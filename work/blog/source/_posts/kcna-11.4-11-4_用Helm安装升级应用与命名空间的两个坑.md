@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 Helm 一行命令安装升级应用与命名空间的两个坑"
 date: 2026-10-02 20:16:00
-categories: [Kubernetes, 包管理]
+categories: [kcna, Kubernetes, 包管理]
 tags: [helm install/upgrade, kubeconfig, 镜像密钥下发, namespace删除风险, release管理]
 ---
 

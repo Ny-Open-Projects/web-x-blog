@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 临时存储卷 emptyDir —— Pod 内容器共享数据"
 date: 2026-10-03 22:20:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, emptyDir, 数据卷, volumeMounts, 容器共享]
 ---
 

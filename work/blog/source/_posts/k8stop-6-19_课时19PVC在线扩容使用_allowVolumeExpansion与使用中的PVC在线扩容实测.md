@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: PVC 在线扩容实操（allowVolumeExpansion、edit PVC 与使用中的卷也能扩的实测）"
 date: 2026-10-03 23:16:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [PVC扩容, allowVolumeExpansion, StorageClass, monitor, allowMultiplePerNode, xfs, 在线扩容, 后端存储]
 ---
 

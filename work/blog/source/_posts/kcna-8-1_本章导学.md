@@ -1,7 +1,7 @@
 ---
 title: "为 gRPC 服务增加 REST API：本章导学"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, REST API, Gin, 连接池, 反射, grpcurl, gRPC-Gateway, CORS]
 disableNunjucks: true
 ---

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: SpringCloud 架构解析（上·传统架构痛点与服务发现/网关/配置中心）"
 date: 2026-10-04 05:10:00
-categories: [Kubernetes, SpringCloud]
+categories: [k8stop, Kubernetes, SpringCloud]
 tags: [SpringCloud, 微服务, Eureka, Zuul, ConfigServer, 服务发现, 网关, 配置中心, 东西流量, 南北流量]
 ---
 

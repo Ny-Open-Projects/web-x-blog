@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: ServiceAccount 权限管理（专用 namespace 集中托管与 token 登录）"
 date: 2026-10-03 22:43:00
-categories: [Kubernetes, RBAC]
+categories: [k8stop, Kubernetes, RBAC]
 tags: [ServiceAccount, RBAC, token, RoleBinding, ClusterRoleBinding, system:serviceaccounts, ResourceQuota, Dashboard]
 ---
 

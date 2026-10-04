@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "ES集群及节点角色规划实践"
 date: 2026-10-04 05:03:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [Elasticsearch, 集群规划, 分片, 副本, shrink, split, routing]
 ---
 

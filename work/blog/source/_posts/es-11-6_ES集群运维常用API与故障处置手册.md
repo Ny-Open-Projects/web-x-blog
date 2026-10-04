@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: ES 集群运维常用 API 与故障处置手册"
 date: 2026-10-02 04:42:00
-categories: [Elasticsearch, 集群运维]
+categories: [es, Elasticsearch, 集群运维]
 tags: [allocation_explain, 磁盘水位线, reroute, 滚动重启, 线程池, forcemerge, ILM, 别名, reindex, hot_threads]
 disableNunjucks: true
 

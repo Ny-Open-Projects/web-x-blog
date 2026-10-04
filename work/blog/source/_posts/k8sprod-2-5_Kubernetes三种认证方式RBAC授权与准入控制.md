@@ -8,8 +8,7 @@ tags:
   - RBAC
   - ServiceAccount
   - 准入控制
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 的认证、授权与准入控制：三种认证方式、RBAC 模型与三道关卡

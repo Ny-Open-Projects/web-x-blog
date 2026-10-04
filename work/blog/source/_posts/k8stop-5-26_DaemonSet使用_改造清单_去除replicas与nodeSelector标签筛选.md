@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: DaemonSet 的使用（改造 Deployment 清单、去掉 replicas、nodeSelector 筛选节点）"
 date: 2026-10-03 15:55:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [DaemonSet, nodeSelector, 去掉 replicas, updateStrategy, kubectl label, replace, rollout history, 每节点一个, 清单改造]
 ---
 

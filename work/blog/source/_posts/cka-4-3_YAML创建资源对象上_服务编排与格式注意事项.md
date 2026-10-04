@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 用 YAML 创建资源对象（上）—— 服务编排与格式铁律"
 date: 2026-10-03 09:25:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, YAML, 服务编排, kubectl apply, Service]
 ---
 

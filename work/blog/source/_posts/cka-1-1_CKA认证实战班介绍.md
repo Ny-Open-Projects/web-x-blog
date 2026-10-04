@@ -1,7 +1,7 @@
 ---
 title: "CKA 认证实战班介绍"
 date: 2026-10-04 03:40:00
-categories: [Kubernetes, CKA认证]
+categories: [cka, Kubernetes, CKA认证]
 tags: [Kubernetes, CKA, 认证考试, 容器编排, 运维, kubectl]
 disableNunjucks: true
 ---

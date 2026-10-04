@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 基于角色的账户管理（Role Strategy 插件）"
 date: 2026-10-04 05:00:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, 角色策略, RBAC, 账户管理, 权限, 匿名只读, 插件]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins Credentials 配置（SSH Key 与仓库账号）"
 date: 2026-10-04 06:10:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, Credentials, SSH, 凭证, GitLab, Harbor]
 ---
 

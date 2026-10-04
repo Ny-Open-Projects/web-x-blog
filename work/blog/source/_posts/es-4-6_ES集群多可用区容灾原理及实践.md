@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: ES 集群多可用区容灾的原理与部署"
 date: 2026-10-02 07:55:00
-categories: [Elasticsearch, 高可用]
+categories: [es, Elasticsearch, 高可用]
 tags: [机架感知, 多可用区, 容灾, allocation-awareness, 副本]
 ---
 

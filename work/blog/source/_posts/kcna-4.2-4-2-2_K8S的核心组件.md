@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: K8s 核心组件 —— 控制平面五个加上节点三个"
 date: 2026-10-02 01:15:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [K8s, 核心组件, kube-apiserver, etcd, kube-scheduler, kube-controller-manager, kubelet, kube-proxy, 容器运行时, cloud-controller-manager]
 ---
 

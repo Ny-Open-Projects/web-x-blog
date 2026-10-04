@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: Go操作ES的一些技巧和注意事项"
 date: 2026-10-02 11:05:00
-categories: [Go, Elasticsearch]
+categories: [es, Go, Elasticsearch]
 tags: [olivere/elastic, 客户端封装, bulk处理器, 版本冲突, 查询封装, scroll]
 disableNunjucks: true
 

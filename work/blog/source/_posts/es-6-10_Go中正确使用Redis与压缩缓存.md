@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: Go 中正确使用 Redis 与压缩缓存"
 date: 2026-10-02 09:20:00
-categories: [Go, Redis]
+categories: [es, Go, Redis]
 tags: [Redis, go-redis, GZIP, 连接池, 压缩缓存]
 ---
 

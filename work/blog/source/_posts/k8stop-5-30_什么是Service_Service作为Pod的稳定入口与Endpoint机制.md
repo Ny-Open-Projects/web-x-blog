@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 什么是 Service（逻辑上的一组 Pod，带稳定名称的反向代理）"
 date: 2026-10-03 16:30:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Service, Pod IP, selector, Endpoint, Endpoints, 反向代理, 四层负载均衡, 服务发现]
 ---
 

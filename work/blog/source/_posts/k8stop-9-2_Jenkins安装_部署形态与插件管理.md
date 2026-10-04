@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 安装（部署形态与插件管理）"
 date: 2026-10-04 04:55:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, 安装, war, 插件, BlueOcean, Kubernetes插件, 角色策略, 备份]
 ---
 

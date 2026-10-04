@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 在 K8s 上部署、配置和使用 Ingress 的完整链路"
 date: 2026-10-02 20:02:00
-categories: [Kubernetes, 集群网络]
+categories: [kcna, Kubernetes, 集群网络]
 tags: [Ingress, IngressController, 反向代理, 路由规则, gRPC, Secret, TLS]
 ---
 

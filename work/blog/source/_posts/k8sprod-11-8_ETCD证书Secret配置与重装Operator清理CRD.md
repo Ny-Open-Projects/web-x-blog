@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 生产实践: ETCD 证书 Secret 配置与重装 Operator 清理 CRD"
 date: 2026-10-04 12:05:00
-categories: [Kubernetes, 监控]
+categories: [k8sprod, Kubernetes, 监控]
 tags: [Prometheus, Secret, tlsConfig, kube-scheduler, kubelet, CRD, helm delete --purge, Alerting Rules]
 disableNunjucks: true
 

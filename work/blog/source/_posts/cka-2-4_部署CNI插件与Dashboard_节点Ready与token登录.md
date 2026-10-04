@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 部署CNI插件与Dashboard（节点Ready与token登录）"
 date: 2026-10-02 15:55:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, CNI, flannel, CoreDNS, Dashboard, NodePort, ServiceAccount]
 ---
 

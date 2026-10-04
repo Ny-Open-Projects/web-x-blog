@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 监控资源利用率（API 聚合层、top 排序与 CPU 单位）"
 date: 2026-10-02 19:20:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubectl top, APIService, API聚合层, sort-by, 资源单位, 利用率]
 ---
 

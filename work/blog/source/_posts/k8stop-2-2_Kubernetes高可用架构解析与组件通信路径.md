@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Kubernetes 高可用架构解析与组件通信路径"
 date: 2026-10-02 09:20:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [高可用架构, etcd, VIP, keepalived, haproxy, 组件通信]
 ---
 

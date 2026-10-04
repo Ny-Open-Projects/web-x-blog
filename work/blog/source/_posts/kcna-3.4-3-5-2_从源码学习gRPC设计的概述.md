@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 从源码学习 gRPC 设计（一）—— protobuf 字段、数据类型与四种通信方式"
 date: 2026-10-02 00:05:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [protobuf, proto3, 字段编号, 数据类型, stream, 单向流, 双向流, 编解码, grpc-go, 源码]
 ---
 

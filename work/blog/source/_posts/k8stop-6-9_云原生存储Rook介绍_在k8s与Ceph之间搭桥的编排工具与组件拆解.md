@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 云原生存储 Rook 介绍（在 k8s 与 Ceph 之间搭桥的编排工具与组件拆解）"
 date: 2026-10-03 22:45:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [Rook, Ceph, GlusterFS, 云原生存储, CSI, OSD, MON, MDS, RGW, MGR, Operator, StorageClass, 动态 PV]
 ---
 

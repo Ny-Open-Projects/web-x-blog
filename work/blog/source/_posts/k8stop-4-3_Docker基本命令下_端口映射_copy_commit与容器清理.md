@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Docker 基本命令下（-P 端口映射 / copy / commit / 容器清理）"
 date: 2026-10-03 12:19:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [docker -p, docker port, docker cp, docker commit, docker rmi, docker rm -f, run --rm, 镜像历史, 前台启动]
 disableNunjucks: true
 

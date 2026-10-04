@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证考点: 给用户积分等级服务编写自定义 Chart"
 date: 2026-10-02 20:14:00
-categories: [Kubernetes, 包管理]
+categories: [kcna, Kubernetes, 包管理]
 tags: [Chart, values.yaml, 模板, ConfigMap健康检查, namespace模板, 镜像拉取密钥]
 disableNunjucks: true
 

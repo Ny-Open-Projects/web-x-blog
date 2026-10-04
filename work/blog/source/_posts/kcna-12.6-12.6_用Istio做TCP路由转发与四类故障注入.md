@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 Istio 实现 TCP 路由转发与四类故障注入"
 date: 2026-10-02 20:26:00
-categories: [Kubernetes, 服务网格]
+categories: [kcna, Kubernetes, 服务网格]
 tags: [Gateway, DestinationRule, VirtualService, 延时注入, 异常终止, 超时, 熔断, wrk压测]
 ---
 

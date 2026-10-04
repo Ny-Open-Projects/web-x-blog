@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 容器化中间件基本说明（本章路线、为什么 Redis/RabbitMQ/Kafka 要举一反三，以及 Helm、监控与日志的安排）"
 date: 2026-10-03 23:32:00
-categories: [Kubernetes, 中间件]
+categories: [k8stop, Kubernetes, 中间件]
 tags: [中间件容器化, Redis, RabbitMQ, Kafka, ZooKeeper, Helm, Prometheus, 日志收集, 黑盒监控]
 ---
 

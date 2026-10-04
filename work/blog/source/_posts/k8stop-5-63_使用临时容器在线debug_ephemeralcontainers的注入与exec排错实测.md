@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 使用临时容器在线 debug（EphemeralContainers 注入配置、exec 排错与不可覆盖的坑）"
 date: 2026-10-03 22:12:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [临时容器, kubectl-debug, targetContainerName, replace--raw, busybox, shareProcessNamespace, DaemonSet, 在线排错]
 ---
 

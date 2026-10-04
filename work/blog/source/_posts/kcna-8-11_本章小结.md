@@ -1,7 +1,7 @@
 ---
 title: "Gin 框架、gRPC 连接池与 REST API 转换：本章小结"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, REST API, Gin, sync.Pool, 连接池, 反射, grpcurl, gRPC-Gateway, CORS, 本章小结]
 disableNunjucks: true
 ---

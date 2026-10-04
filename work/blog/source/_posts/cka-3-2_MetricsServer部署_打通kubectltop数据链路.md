@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Metrics Server 部署（打通 kubectl top 数据链路）"
 date: 2026-10-02 18:55:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Metrics Server, kubectl top, cAdvisor, APIService, 聚合层]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 为什么要用 Kubernetes（裸容器管不动的五个真实痛点）"
 date: 2026-10-03 12:54:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [为什么要用k8s, 自愈, liveness, readiness, 弹性伸缩, 端口冲突, Service, 裸容器]
 ---
 

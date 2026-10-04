@@ -1,7 +1,7 @@
 ---
 title: "gRPC 本章小结"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, 本章小结, 复习, 通信方式, 代理模式, protobuf, wire type, 字段编号, 源码, 分发]
 disableNunjucks: true
 ---

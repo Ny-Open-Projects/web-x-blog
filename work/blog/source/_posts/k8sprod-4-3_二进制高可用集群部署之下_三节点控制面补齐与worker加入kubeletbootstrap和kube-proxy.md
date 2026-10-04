@@ -8,8 +8,7 @@ tags:
   - kubelet
   - bootstrap
   - kube-proxy
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 二进制高可用集群部署（下）：控制面补齐、worker 加入、kubelet bootstrap 与 kube-proxy

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: proto3 使用与编解码原理 —— 六种 wire type、Varint 与字段安全更新"
 date: 2026-10-02 00:20:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [protobuf, proto3, wire type, Varint, zigzag, 字段编号, 未知字段, 兼容, 编解码, 序列化]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 封装中间件 SDK 的九个考量"
 date: 2026-10-02 09:15:00
-categories: [Go, 工程化]
+categories: [es, Go, 工程化]
 tags: [中间件, SDK封装, 函数式选项, 协程池]
 ---
 

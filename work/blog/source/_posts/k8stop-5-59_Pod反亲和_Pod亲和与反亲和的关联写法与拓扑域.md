@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Pod 亲和与反亲和（跨容器关联的写法、拓扑域与命名空间匹配）"
 date: 2026-10-03 20:02:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [podAffinity, podAntiAffinity, topologyKey, namespaces, labelSelector, 跨namespace, 集群反亲和, 调度性能, 权重]
 ---
 

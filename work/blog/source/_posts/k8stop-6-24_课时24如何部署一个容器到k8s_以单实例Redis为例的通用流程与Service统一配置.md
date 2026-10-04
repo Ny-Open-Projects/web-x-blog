@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 如何把一个容器部署到 K8s（以单实例 Redis 为例：官方镜像、ConfigMap、Service 与接口级健康检查）"
 date: 2026-10-03 23:36:00
-categories: [Kubernetes, 中间件]
+categories: [k8stop, Kubernetes, 中间件]
 tags: [Redis, 单实例, 官方镜像, ConfigMap, Service, 接口级健康检查, 环境变量注入, alpine, 举一反三]
 ---
 

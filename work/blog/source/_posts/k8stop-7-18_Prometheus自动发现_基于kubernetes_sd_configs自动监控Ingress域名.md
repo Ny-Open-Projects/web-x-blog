@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus 自动发现（kubernetes_sd_configs 自动监控 Ingress 域名）"
 date: 2026-10-04 01:06:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, 服务发现, kubernetes_sd_configs, ingress, annotation, relabel_configs, ServiceAccount, ClusterRoleBinding, RBAC, 黑盒监控]
 ---
 

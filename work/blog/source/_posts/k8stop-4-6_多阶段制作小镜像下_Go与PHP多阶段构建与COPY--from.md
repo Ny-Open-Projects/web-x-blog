@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 多阶段制作小镜像下（Go 与 PHP 构建分离实战）"
 date: 2026-10-03 12:40:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [多阶段构建, COPY --from, 小镜像, golang, php, 扩展编译, 镜像体积, 层缓存]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: K8s 集群架构与五个核心概念"
 date: 2026-10-02 09:25:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kube-apiserver, kubelet, kube-proxy, Pod, Service, Namespace, Label]
 ---
 

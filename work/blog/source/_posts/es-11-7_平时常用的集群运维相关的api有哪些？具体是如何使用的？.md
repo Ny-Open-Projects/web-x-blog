@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "平时常用的集群运维相关的api有哪些？具体是如何使用的？(二)"
 date: 2026-10-04 03:00:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [集群运维, 滚动重启, 冷热分层, forcemerge, ILM, 分片分配]
 ---
 

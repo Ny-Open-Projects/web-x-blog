@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 倒排索引如何让全文检索碾压 MySQL 的 LIKE 查询"
 date: 2026-10-02 04:58:00
-categories: [Elasticsearch, 原理剖析]
+categories: [es, Elasticsearch, 原理剖析]
 tags: [倒排索引, term_dictionary, term_index, posting_list, index_options, 分词, match_phrase, B+树]
 ---
 

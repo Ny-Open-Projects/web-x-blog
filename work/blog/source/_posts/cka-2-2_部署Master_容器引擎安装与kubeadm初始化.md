@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 部署Master（容器引擎安装与 kubeadm 初始化十步）"
 date: 2026-10-02 15:10:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubeadm, Master, Docker, 静态Pod, 证书, bootstrap token]
 ---
 

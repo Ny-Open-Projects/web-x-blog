@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: NodeAffinity 使用（节点亲和字段写法逐条实测）"
 date: 2026-10-03 19:55:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [nodeAffinity, nodeSelectorTerms, matchExpressions, operator, In, NotIn, Exists, Gt, Lt, weight, preferred, label层级]
 ---
 

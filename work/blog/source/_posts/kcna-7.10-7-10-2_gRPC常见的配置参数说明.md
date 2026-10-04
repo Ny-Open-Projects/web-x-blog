@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: gRPC 常见的配置参数说明 —— 服务端 ServerOption 与客户端 DialOption、TLS、keepalive、超时"
 date: 2026-10-02 06:35:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [gRPC, ServerOption, DialOption, TLS 证书, keepalive, MaxConcurrentStreams, 消息大小, context 超时, 拦截器]
 ---
 

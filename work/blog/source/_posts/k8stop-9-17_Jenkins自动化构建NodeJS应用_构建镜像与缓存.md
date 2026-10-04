@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 自动化构建 NodeJS 应用（构建镜像与缓存）"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, NodeJS, npm, node_modules, Dockerfile, 缓存, 流水线复用]
 ---
 

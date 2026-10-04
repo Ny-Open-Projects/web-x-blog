@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 生产实践: ingress-nginx 自定义响应头、配置模板与 TLS 证书配置"
 date: 2026-10-03 18:45:00
-categories: [Kubernetes, 生产实践]
+categories: [k8sprod, Kubernetes, 生产实践]
 tags: [ingress-nginx, custom-headers, configuration-snippet, nginx.tmpl, default-ssl-certificate, TLS, Secret, sessionAffinity, 流量控制]
 disableNunjucks: true
 

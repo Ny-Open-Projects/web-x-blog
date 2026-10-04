@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 在 K8s 上部署 Helm 与 tiller 架构的演进"
 date: 2026-10-02 20:12:00
-categories: [Kubernetes, 包管理]
+categories: [kcna, Kubernetes, 包管理]
 tags: [Helm, tiller, client-go, kubeconfig, 证书权限, 安装方式]
 ---
 

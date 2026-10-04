@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Istio 核心组件与 Gateway 端口排错及 Metrics Server 补位"
 date: 2026-10-04 15:00:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [Istio, Helm values, PodDisruptionBudget, istio-gateway, NodePort, metrics-server, Aggregation Layer, kube-apiserver]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes + gRPC 云原生微服务实战：课程导学"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 云原生微服务]
+categories: [kcna, Kubernetes, 云原生微服务]
 tags: [云原生, 微服务, Kubernetes, gRPC, ServiceMesh, 可观测性, 课程导学]
 disableNunjucks: true
 ---

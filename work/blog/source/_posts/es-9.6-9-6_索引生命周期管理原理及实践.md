@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 索引生命周期管理原理及实践"
 date: 2026-10-03 17:35:00
-categories: [Elasticsearch, 日志搜索]
+categories: [es, Elasticsearch, 日志搜索]
 tags: [ILM, rollover, shrink, allocate, force_merge, min_age, 冷热分离]
 ---
 

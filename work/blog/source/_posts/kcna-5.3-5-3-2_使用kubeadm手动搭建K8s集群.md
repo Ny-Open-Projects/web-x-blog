@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 kubeadm 手动搭建 K8s 集群 —— 从采购云主机到两个节点 Ready"
 date: 2026-10-02 03:20:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [kubeadm, 集群搭建, 竞价实例, containerd, kubelet, kubeadm init, join, 网络插件, Ready, 排障]
 ---
 

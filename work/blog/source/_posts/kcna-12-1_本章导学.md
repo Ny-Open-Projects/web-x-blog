@@ -1,7 +1,7 @@
 ---
 title: "ServiceMesh 与 Istio 本章导学：把治理下沉到边车"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 服务网格]
+categories: [kcna, Kubernetes, 服务网格]
 tags: [ServiceMesh, Istio, sidecar, Envoy, 流量治理, 本章导学]
 disableNunjucks: true
 ---

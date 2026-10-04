@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Volumes EmptyDir 实现数据共享（同 Pod 多容器共享目录与 medium 内存盘）"
 date: 2026-10-03 20:23:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [emptyDir, 数据共享, 多容器, volumeMounts, mediumMemory, 端口冲突, command, 临时存储]
 ---
 

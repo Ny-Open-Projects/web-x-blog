@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Prometheus 的架构组件与四种指标类型"
 date: 2026-10-04 09:45:00
-categories: [Kubernetes, 监控]
+categories: [k8sprod, Kubernetes, 监控]
 tags: [Prometheus, Prometheus Server, node_exporter, cAdvisor, Pushgateway, ServiceDiscovery, Alertmanager, PromQL, counter, gauge, histogram, summary]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 动态 PV 供给 StorageClass 会自动把 PV 建好"
 date: 2026-10-03 12:24:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 持久化存储, StorageClass, 动态供给, Provisioner]
 ---
 

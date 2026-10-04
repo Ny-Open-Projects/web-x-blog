@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus Latest 安装入门（版本对应关系与 manifests 目录结构）"
 date: 2026-10-04 01:12:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, kube-prometheus, release-0.5, manifests, ConfigMap, etcd 1MB 限制, nodeSelector, Grafana, Ingress]
 ---
 

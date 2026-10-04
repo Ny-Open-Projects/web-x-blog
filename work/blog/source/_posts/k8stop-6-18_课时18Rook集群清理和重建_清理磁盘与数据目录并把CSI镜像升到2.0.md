@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Rook 集群清理和重建（为什么必须换 CSI 镜像、以及磁盘与数据目录要清干净）"
 date: 2026-10-03 23:12:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [Rook, Ceph, CSI镜像, 快照支持, 清理集群, dataDirHostPath, 重建]
 ---
 

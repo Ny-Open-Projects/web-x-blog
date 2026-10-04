@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: SpringCloud 架构解析（下·组件独立部署与部署理念）"
 date: 2026-10-04 05:15:00
-categories: [Kubernetes, SpringCloud]
+categories: [k8stop, Kubernetes, SpringCloud]
 tags: [SpringCloud, 运维理念, 组件部署, DevOps, 单应用, 架构理解, 部署方式]
 ---
 

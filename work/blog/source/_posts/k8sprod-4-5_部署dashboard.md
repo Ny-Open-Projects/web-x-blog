@@ -1,7 +1,7 @@
 ---
 title: "二进制高可用集群部署（下）：部署 Dashboard 看板"
 date: 2026-10-04 04:00:00
-categories: [Kubernetes, 生产实践]
+categories: [k8sprod, Kubernetes, 生产实践]
 tags: [Kubernetes, Dashboard, Token登录, NodePort, ServiceAccount, RBAC]
 disableNunjucks: true
 ---

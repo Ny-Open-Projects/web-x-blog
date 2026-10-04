@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: 巧用 MongoDB 补足关系型数据库（搜索日志 + 属性补全）"
 date: 2026-10-02 20:50:00
-categories: [Go, Elasticsearch, MongoDB, 项目实战]
+categories: [es, Go, Elasticsearch, MongoDB, 项目实战]
 tags: [mongo-driver, 按天分表, 提前建索引, sync.Map缓存, bson标签, GZip压缩, 优雅关闭]
 disableNunjucks: true
 

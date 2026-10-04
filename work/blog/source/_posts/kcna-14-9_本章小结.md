@@ -1,7 +1,7 @@
 ---
 title: "本章小结 —— K8s 集群监控告警体系的完整回顾"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, 监控告警]
+categories: [kcna, Kubernetes, 监控告警]
 tags: [Prometheus, AlertManager, 动态服务发现, 告警规则, Grafana, 邮件告警, RBAC, 镜像部署]
 disableNunjucks: true
 ---

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Istio 智能路由之请求路由、故障注入与流量迁移"
 date: 2026-10-04 17:20:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [Istio, VirtualService, DestinationRule, subset, fault injection, delay, 权重迁移, end-user header]
 ---
 

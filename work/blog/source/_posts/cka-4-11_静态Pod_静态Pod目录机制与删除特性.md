@@ -3,7 +3,7 @@ disableNunjucks: true
 title: "Kubernetes 认证实战: 静态 Pod 的目录托管机制与它的三个特点"
 date: 2021-04-11 11:05:00
 tags: [Kubernetes, CKA, 静态Pod, kubelet]
-categories: [Kubernetes 认证实战]
+categories: [cka, Kubernetes 认证实战]
 ---
 
 ## 纲要

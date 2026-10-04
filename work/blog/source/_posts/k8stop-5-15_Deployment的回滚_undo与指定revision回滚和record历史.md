@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Deployment 的回滚（undo 到上一版与指定 revision）"
 date: 2026-10-03 13:36:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [回滚, rollout undo, to-revision, rollout history, --record, 自动保护, 旧RS保活, ImagePullBackOff]
 ---
 

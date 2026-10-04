@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Bootstrap Token 方式增加 Node 四步配置与 CSR 审批"
 date: 2026-10-03 12:03:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 二进制部署, TLS Bootstrapping, kubelet, CSR 审批]
 ---
 

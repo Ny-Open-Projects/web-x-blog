@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 在 K8s 部署应用的四步流程（镜像 → 控制器 → 暴露 → 发布）"
 date: 2026-10-02 20:35:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 部署流程, Dockerfile, 控制器, Deployment, Service, Ingress]
 ---
 

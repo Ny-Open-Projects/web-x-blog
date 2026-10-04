@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: Go 集成 MongoDB 细节揭秘"
 date: 2026-10-02 09:50:00
-categories: [Go, MongoDB]
+categories: [es, Go, MongoDB]
 tags: [mongo-driver, 连接池, bson, 游标, 索引]
 disableNunjucks: true
 

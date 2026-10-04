@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Rook Ceph 的 xfs_repair 问题修复（复现现场、direct-mount 挂载 PV 与到底该选 xfs 还是 ext4）"
 date: 2026-10-03 23:24:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [xfs-repair, direct-mount, rbd-map, NodePort, dashboard, Ceph, 快照, ext4, alpha]
 ---
 

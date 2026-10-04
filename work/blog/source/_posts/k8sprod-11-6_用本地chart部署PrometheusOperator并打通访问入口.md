@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: 用本地 chart 部署 Prometheus Operator 并打通访问入口"
 date: 2026-10-04 10:55:00
-categories: [Kubernetes, 监控]
+categories: [k8sprod, Kubernetes, 监控]
 tags: [Helm, Chart, prometheus-operator, CRD, Alertmanager, ServiceMonitor, kube-state-metrics, Grafana, Ingress]
 ---
 

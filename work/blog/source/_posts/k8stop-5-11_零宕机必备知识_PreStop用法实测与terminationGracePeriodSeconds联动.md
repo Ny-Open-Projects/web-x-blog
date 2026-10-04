@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 零宕机必备知识（PreStop 用法实测与宽限期联动）"
 date: 2026-10-03 13:08:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [preStop, lifecycle, yaml缩进, terminationGracePeriodSeconds, 实测, 零宕机, describe事件]
 ---
 

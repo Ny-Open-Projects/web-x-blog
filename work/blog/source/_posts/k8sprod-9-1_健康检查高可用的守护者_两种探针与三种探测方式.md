@@ -9,8 +9,7 @@ tags:
   - tcpSocket
   - httpGet
   - restartPolicy
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: 健康检查 —— livenessProbe 与 readinessProbe 的分工、三种探测方式与无限重启陷阱

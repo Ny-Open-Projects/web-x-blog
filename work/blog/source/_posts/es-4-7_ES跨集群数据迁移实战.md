@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: ES 集群内与跨集群数据迁移实战"
 date: 2026-10-02 08:00:00
-categories: [Elasticsearch, 运维]
+categories: [es, Elasticsearch, 运维]
 tags: [reindex, reroute, 数据迁移, 下线节点, 双写]
 ---
 

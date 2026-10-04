@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus 传统配置方式（additionalScrapeConfigs 接入黑盒监控）"
 date: 2026-10-04 01:02:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, Prometheus Operator, additionalScrapeConfigs, 黑盒监控, blackbox_exporter, relabel_configs, Secret, IPv4, Grafana, 多区域监控]
 ---
 

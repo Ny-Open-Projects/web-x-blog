@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 自动化构建 Java 应用（下·镜像与挂载排错）"
 date: 2026-10-04 04:35:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, Java, kubectl镜像, kubeconfig, 只读挂载, StatefulSet, 排错]
 ---
 

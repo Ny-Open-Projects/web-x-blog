@@ -7,8 +7,7 @@ tags:
   - CI/CD
   - 健康检查
   - go-template
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 disableNunjucks: true
 
 ---

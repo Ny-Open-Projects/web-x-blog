@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Dockerfile 用法（FROM / RUN / COPY / ENTRYPOINT / CMD / VOLUME 全解）"
 date: 2026-10-03 12:26:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Dockerfile, FROM, RUN, COPY, ADD, ENTRYPOINT, CMD, ENV, WORKDIR, USER, VOLUME, EXPOSE, LABEL, 分层缓存]
 disableNunjucks: true
 

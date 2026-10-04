@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 在 K8s 上正确部署 Eureka（StatefulSet 与 Headless Service）"
 date: 2026-10-04 05:20:00
-categories: [Kubernetes, SpringCloud]
+categories: [k8stop, Kubernetes, SpringCloud]
 tags: [Eureka, StatefulSet, HeadlessService, defaultZone, 注册中心, 固定FQDN, 集群]
 ---
 

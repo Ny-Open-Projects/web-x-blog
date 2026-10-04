@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 为什么要引入 Pod（从使用方与容器运行时两个视角看 Pod 的由来）"
 date: 2026-10-03 18:59:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Pod, 容器运行时, CRI, containerd, CRI-O, 共享网络命名空间, 端口冲突, 强依赖, 调度最小单元]
 ---
 

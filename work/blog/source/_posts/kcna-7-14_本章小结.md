@@ -1,7 +1,7 @@
 ---
 title: "gRPC 服务设计与开发全流程：本章小结"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, Protobuf, protoc, 数据层, 服务层, 应用层, 单元测试, 错误码, 本章小结]
 disableNunjucks: true
 ---

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 后台技术架构的发展史 —— 从单体、读写分离到微服务与云原生"
 date: 2026-10-02 22:58:00
-categories: [Kubernetes, 架构]
+categories: [kcna, Kubernetes, 架构]
 tags: [单体架构, 垂直架构, 读写分离, 分布式缓存, 分库分表, 水平拆分, 垂直拆分, 微服务, 云原生, 混合云]
 ---
 

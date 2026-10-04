@@ -8,8 +8,7 @@ tags:
   - 加密
   - TLS
   - 证书
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 认证的密码学原理：从对称加密、非对称加密到 CA 证书与 TLS 握手

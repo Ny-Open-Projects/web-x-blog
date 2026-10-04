@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: nodeAffinity 节点亲和性（硬策略与软策略）"
 date: 2026-10-03 14:00:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, nodeAffinity, 亲和性, 反亲和性, 软策略, 权重]
 ---
 

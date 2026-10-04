@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 环境准备（集群规划、主机初始化与部署方式选型）"
 date: 2026-10-02 14:45:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubeadm, 集群部署, 环境准备, swap, SELinux, 时间同步]
 ---
 

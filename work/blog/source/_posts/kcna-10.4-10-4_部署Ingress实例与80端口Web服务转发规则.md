@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 部署 Ingress 实例并配置 80 端口 Web 转发规则"
 date: 2026-10-02 20:04:00
-categories: [Kubernetes, 实操]
+categories: [kcna, Kubernetes, 实操]
 tags: [IngressController, 实例, HPA, ingressClass, 80端口, Host路由]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "proto3 使用及编解码原理介绍（一）"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [protobuf, proto3, wire type, Varint, zigzag, 字段编号, 未知字段, 编解码, 序列化]
 disableNunjucks: true
 ---

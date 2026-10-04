@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Liveness 与 Readiness 的实战配置（exec 命令缺失导致重启、以及 pgrep java 的致命写法）"
 date: 2026-10-03 22:32:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [livenessProbe, readinessProbe, exec, pgrep, Endpoint, RESTARTS, replace, 健康检查, 零宕机]
 ---
 

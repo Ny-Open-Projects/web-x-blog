@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Deployment 的更新（滚动发布过程与 set image --record）"
 date: 2026-10-03 13:29:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [滚动更新, rollout status, set image, --record, 新RS, 旧RS缩容, 更新触发条件, describe事件]
 ---
 

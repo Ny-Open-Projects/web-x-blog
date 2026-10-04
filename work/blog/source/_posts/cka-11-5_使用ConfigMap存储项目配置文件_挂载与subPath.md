@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 用 ConfigMap 存项目配置文件（挂载与 subPath）"
 date: 2026-10-02 11:32:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, ConfigMap, volumeMount, subPath, 配置管理, 滚动更新]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Alertmanager 入门（告警路由、分组、抑制与收件人配置）"
 date: 2026-10-04 01:03:00
-categories: [Kubernetes, 告警]
+categories: [k8stop, Kubernetes, 告警]
 tags: [Alertmanager, Prometheus, PrometheusRule, 告警路由, 分组聚合, 告警抑制, inhibit_rules, group_wait, receiver, webhook, 企业微信]
 ---
 

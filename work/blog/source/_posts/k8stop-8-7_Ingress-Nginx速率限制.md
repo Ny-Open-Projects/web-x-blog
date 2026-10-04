@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 速率限制（连接数/请求速率/带宽与白名单）"
 date: 2026-10-04 03:35:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, 速率限制, limit-connections, limit-rps, limit-rpm, limit-rate, limit-whitelist, 503]
 ---
 

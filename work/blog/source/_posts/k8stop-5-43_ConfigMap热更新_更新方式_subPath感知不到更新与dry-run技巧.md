@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: ConfigMap & Secret 热更新（更新方式、subPath 感知不到与 dry-run 技巧）"
 date: 2026-10-03 19:55:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [ConfigMap热更新, resourceVersion, subPath不更新, 环境变量不更新, ln软链, postStart, preStop, kubectl dry-run, kubectl replace]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 配好动态服务发现采集集群指标，并在 Grafana 出资源报表"
 date: 2026-10-02 21:48:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [kubernetes_sd_configs, NodePort, ServiceAccount, ClusterRole, annotation, kubelet, cAdvisor, 资源报表]
 ---
 

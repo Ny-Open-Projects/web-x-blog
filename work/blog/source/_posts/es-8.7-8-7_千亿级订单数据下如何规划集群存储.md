@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 千亿级订单数据下如何规划集群存储"
 date: 2026-10-02 22:05:00
-categories: [Elasticsearch, 集群规划]
+categories: [es, Elasticsearch, 集群规划]
 tags: [容量预估, 分片规划, 节点角色, 独立协调节点, JVM]
 ---
 

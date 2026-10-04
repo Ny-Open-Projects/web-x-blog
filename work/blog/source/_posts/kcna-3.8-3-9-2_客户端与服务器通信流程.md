@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: gRPC 客户端与服务器通信流程 —— 注册、建连、建流、分发四段"
 date: 2026-10-02 01:00:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, 通信流程, grpc.NewServer, RegisterGreeterServer, invoke, serveStreams, handleStream, unary, stream, 源码]
 ---
 

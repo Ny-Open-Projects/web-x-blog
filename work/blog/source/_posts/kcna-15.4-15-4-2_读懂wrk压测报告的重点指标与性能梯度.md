@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 读懂 wrk 压测报告的重点指标、标准差与性能梯度"
 date: 2026-10-02 22:20:00
-categories: [Kubernetes, 性能]
+categories: [kcna, Kubernetes, 性能]
 tags: [wrk报告, Latency, STDEV, Latency Distribution, QPS梯度, 磁盘IO, 网络带宽, 限流]
 ---
 

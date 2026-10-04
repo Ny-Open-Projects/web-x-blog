@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Service Mesh 概念与 Linkerd / Istio 两大实现对比"
 date: 2026-10-04 13:15:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [ServiceMesh, Istio, Linkerd, Linkerd2, sidecar, data plane, control plane, CNCF]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus 安装及入门（kube-prometheus 部署与三个入口）"
 date: 2026-10-04 01:11:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, kube-prometheus, Prometheus Operator, Grafana, Alertmanager, node_exporter, kube-state-metrics, ServiceMonitor, Ingress, Silence]
 ---
 

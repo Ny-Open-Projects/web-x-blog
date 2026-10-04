@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 基本认证（Basic Auth 账号密码保护）"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, Basic-Auth, htpasswd, Secret, annotation, auth-type, auth-secret]
 ---
 

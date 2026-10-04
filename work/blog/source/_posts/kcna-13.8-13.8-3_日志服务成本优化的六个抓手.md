@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 日志服务成本优化的六个抓手"
 date: 2026-10-02 21:08:00
-categories: [Kubernetes, 日志]
+categories: [kcna, Kubernetes, 日志]
 tags: [日志成本, 索引裁剪, 冷热分层, 采样降噪, 生命周期, 归档投递]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus 监控 etcd 集群（Endpoint、ServiceMonitor 与 HTTPS 证书接入）"
 date: 2026-10-03 22:49:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, ServiceMonitor, Endpoint, etcd, metrics, HTTPS, 证书, Prometheus Operator, Grafana, dashboard, label 匹配]
 ---
 

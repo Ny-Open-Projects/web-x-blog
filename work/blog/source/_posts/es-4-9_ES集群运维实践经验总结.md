@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: ES 集群运维实践经验总结"
 date: 2026-10-02 09:20:00
-categories: [Elasticsearch, 运维]
+categories: [es, Elasticsearch, 运维]
 tags: [集群状态, 分片未分配, 磁盘水位线, fielddata, GC, 滚动重启]
 ---
 

@@ -74,6 +74,79 @@ def check(text: str):
     return bad
 
 
+def parse_categories(fm):
+    """从 front-matter 解析 categories 列表，兼容行内 [a, b] 与块列表。"""
+    m = re.search(r"^categories:\s*(.*)$", fm, re.M)
+    if not m:
+        return []
+    val = m.group(1).strip()
+    if val.startswith("["):
+        inner = val.strip("[]").strip()
+        if not inner:
+            return []
+        return [x.strip().strip("'\"") for x in inner.split(",") if x.strip()]
+    # 块列表：categories: 之后逐行 - xxx
+    lines = fm.splitlines()
+    for i, ln in enumerate(lines):
+        if re.match(r"^categories:\s*$", ln):
+            cats, j = [], i + 1
+            while j < len(lines):
+                mm = re.match(r"^\s*-\s*(.+?)\s*$", lines[j])
+                if mm:
+                    cats.append(mm.group(1).strip().strip("'\""))
+                    j += 1
+                elif lines[j].strip() == "":
+                    j += 1
+                else:
+                    break
+            return cats
+    return []
+
+
+def inject_course(text, course):
+    """把课程作为顶级分类注入 front-matter（幂等：已含则不重复加）。
+
+    兼容行内 `[a, b]` 与块列表两种写法；块列表会被整体替换为行内写法，
+    并消费掉后续 `- item` 行，避免遗留游离列表项导致 YAML 解析失败。
+    """
+    if not text.startswith("---\n"):
+        return text
+    end = text.find("\n---", 3)
+    if end < 0:
+        return text
+    fm = text[4:end]
+    body = text[end + 4:]
+    cats = parse_categories(fm)
+    if course not in cats:
+        cats = [course] + cats
+    new_line = "categories: [" + ", ".join(cats) + "]"
+    lines = fm.split("\n")
+    out, i, replaced = [], 0, False
+    while i < len(lines):
+        ln = lines[i]
+        if not replaced and re.match(r"^categories:", ln):
+            out.append(new_line)
+            replaced = True
+            if not ln.strip().startswith("categories: ["):
+                j = i + 1
+                while j < len(lines):
+                    if re.match(r"^\s*-\s*.+$", lines[j]):
+                        j += 1
+                    elif lines[j].strip() == "":
+                        j += 1
+                    else:
+                        break
+                i = j
+                continue
+            i += 1
+            continue
+        out.append(ln)
+        i += 1
+    if not replaced:
+        out.append(new_line)
+    return "---\n" + "\n".join(out) + "\n---" + body
+
+
 def main():
     args = [a for a in sys.argv[1:]]
     dry = "--dry-run" in args
@@ -106,7 +179,9 @@ def main():
                 continue
             if dst.exists():
                 print(f"[覆盖] {dst.name}")
-            shutil.copy2(f, dst)
+            text = f.read_text(encoding="utf-8")
+            text = inject_course(text, course)
+            dst.write_text(text, encoding="utf-8")
             ok += 1
         total_ok += ok
         total_skip += skip

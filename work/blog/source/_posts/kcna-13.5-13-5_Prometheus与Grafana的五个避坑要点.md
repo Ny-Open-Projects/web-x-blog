@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证考点: Prometheus 与 Grafana 落地时的五个避坑要点"
 date: 2026-10-02 20:44:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [Prometheus, Grafana, TSDB, remote_write, Histogram, 图表测试, 递归监控]
 disableNunjucks: true
 

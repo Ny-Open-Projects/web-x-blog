@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 用 YAML 创建资源对象（下）—— 字段结构与选择器对齐"
 date: 2026-10-03 09:50:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, YAML, apiVersion, selector, labels, Pod 模板]
 ---
 

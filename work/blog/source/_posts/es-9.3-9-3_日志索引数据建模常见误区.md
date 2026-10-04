@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 日志索引数据建模常见误区"
 date: 2026-10-03 15:20:00
-categories: [Elasticsearch, 日志搜索]
+categories: [es, Elasticsearch, 日志搜索]
 tags: [dynamic_templates, 索引模板, 字段爆炸, 分片数, translog]
 ---
 

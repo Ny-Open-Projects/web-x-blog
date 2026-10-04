@@ -7,8 +7,7 @@ tags:
   - CI/CD
   - Jenkins
   - 持续交付
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 ## 纲要

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证实战: 管理 K8s 组件日志（journalctl、kubectl logs 与两类日志形态）"
 date: 2026-10-02 19:45:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 日志, journalctl, kubectl logs, 容器日志, 标准输出, 镜像]
 disableNunjucks: true
 

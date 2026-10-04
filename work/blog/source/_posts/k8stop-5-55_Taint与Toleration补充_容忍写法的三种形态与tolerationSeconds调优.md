@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Taint 与 Toleration 补充（容忍写法的三种形态、软污点与 tolerationSeconds 调优）"
 date: 2026-10-03 19:34:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Taint, Toleration, Exists, PreferNoSchedule, tolerationSeconds, not-ready, unreachable, 内置污点, 准入控制, GPU节点隔离]
 ---
 

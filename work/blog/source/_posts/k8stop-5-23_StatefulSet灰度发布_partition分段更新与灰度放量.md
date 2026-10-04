@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: StatefulSet 灰度发布（partition 分段更新与灰度放量）"
 date: 2026-10-03 15:34:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [StatefulSet, partition, 灰度发布, 金丝雀, 分段更新, updateStrategy, 滚动发布, Service 切流]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 什么是 Ingress（Ingress 是什么、为什么不用 NodePort）"
 date: 2026-10-03 18:52:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Ingress, NodePort, ingress-nginx, 七层代理, 服务发布, 域名, 80端口, Traefik, Istio]
 ---
 

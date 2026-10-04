@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 高可用 Master 扩容与 token 过期后的 join 处理"
 date: 2026-10-02 10:10:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [kubeadm join, bootstrap token, certificate-key, 控制面扩容, Secret]
 ---
 

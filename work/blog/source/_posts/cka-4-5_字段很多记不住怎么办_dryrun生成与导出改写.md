@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 字段太多记不住怎么办 —— dry-run 生成 + 导出改写 + explain 查询"
 date: 2026-10-03 10:15:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubectl, dry-run, YAML, explain, managedFields]
 ---
 

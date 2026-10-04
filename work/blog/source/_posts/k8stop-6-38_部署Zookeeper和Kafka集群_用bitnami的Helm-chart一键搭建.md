@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 部署 Zookeeper 和 Kafka 集群（用 bitnami 的 Helm chart 一键搭建）"
 date: 2026-10-03 22:29:00
-categories: [Kubernetes, Helm]
+categories: [k8stop, Kubernetes, Helm]
 tags: [Zookeeper, Kafka, bitnami, Helm, persistence, PVC, externalZookeeper, affinity, 2181, Prometheus metrics]
 ---
 

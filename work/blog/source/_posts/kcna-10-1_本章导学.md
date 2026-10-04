@@ -1,7 +1,7 @@
 ---
 title: "K8s 服务暴露本章导学：从 NodePort 到 Ingress"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 服务暴露]
+categories: [kcna, Kubernetes, 服务暴露]
 tags: [Ingress, NodePort, LoadBalancer, Service, gRPC, K8s网络, 本章导学]
 disableNunjucks: true
 ---

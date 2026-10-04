@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 存储 Volumes 介绍（为什么需要卷、Redis nodes.conf 与日志收集sidecar）"
 date: 2026-10-03 20:09:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Volumes, 卷, emptyDir, hostPath, NFS, 持久化, Redis集群, nodes.conf, sidecar日志, filebeat, CSI]
 ---
 

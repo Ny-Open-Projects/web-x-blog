@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 在 K8s 平台部署项目的四个步骤"
 date: 2026-10-02 10:52:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 部署流程, 镜像, 工作负载控制器, Service, 监控日志]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 应用升级、弹性伸缩、回滚与删除（滚动更新原理）"
 date: 2026-10-03 10:40:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Deployment, 滚动更新, 回滚, scale, ReplicaSet, rollout]
 ---
 

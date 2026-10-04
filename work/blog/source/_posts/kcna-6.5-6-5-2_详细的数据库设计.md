@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用户积分等级系统的详细数据库设计 —— 任务积分表、用户积分与明细、等级表、特权表"
 date: 2026-10-02 06:05:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [数据库设计, 任务积分信息表, 用户积分明细, 等级信息表, 特权信息表, 成长数值, 每日限额, 升级降级, DDL, 兑换商城]
 ---
 

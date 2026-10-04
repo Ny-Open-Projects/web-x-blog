@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 静态 PV 供给（上）—— 创建存储池与自动绑定"
 date: 2026-10-04 00:00:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, PV, PVC, 静态供给, NFS, Bound, Pending]
 ---
 

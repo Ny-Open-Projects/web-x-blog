@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Secret 存储敏感信息（变量注入与卷挂载）"
 date: 2026-10-03 21:55:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Secret, base64, docker-registry, TLS, 敏感数据]
 ---
 

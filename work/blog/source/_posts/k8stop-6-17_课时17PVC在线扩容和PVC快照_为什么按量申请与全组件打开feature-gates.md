@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: PVC 在线扩容与快照前的准备（为什么不能一次性申请太大，以及全组件打开 feature gates）"
 date: 2026-10-03 23:08:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [PVC扩容, VolumeSnapshot, feature-gates, alpha, KubeletConfiguration, 按量申请, CSI]
 ---
 

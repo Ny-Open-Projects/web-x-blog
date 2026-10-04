@@ -9,8 +9,7 @@ tags:
   - matchExpressions
   - nodeSelector
   - PodPreset
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: Label —— 小标签大作为：selector、matchExpressions 与 nodeSelector

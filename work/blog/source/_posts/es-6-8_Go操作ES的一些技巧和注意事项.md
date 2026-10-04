@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go操作ES的一些技巧和注意事项"
 date: 2026-10-04 03:05:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [es-go, 函数选项模式, routing, Scroll, Bulk, 版本控制]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 自动构建流水线设计（步骤拆解与镜像发布）"
 date: 2026-10-04 04:05:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, 流水线, 自动构建, 镜像, Dockerfile, kubectl, 滚动更新]
 ---
 

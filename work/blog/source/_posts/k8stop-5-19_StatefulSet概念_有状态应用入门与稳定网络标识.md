@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 有状态应用管理 StatefulSet 概念（稳定标识 + 有序部署 + 独立存储）"
 date: 2026-10-03 14:59:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [StatefulSet, 有状态应用, headless service, 稳定网络标识, FQDN, 有序部署, 动态PV, Redis主从, 粘性标识]
 ---
 

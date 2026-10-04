@@ -1,7 +1,7 @@
 ---
 title: "Scheduler 原理"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [kube-scheduler, 调度, 过滤, 打分, 绑定, 抢占, 驱逐, 调度框架, 扩展点, 调度周期]
 disableNunjucks: true
 ---

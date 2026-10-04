@@ -1,7 +1,7 @@
 ---
 title: "用户成长体系设计：本章导学"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, 项目实战]
+categories: [kcna, Kubernetes, 项目实战]
 tags: [用户成长体系, 积分系统, 等级系统, 系统设计, 数据库设计, 需求调研]
 disableNunjucks: true
 ---

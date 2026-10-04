@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 在 k8s 上部署 Redis 集群下（三主三从的 StatefulSet 结构、反亲和、持久化与分片路由）"
 date: 2026-10-03 22:05:00
-categories: [Kubernetes, Operator]
+categories: [k8stop, Kubernetes, Operator]
 tags: [Redis, redis-cluster-operator, StatefulSet, podAntiAffinity, emptyDir, storageClassName, hostPath, QoS, 分片路由, 智能客户端]
 ---
 

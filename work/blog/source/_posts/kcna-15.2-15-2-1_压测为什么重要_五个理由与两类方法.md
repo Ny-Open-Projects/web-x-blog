@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 压测为什么重要 —— 五个理由、量化指标与两类压测方法"
 date: 2026-10-02 22:04:00
-categories: [Kubernetes, 性能]
+categories: [kcna, Kubernetes, 性能]
 tags: [压力测试, 全链路压测, 本地压测, 分布式压测, 瓶颈定位, QPS, 延迟, 伸缩性验证]
 ---
 

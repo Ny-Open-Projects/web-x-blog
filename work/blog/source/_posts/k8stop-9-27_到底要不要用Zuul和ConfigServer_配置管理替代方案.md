@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 到底要不要用 Zuul 和 ConfigServer（配置管理替代方案）"
 date: 2026-10-04 05:35:00
-categories: [Kubernetes, SpringCloud]
+categories: [k8stop, Kubernetes, SpringCloud]
 tags: [Zuul, ConfigServer, 配置管理, Service代理外部, ConfigMap, 环境变量, Apollo, Ingress]
 ---
 

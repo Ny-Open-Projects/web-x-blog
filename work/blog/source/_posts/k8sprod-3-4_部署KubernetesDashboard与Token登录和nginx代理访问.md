@@ -7,8 +7,7 @@ tags:
   - dashboard
   - token
   - nginx
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 部署 Dashboard：创建 Token 登录、nginx 代理打通 HTTPS 访问

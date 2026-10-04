@@ -1,7 +1,7 @@
 ---
 title: "本章小结 —— 压力测试与 WRK 实战复盘"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, 性能]
+categories: [kcna, Kubernetes, 性能]
 tags: [压力测试, WRK, QPS, 延迟, 瓶颈定位, 对比压测, 性能优化, 本章小结]
 disableNunjucks: true
 ---

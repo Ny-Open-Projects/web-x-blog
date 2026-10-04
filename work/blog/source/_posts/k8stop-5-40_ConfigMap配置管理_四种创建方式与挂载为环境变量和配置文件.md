@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 配置管理 ConfigMap（四种创建方式与挂载成环境变量 / 配置文件）"
 date: 2026-10-03 19:34:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [ConfigMap, 配置字典, 从文件创建, from-literal, envFrom, configMapKeyRef, volumeMounts, 挂载覆盖目录, 热更新, Secret对比]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Docker 与 kubeadm 组件的选定版本及容器运行时配置"
 date: 2026-10-02 09:40:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Docker, containerd, kubeadm, kubelet, cgroupfs, 镜像仓库, 版本兼容]
 disableNunjucks: true
 

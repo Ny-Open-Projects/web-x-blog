@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Helm 包管理与 Tiller 安装以及 Operator 原理"
 date: 2026-10-04 10:20:00
-categories: [Kubernetes, 监控]
+categories: [k8sprod, Kubernetes, 监控]
 tags: [Helm, Chart, Tiller, ServiceAccount, ClusterRoleBinding, CRD, Operator, Prometheus, 部署方案]
 ---
 

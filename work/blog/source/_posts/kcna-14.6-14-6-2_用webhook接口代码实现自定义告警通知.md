@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 webhook 接口代码实现 Prometheus 自定义告警通知"
 date: 2026-10-02 21:56:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [webhook, AlertManager, gin, PostAlert, Alert 结构, pending, firing, 自定义通知]
 ---
 

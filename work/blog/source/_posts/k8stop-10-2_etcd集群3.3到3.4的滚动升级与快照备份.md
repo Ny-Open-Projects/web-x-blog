@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: etcd 集群 3.3 到 3.4 的滚动升级与快照备份"
 date: 2026-10-02 08:20:00
-categories: [Kubernetes, 集群升级]
+categories: [k8stop, Kubernetes, 集群升级]
 tags: [etcd, 滚动升级, snapshot, 双向TLS, 数据一致性]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 数字字段 mapping 在数值类型与 keyword 之间如何选型"
 date: 2026-10-02 03:12:00
-categories: [Elasticsearch, 数据建模]
+categories: [es, Elasticsearch, 数据建模]
 tags: [mapping, keyword, BKD, 倒排索引, global ordinals, execution_hint, 数据建模, 面试高频]
 ---
 

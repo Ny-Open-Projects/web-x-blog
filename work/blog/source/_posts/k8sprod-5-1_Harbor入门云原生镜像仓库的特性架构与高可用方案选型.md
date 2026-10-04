@@ -7,8 +7,7 @@ tags:
   - Harbor
   - 镜像仓库
   - 高可用
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Harbor 入门：云原生镜像仓库的特性、架构与高可用方案选型

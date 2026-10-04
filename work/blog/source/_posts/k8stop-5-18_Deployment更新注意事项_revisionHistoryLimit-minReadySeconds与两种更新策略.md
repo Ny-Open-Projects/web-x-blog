@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Deployment 更新注意事项（revisionHistoryLimit / minReadySeconds / 两种更新策略）"
 date: 2026-10-03 14:52:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Deployment, revisionHistoryLimit, minReadySeconds, RollingUpdate, Recreate, maxSurge, maxUnavailable, hostNetwork, 更新策略]
 ---
 

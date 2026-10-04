@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: 千亿级订单搜索业务难点分析"
 date: 2026-10-02 21:35:00
-categories: [Elasticsearch, 订单搜索]
+categories: [es, Elasticsearch, 订单搜索]
 tags: [冷热分离, 跨集群搜索, 活跃用户, 租期制, 数据膨胀]
 disableNunjucks: true
 

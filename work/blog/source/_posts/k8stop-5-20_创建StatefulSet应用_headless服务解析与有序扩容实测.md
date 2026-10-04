@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 创建一个 StatefulSet 应用（headless Service 解析与有序扩容实测）"
 date: 2026-10-03 15:13:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [StatefulSet, headless service, clusterIP None, scale, 有序扩容, FQDN 解析, nslookup, ConfigMap, 服务发现, 有状态应用]
 ---
 

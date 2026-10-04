@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 监控（下）— Grafana 面板、证书过期告警与持久化"
 date: 2026-10-04 03:10:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, Grafana, Dashboard, 证书过期, 告警, blackbox, ConfigMap, 持久化]
 ---
 

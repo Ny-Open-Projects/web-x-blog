@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: nodeSelector 节点标签选择器（把 Pod 固定到一类节点）"
 date: 2026-10-03 13:35:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, nodeSelector, 标签, 调度, 节点分组]
 ---
 

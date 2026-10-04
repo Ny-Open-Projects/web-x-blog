@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 日志搜索业务场景和功能分析"
 date: 2026-10-03 14:00:00
-categories: [Elasticsearch, 日志搜索]
+categories: [es, Elasticsearch, 日志搜索]
 tags: [云原生, LOG, 结构化日志, pipeline隔离, 采集客户端]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 管理 K8s 应用程序日志（hostPath 与 emptyDir 挂载）"
 date: 2026-10-02 20:10:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 应用日志, hostPath, emptyDir, volume, 多容器kubectl logs -c, 日志采集]
 ---
 

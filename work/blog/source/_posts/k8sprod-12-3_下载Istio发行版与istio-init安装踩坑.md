@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: 下载 Istio 发行版与 istio-init 安装踩坑"
 date: 2026-10-04 14:25:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [Istio, istioctl, helm template, istio-init, initContainer, iptables, mutating webhook, CRD, NodePort]
 ---
 

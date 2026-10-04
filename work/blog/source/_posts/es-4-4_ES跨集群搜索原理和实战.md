@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: ES 跨集群搜索的配置与原理"
 date: 2026-10-02 08:20:00
-categories: [Elasticsearch, 架构]
+categories: [es, Elasticsearch, 架构]
 tags: [跨集群搜索, remote_cluster, routing, 版本兼容]
 ---
 

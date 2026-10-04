@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: K8s 安全框架 认证、授权、准入三道关卡"
 date: 2026-10-03 11:21:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 安全框架, kube-apiserver, RBAC, 准入控制]
 ---
 

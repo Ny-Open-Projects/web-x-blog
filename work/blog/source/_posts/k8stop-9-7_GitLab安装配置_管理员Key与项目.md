@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: GitLab 安装配置与管理员 SSH Key"
 date: 2026-10-04 06:05:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [GitLab, 安装, SSH, 管理员, 仓库]
 ---
 

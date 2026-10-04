@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 从写入原理深入 Elasticsearch 写优化"
 date: 2026-10-01 23:10:00
-categories: [Elasticsearch]
+categories: [es, Elasticsearch]
 tags: [写入优化, translog, refresh, bulk, routing, segment-merge]
 ---
 

@@ -9,8 +9,7 @@ tags:
   - predicate
   - priority
   - informer
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: Scheduler 调度（上）—— 调度器内部流程与 nodeAffinity 亲和性

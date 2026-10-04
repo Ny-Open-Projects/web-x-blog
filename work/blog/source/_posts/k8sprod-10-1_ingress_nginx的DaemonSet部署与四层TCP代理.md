@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: ingress-nginx 的 DaemonSet 部署与四层 TCP 代理"
 date: 2026-10-03 18:10:00
-categories: [Kubernetes, 生产实践]
+categories: [k8sprod, Kubernetes, 生产实践]
 tags: [ingress-nginx, DaemonSet, hostNetwork, nodeSelector, tcp-services, ConfigMap, client_max_body_size, proxy_read_timeout, 四层代理]
 ---
 

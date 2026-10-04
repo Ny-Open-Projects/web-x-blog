@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 正确部署 Zuul 和 ConfigServer 到 K8s（网关与配置中心）"
 date: 2026-10-04 05:30:00
-categories: [Kubernetes, SpringCloud]
+categories: [k8stop, Kubernetes, SpringCloud]
 tags: [Zuul, ConfigServer, Deployment, Service, Ingress, 网关, 配置中心, 无状态]
 ---
 

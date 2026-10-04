@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: Ingress 部署中的三类高频故障与排查路径"
 date: 2026-10-02 20:10:00
-categories: [Kubernetes, 运维排障]
+categories: [kcna, Kubernetes, 运维排障]
 tags: [IngressController, 版本兼容, 路由规则, 日志排查, 云厂商托管]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: CKA考试准备（考试形式、环境要求与答题技巧）"
 date: 2026-10-02 14:20:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 考试, 答题技巧, kubeconfig, 上下文切换]
 ---
 

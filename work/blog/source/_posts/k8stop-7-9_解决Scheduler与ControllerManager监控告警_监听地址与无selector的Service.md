@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 解决 Scheduler / ControllerManager 监控告警（监听地址 + 无 selector 的 Service）"
 date: 2026-10-04 01:16:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, ServiceMonitor, kube-controller-manager, kube-scheduler, Endpoints, 无 selector Service, 10252, 二进制集群, Watchdog]
 ---
 

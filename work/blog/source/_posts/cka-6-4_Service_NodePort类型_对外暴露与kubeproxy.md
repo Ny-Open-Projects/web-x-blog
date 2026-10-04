@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Service NodePort 类型 —— 把应用暴露到集群外"
 date: 2026-10-03 18:35:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, NodePort, Service, kube-proxy, ClusterIP, 端口]
 ---
 

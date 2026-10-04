@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 在 k8s 上是如何发布服务的（东西流量走 Service，南北流量走 Ingress）"
 date: 2026-10-03 16:16:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Service, Ingress, 东西流量, 南北流量, 服务间调用, 服务注册发现, 负载均衡, 域名路由, ingress-nginx, SLB]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 镜像仓库配置与动态获取镜像 Tag"
 date: 2026-10-04 06:00:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [镜像仓库, 阿里云, Harbor, CLI, jq, 级联变量]
 ---
 

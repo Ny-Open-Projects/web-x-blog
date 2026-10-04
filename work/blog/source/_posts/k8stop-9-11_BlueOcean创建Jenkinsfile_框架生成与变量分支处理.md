@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: BlueOcean 创建 Jenkinsfile（框架生成与变量/分支处理）"
 date: 2026-10-04 04:10:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, BlueOcean, Jenkinsfile, 声明式流水线, GitLab, 多分支, 镜像标签]
 ---
 

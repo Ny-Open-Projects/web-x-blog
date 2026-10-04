@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 解决 RabbitMQ 密码不生效问题（ConfigMap 挂载覆盖了镜像生成的配置）"
 date: 2026-10-03 22:13:00
-categories: [Kubernetes, 中间件]
+categories: [k8stop, Kubernetes, 中间件]
 tags: [RabbitMQ, ConfigMap, 挂载覆盖, rabbitmq.conf, 环境变量, StatefulSet 重建, default_user, guest, management 权限]
 ---
 

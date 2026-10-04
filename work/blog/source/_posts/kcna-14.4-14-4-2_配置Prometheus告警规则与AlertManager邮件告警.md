@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证考点: 配好 Prometheus 告警规则与 AlertManager 的邮件告警"
 date: 2026-10-02 21:40:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [AlertManager, 告警规则, SMTP, 授权码, group_wait, repeat_interval, email_configs, webhook]
 disableNunjucks: true
 

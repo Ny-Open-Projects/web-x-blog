@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: APIServer 原理 —— 集群唯一的 etcd 网关与 watch 循环"
 date: 2026-10-02 01:45:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [APIServer, etcd, watch, kubectl, client-go, 网关, 认证鉴权, proxy, 缓存, 性能瓶颈]
 ---
 

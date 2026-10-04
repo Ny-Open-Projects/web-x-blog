@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证考点: 本地装起 Prometheus 与 Grafana 并配出第一张面板"
 date: 2026-10-02 20:52:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [Prometheus, Grafana, brew, datasource, panel, go_goroutines, prometheus_sdk]
 disableNunjucks: true
 

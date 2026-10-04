@@ -7,8 +7,7 @@ tags:
   - Jenkins
   - Pipeline
   - 镜像构建
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 ## 纲要

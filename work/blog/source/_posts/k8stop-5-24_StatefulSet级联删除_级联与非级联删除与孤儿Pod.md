@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: StatefulSet 级联删除与非级联删除（--cascade=false 与孤儿 Pod）"
 date: 2026-10-03 15:41:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [StatefulSet, cascade, 级联删除, 非级联删除, 孤儿 Pod, 垃圾回收, finalizer, delete sts]
 ---
 

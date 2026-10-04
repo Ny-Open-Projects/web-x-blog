@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: gRPC 服务转 Restful API（gin 框架）—— 路由组、参数绑定与转发调用"
 date: 2026-10-03 01:29:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [RESTful API, gin, 路由组, ShouldBindJSON, grpc.Dial, 统一响应格式, 端口冲突]
 ---
 

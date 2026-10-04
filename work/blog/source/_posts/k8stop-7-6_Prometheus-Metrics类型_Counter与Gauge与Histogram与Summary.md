@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus Metrics 类型（Counter / Gauge / Histogram / Summary）"
 date: 2026-10-04 01:13:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, metrics, Counter, Gauge, Histogram, Summary, 分位数, 累计直方图, bucket, exporter, pushgateway]
 ---
 

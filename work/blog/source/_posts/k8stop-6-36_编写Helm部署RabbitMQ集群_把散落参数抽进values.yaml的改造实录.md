@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: 编写 Helm 部署 RabbitMQ 集群（把散落参数抽进 values.yaml 的改造实录）"
 date: 2026-10-03 22:25:00
-categories: [Kubernetes, Helm]
+categories: [k8stop, Kubernetes, Helm]
 tags: [Helm, RabbitMQ, values.yaml, templates, include, Release.Name, serviceAccount, storageClass, emptyDir, dry-run]
 disableNunjucks: true
 

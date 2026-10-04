@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Ingress HTTPS —— 自签证书、存入 Secret 与 TLS 规则"
 date: 2026-10-03 16:55:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Ingress, HTTPS, TLS, Secret, cfssl, 自签证书]
 ---
 

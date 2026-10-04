@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: LogPilot + ES + Kibana 的日志采集落地"
 date: 2026-10-03 22:50:00
-categories: [Kubernetes, 日志]
+categories: [k8sprod, Kubernetes, 日志]
 tags: [LogPilot, Elasticsearch, Kibana, StatefulSet, initContainers, mmap_count, sysctl, 动态发现, 索引模式, emptyDir]
 ---
 

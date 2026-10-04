@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 到底要不要用 Eureka（K8s 服务发现与服务网格权衡）"
 date: 2026-10-04 05:25:00
-categories: [Kubernetes, SpringCloud]
+categories: [k8stop, Kubernetes, SpringCloud]
 tags: [Eureka, 服务发现, kube-dns, CoreDNS, 环境变量, 服务网格, Istio, 新旧项目]
 ---
 

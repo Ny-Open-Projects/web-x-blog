@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 灰度金丝雀发布（权重/Header/Cookie 路由）"
 date: 2026-10-04 03:40:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, 金丝雀, canary, canary-weight, canary-by-header, canary-by-cookie, 灰度发布, 优先级]
 ---
 

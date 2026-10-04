@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 第一个 gRPC 案例演示 —— 四步流程与 helloworld 全链路"
 date: 2026-10-02 23:52:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, protobuf, protoc, protoc-gen-go, helloworld, 字段编号, trailer, HTTP2, 服务开发流程]
 ---
 

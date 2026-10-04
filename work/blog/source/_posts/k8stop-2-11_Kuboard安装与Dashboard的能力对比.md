@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Kuboard 安装与 Dashboard 的能力对比"
 date: 2026-10-02 10:40:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Kuboard, Dashboard, NodePort, 32000端口, 图形化管理, 套件]
 ---
 

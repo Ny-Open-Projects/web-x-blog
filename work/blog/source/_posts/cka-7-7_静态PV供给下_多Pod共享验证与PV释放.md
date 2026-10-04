@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 静态 PV 供给（下）多 Pod 共享验证与 PV 释放"
 date: 2026-10-03 11:00:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 持久化存储, PV, PVC, 访问模式]
 ---
 

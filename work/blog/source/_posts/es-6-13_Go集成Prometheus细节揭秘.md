@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: Go 集成 Prometheus 细节揭秘"
 date: 2026-10-02 10:10:00
-categories: [Go, 可观测性]
+categories: [es, Go, 可观测性]
 tags: [Prometheus, pushgateway, client_golang, Counter, Histogram, PromQL]
 ---
 

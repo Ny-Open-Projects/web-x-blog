@@ -7,8 +7,7 @@ tags:
   - Docker
   - 容器编排
   - 生产实践
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 认识 Kubernetes：名字由来、核心特征与和 Docker 的关系

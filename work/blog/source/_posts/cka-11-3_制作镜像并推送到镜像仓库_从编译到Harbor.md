@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 制作镜像并推送到镜像仓库（从编译到 Harbor）"
 date: 2026-10-02 11:05:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Docker, Dockerfile, Harbor, 镜像仓库, Maven, 私有仓库, insecure-registries]
 ---
 

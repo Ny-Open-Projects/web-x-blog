@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Master 节点（控制面 API Server / Scheduler / Controller Manager / etcd 的角色划分）"
 date: 2026-10-03 15:06:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Master, 控制面, API Server, Scheduler, Controller Manager, etcd, 主从架构, 高可用, VIP, 负载均衡, 选址调度]
 ---
 

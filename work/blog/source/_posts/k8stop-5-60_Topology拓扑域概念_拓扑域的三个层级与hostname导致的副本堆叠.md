@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Topology 拓扑域（hostname 为何让所有 Pod 挤到一台机器、以及按机柜/机房/城市三级划分）"
 date: 2026-10-03 22:00:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [topologyKey, 拓扑域, kubernetes.io/hostname, podAffinity, podAntiAffinity, label, 可用区, 机柜级容灾]
 ---
 

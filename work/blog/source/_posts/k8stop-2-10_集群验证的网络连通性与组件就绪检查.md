@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 集群验证的网络连通性与组件就绪检查"
 date: 2026-10-02 10:30:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [集群验证, ClusterIP, NodePort, metrics-server, Dashboard, 连通性]
 ---
 

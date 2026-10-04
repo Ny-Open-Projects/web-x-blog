@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: haproxy 与 keepalived 搭建 apiserver 负载均衡"
 date: 2026-10-02 09:50:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [haproxy, keepalived, VIP, VRRP, 四层负载, keepalived健康检查]
 ---
 

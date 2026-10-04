@@ -8,8 +8,7 @@ tags:
   - keepalived
   - etcd
   - calico
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 用 kubeadm 部署高可用集群：keepalived、etcd 集群、三 master 与 calico 落地

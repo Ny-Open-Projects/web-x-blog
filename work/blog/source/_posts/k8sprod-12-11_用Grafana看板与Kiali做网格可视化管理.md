@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: 用 Grafana 看板与 Kiali 做网格可视化管理"
 date: 2026-10-04 19:05:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [Istio, Grafana, Kiali, dashboard, P50/P90/P99, 网格可视化, Istio Config, Secret]
 ---
 

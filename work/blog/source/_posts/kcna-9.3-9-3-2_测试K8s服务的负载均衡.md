@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 测试 K8s 服务的负载均衡 —— 制作镜像、TCR 推送、建集群与双实例验证"
 date: 2026-10-03 02:04:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [负载均衡测试, Dockerfile, 交叉编译, GOOS, GOARCH, TCR 镜像仓库, Serverless 集群, 双实例]
 ---
 

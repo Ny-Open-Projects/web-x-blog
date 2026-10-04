@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 为指定用户授权不同命名空间权限（上）签发客户端证书与 kubeconfig"
 date: 2026-10-03 11:28:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, RBAC, 客户端证书, kubeconfig, 命名空间权限]
 ---
 

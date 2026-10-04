@@ -3,7 +3,7 @@ disableNunjucks: true
 title: "Kubernetes 认证实战: InitContainer 初始化容器的执行顺序与三个典型场景"
 date: 2021-04-11 10:20:00
 tags: [Kubernetes, CKA, InitContainer, Pod, emptyDir]
-categories: [Kubernetes 认证实战]
+categories: [cka, Kubernetes 认证实战]
 ---
 
 ## 纲要

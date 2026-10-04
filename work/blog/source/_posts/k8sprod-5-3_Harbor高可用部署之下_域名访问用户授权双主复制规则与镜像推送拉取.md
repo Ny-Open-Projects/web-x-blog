@@ -7,8 +7,7 @@ tags:
   - Harbor
   - 双主复制
   - registry
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Harbor 高可用部署（下）：restart 脚本、域名访问、推送用户授权与双主复制规则

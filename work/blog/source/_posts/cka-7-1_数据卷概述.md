@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 数据卷概述（Volume）"
 date: 2026-04-15 20:40:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Volume, 持久化, hostPath, emptyDir, NFS, ConfigMap, Secret]
 ---
 

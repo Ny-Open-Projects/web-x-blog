@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: Istio 的三类能力——流量治理、可观测性与安全"
 date: 2026-10-02 20:22:00
-categories: [Kubernetes, 服务网格]
+categories: [kcna, Kubernetes, 服务网格]
 tags: [VirtualService, DestinationRule, 灰度发布, 故障注入, 熔断, 流量镜像, mTLS]
 ---
 

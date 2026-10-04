@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: 制作小镜像上（基础镜像选型与 alpine 精简实测）"
 date: 2026-10-03 12:33:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [小镜像, alpine, busybox, scratch, slim, cgo, glibc, 镜像体积, 官方镜像]
 disableNunjucks: true
 

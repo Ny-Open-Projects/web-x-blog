@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 把运行镜像部署到 K8s 集群 —— 建命名空间、建 Deployment 与 Service"
 date: 2026-10-02 04:15:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Deployment, Service, 命名空间, ImagePullPolicy, 环境变量, HPA, 端口暴露, exec验证, EKS]
 ---
 

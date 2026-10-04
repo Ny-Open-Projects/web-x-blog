@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: ConfigMap 存储配置文件（变量注入与数据卷挂载）"
 date: 2026-10-03 21:30:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, ConfigMap, 环境变量, 数据卷, etcd, 配置文件]
 ---
 

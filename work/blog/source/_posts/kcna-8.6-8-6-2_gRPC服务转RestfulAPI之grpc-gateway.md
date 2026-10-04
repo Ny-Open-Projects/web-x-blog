@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: gRPC 服务转 Restful API（grpc-gateway）—— 注解生成代理器与关联启动"
 date: 2026-10-03 01:36:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [grpc-gateway, google.api.http, annotations.proto, runtime.NewServeMux, RegisterXxxHandlerServer, protoc 插件]
 ---
 

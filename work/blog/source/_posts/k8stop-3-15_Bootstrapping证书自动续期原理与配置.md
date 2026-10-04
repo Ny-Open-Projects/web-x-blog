@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Bootstrapping 证书自动续期原理与配置"
 date: 2026-10-02 12:00:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [证书轮换, kubelet, CSR, system:nodes, feature-gate]
 ---
 

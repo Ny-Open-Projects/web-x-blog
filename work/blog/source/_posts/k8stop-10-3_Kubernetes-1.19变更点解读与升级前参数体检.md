@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Kubernetes 1.19 变更点解读与升级前参数体检"
 date: 2026-10-02 08:30:00
-categories: [Kubernetes, 集群升级]
+categories: [k8stop, Kubernetes, 集群升级]
 tags: [CHANGELOG, feature gate, API 迁移, 参数兼容, 升级演练]
 ---
 

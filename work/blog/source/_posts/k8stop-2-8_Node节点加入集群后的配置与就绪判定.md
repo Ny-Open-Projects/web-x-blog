@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Node 节点加入集群后的配置与就绪判定"
 date: 2026-10-02 10:18:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [kubeadm join, NotReady, 节点角色, 镜像仓库同步, 节点标签]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 云原生的 Prometheus 架构、四种指标类型与 PromQL 查询"
 date: 2026-10-02 20:30:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [Prometheus, Pull模型, Pushgateway, exporters, 服务发现, PromQL, Counter, Histogram]
 ---
 

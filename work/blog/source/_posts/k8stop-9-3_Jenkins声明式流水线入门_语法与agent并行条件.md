@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 声明式流水线语法与 agent 并行条件"
 date: 2026-10-04 05:45:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, Pipeline, 声明式流水线, agent, 并行]
 ---
 

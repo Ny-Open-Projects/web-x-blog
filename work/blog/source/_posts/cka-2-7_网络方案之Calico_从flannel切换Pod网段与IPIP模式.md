@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 网络方案之Calico（从flannel切换、Pod网段与IPIP模式）"
 date: 2026-10-02 17:10:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, CNI, Calico, flannel, IPIP, BGP, NetworkPolicy, Pod网段]
 ---
 

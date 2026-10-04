@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: 如何快速重建用户订单索引"
 date: 2026-10-03 10:20:00
-categories: [Elasticsearch, 数据重建]
+categories: [es, Elasticsearch, 数据重建]
 tags: [游标分页, AKSK鉴权, 被动建索引, 时间格式, 深度分页]
 disableNunjucks: true
 

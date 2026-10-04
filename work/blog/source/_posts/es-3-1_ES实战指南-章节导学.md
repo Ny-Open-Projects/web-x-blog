@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "ES实战指南-章节导学"
 date: 2026-10-04 01:03:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [Elasticsearch, 数据建模, 跨集群, 性能优化, 监控]
 ---
 

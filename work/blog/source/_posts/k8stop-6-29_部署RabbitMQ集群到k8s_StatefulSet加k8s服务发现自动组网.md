@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 部署 RabbitMQ 集群到 k8s（StatefulSet 加 k8s 服务发现自动组网）"
 date: 2026-10-03 22:09:00
-categories: [Kubernetes, 中间件]
+categories: [k8stop, Kubernetes, 中间件]
 tags: [RabbitMQ, StatefulSet, peer discovery, endpoints, RBAC, ConfigMap, Secret, Headless Service, NodePort, 5672, 15672]
 ---
 

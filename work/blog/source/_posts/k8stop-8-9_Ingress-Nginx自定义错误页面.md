@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 自定义错误页面（errorpage 与默认后端）"
 date: 2026-10-04 03:45:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, 自定义错误页面, error_page, configuration-snippet, default-backend, custom-http-errors, ConfigMap]
 ---
 

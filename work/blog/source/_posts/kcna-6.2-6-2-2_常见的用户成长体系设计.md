@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 常见的用户成长体系设计 —— 激励的分类、产品目标、腾讯/阿里/京东案例与积分消耗渠道"
 date: 2026-10-02 05:20:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [用户成长体系, 积分体系, 金币体系, 用户激励体系, 物质激励, 精神激励, 用户粘性, 高频操作, QQ等级, 芝麻信用, 京东PLUS, 兑换商城, 成长值]
 ---
 

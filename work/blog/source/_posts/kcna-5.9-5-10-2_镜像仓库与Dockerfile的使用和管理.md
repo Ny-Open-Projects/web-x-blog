@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 镜像仓库与 Dockerfile 的使用和管理 —— 常用指令、多阶段构建、按代码管理 Dockerfile 与仓库规划"
 date: 2026-10-02 05:05:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Dockerfile, FROM, RUN, CMD, ENTRYPOINT, EXPOSE, ENV, ADD, COPY, VOLUME, USER, WORKDIR, ARG, 多阶段构建, 镜像仓库, TCR, 安全扫描]
 ---
 

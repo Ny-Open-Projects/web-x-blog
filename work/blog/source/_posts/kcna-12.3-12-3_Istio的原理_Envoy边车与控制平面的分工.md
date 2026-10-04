@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: Istio 的原理——Envoy 边车与控制平面的分工"
 date: 2026-10-02 20:20:00
-categories: [Kubernetes, 服务网格]
+categories: [kcna, Kubernetes, 服务网格]
 tags: [Istio, Envoy, 数据平面, 控制平面, istiod, mTLS, 配置下发]
 ---
 

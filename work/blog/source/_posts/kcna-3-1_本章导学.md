@@ -1,7 +1,7 @@
 ---
 title: "gRPC 本章导学"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, 本章导学, HTTP2, protobuf, 代码生成, 代理模式, 源码, 学习方法]
 disableNunjucks: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: "云原生的监控、告警和日志服务：本章导学"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 可观测性]
+categories: [kcna, Kubernetes, 可观测性]
 tags: [可观测性, Prometheus, Grafana, 日志服务, 监控, 本章导学]
 disableNunjucks: true
 ---

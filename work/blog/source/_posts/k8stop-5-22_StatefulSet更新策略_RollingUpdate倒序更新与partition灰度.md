@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: StatefulSet 更新策略（RollingUpdate 倒序更新与 partition 灰度）"
 date: 2026-10-03 15:27:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [StatefulSet, updateStrategy, RollingUpdate, partition, OnDelete, 倒序更新, 灰度发布, rollout status, 有序更新]
 ---
 

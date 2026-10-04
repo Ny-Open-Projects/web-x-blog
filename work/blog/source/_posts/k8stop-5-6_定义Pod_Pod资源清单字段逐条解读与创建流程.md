@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 定义一个 Pod（Pod 资源清单字段逐条解读与创建流程）"
 date: 2026-10-03 20:09:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Pod, yaml, apiVersion, kind, metadata, spec, imagePullPolicy, command, args, ports, env, resources, restartPolicy, nodeSelector, hostNetwork, imagePullSecrets, 精简字段]
 ---
 

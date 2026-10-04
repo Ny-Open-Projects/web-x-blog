@@ -1,7 +1,7 @@
 ---
 title: "用 gRPC 实现用户积分等级系统：本章导学"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, Protobuf, protoc, 代码生成, 数据层, 服务层, 应用层, 单元测试]
 disableNunjucks: true
 ---

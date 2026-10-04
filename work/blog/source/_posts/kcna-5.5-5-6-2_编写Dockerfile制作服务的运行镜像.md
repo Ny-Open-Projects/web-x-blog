@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 编写 Dockerfile 制作服务的运行镜像 —— 从基础镜像到推送 TCR"
 date: 2026-10-02 04:00:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Dockerfile, 基础镜像, alpine, 交叉编译, docker build, WORKDIR, EXPOSE, CMD, 镜像缓存, TCR, 镜像大小]
 ---
 

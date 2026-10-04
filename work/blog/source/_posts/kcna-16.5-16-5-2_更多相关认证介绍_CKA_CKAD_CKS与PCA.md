@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 相关认证全景 —— CKA / CKAD / CKS / PCA 的报考条件与权重"
 date: 2026-10-02 22:52:00
-categories: [Kubernetes, 认证]
+categories: [kcna, Kubernetes, 认证]
 tags: [CKA, CKAD, CKS, PCA, 认证权重, 考试时长, 中文版本, 报考顺序]
 ---
 

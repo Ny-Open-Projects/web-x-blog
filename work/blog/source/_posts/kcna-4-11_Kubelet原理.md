@@ -1,7 +1,7 @@
 ---
 title: "Kubelet 原理"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [kubelet, PLEG, syncLoop, CRI, CRIContainerRuntimeInterface, 容器运行时, 设备插件, nodeStatusUpdater, 控制循环]
 disableNunjucks: true
 ---

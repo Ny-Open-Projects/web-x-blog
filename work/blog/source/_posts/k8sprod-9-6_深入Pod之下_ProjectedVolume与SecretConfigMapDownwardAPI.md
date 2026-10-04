@@ -9,8 +9,7 @@ tags:
   - Secret
   - ConfigMap
   - DownwardAPI
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: 深入 Pod（下）—— Projected Volume 与 Secret / ConfigMap / Downward API

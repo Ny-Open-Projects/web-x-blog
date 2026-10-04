@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 云原生日志服务的采集、投递与检索链路"
 date: 2026-10-02 21:00:00
-categories: [Kubernetes, 日志]
+categories: [kcna, Kubernetes, 日志]
 tags: [日志服务, logtail, DaemonSet, Kafka协议, COS, SCF, 索引, 低频存储]
 ---
 

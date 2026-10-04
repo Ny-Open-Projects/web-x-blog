@@ -1,7 +1,7 @@
 ---
 title: "用 Helm 管理 K8s 部署本章小结：Chart 与常用命令"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 包管理]
+categories: [kcna, Kubernetes, 包管理]
 tags: [Helm, Chart, Tiller, 模板渲染, 本章小结]
 disableNunjucks: true
 ---

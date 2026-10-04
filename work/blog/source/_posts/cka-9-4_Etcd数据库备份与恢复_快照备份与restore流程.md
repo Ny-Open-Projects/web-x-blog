@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Etcd 数据库备份与恢复 快照备份与 restore 全流程"
 date: 2026-10-03 12:17:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, etcd, 数据备份, 快照恢复, 静态Pod]
 ---
 

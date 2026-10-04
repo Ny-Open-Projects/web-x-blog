@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 匹配请求头（按 User-Agent / 自定义头路由）"
 date: 2026-10-04 03:30:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, 请求头, User-Agent, configuration-snippet, 灰度, 路由, 重定向]
 ---
 

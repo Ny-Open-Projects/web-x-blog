@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 入门（集群入口链路、选型与部署要点）"
 date: 2026-10-04 01:17:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, nginx-ingress, Traefik, HAProxy, Envoy, DaemonSet, hostNetwork, dnsPolicy, OnDelete, ConfigMap, annotation]
 ---
 

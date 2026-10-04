@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Redis 集群扩容和缩容（改 CR 的 masterSize、最小规模限制与集群配置文件的持久化底线）"
 date: 2026-10-03 22:07:00
-categories: [Kubernetes, Operator]
+categories: [k8stop, Kubernetes, Operator]
 tags: [Redis, 扩容, 缩容, masterSize, nodes.conf, 持久化, base64, stringData, Service 名称, 统一配置]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 腾讯云上 K8s 集群的选择和搭建 —— TKE、EKS 与自建三种形态"
 date: 2026-10-02 03:00:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [TKE, EKS, Serverless集群, 超级节点, VPC, 安全组, 可用区, kube-proxy, iptables, IPVS, kubeadm, 集群搭建]
 ---
 

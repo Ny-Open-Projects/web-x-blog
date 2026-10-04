@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: gRPC 自定义 protoc 插件 —— 从 protoc-gen-go-grpc 源码看代码生成"
 date: 2026-10-02 00:40:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [protoc, protoc-gen-go-grpc, 代码生成, 插件, 模板拼字符串, grpc-go源码, _grpc.pb.go]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: HPA 自动扩缩容（HorizontalPodAutoscaler 基于 metrics-server 的 CPU 扩缩容实测）"
 date: 2026-10-03 19:20:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [HPA, HorizontalPodAutoscaler, metrics-server, requests, cpu-percent, autoscale, 水平伸缩, 反亲和, 缩容稳定期]
 ---
 

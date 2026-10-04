@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: StatefulSet 扩容缩容（有序创建、倒序删除与容器名的坑）"
 date: 2026-10-03 15:20:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [StatefulSet, scale, 有序创建, 倒序删除, 滚动等待, podManagementPolicy, 容器名固定, -o wide, watch]
 ---
 

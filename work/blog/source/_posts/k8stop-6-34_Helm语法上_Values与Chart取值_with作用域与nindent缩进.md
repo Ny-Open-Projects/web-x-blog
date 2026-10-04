@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Helm 语法上（Values 与 Chart 取值、with 作用域与 nindent 缩进）"
 date: 2026-10-03 22:21:00
-categories: [Kubernetes, Helm]
+categories: [k8stop, Kubernetes, Helm]
 tags: [Helm, Go template, .Values, .Chart, with, toYaml, nindent, values.yaml, imagePullSecrets]
 disableNunjucks: true
 

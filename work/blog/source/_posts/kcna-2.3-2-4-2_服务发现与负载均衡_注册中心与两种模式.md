@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 服务发现与负载均衡 —— 注册中心三功能、两种模式与主流实现"
 date: 2026-10-02 23:04:00
-categories: [Kubernetes, 微服务]
+categories: [kcna, Kubernetes, 微服务]
 tags: [服务发现, 注册中心, 服务注册, 健康检查, 客户端发现, 服务端发现, ZooKeeper, etcd, file方案]
 ---
 

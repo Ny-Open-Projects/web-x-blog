@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: Scheduler 原理 —— 过滤、打分、绑定三阶段与调度框架"
 date: 2026-10-02 02:15:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [kube-scheduler, 调度, 过滤, 打分, 绑定, 抢占, 驱逐, 调度框架, 扩展点, 调度周期]
 ---
 

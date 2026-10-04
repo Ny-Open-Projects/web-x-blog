@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: RabbitMQ 扩容和缩容（服务发现自动入群、Pod 重建后队列恢复与固定节点的持久化方案）"
 date: 2026-10-03 22:15:00
-categories: [Kubernetes, 中间件]
+categories: [k8stop, Kubernetes, 中间件]
 tags: [RabbitMQ, 扩容, 缩容, 服务发现, 磁盘节点, 内存节点, hostPath, 节点亲和, 反亲和, Pending, 队列]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 有状态部署与无状态部署区别 两个判断标准"
 date: 2026-10-03 11:14:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, StatefulSet, 有状态应用, 无状态应用, etcd]
 ---
 

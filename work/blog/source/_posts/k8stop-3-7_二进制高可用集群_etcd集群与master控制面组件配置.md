@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制高可用集群的 etcd 与 master 控制面组件配置"
 date: 2026-10-03 11:37:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [etcd 3.4, etcd集群, systemd unit, haproxy, keepalived, VIP 8443, kube-apiserver, kube-controller-manager, kube-scheduler]
 ---
 

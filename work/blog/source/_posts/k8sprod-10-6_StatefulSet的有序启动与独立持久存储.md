@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: StatefulSet 的有序启动与独立持久存储"
 date: 2026-10-03 21:00:00
-categories: [Kubernetes, 编排]
+categories: [k8sprod, Kubernetes, 编排]
 tags: [StatefulSet, Headless Service, volumeClaimTemplates, 有序启动, 稳定DNS, 独立持久卷, PodManagementPolicy, 有状态应用]
 ---
 

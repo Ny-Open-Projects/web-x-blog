@@ -1,7 +1,7 @@
 ---
 title: "K8s 服务发现与负载均衡本章小结：kube-proxy 三种模式、gRPC 长连接失效与 ClusterIP/PodIP/nodeIP"
 date: 2026-10-04 05:00:00
-categories: [Kubernetes, 服务发现与负载均衡]
+categories: [kcna, Kubernetes, 服务发现与负载均衡]
 tags: [Service, kube-proxy, iptables, IPVS, gRPC, 负载均衡, 服务发现, headless, CoreDNS, 本章小结]
 disableNunjucks: true
 ---

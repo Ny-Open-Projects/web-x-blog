@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证实战: Pod 中的三类容器（infra / init / 业务容器）"
 date: 2026-10-03 11:30:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Pod, infra container, pause, initContainer, 数据卷, sidecar]
 disableNunjucks: true
 

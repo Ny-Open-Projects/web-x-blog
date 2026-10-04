@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 Istio 做服务治理的准备工作——建集群、建网格、开注入"
 date: 2026-10-02 20:24:00
-categories: [Kubernetes, 服务网格]
+categories: [kcna, Kubernetes, 服务网格]
 tags: [Istio, 托管集群, sidecar自动注入, VirtualService前置, 双版本部署]
 ---
 

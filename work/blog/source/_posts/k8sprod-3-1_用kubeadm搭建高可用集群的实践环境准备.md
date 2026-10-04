@@ -7,8 +7,7 @@ tags:
   - kubeadm
   - 高可用
   - 环境准备
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 用 kubeadm 搭建高可用集群：实践环境准备全步骤

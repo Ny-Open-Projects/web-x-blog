@@ -1,7 +1,7 @@
 ---
 title: "K8s 监控及告警：让系统风险无处遁逃（本章导学）"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 可观测性]
+categories: [kcna, Kubernetes, 可观测性]
 tags: [Prometheus, AlertManager, 告警, 邮件告警, webhook, 本章导学]
 disableNunjucks: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: "本章小结 —— KCNA 认证全景与云原生知识体系复盘"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, 认证]
+categories: [kcna, Kubernetes, 认证]
 tags: [KCNA, CNCF, 云原生, 容器编排, GitOps, 可观测性, CKA, CKAD, CKS, PCA]
 disableNunjucks: true
 ---

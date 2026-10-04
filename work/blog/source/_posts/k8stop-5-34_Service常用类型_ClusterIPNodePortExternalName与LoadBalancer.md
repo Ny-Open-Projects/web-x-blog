@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Service 常用类型（ClusterIP / NodePort / ExternalName / LoadBalancer）"
 date: 2026-10-03 18:45:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Service, ClusterIP, NodePort, ExternalName, LoadBalancer, nodePort范围, service-node-port-range, Ingress, apply]
 ---
 

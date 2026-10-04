@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 日志搜索业务难点分析"
 date: 2026-10-03 16:30:00
-categories: [Elasticsearch, 日志搜索]
+categories: [es, Elasticsearch, 日志搜索]
 tags: [K8s统一采集, 日志分级隔离, 消息队列缓冲, ELK架构演进]
 ---
 

@@ -7,8 +7,7 @@ tags:
   - 集群测试
   - NodePort
   - DNS
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 集群可用性测试：Pod 网络、Service、NodePort 与 DNS 四项验证

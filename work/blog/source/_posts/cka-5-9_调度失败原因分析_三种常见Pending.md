@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 三种常见调度失败原因与排查手法"
 date: 2026-10-03 15:40:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 调度失败, Pending, Insufficient cpu, taint, describe]
 ---
 

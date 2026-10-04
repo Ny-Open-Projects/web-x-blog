@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: PB 级大文本邮件搜索的三大难点与应对"
 date: 2026-10-02 01:05:00
-categories: [Elasticsearch, 性能优化]
+categories: [es, Elasticsearch, 性能优化]
 tags: [大文本, 数据膨胀, best_compression, 高亮, 冷热分离, refresh_interval, Go并发]
 ---
 

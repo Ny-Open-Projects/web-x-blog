@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: ConfigMap & Secret 使用 SubPath（解决挂载覆盖目录的问题）"
 date: 2026-10-03 19:48:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [subPath, 覆盖目录, volumes.items, volumeMounts, nginx.conf, ConfigMap挂载, 单文件挂载, 动态PV]
 ---
 

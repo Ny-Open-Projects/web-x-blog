@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制集群的 Node 节点配置与 kubelet / kube-proxy / Calico / CoreDNS 安装"
 date: 2026-10-03 11:51:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [kubelet, kube-proxy, ipvs, pause 镜像, clusterDNS, Calico, CoreDNS, kube-system, CNI]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "二进制高可用集群部署（上）：实践环境准备"
 date: 2026-10-04 04:00:00
-categories: [Kubernetes, 生产实践]
+categories: [k8sprod, Kubernetes, 生产实践]
 tags: [Kubernetes, 二进制部署, 高可用, 环境准备, kubeadm]
 disableNunjucks: true
 ---

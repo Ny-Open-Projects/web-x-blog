@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: 补 kube-proxy 与 CoreDNS hosts 插件让 Metrics Server 跑通"
 date: 2026-10-04 16:10:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [kube-proxy, metrics-server, CoreDNS, hosts 插件, fallthrough, kubelet-insecure-tls, 污点, toleration, NoSchedule]
 ---
 

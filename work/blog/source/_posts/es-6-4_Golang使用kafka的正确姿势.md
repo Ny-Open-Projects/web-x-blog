@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: Golang 使用 Kafka 的正确姿势"
 date: 2026-10-02 10:35:00
-categories: [Go, Kafka]
+categories: [es, Go, Kafka]
 tags: [sarama, 消息不丢, 幂等消费, 分区有序, rebalance]
 ---
 

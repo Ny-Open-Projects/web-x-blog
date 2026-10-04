@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Ingress 工作原理与高可用方案"
 date: 2026-10-03 17:20:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Ingress, nginx, Lua, upstream, 高可用, DaemonSet, 污点]
 ---
 

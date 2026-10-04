@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 二进制部署环境介绍 目录结构与配置文件三件套"
 date: 2026-10-03 11:56:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 二进制部署, systemd, TLS Bootstrapping, 目录结构]
 ---
 

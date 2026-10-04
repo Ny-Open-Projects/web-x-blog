@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 用 esrally 给 Elasticsearch 集群做基准压测"
 date: 2026-10-02 00:30:00
-categories: [Elasticsearch, 性能测试]
+categories: [es, Elasticsearch, 性能测试]
 tags: [esrally, 基准测试, CentOS, Python3, JDK, git, 环境搭建]
 ---
 

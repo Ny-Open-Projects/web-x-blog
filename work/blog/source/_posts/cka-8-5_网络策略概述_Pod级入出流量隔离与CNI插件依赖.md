@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 网络策略概述 Pod 级入出流量隔离与 CNI 插件依赖"
 date: 2026-10-03 11:42:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 网络策略, NetworkPolicy, Calico, 多租户隔离]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证考点: 在 K8s 集群中把 Prometheus/Grafana 做成镜像并暴露出外网访问"
 date: 2026-10-02 21:32:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [Dockerfile, 镜像构建, Ingress, ingress-nginx, Service, 一号进程, /etc/hosts, Grafana面板]
 disableNunjucks: true
 

@@ -8,8 +8,7 @@ tags:
   - limits
   - cgroup
   - OOMKill
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 disableNunjucks: true
 
 ---

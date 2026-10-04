@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: CronJob 计划任务（类 Linux 的定时任务如何跑进容器，并发策略解读）"
 date: 2026-10-03 19:20:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [CronJob, Job, crontab, schedule, concurrencyPolicy, Forbid, Replace, startingDeadlineSeconds, suspend, 时区, 命名长度]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 生产实践: 报警规则、Grafana 看板与 Alertmanager 邮件告警打通"
 date: 2026-10-04 12:40:00
-categories: [Kubernetes, 监控]
+categories: [k8sprod, Kubernetes, 监控]
 tags: [PrometheusRule, PromQL, Alerts, pending, Grafana, Dashboard, Alertmanager, SMTP, send_resolved]
 disableNunjucks: true
 

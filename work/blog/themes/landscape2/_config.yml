@@ -1,12 +1,14 @@
 # ===============
 # Header
 # ===============
-# Navigation menu
+# Navigation menu —— 按课程分类 (改造: 课程为顶级分类)
 menu:
   Home: /
-  Kubernetes: /categories/Kubernetes/
-  Elasticsearch: /categories/Elasticsearch/
-  Go: /categories/Go/
+  Elasticsearch: /categories/Elasticsearch-%E8%AF%BE%E7%A8%8B/
+  CKA: /categories/CKA-%E8%AE%A4%E8%AF%81/
+  KCNA: /categories/KCNA-%E8%AE%A4%E8%AF%81/
+  K8s进阶: /categories/K8s-%E8%BF%9B%E9%98%B6/
+  K8s生产: /categories/K8s-%E7%94%9F%E4%BA%A7%E5%AE%9E%E8%B7%B5/
   Archives: /archives
 # RSS link
 rss: /atom.xml

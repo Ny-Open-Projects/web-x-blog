@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Istio 遥测之 Mixer 收集指标与 Prometheus 查询"
 date: 2026-10-04 17:55:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [Istio, Mixer, instance, handler, rule, adapter, prometheus, istio_request_count, rate, ingress]
 ---
 

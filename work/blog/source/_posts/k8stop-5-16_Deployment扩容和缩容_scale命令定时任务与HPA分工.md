@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Deployment 扩容和缩容（scale 与 HPA 的分工）"
 date: 2026-10-03 13:43:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [扩容, 缩容, kubectl scale, 不产生新RS, 定时任务, HPA, 副本数]
 ---
 

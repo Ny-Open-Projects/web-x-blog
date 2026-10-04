@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 动手实践 —— 用命令行管理集群，以及 kubectl 分析 Pod 异常的标准排障路径"
 date: 2026-10-02 04:48:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [kubectl, 命令行管理集群, 节点管理, 服务管理, 部署管理, Pod 异常排查, describe, logs, Events, 滚动更新]
 ---
 

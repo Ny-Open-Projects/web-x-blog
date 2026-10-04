@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: ServiceMesh 是什么——边车代理构成的数据平面"
 date: 2026-10-02 20:18:00
-categories: [Kubernetes, 服务网格]
+categories: [kcna, Kubernetes, 服务网格]
 tags: [ServiceMesh, sidecar, 数据平面, 控制平面, 服务治理, Istio, Linkerd]
 ---
 

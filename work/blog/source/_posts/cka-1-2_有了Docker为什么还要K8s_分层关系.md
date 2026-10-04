@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 有了 Docker 为什么还要 K8s（分层关系）"
 date: 2026-10-02 09:10:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Docker, 容器编排, 集群管理, kubelet, kube-proxy]
 ---
 

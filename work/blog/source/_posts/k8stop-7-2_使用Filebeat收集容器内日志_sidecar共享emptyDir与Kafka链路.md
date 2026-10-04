@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 使用 Filebeat 收集容器内日志（sidecar 共享 emptyDir + Kafka 链路）"
 date: 2026-10-04 01:09:00
-categories: [Kubernetes, 日志]
+categories: [k8stop, Kubernetes, 日志]
 tags: [Filebeat, Logstash, Elasticsearch, Kafka, sidecar, emptyDir, ConfigMap, 容器内日志, 索引拆分, Downward API]
 ---
 

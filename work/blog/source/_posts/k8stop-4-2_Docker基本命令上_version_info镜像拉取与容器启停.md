@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Docker 基本命令上（version / info / 镜像搜索拉取推送 / 容器启停）"
 date: 2026-10-03 12:12:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [docker version, docker info, overlay2, d_type, live-restore, docker pull, docker tag push, docker run, docker logs, docker exec]
 disableNunjucks: true
 

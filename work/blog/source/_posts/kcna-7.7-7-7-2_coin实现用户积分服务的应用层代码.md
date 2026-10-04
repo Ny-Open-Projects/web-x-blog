@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: coin 实现用户积分服务的应用层代码 —— 服务方法、model 与 message 双向转换"
 date: 2026-10-03 00:47:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [应用层, ug_server, coin_server, model 转 message, 时间格式化, TimeLayout, UserCoinChange, 双向转换]
 ---
 

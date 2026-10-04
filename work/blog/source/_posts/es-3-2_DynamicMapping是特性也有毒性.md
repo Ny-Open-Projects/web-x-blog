@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: Dynamic Mapping 的类型推断与四种 dynamic 策略"
 date: 2026-10-02 07:25:00
-categories: [Elasticsearch]
+categories: [es, Elasticsearch]
 tags: [mapping, dynamic, 类型推断, runtime-field]
 ---
 

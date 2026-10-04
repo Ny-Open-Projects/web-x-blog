@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 测试 Kafka 和 Zookeeper 集群（建 topic 与生产消费消息验证可用性）"
 date: 2026-10-03 22:31:00
-categories: [Kubernetes, 中间件]
+categories: [k8stop, Kubernetes, 中间件]
 tags: [Kafka, Zookeeper, kafka-topics.sh, 分区, replication-factor, bootstrap-server, 生产者, 消费者, 奇数节点, 脑裂]
 ---
 

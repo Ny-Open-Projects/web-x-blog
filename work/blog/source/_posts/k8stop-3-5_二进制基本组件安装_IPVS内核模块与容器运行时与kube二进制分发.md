@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制基本组件安装（IPVS 内核模块 / 容器运行时 / kube 二进制）"
 date: 2026-10-03 11:30:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [ipvs, ipvsadm, nf_conntrack, conntrack, cgroup driver, docker 19.03.12, kube 1.19.0, etcd 3.4.12, calico]
 ---
 

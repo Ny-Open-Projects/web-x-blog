@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Helm v3 安装使用（二进制安装、仓库管理与 v2 到 v3 的命令变化）"
 date: 2026-10-03 22:17:00
-categories: [Kubernetes, Helm]
+categories: [k8stop, Kubernetes, Helm]
 tags: [Helm, helm v3, repo add, bitnami, helm pull, helm uninstall, keep-history, namespace 自动创建, values.yaml]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 前后端分离（rewrite-target 路径重写与捕获组）"
 date: 2026-10-04 01:19:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, rewrite-target, 前后端分离, 动静分离, 路径重写, 正则捕获组, ImplementationSpecific]
 ---
 

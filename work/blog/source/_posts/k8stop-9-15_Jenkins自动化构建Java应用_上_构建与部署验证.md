@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 自动化构建 Java 应用（上·构建与部署验证）"
 date: 2026-10-04 04:30:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, Java, Maven, Dockerfile, Deployment, imagePullSecret, 存活探针, 就绪探针]
 ---
 

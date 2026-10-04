@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: 部署 Bookinfo 示例应用并通过 Istio 网关访问"
 date: 2026-10-04 16:45:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [Istio, bookinfo, istio-injection, Gateway, VirtualService, NodePort, istio-ingressgateway, Envoy]
 ---
 

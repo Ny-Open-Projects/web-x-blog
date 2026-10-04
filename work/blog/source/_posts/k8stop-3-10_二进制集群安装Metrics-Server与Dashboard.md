@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制集群安装 Metrics Server 与 Dashboard"
 date: 2026-10-02 11:10:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [metrics-server, dashboard, NodePort, ServiceAccount, token]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: RBAC 实现不同用户不同权限（ClusterRole 模板加 RoleBinding 按 namespace 下发）"
 date: 2026-10-03 22:41:00
-categories: [Kubernetes, RBAC]
+categories: [k8stop, Kubernetes, RBAC]
 tags: [RBAC, ClusterRole, RoleBinding, namespace 隔离, 日志查看, exec, create, 删除权限, 基本认证, ServiceAccount]
 ---
 

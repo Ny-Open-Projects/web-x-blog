@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 部署过程中3个常见问题（Token过期、证书不受信、kubeadm reset）"
 date: 2026-10-02 16:20:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubeadm, token过期, 自签证书, Dashboard, kubeadm reset, Secret]
 ---
 

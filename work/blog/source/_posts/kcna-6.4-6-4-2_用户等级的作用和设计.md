@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用户等级的作用和设计 —— 精神激励、免费与付费获取、指数成长曲线、金字塔分布与过期失效"
 date: 2026-10-02 05:50:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [用户等级, 精神激励, 社群身份, 成长值, 指数增长, 金字塔分布, 等级特权, 会员价, 过期与失效, 付费用户]
 ---
 

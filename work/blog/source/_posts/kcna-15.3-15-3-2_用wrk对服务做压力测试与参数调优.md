@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 wrk 做压测、读懂参数，以及日志磁盘 IO 怎么把 QPS 卡死"
 date: 2026-10-02 22:12:00
-categories: [Kubernetes, 性能]
+categories: [kcna, Kubernetes, 性能]
 tags: [wrk, ghz, gRPC压测, Lua脚本, 连接数, 线程数, 磁盘IO, 日志性能, QPS]
 ---
 

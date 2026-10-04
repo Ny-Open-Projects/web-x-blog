@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Pod 中影响调度的属性有哪些"
 date: 2026-10-03 12:45:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 调度, nodeName, nodeSelector, affinity, tolerations, resources]
 ---
 

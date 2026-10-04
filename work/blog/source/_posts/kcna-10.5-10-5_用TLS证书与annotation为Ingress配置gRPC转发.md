@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 TLS 证书与 annotation 为 Ingress 配置 gRPC 转发"
 date: 2026-10-02 20:06:00
-categories: [Kubernetes, 集群网络]
+categories: [kcna, Kubernetes, 集群网络]
 tags: [gRPC, HTTP2, 443端口, TLS, Secret, backend-protocol, grpcurl]
 ---
 

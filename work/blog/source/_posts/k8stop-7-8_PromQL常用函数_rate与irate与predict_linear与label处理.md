@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: PromQL 常用函数（rate / irate / predict_linear / label 处理）"
 date: 2026-10-04 01:15:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [PromQL, rate, irate, increase, predict_linear, absent, delta, sort, label_join, label_replace, 预测性告警]
 ---
 

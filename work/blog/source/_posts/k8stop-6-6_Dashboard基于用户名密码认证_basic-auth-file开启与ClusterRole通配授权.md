@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Dashboard 基于用户名密码认证（basic-auth-file 开启与 ClusterRole 通配授权）"
 date: 2026-10-03 22:39:00
-categories: [Kubernetes, RBAC]
+categories: [k8stop, Kubernetes, RBAC]
 tags: [Dashboard, 用户名密码认证, basic-auth-file, API Server, ClusterRole, RoleBinding, namespace 只读, NodePort, HTTPS]
 ---
 

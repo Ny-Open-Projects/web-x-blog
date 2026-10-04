@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用户积分的作用和设计 —— 虚拟货币、发放与回收渠道、通胀控制与四个系统功能"
 date: 2026-10-02 05:35:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [用户积分, 虚拟货币, 定价策略, 成本核算, 超发, 通胀, 积分过期, 周期衰减, 任务体系, 限发策略, 惩罚扣减, 兑换商城]
 ---
 

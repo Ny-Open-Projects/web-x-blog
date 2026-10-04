@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 生产环境 Kubernetes 集群的关键性配置清单"
 date: 2026-10-02 11:30:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [生产配置, docker, kubelet, 证书有效期, 资源预留, etcd]
 ---
 

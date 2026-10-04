@@ -1,7 +1,7 @@
 ---
 title: "K8s 服务暴露本章小结：NodePort、Ingress 与 LoadBalancer 的取舍"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 服务暴露]
+categories: [kcna, Kubernetes, 服务暴露]
 tags: [Ingress, NodePort, LoadBalancer, Service, gRPC, TLS, 本章小结]
 disableNunjucks: true
 ---

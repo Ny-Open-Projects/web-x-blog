@@ -1,7 +1,7 @@
 ---
 title: "镜像仓库与 Dockerfile 的使用和管理"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, 容器镜像]
+categories: [kcna, Kubernetes, 容器镜像]
 tags: [Dockerfile, 镜像仓库, 多阶段构建, 容器镜像, FROM, RUN, CMD, ENTRYPOINT, 镜像管理]
 disableNunjucks: true
 ---

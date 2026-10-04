@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 用 PVC 动态申请存储（imageFormat / imageFeatures 两个参数，以及一步到位的动态绑定）"
 date: 2026-10-03 23:00:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [PVC, StorageClass, imageFormat, imageFeatures, layering, ReadWriteOnce, volumeMode, Deployment挂载]
 ---
 

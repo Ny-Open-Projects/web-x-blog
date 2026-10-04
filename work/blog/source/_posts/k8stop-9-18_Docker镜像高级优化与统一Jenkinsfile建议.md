@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Docker 镜像高级优化与统一 Jenkinsfile 建议"
 date: 2026-10-04 04:45:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Docker, 镜像优化, 分层, Jib, 统一Jenkinsfile, 缓存, 多阶段]
 ---
 

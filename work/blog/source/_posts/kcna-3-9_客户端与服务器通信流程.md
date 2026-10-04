@@ -1,7 +1,7 @@
 ---
 title: "客户端与服务器通信流程"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [gRPC, 通信流程, grpc.NewServer, RegisterGreeterServer, invoke, serveStreams, handleStream, unary, stream, 源码]
 disableNunjucks: true
 ---

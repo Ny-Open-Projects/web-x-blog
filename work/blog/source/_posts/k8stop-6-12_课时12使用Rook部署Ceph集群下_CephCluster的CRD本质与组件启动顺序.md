@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 用 Rook 把 Ceph 集群最终搭起来（CephCluster 是 CRD、组件启动顺序与 toolbox 验收）"
 date: 2026-10-03 22:48:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [Rook, Ceph, CRD, operator, CSI, mon, mgr, osd, rook-discover, toolbox, StorageClass]
 ---
 

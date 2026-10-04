@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: kubeadm 安装前的基本环境配置清单"
 date: 2026-10-02 09:30:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [hosts, swap, 时间同步, 内核模块, ipvs, 系统调优, SSH免密]
 ---
 

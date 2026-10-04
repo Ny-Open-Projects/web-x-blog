@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: StatefulSet 之稳定的网络 ID（Headless Service）"
 date: 2026-10-03 20:40:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, StatefulSet, Headless Service, ClusterIP, DNS, 有状态应用]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 对项目 Pod 出入流量访问控制 两则网络策略实战"
 date: 2026-10-03 11:49:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 网络策略, NetworkPolicy, Pod 隔离, 白名单]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 服务调用的限频、限流、降级与熔断 —— 五种自保护手段"
 date: 2026-10-02 23:40:00
-categories: [Kubernetes, 微服务]
+categories: [kcna, Kubernetes, 微服务]
 tags: [限频, 限流, 降级, 熔断, 令牌桶, 漏桶, 熔断三状态, 服务治理, 超时, 隔离]
 ---
 

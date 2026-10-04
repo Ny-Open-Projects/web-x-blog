@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Service DNS 名称解析（CoreDNS）"
 date: 2026-04-15 20:40:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, CoreDNS, Service, DNS, nslookup, 集群网络, 跨命名空间]
 ---
 

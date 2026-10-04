@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: DaemonSet —— 每个节点跑一个 Pod"
 date: 2026-10-03 15:15:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, DaemonSet, 守护进程集, 日志采集, 监控 agent]
 ---
 

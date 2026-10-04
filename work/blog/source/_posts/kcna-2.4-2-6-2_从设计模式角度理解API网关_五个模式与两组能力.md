@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 从设计模式角度理解 API 网关 —— 五个模式与两组能力"
 date: 2026-10-02 23:12:00
-categories: [Kubernetes, 微服务]
+categories: [kcna, Kubernetes, 微服务]
 tags: [API网关, 代理模式, 外观模式, 中介者模式, 责任链模式, 策略模式, 路由器, 转发器, 插件中间件]
 ---
 

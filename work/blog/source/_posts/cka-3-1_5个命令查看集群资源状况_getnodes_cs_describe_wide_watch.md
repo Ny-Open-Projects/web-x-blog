@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 5个命令查看集群资源状况（get nodes / cs / cluster-info / describe / watch）"
 date: 2026-10-02 18:35:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubectl get, describe, wide, watch, cluster-info, componentstatuses]
 ---
 

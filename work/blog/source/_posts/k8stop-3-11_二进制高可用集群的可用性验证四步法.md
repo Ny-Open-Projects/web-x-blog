@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制高可用集群的可用性验证四步法"
 date: 2026-10-02 11:20:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [集群验证, CoreDNS, Service, 网络连通性, busybox]
 ---
 

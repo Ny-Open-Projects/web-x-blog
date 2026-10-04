@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 服务发现与负载均衡（含 gRPC）：本章导学"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, 网络与服务发现]
+categories: [kcna, Kubernetes, 网络与服务发现]
 tags: [Kubernetes, 服务发现, 负载均衡, kube-proxy, gRPC, 集群内调用, 本章导学]
 disableNunjucks: true
 ---

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: kubeadm init 初始化高可用控制面与 Calico 网络插件安装"
 date: 2026-10-02 10:00:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [kubeadm init, upload-certs, podSubnet, Calico, IPIP, join]
 ---
 

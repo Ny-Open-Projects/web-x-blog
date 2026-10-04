@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制安装前的系统与内核升级"
 date: 2026-10-02 12:20:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [内核升级, CentOS7, CentOS8, yum, dnf, kernel]
 ---
 

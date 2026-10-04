@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: KCNA 真题精讲（二）—— ServiceMesh 到 K8s 基础概念的八道题"
 date: 2026-10-02 22:36:00
-categories: [Kubernetes, 认证]
+categories: [kcna, Kubernetes, 认证]
 tags: [KCNA, ServiceMesh, kubelet, APIServer, CRI, kubectl, Pod, 网络模型, git]
 ---
 

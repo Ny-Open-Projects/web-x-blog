@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 核心组件 本章小结"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Kubernetes, 本章小结, 控制平面, 节点组件, APIServer, controller-manager, etcd, scheduler, kubelet, kube-proxy, 资源对象, Pod创建流程]
 disableNunjucks: true
 ---

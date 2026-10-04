@@ -7,8 +7,7 @@ tags:
   - Harbor
   - nginx
   - 双主复制
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Harbor 高可用部署（上）：两个 worker 节点安装 Harbor 并挂 nginx 负载均衡

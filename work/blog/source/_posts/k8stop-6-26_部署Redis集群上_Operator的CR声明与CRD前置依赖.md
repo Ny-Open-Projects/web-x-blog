@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 在 k8s 上部署 Redis 集群上（Operator 的 CR 声明、master 与副本计算、CRD 前置依赖）"
 date: 2026-10-03 22:03:00
-categories: [Kubernetes, Operator]
+categories: [k8stop, Kubernetes, Operator]
 tags: [Redis, redis-cluster-operator, CR, CRD, master, replica, namespace, ClusterRole]
 ---
 

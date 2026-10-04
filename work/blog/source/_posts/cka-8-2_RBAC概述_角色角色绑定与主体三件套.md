@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: RBAC 概述 角色、角色绑定与主体三件套"
 date: 2026-10-03 11:07:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, RBAC, 权限控制, Role, RoleBinding, ServiceAccount]
 ---
 

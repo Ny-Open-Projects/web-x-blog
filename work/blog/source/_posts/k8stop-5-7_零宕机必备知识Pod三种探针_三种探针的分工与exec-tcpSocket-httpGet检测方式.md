@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 零宕机发布必备的 Pod 三种探针（startupProbe / livenessProbe / readinessProbe 与三种检测方式）"
 date: 2026-10-03 22:24:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [探针, startupProbe, livenessProbe, readinessProbe, ExecAction, TCPSocketAction, HTTPGetAction, Endpoint, 零宕机]
 ---
 

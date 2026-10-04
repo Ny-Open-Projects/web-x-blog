@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: KCNA 真题精讲（一）—— 云原生特征、OCI 标准与 Serverless 边界"
 date: 2026-10-02 22:28:00
-categories: [Kubernetes, 认证]
+categories: [kcna, Kubernetes, 认证]
 tags: [KCNA, 云原生, OCI, Serverless, 十二要素, Registry, 四C安全模型, 真题]
 ---
 

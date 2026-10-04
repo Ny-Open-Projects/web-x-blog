@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Prometheus 自定义告警模板（templates 目录挂载与微信模板改造）"
 date: 2026-10-04 01:05:00
-categories: [Kubernetes, 告警]
+categories: [k8stop, Kubernetes, 告警]
 tags: [Alertmanager, 告警模板, Go template, templates, Secret 挂载, wechat.default.message, annotations, message, 时区]
 disableNunjucks: true
 

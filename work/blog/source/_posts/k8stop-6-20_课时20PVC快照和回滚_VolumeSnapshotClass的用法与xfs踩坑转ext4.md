@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: PVC 快照和回滚（VolumeSnapshotClass 的用法、xfs 踩坑与换成 ext4 后的完整验证）"
 date: 2026-10-03 23:20:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [VolumeSnapshot, VolumeSnapshotClass, PVC回滚, dataSource, xfs, ext4, namespace隔离, snapshot-controller]
 ---
 

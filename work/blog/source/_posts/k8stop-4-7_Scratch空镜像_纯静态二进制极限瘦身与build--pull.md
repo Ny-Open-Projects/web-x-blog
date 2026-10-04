@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 特殊镜像 scratch（纯静态极限瘦身的边界与 build --pull）"
 date: 2026-10-03 12:47:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [scratch, 空镜像, 静态编译, 动态库, distroless, build --pull, --no-cache, 小镜像]
 ---
 

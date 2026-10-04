@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: StatefulSet 动态申请存储（volumeClaimTemplates 不可编辑、每副本独立 PVC 与删除后的回收行为）"
 date: 2026-10-03 22:56:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [StatefulSet, volumeClaimTemplates, PVC, accessModes, volumeMode, headless-service, 有序创建, reclaimPolicy]
 ---
 

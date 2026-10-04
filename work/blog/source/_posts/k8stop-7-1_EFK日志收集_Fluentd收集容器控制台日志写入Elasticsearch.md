@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: EFK 日志收集（Fluentd 收集容器控制台日志写入 Elasticsearch）"
 date: 2026-10-03 22:47:00
-categories: [Kubernetes, 日志]
+categories: [k8stop, Kubernetes, 日志]
 tags: [EFK, Elasticsearch, Fluentd, Kibana, ELK, Logstash, DaemonSet, nodeSelector, /var/log/containers, index pattern, ExternalName]
 ---
 

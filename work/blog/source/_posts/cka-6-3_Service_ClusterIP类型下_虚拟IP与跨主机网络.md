@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Service ClusterIP 类型（下）—— 虚拟 IP 与跨主机网络前提"
 date: 2026-10-03 18:10:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, ClusterIP, 虚拟IP, CNI, Flannel, Calico, Endpoint, 负载均衡]
 ---
 

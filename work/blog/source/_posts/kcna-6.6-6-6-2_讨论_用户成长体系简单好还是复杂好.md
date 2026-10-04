@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 讨论 —— 用户成长体系是简单好还是复杂好，以及「前期做产品、后期做运营」的取舍"
 date: 2026-10-02 06:20:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [用户成长体系, 简单 vs 复杂, 用户运营, 打扰成本, 通胀与信任, 活动运营, 产品开发, 体系平衡]
 ---
 

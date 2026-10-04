@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress 多域名使用（一个 Ingress 配多个 host 与 replace 更新）"
 date: 2026-10-03 19:13:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Ingress, 多域名, replace更新, 跨域, ExternalName, rewrite, pathType, 路径匹配]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 变量使用与参数化构建"
 date: 2026-10-04 05:50:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, 变量, 参数化, 内置变量, Credentials]
 ---
 

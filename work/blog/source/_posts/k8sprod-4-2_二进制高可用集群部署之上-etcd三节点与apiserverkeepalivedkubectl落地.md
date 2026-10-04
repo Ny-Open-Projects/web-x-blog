@@ -8,8 +8,7 @@ tags:
   - etcd
   - cfssl
   - keepalived
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 二进制高可用集群部署（上）：cfssl 签 CA、etcd 三节点、apiserver、keepalived 与 kubectl

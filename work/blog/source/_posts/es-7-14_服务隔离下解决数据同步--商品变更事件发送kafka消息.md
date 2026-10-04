@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 商品变更事件发送 Kafka 消息"
 date: 2026-10-02 13:20:00
-categories: [Go, Kafka, 项目实战]
+categories: [es, Go, Kafka, 项目实战]
 tags: [商品变更, 消息结构体, defer, 同步发送, Key哈希, 上下架, 硬删除]
 ---
 

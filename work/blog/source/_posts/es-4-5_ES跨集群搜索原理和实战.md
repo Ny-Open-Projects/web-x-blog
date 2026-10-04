@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "ES跨集群搜索原理和实战"
 date: 2026-10-04 01:04:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [Elasticsearch, 跨集群搜索, CCS, 版本兼容, 查询性能]
 ---
 

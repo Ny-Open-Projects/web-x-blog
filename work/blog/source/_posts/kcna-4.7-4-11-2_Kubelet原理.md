@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: Kubelet 原理 —— 节点端的控制器模式与 CRI 抽象"
 date: 2026-10-02 02:30:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [kubelet, PLEG, syncLoop, CRI, CRIContainerRuntimeInterface, 容器运行时, 设备插件, nodeStatusUpdater, 控制循环]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 生产环境中Go集成mysql需要重点解决哪些问题？"
 date: 2026-10-02 11:40:00
-categories: [Go, MySQL]
+categories: [es, Go, MySQL]
 tags: [GORM, 连接池, 函数选项模式, 预编译, 事务回滚, 检查点]
 ---
 

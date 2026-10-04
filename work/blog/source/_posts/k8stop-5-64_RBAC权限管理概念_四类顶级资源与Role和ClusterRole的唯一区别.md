@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: RBAC 权限管理概念（四类顶级资源、Role 与 ClusterRole 的唯一区别、绑定与 ServiceAccount）"
 date: 2026-10-03 22:16:00
-categories: [Kubernetes, 权限]
+categories: [k8stop, Kubernetes, 权限]
 tags: [RBAC, Role, ClusterRole, RoleBinding, ClusterRoleBinding, ServiceAccount, token, resourceNames, verbs, Dashboard]
 ---
 

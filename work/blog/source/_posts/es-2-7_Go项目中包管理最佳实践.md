@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go项目中包管理最佳实践"
 date: 2026-10-04 03:02:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [Go Modules, go.mod, go.sum, 私有仓库, vendor]
 ---
 

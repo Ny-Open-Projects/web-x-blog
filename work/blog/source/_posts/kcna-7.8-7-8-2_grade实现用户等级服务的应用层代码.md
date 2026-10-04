@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: grade 实现用户等级服务的应用层代码 —— 特权检查、成长值变更与等级跃迁"
 date: 2026-10-03 00:54:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [应用层, grade_server, 特权检查, 成长值, 等级跃迁, 过期时间, UserGradeChange, CheckUserPrivilege]
 ---
 

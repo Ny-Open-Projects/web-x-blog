@@ -1,7 +1,7 @@
 ---
 title: "KCNA 认证试题讲解 —— 本章导学：用真题把云原生体系过一遍"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, 认证]
+categories: [kcna, Kubernetes, 认证]
 tags: [KCNA, CNCF, 云原生认证, 真题讲解, CKA, CKAD, CKS, 本章导学]
 disableNunjucks: true
 ---

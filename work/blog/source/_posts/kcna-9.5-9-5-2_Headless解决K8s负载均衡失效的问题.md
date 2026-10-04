@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: Headless 解决 K8s 负载均衡失效的问题 —— 客户端侧负载均衡与两种绕开方案"
 date: 2026-10-03 02:18:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Headless Service, clusterIP: None, 客户端负载均衡, 服务发现, gRPC 连接池, NodePort, LoadBalancer]
 ---
 

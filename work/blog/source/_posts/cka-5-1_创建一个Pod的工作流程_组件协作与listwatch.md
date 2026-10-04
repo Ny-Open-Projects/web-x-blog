@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 创建一个 Pod 的工作流程（list-watch 与组件协作）"
 date: 2026-10-03 12:20:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 调度, API Server, etcd, Scheduler, kubelet, list-watch]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "用 Helm 管理 K8s 部署：本章导学"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 包管理]
+categories: [kcna, Kubernetes, 包管理]
 tags: [Helm, Chart, 模板化, K8s部署, 本章导学]
 disableNunjucks: true
 ---

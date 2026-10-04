@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Metrics Server 部署与 apiserver 授权证书补齐"
 date: 2026-10-04 15:35:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [metrics-server, kube-apiserver, proxy-client-cert, admin.pem, kubernetes-heapster, Aggregation Layer, kubelet token, CSR]
 ---
 

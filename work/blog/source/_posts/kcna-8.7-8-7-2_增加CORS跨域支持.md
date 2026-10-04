@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 增加 CORS 跨域支持 —— 白名单校验、gin 中间件与 grpc-gateway 的 metadata 方案"
 date: 2026-10-03 01:43:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [CORS, 跨域资源共享, Access-Control-Allow-Origin, 白名单, gin 中间件, grpc-gateway, metadata, JSONP]
 ---
 

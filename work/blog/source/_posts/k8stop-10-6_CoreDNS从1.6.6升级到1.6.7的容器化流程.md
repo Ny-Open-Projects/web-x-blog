@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: CoreDNS 从 1.6.6 升级到 1.6.7 的容器化流程"
 date: 2026-10-02 09:00:00
-categories: [Kubernetes, 集群升级]
+categories: [k8stop, Kubernetes, 集群升级]
 tags: [CoreDNS, 集群DNS, Corefile, 滚动更新, 解析验证]
 ---
 

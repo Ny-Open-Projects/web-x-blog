@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Master 控制面组件的逐台升级实操"
 date: 2026-10-02 08:40:00
-categories: [Kubernetes, 集群升级]
+categories: [k8stop, Kubernetes, 集群升级]
 tags: [kube-apiserver, kube-controller-manager, kube-scheduler, kube-proxy, 静态Pod, 滚动升级]
 ---
 

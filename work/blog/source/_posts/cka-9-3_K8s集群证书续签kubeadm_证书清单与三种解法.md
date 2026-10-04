@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: K8s 集群证书续签（kubeadm）证书清单与三种解法"
 date: 2026-10-03 12:10:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubeadm, 证书续签, 集群升级, 静态Pod]
 ---
 

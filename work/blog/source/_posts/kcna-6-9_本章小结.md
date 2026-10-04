@@ -1,7 +1,7 @@
 ---
 title: "用户成长体系与积分等级系统设计：本章小结"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, 项目实战]
+categories: [kcna, Kubernetes, 项目实战]
 tags: [用户成长体系, 积分系统, 等级系统, 数据库设计, 物质激励, 精神激励, 本章小结]
 disableNunjucks: true
 ---

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制安装 TLS Bootstrapping 自动颁发 kubelet 证书"
 date: 2026-10-03 11:44:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [TLS Bootstrapping, bootstrap token, kubelet 证书, CSR, kubeconfig, kube-system, 自动续期]
 ---
 

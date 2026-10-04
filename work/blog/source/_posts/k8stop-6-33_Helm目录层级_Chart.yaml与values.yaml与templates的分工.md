@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Helm 目录层级（Chart.yaml、values.yaml 与 templates 的分工）"
 date: 2026-10-03 22:19:00
-categories: [Kubernetes, Helm]
+categories: [k8stop, Kubernetes, Helm]
 tags: [Helm, helm create, Chart.yaml, values.yaml, templates, NOTES.txt, _helpers.tpl, charts, dependencies]
 disableNunjucks: true
 

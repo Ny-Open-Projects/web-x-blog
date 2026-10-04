@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress 简单使用（用域名发布一个 Service 的完整流程）"
 date: 2026-10-03 19:06:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Ingress, ingressClass, annotations, networking.k8s.io/v1, hostNetwork, DaemonSet扩缩容, rewrite-target, nginx配置自动生成, hosts解析]
 ---
 

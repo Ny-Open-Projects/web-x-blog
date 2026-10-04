@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 部署 Redis Operator（单实例 Redis 的连接方式、Service 命名与 Operator 选型）"
 date: 2026-10-03 22:01:00
-categories: [Kubernetes, Operator]
+categories: [k8stop, Kubernetes, Operator]
 tags: [Redis, Operator, operatorhub, redis-cluster-operator, Service 命名, ClusterIP, namespace 隔离, 分片]
 ---
 

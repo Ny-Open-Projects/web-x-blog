@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 零宕机必备知识（Pod 退出流程与 preStop 实战）"
 date: 2026-10-03 13:01:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [零宕机, 退出流程, Terminating, preStop, 宽限期, EP摘除, 优雅下线, eureka, kill -9]
 ---
 

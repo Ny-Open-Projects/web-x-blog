@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Node 节点（kubelet / kube-proxy / Calico / CoreDNS / Metrics Server）"
 date: 2026-10-03 16:23:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Node, worker节点, kubelet, kube-proxy, IPVS, iptables, Calico, CoreDNS, Metrics Server, 污点, 转发链路]
 ---
 

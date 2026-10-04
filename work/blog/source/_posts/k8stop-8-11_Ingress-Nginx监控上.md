@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 监控（上）— Prometheus 服务发现与指标抓取"
 date: 2026-10-04 03:05:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, Prometheus, 服务发现, ServiceMonitor, /metrics, 10254, RBAC, ClusterRole, relabel]
 ---
 

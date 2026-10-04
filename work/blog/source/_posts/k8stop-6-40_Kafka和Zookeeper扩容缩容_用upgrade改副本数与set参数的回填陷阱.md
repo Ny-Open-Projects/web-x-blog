@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Kafka 和 Zookeeper 集群扩容缩容（用 upgrade 改副本数与 --set 参数的回填陷阱）"
 date: 2026-10-03 22:35:00
-categories: [Kubernetes, Helm]
+categories: [k8stop, Kubernetes, Helm]
 tags: [Kafka, Zookeeper, 扩容, 缩容, helm upgrade, --set, values.yaml, StatefulSet, 奇数节点]
 ---
 

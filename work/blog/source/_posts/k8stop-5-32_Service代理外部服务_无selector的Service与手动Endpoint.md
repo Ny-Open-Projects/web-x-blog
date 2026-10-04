@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 使用 Service 代理 Kubernetes 外部服务（三种真实使用场景）"
 date: 2026-10-03 16:44:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Service, Endpoints, 无selector, 外部服务, 迁移, 中间件, 配置统一, 免重启]
 ---
 

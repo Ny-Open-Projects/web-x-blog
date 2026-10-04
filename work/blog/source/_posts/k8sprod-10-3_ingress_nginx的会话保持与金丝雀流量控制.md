@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: ingress-nginx 的会话保持与金丝雀流量控制"
 date: 2026-10-03 19:15:00
-categories: [Kubernetes, 生产实践]
+categories: [k8sprod, Kubernetes, 生产实践]
 tags: [ingress-nginx, sessionAffinity, canary, canary-by-weight, canary-by-cookie, canary-by-header, 金丝雀发布, 灰度发布, 流量控制]
 ---
 

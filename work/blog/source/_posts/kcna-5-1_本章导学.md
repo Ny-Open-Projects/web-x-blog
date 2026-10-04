@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群搭建与管理：本章导学"
 date: 2026-10-04 04:40:00
-categories: [Kubernetes, 集群搭建]
+categories: [kcna, Kubernetes, 集群搭建]
 tags: [Kubernetes, 集群搭建, 弹性伸缩, HPA, VPA, 云原生, 腾讯云]
 disableNunjucks: true
 ---

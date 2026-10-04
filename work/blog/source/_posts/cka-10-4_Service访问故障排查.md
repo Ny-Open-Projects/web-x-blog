@@ -1,7 +1,7 @@
 ---
 title: "Service 访问故障排查（七步定位法）"
 date: 2026-10-04 03:40:00
-categories: [Kubernetes, 网络与服务]
+categories: [cka, Kubernetes, 网络与服务]
 tags: [Kubernetes, Service, kube-proxy, CoreDNS, iptables, IPVS, 故障排查]
 disableNunjucks: true
 ---

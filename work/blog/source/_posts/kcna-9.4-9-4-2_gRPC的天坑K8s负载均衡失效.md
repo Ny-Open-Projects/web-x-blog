@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证考点: gRPC 的天坑 —— K8s 负载均衡失效的成因与 HTTP/2 长连接并发"
 date: 2026-10-03 02:11:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [gRPC, 负载不均衡, HTTP/2, 长连接, 多路复用, ClusterIP, 连接级负载均衡]
 disableNunjucks: true
 

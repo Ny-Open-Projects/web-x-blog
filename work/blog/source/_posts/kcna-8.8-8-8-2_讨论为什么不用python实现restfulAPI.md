@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 讨论为什么不用 python 实现 Restful API —— 性能并发、技术栈统一与部署依赖"
 date: 2026-10-03 01:50:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [技术选型, Go, Python, 并发性能, 技术栈统一, 部署依赖, 微服务]
 ---
 

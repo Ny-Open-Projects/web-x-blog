@@ -9,8 +9,7 @@ tags:
   - 金丝雀部署
   - rollout
   - maxSurge
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: 部署策略详解 —— 重建、滚动更新、蓝绿与金丝雀

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 节点存储卷 hostPath —— 把宿主机目录挂进容器"
 date: 2026-10-03 22:45:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, hostPath, 数据卷, bind mount, 宿主机目录]
 ---
 

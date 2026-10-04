@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: TLS Bootstrapping 下 kubelet 的启动流程拆解"
 date: 2026-10-02 11:40:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [kubelet, TLS-Bootstrapping, kubeconfig, CSR, 双向认证]
 ---
 

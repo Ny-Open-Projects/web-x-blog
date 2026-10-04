@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 自动生成框架代码并验证服务 —— protoc 生成、三个目录、服务端与客户端 main"
 date: 2026-10-03 00:19:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [protoc, protoc-gen-go, go-grpc, grpc.NewServer, RegisterUserCoinServer, grpc.Dial, go mod init, insecure]
 ---
 

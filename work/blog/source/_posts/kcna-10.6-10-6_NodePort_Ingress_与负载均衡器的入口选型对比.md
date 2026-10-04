@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: NodePort、Ingress 与负载均衡器三种入口的差异选型"
 date: 2026-10-02 20:08:00
-categories: [Kubernetes, 集群网络]
+categories: [kcna, Kubernetes, 集群网络]
 tags: [LoadBalancer, L4, L7, 服务网关, 入口选型, 成本]
 ---
 

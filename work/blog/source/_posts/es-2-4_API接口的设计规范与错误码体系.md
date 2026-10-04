@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: API 接口的设计规范与错误码体系"
 date: 2026-10-02 06:22:00
-categories: [Go, 工程化]
+categories: [es, Go, 工程化]
 tags: [RESTful, API 设计, 幂等性, 错误码, HTTP 状态码, 响应结构, AK/SK 鉴权, gin]
 disableNunjucks: true
 

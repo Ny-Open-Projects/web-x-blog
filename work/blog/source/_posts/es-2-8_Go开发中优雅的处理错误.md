@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 错误处理的设计与常见反模式"
 date: 2026-10-02 07:20:00
-categories: [Go]
+categories: [es, Go]
 tags: [错误处理, error, errors.Is, errors.As, 包装]
 ---
 

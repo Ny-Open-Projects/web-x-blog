@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Ingress Controller —— 部署、镜像与 hostNetwork 暴露"
 date: 2026-10-03 20:15:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Ingress Controller, nginx, Traefik, HAProxy, hostNetwork, NodePort]
 ---
 

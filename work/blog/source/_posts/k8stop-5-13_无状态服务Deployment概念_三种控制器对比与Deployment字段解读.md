@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 无状态服务 Deployment 概念（与 StatefulSet / DaemonSet 的区别）"
 date: 2026-10-03 13:22:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Deployment, 无状态, StatefulSet, DaemonSet, selector不可变, pod-template-hash, 微服务, 字段解读]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins BlueOcean 可视化创建与编排流水线"
 date: 2026-10-04 06:15:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, BlueOcean, 可视化, 多分支流水线, Job调用Job]
 ---
 

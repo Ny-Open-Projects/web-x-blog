@@ -1,7 +1,7 @@
 ---
 title: "试试服务的抗压能力 —— 本章导学：在压测前先想清楚为什么"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, 性能]
+categories: [kcna, Kubernetes, 性能]
 tags: [压力测试, 压测重要性, WRK, 性能瓶颈, 伸缩性验证, 全链路压测, 本章导学]
 disableNunjucks: true
 ---

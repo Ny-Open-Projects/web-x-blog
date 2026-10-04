@@ -1,7 +1,7 @@
 ---
 title: "为什么选择 Kubernetes 作为微服务框架"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes, 微服务]
+categories: [kcna, Kubernetes, 微服务]
 tags: [Kubernetes, 微服务框架, etcd, CoreDNS, Ingress, 健康检查, 自愈, HPA, 研发效率, 服务可用性]
 disableNunjucks: true
 ---

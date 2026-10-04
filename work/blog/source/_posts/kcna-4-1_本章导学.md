@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 核心组件 本章导学"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Kubernetes, 本章导学, 部署演进, 物理机, 虚拟化, 容器, 核心组件, 资源对象, Pod创建流程]
 disableNunjucks: true
 ---

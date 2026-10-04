@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Docker 基础 —— 容器化是什么、镜像为什么按层存"
 date: 2026-10-03 12:05:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Docker, 容器化, 镜像分层, 联合文件系统, 秒级启动, 虚拟化, 基础镜像]
 disableNunjucks: true
 

@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: 索引订单数据"
 date: 2026-10-03 11:00:00
-categories: [Elasticsearch, 消息消费]
+categories: [es, Elasticsearch, 消息消费]
 tags: [Kafka, routing删除, 整篇覆盖写, 脏数据提交, defer发送]
 disableNunjucks: true
 

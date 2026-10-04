@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 对外暴露应用访问（Service 与 Ingress）"
 date: 2026-10-02 11:45:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Service, Ingress, ingress-nginx, networking.k8s.io, NodePort, 域名]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 级联变量与 Active Choices 联动"
 date: 2026-10-04 05:55:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, ActiveChoices, 级联变量, Groovy, 参数化]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: k8s 1.19 下的 Ingress 配置（apiVersion 迁移与 pathType）"
 date: 2026-10-04 03:15:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, networking.k8s.io/v1, v1beta1, pathType, Ingress, apiVersion, kubernetes1.19]
 ---
 

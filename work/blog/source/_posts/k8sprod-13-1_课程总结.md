@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 生产实践指南：课程总结与学习方法"
 date: 2026-10-04 04:00:00
-categories: [Kubernetes, 生产实践]
+categories: [k8sprod, Kubernetes, 生产实践]
 tags: [Kubernetes, 学习方法, 声明式API, 控制器模式, 生产实践]
 disableNunjucks: true
 ---

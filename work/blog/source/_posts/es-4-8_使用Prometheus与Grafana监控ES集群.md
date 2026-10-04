@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 用 Prometheus 与 Grafana 监控 ES 集群"
 date: 2026-10-02 08:05:00
-categories: [Elasticsearch, 可观测性]
+categories: [es, Elasticsearch, 可观测性]
 tags: [Prometheus, Grafana, elasticsearch_exporter, 监控]
 ---
 

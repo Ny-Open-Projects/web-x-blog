@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 熟悉官方文档（考点分布与搜索技巧）"
 date: 2026-10-02 09:40:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, 官方文档, kubectl, 考试技巧, kubernetes.io]
 ---
 

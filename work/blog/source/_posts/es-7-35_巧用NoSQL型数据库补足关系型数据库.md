@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "巧用NoSQL型数据库补足关系型数据库"
 date: 2026-10-04 01:07:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [MongoDB, NoSQL, 搜索日志, 按天分表, 关系型补足]
 ---
 

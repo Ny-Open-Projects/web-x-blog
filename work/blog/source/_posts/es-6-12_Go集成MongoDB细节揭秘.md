@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go集成MongoDB细节揭秘"
 date: 2026-10-04 03:04:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [MongoDB, mongo-driver, InsertOne, 游标, 索引]
 ---
 

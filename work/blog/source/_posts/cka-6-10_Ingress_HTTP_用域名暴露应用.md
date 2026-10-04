@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Ingress HTTP —— 用域名把应用暴露出去"
 date: 2026-10-03 16:30:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Ingress, Ingress Controller, 域名, hostNetwork, Service]
 ---
 

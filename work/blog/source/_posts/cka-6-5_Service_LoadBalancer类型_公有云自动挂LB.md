@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Service LoadBalancer 类型 —— 公有云上自动挂 LB"
 date: 2026-10-03 19:00:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, LoadBalancer, NodePort, 公有云, LB, 高可用]
 ---
 

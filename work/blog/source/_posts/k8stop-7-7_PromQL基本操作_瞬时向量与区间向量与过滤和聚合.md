@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: PromQL 基本操作（瞬时向量、区间向量、过滤与聚合）"
 date: 2026-10-04 01:14:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [PromQL, Prometheus, 瞬时向量, 区间向量, offset, label 过滤, 正则匹配, 集合运算, 聚合, topk, quantile]
 ---
 

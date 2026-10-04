@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 为指定用户授权不同命名空间权限（下）kubeconfig 默认路径与三种主题主体"
 date: 2026-10-03 11:35:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, RBAC, kubeconfig, ServiceAccount, 用户组授权]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go中间件集成实战-章节导学"
 date: 2026-10-04 05:04:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [Go, 中间件, Kafka, MongoDB, Prometheus, 公共库]
 ---
 

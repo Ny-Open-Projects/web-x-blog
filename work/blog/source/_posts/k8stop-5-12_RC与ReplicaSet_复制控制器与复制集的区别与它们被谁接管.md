@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: RC 与 ReplicaSet（复制控制器与复制集的区别和定位）"
 date: 2026-10-03 13:15:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [ReplicationController, ReplicaSet, RS, RC, 标签选择器, Deployment, 滚动更新, 回滚]
 ---
 

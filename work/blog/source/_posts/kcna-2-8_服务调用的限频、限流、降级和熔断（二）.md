@@ -1,7 +1,7 @@
 ---
 title: "服务调用的限频、限流、降级和熔断（二）—— 算法、方法与三道面试题"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, 微服务]
+categories: [kcna, Kubernetes, 微服务]
 tags: [限频, 限流, 令牌桶, 漏桶, 固定窗口, 滑动窗口, 熔断三状态, 降级方法, 算法]
 disableNunjucks: true
 ---

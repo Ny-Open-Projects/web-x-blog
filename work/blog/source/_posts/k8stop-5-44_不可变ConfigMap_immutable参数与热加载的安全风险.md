@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 不可变的 Secret 和 ConfigMap（immutable 参数与热加载风险）"
 date: 2026-10-03 20:02:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [immutable, 不可变ConfigMap, 热加载, 秒杀系统, beta, immutable报错, 安全配置]
 ---
 

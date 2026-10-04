@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: SpringCloud 项目总结（部署方式与取舍建议）"
 date: 2026-10-04 05:40:00
-categories: [Kubernetes, SpringCloud]
+categories: [k8stop, Kubernetes, SpringCloud]
 tags: [SpringCloud, 总结, Eureka, Zuul, ConfigServer, 部署建议, 服务网格, 运维协作]
 ---
 

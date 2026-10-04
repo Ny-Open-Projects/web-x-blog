@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 准入控制（ResourceQuota 与 LimitRange 的默认值注入和上下限约束）"
 date: 2026-10-03 22:11:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [准入控制, Admission Control, NamespaceLifecycle, LimitRanger, ResourceQuota, LimitRange, default, defaultRequest, max, min, maxLimitRequestRatio]
 ---
 

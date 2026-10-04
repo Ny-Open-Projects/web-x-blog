@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: KCNA 真题精讲（三）—— CI/CD 术语、GitOps 双雄与三道多选题"
 date: 2026-10-02 22:44:00
-categories: [Kubernetes, 认证]
+categories: [kcna, Kubernetes, 认证]
 tags: [KCNA, CI/CD, GitOps, Flux, ArgoCD, kubectl logs -p, Counter, 节点类型, 云成本优化]
 ---
 

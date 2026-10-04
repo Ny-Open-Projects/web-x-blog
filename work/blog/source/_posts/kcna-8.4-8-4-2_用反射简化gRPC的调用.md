@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用反射简化 gRPC 的调用 —— reflection.Register 与 grpcurl 的 list/describe/调用"
 date: 2026-10-03 01:22:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [gRPC 反射, reflection.Register, grpcurl, protoset, list, describe, ServerReflection]
 ---
 

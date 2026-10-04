@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 使用 Service 反代外部域名（ExternalName 类型与跨域问题）"
 date: 2026-10-03 16:51:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Service, ExternalName, CNAME, 跨域, 403, apply, 无selector, 无Endpoint]
 ---
 

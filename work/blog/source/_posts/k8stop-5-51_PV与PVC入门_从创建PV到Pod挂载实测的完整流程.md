@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: PV 与 PVC 入门（从创建 PV 到 Pod 挂载实测的完整流程）"
 date: 2026-10-03 19:06:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [PV, PVC, Bound, Available, Released, Failed, claimName, persistentVolumeClaim, 静态存储, 容量限制, nfs-slow]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 生产实践: 监控体系的目标、采集流程与监控对象"
 date: 2026-10-04 09:10:00
-categories: [Kubernetes, 监控]
+categories: [k8sprod, Kubernetes, 监控]
 tags: [监控体系, 时间序列数据库, 数据采集, 报警规则, 节点指标, 容器指标, Prometheus, Zabbix, Open-Falcon]
 disableNunjucks: true
 

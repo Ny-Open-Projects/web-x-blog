@@ -7,8 +7,7 @@ tags:
   - Ingress
   - ingress-nginx
   - 七层网关
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 ## 纲要

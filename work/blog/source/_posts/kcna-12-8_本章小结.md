@@ -1,7 +1,7 @@
 ---
 title: "ServiceMesh 与 Istio 本章小结：边车、流量治理与故障注入"
 date: 2026-10-04 03:00:00
-categories: [Kubernetes, 服务网格]
+categories: [kcna, Kubernetes, 服务网格]
 tags: [ServiceMesh, Istio, sidecar, 流量治理, 故障注入, 限流, 本章小结]
 disableNunjucks: true
 ---

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 加密数据管理 Secret（创建方式、stringData 与 imagePullSecrets 拉私有镜像）"
 date: 2026-10-03 19:41:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Secret, base64, stringData, from-file, imagePullSecrets, docker-registry, ServiceAccount, defaultMode, subPath, 软加密]
 ---
 

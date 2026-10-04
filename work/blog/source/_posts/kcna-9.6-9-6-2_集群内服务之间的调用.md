@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 集群内服务之间的调用 —— 服务发现的三种方式与 Node IP / ClusterIP / Pod IP"
 date: 2026-10-03 02:25:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [集群内调用, 服务发现, 环境变量, DNS, ClusterIP, Pod IP, Node IP, 域名]
 ---
 

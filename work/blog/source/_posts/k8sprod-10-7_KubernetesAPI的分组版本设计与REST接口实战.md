@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Kubernetes API 的分组/版本设计与 REST 接口实战"
 date: 2026-10-03 21:40:00
-categories: [Kubernetes, 原理剖析]
+categories: [k8sprod, Kubernetes, 原理剖析]
 tags: [apiVersion, 核心组, 分组API, alpha/beta, API Server, REST, client-go, kubernetes-client, 容器管理平台]
 ---
 

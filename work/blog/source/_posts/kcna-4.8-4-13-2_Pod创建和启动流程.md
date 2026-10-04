@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: Pod 创建和启动流程 —— 一条命令背后所有组件的握手"
 date: 2026-10-02 02:45:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Pod, 创建流程, watch, 绑定, 调度, kubelet, 容器运行时, 健康检查, 驱逐, CRI]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "二进制高可用集群部署（中）：集群可用性测试"
 date: 2026-10-04 04:00:00
-categories: [Kubernetes, 生产实践]
+categories: [k8sprod, Kubernetes, 生产实践]
 tags: [Kubernetes, 可用性测试, DaemonSet, NodePort, CoreDNS, 高可用]
 disableNunjucks: true
 ---

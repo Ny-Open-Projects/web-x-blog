@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 定义一个 Service（port / targetPort / selector 与 clusterIP 自动分配）"
 date: 2026-10-03 16:37:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Service, port, targetPort, selector, clusterIP, Endpoints, 命名空间隔离, 跨namespace访问]
 ---
 

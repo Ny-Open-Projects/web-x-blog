@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用代理模式理解 gRPC 的客户端与服务端 —— 定义、两类代理与正反代理"
 date: 2026-10-02 23:58:00
-categories: [Kubernetes, gRPC]
+categories: [kcna, Kubernetes, gRPC]
 tags: [代理模式, 静态代理, 动态代理, 正向代理, 反向代理, 开闭原则, 解耦, API网关, gRPC]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ratel 简单使用（一条表单建出 Deployment+Service+Ingress，以及 ResourceQuota 把第三个副本拒掉的实测）"
 date: 2026-10-03 22:40:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Ratel, Deployment创建, ResourceQuota, LimitRange, hostAliases, toleration, nodeAffinity, Ingress, runAsNonRoot]
 ---
 

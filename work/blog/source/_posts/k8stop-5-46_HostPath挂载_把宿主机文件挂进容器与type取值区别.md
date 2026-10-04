@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Volumes HostPath 挂载宿主机路径（type 取值与目录创建行为）"
 date: 2026-10-03 20:16:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [hostPath, 不推荐使用, type, DirectoryOrCreate, FileOrCreate, timezone, 挂载宿主机目录, socket文件]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制安装前的基本环境配置清单"
 date: 2026-10-02 12:10:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [基本环境, hosts, SELinux, swap, 时间同步, CentOS8]
 ---
 

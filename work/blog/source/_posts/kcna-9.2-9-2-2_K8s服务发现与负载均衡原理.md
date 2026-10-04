@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: K8s 服务发现与负载均衡原理 —— 服务注册、DNS 到 Pod IP 的链路与四种负载均衡方案"
 date: 2026-10-03 01:57:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [服务注册, 服务发现, 负载均衡, ClusterIP, kube-proxy, iptables, IPVS, Ingress, Endpoint]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: kubectl多集群管理（kubeconfig 结构与上下文切换）"
 date: 2026-10-02 18:05:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubeconfig, 多集群, context, use-context, 证书认证, 上下文切换]
 ---
 

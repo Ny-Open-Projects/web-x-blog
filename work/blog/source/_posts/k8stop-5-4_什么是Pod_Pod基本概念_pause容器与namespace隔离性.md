@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 什么是 Pod（最小单元、pause 容器与 namespace 隔离性）"
 date: 2026-10-03 19:27:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Pod, 最小单元, pause容器, namespace隔离, ClusterRole, StorageClass, IngressClass, 共享网络, localhost通信]
 ---
 

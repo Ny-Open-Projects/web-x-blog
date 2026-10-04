@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Kubernetes 服务质量 QoS（三个等级判定与 OOM 时的驱逐顺序）"
 date: 2026-10-03 22:33:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [QoS, Guaranteed, Burstable, BestEffort, OOM, 驱逐顺序, requests, limits, 超分, 资源浪费]
 ---
 

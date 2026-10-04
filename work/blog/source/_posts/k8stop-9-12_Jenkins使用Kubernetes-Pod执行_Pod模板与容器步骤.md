@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 使用 Kubernetes Pod 执行（Pod 模板与容器步骤）"
 date: 2026-10-04 04:15:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, Kubernetes插件, Pod模板, agent, Maven, Docker, kubectl, 凭证]
 ---
 

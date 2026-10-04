@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 用工作负载控制器部署镜像（Deployment 与私有仓库认证）"
 date: 2026-10-02 11:20:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Deployment, imagePullSecrets, 私有仓库, readinessProbe, livenessProbe, resources]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: Lucene 段合并的完整过程与触发时机"
 date: 2026-10-02 04:50:00
-categories: [Elasticsearch, 原理剖析]
+categories: [es, Elasticsearch, 原理剖析]
 tags: [Lucene, 段合并, segment, forcemerge, mergeInit, mergeMiddle, commitMerge, doc_values, 限流]
 disableNunjucks: true
 

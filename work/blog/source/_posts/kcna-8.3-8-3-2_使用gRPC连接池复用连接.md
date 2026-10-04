@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 使用 gRPC 连接池复用连接 —— sync.Pool 的 New/Get/Put、容量自伸缩与 CAS 无锁原理"
 date: 2026-10-03 01:15:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [gRPC, 连接池, sync.Pool, 长连接, HTTP/2 多路复用, CAS, 无锁队列, GC]
 ---
 

@@ -9,8 +9,7 @@ tags:
   - QoS
   - eviction
   - kubelet
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: Resources 资源管理（下）—— LimitRange、ResourceQuota 与 Pod 驱逐策略

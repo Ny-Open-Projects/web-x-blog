@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 共享文件系统类型的 StorageClass（CephFileSystem 的主备 MDS、内核 4.17 门槛与多 Pod 实测共享）"
 date: 2026-10-03 23:04:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [CephFileSystem, StorageClass, ReadWriteMany, MDS, metadataPool, 内核版本, 文件共享, quota]
 ---
 

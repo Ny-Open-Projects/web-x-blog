@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制生成证书详解（cfssl 自签 CA 与 etcd / apiserver 等组件证书）"
 date: 2026-10-03 11:58:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [cfssl, CSR, 自签 CA, ca.pem, apiserver 证书, aggregator, admin.kubeconfig, CN O, service-account, 100 年有效期]
 ---
 

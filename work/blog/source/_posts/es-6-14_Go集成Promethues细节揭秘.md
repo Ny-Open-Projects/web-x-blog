@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go集成Prometheus细节揭秘"
 date: 2026-10-04 04:04:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [Prometheus, Pushgateway, Grafana, Counter, Histogram, 监控]
 ---
 

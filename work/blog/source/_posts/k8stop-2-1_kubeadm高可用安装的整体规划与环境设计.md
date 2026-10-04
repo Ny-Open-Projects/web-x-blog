@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: kubeadm 高可用安装的整体规划与环境设计"
 date: 2026-10-02 09:10:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [kubeadm, 高可用, 机器规划, 版本选型, 环境规格]
 ---
 

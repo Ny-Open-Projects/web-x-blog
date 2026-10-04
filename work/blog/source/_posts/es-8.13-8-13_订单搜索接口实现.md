@@ -1,7 +1,7 @@
 ---
 title: "Go 项目开发: 订单搜索接口实现"
 date: 2026-10-03 12:10:00
-categories: [Elasticsearch, 搜索服务]
+categories: [es, Elasticsearch, 搜索服务]
 tags: [should权重, 高亮片段, 越权过滤, 拼音查询降噪, 指标上报]
 disableNunjucks: true
 

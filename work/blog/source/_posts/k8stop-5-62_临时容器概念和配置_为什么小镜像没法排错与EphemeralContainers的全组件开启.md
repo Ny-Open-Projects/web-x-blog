@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 临时容器概念与配置（为什么小镜像没法排错、EphemeralContainers 的 feature-gates 全组件开启）"
 date: 2026-10-03 22:08:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [临时容器, EphemeralContainer, feature-gates, shareProcessNamespace, alpine, scratch, 镜像瘦身, k8s1.16]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "ES集群及节点角色规划实践"
 date: 2026-10-04 04:03:00
-categories: [Elasticsearch, 架构设计]
+categories: [es, Elasticsearch, 架构设计]
 tags: [集群规划, 节点角色, master, ingest, 分片, 内存磁盘比, JVM]
 ---
 

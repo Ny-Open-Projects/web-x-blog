@@ -7,8 +7,7 @@ tags:
   - kubeadm
   - 二进制安装
   - 集群部署
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # 集群搭建方案对比：社区脚本、kubeadm 与二进制安装

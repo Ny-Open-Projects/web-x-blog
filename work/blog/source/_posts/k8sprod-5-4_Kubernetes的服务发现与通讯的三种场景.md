@@ -7,8 +7,7 @@ tags:
   - Service
   - Ingress
   - 服务发现
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 ## 纲要

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 网络卷 NFS —— 跨节点共享存储"
 date: 2026-10-03 23:10:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, NFS, 网络存储, 持久化, volumeMounts]
 ---
 

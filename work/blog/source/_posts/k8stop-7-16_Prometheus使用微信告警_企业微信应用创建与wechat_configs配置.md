@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus 使用微信告警（企业微信应用创建与 wechat_configs 配置）"
 date: 2026-10-04 01:04:00
-categories: [Kubernetes, 告警]
+categories: [k8stop, Kubernetes, 告警]
 tags: [Alertmanager, 企业微信, 微信告警, wechat_configs, corp_id, agent_id, to_tag, Secret, receiver, send_resolved]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: RBAC 使用（官方写法拆解、subjects 的九种绑定形态与聚合 ClusterRole）"
 date: 2026-10-03 22:20:00
-categories: [Kubernetes, 权限]
+categories: [k8stop, Kubernetes, 权限]
 tags: [RBAC, subjects, ClusterRole, RoleBinding, aggregationRule, serviceaccounts, unit resources, token-ttl, Dashboard]
 ---
 

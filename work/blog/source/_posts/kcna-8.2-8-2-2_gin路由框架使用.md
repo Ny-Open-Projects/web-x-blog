@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: gin 路由框架使用 —— 路由参数、路由组、中间件、渲染与自定义 HTTP Server"
 date: 2026-10-03 01:08:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [gin, 路由参数, 路由组, 中间件, JSON 渲染, http.Server, Cookie, Web 框架]
 ---
 

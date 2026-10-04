@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 存储回顾（静态与动态两条链路、快照的完整闭环，以及为什么 CSI 会成为主流）"
 date: 2026-10-03 23:28:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [静态存储, 动态存储, StorageClass, PVC, VolumeSnapshot, CSI, FlexVolume, in-tree, 回顾]
 ---
 

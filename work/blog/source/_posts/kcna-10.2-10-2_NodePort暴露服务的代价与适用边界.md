@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: NodePort 暴露服务的代价与三个适用前提"
 date: 2026-10-02 20:00:00
-categories: [Kubernetes, 集群网络]
+categories: [kcna, Kubernetes, 集群网络]
 tags: [NodePort, Service, 端口冲突, 对外暴露, 云厂商LB]
 ---
 

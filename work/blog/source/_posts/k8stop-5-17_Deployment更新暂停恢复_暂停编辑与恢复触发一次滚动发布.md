@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Deployment 更新暂停与恢复（一次改动只发布一次）"
 date: 2026-10-03 14:45:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Deployment, rollout, pause, resume, set image, set resources, 滚动发布, 滚动更新, 资源配额, CICD]
 ---
 

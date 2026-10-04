@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 认证考点: Prometheus 与 AlertManager 监控告警体系的分工与全流程"
 date: 2026-10-02 21:24:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [Prometheus, AlertManager, Pushgateway, exporters, alerting rule, route, receiver, webhook, 分组路由]
 disableNunjucks: true
 

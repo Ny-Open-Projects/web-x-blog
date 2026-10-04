@@ -7,8 +7,7 @@ tags:
   - Pod
   - Deployment
   - Service
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 核心概念：从容器到 Pod、副本集、Deployment 与 Service

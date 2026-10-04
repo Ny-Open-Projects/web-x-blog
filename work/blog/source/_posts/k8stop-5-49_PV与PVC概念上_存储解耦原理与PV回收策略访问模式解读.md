@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: PV 与 PVC 概念上（存储解耦原理、回收策略与访问模式解读）"
 date: 2026-10-03 18:52:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [PV, PVC, PersistentVolume, PersistentVolumeClaim, 静态动态, 回收策略, accessModes, storageClassName, volumeMode, Retain, Delete, Recycle]
 ---
 

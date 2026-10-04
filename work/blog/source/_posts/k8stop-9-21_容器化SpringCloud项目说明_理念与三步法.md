@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 容器化 SpringCloud 项目说明（理念与三步法）"
 date: 2026-10-04 05:05:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [SpringCloud, 容器化, CI/CD, 微服务, 理念, 持续集成, 持续部署]
 ---
 

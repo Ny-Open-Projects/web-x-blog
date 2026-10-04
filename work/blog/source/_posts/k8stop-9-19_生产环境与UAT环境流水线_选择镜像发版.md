@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 生产环境与 UAT 环境流水线（选择镜像发版）"
 date: 2026-10-04 04:50:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, UAT, 生产环境, 选择镜像, Harbor, ActiveChoices, 多集群, 流水线]
 ---
 

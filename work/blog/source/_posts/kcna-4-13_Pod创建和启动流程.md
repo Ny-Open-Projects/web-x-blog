@@ -1,7 +1,7 @@
 ---
 title: "Pod 创建和启动流程"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Pod, 创建流程, watch, 绑定, 调度, kubelet, 容器运行时, 健康检查, 驱逐, CRI]
 disableNunjucks: true
 ---

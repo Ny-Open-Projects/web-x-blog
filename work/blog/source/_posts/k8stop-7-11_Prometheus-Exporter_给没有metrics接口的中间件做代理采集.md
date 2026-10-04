@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus Exporter（给没有 metrics 接口的中间件做代理采集）"
 date: 2026-10-03 22:51:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, exporter, kafka_exporter, redis_exporter, node_exporter, ServiceMonitor, 无头 Service, Grafana, 变量取值, 消费组]
 ---
 

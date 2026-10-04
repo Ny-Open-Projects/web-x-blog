@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 prometheus client SDK 把自定义指标接进服务"
 date: 2026-10-02 20:32:00
-categories: [Kubernetes, 监控]
+categories: [kcna, Kubernetes, 监控]
 tags: [prometheus_client, Go, Gauge, 注册器, 拦截器, /metrics]
 ---
 

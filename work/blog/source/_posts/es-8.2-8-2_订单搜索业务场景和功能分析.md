@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 订单搜索业务场景和功能分析"
 date: 2026-10-02 21:10:00
-categories: [Elasticsearch, 订单搜索]
+categories: [es, Elasticsearch, 订单搜索]
 tags: [routing, 用户维度, 冷热维度, 索引隔离, 跨集群搜索]
 ---
 

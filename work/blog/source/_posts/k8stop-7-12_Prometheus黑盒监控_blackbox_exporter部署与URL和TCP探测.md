@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus 黑盒监控（blackbox_exporter 部署与 URL / TCP 探测）"
 date: 2026-10-04 01:01:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, blackbox_exporter, 黑盒监控, 白盒监控, ConfigMap, ServiceMonitor, probe, tcp_connect, http_2xx]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 特定场景下的数据建模"
 date: 2026-10-02 23:15:00
-categories: [Elasticsearch, 数据建模]
+categories: [es, Elasticsearch, 数据建模]
 tags: [预排序字段, 数组建模, edge_ngram, 拼音高亮, dynamic=strict]
 ---
 

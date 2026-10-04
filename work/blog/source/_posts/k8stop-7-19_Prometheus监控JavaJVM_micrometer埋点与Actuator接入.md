@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Prometheus 监控 Java JVM（micrometer 埋点与 Actuator 接入）"
 date: 2026-10-04 01:07:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, JVM, micrometer, SpringBoot, Actuator, 埋点监控, 垃圾回收, maven, Grafana, application tag]
 ---
 

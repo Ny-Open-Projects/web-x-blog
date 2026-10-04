@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Prometheus Web 界面与 Targets 巡检及组件指标补齐"
 date: 2026-10-04 11:30:00
-categories: [Kubernetes, 监控]
+categories: [k8sprod, Kubernetes, 监控]
 tags: [Prometheus, PromQL, Graph, Targets, relabel, ServiceMonitor, kube-controller-manager, etcd, kubelet, tlsConfig]
 ---
 

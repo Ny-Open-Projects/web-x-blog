@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Affinity 亲和力入门（三类亲和力与硬软两种约束的概念）"
 date: 2026-10-03 19:48:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Affinity, nodeAffinity, podAffinity, podAntiAffinity, required, preferred, labelSelector, 反亲和, 调度性能]
 ---
 

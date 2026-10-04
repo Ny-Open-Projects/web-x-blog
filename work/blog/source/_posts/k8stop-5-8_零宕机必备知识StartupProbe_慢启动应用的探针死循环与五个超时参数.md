@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 零宕机必备的 StartupProbe（慢启动应用的探针困境、五个超时参数与 CoreDNS 的双接口做法）"
 date: 2026-10-03 22:28:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [startupProbe, livenessProbe, readinessProbe, initialDelaySeconds, failureThreshold, slowStart, CoreDNS, 滚动发布]
 ---
 

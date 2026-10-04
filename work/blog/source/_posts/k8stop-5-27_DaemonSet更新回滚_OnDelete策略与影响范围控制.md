@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: DaemonSet 的更新和回滚（OnDelete 策略为什么更适合守护进程）"
 date: 2026-10-03 16:02:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [DaemonSet, updateStrategy, OnDelete, RollingUpdate, maxUnavailable, rollout undo, rollout history, 影响范围, 标签筛选]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: K8s 的资源 —— 七大类资源模型与它们各自管什么"
 date: 2026-10-02 01:30:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [K8s, 资源, Pod, Deployment, Service, Ingress, ConfigMap, ServiceAccount, RBAC, NetworkPolicy, CRD, 声明式]
 ---
 

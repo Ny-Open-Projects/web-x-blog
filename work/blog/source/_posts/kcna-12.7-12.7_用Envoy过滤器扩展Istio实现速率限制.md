@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 用 Envoy 过滤器扩展 Istio 实现速率限制"
 date: 2026-10-02 20:28:00
-categories: [Kubernetes, 服务网格]
+categories: [kcna, Kubernetes, 服务网格]
 tags: [EnvoyFilter, ratelimit, Redis, WASM, 429, 自定义扩展]
 ---
 

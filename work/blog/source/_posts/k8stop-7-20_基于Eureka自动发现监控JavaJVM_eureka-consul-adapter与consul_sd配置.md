@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 基于 Eureka 自动发现监控 Java JVM（eureka-consul-adapter 与 consul_sd_configs）"
 date: 2026-10-04 01:08:00
-categories: [Kubernetes, 监控]
+categories: [k8stop, Kubernetes, 监控]
 tags: [Prometheus, Eureka, SpringCloud, 服务发现, consul_sd_configs, eureka-consul-adapter, JVM, micrometer, 微服务]
 ---
 

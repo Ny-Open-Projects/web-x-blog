@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: ES 集群规划与分片设计"
 date: 2026-10-02 08:15:00
-categories: [Elasticsearch, 集群规划]
+categories: [es, Elasticsearch, 集群规划]
 tags: [节点角色, 分片规划, shrink, split, 硬件选型]
 ---
 

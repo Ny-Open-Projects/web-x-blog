@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: KUBECONFIG 多集群配置（上下文切换与 Secret 挂载）"
 date: 2026-10-04 04:25:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [kubectl, kubeconfig, context, Secret, 多集群, 凭证挂载]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 服务伸缩性的实现和原理 —— HPA / VPA / CA 三类扩缩容"
 date: 2026-10-02 03:40:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [HPA, VPA, CA, 水平扩缩容, 垂直扩缩容, 集群自动扩缩容, metrics-server, 智能HPA, 定时HPA, 弹性伸缩]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Service 代理模式 iptables 与 ipvs"
 date: 2026-10-03 19:25:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kube-proxy, iptables, ipvs, netfilter, LVS, DNAT]
 ---
 

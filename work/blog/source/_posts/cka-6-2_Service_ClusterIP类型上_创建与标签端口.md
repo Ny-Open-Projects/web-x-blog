@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Service ClusterIP 类型（上）—— 创建、标签与端口"
 date: 2026-10-03 17:45:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Service, ClusterIP, selector, port, targetPort, expose]
 ---
 

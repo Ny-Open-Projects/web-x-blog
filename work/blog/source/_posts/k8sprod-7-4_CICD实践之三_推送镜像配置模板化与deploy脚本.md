@@ -7,8 +7,7 @@ tags:
   - Jenkins
   - Pipeline
   - 配置模板
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 ## 纲要

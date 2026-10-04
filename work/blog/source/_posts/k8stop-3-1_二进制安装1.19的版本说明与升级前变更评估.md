@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 二进制安装 1.19 的版本说明与升级前变更评估"
 date: 2026-10-02 11:00:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [二进制安装, kubernetes-1.19, CHANGELOG, Ingress, 证书轮换]
 ---
 

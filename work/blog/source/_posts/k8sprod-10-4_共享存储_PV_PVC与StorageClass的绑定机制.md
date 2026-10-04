@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: PV、PVC 与 StorageClass 的绑定机制与 GlusterFS 后端"
 date: 2026-10-03 19:50:00
-categories: [Kubernetes, 存储]
+categories: [k8sprod, Kubernetes, 存储]
 tags: [PV, PVC, StorageClass, PersistentVolume, PersistentVolumeClaim, NFS, StorageClass 动态供给, GlusterFS, Heketi, allow-privileged]
 ---
 

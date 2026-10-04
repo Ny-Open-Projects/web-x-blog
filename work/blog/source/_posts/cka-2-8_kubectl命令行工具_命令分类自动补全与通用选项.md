@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: kubectl 命令行工具（命令分类、自动补全与通用选项）"
 date: 2026-10-02 17:35:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubectl, 自动补全, api-resources, 通用选项, dry-run]
 ---
 

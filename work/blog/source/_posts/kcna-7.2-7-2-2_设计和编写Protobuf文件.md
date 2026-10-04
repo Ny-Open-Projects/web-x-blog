@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 设计和编写 Protobuf 文件 —— 用户积分与等级服务的 proto3 定义"
 date: 2026-10-03 00:12:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [Protobuf, proto3, protoc, gRPC 服务定义, message, repeated, 用户成长体系]
 ---
 

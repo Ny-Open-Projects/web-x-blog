@@ -1,7 +1,7 @@
 ---
 title: "服务调用的限频、限流、降级和熔断（一）—— 调用方为什么要自保"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, 微服务]
+categories: [kcna, Kubernetes, 微服务]
 tags: [服务治理, 限频, 限流, 降级, 熔断, 隔离, 超时, 自保护]
 disableNunjucks: true
 ---

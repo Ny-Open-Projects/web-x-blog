@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: gRPC 使用中的常见问题及解决方案 —— 十八种状态编码、默认 UNKNOWN 的坑与日志排障"
 date: 2026-10-02 06:50:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [gRPC, status code, OK=0, CANCELLED=1, UNKNOWN=2, DEADLINE_EXCEEDED=4, INTERNAL=13, UNAVAILABLE=14, 错误日志, 排障]
 ---
 

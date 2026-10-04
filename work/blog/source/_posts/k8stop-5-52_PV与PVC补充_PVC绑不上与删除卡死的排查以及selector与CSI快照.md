@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: PV 与 PVC 补充（绑不上与删除卡死的排查、selector 分配、CSI 与快照）"
 date: 2026-10-03 19:13:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [PVC Pending, Terminating, selector, matchExpressions, CSI, VolumeSnapshot, 块存储 Block, 回收Pod, Recycle, 区域分配]
 ---
 

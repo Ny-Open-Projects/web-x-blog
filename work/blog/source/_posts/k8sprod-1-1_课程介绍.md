@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 生产实践指南：课程介绍与学习地图"
 date: 2026-10-04 04:00:00
-categories: [Kubernetes, 生产实践]
+categories: [k8sprod, Kubernetes, 生产实践]
 tags: [Kubernetes, 云原生, 课程大纲, 高可用集群, 生产实践]
 disableNunjucks: true
 ---

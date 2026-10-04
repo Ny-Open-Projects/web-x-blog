@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: 容器日志采集的三种方案对比与 LogPilot 原理"
 date: 2026-10-03 22:15:00
-categories: [Kubernetes, 日志]
+categories: [k8sprod, Kubernetes, 日志]
 tags: [容器日志, 标准输出, sidecar, DaemonSet 日志采集, LogPilot, Filebeat, Fluentd, 动态发现]
 ---
 

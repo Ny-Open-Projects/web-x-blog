@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: CNI网络方案选型（Flannel 路由/隧道模式与 VXLAN 原理）"
 date: 2026-10-02 16:45:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, CNI, flannel, VXLAN, host-gw, Calico, NetworkPolicy, 路由]
 ---
 

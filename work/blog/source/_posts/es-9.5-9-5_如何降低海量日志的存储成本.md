@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 如何降低海量日志的存储成本"
 date: 2026-10-03 17:00:00
-categories: [Elasticsearch, 成本治理]
+categories: [es, Elasticsearch, 成本治理]
 tags: [冷热分离, 生命周期管理, 备份归档, 预聚合, ILM]
 ---
 

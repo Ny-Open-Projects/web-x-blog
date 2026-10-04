@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 挂载 NFS 至容器（NFS 服务端配置与 Pod 直挂 volume 实测）"
 date: 2026-10-03 18:45:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [NFS, volume, nfs-utils, exports, exportfs, 共享存储, PV, PVC, NAS, mount]
 ---
 

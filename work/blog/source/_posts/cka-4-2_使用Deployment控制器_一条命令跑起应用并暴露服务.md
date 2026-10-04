@@ -3,7 +3,7 @@ disableNunjucks: true
 title: "Kubernetes 认证实战: 用 Deployment 一条命令跑起应用并用 Service 暴露出去"
 date: 2021-04-11 12:00:00
 tags: [Kubernetes, CKA, Deployment, ReplicaSet, Service, NodePort]
-categories: [Kubernetes 认证实战]
+categories: [cka, Kubernetes 认证实战]
 ---
 
 ## 纲要

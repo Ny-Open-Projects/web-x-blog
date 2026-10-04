@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Label 与 Selector（资源分组、按标签调度与选择器查询语法）"
 date: 2026-10-03 16:09:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Label, Selector, kubectl label, nodeSelector, 等值匹配, 集合匹配, 取反 !=, 标签改不生效, 服务发现, 白名单专线网段]
 ---
 

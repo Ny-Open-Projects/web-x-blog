@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: Helm 语法下（dry-run 调试、_helpers.tpl 全名生成逻辑与 range 遍历）"
 date: 2026-10-03 22:23:00
-categories: [Kubernetes, Helm]
+categories: [k8stop, Kubernetes, Helm]
 tags: [Helm, Go template, dry-run, include, define, _helpers.tpl, trunc, trimSuffix, default, printf, range, imagePullSecrets]
 disableNunjucks: true
 

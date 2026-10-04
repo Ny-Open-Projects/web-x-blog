@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 验证用户积分等级系统的效果 —— 服务端启动、客户端调用与数据库初始化"
 date: 2026-10-03 01:01:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [gRPC 验证, main_server, main_client, InitDB, mysql 驱动, 请求日志, 端到端联调]
 ---
 

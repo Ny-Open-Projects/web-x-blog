@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Golang使用kafka的正确姿势"
 date: 2026-10-04 01:05:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [Kafka, Go, 消息队列, 断线重连, 消费幂等]
 ---
 

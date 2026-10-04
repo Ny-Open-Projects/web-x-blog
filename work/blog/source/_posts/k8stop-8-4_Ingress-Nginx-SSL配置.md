@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx SSL 配置（单域名/通配符证书与强制跳转）"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, TLS, SSL, 证书, Secret, 强制跳转, ssl-redirect, ssl-passthrough, backend-protocol, Dashboard]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Metrics Server 与 Dashboard 的安装"
 date: 2026-10-02 10:50:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [metrics-server, Dashboard, Aggregation Layer, 镜像仓库, Pending]
 ---
 

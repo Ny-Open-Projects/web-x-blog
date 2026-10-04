@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 守护进程服务 DaemonSet（在每个节点上都跑一个 Pod）"
 date: 2026-10-03 15:48:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [DaemonSet, 守护进程集, DS, 每节点一个, 节点标签匹配, Calico, filebeat, fluentd, node-exporter, ingress controller, 集群存储]
 ---
 

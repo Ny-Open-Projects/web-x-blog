@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Service 访问故障排查的七步定位法"
 date: 2026-10-02 10:25:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Service, ClusterIP, kube-proxy, iptables, ipvs, endpoints, coredns, CNI]
 ---
 

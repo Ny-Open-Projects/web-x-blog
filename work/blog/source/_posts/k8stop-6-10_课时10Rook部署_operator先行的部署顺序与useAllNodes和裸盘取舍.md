@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Rook 部署实记（operator 先起来、cluster 后部署，以及存储节点用裸盘还是目录的取舍）"
 date: 2026-10-03 22:44:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [Rook, Ceph, operator, useAllNodes, useAllDevices, OSD, mon, MGR, 裸盘, dataDirHostPath]
 ---
 

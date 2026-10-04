@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins 配置 Kubernetes 多集群（Cloud 与证书凭证）"
 date: 2026-10-04 04:20:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, Kubernetes插件, Cloud, kubeconfig, PKCS12, 证书, 多集群]
 ---
 

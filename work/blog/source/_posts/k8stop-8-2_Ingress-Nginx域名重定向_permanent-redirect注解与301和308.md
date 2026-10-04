@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 域名重定向（permanent-redirect 注解与 301 / 308）"
 date: 2026-10-04 01:18:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, annotation, 域名重定向, permanent-redirect, 301, 308, 声明式配置, nginx.conf]
 ---
 

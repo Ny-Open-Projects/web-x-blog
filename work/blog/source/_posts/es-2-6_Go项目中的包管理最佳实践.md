@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: Go 项目中的包管理最佳实践"
 date: 2026-10-02 06:45:00
-categories: [Go, 工程化]
+categories: [es, Go, 工程化]
 tags: [go module, GOPATH, vendor, go.mod, go.sum, replace, GOPRIVATE, 私有仓库]
 ---
 

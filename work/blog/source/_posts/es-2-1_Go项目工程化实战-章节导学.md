@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go项目工程化实战-章节导学"
 date: 2026-10-04 01:02:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [Go, 工程化, 目录结构, API设计, 配置管理]
 ---
 

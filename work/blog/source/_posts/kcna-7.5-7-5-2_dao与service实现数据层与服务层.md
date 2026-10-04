@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: dao 与 service 实现用户积分和等级系统的数据层、服务层 —— 增删改查、分页、软删除与分层隔离"
 date: 2026-10-03 00:33:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [DAO, service 层, 分页查询, 预编译 SQL, 软删除, common.Now, mustColumns, 分层隔离]
 ---
 

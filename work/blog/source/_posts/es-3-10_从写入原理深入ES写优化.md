@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "从写入原理深入ES写优化"
 date: 2026-10-04 04:02:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [写入原理, routing, preference, translog, refresh, 段合并, 写优化]
 ---
 

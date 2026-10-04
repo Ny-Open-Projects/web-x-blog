@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: Pod 存在的意义（最小部署单元与亲密型应用）"
 date: 2026-10-03 11:05:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, Pod, 容器, 单进程模型, 网络命名空间, 亲密型应用]
 ---
 

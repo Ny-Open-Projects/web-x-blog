@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 安装一键式 K8s 资源平台 Ratel 到集群（kubeconfig 挂 Secret、8888 端口与 Ingress 暴露）"
 date: 2026-10-03 22:36:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Ratel, k8s管理平台, kubeconfig, Secret挂载, Ingress, RBAC, imagePullPolicy, 一键式部署]
 ---
 

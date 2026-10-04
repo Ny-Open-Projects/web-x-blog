@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: Istio 的架构原理 Envoy / Pilot / Mixer / Galley / Citadel"
 date: 2026-10-04 13:50:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [Istio, Envoy, Pilot, Mixer, Citadel, Galley, sidecar, data plane, control plane, mTLS]
 ---
 

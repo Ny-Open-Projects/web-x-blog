@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Ingress Nginx 黑白名单（IP 白名单与黑名单）"
 date: 2026-10-04 03:25:00
-categories: [Kubernetes, Ingress]
+categories: [k8stop, Kubernetes, Ingress]
 tags: [Ingress, ingress-nginx, 白名单, 黑名单, whitelist-source-range, denylist-source-range, annotation, ConfigMap, configuration-snippet]
 ---
 

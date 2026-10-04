@@ -9,8 +9,7 @@ tags:
   - topologyKey
   - taint
   - toleration
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: Scheduler 调度（下）—— podAffinity 反亲和打散、taint 与 toleration

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 到底什么才算云原生"
 date: 2026-10-02 21:16:00
-categories: [Kubernetes, 概念]
+categories: [kcna, Kubernetes, 概念]
 tags: [云原生, 容器化, Docker, Kubernetes, 可观测, 弹性伸缩, DevOps]
 ---
 

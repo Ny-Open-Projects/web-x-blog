@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 操作 ES 的一些技巧和注意事项（二）：文档增删改与批量/Bulk 封装"
 date: 2026-10-04 02:05:00
-categories: [Elasticsearch, Go]
+categories: [es, Elasticsearch, Go]
 tags: [go-elasticsearch, olivere/elastic, BulkProcessor, refresh, OpType, 版本控制, upsert, deleteByQuery]
 ---
 

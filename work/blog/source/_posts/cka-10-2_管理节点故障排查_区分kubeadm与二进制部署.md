@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 管理节点（Master）故障排查"
 date: 2026-10-02 10:10:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubeadm, 二进制部署, systemd, 静态Pod, kube-controller-manager, 排障]
 ---
 

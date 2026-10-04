@@ -10,8 +10,7 @@ tags:
   - lifecycle
   - postStart
   - preStop
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: 深入 Pod（上）—— pause 容器、共享 network/volume、hostAliases 与 lifecycle

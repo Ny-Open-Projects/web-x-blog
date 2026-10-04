@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 使用不同资源名称查询日志（Filebeat 排错 + Kibana 按字段过滤）"
 date: 2026-10-04 01:10:00
-categories: [Kubernetes, 日志]
+categories: [k8stop, Kubernetes, 日志]
 tags: [Filebeat, Logstash, Kibana, Elasticsearch, Kafka, 多行合并, multiline, 索引模式, podname, 字段过滤]
 ---
 

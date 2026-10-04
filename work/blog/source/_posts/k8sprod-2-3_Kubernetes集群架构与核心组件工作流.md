@@ -7,8 +7,7 @@ tags:
   - 集群架构
   - etcd
   - kubelet
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 架构设计：两种节点、五个核心组件与一次调度落地的完整流程

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 用 Topology 实现多地多机房部署（机柜级拓扑域实测、副本 Pending 与软硬反亲和）"
 date: 2026-10-03 22:04:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [topologyKey, 机柜级拓扑域, podAntiAffinity, required, preferred, weight, Pending, 多地多机房]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Taint 与 Toleration 入门（用污点排斥、用容忍声明来控住调度）"
 date: 2026-10-03 19:27:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [Taint, Toleration, NoSchedule, NoExecute, PreferNoSchedule, operators Equal Exists, tolerationSeconds, 驱逐, 异构节点, nodeSelector]
 ---
 

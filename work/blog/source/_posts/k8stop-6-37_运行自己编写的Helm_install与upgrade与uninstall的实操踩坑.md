@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes 集群部署: 运行自己编写的 Helm（install / upgrade / uninstall 的实操踩坑）"
 date: 2026-10-03 22:27:00
-categories: [Kubernetes, Helm]
+categories: [k8stop, Kubernetes, Helm]
 tags: [Helm, helm install, helm upgrade, helm uninstall, namespace 预创建, volumeClaimTemplates, --set, helm list, ConfigMap 写反]
 disableNunjucks: true
 

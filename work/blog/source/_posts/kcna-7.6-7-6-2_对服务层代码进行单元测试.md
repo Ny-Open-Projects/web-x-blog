@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 对服务层代码进行单元测试 —— _test.go 约定、initDB 公共方法与时区统一"
 date: 2026-10-03 00:40:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [单元测试, go test, _test.go, initDB, 时区 UTC, mysql 驱动, 表驱动测试, 用户成长体系]
 ---
 

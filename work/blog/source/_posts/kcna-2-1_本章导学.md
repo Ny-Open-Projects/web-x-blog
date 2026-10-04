@@ -1,7 +1,7 @@
 ---
 title: "本章导学 —— 微服务概述与 K8s 治理微服务的优势"
 date: 2026-10-04 03:20:00
-categories: [Kubernetes, 微服务]
+categories: [kcna, Kubernetes, 微服务]
 tags: [微服务, 架构演进, 服务发现, 服务治理, API网关, Kubernetes, 本章导学]
 disableNunjucks: true
 ---

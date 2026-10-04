@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Jenkins CI/CD 概述（一次构建、到处发布）"
 date: 2026-10-04 04:00:00
-categories: [Kubernetes, CI/CD]
+categories: [k8stop, Kubernetes, CI/CD]
 tags: [Jenkins, CI/CD, 持续集成, 持续交付, 持续部署, 镜像, 流水线, GitLab]
 ---
 

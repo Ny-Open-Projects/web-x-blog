@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Go 项目开发: 如何避免大量写入导致集群高负载而影响查询效率"
 date: 2026-10-02 22:40:00
-categories: [Elasticsearch, 架构设计]
+categories: [es, Elasticsearch, 架构设计]
 tags: [分层架构, 跨集群搜索, Kafka多消费组, Bitmap, 按日期分表]
 ---
 

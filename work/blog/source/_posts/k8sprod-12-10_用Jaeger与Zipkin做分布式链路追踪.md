@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: 用 Jaeger 与 Zipkin 做 Istio 分布式链路追踪"
 date: 2026-10-04 18:30:00
-categories: [Kubernetes, ServiceMesh]
+categories: [k8sprod, Kubernetes, ServiceMesh]
 tags: [Istio, 分布式追踪, Jaeger, Zipkin, span, 采样率, tracing.sampling, Dependency, TraceID]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: 集群与服务的管理和配置 —— 控制台十块内容、APIServer 访问开关与 kubeconfig"
 date: 2026-10-02 04:40:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [集群管理, APIServer, kubeconfig, 超级节点, Deployment, StatefulSet, CronJob, HPA, Service, Ingress, ConfigMap, Secret, RBAC, Events, 服务网格]
 ---
 

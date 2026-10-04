@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: InitContainer 初始化容器（启动前的预处理与强依赖等待）"
 date: 2026-10-03 19:41:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [initContainers, 初始化容器, privileged, sysctl, postStart, 顺序执行, 依赖等待, 特权容器]
 ---
 

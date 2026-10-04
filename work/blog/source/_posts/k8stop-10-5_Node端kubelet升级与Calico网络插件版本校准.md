@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: Node 端 kubelet 升级与 Calico 网络插件版本校准"
 date: 2026-10-02 08:50:00
-categories: [Kubernetes, 集群升级]
+categories: [k8stop, Kubernetes, 集群升级]
 tags: [kubelet, kube-proxy, Calico, CNI, DaemonSet, 网络插件]
 ---
 

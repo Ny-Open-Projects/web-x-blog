@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: ControllerManager 原理 —— informer、事件分发与期望状态收敛"
 date: 2026-10-02 02:00:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [kube-controller-manager, controller, informer, ListWatch, 事件回调, 期望状态, client-go, workqueue, 调度一致性]
 ---
 

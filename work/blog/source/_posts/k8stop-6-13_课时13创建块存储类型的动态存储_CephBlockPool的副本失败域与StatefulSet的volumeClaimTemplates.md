@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 创建块存储类型的动态存储（CephBlockPool 副本与失败域、StorageClass 与 StatefulSet 的 volumeClaimTemplates）"
 date: 2026-10-03 22:52:00
-categories: [Kubernetes, 存储]
+categories: [k8stop, Kubernetes, 存储]
 tags: [CephBlockPool, StorageClass, 块存储, 文件存储, RWO, failureDomain, replicated.size, xfs, reclaimPolicy, StatefulSet]
 ---
 

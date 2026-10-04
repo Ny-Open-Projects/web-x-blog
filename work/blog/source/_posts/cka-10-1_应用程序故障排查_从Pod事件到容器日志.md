@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证实战: 应用程序故障排查（从 Pod 事件到容器日志）"
 date: 2026-10-02 09:55:00
-categories: [Kubernetes, 认证实战]
+categories: [cka, Kubernetes, 认证实战]
 tags: [Kubernetes, CKA, kubectl describe, kubectl logs, kubectl exec, 排障, Pending, CrashLoopBackOff]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 使用 Helm 安装 Ingress（ingress-nginx 的 values 改造与 DaemonSet 部署）"
 date: 2026-10-03 18:59:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [helm, ingress-nginx, values.yaml, hostNetwork, ClusterFirstWithHostNet, nodeSelector, DaemonSet, admissionWebhook, 阿里云镜像仓库]
 ---
 

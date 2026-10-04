@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 生产实践: 用 Heketi 初始化 GlusterFS 并让 StorageClass 动态供给 PV"
 date: 2026-10-03 20:25:00
-categories: [Kubernetes, 存储]
+categories: [k8sprod, Kubernetes, 存储]
 tags: [GlusterFS, Heketi, StorageClass, PersistentVolumeClaim, provisioner, topology.json, reclaimPolicy, heketi-security, 动态供给]
 ---
 

@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 集群部署: 使用 PodPreset 预配置容器时区（准入插件开启、hostPath 挂载与 selector 匹配）"
 date: 2026-10-03 22:37:00
-categories: [Kubernetes, 集群部署]
+categories: [k8stop, Kubernetes, 集群部署]
 tags: [PodPreset, 准入控制, 时区, /etc/localtime, UTC, hostPath, selector, annotation, exclude, namespace]
 ---
 

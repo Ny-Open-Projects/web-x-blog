@@ -2,7 +2,7 @@
 disableNunjucks: true
 title: "Kubernetes 认证考点: models 与 dbhelper 实现用户积分和等级系统的数据层基础 —— xorm reverse、配置加载与数据库连接"
 date: 2026-10-03 00:26:00
-categories: [Kubernetes]
+categories: [kcna, Kubernetes]
 tags: [xorm, xorm reverse, models, dbhelper, 环境变量配置, 连接池, unsigned int, Go 数据层]
 ---
 

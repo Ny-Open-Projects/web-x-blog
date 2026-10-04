@@ -9,8 +9,7 @@ tags:
   - kubeconfig
   - context
   - DNS
-categories:
-  - Kubernetes 生产实践
+categories: [k8sprod, Kubernetes 生产实践]
 ---
 
 # Kubernetes 生产实践: Namespace —— 集群的共享与隔离，以及 service IP 为什么跨命名空间还能通
