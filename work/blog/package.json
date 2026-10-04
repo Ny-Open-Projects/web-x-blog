@@ -1,0 +1,26 @@
+{
+  "name": "web-x-blog",
+  "version": "0.1.0",
+  "private": true,
+  "description": "hexo 站点：把 work/target 的内容分类后发布",
+  "scripts": {
+    "build": "hexo generate",
+    "server": "hexo server",
+    "clean": "hexo clean"
+  },
+  "hexo": {
+    "version": "8.1.2"
+  },
+  "dependencies": {
+    "hexo": "^8.1.2",
+    "hexo-generator-archive": "^2.0.0",
+    "hexo-generator-category": "^2.0.0",
+    "hexo-generator-index": "^2.0.0",
+    "hexo-generator-tag": "^2.0.0",
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-markdown-it": "^7.1.1",
+    "hexo-renderer-stylus": "^2.1.0",
+    "hexo-server": "^3.0.0",
+    "hexo-theme-landscape": "^1.1.0"
+  }
+}

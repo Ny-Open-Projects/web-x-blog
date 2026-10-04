@@ -1,0 +1,57 @@
+<%
+  var COLS = ['Kubernetes', 'Elasticsearch', 'Go'];
+  var PER = 8;
+
+  function topCat(post) {
+    var cs = post.categories;
+    if (!cs || !cs.first) return '其他';
+    var c = cs.first();
+    return (c && c.name) ? c.name : '其他';
+  }
+
+  var bucket = {}, all = [];
+  site.posts.each(function (p) {
+    var name = topCat(p);
+    if (!bucket[name]) bucket[name] = [];
+    bucket[name].push(p);
+    all.push(p);
+  });
+
+  var cols = COLS.map(function (n) { return { name: n, posts: bucket[n] || [] }; })
+                 .filter(function (g) { return g.posts.length > 0; });
+
+  var rest = all.filter(function (p) { return COLS.indexOf(topCat(p)) === -1; });
+  if (rest.length) cols.push({ name: '其他', posts: rest });
+-%>
+<% if (page.current > 1) { %>
+  <%- partial('_partial/archive', {expand: true, index: true}) %>
+<% } else { %>
+<style>
+.home-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin:24px 0 12px}
+.home-col{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:12px;padding:14px 16px 12px}
+.home-col-title{font-size:14px;font-weight:500;margin:0 0 10px;display:flex;align-items:baseline;gap:8px;line-height:1.4}
+.home-col-title small{font-size:12px;font-weight:400;color:var(--color-text-tertiary)}
+.home-col .article{padding:0;margin:0 0 8px;border-bottom:1px solid var(--color-border-tertiary)}
+.home-col .article:last-of-type{border-bottom:none}
+.home-col .article-inner{padding:0}
+.home-col .article-meta{margin-bottom:2px}
+.home-col .article-entry,.home-col .article-footer{display:none}
+.home-col-more{display:inline-block;margin-top:8px;font-size:12px;color:var(--color-text-secondary)}
+.home-col-more:hover{color:var(--color-text-primary)}
+</style>
+<div class="home-cols">
+  <% cols.forEach(function (group) { %>
+    <% var link = (group.name === '其他') ? '/archives/' : ('/categories/' + encodeURIComponent(group.name) + '/'); %>
+    <div class="home-col">
+      <h2 class="home-col-title">
+        <a href="<%- url_for(link) %>"><%= group.name %></a>
+        <small><%= group.posts.length %> 篇</small>
+      </h2>
+      <% group.posts.slice(0, PER).forEach(function (post) { %>
+        <%- partial('_partial/article', {post: post, index: true}) %>
+      <% }); %>
+      <a class="home-col-more" href="<%- url_for(link) %>">查看全部 <%= group.posts.length %> 篇 &raquo;</a>
+    </div>
+  <% }); %>
+</div>
+<% } %>

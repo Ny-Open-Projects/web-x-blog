@@ -1,0 +1,15 @@
+.DS_Store
+.AppleDouble
+.idea/
+.vscode/
+node_modules/
+dist/
+*.log
+
+# Hexo 生成产物（可由 generate_site.sh 重建，不入库）
+work/blog/public/
+db.json
+.deploy_git/
+
+# 项目本地 agent / memory 目录（不入库）
+.workbuddy/

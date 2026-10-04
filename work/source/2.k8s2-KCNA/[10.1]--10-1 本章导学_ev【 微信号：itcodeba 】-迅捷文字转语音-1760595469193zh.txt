@@ -1,0 +1,13 @@
+所以大家好，这一章咱们讲一讲使用ingressservice来暴露k八十集群内的服务。
+咱们开发的普通service，在集群内可以通过服务的域名来访问，也可以直接使用服务的classIP来访问。
+但是在集群外服务的域名和classPIP都是无法访问的。
+针对HTTP内的web服务提供外部可访问的api接口配置一个engressservice，这是一个很好的选择。
+咱们先来看一下本章导学要把服务暴露在k八十机群外访问除了ingressservice，还有nodel的方式。
+所以咱们先聊一聊ponodeapod暴露服务的问题。基于咱们开发的web服务的特点，使用nodelpod方式来暴露服务还是比较少的，但是咱们也需要了解一下其中的原因。
+也许以后有特殊的情况。可能还会用得到nodea的方式。
+接下来作为本章的重点，咱们在腾讯云上把poinress部署起来，并且配置相应的转发规则，把咱们的用户积分和等级服务通过inressservice暴露出来，由为kboss集群内服务的访问入口。
+由于咱们的服务使用的是加PC协议。同时咱们也实现了restforAPI。
+所以咱们这里的inressservice也是要实现两种方式，一种可以支持加PC协议，一种可以支持HTDP的API接口，大家都可以学习，了解一下，以后都是可以用得到的。
+最后除了nodelport和englishx方还有loadbalbalance方可以暴暴k八ass机群内的的服务。
+所以咱们也对比介绍一下loadbalance方式，了解一下它的特点和问题，以后也都会用得到。
+那咱就开始本章的具体内容吧。

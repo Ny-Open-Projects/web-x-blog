@@ -1,0 +1,210 @@
+[
+ {
+  "num": 122,
+  "src": "6-25",
+  "title": "课时25：部署Redis Operator",
+  "file": "6-25 课时25：部署Redis Operator【 微信号：itcodeba 】-迅捷文字转语音-1760602782193zh.txt",
+  "lines": 87,
+  "bytes": 14680
+ },
+ {
+  "num": 123,
+  "src": "6-26",
+  "title": "课时26：在k8s上部署Redis集群上",
+  "file": "6-26 课时26：在k8s上部署Redis集群上【 微信号：itcodeba 】-迅捷文字转语音-1760602793606zh.txt",
+  "lines": 14,
+  "bytes": 2343
+ },
+ {
+  "num": 124,
+  "src": "6-27",
+  "title": "课时27：在k8s上部署Redis集群下",
+  "file": "6-27 课时27：在k8s上部署Redis集群下【 微信号：itcodeba 】-迅捷文字转语音-1760602798814zh.txt",
+  "lines": 72,
+  "bytes": 12357
+ },
+ {
+  "num": 125,
+  "src": "6-28",
+  "title": "课时28：Redis集群扩容和缩容",
+  "file": "6-28 课时28：Redis集群扩容和缩容【 微信号：itcodeba 】-迅捷文字转语音-1760602812031zh.txt",
+  "lines": 80,
+  "bytes": 13414
+ },
+ {
+  "num": 126,
+  "src": "6-29",
+  "title": "课时29：部署RabbitMQ集群到k8s",
+  "file": "6-29 课时29：部署RabbitMQ集群到k8s【 微信号：itcodeba 】-迅捷文字转语音-1760602822857zh.txt",
+  "lines": 92,
+  "bytes": 15167
+ },
+ {
+  "num": 127,
+  "src": "6-3",
+  "title": "课时3： 准入控制",
+  "file": "6-3 课时3： 准入控制【 微信号：itcodeba 】-迅捷文字转语音-1760601668167zh.txt",
+  "lines": 72,
+  "bytes": 13238
+ },
+ {
+  "num": 128,
+  "src": "6-30",
+  "title": "课时30：解决RabbitMQ密码不生效问题",
+  "file": "6-30 课时30：解决RabbitMQ密码不生效问题【 微信号：itcodeba 】-迅捷文字转语音-1760603152324zh.txt",
+  "lines": 44,
+  "bytes": 6431
+ },
+ {
+  "num": 129,
+  "src": "6-31",
+  "title": "课时31：RabbitMQ扩容和缩容",
+  "file": "6-31 课时31：RabbitMQ扩容和缩容【 微信号：itcodeba 】-迅捷文字转语音-1760603162602zh.txt",
+  "lines": 54,
+  "bytes": 9202
+ },
+ {
+  "num": 130,
+  "src": "6-32",
+  "title": "课时32：Helm v3安装使用",
+  "file": "6-32 课时32：Helm v3安装使用【 微信号：itcodeba 】-迅捷文字转语音-1760603173733zh.txt",
+  "lines": 61,
+  "bytes": 9705
+ },
+ {
+  "num": 131,
+  "src": "6-33",
+  "title": "课时33：Helm目录层级",
+  "file": "6-33 课时33：Helm目录层级【 微信号：itcodeba 】-迅捷文字转语音-1760603186586zh.txt",
+  "lines": 38,
+  "bytes": 6504
+ },
+ {
+  "num": 132,
+  "src": "6-34",
+  "title": "课时34：Helm语法上",
+  "file": "6-34 课时34：Helm语法上【 微信号：itcodeba 】-迅捷文字转语音-1760603193339zh.txt",
+  "lines": 40,
+  "bytes": 5951
+ },
+ {
+  "num": 133,
+  "src": "6-35",
+  "title": "课时35：Helm语法下",
+  "file": "6-35 课时35：Helm语法下【 微信号：itcodeba 】-迅捷文字转语音-1760603199673zh.txt",
+  "lines": 74,
+  "bytes": 13458
+ },
+ {
+  "num": 134,
+  "src": "6-36",
+  "title": "课时36：编写Helm部署RabbitMQ集群",
+  "file": "6-36 课时36：编写Helm部署RabbitMQ集群【 微信号：itcodeba 】-迅捷文字转语音-1760603211212zh.txt",
+  "lines": 190,
+  "bytes": 28531
+ },
+ {
+  "num": 135,
+  "src": "6-37",
+  "title": "课时37：运行自己编写的Helm",
+  "file": "6-37 课时37：运行自己编写的Helm【 微信号：itcodeba 】-迅捷文字转语音-1760603237205zh.txt",
+  "lines": 73,
+  "bytes": 11328
+ },
+ {
+  "num": 136,
+  "src": "6-38",
+  "title": "课时38：部署Zookeeper和Kafka集群",
+  "file": "6-38 课时38：部署Zookeeper和Kafka集群【 微信号：itcodeba 】-迅捷文字转语音-1760603619093zh.txt",
+  "lines": 76,
+  "bytes": 12473
+ },
+ {
+  "num": 137,
+  "src": "6-39",
+  "title": "课时39：测试Kafka和Zookeeper集群",
+  "file": "6-39 课时39：测试Kafka和Zookeeper集群【 微信号：itcodeba 】-迅捷文字转语音-1760603632212zh.txt",
+  "lines": 56,
+  "bytes": 9955
+ },
+ {
+  "num": 138,
+  "src": "6-4",
+  "title": "课时4： Kubernetes服务质量QoS",
+  "file": "6-4 课时4： Kubernetes服务质量QoS【 微信号：itcodeba 】-迅捷文字转语音-1760601679852zh.txt",
+  "lines": 67,
+  "bytes": 12520
+ },
+ {
+  "num": 139,
+  "src": "6-40",
+  "title": "课时40：Kafka和Zookeeper集群扩容缩容",
+  "file": "6-40 课时40：Kafka和Zookeeper集群扩容缩容【 微信号：itcodeba 】-迅捷文字转语音-1760603646189zh.txt",
+  "lines": 21,
+  "bytes": 3034
+ },
+ {
+  "num": 140,
+  "src": "6-5",
+  "title": "课时5： 使用PodPreset预配置容器时区",
+  "file": "6-5 课时5： 使用PodPreset预配置容器时区【 微信号：itcodeba 】-迅捷文字转语音-1760601689952zh.txt",
+  "lines": 120,
+  "bytes": 20009
+ },
+ {
+  "num": 141,
+  "src": "6-6",
+  "title": "课时6： Dashboard基于用户名密码认证",
+  "file": "6-6 课时6： Dashboard基于用户名密码认证【 微信号：itcodeba 】-迅捷文字转语音-1760602118171zh.txt",
+  "lines": 69,
+  "bytes": 11535
+ },
+ {
+  "num": 142,
+  "src": "6-7",
+  "title": "课时7： RBAC实现不同用户不同权限",
+  "file": "6-7 课时7： RBAC实现不同用户不同权限【 微信号：itcodeba 】-迅捷文字转语音-1760602130137zh.txt",
+  "lines": 38,
+  "bytes": 6425
+ },
+ {
+  "num": 143,
+  "src": "6-8",
+  "title": "课时8： ServiceAccount权限管理",
+  "file": "6-8 课时8： ServiceAccount权限管理【 微信号：itcodeba 】-迅捷文字转语音-1760602139758zh.txt",
+  "lines": 75,
+  "bytes": 12695
+ },
+ {
+  "num": 144,
+  "src": "6-9",
+  "title": "课时9： 云原生存储Rook介绍",
+  "file": "6-9 课时9： 云原生存储Rook介绍【 微信号：itcodeba 】-迅捷文字转语音-1760602152389zh.txt",
+  "lines": 94,
+  "bytes": 16715
+ },
+ {
+  "num": 145,
+  "src": "7-1",
+  "title": "课时1：EFK日志收集",
+  "file": "7-1 课时1：EFK日志收集【 微信号：itcodeba 】-迅捷文字转语音-1760603651446zh.txt",
+  "lines": 119,
+  "bytes": 21610
+ },
+ {
+  "num": 146,
+  "src": "7-10",
+  "title": "课时10：Prometheus监控etcd集群",
+  "file": "7-10 课时10：Prometheus监控etcd集群【 微信号：itcodeba 】-迅捷文字转语音-1760604038988zh.txt",
+  "lines": 131,
+  "bytes": 20100
+ },
+ {
+  "num": 147,
+  "src": "7-11",
+  "title": "课时11：Prometheus Exporter",
+  "file": "7-11 课时11：Prometheus Exporter【 微信号：itcodeba 】-迅捷文字转语音-1760604062123zh.txt",
+  "lines": 122,
+  "bytes": 22636
+ }
+]

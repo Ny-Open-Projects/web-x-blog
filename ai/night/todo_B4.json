@@ -1,0 +1,226 @@
+[
+ {
+  "num": 177,
+  "src": "9-1",
+  "title": "课时1：Jenkins CICD介绍",
+  "file": "9-1 课时1：Jenkins CICD介绍【 微信号：itcodeba 】-迅捷文字转语音-1760605785993zh.txt",
+  "lines": 61,
+  "bytes": 12473
+ },
+ {
+  "num": 178,
+  "src": "9-10",
+  "title": "课时10：Jenkins自动构建流水线设计",
+  "file": "9-10 课时10：Jenkins自动构建流水线设计【 微信号：itcodeba 】-迅捷文字转语音-1760606212906zh.txt",
+  "lines": 76,
+  "bytes": 13215
+ },
+ {
+  "num": 179,
+  "src": "9-11",
+  "title": "课时11：使用BlueOcean创建Jenkinsfile",
+  "file": "9-11 课时11：使用BlueOcean创建Jenkinsfile【 微信号：itcodeba 】-迅捷文字转语音-1760606222513zh.txt",
+  "lines": 166,
+  "bytes": 25190
+ },
+ {
+  "num": 180,
+  "src": "9-12",
+  "title": "课时12：Jenkins使用Kubernetes Pod执行",
+  "file": "9-12 课时12：Jenkins使用Kubernetes Pod执行【 微信号：itcodeba 】-迅捷文字转语音-1760606242084zh.txt",
+  "lines": 179,
+  "bytes": 28687
+ },
+ {
+  "num": 181,
+  "src": "9-13",
+  "title": "课时13：Jenkins配置Kubernetes多集群",
+  "file": "9-13 课时13：Jenkins配置Kubernetes多集群【 微信号：itcodeba 】-迅捷文字转语音-1760606597746zh.txt",
+  "lines": 50,
+  "bytes": 8124
+ },
+ {
+  "num": 182,
+  "src": "9-14",
+  "title": "课时14：KUBECONFIG多集群配置",
+  "file": "9-14 课时14：KUBECONFIG多集群配置【 微信号：itcodeba 】-迅捷文字转语音-1760606608414zh.txt",
+  "lines": 42,
+  "bytes": 6625
+ },
+ {
+  "num": 183,
+  "src": "9-15",
+  "title": "课时15：Jenkins自动化构建Java应用上",
+  "file": "9-15 课时15：Jenkins自动化构建Java应用上【 微信号：itcodeba 】-迅捷文字转语音-1760606618744zh.txt",
+  "lines": 134,
+  "bytes": 23517
+ },
+ {
+  "num": 184,
+  "src": "9-16",
+  "title": "课时16：Jenkins自动化构建Java应用下",
+  "file": "9-16 课时16：Jenkins自动化构建Java应用下【 微信号：itcodeba 】-迅捷文字转语音-1760606641059zh.txt",
+  "lines": 30,
+  "bytes": 4896
+ },
+ {
+  "num": 185,
+  "src": "9-17",
+  "title": "课时17：Jenkins自动化构建NodeJS应用",
+  "file": "9-17 课时17：Jenkins自动化构建NodeJS应用【 微信号：itcodeba 】-迅捷文字转语音-1760606646567zh.txt",
+  "lines": 97,
+  "bytes": 15764
+ },
+ {
+  "num": 186,
+  "src": "9-18",
+  "title": "课时18：Docker镜像高级优化及自动化构建建议",
+  "file": "9-18 课时18：Docker镜像高级优化及自动化构建建议【 微信号：itcodeba 】-迅捷文字转语音-1760606663544zh.txt",
+  "lines": 98,
+  "bytes": 18563
+ },
+ {
+  "num": 187,
+  "src": "9-19",
+  "title": "课时19：Jenkins生产环境和UAT环境流水线设计",
+  "file": "9-19 课时19：Jenkins生产环境和UAT环境流水线设计【 微信号：itcodeba 】-迅捷文字转语音-1760606674409zh.txt",
+  "lines": 88,
+  "bytes": 14996
+ },
+ {
+  "num": 188,
+  "src": "9-2",
+  "title": "课时2：Jenkins安装",
+  "file": "9-2 课时2：Jenkins安装【 微信号：itcodeba 】-迅捷文字转语音-1760605794563zh.txt",
+  "lines": 59,
+  "bytes": 10883
+ },
+ {
+  "num": 189,
+  "src": "9-20",
+  "title": "课时20：Jenkins基于角色的账户管理",
+  "file": "9-20 课时20：Jenkins基于角色的账户管理【 微信号：itcodeba 】-迅捷文字转语音-1760606685632zh.txt",
+  "lines": 75,
+  "bytes": 12895
+ },
+ {
+  "num": 190,
+  "src": "9-21",
+  "title": "容器化SpringCloud项目说明",
+  "file": "9-21 容器化SpringCloud项目说明【 微信号：itcodeba 】-迅捷文字转语音-1760607010284zh.txt",
+  "lines": 22,
+  "bytes": 4783
+ },
+ {
+  "num": 191,
+  "src": "9-22",
+  "title": "SpringCloud架构解析上",
+  "file": "9-22 SpringCloud架构解析上【 微信号：itcodeba 】-迅捷文字转语音-1760607018418zh.txt",
+  "lines": 143,
+  "bytes": 27660
+ },
+ {
+  "num": 192,
+  "src": "9-23",
+  "title": "SpringCloud架构解析下",
+  "file": "9-23 SpringCloud架构解析下【 微信号：itcodeba 】-迅捷文字转语音-1760607036791zh.txt",
+  "lines": 21,
+  "bytes": 4535
+ },
+ {
+  "num": 193,
+  "src": "9-24",
+  "title": "如何在k8s上正确部署Eureka",
+  "file": "9-24 如何在k8s上正确部署Eureka【 微信号：itcodeba 】-迅捷文字转语音-1760607042303zh.txt",
+  "lines": 55,
+  "bytes": 9131
+ },
+ {
+  "num": 194,
+  "src": "9-25",
+  "title": "到底要不要用Eureka",
+  "file": "9-25 到底要不要用Eureka【 微信号：itcodeba 】-迅捷文字转语音-1760607049945zh.txt",
+  "lines": 61,
+  "bytes": 10689
+ },
+ {
+  "num": 195,
+  "src": "9-26",
+  "title": "如何正确部署Zuul和ConfigServer到k8s",
+  "file": "9-26 如何正确部署Zuul和ConfigServer到k8s【 微信号：itcodeba 】-迅捷文字转语音-1760607057754zh.txt",
+  "lines": 41,
+  "bytes": 6647
+ },
+ {
+  "num": 196,
+  "src": "9-27",
+  "title": "到底要不要用Zuul和ConfigServer",
+  "file": "9-27 到底要不要用Zuul和ConfigServer【 微信号：itcodeba 】-迅捷文字转语音-1760607063753zh.txt",
+  "lines": 71,
+  "bytes": 12188
+ },
+ {
+  "num": 197,
+  "src": "9-28",
+  "title": "SpringCloud项目总结",
+  "file": "9-28 SpringCloud项目总结【 微信号：itcodeba 】-迅捷文字转语音-1760607072141zh.txt",
+  "lines": 55,
+  "bytes": 10089
+ },
+ {
+  "num": 198,
+  "src": "9-3",
+  "title": "课时3：Jenkins声明式流水线入门",
+  "file": "9-3 课时3：Jenkins声明式流水线入门【 微信号：itcodeba 】-迅捷文字转语音-1760605804009zh.txt",
+  "lines": 133,
+  "bytes": 24406
+ },
+ {
+  "num": 199,
+  "src": "9-4",
+  "title": "课时4：Jenkins变量使用",
+  "file": "9-4 课时4：Jenkins变量使用【 微信号：itcodeba 】-迅捷文字转语音-1760605818946zh.txt",
+  "lines": 69,
+  "bytes": 11770
+ },
+ {
+  "num": 200,
+  "src": "9-5",
+  "title": "课时5：Jenkins级联变量",
+  "file": "9-5 课时5：Jenkins级联变量【 微信号：itcodeba 】-迅捷文字转语音-1760606160831zh.txt",
+  "lines": 46,
+  "bytes": 7966
+ },
+ {
+  "num": 201,
+  "src": "9-6",
+  "title": "课时6：镜像仓库配置",
+  "file": "9-6 课时6：镜像仓库配置【 微信号：itcodeba 】-迅捷文字转语音-1760606171030zh.txt",
+  "lines": 71,
+  "bytes": 12183
+ },
+ {
+  "num": 202,
+  "src": "9-7",
+  "title": "课时7：GitLab安装配置",
+  "file": "9-7 课时7：GitLab安装配置【 微信号：itcodeba 】-迅捷文字转语音-1760606183181zh.txt",
+  "lines": 36,
+  "bytes": 6468
+ },
+ {
+  "num": 203,
+  "src": "9-8",
+  "title": "课时8： Jenkins Credentials配置",
+  "file": "9-8 课时8： Jenkins Credentials配置【 微信号：itcodeba 】-迅捷文字转语音-1760606193933zh.txt",
+  "lines": 25,
+  "bytes": 4228
+ },
+ {
+  "num": 204,
+  "src": "9-9",
+  "title": "课时9：Jenkins BlueOcean入门",
+  "file": "9-9 课时9：Jenkins BlueOcean入门【 微信号：itcodeba 】-迅捷文字转语音-1760606199321zh.txt",
+  "lines": 119,
+  "bytes": 22513
+ }
+]

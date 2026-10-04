@@ -1,0 +1,234 @@
+[
+ {
+  "num": 148,
+  "src": "7-12",
+  "title": "课时12：Prometheus黑盒监控",
+  "file": "7-12 课时12：Prometheus黑盒监控【 微信号：itcodeba 】-迅捷文字转语音-1760604084606zh.txt",
+  "lines": 58,
+  "bytes": 10099
+ },
+ {
+  "num": 149,
+  "src": "7-13",
+  "title": "课时13：Prometheus additional传统配置",
+  "file": "7-13 课时13：Prometheus additional传统配置【 微信号：itcodeba 】-迅捷文字转语音-1760604094076zh.txt",
+  "lines": 108,
+  "bytes": 19436
+ },
+ {
+  "num": 150,
+  "src": "7-14",
+  "title": "课时14：Alertmanager入门",
+  "file": "7-14 课时14：Alertmanager入门【 微信号：itcodeba 】-迅捷文字转语音-1760604522277zh.txt",
+  "lines": 76,
+  "bytes": 15537
+ },
+ {
+  "num": 151,
+  "src": "7-16",
+  "title": "课时16：Prometheus使用微信告警",
+  "file": "7-16 课时16：Prometheus使用微信告警【 微信号：itcodeba 】-迅捷文字转语音-1760604546548zh.txt",
+  "lines": 38,
+  "bytes": 6138
+ },
+ {
+  "num": 152,
+  "src": "7-17",
+  "title": "课时17：Prometheus自定义告警模板",
+  "file": "7-17 课时17：Prometheus自定义告警模板【 微信号：itcodeba 】-迅捷文字转语音-1760604554903zh.txt",
+  "lines": 41,
+  "bytes": 7614
+ },
+ {
+  "num": 153,
+  "src": "7-18",
+  "title": "课时18：Prometheus自动发现",
+  "file": "7-18 课时18：Prometheus自动发现【 微信号：itcodeba 】-迅捷文字转语音-1760604562431zh.txt",
+  "lines": 76,
+  "bytes": 13404
+ },
+ {
+  "num": 154,
+  "src": "7-19",
+  "title": "课时19：Prometheus监控Java JVM",
+  "file": "7-19 课时19：Prometheus监控Java JVM【 微信号：itcodeba 】-迅捷文字转语音-1760604572526zh.txt",
+  "lines": 105,
+  "bytes": 17859
+ },
+ {
+  "num": 155,
+  "src": "7-2",
+  "title": "课时2：使用Filebeat收集容器内日志",
+  "file": "7-2 课时2：使用Filebeat收集容器内日志【 微信号：itcodeba 】-迅捷文字转语音-1760603668671zh.txt",
+  "lines": 89,
+  "bytes": 16913
+ },
+ {
+  "num": 156,
+  "src": "7-20",
+  "title": "课时20：基于Eureka自动发现监控Java JVM",
+  "file": "7-20 课时20：基于Eureka自动发现监控Java JVM【 微信号：itcodeba 】-迅捷文字转语音-1760604585139zh.txt",
+  "lines": 81,
+  "bytes": 14496
+ },
+ {
+  "num": 157,
+  "src": "7-3",
+  "title": "课时3：使用不同资源名称查询日志",
+  "file": "7-3 课时3：使用不同资源名称查询日志【 微信号：itcodeba 】-迅捷文字转语音-1760603683999zh.txt",
+  "lines": 79,
+  "bytes": 13106
+ },
+ {
+  "num": 158,
+  "src": "7-4",
+  "title": "课时4：Prometheus安装及入门",
+  "file": "7-4 课时4：Prometheus安装及入门【 微信号：itcodeba 】-迅捷文字转语音-1760603698746zh.txt",
+  "lines": 119,
+  "bytes": 20933
+ },
+ {
+  "num": 159,
+  "src": "7-5",
+  "title": "课时5：Prometheus Latest安装入门",
+  "file": "7-5 课时5：Prometheus Latest安装入门【 微信号：itcodeba 】-迅捷文字转语音-1760603712801zh.txt",
+  "lines": 118,
+  "bytes": 20882
+ },
+ {
+  "num": 160,
+  "src": "7-6",
+  "title": "课时6：Prometheus Metrics类型",
+  "file": "7-6 课时6：Prometheus Metrics类型【 微信号：itcodeba 】-迅捷文字转语音-1760603975768zh.txt",
+  "lines": 115,
+  "bytes": 21172
+ },
+ {
+  "num": 161,
+  "src": "7-7",
+  "title": "课时7：PromQL基本操作",
+  "file": "7-7 课时7：PromQL基本操作【 微信号：itcodeba 】-迅捷文字转语音-1760603993630zh.txt",
+  "lines": 103,
+  "bytes": 18578
+ },
+ {
+  "num": 162,
+  "src": "7-8",
+  "title": "课时8：PromQL常用函数",
+  "file": "7-8 课时8：PromQL常用函数【 微信号：itcodeba 】-迅捷文字转语音-1760604011895zh.txt",
+  "lines": 123,
+  "bytes": 20230
+ },
+ {
+  "num": 163,
+  "src": "7-9",
+  "title": "课时9：解决Scheduler监控问题",
+  "file": "7-9 课时9：解决Scheduler监控问题【 微信号：itcodeba 】-迅捷文字转语音-1760604029119zh.txt",
+  "lines": 65,
+  "bytes": 11154
+ },
+ {
+  "num": 164,
+  "src": "8-1",
+  "title": "课时1：Ingress Nginx入门",
+  "file": "8-1 课时1：Ingress Nginx入门【 微信号：itcodeba 】-迅捷文字转语音-1760604597628zh.txt",
+  "lines": 71,
+  "bytes": 11721
+ },
+ {
+  "num": 165,
+  "src": "8-10",
+  "title": "课时10： Ingress Nginx基本认证",
+  "file": "8-10 课时10： Ingress Nginx基本认证【 微信号：itcodeba 】-迅捷文字转语音-1760605752133zh.txt",
+  "lines": 21,
+  "bytes": 3508
+ },
+ {
+  "num": 166,
+  "src": "8-11",
+  "title": "课时11： Ingress Nginx监控上",
+  "file": "8-11 课时11： Ingress Nginx监控上【 微信号：itcodeba 】-迅捷文字转语音-1760605760299zh.txt",
+  "lines": 69,
+  "bytes": 12596
+ },
+ {
+  "num": 167,
+  "src": "8-12",
+  "title": "课时12：Ingress Nginx监控下",
+  "file": "8-12 课时12：Ingress Nginx监控下【 微信号：itcodeba 】-迅捷文字转语音-1760605772912zh.txt",
+  "lines": 27,
+  "bytes": 4871
+ },
+ {
+  "num": 168,
+  "src": "8-13",
+  "title": "课时13：k8s1.19下的Ingress配置",
+  "file": "8-13 课时13：k8s1.19下的Ingress配置【 微信号：itcodeba 】-迅捷文字转语音-1760605780404zh.txt",
+  "lines": 36,
+  "bytes": 5812
+ },
+ {
+  "num": 169,
+  "src": "8-2",
+  "title": "课时2： Ingress Nginx域名重定向",
+  "file": "8-2 课时2： Ingress Nginx域名重定向【 微信号：itcodeba 】-迅捷文字转语音-1760605146127zh.txt",
+  "lines": 55,
+  "bytes": 10949
+ },
+ {
+  "num": 170,
+  "src": "8-3",
+  "title": "课时3： Ingress Nginx前后端分离",
+  "file": "8-3 课时3： Ingress Nginx前后端分离【 微信号：itcodeba 】-迅捷文字转语音-1760605159069zh.txt",
+  "lines": 48,
+  "bytes": 7589
+ },
+ {
+  "num": 171,
+  "src": "8-4",
+  "title": "课时4： Ingress Nginx SSL配置",
+  "file": "8-4 课时4： Ingress Nginx SSL配置【 微信号：itcodeba 】-迅捷文字转语音-1760605169904zh.txt",
+  "lines": 87,
+  "bytes": 13532
+ },
+ {
+  "num": 172,
+  "src": "8-5",
+  "title": "课时5： Ingress Nginx黑白名单",
+  "file": "8-5 课时5： Ingress Nginx黑白名单【 微信号：itcodeba 】-迅捷文字转语音-1760605184568zh.txt",
+  "lines": 52,
+  "bytes": 8566
+ },
+ {
+  "num": 173,
+  "src": "8-6",
+  "title": "课时6： Ingress Nginx匹配请求头",
+  "file": "8-6 课时6： Ingress Nginx匹配请求头【 微信号：itcodeba 】-迅捷文字转语音-1760605193732zh.txt",
+  "lines": 18,
+  "bytes": 3935
+ },
+ {
+  "num": 174,
+  "src": "8-7",
+  "title": "课时7： Ingress Nginx速率限制",
+  "file": "8-7 课时7： Ingress Nginx速率限制【 微信号：itcodeba 】-迅捷文字转语音-1760605199494zh.txt",
+  "lines": 36,
+  "bytes": 5955
+ },
+ {
+  "num": 175,
+  "src": "8-8",
+  "title": "课时8： Ingress Nginx实现灰度金丝雀发布",
+  "file": "8-8 课时8： Ingress Nginx实现灰度金丝雀发布【 微信号：itcodeba 】-迅捷文字转语音-1760605208214zh.txt",
+  "lines": 89,
+  "bytes": 14851
+ },
+ {
+  "num": 176,
+  "src": "8-9",
+  "title": "课时9： Ingress Nginx自定义错误页面",
+  "file": "8-9 课时9： Ingress Nginx自定义错误页面【 微信号：itcodeba 】-迅捷文字转语音-1760605223718zh.txt",
+  "lines": 68,
+  "bytes": 10725
+ }
+]

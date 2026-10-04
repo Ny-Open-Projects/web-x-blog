@@ -1,0 +1,202 @@
+[
+ {
+  "num": 96,
+  "src": "5-60",
+  "title": "Topology拓扑域概念",
+  "file": "5-60 Topology拓扑域概念【 微信号：itcodeba 】-迅捷文字转语音-1760601212907zh.txt",
+  "lines": 53,
+  "bytes": 8201
+ },
+ {
+  "num": 97,
+  "src": "5-61",
+  "title": "使用Topology实现多地多机房部署",
+  "file": "5-61 使用Topology实现多地多机房部署【 微信号：itcodeba 】-迅捷文字转语音-1760601220871zh.txt",
+  "lines": 66,
+  "bytes": 11028
+ },
+ {
+  "num": 98,
+  "src": "5-62",
+  "title": "临时容器概念和配置",
+  "file": "5-62 临时容器概念和配置【 微信号：itcodeba 】-迅捷文字转语音-1760601233684zh.txt",
+  "lines": 52,
+  "bytes": 8847
+ },
+ {
+  "num": 99,
+  "src": "5-63",
+  "title": "使用临时容器在线debug",
+  "file": "5-63 使用临时容器在线debug【 微信号：itcodeba 】-迅捷文字转语音-1760601587639zh.txt",
+  "lines": 66,
+  "bytes": 10620
+ },
+ {
+  "num": 100,
+  "src": "5-64",
+  "title": "RBAC权限管理概念",
+  "file": "5-64 RBAC权限管理概念【 微信号：itcodeba 】-迅捷文字转语音-1760601602843zh.txt",
+  "lines": 166,
+  "bytes": 28459
+ },
+ {
+  "num": 101,
+  "src": "5-65",
+  "title": "RBAC使用",
+  "file": "5-65 RBAC使用【 微信号：itcodeba 】-迅捷文字转语音-1760601628236zh.txt",
+  "lines": 106,
+  "bytes": 21028
+ },
+ {
+  "num": 102,
+  "src": "5-7",
+  "title": "零宕机发布应用必备知识：Pod三种探针",
+  "file": "5-7 零宕机发布应用必备知识：Pod三种探针【 微信号：itcodeba 】-迅捷文字转语音-1760599148070zh.txt",
+  "lines": 57,
+  "bytes": 9830
+ },
+ {
+  "num": 103,
+  "src": "5-8",
+  "title": "零宕机必备知识：StartupProbe",
+  "file": "5-8 零宕机必备知识：StartupProbe【 微信号：itcodeba 】-迅捷文字转语音-1760599159413zh.txt",
+  "lines": 115,
+  "bytes": 20528
+ },
+ {
+  "num": 104,
+  "src": "5-9",
+  "title": "零宕机必备知识：Liveness和Readiness",
+  "file": "5-9 零宕机必备知识：Liveness和Readiness【 微信号：itcodeba 】-迅捷文字转语音-1760599175189zh.txt",
+  "lines": 51,
+  "bytes": 8045
+ },
+ {
+  "num": 105,
+  "src": "6-1",
+  "title": "课时1： 安装一键式k8s资源平台Ratel到k8s集群中",
+  "file": "6-1 课时1： 安装一键式k8s资源平台Ratel到k8s集群中【 微信号：itcodeba 】-迅捷文字转语音-1760601644412zh.txt",
+  "lines": 46,
+  "bytes": 8231
+ },
+ {
+  "num": 106,
+  "src": "6-10",
+  "title": "课时10：Rook部署",
+  "file": "6-10 课时10：Rook部署【 微信号：itcodeba 】-迅捷文字转语音-1760602165849zh.txt",
+  "lines": 86,
+  "bytes": 13583
+ },
+ {
+  "num": 108,
+  "src": "6-12",
+  "title": "课时12：使用Rook部署Ceph集群下",
+  "file": "6-12 课时12：使用Rook部署Ceph集群下【 微信号：itcodeba 】-迅捷文字转语音-1760602181549zh.txt",
+  "lines": 58,
+  "bytes": 8883
+ },
+ {
+  "num": 109,
+  "src": "6-13",
+  "title": "课时13：创建块存储类型的动态存储",
+  "file": "6-13 课时13：创建块存储类型的动态存储【 微信号：itcodeba 】-迅捷文字转语音-1760602190493zh.txt",
+  "lines": 50,
+  "bytes": 8555
+ },
+ {
+  "num": 110,
+  "src": "6-14",
+  "title": "课时14：StatefulSet动态申请存储",
+  "file": "6-14 课时14：StatefulSet动态申请存储【 微信号：itcodeba 】-迅捷文字转语音-1760602410711zh.txt",
+  "lines": 52,
+  "bytes": 8326
+ },
+ {
+  "num": 111,
+  "src": "6-15",
+  "title": "课时15：使用PVC动态申请存储",
+  "file": "6-15 课时15：使用PVC动态申请存储【 微信号：itcodeba 】-迅捷文字转语音-1760602422850zh.txt",
+  "lines": 26,
+  "bytes": 4838
+ },
+ {
+  "num": 112,
+  "src": "6-16",
+  "title": "课时16：共享文件系统类型的StorageClass",
+  "file": "6-16 课时16：共享文件系统类型的StorageClass【 微信号：itcodeba 】-迅捷文字转语音-1760602431743zh.txt",
+  "lines": 52,
+  "bytes": 8549
+ },
+ {
+  "num": 113,
+  "src": "6-17",
+  "title": "课时17：PVC在线扩容和PVC快照",
+  "file": "6-17 课时17：PVC在线扩容和PVC快照【 微信号：itcodeba 】-迅捷文字转语音-1760602442445zh.txt",
+  "lines": 33,
+  "bytes": 4393
+ },
+ {
+  "num": 114,
+  "src": "6-18",
+  "title": "课时18：Rook集群清理和重建",
+  "file": "6-18 课时18：Rook集群清理和重建【 微信号：itcodeba 】-迅捷文字转语音-1760602449487zh.txt",
+  "lines": 24,
+  "bytes": 3282
+ },
+ {
+  "num": 115,
+  "src": "6-19",
+  "title": "课时19：PVC在线扩容使用",
+  "file": "6-19 课时19：PVC在线扩容使用【 微信号：itcodeba 】-迅捷文字转语音-1760602454756zh.txt",
+  "lines": 41,
+  "bytes": 6413
+ },
+ {
+  "num": 116,
+  "src": "6-2",
+  "title": "课时2： Ratel简单使用",
+  "file": "6-2 课时2： Ratel简单使用【 微信号：itcodeba 】-迅捷文字转语音-1760601653895zh.txt",
+  "lines": 98,
+  "bytes": 18867
+ },
+ {
+  "num": 117,
+  "src": "6-20",
+  "title": "课时20：PVC快照和回滚",
+  "file": "6-20 课时20：PVC快照和回滚【 微信号：itcodeba 】-迅捷文字转语音-1760602461456zh.txt",
+  "lines": 54,
+  "bytes": 8994
+ },
+ {
+  "num": 118,
+  "src": "6-21",
+  "title": "课时21：Rook Ceph xfs_repair问题修复",
+  "file": "6-21 课时21：Rook Ceph xfs_repair问题修复【 微信号：itcodeba 】-迅捷文字转语音-1760602472779zh.txt",
+  "lines": 133,
+  "bytes": 22546
+ },
+ {
+  "num": 119,
+  "src": "6-22",
+  "title": "课时22：存储回顾",
+  "file": "6-22 课时22：存储回顾【 微信号：itcodeba 】-迅捷文字转语音-1760602747450zh.txt",
+  "lines": 47,
+  "bytes": 8638
+ },
+ {
+  "num": 120,
+  "src": "6-23",
+  "title": "课时23：容器化中间件基本说明",
+  "file": "6-23 课时23：容器化中间件基本说明【 微信号：itcodeba 】-迅捷文字转语音-1760602757656zh.txt",
+  "lines": 25,
+  "bytes": 4074
+ },
+ {
+  "num": 121,
+  "src": "6-24",
+  "title": "课时24：如何部署一个容器到k8s",
+  "file": "6-24 课时24：如何部署一个容器到k8s【 微信号：itcodeba 】-迅捷文字转语音-1760602764724zh.txt",
+  "lines": 115,
+  "bytes": 20625
+ }
+]

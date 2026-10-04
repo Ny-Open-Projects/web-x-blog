@@ -1,0 +1,66 @@
+title: web-x-blog
+subtitle: 技术笔记与面试题库
+description: 从机器翻译素材转换而来的技术内容，由 agent 维护
+author: Ny
+language: zh-CN
+timezone: Asia/Shanghai
+
+# URL —— 换域名时改这里
+url: http://example.com
+root: /
+
+theme: landscape2
+sourceDir: source
+
+# 内容目录：target 的东西靠这里分类进站
+# 约定见 ../../ai/AGENTS.md
+new_post_name: :title.md
+
+default_layout: post
+titlecase: false
+filename_case: false
+
+post_asset_folder: false
+relative_link: false
+future: true
+
+# 分类 / 标签（target 的 front-matter 靠这两个字段对齐）
+default_category: 未分类
+category_map:
+  es: Elasticsearch
+  k8s: Kubernetes
+  go: Go
+  py: Python
+  sql: SQL
+tag_map:
+
+exclude:
+  - "README.md"
+  - "AGENTS.md"
+
+# 分页 —— 84 篇起站,首页每页 20 篇,归档一次铺完
+index_generator:
+  per_page: 20
+  layout: index
+  enable: true
+
+archive_generator:
+  per_page: 100
+  layout: archive
+  enable: true
+
+tag_generator:
+  enable: true
+  per_page: 50
+  layout: tag
+
+category_generator:
+  enable: true
+  per_page: 50
+  layout: category
+
+# 代码块:关掉行号,保留语法高亮(高亮走内置 highlight)
+highlight:
+  enable: true
+  line_number: false
+  tab: 4

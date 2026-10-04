@@ -1,0 +1,268 @@
+[
+  {
+    "num": 165,
+    "src": "8-10",
+    "title": "课时10： Ingress Nginx基本认证",
+    "source": "work/source/3.k8s3-top/8-10 课时10： Ingress Nginx基本认证【 微信号：itcodeba 】-迅捷文字转语音-1760605752133zh.txt",
+    "exists": true
+  },
+  {
+    "num": 166,
+    "src": "8-11",
+    "title": "课时11： Ingress Nginx监控上",
+    "source": "work/source/3.k8s3-top/8-11 课时11： Ingress Nginx监控上【 微信号：itcodeba 】-迅捷文字转语音-1760605760299zh.txt",
+    "exists": true
+  },
+  {
+    "num": 167,
+    "src": "8-12",
+    "title": "课时12：Ingress Nginx监控下",
+    "source": "work/source/3.k8s3-top/8-12 课时12：Ingress Nginx监控下【 微信号：itcodeba 】-迅捷文字转语音-1760605772912zh.txt",
+    "exists": true
+  },
+  {
+    "num": 168,
+    "src": "8-13",
+    "title": "课时13：k8s1.19下的Ingress配置",
+    "source": "work/source/3.k8s3-top/8-13 课时13：k8s1.19下的Ingress配置【 微信号：itcodeba 】-迅捷文字转语音-1760605780404zh.txt",
+    "exists": true
+  },
+  {
+    "num": 171,
+    "src": "8-4",
+    "title": "课时4： Ingress Nginx SSL配置",
+    "source": "work/source/3.k8s3-top/8-4 课时4： Ingress Nginx SSL配置【 微信号：itcodeba 】-迅捷文字转语音-1760605169904zh.txt",
+    "exists": true
+  },
+  {
+    "num": 172,
+    "src": "8-5",
+    "title": "课时5： Ingress Nginx黑白名单",
+    "source": "work/source/3.k8s3-top/8-5 课时5： Ingress Nginx黑白名单【 微信号：itcodeba 】-迅捷文字转语音-1760605184568zh.txt",
+    "exists": true
+  },
+  {
+    "num": 173,
+    "src": "8-6",
+    "title": "课时6： Ingress Nginx匹配请求头",
+    "source": "work/source/3.k8s3-top/8-6 课时6： Ingress Nginx匹配请求头【 微信号：itcodeba 】-迅捷文字转语音-1760605193732zh.txt",
+    "exists": true
+  },
+  {
+    "num": 174,
+    "src": "8-7",
+    "title": "课时7： Ingress Nginx速率限制",
+    "source": "work/source/3.k8s3-top/8-7 课时7： Ingress Nginx速率限制【 微信号：itcodeba 】-迅捷文字转语音-1760605199494zh.txt",
+    "exists": true
+  },
+  {
+    "num": 175,
+    "src": "8-8",
+    "title": "课时8： Ingress Nginx实现灰度金丝雀发布",
+    "source": "work/source/3.k8s3-top/8-8 课时8： Ingress Nginx实现灰度金丝雀发布【 微信号：itcodeba 】-迅捷文字转语音-1760605208214zh.txt",
+    "exists": true
+  },
+  {
+    "num": 176,
+    "src": "8-9",
+    "title": "课时9： Ingress Nginx自定义错误页面",
+    "source": "work/source/3.k8s3-top/8-9 课时9： Ingress Nginx自定义错误页面【 微信号：itcodeba 】-迅捷文字转语音-1760605223718zh.txt",
+    "exists": true
+  },
+  {
+    "num": 177,
+    "src": "9-1",
+    "title": "课时1：Jenkins CICD介绍",
+    "source": "work/source/3.k8s3-top/9-1 课时1：Jenkins CICD介绍【 微信号：itcodeba 】-迅捷文字转语音-1760605785993zh.txt",
+    "exists": true
+  },
+  {
+    "num": 178,
+    "src": "9-10",
+    "title": "课时10：Jenkins自动构建流水线设计",
+    "source": "work/source/3.k8s3-top/9-10 课时10：Jenkins自动构建流水线设计【 微信号：itcodeba 】-迅捷文字转语音-1760606212906zh.txt",
+    "exists": true
+  },
+  {
+    "num": 179,
+    "src": "9-11",
+    "title": "课时11：使用BlueOcean创建Jenkinsfile",
+    "source": "work/source/3.k8s3-top/9-11 课时11：使用BlueOcean创建Jenkinsfile【 微信号：itcodeba 】-迅捷文字转语音-1760606222513zh.txt",
+    "exists": true
+  },
+  {
+    "num": 180,
+    "src": "9-12",
+    "title": "课时12：Jenkins使用Kubernetes Pod执行",
+    "source": "work/source/3.k8s3-top/9-12 课时12：Jenkins使用Kubernetes Pod执行【 微信号：itcodeba 】-迅捷文字转语音-1760606242084zh.txt",
+    "exists": true
+  },
+  {
+    "num": 181,
+    "src": "9-13",
+    "title": "课时13：Jenkins配置Kubernetes多集群",
+    "source": "work/source/3.k8s3-top/9-13 课时13：Jenkins配置Kubernetes多集群【 微信号：itcodeba 】-迅捷文字转语音-1760606597746zh.txt",
+    "exists": true
+  },
+  {
+    "num": 182,
+    "src": "9-14",
+    "title": "课时14：KUBECONFIG多集群配置",
+    "source": "work/source/3.k8s3-top/9-14 课时14：KUBECONFIG多集群配置【 微信号：itcodeba 】-迅捷文字转语音-1760606608414zh.txt",
+    "exists": true
+  },
+  {
+    "num": 183,
+    "src": "9-15",
+    "title": "课时15：Jenkins自动化构建Java应用上",
+    "source": "work/source/3.k8s3-top/9-15 课时15：Jenkins自动化构建Java应用上【 微信号：itcodeba 】-迅捷文字转语音-1760606618744zh.txt",
+    "exists": true
+  },
+  {
+    "num": 184,
+    "src": "9-16",
+    "title": "课时16：Jenkins自动化构建Java应用下",
+    "source": "work/source/3.k8s3-top/9-16 课时16：Jenkins自动化构建Java应用下【 微信号：itcodeba 】-迅捷文字转语音-1760606641059zh.txt",
+    "exists": true
+  },
+  {
+    "num": 185,
+    "src": "9-17",
+    "title": "课时17：Jenkins自动化构建NodeJS应用",
+    "source": "work/source/3.k8s3-top/9-17 课时17：Jenkins自动化构建NodeJS应用【 微信号：itcodeba 】-迅捷文字转语音-1760606646567zh.txt",
+    "exists": true
+  },
+  {
+    "num": 186,
+    "src": "9-18",
+    "title": "课时18：Docker镜像高级优化及自动化构建建议",
+    "source": "work/source/3.k8s3-top/9-18 课时18：Docker镜像高级优化及自动化构建建议【 微信号：itcodeba 】-迅捷文字转语音-1760606663544zh.txt",
+    "exists": true
+  },
+  {
+    "num": 187,
+    "src": "9-19",
+    "title": "课时19：Jenkins生产环境和UAT环境流水线设计",
+    "source": "work/source/3.k8s3-top/9-19 课时19：Jenkins生产环境和UAT环境流水线设计【 微信号：itcodeba 】-迅捷文字转语音-1760606674409zh.txt",
+    "exists": true
+  },
+  {
+    "num": 188,
+    "src": "9-2",
+    "title": "课时2：Jenkins安装",
+    "source": "work/source/3.k8s3-top/9-2 课时2：Jenkins安装【 微信号：itcodeba 】-迅捷文字转语音-1760605794563zh.txt",
+    "exists": true
+  },
+  {
+    "num": 189,
+    "src": "9-20",
+    "title": "课时20：Jenkins基于角色的账户管理",
+    "source": "work/source/3.k8s3-top/9-20 课时20：Jenkins基于角色的账户管理【 微信号：itcodeba 】-迅捷文字转语音-1760606685632zh.txt",
+    "exists": true
+  },
+  {
+    "num": 190,
+    "src": "9-21",
+    "title": "容器化SpringCloud项目说明",
+    "source": "work/source/3.k8s3-top/9-21 容器化SpringCloud项目说明【 微信号：itcodeba 】-迅捷文字转语音-1760607010284zh.txt",
+    "exists": true
+  },
+  {
+    "num": 191,
+    "src": "9-22",
+    "title": "SpringCloud架构解析上",
+    "source": "work/source/3.k8s3-top/9-22 SpringCloud架构解析上【 微信号：itcodeba 】-迅捷文字转语音-1760607018418zh.txt",
+    "exists": true
+  },
+  {
+    "num": 192,
+    "src": "9-23",
+    "title": "SpringCloud架构解析下",
+    "source": "work/source/3.k8s3-top/9-23 SpringCloud架构解析下【 微信号：itcodeba 】-迅捷文字转语音-1760607036791zh.txt",
+    "exists": true
+  },
+  {
+    "num": 193,
+    "src": "9-24",
+    "title": "如何在k8s上正确部署Eureka",
+    "source": "work/source/3.k8s3-top/9-24 如何在k8s上正确部署Eureka【 微信号：itcodeba 】-迅捷文字转语音-1760607042303zh.txt",
+    "exists": true
+  },
+  {
+    "num": 194,
+    "src": "9-25",
+    "title": "到底要不要用Eureka",
+    "source": "work/source/3.k8s3-top/9-25 到底要不要用Eureka【 微信号：itcodeba 】-迅捷文字转语音-1760607049945zh.txt",
+    "exists": true
+  },
+  {
+    "num": 195,
+    "src": "9-26",
+    "title": "如何正确部署Zuul和ConfigServer到k8s",
+    "source": "work/source/3.k8s3-top/9-26 如何正确部署Zuul和ConfigServer到k8s【 微信号：itcodeba 】-迅捷文字转语音-1760607057754zh.txt",
+    "exists": true
+  },
+  {
+    "num": 196,
+    "src": "9-27",
+    "title": "到底要不要用Zuul和ConfigServer",
+    "source": "work/source/3.k8s3-top/9-27 到底要不要用Zuul和ConfigServer【 微信号：itcodeba 】-迅捷文字转语音-1760607063753zh.txt",
+    "exists": true
+  },
+  {
+    "num": 197,
+    "src": "9-28",
+    "title": "SpringCloud项目总结",
+    "source": "work/source/3.k8s3-top/9-28 SpringCloud项目总结【 微信号：itcodeba 】-迅捷文字转语音-1760607072141zh.txt",
+    "exists": true
+  },
+  {
+    "num": 198,
+    "src": "9-3",
+    "title": "课时3：Jenkins声明式流水线入门",
+    "source": "work/source/3.k8s3-top/9-3 课时3：Jenkins声明式流水线入门【 微信号：itcodeba 】-迅捷文字转语音-1760605804009zh.txt",
+    "exists": true
+  },
+  {
+    "num": 199,
+    "src": "9-4",
+    "title": "课时4：Jenkins变量使用",
+    "source": "work/source/3.k8s3-top/9-4 课时4：Jenkins变量使用【 微信号：itcodeba 】-迅捷文字转语音-1760605818946zh.txt",
+    "exists": true
+  },
+  {
+    "num": 200,
+    "src": "9-5",
+    "title": "课时5：Jenkins级联变量",
+    "source": "work/source/3.k8s3-top/9-5 课时5：Jenkins级联变量【 微信号：itcodeba 】-迅捷文字转语音-1760606160831zh.txt",
+    "exists": true
+  },
+  {
+    "num": 201,
+    "src": "9-6",
+    "title": "课时6：镜像仓库配置",
+    "source": "work/source/3.k8s3-top/9-6 课时6：镜像仓库配置【 微信号：itcodeba 】-迅捷文字转语音-1760606171030zh.txt",
+    "exists": true
+  },
+  {
+    "num": 202,
+    "src": "9-7",
+    "title": "课时7：GitLab安装配置",
+    "source": "work/source/3.k8s3-top/9-7 课时7：GitLab安装配置【 微信号：itcodeba 】-迅捷文字转语音-1760606183181zh.txt",
+    "exists": true
+  },
+  {
+    "num": 203,
+    "src": "9-8",
+    "title": "课时8： Jenkins Credentials配置",
+    "source": "work/source/3.k8s3-top/9-8 课时8： Jenkins Credentials配置【 微信号：itcodeba 】-迅捷文字转语音-1760606193933zh.txt",
+    "exists": true
+  },
+  {
+    "num": 204,
+    "src": "9-9",
+    "title": "课时9：Jenkins BlueOcean入门",
+    "source": "work/source/3.k8s3-top/9-9 课时9：Jenkins BlueOcean入门【 微信号：itcodeba 】-迅捷文字转语音-1760606199321zh.txt",
+    "exists": true
+  }
+]

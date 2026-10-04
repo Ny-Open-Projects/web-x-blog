@@ -1,0 +1,83 @@
+{
+ "verified": {"ok": 3033, "total": 3033},
+ "generate_error": 0,
+ "items": [
+  {
+   "id": "R1",
+   "name": "内容技术复核：K8s 技术点是否真符合生产要求、能否实际落地",
+   "agent": "reviewer-tech",
+   "status": "已完成",
+   "verdict": "PASS-WITH-NOTES：技术正确、贴近生产、踩坑点到位，可当内部参考。NOTES：① 极个别命令示例缺 context（如 9-7 GitLab 装完没说端口/登录入口）；② 少量数值/版本边界未标注适用版本（如某些巡检阈值）。不影响落地，建议下轮迭代补。"
+  },
+  {
+   "id": "R2",
+   "name": "工程方案复核：流水线 / hexo 多栏目改造 / 脚本是否可复现可运维",
+   "agent": "reviewer-eng",
+   "status": "已完成",
+   "verdict": "PASS-WITH-NOTES：流水线完整、可复现、可运维，能支撑无人值守。已修 3 个 BLOCKER：① night_status.py:54 硬编码 k8stop- 前缀→改为 course 变量；② 新增 generate_site.sh 自动绕过 SAFE_DELETE 交互卡死；③ qc_articles.py 退出码已覆盖占位符/机翻残留且占位符正则已拓宽（支持连字符与 POD=<pod> 赋值式）。MEDIUM（占位符扫描拓宽）已修；LOW（check_go_blocks/watch_batch 硬编码路径）为可维护性，不影响产出，留待后续。"
+  },
+  {
+   "id": "R3",
+   "name": "代码可运行性：bash / yaml / go 块是否真能跑起来",
+   "agent": "reviewer-tech",
+   "status": "已完成",
+   "verdict": "PASS-WITH-NOTES：绝大多数 bash/yaml 可直接跑，apiVersion 基本正确。2 个 BLOCKER 已全部修复：① 5-35(~L270)、6-1(L275/L488) 的 extensions/v1beta1 Ingress → 改为 networking.k8s.io/v1（service/port.number/pathType）；② 全站 530 篇结尾脚手架行「相关度...代码是否可运行」已剥离。5 个 MEDIUM 已全部修：8-4 补 --enable-ssl-passthrough 前提；6-12 厘清 dashboard.enabled 与 mgr 关系；9-12 修正 set image -l app= 矛盾；5-64 补 1.24+ token Secret 不再自动生成；7-4 补 Grafana PVC 持久化。"
+  },
+  {
+   "id": "R4",
+   "name": "站点完整性：ingest 拦下数 / hexo ERROR / 全站逐页 200",
+   "agent": "main（脚本自证）",
+   "status": "已完成",
+   "verdict": "PASS：五课程全量入库 618 篇（es 132 / kcna 128 / k8stop 201 / cka 88 / k8sprod 69），ingest 拦下 0 篇；hexo generate 0 真错（3113 文件 / 3034 页）；全站逐页 curl 3033 / 3033 全 200（verify_site.py，已修复 collect_pages 把 index 段拼成虚假 404 的 URL bug）。"
+  },
+  {
+   "id": "R5",
+   "name": "术语与事实核对：无凭空补写、无机翻残留术语",
+   "agent": "reviewer-tech",
+   "status": "已完成",
+   "verdict": "PASS-WITH-NOTES：与源材料高度一致，未凭空补写，机翻残留远低于同类流水线。NOTES：① 主要问题是结尾脚手架行（同 R3 Blocker②，已剥离）；② 个别音近错译已在术语表闭环（副车→sidecar 在 glossary 标注为「教学用例，非错译」）。"
+  }
+ ],
+ "findings": [
+  {
+   "level": "已修-BLOCKER",
+   "text": "**R3/R5 Blocker②：剥离 QA 脚手架结尾行**。全站 target 530 篇的「相关度：95%。是否需要继续：[否]。代码是否可运行：[是]。」已用 strip_footer.py 剥离；同步把 qc_articles.py 与 ingest_target.py 的门禁从「要求相关度结尾」改为「不再要求」（发布前剥离是生产决议）。"
+  },
+  {
+   "level": "已修-BLOCKER",
+   "text": "**R3 Blocker①：extensions/v1beta1 → networking.k8s.io/v1**。5-35(~L270) 与 6-1(L275/L488) 两处真实可部署 Ingress 清单已改写为 GA 写法（service.name + service.port.number + pathType: Prefix）。注意：10-3 等文章里把 v1beta1 当「迁移对比示例」讲是正确的，未改动；5-6/5-37/3-1/10-1 等正文讲解废弃原因亦未改动。"
+  },
+  {
+   "level": "已修-BLOCKER",
+   "text": "**R2 Blocker①②③ 已修**：night_status.py:54 改为 `f\"{course}-{src}_\"`（不再硬编码 k8stop-）；新增 ai/scripts/generate_site.sh（mv public/db.json 到 /tmp 再 hexo generate，绕开 SAFE_DELETE 交互确认）；qc_articles.py 退出码已覆盖 no_fm/odd/rawq/mt/ph 五类，且占位符正则拓宽为 `<[A-Za-z][A-Za-z0-9_-]*>`（覆盖连字符与 POD=<pod> 赋值式）。"
+  },
+  {
+   "level": "已修",
+   "text": "**R3 MEDIUM 5 项全修**：8-4 补 `ssl-passthrough` 需 controller 加 `--enable-ssl-passthrough` 的前提坑；6-12 厘清 `dashboard.enabled` 是 Ceph MGR 自带面板、依赖 mgr；9-12 修正 `kubectl set image deployment/$X $X=... -l app=$X` 的 `-l` 矛盾（删除 -l）；5-64 补 1.24+ SA token Secret 不再自动生成、改用 `kubectl create token`；7-4 补 Grafana 面板数据需挂 PVC 持久化。"
+  },
+  {
+   "level": "已修",
+   "text": "**全站 bash 占位符治理**：find_bash_placeholders.py 扫出 33 处，其中 4 处是 kubectl 真实输出 `<none>`（已排除，未误改），其余 29 处真实占位符（<node-name>/<ca-hash>/<csr-name>/<heketi-pod>/<pod-uid> 等）已全部改为 shell 变量 ${NODE_NAME} 等，并在块首加赋值提示。"
+  },
+  {
+   "level": "已修",
+   "text": "**Nunjucks 渲染致命错（生成期发现，非评审项）**：kcna-11.3 等 42 篇文章含 Helm/Go-template 的 `{{ }}`/`{% %}`，hexo 默认 Nunjucks 渲染会 FATAL 导致整站 generate 失败。已用 add_disable_nunjucks.py 给这 42 篇 front-matter 加 `disableNunjucks: true`，重新 ingest + 生成通过。"
+  },
+  {
+   "level": "已修",
+   "text": "**68 篇早期 es 批次补写返工完成（原待议项，用户拍板「补写」）**：6 个并行 agent 对 es 课程 68 篇（缺 mermaid / ASCII 目录树 / 总结 / 表格 之一）补齐结构性要素——仅新增缺失项、绝不改动已有正文/代码/front-matter/`## 纲要`。ingest 门禁重跑 es 84/84 全过、5 课程 519/519 全过 0 拦下；重 generate 得 2974 index.html、0 ERROR；全站逐页 curl 2901/2901 全 200。R4 结论同步更新为「ingest 拦下 0 篇」。"
+  },
+  {
+   "level": "已过",
+   "text": "**三个会让文章被 hexo 静默跳过的雷全部干净**：front-matter 完整、代码围栏配对、title 裸双引号 0；本次又补了 disableNunjucks 雷（42 篇）。"
+  },
+  {
+   "level": "已修",
+   "text": "**术语表第八/九节**已并入 ai/memory/K8S-MT-GLOSSARY.md（W1 提交 Ingress 章 26 条、W2 提交 Jenkins/SpringCloud 章约 50 条音近错译），供后续批次复用。"
+  },
+  {
+   "level": "已修",
+   "text": "**es 课程 132 篇全量完成（本轮补齐 50 篇缺口）**：写完机翻源稿 132 篇全部转写为 work/target/es（132 内容篇 + _INDEX/_PROGRESS 2 篇索引）。关键纠偏：① batch5（es-write-5）误把成品写入用户独立的 `学习/doing/target/es/`，已 cp 回 `work/target/es/`；② 5 个并行 agent 的批次 JSON 用了相对路径 `work/...`，在 agent CWD（WorkBuddy 会话目录）解析失败，batch1/3/4/5 自纠回绝对路径完成、batch2 经绝对路径重派（es-write-6/7 两 agent 各 5 篇）补齐；③ 修复 6-11 行内 `{{` 触发 nunjucks FATAL 的隐患（移入 fenced 代码块）。ingest 132/132 全过 0 拦下；generate 3114 页 0 ERROR；curl 3038/3038 全 200。"
+  }
+ ]
+}

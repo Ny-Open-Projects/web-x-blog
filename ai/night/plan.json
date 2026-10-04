@@ -1,0 +1,896 @@
+{
+ "course": "k8stop",
+ "created": "2026-10-03",
+ "batches": [
+  {
+   "id": "B1",
+   "lo": 96,
+   "hi": 121,
+   "agent": "k8stop-n1"
+  },
+  {
+   "id": "B2",
+   "lo": 122,
+   "hi": 147,
+   "agent": "k8stop-n2"
+  },
+  {
+   "id": "B3",
+   "lo": 148,
+   "hi": 176,
+   "agent": "k8stop-n3"
+  },
+  {
+   "id": "B4",
+   "lo": 177,
+   "hi": 204,
+   "agent": "k8stop-n4"
+  }
+ ],
+ "items": [
+  {
+   "num": 96,
+   "src": "5-60",
+   "title": "Topology拓扑域概念",
+   "file": "5-60 Topology拓扑域概念【 微信号：itcodeba 】-迅捷文字转语音-1760601212907zh.txt",
+   "lines": 53,
+   "bytes": 8201
+  },
+  {
+   "num": 97,
+   "src": "5-61",
+   "title": "使用Topology实现多地多机房部署",
+   "file": "5-61 使用Topology实现多地多机房部署【 微信号：itcodeba 】-迅捷文字转语音-1760601220871zh.txt",
+   "lines": 66,
+   "bytes": 11028
+  },
+  {
+   "num": 98,
+   "src": "5-62",
+   "title": "临时容器概念和配置",
+   "file": "5-62 临时容器概念和配置【 微信号：itcodeba 】-迅捷文字转语音-1760601233684zh.txt",
+   "lines": 52,
+   "bytes": 8847
+  },
+  {
+   "num": 99,
+   "src": "5-63",
+   "title": "使用临时容器在线debug",
+   "file": "5-63 使用临时容器在线debug【 微信号：itcodeba 】-迅捷文字转语音-1760601587639zh.txt",
+   "lines": 66,
+   "bytes": 10620
+  },
+  {
+   "num": 100,
+   "src": "5-64",
+   "title": "RBAC权限管理概念",
+   "file": "5-64 RBAC权限管理概念【 微信号：itcodeba 】-迅捷文字转语音-1760601602843zh.txt",
+   "lines": 166,
+   "bytes": 28459
+  },
+  {
+   "num": 101,
+   "src": "5-65",
+   "title": "RBAC使用",
+   "file": "5-65 RBAC使用【 微信号：itcodeba 】-迅捷文字转语音-1760601628236zh.txt",
+   "lines": 106,
+   "bytes": 21028
+  },
+  {
+   "num": 102,
+   "src": "5-7",
+   "title": "零宕机发布应用必备知识：Pod三种探针",
+   "file": "5-7 零宕机发布应用必备知识：Pod三种探针【 微信号：itcodeba 】-迅捷文字转语音-1760599148070zh.txt",
+   "lines": 57,
+   "bytes": 9830
+  },
+  {
+   "num": 103,
+   "src": "5-8",
+   "title": "零宕机必备知识：StartupProbe",
+   "file": "5-8 零宕机必备知识：StartupProbe【 微信号：itcodeba 】-迅捷文字转语音-1760599159413zh.txt",
+   "lines": 115,
+   "bytes": 20528
+  },
+  {
+   "num": 104,
+   "src": "5-9",
+   "title": "零宕机必备知识：Liveness和Readiness",
+   "file": "5-9 零宕机必备知识：Liveness和Readiness【 微信号：itcodeba 】-迅捷文字转语音-1760599175189zh.txt",
+   "lines": 51,
+   "bytes": 8045
+  },
+  {
+   "num": 105,
+   "src": "6-1",
+   "title": "课时1： 安装一键式k8s资源平台Ratel到k8s集群中",
+   "file": "6-1 课时1： 安装一键式k8s资源平台Ratel到k8s集群中【 微信号：itcodeba 】-迅捷文字转语音-1760601644412zh.txt",
+   "lines": 46,
+   "bytes": 8231
+  },
+  {
+   "num": 106,
+   "src": "6-10",
+   "title": "课时10：Rook部署",
+   "file": "6-10 课时10：Rook部署【 微信号：itcodeba 】-迅捷文字转语音-1760602165849zh.txt",
+   "lines": 86,
+   "bytes": 13583
+  },
+  {
+   "num": 108,
+   "src": "6-12",
+   "title": "课时12：使用Rook部署Ceph集群下",
+   "file": "6-12 课时12：使用Rook部署Ceph集群下【 微信号：itcodeba 】-迅捷文字转语音-1760602181549zh.txt",
+   "lines": 58,
+   "bytes": 8883
+  },
+  {
+   "num": 109,
+   "src": "6-13",
+   "title": "课时13：创建块存储类型的动态存储",
+   "file": "6-13 课时13：创建块存储类型的动态存储【 微信号：itcodeba 】-迅捷文字转语音-1760602190493zh.txt",
+   "lines": 50,
+   "bytes": 8555
+  },
+  {
+   "num": 110,
+   "src": "6-14",
+   "title": "课时14：StatefulSet动态申请存储",
+   "file": "6-14 课时14：StatefulSet动态申请存储【 微信号：itcodeba 】-迅捷文字转语音-1760602410711zh.txt",
+   "lines": 52,
+   "bytes": 8326
+  },
+  {
+   "num": 111,
+   "src": "6-15",
+   "title": "课时15：使用PVC动态申请存储",
+   "file": "6-15 课时15：使用PVC动态申请存储【 微信号：itcodeba 】-迅捷文字转语音-1760602422850zh.txt",
+   "lines": 26,
+   "bytes": 4838
+  },
+  {
+   "num": 112,
+   "src": "6-16",
+   "title": "课时16：共享文件系统类型的StorageClass",
+   "file": "6-16 课时16：共享文件系统类型的StorageClass【 微信号：itcodeba 】-迅捷文字转语音-1760602431743zh.txt",
+   "lines": 52,
+   "bytes": 8549
+  },
+  {
+   "num": 113,
+   "src": "6-17",
+   "title": "课时17：PVC在线扩容和PVC快照",
+   "file": "6-17 课时17：PVC在线扩容和PVC快照【 微信号：itcodeba 】-迅捷文字转语音-1760602442445zh.txt",
+   "lines": 33,
+   "bytes": 4393
+  },
+  {
+   "num": 114,
+   "src": "6-18",
+   "title": "课时18：Rook集群清理和重建",
+   "file": "6-18 课时18：Rook集群清理和重建【 微信号：itcodeba 】-迅捷文字转语音-1760602449487zh.txt",
+   "lines": 24,
+   "bytes": 3282
+  },
+  {
+   "num": 115,
+   "src": "6-19",
+   "title": "课时19：PVC在线扩容使用",
+   "file": "6-19 课时19：PVC在线扩容使用【 微信号：itcodeba 】-迅捷文字转语音-1760602454756zh.txt",
+   "lines": 41,
+   "bytes": 6413
+  },
+  {
+   "num": 116,
+   "src": "6-2",
+   "title": "课时2： Ratel简单使用",
+   "file": "6-2 课时2： Ratel简单使用【 微信号：itcodeba 】-迅捷文字转语音-1760601653895zh.txt",
+   "lines": 98,
+   "bytes": 18867
+  },
+  {
+   "num": 117,
+   "src": "6-20",
+   "title": "课时20：PVC快照和回滚",
+   "file": "6-20 课时20：PVC快照和回滚【 微信号：itcodeba 】-迅捷文字转语音-1760602461456zh.txt",
+   "lines": 54,
+   "bytes": 8994
+  },
+  {
+   "num": 118,
+   "src": "6-21",
+   "title": "课时21：Rook Ceph xfs_repair问题修复",
+   "file": "6-21 课时21：Rook Ceph xfs_repair问题修复【 微信号：itcodeba 】-迅捷文字转语音-1760602472779zh.txt",
+   "lines": 133,
+   "bytes": 22546
+  },
+  {
+   "num": 119,
+   "src": "6-22",
+   "title": "课时22：存储回顾",
+   "file": "6-22 课时22：存储回顾【 微信号：itcodeba 】-迅捷文字转语音-1760602747450zh.txt",
+   "lines": 47,
+   "bytes": 8638
+  },
+  {
+   "num": 120,
+   "src": "6-23",
+   "title": "课时23：容器化中间件基本说明",
+   "file": "6-23 课时23：容器化中间件基本说明【 微信号：itcodeba 】-迅捷文字转语音-1760602757656zh.txt",
+   "lines": 25,
+   "bytes": 4074
+  },
+  {
+   "num": 121,
+   "src": "6-24",
+   "title": "课时24：如何部署一个容器到k8s",
+   "file": "6-24 课时24：如何部署一个容器到k8s【 微信号：itcodeba 】-迅捷文字转语音-1760602764724zh.txt",
+   "lines": 115,
+   "bytes": 20625
+  },
+  {
+   "num": 122,
+   "src": "6-25",
+   "title": "课时25：部署Redis Operator",
+   "file": "6-25 课时25：部署Redis Operator【 微信号：itcodeba 】-迅捷文字转语音-1760602782193zh.txt",
+   "lines": 87,
+   "bytes": 14680
+  },
+  {
+   "num": 123,
+   "src": "6-26",
+   "title": "课时26：在k8s上部署Redis集群上",
+   "file": "6-26 课时26：在k8s上部署Redis集群上【 微信号：itcodeba 】-迅捷文字转语音-1760602793606zh.txt",
+   "lines": 14,
+   "bytes": 2343
+  },
+  {
+   "num": 124,
+   "src": "6-27",
+   "title": "课时27：在k8s上部署Redis集群下",
+   "file": "6-27 课时27：在k8s上部署Redis集群下【 微信号：itcodeba 】-迅捷文字转语音-1760602798814zh.txt",
+   "lines": 72,
+   "bytes": 12357
+  },
+  {
+   "num": 125,
+   "src": "6-28",
+   "title": "课时28：Redis集群扩容和缩容",
+   "file": "6-28 课时28：Redis集群扩容和缩容【 微信号：itcodeba 】-迅捷文字转语音-1760602812031zh.txt",
+   "lines": 80,
+   "bytes": 13414
+  },
+  {
+   "num": 126,
+   "src": "6-29",
+   "title": "课时29：部署RabbitMQ集群到k8s",
+   "file": "6-29 课时29：部署RabbitMQ集群到k8s【 微信号：itcodeba 】-迅捷文字转语音-1760602822857zh.txt",
+   "lines": 92,
+   "bytes": 15167
+  },
+  {
+   "num": 127,
+   "src": "6-3",
+   "title": "课时3： 准入控制",
+   "file": "6-3 课时3： 准入控制【 微信号：itcodeba 】-迅捷文字转语音-1760601668167zh.txt",
+   "lines": 72,
+   "bytes": 13238
+  },
+  {
+   "num": 128,
+   "src": "6-30",
+   "title": "课时30：解决RabbitMQ密码不生效问题",
+   "file": "6-30 课时30：解决RabbitMQ密码不生效问题【 微信号：itcodeba 】-迅捷文字转语音-1760603152324zh.txt",
+   "lines": 44,
+   "bytes": 6431
+  },
+  {
+   "num": 129,
+   "src": "6-31",
+   "title": "课时31：RabbitMQ扩容和缩容",
+   "file": "6-31 课时31：RabbitMQ扩容和缩容【 微信号：itcodeba 】-迅捷文字转语音-1760603162602zh.txt",
+   "lines": 54,
+   "bytes": 9202
+  },
+  {
+   "num": 130,
+   "src": "6-32",
+   "title": "课时32：Helm v3安装使用",
+   "file": "6-32 课时32：Helm v3安装使用【 微信号：itcodeba 】-迅捷文字转语音-1760603173733zh.txt",
+   "lines": 61,
+   "bytes": 9705
+  },
+  {
+   "num": 131,
+   "src": "6-33",
+   "title": "课时33：Helm目录层级",
+   "file": "6-33 课时33：Helm目录层级【 微信号：itcodeba 】-迅捷文字转语音-1760603186586zh.txt",
+   "lines": 38,
+   "bytes": 6504
+  },
+  {
+   "num": 132,
+   "src": "6-34",
+   "title": "课时34：Helm语法上",
+   "file": "6-34 课时34：Helm语法上【 微信号：itcodeba 】-迅捷文字转语音-1760603193339zh.txt",
+   "lines": 40,
+   "bytes": 5951
+  },
+  {
+   "num": 133,
+   "src": "6-35",
+   "title": "课时35：Helm语法下",
+   "file": "6-35 课时35：Helm语法下【 微信号：itcodeba 】-迅捷文字转语音-1760603199673zh.txt",
+   "lines": 74,
+   "bytes": 13458
+  },
+  {
+   "num": 134,
+   "src": "6-36",
+   "title": "课时36：编写Helm部署RabbitMQ集群",
+   "file": "6-36 课时36：编写Helm部署RabbitMQ集群【 微信号：itcodeba 】-迅捷文字转语音-1760603211212zh.txt",
+   "lines": 190,
+   "bytes": 28531
+  },
+  {
+   "num": 135,
+   "src": "6-37",
+   "title": "课时37：运行自己编写的Helm",
+   "file": "6-37 课时37：运行自己编写的Helm【 微信号：itcodeba 】-迅捷文字转语音-1760603237205zh.txt",
+   "lines": 73,
+   "bytes": 11328
+  },
+  {
+   "num": 136,
+   "src": "6-38",
+   "title": "课时38：部署Zookeeper和Kafka集群",
+   "file": "6-38 课时38：部署Zookeeper和Kafka集群【 微信号：itcodeba 】-迅捷文字转语音-1760603619093zh.txt",
+   "lines": 76,
+   "bytes": 12473
+  },
+  {
+   "num": 137,
+   "src": "6-39",
+   "title": "课时39：测试Kafka和Zookeeper集群",
+   "file": "6-39 课时39：测试Kafka和Zookeeper集群【 微信号：itcodeba 】-迅捷文字转语音-1760603632212zh.txt",
+   "lines": 56,
+   "bytes": 9955
+  },
+  {
+   "num": 138,
+   "src": "6-4",
+   "title": "课时4： Kubernetes服务质量QoS",
+   "file": "6-4 课时4： Kubernetes服务质量QoS【 微信号：itcodeba 】-迅捷文字转语音-1760601679852zh.txt",
+   "lines": 67,
+   "bytes": 12520
+  },
+  {
+   "num": 139,
+   "src": "6-40",
+   "title": "课时40：Kafka和Zookeeper集群扩容缩容",
+   "file": "6-40 课时40：Kafka和Zookeeper集群扩容缩容【 微信号：itcodeba 】-迅捷文字转语音-1760603646189zh.txt",
+   "lines": 21,
+   "bytes": 3034
+  },
+  {
+   "num": 140,
+   "src": "6-5",
+   "title": "课时5： 使用PodPreset预配置容器时区",
+   "file": "6-5 课时5： 使用PodPreset预配置容器时区【 微信号：itcodeba 】-迅捷文字转语音-1760601689952zh.txt",
+   "lines": 120,
+   "bytes": 20009
+  },
+  {
+   "num": 141,
+   "src": "6-6",
+   "title": "课时6： Dashboard基于用户名密码认证",
+   "file": "6-6 课时6： Dashboard基于用户名密码认证【 微信号：itcodeba 】-迅捷文字转语音-1760602118171zh.txt",
+   "lines": 69,
+   "bytes": 11535
+  },
+  {
+   "num": 142,
+   "src": "6-7",
+   "title": "课时7： RBAC实现不同用户不同权限",
+   "file": "6-7 课时7： RBAC实现不同用户不同权限【 微信号：itcodeba 】-迅捷文字转语音-1760602130137zh.txt",
+   "lines": 38,
+   "bytes": 6425
+  },
+  {
+   "num": 143,
+   "src": "6-8",
+   "title": "课时8： ServiceAccount权限管理",
+   "file": "6-8 课时8： ServiceAccount权限管理【 微信号：itcodeba 】-迅捷文字转语音-1760602139758zh.txt",
+   "lines": 75,
+   "bytes": 12695
+  },
+  {
+   "num": 144,
+   "src": "6-9",
+   "title": "课时9： 云原生存储Rook介绍",
+   "file": "6-9 课时9： 云原生存储Rook介绍【 微信号：itcodeba 】-迅捷文字转语音-1760602152389zh.txt",
+   "lines": 94,
+   "bytes": 16715
+  },
+  {
+   "num": 145,
+   "src": "7-1",
+   "title": "课时1：EFK日志收集",
+   "file": "7-1 课时1：EFK日志收集【 微信号：itcodeba 】-迅捷文字转语音-1760603651446zh.txt",
+   "lines": 119,
+   "bytes": 21610
+  },
+  {
+   "num": 146,
+   "src": "7-10",
+   "title": "课时10：Prometheus监控etcd集群",
+   "file": "7-10 课时10：Prometheus监控etcd集群【 微信号：itcodeba 】-迅捷文字转语音-1760604038988zh.txt",
+   "lines": 131,
+   "bytes": 20100
+  },
+  {
+   "num": 147,
+   "src": "7-11",
+   "title": "课时11：Prometheus Exporter",
+   "file": "7-11 课时11：Prometheus Exporter【 微信号：itcodeba 】-迅捷文字转语音-1760604062123zh.txt",
+   "lines": 122,
+   "bytes": 22636
+  },
+  {
+   "num": 148,
+   "src": "7-12",
+   "title": "课时12：Prometheus黑盒监控",
+   "file": "7-12 课时12：Prometheus黑盒监控【 微信号：itcodeba 】-迅捷文字转语音-1760604084606zh.txt",
+   "lines": 58,
+   "bytes": 10099
+  },
+  {
+   "num": 149,
+   "src": "7-13",
+   "title": "课时13：Prometheus additional传统配置",
+   "file": "7-13 课时13：Prometheus additional传统配置【 微信号：itcodeba 】-迅捷文字转语音-1760604094076zh.txt",
+   "lines": 108,
+   "bytes": 19436
+  },
+  {
+   "num": 150,
+   "src": "7-14",
+   "title": "课时14：Alertmanager入门",
+   "file": "7-14 课时14：Alertmanager入门【 微信号：itcodeba 】-迅捷文字转语音-1760604522277zh.txt",
+   "lines": 76,
+   "bytes": 15537
+  },
+  {
+   "num": 151,
+   "src": "7-16",
+   "title": "课时16：Prometheus使用微信告警",
+   "file": "7-16 课时16：Prometheus使用微信告警【 微信号：itcodeba 】-迅捷文字转语音-1760604546548zh.txt",
+   "lines": 38,
+   "bytes": 6138
+  },
+  {
+   "num": 152,
+   "src": "7-17",
+   "title": "课时17：Prometheus自定义告警模板",
+   "file": "7-17 课时17：Prometheus自定义告警模板【 微信号：itcodeba 】-迅捷文字转语音-1760604554903zh.txt",
+   "lines": 41,
+   "bytes": 7614
+  },
+  {
+   "num": 153,
+   "src": "7-18",
+   "title": "课时18：Prometheus自动发现",
+   "file": "7-18 课时18：Prometheus自动发现【 微信号：itcodeba 】-迅捷文字转语音-1760604562431zh.txt",
+   "lines": 76,
+   "bytes": 13404
+  },
+  {
+   "num": 154,
+   "src": "7-19",
+   "title": "课时19：Prometheus监控Java JVM",
+   "file": "7-19 课时19：Prometheus监控Java JVM【 微信号：itcodeba 】-迅捷文字转语音-1760604572526zh.txt",
+   "lines": 105,
+   "bytes": 17859
+  },
+  {
+   "num": 155,
+   "src": "7-2",
+   "title": "课时2：使用Filebeat收集容器内日志",
+   "file": "7-2 课时2：使用Filebeat收集容器内日志【 微信号：itcodeba 】-迅捷文字转语音-1760603668671zh.txt",
+   "lines": 89,
+   "bytes": 16913
+  },
+  {
+   "num": 156,
+   "src": "7-20",
+   "title": "课时20：基于Eureka自动发现监控Java JVM",
+   "file": "7-20 课时20：基于Eureka自动发现监控Java JVM【 微信号：itcodeba 】-迅捷文字转语音-1760604585139zh.txt",
+   "lines": 81,
+   "bytes": 14496
+  },
+  {
+   "num": 157,
+   "src": "7-3",
+   "title": "课时3：使用不同资源名称查询日志",
+   "file": "7-3 课时3：使用不同资源名称查询日志【 微信号：itcodeba 】-迅捷文字转语音-1760603683999zh.txt",
+   "lines": 79,
+   "bytes": 13106
+  },
+  {
+   "num": 158,
+   "src": "7-4",
+   "title": "课时4：Prometheus安装及入门",
+   "file": "7-4 课时4：Prometheus安装及入门【 微信号：itcodeba 】-迅捷文字转语音-1760603698746zh.txt",
+   "lines": 119,
+   "bytes": 20933
+  },
+  {
+   "num": 159,
+   "src": "7-5",
+   "title": "课时5：Prometheus Latest安装入门",
+   "file": "7-5 课时5：Prometheus Latest安装入门【 微信号：itcodeba 】-迅捷文字转语音-1760603712801zh.txt",
+   "lines": 118,
+   "bytes": 20882
+  },
+  {
+   "num": 160,
+   "src": "7-6",
+   "title": "课时6：Prometheus Metrics类型",
+   "file": "7-6 课时6：Prometheus Metrics类型【 微信号：itcodeba 】-迅捷文字转语音-1760603975768zh.txt",
+   "lines": 115,
+   "bytes": 21172
+  },
+  {
+   "num": 161,
+   "src": "7-7",
+   "title": "课时7：PromQL基本操作",
+   "file": "7-7 课时7：PromQL基本操作【 微信号：itcodeba 】-迅捷文字转语音-1760603993630zh.txt",
+   "lines": 103,
+   "bytes": 18578
+  },
+  {
+   "num": 162,
+   "src": "7-8",
+   "title": "课时8：PromQL常用函数",
+   "file": "7-8 课时8：PromQL常用函数【 微信号：itcodeba 】-迅捷文字转语音-1760604011895zh.txt",
+   "lines": 123,
+   "bytes": 20230
+  },
+  {
+   "num": 163,
+   "src": "7-9",
+   "title": "课时9：解决Scheduler监控问题",
+   "file": "7-9 课时9：解决Scheduler监控问题【 微信号：itcodeba 】-迅捷文字转语音-1760604029119zh.txt",
+   "lines": 65,
+   "bytes": 11154
+  },
+  {
+   "num": 164,
+   "src": "8-1",
+   "title": "课时1：Ingress Nginx入门",
+   "file": "8-1 课时1：Ingress Nginx入门【 微信号：itcodeba 】-迅捷文字转语音-1760604597628zh.txt",
+   "lines": 71,
+   "bytes": 11721
+  },
+  {
+   "num": 165,
+   "src": "8-10",
+   "title": "课时10： Ingress Nginx基本认证",
+   "file": "8-10 课时10： Ingress Nginx基本认证【 微信号：itcodeba 】-迅捷文字转语音-1760605752133zh.txt",
+   "lines": 21,
+   "bytes": 3508
+  },
+  {
+   "num": 166,
+   "src": "8-11",
+   "title": "课时11： Ingress Nginx监控上",
+   "file": "8-11 课时11： Ingress Nginx监控上【 微信号：itcodeba 】-迅捷文字转语音-1760605760299zh.txt",
+   "lines": 69,
+   "bytes": 12596
+  },
+  {
+   "num": 167,
+   "src": "8-12",
+   "title": "课时12：Ingress Nginx监控下",
+   "file": "8-12 课时12：Ingress Nginx监控下【 微信号：itcodeba 】-迅捷文字转语音-1760605772912zh.txt",
+   "lines": 27,
+   "bytes": 4871
+  },
+  {
+   "num": 168,
+   "src": "8-13",
+   "title": "课时13：k8s1.19下的Ingress配置",
+   "file": "8-13 课时13：k8s1.19下的Ingress配置【 微信号：itcodeba 】-迅捷文字转语音-1760605780404zh.txt",
+   "lines": 36,
+   "bytes": 5812
+  },
+  {
+   "num": 169,
+   "src": "8-2",
+   "title": "课时2： Ingress Nginx域名重定向",
+   "file": "8-2 课时2： Ingress Nginx域名重定向【 微信号：itcodeba 】-迅捷文字转语音-1760605146127zh.txt",
+   "lines": 55,
+   "bytes": 10949
+  },
+  {
+   "num": 170,
+   "src": "8-3",
+   "title": "课时3： Ingress Nginx前后端分离",
+   "file": "8-3 课时3： Ingress Nginx前后端分离【 微信号：itcodeba 】-迅捷文字转语音-1760605159069zh.txt",
+   "lines": 48,
+   "bytes": 7589
+  },
+  {
+   "num": 171,
+   "src": "8-4",
+   "title": "课时4： Ingress Nginx SSL配置",
+   "file": "8-4 课时4： Ingress Nginx SSL配置【 微信号：itcodeba 】-迅捷文字转语音-1760605169904zh.txt",
+   "lines": 87,
+   "bytes": 13532
+  },
+  {
+   "num": 172,
+   "src": "8-5",
+   "title": "课时5： Ingress Nginx黑白名单",
+   "file": "8-5 课时5： Ingress Nginx黑白名单【 微信号：itcodeba 】-迅捷文字转语音-1760605184568zh.txt",
+   "lines": 52,
+   "bytes": 8566
+  },
+  {
+   "num": 173,
+   "src": "8-6",
+   "title": "课时6： Ingress Nginx匹配请求头",
+   "file": "8-6 课时6： Ingress Nginx匹配请求头【 微信号：itcodeba 】-迅捷文字转语音-1760605193732zh.txt",
+   "lines": 18,
+   "bytes": 3935
+  },
+  {
+   "num": 174,
+   "src": "8-7",
+   "title": "课时7： Ingress Nginx速率限制",
+   "file": "8-7 课时7： Ingress Nginx速率限制【 微信号：itcodeba 】-迅捷文字转语音-1760605199494zh.txt",
+   "lines": 36,
+   "bytes": 5955
+  },
+  {
+   "num": 175,
+   "src": "8-8",
+   "title": "课时8： Ingress Nginx实现灰度金丝雀发布",
+   "file": "8-8 课时8： Ingress Nginx实现灰度金丝雀发布【 微信号：itcodeba 】-迅捷文字转语音-1760605208214zh.txt",
+   "lines": 89,
+   "bytes": 14851
+  },
+  {
+   "num": 176,
+   "src": "8-9",
+   "title": "课时9： Ingress Nginx自定义错误页面",
+   "file": "8-9 课时9： Ingress Nginx自定义错误页面【 微信号：itcodeba 】-迅捷文字转语音-1760605223718zh.txt",
+   "lines": 68,
+   "bytes": 10725
+  },
+  {
+   "num": 177,
+   "src": "9-1",
+   "title": "课时1：Jenkins CICD介绍",
+   "file": "9-1 课时1：Jenkins CICD介绍【 微信号：itcodeba 】-迅捷文字转语音-1760605785993zh.txt",
+   "lines": 61,
+   "bytes": 12473
+  },
+  {
+   "num": 178,
+   "src": "9-10",
+   "title": "课时10：Jenkins自动构建流水线设计",
+   "file": "9-10 课时10：Jenkins自动构建流水线设计【 微信号：itcodeba 】-迅捷文字转语音-1760606212906zh.txt",
+   "lines": 76,
+   "bytes": 13215
+  },
+  {
+   "num": 179,
+   "src": "9-11",
+   "title": "课时11：使用BlueOcean创建Jenkinsfile",
+   "file": "9-11 课时11：使用BlueOcean创建Jenkinsfile【 微信号：itcodeba 】-迅捷文字转语音-1760606222513zh.txt",
+   "lines": 166,
+   "bytes": 25190
+  },
+  {
+   "num": 180,
+   "src": "9-12",
+   "title": "课时12：Jenkins使用Kubernetes Pod执行",
+   "file": "9-12 课时12：Jenkins使用Kubernetes Pod执行【 微信号：itcodeba 】-迅捷文字转语音-1760606242084zh.txt",
+   "lines": 179,
+   "bytes": 28687
+  },
+  {
+   "num": 181,
+   "src": "9-13",
+   "title": "课时13：Jenkins配置Kubernetes多集群",
+   "file": "9-13 课时13：Jenkins配置Kubernetes多集群【 微信号：itcodeba 】-迅捷文字转语音-1760606597746zh.txt",
+   "lines": 50,
+   "bytes": 8124
+  },
+  {
+   "num": 182,
+   "src": "9-14",
+   "title": "课时14：KUBECONFIG多集群配置",
+   "file": "9-14 课时14：KUBECONFIG多集群配置【 微信号：itcodeba 】-迅捷文字转语音-1760606608414zh.txt",
+   "lines": 42,
+   "bytes": 6625
+  },
+  {
+   "num": 183,
+   "src": "9-15",
+   "title": "课时15：Jenkins自动化构建Java应用上",
+   "file": "9-15 课时15：Jenkins自动化构建Java应用上【 微信号：itcodeba 】-迅捷文字转语音-1760606618744zh.txt",
+   "lines": 134,
+   "bytes": 23517
+  },
+  {
+   "num": 184,
+   "src": "9-16",
+   "title": "课时16：Jenkins自动化构建Java应用下",
+   "file": "9-16 课时16：Jenkins自动化构建Java应用下【 微信号：itcodeba 】-迅捷文字转语音-1760606641059zh.txt",
+   "lines": 30,
+   "bytes": 4896
+  },
+  {
+   "num": 185,
+   "src": "9-17",
+   "title": "课时17：Jenkins自动化构建NodeJS应用",
+   "file": "9-17 课时17：Jenkins自动化构建NodeJS应用【 微信号：itcodeba 】-迅捷文字转语音-1760606646567zh.txt",
+   "lines": 97,
+   "bytes": 15764
+  },
+  {
+   "num": 186,
+   "src": "9-18",
+   "title": "课时18：Docker镜像高级优化及自动化构建建议",
+   "file": "9-18 课时18：Docker镜像高级优化及自动化构建建议【 微信号：itcodeba 】-迅捷文字转语音-1760606663544zh.txt",
+   "lines": 98,
+   "bytes": 18563
+  },
+  {
+   "num": 187,
+   "src": "9-19",
+   "title": "课时19：Jenkins生产环境和UAT环境流水线设计",
+   "file": "9-19 课时19：Jenkins生产环境和UAT环境流水线设计【 微信号：itcodeba 】-迅捷文字转语音-1760606674409zh.txt",
+   "lines": 88,
+   "bytes": 14996
+  },
+  {
+   "num": 188,
+   "src": "9-2",
+   "title": "课时2：Jenkins安装",
+   "file": "9-2 课时2：Jenkins安装【 微信号：itcodeba 】-迅捷文字转语音-1760605794563zh.txt",
+   "lines": 59,
+   "bytes": 10883
+  },
+  {
+   "num": 189,
+   "src": "9-20",
+   "title": "课时20：Jenkins基于角色的账户管理",
+   "file": "9-20 课时20：Jenkins基于角色的账户管理【 微信号：itcodeba 】-迅捷文字转语音-1760606685632zh.txt",
+   "lines": 75,
+   "bytes": 12895
+  },
+  {
+   "num": 190,
+   "src": "9-21",
+   "title": "容器化SpringCloud项目说明",
+   "file": "9-21 容器化SpringCloud项目说明【 微信号：itcodeba 】-迅捷文字转语音-1760607010284zh.txt",
+   "lines": 22,
+   "bytes": 4783
+  },
+  {
+   "num": 191,
+   "src": "9-22",
+   "title": "SpringCloud架构解析上",
+   "file": "9-22 SpringCloud架构解析上【 微信号：itcodeba 】-迅捷文字转语音-1760607018418zh.txt",
+   "lines": 143,
+   "bytes": 27660
+  },
+  {
+   "num": 192,
+   "src": "9-23",
+   "title": "SpringCloud架构解析下",
+   "file": "9-23 SpringCloud架构解析下【 微信号：itcodeba 】-迅捷文字转语音-1760607036791zh.txt",
+   "lines": 21,
+   "bytes": 4535
+  },
+  {
+   "num": 193,
+   "src": "9-24",
+   "title": "如何在k8s上正确部署Eureka",
+   "file": "9-24 如何在k8s上正确部署Eureka【 微信号：itcodeba 】-迅捷文字转语音-1760607042303zh.txt",
+   "lines": 55,
+   "bytes": 9131
+  },
+  {
+   "num": 194,
+   "src": "9-25",
+   "title": "到底要不要用Eureka",
+   "file": "9-25 到底要不要用Eureka【 微信号：itcodeba 】-迅捷文字转语音-1760607049945zh.txt",
+   "lines": 61,
+   "bytes": 10689
+  },
+  {
+   "num": 195,
+   "src": "9-26",
+   "title": "如何正确部署Zuul和ConfigServer到k8s",
+   "file": "9-26 如何正确部署Zuul和ConfigServer到k8s【 微信号：itcodeba 】-迅捷文字转语音-1760607057754zh.txt",
+   "lines": 41,
+   "bytes": 6647
+  },
+  {
+   "num": 196,
+   "src": "9-27",
+   "title": "到底要不要用Zuul和ConfigServer",
+   "file": "9-27 到底要不要用Zuul和ConfigServer【 微信号：itcodeba 】-迅捷文字转语音-1760607063753zh.txt",
+   "lines": 71,
+   "bytes": 12188
+  },
+  {
+   "num": 197,
+   "src": "9-28",
+   "title": "SpringCloud项目总结",
+   "file": "9-28 SpringCloud项目总结【 微信号：itcodeba 】-迅捷文字转语音-1760607072141zh.txt",
+   "lines": 55,
+   "bytes": 10089
+  },
+  {
+   "num": 198,
+   "src": "9-3",
+   "title": "课时3：Jenkins声明式流水线入门",
+   "file": "9-3 课时3：Jenkins声明式流水线入门【 微信号：itcodeba 】-迅捷文字转语音-1760605804009zh.txt",
+   "lines": 133,
+   "bytes": 24406
+  },
+  {
+   "num": 199,
+   "src": "9-4",
+   "title": "课时4：Jenkins变量使用",
+   "file": "9-4 课时4：Jenkins变量使用【 微信号：itcodeba 】-迅捷文字转语音-1760605818946zh.txt",
+   "lines": 69,
+   "bytes": 11770
+  },
+  {
+   "num": 200,
+   "src": "9-5",
+   "title": "课时5：Jenkins级联变量",
+   "file": "9-5 课时5：Jenkins级联变量【 微信号：itcodeba 】-迅捷文字转语音-1760606160831zh.txt",
+   "lines": 46,
+   "bytes": 7966
+  },
+  {
+   "num": 201,
+   "src": "9-6",
+   "title": "课时6：镜像仓库配置",
+   "file": "9-6 课时6：镜像仓库配置【 微信号：itcodeba 】-迅捷文字转语音-1760606171030zh.txt",
+   "lines": 71,
+   "bytes": 12183
+  },
+  {
+   "num": 202,
+   "src": "9-7",
+   "title": "课时7：GitLab安装配置",
+   "file": "9-7 课时7：GitLab安装配置【 微信号：itcodeba 】-迅捷文字转语音-1760606183181zh.txt",
+   "lines": 36,
+   "bytes": 6468
+  },
+  {
+   "num": 203,
+   "src": "9-8",
+   "title": "课时8： Jenkins Credentials配置",
+   "file": "9-8 课时8： Jenkins Credentials配置【 微信号：itcodeba 】-迅捷文字转语音-1760606193933zh.txt",
+   "lines": 25,
+   "bytes": 4228
+  },
+  {
+   "num": 204,
+   "src": "9-9",
+   "title": "课时9：Jenkins BlueOcean入门",
+   "file": "9-9 课时9：Jenkins BlueOcean入门【 微信号：itcodeba 】-迅捷文字转语音-1760606199321zh.txt",
+   "lines": 119,
+   "bytes": 22513
+  }
+ ]
+}
