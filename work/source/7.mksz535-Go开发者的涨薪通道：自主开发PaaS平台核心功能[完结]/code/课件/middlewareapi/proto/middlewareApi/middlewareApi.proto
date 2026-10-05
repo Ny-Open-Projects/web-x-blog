@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package middlewareApi;
+
+option go_package = "./proto/middlewareApi;middlewareApi";
+
+service MiddlewareApi {
+    rpc FindMiddlewareById(Request) returns (Response){}
+	rpc AddMiddleware(Request) returns (Response){}
+	rpc DeleteMiddlewareById(Request) returns (Response){}
+	rpc UpdateMiddleware(Request) returns (Response){}
+	//默认接口
+	rpc Call(Request) returns (Response){}
+	//根据类型获取所有中间件
+	rpc FindAllMiddlewareByTypeId(Request) returns (Response){}
+	//中间件类型对外开发的API
+	rpc FindMiddleTypeById(Request) returns (Response){}
+	rpc AddMiddleType(Request) returns (Response){}
+	rpc DeleteMiddleTypeById(Request) returns (Response){}
+	rpc UpdateMiddleType(Request) returns (Response){}
+	rpc FindAllMiddleType(Request) returns (Response){}
+}
+
+message Pair {
+	string key = 1;
+	repeated string values = 2;
+}
+
+
+message Request {
+	string method = 1;
+	string path = 2;
+	map<string, Pair> header = 3;
+	map<string, Pair> get = 4;
+	map<string, Pair> post = 5;
+	string body = 6;
+	string url = 7;
+}
+
+
+message Response {
+	int32 statusCode = 1;
+	map<string, Pair> header = 2;
+	string body = 3;
+}
+

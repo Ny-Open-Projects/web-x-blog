@@ -1,0 +1,72 @@
+version: "3.8"
+
+# es-demo 配套运行环境（ES 7.x）
+# 核心：elasticsearch + redis
+# 可选（up-full）：kafka + zookeeper + kibana
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.18
+    container_name: es-demo-es
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - cluster.name=es-demo
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    networks: [esnet]
+
+  redis:
+    image: redis:7-alpine
+    container_name: es-demo-redis
+    ports:
+      - "6379:6379"
+    networks: [esnet]
+
+  zookeeper:
+    image: bitnami/zookeeper:3.9
+    container_name: es-demo-zk
+    environment:
+      - ZOO_4LW_COMMANDS_WHITELIST=*
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - "2181:2181"
+    networks: [esnet]
+    profiles: ["full"]
+
+  kafka:
+    image: bitnami/kafka:3.6
+    container_name: es-demo-kafka
+    depends_on: [zookeeper]
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+    ports:
+      - "9092:9092"
+    networks: [esnet]
+    profiles: ["full"]
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.18
+    container_name: es-demo-kibana
+    depends_on: [elasticsearch]
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks: [esnet]
+    profiles: ["full"]
+
+networks:
+  esnet:
+    driver: bridge

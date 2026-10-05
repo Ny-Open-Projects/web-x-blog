@@ -1,0 +1,3412 @@
+{
+  "course": "paas",
+  "src": "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]",
+  "chapters": [
+    {
+      "name": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "count": 19
+    },
+    {
+      "name": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "count": 13
+    },
+    {
+      "name": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "count": 15
+    },
+    {
+      "name": "第1章 云原生时代已经来临，你准备好了么？",
+      "count": 5
+    },
+    {
+      "name": "第2章 Go 搭建基础开发环境",
+      "count": 6
+    },
+    {
+      "name": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "count": 11
+    },
+    {
+      "name": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "count": 8
+    },
+    {
+      "name": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "count": 26
+    },
+    {
+      "name": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "count": 9
+    },
+    {
+      "name": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "count": 8
+    },
+    {
+      "name": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
+      "count": 4
+    },
+    {
+      "name": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "count": 17
+    }
+  ],
+  "file_count": 141,
+  "article_count": 140,
+  "merged_count": 1,
+  "code_file_count": 300,
+  "code_ext_stat": {
+    "go": 133,
+    "html": 81,
+    "yml": 21,
+    "md": 18,
+    "mod": 15,
+    "sum": 15,
+    "proto": 12,
+    "sh": 3,
+    "yaml": 1,
+    "conf": 1
+  },
+  "articles": [
+    {
+      "id": "1-1",
+      "title": "1-1云原生时代什么样的人才更稀缺0843_ev",
+      "chapter": "第1章 云原生时代已经来临，你准备好了么？",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第1章 云原生时代已经来临，你准备好了么？/1-1云原生时代什么样的人才更稀缺0843_ev[16]-迅捷文字转语音-1790971522845zh.txt"
+      ],
+      "words": 2870,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "1-2",
+      "title": "1-2什么是云原生GOPaaS平台以及有哪些优势0454_ev",
+      "chapter": "第1章 云原生时代已经来临，你准备好了么？",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第1章 云原生时代已经来临，你准备好了么？/1-2什么是云原生GOPaaS平台以及有哪些优势0454_ev[16]-迅捷文字转语音-1790971531534zh.txt"
+      ],
+      "words": 1786,
+      "merged": false,
+      "tokens": [
+        "gopaas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "1-3",
+      "title": "1-3云原生GoPaaS平台与DevOps的关系0335_ev",
+      "chapter": "第1章 云原生时代已经来临，你准备好了么？",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第1章 云原生时代已经来临，你准备好了么？/1-3云原生GoPaaS平台与DevOps的关系0335_ev[16]-迅捷文字转语音-1790971538321zh.txt"
+      ],
+      "words": 1226,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "devops"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "1-4",
+      "title": "1-4云原生PaaS平台与服务网格0217_ev",
+      "chapter": "第1章 云原生时代已经来临，你准备好了么？",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第1章 云原生时代已经来临，你准备好了么？/1-4云原生PaaS平台与服务网格0217_ev[16]-迅捷文字转语音-1790971544567zh.txt"
+      ],
+      "words": 827,
+      "merged": false,
+      "tokens": [
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html",
+        "code/课件/go-paas-front/route-create.html"
+      ]
+    },
+    {
+      "id": "1-5",
+      "title": "1-5云原生GoPaaS平台与低代码0257_ev",
+      "chapter": "第1章 云原生时代已经来临，你准备好了么？",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第1章 云原生时代已经来临，你准备好了么？/1-5云原生GoPaaS平台与低代码0257_ev[16]-迅捷文字转语音-1790971550308zh.txt"
+      ],
+      "words": 966,
+      "merged": false,
+      "tokens": [
+        "gopaas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "2-1",
+      "title": "2-1环境安装级版本说明0315_ev",
+      "chapter": "第2章 Go 搭建基础开发环境",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第2章 Go 搭建基础开发环境/2-1环境安装级版本说明0315_ev-迅捷文字转语音-1790971814837zh.txt"
+      ],
+      "words": 1284,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-2",
+      "title": "2-2go代理和慕课网git设置0654_ev",
+      "chapter": "第2章 Go 搭建基础开发环境",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第2章 Go 搭建基础开发环境/2-2go代理和慕课网git设置0654_ev-迅捷文字转语音-1790971821500zh.txt"
+      ],
+      "words": 2327,
+      "merged": false,
+      "tokens": [
+        "git"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "2-3",
+      "title": "2-3项目目录结构1030_ev",
+      "chapter": "第2章 Go 搭建基础开发环境",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第2章 Go 搭建基础开发环境/2-3项目目录结构1030_ev-迅捷文字转语音-1790971831690zh.txt"
+      ],
+      "words": 3635,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-4",
+      "title": "2-4cap-tool代码目录生成proto文件生成1202_ev",
+      "chapter": "第2章 Go 搭建基础开发环境",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第2章 Go 搭建基础开发环境/2-4cap-tool代码目录生成proto文件生成1202_ev-迅捷文字转语音-1790971841255zh.txt"
+      ],
+      "words": 4272,
+      "merged": false,
+      "tokens": [
+        "cap-tool",
+        "proto"
+      ],
+      "code_refs": [
+        "code/课件/cap-tool/tpl/proto.go",
+        "code/课件/cap-tool/tpl/ignore.go",
+        "code/课件/cap-tool/tpl/plugin.go",
+        "code/课件/cap-tool/tpl/filebeat.go",
+        "code/课件/cap-tool/tpl/docker.go",
+        "code/课件/cap-tool/go.mod",
+        "code/课件/cap-tool/tpl/makefile.go",
+        "code/课件/cap-tool/main.go"
+      ]
+    },
+    {
+      "id": "2-5",
+      "title": "2-5docker-composeyml编写和常见用法0918_ev",
+      "chapter": "第2章 Go 搭建基础开发环境",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第2章 Go 搭建基础开发环境/2-5docker-composeyml编写和常见用法0918_ev-迅捷文字转语音-1790971850488zh.txt"
+      ],
+      "words": 3360,
+      "merged": false,
+      "tokens": [
+        "docker-composeyml"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "2-6",
+      "title": "2-6总结思考0311_ev",
+      "chapter": "第2章 Go 搭建基础开发环境",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第2章 Go 搭建基础开发环境/2-6总结思考0311_ev-迅捷文字转语音-1790971857235zh.txt"
+      ],
+      "words": 1189,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "3-1",
+      "title": "3-1本章概览0153_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-1本章概览0153_ev-迅捷文字转语音-1790973002324zh.txt"
+      ],
+      "words": 709,
+      "merged": false,
+      "tokens": [
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-2",
+      "title": "3-2go-microv3框架与microv3的关系0307_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-2go-microv3框架与microv3的关系0307_ev-迅捷文字转语音-1790973008033zh.txt"
+      ],
+      "words": 1194,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "microv3",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-3",
+      "title": "3-3go-microv3框架整体介绍0342_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-3go-microv3框架整体介绍0342_ev-迅捷文字转语音-1790973014023zh.txt"
+      ],
+      "words": 1331,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-4",
+      "title": "3-4go-microv3添加集群版本consul上0452_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-4go-microv3添加集群版本consul上0452_ev-迅捷文字转语音-1790973020334zh.txt"
+      ],
+      "words": 1868,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "consul",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-5",
+      "title": "3-5go-microv3添加集群版本consul下1252_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-5go-microv3添加集群版本consul下1252_ev-迅捷文字转语音-1790973029901zh.txt"
+      ],
+      "words": 4119,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "consul",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-6",
+      "title": "3-6go-microv3添加配置中心1037_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-6go-microv3添加配置中心1037_ev-迅捷文字转语音-1790973038820zh.txt"
+      ],
+      "words": 2889,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-7",
+      "title": "3-7go-microv3如何使用配置中心连接mysql1143_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-7go-microv3如何使用配置中心连接mysql1143_ev-迅捷文字转语音-1790973437619zh.txt"
+      ],
+      "words": 3099,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "mysql1143_ev",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-8",
+      "title": "3-8go-microv3添加链路追踪1010_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-8go-microv3添加链路追踪1010_ev-迅捷文字转语音-1790973448199zh.txt"
+      ],
+      "words": 3287,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-9",
+      "title": "3-9go-microv3启用日志中心1333_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-9go-microv3启用日志中心1333_ev-迅捷文字转语音-1790973457740zh.txt"
+      ],
+      "words": 4265,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-10",
+      "title": "3-10go-microv3添加监控中心0821_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-10go-microv3添加监控中心0821_ev-迅捷文字转语音-1790973469268zh.txt"
+      ],
+      "words": 2651,
+      "merged": false,
+      "tokens": [
+        "go-microv3",
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "3-11",
+      "title": "3-11总结思考0155_ev",
+      "chapter": "第3章 Go 微服务 go-micro v3 框架快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第3章 Go 微服务 go-micro v3 框架快速入门/3-11总结思考0155_ev-迅捷文字转语音-1790973476643zh.txt"
+      ],
+      "words": 753,
+      "merged": false,
+      "tokens": [
+        "go-micro"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "4-1",
+      "title": "4-1GoPaaS平台k8s架构原理0733_ev",
+      "chapter": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第4章 云原生 Go PaaS 平台 K8s 快速入门/4-1GoPaaS平台k8s架构原理0733_ev[16]-迅捷文字转语音-1790974543171zh.txt"
+      ],
+      "words": 2783,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "k8s",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/k8s-install/base_install.sh",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/k8s-install/k8s 安装指导说明.md"
+      ]
+    },
+    {
+      "id": "4-2",
+      "title": "4-2GoPaaS平台k8s核心组件-apiserver架构原理讲解0629_ev",
+      "chapter": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第4章 云原生 Go PaaS 平台 K8s 快速入门/4-2GoPaaS平台k8s核心组件-apiserver架构原理讲解0629_ev[16]-迅捷文字转语音-1790974550957zh.txt"
+      ],
+      "words": 2368,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "k8s",
+        "apiserver",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/k8s-install/base_install.sh",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/k8s-install/k8s 安装指导说明.md"
+      ]
+    },
+    {
+      "id": "4-3",
+      "title": "4-3GoPaaS平台controller与scheduler调度器原理上0600_ev",
+      "chapter": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第4章 云原生 Go PaaS 平台 K8s 快速入门/4-3GoPaaS平台controller与scheduler调度器原理上0600_ev[16]-迅捷文字转语音-1790974561206zh.txt"
+      ],
+      "words": 2083,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "controller",
+        "scheduler",
+        "paas",
+        "k8s"
+      ],
+      "code_refs": [
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/k8s-install/base_install.sh",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/k8s-install/k8s 安装指导说明.md"
+      ]
+    },
+    {
+      "id": "4-4",
+      "title": "4-4GoPaaS平台controller与scheduler调度器原理下0904_ev",
+      "chapter": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第4章 云原生 Go PaaS 平台 K8s 快速入门/4-4GoPaaS平台controller与scheduler调度器原理下0904_ev[16]-迅捷文字转语音-1790974568415zh.txt"
+      ],
+      "words": 3051,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "controller",
+        "scheduler",
+        "paas",
+        "k8s"
+      ],
+      "code_refs": [
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/k8s-install/base_install.sh",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/k8s-install/k8s 安装指导说明.md"
+      ]
+    },
+    {
+      "id": "4-5",
+      "title": "4-5GoPaaS平台Servicedeploymentpod的关系0224_ev",
+      "chapter": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第4章 云原生 Go PaaS 平台 K8s 快速入门/4-5GoPaaS平台Servicedeploymentpod的关系0224_ev[16]-迅捷文字转语音-1790974575815zh.txt"
+      ],
+      "words": 876,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "servicedeploymentpod",
+        "paas",
+        "k8s"
+      ],
+      "code_refs": [
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/k8s-install/base_install.sh",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/k8s-install/k8s 安装指导说明.md"
+      ]
+    },
+    {
+      "id": "4-7",
+      "title": "4-7k8s的安装上0550_ev",
+      "chapter": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第4章 云原生 Go PaaS 平台 K8s 快速入门/4-7k8s的安装上0550_ev[16]-迅捷文字转语音-1790974579486zh.txt"
+      ],
+      "words": 1747,
+      "merged": false,
+      "tokens": [
+        "k8s",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/k8s-install/base_install.sh",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/k8s-install/k8s 安装指导说明.md"
+      ]
+    },
+    {
+      "id": "4-8",
+      "title": "4-8k8s的安装下1518_ev",
+      "chapter": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第4章 云原生 Go PaaS 平台 K8s 快速入门/4-8k8s的安装下1518_ev[16]-迅捷文字转语音-1790975717622zh.txt"
+      ],
+      "words": 3394,
+      "merged": false,
+      "tokens": [
+        "k8s",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/k8s-install/base_install.sh",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/k8s-install/k8s 安装指导说明.md"
+      ]
+    },
+    {
+      "id": "4-9",
+      "title": "4-9总结思考0344_ev",
+      "chapter": "第4章 云原生 Go PaaS 平台 K8s 快速入门",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第4章 云原生 Go PaaS 平台 K8s 快速入门/4-9总结思考0344_ev[16]-迅捷文字转语音-1790975731935zh.txt"
+      ],
+      "words": 1305,
+      "merged": false,
+      "tokens": [
+        "paas",
+        "k8s"
+      ],
+      "code_refs": [
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/k8s-install/base_install.sh",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/k8s-install/k8s 安装指导说明.md"
+      ]
+    },
+    {
+      "id": "5-1",
+      "title": "5-1PaaS平台应用开发-Deployment介绍1106_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-1PaaS平台应用开发-Deployment介绍1106_ev-迅捷文字转语音-1790975827641zh.txt"
+      ],
+      "words": 4143,
+      "merged": false,
+      "tokens": [
+        "paas",
+        "deployment"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html",
+        "code/课件/go-paas-front/route-create.html"
+      ]
+    },
+    {
+      "id": "5-2",
+      "title": "5-2PaaS平台Pod基本概念依据调度策略介绍1622_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-2PaaS平台Pod基本概念依据调度策略介绍1622_ev-迅捷文字转语音-1790975837479zh.txt"
+      ],
+      "words": 5609,
+      "merged": false,
+      "tokens": [
+        "paas",
+        "pod"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-front/pod-create.html",
+        "code/课件/go-paas-front/pod-detail.html",
+        "code/课件/go-paas-front/pod-index.html",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/pod/domain/model/pod_env.go",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/pod/filebeat.yml",
+        "code/课件/pod/domain/model/pod_port.go"
+      ]
+    },
+    {
+      "id": "5-3",
+      "title": "5-3必看基于慕课网gomod的相关设置0356_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-3必看基于慕课网gomod的相关设置0356_ev-迅捷文字转语音-1790975855529zh.txt"
+      ],
+      "words": 1315,
+      "merged": false,
+      "tokens": [
+        "gomod",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html",
+        "code/课件/go-paas-front/route-create.html"
+      ]
+    },
+    {
+      "id": "5-4",
+      "title": "5-4GOPaaS平台开发工程目录创建及说明0842_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-4GOPaaS平台开发工程目录创建及说明0842_ev-迅捷文字转语音-1790975860379zh.txt"
+      ],
+      "words": 2682,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html",
+        "code/课件/go-paas-front/route-create.html"
+      ]
+    },
+    {
+      "id": "5-5",
+      "title": "5-5GoPaaS平台Pod模型的开发上1234_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-5GoPaaS平台Pod模型的开发上1234_ev-迅捷文字转语音-1790975866956zh.txt"
+      ],
+      "words": 3273,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "pod",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-front/pod-create.html",
+        "code/课件/go-paas-front/pod-detail.html",
+        "code/课件/go-paas-front/pod-index.html",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/pod/domain/model/pod_env.go",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/pod/filebeat.yml",
+        "code/课件/pod/domain/model/pod_port.go"
+      ]
+    },
+    {
+      "id": "5-6",
+      "title": "5-6GoPaaS平台Pod模型的开发下0724_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-6GoPaaS平台Pod模型的开发下0724_ev-迅捷文字转语音-1790975875517zh.txt"
+      ],
+      "words": 2420,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "pod",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-front/pod-create.html",
+        "code/课件/go-paas-front/pod-detail.html",
+        "code/课件/go-paas-front/pod-index.html",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/pod/domain/model/pod_env.go",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/pod/filebeat.yml",
+        "code/课件/pod/domain/model/pod_port.go"
+      ]
+    },
+    {
+      "id": "5-7",
+      "title": "5-7GOPaaS平台Repository代码开发上1325_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-7GOPaaS平台Repository代码开发上1325_ev-迅捷文字转语音-1790976304163zh.txt"
+      ],
+      "words": 3416,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "repository",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/repository/base_repository.go",
+        "code/课件/volume/domain/repository/volume_repository.go",
+        "code/课件/svc/domain/repository/svc_repository.go",
+        "code/课件/pod/domain/repository/pod_repository.go",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/route/domain/repository/route_repository.go",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/middleware/domain/repository/middle_type_repository.go"
+      ]
+    },
+    {
+      "id": "5-8",
+      "title": "5-8GOPaaS平台Repository代码开发下1041_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-8GOPaaS平台Repository代码开发下1041_ev-迅捷文字转语音-1790976315463zh.txt"
+      ],
+      "words": 2424,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "repository",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/repository/base_repository.go",
+        "code/课件/volume/domain/repository/volume_repository.go",
+        "code/课件/svc/domain/repository/svc_repository.go",
+        "code/课件/pod/domain/repository/pod_repository.go",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/route/domain/repository/route_repository.go",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/middleware/domain/repository/middle_type_repository.go"
+      ]
+    },
+    {
+      "id": "5-9",
+      "title": "5-9GOPaaS平台Proto对外服务开发1233_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-9GOPaaS平台Proto对外服务开发1233_ev-迅捷文字转语音-1790976326343zh.txt"
+      ],
+      "words": 2667,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "proto",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/svcapi/proto/svcApi/svcApi.proto",
+        "code/课件/routeapi/proto/routeApi/routeApi.proto",
+        "code/课件/volumeapi/proto/volumeApi/volumeApi.proto",
+        "code/课件/podapi/proto/podApi/podApi.proto",
+        "code/课件/volume/proto/volume/volume.proto",
+        "code/课件/route/proto/route/route.proto",
+        "code/课件/svc/proto/svc/svc.proto",
+        "code/课件/appstoreapi/proto/appStoreApi/appStoreApi.proto"
+      ]
+    },
+    {
+      "id": "5-10",
+      "title": "5-10GOPaaS平台Service开发11057_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-10GOPaaS平台Service开发11057_ev-迅捷文字转语音-1790976336991zh.txt"
+      ],
+      "words": 2655,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "service",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/service/base_data_service.go",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/appstore/domain/service/appStore_data_service.go",
+        "code/课件/middleware/domain/service/middle_type_data_service.go",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html"
+      ]
+    },
+    {
+      "id": "5-11",
+      "title": "5-11GOPaaS平台Service开发21704_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-11GOPaaS平台Service开发21704_ev-迅捷文字转语音-1790976345121zh.txt"
+      ],
+      "words": 4024,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "service",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/service/base_data_service.go",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/appstore/domain/service/appStore_data_service.go",
+        "code/课件/middleware/domain/service/middle_type_data_service.go",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html"
+      ]
+    },
+    {
+      "id": "5-12",
+      "title": "5-12GOPaaS平台Service开发32134_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-12GOPaaS平台Service开发32134_ev-迅捷文字转语音-1790976357416zh.txt"
+      ],
+      "words": 4459,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "service",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/service/base_data_service.go",
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/appstore/domain/service/appStore_data_service.go",
+        "code/课件/middleware/domain/service/middle_type_data_service.go",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html"
+      ]
+    },
+    {
+      "id": "5-13",
+      "title": "5-13GOPaaS平台Main开发基础中间件创建上0840_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-13GOPaaS平台Main开发基础中间件创建上0840_ev-迅捷文字转语音-1790977559756zh.txt"
+      ],
+      "words": 2275,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "main",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/model/base.go",
+        "code/课件/appstore/domain/model/app_category.go",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/appstore/domain/model/app_middle.go",
+        "code/课件/appstore/domain/model/app_volume.go",
+        "code/课件/appstore/domain/model/app_isv.go",
+        "code/课件/pod/domain/model/pod_env.go",
+        "code/课件/appstore/domain/model/app_image.go"
+      ]
+    },
+    {
+      "id": "5-14",
+      "title": "5-14GOPaaS平台Main开发基础中间件创建下1015_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-14GOPaaS平台Main开发基础中间件创建下1015_ev-迅捷文字转语音-1790977568775zh.txt"
+      ],
+      "words": 2938,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "main",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/model/base.go",
+        "code/课件/appstore/domain/model/app_category.go",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/appstore/domain/model/app_middle.go",
+        "code/课件/appstore/domain/model/app_volume.go",
+        "code/课件/appstore/domain/model/app_isv.go",
+        "code/课件/pod/domain/model/pod_env.go",
+        "code/课件/appstore/domain/model/app_image.go"
+      ]
+    },
+    {
+      "id": "5-15",
+      "title": "5-15创建k8s集群config通过kubectl操作k8s集群上1159_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-15创建k8s集群config通过kubectl操作k8s集群上1159_ev-迅捷文字转语音-1790977578173zh.txt"
+      ],
+      "words": 2696,
+      "merged": false,
+      "tokens": [
+        "k8s",
+        "config",
+        "kubectl",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/common/config.go",
+        "code/课件/middleware/domain/model/middle_config.go",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html"
+      ]
+    },
+    {
+      "id": "5-16",
+      "title": "5-16创建k8s集群config通过kubectl操作k8s集群下1004_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-16创建k8s集群config通过kubectl操作k8s集群下1004_ev-迅捷文字转语音-1790977588583zh.txt"
+      ],
+      "words": 1963,
+      "merged": false,
+      "tokens": [
+        "k8s",
+        "config",
+        "kubectl",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/k8s-install/check_host.sh",
+        "code/课件/common/config.go",
+        "code/课件/middleware/domain/model/middle_config.go",
+        "code/课件/k8s-install/install_master.sh",
+        "code/课件/go-paas-html/pages-404.html"
+      ]
+    },
+    {
+      "id": "5-17",
+      "title": "5-17podhandler对外服务逻辑实现上0955_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-17podhandler对外服务逻辑实现上0955_ev-迅捷文字转语音-1790977595919zh.txt"
+      ],
+      "words": 1561,
+      "merged": false,
+      "tokens": [
+        "podhandler",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/pod/handler/podHandler.go",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html"
+      ]
+    },
+    {
+      "id": "5-18",
+      "title": "5-18podhandler对外服务逻辑实现下1151_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-18podhandler对外服务逻辑实现下1151_ev-迅捷文字转语音-1790977603439zh.txt"
+      ],
+      "words": 1937,
+      "merged": false,
+      "tokens": [
+        "podhandler",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/pod/handler/podHandler.go",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html"
+      ]
+    },
+    {
+      "id": "5-19",
+      "title": "5-19POD服务打包到docker中的注意事项及代码修改注意事项1700_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-19POD服务打包到docker中的注意事项及代码修改注意事项1700_ev-迅捷文字转语音-1790978797284zh.txt"
+      ],
+      "words": 5155,
+      "merged": false,
+      "tokens": [
+        "pod",
+        "docker",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-front/pod-create.html",
+        "code/课件/go-paas-front/pod-detail.html",
+        "code/课件/go-paas-front/pod-index.html",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/pod/domain/model/pod_env.go",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/podapi/filebeat.yml"
+      ]
+    },
+    {
+      "id": "5-20",
+      "title": "5-20PodAPI工程目录以及proto文件开发1231_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-20PodAPI工程目录以及proto文件开发1231_ev-迅捷文字转语音-1790978810777zh.txt"
+      ],
+      "words": 3058,
+      "merged": false,
+      "tokens": [
+        "podapi",
+        "proto",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/podapi/proto/podApi/podApi.proto",
+        "code/课件/podapi/proto/podApi/podApi.pb.micro.go",
+        "code/课件/podapi/proto/podApi/podApi.pb.go",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/podapi/go.mod",
+        "code/课件/svcapi/proto/svcApi/svcApi.proto",
+        "code/课件/routeapi/proto/routeApi/routeApi.proto",
+        "code/课件/volumeapi/proto/volumeApi/volumeApi.proto"
+      ]
+    },
+    {
+      "id": "5-21",
+      "title": "5-21PodAPIHandler开发1313_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-21PodAPIHandler开发1313_ev-迅捷文字转语音-1790978821481zh.txt"
+      ],
+      "words": 2380,
+      "merged": false,
+      "tokens": [
+        "podapihandler",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/podapi/handler/podApiHandler.go",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html"
+      ]
+    },
+    {
+      "id": "5-22",
+      "title": "5-22Podmain开发2144_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-22Podmain开发2144_ev-迅捷文字转语音-1790978833286zh.txt"
+      ],
+      "words": 4551,
+      "merged": false,
+      "tokens": [
+        "podmain",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html",
+        "code/课件/go-paas-front/route-create.html"
+      ]
+    },
+    {
+      "id": "5-23",
+      "title": "5-23统一网关的说明讲解0451_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-23统一网关的说明讲解0451_ev-迅捷文字转语音-1790978847488zh.txt"
+      ],
+      "words": 1626,
+      "merged": false,
+      "tokens": [
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html",
+        "code/课件/go-paas-front/route-create.html"
+      ]
+    },
+    {
+      "id": "5-24",
+      "title": "5-24API完善及pod前端页面开发上1411_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-24API完善及pod前端页面开发上1411_ev-迅捷文字转语音-1790979724714zh.txt"
+      ],
+      "words": 3843,
+      "merged": false,
+      "tokens": [
+        "api",
+        "pod",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/podapi/go.mod",
+        "code/课件/podapi/proto/podApi/podApi.proto",
+        "code/课件/podapi/plugin/hystrix/hystrix.go",
+        "code/课件/podapi/plugin/form/from.go",
+        "code/课件/podapi/main.go",
+        "code/课件/podapi/README.md",
+        "code/课件/podapi/handler/podApiHandler.go"
+      ]
+    },
+    {
+      "id": "5-25",
+      "title": "5-25API完善及pod前端页面开发下1157_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-25API完善及pod前端页面开发下1157_ev-迅捷文字转语音-1790979743766zh.txt"
+      ],
+      "words": 3108,
+      "merged": false,
+      "tokens": [
+        "api",
+        "pod",
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/podapi/go.mod",
+        "code/课件/podapi/proto/podApi/podApi.proto",
+        "code/课件/podapi/plugin/hystrix/hystrix.go",
+        "code/课件/podapi/plugin/form/from.go",
+        "code/课件/podapi/main.go",
+        "code/课件/podapi/README.md",
+        "code/课件/podapi/handler/podApiHandler.go"
+      ]
+    },
+    {
+      "id": "5-26",
+      "title": "5-26总结思考0703_ev",
+      "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源/5-26总结思考0703_ev-迅捷文字转语音-1790979767942zh.txt"
+      ],
+      "words": 2532,
+      "merged": false,
+      "tokens": [
+        "paas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/pages-404.html",
+        "code/课件/go-paas-html/pages-forgot-password.html",
+        "code/课件/go-paas-html/pages-login.html",
+        "code/课件/go-paas-html/pages-login2.html",
+        "code/课件/go-paas-html/pages-sign-up.html",
+        "code/课件/go-paas-html/layouts-nosidebars.html",
+        "code/课件/go-paas-front/volume-create.html",
+        "code/课件/go-paas-front/route-create.html"
+      ]
+    },
+    {
+      "id": "[10.9]中间件proto文件开发更多资源ubkz.com",
+      "title": "[10.9] 中间件 proto 文件开发更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.9] 中间件 proto 文件开发更多资源ubkz.com-迅捷文字转语音-1790984654892zh.txt"
+      ],
+      "words": 1845,
+      "merged": false,
+      "tokens": [
+        "proto",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.20]总结&思考更多资源ubkz.com",
+      "title": "[10.20] 总结&思考更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.20] 总结&思考更多资源ubkz.com-迅捷文字转语音-1790986061967zh.txt"
+      ],
+      "words": 611,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[6.3]--6-3service服务端model模型开发",
+      "title": "[6.3]--6-3Service服务端model模型开发",
+      "chapter": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.3]--6-3Service服务端model模型开发[16]-迅捷文字转语音-1790980007451zh.txt"
+      ],
+      "words": 2970,
+      "merged": false,
+      "tokens": [
+        "service",
+        "model",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/model/base.go",
+        "code/课件/appstore/domain/model/app_category.go",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/appstore/domain/model/app_middle.go",
+        "code/课件/appstore/domain/model/app_volume.go",
+        "code/课件/appstore/domain/model/app_isv.go",
+        "code/课件/pod/domain/model/pod_env.go",
+        "code/课件/appstore/domain/model/app_image.go"
+      ]
+    },
+    {
+      "id": "[6.6]--6-6svcapi工程创建及接口业务逻辑开发",
+      "title": "[6.6]--6-6svcAPI工程创建及接口业务逻辑开发",
+      "chapter": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.6]--6-6svcAPI工程创建及接口业务逻辑开发[16]-迅捷文字转语音-1790980573204zh.txt"
+      ],
+      "words": 5063,
+      "merged": false,
+      "tokens": [
+        "svcapi",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/svcapi/filebeat.yml",
+        "code/课件/svcapi/go.mod",
+        "code/课件/svcapi/proto/svcApi/svcApi.proto",
+        "code/课件/svcapi/plugin/hystrix/hystrix.go",
+        "code/课件/svcapi/plugin/form/form.go",
+        "code/课件/svcapi/README.md",
+        "code/课件/svcapi/main.go",
+        "code/课件/svcapi/handler/svcApiHandler.go"
+      ]
+    },
+    {
+      "id": "[6.5]--6-5service服务开发",
+      "title": "[6.5]--6-5Service服务开发",
+      "chapter": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.5]--6-5Service服务开发[16]-迅捷文字转语音-1790980552908zh.txt",
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.5]--6-5Service服务开发[16]-迅捷文字转语音-1790980030391zh.txt"
+      ],
+      "words": 6510,
+      "merged": true,
+      "tokens": [
+        "service",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/service/base_data_service.go",
+        "code/课件/appstore/domain/service/appStore_data_service.go",
+        "code/课件/middleware/domain/service/middle_type_data_service.go",
+        "code/课件/svc/domain/service/svc_data_service.go",
+        "code/课件/route/domain/service/route_data_service.go",
+        "code/课件/volume/domain/service/volume_data_service.go",
+        "code/课件/pod/domain/service/pod_data_service.go",
+        "code/课件/middleware/domain/service/middleware_data_service.go"
+      ]
+    },
+    {
+      "id": "[6.7]--6-7服务管理前端效果展示及删除接口完善",
+      "title": "[6.7]--6-7服务管理前端效果展示及删除接口完善",
+      "chapter": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.7]--6-7服务管理前端效果展示及删除接口完善[16]-迅捷文字转语音-1790980596466zh.txt"
+      ],
+      "words": 3033,
+      "merged": false,
+      "tokens": [
+        "gopaas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[6.8]--6-8总结&amp;思考",
+      "title": "[6.8]--6-8总结&amp;思考",
+      "chapter": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.8]--6-8总结&amp;思考[16]-迅捷文字转语音-1790980607938zh.txt"
+      ],
+      "words": 1315,
+      "merged": false,
+      "tokens": [
+        "amp",
+        "gopaas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[6.4]--6-4service服务端proto文件开发及代码生成",
+      "title": "[6.4]--6-4service服务端proto文件开发及代码生成",
+      "chapter": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.4]--6-4service服务端proto文件开发及代码生成[16]-迅捷文字转语音-1790980023805zh.txt"
+      ],
+      "words": 751,
+      "merged": false,
+      "tokens": [
+        "service",
+        "proto",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/svcapi/proto/svcApi/svcApi.proto",
+        "code/课件/routeapi/proto/routeApi/routeApi.proto",
+        "code/课件/volumeapi/proto/volumeApi/volumeApi.proto",
+        "code/课件/podapi/proto/podApi/podApi.proto",
+        "code/课件/volume/proto/volume/volume.proto",
+        "code/课件/route/proto/route/route.proto",
+        "code/课件/svc/proto/svc/svc.proto",
+        "code/课件/appstoreapi/proto/appStoreApi/appStoreApi.proto"
+      ]
+    },
+    {
+      "id": "[6.1]--6-1service类型原理介绍",
+      "title": "[6.1]--6-1Service类型原理介绍",
+      "chapter": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.1]--6-1Service类型原理介绍[16]-迅捷文字转语音-1790979981156zh.txt"
+      ],
+      "words": 6885,
+      "merged": false,
+      "tokens": [
+        "service",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/base/domain/service/base_data_service.go",
+        "code/课件/appstore/domain/service/appStore_data_service.go",
+        "code/课件/middleware/domain/service/middle_type_data_service.go",
+        "code/课件/svc/domain/service/svc_data_service.go",
+        "code/课件/route/domain/service/route_data_service.go",
+        "code/课件/volume/domain/service/volume_data_service.go",
+        "code/课件/pod/domain/service/pod_data_service.go",
+        "code/课件/middleware/domain/service/middleware_data_service.go"
+      ]
+    },
+    {
+      "id": "[6.2]--6-2cap-v2,cap-tool,cap-api-gatew",
+      "title": "[6.2]--6-2cap-v2,cap-tool,cap-api-gatew",
+      "chapter": "第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第6章 云原生GoPaaS平台服务管理功能开发，学习服务与底层的关/[6.2]--6-2cap-v2,cap-tool,cap-api-gatew[16]-迅捷文字转语音-1790979997838zh.txt"
+      ],
+      "words": 1548,
+      "merged": false,
+      "tokens": [
+        "cap-v2",
+        "cap-tool",
+        "cap-api-gatew",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/cap-tool/tpl/ignore.go",
+        "code/课件/cap-tool/tpl/plugin.go",
+        "code/课件/cap-tool/tpl/filebeat.go",
+        "code/课件/cap-tool/tpl/docker.go",
+        "code/课件/cap-tool/go.mod",
+        "code/课件/cap-tool/tpl/makefile.go",
+        "code/课件/cap-tool/main.go",
+        "code/课件/cap-tool/tpl/hystrix.go"
+      ]
+    },
+    {
+      "id": "[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "title": "[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态/[7.2]--7-2路由model与repository开发调整更多资源ubkz.com-迅捷文字转语音-1790980865095zh.txt"
+      ],
+      "words": 2562,
+      "merged": false,
+      "tokens": [
+        "model",
+        "repository",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/base/domain/model/base.go",
+        "code/课件/appstore/domain/model/app_category.go",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/appstore/domain/model/app_middle.go",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/appstore/domain/model/app_volume.go",
+        "code/课件/appstore/domain/model/app_isv.go"
+      ]
+    },
+    {
+      "id": "[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "title": "[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态/[7.1]--7-1路由ingress架构详解更多资源ubkz.com-迅捷文字转语音-1790980856443zh.txt"
+      ],
+      "words": 3549,
+      "merged": false,
+      "tokens": [
+        "ingress",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/ingress/README.md",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go"
+      ]
+    },
+    {
+      "id": "[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "title": "[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态/[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com-迅捷文字转语音-1790981429125zh.txt"
+      ],
+      "words": 2143,
+      "merged": false,
+      "tokens": [
+        "route",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/routeapi/filebeat.yml",
+        "code/课件/route/filebeat.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/route/domain/model/route.go"
+      ]
+    },
+    {
+      "id": "[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "title": "[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态/[7.8]--7-8总结&amp;思考更多资源ubkz.com-迅捷文字转语音-1790981437073zh.txt"
+      ],
+      "words": 1842,
+      "merged": false,
+      "tokens": [
+        "amp",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "title": "[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态/[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com-迅捷文字转语音-1790980899361zh.txt"
+      ],
+      "words": 2454,
+      "merged": false,
+      "tokens": [
+        "handler",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "title": "[7.5]--7-5route对外API的开发更多资源ubkz.com",
+      "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态/[7.5]--7-5route对外API的开发更多资源ubkz.com-迅捷文字转语音-1790980910617zh.txt"
+      ],
+      "words": 3216,
+      "merged": false,
+      "tokens": [
+        "route",
+        "api",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/routeapi/filebeat.yml",
+        "code/课件/routeapi/go.mod",
+        "code/课件/routeapi/proto/routeApi/routeApi.proto",
+        "code/课件/routeapi/plugin/hystrix/hystrix.go",
+        "code/课件/routeapi/form/form.go",
+        "code/课件/routeapi/README.md",
+        "code/课件/routeapi/main.go",
+        "code/课件/routeapi/handler/routeApiHandler.go"
+      ]
+    },
+    {
+      "id": "[7.3]--7-3路由service开发更多资源ubkz.com",
+      "title": "[7.3]--7-3路由service开发更多资源ubkz.com",
+      "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态/[7.3]--7-3路由service开发更多资源ubkz.com-迅捷文字转语音-1790980875578zh.txt"
+      ],
+      "words": 4313,
+      "merged": false,
+      "tokens": [
+        "service",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "title": "[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态/[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com-迅捷文字转语音-1790980923955zh.txt"
+      ],
+      "words": 1227,
+      "merged": false,
+      "tokens": [
+        "k8s",
+        "nginx-controller",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "title": "[8.1]--8-1GoPaaS平台监控系统Prometheus架构介绍更多资源ubkz.com",
+      "chapter": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用/[8.1]--8-1GoPaaS平台监控系统Prometheus架构介绍更多资源ubkz.com-迅捷文字转语音-1790981524869zh.txt"
+      ],
+      "words": 3491,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "prometheus",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/prometheus.yml",
+        "code/课件/common/prometheus.go",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml"
+      ]
+    },
+    {
+      "id": "[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "title": "[8.2]--8-2GoPaaS平台Prometheus监控安装更多资源ubkz.com",
+      "chapter": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用/[8.2]--8-2GoPaaS平台Prometheus监控安装更多资源ubkz.com-迅捷文字转语音-1790981534130zh.txt"
+      ],
+      "words": 2149,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "prometheus",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/prometheus.yml",
+        "code/课件/common/prometheus.go",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml"
+      ]
+    },
+    {
+      "id": "[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "title": "[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "chapter": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用/[8.4]--8-4总结&amp;思考更多资源ubkz.com-迅捷文字转语音-1790981554939zh.txt"
+      ],
+      "words": 1392,
+      "merged": false,
+      "tokens": [
+        "amp",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "title": "[8.3]--8-3GoPaaS平台监控Grafana图标使用说明更多资源ubkz.com",
+      "chapter": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用/[8.3]--8-3GoPaaS平台监控Grafana图标使用说明更多资源ubkz.com-迅捷文字转语音-1790981542115zh.txt"
+      ],
+      "words": 2986,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "grafana",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "title": "[9.6]--9-6GoPaaS平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.6]--9-6GoPaaS平台cephadm安装基础集群（上）更多资源ubkz.com-迅捷文字转语音-1790982154683zh.txt"
+      ],
+      "words": 3136,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "cephadm",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "title": "[9.2]--9-2GoPaaS平台Ceph核心组件介绍更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.2]--9-2GoPaaS平台Ceph核心组件介绍更多资源ubkz.com-迅捷文字转语音-1790982124691zh.txt"
+      ],
+      "words": 1440,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "ceph",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "title": "[9.3]--9-3GoPaaS平台Ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.3]--9-3GoPaaS平台Ceph存储过程及核心概念介绍更多资源ubkz.com-迅捷文字转语音-1790982130456zh.txt"
+      ],
+      "words": 3315,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "ceph",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "title": "[9.16]--9-16GoPaaS平台volumeapi开发更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.16]--9-16GoPaaS平台volumeapi开发更多资源ubkz.com-迅捷文字转语音-1790983140106zh.txt"
+      ],
+      "words": 2265,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "volumeapi",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/volumeapi/filebeat.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go"
+      ]
+    },
+    {
+      "id": "[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "title": "[9.4]--9-4GoPaaS平台Ceph资源购买注意事项更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.4]--9-4GoPaaS平台Ceph资源购买注意事项更多资源ubkz.com-迅捷文字转语音-1790982139048zh.txt"
+      ],
+      "words": 2684,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "ceph",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "title": "[9.12]--9-12GoPaaS平台Service开发（上）更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.12]--9-12GoPaaS平台Service开发（上）更多资源ubkz.com-迅捷文字转语音-1790982630348zh.txt"
+      ],
+      "words": 2468,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "service",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "title": "[9.11]--9-11GoPaaS平台PVC模型开发更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.11]--9-11GoPaaS平台PVC模型开发更多资源ubkz.com-迅捷文字转语音-1790982621960zh.txt"
+      ],
+      "words": 2264,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "pvc",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "title": "[9.15]--9-15GoPaaS平台ServiceHandler开发更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.15]--9-15GoPaaS平台ServiceHandler开发更多资源ubkz.com-迅捷文字转语音-1790983129408zh.txt"
+      ],
+      "words": 1957,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "servicehandler",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "title": "[9.5]--9-5GoPaaS平台Ceph安全机器初始化更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.5]--9-5GoPaaS平台Ceph安全机器初始化更多资源ubkz.com-迅捷文字转语音-1790982147962zh.txt"
+      ],
+      "words": 1846,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "ceph",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "title": "[9.7]--9-7GoPaaS平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.7]--9-7GoPaaS平台cephadm安装基础集群（下）更多资源ubkz.com-迅捷文字转语音-1790982579090zh.txt"
+      ],
+      "words": 3824,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "cephadm",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "title": "[9.9]--9-9GoPaaS平台k8s通过CSI方式添加外部Ceph系统（更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.9]--9-9GoPaaS平台k8s通过CSI方式添加外部Ceph系统（更多资源ubkz.com-迅捷文字转语音-1790982601656zh.txt"
+      ],
+      "words": 3721,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "k8s",
+        "csi",
+        "ceph",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/ceph/2.k8s 使用 CSI 添加 ceph 为存储.md",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go"
+      ]
+    },
+    {
+      "id": "[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "title": "[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.17]--9-17总结&amp;思考更多资源ubkz.com-迅捷文字转语音-1790983150039zh.txt"
+      ],
+      "words": 1509,
+      "merged": false,
+      "tokens": [
+        "amp",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "title": "[9.1]--9-1GoPaaS平台分布式存储Ceph架构介绍更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.1]--9-1GoPaaS平台分布式存储Ceph架构介绍更多资源ubkz.com-迅捷文字转语音-1790982112936zh.txt"
+      ],
+      "words": 3317,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "ceph",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "title": "[9.13]--9-13GoPaaS平台Service开发（下）更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.13]--9-13GoPaaS平台Service开发（下）更多资源ubkz.com-迅捷文字转语音-1790983105580zh.txt"
+      ],
+      "words": 2602,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "service",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "title": "[9.10]--9-10GoPaaS平台k8s通过CSI方式添加外部Ceph系统更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.10]--9-10GoPaaS平台k8s通过CSI方式添加外部Ceph系统更多资源ubkz.com-迅捷文字转语音-1790982613326zh.txt"
+      ],
+      "words": 3380,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "k8s",
+        "csi",
+        "ceph",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/ceph/2.k8s 使用 CSI 添加 ceph 为存储.md",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go"
+      ]
+    },
+    {
+      "id": "[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "title": "[9.14]--9-14GoPaaS平台PV与PVC的关系和原理说明更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.14]--9-14GoPaaS平台PV与PVC的关系和原理说明更多资源ubkz.com-迅捷文字转语音-1790983118969zh.txt"
+      ],
+      "words": 4905,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "pvc",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "title": "[9.8]--9-8GoPaaS平台ceph核心组件安装更多资源ubkz.com",
+      "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘/[9.8]--9-8GoPaaS平台ceph核心组件安装更多资源ubkz.com-迅捷文字转语音-1790982590501zh.txt"
+      ],
+      "words": 2911,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "ceph",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "title": "[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com-迅捷文字转语音-1790985485144zh.txt"
+      ],
+      "words": 1770,
+      "merged": false,
+      "tokens": [
+        "main",
+        "handler",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/base/domain/model/base.go",
+        "code/课件/appstore/domain/model/app_category.go",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/appstore/domain/model/app_middle.go",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/appstore/domain/model/app_volume.go",
+        "code/课件/appstore/domain/model/app_isv.go"
+      ]
+    },
+    {
+      "id": "[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "title": "[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com-迅捷文字转语音-1790985459696zh.txt"
+      ],
+      "words": 1661,
+      "merged": false,
+      "tokens": [
+        "service",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "title": "[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com-迅捷文字转语音-1790984690348zh.txt"
+      ],
+      "words": 2550,
+      "merged": false,
+      "tokens": [
+        "middlewareservice",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "title": "[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com-迅捷文字转语音-1790984645989zh.txt"
+      ],
+      "words": 1302,
+      "merged": false,
+      "tokens": [
+        "type",
+        "verisonrepository",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "title": "[10.19]--10-19中间件前端页面以及核心API开发（下）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.19]--10-19中间件前端页面以及核心API开发（下）更多资源ubkz.com-迅捷文字转语音-1790985519423zh.txt"
+      ],
+      "words": 2947,
+      "merged": false,
+      "tokens": [
+        "api",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/volumeapi/filebeat.yml",
+        "code/课件/svcapi/filebeat.yml",
+        "code/课件/routeapi/filebeat.yml",
+        "code/课件/middlewareapi/filebeat.yml"
+      ]
+    },
+    {
+      "id": "[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "title": "[10.18]--10-18中间件前端页面以及核心API开发（中）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.18]--10-18中间件前端页面以及核心API开发（中）更多资源ubkz.com-迅捷文字转语音-1790985506805zh.txt"
+      ],
+      "words": 2768,
+      "merged": false,
+      "tokens": [
+        "api",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/volumeapi/filebeat.yml",
+        "code/课件/svcapi/filebeat.yml",
+        "code/课件/routeapi/filebeat.yml",
+        "code/课件/middlewareapi/filebeat.yml"
+      ]
+    },
+    {
+      "id": "[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "title": "[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.11]--10-11中间件service开发（2）更多资源ubkz.com-迅捷文字转语音-1790984684982zh.txt"
+      ],
+      "words": 629,
+      "merged": false,
+      "tokens": [
+        "service",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "title": "[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.6]--10-6中间件类型type和version创建更多资源ubkz.com-迅捷文字转语音-1790983915432zh.txt"
+      ],
+      "words": 958,
+      "merged": false,
+      "tokens": [
+        "type",
+        "version",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/middleware/domain/model/middle_version.go"
+      ]
+    },
+    {
+      "id": "[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "title": "[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.10]--10-10中间件service开发（1）更多资源ubkz.com-迅捷文字转语音-1790984670938zh.txt"
+      ],
+      "words": 2089,
+      "merged": false,
+      "tokens": [
+        "service",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "title": "[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com-迅捷文字转语音-1790983923252zh.txt"
+      ],
+      "words": 1672,
+      "merged": false,
+      "tokens": [
+        "middlewarerepository",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "title": "[10.17]--10-17中间件前端页面以及核心API开发（上）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.17]--10-17中间件前端页面以及核心API开发（上）更多资源ubkz.com-迅捷文字转语音-1790985496970zh.txt"
+      ],
+      "words": 2485,
+      "merged": false,
+      "tokens": [
+        "api",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/volumeapi/filebeat.yml",
+        "code/课件/svcapi/filebeat.yml",
+        "code/课件/routeapi/filebeat.yml",
+        "code/课件/middlewareapi/filebeat.yml"
+      ]
+    },
+    {
+      "id": "[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "title": "[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com-迅捷文字转语音-1790985471160zh.txt"
+      ],
+      "words": 2732,
+      "merged": false,
+      "tokens": [
+        "main",
+        "handler",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/base/domain/model/base.go",
+        "code/课件/appstore/domain/model/app_category.go",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/appstore/domain/model/app_middle.go",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/appstore/domain/model/app_volume.go",
+        "code/课件/appstore/domain/model/app_isv.go"
+      ]
+    },
+    {
+      "id": "[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "title": "[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com-迅捷文字转语音-1790984701724zh.txt"
+      ],
+      "words": 1918,
+      "merged": false,
+      "tokens": [
+        "middlewareservice",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "title": "[10.4]--10-4中间件model-MiddleConfig创建更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.4]--10-4中间件model-MiddleConfig创建更多资源ubkz.com-迅捷文字转语音-1790983909760zh.txt"
+      ],
+      "words": 501,
+      "merged": false,
+      "tokens": [
+        "model-middleconfig",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "title": "[10.2]--10-2GoPAAS平台中间件model-middle_port更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.2]--10-2GoPAAS平台中间件model-middle_port更多资源ubkz.com-迅捷文字转语音-1790983899927zh.txt"
+      ],
+      "words": 607,
+      "merged": false,
+      "tokens": [
+        "gopaas",
+        "model-middle_port",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "title": "[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com-迅捷文字转语音-1790983904875zh.txt"
+      ],
+      "words": 587,
+      "merged": false,
+      "tokens": [
+        "model-middle_env",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "title": "[10.1]--10-1Go云原生PaaS平台中间件model-middlewa更多资源ubkz.com",
+      "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件/[10.1]--10-1Go云原生PaaS平台中间件model-middlewa更多资源ubkz.com-迅捷文字转语音-1790983889784zh.txt"
+      ],
+      "words": 2212,
+      "merged": false,
+      "tokens": [
+        "paas",
+        "model-middlewa",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/go-paas-html/email-compose.html",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go"
+      ]
+    },
+    {
+      "id": "[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "title": "[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.13]--11-13总结&amp;思考更多资源ubkz.com-迅捷文字转语音-1790986619423zh.txt"
+      ],
+      "words": 957,
+      "merged": false,
+      "tokens": [
+        "amp",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "title": "[11.9]--11-9云应用市场APIform表单处理研发更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.9]--11-9云应用市场APIform表单处理研发更多资源ubkz.com-迅捷文字转语音-1790986378301zh.txt"
+      ],
+      "words": 2165,
+      "merged": false,
+      "tokens": [
+        "apiform",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "title": "[11.6]--11-6云应用市场服务端Proto开发更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.6]--11-6云应用市场服务端Proto开发更多资源ubkz.com-迅捷文字转语音-1790986143205zh.txt"
+      ],
+      "words": 1573,
+      "merged": false,
+      "tokens": [
+        "proto",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "title": "[11.11]--11-11云应用addAppStore（中）更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.11]--11-11云应用addAppStore（中）更多资源ubkz.com-迅捷文字转语音-1790986397281zh.txt"
+      ],
+      "words": 741,
+      "merged": false,
+      "tokens": [
+        "addappstore",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "title": "[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com-迅捷文字转语音-1790986115616zh.txt"
+      ],
+      "words": 2017,
+      "merged": false,
+      "tokens": [
+        "model",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/base/domain/model/base.go",
+        "code/课件/appstore/domain/model/app_category.go",
+        "code/课件/appstore/domain/model/app_pod.go",
+        "code/课件/appstore/domain/model/app_middle.go",
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/appstore/domain/model/app_volume.go",
+        "code/课件/appstore/domain/model/app_isv.go"
+      ]
+    },
+    {
+      "id": "[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "title": "[11.5]--11-5云应用平台Service代码开发更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.5]--11-5云应用平台Service代码开发更多资源ubkz.com-迅捷文字转语音-1790986138044zh.txt"
+      ],
+      "words": 821,
+      "merged": false,
+      "tokens": [
+        "service",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "title": "[11.10]--11-10云应用添加应用addAppStore接口（上）更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.10]--11-10云应用添加应用addAppStore接口（上）更多资源ubkz.com-迅捷文字转语音-1790986388617zh.txt"
+      ],
+      "words": 1146,
+      "merged": false,
+      "tokens": [
+        "addappstore",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "title": "[11.8]--11-8云应用市场APiProto开发更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.8]--11-8云应用市场APiProto开发更多资源ubkz.com-迅捷文字转语音-1790986368520zh.txt"
+      ],
+      "words": 1676,
+      "merged": false,
+      "tokens": [
+        "apiproto",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "title": "[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.1]--11-1云应用市场开发介绍更多资源ubkz.com-迅捷文字转语音-1790986097632zh.txt"
+      ],
+      "words": 614,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "title": "[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com-迅捷文字转语音-1790986102158zh.txt"
+      ],
+      "words": 2764,
+      "merged": false,
+      "tokens": [
+        "app_store",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "title": "[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com-迅捷文字转语音-1790986125013zh.txt"
+      ],
+      "words": 2718,
+      "merged": false,
+      "tokens": [
+        "repository",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "title": "[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com-迅捷文字转语音-1790986355910zh.txt"
+      ],
+      "words": 1863,
+      "merged": false,
+      "tokens": [
+        "handler",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "title": "[11.12]--11-12云应用市场API开发（下）更多资源ubkz.com",
+      "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平/[11.12]--11-12云应用市场API开发（下）更多资源ubkz.com-迅捷文字转语音-1790986403711zh.txt"
+      ],
+      "words": 1137,
+      "merged": false,
+      "tokens": [
+        "api",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/volumeapi/filebeat.yml",
+        "code/课件/svcapi/filebeat.yml",
+        "code/课件/routeapi/filebeat.yml",
+        "code/课件/middlewareapi/filebeat.yml"
+      ]
+    },
+    {
+      "id": "[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "title": "[12.14]--12-14用户中前端API开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.14]--12-14用户中前端API开发更多资源ubkz.com-迅捷文字转语音-1790987169322zh.txt"
+      ],
+      "words": 4303,
+      "merged": false,
+      "tokens": [
+        "api",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/podapi/filebeat.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/volumeapi/filebeat.yml",
+        "code/课件/svcapi/filebeat.yml",
+        "code/课件/routeapi/filebeat.yml",
+        "code/课件/middlewareapi/filebeat.yml"
+      ]
+    },
+    {
+      "id": "[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "title": "[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.15]--12-15总结&amp;思考更多资源ubkz.com-迅捷文字转语音-1790987198798zh.txt"
+      ],
+      "words": 1294,
+      "merged": false,
+      "tokens": [
+        "amp",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "title": "[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com-迅捷文字转语音-1790986675132zh.txt"
+      ],
+      "words": 2986,
+      "merged": false,
+      "tokens": [
+        "userrepository",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "title": "[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com-迅捷文字转语音-1790986929767zh.txt"
+      ],
+      "words": 1181,
+      "merged": false,
+      "tokens": [
+        "userhandler",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "title": "[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com-迅捷文字转语音-1790986938788zh.txt"
+      ],
+      "words": 1393,
+      "merged": false,
+      "tokens": [
+        "rolehandler",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "title": "[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com-迅捷文字转语音-1790987159023zh.txt"
+      ],
+      "words": 1210,
+      "merged": false,
+      "tokens": [
+        "handler",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "title": "[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.7]--12-7用户中心-role-service开发更多资源ubkz.com-迅捷文字转语音-1790986899437zh.txt"
+      ],
+      "words": 692,
+      "merged": false,
+      "tokens": [
+        "role-service",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "title": "[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com-迅捷文字转语音-1790986907597zh.txt"
+      ],
+      "words": 314,
+      "merged": false,
+      "tokens": [
+        "service",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "title": "[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.6]--12-6用户中心-user-service开发更多资源ubkz.com-迅捷文字转语音-1790986710789zh.txt"
+      ],
+      "words": 759,
+      "merged": false,
+      "tokens": [
+        "user-service",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "title": "[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com-迅捷文字转语音-1790986706517zh.txt"
+      ],
+      "words": 517,
+      "merged": false,
+      "tokens": [
+        "repository",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "title": "[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com-迅捷文字转语音-1790986913676zh.txt"
+      ],
+      "words": 770,
+      "merged": false,
+      "tokens": [
+        "user-proto",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "title": "[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com-迅捷文字转语音-1790986701129zh.txt"
+      ],
+      "words": 517,
+      "merged": false,
+      "tokens": [
+        "repository",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "title": "[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com-迅捷文字转语音-1790986692235zh.txt"
+      ],
+      "words": 1659,
+      "merged": false,
+      "tokens": [
+        "repository",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "title": "[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com-迅捷文字转语音-1790986921005zh.txt"
+      ],
+      "words": 1341,
+      "merged": false,
+      "tokens": [
+        "proto",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    },
+    {
+      "id": "[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "title": "[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
+      "sources": [
+        "work/source/7.mksz535-Go开发者的涨薪通道：自主开发PaaS平台核心功能[完结]/第12章云原生GoPaaS平台用户中心，健全验证统一管理/[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com-迅捷文字转语音-1790986658810zh.txt"
+      ],
+      "words": 2923,
+      "merged": false,
+      "tokens": [
+        "user-role-permissi",
+        "ubkz",
+        "com",
+        "gopaas"
+      ],
+      "code_refs": [
+        "code/课件/docker-compose/chapter3/elasticsearch/config/elasticsearch.yml",
+        "code/课件/docker-compose/chapter3/kibana/config/kibana.yml",
+        "code/课件/docker-compose/chapter3/logstash/config/logstash.yml",
+        "code/课件/docker-compose/chapter3/logstash/pipeline/logstash.conf",
+        "code/课件/common/swap.go",
+        "code/课件/docker-compose/chapter2/docker-compose.yml",
+        "code/课件/appstore/domain/model/app_comment.go",
+        "code/课件/docker-compose/chapter3/prometheus.yml"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# yaml 配置实例
+version: '3'
+services:
+  #服务名称
+  base-service:
+    # 构建
+    build:
+      context: ../../base
+      dockerfile: Dockerfile
+    image: base-service:1.0.0
+    container_name: base-cap-service
+    restart: always
+    ports:
+    - "5000:5000"
+    - "8080:8080"

@@ -1,0 +1,155 @@
+%% es 课程 ES/Go 知识点图谱（按类别分组）
+%% 图例：绿=correct 橙=partial 红=error
+graph TD
+    classDef ok fill:#d7f5dd,stroke:#2f855a,color:#1a202c;
+    classDef warn fill:#ffe8c2,stroke:#b7791f,color:#1a202c;
+    classDef err fill:#ffd6d6,stroke:#c53030,color:#1a202c;
+
+    subgraph Mapping["Mapping / 索引与字段类型"]
+        M1[KP-MAP-01 类型推断规则]:::ok
+        M2[KP-MAP-02 dynamic 四策略]:::ok
+        M3[KP-MAP-03 写失败仍建空索引]:::ok
+        M4[KP-MAP-04 数字类型选型]:::warn
+        M5[KP-MAP-05 text+keyword 双写]:::ok
+        M6[KP-MAP-06 数组扁平化]:::ok
+        M7[KP-MAP-07 nested 类型/查询]:::ok
+        M8[KP-MAP-08 join 父子+routing]:::ok
+        M9[KP-MAP-09 global ordinals]:::ok
+        M10[KP-MAP-10 doc_values/index 开关]:::ok
+        M11[KP-MAP-11 dynamic_templates]:::ok
+    end
+
+    subgraph Write["Write / 写入"]
+        W1[KP-WRITE-01 refresh 三值]:::ok
+        W2[KP-WRITE-02 bulk 三阈值]:::ok
+        W3[KP-WRITE-03 external 版本锁]:::ok
+        W4[KP-WRITE-04 upsert 组合]:::ok
+        W5[KP-WRITE-05 ByQuery+冲突继续]:::ok
+        W6[KP-WRITE-06 routing 必带]:::ok
+        W7[KP-WRITE-07 reindex 幂等]:::ok
+        W8[KP-WRITE-08 ingest pipeline]:::ok
+    end
+
+    subgraph Search["Search / 查询"]
+        S1[KP-SEARCH-01 bool/term/match]:::ok
+        S2[KP-SEARCH-02 nested query]:::ok
+        S3[KP-SEARCH-03 function_score]:::ok
+        S4[KP-SEARCH-04 排序]:::ok
+        S5[KP-SEARCH-05 search_after]:::ok
+        S6[KP-SEARCH-06 scroll+Clear]:::warn
+        S7[KP-SEARCH-07 高亮/字段过滤]:::ok
+        S8[KP-SEARCH-08 msearch]:::ok
+        S9[KP-SEARCH-09 preference]:::ok
+    end
+
+    subgraph Agg["Aggregate / 聚合"]
+        A1[KP-AGG-01 桶/指标聚合]:::ok
+        A2[KP-AGG-02 shard_size 精度]:::ok
+        A3[KP-AGG-03 pipeline 聚合]:::ok
+    end
+
+    subgraph Ops["Ops / 运维"]
+        O1[KP-OPS-01 red/yellow 根因]:::ok
+        O2[KP-OPS-02 allocation explain]:::ok
+        O3[KP-OPS-03 磁盘三档水位线]:::ok
+        O4[KP-OPS-04 洪水线只读解除]:::ok
+        O5[KP-OPS-05 forcemerge]:::ok
+        O6[KP-OPS-06 reroute 弃数据]:::ok
+        O7[KP-OPS-07 滚动重启六步]:::ok
+        O8[KP-OPS-08 CPU 三件套]:::ok
+        O9[KP-OPS-09 分片上限 1000]:::ok
+        O10[KP-OPS-10 别名/禁通配删]:::ok
+    end
+
+    subgraph ILM["ILM / 生命周期"]
+        I1[KP-ILM-01 四阶段]:::ok
+        I2[KP-ILM-02 rollover+别名]:::ok
+        I3[KP-ILM-03 codec 需 close]:::ok
+    end
+
+    subgraph Cluster["Cluster / 集群"]
+        C1[KP-CLUSTER-01 节点角色]:::ok
+        C2[KP-CLUSTER-02 分片规划]:::ok
+        C3[KP-CLUSTER-03 冷热分层]:::warn
+        C4[KP-CLUSTER-04 分配感知]:::ok
+    end
+
+    subgraph XC["CrossCluster / 跨集群"]
+        X1[KP-XC-01 CCS]:::ok
+        X2[KP-XC-02 CCR 需白金版]:::ok
+        X3[KP-XC-03 注册 remote]:::ok
+    end
+
+    subgraph Go["GoClient / Go 客户端"]
+        G1[KP-GO-01 olivere/elastic v7]:::ok
+        G2[KP-GO-02 关 sniff+多地址]:::ok
+        G3[KP-GO-03 读写分离双 client]:::ok
+        G4[KP-GO-04 8.x 继续用 v7]:::err
+        G5[KP-GO-05 bulk 退出前 flush]:::ok
+        G6[KP-GO-06 索引缓存慎用]:::ok
+    end
+
+    subgraph DM["DataModeling / 建模"]
+        D1[KP-DM-01 宽表建模]:::ok
+        D2[KP-DM-02 nested vs join]:::ok
+        D3[KP-DM-03 冷热/空间换时间]:::ok
+    end
+
+    subgraph Int["Integration / 集成"]
+        T1[KP-INTEG-01 Kafka 解耦]:::ok
+        T2[KP-INTEG-02 Redis 压缩缓存]:::ok
+        T3[KP-INTEG-03 binlog→ES]:::ok
+        T4[KP-INTEG-04 Prometheus]:::ok
+    end
+
+    %% 关键依赖链
+    M6 --> M7
+    M6 --> M8
+    M8 --> M9
+    M7 --> S2
+    M4 --> D1
+    M10 --> D3
+    M5 --> S1
+
+    G2 --> G1
+    G3 --> G1
+    G1 --> G4
+    W2 --> G5
+    W6 --> W3
+    W3 --> W4
+    W5 --> W3
+
+    S1 --> S3
+    S4 --> S5
+    S5 -.替代.-> S6
+    S6 --> W7
+    S8 --> S1
+    A1 --> S1
+    A2 --> A1
+    A3 --> A1
+
+    O1 --> O2
+    O3 --> O1
+    O4 --> O3
+    O6 --> O2
+    O9 --> C2
+    O10 --> I1
+
+    I1 --> I2
+    I2 --> O10
+    C1 --> C2
+    C3 --> I1
+    C3 --> C4
+
+    X3 --> X1
+    X3 --> X2
+    X1 --> S1
+
+    D1 --> D2
+    D3 --> D1
+    D1 --> S1
+
+    T1 --> W2
+    T2 --> S1
+    T3 --> W1
+    T4 --> S1

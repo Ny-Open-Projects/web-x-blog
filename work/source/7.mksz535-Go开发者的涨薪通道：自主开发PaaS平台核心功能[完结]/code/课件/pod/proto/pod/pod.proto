@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package pod;
+
+option go_package = "./proto/pod;pod";
+
+service Pod {
+    rpc AddPod(PodInfo) returns (Response) {}
+    rpc DeletePod(PodId) returns (Response) {}
+    rpc FindPodByID(PodId) returns (PodInfo) {}
+    rpc UpdatePod(PodInfo) returns (Response) {}
+    rpc FindAllPod(FindAll) returns (AllPod){}
+}
+
+message PodInfo {
+    int64 id = 1;
+    string pod_namespace = 2;
+    string pod_name = 3;
+    string pod_team_id = 4;
+    float pod_cpu_max = 5;
+    int32 pod_replicas =6;
+    float pod_memory_max =7;
+    repeated PodPort pod_port =8;
+    repeated PodEnv pod_env =9;
+    string pod_pull_policy=10;
+    string pod_restart =11;
+    string pod_type=12;
+    string pod_image=13;
+}
+
+message PodPort {
+    int64 pod_id =1;
+    int32 container_port =2;
+    string protocol =3;
+}
+
+message PodEnv {
+    int64 pod_id =1;
+    string env_key =2;
+    string env_value =3;
+}
+message PodId {
+    int64 id =1;
+}
+message Response {
+    string msg =1;
+}
+
+message FindAll{
+
+}
+
+message AllPod {
+    repeated PodInfo pod_info =1 ;
+}

@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package appStore;
+
+option go_package = "./proto/appStore;appStore";
+
+service AppStore {
+	//对外提供添加服务
+	rpc AddAppStore(AppStoreInfo) returns (Response) {}
+	rpc DeleteAppStore(AppStoreId) returns (Response) {}
+	rpc UpdateAppStore(AppStoreInfo) returns (Response) {}
+	rpc FindAppStoreByID(AppStoreId) returns (AppStoreInfo) {}
+	rpc FindAllAppStore(FindAll) returns (AllAppStore) {}
+
+	//添加常用的接口
+	rpc AddInstallNum(AppStoreId) returns (Response){}
+	rpc GetInstallNum(AppStoreId) returns (Number){}
+	rpc AddViewNum(AppStoreId) returns (Response){}
+	rpc GetViewNum(AppStoreId) returns (Number){}
+}
+
+message AppStoreInfo {
+	int64 id = 1;
+	string app_sku =2;
+	string app_title= 3;
+	string app_describe =4;
+	string app_detail =5;
+	float app_price =6;
+	int64 app_install =7;
+	int64 app_views =8;
+	bool app_check =9;
+	int64 app_category_id =10;
+	int64 app_isv_id = 11;
+	repeated AppImage app_image =12;
+	repeated AppPod app_pod =13;
+	repeated AppMiddle app_middle =14;
+	repeated AppVolume app_volume =15;
+	repeated AppComment app_comment =16;
+}
+
+message AppStoreId {
+	int64 id = 1;
+}
+
+message AppImage {
+	int64 app_id =1;
+	string app_image_src =2;
+}
+
+message AppPod {
+	int64 app_id =1;
+	int64 app_pod_id =2;
+}
+
+message AppMiddle{
+	int64 app_id =1;
+	int64 app_middle_id=2;
+}
+
+message AppComment {
+	int64 app_id =1;
+	string app_comment_title =2;
+	string app_comment_detail =3;
+	int64 app_user_id =4;
+}
+
+message AppVolume{
+	int64 app_id =1;
+	int64 app_volume_id =2;
+}
+
+message FindAll {
+
+}
+
+message Response {
+	string msg =1 ;
+}
+
+message AllAppStore {
+	repeated AppStoreInfo appStore_info = 1;
+}
+
+message Number {
+	int64 num =1;
+}
+
+

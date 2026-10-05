@@ -1,0 +1,7 @@
+FROM alpine:latest
+
+RUN apk add ca-certificates
+
+COPY  cap-tool .
+
+ENTRYPOINT ["/cap-tool"]

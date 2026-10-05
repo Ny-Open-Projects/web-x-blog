@@ -1,0 +1,1310 @@
+{
+  "meta": {
+    "course": "lottery",
+    "articles": 104,
+    "code_files": 94,
+    "edges": 82
+  },
+  "nodes": [
+    {
+      "id": "A1-1",
+      "label": "1-1 Go抽奖系统导学",
+      "type": "article",
+      "chapter": "第1章 课程介绍【预备，初识】【更多IT教程 微信352852792】",
+      "words": 2969
+    },
+    {
+      "id": "A2-1",
+      "label": "2-1 年会抽奖_实现分析",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 371
+    },
+    {
+      "id": "A2-2",
+      "label": "2-2 年会抽奖基本功能实现",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 3037
+    },
+    {
+      "id": "A2-3",
+      "label": "2-3 编写web单元测试和并发安全问题",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 1513
+    },
+    {
+      "id": "A2-4",
+      "label": "2-4 用互斥锁解决并发安全问题",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 802
+    },
+    {
+      "id": "A2-5",
+      "label": "2-5 彩票_实现分析",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 303
+    },
+    {
+      "id": "A2-6",
+      "label": "2-6 刮刮乐和双色球",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 3095
+    },
+    {
+      "id": "A2-7",
+      "label": "2-7 微信摇一摇_实现分析",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 285
+    },
+    {
+      "id": "A2-8",
+      "label": "2-8 微信摇一摇实现（上）",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 3759
+    },
+    {
+      "id": "A2-9",
+      "label": "2-9 微信摇一摇实现（下）",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 3745
+    },
+    {
+      "id": "A2-10",
+      "label": "2-10 bug修复和压测",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 2272
+    },
+    {
+      "id": "A2-11",
+      "label": "2-11 支付宝集福卡_实现分析",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 356
+    },
+    {
+      "id": "A2-12",
+      "label": "2-12 支付宝集福卡实现",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 3433
+    },
+    {
+      "id": "A2-13",
+      "label": "2-13 微博抢红包_实现分析",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 490
+    },
+    {
+      "id": "A2-14",
+      "label": "2-14 实现发红包",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 3082
+    },
+    {
+      "id": "A2-15",
+      "label": "2-15 实现抢红包",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 1004
+    },
+    {
+      "id": "A2-16",
+      "label": "2-16 均衡问题和sync.Map解决异常",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 2120
+    },
+    {
+      "id": "A2-17",
+      "label": "2-17 改用chan的方式解决并发安全问题",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 1657
+    },
+    {
+      "id": "A2-18",
+      "label": "2-18 再次压测验证和优化改造",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 1335
+    },
+    {
+      "id": "A2-19",
+      "label": "2-19 抽奖大转盘_实现分析",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 457
+    },
+    {
+      "id": "A2-20",
+      "label": "2-20 抽奖大转盘初步实现",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 1889
+    },
+    {
+      "id": "A2-21",
+      "label": "2-21 sync.Mutex和atomic改造性能对比",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 1491
+    },
+    {
+      "id": "A2-22",
+      "label": "2-22 六种抽奖活动总结",
+      "type": "article",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "words": 399
+    },
+    {
+      "id": "A3-1",
+      "label": "3-1 需求整理和提炼",
+      "type": "article",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "words": 698
+    },
+    {
+      "id": "A3-2",
+      "label": "3-2 用户操作和业务流程",
+      "type": "article",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "words": 1307
+    },
+    {
+      "id": "A3-3",
+      "label": "3-3 数据库设计",
+      "type": "article",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "words": 3658
+    },
+    {
+      "id": "A3-4",
+      "label": "3-4 缓存设计",
+      "type": "article",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "words": 1583
+    },
+    {
+      "id": "A3-5",
+      "label": "3-5 系统架构设计",
+      "type": "article",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "words": 1823
+    },
+    {
+      "id": "A3-6",
+      "label": "3-6 系统设计和架构设计总结",
+      "type": "article",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "words": 474
+    },
+    {
+      "id": "A4-1",
+      "label": "4-1 项目框架搭建",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 1640
+    },
+    {
+      "id": "A4-2",
+      "label": "4-2 数据模型的生成",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 1222
+    },
+    {
+      "id": "A4-3",
+      "label": "4-3 核心的dao和service类",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 859
+    },
+    {
+      "id": "A4-4",
+      "label": "4-4 定义dao",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 7180
+    },
+    {
+      "id": "A4-5",
+      "label": "4-5 定义service",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 3072
+    },
+    {
+      "id": "A4-6",
+      "label": "4-6 定义数据库和redis配置信息",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 1594
+    },
+    {
+      "id": "A4-7",
+      "label": "4-7 创建数据库实例及其要点",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 1686
+    },
+    {
+      "id": "A4-8",
+      "label": "4-8 创建redis实例及其要点",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 2299
+    },
+    {
+      "id": "A4-9",
+      "label": "4-9 利用iris建立web站点",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 216
+    },
+    {
+      "id": "A4-10",
+      "label": "4-10 项目配置和通用方法",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 1860
+    },
+    {
+      "id": "A4-11",
+      "label": "4-11 web站点初始化构建",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 2749
+    },
+    {
+      "id": "A4-12",
+      "label": "4-12 实现IndexController",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 1428
+    },
+    {
+      "id": "A4-13",
+      "label": "4-13 完善路由和main.go文件",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 1519
+    },
+    {
+      "id": "A4-14",
+      "label": "4-14 登录和退出：安全值校验和防篡改",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 3826
+    },
+    {
+      "id": "A5-1",
+      "label": "5-1 后台功能开发介绍",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 302
+    },
+    {
+      "id": "A5-2",
+      "label": "5-2 页面模板和AdminController",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 4355
+    },
+    {
+      "id": "A5-3",
+      "label": "5-3 奖品管理实现（上）",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 1528
+    },
+    {
+      "id": "A5-4",
+      "label": "5-4 奖品管理实现（中）",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 4587
+    },
+    {
+      "id": "A5-5",
+      "label": "5-5 奖品管理实现（下）",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 3463
+    },
+    {
+      "id": "A5-6",
+      "label": "5-6 优惠券管理实现（上）",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 2505
+    },
+    {
+      "id": "A5-7",
+      "label": "5-7 优惠券管理实现（下）",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 1537
+    },
+    {
+      "id": "A5-8",
+      "label": "5-8 中奖记录管理",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 1848
+    },
+    {
+      "id": "A5-9",
+      "label": "5-9 用户管理",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 1733
+    },
+    {
+      "id": "A5-10",
+      "label": "5-10 IP黑名单管理",
+      "type": "article",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "words": 1088
+    },
+    {
+      "id": "A6-1",
+      "label": "6-1 抽奖接口开发细节分析",
+      "type": "article",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "words": 2573
+    },
+    {
+      "id": "A6-2",
+      "label": "6-2 用户并发操作的锁",
+      "type": "article",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "words": 1925
+    },
+    {
+      "id": "A6-3",
+      "label": "6-3 验证用户、IP今日参与次数（上）",
+      "type": "article",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "words": 2251
+    },
+    {
+      "id": "A6-4",
+      "label": "6-4 验证用户、IP今日参与次数（下）",
+      "type": "article",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "words": 2745
+    },
+    {
+      "id": "A6-5",
+      "label": "6-5 用户、IP黑名单的处理",
+      "type": "article",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "words": 2255
+    },
+    {
+      "id": "A6-6",
+      "label": "6-6 抽奖的实现",
+      "type": "article",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "words": 4413
+    },
+    {
+      "id": "A6-7",
+      "label": "6-7 发奖的实现",
+      "type": "article",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "words": 4675
+    },
+    {
+      "id": "A6-8",
+      "label": "6-8 中奖记录和返回结果",
+      "type": "article",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "words": 3795
+    },
+    {
+      "id": "A7-1",
+      "label": "7-1 分析_奖品数据全量缓存",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 1010
+    },
+    {
+      "id": "A7-2",
+      "label": "7-2 实现_奖品数据全量缓存（上）",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 3132
+    },
+    {
+      "id": "A7-3",
+      "label": "7-3 实现_奖品数据全量缓存（下）",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 2525
+    },
+    {
+      "id": "A7-4",
+      "label": "7-4 分析_单个用户数据部分缓存",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 550
+    },
+    {
+      "id": "A7-5",
+      "label": "7-5 实现_单个用户数据部分缓存",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 3474
+    },
+    {
+      "id": "A7-6",
+      "label": "7-6 分析_IP黑名单数据缓存",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 343
+    },
+    {
+      "id": "A7-7",
+      "label": "7-7 实现_IP黑名单数据缓存",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 784
+    },
+    {
+      "id": "A7-8",
+      "label": "7-8 优化IP今日抽奖次数",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 773
+    },
+    {
+      "id": "A7-9",
+      "label": "7-9 优化用户今日抽奖次数",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 743
+    },
+    {
+      "id": "A7-10",
+      "label": "7-10 用户今日抽奖次数（上）",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 1711
+    },
+    {
+      "id": "A7-11",
+      "label": "7-11 用户今日抽奖次数（下）",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 1399
+    },
+    {
+      "id": "A7-12",
+      "label": "7-12 为什么使用奖品池",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 672
+    },
+    {
+      "id": "A7-13",
+      "label": "7-13 初步使用奖品池",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 1331
+    },
+    {
+      "id": "A7-14",
+      "label": "7-14 分析_优惠券的全量缓存",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 849
+    },
+    {
+      "id": "A7-15",
+      "label": "7-15 实现_优惠券的全量缓存（上）",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 3109
+    },
+    {
+      "id": "A7-16",
+      "label": "7-16 实现_优惠券的全量缓存（下）",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 1417
+    },
+    {
+      "id": "A7-17",
+      "label": "7-17 使用redis优化总结",
+      "type": "article",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "words": 779
+    },
+    {
+      "id": "A8-1",
+      "label": "8-1 发奖计划设计分析",
+      "type": "article",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "words": 1351
+    },
+    {
+      "id": "A8-2",
+      "label": "8-2 实现发奖计划（上）",
+      "type": "article",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "words": 5140
+    },
+    {
+      "id": "A8-3",
+      "label": "8-3 实现发奖计划（中）",
+      "type": "article",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "words": 4306
+    },
+    {
+      "id": "A8-4",
+      "label": "8-4 实现发奖计划（下）",
+      "type": "article",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "words": 4344
+    },
+    {
+      "id": "A8-5",
+      "label": "8-5 自动填充奖品池分析",
+      "type": "article",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "words": 748
+    },
+    {
+      "id": "A8-6",
+      "label": "8-6 实现奖品池（上）",
+      "type": "article",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "words": 3730
+    },
+    {
+      "id": "A8-7",
+      "label": "8-7 实现奖品池（下）",
+      "type": "article",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "words": 1447
+    },
+    {
+      "id": "A8-8",
+      "label": "8-8 总结发奖计划和奖品池",
+      "type": "article",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "words": 461
+    },
+    {
+      "id": "A9-1",
+      "label": "9-1 前端大转盘分析",
+      "type": "article",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "words": 665
+    },
+    {
+      "id": "A9-2",
+      "label": "9-2 前端大转盘效果实现",
+      "type": "article",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "words": 6243
+    },
+    {
+      "id": "A9-3",
+      "label": "9-3 优化奖品设置分析",
+      "type": "article",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "words": 1691
+    },
+    {
+      "id": "A9-4",
+      "label": "9-4 优化发放奖品分析",
+      "type": "article",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "words": 1518
+    },
+    {
+      "id": "A9-5",
+      "label": "9-5 再来一次压力测试吧",
+      "type": "article",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "words": 493
+    },
+    {
+      "id": "A9-6",
+      "label": "9-6 压力测试",
+      "type": "article",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "words": 5811
+    },
+    {
+      "id": "A9-7",
+      "label": "9-7 更多运营策略",
+      "type": "article",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "words": 879
+    },
+    {
+      "id": "A10-1",
+      "label": "10-1 了解thrift",
+      "type": "article",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "words": 2283
+    },
+    {
+      "id": "A10-2",
+      "label": "10-2 定义thrift文件",
+      "type": "article",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "words": 1915
+    },
+    {
+      "id": "A10-3",
+      "label": "10-3 生成代码",
+      "type": "article",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "words": 1608
+    },
+    {
+      "id": "A10-4",
+      "label": "10-4 服务端接口（上）",
+      "type": "article",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "words": 301
+    },
+    {
+      "id": "A10-5",
+      "label": "10-5 服务端接口（中）",
+      "type": "article",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "words": 3501
+    },
+    {
+      "id": "A10-6",
+      "label": "10-6 服务端接口（下）",
+      "type": "article",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "words": 4318
+    },
+    {
+      "id": "A10-7",
+      "label": "10-7 客户端接口",
+      "type": "article",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "words": 2964
+    },
+    {
+      "id": "A10-8",
+      "label": "10-8 总结",
+      "type": "article",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "words": 720
+    },
+    {
+      "id": "A11-1",
+      "label": "11-1 问题与思考",
+      "type": "article",
+      "chapter": "第11章 课程总结【结束，沉淀】【更多IT教程 微信352852792】",
+      "words": 732
+    },
+    {
+      "id": "A11-2",
+      "label": "11-2 课程总结",
+      "type": "article",
+      "chapter": "第11章 课程总结【结束，沉淀】【更多IT教程 微信352852792】",
+      "words": 1463
+    },
+    {
+      "id": "A本章精华总结",
+      "label": "本章精华总结",
+      "type": "article",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "words": 3
+    },
+    {
+      "id": "Ccode_lottery_web_views_shared_error_html",
+      "label": "code/lottery/web/views/shared/error.html",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_web_views_admin_index_html",
+      "label": "code/lottery/web/views/admin/index.html",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_web_middleware_basicauth_go",
+      "label": "code/lottery/web/middleware/basicauth.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_web_controllers_index_lucky_5check_blackuser_go",
+      "label": "code/lottery/web/controllers/index_lucky_5check_blackuser.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_web_controllers_index_lucky_4check_blakip_go",
+      "label": "code/lottery/web/controllers/index_lucky_4check_blakip.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_web_controllers_index_lucky_4check_blackip_go",
+      "label": "code/lottery/web/controllers/index_lucky_4check_blackip.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_web_viewmodels_view_gift_go",
+      "label": "code/lottery/web/viewmodels/view_gift.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_web_controllers_index_lucky_9prize_go",
+      "label": "code/lottery/web/controllers/index_lucky_9prize.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery__demo_threadsafe_mainMap_go",
+      "label": "code/lottery/_demo/threadsafe/mainMap.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_dao_user_dao_go",
+      "label": "code/lottery/dao/user_dao.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_services_code_service_go",
+      "label": "code/lottery/services/code_service.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_services_userday_service_go",
+      "label": "code/lottery/services/userday_service.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_dao_userday_dao_go",
+      "label": "code/lottery/dao/userday_dao.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_dao_blackip_dao_go",
+      "label": "code/lottery/dao/blackip_dao.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_services_result_service_go",
+      "label": "code/lottery/services/result_service.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_dao_code_dao_go",
+      "label": "code/lottery/dao/code_dao.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_dao_result_dao_go",
+      "label": "code/lottery/dao/result_dao.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_dao_gift_dao_go",
+      "label": "code/lottery/dao/gift_dao.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_rpc_lucky_service_remote_go_client_goclient_main_go",
+      "label": "code/lottery/rpc/lucky_service-remote/go_client/goclient_main.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_services_blackip_service_go",
+      "label": "code/lottery/services/blackip_service.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_services_user_service_go",
+      "label": "code/lottery/services/user_service.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_rpc_lucky_service_remote_lucky_service_remote_go",
+      "label": "code/lottery/rpc/lucky_service-remote/lucky_service-remote.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_services_gift_service_go",
+      "label": "code/lottery/services/gift_service.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_conf_redis_go",
+      "label": "code/lottery/conf/redis.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_web_main_go",
+      "label": "code/lottery/web/main.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery__demo_threadsafe_mainInt_go",
+      "label": "code/lottery/_demo/threadsafe/mainInt.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery__demo_annualMeeting_safe_main_test_go",
+      "label": "code/lottery/_demo/annualMeeting/safe/main_test.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery__demo_threadsafe_mainArray_go",
+      "label": "code/lottery/_demo/threadsafe/mainArray.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery__demo_annualMeeting_main_test_go",
+      "label": "code/lottery/_demo/annualMeeting/main_test.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery__demo_ticket_main_go",
+      "label": "code/lottery/_demo/ticket/main.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery__demo_annualMeeting_main_go",
+      "label": "code/lottery/_demo/annualMeeting/main.go",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_lottery_thrift_lucky_thrift",
+      "label": "code/lottery/thrift/lucky.thrift",
+      "type": "code"
+    }
+  ],
+  "edges": [
+    {
+      "from": "A2-3",
+      "to": "Ccode_lottery_web_views_shared_error_html",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A2-3",
+      "to": "Ccode_lottery_web_views_admin_index_html",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A2-3",
+      "to": "Ccode_lottery_web_middleware_basicauth_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A2-3",
+      "to": "Ccode_lottery_web_controllers_index_lucky_5check_blackuser_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A2-3",
+      "to": "Ccode_lottery_web_controllers_index_lucky_4check_blakip_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A2-3",
+      "to": "Ccode_lottery_web_controllers_index_lucky_4check_blackip_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A2-3",
+      "to": "Ccode_lottery_web_viewmodels_view_gift_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A2-3",
+      "to": "Ccode_lottery_web_controllers_index_lucky_9prize_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A2-16",
+      "to": "Ccode_lottery__demo_threadsafe_mainMap_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-3",
+      "to": "Ccode_lottery_dao_user_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-3",
+      "to": "Ccode_lottery_services_code_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-3",
+      "to": "Ccode_lottery_services_userday_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-3",
+      "to": "Ccode_lottery_dao_userday_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-3",
+      "to": "Ccode_lottery_dao_blackip_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-3",
+      "to": "Ccode_lottery_services_result_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-3",
+      "to": "Ccode_lottery_dao_code_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-3",
+      "to": "Ccode_lottery_dao_result_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-4",
+      "to": "Ccode_lottery_dao_user_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-4",
+      "to": "Ccode_lottery_dao_userday_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-4",
+      "to": "Ccode_lottery_dao_blackip_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-4",
+      "to": "Ccode_lottery_dao_code_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-4",
+      "to": "Ccode_lottery_dao_result_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-4",
+      "to": "Ccode_lottery_dao_gift_dao_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-5",
+      "to": "Ccode_lottery_services_code_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-5",
+      "to": "Ccode_lottery_services_userday_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-5",
+      "to": "Ccode_lottery_services_result_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-5",
+      "to": "Ccode_lottery_rpc_lucky_service_remote_go_client_goclient_main_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-5",
+      "to": "Ccode_lottery_services_blackip_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-5",
+      "to": "Ccode_lottery_services_user_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-5",
+      "to": "Ccode_lottery_rpc_lucky_service_remote_lucky_service_remote_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-5",
+      "to": "Ccode_lottery_services_gift_service_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-6",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-8",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-9",
+      "to": "Ccode_lottery_web_views_shared_error_html",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-9",
+      "to": "Ccode_lottery_web_views_admin_index_html",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-9",
+      "to": "Ccode_lottery_web_middleware_basicauth_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-9",
+      "to": "Ccode_lottery_web_controllers_index_lucky_5check_blackuser_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-9",
+      "to": "Ccode_lottery_web_controllers_index_lucky_4check_blakip_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-9",
+      "to": "Ccode_lottery_web_controllers_index_lucky_4check_blackip_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-9",
+      "to": "Ccode_lottery_web_viewmodels_view_gift_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-9",
+      "to": "Ccode_lottery_web_controllers_index_lucky_9prize_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-11",
+      "to": "Ccode_lottery_web_views_shared_error_html",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-11",
+      "to": "Ccode_lottery_web_views_admin_index_html",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-11",
+      "to": "Ccode_lottery_web_middleware_basicauth_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-11",
+      "to": "Ccode_lottery_web_controllers_index_lucky_5check_blackuser_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-11",
+      "to": "Ccode_lottery_web_controllers_index_lucky_4check_blakip_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-11",
+      "to": "Ccode_lottery_web_controllers_index_lucky_4check_blackip_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-11",
+      "to": "Ccode_lottery_web_viewmodels_view_gift_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-11",
+      "to": "Ccode_lottery_web_controllers_index_lucky_9prize_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-13",
+      "to": "Ccode_lottery_web_main_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-13",
+      "to": "Ccode_lottery__demo_threadsafe_mainInt_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-13",
+      "to": "Ccode_lottery__demo_annualMeeting_safe_main_test_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-13",
+      "to": "Ccode_lottery__demo_threadsafe_mainArray_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-13",
+      "to": "Ccode_lottery__demo_threadsafe_mainMap_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-13",
+      "to": "Ccode_lottery__demo_annualMeeting_main_test_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-13",
+      "to": "Ccode_lottery__demo_ticket_main_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A4-13",
+      "to": "Ccode_lottery__demo_annualMeeting_main_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-1",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-2",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-3",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-4",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-5",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-6",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-7",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-8",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-9",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-10",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-11",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-12",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-13",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-14",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-15",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-16",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A7-17",
+      "to": "Ccode_lottery_conf_redis_go",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A10-1",
+      "to": "Ccode_lottery_thrift_lucky_thrift",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A10-2",
+      "to": "Ccode_lottery_thrift_lucky_thrift",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A10-3",
+      "to": "Ccode_lottery_thrift_lucky_thrift",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A10-4",
+      "to": "Ccode_lottery_thrift_lucky_thrift",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A10-5",
+      "to": "Ccode_lottery_thrift_lucky_thrift",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A10-6",
+      "to": "Ccode_lottery_thrift_lucky_thrift",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A10-7",
+      "to": "Ccode_lottery_thrift_lucky_thrift",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A10-8",
+      "to": "Ccode_lottery_thrift_lucky_thrift",
+      "relation": "uses-code"
+    }
+  ]
+}

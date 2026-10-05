@@ -1,0 +1,1533 @@
+{
+  "course": "lottery",
+  "src": "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目",
+  "chapters": [
+    {
+      "name": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "count": 8
+    },
+    {
+      "name": "第11章 课程总结【结束，沉淀】【更多IT教程 微信352852792】",
+      "count": 2
+    },
+    {
+      "name": "第1章 课程介绍【预备，初识】【更多IT教程 微信352852792】",
+      "count": 1
+    },
+    {
+      "name": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "count": 22
+    },
+    {
+      "name": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "count": 6
+    },
+    {
+      "name": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "count": 18
+    },
+    {
+      "name": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "count": 10
+    },
+    {
+      "name": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "count": 8
+    },
+    {
+      "name": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "count": 17
+    },
+    {
+      "name": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "count": 8
+    },
+    {
+      "name": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "count": 7
+    }
+  ],
+  "file_count": 107,
+  "article_count": 104,
+  "merged_count": 3,
+  "code_file_count": 94,
+  "code_ext_stat": {
+    "go": 78,
+    "html": 12,
+    "md": 1,
+    "sql": 1,
+    "thrift": 1,
+    "js": 1
+  },
+  "articles": [
+    {
+      "id": "1-1",
+      "title": "1-1 Go抽奖系统导学",
+      "chapter": "第1章 课程介绍【预备，初识】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第1章 课程介绍【预备，初识】【更多IT教程 微信352852792】/1-1 Go抽奖系统导学【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790956108928zh.txt"
+      ],
+      "words": 2969,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-1",
+      "title": "2-1 年会抽奖_实现分析",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-1 年会抽奖_实现分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790956602923zh.txt"
+      ],
+      "words": 371,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-2",
+      "title": "2-2 年会抽奖基本功能实现",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-2 年会抽奖基本功能实现【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790956610515zh.txt"
+      ],
+      "words": 3037,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-3",
+      "title": "2-3 编写web单元测试和并发安全问题",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-3 编写web单元测试和并发安全问题【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790956624934zh.txt"
+      ],
+      "words": 1513,
+      "merged": false,
+      "tokens": [
+        "web"
+      ],
+      "code_refs": [
+        "code/lottery/web/views/shared/error.html",
+        "code/lottery/web/views/admin/index.html",
+        "code/lottery/web/middleware/basicauth.go",
+        "code/lottery/web/controllers/index_lucky_5check_blackuser.go",
+        "code/lottery/web/controllers/index_lucky_4check_blakip.go",
+        "code/lottery/web/controllers/index_lucky_4check_blackip.go",
+        "code/lottery/web/viewmodels/view_gift.go",
+        "code/lottery/web/controllers/index_lucky_9prize.go"
+      ]
+    },
+    {
+      "id": "2-4",
+      "title": "2-4 用互斥锁解决并发安全问题",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-4 用互斥锁解决并发安全问题【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790956635102zh.txt"
+      ],
+      "words": 802,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-5",
+      "title": "2-5 彩票_实现分析",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-5 彩票_实现分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957138305zh.txt"
+      ],
+      "words": 303,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-6",
+      "title": "2-6 刮刮乐和双色球",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-6 刮刮乐和双色球【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957144448zh.txt"
+      ],
+      "words": 3095,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-7",
+      "title": "2-7 微信摇一摇_实现分析",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-7 微信摇一摇_实现分析[2]-迅捷文字转语音-1790957157994zh.txt"
+      ],
+      "words": 285,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-8",
+      "title": "2-8 微信摇一摇实现（上）",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-8 微信摇一摇实现（上）[2]-迅捷文字转语音-1790957164283zh.txt"
+      ],
+      "words": 3759,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-9",
+      "title": "2-9 微信摇一摇实现（下）",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-9 微信摇一摇实现（下）[2]-迅捷文字转语音-1790957178012zh.txt"
+      ],
+      "words": 3745,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-10",
+      "title": "2-10 bug修复和压测",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-10 bug修复和压测【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957191082zh.txt"
+      ],
+      "words": 2272,
+      "merged": false,
+      "tokens": [
+        "bug"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "2-11",
+      "title": "2-11 支付宝集福卡_实现分析",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-11 支付宝集福卡_实现分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957650333zh.txt"
+      ],
+      "words": 356,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-12",
+      "title": "2-12 支付宝集福卡实现",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-12 支付宝集福卡实现【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957657019zh.txt"
+      ],
+      "words": 3433,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-13",
+      "title": "2-13 微博抢红包_实现分析",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-13 微博抢红包_实现分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957676070zh.txt"
+      ],
+      "words": 490,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-14",
+      "title": "2-14 实现发红包",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-14 实现发红包【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957681662zh.txt"
+      ],
+      "words": 3082,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-15",
+      "title": "2-15 实现抢红包",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-15 实现抢红包【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957692230zh.txt"
+      ],
+      "words": 1004,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-16",
+      "title": "2-16 均衡问题和sync.Map解决异常",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-16 均衡问题和sync.Map解决异常【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790957698516zh.txt"
+      ],
+      "words": 2120,
+      "merged": false,
+      "tokens": [
+        "sync",
+        "map"
+      ],
+      "code_refs": [
+        "code/lottery/_demo/threadsafe/mainMap.go"
+      ]
+    },
+    {
+      "id": "2-17",
+      "title": "2-17 改用chan的方式解决并发安全问题",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-17 改用chan的方式解决并发安全问题【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790958114918zh.txt"
+      ],
+      "words": 1657,
+      "merged": false,
+      "tokens": [
+        "chan"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "2-18",
+      "title": "2-18 再次压测验证和优化改造",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-18 再次压测验证和优化改造【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790958124915zh.txt"
+      ],
+      "words": 1335,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-19",
+      "title": "2-19 抽奖大转盘_实现分析",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-19 抽奖大转盘_实现分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790958133173zh.txt"
+      ],
+      "words": 457,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-20",
+      "title": "2-20 抽奖大转盘初步实现",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-20 抽奖大转盘初步实现【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790958139292zh.txt"
+      ],
+      "words": 1889,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "2-21",
+      "title": "2-21 sync.Mutex和atomic改造性能对比",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-21 sync.Mutex和atomic改造性能对比【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790958148496zh.txt"
+      ],
+      "words": 1491,
+      "merged": false,
+      "tokens": [
+        "sync",
+        "mutex",
+        "atomic"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "2-22",
+      "title": "2-22 六种抽奖活动总结",
+      "chapter": "第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第2章 6种抽奖活动来一遍【伸展运动，舒缓热身】【更多IT教程 微信352852792】/2-22 六种抽奖活动总结【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790958155327zh.txt"
+      ],
+      "words": 399,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "3-1",
+      "title": "3-1 需求整理和提炼",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】/3-1 需求整理和提炼【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790959283860zh.txt"
+      ],
+      "words": 698,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "3-2",
+      "title": "3-2 用户操作和业务流程",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】/3-2 用户操作和业务流程【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790959290049zh.txt"
+      ],
+      "words": 1307,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "3-3",
+      "title": "3-3 数据库设计",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】/3-3 数据库设计【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790959297212zh.txt"
+      ],
+      "words": 3658,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "3-4",
+      "title": "3-4 缓存设计",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】/3-4 缓存设计【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790959308233zh.txt"
+      ],
+      "words": 1583,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "3-5",
+      "title": "3-5 系统架构设计",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】/3-5 系统架构设计【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790959315979zh.txt"
+      ],
+      "words": 1823,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "3-6",
+      "title": "3-6 系统设计和架构设计总结",
+      "chapter": "第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第3章 系统设计和架构设计【扩胸运动，有容乃大】【更多IT教程 微信352852792】/3-6 系统设计和架构设计总结【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790959322491zh.txt"
+      ],
+      "words": 474,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "4-1",
+      "title": "4-1 项目框架搭建",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-1 项目框架搭建【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790960882749zh.txt"
+      ],
+      "words": 1640,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "4-2",
+      "title": "4-2 数据模型的生成",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-2 数据模型的生成【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790960892960zh.txt"
+      ],
+      "words": 1222,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "4-3",
+      "title": "4-3 核心的dao和service类",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-3 核心的dao和service类【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790960902212zh.txt"
+      ],
+      "words": 859,
+      "merged": false,
+      "tokens": [
+        "dao",
+        "service"
+      ],
+      "code_refs": [
+        "code/lottery/dao/user_dao.go",
+        "code/lottery/services/code_service.go",
+        "code/lottery/services/userday_service.go",
+        "code/lottery/dao/userday_dao.go",
+        "code/lottery/dao/blackip_dao.go",
+        "code/lottery/services/result_service.go",
+        "code/lottery/dao/code_dao.go",
+        "code/lottery/dao/result_dao.go"
+      ]
+    },
+    {
+      "id": "4-4",
+      "title": "4-4 定义dao",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-4 定义dao【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790960911222zh.txt",
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-4 定义dao【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790961755360zh.txt"
+      ],
+      "words": 7180,
+      "merged": true,
+      "tokens": [
+        "dao"
+      ],
+      "code_refs": [
+        "code/lottery/dao/user_dao.go",
+        "code/lottery/dao/userday_dao.go",
+        "code/lottery/dao/blackip_dao.go",
+        "code/lottery/dao/code_dao.go",
+        "code/lottery/dao/result_dao.go",
+        "code/lottery/dao/gift_dao.go"
+      ]
+    },
+    {
+      "id": "4-5",
+      "title": "4-5 定义service",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-5 定义service【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790960928164zh.txt",
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-5 定义service【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790961768402zh.txt"
+      ],
+      "words": 3072,
+      "merged": true,
+      "tokens": [
+        "service"
+      ],
+      "code_refs": [
+        "code/lottery/services/code_service.go",
+        "code/lottery/services/userday_service.go",
+        "code/lottery/services/result_service.go",
+        "code/lottery/rpc/lucky_service-remote/go_client/goclient_main.go",
+        "code/lottery/services/blackip_service.go",
+        "code/lottery/services/user_service.go",
+        "code/lottery/rpc/lucky_service-remote/lucky_service-remote.go",
+        "code/lottery/services/gift_service.go"
+      ]
+    },
+    {
+      "id": "4-6",
+      "title": "4-6 定义数据库和redis配置信息",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-6 定义数据库和redis配置信息【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790960937812zh.txt",
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-6 定义数据库和redis配置信息【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790961777288zh.txt"
+      ],
+      "words": 1594,
+      "merged": true,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "4-7",
+      "title": "4-7 创建数据库实例及其要点",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-7 创建数据库实例及其要点【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790961784567zh.txt"
+      ],
+      "words": 1686,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "4-8",
+      "title": "4-8 创建redis实例及其要点",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-8 创建redis实例及其要点【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790961791299zh.txt"
+      ],
+      "words": 2299,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "4-9",
+      "title": "4-9 利用iris建立web站点",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-9 利用iris建立web站点【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790961800912zh.txt"
+      ],
+      "words": 216,
+      "merged": false,
+      "tokens": [
+        "iris",
+        "web"
+      ],
+      "code_refs": [
+        "code/lottery/web/views/shared/error.html",
+        "code/lottery/web/views/admin/index.html",
+        "code/lottery/web/middleware/basicauth.go",
+        "code/lottery/web/controllers/index_lucky_5check_blackuser.go",
+        "code/lottery/web/controllers/index_lucky_4check_blakip.go",
+        "code/lottery/web/controllers/index_lucky_4check_blackip.go",
+        "code/lottery/web/viewmodels/view_gift.go",
+        "code/lottery/web/controllers/index_lucky_9prize.go"
+      ]
+    },
+    {
+      "id": "4-10",
+      "title": "4-10 项目配置和通用方法",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-10 项目配置和通用方法【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790962169855zh.txt"
+      ],
+      "words": 1860,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "4-11",
+      "title": "4-11 web站点初始化构建",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-11 web站点初始化构建【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790962179108zh.txt"
+      ],
+      "words": 2749,
+      "merged": false,
+      "tokens": [
+        "web"
+      ],
+      "code_refs": [
+        "code/lottery/web/views/shared/error.html",
+        "code/lottery/web/views/admin/index.html",
+        "code/lottery/web/middleware/basicauth.go",
+        "code/lottery/web/controllers/index_lucky_5check_blackuser.go",
+        "code/lottery/web/controllers/index_lucky_4check_blakip.go",
+        "code/lottery/web/controllers/index_lucky_4check_blackip.go",
+        "code/lottery/web/viewmodels/view_gift.go",
+        "code/lottery/web/controllers/index_lucky_9prize.go"
+      ]
+    },
+    {
+      "id": "4-12",
+      "title": "4-12 实现IndexController",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-12 实现IndexController【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790962192720zh.txt"
+      ],
+      "words": 1428,
+      "merged": false,
+      "tokens": [
+        "indexcontroller"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "4-13",
+      "title": "4-13 完善路由和main.go文件",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-13 完善路由和main.go文件【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790962201275zh.txt"
+      ],
+      "words": 1519,
+      "merged": false,
+      "tokens": [
+        "main"
+      ],
+      "code_refs": [
+        "code/lottery/web/main.go",
+        "code/lottery/_demo/threadsafe/mainInt.go",
+        "code/lottery/_demo/annualMeeting/safe/main_test.go",
+        "code/lottery/_demo/threadsafe/mainArray.go",
+        "code/lottery/_demo/threadsafe/mainMap.go",
+        "code/lottery/_demo/annualMeeting/main_test.go",
+        "code/lottery/_demo/ticket/main.go",
+        "code/lottery/_demo/annualMeeting/main.go"
+      ]
+    },
+    {
+      "id": "4-14",
+      "title": "4-14 登录和退出：安全值校验和防篡改",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/4-14 登录和退出：安全值校验和防篡改【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790962207632zh.txt"
+      ],
+      "words": 3826,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-1",
+      "title": "5-1 后台功能开发介绍",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-1 后台功能开发介绍【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790963441588zh.txt"
+      ],
+      "words": 302,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-2",
+      "title": "5-2 页面模板和AdminController",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-2 页面模板和AdminController【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790963447666zh.txt"
+      ],
+      "words": 4355,
+      "merged": false,
+      "tokens": [
+        "admincontroller"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "5-3",
+      "title": "5-3 奖品管理实现（上）",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-3 奖品管理实现（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790963464992zh.txt"
+      ],
+      "words": 1528,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-4",
+      "title": "5-4 奖品管理实现（中）",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-4 奖品管理实现（中）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790963473012zh.txt"
+      ],
+      "words": 4587,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-5",
+      "title": "5-5 奖品管理实现（下）",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-5 奖品管理实现（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790963486049zh.txt"
+      ],
+      "words": 3463,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-6",
+      "title": "5-6 优惠券管理实现（上）",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-6 优惠券管理实现（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790963497754zh.txt"
+      ],
+      "words": 2505,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-7",
+      "title": "5-7 优惠券管理实现（下）",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-7 优惠券管理实现（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964648842zh.txt"
+      ],
+      "words": 1537,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-8",
+      "title": "5-8 中奖记录管理",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-8 中奖记录管理【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964658307zh.txt"
+      ],
+      "words": 1848,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-9",
+      "title": "5-9 用户管理",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-9 用户管理【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964667188zh.txt"
+      ],
+      "words": 1733,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "5-10",
+      "title": "5-10 IP黑名单管理",
+      "chapter": "第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第5章 后台功能开发【体侧运动，运筹帷幄】【更多IT教程 微信352852792】/5-10 IP黑名单管理【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964675257zh.txt"
+      ],
+      "words": 1088,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "6-1",
+      "title": "6-1 抽奖接口开发细节分析",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】/6-1 抽奖接口开发细节分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964868883zh.txt"
+      ],
+      "words": 2573,
+      "merged": false,
+      "tokens": [
+        "mysql"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "6-2",
+      "title": "6-2 用户并发操作的锁",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】/6-2 用户并发操作的锁【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964879302zh.txt"
+      ],
+      "words": 1925,
+      "merged": false,
+      "tokens": [
+        "mysql"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "6-3",
+      "title": "6-3 验证用户、IP今日参与次数（上）",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】/6-3 验证用户、IP今日参与次数（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964888474zh.txt"
+      ],
+      "words": 2251,
+      "merged": false,
+      "tokens": [
+        "mysql"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "6-4",
+      "title": "6-4 验证用户、IP今日参与次数（下）",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】/6-4 验证用户、IP今日参与次数（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964901591zh.txt"
+      ],
+      "words": 2745,
+      "merged": false,
+      "tokens": [
+        "mysql"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "6-5",
+      "title": "6-5 用户、IP黑名单的处理",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】/6-5 用户、IP黑名单的处理【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964910743zh.txt"
+      ],
+      "words": 2255,
+      "merged": false,
+      "tokens": [
+        "mysql"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "6-6",
+      "title": "6-6 抽奖的实现",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】/6-6 抽奖的实现【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790964918537zh.txt"
+      ],
+      "words": 4413,
+      "merged": false,
+      "tokens": [
+        "mysql"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "6-7",
+      "title": "6-7 发奖的实现",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】/6-7 发奖的实现【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966068742zh.txt"
+      ],
+      "words": 4675,
+      "merged": false,
+      "tokens": [
+        "mysql"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "6-8",
+      "title": "6-8 中奖记录和返回结果",
+      "chapter": "第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第6章 基于mysql的抽奖功能开发【体转运动，基础版本】【更多IT教程 微信352852792】/6-8 中奖记录和返回结果【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966084016zh.txt"
+      ],
+      "words": 3795,
+      "merged": false,
+      "tokens": [
+        "mysql"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "7-1",
+      "title": "7-1 分析_奖品数据全量缓存",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-1 分析_奖品数据全量缓存【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966208615zh.txt"
+      ],
+      "words": 1010,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-2",
+      "title": "7-2 实现_奖品数据全量缓存（上）",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-2 实现_奖品数据全量缓存（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966218796zh.txt"
+      ],
+      "words": 3132,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-3",
+      "title": "7-3 实现_奖品数据全量缓存（下）",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-3 实现_奖品数据全量缓存（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966231734zh.txt"
+      ],
+      "words": 2525,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-4",
+      "title": "7-4 分析_单个用户数据部分缓存",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-4 分析_单个用户数据部分缓存【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966242182zh.txt"
+      ],
+      "words": 550,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-5",
+      "title": "7-5 实现_单个用户数据部分缓存",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-5 实现_单个用户数据部分缓存【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966246193zh.txt"
+      ],
+      "words": 3474,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-6",
+      "title": "7-6 分析_IP黑名单数据缓存",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-6 分析_IP黑名单数据缓存【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966257405zh.txt"
+      ],
+      "words": 343,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-7",
+      "title": "7-7 实现_IP黑名单数据缓存",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-7 实现_IP黑名单数据缓存【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966655942zh.txt"
+      ],
+      "words": 784,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-8",
+      "title": "7-8 优化IP今日抽奖次数",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-8 优化IP今日抽奖次数【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966662888zh.txt"
+      ],
+      "words": 773,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-9",
+      "title": "7-9 优化用户今日抽奖次数",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-9 优化用户今日抽奖次数【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966669292zh.txt"
+      ],
+      "words": 743,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-10",
+      "title": "7-10 用户今日抽奖次数（上）",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-10 用户今日抽奖次数（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966675734zh.txt"
+      ],
+      "words": 1711,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-11",
+      "title": "7-11 用户今日抽奖次数（下）",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-11 用户今日抽奖次数（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966685572zh.txt"
+      ],
+      "words": 1399,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-12",
+      "title": "7-12 为什么使用奖品池",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-12 为什么使用奖品池【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790966692031zh.txt"
+      ],
+      "words": 672,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-13",
+      "title": "7-13 初步使用奖品池",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-13 初步使用奖品池【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967077591zh.txt"
+      ],
+      "words": 1331,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-14",
+      "title": "7-14 分析_优惠券的全量缓存",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-14 分析_优惠券的全量缓存【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967086665zh.txt"
+      ],
+      "words": 849,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-15",
+      "title": "7-15 实现_优惠券的全量缓存（上）",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-15 实现_优惠券的全量缓存（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967093036zh.txt"
+      ],
+      "words": 3109,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-16",
+      "title": "7-16 实现_优惠券的全量缓存（下）",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-16 实现_优惠券的全量缓存（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967106257zh.txt"
+      ],
+      "words": 1417,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "7-17",
+      "title": "7-17 使用redis优化总结",
+      "chapter": "第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第7章 使用redis缓存优化【全身运动，升级版本】【更多IT教程 微信352852792】/7-17 使用redis优化总结【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967113429zh.txt"
+      ],
+      "words": 779,
+      "merged": false,
+      "tokens": [
+        "redis"
+      ],
+      "code_refs": [
+        "code/lottery/conf/redis.go"
+      ]
+    },
+    {
+      "id": "8-1",
+      "title": "8-1 发奖计划设计分析",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】/8-1 发奖计划设计分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967405569zh.txt"
+      ],
+      "words": 1351,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "8-2",
+      "title": "8-2 实现发奖计划（上）",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】/8-2 实现发奖计划（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967413044zh.txt"
+      ],
+      "words": 5140,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "8-3",
+      "title": "8-3 实现发奖计划（中）",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】/8-3 实现发奖计划（中）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967429822zh.txt"
+      ],
+      "words": 4306,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "8-4",
+      "title": "8-4 实现发奖计划（下）",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】/8-4 实现发奖计划（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967442990zh.txt"
+      ],
+      "words": 4344,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "8-5",
+      "title": "8-5 自动填充奖品池分析",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】/8-5 自动填充奖品池分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967455109zh.txt"
+      ],
+      "words": 748,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "8-6",
+      "title": "8-6 实现奖品池（上）",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】/8-6 实现奖品池（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790967459706zh.txt"
+      ],
+      "words": 3730,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "8-7",
+      "title": "8-7 实现奖品池（下）",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】/8-7 实现奖品池（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790968631219zh.txt"
+      ],
+      "words": 1447,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "8-8",
+      "title": "8-8 总结发奖计划和奖品池",
+      "chapter": "第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第8章 奖品池以及发奖计划的实现【跳跃运动，极致版本】【更多IT教程 微信352852792】/8-8 总结发奖计划和奖品池【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790968639473zh.txt"
+      ],
+      "words": 461,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "9-1",
+      "title": "9-1 前端大转盘分析",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】/9-1 前端大转盘分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790968723708zh.txt"
+      ],
+      "words": 665,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "9-2",
+      "title": "9-2 前端大转盘效果实现",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】/9-2 前端大转盘效果实现【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790968730296zh.txt"
+      ],
+      "words": 6243,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "9-3",
+      "title": "9-3 优化奖品设置分析",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】/9-3 优化奖品设置分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790968750420zh.txt"
+      ],
+      "words": 1691,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "9-4",
+      "title": "9-4 优化发放奖品分析",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】/9-4 优化发放奖品分析【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790968756668zh.txt"
+      ],
+      "words": 1518,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "9-5",
+      "title": "9-5 再来一次压力测试吧",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】/9-5 再来一次压力测试吧【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790968762387zh.txt"
+      ],
+      "words": 493,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "9-6",
+      "title": "9-6 压力测试",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】/9-6 压力测试【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790968766591zh.txt"
+      ],
+      "words": 5811,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "9-7",
+      "title": "9-7 更多运营策略",
+      "chapter": "第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第9章 完整性演示以及更多总结【整理运动，整体交付】【更多IT教程 微信352852792】/9-7 更多运营策略【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790969199849zh.txt"
+      ],
+      "words": 879,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "10-1",
+      "title": "10-1 了解thrift",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】/10-1 了解thrift【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970049234zh.txt"
+      ],
+      "words": 2283,
+      "merged": false,
+      "tokens": [
+        "thrift"
+      ],
+      "code_refs": [
+        "code/lottery/thrift/lucky.thrift"
+      ]
+    },
+    {
+      "id": "10-2",
+      "title": "10-2 定义thrift文件",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】/10-2 定义thrift文件【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970060155zh.txt"
+      ],
+      "words": 1915,
+      "merged": false,
+      "tokens": [
+        "thrift"
+      ],
+      "code_refs": [
+        "code/lottery/thrift/lucky.thrift"
+      ]
+    },
+    {
+      "id": "10-3",
+      "title": "10-3 生成代码",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】/10-3 生成代码【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970067953zh.txt"
+      ],
+      "words": 1608,
+      "merged": false,
+      "tokens": [
+        "thrift"
+      ],
+      "code_refs": [
+        "code/lottery/thrift/lucky.thrift"
+      ]
+    },
+    {
+      "id": "10-4",
+      "title": "10-4 服务端接口（上）",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】/10-4 服务端接口（上）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970075593zh.txt"
+      ],
+      "words": 301,
+      "merged": false,
+      "tokens": [
+        "thrift"
+      ],
+      "code_refs": [
+        "code/lottery/thrift/lucky.thrift"
+      ]
+    },
+    {
+      "id": "10-5",
+      "title": "10-5 服务端接口（中）",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】/10-5 服务端接口（中）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970079429zh.txt"
+      ],
+      "words": 3501,
+      "merged": false,
+      "tokens": [
+        "thrift"
+      ],
+      "code_refs": [
+        "code/lottery/thrift/lucky.thrift"
+      ]
+    },
+    {
+      "id": "10-6",
+      "title": "10-6 服务端接口（下）",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】/10-6 服务端接口（下）【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970089948zh.txt"
+      ],
+      "words": 4318,
+      "merged": false,
+      "tokens": [
+        "thrift"
+      ],
+      "code_refs": [
+        "code/lottery/thrift/lucky.thrift"
+      ]
+    },
+    {
+      "id": "10-7",
+      "title": "10-7 客户端接口",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】/10-7 客户端接口【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970510642zh.txt"
+      ],
+      "words": 2964,
+      "merged": false,
+      "tokens": [
+        "thrift"
+      ],
+      "code_refs": [
+        "code/lottery/thrift/lucky.thrift"
+      ]
+    },
+    {
+      "id": "10-8",
+      "title": "10-8 总结",
+      "chapter": "第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第10章 引入thrift框架【附加运动，扩展服务】【更多IT教程 微信352852792】/10-8 总结【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970521910zh.txt"
+      ],
+      "words": 720,
+      "merged": false,
+      "tokens": [
+        "thrift"
+      ],
+      "code_refs": [
+        "code/lottery/thrift/lucky.thrift"
+      ]
+    },
+    {
+      "id": "11-1",
+      "title": "11-1 问题与思考",
+      "chapter": "第11章 课程总结【结束，沉淀】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第11章 课程总结【结束，沉淀】【更多IT教程 微信352852792】/11-1 问题与思考【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970612711zh.txt"
+      ],
+      "words": 732,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "11-2",
+      "title": "11-2 课程总结",
+      "chapter": "第11章 课程总结【结束，沉淀】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第11章 课程总结【结束，沉淀】【更多IT教程 微信352852792】/11-2 课程总结【更多IT教程 微信352852792】[2]-迅捷文字转语音-1790970619136zh.txt"
+      ],
+      "words": 1463,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "本章精华总结",
+      "title": "本章精华总结",
+      "chapter": "第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】",
+      "sources": [
+        "work/source/6. mksz295 - 高并发 高性能 Go语言开发企业级抽奖项目/第4章 项目框架与核心代码【踢腿运动，固若磐石】【更多IT教程 微信352852792】/本章精华总结-迅捷文字转语音-1790963398653zh.txt"
+      ],
+      "words": 3,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package route;
+
+option go_package = "./proto/route;route";
+
+service Route {
+	//对外提供添加服务
+	rpc AddRoute(RouteInfo) returns (Response) {}
+	rpc DeleteRoute(RouteId) returns (Response) {}
+	rpc UpdateRoute(RouteInfo) returns (Response) {}
+	rpc FindRouteByID(RouteId) returns (RouteInfo) {}
+	rpc FindAllRoute(FindAll) returns (AllRoute) {}
+}
+message RouteInfo {
+	int64 id = 1;
+	string route_name = 2;
+	string route_namespace =3;
+	string route_host =4;
+	repeated RoutePath route_path=5;
+}
+
+message RoutePath {
+	int64 id = 1;
+	int64 route_id =2;
+	string route_path_name=3;
+	string route_backend_service=4;
+	int32 route_backend_service_port=5;
+}
+
+message RouteId {
+	int64 id = 1;
+}
+
+message FindAll {
+
+}
+
+message Response {
+	string msg =1 ;
+}
+
+message AllRoute {
+	repeated RouteInfo route_info = 1;
+}
+
+

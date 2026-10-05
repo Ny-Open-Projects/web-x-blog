@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package middleware;
+
+option go_package = "./proto/middleware;middleware";
+
+service Middleware {
+	//对外提供添加服务
+	rpc AddMiddleware(MiddlewareInfo) returns (Response) {}
+	rpc DeleteMiddleware(MiddlewareId) returns (Response) {}
+	rpc UpdateMiddleware(MiddlewareInfo) returns (Response) {}
+	rpc FindMiddlewareByID(MiddlewareId) returns (MiddlewareInfo) {}
+	rpc FindAllMiddleware(FindAll) returns (AllMiddleware) {}
+	//根据中间件的类型查找所有中间件
+	rpc FindAllMiddlewareByTypeID(FindAllByTypeId) returns (AllMiddleware){}
+	//获取中间件类型
+	rpc FindMiddleTypeByID(MiddleTypeId) returns (MiddleTypeInfo){}
+	rpc AddMiddleType(MiddleTypeInfo) returns (Response){}
+	rpc DeleteMiddleTypeByID(MiddleTypeId) returns (Response){}
+	rpc UpdateMiddleType(MiddleTypeInfo) returns(Response){}
+	rpc FindAllMiddleType(FindAll) returns (AllMiddleType){}
+}
+
+message MiddlewareInfo {
+	int64 id = 1;
+	string middle_name = 2;
+	string middle_namespace =3;
+	int64 middle_type_id = 4;
+	int64 middle_version_id =5;
+	repeated MiddlePort middle_port=6;
+	MiddleConfig middle_config=7;
+	repeated MiddleEnv middle_env=8;
+	float middle_cpu=9;
+	float middle_memory=10;
+	repeated MiddleStorage middle_storage =11;
+	int32 middle_replicas = 12;
+	//添加需要的镜像版本
+	string middle_docker_image_version=13;
+}
+//中间件的端口
+message MiddlePort {
+	int64 middle_id=1;
+	int32 middle_port=2;
+	string middle_protocol=3;
+}
+//中间的配置
+message MiddleConfig{
+	int64 middle_id =1;
+	string middle_config_root_user =2;
+	string middle_config_root_pwd =3;
+	string middle_config_user =4;
+	string middle_config_pwd =5;
+	string middle_config_data_base =6;
+}
+//中间件环境变量
+message MiddleEnv {
+	int64 middle_id=1;
+	string env_key=2;
+	string env_value=3;
+}
+
+//中间件存储
+message MiddleStorage{
+	int64 middle_id =1;
+	string middle_storage_name=2;
+	float middle_storage_size=3;
+	string middle_storage_path=4;
+	string middle_storage_class=5;
+	string middle_storage_access_mode=6;
+}
+
+message FindAllByTypeId {
+    int64 type_id =1;
+}
+
+message MiddleTypeId {
+	int64 id=1;
+}
+
+message MiddlewareId {
+	int64 id = 1;
+}
+
+message FindAll {
+
+}
+
+message Response {
+	string msg =1 ;
+}
+
+message AllMiddleware {
+	repeated MiddlewareInfo middleware_info = 1;
+}
+
+message MiddleTypeInfo {
+	int64 id =1;
+	string middle_type_name=2;
+	string middle_type_image_src=3;
+	repeated MiddleVersion middle_version=4;
+}
+
+message MiddleVersion{
+	int64 middle_type_id =1;
+	string middle_docker_image=2;
+	string middle_vs=3;
+}
+
+message AllMiddleType{
+	repeated MiddleTypeInfo middle_type_info =1;
+}
+
+

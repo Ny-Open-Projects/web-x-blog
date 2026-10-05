@@ -13,3 +13,9 @@ db.json
 
 # 项目本地 agent / memory 目录（不入库）
 .workbuddy/
+
+# 课程素材里的数据库运行时产物（非源码，体积大，约 172MB）
+ibdata1
+ib_logfile0
+ib_logfile1
+*.ibd

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package volume;
+
+option go_package = "./proto/volume;volume";
+
+service Volume {
+	//对外提供添加服务
+	rpc AddVolume(VolumeInfo) returns (Response) {}
+	rpc DeleteVolume(VolumeId) returns (Response) {}
+	rpc UpdateVolume(VolumeInfo) returns (Response) {}
+	rpc FindVolumeByID(VolumeId) returns (VolumeInfo) {}
+	rpc FindAllVolume(FindAll) returns (AllVolume) {}
+}
+message VolumeInfo {
+	int64 id = 1;
+	string volume_name=2;
+	string volume_namespace=3;
+	string volume_access_mode=4;
+	string volume_storage_class_name=5;
+	float volume_request=6;
+	string volume_persistent_volume_mode=7;
+}
+
+message VolumeId {
+	int64 id = 1;
+}
+
+message FindAll {
+
+}
+
+message Response {
+	string msg =1 ;
+}
+
+message AllVolume {
+	repeated VolumeInfo volume_info = 1;
+}
+
+

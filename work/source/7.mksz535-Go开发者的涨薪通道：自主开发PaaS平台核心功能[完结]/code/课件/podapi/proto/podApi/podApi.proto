@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package podApi;
+
+option go_package = "./proto/podApi;podApi";
+
+service PodApi {
+    rpc FindPodById (Request) returns (Response) {}
+    rpc AddPod(Request) returns (Response){}
+    rpc DeletePodById(Request) returns (Response){}
+    rpc UpdatePod(Request) returns (Response){}
+    //默认接口
+    rpc Call(Request) returns (Response){}
+
+}
+
+message Pair {
+    string key = 1;
+    repeated string values = 2;
+}
+
+message Request {
+    string method = 1;
+    string path = 2;
+    map<string, Pair> header = 3;
+    map<string, Pair> get = 4;
+    map<string, Pair> post = 5;
+    string body = 6;
+    string url = 7;
+}
+
+message Response {
+    int32 statusCode = 1;
+    map<string, Pair> header = 2;
+    string body = 3;
+}

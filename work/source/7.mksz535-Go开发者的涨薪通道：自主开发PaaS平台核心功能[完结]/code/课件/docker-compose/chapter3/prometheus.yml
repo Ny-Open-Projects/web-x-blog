@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s #默认15秒采集一次
+  external_labels:
+    monitor: 'go-paas-imooc-monitor'
+scrape_configs:
+  #监控的服务
+  - job_name: 'base'
+    scrape_interval: 5s #覆盖默认值
+    static_configs:
+      # 这个可以改，但是需要每个服务能暴露访问到
+      - targets: ['192.168.0.108:9192']
