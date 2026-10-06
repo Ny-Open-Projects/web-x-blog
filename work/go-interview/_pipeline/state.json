@@ -4418,10 +4418,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "152-why-microservices",
+        "152-characteristics",
+        "152-advantages",
+        "152-disadvantages",
+        "152-when-to-use",
+        "152-microservices.deep"
+      ],
+      "done_at": "2026-10-06T19:14:12+08:00"
     },
     "source/15/15-3 SOA和微服务架构有什么区别？-迅捷文字转语音-1790926934996zh.txt": {
       "id": "15-3",
@@ -4832,10 +4840,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1717-quicksort-overview",
+        "1717-recursive-impl",
+        "1717-partition",
+        "1717-complexity",
+        "1717-optimization",
+        "1717-quicksort.deep"
+      ],
+      "done_at": "2026-10-06T19:14:12+08:00"
     },
     "source/17/17-18 分别使用递归和非递归的方式实现二分查找-迅捷文字转语音-1790929421700zh.txt": {
       "id": "17-18",
@@ -5998,7 +6014,7 @@
     }
   },
   "next_num": 1,
-  "waves": 31,
-  "updated": "2026-10-06T19:10:22+08:00",
+  "waves": 32,
+  "updated": "2026-10-06T19:14:12+08:00",
   "consec_fail": 0
 }
