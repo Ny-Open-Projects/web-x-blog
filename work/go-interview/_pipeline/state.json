@@ -807,10 +807,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "608-panic-execution-defer",
+        "608-recover-in-defer",
+        "608-recover-same-goroutine",
+        "608-recover-nearest-overwrite",
+        "608-panic-recover-practice",
+        "608-panic-recover.deep"
+      ],
+      "done_at": "2026-10-06T11:33:20+08:00"
     },
     "source/06/6-9 channel 底层的数据结构是什么？-迅捷文字转语音-1790861370748zh.txt": {
       "id": "6-9",
@@ -2109,10 +2117,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "105-atomic-vs-mutex-core",
+        "105-atomic-implementation",
+        "105-atomic-types-scope",
+        "105-atomic-vs-lock-when",
+        "105-cond-semaphore",
+        "105-atomic-vs-lock.deep"
+      ],
+      "done_at": "2026-10-06T11:33:20+08:00"
     },
     "source/10/10-6 Go可以限制运行时操作系统线程的数量吗？-迅捷文字转语音-1790917893659zh.txt": {
       "id": "10-6",
@@ -5619,7 +5635,7 @@
     }
   },
   "next_num": 1,
-  "waves": 6,
-  "updated": "2026-10-06T11:25:16+08:00",
+  "waves": 7,
+  "updated": "2026-10-06T11:33:20+08:00",
   "consec_fail": 0
 }
