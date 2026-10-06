@@ -353,10 +353,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "406-visibility",
+        "406-internal-folder",
+        "406-internal-meaning",
+        "406-private-replace",
+        "406-gomod-directives",
+        "406-internal-pkg.deep"
+      ],
+      "done_at": "2026-10-06T23:20:47+08:00"
     },
     "source/04/4-7 如何使用内部包？（二）-迅捷文字转语音-1790755615349zh.txt": {
       "id": "4-7",
@@ -3362,10 +3370,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1245-key-len",
+        "1245-ref-rows",
+        "1245-filtered",
+        "1245-extra-basic",
+        "1245-extra-advanced",
+        "1245-explain-columns.deep"
+      ],
+      "done_at": "2026-10-06T23:20:47+08:00"
     },
     "source/12/12-46 千万级的数据表如何优化深度分页？（一）-迅捷文字转语音-1790923701152zh.txt": {
       "id": "12-46",
@@ -6110,7 +6126,7 @@
     }
   },
   "next_num": 1,
-  "waves": 38,
-  "updated": "2026-10-06T23:14:59+08:00",
+  "waves": 39,
+  "updated": "2026-10-06T23:20:47+08:00",
   "consec_fail": 0
 }
