@@ -201,3 +201,16 @@
 **当前待产**：storage 剩 10、apm 剩 16（其中 apm 5-20 为"正确跳过"的重复卡，真实待补 15）；course11（go-interview）369 篇仍 0 产，待串行校准（MAX_PARALLEL=1）。
 
 **下一波建议**：Wave6 清理 storage 末 10（8-13/8-2/9-2~9-6/9-7~9-9）+ apm 余 15，即可把课程 9/10 推到接近满覆盖；之后转 course11 首波串行校准。
+
+## 断点 2026-10-06 · Wave6（storage/apm 收口）
+
+**派发**：复用新增生成器 `ai/scripts/gen_wave_specs.py`（读 manifest+sources+code_refs，落 /tmp/wave6_{group}.md，自包含规格）；并发 2 节奏（Round1: storageA+apmA；Round2: storageB+apmB），各段 5~8 篇。
+
+**结果（独立复算 + 25 篇全量程序化 QC）**：storage 100→**110**（+10，FULL 收口）、apm 94→**109**（+15），合计 **+25 篇落盘**。campus 维持 78/78。apm 仅余 `5-20` 因与 4-21「下单成功数监控」语义重复、按 card-qc 第 3 项**故意跳过**（非漏产），覆盖率脚本仍计 missing=1。
+
+- 25 篇程序化 QC：0 异常（三单引号 0、相关度行齐、围栏成对、体量达标、机翻残留 0、素材索引 mermaid 齐）。
+- 实盘计数与覆盖率一致：campus 78 / storage 110 / apm 109。
+- **课程 8/9/10 全部覆盖达成**（apm 仅留 1 张已知重复卡缺口）。
+- 监控基线：`_monitor_wave.py` TARGETS → {campus:78, storage:110, apm:109}。
+
+**下一步**：转 **course11（go-interview）首波**——369 篇待产，属另一套流水线 `mt-to-interview-cards`，须**串行校准（MAX_PARALLEL=1）**规避 429（此前并行 3→全线 429 已锁单线程）。建议先 10~20 篇校准打样，再滚动扩量。
