@@ -1,0 +1,54 @@
+# 814 g 的 GC 辅助与同步调试字段
+
+> 分类：并发模型 | 难度：L3 | 题型：原理题 | 频率：中 | 关键词：**gcAssistBytes** / **racectx** / **selectDone** / **writebuf**
+> 原文锚点：第 63~109 段「racectx 存储竞态检测上下文…GCassistantbatch 与回收负债」
+
+## 一句话总述
+g 内还有一组"运行支撑字段"：gcAssistBytes 记录 GC 辅助负债，racectx 供竞态检测，writebuf/cgoCtxt/labels/timer/selectDone 服务 IO、cgo、性能分析与 select。
+
+## 面试官视角
+- 考察意图：是否清楚 g 结构体如何承载 GC/竞态/调度细节
+- P5 知道 gcAssistBytes 是 GC 负债 / P6 能讲 selectDone 原子标记 / P7 能讲负债为负要"还债"
+- 红旗：把 writebuf 当成网络缓冲；答不出 gcAssistBytes 为负意味着什么
+- 惊艳点：gcAssistBytes 为负表示 g 欠 GC 债，需执行扫描工作偿还 `[源码]` runtime2.go
+
+## 主问答
+**Q：** g 里那些"GC/竞态/同步"字段分别做什么？
+**A：**
+1. **gcAssistBytes**：GC 辅助余额，为负表示 g 欠债需扫描偿还 `[源码]`。
+2. **racectx**：竞态检测器（race detector）的上下文 ID `[源码]`。
+3. **selectDone/writebuf/cgoCtxt/labels/timer**：分别标记 select 参与、写缓冲、cgo 回溯、profile 标签、time.Sleep 缓存定时器 `[源码]`。
+**加分层：** 字段多数为运行时内部优化，对普通业务透明。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | gcAssistBytes 是什么 | 概念 | GC 辅助负债 | 换题 |
+| L2 | 负债为负怎么办 | 机制 | g 执行扫描还债 | 判 P5 |
+| L3 | selectDone 如何工作 | 边界 | 原子标记避免竞争 | 判 P6 |
+| L4 | writebuf 何时用 | 权衡 | gwrite 写阻塞时缓冲 | 判 P6+ |
+| L5 | GC 辅助如何影响延迟 | 实战 | 分配多→辅助扫描开销 | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| go1.20+ 字段稳定 | gcAssistBytes 字段名长期未变 `[存疑]` | 照"负债模型"答即可 |
+
+## 关键代码
+```go
+// 示意，未验证：g 的 GC/同步支撑字段（节选）
+type g struct {
+    gcAssistBytes int64      // GC 辅助余额，负=欠债
+    racectx       uintptr    // 竞态检测上下文
+    selectDone    uint32     // 参与 select 的原子标记
+    writebuf      []byte     // gwrite 写缓冲
+    timer         *timer     // time.Sleep 缓存的定时器
+}
+```
+
+## ⚠️ 原文纠错
+① 原文"levels 字段"实为 `labels`（性能分析标签），系机翻误识。② 原文"debugtransbacksenstor 标志"严重崩坏，对应机制疑为 `GODEBUG`/调试标志控制 `g.ancestors`，名称无法确证标 `[存疑]`。③ 原文"goroutineprofile 字段"在 runtime2.go 中无同名字段，疑为对 `profilehz`/profiler 标签机制的误述，标 `[存疑]`。
+
+## 总结与追问预判
+- g 用 gcAssistBytes 记 GC 负债、racectx 供竞态、selectDone 防 select 竞争，多数为运行时内部优化。
+- 下一题接「m 结构体字段与 P 的关联」（见 814-m-struct-fields）。
