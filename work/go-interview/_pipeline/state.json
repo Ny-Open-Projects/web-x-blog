@@ -1143,10 +1143,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "709-cron-expression-syntax",
+        "709-cron-register-methods",
+        "709-cron-timezone",
+        "709-cron-overlap-recover",
+        "709-cron-vs-ticker",
+        "709-cron.deep"
+      ],
+      "done_at": "2026-10-06T13:05:30+08:00"
     },
     "source/08/8-1 为什么面试官那么喜欢问runtime类型的问题？-迅捷文字转语音-1790896556027zh.txt": {
       "id": "8-1",
@@ -2318,10 +2326,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1111-slice-delete-swap",
+        "1111-slice-delete-copy",
+        "1111-slice-delete-append",
+        "1111-slice-delete-range",
+        "1111-slice-slice-memory-leak",
+        "1111-slice-delete.deep"
+      ],
+      "done_at": "2026-10-06T13:05:30+08:00"
     },
     "source/11/11-12 降低值复制成本优化Go代码性能-迅捷文字转语音-1790920251301zh.txt": {
       "id": "11-12",
@@ -5747,7 +5763,7 @@
     }
   },
   "next_num": 1,
-  "waves": 14,
-  "updated": "2026-10-06T12:58:53+08:00",
+  "waves": 15,
+  "updated": "2026-10-06T13:05:30+08:00",
   "consec_fail": 0
 }

@@ -238,6 +238,7 @@
 **批次 12（2026-10-06）**：16-2 设计模式（一）（5 主卡+1 deep，162-*）+ 16-3 设计模式（二）（5 主卡+1 deep，163-*），新开第 16 章。覆盖创建型(singleton/factory/builder)+结构型(adapter/decorator) 与行为型(strategy/observer/chain/ template/iterator)。原文为概念讲义无事实错误，仅做口播序数错乱重建（行为型序号念乱按 GoF 23 种重建）。`163-iterator` 版本栅栏标注 `iter.Seq`/`Seq2` go1.23 引入。`validate.py --strict` 独立复核 **144/144 PASS、0 error**。
   ⚠️ **黑名单又发现 `裸体` 也在列（line 30）**：lead 此前"安全词"误列 `裸体→得体`；worker 已规避（改用 利用→nil/勾浪→Go/首时→守时）。已更正 MEMORY 安全词清单，后续派单严禁用 `裸体`。
 **批次 13（2026-10-06）**：4-12 fmt动词区别（二）（5 主卡+1 deep，412-*）+ 16-1 设计模式六大原则（5 主卡+1 deep，161-*）。纠正 2 处：412-fmt-percent-escape 原文把"99.99 输出成 100%"归因浮点精度（实测 %.2f 仍 99.99，实为未转义 `%` 当动词致 `%!(MISSING)`，须用 `%%`）；412-fmt-stdin 原文把 `go build -ldflags -X` 列为"获取标准输入"且记成"杠 s"（实为编译期链接器注入变量，-X 设字符串变量、-s 剥离调试信息，与 stdin 无关）。`validate.py --strict` 独立复核 **156/156 PASS、0 error**。
+**批次 14（2026-10-06）**：7-9 cron 定时任务（5 主卡+1 deep，709-*）+ 11-11 切片删除优化（5 主卡+1 deep，1111-*），新开第 11 章。纠正 2 处：709-cron-timezone 原文例"UTC 2:00 按东八区是早 8 点"前后矛盾（同段已说 UTC 慢 8h，应为 10:00）；1111-slice-delete-append 原文总结"copy 方式比较高效"与自身基准（append 稍快、差距极小、可读性优先）矛盾。cron 标 robfig/cron/v3 `[第三方]`。`validate.py --strict` 独立复核 **168/168 PASS、0 error**。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
