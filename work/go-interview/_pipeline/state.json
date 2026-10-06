@@ -1146,10 +1146,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "813-gmp-model-overview.md",
+        "813-g-stack-fields.md",
+        "813-g-gobuf.md",
+        "813-g-syscall-gc-fields.md",
+        "813-g-panic-defer-fields.md",
+        "813-g-stack-fields.deep.md"
+      ],
+      "done_at": "2026-10-06T11:19:06+08:00"
     },
     "source/08/8-14 GMP底层数据结构是怎样的？（二）-迅捷文字转语音-1790903135615zh.txt": {
       "id": "8-14",
@@ -1184,10 +1192,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "815-m-spin-locks-blocked.md",
+        "815-p-overview-status.md",
+        "815-p-runq-runnext.md",
+        "815-p-mcache-pcache.md",
+        "815-p-gc-timer-preempt.md",
+        "815-p-runq-runnext.deep.md"
+      ],
+      "done_at": "2026-10-06T11:19:06+08:00"
     },
     "source/08/8-16 GMP 调度流程是怎样的？-迅捷文字转语音-1790903160690zh.txt": {
       "id": "8-16",
@@ -5587,7 +5603,7 @@
     }
   },
   "next_num": 1,
-  "waves": 4,
-  "updated": "2026-10-06T11:10:18+08:00",
+  "waves": 5,
+  "updated": "2026-10-06T11:19:07+08:00",
   "consec_fail": 0
 }

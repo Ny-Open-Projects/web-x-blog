@@ -1,0 +1,55 @@
+# 813 g 的栈字段：stack / stackguard / throwsplit
+
+> 分类：并发模型 | 难度：L3 | 题型：原理题 | 频率：中 | 关键词：**stack** / **stackguard** / **throwsplit** / **栈溢出**
+> 原文锚点：第 25~28 段「strock 是对栈参数…两个用于栈的扩张和收缩的检查标志，它是抢占标志」
+
+## 一句话总述
+g.stack 描述栈内存，stackguard0/1 是栈边界哨兵兼协作式抢占标志，stktopsp 供回溯校验，throwsplit 禁止栈分裂，stackLock 在并发改栈时加锁 `[源码]` runtime2.go。
+
+## 面试官视角
+- 考察意图：是否理解"栈自动增长"背后的字段机制与抢占钩子
+- P5 知道 stack 是栈内存 / P6 讲清 stackguard 如何触发扩容与抢占 / P7 讲 throwsplit 与栈收缩安全点
+- 红旗：把 stackguard 只当溢出保护；答不出"为何 stackguard 也用于抢占"
+- 惊艳点：栈初始仅 2KB，靠 stackguard0 越界陷入 `morestack` 增长，旧栈复制新栈 `[源码]` runtime/stack.go
+
+## 主问答
+**Q：** g 里哪些字段管栈的扩缩与溢出？
+**A：**
+1. **stack / stackguard0/1**：stack 是 [lo,hi] 栈区间；stackguard0 是栈顶哨兵，越界即增长或抢占 `[源码]`。
+2. **stktopsp / throwsplit**：stktopsp 存回溯期预期栈顶用于一致性校验；throwsplit 置位则禁止栈分裂 `[源码]`。
+3. **stackLock**：并发调整栈时加锁，避免其他 G 读到半截栈 `[源码]`。
+**加分层：** stackguard0 同时是协作式抢占点——置 `stackPreempt` 后函数 prologue 检测触发调度。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | stack 是什么 | 概念 | g 的栈内存区间 | 换题 |
+| L2 | stackguard 干嘛 | 机制 | 越界增长/抢占 | 判 P5 |
+| L3 | 扩容怎么搬 | 边界 | 旧栈复制新栈、调整指针 | 判 P6 |
+| L4 | 为何要 throwsplit | 权衡 | cgo/汇编禁分裂保安全 | 判 P6+ |
+| L5 | 栈收缩何时发生 | 实战 | 同步安全点缩栈 | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| go1.20+ 稳定 | 栈增长策略(copy stack)长期未变 `[存疑]` | 答"stackguard0 越界→morestack 复制增长"即可 |
+
+## 关键代码
+```go
+// 示意，未验证：g 的栈相关字段（节选）
+type g struct {
+	stack       stack    // [stack.lo, stack.hi] 栈区间
+	stackguard0 uintptr  // 栈顶哨兵，越界触发增长/抢占
+	stackguard1 uintptr  // 系统调用期的栈哨兵
+	stktopsp    uintptr  // 回溯期预期栈顶
+	throwsplit  bool     // true=禁止栈分裂
+	stackLock   uint32   // 并发改栈时加锁
+}
+```
+
+## ⚠️ 原文纠错
+未发现技术错误。核对范围：通读全文并重点核对代码 API 与版本相关行为；仅做了机翻解码（如 勾浪→Go、对栈→栈 等拼写还原），技术结论未做更正。
+
+## 总结与追问预判
+- 栈靠 stack/stackguard0 实现自动增长与协作抢占，throwsplit 与 stackLock 处理特殊/并发场景。
+- 深入见 813-g-stack-fields.deep.md（增长/收缩算法与安全点）。
