@@ -1,0 +1,55 @@
+# 602 Context 接口与四个核心方法
+
+> 分类：并发模型 | 难度：L2 | 题型：八股题 | 频率：高 | 关键词：**Done** / **Err** / **Deadline** / **Value**
+> 原文锚点：第 18~28 段「接口包含四个方法…Done 返回只读 channel…Err 返回取消原因」
+
+## 一句话总述
+Context 是 go1.7 引入标准库的接口，定义 Done()/Err()/Deadline()/Value() 四个方法，用于在 goroutine 间传递取消信号与请求作用域数据。
+
+## 面试官视角
+- 考察意图：是否理解 Context 的接口契约与取消机制，而非只会调 WithXxx。
+- P5 知四个方法名 / P6 能讲 Done 是只读 channel、关闭即通知 / P7 知 Err 只有两种取值与 Deadline 的 bool 含义。
+- 红旗：把 Done 当成可写 channel；以为 Err 会返回任意自定义错误。
+- 惊艳点：Done() 返回只读 channel，全程不写入，只有关闭动作；子协程读零值即"被取消"信号 `[源码] src/context/context.go`。
+
+## 主问答
+**Q（面试官原话）：** 你说说 Context 这个接口里都有什么方法，各自干嘛的？
+**A：**
+1. **Done()**：返回只读 channel，context 被取消或超时时该 channel 被关闭；子 goroutine 读到零值即可收尾退出。
+2. **Err()**：返回 error，仅在 Done 关闭后有意义；取值只有两种——Canceled（主动 cancel）或 DeadlineExceeded（超时）`[源码]`。
+3. **Deadline()**：返回 (time.Time, bool)，bool 表示是否设置截止时间，可用于任务过长时提前跳过省资源。
+**加分层：** Value() 仅用于请求作用域元数据（如 requestID），不应承载业务参数。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
+|---|---|---|---|---|
+| L1 | 哪四个方法 | 概念 | 说 Done/Err 等 | 换题 |
+| L2 | Done 怎么用 | 机制 | 关闭即通知 | 判 P5 |
+| L3 | Err 几种值 | 边界 | 仅 cancel/超时 | 判 P6 |
+| L4 | Deadline bool | 权衡 | 无截止返回 false | 判 P6+ |
+| L5 | 自定义类型 | 实战 | 实现接口做包装 | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| go1.7 起稳定 `[源码]` | 无 | 四方法语义自 1.7 未变；context 包在 1.7 进标准库 |
+
+## 关键代码
+```go
+// 示意，未验证：读取 Done 做取消收尾
+func worker(ctx context.Context) {
+	select {
+	case <-ctx.Done():
+		fmt.Println("退出:", ctx.Err()) // Canceled 或 DeadlineExceeded
+	case <-time.After(3 * time.Second):
+		fmt.Println("完成")
+	}
+}
+```
+
+## 总结与追问预判
+- Context 四方法构成取消与数据传递的契约；Done 关闭即信号、Err 仅两值。
+- 预判：取消如何跨层传播 → 见 602-context-cancel-propagation。
+
+## ⚠️ 原文纠错
+未发现事实性技术错误。核对范围：通读全文并重点核对接口方法与版本行为；仅做机翻解码（contest→context、携程/购入器→goroutine、蛋→Done、consol→cancel、withtimeout→WithTimeout 等拼写还原），技术结论未做更正。

@@ -228,6 +228,7 @@
 **当前进度**：369 任务 / 12 done / 357 pending / 72 卡落盘（XL 档 12/114：7-10/7-8/8-14/8-16/9-25/7-6/8-13/8-15/7-7/19-6/6-8/10-5）。6 批次（批次1~6）均 12/12 PASS（0 error），累计纠正实质技术错误若干（mcache 挂 P 非 M、gin abortIndex=63 非 int8 上限、Gin `dive` 嵌套校验子句、GMP 字段名崩坏还原、10-5 原子操作 all-or-nothing 误用事务语义、sync.Cond Wait/Signal 类比加锁解锁错误、notifyListWait 误称 C 库实现等）。
 
 **批次 6（2026-10-06）**：6-8 panic/recover（5 主卡+1 deep，608-*）+ 10-5 原子操作 vs 锁（5 主卡+1 deep，105-*）。纠正 3 处实质错误：① 105-atomic-vs-mutex-core 原文把原子操作说成"要么全成要么全不成"（事务回滚语义），正确是不可分性；② 105-cond-semaphore 把 `Wait`≈加锁、`Signal`≈解锁（实际 Wait 先 Unlock 再挂起、唤醒后重 Lock，Signal 只唤醒等待者）；③ 同卡把 `notifyListWait` 说成"底层 C 库"，实际 Go 运行时由 Go+少量汇编实现（runtime/sema.go）。`validate.py --strict` 独立复核 **72/72 PASS、0 error**（2 warn 为历史存量）。
+**批次 7（2026-10-06）**：6-2 context 最佳实践（5 主卡+1 deep，602-*）+ 4-5 Go 包管理（二）（5 主卡+1 deep，405-*）。纠正 1 处：405-gomod-structure 原文称 go.mod `go 1.20` 指令"只是当前环境 go 版本信息"，纠正为「模块要求的最低 Go 版本」（自 go1.21 驱动 toolchain 选择）。`validate.py --strict` 独立复核 **84/84 PASS、0 error**（2 warn 为历史存量）。版本栅栏已写入：context go1.7 进标准库、GO111MODULE go1.11/1.13/1.16 演进、`WithoutCancel`/`AfterFunc` go1.21 新增。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。

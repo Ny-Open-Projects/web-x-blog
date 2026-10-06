@@ -1,0 +1,58 @@
+# 405 跳过哈希校验的三种情况与 vendor 模式
+
+> 分类：工程化与测试 | 难度：L3 | 题型：工程题 | 频率：中 | 关键词：**GOPRIVATE** / **GOSUMDB=off** / **go mod vendor** / **离线构建**
+> 原文锚点：第 116~131 段「GOPRIVATE 跳过…vendor 不校验…GOSUMDB=off 全关」
+
+## 一句话总述
+三类情况不做事后哈希校验：GOPRIVATE 匹配的私有包、go mod vendor 落盘的 vendor 目录、GOSUMDB=off 全局关闭；vendor 还能实现离线可复现构建。
+
+## 面试官视角
+- 考察意图：是否知道校验可被绕过以及各自的适用场景，而非"go.sum 永远校验"。
+- P5 知三种跳过方式 / P6 能区分 GOPRIVATE 与 GOSUMDB=off 的范围 / P7 知 vendor 的离线价值与同步成本。
+- 红旗：以为私有包必须过 sum.golang.org；把 GOSUMDB=off 当通用做法。
+- 惊艳点：GOPRIVATE 只跳过 sumdb 校验但仍走哈希本地比对，而 GOSUMDB=off 连本地 sumdb 查询也关 `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 什么情况下 go 不会对依赖做哈希校验？
+**A：**
+1. **结论**：三情况——GOPRIVATE 匹配的包、vendor 目录里的包、GOSUMDB=off 全局关闭。
+2. **机制**：GOPRIVATE 让内部包不上 sum.golang.org；`go mod vendor` 把源码固化为本地 vendor，构建直接用它不再校验 `[源码]`。
+3. **边界**：GOSUMDB=off 是全局关闭校验，降低安全性，仅适合隔离/离线环境，不可作为常态。
+**加分层：** vendor 换来离线可复现，但需随 go.mod 变更重新 `go mod vendor`，有同步负担。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
+|---|---|---|---|---|
+| L1 | 哪三种 | 概念 | 私包/vendor/off | 换题 |
+| L2 | GOPRIVATE | 机制 | 跳 sumdb | 判 P5 |
+| L3 | vendor 逻辑 | 边界 | 固化免校验 | 判 P6 |
+| L4 | off 风险 | 权衡 | 安全下降 | 判 P6+ |
+| L5 | 离线构建 | 实战 | vendor+CI | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| go1.11 起 GOPRIVATE/GOSUMDB 稳定, vendor 长期支持 `[源码]` | 无实质翻转 | 三情况仍成立；强调 GOSUMDB=off 仅限隔离环境 |
+
+## 关键代码
+```go
+// 示意，未验证：程序内设置私有模块范围（等效 GOPRIVATE 环境变量）
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	os.Setenv("GOPRIVATE", "git.internal.com") // 匹配到的包跳过 sumdb 校验
+	fmt.Println("private set:", os.Getenv("GOPRIVATE"))
+}
+```
+
+## 总结与追问预判
+- 三情况免校验：私包、vendor、GOSUMDB=off；vendor 主打离线可复现。
+- 预判：GOPATH 与模块模式存储差异 → 见 405-gopath-vs-modules。
+
+## ⚠️ 原文纠错
+未发现事实性技术错误。核对范围：核对 GOPRIVATE/GOSUMDB=off/go mod vendor 三种跳过校验的条件与 vendor 离线语义；仅做机翻解码（goprivert→GOPRIVATE、gosomeDB→GOSUMDB、gomodelrender→go mod vendor、REDM→vendor、rdder→vendor 等还原），技术结论未做更正。

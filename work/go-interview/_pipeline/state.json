@@ -282,10 +282,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "405-go111-module",
+        "405-gomod-structure",
+        "405-gosum-checksum",
+        "405-vendor-mode",
+        "405-gopath-vs-modules",
+        "405-go-mod.deep"
+      ],
+      "done_at": "2026-10-06T11:42:08+08:00"
     },
     "source/04/4-6 如何使用内部包？（一）-迅捷文字转语音-1790755605845zh.txt": {
       "id": "4-6",
@@ -717,10 +725,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "602-context-interface",
+        "602-context-cancel-propagation",
+        "602-withvalue-timeout",
+        "602-context-best-practices",
+        "602-context-data-abuse",
+        "602-context.deep"
+      ],
+      "done_at": "2026-10-06T11:42:07+08:00"
     },
     "source/06/6-3 你在面试时，switch这些细节是不是被忽视了-迅捷文字转语音-1790857211541zh.txt": {
       "id": "6-3",
@@ -5635,7 +5651,7 @@
     }
   },
   "next_num": 1,
-  "waves": 7,
-  "updated": "2026-10-06T11:33:20+08:00",
+  "waves": 8,
+  "updated": "2026-10-06T11:42:08+08:00",
   "consec_fail": 0
 }
