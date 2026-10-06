@@ -165,3 +165,13 @@
 - campus 10-x 的 `code_refs`（L122/L141 等 Java 文件）经核实是 LeetCode 算法题解，与"数据库/事务/字段类型"主题**无关**，属数据集错配噪声 → 按"概念卡不强塞代码"处理，未嵌入；DB 卡改用 SQL 示例。
 - campus 8-7/8-8 源讲稿文本完全相同（均 LeetCode 54 螺旋矩阵）→ 按切面拆分（思路 vs 代码），规避 card-qc 重复命中。
 - 讲稿事实错误已修：INT 实为 4 字节（讲稿误 8）、DECIMAL(p,d) 精度/标度、ASR 错词（张读→脏读、换读→幻读、单独→不可重复读、西塔→Seata、柔 PMQ→RocketMQ、密等→幂等 等）。
+
+## 断点 2026-10-06 · Wave3（storage/apm 续产）
+
+**结果（独立复算）**：storage 59→**68**（+9）、apm 48→**64**（+16），合计 **+25 篇**（非 32：storageA 7 个 slot 命中此前 wave 已产出的点号命名文件 3.8/3.9/3.10/3.11/3.14/3.15/3.16，子 agent 按 card-qc 重复项正确跳过，无漏产无重复）。campus 维持 78/78。
+
+- 25 篇全量程序化 QC：0 异常（三单引号 0、均有相关度行、围栏成对、体量 1.3–5.8KB）。
+- 监控基线：`_monitor_wave.py` TARGETS → {campus:78, storage:68, apm:64}。
+- **修复派发 bug**：Wave3 生成器漏识别"点号=短横"同 id（覆盖率脚本能识别）。**Wave4 起改读 `work/target/_COVERAGE_ALL.json` 的 `missing` 列表**（权威），避免再浪费 slot。
+
+**当前待产**：storage 剩 42、apm 剩 46；course11（go-interview）队列 369 篇仍 0 产，待串行校准启动（见 mt-to-interview-cards SKILL：并行 3→全线 429，已锁 MAX_PARALLEL=1，校准阶段单强模型跑 10~20 篇）。
