@@ -2562,10 +2562,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1119-stack-growth-history",
+        "1119-large-object-escape",
+        "1119-interface-conversion-escape",
+        "1119-container-interface-escape",
+        "1119-fmt-reflect-escape",
+        "1119-escape-analysis.deep"
+      ],
+      "done_at": "2026-10-06T17:49:51+08:00"
     },
     "source/12/12-1 为什么数据库类的面试题是面试过程中的必考题？-迅捷文字转语音-1790920684162zh.txt": {
       "id": "12-1",
@@ -5505,10 +5513,11 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [],
+      "done_at": "2026-10-06T17:49:52+08:00"
     },
     "source/18/18-50 拔掉网线后原本的TCP连接还会存在吗？-迅捷文字转语音-1790932270070zh.txt": {
       "id": "18-50",
@@ -5820,7 +5829,7 @@
     }
   },
   "next_num": 1,
-  "waves": 19,
-  "updated": "2026-10-06T17:40:47+08:00",
+  "waves": 20,
+  "updated": "2026-10-06T17:49:52+08:00",
   "consec_fail": 0
 }
