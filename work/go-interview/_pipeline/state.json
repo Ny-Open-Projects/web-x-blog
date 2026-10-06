@@ -2264,10 +2264,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1025-overview",
+        "1025-usage",
+        "1025-source",
+        "1025-forget",
+        "1025-cyclicbarrier",
+        "1025-singleflight.deep"
+      ],
+      "done_at": "2026-10-06T20:29:14+08:00"
     },
     "source/10/10-3 应该怎么回答并发编程类问题？-迅捷文字转语音-1790917877440zh.txt": {
       "id": "10-3",
@@ -3457,10 +3465,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1253-rdb",
+        "1253-aof",
+        "1253-aof-rewrite",
+        "1253-hybrid",
+        "1253-compare",
+        "1253-redis-persist.deep"
+      ],
+      "done_at": "2026-10-06T20:29:14+08:00"
     },
     "source/12/12-54 如何避免缓存穿透，缓存雪崩和缓存击穿？.mp4-迅捷文字转语音-1790924132354zh.txt": {
       "id": "12-54",
@@ -6062,7 +6078,7 @@
     }
   },
   "next_num": 1,
-  "waves": 35,
-  "updated": "2026-10-06T20:25:10+08:00",
+  "waves": 36,
+  "updated": "2026-10-06T20:29:14+08:00",
   "consec_fail": 0
 }

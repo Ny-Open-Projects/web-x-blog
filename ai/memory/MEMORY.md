@@ -347,7 +347,15 @@
 - **文件名映射复核**：12-44→`1244-`(4位)、12-18→`1218-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（12-44→1244、12-18→1218）**。
 - `validate.py --strict` 独立复核 **390/390 PASS、0 error、warn 39**（warn 含本批 1218 卡 `text` 块「未见可运行语言」无害告警 + 历史 json/bash 块，均非 error）。无 R1 剔除。
 
-**当前进度（批次34收口）**：369 任务 / **68 done / 301 pending / 390 卡落盘**（XL 档 68/114，约 60%）。已做清单（续批次33）：+4-4/12-36/19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9/13-7/12-11/17-17/15-2/18-14/12-35/12-34/4-11/12-44/12-18。剩余：XL 46 篇（68/114）→ 之后 L 124 / M 100 / S 31。
+**批次 35（2026-10-06）**：10-25 Singleflight 实现原理（6 卡，1025-*）+ 12-53 Redis 持久化方式（6 卡，1253-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主。
+- **10-25 崩坏词归一**：构大社区→Go 社区、勾入t/购routing/购入t→goroutine、singinkflact/singleflag→singleflight、circlebarrier/circlebroup/circbarrier/sqlbarrier→CyclicBarrier、whightgroup/whittle/whialgroup→WaitGroup、勾入tine→goroutine、errorbrokenbarrier→broken barrier。
+- **10-25 事实核校**：① singleflight 用于请求合并/防缓存击穿、同 key 并发只回源一次、与限流/批处理不同——正确；② Group 零值可用、Do(key,fn) 返回 (val,err,shared)、shared 标记是否搭车——正确；③ 源码 Group(mu+map)、call(wg+val+chan)、Do 查 key/首执行/余 WaitGroup 等/结果共享——正确；④ Forget 删 map 项使同 key 后续重执行、不影响进行中请求——正确；⑤ CyclicBarrier 可复用、多对等到齐、New/NewWithAction/await/reset/IsBroken、与 WaitGroup 一对多语义差异——正确。
+- **12-53 崩坏词归一**：REDIS/REDS→Redis、MMMCatch→Memcached、IOF/RDF/LOF/ROF/LF→AOF、RDBL照→RDB、c五/c五九百一→save 900 1、BGC五→BGSAVE、folk→fork、coponrightright→写时复制(COW)、linx→Linux、server点AOFbuffer→aof_buf、right→write、configcatch→内核缓冲区、FSYC/FSYNC→fsync、acase→内核缓冲配置(appendfsync)、resecond→everysec、low→no、OOS→always、建制队/键制队→键值对、appendonly/appendfilename/apppadonly→appendonly、LOFRDDBgramble→aof-use-rdb-preamble。
+- **12-53 事实核校**：① RDB 全量快照、save 触发 BGSAVE、fork 子进程不阻塞、COW 按 4KB 页复制避免内存翻倍、间隔丢数据——正确；② AOF 追加写命令(只记写)、aof_buf→write→fsync 链路、三策略 always/everysec/no 语义与默认 everysec、可靠性/性能排序——正确；③ AOF 重写后台子进程、键值对最小命令集、命令合并、先新文件后原子替换防污染——正确；④ 混合持久化 RDB 全量+AOF 增量、4.0+ 引入、appendonly+aof-use-rdb-preamble 开启——正确；⑤ 三者对比选型(安全vs性能)、可 RDB+AOF 同开兜底——正确。
+- **文件名映射复核**：10-25→`1025-`(4位)、12-53→`1253-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（10-25→1025、12-53→1253）**。
+- `validate.py --strict` 独立复核 **402/402 PASS、0 error、warn 44**（warn 含本批 1253 卡 bash 块「未见可运行语言」无害告警 + 历史 json/bash 块，均非 error）。无 R1 剔除。
+
+**当前进度（批次35收口）**：369 任务 / **70 done / 299 pending / 402 卡落盘**（XL 档 70/114，约 61%）。已做清单（续批次34）：+.../12-44/12-18/10-25/12-53。剩余：XL 44 篇（70/114）→ 之后 L 124 / M 100 / S 31。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
