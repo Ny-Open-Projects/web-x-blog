@@ -639,10 +639,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "508-value-or-pointer",
+        "508-struct-copy-field",
+        "508-struct-indirect-field",
+        "508-struct-reassign-field",
+        "508-string-immutable",
+        "508-struct-vs-pointer.deep"
+      ],
+      "done_at": "2026-10-06T23:45:04+08:00"
     },
     "source/05/5-9 interface 可以比较吗-迅捷文字转语音-1790855996240zh.txt": {
       "id": "5-9",
@@ -1564,10 +1572,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "808-tricolor-misreclaim",
+        "808-strong-weak-invariant",
+        "808-insert-barrier",
+        "808-delete-barrier",
+        "808-hybrid-barrier",
+        "808-write-barrier.deep"
+      ],
+      "done_at": "2026-10-06T23:45:11+08:00"
     },
     "source/08/8-9 Go中并发的三色标记法具体是怎么实现的？-迅捷文字转语音-1790903070373zh.txt": {
       "id": "8-9",
@@ -6126,7 +6142,7 @@
     }
   },
   "next_num": 1,
-  "waves": 39,
-  "updated": "2026-10-06T23:20:47+08:00",
+  "waves": 40,
+  "updated": "2026-10-06T23:45:11+08:00",
   "consec_fail": 0
 }
