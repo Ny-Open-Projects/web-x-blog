@@ -175,3 +175,15 @@
 - **修复派发 bug**：Wave3 生成器漏识别"点号=短横"同 id（覆盖率脚本能识别）。**Wave4 起改读 `work/target/_COVERAGE_ALL.json` 的 `missing` 列表**（权威），避免再浪费 slot。
 
 **当前待产**：storage 剩 42、apm 剩 46；course11（go-interview）队列 369 篇仍 0 产，待串行校准启动（见 mt-to-interview-cards SKILL：并行 3→全线 429，已锁 MAX_PARALLEL=1，校准阶段单强模型跑 10~20 篇）。
+
+## 断点 2026-10-06 · Wave4（storage/apm 续产）
+
+**结果（独立复算 + 16 篇深检）**：storage 68→**84**（+16）、apm 64→**79**（+15），合计 **+31 篇**。campus 维持 78/78。
+
+- 首轮 4 并行派发中 storageB/apmA 两 agent 因 **429 限流**创建失败；限流 09:29 重置后重试，二 agent 核验盘上 id 均已存在（首轮 429 前实际已落盘），诚实跳过，**非偷懒谎报**（已用 ls + 覆盖率双重核验）。
+- 16 篇争议文件深检：0 异常（三单引号 0、相关度行齐、围栏成对、机翻残留扫描 0、体量 1.6–5.1KB）。
+- 监控基线：`_monitor_wave.py` TARGETS → {campus:78, storage:84, apm:79}。
+
+**当前待产**：storage 剩 26、apm 剩 31；course11 369 篇仍 0 产（待串行校准）。
+
+**429 教训（接手者必读）**：本机 API 短时窗口限流，4 并行曾触发全线 429；重试窗口 ~09:29 重置。续产建议**并行 ≤2** 或串行，避免再撞限流。course11 流水线已锁 MAX_PARALLEL=1。

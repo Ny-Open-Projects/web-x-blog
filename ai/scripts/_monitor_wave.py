@@ -3,7 +3,7 @@
 import re, time, subprocess, sys
 
 ROOT = '/Users/Wang/Code/github/web-x-blog'
-TARGETS = {'campus': 78, 'storage': 68, 'apm': 64}  # 波次目标落盘数（Wave3 完成后基线）
+TARGETS = {'campus': 78, 'storage': 84, 'apm': 79}  # 波次目标落盘数（Wave4 完成后基线）
 MAX_SEC = 540  # 最长保活 9 分钟
 
 
