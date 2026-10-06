@@ -3227,10 +3227,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1237-implicit-lock",
+        "1237-implicit-lock-clustered",
+        "1237-implicit-lock-secondary",
+        "1237-secondary-equality-locking",
+        "1237-supremum-pseudo-record",
+        "1237-mysql-locks-6"
+      ],
+      "done_at": "2026-10-07T00:52:59+08:00"
     },
     "source/12/12-38 彻底搞懂MySQL中的锁（七）-迅捷文字转语音-1790923230648zh.txt": {
       "id": "12-38",
@@ -3831,10 +3839,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1311-deep-paging-cost",
+        "1311-max-result-window",
+        "1311-scroll-api",
+        "1311-search-after",
+        "1311-doc-values-sort",
+        "1311-es-deep-paging"
+      ],
+      "done_at": "2026-10-07T00:52:59+08:00"
     },
     "source/13/13-12 ElasticSearch如何解决并发冲突问题？-迅捷文字转语音-1790925312077zh.txt": {
       "id": "13-12",
@@ -6142,7 +6158,7 @@
     }
   },
   "next_num": 1,
-  "waves": 40,
-  "updated": "2026-10-06T23:45:11+08:00",
+  "waves": 41,
+  "updated": "2026-10-07T00:52:59+08:00",
   "consec_fail": 0
 }
