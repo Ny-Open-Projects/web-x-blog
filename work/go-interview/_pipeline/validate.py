@@ -35,7 +35,9 @@ BLACKLIST = [
 STRIP_TARGETS = ("go", "python", "java", "sql", "lua", "text", "mermaid", "bash", "json", "yaml", "md")
 
 # 允许 .deep.md：SPEC 第 3 节规定的深挖卡命名
-FILENAME_RE = re.compile(r"^\d{3}-[a-z0-9]+(-[a-z0-9]+)*(\.deep)?\.md$")
+# 前缀位数：章节(1~2位)+课次(1~2位)。单章单课=3位(707)，双章双课=4位(1017=章10课17)。
+# 原正则 ^\d{3}- 只认3位，会把 chapter10/19 + 两位课次的4位前缀卡误判 error。放宽到 {3,4}。
+FILENAME_RE = re.compile(r"^\d{3,4}-[a-z0-9]+(-[a-z0-9]+)*(\.deep)?\.md$")
 # 001-float-or-slice-as-map-key.md
 MAIN_SUFFIX = ".deep.md"
 

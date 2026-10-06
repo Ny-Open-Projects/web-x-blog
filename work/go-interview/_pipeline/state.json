@@ -132,10 +132,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "415-slice-header-struct",
+        "415-slice-assign-share",
+        "415-array-slice-compare",
+        "415-nil-slice-vs-array",
+        "415-array-literal-index",
+        "415-array-slice.deep"
+      ],
+      "done_at": "2026-10-06T11:54:09+08:00"
     },
     "source/04/4-16 Go语言中双引号和反引号有什么区别？-迅捷文字转语音-1790758636105zh.txt": {
       "id": "4-16",
@@ -1953,10 +1961,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1017-closure-loop-var",
+        "1017-closure-late-binding",
+        "1017-goroutine-loop-var",
+        "1017-closure-shared-modify",
+        "1017-goroutine-solutions",
+        "1017-goroutine-closure.deep"
+      ],
+      "done_at": "2026-10-06T11:54:09+08:00"
     },
     "source/10/10-18 for循环中goroutine“坑”都在这里-迅捷文字转语音-1790918786822zh.txt": {
       "id": "10-18",
@@ -5651,7 +5667,7 @@
     }
   },
   "next_num": 1,
-  "waves": 8,
-  "updated": "2026-10-06T11:42:08+08:00",
+  "waves": 9,
+  "updated": "2026-10-06T11:54:09+08:00",
   "consec_fail": 0
 }

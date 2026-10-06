@@ -229,6 +229,8 @@
 
 **批次 6（2026-10-06）**：6-8 panic/recover（5 主卡+1 deep，608-*）+ 10-5 原子操作 vs 锁（5 主卡+1 deep，105-*）。纠正 3 处实质错误：① 105-atomic-vs-mutex-core 原文把原子操作说成"要么全成要么全不成"（事务回滚语义），正确是不可分性；② 105-cond-semaphore 把 `Wait`≈加锁、`Signal`≈解锁（实际 Wait 先 Unlock 再挂起、唤醒后重 Lock，Signal 只唤醒等待者）；③ 同卡把 `notifyListWait` 说成"底层 C 库"，实际 Go 运行时由 Go+少量汇编实现（runtime/sema.go）。`validate.py --strict` 独立复核 **72/72 PASS、0 error**（2 warn 为历史存量）。
 **批次 7（2026-10-06）**：6-2 context 最佳实践（5 主卡+1 deep，602-*）+ 4-5 Go 包管理（二）（5 主卡+1 deep，405-*）。纠正 1 处：405-gomod-structure 原文称 go.mod `go 1.20` 指令"只是当前环境 go 版本信息"，纠正为「模块要求的最低 Go 版本」（自 go1.21 驱动 toolchain 选择）。`validate.py --strict` 独立复核 **84/84 PASS、0 error**（2 warn 为历史存量）。版本栅栏已写入：context go1.7 进标准库、GO111MODULE go1.11/1.13/1.16 演进、`WithoutCancel`/`AfterFunc` go1.21 新增。
+**批次 8（2026-10-06）**：10-17 Goroutine 闭包陷阱（5 主卡+1 deep，1017-*）+ 4-15 数组和切片区别（二）（5 主卡+1 deep，415-*）。纠正 1 处（版本翻转）：1017-goroutine-loop-var 原文把"循环变量每轮复用同一变量"当普适事实，纠正为 **Go 1.22 起 for/range 循环变量改为每轮独立（per-iteration scope）**，旧版 ≤1.21 才共享。`validate.py --strict` 独立复核 **96/96 PASS、0 error**。
+  ⚠️ **本批暴露流水线 bug 并修复**：`validate.py` 文件名正则 `^\d{3}-` 只认 3 位前缀，而 10-17→1017 是 4 位（章节10+两位课次），导致 6 个 error。已放宽正则到 `^\d{3,4}-`（项目内 `_pipeline/validate.py`，不动 source），覆盖所有 chapter10/19 + 两位课次的 4 位卡。后续同类卡（10-10~10-19、19-10~19-25 等）不再误判。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
