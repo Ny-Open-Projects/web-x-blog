@@ -1,0 +1,63 @@
+# 198 网盘文件内容索引的压缩与映射
+
+> 分类：Elasticsearch 索引建模 | 难度：L3 | 题型：应用题 | 频率：低 | 关键词：**best_compression**/**index.codec**/**content text**/**HTML char_filter**/**预排序**
+> 原文锚点：第 73~83 段「文件内容索引的结构与 mapping」
+
+## 一句话总述
+文件内容索引与文件名结构类似，但 content 字段占用空间可能是文件名的几百上千倍，因此 setting 必须开 `index.codec=best_compression`；content 同样是 text + 带 HTML 标签处理的 char filter。
+
+## 面试官视角
+- 考察意图：是否知道「文本占空间大→必须最大压缩」，并能复用文件名索引的分词方案。
+- 分档：P5 知 content 用 text；P6 知 best_compression 省空间；P7 知 content 与 filename 索引的差异只在压缩与字段。
+- 红旗答案：content 用 keyword；或不设压缩导致磁盘暴涨。
+- 惊艳点：量化「content 索引空间是文件名的上千倍」，解释为何单独强调压缩。
+
+## 主问答
+**Q（面试官原话）：** 文件内容索引和文件名索引有什么不一样？
+**A：**
+1. **结构一致**：同样有 doc_id、uid、file_type、file_size、upload_time、content 六个字段。
+2. **最大差异在压缩**：content 占空间极大（数百~上千倍于文件名），故 setting 用 `index.codec: best_compression`（ES 提供的最大压缩比）。
+3. **预排序复用**：仍按业务设 `index.sort.field=ctime`。
+4. **分词器复用**：与文件名相同，索引 ik_max_word + 搜索 ik_smart + lowercase。
+5. **content 特殊处理**：content 可能是 HTML，写入用带 HTML 标签 char filter（html_strip）的分词器切词，搜索仍用 ik_smart。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | content 用什么类型？ | 基础 | text（要搜索） | P5 |
+| L2 | 为什么开 best_compression？ | 取舍 | 文本占空间大，省磁盘 | P6 |
+| L3 | best_compression 代价？ | 权衡 | CPU 解压开销略增，换空间 | P6 |
+| L4 | HTML 内容怎么处理？ | 原理 | char filter html_strip | P7 |
+| L5 | 还有别的 codec 吗？ | 进阶 | default(LZ4) vs best_compression(DEFLATE) | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| ES 2.x+ | `index.codec` 支持 default/best_compression | 文本重的索引统一 best_compression |
+
+## 关键代码
+```json
+{
+  "settings": {
+    "index.codec": "best_compression",
+    "index.sort.field": "ctime",
+    "analysis": {
+      "analyzer": {
+        "content_index": { "type": "custom", "tokenizer": "ik_max_word", "char_filter": ["html_strip"], "filter": ["lowercase"] }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "content": { "type": "text", "analyzer": "content_index", "search_analyzer": "ik_smart" }
+    }
+  }
+}
+```
+
+## 总结与追问预判
+content 索引 = 文件名索引 + best_compression + HTML char filter。核心是「空间敏感度不同，压缩策略不同」。下一步常问查询如何带 routing 减少分片扫描。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] content 索引空间远大于文件名、best_compression 为最大压缩比、content 用 text+HTML char filter、预排序复用——均正确。
+2. 崩坏词归一：源码将 settings 音译为 masetting、mapping 音译为品、best_compression 音译为 bestcompression、ik_max_word 音译为 ipadIITmasterDD、ik_smart 音译为 xsmart；源码将 Go 语言 音译为崩坏词，本卡统一为 Go 语言。

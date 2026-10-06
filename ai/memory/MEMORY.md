@@ -289,7 +289,16 @@
 - **⚠️ 本批小修（lead 必读）**：`validate.py` 规则 11「机翻残留」扫全文含纠错节，`419-shift-overflow.md` 初稿在纠错节字面写 `uin的十六→uint16` 触发 1 个 error（`\buin的` 命中）。修正为泛述"源码将 uint16 音译为崩坏词，本卡统一为 uint16"，并同步修 `419-numeric-overflow.deep.md`（深卡虽 early-return 不扫此规则，仍一并归一）。复跑 **306/306 PASS、0 error**（warn 16 为历史存量）。**铁律：纠错节不得字面出现任何黑名单/残留词（含 `uin的` 这类机翻崩坏词），一律泛述归一。**
 - `validate.py --strict` 独立复核 **306/306 PASS、0 error、warn 16**（warn 为历史 708 卡 yaml/json/bash 告警，无害）。无 R1 剔除。
 
-**当前进度（批次27收口）**：369 任务 / **54 done / 315 pending / 306 卡落盘**（XL 档 54/114，约 47%）。已做清单（续批次24）：+12-3/12-33/13-8/4-19/6-9/12-9。剩余：XL 60 篇（54/114）→ 之后 L 124 / M 100 / S 31。
+**批次 28（2026-10-06）**：19-8 企业级网盘搜索场景下的索引建模（6 卡，198-*）+ 13-14 如何使用 Go 操作 Elasticsearch？(一)（6 卡，1314-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主。
+- **19-8 崩坏词归一**：下的→shard(分片)、元素据→元数据、claster点mask架子perload→cluster.max_shards_per_node、making/品→mapping、setting/masetting→settings、kword→keyword、test→text、DOCvalues→doc_values、copytwo→copy_to、loms→norms、indexoptions→index_options、ipadmassword→ik_max_word、xmart→ik_smart、掐filter→char filter、点stafield→index.sort.field、master字句→must、秀的子句→should、mach→match、matchfreeze→match_phrase、routine→routing、school/scscscore→score、漫查→慢查询、布ars→bool。
+- **19-8 事实核校/补正**：① 字段属性映射正确（排序→预排序字段、等值→keyword+关 doc_values、范围→数值 BKD、打分无关→关 index_options/norms）；② 分片 840 公约数法、单分片 ≤50G、cluster.max_shards_per_node 默认 1000、主分片不可随意改——均正确；③ refresh 1s 适用小文本高实时、IK 索细/搜粗、ctime 预排序、content 用 best_compression——均正确；④ bool 查询 must(UID+ctime 范围+后缀)/should(match boost=1 + match_phrase boost=5)/minimum_should_match=1/routing=UID——均正确。
+- **13-14 崩坏词归一**：elelishsearch→Elasticsearch、stsDK→SDK、clees/新兰→client、bug→bulk(机翻崩坏!)、携程→goroutine、秀探/秀time→sniff(嗅探)、八deg→debug、UIL→URL、basicoss→BasicAuth、SYCmap→sync.Map、firsttrict→force、森→JSON、view方法/new方法→Do 方法、boss→false、OScatch→OS cache、NITES→init、martialjason→MarshalJSON、m的gate→MGet、scorequery→ScrollQuery、丢方法→Do、worp→work、艾/艾特→Add、backservice→bulk service。
+- **13-14 事实核校/补正**：① 两种 SDK 取舍（olivere/elastic 易用但 ES7 停维护、官方 API 全但繁琐）正确；② 多实例 map、ClientConfig、嗅探默认 false、sync.Map 缓存索引存在性、函数选项模式、getClient 返 nil——正确；③ bulk 处理器 workers goroutine + 三触发条件(数量/大小/时间任一) + afterFunction 回调 + 内存风险——正确；④ Index/OpType/refresh 默认 false/routing、IndexExists force 直查、bulk 两式(逐条 Add / 批量 Do)、version 乐观锁——正确；⑤ Get/MGet/Query(enableDSL)/ScrollQuery(游标+回调)——正确。
+- **反直觉点（written into cards）**：① ES 主分片数难改，故一开始要算准（公约数法）；② bulk 默认不立即可见（refresh=false），且占业务内存缓冲；③ match_phrase 相关度高于 match 故 boost 更高；④ 网盘查询靠 routing=UID 把扫描收敛到单分片。
+- **warn 说明（lead 必读）**：本批 5 张 198 主卡各 1 条无害 warn「未见可运行语言的代码块」——因这些卡用 ```` ```json ```` 配置块（JSON 不计入"可运行语言"），而 1314 卡用 ```` ```go ```` 故 0 warn。与历史 708 卡基线同类，非 error，不阻塞。
+- `validate.py --strict` 独立复核 **318/318 PASS、0 error、warn 21**（warn 为历史 708 卡 + 本批 5 张 json 配置块告警，均无害）。无 R1 剔除。
+
+**当前进度（批次28收口）**：369 任务 / **56 done / 313 pending / 318 卡落盘**（XL 档 56/114，约 49%）。已做清单（续批次27）：+19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9。剩余：XL 58 篇（56/114）→ 之后 L 124 / M 100 / S 31。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。

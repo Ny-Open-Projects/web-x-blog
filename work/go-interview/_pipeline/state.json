@@ -3732,10 +3732,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1314-go-es-sdk-choice",
+        "1314-client-init",
+        "1314-bulk-processor",
+        "1314-doc-index-api",
+        "1314-query-api",
+        "1314-go-es.deep"
+      ],
+      "done_at": "2026-10-06T18:55:53+08:00"
     },
     "source/13/13-15 如何使用Go操作Elasticsearch？(二)-迅捷文字转语音-1790925517166zh.txt": {
       "id": "13-15",
@@ -5928,10 +5936,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "198-es-modeling-overview",
+        "198-shard-design",
+        "198-filename-mapping",
+        "198-content-mapping",
+        "198-bool-query-routing",
+        "198-netdisk-modeling.deep"
+      ],
+      "done_at": "2026-10-06T18:55:53+08:00"
     },
     "source/19/19-9 企业级网盘搜索场景下的性能优化-迅捷文字转语音-1790933095483zh.txt": {
       "id": "19-9",
@@ -5950,7 +5966,7 @@
     }
   },
   "next_num": 1,
-  "waves": 28,
-  "updated": "2026-10-06T18:50:01+08:00",
+  "waves": 29,
+  "updated": "2026-10-06T18:55:53+08:00",
   "consec_fail": 0
 }
