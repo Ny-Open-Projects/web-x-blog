@@ -3658,10 +3658,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "126-buffer-pool-lists",
+        "126-wal-redolog-flow",
+        "126-flush-log-at-trx-commit",
+        "126-redolog-flush-triggers",
+        "126-redolog-full-checkpoint",
+        "126-redolog-internals"
+      ],
+      "done_at": "2026-10-07T01:29:50+08:00"
     },
     "source/12/12-60 Redis的大Key有什么影响？如何处理大 key？-迅捷文字转语音-1790924341869zh.txt": {
       "id": "12-60",
@@ -4300,10 +4308,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "143-mq-scenarios",
+        "143-mq-selection-principle",
+        "143-mq-compare",
+        "143-rocketmq-storage",
+        "143-pulsar-arch",
+        "143-mq-selection"
+      ],
+      "done_at": "2026-10-07T01:29:50+08:00"
     },
     "source/14/14-4 kafka 为什么会有很高的吞吐性能？-迅捷文字转语音-1790925809079zh.txt": {
       "id": "14-4",
@@ -6174,7 +6190,7 @@
     }
   },
   "next_num": 1,
-  "waves": 42,
-  "updated": "2026-10-07T01:11:44+08:00",
+  "waves": 43,
+  "updated": "2026-10-07T01:29:50+08:00",
   "consec_fail": 0
 }
