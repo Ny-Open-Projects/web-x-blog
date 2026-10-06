@@ -1,0 +1,51 @@
+# 1211 InnoDB 数据字典的 8.0 重构
+
+> 分类：MySQL 存储 | 难度：L4 | 题型：原理题 | 频率：中 | 关键词：**数据字典**/**原子 DDL**/**mysql.ibd**/**sys_tables**/**SDI 统一**
+> 原文锚点：第 66~98 段「InnoDB 数据字典 8.0 改进与原子 DDL」
+
+## 一句话总述
+MySQL 8.0 对数据字典做了大重构：之前元数据分散在 server 层文件（.frm/.opt/.TRN/.TRG）、mysql 库表、InnoDB 内部表（sys_tables/sys_columns/sys_indexes/sys_fields），且系统表用 MyISAM 无事务能力；8.0 起统一存入 **InnoDB 数据字典表（mysql.ibd，共享表空间）**，DDL 转为对系统表的 DML，从而支持**原子 DDL**。
+
+## 面试官视角
+- 考察意图：是否掌握 8.0 数据字典重构这一重要版本差异，以及「原子 DDL」的实现原理。
+- 分档：P5 知 8.0 无 .frm；P6 知元数据统一进 mysql.ibd、支持原子 DDL；P7 知内部表 sys_*、DDL 转 DML 回滚机制。
+- 红旗答案：以为 8.0 仍用 MyISAM 存系统表；或说不清原子 DDL 怎么来的。
+- 惊艳点：点出「DDL 变成对系统表的 DML，失败时靠事务引擎自身回滚保证原子性」「8.0 自增值也持久化」。
+
+## 主问答
+**Q（面试官原话）：** MySQL 8.0 的数据字典有什么变化？原子 DDL 怎么实现？
+**A：**
+1. **8.0 前的分散**：元数据散在 server 层文件（.frm 表结构/.opt 字符集/.TRN/.TRG 触发器）、mysql 库表（user/event/proc）、InnoDB 内部表（sys_tables/sys_columns/sys_indexes/sys_fields）；系统表用 MyISAM，无事务能力、不支持原子 DDL。
+2. **8.0 统一**：所有元数据存入 InnoDB 数据字典表（统一在 `mysql.ibd`，共享表空间），取消 .frm/.TRG/.OPT 文件。
+3. **原子 DDL**：DDL 操作被转变成一组对系统表的 DML；若失败，可依据 InnoDB 事务自身回滚保证系统表一致性。
+4. **覆盖范围**：存储过程/触发器/视图/自定义函数 的 CREATE/DROP/ALTER，用户角色语句，RENAME，GRANT/REVOKE 等均支持原子 DDL。
+5. **自增值持久化**：8.0 起自增值写入 redo log 与字典表（mysql.innodb_dynamic_metadata），crash 重启先从字典表读持久化值再读 redo，避免复用。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 8.0 还有 .frm 吗？ | 版本 | 取消，进 .ibd | P5 |
+| L2 | 元数据存哪？ | 细节 | mysql.ibd (InnoDB) | P6 |
+| L3 | 原子 DDL 原理？ | 原理 | DDL 转 DML + 回滚 | P7 |
+| L4 | 内部表有哪些？ | 深度 | sys_tables/columns/indexes/fields | P7 |
+| L5 | 自增值 8.0 变化？ | 进阶 | 持久化，不复用 | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| MySQL 8.0 | 数据字典统一为 InnoDB、原子 DDL、自增值持久化；8.0.20 双写文件分离 | 5.7 仍 .frm+MyISAM 系统表，无原子 DDL |
+
+## 关键代码
+```sql
+-- 8.0 查看系统表存储引擎（多为 InnoDB）
+SELECT table_name, engine
+FROM information_schema.tables
+WHERE table_schema = 'mysql' AND engine = 'CSV';  -- 仅 general_log 等日志表用 CSV
+```
+
+## 总结与追问预判
+数据字典重构是 8.0 的基石性改动，解释了「为何 DDL 不再丢一半」。与之配套的自增值持久化、doublewrite 分离——下一张收尾。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 8.0 前元数据分散(文件+mysql库表+InnoDB内部表 sys_*)、8.0 统一 mysql.ibd、原子 DDL(DDL转DML+回滚)、自增值持久化(redo+字典表, crash 先读字典表再读 redo)——均正确；源码称 5.7「mysql 库下 InnoDB 引擎表，移除 event 和 proc 系统表」与官方一致。
+2. 崩坏词归一：源码将 MySQL 音译为崩坏词（本卡统一为 MySQL）、InnoDB 音译为 inlDB/inoDB/innODB/ininoc、MyISAM 音译为 myysm/mysam、数据字典 音译为 数据字典(正确保留)、redo log 音译为 radiolog、doublewrite 音译为 doubleright、information_schema 音译为 informationgame；据官方事实补正「DDL 转 DML 实现原子性、8.0.20 双写文件分离」。
