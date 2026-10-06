@@ -1018,10 +1018,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "712-loop-var-capture",
+        "712-loop-var-copy-fix",
+        "712-pointer-shared-race",
+        "712-ants-pool-usage",
+        "712-goroutine-count-monitor",
+        "712-goroutine-pitfalls"
+      ],
+      "done_at": "2026-10-07T01:11:44+08:00"
     },
     "source/07/7-13 如何优雅的关闭服务？-迅捷文字转语音-1790866902020zh.txt": {
       "id": "7-13",
@@ -3953,10 +3961,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "132-node-roles",
+        "132-data-tiers",
+        "132-master-candidate",
+        "132-shard-allocation",
+        "132-replica-promotion",
+        "132-es-cluster-architecture"
+      ],
+      "done_at": "2026-10-07T01:11:44+08:00"
     },
     "source/13/13-3 Elasticsearch是如何实现master选举的？（三）-迅捷文字转语音-1790924799564zh.txt": {
       "id": "13-3",
@@ -6158,7 +6174,7 @@
     }
   },
   "next_num": 1,
-  "waves": 41,
-  "updated": "2026-10-07T00:52:59+08:00",
+  "waves": 42,
+  "updated": "2026-10-07T01:11:44+08:00",
   "consec_fail": 0
 }
