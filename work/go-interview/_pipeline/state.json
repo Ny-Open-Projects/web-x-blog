@@ -2891,10 +2891,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1222-like-basics",
+        "1222-covering-index",
+        "1222-secondary-vs-clustered",
+        "1222-composite-exceptions",
+        "1222-summary-exceptions",
+        "1222-like-index.deep"
+      ],
+      "done_at": "2026-10-06T20:35:18+08:00"
     },
     "source/12/12-23 唯一索引的数据就一定不会重复吗？-迅捷文字转语音-1790922008291zh.txt": {
       "id": "12-23",
@@ -3292,10 +3300,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1243-columns-overview",
+        "1243-id-column",
+        "1243-select-type",
+        "1243-materialized-subquery",
+        "1243-union-dependent",
+        "1243-explain-overview.deep"
+      ],
+      "done_at": "2026-10-06T20:35:18+08:00"
     },
     "source/12/12-44 explain详解（二）-迅捷文字转语音-1790923463129zh.txt": {
       "id": "12-44",
@@ -6078,7 +6094,7 @@
     }
   },
   "next_num": 1,
-  "waves": 36,
-  "updated": "2026-10-06T20:29:14+08:00",
+  "waves": 37,
+  "updated": "2026-10-06T20:35:18+08:00",
   "consec_fail": 0
 }

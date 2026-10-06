@@ -355,7 +355,15 @@
 - **文件名映射复核**：10-25→`1025-`(4位)、12-53→`1253-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（10-25→1025、12-53→1253）**。
 - `validate.py --strict` 独立复核 **402/402 PASS、0 error、warn 44**（warn 含本批 1253 卡 bash 块「未见可运行语言」无害告警 + 历史 json/bash 块，均非 error）。无 R1 剔除。
 
-**当前进度（批次35收口）**：369 任务 / **70 done / 299 pending / 402 卡落盘**（XL 档 70/114，约 61%）。已做清单（续批次34）：+.../12-44/12-18/10-25/12-53。剩余：XL 44 篇（70/114）→ 之后 L 124 / M 100 / S 31。
+**批次 36（2026-10-06）**：12-22 LIKE "%x" 索引是否失效（6 卡，1222-*）+ 12-43 explain详解（一）（6 卡，1243-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主。
+- **12-22 崩坏词归一**：b加树→B+树、索影/类影/缩影/类me/级索/级字段→索引/二级/字段、麦克→LIKE、concxt→concat、h增单/h字段/级字段→age 字段、类目字段→主键字段、技术索引/聚索索引→聚簇索引、二o代价→IO 代价、snap新/slact/slect/circ/circle→SELECT/SQL、stex星/stct新/steck→SELECT *、DAC→SELECT、事物ID/事物i→事务 ID、回滚指针→rollback pointer。
+- **12-22 事实核校**：① 最左前缀原则（联合索引断层/ LIKE 前缀匹配）、'x%' 走 range、'%x%' 常规全表扫——正确；② 覆盖索引下非前缀 LIKE 走二级索引全扫(type=index)、二级索引树更小免回表、优化器选低成本路径——正确；③ 聚簇索引含事务ID/回滚指针等隐藏列、二级索引只含索引列+主键——正确；④ 联合索引覆盖时非前缀 LIKE 全扫二级索引且列序无关、带非索引列回表则改扫聚簇——正确；⑤ 三种例外（两列表/只查索引列/联合索引只查其列）本质都是覆盖、range>index 效率——正确。
+- **12-43 崩坏词归一**：slect/slack/slacktype/slecttype→SELECT/select_type、sttcttype/set关键字/slacktape/sacktype/stacktype/slackhelp/slact→SELECT/select_type、slapting/slating/selecting/slecting/selectKE/selectting→SELECT、innerjoint→INNER JOIN、uni/unon/uning/uniono/unionor→UNION、subquary/sub插询/sub插线→subquery、dependentsubquary/defendantsubquery/dependentsubquery→dependent subquery、物化/雾化→物化、凝时表/物理表→临时表、TMPtableside→tmp_table_size、优化奇→优化器、旧文连接/旧问查询/作文查询→连接查询、回滚指针→rollback pointer。
+- **12-43 事实核校**：① EXPLAIN 各列含义(id/select_type/table/type/possible_keys/key/key_len/ref/rows/filtered/Extra)——正确；② id 标识 SELECT 关键字、join 同 id、子查询异 id、union 临时表多一条、优化器改写子查询合并 id——正确；③ select_type 谱系(SIMPLE/PRIMARY/SUBQUERY/DEPENDENT SUBQUERY/UNION/UNION RESULT/DERIVED)——正确；④ SUBQUERY=物化(一次)/DEPENDENT SUBQUERY=非物化(多次)、临时表哈希索引去重、tmp_table_size 超限落磁盘、空间换时间、范围小易触发——正确；⑤ UNION RESULT 来自去重临时表、记录数=表数+1、UNION ALL 无临时表、DEPENDENT UNION 为子查询内 union 受外层驱动——正确。
+- **文件名映射复核**：12-22→`1222-`(4位)、12-43→`1243-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（12-22→1222、12-43→1243）**。
+- `validate.py --strict` 独立复核 **414/414 PASS、0 error、warn 44**（warn 为历史 1253 卡 bash 块无害告警 + 早期 json/bash 块，本批 12 卡全 ⚠0）。无 R1 剔除。
+
+**当前进度（批次36收口）**：369 任务 / **72 done / 297 pending / 414 卡落盘**（XL 档 72/114，约 63%）。已做清单（续批次35）：+.../10-25/12-53/12-22/12-43。剩余：XL 42 篇（72/114）→ 之后 L 124 / M 100 / S 31。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
