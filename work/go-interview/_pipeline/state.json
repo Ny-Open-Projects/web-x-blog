@@ -2971,10 +2971,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "123-mysql-log-overview",
+        "123-error-log",
+        "123-slow-query-log",
+        "123-binlog-intro",
+        "123-binlog-filter-db",
+        "123-mysql-logs.deep"
+      ],
+      "done_at": "2026-10-06T18:43:41+08:00"
     },
     "source/12/12-30 事务的隔离级别有哪些？（二）-迅捷文字转语音-1790922665674zh.txt": {
       "id": "12-30",
@@ -3031,10 +3039,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1233-lock-taxonomy",
+        "1233-table-lock",
+        "1233-mdl-lock",
+        "1233-global-lock",
+        "1233-optimistic-pessimistic",
+        "1233-mysql-locks.deep"
+      ],
+      "done_at": "2026-10-06T18:43:42+08:00"
     },
     "source/12/12-34 彻底搞懂MySQL中的锁（三）-迅捷文字转语音-1790922958337zh.txt": {
       "id": "12-34",
@@ -5918,7 +5934,7 @@
     }
   },
   "next_num": 1,
-  "waves": 26,
-  "updated": "2026-10-06T18:35:07+08:00",
+  "waves": 27,
+  "updated": "2026-10-06T18:43:42+08:00",
   "consec_fail": 0
 }

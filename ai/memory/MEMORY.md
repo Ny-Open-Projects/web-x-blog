@@ -271,6 +271,15 @@
 - **反直觉点（written into cards）**：① channel 不是简单队列，是带环形缓冲的 struct + 阻塞等待者链表；② 无缓冲 channel 发送即 handoff 不进 buf；③ 查询缓存失效是"表级"，任一写入即整表缓存清空；④ 移除查询缓存后性能反而提升（省去锁+失效维护开销）。
 - `validate.py --strict` 独立复核 **282/282 PASS、0 error**（10 warn 为历史存量）。无 R1 剔除。
 
+**批次 26（2026-10-06）**：12-3 MySQL 日志体系 + binlog 配置（6 卡，123-*）+ 12-33 MySQL 锁（二）（6 卡，1233-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主 + 精度补正。
+- **12-3 崩坏词归一**：redolog/radiolog→redo log、inlog/和inlog→binlog、circle→SQL、漫长日志/漫查/曼查→慢查询日志、mysqldumpsnow→mysqldumpslow、马刺go八点零→MySQL 8.0、PIL→perror、wordlive→/var/lib/mysql、logoerrorverversity/logo沃敏→log_error_verbosity、blologexpelogseconds→binlog_expire_logs_seconds、blogUGB→binlog_do_db、BNlog一个logb/一个logDB→binlog_ignore_db、右子/右次/柚子→USE、肉→ROW、钛色库→test 库。
+- **12-3 事实核校**：四类日志定义、8.0 将 `log_warnings` 改名 `log_error_verbosity`(默认2)、慢日志阈值"大于不含等于"、binlog 为 server 层逻辑日志 + 8.0 默认压缩加密 + expire 默认 30 天 + max 默认 100MB、配置文件"后读覆盖先读"——均正确。
+- **12-33 崩坏词归一**：解锁→写锁(X)、库机锁→库级锁、表级组→表级锁、原数据组/MATDAAA→MDL、航机锁/行情锁→行级锁、零件锁→临键锁(next-key)、漏关锁→乐观锁、被关锁→悲观锁、度indb/英LDB→InnoDB、排排锁→排他锁、协作→写锁、哔哩哔→BDB、soopentableslike→SHOW OPEN TABLES LIKE、MADAAAOS→metadata_locks、flashtableswithreadlock/FTWRL→FLUSH TABLES WITH READ LOCK、mysqlapp→mysqldump、rgin/verging/verid/worgin/wordgin/进值→version、事物→事务。
+- **12-33 事实核校/补正**：① S/X 互斥矩阵、粒度排序、意向锁/MDL/auto-inc 属表级、乐观(版本机制)vs 悲观(先加锁) 划分均正确；② **MDL「变更表结构时将 MDL 解锁」为口播错误，应为加 MDL 写锁**；③ 乐观锁/悲观锁是并发控制**思想**非 MySQL 内置锁，乐观锁多为应用层 version 字段；④ **页锁的 BDB 引擎已在 MySQL 5.1 移除**，原文"页锁在 BDB 支持"仅历史事实。
+- **反直觉点（written into cards）**：① statement 格式下"未 USE 则 do_db 不生效、所有库都记"、USE ignore 库后跨库操作亦不记，ROW 下按实际表库过滤且仅 DDL 必记；② FTWRL 异常断开自动释放、read_only 异常后一直只读（不宜替代 FTWRL）；③ MDL 等待雪崩：长事务持读锁挡 DDL，DDL 挡后续读。
+- **⚠️ 本批重大踩坑（lead 必读）**：初稿用 `**加粗**` 内联标签（`**一句话总述**：`）代替 `##` 标题，且漏写 `> 原文锚点` 行 → 触发 validate.py 规则 4(6错)/5/6/8，**10 张主卡各 9 error、共 90 error**。修正为 house 骨架：`> 原文锚点` 行 + `## 一句话总述/面试官视角/主问答/追问链/版本与兼容性/关键代码/总结与追问预判` 标题 + 主问答用 `1. **点**：` 编号 + 追问链 5 列含「答不出停在哪档」。复跑 **294/294 PASS、0 error**（warn 27→11，多为历史存量）。**铁律：主卡必须用 `##` heading 且含 `> 原文锚点`，绝不可用加粗内联冒充标题。**
+- `validate.py --strict` 独立复核 **294/294 PASS、0 error、warn 11**（warn 为历史 708 卡 yaml/json/bash 告警，无害）。无 R1 剔除。
+
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
 - 每批必跑 `validate.py --strict`，**有 error 修完才 done**，done 即落盘进度。

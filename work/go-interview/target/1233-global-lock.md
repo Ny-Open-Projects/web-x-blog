@@ -1,0 +1,49 @@
+# 1233 全局锁（FTWRL）
+
+> 分类：MySQL 锁 | 难度：L3 | 题型：八股题 | 频率：中 | 关键词：**FTWRL**/**mysqldump**/**read_only**/**--single-transaction**
+> 原文锚点：第 92~118 段「全局锁与全库备份」
+
+## 一句话总述
+`FLUSH TABLES WITH READ LOCK`（FTWRL）对整个库加只读锁，用于全库备份；生产极危险，优先用 `mysqldump --single-transaction` 替代。
+
+## 面试官视角
+- 考察意图：常问"全库备份为什么要锁""FTWRL 和 readonly 区别"。
+- 分档：P5 知 FTWRL 全库只读；P6 知备份需一致性；P7 知 --single-transaction 借 MVCC。
+- 红旗答案：以为 `SET GLOBAL read_only=ON` 是 FTWRL 的安全等价物。
+- 惊艳点：点出 FTWRL 异常断开自动释放、read_only 不释放。
+
+## 主问答
+**Q（面试官原话）：** 全库备份为什么要加锁，用什么命令？
+**A：**
+1. **效果**：执行后整个库只读——阻塞数据增删改、DDL、写事务提交；本质是让全库进入只读。
+2. **备份用途**：不加锁备份时跨表操作（如扣款成功但订单未备）会让备份处于逻辑不一致时间点，故需锁保证一致性。
+3. **更优替代**：`mysqldump --single-transaction` 借 **MVCC 可重复读快照**拿一致性视图，备份期间表**仍可正常读写**，前提表均用事务引擎（如 InnoDB）。
+4. **为何不用 `SET GLOBAL read_only=ON`**：① `read_only` 常被用作主备判断，改全局变量影响面大；② FTWRL 后客户端异常断开会**自动释放**，而 `read_only=true` 异常后库会**一直只读**直到手动复位，风险更高。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | FTWRL 干嘛？ | 基础 | 全库只读锁 | P5 |
+| L2 | 备份为何要锁？ | 原理 | 保证逻辑一致性时间点 | P6 |
+| L3 | 不用锁的备份方式？ | 进阶 | --single-transaction（MVCC 快照） | P6 |
+| L4 | 为何不用 read_only？ | 权衡 | 主备判断+异常不自动释放 | P7 |
+| L5 | --single-transaction 前提？ | 边界 | 表均事务引擎（InnoDB） | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| MySQL 5.5+ | 无 | FTWRL 各版通用；--single-transaction 依赖 InnoDB MVCC（可重复读） |
+
+## 关键代码
+```sql
+FLUSH TABLES WITH READ LOCK;   -- 全库只读
+-- 备份用（推荐）：
+mysqldump --single-transaction -u root -p db > backup.sql
+```
+
+## 总结与追问预判
+FTWRL 全库只读、仅用于一致性备份；`--single-transaction` 借 MVCC 免锁备份更优；`read_only` 不宜替代 FTWRL（主备语义+异常不释放）。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验]FTWRL 全库只读、阻塞增删改/DDL/提交、--single-transaction 借 MVCC 一致性视图且表可正常读写、read_only 不宜替代（主备判断+异常不自动释放），均正确。
+2. 崩坏词归一：flashtableswithreadlock/FTWRL→FLUSH TABLES WITH READ LOCK、mysqlapp→mysqldump、杠cino/中控件transaction→--single-transaction、reado里→read_only、fourse→false、主库还是备库→主库/备库。
