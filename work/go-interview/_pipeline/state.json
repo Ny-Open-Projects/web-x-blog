@@ -5212,10 +5212,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "181-linux-origin.md",
+        "181-kernel-milestones.md",
+        "181-centos-eol.md",
+        "181-centos-migration.md",
+        "181-linux-interview-roadmap.md",
+        "181-centos-migration.deep.md"
+      ],
+      "done_at": "2026-10-07T03:02:00+08:00"
     },
     "source/18/18-10 如何排查内存问题？-迅捷文字转语音-1790930146033zh.txt": {
       "id": "18-10",
@@ -5355,10 +5363,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1818-raid-basics.md",
+        "1818-raid0-raid1.md",
+        "1818-raid5-parity.md",
+        "1818-raid6-dual-parity.md",
+        "1818-raid10-vs-raid01.md",
+        "1818-raid-selection.deep.md"
+      ],
+      "done_at": "2026-10-07T03:02:00+08:00"
     },
     "source/18/18-19 怎么学好linux？-迅捷文字转语音-1790930565522zh.txt": {
       "id": "18-19",
@@ -6206,7 +6222,7 @@
     }
   },
   "next_num": 1,
-  "waves": 44,
-  "updated": "2026-10-07T01:47:14+08:00",
+  "waves": 45,
+  "updated": "2026-10-07T03:02:00+08:00",
   "consec_fail": 0
 }
