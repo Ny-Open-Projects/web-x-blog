@@ -1033,10 +1033,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "707-gin-binding-overview.md",
+        "707-gin-validation-rules.md",
+        "707-gin-nested-struct.md",
+        "707-gin-custom-validator.md",
+        "707-gin-bind-error-handling.md",
+        "707-gin-validation.deep.md"
+      ],
+      "done_at": "2026-10-06T11:25:16+08:00"
     },
     "source/07/7-8 Gin 如何加载静态资源？-迅捷文字转语音-1790864846170zh.txt": {
       "id": "7-8",
@@ -5551,10 +5559,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "196-ha-metrics.md",
+        "196-multi-region-active-active.md",
+        "196-cluster-vs-distributed.md",
+        "196-cap-theorem.md",
+        "196-base-theory.md",
+        "196-seckill-ha.deep.md"
+      ],
+      "done_at": "2026-10-06T11:25:16+08:00"
     },
     "source/19/19-7 企业级网盘搜索场景下的系统架构设计-迅捷文字转语音-1790932848748zh.txt": {
       "id": "19-7",
@@ -5603,7 +5619,7 @@
     }
   },
   "next_num": 1,
-  "waves": 5,
-  "updated": "2026-10-06T11:19:07+08:00",
+  "waves": 6,
+  "updated": "2026-10-06T11:25:16+08:00",
   "consec_fail": 0
 }

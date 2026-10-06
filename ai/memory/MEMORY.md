@@ -225,7 +225,7 @@
 
 **质量门（独立复核，非轻信 worker）**：`validate.py --strict` 初跑 10 张主卡全 FAIL（缺强制 `## ⚠️ 原文纠错` 节）；批量补该节 + 把 `708-gin-static-deep.md` 改名 `708-gin-static.deep.md`（后缀须 `.deep.md`）→ 复跑 **12/12 PASS（0 error，2 警告为无害「补充分级」标记）**。已 `queue.py done` 标记 2 任务完成，并清掉 2 个历史孤儿 running 任务。
 
-**当前进度**：369 任务 / 4 done / 365 pending / 24 卡落盘（XL 档 4/114：7-10/7-8/8-14/8-16）。本批（8-14/8-16 GMP）12 张卡 validate 12/12 PASS（含 5 处原文技术错误纠正）。
+**当前进度**：369 任务 / 10 done / 359 pending / 60 卡落盘（XL 档 10/114：7-10/7-8/8-14/8-16/9-25/7-6/8-13/8-15/7-7/19-6）。5 批次（批次1~5）均 12/12 PASS（0 error），累计纠正实质技术错误若干（mcache 挂 P 非 M、gin abortIndex=63 非 int8 上限、Gin `dive` 嵌套校验子句、GMP 字段名崩坏还原等）。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
