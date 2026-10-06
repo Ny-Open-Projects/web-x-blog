@@ -524,10 +524,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "503-pointer-no-arithmetic",
+        "503-pointer-type-conversion",
+        "503-pointer-compare",
+        "503-pointer-assign",
+        "503-unsafe-pointer-rules",
+        "503-pointer.deep"
+      ],
+      "done_at": "2026-10-06T17:05:10+08:00"
     },
     "source/05/5-4 Go语言中哪些类型的零值可以用nil来表示？-迅捷文字转语音-1790757622608zh.txt": {
       "id": "5-4",
@@ -1431,10 +1439,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "805-rt0-entry-asm",
+        "805-g0-m0-init",
+        "805-schedinit",
+        "805-newproc-mstart",
+        "805-runtime-main-flow",
+        "805-program-startup.deep"
+      ],
+      "done_at": "2026-10-06T17:05:10+08:00"
     },
     "source/08/8-6 常见的 GC 实现方式有哪些？-迅捷文字转语音-1790896592199zh.txt": {
       "id": "8-6",
@@ -5772,7 +5788,7 @@
     }
   },
   "next_num": 1,
-  "waves": 16,
-  "updated": "2026-10-06T16:55:47+08:00",
+  "waves": 17,
+  "updated": "2026-10-06T17:05:10+08:00",
   "consec_fail": 0
 }
