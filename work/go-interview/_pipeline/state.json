@@ -209,10 +209,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "418-untyped-constant-default-type.md",
+        "418-int-range-complement.md",
+        "418-unsigned-overflow-wrap.md",
+        "418-signed-overflow-reversal.md",
+        "418-int-conversion-overflow.md",
+        "418-integer-overflow.deep.md"
+      ],
+      "done_at": "2026-10-07T03:22:58+08:00"
     },
     "source/04/4-19 数值类型运算后值溢出会发生什么？（二）-迅捷文字转语音-1790759409929zh.txt": {
       "id": "4-19",
@@ -376,10 +384,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "407-private-repo-import.md",
+        "407-goproxy-config.md",
+        "407-goprivate.md",
+        "407-gonoproxy-gonosumdb.md",
+        "407-enterprise-mirror.md",
+        "407-go-private-module.deep.md"
+      ],
+      "done_at": "2026-10-07T03:22:58+08:00"
     },
     "source/04/4-8 Go 工作区模式-迅捷文字转语音-1790755624479zh.txt": {
       "id": "4-8",
@@ -6222,7 +6238,7 @@
     }
   },
   "next_num": 1,
-  "waves": 45,
-  "updated": "2026-10-07T03:02:00+08:00",
+  "waves": 46,
+  "updated": "2026-10-07T03:22:58+08:00",
   "consec_fail": 0
 }
