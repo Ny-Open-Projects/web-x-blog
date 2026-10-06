@@ -323,7 +323,15 @@
 - **文件名映射复核**：17-17→`1717-`（4 位）、15-2→`152-`（3 位）。**铁律复核：chapter≥10 用原章号直接拼接、单课次不补零（15-2→152 而非 1502）；chapter<10 单元课次补零成 3 位（见批次 29 的 4-4→404）。**
 - `validate.py --strict` 独立复核 **354/354 PASS、0 error、warn 32**（warn 为历史 708 卡 + json/bash 块告警，均无害）。无 R1 剔除。
 
-**当前进度（批次31收口）**：369 任务 / **62 done / 307 pending / 354 卡落盘**（XL 档 62/114，约 54%）。已做清单（续批次30）：+4-4/12-36/19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9/13-7/12-11/17-17/15-2。剩余：XL 52 篇（62/114）→ 之后 L 124 / M 100 / S 31。
+**批次 32（2026-10-06）**：18-14 inode 与硬链接、软连接（6 卡，1814-*）+ 12-35 彻底搞懂 MySQL 中的锁（四）（6 卡，1235-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主 + 1 处口播误差订正。
+- **18-14 崩坏词归一**：inload/乐的/引楼/遗漏→inode、公录→目录、relatime→relatime(正)、lowsuchfileordirectory→No such file or directory、迁气time/嵌级time→ctime、ascesstime→atime。
+- **18-14 事实核校**：① 扇区512B/块4KB=8扇区、inode 存元信息、stat 查看、系统靠 inode 编号识别文件——正确；② 四时间戳(atime/mtime/ctime/birthtime)、ctime 为元信息变更非创建、relatime 仅当 mtime 更新才刷 atime——正确；③ inode 区与数据区分区、inode 大小固定数量有限、小文件多致 inode 耗尽(df -i)、目录项=文件名+inode号、目录 x 权限用于访问 inode——正确；④ 硬链接共享 inode/链接数语义/不可跨FS不可链目录、软链接独立 inode/可跨FS可链目录/删原成死链、inode 分离支撑无缝更新——正确。
+- **12-35 崩坏词归一**：英乐DB/英伦DB/英LDB/音ODB/音LDB/叶罗DB→InnoDB、零件锁→next-key 锁、电器锁→间隙锁、换读/患读→幻读、supreme→supremum、insertintation→insert intention、performancescheml→performance_schema、informationscheml→information_schema、inoDBTRX→innodb_trx、b加速→B+树、基速索引→聚簇索引、事物→事务、串新化→串行化。
+- **12-35 事实核校/补正**：① RR 下插入加 IS 锁、插入意向锁之间不互斥、唯一键冲突记录锁阻塞、supremum 虚拟最大记录加 X 锁阻塞插入、insert intention 标记被阻塞插入——正确；② 意向锁表级 IS/IX、加行锁前先加意向锁、意向锁自身不互斥、仅与表级 S/X 互斥、本质为行锁存在性标识——正确；③ DELETE 先定位加 X 锁、再 delete mark、purge 异步回收、表级 IS、REC_NOT_GAP 为普通记录锁——正确（**源稿口播「delete 需 s 锁」为误差，实为 X 锁，本卡订正**）；④ next-key=记录锁+间隙锁、左开右闭、RR 防幻读/RC 退化、唯一索引等值退化为记录锁、加锁针对索引(主键/二级索引连带主键)——正确。
+- **文件名映射复核**：18-14→`1814-`(4位)、12-35→`1235-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（12-35→1235 而非 12350）**。
+- `validate.py --strict` 独立复核 **366/366 PASS、0 error、warn 37**（warn 含本批 1814 卡 bash 块「未见可运行语言」无害告警 + 历史 json/bash 块，均非 error）。无 R1 剔除。
+
+**当前进度（批次32收口）**：369 任务 / **64 done / 305 pending / 366 卡落盘**（XL 档 64/114，约 56%）。已做清单（续批次31）：+4-4/12-36/19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9/13-7/12-11/17-17/15-2/18-14/12-35。剩余：XL 50 篇（64/114）→ 之后 L 124 / M 100 / S 31。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
