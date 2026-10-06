@@ -824,10 +824,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "607-defer-eval-moment",
+        "607-defer-exec-order",
+        "607-defer-loop-var",
+        "607-defer-mem-leak",
+        "607-defer-named-return",
+        "607-defer.deep"
+      ],
+      "done_at": "2026-10-06T12:07:28+08:00"
     },
     "source/06/6-8 最容易被忽略的panic和recover的一些细节问题-迅捷文字转语音-1790857247011zh.txt": {
       "id": "6-8",
@@ -915,10 +923,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "711-pool-concurrency",
+        "711-pool-panic-recover",
+        "711-pool-running-atomic",
+        "711-pool-submit-timeout",
+        "711-pool-task-queue",
+        "711-ants.deep"
+      ],
+      "done_at": "2026-10-06T12:07:28+08:00"
     },
     "source/07/7-12 如何使用ants管理 goroutine ？(一)-迅捷文字转语音-1790866894039zh.txt": {
       "id": "7-12",
@@ -5683,7 +5699,7 @@
     }
   },
   "next_num": 1,
-  "waves": 10,
-  "updated": "2026-10-06T12:01:21+08:00",
+  "waves": 11,
+  "updated": "2026-10-06T12:07:28+08:00",
   "consec_fail": 0
 }
