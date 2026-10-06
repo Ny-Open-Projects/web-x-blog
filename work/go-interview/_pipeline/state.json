@@ -3541,10 +3541,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "125-bufferpool-lru-young-old",
+        "125-bufferpool-preread-failure",
+        "125-bufferpool-control-block",
+        "125-bufferpool-sizing",
+        "125-redolog-motivation",
+        "125-bufferpool-internals.deep"
+      ],
+      "done_at": "2026-10-07T05:22:46+08:00"
     },
     "source/12/12-50 面试必备的SQL语句（一）-迅捷文字转语音-1790923924964zh.txt": {
       "id": "12-50",
@@ -4056,10 +4064,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "133-replica-loss-delay",
+        "133-master-responsibilities",
+        "133-master-election-flow",
+        "133-voting-rules",
+        "133-split-brain-quorum",
+        "133-master-election.deep"
+      ],
+      "done_at": "2026-10-07T05:22:46+08:00"
     },
     "source/13/13-4 谈谈你对倒排索引的理解？-迅捷文字转语音-1790924804864zh.txt": {
       "id": "13-4",
@@ -6270,7 +6286,7 @@
     }
   },
   "next_num": 1,
-  "waves": 48,
-  "updated": "2026-10-07T04:00:32+08:00",
+  "waves": 49,
+  "updated": "2026-10-07T05:22:46+08:00",
   "consec_fail": 0
 }

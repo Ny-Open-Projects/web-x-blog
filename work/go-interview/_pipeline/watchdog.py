@@ -47,6 +47,24 @@ PATTERNS = [
 ]
 # 明确不算额度问题的（速率超限 ≠ 总额度耗尽，要区分）
 RATE_ONLY = re.compile(r"(too many requests|rate.?limit)", re.I)
+# 只有这类强信号才判定为「额度耗尽」并暂停流水线
+STRONG_QUOTA = re.compile(r"额度已用尽|加量包|quota|statusCode\"?\s*[:=]\s*429", re.I)
+
+# 已知无害噪声（2026-10-07 04:43 误停事故根因，命中即忽略，不触发暂停）：
+#   ① daemon.log 里的存储键名 model-rate-limit-cap —— 只是个 key 名，不是限流事件
+#   ② agent 自己的诊断命令回显 —— grep '额度已用尽' 会把该字符串写进会话日志，自证自
+# 真实的额度错误形如 `[ModelProvider] ... {"code":-32003 ... 429 额度已用尽`，
+# 不在上述两类里，仍能被正常捕获。
+BENIGN = re.compile(
+    r"model[-_\s]*rate[-_\s]*limit[-_\s]*cap"   # 连字符/驼峰两种写法都要挡
+    r"|\[BashTool\]"
+    r"|\[ShellService\]"
+    r"|\[SandboxOrchestrator\]"
+    r"|command="
+    r"|cmd="
+    r"|canonical=",
+    re.I,
+)
 
 
 def now():
@@ -110,7 +128,13 @@ def new_text(p):
         size = p.stat().st_size
     except Exception:
         return ""
-    off = _SINCE.get(str(p), 0)
+    if str(p) not in _SINCE:
+        # 基线之后新出现的日志文件：只登记偏移，不当作新增内容扫描。
+        # 否则会把该文件里 4 天前的历史 429 当成"刚发生"，造成误判暂停
+        # （2026-10-07 04:43 误停事故的根因之一）。
+        _SINCE[str(p)] = size
+        return ""
+    off = _SINCE[str(p)]
     if size <= off:
         return ""
     try:
@@ -132,11 +156,17 @@ def scan_429():
             continue
         for pat in PATTERNS:
             for m in pat.finditer(txt):
-                # 区分「总额度耗尽」与「速率超限」
+                # 先按整行剔除已知无害噪声（±80 的窄窗口会漏掉行首的 command= 标记）
+                ls = txt.rfind("\n", 0, m.start()) + 1
+                le = txt.find("\n", m.end())
+                le = len(txt) if le == -1 else le
+                if BENIGN.search(txt[ls:le]):
+                    continue
+                # 区分「总额度耗尽」与「速率超限」——只有强信号才允许触发暂停。
+                # 单独的 rate limit 字样（提示词文本、配置键名）不算，避免误停整夜。
                 ctx = txt[max(0, m.start() - 80):m.end() + 80]
-                is_quota = bool(re.search(r"额度已用尽|quota|加量包", ctx, re.I))
                 hits.append((p.name, m.group(0), ctx.replace("\n", " ")[:150]))
-                if is_quota or not RATE_ONLY.search(m.group(0)):
+                if STRONG_QUOTA.search(ctx):
                     quota_exhausted = True
     return hits, quota_exhausted
 
