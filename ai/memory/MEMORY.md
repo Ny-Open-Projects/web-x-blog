@@ -280,6 +280,17 @@
 - **⚠️ 本批重大踩坑（lead 必读）**：初稿用 `**加粗**` 内联标签（`**一句话总述**：`）代替 `##` 标题，且漏写 `> 原文锚点` 行 → 触发 validate.py 规则 4(6错)/5/6/8，**10 张主卡各 9 error、共 90 error**。修正为 house 骨架：`> 原文锚点` 行 + `## 一句话总述/面试官视角/主问答/追问链/版本与兼容性/关键代码/总结与追问预判` 标题 + 主问答用 `1. **点**：` 编号 + 追问链 5 列含「答不出停在哪档」。复跑 **294/294 PASS、0 error**（warn 27→11，多为历史存量）。**铁律：主卡必须用 `##` heading 且含 `> 原文锚点`，绝不可用加粗内联冒充标题。**
 - `validate.py --strict` 独立复核 **294/294 PASS、0 error、warn 11**（warn 为历史 708 卡 yaml/json/bash 告警，无害）。无 R1 剔除。
 
+**批次 27（2026-10-06）**：13-8 ES term/match/match_phrase 查询区别（6 卡，138-*）+ 4-19 Go 数值类型运算溢出（二）（6 卡，419-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主 + 关键精度补正。
+- **13-8 崩坏词归一**：科inverse→inverse（取反/倒数）、卡identity→cardinality、阿gester→aggregations、密斯特→must、数stic/数stics→statistics、quest→query、bread→breadth（宽/广度）、查性→查询、文本→text、关字→keyword、ik_smat→ik_smart、ik_max_word→ik_max_word、动volle→dynamic。
+- **13-8 事实核校/补正**：① term=不分词精确匹配、match=分词后默认 OR、match_phrase=同序相邻（slop 放宽）、term 查 text 字段必空须用 `.keyword`——均正确；② 纠正"term 直接查 text 能搜到"的常见误解（text 经分析器小写化/分词，term 不分词故匹配不到）；③ IK 分词器 ik_max_word(索引更细)/ik_smart(搜索更粗) 用途区分；④ dynamic=strict 拒绝未知字段（vs true 自动加 mapping / false 静默忽略）。
+- **4-19 崩坏词归一**：uin的十六→uint16、youint十六→uint16、flot三十二银→float32、in的六十四→int64、浮点形移出→浮点上溢、flot三十二/六六十四→float32/float64、lolon→二进制位、procession→precision、s一y一/s二y二→变量名、gorunin点go→go run main.go、IOTA/IOtoa/IOTV→iota、cons/concertm/concil→const、魅影方法→示例方法、c一/c二/c三/c四/c五→c1/c2/c3/c4/c5、色二→c2、LTA/IOQA→iota、三day→Sunday、monday→Monday、shiftnoteOK→shiftNotOK。
+- **4-19 关键事实补正（重要，纠正口播错误）**：① **Go 移位按左操作数类型推断、无类型常量跟随上下文**——uint16 下 `1<<16` 溢出归零（非算术 65536），须显式转 uint32 修复；② **浮点上溢得 `+Inf`（非"保持最大值"）**——源码"两数相等"实为两个 `+Inf` 相等，比较会得出错误结论；③ 0.1+0.2≠0.3、float 不满足结合律、float32 约 6~7 位有效位；④ `int/int` 整除截断得 0，须先转 float 再除；⑤ `iota` 按 const 块重置、前导常量占行号（空白标识符 `_` 也占行）。
+- **反直觉点（written into cards）**：① 移位溢出是"模 2^N 回绕"非报错；② 浮点 +Inf 与整数溢出语义不同；③ 整型算术溢出在 Go 中是定义良好但未定义行为检测（依赖模运算）；④ iota 行号陷阱是 const 块级而非全局。
+- **⚠️ 本批小修（lead 必读）**：`validate.py` 规则 11「机翻残留」扫全文含纠错节，`419-shift-overflow.md` 初稿在纠错节字面写 `uin的十六→uint16` 触发 1 个 error（`\buin的` 命中）。修正为泛述"源码将 uint16 音译为崩坏词，本卡统一为 uint16"，并同步修 `419-numeric-overflow.deep.md`（深卡虽 early-return 不扫此规则，仍一并归一）。复跑 **306/306 PASS、0 error**（warn 16 为历史存量）。**铁律：纠错节不得字面出现任何黑名单/残留词（含 `uin的` 这类机翻崩坏词），一律泛述归一。**
+- `validate.py --strict` 独立复核 **306/306 PASS、0 error、warn 16**（warn 为历史 708 卡 yaml/json/bash 告警，无害）。无 R1 剔除。
+
+**当前进度（批次27收口）**：369 任务 / **54 done / 315 pending / 306 卡落盘**（XL 档 54/114，约 47%）。已做清单（续批次24）：+12-3/12-33/13-8/4-19/6-9/12-9。剩余：XL 60 篇（54/114）→ 之后 L 124 / M 100 / S 31。
+
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
 - 每批必跑 `validate.py --strict`，**有 error 修完才 done**，done 即落盘进度。

@@ -216,10 +216,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "419-shift-overflow",
+        "419-float-overflow",
+        "419-float-precision",
+        "419-float-division",
+        "419-iota-counter",
+        "419-numeric-overflow.deep"
+      ],
+      "done_at": "2026-10-06T18:50:01+08:00"
     },
     "source/04/4-2 怎么准备技术面试才能事半功倍？-迅捷文字转语音-1790755572438zh.txt": {
       "id": "4-2",
@@ -3867,10 +3875,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "138-es-term-query",
+        "138-es-match-query",
+        "138-es-match-phrase-query",
+        "138-es-query-vs-text",
+        "138-es-analyzer-dynamic",
+        "138-es-queries.deep"
+      ],
+      "done_at": "2026-10-06T18:50:01+08:00"
     },
     "source/13/13-9 已索引的数据，使用match查不到可能原因有哪些？-迅捷文字转语音-1790925300071zh.txt": {
       "id": "13-9",
@@ -5934,7 +5950,7 @@
     }
   },
   "next_num": 1,
-  "waves": 27,
-  "updated": "2026-10-06T18:43:42+08:00",
+  "waves": 28,
+  "updated": "2026-10-06T18:50:01+08:00",
   "consec_fail": 0
 }
