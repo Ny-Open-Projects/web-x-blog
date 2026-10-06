@@ -1964,10 +1964,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "907-slice-header",
+        "907-array-vs-slice-param",
+        "907-slice-reslice-share",
+        "907-slice-desc-independent",
+        "907-slice-reassign-param",
+        "907-slice-internals"
+      ],
+      "done_at": "2026-10-07T01:47:14+08:00"
     },
     "source/09/9-8 slice是如何扩容的？-迅捷文字转语音-1790916185909zh.txt": {
       "id": "9-8",
@@ -3022,10 +3030,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1227-char-vs-varchar",
+        "1227-strict-mode-truncate",
+        "1227-utf8mb4-bytes",
+        "1227-varchar-max-length",
+        "1227-row-size-limit-text",
+        "1227-char-varchar-math"
+      ],
+      "done_at": "2026-10-07T01:47:14+08:00"
     },
     "source/12/12-28 char和varchar有什么区别（二）-迅捷文字转语音-1790922381744zh.txt": {
       "id": "12-28",
@@ -6190,7 +6206,7 @@
     }
   },
   "next_num": 1,
-  "waves": 43,
-  "updated": "2026-10-07T01:29:50+08:00",
+  "waves": 44,
+  "updated": "2026-10-07T01:47:14+08:00",
   "consec_fail": 0
 }
