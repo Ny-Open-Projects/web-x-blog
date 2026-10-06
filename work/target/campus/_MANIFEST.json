@@ -1,0 +1,1859 @@
+{
+  "course": "campus",
+  "src": "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]",
+  "chapters": [
+    {
+      "name": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "count": 6
+    },
+    {
+      "name": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "count": 4
+    },
+    {
+      "name": "{12}--第12章程序设计之面向对象编程",
+      "count": 6
+    },
+    {
+      "name": "{1}--第1章2021后端校招面试直通车，提前锁定大厂offer-导学",
+      "count": 1
+    },
+    {
+      "name": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "count": 7
+    },
+    {
+      "name": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "count": 9
+    },
+    {
+      "name": "{4}--第4章操作系统核心之进程、线程与协程",
+      "count": 6
+    },
+    {
+      "name": "{5}--第5章操作系统核心之存储系统详解",
+      "count": 6
+    },
+    {
+      "name": "{6}--第6章计算机系统之锁、同步与通信",
+      "count": 7
+    },
+    {
+      "name": "{7}--第7章计算机系统之编程语言与运行原理",
+      "count": 5
+    },
+    {
+      "name": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "count": 10
+    },
+    {
+      "name": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "count": 5
+    },
+    {
+      "name": "第13章 程序设计之设计模式详解",
+      "count": 4
+    },
+    {
+      "name": "第16章 面试复盘-预祝大家斩获offer拿高薪",
+      "count": 3
+    }
+  ],
+  "file_count": 79,
+  "article_count": 78,
+  "merged_count": 1,
+  "code_file_count": 20,
+  "code_ext_stat": {
+    "java": 18,
+    "xml": 1,
+    "md": 1
+  },
+  "articles": [
+    {
+      "id": "13-2",
+      "title": "13-2 面向对象开发的核心思想和概念【更多教程ubkz.com】",
+      "chapter": "第13章 程序设计之设计模式详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/第13章 程序设计之设计模式详解/13-2 面向对象开发的核心思想和概念【更多教程ubkz.com】-迅捷文字转语音-1791007314864zh.txt"
+      ],
+      "words": 4315,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "13-3",
+      "title": "13-3 面向对象编程——接口的基本设计【更多教程ubkz.com】",
+      "chapter": "第13章 程序设计之设计模式详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/第13章 程序设计之设计模式详解/13-3 面向对象编程——接口的基本设计【更多教程ubkz.com】-迅捷文字转语音-1791007330058zh.txt"
+      ],
+      "words": 2590,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "13-4",
+      "title": "13-4 面向对象编程——类的实现与继承【更多教程ubkz.com】",
+      "chapter": "第13章 程序设计之设计模式详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/第13章 程序设计之设计模式详解/13-4 面向对象编程——类的实现与继承【更多教程ubkz.com】-迅捷文字转语音-1791007340678zh.txt"
+      ],
+      "words": 2427,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "13-5",
+      "title": "13-5 面向对象编程——继承的使用原则【更多教程ubkz.com】",
+      "chapter": "第13章 程序设计之设计模式详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/第13章 程序设计之设计模式详解/13-5 面向对象编程——继承的使用原则【更多教程ubkz.com】-迅捷文字转语音-1791007353627zh.txt"
+      ],
+      "words": 2331,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "16-1",
+      "title": "16-1 课程总结（一）【更多教程ubkz.com】",
+      "chapter": "第16章 面试复盘-预祝大家斩获offer拿高薪",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/第16章 面试复盘-预祝大家斩获offer拿高薪/16-1 课程总结（一）【更多教程ubkz.com】-迅捷文字转语音-1791007873338zh.txt"
+      ],
+      "words": 1459,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com",
+        "offer"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "16-2",
+      "title": "16-2 课程总结（二）【更多教程ubkz.com】",
+      "chapter": "第16章 面试复盘-预祝大家斩获offer拿高薪",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/第16章 面试复盘-预祝大家斩获offer拿高薪/16-2 课程总结（二）【更多教程ubkz.com】-迅捷文字转语音-1791007882297zh.txt"
+      ],
+      "words": 1705,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com",
+        "offer"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "16-3",
+      "title": "16-3 课程展望【更多教程ubkz.com】",
+      "chapter": "第16章 面试复盘-预祝大家斩获offer拿高薪",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/第16章 面试复盘-预祝大家斩获offer拿高薪/16-3 课程展望【更多教程ubkz.com】-迅捷文字转语音-1791007891305zh.txt"
+      ],
+      "words": 915,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com",
+        "offer"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{1}--第1章2021后端校招面试直通车，提前锁定大厂offer-导学",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{1}--第1章2021后端校招面试直通车，提前锁定大厂offer-导学/[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790987284654zh.txt"
+      ],
+      "words": 3141,
+      "merged": false,
+      "tokens": [
+        "offer-",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[2.3]--2-4请简述常见HTTP状态码及含义&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议/[2.3]--2-4请简述常见HTTP状态码及含义&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790987362666zh.txt"
+      ],
+      "words": 6858,
+      "merged": false,
+      "tokens": [
+        "http",
+        "mdash",
+        "ubkz",
+        "com",
+        "https",
+        "dns"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;DNS_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议/[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;DNS_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790987401319zh.txt"
+      ],
+      "words": 3856,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "dns_",
+        "ubkz",
+        "com",
+        "http",
+        "https",
+        "dns"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议/[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790987379083zh.txt"
+      ],
+      "words": 5808,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "mdash_",
+        "ubkz",
+        "com",
+        "http",
+        "https",
+        "dns"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[2.5]--2-6请简述HTTPS加密认证的过程&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议/[2.5]--2-6请简述HTTPS加密认证的过程&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790987392129zh.txt"
+      ],
+      "words": 3298,
+      "merged": false,
+      "tokens": [
+        "https",
+        "mdash",
+        "ubkz",
+        "com",
+        "http",
+        "dns"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[2.1]--2-2TCP、UDP协议分别属于什么层&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议/[2.1]--2-2TCP、UDP协议分别属于什么层&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790987329626zh.txt"
+      ],
+      "words": 5737,
+      "merged": false,
+      "tokens": [
+        "tcp",
+        "udp",
+        "mdash",
+        "mdash_",
+        "ubkz",
+        "com",
+        "http",
+        "https",
+        "dns"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[2.7]--2-8你了解DNS攻击吗？是什么原理&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议/[2.7]--2-8你了解DNS攻击吗？是什么原理&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790987974327zh.txt"
+      ],
+      "words": 3132,
+      "merged": false,
+      "tokens": [
+        "dns",
+        "mdash",
+        "ubkz",
+        "com",
+        "http",
+        "https"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[2.2]--2-3请简述HTTP1.0、1.1、2.0的主要区别&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议/[2.2]--2-3请简述HTTP1.0、1.1、2.0的主要区别&mdash_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790987345654zh.txt"
+      ],
+      "words": 6864,
+      "merged": false,
+      "tokens": [
+        "http1",
+        "mdash_",
+        "ubkz",
+        "com",
+        "http",
+        "https",
+        "dns"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[3.7]--3-8请简述什么是SYNflood攻击&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.7]--3-8请简述什么是SYNflood攻击&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988274934zh.txt"
+      ],
+      "words": 3295,
+      "merged": false,
+      "tokens": [
+        "synflood",
+        "mdash",
+        "mdash_",
+        "ubkz",
+        "com",
+        "tcp",
+        "udp"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[3.1]--3-2请简述TCP与UDP协议的区别&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.1]--3-2请简述TCP与UDP协议的区别&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988027988zh.txt"
+      ],
+      "words": 5842,
+      "merged": false,
+      "tokens": [
+        "tcp",
+        "udp",
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;TCP_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;TCP_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988245962zh.txt"
+      ],
+      "words": 4199,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "tcp_",
+        "ubkz",
+        "com",
+        "tcp",
+        "udp"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[3.8]--3-9什么是VPN？请简述VPN的原理&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.8]--3-9什么是VPN？请简述VPN的原理&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988447761zh.txt"
+      ],
+      "words": 3474,
+      "merged": false,
+      "tokens": [
+        "vpn",
+        "mdash",
+        "mdash_",
+        "ubkz",
+        "com",
+        "tcp",
+        "udp"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[3.2]--3-3TCP协议为什么需要三次握手&mdash;&mdash;T_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.2]--3-3TCP协议为什么需要三次握手&mdash;&mdash;T_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988224297zh.txt",
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.2]--3-3TCP协议为什么需要三次握手&mdash;&mdash;T_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988043002zh.txt"
+      ],
+      "words": 6890,
+      "merged": true,
+      "tokens": [
+        "tcp",
+        "mdash",
+        "ubkz",
+        "com",
+        "udp"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[3.3]--3-4请简述什么是TIME_WAIT状态&mdash;&mdas_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.3]--3-4请简述什么是TIME_WAIT状态&mdash;&mdas_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988235132zh.txt"
+      ],
+      "words": 3382,
+      "merged": false,
+      "tokens": [
+        "time_wait",
+        "mdash",
+        "mdas_",
+        "ubkz",
+        "com",
+        "tcp",
+        "udp"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;TCP粘_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;TCP粘_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988266507zh.txt"
+      ],
+      "words": 3695,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "tcp",
+        "ubkz",
+        "com",
+        "udp"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[3.5]--3-6请介绍常见的TCP拥塞避免算法&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{3}--第3章网络协议面试核心之IP、TCP、UDP协议/[3.5]--3-6请介绍常见的TCP拥塞避免算法&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988257660zh.txt"
+      ],
+      "words": 3892,
+      "merged": false,
+      "tokens": [
+        "tcp",
+        "mdash",
+        "ubkz",
+        "com",
+        "udp"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{4}--第4章操作系统核心之进程、线程与协程/[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988505199zh.txt"
+      ],
+      "words": 4390,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[4.5]--4-6IO密集型任务部署需要注意什么&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{4}--第4章操作系统核心之进程、线程与协程/[4.5]--4-6IO密集型任务部署需要注意什么&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988535034zh.txt"
+      ],
+      "words": 3957,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{4}--第4章操作系统核心之进程、线程与协程/[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988495493zh.txt"
+      ],
+      "words": 2903,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{4}--第4章操作系统核心之进程、线程与协程/[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988542985zh.txt"
+      ],
+      "words": 4690,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{4}--第4章操作系统核心之进程、线程与协程/[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988526597zh.txt"
+      ],
+      "words": 4153,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{4}--第4章操作系统核心之进程、线程与协程/[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988516528zh.txt"
+      ],
+      "words": 3280,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;Lin_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{5}--第5章操作系统核心之存储系统详解/[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;Lin_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988774174zh.txt"
+      ],
+      "words": 4748,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "lin_",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[5.6]--5-7请简述服务器部署的RAID&mdash;&mdash;磁盘_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{5}--第5章操作系统核心之存储系统详解/[5.6]--5-7请简述服务器部署的RAID&mdash;&mdash;磁盘_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988782322zh.txt"
+      ],
+      "words": 3622,
+      "merged": false,
+      "tokens": [
+        "raid",
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{5}--第5章操作系统核心之存储系统详解/[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988755285zh.txt"
+      ],
+      "words": 4911,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{5}--第5章操作系统核心之存储系统详解/[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988735850zh.txt"
+      ],
+      "words": 3533,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[5.4]--5-5请编程实现LRU算法&mdash;&mdash;页面置换算_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{5}--第5章操作系统核心之存储系统详解/[5.4]--5-5请编程实现LRU算法&mdash;&mdash;页面置换算_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988766529zh.txt"
+      ],
+      "words": 3891,
+      "merged": false,
+      "tokens": [
+        "lru",
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{5}--第5章操作系统核心之存储系统详解/[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988745491zh.txt"
+      ],
+      "words": 3814,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{6}--第6章计算机系统之锁、同步与通信/[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988993789zh.txt"
+      ],
+      "words": 3718,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{6}--第6章计算机系统之锁、同步与通信/[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988962822zh.txt"
+      ],
+      "words": 4571,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{6}--第6章计算机系统之锁、同步与通信/[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988983374zh.txt"
+      ],
+      "words": 3872,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{6}--第6章计算机系统之锁、同步与通信/[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790989205224zh.txt"
+      ],
+      "words": 3994,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{6}--第6章计算机系统之锁、同步与通信/[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790989001908zh.txt"
+      ],
+      "words": 4749,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;CAS_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{6}--第6章计算机系统之锁、同步与通信/[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;CAS_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790989010731zh.txt"
+      ],
+      "words": 3722,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "cas_",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[6.2]--6-3线程-进程同步问题三大经典案例详解_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{6}--第6章计算机系统之锁、同步与通信/[6.2]--6-3线程-进程同步问题三大经典案例详解_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790988974025zh.txt"
+      ],
+      "words": 4492,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{7}--第7章计算机系统之编程语言与运行原理/[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790989290191zh.txt"
+      ],
+      "words": 4300,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{7}--第7章计算机系统之编程语言与运行原理/[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790989262819zh.txt"
+      ],
+      "words": 4342,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "mda_",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[7.4]--7-5请简述什么是JIT技术&mdash;&mdash;程序运行_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{7}--第7章计算机系统之编程语言与运行原理/[7.4]--7-5请简述什么是JIT技术&mdash;&mdash;程序运行_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790989281266zh.txt"
+      ],
+      "words": 4588,
+      "merged": false,
+      "tokens": [
+        "jit",
+        "mdash",
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[7.3]--7-4编译器原理剖析_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{7}--第7章计算机系统之编程语言与运行原理/[7.3]--7-4编译器原理剖析_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790989273657zh.txt"
+      ],
+      "words": 3390,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
+      "title": "[7.1]--7-2计算机的层次结构划分详解_一手IT课程资源+微信2268731，网站ubkz.com",
+      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{7}--第7章计算机系统之编程语言与运行原理/[7.1]--7-2计算机的层次结构划分详解_一手IT课程资源+微信2268731，网站ubkz.com[2]-迅捷文字转语音-1790989252428zh.txt"
+      ],
+      "words": 3179,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[8.2]--8-3链表结构详解&mdash;&mdash;单向链表、双向链表",
+      "title": "[8.2]--8-3链表结构详解&mdash;&mdash;单向链表、双向链表",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.2]--8-3链表结构详解&mdash;&mdash;单向链表、双向链表-迅捷文字转语音-1790989444046zh.txt"
+      ],
+      "words": 2540,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.4]--8-5链表算法题实战详解",
+      "title": "[8.4]--8-5链表算法题实战详解（二）",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.4]--8-5链表算法题实战详解（二）-迅捷文字转语音-1790989469394zh.txt"
+      ],
+      "words": 6712,
+      "merged": false,
+      "tokens": [
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.7]--8-8数组、栈、队列实战详解",
+      "title": "[8.7]--8-8数组、栈、队列实战详解（一）",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.7]--8-8数组、栈、队列实战详解（一）-迅捷文字转语音-1790989714615zh.txt"
+      ],
+      "words": 3555,
+      "merged": false,
+      "tokens": [
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.3]--8-4链表算法题实战详解",
+      "title": "[8.3]--8-4链表算法题实战详解（一）",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.3]--8-4链表算法题实战详解（一）-迅捷文字转语音-1790989451892zh.txt"
+      ],
+      "words": 8281,
+      "merged": false,
+      "tokens": [
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.1]--8-2时间复杂度与空间复杂度",
+      "title": "[8.1]--8-2时间复杂度与空间复杂度",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.1]--8-2时间复杂度与空间复杂度-迅捷文字转语音-1790989435896zh.txt"
+      ],
+      "words": 4308,
+      "merged": false,
+      "tokens": [
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.5]--8-6基础数据结构&mdash;&mdash;数组、栈、队列",
+      "title": "[8.5]--8-6基础数据结构&mdash;&mdash;数组、栈、队列",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.5]--8-6基础数据结构&mdash;&mdash;数组、栈、队列-迅捷文字转语音-1790989482580zh.txt"
+      ],
+      "words": 1692,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.10]--8-11数组、栈、队列实战详解",
+      "title": "[8.10]--8-11数组、栈、队列实战详解（四）",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.10]--8-11数组、栈、队列实战详解（四）-迅捷文字转语音-1790989747035zh.txt"
+      ],
+      "words": 1965,
+      "merged": false,
+      "tokens": [
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.6]--8-7数组、栈、队列实战详解",
+      "title": "[8.6]--8-7数组、栈、队列实战详解（一）",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.6]--8-7数组、栈、队列实战详解（一）-迅捷文字转语音-1790989488560zh.txt"
+      ],
+      "words": 3555,
+      "merged": false,
+      "tokens": [
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.8]--8-9数组、栈、队列实战详解",
+      "title": "[8.8]--8-9数组、栈、队列实战详解（二）",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.8]--8-9数组、栈、队列实战详解（二）-迅捷文字转语音-1790989724239zh.txt"
+      ],
+      "words": 5005,
+      "merged": false,
+      "tokens": [
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[8.9]--8-10数组、栈、队列实战详解",
+      "title": "[8.9]--8-10数组、栈、队列实战详解（三）",
+      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new/[8.9]--8-10数组、栈、队列实战详解（三）-迅捷文字转语音-1790989736958zh.txt"
+      ],
+      "words": 2790,
+      "merged": false,
+      "tokens": [
+        "iclass",
+        "new"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[9.5]--9-5回溯算法题模板与实战详解",
+      "title": "[9.5]--9-5回溯算法题模板与实战详解（二）",
+      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas/[9.5]--9-5回溯算法题模板与实战详解（二）-迅捷文字转语音-1790990394741zh.txt"
+      ],
+      "words": 6173,
+      "merged": false,
+      "tokens": [
+        "iclas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[9.4]--9-4回溯算法题模板与实战详解",
+      "title": "[9.4]--9-4回溯算法题模板与实战详解（一）",
+      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas/[9.4]--9-4回溯算法题模板与实战详解（一）-迅捷文字转语音-1790990379882zh.txt"
+      ],
+      "words": 5458,
+      "merged": false,
+      "tokens": [
+        "iclas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[9.1]--9-1&mdash;&mdash;基础算法详解&mdash;&m",
+      "title": "[9.1]--9-1&mdash;&mdash;基础算法详解&mdash;&m",
+      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas/[9.1]--9-1&mdash;&mdash;基础算法详解&mdash;&m-迅捷文字转语音-1790990291814zh.txt"
+      ],
+      "words": 2847,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "iclas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[9.3]--9-3广度优先搜索(bfs)实战详解",
+      "title": "[9.3]--9-3广度优先搜索(BFS)实战详解",
+      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas/[9.3]--9-3广度优先搜索(BFS)实战详解-迅捷文字转语音-1790990350503zh.txt"
+      ],
+      "words": 7189,
+      "merged": false,
+      "tokens": [
+        "bfs",
+        "iclas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[9.2]--9-2深度优先搜索(dfs)实战详解",
+      "title": "[9.2]--9-2深度优先搜索(DFS)实战详解",
+      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas/[9.2]--9-2深度优先搜索(DFS)实战详解-迅捷文字转语音-1790990310603zh.txt"
+      ],
+      "words": 5875,
+      "merged": false,
+      "tokens": [
+        "dfs",
+        "iclas"
+      ],
+      "code_refs": []
+    },
+    {
+      "id": "[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
+      "title": "[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne/[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1790991028899zh.txt"
+      ],
+      "words": 3897,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "md_ubkz",
+        "com",
+        "iclass"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
+      "title": "[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne/[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1790990989893zh.txt"
+      ],
+      "words": 2172,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com",
+        "iclass"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
+      "title": "[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne/[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1790991009301zh.txt"
+      ],
+      "words": 5594,
+      "merged": false,
+      "tokens": [
+        "char",
+        "varchar",
+        "text",
+        "mdash_ubkz",
+        "com",
+        "iclass"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
+      "title": "[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne/[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1790990999533zh.txt"
+      ],
+      "words": 4428,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com",
+        "iclass"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
+      "title": "[10.5]--10-5请简述数据库的ACID属性&mdash;&mdash;A_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne/[10.5]--10-5请简述数据库的ACID属性&mdash;&mdash;A_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1790991020679zh.txt"
+      ],
+      "words": 3294,
+      "merged": false,
+      "tokens": [
+        "acid",
+        "mdash",
+        "a_ubkz",
+        "com",
+        "iclass"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
+      "title": "[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne/[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1790990979585zh.txt"
+      ],
+      "words": 4250,
+      "merged": false,
+      "tokens": [
+        "ubkz",
+        "com",
+        "iclass"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
+      "title": "[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{11}--第11章数据库核心之索引、性能与安全iclass=new_tag/[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1791006908363zh.txt"
+      ],
+      "words": 4568,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com",
+        "iclass",
+        "new_tag"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
+      "title": "[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{11}--第11章数据库核心之索引、性能与安全iclass=new_tag/[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1791006895931zh.txt"
+      ],
+      "words": 4224,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "ubkz",
+        "com",
+        "iclass",
+        "new_tag"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
+      "title": "[11.6]--11-7MySQL权限维护详解_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{11}--第11章数据库核心之索引、性能与安全iclass=new_tag/[11.6]--11-7MySQL权限维护详解_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1791006918917zh.txt"
+      ],
+      "words": 4452,
+      "merged": false,
+      "tokens": [
+        "mysql",
+        "ubkz",
+        "com",
+        "iclass",
+        "new_tag"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
+      "title": "[11.1]--11-2为什么使用B+树做索引&mdash;&mdash;MyS_ubkz.com，一手IT课程+微信2268731",
+      "chapter": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{11}--第11章数据库核心之索引、性能与安全iclass=new_tag/[11.1]--11-2为什么使用B+树做索引&mdash;&mdash;MyS_ubkz.com，一手IT课程+微信2268731[2]-迅捷文字转语音-1791006882562zh.txt"
+      ],
+      "words": 3970,
+      "merged": false,
+      "tokens": [
+        "mdash",
+        "mys_ubkz",
+        "com",
+        "iclass",
+        "new_tag"
+      ],
+      "code_refs": [
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+        "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java"
+      ]
+    },
+    {
+      "id": "[12.1]--12-2设计模式之单例模式详解",
+      "title": "[12.1]--12-2设计模式之单例模式详解",
+      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{12}--第12章程序设计之面向对象编程/[12.1]--12-2设计模式之单例模式详解-迅捷文字转语音-1791007083543zh.txt"
+      ],
+      "words": 3813,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "[12.2]--12-3设计模式之建造者模式详解",
+      "title": "[12.2]--12-3设计模式之建造者模式详解",
+      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{12}--第12章程序设计之面向对象编程/[12.2]--12-3设计模式之建造者模式详解-迅捷文字转语音-1791007092686zh.txt"
+      ],
+      "words": 3010,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "[12.3]--12-4设计模式之适配器模式详解",
+      "title": "[12.3]--12-4设计模式之适配器模式详解",
+      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{12}--第12章程序设计之面向对象编程/[12.3]--12-4设计模式之适配器模式详解-迅捷文字转语音-1791007100241zh.txt"
+      ],
+      "words": 2639,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "[12.4]--12-5设计模式之装饰器模式详解",
+      "title": "[12.4]--12-5设计模式之装饰器模式详解",
+      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{12}--第12章程序设计之面向对象编程/[12.4]--12-5设计模式之装饰器模式详解-迅捷文字转语音-1791007110517zh.txt"
+      ],
+      "words": 2342,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "[12.5]--12-6设计模式之代理模式详解",
+      "title": "[12.5]--12-6设计模式之代理模式详解",
+      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{12}--第12章程序设计之面向对象编程/[12.5]--12-6设计模式之代理模式详解-迅捷文字转语音-1791007116517zh.txt"
+      ],
+      "words": 2758,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    },
+    {
+      "id": "[12.6]--12-7系统设计模式的七大原则",
+      "title": "[12.6]--12-7系统设计模式的七大原则",
+      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "sources": [
+        "work/source/8.mksz540-后端校招面试直通车，提前锁定大厂offer[完结]/{12}--第12章程序设计之面向对象编程/[12.6]--12-7系统设计模式的七大原则-迅捷文字转语音-1791007122139zh.txt"
+      ],
+      "words": 4399,
+      "merged": false,
+      "tokens": [],
+      "code_refs": []
+    }
+  ]
+}

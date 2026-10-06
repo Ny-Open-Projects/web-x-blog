@@ -1,0 +1,781 @@
+{
+  "meta": {
+    "course": "apm",
+    "articles": 110,
+    "code_files": 0,
+    "edges": 0
+  },
+  "nodes": [
+    {
+      "id": "A1-1",
+      "label": "1-1 课程导学",
+      "type": "article",
+      "chapter": "第1章 课程整体介绍",
+      "words": 2928
+    },
+    {
+      "id": "A2-1",
+      "label": "2-1 APM监控系统的整体介绍，了解apm系统的核心概念",
+      "type": "article",
+      "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
+      "words": 970
+    },
+    {
+      "id": "A2-2",
+      "label": "2-2 为什么需要开发一套APM系统？了解它在企业中的重要性",
+      "type": "article",
+      "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
+      "words": 2118
+    },
+    {
+      "id": "A2-3",
+      "label": "2-3 APM系统的三板斧介绍--链路追踪，指标，日志",
+      "type": "article",
+      "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
+      "words": 3143
+    },
+    {
+      "id": "A2-4",
+      "label": "2-4 APM工具选型(一)常见链路监控工具对比",
+      "type": "article",
+      "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
+      "words": 3504
+    },
+    {
+      "id": "A2-5",
+      "label": "2-5 OpenTracing，OpenCensus，OpenTelemetry三者之间的联系",
+      "type": "article",
+      "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
+      "words": 5406
+    },
+    {
+      "id": "A2-6",
+      "label": "2-6 APM工具选型(二) 指标和日志采集分析工具介绍",
+      "type": "article",
+      "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
+      "words": 2296
+    },
+    {
+      "id": "A2-7",
+      "label": "2-7 APM产品的最终成果",
+      "type": "article",
+      "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
+      "words": 4666
+    },
+    {
+      "id": "A3-1",
+      "label": "3-1 本章导学",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 404
+    },
+    {
+      "id": "A3-2",
+      "label": "3-2 docker以及docker compose 安装 优化版",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 837
+    },
+    {
+      "id": "A3-3",
+      "label": "3-3 docker compose配置讲解",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 911
+    },
+    {
+      "id": "A3-4",
+      "label": "3-4 docker compose 安装redis 和mysql 优化版",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 903
+    },
+    {
+      "id": "A3-5",
+      "label": "3-5 项目构建--详解项目开发需求",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 799
+    },
+    {
+      "id": "A3-6",
+      "label": "3-6 项目构建--项目代码结构与表结构介绍",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 2148
+    },
+    {
+      "id": "A3-7",
+      "label": "3-7 项目构建--创建db和redis连接",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 3043
+    },
+    {
+      "id": "A3-8",
+      "label": "3-8 项目构建--创建http服务器",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 1690
+    },
+    {
+      "id": "A3-9",
+      "label": "3-9 项目构建--创建grpc服务",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 3612
+    },
+    {
+      "id": "A3-10",
+      "label": "3-10 项目构建--服务启动逻辑优化",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 1839
+    },
+    {
+      "id": "A3-11",
+      "label": "3-11 项目构建--统一http服务返回格式",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 1543
+    },
+    {
+      "id": "A3-12",
+      "label": "3-12 项目构建--日志打印",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 1295
+    },
+    {
+      "id": "A3-13",
+      "label": "3-13 项目构建--封装sql 返回工具方法",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 740
+    },
+    {
+      "id": "A3-14",
+      "label": "3-14 项目构建--实现订单服务业务逻辑",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 2224
+    },
+    {
+      "id": "A3-15",
+      "label": "3-15 项目构建--实现商品服务业务逻辑",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 2578
+    },
+    {
+      "id": "A3-16",
+      "label": "3-16 项目构建--实现用户服务业务逻辑",
+      "type": "article",
+      "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
+      "words": 2394
+    },
+    {
+      "id": "A4-1",
+      "label": "4-1 本章导学",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 191
+    },
+    {
+      "id": "A4-2",
+      "label": "4-2 【技术详解】链路追踪基本概念",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 3602
+    },
+    {
+      "id": "A4-3",
+      "label": "4-3 【问题分析】链路追踪系统落地过程中的挑战",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 3307
+    },
+    {
+      "id": "A4-4",
+      "label": "4-4 【技术详解】Opentelemetry 介绍",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 2268
+    },
+    {
+      "id": "A4-5",
+      "label": "4-5 【技术详解】OpenTelemetry Collector安装以及配置文件介绍",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 2011
+    },
+    {
+      "id": "A4-6",
+      "label": "4-6 【实战】OpenTelemetry Collector 实战， 掌握opentelemetry sdk用法",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 3266
+    },
+    {
+      "id": "A4-7",
+      "label": "4-7 【技术详解】Opentelemetry Collector Extension 插件介绍",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 1855
+    },
+    {
+      "id": "A4-8",
+      "label": "4-8 【实战】jaeger对追踪数据展示",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 2405
+    },
+    {
+      "id": "A4-9",
+      "label": "4-9 【实战】后置采样配置与实践",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 3619
+    },
+    {
+      "id": "A4-10",
+      "label": "4-10 确定有意义的调用链路",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 836
+    },
+    {
+      "id": "A4-11",
+      "label": "4-11 【实战】对含有错误信息的链路进行跟踪",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 4620
+    },
+    {
+      "id": "A4-12",
+      "label": "4-12 【技术详解】go-mysql库源码剖析",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 4404
+    },
+    {
+      "id": "A4-13",
+      "label": "4-13 【实战】装饰器模式封装mysql驱动",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 4154
+    },
+    {
+      "id": "A4-14",
+      "label": "4-14 【实战】装饰器模式封装mysql",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 3266
+    },
+    {
+      "id": "A4-15",
+      "label": "4-15 【实战】装饰器模式封装mysql驱动",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 831
+    },
+    {
+      "id": "A4-16",
+      "label": "4-16 【实战】对含有mysql慢查询的链路进行跟踪",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 3847
+    },
+    {
+      "id": "A4-17",
+      "label": "4-17 【实战】对含有长事务的链路进行跟踪",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 2073
+    },
+    {
+      "id": "A4-18",
+      "label": "4-18 【实战】对含有redis报错请求的链路进行跟踪",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 1421
+    },
+    {
+      "id": "A4-19",
+      "label": "4-19 【实战】对服务器慢http接口的链路进行跟踪",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 3937
+    },
+    {
+      "id": "A4-20",
+      "label": "4-20 实战】对慢grpc接口的链路进行跟踪",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 3584
+    },
+    {
+      "id": "A4-21",
+      "label": "4-21 【实战】业务维度监控之下单成功数指标监控",
+      "type": "article",
+      "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
+      "words": 2459
+    },
+    {
+      "id": "A5-1",
+      "label": "5-1 本章导学",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 510
+    },
+    {
+      "id": "A5-2",
+      "label": "5-2 【原理】建立性能监控指标的原则有哪些？",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 4250
+    },
+    {
+      "id": "A5-3",
+      "label": "5-3 【原理】建立性能监控指标的方法论-四大黄金指标原则，use red方法",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2079
+    },
+    {
+      "id": "A5-4",
+      "label": "5-4 【原理】详解prometheus绘图原理",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2851
+    },
+    {
+      "id": "A5-5",
+      "label": "5-5 【原理】详解prometheus 四大监控指标类型",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 3675
+    },
+    {
+      "id": "A5-6",
+      "label": "5-6 【原理】详解prometheus常用函数",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 1516
+    },
+    {
+      "id": "A5-7",
+      "label": "5-7 【实战】确定要建立的监控指标",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2294
+    },
+    {
+      "id": "A5-8",
+      "label": "5-8 【实战】为http接口创建qps，错误数 统计指标",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2702
+    },
+    {
+      "id": "A5-9",
+      "label": "5-9 【实战】用grafana绘制监控面板(一)",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 4203
+    },
+    {
+      "id": "A5-10",
+      "label": "5-10 【实战】用grafana绘制监控面板(二)",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 1029
+    },
+    {
+      "id": "A5-11",
+      "label": "5-11 【实战】对接口进行压测观察qps统计数据",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 1016
+    },
+    {
+      "id": "A5-12",
+      "label": "5-12 【实战】对grpc接口创建qps，错误数指标",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2424
+    },
+    {
+      "id": "A5-13",
+      "label": "5-13 【实战】对grpc接口创建qps，错误数指标 监控面板",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 589
+    },
+    {
+      "id": "A5-14",
+      "label": "5-14 【实战】创建应用服务维度mysql监控，sql语法分析",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2221
+    },
+    {
+      "id": "A5-15",
+      "label": "5-15 【实战】创建应用服务维度mysql监控，代码实现",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 3712
+    },
+    {
+      "id": "A5-16",
+      "label": "5-16 【实战】创建应用服务维度mysql监控，绘制监控面板",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2165
+    },
+    {
+      "id": "A5-17",
+      "label": "5-17 【实战】对应用服务runtime 指标的监控(一)",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 3457
+    },
+    {
+      "id": "A5-18",
+      "label": "5-18 【实战】对应用服务runtime 指标的监控(二)",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 1080
+    },
+    {
+      "id": "A5-19",
+      "label": "5-19 分支【实战】对应用服务内部流量进行分布监控",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2273
+    },
+    {
+      "id": "A5-20",
+      "label": "5-20 【实战】业务维度监控之下单成功数指标监控",
+      "type": "article",
+      "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
+      "words": 2459
+    },
+    {
+      "id": "A6-1",
+      "label": "6-1 【原理】golang中性能监控的大杀器--golang pprof",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 1755
+    },
+    {
+      "id": "A6-2",
+      "label": "6-2 【实战】如何使用 golang pprof 来进行性能排查(一)-排查cpu性能问题？",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 5491
+    },
+    {
+      "id": "A6-3",
+      "label": "6-3 【实战】如何使用 golang pprof 来进行性能排查(二)-排查内存性能问题？",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 3257
+    },
+    {
+      "id": "A6-4",
+      "label": "6-4 【实战】如何使用 golang pprof 来进行性能排查(三)-排查block阻塞问题？",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 3335
+    },
+    {
+      "id": "A6-5",
+      "label": "6-5 【实战】如何使用 golang pprof 来进行性能排查(四)-排查加锁性能问题？",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 1624
+    },
+    {
+      "id": "A6-6",
+      "label": "6-6 【实战】如何使用 golang pprof 来进行性能排查(五)-排查goroutine th",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 2006
+    },
+    {
+      "id": "A6-7",
+      "label": "6-7 【原理】golang pprof源码分析 -- cpu占用率统计原理【版权修正版】",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 2718
+    },
+    {
+      "id": "A6-8",
+      "label": "6-8 【原理】golang pprof源码分析 --memory，block，mutex 统计原理",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 8339
+    },
+    {
+      "id": "A6-9",
+      "label": "6-9 【原理】golang pprof源码分析 -- goroutine thread 统计原理",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 3664
+    },
+    {
+      "id": "A6-10",
+      "label": "6-10 【原理】go trace 分析延迟性问题",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 5251
+    },
+    {
+      "id": "A6-11",
+      "label": "6-11 【实战】自动化pprof机制的实现--holmes 库的使用",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 3970
+    },
+    {
+      "id": "A6-12",
+      "label": "6-12 【原理】自动化pprof机制的实现--holmes库源码解读",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 1765
+    },
+    {
+      "id": "A6-13",
+      "label": "6-13 【实战】电商项目优化--引入holmes实现自动化pprof",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 1575
+    },
+    {
+      "id": "A6-14",
+      "label": "6-14 【实战】终端一键生成生成pprof profile 之 gops的使用",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 1511
+    },
+    {
+      "id": "A6-15",
+      "label": "6-15 【实战】巧用pprof工具分析内存泄漏问题",
+      "type": "article",
+      "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
+      "words": 1697
+    },
+    {
+      "id": "A7-1",
+      "label": "7-1 本章概述",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 343
+    },
+    {
+      "id": "A7-2",
+      "label": "7-2 【原理】详解日志收集架构模型",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 286
+    },
+    {
+      "id": "A7-3",
+      "label": "7-3 【原理】通过ELK技术栈来解决日志收集-详解elasticsearch",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 3743
+    },
+    {
+      "id": "A7-4",
+      "label": "7-4 【原理】通过ELK技术栈来解决日志收集-详解kibana",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 1672
+    },
+    {
+      "id": "A7-5",
+      "label": "7-5 【实战】 服务器日志采用文件存储",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 2520
+    },
+    {
+      "id": "A7-6",
+      "label": "7-6 【实战】通过ELK技术栈来解决日志收集-filebeat收集日志",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 1581
+    },
+    {
+      "id": "A7-7",
+      "label": "7-7 【实战】通过ELK技术栈来解决日志收集-logstash收集日志",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 1011
+    },
+    {
+      "id": "A7-8",
+      "label": "7-8 【实战】kibana展示日志",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 2396
+    },
+    {
+      "id": "A7-9",
+      "label": "7-9 【实战】索引模板配置",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 1623
+    },
+    {
+      "id": "A7-10",
+      "label": "7-10 【实战】索引生命周期的配置",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 640
+    },
+    {
+      "id": "A7-11",
+      "label": "7-11 【实战】mysql 审计日志打印",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 1293
+    },
+    {
+      "id": "A7-12",
+      "label": "7-12 【实战】kibana 分析日志",
+      "type": "article",
+      "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
+      "words": 999
+    },
+    {
+      "id": "A8-1",
+      "label": "8-1 【原理】 自研告警服务需求分析以及表结构介绍",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 2403
+    },
+    {
+      "id": "A8-2",
+      "label": "8-2 【实战】 doglarm服务基础代码框架搭建",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 1581
+    },
+    {
+      "id": "A8-3",
+      "label": "8-3 【原理】grafana告警规则配置详解",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 6348
+    },
+    {
+      "id": "A8-4",
+      "label": "8-4 【实战】 实现grafana 指标告警接口_denois",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 3052
+    },
+    {
+      "id": "A8-5",
+      "label": "8-5 【实战】 实现错误等级Error的日志告警",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 1650
+    },
+    {
+      "id": "A8-6",
+      "label": "8-6 【实战】 接入电话告警",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 2246
+    },
+    {
+      "id": "A8-7",
+      "label": "8-7 【实战】 接入钉钉告警",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 1400
+    },
+    {
+      "id": "A8-8",
+      "label": "8-8 【实战】 对日志内容进行限流排重处理",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 3189
+    },
+    {
+      "id": "A8-9",
+      "label": "8-9 【实战】 增加应用服务保活探测机制_denois",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 3188
+    },
+    {
+      "id": "A8-10",
+      "label": "8-10 【实战】 手写代码进行监控埋点",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 943
+    },
+    {
+      "id": "A8-11",
+      "label": "8-11 【实战】 dogalarm 自监控面板 _denois",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 1747
+    },
+    {
+      "id": "A8-12",
+      "label": "8-12 【实战】保活机制自动重启应用服务",
+      "type": "article",
+      "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
+      "words": 5245
+    },
+    {
+      "id": "A9-1",
+      "label": "9-1 如何衡量APM系统本身是正常运行的？",
+      "type": "article",
+      "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
+      "words": 766
+    },
+    {
+      "id": "A9-2",
+      "label": "9-2 衡量apm系统本身性能的通用手段的副本",
+      "type": "article",
+      "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
+      "words": 3956
+    },
+    {
+      "id": "A9-3",
+      "label": "9-3 apm自监控及扩容思路之链路追踪系统容量瓶颈分析的副本",
+      "type": "article",
+      "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
+      "words": 5331
+    },
+    {
+      "id": "A9-4",
+      "label": "9-4 apm自监控及扩容思路之日志手机系统容量分析及扩容思路的副本",
+      "type": "article",
+      "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
+      "words": 3286
+    },
+    {
+      "id": "A9-5",
+      "label": "9-5 apm自监控及扩容思路之指标系统容量分析及扩容思路",
+      "type": "article",
+      "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
+      "words": 1740
+    },
+    {
+      "id": "A10-1",
+      "label": "10-1 课程总结",
+      "type": "article",
+      "chapter": "第10章 整体课程内容总结",
+      "words": 2143
+    }
+  ],
+  "edges": []
+}

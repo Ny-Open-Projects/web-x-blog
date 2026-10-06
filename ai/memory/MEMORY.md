@@ -140,3 +140,28 @@
 ### 交付节奏建议（等 Ny 确认）
 
 先出本篇当**格式样板**，验完再按批推（建议每批 10 篇）。产物落 `work/target/es/`，成熟后拷进 `work/blog/source/_posts/` 进站。
+
+---
+
+## 断点 2026-10-06 · Wave2（campus/storage/apm 新课续产）
+
+**派发方式**：4 个互斥段落子 agent 并行（campusA / campusB / storageA / apm1，各 8 篇），按 `ai/prompts/blog_prompt.md` 产出、自我过 `card-qc.md`。
+
+**结果（独立复算，非轻信 worker 自报）**：
+
+| 课程 | Wave2 前 | Wave2 新增 | 当前 done/total | 状态 |
+| --- | --- | --- | --- | --- |
+| campus（课程8） | 62 | +16 | **78/78** | ✅ 收口清零 |
+| storage（课程9） | 51 | +8 | 59/110 | 续产中 |
+| apm（课程10） | 40 | +8 | 48/110 | 续产中 |
+
+- 合计 **+32 篇 / 32 篇落盘**，0 重复、0 回退。
+- 32 篇全量程序化 QC：禁用三单引号 0 命中、均有"相关度"结尾行、代码围栏成对、体量 1.3–7KB，异常 0。
+- 监控基线已更新：`ai/scripts/_monitor_wave.py` TARGETS → {campus:78, storage:59, apm:48}。
+
+**待续（下一波）**：storage 剩 51、apm 剩 62；course11（go-interview）队列仍空（XL 0/114、L 0/124、M 0/100、S 0/31），尚未启动。建议 Wave3 继续推进 storage/apm，或开 course11 首波。
+
+**关键发现（接手者必读）**：
+- campus 10-x 的 `code_refs`（L122/L141 等 Java 文件）经核实是 LeetCode 算法题解，与"数据库/事务/字段类型"主题**无关**，属数据集错配噪声 → 按"概念卡不强塞代码"处理，未嵌入；DB 卡改用 SQL 示例。
+- campus 8-7/8-8 源讲稿文本完全相同（均 LeetCode 54 螺旋矩阵）→ 按切面拆分（思路 vs 代码），规避 card-qc 重复命中。
+- 讲稿事实错误已修：INT 实为 4 字节（讲稿误 8）、DECIMAL(p,d) 精度/标度、ASR 错词（张读→脏读、换读→幻读、单独→不可重复读、西塔→Seata、柔 PMQ→RocketMQ、密等→幂等 等）。

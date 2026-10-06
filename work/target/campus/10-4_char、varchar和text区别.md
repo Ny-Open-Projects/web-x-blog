@@ -1,0 +1,140 @@
+# 后端校招面试直通车: char、varchar 和 text 的区别
+
+## 纲要
+
+- MySQL 数据类型五大类：数字、日期、字符串、空间、JSON
+- 数字类型：整数（tinyint/smallint/mediumint/int/bigint）按占用字节递增；小数 float/double（近似）与 decimal（精确）
+- 小数存储金额：用 `DECIMAL(p,d)` 或"整数 × 倍数"消除浮点误差
+- 字符串类型：char（定长）、varchar（变长）、text（长文本）等
+- **char vs varchar**：定长 vs 变长，存储占用不同
+- **varchar vs text**：text 不支持 DEFAULT（早期版本）、最大更长、索引开销更大
+- JSON 类型优于用字符串存 JSON：自动校验、结构化存储、支持局部读写
+
+## MySQL 数据类型五大类
+
+| 大类 | 典型类型 |
+| --- | --- |
+| 数字类型 | TINYINT、SMALLINT、MEDIUMINT、INT、BIGINT、FLOAT、DOUBLE、DECIMAL |
+| 日期类型 | DATE、TIME、DATETIME、TIMESTAMP、YEAR |
+| 字符串类型 | CHAR、VARCHAR、BINARY、VARBINARY、BLOB、TEXT、ENUM、SET |
+| 空间数据类型 | 几何类型（业务较少使用） |
+| JSON 数据类型 | JSON |
+
+## 数字类型
+
+### 整数
+
+不同整数类型的区别主要是**占用的存储空间**：
+
+| 类型 | 占用字节 | 有符号范围（约） |
+| --- | --- | --- |
+| TINYINT | 1 | -128 ~ 127（无符号 0 ~ 255） |
+| SMALLINT | 2 | -32768 ~ 32767（无符号 0 ~ 65535） |
+| MEDIUMINT | 3 | -838万 ~ 838万 |
+| INT | 4 | -21亿 ~ 21亿 |
+| BIGINT | 8 | 非常大（对应编程语言的 long） |
+
+> 选型原则：在满足取值范围的前提下，尽量用小类型以节省空间与 IO。
+
+### 小数
+
+- `FLOAT`：单精度浮点数；`DOUBLE`：双精度浮点数。二者都是**近似值**，存在浮点误差。
+- `DECIMAL(p, d)`：存储**精确**数值。`p` 是精度（总位数），`d` 是标度（小数点后的位数）。例如 `DECIMAL(10, 2)` 表示总共 10 位数字、小数点后 2 位，范围约 `-99999999.99 ~ 99999999.99`。
+
+**金额存储的正确姿势**：货币、消费数据不允许一分钱误差，否则会导致对账失败。两种可靠做法：
+
+1. 使用 `DECIMAL`，如 `DECIMAL(10, 2)`；
+2. 把小数乘以固定倍数（如 ×10000）转成整数（`INT`/`BIGINT`）存储——因为整数在底层没有误差，彻底规避浮点问题。
+
+### 日期
+
+通过"零值"即可区分：`DATE` 只存年月日，`TIME` 只存时分秒，`DATETIME` 年月日+时分秒，`TIMESTAMP` 内部以整数（时间戳）存储且随会话时区转换，`YEAR` 只存年。一般业务用 `DATETIME`；若对"秒"级精度或时区敏感，用 `TIMESTAMP`。
+
+## 字符串类型：char、varchar、text
+
+字符串类型最复杂，重点关注两点：**是否定长** 与 **最大长度**。
+
+| 类型 | 是否定长 | 最大长度 | 备注 |
+| --- | --- | --- | --- |
+| CHAR(n) | 定长 | 255 字节 | 不足 n 则补空格填满 |
+| VARCHAR(n) | 变长 | 65535 字节（受行大小限制） | 按实际长度占用 |
+| TINYTEXT | 变长 | 255 字节 | |
+| TEXT | 变长 | 65535 字节 | |
+| MEDIUMTEXT | 变长 | 16 MB | |
+| LONGTEXT | 变长 | 4 GB | |
+
+### char 与 varchar 的核心区别
+
+- **CHAR 是定长**：定义 `CHAR(32)` 后，无论内容多短，该列都固定占用 32 字节。例如存"张三"（4 字节），仍占满 32 字节，剩余用空格填充。
+- **VARCHAR 是变长**：定义 `VARCHAR(32)` 后，实际占用随内容变化。存"张三"只占用 4 字节（外加 1~2 字节记录长度）。
+
+适用场景：
+
+- 长度固定的值（如 MD5、身份证号）用 `CHAR`；
+- 长度不固定但不会太长的文本用 `VARCHAR`。
+
+### varchar 与 text 的区别
+
+1. **默认值**：早期 MySQL 中 `TEXT` 不支持 `DEFAULT`，`VARCHAR` 支持；现代版本中该限制已大幅放宽，但 `TEXT` 仍不建议设默认值。
+2. **最大长度**：`VARCHAR` 上限受单行 65535 字节约束；`TEXT` 通过 `MEDIUMTEXT`/`LONGTEXT` 可存更长的数据。
+3. **索引开销**：给 `TEXT` 建索引占用空间更大，而 `VARCHAR` 的索引相对更小。
+
+**建议尽量少用 TEXT**：它在性能与索引上都有更大损耗，仅在确需存储超长文本（如文章正文、编码数据）等极端场景才使用。
+
+## JSON 类型
+
+MySQL 提供原生 `JSON` 类型。相比"用字符串存 JSON"，它的优势：
+
+- 写入时自动**校验**结构合法性，非法 JSON 直接抛异常；
+- 内部以结构化（非打平）格式存储，支持**局部读写**，修改某个字段无需读出整串再写回；
+- 配合生成列与索引可高效查询。
+
+但需注意：JSON 本质仍是结构化数据，按范式设计应拆分为独立表/字段；除非必要，不建议在 MySQL 中存大量 JSON。若一定要存，优先用 `JSON` 类型而非字符串。
+
+## Demo 示例
+
+### 运行说明
+
+在 MySQL 5.7 / 8.0 客户端执行，观察各类型的定义方式。
+
+```sql
+CREATE TABLE IF NOT EXISTS user_profile (
+    id          BIGINT       NOT NULL AUTO_INCREMENT,
+    username    VARCHAR(64)  NOT NULL DEFAULT '',
+    md5_token   CHAR(32)     NOT NULL DEFAULT '',          -- 定长摘要用 CHAR
+    bio         VARCHAR(255) NULL,                        -- 短简介用 VARCHAR
+    resume      TEXT         NULL,                        -- 超长文本用 TEXT
+    balance     DECIMAL(10,2) NOT NULL DEFAULT 0.00,      -- 金额用 DECIMAL
+    profile     JSON         NULL,                        -- 结构化扩展用 JSON
+    created_at  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    INDEX idx_username (username)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+```
+
+### 代码说明
+
+- `md5_token CHAR(32)`：MD5 固定 32 位，用定长 `CHAR` 最合适；
+- `bio VARCHAR(255)`：长度不固定的短文本，用变长 `VARCHAR`；
+- `resume TEXT`：可能很长的个人简介，用 `TEXT`；
+- `balance DECIMAL(10,2)`：金额要求精确，使用 `DECIMAL` 而非 `FLOAT`；
+- `profile JSON`：半结构化字段用原生 `JSON`，获得校验与局部读写能力。
+
+### 技术点总结
+
+| 对比 | 结论 |
+| --- | --- |
+| char vs varchar | 定长 vs 变长，按内容实际长度占用 |
+| varchar vs text | text 早期无 DEFAULT、可更长、索引更重 |
+| 金额 | 用 DECIMAL 或整数×倍数，禁用浮点 |
+| JSON | 用 JSON 类型而非字符串，支持校验与局部读写 |
+
+## 面试答题要点
+
+- 先给 MySQL 类型全景（数字/日期/字符串/空间/JSON），再聚焦字符串。
+- char/varchar 区别：定长 vs 变长，直接影响存储占用。
+- varchar/text 区别：默认值支持、最大长度、索引开销三点。
+- 金额存储：强调 DECIMAL 精确或整数化，点出浮点误差风险。
+- JSON：说明原生 JSON 相比字符串的优势，但指出范式设计的优先级。
+
+相关度：92%。是否需要继续：[否]。代码是否可运行：[是]。

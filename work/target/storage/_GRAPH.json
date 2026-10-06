@@ -1,0 +1,2887 @@
+{
+  "meta": {
+    "course": "storage",
+    "articles": 110,
+    "code_files": 173,
+    "edges": 408
+  },
+  "nodes": [
+    {
+      "id": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "label": "[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
+      "words": 1723
+    },
+    {
+      "id": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "label": "[1.7]--1-7数据库解决方案不仅仅是CRUD那么简单【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
+      "words": 1323
+    },
+    {
+      "id": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "label": "[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
+      "words": 1410
+    },
+    {
+      "id": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "label": "[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
+      "words": 551
+    },
+    {
+      "id": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "label": "[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
+      "words": 495
+    },
+    {
+      "id": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "label": "[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
+      "words": 1035
+    },
+    {
+      "id": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "label": "[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
+      "words": 1236
+    },
+    {
+      "id": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "label": "[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 3149
+    },
+    {
+      "id": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "label": "[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 3320
+    },
+    {
+      "id": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "label": "[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 327
+    },
+    {
+      "id": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "label": "[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 4893
+    },
+    {
+      "id": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "label": "[2.10]--2-10MybatisPlus进阶，高效的ORM代码实现（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 2965
+    },
+    {
+      "id": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "label": "[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 1659
+    },
+    {
+      "id": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "label": "[2.11]--2-11MybatisPlus进阶，高效的ORM代码实现（中）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 2814
+    },
+    {
+      "id": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "label": "[2.5]--2-5高效部署之容器化利器Docker【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 5669
+    },
+    {
+      "id": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "label": "[2.12]--2-12MybatisPlus进阶，高效的ORM代码实现（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 3818
+    },
+    {
+      "id": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "label": "[2.9]--2-9MybatisPlus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 4510
+    },
+    {
+      "id": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "label": "[2.8]--2-8MybatisPlus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
+      "words": 3243
+    },
+    {
+      "id": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "label": "[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 3294
+    },
+    {
+      "id": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "label": "[3.3]--3-3Mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 2540
+    },
+    {
+      "id": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "label": "[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 2658
+    },
+    {
+      "id": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "label": "[3.5]--3-5Mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 3486
+    },
+    {
+      "id": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "label": "[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 288
+    },
+    {
+      "id": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "label": "[3.7]--3-7Mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 3904
+    },
+    {
+      "id": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "label": "[3.6]--3-6Mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 1151
+    },
+    {
+      "id": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "label": "[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 5437
+    },
+    {
+      "id": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "label": "[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 3118
+    },
+    {
+      "id": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "label": "[3.2]--3-2Mysql选型优劣势【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 2573
+    },
+    {
+      "id": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "label": "[3.4]--3-4Mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 3068
+    },
+    {
+      "id": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "label": "[3.8]--3-8Mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 4942
+    },
+    {
+      "id": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "label": "[3.9]--3-9Mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 3379
+    },
+    {
+      "id": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "label": "[3.16]--3-16交易核心：SKU-库存模型的发布（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 5059
+    },
+    {
+      "id": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "label": "[3.17]--3-17交易核心：SKU-库存模型的发布（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 3734
+    },
+    {
+      "id": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "label": "[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 3336
+    },
+    {
+      "id": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "label": "[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 2144
+    },
+    {
+      "id": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "label": "[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 2312
+    },
+    {
+      "id": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "label": "[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
+      "words": 4377
+    },
+    {
+      "id": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "label": "[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 2434
+    },
+    {
+      "id": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "label": "[4.7]--4-7使用Seata改造下单流程（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 4378
+    },
+    {
+      "id": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "label": "[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 4515
+    },
+    {
+      "id": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "label": "[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 2315
+    },
+    {
+      "id": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "label": "[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 1807
+    },
+    {
+      "id": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "label": "[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 4075
+    },
+    {
+      "id": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "label": "[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 3549
+    },
+    {
+      "id": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "label": "[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 2485
+    },
+    {
+      "id": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "label": "[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 3732
+    },
+    {
+      "id": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "label": "[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 5431
+    },
+    {
+      "id": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "label": "[4.6]--4-6Seata对分布式事务的支持【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 4949
+    },
+    {
+      "id": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "label": "[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 5629
+    },
+    {
+      "id": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "label": "[4.8]--4-8使用Seata改造下单流程（中）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 4223
+    },
+    {
+      "id": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "label": "[4.9]--4-9使用Seata改造下单流程（下）【海量资源：ubkz.com】",
+      "type": "article",
+      "chapter": "{4}--第4章高事务保证要求的交易核心能力",
+      "words": 1723
+    },
+    {
+      "id": "A[5.1]--5-1redis选型优劣势",
+      "label": "[5.1]--5-1Redis选型优劣势",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 1843
+    },
+    {
+      "id": "A[5.5]--5-5实用的redis分布式解决方案",
+      "label": "[5.5]--5-5实用的Redis分布式解决方案（1）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 2956
+    },
+    {
+      "id": "A[5.7]--5-7实用的redis分布式解决方案",
+      "label": "[5.7]--5-7实用的Redis分布式解决方案（3）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 3860
+    },
+    {
+      "id": "A[5.16]--5-16主从不一致我们该怎么办",
+      "label": "[5.16]--5-16主从不一致我们该怎么办",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 1849
+    },
+    {
+      "id": "A[5.11]--5-11商品详情缓存化提升查询性能",
+      "label": "[5.11]--5-11商品详情缓存化提升查询性能（上）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 5211
+    },
+    {
+      "id": "A[5.14]--5-14动手部署mysql读写分离集群",
+      "label": "[5.14]--5-14动手部署Mysql读写分离集群",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 6628
+    },
+    {
+      "id": "A[5.10]--5-10动手使用redis",
+      "label": "[5.10]--5-10动手使用Redis",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 1024
+    },
+    {
+      "id": "A[5.3]--5-3为什么redis那么快",
+      "label": "[5.3]--5-3为什么Redis那么快（中）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 5198
+    },
+    {
+      "id": "A[5.15]--5-15改造项目兜底住mysql性能极限",
+      "label": "[5.15]--5-15改造项目兜底住Mysql性能极限",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 1884
+    },
+    {
+      "id": "A[5.4]--5-4为什么redis那么快",
+      "label": "[5.4]--5-4为什么Redis那么快（下）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 2278
+    },
+    {
+      "id": "A[5.8]--5-8实用的redis分布式解决方案",
+      "label": "[5.8]--5-8实用的Redis分布式解决方案（4）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 2248
+    },
+    {
+      "id": "A[5.6]--5-6实用的redis分布式解决方案",
+      "label": "[5.6]--5-6实用的Redis分布式解决方案（2）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 3639
+    },
+    {
+      "id": "A[5.2]--5-2为什么redis那么快",
+      "label": "[5.2]--5-2为什么Redis那么快（上）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 3510
+    },
+    {
+      "id": "A[5.12]--5-12商品详情缓存化提升查询性能",
+      "label": "[5.12]--5-12商品详情缓存化提升查询性能（下）",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 2810
+    },
+    {
+      "id": "A[5.13]--5-13mysql读写分离的原理",
+      "label": "[5.13]--5-13mysql读写分离的原理",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 5184
+    },
+    {
+      "id": "A[5.9]--5-9如何规避redis缓存的短板",
+      "label": "[5.9]--5-9如何规避Redis缓存的短板",
+      "type": "article",
+      "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
+      "words": 4214
+    },
+    {
+      "id": "A[6.12]--6-12增量索引构建",
+      "label": "[6.12]--6-12增量索引构建（下）",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 5450
+    },
+    {
+      "id": "A[6.11]--6-11增量索引构建",
+      "label": "[6.11]--6-11增量索引构建（上）",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 4355
+    },
+    {
+      "id": "A[6.9]--6-9全量索引构建",
+      "label": "[6.9]--6-9全量索引构建",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 4311
+    },
+    {
+      "id": "A[6.4]--6-4为什么elasticsearch适合做全文搜索",
+      "label": "[6.4]--6-4为什么ElasticSearch适合做全文搜索（3）",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 4076
+    },
+    {
+      "id": "A[6.2]--6-2为什么elasticsearch适合做全文搜索",
+      "label": "[6.2]--6-2为什么ElasticSearch适合做全文搜索（1）",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 3618
+    },
+    {
+      "id": "A[6.1]--6-1elasticsearch选型优劣势",
+      "label": "[6.1]--6-1ElasticSearch选型优劣势",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 2598
+    },
+    {
+      "id": "A[6.13]--6-13改造商品搜索能力",
+      "label": "[6.13]--6-13改造商品搜索能力",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 3030
+    },
+    {
+      "id": "A[6.7]--6-7es性能提升及高可用方案",
+      "label": "[6.7]--6-7ES性能提升及高可用方案（下）",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 4961
+    },
+    {
+      "id": "A[6.8]--6-8动手使用es",
+      "label": "[6.8]--6-8动手使用ES",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 4953
+    },
+    {
+      "id": "A[6.5]--6-5为什么elasticsearch适合做全文搜索",
+      "label": "[6.5]--6-5为什么ElasticSearch适合做全文搜索（4）",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 2087
+    },
+    {
+      "id": "A[6.3]--6-3为什么elasticsearch适合做全文搜索",
+      "label": "[6.3]--6-3为什么ElasticSearch适合做全文搜索（2）",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 1899
+    },
+    {
+      "id": "A[6.6]--6-6es性能提升及高可用方案",
+      "label": "[6.6]--6-6ES性能提升及高可用方案（上）",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 4428
+    },
+    {
+      "id": "A[6.10]--6-10全量索引构建",
+      "label": "[6.10]--6-10全量索引构建",
+      "type": "article",
+      "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
+      "words": 4084
+    },
+    {
+      "id": "A[7.4]--7-4关注粉丝能力设计",
+      "label": "[7.4]--7-4关注粉丝能力设计（上）",
+      "type": "article",
+      "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
+      "words": 2110
+    },
+    {
+      "id": "A[7.3]--7-3动手使用neo4j",
+      "label": "[7.3]--7-3动手使用neo4j（下）",
+      "type": "article",
+      "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
+      "words": 3391
+    },
+    {
+      "id": "A[7.2]--7-2动手使用neo4j",
+      "label": "[7.2]--7-2动手使用neo4j（上）",
+      "type": "article",
+      "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
+      "words": 4971
+    },
+    {
+      "id": "A[7.6]--7-6关注粉丝能力设计",
+      "label": "[7.6]--7-6关注粉丝能力设计（下）",
+      "type": "article",
+      "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
+      "words": 1363
+    },
+    {
+      "id": "A[7.5]--7-5关注粉丝能力设计",
+      "label": "[7.5]--7-5关注粉丝能力设计（中）",
+      "type": "article",
+      "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
+      "words": 5129
+    },
+    {
+      "id": "A[7.7]--7-7neo4j分布式集群方案",
+      "label": "[7.7]--7-7Neo4J分布式集群方案",
+      "type": "article",
+      "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
+      "words": 4383
+    },
+    {
+      "id": "A[7.1]--7-1图形数据结构存储如何支撑",
+      "label": "[7.1]--7-1图形数据结构存储如何支撑",
+      "type": "article",
+      "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
+      "words": 3384
+    },
+    {
+      "id": "A[8.15]--8-15推拉混合模式的实践",
+      "label": "[8.15]--8-15推拉混合模式的实践（下）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 4887
+    },
+    {
+      "id": "A[8.9]--8-9使用javaapi接入hbase消息实体",
+      "label": "[8.9]--8-9使用JavaAPI接入HBase消息实体（下）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 1641
+    },
+    {
+      "id": "A[8.12]--8-12feed流之经典推拉设计模式",
+      "label": "[8.12]--8-12Feed流之经典推拉设计模式（3）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 2885
+    },
+    {
+      "id": "A[8.1]--8-1feed流的场景支撑难在哪里",
+      "label": "[8.1]--8-1Feed流的场景支撑难在哪里",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 2010
+    },
+    {
+      "id": "A[8.10]--8-10feed流之经典推拉设计模式",
+      "label": "[8.10]--8-10Feed流之经典推拉设计模式（1）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 4950
+    },
+    {
+      "id": "A[8.14]--8-14推拉混合模式的实践",
+      "label": "[8.14]--8-14推拉混合模式的实践（上）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 3373
+    },
+    {
+      "id": "A[8.3]--8-3hbase原理及优劣势",
+      "label": "[8.3]--8-3HBase原理及优劣势（中）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 2740
+    },
+    {
+      "id": "A[8.13]--8-13feed流之经典推拉设计模式",
+      "label": "[8.13]--8-13Feed流之经典推拉设计模式（4）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 2345
+    },
+    {
+      "id": "A[8.2]--8-2hbase原理及优劣势",
+      "label": "[8.2]--8-2HBase原理及优劣势（上）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 2244
+    },
+    {
+      "id": "A[8.11]--8-11feed流之经典推拉设计模式",
+      "label": "[8.11]--8-11Feed流之经典推拉设计模式（2）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 3233
+    },
+    {
+      "id": "A[8.7]--8-7使用javaapi接入hbase消息实体",
+      "label": "[8.7]--8-7使用JavaAPI接入HBase消息实体（上）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 5009
+    },
+    {
+      "id": "A[8.5]--8-5动手使用hbase",
+      "label": "[8.5]--8-5动手使用HBase",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 4968
+    },
+    {
+      "id": "A[8.8]--8-8使用javaapi接入hbase消息实体",
+      "label": "[8.8]--8-8使用JavaAPI接入HBase消息实体（中）",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 3451
+    },
+    {
+      "id": "A[8.6]--8-6hbase中的rowkey为什么那么重要",
+      "label": "[8.6]--8-6HBase中的RowKey为什么那么重要",
+      "type": "article",
+      "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
+      "words": 5418
+    },
+    {
+      "id": "A[9.6]--9-6使用javaapi实现点赞评论能力",
+      "label": "[9.6]--9-6使用JavaAPI实现点赞评论能力（下）",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 3089
+    },
+    {
+      "id": "A[9.8]--9-8削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题",
+      "label": "[9.8]--9-8削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题（下）",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 3302
+    },
+    {
+      "id": "A[9.3]--9-3动手使用mongodb",
+      "label": "[9.3]--9-3动手使用mongodb",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 4099
+    },
+    {
+      "id": "A[9.9]--9-9mongodb分布式扩展",
+      "label": "[9.9]--9-9MongoDB分布式扩展",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 1847
+    },
+    {
+      "id": "A[9.7]--9-7削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题",
+      "label": "[9.7]--9-7削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题（上）",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 2757
+    },
+    {
+      "id": "A[9.4]--9-4使用javaapi实现点赞评论能力",
+      "label": "[9.4]--9-4使用JavaAPI实现点赞评论能力（上）",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 1644
+    },
+    {
+      "id": "A[9.5]--9-5使用javaapi实现点赞评论能力",
+      "label": "[9.5]--9-5使用JavaAPI实现点赞评论能力（中）",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 7694
+    },
+    {
+      "id": "A[9.1]--9-1点赞评论场景解析",
+      "label": "[9.1]--9-1点赞评论场景解析",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 932
+    },
+    {
+      "id": "A[9.2]--9-2mongodb原理及优劣势",
+      "label": "[9.2]--9-2MongoDB原理及优劣势",
+      "type": "article",
+      "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
+      "words": 3918
+    },
+    {
+      "id": "Ccode_socialecom_README_md",
+      "label": "code/socialecom/README.md",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "label": "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "label": "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "label": "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "label": "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "label": "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "label": "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "label": "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "label": "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "label": "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "label": "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "label": "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
+      "type": "code"
+    },
+    {
+      "id": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "label": "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
+      "type": "code"
+    }
+  ],
+  "edges": [
+    {
+      "from": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_helper_MybatisPlusConfig_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_MybatisPlusGenerator_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_README_md",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第二章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_UserMapper_java",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_resources_mapper_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第三章代码_socialecom_src_main_java_com_imooc_socialecom_mapper_xml_SkuMapper_xml",
+      "relation": "uses-code"
+    },
+    {
+      "from": "A[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
+      "to": "Ccode_socialecom_第四章代码_socialecom_src_main_resources_mapper_TestMapper_xml",
+      "relation": "uses-code"
+    }
+  ]
+}
