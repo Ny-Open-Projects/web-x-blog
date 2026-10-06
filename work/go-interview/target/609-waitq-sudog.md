@@ -1,0 +1,57 @@
+# 609 等待队列与 sudog
+
+> 分类：Go 并发 | 难度：L3 | 题型：原理题 | 频率：中 | 关键词：**sudog**/**waitq**/**FIFO**/**唤醒**
+> 原文锚点：第 37~87 段「receivecill/sendkill 等待队列…sudolog 结构体」
+
+## 一句话总述
+阻塞的发送者/接收者被封装成 **sudog**，串成 **waitq**（recvq/sendq，本质是 sudog 双向链表，**FIFO**）；sudog 记录等待的 g、数据落点 `elem`、方向(收/发)、`success` 等；被对端唤醒后取走数据继续。
+
+## 面试官视角
+- 考察意图：是否理解"阻塞的 goroutine 在 channel 里如何被管理、如何被公平唤醒"。
+- 分档：P5 知阻塞会进等待队列；P6 知 sudog 封装等待者；P7 能讲清 waitq 是 FIFO 双向链表、sudog 关键字段。
+- 红旗答案：以为阻塞就"消失"了，不知其在 recvq/sendq 里排队。
+- 惊艳点：点出 **FIFO 保证"早阻塞的接收者先拿到数据"的公平性** `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 阻塞在 channel 上的 goroutine 是怎么管理的？
+**A：**
+1. **结论**：等待者封装成 sudog，串成 waitq 双向链表。
+2. **机制**：sudog 含 `g`（等待协程）、`elem`（数据落点指针）、`next`/`prev`（链表）、`isSelect`、`success`（被关闭唤醒时为 false）。`recvq`/`sendq` 各是一个 `waitq{first,last}`。唤醒时取队首——等待最久的先得。
+3. **边界**：sudog 还服务于 select 与协程栈转移（`parent` 字段），但普通收发只用其"等待"语义；链表头尾指针保证 O(1) 入队出队。
+
+**加分层：** 因为 FIFO，多个接收者排队时不会出现"后来的先拿到"的饥饿。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 阻塞去哪了？ | 基础 | 进 waitq | P5 |
+| L2 | sudog 是啥？ | 结构 | 封装等待者 | P6 |
+| L3 | 队列有序吗？ | 公平 | FIFO | P6 |
+| L4 | 唤醒取谁？ | 机制 | 队首 | P7 |
+| L5 | sudog 还干啥？ | 进阶 | select/栈转移 | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| Go 1.0+ | 无 | 答"阻塞者封装 sudog 入 recvq/sendq（FIFO waitq）；sudog 含 g/elem/success" |
+
+## 关键代码
+```go
+// runtime: 等待队列与 sudog（节选）
+type waitq struct { first *sudog; last *sudog }
+type sudog struct {
+    g       *g
+    elem    unsafe.Pointer // 数据落点
+    next    *sudog
+    prev    *sudog
+    isSelect bool
+    success  bool           // 被关闭唤醒时为 false
+}
+```
+
+## 总结与追问预判
+阻塞者以 sudog 入 FIFO 等待队列，唤醒取队首。追问接"channel 的锁与自旋"与"关闭 channel 如何唤醒"。
+
+## ⚠️ 原文纠错
+1. 机翻崩坏词归一：`studolog`/`studylog`/`sododog`/`sugelog`/`solillog`/`stuilog`/`suilog`→**sudog**；`weightkill`/`waitkill`→**waitq**；`勾入tin`/`构入t`→**goroutine**；`构入t`→goroutine。事实正确，仅术语崩坏，本卡已归一 `[经验]`。
+2. 原文对 sudog 字段的拼写崩坏极多（studolog/studylog/sododog 等互相串），本卡按 `runtime` 真实 `sudog` 结构归一；其 `waitlink`/`waittail` 等字段描述与源码一致（链表头尾指针 + parent 栈转移），无事实错误。

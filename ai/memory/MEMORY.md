@@ -263,6 +263,14 @@
 - **反直觉点（written into cards）**：① 切片截取只换 header 不复制数据，共享底层；② append 是否串扰原切片取决于 cap 是否触发扩容；③ make 给 len 会让 append 接在默认值后；④ 原切片 nil 时普通 make 得空数组，src[:0:0] 保 nil；⑤ redo 事务中持续写非"提交才写"；⑥ MVCC 非乐观锁；⑦ 自增 ID 断层源于回滚不回收。
 - `validate.py --strict` 独立复核 **270/270 PASS、0 error**（10 warn 为历史存量）。无 R1 剔除。
 
+**批次 25（2026-10-06）**：6-9 channel 底层的数据结构是什么？（6 卡，609-*）+ 12-9 为什么 MySQL 8.0 移除了查询缓存（一）（6 卡，129-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主 + 关键事实补正。
+- **6-9 崩坏词归一**：killcount→qcount、datacaresize→dataqsiz、reservex→recvx、send的s→sendx、receivecill→recvq、sendcill→sendq、look→lock、hcham→hchan、环形buffer→环形缓冲、双向链表→sudog 双向链表、unbuffered→无缓冲、buffered→有缓冲。
+- **6-9 关键事实补正（重要）**：源称 channel "由一个双向链表和一个锁组成、头部取数据尾部加数据"不准确——Go 实际用**环形缓冲区(ring buffer)**（`buf` 指针 + `sendx`/`recvx` 模运算索引），sudog 双向链表仅用于管理阻塞等待者(recvq/sendq)；本卡据 `src/runtime/chan.go` 的 `hchan` 结构精确化（qcount/dataqsiz/buf/recvq/sendq/lock 字段）。
+- **12-9 崩坏词归一**：circl→SQL、mysam→MyISAM、ininoOD→InnoDB、b加c→B+树、memocatch→memcached、querycache→查询缓存、应付写的→应对写的、scal→SQL、open_cable→optimizer、wher→WHERE、selict→SELECT。
+- **12-9 事实核对**：8.0 移除查询缓存的四大动因（失效频繁/锁竞争/mutex 开销/命中率低<约1%）均正确；补 InnoDB buffer pool 作为实际缓存层、query_cache_type=0 默认关、8.0 仍可用 `FLUSH STATUS` 监控（历史 5.7 才有 Qcache_* 状态变量）。
+- **反直觉点（written into cards）**：① channel 不是简单队列，是带环形缓冲的 struct + 阻塞等待者链表；② 无缓冲 channel 发送即 handoff 不进 buf；③ 查询缓存失效是"表级"，任一写入即整表缓存清空；④ 移除查询缓存后性能反而提升（省去锁+失效维护开销）。
+- `validate.py --strict` 独立复核 **282/282 PASS、0 error**（10 warn 为历史存量）。无 R1 剔除。
+
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
 - 每批必跑 `validate.py --strict`，**有 error 修完才 done**，done 即落盘进度。
