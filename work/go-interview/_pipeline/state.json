@@ -1424,10 +1424,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "804-build-pipeline",
+        "804-frontend-ast-typecheck",
+        "804-ssa-generation",
+        "804-optimization-inline-escape",
+        "804-build-debug-cache",
+        "804-compile.deep"
+      ],
+      "done_at": "2026-10-06T17:31:06+08:00"
     },
     "source/08/8-5 Go 程序启动过程是怎样的？-迅捷文字转语音-1790896583051zh.txt": {
       "id": "8-5",
@@ -2463,10 +2471,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1114-pprof-overview",
+        "1114-cpu-profile",
+        "1114-memory-mutex-block",
+        "1114-net-http-pprof",
+        "1114-pprof-analysis",
+        "1114-pprof.deep"
+      ],
+      "done_at": "2026-10-06T17:31:07+08:00"
     },
     "source/11/11-5 如何使用Trace定位性能问题？-迅捷文字转语音-1790919943325zh.txt": {
       "id": "11-5",
@@ -5788,7 +5804,7 @@
     }
   },
   "next_num": 1,
-  "waves": 17,
-  "updated": "2026-10-06T17:05:10+08:00",
+  "waves": 18,
+  "updated": "2026-10-06T17:31:07+08:00",
   "consec_fail": 0
 }
