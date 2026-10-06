@@ -231,6 +231,8 @@
 **批次 7（2026-10-06）**：6-2 context 最佳实践（5 主卡+1 deep，602-*）+ 4-5 Go 包管理（二）（5 主卡+1 deep，405-*）。纠正 1 处：405-gomod-structure 原文称 go.mod `go 1.20` 指令"只是当前环境 go 版本信息"，纠正为「模块要求的最低 Go 版本」（自 go1.21 驱动 toolchain 选择）。`validate.py --strict` 独立复核 **84/84 PASS、0 error**（2 warn 为历史存量）。版本栅栏已写入：context go1.7 进标准库、GO111MODULE go1.11/1.13/1.16 演进、`WithoutCancel`/`AfterFunc` go1.21 新增。
 **批次 8（2026-10-06）**：10-17 Goroutine 闭包陷阱（5 主卡+1 deep，1017-*）+ 4-15 数组和切片区别（二）（5 主卡+1 deep，415-*）。纠正 1 处（版本翻转）：1017-goroutine-loop-var 原文把"循环变量每轮复用同一变量"当普适事实，纠正为 **Go 1.22 起 for/range 循环变量改为每轮独立（per-iteration scope）**，旧版 ≤1.21 才共享。`validate.py --strict` 独立复核 **96/96 PASS、0 error**。
   ⚠️ **本批暴露流水线 bug 并修复**：`validate.py` 文件名正则 `^\d{3}-` 只认 3 位前缀，而 10-17→1017 是 4 位（章节10+两位课次），导致 6 个 error。已放宽正则到 `^\d{3,4}-`（项目内 `_pipeline/validate.py`，不动 source），覆盖所有 chapter10/19 + 两位课次的 4 位卡。后续同类卡（10-10~10-19、19-10~19-25 等）不再误判。
+**批次 9（2026-10-06）**：4-10 获取项目根目录（5 主卡+1 deep，410-*）+ 10-19 并发编程误区（一）（5 主卡+1 deep，1019-*）。纠正 2 处：1019-data-race 把"跨请求改同一行数据"误称 data race（实为资源争用，需 DB 事务/锁，'-race' 检测不到）；1019-channel-leak 称函数返回后 goroutine 自动回收（实为阻塞在 channel 的 goroutine 不随外层函数返回结束，须显式退出）。`validate.py --strict` 独立复核 **108/108 PASS、0 error**。
+  ⚠️ **黑名单模板隐患（lead 必读）**：`validate.py` 黑名单（line 27）含 `构语言`/`护士锁`/`购语言` 等机翻词；lead 给 worker 的"固定声明行"若写"如 构语言→Go、护士锁→互斥锁"会触发规则 11 error。worker 已用 `利用→nil`/`勾浪→Go` 等非黑名单词改写。**后续派单的固定声明行一律改用安全示例**：`利用→nil`、`勾浪→Go`、`裸体→得体`、`首时→守时`（勾浪不在黑名单）。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。

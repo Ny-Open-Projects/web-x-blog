@@ -57,10 +57,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "410-exec-dir-pitfall",
+        "410-os-args-path",
+        "410-os-executable",
+        "410-runtime-caller",
+        "410-env-root-dir",
+        "410-project-root.deep"
+      ],
+      "done_at": "2026-10-06T12:01:21+08:00"
     },
     "source/04/4-11 Go输出时 %v %+v %#v 有什么区别？（一）-迅捷文字转语音-1790758588213zh.txt": {
       "id": "4-11",
@@ -1999,10 +2007,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1019-data-race",
+        "1019-goroutine-not-wait",
+        "1019-channel-deadlock",
+        "1019-channel-leak",
+        "1019-channel-close-panic",
+        "1019-concurrency-pitfalls.deep"
+      ],
+      "done_at": "2026-10-06T12:01:21+08:00"
     },
     "source/10/10-2 Go的并发编程真的那么简单吗？-迅捷文字转语音-1790916482852zh.txt": {
       "id": "10-2",
@@ -5667,7 +5683,7 @@
     }
   },
   "next_num": 1,
-  "waves": 9,
-  "updated": "2026-10-06T11:54:09+08:00",
+  "waves": 10,
+  "updated": "2026-10-06T12:01:21+08:00",
   "consec_fail": 0
 }
