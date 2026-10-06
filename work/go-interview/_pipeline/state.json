@@ -2856,10 +2856,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1225-transaction-rollback",
+        "1225-unique-index-conflict",
+        "1225-offset-increment",
+        "1225-manual-adjust-truncate",
+        "1225-max-value-overflow",
+        "1225-auto-increment.deep"
+      ],
+      "done_at": "2026-10-06T18:20:26+08:00"
     },
     "source/12/12-26 count() ， count(1)和count(字段名)到底有什么区别？-迅捷文字转语音-1790922372075zh.txt": {
       "id": "12-26",
@@ -3682,10 +3690,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1316-hardware-disk",
+        "1316-index-time-sort",
+        "1316-refresh-translog",
+        "1316-query-routing-cache",
+        "1316-shard-planning",
+        "1316-es-optimization.deep"
+      ],
+      "done_at": "2026-10-06T18:20:27+08:00"
     },
     "source/13/13-2 Elasticsearch是如何实现master选举的？（二）-迅捷文字转语音-1790924793742zh.txt": {
       "id": "13-2",
@@ -5854,7 +5870,7 @@
     }
   },
   "next_num": 1,
-  "waves": 22,
-  "updated": "2026-10-06T18:14:02+08:00",
+  "waves": 23,
+  "updated": "2026-10-06T18:20:27+08:00",
   "consec_fail": 0
 }

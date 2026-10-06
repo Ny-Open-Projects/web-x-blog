@@ -1,0 +1,51 @@
+# 1316 分片规划与副本策略
+
+> 分类：Elasticsearch | 难度：L4 | 题型：八股题 | 频率：高 | 关键词：**分片大小**/**ILM**/**副本**/**分配**
+> 原文锚点：第 69~98 段「分片数推算…副本/分配/迁移」
+
+## 一句话总述
+单分片建议 10~50GB（日志/时序取其上沿）；用 `max_primary_shard_size` 让 ILM rollover 控上限；每 GB 堆内存约 20 个分片（32GB 堆≈600+）；分片数尽量多因子便于被节点数整除以均摊；副本按可用性/成本权衡、闲时调整；分配不均可限主分片自动分配后手动 reroute。
+
+## 面试官视角
+- 考察意图：是否具备"按数据量与节点数规划分片"的工程能力，而非拍脑袋定分片数。
+- 分档：P5 知分片别太多；P6 懂 10~50GB、堆内存分片比；P7 能讲清整除性、ILM、副本动态调、手动 reroute。
+- 红旗答案：固定 33 个分片；以为副本越多越好；以为分片数无所谓整除。
+- 惊艳点：**分片数应具"多因子"——能被多数节点数整除才能均匀分布；前期拍 33 这种质数，后续加节点永远均不开**，这是极易踩的坑 `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 一个索引该设多少分片？副本怎么定？
+**A：**
+1. **结论**：按总量/单分片目标大小（10~50GB）反推分片数；副本按可用性需求设（日志可 0），动态可调且宜闲时操作；分片数选多因子便于整除节点数。
+2. **机制**：单分片过大恢复慢、过小则元数据与堆开销爆炸；堆内存每 GB 约承载 20 分片，超标节点性能下降。ILM 用 `max_primary_shard_size=50g` 自动 rollover 防单分片过大 `[经验]`。
+3. **边界**：分片数 > 节点数才能均摊；副本占等量资源（CPU/内存/盘），非越多越好；分配不均可 `cluster.routing.allocation.enable=new_primaries` 锁主分片后 `reroute` 手动迁。
+
+**加分层：** 副本能响应读、提升可用，但增加写入放大与存储成本——按 SLA 与预算取平衡，别无脑设大。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 分片多大？ | 基础 | 10~50GB | P5 |
+| L2 | 堆内存比？ | 容量 | ~20 分片/GB | P6 |
+| L3 | 为啥要整除？ | 均摊 | 多因子易分配 | P7 |
+| L4 | 副本越多越好？ | 权衡 | 否，按 SLA | P7 |
+| L5 | 不均怎么迁？ | 进阶 | allocation enable+reroute | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| ES 6.x+ | ILM/分片规划建议稳定 | 答"按量反推、10~50GB、20 分片/GB 堆、多因子整除" |
+
+## 关键代码
+```json
+// ILM rollover 控单分片上限 + 限主分片自动分配
+PUT _ilm/policy/logs { "policy": { "phases": { "hot": { "actions": {
+  "rollover": { "max_primary_shard_size": "50gb" } } } } } }
+PUT _cluster/settings { "transient": { "cluster.routing.allocation.enable": "new_primaries" } }
+POST _cluster/reroute { "commands": [ { "move": { "index": "logs", "shard": 0, "from_node": "n1", "to_node": "n2" } } ] }
+```
+
+## 总结与追答预判
+分片规划=按量反推+多因子整除；副本按 SLA；不均用 allocation+reroute。追问接"架构层冷热分离/多集群"。
+
+## ⚠️ 原文纠错
+1. 原文分片规划、ILM、副本、分配迁移要点正确，仅术语崩坏：classsettings→**cluster settings**、classroutingallocationenable→**cluster.routing.allocation.enable**、newprimaries→**new_primaries**、rerootAPI→**reroute API**、maxprimarshtsize→**max_primary_shard_size**、实g→**10GB**、三十GBZ→**32GB（堆）**、settPS→**QPS**、索影→**索引**、分辨→**分片**、集限→**集群**、存→**节点**。本卡已归一，事实无错 `[经验]`。
