@@ -95,10 +95,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "412-fmt-verbs",
+        "412-fmt-gosyntax",
+        "412-fmt-string-method",
+        "412-fmt-percent-escape",
+        "412-fmt-stdin",
+        "412-fmt-verbs.deep"
+      ],
+      "done_at": "2026-10-06T12:58:53+08:00"
     },
     "source/04/4-13 Go语言中new和make有什么区别？-迅捷文字转语音-1790758608806zh.txt": {
       "id": "4-13",
@@ -4290,10 +4298,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "161-srp",
+        "161-ocp",
+        "161-lsp",
+        "161-isp",
+        "161-dip",
+        "161-solid.deep"
+      ],
+      "done_at": "2026-10-06T12:58:53+08:00"
     },
     "source/16/16-10 如何使用Go语言实现装饰器模式？-迅捷文字转语音-1790928567723zh.txt": {
       "id": "16-10",
@@ -5731,7 +5747,7 @@
     }
   },
   "next_num": 1,
-  "waves": 13,
-  "updated": "2026-10-06T12:49:06+08:00",
+  "waves": 14,
+  "updated": "2026-10-06T12:58:53+08:00",
   "consec_fail": 0
 }

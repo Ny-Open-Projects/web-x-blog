@@ -237,6 +237,7 @@
 **批次 11（2026-10-06）**：10-21 优雅关闭通道（5 主卡+1 deep，1021-*）+ 10-11 指针值原子操作（5 主卡+1 deep，1011-*）。10-11 与批次 6 的 10-5 互补（本批聚焦 `atomic.Pointer[T]`，go1.19 引入，补历史 `unsafe.Pointer` 写法的版本边界；并补 `atomic.Value.Store` 类型须恒定否则 panic 的硬约束）。`validate.py --strict` 独立复核 **132/132 PASS、0 error**。
 **批次 12（2026-10-06）**：16-2 设计模式（一）（5 主卡+1 deep，162-*）+ 16-3 设计模式（二）（5 主卡+1 deep，163-*），新开第 16 章。覆盖创建型(singleton/factory/builder)+结构型(adapter/decorator) 与行为型(strategy/observer/chain/ template/iterator)。原文为概念讲义无事实错误，仅做口播序数错乱重建（行为型序号念乱按 GoF 23 种重建）。`163-iterator` 版本栅栏标注 `iter.Seq`/`Seq2` go1.23 引入。`validate.py --strict` 独立复核 **144/144 PASS、0 error**。
   ⚠️ **黑名单又发现 `裸体` 也在列（line 30）**：lead 此前"安全词"误列 `裸体→得体`；worker 已规避（改用 利用→nil/勾浪→Go/首时→守时）。已更正 MEMORY 安全词清单，后续派单严禁用 `裸体`。
+**批次 13（2026-10-06）**：4-12 fmt动词区别（二）（5 主卡+1 deep，412-*）+ 16-1 设计模式六大原则（5 主卡+1 deep，161-*）。纠正 2 处：412-fmt-percent-escape 原文把"99.99 输出成 100%"归因浮点精度（实测 %.2f 仍 99.99，实为未转义 `%` 当动词致 `%!(MISSING)`，须用 `%%`）；412-fmt-stdin 原文把 `go build -ldflags -X` 列为"获取标准输入"且记成"杠 s"（实为编译期链接器注入变量，-X 设字符串变量、-s 剥离调试信息，与 stdin 无关）。`validate.py --strict` 独立复核 **156/156 PASS、0 error**。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
