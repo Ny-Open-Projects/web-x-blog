@@ -1,0 +1,57 @@
+# 708 Gin 加载静态资源的三种方法
+
+> 分类：网络与 IO | 难度：L1 | 题型：八股题 | 频率：中 | 关键词：**Static** / **StaticFile** / **StaticFS**
+> 原文锚点：第 11~61 段
+
+## 一句话总述
+Gin 把本地文件映射成 HTTP 路径：Static/StaticFS 映射整个文件夹，StaticFile 只映射单文件，第一参路由、第二参本地路径。
+
+## 面试官视角
+- 意图：是否搭过 Gin 静态服务、分清三方法适用面。
+- P5 会调 / P6 说清文件夹 vs 单文件 / P7 知生产上 CDN。
+- 红旗：把 StaticFile 当文件夹用；不知第一参是访问路由。
+- 惊艳点：Static/StaticFS 注册后整目录可遍历 —— 验证 gin `engine.Static` 注册 GET+HEAD。
+
+## 主问答
+**Q（面试官原话）：** Gin 怎么把前端静态资源对外提供访问？
+**A：**
+1. **结论**：`Static`/`StaticFS` 映射整个文件夹，`StaticFile` 只映射单个文件。
+2. **机制**：第一参是访问路由，第二参是本地路径；本质起文件服务器暴露本地文件成 HTTP 路径。
+3. **边界**：`StaticFile` 只接具体文件（图片/JS/CSS），不能暴露整个目录。
+**加分层：** 生产静态资源应独立部署+CDN，后端只留接口。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
+|---|---|---|---|---|
+| L1 | 有哪三种 | 知否 | 说 Static 等 | 换题 |
+| L2 | 文件夹 vs 文件 | 会用 | Static/StaticFile 区别 | 判 P5 |
+| L3 | StaticFS 第二参 | 类型 | http.FileSystem | 判 P6 |
+| L4 | 为何分离部署 | 架构 | CDN/减负 | 判 P6+ |
+| L5 | 静态服务安全 | 实战 | 目录穿越防护 | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| gin v1.x `[存疑]` | 未核实 | Static/StaticFile/StaticFS 长期存在，语义稳定 |
+
+## 关键代码
+```go
+// 示意，未验证：Gin 暴露静态资源
+package main
+
+import "github.com/gin-gonic/gin"
+
+func main() {
+	r := gin.Default()
+	r.Static("/static", "./assets")        // 整个目录
+	r.StaticFile("/favicon.ico", "./a.ico") // 单个文件
+	r.Run(":8888")
+}
+```
+
+## 总结与追问预判
+- Static/StaticFS 管目录，StaticFile 管单文件；第一参路由、第二参本地路径。
+- 预判：StaticFS 为何能接 http.Dir → 见 708-http-dir-filesystem。
+
+## ⚠️ 原文纠错
+未发现事实性技术错误。核对范围：通读全文并重点核对代码 API 与版本相关行为；仅做了机翻解码（如 mergo / 勾浪→Go 等拼写还原），技术结论未做更正。

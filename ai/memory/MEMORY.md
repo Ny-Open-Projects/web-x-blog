@@ -214,3 +214,21 @@
 - 监控基线：`_monitor_wave.py` TARGETS → {campus:78, storage:110, apm:109}。
 
 **下一步**：转 **course11（go-interview）首波**——369 篇待产，属另一套流水线 `mt-to-interview-cards`，须**串行校准（MAX_PARALLEL=1）**规避 429（此前并行 3→全线 429 已锁单线程）。建议先 10~20 篇校准打样，再滚动扩量。
+
+## 断点 2026-10-06 · Course11（go-interview）校准首波
+
+**流水线接入**：`mt-to-interview-cards` skill 脚本拷贝进 `work/go-interview/_pipeline/`（自含，路径靠 `parent.parent` 解析，可直接 `python3 _pipeline/queue.py` 跑），`state.json` 移入 `_pipeline/`。MAX_PARALLEL=1、MAX_FILES_PER_AGENT=2、COOLDOWN_SEC=180（防 429）。
+
+**校准批次（Wave 2 抽取）**：2 个 XL 任务（7-10 mergo map↔struct、7-8 Gin 静态资源），各 ~25KB → **6 卡+1 deep/任务，共 12 张卡**落 `work/go-interview/target/`。
+- 主卡 10 张：`710-*`(mergo 5 张) + `708-*`(Gin 5 张)；难度分布 L1=2/L2=4/L3=3/L4=1（正好 2:4:3:1）。
+- deep 2 张：`710-mergo.deep.md`、`708-gin-static.deep.md`。
+
+**质量门（独立复核，非轻信 worker）**：`validate.py --strict` 初跑 10 张主卡全 FAIL（缺强制 `## ⚠️ 原文纠错` 节）；批量补该节 + 把 `708-gin-static-deep.md` 改名 `708-gin-static.deep.md`（后缀须 `.deep.md`）→ 复跑 **12/12 PASS（0 error，2 警告为无害「补充分级」标记）**。已 `queue.py done` 标记 2 任务完成，并清掉 2 个历史孤儿 running 任务。
+
+**当前进度**：369 任务 / 2 done / 367 pending / 12 卡落盘（仅 XL 档 2/114）。
+
+**关键纪律（接手者必读）**：
+- course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
+- 每批必跑 `validate.py --strict`，**有 error 修完才 done**，done 即落盘进度。
+- 串行优先，遇 429 立即退避；勿调高 MAX_PARALLEL。
+- 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2` → 派 1 个子 agent 产卡 → `validate.py --strict` → `queue.py done <task_id> --cards ...`。
