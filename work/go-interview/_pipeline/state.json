@@ -2539,10 +2539,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1118-stack-heap-diff",
+        "1118-escape-analysis-cmd",
+        "1118-escape-causes",
+        "1118-escape-impact",
+        "1118-escape-closure-capture",
+        "1118-escape.deep"
+      ],
+      "done_at": "2026-10-06T17:40:47+08:00"
     },
     "source/11/11-9 如何做内存逃逸分析？（二）-迅捷文字转语音-1790920232128zh.txt": {
       "id": "11-9",
@@ -3484,10 +3492,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1207-binlog-formats",
+        "1207-binlog-config",
+        "1207-binlog-write-flow",
+        "1207-sync-binlog",
+        "1207-two-phase-commit",
+        "1207-binlog.deep"
+      ],
+      "done_at": "2026-10-06T17:40:47+08:00"
     },
     "source/12/12-8 binlog 什么时候刷盘？（二）-迅捷文字转语音-1790920922912zh.txt": {
       "id": "12-8",
@@ -5804,7 +5820,7 @@
     }
   },
   "next_num": 1,
-  "waves": 18,
-  "updated": "2026-10-06T17:31:07+08:00",
+  "waves": 19,
+  "updated": "2026-10-06T17:40:47+08:00",
   "consec_fail": 0
 }
