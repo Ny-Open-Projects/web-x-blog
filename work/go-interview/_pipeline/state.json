@@ -2375,10 +2375,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1110-slice-shared-backing",
+        "1110-append-overwrite",
+        "1110-three-index-expr",
+        "1110-copy-clone",
+        "1110-append-clone",
+        "1110-slice-clone.deep"
+      ],
+      "done_at": "2026-10-06T18:30:31+08:00"
     },
     "source/11/11-11 如何优化切片元素的删除？-迅捷文字转语音-1790920244724zh.txt": {
       "id": "11-11",
@@ -3120,10 +3128,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "124-acid-properties",
+        "124-redo-log",
+        "124-binlog",
+        "124-redo-vs-binlog",
+        "124-undo-log-mvcc",
+        "124-mysql-logs.deep"
+      ],
+      "done_at": "2026-10-06T18:30:31+08:00"
     },
     "source/12/12-40 彻底搞懂MySQL中的锁（九）-迅捷文字转语音-1790923240061zh.txt": {
       "id": "12-40",
@@ -5886,7 +5902,7 @@
     }
   },
   "next_num": 1,
-  "waves": 24,
-  "updated": "2026-10-06T18:27:20+08:00",
+  "waves": 25,
+  "updated": "2026-10-06T18:30:31+08:00",
   "consec_fail": 0
 }

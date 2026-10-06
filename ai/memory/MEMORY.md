@@ -225,7 +225,7 @@
 
 **质量门（独立复核，非轻信 worker）**：`validate.py --strict` 初跑 10 张主卡全 FAIL（缺强制 `## ⚠️ 原文纠错` 节）；批量补该节 + 把 `708-gin-static-deep.md` 改名 `708-gin-static.deep.md`（后缀须 `.deep.md`）→ 复跑 **12/12 PASS（0 error，2 警告为无害「补充分级」标记）**。已 `queue.py done` 标记 2 任务完成，并清掉 2 个历史孤儿 running 任务。
 
-**当前进度（2026-10-06 批次23收口）**：369 任务 / **46 done / 323 pending / 258 卡落盘**（XL 档 46/114，约 40%）。批次1~23 累计 258/258 PASS（0 error，仅 10 无害 warn：2 历史 708 卡 + 8 新增 yaml/json/bash/ini 代码块告警）。剩余：XL 68 篇（46/114 已做）→ 之后 L 124 / M 100 / S 31。每批 6 卡（2 任务×3 主卡+1 deep，R1 剔除批则 0 卡）。已做 XL 清单：6-2/6-7/6-8/6-10/7-6/7-7/7-8/7-10/7-11/8-3/8-4/8-5/8-11/8-12/8-13/8-14/8-15/8-16/9-23/9-25/10-5/10-11/10-17/10-19/10-21/11-4/11-8/11-9/11-11/11-14/12-7/12-8/12-25/13-16/16-1/16-2/16-3/19-6/4-5/4-10/4-12/4-15/5-3。
+**当前进度（2026-10-06 批次24收口）**：369 任务 / **48 done / 321 pending / 270 卡落盘**（XL 档 48/114，约 42%）。批次1~24 累计 270/270 PASS（0 error，仅 10 无害 warn：2 历史 708 卡 + 8 新增 yaml/json/bash/ini 代码块告警）。剩余：XL 66 篇（48/114 已做）→ 之后 L 124 / M 100 / S 31。每批 6 卡（2 任务×3 主卡+1 deep，R1 剔除批则 0 卡）。已做 XL 清单：6-2/6-7/6-8/6-10/7-6/7-7/7-8/7-10/7-11/8-3/8-4/8-5/8-11/8-12/8-13/8-14/8-15/8-16/9-23/9-25/10-5/10-11/10-17/10-19/10-21/11-4/11-8/11-9/11-10/11-11/11-14/12-4/12-7/12-8/12-25/13-16/16-1/16-2/16-3/19-6/4-5/4-10/4-12/4-15/5-3。
 
 **批次 6（2026-10-06）**：6-8 panic/recover（5 主卡+1 deep，608-*）+ 10-5 原子操作 vs 锁（5 主卡+1 deep，105-*）。纠正 3 处实质错误：① 105-atomic-vs-mutex-core 原文把原子操作说成"要么全成要么全不成"（事务回滚语义），正确是不可分性；② 105-cond-semaphore 把 `Wait`≈加锁、`Signal`≈解锁（实际 Wait 先 Unlock 再挂起、唤醒后重 Lock，Signal 只唤醒等待者）；③ 同卡把 `notifyListWait` 说成"底层 C 库"，实际 Go 运行时由 Go+少量汇编实现（runtime/sema.go）。`validate.py --strict` 独立复核 **72/72 PASS、0 error**（2 warn 为历史存量）。
 **批次 7（2026-10-06）**：6-2 context 最佳实践（5 主卡+1 deep，602-*）+ 4-5 Go 包管理（二）（5 主卡+1 deep，405-*）。纠正 1 处：405-gomod-structure 原文称 go.mod `go 1.20` 指令"只是当前环境 go 版本信息"，纠正为「模块要求的最低 Go 版本」（自 go1.21 驱动 toolchain 选择）。`validate.py --strict` 独立复核 **84/84 PASS、0 error**（2 warn 为历史存量）。版本栅栏已写入：context go1.7 进标准库、GO111MODULE go1.11/1.13/1.16 演进、`WithoutCancel`/`AfterFunc` go1.21 新增。
@@ -256,6 +256,12 @@
 - **反直觉点（written into cards）**：① 切片 len 是"可见元素数"（可被直接部分独立坑掉），map len 是"底层键值对个数"——此差异是面试对比点；② nil channel 收发永久阻塞；③ cgo 的 C 堆泄漏 Go pprof 不可见；④ 切片 append 扩容后底层数组换新地址，函数内修改不反映外层。
 - **纪律踩坑（本批必记）**：① `812-cgo-leak` 与 `812-pprof-diagnosis` 的 `## ⚠️ 原文纠错` 初稿字面写了黑名单词 `构语言`/`勾浪`（作归一示例）→ 触发规则 11 error；修正为"原文把 Go/Go 语言 音译为崩坏词"的泛述（**绝不写黑名单词字面**）。② 误删 pprof 卡 ```` ```bash ```` 语言标识改纯 ```` ``` ```` → 触发"开围栏缺语言标识" error；还原 ```` ```bash ````（规则 14 仅 warn，无害）。**铁律：纠错节不得出现 构语言/护士锁/购语言/裸体/首时穿着/小r留下；代码围栏必须带语言标识（bash 可接受，无标识是 error）。**
 - `validate.py --strict` 独立复核 **258/258 PASS、0 error**（10 warn 为历史存量，含本批 812-pprof 的 bash 围栏告警）。无 R1 剔除。
+
+**批次 24（2026-10-06）**：12-4 MySQL 的 redo log 和 binlog 有何区别？（二）（6 卡，124-*）+ 11-10 如何最高效率的克隆一个切片？（6 卡，1110-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主 + 精度补正。
+- **12-4 崩坏词归一**：redulog/radeolog/radiolog/redudoal/raoOGG/videolog/viduallog/rediolog/redOOG→redo log；英德DB/英乐DB/英LDB/ininlowDB/ininoOD/inlowDBB/英诺DB→InnoDB；crushrecover/clashrecover→crash recovery；billog/bilog/blogg/b漏o/BILOG/beinlog→binlog；circle语句→SQL 语句；yom引引→MyISAM；SID→ACID；原则性→原子性；搜狗查询/circle操作→SQL 查询/操作；中句日志/中距日志/装继日志→relay log（中继日志）；漫长日志→慢查询日志。事实核对：redo 物理日志/循环写/InnoDB 引擎层、binlog server 层逻辑日志/追加写/全引擎、undo 逻辑日志/回滚+MVCC、2PC(redo prepare→binlog→redo commit) 崩溃恢复——均正确。精度补正：① 原文"redo 事务操作完才写"不严谨→redo 事务中持续写(prepare/commit 两阶段)，本卡精确化；② "binlog/redo 都是追加写"需细化→redo 循环写(覆盖)、binlog 追加写(切文件)；③ 称 MVCC"是乐观锁"不严谨→MVCC 是快照读/版本链机制(配锁)，本卡纠。
+- **11-10 崩坏词归一**：耳pad/耳pend/尔end/rpad→append；利有/利o/六→nil；copcopen/扩币→copy；钢奔析→-bench；奔析pmark→benchmark；三元素引/三元索引/元操作符/元式→三元切片表达式；构版本→Go 版本；一点二零点四→Go 1.20.4；一点一五→Go 1.15；底层速组→底层数组。事实核对：切片截取共享底层数组、append 覆盖原切片(cap 够)、三元表达式限 cap 强制扩容脱钩、copy 覆盖式且 dst 须预设 len、append(...) 克隆、src[:0:0] 保 nil 特性、Go 1.15 起 copy 经 memmove 优化通常快于 append——均正确。
+- **反直觉点（written into cards）**：① 切片截取只换 header 不复制数据，共享底层；② append 是否串扰原切片取决于 cap 是否触发扩容；③ make 给 len 会让 append 接在默认值后；④ 原切片 nil 时普通 make 得空数组，src[:0:0] 保 nil；⑤ redo 事务中持续写非"提交才写"；⑥ MVCC 非乐观锁；⑦ 自增 ID 断层源于回滚不回收。
+- `validate.py --strict` 独立复核 **270/270 PASS、0 error**（10 warn 为历史存量）。无 R1 剔除。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
