@@ -363,7 +363,17 @@
 - **文件名映射复核**：12-22→`1222-`(4位)、12-43→`1243-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（12-22→1222、12-43→1243）**。
 - `validate.py --strict` 独立复核 **414/414 PASS、0 error、warn 44**（warn 为历史 1253 卡 bash 块无害告警 + 早期 json/bash 块，本批 12 卡全 ⚠0）。无 R1 剔除。
 
-**当前进度（批次36收口）**：369 任务 / **72 done / 297 pending / 414 卡落盘**（XL 档 72/114，约 63%）。已做清单（续批次35）：+.../10-25/12-53/12-22/12-43。剩余：XL 42 篇（72/114）→ 之后 L 124 / M 100 / S 31。
+**批次 37（2026-10-06 夜，无人值守首波）**：12-15 索引的底层存储结构（四）（6 卡，1215-*）+ 12-31 事务的隔离级别有哪些（三）（6 卡，1231-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主。
+- **12-15 崩坏词归一**：inlooDB/inoDB/英乐DB/英LDB/英乐TB/innerDB/用的DB/inlDB/inlGB→InnoDB、myql/买sql/myslLL/mmsql→MySQL、b加树→B+树、浪值/浪指/long值→NULL、conpact/contact/acompact→COMPACT、rednant/redomant/redundant/residenant→REDUNDANT、dynamic→DYNAMIC、comprised/comppress/compassed/comppax→COMPRESSED、innerDBdefaultroformer→innodb_default_row_format、wortl/world加/wordchachairtestblobe→VARCHAR/CHAR/TEXT/BLOB、deletemask→delete_mask、miniRECmask→min_rec_mask、lixrecord/lesserrecord/leftrecord/lexurrecord/nextrecord→next_record、recordtype→record_type、事物id/DBTRSID/DBTSID/DBTISID→DB_TRX_ID、DBropPT→DB_ROLL_PTR、DBroid→DB_ROW_ID、技术索引→聚簇索引、利息/力/历序/逆序→逆序、溢出液/溢出页→溢出页、zlab→zlib。
+- **12-15 事实核校**：① 段/区/页/行层级、四种行格式、版本默认演进（<5.1 REDUNDANT、5.1+ COMPACT、5.7/8.0 DYNAMIC）、innodb_default_row_format——正确；② COMPACT 四段（变长字段长度列表逆序/只记非NULL、NULL值列表按位逆序高位补0、记录头5B、真实数据+隐藏列）——正确；③ 记录头 40 位（delete_mask 软删除+垃圾链表可重用空间、min_rec_mask、n_owned、heap_no、record_type 0~3、next_record 16位偏移按主键升序单链表）——正确；④ REDUNDANT 字段长度偏移列表逆序、相邻差值算长度、NULL 比特位、无独立 NULL 列表、空间浪费被取代——正确；⑤ 行溢出：页 16KB、VARCHAR 65532B、一页至少两条、COMPACT 留 768B 前缀+20B 指针、DYNAMIC 全溢出仅留 20B 地址、多溢出页成链、COMPRESSED 加 zlib——正确。
+- **12-31 崩坏词归一**：inoTB/inlDB/用的DB/应DB→InnoDB、换读→幻读、MOVCC/MOCCC/MTIRDCconrorencecontrol/MVCC→MVCC、conluct→很大程度上、lessscadoook→next-key 锁、selectforupdate→SELECT FOR UPDATE、安卓log/安卓logo/IDlog→undo log、readofyou/readofview/reviewyou/readVU/dviewu/srredofu→ReadView、constantreadview→consistent read view、inloDB→InnoDB、starttransactionwithconsistentslaackshote→START TRANSACTION WITH CONSISTENT SNAPSHOT、TSID/TRSID/DBTISID→DB_TRX_ID、技术索引→聚簇索引、配置/配件→页头(Page Header)、配MXXTIID→PAGE_MAX_TRX_ID、卓andlog→undo log。
+- **12-31 事实核校**：① MVCC 定义与目的、读写不阻塞、复用 undo log 版本链、DB_TRX_ID(6B)/DB_ROLL_PTR(7B)、提交后可见——正确；② RC/RR 均靠 ReadView、生成时机差异（RC 每语句 vs RR 启动一次）、BEGIN 不立即启动事务需首条 InnoDB 语句、WITH CONSISTENT SNAPSHOT 立即启动——正确；③ 可见性三区间算法（<min 可见；区间内看活跃列表、等于自身ID可见；>max 不可见；均回溯 undo log）——正确；④ 事务ID全局自增、256 倍数刷系统表空间页5 Max Trx ID(8B)、重启载入+256、DB_ROW_ID 无主键时补、二级索引页头 PAGE_MAX_TRX_ID(8B) 页级粗判——正确；⑤ 快照读(MVCC)+当前读(FOR UPDATE 加 next-key 锁)很大程度上避免幻读、非完全、四隔离级别递增性能递减、脏读/不可重复读对应级别——正确。
+- **文件名映射复核**：12-15→`1215-`(4位)、12-31→`1231-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（12-15→1215、12-31→1231）**。
+- `validate.py --strict` 独立复核 **426/426 PASS、0 error、warn 50**（warn 含本批 6 张 `text` 块「未见可运行语言」无害告警 + 历史告警，均非 error）。无 R1 剔除。
+
+**【夜间无人值守】2026-10-06 23:05 部署**：新增 `_pipeline/NIGHT-SHIFT.md`（权威交接 SOP，含硬红线/429 防护四闸门/单波6步SOP/骨架铁律/文件名映射/崩坏词处理/晨间交付格式）；启动 `watchdog.py` 后台守护（轮询 120s，命中 429 自动写 `.paused` 并解冻任务）；注册自动化 **「course11 面试卡夜间无人值守（串行单波）」**（id `344365e2-08cb-4bc8-8301-aa45fb0d3564`，2026-10-06T23:30 起 **FREQ=HOURLY;INTERVAL=2** 至 2026-10-07T07:30，约 5 波）。**防 429 核心：单会话只跑 1 波 + MAX_PARALLEL=1 严禁并行子 agent**（实测依据 2026-10-03 三并行 worker 同时 429 全败；本会话 metrics 429 计数=0）。
+
+**当前进度（批次37收口）**：369 任务 / **74 done / 295 pending / 426 卡落盘**（XL 档 74/114，约 65%）。已做清单（续批次36）：+.../12-22/12-43/12-15/12-31。剩余：XL 40 篇（74/114）→ 之后 L 124 / M 100 / S 31。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。

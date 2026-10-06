@@ -2763,10 +2763,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1215-row-format-overview",
+        "1215-compact-structure",
+        "1215-record-header",
+        "1215-redundant-vs-compact",
+        "1215-row-overflow",
+        "1215-row-format.deep"
+      ],
+      "done_at": "2026-10-06T23:14:59+08:00"
     },
     "source/12/12-16 索引的底层存储结构（五）-迅捷文字转语音-1790921457085zh.txt": {
       "id": "12-16",
@@ -3065,10 +3073,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1231-mvcc-overview",
+        "1231-readview",
+        "1231-visibility",
+        "1231-trx-id-hidden",
+        "1231-phantom-solutions",
+        "1231-mvcc.deep"
+      ],
+      "done_at": "2026-10-06T23:14:59+08:00"
     },
     "source/12/12-32 彻底搞懂MySQL中的锁（一）-迅捷文字转语音-1790922676592zh.txt": {
       "id": "12-32",
@@ -6094,7 +6110,7 @@
     }
   },
   "next_num": 1,
-  "waves": 37,
-  "updated": "2026-10-06T20:35:18+08:00",
+  "waves": 38,
+  "updated": "2026-10-06T23:14:59+08:00",
   "consec_fail": 0
 }
