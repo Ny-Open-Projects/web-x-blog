@@ -331,7 +331,15 @@
 - **文件名映射复核**：18-14→`1814-`(4位)、12-35→`1235-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（12-35→1235 而非 12350）**。
 - `validate.py --strict` 独立复核 **366/366 PASS、0 error、warn 37**（warn 含本批 1814 卡 bash 块「未见可运行语言」无害告警 + 历史 json/bash 块，均非 error）。无 R1 剔除。
 
-**当前进度（批次32收口）**：369 任务 / **64 done / 305 pending / 366 卡落盘**（XL 档 64/114，约 56%）。已做清单（续批次31）：+4-4/12-36/19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9/13-7/12-11/17-17/15-2/18-14/12-35。剩余：XL 50 篇（64/114）→ 之后 L 124 / M 100 / S 31。
+**批次 33（2026-10-06）**：12-34 彻底搞懂 MySQL 中的锁（三）（6 卡，1234-*）+ 4-11 Go 输出时 %v %+v %#v 区别（一）（6 卡，411-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主。
+- **12-34 崩坏词归一**：行机锁/航行锁/航锁→行锁、斜锁→写锁(X锁)、换堵/换路/换读→幻读、英核DB/因核DB/用的DB/inseroDB→InnoDB、autoenquirement→AUTO_INCREMENT、inblog→binlog、存库/重库→从库、selact/selack/slect→SELECT、lookinsharemode→LOCK IN SHARE MODE、selctforfor/selackforhere→SELECT FOR SHARE、innodb_looksisafeforbelog→innodb_locks_unsafe_for_binlog。
+- **12-34 事实核校**：① 行锁在存储引擎层、S 兼容 S、X 不兼容任何、UPDATE/DELETE 自动加 X、行锁仅事务内有效——正确；② 一致性读(MVCC 无锁)/锁定读之分、FOR UPDATE 加 X、LOCK IN SHARE MODE/FOR SHARE 加 S、S 兼容 S 阻塞 X、X 阻塞一切、8.0 支持 FOR SHARE——正确；③ 自增锁保证连续不重复、传统表锁 vs 5.1.2 轻量级锁(赋值即释放)、autoinc_lock_mode 0/1/2(8.0 默认2)、mode=2+statement binlog 主从主键不一致、row binlog 解决——正确；④ 间隙锁解决 RR 幻读、锁索引区间、只阻塞插入不阻塞读写、间隙锁间不互斥、仅 RR 生效、innodb_locks_unsafe_for_binlog 5.6.3 移除后默认开——正确。
+- **4-11 崩坏词归一**：勾/勾输出/勾浪→Go、阿斯格马/阿斯格码/阿色码/阿斯玛/二次码→ASCII 码、入n类型/入arrn→rune、inter三十二→int32、buin八→byte、尔瑞一/arv一/array二/arrr→array、针→指针。
+- **4-11 事实核校**：① 布尔 %t(值)/%T(类型)、整型 %d/%5d(补空格)/%05d(补零)/%b(二)/%o(八)/%c(码点)/%q(引号)/%x/%X(十六)/%U(Unicode)、rune=int32——正确；② 字符串 UTF-8 字节存储、中文占3字节致下标跳变(s[0]/s[3])、浮点 %f 默认6位小数、%e/%g 科学/自动、结尾5常「五舍」精度细节、byte=uint8——正确；③ FMT 三函数(Print/Printf/Println 在格式化/换行/空格上的差异)、%p 打印地址——正确；④ **核心考点 %v/%+v/%#v 递进：%v 只值 / %+v 值+字段名 / %#v 值+字段名+类型名**——正确。
+- **文件名映射复核**：12-34→`1234-`(4位)、4-11→`411-`(3位，chapter<10 课次11 补零为 411)。**铁律复核：chapter<10 单元课次补零（4-11→411），chapter≥10 原章号拼接（12-34→1234）。**
+- `validate.py --strict` 独立复核 **378/378 PASS、0 error、warn 37**（warn 为历史 json/bash 块无害告警，本批无新增）。无 R1 剔除。
+
+**当前进度（批次33收口）**：369 任务 / **66 done / 303 pending / 378 卡落盘**（XL 档 66/114，约 58%）。已做清单（续批次32）：+4-4/12-36/19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9/13-7/12-11/17-17/15-2/18-14/12-35/12-34/4-11。剩余：XL 48 篇（66/114）→ 之后 L 124 / M 100 / S 31。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。

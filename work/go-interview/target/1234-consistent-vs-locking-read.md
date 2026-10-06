@@ -1,0 +1,48 @@
+# 1234 一致性读与锁定读
+
+> 分类：MySQL 锁 | 难度：中 | 题型：原理 | 频率：高 | 关键词：**一致性读、快照读、锁定读、FOR UPDATE、FOR SHARE**
+
+> 原文锚点：第 21~49 段「一致性读/锁定读与显式加锁语句」
+
+## 一句话总述
+读取分两类：一致性读（快照读，普通 `SELECT` 在 RC/RR 下基于 MVCC、不加锁、效率最高）；锁定读（基于读后修改的场景，需加锁）。`SELECT ... FOR UPDATE` 加 X 锁、`SELECT ... LOCK IN SHARE MODE` 或 8.0+ `SELECT ... FOR SHARE` 加 S 锁——S 之间兼容但阻塞 X，X 阻塞一切。
+
+## 面试官视角
+一致性读 vs 锁定读是「读要不要加锁」的核心分界。考官想听你讲清「普通 SELECT 在 RR 下靠 MVCC 无锁」以及 FOR UPDATE/FOR SHARE 的加锁差异。能区分 S 与 X 的阻塞关系即过关。
+
+## 主问答
+**Q（面试官原话）：** 一致性读和锁定读有什么区别？FOR UPDATE 加什么锁？
+
+1. **一致性读（快照读）**：普通 `SELECT` 在 RC/RR 下走 MVCC 读快照，不对记录加任何锁，并发最高；用于「只读不改」场景。
+2. **锁定读**：当要基于读取的值做修改时，需先加锁防别人改。用 `SELECT ... FOR UPDATE` 对读取行加 **X 锁**，或用 `LOCK IN SHARE MODE` / 8.0+ `FOR SHARE` 加 **S 锁**。
+3. **S 与 X 阻塞关系**：持 S 锁时其他事务仍可获取 S 锁（兼容），但获取 X 锁会被阻塞；持 X 锁时其他事务获取 S 或 X 均阻塞，直到当前事务提交/回滚释放。
+4. **8.0 新语法**：`FOR SHARE` 等价于老式 `LOCK IN SHARE MODE`，都是加 S 锁。
+
+## 追问链
+| 档位 | 追问 | 答不出停在哪档 |
+|------|------|----------------|
+| L1 | 普通 SELECT 加锁吗？ | 说不清快照读 |
+| L2 | FOR UPDATE 加什么？ | 说不清 X 锁 |
+| L3 | FOR SHARE 加什么？ | 说不清 S 锁 |
+| L4 | S 与 X 怎么互阻塞？ | 说不清矩阵 |
+| L5 | 8.0 新语法？ | 说不清 FOR SHARE |
+
+## 版本与兼容性
+| 语句 | 加锁 |
+|------|------|
+| 普通 SELECT | 一致性读，无锁 |
+| ... FOR UPDATE | X 锁 |
+| ... LOCK IN SHARE MODE / FOR SHARE | S 锁 |
+
+## 关键代码
+```sql
+SELECT * FROM t WHERE id=1 FOR UPDATE;   -- X 锁
+SELECT * FROM t WHERE id=1 FOR SHARE;    -- S 锁（8.0+）
+```
+
+## 总结与追问预判
+核心：**快照读无锁、锁定读用 FOR UPDATE(X)/FOR SHARE(S)；S 兼容 S 阻塞 X、X 阻塞一切**。追问常拐向行锁基础（见 1234-row-lock）或自增锁（见 1234-auto-inc-lock）。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 一致性读(MVCC 无锁)/锁定读之分、FOR UPDATE 加 X、LOCK IN SHARE MODE/FOR SHARE 加 S、S 兼容 S 阻塞 X、X 阻塞一切、8.0 支持 FOR SHARE——均正确，本卡为准。
+2. 崩坏词归一：源码将 InnoDB / 行锁 / 幻读 / 事务 / 排他锁 等音译为崩坏词；本卡统一为规范术语。
