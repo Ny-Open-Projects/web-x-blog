@@ -1010,10 +1010,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "706-gin-middleware-essence.md",
+        "706-default-vs-new.md",
+        "706-middleware-register.md",
+        "706-middleware-chain.md",
+        "706-middleware-chain.deep.md",
+        "706-auth-middleware.md"
+      ],
+      "done_at": "2026-10-06T11:10:18+08:00"
     },
     "source/07/7-7 Gin是如何实现参数校验的？-迅捷文字转语音-1790864834851zh.txt": {
       "id": "7-7",
@@ -1649,10 +1657,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "925-mutex-usage.md",
+        "925-rwmutex-usage.md",
+        "925-mutex-impl.md",
+        "925-mutex-impl.deep.md",
+        "925-rwmutex-impl.md",
+        "925-lock-reentrancy.md"
+      ],
+      "done_at": "2026-10-06T11:10:18+08:00"
     },
     "source/09/9-3 String的底层存储结构-迅捷文字转语音-1790914006445zh.txt": {
       "id": "9-3",
@@ -5571,7 +5587,7 @@
     }
   },
   "next_num": 1,
-  "waves": 3,
-  "updated": "2026-10-06T10:56:19+08:00",
+  "waves": 4,
+  "updated": "2026-10-06T11:10:18+08:00",
   "consec_fail": 0
 }
