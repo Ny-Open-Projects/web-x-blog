@@ -652,10 +652,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "610-channel-direction",
+        "610-unbuffered-channel",
+        "610-buffered-channel",
+        "610-channel-deadlock-scenarios",
+        "610-channel-make-and-nil",
+        "610-channel-types.deep"
+      ],
+      "done_at": "2026-10-06T17:53:23+08:00"
     },
     "source/06/6-11 nil的channel发送和接收数据会发生什么？-迅捷文字转语音-1790861394574zh.txt": {
       "id": "6-11",
@@ -5182,10 +5190,11 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [],
+      "done_at": "2026-10-06T17:53:23+08:00"
     },
     "source/18/18-30 DMA是如何工作的？-迅捷文字转语音-1790931208122zh.txt": {
       "id": "18-30",
@@ -5829,7 +5838,7 @@
     }
   },
   "next_num": 1,
-  "waves": 20,
-  "updated": "2026-10-06T17:49:52+08:00",
+  "waves": 21,
+  "updated": "2026-10-06T17:53:23+08:00",
   "consec_fail": 0
 }
