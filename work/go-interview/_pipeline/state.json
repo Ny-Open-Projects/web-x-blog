@@ -2800,10 +2800,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1218-index-io-conditions",
+        "1218-hash-bst-limits",
+        "1218-avl-btree",
+        "1218-bplus-vs-btree",
+        "1218-ahi-three-features",
+        "1218-bplus-tree.deep"
+      ],
+      "done_at": "2026-10-06T20:25:10+08:00"
     },
     "source/12/12-19 Mysql索引为什么是最左前缀原则？-迅捷文字转语音-1790921692429zh.txt": {
       "id": "12-19",
@@ -3291,10 +3299,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1244-type-overview",
+        "1244-const-system",
+        "1244-eqref-ref",
+        "1244-range-index-all",
+        "1244-special-types",
+        "1244-explain-type.deep"
+      ],
+      "done_at": "2026-10-06T20:25:10+08:00"
     },
     "source/12/12-45 explain详解（三）-迅捷文字转语音-1790923695420zh.txt": {
       "id": "12-45",
@@ -6046,7 +6062,7 @@
     }
   },
   "next_num": 1,
-  "waves": 34,
-  "updated": "2026-10-06T20:18:29+08:00",
+  "waves": 35,
+  "updated": "2026-10-06T20:25:10+08:00",
   "consec_fail": 0
 }

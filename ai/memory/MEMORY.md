@@ -339,7 +339,15 @@
 - **文件名映射复核**：12-34→`1234-`(4位)、4-11→`411-`(3位，chapter<10 课次11 补零为 411)。**铁律复核：chapter<10 单元课次补零（4-11→411），chapter≥10 原章号拼接（12-34→1234）。**
 - `validate.py --strict` 独立复核 **378/378 PASS、0 error、warn 37**（warn 为历史 json/bash 块无害告警，本批无新增）。无 R1 剔除。
 
-**当前进度（批次33收口）**：369 任务 / **66 done / 303 pending / 378 卡落盘**（XL 档 66/114，约 58%）。已做清单（续批次32）：+4-4/12-36/19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9/13-7/12-11/17-17/15-2/18-14/12-35/12-34/4-11。剩余：XL 48 篇（66/114）→ 之后 L 124 / M 100 / S 31。
+**批次 34（2026-10-06）**：12-44 explain详解（二）（6 卡，1244-*）+ 12-18 为什么 MySQL InnoDB 采用 B+ 树作为索引（6 卡，1218-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主（B+树/InnoDB/EXPLAIN/索引等音译崩坏）。
+- **12-44 崩坏词归一**：slect/selack/sarack→SELECT、starttype/saracktype→select_type、ecoraf/ecalrap/equalrap→eq_ref、raf→ref、润景→range、snap新→SELECT、secrettable→SHOW TABLE、fourtest→fulltext、raporlong→ref_or_null、索影→索引、英LDB→InnoDB、mysam→MyISAM、o→ALL。
+- **12-44 事实核校**：① type 列谱系 system>const>eq_ref>ref>range>index>ALL（越左扫描越少）——正确；② system 需表仅 1 行且统计精确引擎(MyISAM/Memory)、const 主键/唯一索引等值常量——正确；③ eq_ref 被驱动表唯一键等值(≤1行)、ref 普通索引等值(多行)、子查询优化器改写 join 使条件变常量——正确；④ range 索引范围、index 二级索引全扫(常因覆盖)、ALL 全表扫、fulltext 全文、possible_keys 候选/key 实际且非越多越好——正确；⑤ ref_or_null(ref+NULL行)、index_merge(union/intersection/sort-union)、unique_subquery(唯一键关联免全扫)——正确。
+- **12-18 崩坏词归一**：b加树/b加数/b加速→B+树、b树/b数→B树、买索构/买索→MySQL、英LDB/英额DB/英诺DB/英乐DB/应乐DB/依乐DV/inoDB/英DB→InnoDB、哈希/哈西→哈希、乐indbadaptive哈希index→innodb_adaptive_hash_index、巴菲铺→Buffer Pool、双写缓冲/双写缓冲区→doublewrite、mysam/mysam→MyISAM、NDB→NDB、O方/O镂文倒勒文→O(n)/O(log n)。
+- **12-18 事实核校**：① 索引存磁盘、IO 为瓶颈、两大设计条件(少IO+支持范围查)——正确；② 哈希 O(1) 但无范围/排序、数组二分插入搬移 IO 大、二叉搜索树递增退化成链且树高失控——正确；③ AVL 高度差≤1 自动平衡防退化但树高仍随节点增、B 树多叉降高但非叶存数据致范围查中序遍历多 IO——正确；④ B+ 树非叶只存索引→更矮胖少 IO、叶子双向链表→范围查顺序扫、16KB 页、四大优势(性能稳/宜范围/磁盘友好/局部性)——正确；⑤ 哈希不支持范围/排序/部分列、AHI 自动建仅内存仅等值、默认开 8 分区最多 512、InnoDB 三大特性(AHI/Buffer Pool/双写缓冲)——正确。
+- **文件名映射复核**：12-44→`1244-`(4位)、12-18→`1218-`(4位)。**铁律复核：chapter≥10 原章号直接拼接、单课次不补零（12-44→1244、12-18→1218）**。
+- `validate.py --strict` 独立复核 **390/390 PASS、0 error、warn 39**（warn 含本批 1218 卡 `text` 块「未见可运行语言」无害告警 + 历史 json/bash 块，均非 error）。无 R1 剔除。
+
+**当前进度（批次34收口）**：369 任务 / **68 done / 301 pending / 390 卡落盘**（XL 档 68/114，约 60%）。已做清单（续批次33）：+4-4/12-36/19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9/13-7/12-11/17-17/15-2/18-14/12-35/12-34/4-11/12-44/12-18。剩余：XL 46 篇（68/114）→ 之后 L 124 / M 100 / S 31。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
