@@ -298,7 +298,15 @@
 - **warn 说明（lead 必读）**：本批 5 张 198 主卡各 1 条无害 warn「未见可运行语言的代码块」——因这些卡用 ```` ```json ```` 配置块（JSON 不计入"可运行语言"），而 1314 卡用 ```` ```go ```` 故 0 warn。与历史 708 卡基线同类，非 error，不阻塞。
 - `validate.py --strict` 独立复核 **318/318 PASS、0 error、warn 21**（warn 为历史 708 卡 + 本批 5 张 json 配置块告警，均无害）。无 R1 剔除。
 
-**当前进度（批次28收口）**：369 任务 / **56 done / 313 pending / 318 卡落盘**（XL 档 56/114，约 49%）。已做清单（续批次27）：+19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9。剩余：XL 58 篇（56/114）→ 之后 L 124 / M 100 / S 31。
+**批次 29（2026-10-06）**：4-4 Go 包管理的方式有哪些（一）（6 卡，404-*）+ 12-36 彻底搞懂 MySQL 中的锁（五）（6 卡，1236-*）。两份源稿**事实基本正确**，纠错以 ASR/机翻崩坏术语归一为主 + 关键事实补正。
+- **4-4 崩坏词归一**：勾那/购→Go、Golang 音译为 golwn/godown、gopass→GOPATH、goroot→GOROOT、goinv/goENA→go env、basicprofile→bash_profile、goget→go get、goin/goingstore/goinschool→go install、gobuilill→go build、gorun→go run、PKD→pkg、-d 参数保留、go第一批→godep、glade→glide、gorender/点derder→govendor、go十五renderexperiment→GO15VENDOREXPERIMENT、render→vendor、docork→Docker、括OS→K8s、gomodels→Go Modules、go点mode→go.mod、构点sam→go.sum。
+- **4-4 事实核校/补正**：① GOPATH 模式无版本控制、GOPATH≠GOROOT、目录结构 src/pkg/bin、工程须放 src 下——正确；② go get=下载+install(-d 只下)、go install 产物路径(main→bin/普通→pkg)、go build 不进 bin、go run 仅 main、main 包判定——正确；③ godep workspace 快照/glide yaml+lock/govendor vendor 目录(1.5 引入/1.6 默认/1.7 取消 GO15VENDOREXPERIMENT)及搜索顺序与取舍——正确；④ Go Modules 1.11(2018-08-24)推出、1.13 默认、GO111MODULE 三态、go.mod 声明/go.sum 哈希校验——正确。⑤ **源稿对「Go 1.8 起 GOPATH 默认值」口播含矛盾（先说默认空后又说给默认目录），已按官方事实修正为「Go 1.8 起有默认 $HOME/go」**。
+- **12-36 崩坏词归一**：零件锁→临键锁(next-key lock)、间隙锁正确保留、意向组→意向锁、意向排发组→意向排他锁(IX)、协索/解索→写锁(X)、读组→读锁(S)、insertintention→Insert Intention(插入意向锁)、终态/中单→终端、回本→回滚、schemlDBTRX→information_schema.innodb_trx、最大虚拟行→supremum；MySQL 音译为崩坏词（本卡统一为 MySQL）。
+- **12-36 事实核校/补正**：① UPDATE 存储不变原地更新加 S 锁、变化走 delete+insert、B+ 树 S 锁、insert 隐式锁保护——正确；② 唯一索引等值存在→记录锁(REC_NOT_GAP，临键锁退化)，退化因主键唯一杜绝幻读——正确；③ 唯一索引等值不存在→IX+间隙锁，锁前面最近间隙、开区间不含边界、插隙被阻塞——正确；④ 范围查询→IX+临键锁，越界锁 supremum、锁整个间隙非查询区间、临键锁左开右闭/间隙锁全开——正确；⑤ 间隙锁不互斥(X/S gap 可共存)、整段锁定、Insert Intention 等待、data_locks 观测——正确。
+- **⚠️ 本批踩坑（lead 必读）**：初写 6 张 4-4 卡用前缀 `44-`（仅 2 位），触发 validate 规则 `^\d{3,4}-` **文件名 error（6 卡全 FAIL）**。修正：`4-4` 须映射为 `404-`（3 位，沿用 `4-XX→40X` 约定：405/412/415/419 同例），深卡同步改名 `404-package-management.deep.md`，并修正 404-package-history 内交叉引用 `44-go-modules→404-go-modules`。复跑 **330/330 PASS、0 error**。**铁律：源编号 `章-课次` 映射为文件名前缀时，chapter<10 的单元课次须补零成 3 位（4-4→404、4-5→405），不可漏补零成 2 位。**
+- `validate.py --strict` 独立复核 **330/330 PASS、0 error、warn 26**（warn 为历史 708 卡 + 198 的 json 块 + 404 的 bash 块告警，均无害）。无 R1 剔除。
+
+**当前进度（批次29收口）**：369 任务 / **58 done / 311 pending / 330 卡落盘**（XL 档 58/114，约 51%）。已做清单（续批次28）：+4-4/12-36/19-8/13-14/12-3/12-33/13-8/4-19/6-9/12-9。剩余：XL 56 篇（58/114）→ 之后 L 124 / M 100 / S 31。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。

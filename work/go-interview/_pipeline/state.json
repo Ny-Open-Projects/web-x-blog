@@ -299,10 +299,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "404-gopath-mode",
+        "404-go-commands",
+        "404-community-tools",
+        "404-go-modules",
+        "404-package-history",
+        "404-package-management.deep"
+      ],
+      "done_at": "2026-10-06T19:00:44+08:00"
     },
     "source/04/4-5 Go包管理的方式有哪些？（二）-迅捷文字转语音-1790755593326zh.txt": {
       "id": "4-5",
@@ -3100,10 +3108,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1236-update-locking",
+        "1236-unique-equality-exists",
+        "1236-unique-equality-notexists",
+        "1236-range-nextkey-lock",
+        "1236-gap-lock-mechanics",
+        "1236-mysql-locks-5.deep"
+      ],
+      "done_at": "2026-10-06T19:00:45+08:00"
     },
     "source/12/12-37 彻底搞懂MySQL中的锁（六）-迅捷文字转语音-1790923224824zh.txt": {
       "id": "12-37",
@@ -5966,7 +5982,7 @@
     }
   },
   "next_num": 1,
-  "waves": 29,
-  "updated": "2026-10-06T18:55:53+08:00",
+  "waves": 30,
+  "updated": "2026-10-06T19:00:45+08:00",
   "consec_fail": 0
 }
