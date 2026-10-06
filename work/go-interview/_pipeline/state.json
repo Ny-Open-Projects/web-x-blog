@@ -3122,10 +3122,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1230-dirty-read.md",
+        "1230-nonrepeatable-vs-phantom.md",
+        "1230-isolation-matrix.md",
+        "1230-serializable-cost.md",
+        "1230-isolation-demo-practice.md",
+        "1230-isolation-levels.deep.md"
+      ],
+      "done_at": "2026-10-07T03:41:59+08:00"
     },
     "source/12/12-31 事务的隔离级别有哪些？（三）-迅捷文字转语音-1790922670737zh.txt": {
       "id": "12-31",
@@ -3743,10 +3751,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1262-master-slave-overview.md",
+        "1262-full-sync-flow.md",
+        "1262-psync-runid.md",
+        "1262-repl-backlog.md",
+        "1262-repl-offset-consistency.md",
+        "1262-replication.deep.md"
+      ],
+      "done_at": "2026-10-07T03:41:59+08:00"
     },
     "source/12/12-63 Redis 如何实现服务高可用？（二）-迅捷文字转语音-1790924538489zh.txt": {
       "id": "12-63",
@@ -6238,7 +6254,7 @@
     }
   },
   "next_num": 1,
-  "waves": 46,
-  "updated": "2026-10-07T03:22:58+08:00",
+  "waves": 47,
+  "updated": "2026-10-07T03:41:59+08:00",
   "consec_fail": 0
 }
