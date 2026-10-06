@@ -1895,10 +1895,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1011-atomic-pointer-intro",
+        "1011-atomic-pointer-cas",
+        "1011-atomic-pointer-vs-value",
+        "1011-atomic-pointer-vs-lock",
+        "1011-unsafe-pointer-history",
+        "1011-atomic-pointer.deep"
+      ],
+      "done_at": "2026-10-06T12:34:01+08:00"
     },
     "source/10/10-12 自旋锁是怎么实现的？-迅捷文字转语音-1790918500958zh.txt": {
       "id": "10-12",
@@ -2076,10 +2084,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1021-close-channel-traits",
+        "1021-close-exit-patterns",
+        "1021-safe-close-once",
+        "1021-close-fanout",
+        "1021-close-multi-sender",
+        "1021-close-channel.deep"
+      ],
+      "done_at": "2026-10-06T12:34:01+08:00"
     },
     "source/10/10-22 什么是协程泄露？怎么预防？-迅捷文字转语音-1790919177893zh.txt": {
       "id": "10-22",
@@ -5699,7 +5715,7 @@
     }
   },
   "next_num": 1,
-  "waves": 11,
-  "updated": "2026-10-06T12:07:28+08:00",
+  "waves": 12,
+  "updated": "2026-10-06T12:34:01+08:00",
   "consec_fail": 0
 }

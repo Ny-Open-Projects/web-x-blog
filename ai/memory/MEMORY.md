@@ -234,6 +234,7 @@
 **批次 9（2026-10-06）**：4-10 获取项目根目录（5 主卡+1 deep，410-*）+ 10-19 并发编程误区（一）（5 主卡+1 deep，1019-*）。纠正 2 处：1019-data-race 把"跨请求改同一行数据"误称 data race（实为资源争用，需 DB 事务/锁，'-race' 检测不到）；1019-channel-leak 称函数返回后 goroutine 自动回收（实为阻塞在 channel 的 goroutine 不随外层函数返回结束，须显式退出）。`validate.py --strict` 独立复核 **108/108 PASS、0 error**。
   ⚠️ **黑名单模板隐患（lead 必读）**：`validate.py` 黑名单（line 27）含 `构语言`/`护士锁`/`购语言` 等机翻词；lead 给 worker 的"固定声明行"若写"如 构语言→Go、护士锁→互斥锁"会触发规则 11 error。worker 已用 `利用→nil`/`勾浪→Go` 等非黑名单词改写。**后续派单的固定声明行一律改用安全示例**：`利用→nil`、`勾浪→Go`、`裸体→得体`、`首时→守时`（勾浪不在黑名单）。
 **批次 10（2026-10-06）**：6-7 defer 踩坑（5 主卡+1 deep，607-*）+ 7-11 ants 管理 goroutine（二）（5 主卡+1 deep，711-*）。纠正 1 处：607-defer-loop-var 原文以旧版 ≤1.21 行为描述 defer 闭包捕获循环变量"输出三个三"，未提 Go1.22 per-iteration scope 翻转。声明行已统一改用非黑名单安全词（利用→nil/勾浪→Go/首时→守时）。`validate.py --strict` 独立复核 **120/120 PASS、0 error**。
+**批次 11（2026-10-06）**：10-21 优雅关闭通道（5 主卡+1 deep，1021-*）+ 10-11 指针值原子操作（5 主卡+1 deep，1011-*）。10-11 与批次 6 的 10-5 互补（本批聚焦 `atomic.Pointer[T]`，go1.19 引入，补历史 `unsafe.Pointer` 写法的版本边界；并补 `atomic.Value.Store` 类型须恒定否则 panic 的硬约束）。`validate.py --strict` 独立复核 **132/132 PASS、0 error**。
 
 **关键纪律（接手者必读）**：
 - course11 与 blog 三课（8/9/10）是**两套流水线**：blog 用 `ai/prompts/blog_prompt.md`，course11 用 `mt-to-interview-cards/_pipeline/SPEC.md`（主卡 ≤400 汉字 / v4 七段式 / 追问链 L1~L5 / 版本栅栏 / 强制 `## ⚠️ 原文纠错` 节）。
