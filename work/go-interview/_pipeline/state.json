@@ -1417,10 +1417,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "803-compile-overview",
+        "803-lexical-analysis",
+        "803-syntax-analysis",
+        "803-type-check",
+        "803-codegen-ssa",
+        "803-compile.deep"
+      ],
+      "done_at": "2026-10-06T18:14:01+08:00"
     },
     "source/08/8-4 Go编译过程是怎样的？（二）-迅捷文字转语音-1790896573930zh.txt": {
       "id": "8-4",
@@ -3531,10 +3539,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1208-two-phase-commit-recap",
+        "1208-master-slave-replication",
+        "1208-replication-delay",
+        "1208-sync-modes",
+        "1208-semi-sync-config",
+        "1208-binlog.deep"
+      ],
+      "done_at": "2026-10-06T18:14:02+08:00"
     },
     "source/12/12-9 为什么mysql8.0移除了查询缓存（一）-迅捷文字转语音-1790921174051zh.txt": {
       "id": "12-9",
@@ -5838,7 +5854,7 @@
     }
   },
   "next_num": 1,
-  "waves": 21,
-  "updated": "2026-10-06T17:53:23+08:00",
+  "waves": 22,
+  "updated": "2026-10-06T18:14:02+08:00",
   "consec_fail": 0
 }
