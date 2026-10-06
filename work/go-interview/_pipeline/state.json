@@ -4320,10 +4320,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "162-singleton",
+        "162-factory",
+        "162-builder",
+        "162-adapter",
+        "162-decorator",
+        "162-design-patterns.deep"
+      ],
+      "done_at": "2026-10-06T12:49:06+08:00"
     },
     "source/16/16-3 设计模式有哪些？（二）-迅捷文字转语音-1790928124930zh.txt": {
       "id": "16-3",
@@ -4335,10 +4343,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "163-strategy",
+        "163-observer",
+        "163-chain-of-responsibility",
+        "163-template-method",
+        "163-iterator",
+        "163-design-patterns.deep"
+      ],
+      "done_at": "2026-10-06T12:49:06+08:00"
     },
     "source/16/16-4 分别使用懒汉式和饿汉式实现单例模式-迅捷文字转语音-1790928131839zh.txt": {
       "id": "16-4",
@@ -5715,7 +5731,7 @@
     }
   },
   "next_num": 1,
-  "waves": 12,
-  "updated": "2026-10-06T12:34:01+08:00",
+  "waves": 13,
+  "updated": "2026-10-06T12:49:06+08:00",
   "consec_fail": 0
 }
