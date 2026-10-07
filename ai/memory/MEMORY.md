@@ -651,3 +651,19 @@
 1. **MySQL 锁系列必须先查已覆盖章节**（1230 隔离级别 / 1231 MVCC / 1232 锁概述 / 1233 全局锁·MDL·表锁 / 1234 auto-inc / 1235 意向锁·临键锁 / 1236 间隙锁机制 / 1237 隐式锁·等值加锁·Supremum / 1238 范围加锁 / 1240 排查优化），新源一律先 ls 再定角度。
 2. **「全表行锁 ≠ 表锁」是高频加分点**：整表每条记录各加行锁，非单个表级锁。
 3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
+
+## 2026-10-08 00:17（第十次触发 · wave 58）—— 新产 12 张卡（TCP 协议 + Go String 底层存储）
+
+**结论**：闸门全过（reclaim 无 stale、无 pause、running=0、pending=257）。源 18-40（彻底理解 TCP）→ 6 张 `1840-*`；源 9-3（String 底层存储结构）→ 6 张 `903-*`。全部新产，无撞重。
+- 门禁 **654/654 PASS、0 error、warn 51**（12 张卡 0 新增 warn；全用 go 块保底）。
+- 提交：12 卡 + state.json + metrics.jsonl；source/ 命中 0；未 push。
+- 角度错开：已有 `508-string-immutable`（不可变语义），本批 903 主打**底层结构 + Sizeof + len 字节数 + UTF-8/码点 + rune 遍历 + data 指针实验**，不重复立题。
+- 崩坏词：TCP、源端口(原单口号)、序列号、确认应答号、数据偏移(首部)、保留字段、URG/ACK(SK)/PSH(剖析flag)/RST(RSP/resetflag)/SYN(SYM/SYNC)/FIN、紧急指针、窗口大小、校验和(校验核)、选项字段、MSS(最大豹纹段长度)、窗口扩大因子(比口扩大因子)、三次握手/四次挥手、滑动窗口、拥塞控制(拥速控制)、全双工、乱序(烂序)、发布订阅(发布电阅)、ASCII(阿斯马)、终止会话(终止绘话)、Go(构语言)、len(认识/似字字)、Sizeof(sizeoff/unsafesizeof)、rune(入文/run)、Unicode(unico/uniode/unque/unid克/unique/undo)、UTF-8(UTF八/struTF八)、UTF-16/32、码点(麻点)、统一码联盟、uintptr(uintPDR/uin的PDR)、int(lint)、goroutine(购入进)、反射、不可变(不可面性)——一律归一，纠错节泛述未写崩坏词。
+- 文件名映射：1840-(chapter18≥10 直拼)、903-(chapter9<10 补零成 3 位) 正确。
+- **⚠️ 源稿内部矛盾已裁决**：9-3 前面说 sizeof 是「八」，后面说「十六」并给出 8+8 推导。**正确值为 16**（64 位 string = data uintptr 8 + len int 8），已按 16 写入并在纠错节注明原文口误。
+- 事实核校：TCP 面向连接/可靠/字节流；七特性（可靠四手段、三次握手/四次挥手、滑动窗口流控、拥塞控制降速重传、有序、全双工、易实现）；字节流三推论（被分组、无消息边界、按序交付+去重）；首部 20~60 字节、序列号 32 位解决乱序、确认号 32 位解决丢包、数据偏移 4 比特取值 5~15 单位 4 字节、窗口/校验和 16 位、选项需 4 字节对齐；六标志位语义、ACK 除首次 SYN 外必须置 1、RST 三种场景；Go string 为只读字节切片、UTF-8、len 为字节数、汉字 3 字节、rune 为码点、range 的 i 为字节下标——均与 RFC/Go 规范一致。
+
+**下次接手必读**：
+1. **TCP 系列刚起步**（仅 1840-*），后续 18-xx 网络源仍可继续，但要先 ls target/18* 核对（已有 181 centos/linux、1814 inode、1818 raid）。
+2. **源稿自相矛盾时以推导为准**：如 sizeof 8 vs 16，取有完整推导的 16，并在纠错节标注原文口误。
+3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`

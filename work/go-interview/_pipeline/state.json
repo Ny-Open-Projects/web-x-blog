@@ -1952,10 +1952,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "903-string-sizeof",
+        "903-len-is-bytes",
+        "903-unicode-utf8-codepoint",
+        "903-rune-iteration",
+        "903-string-data-pointer",
+        "903-string-storage.deep"
+      ],
+      "done_at": "2026-10-08T00:17:32+08:00"
     },
     "source/09/9-4 不同String拼接方式的性能分析-迅捷文字转语音-1790914114342zh.txt": {
       "id": "9-4",
@@ -5924,10 +5932,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1840-tcp-protocol-overview",
+        "1840-tcp-features",
+        "1840-byte-stream",
+        "1840-tcp-header",
+        "1840-tcp-flags",
+        "1840-tcp-protocol.deep"
+      ],
+      "done_at": "2026-10-08T00:17:32+08:00"
     },
     "source/18/18-41 TCP和UDP有什么区别？-迅捷文字转语音-1790931841884zh.txt": {
       "id": "18-41",
@@ -6398,7 +6414,7 @@
     }
   },
   "next_num": 1,
-  "waves": 57,
-  "updated": "2026-10-08T00:10:29+08:00",
+  "waves": 58,
+  "updated": "2026-10-08T00:17:32+08:00",
   "consec_fail": 0
 }
