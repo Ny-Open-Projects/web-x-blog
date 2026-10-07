@@ -569,3 +569,17 @@
 1. **go 块保底 warn**：Kafka/MQ 类卡用 go（sarama 风格）块，避免 bash/yaml 触发规则 14 warn；本批 12 张全带 go 块，warn 保持 51 不增。
 2. **堆积极限口答链**：生产>消费→lag 涨→超 retention 丢；六因（消费慢/重平衡/洪峰/集群/分区/策略）对六策（扩容/并行/限流/死信/隔离）。
 3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
+
+## 2026-10-07 10:41~10:46（第五次触发 · wave 53）—— 新产 12 张卡（MySQL 锁 + Go HTTP 表单）
+
+**结论**：闸门全过（reclaim 无 stale、无 pause、running=0、pending=267）。源 12-32（MySQL 锁一）→ 6 张 `1232-*`；源 7-3（Go HTTP 表单处理）→ 6 张 `703-*`。全部新产，无撞重。
+- 门禁 **594/594 PASS、0 error、warn 51**（12 张卡 0 新增 warn；MySQL 卡用 sql 块、Go 卡用 go 块保底）。
+- 提交：12 卡 + state.json + metrics.jsonl；source/ 命中 0；未 push。
+- 崩坏词：MySQL(bumysql/英ODB)、事务(事物)、脏读(脏节/脏起/脏毒)、幻读(换读)、串行化(串新化)、select(slack)、MVCC(MOVCC)、索引(索影)；Go(net/http→let点HTTP、Handler→loanhanddler、ParseFiles→perstplile、FormValue→requestformvalue、username→usename、URL→UIL)——一律归一，纠错节泛述未写崩坏词。
+- 文件名映射：1232-(chapter12≥10 直拼)、703-(chapter7<10 补零) 正确。
+- 事实核校：InnoDB 默认行锁+MVCC 读写不冲突、readview RC 每次/RR 首次复用、串行化读写都加锁+意向锁 IS/IX、FormValue 含 URL 参数而 PostFormValue 仅表单体、Form/PostForm 惰性解析——均与官方/源码一致。
+
+**下次接手必读**：
+1. **MySQL 锁卡用 sql 块**：避免规则 14 warn；本批 5 张主卡全带 sql 块，warn 保持 51。
+2. **事物=事务 是最高频崩坏**：凡「事物」一律改「事务」；脏节/换读/串新化 对应 脏读/幻读/串行化，不可照抄。
+3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
