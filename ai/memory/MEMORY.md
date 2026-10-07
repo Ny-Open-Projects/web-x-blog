@@ -706,3 +706,22 @@
 - 撞题检查手法（可复用）：`ls target/<prefix>-*` 查文件名撞重后，**还要 `ls target/ | grep -iE <关键词>` 查内容撞题**，只读首 40 行即可判定覆盖角度。
 - 门禁：674/674 PASS，error 0，warn **51（未增加）**——保持不新增 warn 的基线。
 - 累计：116 篇 done（本批）/ 674 张卡。
+
+## wave 61（2026-10-08 凌晨，L 级，8 张）
+
+- 源：`source/12/12-39`（彻底搞懂 MySQL 中的锁（八），L 级）→ `1239-`；`source/12/12-64`（Redis 如何实现服务高可用？（三），L 级）→ `1264-`。
+- 产出：
+  - `1239-select-star-vs-covering.md`（SELECT name 走覆盖索引 vs SELECT * 改扫聚簇索引 → 加锁对象完全不同）
+  - `1239-unique-equality-degenerate.md`（唯一/普通索引加锁退化三分支；"最大值"是相对当前扫描索引列，非主键最大值）
+  - `1239-statement-lock-matrix.md`（五类语句锁矩阵：MVCC 不加锁 / IS+S / IX+X / IX+X / IX+插入意向锁）
+  - `1239-innodb-lock-rules.deep.md`（行锁本质=加锁对象是索引、三种锁及隔离级别、死锁三成因与排查四步）
+  - `1264-tendis-overview.md`（Tendis 定位/六特性/适用与不适用场景）
+  - `1264-lsm-tree-basics.md`（memtable=skiplist → 不可变 SSTable、追加写、tombstone、空间放大+读放大）
+  - `1264-lsm-compaction.md`（归并三步、写放大、key 频繁变化为何是禁区）
+  - `1264-tendis-architecture.deep.md`（gossip 去中心化 + CRC16%16384 + MOVE、binlog 存 RocksDB、全量/增量两阶段）
+- 撞题规避：1230~1238 已密集覆盖锁 → 1239 只取「选树差异 / 退化分支 / 语句矩阵 / 死锁排查流程」四个未覆盖角度，不重复临键锁概念与类型转换锁全表（后者在 1238）。
+- 原文纠错（本波两处硬错误，已写进纠错节）：
+  - 12-39 第 47 段称 DELETE "加表级 IS 锁" → **应为 IX**；第 49 段"IS 锁，也就是意向排他锁"自相矛盾 → **IX**。
+  - 12-64 第 38 段称 SSTable "有序的可变数据文件" → **应为不可变**（原文后句自己说不可更改）。
+  - 12-64 末尾口述称"介绍了 Redis 主从架构"，**本节实际讲 Tendis**，属口误。
+- 门禁：682/682 PASS，error 0，warn **51（未增加）**。累计 118 篇 done / 682 张卡。
