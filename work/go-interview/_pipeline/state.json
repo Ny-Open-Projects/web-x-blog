@@ -1095,10 +1095,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "715-viper-basics",
+        "715-dynamic-watch",
+        "715-mapstructure-tag",
+        "715-config-safety",
+        "715-config-design-tips",
+        "715-viper.deep"
+      ],
+      "done_at": "2026-10-07T10:30:40+08:00"
     },
     "source/07/7-2 net／http启动http server的执行过程是怎样的？-迅捷文字转语音-1790864800045zh.txt": {
       "id": "7-2",
@@ -4359,10 +4367,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1419-backlog-impact",
+        "1419-log-cleanup-policy",
+        "1419-backlog-causes",
+        "1419-backlog-solutions",
+        "1419-partition-strategy",
+        "1419-kafka-backlog.deep"
+      ],
+      "done_at": "2026-10-07T10:30:40+08:00"
     },
     "source/14/14-2 怎么回答消息中间类型的面试题？-迅捷文字转语音-1790925801895zh.txt": {
       "id": "14-2",
@@ -6302,7 +6318,7 @@
     }
   },
   "next_num": 1,
-  "waves": 51,
-  "updated": "2026-10-07T10:12:50+08:00",
+  "waves": 52,
+  "updated": "2026-10-07T10:30:40+08:00",
   "consec_fail": 0
 }

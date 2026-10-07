@@ -555,3 +555,17 @@
 1. **reclaim-stale.py 有 bug 已修**：原 `reset <tid>` 缺 `--task`，回收仅打印不生效，致后续会话 running>0 永久避让。现已改为 `reset --task <tid>`，每波开工前回收有效。
 2. **死会话残留卡判定**：若 `queue next` 派到的源在 target/ 已有 6 张卡（5 主+1 深），说明是上一死会话产物，只需修门禁 error 后 `done`，勿重复产卡（防库内自引用）。
 3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
+
+## 2026-10-07 10:24~10:31（第五次触发 · wave 52）—— 新产 12 张卡（Viper + Kafka 堆积）
+
+**结论**：闸门全过（reclaim 无 stale、无 pause、running=0、pending=269）。源 7-15（Viper 动态监听）→ 6 张 `715-*`；源 14-19（Kafka 消息堆积）→ 6 张 `1419-*`。全部新产，无撞重（target/ 无 715-/1419- 前缀）。
+- 门禁 **582/582 PASS、0 error、warn 51**（12 张卡 0 新增 warn，go 块保底）。
+- 提交：12 卡 + state.json + metrics.jsonl；source/ 命中 0；未 push。
+- 崩坏词：Viper(weaper/vippo)、Kafka(卡夫卡/卡布卡)、broker(broke单)、重试(城市)、死信队列(死性队列)、mapstructure(macstructure) 等一律归一为规范术语，纠错节泛述未写崩坏词。
+- 文件名映射：715-(chapter7<10 补零)、1419-(chapter14≥10 直拼) 正确。
+- 事实核校：Viper 四步加载/WatchConfig+OnConfigChange/mapstructure 下划线+冒号空格坑；Kafka retention 三策略(ms>minutes>hours)、cleanup.policy 默认 delete、分区≈broker 整数倍、死信隔离大消息——均与官方一致。
+
+**下次接手必读**：
+1. **go 块保底 warn**：Kafka/MQ 类卡用 go（sarama 风格）块，避免 bash/yaml 触发规则 14 warn；本批 12 张全带 go 块，warn 保持 51 不增。
+2. **堆积极限口答链**：生产>消费→lag 涨→超 retention 丢；六因（消费慢/重平衡/洪峰/集群/分区/策略）对六策（扩容/并行/限流/死信/隔离）。
+3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
