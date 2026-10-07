@@ -2002,10 +2002,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "905-string-assign-share",
+        "905-string-slice-leak",
+        "905-string-slice-fixes",
+        "905-string-memory-leak.deep"
+      ],
+      "done_at": "2026-10-08T07:50:00+08:00"
     },
     "source/09/9-6 字符串转成 byte 切片，会发生内存拷贝吗？-迅捷文字转语音-1790916155137zh.txt": {
       "id": "9-6",
@@ -4579,10 +4585,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "144-seqwrite-pagecache",
+        "144-zerocopy",
+        "144-batch-compression-scale",
+        "144-kafka-throughput.deep"
+      ],
+      "done_at": "2026-10-08T07:50:00+08:00"
     },
     "source/14/14-5 Kafka为什么使用page cache管理缓存数据而不是自己管理？-迅捷文字转语音-1790926008661zh.txt": {
       "id": "14-5",
@@ -6478,7 +6490,7 @@
     }
   },
   "next_num": 1,
-  "waves": 63,
-  "updated": "2026-10-08T07:04:14+08:00",
+  "waves": 64,
+  "updated": "2026-10-08T07:50:00+08:00",
   "consec_fail": 0
 }

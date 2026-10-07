@@ -763,3 +763,24 @@
   - 12-21 称"OR 两列可以是联合索引"需谨慎：联合索引非最左列多走**全索引扫描**，`index_merge` union 需要**两个独立单列索引**。
   - 9-22 称 dirty 写入用"自旋锁 + CAS"，**实际是互斥锁 mu 保护 dirty，CAS 用于 entry 状态变更**。
 - 门禁：698/698 PASS，error 0，warn **51**（本波 8 张零新增 warn，纠错节均压在 200 字内）。累计 122 篇 done / 698 张卡。
+
+## wave 64（2026-10-08 早上，L 级，8 张）
+
+- 源：`source/14/14-4`（kafka 为什么会有很高的吞吐性能？，L 级）→ `144-`；`source/09/9-5`（字符串切片导致的内存泄露分析，L 级）→ `905-`。
+- 产出：
+  - `144-seqwrite-pagecache.md`（顺序 IO 省寻址：SSD 几倍 / 机械盘几十倍；页缓存三条行为 + 命中率高 + 免 JVM 堆管理）
+  - `144-zerocopy.md`（三步复制→两步、页缓存直送 socket 缓冲区、DMA 免 CPU 参与）
+  - `144-batch-compression-scale.md`（攒批 size/time 双阈值、broker 端不解批、整批压缩、分区并行）
+  - `144-kafka-throughput.deep.md`（四特性 + 六概念 + 六原因 + 取舍表 + 答题框架）
+  - `905-string-assign-share.md`（赋值/引用赋值/传参均不拷贝共享地址，置空也不释放）
+  - `905-string-slice-leak.md`（截取共享起始地址钉住整块；Repeat(s,1) 原样返回 vs Repeat(s,>1) Builder 扩容）
+  - `905-string-slice-fixes.md`（三种切断写法 + strings.Clone 官方答案）
+  - `905-string-memory-leak.deep.md`（泄漏链条 + "地址变没变"唯一判据 + 生命周期决策）
+- 撞题规避：146-* 已讲 topic→分区→日志段存储模型、147-* 已讲分区目的与写入链路 → 144 专攻**六大吞吐原因**（均按"存储层/传输层/网络+架构层"重新分块）；1111-slice-slice-memory-leak 讲的是**切片**版本 → 905 是**字符串**版本，互补不重复。
+- 原文纠错（本波）：原文把批量机制写作"VP 机制"，**标准术语是 batch**，对应 `batch.size` / `linger.ms`（音译残词）。
+- 新增写法（可复用）：这两吃了 Gen-J 版本红利——**Go 1.18+ `strings.Clone`** 是切断字符串引用的官方答案，**Go 1.20+ `unsafe.StringData`** 取代已弃用的 `reflect.StringHeader`，均在纠错节补上。
+- **踩坑（重要，务必记住）**：写 `905-string-memory-leak.deep.md` 时我在"原文锚点"行里**输出了一段乱码**（sympath/ánn/résult 等混种字符），自查时才被发现。
+  - 对策：深卡的原文锚点很长，**写完后必须回读一次**，或干脆用脚本落盘后 grep 非中日常字符。
+  - 自查脚本（已验证可用）：按 Unicode 码位白名单扫——放行 ASCII / CJK(0x4e00-0x9fff) / CJK标点(0x3000-0x303f) / 全角(0xff00-0xffef) / emoji / 通用标点，其余即报。
+
+- 门禁：706/706 PASS，error 0，warn **51**（144-seqwrite-pagecache 初跑纠错节 263 字触发 warn，压缩后回归）。累计 124 篇 done / 706 张卡。
