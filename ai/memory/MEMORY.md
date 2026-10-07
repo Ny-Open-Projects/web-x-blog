@@ -744,3 +744,22 @@
   - 复验手法：`python3 _pipeline/validate.py --file target/<卡>.md` 可直接看单卡的 warn 明细。
 - 原文纠错（本波）：12-12 段 14"八 k 页写四个磁盘页"与 16KB/4KB 矛盾（口误）；段 34 把 undo 的"逻辑日志+逆向操作"说成 redo；`innodb_change_buffering` 默认值原文说成"不缓冲"，**实际默认 all**。
 - 门禁：690/690 PASS，error 0，warn **51**。累计 120 篇 done / 690 张卡。
+
+## wave 63（2026-10-08 凌晨，L 级，8 张）
+
+- 源：`source/12/12-21`（哪些情况下会导致索引失效？，L 级）→ `1221-`；`source/09/9-22`（sync.Map 的实现原理，L 级）→ `922-`。
+- 产出：
+  - `1221-condition-writing-failures.md`（最左前缀 / 函数运算 / 隐式类型转换 三种写法失效）
+  - `1221-selectivity-and-or.md`（选择性差 + OR 含非索引列失效 + index_merge 开关 + AND 对照）
+  - `1221-fragment-smalltable-stats.md`（碎片过多 / 表太小 / 统计信息过时三类"有索引却不用"）
+  - `1221-index-design-principles.deep.md`（九条建索引原则 + pk_/uk_/idx_ 命名 + 取舍表）
+  - `922-syncmap-usage.md`（Store/Load/Range/LoadOrStore/LoadAndDelete + 与普通 map 五点区别）
+  - `922-syncmap-read-dirty.md`（read/dirty 读写分离、misses 穿透计数与提升）
+  - `922-syncmap-entry-states.md`（延迟删除 + entry 三态 nil/expunged/正常 + 重整浅拷贝）
+  - `922-syncmap-principle.deep.md`（原子优先锁兜底、代价边界、与 map+RWMutex 选型表）
+- 撞题规避：1222-* 只覆盖 LIKE 基础，1238 覆盖类型转换的**加锁**后果，1244 覆盖 EXPLAIN type → 1221 专攻**失效成因分类 + 建索引原则**；sync.Map 此前无任何专属卡（仅被 5 张卡顺带提及）→ 922 全套为首次系统覆盖。
+- 原文纠错（本波）：
+  - 12-21 把 "!=" 归入"匹配全值"**不准确**（!= / NOT IN 一般不走索引）。
+  - 12-21 称"OR 两列可以是联合索引"需谨慎：联合索引非最左列多走**全索引扫描**，`index_merge` union 需要**两个独立单列索引**。
+  - 9-22 称 dirty 写入用"自旋锁 + CAS"，**实际是互斥锁 mu 保护 dirty，CAS 用于 entry 状态变更**。
+- 门禁：698/698 PASS，error 0，warn **51**（本波 8 张零新增 warn，纠错节均压在 200 字内）。累计 122 篇 done / 698 张卡。

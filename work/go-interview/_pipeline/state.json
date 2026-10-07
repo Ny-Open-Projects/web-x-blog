@@ -1882,10 +1882,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "922-syncmap-usage",
+        "922-syncmap-read-dirty",
+        "922-syncmap-entry-states",
+        "922-syncmap-principle.deep"
+      ],
+      "done_at": "2026-10-08T07:04:14+08:00"
     },
     "source/09/9-23 Map、Slice作为参数传递会遇到什么问题？-迅捷文字转语音-1790917596087zh.txt": {
       "id": "9-23",
@@ -3022,10 +3028,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1221-condition-writing-failures",
+        "1221-selectivity-and-or",
+        "1221-fragment-smalltable-stats",
+        "1221-index-design-principles.deep"
+      ],
+      "done_at": "2026-10-08T07:04:14+08:00"
     },
     "source/12/12-22 MySQL 使用 like “%x“，索引一定会失效吗？-迅捷文字转语音-1790922002324zh.txt": {
       "id": "12-22",
@@ -6466,7 +6478,7 @@
     }
   },
   "next_num": 1,
-  "waves": 62,
-  "updated": "2026-10-08T06:59:02+08:00",
+  "waves": 63,
+  "updated": "2026-10-08T07:04:14+08:00",
   "consec_fail": 0
 }
