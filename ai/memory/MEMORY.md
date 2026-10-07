@@ -725,3 +725,22 @@
   - 12-64 第 38 段称 SSTable "有序的可变数据文件" → **应为不可变**（原文后句自己说不可更改）。
   - 12-64 末尾口述称"介绍了 Redis 主从架构"，**本节实际讲 Tendis**，属口误。
 - 门禁：682/682 PASS，error 0，warn **51（未增加）**。累计 118 篇 done / 682 张卡。
+
+## wave 62（2026-10-08 凌晨，L 级，8 张）
+
+- 源：`source/13/13-4`（谈谈你对倒排索引的理解，L 级）→ `134-`；`source/12/12-12`（索引的底层存储结构（二），L 级）→ `1212-`。
+- 产出：
+  - `134-inverted-vs-forward.md`（正排=文档ID→词 / 倒排=词→文档ID集合，含分词示例）
+  - `134-vs-mysql-like.md`（倒排 vs LIKE 两优势：B+树左前缀 vs %开头全表扫描；分词只能匹配相邻文本）
+  - `134-inverted-index-structure.md`（term / term dictionary / term index / posting list 四部分）
+  - `134-inverted-index.deep.md`（构建三步、index_options 四档、检索四步、refresh/merge 近实时）
+  - `1212-doublewrite-buffer.md`（16KB vs 4KB、部分写失效、两阶段顺序→随机写入）
+  - `1212-doublewrite-faq.md`（redo 512B block 对齐扇区免双写；页副本不可替代；顺序IO+2MB+校验值三保险）
+  - `1212-change-buffer.md`（只对非唯一二级索引、唯一性检查必须读盘、两配置、软删除 + purge）
+  - `1212-buffer-mechanisms.deep.md`（两机制共同主线：把不可控随机 IO 换成顺序 IO 或延迟 IO）
+- 撞题规避：137-* 只把倒排索引当 segment 的组成部分、138-* 讲 term 查询 → 134 专攻倒排内部结构；1211-tablespace 只在"系统表空间含双写/更改缓冲"一句带过 → 1212 无冲突。
+- **踩坑（可复用）**：纠错节超 250 汉字会触发 warn（不阻断但会抬高全局 warn 基线）。本波 3 张 1212 卡初次跑出 warn 51→54，压缩纠错节后回到 51。
+  - **对策：写卡时就把纠错节控制在 ~200 汉字以内**；事实核校一条用顿号串要点即可，不要逐条展开。
+  - 复验手法：`python3 _pipeline/validate.py --file target/<卡>.md` 可直接看单卡的 warn 明细。
+- 原文纠错（本波）：12-12 段 14"八 k 页写四个磁盘页"与 16KB/4KB 矛盾（口误）；段 34 把 undo 的"逻辑日志+逆向操作"说成 redo；`innodb_change_buffering` 默认值原文说成"不缓冲"，**实际默认 all**。
+- 门禁：690/690 PASS，error 0，warn **51**。累计 120 篇 done / 690 张卡。

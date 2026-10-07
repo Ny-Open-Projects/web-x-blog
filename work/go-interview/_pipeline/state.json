@@ -2844,10 +2844,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1212-doublewrite-buffer",
+        "1212-doublewrite-faq",
+        "1212-change-buffer",
+        "1212-buffer-mechanisms.deep"
+      ],
+      "done_at": "2026-10-08T06:59:01+08:00"
     },
     "source/12/12-13 索引的底层存储结构（六）-迅捷文字转语音-1790921443893zh.txt": {
       "id": "12-13",
@@ -4207,10 +4213,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "134-inverted-vs-forward",
+        "134-vs-mysql-like",
+        "134-inverted-index-structure",
+        "134-inverted-index.deep"
+      ],
+      "done_at": "2026-10-08T06:59:01+08:00"
     },
     "source/13/13-5 Elasticsearch是如何写入数据的？(一)-迅捷文字转语音-1790925071295zh.txt": {
       "id": "13-5",
@@ -6454,7 +6466,7 @@
     }
   },
   "next_num": 1,
-  "waves": 61,
-  "updated": "2026-10-08T06:52:20+08:00",
+  "waves": 62,
+  "updated": "2026-10-08T06:59:02+08:00",
   "consec_fail": 0
 }
