@@ -3354,10 +3354,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1238-range-scan-lock",
+        "1238-range-why-next-key",
+        "1238-range-le-scan",
+        "1238-type-conversion-lock",
+        "1238-range-empty-lock",
+        "1238-range-locking.deep"
+      ],
+      "done_at": "2026-10-08T00:10:29+08:00"
     },
     "source/12/12-39 彻底搞懂MySQL中的锁（八）-迅捷文字转语音-1790923235479zh.txt": {
       "id": "12-39",
@@ -3816,10 +3824,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1261-double-write-problem",
+        "1261-delete-vs-update",
+        "1261-cache-aside-order",
+        "1261-delayed-double-delete",
+        "1261-delete-retry-binlog",
+        "1261-cache-consistency.deep"
+      ],
+      "done_at": "2026-10-08T00:10:29+08:00"
     },
     "source/12/12-62 Redis 如何实现服务高可用？(一)-迅捷文字转语音-1790924533062zh.txt": {
       "id": "12-62",
@@ -6382,7 +6398,7 @@
     }
   },
   "next_num": 1,
-  "waves": 56,
-  "updated": "2026-10-08T00:02:42+08:00",
+  "waves": 57,
+  "updated": "2026-10-08T00:10:29+08:00",
   "consec_fail": 0
 }
