@@ -141,10 +141,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "414-array-slice-same",
+        "414-go-zero-value",
+        "414-array-declare",
+        "414-nil-pointer-array",
+        "414-slice-nil-vs-map",
+        "414-array-slice-basics.deep"
+      ],
+      "done_at": "2026-10-07T23:55:57+08:00"
     },
     "source/04/4-15 数组和切片有什么区别？（二）-迅捷文字转语音-1790758623594zh.txt": {
       "id": "4-15",
@@ -3399,10 +3407,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1240-show-processlist",
+        "1240-processlist-agg",
+        "1240-lock-views",
+        "1240-lock-optimization",
+        "1240-deadlock-timeout",
+        "1240-mysql-lock-ops.deep"
+      ],
+      "done_at": "2026-10-07T23:55:57+08:00"
     },
     "source/12/12-41 更新数据时没加索引会锁全表吗？-迅捷文字转语音-1790923450421zh.txt": {
       "id": "12-41",
@@ -6350,7 +6366,7 @@
     }
   },
   "next_num": 1,
-  "waves": 54,
-  "updated": "2026-10-07T11:01:46+08:00",
+  "waves": 55,
+  "updated": "2026-10-07T23:55:57+08:00",
   "consec_fail": 0
 }

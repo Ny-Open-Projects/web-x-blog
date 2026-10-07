@@ -583,3 +583,39 @@
 1. **MySQL 锁卡用 sql 块**：避免规则 14 warn；本批 5 张主卡全带 sql 块，warn 保持 51。
 2. **事物=事务 是最高频崩坏**：凡「事物」一律改「事务」；脏节/换读/串新化 对应 脏读/幻读/串行化，不可照抄。
 3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
+
+## 2026-10-07 10:46~11:01（第六次触发 · wave 54）—— 新产 12 张卡（Elasticsearch 基础 + Kafka 数据存储）
+
+**结论**：闸门全过（reclaim 无 stale、无 pause、running=0、pending=265）。源 13-1（Elasticsearch 基础）→ 6 张 `131-*`；源 14-6（Kafka 数据存储）→ 6 张 `146-*`。全部新产，无撞重（target/ 无 131-/146- 前缀）。
+- 门禁 **606/606 PASS、0 error、warn 51**（12 张卡 0 新增 warn；ES 卡用 go 块、Kafka 卡用 go 块保底）。
+- 提交：12 卡 + state.json + metrics.jsonl；source/ 命中 0；未 push。
+- 崩坏词：Elasticsearch(electsearch/elasstik/易搜)、Lucene(loes/lusin)、Kafka(卡夫卡/卡布卡)、broker(broke单)、shard(下d/沙的)、replica(热plicar/热pli)、索引(索影/索引)、mapping(麦平/麦ping)、segment(色个闷特/赛根)、offset(奥佛set/澳set)、commit log(康米特老哥)——一律归一为规范术语，纠错节泛述未写崩坏词。
+- 文件名映射：131-(chapter13≥10 直拼)、146-(chapter14≥10 直拼) 正确。
+- 事实核校：ES 构建于 Lucene 之上提供分布式/近实时/REST；主分片数不可改、副本可调；type 在 7.x 废弃 8.x 移除统一 _doc；Kafka 分段四条件(size/time/offset/index)、稀疏索引二分定位、消息格式 v0/v1/v2(含 header)——均与官方一致。
+
+**下次接手必读**：
+1. **ES 卡用 go 块保底**：ES 客户端(delivery-go/elastic)风格 go 块避免规则 14 warn；本批 6 张主卡全带 go 块，warn 保持 51 不增。
+2. **shard/replica 是高频混淆点**：主分片数建索引后不可改、副本数可随时调；segment 不是用户概念、是 Lucene 底层文件。
+3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
+
+## 2026-10-07 23:45~23:56（第七次触发 · wave 55）—— 新产 12 张卡（Go 数组/切片基础 + MySQL 锁排查优化）+ 规则变更
+
+**结论**：闸门全过（reclaim 无 stale、无 pause、running=0、pending=263）。源 4-14（数组和切片区别·一）→ 6 张 `414-*`；源 12-40（MySQL 锁·九）→ 6 张 `1240-*`。全部新产，无撞重。
+- 门禁 **618/618 PASS、0 error、warn 51**（12 张卡 0 新增 warn；Go 卡用 go 块、MySQL 卡用 sql 块保底）。
+- 提交：12 卡 + state.json + metrics.jsonl + validate.py + NIGHT-SHIFT.md；source/ 命中 0；未 push。
+- 崩坏词：数组(速组/宿主/二瑞)、切片(切偏/qie片)、映射(映色/映射)、字面量(自变量)、零值(凝脂/邻脂/磷脂)、new(六/word)、nil(逆偶/利偶/neo)、panic(空指针异常)、processlist(processlist)、information_schema(informationschemle)、performance_schema(performation这ma)、data_locks(dataLOS)、data_lock_waits(datalookwith)、metadata_locks(mcdataOOks)、innodb_trx(innoDBTIX)、事务(事物)、死锁(死索/子锁)、脏读(贯读)、不可重复读(不可重复图)、间隙锁(零件锁)、排他锁(排查锁)、乐观锁(乐关锁/漏观锁)——一律归一，纠错节泛述未写崩坏词。
+- 文件名映射：414-(chapter4<10 补零)、1240-(chapter12≥10 直拼) 正确。
+- 角度错开：已有 907/923-*（slice 传参/header/扩容/共享）与 1232-*（锁类型），本批 414 主打**零值体系+声明方式+nil 语义**，1240 主打**排查工具+优化+死锁检测**，无自引用。
+- 事实核校：SHOW PROCESSLIST 的 Info 列截断 100 字符（非只返回 100 行，原文表述已纠正）；8.0 行锁视图迁 performance_schema.data_locks/data_lock_waits，5.7 用 information_schema.INNODB_LOCKS/INNODB_LOCK_WAITS；innodb_deadlock_detect 自 5.7.15 引入默认 ON、高并发建议关闭；innodb_lock_wait_timeout 默认 50s 建议 5~10s；innodb_rollback_on_timeout 默认 OFF（ON 则超时回滚整个事务）——均与官方手册一致。
+
+### ⚠️ 规则变更（用户 2026-10-07 拍板，务必遵守新口径）
+1. **主卡字数上限取消**：`validate.py` 规则 3 由「≤700 汉字 error」改为**仅统计不阻断**（字数仍计算但不再报错）。理由：400→650→700 三次上调说明固定上限只会逼出「砍追问链/版本栅栏/验证数据」的挤字数行为。回滚方式：把规则 3 换回 `if n > 700: r.err(...)`。
+2. **取消波间 `sleep 600` 冷却**：不再休息，一波 done 立刻排下一波。
+3. **取消单会话 4 波上限**：持续串行推进，直到用户叫停或额度异常。
+4. **不要定时任务**：不依赖 automation 节拍，人工触发 + 会话内连续推进。
+5. **红线不变**：MAX_PARALLEL=1 不并发、不开并行子 agent、source/ 只读、只本地 commit 不 push、门禁 0 error 才 done、不改 validate.py 放宽规则（本次放宽是用户明确拍板）。
+
+**下次接手必读**：
+1. **规则已改**：不要再为压 700 字重写卡片，直接写满信息密度即可；但骨架节、`## ⚠️ 原文纠错`、追问链/版本栅栏仍为硬约束。
+2. **不 sleep**：波间直接 `queue.py next` 继续，别再 `sleep 600`。
+3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
