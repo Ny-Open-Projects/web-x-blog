@@ -667,3 +667,22 @@
 1. **TCP 系列刚起步**（仅 1840-*），后续 18-xx 网络源仍可继续，但要先 ls target/18* 核对（已有 181 centos/linux、1814 inode、1818 raid）。
 2. **源稿自相矛盾时以推导为准**：如 sizeof 8 vs 16，取有完整推导的 16，并在纠错节标注原文口误。
 3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
+
+## 2026-10-08 06:40（第十一次触发 · wave 59）—— 新产 12 张卡（Kafka 写入链路 + MySQL 架构与优化器）
+
+**结论**：闸门全过（reclaim 无 stale、无 pause、running=0、pending=255）。源 14-7（Kafka 如何写入数据）→ 6 张 `147-*`；源 12-10（MySQL 8.0 移除查询缓存·二，实为架构+优化器）→ 6 张 `1210-*`。全部新产，无撞重。
+- 门禁 **666/666 PASS、0 error、warn 51**（Kafka 卡用 go 块、MySQL 卡用 sql 块保底）。
+- 提交：12 卡 + state.json + metrics.jsonl；source/ 命中 0；未 push。
+- 角度错开：已有 `146-offset-consumer`（位移概念）与 `1417-*`（acks/副本数/unclean 选举），本批 147 主打**分区目的/分区策略/写入端到端链路/ISR 提交语义/消费重平衡+位移存储演进**；已有 `1211-*`（InnoDB 文件布局/表空间），本批 1210 主打**文件类型全景 + 可插拔引擎层 + 优化器两面 + 七步执行流程**。
+- 崩坏词：Kafka(卡夫卡/卡布卡)、broker(projeblock/block)、分区(线上/可逆性)、轮询(人形/人行)、随机(随c作列)、topic(pertopic)、乱序(烂句)、goroutine(携程)、消费者(消随者)、follower(追溯者)、leader(leaderer)、ZooKeeper(自OKper/zooocpper/zookeapper)、__consumer_offsets(consumeroffset)、InnoDB(英LDB/英乐DB/inoDB/minoDB/MODDB)、MyISAM(massam/MIDsam)、MySQL(买sql/mysl)、SQL(circle/cirql/circl/SOLL)、索引(索影)、buffer pool(buffboard/buffero)、子查询(此查询)、慢查询(漫长日志)、binlog(radiolog)、undo(IDO日志)、SHOW ENGINES(修enines)、socket(搜ql/unixcircs)、表空间(表控件)、分析器(析析器)、优化器(优化c者)——一律归一，纠错节泛述未写崩坏词。
+- 文件名映射：147-(chapter14≥10 直拼)、1210-(chapter12≥10 直拼) 正确。
+- **⚠️ 新踩坑：黑名单误伤**（务必记住）：`validate.py` 的 BLACKLIST 含 `构元`（本意抓 Go 语言的机翻崩坏词「构语言/构元」），但**「表结构元数据」里「构元」二字连续会被误判为 error**。本次 `1210-file-layer.md` 因此 FAIL 一次。
+  - **修复方式（红线禁止改规则，故改自己表述）**：把「表结构元数据」改写成「**表定义的元数据**」或「表结构 的定义元数据」，避免「构元」连续。
+  - **通用规避**：写 MySQL/数据库卡时慎用「结构元」「构元」这类连续字组；同理黑名单还有 `裸体`、`派森`、`引诺DB`、`妈妈引擎`、`护士锁`、`自选锁`、`CQ语句`、`maxk`、`uin的` 等，注意别在正常上下文中撞上。
+- **源稿口误已裁决**：12-10 称「独立表空间使用 MYD 文件」是错的——`.MYD` 是 MyISAM 专用，独立表空间应为 **`.ibd`**（每张 InnoDB 表一个）。已按正确归属写入并在纠错节标注。
+- 事实核校：分区打破单机 IO 瓶颈并可创建后扩容；轮询最均匀、随机效果更差、哈希按 key 保序（仅分区内有序）；活跃日志段唯一且对应数据+索引两文件、先页缓存后刷盘；ISR 只含部分 follower、ISR 全写入才提交且只有已提交可被消费、控制器从 ISR 选新 leader；重平衡三种触发、实例数应等于分区数、首次随机读后顺序批读、位移 0.8 前存 ZooKeeper→0.9 起存 __consumer_offsets；优化器五原因（InnoDB 因 MVCC 不精确、随机 8 页采样、成本≠速度、IO 未计缓存、计划空间截断、UDF 无法估算）与十优化；引擎可插拔且表为逻辑概念；文件层五类；七步执行流程且查询缓存仅 8.0 前——均与官方一致。
+
+**下次接手必读**：
+1. **写卡时避开「构元」「裸体」等黑名单连续字组**，写完必跑 validate；命中误伤改自己表述，不要改 BLACKLIST。
+2. **MySQL 文件后缀按引擎分家**：.MYD/.MYI=MyISAM，.ibd/.ibdata=InnoDB，.FRM 在 8.0 已被数据字典取代。
+3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`

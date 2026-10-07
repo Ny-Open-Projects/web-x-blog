@@ -2792,10 +2792,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1210-optimizer-limits",
+        "1210-optimizer-optimizations",
+        "1210-storage-engine-layer",
+        "1210-file-layer",
+        "1210-sql-execution-flow",
+        "1210-mysql-architecture.deep"
+      ],
+      "done_at": "2026-10-08T06:40:16+08:00"
     },
     "source/12/12-11 索引的底层存储结构（一）-迅捷文字转语音-1790921186490zh.txt": {
       "id": "12-11",
@@ -4576,10 +4584,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "147-partition-purpose",
+        "147-partition-strategy",
+        "147-write-flow",
+        "147-isr-replication",
+        "147-consumer-rebalance",
+        "147-kafka-write-flow.deep"
+      ],
+      "done_at": "2026-10-08T06:40:16+08:00"
     },
     "source/14/14-8 消费组的重平衡的过程是怎样的？-迅捷文字转语音-1790926020627zh.txt": {
       "id": "14-8",
@@ -6414,7 +6430,7 @@
     }
   },
   "next_num": 1,
-  "waves": 58,
-  "updated": "2026-10-08T00:17:32+08:00",
+  "waves": 59,
+  "updated": "2026-10-08T06:40:16+08:00",
   "consec_fail": 0
 }
