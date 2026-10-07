@@ -1987,10 +1987,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "904-concat-plus-sprintf",
+        "904-builder-vs-buffer",
+        "904-byteslice-join-bench",
+        "904-string-concat.deep"
+      ],
+      "done_at": "2026-10-08T07:56:45+08:00"
     },
     "source/09/9-5 字符串切片导致的内存泄露分析-迅捷文字转语音-1790914118884zh.txt": {
       "id": "9-5",
@@ -2477,10 +2483,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "107-rwmutex-safemap",
+        "107-sharded-map",
+        "107-channel-serialized-map",
+        "107-map-concurrency.deep"
+      ],
+      "done_at": "2026-10-08T07:56:45+08:00"
     },
     "source/10/10-8 Golang如何控制并发数？-迅捷文字转语音-1790918130550zh.txt": {
       "id": "10-8",
@@ -6490,7 +6502,7 @@
     }
   },
   "next_num": 1,
-  "waves": 64,
-  "updated": "2026-10-08T07:50:00+08:00",
+  "waves": 65,
+  "updated": "2026-10-08T07:56:45+08:00",
   "consec_fail": 0
 }

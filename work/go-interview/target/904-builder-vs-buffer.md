@@ -1,0 +1,98 @@
+# 904 bytes.Buffer 与 strings.Builder：预分配、扩容规则与零拷贝的胜负手
+
+> 分类：Go 基础 / string | 难度：L4 | 题型：原理题 | 频率：高 | 关键词：**Grow、预分配、扩容规则、2*cap+n、零拷贝、强转、strings.Builder、bytes.Buffer**
+
+> 原文锚点：第 12~39 段「bytes.Buffer 提供了一个 Grow 函数，我们可以预先指定这个字符串的长度，一旦我们指定的这个字符串长度，它就会提前为我们申请这么大的空间，所以它可以有效避免频繁这个空间的申请…strings.Builder 跟 bytes.Buffer 很类似，也是有预分配机制的，但是它的预分配规则是有差异的…当 buffer 的容量减去 buffer 的长度，小于当前需要追加的字符串的长度的时候，才会触发扩容，扩容规则是扩容到两倍的当前 buffer，再加上当前需要追加的字符串的长度…strings.Builder 整体的性能要比 bytes.Buffer 略高的，虽然两者底层都是一个字节数组，但是 bytes.Buffer 转换字符串的时候，它要重新申请内存空间，而 strings.Builder 是直接将底层的 []byte 转成字符串进行返回，它使用的是零拷贝转换」
+
+## 一句话总述
+`bytes.Buffer` 与 `strings.Builder` **底层都是字节数组**，都靠 **`Grow` 预分配**避免频繁申请空间，且**扩容触发条件都是"容量减长度 < 待追加长度"**、**扩容到 `2*cap + 待追加长度`**；但**两者预分配规则有差异**，且**最后转字符串时不同**：**`bytes.Buffer` 是强转、要重新申请内存**，**`strings.Builder` 是零拷贝、直接把底层 `[]byte` 转成字符串返回**——所以 **`strings.Builder` 整体性能略高**。
+
+## 面试官视角
+- 考察意图：能否说清"为什么 `strings.Builder` 更快"，这几乎是 Go 字符串题的必考点。
+- 分档：P5 知道大量拼接用 Builder；P6 能说"预分配 + 少扩容"；P7 能讲出**触发扩容的判据**、**`2*cap+n` 的扩容公式**，以及**零拷贝 vs 强转这个胜负手**。
+- 红旗答案：只知道"Builder 快"却说不出根因；或以为两者是同一个东西。
+- 惊艳点：**胜负手不在写入阶段而在"最后一步转字符串"**——写入时两者差不多，**Builder 的 `String()` 零拷贝、Buffer 的 `String()` 要拷贝一份** `[源码]`。
+
+## 主问答
+**Q（面试官原话）：** `strings.Builder` 为什么比 `bytes.Buffer` 快？
+
+1. **结论**：**两者底层都是字节数组、都有预分配机制**，但**预分配规则有差异**；决定性差距在最后一步——**`bytes.Buffer` 转字符串要重新申请内存（强转），`strings.Builder` 用零拷贝直接把底层 `[]byte` 转成字符串返回**，因此 **Builder 整体性能略高** `[源码]`。
+2. **bytes.Buffer 的预分配**：**它提供了 `Grow` 函数，可以预先指定字符串的长度**；**一旦指定，它就会提前申请这么大的空间**，**从而有效避免频繁的空间申请** **；可以通过 `WriteString` 直接对新字符串进行拼接** `[源码]`。
+3. **与加号的本质区别**：**bytes.Buffer 跟加号拼接的不同点在于它实现了一种预分配机制**；**当有新的字符串需要追加时，它可以预申请更多的空间，从而避免后续频繁的空间申请** `[源码]`。
+4. **实测对照**：**不指定空间时，buffer 在追加过程中会不断扩容**（容量持续增长）；**用 `Grow` 预先设置容量后，整个过程中不再发生扩容** `[源码]`。
+5. **strings.Builder 的差异**：**它与 bytes.Buffer 很类似，也有预分配机制**，**但预分配规则有差异**，实测**打印出来的扩容次数是不一样的** `[源码]`。
+6. **扩容触发条件**：**当 buffer 的容量减去 buffer 的长度，小于当前需要追加的字符串的长度时，才会触发扩容** `[源码]`。
+7. **扩容规则**：**扩容到两倍的当前 buffer，再加上当前需要追加的字符串的长度** `[源码]`。
+8. **胜负手 · 零拷贝 vs 强转**：**strings.Builder 使用零拷贝转换，直接将底层的字节数组转成字符串**；**而 bytes.Buffer 的转换是直接进行强转**，**转换字符串时要重新申请内存空间**；**所以在最后转成字符串的时候，它们的性能是有差异的** `[源码]`。
+
+**加分层：** 因为 `String()` 是零拷贝，**调用后 Builder 内部的缓冲已与返回的 string 共享内存，此时不能再对 Builder 做写入**（否则会破坏字符串的不可变性）；这是零拷贝带来的使用约束。
+
+## 追问链
+| 层级 | 追问 | 答不出停在哪档 |
+|---|---|---|
+| L1 | 两者底层是什么？ | 答不出字节数组 |
+| L2 | 预分配靠哪个函数？ | 答不出 Grow |
+| L3 | 什么时候触发扩容？ | 答不出 cap-len < 追加长度 |
+| L4 | 扩容到多少？ | 答不出 2*cap + n |
+| L5 | 谁更快、为什么？ | 答不出零拷贝 vs 强转 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| Go 1.10+ | `strings.Builder` 引入 | 之前只能用 bytes.Buffer |
+| Go 1.10 ~ 1.19 | `2*cap + n` 扩容 | 老实现公式 |
+| Go 1.20+ | 改用 `slices.Grow` | 增长策略更平滑，语义不变 |
+| 所有版本 | `Builder.String()` 零拷贝 | 调用后不可再写入 |
+
+## 关键代码
+```go
+package main
+
+import (
+	"bytes"
+	"fmt"
+	"strings"
+)
+
+func main() {
+	const n = 10000
+	part := "abcd"
+
+	// 1) bytes.Buffer：不预分配会不断扩容；Grow 后不再扩容
+	var buf bytes.Buffer
+	last := buf.Cap()
+	for i := 0; i < n; i++ {
+		buf.WriteString(part)
+		if buf.Cap() != last {
+			last = buf.Cap()
+			fmt.Println("buffer 扩容至:", last)
+		}
+	}
+
+	// 2) strings.Builder：预分配规则不同，扩容次数也不同
+	var sb strings.Builder
+	sb.Grow(n * len(part)) // 预分配后基本不再扩容
+	last2 := sb.Cap()
+	for i := 0; i < n; i++ {
+		sb.WriteString(part)
+		if sb.Cap() != last2 {
+			last2 = sb.Cap()
+			fmt.Println("builder 扩容至:", last2)
+		}
+	}
+
+	// 3) 胜负手：Builder.String() 零拷贝；Buffer.String() 是标准转换（会拷贝）
+	s1 := sb.String()
+	s2 := buf.String()
+	_, _ = s1, s2
+	// 注意：sb.String() 之后不能再 sb.WriteString(...)，否则破坏 s1 的不可变性
+}
+```
+
+## 总结与追问预判
+**必追问的是"零拷贝有没有代价"**——**有**：**`Builder.String()` 之后 Builder 就不能再写入**，因为返回的 string 与内部缓冲共享内存；若还需继续追加，应先取字符串再做新的 Builder。追问常接"那我该用哪个"——**大量字符串拼接一律用 `strings.Builder`，它是官方推荐方式**；只有在**需要 `bytes.Buffer` 的读接口（如实现 `io.Reader`、做字节级读写）**时才选 Buffer。
+
+## ⚠️ 原文纠错
+1. 事实核校：`Grow` 可预分配并提前申请空间、`WriteString` 用于拼接、预分配是它与加号的本质区别、不预分配会不断扩容而预分配后不再扩容、Builder 与 Buffer 均有预分配但规则有差异、扩容触发条件为 cap-len < 待追加长度、扩容到 2*cap + 待追加长度、两者底层都是字节数组、Builder 零拷贝转换而 Buffer 强转需重新申请内存、Builder 性能略高——均与 Go 标准库一致 `[经验]`。
+2. 补充：**`2*cap + n` 是 Go 1.10~1.19 的实现**，**Go 1.20 起 `strings.Builder` 改用 `slices.Grow`，增长策略更平滑**，但"尽量少扩容"的结论不变；另外 **Builder 的零拷贝导致 `String()` 后不可再写入**，这是它的使用约束 `[经验]`。
+3. 崩坏词归一：源码将 bytes.Buffer、strings.Builder、Grow、预分配、扩容、零拷贝等术语音译为多组崩坏词，本卡统一为规范术语 `[经验]`。

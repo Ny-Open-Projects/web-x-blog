@@ -784,3 +784,19 @@
   - 自查脚本（已验证可用）：按 Unicode 码位白名单扫——放行 ASCII / CJK(0x4e00-0x9fff) / CJK标点(0x3000-0x303f) / 全角(0xff00-0xffef) / emoji / 通用标点，其余即报。
 
 - 门禁：706/706 PASS，error 0，warn **51**（144-seqwrite-pagecache 初跑纠错节 263 字触发 warn，压缩后回归）。累计 124 篇 done / 706 张卡。
+
+## wave 65（2026-10-08 早上，L 级，8 张）
+
+- 源：`source/10/10-7`（如何避免 Map 的并发问题？，L 级）→ `107-`；`source/09/9-4`（不同 String 拼接方式的性能分析，L 级）→ `904-`。
+- 产出：
+  - `107-rwmutex-safemap.md`（读写锁两字段封装、get 读锁/set·delete 写锁、range 迭代器只加读锁、一把大锁瓶颈）
+  - `107-sharded-map.md`（32 分片、切片存 map、FNV 取模定位、两层遍历、锁在循环内、return 前再解锁）
+  - `107-channel-serialized-map.md`（request 封装 op/key/value + response 回传、单 goroutine 串行、并发度恒为 1）
+  - `107-map-concurrency.deep.md`（四条路线：整体重新赋值 / sync.Map / 锁+分片 / channel 串行化 + 选型表）
+  - `904-concat-plus-sprintf.md`（加号：不可变→每次新串→频繁分配+GC；fmt：创建→格式化→强转→释放）
+  - `904-builder-vs-buffer.md`（Grow 预分配、cap-len<追加长度才扩容、2*cap+n、Builder 零拷贝 vs Buffer 强转）
+  - `904-byteslice-join-bench.md`（预分配切片、Join 底层即 Builder+Grow、常量编译期折叠、-bench 命令）
+  - `904-string-concat.deep.md`（六种方式性能排序 + 两条主线 + 可读性优先的选型态度）
+- 撞题规避：1019-* 只讲数据竞争通识与检测工具，未涉及 map 的具体工程方案 → 107 四张为首次系统覆盖；此前无任何字符串拼接专属卡 → 904 四张为首次覆盖。
+- 原文纠错（本波）：**原文称本节"介绍两种方法"，实际给了三种**（读写锁/分片/channel），加上前作回顾共四条路线；已在深卡纠错节点明。另 `2*cap+n` 是 Go 1.10~1.19 实现，**1.20 起改用 slices.Grow**。
+- 门禁：714/714 PASS，error 0，warn **51**（107-sharded-map 初跑纠错节 260 字触发 warn，压缩后回归）。累计 126 篇 done / 714 张卡。
