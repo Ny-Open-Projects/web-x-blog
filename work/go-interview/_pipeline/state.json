@@ -3929,10 +3929,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "131-es-vs-lucene",
+        "131-shard-replica",
+        "131-index-mapping-setting",
+        "131-type-evolution",
+        "131-docker-setup",
+        "131-es-basics.deep"
+      ],
+      "done_at": "2026-10-07T11:01:46+08:00"
     },
     "source/13/13-10 ElasticSearch是如何实现高可用的？-迅捷文字转语音-1790925302708zh.txt": {
       "id": "13-10",
@@ -4489,10 +4497,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "146-storage-model",
+        "146-log-segment-roll",
+        "146-index-files",
+        "146-message-format",
+        "146-offset-consumer",
+        "146-kafka-storage.deep"
+      ],
+      "done_at": "2026-10-07T11:01:46+08:00"
     },
     "source/14/14-7 kafka是如何写入数据的？-迅捷文字转语音-1790926015770zh.txt": {
       "id": "14-7",
@@ -6334,7 +6350,7 @@
     }
   },
   "next_num": 1,
-  "waves": 53,
-  "updated": "2026-10-07T10:46:29+08:00",
+  "waves": 54,
+  "updated": "2026-10-07T11:01:46+08:00",
   "consec_fail": 0
 }
