@@ -762,10 +762,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "612-closed-channel-drain",
+        "612-channel-elem-size-limit",
+        "612-channel-gc-reference",
+        "612-closed-channel-ops.deep"
+      ],
+      "done_at": "2026-10-08T06:46:56+08:00"
     },
     "source/06/6-13 如何通过interface实现鸭子类型？-迅捷文字转语音-1790861407235zh.txt": {
       "id": "6-13",
@@ -2921,10 +2927,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1217-bplus-two-properties",
+        "1217-secondary-leaf-backtable",
+        "1217-myisam-index-layout",
+        "1217-clustered-vs-secondary.deep"
+      ],
+      "done_at": "2026-10-08T06:46:56+08:00"
     },
     "source/12/12-18 为什么 MySQL  InnoDB采用 B+ 树作为索引？-迅捷文字转语音-1790921686556zh.txt": {
       "id": "12-18",
@@ -6430,7 +6442,7 @@
     }
   },
   "next_num": 1,
-  "waves": 59,
-  "updated": "2026-10-08T06:40:16+08:00",
+  "waves": 60,
+  "updated": "2026-10-08T06:46:56+08:00",
   "consec_fail": 0
 }

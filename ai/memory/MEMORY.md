@@ -686,3 +686,23 @@
 1. **写卡时避开「构元」「裸体」等黑名单连续字组**，写完必跑 validate；命中误伤改自己表述，不要改 BLACKLIST。
 2. **MySQL 文件后缀按引擎分家**：.MYD/.MYI=MyISAM，.ibd/.ibdata=InnoDB，.FRM 在 8.0 已被数据字典取代。
 3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
+
+## wave 60（2026-10-08 凌晨，L 级，8 张）
+
+- 源：`source/12/12-17`（聚集索引与辅助索引区别，L 级）→ `1217-`；`source/06/6-12`（关闭的 channel 发送和接收，L 级）→ `612-`。
+- L 级规格：**每源 3 主卡 + 1 深卡 = 8 张**（非 XL 的 12 张），本波实际产出 8 张。
+- 产出：
+  - `1217-bplus-two-properties.md`（B+树两特性：行级单链表有序 + 页级双向链表有序 + 目录页可嵌套）
+  - `1217-secondary-leaf-backtable.md`（二级索引叶子存「索引列+主键」、目录项变「索引列+页号」、回表=顺序IO+随机IO）
+  - `1217-myisam-index-layout.md`（.MYD/.MYI 分离、行号定位、MyISAM 全部索引都是二级索引）
+  - `1217-clustered-vs-secondary.deep.md`（三区别 + 叶子不存完整记录的三原因 + 联合索引一树 vs 两树）
+  - `612-closed-channel-drain.md`（close 是关门不是清空：残留读完再返零值、无缓冲也不阻塞、跨协程关闭同样不阻塞）
+  - `612-channel-elem-size-limit.md`（元素 >64KB 被拒、至少复制一次、经缓冲队列两次、只复制直接部分、传指针）
+  - `612-channel-gc-reference.md`（channel 与 goroutine 双向引用、队列非空不回收、goroutine 退出才回收、nil 永久阻塞）
+  - `612-closed-channel-ops.deep.md`（close 广播语义、六条操作结论、for-range/ok/select 三种判断方式对比）
+- 撞题规避（本波关键）：
+  - `1222-secondary-vs-clustered` 已覆盖「聚簇 vs 二级索引的优化器选型」→ 1217 改打**存储结构 + IO 代价 + MyISAM 对照 + 目录页嵌套**，不碰选型。
+  - `1021-*` 五张已覆盖关闭 channel 四条特性与退出/多发送方/安全关闭 → 612 改打**残留读完、64KB 元素、GC 引用、语义设计**，不重复列四条特性。
+- 撞题检查手法（可复用）：`ls target/<prefix>-*` 查文件名撞重后，**还要 `ls target/ | grep -iE <关键词>` 查内容撞题**，只读首 40 行即可判定覆盖角度。
+- 门禁：674/674 PASS，error 0，warn **51（未增加）**——保持不新增 warn 的基线。
+- 累计：116 篇 done（本批）/ 674 张卡。
