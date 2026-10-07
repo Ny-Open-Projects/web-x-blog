@@ -2139,10 +2139,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1015-channel-mutex",
+        "1015-channel-lock-pitfalls",
+        "1015-channel-semaphore",
+        "1015-official-semaphore",
+        "1015-mutex-vs-channel-bench",
+        "1015-channel-lock.deep"
+      ],
+      "done_at": "2026-10-07T10:12:49+08:00"
     },
     "source/10/10-16 如何使用通道实现对http请求的限速？-迅捷文字转语音-1790918774725zh.txt": {
       "id": "10-16",
@@ -4313,10 +4321,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1417-consumer-commit",
+        "1417-flush-strategy",
+        "1417-producer-acks",
+        "1417-replica-factor",
+        "1417-unclean-leader-election",
+        "1417-reliability.deep"
+      ],
+      "done_at": "2026-10-07T10:12:50+08:00"
     },
     "source/14/14-18 kafka 如何避免重复消费？-迅捷文字转语音-1790926622146zh.txt": {
       "id": "14-18",
@@ -6286,7 +6302,7 @@
     }
   },
   "next_num": 1,
-  "waves": 49,
-  "updated": "2026-10-07T05:22:46+08:00",
+  "waves": 51,
+  "updated": "2026-10-07T10:12:50+08:00",
   "consec_fail": 0
 }

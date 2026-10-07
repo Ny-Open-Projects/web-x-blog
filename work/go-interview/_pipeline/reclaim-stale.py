@@ -83,7 +83,7 @@ def main():
         return 0
 
     for tid in ids:
-        subprocess.run(["python3", str(QUEUE), "reset", tid], check=False)
+        subprocess.run(["python3", str(QUEUE), "reset", "--task", tid], check=False)
     print("已放回队列（reset，不计失败、不退避），可继续派单。")
     return 0
 

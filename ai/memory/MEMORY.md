@@ -540,3 +540,18 @@
 - **产物数字**：12 张卡合计 **47151 字节**；逐文件 md5 再取整体链路摘要 `60a926f9c33bac7e209465fe2329741c`；429 计数 **0**，attempts 均为 1。
 
 **当前进度（批次49收口）**：369 任务 / **96 done / 273 pending / 558 张卡落盘**（XL 档 96/114，约 84%）。已做清单（续批次48）：+12-5/13-3。剩余：XL 18 篇 → 之后 L 124 / M 100 / S 31。
+
+## 2026-10-07 10:08~10:13（第五次触发 · wave 51）—— 收口死会话残留，修 1 张超限卡
+
+**结论**：开工回收 2 个卡死 running 任务（10-15 / 14-17，停滞 267~284 分钟），其卡片已由死会话落盘但未标记 done、未提交。修 `1417-consumer-commit.md` 主卡 723→≤700 字超限 error，门禁回到 0 error，标记 done 并补提交。
+
+**产出/收口**：源 10-15（channel 互斥锁）→ 6 张 `1015-*`（channel-mutex / channel-lock-pitfalls / channel-semaphore / official-semaphore / mutex-vs-channel-bench / channel-lock.deep）；源 14-17（Kafka 丢数据）→ 6 张 `1417-*`（consumer-commit / flush-strategy / producer-acks / replica-factor / unclean-leader-election / reliability.deep）。合计 12 张卡，均沿用死会话产物，未新产。
+- 门禁 **570/570 PASS、0 error、warn 51**（本批仅修 1 error，0 新增 warn）。
+- 提交：12 卡 + state.json + metrics.jsonl + reclaim-stale.py（修 reset 缺 --task 的 bug，使回收器真正生效，防后续「整夜空跑」）；source/ 命中 0；未 push。
+- 崩坏词：1417 纠错节泛述「消费位移/提交/消费者/幂等」归一，未写黑名单词；文件名映射 1015-/1417- 正确（chapter≥10 直拼）。
+- 事实核校：自动提交默认 true、关掉改手动、宁可重复消费不丢、消费端幂等——与原文一致，无误。
+
+**下次接手必读**：
+1. **reclaim-stale.py 有 bug 已修**：原 `reset <tid>` 缺 `--task`，回收仅打印不生效，致后续会话 running>0 永久避让。现已改为 `reset --task <tid>`，每波开工前回收有效。
+2. **死会话残留卡判定**：若 `queue next` 派到的源在 target/ 已有 6 张卡（5 主+1 深），说明是上一死会话产物，只需修门禁 error 后 `done`，勿重复产卡（防库内自引用）。
+3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
