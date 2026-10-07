@@ -619,3 +619,19 @@
 1. **规则已改**：不要再为压 700 字重写卡片，直接写满信息密度即可；但骨架节、`## ⚠️ 原文纠错`、追问链/版本栅栏仍为硬约束。
 2. **不 sleep**：波间直接 `queue.py next` 继续，别再 `sleep 600`。
 3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`
+
+## 2026-10-08 00:02（第八次触发 · wave 56）—— 新产 12 张卡（Go 操作 Kafka + MySQL 深度分页优化）
+
+**结论**：闸门全过（reclaim 无 stale、无 pause、running=0、pending=261）。源 14-20（Go 操作 Kafka 注意事项）→ 6 张 `1420-*`；源 12-46（千万级深度分页·一）→ 6 张 `1246-*`。全部新产，无撞重。
+- 门禁 **630/630 PASS、0 error、warn 51**（12 张卡 0 新增 warn；Kafka 卡用 go 块、MySQL 卡用 sql 块、Go 工程卡用 go 块保底）。
+- **新规生效验证**：取消 700 字上限后本批**零体量 error**，卡片信息密度明显提升（不再为凑字数砍内容），无需任何压字重写。
+- 提交：12 卡 + state.json + metrics.jsonl；source/ 命中 0；未 push。
+- 崩坏词：Kafka(卡夫卡)、sarama(塞尔玛/sara码/塞ara)、confluent-kafka-go(confluent杠卡夫卡杠go/卡夫ent)、goroutine(携程)、broker(broke端)、message.max.bytes(message点maxbace)、LZ4(LZfour)、NewAsyncProducer(六ASYCproducer)、NewSyncProducer(六SYCproducer)、Offsets.Initial(offsize的点lisual)、newest(nenestst)、oldest(odest/olist)、docker-compose(dogcomposer)、回调(回电函数)、nil(leo/neo)、主键(组件/技速索引)、二级索引树(二级索引数)、SELECT name(slaslaackname)、int64(inter六十四)、init(NIT)、URL(UIL)、go-sql-driver(gocircledriver)、DSN、sumTotal(mtotal/sometotal)——一律归一，纠错节泛述未写崩坏词。
+- 文件名映射：1420-(chapter14≥10 直拼)、1246-(chapter12≥10 直拼) 正确。
+- 角度错开：已有 1417/1419/146-*（Kafka 可靠性/堆积/存储），本批 1420 主打**客户端 SDK 工程实践**（选型/配置/重连/位点/优雅退出）；已有 1311-*（ES 深度分页），本批 1246 主打 **MySQL** 方案（覆盖索引/延迟关联/游标法），无自引用。
+- 事实核校：sarama 主流且纯 Go（confluent-kafka-go 基于 librdkafka 需 cgo）；Version 需与服务端对齐；MaxMessageBytes 须小于 broker message.max.bytes 才生效；LZ4 吞吐最高、zstd 压缩比最高、综合选 LZ4；Offsets.Initial 仅在无已提交位点时生效；异步 producer 必须 Close()（AsyncClose 不等待）否则丢消息；深度分页代价=扫描丢弃+百万次回表（1650ms→268ms）；游标法与 offset 不等价（id 断层）——均与官方一致。
+
+**下次接手必读**：
+1. **新规已跑通**：wave 55 起取消 700 字上限、取消 sleep 冷却、取消 4 波上限，本批验证无副作用，继续按新口径执行。
+2. **游标法必带「不等价」说明**：id 有删除断层时结果与 offset 错位，且不支持任意跳页——这是该题的题眼，不能漏。
+3. 续跑：`cd work/go-interview && python3 _pipeline/queue.py next --wave 1 --per-agent 2`

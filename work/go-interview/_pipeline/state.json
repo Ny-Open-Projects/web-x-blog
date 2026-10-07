@@ -3529,10 +3529,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1246-deep-paging-cost",
+        "1246-covering-index",
+        "1246-id-cursor",
+        "1246-go-mysql-init",
+        "1246-go-count-total",
+        "1246-deep-paging.deep"
+      ],
+      "done_at": "2026-10-08T00:02:42+08:00"
     },
     "source/12/12-47 千万级的数据表如何优化深度分页？（二）-迅捷文字转语音-1790923705949zh.txt": {
       "id": "12-47",
@@ -4445,10 +4453,18 @@
       "depth_cap": "L3~L4",
       "suggest_cards": 5,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1420-kafka-go-sdk",
+        "1420-producer-config",
+        "1420-producer-reconnect",
+        "1420-consumer-offset-initial",
+        "1420-graceful-shutdown",
+        "1420-kafka-go-client.deep"
+      ],
+      "done_at": "2026-10-08T00:02:42+08:00"
     },
     "source/14/14-3 哪些场景下需要考虑引入消息中间件？各种消息中间件应该怎么选？-迅捷文字转语音-1790925803345zh.txt": {
       "id": "14-3",
@@ -6366,7 +6382,7 @@
     }
   },
   "next_num": 1,
-  "waves": 55,
-  "updated": "2026-10-07T23:55:57+08:00",
+  "waves": 56,
+  "updated": "2026-10-08T00:02:42+08:00",
   "consec_fail": 0
 }
