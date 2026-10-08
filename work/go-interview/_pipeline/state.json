@@ -132,10 +132,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "413-new-make-basics",
+        "413-make-vs-new-slice-demo",
+        "413-new-pitfalls",
+        "413-new-vs-make"
+      ],
+      "done_at": "2026-10-08T18:52:36+08:00"
     },
     "source/04/4-14 数组和切片有什么区别？（一）-迅捷文字转语音-1790758615357zh.txt": {
       "id": "4-14",
@@ -1148,10 +1154,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "714-gorm-transaction-overview",
+        "714-gorm-transaction-callback",
+        "714-gorm-transaction-savepoint",
+        "714-gorm-tx"
+      ],
+      "done_at": "2026-10-08T18:52:37+08:00"
     },
     "source/07/7-15 如何使用viper实现配置的动态监听？-迅捷文字转语音-1790866914060zh.txt": {
       "id": "7-15",
@@ -6958,7 +6970,7 @@
     }
   },
   "next_num": 1,
-  "waves": 103,
-  "updated": "2026-10-08T18:47:26+08:00",
+  "waves": 104,
+  "updated": "2026-10-08T18:52:37+08:00",
   "consec_fail": 0
 }
