@@ -1397,10 +1397,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "810-gc-trigger-timing",
+        "810-manual-gc-freeosmemory",
+        "810-reduce-gc-frequency",
+        "810-gc-trigger.deep"
+      ],
+      "done_at": "2026-10-08T19:53:36+08:00"
     },
     "source/08/8-11 哪些情况下容易发生内存泄漏？（一）-迅捷文字转语音-1790903093623zh.txt": {
       "id": "8-11",
@@ -2880,10 +2886,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1115-api-perf-overview",
+        "1115-cache-and-parallel",
+        "1115-lock-batch-scale",
+        "1115-api-perf.deep"
+      ],
+      "done_at": "2026-10-08T19:53:36+08:00"
     },
     "source/11/11-2 应对性能优化类面试题，应该这样做-迅捷文字转语音-1790919686530zh.txt": {
       "id": "11-2",
@@ -7066,7 +7078,7 @@
     }
   },
   "next_num": 1,
-  "waves": 112,
-  "updated": "2026-10-08T19:48:20+08:00",
+  "waves": 113,
+  "updated": "2026-10-08T19:53:36+08:00",
   "consec_fail": 0
 }
