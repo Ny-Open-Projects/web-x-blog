@@ -1643,10 +1643,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "802-runtime-prep-method",
+        "802-runtime-exam-categories",
+        "802-runtime-mock-checklist",
+        "802-runtime-prep.deep"
+      ],
+      "done_at": "2026-10-08T22:47:37+08:00"
     },
     "source/08/8-20 time.Sleep(d)与←time.After(d)有何区别？-迅捷文字转语音-1790904439311zh.txt": {
       "id": "8-20",
@@ -2390,10 +2396,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1014-mutex-normal-mode",
+        "1014-mutex-starvation-mode",
+        "1014-mutex-mode-switch",
+        "1014-mutex-modes.deep"
+      ],
+      "done_at": "2026-10-08T22:47:37+08:00"
     },
     "source/10/10-15 如何使用channel实现互斥锁？-迅捷文字转语音-1790918769363zh.txt": {
       "id": "10-15",
@@ -7163,7 +7175,7 @@
     }
   },
   "next_num": 1,
-  "waves": 120,
-  "updated": "2026-10-08T22:42:18+08:00",
+  "waves": 121,
+  "updated": "2026-10-08T22:47:37+08:00",
   "consec_fail": 0
 }
