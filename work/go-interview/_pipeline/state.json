@@ -281,10 +281,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "402-tech-interview-prep",
+        "402-prep-key-areas.deep"
+      ],
+      "done_at": "2026-10-08T23:40:27+08:00"
     },
     "source/04/4-20 Go语言中每个值在内存中只分布在一个内存块上的类型有哪些？-迅捷文字转语音-1790759419549zh.txt": {
       "id": "4-20",
@@ -3460,10 +3464,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1223-unique-index-duplicate",
+        "1223-unique-ensure-methods.deep"
+      ],
+      "done_at": "2026-10-08T23:40:27+08:00"
     },
     "source/12/12-24 唯一索引一定比普通索引快吗？-迅捷文字转语音-1790922010669zh.txt": {
       "id": "12-24",
@@ -7207,7 +7215,7 @@
     }
   },
   "next_num": 1,
-  "waves": 125,
-  "updated": "2026-10-08T23:05:22+08:00",
+  "waves": 126,
+  "updated": "2026-10-08T23:40:27+08:00",
   "consec_fail": 0
 }
