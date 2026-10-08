@@ -983,3 +983,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 Elasticsearch→崩坏词、shard→下载/现程、wait_for_active→waitforactive 下子、thread pool→线程状态/现程池、reject→困盈、translog→transforer、OS cache→OS 开启/OSK、binlog→billog、宕机→当机、Redis→崩坏词、布隆→音译崩坏、雪崩/击穿→崩坏 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
 - 格式坑（沿用 wave72 固化）：2 张深卡文件名均以 `.deep.md` 结尾（`136-write-lifecycle.deep.md`/`1254-cache-3problems.deep.md`），未被误判为主卡；**新增规则 14 教训**：主卡须含 go/sql 代码块，json 块不计入"可运行语言"，否则报"代码: 未见可运行语言的代码块" warn——今后 ES 配置类卡一律用 go 客户端示例而非 json。
 - 门禁：802/802 PASS，error 0，warn **51**。累计 148 篇 done / 802 张卡。
+
+## wave 77（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/10/10-22`（什么是协程泄露？怎么预防？，L 级）→ `1022-`；`source/12/12-16`（索引的底层存储结构（五），L 级）→ `1216-`。
+- 产出：
+  - `1022-leak-trigger-scenarios.md`（协程泄露具体触发场景(除 channel 收发)：defer 误用文件句柄堆积 / nil channel 读写永久阻塞 / 空 select{} 永久阻塞；与 1019 的 channel 三形态互补）
+  - `1022-leak-prevention.md`（预防治理体系：context 取消 + 超时 + 协程池/信号量控并发 + 大文件分治/文件流 + NumGoroutine/pprof 监控）
+  - `1022-leak-resource-exhaustion.md`（资源耗尽维度：端口/句柄耗尽 / 内存 OOM / 长任务无超时堆积；下游故障+无超时=雪崩放大）
+  - `1022-goroutine-leak.deep.md`（协程泄露全景：本质+场景枚举(本卡组+1019组)+预防体系，串联 812/1019/602）
+  - `1216-page-structure.md`（InnoDB 数据页七部分物理结构：file header 38B(上下页指针)/page header 56B/最大最小记录26B/user records/free space/page directory/file trailer 8B；行 next_record 单链表；空闲/干净/脏页）
+  - `1216-page-directory.md`（页目录=槽稀疏索引；分组 min组1条/max组1-8条/其他4-8条、n_owned 计数、槽满8拆4+5；二分定位槽再遍历组链表）
+  - `1216-page-crash-recovery.md`（页级崩溃恢复：file trailer 前4B 校验和 vs file header 校验和检半写、后4B LSN(redo 量)、MTR=一组 redo 原子重放）
+  - `1216-innodb-page.deep.md`（InnoDB 数据页全景：七部分+页目录+页级恢复，串联 1211/1215/1210/125）
+- 撞题规避：`1022-` 与 `812-goroutine-leak`(概念+GC+NumGoroutine 监控)/`1019-channel-leak`(channel 三形态)/`602-context-cancel`(context 传播) 重叠，本波只取三真 gap——①defer 误用(文件句柄堆积)/nil channel/空 select 三类 812/1019 未覆盖的具体触发坑、②资源耗尽维度(端口/内存/长任务)、③预防治理体系(context/超时/池化/分治/监控)；深卡做全景串联并显式边界到 812/1019/602，不重产其概念/监控/context 内容。`1216-` 与 `1211-index-storage`(B+树/表空间/段/区)/`1215-row-format`(行格式)/`1210-storage-engine`(引擎层)/`125-bufferpool`(脏页管理) 重叠，但**页(Page)物理结构层是干净 gap**——七部分字节数/行单链表/页目录槽分组/页级半写恢复均未被覆盖；本波聚焦"页"这一层(介于区与行之间)，四张完整覆盖，深卡显式边界到 1211/1215/1210/125 不重产上层。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原，含 goroutine→过入/购入器、defer→底份/抵份、channel→签到、select→死莱克、context→control、nil→neo、MySQL→买sql、InnoDB→英格DB、page→液/张页、file trailer→fileteller、LSN→tellogsequencenumber、MTR→minitransaction、redo→redulog、n_owned→NON、页目录→硬目录/页幕录、槽→藏物 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
+- 格式坑（沿用 wave72 固化）：2 张深卡文件名均以 `.deep.md` 结尾（`1022-goroutine-leak.deep.md`/`1216-innodb-page.deep.md`），未被误判为主卡；MySQL 内核类卡用 sql 代码块满足规则 14。
+- 门禁：810/810 PASS，error 0，warn **51**。累计 150 篇 done / 810 张卡。

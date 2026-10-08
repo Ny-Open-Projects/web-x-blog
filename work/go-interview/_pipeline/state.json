@@ -2389,10 +2389,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1022-leak-trigger-scenarios",
+        "1022-leak-prevention",
+        "1022-leak-resource-exhaustion",
+        "1022-goroutine-leak.deep"
+      ],
+      "done_at": "2026-10-08T11:51:51+08:00"
     },
     "source/10/10-23 Go 中主协程如何等待其他协程退出-迅捷文字转语音-1790919521234zh.txt": {
       "id": "10-23",
@@ -3002,10 +3008,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1216-page-structure",
+        "1216-page-directory",
+        "1216-page-crash-recovery",
+        "1216-innodb-page.deep"
+      ],
+      "done_at": "2026-10-08T11:51:51+08:00"
     },
     "source/12/12-17 聚集索引与辅助索引有什么区别？-迅捷文字转语音-1790921681471zh.txt": {
       "id": "12-17",
@@ -6634,7 +6646,7 @@
     }
   },
   "next_num": 1,
-  "waves": 76,
-  "updated": "2026-10-08T11:37:39+08:00",
+  "waves": 77,
+  "updated": "2026-10-08T11:51:51+08:00",
   "consec_fail": 0
 }
