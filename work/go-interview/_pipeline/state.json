@@ -187,10 +187,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "416-string-literal-quotes",
+        "416-string-escape-forms",
+        "416-byte-rune-char",
+        "416-string-literals.deep"
+      ],
+      "done_at": "2026-10-08T14:12:35+08:00"
     },
     "source/04/4-17 strings.TrimRight和strings.TrimSuffix有什么区别？-迅捷文字转语音-1790759393888zh.txt": {
       "id": "4-17",
@@ -1789,10 +1795,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "914-map-hmap-bmap",
+        "914-map-key-locate",
+        "914-map-concurrency-float",
+        "914-map-implementation.deep"
+      ],
+      "done_at": "2026-10-08T14:12:35+08:00"
     },
     "source/09/9-15 map是如何扩容的？-迅捷文字转语音-1790916848519zh.txt": {
       "id": "9-15",
@@ -6670,7 +6682,7 @@
     }
   },
   "next_num": 1,
-  "waves": 79,
-  "updated": "2026-10-08T12:31:30+08:00",
+  "waves": 80,
+  "updated": "2026-10-08T14:12:35+08:00",
   "consec_fail": 0
 }

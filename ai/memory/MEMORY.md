@@ -1034,3 +1034,20 @@
 - 原文纠错（本波）：初版纠错节枚举崩坏词（构语言/neo/readerror/REDIS/NS 等），触发 validator 规则 11「机翻残留」denylist（构语言 命中）；按 wave71 泛述 SOP 重写纠错节为"将源码中的若干术语崩坏词统一还原为规范术语"、不再列举任何原词崩坏词，✓11 归零。属本波根因修复（非补丁），此前 wave74~78 纠错节亦含崩坏词列举但未被 denylist 命中，本波起严格遵循泛述 SOP。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`509-interface-compare.deep.md`/`195-prevent-oversell.deep.md`），无同名主卡故未触发深挖门槛规则；509 三张主卡含 go 块、195 三张主卡含 sql/go 块满足规则 14。
 - 门禁：826/826 PASS，error 0，warn **51**。累计 154 篇 done / 826 张卡。
+
+## wave 80（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/04/4-16`（Go语言中双引号和反引号有什么区别？，L1~L2）→ `416-`；`source/09/9-14`（map的底层实现是什么？，L2~L3）→ `914-`。
+- 产出：
+  - `416-string-literal-quotes.md`（双引号=解释型(解析转义)、反引号=原生型(原样不解析)；两者皆生成 string 类型、不可修改(转写须新分配)；解释型可跨行但需换行转义、原生型保留换行与缩进）
+  - `416-string-escape-forms.md`（四种转义：\ooo 八进制(≤377)/\xXX 十六进制(1字节)/\uXXXX(1码点)/\UXXXXXXXX(1码点)；边界：八进制/十六进制转义后紧跟数字会被并入、单引号字符字面量非法须转义）
+  - `416-byte-rune-char.md`（Go 无 char 类型；单引号字符字面量是 byte(uint8) 或 rune(int32) 码值、非字符对象；ASCII 用 byte、中文/Unicode 用 rune；rune 即 int32 别名用于 UTF-8 码点）
+  - `416-string-literals.deep.md`（字符串字面量全景：双引号 vs 反引号语义+四种转义+byte/rune 模型+UTF-8 边界，串联 420/415）
+  - `914-map-hmap-bmap.md`（map 底层=hmap(count/B/buckets/oldbuckets/nevacuate/extra)+bmap(top hash 高8位+keys[8]+values[8]，bucketCnt=8，溢出链)；哈希查找表+链表法；runtime/map.go 结构拆解）
+  - `914-map-key-locate.md`（低 B 位定桶、高 8 位 top hash 定桶内位置；哈希冲突线性探测桶内、溢出桶链；均摊 O(1) 最差 O(N)；扩容触发 6.5 负载因子/溢出桶过多）
+  - `914-map-concurrency-float.md`（三注意：①并发读写 panic(非 goroutine-safe，须 sync.RWMutex 或 sync.Map) ②float 作 key 不稳定(二进制表示误差致查不到) ③无序遍历(每次 range 起点随机化防依赖)）
+  - `914-map-implementation.deep.md`（map 底层全景：哈希表 vs 搜索树取舍 + hmap/bmap 结构 + 定位/扩容/并发三注意，边界到 1218/107/414/923）
+- 撞题规避：`416-` 是**干净首覆盖**（全库无字符串字面量引号/转义/byte-rune 模型专用卡；相邻 415-array-slice-compare 偏数组切片比较语义、420-indirect-part-types 偏值内存布局中间接值部，均不覆盖字面量语法层），四张完整覆盖。`914-` 与 `1218-map-usage`(map 使用特性/增删查改)/`107-map-concurrent`(并发安全方案)/`414-map-range`(遍历顺序) 相邻但**底层 hmap/bmap 结构层是干净 gap**——既有卡均偏使用层/并发层/遍历层，未覆盖 bmap 字节布局/top hash 定位/负载因子扩容；本波聚焦"底层实现"这一层，深卡显式边界到 1218/107/414/923 不重产使用语法。全波 8 张 0 error、warn 维持 51（纠错节从首版即按 wave71 泛述 SOP 写，未列举任何原词崩坏词，未触发规则 11）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 rune→崩坏词、byte→拜特、literal→力特柔/字面量、escape→易斯盖普/转义、backslash→反斜杠、octal→崩坏词、hex→崩坏、rune→如呢、UTF-8→UTF8/优提夫、top hash→托普哈西、bucket→巴克特/桶、overflow→欧福漏/溢出、load factor→楼得饭特、panict→怕你可/panic、float→夫洛特/浮点 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`416-string-literals.deep.md`/`914-map-implementation.deep.md`），未被误判为主卡；416 三张主卡含 go 块、914 三张主卡含 go 块满足规则 14。
+- 门禁：834/834 PASS，error 0，warn **51**。累计 156 篇 done / 834 张卡。
