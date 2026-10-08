@@ -932,3 +932,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 Elasticsearch→electsearch 等音译、nil→偶/neo/leo、once→ones、atomic→autommic、double-checked locking→double 切割的 locking、goroutine→构入性 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。**精度补全**：源把裸 DCL 当合法方案，本波在 165 主卡+深卡补出 Go 内存模型下裸标志 DCL 属数据竞争、建议以 Once/atomic 保护（属补全非纠错）。
 - 格式坑（沿用 wave72 固化）：4 张深卡文件名均以 `.deep.md` 结尾（`1310-es-ha.deep.md`/`165-thread-safe-singleton.deep.md`），未被误判为主卡。
 - 门禁：778/778 PASS，error 0，warn **51**。累计 142 篇 done / 778 张卡。
+
+## wave 74（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/08/8-9`（Go中并发的三色标记法具体是怎么实现的？，L 级）→ `809-`；`source/10/10-4`（Go是怎么实现原子操作的？，L 级）→ `104-`。
+- 产出：
+  - `809-hybrid-barrier-stack-norescan.md`（混合写屏障规则①底层：栈全黑 + GC 期间栈新增对象直接标黑 → 免 STW 重扫栈；对比 Go1.5 插入屏障需二次重扫栈的代价）
+  - `809-write-barrier-scenario.md`（写屏障场景推演：栈黑不触发屏障、堆灰删白→删除屏障标灰防误回收、堆黑增白→插入屏障标灰）
+  - `809-tricolor-engineering-notes.md`（三色工程要点：防环辅助结构 / worklist 队列、浮动垃圾成因与短 STW 代价、强 / 弱三色不变式取舍）
+  - `809-tricolor-marking.deep.md`（三色标记实现全景：算法 + 屏障 + 场景 + 工程四层，串联 807/808）
+  - `104-concurrency-race-demo.md`（count++ 拆 load/add/store 三指令竞争得 987≠1000、单核不出现、三解法锁 / 通道缓冲1 / atomic.AddInt64 对比）
+  - `104-atomic-essence.md`（本质=不可中断的变量级互斥；Go 靠 LOCK 前缀 CPU 指令锁总线、sync/atomic 跨架构封装）
+  - `104-atomic-pitfalls.md`（五陷阱：struct 不直接原子 / 不保复合逻辑 / 高竞争不如锁 / 单核也需保护 / atomic.Value 须同类型）
+  - `104-atomic-impl.deep.md`（原子实现全景：根因竞争 + 本质 + 实战陷阱三层，串联 105）
+- 撞题规避：`809-` 与 `807-gc-tricolor`(三色基础)/`808-*`(6 卡：删除屏障/混合屏障/插入屏障/强-弱不变式/三色误回收/写屏障深卡) 重叠，本波聚焦**规则①栈免重扫底层逻辑 + 写屏障场景推演 + 三色工程要点**，各主卡显式声明与 807/808 边界、互补不重复；`104-` 与 `105-atomic-*`(5 卡：实现/类型作用域/锁vs原子取舍/锁vs原子深卡/原子vs互斥核心) 重叠，聚焦**并发竞争根因 worked demo + 原子本质 + 实战陷阱**，与 105 互补。全波 8 张 0 error、0 新增 warn（warn 维持 51）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 goroutine→构入性/购入性、三色→三色/伞色、mark→马克、barrier→屏障/百叶窗、stack→栈/斯的、heap→堆/系的、pointer→指针/拼的、atomic→原子的/阿童木、race→瑞斯 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
+- 格式坑（沿用 wave72 固化）：4 张深卡文件名均以 `.deep.md` 结尾（`809-tricolor-marking.deep.md`/`104-atomic-impl.deep.md`），未被误判为主卡。
+- 门禁：786/786 PASS，error 0，warn **51**。累计 144 篇 done / 786 张卡。

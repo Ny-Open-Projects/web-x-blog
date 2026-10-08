@@ -1675,10 +1675,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "809-hybrid-barrier-stack-norescan",
+        "809-write-barrier-scenario",
+        "809-tricolor-engineering-notes",
+        "809-tricolor-marking.deep"
+      ],
+      "done_at": "2026-10-08T11:08:41+08:00"
     },
     "source/09/9-1 问得最多的底层原理是这些，大佬教你有针对性的去备战（加片头）-迅捷文字转语音-1790911924377zh.txt": {
       "id": "9-1",
@@ -2460,10 +2466,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "104-concurrency-race-demo",
+        "104-atomic-essence",
+        "104-atomic-pitfalls",
+        "104-atomic-impl.deep"
+      ],
+      "done_at": "2026-10-08T11:08:41+08:00"
     },
     "source/10/10-5 原子操作和锁有什么区别？-迅捷文字转语音-1790917884924zh.txt": {
       "id": "10-5",
@@ -6598,7 +6610,7 @@
     }
   },
   "next_num": 1,
-  "waves": 73,
-  "updated": "2026-10-08T10:50:03+08:00",
+  "waves": 74,
+  "updated": "2026-10-08T11:08:41+08:00",
   "consec_fail": 0
 }
