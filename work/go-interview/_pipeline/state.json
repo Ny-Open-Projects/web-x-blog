@@ -3539,10 +3539,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1224-unique-vs-normal-index",
+        "1224-index-uniqueness-tradeoffs.deep"
+      ],
+      "done_at": "2026-10-09T06:57:55+08:00"
     },
     "source/12/12-25 为什么 MySQL 自增主键 ID 不连续？-迅捷文字转语音-1790922365477zh.txt": {
       "id": "12-25",
@@ -6816,10 +6820,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1841-tcp-vs-udp",
+        "1841-tcp-udp-tradeoffs.deep"
+      ],
+      "done_at": "2026-10-09T06:57:48+08:00"
     },
     "source/18/18-42 TCP 和 UDP 可以绑定相同的端口吗？-迅捷文字转语音-1790931844147zh.txt": {
       "id": "18-42",
@@ -7359,7 +7367,7 @@
     }
   },
   "next_num": 1,
-  "waves": 144,
-  "updated": "2026-10-09T06:47:18+08:00",
+  "waves": 145,
+  "updated": "2026-10-09T06:57:55+08:00",
   "consec_fail": 0
 }
