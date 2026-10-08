@@ -2294,10 +2294,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1012-spinlock-impl",
+        "1012-spinlock-vs-mutex",
+        "1012-lock-selection",
+        "1012-spinlock.deep"
+      ],
+      "done_at": "2026-10-08T19:35:33+08:00"
     },
     "source/10/10-13 Mutex 是悲观锁还是乐观锁？-迅捷文字转语音-1790918504020zh.txt": {
       "id": "10-13",
@@ -4501,10 +4507,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1315-official-sdk-client",
+        "1315-write-design",
+        "1315-query-optimize",
+        "1315-go-es-part2.deep"
+      ],
+      "done_at": "2026-10-08T19:35:33+08:00"
     },
     "source/13/13-16 怎么优化ElasticSearch性能？-迅捷文字转语音-1790925519901zh.txt": {
       "id": "13-16",
@@ -7030,7 +7042,7 @@
     }
   },
   "next_num": 1,
-  "waves": 109,
-  "updated": "2026-10-08T19:29:11+08:00",
+  "waves": 110,
+  "updated": "2026-10-08T19:35:33+08:00",
   "consec_fail": 0
 }
