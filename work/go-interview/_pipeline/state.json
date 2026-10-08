@@ -5278,10 +5278,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1510-callchain-timeout",
+        "1510-deadline-propagation.deep"
+      ],
+      "done_at": "2026-10-09T01:29:10+08:00"
     },
     "source/15/15-11 Prometheus的四种指标类型-迅捷文字转语音-1790927488273zh.txt": {
       "id": "15-11",
@@ -5824,10 +5828,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1711-complexity-evaluation",
+        "1711-complexity-analysis-method.deep"
+      ],
+      "done_at": "2026-10-09T01:29:10+08:00"
     },
     "source/17/17-12 一致性哈希算法的使用场景和解决的问题是什么？-迅捷文字转语音-1790929036195zh.txt": {
       "id": "17-12",
@@ -7263,7 +7271,7 @@
     }
   },
   "next_num": 1,
-  "waves": 132,
-  "updated": "2026-10-09T01:24:01+08:00",
+  "waves": 133,
+  "updated": "2026-10-09T01:29:10+08:00",
   "consec_fail": 0
 }
