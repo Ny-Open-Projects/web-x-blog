@@ -2262,10 +2262,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1018-goroutine-eval-exec-model",
+        "1018-goroutine-shared-write-race",
+        "1018-goroutine-data-race-detector",
+        "1018-goroutine-loop-pitfalls.deep"
+      ],
+      "done_at": "2026-10-08T09:47:27+08:00"
     },
     "source/10/10-19 并发编程误区之（一）-迅捷文字转语音-1790919160908zh.txt": {
       "id": "10-19",
@@ -4984,10 +4990,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "158-retry-timeout",
+        "158-circuit-breaker-degrade",
+        "158-isolation-ratelimit",
+        "158-microservice-fault-tolerance.deep"
+      ],
+      "done_at": "2026-10-08T09:47:28+08:00"
     },
     "source/15/15-9 限流有哪些实现方式？-迅捷文字转语音-1790927484568zh.txt": {
       "id": "15-9",
@@ -6526,7 +6538,7 @@
     }
   },
   "next_num": 1,
-  "waves": 67,
-  "updated": "2026-10-08T09:33:49+08:00",
+  "waves": 68,
+  "updated": "2026-10-08T09:47:28+08:00",
   "consec_fail": 0
 }

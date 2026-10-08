@@ -832,3 +832,19 @@
 - 撞题规避：124-acid-properties 已覆盖 ACID 定义+谁保证谁 → 1229 三张主卡避开 ACID 定义，聚焦**访问模式/事务ID时机/自动提交隐式提交/引擎临时表**；1225-transaction-rollback 覆盖回滚；1230-* 覆盖隔离级别。607/608-* 覆盖 defer 用法层 → 604 四张聚焦**运行时内部结构**（_defer 字段/deferproc/deferreturn/开放编码），互补不重复。
 - 原文纠错（本波）：① 事务"遇错自动回滚整个事务"→精确为 InnoDB 对单条语句做语句级回滚、仅死锁/锁等待超时才回滚整事务（1229-autocommit-implicit 边界）；② defer 的 `heap` 字段被源误述为"优先级/优先队列"，实际是堆分配标记、defer 是 LIFO 链表栈无优先队列（604-defer-struct 纠错节）。其余纯 ASR 解码（英乐DB→InnoDB、安卓logo→undo log、deffer→defer、勾入进→goroutine 等）。
 - 门禁：730/730 PASS，error 0，warn **51**。累计 130 篇 done / 730 张卡。
+
+## wave 68（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/10/10-18`（for循环中goroutine“坑”都在这里，L 级）→ `1018-`；`source/15/15-8`（微服务的容错设计，L 级）→ `158-`。
+- 产出：
+  - `1018-goroutine-eval-exec-model.md`（估值时刻/执行时刻两阶段模型 + GOMAXPROCS/sleep 巧合非保证 + 循环变量捕获 Go1.22 per-iteration 翻转）
+  - `1018-goroutine-shared-write-race.md`（读写共享变量真数据竞争 UB + 拷贝传值/锁/chan 三修法）
+  - `1018-goroutine-data-race-detector.md`（go test -race 原理/开销/CI 开启 + happens-before）
+  - `1018-goroutine-loop-pitfalls.deep.md`（四类坑统一心智模型 + 与 1017 互补 + 答题框架）
+  - `158-retry-timeout.md`（重试限次+指数退避+超时上限+非幂等谨慎+服务端反向抑制风暴）
+  - `158-circuit-breaker-degrade.md`（熔断三态开/半开/关 + 雪崩因果链 + 降级兜底）
+  - `158-isolation-ratelimit.md`（限流令牌桶/漏桶 + 隔离舱壁维度 + 高可用四基）
+  - `158-microservice-fault-tolerance.deep.md`（故障生命周期三段串联 + 取舍表 + 选型决策树）
+- 撞题规避：1017/712-* 已覆盖循环变量捕获+传值/重赋值修法 → 1018 四张补**估值/执行两阶段模型、读写竞争真 UB、-race 检测原理、统一心智模型**，互补不重复；158-* 无任何微服务容错卡，干净首覆盖。
+- 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含勾入进→goroutine、容断→熔断、指数KB→指数退避、非密等性→非幂等性、硬排桶→令牌桶、持发→超时、限流桶→令牌桶 等还原。
+- 门禁：738/738 PASS，error 0，warn **51**。累计 132 篇 done / 738 张卡。
