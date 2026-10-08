@@ -1,0 +1,58 @@
+# 1413 事务生产者：配置步骤与 API 流程
+
+> 分类：消息中间件 / Kafka | 难度：L3 | 题型：机制题 | 频率：中 | 关键词：**事务生产者** / **transactional.id** / **beginTransaction** / **consume-transform-produce** / **0.14**
+> 原文锚点：第 16~33 段「事务两种用途(多消息原子/消费topicA转写topicB)；先开幂等再设 transactional.id(SDK1.4.0+)，包路径变化；beginTransaction→send→commitTransaction；isTransactional 检查」
+
+## 一句话总述
+**事务生产者**（Kafka 0.14 引入）须**先开幂等再设 `transactional.id`**，把多个发送（甚至"消费 topicA→处理→写 topicB"）打包成原子操作：要么全部提交成功，要么全部失败。API 流程为 `beginTransaction` → 发送 → `commitTransaction`（异常则 `abort`）。它保证 producer→broker 跨分区不丢不重，但 consumer 端仍需额外机制。
+
+## 面试官视角
+- 意图：是否分得清"事务生产者配置前提"与"consume-transform-produce 原子语义"。
+- P5 知事务保证多消息原子；P6 知"先幂等、再 transactional.id、SDK>=1.4.0"；P7 知 consume-transform-produce 模式与"consumer 端仍需精确一次配合" `[边界]` 见 1418-producer-idempotent。
+- 红旗：以为开事务不用先开幂等；以为事务能保证 consumer 不重复消费。
+- 惊艳点：点出"事务解决的是 consume→process→produce 跨步骤原子，但 consumer offset 提交与处理顺序错位仍会重投" `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 事务生产者怎么配置，典型用法是什么？
+**A：**
+1. **配置前提**：先开启幂等（`enable.idempotence=true`），再设 `transactional.id`（要求客户端库 `>=1.4.0`）；同一 `transactional.id` 标识一个事务身份，用于故障恢复时回滚未完成事务。
+2. **API 流程**：`InitTransactions` 初始化 → `BeginTransaction` 开启 → 发送多条消息（可跨分区）→ `CommitTransaction` 提交；中途出错调用 `AbortTransaction` 中止，保证原子。
+3. **consume-transform-produce**：把"从 topicA 消费→业务处理→发往 topicB"整体包进一个事务，避免"处理完但 topicA offset 未提交就崩溃"导致的 topicB 重复——这是幂等生产者单独做不到的。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
+|---|---|---|---|---|
+| L1 | 事务用途 | 概念 | 多消息原子/跨步骤原子 | 换题 |
+| L2 | 配置前提 | 配置 | 先幂等+transactional.id | 判 P5 |
+| L3 | API 流程 | 用法 | begin→send→commit/abort | 判 P6 |
+| L4 | consume-transform | 设计 | topicA→B 原子 | 判 P6+ |
+| L5 | consumer 边界 | 进阶 | 消费端仍需精确一次配合 | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| 0.14 引入 | 客户端库 >=1.4.0 | 旧库无 transactional.id；部分客户端库 1.4.0 起包路径变更，升级需注意 import |
+
+## 关键代码
+```go
+// 示意：sarama 事务生产者 consume-transform-produce（0.14+），未做端到端验证
+cfg := sarama.NewConfig()
+cfg.Producer.Idempotent = true
+cfg.Producer.TransactionalID = "svc-1"         // 先幂等再设 transactional.id
+cfg.Producer.RequiredAcks = sarama.WaitForAll
+p, _ := sarama.NewSyncProducer(brokers, cfg)
+p.InitTransactions(ctx)
+p.BeginTransaction()                           // 开启事务
+p.SendMessage(&sarama.ProducerMessage{Topic: "topicB", Value: processed})
+// 提交 topicA 位移须在同一事务内（借助事务型 offset 提交）
+if err := p.CommitTransaction(ctx); err != nil {
+    p.AbortTransaction(ctx)                    // 异常中止，保证原子
+}
+```
+
+## 总结与追问预判
+- 事务生产者 = 先幂等 + transactional.id + begin/commit 流程，支持跨分区/跨 topic 原子。
+- 预判：幂等生产者配置 → 见 1413-idempotent-config；选型对比 → 见 1413-idempotent-vs-transactional；机制概述 → 见 1418-producer-idempotent。
+
+## ⚠️ 原文纠错
+源码将若干术语音译为崩坏词（英文专有名词被错读为近似音、部分中文术语写错字），本卡统一为规范术语 `[经验]`。事实核校：先开幂等再设 transactional.id、SDK>=1.4.0、begin/commit 流程、consume-transform-produce 原子——均正确，未做更正。

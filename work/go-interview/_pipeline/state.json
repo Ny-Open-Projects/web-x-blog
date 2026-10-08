@@ -4436,10 +4436,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1312-optimistic-vs-pessimistic",
+        "1312-version-control",
+        "1312-seqno-primaryterm",
+        "1312-es-concurrency.deep"
+      ],
+      "done_at": "2026-10-08T19:29:11+08:00"
     },
     "source/13/13-13 部署ElasticSearch过程中需要对操作系统进行哪些配置？-迅捷文字转语音-1790925507612zh.txt": {
       "id": "13-13",
@@ -4763,10 +4769,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1413-idempotent-config",
+        "1413-transactional-config",
+        "1413-idempotent-vs-transactional",
+        "1413-kafka-exactly-once.deep"
+      ],
+      "done_at": "2026-10-08T19:29:11+08:00"
     },
     "source/14/14-14 如何做到消息的有序性？-迅捷文字转语音-1790926412873zh.txt": {
       "id": "14-14",
@@ -7018,7 +7030,7 @@
     }
   },
   "next_num": 1,
-  "waves": 108,
-  "updated": "2026-10-08T19:21:17+08:00",
+  "waves": 109,
+  "updated": "2026-10-08T19:29:11+08:00",
   "consec_fail": 0
 }
