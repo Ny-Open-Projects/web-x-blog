@@ -1,0 +1,77 @@
+> 原文锚点：第 40~54 段「k 八 s 的使用场景…微服务架构…敏捷开发…跨云厂商和数据中心…CICD（Jenkins/GitLab）…大规模容器部署（数千节点数十万容器）」+ 特点「可移植性（跨云）/可扩展性（模块化插件化）/自动化」（使用场景与三大特点）
+
+## 一句话总述
+K8s 的典型场景是**微服务架构、敏捷开发、跨云/混合云部署、CI/CD 流水线、大规模容器集群**；其三大特点是**可移植性**（跨公有/私有/混合云）、**可扩展性**（模块化插件化、分布式架构易扩容）、**自动化**（声明式管理应用全生命周期）。
+
+## 面试官视角
+这题考「K8s 适用边界」的判断力。考点：① 场景能否讲出「为什么 K8s 适合」（如微服务靠 Service 解耦、跨云靠声明式可移植）；② 特点能否对应机制（可移植=声明式抽象底层、可扩展=CRD/Operator 插件化）；③ 会不会说「什么场景不适合 K8s」（小项目上 K8s 是过度工程）。能讲边界最显成熟。
+
+## 主问答
+**Q（面试官原话）：** K8s 适合哪些场景？它有什么特点？
+
+**A：**
+1. **微服务架构**：Pod/Service/Namespace 天然映射「服务=一组 Pod + 稳定入口 + 隔离」，K8s 轻松管理服务间依赖、发现与通信，是微服务的首选运行底座。
+2. **敏捷开发 / CI/CD**：声明式 + 滚动升级让「提交即部署」闭环（与 Jenkins/GitLab CI 集成），快速迭代、一键回滚。
+3. **跨云 / 混合云**：K8s 抽象了底层云差异，同一套 YAML 可在 AWS/GCP/阿里云/本地数据中心运行，**应用可在云间迁移**，避免厂商锁定。
+4. **大规模容器部署**：成熟生产可扩展到**数千节点、数十万容器**，调度与自愈机制扛得住规模。
+5. **三大特点**：① **可移植性**——声明式 API 屏蔽底层，跨云迁移；② **可扩展性**——高度模块化/插件化，CRD+Operator 可自定义资源与控制器，分布式架构易扩集群；③ **自动化**——自动部署/重启/复制/伸缩，配置即策略。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 适合啥场景？ | 场景归类 | 微服务/CI-CD/跨云/大规模 | 零散算 L1 未过 |
+| L2 | 跨云为何行？ | 可移植机制 | 声明式抽象底层云差异 | 答不清算 L2 未过 |
+| L3 | 可扩展性指啥？ | 插件化/CRD | CRD+Operator 自定义控制 | 说「加机器」算 L3 未过 |
+| L4 | 大规模到啥量？ | 规模事实 | 数千节点/数十万容器 | 无数字算 L4 未过 |
+| L5 | 啥场景不适合？ | 边界判断 | 小项目/无弹性需求上 K8s 过度 | 无边界算 L5 未过 |
+
+## 版本与兼容性
+- 跨云可移植依赖**声明式 API + 标准 kubelet 接口**；多云管理常用 Rancher/ClusterAPI，GitOps 用 ArgoCD/Flux。
+- 扩展性靠 `CRD`（自定义资源）+ `Operator`（自定义控制器）模式——这是 K8s 生态扩张的核心机制。
+- 与「微服务拆分」（见 `154-microservice-split-overview.deep.md`）配合：先有微服务架构决策，再用 K8s 落地运行。
+
+## 总结与追问预判
+收口：**场景=微服务/CI-CD/跨云/大规模；特点=可移植(声明式抽象)/可扩展(CRD插件化)/自动化**。预判追问：① 优势机制（见 `1515-k8s-advantages.md`）；② 架构基础（见 `1515-k8s-architecture.md`）。**高阶收尾必带边界**：「小团队/无弹性需求/单机应用上 K8s 是过度工程，Docker Compose 足矣」——能说不适合场景，才显工程权衡。
+
+## ⚠️ 原文纠错
+源视频转写将 Kubernetes / CI/CD / Jenkins / GitLab / 可移植性 / 可扩展性 等音译为崩坏词（如「k 八 s」「敏开发发」「跨云云厂商」「金hsgetlave」指代 Jenkins/GitLab、「可一致性」指代可移植性/一致性混写），本卡已还原为规范术语（Kubernetes / CI/CD / Jenkins / GitLab / 可移植性 / 可扩展性）。交付卡禁止保留任何原词崩坏写法。
+
+> **[经验]** 答「场景/特点」时务必补一句**边界**：「K8s 不是银弹，单机或小项目用 Docker Compose 更划算，上 K8s 的学习与运维成本不低」。面试官最怕背手册的人，能讲「什么时候不该用」直接拉开档次。
+
+```yaml
+# 跨云可移植：同一 Deployment 在任意云/本地运行（声明式屏蔽底层差异）
+apiVersion: apps/v1
+kind: Deployment
+metadata: { name: api, labels: { app: api } }
+spec:
+  replicas: 3
+  selector: { matchLabels: { app: api } }
+  template:
+    metadata: { labels: { app: api } }
+    spec:
+      containers:
+        - name: api
+          image: registry.example.com/api:1.4.0   # 仅镜像地址随云变，其余不变
+          ports: [{ containerPort: 8080 }]
+```
+
+```go
+// Go 侧用 client-go 跨集群：同一份代码对接不同 kubeconfig 即可跨云操作
+package main
+
+import (
+	"os"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
+)
+
+func clusterClient(kubeconfig string) (*kubernetes.Clientset, error) {
+	cfg, err := clientcmd.BuildConfigFromFlags("", kubeconfig) // 换路径即换云
+	if err != nil {
+		return nil, err
+	}
+	return kubernetes.NewForConfig(cfg)
+}
+
+var _ = os.Getenv
+```
