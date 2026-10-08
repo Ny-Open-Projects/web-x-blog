@@ -1119,3 +1119,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原（1242 含 幻读→患读、快照→拍照、提交→提交、隔离→隔离、间隙锁→零键索/零键锁、当前读→当前读 等；173 含 栈→栈、切片→切切/切片、入栈→入栈、出栈→出栈/拓扑、栈顶→栈顶/战顶、链表→链链/链表、push→push/扑、pop→pop/拓扑、peek→pick/取栈点 等）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11。1242 另含一条事实核校：原文把"修改"也列为幻读成因，本卡归为"修改使记录进出查询范围"的边界型幻读，与 1230 卡口径一致。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`1242-phantom-overview.deep.md`/`173-stack-overview.deep.md`），未被误判为主卡；1242 三张主卡含 sql 块(事务演示)、173 三张主卡含 go 块(Stack/LStack/NewStack)满足规则 14。
 - 门禁：866/866 PASS，error 0，warn **51**。累计 164 篇 done / 866 张卡。
+
+## wave 85（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/09/9-11`（channel的底层实现原理，L2~L3）→ `911-`；`source/18/18-7`（进程管理，L2~L3）→ `187-`。
+- 产出：
+  - `911-channel-data-copy.md`（channel 值传递复制语义：值必复制、经 buf 两次、只复制直接值部；大结构体传指针降成本，边界 1112-value-size）
+  - `911-channel-sync-async.md`（有缓冲=异步/无缓冲=同步 rendezvous；send/recv 算法「抢锁→判 recvq/sendq→handoff/buf/park」，recv 遇 sendq 非空从 buf 首取+sendq 补尾）
+  - `911-channel-csp-design.md`（CSP 模型「通过通信共享内存」；channel 传所有权非共享；有加锁+调度开销、高频状态应改用 atomic/mutex，边界 609-concurrency-lock）
+  - `911-channel-pass-semantics.deep.md`（channel 传递与语义全景：结构层交 609-channel.deep，本卡串 复制/同步异步/算法/CSP 四层 + 显式边界到 609）
+  - `187-process-states.md`（Linux 进程状态机：运行/就绪/睡眠(可中断/不可中断/停止)三态+僵尸；不可中断态保原子；僵尸是独立终止态非睡眠子态）
+  - `187-zombie-orphan.md`（僵尸=父未 wait 占 PID/进程表、孤儿=父先死被 init(PID1) 收养无害；都归 init 后果相反）
+  - `187-background-nohup-exec-screen.md`（后台运行三法：nohup 忽略 SIGHUP 新进程 / exec 替换且 Docker 中作 PID1 收 SIGTERM 优雅关闭 / screen 独立会话；Docker 优先 exec）
+  - `187-process-mgmt-overview.deep.md`（进程管理全景：类型→状态机→僵尸孤儿→后台三法 四层 + 显式边界到 Go runtime 调度卡 813/814/815）
+- 撞题规避：`911-` 与 `609-channel.deep`(hchan 全景/四路径/关闭语义)、`609-channel-concurrency-lock`(锁/自旋)、`610-deadlock`/`612-closed-channel`/`1019-close-panic`/`1021-close-*`(关闭与 panic)、`1015-channel-semaphore`(信号量用法) 重叠，但**结构层已被 609 深卡占全**，本波取**语义/算法/设计层真 gap**：①值复制次数(1 vs 2、直接值部) ②同步异步+send/recv 算法步骤与 recvq/sendq 优先级(含 recv 遇 sendq 非空分支) ③CSP 设计哲学与适用边界。深卡显式声明「结构层见 609，本卡不重画 hchan」，不重产结构已覆盖内容。`187-` 为 **Linux 进程管理干净首覆盖**(grep 命中的 410-* 是 Go os 包、181-* 是 Linux 历史，均非进程状态机/僵尸/孤儿/nohup/screen)，且全库无 Docker PID1 优雅关闭点；深卡显式边界到 Go runtime goroutine/OS 线程调度(813/814/815)，不混两层概念。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（911 含 channel→牵al/腔道、协程→勾入t、缓冲→八份/缓冲、条件变量→组合条件变量、锁→look/mutex、panic→tepineic、复制→复制 等；187 含 进程→进呈、线程→线呈、僵尸→僵止、孤儿→过尔、守护→守护、nohup→lowhup、exec→ESEC、screen→SCE、终端→终单/终单 等）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11。187 另含两条事实核校：①僵尸是独立终止态非睡眠子态(原文归类有误) ②nohup/exec/screen 规范名归一并补 Docker PID1 优雅关闭生产结论(原文只泛述差异)。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`911-channel-pass-semantics.deep.md`/`187-process-mgmt-overview.deep.md`），未被误判为主卡；911 三张主卡含 go 块(channel/copy/结构)、187 三张主卡含 go 块(os/exec+syscall 演示进程生命周期/僵尸/Docker 脱离终端)满足规则 14（OS 题无原生 go 块，借 os/exec 落地）。
+- 门禁：874/874 PASS，error 0，warn **51**。累计 166 篇 done / 874 张卡。

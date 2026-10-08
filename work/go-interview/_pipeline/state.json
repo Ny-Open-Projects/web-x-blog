@@ -1750,10 +1750,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "911-channel-data-copy",
+        "911-channel-sync-async",
+        "911-channel-csp-design",
+        "911-channel-pass-semantics.deep"
+      ],
+      "done_at": "2026-10-08T15:02:41+08:00"
     },
     "source/09/9-12 Goroutine与进程线程有何区别？-迅捷文字转语音-1790916680264zh.txt": {
       "id": "9-12",
@@ -6479,10 +6485,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "187-process-states",
+        "187-zombie-orphan",
+        "187-background-nohup-exec-screen",
+        "187-process-mgmt-overview.deep"
+      ],
+      "done_at": "2026-10-08T15:02:42+08:00"
     },
     "source/18/18-8 CPU 负载和 CPU 利用率的区别是什么？-迅捷文字转语音-1790929939260zh.txt": {
       "id": "18-8",
@@ -6730,7 +6742,7 @@
     }
   },
   "next_num": 1,
-  "waves": 84,
-  "updated": "2026-10-08T14:52:33+08:00",
+  "waves": 85,
+  "updated": "2026-10-08T15:02:42+08:00",
   "consec_fail": 0
 }

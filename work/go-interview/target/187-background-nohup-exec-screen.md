@@ -1,0 +1,56 @@
+# 187 后台运行命令：nohup / exec / screen 与 Docker PID 1
+
+> 分类：操作系统 / Linux | 难度：L3 | 题型：实操题 | 频率：中 | 关键词：**nohup**/**exec**/**screen**/**SIGHUP**/**setsid**/**Docker PID 1 优雅关闭**
+
+> 原文锚点：第 27~62 段「关闭终端后命令不退出 / nohup 与 exec 与 screen 区别」
+
+## 一句话总述
+想让命令**关终端后继续跑**，有三种常用手段：**nohup**（忽略 SIGHUP、输出重定向 `nohup.out`、作为新进程不替换终端）、**exec**（替换当前 shell 进程、关终端即终止；但在 Docker 中作 **PID 1** 能收退出信号实现**优雅关闭**）、**screen**（独立会话，关终端不影响、可重连）。Docker 里需优雅关闭时应优先 `exec`，而非 nohup。
+
+## 面试官视角
+这是「命令不退出」的实操题，常和 Docker 结合考。能讲清三者差异、尤其点出「exec 在 Docker 中作 PID 1 收 SIGTERM 优雅关闭、nohup 收不到」的，是实踩过坑的水平。
+
+## 主问答
+**Q（面试官原话）：** 怎么让命令关掉终端还继续运行？nohup / exec / screen 有啥区别？
+
+1. **nohup**：启动时忽略 `SIGHUP`（关终端会发 SIGHUP），标准输出默认重定向到 `nohup.out`，避免关终端丢失输出；它以**新进程**运行，**不替换**当前 shell，关终端后仍跑。
+2. **exec**：**替换**当前 shell 进程（脚本结束终端会话也结束）；在 Docker 中 `exec` 启动的程序成为 **PID 1**，容器退出时能收到 `SIGTERM` 等退出信号，从而**优雅关闭**；nohup 起的程序收不到这类信号。
+3. **screen**：开独立会话窗口运行命令，关终端只是断开连接、会话内程序照跑，可 `screen -r` 重连继续看输出——适合装耗时软件。
+4. **输出重定向差异**：nohup 默认写 `nohup.out`；exec 输出在当前终端，除非手动重定向；screen 输出在会话内。
+5. **Docker 结论**：需优雅关闭（收到信号清理资源）用 `exec`；用 nohup 起则收不到退出信号、无法优雅关停——这是生产部署的关键取舍。
+
+## 追问链
+| 档位 | 追问 | 答不出停在哪档 |
+|------|------|----------------|
+| L1 | 怎么后台运行？ | 说不清 nohup |
+| L2 | nohup 干嘛？ | 说不清忽略 SIGHUP |
+| L3 | exec 与 nohup 区别？ | 说不清替换 vs 新进程 |
+| L4 | Docker 用哪个？ | 说不清 exec 作 PID1 优雅关闭 |
+| L5 | 为何 nohup 收不到信号？ | 说不清非 PID1 收退出信号 |
+
+## 版本与兼容性
+| 手段 | 关终端 | 替换 shell | Docker 收信号 | 输出 |
+|------|--------|------------|--------------|------|
+| nohup | 继续跑 | 否（新进程） | 否 | nohup.out |
+| exec | 终止 | 是 | 是（PID1） | 当前终端 |
+| screen | 继续跑 | 否（独立会话） | 视情况 | 会话内 |
+
+## 关键代码
+```go
+// Go 里用 os/exec + SysProcAttr 模拟 nohup/setsid 的"脱离终端"语义
+cmd := exec.Command("ping", "baidu.com")
+cmd.SysProcAttr = &syscall.SysProcAttr{Setsid: true} // 新建会话、脱离控制终端(类似 nohup/screen)
+if err := cmd.Start(); err != nil {
+    panic(err)
+}
+// Docker 中想作 PID1 收 SIGTERM 优雅关闭，则用 exec 而非 setsid 脱离
+// signal.Notify(sigCh, syscall.SIGTERM); <-sigCh // 优雅关闭逻辑
+_ = cmd.Wait()
+```
+
+## 总结与追问预判
+核心：**nohup 忽略 SIGHUP 新进程、exec 替换且 Docker 中作 PID1 优雅关闭、screen 独立会话可重连**；Docker 需优雅关闭选 exec。追问拐向「进程状态/僵尸」——备好「不 Wait 会积累僵尸」（见 `187-zombie-orphan.md`）。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 原文将 `nohup` 音近记为「lowhup」、`exec` 记为「ESEC」、`screen` 记为「SCE」——本卡归一为规范命令名；并补入「Docker 中 exec 作 PID1 收 SIGTERM 优雅关闭、nohup 收不到」这一生产级结论（原文只泛述二者差异）。
+2. 崩坏词归一：源码将 nohup / exec / screen / 终端 / 会话 等音译为多组崩坏词，本卡统一为规范术语。
