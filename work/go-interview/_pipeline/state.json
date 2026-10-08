@@ -789,10 +789,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "601-go-advanced-features",
+        "601-advanced-features-roadmap.deep"
+      ],
+      "done_at": "2026-10-09T01:02:50+08:00"
     },
     "source/06/6-10 有缓冲的channel和无缓冲的channel有何区别-迅捷文字转语音-1790861382759zh.txt": {
       "id": "6-10",
@@ -6985,10 +6989,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "188-load-vs-utilization",
+        "188-load-diagnosis.deep"
+      ],
+      "done_at": "2026-10-09T01:02:50+08:00"
     },
     "source/18/18-9 如何排查CPU占用过高的问题？-迅捷文字转语音-1790930144714zh.txt": {
       "id": "18-9",
@@ -7239,7 +7247,7 @@
     }
   },
   "next_num": 1,
-  "waves": 129,
-  "updated": "2026-10-09T00:50:50+08:00",
+  "waves": 130,
+  "updated": "2026-10-09T01:02:50+08:00",
   "consec_fail": 0
 }
