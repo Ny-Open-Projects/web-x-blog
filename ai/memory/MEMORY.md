@@ -1068,3 +1068,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 circle→SQL、勾浪→Go、携程→goroutine、并刷术→并发数、单口→端口、文件描述服务→文件描述符、另一排桶→令牌桶、硬排→令牌、扩大→channel/quota、牵l→请求、润景→程序、位置→Wait、tiken→Ticker、REDIS→Redis、浪值→NULL、ln值→NULL、缩引→索引、asside→某、redealn→REDUNDANT、索影→索引、乐indv→InnoDB、root→OR、uni→UNION、oldby→ORDER BY、note→NOT、cirll→SQL 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`108-control-concurrency-overview.deep.md`/`1248-sql-optimization-overview.deep.md`），未被误判为主卡；108 三张主卡含 go 块、1248 三张主卡含 sql 块满足规则 14。
 - 门禁：842/842 PASS，error 0，warn **51**。累计 158 篇 done / 842 张卡。
+
+## wave 82（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/14/14-18`（kafka 如何避免重复消费？，L2~L3）→ `1418-`；`source/10/10-2`（Go的并发编程真的那么简单吗？，L2~L3）→ `102-`。
+- 产出：
+  - `1418-kafka-dup-root.md`（重复消费根因=业务已处理 offset 未提交；三触发场景(宕机/自动提交/rebalance 超时 max.poll.interval.ms 默认5min)；三质量标准 at-most/at-least/exactly-once；Kafka 普通消费泊 exactly-once 难）
+  - `1418-idempotent-consumption.md`（**业务层幂等(核心 gap)**：DB 主键/唯一索引、ES 文档ID 用业务ID、去重表/全局唯一ID、Redis 去重缓存；producer 幂等≠端到端）
+  - `1418-producer-idempotent.md`（Kafka producer 端：幂等生产者 0.11(PID+序列号单分区去重)/事务生产者 0.14(跨分区原子)；仅去重发送端）
+  - `1418-kafka-dup-overview.deep.md`（重复消费全景：根因→质量标准→Kafka机制(边界1417/147)→业务幂等 四层 + 选型表）
+  - `102-concurrency-three-problems.md`（并发三分类框架：分工/同步/互斥；Go 原语映射 channel+条件变量=同步、锁+原子=互斥；目标差异=性能vs正确）
+  - `102-concurrency-pitfalls.md`（Go 简单假象与雷区：go 一行启动≠写好；资源/死锁/选型；并发 bug 需并发量触发难定位+脏数据；实例边界 1017 闭包循环变量）
+  - `102-primitive-selection.md`（选型大方向：编排用 channel、保护用锁/原子；灵活组合 sync.Map 读写分离降锁竞争；新手三误区）
+  - `102-go-concurrency-overview.deep.md`（Go 并发全景：三框架→雷区→选型大方向→实例边界 四层 + 边界 1017/105/1015/922/108）
+- 撞题规避：`1418-` 与 `1417-consumer-commit`(offset 提交机制/手动提交)、`1417-reliability.deep`(六道闸门/acks/ISR)、`147-consumer-rebalance`(rebalance 触发) 重叠，本波取**真 gap=业务层幂等消费实现**(DB 唯一索引/ES 文档ID/去重表/Redis 缓存，1417 只提"消费端须幂等"未给手段)；另补根因三场景+三质量标准+producer 幂等/事务版本边界(0.11/0.14)，深卡显式边界到 1417/147，不重产提交/可靠性机制。`102-` 与 `1017-*`(闭包循环变量 bug)、`105-atomic-vs-lock-when`(锁vs原子)、`1015-mutex-vs-channel-bench`(锁vschannel)、`922-syncmap-*`(sync.Map)、`108-`(协程数) 重叠，本波取**心智模型层真 gap**：①并发三分类框架(分工/同步/互斥，全库无此 framing) ②简单假象与雷区(go易写难好+并发bug特性) ③选型大方向(编排用channel/保护用锁)，深卡显式边界到 1017/105/1015/922/108，不重产闭包bug/锁原子细节。全波 8 张 0 error、warn 维持 51（**修复规则 11**：初版 6 张主卡纠错节列举崩坏词(构语言/卡夫卡/牵al 等)，`102-primitive-selection` 命中 denylist「构语言」触发 ✗1；按 wave71/79 泛述 SOP 将 6 张全改为纯泛述"源码将若干术语音译为崩坏词，本卡统一为规范术语"，✓11 归零——根因修复，非只改报错那张）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 kafka→卡夫卡、幂等→密等、broker→brock、panic→panick、rebalance→rebalance、max.poll.interval→maskforinterl、producer→roproDMM、RabbitMQ→rubitm、Redis→regiis、MongoDB→moglDB、NotFound→lotefound、Go→构语言/构的、channel→牵al、goroutine→携程、闭包→B包、sync.Map→SYNCmap、0.11→一点二零、0.14→一点四零 等；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`1418-kafka-dup-overview.deep.md`/`102-go-concurrency-overview.deep.md`），未被误判为主卡；1418 三张主卡含 go 块(manual commit/sarama/Redis)、102 三张主卡含 go 块满足规则 14。
+- 门禁：850/850 PASS，error 0，warn **51**。累计 160 篇 done / 850 张卡。

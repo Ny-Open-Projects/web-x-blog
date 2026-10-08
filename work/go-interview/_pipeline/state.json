@@ -2360,10 +2360,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "102-concurrency-three-problems",
+        "102-concurrency-pitfalls",
+        "102-primitive-selection",
+        "102-go-concurrency-overview.deep"
+      ],
+      "done_at": "2026-10-08T14:32:14+08:00"
     },
     "source/10/10-20 并发编程误区（二）-迅捷文字转语音-1790919168288zh.txt": {
       "id": "10-20",
@@ -4648,10 +4654,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1418-kafka-dup-root",
+        "1418-idempotent-consumption",
+        "1418-producer-idempotent",
+        "1418-kafka-dup-overview.deep"
+      ],
+      "done_at": "2026-10-08T14:32:13+08:00"
     },
     "source/14/14-19 kafka出现消息堆积应该怎么办？-迅捷文字转语音-1790926625829zh.txt": {
       "id": "14-19",
@@ -6694,7 +6706,7 @@
     }
   },
   "next_num": 1,
-  "waves": 81,
-  "updated": "2026-10-08T14:21:50+08:00",
+  "waves": 82,
+  "updated": "2026-10-08T14:32:14+08:00",
   "consec_fail": 0
 }
