@@ -278,10 +278,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "420-single-block-types",
+        "420-indirect-part-types",
+        "420-stack-grow-address-shift",
+        "420-value-memory-layout.deep"
+      ],
+      "done_at": "2026-10-08T11:26:58+08:00"
     },
     "source/04/4-21 Go语言中哪些类型可以被内嵌？-迅捷文字转语音-1790759426748zh.txt": {
       "id": "4-21",
@@ -4336,10 +4342,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "135-coordinating-node-routing",
+        "135-routing-write-query-impact",
+        "135-query-jitter-preference",
+        "135-bulk-routing-optimization.deep"
+      ],
+      "done_at": "2026-10-08T11:26:57+08:00"
     },
     "source/13/13-6 Elasticsearch是如何写入数据的？（二）-迅捷文字转语音-1790925075518zh.txt": {
       "id": "13-6",
@@ -6610,7 +6622,7 @@
     }
   },
   "next_num": 1,
-  "waves": 74,
-  "updated": "2026-10-08T11:08:41+08:00",
+  "waves": 75,
+  "updated": "2026-10-08T11:26:58+08:00",
   "consec_fail": 0
 }

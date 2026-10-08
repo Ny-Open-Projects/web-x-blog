@@ -1,0 +1,52 @@
+# 135 routing 对写入/查询/删除的影响
+
+> 分类：Elasticsearch · 分布式写入 | 难度：L3 | 题型：应用题 | 频率：高 | 关键词：**自定义 routing**/**同 ID 共存**/**get/delete 须显式 routing**/**bulk 散列**
+> 原文锚点：第 10~25 段「自定义 routing 与文档 ID 共存；get/delete 按文档 ID 不指定 routing 会误删；bulk 不指定 routing 散列成片数倍写请求」
+
+## 一句话总述
+`routing` 是写入寻址的"分片键"：**自定义 routing 的文档即使 `_id` 相同，只要 routing 不同就是两条独立数据**（同 ID 可共存）；因此用 `get`/`delete` 按 ID 操作时**必须显式带原 routing**，否则默认按 `_id` 路由会删错/查不到目标；`bulk` 不指定 routing 时一次请求会被拆成"分片数"倍写请求散到各节点。
+
+## 面试官视角
+- 考察意图：是否真正用过自定义 routing，理解"ID 相同 ≠ 同一条数据"这一反直觉点，以及 get/delete 的坑。
+- 分档：P5 知 routing 是分片键；P6 知自定义 routing 下 ID 可共存、get/delete 须带 routing；P7 知 bulk 散列放大与优化。
+- 红旗：以为 `_id` 全局唯一；或 delete 一个 ID 就把同 ID 不同 routing 的都删了。
+- 惊艳点：点出"routing 本质是把同维度数据锁在同一分片"，以及"bulk 按 routing 打包可把片数倍写请求收敛回单分片写"。
+
+## 主问答
+**Q（面试官原话）：** 我自定义了 routing，又用了业务 ID，会有什么坑？
+**A：**
+1. **同 ID 可共存**：文档唯一性 = `(_id, routing)` 组合。写入时指定 `routing=111` 与默认（按 `_id`）的两条数据，**ID 都是 1 但 routing 不同，是两条独立文档**，可共存。
+2. **get/delete 必须显式 routing**：用 `get`/`delete` 按 ID 操作时若**不显式指定 routing**，ES 默认以 `_id` 作 routing 去定位——只能命中"无 routing 的那条"，**带 routing 的那条删不掉/查不到**（演示中 delete 后带 routing 的依然存在）。
+3. **bulk 散列放大**：`bulk` 不指定 routing 时，ES 以文档 `_id` 路由，一次 bulk 会被协调节点拆成"分片数"倍写请求发往各分片；分片越多、节点故障/GC/抖动时越易排队打满、写入被拒。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | ID 相同是同一文档？ | 反直觉 | 否，需看 routing | P5 |
+| L2 | delete 坑？ | 实战 | 须显式带 routing | P6 |
+| L3 | bulk 不指定 routing？ | 机制 | 散成片数倍请求 | P6+ |
+| L4 | 何时用自定义 routing？ | 取舍 | 同维度数据聚合查询 | P7 |
+| L5 | 日志场景为何自动 ID？ | 进阶 | 无更新场景省一次查 ID IO | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| ES 全版本 | 7.0 弃 type；routing 语义稳定 | 答"唯一性由 (_id,routing) 决定；get/delete 必带 routing；更新场景用业务 ID，日志等无更新场景让 ES 自动生成 ID 省 IO" |
+
+## 关键代码
+```go
+// 写入：同 ID、不同 routing → 两条独立文档
+cli.Index().Index("user").Id("1").Routing("111").BodyJson(doc).Do(ctx) // create 成功
+cli.Index().Index("user").Id("1").BodyJson(doc).Do(ctx)               // 另一条，无 routing
+
+// 删除：必须带 routing，否则按 _id 默认路由，删不掉带 routing 的那条
+cli.Delete().Index("user").Id("1").Routing("111").Do(ctx) // ✅ 删目标
+cli.Delete().Index("user").Id("1").Do(ctx)                // ❌ 只删无 routing 的那条
+```
+
+## 总结与追问预判
+自定义 routing 把"文档唯一性"从 `_id` 升级为 `(_id, routing)`，用 get/delete 必须带 routing，否则定位错位。追问接"主副本 refresh 时机不同导致查询结果震荡"。
+
+## ⚠️ 原文纠错
+1. 事实核校：自定义 routing 下 (_id,routing) 唯一、get/delete 须显式 routing、bulk 不指定 routing 散列成片数倍写请求、日志无更新场景用自动 ID 省 IO——均正确 `[经验]`。
+2. 崩坏词归一：源码将 Elasticsearch 音译为崩坏词、routing 音译为入听/入体、delete 音译为删除/删除之后、bulk 音译为 bug；源码将若干标识符音译为崩坏词，本卡统一为规范术语 `[经验]`。

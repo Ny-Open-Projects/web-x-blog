@@ -949,3 +949,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 goroutine→构入性/购入性、三色→三色/伞色、mark→马克、barrier→屏障/百叶窗、stack→栈/斯的、heap→堆/系的、pointer→指针/拼的、atomic→原子的/阿童木、race→瑞斯 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
 - 格式坑（沿用 wave72 固化）：4 张深卡文件名均以 `.deep.md` 结尾（`809-tricolor-marking.deep.md`/`104-atomic-impl.deep.md`），未被误判为主卡。
 - 门禁：786/786 PASS，error 0，warn **51**。累计 144 篇 done / 786 张卡。
+
+## wave 75（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/13/13-5`（Elasticsearch是如何写入数据的？(一)，L 级）→ `135-`；`source/04/4-20`（Go语言中每个值在内存中只分布在一个内存块上的类型有哪些？，L 级）→ `420-`。
+- 产出：
+  - `135-coordinating-node-routing.md`（协调节点角色 + routing 取余定位(hash(routing)%主分片数) + 全节点缓存分片位置仅主节点更新 → 主分片数参与路由不可改、分片数>节点数+预留）
+  - `135-routing-write-query-impact.md`（routing 对写入/查询/删除影响：自定义 routing 与文档 ID 共存(同ID不同routing=两条) / get-delete 须显式 routing 否则按 ID 误删 / bulk 不指定 routing 散成片数倍写请求）
+  - `135-query-jitter-preference.md`（主副本 refresh 时机不同 → 同查询结果震荡 + preference 固定分片消除震荡并提升分片级缓存命中）
+  - `135-bulk-routing-optimization.deep.md`（bulk 路由优化：相同 routing 打包 + 手动 routing 缓解写入被拒；写入被拒根因=队列打满/节点故障/GC/网络）
+  - `420-single-block-types.md`（单内存块类型=直接值部类型：布尔/数值/指针/结构体/数组；判定法则=是否含间接引用；指针值单块但所指多块）
+  - `420-indirect-part-types.md`（含间接值部的 6 类：slice/map/chan/func/interface/string，逐一拆解各自间接值部(底层数组/hmap/hchan/闭包/itab+data/只读字节数组)）
+  - `420-stack-grow-address-shift.md`（协程栈 2KB 自适应、上限 1GB/250MB/SetMaxStack；栈伸缩内存块搬迁地址变指针刷新；逃逸留隐式指针指向堆）
+  - `420-value-memory-layout.deep.md`（值内存布局全景：值部分类+单块/多块+栈堆逃逸+地址变化，串联 923/1112/1118）
+- 撞题规避：`135-` 与 `1314-doc-index-api`(Go 写入API/refresh语义)/`1316-refresh-translog`(refresh/translog机制)/`1314-bulk-processor`(bulk两式) 重叠，本波聚焦**routing 算法+协调节点架构+查询结果震荡+preference+bulk路由放大**，各主卡显式声明与 1314/1316 边界、互补不重复；`420-` 与 `923-direct-indirect-part`(传参拷贝直接部分)/`1112-value-size`(值尺寸)/`1118-stack-heap-diff`(栈堆分工上限)/`1119-escape-analysis`(逃逸分析) 高度重叠，本波只取**两个真 gap**：①面试题标准答案"单内存块类型 5 类清单+判定法则"（923 讲传值模型未给此分类）、②栈伸缩时地址变化+逃逸隐式指针机制（1118 讲分工未讲地址变迁），各卡显式声明互补边界，不重产已被覆盖的传值/尺寸/逃逸命令内容。全波 8 张 0 error、0 新增 warn（warn 维持 51）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 Elasticsearch→崩坏词、goroutine→构入性/过入、routing→入听/入体、search→场询、refresh→刷新、bulk→bug、preference→偏好/三星ID、map→映射/麻坡、chan→通道、string→速度、指针→拼的、栈→栈/站、SetMaxStack→sidemarxstock、MB/MiB 音译混乱 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
+- 格式坑（沿用 wave72 固化）：2 张深卡文件名均以 `.deep.md` 结尾（`135-bulk-routing-optimization.deep.md`/`420-value-memory-layout.deep.md`），未被误判为主卡。
+- 门禁：794/794 PASS，error 0，warn **51**。累计 146 篇 done / 794 张卡。
