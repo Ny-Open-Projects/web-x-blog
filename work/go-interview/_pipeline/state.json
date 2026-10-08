@@ -3927,10 +3927,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1260-bigkey-definition",
+        "1260-bigkey-impacts",
+        "1260-bigkey-handling",
+        "1260-bigkey.deep"
+      ],
+      "done_at": "2026-10-08T10:34:20+08:00"
     },
     "source/12/12-61 Redis如何保证与数据库的双写一致性？-迅捷文字转语音-1790924528181zh.txt": {
       "id": "12-61",
@@ -6455,10 +6461,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "193-cache-component-selection",
+        "193-cache-distribution-deploy",
+        "193-seckill-link-cache",
+        "193-seckill-cache-design.deep"
+      ],
+      "done_at": "2026-10-08T10:34:20+08:00"
     },
     "source/19/19-4 电商秒杀场景下如何应对突发流量？-迅捷文字转语音-1790932557341zh.txt": {
       "id": "19-4",
@@ -6574,7 +6586,7 @@
     }
   },
   "next_num": 1,
-  "waves": 71,
-  "updated": "2026-10-08T10:21:39+08:00",
+  "waves": 72,
+  "updated": "2026-10-08T10:34:20+08:00",
   "consec_fail": 0
 }

@@ -898,3 +898,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含 护士锁→互斥锁、子锁→死锁、活节→活锁、勾入进→goroutine、自选锁→自旋锁、CS→CAS、vergin→version、trlolook→TryLock、phoalerror→fatal error、PPROF→pprof、runtimetrace→runtime/trace、gototrice→go tool trace、trss→trace 文件、glpthings→Goroutines、helpp→Heap、PROC→Proc 等。技术均准确（Mutex 悲观、CAS 乐观、死锁不可 recover、trace UI 分层、trace vs pprof 分工）。
 - **门禁修复（重要·二次踩坑）**：首校 5 error——主卡纠错节列举的原词崩坏词命中机翻残留黑名单（构语言/wave70、护士锁/自选锁/wave71）。规则 11 只校主卡（深卡 ✓2 不跑该规则）。**强化 SOP：纠错节一律泛述"源码将若干〔术语〕音译为崩坏词，本卡统一为规范术语"，禁止列举任何原词崩坏词——黑名单无法穷举（已知构语言/护士锁/自选锁，必有更多），泛述可一劳永逸规避整类失败**。本波 3 张主卡已改为泛述，全量 762/762 PASS、error 0、warn 51。
 - 门禁：762/762 PASS，error 0，warn **51**。累计 138 篇 done / 762 张卡。
+
+## wave 72（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/19/19-3`（电商秒杀场景下的各种缓存设计，L 级）→ `193-`；`source/12/12-60`（Redis的大Key有什么影响？如何处理大 key？，L 级）→ `1260-`。
+- 产出：
+  - `193-cache-component-selection.md`（缓存组件选择：本地缓存/Redis/Memcached 分层 + 简单读写用 string 序列化 JSON/protobuf、复杂存取用 hash/set/list/zset）
+  - `193-cache-distribution-deploy.md`（分布策略：取模 vs 一致性哈希、client 直连 vs proxy 路由；部署：分池/分层/分IDC/异构/服务化）
+  - `193-seckill-link-cache.md`（秒杀链路四缓存：静态资源 CDN / 本地缓存预热商品 / 用户+访问记录缓存防刷 / 库存缓存+MQ 异步落库削峰）
+  - `193-seckill-cache-design.deep.md`（缓存设计方法论：组件→结构→分布→部署→链路 + 11 考量点，与 1261/129/1253/196 互补）
+  - `1260-bigkey-definition.md`（大 Key 定义：经验线 value>1MB 或集合>1万、场景线 10KB 即大 Key、按耗时上报量化定义）
+  - `1260-bigkey-impacts.md`（六大影响：内存碎片/单线程阻塞/网络拥堵/AOF always 阻塞+fork 写时复制页表复制+内存大页/主从延迟/集群倾斜）
+  - `1260-bigkey-handling.md`（处理六法：拆多 key 或 hash field / UNLINK 异步删 / 更短过期 / LRU-LFU 淘汰 / 扫描定位 scan+--bigkeys+RDB / gzip 压缩存储）
+  - `1260-bigkey.deep.md`（大 Key 全景：定义→影响→处理 + fork 写时复制与内存大页(2MB vs 4KB)底层机制，与 1253 持久化互补）
+- 撞题规避：`193-` 避开 `196-seckill-ha.deep`(秒杀高可用)/`1261-*`(Cache-Aside 一致性)/`129-*`(查询缓存)，聚焦**缓存组件/结构/分布/部署/秒杀链路**方法论，各主卡纠错节注明互补边界；`1260-` 与 `1253-redis-persist.deep`(持久化机制) 不同主题（聚焦大 Key 影响与治理），干净首覆盖。全波 8 张 0 error、0 新增 warn（warn 维持 51）。
+- 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含 localcatch→localCache、REDISP卡→Redis、MMCatch→Memcached、propersy→proxy、qu模/曲模→取模、客户直连→客户端直连、读写峰值→读写峰值、速组→数组、速度→切片、引诺→引擎(?) 等。技术均准确（缓存分层、一致性哈希、写时复制、内存大页）。按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
+- **门禁修复（格式坑·新发现）**：首校 769/770 error 7——`1260-bigkey-deep.md` 文件名**无 `.deep` 后缀**，validate 归类为「主卡」并强求 面试官视角/主问答/追问链/版本与兼容性/总结 等小节，直接 error。改名 `1260-bigkey.deep.md`（以 `.deep.md` 结尾）后 770/770 PASS、error 0、warn 51。**永久 SOP：深卡文件名一律 `*.<topic>.deep.md` 结尾**，否则 validator 误判为主卡、整卡 error；此坑与 wave70/71 机翻残留坑并列，须固化进产卡 SOP。
+- 门禁：770/770 PASS，error 0，warn **51**。累计 140 篇 done / 770 张卡。

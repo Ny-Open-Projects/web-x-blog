@@ -1,0 +1,59 @@
+# 193 电商秒杀缓存组件选择与数据结构设计
+
+> 分类：架构/缓存 | 难度：L2 | 题型：设计题 | 频率：中 | 关键词：**缓存组件** / **localCache** / **Redis** / **数据结构选型**
+> 原文锚点：第 3~8 段「缓存组件选择(localCache/REDIS/MMCatch/二次开发)；简单读写用 string/JSON/protobuf，复杂存取用 hash/set/list/zset 存 REDIS」
+
+## 一句话总述
+秒杀缓存设计第一步是**选对缓存组件**和**设计数据结构**：简单 KV 读写用本地缓存或 Redis 的 string 存序列化字节（JSON/protobuf）；需要部分字段访问或在缓存端计算时，用 Redis 的 hash/set/list/zset 等集合类型，把数据拆成结构化字段，避免整存整取带来的带宽与计算浪费。
+
+## 面试官视角
+- 意图：考察"会不会按访问特征选组件和结构体"，而非只会 `set/get`。
+- P5 知道用 Redis 缓存；P6 能区分 string 序列化 vs hash 结构化、能说出本地缓存与 Redis 的分工；P7 能结合秒杀高并发讲"本地缓存抗读、Redis 抗共享写、protobuf 省带宽"。
+- 红旗：把所有数据一律塞成 string JSON；不知道本地缓存与分布式缓存的边界。
+- 惊艳点：点出"序列化协议选型(protobuf 比 JSON 省 30%~60% 体积)"和"集合类型让缓存端可计算"。
+
+## 主问答
+**Q：** 秒杀场景缓存组件怎么选？数据结构怎么设计？
+**A：**
+1. **组件选择**：按访问特征分两层——**本地缓存(localCache)** 抗超高热读（秒杀商品信息预热进进程内存，读不落网络）；**Redis** 做跨进程共享的写缓存（库存、用户访问记录）；若开源组件不满足，再考虑二次开发或自研。
+2. **简单读写**：数据整存整取时，把结构体序列化为字节序列再存——JSON 通用但体积大，protobuf 体积更小、解析更快，适合高并发回源链路。
+3. **复杂存取**：需要取部分字段或在缓存端聚合计算时，用 Redis 的 **hash/set/list/zset** 等集合类型，把对象拆成 field 存储，避免为读一个字段拉回整个大对象。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
+|---|---|---|---|---|
+| L1 | 缓存组件有哪些 | 基础 | 本地/Redis/MC | 判 P5 |
+| L2 | string vs hash | 选型 | 整取用 string，部分取用 hash | 判 P6 |
+| L3 | 序列化选 JSON 还是 protobuf | 优化 | 高并发选 protobuf 省带宽 | 判 P6+ |
+| L4 | 本地缓存与 Redis 分工 | 架构 | 本地抗读、Redis 抗共享写 | 判 P7 |
+| L5 | 集合类型让缓存端计算 | 进阶 | zset 排行/set 去重 | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| 通用架构原则 | 无 | 组件/数据结构选型与具体语言版本无关；protobuf 在 Go 经 google.golang.org/protobuf 提供，Redis 集合类型自 2.x 稳定 `[经验]` |
+
+## 关键代码
+```go
+// 简单读写：结构体序列化为字节再存 Redis（推荐 protobuf 省带宽）
+type SkuInfo struct {
+    ID    int64  `protobuf:"varint,1,opt,name=id"`
+    Name  string `protobuf:"bytes,2,opt,name=name"`
+    Price int64  `protobuf:"varint,3,opt,name=price"`
+}
+
+// 复杂存取：用 hash 把对象拆成 field，避免整存整取
+func cacheSku(rdb *redis.Client, sku SkuInfo) error {
+    // HSET seckill:sku:{id} id {id} name {name} price {price}
+    return rdb.HSet(ctx, "seckill:sku:"+strconv.FormatInt(sku.ID, 10),
+        "id", sku.ID, "name", sku.Name, "price", sku.Price).Err()
+}
+// 读单字段：HGET seckill:sku:{id} price  —— 只拉价格，不拉全对象
+```
+
+## 总结与追问预判
+- 选组件：本地缓存抗热读、Redis 抗共享写；选结构：整存取 string(序列化)、部分取/计算用集合类型。
+- 预判：分布策略见 193-cache-distribution-deploy；秒杀链路缓存见 193-seckill-link-cache；缓存一致性(Cache-Aside)见 1261-*；查询缓存见 129-*（本卡不重复）。
+
+## ⚠️ 原文纠错
+未发现事实性技术错误。核对范围：通读并重点核对"组件分层(localCache/Redis/MC)、简单读写用 string 序列化(JSON/protobuf)、复杂存取用 hash/set/list/zset"的描述，与缓存工程实践一致。源码将若干缓存术语音译为崩坏词，本卡统一为规范术语，技术结论未做更正。与既有卡边界：缓存一致性见 1261-*、查询缓存见 129-*、Redis 持久化见 1253-*（本卡不重复）`[经验]`。
