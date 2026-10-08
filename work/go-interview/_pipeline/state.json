@@ -2166,10 +2166,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "909-select-scace-struct",
+        "909-select-characteristics",
+        "909-empty-select-block",
+        "909-select"
+      ],
+      "done_at": "2026-10-08T18:09:16+08:00"
     },
     "source/10/10-1 为什么并发编程是每个后端开发必须要掌握的？-迅捷文字转语音-1790916478772zh.txt": {
       "id": "10-1",
@@ -6415,10 +6421,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1843-tcp-handshake-recap",
+        "1843-handshake-loss-first",
+        "1843-handshake-loss-third",
+        "1843-retransmit-mechanism"
+      ],
+      "done_at": "2026-10-08T18:09:16+08:00"
     },
     "source/18/18-44 当客户端收到不正确的ack，还会发送rst吗？为什么？-迅捷文字转语音-1790931848670zh.txt": {
       "id": "18-44",
@@ -6886,7 +6898,7 @@
     }
   },
   "next_num": 1,
-  "waves": 97,
-  "updated": "2026-10-08T17:07:15+08:00",
+  "waves": 98,
+  "updated": "2026-10-08T18:09:16+08:00",
   "consec_fail": 0
 }
