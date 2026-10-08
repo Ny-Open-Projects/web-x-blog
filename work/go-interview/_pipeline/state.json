@@ -1595,10 +1595,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "818-work-stealing-mechanism",
+        "818-stealing-vs-sharing",
+        "818-runq-global-scenarios",
+        "818-work-stealing.deep"
+      ],
+      "done_at": "2026-10-08T22:10:17+08:00"
     },
     "source/08/8-19 GMP 调度过程中哪些情况会出现阻塞？-迅捷文字转语音-1790904433279zh.txt": {
       "id": "8-19",
@@ -4201,10 +4207,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1257-maxmemory-config",
+        "1257-eviction-policies",
+        "1257-memory-full-behavior",
+        "1257-redis-memory-eviction.deep"
+      ],
+      "done_at": "2026-10-08T22:10:17+08:00"
     },
     "source/12/12-58 Redis 持久化时，对过期键会如何处理的？.mp4-迅捷文字转语音-1790924337951zh.txt": {
       "id": "12-58",
@@ -7114,7 +7126,7 @@
     }
   },
   "next_num": 1,
-  "waves": 116,
-  "updated": "2026-10-08T22:04:41+08:00",
+  "waves": 117,
+  "updated": "2026-10-08T22:10:17+08:00",
   "consec_fail": 0
 }
