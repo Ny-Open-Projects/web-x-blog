@@ -3832,10 +3832,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1254-cache-penetration",
+        "1254-cache-avalanche",
+        "1254-cache-stampede",
+        "1254-cache-3problems.deep"
+      ],
+      "done_at": "2026-10-08T11:37:39+08:00"
     },
     "source/12/12-55 Redis 过期删除策略和内存淘汰策略有什么区别？.mp4-迅捷文字转语音-1790924136454zh.txt": {
       "id": "12-55",
@@ -4363,10 +4369,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "136-replica-sync",
+        "136-write-threadpool-reject",
+        "136-translog-recovery",
+        "136-write-lifecycle.deep"
+      ],
+      "done_at": "2026-10-08T11:37:39+08:00"
     },
     "source/13/13-7 segment段为什么是不可变的？-迅捷文字转语音-1790925079725zh.txt": {
       "id": "13-7",
@@ -6622,7 +6634,7 @@
     }
   },
   "next_num": 1,
-  "waves": 75,
-  "updated": "2026-10-08T11:26:58+08:00",
+  "waves": 76,
+  "updated": "2026-10-08T11:37:39+08:00",
   "consec_fail": 0
 }

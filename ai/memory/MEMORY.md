@@ -966,3 +966,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 Elasticsearch→崩坏词、goroutine→构入性/过入、routing→入听/入体、search→场询、refresh→刷新、bulk→bug、preference→偏好/三星ID、map→映射/麻坡、chan→通道、string→速度、指针→拼的、栈→栈/站、SetMaxStack→sidemarxstock、MB/MiB 音译混乱 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
 - 格式坑（沿用 wave72 固化）：2 张深卡文件名均以 `.deep.md` 结尾（`135-bulk-routing-optimization.deep.md`/`420-value-memory-layout.deep.md`），未被误判为主卡。
 - 门禁：794/794 PASS，error 0，warn **51**。累计 146 篇 done / 794 张卡。
+
+## wave 76（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/13/13-6`（Elasticsearch是如何写入数据的？(二)，L 级）→ `136-`；`source/12/12-54`（如何避免缓存穿透，缓存雪崩和缓存击穿？，L 级）→ `1254-`。
+- 产出：
+  - `136-replica-sync.md`（ES 副本同步：in-sync allocation、默认主成功即返副本异步、wait_for_active_shards(含主)控持久性）
+  - `136-write-threadpool-reject.md`（写入 write 线程池打满 reject、429 重试、bulk 调大小/数量/间隔、cat threadpool 看 reject/queue/active）
+  - `136-translog-recovery.md`（translog 崩溃恢复(buffer+OS cache→宕机读 translog 重建)、异步写丢 n 秒、类比 MySQL binlog、仅日志/可重放场景用异步）
+  - `136-write-lifecycle.deep.md`（ES 写入全生命周期：routing→buffer→translog→refresh→segment→flush→merge→副本→NRT，串联 135/137/1316）
+  - `1254-cache-penetration.md`（缓存穿透：查不存在打 DB；空值缓存(短TTL)+布隆过滤器+参数校验）
+  - `1254-cache-avalanche.md`（缓存雪崩：大量 key 同时失效/集群宕机；TTL 随机抖动+多级缓存+熔断降级+热点永不过期）
+  - `1254-cache-stampede.md`（缓存击穿：单热点失效瞬间并发回源；互斥锁/singleflight(并发合并1次)/逻辑过期）
+  - `1254-cache-3problems.deep.md`（三兄弟对比总纲：穿透/雪崩/击穿触发条件+范围+根因+解法选型表，串联 1261/193/196）
+- 撞题规避：`136-` 与 `137-*`(segment 不可变/段合并/force merge/segment 结构)、`134-inverted-index`(写入 pipeline 简介)、`1316-refresh-translog`(refresh/translog 调优) 重度重叠——源核心是写入落盘全流程，但 segment/refresh/merge/删除处理已被 137-* 全面覆盖；本波只取三个**真 gap**：①ES 副本同步机制(in-sync/wait_for_active，1262 是 Redis 复制不覆盖 ES)、②写入线程池 reject 与 cat threadpool 监控(全库无覆盖)、③translog 崩溃恢复与可靠性窗口(1316 只讲调优旋钮未讲恢复机制)；深卡做写入全生命周期串联并显式边界到 137/1316/135，不重产已被覆盖的 segment/refresh 机制。`1254-` 是**干净首覆盖**（全库无"穿透/雪崩/击穿"专用卡，196 仅顺带提防雪崩限流），四张完整覆盖三兄弟成因+解法+对比。全波 8 张 0 error、warn 维持 51（修复：136-translog-recovery 原仅 json 代码块触发规则 14 代码 warn，补 go 块后 ✓11 归零）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 Elasticsearch→崩坏词、shard→下载/现程、wait_for_active→waitforactive 下子、thread pool→线程状态/现程池、reject→困盈、translog→transforer、OS cache→OS 开启/OSK、binlog→billog、宕机→当机、Redis→崩坏词、布隆→音译崩坏、雪崩/击穿→崩坏 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
+- 格式坑（沿用 wave72 固化）：2 张深卡文件名均以 `.deep.md` 结尾（`136-write-lifecycle.deep.md`/`1254-cache-3problems.deep.md`），未被误判为主卡；**新增规则 14 教训**：主卡须含 go/sql 代码块，json 块不计入"可运行语言"，否则报"代码: 未见可运行语言的代码块" warn——今后 ES 配置类卡一律用 go 客户端示例而非 json。
+- 门禁：802/802 PASS，error 0，warn **51**。累计 148 篇 done / 802 张卡。
