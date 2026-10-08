@@ -2199,10 +2199,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "908-growslice-rule",
+        "908-size-optimize",
+        "908-prealloc-copy",
+        "908-slice-grow.deep"
+      ],
+      "done_at": "2026-10-08T19:40:08+08:00"
     },
     "source/09/9-9  select 底层数据结构是什么？有什么特性？-迅捷文字转语音-1790916196682zh.txt": {
       "id": "9-9",
@@ -3253,10 +3259,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1219-leftmost-why",
+        "1219-composite-gap",
+        "1219-range-breaks-index",
+        "1219-leftmost-prefix.deep"
+      ],
+      "done_at": "2026-10-08T19:40:07+08:00"
     },
     "source/12/12-2 应该怎么准备数据库类型的面试题？-迅捷文字转语音-1790920685506zh.txt": {
       "id": "12-2",
@@ -7042,7 +7054,7 @@
     }
   },
   "next_num": 1,
-  "waves": 110,
-  "updated": "2026-10-08T19:35:33+08:00",
+  "waves": 111,
+  "updated": "2026-10-08T19:40:08+08:00",
   "consec_fail": 0
 }
