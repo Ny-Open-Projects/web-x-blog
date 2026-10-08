@@ -6613,10 +6613,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1834-io-multiplexing-select-poll-epoll",
+        "1834-netpoll-evolution-tradeoff"
+      ],
+      "done_at": "2026-10-09T02:55:31+08:00"
     },
     "source/18/18-35 进程写文件的过程崩溃了，已写入的数据会丢失吗？-迅捷文字转语音-1790931421428zh.txt": {
       "id": "18-35",
@@ -6981,10 +6985,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "186-big-log-viewing",
+        "186-log-search-toolbox"
+      ],
+      "done_at": "2026-10-09T02:55:25+08:00"
     },
     "source/18/18-7 进程管理-迅捷文字转语音-1790929935650zh.txt": {
       "id": "18-7",
@@ -7279,7 +7287,7 @@
     }
   },
   "next_num": 1,
-  "waves": 134,
-  "updated": "2026-10-09T02:42:52+08:00",
+  "waves": 135,
+  "updated": "2026-10-09T02:55:31+08:00",
   "consec_fail": 0
 }
