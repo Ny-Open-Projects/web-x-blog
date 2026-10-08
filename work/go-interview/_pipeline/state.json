@@ -861,10 +861,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "613-duck-typing-interface",
+        "613-duck-typing.deep"
+      ],
+      "done_at": "2026-10-08T22:58:14+08:00"
     },
     "source/06/6-14 Go语言支持重载吗？如何实现重写？-迅捷文字转语音-1790861412496zh.txt": {
       "id": "6-14",
@@ -1097,10 +1101,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "701-go-stdlib-frameworks",
+        "701-go-lib-selection.deep"
+      ],
+      "done_at": "2026-10-08T22:58:14+08:00"
     },
     "source/07/7-10 如何使用mergo实现map与struct的互转？-迅捷文字转语音-1790866869641zh.txt": {
       "id": "7-10",
@@ -7183,7 +7191,7 @@
     }
   },
   "next_num": 1,
-  "waves": 122,
-  "updated": "2026-10-08T22:54:17+08:00",
+  "waves": 123,
+  "updated": "2026-10-08T22:58:14+08:00",
   "consec_fail": 0
 }
