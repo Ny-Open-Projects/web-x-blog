@@ -1,0 +1,36 @@
+# 1006 GMP 资源限制旋钮的取舍与调优深挖
+
+> 分类：Go 运行时 / GMP | 难度：L3 | 题型：深挖 | 频率：中 | 关键词：**资源限制** / **非必要不调整** / **IO 密集型** / **cgroup** / **软限制**
+> 原文锚点：第 1~50 段「四个设置控 M/P/栈/堆；非必要不调整；IO 密集型可设 P>核数；内存受限环境用软限制」
+
+## 思路与架构
+四个旋钮分两层：① 并发规模层——`SetMaxThreads`（M 上限，崩）、`GOMAXPROCS`（P 数，调度并行度）；② 内存边界层——`SetMaxStack`（单协程栈）、`SetMemoryLimit`（Go 堆软上限）。调优的核心是"默认值已为通用场景最优，只在确证的异常下才动"，且运行时限制要与 OS 层（cgroup / 内核参数）协同而非冲突。
+
+## 方案取舍
+```text
+四类旋钮取舍矩阵：
+──────────────────────────────────────────────────────────────
+旋钮              限制对象        默认          越界后果      何时才动
+SetMaxThreads     M(OS线程)      10000         crash         几乎不动；防异常起线程
+GOMAXPROCS        P(逻辑处理器)   NumCPU       无硬后果       IO 密集型设 >核数
+SetMaxStack       单协程栈        1GB/250MB     栈溢出        几乎不动
+SetMemoryLimit    Go 堆(软)       MaxInt64       GC 更频      容器/内存受限环境
+
+设计法则：
+- "非必要不调整"：默认值覆盖绝大多数场景
+- IO 密集型：P>CPU 核数有益（瓶颈在 IO 延迟而非算力）
+- 容器里用 SetMemoryLimit/GOMEMLIMIT 兜底，避免被 cgroup OOM kill
+- M 受内核 threads-max/PID_MAX/max_map_count 钳制，调大 SetMaxThreads 不等于真能起那么多
+```
+
+## 答题技巧
+```text
+面试话术（先分层，再原则，后场景）：
+1. 分层：M/P 管并发规模，栈/堆管内存边界
+2. 原则：默认值即最优，"非必要不调整"；SetMaxThreads 超限即崩是硬红线
+3. 场景1 IO 密集：GOMAXPROCS 设 >核数，利用 IO 等待空出 P
+4. 场景2 容器：SetMemoryLimit 软兜底，GC 更频但避免被 kill
+5. 收尾：运行时限制与 cgroup/内核参数协同，不是替代关系
+```
+
+> 边界：GMP 模型与 P/M 语义见 813-gmp-model-overview、816-gmp-tradeoff、815-p-overview-status；栈上限与 SetMaxStack 旁支见 420-stack-grow-address-shift、1118-stack-heap-diff；GC 频率见 GC 相关卡。本卡只深挖"资源限制旋钮取舍"不重述调度原理。

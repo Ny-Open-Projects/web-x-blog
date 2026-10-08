@@ -2569,10 +2569,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1024-keep-main-alive",
+        "1024-for-loop-preempt",
+        "1024-signal-notify-daemon",
+        "1024-keep-main-alive.deep"
+      ],
+      "done_at": "2026-10-08T19:48:20+08:00"
     },
     "source/10/10-25 Singleflight的实现原理和使用场景-迅捷文字转语音-1790919526694zh.txt": {
       "id": "10-25",
@@ -2666,10 +2672,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1006-resource-limit-overview",
+        "1006-setmaxthreads",
+        "1006-setmemorylimit",
+        "1006-gmp-resource-tuning.deep"
+      ],
+      "done_at": "2026-10-08T19:48:19+08:00"
     },
     "source/10/10-7 如何避免Map的并发问题？-迅捷文字转语音-1790918124869zh.txt": {
       "id": "10-7",
@@ -7054,7 +7066,7 @@
     }
   },
   "next_num": 1,
-  "waves": 111,
-  "updated": "2026-10-08T19:40:08+08:00",
+  "waves": 112,
+  "updated": "2026-10-08T19:48:20+08:00",
   "consec_fail": 0
 }

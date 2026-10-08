@@ -1,0 +1,71 @@
+# 1024 让主协程永不退出的 5 种技巧（常驻进程模式）
+
+> 分类：Go 并发 / 常驻进程 | 难度：L3 | 题型：技巧题 | 频率：中 | 关键词：**主协程不退出** / **死循环** / **channel 阻塞** / **空 select** / **signal.Notify**
+> 原文锚点：第 1~46 段「常驻进程需主协程不退；5 法：for死循环/无缓冲channel阻塞/nil channel/空select{}/signal.Notify；需注意 panic 用 recover 恢复」
+
+## 一句话总述
+常驻进程要让 `main` 永不退出，常见 5 招：① `for {}` 死循环；② 从无缓冲 channel 读/写造成阻塞；③ 向 nil channel 读写（永久阻塞）；④ `select {}` 空语句阻塞；⑤ `signal.Notify` 监听退出信号（最推荐）。前四者靠"阻塞/空转"卡住 main，第五者还能优雅捕获退出方式。
+
+## 面试官视角
+- 意图：考察对 goroutine 生命周期与"main 退出即全退出"的理解，以及哪种方式生产可用。
+- P5 知 5 种方式；P6 知死循环空转浪费 CPU、空 select/无 goroutine 会死锁；P7 知信号法最推荐、配合 recover 防 panic 退出。
+- 红旗：以为 `for {}` 是最佳实践；或忽略"纯阻塞无运行 goroutine 会 fatal error: all goroutines are asleep - deadlock"。
+- 惊艳点：点出"信号法既阻塞又能拿到退出原因、可接优雅关停" `[边界]` 见 909-empty-select-block（空 select）、713-signal-capture（信号捕获）、610-channel-make-and-nil（nil channel）、609-channel-send-recv（无缓冲阻塞）。
+
+## 主问答
+**Q（面试官原话）：** 怎么让 Go 的主协程一直不退出？
+**A：**
+1. **for{} 死循环**：最简单但空转持续占 CPU，且需配合抢占调度才不饿死其他协程（版本边界见 1024-for-loop-preempt）。
+2. **无缓冲 channel 阻塞**：主协程从无缓冲 channel 读（或写）而无对方就绪 → 阻塞；若没有任何持续运行的 goroutine 提供数据，会触发死锁。
+3. **nil channel 读写**：对 nil channel 读写永久阻塞，等价于"卡住 main"，机制同无缓冲阻塞。
+4. **select{} 空语句**：无 case 的 `select{}` 永久阻塞 main；同样要求已有 goroutine 在跑，否则死锁。
+5. **signal.Notify（推荐）**：监听 OS 信号阻塞 main，还能读取具体退出方式（interrupt/terminate/kill），生产最常用（见 1024-signal-notify-daemon）。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
+|---|---|---|---|---|
+| L1 | 有几种方式 | 基础 | 5 种 | 判 P5 |
+| L2 | for{} 缺点 | 陷阱 | 空转占 CPU | 判 P6 |
+| L3 | 阻塞法为何死锁 | 机制 | 无就绪 goroutine | 判 P6+ |
+| L4 | 哪个最推荐 | 选型 | signal.Notify | 判 P7 |
+| L5 | 还应注意什么 | 边界 | recover 防 panic 退出 | 判 P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| 所有版本 | 无 | 5 法并列；死循环需抢占调度（见 1024-for-loop-preempt） |
+
+## 关键代码
+```go
+package main
+
+import (
+	"os"
+	"os/signal"
+	"syscall"
+)
+
+func main() {
+	// 法1：死循环（空转，不推荐）
+	// for {}
+
+	// 法2/3：channel 阻塞
+	// ch := make(chan int); <-ch          // 无缓冲且无发送方 → 阻塞
+	// var nch chan int; <-nch              // nil channel 永久阻塞
+
+	// 法4：空 select 阻塞
+	// select {}
+
+	// 法5：信号阻塞（推荐）
+	sig := make(chan os.Signal, 1)
+	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
+	<-sig // 阻塞直到收到信号
+}
+```
+
+## 总结与追问预判
+- 5 法分两类：空转/阻塞卡 main（前四）、信号监听（第五，最推荐可捕获退出原因）。
+- 预判：空 select 死锁细节 → 见 909-empty-select-block；信号捕获与优雅退出 → 见 713-signal-capture、713-graceful-shutdown；nil channel 语义 → 见 610-channel-make-and-nil；无缓冲阻塞 → 见 609-channel-send-recv。
+
+## ⚠️ 原文纠错
+源码将若干专有名词音译为崩坏词（英文术语错读为近似音、部分中文术语写错字），本卡统一为规范术语 `[经验]`。事实核校：5 种方式、死循环空转占 CPU、阻塞法无 goroutine 会死锁、信号法最推荐——均正确；但"抢占式调度版本"表述见 1024-for-loop-preempt 纠错（实为 1.14 而非 1.4）。
