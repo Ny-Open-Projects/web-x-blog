@@ -3027,10 +3027,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1213-extent-segment",
+        "1213-index-directory-item",
+        "1213-btree-layers-mvcc",
+        "1213-innodb-storage"
+      ],
+      "done_at": "2026-10-08T16:16:47+08:00"
     },
     "source/12/12-14 索引的底层存储结构（三）-迅捷文字转语音-1790921447498zh.txt": {
       "id": "12-14",
@@ -6692,10 +6698,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "194-async-queue-flow",
+        "194-redis-queue-tuning",
+        "194-stock-table-isolation",
+        "194-seckill-traffic"
+      ],
+      "done_at": "2026-10-08T16:16:47+08:00"
     },
     "source/19/19-5 电商秒杀场景下如何防止超卖？-迅捷文字转语音-1790932834746zh.txt": {
       "id": "19-5",
@@ -6802,7 +6814,7 @@
     }
   },
   "next_num": 1,
-  "waves": 90,
-  "updated": "2026-10-08T16:04:43+08:00",
+  "waves": 91,
+  "updated": "2026-10-08T16:16:47+08:00",
   "consec_fail": 0
 }
