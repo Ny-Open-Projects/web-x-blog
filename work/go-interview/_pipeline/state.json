@@ -4790,10 +4790,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1309-match-term-mismatch",
+        "1309-match-phrase-position",
+        "1309-analyzer-debug-method",
+        "1309-es-match-troubleshoot.deep"
+      ],
+      "done_at": "2026-10-08T22:17:27+08:00"
     },
     "source/14/14-1 为什么后端面试中消息中间件的出现频率越来越高？-迅捷文字转语音-1790925800227zh.txt": {
       "id": "14-1",
@@ -6953,10 +6959,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1912-cache-db-counter",
+        "1912-redis-full-counter",
+        "1912-pika-rocksdb-counter",
+        "1912-counter-architecture.deep"
+      ],
+      "done_at": "2026-10-08T22:17:27+08:00"
     },
     "source/19/19-2 电商秒杀场景如何设计系统架构？-迅捷文字转语音-1790932550533zh.txt": {
       "id": "19-2",
@@ -7126,7 +7138,7 @@
     }
   },
   "next_num": 1,
-  "waves": 117,
-  "updated": "2026-10-08T22:10:17+08:00",
+  "waves": 118,
+  "updated": "2026-10-08T22:17:27+08:00",
   "consec_fail": 0
 }
