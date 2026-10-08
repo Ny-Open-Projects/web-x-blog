@@ -848,3 +848,19 @@
 - 撞题规避：1017/712-* 已覆盖循环变量捕获+传值/重赋值修法 → 1018 四张补**估值/执行两阶段模型、读写竞争真 UB、-race 检测原理、统一心智模型**，互补不重复；158-* 无任何微服务容错卡，干净首覆盖。
 - 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含勾入进→goroutine、容断→熔断、指数KB→指数退避、非密等性→非幂等性、硬排桶→令牌桶、持发→超时、限流桶→令牌桶 等还原。
 - 门禁：738/738 PASS，error 0，warn **51**。累计 132 篇 done / 738 张卡。
+
+## wave 69（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/06/6-3`（你在面试时，switch这些细节是不是被忽视了，L 级）→ `603-`；`source/08/8-7`（Go语言中的GC流程（一），L 级）→ `807-`。
+- 产出：
+  - `603-switch-case-dup.md`（常量 case 不可重复，布尔常量 case 可重复特例 + Go 1.20 编译器行为 + 命中即 break）
+  - `603-switch-default-expr.md`（省略表达式≡switch true + case 与 switch 类型严格一致 int≠int32/int64 + default 位置自由 + case 可为函数调用）
+  - `603-switch-fallthrough.md`（fallthrough 贯穿到下一 case 开头不重求值 + case 块独立作用域 + 三条约束：末语句/非末 case/default 禁用）
+  - `603-switch-details.deep.md`（四条主线串联：表达式形态/default 与省略/类型一致/fallthrough 与作用域 + 编译期/运行期两线 + 答题框架）
+  - `807-gc-history-stw.md`（STW 主线：1.0 秒级→1.3 分离→1.4 准确式→1.5 三色标记(10~40ms)→1.6 状态机→1.7 bitmap→1.8 混合写屏障(<1ms)；里程碑 1.5/1.8）
+  - `807-gc-mark-sweep.md`（标记清除三步 + 三大问题 STW/扫整堆/碎片 + Go 1.3 标记清除分离使清除并发）
+  - `807-gc-tricolor.md`（三色含义白/灰/黑 + 推进过程 + 并发需写屏障防漏标 + 启停仍短 STW）
+  - `807-gc-flow-part1.deep.md`（GC 流程一全景：指标层/算法层/演进层/与 813-815 runtime 层互补 + 设计取舍 + 答题框架）
+- 撞题规避：`603-` 无任何 switch 卡（grep 命中 selectivity/select-type/mq-selection 皆 select 关键词误匹配，与 Go switch 无关），干净首覆盖；`807-` 已存在 `813/814/815`(runtime 结构体 GC 字段) 与 `612`(channel GC 引用)，本波四张聚焦**GC 算法流程层**（STW 演进/标记清除/三色标记），在深卡显式标注"runtime 层 GC 字段见 813/814/815"互补不重复。
+- 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含 SPW→STW、构兑→Go、bruntime→runtime、三年时间→STW 时间、一点三/一点五/一点八→Go 1.3/1.5/1.8、混合血平状→混合写屏障、三个标记法→三色标记法、跟对象→根对象、forthrough/ffault/falsethrough→fallthrough、dedeault→default、rucase→case、曲具→求值、星区→星期、内支→内容 等。Go GC 演进史与官方 release 史实一致（1.3 标记清除分离/1.5 并发三色标记/1.8 混合写屏障均公认）。源中"Go 1.20 前需给 rand 设种子"属实（1.20 起自动播种）。
+- 门禁：746/746 PASS，error 0，warn **51**。累计 134 篇 done / 746 张卡。

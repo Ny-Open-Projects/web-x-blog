@@ -866,10 +866,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "603-switch-case-dup",
+        "603-switch-default-expr",
+        "603-switch-fallthrough",
+        "603-switch-details.deep"
+      ],
+      "done_at": "2026-10-08T09:57:44+08:00"
     },
     "source/06/6-4 defer底层数据结构是什么？-迅捷文字转语音-1790857218691zh.txt": {
       "id": "6-4",
@@ -1625,10 +1631,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "807-gc-history-stw",
+        "807-gc-mark-sweep",
+        "807-gc-tricolor",
+        "807-gc-flow-part1.deep"
+      ],
+      "done_at": "2026-10-08T09:57:44+08:00"
     },
     "source/08/8-8 Go语言中的GC流程（二）-迅捷文字转语音-1790896605230zh.txt": {
       "id": "8-8",
@@ -6538,7 +6550,7 @@
     }
   },
   "next_num": 1,
-  "waves": 68,
-  "updated": "2026-10-08T09:47:28+08:00",
+  "waves": 69,
+  "updated": "2026-10-08T09:57:44+08:00",
   "consec_fail": 0
 }
