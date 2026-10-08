@@ -5302,10 +5302,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1506-observe-tracing",
+        "1506-microservice-security",
+        "1506-avoid-overdesign",
+        "1506-impact-assessment"
+      ],
+      "done_at": "2026-10-08T19:07:35+08:00"
     },
     "source/15/15-7 微服务治理的手段有哪些？-迅捷文字转语音-1790927164005zh.txt": {
       "id": "15-7",
@@ -6183,10 +6189,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1825-segmentation-vs-paging",
+        "1825-segment-address-translation",
+        "1825-why-segment",
+        "1825-segmentation"
+      ],
+      "done_at": "2026-10-08T19:07:35+08:00"
     },
     "source/18/18-26 内存页置换算法有哪些？-迅捷文字转语音-1790930996465zh.txt": {
       "id": "18-26",
@@ -6982,7 +6994,7 @@
     }
   },
   "next_num": 1,
-  "waves": 105,
-  "updated": "2026-10-08T18:59:51+08:00",
+  "waves": 106,
+  "updated": "2026-10-08T19:07:35+08:00",
   "consec_fail": 0
 }
