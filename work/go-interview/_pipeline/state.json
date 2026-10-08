@@ -1612,10 +1612,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "817-scheduling-triggers",
+        "817-gmp-scheduling-internals.deep"
+      ],
+      "done_at": "2026-10-09T01:13:41+08:00"
     },
     "source/08/8-18 Go调度过程中的工作窃取分析-迅捷文字转语音-1790904425384zh.txt": {
       "id": "8-18",
@@ -7038,10 +7042,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1910-comment-system-architecture",
+        "1910-high-concurrency-comment.deep"
+      ],
+      "done_at": "2026-10-09T01:13:41+08:00"
     },
     "source/19/19-11 高并发的微博评论系统的表结构设计-迅捷文字转语音-1790933102569zh.txt": {
       "id": "19-11",
@@ -7247,7 +7255,7 @@
     }
   },
   "next_num": 1,
-  "waves": 130,
-  "updated": "2026-10-09T01:02:50+08:00",
+  "waves": 131,
+  "updated": "2026-10-09T01:13:41+08:00",
   "consec_fail": 0
 }
