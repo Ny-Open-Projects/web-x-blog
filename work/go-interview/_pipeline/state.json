@@ -6027,10 +6027,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "177-go-set-implementation",
+        "177-go-set-memory.deep"
+      ],
+      "done_at": "2026-10-08T23:05:22+08:00"
     },
     "source/17/17-8 Golang中如何实现二叉树？-迅捷文字转语音-1790928843181zh.txt": {
       "id": "17-8",
@@ -6812,10 +6816,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1849-http-vs-tcp-keepalive",
+        "1849-keepalive-pitfalls.deep"
+      ],
+      "done_at": "2026-10-08T23:05:22+08:00"
     },
     "source/18/18-5 常用命令及技巧（三）-迅捷文字转语音-1790929926925zh.txt": {
       "id": "18-5",
@@ -7199,7 +7207,7 @@
     }
   },
   "next_num": 1,
-  "waves": 124,
-  "updated": "2026-10-08T23:01:42+08:00",
+  "waves": 125,
+  "updated": "2026-10-08T23:05:22+08:00",
   "consec_fail": 0
 }
