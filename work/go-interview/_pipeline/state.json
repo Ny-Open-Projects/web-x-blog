@@ -1747,10 +1747,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "910-alignment-basics",
+        "910-alignment-rules",
+        "910-empty-struct-alignment",
+        "910-struct-alignment"
+      ],
+      "done_at": "2026-10-08T16:26:46+08:00"
     },
     "source/09/9-11 channel的底层实现原理是什么？-迅捷文字转语音-1790916676598zh.txt": {
       "id": "9-11",
@@ -1798,10 +1804,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "913-waitgroup-usage",
+        "913-waitgroup-state",
+        "913-waitgroup-atomic",
+        "913-waitgroup"
+      ],
+      "done_at": "2026-10-08T16:26:46+08:00"
     },
     "source/09/9-14 map的底层实现是什么？-迅捷文字转语音-1790916843595zh.txt": {
       "id": "9-14",
@@ -6814,7 +6826,7 @@
     }
   },
   "next_num": 1,
-  "waves": 91,
-  "updated": "2026-10-08T16:16:47+08:00",
+  "waves": 92,
+  "updated": "2026-10-08T16:26:46+08:00",
   "consec_fail": 0
 }

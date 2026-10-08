@@ -1211,3 +1211,11 @@
 - 原文纠错（本波）：纯 ASR 解码还原（19-4 含 引序→有序、预订单/预订单混用统一、REDIS卡入卡→Redis 队列 LPUSH/RPOP、消峰→削峰；12-13 含 英乐DB→InnoDB、毕加索/毕加树→B+树、组键→主键、主界→主键、硬加速→B+树、组件ID→主键、单链表→单向链表、色影→索引），按固化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**；19-4 含事实核校：补正「持续高峰(外卖)不适用异步削峰、需水平扩展」；12-13 含事实核校：补正「目录项复用数据页结构靠 record_type 区分、回滚段供 MVCC」。未触发规则 11、补充分级 warn 维持 51。
 - 格式坑（沿用固化 SOP）：2 张深卡 `.deep.md` 尾（194-seckill-traffic/1213-innodb-storage），深卡 stem 与三主卡不同名不触发深挖门槛；194- 三主卡含 go 块(Redis LPUSH/RPOP 排队/限长/多 worker 消费)满足规则 14，1213- 三主卡含 sql 块(INNODB_TABLESPACES/INNODB_INDEXES/INNODB_BUFFER_PAGE/INNODB_METRICS 探查)满足规则 14。
 - 门禁：922/922 PASS，error 0，warn **51**。累计 178 篇 done / 922 张卡。
+
+## wave 92（2026-10-08 下午，L 级，8 张）
+- 源：`9-10 Go struct 字段对齐`（source/09/9-10 Go struct字段对齐-迅捷文字转语音-1790916673215zh.txt）、`9-13 waitgroup 实现原理`（source/09/9-13 waitgroup实现原理是什么？-迅捷文字转语音-1790916682697zh.txt）
+- 产出：`910-alignment-basics.md`/`910-alignment-rules.md`/`910-empty-struct-alignment.md`/`910-struct-alignment.deep.md` + `913-waitgroup-usage.md`/`913-waitgroup-state.md`/`913-waitgroup-atomic.md`/`913-waitgroup.deep.md`（文件名 stem 910-/913- 对应 chapter9-10/chapter9-13，chapter<10 单数字+零补子号成 3 位）
+- 撞题规避（additive）：`910-` 与 `1112-value-size`(struct=字段和+padding 高层提及) 同主题，本波取**对齐动机(CPU按字长读/减字数)+对齐规则算法(字段对齐=min(类型,机器字节8)/结构体对齐=字段最大对齐非公约数/size=累加+填充/对齐值=1无填充)+32vs64位差异+空结构体末位对齐特例(防取地址越界泄露)** 真 gap；主卡显式 [边界] 只引 1112 不重述 padding 高层结论。`913-` 与 `1019-concurrency-pitfalls`(WaitGroup Add/Done/Wait 配对+race detector) 同主题，本波取**源码三字段(noCopy/state uint64 高32 counter 低32 waiter/sema)+Add 左移32加 counter+Done=Add(-1)+Wait 增 waiter+CAS 阻塞+counter=0 唤醒所有** 真 gap；主卡显式 [边界] 只引 1019 不重述 race detector。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（9-10 含 特八/特十六/的六十四→int8/int16/int64、英特→int、构语言→Go、字长→字长/wordsize、载子→占位/size；9-13 含 weightgroup→WaitGroup、勾入进→goroutine、艾特→Add、淡→Done、weight→Wait、构入器→协程、lowcopy→noCopy、uin的三十二→uint32、CNS→CAS），按固化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**；9-10 含事实核校：补正「结构体对齐值=字段最大对齐（源文误写公约数）」；9-13 含事实核校：补正「Add delta 左移32位是因 counter 在高32位、waiter 在低32位」。未触发规则 11、补充分级 warn 维持 51。
+- 格式坑（沿用固化 SOP）：2 张深卡 `.deep.md` 尾（910-struct-alignment/913-waitgroup），深卡 stem 与三主卡不同名不触发深挖门槛；910- 三主卡含 go 块(unsafe.Sizeof/Alignof 实测)满足规则 14，913- 三主卡含 go 块(用法演示/字段布局/Add 移位)满足规则 14。
+- 门禁：930/930 PASS，error 0，warn **51**。累计 180 篇 done / 930 张卡。
