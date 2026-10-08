@@ -1000,3 +1000,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 goroutine→过入/购入器、defer→底份/抵份、channel→签到、select→死莱克、context→control、nil→neo、MySQL→买sql、InnoDB→英格DB、page→液/张页、file trailer→fileteller、LSN→tellogsequencenumber、MTR→minitransaction、redo→redulog、n_owned→NON、页目录→硬目录/页幕录、槽→藏物 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
 - 格式坑（沿用 wave72 固化）：2 张深卡文件名均以 `.deep.md` 结尾（`1022-goroutine-leak.deep.md`/`1216-innodb-page.deep.md`），未被误判为主卡；MySQL 内核类卡用 sql 代码块满足规则 14。
 - 门禁：810/810 PASS，error 0，warn **51**。累计 150 篇 done / 810 张卡。
+
+## wave 78（2026-10-08 中午，L 级，8 张）
+
+- 源：`source/08/8-6`（常见的 GC 实现方式有哪些？，L2~L3）→ `806-`；`source/12/12-26`（count()、count(1)和count(字段名)到底有什么区别？，L2~L3）→ `1226-`。
+- 产出：
+  - `806-gc-two-families.md`（GC 两大门派：追踪式 vs 引用计数式；根对象三类(全局变量/执行栈/寄存器)；引用计数优=实现简单回收及时、缺=额外开销+循环引用无法回收；Go 选追踪式根因之一即循环引用）
+  - `806-tracing-variants.md`（追踪式六细分：标记清除/标记整理/复制/分代/增量/并发；前三种碎片取舍、后三种停顿取舍；Go 取并发+非分代+非移动三色标记清除之一角）
+  - `806-go-why-no-generational.md`（Go 不用分代三因：①逃逸分析把多数新生对象放栈、分代假设失效 ②tcmalloc 基本无碎片、整理无收益 ③并发优先于压 STW）
+  - `806-gc-taxonomy.deep.md`（GC 分类总览：两层树(派别/六细分)+选型决策表+答题技巧；追踪式 vs 引用计数五维对比）
+  - `1226-count-semantics.md`（COUNT 语义本质：统计参数值非 NULL 行；COUNT(*)/COUNT(1)/COUNT(主键) 计全部行、COUNT(字段) 排除 NULL；COUNT(任意非NULL常量) 等价 COUNT(1)；L3 因配深卡）
+  - `1226-count-index-choice.md`（执行机制：Server 层维护计数变量循环读 InnoDB；二级索引叶子只存主键+字段值体积小→优先扫二级索引；无则主键；多二级索引用 key_len 最小）
+  - `1226-count-performance-rank.md`（性能排序：COUNT(*)≈COUNT(1)>COUNT(索引字段)>COUNT(主键)>COUNT(非索引字段)；MyISAM 无 WHERE 走 O(1) 行数变量、InnoDB 因 MVCC 不行；近似值用 SHOW TABLE STATUS/information_schema）
+  - `1226-count-semantics.deep.md`（COUNT 语义实战深挖：语义→机制→排序→引擎四层架构 + 写法取舍表 + 答题技巧；破"COUNT(*) 最慢"误区、锚定 EXPLAIN/引擎差异）
+- 撞题规避：`806-` 与 `807-gc-mark-sweep`(标记清除单点)/`807-gc-tricolor`(三色标记单点)/`807-gc-history-stw`(演进史) 重叠，本波只取**真 gap**——源 8-6 是 GC 全分类广度题(两派+六细分+Go 不用分代)，既有 807 三张偏单点/演进，本波做"分类谱系总览层"并显式边界到 807-*，不重产标记清除流程/三色推进/STW 演进。`1226-` 与 `1246-go-count-total`(Go 层 Scan 传地址/游标遍历)/`1217-myisam-index-layout`(MyISAM 索引物理存储) 重叠，但**COUNT 语义+执行机制+性能排序层是干净 gap**——1246 偏 Go 工程代码、1217 偏索引文件布局，均未覆盖 COUNT 三者语义差异与索引选择机制；本波聚焦 SQL 语义层，四张完整覆盖，深卡显式边界到 1246/1217 不重产。全波 8 张 0 error、warn 维持 51（修复：1226-count-semantics 原 L2 触发"深挖门槛"规则——L1/L2 默认不出深挖，提为 L3 以合法配对深卡，考点确属 L3 陷阱题）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 tracing→追踪式、reference counting→引用激素/引用技素、根对象→跟对象、栈→勾当/执行站、寄存器→奇存器、标记清除→标记清楚、标记整理→标记真理、复制→夫制、分代→分带/份带、增量→曾量、并发→并法、逃逸分析→逃逸分系、tcmalloc→tmalloc、STW→SPW/三年时间、COUNT→康特、NULL→浪值、SELECT→snaack、主键→组件、聚簇索引→技术索引、二级索引→二级索引、key_len→klenth、warning→warwarming、MyISAM→mysam、InnoDB→inlDB、row count→roctt、rows→rose 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`806-gc-taxonomy.deep.md`/`1226-count-semantics.deep.md`），未被误判为主卡；GC 类主卡用 go 代码块、MySQL 类主卡用 sql 代码块满足规则 14（806 三张主卡含 go 块、1226 三张主卡含 sql 块）。**踩坑+修复**：1226-count-semantics 初标 L2，因配 `.deep.md` 触发"深挖门槛"规则(✗1)，提 L3 后 ✓11 归零——沉淀：配深卡的主卡须 ≥L3。
+- 门禁：818/818 PASS，error 0，warn **51**。累计 152 篇 done / 818 张卡。

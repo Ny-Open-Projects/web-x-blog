@@ -1622,10 +1622,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "806-gc-two-families",
+        "806-tracing-variants",
+        "806-go-why-no-generational",
+        "806-gc-taxonomy.deep"
+      ],
+      "done_at": "2026-10-08T12:06:39+08:00"
     },
     "source/08/8-7 Go语言中的GC流程（一）-迅捷文字转语音-1790896598708zh.txt": {
       "id": "8-7",
@@ -3215,10 +3221,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1226-count-semantics",
+        "1226-count-index-choice",
+        "1226-count-performance-rank",
+        "1226-count-semantics.deep"
+      ],
+      "done_at": "2026-10-08T12:06:39+08:00"
     },
     "source/12/12-27 char和varchar有什么区别（一）-迅捷文字转语音-1790922376242zh.txt": {
       "id": "12-27",
@@ -6646,7 +6658,7 @@
     }
   },
   "next_num": 1,
-  "waves": 77,
-  "updated": "2026-10-08T11:51:51+08:00",
+  "waves": 78,
+  "updated": "2026-10-08T12:06:39+08:00",
   "consec_fail": 0
 }
