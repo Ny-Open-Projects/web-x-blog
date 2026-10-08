@@ -704,10 +704,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "507-variadic-rules",
+        "507-spread-and-compile-eval",
+        "507-variadic-vs-functional-options",
+        "507-variadic.deep"
+      ],
+      "done_at": "2026-10-08T21:54:36+08:00"
     },
     "source/05/5-8 调用函数传入结构体时，是传值还是传指针？-迅捷文字转语音-1790757643134zh.txt": {
       "id": "5-8",
@@ -968,10 +974,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "605-defer-lifo-order",
+        "605-defer-scenarios",
+        "605-defer-recover-cancel",
+        "605-defer.deep"
+      ],
+      "done_at": "2026-10-08T21:54:36+08:00"
     },
     "source/06/6-6 打开10万个文件，如何使用defer关闭资源？-迅捷文字转语音-1790857231502zh.txt": {
       "id": "6-6",
@@ -7090,7 +7102,7 @@
     }
   },
   "next_num": 1,
-  "waves": 114,
-  "updated": "2026-10-08T19:58:38+08:00",
+  "waves": 115,
+  "updated": "2026-10-08T21:54:36+08:00",
   "consec_fail": 0
 }
