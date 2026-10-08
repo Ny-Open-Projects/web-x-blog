@@ -2025,10 +2025,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "918-nil-vs-empty-map",
+        "918-copy-semantics-contrast.deep"
+      ],
+      "done_at": "2026-10-09T04:50:23+08:00"
     },
     "source/09/9-19 map 中删除一个 key，它的内存会释放么？-迅捷文字转语音-1790917427057zh.txt": {
       "id": "9-19",
@@ -7117,10 +7121,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1911-comment-table-split",
+        "1911-vertical-split-motives.deep"
+      ],
+      "done_at": "2026-10-09T04:50:17+08:00"
     },
     "source/19/19-12 海量数据的微博计数器解决方案-迅捷文字转语音-1790933104728zh.txt": {
       "id": "19-12",
@@ -7311,7 +7319,7 @@
     }
   },
   "next_num": 1,
-  "waves": 138,
-  "updated": "2026-10-09T04:38:26+08:00",
+  "waves": 139,
+  "updated": "2026-10-09T04:50:23+08:00",
   "consec_fail": 0
 }
