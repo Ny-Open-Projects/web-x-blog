@@ -317,10 +317,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "421-embed-eligibility",
+        "421-embed-pointer-named",
+        "421-embed-unnamed-types",
+        "421-embed.deep"
+      ],
+      "done_at": "2026-10-08T22:42:18+08:00"
     },
     "source/04/4-3 如何回答基础类面试题才能“打动”面试官？-迅捷文字转语音-1790755578479zh.txt": {
       "id": "4-3",
@@ -813,10 +819,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "611-nil-channel-operations",
+        "611-nil-channel-goroutine-block",
+        "611-nil-channel-vs-closed",
+        "611-nil-channel.deep"
+      ],
+      "done_at": "2026-10-08T22:42:18+08:00"
     },
     "source/06/6-12 关闭的channel发送和接收数据会发生什么？-迅捷文字转语音-1790861399980zh.txt": {
       "id": "6-12",
@@ -7151,7 +7163,7 @@
     }
   },
   "next_num": 1,
-  "waves": 119,
-  "updated": "2026-10-08T22:34:43+08:00",
+  "waves": 120,
+  "updated": "2026-10-08T22:42:18+08:00",
   "consec_fail": 0
 }
