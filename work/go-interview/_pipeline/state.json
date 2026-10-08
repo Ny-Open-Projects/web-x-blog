@@ -677,10 +677,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "504-nil-zero-value-types",
+        "504-nil-comparability.deep"
+      ],
+      "done_at": "2026-10-09T06:37:06+08:00"
     },
     "source/05/5-5 Go语言中如何实现任意数值转换？-迅捷文字转语音-1790757627324zh.txt": {
       "id": "5-5",
@@ -1988,10 +1992,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "915-map-growth",
+        "915-map-growth-internals.deep"
+      ],
+      "done_at": "2026-10-09T06:36:59+08:00"
     },
     "source/09/9-16 map 中的 key 为什么是无序的？-迅捷文字转语音-1790916851025zh.txt": {
       "id": "9-16",
@@ -7343,7 +7351,7 @@
     }
   },
   "next_num": 1,
-  "waves": 142,
-  "updated": "2026-10-09T06:23:30+08:00",
+  "waves": 143,
+  "updated": "2026-10-09T06:37:06+08:00",
   "consec_fail": 0
 }

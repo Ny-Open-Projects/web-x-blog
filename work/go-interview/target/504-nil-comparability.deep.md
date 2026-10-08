@@ -1,0 +1,59 @@
+# 504 nil 深挖：可比较性、typed-nil 陷阱与接口相等规则
+
+> 深挖卡：从「哪些零值是 nil」推进到「nil 为什么不能随便比」以及生产里最常踩的 typed-nil 坑。
+
+## 思路与架构
+
+判断一个 nil 能不能比较，要走**三层判据**，缺一层就会踩坑：
+
+```text
+第 1 层：这个类型本身可比较吗？
+        可比较：数值 / bool / string / 指针 / chan / interface / 可比较字段组成的结构体与数组
+        不可比较：slice / map / func（语言规范直接排除）
+        → 不可比较类型只能与 nil 比：s == nil 合法，s1 == s2 编译报错
+
+第 2 层：两边类型能互相赋值吗？
+        接口与非接口比较，要求非接口类型可比较且可赋值给该接口类型
+        → (*int)(nil) == any(nil) 合法（*int 可赋给 any），结果为 false
+
+第 3 层：interface 相等 = 动态类型相等 && 动态值相等
+        any(nil)         -> (type=nil, value=nil)
+        any((*int)(nil)) -> (type=*int, value=nil)   ← 类型不等，故 != nil
+```
+
+typed-nil 陷阱的完整链路：
+
+```text
+func do() error {
+    var e *MyError = nil     // 具体类型的 nil 指针
+    return e                 // 隐式装箱：接口值变成 (type=*MyError, value=nil)
+}
+err := do()
+err == nil  // false  ← 类型描述符非空，接口值非 nil
+```
+
+**为什么语言要这样设计**：接口的 `== nil` 判定只能看接口值本身是否为空。如果让「装了 nil 指针的接口」等于 nil，那么 `err.Error()` 调用时无法区分「真的没错误」与「错误对象存在但内部状态为空」，也会让类型断言 `err.(*MyError)` 的行为变得不可预测。Go 选择了「装箱即带类型」的简单规则，代价就是这个陷阱。
+
+三条规避写法：返回前显式判断（`if e != nil { return e }; return nil`）；用 `errors.Is` 做语义判断；**不要把具体错误类型包进接口后再裸判 nil**。
+
+## 方案取舍
+
+| 场景 | 写法 | 结果 | 建议 |
+|---|---|---|---|
+| 判「有没有错误」 | `err != nil` | typed-nil 时误判为「有错」 | **避免返回 typed-nil**，见上 |
+| 判「是不是某个错误」 | `errors.Is(err, target)` | 展开包装链，语义正确 | **首选** |
+| 取具体错误类型 | `errors.As(err, &target)` | 逐层拆包匹配 | 需要取字段时用它 |
+| 比较切片内容 | `slices.Equal(a, b)`（Go 1.21+） | 逐元素比 | 替代手写循环 |
+| 比较 map 内容 | `maps.Equal(a, b)`（Go 1.21+） | 逐键值比 | 同上 |
+| 比较 struct 含不可比较字段 | `reflect.DeepEqual` | 慢、有特例 | 仅测试用，生产别用 |
+| 判「切片为空」 | `len(s) == 0` | nil 与空切片都成立 | **比 `s == nil` 更合适** |
+
+取舍原则：**语义判断优先于结构判断**。判「空」用 `len`，判「错误」用 `errors.Is`，`== nil` 只用在确定不会有 typed-nil 的地方。`reflect.DeepEqual` 虽然万能，但语义上把 nil 切片与空切片视为不等（与 `len` 口径不一致），且性能差一个数量级，只适合测试断言。
+
+## 答题技巧
+
+1. **把「不可比较」讲成规范层面的事实，而不是实现细节**：直接引语言规范——slice、map、func 是**唯一三种不可比较**的类型（除了它们作为字段构成的结构体/数组也不可比较），所以只能与 nil 比。一句话定性，比举例子更有说服力。
+2. **typed-nil 一定要给出「接口是两字宽」的图**：`(类型指针, 数据指针)`，nil 接口是两个字都为空；装了 nil 指针的接口是类型指针非空。**能画出这两个格子的人，面试官基本不会再追问**。
+3. **主动给编译错误原文**：`invalid operation: s1 == s2 (slice can only be compared to nil)`——报出原文说明你真跑过，而不是背的。
+4. **带版本栅栏**：`slices.Equal` / `maps.Equal` 是 Go 1.21+ 才有；老项目用 `bytes.Equal`（仅 []byte）或手写循环。`errors.Is` / `errors.As` 是 Go 1.13+。
+5. **收尾给一条工程规约**：函数签名返回 `error` 接口时，具体实现里的错误变量要么用 `error` 类型接收，要么在返回点做 nil 归一——**不要让具体类型的 nil 指针逃逸进接口**。这条规约写进团队的 code review checklist 就再也不会踩。

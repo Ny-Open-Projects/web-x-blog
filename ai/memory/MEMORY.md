@@ -1646,3 +1646,16 @@
 - **硬纠错（可复用判据）**：① **「二分递归会爆栈」是错的**——深度仅 log2(n)，n=2^20 才 20 层，会爆的是线性递归；② **PRG 必须用 303 `StatusSeeOther`**，302 在部分实现里重定向仍发 POST；③ **token 校验与消费必须原子**（`GETDEL`），先 GET 再 DEL 有并发双放行窗口；④ 原文建议随机串做 MD5 → **修正为** `crypto/rand` + `HMAC-SHA256`（MD5 已可碰撞）；⑤ `mid` 必须排除自身（`mid±1`），否则 `left+1==right` 时死循环。
 - **格式**：主卡 8 节齐全、`## ⚠️ 原文纠错` 精确、锚点齐、追问链 5 列含「答不出停在哪档」、代码块用 ```go（规则 14）、纠错节 6 条 × ≤40 汉字；深卡三节预置 ```text。**一次通过、零打回。**
 - **门禁**：**1247/1247 PASS、error 0、warn 51**（本波 4 张卡 **0 新增 warn**）。累计 **280 篇 done / 1247 张卡**。
+
+## wave 143（2026-10-09 06:29~06:37）· course11 夜间值守
+
+- **派单**：`9-15 map是如何扩容的？`（M/L2/4554B/卡2）→ chapter 9 <10 补零 → **915-**；`5-4 Go语言中哪些类型的零值可以用nil来表示？`（M/L2/4546B/卡2）→ **504-**。
+- **产卡 4 张**：`915-map-growth.md`（主）+ `915-map-growth-internals.deep.md`（深）；`504-nil-zero-value-types.md`（主）+ `504-nil-comparability.deep.md`（深）。深卡均用**主题 stem** 规避规则 12。
+- **撞题规避 [边界]**：两源均为**相邻强覆盖**——`914-map-hmap-bmap`（hmap/bmap 结构）、`414-go-zero-value`（零值表 + nil 六类）已存在。取真 gap：915 只讲**扩容触发/渐进迁移/不缩容/版本栅栏**，不重述结构；504 只讲 **nil 的三个反直觉性质**（尺寸/可比较性/typed-nil），不重述零值表。引用卡全部 `ls` 核实存在：`914-map-hmap-bmap` / `914-map-key-locate` / `914-map-concurrency-float` / `918-nil-vs-empty-map` / `908-slice-grow.deep` / `414-go-zero-value` / `414-slice-nil-vs-map` / `413-new-make-basics` / `509-error-nil-trap` / `509-interface-compare-runtime`。
+- **崩坏词**：两源命中黑名单 **0**（源内「八x速组/oldbox/macextra/构元名值/界变类型/利偶」等均不在黑名单）。纠错节一律泛述，未列举原词。
+- **文件名映射复核**：9-15 → 915-（补零 3 位）；5-4 → 504-（补零 3 位）。**均正确。**
+- **★ 本波最大发现（版本级硬事实，务必复用）**：**Go 1.24 起 map 底层已从 hmap/bmap 换成 Swiss Table**（`internal/runtime/maps`，`Map{used,seed,dirPtr,dirLen,globalDepth,globalShift,writing,tombstonePossible,clearSeq}` + `table{used,capacity,growthLeft,localDepth,index,groups}`）。`loadFactorNum=13/loadFactorDen=2 → **6.5**` 是 **Go ≤1.23** 的值；Go 1.26.5 里 `runtime/map.go` 已改写为 `loadFactorNum=7 / loadFactorDen=8`，实际生效的是 `maxAvgGroupLoad=7 / MapGroupSlots=8 → **7/8 = 0.875**`。**所有旧卡（如 914-map-hmap-bmap）描述的是 ≤1.23 实现，新卡必须带此版本栅栏。**
+- **实测（Go 1.26.5）**：① **删除不缩容**：插入 100 万 int→int 后 `HeapAlloc = 36.34 MB`，逐个 delete 清空后 **仍 36.34 MB**（len=0），再 `clear(m)` **仍 36.34 MB**；② **小 map 优化**：每 map 装 8 元素平均 **200 字节**，装 9 元素跳到 **385 字节**（+93%，触发 `growToTable` 分配 capacity=16 的表），16 元素 673 / 17 元素 672（同档）；③ **遍历随机**：同一 200 元素 map 三次 range 首个 key 分别 **13 / 149 / 184**；④ **nil 尺寸（64 位）**：指针/map/chan/func = **8**，slice = **24**，interface = **16**；⑤ **typed-nil**：`(*int)(nil) == interface{}(nil)` → **false**；`interface{}((*int)(nil)) == nil` → **false**；`(*int)(nil) == interface{}((*int)(nil))` → true；⑥ 切片互比编译报错原文：`invalid operation: s1 == s2 (slice can only be compared to nil)`。
+- **踩坑记录**：用 `(*hmap)(unsafe.Pointer(&m))` 观测 map 内部**读不到 B**——因为 `map` 变量本身就是 `*hmap`，需 `*(**hmap)(unsafe.Pointer(&m))`；且 Go 1.24+ 布局已变，这套 unsafe 观测**已失效**，改用 HeapAlloc 差值与源码常量取证更稳。
+- **硬纠错**：① 原文「map 会随删除触发缩容、动态伸缩」→ **错**，Go map **只增不缩**；② 原文「负载因子随 B 增大而变大」→ **错**，负载因子是常量（6.5 / 0.875），变的是阈值；③ 原文把 map 无序归因于迁移 → 主因是**遍历起点随机**；④ Go 1.24+ 等量重建的触发比例是**墓碑 > 容量 10%**（`pruneTombstones`）。
+- **门禁**：**1251/1251 PASS、error 0、warn 51**（本波 4 张 **0 新增 warn**）。累计 **282 篇 done / 1251 张卡**。
