@@ -2231,10 +2231,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "906-string-bytes-conversion",
+        "906-conversion-choosing.deep"
+      ],
+      "done_at": "2026-10-08T23:51:57+08:00"
     },
     "source/09/9-7 slice 底层数据结构是什么？有什么特性？-迅捷文字转语音-1790916164565zh.txt": {
       "id": "9-7",
@@ -5471,10 +5475,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "155-microservice-principles",
+        "155-principles-vertical-vs-horizontal.deep"
+      ],
+      "done_at": "2026-10-08T23:51:57+08:00"
     },
     "source/15/15-6 微服务化过程中有哪些注意点？-迅捷文字转语音-1790927161259zh.txt": {
       "id": "15-6",
@@ -7215,7 +7223,7 @@
     }
   },
   "next_num": 1,
-  "waves": 126,
-  "updated": "2026-10-08T23:40:27+08:00",
+  "waves": 127,
+  "updated": "2026-10-08T23:51:57+08:00",
   "consec_fail": 0
 }
