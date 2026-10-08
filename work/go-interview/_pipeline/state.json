@@ -3091,10 +3091,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "116-schedtrace-fields",
+        "116-sched-diagnose-playbook"
+      ],
+      "done_at": "2026-10-09T02:42:52+08:00"
     },
     "source/11/11-7 如何分析go代码的GC情况？-迅捷文字转语音-1790919949618zh.txt": {
       "id": "11-7",
@@ -6212,10 +6216,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1813-fd-stdin-out-err",
+        "1813-shell-redirect-pitfalls"
+      ],
+      "done_at": "2026-10-09T02:42:47+08:00"
     },
     "source/18/18-14 inode与硬链接，软连接-迅捷文字转语音-1790930342681zh.txt": {
       "id": "18-14",
@@ -7271,7 +7279,7 @@
     }
   },
   "next_num": 1,
-  "waves": 133,
-  "updated": "2026-10-09T01:29:10+08:00",
+  "waves": 134,
+  "updated": "2026-10-09T02:42:52+08:00",
   "consec_fail": 0
 }
