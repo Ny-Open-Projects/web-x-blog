@@ -5533,10 +5533,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1712-consistent-hashing-overview",
+        "1712-hash-ring-basics",
+        "1712-virtual-node",
+        "1712-consistent-hashing"
+      ],
+      "done_at": "2026-10-08T18:18:28+08:00"
     },
     "source/17/17-13 至少使用2种方式实现字符串的反转？-迅捷文字转语音-1790929221958zh.txt": {
       "id": "17-13",
@@ -6502,10 +6508,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1848-tcp-loss-overview",
+        "1848-queue-buffer-loss",
+        "1848-network-nic-loss",
+        "1848-tcp-packet-loss"
+      ],
+      "done_at": "2026-10-08T18:18:28+08:00"
     },
     "source/18/18-49 TCP Keepalive 和 HTTP Keepalive是一样的吗？-迅捷文字转语音-1790932267042zh.txt": {
       "id": "18-49",
@@ -6898,7 +6910,7 @@
     }
   },
   "next_num": 1,
-  "waves": 98,
-  "updated": "2026-10-08T18:09:16+08:00",
+  "waves": 99,
+  "updated": "2026-10-08T18:18:28+08:00",
   "consec_fail": 0
 }
