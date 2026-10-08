@@ -5928,10 +5928,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1820-kernel-role",
+        "1820-user-kernel-space",
+        "1820-kernel-architecture",
+        "1820-kernel-design-overview"
+      ],
+      "done_at": "2026-10-08T15:33:33+08:00"
     },
     "source/18/18-21 为什么 Linux 系统下的应用程序不能直接在 Windows 下运行？-迅捷文字转语音-1790930795690zh.txt": {
       "id": "18-21",
@@ -6063,10 +6069,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1829-scheduling-foundation",
+        "1829-batch-algorithms",
+        "1829-modern-algorithms",
+        "1829-scheduling-overview"
+      ],
+      "done_at": "2026-10-08T15:33:33+08:00"
     },
     "source/18/18-3 常用命令及技巧（一）-迅捷文字转语音-1790929646054zh.txt": {
       "id": "18-3",
@@ -6766,7 +6778,7 @@
     }
   },
   "next_num": 1,
-  "waves": 87,
-  "updated": "2026-10-08T15:25:41+08:00",
+  "waves": 88,
+  "updated": "2026-10-08T15:33:33+08:00",
   "consec_fail": 0
 }

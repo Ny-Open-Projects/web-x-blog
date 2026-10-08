@@ -1170,3 +1170,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原（101 含 携程→协程、并情→并行、现成→线程、计存器→寄存器；1214 含 firpertable/fapertable→file-per-table、IPdata→IBdata、innerDB→InnoDB、安六→undo、穿kid→truncate、DRDB→DRBD）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**(只写「源码将若干 InnoDB/并发专有名词音译为崩坏词，本卡统一为规范术语」+`[经验]`标记)，未触发规则 11、补充分级 warn 维持 51。1214 另含事实核校：五类表空间版本起点(通用 5.7/临时 5.7.2/undo 5.6)、file-per-table 默认 ON/删即回收/单表 64TB、undo 可 truncate 不可 drop 均准确。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`101-concurrency-must-learn.deep.md`/`1214-tablespace-types-overview.deep.md`），未被误判为主卡；101 三张主卡含 go 块(goroutine 并发演示/10w 切换/哈希分段)、1214 三张主卡含 sql 块(SHOW VARIABLES/DROP TABLE/CREATE TABLESPACE/ALTER UNDO)满足规则 14。
 - 门禁：890/890 PASS，error 0，warn **51**。累计 170 篇 done / 890 张卡。
+
+## wave 88（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/18/18-29`（进程的调度算法有哪些，L2~L3）→ `1829-`；`source/18/18-20`（Linux 内核设计的理念是什么，L2~L3）→ `1820-`。
+- 产出：
+  - `1829-scheduling-foundation.md`（调度基础：定义=选就绪进程给 CPU、非抢占(完成/阻塞让出)vs 抢占(可打断)、三原则(时间片/优先权/短作业优先)、调度只影响等待时间）
+  - `1829-batch-algorithms.md`（经典批处理三算法：FCFS 非抢占长作业饥饿/适合CPU繁忙型、SJF 短者先不利长作业、HRRN 响应比=(等待+服务)/服务 兼顾长短）
+  - `1829-modern-algorithms.md`（现代分时三算法：RR 时间片20~50ms(太短切换多/太长响应差)、最高优先级静态/动态+抢占/非抢占+饥饿、多级反馈队列结合RR+优先级未完成降级兼顾长短）
+  - `1829-scheduling-overview.deep.md`（进程调度全景：基础层→批处理层→分时层 三层 + 边界到 Go GMP 805/813/815/816）
+  - `1820-kernel-role.md`（内核角色：应用↔硬件中间人、五大功能(硬件/资源/驱动/安全/系统调用)、无内核五问题(开发/移植/稳定安全/资源/驱动)）
+  - `1820-user-kernel-space.md`（用户/内核空间隔离、用户态/内核态、系统调用靠中断陷入与返回、切换有开销；边界到 101(内核态切换代价)/Go GMP）
+  - `1820-kernel-architecture.md`（Linux 设计四理念：多任务/SMP/ELF/宏内核；宏内核集成性能优+模块化动态加载；微内核(Windows)最小功能+用户态IPC 可维护但性能低；补正 Windows NT 实为混合内核）
+  - `1820-kernel-design-overview.deep.md`（Linux 内核全景：价值层→工作层→理念层 三层 + 边界到 181(Linux只是内核/GPL)/181-kernel-milestones/101/Go GMP）
+- 撞题规避：`1829-` 为 OS 进程调度算法干净首覆盖（命中文件多为 Go GMP 调度 805/813/815/816/1017，非 OS 级 FCFS/SJF/HRRN/RR/多级反馈队列），取**六算法+抢占原则**体系真 gap；深卡显式边界到 Go runtime 用户态调度(805/813/815/816)。`1820-` 命中 `181-linux-origin`(只讲 Unix/GNU/GPL，非设计理念) 与 `101-context-switch-cost`(内核态切换代价)/Go GMP(用户态内核态)，本波取**内核五大功能/为什么需要内核/用户内核空间隔离/宏微内核+SMP+ELF 设计理念**真 gap；深卡显式边界到 181(只引 Linux 只是内核不重述)/101(只点内核态切换代价)/Go GMP(只引不重画)。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（1829 含 攒作业→短作业、能转→抢占、非抢占错位表述、才会先→FCFS；1820 含 微dows→Windows、用户台/内核台→用户态/内核态、EIF/ENF→ELF、对称多处理保留、宏内核/微内核保留）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11、补充分级 warn 维持 51。1820 另含事实核校：补正「Windows NT 严格属混合内核、课程作微内核示例」，面试按课程口径答并补混合内核更准确。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`1829-scheduling-overview.deep.md`/`1820-kernel-design-overview.deep.md`），未被误判为主卡；1829 三张主卡含 go 块(RR模型/HRRN选择/多级反馈)、1820 三张主卡含 go 块(ReadFile syscall/Write syscall/modprobe)满足规则 14。
+- 门禁：898/898 PASS，error 0，warn **51**。累计 172 篇 done / 898 张卡。
