@@ -1,0 +1,60 @@
+# 1252 面试 SQL（三）：窗口函数三兄弟与分区排名
+
+> 分类：MySQL/SQL | 难度：L3 | 题型：方案题 | 频率：中 | 关键词：**窗口函数**/**row_number**/**rank**/**dense_rank**/**partition by**/**并列排名**
+> 原文锚点：第 4~28 段「row_number over partition by 分区排名...rank/dense_rank 并列跳号vs不跳号对比...总成绩排名实战」
+
+## 一句话总述
+窗口函数三兄弟——`row_number` 强制连续序号（不并列）、`rank` 并列同分同排名且后续**跳号**、`dense_rank` 并列同分同排名且后续**不跳号**；`partition by` 分区独立排名、`order by` 区内排序；配合可解「学生成绩分区排名」「总成绩排名」等报表题。
+
+## 面试官视角
+- 考察意图：是否真懂三种排名语义差异（跳号 vs 不跳号），而非只会 `row_number`。
+- 分档：P5 知 `row_number` 给序号；P6 能区分 `rank`/`dense_rank` 并列语义；P7 能用 `partition by` 做分区排名、说出跳号差异。
+- 红旗答案：把 `rank` 和 `dense_rank` 当一回事；不知道并列同分时排名怎么算。
+- 惊艳点：点出「`row_number` 强行不并列、`rank` 跳号、`dense_rank` 不跳号」三语义，并主动 `partition by` 分区排名 [经验]。
+
+## 主问答
+**Q（面试官原话）：** row_number、rank、dense_rank 有什么区别？怎么用？
+**A：**
+1. **row_number**：强制给连续唯一序号，即使排序值相同也**不并列**（如两人均 263.5 仍排 1、2）[经验]。
+2. **rank**：排序值相同则**并列同排名**，并列后下一个名次**跳号**（两个第一 → 没有第二，直接第三）[经验]。
+3. **dense_rank**：排序值相同也**并列同排名**，但并列后下一个名次**不跳号**（两个第一 → 接着是第二）[经验]。
+4. **partition by 分区**：按某列（如学生ID/学科ID）分区，窗口函数在每区内独立排名；`order by` 决定区内排序方向 [经验]。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 三兄弟是啥？ | 基础 | row_number/rank/dense_rank | P5 |
+| L2 | 并列怎么排？ | 语义 | rank跳号/dense不跳号 | P6 |
+| L3 | 分区？ | 进阶 | partition by 独立排名 | P6 |
+| L4 | 实战场景？ | 应用 | 学生成绩/总成绩排名 | P7 |
+| L5 | 版本差异？ | 扩展 | 8.0+ 窗口函数支持 | P7+ |
+
+## 版本与兼容性
+- 窗口函数需 MySQL 8.0+ / 主流数仓支持；老版本用「嵌套 MAX 排除法」取排名见 `1251-rank-second` [边界]。
+- 本卡是三兄弟**系统语义+分区排名**，与 `1251-rank-second`（第N高嵌套技巧）互补不重述；同系列 SQL 写法见 `1250-*` [边界]。
+
+## 总结与追问预判
+三语义是窗口函数必考题：「row_number 不并列、rank 跳号、dense_rank 不跳号」。面试常追问「并列同分怎么排名」→ 直接答三语义差异；再追问「分区内排名」→ 答 `partition by` + `order by`。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] row_number 强制序号、rank 跳号、dense_rank 不跳号、partition by 分区排名——均正确，符合 SQL 标准语义。
+2. 崩坏词归一：源码将 SQL 关键词音译为崩坏词（如「色口/色课」=SQL、「protisionby」=partition by、「丝denrank」=dense_rank），本卡统一为规范术语，不列举任何原词崩坏词。
+
+```sql
+-- 学生成绩分区排名：每名学生(学号)内各科成绩从大到小排序
+SELECT student_id, subject_id, score,
+       ROW_NUMBER() OVER (PARTITION BY student_id ORDER BY score DESC) AS rn,
+       RANK()     OVER (PARTITION BY student_id ORDER BY score DESC) AS rk,
+       DENSE_RANK() OVER (PARTITION BY student_id ORDER BY score DESC) AS drk
+FROM   score;
+
+-- 总成绩排名（先聚合再排名）：两人均 263.5
+SELECT student_id,
+       SUM(score) AS total,
+       ROW_NUMBER() OVER (ORDER BY SUM(score) DESC) AS rn,        -- 强制 1,2 不并列
+       RANK()     OVER (ORDER BY SUM(score) DESC) AS rk,          -- 并列跳号: 1,1,3
+       DENSE_RANK() OVER (ORDER BY SUM(score) DESC) AS drk        -- 并列不跳号: 1,1,2
+FROM   score
+GROUP  BY student_id
+ORDER  BY total DESC;
+```

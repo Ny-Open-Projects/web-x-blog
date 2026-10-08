@@ -4142,10 +4142,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1252-sql-window-functions",
+        "1252-sql-pivot.deep"
+      ],
+      "done_at": "2026-10-08T22:54:17+08:00"
     },
     "source/12/12-53 Redis有哪些持久化的方式，实现过程是怎样的？-迅捷文字转语音-1790924126016zh.txt": {
       "id": "12-53",
@@ -5722,10 +5726,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "171-dsa-interview-prep",
+        "171-dsa-prep.deep"
+      ],
+      "done_at": "2026-10-08T22:54:17+08:00"
     },
     "source/17/17-10 如何求一颗二叉树的最大子树和？-迅捷文字转语音-1790929032493zh.txt": {
       "id": "17-10",
@@ -7175,7 +7183,7 @@
     }
   },
   "next_num": 1,
-  "waves": 121,
-  "updated": "2026-10-08T22:47:37+08:00",
+  "waves": 122,
+  "updated": "2026-10-08T22:54:17+08:00",
   "consec_fail": 0
 }
