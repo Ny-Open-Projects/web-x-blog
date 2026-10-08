@@ -1109,10 +1109,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "713-signal-capture",
+        "713-http-graceful-shutdown",
+        "713-component-close-order",
+        "713-graceful-shutdown-overview.deep"
+      ],
+      "done_at": "2026-10-08T15:10:00+08:00"
     },
     "source/07/7-14 Go ORM中如何进行事务操作？-迅捷文字转语音-1790866908374zh.txt": {
       "id": "7-14",
@@ -1162,10 +1168,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "702-http-server-startup",
+        "702-serve-goroutine-per-conn",
+        "702-servemux-routing",
+        "702-net-http-startup-overview.deep"
+      ],
+      "done_at": "2026-10-08T15:10:00+08:00"
     },
     "source/07/7-3 go http server如何处理表单输入的？-迅捷文字转语音-1790864806004zh.txt": {
       "id": "7-3",
@@ -6742,7 +6754,7 @@
     }
   },
   "next_num": 1,
-  "waves": 85,
-  "updated": "2026-10-08T15:02:42+08:00",
+  "waves": 86,
+  "updated": "2026-10-08T15:10:00+08:00",
   "consec_fail": 0
 }

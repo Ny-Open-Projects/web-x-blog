@@ -1136,3 +1136,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原（911 含 channel→牵al/腔道、协程→勾入t、缓冲→八份/缓冲、条件变量→组合条件变量、锁→look/mutex、panic→tepineic、复制→复制 等；187 含 进程→进呈、线程→线呈、僵尸→僵止、孤儿→过尔、守护→守护、nohup→lowhup、exec→ESEC、screen→SCE、终端→终单/终单 等）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11。187 另含两条事实核校：①僵尸是独立终止态非睡眠子态(原文归类有误) ②nohup/exec/screen 规范名归一并补 Docker PID1 优雅关闭生产结论(原文只泛述差异)。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`911-channel-pass-semantics.deep.md`/`187-process-mgmt-overview.deep.md`），未被误判为主卡；911 三张主卡含 go 块(channel/copy/结构)、187 三张主卡含 go 块(os/exec+syscall 演示进程生命周期/僵尸/Docker 脱离终端)满足规则 14（OS 题无原生 go 块，借 os/exec 落地）。
 - 门禁：874/874 PASS，error 0，warn **51**。累计 166 篇 done / 874 张卡。
+
+## wave 86（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/07/7-13`（如何优雅的关闭服务，L2~L3）→ `713-`；`source/07/7-2`（net/http 启动 http server 执行过程，L2~L3）→ `702-`。
+- 产出：
+  - `713-signal-capture.md`（信号捕获：signal.Notify 转 channel、主 goroutine 阻塞；信号清单 SIGHUP=1/SIGINT=2/SIGQUIT=3/SIGTERM=15、SIGKILL=9 不可捕获不监听；channel 带缓冲+Stop）
+  - `713-http-graceful-shutdown.md`（HTTP 优雅关闭：http.Server.Shutdown 先关 listener 拒新请求、等老请求、带超时 ctx；通用 5 步收尾；WaitGroup/context 等在途）
+  - `713-component-close-order.md`（多组件关闭顺序：启动最后依赖最先 init、关闭相反；先关 HTTP 入口再关 Redis/Kafka/DB；异步生产者须 flush 引 1420）
+  - `713-graceful-shutdown-overview.deep.md`（优雅关闭全景：信号→Shutdown→组件顺序 三层 + 边界到 1420(Kafka flush)/187(Docker PID1)）
+  - `702-http-server-startup.md`（net/http 启动三步：NewServeMux 建表→HandleFunc 注册→ListenAndServe 绑定；简法 DefaultServeMux；addr :port 全网卡/IP 限回环）
+  - `702-serve-goroutine-per-conn.md`（ListenAndServe 底层：Serve 每连接 go c.serve()；handler==nil 兜底 DefaultServeMux；连接级并发/单连接串行、共享状态自加锁）
+  - `702-servemux-routing.md`（ServeMux 路由：精确优先、前缀/子树最长匹配；包级 HandleFunc 进全局 DefaultServeMux 单例；原生不按 method 分流）
+  - `702-net-http-startup-overview.deep.md`（net/http 启动全景：三步→Serve 并发→ServeMux 路由 三层 + 边界到 706/707(Gin)）
+- 撞题规避：`713-` 与 `1420-graceful-shutdown`(仅 Kafka 异步生产者 flush/consumer.Close) 重叠，但**1420 是 Kafka 专项目点**，本波取**HTTP 服务优雅关闭体系真 gap**：信号捕获(各信号值+SIGKILL 不可监听)、Shutdown 机制+5 步法、多组件依赖反向关闭原则；深卡显式边界到 1420(只引 Kafka flush 不重述)/187(Docker PID1 只点一句)。`702-` 与 `706-middleware-register`(Gin 中间件)/`707-gin-validator`/`163-chain-of-responsibility`(Handler 链)/`708-http-dir` 重叠，但**全库无 net/http 原生 server 启动引导卡**(70x 是 form/template/static)，本波取**原生启动三步+Serve 每连接 goroutine+DefaultServeMux 兜底+ServeMux 匹配**干净 gap；深卡显式边界到 706/707(Gin 上层封装)。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（713 含 signal→signal、携程→协程、关闭→下载档(shutdown)/关毕、卡夫卡→Kafka、构语言→Go、server→server；702 含 HTTP→HTTP、多路复用器→mux、携程→goroutine、serve→serve、handler→handler 等）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11。713 另含事实核校：信号清单值准确、补「SIGKILL 不可捕获故不监听+channel 带缓冲/Stop」；702 补「ResponseWriter 实现 io.Writer、addr 全网卡 vs 回环、单连接串行/共享状态自加锁、精确优先于子树」匹配细节。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`713-graceful-shutdown-overview.deep.md`/`702-net-http-startup-overview.deep.md`），未被误判为主卡；713 三张主卡含 go 块(signal/Server.Shutdown/component hook)、702 三张主卡含 go 块(NewServeMux/ListenAndServe/ServeMux)满足规则 14。
+- 门禁：882/882 PASS，error 0，warn **51**。累计 168 篇 done / 882 张卡。
