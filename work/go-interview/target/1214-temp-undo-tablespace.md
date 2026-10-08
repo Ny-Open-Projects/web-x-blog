@@ -1,0 +1,51 @@
+# 1214 临时表空间与 undo 表空间
+
+> 分类：MySQL 存储 | 难度：L3 | 题型：机制题 | 频率：中 | 关键词：**临时表空间**/**ibtmp**/**undo表空间**/**truncate**/**5.6/5.7**
+> 原文锚点：第 46~57 段「临时表空间 + undo 表空间」
+
+## 一句话总述
+**临时表空间**（5.7.2+，`ibtmp01`）存内部临时表与未提交修改的回滚对象，每次 server 启动重建；**undo 表空间**（5.6+）存 undo log，`innodb_undo_tablespace` 默认 2 个文件、配 0 即禁用，启用后系统表空间内的 undo 失效，支持 `TRUNCATE` 但不支持 `DROP`。
+
+## 面试官视角
+- 考察意图：是否知道这两类「辅助表空间」的存在、版本起点与运维要点（尤其 undo 的 truncate/drop 区别）。
+- 分档：P5 知 undo 存回滚日志；P6 知临时表空间 5.7.2+、ibtmp 重启重建；P7 知 undo 默认 2 文件、truncate 可用 drop 不可。
+- 红旗答案：以为 undo 可 DROP；或不知道临时表空间每次启动重建。
+- 惊艳点：点出「只有用上独立 undo 表空间才支持 TRUNCATE，且必须已独立于系统表空间」。
+
+## 主问答
+**Q（面试官原话）：** 临时表空间和 undo 表空间分别是什么？
+**A：**
+1. **临时表空间**：MySQL 5.7.2 起支持，保存检索临时表、已修改未提交数据相关对象（用于回滚临时表修改），临时表的 undo log 也可存于此；默认文件 `ibtmp01`，**每次 server 启动都会重新创建**。
+2. **undo 表空间**：MySQL 5.6 起支持，用户自定义、`innodb_undo_tablespace` 配置其文件数量（0=禁用，默认 2，即启用且默认 2 个文件），单文件约 10MB，可存一个或多个 undo log。
+3. **undo 接管系统**：启用独立 undo 表空间后，系统表空间内的 undo log 失效、改由 undo 表空间记录——把 undo 从系统表空间拆出便于独立运维。
+4. **undo 运维限制**：undo 表空间支持 `TRUNCATE`（回收空间）但**不支持 `DROP`**；且只有 undo 表空间已独立于系统表空间时，TRUNCATE 才可用。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | undo 表空间？ | 基础 | 存 undo log | P5 |
+| L2 | 临时表空间哪版？ | 版本 | 5.7.2+ | P6 |
+| L3 | ibtmp 何时重建？ | 细节 | 每次启动 | P6 |
+| L4 | undo 默认几个？ | 配置 | innodb_undo_tablespace=2 | P7 |
+| L5 | undo 能 drop 吗？ | 进阶 | 只 truncate 不可 drop | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| MySQL 5.6 / 5.7.2 | undo 5.6+；临时 5.7.2+ | 按实际版本答；默认 undo 2 文件、临时表空间重启重建 |
+
+## 关键代码
+```sql
+SHOW VARIABLES LIKE 'innodb_undo_tablespace';  -- 默认 2（启用、2 个文件）
+SHOW VARIABLES LIKE 'innodb_undo_directory';   -- undo 文件目录
+-- 回收 undo 空间（需已独立于系统表空间）
+ALTER UNDO TABLESPACE innodb_undo_001 SET INACTIVE;
+-- 临时表空间文件 ibtmp01 在每次 mysqld 启动时重建
+```
+
+## 总结与追问预判
+临时/undo 表空间是独立运维的两类辅助空间，版本门槛与 truncate/drop 限制是高频坑。五类表空间全景在深卡串起。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 临时表空间 5.7.2+/ibtmp 重启重建、undo 表空间 5.6+/默认 2 文件/启用后系统 undo 失效/可 truncate 不可 drop——均正确。
+2. 崩坏词归一：源码将若干 InnoDB 专有名词（undo/IBdata/temporary 等）音译为崩坏词，本卡统一为规范术语。

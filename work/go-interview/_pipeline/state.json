@@ -2169,10 +2169,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "101-concurrency-vs-parallel",
+        "101-context-switch-cost",
+        "101-reduce-context-switch",
+        "101-concurrency-must-learn"
+      ],
+      "done_at": "2026-10-08T15:25:41+08:00"
     },
     "source/10/10-10 如何实现整数类型的原子操作？-迅捷文字转语音-1790918293774zh.txt": {
       "id": "10-10",
@@ -3030,10 +3036,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1214-file-per-table",
+        "1214-shared-general-tablespace",
+        "1214-temp-undo-tablespace",
+        "1214-tablespace-types-overview"
+      ],
+      "done_at": "2026-10-08T15:25:41+08:00"
     },
     "source/12/12-15 索引的底层存储结构（四）-迅捷文字转语音-1790921451127zh.txt": {
       "id": "12-15",
@@ -6754,7 +6766,7 @@
     }
   },
   "next_num": 1,
-  "waves": 86,
-  "updated": "2026-10-08T15:10:00+08:00",
+  "waves": 87,
+  "updated": "2026-10-08T15:25:41+08:00",
   "consec_fail": 0
 }

@@ -1153,3 +1153,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原（713 含 signal→signal、携程→协程、关闭→下载档(shutdown)/关毕、卡夫卡→Kafka、构语言→Go、server→server；702 含 HTTP→HTTP、多路复用器→mux、携程→goroutine、serve→serve、handler→handler 等）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11。713 另含事实核校：信号清单值准确、补「SIGKILL 不可捕获故不监听+channel 带缓冲/Stop」；702 补「ResponseWriter 实现 io.Writer、addr 全网卡 vs 回环、单连接串行/共享状态自加锁、精确优先于子树」匹配细节。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`713-graceful-shutdown-overview.deep.md`/`702-net-http-startup-overview.deep.md`），未被误判为主卡；713 三张主卡含 go 块(signal/Server.Shutdown/component hook)、702 三张主卡含 go 块(NewServeMux/ListenAndServe/ServeMux)满足规则 14。
 - 门禁：882/882 PASS，error 0，warn **51**。累计 168 篇 done / 882 张卡。
+
+## wave 87（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/10/10-1`（为什么并发编程是每个后端开发必须要掌握的，L3）→ `101-`；`source/12/12-14`（标题「索引的底层存储结构（三）」但内容实为 InnoDB 表空间类型，L3）→ `1214-`。**⚠ 数据质量：12-14 队列标题/源内容错位（标题称索引存储结构三，内容实为表空间类型），按真实内容产卡，待确认是否另有独立源/修正标题。**
+- 产出：
+  - `101-concurrency-vs-parallel.md`（并发vs并行：并发=同时间段交替/并行=单位时间同时；单核靠时间片轮转支持多线程、任意时刻仅一指令在核；多核=多饮水机比喻）
+  - `101-context-switch-cost.md`（上下文切换代价：定义=保存+加载任务状态；寄存器现场保存+CPU 高速缓存失效(主损耗)+内核态切换）
+  - `101-reduce-context-switch.md`（减少切换四法：避免锁/数据分段、CAS 自旋免阻塞、减线程数、协程 M:N 用户态切换免内核切换）
+  - `101-concurrency-must-learn.deep.md`（并发全貌：动机层(多核刚需/高并发业务/Go 特性)→概念层→代价层→优化层 四层 + 边界到 104(CAS)/922(sync.Map)/102(陷阱)）
+  - `1214-file-per-table.md`（file-per-table 独立表空间：默认 ON、删数据回收 OS、单表 64TB 上限、fsync 按文件分散/fd 占用高、autoextend 无效、O_DIRECT 下更优）
+  - `1214-shared-general-tablespace.md`（共享表空间=IBdata 多表共用/删数据不回收/64TB 共享上限；通用表空间 5.7+ 共享型/元数据内存更省/可放目录外/支持全行格式）
+  - `1214-temp-undo-tablespace.md`（临时表空间 5.7.2+/ibtmp 重启重建；undo 表空间 5.6+/默认 2 文件/启用后系统 undo 失效/可 truncate 不可 drop）
+  - `1214-tablespace-types-overview.deep.md`（五类表空间全景：独立型/file-per-table + 共享型/系统&通用 + 辅助型/临时&undo，对比表 + 显式边界到 1211-tablespace/1211-innodb-file-layout）
+- 撞题规避：`101-` 为并发基础干净首覆盖（104- 仅 CAS 原子内部、922- 仅 sync.Map、102- 仅陷阱，无 并发vs并行/上下文切换/减少切换综合卡），取**动机+概念+代价+四法**体系真 gap；深卡显式边界到 104/922/102。`1214-` 命中 `1211-tablespace.md`(系统表空间=IBdata/独立=.ibd 二分，未展开五类优缺点与版本) 与 `1211-innodb-file-layout.md`(8.0 单 .ibd+SDI，非表空间类型)，本波取**五类表空间类型(file-per-table/共享/通用/临时/undo)的详细优缺点+版本演进(5.6/5.7/5.7.2/8.0)**真 gap；深卡显式边界到 1211 两张(只补未覆盖的「类型对比」层不重述底层)。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（101 含 携程→协程、并情→并行、现成→线程、计存器→寄存器；1214 含 firpertable/fapertable→file-per-table、IPdata→IBdata、innerDB→InnoDB、安六→undo、穿kid→truncate、DRDB→DRBD）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**(只写「源码将若干 InnoDB/并发专有名词音译为崩坏词，本卡统一为规范术语」+`[经验]`标记)，未触发规则 11、补充分级 warn 维持 51。1214 另含事实核校：五类表空间版本起点(通用 5.7/临时 5.7.2/undo 5.6)、file-per-table 默认 ON/删即回收/单表 64TB、undo 可 truncate 不可 drop 均准确。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`101-concurrency-must-learn.deep.md`/`1214-tablespace-types-overview.deep.md`），未被误判为主卡；101 三张主卡含 go 块(goroutine 并发演示/10w 切换/哈希分段)、1214 三张主卡含 sql 块(SHOW VARIABLES/DROP TABLE/CREATE TABLESPACE/ALTER UNDO)满足规则 14。
+- 门禁：890/890 PASS，error 0，warn **51**。累计 170 篇 done / 890 张卡。
