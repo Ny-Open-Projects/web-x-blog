@@ -4307,10 +4307,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1313-os-virtual-fd",
+        "1313-swap-thp",
+        "1313-network-jvm-security",
+        "1313-es-os-config"
+      ],
+      "done_at": "2026-10-08T15:46:13+08:00"
     },
     "source/13/13-14 如何使用Go操作Elasticsearch？(一)-迅捷文字转语音-1790925511185zh.txt": {
       "id": "13-14",
@@ -4943,10 +4949,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1511-counter-gauge",
+        "1511-histogram-summary",
+        "1511-metric-model-promql",
+        "1511-metric-types"
+      ],
+      "done_at": "2026-10-08T15:46:13+08:00"
     },
     "source/15/15-12 Docker的底层原理-迅捷文字转语音-1790927491653zh.txt": {
       "id": "15-12",
@@ -6778,7 +6790,7 @@
     }
   },
   "next_num": 1,
-  "waves": 88,
-  "updated": "2026-10-08T15:33:33+08:00",
+  "waves": 89,
+  "updated": "2026-10-08T15:46:13+08:00",
   "consec_fail": 0
 }

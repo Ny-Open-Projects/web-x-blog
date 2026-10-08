@@ -1187,3 +1187,11 @@
 - 原文纠错（本波）：纯 ASR 解码还原（1829 含 攒作业→短作业、能转→抢占、非抢占错位表述、才会先→FCFS；1820 含 微dows→Windows、用户台/内核台→用户态/内核态、EIF/ENF→ELF、对称多处理保留、宏内核/微内核保留）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11、补充分级 warn 维持 51。1820 另含事实核校：补正「Windows NT 严格属混合内核、课程作微内核示例」，面试按课程口径答并补混合内核更准确。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`1829-scheduling-overview.deep.md`/`1820-kernel-design-overview.deep.md`），未被误判为主卡；1829 三张主卡含 go 块(RR模型/HRRN选择/多级反馈)、1820 三张主卡含 go 块(ReadFile syscall/Write syscall/modprobe)满足规则 14。
 - 门禁：898/898 PASS，error 0，warn **51**。累计 172 篇 done / 898 张卡。
+
+## wave 89（2026-10-08 下午，L 级，8 张）
+- 源：`15-11 Prometheus的四种指标类型`（source/15/15-11 Prometheus的四种指标类型-迅捷文字转语音-1790927488273zh.txt）、`13-13 部署ElasticSearch过程中需要对操作系统进行哪些配置？`（source/13/13-13 部署ElasticSearch过程中需要对操作系统进行哪些配置？-迅捷文字转语音-1790925507612zh.txt）
+- 产出：`1511-counter-gauge.md`/`1511-histogram-summary.md`/`1511-metric-model-promql.md`/`1511-metric-types.deep.md` + `1313-os-virtual-fd.md`/`1313-swap-thp.md`/`1313-network-jvm-security.md`/`1313-es-os-config.deep.md`（文件名 stem 1511-/1313- 对应 chapter15-11/chapter13-13）
+- 撞题规避：`1511-` 全库 grep `Prometheus`/四个指标类型**零命中**（仅 925-rwmutex 的 go `Counter` struct 无关），为干净首覆盖，取 Counter/Gauge/Histogram/Summary 四类型 + labels 时序模型 + rate/irate/histogram_quantile 真 gap；深卡显式边界到 告警/Alertmanager/Grafana（不重画）。`1313-` 仅与 `131-docker-setup.md`（max_map_count 一项重叠）及 `131-es-basics.deep.md`（只提一句）重叠，其余 8 项 OS 配置（limits nofile/swapoff/swappiness/THP/tcp_keepalive/somaxconn/安全/JVM堆）未覆盖，取**九项 OS 配置**真 gap；深卡显式边界到 131-docker-setup（只引 max_map_count 不重画 docker 起法）/811-memory-foundations（Linux 内存机制）。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（1511 含 指盘→Gauge、柱状图/统一→Histogram、摘要→Summary、imrate→irate、桶/直柱→bucket；1313 含 文件描→file descriptors、交换分区/交换空间→swap、透明大页/大页面→THP、堆外/对→堆、保险/安全→认证/TLS），按固化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**；1511 含事实核校：补正「Histogram 分位在服务端用 histogram_quantile 计算、Summary 分位在客户端算、不可跨实例聚合」；1313 含事实核校：补正「swappiness=1 最少交换、=0 仅内存不足才用」。未触发规则 11、补充分级 warn 维持 51。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾，未被误判为主卡；1511 三张主卡含 go 块（client_golang CounterVec/Gauge/Histogram+Summary/PromQL 查询）、1313 三张主卡含 go 块（unix.Sysctl/Getrlimit/TCP keepalive/Cluster.Health 探活）满足规则 14。
+- 门禁：906/906 PASS，error 0，warn **51**。累计 174 篇 done / 906 张卡。

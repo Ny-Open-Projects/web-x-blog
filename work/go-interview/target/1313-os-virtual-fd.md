@@ -1,0 +1,60 @@
+# 1313 ES 部署 OS 配置（一）：虚拟内存与文件描述符
+
+> 分类：搜索 / Elasticsearch | 难度：L3 | 题型：运维题 | 频率：中 | 关键词：**vm.max_map_count**/**mmapfs**/**limits.conf**/**nofile**/**文件描述符**
+> 原文锚点：第 1~15 段「虚拟内存映射数量 + 文件描述符限制」
+
+## 一句话总述
+ES 依赖 mmapfs 存储引擎、默认大量使用虚拟内存映射，故须调大 `vm.max_map_count`（写 /etc/sysctl.conf 后 `sysctl -p` 生效）；同时 ES 可能打开海量文件，须为 elasticsearch 用户在 `/etc/security/limits.conf` 设 `nofile` 软/硬限制（如 65536），否则启动报「max file descriptors」。
+
+## 面试官视角
+- 考察意图：是否知道 ES 上线两个最基础的 OS 坑——虚拟内存映射数与文件描述符。
+- 分档：P5 知要调系统参数；P6 知 max_map_count 与 nofile 两个具体项；P7 知 mmapfs 为何要吃映射数、limits.conf 对应用户生效。
+- 红旗答案：以为 ES 只用堆内存、不管 mmap；或不知道 nofile 要按运行用户设。
+- 惊艳点：点出「max_map_count 是 ES 运维第一坑（值太小 ES 直接起不来），limits.conf 须指定 es 运行用户而非 root」。
+
+## 主问答
+**Q（面试官原话）：** 部署 ES 为什么要调虚拟内存映射数和文件描述符？
+**A：**
+1. **虚拟内存映射（vm.max_map_count）**：ES 用 mmapfs 引擎，靠内存映射文件访问索引，默认映射数上限偏小；须设 `vm.max_map_count=262144`（或更高），写入 /etc/sysctl.conf 后 `sysctl -p` 立即生效（开机自动加载，无需重启）。值太小 ES 启动直接报错。
+2. **文件描述符（nofile）**：ES 节点可能打开大量文件（索引文件、socket 等），默认 ulimit 不够；在 /etc/security/limits.conf 为 elasticsearch 运行用户设 `soft nofile` 与 `hard nofile`（如均 65536）后重新登录生效。
+3. **为何按用户设**：limits.conf 按用户名维度生效，必须写 ES 实际运行用户（如 elasticsearch），写 root 无效；容器部署须在 host 级设置（容器共享宿主内核参数）。
+4. **验证**：`sysctl vm.max_map_count` 看映射数；`cat /proc/<pid>/limits | grep "Max open files"` 看进程实际 nofile。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 调啥参数？ | 基础 | max_map_count/nofile | P5 |
+| L2 | 为什么调？ | 机制 | mmapfs 吃映射数 | P6 |
+| L3 | 怎么永久生效？ | 操作 | sysctl.conf+sysctl -p | P6 |
+| L4 | limits 给谁设？ | 细节 | es 运行用户 | P7 |
+| L5 | 容器里怎么设？ | 进阶 | host 级 sysctl | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| ES 全版本 | 需 max_map_count | 默认值偏小，生产必调 |
+| 任意版本 | limits.conf | 按运行用户设 nofile |
+
+## 关键代码
+```go
+// 程序侧校验：读出当前 max_map_count 与进程 nofile（部署自检）
+import (
+	"strconv"
+
+	"golang.org/x/sys/unix"
+)
+func checkESLimits() {
+	s, _ := unix.Sysctl("vm.max_map_count") // 应 >= 262144
+	mmax, _ := strconv.Atoi(s)
+	lim := &unix.Rlimit{}
+	unix.Getrlimit(unix.RLIMIT_NOFILE, lim) // Cur/Max 应 >= 65536
+	_ = mmax
+}
+```
+
+## 总结与预判
+虚拟内存与文件描述符是 ES 部署前两坑。交换分区/透明大页等其余内核调优下一张。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] mmapfs 需大映射数故调 vm.max_map_count、写 sysctl.conf+sysctl -p 生效、limits.conf 按 es 用户设 nofile(如65536)——均正确；补正：sysctl -p 即可立即生效、无需重启（课程口播「重启」不严谨）。
+2. 崩坏词归一：源码将若干 ES/Linux 专有名词音译为崩坏词，本卡统一为规范术语。
