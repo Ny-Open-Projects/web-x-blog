@@ -2352,10 +2352,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1010-atomic-ops-api",
+        "1010-atomic-typed-api-upgrade"
+      ],
+      "done_at": "2026-10-09T03:24:08+08:00"
     },
     "source/10/10-11 如何实现指针值的原子操作？-迅捷文字转语音-1790918493358zh.txt": {
       "id": "10-11",
@@ -2862,10 +2866,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "111-perf-optimization-timing",
+        "111-perf-engineering-ethics"
+      ],
+      "done_at": "2026-10-09T03:24:15+08:00"
     },
     "source/11/11-10 如何最高效率的克隆一个切片？-迅捷文字转语音-1790920238487zh.txt": {
       "id": "11-10",
@@ -7295,7 +7303,7 @@
     }
   },
   "next_num": 1,
-  "waves": 136,
-  "updated": "2026-10-09T03:10:55+08:00",
+  "waves": 137,
+  "updated": "2026-10-09T03:24:15+08:00",
   "consec_fail": 0
 }
