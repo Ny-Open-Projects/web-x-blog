@@ -1387,3 +1387,11 @@
 - 原文纠错（本波关键坑）：纯 ASR 解码还原。8-10 源含黑名单词 `构语言`(→Go语言，源"在构语言中垃圾回收")；按固化 SOP「Go 类源纠错节纯泛述不列举任何原词崩坏词」+正文一律用规范词 `Go`，已用 grep 预扫确认 810 卡零黑名单词(构语言/构元/购语言/护士锁/自选锁/妈妈引擎/引诺DB均未现于卡体)未触发规则 11。11-15 源崩坏词(幺零九零→1090/阿姆达尔→Amdahl/REDIS→Redis/mgate→mget/分代符→分段锁，均非黑名单)。两源 warn 维持 51。
 - 格式坑（本波）：2 张深卡 `.deep.md` 点号尾（1115-api-perf / 810-gc-trigger），深卡 stem 与三主卡不同名不触发深挖门槛；**深卡三节(思路与架构/方案取舍/答题技巧)围栏延续 wave103~112 直接预置 ```text，连续十一波(wave103~113)零 error 落地**。四主卡均含 ```go 代码块（1115- 并行errgroup/分段锁map+IN批量/8方向树；810- runtime.GC+FreeOSMemory/手动差异/sync.Pool+SetGCPercent）满足规则 14。
 - 门禁：1098/1098 PASS，error 0，warn **51**。累计 222 篇 done / 1098 张卡。
+
+## wave 114（2026-10-08 晚，L 级，8 张）
+- 源：`10-23 主协程如何等待其他协程退出`（source/10/10-23 主协程如何等待其他协程退出-迅捷文字转语音-1790919521234zh.txt）、`5-16 大佬传授几招for range闭坑秘笈`（source/05/5-16 大佬传授几招for range闭坑秘笈-迅捷文字转语音-1790856034240zh.txt，chapter<10 补零 5-16→516；chapter≥10 直拼 10-23→1023）
+- 产出：`1023-wait-goroutines-overview.md`/`1023-waitgroup-broadcast.md`/`1023-channel-semaphore-sync.md`/`1023-wait-goroutines.deep.md` + `516-range-address-trap.md`/`516-range-value-copy.md`/`516-range-pointer-array.md`/`516-for-range.deep.md`
+- 撞题规避（additive）：`1023-` 与 `913-waitgroup-usage`(Add/Done/Wait 用法)/`913-waitgroup-*`(原子/状态/深卡) 重叠，取**真 gap**=① 主协程等待子协程退出的多种同步方式选型总览(WaitGroup最推荐/无缓冲channel/信号量此场景不推荐) ② WaitGroup 广播通知模式(双 WG:ready.Wait阻塞、主Done广播数据就绪,913 未覆盖) ③ 无缓冲channel同步(读满全部)vs信号量(本职限并发非等待)边界；主卡显式 [边界] 引 913/1024(无缓冲阻塞)/1015(信号量限并发) 不重述 WaitGroup 实现。`516-` 与 `1112-forrange-copy-trap`(大元素双变量复制性能) 高重叠但**错位**(1112 只讲性能、不讲取地址陷阱)，取**真 gap**=① for range 取地址陷阱(value副本+同址复用→map值全为最后,经典面试题,正确写法先拷贝再取址) ② value是副本改v不动原值 ③ 指针数组nil元素解引用panic+下划线忽略值安全遍历；主卡显式 [边界] 引 1112(大元素复制基准)/1017-closure-loop-var(闭包捕获同款)/414(指针数组nil) 不重述复制性能基准。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（1023: 主携程→主协程/构入器→goroutine/勾to→goroutine/蛋→Done/站→Done/干→Done/速据→数据/牵动→channel/购车区→semaphore；516: fourrange→for range/负循环→for循环/y六→value/速读→数组/速组→数组/leal→nil/leo→nil，均非黑名单）。两源 grep 预扫确认**零**黑名单词(构元/构语言/购语言/护士锁/自选锁/妈妈引擎/引诺DB均未现)，未触发规则 11、warn 维持 51。
+- 格式坑（本波）：2 张深卡 `.deep.md` 点号尾（1023-wait-goroutines / 516-for-range），深卡 stem 与三主卡不同名不触发深挖门槛；**深卡三节(思路与架构/方案取舍/答题技巧)围栏延续 wave103~113 直接预置 ```text，连续十二波(wave103~114)零 error 落地**。四主卡均含 ```go 代码块（1023- WaitGroup/双WG广播/channel+semaphore；516- 取地址陷阱+修复/副本不改原/指针nil panic+_忽略）满足规则 14。
+- 门禁：1106/1106 PASS，error 0，warn **51**。累计 224 篇 done / 1106 张卡。

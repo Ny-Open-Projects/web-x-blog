@@ -594,10 +594,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "516-range-address-trap",
+        "516-range-value-copy",
+        "516-range-pointer-array",
+        "516-for-range.deep"
+      ],
+      "done_at": "2026-10-08T19:58:38+08:00"
     },
     "source/05/5-2 Go语言中哪些类型的值可以用组合字面量表示？-迅捷文字转语音-1790757606243zh.txt": {
       "id": "5-2",
@@ -2560,10 +2566,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1023-wait-goroutines-overview",
+        "1023-waitgroup-broadcast",
+        "1023-channel-semaphore-sync",
+        "1023-wait-goroutines.deep"
+      ],
+      "done_at": "2026-10-08T19:58:37+08:00"
     },
     "source/10/10-24 Go中如何实现主协程永不退出？-迅捷文字转语音-1790919524073zh.txt": {
       "id": "10-24",
@@ -7078,7 +7090,7 @@
     }
   },
   "next_num": 1,
-  "waves": 113,
-  "updated": "2026-10-08T19:53:36+08:00",
+  "waves": 114,
+  "updated": "2026-10-08T19:58:38+08:00",
   "consec_fail": 0
 }
