@@ -2760,10 +2760,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1113-string-to-byteslice",
+        "1113-byteslice-to-string",
+        "1113-zero-copy-pitfalls",
+        "1113-string-byteslice-zerocopy"
+      ],
+      "done_at": "2026-10-08T18:25:17+08:00"
     },
     "source/11/11-14 如何优化json序列化的性能？-迅捷文字转语音-1790920480026zh.txt": {
       "id": "11-14",
@@ -3876,10 +3882,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1249-small-table-drive",
+        "1249-smo-sharding",
+        "1249-hot-cold-column-split",
+        "1249-sql-optimization-2"
+      ],
+      "done_at": "2026-10-08T18:25:17+08:00"
     },
     "source/12/12-5 redo log 写满会发生什么？（一）-迅捷文字转语音-1790920904299zh.txt": {
       "id": "12-5",
@@ -6910,7 +6922,7 @@
     }
   },
   "next_num": 1,
-  "waves": 99,
-  "updated": "2026-10-08T18:18:28+08:00",
+  "waves": 100,
+  "updated": "2026-10-08T18:25:17+08:00",
   "consec_fail": 0
 }
