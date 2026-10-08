@@ -4311,10 +4311,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1259-lru-vs-lfu",
+        "1259-cache-eviction-internals.deep"
+      ],
+      "done_at": "2026-10-09T01:24:01+08:00"
     },
     "source/12/12-6 redo log 写满会发生什么？（二）-迅捷文字转语音-1790920909827zh.txt": {
       "id": "12-6",
@@ -5737,10 +5741,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "167-functional-options",
+        "167-api-evolution-patterns.deep"
+      ],
+      "done_at": "2026-10-09T01:24:01+08:00"
     },
     "source/16/16-8 建造者模式主要用来解决什么问题？-迅捷文字转语音-1790928380922zh.txt": {
       "id": "16-8",
@@ -7255,7 +7263,7 @@
     }
   },
   "next_num": 1,
-  "waves": 131,
-  "updated": "2026-10-09T01:13:41+08:00",
+  "waves": 132,
+  "updated": "2026-10-09T01:24:01+08:00",
   "consec_fail": 0
 }
