@@ -1688,10 +1688,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "820-sleep-vs-after",
+        "820-timer-gotchas-playbook"
+      ],
+      "done_at": "2026-10-09T03:10:48+08:00"
     },
     "source/08/8-3 Go编译过程是怎样的？（一）-迅捷文字转语音-1790896565096zh.txt": {
       "id": "8-3",
@@ -5170,10 +5174,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "145-kafka-pagecache-why-os",
+        "145-cache-management-tradeoff"
+      ],
+      "done_at": "2026-10-09T03:10:55+08:00"
     },
     "source/14/14-6 kafka的数据是如何存储的？-迅捷文字转语音-1790926010811zh.txt": {
       "id": "14-6",
@@ -7287,7 +7295,7 @@
     }
   },
   "next_num": 1,
-  "waves": 135,
-  "updated": "2026-10-09T02:55:31+08:00",
+  "waves": 136,
+  "updated": "2026-10-09T03:10:55+08:00",
   "consec_fail": 0
 }
