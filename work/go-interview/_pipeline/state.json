@@ -2651,10 +2651,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "109-slice-not-concurrent",
+        "109-safeslice-rwlock",
+        "109-safeslice-channel",
+        "109-concurrent-slice"
+      ],
+      "done_at": "2026-10-08T16:55:24+08:00"
     },
     "source/11/11-1 性能优化是区分“小白”和“大佬”的分水岭-迅捷文字转语音-1790919684172zh.txt": {
       "id": "11-1",
@@ -5703,10 +5709,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "175-reverse-stack-overview",
+        "175-reverse-stack-queue",
+        "175-reverse-stack-recursive",
+        "175-reverse-stack"
+      ],
+      "done_at": "2026-10-08T16:55:24+08:00"
     },
     "source/17/17-6 Golang如何实现数组队列和链表队列？-迅捷文字转语音-1790928839261zh.txt": {
       "id": "17-6",
@@ -6850,7 +6862,7 @@
     }
   },
   "next_num": 1,
-  "waves": 94,
-  "updated": "2026-10-08T16:50:23+08:00",
+  "waves": 95,
+  "updated": "2026-10-08T16:55:24+08:00",
   "consec_fail": 0
 }

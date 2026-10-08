@@ -1,0 +1,25 @@
+# 109 并发安全 Slice 实现 深挖
+
+> 覆盖源 10-9 全文：slice 非并发安全本质、RWMutex 封装、channel 串行化、分片优化。主卡已拆成非并发本质、RWMutex 封装、channel 串行化三张，本附录做横向对比与取舍。
+
+## 思路与架构
+
+```mermaid
+graph TD
+A[并发安全 Slice] --> B[根因: 引用类型共享底层数组]
+A --> C[RWMutex 封装 SafeSlice]
+A --> D[channel 串行化 actor]
+C --> C1[写锁改/读锁取+下标校验]
+D --> D1[request 封装+单协程 run]
+A --> E[优化: 分片 slice 打散锁粒度]
+E --> E1[写多索引随机有效/append 集中收益低]
+```
+
+## 方案取舍
+- **RWMutex vs channel**：读多写少选 RWMutex（读锁不互斥）；channel 串行化逻辑简单但单消费者瓶颈、读频繁更慢。
+- **分片 slice**：写多且索引随机时按 key 分片打散锁粒度；但 append 索引连续易集中某分片、锁仍集中，收益有限。
+- **sync 原语 vs 自建**：map 有 `sync.Map`、slice 无官方并发版，需按访问模式自封装（锁或 channel）。
+
+## 答题技巧
+- 被问「slice 并发安全吗」先答「否 + 静默覆盖（对比 map panic）+ 共享底层数组」，再给锁/channel 两方案 [经验]。
+- 主动边界到 `914`(map 并发)/`925`(RWMutex)/`609`(channel 锁)/`1018`(race detector)，构成并发安全全栈 [边界]。
