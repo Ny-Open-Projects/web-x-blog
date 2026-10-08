@@ -3649,10 +3649,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1242-phantom-scenarios",
+        "1242-snapshot-vs-current-read",
+        "1242-rr-phantom-recurrence",
+        "1242-phantom-overview.deep"
+      ],
+      "done_at": "2026-10-08T14:52:33+08:00"
     },
     "source/12/12-43 explain详解（一）-迅捷文字转语音-1790923457095zh.txt": {
       "id": "12-43",
@@ -5571,10 +5577,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "173-array-stack",
+        "173-linkedlist-stack",
+        "173-stack-select",
+        "173-stack-overview.deep"
+      ],
+      "done_at": "2026-10-08T14:52:33+08:00"
     },
     "source/17/17-4 设计一个栈可以保存栈中的最小元素-迅捷文字转语音-1790928652873zh.txt": {
       "id": "17-4",
@@ -6718,7 +6730,7 @@
     }
   },
   "next_num": 1,
-  "waves": 83,
-  "updated": "2026-10-08T14:38:55+08:00",
+  "waves": 84,
+  "updated": "2026-10-08T14:52:33+08:00",
   "consec_fail": 0
 }

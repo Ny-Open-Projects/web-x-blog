@@ -1,0 +1,84 @@
+# 173 用链表实现栈
+
+> 分类：数据结构 / Go | 难度：L2 | 题型：实现题 | 频率：中 | 关键词：**链表栈**/**头插/头出**/**前置指针**/**push/pop/peek**/**读写锁**
+
+> 原文锚点：第 36~49 段「链表实现栈」
+
+## 一句话总述
+链表栈用一个**带前置指针的节点链**表示，栈顶即链表头 `top`。`push` 在头部插入（新节点 prev 指向旧 top）、`pop` 弹出头部节点并让 `top = top.prev`、`peek` 返回 `top.value`；增删只改指针不搬数据，配 `sync.RWMutex` 保并发安全。
+
+## 面试官视角
+链表栈考的是「指针操作是否干净」：空栈 pop 的处理、头插时 prev 指针的衔接、size 自减。能边写边说清「栈顶是头不是尾、push 是头插」的，基本稳。
+
+## 主问答
+**Q（面试官原话）：** 用链表怎么实现一个栈？
+
+1. **节点结构**：每个节点含 `value` 与指向前驱的 `prev` 指针；栈持有一个 `top` 指针和 `size` 计数、一把读写锁。
+2. **push 头插**：新建节点，其 `prev` 指向当前 `top`，再把 `top` 更新为新节点，size+1——新元素即栈顶。
+3. **pop 弹头**：先判空（size==0 直接返回）；取 `top.value`，`top = top.prev`，size-1，返回弹出的 value。
+4. **peek 不弹**：直接返回 `top.value`，不动指针、不改 size。
+5. **并发安全**：所有操作加锁（peek 用读锁、push/pop 用写锁），避免多 goroutine 改 `top` 出现竞态。
+
+## 追问链
+| 档位 | 追问 | 答不出停在哪档 |
+|------|------|----------------|
+| L1 | 链表栈怎么表示？ | 说不清 top 即头 |
+| L2 | push 怎么插？ | 说不清头插/prev |
+| L3 | pop 怎么改指针？ | 说不清 top=top.prev |
+| L4 | 空栈怎么处理？ | 说不清 size==0 返回 |
+| L5 | 并发怎么保安全？ | 说不清读写锁 |
+
+## 版本与兼容性
+| 操作 | 时间复杂度 | 说明 |
+|------|------------|------|
+| push | O(1) | 头插，仅改指针 |
+| pop | O(1) | 改头指针 |
+| peek | O(1) | 取头值 |
+
+## 关键代码
+```go
+type Node struct {
+    value int
+    prev  *Node
+}
+type LStack struct {
+    top  *Node
+    size int
+    mu   sync.RWMutex
+}
+
+func (s *LStack) Push(x int) {
+    s.mu.Lock()
+    defer s.mu.Unlock()
+    s.top = &Node{value: x, prev: s.top} // 新节点 prev 指向旧 top
+    s.size++
+}
+
+func (s *LStack) Pop() (int, bool) {
+    s.mu.Lock()
+    defer s.mu.Unlock()
+    if s.size == 0 {
+        return 0, false
+    }
+    v := s.top.value
+    s.top = s.top.prev // 头结点弹出，top 前移
+    s.size--
+    return v, true
+}
+
+func (s *LStack) Peek() (int, bool) {
+    s.mu.RLock()
+    defer s.mu.RUnlock()
+    if s.size == 0 {
+        return 0, false
+    }
+    return s.top.value, true
+}
+```
+
+## 总结与追问预判
+核心：**链表栈栈顶即头，push 头插、pop 弹头，只改指针不搬数据**。追问拐向「和切片栈比」——备好「数组栈读快写慢、链表栈写快读慢」（见 `173-stack-select.md`）；若被问「为什么不用数组」，接「写多读少用链表、省去搬移」。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 原文链表栈采用「top 指向前驱、push 头插」的前向链表实现，描述准确；本卡补入空栈 pop 的边界返回与读写锁并发保护，使实现可直接落地。
+2. 崩坏词归一：源码将链表 / 栈 / 入栈 / 出栈 / 栈顶 等音译为多组崩坏词，本卡统一为规范术语。

@@ -1102,3 +1102,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 jason→JSON、encoding/json→eneasyjason、jsoniter→jasonauerator、easyjson→mantilencodingjason、ffjson→easeasy省、protobuf→protobuff、Marshal→SPGmartial、Unmarshal→jason点mmartial、RawMessage→jason点rormessage、微服务→微服务、火枪手→火枪手、绞杀者→假杀者、单体→单体、中庸→中庸 等；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**（吸取 wave82 教训，本波从首版即纯泛述，未触发规则 11）。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`1114-json-perf-overview.deep.md`/`154-microservice-split-overview.deep.md`），未被误判为主卡；1114 三张主卡含 go 块(jsoniter/RawMessage/标签)、154 三张主卡含 go 块(ServiceTeam/OrderService/OrderGateway)满足规则 14。
 - 门禁：858/858 PASS，error 0，warn **51**。累计 162 篇 done / 858 张卡。
+
+## wave 84（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/12/12-42`（什么情况下会出现幻读？，L2~L3）→ `1242-`；`source/17/17-3`（队列标题「至少使用2种方式实现字符串的反转？」，**但实际文件内容是「栈的实现（数组+链表）」——标题/内容错位，无字符串反转内容**）→ `173-`。
+- 产出：
+  - `1242-phantom-scenarios.md`（幻读发生场景：RC/RU 下并发插入/删除/并发更新使行进出查询范围三类必触发；与不可重复读再点(值 vs 行数)；RC/RU 不避免）
+  - `1242-snapshot-vs-current-read.md`（快照读 vs 当前读：RR 快照读靠 ReadView 沿版本链隔离；当前读 FOR UPDATE/FOR SHARE/写/串行化读最新；锁语法 8.0 FOR SHARE vs 旧 LOCK IN SHARE MODE）
+  - `1242-rr-phantom-recurrence.md`（RR 下仍幻读的两具体场景：①对别事务新插入行 UPDATE 当前读拉入 ②FOR UPDATE 当前读直接可见；根因=脱离快照读；彻底解靠间隙锁/Next-Key）
+  - `1242-phantom-overview.deep.md`（幻读全景：定义→场景→RR两类读→RR复现→锁兜底 五层 + 边界 1230/1231/1235/1236）
+  - `173-array-stack.md`（切片栈：push=append 末/ pop 弹末；**截取 pop 不释放底层数组→内存泄漏**，置 nil+缩视图修）
+  - `173-linkedlist-stack.md`（链表栈：top 即头、push 头插(prev 指旧 top)、pop 弹头(top=top.prev)、peek 不弹；读写锁并发）
+  - `173-stack-select.md`（选型：数组栈连续内存/随机访问/读多写少；链表栈散落/增删只改指针/写多读少；同 O(1)）
+  - `173-stack-overview.deep.md`（栈实现全景：定义→双实现→选型→边界 四层 + 显式边界到 Go 运行时栈(420/1118 等)）
+- 撞题规避：`1242-` 与 `1230-nonrepeatable-vs-phantom`(定义/区别)、`1230-isolation-demo-practice`(终端验证命令)、`1231-mvcc.deep`/`1231-readview`/`1231-visibility`(MVCC 内部)、`1235-next-key-lock`/`1236-gap-lock-mechanics`/`1236-range-nextkey-lock`(锁内部) 重叠，本波取**真 gap=幻读发生条件与 RR 复现场景**(RC/RU 三类触发 + RR 下两个当前读复现 demo + 快照/当前读机制 + 锁语法版本差异)，深卡只点"锁住间隙拦插入"不重产锁内部，显式边界到 1230/1231/1235/1236。`173-` 为**用户态数据结构栈干净首覆盖**(全库"栈/stack"命中的是 Go 运行时调用栈/调度 420/1118/813 等，非数据结构栈；"反转"仅 418 有符号溢出反转、1717 递归/快排误命中)，故产栈实现卡；**标题错位提示**：17-3 队列标题称"字符串反转"但源文件实为栈实现，已按真实内容产卡，建议用户确认是否存在独立的字符串反转源或修正 17-3 标题。全波 8 张 0 error、warn 维持 51（**修复补充分级 warn**：1242-snapshot-vs-current-read 初版纠错节缺 `[经验]` 标记触发 `⚠ 补充分级` 全文无标记，warn 升至 52；补 `[经验]` 后归零——其余 7 张本就带 `[经验]`）。
+- 原文纠错（本波）：纯 ASR 解码还原（1242 含 幻读→患读、快照→拍照、提交→提交、隔离→隔离、间隙锁→零键索/零键锁、当前读→当前读 等；173 含 栈→栈、切片→切切/切片、入栈→入栈、出栈→出栈/拓扑、栈顶→栈顶/战顶、链表→链链/链表、push→push/扑、pop→pop/拓扑、peek→pick/取栈点 等）；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11。1242 另含一条事实核校：原文把"修改"也列为幻读成因，本卡归为"修改使记录进出查询范围"的边界型幻读，与 1230 卡口径一致。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`1242-phantom-overview.deep.md`/`173-stack-overview.deep.md`），未被误判为主卡；1242 三张主卡含 sql 块(事务演示)、173 三张主卡含 go 块(Stack/LStack/NewStack)满足规则 14。
+- 门禁：866/866 PASS，error 0，warn **51**。累计 164 篇 done / 866 张卡。
