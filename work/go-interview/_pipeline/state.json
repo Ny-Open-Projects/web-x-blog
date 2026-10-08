@@ -5950,10 +5950,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1715-selection-sort",
+        "1715-selection-two-way.deep"
+      ],
+      "done_at": "2026-10-09T07:47:30+08:00"
     },
     "source/17/17-16 Golang中如何实现插入排序？-迅捷文字转语音-1790929227306zh.txt": {
       "id": "17-16",
@@ -6332,10 +6336,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1816-crontab-not-working",
+        "1816-cron-troubleshoot-flow.deep"
+      ],
+      "done_at": "2026-10-09T07:47:30+08:00"
     },
     "source/18/18-17 su， su -， sudo -i， sudo -s有什么么区别？-迅捷文字转语音-1790930557715zh.txt": {
       "id": "18-17",
@@ -7367,7 +7375,7 @@
     }
   },
   "next_num": 1,
-  "waves": 145,
-  "updated": "2026-10-09T06:57:55+08:00",
+  "waves": 146,
+  "updated": "2026-10-09T07:47:30+08:00",
   "consec_fail": 0
 }
