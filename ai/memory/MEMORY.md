@@ -816,3 +816,19 @@
 - 撞题规避：129-querycache-perf-overhead/1311-search-after/198-shard-design 角度不同不撞；162-factory.md 已覆盖工厂方法+抽象工厂概念层 → 166 三张避开概念重复，聚焦**简单工厂(162 红旗缺口)/抽象工厂具体 Go 实现+产品族一致性/三者对比选型**，互补不重复。
 - 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含"三个月/一百天"低频淘汰阈值口径不一致（统一按可配置 TTL 表述）；源码将 _source/best_compression/refresh_interval/index buffer 等标识符音译为崩坏词，泛述还原。
 - 门禁：722/722 PASS，error 0，warn **51**。累计 128 篇 done / 722 张卡。
+
+## wave 67（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/12/12-29`（事务的隔离级别有哪些？（一），L 级）→ `1229-`；`source/06/6-4`（defer底层数据结构是什么？，L 级）→ `604-`。
+- 产出：
+  - `1229-tx-access-mode-id.md`（访问模式 READ ONLY/READ WRITE + 事务ID 只对事务表改动才分配 + 只读事务可改临时表）
+  - `1229-autocommit-implicit.md`（自动提交 autocommit 默认 ON + 隐式提交 7 类 + 遇错语句级回滚纠偏）
+  - `1229-tx-engine-temporary.md`（仅 InnoDB/NDB 支持事务 + 用户/内部临时表区分 + EXPLAIN Using temporary）
+  - `1229-transaction-basics.deep.md`（事务全景串联 + 一元隔持久助记 + 提交方式取舍 + 答题框架）
+  - `604-defer-struct.md`（_defer 结构体字段 + link 头插 LIFO 栈 + heap=堆分配非优先级纠正）
+  - `604-deferproc-deferreturn.md`（deferproc 注册/deferreturn 执行 + goroutine 级 defer 栈 + panic 捕获）
+  - `604-defer-opencoded.md`（开放编码 defer Go1.14+ 编译期内联零分配 + 限制/退化）
+  - `604-defer-runtime.deep.md`（_defer 结构+头插+两 runtime 函数+开放编码+与 607 用法层互补 + 答题框架）
+- 撞题规避：124-acid-properties 已覆盖 ACID 定义+谁保证谁 → 1229 三张主卡避开 ACID 定义，聚焦**访问模式/事务ID时机/自动提交隐式提交/引擎临时表**；1225-transaction-rollback 覆盖回滚；1230-* 覆盖隔离级别。607/608-* 覆盖 defer 用法层 → 604 四张聚焦**运行时内部结构**（_defer 字段/deferproc/deferreturn/开放编码），互补不重复。
+- 原文纠错（本波）：① 事务"遇错自动回滚整个事务"→精确为 InnoDB 对单条语句做语句级回滚、仅死锁/锁等待超时才回滚整事务（1229-autocommit-implicit 边界）；② defer 的 `heap` 字段被源误述为"优先级/优先队列"，实际是堆分配标记、defer 是 LIFO 链表栈无优先队列（604-defer-struct 纠错节）。其余纯 ASR 解码（英乐DB→InnoDB、安卓logo→undo log、deffer→defer、勾入进→goroutine 等）。
+- 门禁：730/730 PASS，error 0，warn **51**。累计 130 篇 done / 730 张卡。
