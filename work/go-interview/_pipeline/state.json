@@ -2314,10 +2314,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1016-channel-ratelimiter",
+        "1016-fastest-response-channel",
+        "1016-ratelimit-vs-semaphore",
+        "1016-channel-rate-limit"
+      ],
+      "done_at": "2026-10-08T16:50:23+08:00"
     },
     "source/10/10-17 Goroutine中闭包也有很多的“坑”，你平时注意到了吗-迅捷文字转语音-1790918778077zh.txt": {
       "id": "10-17",
@@ -6545,10 +6551,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1853-dns-resolution",
+        "1853-tcp-connection",
+        "1853-http-render-close",
+        "1853-url-to-page"
+      ],
+      "done_at": "2026-10-08T16:50:23+08:00"
     },
     "source/18/18-6 如何查看超大日志？-迅捷文字转语音-1790929933661zh.txt": {
       "id": "18-6",
@@ -6838,7 +6850,7 @@
     }
   },
   "next_num": 1,
-  "waves": 93,
-  "updated": "2026-10-08T16:42:38+08:00",
+  "waves": 94,
+  "updated": "2026-10-08T16:50:23+08:00",
   "consec_fail": 0
 }

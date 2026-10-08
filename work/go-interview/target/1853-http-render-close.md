@@ -1,0 +1,58 @@
+# 1853 从输入 URL 到页面：HTTP 请求响应、渲染与连接关闭
+
+> 分类：网络/HTTP | 难度：L2 | 题型：流程题 | 频率：高 | 关键词：**HTTP请求**/**HTTP响应**/**渲染DOM**/**子资源**/**keep-alive长连接**
+> 原文锚点：第 50~62 段「发 HTTP 请求(行/头/体) → 服务器响应(状态行/头/体 HTML) → 解析渲染+子资源 → 关闭连接(1.0 close/1.1 keep-alive)」
+
+## 一句话总述
+连接建立后，浏览器**发 HTTP 请求**（请求行+头+体）给服务器；服务器**回 HTTP 响应**（状态行+头+体，体通常是 HTML）；浏览器**解析渲染**（构建 DOM、CSS/JS、布局绘制），遇图片/CSS/JS 再发子请求；最后按协议版本**关连接**——HTTP/1.0 或 `Connection: close` 用完即关，HTTP/1.1 或 keep-alive 复用长连接省握手开销。
+
+## 面试官视角
+- 考察意图：能否串起「请求→响应→渲染→关连接」，并讲清 keep-alive 的意义。
+- 分档：P5 知请求有方法/路径、响应有状态码；P6 能讲渲染触发子请求与 keep-alive 复用；P7 知长连接对性能的影响与队头阻塞。
+- 红旗答案：把渲染说成「一次性拿到整页」忽略子资源瀑布；混淆 close 与 keep-alive。
+- 惊艳点：点出「渲染期间发现的子资源是另一条 HTTP 请求、形成请求瀑布」，以及「keep-alive 复用连接省 TCP/TLS 握手」 [经验]。
+
+## 主问答
+**Q（面试官原话）：** 连接建好之后怎么取回页面？连接何时关？
+**A：**
+1. **请求/响应报文**：请求=请求行（方法/路径/版本）+请求头+请求体；响应=状态行（版本/状态码/描述）+响应头+响应体（通常 HTML 字符串） [经验]。
+2. **解析渲染**：收到 HTML 后解析构建 DOM，处理 CSS/JS 做布局绘制；解析中遇图片/CSS/JS 等资源会再发起 HTTP 子请求，形成资源瀑布 [经验]。
+3. **连接关闭策略**：HTTP/1.0 或 `Connection: close` 响应后关连接；HTTP/1.1 或 1.0 配 keep-alive 则复用长连接服务多请求，省重复握手开销 [经验]。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 响应有啥？ | 结构 | 状态码+头+体 | P5 |
+| L2 | 怎么渲染？ | 流程 | DOM+子请求 | P6 |
+| L3 | 连接何时关？ | 策略 | close/keep-alive | P6 |
+| L4 | 长连接好处？ | 性能 | 省握手 | P7 |
+| L5 | 队头阻塞？ | 工程 | HTTP/2 多路复用 | P7+ |
+
+## 版本与兼容性
+- 本卡只覆盖「HTTP 收发 + 渲染 + 关闭」；DNS 见 `1853-dns-resolution`、TCP 封装与握手见 `1853-tcp-connection` [边界]。
+- TCP 连接关闭的 FIN/四次挥手细节见 `1840-tcp-*` 系列，本卡只引 close/keep-alive 不重述挥手 [边界]。
+
+## 总结与追问预判
+从 URL 到页面是一场「DNS→TCP→TLS→HTTP→渲染」的链式协作，每一环都可能成为性能瓶颈（DNS TTL、TLS 握手、keep-alive、HTTP/2 多路复用）。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 请求/响应报文结构、渲染触发子资源请求、HTTP/1.0 close 与 1.1 keep-alive 复用——均正确。
+2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（请求行、状态码、DOM、长连接、keep-alive 等）。
+
+```go
+// HTTP 请求/响应 + keep-alive 长连接（连接关闭策略）
+func fetch(urlStr string) (string, error) {
+    // 默认 Transport 开启 keep-alive，复用 TCP 连接服务多次请求
+    client := &http.Client{Transport: &http.Transport{DisableKeepAlives: false}}
+    req, _ := http.NewRequest("GET", urlStr, nil) // 请求行：方法/路径/版本
+    resp, err := client.Do(req)
+    if err != nil {
+        return "", err
+    }
+    defer resp.Body.Close() // 响应体：状态行(状态码)+头+体(HTML)
+    body, _ := io.ReadAll(resp.Body)
+    _ = resp.StatusCode // 200/301/404...
+    return string(body), nil
+    // 若服务端回 Connection: close，则本连接用后关闭；否则复用
+}
+```
