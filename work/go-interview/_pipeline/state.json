@@ -1899,10 +1899,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "912-goroutine-vs-process-thread",
+        "912-goroutine-scheduling.deep"
+      ],
+      "done_at": "2026-10-08T23:01:42+08:00"
     },
     "source/09/9-13 waitgroup实现原理是什么？-迅捷文字转语音-1790916682697zh.txt": {
       "id": "9-13",
@@ -2687,10 +2691,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1003-concurrency-interview-method",
+        "1003-concurrency-case.deep"
+      ],
+      "done_at": "2026-10-08T23:01:42+08:00"
     },
     "source/10/10-4 Go是怎么实现原子操作的？-迅捷文字转语音-1790917880276zh.txt": {
       "id": "10-4",
@@ -7191,7 +7199,7 @@
     }
   },
   "next_num": 1,
-  "waves": 123,
-  "updated": "2026-10-08T22:58:14+08:00",
+  "waves": 124,
+  "updated": "2026-10-08T23:01:42+08:00",
   "consec_fail": 0
 }
