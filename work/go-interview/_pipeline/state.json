@@ -4289,10 +4289,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1255-redis-expire-vs-eviction",
+        "1255-expire-deletion-choices.deep"
+      ],
+      "done_at": "2026-10-09T07:55:07+08:00"
     },
     "source/12/12-56 Redis 的过期数据会被立马删除吗？-迅捷文字转语音-1790924138351zh.txt": {
       "id": "12-56",
@@ -6533,10 +6537,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1826-page-replacement-algorithms",
+        "1826-page-replacement-tradeoffs.deep"
+      ],
+      "done_at": "2026-10-09T07:55:07+08:00"
     },
     "source/18/18-27 为什么不全部使用 mmap 来分配内存？-迅捷文字转语音-1790930998402zh.txt": {
       "id": "18-27",
@@ -7375,7 +7383,7 @@
     }
   },
   "next_num": 1,
-  "waves": 146,
-  "updated": "2026-10-09T07:47:30+08:00",
+  "waves": 147,
+  "updated": "2026-10-09T07:55:07+08:00",
   "consec_fail": 0
 }
