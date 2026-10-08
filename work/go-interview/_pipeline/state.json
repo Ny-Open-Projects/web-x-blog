@@ -5177,10 +5177,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1501-service-communication",
+        "1501-service-discovery-registry",
+        "1501-microservice-overview",
+        "1501-microservice-overview.deep"
+      ],
+      "done_at": "2026-10-08T22:34:43+08:00"
     },
     "source/15/15-10 如何对整个调用链做超时控制？-迅捷文字转语音-1790927486120zh.txt": {
       "id": "15-10",
@@ -6136,10 +6142,17 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1815-file-deleted-space-held",
+        "1815-truncate-reclaim",
+        "1815-pseudo-delete-mv-tmp",
+        "1815-hardlink-space-held",
+        "1815-space-not-reclaimed.deep"
+      ],
+      "done_at": "2026-10-08T22:34:43+08:00"
     },
     "source/18/18-16 配置好了crontab为啥不生效？-迅捷文字转语音-1790930351945zh.txt": {
       "id": "18-16",
@@ -7138,7 +7151,7 @@
     }
   },
   "next_num": 1,
-  "waves": 118,
-  "updated": "2026-10-08T22:17:27+08:00",
+  "waves": 119,
+  "updated": "2026-10-08T22:34:43+08:00",
   "consec_fail": 0
 }
