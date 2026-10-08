@@ -615,10 +615,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "502-literal-composite-overview",
+        "502-composite-literal-forms",
+        "502-zero-value-no-literal",
+        "502-composite-literal.deep"
+      ],
+      "done_at": "2026-10-08T22:04:41+08:00"
     },
     "source/05/5-3 Go语言的指针有哪些限制？-迅捷文字转语音-1790757612101zh.txt": {
       "id": "5-3",
@@ -3034,10 +3040,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1107-gc-analysis-overview",
+        "1107-gctrace-fields",
+        "1107-readmemstats-pprof",
+        "1107-gc-analysis.deep"
+      ],
+      "done_at": "2026-10-08T22:04:41+08:00"
     },
     "source/11/11-8 如何做内存逃逸分析？（一）-迅捷文字转语音-1790919952368zh.txt": {
       "id": "11-8",
@@ -7102,7 +7114,7 @@
     }
   },
   "next_num": 1,
-  "waves": 115,
-  "updated": "2026-10-08T21:54:36+08:00",
+  "waves": 116,
+  "updated": "2026-10-08T22:04:41+08:00",
   "consec_fail": 0
 }
