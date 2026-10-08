@@ -915,3 +915,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含 localcatch→localCache、REDISP卡→Redis、MMCatch→Memcached、propersy→proxy、qu模/曲模→取模、客户直连→客户端直连、读写峰值→读写峰值、速组→数组、速度→切片、引诺→引擎(?) 等。技术均准确（缓存分层、一致性哈希、写时复制、内存大页）。按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
 - **门禁修复（格式坑·新发现）**：首校 769/770 error 7——`1260-bigkey-deep.md` 文件名**无 `.deep` 后缀**，validate 归类为「主卡」并强求 面试官视角/主问答/追问链/版本与兼容性/总结 等小节，直接 error。改名 `1260-bigkey.deep.md`（以 `.deep.md` 结尾）后 770/770 PASS、error 0、warn 51。**永久 SOP：深卡文件名一律 `*.<topic>.deep.md` 结尾**，否则 validator 误判为主卡、整卡 error；此坑与 wave70/71 机翻残留坑并列，须固化进产卡 SOP。
 - 门禁：770/770 PASS，error 0，warn **51**。累计 140 篇 done / 770 张卡。
+
+## wave 73（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/13/13-10`（ElasticSearch是如何实现高可用的？，L 级）→ `1310-`；`source/16/16-5`（分别使用两种方式实现线程安全的单例模式，L 级）→ `165-`。
+- 产出：
+  - `1310-es-ha-mechanisms.md`（ES 高可用六机制：分片/副本/主节点选举/故障转移/协调节点负载均衡/水平扩展；综述不重复单机制）
+  - `1310-es-rack-awareness.md`（部署层 HA 保障：same_shard.host 禁同机、机架感知 awareness.attributes=zone 避同 zone、master 跨 AZ 且 ≥3）
+  - `1310-es-multi-az-topology.md`（跨 AZ 两拓扑：同集群跨 AZ 节点(省但跨机房低效) vs 多集群各 AZ 持全量(真 HA 但资源翻倍) + awareness.force 防副本乱漂拖垮）
+  - `1310-es-ha.deep.md`（ES HA 全景：机制层+部署保障层+拓扑层决策框架，串联 131/132/133/1316/198）
+  - `165-singleton-mutex-dcl.md`（懒汉式 check-then-act 竞态；加 Mutex 正确但每次锁；DCL 缩锁范围省开销；补 Go 内存模型裸 DCL 可见性 race 陷阱）
+  - `165-singleton-once.md`（sync.Once 官方推荐：once.Do 只执行一次、内部 atomic+Mutex 双检；100 并发只建一次）
+  - `165-singleton-atomic.md`（原子+Mutex 双检：atomic 管可见性、Mutex 管互斥；与 Once 源码同源）
+  - `165-thread-safe-singleton.deep.md`（Go 线程安全单例全景：四方案对比+内存可见性陷阱+Once 源码本质；串联 162/1021/925/105）
+- 撞题规避：`1310-` 与 `131-shard-replica`(分片副本基础)/`132-*`(集群架构)/`133-*`(选主quorum)/`1316-shard-planning`(分片规划)/`198-shard-design`(建模) 重叠，本波聚焦**HA 机制综述+部署保障(同机/机架感知/master跨AZ)+跨AZ拓扑权衡**，各主卡纠错节注明互补边界不重复；`165-` 与 `162-singleton`(单例概念) 重叠，聚焦**4 种 Go 线程安全实现**(Mutex/DCL/Once/atomic)，与 `1021-safe-close-once`(Once 关闭)/`925`(Mutex)/`105`(atomic) 互补。全波 8 张 0 error、0 新增 warn（warn 维持 51）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 Elasticsearch→electsearch 等音译、nil→偶/neo/leo、once→ones、atomic→autommic、double-checked locking→double 切割的 locking、goroutine→构入性 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。**精度补全**：源把裸 DCL 当合法方案，本波在 165 主卡+深卡补出 Go 内存模型下裸标志 DCL 属数据竞争、建议以 Once/atomic 保护（属补全非纠错）。
+- 格式坑（沿用 wave72 固化）：4 张深卡文件名均以 `.deep.md` 结尾（`1310-es-ha.deep.md`/`165-thread-safe-singleton.deep.md`），未被误判为主卡。
+- 门禁：778/778 PASS，error 0，warn **51**。累计 142 篇 done / 778 张卡。

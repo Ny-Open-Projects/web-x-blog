@@ -4122,10 +4122,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1310-es-ha-mechanisms",
+        "1310-es-rack-awareness",
+        "1310-es-multi-az-topology",
+        "1310-es-ha.deep"
+      ],
+      "done_at": "2026-10-08T10:50:03+08:00"
     },
     "source/13/13-11 ElasticSearch如何解决深分页问题？-迅捷文字转语音-1790925306752zh.txt": {
       "id": "13-11",
@@ -5161,10 +5167,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "165-singleton-mutex-dcl",
+        "165-singleton-once",
+        "165-singleton-atomic",
+        "165-thread-safe-singleton.deep"
+      ],
+      "done_at": "2026-10-08T10:50:03+08:00"
     },
     "source/16/16-6 GO语言中的简单工厂，抽象工厂和工厂方法？-迅捷文字转语音-1790928374884zh.txt": {
       "id": "16-6",
@@ -6586,7 +6598,7 @@
     }
   },
   "next_num": 1,
-  "waves": 72,
-  "updated": "2026-10-08T10:34:20+08:00",
+  "waves": 73,
+  "updated": "2026-10-08T10:50:03+08:00",
   "consec_fail": 0
 }

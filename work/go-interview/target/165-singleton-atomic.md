@@ -1,0 +1,65 @@
+# 165 线程安全单例：原子操作方案
+
+> 分类：Go/并发 | 难度：L2 | 题型：方案题 | 频率：中 | 关键词：**atomic** / **LoadUint32** / **StoreUint32** / **与 Once 同源**
+> 原文锚点：第 34~66 段「原子操作检查 initialized 标志；拿 Mutex 二次检查再创建; atomic.StoreUint32 置位; 指出此实现与 Once 源码如出一辙」
+
+## 一句话总述
+除 Mutex/DCL/Once 外，还可用**原子操作**实现线程安全单例：用 `atomic.LoadUint32` 无锁读 `initialized` 标志，为空才 `Lock` 并**二次**检查，创建后 `atomic.StoreUint32` 置位。这个"atomic 标志 + Mutex 双检"的结构，正是 `sync.Once` 源码自身的实现——二者同源，区别在于 Once 把它封装成了标准原语。
+
+## 面试官视角
+- 意图：考察"是否理解 Once 的底层，以及 atomic 与锁的配合"。
+- P5 知道 Lock；P6 能写原子+双检；P7 能讲"Once.doSlow 内部就是 atomic + Mutex 双重检查，与本方案一致"并点出 atomic 负责可见性、Mutex 负责临界区。
+- 红旗：以为原子操作能替代锁；不知道 atomic 只管标志可见性、创建仍要锁。
+- 惊艳点：点出"手写原子方案 = Once 源码复刻，理解它就读懂了 Once"。
+
+## 主问答
+**Q：** 用原子操作怎么写线程安全单例？和 Once 啥关系？
+**A：**
+1. **结构**：`var initialized uint32` 作标志。`GetInstance` 先 `atomic.LoadUint32(&initialized)` 无锁判是否=1；不为 1 才 `Lock`，持锁**二次**判断，确认仍=0 才创建实例并 `atomic.StoreUint32(&initialized, 1)`。
+2. **角色**：atomic 负责标志的**可见性**（跨 goroutine 立即可见），Mutex 负责"创建实例"这一临界区的**互斥**——各管一段。
+3. **与 Once 同源**：`sync.Once` 的 `doSlow` 正是"atomic 判是否已执行 + 拿锁二次检查 + 执行后置位"——本方案等于把 Once 拆开手写，证明"读懂它就读懂 Once"。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
+|---|---|---|---|---|
+| L1 | 原子方案结构 | 基础 | atomic 标志+双检 | 判 P5 |
+| L2 | 为何还要 Mutex | 机制 | atomic 管可见/锁管互斥 | 判 P6 |
+| L3 | 与 Once 关系 | 联动 | 同源(Once 源码即此) | 判 P6+ |
+| L4 | atomic 管啥 | 深挖 | 内存可见性 | 判 P7 |
+| L5 | 四方案取舍 | 综合 | Once 最省心 | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| Go 1.0 ~ 1.22+ | 无 | atomic.Load/StoreUint32 自 1.0 稳定；Once.doSlow 实现跨版本一致 `[经验]` |
+
+## 关键代码
+```go
+// 原子操作 + Mutex 双重检查：与 sync.Once 源码同源
+var (
+    inst        *Singleton
+    mu          sync.Mutex
+    initialized uint32
+)
+
+func GetInstance() *Singleton {
+    if atomic.LoadUint32(&initialized) == 1 { // 无锁快路径：atomic 保证可见
+        return inst
+    }
+    mu.Lock()
+    defer mu.Unlock()
+    if initialized == 0 { // 持锁二次检查
+        inst = &Singleton{}
+        atomic.StoreUint32(&initialized, 1) // 置位，其他 goroutine 立即可见
+    }
+    return inst
+}
+// 这正是 sync.Once.doSlow 的实现骨架（见 165-singleton-once）
+```
+
+## 总结与追问预判
+- 原子方案 = atomic 管可见性 + Mutex 管互斥双检，与 Once 同源；实战首选 Once。
+- 预判：Once 见 165-singleton-once；DCL 见 165-singleton-mutex-dcl；原子基础见 105-atomic-types-scope；Mutex 基础见 925（本卡不重复）。
+
+## ⚠️ 原文纠错
+未发现事实性技术错误。核对范围：通读并重点核对"atomic.LoadUint32 无锁判标志、拿 Mutex 二次检查、atomic.StoreUint32 置位、此实现与 sync.Once 源码如出一辙"的描述，与 atomic + Mutex 双重检查机制及 Once 源码一致。源码将若干并发关键字音译为崩坏词，本卡统一为规范术语，技术结论未做更正。与既有卡边界：原子基础见 105、Mutex 基础见 925、Once 关闭见 1021、单例概念见 162（本卡聚焦原子方案单例）`[经验]`。
