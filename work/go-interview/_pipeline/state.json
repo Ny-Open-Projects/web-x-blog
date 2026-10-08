@@ -4886,10 +4886,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1410-topic-delete-flow",
+        "1410-kafka-deletion-internals.deep"
+      ],
+      "done_at": "2026-10-09T00:50:50+08:00"
     },
     "source/14/14-11 什么是位移主题，有什么用？-迅捷文字转语音-1790926221983zh.txt": {
       "id": "14-11",
@@ -4967,10 +4971,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1415-producer-send-modes",
+        "1415-async-producer-internals.deep"
+      ],
+      "done_at": "2026-10-09T00:50:50+08:00"
     },
     "source/14/14-16 kafka是如何实现高可用的？-迅捷文字转语音-1790926416707zh.txt": {
       "id": "14-16",
@@ -7231,7 +7239,7 @@
     }
   },
   "next_num": 1,
-  "waves": 128,
-  "updated": "2026-10-08T23:57:08+08:00",
+  "waves": 129,
+  "updated": "2026-10-09T00:50:50+08:00",
   "consec_fail": 0
 }
