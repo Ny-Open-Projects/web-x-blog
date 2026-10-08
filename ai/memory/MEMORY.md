@@ -864,3 +864,20 @@
 - 撞题规避：`603-` 无任何 switch 卡（grep 命中 selectivity/select-type/mq-selection 皆 select 关键词误匹配，与 Go switch 无关），干净首覆盖；`807-` 已存在 `813/814/815`(runtime 结构体 GC 字段) 与 `612`(channel GC 引用)，本波四张聚焦**GC 算法流程层**（STW 演进/标记清除/三色标记），在深卡显式标注"runtime 层 GC 字段见 813/814/815"互补不重复。
 - 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含 SPW→STW、构兑→Go、bruntime→runtime、三年时间→STW 时间、一点三/一点五/一点八→Go 1.3/1.5/1.8、混合血平状→混合写屏障、三个标记法→三色标记法、跟对象→根对象、forthrough/ffault/falsethrough→fallthrough、dedeault→default、rucase→case、曲具→求值、星区→星期、内支→内容 等。Go GC 演进史与官方 release 史实一致（1.3 标记清除分离/1.5 并发三色标记/1.8 混合写屏障均公认）。源中"Go 1.20 前需给 rand 设种子"属实（1.20 起自动播种）。
 - 门禁：746/746 PASS，error 0，warn **51**。累计 134 篇 done / 746 张卡。
+
+## wave 70（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/18/18-10`（如何排查内存问题？，L 级）→ `1810-`；`source/11/11-12`（降低值复制成本优化Go代码性能，L 级）→ `1112-`。
+- 产出：
+  - `1810-mem-free-top.md`（free -h 六列 + available 含可回收缓存比 free 大 + top VIRT/RES/SHR/%MEM + buffer 缓存磁盘块/cache 缓存文件页）
+  - `1810-mem-vmstat-slab.md`（vmstat 全字段 si/so/wa/b + slabtop 按 a(对象数)/c(size) 排序 + pmap 进程地址空间）
+  - `1810-mem-diagnose-flow.md`（排查四步决策树 + 三型分流(可用内存低/swap占用/buffer cache高) + 内存不足信号集 free↓+si/so↑+bi/bo↑+缺页中断↑+cs↑+b↑+wa↑）
+  - `1810-mem-os-troubleshoot.deep.md`（系统级排查全景 + 与 Go 应用层 812/1114 pprof 上下游互补 + 先系统后应用）
+  - `1112-value-size.md`（值尺寸体系：基础类型固定/struct=字段和+padding/array=元素×长 + 零尺寸值(空结构体/[N]空结构体) + unsafe.Sizeof）
+  - `1112-copy-cost-pointer.md`（大 struct/array 用指针省复制但增 GC 压力；slice/map/chan/func/string/interface 只复制 header 不用指针；直接值部 vs 间接值部共享）
+  - `1112-forrange-copy-trap.md`（for-range 双循环变量遍历大元素每次复制 + 单变量+s[i]/for下标不复制 + 基准三方式差距数量级）
+  - `1112-value-copy-opt.deep.md`（降值复制成本链路：尺寸体系→指针取舍→for-range陷阱→bench验证 + 与 923/508 互补）
+- 撞题规避：`1810-` 与既有 `812/1114`(Go 应用层 pprof) `811`(内存基础) 高度重叠，本波四张聚焦**Linux 系统层排查**(free/top/vmstat/slabtop/pmap+指标+决策树)，在深卡显式标注"与 812/1114 应用层上下游互补、先系统后应用"，不重复；`1112-` 与 `923`(map/slice 传值机制) `508`(struct 字段拷贝) 重叠，本波聚焦**值尺寸体系+复制代价 vs 指针 GC 压力决策+for-range 陷阱**，各主卡纠错节注明"在其之上补优化决策、互补不重复"。
+- 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含 切液中断/血液中断→缺页中断、速度→切片、速组→数组、直接直部→直接值部、root类型→rune、原生字→机器字、案例类型→any、fourrange→for range、钢奔起→-bench、gramstate→vmstat、slaptop→slabtop、拓扑命令→top、doca→docker、srelamber→SReclaimable、free杠h→free -h 等。技术均准确（free/top/vmstat 指标、值尺寸、for-range 复制语义）。
+- **门禁修复（重要）**：`1112-copy-cost-pointer.md` 首校 error 1——纠错节把机翻残留黑名单词「构语言」当作"已还原词"列举，触发规则 11 机翻残留。删去该词条后 754/754 PASS、error 0。**教训：纠错节泛述 ASR 崩坏词时，若原词命中机翻残留黑名单（如「构语言」），不可原样列举，改为泛述"源码将若干标识符音译为崩坏词，本卡统一为规范术语"；同音「勾语言」不在黑名单故可列**（两词皆音译 Go 语言，仅「构语言」被拦）。
+- 门禁：754/754 PASS，error 0，warn **51**。累计 136 篇 done / 754 张卡。

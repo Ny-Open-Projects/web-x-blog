@@ -2619,10 +2619,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1112-value-size",
+        "1112-copy-cost-pointer",
+        "1112-forrange-copy-trap",
+        "1112-value-copy-opt.deep"
+      ],
+      "done_at": "2026-10-08T10:11:17+08:00"
     },
     "source/11/11-13 如何实现字符串和byte切片的零拷贝转换？-迅捷文字转语音-1790920477013zh.txt": {
       "id": "11-13",
@@ -5549,10 +5555,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1810-mem-free-top",
+        "1810-mem-vmstat-slab",
+        "1810-mem-diagnose-flow",
+        "1810-mem-os-troubleshoot.deep"
+      ],
+      "done_at": "2026-10-08T10:11:17+08:00"
     },
     "source/18/18-11 如何排查IO问题？-迅捷文字转语音-1790930150735zh.txt": {
       "id": "18-11",
@@ -6550,7 +6562,7 @@
     }
   },
   "next_num": 1,
-  "waves": 69,
-  "updated": "2026-10-08T09:57:44+08:00",
+  "waves": 70,
+  "updated": "2026-10-08T10:11:17+08:00",
   "consec_fail": 0
 }
