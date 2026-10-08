@@ -1195,3 +1195,11 @@
 - 原文纠错（本波）：纯 ASR 解码还原（1511 含 指盘→Gauge、柱状图/统一→Histogram、摘要→Summary、imrate→irate、桶/直柱→bucket；1313 含 文件描→file descriptors、交换分区/交换空间→swap、透明大页/大页面→THP、堆外/对→堆、保险/安全→认证/TLS），按固化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**；1511 含事实核校：补正「Histogram 分位在服务端用 histogram_quantile 计算、Summary 分位在客户端算、不可跨实例聚合」；1313 含事实核校：补正「swappiness=1 最少交换、=0 仅内存不足才用」。未触发规则 11、补充分级 warn 维持 51。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾，未被误判为主卡；1511 三张主卡含 go 块（client_golang CounterVec/Gauge/Histogram+Summary/PromQL 查询）、1313 三张主卡含 go 块（unix.Sysctl/Getrlimit/TCP keepalive/Cluster.Health 探活）满足规则 14。
 - 门禁：906/906 PASS，error 0，warn **51**。累计 174 篇 done / 906 张卡。
+
+## wave 90（2026-10-08 下午，L 级，8 张）
+- 源：`11-2 应对性能优化类面试题，应该这样做`（source/11/11-2 应对性能优化类面试题，应该这样做-迅捷文字转语音-1790919686530zh.txt）、`12-50 面试必备的SQL语句（一）`（source/12/12-50 面试必备的SQL语句（一）-迅捷文字转语音-1790923924964zh.txt）
+- 产出：`112-star-answer.md`/`112-bottleneck-first.md`/`112-qos-metrics.md`/`112-performance-interview.deep.md` + `1250-custom-sort-null-last.md`/`1250-agg-distinct-stats.md`/`1250-groupby-rollup-case.md`/`1250-sql-writing-tech.deep.md`（文件名 stem 112-/1250- 对应 chapter11-2/chapter12-50）
+- 撞题规避：`112-` 为性能优化**面试方法论**首覆盖（STAR/瓶颈优先/QoS 四指标），与 199-netdisk-search-perf(真实 ES 优化案例)、1240(锁优化)/1118(逃逸分析) 取边界不重述具体手段；`112-qos-metrics` 与 196-ha-metrics(可用性 MTBF/MTTR/SLA) 同源，本卡**只引四个九=52.6min 数字、不重述其公式**，显式标 [边界]。`1250-` 为面试 SQL 技巧（FIELD 保序/NULL 沉底/COUNT DISTINCT 客单类/GROUP BY ROLLUP/CASE WHEN 分级）干净首覆盖，全库 grep `ORDER BY FIELD|WITH ROLLUP|客单价` 零命中；与 12xx MySQL 体系（1210 执行流/1248 优化总览）取边界只讲写法不讲引擎内部。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（11-2 含 攒作业→短作业、确口→接口、p九九→p99、KOS→QoS、保险→可用性；12-50 含 老值→NULL、依附条件→条件、分歧→分级、客单店→客单价），按固化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**；11-2 含事实核校：补正「RPS 与 QPS 实战口径略异、课程视为同义」「STAR 是叙事框架非新算法」；12-50 含事实核校：补正「FIELD 列表须同类型避免隐式转换」「ROLLUP≠CUBE、只按最左前缀上卷」。未触发规则 11、补充分级 warn 维持 51。
+- 格式坑（本波修过 12 error）：首版主卡用 `- **加粗**` 无序列表 + 缺 `> 原文锚点：` + 追问链缺 `答不出停在哪档` 列，触发 `✗ 答案骨架`/`✗ 原文锚点`/`⚠ 追问链` 共 12 error+5 warn；已按 house 格式改为 `**Q/A：**` + `1. **加粗**：` 有序列表（≥3 点）+ 补 `原文锚点` 行 + 追问链扩为 5 列。**固化经验**：主卡主问答必须用 `1. **bold**：` 有序列表 ≥3 条（无序列表计 0），头部必带 `> 原文锚点：第 X~Y 段「…」`，追问链必含 `答不出停在哪档` 列，否则必触发 error。2 张深卡 `.deep.md` 尾、主卡均含 go/sql 块满足规则 14。
+- 门禁：914/914 PASS，error 0，warn **51**。累计 176 篇 done / 914 张卡。

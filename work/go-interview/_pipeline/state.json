@@ -2781,10 +2781,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "112-star-answer",
+        "112-bottleneck-first",
+        "112-qos-metrics",
+        "112-performance-interview"
+      ],
+      "done_at": "2026-10-08T16:04:43+08:00"
     },
     "source/11/11-3 如何使用benchmark进行性能测试？-迅捷文字转语音-1790919690010zh.txt": {
       "id": "11-3",
@@ -3866,10 +3872,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1250-custom-sort-null-last",
+        "1250-agg-distinct-stats",
+        "1250-groupby-rollup-case",
+        "1250-sql-writing-tech"
+      ],
+      "done_at": "2026-10-08T16:04:43+08:00"
     },
     "source/12/12-51 面试必备的SQL语句（二）-迅捷文字转语音-1790923928534zh.txt": {
       "id": "12-51",
@@ -6790,7 +6802,7 @@
     }
   },
   "next_num": 1,
-  "waves": 89,
-  "updated": "2026-10-08T15:46:13+08:00",
+  "waves": 90,
+  "updated": "2026-10-08T16:04:43+08:00",
   "consec_fail": 0
 }
