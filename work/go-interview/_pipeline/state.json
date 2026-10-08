@@ -558,10 +558,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "514-deepequal-mechanism",
+        "514-deepequal-vs-equal",
+        "514-deepequal-pitfalls",
+        "514-object-equality"
+      ],
+      "done_at": "2026-10-08T18:59:51+08:00"
     },
     "source/05/5-15 使用两种方式判断一个对象是否拥有某个方法-迅捷文字转语音-1790856030604zh.txt": {
       "id": "5-15",
@@ -3421,10 +3427,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1228-index-length-limit",
+        "1228-innodb-large-prefix-fileformat",
+        "1228-row-length-utf8mb4",
+        "1228-index-row-format"
+      ],
+      "done_at": "2026-10-08T18:59:51+08:00"
     },
     "source/12/12-29 事务的隔离级别有哪些？（一）-迅捷文字转语音-1790922661090zh.txt": {
       "id": "12-29",
@@ -6970,7 +6982,7 @@
     }
   },
   "next_num": 1,
-  "waves": 104,
-  "updated": "2026-10-08T18:52:37+08:00",
+  "waves": 105,
+  "updated": "2026-10-08T18:59:51+08:00",
   "consec_fail": 0
 }

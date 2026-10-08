@@ -1,0 +1,55 @@
+# 514 == 与 reflect.DeepEqual 的三大语义差异
+
+> 分类：Go 类型系统 / 相等判断 | 难度：L3 | 题型：对比题 | 频率：中高 | 关键词：**命名类型 vs 匿名** / **指针同值不同址** / **循环引用** / **DeepEqual 深度**
+> 原文锚点：第 29~52 段「①不同类型(命名类型vs匿名同底层)==可能true DeepEqual false ②指针指向同值不同址==false DeepEqual true ③循环引用 DeepEqual靠visit返回true防死循环」
+
+## 一句话总述
+`==` 比的是"类型与值（或地址）"，`DeepEqual` 比的是"结构深度相等"，三处典型分歧：**① 命名类型 vs 匿名同底层类型**——`==` 因底层相同可为 true，`DeepEqual` 因类型名不同直接 false；**② 指针指向同值不同地址**——`==` 比地址为 false，`DeepEqual` 比值同为 true；**③ 循环引用**——`==` false，`DeepEqual` 靠 visit map 返回 true 防死循环。
+
+## 面试官视角
+- 考察意图：能否用三个最小反例讲清 == 与 DeepEqual 的语义鸿沟
+- P5 知 DeepEqual 比内容；P6 能讲清上述三点差异；P7 能讲"DeepEqual 不关心指针是否同一地址、只关心指向的值"
+- 红旗：以为 DeepEqual 和 == 结果总一致；用 == 比 slice/map（编译不过）
+- 惊艳点：每个差异都配一个"同输入两函数结果相反"的最小例子，比背名词有力 [源码]
+
+## 主问答
+**Q（面试官原话）：** == 和 reflect.DeepEqual 结果不一样的情况有哪些？
+**A：**
+1. **命名类型 vs 匿名同底层**：`Person{name:"test"}` 与匿名结构体 `{name:"test"}` 底层都是 struct、`==` 为 true；`DeepEqual` 认为**类型名不同直接 false** [源码]。
+2. **指针同值不同址**：两个 `*int` 指向各自地址但值都是 0，`x == y` 比地址为 **false**；`DeepEqual` 比**指向的值**为 **true** [源码]。
+3. **循环引用**：A→B→C→A 成环，`==` 为 false；`DeepEqual` 靠 visit map 识别已比地址、返回 **true** 并**安全终止递归**（否则无限循环）[源码]。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 两函数区别 | 概念 | ==比地址/类型,Deep比结构 | P5 |
+| L2 | 类型名不同 | 差异1 | DeepEqual false | P6 |
+| L3 | 指针同值 | 差异2 | DeepEqual true | P6+ |
+| L4 | 循环引用 | 差异3 | DeepEqual true 防环 | P7 |
+| L5 | 何时用哪个 | 选型 | 比结构用 DeepEqual | P7+ |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+| --- | --- | --- |
+| Go 全版本 | 语义稳定 | 三处差异长期成立；DeepEqual 不关心指针同一性 |
+
+## 关键代码
+```go
+type Person struct{ Name string }
+p1 := Person{Name: "test"}
+p2 := struct{ Name string }{Name: "test"}
+fmt.Println(p1 == p2)                    // true（底层同 struct）
+fmt.Println(reflect.DeepEqual(p1, p2))   // false（类型名不同）
+
+x, y := new(int), new(int)
+*x, *y = 0, 0
+fmt.Println(x == y)                      // false（地址不同）
+fmt.Println(reflect.DeepEqual(x, y))    // true（指向的值相同）
+```
+
+## ⚠️ 原文纠错
+源码将若干术语音译为崩坏词，本卡统一为规范术语（Go 语言、reflect、DeepEqual、切片/映射/函数、nil、双等号、循环引用 等）；技术结论未做事实性更正 [经验]。
+
+## 总结与追问预判
+- 三点差异：命名类型名、指针同值、循环引用——== 与 DeepEqual 结果相反。
+- DeepEqual 原理见 514-deepequal-mechanism；可比较类型清单见 509-comparable-types；切片 == 规则见 415（只引不重述）。
