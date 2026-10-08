@@ -1245,10 +1245,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "705-web-framework-landscape",
+        "705-framework-comparison-3dimensions",
+        "705-framework-selection-principles",
+        "705-web-framework"
+      ],
+      "done_at": "2026-10-08T18:47:26+08:00"
     },
     "source/07/7-6 Gin中间件的实现原理-迅捷文字转语音-1790864823608zh.txt": {
       "id": "7-6",
@@ -2447,10 +2453,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1020-sync-value-copy",
+        "1020-waitgroup-add-placement",
+        "1020-lock-pairing-reentrant",
+        "1020-concurrency-pitfalls-2"
+      ],
+      "done_at": "2026-10-08T18:47:26+08:00"
     },
     "source/10/10-21 如何优雅的关闭通道？-迅捷文字转语音-1790919171199zh.txt": {
       "id": "10-21",
@@ -6946,7 +6958,7 @@
     }
   },
   "next_num": 1,
-  "waves": 102,
-  "updated": "2026-10-08T18:39:39+08:00",
+  "waves": 103,
+  "updated": "2026-10-08T18:47:26+08:00",
   "consec_fail": 0
 }
