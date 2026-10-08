@@ -12,10 +12,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "201-go-adoption-landscape",
+        "201-go-success-factors",
+        "201-go-tradeoffs",
+        "201-go-selection"
+      ],
+      "done_at": "2026-10-08T18:39:39+08:00"
     },
     "source/02/2-2 GO语言与生俱来的那些特性，听完这节课让你盆满钵满-迅捷文字转语音-1790684973137zh.txt": {
       "id": "2-2",
@@ -659,10 +665,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "506-map-key-comparable",
+        "506-float-key-nan",
+        "506-pointer-key-address",
+        "506-map-key-constraints"
+      ],
+      "done_at": "2026-10-08T18:39:39+08:00"
     },
     "source/05/5-7 Go 语言怎么使用变长参数函数？-迅捷文字转语音-1790757637841zh.txt": {
       "id": "5-7",
@@ -6934,7 +6946,7 @@
     }
   },
   "next_num": 1,
-  "waves": 101,
-  "updated": "2026-10-08T18:32:13+08:00",
+  "waves": 102,
+  "updated": "2026-10-08T18:39:39+08:00",
   "consec_fail": 0
 }
