@@ -2582,10 +2582,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "108-resource-budget-concurrency",
+        "108-rate-limiter-go",
+        "108-distributed-ratelimit",
+        "108-control-concurrency-overview.deep"
+      ],
+      "done_at": "2026-10-08T14:21:50+08:00"
     },
     "source/10/10-9 切片类型Slice是并发安全的吗？-迅捷文字转语音-1790918289624zh.txt": {
       "id": "10-9",
@@ -3753,10 +3759,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1248-schema-design-optimization",
+        "1248-implicit-conversion-index",
+        "1248-version-index-null-rules",
+        "1248-sql-optimization-overview.deep"
+      ],
+      "done_at": "2026-10-08T14:21:50+08:00"
     },
     "source/12/12-49 谈谈SQL优化的经验（二）-迅捷文字转语音-1790923921590zh.txt": {
       "id": "12-49",
@@ -6682,7 +6694,7 @@
     }
   },
   "next_num": 1,
-  "waves": 80,
-  "updated": "2026-10-08T14:12:35+08:00",
+  "waves": 81,
+  "updated": "2026-10-08T14:21:50+08:00",
   "consec_fail": 0
 }

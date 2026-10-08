@@ -1051,3 +1051,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 rune→崩坏词、byte→拜特、literal→力特柔/字面量、escape→易斯盖普/转义、backslash→反斜杠、octal→崩坏词、hex→崩坏、rune→如呢、UTF-8→UTF8/优提夫、top hash→托普哈西、bucket→巴克特/桶、overflow→欧福漏/溢出、load factor→楼得饭特、panict→怕你可/panic、float→夫洛特/浮点 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`416-string-literals.deep.md`/`914-map-implementation.deep.md`），未被误判为主卡；416 三张主卡含 go 块、914 三张主卡含 go 块满足规则 14。
 - 门禁：834/834 PASS，error 0，warn **51**。累计 156 篇 done / 834 张卡。
+
+## wave 81（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/10/10-8`（Golang如何控制并发数？，L2~L3）→ `108-`；`source/12/12-48`（谈谈SQL优化的经验（一），L2~L3）→ `1248-`。
+- 产出：
+  - `108-resource-budget-concurrency.md`（资源预算三约束：单 goroutine 实际内存(大对象 tens~hundreds MB)/本地端口 65535/fd 内核上限；约束的是引用资源非栈；决策框架=出现风险即池化/限流）
+  - `108-rate-limiter-go.md`（四算法枚举：固定窗口/滑动窗口/漏桶/令牌桶；官方 golang.org/x/time/rate：rate.Limit 速率+burst 桶容量+Wait(ctx) 超时放行；自实现 channel+ticker）
+  - `108-distributed-ratelimit.md`（分布式限流：本地限流不精准(副本流量不均→全局失真，例 5+30→8 非 10)；令牌存 Redis 跨副本共享+Lua 原子扣减；代价=Redis 可用性/原子性）
+  - `108-control-concurrency-overview.deep.md`（控制并发数全景：资源预算→池化(711/712)/信号量(1015/105)→限流(158)→分布式 四层 + 选型表 + 答题技巧）
+  - `1248-schema-design-optimization.md`（建表设计层优化：类型恰当(tinyint<smallint<int<bigint)/NOT NULL 收益(省标志位+避免索引变长+优化器易优化)/默认值/date→int 省函数转换；联合索引最左列选最常用）
+  - `1248-implicit-conversion-index.md`（隐式类型转换导致索引失效：字符列当数值不加引号→MySQL 套函数→失效；OR 两侧都索引才走否则失效→UNION 替代；避坑口诀）
+  - `1248-version-index-null-rules.md`（版本差异：①8.0 范围列后索引仍有效(优化器按代价选列) ②IS NULL/IS NOT NULL 规则(不允许NULL都失效/允许NULL则IS NULL走ref)、NOT IN 5.8 前失效）
+  - `1248-sql-optimization-overview.deep.md`（SQL 优化经验全景（一）：设计层/查询失效/版本细节/编写习惯四层 + 既有卡边界表(1215/1221/1222/1246/1225/129)）
+- 撞题规避：`108-` 与 `711-`/`712-`(协程池 ants 实现/pool-concurrency/submit-timeout/task-queue/panic-recover)、`1015-`/`105-`(信号量)、`1022-`(泄露预防提及池化)、`158-isolation-ratelimit`(微服务限流架构) 重叠，本波取三个真 gap——①资源预算三约束具体数值(711讲机制、1022讲预防、均未枚举内存/端口65535/fd)、②Go 限流实现(四算法枚举+官方 time/rate API，158 是架构视角不覆盖具体 Go API)、③分布式限流(Redis 共享令牌，158 单实例不覆盖)；深卡显式边界到 711/712/1015/105/1022/158，不重产池化/信号量机制。`1248-` 与 `1221-`/`1222-`(索引失效/最左前缀/覆盖索引/复合断层)、`1246-`(深度分页)、`1225-`(TRUNCATE 自增/回滚)、`1215-`(compact 行格式 NULL 标志位) 重叠，本波取三个真 gap——①建表设计层(类型/NOT NULL/默认值/date→int，1215 讲行格式存储未讲设计建议 why)、②隐式类型转换+OR 索引失效(grep 全库无覆盖)、③版本差异(8.0 范围列后索引仍有效+IS NULL 规则，grep 无覆盖)；深卡显式边界到 1221/1222/1246/1225/1215，不重产深度分页/TRUNCATE/覆盖索引已覆盖内容。全波 8 张 0 error、warn 维持 51（纠错节从首版即按 wave71 泛述 SOP 写，未列举任何原词崩坏词，未触发规则 11）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 circle→SQL、勾浪→Go、携程→goroutine、并刷术→并发数、单口→端口、文件描述服务→文件描述符、另一排桶→令牌桶、硬排→令牌、扩大→channel/quota、牵l→请求、润景→程序、位置→Wait、tiken→Ticker、REDIS→Redis、浪值→NULL、ln值→NULL、缩引→索引、asside→某、redealn→REDUNDANT、索影→索引、乐indv→InnoDB、root→OR、uni→UNION、oldby→ORDER BY、note→NOT、cirll→SQL 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`108-control-concurrency-overview.deep.md`/`1248-sql-optimization-overview.deep.md`），未被误判为主卡；108 三张主卡含 go 块、1248 三张主卡含 sql 块满足规则 14。
+- 门禁：842/842 PASS，error 0，warn **51**。累计 158 篇 done / 842 张卡。
