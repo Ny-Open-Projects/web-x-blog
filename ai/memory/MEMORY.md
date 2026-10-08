@@ -800,3 +800,19 @@
 - 撞题规避：1019-* 只讲数据竞争通识与检测工具，未涉及 map 的具体工程方案 → 107 四张为首次系统覆盖；此前无任何字符串拼接专属卡 → 904 四张为首次覆盖。
 - 原文纠错（本波）：**原文称本节"介绍两种方法"，实际给了三种**（读写锁/分片/channel），加上前作回顾共四条路线；已在深卡纠错节点明。另 `2*cap+n` 是 Go 1.10~1.19 实现，**1.20 起改用 slices.Grow**。
 - 门禁：714/714 PASS，error 0，warn **51**（107-sharded-map 初跑纠错节 260 字触发 warn，压缩后回归）。累计 126 篇 done / 714 张卡。
+
+## wave 66（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/19/19-9`（企业级网盘搜索场景下的性能优化，L 级）→ `199-`；`source/16/16-6`（GO语言中的简单工厂，抽象工厂和工厂方法？，L 级）→ `166-`。
+- 产出：
+  - `199-text-index-bloat.md`（大文本数据膨胀：best_compression 压缩、关大字段 _source、字数截断、TTL 淘冷；含"三个月/一百天"阈值口径不一致注）
+  - `199-highlight-perf.md`（高亮四大方案：定制插件流式停读/外部存储并发高亮/按段落拆分/业务免高亮）
+  - `199-write-load-arch.md`（写入负载：业务层合并写、调大 refresh_interval(>5s)、冷热分离/读写分离/TTL 淘汰）
+  - `199-netdisk-search-perf.deep.md`（三挑战总览+手段映射+按代价排序+选型表）
+  - `166-simple-factory.md`（简单工厂=集中 if-else 分发、不在 GoF 23 种、加产品违开闭→升级工厂方法）
+  - `166-abstract-factory.md`（抽象工厂家具族 Go 实现：FurnitureFactory 接口+Modern/Classic 两工厂、产品族一致性、单维度上它=过度设计）
+  - `166-factory-comparison.md`（三者对比选型两轴：扩展频率+是否产品族；Go 惯用法 func()Product）
+  - `166-three-factories.deep.md`（演化脉络+四模式取舍表+Go 函数工厂惯用法）
+- 撞题规避：129-querycache-perf-overhead/1311-search-after/198-shard-design 角度不同不撞；162-factory.md 已覆盖工厂方法+抽象工厂概念层 → 166 三张避开概念重复，聚焦**简单工厂(162 红旗缺口)/抽象工厂具体 Go 实现+产品族一致性/三者对比选型**，互补不重复。
+- 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含"三个月/一百天"低频淘汰阈值口径不一致（统一按可配置 TTL 表述）；源码将 _source/best_compression/refresh_interval/index buffer 等标识符音译为崩坏词，泛述还原。
+- 门禁：722/722 PASS，error 0，warn **51**。累计 128 篇 done / 722 张卡。

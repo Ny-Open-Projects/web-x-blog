@@ -5116,10 +5116,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "166-simple-factory",
+        "166-abstract-factory",
+        "166-factory-comparison",
+        "166-three-factories.deep"
+      ],
+      "done_at": "2026-10-08T09:19:40+08:00"
     },
     "source/16/16-7 Go语言中如何实现任意数量和位置的参数传递？-迅捷文字转语音-1790928378898zh.txt": {
       "id": "16-7",
@@ -6495,14 +6501,20 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "199-text-index-bloat",
+        "199-highlight-perf",
+        "199-write-load-arch",
+        "199-netdisk-search-perf.deep"
+      ],
+      "done_at": "2026-10-08T09:19:40+08:00"
     }
   },
   "next_num": 1,
-  "waves": 65,
-  "updated": "2026-10-08T07:56:45+08:00",
+  "waves": 66,
+  "updated": "2026-10-08T09:19:40+08:00",
   "consec_fail": 0
 }
