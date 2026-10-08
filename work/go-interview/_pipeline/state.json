@@ -700,10 +700,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "509-comparable-types",
+        "509-interface-compare-runtime",
+        "509-error-nil-trap",
+        "509-interface-compare.deep"
+      ],
+      "done_at": "2026-10-08T12:31:30+08:00"
     },
     "source/06/6-1 从容应对面试不得不掌握的Go 语言的高级特性-迅捷文字转语音-1790857190051zh.txt": {
       "id": "6-1",
@@ -6569,10 +6575,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "195-stock-deduction-locks",
+        "195-redis-distlock-detail",
+        "195-seckill-mq-and-app",
+        "195-prevent-oversell.deep"
+      ],
+      "done_at": "2026-10-08T12:31:30+08:00"
     },
     "source/19/19-6 电商秒杀场景的高可用建设-迅捷文字转语音-1790932839121zh.txt": {
       "id": "19-6",
@@ -6658,7 +6670,7 @@
     }
   },
   "next_num": 1,
-  "waves": 78,
-  "updated": "2026-10-08T12:06:39+08:00",
+  "waves": 79,
+  "updated": "2026-10-08T12:31:30+08:00",
   "consec_fail": 0
 }

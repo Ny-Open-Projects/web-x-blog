@@ -1017,3 +1017,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 tracing→追踪式、reference counting→引用激素/引用技素、根对象→跟对象、栈→勾当/执行站、寄存器→奇存器、标记清除→标记清楚、标记整理→标记真理、复制→夫制、分代→分带/份带、增量→曾量、并发→并法、逃逸分析→逃逸分系、tcmalloc→tmalloc、STW→SPW/三年时间、COUNT→康特、NULL→浪值、SELECT→snaack、主键→组件、聚簇索引→技术索引、二级索引→二级索引、key_len→klenth、warning→warwarming、MyISAM→mysam、InnoDB→inlDB、row count→roctt、rows→rose 等；按 wave71 强化 SOP 纠错节一律泛述，未触发规则 11。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`806-gc-taxonomy.deep.md`/`1226-count-semantics.deep.md`），未被误判为主卡；GC 类主卡用 go 代码块、MySQL 类主卡用 sql 代码块满足规则 14（806 三张主卡含 go 块、1226 三张主卡含 sql 块）。**踩坑+修复**：1226-count-semantics 初标 L2，因配 `.deep.md` 触发"深挖门槛"规则(✗1)，提 L3 后 ✓11 归零——沉淀：配深卡的主卡须 ≥L3。
 - 门禁：818/818 PASS，error 0，warn **51**。累计 152 篇 done / 818 张卡。
+
+## wave 79（2026-10-08 中午，L 级，8 张）
+
+- 源：`source/05/5-9`（interface 可以比较吗？，L2~L3）→ `509-`；`source/19/19-5`（电商秒杀场景下如何防止超卖？，L2~L3）→ `195-`。
+- 产出：
+  - `509-comparable-types.md`（Go 可比较类型清单：除 func/map/slice 外皆可比较；数组/结构体含不可比较字段则整体不可比；map/slice/func 可与 nil 比；可比较≠可排序）
+  - `509-interface-compare-runtime.md`（interface 比较底层：eface/iface 两表示(type+data)；比较=type 同+data 指向值同(非指针地址)；空接口 type+data 全空才 nil；eface 重分配 data）
+  - `509-error-nil-trap.md`（error != nil 却打印 nil 陷阱：底层是指针类型→type 非空→接口非 nil；nil interface(全空) vs nil pointer(type 非空)；规避 return nil 归一化）
+  - `509-interface-compare.deep.md`（interface 比较全景：清单→底层→陷阱→规避四层 + 比较对象取舍表 + 答题技巧）
+  - `195-stock-deduction-locks.md`（防超卖 DB 层三方案：悲观锁(FOR UPDATE 串行)/乐观锁(version CAS UPDATE WHERE version=旧值 AND stock>0 重试)/Redis 分布式锁(SET NX EX)）
+  - `195-redis-distlock-detail.md`（Redis 分布式锁三件套：SET NX EX 原子加锁+唯一 value 防误删+Lua 原子释放；缺陷：超时→看门狗、主从异步→Redlock(≥5 节点过半)）
+  - `195-seckill-mq-and-app.md`（业务层 MQ 削峰(不直接打 DB，但 DB 锁仍兜底)+应用层批量写+singleflight 合并读）
+  - `195-prevent-oversell.deep.md`（防超卖全景架构：请求→MQ→DB锁→应用层四段 + 方案选型表 + 边界到 1013/1233/193/196）
+- 撞题规避：`509-` 与 `503-pointer-compare`(指针比较)/`415-array-slice-compare`(数组切片比较)/`420-indirect-part-types`(间接值部含 interface) 重叠，但**接口比较语义层(可比较性清单+iface/eface 底层+error nil 陷阱)是干净 gap**——503/415 偏指针/数组比较、420 偏值内存布局，均未覆盖 interface 比较的底层结构与 nil 陷阱；本波四张完整覆盖并显式边界到 503/415/420。`195-` 与 `193-`(秒杀缓存设计)/`196-`(秒杀高可用)/`1013-`(Go in-process 悲观/乐观锁)/`1233-`(锁分类) 重叠，但**库存扣减并发控制层(DB 悲观/乐观锁+Redis 分布式锁+Redlock+MQ 削峰+singleflight)是干净 gap**——193/196 偏缓存/HA、1013 偏进程内 Go 锁、1233 偏锁分类，均未覆盖秒杀场景的库存扣减方案组合；本波聚焦扣减并发层，深卡显式边界到 1013/1233/193/196 不重产。全波 8 张 0 error、warn 维持 51（修复：纠错节初列崩坏词触发规则 11 机翻残留，改泛述后 ✓11 归零——重申 wave71 泛述 SOP 硬规则）。
+- 原文纠错（本波）：初版纠错节枚举崩坏词（构语言/neo/readerror/REDIS/NS 等），触发 validator 规则 11「机翻残留」denylist（构语言 命中）；按 wave71 泛述 SOP 重写纠错节为"将源码中的若干术语崩坏词统一还原为规范术语"、不再列举任何原词崩坏词，✓11 归零。属本波根因修复（非补丁），此前 wave74~78 纠错节亦含崩坏词列举但未被 denylist 命中，本波起严格遵循泛述 SOP。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`509-interface-compare.deep.md`/`195-prevent-oversell.deep.md`），无同名主卡故未触发深挖门槛规则；509 三张主卡含 go 块、195 三张主卡含 sql/go 块满足规则 14。
+- 门禁：826/826 PASS，error 0，warn **51**。累计 154 篇 done / 826 张卡。
