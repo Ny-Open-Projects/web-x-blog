@@ -3816,10 +3816,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1247-keyset-cursor-paging",
+        "1247-covering-index-split",
+        "1247-deep-paging-overview",
+        "1247-deep-paging-optimize"
+      ],
+      "done_at": "2026-10-08T16:42:38+08:00"
     },
     "source/12/12-48 谈谈SQL优化的经验（一）-迅捷文字转语音-1790923709485zh.txt": {
       "id": "12-48",
@@ -5209,10 +5215,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "157-node-management",
+        "157-loadbalance-routing",
+        "157-governance-overview",
+        "157-microservice-governance"
+      ],
+      "done_at": "2026-10-08T16:42:38+08:00"
     },
     "source/15/15-8 微服务的容错设计-迅捷文字转语音-1790927167110zh.txt": {
       "id": "15-8",
@@ -6826,7 +6838,7 @@
     }
   },
   "next_num": 1,
-  "waves": 92,
-  "updated": "2026-10-08T16:26:46+08:00",
+  "waves": 93,
+  "updated": "2026-10-08T16:42:38+08:00",
   "consec_fail": 0
 }

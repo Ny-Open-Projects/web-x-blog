@@ -1219,3 +1219,11 @@
 - 原文纠错（本波）：纯 ASR 解码还原（9-10 含 特八/特十六/的六十四→int8/int16/int64、英特→int、构语言→Go、字长→字长/wordsize、载子→占位/size；9-13 含 weightgroup→WaitGroup、勾入进→goroutine、艾特→Add、淡→Done、weight→Wait、构入器→协程、lowcopy→noCopy、uin的三十二→uint32、CNS→CAS），按固化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**；9-10 含事实核校：补正「结构体对齐值=字段最大对齐（源文误写公约数）」；9-13 含事实核校：补正「Add delta 左移32位是因 counter 在高32位、waiter 在低32位」。未触发规则 11、补充分级 warn 维持 51。
 - 格式坑（沿用固化 SOP）：2 张深卡 `.deep.md` 尾（910-struct-alignment/913-waitgroup），深卡 stem 与三主卡不同名不触发深挖门槛；910- 三主卡含 go 块(unsafe.Sizeof/Alignof 实测)满足规则 14，913- 三主卡含 go 块(用法演示/字段布局/Add 移位)满足规则 14。
 - 门禁：930/930 PASS，error 0，warn **51**。累计 180 篇 done / 930 张卡。
+
+## wave 93（2026-10-08 下午，L 级，8 张）
+- 源：`15-7 微服务治理的手段有哪些？`（source/15/15-7 微服务治理的手段有哪些？-迅捷文字转语音-1790927164005zh.txt）、`12-47 千万级的数据表如何优化深度分页？（二）`（source/12/12-47 千万级的数据表如何优化深度分页？（二）-迅捷文字转语音-1790923705949zh.txt）
+- 产出：`157-node-management.md`/`157-loadbalance-routing.md`/`157-governance-overview.md`/`157-microservice-governance.deep.md` + `1247-keyset-cursor-paging.md`/`1247-covering-index-split.md`/`1247-deep-paging-overview.md`/`1247-deep-paging-optimize.deep.md`（文件名 stem 157-/1247- 对应 chapter15-7/chapter12-47）
+- 撞题规避（additive）：`157-` 与 `158-microservice-fault-tolerance.deep`/`158-isolation-ratelimit`(限流隔离/熔断降级实现) 同主题，本波取**治理手段清单与选型**(节点管理=注册中心主动摘除心跳超时+消费者存活探测下移抗误判+防故障扩散；负载均衡5算法=轮询/加权轮询/最少连接/随机/源地址哈希 + 路由规则满足机房就近/灰度；容错7策略总览=失败通知/自动切换/快速失败/失败缓存/熔断/限流/降级 + 非幂等不无脑重试 + 框架默认集成)，158 只讲实现层本波讲治理手段清单与选型真 gap；三张主卡均显式 [边界] 只引 158 不重述实现。`1247-` 与 `1246-deep-paging-cost`(深度分页代价分析)/`1217-secondary-leaf-backtable`(回表 IO 代价) 同主题，本波取**解法**(主键排序→游标分页 WHERE id > miniID ORDER BY id LIMIT k 批次循环；二级索引排序→覆盖索引两查询拆分 先查 id 走覆盖索引不回表、再 IN 主键回查全字段)，1246 讲慢因、本波讲怎么优化真 gap；三张主卡均显式 [边界] 只引 1246/1217 不重述慢因。全波 8 张 0 error、warn 维持 51。
+- 原文纠错（本波）：纯 ASR 解码还原（15-7 含 节点挂了→节点宕机/摘除、负在→负载、原地址→源地址、失败自动切换保留、快读失败→快速失败、失败缓寸→失败缓存、限六→限流、将级→降级、非幂等保留、框架默认集成保留；12-47 含 命IID/miniID→miniID、肉/干函数→数据库查询/扫描函数、苏→users、low→log、命IID→miniID、类目→类目/name、覆盖数据→覆盖索引、硬条件→IN 条件、回表保留、实个→十个、mysqid→MySQL id），按固化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**；12-47 含事实核校：补正「删除行致 id 不连续、每批实际返回≤k、须以结果集为空判终止」。未触发规则 11、补充分级 warn 维持 51。
+- 格式坑（沿用固化 SOP）：2 张深卡 `.deep.md` 尾（157-microservice-governance/1247-deep-paging-optimize），深卡 stem 与三主卡不同名不触发深挖门槛；157- 三主卡含 go 块(消费者侧本地摘除/加权轮询/失败自动切换)、1247- 三主卡含 sql 块(游标分页/覆盖拆分两查询/总览对比)满足规则 14。
+- 门禁：938/938 PASS，error 0，warn **51**。累计 182 篇 done / 938 张卡。
