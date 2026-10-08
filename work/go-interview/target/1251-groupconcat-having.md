@@ -1,0 +1,56 @@
+# 1251 面试 SQL（二）：GROUP_CONCAT 拼接与 HAVING 分组后过滤
+
+> 分类：MySQL/SQL | 难度：L3 | 题型：方案题 | 频率：中 | 关键词：**GROUP_CONCAT**/**HAVING**/**分组后过滤**/**WHERE顺序**/**聚合条件**
+> 原文锚点：第 30~43 段「GROUP_CONCAT 按学生ID拼学科名 + HAVING 找选两门以上(WHERE先于GROUP BY不能用、HAVING后于)」
+
+## 一句话总述
+`GROUP_CONCAT` 可在 `GROUP BY` 内把分组内的某列拼成字符串（如按学生 ID 分组拼出其所选学科列表）。对**分组结果**再过滤必须用 **HAVING** 而非 WHERE——因为 WHERE 在 GROUP BY **之前**执行、拿不到聚合值，HAVING 在 GROUP BY **之后**执行，能用 `COUNT(学科)` 这类聚合条件（如「选两门以上」）。
+
+## 面试官视角
+- 考察意图：能否区分 WHERE 与 HAVING 的执行时机，并熟练用 GROUP_CONCAT 做行转列拼接。
+- 分档：P5 知 GROUP BY；P6 能写 GROUP_CONCAT + HAVING；P7 知 WHERE/HAVING 执行序、HAVING 可用聚合函数。
+- 红旗答案：把「选两门以上」放 WHERE（WHERE 早于 GROUP BY 无聚合值）；忽略 GROUP_CONCAT 分隔符/排序参数。
+- 惊艳点：点出「WHERE 过滤行、HAVING 过滤组，HAVING 才能用 COUNT/SUM 等聚合」，以及「GROUP_CONCAT 可加 ORDER BY/SEPARATOR 控制拼接」 [经验]。
+
+## 主问答
+**Q（面试官原话）：** 怎么输出每学生选修的学科列表？怎么找选两门以上的学生？
+**A：**
+1. **GROUP_CONCAT 拼接**：按 `studentID` 分组，用 `GROUP_CONCAT(subject ORDER BY subject SEPARATOR '-')` 把学科名拼成一行 [经验]。
+2. **HAVING 分组后过滤**：「选两门以上」是对组的结果过滤，用 `HAVING COUNT(subject) > 2` [经验]。
+3. **WHERE vs HAVING 时机**：WHERE 在 GROUP BY **前**执行、只能过滤行，拿不到聚合值；HAVING 在 GROUP BY **后**执行、可用聚合函数——故分组后条件必用 HAVING [经验]。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 拼学科？ | 函数 | GROUP_CONCAT | P5 |
+| L2 | 两门以上？ | 过滤 | HAVING | P6 |
+| L3 | 何时用？ | 时机 | GROUP BY 后 | P6 |
+| L4 | WHERE? | 对比 | 过滤行早于 | P7 |
+| L5 | 排序？ | 细节 | CONCAT 内 ORDER | P7+ |
+
+## 版本与兼容性
+- 本卡只讲 GROUP_CONCAT 与 HAVING；CTE/IN·NOT IN 见 `1251-cte-subquery-stats`、排名技巧见 `1251-rank-second` [边界]。
+- 同系列 SQL 写法见 `1250-*`；聚合/分组引擎细节见 `1210-*`——本卡只引不重述 [边界]。
+
+## 总结与追问预判
+「行转列拼接 + 分组后过滤」是报表类 SQL 高频组合。面试常追问「GROUP_CONCAT 长度上限（group_concat_max_len）」「HAVING 与 WHERE 性能差异（HAVING 常需临时表）」。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] GROUP_CONCAT 分组拼接、HAVING 分组后过滤、WHERE 先于 GROUP BY——均正确。
+2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（分组拼接、聚合、过滤、学科、执行顺序等）。
+
+```sql
+-- ① 每学生选修的学科列表（行转列拼接）
+SELECT studentID,
+       GROUP_CONCAT(subject ORDER BY subject SEPARATOR '-') AS subjects
+FROM   student_subject
+GROUP  BY studentID;
+
+-- ② 选两门以上的学生（分组后过滤用 HAVING，不可用 WHERE）
+SELECT studentID,
+       COUNT(subject) AS cnt
+FROM   student_subject
+GROUP  BY studentID
+HAVING COUNT(subject) > 2;   -- HAVING 在 GROUP BY 之后，能用聚合值
+-- WHERE  cnt > 2 会报错：WHERE 早于 GROUP BY，此时尚无聚合结果
+```

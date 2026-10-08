@@ -3929,10 +3929,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1251-cte-subquery-stats",
+        "1251-groupconcat-having",
+        "1251-rank-second",
+        "1251-sql-interview-2"
+      ],
+      "done_at": "2026-10-08T17:07:15+08:00"
     },
     "source/12/12-52 面试必备的SQL语句（三）-迅捷文字转语音-1790923931821zh.txt": {
       "id": "12-52",
@@ -6823,10 +6829,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "197-netdisk-arch-overview",
+        "197-index-separation",
+        "197-first-search-rebuild",
+        "197-netdisk-search-arch"
+      ],
+      "done_at": "2026-10-08T17:07:15+08:00"
     },
     "source/19/19-8 企业级网盘搜索场景下的索引建模-迅捷文字转语音-1790932852652zh.txt": {
       "id": "19-8",
@@ -6874,7 +6886,7 @@
     }
   },
   "next_num": 1,
-  "waves": 96,
-  "updated": "2026-10-08T17:00:14+08:00",
+  "waves": 97,
+  "updated": "2026-10-08T17:07:15+08:00",
   "consec_fail": 0
 }
