@@ -502,10 +502,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "510-struct-not-comparable",
+        "510-comparison-rules.deep"
+      ],
+      "done_at": "2026-10-08T23:57:08+08:00"
     },
     "source/05/5-11 DeepEqual()与bytes.Equal()比较切片时有何区别？-迅捷文字转语音-1790856011095zh.txt": {
       "id": "5-11",
@@ -5305,10 +5309,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1513-docker-vs-lxc",
+        "1513-container-tech.deep"
+      ],
+      "done_at": "2026-10-08T23:57:08+08:00"
     },
     "source/15/15-14 Docker Image 和 Docker Layer （层) 有什么不同？-迅捷文字转语音-1790927723640zh.txt": {
       "id": "15-14",
@@ -7223,7 +7231,7 @@
     }
   },
   "next_num": 1,
-  "waves": 127,
-  "updated": "2026-10-08T23:51:57+08:00",
+  "waves": 128,
+  "updated": "2026-10-08T23:57:08+08:00",
   "consec_fail": 0
 }
