@@ -4168,10 +4168,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1263-sentinel-overview",
+        "1263-sentinel-election",
+        "1263-sentinel-failover",
+        "1263-redis-sentinel"
+      ],
+      "done_at": "2026-10-08T17:00:14+08:00"
     },
     "source/12/12-64 Redis 如何实现服务高可用？（三）-迅捷文字转语音-1790924541885zh.txt": {
       "id": "12-64",
@@ -5760,10 +5766,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "178-binary-tree-basics",
+        "178-tree-traversal",
+        "178-binarytree-go-impl",
+        "178-binary-tree"
+      ],
+      "done_at": "2026-10-08T17:00:14+08:00"
     },
     "source/17/17-9 如何判断两颗二叉树是否相等？-迅捷文字转语音-1790929031253zh.txt": {
       "id": "17-9",
@@ -6862,7 +6874,7 @@
     }
   },
   "next_num": 1,
-  "waves": 95,
-  "updated": "2026-10-08T16:55:24+08:00",
+  "waves": 96,
+  "updated": "2026-10-08T17:00:14+08:00",
   "consec_fail": 0
 }

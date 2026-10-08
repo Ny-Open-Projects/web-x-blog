@@ -1,0 +1,64 @@
+# 1263 Redis 哨兵：故障转移流程（选新主）
+
+> 分类：Redis/高可用 | 难度：L3 | 题型：方案题 | 频率：高 | 关键词：**故障转移**/**选新主**/**slave-priority**/**repl-offset**/**运行ID最小**/**pubsub通知**
+> 原文锚点：第 34~54 段「选新主三轮考察(优先级/复制进度/运行ID) + 其余从改目标 + pub/sub 通知客户端 + 旧主上线降从」
+
+## 一句话总述
+leader 哨兵执行故障转移：先**过滤**离线/网络差的从节点，再对候选从节点做**三轮考察**选新主——① 优先级 `slave-priority`（高者优先）；② 复制进度 `slave_repl_offset` 越接近 `master_repl_offset` 越优先；③ 运行 ID 最小（字典序靠前，保证确定性）。选定后其余从节点改复制新主，新主地址经 **pub/sub 通知客户端**，旧主上线后降为新主的从节点。
+
+## 面试官视角
+- 考察意图：能否完整复述故障转移的三轮考察顺序与确定性收尾。
+- 分档：P5 知从节点中选新主；P6 能列三轮考察；P7 知 offset 含义、ID 最小保证确定性、旧主降级。
+- 红旗答案：把考察顺序说反（先 ID 再优先级）；忽略旧主重新上线要降级为从。
+- 惊艳点：点出「复制进度用 repl_offset 接近度衡量、ID 最小仅为 tie-break 保证确定性」，以及「旧主恢复后自动沦为从避免双主」 [经验]。
+
+## 主问答
+**Q（面试官原话）：** 故障转移具体怎么选新主、怎么收尾？
+**A：**
+1. **过滤 + 三轮考察**：先过滤离线/网络差从节点；再按 ①`slave-priority` 高者优先 → ②`slave_repl_offset` 最接近 `master_repl_offset`（复制进度靠前） → ③ 运行 ID 最小 三轮依次决胜 [经验]。
+2. **切换复制目标**：其余从节点改为复制新主；新主 IP/信息经 pub/sub 通知客户端 [经验]。
+3. **旧主收尾**：哨兵继续监视旧主，其重新上线后设为新主的**从节点**，避免双主 [经验]。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 新主从哪？ | 来源 | 从节点选 | P5 |
+| L2 | 考察序？ | 顺序 | 优先级→offset→ID | P6 |
+| L3 | offset？ | 进度 | 接近 master | P6 |
+| L4 | ID 最小？ | 确定性 | tie-break | P7 |
+| L5 | 旧主？ | 收尾 | 降级为从 | P7+ |
+
+## 版本与兼容性
+- 本卡只讲故障转移流程；故障检测见 `1263-sentinel-overview`、选主投票见 `1263-sentinel-election` [边界]。
+- 主从复制（offset 来源）见 `1262-*`；其他 HA（ES）见 `1310-es-ha-*`——本卡只引不重述 [边界]。
+
+## 总结与追问预判
+故障转移的三轮考察是「优先级→数据新→确定性」的稳健排序。客户端靠 pub/sub 订阅主地址变化，实现无硬编码主 IP 的自动切换。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 过滤+三轮考察、offset 接近度、ID 最小确定性、pub/sub 通知、旧主降级——均正确。
+2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（哨兵、故障转移、优先级、复制偏移、运行ID、发布订阅等）。
+
+```go
+// 故障转移：从候选从节点中选新主（三轮考察，胜出即返回）
+type Slave struct {
+    Priority int   // slave-priority，高者优先
+    ReplOff  int64 // slave_repl_offset
+    RunID    string // 运行 ID
+    MasterOff int64 // master_repl_offset（用于算接近度）
+}
+func pickNewMaster(slaves []Slave) Slave {
+    best := slaves[0]
+    for _, s := range slaves[1:] {
+        // ① 优先级高者优先
+        if s.Priority > best.Priority { best = s; continue }
+        if s.Priority < best.Priority { continue }
+        // ② 复制进度（offset 接近 master）靠前者优先
+        if s.ReplOff-s.MasterOff > best.ReplOff-best.MasterOff { best = s; continue }
+        if s.ReplOff-s.MasterOff < best.ReplOff-best.MasterOff { continue }
+        // ③ 运行 ID 最小（字典序）作 tie-break，保证确定性
+        if s.RunID < best.RunID { best = s }
+    }
+    return best // 选定后：其余从改复制目标、pub/sub 通知客户端、旧主上线降从
+}
+```
