@@ -1314,10 +1314,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "704-form-resubmit-guard",
+        "704-idempotency-design.deep"
+      ],
+      "done_at": "2026-10-09T06:23:30+08:00"
     },
     "source/07/7-5 你用过哪些web框架，都有什么特点？-迅捷文字转语音-1790864817821zh.txt": {
       "id": "7-5",
@@ -5983,10 +5987,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1718-binary-search-impl",
+        "1718-binary-search-boundary.deep"
+      ],
+      "done_at": "2026-10-09T06:23:25+08:00"
     },
     "source/17/17-19 如何使用队列和hash表实现一个LRU缓存？-迅捷文字转语音-1790929423592zh.txt": {
       "id": "17-19",
@@ -7335,7 +7343,7 @@
     }
   },
   "next_num": 1,
-  "waves": 141,
-  "updated": "2026-10-09T05:12:33+08:00",
+  "waves": 142,
+  "updated": "2026-10-09T06:23:30+08:00",
   "consec_fail": 0
 }

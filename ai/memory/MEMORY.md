@@ -1634,3 +1634,15 @@
 - 格式坑（本波）：深卡用**主题 stem**（`1824-overcommit-and-oom.deep` / `1838-classful-to-cidr.deep`）规避规则 12；三节预置 ```text，连续三十九波（wave103~141）零 error。主卡代码块均为 ```go（1824：裸 `syscall.Mmap` + `ps` 读 RSS 三段对照；1838：五类范围逐位推导 + 主机数公式）。**纠错节纪律继续生效**：两卡均 6 条 × ≤40 汉字，一次通过无打回。
 - ⚠️ 格式教训（本波新踩）：`1838-ip-address-classes.md` 初稿的 `[边界]` 行写了「见 `1324-arp-protocol`（若存在则以实际库内为准）」——**引用了未核实存在的文件名并加免责括注，属含糊引用**，已改为引用实际存在的 `131-docker-setup` 与 `1313-es-os-config`。**硬规则：[边界] 只能引用已 grep / ls 核实存在的卡编号，禁止写"若存在"这类括注。**
 - 门禁：1243/1243 PASS，error 0，warn **51**（无回归、本波 0 新增 warn）。累计 278 篇 done / 1243 张卡。
+
+## wave 142（2026-10-09 06:17~06:24）· course11 夜间值守
+
+- **派单**：`17-18 分别使用递归和非递归的方式实现二分查找`（M/L2/4588B/卡2）→ 前缀 **1718-**；`7-4 go http server如何防止表单重复提交？`（M/L2/4576B/卡2）→ chapter 7 <10 补零 → **704-**。
+- **产卡 4 张**：`1718-binary-search-impl.md`（主）+ `1718-binary-search-boundary.deep.md`（深，主题 stem 规避规则 12）；`704-form-resubmit-guard.md`（主）+ `704-idempotency-design.deep.md`（深）。
+- **撞题规避 [边界]**：grep「二分查找」命中 11 张但**均为 LSM/哈希环/索引页目录的顺带提及**，无专用二分卡 → 1718 为**干净首覆盖**，引用已核实存在的 `1717-recursive-impl` / `1717-quicksort-overview` / `1717-optimization` / `1711-complexity-evaluation`。grep「幂等|重复提交」命中 24 张但全是 Kafka / 微服务 / ES 侧 → Web 表单防重为**干净首覆盖**，引用已核实的 `703-form-basics` / `703-formvalue-vs-postformvalue` / `702-servemux-routing` / `1223-unique-index-duplicate` / `1418-idempotent-consumption`。**再次验证：grep 命中多 ≠ 撞题，必须打开命中文件确认主题。**
+- **崩坏词**：两源命中黑名单 **0**（源内「分支法/关较否/缩引/数置/rite/let/二点斯/UIL抵扣/MD五」等均不在黑名单）。纠错节一律泛述「源码将若干术语音译为崩坏词，本卡统一为规范术语」，未列举任何原词。
+- **文件名映射复核**：17-18 → 1718-（chapter≥10 直接拼接）；7-4 → 704-（chapter<10 补零 3 位）。**均正确。**
+- **实测（Go 1.26.5，本机真跑）**：① 二分 `mid` 溢出：`left=4611686018427387903, right=9223372036854775805` 时 `(left+right)/2 = -2305843009213693954`（负、越界 panic）vs `left+(right-left)/2 = 6917529027641081854`；② `n=2^20` 基准（`-benchtime 2000x -count 3`）：递归 **73.6 ns/op** / 非递归 **66.7 ns/op** / `slices.BinarySearch` **27.4 ns/op**（标准库快 **2.4 倍**）；③ 源码数组 `[1 3 5 7 8 9]`：target 5→2、9→5、1→0、4→-1；④ token URL 编码：原始 `ab c+d&e=f%g` 经 `url.Values.Encode` → `token=ab+c%2Bd%26e%3Df%25g` 可原样取回；**不编码直接拼接**则报 `invalid URL escape "%g"` 且只取回 `ab c d`（失真）；⑤ `sync.Map.LoadAndDelete` 模拟原子消费：第 1 次 `true` 放行、第 2/3 次 `false` 拒绝；⑥ 随机串长度：`crypto/rand` 16 字节→hex 32 / base64url 22 字符，32 字节→hex 64 / base64url 43，HMAC-SHA256 签名 32 字节→base64url 43。
+- **硬纠错（可复用判据）**：① **「二分递归会爆栈」是错的**——深度仅 log2(n)，n=2^20 才 20 层，会爆的是线性递归；② **PRG 必须用 303 `StatusSeeOther`**，302 在部分实现里重定向仍发 POST；③ **token 校验与消费必须原子**（`GETDEL`），先 GET 再 DEL 有并发双放行窗口；④ 原文建议随机串做 MD5 → **修正为** `crypto/rand` + `HMAC-SHA256`（MD5 已可碰撞）；⑤ `mid` 必须排除自身（`mid±1`），否则 `left+1==right` 时死循环。
+- **格式**：主卡 8 节齐全、`## ⚠️ 原文纠错` 精确、锚点齐、追问链 5 列含「答不出停在哪档」、代码块用 ```go（规则 14）、纠错节 6 条 × ≤40 汉字；深卡三节预置 ```text。**一次通过、零打回。**
+- **门禁**：**1247/1247 PASS、error 0、warn 51**（本波 4 张卡 **0 新增 warn**）。累计 **280 篇 done / 1247 张卡**。
