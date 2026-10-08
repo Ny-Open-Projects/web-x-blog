@@ -491,10 +491,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "501-len-cap-types",
+        "501-slice-len-cap-internals.deep"
+      ],
+      "done_at": "2026-10-09T06:47:18+08:00"
     },
     "source/05/5-10 如何使一个结构体不能被比较？-迅捷文字转语音-1790856005824zh.txt": {
       "id": "5-10",
@@ -7193,10 +7197,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "192-seckill-design-principles",
+        "192-seckill-principles-tradeoffs.deep"
+      ],
+      "done_at": "2026-10-09T06:47:12+08:00"
     },
     "source/19/19-3 电商秒杀场景下的各种缓存设计-迅捷文字转语音-1790932552687zh.txt": {
       "id": "19-3",
@@ -7351,7 +7359,7 @@
     }
   },
   "next_num": 1,
-  "waves": 143,
-  "updated": "2026-10-09T06:37:06+08:00",
+  "waves": 144,
+  "updated": "2026-10-09T06:47:18+08:00",
   "consec_fail": 0
 }

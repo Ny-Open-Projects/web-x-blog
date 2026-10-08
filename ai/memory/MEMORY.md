@@ -1659,3 +1659,14 @@
 - **踩坑记录**：用 `(*hmap)(unsafe.Pointer(&m))` 观测 map 内部**读不到 B**——因为 `map` 变量本身就是 `*hmap`，需 `*(**hmap)(unsafe.Pointer(&m))`；且 Go 1.24+ 布局已变，这套 unsafe 观测**已失效**，改用 HeapAlloc 差值与源码常量取证更稳。
 - **硬纠错**：① 原文「map 会随删除触发缩容、动态伸缩」→ **错**，Go map **只增不缩**；② 原文「负载因子随 B 增大而变大」→ **错**，负载因子是常量（6.5 / 0.875），变的是阈值；③ 原文把 map 无序归因于迁移 → 主因是**遍历起点随机**；④ Go 1.24+ 等量重建的触发比例是**墓碑 > 容量 10%**（`pruneTombstones`）。
 - **门禁**：**1251/1251 PASS、error 0、warn 51**（本波 4 张 **0 新增 warn**）。累计 **282 篇 done / 1251 张卡**。
+
+## wave 144（2026-10-09 06:42~06:48）· course11 夜间值守
+
+- **派单**：`19-2 电商秒杀场景如何设计系统架构？`（M/L2/4532B/卡2）→ chapter 19 ≥10 → **192-**；`5-1 哪些类型可以使用len？哪些可以使用cap？`（M/L2/4515B/卡2）→ **501-**。
+- **产卡 4 张**：`192-seckill-design-principles.md`（主）+ `192-seckill-principles-tradeoffs.deep.md`（深）；`501-len-cap-types.md`（主）+ `501-slice-len-cap-internals.deep.md`（深）。深卡均为主题 stem。
+- **撞题规避 [边界]**：19-2 是**强相邻**——库内已有 5 张秒杀卡（193/194/195/196）。grep「四要一不要|数据要少|路径要短|依赖要少」命中 **0** → 取真 gap：**只讲架构设计原则（四要一不要）与限频/精简/降级的动机**，机制一律不重述，引用 `193-seckill-link-cache` / `194-seckill-traffic.deep` / `195-prevent-oversell.deep` / `196-seckill-ha.deep` / `196-base-theory`（全部 ls 核实存在）。501 也是首覆盖（grep len/cap 命中的 402/415/506/507 均非本主题）。
+- **崩坏词**：两源命中黑名单 **0**（源内「宿组/速组/keep/lince/roon/构面式/n斯」等均不在黑名单）。纠错节一律泛述未列举原词。
+- **文件名映射复核**：19-2 → 192-（chapter≥10 直接拼接）；5-1 → 501-（chapter<10 补零 3 位）。**均正确。**
+- **实测（Go 1.26.5）**：① **令牌桶限频**（容量 10、速率 100/s）：瞬间打 100 次 → **放行 10 次、拒绝 90 次**；静置 200ms 后再打 100 次 → 仍放行 10 次（桶容量即瞬时放行上限）；② **数据瘦身**：9 字段完整结构 `unsafe.Sizeof` = **120 字节/条** vs 4 字段精简结构 **40 字节/条**，缩减 **66.7%**（注意：只含结构体本身，不含字符串指向的堆数据，表述时已注明）；③ **len/cap 语义**：`[5]int` → len=5 cap=5；`make([]int,3)` → 3/3，append 后 **4/6**（容量翻倍）；`make(chan int,10)` → **len=0 cap=10**；map len=1 无 cap；`"Go语言"` → **len=8 字节 / len([]rune)=4 字符**；④ **编译期常量**：`const na = len([5]int{})=5` 可作数组维度，`const nb = len(slice)` 报 `len(b) (variable of type []int) is not constant`；⑤ **反射改 len/cap**：`make([]int,1,6)` → `SetLen(2)` → 2/6 → `SetCap(5)` → 2/5 → `SetCap(8)` panic `reflect: slice capacity out of range in SetCap`；⑥ `unsafe.Slice(unsafe.SliceData(s),6)` → len=6 cap=6（同一底层数组，越界踩邻居）；⑦ nil 值：nil slice 0/0、nil map len=0、nil chan 0/0。
+- **硬纠错**：① 原文「map 容量无限制故不支持 cap」结论对但理由含糊，实质是 **map 无预分配容量语义**，`make(map,n)` 的 n 只是 hint；② 原文漏了 **string 也不能用 cap**；③ 秒杀原文只说「大量请求同时读写」未点破瓶颈是**热点单行写**，且「加机器不是最好办法」未给原因——**行锁把并发串行化**；④ 原文按钮置灰属前端手段，必须配**服务端限频 + 答题防刷**。
+- **门禁**：**1255/1255 PASS、error 0、warn 51**（本波 4 张 **0 新增 warn**）。累计 **284 篇 done / 1255 张卡**。
