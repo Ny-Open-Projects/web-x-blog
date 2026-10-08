@@ -449,10 +449,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "408-go-workspace-mode",
+        "408-workspace-vs-replace.deep"
+      ],
+      "done_at": "2026-10-09T05:01:23+08:00"
     },
     "source/04/4-9 init() 函数是什么时候执行的？-迅捷文字转语音-1790758565868zh.txt": {
       "id": "4-9",
@@ -6319,10 +6323,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1817-su-sudo-variants",
+        "1817-privilege-escalation-model.deep"
+      ],
+      "done_at": "2026-10-09T05:01:28+08:00"
     },
     "source/18/18-18 磁盘阵列-迅捷文字转语音-1790930560026zh.txt": {
       "id": "18-18",
@@ -7319,7 +7327,7 @@
     }
   },
   "next_num": 1,
-  "waves": 139,
-  "updated": "2026-10-09T04:50:23+08:00",
+  "waves": 140,
+  "updated": "2026-10-09T05:01:28+08:00",
   "consec_fail": 0
 }
