@@ -861,10 +861,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "615-embedding-inheritance",
+        "615-method-promotion-conflict",
+        "615-interface-two-impls",
+        "615-go-oop"
+      ],
+      "done_at": "2026-10-08T19:14:19+08:00"
     },
     "source/06/6-16 Go语言中如何实现多态？-迅捷文字转语音-1790861422015zh.txt": {
       "id": "6-16",
@@ -6240,10 +6246,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1828-ipc-overview",
+        "1828-pipe-messagequeue",
+        "1828-shared-memory-signal",
+        "1828-ipc"
+      ],
+      "done_at": "2026-10-08T19:14:19+08:00"
     },
     "source/18/18-29 进程的调度算法有哪些？-迅捷文字转语音-1790931204189zh.txt": {
       "id": "18-29",
@@ -6994,7 +7006,7 @@
     }
   },
   "next_num": 1,
-  "waves": 106,
-  "updated": "2026-10-08T19:07:35+08:00",
+  "waves": 107,
+  "updated": "2026-10-08T19:14:19+08:00",
   "consec_fail": 0
 }
