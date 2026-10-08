@@ -1,0 +1,27 @@
+# 1105 Go 执行追踪全景（深挖）
+
+> 分类：Go/性能 | 难度：L3 | 题型：综合题 | 频率：中 | 关键词：**执行追踪** / **采集+UI+分工** / **与 pprof 互补**
+> 原文锚点：第 1~72 段「pprof不足→trace;runtime/trace采集;go tool trace UI(Goroutine/Threads/Heap/GC/Proc+时间分解);net/http/pprof trace端点;trace vs pprof;开销」
+
+## 一句话总述
+执行追踪（execution tracer）是 pprof 的补集：它记录 goroutine 的完整生命周期事件，解决"goroutine 阻塞多久、在哪被调度打断"这类 pprof 采样看不清的问题。面试按"采集 → UI 解读 → 与 pprof 分工"三步，并明确与 1114（pprof 全解）互补、与 814（runtime G 的 trace 字段）不同层。
+
+## 思路与架构
+- **动机层**：pprof 是采样，看不清时序/阻塞 → 需要 trace（事件记录）。
+- **采集层**：runtime/trace（Start/Stop 写文件）+ net/http/pprof 的 /debug/pprof/trace 端点。
+- **解读层**：go tool trace UI（Goroutine/Threads/Heap/GC/Proc 分层 + goroutine 时间分解：执行/网络等待/同步阻塞/系统调用/调度等待/GC清除/GC暂停）。
+- **分工层**：pprof 看总体开销/热点函数，trace 看时序/阻塞/调度；trace 有运行时开销、采完即停。
+
+## 方案取舍
+- **为何 trace 不能替代 pprof**：trace 是事件流不是聚合统计，找"哪个函数最耗 CPU"不如 pprof 的 CPU profile 直观；但找"goroutine 卡哪、等多久"pprof 做不到。
+- **开销权衡**：trace 录制拖慢程序，生产上按需短时采集，分析完关掉；pprof 采样开销小可常驻。
+- **与既有卡边界**：1114-* 是 pprof 全解（采集/火焰图/heap/profile），本卡只讲 trace 及其与 pprof 的分工；814-g-trace-signal 是 runtime 内部 g 结构的 trace 字段，与"执行追踪工具"是两回事。
+
+## 答题技巧
+1. **开口定调**："pprof 看总体、trace 看时序，二者互补"。
+2. **给采集**：runtime/trace Start/Stop 或 pprof trace 端点。
+3. **讲 UI**：Goroutine 状态 + 时间分解（重点 GC暂停/调度等待）。
+4. **落结论**：过量 goroutine → GC 压力/调度开销，反向控并发规模；提 1114 显示体系。
+
+## ⚠️ 原文纠错
+未发现事实性技术错误。核对范围：通读全文并交叉核对"pprof 不足→trace、runtime/trace 采集、go tool trace UI 分层与时间分解、net/http/pprof trace 端点、trace vs pprof 分工、trace 有开销"四条主线，与 Go 性能工具链一致。源码将术语音译为崩坏词（勾入进→goroutine、PPROF→pprof、runtimetrace→runtime/trace、gototrice→go tool trace、trss→trace 文件、构入器→goroutine、glpthings→Goroutines、helpp→Heap、PROC→Proc 等），本卡统一为规范术语，技术结论未做更正。与 1114-pprof-*（采样剖析全解）互补、与 814-g-trace-signal（runtime G 内部字段）不同层，本卡聚焦执行追踪工具链 `[经验]`。

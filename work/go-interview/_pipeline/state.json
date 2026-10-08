@@ -2183,10 +2183,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1013-mutex-pessimistic",
+        "1013-optimistic-lock-go",
+        "1013-deadlock-livelock",
+        "1013-lock-pessimistic-optimistic.deep"
+      ],
+      "done_at": "2026-10-08T10:21:39+08:00"
     },
     "source/10/10-14 sync.Mutex 正常模式和饥饿模式有啥区别-迅捷文字转语音-1790918508223zh.txt": {
       "id": "10-14",
@@ -2746,10 +2752,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1105-trace-collect",
+        "1105-trace-ui",
+        "1105-trace-vs-pprof",
+        "1105-execution-trace.deep"
+      ],
+      "done_at": "2026-10-08T10:21:39+08:00"
     },
     "source/11/11-6 如何通过GODEBUG分析go schedule？-迅捷文字转语音-1790919947536zh.txt": {
       "id": "11-6",
@@ -6562,7 +6574,7 @@
     }
   },
   "next_num": 1,
-  "waves": 70,
-  "updated": "2026-10-08T10:11:17+08:00",
+  "waves": 71,
+  "updated": "2026-10-08T10:21:39+08:00",
   "consec_fail": 0
 }

@@ -881,3 +881,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含 切液中断/血液中断→缺页中断、速度→切片、速组→数组、直接直部→直接值部、root类型→rune、原生字→机器字、案例类型→any、fourrange→for range、钢奔起→-bench、gramstate→vmstat、slaptop→slabtop、拓扑命令→top、doca→docker、srelamber→SReclaimable、free杠h→free -h 等。技术均准确（free/top/vmstat 指标、值尺寸、for-range 复制语义）。
 - **门禁修复（重要）**：`1112-copy-cost-pointer.md` 首校 error 1——纠错节把机翻残留黑名单词「构语言」当作"已还原词"列举，触发规则 11 机翻残留。删去该词条后 754/754 PASS、error 0。**教训：纠错节泛述 ASR 崩坏词时，若原词命中机翻残留黑名单（如「构语言」），不可原样列举，改为泛述"源码将若干标识符音译为崩坏词，本卡统一为规范术语"；同音「勾语言」不在黑名单故可列**（两词皆音译 Go 语言，仅「构语言」被拦）。
 - 门禁：754/754 PASS，error 0，warn **51**。累计 136 篇 done / 754 张卡。
+
+## wave 71（2026-10-08 上午，L 级，8 张）
+
+- 源：`source/10/10-13`（Mutex 是悲观锁还是乐观锁？，L 级）→ `1013-`；`source/11/11-5`（如何使用Trace定位性能问题？，L 级）→ `1105-`。
+- 产出：
+  - `1013-mutex-pessimistic.md`（Mutex 属悲观锁：访问前加锁；与乐观锁区别=先锁vs先校验；Go 无内置乐观锁靠 CAS/版本号）
+  - `1013-optimistic-lock-go.md`（Go 乐观锁两实现：CAS(atomic.CompareAndSwap 自旋,冲突多CPU开销大,适合冲突少持锁短) + 版本号机制）
+  - `1013-deadlock-livelock.md`（死锁=互等锁,fatal error 不可 recover + 避免六法(含 Go1.18 TryLock) + 活锁=拿到又释放不执行 + Mutex 不可重入）
+  - `1013-lock-pessimistic-optimistic.deep.md`（锁分类全景：概念/Go落地/CAS vs Mutex/死锁活锁 + 与 925/105/1233/1019 互补）
+  - `1105-trace-collect.md`（执行追踪采集：runtime/trace Start/Stop + go tool trace；net/http/pprof /debug/pprof/trace?seconds=N）
+  - `1105-trace-ui.md`（go tool trace UI：时间线/Goroutine行(状态)/Threads/Heap/GC/Proc + goroutine 时间分解(执行/阻塞/GC暂停)）
+  - `1105-trace-vs-pprof.md`（trace=事件记录看时序阻塞 vs pprof=采样看CPU百分比；trace 有开销采完即停；互补）
+  - `1105-execution-trace.deep.md`（执行追踪全景：采集+UI+与 pprof 分工；与 1114 互补、与 814 runtime G 字段不同层）
+- 撞题规避：`1013-` 与 `925`(Mutex 用法/实现) `105`(CAS vs Mutex 取舍) `1233`(DB 乐观悲观) `1019`(channel 死锁) 重叠，本波聚焦**锁分类+Go 乐观锁实现+死锁活锁概念**，各主卡纠错节注明互补边界不重复；`1105-` 是**首个 Go 执行追踪卡**，与 `1114`(pprof 采样) 互补、与 `814`(runtime G trace 字段) 不同层，明确标注。
+- 原文纠错（本波）：纯 ASR 解码还原，无事实性技术错误；含 护士锁→互斥锁、子锁→死锁、活节→活锁、勾入进→goroutine、自选锁→自旋锁、CS→CAS、vergin→version、trlolook→TryLock、phoalerror→fatal error、PPROF→pprof、runtimetrace→runtime/trace、gototrice→go tool trace、trss→trace 文件、glpthings→Goroutines、helpp→Heap、PROC→Proc 等。技术均准确（Mutex 悲观、CAS 乐观、死锁不可 recover、trace UI 分层、trace vs pprof 分工）。
+- **门禁修复（重要·二次踩坑）**：首校 5 error——主卡纠错节列举的原词崩坏词命中机翻残留黑名单（构语言/wave70、护士锁/自选锁/wave71）。规则 11 只校主卡（深卡 ✓2 不跑该规则）。**强化 SOP：纠错节一律泛述"源码将若干〔术语〕音译为崩坏词，本卡统一为规范术语"，禁止列举任何原词崩坏词——黑名单无法穷举（已知构语言/护士锁/自选锁，必有更多），泛述可一劳永逸规避整类失败**。本波 3 张主卡已改为泛述，全量 762/762 PASS、error 0、warn 51。
+- 门禁：762/762 PASS，error 0，warn **51**。累计 138 篇 done / 762 张卡。
