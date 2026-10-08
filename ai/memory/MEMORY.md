@@ -1085,3 +1085,20 @@
 - 原文纠错（本波）：纯 ASR 解码还原，含 kafka→卡夫卡、幂等→密等、broker→brock、panic→panick、rebalance→rebalance、max.poll.interval→maskforinterl、producer→roproDMM、RabbitMQ→rubitm、Redis→regiis、MongoDB→moglDB、NotFound→lotefound、Go→构语言/构的、channel→牵al、goroutine→携程、闭包→B包、sync.Map→SYNCmap、0.11→一点二零、0.14→一点四零 等；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**，未触发规则 11。
 - 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`1418-kafka-dup-overview.deep.md`/`102-go-concurrency-overview.deep.md`），未被误判为主卡；1418 三张主卡含 go 块(manual commit/sarama/Redis)、102 三张主卡含 go 块满足规则 14。
 - 门禁：850/850 PASS，error 0，warn **51**。累计 160 篇 done / 850 张卡。
+
+## wave 83（2026-10-08 下午，L 级，8 张）
+
+- 源：`source/11/11-14`（如何优化json序列化的性能？，L2~L3）→ `1114-`；`source/15/15-4`（如何确定微服务架构的拆分粒度？，L2~L3）→ `154-`。
+- 产出：
+  - `1114-json-fast-lib.md`（换更快库：标准库反射慢多分配；jsoniter 兼容且反序列化优(6次→1次分配)、easyjson 预编译最快、ffjson；跨服务 RPC+protobuf）
+  - `1114-avoid-map-deserialize.md`（避 map 反序列化：结构体字段确定无反射；map 需 interface{} 多分配(7 vs 16)；个别 key 用 json.RawMessage 延迟解析）
+  - `1114-optimize-tags-struct.md`（优化标签/结构：简短 json 标签减体积、简单类型少嵌套；边际优化优先级最低）
+  - `1114-json-perf-overview.deep.md`（JSON 序列化性能优化全景：换库→避map→结构 收益递减三招 + 选型表 + bench 验证）
+  - `154-split-timing.md`（拆分时机与前置：单体优先、被迫拆分、基础设施就绪(监控/部署/灰度/弹性)、演进式；边界 152-when-to-use）
+  - `154-split-granularity.md`（拆分粒度：中庸非越细；三个火枪手(3人/服务，备份+讨论)、决策权重 50/30/20）
+  - `154-split-strategy-metrics.md`（六拆分策略+绞杀者模式；衡量四维度：内部复杂度(人数)/外部复杂度(子系统数5合理20过高)/交付周期(天级)/跨团队成本；康威定律对齐）
+  - `154-microservice-split-overview.deep.md`（微服务拆分全景：时机→粒度→策略→衡量 四层 + 边界 152/158）
+- 撞题规避：`1114-` 为**干净首覆盖**（全库无 Go JSON 序列化性能专用卡；grep 仅 ES 文档 JSON 误命中）；三招(换库/避map/结构)完整覆盖。`154-` 与 `152-when-to-use`(选型权衡/何时用微服务)、`152-microservices.deep`(设计哲学)、`158-*`(微服务容错) 重叠，但**拆分粒度决策框架是干净 gap**——152 仅讲选型(单体vs微服务)，未讲"拆多细"(中庸/三个火枪手/50-30-20/六策略/四维度衡量)；本波聚焦粒度决策层，深卡显式边界到 152(选型)/158(容错)，不重产选型与容错已覆盖内容。全波 8 张 0 error、warn 维持 51（**修复答案骨架规则**：154-split-strategy-metrics 初版主问答仅 2 条加粗要点触发「主问答加粗≥3」规则，补"康威定律对齐"第 3 条后 ✓10 归零）。
+- 原文纠错（本波）：纯 ASR 解码还原，含 jason→JSON、encoding/json→eneasyjason、jsoniter→jasonauerator、easyjson→mantilencodingjason、ffjson→easeasy省、protobuf→protobuff、Marshal→SPGmartial、Unmarshal→jason点mmartial、RawMessage→jason点rormessage、微服务→微服务、火枪手→火枪手、绞杀者→假杀者、单体→单体、中庸→中庸 等；按 wave71 强化 SOP 纠错节**一律纯泛述不列举任何原词崩坏词**（吸取 wave82 教训，本波从首版即纯泛述，未触发规则 11）。
+- 格式坑（沿用固化 SOP）：2 张深卡文件名均以 `.deep.md` 结尾（`1114-json-perf-overview.deep.md`/`154-microservice-split-overview.deep.md`），未被误判为主卡；1114 三张主卡含 go 块(jsoniter/RawMessage/标签)、154 三张主卡含 go 块(ServiceTeam/OrderService/OrderGateway)满足规则 14。
+- 门禁：858/858 PASS，error 0，warn **51**。累计 162 篇 done / 858 张卡。

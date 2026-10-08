@@ -2721,10 +2721,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1114-json-fast-lib",
+        "1114-avoid-map-deserialize",
+        "1114-optimize-tags-struct",
+        "1114-json-perf-overview.deep"
+      ],
+      "done_at": "2026-10-08T14:38:54+08:00"
     },
     "source/11/11-15 如何优化api接口的性能？-迅捷文字转语音-1790920483799zh.txt": {
       "id": "11-15",
@@ -5074,10 +5080,16 @@
       "depth_cap": "L2~L3",
       "suggest_cards": 3,
       "allow_deep": true,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "154-split-timing",
+        "154-split-granularity",
+        "154-split-strategy-metrics",
+        "154-microservice-split-overview.deep"
+      ],
+      "done_at": "2026-10-08T14:38:55+08:00"
     },
     "source/15/15-5 微服务有哪些设计原则？-迅捷文字转语音-1790927158965zh.txt": {
       "id": "15-5",
@@ -6706,7 +6718,7 @@
     }
   },
   "next_num": 1,
-  "waves": 82,
-  "updated": "2026-10-08T14:32:14+08:00",
+  "waves": 83,
+  "updated": "2026-10-08T14:38:55+08:00",
   "consec_fail": 0
 }
