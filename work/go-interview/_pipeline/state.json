@@ -6028,10 +6028,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1713-string-reverse-two-ways",
+        "1713-reverse-utf8-xor-traps.deep"
+      ],
+      "done_at": "2026-10-09T10:32:29+08:00"
     },
     "source/17/17-14 Golang中如何实现冒泡排序？-迅捷文字转语音-1790929223555zh.txt": {
       "id": "17-14",
@@ -6153,10 +6157,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "172-linkedlist-basics",
+        "172-linkedlist-variants.deep"
+      ],
+      "done_at": "2026-10-09T10:32:29+08:00"
     },
     "source/17/17-20 算法必备100题-迅捷文字转语音-1790929424656zh.txt": {
       "id": "17-20",
@@ -7535,7 +7543,7 @@
     }
   },
   "next_num": 1,
-  "waves": 166,
-  "updated": "2026-10-09T10:25:47+08:00",
+  "waves": 167,
+  "updated": "2026-10-09T10:32:29+08:00",
   "consec_fail": 0
 }

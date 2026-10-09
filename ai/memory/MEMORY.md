@@ -1850,3 +1850,9 @@
 - 916-map-order-mechanics.deep：mapiterinit fastrand 起点+桶内偏移；哈希种子防 DoS；「只承诺不保证有序」规范哲学；结构选型优于事后排序。
 - 1258-redis-expire-persistence：规则矩阵 RDB（生成不写/主查从不查）+ AOF（删时追加 DEL/重写过滤）+ 主从（从不主动删收 DEL 才删）；纠错 3.2 从库读 nil 版本边界；go 决策矩阵模拟 [实测]。
 - 1258-expire-lifecycle.deep：主时钟唯一决策点（时钟差异冲突推演）；可见性（读路径）与物理删除（主库）分离；AOF「记录动作+记录状态」闭环，与 binlog 同构。
+
+## wave167（2026-10-09 10:38）17-2 链表 / 17-13 字符串反转 —— 4 卡，348/369
+- 172-linkedlist-basics：节点=data+next；走尾追加 O(n)（主动报 O(n²) 总账+尾指针 O(1) 优化引 176 deep）；四变体单/双/循环单/循环双；[实测] 追加 1,2,3 遍历正确。
+- 172-linkedlist-variants.deep：双向 O(1) 删除前提=持引用（LRU 合体）；循环链表防死循环（记起点+不变量测试）；container/list vs 手写选型。
+- 1713-string-reverse-two-ways：双指针骨架+临时变量/异或两法；[实测] 中文 []byte 异或反转 "\xbd\xa5堽\xe4" 乱码、rune 法「好你」正确；异或三性质推导。
+- 1713-reverse-utf8-xor-traps.deep：byte/rune 两级反转语义；**异或同址自交换清零雷**（i<=j 改写即爆）；Go 多赋值先求值右侧=安全版临时变量；反转变形谱系=骨架+交换条件变化。
