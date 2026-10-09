@@ -1863,3 +1863,9 @@
 - 819-gmp-blocking-cases：四类阻塞（syscall/内存同步/GC/Sleep）+ M-P 解绑统一应对；waitreason 排查入口；[实测] GOMAXPROCS=1 下 4 G 睡 chan receive 主 G 照常百万计数，close 全唤醒。
 - 819-blocking-taxonomy.deep：**G 阻塞 vs M 阻塞分类学**（换 G vs 换 P）；netpoller 让网络 IO 不睡 M；sysmon 10ms 线强制 retake；waitreason+block profile+trace 三件套。
 - 边界：108-rate-limiter-go/1016 系（Go 实现体）只引不重述。
+
+## wave169（2026-10-09 10:53）14-16 Kafka HA / 14-2 MQ 答法 —— 4 卡，356/369
+- 1416-kafka-high-availability：五支柱（集群/ZK/副本/故障检测/扩容）+ 两层分工（控制面 vs 数据面）；**KRaft 3.3+ / 4.0 移除 ZK 版本边界**（纠错原文唯 ZK 论）；go 选举矩阵 [实测]。
+- 1416-ha-pillars.deep：两级选举（控制器=指挥官 vs 分区 leader=读写）；ZK ≥3 奇数过半算术；unclean 参数=可用性一致性开关；**HA 保护不了什么**短板清单。
+- 142-mq-answer-tactics：三大块（选型/概念/原理）+ 简历埋伏笔 + 案例立体化 + STAR；python 伏笔自检 [实测] 1/3 保留。
+- 142-resume-baiting-tactics.deep：伏笔三规范（可验证/有梯度/有收口）；下钻路径模型（方案→原因→验证）；**案例三级梯度**（亲历/消化/文献，只投喂前两级）；效果必带数字。

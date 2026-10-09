@@ -5122,10 +5122,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1416-kafka-high-availability",
+        "1416-ha-pillars.deep"
+      ],
+      "done_at": "2026-10-09T10:48:05+08:00"
     },
     "source/14/14-17 Kafka 到底会不会丢数据？-迅捷文字转语音-1790926616929zh.txt": {
       "id": "14-17",
@@ -5204,10 +5208,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "142-mq-answer-tactics",
+        "142-resume-baiting-tactics.deep"
+      ],
+      "done_at": "2026-10-09T10:48:05+08:00"
     },
     "source/14/14-20 使用Go操作Kafka有哪些需要注意的地方？-迅捷文字转语音-1790926630648zh.txt": {
       "id": "14-20",
@@ -7551,7 +7559,7 @@
     }
   },
   "next_num": 1,
-  "waves": 168,
-  "updated": "2026-10-09T10:41:06+08:00",
+  "waves": 169,
+  "updated": "2026-10-09T10:48:05+08:00",
   "consec_fail": 0
 }
