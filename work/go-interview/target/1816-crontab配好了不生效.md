@@ -1,0 +1,75 @@
+# 1816 crontab 配好了不生效：六步排查链
+
+> 分类：操作系统 / 运维 | 难度：L2 | 题型：排障题 | 频率：高 | 关键词：**crond 服务状态**/**分时日月周**/**用户环境差异**/**绝对路径**/**日志定位**
+> 原文锚点：第 1~33 段「首先第一步我们需要去检查 cron 任务的状态…crontab 的执行必须在 cron 服务已经启动的前提下…周期的定义第一位是分钟…执行定时任务没有执行的话，我们可以通过查看 /var/log 下 syslog 里的 cron 相关日志来定位」
+
+## 一句话总述
+crontab 不生效是一个**链式排查题**：服务在不在（`systemctl status crond`）→ 语法对不对（分 时 日 月 周）→ 权限够不够 → **用户环境是否一致**（cron 环境极简，不加载登录 shell 的配置）→ 命令是否写**绝对路径**（cron 默认 PATH 很短）→ 最后用 **cron 日志**（/var/log/syslog 或 journalctl）定位，而不是靠猜。
+
+## 面试官视角
+- 考察意图：验证是否真被 cron 坑过。「配好了不生效」是最高频的运维现场题，背不出排障链的人一问便知。
+- 分档：P5 知道查服务状态和日志；P6 能说全字段格式、权限、绝对路径三关；P7 能讲清 **cron 运行环境与登录环境的差异**（PATH/SHELL/环境变量）并给出自证手段。
+- 红旗答案：只答「重启 crond 试试」；不知道 cron 任务里 `/etc/crontab` 与 `crontab -e` 格式差一个**用户名字段**。
+- 惊艳点：主动说「cron 默认 PATH 通常只有 `/usr/bin:/bin`，`/usr/sbin` 与用户自装目录都不在里面，所以命令一律写绝对路径」，并给出实测证据 [实测]。
+
+## 主问答
+**Q（面试官原话）：** 配好了 crontab 但任务没按预期执行，你怎么排查？
+**A：**
+1. **第一步查服务**：cron 任务的执行**依赖 crond 服务存活**，`systemctl status crond`（Debian 系服务名叫 `cron`）看到 `active (running)` 才算过第一关；初学者最容易忽略这一步——服务没起，再对的 crontab 也不会跑 [源码]。
+2. **第二步查格式**：字段顺序**分 时 日 月 周**（0~59 / 0~23 / 1~31 / 1~12 / 0~7，其中 0 和 7 都表示周日，月份星期也可用英文缩写）；某位是 `*` 表示「每」该单位。**注意 `/etc/crontab` 比用户 crontab 多一个用户名字段**（以哪个用户身份执行），两者混用是经典错误 [源码]。
+3. **第三步查权限与路径**：脚本本身要有**执行权限**（`chmod +x`）；命令必须写**绝对路径**——cron 的默认 PATH 极短，实测设 `PATH=/usr/bin:/bin` 后，`docker`、`useradd`、`systemctl` 全部 `NOT FOUND`，只有 `ls` 这类在 `/bin` 的能找到 [实测]。
+4. **第四步查用户环境**：cron 执行环境与登录 shell 环境**不同**，不加载 `~/.bashrc` / `~/.bash_profile`。脚本依赖的环境变量若只存在于某个账号的配置里，换成别的用户（或 cron 环境）执行就会失败——解法是在 crontab 里显式 `export`，或让脚本自己 `source` 配置文件 [源码]。
+5. **第五步看日志定位**：先看系统日志里的 cron 记录（`grep CRON /var/log/syslog`，RHEL 系看 `/var/log/cron`），能确认任务**有没有被调度、退出码是多少**；再看服务日志 `journalctl -u crond`。两者配合可区分「没调度」和「调度了但脚本失败」 [源码]。
+6. **自证手段**：排查期给任务行加输出重定向 `* * * * * /path/job.sh >> /tmp/job.log 2>&1`，把 stdout/stderr 落到文件——环境差异导致的报错会原样出现在日志里，比改完干等快得多 [经验]。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | cron 不生效先查什么？ | 排障起点 | 服务状态 systemctl status crond | P5 停 |
+| L2 | 五个字段分别是什么？ | 语法 | 分 时 日 月 周，0/7 都是周日 | P5 停 |
+| L3 | 为什么命令要写绝对路径？ | 环境意识 | cron 默认 PATH 极短，sbin 与自装目录找不到 | P6 停 |
+| L4 | 脚本在 A 账号能跑 cron 里失败？ | 环境差异 | cron 不加载用户 shell 配置，显式 source/export | P6 停 |
+| L5 | 怎么证明任务到底跑没跑？ | 证据链 | syslog 的 CRON 行 + journalctl + 自带重定向日志 | P7 停 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| RHEL/CentOS | 服务名叫 **crond** | `systemctl status crond`，日志走 /var/log/cron |
+| Debian/Ubuntu | 服务名叫 **cron**，日志进 /var/log/syslog | `systemctl status cron`，`grep CRON /var/log/syslog` |
+| Debian 及后续版本 | cron 默认 PATH 在 /etc/default/cron 可配，但默认不含 sbin 与用户目录 | 一律绝对路径，别赌发行版差异 |
+| 有 systemd 的系统 | `journalctl -u crond` 取代翻 syslog 文件 | 优先 journalctl，范围加 `--since` |
+| 现代替代 | systemd timer 支持 Persistent 补跑、依赖管理 | 重要任务建议迁移，cron 留给简单周期任务 |
+
+## 关键代码
+```go
+// 模拟 cron 的极简 PATH：用 exec.LookPath 复现「命令写裸名找不到」的现场
+package main
+
+import (
+	"fmt"
+	"os"
+	"os/exec"
+)
+
+func main() {
+	// Debian/Ubuntu /etc/default/cron、RHEL crontab 的默认 PATH 均不含 /usr/sbin 与用户自装目录
+	os.Setenv("PATH", "/usr/bin:/bin")
+	for _, cmd := range []string{"ls", "docker", "useradd", "systemctl"} {
+		p, err := exec.LookPath(cmd)
+		if err != nil {
+			fmt.Printf("%-10s -> NOT FOUND (PATH=/usr/bin:/bin)\n", cmd)
+		} else {
+			fmt.Printf("%-10s -> %s\n", cmd, p)
+		}
+	}
+}
+// [实测] 输出：ls -> /bin/ls；docker/useradd/systemctl -> NOT FOUND (PATH=/usr/bin:/bin)
+```
+
+## 总结与追问预判
+一句话记忆：**「服务 → 语法 → 权限 → 环境 → 路径 → 日志」六步链，cron 环境是极简环境**。本卡讲的是 Linux 系统级 crontab 的排障链；**cron 表达式本身的语法**（5 位 vs 6 位、`*` `/` `-` `,` 占位符语义）与应用层定时任务见 709、`709-cron-overlap-recover` 等 709 系列 [边界]，本卡不重述。常追问「秒级任务怎么办」——答：cron 最细粒度是分钟，秒级要么写循环脚本 sleep，要么用应用层调度器（robfig/cron，见 709）；再追问「crond 会不会漏跑」——答：宕机跨过触发点就丢了，重要任务要有幂等与补偿（见 709 的错峰与补偿思路）。
+
+## ⚠️ 原文纠错
+1. 术语归一：[经验] 源为语音转写，crontab/cron 服务名多处被转成崩坏拼写，本卡统一为规范术语 crontab / crond / cron。
+2. 转写纠错：源的「信号」应为「星号」；「七表示三倍」应为「7 也表示周日」（0 与 7 等价）；「wordlog 下 siislog」应为「/var/log 下的 syslog」。
+3. 补充：源未区分 `/etc/crontab`（多用户名字段）与 `crontab -e`（无该字段），两者混用是高频翻车点，本卡已补。

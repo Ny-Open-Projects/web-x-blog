@@ -45,4 +45,4 @@ func IncrWeiboCounter(ctx context.Context, id string, field string, delta int64)
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 Redis、Redis Cluster、哈希分片、主从复制、读写分离、持久化）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：缓存+DB 瓶颈见 `1912-cache-db-counter`；磁盘型 Pika/RocksDB 见 `1912-pika-rocksdb-counter`；本卡只讲 Redis 全量方案的伸缩与成本边界。
+> 边界：缓存+DB 瓶颈见 1912；磁盘型 Pika/RocksDB 见 1912；本卡只讲 Redis 全量方案的伸缩与成本边界。

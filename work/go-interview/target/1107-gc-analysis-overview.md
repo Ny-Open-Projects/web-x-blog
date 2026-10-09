@@ -62,4 +62,4 @@ func main() {
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 Go、GODEBUG=gctrace、runtime.ReadMemStats、wall-clock）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：GC **触发时机**（堆增长 pacer / 定时 forcegcperiod / 手动）见 `810-gc-trigger-timing`；三色标记与 STW 演进见 `807`/`808`/`809`；降频参数 `GOGC`/`SetGCPercent`/`sync.Pool` 见 `810-reduce-gc-frequency`。本卡只讲"如何观测分析"，不重述触发与算法。
+> 边界：GC **触发时机**（堆增长 pacer / 定时 forcegcperiod / 手动）见 810；三色标记与 STW 演进见 `807`/`808`/`809`；降频参数 `GOGC`/`SetGCPercent`/`sync.Pool` 见 810。本卡只讲"如何观测分析"，不重述触发与算法。

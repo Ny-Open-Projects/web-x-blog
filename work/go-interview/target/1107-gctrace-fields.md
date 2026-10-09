@@ -54,4 +54,4 @@ func main() {
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 Go、GODEBUG=gctrace、wall-clock、runtime.GC）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：gctrace 是"观测手段"，GC **触发时机**见 `810-gc-trigger-timing`；手动 `runtime.GC()` 与 `debug.FreeOSMemory` 差异见 `810-manual-gc-freeosmemory`。
+> 边界：gctrace 是"观测手段"，GC **触发时机**见 810；手动 `runtime.GC()` 与 `debug.FreeOSMemory` 差异见 810。

@@ -22,4 +22,4 @@
 技巧4：收尾点"一般死锁场景另见 610"(引 610-channel-deadlock-scenarios)，不抢他人地盘。
 ```
 
-> 边界：channel 基础/select 见 `610-channel-make-and-nil`；closed 行为见 `612-closed-channel-*`；关闭 panic见 `1019-*`/`1021-*`；本深卡只讲"如何答好 nil/closed 对比题"。
+> 边界：channel 基础/select 见 610；closed 行为见 612*`；关闭 panic见 `1019-*`/`1021-*`；本深卡只讲"如何答好 nil/closed 对比题"。

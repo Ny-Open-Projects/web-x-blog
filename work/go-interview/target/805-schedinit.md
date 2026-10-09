@@ -46,7 +46,7 @@
 
 ## 总结与追问预判
 - schedinit 总装：栈/分配器/调度器 + 创建 P（核数受 GOMAXPROCS 限）+ GC 参数初设不启。
-- 预判：newproc/mstart → 见 805-newproc-mstart；runtime.main → 见 805-runtime-main-flow。
+- 预判：newproc/mstart → 见 805；runtime.main → 见 805。
 
 ## ⚠️ 原文纠错
 未发现事实性技术错误。核对范围：通读全文并重点核对 schedinit 职责与 GC 启动时序及版本相关行为；仅做了机翻解码（如 勾浪→Go、魅影→main、勾入t→goroutine、sky的NIP→schedinit 等拼写还原），技术结论未做更正。

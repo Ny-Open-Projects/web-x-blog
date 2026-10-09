@@ -48,9 +48,9 @@ func reclaimByTruncate(path string) error {
 
 ## 总结与追问预判
 - 口诀：**要释放、先清空；truncate 改长度、rm 删目录项**。
-- 预判追问："truncate 和 rm 对进程的影响差在哪？"→ truncate 不动 fd、进程无感；rm 若不关 fd 空间不回收（见 `1815-file-deleted-space-held`）。
+- 预判追问："truncate 和 rm 对进程的影响差在哪？"→ truncate 不动 fd、进程无感；rm 若不关 fd 空间不回收（见 1815）。
 
 ## ⚠️ 原文纠错
 源码将命令音译为崩坏词，本卡已统一为规范术语（`truncate`/`: >`/`test.log`/`i_size`/`inode`/`fd`）。纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：进程占用定位见 `1815-file-deleted-space-held`；inode/数据块机制见 `1814-inode-basics`；本卡只讲"清空内容回收"这一种手段。
+> 边界：进程占用定位见 1815；inode/数据块机制见 1814；本卡只讲"清空内容回收"这一种手段。

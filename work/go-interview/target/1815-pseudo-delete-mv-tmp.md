@@ -49,4 +49,4 @@ func safeDelete(path string) error {
 ## ⚠️ 原文纠错
 源码将机制描述为"在 shell 配置文件里定义同名函数覆盖 rm"，本卡统一为规范术语（`rm`/`mv`/`/tmp`/`~/.bashrc`/`回收站`）。纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：进程占用见 `1815-file-deleted-space-held`；硬链接见 `1815-hardlink-space-held`；本卡只讲"rm 被别名成 mv 到 /tmp"这一种伪删除情形。
+> 边界：进程占用见 1815；硬链接见 1815；本卡只讲"rm 被别名成 mv 到 /tmp"这一种伪删除情形。

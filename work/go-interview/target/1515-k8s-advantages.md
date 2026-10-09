@@ -29,10 +29,10 @@ K8s 的核心优势可归为六点：**自动化**（部署/重启/复制/伸缩
 ## 版本与兼容性
 - HPA 早期基于 `metrics-server`（CPU/内存），现支持 `custom.metrics`/`external.metrics`（如 QPS、队列长度），KEDA 可接任意事件源。
 - 自愈依赖 `livenessProbe`/`readinessProbe` 配置合理——配错探针反而会造成频繁重启（踩坑点）。
-- 与「微服务治理」（见 `157-microservice-governance.deep.md`/`158-microservice-fault-tolerance.deep.md`）互补：K8s 提供基础设施级弹性，服务网格提供应用级治理。
+- 与「微服务治理」（见 157.md`/`158-microservice-fault-tolerance.deep.md`）互补：K8s 提供基础设施级弹性，服务网格提供应用级治理。
 
 ## 总结与追问预判
-收口：**K8s 优势 = 自动化 + 高可用(副本自愈) + 弹性(HPA) + 负载均衡(Service) + 生态**，本质是「把运维经验沉淀进控制循环」。预判追问：① 用在哪些场景（见 `1515-k8s-scenarios-features.md`）；② 架构基础（见 `1515-k8s-architecture.md`）。回答时把「声明式期望状态 + 控制循环调和」这句抛出，最显深度。
+收口：**K8s 优势 = 自动化 + 高可用(副本自愈) + 弹性(HPA) + 负载均衡(Service) + 生态**，本质是「把运维经验沉淀进控制循环」。预判追问：① 用在哪些场景（见 1515.md`）；② 架构基础（见 1515.md`）。回答时把「声明式期望状态 + 控制循环调和」这句抛出，最显深度。
 
 ## ⚠️ 原文纠错
 源视频转写将 Kubernetes / 高可用 / 自动扩展 / 负载均衡 / Prometheus / Grafana 等音译为崩坏词（如「k 八 s」「第六个优势/第六将流量」序号错乱、「普罗米修斯」保留、「graph」指代 Grafana），本卡已还原为规范术语（Kubernetes / 高可用 / 自动扩缩 / 负载均衡 / Prometheus / Grafana）。交付卡禁止保留任何原词崩坏写法。

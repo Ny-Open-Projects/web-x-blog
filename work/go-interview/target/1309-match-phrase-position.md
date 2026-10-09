@@ -51,4 +51,4 @@ es.Termvectors(strings.NewReader(`{"fields":["content"],"_source":true}`),
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 match_phrase、slop、position、term、analyzer、IK 分词器）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：match_phrase 基础语法见 `138-es-match-phrase-query`；analyzer 动态配置见 `138-es-analyzer-dynamic`；本卡只讲 phrase 的 position 相邻性与 slop 调参，不重述基础语法。
+> 边界：match_phrase 基础语法见 138；analyzer 动态配置见 138；本卡只讲 phrase 的 position 相邻性与 slop 调参，不重述基础语法。

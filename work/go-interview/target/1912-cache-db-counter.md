@@ -50,4 +50,4 @@ func IncrCounter(ctx context.Context, objID string, delta int64) error {
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 Redis、memcached、计数器、TPS、QPS）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：Redis 全量存储方案见 `1912-redis-full-counter`；磁盘型 Pika/RocksDB 见 `1912-pika-rocksdb-counter`；本卡只讲缓存+DB 方案的模型与瓶颈，不展开后续方案。
+> 边界：Redis 全量存储方案见 1912；磁盘型 Pika/RocksDB 见 1912；本卡只讲缓存+DB 方案的模型与瓶颈，不展开后续方案。

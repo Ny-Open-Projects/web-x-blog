@@ -30,7 +30,7 @@
 - 这些诊断**与编程语言无关**，是 Linux 网络栈事实。
 
 ## 总结与追问预判
-收口：**外侧丢包 = 网卡队列/硬件（看 `ifconfig drop`/`ethtool -S`）+ 中间网络（看 `mtr -u -r` 每跳 `%loss`）**，最后统一回到「TCP 不保应用层」。预判追问：① 内侧队列/缓冲丢包 → `1848-queue-buffer-loss.md`；② 应用层自保手段（消息确认/重传/幂等）。回答时把 `mtr` 的「逐跳 `%loss`」作为亮点抛出来，比只说 `ping` 更专业。
+收口：**外侧丢包 = 网卡队列/硬件（看 `ifconfig drop`/`ethtool -S`）+ 中间网络（看 `mtr -u -r` 每跳 `%loss`）**，最后统一回到「TCP 不保应用层」。预判追问：① 内侧队列/缓冲丢包 → 1848.md`；② 应用层自保手段（消息确认/重传/幂等）。回答时把 `mtr` 的「逐跳 `%loss`」作为亮点抛出来，比只说 `ping` 更专业。
 
 ## ⚠️ 原文纠错
 源视频转写将 txqueuelen / MTR / /proc/net/snmp / 链路 等音译为崩坏词（如「TSqueenlenges」「MTR 杠u 杠r」「leightstate 指代 snmp」「光缆这些」保留但节点表述崩坏），本卡已还原为规范术语（txqueuelen / MTR / /proc/net/snmp / 路由器交换机光缆链路）。交付卡禁止保留任何原词崩坏写法。

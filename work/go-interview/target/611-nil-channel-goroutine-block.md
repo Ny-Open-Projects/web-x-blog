@@ -26,7 +26,7 @@
 
 ## 版本与兼容性
 - 行为自 Go 1.0 稳定，由运行时死锁检测器判定（仅当所有 goroutine 均阻塞才报 deadlock）。
-- 无缓冲 channel 同 goroutine 收发也会死锁，机制相同，见 `610-channel-deadlock-scenarios`。
+- 无缓冲 channel 同 goroutine 收发也会死锁，机制相同，见 610。
 
 ## 关键代码
 ```go
@@ -43,9 +43,9 @@ func main() {
 
 ## 总结与追问预判
 - 口诀：**同 goroutine 卡=死锁报错；异 goroutine 卡=等主退，不报错**。
-- 预判追问："那无缓冲 channel 同 goroutine 收发呢？"→ 同样死锁，机制一致（见 `610-channel-deadlock-scenarios`）。
+- 预判追问："那无缓冲 channel 同 goroutine 收发呢？"→ 同样死锁，机制一致（见 610）。
 
 ## ⚠️ 原文纠错
 源码将 goroutine/channel 术语音译为崩坏词，本卡已统一为规范术语（如 goroutine/channel/nil/死锁/阻塞/主协程）。纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：一般 channel 死锁场景见 `610-channel-deadlock-scenarios`；nil channel 操作总览见 `611-nil-channel-operations`；本卡只纵深"同/异 goroutine 的死锁 vs 阻塞差异"。
+> 边界：一般 channel 死锁场景见 610；nil channel 操作总览见 611；本卡只纵深"同/异 goroutine 的死锁 vs 阻塞差异"。

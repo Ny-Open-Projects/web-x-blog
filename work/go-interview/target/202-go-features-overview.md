@@ -73,7 +73,7 @@ func main() {
 [实测] 输出（goroutine 调度顺序不保证）：`data-1 / err: invalid id: -2 / data-3` 三行齐全。
 
 ## 总结与追问预判
-核心：**七特性每条都要能接「为什么+注意什么」——特性清单只是入场券，设计权衡才是得分点**。追问必往深处走：goroutine 数量控制与 GMP 见 `912-goroutine-scheduling.deep.md`、channel 语义族见 `610-channel-types.deep.md`、error 处理实践见 `513-error-wrap-practice.md`、设计目标与成功因素见 `201-go-success-factors.md`，七特性与面试考察点的映射见 `202-features-interview-map.deep.md`。
+核心：**七特性每条都要能接「为什么+注意什么」——特性清单只是入场券，设计权衡才是得分点**。追问必往深处走：goroutine 数量控制与 GMP 见 912.md`、channel 语义族见 610.md`、error 处理实践见 513.md`、设计目标与成功因素见 201.md`，七特性与面试考察点的映射见 202.md`。
 
 ## ⚠️ 原文纠错
 1. 术语核校： [经验] 原文「携程」=goroutine（协程音转，Go 官方术语为 goroutine）；「管道/chanal」=channel；「gofornote」=gofmt；「pop 错误」=报错；「HTPTCPUDP」=HTTP/TCP/UDP，已全部归一。

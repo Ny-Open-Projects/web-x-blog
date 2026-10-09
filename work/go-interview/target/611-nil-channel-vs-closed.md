@@ -26,8 +26,8 @@
 | L5 | select 中差异 | 是否懂选中 | nil永不选中/closed可触发 | 答不出停档 |
 
 ## 版本与兼容性
-- 行为自 Go 1.0 稳定；closed channel 的"残留先读完再零值"语义见 `612-closed-channel-drain`。
-- 重复关闭、向已关闭发送均 panic，细节见 `1019-channel-close-panic`/`1021-close-channel-traits`。
+- 行为自 Go 1.0 稳定；closed channel 的"残留先读完再零值"语义见 612。
+- 重复关闭、向已关闭发送均 panic，细节见 1019/`1021-close-channel-traits`。
 
 ## 关键代码
 ```go
@@ -47,9 +47,9 @@ fmt.Println(c == nil) // false：closed 不是 nil
 
 ## 总结与追问预判
 - 口诀：**nil 未初始化(收发阻塞/关panic)；closed 已终态(收零值/发panic/关repeat panic)；closed≠nil**。
-- 预判追问："那关闭能当广播用？"→ 能，发送方写完关门、接收方自然退出（见 `612-closed-channel-drain`）。
+- 预判追问："那关闭能当广播用？"→ 能，发送方写完关门、接收方自然退出（见 612）。
 
 ## ⚠️ 原文纠错
 源码将 channel 相关术语音译为崩坏词，本卡已统一为规范术语（如 channel/nil/closed/goroutine/死锁/panic/zero value/select）。纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：nil 操作总览见 `611-nil-channel-operations`；closed 残留读/不阻塞见 `612-closed-channel-drain`/`612-closed-channel-ops`；关闭 panic/重复关闭见 `1019-channel-close-panic`/`1021-close-channel-traits`；本卡只做 nil vs closed 四维度对比。
+> 边界：nil 操作总览见 611；closed 残留读/不阻塞见 612/`612-closed-channel-ops`；关闭 panic/重复关闭见 1019/`1021-close-channel-traits`；本卡只做 nil vs closed 四维度对比。

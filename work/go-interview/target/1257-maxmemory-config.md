@@ -55,4 +55,4 @@ _ = err
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 Redis、maxmemory、淘汰策略、noeviction、warning 日志）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：八种淘汰策略细节与版本默认差异见 `1257-eviction-policies`；内存满的具体表现与查看/设置命令见 `1257-memory-full-behavior`；Redis 持久化见 `1253-redis-persist`、哨兵见 `1263-redis-sentinel`，本卡只讲 maxmemory 配置本身。
+> 边界：八种淘汰策略细节与版本默认差异见 1257；内存满的具体表现与查看/设置命令见 1257；Redis 持久化见 1253、哨兵见 1263，本卡只讲 maxmemory 配置本身。

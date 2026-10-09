@@ -37,7 +37,7 @@ STRIP_TARGETS = ("go", "python", "java", "sql", "lua", "text", "mermaid", "bash"
 # 允许 .deep.md：SPEC 第 3 节规定的深挖卡命名
 # 前缀位数：章节(1~2位)+课次(1~2位)。单章单课=3位(707)，双章双课=4位(1017=章10课17)。
 # 原正则 ^\d{3}- 只认3位，会把 chapter10/19 + 两位课次的4位前缀卡误判 error。放宽到 {3,4}。
-FILENAME_RE = re.compile(r"^\d{3,4}-[a-z0-9]+(-[a-z0-9]+)*(\.deep)?\.md$")
+FILENAME_RE = re.compile(r"^\d{3,4}-[0-9A-Za-z\u4e00-\u9fff][0-9A-Za-z\u4e00-\u9fff._-]*(\.deep)?\.md$")
 # 001-float-or-slice-as-map-key.md
 MAIN_SUFFIX = ".deep.md"
 
@@ -333,16 +333,19 @@ def validate_card(path: Path, is_deep: bool) -> Result:
 
 def collect(root: Path):
     # ⚠️ 2026-10-04：v4 改用中文命名，本门禁（v3 规则：6 小节 + 700 字）不再适用。
-    # 双轨分工：
-    #   validate.py    → 只管英文名卡（v3 遗留，待重做）
-    #   validate-v4.py → 只管中文名卡（v4 新产出）
-    # 否则 v3 门禁会把 v4 卡全部报错，噪声淹没真问题。
+    # 双轨分工（**2026-10-09 修订**）：
+    #   原「中文名一律跳过」是给 target/go（v4 库，13xx 中文卡）让路；
+    #   但 course11 主产出（target/ 下 1394 张）已于 2026-10-09 全量改为中文名，
+    #   若沿用旧逻辑 → 1274 张卡落入「validate.py 跳过 + validate-v4.py 够不着(target/go 不存在)」
+    #   的门禁真空。故改为：仅 target/go 下的中文卡让给 validate-v4.py，其余目录全量校验。
+    #   validate.py    → 英文名卡 + 非 target/go 的中文名卡（course11 主产出）
+    #   validate-v4.py → target/go 下的中文名卡（v4 新产出）
     out = []
     for p in sorted(root.rglob("*.md")):
         if not p.is_file():
             continue
-        if re.search(r"[\u4e00-\u9fff]", p.name):
-            continue          # v4 中文名卡，交给 validate-v4.py
+        if re.search(r"[\u4e00-\u9fff]", p.name) and "target/go" in str(p.parent):
+            continue          # v4 中文名卡（target/go），交给 validate-v4.py
         out.append(p)
     return out
 

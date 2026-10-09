@@ -51,4 +51,4 @@ func main() {
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 GMP、goroutine、工作窃取、GODEBUG=schedtrace、GOMAXPROCS、runq）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：GMP 模型总览见 `813-gmp-model-overview`；P 本地队列 runq/runnext 见 `815-p-runq-runnext`；GMP 权衡见 `816-gmp-tradeoff`；本卡只讲工作窃取机制本身。
+> 边界：GMP 模型总览见 813；P 本地队列 runq/runnext 见 815；GMP 权衡见 816；本卡只讲工作窃取机制本身。

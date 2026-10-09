@@ -26,7 +26,7 @@ channel 八股高频题。面试官要看你是否分清"nil channel 的收发�
 
 ## 版本与兼容性
 - nil channel 行为自 Go 1.0 稳定；`close(nil)` panic、`nil` 收发阻塞均为语言规定，无版本翻转。
-- 注意：nil channel 在 `select` 中对应 case **永不选中**（见 `610-channel-make-and-nil`）。
+- 注意：nil channel 在 `select` 中对应 case **永不选中**（见 610）。
 
 ## 关键代码
 ```go
@@ -45,9 +45,9 @@ fmt.Println(b == nil) // false：关闭后并非 nil
 
 ## 总结与追问预判
 - 口诀：**nil 收发阻塞(同goroutine死锁)，nil 关闭 panic；closed 不是 nil**。
-- 预判追问："nil channel 在 select 里呢？"→ 永不选中，可用来动态禁用分支（见 `610-channel-make-and-nil`）。
+- 预判追问："nil channel 在 select 里呢？"→ 永不选中，可用来动态禁用分支（见 610）。
 
 ## ⚠️ 原文纠错
 源码将 channel 相关术语音译为崩坏词，本卡已统一为规范术语（如 channel/nil/goroutine/死锁/panic/close/make）。纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：channel 需 make、零值 nil、select 中不选中见 `610-channel-make-and-nil`；关闭后的行为见 `612-closed-channel-drain`/`612-closed-channel-ops`；本卡只讲 nil channel 自身操作后果。
+> 边界：channel 需 make、零值 nil、select 中不选中见 610；关闭后的行为见 612/`612-closed-channel-ops`；本卡只讲 nil channel 自身操作后果。

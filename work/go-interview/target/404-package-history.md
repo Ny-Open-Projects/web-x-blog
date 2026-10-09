@@ -43,7 +43,7 @@ echo $GO111MODULE   # auto/on/off
 ```
 
 ## 总结与追问预判
-时间线是「GOPATH → godep → glide → govendor → Modules」，关键是每个节点的年份与动机。下一步可深问 go.mod/go.sum 的内部机制（见 404-go-modules）。
+时间线是「GOPATH → godep → glide → govendor → Modules」，关键是每个节点的年份与动机。下一步可深问 go.mod/go.sum 的内部机制（见 404）。
 
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] 时间线 2009 GOPATH / 2013 godep / 2014 glide / 2015 govendor / 2018-08-24 Go Modules(go1.11) / 1.13 默认、官方曾推荐多达 15 种工具——均正确。

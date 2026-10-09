@@ -51,4 +51,4 @@ es.Indices.Create("article", es.Indices.Create.WithBody(strings.NewReader(`{
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 match、match_phrase、analyzer、term、position、_analyze、_termvectors、IK 分词器）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：match/match_phrase 语法见 `138-es-match-query`/`138-es-match-phrase-query`；analyzer 动态配置见 `138-es-analyzer-dynamic`；本卡只讲"查不到"的系统排查法与避免手段。
+> 边界：match/match_phrase 语法见 138/`138-es-match-phrase-query`；analyzer 动态配置见 138；本卡只讲"查不到"的系统排查法与避免手段。

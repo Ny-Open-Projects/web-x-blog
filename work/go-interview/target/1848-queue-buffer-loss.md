@@ -30,7 +30,7 @@
 - 全连接队列 = `min(listen backlog, net.core.somaxconn)`，二者都要看，调一个不调另一个会「看起来没生效」。
 
 ## 总结与追问预判
-收口：**内侧丢包两大源 = 建连队列溢出（半/全连接，查 `netstat -s`）+ 接收缓冲零窗口（查 `/proc/net/snmp` TCPBacklogDrop）**，参数层面 `tcp_max_syn_backlog`/`somaxconn`/`tcp_rmem` 可调。预判追问：① 网卡侧丢包 → `1848-network-nic-loss.md`；② 应用层如何用 `SO_RCVBUF` 兜底 → 见下方 Go 示例。回答时强调「队列溢出是静默丢、不报错」，是最隐蔽的一类。
+收口：**内侧丢包两大源 = 建连队列溢出（半/全连接，查 `netstat -s`）+ 接收缓冲零窗口（查 `/proc/net/snmp` TCPBacklogDrop）**，参数层面 `tcp_max_syn_backlog`/`somaxconn`/`tcp_rmem` 可调。预判追问：① 网卡侧丢包 → 1848.md`；② 应用层如何用 `SO_RCVBUF` 兜底 → 见下方 Go 示例。回答时强调「队列溢出是静默丢、不报错」，是最隐蔽的一类。
 
 ## ⚠️ 原文纠错
 源视频转写将半连接/全连接队列、零窗口、网卡队列长度(txqueuelen)、/proc/net/snmp 等音译为崩坏词（如「全链接队列」「半连接的对列」「TSqueenlenges」「leightstate 指代 snmp 文件」），本卡已还原为规范术语。交付卡禁止保留任何原词崩坏写法。

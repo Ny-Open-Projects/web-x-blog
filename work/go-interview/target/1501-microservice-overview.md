@@ -12,16 +12,16 @@
 
 **A：**
 
-1. **基本概念与优劣**：能说清微服务定义、相对单体/SOA 的优势（独立部署、技术异构、可扩展）与挑战（分布式复杂度、运维成本、网络不可靠），见 `152-why-microservices`。
+1. **基本概念与优劣**：能说清微服务定义、相对单体/SOA 的优势（独立部署、技术异构、可扩展）与挑战（分布式复杂度、运维成本、网络不可靠），见 152。
 2. **设计原则**：垂直拆分优先、服务自治、接口隔离、自动化驱动——四原则决定拆分质量。
-3. **拆分策略**：单体如何拆成多服务、如何定义服务边界，见 `154-split-granularity` / `154-split-strategy-metrics` / `154-split-timing`。
-4. **服务通信**：HTTP/REST、RPC/gRPC、消息队列三范式对比，见 `1501-service-communication`。
-5. **服务发现与注册**：注册中心（etcd/Consul/ZooKeeper）+ 注册/心跳/发现 + 客户端负载均衡，见 `1501-service-discovery-registry`。
-6. **API 网关**：请求路由、认证授权、限流熔断的统一入口，见 `157-governance-overview` / `157-loadbalance-routing`。
-7. **负载均衡与容错**：轮询/随机/最少连接策略 + 超时/重试/熔断降级，见 `158-retry-timeout` / `158-circuit-breaker-degrade` / `158-isolation-ratelimit`。
+3. **拆分策略**：单体如何拆成多服务、如何定义服务边界，见 154 / `154-split-strategy-metrics` / `154-split-timing`。
+4. **服务通信**：HTTP/REST、RPC/gRPC、消息队列三范式对比，见 1501。
+5. **服务发现与注册**：注册中心（etcd/Consul/ZooKeeper）+ 注册/心跳/发现 + 客户端负载均衡，见 1501。
+6. **API 网关**：请求路由、认证授权、限流熔断的统一入口，见 157 / `157-loadbalance-routing`。
+7. **负载均衡与容错**：轮询/随机/最少连接策略 + 超时/重试/熔断降级，见 158 / `158-circuit-breaker-degrade` / `158-isolation-ratelimit`。
 8. **分布式事务**：跨服务数据一致性的挑战，2PC/TCC/Saga 等方案取舍（本源点到为止，宜另开专题）。
-9. **容器化与 CI/CD**：Docker/K8s 部署与持续集成，见 `1515-k8s-architecture`。
-10. **监控与日志**：Prometheus 指标 + ELK 日志采集，见 `1511-metric-types` / `1506-observe-tracing`。
+9. **容器化与 CI/CD**：Docker/K8s 部署与持续集成，见 1515。
+10. **监控与日志**：Prometheus 指标 + ELK 日志采集，见 1511 / `1506-observe-tracing`。
 
 ## 追问链（L1~L5）
 | 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
@@ -66,4 +66,4 @@ _ = microservicePoints
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 微服务、SOA、API 网关、CI/CD、K8s、Prometheus、ELK、etcd、Consul、ZooKeeper、gRPC）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：通信细节见 `1501-service-communication`；服务发现见 `1501-service-discovery-registry`；拆分/治理/容错/安全分别见 `154-*`/`157-*`/`158-*`/`1506-microservice-security`；本卡只做索引地图，不重述各域内容。
+> 边界：通信细节见 1501；服务发现见 1501；拆分/治理/容错/安全分别见 `154-*`/`157-*`/`158-*`/`1506-microservice-security`；本卡只做索引地图，不重述各域内容。

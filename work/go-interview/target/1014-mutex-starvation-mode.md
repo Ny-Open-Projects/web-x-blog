@@ -25,7 +25,7 @@ sync.Mutex **饥饿模式（starvation mode）**为消除"队尾老等待者拿�
 | L5 | 何时进饥饿模式 | 是否懂切换 | 见下卡(>1ms/队空) | 答不出停档 |
 
 ## 版本与兼容性
-- 饥饿模式 **Go 1.9** 引入（修复此前写者可能饿死的缺陷）；handoff 经 `runtime_Semrelease(handoff=true)` 实现，见 `925-mutex-impl`。
+- 饥饿模式 **Go 1.9** 引入（修复此前写者可能饿死的缺陷）；handoff 经 `runtime_Semrelease(handoff=true)` 实现，见 925。
 - 内部位 `mutexStarving`（state 第 3 位）标记当前是否饥饿模式。
 
 ## 关键代码
@@ -42,9 +42,9 @@ func illustrateStarvationMode() {
 
 ## 总结与追问预判
 - 口诀：**饥饿模式=handoff 直交队首 + 新来者入尾 + 公平换吞吐**。
-- 预判追问："两种模式怎么切换？"→ 见 `1014-mutex-mode-switch`（等待>1ms 或队列仅剩 1 人触发）。
+- 预判追问："两种模式怎么切换？"→ 见 1014（等待>1ms 或队列仅剩 1 人触发）。
 
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 sync.Mutex/互斥锁/正常模式/饥饿模式/goroutine/等待队列/handoff）。纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：Mutex 内部实现(state/sema/CAS/自旋)见 `925-mutex-impl`；本卡只讲饥饿模式的**用户可观察行为**，不重述实现。
+> 边界：Mutex 内部实现(state/sema/CAS/自旋)见 925；本卡只讲饥饿模式的**用户可观察行为**，不重述实现。

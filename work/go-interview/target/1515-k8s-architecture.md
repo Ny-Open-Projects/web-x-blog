@@ -27,10 +27,10 @@ K8s 是一套**以 Pod 为最小调度单位、以声明式 API 管理容器生�
 ## 版本与兼容性
 - 概念跨版本稳定；`ReplicationController` 已被 `ReplicaSet` 取代（Deployment 默认用 RS），新代码不应再直接用 RC。
 - `kubectl`/声明式 YAML 是标准交互方式；编程侧用 `client-go`（Go 生态一等公民，见下代码）。
-- 注意与「微服务」（见 `152-why-microservices.md`/`157-microservice-governance.deep.md`）区分：微服务是**架构风格**，K8s 是**运行微服务的基础设施**，二者不同层。
+- 注意与「微服务」（见 152.md`/`157-microservice-governance.deep.md`）区分：微服务是**架构风格**，K8s 是**运行微服务的基础设施**，二者不同层。
 
 ## 总结与追问预判
-收口：**K8s = Master 决策 + Node 执行 + Pod 最小单位 + Controller/Service/Namespace 分层管理**。预判追问：① K8s 凭什么成为标准（优势，见 `1515-k8s-advantages.md`）；② 用在哪（场景/特点，见 `1515-k8s-scenarios-features.md`）。回答时把「Pod 共享网络命名空间」和「etcd 是唯一真相源」两句抛出，最显功底。
+收口：**K8s = Master 决策 + Node 执行 + Pod 最小单位 + Controller/Service/Namespace 分层管理**。预判追问：① K8s 凭什么成为标准（优势，见 1515.md`）；② 用在哪（场景/特点，见 1515.md`）。回答时把「Pod 共享网络命名空间」和「etcd 是唯一真相源」两句抛出，最显功底。
 
 ## ⚠️ 原文纠错
 源视频转写将 Kubernetes / master / worker(node) / pod / replication controller / deployment / HPA / service / namespace / etcd 等音译为崩坏词（如「k 八 s」指代 Kubernetes、「load」指代 worker 节点、「propersdd」指代 pod、「replicationcontroller」保留、「horiontalpodortoscale」指代 HPA、「cper」指代容器运行时 CRI、「graph」指代 Grafana），本卡已还原为规范术语。交付卡禁止保留任何原词崩坏写法。

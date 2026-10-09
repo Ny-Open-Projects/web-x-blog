@@ -53,4 +53,4 @@ _ = cli.ConfigSet(ctx, "maxmemory-policy", "allkeys-lru").Err()
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 Redis、noeviction、allkeys-lru、allkeys-lfu、volatile-ttl、maxmemory-policy）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：maxmemory 配置/单位见 `1257-maxmemory-config`；内存满具体行为见 `1257-memory-full-behavior`；本卡只列策略矩阵与版本默认。
+> 边界：maxmemory 配置/单位见 1257；内存满具体行为见 1257；本卡只列策略矩阵与版本默认。

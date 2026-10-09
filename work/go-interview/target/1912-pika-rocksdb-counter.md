@@ -46,4 +46,4 @@ func IncrOnPika(ctx context.Context, id, field string, delta int64) int64 {
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 Pika、RocksDB、LSM 树、memtable、SSTable、compaction、block cache）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：缓存+DB 见 `1912-cache-db-counter`；Redis 全量见 `1912-redis-full-counter`；本卡只讲 Pika/RocksDB 磁盘型方案的取舍，不重述前两种。
+> 边界：缓存+DB 见 1912；Redis 全量见 1912；本卡只讲 Pika/RocksDB 磁盘型方案的取舍，不重述前两种。

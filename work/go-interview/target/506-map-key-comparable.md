@@ -1,7 +1,7 @@
 > 原文锚点：第 13~23 段「只可比较的类型才能作为 map 的 k…除 slice/map/functions 几种类型外其他类型都可比较…数组元素类型不可比较则数组不可比较…结构体全部字段可比较才可比较…切片不能作为 map 的 k，只能作为值」（可比较类型作 key 前提 + slice/map/func 不可作 key + 数组/结构体字段细则）
 
 ## 一句话总述
-**map 的 key 类型必须是「可比较（comparable）」类型**——`func`/`map`/`slice` 三者不可比较，因此**直接作 key 会编译报错**；数组/结构体只有在「所有元素/字段都可比较」时才可作 key。这是把「类型可比较性」（见 `509-comparable-types.md`）落到 map 实战的硬约束。
+**map 的 key 类型必须是「可比较（comparable）」类型**——`func`/`map`/`slice` 三者不可比较，因此**直接作 key 会编译报错**；数组/结构体只有在「所有元素/字段都可比较」时才可作 key。这是把「类型可比较性」（见 509.md`）落到 map 实战的硬约束。
 
 ## 面试官视角
 这题考「可比较性」与「map key」的连接。考点：① 哪三类绝对不能作 key（编译期就拒）；② 数组/结构体作 key 的细则；③ 把「可比较」概念迁移到「map 约束」的能力。能说「`map[[]int]int` 编译不过」比只背「slice 不可比较」更显实战。
@@ -13,7 +13,7 @@
 1. **前提：key 必须可比较**。Go 规定 map key 类型必须满足 `comparable` 约束——只有「可比较类型」才能作 key，不可比较类型作 key 在**编译期**直接报错（`invalid map key type`）。
 2. **slice/map/func 绝对不能作 key**：这三类类型彼此不可比较（且无法哈希），声明 `map[[]int]int` 或 `map[map[string]int]int` 会**编译失败**；切片只能作 map 的 **value**，不能作 key。
 3. **数组/结构体的细则**：数组只有在「元素类型可比较」时才可比较、才可作 key（如 `[3]int` 可作 key）；若数组元素含 `map`/`slice`/`func` 则整体不可比较、不能作 key。**结构体**同理——所有字段都可比较（不含 map/slice/func 字段）才可作 key，否则编译报错。
-4. **float 可作 key 但有坑**（见 `506-float-key-nan.md`）；指针可作 key 但按**地址**比较（见 `506-pointer-key-address.md`）——二者合法但行为反直觉。
+4. **float 可作 key 但有坑**（见 506.md`）；指针可作 key 但按**地址**比较（见 506.md`）——二者合法但行为反直觉。
 
 ## 追问链
 | 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
@@ -30,7 +30,7 @@
 - 注意与「map 并发/无序/float key 风险」（`914-map-concurrency-float.md`）区分：本卡只讲「key 类型合法性」，那张讲「float key 取值异常 + 并发 panic + 无序」。
 
 ## 总结与追问预判
-收口：**map key 必须 comparable → func/map/slice 编译期拒、数组/结构体看字段；切片只能当 value**。预判追问：① float key 的精度与 NaN 诡异（见 `506-float-key-nan.md`）；② 指针 key 按地址（见 `506-pointer-key-address.md`）。回答时把「`map[[]int]int` 编译报错」一句抛出，最显你把概念落到了代码层。
+收口：**map key 必须 comparable → func/map/slice 编译期拒、数组/结构体看字段；切片只能当 value**。预判追问：① float key 的精度与 NaN 诡异（见 506.md`）；② 指针 key 按地址（见 506.md`）。回答时把「`map[[]int]int` 编译报错」一句抛出，最显你把概念落到了代码层。
 
 ## ⚠️ 原文纠错
 源视频转写将 Go / map key / 可比较类型 / 切片 等音译为若干崩坏词，本卡已统一还原为规范术语（Go / map 键 / 可比较（comparable）类型 / 切片 slice）。交付卡禁止保留任何原词崩坏写法。

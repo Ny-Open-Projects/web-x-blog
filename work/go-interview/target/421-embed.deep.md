@@ -22,4 +22,4 @@
 技巧4：收尾点"方法提升是另一回事"(引 615)，避免把资格题答成继承题。
 ```
 
-> 边界：方法提升/组合优于继承见 `615-embedding-inheritance`/`615-method-promotion-conflict`；本深卡只讲"如何答好类型资格题"。
+> 边界：方法提升/组合优于继承见 615/`615-method-promotion-conflict`；本深卡只讲"如何答好类型资格题"。

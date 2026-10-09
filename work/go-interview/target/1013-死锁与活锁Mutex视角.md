@@ -1,0 +1,61 @@
+# 1013 死锁与活锁（Mutex 视角）
+
+> 分类：Go/并发 | 难度：L3 | 题型：故障题 | 频率：中 | 关键词：**死锁** / **不可 recover** / **TryLock** / **活锁**
+> 原文锚点：第 27~73 段「死锁(多goroutine互等锁,致命panic不可recover);避免六法(加解锁成对/同序取锁/超时/固定顺序/TryLock Go1.18/选合适原语);Mutex不可重入重入触发fatalerror;活锁(拿到又释放不执行)」
+
+## 一句话总述
+**死锁**是多个 goroutine 相互等待对方持有的锁而无法推进，Go 会抛**致命错误（fatal error）且不可 recover**，直接导致服务崩溃；避免死锁有六法（加解锁成对、相同顺序取锁、超时、固定分配顺序、Go 1.18 的 `TryLock`、选合适并发原语）。**活锁**则相反——拿到资源又主动释放、互不执行，资源空转。
+
+## 面试官视角
+- 意图：考察对锁故障的认知与规避手段，常配合"怎么排查死锁"。
+- P5 知道死锁是互相等锁；P6 能说清避免死锁的加锁顺序法；P7 能讲清"死锁 fatal error 不可 recover"与活锁区别、TryLock 用途。
+- 红旗：以为死锁能被 recover 捕获；以为 Mutex 可重入；把活锁当死锁。
+- 惊艳点：点出 `sync.Mutex.TryLock`（Go 1.18 非阻塞）可避免不可重入导致的死锁；活锁是"相互谦让不执行"。
+
+## 主问答
+**Q（面试官原话）：** Mutex 怎么避免死锁？死锁能 recover 吗？
+**A：**
+1. **结论**：死锁 = 多 goroutine 交叉持有对方要的锁并互等；Go 检测到后抛 **fatal error（如 all goroutines are deadlocked）且不可 recover**——`recover()` 只拦普通 panic，拦不住 fatal error，服务直接崩。避免六法见下。
+2. **机制（六法）**：① 加锁/解锁成对、尽量同一 goroutine；② **按相同顺序取锁**避免循环等待；③ 取锁加超时（避免长时间阻塞）；④ 固定资源分配/释放顺序；⑤ Go 1.18+ `Mutex.TryLock()` 非阻塞尝试，避免不可重入导致的死锁；⑥ 选合适并发原语（未必非用锁）。
+3. **边界（活锁）**：活锁与死锁相反——goroutine 拿到了资源却又主动让给别的、互不真正执行，资源在它们之间空转。Mutex **不可重入**，同一 goroutine 两次 `Lock()` 会自死锁（fatal error）`[经验]`。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
+|---|---|---|---|---|
+| L1 | 死锁定义 | 基础 | 互等对方锁 | 判 P5 |
+| L2 | 能否 recover | 关键 | fatal error 不可 recover | 判 P6 |
+| L3 | 避免死锁 | 方法 | 同序取锁/超时/TryLock | 判 P6+ |
+| L4 | 活锁区别 | 辨析 | 拿到又释放不执行 | 判 P7 |
+| L5 | 不可重入 | 细节 | 两次 Lock 自死锁 | 判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在该怎么答 |
+|---|---|---|
+| Go 1.18+ | TryLock 新增 | TryLock 自 Go 1.18 引入，非阻塞取锁；死锁 fatal error 不可 recover 为恒定行为 `[经验]` |
+
+## 关键代码
+```go
+// 死锁：两把锁交叉取锁 → 互等
+var mu1, mu2 sync.Mutex
+go func() { mu1.Lock(); mu2.Lock() }() // 持 mu1 等 mu2
+go func() { mu2.Lock(); mu1.Lock() }() // 持 mu2 等 mu1 → 死锁 fatal error
+
+// 避免：按相同顺序取锁
+func safe() {
+    mu1.Lock(); defer mu1.Unlock()
+    mu2.Lock(); defer mu2.Unlock()
+}
+
+// Go 1.18+ 非阻塞尝试，避免不可重入死锁
+if mu.TryLock() {
+    defer mu.Unlock()
+    // 拿到锁才进；拿不到走别的逻辑
+}
+```
+
+## 总结与预判
+- 死锁 fatal error 不可 recover；六法避免；活锁是谦让空转；Mutex 不可重入。
+- 预判：Mutex 悲观锁 → 见 1013；Go 乐观锁 → 见 1013；channel 死锁见 1019。
+
+## ⚠️ 原文纠错
+未发现事实性技术错误。核对范围：通读并重点核对"死锁=互等锁、fatal error 不可 recover、避免六法（含 Go 1.18 TryLock）、Mutex 不可重入（两次 Lock 自死锁）、活锁=拿到又释放不执行"的描述，与 Go 运行时行为一致。源码将术语音译为崩坏词，本卡统一为规范术语，技术结论未做更正。与 1019-channel-deadlock（channel 死锁）互补——本卡聚焦 Mutex 死锁/活锁，不重复 `[经验]`。

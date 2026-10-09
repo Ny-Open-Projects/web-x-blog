@@ -52,4 +52,4 @@ import _ "net/http/pprof" // 匿名导入即可注册 /debug/pprof 路由
 ## ⚠️ 原文纠错
 源码将若干术语音译为崩坏词，本卡已统一为规范术语（如 Go、runtime.ReadMemStats、net/http/pprof、execution trace）。本源未现黑名单词，正文一律使用规范词，纠错节不枚举任何原词崩坏词 `[经验]`。
 
-> 边界：pprof 通用用法见 `1506-observe-tracing`；GC 触发与降频见 `810-*`；本卡只讲"如何量化与剖析 GC"。
+> 边界：pprof 通用用法见 1506；GC 触发与降频见 `810-*`；本卡只讲"如何量化与剖析 GC"。

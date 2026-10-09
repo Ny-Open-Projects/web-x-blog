@@ -30,7 +30,7 @@
 - 注意 `&b[0]` 在 `len(b)==0` 时会 panic（空切片取首元素），需先判空或改用 `unsafe.SliceData`（Go 1.20+ 对空切片返回 nil 指针更安全）。
 
 ## 总结与追问预判
-收口：**[]byte→string 零拷贝靠 header 布局兼容（Data+Len）+ 共享底层；Go 1.20+ 用 `unsafe.String(&b[0], len(b))`**。预判追问：① 正方向 string→[]byte（见 `1113-string-to-byteslice.md`）；② 共享底层的致命坑（不可变被破坏、只读段 panic、GC，见 `1113-zero-copy-pitfalls.md`）。回答时把「string/slice header 前 16 字节同布局」这句抛出，最能体现底层功底。
+收口：**[]byte→string 零拷贝靠 header 布局兼容（Data+Len）+ 共享底层；Go 1.20+ 用 `unsafe.String(&b[0], len(b))`**。预判追问：① 正方向 string→[]byte（见 1113.md`）；② 共享底层的致命坑（不可变被破坏、只读段 panic、GC，见 1113.md`）。回答时把「string/slice header 前 16 字节同布局」这句抛出，最能体现底层功底。
 
 ## ⚠️ 原文纠错
 源视频转写将 slice header / string header / 指针取值 / 字节切片 等音译为崩坏词（如「反射的 sliceheader 类型」保留但「hsisivepoint」「isavepoint」指代 unsafe.Pointer、「星号表示取值」语义保留但表述崩坏、「bat」指代 byte），本卡已还原为规范术语（SliceHeader / StringHeader / unsafe.Pointer / 指针解引用 / []byte）。交付卡禁止保留任何原词崩坏写法。

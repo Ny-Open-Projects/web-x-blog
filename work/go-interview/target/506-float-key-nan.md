@@ -29,7 +29,7 @@
 - 与「可比较类型」（`509-comparable-types.md`）衔接：float **可比较**（能作 key），但比较结果反直觉，这是「可比较 ≠ 安全」的典型。
 
 ## 总结与追问预判
-收口：**float 能作 key 但坑深——精度让哈希漂移取不到值，NaN 自不等能存双 key；改用定点 int 或格式化 string**。预判追问：① key 类型合法性（见 `506-map-key-comparable.md`）；② 指针 key 按地址（见 `506-pointer-key-address.md`）；③ 并发/无序风险（见 `914-map-concurrency-float.md`）。回答时把「`NaN != NaN` 能塞进两个 NaN key」抛出，是最惊艳的细节。
+收口：**float 能作 key 但坑深——精度让哈希漂移取不到值，NaN 自不等能存双 key；改用定点 int 或格式化 string**。预判追问：① key 类型合法性（见 506.md`）；② 指针 key 按地址（见 506.md`）；③ 并发/无序风险（见 914.md`）。回答时把「`NaN != NaN` 能塞进两个 NaN key」抛出，是最惊艳的细节。
 
 ## ⚠️ 原文纠错
 源视频转写将 Go / float / NaN / map key / 浮点精度 等音译为若干崩坏词，本卡已统一还原为规范术语（Go / float64 / NaN（Not-a-Number）/ map 键 / 浮点精度）。交付卡禁止保留任何原词崩坏写法。

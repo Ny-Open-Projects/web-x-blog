@@ -26,4 +26,4 @@
 技巧4：收尾强调"i_nlink=0 且 i_count=0 才释放"，一句话封口
 ```
 
-> 边界：inode 机制本体见 `1814-inode-basics`；各单情形见 `1815-file-deleted-space-held`/`1815-truncate-reclaim`/`1815-pseudo-delete-mv-tmp`/`1815-hardlink-space-held`。
+> 边界：inode 机制本体见 1814；各单情形见 1815/`1815-truncate-reclaim`/`1815-pseudo-delete-mv-tmp`/`1815-hardlink-space-held`。
