@@ -6911,10 +6911,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1844-rst-incorrect-ack",
+        "1844-rst-use-cases.deep"
+      ],
+      "done_at": "2026-10-09T08:21:11+08:00"
     },
     "source/18/18-45 什么情况下3次握手过程中客户端会收到不正确的ack？-迅捷文字转语音-1790932052201zh.txt": {
       "id": "18-45",
@@ -7042,10 +7046,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1851-https-connection-setup",
+        "1851-tls-handshake-detail.deep"
+      ],
+      "done_at": "2026-10-09T08:21:11+08:00"
     },
     "source/18/18-52 有了HTTP 协议，为什么还要websocket和RPC 协议？-迅捷文字转语音-1790932273606zh.txt": {
       "id": "18-52",
@@ -7407,7 +7415,7 @@
     }
   },
   "next_num": 1,
-  "waves": 150,
-  "updated": "2026-10-09T08:15:03+08:00",
+  "waves": 151,
+  "updated": "2026-10-09T08:21:11+08:00",
   "consec_fail": 0
 }

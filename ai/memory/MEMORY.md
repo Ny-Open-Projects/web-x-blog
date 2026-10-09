@@ -1726,3 +1726,12 @@
 - 门禁：1279/1279 PASS、err0、warn51（0 新增，一次过）。
 - 进度：296/369 done（80%）、73 pending、1279 张卡。
 - 沉淀：「演进链答题法」——每步说清上一步会怎么死，链式推演优于报终态答案；句柄排查口诀：容器内 ulimit -n + /proc/1/limits 双查。
+
+## wave 151（2026-10-09 08:21）· 1851 HTTPS 建连 + 1844 RST
+- 源：18-51（M/2卡）/ 18-44（M/2卡）。两主题均为干净首覆盖（无 https/rst 卡）。
+- 产卡：1851-https-connection-setup.md / 1851-tls-handshake-detail.deep.md（HTTPS=HTTP夹TLS层；TLS1.2四步握手逐消息；三随机数推导对称密钥；TLS1.3 1-RTT/0-RTT/前向安全；证书验证六清单；[实测] 本机 TLS1.3 握手 1.80ms vs 纯 TCP 0.40ms）+ 1844-rst-incorrect-ack.md / 1844-rst-use-cases.deep.md（不正确 ACK 回 RST 且只杀当前握手；SYN seq=1丢→重发seq=5→旧包先到→ack=2≠6→RST；RST 四用途；RST vs FIN 四维；[实测] connection refused=内核代答 RST 448µs；RFC 5961 challenge-ACK）。
+- 撞题边界：1843 系列为握手丢包（引不重述）；1849 keepalive。
+- 黑名单：双源 0 命中；卡体自检 0 命中。
+- 门禁：1283/1283 PASS、err0、warn51（0 新增，一次过）。
+- 进度：298/369 done（81%）、71 pending、1283 张卡。
+- 沉淀：「秒拒查 REJECT、超时查 DROP」RST 排查口诀；RFC 5961 challenge-ACK 解释「RST 没生效」；TLS 源转写崩坏词量大（servercontesting=ServerKeyExchange 等）纠错节泛述处理。

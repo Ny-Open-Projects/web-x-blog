@@ -1,0 +1,34 @@
+# 1851 TLS 握手消息时序、版本演进与证书验证 深挖
+
+> 覆盖源 18-51 全文：TLS 1.2 四步握手的逐消息拆解、对称密钥推导链、证书链验证的完整清单、TLS 1.3 的重构（1-RTT/0-RTT/前向安全）、性能优化手段（会话恢复/Session Ticket/OCSP Stapling）。主卡已给五步建连全景与实测，本附录做密码学与版本演进四层深挖。
+
+## 思路与架构
+
+```text
+TLS 1.2 握手 (约 2 RTT)
+├─ C -> S: ClientHello {版本, 套件列表, 客户端随机数}
+├─ S -> C: ServerHello {选定版本/套件, 服务端随机数}
+│          Certificate {证书链: 域名/发行方/有效期}
+│          ServerKeyExchange {DH 参数或 RSA 公钥}
+│          [CertificateRequest 可选]
+│          ServerHelloDone
+├─ C -> S: ClientKeyExchange {预主密钥/ DH 公钥}
+│          ChangeCipherSpec {「接下来我加密了」}
+│          Finished {加密的握手摘要}
+└─ S -> C: ChangeCipherSpec + Finished
+会话密钥 = PRF(客户端随机数, 服务端随机数, 预主密钥)
+```
+
+## 方案取舍
+- **为什么需要两个随机数 + 预主密钥三方材料**：单一材料各有一根软肋——只有客户端随机数可被重放，只有服务端随机数无客户端参与，只有 RSA 加密的预主密钥则**一旦服务端私钥泄露、历史流量全部可解**（无前向安全）。三方混合的目的是** randomness 混合 + 抗重放 + （DHE 套件下）前向安全**：DHE/ECDHE 套件中预主密钥由临时 DH 协商得出，临时密钥不落盘，私钥泄露也解不开历史流量 [经验]。
+- **证书验证的完整清单（客户端收到 Certificate 后）**：① **链验证**——站点证书 → 中间 CA → 受信根 CA，逐级签名核验；② **域名匹配**——CN/SAN 包含目标域名；③ **有效期**——NotBefore/NotAfter 窗口；④ **用途**——KeyUsage/ExtKeyUsage 含 serverAuth；⑤ **吊销**——CRL 或 OCSP（Stapling 由服务端代查更高效）；⑥（可选）**透明度**——SCT 证明证书进了 CT 日志。任何一步失败即握手终止——自签证书报的 `certificate signed by unknown authority` 就是链验证断在第 ① 步 [经验]。
+- **TLS 1.3 为什么能压到 1-RTT**：① **ClientHello 捎带 key_share**——客户端直接带上 ECDHE 公钥，服务端回 ServerHello 时即可算出共享密钥，省去独立的密钥交换往返；② **消息合并**——ServerHello/Certificate/Finished 一包发完；③ **删除旧包袱**——RSA 静态密钥交换、ChangeCipherSpec（1.3 加密覆盖所有握手消息，无需明文通知）、CBC 套件、压缩。**0-RTT** 是 PSK 恢复会话时的附加能力，但有重放风险，只用于幂等请求 [经验]。
+- **性能优化的三板斧**：① **会话恢复**——Session ID / Session Ticket 跳过证书与密钥交换，恢复握手仅 1 RTT（1.3 甚至 0-RTT）；② **长连接复用**——TLS 握手只付一次，之后全在既有通道（与 `1849-http-vs-tcp-keepalive` 的 keep-alive 思路同构 [边界]）；③ **TLS 1.3 + ECDSA 证书**——握手消息更小、签名验签更快。实测参考：本机 TLS1.3 握手 1.80ms vs 纯 TCP 0.40ms；广域网按 RTT 放大后差距显著，这正是「CDN 必须就近 terminate TLS」的动机 [实测]。
+- **安全层的层位启示**：TLS 夹在 TCP 与 HTTP 之间的「夹层」设计带来了通用性（任何 TCP 应用都能包 TLS），也带来了 TCP 层可见性丧失（中间设备看不到域名之外的流量特征，只看得见 SNI——而 SNI 明文又引出 ECH 加密议题）。QUIC 干脆把 TLS 1.3 内嵌进传输层，同时解决握手 RTT 与队头阻塞——**层位选择是协议设计的核心权衡** [经验]。
+
+## 答题技巧
+- 按「分层位置 → 建连时序 → 密钥来源 → 开销量化」四段展开，时序图脑内画给面试官看 [经验]。
+- 被问「证书验什么」→ 六清单一口气报完（链/域名/有效期/用途/吊销/CT），完整度即分档 [经验]。
+- 被问「TLS 1.3 快在哪」→ key_share 并入 ClientHello 省一个 RTT + 消息合并 + 删除 RSA 静态交换换前向安全 [经验]。
+- 被问「怎么优化 TLS 开销」→ 会话恢复 + 长连接 + 1.3/ECDSA 三板斧，配实测数字（本机 1.8ms vs 0.4ms，广域按 RTT 放大） [实测]。
+- 主动边界到 `1843-tcp-handshake-recap`（TCP 握手细节）、`1849-http-vs-tcp-keepalive`（连接复用）、`1852-http-websocket-rpc`（协议分工全景），构成传输安全专题 [边界]。

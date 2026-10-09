@@ -444,3 +444,6 @@
 {"event": "wave", "wave": 150, "files": 2, "agents": 1, "ts": "2026-10-09T08:11:14+08:00"}
 {"event": "done", "task": "9-24", "cards": 2, "attempts": 1, "ts": "2026-10-09T08:15:02+08:00"}
 {"event": "done", "task": "6-6", "cards": 2, "attempts": 1, "ts": "2026-10-09T08:15:03+08:00"}
+{"event": "wave", "wave": 151, "files": 2, "agents": 1, "ts": "2026-10-09T08:17:26+08:00"}
+{"event": "done", "task": "18-51", "cards": 2, "attempts": 1, "ts": "2026-10-09T08:21:11+08:00"}
+{"event": "done", "task": "18-44", "cards": 2, "attempts": 1, "ts": "2026-10-09T08:21:11+08:00"}
