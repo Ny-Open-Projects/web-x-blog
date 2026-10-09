@@ -3481,10 +3481,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1220-icp-vs-covering",
+        "1220-icp-mechanics.deep"
+      ],
+      "done_at": "2026-10-09T09:03:43+08:00"
     },
     "source/12/12-21 哪些情况下会导致索引失效？-迅捷文字转语音-1790921997571zh.txt": {
       "id": "12-21",
@@ -5410,10 +5414,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1512-docker-internals",
+        "1512-namespace-cgroup.deep"
+      ],
+      "done_at": "2026-10-09T09:03:42+08:00"
     },
     "source/15/15-13 Docker 与 LXC有何不同？-迅捷文字转语音-1790927721123zh.txt": {
       "id": "15-13",
@@ -7455,7 +7463,7 @@
     }
   },
   "next_num": 1,
-  "waves": 156,
-  "updated": "2026-10-09T08:54:20+08:00",
+  "waves": 157,
+  "updated": "2026-10-09T09:03:43+08:00",
   "consec_fail": 0
 }

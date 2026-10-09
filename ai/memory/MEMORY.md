@@ -1780,3 +1780,10 @@
 - 门禁：1303/1303 PASS、err0、warn51（0 新增，一次过）。
 - 进度：308/369 done（83%）、61 pending、1303 张卡。
 - 沉淀：⚠️ 重要实测纠正——「空结构体共享 zerobase 同地址」是流传误区，go1.26.5 实测栈/new/数组地址均不同，只能依赖「值比较恒真」；spec 原文是 may or may not。写卡引用此结论时勿再复述旧误区。
+
+## wave157（2026-10-09 09:03）15-12 Docker底层原理 / 12-20 索引覆盖vs下推 —— 4 卡，310/369
+- 1512-docker-internals：三大基石 namespace 管视图 / cgroup 管配额 / UnionFS 分层镜像；cgroup v2 cpu.max 读取 Go 代码 [实测]。
+- 1512-namespace-cgroup.deep：六种 namespace 清单（pid/net/mnt/uts/ipc/user）；cgroup v1 层级 vs v2 统一层级；UnionFS CoW 链路含 whiteout。
+- 1220-icp-vs-covering：覆盖=不回表（Using index）；下推=回表前先由存储层过滤（Using index condition，5.6+）；场景 `name > 'c' AND name LIKE '%b'` ICP 减少回表。
+- 1220-icp-mechanics.deep：执行器-存储层交互链路；ICP 适用清单（二级索引/范围/LIKE 前缀通配）；联合索引后缀列价值；MRR 配合。
+- 撞题边界：1513-docker-vs-lxc 只作对比引用；覆盖索引系列 1222/1246/1247/1239 仅 1239 提及下推 → ICP 机制为真 gap。
