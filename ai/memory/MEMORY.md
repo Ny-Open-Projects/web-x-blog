@@ -1816,3 +1816,10 @@
 - 902-internals-answer-method：三件套=总结先行/表达刻意练(录音复盘)/举例类比打 why 层；自检程序 [实测] 4/5。
 - 902-internals-answer-playbook.deep：三层深度（背诵/机制/设计）；八股特征=缺决策路径；类比两腿=同构+差异；三级追问与「坦诚+验证思路」话术；表达训练最小闭环 15 分钟/次。
 - 规则 14 二次踩坑：text 模板块不算可运行语言——方法论卡也须配真实 go 块（跑通后嵌入 [实测] 输出）。
+
+## wave162（2026-10-09 10:07）18-2 网络/OS 应考 / 18-11 IO 排查 —— 4 卡，328/369
+- 182-network-os-interview-map：三技巧（准备/结构化/举例）+ 十大考点地图（OS四项+网络六项）；纠错「HTTP的三次握手」=TCP；考点映射自检 [实测] 强项 8/10。
+- 182-network-os-prep-tactics.deep：考点→证据映射；案例 STAR 化（现象/定位/修复/验证）；弱项主动暴露话术；排查/原理/对比三种骨架。
+- 1811-io-troubleshoot：iostat -xz 指标族（r/s w/s rkB/s wkB/s r_await w_await aqu-sz %util）+ pidstat 定进程；**判读优先级 应用延迟>await>aqu-sz>%util**；RAID 逻辑设备假饱和；[实测] 基线 tps132/3.09MB/s → dd 负载 7788/264MB/s。
+- 1811-io-reading-priority.deep：%util 串行假设失真（NVMe/RAID）；await 双刃剑先查量再查速；三屏蔽器（异步IO/预读/page cache）；基线-负载-对照方法论。
+- **规则 12 新教训**：L1/L2 主卡若存在**同名** stem.deep.md 即 error——深卡命名必须与主卡 stem 不同（1811-io-troubleshoot.deep → 改名 1811-io-reading-priority.deep）；规则 14 二次确认：text 块不算代码，方法论卡也需 python/go 实跑块。

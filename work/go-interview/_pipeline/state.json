@@ -6334,10 +6334,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1811-io-troubleshoot",
+        "1811-io-reading-priority.deep"
+      ],
+      "done_at": "2026-10-09T09:55:58+08:00"
     },
     "source/18/18-12 linux用户环境配置脚本的执行顺序是怎样的？-迅捷文字转语音-1790930152423zh.txt": {
       "id": "18-12",
@@ -6504,10 +6508,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "182-network-os-interview-map",
+        "182-network-os-prep-tactics.deep"
+      ],
+      "done_at": "2026-10-09T09:55:58+08:00"
     },
     "source/18/18-20 Linux 内核设计的理念是什么？-迅捷文字转语音-1790930566566zh.txt": {
       "id": "18-20",
@@ -7495,7 +7503,7 @@
     }
   },
   "next_num": 1,
-  "waves": 161,
-  "updated": "2026-10-09T09:46:10+08:00",
+  "waves": 162,
+  "updated": "2026-10-09T09:55:58+08:00",
   "consec_fail": 0
 }

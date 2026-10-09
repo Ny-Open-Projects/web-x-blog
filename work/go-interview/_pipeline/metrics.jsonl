@@ -477,3 +477,6 @@
 {"event": "wave", "wave": 161, "files": 2, "agents": 1, "ts": "2026-10-09T09:39:20+08:00"}
 {"event": "done", "task": "17-4", "cards": 2, "attempts": 1, "ts": "2026-10-09T09:46:09+08:00"}
 {"event": "done", "task": "9-2", "cards": 2, "attempts": 1, "ts": "2026-10-09T09:46:10+08:00"}
+{"event": "wave", "wave": 162, "files": 2, "agents": 1, "ts": "2026-10-09T09:48:20+08:00"}
+{"event": "done", "task": "18-2", "cards": 2, "attempts": 1, "ts": "2026-10-09T09:55:58+08:00"}
+{"event": "done", "task": "18-11", "cards": 2, "attempts": 1, "ts": "2026-10-09T09:55:58+08:00"}
