@@ -2084,10 +2084,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "917-map-element-not-addressable"
+      ],
+      "done_at": "2026-10-09T16:46:34+08:00"
     },
     "source/09/9-18 nil map 和空 map 有何不同？-迅捷文字转语音-1790917340167zh.txt": {
       "id": "9-18",
@@ -7158,10 +7161,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1845-tcp-wrong-ack-causes"
+      ],
+      "done_at": "2026-10-09T16:46:34+08:00"
     },
     "source/18/18-46 如果TCP已经建立连接，再次收到SYN会发生什么？-迅捷文字转语音-1790932053162zh.txt": {
       "id": "18-46",
@@ -7659,7 +7665,7 @@
     }
   },
   "next_num": 1,
-  "waves": 185,
-  "updated": "2026-10-09T12:38:55+08:00",
+  "waves": 187,
+  "updated": "2026-10-09T16:46:34+08:00",
   "consec_fail": 0
 }
