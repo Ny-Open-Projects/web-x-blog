@@ -1692,10 +1692,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "819-gmp-blocking-cases",
+        "819-blocking-taxonomy.deep"
+      ],
+      "done_at": "2026-10-09T10:41:06+08:00"
     },
     "source/08/8-2 面对Go runtime类问题，教你几招轻松应对-迅捷文字转语音-1790896560069zh.txt": {
       "id": "8-2",
@@ -5729,10 +5733,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "159-rate-limit-algorithms",
+        "159-limit-family-compare.deep"
+      ],
+      "done_at": "2026-10-09T10:41:06+08:00"
     },
     "source/16/16-1 设计模式有6大原则-迅捷文字转语音-1790928110522zh.txt": {
       "id": "16-1",
@@ -7543,7 +7551,7 @@
     }
   },
   "next_num": 1,
-  "waves": 167,
-  "updated": "2026-10-09T10:32:29+08:00",
+  "waves": 168,
+  "updated": "2026-10-09T10:41:06+08:00",
   "consec_fail": 0
 }

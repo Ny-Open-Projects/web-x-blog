@@ -1856,3 +1856,10 @@
 - 172-linkedlist-variants.deep：双向 O(1) 删除前提=持引用（LRU 合体）；循环链表防死循环（记起点+不变量测试）；container/list vs 手写选型。
 - 1713-string-reverse-two-ways：双指针骨架+临时变量/异或两法；[实测] 中文 []byte 异或反转 "\xbd\xa5堽\xe4" 乱码、rune 法「好你」正确；异或三性质推导。
 - 1713-reverse-utf8-xor-traps.deep：byte/rune 两级反转语义；**异或同址自交换清零雷**（i<=j 改写即爆）；Go 多赋值先求值右侧=安全版临时变量；反转变形谱系=骨架+交换条件变化。
+
+## wave168（2026-10-09 10:46）15-9 限流 / 8-19 GMP 阻塞 —— 4 卡，352/369
+- 159-rate-limit-algorithms：四算法（固定窗/滑动窗/令牌桶/漏桶）+ 三形态（延迟队列 ES 例/分布式/客户端）；[实测] 固定窗口跨边界 20 连发全放行=2 倍突刺。
+- 159-limit-family-compare.deep：选型决策树（保护谁/突发/单机全局/满了怎么办）；Redis+Lua 原子化 + fail-open/close 拍板；限流必须与上游退避成对设计。
+- 819-gmp-blocking-cases：四类阻塞（syscall/内存同步/GC/Sleep）+ M-P 解绑统一应对；waitreason 排查入口；[实测] GOMAXPROCS=1 下 4 G 睡 chan receive 主 G 照常百万计数，close 全唤醒。
+- 819-blocking-taxonomy.deep：**G 阻塞 vs M 阻塞分类学**（换 G vs 换 P）；netpoller 让网络 IO 不睡 M；sysmon 10ms 线强制 retake；waitreason+block profile+trace 三件套。
+- 边界：108-rate-limiter-go/1016 系（Go 实现体）只引不重述。
