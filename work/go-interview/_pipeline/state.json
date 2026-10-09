@@ -5751,10 +5751,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1610-decorator-components",
+        "1610-decorator-two-forms.deep"
+      ],
+      "done_at": "2026-10-09T10:10:18+08:00"
     },
     "source/16/16-2 设计模式有哪些？（一）-迅捷文字转语音-1790928117865zh.txt": {
       "id": "16-2",
@@ -6894,10 +6898,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1839-ping-icmp-echo",
+        "1839-ping-diagnostics.deep"
+      ],
+      "done_at": "2026-10-09T10:10:19+08:00"
     },
     "source/18/18-4 常用命令及技巧（二）-迅捷文字转语音-1790929652572zh.txt": {
       "id": "18-4",
@@ -7511,7 +7519,7 @@
     }
   },
   "next_num": 1,
-  "waves": 163,
-  "updated": "2026-10-09T10:03:02+08:00",
+  "waves": 164,
+  "updated": "2026-10-09T10:10:19+08:00",
   "consec_fail": 0
 }

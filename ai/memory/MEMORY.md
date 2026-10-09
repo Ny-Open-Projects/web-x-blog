@@ -1830,3 +1830,10 @@
 - 169-pay-strategy-cart：接口+三实现+购物车持策略字段+Set 运行期切换；**nil 策略防御**（strategy==nil 提示而非 panic）；纠错「配方法」=Pay 音转。
 - 169-strategy-context-tradeoffs.deep：setter/构造/函数类型/注册表四条注入路取舍；setter 三隐雷（nil 窗口/并发切换 -race 爆/可变状态）；「策略有无配置状态」为 map+函数 vs 接口划界。
 - 边界：514-deepequal-vs-equal（== 三差异）只引不重述；163-strategy（模式立论）引用。
+
+## wave164（2026-10-09 10:20）16-10 装饰器模式 / 18-39 ping 原理 —— 4 卡，336/369
+- 1610-decorator-components：四角色结构体版（接口/具体组件/抽象装饰器委托默认/具体装饰器遮蔽重写）；[实测] B(A(base))="B(A(基础功能))" 洋葱叠加；纠错「继承」=嵌入组合遮蔽。
+- 1610-decorator-two-forms.deep：结构体版 vs 闭包版（中间件）选型（方法数/状态）；顺序即语义（日志(重试) vs 重试(日志)）；装饰 vs 代理（意图）vs 适配器（换契约）vs 责任链（可短路）。
+- 1839-ping-icmp-echo：ICMP Echo 请求/应答、标识符+序列号配对、RTT/丢包率；[实测] 回环 4 包 RTT 0.069/0.076/0.084ms stddev 0.006、ttl=64；go 解析器 [实测] avg 0.071ms seq 连续；纠错「HTTP三次握手」级转写=SMPIcho→ICMP Echo。
+- 1839-ping-diagnostics.deep：ping 不通分流树（防火墙禁 ICMP 最常见误判）；服务监控探端口/主机监控才用 ping；traceroute TTL 逐跳 + MTR 假丢包判读；RTT 四元组判读。
+- 边界：162-decorator（函数式形态立论）只引不重述；1415 仅顺带提 RTT。
