@@ -5488,10 +5488,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1516-pod-creation-flow",
+        "1516-pod-flow-detail.deep"
+      ],
+      "done_at": "2026-10-09T09:22:42+08:00"
     },
     "source/15/15-17 K8s中pod的状态有哪些？怎么查看？-迅捷文字转语音-1790927919905zh.txt": {
       "id": "15-17",
@@ -6188,10 +6192,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "176-array-queue",
+        "176-linkedlist-queue.deep"
+      ],
+      "done_at": "2026-10-09T09:22:42+08:00"
     },
     "source/17/17-7 如何在Golang中实现不可重复集合？-迅捷文字转语音-1790928840989zh.txt": {
       "id": "17-7",
@@ -7463,7 +7471,7 @@
     }
   },
   "next_num": 1,
-  "waves": 157,
-  "updated": "2026-10-09T09:03:43+08:00",
+  "waves": 158,
+  "updated": "2026-10-09T09:22:42+08:00",
   "consec_fail": 0
 }

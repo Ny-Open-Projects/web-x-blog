@@ -1787,3 +1787,11 @@
 - 1220-icp-vs-covering：覆盖=不回表（Using index）；下推=回表前先由存储层过滤（Using index condition，5.6+）；场景 `name > 'c' AND name LIKE '%b'` ICP 减少回表。
 - 1220-icp-mechanics.deep：执行器-存储层交互链路；ICP 适用清单（二级索引/范围/LIKE 前缀通配）；联合索引后缀列价值；MRR 配合。
 - 撞题边界：1513-docker-vs-lxc 只作对比引用；覆盖索引系列 1222/1246/1247/1239 仅 1239 提及下推 → ICP 机制为真 gap。
+
+## wave158（2026-10-09 09:22）17-6 数组/链表队列 / 15-16 K8s Pod 创建流程 —— 4 卡，312/369
+- 176-array-queue：FIFO 队尾入队队头出队；出队 copy 前移而非 s[1:]（截取后头槽位仍持指针 [实测] full[0]!=nil=true）；数组 copy 版 10 万次 1.37s。
+- 176-linkedlist-queue.deep：演进链 数组copy(1.37s)→链表走尾O(n)(9.02s)→尾指针O(1)(8.5ms，快 1055 倍)→环形缓冲/channel hchan；tail 回补三态边界。
+- 1516-pod-creation-flow：四棒接力 apiserver 落库→scheduler 写 spec.nodeName→kubelet 拉镜像建容器→状态回写收敛；**只有 apiserver 碰 etcd**（纠错：原文说 kubelet/scheduler 监听 etcd，实为经 API Server list-watch）。
+- 1516-pod-flow-detail.deep：list-watch 取舍、调度两阶段过滤+打分、kubelet 重启 vs 控制器重建两层故障域、Pending 排查分流（无 Scheduled 查调度 / FailedCreatePodSandBox 查镜像）。
+- **k3d 实测**（本机新建集群 wave158，k3s v1.35.5）：镜像不可达时 Scheduled 事件照常出现而 Pod 卡 Pending（调度成功≠容器运行）；修镜像后 apply→Running 2.4s；conditions PodScheduled→Ready 1s 内。集群保留供后续 K8s 波复用（k3d cluster delete wave158 可删）。
+- **规则 14 新发现**：代码块白名单 go/python/java/sql/lua——bash/text 不算「可运行语言」，主卡必须有 go/sql 块（warn +1 教训，已用 Pod JSON 解析 go 块修复回 51）。
