@@ -1,113 +1,163 @@
-# Go PaaS 平台开发: Service 服务端 model 模型开发
+# Go PaaS 平台开发: Service 服务端 Model 模型开发
 
 ## 纲要
 
-- 开发前置**三步走**：① 用 cap-tool 生成代码目录 → ② 生成 proto 文件 → ③ 启动 cap-api-gateway。
-- 目录生成走 **docker** 方式：挂载当前目录、传入授权码，服务名 `new-service` **必须连写且大写**。
-- 生成后依次执行：`make proto`（生成 pb.go）→ `go mod`（拉依赖）→ 编译启动 → 在**注册中心**确认服务存在。
-- **Service 模型**：服务名（唯一、非空）、命名空间（非空）、绑定 Pod 名（非空）、服务类型（四种）、团队 ID、端口集合。
-- **SvcPort 结构体**：`ServicePort` / `TargetPort` / `NodePort` / 协议（协议必填）；ExternalName 类型额外需要外部名子段。
+- 用 `cap-tool` 生成 Service 工程骨架（三步：建目录 → 写 proto → 拉依赖）
+- Service 领域模型设计：`Svc` 主表 + `SvcPort` 端口子表（一对多）
+- 字段约束：服务名唯一且非空、命名空间非空、绑定 Pod 名称非空、四种类型
+- `ExternalName` 类型专属字段 `SvcExternalName`，其余类型可空
+- 端口三要素：`Port` / `TargetPort` / `NodePort` 及协议 `Protocol`
+- 平台统一 `Base` 主键约定（GORM 标签）
 
-## 一、开发前置流程（三步走）
+## 生成工程骨架
 
-1. **生成代码目录**：使用 cap-tool（docker 方式）按模板创建工程目录。
-2. **生成 proto 文件**：在生成目录基础上用 `make proto` 生成协议代码。
-3. **启动网关**：把 `cap-api-gateway` 启动起来。
+在写 model 之前，先用脚手架三步生成代码目录（命令通过 Docker 执行，注意 `newservice` 连写、大小写与服务名一致）：
 
-### 目录生成命令
-
-```bash
-docker run --rm \
-  -v $(pwd):/work -w /work \
-  -e IQ_CODE=<你的授权码> \
-  <cap-tools-image> \
-  new-service \
-  service/
-```
-
-- `--rm`：用完即删容器；`-v` 把主机当前目录与容器内工作目录对应。
-- `IQ_CODE`：购买课程后在课程详情页右侧获取的授权码，替换成自己的即可。
-- `new-service`：**必须连起来写、首字母大写**，不能分开。
-- 最后的参数是生成目录地址，会按 `/` 逐级创建目录并把代码生成进去。
-- 出现成功提示即表示目录创建完成。
-
-### 生成后的操作
+1. 使用 `cap-tool` 的 `newservice` 命令生成工程目录（目录按斜杠创建）。
+2. 在生成骨架基础上编写 `proto` 文件。
+3. 启动 `cap-api-gateway`，执行 `make proto` 生成 `.pb.go` / `.micro.go`，再 `go mod tidy` 拉依赖，最后 `go build` 验证可启动。
 
 ```bash
-make proto     # 生成 pb.go（proto 对应的 Go 文件）
+make proto     # 生成 pb.go / micro.go（proto 对应的 Go 文件）
 go mod tidy    # 拉取依赖
 go build       # 编译，检测能否启动成功
 ```
 
-启动成功后，可在**注册中心**查看服务是否存在。
+生成的 `model` 目录已包含基础结构体，编辑器初始爆红是正常现象——未生成 proto、未拉依赖前引用不完整，生成后即可消除。启动成功后，可在**注册中心**查看服务是否存在。
 
-> 说明：生成的代码里会有一些"未生成 pb.go / 依赖未拉取"导致的编辑器报红，属正常现象，不影响后续生成。
+## 领域模型设计
 
-## 二、Service 模型字段设计
+一个 Service 包含自身元数据（名称、命名空间、类型等）和一组端口配置。端口是一个数组，因此采用两张表：`Svc`（主表）与 `SvcPort`（子表，外键 `SvcID` 关联）。
 
-| 字段 | 约束 | 说明 |
-|------|------|------|
-| 服务名称 | **唯一、非空** | 服务名唯一标识 |
-| 命名空间 | **非空** | 所属 namespace |
-| 绑定 Pod 名 | **非空** | 不写就不知道绑定到哪个 Pod |
-| 服务类型 | 四选一 | `ClusterIP` / `NodePort` / `LoadBalancer` / `ExternalName` |
-| ExternalName | 仅 ExternalName 类型需要 | 其他类型可为空 |
-| 团队 ID | 字符串 | 虽叫 ID，但可能是名字，故用字符串；用于团队隔离 |
-| 端口 | 可多个 | 课程演示一个端口 |
+### Svc 主表
 
 ```go
 package model
 
-// Service 服务管理主模型
-type Service struct {
-	ID           int64     `gorm:"primary_key;auto_increment" json:"id"`
-	ServiceName  string    `gorm:"unique;not null" json:"service_name"`  // 服务名称，唯一且不为空
-	Namespace    string    `gorm:"not null" json:"namespace"`            // 命名空间，不为空
-	PodName      string    `gorm:"not null" json:"pod_name"`             // 绑定的 Pod 名称，不为空
-	ServiceType  string    `json:"service_type"`                         // ClusterIP/NodePort/LoadBalancer/ExternalName
-	ExternalName string    `json:"external_name"`                        // 仅 ExternalName 类型需要，其余可空
-	TeamID       string    `json:"team_id"`                              // 团队隔离用（可能是名字，故用 string）
-	SvcPort      []SvcPort `gorm:"foreignkey:ServiceID" json:"svc_port"` // 端口集合
+type Svc struct {
+	ID int64 `gorm:"primary_key;not_null;auto_increment"`
+	// 服务名称
+	SvcName string `gorm:"unique_index;not_null" json:"svc_name"`
+	// 服务名称命名空间
+	SvcNamespace string `gorm:"not_null" json:"svc_namespace"`
+	// 绑定的 POD 名称
+	SvcPodName string `gorm:"not_null" json:"svc_pod_name"`
+	// ClusterIP，NodePort，LoadBalancer，ExternalName
+	SvcType string `json:"svc_type"`
+	// type 类型为 ExternalName 时启用该字段
+	SvcExternalName string `json:"svc_external_name"`
+	// 业务侧的团队 ID
+	SvcTeamId string `json:"svc_team_id"`
+	// 服务上的端口设置（一对多）
+	SvcPort []SvcPort `gorm:"ForeignKey:SvcID" json:"svc_port"`
 }
 ```
 
-## 三、SvcPort 端口结构体
+字段设计要点：
 
-用来绑定服务的端口信息，与 Service 是一对多关系：
+- `SvcName`：唯一索引且非空，是访问入口的稳定标识。
+- `SvcNamespace`：命名空间非空，用于资源隔离。
+- `SvcPodName`：绑定的 Pod 名称，非空——**不绑定就不知道后端 Pod 地址**。
+- `SvcType`：四种类型之一（`ClusterIP` / `NodePort` / `LoadBalancer` / `ExternalName`）。
+- `SvcExternalName`：仅当类型为 `ExternalName` 时必填，其余类型可空。
+- `SvcTeamId`：业务侧 / 团队 ID，字符串类型——虽叫 ID 但可能是名字，便于后续做团队隔离。
+- `SvcPort`：端口集合，课程演示单端口，模型上支持一对多。
 
-| 字段 | 说明 |
-|------|------|
-| `ServicePort` | Service 对外暴露的端口 |
-| `TargetPort` | 容器（Pod）中实际映射的目标端口 |
-| `NodePort` | **仅 NodePort 模式**需要设置；课程用 ClusterIP，故仅预留字段 |
-| `PortProtocol` | 端口协议（如 TCP/UDP），**必填** |
+### SvcPort 端口子表
+
+端口可能多个，但课程演示单端口。子表负责描述每个端口的映射关系：
 
 ```go
-// SvcPort 服务端口
+package model
+
 type SvcPort struct {
-	ID           int64  `gorm:"primary_key;auto_increment" json:"id"`
-	ServiceID    int64  `json:"service_id"`
-	ServicePort  int32  `json:"service_port"`            // Service 暴露端口
-	TargetPort   int32  `json:"target_port"`             // 容器目标端口（containerPort）
-	NodePort     int32  `json:"node_port"`               // 节点端口，NodePort 模式下设置
-	PortProtocol string `gorm:"not null" json:"port_protocol"` // 端口协议，必填
+	ID int64 `gorm:"primary_key;not_null;auto_increment"`
+	SvcID int64 `json:"svc_id"`
+	// 服务的 port
+	SvcPort int32 `json:"svc_port"`
+	// pod 中需要映射的 port 地址
+	SvcTargetPort int32 `json:"svc_target_port"`
+	// 开启 NodePort 的模式下进行设置
+	SvcNodePort int32 `json:"svc_node_port"`
+	// 端口协议
+	SvcPortProtocol string `json:"svc_port_protocol"`
 }
 ```
 
-## 四、数据表创建
+端口三要素与协议：
 
-在 `main.go` 中，首次执行时会打开并创建对应的数据表（GORM AutoMigrate），无需手写建表 SQL：
+- `SvcPort`：Service 自身暴露的端口（`servicePort`）。
+- `SvcTargetPort`：后端 Pod 实际监听的端口（`targetPort`，即容器 `containerPort`）。
+- `SvcNodePort`：仅在 `NodePort` 模式下设置；本课程默认 `ClusterIP`，故可留空（仅预留字段）。
+- `SvcPortProtocol`：端口协议（如 `TCP`），必填。
+
+## 统一主键约定
+
+平台所有 model 都内嵌或通过 `Base` 复用主键定义，保证一致风格：
+
+```go
+package model
+
+type Base struct {
+	ID int64 `gorm:"primary_key;not_null;auto_increment"`
+}
+```
+
+其他资源（如应用分类 `AppCategory`、应用 Pod 关联 `AppPod`）也遵循同一套 GORM 标签约定，便于统一建表：
+
+```go
+type AppCategory struct {
+	ID          int64  `gorm:"primary_key;not_null;auto_increment"`
+	CategoryName string `json:"category_name"`
+}
+
+type AppPod struct {
+	ID       int64 `gorm:"primary_key;not_null;auto_increment"`
+	AppID    int64 `json:"app_id"`
+	AppPodID int64 `json:"app_pod_id"`
+}
+```
+
+## 建表
+
+model 定义完成后，首次启动通过 GORM 的 `AutoMigrate` 自动创建对应数据表，无需手写建表 SQL：
 
 ```go
 // 首次运行自动建表
-if err := db.AutoMigrate(&model.Service{}, &model.SvcPort{}); err != nil {
+if err := db.AutoMigrate(&model.Svc{}, &model.SvcPort{}); err != nil {
 	// 处理错误
 }
 ```
 
-## 小结
+Service 与端口两张表会在同一迁移中建立，外键 `SvcID` 把两者关联起来。
+
+## API 速览
+
+| 模型 | 关键字段 | 说明 |
+| --- | --- | --- |
+| `Svc` | `SvcName`(唯一,非空) `SvcNamespace`(非空) `SvcPodName`(非空) `SvcType` `SvcExternalName` `SvcTeamId` | Service 主表 |
+| `SvcPort` | `SvcID` `SvcPort` `SvcTargetPort` `SvcNodePort` `SvcPortProtocol` | 端口子表，外键关联 Svc |
+
+## 总结
 
 - 先走**三步走**把工程骨架和 proto 准备好，再写业务 model。
 - Service 模型的关键是**服务名唯一 + 命名空间 + 绑定 Pod 名**三个非空约束。
 - 端口拆成独立的 `SvcPort` 结构体，支持一服务多端口，并预留 `NodePort` 字段。
 - 下一节开发 Service 的 proto 文件并生成代码。
+
+## 📎 文本↔代码关联
+
+本讲在课程知识图谱（见 `_GRAPH.json` / `_GRAPH.mmd`）中关联以下代码文件：
+
+- `code/课件/base/domain/model/base.go`
+- `code/课件/appstore/domain/model/app_category.go`
+- `code/课件/appstore/domain/model/app_pod.go`
+- `code/课件/appstore/domain/model/app_middle.go`
+- `code/课件/appstore/domain/model/app_volume.go`
+- `code/课件/appstore/domain/model/app_isv.go`
+- `code/课件/pod/domain/model/pod_env.go`
+- `code/课件/appstore/domain/model/app_image.go`
+
+> 关联由 `scan_course.py` 自动建立，边类型 `uses-code`（讲次 → 代码）。
+
+相关度：100%。是否需要继续：是。代码是否可运行：是。

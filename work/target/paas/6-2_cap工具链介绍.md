@@ -1,52 +1,164 @@
-# Go PaaS 平台开发: cap-v3 / cap-tool / cap-api-gateway 工具介绍
+# Go PaaS 平台开发: cap 工具链与 cap-api-gateway 网关
 
 ## 纲要
 
-- 开发前先准备好三件套工具：**cap-v3**（生成 proto 代码）、**cap-tool**（生成项目脚手架）、**cap-api-gateway**（API 网关源码）。
-- **cap-v3**：基于 protoc 生成 proto 相关代码文件，**必须使用指定版本**（go-micro v3 可用；v4 因 proto 生成不兼容暂不使用）。
-- 课程已把这些工具的**二进制打进 Docker 镜像**，统一用 `docker` 执行，避免本机环境差异。
-- **cap-tool**：按自定义目录生成指定的文件与代码结构，大幅减少重复创建工作；**只生成结构，不影响正常开发**，也可手动创建或直接改模板。
-- **cap-api-gateway**：API 网关源码（由 v2 升级改造而来），可按需替换成自己的流量网关（如自建 nginx）。
+- 平台脚手架三件套：`cap-v3`（生成 proto 代码）、`cap-tool`（按目录生成工程骨架）、`cap-api-gateway`（流量网关）
+- `cap-v3`：封装 protoc 的镜像，统一在 Docker 内生成 `.pb.go` / `.micro.go`
+- `cap-tool`：基于目录模板一键生成标准微服务工程，显著提升开发效率
+- `cap-api-gateway`：基于 go-micro v2 改造的 API 网关，对外暴露 HTTP 入口
+- 版本注意事项：`protoc` 暂用 v3，go-micro 网关兼容 v1.9/v1.10，避免不兼容版本
 
-## cap-v3：proto 代码生成工具
+## 为什么需要这套工具
 
-- **作用**：生成 proto 相关的代码文件（`.pb.go` 等），是服务开发的必备前置工具。
-- **版本限制（重要）**：
-  - 官方 go-micro **v3 可用**；
-  - go-micro **v4 刚发布，proto 文件生成有问题、一直没通过**，属官方不兼容，等稳定后再升级。
-  - 必须按说明文件安装**指定版本**（不要装最新或低版本）。
-- **使用方式**：课程已把编译好的二进制打进 Docker 镜像，作为工具使用，**全部通过 `docker` 执行**：
+在 PaaS 平台中，每个资源（应用、Pod、路由、存储卷、Service）都是一个独立的微服务，都要重复创建"model / repository / proto / handler / main / 插件"等目录与样板代码。手工创建既慢又易错，因此课程提供了一套脚手架：
+
+- `cap-v3`：生成 proto 相关代码文件。课程已把指定版本的二进制打入镜像，使用时全程通过 Docker 执行，免去本机环境差异。
+- `cap-tool`：根据自定义目录模板生成工程结构。不用它也能手动创建，或直接基于模板改，但用它可避免重复劳动。
+- `cap-api-gateway`：把内部微服务聚合为统一对外 HTTP 网关，源码基于 go-micro v2 改写而来，可按需替换成自己的流量网关（如 Nginx）。
+
+## cap-v3：proto 代码生成
+
+`cap-v3` 本质是一个封装了 `protoc` 的 Docker 镜像。课程建议安装 `protoc` v3 版本：v4 刚发布时与生成逻辑存在官方不兼容问题，待稳定后再升级。使用方式统一为 Docker 运行，无需本机安装：
 
 ```bash
 # 用镜像内的 cap-v3 生成 proto 代码（示例）
-docker run --rm -v $(pwd):/work -w /work <cap-tools-image> \
-  cap-v3 --proto_path=. --go_out=. --micro_out=. proto/service.proto
+docker run --rm -v $(pwd):/work -w /work cap1573/cap-v3 \
+  --proto_path=. --micro_out=. --go_out=:. ./proto/svc/svc.proto
 ```
 
 > 提示：若自行安装，安装完成后可直接运行；本课程统一走镜像，保证团队环境一致。
 
-## cap-tool：项目脚手架生成工具
+## cap-tool：工程脚手架
 
-- **作用**：按自定义目录**生成指定的文件与代码结构**，避免每次重复创建目录和基础功能代码，**极大提高开发效率**。
-- **定位**：它**只负责生成代码结构**，不影响正常开发。
-  - 即使不用这个工具，也可以**手动创建**；
-  - 或直接拉取老师提供的模板（创建 proto 的模板、创建 service 的代码仓库）在上面改。
-- **开放情况**：cap-tool 因含慕课网的验证（授权校验），**前期暂不开放**；后期会去掉验证部分，逐步开放模板文件。
-- **替代方案**：模板文件的创建本身比较简单，**可以自己写模板**。
+`cap-tool` 是一个基于 Cobra 的命令行工具，根据模板目录（`tpl/`）渲染出完整工程。其核心 `main` 仅做命令分发：
 
-## cap-api-gateway：API 网关源码
+```go
+package main
 
-- 这是三个工具中的第三个，源码已上传至课程资料。
-- **来源**：主要基于 **v2 版本修改**而来；老师在此基础上直接生成了 **v3**。
-- **可替换**：可以根据自己的需要，把其中的内容换成**自己的流量网关**（例如自建的 nginx）。
-- **版本注意**：v3 生成过程中，该工具使用的是 **1.9 版本**，**1.10 目前不兼容**，需注意版本匹配。
+import (
+	"github.com/Cap1573/cap-tool/cmd"
+)
 
-## 小结
+func main() {
+	cmd.Execute()
+}
+```
+
+工具本身依赖 `cobra`、`viper`、`treeprint` 等：
+
+```go
+module github.com/Cap1573/cap-tool
+
+go 1.16
+
+require (
+	github.com/spf13/cobra v1.2.1
+	github.com/spf13/viper v1.8.1
+	github.com/xlab/treeprint v1.1.0
+)
+```
+
+调用方式（Docker 方式，注意服务名 `new-service` 要连写、首字母大写，最后参数是生成目录）：
+
+```bash
+docker run --rm \
+  -v $(pwd):/work -w /work \
+  -e IQ_CODE=<你的授权码> \
+  cap1573/cap-tool new-service service/
+```
+
+- `--rm`：用完即删容器；`-v` 把主机当前目录与容器内工作目录对应。
+- `IQ_CODE`：购买课程后在课程详情页右侧获取的授权码，替换成自己的即可。
+- `new-service`：**必须连起来写、首字母大写**，不能分开。
+- 最后的参数是生成目录地址，会按 `/` 逐级创建目录并把代码生成进去。
+
+### 模板机制
+
+`cap-tool` 把常用文件做成模板，按 `{{.Alias}}` 等占位符渲染。例如 `Makefile` 模板统一了 `proto / build / docker` 命令：
+
+```makefile
+.PHONY: proto
+proto:
+	sudo docker run --rm -v $(shell pwd):$(shell pwd) -w $(shell pwd) cap1573/cap-v3 --proto_path=. --micro_out=. --go_out=:. ./proto/{{.Alias}}/{{.Alias}}.proto
+
+.PHONY: build
+build:
+	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o {{.Alias}} *.go
+
+.PHONY: docker
+docker:
+	docker build . -t {{.Alias}}:latest
+```
+
+`Dockerfile` 模板（`DockerSRV`）默认把二进制与 `filebeat.yml` 一起打进镜像，使日志能统一采集：
+
+```dockerfile
+FROM alpine
+ADD {{.Alias}} /{{.Alias}}
+ADD filebeat.yml /filebeat.yml
+ENTRYPOINT [ "/{{.Alias}}" ]
+```
+
+`filebeat.yml` 模板约定把当前目录 `*.log` 采集到 Logstash：
+
+```yaml
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - ./*.log
+output.logstash:
+  hosts: ["localhost:5044"]
+```
+
+插件导入模板（`plugin.go`）则根据 `.Plugins` 自动注入 `go-plugins` 的匿名引用：
+
+```go
+var Plugin = `package main
+{{if .Plugins}}
+import ({{range .Plugins}}
+	_ "github.com/micro/go-plugins/{{.}}"{{end}}
+){{end}}
+`
+```
+
+> 说明：`cap-tool` 模板中带有慕课网的授权校验，仅作用于生成工具本身，**不影响你生成的工程代码**；生成的工程编译成二进制打包进 Docker 后独立运行，与校验无关。后续课程会逐步开放模板文件。
+
+## cap-api-gateway：流量网关
+
+`cap-api-gateway` 是课程提供的 API 网关源码，基于 go-micro v2 改写。它的作用是把内部 `go.micro.service.*` 微服务通过 `go.micro.api.*` 前缀的 API 服务对外暴露为 HTTP 接口。在 `svcApi` 工程中可见其注册方式：
+
+```go
+// 默认 API 服务名称带 "Api"，程序会自动替换前缀
+// svcApi -> 对应后端 go.micro.service.svc
+svcService := go_micro_service_svc.NewSvcService("go.micro.service.svc", service.Client())
+```
+
+注意 go-micro 版本兼容：网关源码基于 v1.9/v1.10 系列改造，切换到 `cap-v3` 生成代码时也要留意版本一致性，避免生成端与运行端不兼容。
+
+## 总结
 
 | 工具 | 作用 | 关键注意 |
 |------|------|----------|
-| cap-v3 | 生成 proto 代码 | 用 go-micro **v3**，v4 暂不兼容 |
-| cap-tool | 生成项目/代码结构 | 只生成结构；含授权校验故前期不开放，可自写模板 |
-| cap-api-gateway | API 网关源码 | 基于 v2 改造，依赖 **1.9**（1.10 不兼容） |
+| `cap-v3` | 生成 proto 代码（`.pb.go` / `.micro.go`） | 用 go-micro **v3**，v4 暂因官方不兼容不可用 |
+| `cap-tool` | 按模板生成工程/代码结构 | 只生成结构；含授权校验故前期不开放，可自写模板 |
+| `cap-api-gateway` | API 网关源码，聚合内部微服务对外暴露 HTTP | 基于 v2 改造，依赖 **1.9**（1.10 不兼容），可换成自建 Nginx |
 
 下一节正式进入 Service 服务端开发。
+
+## 📎 文本↔代码关联
+
+本讲在课程知识图谱（见 `_GRAPH.json` / `_GRAPH.mmd`）中关联以下代码文件：
+
+- `code/课件/cap-tool/tpl/ignore.go`
+- `code/课件/cap-tool/tpl/plugin.go`
+- `code/课件/cap-tool/tpl/filebeat.go`
+- `code/课件/cap-tool/tpl/docker.go`
+- `code/课件/cap-tool/go.mod`
+- `code/课件/cap-tool/tpl/makefile.go`
+- `code/课件/cap-tool/main.go`
+- `code/课件/cap-tool/tpl/hystrix.go`
+
+> 关联由 `scan_course.py` 自动建立，边类型 `uses-code`（讲次 → 代码）。
+
+相关度：95%。是否需要继续：是。代码是否可运行：否。

@@ -1,105 +1,161 @@
-# Go PaaS 平台开发: Service 服务端 proto 文件开发及代码生成
+# Go PaaS 平台开发: Service 服务端 Proto 文件开发与代码生成
 
 ## 纲要
 
-- 上一节开发了 model，这一节**根据 model 把 proto 的参数完善**——开发 Service 时 proto 参数会被直接使用到。
-- proto 中定義两类消息：**`ServiceInfo`**（服务主信息）与 **`SvcPort`**（端口信息），后者以 `repeated` 形式挂在前者下。
-- `SvcPort` 包含：ID、ServiceID、`service_port`、`service_target_port`、`service_node_port`、端口协议。
-- 查询口径：更新时可带上 Pod 信息；若不传扩展 ID，则通过 **`SvcId` 查找**。
-- 执行 `make proto` 后会生成**两个文件**：`*.pb.go` 与 `*.micro.pb.go`。
+- 在 model 基础上完善 `proto` 文件，定义 Service 的 RPC 与消息结构
+- `svc.proto` 消息设计：`SvcInfo` / `SvcPort` / `SvcId` / `AllSvc` 等
+- 代码生成命令：`make proto`（基于 `cap-v3` 镜像）产出 `.pb.go` 与 `.micro.go`
+- `go_package` 选项与路径写法，确保本机可识别生成地址
+- 平台各资源（svc / pod / route / volume / appstore）的 proto 组织方式一致
 
-## 一、proto 文件定义
+## 为什么需要 proto
 
-```proto
+上一节定义了 `Svc` / `SvcPort` 两张数据库表，但服务间调用、前端透传都需要一份语言无关的契约。`proto` 就是这份契约：`svc.proto` 描述 Service 的增删改查接口与数据结构，`protoc` 据此生成 Go 代码（`.pb.go` 消息体 + `.micro.go` 微服务桩），供业务代码直接调用。
+
+> 关键原则：**proto 字段要与 model 一一对齐**，避免两层契约不一致导致的隐性 bug。
+
+## svc.proto 完整定义
+
+```protobuf
 syntax = "proto3";
 
-package go.micro.service.service;
+package svc;
 
-// Service 服务管理服务
-service Service {
-    // 新增服务
-    rpc AddService(ServiceInfo) returns (Response) {}
-    // 删除服务
-    rpc DeleteService(ServiceId) returns (Response) {}
-    // 更新服务
-    rpc UpdateService(ServiceInfo) returns (Response) {}
-    // 根据 ID 查询服务
-    rpc FindServiceByID(ServiceId) returns (ServiceInfo) {}
-    // 查询全部服务
-    rpc FindAllService(FindAll) returns (ServiceAll) {}
+option go_package = "./proto/svc;svc";
+
+service Svc {
+	// 对外提供添加服务
+	rpc AddSvc(SvcInfo) returns (Response) {}
+	rpc DeleteSvc(SvcId) returns (Response) {}
+	rpc UpdateSvc(SvcInfo) returns (Response) {}
+	rpc FindSvcByID(SvcId) returns (SvcInfo) {}
+	rpc FindAllSvc(FindAll) returns (AllSvc) {}
 }
 
-// ServiceInfo 服务主信息（对应 model.Service）
-message ServiceInfo {
-    int64  id                    = 1;  // 主键，更新时可带上
-    string service_name          = 2;  // 服务名称，唯一
-    string service_namespace     = 3;  // 命名空间
-    string service_pod_name      = 4;  // 绑定的 Pod 名称
-    string service_type          = 5;  // ClusterIP/NodePort/LoadBalancer/ExternalName
-    string service_external_name = 6;  // 仅 ExternalName 类型需要
-    string service_team_id       = 7;  // 团队隔离
-    repeated SvcPort svc_port    = 8;  // 端口集合
+message SvcInfo {
+	int64 id = 1;
+	string svc_namespace = 2;
+	string svc_name = 3;
+	string svc_pod_name = 4;
+	string svc_type = 5;
+	string svc_external_name = 6;
+	string svc_team_id = 7;
+	repeated SvcPort svc_port = 8;
 }
 
-// SvcPort 服务端口（对应 model.SvcPort）
 message SvcPort {
-    int64  id                   = 1;  // 主键
-    int64  service_id           = 2;  // 所属 Service
-    int32  service_port         = 3;  // Service 暴露端口
-    int32  service_target_port  = 4;  // 容器目标端口
-    int32  service_node_port    = 5;  // 节点端口（NodePort 模式）
-    string service_port_protocol = 6; // 端口协议，必填
+	int64 id = 1;
+	int64 svc_id = 2;
+	int32 svc_port = 3;
+	int32 svc_target_port = 4;
+	int32 svc_node_port = 5;
+	string svc_port_protocol = 6;
 }
 
-message ServiceId {
-    int64 service_id = 1;
+message SvcId {
+	int64 id = 1;
 }
 
-message FindAll {}
-
-message ServiceAll {
-    repeated ServiceInfo service_info = 1;
+message FindAll {
 }
 
 message Response {
-    string msg = 1;
+	string msg = 1;
+}
+
+message AllSvc {
+	repeated SvcInfo svc_info = 1;
 }
 ```
 
-> 说明：`ServiceInfo` 的字段与 model 一一对应；端口用 `repeated SvcPort` 表达"一个服务可配多个端口"。
+要点说明：
 
-## 二、生成代码
+- `SvcInfo` 与 6.3 的 `Svc` model 字段一一对应，`repeated SvcPort` 对应一对多端口。
+- 更新（`UpdateSvc`）与新增（`AddSvc`）共用 `SvcInfo`；区别仅在于更新时多带 `id` / `svc_id`，由调用方填好。
+- 删除只传 `SvcId`；查单个返回 `SvcInfo`；查全部返回 `AllSvc`（`repeated SvcInfo`）。
+- **查找口径约定**：更新时可把 Pod 信息一并带上；若不传扩展 ID，则通过 `SvcId` 进行查找。
 
-执行 Makefile 中的 proto 生成命令：
+## 代码生成
 
-```bash
-make proto
+工程 `Makefile` 已内置 proto 生成目标（依赖 `cap-v3` 镜像，`--micro_out` 产出 go-micro 桩）：
+
+```makefile
+.PHONY: proto
+proto:
+	sudo docker run --rm -v $(shell pwd):$(shell pwd) -w $(shell pwd) cap1573/cap-v3 \
+	  --proto_path=. --micro_out=. --go_out=:. ./proto/svc/svc.proto
 ```
 
-生成后会得到**两个文件**：
+执行 `make proto` 后会在 `proto/svc/` 下生成两个文件：
 
 | 文件 | 说明 |
-|------|------|
-| `*.pb.go` | protobuf 消息与序列化代码 |
-| `*.micro.pb.go` | go-micro 的服务/客户端桩代码 |
+| --- | --- |
+| `svc.pb.go` | protobuf 消息结构体与序列化代码 |
+| `svc.micro.go` | go-micro 的服务/客户端桩代码（`SvcService`、`SvcHandler`）与注册代码 |
 
-若本机 `make proto` 跑不通，可把 Makefile 里的 protoc 命令**直接复制到终端执行**：
+> 注意：`go_package` 中的地址要改成**你本机可识别的导入路径**，生成出的包才能被工程正确引用。若本机 `make` 不可用，可直接复制该 `docker run` 命令到本地执行：
+>
+> ```bash
+> protoc --proto_path=. --micro_out=. --go_out=:. proto/svc/svc.proto
+> ```
 
-```bash
-# go-micro v3 生成命令（路径按本机实际情况调整）
-protoc --proto_path=. --micro_out=. --go_out=:. proto/service.proto
+## 平台的 proto 组织
+
+每个资源都有独立的 proto 工程，命名与目录一致：`svc`、`pod`、`route`、`volume`、`appstore` 各自有 `proto/<alias>/<alias>.proto`；对外暴露的 API 工程（`svcApi`、`podApi`、`routeApi`、`volumeApi`、`appStoreApi`）另有对应 `*.proto` 描述网关契约。例如 `svcApi.proto` 统一以 `Request` / `Response` 包住 method、path、header、get、post、body，作为 HTTP 网关的通用入参出参。
+
+```protobuf
+syntax = "proto3";
+package svcApi;
+option go_package = "./proto/svcApi;svcApi";
+
+service SvcApi {
+    rpc FindSvcById(Request) returns (Response){}
+    rpc AddSvc(Request) returns (Response){}
+    rpc DeleteSvcById(Request) returns (Response){}
+    rpc UpdateSvc(Request) returns (Response){}
+    rpc Call(Request) returns (Response){} // 默认接口：查询所有
+}
+
+message Request {
+    string method = 1;
+    string path = 2;
+    map<string, Pair> header = 3;
+    map<string, Pair> get = 4;
+    map<string, Pair> post = 5;
+    string body = 6;
+    string url = 7;
+}
 ```
 
-> **注意**：命令里的地址（模块路径 / 输出路径）**必须改成本机能识别的地址**，否则生成的文件 import 路径会不对。
+## API 速览
 
-## 三、查找口径约定
+| 项 | 说明 |
+| --- | --- |
+| `protoc` 版本 | 使用 `cap-v3`（v3 系列），避免 v4 不兼容 |
+| 生成产物 | `<alias>.pb.go`、`<alias>.micro.go` |
+| 生成命令 | `make proto` 或等价的 `docker run cap1573/cap-v3 ...` |
+| 关键选项 | `go_package` 必须指向本机可识别的包路径 |
 
-- **更新**时可以把 Pod 信息一并带上；
-- 若**不传扩展 ID（数据扩展 ID）**，则通过 **`SvcId`** 进行查找。
-
-## 小结
+## 总结
 
 - proto 是"对外契约"，字段要与 model 对齐，避免两边不一致。
-- 生成物是 `*.pb.go` + `*.micro.pb.go` 两个文件，缺一不可。
+- 生成物是 `*.pb.go` + `*.micro.go` 两个文件，缺一不可。
 - 生成命令的路径必须适配本机。
 - 下一节开发 Service 服务端（`service` 层）逻辑。
+
+## 📎 文本↔代码关联
+
+本讲在课程知识图谱（见 `_GRAPH.json` / `_GRAPH.mmd`）中关联以下代码文件：
+
+- `code/课件/svcapi/proto/svcApi/svcApi.proto`
+- `code/课件/routeapi/proto/routeApi/routeApi.proto`
+- `code/课件/volumeapi/proto/volumeApi/volumeApi.proto`
+- `code/课件/podapi/proto/podApi/podApi.proto`
+- `code/课件/volume/proto/volume/volume.proto`
+- `code/课件/route/proto/route/route.proto`
+- `code/课件/svc/proto/svc/svc.proto`
+- `code/课件/appstoreapi/proto/appStoreApi/appStoreApi.proto`
+
+> 关联由 `scan_course.py` 自动建立，边类型 `uses-code`（讲次 → 代码）。
+
+相关度：100%。是否需要继续：是。代码是否可运行：是。

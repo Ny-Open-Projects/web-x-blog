@@ -1,38 +1,63 @@
-# Go PaaS 平台开发: Service 类型原理介绍
+# Go PaaS 平台开发: Service 类型原理与 Service/Endpoint/Pod 关系
 
 ## 纲要
 
-- **Service 是什么**：它是 Pod 的**逻辑分组**，通过 `label selector` 把一组 Pod 聚合为一个统一入口。
-- **为什么需要 Service**：Pod 被驱逐或重建后 IP 会变，写死 Pod IP 会访问失败；Service 提供**稳定的名称 + 端口**，并自带**负载均衡**。
-- **四种类型**：`ClusterIP`（默认，集群内）、`NodePort`（暴露到节点端口）、`LoadBalancer`（云厂商负载均衡）、`ExternalName`（外部服务映射进集群）。
-- **Service 与 Endpoint、Pod 的关系**：创建 Service 会同步创建 Endpoint 对象，它记录 Pod IP + 目标端口的**映射表**，并随 Pod 状态实时更新。
-- **流量路径**：Service 不直接转发数据，而是通过 Endpoint 查到真实 Pod IP，再把流量打过去；Pod 掉线会被 Endpoint 剔除。
+- Kubernetes `Service` 的本质：Pod 的**逻辑分组**与**稳定访问入口**
+- 四种 Service 类型：`ClusterIP`、`NodePort`、`LoadBalancer`、`ExternalName` 的适用场景与端口差异
+- `Service` 与 `Pod` 的关联机制：通过 `Label Selector` + `Endpoint` 实时维护后端地址
+- `Deployment` 管 Pod 部署，`Service` 管 Pod 访问（两者是**平行的抽象层**）
+- 平台侧如何用 Go 代码描述一个 Service：以 `svc.proto` 的 `SvcInfo` 与 `SvcDataService.setService` 为例
 
-## Service 的作用
+## Service 解决了什么问题
 
-Pod 在 K8s 中运行，可能分散在不同节点上，而且**Pod 的 IP 是会变的**（被驱逐、重新调度后 IP 和名称后缀都可能变化）。如果程序里写死某个 Pod 的 IP，一旦该 Pod 重建，访问就失败了。
+在没有 `Service` 的情况下，Pod 直接运行在节点上。一旦 Pod 被驱逐、调度或重建，它的 IP 与名称（带随机后缀）都会变化。如果应用里把 Pod 的 IP 或名称写死，网络就会中断。
 
-Service 就是为了解决这个：
+`Service` 在 Pod 之上抽象出一层逻辑分组：
 
-1. **逻辑分组**：用 `label selector` 把同一类 Pod（例如 nginx 的多个副本）归为一组。
-2. **稳定入口**：访问方只写 **Service 名称 + 端口**（通过集群 DNS 解析），不用写 Pod IP。
-3. **负载均衡**：Service 默认提供负载均衡能力（策略为随机 / 轮询），把流量分摊到后端多个 Pod。
-4. **自动摘除故障**：当某个 Pod 宕机，Service 不会再往它转发流量，配合滚动更新可实现服务**在线不下线**。
+- 通过 `Service` 名称即可访问背后的一组 Pod，不必关心具体 Pod 的 IP。
+- `Service` 默认自带负载均衡能力，把流量按轮询或随机策略转发到后端 Pod。
+- Pod 宕机后，`Service` 通过 `Endpoint` 感知状态变化，自动把坏节点剔除，流量不再打到它上面。
+
+```mermaid
+flowchart LR
+    subgraph NS[命名空间 default]
+        SVC[Service: nginx<br/>类型 ClusterIP]
+        E[Endpoint: nginx<br/>实时维护 Pod IP:Port]
+        P1[Pod nginx-xxx 节点1]
+        P2[Pod nginx-yyy 节点1]
+        P3[Pod nginx-zzz 节点2]
+        P4[Pod nginx-www 节点2]
+    end
+    APP[其他 Pod/应用] -->|service 名称 + 端口| SVC
+    SVC -->|负载均衡| E
+    E -->|实时映射| P1
+    E --> P2
+    E --> P3
+    E --> P4
+```
 
 ## Service 与 Deployment、Pod 的关系
 
-- `Deployment` 负责**管理 Pod 的部署状态**（副本数、滚动更新）。
-- `Service` 与 Deployment 几乎是**平级**关系：它通过标签的逻辑关系把相关 Pod 组合起来。
-- 流量进来后，Service 通过负载均衡（轮询 / 随机）把请求打到它所管辖的 Pod 上。
+三者是分层的，但 `Service` 与 `Deployment` 之间没有从属关系：
+
+- `Deployment` 负责**管理 Pod 的部署状态**（副本数、滚动更新、重启策略）。
+- `Service` 与 `Deployment` 几乎是**平级**关系：它通过标签的逻辑关系把相关 Pod 组合起来，只管"怎么访问到"，不管"这些 Pod 怎么来的"。
+- 一个 `Service` 可以映射到多个 Pod；反过来，同一组 Pod 也可以被多个 Service 以不同端口暴露。
+
+> 面试/排查要点：能说出"Deployment 管生命周期、Service 管访问入口"这层分工，比只背"Service 转发流量"进了一层。
 
 ## 四种 Service 类型
 
-### 1. ClusterIP（默认，最常用）
+### ClusterIP
 
-- 创建后 K8s 会给服务分配一个**集群内部 IP**，只能在**集群内**访问。
-- 访问方式：直接写服务名称 + 端口（如 `nginx:80`），不用写 IP。
-- 本课程默认采用这种方式创建服务。
-- **局限**：仅限集群内访问。
+最常用的模式，也是本课程创建服务时默认采用的方式。它的特点是：
+
+- 集群内部通过 DNS 名称（`serviceName.namespace`）或 `ClusterIP` 访问。
+- 只分配集群内部 IP，**外部无法直接访问**。
+- 负载均衡策略为随机或轮询。
+- 配合多副本 + `RollingUpdate`，可实现"滚动更新、服务不中断"。
+
+典型架构：创建逻辑 Service 后，集群为其分配一个内网 IP；其他 Pod 只需写 `nginx:80` 即可访问，无需关心后端 Pod 名称与 IP。当某个 Pod 宕机，流量不会被转发到它。
 
 ```yaml
 apiVersion: v1
@@ -48,16 +73,17 @@ spec:
       targetPort: 8080 # 后端 Pod 实际监听的端口
 ```
 
-### 2. NodePort（对外暴露）
+### NodePort
 
-- 解决 ClusterIP 只能集群内访问的问题：**集群外部**可通过 `节点IP + 节点端口` 访问。
-- **端口范围受限**：默认 30000–32767，约 2768 个，节点规模大时端口资源宝贵，需谨慎使用。
-- **三个关键端口**：
-  - `port`：Service 自身端口；
-  - `targetPort`：后端 Pod（如 nginx）实际端口；
-  - `nodePort`：节点上暴露的端口。
-- 流量路径：外部 → `nodePort` → Service 的 `port` → Pod 的 `targetPort`。
-- 本课程中**中间件需要对外开外网时**采用此模式。
+用于把服务暴露给集群外部。访问方式为 `NodeIP:NodePort`。
+
+- 默认端口范围 `30000~32767`，可用数量约 2700 个，属于**宝贵资源**，需谨慎使用。
+- 涉及三个关键端口：
+  - `port`（`servicePort`）：Service 自身暴露的端口。
+  - `targetPort`：后端 Pod 实际监听的端口。
+  - `nodePort`：节点上对外开放的端口。
+
+架构：外部流量进入 `nodePort:30001` → 映射到 `Service:80` → 再映射到后端 Pod 的 `targetPort`（如 `8080`）。本课程中**中间件需要对外开外网时**采用此模式。
 
 ```yaml
 apiVersion: v1
@@ -74,19 +100,33 @@ spec:
       nodePort: 30001   # 可选，不指定则由系统分配
 ```
 
-### 3. LoadBalancer（云厂商负载均衡）
+### LoadBalancer
 
-- 在**集群外部**提供一个独立的负载均衡 IP，所有流量先打到这个 IP，再分发到节点。
-- 创建该类型时，K8s 会**自动创建 NodePort 和 ClusterIP**，并把外部负载均衡映射到它们之上。
-- 只需把 `type` 写成 `LoadBalancer` 即可。
-- **限制**：**必须云厂商支持**（不仅要提供 IP，还要支持负载均衡策略）。
+在集群外由云厂商提供一个独立的负载均衡 IP，自动创建 `NodePort` 与 `ClusterIP` 两层，并把流量统一收口到该 IP 再分发到各节点。
 
-### 4. ExternalName（外部服务映射进集群）
+- 创建时只需把 `type` 写成 `LoadBalancer`。
+- 限制：**依赖云厂商**，需要云厂商提供并管理该 IP 及负载均衡策略。
+- 中间件场景接触较多。
 
-- 与前三种完全不同：它解决的是**集群内部要访问集群外部服务**的场景。
-- 通过 DNS 把外部服务映射成集群内的一个服务名，使其能像内部服务一样被 `namespace` 隔离和管理。
-- 好处：以后即使外部服务迁入集群，**访问名称不变**，屏蔽了"服务不在 K8s 内"的差异。
-- **限制**：强依赖 DNS 解析。
+```mermaid
+flowchart LR
+    EXT[外部流量] --> LB[云厂商负载均衡 IP]
+    LB --> N1[节点 NodePort]
+    LB --> N2[节点 NodePort]
+    N1 --> SVC[Service]
+    N2 --> SVC
+    SVC --> POD[后端 Pod]
+```
+
+### ExternalName
+
+与前三种都不一样，用于把集群外部的服务"伪装"成集群内部服务来管理。
+
+- 通过 DNS `CNAME` 把外部服务名映射为集群内的 Service 名称。
+- **强依赖 DNS 解析**。
+- 价值：屏蔽外部服务不在 Kubernetes 内管理的问题；即使后续把外部服务迁移进集群，调用方仍用同一个 Service 名称，**无需改代码**。
+
+例如把外部 `shopAPI` 映射为 `Service`，调用方始终访问 `shopAPI`，无论它部署在集群内还是集群外。
 
 ```yaml
 apiVersion: v1
@@ -100,23 +140,80 @@ spec:
 
 ## Service、Endpoint 与 Pod 的关联
 
-创建 Service 时，K8s 会**同步创建一个 Endpoint 对象**，它本质上是一张**映射表**，记录：
+`Service` 如何找到背后的 Pod？答案是 `Label Selector` 与 `Endpoint` 的配合。
 
-- 后端 Pod 的 IP；
-- 对应的目标端口（`targetPort`）。
+1. 创建 `Service` 时，Kubernetes 会同步创建一个 `Endpoint` 对象。
+2. `Endpoint` 是一张"映射表"，记录 Pod 的实际 IP 与暴露的端口（`targetPort`）。
+3. `Service` 通过 `Label Selector`（如 `app-name=nginx`）选中一组 Pod。
+4. `Endpoint` 会依据 `Label Selector` 实时更新：Pod 被删除/重建时，地址随之变更。
+5. `Service` 转发流量时读取 `Endpoint` 中的地址，自动剔除异常节点。
 
-工作流程：
+```mermaid
+sequenceDiagram
+    participant C as 调用方 Pod
+    participant S as Service
+    participant E as Endpoint
+    participant P as 后端 Pod
+    C->>S: 访问 service 名称:端口
+    S->>E: 查询后端 Pod IP:Port
+    E-->>S: 返回健康 Pod 列表
+    S->>P: 负载均衡转发
+    Note over E,P: Pod 变更时 Endpoint 实时更新
+```
 
-1. Service 需要 Pod IP 时，去 **Endpoint 查表**；
-2. Endpoint 依据 **label selector** 实时维护这张表；
-3. 某个 Pod 宕机 / 被驱逐 → Endpoint **把该地址从表中摘掉** → Service 查到的都是健康节点；
-4. Service 拿到 `Pod IP + 端口` 后，直接访问目标 Pod。
+> 面试/排查要点：能说出"流量经过 Endpoint 这层映射表"，说明对 K8s 服务发现的理解已经进了一层——大多数人只停留在"访问 Service 就到 Pod"。
 
-> 面试/排查要点：能说出"流量经过 Endpoint"这层，说明对 K8s 服务发现的理解已经进了一层——大多数人只停留在"访问 Service 就到 Pod"。
+## 平台侧如何用 Go 描述一个 Service
 
-## 小结
+在 PaaS 平台中，一个 Service 的元数据用 `proto` 定义（`svc.proto`），业务代码再把 `SvcInfo` 转换成 Kubernetes 的 `v1.Service`。下面是平台 `SvcDataService.setService` 的核心逻辑（节选自 `svc/domain/service/svc_data_service.go`）：
+
+```go
+// setService 根据 SvcInfo 构建 Kubernetes v1.Service
+func (u *SvcDataService) setService(svcInfo *svc.SvcInfo) *v1.Service {
+	service := &v1.Service{}
+	// 服务基础信息
+	service.ObjectMeta = v12.ObjectMeta{
+		Name:      svcInfo.SvcName,
+		Namespace: svcInfo.SvcNamespace,
+		Labels: map[string]string{
+			"app-name": svcInfo.SvcPodName,
+			"author":   "Caplost",
+		},
+	}
+	// 课程采用 ClusterIP 模式
+	service.Spec = v1.ServiceSpec{
+		Ports: u.getSvcPort(svcInfo),
+		Selector: map[string]string{
+			"app-name": svcInfo.SvcPodName,
+		},
+		Type: "ClusterIP",
+	}
+	return service
+}
+```
+
+可以看到，平台把 `SvcPodName` 同时写进 `Labels` 与 `Selector` 的 `app-name`，正是上面讲的"通过标签选择后端 Pod"。
+
+## 总结
 
 - Service = **Pod 的逻辑分组 + 稳定入口 + 负载均衡**。
 - 四种类型按使用频率：`ClusterIP` > `NodePort` > `LoadBalancer` > `ExternalName`。
 - 真正的转发依赖 **Endpoint 映射表**，它由 `label selector` 驱动实时更新。
 - 下一节进入代码：在 PaaS 平台中开发 Service 管理功能。
+
+## 📎 文本↔代码关联
+
+本讲在课程知识图谱（见 `_GRAPH.json` / `_GRAPH.mmd`）中关联以下代码文件：
+
+- `code/课件/base/domain/service/base_data_service.go`
+- `code/课件/appstore/domain/service/appStore_data_service.go`
+- `code/课件/middleware/domain/service/middle_type_data_service.go`
+- `code/课件/svc/domain/service/svc_data_service.go`
+- `code/课件/route/domain/service/route_data_service.go`
+- `code/课件/volume/domain/service/volume_data_service.go`
+- `code/课件/pod/domain/service/pod_data_service.go`
+- `code/课件/middleware/domain/service/middleware_data_service.go`
+
+> 关联由 `scan_course.py` 自动建立，边类型 `uses-code`（讲次 → 代码）。
+
+相关度：100%。是否需要继续：是。代码是否可运行：否。
