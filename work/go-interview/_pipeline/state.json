@@ -6192,10 +6192,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1719-lru-impl-queue-hash.md"
+      ],
+      "done_at": "2026-10-09T12:06:19+08:00"
     },
     "source/17/17-2 Golang中如何实现链表？-迅捷文字转语音-1790928647720zh.txt": {
       "id": "17-2",
@@ -7143,10 +7146,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1846-syn-again-established.md"
+      ],
+      "done_at": "2026-10-09T12:06:18+08:00"
     },
     "source/18/18-47 TCP第4次挥手为什么要等待2MSL？-迅捷文字转语音-1790932054365zh.txt": {
       "id": "18-47",
@@ -7617,7 +7623,7 @@
     }
   },
   "next_num": 1,
-  "waves": 178,
-  "updated": "2026-10-09T12:00:43+08:00",
+  "waves": 179,
+  "updated": "2026-10-09T12:06:19+08:00",
   "consec_fail": 0
 }

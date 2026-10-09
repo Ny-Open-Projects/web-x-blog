@@ -1915,3 +1915,7 @@
 - 121-why-db-must-ask：「心脏/瓶颈/标尺」三层逻辑；go 考点自检映射表 [实测]；与 401/801 共用「探测能力边界」答题骨架。
 - 1519-pod-probe-three：三探针（liveness 重启/readiness 摘流量/startup 护启动）×三方式；[实测] k3d+nginx httpGet 对比——/notfound 404 在 35s 内 RESTARTS=2、健康版 0；exec 命令缺失=unknown 不计失败的坑。
 - 实验坑：pause 镜像无 shell 命令（exec unknown）；pod 更新禁改 probe（delete 后重建）；实验 Pod 已清理。
+
+## wave179（2026-10-09 12:04）18-46 再收 SYN / 17-19 LRU —— 2 卡（S 档单卡），354 done (96%)
+- 1846-syn-again-established：半开连接+源端口分水岭（同→Challenge ACK→RST 释放；异→新握手+keepalive 收尾）；RFC 5961 版本词；python 场景推演器 [实测]；1844 系列只引不重述。
+- 1719-lru-impl-queue-hash：双结构分工（哈希找得到+链表排得出）O(1)；[实测] LeetCode146 序列 1/-1 false/-1/3；纠错双点——sync.Map 不必要、数组移头 O(n) 须升双向链表；接 1259/1257/125 buffer pool LRU 变体。
