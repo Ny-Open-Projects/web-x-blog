@@ -1735,3 +1735,12 @@
 - 门禁：1283/1283 PASS、err0、warn51（0 新增，一次过）。
 - 进度：298/369 done（81%）、71 pending、1283 张卡。
 - 沉淀：「秒拒查 REJECT、超时查 DROP」RST 排查口诀；RFC 5961 challenge-ACK 解释「RST 没生效」；TLS 源转写崩坏词量大（servercontesting=ServerKeyExchange 等）纠错节泛述处理。
+
+## wave 152（2026-10-09 08:27）· 148 重平衡五步 + 168 建造者四角色
+- 源：14-8（M/2卡）/ 16-8（M/2卡）。
+- 产卡：148-rebalance-process.md / 148-rebalance-cost.deep.md（五步：触发→JoinGroup→选Leader→Leader分配→SyncGroup；Coordinator管流程/Leader管方案；STW整组停；治理三板斧 心跳三层参数/静态成员KIP-345/增量协作KIP-429；Go SDK分区数变化可能不自动触发需手动重启）+ 168-builder-pattern-roles.md / 168-builder-director-validation.deep.md（四角色；Director 在 Go 常由普通函数替代；Build() 收口校验不变量；[实测] Port(70000) 被拦截 err=invalid port 70000）。
+- 撞题边界：147 已覆盖重平衡定义/触发条件/实例数匹配（本卡取五步流程+角色分工+STW 增量）；162 已覆盖函数式 Options（本卡取经典四角色+Build 校验增量）。
+- 黑名单：⚠️ 16-8 源命中「构语言」2 次（第16/17行）——卡体全程只写 Go，纠错节泛述，自检 0 命中，规则 11 未触发。
+- 门禁：1287/1287 PASS、err0、warn51（0 新增，一次过）。
+- 进度：300/369 done（81%）、69 pending、1287 张卡。
+- 沉淀：「中间态自由、收口拦截」概括 Builder 校验设计；「what vs how」分工厂与建造者；必填项应做位置参数不塞 Option/Builder。

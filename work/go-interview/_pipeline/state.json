@@ -5303,10 +5303,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "148-rebalance-process",
+        "148-rebalance-cost.deep"
+      ],
+      "done_at": "2026-10-09T08:27:51+08:00"
     },
     "source/14/14-9 如何避免消费组的重平衡？-迅捷文字转语音-1790926217831zh.txt": {
       "id": "14-9",
@@ -5840,10 +5844,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "168-builder-pattern-roles",
+        "168-builder-director-validation.deep"
+      ],
+      "done_at": "2026-10-09T08:27:52+08:00"
     },
     "source/16/16-9 使用策略模式模拟实现多种支付方式-迅捷文字转语音-1790928566012zh.txt": {
       "id": "16-9",
@@ -7415,7 +7423,7 @@
     }
   },
   "next_num": 1,
-  "waves": 151,
-  "updated": "2026-10-09T08:21:11+08:00",
+  "waves": 152,
+  "updated": "2026-10-09T08:27:52+08:00",
   "consec_fail": 0
 }
