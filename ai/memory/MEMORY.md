@@ -1910,3 +1910,8 @@
 - 1812-shell-profile-order：两链模型（登录=profile 链/子 shell=bashrc 链）+覆盖规则（后者赢）+echo $0 埋点；[实测] fake HOME 两链分离（bash --login 只读 A、bash -i 只读 B）+python 覆盖模拟器；发行版差异 RHEL/Debian。
 - 1709-binary-tree-equal：三分支递归（双空/单空/值+左右同位递归）；[实测] true/false/false 三例与源一致；与对称树/子树判断的改法一句话区分；178 系列只引不重述。
 - 门禁踩坑：bash 块白名单（规则 14 第 10 次，1812）→ bash 实测转 [实测] 文字段+补 python 覆盖模拟器，warn 收回 51。
+
+## wave178（2026-10-09 11:58）12-1 数据库必考 / 15-19 Pod 健康检查 —— 2 卡（S 档单卡），352 done (95%)
+- 121-why-db-must-ask：「心脏/瓶颈/标尺」三层逻辑；go 考点自检映射表 [实测]；与 401/801 共用「探测能力边界」答题骨架。
+- 1519-pod-probe-three：三探针（liveness 重启/readiness 摘流量/startup 护启动）×三方式；[实测] k3d+nginx httpGet 对比——/notfound 404 在 35s 内 RESTARTS=2、健康版 0；exec 命令缺失=unknown 不计失败的坑。
+- 实验坑：pause 镜像无 shell 命令（exec unknown）；pod 更新禁改 probe（delete 后重建）；实验 Pod 已清理。

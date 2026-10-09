@@ -3272,10 +3272,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "121-why-db-must-ask.md"
+      ],
+      "done_at": "2026-10-09T12:00:43+08:00"
     },
     "source/12/12-10 为什么mysql8.0移除了查询缓存（二）-迅捷文字转语音-1790921180598zh.txt": {
       "id": "12-10",
@@ -5606,10 +5609,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1519-pod-probe-three.md"
+      ],
+      "done_at": "2026-10-09T12:00:43+08:00"
     },
     "source/15/15-2 微服务的优缺点分别是什么？-迅捷文字转语音-1790926929220zh.txt": {
       "id": "15-2",
@@ -7611,7 +7617,7 @@
     }
   },
   "next_num": 1,
-  "waves": 177,
-  "updated": "2026-10-09T11:52:25+08:00",
+  "waves": 178,
+  "updated": "2026-10-09T12:00:43+08:00",
   "consec_fail": 0
 }
