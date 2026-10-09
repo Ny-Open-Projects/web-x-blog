@@ -700,10 +700,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "505-numeric-type-convert",
+        "505-convert-overflow-guards.deep"
+      ],
+      "done_at": "2026-10-09T08:02:33+08:00"
     },
     "source/05/5-6 float或切片可以作为map类型的key吗？-迅捷文字转语音-1790757631855zh.txt": {
       "id": "5-6",
@@ -4308,10 +4312,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1256-expire-not-immediate",
+        "1256-periodic-scan-internals.deep"
+      ],
+      "done_at": "2026-10-09T08:02:33+08:00"
     },
     "source/12/12-57 Redis 内存满了，会发生什么？.mp4-迅捷文字转语音-1790924335039zh.txt": {
       "id": "12-57",
@@ -7383,7 +7391,7 @@
     }
   },
   "next_num": 1,
-  "waves": 147,
-  "updated": "2026-10-09T07:55:07+08:00",
+  "waves": 148,
+  "updated": "2026-10-09T08:02:33+08:00",
   "consec_fail": 0
 }
