@@ -1,10 +1,32 @@
 ---
 disableNunjucks: true
 title: "Kubernetes 认证实战: 用 Deployment 一条命令跑起应用并用 Service 暴露出去"
-date: 2021-04-11 12:00:00
+date: 2026-10-10 07:35:00
 tags: [Kubernetes, CKA, Deployment, ReplicaSet, Service, NodePort]
 categories: [Kubernetes 认证实战]
 ---
+
+# Kubernetes 认证实战: 用 Deployment 一条命令跑起应用并用 Service 暴露出去
+
+有了镜像之后，把一个应用跑进 Kubernetes 只需要两条命令：`kubectl create deployment` 和 `kubectl expose`。
+
+结论先给：
+
+1. **先学会用命令行创建资源**（CKA 考试时间紧，写 YAML 太慢），再回头补 YAML 的字段结构；
+2. `create deployment` 背后真正的关系是**三层**——**Deployment 管 ReplicaSet，ReplicaSet 管 Pod**；
+3. **部署任何镜像之前，先确保这个镜像能拉下来**（`docker pull` 试一下），别等 Pod 卡在 `ImagePullBackOff` 才回头查；
+4. **ClusterIP 是集群内部的虚拟 IP**，你本机没有到它的路由，浏览器访问会一直转圈；想从集群外访问就用 **`--type=NodePort`**，走 `节点IP:NodePort`。
+
+从 `docker run` 迁移过来的心智模型对照：
+
+```mermaid
+graph LR
+    D["docker run -d --name web -p 80 镜像"] --> K["kubectl create deployment web --image=镜像"]
+    K --> S["kubectl expose deployment web --port=80 --type=NodePort"]
+    S --> A["Deployment<br/>部署控制器（缩写 deploy）"]
+    A --> B["ReplicaSet<br/>副本集（缩写 rs）"]
+    B --> C["Pod<br/>最小部署单元（缩写 po）"]
+```
 
 ## 纲要
 
@@ -138,7 +160,12 @@ default/
 
 ### 第三步：暴露服务
 
-现在 Pod 起来了，但它只有一个集群内部的 Pod IP，你在自己电脑上访问不到——Pod IP 是私有内网地址，你的机器根本没有路由到它。
+现在 Pod 起来了，但它在自己电脑上访问不到——原因有两层，别混为一谈：
+
+- **Pod IP** 是集群内部的私有地址，你的机器根本没有到它的路由；
+- 就算创建了 Service，默认的 **ClusterIP 也是集群内部的虚拟 IP**，从集群外同样访问不到（浏览器会一直转圈）。
+
+所以要在集群外访问，Service 的类型必须选 **`NodePort`**（或 `LoadBalancer`），然后用**节点 IP + 节点端口**访问。
 
 ```bash
 # 先看一眼这个内部 IP
