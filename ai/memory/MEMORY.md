@@ -1897,3 +1897,7 @@
 ## wave174（2026-10-09 11:35）5-15 方法探测 / 17-16 插入排序 —— 2 卡（S 档单卡），344 done (93%)
 - 515-has-method-two-ways：断言到匿名接口字面量 vs reflect MethodByName+IsValid；[实测] 关键反例——指针接收者方法在值上探测 false（两法一致，同查方法集）；空串守卫；与 1119（反射逃逸）划界。
 - 1716-insertion-sort：三行内核 key/右移/归位；[实测] [5,3,8,2,1]→[1,2,3,5,8] 三例与源一致；卖点「稳定+近有序 O(n)」；排序三兄弟定位（冒泡交换/选择选最/插入移位），补齐 1714/1715/1716/1717 系列。
+
+## wave175（2026-10-09 11:41）15-17 Pod 状态 / 18-37 大文件 IO —— 2 卡（S 档单卡），346 done (94%)
+- 1517-pod-status-six：五 phase+ContainerCreating 展示态；[实测] k3d 中 STATUS 列 ImagePullBackOff 的 Pod `.status.phase` 实为 Pending（phase vs reason 两层级）+ python -o json 解析块；排查三板斧 get/describe/-o。
+- 1837-large-file-io-split：缓存污染→大文件直接 IO+异步 IO；nginx 阈值分流范本；[实测] 256MB 顺序读冷 818 vs 热 953MB/s 仅差 16%（NVMe 顺序大读缓存收益小→反证分流合理）；io_uring 5.1+ 版本边界；传统 aio 仅 O_DIRECT。

@@ -5564,10 +5564,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1517-pod-status-six.md"
+      ],
+      "done_at": "2026-10-09T11:40:29+08:00"
     },
     "source/15/15-18 K8s中什么是静态 Pod？-迅捷文字转语音-1790927921246zh.txt": {
       "id": "15-18",
@@ -6938,10 +6941,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1837-large-file-io-split.md"
+      ],
+      "done_at": "2026-10-09T11:40:29+08:00"
     },
     "source/18/18-38 深入理解IP地址-迅捷文字转语音-1790931615044zh.txt": {
       "id": "18-38",
@@ -7593,7 +7599,7 @@
     }
   },
   "next_num": 1,
-  "waves": 174,
-  "updated": "2026-10-09T11:34:03+08:00",
+  "waves": 175,
+  "updated": "2026-10-09T11:40:29+08:00",
   "consec_fail": 0
 }
