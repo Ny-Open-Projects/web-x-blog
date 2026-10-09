@@ -1940,3 +1940,8 @@
 ## wave184（2026-10-09 12:38）4-3 打动面试官 / 18-21 ELF vs PE —— 2 卡（S 档单卡），364 done (99%)
 - 403-answer-basics-to-impress：三招「全面多解/联系实际/深挖坑点」+四层答题骨架；python 分层自检器 [实测] 回答一 1 层 vs 回答二 4 层；与 401 划界（为什么问 vs 怎么答）。
 - 1821-elf-vs-pe-cross-os：两根因（syscall 接口+二进制格式）+「格式=文件头协议约定」；[实测] file 命令——macOS /bin/ls=Mach-O arm64e vs Linux busybox=ELF x86-64 ld-musl（docker cp 提取）；python 解读器 [实测]；第三层纠错：动态链接器差异。
+
+## wave185（2026-10-09 12:42）18-42 同端口双协议 / 9-19 删 key 不释放 —— 2 卡（S 档单卡），366 done (99%)
+- 1842-tcp-udp-same-port：协议号一级分发+端口号二级分发；[实测] python 同端口 54321 绑 TCP+UDP 共存成功、同协议重绑 Address already in use；SO_REUSEPORT 边界。
+- 919-map-delete-memory：三段 MemStats 实验（2.5MB→全删 2.5MB→nil 回收）+渐进式扩容/装填因子 6.5/懒迁移机制；「不缩容」是低延迟设计取舍；姊妹题 920（重整方案）只引。
+- 规则 11 第 2 次踩坑：919 纠错节引用「购语言」原文 → 改述「多组同源崩坏串」修复，err 收回 0。

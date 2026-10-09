@@ -2118,10 +2118,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "919-map-delete-memory.md"
+      ],
+      "done_at": "2026-10-09T12:38:55+08:00"
     },
     "source/09/9-2 怎样回答底层原理类问题才能证明自己真正掌握了？-迅捷文字转语音-1790913188740zh.txt": {
       "id": "9-2",
@@ -7097,10 +7100,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1842-tcp-udp-same-port.md"
+      ],
+      "done_at": "2026-10-09T12:38:54+08:00"
     },
     "source/18/18-43 第三次握手丢失了，会发生什么？-迅捷文字转语音-1790931845111zh.txt": {
       "id": "18-43",
@@ -7653,7 +7659,7 @@
     }
   },
   "next_num": 1,
-  "waves": 184,
-  "updated": "2026-10-09T12:34:41+08:00",
+  "waves": 185,
+  "updated": "2026-10-09T12:38:55+08:00",
   "consec_fail": 0
 }
