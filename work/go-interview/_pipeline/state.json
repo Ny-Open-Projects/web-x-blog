@@ -33,10 +33,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "202-go-features-overview",
+        "202-features-interview-map.deep"
+      ],
+      "done_at": "2026-10-09T10:18:23+08:00"
     },
     "source/04/4-1 为什么基础类面试题是必问的？-迅捷文字转语音-1790755565328zh.txt": {
       "id": "4-1",
@@ -4971,10 +4975,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "141-why-mq-matters",
+        "141-mq-landscape.deep"
+      ],
+      "done_at": "2026-10-09T10:18:23+08:00"
     },
     "source/14/14-10 kafka topic删除的流程是怎样的？-迅捷文字转语音-1790926219789zh.txt": {
       "id": "14-10",
@@ -7519,7 +7527,7 @@
     }
   },
   "next_num": 1,
-  "waves": 164,
-  "updated": "2026-10-09T10:10:19+08:00",
+  "waves": 165,
+  "updated": "2026-10-09T10:18:23+08:00",
   "consec_fail": 0
 }

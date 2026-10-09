@@ -1837,3 +1837,10 @@
 - 1839-ping-icmp-echo：ICMP Echo 请求/应答、标识符+序列号配对、RTT/丢包率；[实测] 回环 4 包 RTT 0.069/0.076/0.084ms stddev 0.006、ttl=64；go 解析器 [实测] avg 0.071ms seq 连续；纠错「HTTP三次握手」级转写=SMPIcho→ICMP Echo。
 - 1839-ping-diagnostics.deep：ping 不通分流树（防火墙禁 ICMP 最常见误判）；服务监控探端口/主机监控才用 ping；traceroute TTL 逐跳 + MTR 假丢包判读；RTT 四元组判读。
 - 边界：162-decorator（函数式形态立论）只引不重述；1415 仅顺带提 RTT。
+
+## wave165（2026-10-09 10:27）14-1 MQ 频率升高 / 2-2 Go 七特性 —— 4 卡，340/369
+- 141-why-mq-matters：三关键词（解耦/缓冲/异步）+ 六推动力 + **代价三面**（最终一致/幂等/运维）；[实测] 100 缓冲吸收 150 突发、50 背压拒绝——缓冲有上限。
+- 141-mq-landscape.deep：MQ 四板块备考地图（语义/可靠性/协同/进阶）+ 14-x 系列对照；Kafka/RabbitMQ/RocketMQ 一句话选型；缺口自查：延迟消息/死信/积压治理。
+- 202-go-features-overview：七特性每条带「注意什么」（goroutine 数量控制/channel nil/closed/defer 循环积压）；[实测] 七特性最小集合演示。
+- 202-features-interview-map.deep：特性→考察深度地图+卡库锚点；**协同矩阵**（多返回值↔error/channel↔goroutine/defer↔panic）；与 201 成功因素边界。
+- **文件名规则教训**：编号必须**三位数**（2-2→202 而非 22）——`<三位编号>-<英文短横线>.md`，error 2 个后修正。
