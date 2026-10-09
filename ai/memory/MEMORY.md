@@ -1802,3 +1802,10 @@
 - 1714-bubble-sort：相邻逆序交换+每轮冒最大值+swapped 剪枝；[实测] 53821 逐轮与源一致；n=1000 cmp=498015/swap=248090（=逆序数，期望 n(n-1)/4）；已序 1 轮 4 次比较 O(n)。
 - 1714-bubble-vs-selection.deep：对账 冒泡 248090 swap vs 选择 993（250 倍）；逆序数统一量尺（冒泡交换数=插入移动数=逆序数）；鸡尾酒/梳排序改进谱系；生产 pdqsort。
 - 边界：615-embedding-inheritance 只引不重述（嵌入全景）；1715 选择排序主卡在 wave146。
+
+## wave160（2026-10-09 09:46）17-10 最大子树和 / 14-12 sarama 位移提交 —— 4 卡，320/369
+- 1710-max-subtree-sum：后序一趟、返回值传子树和、答案走全局旁路；[实测] 源树=12、全负树(-5,-2,-9)=-2（单节点）、树4(-10,6)=6（子树≠路径）；MinInt 纠错原文 32 位溢出说法。
+- 1710-subtree-vs-path.deep：双通道递归范式（树形 DP 通用骨架）；子树整棵计入 vs 路径可剪负的分水岭；Go 栈可增长 vs 显式栈迭代化。
+- 1412-sarama-offset-commit：AutoCommit.Enable/Interval(1s)；重复窗口=上次提交点→崩溃点，interval 只缩不灭；MarkMessage 业务成功后标记；纠错「北京缓存」=Redis 音转。
+- 1412-offset-timing-matrix.deep：时序矩阵（先提交后处理=至多一次/先处理后提交=至少一次）；MarkMessage≠CommitMessages（标记 vs 显式即时提交）；窗口下界=单批处理时长；rebalance 只 Mark 不提交=清零式重放。
+- 边界：1417-consumer-commit（可靠性哲学）只引不重述，1411-offset-topic（存储设计）引用。

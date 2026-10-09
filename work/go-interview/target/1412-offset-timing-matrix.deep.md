@@ -1,0 +1,33 @@
+# 1412 位移提交时机矩阵与窗口账本深挖
+
+> 覆盖源 14-12 的机制延伸：四种「处理/提交」时序的语义矩阵、自动提交的内部节奏（sarama 的 offset manager 与 session 提交路径）、MarkMessage 与 CommitMessages 双 API 辨析、rebalance 场景的提交联动。主卡已给两档配置与窗口，本附录做时机与机制深挖。
+
+## 思路与架构
+
+```text
+处理与提交的时序矩阵 (横轴: 先后)
+├─ 先提交后处理 (自动提交的坏例)
+│   ├─ 语义: 至多一次 (处理失败=消息永久跳过)
+│   └─ 后果: 静默丢失 —— 高可靠场景禁忌
+├─ 先处理后提交 (手动 MarkMessage)
+│   ├─ 语义: 至少一次 (处理成功但未提交即崩=重放)
+│   └─ 后果: 重复消费 -> 消费端幂等兜底
+├─ 周期提交 (自动提交真实行为)
+│   ├─ 提交点离散, 与处理完成点无关
+│   └─ 重复窗口 = 上次提交点到崩溃点 (≈ interval + 批时长)
+└─ 事务提交 (produce+consume offset 原子)
+    └─ consume-transform-produce 链路的精确一次路径
+        (见 1413 事务系列, 此处只占位)
+```
+
+## 方案取舍
+- **时序矩阵是位移提交的「总纲」**：自动/手动只是开关，**提交动作落在处理之前还是之后**才是语义开关——之前是至多一次（可能丢）、之后是至少一次（可能重）。原版 Java 客户端的自动提交还会在 poll 循环里**顺手提交上一轮的位移**，时机更隐蔽；sarama 则由 offset manager 周期刷盘。答出「开关背后的时序决定语义」，比背配置高一档 [经验]。
+- **MarkMessage vs CommitMessages 的机制分工**：MarkMessage 只是把消息标记进 session 的待提交集合——**位移真正落 `__consumer_offsets` 由 offset manager 按 AutoCommit.Interval（手动模式下也生效）或 session 结束触发**；CommitMessages 则绕过节奏**显式即时提交**。推论：手动模式只调 MarkMessage 仍有最长 interval 的重复窗口，要即时落盘得补 CommitMessages——「手动≠实时」是 sarama 用户的常见误区 [源码]。
+- **窗口账本的两个放大器**：① interval 调小 → 提交写放大（每次提交都是位移主题的一条消息，ConsumerGroup 全员 × 每分区）；② 单批处理时长拉长 → 窗口内滞留消息增多。极端对照：interval=1s + 批处理 10ms，窗口≈1s；interval=1s + 单条处理 30s（如重 AI 推理），窗口≈30s——**窗口下界是批处理时长，不是 interval**，调 interval 前先看单批耗时 [经验]。
+- **rebalance 联动的重复放大**：重平衡把分区从 A 挪到 B 时，A 未提交的位移随 session 关闭丢弃，B 从已提交点继续——若 A 长期「只 Mark 不提交」，一次 rebalance 就把整个 Mark 历史清零式重放。对策：rebalance 回调里（或 session 退出前）补一次显式提交，把「周期提交」的尾部风险钉死 [经验]。
+
+## 答题技巧
+- 用时序矩阵开场：先讲「提交在处理之前=可能丢、之后=可能重」，再落到自动/手动的配置——语义先于参数 [经验]。
+- 报窗口账本：「重复窗口下界是单批处理时长，interval 调小只缩尾部不灭窗口」——一句话化解「调小 interval 行不行」的追问 [经验]。
+- 被问「MarkMessage 了为什么还重复」→ 讲 offset manager 的提交节奏 + rebalance 清零放大器，给出 session 退出前补提交的修法 [源码]。
+- 主动边界到 `1417-consumer-commit`（宁可重复不丢失的可靠性哲学与幂等配套）、`1411-offset-topic`（位移主题的存储设计）、`1413-kafka-exactly-once`（事务化精确一次）、`147-consumer-rebalance`/`148-rebalance-process`（重平衡触发与流程），构成「消费端可靠性」专题 [边界]。

@@ -5016,10 +5016,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1412-sarama-offset-commit",
+        "1412-offset-timing-matrix.deep"
+      ],
+      "done_at": "2026-10-09T09:37:11+08:00"
     },
     "source/14/14-13 幂等生产者和事务生产者有什么区别？-迅捷文字转语音-1790926409927zh.txt": {
       "id": "14-13",
@@ -5933,10 +5937,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1710-max-subtree-sum",
+        "1710-subtree-vs-path.deep"
+      ],
+      "done_at": "2026-10-09T09:37:11+08:00"
     },
     "source/17/17-11 算法的复杂度是怎么评估的？-迅捷文字转语音-1790929034103zh.txt": {
       "id": "17-11",
@@ -7479,7 +7487,7 @@
     }
   },
   "next_num": 1,
-  "waves": 159,
-  "updated": "2026-10-09T09:30:11+08:00",
+  "waves": 160,
+  "updated": "2026-10-09T09:37:11+08:00",
   "consec_fail": 0
 }
