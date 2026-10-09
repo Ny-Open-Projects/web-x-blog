@@ -1893,3 +1893,7 @@
 - 1823-cpu-mem-readwrite：读三步（定址→取数→入寄存器）/写三步（先入寄存器）+ 取指场景；[实测] 行/列遍历 8192² row 353~376ms vs col 928~968ms ≈2.5 倍（缓存布局量化）；与 811（层级/false sharing）只引不重述。
 - 1518-static-pod：k3d(k3s) 真实全链路 [实测]——manifest 入 pod-manifests→10s 自动拉起 Running、名字改写 <名>-<节点名>、kubectl delete 后 8s 原地复活、删 manifest 才 NotFound；k3s mirror pod owner=Node。口诀「文件生、节点死、删不掉」。
 - 门禁踩坑：bash 块不算白名单（规则 14 第 9 次）→ 补 python 静态 Pod 识别器实跑收编 warn 回 51。实验 Pod 已清理（manifest 删除→NotFound）。
+
+## wave174（2026-10-09 11:35）5-15 方法探测 / 17-16 插入排序 —— 2 卡（S 档单卡），344 done (93%)
+- 515-has-method-two-ways：断言到匿名接口字面量 vs reflect MethodByName+IsValid；[实测] 关键反例——指针接收者方法在值上探测 false（两法一致，同查方法集）；空串守卫；与 1119（反射逃逸）划界。
+- 1716-insertion-sort：三行内核 key/右移/归位；[实测] [5,3,8,2,1]→[1,2,3,5,8] 三例与源一致；卖点「稳定+近有序 O(n)」；排序三兄弟定位（冒泡交换/选择选最/插入移位），补齐 1714/1715/1716/1717 系列。

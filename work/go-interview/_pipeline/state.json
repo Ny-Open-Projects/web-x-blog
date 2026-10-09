@@ -616,10 +616,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "515-has-method-two-ways.md"
+      ],
+      "done_at": "2026-10-09T11:34:03+08:00"
     },
     "source/05/5-16 大佬传授几招for range闭坑秘笈-迅捷文字转语音-1790856034240zh.txt": {
       "id": "5-16",
@@ -6114,10 +6117,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1716-insertion-sort.md"
+      ],
+      "done_at": "2026-10-09T11:34:03+08:00"
     },
     "source/17/17-17 如何在Golang实现快速排序？-迅捷文字转语音-1790929415506zh.txt": {
       "id": "17-17",
@@ -7587,7 +7593,7 @@
     }
   },
   "next_num": 1,
-  "waves": 173,
-  "updated": "2026-10-09T11:27:38+08:00",
+  "waves": 174,
+  "updated": "2026-10-09T11:34:03+08:00",
   "consec_fail": 0
 }
