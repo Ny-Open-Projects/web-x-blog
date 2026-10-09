@@ -6708,10 +6708,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1827-mmap-limitations",
+        "1827-mmap-usage-boundary.deep"
+      ],
+      "done_at": "2026-10-09T11:03:59+08:00"
     },
     "source/18/18-28 进程间通信的方式有哪些？-迅捷文字转语音-1790930999930zh.txt": {
       "id": "18-28",
@@ -6800,10 +6804,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1831-disk-scheduling",
+        "1831-disk-scheduling-variants.deep"
+      ],
+      "done_at": "2026-10-09T11:03:59+08:00"
     },
     "source/18/18-32 阻塞与非阻塞 IO-迅捷文字转语音-1790931211370zh.txt": {
       "id": "18-32",
@@ -7567,7 +7575,7 @@
     }
   },
   "next_num": 1,
-  "waves": 170,
-  "updated": "2026-10-09T10:55:50+08:00",
+  "waves": 171,
+  "updated": "2026-10-09T11:03:59+08:00",
   "consec_fail": 0
 }
