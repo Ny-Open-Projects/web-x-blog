@@ -6355,10 +6355,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1709-binary-tree-equal.md"
+      ],
+      "done_at": "2026-10-09T11:52:25+08:00"
     },
     "source/18/18-1 Linux相关的知识点那么多，面试应该怎么准备？-迅捷文字转语音-1790929638870zh.txt": {
       "id": "18-1",
@@ -6433,10 +6436,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1812-shell-profile-order.md"
+      ],
+      "done_at": "2026-10-09T11:52:25+08:00"
     },
     "source/18/18-13 2＞&1到底是怎么来的？-迅捷文字转语音-1790930340215zh.txt": {
       "id": "18-13",
@@ -7605,7 +7611,7 @@
     }
   },
   "next_num": 1,
-  "waves": 176,
-  "updated": "2026-10-09T11:46:14+08:00",
+  "waves": 177,
+  "updated": "2026-10-09T11:52:25+08:00",
   "consec_fail": 0
 }

@@ -522,3 +522,6 @@
 {"event": "wave", "wave": 176, "files": 2, "agents": 1, "ts": "2026-10-09T11:42:42+08:00"}
 {"event": "done", "task": "4-1", "cards": 1, "attempts": 1, "ts": "2026-10-09T11:46:14+08:00"}
 {"event": "done", "task": "8-1", "cards": 1, "attempts": 1, "ts": "2026-10-09T11:46:14+08:00"}
+{"event": "wave", "wave": 177, "files": 2, "agents": 1, "ts": "2026-10-09T11:48:23+08:00"}
+{"event": "done", "task": "18-12", "cards": 1, "attempts": 1, "ts": "2026-10-09T11:52:25+08:00"}
+{"event": "done", "task": "17-9", "cards": 1, "attempts": 1, "ts": "2026-10-09T11:52:25+08:00"}
