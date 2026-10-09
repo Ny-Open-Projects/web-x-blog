@@ -352,10 +352,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "403-answer-basics-to-impress.md"
+      ],
+      "done_at": "2026-10-09T12:34:41+08:00"
     },
     "source/04/4-4 Go包管理的方式有哪些？（一）-迅捷文字转语音-1790755582919zh.txt": {
       "id": "4-4",
@@ -6655,10 +6658,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1821-elf-vs-pe-cross-os.md"
+      ],
+      "done_at": "2026-10-09T12:34:41+08:00"
     },
     "source/18/18-22 用户态和内核态是如何切换的？-迅捷文字转语音-1790930796840zh.txt": {
       "id": "18-22",
@@ -7647,7 +7653,7 @@
     }
   },
   "next_num": 1,
-  "waves": 183,
-  "updated": "2026-10-09T12:29:16+08:00",
+  "waves": 184,
+  "updated": "2026-10-09T12:34:41+08:00",
   "consec_fail": 0
 }

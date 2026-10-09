@@ -1936,3 +1936,7 @@
 ## wave183（2026-10-09 12:29）9-21 不加锁更新 map / 18-19 学好 Linux —— 2 卡（S 档单卡），362 done (98%)
 - 921-map-lockfree-update：写-复制-切换（私有构建→atomic.Pointer 切换→无锁快照读）；[实测] 反例 fatal error: concurrent map writes 不可 recover、正解 5 次整表更新零冲突；纠错核心——「赋值原子」内存模型不保证，须 atomic.Pointer（1.19+）。
 - 1819-linux-learning：专项突破+动手敲+时间盒三词框架；python 学习计划自检器 [实测] 报 2 缺口；「知识内化成技能」理论支撑。
+
+## wave184（2026-10-09 12:38）4-3 打动面试官 / 18-21 ELF vs PE —— 2 卡（S 档单卡），364 done (99%)
+- 403-answer-basics-to-impress：三招「全面多解/联系实际/深挖坑点」+四层答题骨架；python 分层自检器 [实测] 回答一 1 层 vs 回答二 4 层；与 401 划界（为什么问 vs 怎么答）。
+- 1821-elf-vs-pe-cross-os：两根因（syscall 接口+二进制格式）+「格式=文件头协议约定」；[实测] file 命令——macOS /bin/ls=Mach-O arm64e vs Linux busybox=ELF x86-64 ld-musl（docker cp 提取）；python 解读器 [实测]；第三层纠错：动态链接器差异。
