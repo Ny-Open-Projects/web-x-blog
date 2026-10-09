@@ -32,12 +32,7 @@
 - 本卡只讲底层数据结构与 selectgo；特性见 909、空 select 优化见 909 [边界]。
 - channel 底层结构见 `1011-*`(若有的 channel 实现)；关闭 channel 操作见 612——本卡只引不重述 [边界]。
 
-## 总结与追问预判
-select 底层是「编译期 scase + 运行时 selectgo 轮询」。面试常追问「多个就绪如何选」（随机）、「空 select 干嘛用」（挂起）。
-
-## ⚠️ 原文纠错
-1. 事实核校： [经验] select 多路复用、scase(c/element)、selectgo 遍历就绪、返回索引+读成功——均正确。
-2. 崩坏词归一：源码将若干术语音译为崩坏词（slack/slect/stat 等），本卡统一为规范术语（select、scase、selectgo、多路复用、通道、协程等）。
+## 关键代码
 
 ```go
 // select 底层（简化）：编译期生成 scase 数组，运行时 selectgo 调度
@@ -52,3 +47,10 @@ type scase struct {
 func selectgo(cases []scase) (chosen int, recvOK bool) // 运行时实现，此处仅示意签名
 // 注：select 是控制结构非数据类型；每个非 default case 只绑定一个 channel 收发
 ```
+
+## 总结与追问预判
+select 底层是「编译期 scase + 运行时 selectgo 轮询」。面试常追问「多个就绪如何选」（随机）、「空 select 干嘛用」（挂起）。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] select 多路复用、scase(c/element)、selectgo 遍历就绪、返回索引+读成功——均正确。
+2. 崩坏词归一：源码将若干术语音译为崩坏词（slack/slect/stat 等），本卡统一为规范术语（select、scase、selectgo、多路复用、通道、协程等）。

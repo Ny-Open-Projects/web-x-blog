@@ -31,12 +31,7 @@
 ## 版本与兼容性
 - `WITH ROLLUP` 为 MySQL/SQL 标准扩展；`GROUPING()` 需 MySQL 8.0+。PostgreSQL 用 `GROUP BY ROLLUP(...)` 语法，SQL Server 用 `GROUP BY ... WITH ROLLUP`。
 
-## 总结与追问预判
-ROLLUP 与 CASE WHEN 是多维度报表基石。配合本波「去重聚合」「自定义排序」三张卡，面试常见 SQL 统计题基本覆盖。
-
-## ⚠️ 原文纠错
-1. 事实核校： [经验] ROLLUP 与 `GROUP BY ... WITH CUBE` 不同，ROLLUP 只按最左前缀上卷、CUBE 生成全组合，别混用——正确。
-2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（分组、汇总、小计、分级、条件分支等）。
+## 关键代码
 
 ```sql
 -- 每个商品销售额 + 总计（ROLLUP 追加超级累加行）
@@ -55,3 +50,10 @@ SELECT product_id,
 FROM orders
 GROUP BY product_id;
 ```
+
+## 总结与追问预判
+ROLLUP 与 CASE WHEN 是多维度报表基石。配合本波「去重聚合」「自定义排序」三张卡，面试常见 SQL 统计题基本覆盖。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] ROLLUP 与 `GROUP BY ... WITH CUBE` 不同，ROLLUP 只按最左前缀上卷、CUBE 生成全组合，别混用——正确。
+2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（分组、汇总、小计、分级、条件分支等）。

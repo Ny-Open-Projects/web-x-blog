@@ -29,13 +29,7 @@ Go 的 `error` 只是一个 **`Error() string` 接口**，没有异常机制；�
 - `==` 比较只适用于**未包装**的哨兵错误（`errors.New`/`ErrNotExist`）；一旦 `fmt.Errorf("%w")` 包装，`==` 失效，必须 `errors.Is`。
 - 注意与「`err != nil` 陷阱」（见 509.md`）区分：那张讲「返回 nil 却非 nil 指针」的坑，本卡讲「如何分类断言错误」。
 
-## 总结与追问预判
-收口：**error 是接口；用 code/类型分类，用 `errors.Is/As` 断言，绝不靠文本**。预判追问：① 哪些写法不优雅（见 513.md`）；② 怎么 wrap 保存上下文（见 513.md`）。回答时把「同类型错误文本可能不同，文本断言脆弱」抛出，最显经验。
-
-## ⚠️ 原文纠错
-源视频转写将 error 接口模型、PathError、类型断言、标准库等术语音译为若干崩坏词，本卡已统一还原为规范术语（error 接口 / *fs.PathError / errors.Is / errors.As / fmt.Errorf 等）。交付卡禁止保留任何原词崩坏写法。
-
-> **[经验]** 面试金句：**「错误文本是给人看的，不是给代码判的。」** 判断错误类型永远用 `errors.Is`/`errors.As` + 自定义类型/哨兵值，不用 `strings.Contains(err.Error(), "...")`。后者在日志国际化、措辞微调时必炸，是新手与老手的分界线。
+## 关键代码
 
 ```go
 package main
@@ -75,3 +69,11 @@ func read(path string) error {
 	return nil
 }
 ```
+
+## 总结与追问预判
+收口：**error 是接口；用 code/类型分类，用 `errors.Is/As` 断言，绝不靠文本**。预判追问：① 哪些写法不优雅（见 513.md`）；② 怎么 wrap 保存上下文（见 513.md`）。回答时把「同类型错误文本可能不同，文本断言脆弱」抛出，最显经验。
+
+## ⚠️ 原文纠错
+源视频转写将 error 接口模型、PathError、类型断言、标准库等术语音译为若干崩坏词，本卡已统一还原为规范术语（error 接口 / *fs.PathError / errors.Is / errors.As / fmt.Errorf 等）。交付卡禁止保留任何原词崩坏写法。
+
+> **[经验]** 面试金句：**「错误文本是给人看的，不是给代码判的。」** 判断错误类型永远用 `errors.Is`/`errors.As` + 自定义类型/哨兵值，不用 `strings.Contains(err.Error(), "...")`。后者在日志国际化、措辞微调时必炸，是新手与老手的分界线。

@@ -29,13 +29,7 @@
 - Go 1.18+ 引入 `comparable` 约束（泛型），但 map key 的 comparable 语义不变。
 - 注意与「map 并发/无序/float key 风险」（`914-map-concurrency-float.md`）区分：本卡只讲「key 类型合法性」，那张讲「float key 取值异常 + 并发 panic + 无序」。
 
-## 总结与追问预判
-收口：**map key 必须 comparable → func/map/slice 编译期拒、数组/结构体看字段；切片只能当 value**。预判追问：① float key 的精度与 NaN 诡异（见 506.md`）；② 指针 key 按地址（见 506.md`）。回答时把「`map[[]int]int` 编译报错」一句抛出，最显你把概念落到了代码层。
-
-## ⚠️ 原文纠错
-源视频转写将 Go / map key / 可比较类型 / 切片 等音译为若干崩坏词，本卡已统一还原为规范术语（Go / map 键 / 可比较（comparable）类型 / 切片 slice）。交付卡禁止保留任何原词崩坏写法。
-
-> **[经验]** 答「切片能作 key 吗」**直接给编译错误**最稳：`var m map[[]int]int` 报 `invalid map key type []int`。比泛泛说「slice 不可比较」更能证明你真踩过——编译器在 key 合法性上比人严，运行前就拦。
+## 关键代码
 
 ```go
 package main
@@ -59,3 +53,11 @@ func main() {
 	_ = Bad{}
 }
 ```
+
+## 总结与追问预判
+收口：**map key 必须 comparable → func/map/slice 编译期拒、数组/结构体看字段；切片只能当 value**。预判追问：① float key 的精度与 NaN 诡异（见 506.md`）；② 指针 key 按地址（见 506.md`）。回答时把「`map[[]int]int` 编译报错」一句抛出，最显你把概念落到了代码层。
+
+## ⚠️ 原文纠错
+源视频转写将 Go / map key / 可比较类型 / 切片 等音译为若干崩坏词，本卡已统一还原为规范术语（Go / map 键 / 可比较（comparable）类型 / 切片 slice）。交付卡禁止保留任何原词崩坏写法。
+
+> **[经验]** 答「切片能作 key 吗」**直接给编译错误**最稳：`var m map[[]int]int` 报 `invalid map key type []int`。比泛泛说「slice 不可比较」更能证明你真踩过——编译器在 key 合法性上比人严，运行前就拦。

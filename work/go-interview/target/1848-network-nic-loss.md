@@ -29,13 +29,7 @@
 - `txqueuelen` 默认 1000，高吞吐场景（如 10G+ 网卡）可调大到 2000~10000；需配合 `ethtool -G` 的 ring buffer 一起看。
 - 这些诊断**与编程语言无关**，是 Linux 网络栈事实。
 
-## 总结与追问预判
-收口：**外侧丢包 = 网卡队列/硬件（看 `ifconfig drop`/`ethtool -S`）+ 中间网络（看 `mtr -u -r` 每跳 `%loss`）**，最后统一回到「TCP 不保应用层」。预判追问：① 内侧队列/缓冲丢包 → 1848.md`；② 应用层自保手段（消息确认/重传/幂等）。回答时把 `mtr` 的「逐跳 `%loss`」作为亮点抛出来，比只说 `ping` 更专业。
-
-## ⚠️ 原文纠错
-源视频转写将 txqueuelen / MTR / /proc/net/snmp / 链路 等音译为崩坏词（如「TSqueenlenges」「MTR 杠u 杠r」「leightstate 指代 snmp」「光缆这些」保留但节点表述崩坏），本卡已还原为规范术语（txqueuelen / MTR / /proc/net/snmp / 路由器交换机光缆链路）。交付卡禁止保留任何原词崩坏写法。
-
-> **[经验]** `ping` 只能看端到端丢包，`mtr` 才能看**逐跳**丢包率——定位「到底是哪个中间节点丢」必须用 `mtr -u -r`。面试中说出「先看 ping 端到端，再用 mtr 逐跳定位」的排查顺序，比只背命令更显工程素养。
+## 关键代码
 
 ```go
 // 用 mtr 逐跳定位中间网络丢包（Go 调用外部命令解析报告）
@@ -62,3 +56,11 @@ func sendWithRetry(c net.Conn, payload []byte, maxRetry int) error {
 	return errors.New("send failed after retries")
 }
 ```
+
+## 总结与追问预判
+收口：**外侧丢包 = 网卡队列/硬件（看 `ifconfig drop`/`ethtool -S`）+ 中间网络（看 `mtr -u -r` 每跳 `%loss`）**，最后统一回到「TCP 不保应用层」。预判追问：① 内侧队列/缓冲丢包 → 1848.md`；② 应用层自保手段（消息确认/重传/幂等）。回答时把 `mtr` 的「逐跳 `%loss`」作为亮点抛出来，比只说 `ping` 更专业。
+
+## ⚠️ 原文纠错
+源视频转写将 txqueuelen / MTR / /proc/net/snmp / 链路 等音译为崩坏词（如「TSqueenlenges」「MTR 杠u 杠r」「leightstate 指代 snmp」「光缆这些」保留但节点表述崩坏），本卡已还原为规范术语（txqueuelen / MTR / /proc/net/snmp / 路由器交换机光缆链路）。交付卡禁止保留任何原词崩坏写法。
+
+> **[经验]** `ping` 只能看端到端丢包，`mtr` 才能看**逐跳**丢包率——定位「到底是哪个中间节点丢」必须用 `mtr -u -r`。面试中说出「先看 ping 端到端，再用 mtr 逐跳定位」的排查顺序，比只背命令更显工程素养。

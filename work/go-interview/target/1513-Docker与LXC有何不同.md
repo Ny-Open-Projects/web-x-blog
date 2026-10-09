@@ -35,12 +35,7 @@
 - 容器编排层（K8s 架构）见 1515 [边界]；本卡只讲 Docker 与 LXC 的容器层差异，不重述编排。
 - 注：`131-docker-setup` 实为**用 docker-compose 搭 ES 集群**，属应用操作而非 Docker 技术本身，与本卡无重叠 [边界]。
 
-## 总结与追问预判
-一句话定位：「LXC 造的是轻量 Linux 系统，Docker 交付的是应用」。面试常追问「Docker 底层靠什么隔离」→ 答「早期借 LXC，0.9.0 起用 libcontainer，本质仍是 cgroups + namespace」；再追问「镜像为什么小」→ 答「UnionFS 分层，只读层多容器共享」。
-
-## ⚠️ 原文纠错
-1. 事实核校： [经验] LXC 定义、容器与虚拟机的互补关系、生命周期/抽象层次/管理/分层/生态五点差异、Docker 0.9.0 切换 libcontainer——均正确，符合容器技术发展事实。
-2. 崩坏词归一：源码将若干术语音译为崩坏词（如 LXC、Linux Container、cgroups、namespace、UnionFS、Docker Hub/Compose/Swarm、K8s、x86 等），本卡统一为规范术语，无黑名单词。
+## 关键代码
 
 ```go
 // 容器化的对象：一个最简 HTTP 服务（Docker 镜像里 ENTRYPOINT 跑的就是它）
@@ -52,3 +47,10 @@ func main() {
     http.ListenAndServe(":8080", nil)
 }
 ```
+
+## 总结与追问预判
+一句话定位：「LXC 造的是轻量 Linux 系统，Docker 交付的是应用」。面试常追问「Docker 底层靠什么隔离」→ 答「早期借 LXC，0.9.0 起用 libcontainer，本质仍是 cgroups + namespace」；再追问「镜像为什么小」→ 答「UnionFS 分层，只读层多容器共享」。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] LXC 定义、容器与虚拟机的互补关系、生命周期/抽象层次/管理/分层/生态五点差异、Docker 0.9.0 切换 libcontainer——均正确，符合容器技术发展事实。
+2. 崩坏词归一：源码将若干术语音译为崩坏词（如 LXC、Linux Container、cgroups、namespace、UnionFS、Docker Hub/Compose/Swarm、K8s、x86 等），本卡统一为规范术语，无黑名单词。

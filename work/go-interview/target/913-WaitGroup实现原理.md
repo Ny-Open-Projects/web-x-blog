@@ -31,12 +31,7 @@ WaitGroup 本质是**一个原子计数器 + 信号量**：`Add(delta)` 把 delt
 ## 版本与兼容性
 - CAS 实现属 Go runtime 标准手段；与 1019（并发陷阱）、913-waitgroup-state（字段布局）互补 [边界]。
 
-## 总结与追问预判
-WaitGroup 三卡（用法/字段/原理）合起来即「会用+懂源码」。与 errgroup、channel 关闭信号等选型对比，是并发编排题的加分项。
-
-## ⚠️ 原文纠错
-1. 事实核校： [经验] Add 左移32加 counter、Done=Add(-1)、Wait 增 waiter+CAS 阻塞、counter=0 唤醒所有、CAS 优于加锁——均正确。
-2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（WaitGroup、原子操作、比较并交换、计数器、信号量、等待队列等）。
+## 关键代码
 
 ```go
 // WaitGroup 核心位域操作（示意）
@@ -54,3 +49,10 @@ func (wg *WaitGroup) Add(delta int) {
 }
 // Wait: 右移 32 位增加 waiter，CAS 自旋直到 counter==0
 ```
+
+## 总结与追问预判
+WaitGroup 三卡（用法/字段/原理）合起来即「会用+懂源码」。与 errgroup、channel 关闭信号等选型对比，是并发编排题的加分项。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] Add 左移32加 counter、Done=Add(-1)、Wait 增 waiter+CAS 阻塞、counter=0 唤醒所有、CAS 优于加锁——均正确。
+2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（WaitGroup、原子操作、比较并交换、计数器、信号量、等待队列等）。

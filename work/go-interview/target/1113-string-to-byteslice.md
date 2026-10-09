@@ -29,13 +29,7 @@
 - string 不可变是语言保证；零拷贝得到的 []byte 一旦写入会破坏该保证，且若底层来自只读段（如字符串字面量在 `.rodata`）会触发 **SIGSEGV**（见 1113.md`）。
 - 注意与「string 底层结构」基础（`903-string-storage.deep.md`、`903-string-data-pointer.md`）区分：本卡讲**转换是否拷贝**，那两张讲**存储结构本身**。
 
-## 总结与追问预判
-收口：**强转拷贝（新分配）、零拷贝共享 Data 指针；Go 1.20+ 用 `unsafe.Slice/unsafe.StringData` 官方 API，别再手写 header**。预判追问：① 反方向 []byte→string（见 1113.md`）；② 零拷贝的致命坑（不可变被破坏/GC/只读段 panic，见 1113.md`）。回答时把「Data 是 uintptr、GC 不扫为指针根」这句抛出来，是高阶分水岭。
-
-## ⚠️ 原文纠错
-源视频转写将 string / byte 切片 / unsafe.Pointer / string header / slice header 等音译为崩坏词（如「street」指代 string、「bat 切片」指代字节切片「byte slice」、「isavepoint」指代 unsafe.Pointer、「stringheader/sliceheader」保留但表述崩坏、「lidata」指代 Data 指针），本卡已还原为规范术语（string / []byte / unsafe.Pointer / StringHeader / SliceHeader / Data 指针）。交付卡禁止保留任何原词崩坏写法。
-
-> **[经验]** 面试被问「零拷贝转换」，**先给 Go 1.20+ 官方 API 再提老写法**：`unsafe.Slice(unsafe.StringData(s), len(s))` 是正解。手写 `reflect.SliceHeader` 在 Go 1.20+ 是**反模式**（Data 为 uintptr、GC 不视为根、可能误回收底层数组），说出来比只背老写法更显你跟进了版本演进。
+## 关键代码
 
 ```go
 package main
@@ -64,3 +58,11 @@ func StringToBytes(s string) []byte {
 	return unsafe.Slice(unsafe.StringData(s), len(s))
 }
 ```
+
+## 总结与追问预判
+收口：**强转拷贝（新分配）、零拷贝共享 Data 指针；Go 1.20+ 用 `unsafe.Slice/unsafe.StringData` 官方 API，别再手写 header**。预判追问：① 反方向 []byte→string（见 1113.md`）；② 零拷贝的致命坑（不可变被破坏/GC/只读段 panic，见 1113.md`）。回答时把「Data 是 uintptr、GC 不扫为指针根」这句抛出来，是高阶分水岭。
+
+## ⚠️ 原文纠错
+源视频转写将 string / byte 切片 / unsafe.Pointer / string header / slice header 等音译为崩坏词（如「street」指代 string、「bat 切片」指代字节切片「byte slice」、「isavepoint」指代 unsafe.Pointer、「stringheader/sliceheader」保留但表述崩坏、「lidata」指代 Data 指针），本卡已还原为规范术语（string / []byte / unsafe.Pointer / StringHeader / SliceHeader / Data 指针）。交付卡禁止保留任何原词崩坏写法。
+
+> **[经验]** 面试被问「零拷贝转换」，**先给 Go 1.20+ 官方 API 再提老写法**：`unsafe.Slice(unsafe.StringData(s), len(s))` 是正解。手写 `reflect.SliceHeader` 在 Go 1.20+ 是**反模式**（Data 为 uintptr、GC 不视为根、可能误回收底层数组），说出来比只背老写法更显你跟进了版本演进。

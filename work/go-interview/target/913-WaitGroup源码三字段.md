@@ -31,12 +31,7 @@ WaitGroup 源码三字段：**noCopy** 空结构体（防复制检测）、**sta
 ## 版本与兼容性
 - 字段布局随 Go 版本微调，但「高32 counter/低32 waiter + sema」位域设计长期稳定；与 1019 并发陷阱互补 [边界]。
 
-## 总结与追问预判
-字段布局清楚后，Add/Done/Wait 如何操作这个位域（移位+CAS），下一张讲。
-
-## ⚠️ 原文纠错
-1. 事实核校： [经验] 三字段 noCopy/state/sema、state 高32=counter 低32=waiter、sema 信号量唤醒——均正确。
-2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（WaitGroup、原子类型、计数器、等待者、信号量、复制检测等）。
+## 关键代码
 
 ```go
 // sync.WaitGroup 源码三字段（示意，非逐字）
@@ -46,3 +41,10 @@ type WaitGroup struct {
     sema   uint32        // 信号量，用于 Wait 阻塞与唤醒
 }
 ```
+
+## 总结与追问预判
+字段布局清楚后，Add/Done/Wait 如何操作这个位域（移位+CAS），下一张讲。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 三字段 noCopy/state/sema、state 高32=counter 低32=waiter、sema 信号量唤醒——均正确。
+2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（WaitGroup、原子类型、计数器、等待者、信号量、复制检测等）。

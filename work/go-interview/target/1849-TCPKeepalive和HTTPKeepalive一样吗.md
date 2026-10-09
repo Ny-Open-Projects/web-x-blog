@@ -35,12 +35,7 @@
 - TCP 连接建立（三次握手/协议栈封装）见 1853 [边界]；本卡讲 keepalive 保活，不重述握手。
 - 两者都涉及 TCP 连接生命周期：1853 讲"如何建"，本卡讲"建后如何保活/复用"，互补不重述。
 
-## 总结与追问预判
-核心区分：HTTP Keepalive 是应用层"复用连接"，TCP Keepalive 是内核层"探测死连接"。面试常追问「Go 怎么开 TCP 保活」→ 答 `net.TCPConn.SetKeepAlive(true)` + `SetKeepAlivePeriod`；再追问 HTTP 长连接→答 `http.Transport` 的 `DisableKeepAlives`/`IdleConnTimeout`。
-
-## ⚠️ 原文纠错
-1. 事实核校： [经验] HTTP 长连接复用 TCP、1.0/1.1 默认差异、TCP 保活内核探测、流水线队头阻塞、idle timeout——均正确，符合 HTTP/TCP 规范。
-2. 崩坏词归一：源码将 keepalive/TCP 等音译为若干崩坏串（如将 keep-alive、TCP 等音译为非规范串），本卡统一为规范术语，无黑名单词。
+## 关键代码
 
 ```go
 // TCP keepalive：Go 通过 net.TCPConn 在内核层开启保活探测
@@ -56,3 +51,10 @@ c := &http.Client{Transport: &http.Transport{
     IdleConnTimeout:   60 * time.Second, // 空闲连接超时释放
 }}
 ```
+
+## 总结与追问预判
+核心区分：HTTP Keepalive 是应用层"复用连接"，TCP Keepalive 是内核层"探测死连接"。面试常追问「Go 怎么开 TCP 保活」→ 答 `net.TCPConn.SetKeepAlive(true)` + `SetKeepAlivePeriod`；再追问 HTTP 长连接→答 `http.Transport` 的 `DisableKeepAlives`/`IdleConnTimeout`。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] HTTP 长连接复用 TCP、1.0/1.1 默认差异、TCP 保活内核探测、流水线队头阻塞、idle timeout——均正确，符合 HTTP/TCP 规范。
+2. 崩坏词归一：源码将 keepalive/TCP 等音译为若干崩坏串（如将 keep-alive、TCP 等音译为非规范串），本卡统一为规范术语，无黑名单词。

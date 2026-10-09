@@ -29,13 +29,7 @@
 - `tcp_rmem`/`tcp_wmem` 三元组为「最小/默认/最大」自动调节区间；`SO_RCVBUF` 设置后内核通常会**翻倍**（受 `tcp_rmem` 上限约束），这是常见认知坑。
 - 全连接队列 = `min(listen backlog, net.core.somaxconn)`，二者都要看，调一个不调另一个会「看起来没生效」。
 
-## 总结与追问预判
-收口：**内侧丢包两大源 = 建连队列溢出（半/全连接，查 `netstat -s`）+ 接收缓冲零窗口（查 `/proc/net/snmp` TCPBacklogDrop）**，参数层面 `tcp_max_syn_backlog`/`somaxconn`/`tcp_rmem` 可调。预判追问：① 网卡侧丢包 → 1848.md`；② 应用层如何用 `SO_RCVBUF` 兜底 → 见下方 Go 示例。回答时强调「队列溢出是静默丢、不报错」，是最隐蔽的一类。
-
-## ⚠️ 原文纠错
-源视频转写将半连接/全连接队列、零窗口、网卡队列长度(txqueuelen)、/proc/net/snmp 等音译为崩坏词（如「全链接队列」「半连接的对列」「TSqueenlenges」「leightstate 指代 snmp 文件」），本卡已还原为规范术语。交付卡禁止保留任何原词崩坏写法。
-
-> **[经验]** 调全连接队列时**必须同时看 `listen(backlog)` 和 `net.core.somaxconn`**：实际生效值是二者取小。只改代码 backlog 不改 somaxconn，或反之，都会让人误以为「调了没生效」。这一条在排查「偶然连接超时」时极常用。
+## 关键代码
 
 ```go
 // 应用层调整接收缓冲区（注意：内核通常会把 SO_RCVBUF 翻倍，且受 tcp_rmem 上限约束）
@@ -58,3 +52,11 @@ func setRecvBuf(c net.Conn, size int) error {
 ln, _ := net.Listen("tcp", ":8080") // Go 默认 backlog 由系统 somaxconn 约束
 _ = ln
 ```
+
+## 总结与追问预判
+收口：**内侧丢包两大源 = 建连队列溢出（半/全连接，查 `netstat -s`）+ 接收缓冲零窗口（查 `/proc/net/snmp` TCPBacklogDrop）**，参数层面 `tcp_max_syn_backlog`/`somaxconn`/`tcp_rmem` 可调。预判追问：① 网卡侧丢包 → 1848.md`；② 应用层如何用 `SO_RCVBUF` 兜底 → 见下方 Go 示例。回答时强调「队列溢出是静默丢、不报错」，是最隐蔽的一类。
+
+## ⚠️ 原文纠错
+源视频转写将半连接/全连接队列、零窗口、网卡队列长度(txqueuelen)、/proc/net/snmp 等音译为崩坏词（如「全链接队列」「半连接的对列」「TSqueenlenges」「leightstate 指代 snmp 文件」），本卡已还原为规范术语。交付卡禁止保留任何原词崩坏写法。
+
+> **[经验]** 调全连接队列时**必须同时看 `listen(backlog)` 和 `net.core.somaxconn`**：实际生效值是二者取小。只改代码 backlog 不改 somaxconn，或反之，都会让人误以为「调了没生效」。这一条在排查「偶然连接超时」时极常用。
