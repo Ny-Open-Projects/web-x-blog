@@ -1717,3 +1717,12 @@
 - 门禁：1275/1275 PASS、err0、warn51（0 新增，一次过）。
 - 进度：294/369 done（80%）、75 pending、1275 张卡。
 - 沉淀：方法论类卡用 ```sql 代码块过规则 14（白名单含 sql）；「RPC 是范式、gRPC 是协议」「对外 HTTP 对内 RPC 分的是信任域」两句话可复用。
+
+## wave 150（2026-10-09 08:15）· 924 time.Duration + 606 十万文件 defer
+- 源：9-24（M/2卡）/ 6-6（M/2卡）。
+- 产卡：924-duration-essence.md / 924-duration-unit-pitfalls.deep.md（Duration=int64纳秒别名；[实测] 错误混算差值500000000毫秒=500秒；墙钟vs单调钟分界）+ 606-massive-files-defer.md / 606-resource-limit-pipeline.deep.md（四步演进：循环defer→封装函数→WaitGroup并发→goroutine池限流；[实测] ulimit -n macOS=1048575 vs Linux soft=1024；句柄配额四层 soft/hard/systemd/cgroup）。
+- 撞题边界：607-defer-mem-leak 已覆盖循环 defer 机制（含10万文件例），606 取「演进链+句柄配额体系+并发限流」增量，机制层全部 [边界] 引用。
+- 黑名单：双源 0 命中；卡体自检 0 命中。
+- 门禁：1279/1279 PASS、err0、warn51（0 新增，一次过）。
+- 进度：296/369 done（80%）、73 pending、1279 张卡。
+- 沉淀：「演进链答题法」——每步说清上一步会怎么死，链式推演优于报终态答案；句柄排查口诀：容器内 ulimit -n + /proc/1/limits 双查。

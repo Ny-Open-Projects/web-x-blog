@@ -1045,10 +1045,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "606-massive-files-defer",
+        "606-resource-limit-pipeline.deep"
+      ],
+      "done_at": "2026-10-09T08:15:03+08:00"
     },
     "source/06/6-7 你需要了解的关于defer容易踩坑的地方-迅捷文字转语音-1790857236055zh.txt": {
       "id": "6-7",
@@ -2172,10 +2176,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "924-duration-essence",
+        "924-duration-unit-pitfalls.deep"
+      ],
+      "done_at": "2026-10-09T08:15:02+08:00"
     },
     "source/09/9-25 sync 包的读写锁和互斥锁是怎么实现的？-迅捷文字转语音-1790917604607zh.txt": {
       "id": "9-25",
@@ -7399,7 +7407,7 @@
     }
   },
   "next_num": 1,
-  "waves": 149,
-  "updated": "2026-10-09T08:08:50+08:00",
+  "waves": 150,
+  "updated": "2026-10-09T08:15:03+08:00",
   "consec_fail": 0
 }
