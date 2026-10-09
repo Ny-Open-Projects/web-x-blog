@@ -1906,10 +1906,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "901-internals-prep-checklist",
+        "901-prep-methods.deep"
+      ],
+      "done_at": "2026-10-09T10:55:50+08:00"
     },
     "source/09/9-10 Go struct字段对齐-迅捷文字转语音-1790916673215zh.txt": {
       "id": "9-10",
@@ -6777,10 +6781,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1830-dma-workflow",
+        "1830-dma-coherence.deep"
+      ],
+      "done_at": "2026-10-09T10:55:50+08:00"
     },
     "source/18/18-31 磁盘调度算法有哪些？-迅捷文字转语音-1790931209856zh.txt": {
       "id": "18-31",
@@ -7559,7 +7567,7 @@
     }
   },
   "next_num": 1,
-  "waves": 169,
-  "updated": "2026-10-09T10:48:05+08:00",
+  "waves": 170,
+  "updated": "2026-10-09T10:55:50+08:00",
   "consec_fail": 0
 }
