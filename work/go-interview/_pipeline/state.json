@@ -529,10 +529,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "511-deepequal-nil-vs-empty",
+        "511-nil-semantics-equal.deep"
+      ],
+      "done_at": "2026-10-09T10:03:02+08:00"
     },
     "source/05/5-12 空 struct{} 有什么用？-迅捷文字转语音-1790856015119zh.txt": {
       "id": "5-12",
@@ -5907,10 +5911,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "169-pay-strategy-cart",
+        "169-strategy-context-tradeoffs.deep"
+      ],
+      "done_at": "2026-10-09T10:03:02+08:00"
     },
     "source/17/17-1 如何准备数据结构和算法面试？-迅捷文字转语音-1790928645002zh.txt": {
       "id": "17-1",
@@ -7503,7 +7511,7 @@
     }
   },
   "next_num": 1,
-  "waves": 162,
-  "updated": "2026-10-09T09:55:58+08:00",
+  "waves": 163,
+  "updated": "2026-10-09T10:03:02+08:00",
   "consec_fail": 0
 }

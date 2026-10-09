@@ -1823,3 +1823,10 @@
 - 1811-io-troubleshoot：iostat -xz 指标族（r/s w/s rkB/s wkB/s r_await w_await aqu-sz %util）+ pidstat 定进程；**判读优先级 应用延迟>await>aqu-sz>%util**；RAID 逻辑设备假饱和；[实测] 基线 tps132/3.09MB/s → dd 负载 7788/264MB/s。
 - 1811-io-reading-priority.deep：%util 串行假设失真（NVMe/RAID）；await 双刃剑先查量再查速；三屏蔽器（异步IO/预读/page cache）；基线-负载-对照方法论。
 - **规则 12 新教训**：L1/L2 主卡若存在**同名** stem.deep.md 即 error——深卡命名必须与主卡 stem 不同（1811-io-troubleshoot.deep → 改名 1811-io-reading-priority.deep）；规则 14 二次确认：text 块不算代码，方法论卡也需 python/go 实跑块。
+
+## wave163（2026-10-09 10:14）5-11 DeepEqual vs bytes.Equal / 16-9 策略模式支付 —— 4 卡，332/369
+- 511-deepequal-nil-vs-empty：**nil 性不对称时分歧**——DeepEqual([]byte(nil),[]byte{})=false（IsNil 短路不比内容）、bytes.Equal=true（只比内容）；双 nil DeepEqual=true；[实测] 五组对账 + slices.Equal(1.21+) 同 bytes.Equal 语义。
+- 511-nil-semantics-equal.deep：IsNil 短路是测试语义的设计选择；性能反射 vs memexact 差 1~2 数量级（DeepEqual 别进热路径）；nil 切片工程规范。
+- 169-pay-strategy-cart：接口+三实现+购物车持策略字段+Set 运行期切换；**nil 策略防御**（strategy==nil 提示而非 panic）；纠错「配方法」=Pay 音转。
+- 169-strategy-context-tradeoffs.deep：setter/构造/函数类型/注册表四条注入路取舍；setter 三隐雷（nil 窗口/并发切换 -race 爆/可变状态）；「策略有无配置状态」为 map+函数 vs 接口划界。
+- 边界：514-deepequal-vs-equal（== 三差异）只引不重述；163-strategy（模式立论）引用。
