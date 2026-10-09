@@ -6661,10 +6661,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1822-user-kernel-switch.md"
+      ],
+      "done_at": "2026-10-09T12:18:35+08:00"
     },
     "source/18/18-23 CPU 是如何读写内存的？-迅捷文字转语音-1790930797923zh.txt": {
       "id": "18-23",
@@ -7375,10 +7378,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "189-cpu-high-triage.md"
+      ],
+      "done_at": "2026-10-09T12:18:35+08:00"
     },
     "source/19/19-1 如何介绍自己的项目才能凸显自己发挥的重要作用？-迅捷文字转语音-1790932549116zh.txt": {
       "id": "19-1",
@@ -7629,7 +7635,7 @@
     }
   },
   "next_num": 1,
-  "waves": 180,
-  "updated": "2026-10-09T12:13:11+08:00",
+  "waves": 181,
+  "updated": "2026-10-09T12:18:35+08:00",
   "consec_fail": 0
 }

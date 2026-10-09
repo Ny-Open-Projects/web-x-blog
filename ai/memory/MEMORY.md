@@ -1924,3 +1924,7 @@
 - 191-project-intro-impact：四要素「全貌/量化/推动/协作」+python 介绍稿自检器 [实测]（含糊稿四条全报）；「团队成果里我的部分」边界表达；接 1910/1911 作量化案例素材。
 - 1514-docker-image-vs-layer：四维（定义/存储/可变性/层叠）；[实测] docker history nginx:alpine——RUN 36.3MB/COPY 4.62kB/元数据 0B；go 层缓存失效链模拟（链式失效→排层原则）；纠错「layer 可变」不严谨（新层替换+其后全废）。
 - 门禁踩坑：bash 块白名单第 11 次（1514）→ 转文字+补 go 模拟器。
+
+## wave181（2026-10-09 12:19）18-22 两态切换 / 18-9 CPU 高排查 —— 2 卡（S 档单卡），358 done (97%)
+- 1822-user-kernel-switch：四步「发起→保存切换→按号执行→恢复返回」；[实测] getpid 28ns/op vs 普通函数 <1ns（切换代价量化）；纠错——现场存内核栈非用户栈、int 0x80→syscall 指令演进、进入路径三条。
+- 189-cpu-high-triage：三步 top→mpstat %iowait→pidstat %wait；两 wait 辨析（等磁盘 vs 等调度）是区分点；python 归因决策树 [实测] 三支线（IO 瓶颈/调度竞争/计算密集）；188 概念卡后置实操卡。
