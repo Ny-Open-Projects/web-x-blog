@@ -6247,10 +6247,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1720-algorithm-must-know-100"
+      ],
+      "done_at": "2026-10-09T17:02:30+08:00"
     },
     "source/17/17-3 至少使用2种方式实现字符串的反转？-迅捷文字转语音-1790928649142zh.txt": {
       "id": "17-3",
@@ -7665,7 +7668,7 @@
     }
   },
   "next_num": 1,
-  "waves": 187,
-  "updated": "2026-10-09T16:46:34+08:00",
+  "waves": 188,
+  "updated": "2026-10-09T17:02:30+08:00",
   "consec_fail": 0
 }
