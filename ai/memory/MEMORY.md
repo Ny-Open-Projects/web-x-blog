@@ -1844,3 +1844,9 @@
 - 202-go-features-overview：七特性每条带「注意什么」（goroutine 数量控制/channel nil/closed/defer 循环积压）；[实测] 七特性最小集合演示。
 - 202-features-interview-map.deep：特性→考察深度地图+卡库锚点；**协同矩阵**（多返回值↔error/channel↔goroutine/defer↔panic）；与 201 成功因素边界。
 - **文件名规则教训**：编号必须**三位数**（2-2→202 而非 22）——`<三位编号>-<英文短横线>.md`，error 2 个后修正。
+
+## wave166（2026-10-09 10:32）9-16 map 无序 / 12-58 Redis 过期键持久化 —— 4 卡，344/369
+- 916-map-key-unordered：无序三层因（哈希定位/遍历随机起点故意/渐进迁移）；纠错——「每次遍历不同」归因哈希不准，真因是 range 随机起点；[实测] 跨进程 123 vs 312、小 map 同进程可连排相同。
+- 916-map-order-mechanics.deep：mapiterinit fastrand 起点+桶内偏移；哈希种子防 DoS；「只承诺不保证有序」规范哲学；结构选型优于事后排序。
+- 1258-redis-expire-persistence：规则矩阵 RDB（生成不写/主查从不查）+ AOF（删时追加 DEL/重写过滤）+ 主从（从不主动删收 DEL 才删）；纠错 3.2 从库读 nil 版本边界；go 决策矩阵模拟 [实测]。
+- 1258-expire-lifecycle.deep：主时钟唯一决策点（时钟差异冲突推演）；可见性（读路径）与物理删除（主库）分离；AOF「记录动作+记录状态」闭环，与 binlog 同构。

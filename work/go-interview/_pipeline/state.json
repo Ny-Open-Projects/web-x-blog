@@ -2039,10 +2039,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "916-map-key-unordered",
+        "916-map-order-mechanics.deep"
+      ],
+      "done_at": "2026-10-09T10:25:47+08:00"
     },
     "source/09/9-17 为什么不能对map的元素取地址？-迅捷文字转语音-1790916852812zh.txt": {
       "id": "9-17",
@@ -4388,10 +4392,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1258-redis-expire-persistence",
+        "1258-expire-lifecycle.deep"
+      ],
+      "done_at": "2026-10-09T10:25:47+08:00"
     },
     "source/12/12-59 LRU 算法和 LFU 算法有什么区别？-迅捷文字转语音-1790924339473zh.txt": {
       "id": "12-59",
@@ -7527,7 +7535,7 @@
     }
   },
   "next_num": 1,
-  "waves": 165,
-  "updated": "2026-10-09T10:18:23+08:00",
+  "waves": 166,
+  "updated": "2026-10-09T10:25:47+08:00",
   "consec_fail": 0
 }
