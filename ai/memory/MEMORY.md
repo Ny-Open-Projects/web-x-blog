@@ -1901,3 +1901,7 @@
 ## wave175（2026-10-09 11:41）15-17 Pod 状态 / 18-37 大文件 IO —— 2 卡（S 档单卡），346 done (94%)
 - 1517-pod-status-six：五 phase+ContainerCreating 展示态；[实测] k3d 中 STATUS 列 ImagePullBackOff 的 Pod `.status.phase` 实为 Pending（phase vs reason 两层级）+ python -o json 解析块；排查三板斧 get/describe/-o。
 - 1837-large-file-io-split：缓存污染→大文件直接 IO+异步 IO；nginx 阈值分流范本；[实测] 256MB 顺序读冷 818 vs 热 953MB/s 仅差 16%（NVMe 顺序大读缓存收益小→反证分流合理）；io_uring 5.1+ 版本边界；传统 aio 仅 O_DIRECT。
+
+## wave176（2026-10-09 11:47）4-1 基础题必问 / 8-1 runtime 必考 —— 2 卡（S 档单卡），348 done (94%)
+- 401-basics-why-asked：探测知识边界下限+变式追问淘汰背诵者；实用派 vs 专家派；python 变式自测器 [实测]（TCP 三问/挥手两问）；与 402（五大范围总纲）划界，TCP 变式引 1843/1844 原题卡。
+- 801-why-runtime-asked：「优势载体→掌握标尺」逻辑+两块组成清单（语言功能/OS 交互）+三板斧；go 组成→考点映射表 [实测]；纠错要点 runtime 编译进二进制非独立 VM、抢占 1.14/写屏障 1.8 版本词。

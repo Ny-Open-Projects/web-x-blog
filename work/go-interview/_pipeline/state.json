@@ -52,10 +52,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "401-basics-why-asked.md"
+      ],
+      "done_at": "2026-10-09T11:46:14+08:00"
     },
     "source/04/4-10 Go语言中如何获取项目的根目录？-迅捷文字转语音-1790758575601zh.txt": {
       "id": "4-10",
@@ -1487,10 +1490,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "801-why-runtime-asked.md"
+      ],
+      "done_at": "2026-10-09T11:46:14+08:00"
     },
     "source/08/8-10 哪些情况下会触发GC？-迅捷文字转语音-1790903084490zh.txt": {
       "id": "8-10",
@@ -7599,7 +7605,7 @@
     }
   },
   "next_num": 1,
-  "waves": 175,
-  "updated": "2026-10-09T11:40:29+08:00",
+  "waves": 176,
+  "updated": "2026-10-09T11:46:14+08:00",
   "consec_fail": 0
 }
