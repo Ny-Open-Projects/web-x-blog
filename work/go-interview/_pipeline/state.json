@@ -6761,10 +6761,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1836-zero-copy-path",
+        "1836-zero-copy-evolution.deep"
+      ],
+      "done_at": "2026-10-09T08:34:33+08:00"
     },
     "source/18/18-37 大文件IO的具体过程是什么样的？-迅捷文字转语音-1790931613618zh.txt": {
       "id": "18-37",
@@ -6968,10 +6972,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1847-2msl-timewait",
+        "1847-timewait-production.deep"
+      ],
+      "done_at": "2026-10-09T08:34:33+08:00"
     },
     "source/18/18-48 TCP在哪些情况下会丢数据？-迅捷文字转语音-1790932056365zh.txt": {
       "id": "18-48",
@@ -7423,7 +7431,7 @@
     }
   },
   "next_num": 1,
-  "waves": 152,
-  "updated": "2026-10-09T08:27:52+08:00",
+  "waves": 153,
+  "updated": "2026-10-09T08:34:33+08:00",
   "consec_fail": 0
 }

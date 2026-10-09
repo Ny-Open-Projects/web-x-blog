@@ -1744,3 +1744,12 @@
 - 门禁：1287/1287 PASS、err0、warn51（0 新增，一次过）。
 - 进度：300/369 done（81%）、69 pending、1287 张卡。
 - 沉淀：「中间态自由、收口拦截」概括 Builder 校验设计；「what vs how」分工厂与建造者；必填项应做位置参数不塞 Option/Builder。
+
+## wave 153（2026-10-09 08:34）· 1847 2MSL/TIME_WAIT + 1836 零拷贝账本
+- 源：18-47（M/2卡）/ 18-36（M/2卡）。
+- 产卡：1847-2msl-timewait.md / 1847-timewait-production.deep.md（2MSL 两重保险 ACK丢失兜底+旧报文消亡；MSL=TCP时间30s vs TTL=IP跳数64；[实测] 300短连接→netstat恰好300条TIME_WAIT；治理决策树 tw_reuse出方向限制/tw_recycle已移除/CLOSE_WAIT是应用bug）+ 1836-zero-copy-path.md / 1836-zero-copy-evolution.deep.md（账本4拷贝4切换→sendfile 2/3→SG-DMA 2/2；Go io.Copy 自动sendfile反模式提醒；TLS使零拷贝失效→kTLS出路；变体谱系 mmap/splice）。
+- 撞题边界：144-zerocopy 已覆盖 Kafka 三复制→两复制+DMA（本卡取 OS 账本+变体谱系+Go 支持+TLS 边界增量）；1113 是用户态 string 零拷贝另一码事。
+- 黑名单：双源 0 命中；卡体自检 0 命中。
+- 门禁：1291/1291 PASS、err0、warn51（0 新增，一次过）。
+- 进度：302/369 done（82%）、67 pending、1291 张卡。
+- 沉淀：「精确计数验证协议语义」实验模式（300→300）可推广到其他 TCP 状态诊断；CLOSE_WAIT 堆积=应用忘 Close 与 TIME_WAIT 分开诊断。
