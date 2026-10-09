@@ -5040,10 +5040,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1414-message-ordering",
+        "1414-ordering-tradeoffs.deep"
+      ],
+      "done_at": "2026-10-09T08:40:41+08:00"
     },
     "source/14/14-15 kafka发送消息的方式有哪些？-迅捷文字转语音-1790926414537zh.txt": {
       "id": "14-15",
@@ -5322,10 +5326,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1409-avoid-rebalance",
+        "1409-rebalance-checklist.deep"
+      ],
+      "done_at": "2026-10-09T08:40:41+08:00"
     },
     "source/15/15-1 微服务面试中有哪些要点是必须掌握的？-迅捷文字转语音-1790926926372zh.txt": {
       "id": "15-1",
@@ -7431,7 +7439,7 @@
     }
   },
   "next_num": 1,
-  "waves": 153,
-  "updated": "2026-10-09T08:34:33+08:00",
+  "waves": 154,
+  "updated": "2026-10-09T08:40:41+08:00",
   "consec_fail": 0
 }
