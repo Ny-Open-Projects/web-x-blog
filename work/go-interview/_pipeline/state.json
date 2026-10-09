@@ -2149,10 +2149,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "920-map-leak-reorganize.md"
+      ],
+      "done_at": "2026-10-09T12:23:27+08:00"
     },
     "source/09/9-21 如何在不加锁的情况下更新map的数据？-迅捷文字转语音-1790917429120zh.txt": {
       "id": "9-21",
@@ -7245,10 +7248,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1850-unplug-netline-tcp.md"
+      ],
+      "done_at": "2026-10-09T12:23:27+08:00"
     },
     "source/18/18-51 HTTPS建立连接跟HTTP相比有什么区别？-迅捷文字转语音-1790932271152zh.txt": {
       "id": "18-51",
@@ -7635,7 +7641,7 @@
     }
   },
   "next_num": 1,
-  "waves": 181,
-  "updated": "2026-10-09T12:18:35+08:00",
+  "waves": 182,
+  "updated": "2026-10-09T12:23:27+08:00",
   "consec_fail": 0
 }

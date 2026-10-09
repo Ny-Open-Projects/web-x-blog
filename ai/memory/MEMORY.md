@@ -1928,3 +1928,7 @@
 ## wave181（2026-10-09 12:19）18-22 两态切换 / 18-9 CPU 高排查 —— 2 卡（S 档单卡），358 done (97%)
 - 1822-user-kernel-switch：四步「发起→保存切换→按号执行→恢复返回」；[实测] getpid 28ns/op vs 普通函数 <1ns（切换代价量化）；纠错——现场存内核栈非用户栈、int 0x80→syscall 指令演进、进入路径三条。
 - 189-cpu-high-triage：三步 top→mpstat %iowait→pidstat %wait；两 wait 辨析（等磁盘 vs 等调度）是区分点；python 归因决策树 [实测] 三支线（IO 瓶颈/调度竞争/计算密集）；188 概念卡后置实操卡。
+
+## wave182（2026-10-09 12:24）18-50 拔网线 / 9-20 map 泄漏 —— 2 卡（S 档单卡），360 done (98%)
+- 1850-unplug-netline-tcp：连接=内存结构体破题→重传窗口二分（插回无感恢复/耗尽 tcp_retries2=15 断开）→RST 终结；纠错 tcp_retries2 默认 15 非源文 5；与 1846 半开连接同底座。
+- 920-map-leak-reorganize：delete 标记删除不缩容；[实测] 10w=2.5MB→全删 2.5MB→重整 0.3MB（近 10 倍差）；重整四步+治理选型；Go 1.24 Swiss Table 语义不变的版本边界。
