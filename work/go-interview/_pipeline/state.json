@@ -2167,10 +2167,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "921-map-lockfree-update.md"
+      ],
+      "done_at": "2026-10-09T12:29:16+08:00"
     },
     "source/09/9-22 sync.Map的实现原理-迅捷文字转语音-1790917591258zh.txt": {
       "id": "9-22",
@@ -6594,10 +6597,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1819-linux-learning.md"
+      ],
+      "done_at": "2026-10-09T12:29:16+08:00"
     },
     "source/18/18-2 网络和操作系统相关的面试有哪些应对技巧？-迅捷文字转语音-1790929644518zh.txt": {
       "id": "18-2",
@@ -7641,7 +7647,7 @@
     }
   },
   "next_num": 1,
-  "waves": 182,
-  "updated": "2026-10-09T12:23:27+08:00",
+  "waves": 183,
+  "updated": "2026-10-09T12:29:16+08:00",
   "consec_fail": 0
 }

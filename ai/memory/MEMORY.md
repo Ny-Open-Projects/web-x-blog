@@ -1932,3 +1932,7 @@
 ## wave182（2026-10-09 12:24）18-50 拔网线 / 9-20 map 泄漏 —— 2 卡（S 档单卡），360 done (98%)
 - 1850-unplug-netline-tcp：连接=内存结构体破题→重传窗口二分（插回无感恢复/耗尽 tcp_retries2=15 断开）→RST 终结；纠错 tcp_retries2 默认 15 非源文 5；与 1846 半开连接同底座。
 - 920-map-leak-reorganize：delete 标记删除不缩容；[实测] 10w=2.5MB→全删 2.5MB→重整 0.3MB（近 10 倍差）；重整四步+治理选型；Go 1.24 Swiss Table 语义不变的版本边界。
+
+## wave183（2026-10-09 12:29）9-21 不加锁更新 map / 18-19 学好 Linux —— 2 卡（S 档单卡），362 done (98%)
+- 921-map-lockfree-update：写-复制-切换（私有构建→atomic.Pointer 切换→无锁快照读）；[实测] 反例 fatal error: concurrent map writes 不可 recover、正解 5 次整表更新零冲突；纠错核心——「赋值原子」内存模型不保证，须 atomic.Pointer（1.19+）。
+- 1819-linux-learning：专项突破+动手敲+时间盒三词框架；python 学习计划自检器 [实测] 报 2 缺口；「知识内化成技能」理论支撑。
