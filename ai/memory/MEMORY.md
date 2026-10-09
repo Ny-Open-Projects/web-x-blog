@@ -1809,3 +1809,10 @@
 - 1412-sarama-offset-commit：AutoCommit.Enable/Interval(1s)；重复窗口=上次提交点→崩溃点，interval 只缩不灭；MarkMessage 业务成功后标记；纠错「北京缓存」=Redis 音转。
 - 1412-offset-timing-matrix.deep：时序矩阵（先提交后处理=至多一次/先处理后提交=至少一次）；MarkMessage≠CommitMessages（标记 vs 显式即时提交）；窗口下界=单批处理时长；rebalance 只 Mark 不提交=清零式重放。
 - 边界：1417-consumer-commit（可靠性哲学）只引不重述，1411-offset-topic（存储设计）引用。
+
+## wave161（2026-10-09 09:56）17-4 最小栈 / 9-2 底层原理答法 —— 4 卡，324/369
+- 174-min-stack：双栈+压弹同步规则全 O(1)；**纠错①** 源文开篇「栈先进先出」为转写错误（栈=FILO）；**纠错②**「严格小于才压最小栈」遇重复最小值 [实测] push 2,3,2 后 pop → min栈清空 → GetMin panic index out of range [-1]；修法 `<=`。
+- 174-min-stack-duplicates.deep：panic 实测逐层复现；`<=` 版 vs 每层压 min(v,curMin) 版空间账；差值栈 O(1) 空间（不推荐工程用）；辅助栈范式迁移（max 栈/双栈队列/GMP 双队列）。
+- 902-internals-answer-method：三件套=总结先行/表达刻意练(录音复盘)/举例类比打 why 层；自检程序 [实测] 4/5。
+- 902-internals-answer-playbook.deep：三层深度（背诵/机制/设计）；八股特征=缺决策路径；类比两腿=同构+差异；三级追问与「坦诚+验证思路」话术；表达训练最小闭环 15 分钟/次。
+- 规则 14 二次踩坑：text 模板块不算可运行语言——方法论卡也须配真实 go 块（跑通后嵌入 [实测] 输出）。

@@ -2095,10 +2095,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "902-internals-answer-method",
+        "902-internals-answer-playbook.deep"
+      ],
+      "done_at": "2026-10-09T09:46:10+08:00"
     },
     "source/09/9-20 map为什么会内存泄露？-迅捷文字转语音-1790917427967zh.txt": {
       "id": "9-20",
@@ -6172,10 +6176,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "174-min-stack",
+        "174-min-stack-duplicates.deep"
+      ],
+      "done_at": "2026-10-09T09:46:09+08:00"
     },
     "source/17/17-5 如何翻转栈的所有元素？-迅捷文字转语音-1790928835907zh.txt": {
       "id": "17-5",
@@ -7487,7 +7495,7 @@
     }
   },
   "next_num": 1,
-  "waves": 160,
-  "updated": "2026-10-09T09:37:11+08:00",
+  "waves": 161,
+  "updated": "2026-10-09T09:46:10+08:00",
   "consec_fail": 0
 }
