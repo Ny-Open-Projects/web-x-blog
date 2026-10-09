@@ -54,7 +54,7 @@ func lookup(m *hmap, key Key) (Value, bool) {
 }
 ```
 
-## 总结与追责预判
+## 总结与追问预判
 - 定位：低 B 位定桶、高 8 位 top hash 定桶内；写满走 overflow；读比 top hash 再比 key；均摊 O(1) 最差 O(N)。
 - 预判：底层结构 → 见 914；注意事项 → 见 914；哈希 vs 树 → 见 1218。
 

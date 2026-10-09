@@ -16,7 +16,7 @@
 3. **零值与 select**：closed channel 读得到残留数据再读零值；nil channel 在 `select` 中对应 case **永不选中**，closed channel 的 case 可正常触发。
 4. **身份**：`close(ch)` 后 `ch == nil` 仍为 `false`——closed **不是** nil。
 
-## 追问链（L1~L5）
+## 追问链
 | 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
 |----|------|----------|--------|------------|
 | L1 | nil 能 close 吗 | 是否懂 panic | close nil panic | 答不出停档 |

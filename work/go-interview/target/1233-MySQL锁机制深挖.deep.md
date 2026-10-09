@@ -49,7 +49,7 @@ WHERE LOCK_STATUS IN ('PENDING','GRANTED');
 3. 问"为什么 DDL 卡住"——引到 MDL 雪崩：长事务持读锁挡 DDL，DDL 挡后续读。
 4. 页锁主动说明"BDB 已废弃"，展示你区分历史与现实。
 
-## 总结
+## 总结与追问预判
 InnoDB 行锁以记录/间隙/临键/插入意向四型协同，意向锁加速表级判断，auto-inc 保自增；页锁随 BDB 退出历史，MDL 等待靠 metadata_locks 排查。
 
 ## ⚠️ 原文纠错

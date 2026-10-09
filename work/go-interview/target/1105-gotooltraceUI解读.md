@@ -45,7 +45,7 @@ func boom() {
 // 结论：并发任务需控制同时运行的 goroutine 数量，避免堆积
 ```
 
-## 总结与预判
+## 总结与追问预判
 - trace UI 分层 + goroutine 时间分解（执行/阻塞/GC暂停）；从分解定位 GC/调度瓶颈。
 - 预判：trace 采集 → 见 1105；trace vs pprof → 见 1105。
 

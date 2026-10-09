@@ -16,7 +16,7 @@
 3. **第三步·判 phrase 相邻**：`match_phrase` 用 `_termvectors` 看每个 term 的 position，确认是否连续；不连续就用 `slop` 放宽，或确认是否有长词被再细分插入中间 term。
 4. **第四步·架构避免**：建索引时**查询 analyzer 与索引 analyzer 保持一致**；按粒度选 `ik_smart`（粗，少中间 term）或 `ik_max_word`（细，召回高但易插 term）；必要时配同义词(synonym) / 字符过滤(char_filter) 补全 term。
 
-## 追问链（L1~L5）
+## 追问链
 | 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
 |----|------|----------|--------|------------|
 | L1 | 首要排查动作 | 是否懂 _analyze | 先对齐两边分词 | 答不出即止 |

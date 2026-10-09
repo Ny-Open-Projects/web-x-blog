@@ -15,7 +15,7 @@
 2. **异 goroutine → 仅阻塞**：把收发放到 `go func()` 里，该 goroutine 永久阻塞在发送/接收点；但**主 goroutine 仍在跑**（如 `time.Sleep(1s)`），所以调度器不认为死锁，不会报错——直到主 goroutine 退出、进程结束，那个子 goroutine 才随之终止。
 3. **本质**：死锁要求"所有 goroutine 都阻塞且无出路"；异 goroutine 情形下主 goroutine 还活着，不满足该条件，故只是阻塞而非 deadlock。
 
-## 追问链（L1~L5）
+## 追问链
 | 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
 |----|------|----------|--------|------------|
 | L1 | 同goroutine收发给果 | 是否懂死锁 | 永久阻塞→deadlock | 答不出停档 |

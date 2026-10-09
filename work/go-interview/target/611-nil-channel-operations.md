@@ -15,7 +15,7 @@ channel 八股高频题。面试官要看你是否分清"nil channel 的收发�
 2. **关闭 → panic**：对 nil channel 调用 `close` 会直接抛 `panic: close of nil channel`，与"收发阻塞"是不同机制。
 3. **关闭后的 channel 不是 nil**：`close(ch)` 之后 `ch == nil` 仍为 `false`——"nil"指未初始化，"closed"是已初始化后的终态，两者不要混为一谈。
 
-## 追问链（L1~L5）
+## 追问链
 | 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
 |----|------|----------|--------|------------|
 | L1 | nil channel 收发 | 是否懂阻塞 | 永久阻塞/同goroutine死锁 | 答不出停档 |

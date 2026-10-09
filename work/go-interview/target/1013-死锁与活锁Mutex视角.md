@@ -53,7 +53,7 @@ if mu.TryLock() {
 }
 ```
 
-## 总结与预判
+## 总结与追问预判
 - 死锁 fatal error 不可 recover；六法避免；活锁是谦让空转；Mutex 不可重入。
 - 预判：Mutex 悲观锁 → 见 1013；Go 乐观锁 → 见 1013；channel 死锁见 1019。
 

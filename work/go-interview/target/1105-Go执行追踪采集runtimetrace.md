@@ -52,7 +52,7 @@ func main() {
 // 端点机制见 1114
 ```
 
-## 总结与预判
+## 总结与追问预判
 - 采 trace：runtime/trace(Start/Stop) 或 pprof /debug/pprof/trace?seconds=N；go tool trace 看。
 - 预判：trace UI 解读 → 见 1105；trace vs pprof → 见 1105；pprof 用法见 1114。
 
