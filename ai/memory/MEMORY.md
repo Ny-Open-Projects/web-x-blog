@@ -1771,3 +1771,12 @@
 - 门禁：1299/1299 PASS、err0、warn51（0 新增，一次过）。
 - 进度：306/369 done（83%）、63 pending、1299 张卡。
 - 沉淀：「等待翼+拷贝翼」组织高性能 IO 专题（多路复用管等待、零拷贝管搬运）；ESB 四职能去向映射表；「智能总线哑端点」vs「笨管道智能端点」一句话对比。
+
+## wave 156（2026-10-09 08:54）· 512 空 struct{} + 164 懒汉饿汉单例
+- 源：5-12（M/2卡）/ 16-4（M/2卡）。
+- 产卡：512-empty-struct-set.md / 512-zerobase-uses.deep.md（零尺寸+无值语义；Set 两实现；[实测] value 0 vs 1 字节；⚠️ 地址相等性传说澄清：栈变量/new 实测均不同，规范只说 may or may not，恒真的是接口装箱 i==j）+ 164-eager-vs-lazy-singleton.md / 164-eager-init-tradeoffs.deep.md（懒vs饿选型：默认饿汉；init 单 goroutine 串行=线程安全来源；懒汉回本三条件；OnceValue 现代形态；[实测] -race 100 并发 calls=1）。
+- 撞题边界：910 已覆盖末位对齐特例；165 系列已覆盖 DCL/atomic/Once 并发补丁（164 取懒vs饿选型+init 时序语义增量）。
+- 黑名单：双源 0 命中；卡体自检 0 命中。
+- 门禁：1303/1303 PASS、err0、warn51（0 新增，一次过）。
+- 进度：308/369 done（83%）、61 pending、1303 张卡。
+- 沉淀：⚠️ 重要实测纠正——「空结构体共享 zerobase 同地址」是流传误区，go1.26.5 实测栈/new/数组地址均不同，只能依赖「值比较恒真」；spec 原文是 may or may not。写卡引用此结论时勿再复述旧误区。

@@ -544,10 +544,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "512-empty-struct-set",
+        "512-zerobase-uses.deep"
+      ],
+      "done_at": "2026-10-09T08:54:20+08:00"
     },
     "source/05/5-13 处理Go语言中的错误，怎么才算最优雅？-迅捷文字转语音-1790856019333zh.txt": {
       "id": "5-13",
@@ -5780,10 +5784,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "164-eager-vs-lazy-singleton",
+        "164-eager-init-tradeoffs.deep"
+      ],
+      "done_at": "2026-10-09T08:54:20+08:00"
     },
     "source/16/16-5 分别使用两种方式实现线程安全的单例模式-迅捷文字转语音-1790928371163zh.txt": {
       "id": "16-5",
@@ -7447,7 +7455,7 @@
     }
   },
   "next_num": 1,
-  "waves": 155,
-  "updated": "2026-10-09T08:47:04+08:00",
+  "waves": 156,
+  "updated": "2026-10-09T08:54:20+08:00",
   "consec_fail": 0
 }
