@@ -5518,10 +5518,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1514-docker-image-vs-layer.md"
+      ],
+      "done_at": "2026-10-09T12:13:11+08:00"
     },
     "source/15/15-15 简述 K8s 的优势、使⽤场景及其特点？-迅捷文字转语音-1790927724622zh.txt": {
       "id": "15-15",
@@ -7387,10 +7390,13 @@
       "depth_cap": "L1~L2",
       "suggest_cards": 1,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "191-project-intro-impact.md"
+      ],
+      "done_at": "2026-10-09T12:13:11+08:00"
     },
     "source/19/19-10 高并发的微博评论系统架构设计-迅捷文字转语音-1790933099989zh.txt": {
       "id": "19-10",
@@ -7623,7 +7629,7 @@
     }
   },
   "next_num": 1,
-  "waves": 179,
-  "updated": "2026-10-09T12:06:19+08:00",
+  "waves": 180,
+  "updated": "2026-10-09T12:13:11+08:00",
   "consec_fail": 0
 }

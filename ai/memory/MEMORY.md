@@ -1919,3 +1919,8 @@
 ## wave179（2026-10-09 12:04）18-46 再收 SYN / 17-19 LRU —— 2 卡（S 档单卡），354 done (96%)
 - 1846-syn-again-established：半开连接+源端口分水岭（同→Challenge ACK→RST 释放；异→新握手+keepalive 收尾）；RFC 5961 版本词；python 场景推演器 [实测]；1844 系列只引不重述。
 - 1719-lru-impl-queue-hash：双结构分工（哈希找得到+链表排得出）O(1)；[实测] LeetCode146 序列 1/-1 false/-1/3；纠错双点——sync.Map 不必要、数组移头 O(n) 须升双向链表；接 1259/1257/125 buffer pool LRU 变体。
+
+## wave180（2026-10-09 12:12）19-1 项目介绍 / 15-14 Image vs Layer —— 2 卡（S 档单卡），356 done (96%)
+- 191-project-intro-impact：四要素「全貌/量化/推动/协作」+python 介绍稿自检器 [实测]（含糊稿四条全报）；「团队成果里我的部分」边界表达；接 1910/1911 作量化案例素材。
+- 1514-docker-image-vs-layer：四维（定义/存储/可变性/层叠）；[实测] docker history nginx:alpine——RUN 36.3MB/COPY 4.62kB/元数据 0B；go 层缓存失效链模拟（链式失效→排层原则）；纠错「layer 可变」不严谨（新层替换+其后全废）。
+- 门禁踩坑：bash 块白名单第 11 次（1514）→ 转文字+补 go 模拟器。
