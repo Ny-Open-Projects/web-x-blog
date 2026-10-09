@@ -3450,10 +3450,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "122-db-interview-map",
+        "122-db-prep-loop.deep"
+      ],
+      "done_at": "2026-10-09T08:08:50+08:00"
     },
     "source/12/12-20 索引覆盖和索引下推有什么区别？-迅捷文字转语音-1790921695415zh.txt": {
       "id": "12-20",
@@ -7045,10 +7049,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1852-http-websocket-rpc",
+        "1852-protocol-selection.deep"
+      ],
+      "done_at": "2026-10-09T08:08:50+08:00"
     },
     "source/18/18-53 浏览器中输入URL到返回页面过程-迅捷文字转语音-1790932497127zh.txt": {
       "id": "18-53",
@@ -7391,7 +7399,7 @@
     }
   },
   "next_num": 1,
-  "waves": 148,
-  "updated": "2026-10-09T08:02:33+08:00",
+  "waves": 149,
+  "updated": "2026-10-09T08:08:50+08:00",
   "consec_fail": 0
 }
