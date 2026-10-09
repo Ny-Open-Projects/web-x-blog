@@ -83,7 +83,7 @@ Ingress 的作用：**通过 Service 再关联到这一组 Pod，并且按域名
 
 ```mermaid
 graph LR
-    U["用户 访问 xboard.container.com"] -->|"nginx 负载均衡器"| IC["Ingress Controller"]
+    U["用户 访问 javademo.container.com"] -->|"nginx 负载均衡器"| IC["Ingress Controller"]
     IC -->|"按 host 匹配"| IN["Ingress 规则"]
     IN --> SVC["Service"]
     SVC --> P1["Pod"]
@@ -98,7 +98,7 @@ metadata:
   name: javademo
 spec:
   rules:
-    - host: xboard.container.com
+    - host: javademo.container.com
       http:
         paths:
           - path: /
@@ -117,7 +117,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: xboard.container.com
+    - host: javademo.container.com
       http:
         paths:
           - path: /
@@ -151,11 +151,11 @@ Ingress 按 host 分流，所以你得让域名解析到节点上。测试环境
 
 ```text
 # /etc/hosts (macOS/Linux) 或 C:\Windows\System32\drivers\etc\hosts
-192.168.31.62  xboard.container.com
-192.168.31.63  xboard.container.com
+192.168.31.62  javademo.container.com
+192.168.31.63  javademo.container.com
 ```
 
-绑定之后浏览器访问 `http://xboard.container.com:81` 就能打开页面；Ingress 日志会记录每一次请求，可以确认流量确实到了：
+绑定之后浏览器访问 `http://javademo.container.com:81` 就能打开页面；Ingress 日志会记录每一次请求，可以确认流量确实到了：
 
 ```bash
 kubectl logs -n ingress-nginx -l app=ingress-nginx -f
@@ -171,7 +171,7 @@ kubectl logs -n ingress-nginx -l app=ingress-nginx -f
 | 看 Ingress | `kubectl get ingress` / `kubectl get ing` |
 | Ingress 规则详情 | `kubectl describe ingress <name>` |
 | 看 Ingress Controller | `kubectl get pods -A \| grep ingress` |
-| 验证转发 | `curl -H "Host: xboard.container.com" http://<node-ip>:81` |
+| 验证转发 | `curl -H "Host: javademo.container.com" http://<node-ip>:81` |
 
 ## Demo 示例
 
@@ -187,8 +187,8 @@ kubectl get ingress javademo
 kubectl describe ingress javademo
 
 # 3. 验证：不靠浏览器也能测
-curl -H "Host: xboard.container.com" http://192.168.31.62:81 -I
-curl -H "Host: xboard.container.com" http://192.168.31.63:81
+curl -H "Host: javademo.container.com" http://192.168.31.62:81 -I
+curl -H "Host: javademo.container.com" http://192.168.31.63:81
 
 # 4. 看流量到底走没走通
 kubectl logs -n ingress-nginx -l app=ingress-nginx --tail=50 -f
@@ -197,7 +197,7 @@ kubectl logs -n ingress-nginx -l app=ingress-nginx --tail=50 -f
 ```text
 # 从 Service 到 Ingress 的完整路径
 客户端
-  └── Host: xboard.container.com:81
+  └── Host: javademo.container.com:81
         └── Ingress Controller (DaemonSet，每个节点一个)
               └── 匹配 ingress 的 host 规则
                     └── Service javademo (ClusterIP)
