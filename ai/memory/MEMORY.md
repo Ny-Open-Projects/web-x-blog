@@ -1883,3 +1883,8 @@
 - 1827-mmap-usage-boundary.deep：页错误生命周期（映射≠分配）；malloc 128KB 阈值=「池化小块+mmap 大块」分工；mmap 随机访问缺页风暴反例（DB 自管缓冲池）；Go mcache/mcentral/mheap 活教材。
 - 1831-disk-scheduling：七族演进（FCFS→SSTF→SCAN→C-SCAN→N-Step→LOOK）；[实测] 经典队列 FCFS 640/SSTF 236/SCAN 331；SSD 退化边界。
 - 1831-disk-scheduling-variants.deep：病-药演进链；N-Step 批处理锁防插队；饥饿治理三思路（定向循环/分批锁定/老化加权）迁移到 mutex/MQ；Linux none/kyber/mq-deadline/bfq。
+
+## wave172（2026-10-09 11:15）6-16 接口多态 / 4-17 trim 族 —— 2 卡（S 档单卡），340 done (92%)
+- 616-interface-polymorphism：多态三步答法（定义→接口切片+多态参数→加类型不改调用方）；[实测] robotDuck append 后调用方零改动；与 613（鸭子类型语义）/615（两条实现路径）/614（无重载）只引不重述。
+- 417-trim-family-two-modes：贪婪派（Trim/TrimLeft/TrimRight，cutset 字符集）vs 精确派（TrimPrefix/TrimSuffix，完整子串只删一次）；[实测] gogointerviewgogo 六函数输出；TrimFunc 回调 true=剪除。
+- 纠错硬伤：源称「ASCII<128 只有中文字符」事实恰反（ASCII<128=英文段，r<128 剪英文留中文）；trim 族返回切片共享底层数组接 905。
