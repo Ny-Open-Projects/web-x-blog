@@ -1795,3 +1795,10 @@
 - 1516-pod-flow-detail.deep：list-watch 取舍、调度两阶段过滤+打分、kubelet 重启 vs 控制器重建两层故障域、Pending 排查分流（无 Scheduled 查调度 / FailedCreatePodSandBox 查镜像）。
 - **k3d 实测**（本机新建集群 wave158，k3s v1.35.5）：镜像不可达时 Scheduled 事件照常出现而 Pod 卡 Pending（调度成功≠容器运行）；修镜像后 apply→Running 2.4s；conditions PodScheduled→Ready 1s 内。集群保留供后续 K8s 波复用（k3d cluster delete wave158 可删）。
 - **规则 14 新发现**：代码块白名单 go/python/java/sql/lua——bash/text 不算「可运行语言」，主卡必须有 go/sql 块（warn +1 教训，已用 Pod JSON 解析 go 块修复回 51）。
+
+## wave159（2026-10-09 09:34）6-14 重载重写 / 17-14 冒泡排序 —— 4 卡，316/369
+- 614-no-overload-override：重载=同名不同参（Go 拒绝，method redeclared）、重写=同名同参不同实现（嵌入遮蔽 + 接口分派两层）；替代路可变参数/泛型/命名分化。
+- 614-overload-alternatives.deep：砍重载的代价账；**遮蔽是编译期静态分派、接口经 itab 运行期分派**——「Cat 传成 Animal 调用走旧版」反例钉死区别；ParseInt/ParseFloat 命名分化实例。
+- 1714-bubble-sort：相邻逆序交换+每轮冒最大值+swapped 剪枝；[实测] 53821 逐轮与源一致；n=1000 cmp=498015/swap=248090（=逆序数，期望 n(n-1)/4）；已序 1 轮 4 次比较 O(n)。
+- 1714-bubble-vs-selection.deep：对账 冒泡 248090 swap vs 选择 993（250 倍）；逆序数统一量尺（冒泡交换数=插入移动数=逆序数）；鸡尾酒/梳排序改进谱系；生产 pdqsort。
+- 边界：615-embedding-inheritance 只引不重述（嵌入全景）；1715 选择排序主卡在 wave146。

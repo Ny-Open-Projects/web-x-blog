@@ -912,10 +912,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "614-no-overload-override",
+        "614-overload-alternatives.deep"
+      ],
+      "done_at": "2026-10-09T09:30:10+08:00"
     },
     "source/06/6-15 Go语言中如何实现继承？-迅捷文字转语音-1790861416618zh.txt": {
       "id": "6-15",
@@ -5999,10 +6003,14 @@
       "depth_cap": "L2",
       "suggest_cards": 2,
       "allow_deep": false,
-      "status": "pending",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "last_error": null,
-      "cards": []
+      "cards": [
+        "1714-bubble-sort",
+        "1714-bubble-vs-selection.deep"
+      ],
+      "done_at": "2026-10-09T09:30:11+08:00"
     },
     "source/17/17-15 如何在Golang中实现选择排序？-迅捷文字转语音-1790929225229zh.txt": {
       "id": "17-15",
@@ -7471,7 +7479,7 @@
     }
   },
   "next_num": 1,
-  "waves": 158,
-  "updated": "2026-10-09T09:22:42+08:00",
+  "waves": 159,
+  "updated": "2026-10-09T09:30:11+08:00",
   "consec_fail": 0
 }
