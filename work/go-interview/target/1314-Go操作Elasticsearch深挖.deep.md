@@ -21,6 +21,47 @@
 - 被追问版本时，直接用「官方 SDK /v8 对应 ES8」对齐，展示你知道版本耦合。
 - 主动补一句「scroll 已被 PIT+search_after 替代」，体现你跟进了新版最佳实践。
 
-## ⚠️ 原文纠错
+## 细节与核心 API
+
+**官方 SDK 初始化（v8，生产关 sniff）：**
+
+```go
+es, err := elasticsearch.NewClient(elasticsearch.Config{
+    Addresses: []string{"https://es:9200"},
+    Username:  "elastic",
+    Password:  "***",
+    // 生产关闭 sniff（容器/云托管拓扑下嗅探反而错）
+})
+```
+
+**写入双通道：单条 Index + bulk 处理器：**
+
+```go
+// 单条写：OpType/index、refresh、routing
+_, err := es.Index("orders",
+    bytes.NewReader(doc),
+    es.Index.WithRouting("uid123"),
+    es.Index.WithRefresh("false")) // 写入默认不 refresh，不可立即查
+
+// bulk 处理器：workers goroutine + 三触发（flush bytes / actions / interval）+ afterFunction 回调
+bulk := esutil.NewBulkIndexer(esutil.BulkIndexerConfig{
+    Index:         "orders",
+    NumWorkers:    4,
+    FlushBytes:    5 << 20,
+    FlushInterval: 10 * time.Second,
+})
+_ = bulk.Add(ctx, esutil.BulkIndexerItem{
+    Action: "index", Routing: "uid123",
+    Body: bytes.NewReader(doc),
+    OnSuccess: func(ctx, it, res) {},
+})
+_ = bulk.Close(ctx)
+```
+
+**查询封装（Get/MGet/Query/Scroll 四类）：**
+
+```go
+// 深翻页用 scroll 回调，用完 clearScroll；新版优先 PIT + search_after（见 1311）
+```
 1. 事实核校： [经验] 三层架构、SDK 选型、bulk 三条件、refresh 默认 false、scroll 深翻页——均正确，本卡为架构性归纳。
 2. 崩坏词归一：源码将 Elasticsearch 音译为崩坏词，本卡统一为 Elasticsearch；源码将 bulk 音译为 bug（本卡统一为 bulk）；源码将 Go 语言 音译为崩坏词，本卡统一为 Go 语言。

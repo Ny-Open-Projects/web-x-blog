@@ -22,3 +22,25 @@
 - 被问"写入慢 / 写入被拒怎么排查"：先说**路由散列扇出**（bulk 不指定 routing → 片数倍请求），再说**节点侧**（GC/网络/故障）与**队列打满**（indexing queue），最后给"routing 打包 + 手动 routing"两招。
 - 惊艳点：点出"分片数越多，不指定 routing 的 bulk 放大越严重"——把"分片规划"和"写入性能"连起来（呼应 1316-shard-planning 的分片数权衡）。
 - 边界声明：本卡聚焦**路由层与队列层**的写入优化，与 `1314-doc-index-api`（Go 写入 API / refresh 语义）和 `1316-refresh-translog`（refresh/translog 内部机制）互补，不重复其内部细节；`1314-bulk-processor` 讲 Go 侧 bulk 两式（Add/Do），本卡讲集群侧路由放大与拒绝根因。
+
+## 细节与核心 API
+
+**routing 打包收敛扇出（写请求数 = 分片数 → 1）：**
+
+```go
+// 同维度文档放同一 bulk + 显式 routing，一次 bulk 只转发到固定分片
+req := es.Bulk().Index("logs").Routing("uid123")
+req.Add(esapi.IndexRequest{Document: doc1, Routing: "uid123"})
+req.Add(esapi.IndexRequest{Document: doc2, Routing: "uid123"})
+// 不指定 routing → hash(_id) % 主分片数 → 一次 bulk 被拆成"分片数"倍写请求
+```
+
+**写入被拒链路（~rejected 排查）：**
+
+```text
+分片数过多 + 部分节点故障/GC 卡顿/网络抖动 → 某些分片写入延迟
+→ 节点 indexing_queue 打满 → 新写入被 reject
+排查：GET _cat/thread_pool/write?v  看 queue/rejected；GET _nodes/hot_threads
+```
+
+**取舍：日志/度量（只写不更新）→ 自动 ID + 按维度 routing 打包；有更新 → 业务 ID + 同维度 routing**

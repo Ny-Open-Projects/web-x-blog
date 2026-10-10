@@ -23,6 +23,29 @@ ES 段的整个生命周期可串成一条链：
 - 被追问性能调优时，直接抛 `max_thread_count` 默认值公式与 HDD 设 1 的结论。
 - 收尾补一句「force merge 只用于不再写入的索引」，避免被追问时给出危险建议。
 
-## ⚠️ 原文纠错
+## 细节与核心 API
+
+**段生命周期 API：**
+
+```json
+// 段不可变；后台 merge 合并小段、清标记、提压缩、有限流保护
+POST /idx/_forcemerge?only_expune_deletes=true   // 仅只读/归档索引，代价高需规划
+// 限流：HDD 必须降 max_thread_count=1，避免 IO 打满
+PUT /idx/_settings { "index.merge.scheduler.max_thread_count": 1 }  // SSD 默认即可
+```
+
+**不可变五动机（答题骨架）：**
+
+```text
+顺序写（append-only，无随机改写） / 免锁（读不加锁） / 缓存不失效（段文件可安全缓存）
+/ 标记删除（删改只打标，物理清除推迟到 merge） / 一致性（段一旦写出即不变，副本易对齐）
+```
+
+**运维边界：**
+
+```bash
+GET _cat/segments/idx?v        # 看段数；段过多 → 查询慢、合并压力大
+POST /idx/_forcemerge?max_num_segments=1  # 只读索引收尾，写入中索引禁用
+```
 1. 事实核校： [经验] 段生命周期五环节、不可变五动机、merge 多阶段+限流、force merge 代价与差异——均正确，本卡为架构性归纳。
 2. 崩坏词归一：源码将 segment 音译为 段/淡文件、Lucene 音译为 loosen/loser、merge 音译为 蛋合并/氮合并、force merge 音译为 firstmerge、Elasticsearch 音译为崩坏词（本卡统一为 Elasticsearch）。

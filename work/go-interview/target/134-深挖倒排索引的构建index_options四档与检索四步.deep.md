@@ -52,3 +52,34 @@
 1. 事实核校：构建三步（预处理含分词/去停用词/词干提取、生成倒排列表、汇总为映射）、`index_options` 四档含义与 `positions` 为默认值、检索四步（查询预处理/查倒排列表/合并/排序返回）、and 取交集 or 取并集、权重分词停用词影响效果、需定期更新索引——均与 ES 实现一致 `[经验]`。
 2. 补充：原文未提 **ES 的近实时（NRT）机制**——倒排索引并不是"定期重建"，而是**新文档先写入内存 buffer 与 translog，经 refresh（默认 1 秒）生成新段后才可被检索**，段再通过后台 merge 合并；面试中把"定期更新"改述为 **refresh + merge 的近实时模型**更准确 `[经验]`。
 3. 崩坏词归一：源码将倒排索引、倒排列表、停用词、词干提取、index_options、偏移量、高亮等术语音译为多组崩坏词，本卡统一为规范术语 `[经验]`。
+
+## 细节与核心 API
+
+**index_options 四档（默认 positions，控制 posting list 存多少信息）：**
+
+```json
+PUT /my_idx {
+  "mappings": { "properties": {
+    "title":    { "type": "text", "index_options": "docs" },     // 只存文档 ID
+    "content":  { "type": "text", "index_options": "freqs" },    // + 词频（评分）
+    "body":     { "type": "text", "index_options": "positions" },// 默认：+位置（短语查询）
+    "comment":  { "type": "text", "index_options": "offsets" }   // +字符偏移（高亮）
+  } }
+}
+```
+
+**检索四步里的合并语义（and 交集 / or 并集）：**
+
+```json
+// match + operator=and → 取多个 term 倒排列表的交集
+{ "query": { "match": { "body": { "query": "go 并发", "operator": "and" } } } }
+// bool.must 等价于 and；bool.should 等价于 or（取并集）
+{ "query": { "bool": { "must": [ {"term":{"f":"a"}}, {"term":{"f":"b"}} ] } } }
+```
+
+**近实时模型（纠错 2 的落地）：**
+
+```text
+新文档 → 内存 buffer + translog → refresh(默认 1s) 生成新段(OS cache) 才可搜
+段经后台 merge 合并；不是"定期重建索引"，而是 refresh + merge 的 NRT 模型
+```

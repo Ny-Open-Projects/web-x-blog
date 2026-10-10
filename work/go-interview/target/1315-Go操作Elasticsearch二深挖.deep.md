@@ -33,3 +33,38 @@ scroll     → 用完 clearScroll；scrollID 变化才清旧，防误清在用�
 ```
 
 > 边界：连接池封装见 1314；两种 SDK 取舍见 1314；索引/文档 API 见 1314；查询 API 见 1314；bulk 风险见 1314；seq_no 机制见 1312；深翻页替代见 1311。本卡只深挖"Go 操作 ES（二）"不重述（一）各机制。
+
+## 细节与核心 API
+
+**官方 SDK 两级封装 + HTTPS/TLS：**
+
+```go
+// 高层 typed API（推荐新项目）
+typed, _ := elasticsearch.NewTypedClient(elasticsearch.Config{
+    Addresses: []string{"https://es:9200"},
+    Username:  "elastic", Password: "***",
+})
+// 原始 DSL 用 esapi（灵活但繁琐）
+```
+
+**写入设计（routing / ID / json / painless / seq_no）：**
+
+```go
+// routing 控数据分布（查询侧定向扫一片，降扇出）；业务 ID 幂等更新
+typed.Index("orders").Id(orderID).Routing(userID).Document(o).Do(ctx)
+// json tag 必须与 mapping 字段名对应，否则串行失败
+type Order struct {
+    UserID int64  `json:"user_id"`  // 对应 mapping 的 user_id
+    Status string `json:"status"`
+}
+// painless 部分字段更新
+typed.Update("orders", orderID).Doc(map[string]any{"status": "paid"}).Do(ctx)
+```
+
+**查询优化（preference / scroll 内存）：**
+
+```go
+// preference 本地分片优先，命中缓存、减跨节点
+typed.Search().Index("orders").Preference("_local").Query(q).Do(ctx)
+// scroll 用完 clearScroll；scrollID 变化才清旧的，防误清在用游标
+```
