@@ -29,3 +29,25 @@
 3. **讲版本演进**：5.6 Antelope+OFF 最坑，5.7/8.0 默认 3072、8.0 配置移除。
 4. **区分两限制**：行 65535（TEXT/BLOB 豁免）vs 索引 767/3072，别混。
 5. **避坑**：不在 8.0 找 innodb_large_prefix；不说"索引限制恒 767"；不把 TEXT/BLOB 算进行长。
+
+## 细节与核心 API
+
+**索引长度上限决策矩阵**：
+
+```text
+行格式 COMPACT/REDUNDANT    → 767 字节
+行格式 DYNAMIC/COMPRESSED   → 3072 字节（需文件格式 Barracuda）
+字符集 UTF8MB4(4B) 放大占用   → varchar(255) 在 utf8mb3 下 765 勉强过、utf8mb4 下 1020 早超
+版本 5.6 默认 Antelope+OFF   → 767（最坑）；5.7/8.0 默认 Barracuda/DYNAMIC → 3072
+```
+
+```sql
+-- 解除 767 限制（老库 5.6 迁移）
+SET GLOBAL innodb_file_format=Barracuda;   -- 5.6 需显式（8.0 已固定 Barracuda）
+SET GLOBAL innodb_large_prefix=ON;         -- 5.6 需显式；8.0 已移除该变量
+ALTER TABLE t ROW_FORMAT=DYNAMIC;
+```
+
+**两限制区分**：行 65535（TEXT/BLOB 豁免）vs 单索引 767/3072（行格式 + 字符集 + 版本决定）；超长字段用前缀索引 `name(20)` 或哈希列（见 1223）。
+
+> 边界：行格式见 1215；key_len 读取见 1245；char/varchar 存储数学见 1227；本卡只做索引长度限制体系。

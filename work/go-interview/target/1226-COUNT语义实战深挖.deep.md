@@ -26,3 +26,25 @@
 3. **用 EXPLAIN 收口**：说"有二级索引时 `COUNT(*)` 走最小 key_len 的二级索引"，比空谈"快"更有说服力。
 4. **锚定引擎差异**：MyISAM O(1) vs InnoDB MVCC，是区分"懂原理"和"只会背"的分水岭。
 5. **边界不漏**：`COUNT(0)`/`COUNT(4)` 都计全部行（0/4 非 NULL）；`COUNT(NULL)` 恒 0——这两个边界常被追问。
+
+## 细节与核心 API
+
+**语义**：`COUNT(expr)` 计 expr 非 NULL 行；`COUNT(*)` 计全部行（ANSI 计行语法）：
+
+```sql
+SELECT COUNT(*), COUNT(1), COUNT(id), COUNT(name), COUNT(NULL) FROM t;
+-- COUNT(*) / COUNT(1)       走最小二级索引（最快）
+-- COUNT(主键)              走聚簇索引（全字段，较慢）
+-- COUNT(索引字段)          二级索引 + 判 NULL（中）
+-- COUNT(非索引字段)        全表扫描（最慢）
+-- COUNT(0)/COUNT(4) 都计全部行（非 NULL）；COUNT(NULL) 恒 0
+EXPLAIN SELECT COUNT(*) FROM t;   -- 看 key 选最小 key_len 的二级索引
+```
+
+**引擎差异**：MyISAM 无事务 → O(1) 维护总行数；InnoDB 有 MVCC → 必须扫索引或靠应用层计数。
+
+```text
+高频准确总数 → 应用层计数表/缓存；近似总数 → information_schema / SHOW TABLE STATUS
+```
+
+> 边界：索引选择与 key_len 见 1245；覆盖索引见 1246；本卡只讲 COUNT 语义实战。
