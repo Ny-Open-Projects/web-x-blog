@@ -22,6 +22,32 @@
 - 被追问主从不一致：直接抛「mode=2 + statement binlog 主键错位」，并给 row binlog 解法。
 - 收尾强调「走索引才能精准锁行，否则锁范围放大」，展示实战视野。
 
+## 细节与核心 API
+
+**读类型定是否加锁**：
+
+```sql
+SELECT * FROM t WHERE id=1;             -- 一致性读（快照读，MVCC 无锁）
+SELECT * FROM t WHERE id=1 FOR UPDATE;  -- 锁定读，加 X（next-key/RR 或 记录锁/RC）
+SELECT * FROM t WHERE id=1 FOR SHARE;   -- 锁定读，加 S
+```
+
+**写必加 X；RR 默认 next-key（含间隙），RC 退化为记录锁**：
+
+```sql
+UPDATE t SET a=1 WHERE id=1;   -- 对 id 索引加 X；RR 下 next-key，RC 下记录锁
+```
+
+**自增锁粒度**：`mode=2`（轻量，8.0 默认）性能最高，但**必须配 `binlog_format=ROW`** 保主从一致；statement binlog 下主键错位：
+
+```ini
+innodb_autoinc_lock_mode = 2   # 前提：binlog_format = ROW
+```
+
+**反直觉两点**：间隙锁只防插入不防读写、且间隙锁之间不互斥；走索引才能精准锁行，否则锁范围放大。
+
+> 边界：隔离级别见 1230；加锁单位与索引见 1235；本卡只讲"一条 SQL 怎么加锁"的体系与调优。
+
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] 一致性读/锁定读之分、FOR UPDATE(X)/FOR SHARE(S)、写加 X、自增锁与 autoinc_lock_mode、间隙锁防幻读且仅 RR 生效、5.6.3 移除 unsafe_for_binlog——均为架构性归纳，与 InnoDB 锁机制一致。
 2. 崩坏词归一：源码将 InnoDB / 行锁 / 幻读 / 事务 / 排他锁 / 自增 等音译为崩坏词；本卡统一为规范术语。

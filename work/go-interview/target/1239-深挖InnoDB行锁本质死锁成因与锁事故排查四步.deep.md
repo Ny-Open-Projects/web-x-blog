@@ -51,6 +51,43 @@
 5. **排查要落到三个字段**：`blocking_pid` / `blocking_trx_id` / `blocking_query`——报出字段名比泛泛说"查锁表"更有说服力（视图清单与版本迁移见 1240）。
 6. **止步档位**：能讲清三种锁与 RR 默认行为即达 L4；能补上死锁三成因、"锁等待 ≠ 死锁"、排查四步与三个关键字段，即达 L5。
 
+## 细节与核心 API
+
+**行锁本质：加锁对象是索引，不是数据行本身**：
+
+```sql
+SELECT * FROM t WHERE id=1 FOR UPDATE;       -- 主键等值 → RR 退化为记录锁（唯一索引降级）
+SELECT * FROM t WHERE name='x' FOR UPDATE;   -- name 无索引 → 退化为全表行锁（不是表锁！）
+```
+
+**三种行锁与隔离级别**：
+
+```text
+记录锁 Record Lock      RC / RR 均支持
+间隙锁 Gap Lock         仅 RR 支持（锁间隙防插入）
+临键锁 Next-Key Lock     RR 默认、最基本加锁单位；遇唯一索引降级为记录锁
+无主键表：仍对 InnoDB 隐藏 row_id 加锁，行为不变只是看不到具体 id
+```
+
+**死锁检测 + 超时（8.0 默认检测 ON）**：
+
+```sql
+SHOW VARIABLES LIKE 'innodb_deadlock_detect';     -- 高并发热点写可关闭，改超时兜底
+SHOW VARIABLES LIKE 'innodb_lock_wait_timeout';   -- 默认 50s，建议 5~10s
+-- 锁等待长 ≠ 死锁；死锁是循环依赖，靠检测+回滚解决，应用重跑被回滚事务（需幂等）
+```
+
+**排查四步 + 三个关键字段**：
+
+```sql
+SHOW ENGINE INNODB STATUS;                     -- ① 有无等待的锁
+SELECT * FROM information_schema.INNODB_TRX;   -- ② 活跃事务
+SELECT * FROM sys.innodb_lock_waits;           -- ③ 锁等待明细（8.0 底层读 data_lock_waits）
+-- ④ 取 blocking_pid / blocking_trx_id / blocking_query 定位阻塞源
+```
+
+> 边界：加锁规则架构见 1236；隐式锁与二级索引见 1237；范围查询加锁见 1238；本卡只讲行锁本质、死锁与排查四步。
+
 ## ⚠️ 原文纠错
 1. 事实核校：行锁通过对索引记录加锁实现、三种锁类型及其隔离级别支持、临键锁为最基本加锁单位、RR 下默认临键锁且遇唯一索引降级、无主键表仍对隐藏 ID 加锁、死锁为循环依赖且与锁等待不同、死锁检测后自动回滚、应用应重试被回滚事务、排查四步与三个关键字段——均与 InnoDB 实现一致 `[经验]`。
 2. 补充：原文未提**间隙锁与临键锁在 RC 下不生效**，也未提**死锁检测可通过 `innodb_deadlock_detect` 关闭**（高并发热点更新场景下关掉检测、改用锁等待超时是常见调优手段）；另外 `sys.innodb_lock_waits` 在 8.0 中底层已改读 `performance_schema.data_lock_waits` `[经验]`。

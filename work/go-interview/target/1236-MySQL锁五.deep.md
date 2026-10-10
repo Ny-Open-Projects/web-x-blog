@@ -22,6 +22,28 @@ InnoDB 加锁规则可拆成三把「锁尺子」：
 - 区分「临键锁左开右闭 vs 间隙锁全开」的区间语义，这是 P7 分水岭。
 - 被要求证明时，直接给 `performance_schema.data_locks` 的 `lock_mode`（含 `REC_NOT_GAP`/`GAP`/`INSERT_INTENTION`）作为观测证据。
 
+## 细节与核心 API
+
+**三把锁尺子**：
+
+```text
+记录锁 REC_NOT_GAP          锁单行，不含间隙
+间隙锁 GAP                  开区间不含边界，防插入（仅 RR）
+临键锁 next-key             记录锁+间隙锁，左开右闭 [a, b)（RR 默认行锁形态）
+加锁 = f(索引类型 × 查询形态 × 记录是否存在)；UPDATE 先归约为 delete/insert 再套规则
+```
+
+**规则速记**：唯一索引等值+存在→记录锁；不存在→间隙锁；范围→临键锁；间隙锁 X/S 不互斥（只防插入）。
+
+```sql
+-- 观测加锁类型（8.0）
+SELECT lock_mode, lock_type, index_name, lock_data
+FROM performance_schema.data_locks;
+-- lock_mode 含 REC_NOT_GAP / GAP / INSERT_INTENTION / X / S
+```
+
+> 边界：锁机制四型见 1233；隔离级别见 1230；本卡只讲 UPDATE 加锁规则架构。
+
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] 三把锁尺子、唯一索引等值存在→记录锁、不存在→间隙锁、范围→临键锁、间隙锁不互斥、Insert Intention——均正确，本卡为架构性归纳。
 2. 崩坏词归一：源码将 临键锁 音译为 零件锁、间隙锁 正确保留、记录锁 正确保留、意向排他锁 音译为 意向排发组、写锁 音译为 协索、读锁 音译为 读组、插入意向锁 音译为 insertintention、终端 音译为 终态/中单、information_schema.innodb_trx 音译为 schemlDBTRX；MySQL 音译为崩坏词（本卡统一为 MySQL）。

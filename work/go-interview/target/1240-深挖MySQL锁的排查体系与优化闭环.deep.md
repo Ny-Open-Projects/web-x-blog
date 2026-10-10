@@ -39,6 +39,31 @@
 4. **给数字**：默认超时 50 秒、建议 5~10 秒、检测深度 200、Info 截断 100 字符——具体数字比形容词可信。
 5. **止步档位**：能完整说出排查链路三层即达 L4；能再讲清版本差异、兜底开关的耦合关系并给出优化顺序，即达 L5。
 
+## 细节与核心 API
+
+**排查闭环五层（从现象到优化）**：
+
+```sql
+SHOW PROCESSLIST;                               -- ① 现象：STATE 含锁字、TIME 异常偏大
+SELECT * FROM information_schema.INNODB_TRX;    -- ② 活跃事务 / 持锁时长
+SELECT * FROM performance_schema.data_locks;    -- ③ 8.0 加锁类型与被锁数据
+SELECT * FROM performance_schema.data_lock_waits;-- ③ 谁等谁（锁等待图）
+SELECT * FROM performance_schema.metadata_locks;-- ③ DDL 阻塞（MDL，看 PENDING）
+SHOW OPEN TABLES WHERE In_use > 0;              -- ③ 表级占用
+```
+
+**兜底机制（成对记忆：检测 ↔ 超时）**：
+
+```ini
+innodb_deadlock_detect = ON     # 5.7.15+ 默认 ON；高并发热点写可关闭
+innodb_lock_wait_timeout = 5    # 默认 50s，建议 5~10s；关闭检测必须同步调小，否则兜底失效
+innodb_rollback_on_timeout       # 决定超时回滚范围（整事务 or 仅当前语句）
+```
+
+**优化闭环（先做无副作用的）**：缩短持锁时间 → WHERE/JOIN 命中索引缩小锁范围 → 大查询分页 → 合并查询减少加锁次数 → 加锁操作放事务最后 → 冲突少可用乐观锁。
+
+> 边界：行锁本质与排查四步见 1239；锁谱系（全局锁/MDL/AUTO-INC/IS-IX）见 1233；本卡只讲锁的排查体系与优化闭环。
+
 ## ⚠️ 原文纠错
 1. 事实核校：排查链路（processlist → 聚合 → 锁视图 → 检测/超时 → 优化）、8.0 视图迁移、锁谱系（全局锁、MDL、AUTO-INC、表级共享/排他、意向锁、间隙锁/记录锁/插入意向锁）——均与 MySQL 官方手册一致 `[经验]`。
 2. 补充：原文称「只能列出前一百条」应为「INFO 列截断为前 100 个字符」；AUTO-INC 锁在 8.0 的行为与 `innodb_autoinc_lock_mode` 取值相关，答题时注明受该参数影响更严谨 `[经验]`。

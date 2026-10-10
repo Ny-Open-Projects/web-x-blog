@@ -22,6 +22,34 @@
 - 被追问死锁：直接说「next-key 间隙重叠 + 两事务加锁顺序相反」，并抛 `data_locks` 观测手段。
 - 收尾强调「加锁单位默认是 next-key 锁、唯一等值会退化」，展示对默认行为的掌握。
 
+## 细节与核心 API
+
+**锁永远加在索引上**：命中主键锁主键；命中二级索引锁二级索引 + 对应主键；无索引 → 锁全表。
+
+```sql
+UPDATE t SET a=1 WHERE id=1;     -- 主键等值 → RR 下退化为记录锁（唯一/主键定位缩小锁范围）
+UPDATE t SET a=1 WHERE name='x'; -- name 无索引 → 锁全表（走索引才能精准锁行）
+```
+
+**加锁单位默认 next-key；唯一键等值优化退化为记录锁**：
+
+```text
+RR 默认 next-key（记录锁+间隙锁，防幻读）；RC 退化为记录锁
+唯一键等值命中：优化为记录锁，减少间隙争用
+```
+
+**死锁根因 = next-key 间隙重叠 + 两事务加锁顺序相反**：
+
+```sql
+-- 观测三件套
+SELECT * FROM performance_schema.data_locks;          -- 锁类型与等待
+SELECT * FROM performance_schema.data_lock_waits;     -- 锁等待图（谁等谁）
+SELECT * FROM information_schema.innodb_trx\G          -- 活跃事务 / 持锁时长
+-- 大表 DELETE 走 next-key + purge 异步，宜分批限行数，避免长事务持锁
+```
+
+> 边界：锁机制四型见 1233；隔离级别见 1230；本卡只讲"索引定加锁对象 + 排查思路"。
+
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] 隔离级别影响锁粒度、加锁针对索引、各类语句加锁路径、next-key/间隙/插入意向语义、观测表（data_locks/innodb_trx）——均为架构性归纳，与 InnoDB 锁机制一致。源稿「delete 需 s 锁」为口播误差，实为 X 锁。
 2. 崩坏词归一：源码将 InnoDB / 行锁 / next-key 锁 / 事务 / 聚簇索引 / 间隙锁 等音译为崩坏词；本卡统一为规范术语。

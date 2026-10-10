@@ -35,6 +35,33 @@ SELECT * FROM performance_schema.metadata_locks
 WHERE LOCK_STATUS IN ('PENDING','GRANTED');
 ```
 
+## 细节与核心 API
+
+**行级锁四型（InnoDB，RR 下默认 next-key）**：
+
+```text
+记录锁      锁单个索引项
+间隙锁      锁索引记录间间隙，防插入（仅 RR）
+临键锁      记录锁+间隙锁，左开右闭 [a, b)
+插入意向锁  INSERT 声明插入意向，互不冲突可并发插入
+```
+
+**意向锁 / auto-inc / MDL**：
+
+```text
+意向锁 IS/IX：对行加 S/X 前先对表加意向锁，让表锁请求快速判断行锁冲突（避免逐行扫）
+auto-inc 锁 ：保证自增列并发不重；innodb_autoinc_lock_mode 调粒度
+```
+
+```sql
+-- MDL 雪崩排查：LOCK_STATUS='PENDING' 即等待，优先 kill 持锁长事务
+SELECT * FROM performance_schema.metadata_locks
+ WHERE LOCK_STATUS IN ('PENDING','GRANTED');
+-- 间隙/next-key 仅 RR 默认启用；RC 可关间隙降冲突（失幻读防护）
+```
+
+> 边界：隔离级别矩阵见 1230；MVCC 见 1231；加锁规则与排查见 1235；本卡只讲锁机制四型与体系。
+
 ## 思路与架构
 - 行级锁是一套"记录锁 + 间隙锁"的组合体系：记录锁锁索引项，间隙锁锁区间，next-key 二者合一防幻读；插入意向锁是 INSERT 的并发优化。
 - 意向锁是表级"占位符"，让表锁请求不必逐行扫描即可判断行锁冲突，是 InnoDB 行锁与表锁共存的桥梁。
