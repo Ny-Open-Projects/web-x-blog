@@ -25,3 +25,29 @@
 - **被问「断连后为什么全量」按序排查**：runID 是否变了 → offset 是否已被覆盖 → 积压缓冲是否太小。给出排查顺序比猜原因可信得多。
 - **主动补一个反常识点**：积压缓冲区是**环形**的，写满**直接覆盖**而不是阻塞；所以「主库写太快」会让从库重连必走全量，形成雪崩式的复制风暴。
 - **收尾给可验证动作**：`INFO replication` 看 `master_link_status` 与两个 offset 差值、`INFO server` 比对 runID、压测期监控 `rdb_bgsave_in_progress`——能讲出观测方式最加分。
+
+## 细节与核心 API
+
+**主从复制关键配置（两缓冲区 + 超时）：**
+
+```conf
+repl-backlog-size 1mb   # 复制积压缓冲区默认 1MB，环形；估算 = 写速率 × 断连时长 × 2
+repl-timeout 60         # 复制超时默认 60s
+repl-backlog-ttl 3600   # 从库全掉后积压缓冲区保留时长
+```
+
+**全量 vs 增量判定（重连先问三问）：**
+
+```text
+runID 变了吗？ → 变了必走全量
+offset 之后的数据还在积压缓冲区吗？ → 被覆盖则全量
+主库有足够资源做全量(BGSAVE)吗？ → 否则失败重来
+```
+
+**观测命令：**
+
+```bash
+redis-cli INFO replication   # master_link_status / master_repl_offset / slave_repl_offset / connected_slaves
+redis-cli INFO server         # run_id（40 位，重启即变）
+redis-cli INFO persistence    # rdb_bgsave_in_progress（全量期间监控）
+```

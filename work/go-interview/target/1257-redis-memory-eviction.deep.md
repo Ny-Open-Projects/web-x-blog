@@ -25,4 +25,32 @@ Redis 内存满的处理链路：
 - 必点版本默认：3.0 前 volatile-lru、3.0+ noeviction、4.0 加 LFU。
 - 画"范围(allkeys/volatile) × 算法(lru/lfu/random/ttl) + noeviction = 8"矩阵防漏。
 - 收尾落到运维：CONFIG GET/SET + redis.conf 持久化 + INFO memory 监控。
+
+## 细节与核心 API
+
+**内存淘汰关键配置：**
+
+```conf
+maxmemory 4gb                 # 必须设，防 OOM 被 OS kill（按物理内存 70~80% 留碎片与峰值余量）
+maxmemory-policy allkeys-lfu  # 纯缓存：allkeys-lru/lfu；含持久语义：volatile-*
+maxmemory-samples 5           # 近似 LRU/LFU 采样数，越大越准但每次淘汰 CPU 越高
+```
+
+**八策略矩阵（范围 × 算法 + noeviction）：**
+
+```text
+allkeys-lru / allkeys-lfu / allkeys-random / allkeys-ttl
+volatile-lru / volatile-lfu / volatile-random / volatile-ttl
++ noeviction（只拦不删，默认 3.0+）
+版本默认：3.0 前 volatile-lru；3.0+ noeviction；4.0 加 LFU
+volatile-* 池空 → 退化为拒写
+```
+
+**观测与在线调整：**
+
+```bash
+redis-cli CONFIG GET maxmemory-policy
+redis-cli CONFIG SET maxmemory-policy allkeys-lfu
+redis-cli INFO memory   # 看 maxmemory / used_memory / mem_fragmentation_ratio / evicted_keys
+```
 ```

@@ -26,5 +26,35 @@
 4. **挖底层**：内存大页放大写时复制拷贝量，秒杀深挖点。
 5. **关联延展**：提 1253 持久化、1261 一致性，显示边界意识。
 
+## 细节与核心 API
+
+**大 key 识别与异步删除（UNLINK 主线程零阻塞，DEL 仅适合小 key）：**
+
+```bash
+redis-cli --bigkeys            # 扫描统计各类型最大 key
+redis-cli MEMORY USAGE bigkey  # 看单 key 内存占用
+UNLINK bigkey                  # 异步释放，引用计数 + 后台 unlink 线程
+# 集合拆分：取模拆成 N 个子 key，读时 MGET 聚合，删时逐个 UNLINK
+```
+
+**gzip 压缩存储（以算换带宽，命中即作 gzip 流免服务端解压）：**
+
+```go
+var buf bytes.Buffer
+gz := gzip.NewWriter(&buf)
+gz.Write(payload)
+gz.Close()
+cache.Set(key, buf.Bytes(), ttl)
+```
+
+**内存大页放大写时复制（fork 时单次拷贝从 4KB 升到 2MB）：**
+
+```conf
+# Redis 官方建议关闭透明大页（THP），避免持久化 COW 拷贝量爆炸
+# Linux 临时关闭：
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+# redis.conf 也可配合 disable-thp yes（部分发行版/版本支持）
+```
+
 ## ⚠️ 原文纠错
 未发现事实性技术错误。核对范围：通读全文并交叉核对"定义阈值、六影响(含 AOF always 阻塞/fork 复制页表/写时复制拷贝物理内存/内存大页 2MB vs 4KB)、六处理(含 UNLINK/取模拆分/gzip 压缩)"三条主线，与 Redis/Linux 内核机制一致。源码将若干 Redis 术语音译为崩坏词，本卡统一为规范术语，技术结论未做更正。与既有卡边界已在各主卡 纠错节注明（1253 持久化 / 1261 一致性），互补不重复 `[经验]`。

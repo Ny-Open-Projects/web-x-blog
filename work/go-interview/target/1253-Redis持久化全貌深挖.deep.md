@@ -22,3 +22,33 @@ Redis 持久化要解决「宕机重启后数据可恢复」，两条技术路�
 3. 用一张对比表收口：数据安全、恢复速度、文件大小三维度。
 4. 选型话术：「高性能 RDB、高可靠 AOF、兼顾混合，生产常双开兜底」。
 5. 细节加分：COW 按 4KB 页复制、everysec 最多丢 1 秒、aof-use-rdb-preamble 默认 yes。
+
+## 细节与核心 API
+
+**redis.conf 持久化关键配置：**
+
+```conf
+save 900 1            # RDB：900s 内至少 1 次写触发 BGSAVE
+save 300 10
+save 60 10000
+appendonly yes        # 开启 AOF
+appendfsync everysec  # always(最安全吃CPU) / everysec(默认,最多丢1s) / no(不可控)
+aof-use-rdb-preamble yes  # 4.0+ 混合持久化：重写文件前半 RDB + 后半 AOF 增量
+```
+
+**写时复制（COW）与 fork：**
+
+```text
+BGSAVE / BGREWRITEAOF 时 fork 子进程：
+- 父子进程共享 4KB 物理页，子进程读、父进程写
+- 父进程改某页 → 内核复制该 4KB 页给父（写时复制），子进程仍看旧页
+- 大 key 会让复制的物理页极多 → 持久化耗时陡增（见 1260）
+```
+
+**观测与手动触发：**
+
+```bash
+redis-cli INFO persistence   # 看 rdb_last_bgsave_status / aof_last_write_status
+redis-cli BGREWRITEAOF       # 手动触发 AOF 重写
+redis-cli LASTSAVE           # 最近一次 RDB 成功的时间戳
+```

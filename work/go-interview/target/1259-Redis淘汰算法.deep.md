@@ -29,3 +29,40 @@
 - 被问「LFU 就只是记次数吗」→ 立刻答**不是**，要讲**先衰减后按概率增长**，`lfu-decay-time` 越大衰减越慢、`lfu-log-factor` 越大增长越慢 [经验]。
 - 收尾给选材建议：**访问模式稳定且局部性强 → LRU；存在偶发批量扫描、容易造成污染 → LFU**，并补一句"LFU 需 Redis 4.0+" [经验]。
 - 主动边界到本库 MySQL 缓冲池相关卡片（InnoDB LRU 变体与中点插入策略），构成本地—分布式缓存对照 [边界]。
+
+## 细节与核心 API
+
+**Redis 对象内 24 bits 字段布局（LRU 与 LFU 共用同一空间）：**
+
+```go
+// 近似 LRU：24 bits 存「最后访问时间戳」，淘汰时随机采样 N 个取最久未访问
+// LFU(4.0+)：同一 24 bits 拆 16 bits(分钟级时间) + 8 bits(计数, 初值 5)
+type redisObject struct {
+    lru uint32 // 实际只用 24 bit：LRU 模式存时间戳；LFU 模式存 (time16 | counter8)
+}
+// 每次访问(LFU)：先按时间差衰减 → 再按概率增长（当前值越大概率越低，对数压缩 0~255）
+```
+
+**本地缓存用严格 LRU 完全合理（Go 进程内，移动只是指针赋值）：**
+
+```go
+type LRU struct {
+    ll *list.List
+    m  map[string]*list.Element
+}
+func (c *LRU) Get(k string) (any, bool) {
+    if e, ok := c.m[k]; ok {
+        c.ll.MoveToFront(e) // 命中移到头；本地场景成本低，与 Redis 约束不同
+        return e.Value, true
+    }
+    return nil, false
+}
+```
+
+**LFU 调优三项：**
+
+```conf
+maxmemory-samples 5   # 采样数：越大越接近真实 LRU/LFU，CPU 越高
+lfu-log-factor 10     # 增长概率对数因子，越大增长越慢（8 位计数器区分度拉长）
+lfu-decay-time 1      # 衰减分钟数，越大衰减越慢；停访问的 key 自然冷却
+```

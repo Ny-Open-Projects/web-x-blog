@@ -44,6 +44,37 @@
 4. **务必带"冷热分级"这个结论**：Tendis **不能完全替代 Redis**，正确姿势是**与 Redis 配合实现冷热数据分离**。
 5. **止步档位**：能讲清集群架构与两阶段同步即达 L4；能补上槽位计算细节、"binlog 存 RocksDB + BINLOG ID 保序"的设计动因，以及内存/磁盘的取舍表，即达 L5。
 
+## 细节与核心 API
+
+**槽位计算（与 Redis Cluster 完全一致，平滑迁移的论据）：**
+
+```go
+// CRC16(key) % 16384
+func slot(key string) int {
+    return int(crc16.Checksum([]byte(key), crc16.MakeTable(crc16.CCITTFalse)) % 16384)
+}
+// hash tag：用 key 中 {...} 部分参与哈希，使相关 key 落同一槽（事务/批量友好）
+// 示例：{user:1001}.profile 与 {user:1001}.order 同槽
+```
+
+**集群（去中心化）+ 复制（全量/增量）：**
+
+```text
+集群：gossip 协议，每节点持有全量路由；任意节点可访问，MOVE 协议最终路由到正确节点
+复制：
+- 全量：master 对 RocksDB 做快照（全量数据集 + 写数据时生成的 binlog）发给 slave
+- 增量：master 记录快照最大 binlog 序列号 master_sequence，从 master_sequence+1 逐条发
+- binlog 存 RocksDB，类似 MySQL row 模式；全局递增 BINLOG ID 保序；一条 binlog 对应一对 KV
+```
+
+**冷热分级落地（Tendis 不替代 Redis）：**
+
+```text
+热数据 → Redis（内存，低延迟）
+冷数据 → Tendis（RocksDB/磁盘，PB 级容量，延迟换成本）
+两者共用 Redis Cluster 的槽位/MOVE/gossip 模型，接入与运维迁移成本最低
+```
+
 ## ⚠️ 原文纠错
 1. 事实核校：gossip 去中心化且每节点持有全量路由、MOVE 协议路由、CRC16 % 16384 分槽、master 间 slot 不重复、binlog 存 RocksDB 且类似 MySQL row 模式、全局递增 BINLOG ID 保序、一条 binlog 对应一对 KV、全量同步用快照（全量数据集 + binlog）、增量同步从 master_sequence+1 逐条发送——均与 Tendis 设计一致 `[经验]`。
 2. 补充：原文称"一条 binlog 修改的数据只能对应 RocksDB 中的一对 KV"，应理解为**一条 binlog 变更对应确定的一对 KV 写入**，用以确保复制的幂等与可回放；另本节末尾口述称"介绍了 Redis 的主从架构、全量与增量同步流程"，**与本节主体（Tendis）不符，属口误** `[经验]`。
