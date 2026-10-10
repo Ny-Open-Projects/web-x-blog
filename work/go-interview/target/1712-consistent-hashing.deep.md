@@ -28,3 +28,25 @@
 3. **数字显专业**：虚拟节点经验值 100~200/节点（Redis 160）、查找 O(log V)、迁移量约 1/N。
 4. **高阶加分点**：① 明确指出环回（wrap-around）边界；② 区分经典环与 Redis 槽位；③ 提到虚拟节点顺带解决权重与稳定性。
 5. **避坑**：绝不把 slot 说成虚拟节点；绝不声称「天然均匀」（无虚拟节点时会倾斜）。
+
+## 细节与核心 API
+
+```go
+import ("hash/crc32"; "sort"; "strconv")
+type Ring struct { hashes []uint32; nodes  []string }
+func (r *Ring) Add(node string, vnodes int) {
+    for i := 0; i < vnodes; i++ {
+        h := crc32.ChecksumIEEE([]byte(node + "#" + strconv.Itoa(i)))
+        r.hashes = append(r.hashes, h); r.nodes = append(r.nodes, node)
+    }
+    sort.Slice(r.hashes, func(i, j int) bool { return r.hashes[i] < r.hashes[j] })
+}
+func (r *Ring) Get(key string) string {
+    h := crc32.ChecksumIEEE([]byte(key))
+    i := sort.Search(len(r.hashes), func(i int) bool { return r.hashes[i] >= h })
+    if i == len(r.hashes) { i = 0 } // 环回
+    return r.nodes[i]
+}
+// 虚拟节点(vnodes)打散数据，节点增减只迁移 1/N 的 key（vs 取模 N 全部重映射）
+// 应用：分布式缓存/存储分片，扩缩容时最小化数据迁移
+```

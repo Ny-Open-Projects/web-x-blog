@@ -19,3 +19,18 @@ map 删除内存行为
 ## 答题技巧
 - 被问"删元素内存降吗"按层答：部分不回收 → 全删/nil 才回 → 低版全删也不回 [经验]。
 - 主动边界到 `910`(空结构体尺寸)、`914`(map 原理)，构成 set 全栈 [边界]。
+
+## 细节与核心 API
+
+```go
+// 经典 set：map[K]struct{}（value 为零尺寸，仅占 key 内存，无 value 开销）
+set := map[string]struct{}{}
+set["a"] = struct{}{}
+if _, ok := set["a"]; ok { /* 存在 */ }
+delete(set, "a")
+// 内存：value 是 struct{}（0 字节），比 map[K]bool 省一个字节/项；runtime 用 zerobase 共享
+// 版本差异：
+//  - Go <1.24：手写 map[K]struct{} 或第三方泛型 set（如 deckarep/golang-set）
+//  - Go 1.24+：标准库新增 maps 包（maps.Keys/Values/Clone 等），官方泛型容器生态完善
+// 注意：map 遍历无序；并发要用 sync.Map 或加锁，不能多 goroutine 并发写
+```
