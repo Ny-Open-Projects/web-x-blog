@@ -17,3 +17,30 @@ binlog（二进制日志）是 MySQL server 层日志，记录所有更改数据
 3. **刷盘回答钩子**：把 `sync_binlog` 与 redo 的 `innodb_flush_log_at_trx_commit` 绑成"双 1"，顺带引出两阶段提交为何需要 XID 关联。
 4. **复制链路三线程两日志**：Binlog Dump/IO/SQL + binlog/relay log，点出 SQL 单线程是延迟根因。
 5. **反直觉点**：① binlog 时间戳用主库时钟，**主从时钟不同步不导致复制延迟**；② 半同步 ACK 是"写入 relay log"不是"执行完"；③ 混合模式缩写是 MBR 不是 MMR。
+
+## 细节与核心 API
+
+**双 1 不丢事务基线（server 层 binlog + 引擎层 redo 配合）**：
+
+```ini
+sync_binlog = 1                          # 每次事务提交 fsync（0=交 OS 缓存最快/可能丢；N=每 N 事务 fsync）
+innodb_flush_log_at_trx_commit = 1      # redo 每次提交 fsync
+```
+
+**binlog 三种格式**：
+
+```text
+STATEMENT(SBR) 记 SQL 语句，轻量；UUID()/NOW()/带 LIMIT 的 DELETE 在主从可能不一致
+ROW(RBR)       记行改动，最准；全表 UPDATE 产生海量 binlog（日志大）
+MIXED(MBR)     默认 STATEMENT，无法精确复制时自动转 ROW   ← 面试必须说 MBR，不是 MMR
+```
+
+**主从复制链路（三线程两日志）**：
+
+```text
+主库 binlog → Binlog Dump 线程 → 从库 IO 线程 → relay log → SQL 线程回放
+  SQL 单线程回放是复制延迟根因；5.7+ LOGICAL_CLOCK 支持并行回放
+  半同步 ACK = 已"写入 relay log" 而非 "已执行完"
+```
+
+> 边界：redo/undo 与两阶段提交见 1209；事务隔离与 MVCC 见 1230/1231；本卡只讲 binlog 格式、刷盘、主从复制。

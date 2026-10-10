@@ -24,3 +24,28 @@
 - 被问"页内怎么快速查"：归到 1216-page-directory 的二分+槽。
 - 被问"宕机怎么恢复页"：归到 1216-page-crash-recovery 的校验和半写检测 + MTR 原子重放。
 - 边界声明：本卡是**数据页层**的整合总纲。上层"表空间→段→区→B+树"归 `1211-index-storage`、行格式(COMPACT/DYNAMIC)归 `1215-row-format-overview`、可插拔引擎层归 `1210-storage-engine-layer`、Buffer Pool(脏页/空闲页管理)归 `125-bufferpool-internals`。本卡只覆盖"页"这一层（七部分/页目录/页级恢复），不重述已被专项卡覆盖的论证。
+
+## 细节与核心 API
+
+**数据页 16KB 七部分结构**：
+
+```text
+file header  38B  (含上下页指针 FIL_PAGE_PREV/NEXT)
+page header  56B
+最大/最小记录 26B
+user records       (行单链表，next_record 串联)
+free space
+page directory     (槽稀疏索引)
+file trailer  8B   (前4B 校验和 / 后4B LSN)
+```
+
+**页内查找**：页目录 = 槽稀疏索引；分组规则 min1 / max1-8 / 其他 4-8；`n_owned` 计数；查找先二分定位槽、再遍历组内链表。
+
+**崩溃恢复**：`file trailer` 前 4B 校验和 vs `file header` 校验和 → 检测半写（页断裂）；后 4B LSN 记录已写 redo 量；MTR（Mini-Transaction）= 一组 redo 的原子重放单元。
+
+```ini
+# 校验和算法（配合 doublewrite 防半写）
+innodb_checksum_algorithm = crc32   # 默认
+```
+
+> 边界：Buffer Pool 脏页/空闲页管理见 125/1300；doublewrite 见 1212；本卡只覆盖"页"这一层。

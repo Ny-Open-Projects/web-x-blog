@@ -26,3 +26,24 @@
 - **回收对比**：file-per-table 删即回收 vs 共享表空间只复用不回收，是经典送分题。
 - **undo 陷阱**：可 TRUNCATE 不可 DROP；只有独立于系统表空间才支持 truncate。
 - **显式边界**：表空间「定义 + 共享/独立二分 + 系统表空间含双写/更改缓冲/undo」见 1211；8.0 单 .ibd + SDI 布局见 1211；本卡不重画这两张已覆盖的底层，只补「五类类型的优缺点与版本演进」这一真 gap。
+
+## 细节与核心 API
+
+**五类表空间与版本起点**：
+
+```sql
+独立型   file-per-table :  CREATE TABLE t(...) /* 默认 innodb_file_per_table=ON，删即回收 */
+共享型   系统表空间     :  ibdata1（多表共用，删不回收只复用，64TB 共享）
+通用     通用表空间     :  CREATE TABLESPACE ts ADD DATAFILE 'ts.ibd'（5.7+，内存更省/可 IO 隔离）
+临时     临时表空间     :  ibtmp1（5.7.2+，重启重建，存临时表/未提交回滚）
+undo     undo 表空间    :  undo_001/undo_002（5.6+，默认 2 文件，可 TRUNCATE 不可 DROP）
+```
+
+```ini
+# 关键配置与版本边界（P7 硬证据）
+innodb_file_per_table = ON        # 默认独立 .ibd，删表回收空间
+innodb_undo_tablespaces = 2       # 5.6+ 默认 2 个 undo 文件
+# 通用 5.7 起 / 临时 5.7.2 起 / undo 独立 5.6 起
+```
+
+> 边界：.ibd 内嵌 SDI 见 1211；双写/更改缓冲在系统表空间见 1212；本卡只讲五类表空间优缺点与版本演进。

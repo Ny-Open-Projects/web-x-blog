@@ -27,3 +27,23 @@ F --> G[叶子存完整用户记录→索引即数据]
 - 被问「索引底层」时，从「区/段分配 → 页 → 目录项(record_type=1) → B+树分层」自底向上串一遍，比只背 B+树性质更显深度 [经验]。
 - 主动连线回滚段↔MVCC，把存储与事务串起来，是 P7 加分项 [经验]。
 - 与 1215(记录头)/1216(页目录)/1217(B+树性质)/1211(索引概览) 互为引用而非重述，构成存储全栈 [边界]。
+
+## 细节与核心 API
+
+**存储层级与物理归属**：
+
+```text
+表空间 → 段 segment → 区 extent(1MB = 64 连续页) → 页(16KB) → 记录
+  索引段 = 非叶区集合；数据段 = 叶区集合；回滚段 = 回滚数据区(MVCC 版本链)
+  目录项 record_type=1 复用数据页结构(免单独目录空间/免迁移)
+  B+树：根/非叶/叶(第0层)；叶存完整用户记录 → "索引即数据"(聚簇)
+```
+
+```sql
+-- 观测段/区分配
+SELECT * FROM information_schema.INNODB_TABLESPACES
+ WHERE NAME LIKE 'db/t%'\G
+SELECT SPACE, NAME FROM information_schema.INNODB_TABLESPACES_BRIEF;
+```
+
+> 边界：页目录/记录头见 1215/1216；B+树性质见 1217；聚簇 vs 二级索引见 1217。本卡只讲 InnoDB 底层存储结构串联。

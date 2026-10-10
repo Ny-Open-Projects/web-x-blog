@@ -23,3 +23,31 @@
 3. 拆解 COMPACT 四段 + 逆序 + 记录头 5 字节 40 位（重点 delete_mask 软删除、next_record 按主键升序）。
 4. 对比 REDUNDANT：偏移列表 + NULL 比特位，冗余被淘汰。
 5. 收尾行溢出：768B 前缀 vs 全溢出 20B 地址，COMPRESSED 加 zlib；实战话术「大字段多用 DYNAMIC，冷数据才考虑 COMPRESSED」。
+
+## 细节与核心 API
+
+**四种行格式与版本默认**：
+
+```text
+< 5.1      REDUNDANT  （偏移列表 + NULL 比特位，冗余）
+5.1+       COMPACT    （变长非NULL列长度 + 独立 NULL 位图）
+5.7 / 8.0  DYNAMIC    （默认；大字段全溢出仅留 20B 地址）
+COMPRESSED           （DYNAMIC + zlib 压缩，省磁盘增 CPU）
+```
+
+**COMPACT 行内布局（逆序存储）**：
+
+```text
+变长字段长度列表 → NULL 值列表 → 记录头 5B(40bit) → 真实数据 + 隐藏列
+  隐藏列：DB_TRX_ID 6B / DB_ROLL_PTR 7B / 无主键时 DB_ROW_ID 6B
+记录头关键位：delete_mask(软删除→进垃圾链表可重用) / next_record(页内按主键升序单链表)
+```
+
+**行溢出阈值**：COMPACT 留 768B 前缀；DYNAMIC 全溢出仅留 20B 地址；COMPRESSED 再加 zlib。
+
+```sql
+CREATE TABLE t (...) ROW_FORMAT=DYNAMIC;
+SHOW TABLE STATUS LIKE 't'\G   -- Row_format 列
+```
+
+> 边界：页目录/页结构见 1216；隐藏列与 MVCC 版本链见 1231；本卡只讲行格式。
