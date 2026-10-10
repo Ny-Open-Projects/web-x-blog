@@ -11,3 +11,23 @@ Viper 内部由「配置源抽象 + 键路径解析 + 变更通知」三层构�
 
 ## 答题技巧
 面试答动态配置题，先给四步加载（New→SetConfigFile→ReadInConfig→Unmarshal），再给热更两 API（WatchConfig+OnConfigChange）并强调「回调里重 Unmarshal + 并发安全替换」。必点两个坑：下划线字段与冒号后空格导致静默零值；以及稳定性红线——连接配置不热更、走发版。追问到架构时，用「不可变快照 + 原子指针」收尾，体现工程深度。
+
+## 细节与核心 API
+
+```go
+import "github.com/spf13/viper"
+v := viper.New()
+v.SetConfigFile("config.yaml")
+v.ReadInConfig()
+// 动态监听文件变化（热更新）
+v.WatchConfig()
+v.OnConfigChange(func(e fsnotify.Event) {
+    log.Println("config changed:", e.Name)
+    // 重新加载到内存中的配置对象（注意并发读需加锁或原子替换指针）
+})
+port := v.GetInt("server.port")
+dsn := v.GetString("db.dsn")
+// 多源优先级：Set > flag > env > config > key/value > default
+// 注意：热更新要处理运行中配置被并发读取的可见性与一致性
+_ = port; _ = dsn
+```

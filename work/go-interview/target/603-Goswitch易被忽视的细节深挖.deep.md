@@ -22,5 +22,29 @@ Go `switch` 的细节可归为四条主线：表达式与 case 形态（任意�
 3. **踩坑定点**：fallthrough 三条约束（末语句/非末 case/default 禁用）和 case 块独立作用域，是 P7 分水岭。
 4. **关联延展**：type switch、select 可顺带提一句，显示体系化认知。
 
+## 细节与核心 API
+
+```go
+// 1) 默认不 fallthrough（C 会），需显式 fallthrough 且忽略后面的 case 条件
+switch x {
+case 1:
+    fallthrough // 直接进 case 2 的语句体（不判断 2 的条件）
+case 2:
+    fmt.Println("1 or 2")
+}
+// 2) 可在 switch 后写初始化语句
+switch v := f(); v {
+case 1: _ = v
+}
+// 3) 类型 switch
+switch any.(type) {
+case int:    fmt.Println("int")
+case string: fmt.Println("string")
+default:     fmt.Println("other")
+}
+// 4) case 可用逗号并列多个值：case 1, 2, 3:
+// 5) 无表达式的 switch 等价于 switch true，可做 if-else 链
+```
+
 ## ⚠️ 原文纠错
 未发现事实性技术错误。核对范围：通读全文并交叉核对"case 任意类型/多值/表达式、default 位置自由、常量重复布尔特例、省略≡true、类型严格一致、fallthrough 贯穿与作用域及三条约束"四条主线，与 Go 规范一致；"Go 1.20 前需给 rand 设种子"属实（1.20 起自动播种）属旁支。仅做了 ASR 解码将多组术语崩坏词（forthrough/ffault/falsethrough/falthrough→fallthrough、dedeault→default、rucase→case、曲具→求值、星区→星期、构兑→Go、内支→内容 等）统一还原为规范术语，技术结论未做更正。源码将若干标识符音译为崩坏词，本卡统一为规范术语 `[经验]`。

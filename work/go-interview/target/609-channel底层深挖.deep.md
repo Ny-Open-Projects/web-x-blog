@@ -17,3 +17,20 @@ hchan 全景＝**环形缓冲(buf)** ＋ **计数/容量(qcount/dataqsiz)** ＋ 
 3. **FIFO 等待队列**保证公平：早阻塞的接收者先拿到数据。
 4. **反直觉点**：① 无缓冲是 handoff 而非"缓冲为 1"；② 向 **nil channel 收发永久阻塞**（hchan 为 nil）；③ 关闭 channel 唤醒等待者且 `success=false`；④ 自旋锁≠mutex，只适合短临界区。
 5. **版本锚点**：hchan 结构长期稳定（`runtime/chan.go`）；Go 1.9 重构了 mutex 内部实现但不影响 channel 语义；`select` 多 case 时走 `selectnbrecv`/`selectsend` 等专用路径，但底层仍是同一套 sudog 机制。
+
+## 细节与核心 API
+
+```go
+// runtime.hchan 关键字段（简化）：
+//   qcount   uint  // 当前元素数
+//   dataqsiz uint  // 环形缓冲容量（无缓冲为 0）
+//   buf      unsafe.Pointer // 环形缓冲指针
+//   elemsize uint16
+//   closed   uint32
+//   sendx, recvx uint // 环形缓冲读写游标
+//   recvq, sendq waitq // 等待的 goroutine 双向链表（sudog）
+// 无缓冲 channel：sendq/recvq 直接交接（goroutine 互相 handoff），不经过 buf
+// 有缓冲：先写 buf，buf 满再把发送 G 挂 recvq（或反之）
+// 关闭：closed=1，唤醒所有等待 G，接收方收到零值 ok=false
+// 接收/发送在 buf 与 waitq 之间切换，保证 FIFO（同方向）
+```

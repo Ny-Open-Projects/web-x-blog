@@ -52,3 +52,33 @@ default: // 非阻塞：所有 case 未就绪时走这里
 
 ## 总结与追问预判
 hchan 三件套（buf/sendq/recvq）是理解一切 channel 行为的总纲；死锁归因"等待环 + 无推进者"。
+
+## 细节与核心 API
+
+```go
+// 超时控制（不要裸等，防止永久阻塞）
+select {
+case v := <-ch:
+    use(v)
+case <-time.After(2 * time.Second):
+    return ErrTimeout
+}
+// done 信号（级联取消）
+done := make(chan struct{})
+go func() { defer close(done); doWork() }()
+<-done
+// fan-in：多路合并
+func fanIn(a, b <-chan int) <-chan int {
+    out := make(chan int)
+    go func() { defer close(out)
+        for a != nil || b != nil {
+            select {
+            case v, ok := <-a: if !ok { a = nil } else { out <- v }
+            case v, ok := <-b: if !ok { b = nil } else { out <- v }
+            }
+        }
+    }()
+    return out
+}
+// 限流：用 chan struct{} 作信号量（见并发控制卡）
+```

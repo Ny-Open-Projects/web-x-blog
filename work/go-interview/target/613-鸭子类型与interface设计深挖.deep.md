@@ -19,3 +19,16 @@
 ## 答题技巧
 - 被问"Go 接口和 Java 区别"先答隐式实现（方法集匹配、无声明），再补编译器转换与 nil 陷阱 [经验]。
 - 主动边界到 `615-interface-two-impls`(隐式实现机制)、`615-go-oop`(组合优于继承)，构成接口全栈 [边界]。
+
+## 细节与核心 API
+
+```go
+// Go 是结构化类型（鸭子类型）：只要方法集匹配即实现接口，无需声明 implements
+type Reader interface { Read(p []byte) (int, error) }
+type MyReader struct{}
+func (MyReader) Read(p []byte) (int, error) { return 0, nil }
+var _ Reader = MyReader{} // 编译期断言：MyReader 实现 Reader
+// 小接口（1~3 方法）是 Go 风格：io.Reader/io.Writer/io.Closer 组合出大能力
+// 空接口 interface{} 可装任何值，但失去编译期约束（Go 1.18+ 优先用泛型约束）
+// 指针接收者方法不提升给值类型：*T 实现接口不代表 T 实现（反之亦然）
+```

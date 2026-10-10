@@ -22,3 +22,22 @@ net/http 启动这条线按「**启动三步 → Serve 并发 → ServeMux 路�
 3. 路由规则：精确优先、前缀最长；包级 HandleFunc 进全局表，别多处混用。
 4. 收尾：addr 冒号开头绑全网卡、指定 IP 限回环；原生不按 method 分流，需要靠 Handler 或框架。
 5. 边界话术：**「这是 net/http 原生；Gin 是上层封装，engine 自带 router」**——避免被追问时把原生与框架 API 混为一谈。
+
+## 细节与核心 API
+
+```go
+mux := http.NewServeMux()
+mux.HandleFunc("/api", func(w http.ResponseWriter, r *http.Request) {
+    w.Write([]byte("ok"))
+})
+srv := &http.Server{
+    Addr:         ":8080",
+    Handler:      mux,
+    ReadTimeout:  5 * time.Second,   // 读整个请求超时（防慢速攻击）
+    WriteTimeout: 10 * time.Second,  // 写响应超时
+    IdleTimeout:  120 * time.Second, // keep-alive 空闲超时
+}
+// 关键：务必设超时，否则默认无超时可能被慢连接拖死
+log.Fatal(srv.ListenAndServe())
+// 优雅关闭见“优雅关闭全景”卡；ServeMux 默认不清理路径尾斜杠（可用 http.StripPrefix）
+```

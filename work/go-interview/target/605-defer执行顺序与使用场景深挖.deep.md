@@ -38,3 +38,20 @@ defer 矩阵：
 ```
 
 > 边界：return 时机见 607；循环变量坑见 607；命名返回值见 607；context 见 602；协程泄漏见 1022；优雅退出见 713。本卡只深挖"defer 顺序与场景"不重述 defer 底层字段。
+
+## 细节与核心 API
+
+```go
+// 1) 多个 defer 后进先出（LIFO）
+func f() { defer fmt.Print(1); defer fmt.Print(2) } // 输出 21
+// 2) defer 的参数在“注册时”求值，函数体延迟执行
+func g() { x := 10; defer fmt.Println(x); x = 20 } // 打印 10
+// 3) 命名返回值可被 defer 修改（匿名返回值不受）
+func h() (r int) { defer func() { r++ }(); r = 1; return r } // 返回 2
+// 4) 典型场景：资源释放（Close）、解锁、recover 兜底
+func safe() {
+    defer func() { if rec := recover(); rec != nil { log.Println(rec) } }()
+    panic("boom") // 被 defer 兜住，不崩溃
+}
+// 5) defer 在 return 之后、函数真正返回之前执行（含返回值赋值之后）
+```

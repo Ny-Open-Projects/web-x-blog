@@ -23,3 +23,17 @@ CyclicBarrier 是并列的同步原语，强调「多对等 goroutine 到齐放�
 3. 源码一句话：map[key]*call 去重 + WaitGroup 等待，首个跑 fn 写 val，其余共享。
 4. 对比收尾：singleflight 合并回源 ≠ 限流 ≠ 批处理；CyclicBarrier 是另类「多对等到齐」同步原语。
 5. 实战话术：「用 singleflight 包住回源函数，key 用缓存名，20 个并发最终只打 1 次 DB。」
+
+## 细节与核心 API
+
+```go
+import "golang.org/x/sync/singleflight"
+var g singleflight.Group
+v, err, shared := g.Do("key", func() (interface{}, error) {
+    return db.Query() // 同一 key 的并发请求合并为一次执行
+})
+// shared=true 表示本次结果被其他调用方共享
+// Forget/Forget(key)：主动移除 key，使下一次重新执行（用于缓存失效）
+// 与 sync.Once 区别：Once 只执行一次进程生命周期内；singleflight 按 key 每轮合并
+// 典型用法：热点缓存回源、配置加载，防止惊群
+```

@@ -30,3 +30,20 @@ Go Web 框架选型决策树
 3. **落到选型三原则**：业务 > 团队 > 时间，再加"先上线再迭代"，显务实。
 4. **Gin 当安全牌**：不会就推 Gin（最流行、命中率高、生态全）。
 5. **避坑**：不说"Go 不用框架"（net/http 够≠不选型）；不把 Gin/Beego 当同类；不忽略 Fiber 底层是 fasthttp 非 net/http。
+
+## 细节与核心 API
+
+```go
+// 标准库 net/http 已可构建生产服务；框架提供路由/中间件/绑定等便利
+// gin 示例（路由分组 + 中间件 + JSON 绑定）
+r := gin.Default()
+r.Use(gin.Logger(), gin.Recovery()) // 全局中间件（panic 不崩）
+api := r.Group("/api")
+api.POST("/login", func(c *gin.Context) {
+    var req struct{ User, Pwd string }
+    if err := c.ShouldBindJSON(&req); err != nil { c.JSON(400, gin.H{"e": err.Error()}); return }
+    c.JSON(200, gin.H{"ok": true})
+})
+r.Run(":8080")
+// 选型：轻量用 net/http + chi；全功能用 gin/echo；注意框架的 Context 复用陷阱
+```

@@ -41,6 +41,23 @@
 4. **池化题要谈释放与满池行为。** 只会 `Submit` 是使用经验，讲得出 Release 时机与池满策略才是工程经验 `[经验]`。
 5. **分界要讲死。** "NumGoroutine 用于观测、等待组用于同步"这句话背下来，几乎能接住所有追问。
 
+## 细节与核心 API
+
+```go
+// 坑1 泄漏：goroutine 永久阻塞（无退出条件）
+done := make(chan struct{})
+go func() { <-done }() // 若无人 close(done) 则泄漏
+// 修复：用 context 取消
+ctx, cancel := context.WithCancel(context.Background())
+go func(ctx context.Context) { for { select { case <-ctx.Done(): return; default: work() } } }(ctx)
+// 坑2 panic：goroutine 内 panic 不被外层 recover 捕获，会崩进程
+go func() { defer func() { _ = recover() }(); mayPanic() }()
+// 坑3 竞态：共享变量未同步
+var mu sync.Mutex
+go func() { mu.Lock(); counter++; mu.Unlock() }()
+// 池化取舍：短任务用 worker pool 复用 G 省创建成本；长任务/阻塞型不宜池化
+```
+
 ## ⚠️ 原文纠错
 
 1. 事实核校：原文三个示例的现象（0~9 乱序、十个 10、f3 恒为 9）复现均准确；本卡补充其共同根因是"读值被推迟、写值未停止" `[经验]`。

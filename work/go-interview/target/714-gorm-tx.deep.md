@@ -27,3 +27,21 @@ GORM 事务选型树
 3. **嵌套用内层 tx**：回调嵌套每层用各自入参 tx，不碰外层 db。
 4. **粒度对比收尾**：整段成否用回调，长事务细粒度用显式。
 5. **避坑**：不在事务里用外层 db；不忘 Commit 致连接悬挂；不以为回滚只能全有全无。
+
+## 细节与核心 API
+
+```go
+// 事务：db.Transaction 自动 commit/rollback
+err := db.Transaction(func(tx *gorm.DB) error {
+    if err := tx.Create(&order).Error; err != nil { return err }   // 返回 err 自动 rollback
+    if err := tx.Model(&user).Where("id=?", uid).Update("bal", gorm.Expr("bal - ?", amt)).Error; err != nil {
+        return err
+    }
+    return nil // 返回 nil 自动 commit
+})
+// 手动事务
+tx := db.Begin()
+defer func() { if r := recover(); r != nil { tx.Rollback() } }()
+// 关键：必须用 tx 而非 db 执行后续语句，否则脱离事务
+// 隔离级别：db.Session(&gorm.Session{SkipDefaultTransaction: true}) 可关自动事务提升性能
+```

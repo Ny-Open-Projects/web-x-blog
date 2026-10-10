@@ -11,3 +11,21 @@ Go 处理表单是「路由 → 方法分支 → 解析 → 取值」四步。ne
 
 ## 答题技巧
 答表单题按「起服务（ListenAndServe）→ 路由（HandleFunc）→ 方法分支（r.Method）→ 渲染/取值」串。高频追问：① Form 为何有时 nil（惰性，需先 Parse）；② FormValue 与 PostFormValue 区别（范围：是否含 URL 参数；都仅 POST/PUT/PATCH）；③ 模板路径相对执行目录。收尾点出：显式 ServeMux + html/template + 按需 Value 方法是工程稳妥组合。
+
+## 细节与核心 API
+
+```go
+func handler(w http.ResponseWriter, r *http.Request) {
+    if err := r.ParseForm(); err != nil { /* 400 */ }
+    // 普通表单：r.FormValue("name")（GET query + POST body 合并）
+    name := r.FormValue("name")
+    // 仅 POST body（不含 URL query）：r.PostFormValue
+    // 文件上传：
+    r.ParseMultipartForm(32 << 20) // 32MB 内存上限，超出落临时文件
+    file, header, err := r.FormFile("upload")
+    if err == nil { defer file.Close(); _ = header }
+    // 注意：未调用 ParseForm 时 FormValue 内部会自动 Parse，但大文件需先限制
+    // 防重复解析：ParseForm 幂等；读 body 只能一次（读完即 EOF）
+    _ = name
+}
+```

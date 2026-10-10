@@ -21,3 +21,17 @@
 ```
 
 > 边界：runtime 技术细节见各专题卡（调度 813/815/816、GC 806/807/808/809、pprof 1114、trace 1105）；本深卡只讲"如何答好 runtime 备考题"。
+
+## 细节与核心 API
+
+```bash
+go env            # 查看全部环境变量（GOPATH/GOMODCACHE/GOPROXY/GOROOT...）
+go env -w GOPROXY=https://proxy.golang.org,direct
+go env GOROOT     # Go 安装目录（编译器/链接器/运行时）
+echo $GOPATH      # 工作区（旧模式）；模块模式下主要用 GOMODCACHE
+# 运行时关键环境变量：
+#   GOMAXPROCS   并行 P 数
+#   GOGC         触发 GC 的堆增长百分比
+#   GODEBUG      调试开关（gctrace、schedotrace、inittrace 等）
+#   GOMEMLIMIT   软内存上限
+```

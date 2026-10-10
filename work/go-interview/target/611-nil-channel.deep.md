@@ -23,3 +23,21 @@
 ```
 
 > 边界：channel 基础/select 见 610；closed 行为见 612*`；关闭 panic见 `1019-*`/`1021-*`；本深卡只讲"如何答好 nil/closed 对比题"。
+
+## 细节与核心 API
+
+```go
+var nilCh chan int // nil channel
+// 在 select 中，向 nil channel 发送或接收会“永远阻塞”且其 case 永远不会被选中
+// 利用此特性动态启用/禁用某个分支：
+select {
+case v := <-nilCh:        // 永不触发
+    _ = v
+case v := <-realCh:
+    use(v)
+case <-time.After(time.Second):
+    timeout()
+}
+// 经典用法：多路扇入时，某个输入关闭后将其置为 nil，使 select 跳过该分支
+// 注意：向 nil channel 发送在普通语句中会永久阻塞（不是 panic）
+```

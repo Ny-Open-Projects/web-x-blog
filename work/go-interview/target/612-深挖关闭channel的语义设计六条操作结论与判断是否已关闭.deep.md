@@ -46,6 +46,24 @@
 4. **主动补一句设计原因**：Go 不提供 `IsClosed()` 是因为并发下查询结果无意义，`ok` 是**同一次接收动作的副产品**，才可靠。
 5. **止步档位**：能背全六条结论即达 L4；能讲清 close 的广播语义、"为无 `IsClosed`"的设计理由、以及三种判断方式的差异，即达 L5。
 
+## 细节与核心 API
+
+```go
+// 六条结论：
+//  1) 向已关闭 channel 发送 -> panic
+//  2) 关闭已关闭 channel -> panic
+//  3) 关闭 nil channel -> panic
+//  4) 从已关闭 channel 接收 -> 立即返回零值，ok=false（缓冲未读完则先读完）
+//  5) 发送/接收均可被 select 的 close 唤醒
+//  6) 只读 channel（<-chan）不能由接收方关闭
+// 判断是否已关闭：用逗号-ok（无法“预先”判断，只能接收时得知）
+v, ok := <-ch
+if !ok { fmt.Println("closed") }
+// 安全关闭（只由发送方关闭；多发送方用额外 done channel + Once 或 sync.Once 包一层）
+var once sync.Once
+safeClose := func(c chan int) { once.Do(func() { close(c) }) }
+```
+
 ## ⚠️ 原文纠错
 1. 事实核校：关闭 nil channel 与重复关闭会 panic、向已关闭 channel 发送会 panic、向 nil channel 收发永久阻塞、同协程读写 nil channel 死锁、for-range 在关闭时才结束且不关闭读完会死锁、用 ok 标识判断关闭且常与 select 配合——均与 Go 语言规范一致 `[经验]`。
 2. 补充：原文第 26 段写"向一个关闭的 nil channel 中发送数据会导致 panic"，**表述有误**——nil channel 谈不上"已关闭"，正确结论是**向 nil channel 发送会永久阻塞**，而**关闭 nil channel 才 panic**；另第 70~71 段内容与第 68 段重复，属口述稿冗余 `[经验]`。

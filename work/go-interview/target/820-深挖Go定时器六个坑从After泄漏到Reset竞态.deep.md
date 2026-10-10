@@ -127,3 +127,21 @@ Q：context.WithTimeout 忘了 cancel 会怎样？
 A：在超时到达前，timer 与 ctx 都不会被回收，属于典型的资源泄漏；
    所以 WithTimeout 必须紧跟 defer cancel()。
 ```
+
+## 细节与核心 API
+
+```go
+// 坑1 time.After 泄漏：长生命周期 select 里每次循环新建 timer，GC 前不释放
+//   错误：for { select { case <-time.After(5*time.Second): ... } }  // timer 堆积
+//   正确：用 time.NewTimer 复用 + Stop
+t := time.NewTimer(5 * time.Second)
+defer t.Stop()
+// 坑2 Stop 返回值：Stop 仅阻止触发，已触发的不会被回收；需 drain channel
+if !t.Stop() { select { case <-t.C: default: } }
+// 坑3 Reset 竞态：Reset 前必须先 Stop 并 drain，否则可能收到旧值
+t.Stop(); select { case <-t.C: default: }; t.Reset(3 * time.Second)
+// 坑4 ticker 必须 Stop 否则泄漏（后台 goroutine 持续）
+tk := time.NewTicker(time.Second); defer tk.Stop()
+// 坑5 AfterFunc 的 t 在触发前不释放（引用闭包）
+// 坑6 系统时钟跳变（NTP 回拨）会让 timer 延迟/提前；用单调时钟部分缓解
+```

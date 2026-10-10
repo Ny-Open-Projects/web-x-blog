@@ -23,3 +23,19 @@
 - 强调 ReadMemStats 必须做差、PauseTotalNs 是累计纳秒，别把绝对值当单次。
 - 收尾落到"减少分配"：预分配 make([]T,0,n)、sync.Pool 复用、值类型替代指针。
 ```
+
+## 细节与核心 API
+
+```go
+// 1) 运行时打印 GC 日志
+//    GODEBUG=gctrace=1 ./app
+//    gc 1 @0.12s 2%: 0.01+0.30+0.01 ms clock, ... 4->5->3 MB, 5 MB goal
+//    含义：第1次GC；wall clock；标记/暂停；堆 存活->标记中->标记后；goal
+// 2) 程序内读指标
+var ms runtime.MemStats
+runtime.ReadMemStats(&ms)
+fmt.Println(ms.HeapAlloc, ms.NumGC, ms.PauseNs[(ms.NumGC+255)%256])
+// 3) pprof 堆采样
+//    go tool pprof http://localhost:6060/debug/pprof/heap
+// 4) 手动触发：debug.FreeOSMemory() 把内存还给 OS（谨慎）
+```
