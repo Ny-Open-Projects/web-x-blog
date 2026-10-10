@@ -1,3 +1,7 @@
+# 1107 Go GC 分析三条主线总览
+
+> 分类：Go 性能/GC 分析 | 难度：L2 | 题型：总览 | 频率：低 | 关键词：**gctrace**/**ReadMemStats**/**pprof**/**trace**
+
 > 原文锚点：第 1~3 段「如何来分析 go 代码的 GC 情况…三种方式：高级 bug 环境变量、runtime 标准库、导出 trace 或 pprof 的 heap 信息」
 
 ## 一句话总述

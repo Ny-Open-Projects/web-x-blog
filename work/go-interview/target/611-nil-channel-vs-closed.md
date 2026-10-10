@@ -1,3 +1,7 @@
+# 611 nil channel vs closed channel 行为对比
+
+> 分类：Go 并发/channel | 难度：L3 | 题型：八股题 | 频率：高 | 关键词：**nil channel**/**closed channel**/**阻塞**/**panic**/**select**
+
 > 原文锚点：第 2~10 段「未初始化channel是nil…关闭后的channel不是nil…关闭nil channel panic」+ 全源 nil vs 关闭语义对比
 
 ## 一句话总述

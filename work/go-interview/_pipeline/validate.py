@@ -123,6 +123,12 @@ def validate_card(path: Path, is_deep: bool) -> Result:
     raw = path.read_text(encoding="utf-8")
     body, blocks = strip_code(raw)
 
+    # 规则 15 预备：首行标题与分类头判定（供主卡/深挖卡头部校验复用）
+    _nonempty = [l for l in raw.splitlines() if l.strip()]
+    _first = _nonempty[0] if _nonempty else ""
+    has_title = bool(re.match(r"^#\s*\S", _first))
+    has_cat = bool(re.search(r"^>\s*分类", raw, re.M))
+
     # 规则 1：围栏配对与语言标识
     fence_errs = fence_issues(raw)
     if fence_errs:
@@ -141,10 +147,26 @@ def validate_card(path: Path, is_deep: bool) -> Result:
     if is_deep:
         if not path.name.endswith(MAIN_SUFFIX):
             r.err("文件名", f"深挖卡应以 .deep.md 结尾：{path.name}")
+        if not has_title:
+            r.err("标题", f"深挖卡首行必须是「# 标题」，当前首行：{_first[:40]!r}")
         for need in ("思路与架构", "方案取舍", "答题技巧"):
             if need not in raw:
                 r.warn("深挖", f"缺小节「{need}」")
         return r   # 深挖卡不校验主卡项
+
+    # 规则 15：主卡头部必须是「# 标题」且含「> 分类」行
+    # 2026-10-09 夜间批量产出漏掉 58 张主卡的头部两行（直接以「> 原文锚点」开头），
+    # 原门禁未校验此项 → 虚假报 PASS。补为硬 error 堵死此漏洞。
+    if not has_title:
+        r.err("标题",
+              f"主卡首行必须是「# 标题」，当前首行：{_first[:40]!r}。"
+              "缺失标题会让卡片在索引/目录中无法定位。")
+    if not has_cat:
+        r.err("分类头",
+              "主卡必须含「> 分类：...」行（分类|难度|题型|频率|关键词）。"
+              "缺失会导致卡片分类与检索信息丢失。")
+    if not r.errors:
+        r.ok()
 
     # 规则 3：主卡体量 —— 2026-10-07 起**取消字数上限**，仅统计、不阻断
     #

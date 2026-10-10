@@ -1,3 +1,7 @@
+# 513 error 接口本质与自定义错误类型
+
+> 分类：Go 错误处理 | 难度：L2 | 题型：八股题 | 频率：中 | 关键词：**error接口**/**Error()**/**自定义类型**/**code**/**PathError**
+
 > 原文锚点：第 6~26 段「我们需要理解 go 中 error 的本质…是一个包含 error 方法 interface…自定义错误类型实现 error 方法…给每种错误定义 code 值…借鉴标准库 FS 包的 PathError（记录 Op/Path/Err）…用类型断言判断是否 *PathError…避免依赖错误信息字符串断言」（error 接口本质/自定义 error+code/PathError 借鉴/errors.Is 类型断言）
 
 ## 一句话总述

@@ -1,3 +1,7 @@
+# 1113 []byte→string 零拷贝（Data 指针直指）
+
+> 分类：Go 字符串/零拷贝 | 难度：L3 | 题型：八股题 | 频率：中 | 关键词：**零拷贝**/**[]byte转string**/**Data指针**/**SliceHeader**
+
 > 原文锚点：第 14~40 段「把一个字节切片呢零拷贝的方式转成一个字符串…把它转成反射的 sliceheader 类型…stringheader 的 data…我们最终转的呢是一个 string…指针类型的字节切片…星号表示的是对指针类型切片进行取值」（[]byte→string 零拷贝：构造 reflect string header，SliceHeader→StringHeader，注意 * 符号指针与取值含义）
 
 ## 一句话总述

@@ -1,3 +1,7 @@
+# 506 float 作 map key：精度与 NaN 坑
+
+> 分类：Go 语法/map | 难度：L3 | 题型：八股题 | 频率：低 | 关键词：**float key**/**精度**/**NaN**/**Float64bits**/**比较**
+
 > 原文锚点：第 24~48 段「浮点型可以比较…作为 map 的 k 会有什么问题…0.3 与很长小数位的浮点最终当成同一 k…float64bits 转成 uint64 再插入 k…0.3 和长浮点转出的 uint64 相等…两个 NAN 作为 k 不相等（NAN!=NAN），map 里能存两个 NAN key」（float 可作 key 但精度/NaN 诡异）
 
 ## 一句话总述

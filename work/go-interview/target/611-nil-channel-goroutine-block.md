@@ -1,3 +1,7 @@
+# 611 nil channel 收发的死锁判定（同/异 goroutine）
+
+> 分类：Go 并发/channel | 难度：L3 | 题型：八股题 | 频率：高 | 关键词：**nil channel**/**死锁**/**goroutine**/**阻塞**
+
 > 原文锚点：第 11~33 段「同goroutine向nil/满channel收发→死锁…异goroutine向nil channel收发→一直阻塞直到主goroutine退出…是否死锁看是否在同goroutine」
 
 ## 一句话总述

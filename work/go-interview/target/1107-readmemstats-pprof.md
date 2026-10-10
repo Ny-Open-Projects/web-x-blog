@@ -1,3 +1,7 @@
+# 1107 runtime.ReadMemStats 与 pprof 定量看 GC
+
+> 分类：Go 性能/GC 分析 | 难度：L3 | 题型：八股题 | 频率：低 | 关键词：**ReadMemStats**/**NumGC**/**PauseTotalNs**/**pprof**
+
 > 原文锚点：第 24~33 段「第二种方式使用 runtime 标准库…runtime.MemoryStates 记录…readmemorystates…GC次数减去…GC暂停时间…第三种引入 netHTTPPPROF 导出 trst 和 help 信息」
 
 ## 一句话总述

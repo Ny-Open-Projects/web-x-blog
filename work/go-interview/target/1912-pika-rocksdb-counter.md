@@ -1,3 +1,7 @@
+# 1912 Pika/RocksDB 落盘计数器方案
+
+> 分类：缓存与存储/高并发 | 难度：L3 | 题型：八股题 | 频率：低 | 关键词：**Pika**/**RocksDB**/**LSM树**/**磁盘**/**兼容Redis**
+
 > 原文锚点：第 23~32 段「需兼容REDIS协议且存磁盘…Pika(tennis)基于RocksDB…LSM树写先入memtable满了flush成SStable(有序不可变)…批量写降写放大…异步IO多线程…读在memtable+SSTable合并查找…compaction重组清理碎片…多级压缩…block/table cache+预读提高顺序读」
 
 ## 一句话总述

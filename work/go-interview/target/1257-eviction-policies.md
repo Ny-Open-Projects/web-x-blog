@@ -1,3 +1,7 @@
+# 1257 Redis 八种内存淘汰策略
+
+> 分类：Redis/内存管理 | 难度：L2 | 题型：八股题 | 频率：中 | 关键词：**淘汰策略**/**allkeys**/**volatile**/**LRU**/**LFU**
+
 > 原文锚点：第 13~22 段「八种内存淘汰策略…noeviction 3.0后默认不淘汰…allkeys-lru…allkeys-lfu 4.0新增…allkeys-random…volatile-lru 3.0前默认…volatile-lfu 4.0…volatile-random…volatile-ttl…config get/set maxmemory-policy」
 
 ## 一句话总述

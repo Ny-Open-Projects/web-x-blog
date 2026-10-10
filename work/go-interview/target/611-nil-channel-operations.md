@@ -1,3 +1,7 @@
+# 611 nil channel 操作后果（阻塞/panic）
+
+> 分类：Go 并发/channel | 难度：L3 | 题型：八股题 | 频率：高 | 关键词：**nil channel**/**永久阻塞**/**死锁**/**panic**/**close**
+
 > 原文锚点：第 1~40 段「未初始化channel是nil…关闭后的channel不是nil…向nil channel收发会阻塞导致死锁…关闭nil channel会panic(close of nil channel)」
 
 ## 一句话总述

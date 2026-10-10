@@ -1,3 +1,7 @@
+# 1309 match_phrase 的 term 顺序相邻与 slop
+
+> 分类：Elasticsearch/查询 | 难度：L3 | 题型：八股题 | 频率：低 | 关键词：**match_phrase**/**position**/**相邻**/**slop**/**召回**
+
 > 原文锚点：第 14~23 段「match_phrase查"中华共和国"匹配不到(要求term顺序相邻,查询分"中华"+"共和国"position 2和6不相邻)…slop参数(间隔term数,设3召回设2不召回)…match_phrase查"人民共和"查不到(原文相邻但"共和国"再细分出"国"使"人民"和"共和"position有间隔)」
 
 ## 一句话总述

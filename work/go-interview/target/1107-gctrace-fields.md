@@ -1,3 +1,7 @@
+# 1107 GODEBUG=gctrace=1 各字段解读
+
+> 分类：Go 性能/GC 分析 | 难度：L3 | 题型：八股题 | 频率：低 | 关键词：**gctrace**/**GC编号**/**CPU占用**/**clock**/**cpu**
+
 > 原文锚点：第 6~23 段「第一种情况通过 gctrace…GC四GC五表示GC编号…alt和百分号之间零点零零七秒…CPU强装时间和CPU时间…stcks占大小 globs全局变量 十六p十六核 forced」
 
 ## 一句话总述

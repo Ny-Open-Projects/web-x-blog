@@ -1,3 +1,7 @@
+# 1515 Kubernetes 架构总览（Master/Worker/Pod）
+
+> 分类：Kubernetes/架构 | 难度：L2 | 题型：总览·思维导图 | 频率：中 | 关键词：**K8s**/**Pod**/**声明式API**/**Master**/**调度**
+
 > 原文锚点：第 5~28 段「那接下来呢我们来看一下 k 八 s 的一些基本概念…master…load(worker)…pod…label…replicationcontroller…deployment…HPA…service…volume…namespace」（K8s 核心概念：master/worker/pod/label/RC/Deployment/HPA/Service/Volume/Namespace）
 
 ## 一句话总述

@@ -1,3 +1,7 @@
+# 1309 ES 查不到的标准排查法（_analyze）
+
+> 分类：Elasticsearch/排查 | 难度：L3 | 题型：八股题 | 频率：低 | 关键词：**analyzer**/**term不一致**/**_analyze**/**position**/**slop**
+
 > 原文锚点：第 1~23 段综合「已索引match查不到…根因=查询/索引分词term不一致(AND全包含/phrase相邻)…用_analyze看分词…position间隔致phrase不召回…slop放宽」
 
 ## 一句话总述
