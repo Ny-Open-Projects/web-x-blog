@@ -16,3 +16,29 @@
 3. **反直觉点**：① key 是 SQL 文本哈希（注释不同都不命中）；② 分区表自动禁用查询缓存；③ `query_cache_type=0` 不释放已分配缓冲；④ 未命中也要付写缓存成本。
 4. **架构四层张口即来**，并澄清"连接池在客户端、连接器在服务端"。
 5. **版本锚点**：5.7.20 默认禁用、8.0 彻底移除；`mysql_reset_connection` 自 5.7.3；优化器统计信息始终来自引擎层。
+
+## 细节与核心 API
+
+**查询缓存相关变量（8.0 已彻底移除，仅 5.7 及更早可见）：**
+
+```sql
+SHOW VARIABLES LIKE 'query_cache_type';  -- 0=OFF 1=ON 2=DEMAND
+SHOW VARIABLES LIKE 'query_cache_size';  -- 固定分配，type=0 也不释放
+-- 8.0 直接报 Unknown system variable：query cache 已从代码树删除
+```
+
+**长连接内存治理（连接池在客户端，临时内存挂在连接对象上断开才释放）：**
+
+```sql
+-- 5.7.3+ 重置连接：释放临时内存/回滚事务，但保留连接与认证，不重建握手
+mysql_reset_connection();
+```
+
+```go
+// Go 侧用连接池复用长连接，避免频繁建连；但需设存活上限防内存堆积
+db.SetMaxOpenConns(50)
+db.SetMaxIdleConns(10)
+db.SetConnMaxLifetime(time.Minute * 30) // 到期回收，等价于被动 reset_connection
+```
+
+**四层架构落点速记**：网络连接层（连接器/连接池，**连接池在客户端**) → 服务层（SQL 接口/解析器/优化器/查询缓存，缓存在 Server 层）→ 存储引擎层（InnoDB buffer pool）→ 文件系统层。优化器所需统计信息（页数/基数/索引分布）由**引擎层**提供。

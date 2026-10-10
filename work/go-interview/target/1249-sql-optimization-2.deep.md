@@ -29,3 +29,34 @@ SQL 优化分层体系
 3. **讲清因果链**：动静分离不是「减少 IO」而是「切断热列更新→同页冷列缓存失效」；分库分表不是「分摊压力」而是「降 SMO 加锁范围+降树高」。
 4. **避坑**：① 不把「小表全扫」（优化器择优，见 `1221`）与「小表驱动大表」（join 顺序）混为一谈；② 高频更新列不进联合索引；③ 分库分表是兜底手段，别张口就分。
 5. **收尾落到边界**：被问「还能怎么优化」时，按 L1→L4 顺序给出下一层方案，体现工程权衡。
+
+## 细节与核心 API
+
+**L1 写法层：小表驱动大表（NLJ，驱动表结果集小、被驱动表有连接索引）：**
+
+```sql
+-- 优化器会选结果集小的作驱动表；被驱动表 join 列必须有索引
+SELECT * FROM small s JOIN big b ON s.id = b.sid WHERE s.flag = 1;
+```
+
+**L2 索引层：覆盖索引避免回表（联合索引末列纳入查询列）：**
+
+```sql
+-- (user_id, id) 联合索引可覆盖 "按 user_id 取 id"，免回表
+SELECT id FROM orders WHERE user_id = ?;
+```
+
+**L3 结构层：动静分离（热列垂直拆表，切断热更新→同页冷列缓存失效）：**
+
+```sql
+CREATE TABLE user_hot (id BIGINT PRIMARY KEY, status TINYINT, last_active BIGINT);
+CREATE TABLE user_cold (id BIGINT PRIMARY KEY, profile TEXT, avatar VARCHAR(255));
+-- 热列高频更新只污染 hot 表缓冲页，cold 大字段页不被连带挤出
+```
+
+**L4 架构层：分库分表（降树高 / 缩小 SMO 加锁范围 / 并行）：**
+
+```sql
+-- 按 user_id 取模分 16 库，单库数据量降为 1/16，B+ 树层数下降、SMO 锁范围收敛
+-- 需中间件（如 ShardingSphere）做路由 + 分布式事务；是最后手段，非首选
+```
