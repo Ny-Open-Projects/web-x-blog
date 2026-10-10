@@ -22,3 +22,22 @@
 3. 讲类型：SIMPLE/PRIMARY/SUBQUERY(物化)/DEPENDENT SUBQUERY(非物化)/UNION/UNION RESULT/DERIVED。
 4. 优化落点：DEPENDENT 改物化或 join；UNION 能 ALL 就 ALL；关注 tmp_table_size。
 5. 实战话术：「先用 EXPLAIN 看 id 和 select_type 定结构，再看 type/key/rows 找慢点，最后按拓扑优化子查询与 union。」
+
+## 细节与核心 API
+
+**拓扑判读（id / select_type）**：
+
+```sql
+EXPLAIN SELECT * FROM a JOIN b ON a.id=b.aid WHERE a.name='x';
+-- id 相同 → join（a 驱动 b）；id 不同 → 子查询/union
+-- select_type 谱系：SIMPLE / PRIMARY / SUBQUERY(物化,一次) / DEPENDENT SUBQUERY(非物化,逐行重执行)
+--   UNION / UNION RESULT(去重临时表, union 比表数多一条) / DERIVED(派生表)
+-- SUBQUERY 物化=空间换时间；DEPENDENT SUBQUERY 非物化=多次 → 改写 join 或缩小范围
+```
+
+```ini
+tmp_table_size = 16M   # 物化临时表超此落盘，拖慢；必要时调大或优化子查询范围
+# 能 UNION ALL 就不用 UNION，省去去重临时表
+```
+
+> 边界：type 谱系见 1244；key_len/Extra 见 1245；本卡只讲 EXPLAIN 列与拓扑。
