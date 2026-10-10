@@ -11,3 +11,26 @@ Kafka 存储是「逻辑 topic → 物理分区目录 → 日志段文件」三�
 
 ## 答题技巧
 答存储题先给三层模型（topic→分区→段），再点「段=1 日志+2 索引、仅尾段写、顺序追加」。必提四分段条件与默认阈值（1GB/7 天/10MB/int 边界）、稀疏索引 + 二分定位、baseOffset 20 位命名。消费侧点 pull 模式、offset 在 __consumer_offsets（非 zk）、端到端压缩。追问架构时用「顺序写 + 稀疏索引 + 段切分 + 副本」收尾。
+
+## 细节与核心 API
+
+**三层模型与段结构：**
+
+```text
+topic → 分区目录 → 日志段文件
+每分区：仅尾段可写、顺序追加（高吞吐根基）
+段 = 1 日志(.log) + 2 索引(.index 偏移→物理 / .timeindex 时间戳→偏移)，以 baseOffset 命名
+```
+
+**四分段条件（任一满足即切段）：**
+
+```text
+大小 1GB / 时间 7 天 / 索引 10MB / 相对偏移超 int
+```
+
+**读取：稀疏索引（4KB 间隔）+ 二分定位物理位置；消息格式 v2 变长+ZIGZAG 压缩，端到端压缩（batch 级）省网络与磁盘。**
+
+```bash
+# 稀疏索引 + 二分；offset 0.9+ 存 __consumer_offsets（非 zk）
+kafka-dump-log.sh --files /data/t-0/00000000000000000000.log --deep-iteration
+```

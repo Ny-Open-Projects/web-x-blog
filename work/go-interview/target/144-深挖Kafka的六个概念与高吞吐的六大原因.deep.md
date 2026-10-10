@@ -51,7 +51,29 @@
 5. **主动补两个"为什么这样设计"**：**为什么不用 JVM 堆缓存**（避免 GC 与管理开销，交给 OS 页缓存）；**为什么可靠性靠副本不靠刷盘**（同步刷盘极其损耗性能）。
 6. **止步档位**：能讲清六概念 + 四原因即达 L4；能补全六原因、每个都说清"收益 + 代价边界"，并解释"‘为什么 topic 只保证分区有序"，即达 L5。
 
-## ⚠️ 原文纠错
+## 细节与核心 API
+
+**六大原因落地为配置/模型：**
+
+```text
+① 顺序写磁盘：分区=可追加日志文件，只需一次寻址连续读写
+② 页缓存：读写实际发生在 OS 内存缓存，不自己管（避开 JVM 堆 GC 与管理开销）
+③ 零拷贝：sendfile 把页缓存直送 socket，DMA 搬运 CPU 不参与（数据需用户态加工时失效）
+④ 批量发送：batch.size + linger.ms，达阈值整批发（批次越大延迟越高）
+⑤ 数据压缩：整批一起压，重复越多越好（lz4/zstd）
+⑥ 横向扩展：partition 独立读写分摊负载；多副本提容错
+```
+
+**概念锚点（易扣分点）：**
+
+```bash
+# topic ≈ ES 索引；partition ≈ 分片；每分区是可追加日志文件
+# offset 只在分区内唯一 → Kafka 保证分区有序而非 topic 有序
+kafka-topics.sh --bootstrap-server b:9092 --create --topic t --partitions 6 --replication-factor 3
+# 分区数创建后只能增不能减；consumer 用 pull 模式 + 保存 offset 实现容灾
+```
+
+**可靠性靠副本不靠刷盘（同步刷盘极损性能）；consumer 位移现代存 `__consumer_offsets` 内部 topic。**
 1. 事实核校：四特性、六概念（含 pull 模式与偏移量恢复、broker 与 topic 不译、分区对应可追加日志文件、offset 分区内唯一故只保证分区有序、副本一主多从且 leader 读写 follower 只同步、leader 故障自动选主）、六原因——均与 Kafka 实现一致 `[经验]`。
 2. 补充：**原文把批量机制写作"VP 机制"，属音译残词，标准术语是批量发送（batch）**，对应 `batch.size` 与 `linger.ms`；另 consumer 的偏移量在现代 Kafka 中存于内部主题 **`__consumer_offsets`** `[经验]`。
 3. 崩坏词归一：源码将 broker、topic、partition、offset、replica、leader/follower、页缓存、零拷贝等术语音译为多组崩坏词，本卡统一为规范术语 `[经验]`。

@@ -37,7 +37,35 @@
 4. **补工程细节**：confluent 需 cgo、sarama 纯 Go——这句话能体现你真的做过部署，不只是写过 demo。
 5. **止步档位**：能讲清配置与退出两层即达 L4；能把重连的并发安全（锁 + 断路器）与位点生效条件讲透，并给出选型矩阵，即达 L5。
 
-## ⚠️ 原文纠错
+## 细节与核心 API
+
+**选型与构造（sarama 纯 Go / confluent-kafka-go 需 cgo）：**
+
+```go
+// 同步生产者（可靠但吞吐低）
+producer := sarama.NewSyncProducer(brokers, cfg)
+// 异步生产者（吞吐高，退出前必须 Close 等积压提交完成，否则丢消息）
+producer := sarama.NewAsyncProducer(brokers, cfg)
+```
+
+**配置层生效前提（讲条件比讲取值高级）：**
+
+```go
+cfg.Version = sarama.V2_8_0_0        // 必须与服务端对齐
+cfg.Producer.MaxMessageBytes = 900000 // 必须小于 broker message.max.bytes 才生效
+cfg.Producer.Compression = sarama.CompressionLZ4 // 吞吐/压缩比性价比最好
+cfg.Consumer.Offsets.Initial = sarama.OffsetOldest // 仅该消费组无已提交位点时生效
+```
+
+**可用性层：双 goroutine 重连 + 断路器退避 + 锁保护连接状态：**
+
+```go
+var mu sync.Mutex
+var producer sarama.SyncProducer
+// 检测 goroutine 发现断连 → 断路器退避 → 重连即重新 NewSyncProducer 并替换引用（mu.Lock 保护）
+```
+
+**退出层：异步生产者必须 Close() 等待积压提交；消费者收信号后 Close() 先处理完已读消息。**
 1. 事实核校：SDK 选型差异、版本对齐、消息上限双端约束、LZ4 性价比、双 goroutine 重连与加锁、位点仅首次生效、异步退出需等待——均与 Kafka/sarama 实践一致 `[经验]`。
 2. 补充：原文对 sarama 的调用名（同步/异步生产者的构造）表述为口语化描述，实际 sarama 中为 `NewSyncProducer` / `NewAsyncProducer`，答题时用规范函数名更严谨 `[经验]`。
 3. 崩坏词归一：源码将 goroutine、Kafka、sarama、broker、偏移量、断路器等术语音译为多组崩坏词，本卡统一为规范术语 `[经验]`。

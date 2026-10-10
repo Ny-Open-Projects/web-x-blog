@@ -23,3 +23,24 @@
 - 答重复消费按"根因→质量标准→Kafka 机制→业务幂等"递进。
 - 口诀：**offset 滞后生重复，质量标准定边界；producer 去重非根治，消费逻辑幂等才兜底**。
 - 易混点：幂等生产者只去重发送端，端到端精确一次必须消费逻辑幂等。
+
+## 细节与核心 API
+
+**业务幂等层（端到端去重最后一道网，四种落地）：**
+
+```sql
+-- ① DB 唯一索引（最简单，关系型存储）
+CREATE UNIQUE INDEX uk_order_id ON orders(order_id);
+```
+```sql
+-- ② 去重表（跨服务，需原子）
+INSERT INTO dedup(msg_key, handled_at) VALUES(?, now()) ON CONFLICT DO NOTHING;
+```
+```go
+// ③ Redis 缓存 msg_key（高性能，带 TTL，依赖可用性）
+if !redis.SetNX(ctx, "dedup:"+msgKey, 1, 24*time.Hour) { return nil } // 已处理则跳过
+// ④ ES 文档 ID（同 ID 覆盖写）
+es.Index("idx").Id(msgKey).Document(doc).Do(ctx)
+```
+
+**口诀：offset 滞后生重复 → 质量标准定边界（at-least-once）→ 消费逻辑幂等才兜底。**

@@ -30,3 +30,23 @@
 - 追问「为什么不能减少分区」→ 按**丢数据 / 时间戳乱序 / 复制开销**三选一必踩的坑展开，再补顺序性、事务性、状态切换 [经验]。
 - 主动给工程收口：「真要缩就新开 topic 切流」，这是面试官想听的落地动作 [经验]。
 - 主动边界到 `1419-log-cleanup-policy`（日志段清理策略，是"段"级回收而非"主题"级删除）、`1419-partition-strategy`（分区数取值与 key 哈希），构成本地生命周期全栈 [边界]。
+
+## 细节与核心 API
+
+**删除是状态机：同步打标记、异步真删除：**
+
+```bash
+kafka-topics.sh --bootstrap-server b:9092 --delete --topic old_topic   # 客户端立即返回，控制器异步推进
+# 手动清理三处落点（兜底，漏一处留幽灵状态）：
+#   ① 元数据 topics 路径  ② 元数据 config 路径  ③ log.dirs 下数据目录
+# 生产一律用脚本，保证三处原子推进
+```
+
+**缩容不支持，替代=新开 topic 切流：**
+
+```bash
+# 新开分区数更少的 topic，业务双写 → 切消费端 → 切生产端 → 老 topic 走删除流程下线
+kafka-topics.sh --bootstrap-server b:9092 --create --topic new_topic \
+  --partitions 6 --replication-factor 3
+# 核心约束：分区一旦减少，老数据时间戳乱序 / 顺序性破坏 / 跨分区事务，收益远小于成本
+```

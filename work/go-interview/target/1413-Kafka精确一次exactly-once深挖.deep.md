@@ -36,3 +36,28 @@ Kafka 精确一次语义分两层，常被混淆：
 ```
 
 > 边界：producer 机制概述见 1418；消费端幂等见 1418；提交机制见 1417；本卡只深挖"Kafka 精确一次分层与选型"不重述各基础机制。
+
+## 细节与核心 API
+
+**producer 端：幂等（单分区单会话）vs 事务（跨分区/会话/topic）：**
+
+```go
+// 幂等生产者（0.11+，broker 按 PID+序列号去重）
+config.Producer.Idempotent = true
+config.Net.MaxOpenRequests = 1 // 配合幂等
+
+// 事务生产者（consume-transform-produce 原子）
+config.Producer.TransactionalID = "txn-1"
+producer.BeginTransaction()
+producer.SendMessage(bizMsg)                 // 写业务 topic
+producer.SendOffsetsToTransaction(offsets, group) // 消费位移随事务原子提交
+producer.CommitTransaction()
+```
+
+**端到端精确一次（producer 机制管不到 consumer）：**
+
+```text
+消费逻辑幂等 + 事务型 offset 提交 = 处理一次
+- 幂等只防 producer 重试重发；consumer offset 错位仍可能重投
+- 事务性能明显差，非必要不开；跨 topic/多步原子才上事务
+```

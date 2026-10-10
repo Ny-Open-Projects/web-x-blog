@@ -50,7 +50,35 @@
 4. **主动点破两个陷阱**：acks=all 会因 ISR 退化而失效；关闭未同步选主影响的是分区可用性而非整个集群 `[源码]`。
 5. **给配置必给配套方案**：直接甩"副本 3 + acks=all + min.insync=2 + 手动提交 + 消费幂等"，比逐个参数解释更像做过生产决策 `[经验]`。
 
-## ⚠️ 原文纠错
+## 细节与核心 API
+
+**六道闸门标准配置（可靠性优先，三件套必给）：**
+
+```properties
+default.replication.factor=3
+min.insync.replicas=2
+unclean.leader.election.enable=false
+# acks=all 必须配 min.insync.replicas，否则 ISR 退化只剩 leader 时退化为 acks=1（伪可靠）
+```
+
+```go
+// 生产者：acks=all
+config.Producer.RequiredAcks = sarama.WaitForAll // acks=-1/all
+config.Producer.Return.Successes = true
+
+// 消费者：关自动提交，业务处理成功才提交（宁可重复不丢，配消费端幂等）
+config.Consumer.Offsets.AutoCommit.Enable = false
+```
+
+**兜底队列（最后一道网）：**
+
+```text
+死信队列(Dead Letter)：消费/解析失败的消息隔离出去，避免毒药消息卡住进度
+重试队列：按等级递增延时重投（一级 5s、二级 10s），超上限进死信
+回退队列：解决"不断回滚回队头"死循环
+```
+
+**刷盘策略：依赖 OS 页缓存，可靠性靠多副本而非单机刷盘；同步刷盘性能损耗过大，海量组件不默认控。**
 
 1. 事实核校：原文对六个影响因素、发送方式三选、死信与重试队列的描述整体准确，本卡沿用并补结构 `[经验]`。
 2. 补充：原文"acks=all 可达到最强可靠性"需加限定——**必须配 `min.insync.replicas`**，否则 ISR 只剩 leader 时会退化为 acks=1 `[源码]`。
