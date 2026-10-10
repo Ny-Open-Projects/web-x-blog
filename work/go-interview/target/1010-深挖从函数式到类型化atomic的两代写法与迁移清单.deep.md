@@ -107,6 +107,75 @@ atomic.Pointer[T]（Go 1.19+）
      且复合逻辑保不住。会用是能力，知道什么时候不用是功力。」
 ```
 
+## 细节与核心 API
+
+```go
+// 第一代：函数式 API（Go < 1.19 或老代码）——类型安全靠人肉保证
+var x int64
+atomic.AddInt64(&x, 1)                       // 返回【新值】
+old := atomic.SwapInt64(&x, 99)              // 返回【旧值】
+ok  := atomic.CompareAndSwapInt64(&x, 99, 100) // 返回【成败 bool】
+
+// 第二代：类型化 API（Go 1.19+）——类型本身携带"我是原子的"，编译器兜底
+var c atomic.Int64
+c.Add(1)                  // 新值
+_ = c.Load()              // 读
+c.Store(50)               // 写
+_ = c.Swap(99)            // 旧值
+_ = c.CompareAndSwap(99, 100) // bool
+var b atomic.Bool
+b.Store(true); _ = b.Load()
+
+// atomic.Pointer[T]：编译期锁定类型，新代码替代 atomic.Value 的首选
+type Config struct{ Addr string }
+var p atomic.Pointer[Config]
+p.Store(&cfg)             // *Config
+cfg2 := p.Load()
+
+// atomic.Value：能存任意类型，但换类型在【运行时】panic，且首次 Store 不能是 nil
+var v atomic.Value
+v.Store(Config{Addr: "x"})          // 首次 Store 必须非 nil
+_ = v.Load().(Config)               // 读取需类型断言
+```
+
+**对齐硬约束**（32 位平台 64 位原子量必须 8 字节对齐，否则 panic / 未定义行为）：
+
+```go
+type Bad struct {
+    a int32
+    c int64  // 放中间可能被挤到非 8 字节边界 -> 32 位平台炸
+}
+type Good struct {
+    c int64  // 放第一个字段，天然对齐；或直接用 atomic.Int64（类型内部已处理对齐）
+    a int32
+}
+```
+
+**CAS 循环**（"读-判断-写"复合逻辑原子操作保不住，必须循环；失败立刻重读，不要 sleep/Gosched）：
+
+```go
+for {
+    old := c.Load()
+    if old > 1e6 { break }
+    if c.CompareAndSwap(old, old+1) { break } // 成功后立刻 break，失败重读 old
+}
+```
+
+**ABA 解法**：把 value 与 version 打包成一个字，避免" A→B→A 被误判没变过"。
+
+**迁移清单（老代码 → 新代码）**：
+
+```text
+atomic.AddInt64(&x, 1)  →  var x atomic.Int64; x.Add(1)
+atomic.LoadInt64(&x)    →  x.Load()
+atomic.StoreInt64(&x,v) →  x.Store(v)
+atomic.SwapInt64(&x,v)  →  x.Swap(v)
+atomic.CompareAndSwap…  →  x.CompareAndSwap(...)
+atomic.Value{}          →  atomic.Pointer[T]{}（能锁类型就换，否则保留 Value）
+```
+
+> 边界：五方法语义陷阱见 104；与锁的选型见 105；本卡只讲两代 API 差别、迁移与底层约束。
+
 **面试官可能的追问**：
 
 ```text
