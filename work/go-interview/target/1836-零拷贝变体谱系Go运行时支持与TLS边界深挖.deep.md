@@ -32,3 +32,18 @@
 - 被问「Go 里怎么吃到零拷贝」→ io.Copy 自动 sendfile + 别手工 buf 中转的反模式，配运行时源码位置 [源码]。
 - 被问「HTTPS 服务怎么办」→ 承认 TLS 退化为传统路径，进阶答 kTLS 下沉，展示视野 [经验]。
 - 主动边界到 `144-zerocopy`（Kafka 消费收益视角）、`1113-zero-copy-pitfalls`（用户态 string/[]byte 零拷贝，另一码事）、`1834-select-poll-epoll`（IO 多路复用与系统调用的配合），构成高性能 IO 专题 [边界]。
+
+## 细节与核心 API
+
+```go
+// 零拷贝手段谱系：
+//  sendfile：in_fd(文件)->out_fd(socket)，内核内搬，省两次拷贝
+//  splice：管道中介，文件<->pipe<->socket
+//  tee/mcopy：同类衍生
+//  mmap+write：映射后写，省一次用户态拷贝（仍一次内核->socket）
+// Go 运行时支持：net 的 io.Copy 在 *os.File -> *net.TCPConn 时走 sendfile 路径（自动零拷贝）
+n, _ := io.Copy(conn, file)   // 大文件下载自动走 sendfile，不在用户态拷贝
+// TLS 边界：sendfile 不能直接用于 TLS 连接（数据需加密，必须过用户态）；
+//   即 https 下载大文件会退回普通 copy（TLS 层无法零拷贝）
+// 选型：明文大文件直传用 sendfile（Go 自动）；加密/需加工则接受普通拷贝
+```

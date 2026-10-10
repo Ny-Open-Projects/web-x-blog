@@ -121,3 +121,22 @@ A：阻塞在 IO 上的 goroutine 会被 netpoll 接管，不占 OS 线程；
    初始栈仅 2KB 量级，十万级连接在内存上是可承受的。
    但每个连接一个 goroutine 不代表可以不管超时与限流。
 ```
+
+## 细节与核心 API
+
+```go
+// C10K 问题：1 万并发连接，每连接一线程 -> 上下文切换/内存爆炸
+// 演进：select(poll 集 fd 数组，O(n) 轮询) -> epoll(就绪事件回调，O(1)) -> Go netpoller
+// Go 做法：每个 conn 一个 goroutine，写法像阻塞，实际由 netpoller 托管
+ln, _ := net.Listen("tcp", ":8080")
+for {
+    c, _ := ln.Accept()
+    go func(conn net.Conn) {        // 一个 G 处理一个连接（M 不阻塞）
+        buf := make([]byte, 4096)
+        for { n, err := conn.Read(buf); if err != nil { return }; handle(buf[:n]) }
+    }(c)
+}
+// 十万连接只需少量 M（=GOMAXPROCS + 少量 syscall 线程），靠 epoll 唤醒就绪 G
+// 选型：写业务用 Go 原生 net（省心）；要极致 control（自定义事件循环）才用 epoll 直接写
+// 陷阱：netpoller 只管“网络 fd”，本地大文件 read 仍阻塞 M（必要时用 goroutine 池隔离）
+```

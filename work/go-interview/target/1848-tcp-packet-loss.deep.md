@@ -35,3 +35,17 @@ TCP 丢数据排查树
 3. **数字与版本**：`txqueuelen` 默认 1000、可调 2000；`TCPBacklogDrop` 需 Linux 5.9+；全连接队列 = `min(backlog, somaxconn)`。
 4. **高阶收尾**：抛出「传输层可靠 ≠ 应用层可靠」，并补一句应用层自保（ACK/重传/幂等），是拿高分的关键一句。
 5. **避坑**：不要说「TCP 绝不丢」；不要把 `mtr` 和 `ping` 混为一谈（前者逐跳、后者端到端）；不要把队列溢出当成「连接被拒绝」（它是静默丢弃，客户端表现为超时）。
+
+## 细节与核心 API
+
+```bash
+# 丢包表现：吞吐骤降、RTT 抖动、重传增多
+ping -c 100 host | grep loss         # 看端到端丢包率
+ss -ti dst host                       # 看某连接的 retransmit、rtt、cwnd（拥塞窗口）
+# 重传机制：超时重传（RTO）与快速重传（收到 3 个重复 ACK）
+# 拥塞控制：丢包触发 cwnd 减半（Reno/Cubic），吞吐随丢包率 √(1/p) 下降
+# 内核可调：
+sysctl -w net.ipv4.tcp_retries2=8     # 重试次数（影响判定死连接快慢）
+# 定位：tcpdump 'tcp.analysis.retransmission'（wireshark 显示过滤）；抓两端对比确认哪段丢
+# 根因：网卡/线/交换机、缓冲区满（Bufferbloat）、ECN 未开、跨公网拥塞、MTU 不匹配分片
+```

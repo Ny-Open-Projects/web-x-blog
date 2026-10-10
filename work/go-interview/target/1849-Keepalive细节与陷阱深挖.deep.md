@@ -18,3 +18,21 @@ keepalive 两层
 ## 答题技巧
 - 被问"两者区别"先定层级（应用层 vs 内核态），再讲目的（省开销 vs 探死连）[经验]。
 - 主动边界到 `1853`(TCP 建连)，构成连接生命周期全栈 [边界]。
+
+## 细节与核心 API
+
+```go
+// TCP Keepalive：探测“死连接”（非应用层心跳），默认关闭需显式开
+conn, _ := net.Dial("tcp", "host:80")
+tcp := conn.(*net.TCPConn)
+tcp.SetKeepAlive(true)
+tcp.SetKeepAlivePeriod(30 * time.Second) // 每 30s 发探测
+// 内核参数（探测节奏，全局）：
+#   net.ipv4.tcp_keepalive_time  = 7200 首次探测前空闲秒数
+#   net.ipv4.tcp_keepalive_intvl = 75   间隔
+#   net.ipv4.tcp_keepalive_probes= 9    探测次数
+// 陷阱：
+//  - Keepalive 默认 2 小时才动，感知死连太慢 -> 业务层心跳（如 gRPC/HTTP/2 ping）更及时
+//  - 它只能发现“对端宕机/网络断”，发现不了“进程卡死但连接还在”
+//  - 中间 NAT 可能丢弃空闲连接，仍须应用心跳保活
+```

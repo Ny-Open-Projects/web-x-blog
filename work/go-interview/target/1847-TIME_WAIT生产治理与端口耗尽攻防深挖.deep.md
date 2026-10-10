@@ -29,3 +29,17 @@ TIME_WAIT 治理决策树
 - 被问「生产 TIME_WAIT 爆了怎么办」→ 按决策树顺序答：分侧 → 长连接治本 → tw_reuse（出方向限制说清）→ 归属调整，并主动点名 tw_recycle 已移除 [经验]。
 - 被问「CLOSE_WAIT 多呢」→ 立刻纠正这是应用层忘 Close 的泄漏 bug，与 TIME_WAIT 协议行为不同——一题双查显深度 [经验]。
 - 主动边界到 `1844-rst-use-cases.deep`（RST 不产生 TIME_WAIT 的对照）、`1843-tcp-handshake-recap`（握手侧状态机）、`1849-http-vs-tcp-keepalive`（长连接原理），构成 TCP 连接生命周期专题 [边界]。
+
+## 细节与核心 API
+
+```bash
+# TIME_WAIT：主动关闭方最后发 ACK 后进入，持续 2*MSL（Linux 默认 60s）
+# 目的：① 确保最后 ACK 可达（丢则对端重传 FIN）② 让旧连接的迷途报文在网络中消亡
+# 端口耗尽：高并发短连接（如调用下游）时，本地端口被大量 TIME_WAIT 占满 -> 无法建新连
+ss -tan | grep TIME-WAIT | wc -l
+# 治理（主动关闭方才产生，故客户端侧最有效）：
+sysctl -w net.ipv4.tcp_tw_reuse=1      # 复用 TIME_WAIT 连接（客户端安全，RFC 允许）
+sysctl -w net.ipv4.tcp_timestamps=1    # tw_reuse 依赖
+# 不推荐 tcp_tw_recycle（已移除，且 NAT 下乱序）；更治本：用长连接（连接池）/SO_REUSEADDR
+# 服务端侧：通常被动关闭，TIME_WAIT 在客户端；若服务端主动关（如反向代理上游）则同理治理
+```

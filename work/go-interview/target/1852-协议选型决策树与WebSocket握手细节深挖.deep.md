@@ -30,3 +30,20 @@
 - 被问「RPC 一定比 HTTP 快吗」→ 拿 HTTP/2 反例压住绝对化结论，再把话题引到「序列化 + 接口治理」，从背结论升级为讲权衡 [经验]。
 - 手写分帧代码主动上：length-prefix 三行核心（写长度头 → ReadFull 头 → ReadFull 体），实测三帧还原，证明懂「流 vs 消息」 [实测]。
 - 主动边界到 `1849-http-vs-tcp-keepalive`（HTTP 长连接与 TCP keepalive 两层含义）、`1853-http-render-close`、`713-http-graceful-shutdown`（连接生命周期工程侧），构成网络协议专题 [边界]。
+
+## 细节与核心 API
+
+```go
+// 协议选型决策树（面试口述）：
+//  需可靠有序流式？ -> TCP（HTTP/gRPC/DB）
+//  需极低延迟/可丢？ -> UDP（DNS/音视频/游戏，自管重传）
+//  请求-响应为主？   -> HTTP/1.1 或 HTTP/2
+//  服务端主动推送？   -> WebSocket / SSE / gRPC stream
+//  跨语言/强契约？   -> gRPC（HTTP/2 + protobuf）
+// WebSocket 握手：HTTP Upgrade 升级，之后脱离 HTTP 帧，走 WS 帧
+//  Go 示例（gorilla/websocket）：
+upgrader := websocket.Upgrader{}
+conn, _ := upgrader.Upgrade(w, r, nil) // 响应 101 Switching Protocols
+for { _, msg, _ := conn.ReadMessage(); conn.WriteMessage(1, msg) } // 双向帧
+// 关键：Upgrade 请求须带 Sec-WebSocket-Key/Version；握手失败回 400；之后是 WS 数据帧
+```

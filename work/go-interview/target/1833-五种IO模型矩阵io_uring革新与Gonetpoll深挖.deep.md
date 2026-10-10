@@ -28,3 +28,16 @@
 - 被问「io_uring 好在哪」→ 双队列共享内存 + 批量提交 + 全域覆盖（文件/网络），对比 AIO 的三宗罪 [经验]。
 - 被问「Go 为什么不用回调」→ netpoll + gopark/goready 把异步封装进调度器，同步 API + 异步运行时 [源码]。
 - 主动边界到 `1834-io-multiplexing-select-poll-epoll`（select/poll/epoll 机制）、`1834-epoll-level-edge`（触发模式）、`1836-zero-copy-path`（拷贝阶段的优化另一翼），构成高性能 IO 双翼（等待翼 + 拷贝翼）[边界]。
+
+## 细节与核心 API
+
+```go
+// epoll（Linux 主流多路复用，Go netpoller 默认后端）：
+//   epoll_create1 -> epoll_ctl(ADD) -> epoll_wait 拿就绪事件
+//   边沿(ET) vs 水平触发(LT)：ET 仅状态变化时通知一次，须一次读尽；LT 没读尽会再通知
+// io_uring（新一代，真正异步）：提交/完成两个 ring，系统调用近乎零开销
+//   提交 SQE -> 内核异步执行（含文件 IO） -> 完成 CQE 回填，支持轮询免 syscall
+// Go 现状：netpoller 仍基于 epoll/kqueue（非 io_uring），但收发走 runtime 托管
+// 选型：高并发网络 epoll 足够；高 IOPS 本地磁盘随机 IO 用 io_uring 收益明显
+// 矩阵：模型3（epoll）覆盖 99% 网络场景；模型5（io_uring）补齐“网络+磁盘统一异步”
+```

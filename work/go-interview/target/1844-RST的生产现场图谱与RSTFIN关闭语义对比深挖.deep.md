@@ -32,3 +32,18 @@
 - 被问「RST 和 FIN 区别」→ 四维对比（优雅度/TIME_WAIT/半关闭/ACK 机制）一口气报完 [经验]。
 - 被问「生产上 RST 从哪来」→ 按图谱三分类（对端/中间盒/本端）+「秒拒查 REJECT、超时查 DROP」的排查口诀 [经验]。
 - 主动边界到 `1843-tcp-handshake-recap`（握手状态机）、`1843-handshake-loss-first`（握手丢包重传）、`1849-http-vs-tcp-keepalive`（保活与心跳），构成 TCP 连接管理专题 [边界]。
+
+## 细节与核心 API
+
+```bash
+# RST（复位）触发场景：
+#  - 端口无监听进程：连接被拒，对端收 RST
+#  - 已关闭 socket 仍收到数据（半打开连接）：RST
+#  - recv buffer 满且对端硬塞（向已关闭方向写）：RST
+#  - SO_LINGER 设 l_onoff=1,l_linger=0：close 直接 RST（不进 TIME_WAIT，但丢弃未发数据）
+# 抓 RST：tcpdump 'tcp[tcpflags] & (tcp-rst) != 0'
+# RST vs FIN：
+#  FIN = 正常优雅关闭（我只不发数据了，仍收你的）；双向 FIN 才全关
+#  RST = 异常立即终止（连接作废，不保证数据送达，无四次挥手）
+# 生产：大量 RST 多指向“服务挂了/端口错/半打开/优雅关闭没做好/防火墙拦截”
+```
