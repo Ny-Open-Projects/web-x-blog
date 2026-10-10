@@ -35,3 +35,27 @@ string 与 []byte 的零拷贝转换，本质是利用两者**底层 header 的�
 3. **版本演进是加分项**：明确「Go 1.20+ 用 `unsafe.String`/`unsafe.Bytes`/`unsafe.StringData`，手写 reflect header 是反模式（uintptr 非 GC 根）」。
 4. **收尾落安全纪律**：「零拷贝结果当只读；需修改就老老实实拷贝」。这比只背写法更显工程成熟。
 5. **避坑**：别说「零拷贝一定更快」（小字符串拷贝更便宜）；别把 `unsafe.String` 说成 Go 1.18 之前就有；别忽略空切片 `&b[0]` panic（用 `unsafe.SliceData`/`StringData` 规避）。
+
+## 细节与核心 API
+
+**强转必拷贝**（string 不可变契约保护，语言强制复制底层数组）：
+
+```go
+b := []byte(s) // 分配新数组
+s2 := string(b)
+```
+
+**零拷贝首选：Go 1.20+ 官方 `unsafe` API**（用 `unsafe.Pointer` 作 GC 根，安全）：
+
+```go
+bs := unsafe.Slice(unsafe.StringData(s), len(s)) // string -> []byte，共享底层，只读
+s3 := unsafe.String(&b[0], len(b))               // []byte -> string，共享底层，只读
+// 写入 bs 会破坏 s 不可变契约，连累其他持有者；
+// 若 s 来自字面量（.rodata 只读段），写入 -> SIGSEGV
+```
+
+**反模式（Go < 1.20 手写 reflect header）**：`SliceHeader.Data` 是 `uintptr`、非 GC 根，可能误回收导致 use-after-free；官方 API 用 `unsafe.Pointer` 规避，禁止手写 header。
+
+**三大坑速记**：① 共享底层改 `[]byte` 破坏 string 不可变；② 字面量 string 写入 SIGSEGV；③ `uintptr` header 不被 GC 扫描 → use-after-free。
+
+> 边界：string 内存泄漏完整链条见 905；逃逸分析见 1119。本卡只讲 string↔[]byte 零拷贝。

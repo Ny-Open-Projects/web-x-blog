@@ -28,3 +28,42 @@
 3. **关联误区(一)**：顺带提"闭包循环变量(1017)也是并发高频坑"，显知识网。
 4. **修复一句话**：值复制→传指针；Add→外提；锁→defer 兜底+去重入。
 5. **避坑**：不把"锁复制"当"浅拷贝无所谓"；不说"Add 先 go 后也行"；不忽略调用链里的重复加锁。
+
+## 细节与核心 API
+
+**① sync 类型值复制：含 Mutex 字段被值传 → 锁失效、计数读出 0**：
+
+```go
+type Counter struct{ mu sync.Mutex; n int }
+func (c Counter) Inc() { c.mu.Lock(); c.n++; c.mu.Unlock() } // 值接收者：复制出独立锁，互不共享
+func (c *Counter) Inc() { c.mu.Lock(); defer c.mu.Unlock(); c.n++ } // 修复：指针接收者
+```
+
+**② WaitGroup.Add 时机：Add 放 goroutine 内 → Wait 抢在 Add 前 → 计数 0 或 panic**：
+
+```go
+var wg sync.WaitGroup
+for i := 0; i < N; i++ {
+    wg.Add(1) // 正确：go 之前 Add（错误写法：写在 goroutine 内）
+    go func() { defer wg.Done(); work() }()
+}
+wg.Wait()
+```
+
+**③ 调用链重入同一锁 → `fatal error: all goroutines are deadlocked`**（重入常藏调用链而非显式自锁）：
+
+```go
+func A(mu *sync.Mutex) { mu.Lock(); defer mu.Unlock(); B(mu) } // A 已持锁
+func B(mu *sync.Mutex) { /* 不能再 Lock 同一把锁，否则死锁 */ }
+// 修复：defer 兜底 + 去重入，或调用链上只持一次锁、内部函数不重复加
+```
+
+**④ 加解锁不配对：中间分支漏 Unlock → 提前 return 后卡死**：
+
+```go
+mu.Lock()
+if err != nil { return } // 错误：漏 Unlock
+defer mu.Unlock()        // 正确：defer 兜底 early-return
+```
+
+> 边界：闭包/循环变量误区(一)见 1017；race detector 见 1018/1019；sync noCopy 见 913；不可重入见 925。

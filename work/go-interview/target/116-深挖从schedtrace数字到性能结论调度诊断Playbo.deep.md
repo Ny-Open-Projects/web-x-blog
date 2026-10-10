@@ -115,4 +115,33 @@ A：默认就是核数，一般不动。容器里若拿到的不是真实 CPU �
 
 Q：schedtrace 和 gctrace 能一起开吗？
 A：能，`GODEBUG=schedtrace=500,gctrace=1`，用逗号分隔多个开关。
+
+## 细节与核心 API
+
+**取数**：`schedtrace` 走标准错误，必须 `2>`：
+
+```bash
+GODEBUG=schedtrace=300 ./app 2> sched.log
+GODEBUG=schedtrace=500,gctrace=1 ./app 2>&1   # 多开关逗号分隔
+```
+
+**典型快照字段解读**：
+
+```text
+gomaxprocs=16 idleprocs=14 threads=22 spinningthreads=1 idlethreads=8 runqueue=0 [0 0 ...] schedticks=...
+  idleprocs 高(≈gomaxprocs) → 没吃满(阻塞型任务/并发度不足)
+  runqueue 持续 >0           → 有积压(生产过快或串行瓶颈)
+  threads 单调上涨(远超P)    → 系统调用/cgo 阻塞、netpoll 未生效
+  [ n1 n2 ] 极不均(如[40 0])  → 工作窃取失效/绑核/单队列热点
+```
+
+**线上常驻只留轻量指标**（切勿常开 schedtrace——会让 sysmon 无法深睡，是持续性 CPU 开销）：
+
+```go
+n := runtime.NumGoroutine() // 长期埋进监控
+cpu := runtime.NumCPU()
+// 出问题再按需抓 GODEBUG=trace 或 pprof，抓完立即关闭
+```
+
+> 边界：GMP 三元组基础见 813；工作窃取见 818；pprof 热点见 1115。本卡只讲"拿到数字怎么下结论"。
 ```
