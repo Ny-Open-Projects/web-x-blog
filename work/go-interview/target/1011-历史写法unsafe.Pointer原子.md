@@ -1,50 +1,81 @@
 # 1011 历史写法 unsafe.Pointer 原子
 
 > 分类：并发模型 | 难度：L3 | 题型：对比题 | 频率：低 | 关键词：**unsafe.Pointer** / **LoadPointer** / **go1.19 前**
+
 > 原文锚点：第 9~22 段「用 unsafe 定义指针值，storepoint 把对象地址存入，loadpoint 取出再转引用」
 
 ## 一句话总述
-Go 1.19 之前没有泛型原子指针，只能用 `atomic.LoadPointer/StorePointer/SwapPointer/CompareAndSwapPointer` 操作 `*unsafe.Pointer`，拿到的 `unsafe.Pointer` 须显式转回 `*T`——类型安全靠人肉保证。
+Go 1.19 之前没有泛型原子指针，只能用 `atomic.LoadPointer/StorePointer/SwapPointer/CompareAndSwapPointer` 操作 `*unsafe.Pointer`，拿到的 `unsafe.Pointer` 须显式转回 `*T`——类型安全靠人肉保证。一句话背法：**「Go1.19 前无泛型原子指针，用 atomic.LoadPointer/StorePointer 操作 *unsafe.Pointer，取回 unsafe.Pointer 须 (*T)(...) 显式转；新代码改 atomic.Pointer[T]」**。
 
 ## 面试官视角
-- 意图：能否读懂老代码里的 `unsafe.Pointer` 原子写法，理解它与新泛型的映射。
-- P5 知有四个 LoadPointer 等 / P6 说清 unsafe.Pointer 与 *T 互转 / P7 知新项目应迁移到 atomic.Pointer[T]。
-- 红旗：把 `unsafe.Pointer` 当普通指针隐式用（转换必须显式）；以为历史写法有类型检查。
-- 惊艳点：`(*T)(p)` 与 `unsafe.Pointer(t)` 是互转唯一合法桥；漏转或错转会编译不过或崩溃 `[源码]` unsafe。
+这是考察"能否读懂老代码里的 unsafe.Pointer 原子写法，理解它与新泛型的映射"的题。
+- **P5**：知道有四个 LoadPointer 等。
+- **P6**：说清 unsafe.Pointer 与 *T 互转。
+- **P7**：知道新项目应迁移到 atomic.Pointer[T]。
+- **红旗**：把 `unsafe.Pointer` 当普通指针隐式用（转换必须显式）；以为历史写法有类型检查。
+- **惊艳点**：`(*T)(p)` 与 `unsafe.Pointer(t)` 是互转唯一合法桥；漏转或错转会编译不过或崩溃 `[源码]` unsafe。
 
 ## 主问答
 **Q（面试官原话）：** 老代码里 atomic.LoadPointer 怎么用？
-**A：**
-1. **结论**：`atomic.LoadPointer(addr *unsafe.Pointer) unsafe.Pointer`，需 `(*T)(unsafe.Pointer(...))` 转回具体类型。
-2. **机制**：底层操作的是 `*unsafe.Pointer`；`StorePointer` 写入、`CompareAndSwapPointer` 比地址，与泛型版语义一致。
-3. **边界**：转换无编译期类型校验，写错 `*T` 运行期才暴露；go1.19+ 应优先 `atomic.Pointer[T]` 消除此类风险。
-**加分层：** unsafe 转换零运行时开销，但把安全责任全压给开发者。
+
+**先铺垫（由浅入深第 1 层）**：维护 Go 1.18 及更老的代码时，还会碰到 `atomic.LoadPointer` 这套。它和泛型 `atomic.Pointer[T]` 语义完全一样，只是类型全靠 `unsafe.Pointer` 兜着，转错类型运行期才炸。
+
+1. **结论（第 2 层·机制）**：`atomic.LoadPointer(addr *unsafe.Pointer) unsafe.Pointer`，需 `(*T)(unsafe.Pointer(...))` 转回具体类型 `[源码]` unsafe。
+2. **机制（第 3 层）**：底层操作的是 `*unsafe.Pointer`；`StorePointer` 写入、`CompareAndSwapPointer` 比地址，与泛型版语义一致 `[源码]`。
+3. **边界（第 4 层）**：转换无编译期类型校验，写错 `*T` 运行期才暴露；go1.19+ 应优先 `atomic.Pointer[T]` 消除此类风险 `[源码]`。
+4. **互转（第 5 层）**：`(*T)(unsafe.Pointer(p))` 与 `unsafe.Pointer(t)` 是唯二合法桥，零运行时开销但安全责任全压给开发者 `[源码]` unsafe。
+5. **迁移（第 6 层）**：新项目一律 `atomic.Pointer[T]`；老代码逐步改写，避免 `unsafe` 裸露 `[经验]`。
 
 ## 追问链
-| 层 | 追问 | 在测什么 | 怎么接 | 答不出停档 |
-|---|---|---|---|---|
-| L1 | 有哪些 | 概念 | LoadPointer 等 | 换题 |
-| L2 | 怎么转 | 机制 | unsafe 互转 | 判 P5 |
-| L3 | 风险 | 边界 | 无类型检查 | 判 P6 |
-| L4 | 迁移 | 权衡 | Pointer[T] | 判 P6+ |
-| L5 | 崩溃排查 | 实战 | 错转定位 | 判 P7 |
+| 档位 | 追问 | 答得到（背这句） | 答不出停在哪档 |
+|------|------|------------------|----------------|
+| L1 | 有哪些 | LoadPointer 等四方法 | — |
+| L2 | 怎么转 | unsafe 互转 (*T)(p) | 停 L2：判 P5 |
+| L3 | 风险 | 无类型检查 | 停 L3：判 P6 |
+| L4 | 迁移 | 改 Pointer[T] | 停 L4：判 P6+ |
+| L5 | 崩溃排查 | 错转定位 | 停 L5：判 P7 |
 
 ## 版本与兼容性
-| 结论成立版本 | 翻转点 | 现在该怎么答 |
-|---|---|---|
-| go<1.19 主用 | go1.19 起推荐 `atomic.Pointer[T]` | 老代码认 `LoadPointer`；新代码用泛型 `[源码]` sync/atomic |
+| 维度 | 说明 |
+|------|------|
+| Go <1.19 主用 | `LoadPointer`/`StorePointer`/`SwapPointer`/`CompareAndSwapPointer` 配 `*unsafe.Pointer` |
+| Go 1.19 起 | 推荐 `atomic.Pointer[T]`，编译期类型安全 |
+| 语义一致 | 旧 CompareAndSwapPointer 同样比地址，与泛型版等价 `[源码]` |
+| 关联 | 泛型 API 见 1011；CAS 比地址见 1011；五方法语义见 1010 |
 
 ## 关键代码
 ```go
-// 示意，未验证：go1.19 前的 unsafe.Pointer 原子写法
-var ptr unsafe.Pointer
-atomic.StorePointer(&ptr, unsafe.Pointer(&user))
-u := (*User)(atomic.LoadPointer(&ptr)) // 显式转回 *User
+package main
+
+import (
+	"fmt"
+	"sync/atomic"
+	"unsafe"
+)
+
+type User struct{ Name string }
+
+func main() {
+	var ptr unsafe.Pointer
+	atomic.StorePointer(&ptr, unsafe.Pointer(&User{Name: "a"}))
+	u := (*User)(atomic.LoadPointer(&ptr)) // 显式转回 *User
+	fmt.Println("load:", u.Name)
+
+	// CAS：比地址，与泛型版语义一致
+	old := &User{Name: "a"}
+	newU := &User{Name: "b"}
+	atomic.StorePointer(&ptr, unsafe.Pointer(old))
+	ok := atomic.CompareAndSwapPointer(&ptr, unsafe.Pointer(old), unsafe.Pointer(newU))
+	fmt.Println("cas:", ok)
+}
 ```
 
 ## 总结与追问预判
-- 旧写法 `*unsafe.Pointer` + LoadPointer 等，转换靠手；新代码改用 atomic.Pointer[T]。
-- 预判：现代 API 总览 → 见 1011。
+**背这三句就够**：① **Go <1.19 用 `atomic.LoadPointer` 等配 `*unsafe.Pointer`**；② **取回须 `(*T)(unsafe.Pointer(p))` 显式转，无编译期校验**；③ **新代码改 `atomic.Pointer[T]`**。
+**预判追问**：
+- 「泛型 Pointer 几方法？」→ Load/Store/Swap/CompareAndSwap（见 1011 泛型 API）。
+- 「CAS 比什么？」→ 比地址非内容（见 1011 指针 CAS）。
+- 「和 atomic.Value 区别？」→ Pointer 管单指针、Value 存任意类型（见 1011 区别）。
 
 ## ⚠️ 原文纠错
 原文整篇采用历史写法 `unsafe.Pointer` + `atomic.LoadPointer`/`StorePointer`/`SwapPointer`/`CompareAndSwapPointer`（对应 Go<1.19），API 行为描述正确，未发现事实错误。本卡点明：go1.19 起应迁移到 `atomic.Pointer[T]`；源文 `PTR` 零值为 nil（"new"系机翻）亦正确还原为指针零值 nil。
