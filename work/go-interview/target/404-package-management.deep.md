@@ -21,6 +21,21 @@ Go 包管理的核心矛盾是「依赖版本控制」：
 - 被追问细节时，主动区分 GOPATH 模式（管理方式）与 GOPATH 路径（环境变量值）两个概念。
 - 收尾补一句「Modules 用 go.sum 哈希校验防篡改、支持多版本并存」——这是区分 P6/P7 的关键。
 
+## 细节与核心 API
+
+```bash
+go mod init example.com/app     # 初始化 go.mod
+go mod tidy                      # 增删依赖，使 go.mod/go.sum 与代码一致
+go get github.com/gin-gonic/gin@v1.9.1   # 加/升级指定版本
+go mod download                  # 下载到模块缓存（GOMODCACHE）
+go mod verify                    # 校验已下载模块未被篡改（对照 go.sum）
+go list -m all                   # 查看依赖树与版本
+go list -u -m all                # 查看可升级版本
+# 锁文件：go.mod（声明） + go.sum（哈希校验）；CI 用 -mod=readonly 防意外变更
+# 可重现构建：go.sum 提交仓库；GOFLAGS=-mod=mod 才允许自动改
+# vendor：go mod vendor 把依赖打入 vendor/（离线/审计场景）
+```
+
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] 三阶段演进、各工具机制、Modules 终局、go.sum 校验定位——均正确，本卡为架构性归纳。
 2. 崩坏词归一：源码将 Go 音译为勾那/购、Golang 音译为 golwn/godown、Go Modules 音译为 gomodels、godep 音译为 go第一批、glide 音译为 glade、govendor 音译为 gorender；源码将 Go 语言 音译为崩坏词，本卡统一为 Go 语言。

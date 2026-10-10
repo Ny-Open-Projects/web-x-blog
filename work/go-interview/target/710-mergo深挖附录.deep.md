@@ -33,6 +33,11 @@ flowchart TD
 
 选型结论：配置/默认值合并、动态 struct↔map 用 mergo；做"外部数据→struct"的反序列化用 mapstructure 更对口；二者都不能替代彼此。不适用边界：超高频热点路径、需要改未导出字段的场景都不该用反射方案。
 
+## 性能量级与实测数据
+未实测，标记 `[存疑]`。反射方案相对代码生成慢一到两个数量级是常见经验判断 `[经验]`，但 mergo 多用于启动期/配置期而非请求热路径，通常不构成瓶颈。验证命令（如需实测）：`go test -bench` 对比 mergo.Merge 与手写的逐字段赋值。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `mergo.Map(dst, src)`：至少一端为 map 时按名映射，常用于 struct↔map。
 - `mergo.Merge(dst, src, opts...)`：合并两同构容器，默认零值才覆盖。
@@ -41,10 +46,6 @@ flowchart TD
 - `mergo.WithTransformer(t Transformer)`：注册字段级自定义逻辑。
 - 坑：dst 必须传指针且可寻址，否则反射写不进；不同类型合并结果难预期。
 
-## 性能量级与实测数据
-未实测，标记 `[存疑]`。反射方案相对代码生成慢一到两个数量级是常见经验判断 `[经验]`，但 mergo 多用于启动期/配置期而非请求热路径，通常不构成瓶颈。验证命令（如需实测）：`go test -bench` 对比 mergo.Merge 与手写的逐字段赋值。
-
-## 答题技巧
 - 30 秒版：mergo 用反射按名合并，默认零值才覆盖，未导出字段不动，要强制覆盖用 WithOverride。
 - 3 分钟版：补 map 并集语义、类型不符保留目标、WithOverwriteWithEmptyValue 区别、Transformer 扩展点。
 - 白板版：画"反射遍历→按名匹配→Config 判定→写入/跳过"流程。

@@ -33,3 +33,23 @@ Go 选型决策框架
 3. **定位金句**：「Go = C 性能 + Python 效率，互联网时代的 C，替代 C 不是 Java」。
 4. **版本演进加分**：泛型 1.18 落地补齐短板；GC 停顿从 STW 优化到亚毫秒（1.5/1.8）。
 5. **避坑**：不说「Go 最快」（纯 CPU 不比 C/Rust）；不说「Go 万能」（GUI/底层非其域）；不把「云原生语言」说成「只能写云原生」（CLI/工具同样是强项）。
+
+## 细节与核心 API
+
+```go
+// Go 的 select：专用于 channel 的多路通信控制，不是“分支选择”通用语句
+ch1, ch2 := make(chan int), make(chan int)
+select {
+case v := <-ch1:        // 多个就绪时随机选一个（不保证顺序）
+    fmt.Println("from ch1", v)
+case ch2 <- 1:          // 向 ch2 发送
+    fmt.Println("sent ch2")
+default:                // 全部未就绪时走 default（非阻塞）
+    fmt.Println("no ready, skip")
+}
+// 关键语义：
+//  - 无 default 且全阻塞 -> 永久阻塞（等待某一分支就绪）
+//  - nil channel 的 case 永不选中（可用来动态禁用分支）
+//  - 超时：case <-time.After(d): 实现“最多等 d”
+// 与 switch 区别：select 只处理 channel 通信/定时器，不能写任意表达式分支
+```

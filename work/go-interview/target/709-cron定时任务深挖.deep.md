@@ -26,6 +26,13 @@ stateDiagram-v2
 
 选型：简单回调用 AddFunc；需要 recover/日志链、或任务带状态用 AddJob + NewChain。
 
+## 性能量级与实测数据
+- 调度开销主要在"算下次触发"与定时器等待，单任务纳秒~微秒级，瓶颈在 Job 本身 `[经验]`。
+- 注册 N 个任务后，每次循环按时间排序取最近触发，调度为 O(N) 扫描（v3 实现），任务极多时需评估 `[存疑]`。
+- 验证版本：go1.26.5 / robfig/cron v3。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `cron.New(opts...)`：建调度器，可链式传 `WithSeconds()`、`WithLocation(loc)`、`WithLogger(log)`。
 - `AddFunc(spec, func()) (EntryID, error)`：闭包注册，表达式非法返回 error。
@@ -34,12 +41,6 @@ stateDiagram-v2
 - `Entries()` / `Entry(id)`：查 Entry 的 `Next`/`Prev`/`Schedule`。
 - `Remove(id)` / `Stop()`：删计划 / 终止调度（Stop 会等正在跑的结束）。
 
-## 性能量级与实测数据
-- 调度开销主要在"算下次触发"与定时器等待，单任务纳秒~微秒级，瓶颈在 Job 本身 `[经验]`。
-- 注册 N 个任务后，每次循环按时间排序取最近触发，调度为 O(N) 扫描（v3 实现），任务极多时需评估 `[存疑]`。
-- 验证版本：go1.26.5 / robfig/cron v3。
-
-## 答题技巧
 - 30 秒版：cron 用表达式描述"日历时刻"，`WithSeconds` 决定 5/6 位；AddFunc/AddJob 注册；时区与 recover 别漏；Start 且主协程常驻。
 - 3 分钟版：展开表达式占位符、两种注册、时区事故链、panic 兜底、串行不重叠。
 - 白板版：先写 `0 0 2 * * *`（每天 2 点），再补 `WithSeconds`/`WithLocation`/`Recover`。

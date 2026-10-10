@@ -33,6 +33,14 @@ graph LR
 
 选型结论：默认正常模式保吞吐，等待超阈值转饥饿保公平，二者靠 state.starving 位自动切换。不适用边界：持锁时间很长且写频繁，饥饿模式仍可能让新请求变慢 `[源码]`。
 
+## 性能量级与实测数据
+- 无竞争 Lock/Unlock 各约一次原子 CAS，零系统调用，纳秒级 `[经验]`。
+- 自旋上限 active_spin=4 轮、每轮约 30 次 PAUSE `[源码]`。
+- 饥饿阈值 starvationThresholdNs ≈ 1e6 ns（1ms）`[源码]`。
+- 原文未给可复现基准，以上量级来自源码常量与经验，非本批实测 `[存疑]`。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `state` 低 3 位：locked/woken/starving，高位 waiter 数（>>3）`[源码]`。
 - `sema`：信号量，lockSlow 阻塞时 `runtime_SemacquireMutex` 减一、解锁 `runtime_Semrelease` 加一 `[源码]`。
@@ -41,13 +49,6 @@ graph LR
 - `runtime_Semrelease(&m.sema, true, 1)`：第 2 参 handoff=true 让渡锁给队首 `[源码]`。
 - `P.runnext`：被 handoff 的 g 放进该字段，下轮优先调度 `[源码]`。
 
-## 性能量级与实测数据
-- 无竞争 Lock/Unlock 各约一次原子 CAS，零系统调用，纳秒级 `[经验]`。
-- 自旋上限 active_spin=4 轮、每轮约 30 次 PAUSE `[源码]`。
-- 饥饿阈值 starvationThresholdNs ≈ 1e6 ns（1ms）`[源码]`。
-- 原文未给可复现基准，以上量级来自源码常量与经验，非本批实测 `[存疑]`。
-
-## 答题技巧
 - 30 秒版：state+sema，CAS 快路径，失败自旋，重竞争 sema FIFO，饥饿模式 handoff。
 - 3 分钟版：展开位布局 + 自旋四条件 + 饥饿阈值切换 + runnext 优先。
 - 白板版：画 CAS 成功/失败两路，失败进自旋后 sema，标 handoff 箭头。

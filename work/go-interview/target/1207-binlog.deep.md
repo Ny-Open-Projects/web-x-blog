@@ -29,6 +29,13 @@ graph TD
 
 选型结论：能接受少量丢失用 N（如 100）；要求不丢用 1 并配合 innodb_flush_log_at_trx_commit=1。不适用边界：=0 绝不用于主库核心数据。
 
+## 性能量级与实测数据
+- binlog 是顺序写，单事务 fsync 的延迟量级在亚毫秒到毫秒（取决于存储 fsync 能力）。
+- sync_binlog=1 在高并发下 fsync 次数≈事务数，是主要瓶颈；组提交把多个事务的 fsync 合并成一次，吞吐可提升数倍 `[外部/MySQL]`。
+- 实测命令（思路，未在本环境跑 MySQL）：`sysbench oltp_write_only --sync-binlog=1` 对比 `--sync-binlog=100` 的 TPS 差异。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `sync_binlog`：每 N 次事务提交 fsync 一次；=1 即每次提交都 fsync `[外部/MySQL]`。
 - `binlog_cache_size`：线程私有 binlog 写缓存，默认 32KB，超限落盘 `[外部/MySQL]`。
@@ -37,12 +44,6 @@ graph TD
 - `PURGE BINARY LOGS` / `RESET MASTER`：binlog 清理，RESET 会复位序号 `[外部/MySQL]`。
 - `SHOW BINARY LOGS` / `SHOW MASTER STATUS`：查看 binlog 文件与当前写入位点 `[外部/MySQL]`。
 
-## 性能量级与实测数据
-- binlog 是顺序写，单事务 fsync 的延迟量级在亚毫秒到毫秒（取决于存储 fsync 能力）。
-- sync_binlog=1 在高并发下 fsync 次数≈事务数，是主要瓶颈；组提交把多个事务的 fsync 合并成一次，吞吐可提升数倍 `[外部/MySQL]`。
-- 实测命令（思路，未在本环境跑 MySQL）：`sysbench oltp_write_only --sync-binlog=1` 对比 `--sync-binlog=100` 的 TPS 差异。
-
-## 答题技巧
 - 30 秒版：binlog 先写线程 cache，提交时按 sync_binlog 刷盘；=1 最安全最慢、=0 由 OS、=N 折中；与 redo 两阶段提交保证一致。
 - 3 分钟版：展开三取值语义、cache 与事务原子性、两阶段提交顺序与崩溃恢复判定。
 - 白板版：画 prepare→binlog→commit 时序，标注 fsync 发生点。

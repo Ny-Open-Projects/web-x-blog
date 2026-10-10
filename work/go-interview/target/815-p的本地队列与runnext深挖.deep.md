@@ -31,6 +31,13 @@ flowchart TD
 **选型结论**：本地 runq(无锁) + 全局队列(兜底) + work-stealing(均衡) 是 Go 调度高吞吐的关键。
 **不适用边界**：极强局部性且不均的任务可能频繁偷取，反而增开销；此时调大 GOMAXPROCS 有限。
 
+## 性能量级与实测数据
+- 本地 runq 容量 256，超出转全局 `[源码]` runtime2.go。
+- work-stealing 偷取量约为源 P runq 的一半 `[源码]` runtime/proc.go。
+- 本地无锁入队相对全局有锁队列显著降低延迟；**未实跑**，数量级标 `[存疑]`。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `p.runq [256]guintptr`：本地可运行 G 环形数组，容量固定 256 `[源码]`。
 - `p.runqhead` / `p.runqtail`：环形队列头尾下标（原子），无锁出入队。
@@ -39,12 +46,6 @@ flowchart TD
 - `runtime/proc.go` 的 `runqget`/`runqput`：本地取/放 G `[源码]`。
 - `runtime/proc.go` 的 `stealWork`：空闲 P 偷取别 P 的 G `[源码]`。
 
-## 性能量级与实测数据
-- 本地 runq 容量 256，超出转全局 `[源码]` runtime2.go。
-- work-stealing 偷取量约为源 P runq 的一半 `[源码]` runtime/proc.go。
-- 本地无锁入队相对全局有锁队列显著降低延迟；**未实跑**，数量级标 `[存疑]`。
-
-## 答题技巧
 - 30 秒版：每 P 一个 256 无锁本地队列，runnext 存优先 G；满了转全局，空了偷别 P 一半。
 - 3 分钟版：本地无锁(原子下标)→runnext 优先续跑→满转全局→空闲 work-stealing。
 - 白板版：画"本 P runq / runnext / 全局队列 / 别 P runq"四块与箭头即可。

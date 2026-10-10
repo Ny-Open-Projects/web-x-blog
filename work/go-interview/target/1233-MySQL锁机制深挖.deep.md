@@ -35,6 +35,16 @@ SELECT * FROM performance_schema.metadata_locks
 WHERE LOCK_STATUS IN ('PENDING','GRANTED');
 ```
 
+## 思路与架构
+- 行级锁是一套"记录锁 + 间隙锁"的组合体系：记录锁锁索引项，间隙锁锁区间，next-key 二者合一防幻读；插入意向锁是 INSERT 的并发优化。
+- 意向锁是表级"占位符"，让表锁请求不必逐行扫描即可判断行锁冲突，是 InnoDB 行锁与表锁共存的桥梁。
+
+## 方案取舍
+- 间隙锁/next-key 锁只在 **REPEATABLE READ** 下默认启用；若业务能接受 READ COMMITTED，可关间隙锁降锁冲突，但会失幻读防护。
+- `innodb_autoinc_lock_mode`：高并发插入场景设为 2（交错）可提升吞吐，但 binlog 必须为 ROW 格式才能保证从库正确重放。
+
+## 答题技巧
+
 ## 细节与核心 API
 
 **行级锁四型（InnoDB，RR 下默认 next-key）**：
@@ -62,15 +72,6 @@ SELECT * FROM performance_schema.metadata_locks
 
 > 边界：隔离级别矩阵见 1230；MVCC 见 1231；加锁规则与排查见 1235；本卡只讲锁机制四型与体系。
 
-## 思路与架构
-- 行级锁是一套"记录锁 + 间隙锁"的组合体系：记录锁锁索引项，间隙锁锁区间，next-key 二者合一防幻读；插入意向锁是 INSERT 的并发优化。
-- 意向锁是表级"占位符"，让表锁请求不必逐行扫描即可判断行锁冲突，是 InnoDB 行锁与表锁共存的桥梁。
-
-## 方案取舍
-- 间隙锁/next-key 锁只在 **REPEATABLE READ** 下默认启用；若业务能接受 READ COMMITTED，可关间隙锁降锁冲突，但会失幻读防护。
-- `innodb_autoinc_lock_mode`：高并发插入场景设为 2（交错）可提升吞吐，但 binlog 必须为 ROW 格式才能保证从库正确重放。
-
-## 答题技巧
 1. 问"行锁有几种"——按"记录/间隙/临键/插入意向"四型答，顺带点 next-key=记录+间隙。
 2. 问"意向锁干嘛"——强调"表级快速判断行锁占用，避免逐行扫"，这是面试加分点。
 3. 问"为什么 DDL 卡住"——引到 MDL 雪崩：长事务持读锁挡 DDL，DDL 挡后续读。

@@ -23,6 +23,20 @@
 - 被追问浮点精度：直接举 `0.125`→`0.12` 的反例，并说明这是二进制浮点 + 舍入实现的真实行为。
 - 收尾补一句「%T 看类型而非值」，展示对反射式输出的理解。
 
+## 细节与核心 API
+
+```bash
+gofmt -l .                 # 列出未格式化的文件（CI 门禁常用）
+gofmt -w .                 # 就地格式化
+goimports -w .             # gofmt + 自动管理 import（增删、分组）
+go vet ./...               # 静态检查（printf 格式、不可达代码、锁拷贝等）
+# 取舍：gofmt 强制统一风格，消灭“格式争论”，但风格不可配置（故意）
+#  CI 集成：make fmt / pre-commit 钩子；MR 前 gofmt -l 必须为空
+# 编辑器：保存时自动 gofmt；imports 用 goimports 或 gopls
+# 进阶：golangci-lint 聚合多 linter（errcheck/staticcheck/ineffassign）
+# 注意：gofmt 改的是排版，不改语义；它让 diff 聚焦逻辑改动而非空格
+```
+
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] 动词分类与语义、%5d/%05d 控宽、%c 码点、UTF-8 字节下标、浮点 6 位小数与五舍、%T 类型名、%v 三兄弟递进、FMT 三函数差异——均为架构性归纳，与 Go fmt 事实一致。
 2. 崩坏词归一：源码将 Go / ASCII 码 / rune / byte / 数组 / 指针 等音译为崩坏词；本卡统一为规范术语。

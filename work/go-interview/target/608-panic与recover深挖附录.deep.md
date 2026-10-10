@@ -29,6 +29,11 @@ flowchart TD
 
 选型结论：业务错误一律用 error 返回；panic 仅用于不可恢复错误、初始化致命依赖、标准库式潜在 bug 标记，并在 goroutine 入口/服务入口统一 recover。不适用边界：不要用 panic/recover 替代正常的多步错误分支判断，那会牺牲可读性。
 
+## 性能量级与实测数据
+panic/recover 本身不是为高频路径设计：触发 panic 涉及 runtime 栈展开与打印（若未捕获）开销显著，远高于一次 mutex 加锁 `[源码]`。实测仅作定性结论——**常态逻辑里不应走 panic 路径**；其价值在异常保护与错误收敛，不在性能。验证：`go test -bench` 对比正常返回与 panic 路径延迟，go1.26.5。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `panic(v interface{})`：触发 panic，v 可为任意值，不限于 error。
 - `recover() interface{}`：仅在 defer 闭包直接调用有效，无 panic 返回 nil。
@@ -37,10 +42,6 @@ flowchart TD
 - `defer` 多个时按 LIFO：最后注册的先执行。
 - `panic(nil)`：仍为一次 panic，recover 返回 nil，可被"按 nil 判断"的兜底层视为"继续"。
 
-## 性能量级与实测数据
-panic/recover 本身不是为高频路径设计：触发 panic 涉及 runtime 栈展开与打印（若未捕获）开销显著，远高于一次 mutex 加锁 `[源码]`。实测仅作定性结论——**常态逻辑里不应走 panic 路径**；其价值在异常保护与错误收敛，不在性能。验证：`go test -bench` 对比正常返回与 panic 路径延迟，go1.26.5。
-
-## 答题技巧
 - 30 秒版：panic 后已注册 defer 执行、沿栈上溯、无 recover 则 goroutine 崩；recover 只在 defer 生效且就近捕获、不跨 goroutine。
 - 3 分钟版：补 defer 的"注册时机"语义、LIFO 顺序、defer 内再 panic 覆盖、goroutine 局部性。
 - 白板版：画"函数 panic → defer LIFO → recover 拦/上溯崩溃"这条主线。

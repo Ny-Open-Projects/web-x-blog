@@ -23,3 +23,23 @@
 - 落到 LSM：memtable 快写、SSTable 有序不可变、compaction 合并减碎片、cache 补读。
 - 收尾强调"兼容 Redis 协议"是 Pika 能被业务无感接入的关键。
 ```
+
+## 细节与核心 API
+
+```go
+// 高并发计数（阅读量/点赞）：先 Redis 累加，异步批量落库，避免直打 DB
+func IncrCounter(ctx context.Context, key string) (int64, error) {
+    return rdb.Incr(ctx, "cnt:"+key).Result()        // 内存级 O(1)，扛百万 QPS
+}
+// 异步落库：定时/按阈值把 Redis 计数刷入 DB，合并写
+func flush() {
+    for _, key := range rdb.Keys(ctx, "cnt:*").Val() {
+        v, _ := rdb.Get(ctx, key).Int64()
+        db.Exec("UPDATE stat SET cnt=? WHERE k=?", v, key)
+        // 注意：增量模式更好 -> INCRBY 后取差值累加，避免覆盖中间增长
+    }
+}
+// 防丢失：DB 用“累加”而非“覆盖”；Redis 宕机前未刷部分需 AOF/RDB 兜底或写 WAL
+// 选型：实时展示用 Redis，精确对账用 DB 异步收敛；强一致计数才直写 DB（性能差）
+// 热点 key：单 key 过热可分片（cnt:key:0..N 取模）+ 本地聚合
+```

@@ -35,3 +35,21 @@ FORCE INDEX       → 拦"有索引但优化器选全扫"（safe-updates 拦不�
 ```
 
 > 边界：SELECT 侧同类事故（类型转换）见 1238；UPDATE 底层加锁机制见 1236；表锁本身见 1233；EXPLAIN type 退化链见 1244；本卡只深挖"UPDATE 安全加锁三道防线"不重述各机制。
+
+## 细节与核心 API
+
+```sql
+-- 问题：并发 UPDATE 同一行可能“丢失更新”（后写覆盖先写）
+-- 方案1 悲观锁：先锁行再改（事务内）
+BEGIN;
+SELECT stock FROM goods WHERE id=1 FOR UPDATE;   -- 排他锁，阻塞其他写
+UPDATE goods SET stock=stock-1 WHERE id=1;
+COMMIT;
+-- 方案2 乐观锁：带版本/条件更新，原子且免锁
+UPDATE goods SET stock=stock-1, version=version+1
+ WHERE id=1 AND version=:old_version AND stock>0;  -- 受影响行数=0 即冲突，需重试
+-- 方案3 条件更新（最轻量，前提是更新可表达为自身函数）
+UPDATE goods SET stock=stock-1 WHERE id=1 AND stock>0;
+-- 选型：冲突少 -> 乐观锁（吞吐高）；冲突多/必须强一致 -> 悲观锁（FOR UPDATE 注意索引，否则锁表）
+-- 注意：UPDATE 默认自带行级写锁（执行期），但“读-改-写”两段之间仍要用上面手段防并发
+```

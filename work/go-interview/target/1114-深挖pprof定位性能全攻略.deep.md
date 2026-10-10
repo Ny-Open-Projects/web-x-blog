@@ -24,6 +24,13 @@ list下钻 --> 定位代码行
 
 不适用边界：短时脚本/无 HTTP 的服务更适合 runtime/pprof；生产用 http/pprof 务必鉴权或定位完关闭。
 
+## 性能量级与实测数据
+- CPU profile 默认 100Hz，每 10ms 一次 SIGPROF 中断，`小于 10ms` 热点会漏采 `[源码]`。
+- heap 默认按 `runtime.MemProfileRate`(512*1024 字节≈512KB) 字节率采样，不是按次数 `[源码]`。
+- 采样本身有开销：CPU profile 约 5% 量级、heap 采样影响分配路径，生产按需开启 `[经验]`。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `runtime/pprof.StartCPUProfile(f)` / `StopCPUProfile()`：CPU 采样开关，100Hz `[源码]`。
 - `pprof.WriteHeapProfile(f)`：写堆快照；等价于 `Lookup("heap").WriteTo` `[源码]`。
@@ -32,12 +39,6 @@ list下钻 --> 定位代码行
 - `net/http/pprof`：空导入后 `init` 在 `http.DefaultServeMux` 注册 `/debug/pprof/` `[源码]`。
 - `go tool pprof -http=:8080 file.prof`：启动 Web UI(含火焰图)，需 graphviz `[源码]`。
 
-## 性能量级与实测数据
-- CPU profile 默认 100Hz，每 10ms 一次 SIGPROF 中断，`小于 10ms` 热点会漏采 `[源码]`。
-- heap 默认按 `runtime.MemProfileRate`(512*1024 字节≈512KB) 字节率采样，不是按次数 `[源码]`。
-- 采样本身有开销：CPU profile 约 5% 量级、heap 采样影响分配路径，生产按需开启 `[经验]`。
-
-## 答题技巧
 - 30 秒版：pprof 采 CPU/heap/mutex/block；三种入口；`top -cum`+`list` 定位到行。
 - 3 分钟版：补各 profile 默认开关、allocs 含已释放/heap 仅存活、采样率事实。
 - 白板版：画上图，标清"选类型→选入口→top -cum→list"。

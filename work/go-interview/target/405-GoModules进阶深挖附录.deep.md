@@ -29,6 +29,11 @@ flowchart TD
 
 选型结论：日常开发用 Modules+go.sum；强可复现/隔离环境用 vendor；GOPATH 已基本淘汰。不适用边界：超大 monorepo 用 vendor 会带来巨大 diff 与同步负担。
 
+## 性能量级与实测数据
+依赖解析（MVS 选版）在中等项目上是毫秒到秒级，`go mod tidy` 会遍历整张依赖图并触发网络查询，耗时随依赖规模增长 `[经验]`。go.sum 校验是本地哈希比对，开销极低。验证：`time go mod tidy` 对比有无缓存的耗时，go1.22。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `go mod init <name>`：初始化生成 go.mod，name 建议用仓库路径 `[源码]`。
 - `go mod tidy`：补齐缺失依赖、删除未用依赖，重写 go.mod/go.sum。
@@ -38,10 +43,6 @@ flowchart TD
 - `replace` 指令：把某模块重定向到本地路径或另一版本，常用于临时修复/私有 fork `[源码]`。
 - `GOPROXY`：模块代理，多个用逗号分隔，`direct` 表示直连 VCS。
 
-## 性能量级与实测数据
-依赖解析（MVS 选版）在中等项目上是毫秒到秒级，`go mod tidy` 会遍历整张依赖图并触发网络查询，耗时随依赖规模增长 `[经验]`。go.sum 校验是本地哈希比对，开销极低。验证：`time go mod tidy` 对比有无缓存的耗时，go1.22。
-
-## 答题技巧
 - 30 秒版：go.mod 声明、go.sum 锁哈希、MVS 选版本、缺失走 GOPROXY 与 sum.golang.org。
 - 3 分钟版：补伪版本三段、go.sum 两类行、GOPRIVATE/GOSUMDB/vendor 三种免校验、replace 用法。
 - 白板版：画"go.mod→依赖图→MVS→pkg/mod→go.sum→构建"主线。

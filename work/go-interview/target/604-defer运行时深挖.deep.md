@@ -30,14 +30,6 @@ Q -->|是| X[真正返回]
 - **选型结论**：写 defer 时保持"函数顶层、数量少"，天然吃到开放编码；循环内 defer 下沉到子函数既正确又高效。
 - **不适用边界**：defer 不是免费糖——循环内大量 defer 会堆分配并延迟释放，是资源泄漏典型面。
 
-## 细节与核心 API
-
-- `_defer.link`：单向链表，头插实现 LIFO `[源码]`。
-- `_defer.sp` / `_defer.pc`：定位 defer 所在栈帧与待执行指令，函数返回时据此找回闭包与变量 `[源码]`。
-- `_defer.heap`：该记录是否堆分配（非"优先级"）；开放编码失败时置 true `[经验]`。
-- `runtime.deferproc` / `runtime.deferreturn`：注册与执行入口，均为 runtime 内部函数 `[源码]`。
-- open-coded：编译器在 return 前内联清理代码，一个帧用一个 `_defer` 描述整组 `[源码]`。
-
 ## 性能量级与实测数据
 
 - 607-defer.deep 实测：稳态循环外单个开放编码 defer 约 6 ns/op、0 allocs；闭包捕获外部变量时约 88 B/op、6 allocs/op `[实测]`。
@@ -56,6 +48,15 @@ func leaky(n int) {
 ```
 
 ## 答题技巧
+
+## 细节与核心 API
+
+- `_defer.link`：单向链表，头插实现 LIFO `[源码]`。
+- `_defer.sp` / `_defer.pc`：定位 defer 所在栈帧与待执行指令，函数返回时据此找回闭包与变量 `[源码]`。
+- `_defer.heap`：该记录是否堆分配（非"优先级"）；开放编码失败时置 true `[经验]`。
+- `runtime.deferproc` / `runtime.deferreturn`：注册与执行入口，均为 runtime 内部函数 `[源码]`。
+- open-coded：编译器在 return 前内联清理代码，一个帧用一个 `_defer` 描述整组 `[源码]`。
+
 
 - 30 秒版：背出"defer=_defer 链表栈、link 头插 LIFO、deferproc 注册/deferreturn 执行、1.14+ 开放编码零分配"。
 - 3 分钟版：按"结构→头插→两 runtime 函数→开放编码"展开，顺带纠"heap≠优先级"。

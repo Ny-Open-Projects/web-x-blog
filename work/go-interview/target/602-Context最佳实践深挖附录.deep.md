@@ -30,6 +30,11 @@ flowchart TD
 
 选型结论：请求链路一律用 context；纯内部后台任务可用 channel 自管。不适用边界：长生命周期后台协程不应绑定请求 context，否则请求结束即被取消。
 
+## 性能量级与实测数据
+context 派生根本身轻量：WithXxx 仅构造小结构体并复制父引用，无锁复制 `[源码]`。取消的代价在于需要每个阻塞点主动 select Done，若 goroutine 数量巨大且都监听同一 ctx，cancel 时需唤醒全部监听者，呈 O(n) `[经验]`。验证：用 `go test -bench` 对比派生 1k/10k 层 ctx 的 cancel 延迟，go1.22。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `context.Background()`：空根 ctx，main/入口用。
 - `context.WithCancel(parent)`：返回子 ctx 与 cancel，调用 cancel 关 Done `[源码]`。
@@ -39,10 +44,6 @@ flowchart TD
 - `context.WithoutCancel(parent)`：go1.21 新增，派生不随父取消的 ctx `[源码]`。
 - `context.AfterFunc`：go1.21 新增，ctx 取消时触发回调 `[源码]`。
 
-## 性能量级与实测数据
-context 派生根本身轻量：WithXxx 仅构造小结构体并复制父引用，无锁复制 `[源码]`。取消的代价在于需要每个阻塞点主动 select Done，若 goroutine 数量巨大且都监听同一 ctx，cancel 时需唤醒全部监听者，呈 O(n) `[经验]`。验证：用 `go test -bench` 对比派生 1k/10k 层 ctx 的 cancel 延迟，go1.22。
-
-## 答题技巧
 - 30 秒版：context 是派生树，父 cancel 关 Done，子 select 收尾；作为参数第一个传、别存 struct、别存敏感数据。
 - 3 分钟版：补四方法语义、WithTimeout=WithDeadline 封装、cancel 必须调用、Value 用自定义 key。
 - 白板版：画"Background→WithXxx→子 goroutine"的树，标 cancel 信号沿边下行。

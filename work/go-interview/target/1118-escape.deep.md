@@ -27,6 +27,14 @@ graph TD
 
 选型结论：能让编译器证明"不出函数"的对象应尽量留在栈，减少 GC 压力。不适用边界：对象过大或尺寸编译期未知（变长数组）会被强制堆分配，无法靠逃逸分析救回。
 
+## 性能量级与实测数据
+- 实测（go1.26.5）：返回 `&local` 的函数，变量被标 `moved to heap`，每次调用产生 1 次堆分配。
+- 闭包捕获基本类型变量，输出 `func literal escapes to heap` 且 `assign=true`。
+- 对比基准：逃逸路径 `allocs/op` 高于栈路径；高频小对象逃逸是 GC 压力主要来源 `[实测]`。
+- 量化命令：`go test -bench=. -benchmem`，看 allocs/op 与 B/op 两列。
+
+## 答题技巧
+
 ## 细节与核心 API
 - `go build -gcflags="-m"`：打印逃逸结论，`moved to heap` 表示栈迁堆 `[源码]`。
 - `go build -gcflags="-m -m"`（或 `-m=2`）：更详细的流分析，最多 4 级 `[源码]`。
@@ -35,13 +43,6 @@ graph TD
 - `assign=true`：`-m -m` 下表示变量被按地址捕获（闭包共享） `[源码]`。
 - `testing.AllocsPerRun`：基准量化逃逸带来的堆分配次数 `[源码]`。
 
-## 性能量级与实测数据
-- 实测（go1.26.5）：返回 `&local` 的函数，变量被标 `moved to heap`，每次调用产生 1 次堆分配。
-- 闭包捕获基本类型变量，输出 `func literal escapes to heap` 且 `assign=true`。
-- 对比基准：逃逸路径 `allocs/op` 高于栈路径；高频小对象逃逸是 GC 压力主要来源 `[实测]`。
-- 量化命令：`go test -bench=. -benchmem`，看 allocs/op 与 B/op 两列。
-
-## 答题技巧
 - 30 秒版：逃逸分析是编译期静态分析，用 `-gcflags="-m"` 看；返回指针、闭包捕获、interface 装箱会让对象上堆。
 - 3 分钟版：展开取地址分析、逃逸判定规则、常见触发点，配 `moved to heap` 实例。
 - 白板版：画变量 → 指针流向 → 是否出函数 → 栈/堆 的判定树。

@@ -30,3 +30,20 @@ new vs make 速查矩阵
 3. **点 nil 判定**：看"引用有没有被初始化"，不看是否指针（s5 字面量也非 nil）。
 4. **new 实战定位**：引用类型鸡肋、数组有用、工程偏好字面量。
 5. **避坑**：不说"new 的 slice 能直接 append"；不把 new 和字面量说成完全等价；不忽略 map 同样适用上述规律。
+
+## 细节与核心 API
+
+```go
+// new(T)：返回 *T，T 被零值初始化（只分配+清零），适用于任意类型
+p := new(int)        // *int，指向 0
+s := new(string)     // *string，指向 ""
+// make：仅用于 slice/map/channel，返回“已初始化可用”的类型本身（非指针）
+sl := make([]int, 0, 10)   // []int，已分配底层数组，cap=10
+m  := make(map[string]int) // map，可直接写
+ch := make(chan int, 3)    // chan，可立即收发
+// 区别：
+//  new 不初始化内部数据结构（如 map 用 new 只是 nil map，写入 panic）
+//  make 针对三种引用类型做“运行所需”的初始化（哈希表/环形缓冲/通道结构）
+// 经验：slice/map/chan 一律用 make；其它用 new 或直接字面量取地址 &T{}
+// 不能 make(new(int)) 或 new(make(...))，二者不互套
+```
