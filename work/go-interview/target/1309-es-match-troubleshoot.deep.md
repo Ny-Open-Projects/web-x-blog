@@ -24,6 +24,8 @@
 - 必点工具：_analyze 看 term、_termvectors 看 position，别靠肉眼猜。
 - 收尾落架构：建索引统一 analyzer、按需选 IK 粒度、analyzer 改动要 _reindex 才生效。
 
+```
+
 ## 细节与核心 API
 
 **对齐查询与索引分词（别靠肉眼猜）：**
@@ -52,5 +54,4 @@ PUT /my_idx { "settings": { "analysis": { "analyzer": { "default": { "type": "ik
 查不到 → ① match 用 AND：查询 term 集 ⊆ 索引 term 集？差一个即不召回
         ② match_phrase：term 都在 + position 连续？长词再细分插中间 term → 不连续
         ③ 一致原则：search_analyzer 必须与索引 analyzer 一致，否则必现查不到
-```
 ```

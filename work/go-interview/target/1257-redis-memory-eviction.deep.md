@@ -26,6 +26,8 @@ Redis 内存满的处理链路：
 - 画"范围(allkeys/volatile) × 算法(lru/lfu/random/ttl) + noeviction = 8"矩阵防漏。
 - 收尾落到运维：CONFIG GET/SET + redis.conf 持久化 + INFO memory 监控。
 
+```
+
 ## 细节与核心 API
 
 **内存淘汰关键配置：**
@@ -52,5 +54,4 @@ volatile-* 池空 → 退化为拒写
 redis-cli CONFIG GET maxmemory-policy
 redis-cli CONFIG SET maxmemory-policy allkeys-lfu
 redis-cli INFO memory   # 看 maxmemory / used_memory / mem_fragmentation_ratio / evicted_keys
-```
 ```

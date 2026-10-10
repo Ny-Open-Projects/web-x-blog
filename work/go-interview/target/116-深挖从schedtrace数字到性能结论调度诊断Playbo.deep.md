@@ -116,6 +116,8 @@ A：默认就是核数，一般不动。容器里若拿到的不是真实 CPU �
 Q：schedtrace 和 gctrace 能一起开吗？
 A：能，`GODEBUG=schedtrace=500,gctrace=1`，用逗号分隔多个开关。
 
+```
+
 ## 细节与核心 API
 
 **取数**：`schedtrace` 走标准错误，必须 `2>`：
@@ -144,4 +146,3 @@ cpu := runtime.NumCPU()
 ```
 
 > 边界：GMP 三元组基础见 813；工作窃取见 818；pprof 热点见 1115。本卡只讲"拿到数字怎么下结论"。
-```
