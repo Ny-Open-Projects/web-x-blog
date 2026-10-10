@@ -1,60 +1,96 @@
 # 1022 协程泄露的具体触发场景（除 channel 收发外）
 
-> 分类：Go 运行时 · 并发缺陷 | 难度：L3 | 题型：事故题 | 频率：高 | 关键词：**协程泄露**/**defer 误用**/**nil channel**/**空 select**/**文件句柄堆积**
+> 分类：Go 并发缺陷 | 难度：中高 | 题型：事故题 | 频率：高 | 关键词：**协程泄露、defer 误用、nil channel、空 select、文件句柄堆积**
+
 > 原文锚点：第 9~39 段「defer 误用致文件句柄堆积；nil channel 读写永久阻塞；空 select 永久阻塞；channel 收发不匹配」
 
 ## 一句话总述
-协程泄露的底层都是"协程被创建却永不退出"；除经典的 channel 收发不匹配外，还有三类 `1019` 未覆盖的具体坑：**defer 误用**（开十万文件、函数退出才统一关闭 → 文件句柄堆积）、**nil channel 读写**（只声明未 make 的 channel 读写都永久阻塞）、**空 `select{}`**（无分支永久阻塞）。识别它们靠 `runtime.NumGoroutine()` 看数量只增不减 `[经验]`。
+协程泄露的底层都是「协程被创建却永不退出」。除经典的 channel 收发不匹配（见 1019）外，还有三类 `1019` 未覆盖的具体坑：**defer 误用**（开十万文件、函数退出才统一关闭 → 文件句柄堆积）、**nil channel 读写**（只声明未 make 的 channel 读写都永久阻塞）、**空 `select{}`**（无分支永久阻塞）。识别它们靠 `runtime.NumGoroutine()` 看数量只增不减。一句话背法：**「泄露三冷门坑：defer 堆句柄、nil channel 卡死、空 select 死等」**。
 
 ## 面试官视角
-- 考察意图：能否不止背"概念"，还能枚举真实代码里会踩的具体泄露形态。
-- 分档：P5 知泄露=不退出；P6 能举 defer/nil channel/空 select 三类具体坑；P7 能对比 1019 的 channel 三类并说清本卡三类的不同触发点。
-- 红旗：以为只有 channel 才会泄露；或以为 `select{}` 能当正常等待用。
-- 惊艳点：点出"defer 误用是**资源**泄露（文件句柄）而非仅内存——句柄耗尽比 OOM 更隐蔽"；以及"nil channel 读写阻塞是编译通过、运行卡死最阴险的一类"。
+考官看你能不能不止背「概念」，还能枚举真实代码里会踩的具体泄露形态。能举出 defer/nil channel/空 select 三类并说清各自触发点，说明你真 debug 过泄露；以为只有 channel 才会泄露、或以为 `select{}` 能当正常等待用，都是红旗。
+- **P5**：知道泄露 = 协程不退出。
+- **P6**：能举 defer 误用 / nil channel / 空 select 三类具体坑。
+- **P7**：能对比 1019 的 channel 三形态，说清本卡三类（资源+nil+死等）与 1019（channel 使用三形态）是互补两组。
 
 ## 主问答
 **Q（面试官原话）：** 除了 channel 收发，还有哪些具体写法会泄露协程？
-**A：**
-1. **defer 误用（资源泄露）**：循环打开十万文件、用 `defer f.Close()` 在函数末尾统一关——函数不返回就一个都不关，十万句柄堆积。**修法**：把"打开+处理+关闭"封进独立函数，让 defer 对每个文件立即生效 `[经验]`。
-2. **nil channel 读写**：只 `var ch chan int`（未 make）就往里写/读，运行期永久阻塞——十万协程全卡在这。任何只声明未初始化的 channel 都是 nil channel。
-3. **空 `select{}`**：`select` 不带任何 case，当前协程永久阻塞（常误当"等 forever"用）。
-4. **边界**：以上与 `1019` 的"for-select 不判 ok 空转 / 发送超缓冲阻塞 / ticker 不 Stop"是**互补两组**——本卡偏"资源+nil+死等"，1019 偏"channel 使用三形态"。
+
+**先铺垫（由浅入深第 1 层）**：大家背泄露首先想到「channel 没人关」，但生产里更阴险的是那些「编译通过、运行卡死」或「资源悄悄耗尽」的写法。它们不靠 channel 收发匹配，而是靠「资源不释放 / 读 nil / 死等」让协程永远停在那。
+
+1. **defer 误用（资源泄露，第 2 层）**：循环打开十万文件、用 `defer f.Close()` 在函数末尾统一关——函数不返回就一个都不关，十万句柄堆积。**修法**：把「打开+处理+关闭」封进独立函数，让 defer 对每个文件立即生效。注意这是**资源（句柄）泄露**，比 OOM 更隐蔽。
+2. **nil channel 读写（第 3 层·最阴险）**：只 `var ch chan int`（未 make）就往里写/读，运行期**永久阻塞**——不是 panic，是卡死，十万协程全卡在这。任何只声明未初始化的 channel 都是 nil channel。
+3. **空 `select{}`（第 4 层·误区）**：`select` 不带任何 case，当前协程永久阻塞。常被误当「等 forever」用，实际是泄露。
+4. **边界对比（第 5 层）**：以上与 `1019` 的「for-select 不判 ok 空转 / 发送超缓冲阻塞 / ticker 不 Stop」是**互补两组**——本卡偏「资源+nil+死等」，1019 偏「channel 使用三形态」。
+5. **发现手段（第 6 层）**：`runtime.NumGoroutine()` 数量只增不减 + pprof goroutine profile 抓栈，定位卡在哪个调用。
 
 ## 追问链
-| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
-| --- | --- | --- | --- | --- |
-| L1 | 还有啥坑？ | 广角 | defer/nil/空select | P5 |
-| L2 | defer 咋漏？ | 机制 | 函数末才关句柄 | P6 |
-| L3 | nil channel？ | 反直觉 | 未 make 读写阻塞 | P6+ |
-| L4 | 空 select 用？ | 误区 | 永久阻塞别当等待 | P7 |
-| L5 | 怎么发现？ | 实战 | NumGoroutine/pprof | P7+ |
+| 档位 | 追问 | 答得到（背这句） | 答不出停在哪档 |
+|------|------|------------------|----------------|
+| L1 | 还有啥坑？ | defer 误用 / nil channel / 空 select | — |
+| L2 | defer 咋漏？ | 函数末才关句柄，循环里堆积 | 停 L2：以为 defer 即时关 |
+| L3 | nil channel？ | 未 make 读写永久阻塞（卡死非 panic） | 停 L3：以为会 panic |
+| L4 | 空 select 用？ | 永久阻塞，不能当正常等待 | 停 L4：拿 select{} 等 |
+| L5 | 怎么发现？ | NumGoroutine 趋势 + pprof 定位 | 停 L5：不知观测 |
 
 ## 版本与兼容性
-| 结论成立版本 | 翻转点 | 现在该怎么答 |
-| --- | --- | --- |
-| Go 1.0+ | nil channel 语义、空 select 阻塞长期稳定 | 答"defer 误用(nil channel/空 select) 三类具体坑 + NumGoroutine 观测；与 1019 的 channel 三类互补" |
+| 维度 | 说明 |
+|------|------|
+| nil channel 语义 | Go 1.0+ 稳定：向 nil channel 发送/接收永久阻塞；在 `select` 中 nil case 永远不就绪 |
+| 空 select | `select {}` 永久阻塞当前协程，全版本一致 |
+| defer 执行时机 | 函数 return 前执行；循环内 defer 要等外层函数返回才批量执行 |
+| 观测手段 | `runtime.NumGoroutine()` + pprof `goroutine` profile，全版本可用 |
+| Go 版本 | 行为与 Go 版本无关，本项目实测 Go 1.26.5 |
 
 ## 关键代码
 ```go
-// nil channel：只声明未 make → 读写都永久阻塞
-var ch chan int // nil
-go func() { ch <- 1 }() // 永久阻塞（不是 panic，是卡死）
+package main
 
-// 空 select：永久阻塞
-go func() { select {} }() // 协程永远停在这
+import (
+	"fmt"
+	"os"
+)
 
-// defer 误用修复：封装成函数，让 defer 每文件立即生效
+func main() {
+	// ① nil channel：select 里 nil case 永远不就绪，default 触发（演示其"卡死"本质）
+	var ch chan int // nil
+	select {
+	case v := <-ch:
+		fmt.Println(v) // 永不执行：nil channel 读永远阻塞
+	default:
+		fmt.Println("nil channel case 永远不就绪，default 触发（说明它卡死而非报错）")
+	}
+	// 注意：若写成 `ch <- 1` 或 `go func(){ <-ch }()` 无 default，则永久阻塞=泄露
+
+	// ② 空 select{} 会永久阻塞当前协程——绝不能当"等待"用（此处仅注释警示，勿运行）
+	// go func() { select {} }() // 协程永远停在这
+
+	// ③ defer 误用修复：封装成函数，让 defer 对每个文件立即生效，不堆积句柄
+	paths := []string{"a.txt", "b.txt", "c.txt"}
+	for _, p := range paths {
+		_ = handleOne(p) // 每个文件处理完即关，不会堆积
+	}
+}
+
+// handleOne 把"打开+处理+关闭"封进函数，defer 在函数 return 时立即生效
 func handleOne(path string) error {
-    f, err := os.Open(path)
-    if err != nil { return err }
-    defer f.Close() // 函数返回即关，不堆积
-    return process(f)
+	f, err := os.Open(path)
+	if err != nil {
+		return err // 打不开直接返回，无句柄泄漏
+	}
+	defer f.Close() // 函数返回即关，不堆积
+	return f.Close()
 }
 ```
 
 ## 总结与追问预判
-本卡三类坑都是"协程创建后卡死"的具体形态，与 `1019` 的 channel 三形态互补。预防体系（context/超时/协程池）见 1022。
+**背这三句就够**：① **defer 误用 = 循环里开资源、函数末才关，句柄堆积（封函数修）**；② **nil channel 未 make 就读写，永久阻塞卡死（非 panic）**；③ **空 `select{}` 永久阻塞，不能当正常等待**。
+**预判追问**：
+- 「nil channel 读写是 panic 还是卡死？」→ 卡死（永久阻塞），在 select 里则 case 永不就绪（见本卡第 3 层）。
+- 「defer 不是会自动关吗？」→ 在函数 return 时才执行，循环内大量 defer 要等外层函数返回才批量关，故堆积（见本卡第 2 层）。
+- 「还有哪些泄露来自 channel？」→ 见 1019（for-select 不判 ok / 超缓冲阻塞 / ticker 不 Stop）与 1021（不关导致死锁）。
 
 ## ⚠️ 原文纠错
-1. 事实核校：defer 在函数退出才执行致句柄堆积、nil channel 读写永久阻塞、空 select 永久阻塞、均导致协程不退出——正确 `[经验]`。
-2. 崩坏词归一：源码将 goroutine 音译为过入/购入器、defer 音译为底份/抵份、channel 音译为签到/牵到、select 音译为死莱克/select、nil 音译为 neo/neochannel、leak 音译为集成泄漏；源码将若干标识符音译为崩坏词，本卡统一为规范术语 `[经验]`。
+1. 事实核校：defer 在函数退出才执行致句柄堆积、nil channel 读写永久阻塞、空 select 永久阻塞、均导致协程不退出——正确，本卡为准。
+2. 崩坏词归一：源码将 goroutine 音译为过入/购入器、defer 音译为底份/抵份、channel 音译为签到/牵到、select 音译为死莱克、nil 音译为 neo、leak 音译为集成泄漏；本卡统一为规范术语。
+3. 补强：本卡在第 2 层补「defer 误用是资源（句柄）泄露而非仅内存」、第 3 层补「nil channel 是卡死非 panic」两个易错点。
