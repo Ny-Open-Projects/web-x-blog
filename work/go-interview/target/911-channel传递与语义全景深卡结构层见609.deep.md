@@ -23,3 +23,19 @@ channel 这条线分两层：**结构层归 `609-channel.deep.md`（hchan = 环�
 3. 手写 send/recv 算法时按「锁 → 对向队列 → buf → park」顺序，别漏 recv 遇 sendq 非空的分支。
 4. 收尾落到取舍：channel 适合传所有权/流水线，高频状态用 atomic/mutex。
 5. 反直觉提醒：无缓冲是 handoff 不是「缓冲为 1」；经 buf 的值被复制两次。
+
+## 细节与核心 API
+
+```go
+// channel 是引用类型（底层 *hchan），传参拷贝的是指针，收发双方共享同一 channel
+func worker(ch chan int) { ch <- 1 } // 与调用方同一 channel
+ch := make(chan int, 1)
+go worker(ch)
+<-ch
+// 发送/接收语义：
+//  无缓冲：发送阻塞直到有接收者（同步交接）
+//  有缓冲：缓冲区满才阻塞发送，空才阻塞接收
+// 关闭：close(ch) 后不可再发送（panic），接收立即返回零值 ok=false
+// 单向 channel 用于约束：func f(in <-chan int, out chan<- int)
+// 不要关闭只读 channel，也不要重复关闭
+```

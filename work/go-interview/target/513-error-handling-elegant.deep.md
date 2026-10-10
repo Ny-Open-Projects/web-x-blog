@@ -31,3 +31,18 @@ Go 没有异常，错误是**显式返回值**——这决定了「优雅」的�
 3. **版本演进加分**：明确「Go 1.13+ 用 `fmt.Errorf("%w")` + `errors.Is/As`，pkg/errors 是历史惯用法」——显你跟版本。
 4. **反直觉点收尾**：「降级成功返回 nil」——多数人以为错误必须一路上抛，讲清「被消化即消失」直接封神。
 5. **避坑**：不说「Go 没有错误处理」（它有，只是不用异常）；不把 `==` 当万能判断（wrap 后失效）；不混淆 `errors.New` 与 `fmt.Errorf("%w")` 的穿透性。
+
+## 细节与核心 API
+
+```go
+import ("errors"; "fmt")
+// 包装：%w 保留因果链
+if err != nil { return fmt.Errorf("read config: %w", err) }
+// 判定：errors.Is 解包比对哨兵
+if errors.Is(err, os.ErrNotExist) { /* 处理不存在 */ }
+// 提取：errors.As 还原具体类型
+var pathErr *os.PathError
+if errors.As(err, &pathErr) { fmt.Println(pathErr.Path) }
+// 一次性多错误：errors.Join(err1, err2)（Go 1.20+）
+// 不要吞错、不要仅打日志不返回；顶层统一收敛为可用户理解的信息
+```

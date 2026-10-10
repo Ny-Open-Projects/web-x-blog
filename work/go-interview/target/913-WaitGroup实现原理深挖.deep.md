@@ -28,3 +28,21 @@ D --> D4[counter=0 唤醒所有]
 ## 答题技巧
 - 被问「WaitGroup 原理」先抛三字段再讲位域与 CAS，避免只在用法层打转 [经验]。
 - 主动连线 1019（并发陷阱/race）与 errgroup/chan 选型，显出并发编排全局观 [边界]。
+
+## 细节与核心 API
+
+```go
+// 内部：counter（剩余任务）、sema（信号量）、waiter（等待数）
+var wg sync.WaitGroup
+for i := 0; i < 3; i++ {
+    wg.Add(1)              // 必须在 go 之前 Add，否则竞态
+    go func() {
+        defer wg.Done()    // Done == Add(-1)
+        work()
+    }()
+}
+wg.Wait()                // 阻塞直到 counter==0
+// 陷阱：在 goroutine 内 Add 会与 Wait 竞态；Done 多调用会 panic（counter 负）
+// 复用 WaitGroup 前必须等 Wait 返回（不可在 Done 仍在进行时再次 Add）
+// 实现等价于：原子操作 counter + 原子信号量休眠/唤醒
+```

@@ -29,3 +29,18 @@
 - 被问「为什么不做成带单位的类型」→ 零开销穿透 runtime/atomic/C 接口三个理由 [经验]。
 - 被问「计时怎么写才对」→ time.Since / 单调钟，并点明 UnixMilli 是墙钟会被回拨 [经验]。
 - 主动边界到 `820-timer-gotchas-playbook.deep`（Timer 语义坑）、`912-goroutine-scheduling.deep`（时间与调度器）、`923-slice-append-expand`（同为「底层结构决定上层语义」的案例），构成标准库本质系列 [边界]。
+
+## 细节与核心 API
+
+```go
+// time.Duration 底层是 int64，单位纳秒；time.Sleep(3) 是 3 纳秒不是 3 秒！
+time.Sleep(3 * time.Second)  // 正确
+time.Sleep(time.Duration(3)) // 错误：3 纳秒
+// 类型别名（type X = Y）与类型定义（type X Y）区别：
+type Celsius = float64       // 别名：与 float64 完全等价，可混用
+type Meter float64           // 定义：是新类型，不能和 float64 直接运算
+var c Celsius = 36.5
+var f float64 = c            // 别名 OK
+// 别名不产生新方法集；自定义类型可挂方法、可做类型安全边界
+// 设计边界：用定义类型表达“单位/语义”，用别名仅做兼容性/重命名
+```

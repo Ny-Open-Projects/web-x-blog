@@ -34,3 +34,18 @@ for range 四大坑矩阵：
 ```
 
 > 边界：大元素复制基准见 1112；goroutine 闭包捕获同款见 1017、1017-goroutine-solutions；nil 指针数组见 414；nil 语义见 415。本卡只深挖"for range 闭坑"不重述切片底层。
+
+## 细节与核心 API
+
+```go
+// Go <1.22：循环变量在每次迭代中复用同一地址，闭包/goroutine 捕获会拿到最后值
+for _, v := range list {
+    go func() { fmt.Println(v) }() // 可能全部打印最后一个 v
+}
+// 修复 1：传参拷贝
+for _, v := range list { go func(v int) { fmt.Println(v) }(v) }
+// 修复 2（Go 1.22+）：循环变量每轮独立，上述闭包已安全
+// range map/切片时被遍历对象被修改可能导致跳过/重复；不要在 range 中 append 自身
+// range string 按 rune（utf8）切分，索引是字节偏移
+for i, r := range "你好" { fmt.Printf("%d %c\n", i, r) } // 0 你  3 好
+```

@@ -30,3 +30,19 @@ map key 类型约束决策树
 3. **NaN 是点睛细节**：`NaN != NaN` 能在 map 塞两个 NaN key，是 float key 最惊艳的反直觉点。
 4. **口诀收尾**：「值类型优先，指针慎选，float 禁用」——九字覆盖选型。
 5. **避坑**：不说「float 不能作 key」（它能，只是不该）；不把「可比较」等同于「可作 key」（还需满足 comparable 约束且行为可预期）；不漏 slice/map/func 的编译期硬拒。
+
+## 细节与核心 API
+
+map 的 key 必须满足 **comparable**（可用 == / !=）：
+
+```go
+m1 := map[[2]int]string{}        // OK：数组 comparable
+m2 := map[string]int{}           // OK
+// m3 := map[[]int]int{}         // 编译错误：slice 不可比较
+// m4 := map[map[string]int]int{}// 编译错误：map 不可比较
+// m5 := map[func()]int{}         // 编译错误：func 不可比较
+// 含不可比较字段的结构体也不能做 key
+type Bad struct{ Slice []int }
+// m6 := map[Bad]int{}           // 编译错误
+// 浮点做 key 要避免 NaN（NaN != NaN 会导致查不到）
+```

@@ -31,3 +31,17 @@
 3. **点代价**：DeepEqual 反射开销、容量不参与、NaN 与自身 false。
 4. **防坑**：绝不 `map == map`（编译不过）；热路径别 DeepEqual 大结构。
 5. **避坑**：不说"DeepEqual 和 == 总一致"；不忽略 unexported 字段也参与比较。
+
+## 细节与核心 API
+
+```go
+import "reflect"
+a := []int{1, 2, 3}
+b := []int{1, 2, 3}
+fmt.Println(a == b)                 // 编译错误：slice 不能用 ==
+fmt.Println(reflect.DeepEqual(a, b)) // true：递归比较元素
+// == 对 comparable 类型比较（值/指针/数组/字段全 comparable 的结构体）
+// DeepEqual 对 nil slice 与空 slice 视为不等，需注意
+fmt.Println(reflect.DeepEqual([]int(nil), []int{})) // false
+// 性能敏感场景改写为手动字段比较，避免反射开销
+```

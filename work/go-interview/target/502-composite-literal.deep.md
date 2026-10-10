@@ -22,3 +22,19 @@
 - 必背 nil 对比：[]int{} 非 nil、var m map 是 nil、向 nil map 写 panic。
 - 收尾举反例：map 没有 nil 字面量、接口没有字面量，逼出"字面量是值的文字写法"的本质定义。
 ```
+
+## 细节与核心 API
+
+```go
+type Point struct{ X, Y int }
+p1 := Point{1, 2}            // 按顺序（unkeyed）
+p2 := Point{X: 1, Y: 2}     // 按字段名（keyed，推荐）
+// Go 1.17+：跨包字面量禁止 unkeyed，强制 keyed 以防字段顺序变更踩坑
+// ps := external.T{1, 2}   // 跨包编译错误
+// 复合字面量可取地址，等价于创建匿名变量
+pp := &Point{X: 1}
+// map 字面量
+m := map[string]int{"a": 1, "b": 2}
+// 空标识 _ 占位忽略字段（仅适用于数组/结构体按位置）
+_ = p1; _ = p2; _ = pp; _ = m
+```

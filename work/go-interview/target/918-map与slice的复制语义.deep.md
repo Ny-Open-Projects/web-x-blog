@@ -74,3 +74,21 @@ slice：直接传值，append 的结果**必须返回**并接回
 | Go 1.21+ | `maps.Clone` / `slices.Clone` | 深拷贝不必手写循环 |
 | Go 1.21+ | `maps.Equal` / `slices.Equal` | 内容比较有了标准做法 |
 | Go 全版本 | 并发写 map 是 `fatal` 非 `panic` | 无法 `recover`，只能避免 [经验] |
+
+## 细节与核心 API
+
+```go
+// slice：copy(dst, src) 按 min(len) 拷贝元素；但若底层数组共享，改元素仍互相可见
+src := []int{1, 2, 3}
+dst := make([]int, len(src))
+n := copy(dst, src)         // n=3，dst 独立底层数组
+// reslice 不 copy，共享底层数组：
+sub := src[1:3]             // 与 src 共享底层数组
+// map：没有 copy 内置函数，赋值/传参都是“引用共享”
+m1 := map[string]int{"a": 1}
+m2 := m1                    // 共享同一 hmap，改 m2 影响 m1
+// 深拷贝 map：手工遍历
+m3 := make(map[string]int, len(m1))
+for k, v := range m1 { m3[k] = v }
+fmt.Println(n, m2, m3)
+```

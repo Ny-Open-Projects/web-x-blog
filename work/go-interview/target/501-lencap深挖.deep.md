@@ -49,3 +49,19 @@ s = s[:8]               →  panic: slice bounds out of range [:8] with capacity
 3. **unsafe 那条路要同时给出反例**：`unsafe.Slice(unsafe.SliceData(s), 6)` 把 `len` 从 1 改成 6 后，`s[3]` 读到的可能是别的对象的内存，写进去就是数据破坏——**说得出"能给数字但生产不能用"，比只会背 API 强**。
 4. **把 string 的 len 争议一次讲清**：`len` 是字节数、`utf8.RuneCountInString` 才是字符数、转 `[]rune` 有 O(n) 拷贝所以只适合一次性统计。**三句话覆盖全部追问**。
 5. **带版本栅栏**：`unsafe.Slice` / `unsafe.SliceData` 是 Go 1.17+（SliceData 是 1.20+）；`slices` 包的 `Clip` / `Grow` 是 Go 1.21+。老项目只能手写 `make` + `copy`。
+
+## 细节与核心 API
+
+```go
+s := []int{1, 2, 3}
+fmt.Println(len(s), cap(s))   // 3 3
+a := [4]int{1, 2, 3, 4}
+fmt.Println(len(a), cap(a))   // 4 4（数组 len==cap）
+m := map[string]int{"a": 1}
+fmt.Println(len(m))           // 1（map 无 cap）
+ch := make(chan int, 2)
+fmt.Println(cap(ch))          // 2（仅 slice/array/chan 有 cap）
+// len 是 O(1) 读取描述符字段；nil slice len==0；nil map len==0 可安全读
+var ns []int
+fmt.Println(len(ns), ns == nil) // 0 true
+```

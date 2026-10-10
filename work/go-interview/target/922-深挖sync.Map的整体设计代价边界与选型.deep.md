@@ -46,6 +46,22 @@
 5. **纠正一个常见误传**：**dirty 是互斥锁保护，不是自旋锁；CAS 用在 entry 状态变更上**。
 6. **止步档位**：能讲清双 map 与读写分离即达 L4；能补上 misses 提升、entry 三态、延迟删除与适用边界，即达 L5。
 
+## 细节与核心 API
+
+```go
+// 内部：read（atomic.Load 的只读 map，无锁快路径）+ dirty（含新写入，需锁）
+// 适合：读多写少、key 集合相对稳定；不适合频繁写或需遍历一致
+var m sync.Map
+m.Store("a", 1)
+m.LoadOrStore("b", 2)        // 不存在才存
+if v, ok := m.Load("a"); ok { _ = v }
+m.Delete("a")
+m.LoadAndDelete("b")
+// 代价：miss 频繁会升 dirty、双份存储；value 是 interface{} 有装箱/类型断言开销
+// 选型：通用并发 map 用 map+RWMutex；仅热点只读+偶发写用 sync.Map
+// 不要对 sync.Map 做范围遍历做强一致快照（Load 与 Range 不保证同一瞬间视图）
+```
+
 ## ⚠️ 原文纠错
 1. 事实核校：读写分离以减少锁操作、原子操作面向硬件且效率高于加锁、原子优先锁兜底、read/dirty 双 map、misses 触发提升、entry 三态与延迟删除、适用读多写少且写密集需其他并发控制机制——均与 Go 标准库实现一致 `[经验]`。
 2. 补充：**原文称对 dirty 的写入使用"自旋锁 + CAS"，实际是互斥锁 `mu sync.Mutex` 保护 dirty，CAS 用于 entry 指针状态变更**；另 `sync.Map` 的官方推荐场景是**写一次读多次**与**不相交 key 集合的并发写**，不只是笼统的"读多写少" `[经验]`。

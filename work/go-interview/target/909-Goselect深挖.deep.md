@@ -23,3 +23,27 @@ A --> E[空select: 编译转 block 挂起]
 ## 答题技巧
 - 被问「select 底层」先答「控制结构+多路复用」，再 scase/selectgo，最后特性与空 select 优化 [经验]。
 - 主动边界到 `612`(关闭 channel 操作)、`816`(GMP 让出 CPU)，构成 select 全栈 [边界]。
+
+## 细节与核心 API
+
+```go
+// select 随机选一个“就绪”的 case；全未就绪走 default（非阻塞）
+ch1, ch2 := make(chan int), make(chan int)
+select {
+case v := <-ch1:
+    fmt.Println("ch1", v)
+case ch2 <- 1:
+    fmt.Println("send ch2")
+default:
+    fmt.Println("non-blocking") // 避免阻塞
+}
+// 多 case 同时就绪时随机选，不保证顺序（防止依赖特定分支）
+// 超时控制：
+select {
+case v := <-ch:
+    _ = v
+case <-time.After(100 * time.Millisecond):
+    fmt.Println("timeout")
+}
+// nil channel 的 case 永远不选（可用于动态禁用某分支）
+```

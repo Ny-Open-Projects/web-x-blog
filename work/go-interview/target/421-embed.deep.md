@@ -23,3 +23,22 @@
 ```
 
 > 边界：方法提升/组合优于继承见 615/`615-method-promotion-conflict`；本深卡只讲"如何答好类型资格题"。
+
+## 细节与核心 API
+
+`//go:embed` 在包内嵌入静态文件，需 `import "embed"`，且指令紧邻变量声明、中间不能有空行：
+
+```go
+import "embed"
+//go:embed config.yaml templates/*.tmpl
+var fs embed.FS
+
+func main() {
+    b, _ := fs.ReadFile("config.yaml")
+    t, _ := fs.ReadFile("templates/index.tmpl")
+    _ = b; _ = t
+}
+//go:embed app.js
+var js []byte          // 也可嵌入为 []byte 或 string
+// 注意：embed 不能在函数内、不能嵌入 "." 或 ".." 上级路径
+```

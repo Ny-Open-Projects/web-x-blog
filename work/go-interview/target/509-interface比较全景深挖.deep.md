@@ -25,3 +25,17 @@ interface 比较题的答题架构是"**清单 → 底层 → 陷阱 → 规避*
 3. **陷阱必讲**：error != nil 却打印 nil 是高频实战题，主动抛出显专业。
 4. **区分 nil 两义**：nil interface（全空）vs nil pointer（type 非空）——这是区分 P6/P7 的分水岭。
 5. **给工程规避**：return nil 归一化，把原理落到代码实践。
+
+## 细节与核心 API
+
+```go
+// 接口相等需：动态类型相同 且 动态值可比较 且 相等
+type T struct{ X int }
+var a, b interface{} = T{1}, T{1}
+fmt.Println(a == b)        // true
+// 若动态类型不可比较（如含 slice/map/func），比较会 panic
+var c, d interface{} = []int{1}, []int{1}
+// c == d  // panic: runtime error: comparing uncomparable type []int
+// 安全比较用 reflect.DeepEqual（区分 nil 语义与 == 不同）
+fmt.Println(reflect.DeepEqual(a, b)) // true
+```
