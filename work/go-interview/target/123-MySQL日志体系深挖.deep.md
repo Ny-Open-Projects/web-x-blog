@@ -48,6 +48,32 @@ SET GLOBAL general_log_file = '/data/mysql/general.log';
 ## 总结与追问预判
 通用日志全量审计但有性能/磁盘代价；配置"后读覆盖先读"决定最终生效值；redo/binlog 实质差异归 12-4。
 
+## 细节与核心 API
+
+**通用查询日志（最危险的一环：全量+系统盘风险）**：
+
+```sql
+SET GLOBAL general_log = ON;
+SET GLOBAL general_log_file = '/data/mysql/general.log';  -- 指向数据盘，不落 /var/lib/mysql（系统盘）
+-- 默认关；高并发常开会迅速撑满磁盘、拖累性能，仅临时排查、用完即关
+```
+
+**配置文件加载顺序（后读覆盖先读，末位优先级最高）**：
+
+```bash
+# mysqld --help --verbose 的 default-options 列出顺序，从左到右读
+# /etc/my.cnf → /etc/mysql/my.cnf → $MYSQL_HOME/my.cnf → ./my.cnf → ~/.my.cnf
+# 越靠后优先级越高；当前目录 ./my.cnf 与 ~/.my.cnf 通常在末位
+```
+
+**binlog 保留时长**：
+
+```ini
+binlog_expire_logs_seconds = 2592000   # 默认 30 天；备库延迟大场景调长，避免 binlog 被清导致备库断裂
+```
+
+> 边界：redo/binlog 物理 vs 逻辑、循环 vs 追加、引擎层 vs server 层差异见 1208/124；本卡只铺日志体系与 binlog 配置、通用日志与配置加载顺序。
+
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] general log 默认关、量大慎开、默认落 /var/lib/mysql；配置文件"后读覆盖先读、末位优先级最高"，正确。
 2. 崩坏词归一：gallerylog→general_log、gererylogile→general_log_file、wordlive→/var/lib/mysql。
