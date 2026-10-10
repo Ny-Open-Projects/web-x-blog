@@ -26,3 +26,29 @@
 - **Counter 铁律**：只增不减，QPS 必须 rate/irate，绝不能对 Gauge 算速率。
 - **分位差异一句话**：Histogram 服务端算(可聚合/耗资源)、Summary 客户端算(快/不可聚合)。
 - **显式边界**：告警链路与 Alertmanager、Grafana 可视化不在本卡范围（课程后续章/运维体系）；本卡只讲指标类型与 PromQL 取数，不重画告警路由。
+
+## 细节与核心 API
+
+**四类指标（Go client_golang 落地）：**
+
+```go
+// Counter：只增，QPS 必须 rate/irate
+requests := prometheus.NewCounterVec(
+    prometheus.CounterOpts{Name: "http_requests_total"}, []string{"svc", "code"})
+requests.WithLabelValues("orders", "200").Inc()
+
+// Gauge：瞬时，set/inc/dec（内存/磁盘/Goroutine 数）
+mem := prometheus.NewGauge(prometheus.GaugeOpts{Name: "mem_bytes"})
+
+// Histogram：分位用 histogram_quantile 服务端算（可跨实例聚合）
+dur := prometheus.NewHistogramVec(prometheus.HistogramOpts{
+    Name: "req_duration_seconds",
+    Buckets: []float64{.01, .05, .1, .5, 1, 5},
+}, []string{"svc"})
+dur.WithLabelValues("orders").Observe(0.12)
+// PromQL: histogram_quantile(0.99, rate(req_duration_seconds_bucket[5m]))
+
+// Summary：客户端算分位，查询快但不可跨实例聚合（单实例分位场景）
+```
+
+**选型口诀：累积量→Counter，状态量→Gauge，要分位且需聚合→Histogram，单实例分位要性能→Summary。平均值掩盖长尾，故用分位暴露 p99。**

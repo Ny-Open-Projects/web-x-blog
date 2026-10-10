@@ -32,3 +32,25 @@
 - 被问「容器里 ps 为什么看不到宿主进程」→ PID namespace：进程号空间独立，容器内自己是 1 号 [经验]。
 - 被问「容器变慢和被杀分别查什么」→ cpu.max 节流 vs memory.max OOM，配 cgroup v2 路径 [经验]。
 - 主动边界到 `1513-docker-vs-lxc`（LXC 对比）、`188-load-diagnosis.deep`（宿主机视图误判）、`187-process-states`（进程本质），构成容器与进程专题 [边界]。
+
+## 细节与核心 API
+
+**六种 namespace（容器=进程，clone 包装）：**
+
+```text
+PID  进程号空间(容器内 PID 从 1 起，看不到宿主进程)
+NET  独立网络栈(网卡/路由/iptables/端口，veth 接入宿主网桥)
+MNT  pivot_root 切根，独立挂载视图
+UTS  独立 hostname
+IPC  独立 System V/POSIX IPC
+USER UID/GID 映射(容器内 root 映射宿主普通用户)
+```
+
+**容器变慢 vs 被杀（cgroup v2 排查）：**
+
+```bash
+cat /sys/fs/cgroup/kubepods/.../cpu.max      # "200000 100000" = limits.cpu=2，超则 throttle
+cat /sys/fs/cgroup/kubepods/.../memory.max  # 超则 OOM kill（直接杀）
+```
+
+**UnionFS 写时复制：读从上往下找层；写=复制到容器层再改（CoW，高频写大文件恶劣）；删=whiteout 白屏遮蔽；新建落容器层。同镜像 N 容器共享只读层省 N-1 倍存储。**
