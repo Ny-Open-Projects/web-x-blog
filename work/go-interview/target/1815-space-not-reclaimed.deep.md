@@ -27,3 +27,16 @@
 ```
 
 > 边界：inode 机制本体见 1814；各单情形见 1815/`1815-truncate-reclaim`/`1815-pseudo-delete-mv-tmp`/`1815-hardlink-space-held`。
+
+## 细节与核心 API
+
+```bash
+# 现象：df 显示磁盘满，但 du 统计目录远小于已用 -> 有“已删但被进程占用的文件”
+df -h /               # 文件系统视角（含已删未释放）
+du -sh /data          # 目录视角（只统计可见文件）
+lsof | grep deleted   # 找出被删但仍被进程持有的 fd（SIZE/OFF 列显示占用）
+# 处理：重启/重载对应进程使其关闭 fd，空间才回收；或 truncate 该 fd 释放
+# 应急：> /proc/<PID>/fd/<FD>   # 清空被删文件内容（进程仍持有该 fd）
+# 根因：文件 unlink 只减 dentry 计数，数据块等最后一个 fd 关闭才回收
+# 典型场景：日志轮转但程序没 reopen；大文件正在写时被 rm
+```

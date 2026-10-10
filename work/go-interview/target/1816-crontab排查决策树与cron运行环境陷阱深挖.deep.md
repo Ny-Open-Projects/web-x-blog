@@ -34,3 +34,18 @@ crontab 不生效
 - 被问「脚本 A 账号能跑 cron 不行」→ 立刻答环境差异三件套：不加载 shell 配置、PATH 极短、无 TTY，并给「脚本自带 source/export + 重定向日志」的自证方案 [经验]。
 - 被问「怎么彻底防呆」→ 主动提 systemd timer 的 Persistent 补跑与 flock 防重叠，展示从排障到工程化的完整视野 [经验]。
 - 主动边界到 `709-cron-expression-syntax`（表达式语法）、`709-cron-overlap-recover`（重叠与补偿）、`187-background-nohup-exec-screen`（前台/后台进程模型），构成定时任务全链 [边界]。
+
+## 细节与核心 API
+
+```bash
+crontab -l -u app        # 查看某用户任务
+crontab -e               # 编辑当前用户
+# 格式：分 时 日 月 周  命令
+#   */5 * * * *  /path/run.sh >> /var/log/run.log 2>&1
+ls /etc/cron.d/          # 系统级任务
+# 运行环境陷阱：cron 的 PATH 极简（仅 /usr/bin:/bin），% 在 crontab 中是换行需转义 \%
+#   -> 命令写绝对路径；脚本里重新 export PATH；用 run-parts 目录时文件需可执行且无后缀
+# 排查：看 /var/log/cron（或 journalctl -u cron）；任务无输出用 2>&1 落日志
+# 时区：cron 用系统时区，容器里常错；用 systemd timer 可显式设时区更可控
+# 注意：% 在命令里要转义，否则被当 stdin；多行用 /bin/sh -c '...'
+```

@@ -26,3 +26,18 @@
 - **宏微对拔**：一句话框架「宏=集成性能高但复杂，微=精简可维护但慢，Linux 用模块化补复杂度」。
 - **系统调用链路**：用户态 → 系统调用(中断) → 内核态 → 完成(中断) → 用户态，四步不能漏。
 - **显式边界**：「Linux 只是内核、GNU 提供用户态、GPL 粘合」见 181；内核发展史见 181；用户↔内核切换的 CPU 代价见 101；Go 用户态调度(GMP)见 805/`813-g`/`815-p`/`816-gmp`；本卡只讲 Linux 内核设计理念，不重画这些已覆盖点。
+
+## 细节与核心 API
+
+```bash
+uname -a                    # 内核版本/架构
+cat /proc/version           # 编译信息
+# 设计理念：单内核（monolithic）+ 可加载模块（LKM），兼顾性能与可扩展
+lsmod | head                # 已加载模块
+modprobe xxx / modprobe -r xxx   # 动态加载/卸载
+# 一切皆文件：设备/进程信息都暴露在 /proc、/sys、/dev
+cat /proc/cpuinfo | grep -c processor   # CPU 核数
+cat /sys/block/sda/queue/scheduler      # 当前 IO 调度器（mq-deadline/bfq/none）
+# 用户态/内核态隔离：系统调用是唯一切换通道（syscall）；glibc 封装
+# 印证：/proc 与 /sys 是内核向用户态暴露状态的“文件系统接口”
+```

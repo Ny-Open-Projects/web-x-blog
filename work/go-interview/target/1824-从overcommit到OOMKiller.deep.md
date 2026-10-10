@@ -74,3 +74,18 @@
 | cgroup v1 / v2 | 容器内存 limit 独立 | 超限即 OOM，与宿主机无关 |
 | 32 位 / 64 位 | 用户态上限 ~3G / ~128TB | 申请阶段的判定依据 |
 | 实测 macOS / go1.26.5 | `mmap` 惰性、Go `make` 立即清零 | 演示须用裸 `mmap` [实测] |
+
+## 细节与核心 API
+
+```bash
+cat /proc/sys/vm/overcommit_memory
+#  0 = 启发式（默认，允许适度超卖）
+#  1 = 总是允许（危险，易触发 OOM）
+#  2 = 严格：提交总量不超过 swap+RAM*overcommit_ratio
+cat /proc/sys/vm/overcommit_ratio
+dmesg | grep -i "killed process"   # OOM 发生时记录被杀进程与内存快照
+# 调优：关键服务加 oom_score_adj（-1000 几乎不被杀）
+echo -500 > /proc/<PID>/oom_score_adj
+# 现象：malloc 成功但访问时触发 OOM Killer（因 overcommit，物理页真的不够才杀）
+# 防护：设 overcommit_memory=2 + swap + 限制 cgroup 内存，避免整机雪崩
+```

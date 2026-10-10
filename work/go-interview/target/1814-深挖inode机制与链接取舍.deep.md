@@ -23,6 +23,19 @@
 - 被追问故障时，直接抛 `df -i` 查 inode 耗尽、`lsof|grep deleted` 查未释放句柄。
 - 收尾举「无缝更新靠 inode 分离」案例，展示工程视野，避免被追问时只停在概念层。
 
+## 细节与核心 API
+
+```bash
+ls -i file            # 看 inode 号
+stat file             # 看 Links、Inode、大小
+ln  a  b              # 硬链接：同一 inode，增加 dentry 计数（不能跨文件系统/不能目录）
+ln -s a  b            # 软链接：新 inode，指向路径（可跨文件系统，原文件删则 dangling）
+df -i /               # 看 inode 使用率（小文件海量会 inode 耗尽，即便磁盘空间有余）
+# 删除文件 = 链接计数减一，归零且无人打开才真正释放数据块
+# 硬链接共享数据：改 a 即改 b；软链接不共享，仅路径跳转
+# 工程：备份/去重用硬链接省空间；配置切换用软链接方便回滚（ln -sfn）
+```
+
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] 扇区/块、inode 元信息、文件名-inode 解耦、硬链共享 inode/链接数语义、软链独立 inode/死链、四时间戳与 relatime、inode 耗尽、目录 x 权限、无缝更新——均为架构性归纳，与 Linux/Unix 文件系统事实一致。
 2. 崩坏词归一：源码将 inode / 目录 / No such file or directory / relatime 等音译为崩坏词；本卡统一为规范术语。

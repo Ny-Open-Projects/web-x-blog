@@ -93,3 +93,21 @@
 [ ] 代码里用 os.Stdout 而不是硬编码 1
 [ ] 起子进程时显式指定 Stderr，别让它继承父进程的流向
 ```
+
+## 细节与核心 API
+
+```bash
+# 坑1：顺序敏感 —— 2>&1 必须在 > 之前，否则 stderr 仍去旧 stdout
+cmd > out.log 2>&1          # 正确：stdout 到文件，stderr 复用重定向后的 stdout
+cmd 2>&1 > out.log          # 错误：stderr 先指向终端，stdout 才去文件（stderr 丢失文件）
+# 坑2：>> 追加 vs > 覆盖（覆盖会清空，慎用）
+# 坑3：吞输出 /dev/null   cmd > /dev/null 2>&1
+# 坑4：here-doc 缩进 —— <<-EOF 仅去前导 tab（非空格）
+cat <<-EOF
+    indent
+EOF
+# 坑5：exec 重定向整个脚本  exec 2>>err.log
+# 坑6：日志分流 —— 同时看 stdout 与 tee 留存
+cmd 2>&1 | tee -a run.log   # 屏幕+文件都可见
+# 线上：用 >> 追加 + 2>&1 合并，避免覆盖历史日志；配合 logrotate
+```
