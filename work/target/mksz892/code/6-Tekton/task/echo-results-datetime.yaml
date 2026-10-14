@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: echo-results-datetime
+spec:
+  params:
+    - name: datetime
+  steps:
+    - name: echo-results-datetime
+      image: alpine
+      script: |
+        #!/bin/sh
+        echo $(params.datetime)
+        

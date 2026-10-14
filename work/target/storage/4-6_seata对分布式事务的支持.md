@@ -4,17 +4,9 @@
 
 - Seata 是阿里开源的分布式事务解决方案，提供 XA / AT / TCC / Saga 四套模式
 - 三个核心角色
-  - TC（Transaction Coordinator）：Seata Server，全局事务协调者，无业务语义
-  - TM（Transaction Manager）：发起分布式事务的微服务根节点，有业务语义
-  - RM（Resource Manager）：真正执行事务的资源管理者，对应事务执行者
-- XA 模式：封装数据库二阶段提交
-- AT 模式（Seata 首创，无侵入自动补偿）
-  - 一阶段：业务 SQL 与 undo_log 作为同一本地事务提交，释放本地锁
-  - 二阶段 confirm：异步删 undo_log；cancel：回放 undo_log 反向补偿
-  - 写隔离靠全局锁；一阶段数据已提交，存在脏读可能
-- TCC 模式：应用实现 try/confirm/cancel 三套方法，Seata 编排
-- Saga 模式：长事务，正向服务 + 补偿服务，Seata 串行调度与反向回滚
-- 选型：图省事用 AT；强一致与外部约束高用侵入式 TCC
+## 📎 代码说明
+
+本讲为**原理 / 架构**篇，正文以推演与图示为主，无配套代码片段；本章课件源码中亦无对应类文件。
 
 ## Seata 解决什么问题
 

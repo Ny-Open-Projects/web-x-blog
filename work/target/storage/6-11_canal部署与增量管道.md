@@ -9,6 +9,10 @@
 - Java 接入骨架：用 `ApplicationRunner` 在 Spring 容器启动后起后台驻留监听；`connect` → `subscribe` → `rollback` → `while(true)` 每 100ms `getWithoutAck` 拉消息
 - 必须手动 ACK：用 `getWithoutAck` 而非 `get`，处理完再 ACK，避免处理中异常导致消息丢失
 
+## 📎 代码说明
+
+本讲代码以**内联片段**形式呈现在正文中。课程课件仅发布第 2/3/4 章（MySQL 核心能力）的完整工程源码，本讲所属章节未随课件发布独立源码文件，故不做外部文件关联，请以正文片段为准。
+
 ## canal 是什么
 
 增量索引构建要借助 canal 这个管道工具。canal 利用了 MySQL 主从之间的协议，把自己伪装成主库的一个 slave，通过 binlog 采集到所有增量变更，再像消息中间件一样把消息推送给 Java 接入端。

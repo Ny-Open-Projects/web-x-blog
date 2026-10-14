@@ -1,0 +1,104 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: go-api-gray-analysis
+spec:
+  args:
+  - name: service-name
+  metrics:
+  - name: go-api-gray-metrics
+    # 注意：当前没有请求的时候，由于没有数据，访问result[0]将会引发索引越界错误，所以会报message: 'metric "success-rate" assessed Error due to consecutiveErrors (5) > consecutiveErrorLimit(4): "Error Message: reflect: slice index out of range"'。
+      #   # value: '[NaN]'  # 没有数据的时候会出现的第一种情况，使用result[0] != result[0] <== NaN不等于任何数，可判断为NaN
+      #     # value: '[]' # 没有数据的时候会出现的第一种情况，当为空值的时候，使用len(result) == 0
+    successCondition: (len(result) == 0 or result[0] != result[0] or result[0] >= 0.95 )
+    interval: 60s
+    count: 3
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: http://prometheus.istio-system.svc.cluster.local:9090
+        query: |
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}",response_code!~"5.*"}[1m]
+          )) /
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}"}[1m]
+          ))
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: go-api-gray
+spec:
+  minReadySeconds: 30
+  revisionHistoryLimit: 6
+  strategy:
+    canary:
+      maxSurge: "25%"
+      maxUnavailable: 0
+      steps:
+      - setWeight: 10
+      - pause:
+          duration: 1m # 1 hour
+      - setWeight: 20
+      - pause: {}
+      - setWeight: 40
+      - pause: {duration: 60s}
+      - setWeight: 60
+      - pause: {duration: 60s}
+      - setWeight: 80
+      - pause: {duration: 60s} 
+      - pause: {} 
+      maxSurge: "25%"
+      maxUnavailable: 0      
+      analysis:
+        templates:
+        - templateName: go-api-gray-analysis
+        startingStep: 2 # 在第二个步骤使用流量分析模板
+        args:
+        - name: service-name
+          value: go-api-service.default.svc.cluster.local      
+  revisionHistoryLimit: 6    
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-api-gray-selector
+  template:
+    metadata:
+      labels:
+        app: go-api-gray-selector   
+    spec:
+      containers:
+      - name: go-api-gray
+        image: registry.cn-hangzhou.aliyuncs.com/tool-bucket/tool:gotest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: go-api-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: go-api-service-port
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: go-api-selector          
+    
+# kubectl get analysisrun
+# kubectl describe analysisrun xxx    
+
+
+# kubectl get analysisrun
+# kubectl describe analysisrun xxx
+# kubectl run -it --rm temp-container --image=alpine:3.16 --restart=Never sh
+# apk add curl 
+# 请求正常接口
+#  while true;do sleep 1;curl -I go-api-blus-green-service.default.svc.cluster.local/tatus200 ;done
+# 请求故障接口
+# while true;do sleep 1;curl -I go-api-blus-green-service.default.svc.cluster.local/status500 ;done

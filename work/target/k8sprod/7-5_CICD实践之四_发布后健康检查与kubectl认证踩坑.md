@@ -62,8 +62,8 @@ kubectl apply -f ./web.yaml
 
 ```text
 name=k8swebdemo
-image=hub.imooc.com/library/k8swebdemo:20261005110432
-host=k8sweb.imooc.com
+image=hub.example.com/library/k8swebdemo:20261005110432
+host=k8sweb.example.com
 copy success
 ready to apply
 error: ...
@@ -119,7 +119,7 @@ kubectl get deploy k8swebdemo -o jsonpath='{.spec.template.spec.containers[0].im
 ```
 
 ```text
-hub.imooc.com/library/k8swebdemo:20261005110432
+hub.example.com/library/k8swebdemo:20261005110432
 ```
 
 **版本对得上，说明整条流水线是真的把新镜像送进集群了。** 到这里流程才算基本走通。

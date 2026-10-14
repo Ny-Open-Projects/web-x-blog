@@ -1,0 +1,51 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: alert-vela-app
+  namespace: test-app
+spec:
+  components:
+    - name: alert-express-server
+      type: webservice
+      properties:
+        image: oamdev/hello-world
+        ports:
+         - port: 8000
+           expose: true
+      traits:
+        - type: scaler
+          properties:
+            replicas: 1
+  policies:
+    - name: target-local-k8s
+      type: topology
+      properties:
+        clusters: ["local"]
+        namespace: "test-app"
+
+  workflow:
+    steps:
+      - name: deploy
+        type: deploy
+        properties:
+          policies: ["target-local-k8s"]
+      - name: deploy-success
+        type: notification
+        if: status.deploy.succeeded
+        properties:
+          lark:
+            url:
+              value: https://open.feishu.cn/open-apis/bot/v2/hook/ebc540e7-6b80-4be6-b31c-045ce18a419c
+            message:
+              msg_type: "text"
+              content: "{\"text\":\" 部署项目: hello-world, 部署环境: prod, 部署结果: 应用部署成功 \"}"
+      - name: deploy-failed
+        type: notification
+        if: status.deploy.failed
+        properties:
+          lark:
+            url:
+              value: https://open.feishu.cn/open-apis/bot/v2/hook/ebc540e7-6b80-4be6-b31c-045ce18a419c
+            message:
+              msg_type: "text"
+              content: "{\"text\":\" 部署项目: hello-world, 部署环境: prod, 部署结果: 失败 \"}"

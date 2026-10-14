@@ -54,7 +54,7 @@
       "title": "1-1 课程导学",
       "chapter": "第1章 课程整体介绍",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第1章 课程整体介绍/1-1 课程导学-迅捷文字转语音-1791014354848zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第1章 课程整体介绍/1-1 课程导学zh.txt"
       ],
       "words": 2928,
       "merged": false,
@@ -66,7 +66,7 @@
       "title": "2-1 APM监控系统的整体介绍，了解apm系统的核心概念",
       "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-1 APM监控系统的整体介绍，了解apm系统的核心概念-迅捷文字转语音-1791014463725zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-1 APM监控系统的整体介绍，了解apm系统的核心概念zh.txt"
       ],
       "words": 970,
       "merged": false,
@@ -80,7 +80,7 @@
       "title": "2-2 为什么需要开发一套APM系统？了解它在企业中的重要性",
       "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-2 为什么需要开发一套APM系统？了解它在企业中的重要性-迅捷文字转语音-1791014470688zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-2 为什么需要开发一套APM系统？了解它在企业中的重要性zh.txt"
       ],
       "words": 2118,
       "merged": false,
@@ -94,7 +94,7 @@
       "title": "2-3 APM系统的三板斧介绍--链路追踪，指标，日志",
       "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-3 APM系统的三板斧介绍--链路追踪，指标，日志-迅捷文字转语音-1791014478930zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-3 APM系统的三板斧介绍-链路追踪，指标，日志zh.txt"
       ],
       "words": 3143,
       "merged": false,
@@ -108,7 +108,7 @@
       "title": "2-4 APM工具选型(一)常见链路监控工具对比",
       "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-4 APM工具选型(一)常见链路监控工具对比(1)-迅捷文字转语音-1791014491615zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-4 APM工具选型(一)常见链路监控工具对比(1)zh.txt"
       ],
       "words": 3504,
       "merged": false,
@@ -122,7 +122,7 @@
       "title": "2-5 OpenTracing，OpenCensus，OpenTelemetry三者之间的联系",
       "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-5 OpenTracing，OpenCensus，OpenTelemetry三者之间的联系-迅捷文字转语音-1791014498679zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-5 OpenTracing，OpenCensus，OpenTelemetry三者之间的联系zh.txt"
       ],
       "words": 5406,
       "merged": false,
@@ -139,7 +139,7 @@
       "title": "2-6 APM工具选型(二) 指标和日志采集分析工具介绍",
       "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-6 APM工具选型(二) 指标和日志采集分析工具介绍--迅捷文字转语音-1791014508358zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-6 APM工具选型(二) 指标和日志采集分析工具介绍-zh.txt"
       ],
       "words": 2296,
       "merged": false,
@@ -153,7 +153,7 @@
       "title": "2-7 APM产品的最终成果",
       "chapter": "第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-7 APM产品的最终成果-迅捷文字转语音-1791014705261zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第2章 【APM监控系统的综述和架构概览】 全方位认识apm系统/2-7 APM产品的最终成果zh.txt"
       ],
       "words": 4666,
       "merged": false,
@@ -167,7 +167,7 @@
       "title": "3-1 本章导学",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-1 本章导学-迅捷文字转语音-1791014761260zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-1 本章导学zh.txt"
       ],
       "words": 404,
       "merged": false,
@@ -182,7 +182,7 @@
       "title": "3-2 docker以及docker compose 安装 优化版",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-2 docker以及docker compose 安装 优化版-迅捷文字转语音-1791014767669zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-2 docker以及docker compose 安装 优化版zh.txt"
       ],
       "words": 837,
       "merged": false,
@@ -199,7 +199,7 @@
       "title": "3-3 docker compose配置讲解",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-3 docker compose配置讲解-迅捷文字转语音-1791014774123zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-3 docker compose配置讲解zh.txt"
       ],
       "words": 911,
       "merged": false,
@@ -216,7 +216,7 @@
       "title": "3-4 docker compose 安装redis 和mysql 优化版",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-4 docker compose 安装redis 和mysql 优化版-迅捷文字转语音-1791014781178zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-4 docker compose 安装redis 和mysql 优化版zh.txt"
       ],
       "words": 903,
       "merged": false,
@@ -235,7 +235,7 @@
       "title": "3-5 项目构建--详解项目开发需求",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-5 项目构建--详解项目开发需求-迅捷文字转语音-1791014791071zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-5 项目构建-详解项目开发需求zh.txt"
       ],
       "words": 799,
       "merged": false,
@@ -250,7 +250,7 @@
       "title": "3-6 项目构建--项目代码结构与表结构介绍",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-6 项目构建--项目代码结构与表结构介绍-迅捷文字转语音-1791014795659zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-6 项目构建-项目代码结构与表结构介绍zh.txt"
       ],
       "words": 2148,
       "merged": false,
@@ -265,7 +265,7 @@
       "title": "3-7 项目构建--创建db和redis连接",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-7 项目构建--创建db和redis连接-迅捷文字转语音-1791014993676zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-7 项目构建-创建db和redis连接zh.txt"
       ],
       "words": 3043,
       "merged": false,
@@ -281,7 +281,7 @@
       "title": "3-8 项目构建--创建http服务器",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-8 项目构建--创建http服务器-迅捷文字转语音-1791015005777zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-8 项目构建-创建http服务器zh.txt"
       ],
       "words": 1690,
       "merged": false,
@@ -297,7 +297,7 @@
       "title": "3-9 项目构建--创建grpc服务",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-9 项目构建--创建grpc服务-迅捷文字转语音-1791015014883zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-9 项目构建-创建grpc服务zh.txt"
       ],
       "words": 3612,
       "merged": false,
@@ -313,7 +313,7 @@
       "title": "3-10 项目构建--服务启动逻辑优化",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-10 项目构建--服务启动逻辑优化-迅捷文字转语音-1791015028763zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-10 项目构建-服务启动逻辑优化zh.txt"
       ],
       "words": 1839,
       "merged": false,
@@ -328,7 +328,7 @@
       "title": "3-11 项目构建--统一http服务返回格式",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-11 项目构建--统一http服务返回格式-迅捷文字转语音-1791015036351zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-11 项目构建-统一http服务返回格式zh.txt"
       ],
       "words": 1543,
       "merged": false,
@@ -344,7 +344,7 @@
       "title": "3-12 项目构建--日志打印",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-12 项目构建--日志打印-迅捷文字转语音-1791015043638zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-12 项目构建-日志打印zh.txt"
       ],
       "words": 1295,
       "merged": false,
@@ -359,7 +359,7 @@
       "title": "3-13 项目构建--封装sql 返回工具方法",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-13 项目构建--封装sql 返回工具方法-迅捷文字转语音-1791015274790zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-13 项目构建-封装sql 返回工具方法zh.txt"
       ],
       "words": 740,
       "merged": false,
@@ -375,7 +375,7 @@
       "title": "3-14 项目构建--实现订单服务业务逻辑",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-14 项目构建--实现订单服务业务逻辑-迅捷文字转语音-1791015282002zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-14 项目构建-实现订单服务业务逻辑zh.txt"
       ],
       "words": 2224,
       "merged": false,
@@ -390,7 +390,7 @@
       "title": "3-15 项目构建--实现商品服务业务逻辑",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-15 项目构建--实现商品服务业务逻辑-迅捷文字转语音-1791015291662zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-15 项目构建-实现商品服务业务逻辑zh.txt"
       ],
       "words": 2578,
       "merged": false,
@@ -405,7 +405,7 @@
       "title": "3-16 项目构建--实现用户服务业务逻辑",
       "chapter": "第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-16 项目构建--实现用户服务业务逻辑-迅捷文字转语音-1791015301986zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第3章 基于Golang构建电商下单微服务，为APM系统提供基础代码框架/3-16 项目构建-实现用户服务业务逻辑zh.txt"
       ],
       "words": 2394,
       "merged": false,
@@ -420,7 +420,7 @@
       "title": "4-1 本章导学",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-1 本章导学-迅捷文字转语音-1791015421168zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-1 本章导学zh.txt"
       ],
       "words": 191,
       "merged": false,
@@ -434,7 +434,7 @@
       "title": "4-2 【技术详解】链路追踪基本概念",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-2 【技术详解】链路追踪基本概念-迅捷文字转语音-1791015427383zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-2 【技术详解】链路追踪基本概念zh.txt"
       ],
       "words": 3602,
       "merged": false,
@@ -448,7 +448,7 @@
       "title": "4-3 【问题分析】链路追踪系统落地过程中的挑战",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-3 【问题分析】链路追踪系统落地过程中的挑战-迅捷文字转语音-1791015437712zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-3 【问题分析】链路追踪系统落地过程中的挑战zh.txt"
       ],
       "words": 3307,
       "merged": false,
@@ -462,7 +462,7 @@
       "title": "4-4 【技术详解】Opentelemetry 介绍",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-4 【技术详解】Opentelemetry 介绍-迅捷文字转语音-1791015450647zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-4 【技术详解】Opentelemetry 介绍zh.txt"
       ],
       "words": 2268,
       "merged": false,
@@ -477,7 +477,7 @@
       "title": "4-5 【技术详解】OpenTelemetry Collector安装以及配置文件介绍",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-5 【技术详解】OpenTelemetry Collector安装以及配置文件介绍-迅捷文字转语音-1791015457091zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-5 【技术详解】OpenTelemetry Collector安装以及配置文件介绍zh.txt"
       ],
       "words": 2011,
       "merged": false,
@@ -493,7 +493,7 @@
       "title": "4-6 【实战】OpenTelemetry Collector 实战， 掌握opentelemetry sdk用法",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-6 【实战】OpenTelemetry Collector 实战， 掌握opentelemetry sdk用法-迅捷文字转语音-1791015463215zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-6 【实战】OpenTelemetry Collector 实战， 掌握opentelemetry sdk用法zh.txt"
       ],
       "words": 3266,
       "merged": false,
@@ -510,7 +510,7 @@
       "title": "4-7 【技术详解】Opentelemetry Collector Extension 插件介绍",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-7 【技术详解】Opentelemetry Collector Extension 插件介绍-迅捷文字转语音-1791015667585zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-7 【技术详解】Opentelemetry Collector Extension 插件介绍zh.txt"
       ],
       "words": 1855,
       "merged": false,
@@ -527,7 +527,7 @@
       "title": "4-8 【实战】jaeger对追踪数据展示",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-8 【实战】jaeger对追踪数据展示-迅捷文字转语音-1791015676322zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-8 【实战】jaeger对追踪数据展示zh.txt"
       ],
       "words": 2405,
       "merged": false,
@@ -542,7 +542,7 @@
       "title": "4-9 【实战】后置采样配置与实践",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-9 【实战】后置采样配置与实践-迅捷文字转语音-1791015686115zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-9 【实战】后置采样配置与实践zh.txt"
       ],
       "words": 3619,
       "merged": false,
@@ -556,7 +556,7 @@
       "title": "4-10 确定有意义的调用链路",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-10 确定有意义的调用链路-迅捷文字转语音-1791015697967zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-10 确定有意义的调用链路zh.txt"
       ],
       "words": 836,
       "merged": false,
@@ -570,7 +570,7 @@
       "title": "4-11 【实战】对含有错误信息的链路进行跟踪",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-11 【实战】对含有错误信息的链路进行跟踪-迅捷文字转语音-1791015702774zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-11 【实战】对含有错误信息的链路进行跟踪zh.txt"
       ],
       "words": 4620,
       "merged": false,
@@ -584,7 +584,7 @@
       "title": "4-12 【技术详解】go-mysql库源码剖析",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-12 【技术详解】go-mysql库源码剖析-迅捷文字转语音-1791015715996zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-12 【技术详解】go-mysql库源码剖析zh.txt"
       ],
       "words": 4404,
       "merged": false,
@@ -599,7 +599,7 @@
       "title": "4-13 【实战】装饰器模式封装mysql驱动",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-13 【实战】装饰器模式封装mysql驱动(1)-迅捷文字转语音-1791016003352zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-13 【实战】装饰器模式封装mysql驱动(1)zh.txt"
       ],
       "words": 4154,
       "merged": false,
@@ -614,7 +614,7 @@
       "title": "4-14 【实战】装饰器模式封装mysql",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-14 【实战】装饰器模式封装mysql(2)-迅捷文字转语音-1791016015553zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-14 【实战】装饰器模式封装mysql(2)zh.txt"
       ],
       "words": 3266,
       "merged": false,
@@ -629,7 +629,7 @@
       "title": "4-15 【实战】装饰器模式封装mysql驱动",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-15 【实战】装饰器模式封装mysql驱动(3)-迅捷文字转语音-1791016028556zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-15 【实战】装饰器模式封装mysql驱动(3)zh.txt"
       ],
       "words": 831,
       "merged": false,
@@ -644,7 +644,7 @@
       "title": "4-16 【实战】对含有mysql慢查询的链路进行跟踪",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-16 【实战】对含有mysql慢查询的链路进行跟踪-迅捷文字转语音-1791016035238zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-16 【实战】对含有mysql慢查询的链路进行跟踪zh.txt"
       ],
       "words": 3847,
       "merged": false,
@@ -659,7 +659,7 @@
       "title": "4-17 【实战】对含有长事务的链路进行跟踪",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-17 【实战】对含有长事务的链路进行跟踪-迅捷文字转语音-1791016047551zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-17 【实战】对含有长事务的链路进行跟踪zh.txt"
       ],
       "words": 2073,
       "merged": false,
@@ -673,7 +673,7 @@
       "title": "4-18 【实战】对含有redis报错请求的链路进行跟踪",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-18 【实战】对含有redis报错请求的链路进行跟踪-迅捷文字转语音-1791016057364zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-18 【实战】对含有redis报错请求的链路进行跟踪zh.txt"
       ],
       "words": 1421,
       "merged": false,
@@ -688,7 +688,7 @@
       "title": "4-19 【实战】对服务器慢http接口的链路进行跟踪",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-19 【实战】对服务器慢http接口的链路进行跟踪-迅捷文字转语音-1791016306712zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-19 【实战】对服务器慢http接口的链路进行跟踪zh.txt"
       ],
       "words": 3937,
       "merged": false,
@@ -703,7 +703,7 @@
       "title": "4-20 实战】对慢grpc接口的链路进行跟踪",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-20 实战】对慢grpc接口的链路进行跟踪-迅捷文字转语音-1791016321679zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-20 实战】对慢grpc接口的链路进行跟踪zh.txt"
       ],
       "words": 3584,
       "merged": false,
@@ -718,7 +718,7 @@
       "title": "4-21 【实战】业务维度监控之下单成功数指标监控",
       "chapter": "第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-21 【实战】业务维度监控之下单成功数指标监控-迅捷文字转语音-1791016334894zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第4章 项目实战步骤一：【构建APM系统之分布式链路追踪技术】/4-21 【实战】业务维度监控之下单成功数指标监控zh.txt"
       ],
       "words": 2459,
       "merged": false,
@@ -732,7 +732,7 @@
       "title": "5-1 本章导学",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-1 本章导学-迅捷文字转语音-1791016801594zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-1 本章导学zh.txt"
       ],
       "words": 510,
       "merged": false,
@@ -746,7 +746,7 @@
       "title": "5-2 【原理】建立性能监控指标的原则有哪些？",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-2 【原理】建立性能监控指标的原则有哪些？-迅捷文字转语音-1791016808060zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-2 【原理】建立性能监控指标的原则有哪些？zh.txt"
       ],
       "words": 4250,
       "merged": false,
@@ -760,7 +760,7 @@
       "title": "5-3 【原理】建立性能监控指标的方法论-四大黄金指标原则，use red方法",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-3 【原理】建立性能监控指标的方法论-四大黄金指标原则，use red方法-迅捷文字转语音-1791016821395zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-3 【原理】建立性能监控指标的方法论-四大黄金指标原则，use red方法zh.txt"
       ],
       "words": 2079,
       "merged": false,
@@ -776,7 +776,7 @@
       "title": "5-4 【原理】详解prometheus绘图原理",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-4 【原理】详解prometheus绘图原理-迅捷文字转语音-1791016832505zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-4 【原理】详解prometheus绘图原理zh.txt"
       ],
       "words": 2851,
       "merged": false,
@@ -791,7 +791,7 @@
       "title": "5-5 【原理】详解prometheus 四大监控指标类型",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-5 【原理】详解prometheus 四大监控指标类型-迅捷文字转语音-1791016841562zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-5 【原理】详解prometheus 四大监控指标类型zh.txt"
       ],
       "words": 3675,
       "merged": false,
@@ -806,7 +806,7 @@
       "title": "5-6 【原理】详解prometheus常用函数",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-6 【原理】详解prometheus常用函数-迅捷文字转语音-1791016850503zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-6 【原理】详解prometheus常用函数zh.txt"
       ],
       "words": 1516,
       "merged": false,
@@ -821,7 +821,7 @@
       "title": "5-7 【实战】确定要建立的监控指标",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-7 【实战】确定要建立的监控指标-迅捷文字转语音-1791017084326zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-7 【实战】确定要建立的监控指标zh.txt"
       ],
       "words": 2294,
       "merged": false,
@@ -835,7 +835,7 @@
       "title": "5-8 【实战】为http接口创建qps，错误数 统计指标",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-8 【实战】为http接口创建qps，错误数 统计指标-迅捷文字转语音-1791017095165zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-8 【实战】为http接口创建qps，错误数 统计指标zh.txt"
       ],
       "words": 2702,
       "merged": false,
@@ -851,7 +851,7 @@
       "title": "5-9 【实战】用grafana绘制监控面板(一)",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-9 【实战】用grafana绘制监控面板(一)-迅捷文字转语音-1791017115693zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-9 【实战】用grafana绘制监控面板(一)zh.txt"
       ],
       "words": 4203,
       "merged": false,
@@ -866,7 +866,7 @@
       "title": "5-10 【实战】用grafana绘制监控面板(二)",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-10 【实战】用grafana绘制监控面板(二)-迅捷文字转语音-1791017130807zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-10 【实战】用grafana绘制监控面板(二)zh.txt"
       ],
       "words": 1029,
       "merged": false,
@@ -881,7 +881,7 @@
       "title": "5-11 【实战】对接口进行压测观察qps统计数据",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-11 【实战】对接口进行压测观察qps统计数据-迅捷文字转语音-1791017135830zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-11 【实战】对接口进行压测观察qps统计数据zh.txt"
       ],
       "words": 1016,
       "merged": false,
@@ -896,7 +896,7 @@
       "title": "5-12 【实战】对grpc接口创建qps，错误数指标",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-12 【实战】对grpc接口创建qps，错误数指标-迅捷文字转语音-1791017141886zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-12 【实战】对grpc接口创建qps，错误数指标zh.txt"
       ],
       "words": 2424,
       "merged": false,
@@ -912,7 +912,7 @@
       "title": "5-13 【实战】对grpc接口创建qps，错误数指标 监控面板",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-13 【实战】对grpc接口创建qps，错误数指标 监控面板-迅捷文字转语音-1791017377467zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-13 【实战】对grpc接口创建qps，错误数指标 监控面板zh.txt"
       ],
       "words": 589,
       "merged": false,
@@ -928,7 +928,7 @@
       "title": "5-14 【实战】创建应用服务维度mysql监控，sql语法分析",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-14 【实战】创建应用服务维度mysql监控，sql语法分析-迅捷文字转语音-1791017384443zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-14 【实战】创建应用服务维度mysql监控，sql语法分析zh.txt"
       ],
       "words": 2221,
       "merged": false,
@@ -944,7 +944,7 @@
       "title": "5-15 【实战】创建应用服务维度mysql监控，代码实现",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-15 【实战】创建应用服务维度mysql监控，代码实现-迅捷文字转语音-1791017392713zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-15 【实战】创建应用服务维度mysql监控，代码实现zh.txt"
       ],
       "words": 3712,
       "merged": false,
@@ -959,7 +959,7 @@
       "title": "5-16 【实战】创建应用服务维度mysql监控，绘制监控面板",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-16 【实战】创建应用服务维度mysql监控，绘制监控面板-迅捷文字转语音-1791017405822zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-16 【实战】创建应用服务维度mysql监控，绘制监控面板zh.txt"
       ],
       "words": 2165,
       "merged": false,
@@ -974,7 +974,7 @@
       "title": "5-17 【实战】对应用服务runtime 指标的监控(一)",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-17 【实战】对应用服务runtime 指标的监控(一)-迅捷文字转语音-1791017413070zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-17 【实战】对应用服务runtime 指标的监控(一)zh.txt"
       ],
       "words": 3457,
       "merged": false,
@@ -989,7 +989,7 @@
       "title": "5-18 【实战】对应用服务runtime 指标的监控(二)",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-18 【实战】对应用服务runtime 指标的监控(二)-迅捷文字转语音-1791017422348zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-18 【实战】对应用服务runtime 指标的监控(二)zh.txt"
       ],
       "words": 1080,
       "merged": false,
@@ -1004,7 +1004,7 @@
       "title": "5-19 分支【实战】对应用服务内部流量进行分布监控",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-19 分支【实战】对应用服务内部流量进行分布监控-迅捷文字转语音-1791018035442zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-19 分支【实战】对应用服务内部流量进行分布监控zh.txt"
       ],
       "words": 2273,
       "merged": false,
@@ -1018,7 +1018,7 @@
       "title": "5-20 【实战】业务维度监控之下单成功数指标监控",
       "chapter": "第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-20 【实战】业务维度监控之下单成功数指标监控-迅捷文字转语音-1791018050729zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第5章 项目实战步骤二：【构建APM系统之建设应用性能监控指标】/5-20 【实战】业务维度监控之下单成功数指标监控zh.txt"
       ],
       "words": 2459,
       "merged": false,
@@ -1032,7 +1032,7 @@
       "title": "6-1 【原理】golang中性能监控的大杀器--golang pprof",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-1 【原理】golang中性能监控的大杀器--golang pprof-迅捷文字转语音-1791018204950zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-1 【原理】golang中性能监控的大杀器-golang pprofzh.txt"
       ],
       "words": 1755,
       "merged": false,
@@ -1048,7 +1048,7 @@
       "title": "6-2 【实战】如何使用 golang pprof 来进行性能排查(一)-排查cpu性能问题？",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-2 【实战】如何使用 golang pprof 来进行性能排查(一)-排查cpu性能问题？-迅捷文字转语音-1791018215559zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-2 【实战】如何使用 golang pprof 来进行性能排查(一)-排查cpu性能问题？zh.txt"
       ],
       "words": 5491,
       "merged": false,
@@ -1065,7 +1065,7 @@
       "title": "6-3 【实战】如何使用 golang pprof 来进行性能排查(二)-排查内存性能问题？",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-3 【实战】如何使用 golang pprof 来进行性能排查(二)-排查内存性能问题？-迅捷文字转语音-1791018230810zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-3 【实战】如何使用 golang pprof 来进行性能排查(二)-排查内存性能问题？zh.txt"
       ],
       "words": 3257,
       "merged": false,
@@ -1081,7 +1081,7 @@
       "title": "6-4 【实战】如何使用 golang pprof 来进行性能排查(三)-排查block阻塞问题？",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-4 【实战】如何使用 golang pprof 来进行性能排查(三)-排查block阻塞问题？-迅捷文字转语音-1791018246358zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-4 【实战】如何使用 golang pprof 来进行性能排查(三)-排查block阻塞问题？zh.txt"
       ],
       "words": 3335,
       "merged": false,
@@ -1098,7 +1098,7 @@
       "title": "6-5 【实战】如何使用 golang pprof 来进行性能排查(四)-排查加锁性能问题？",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-5 【实战】如何使用 golang pprof 来进行性能排查(四)-排查加锁性能问题？-迅捷文字转语音-1791018256896zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-5 【实战】如何使用 golang pprof 来进行性能排查(四)-排查加锁性能问题？zh.txt"
       ],
       "words": 1624,
       "merged": false,
@@ -1114,7 +1114,7 @@
       "title": "6-6 【实战】如何使用 golang pprof 来进行性能排查(五)-排查goroutine th",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-6 【实战】如何使用 golang pprof 来进行性能排查(五)-排查goroutine th-迅捷文字转语音-1791018263280zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-6 【实战】如何使用 golang pprof 来进行性能排查(五)-排查goroutine thzh.txt"
       ],
       "words": 2006,
       "merged": false,
@@ -1131,7 +1131,7 @@
       "title": "6-7 【原理】golang pprof源码分析 -- cpu占用率统计原理【版权修正版】",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-7 【原理】golang pprof源码分析 -- cpu占用率统计原理【版权修正版】-迅捷文字转语音-1791018530641zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-7 【原理】golang pprof源码分析 - cpu占用率统计原理【版权修正版】zh.txt"
       ],
       "words": 2718,
       "merged": false,
@@ -1148,7 +1148,7 @@
       "title": "6-8 【原理】golang pprof源码分析 --memory，block，mutex 统计原理",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-8 【原理】golang pprof源码分析 --memory，block，mutex 统计原理-迅捷文字转语音-1791018540896zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-8 【原理】golang pprof源码分析 -memory，block，mutex 统计原理zh.txt"
       ],
       "words": 8339,
       "merged": false,
@@ -1167,7 +1167,7 @@
       "title": "6-9 【原理】golang pprof源码分析 -- goroutine thread 统计原理",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-9 【原理】golang pprof源码分析 -- goroutine thread 统计原理-迅捷文字转语音-1791018560267zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-9 【原理】golang pprof源码分析 - goroutine thread 统计原理zh.txt"
       ],
       "words": 3664,
       "merged": false,
@@ -1185,7 +1185,7 @@
       "title": "6-10 【原理】go trace 分析延迟性问题",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-10 【原理】go trace 分析延迟性问题-迅捷文字转语音-1791018569334zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-10 【原理】go trace 分析延迟性问题zh.txt"
       ],
       "words": 5251,
       "merged": false,
@@ -1200,7 +1200,7 @@
       "title": "6-11 【实战】自动化pprof机制的实现--holmes 库的使用",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-11 【实战】自动化pprof机制的实现--holmes 库的使用-迅捷文字转语音-1791018582548zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-11 【实战】自动化pprof机制的实现-holmes 库的使用zh.txt"
       ],
       "words": 3970,
       "merged": false,
@@ -1216,7 +1216,7 @@
       "title": "6-12 【原理】自动化pprof机制的实现--holmes库源码解读",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-12 【原理】自动化pprof机制的实现--holmes库源码解读-迅捷文字转语音-1791018591989zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-12 【原理】自动化pprof机制的实现-holmes库源码解读zh.txt"
       ],
       "words": 1765,
       "merged": false,
@@ -1232,7 +1232,7 @@
       "title": "6-13 【实战】电商项目优化--引入holmes实现自动化pprof",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-13 【实战】电商项目优化--引入holmes实现自动化pprof-迅捷文字转语音-1791018821090zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-13 【实战】电商项目优化-引入holmes实现自动化pprofzh.txt"
       ],
       "words": 1575,
       "merged": false,
@@ -1248,7 +1248,7 @@
       "title": "6-14 【实战】终端一键生成生成pprof profile 之 gops的使用",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-14 【实战】终端一键生成生成pprof profile 之 gops的使用--迅捷文字转语音-1791018830131zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-14 【实战】终端一键生成生成pprof profile 之 gops的使用-zh.txt"
       ],
       "words": 1511,
       "merged": false,
@@ -1265,7 +1265,7 @@
       "title": "6-15 【实战】巧用pprof工具分析内存泄漏问题",
       "chapter": "第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-15 【实战】巧用pprof工具分析内存泄漏问题-迅捷文字转语音-1791018837741zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第6章 项目实战步骤三：【构建APM系统之精准定位问题代码】/6-15 【实战】巧用pprof工具分析内存泄漏问题zh.txt"
       ],
       "words": 1697,
       "merged": false,
@@ -1280,7 +1280,7 @@
       "title": "7-1 本章概述",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-1 本章概述-迅捷文字转语音-1791018935839zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-1 本章概述zh.txt"
       ],
       "words": 343,
       "merged": false,
@@ -1294,7 +1294,7 @@
       "title": "7-2 【原理】详解日志收集架构模型",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-2 【原理】详解日志收集架构模型-迅捷文字转语音-1791018942541zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-2 【原理】详解日志收集架构模型zh.txt"
       ],
       "words": 286,
       "merged": false,
@@ -1308,7 +1308,7 @@
       "title": "7-3 【原理】通过ELK技术栈来解决日志收集-详解elasticsearch",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-3 【原理】通过ELK技术栈来解决日志收集-详解elasticsearch-迅捷文字转语音-1791018948726zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-3 【原理】通过ELK技术栈来解决日志收集-详解elasticsearchzh.txt"
       ],
       "words": 3743,
       "merged": false,
@@ -1324,7 +1324,7 @@
       "title": "7-4 【原理】通过ELK技术栈来解决日志收集-详解kibana",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-4 【原理】通过ELK技术栈来解决日志收集-详解kibana-迅捷文字转语音-1791018964482zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-4 【原理】通过ELK技术栈来解决日志收集-详解kibanazh.txt"
       ],
       "words": 1672,
       "merged": false,
@@ -1340,7 +1340,7 @@
       "title": "7-5 【实战】 服务器日志采用文件存储",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-5 【实战】 服务器日志采用文件存储-迅捷文字转语音-1791018970763zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-5 【实战】 服务器日志采用文件存储zh.txt"
       ],
       "words": 2520,
       "merged": false,
@@ -1354,7 +1354,7 @@
       "title": "7-6 【实战】通过ELK技术栈来解决日志收集-filebeat收集日志",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-6 【实战】通过ELK技术栈来解决日志收集-filebeat收集日志-迅捷文字转语音-1791018979092zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-6 【实战】通过ELK技术栈来解决日志收集-filebeat收集日志zh.txt"
       ],
       "words": 1581,
       "merged": false,
@@ -1370,7 +1370,7 @@
       "title": "7-7 【实战】通过ELK技术栈来解决日志收集-logstash收集日志",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-7 【实战】通过ELK技术栈来解决日志收集-logstash收集日志-迅捷文字转语音-1791019572349zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-7 【实战】通过ELK技术栈来解决日志收集-logstash收集日志zh.txt"
       ],
       "words": 1011,
       "merged": false,
@@ -1386,7 +1386,7 @@
       "title": "7-8 【实战】kibana展示日志",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-8 【实战】kibana展示日志-迅捷文字转语音-1791019579772zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-8 【实战】kibana展示日志zh.txt"
       ],
       "words": 2396,
       "merged": false,
@@ -1401,7 +1401,7 @@
       "title": "7-9 【实战】索引模板配置",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-9 【实战】索引模板配置-迅捷文字转语音-1791019589308zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-9 【实战】索引模板配置zh.txt"
       ],
       "words": 1623,
       "merged": false,
@@ -1415,7 +1415,7 @@
       "title": "7-10 【实战】索引生命周期的配置",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-10 【实战】索引生命周期的配置-迅捷文字转语音-1791019597831zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-10 【实战】索引生命周期的配置zh.txt"
       ],
       "words": 640,
       "merged": false,
@@ -1429,7 +1429,7 @@
       "title": "7-11 【实战】mysql 审计日志打印",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-11 【实战】mysql 审计日志打印-迅捷文字转语音-1791019603567zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-11 【实战】mysql 审计日志打印zh.txt"
       ],
       "words": 1293,
       "merged": false,
@@ -1444,7 +1444,7 @@
       "title": "7-12 【实战】kibana 分析日志",
       "chapter": "第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-12 【实战】kibana 分析日志-迅捷文字转语音-1791019609230zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第7章 项目实战步骤四：【构建APM系统之应用服务日志收集】/7-12 【实战】kibana 分析日志zh.txt"
       ],
       "words": 999,
       "merged": false,
@@ -1459,7 +1459,7 @@
       "title": "8-1 【原理】 自研告警服务需求分析以及表结构介绍",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-1 【原理】 自研告警服务需求分析以及表结构介绍-迅捷文字转语音-1791019800949zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-1 【原理】 自研告警服务需求分析以及表结构介绍zh.txt"
       ],
       "words": 2403,
       "merged": false,
@@ -1473,7 +1473,7 @@
       "title": "8-2 【实战】 doglarm服务基础代码框架搭建",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-2 【实战】 doglarm服务基础代码框架搭建-迅捷文字转语音-1791019811350zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-2 【实战】 doglarm服务基础代码框架搭建zh.txt"
       ],
       "words": 1581,
       "merged": false,
@@ -1488,7 +1488,7 @@
       "title": "8-3 【原理】grafana告警规则配置详解",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-3 【原理】grafana告警规则配置详解-迅捷文字转语音-1791019820889zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-3 【原理】grafana告警规则配置详解zh.txt"
       ],
       "words": 6348,
       "merged": false,
@@ -1503,7 +1503,7 @@
       "title": "8-4 【实战】 实现grafana 指标告警接口_denois",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-4 【实战】 实现grafana 指标告警接口_denois-迅捷文字转语音-1791019837979zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-4 【实战】 实现grafana 指标告警接口_denoiszh.txt"
       ],
       "words": 3052,
       "merged": false,
@@ -1519,7 +1519,7 @@
       "title": "8-5 【实战】 实现错误等级Error的日志告警",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-5 【实战】 实现错误等级Error的日志告警-迅捷文字转语音-1791019848036zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-5 【实战】 实现错误等级Error的日志告警zh.txt"
       ],
       "words": 1650,
       "merged": false,
@@ -1534,7 +1534,7 @@
       "title": "8-6 【实战】 接入电话告警",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-6 【实战】 接入电话告警-迅捷文字转语音-1791019855083zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-6 【实战】 接入电话告警zh.txt"
       ],
       "words": 2246,
       "merged": false,
@@ -1548,7 +1548,7 @@
       "title": "8-7 【实战】 接入钉钉告警",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-7 【实战】 接入钉钉告警-迅捷文字转语音-1791020098704zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-7 【实战】 接入钉钉告警zh.txt"
       ],
       "words": 1400,
       "merged": false,
@@ -1562,7 +1562,7 @@
       "title": "8-8 【实战】 对日志内容进行限流排重处理",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-8 【实战】 对日志内容进行限流排重处理-迅捷文字转语音-1791020105874zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-8 【实战】 对日志内容进行限流排重处理zh.txt"
       ],
       "words": 3189,
       "merged": false,
@@ -1576,7 +1576,7 @@
       "title": "8-9 【实战】 增加应用服务保活探测机制_denois",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-9 【实战】 增加应用服务保活探测机制_denois-迅捷文字转语音-1791020117549zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-9 【实战】 增加应用服务保活探测机制_denoiszh.txt"
       ],
       "words": 3188,
       "merged": false,
@@ -1591,7 +1591,7 @@
       "title": "8-10 【实战】 手写代码进行监控埋点",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-10 【实战】 手写代码进行监控埋点--迅捷文字转语音-1791020128828zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-10 【实战】 手写代码进行监控埋点-zh.txt"
       ],
       "words": 943,
       "merged": false,
@@ -1605,7 +1605,7 @@
       "title": "8-11 【实战】 dogalarm 自监控面板 _denois",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-11 【实战】 dogalarm 自监控面板 _denois-迅捷文字转语音-1791020133968zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-11 【实战】 dogalarm 自监控面板 _denoiszh.txt"
       ],
       "words": 1747,
       "merged": false,
@@ -1621,7 +1621,7 @@
       "title": "8-12 【实战】保活机制自动重启应用服务",
       "chapter": "第8章 项目实战步骤五：【构建APM系统之自研告警系统】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-12 【实战】保活机制自动重启应用服务-迅捷文字转语音-1791020139537zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第8章 项目实战步骤五：【构建APM系统之自研告警系统】/8-12 【实战】保活机制自动重启应用服务zh.txt"
       ],
       "words": 5245,
       "merged": false,
@@ -1635,7 +1635,7 @@
       "title": "9-1 如何衡量APM系统本身是正常运行的？",
       "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-1 如何衡量APM系统本身是正常运行的？-迅捷文字转语音-1791020809335zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-1 如何衡量APM系统本身是正常运行的？zh.txt"
       ],
       "words": 766,
       "merged": false,
@@ -1649,7 +1649,7 @@
       "title": "9-2 衡量apm系统本身性能的通用手段的副本",
       "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-2 衡量apm系统本身性能的通用手段的副本-迅捷文字转语音-1791020819533zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-2 衡量apm系统本身性能的通用手段的副本zh.txt"
       ],
       "words": 3956,
       "merged": false,
@@ -1663,7 +1663,7 @@
       "title": "9-3 apm自监控及扩容思路之链路追踪系统容量瓶颈分析的副本",
       "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-3 apm自监控及扩容思路之链路追踪系统容量瓶颈分析的副本-迅捷文字转语音-1791020832013zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-3 apm自监控及扩容思路之链路追踪系统容量瓶颈分析的副本zh.txt"
       ],
       "words": 5331,
       "merged": false,
@@ -1677,7 +1677,7 @@
       "title": "9-4 apm自监控及扩容思路之日志手机系统容量分析及扩容思路的副本",
       "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-4 apm自监控及扩容思路之日志手机系统容量分析及扩容思路的副本-迅捷文字转语音-1791020846716zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-4 apm自监控及扩容思路之日志手机系统容量分析及扩容思路的副本zh.txt"
       ],
       "words": 3286,
       "merged": false,
@@ -1691,7 +1691,7 @@
       "title": "9-5 apm自监控及扩容思路之指标系统容量分析及扩容思路",
       "chapter": "第9章 APM系统拓展：【APM系统组件做自监控】",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-5 apm自监控及扩容思路之指标系统容量分析及扩容思路-迅捷文字转语音-1791020855203zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第9章 APM系统拓展：【APM系统组件做自监控】/9-5 apm自监控及扩容思路之指标系统容量分析及扩容思路zh.txt"
       ],
       "words": 1740,
       "merged": false,
@@ -1705,7 +1705,7 @@
       "title": "10-1 课程总结",
       "chapter": "第10章 整体课程内容总结",
       "sources": [
-        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第10章 整体课程内容总结/10-1 课程总结-迅捷文字转语音-1791021183182zh.txt"
+        "work/source/10.mksz883-高性能GO企业级APM监控系统实战/第10章 整体课程内容总结/10-1 课程总结zh.txt"
       ],
       "words": 2143,
       "merged": false,

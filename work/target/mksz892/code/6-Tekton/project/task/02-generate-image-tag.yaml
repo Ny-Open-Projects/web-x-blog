@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: generate-build-tag
+spec:
+  params:
+    - name: branch
+  results:
+    - name: datetime
+  steps:
+    - name: generate-datetime
+      image: ubuntu
+      imagePullPolicy: IfNotPresent
+      script: |
+        datetime=`date +%Y%m%d-%H%M%S`
+        branch=`echo $(params.branch) | awk -F'/' '{print $NF}'`
+        buildId=node-${datetime}-${branch}
+        echo -n ${buildId} | tee $(results.datetime.path)

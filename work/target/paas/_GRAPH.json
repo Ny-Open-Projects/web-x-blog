@@ -50,7 +50,7 @@
     },
     {
       "id": "A2-2",
-      "label": "2-2go代理和慕课网git设置0654_ev",
+      "label": "2-2go代理和课程平台git设置0654_ev",
       "type": "article",
       "chapter": "第2章 Go 搭建基础开发环境",
       "words": 2327
@@ -232,7 +232,7 @@
     },
     {
       "id": "A5-3",
-      "label": "5-3必看基于慕课网gomod的相关设置0356_ev",
+      "label": "5-3必看基于课程平台gomod的相关设置0356_ev",
       "type": "article",
       "chapter": "第5章 云原生 Go PaaS 平台应用服务管理功能开发，产品化创建资源",
       "words": 1315
@@ -399,15 +399,15 @@
       "words": 2532
     },
     {
-      "id": "A[10.9]中间件proto文件开发更多资源ubkz.com",
-      "label": "[10.9] 中间件 proto 文件开发更多资源ubkz.com",
+      "id": "A[10.9]中间件proto文件开发更多资源",
+      "label": "[10.9] 中间件 proto 文件开发更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 1845
     },
     {
-      "id": "A[10.20]总结&思考更多资源ubkz.com",
-      "label": "[10.20] 总结&思考更多资源ubkz.com",
+      "id": "A[10.20]总结&思考更多资源",
+      "label": "[10.20] 总结&思考更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 611
@@ -469,519 +469,519 @@
       "words": 1548
     },
     {
-      "id": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
-      "label": "[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "id": "A[7.2]-7-2路由model与repository开发调整更多资源",
+      "label": "[7.2]-7-2路由model与repository开发调整更多资源",
       "type": "article",
       "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
       "words": 2562
     },
     {
-      "id": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
-      "label": "[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "id": "A[7.1]-7-1路由ingress架构详解更多资源",
+      "label": "[7.1]-7-1路由ingress架构详解更多资源",
       "type": "article",
       "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
       "words": 3549
     },
     {
-      "id": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
-      "label": "[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "id": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
+      "label": "[7.7]-7-7route前端管理页面及效果演示更多资源",
       "type": "article",
       "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
       "words": 2143
     },
     {
-      "id": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
-      "label": "[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "id": "A[7.8]-7-8总结&amp;思考更多资源",
+      "label": "[7.8]-7-8总结&amp;思考更多资源",
       "type": "article",
       "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
       "words": 1842
     },
     {
-      "id": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
-      "label": "[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "id": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
+      "label": "[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "type": "article",
       "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
       "words": 2454
     },
     {
-      "id": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
-      "label": "[7.5]--7-5route对外API的开发更多资源ubkz.com",
+      "id": "A[7.5]-7-5route对外api的开发更多资源",
+      "label": "[7.5]-7-5route对外API的开发更多资源",
       "type": "article",
       "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
       "words": 3216
     },
     {
-      "id": "A[7.3]--7-3路由service开发更多资源ubkz.com",
-      "label": "[7.3]--7-3路由service开发更多资源ubkz.com",
+      "id": "A[7.3]-7-3路由service开发更多资源",
+      "label": "[7.3]-7-3路由service开发更多资源",
       "type": "article",
       "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
       "words": 4313
     },
     {
-      "id": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
-      "label": "[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "id": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
+      "label": "[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "type": "article",
       "chapter": "第7章云原生GoPaaS平台路由管理功能开发，对外域名映射，动态",
       "words": 1227
     },
     {
-      "id": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
-      "label": "[8.1]--8-1GoPaaS平台监控系统Prometheus架构介绍更多资源ubkz.com",
+      "id": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
+      "label": "[8.1]-8-1GoPaaS平台监控系统Prometheus架构介绍更多资源",
       "type": "article",
       "chapter": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
       "words": 3491
     },
     {
-      "id": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
-      "label": "[8.2]--8-2GoPaaS平台Prometheus监控安装更多资源ubkz.com",
+      "id": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
+      "label": "[8.2]-8-2GoPaaS平台Prometheus监控安装更多资源",
       "type": "article",
       "chapter": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
       "words": 2149
     },
     {
-      "id": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
-      "label": "[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "id": "A[8.4]-8-4总结&amp;思考更多资源",
+      "label": "[8.4]-8-4总结&amp;思考更多资源",
       "type": "article",
       "chapter": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
       "words": 1392
     },
     {
-      "id": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
-      "label": "[8.3]--8-3GoPaaS平台监控Grafana图标使用说明更多资源ubkz.com",
+      "id": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
+      "label": "[8.3]-8-3GoPaaS平台监控Grafana图标使用说明更多资源",
       "type": "article",
       "chapter": "第8章云原生GoPaaS平台后台监控能力建设，总览集群资源使用",
       "words": 2986
     },
     {
-      "id": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
-      "label": "[9.6]--9-6GoPaaS平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "id": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
+      "label": "[9.6]-9-6GoPaaS平台cephadm安装基础集群（上）更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 3136
     },
     {
-      "id": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
-      "label": "[9.2]--9-2GoPaaS平台Ceph核心组件介绍更多资源ubkz.com",
+      "id": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
+      "label": "[9.2]-9-2GoPaaS平台Ceph核心组件介绍更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 1440
     },
     {
-      "id": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
-      "label": "[9.3]--9-3GoPaaS平台Ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "id": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
+      "label": "[9.3]-9-3GoPaaS平台Ceph存储过程及核心概念介绍更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 3315
     },
     {
-      "id": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
-      "label": "[9.16]--9-16GoPaaS平台volumeapi开发更多资源ubkz.com",
+      "id": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
+      "label": "[9.16]-9-16GoPaaS平台volumeapi开发更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 2265
     },
     {
-      "id": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
-      "label": "[9.4]--9-4GoPaaS平台Ceph资源购买注意事项更多资源ubkz.com",
+      "id": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
+      "label": "[9.4]-9-4GoPaaS平台Ceph资源购买注意事项更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 2684
     },
     {
-      "id": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
-      "label": "[9.12]--9-12GoPaaS平台Service开发（上）更多资源ubkz.com",
+      "id": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
+      "label": "[9.12]-9-12GoPaaS平台Service开发（上）更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 2468
     },
     {
-      "id": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
-      "label": "[9.11]--9-11GoPaaS平台PVC模型开发更多资源ubkz.com",
+      "id": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
+      "label": "[9.11]-9-11GoPaaS平台PVC模型开发更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 2264
     },
     {
-      "id": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
-      "label": "[9.15]--9-15GoPaaS平台ServiceHandler开发更多资源ubkz.com",
+      "id": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
+      "label": "[9.15]-9-15GoPaaS平台ServiceHandler开发更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 1957
     },
     {
-      "id": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
-      "label": "[9.5]--9-5GoPaaS平台Ceph安全机器初始化更多资源ubkz.com",
+      "id": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
+      "label": "[9.5]-9-5GoPaaS平台Ceph安全机器初始化更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 1846
     },
     {
-      "id": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
-      "label": "[9.7]--9-7GoPaaS平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "id": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
+      "label": "[9.7]-9-7GoPaaS平台cephadm安装基础集群（下）更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 3824
     },
     {
-      "id": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
-      "label": "[9.9]--9-9GoPaaS平台k8s通过CSI方式添加外部Ceph系统（更多资源ubkz.com",
+      "id": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
+      "label": "[9.9]-9-9GoPaaS平台k8s通过CSI方式添加外部Ceph系统（更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 3721
     },
     {
-      "id": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
-      "label": "[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "id": "A[9.17]-9-17总结&amp;思考更多资源",
+      "label": "[9.17]-9-17总结&amp;思考更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 1509
     },
     {
-      "id": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
-      "label": "[9.1]--9-1GoPaaS平台分布式存储Ceph架构介绍更多资源ubkz.com",
+      "id": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
+      "label": "[9.1]-9-1GoPaaS平台分布式存储Ceph架构介绍更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 3317
     },
     {
-      "id": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
-      "label": "[9.13]--9-13GoPaaS平台Service开发（下）更多资源ubkz.com",
+      "id": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
+      "label": "[9.13]-9-13GoPaaS平台Service开发（下）更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 2602
     },
     {
-      "id": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
-      "label": "[9.10]--9-10GoPaaS平台k8s通过CSI方式添加外部Ceph系统更多资源ubkz.com",
+      "id": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
+      "label": "[9.10]-9-10GoPaaS平台k8s通过CSI方式添加外部Ceph系统更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 3380
     },
     {
-      "id": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
-      "label": "[9.14]--9-14GoPaaS平台PV与PVC的关系和原理说明更多资源ubkz.com",
+      "id": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
+      "label": "[9.14]-9-14GoPaaS平台PV与PVC的关系和原理说明更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 4905
     },
     {
-      "id": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
-      "label": "[9.8]--9-8GoPaaS平台ceph核心组件安装更多资源ubkz.com",
+      "id": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
+      "label": "[9.8]-9-8GoPaaS平台ceph核心组件安装更多资源",
       "type": "article",
       "chapter": "第9章云原生GoPaaS平台分布式存储管理功能开发，提供数据落盘",
       "words": 2911
     },
     {
-      "id": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
-      "label": "[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "id": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
+      "label": "[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 1770
     },
     {
-      "id": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
-      "label": "[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "id": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
+      "label": "[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 1661
     },
     {
-      "id": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
-      "label": "[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "id": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
+      "label": "[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 2550
     },
     {
-      "id": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
-      "label": "[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "id": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
+      "label": "[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 1302
     },
     {
-      "id": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
-      "label": "[10.19]--10-19中间件前端页面以及核心API开发（下）更多资源ubkz.com",
+      "id": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
+      "label": "[10.19]-10-19中间件前端页面以及核心API开发（下）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 2947
     },
     {
-      "id": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
-      "label": "[10.18]--10-18中间件前端页面以及核心API开发（中）更多资源ubkz.com",
+      "id": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
+      "label": "[10.18]-10-18中间件前端页面以及核心API开发（中）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 2768
     },
     {
-      "id": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
-      "label": "[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "id": "A[10.11]-10-11中间件service开发（2）更多资源",
+      "label": "[10.11]-10-11中间件service开发（2）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 629
     },
     {
-      "id": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
-      "label": "[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "id": "A[10.6]-10-6中间件类型type和version创建更多资源",
+      "label": "[10.6]-10-6中间件类型type和version创建更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 958
     },
     {
-      "id": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
-      "label": "[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "id": "A[10.10]-10-10中间件service开发（1）更多资源",
+      "label": "[10.10]-10-10中间件service开发（1）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 2089
     },
     {
-      "id": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
-      "label": "[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "id": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
+      "label": "[10.7]-10-7中间件middlewarerepository开发更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 1672
     },
     {
-      "id": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
-      "label": "[10.17]--10-17中间件前端页面以及核心API开发（上）更多资源ubkz.com",
+      "id": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
+      "label": "[10.17]-10-17中间件前端页面以及核心API开发（上）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 2485
     },
     {
-      "id": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
-      "label": "[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "id": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
+      "label": "[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 2732
     },
     {
-      "id": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
-      "label": "[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "id": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
+      "label": "[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 1918
     },
     {
-      "id": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
-      "label": "[10.4]--10-4中间件model-MiddleConfig创建更多资源ubkz.com",
+      "id": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
+      "label": "[10.4]-10-4中间件model-MiddleConfig创建更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 501
     },
     {
-      "id": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
-      "label": "[10.2]--10-2GoPAAS平台中间件model-middle_port更多资源ubkz.com",
+      "id": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
+      "label": "[10.2]-10-2GoPAAS平台中间件model-middle_port更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 607
     },
     {
-      "id": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
-      "label": "[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "id": "A[10.3]-10-3中间件model-middle_env创建更多资源",
+      "label": "[10.3]-10-3中间件model-middle_env创建更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 587
     },
     {
-      "id": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
-      "label": "[10.1]--10-1Go云原生PaaS平台中间件model-middlewa更多资源ubkz.com",
+      "id": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
+      "label": "[10.1]-10-1Go云原生PaaS平台中间件model-middlewa更多资源",
       "type": "article",
       "chapter": "第10章云原生GoPaaS平台中间件后端管理服务，动态创建中间件",
       "words": 2212
     },
     {
-      "id": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
-      "label": "[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "id": "A[11.13]-11-13总结&amp;思考更多资源",
+      "label": "[11.13]-11-13总结&amp;思考更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 957
     },
     {
-      "id": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
-      "label": "[11.9]--11-9云应用市场APIform表单处理研发更多资源ubkz.com",
+      "id": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
+      "label": "[11.9]-11-9云应用市场APIform表单处理研发更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 2165
     },
     {
-      "id": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
-      "label": "[11.6]--11-6云应用市场服务端Proto开发更多资源ubkz.com",
+      "id": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
+      "label": "[11.6]-11-6云应用市场服务端Proto开发更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 1573
     },
     {
-      "id": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
-      "label": "[11.11]--11-11云应用addAppStore（中）更多资源ubkz.com",
+      "id": "A[11.11]-11-11云应用addappstore（中）更多资源",
+      "label": "[11.11]-11-11云应用addAppStore（中）更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 741
     },
     {
-      "id": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
-      "label": "[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "id": "A[11.3]-11-3云应用辅助信息model开发更多资源",
+      "label": "[11.3]-11-3云应用辅助信息model开发更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 2017
     },
     {
-      "id": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
-      "label": "[11.5]--11-5云应用平台Service代码开发更多资源ubkz.com",
+      "id": "A[11.5]-11-5云应用平台service代码开发更多资源",
+      "label": "[11.5]-11-5云应用平台Service代码开发更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 821
     },
     {
-      "id": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
-      "label": "[11.10]--11-10云应用添加应用addAppStore接口（上）更多资源ubkz.com",
+      "id": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
+      "label": "[11.10]-11-10云应用添加应用addAppStore接口（上）更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 1146
     },
     {
-      "id": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
-      "label": "[11.8]--11-8云应用市场APiProto开发更多资源ubkz.com",
+      "id": "A[11.8]-11-8云应用市场apiproto开发更多资源",
+      "label": "[11.8]-11-8云应用市场APiProto开发更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 1676
     },
     {
-      "id": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
-      "label": "[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "id": "A[11.1]-11-1云应用市场开发介绍更多资源",
+      "label": "[11.1]-11-1云应用市场开发介绍更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 614
     },
     {
-      "id": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
-      "label": "[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "id": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
+      "label": "[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 2764
     },
     {
-      "id": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
-      "label": "[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "id": "A[11.4]-11-4云应用市场repository代码开发更多资源",
+      "label": "[11.4]-11-4云应用市场repository代码开发更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 2718
     },
     {
-      "id": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
-      "label": "[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "id": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
+      "label": "[11.7]-11-7云应用市场服务端handler开发更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 1863
     },
     {
-      "id": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
-      "label": "[11.12]--11-12云应用市场API开发（下）更多资源ubkz.com",
+      "id": "A[11.12]-11-12云应用市场api开发（下）更多资源",
+      "label": "[11.12]-11-12云应用市场API开发（下）更多资源",
       "type": "article",
       "chapter": "第11章云原生GoPaaS平台镜功能开发，商业化镜像市场，完善平",
       "words": 1137
     },
     {
-      "id": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
-      "label": "[12.14]--12-14用户中前端API开发更多资源ubkz.com",
+      "id": "A[12.14]-12-14用户中前端api开发更多资源",
+      "label": "[12.14]-12-14用户中前端API开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 4303
     },
     {
-      "id": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
-      "label": "[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "id": "A[12.15]-12-15总结&amp;思考更多资源",
+      "label": "[12.15]-12-15总结&amp;思考更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 1294
     },
     {
-      "id": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
-      "label": "[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "id": "A[12.2]-12-2元原生平台userrepository开发更多资源",
+      "label": "[12.2]-12-2元原生平台userrepository开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 2986
     },
     {
-      "id": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
-      "label": "[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "id": "A[12.11]-12-11用户中心-userhandler开发更多资源",
+      "label": "[12.11]-12-11用户中心-userhandler开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 1181
     },
     {
-      "id": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
-      "label": "[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "id": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
+      "label": "[12.12]-12-12用户中心-rolehandler开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 1393
     },
     {
-      "id": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
-      "label": "[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "id": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
+      "label": "[12.13]-12-13用户中心-权限-handler开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 1210
     },
     {
-      "id": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
-      "label": "[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "id": "A[12.7]-12-7用户中心-role-service开发更多资源",
+      "label": "[12.7]-12-7用户中心-role-service开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 692
     },
     {
-      "id": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
-      "label": "[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "id": "A[12.8]-12-8用户中心-权限-service开发更多资源",
+      "label": "[12.8]-12-8用户中心-权限-service开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 314
     },
     {
-      "id": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
-      "label": "[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "id": "A[12.6]-12-6用户中心-user-service开发更多资源",
+      "label": "[12.6]-12-6用户中心-user-service开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 759
     },
     {
-      "id": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
-      "label": "[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "id": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
+      "label": "[12.5]-12-5用户中心-权限-repository开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 517
     },
     {
-      "id": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
-      "label": "[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "id": "A[12.9]-12-9用户中心-user-proto开发更多资源",
+      "label": "[12.9]-12-9用户中心-user-proto开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 770
     },
     {
-      "id": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
-      "label": "[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "id": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
+      "label": "[12.4]-12-4用户中心-权限-repository开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 517
     },
     {
-      "id": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
-      "label": "[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "id": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
+      "label": "[12.3]-12-3用户中心-角色-repository开发更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 1659
     },
     {
-      "id": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
-      "label": "[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "id": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
+      "label": "[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 1341
     },
     {
-      "id": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
-      "label": "[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "id": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
+      "label": "[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "type": "article",
       "chapter": "第12章云原生GoPaaS平台用户中心，健全验证统一管理",
       "words": 2923
@@ -2924,82 +2924,82 @@
       "relation": "uses-code"
     },
     {
-      "from": "A[10.9]中间件proto文件开发更多资源ubkz.com",
+      "from": "A[10.9]中间件proto文件开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.9]中间件proto文件开发更多资源ubkz.com",
+      "from": "A[10.9]中间件proto文件开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.9]中间件proto文件开发更多资源ubkz.com",
+      "from": "A[10.9]中间件proto文件开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.9]中间件proto文件开发更多资源ubkz.com",
+      "from": "A[10.9]中间件proto文件开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.9]中间件proto文件开发更多资源ubkz.com",
+      "from": "A[10.9]中间件proto文件开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.9]中间件proto文件开发更多资源ubkz.com",
+      "from": "A[10.9]中间件proto文件开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.9]中间件proto文件开发更多资源ubkz.com",
+      "from": "A[10.9]中间件proto文件开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.9]中间件proto文件开发更多资源ubkz.com",
+      "from": "A[10.9]中间件proto文件开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.20]总结&思考更多资源ubkz.com",
+      "from": "A[10.20]总结&思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.20]总结&思考更多资源ubkz.com",
+      "from": "A[10.20]总结&思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.20]总结&思考更多资源ubkz.com",
+      "from": "A[10.20]总结&思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.20]总结&思考更多资源ubkz.com",
+      "from": "A[10.20]总结&思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.20]总结&思考更多资源ubkz.com",
+      "from": "A[10.20]总结&思考更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.20]总结&思考更多资源ubkz.com",
+      "from": "A[10.20]总结&思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.20]总结&思考更多资源ubkz.com",
+      "from": "A[10.20]总结&思考更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.20]总结&思考更多资源ubkz.com",
+      "from": "A[10.20]总结&思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
@@ -3244,2962 +3244,2962 @@
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "from": "A[7.2]-7-2路由model与repository开发调整更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "from": "A[7.2]-7-2路由model与repository开发调整更多资源",
       "to": "Ccode_课件_base_domain_model_base_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "from": "A[7.2]-7-2路由model与repository开发调整更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_category_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "from": "A[7.2]-7-2路由model与repository开发调整更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_pod_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "from": "A[7.2]-7-2路由model与repository开发调整更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_middle_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "from": "A[7.2]-7-2路由model与repository开发调整更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "from": "A[7.2]-7-2路由model与repository开发调整更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_volume_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-2路由model与repository开发调整更多资源ubkz.com",
+      "from": "A[7.2]-7-2路由model与repository开发调整更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_isv_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "from": "A[7.1]-7-1路由ingress架构详解更多资源",
       "to": "Ccode_课件_ingress_README_md",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "from": "A[7.1]-7-1路由ingress架构详解更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "from": "A[7.1]-7-1路由ingress架构详解更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "from": "A[7.1]-7-1路由ingress架构详解更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "from": "A[7.1]-7-1路由ingress架构详解更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "from": "A[7.1]-7-1路由ingress架构详解更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "from": "A[7.1]-7-1路由ingress架构详解更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-1路由ingress架构详解更多资源ubkz.com",
+      "from": "A[7.1]-7-1路由ingress架构详解更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "from": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "from": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "from": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "from": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
       "to": "Ccode_课件_routeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "from": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
       "to": "Ccode_课件_route_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "from": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "from": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com",
+      "from": "A[7.7]-7-7route前端管理页面及效果演示更多资源",
       "to": "Ccode_课件_route_domain_model_route_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "from": "A[7.8]-7-8总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "from": "A[7.8]-7-8总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "from": "A[7.8]-7-8总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "from": "A[7.8]-7-8总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "from": "A[7.8]-7-8总结&amp;思考更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "from": "A[7.8]-7-8总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "from": "A[7.8]-7-8总结&amp;思考更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.8]--7-8总结&amp;思考更多资源ubkz.com",
+      "from": "A[7.8]-7-8总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "from": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "from": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "from": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "from": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "from": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "from": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "from": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com",
+      "from": "A[7.4]-7-4路由handler逻辑开发和注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "from": "A[7.5]-7-5route对外api的开发更多资源",
       "to": "Ccode_课件_routeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "from": "A[7.5]-7-5route对外api的开发更多资源",
       "to": "Ccode_课件_routeapi_go_mod",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "from": "A[7.5]-7-5route对外api的开发更多资源",
       "to": "Ccode_课件_routeapi_proto_routeApi_routeApi_proto",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "from": "A[7.5]-7-5route对外api的开发更多资源",
       "to": "Ccode_课件_routeapi_plugin_hystrix_hystrix_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "from": "A[7.5]-7-5route对外api的开发更多资源",
       "to": "Ccode_课件_routeapi_form_form_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "from": "A[7.5]-7-5route对外api的开发更多资源",
       "to": "Ccode_课件_routeapi_README_md",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "from": "A[7.5]-7-5route对外api的开发更多资源",
       "to": "Ccode_课件_routeapi_main_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-5route对外api的开发更多资源ubkz.com",
+      "from": "A[7.5]-7-5route对外api的开发更多资源",
       "to": "Ccode_课件_routeapi_handler_routeApiHandler_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-3路由service开发更多资源ubkz.com",
+      "from": "A[7.3]-7-3路由service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-3路由service开发更多资源ubkz.com",
+      "from": "A[7.3]-7-3路由service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-3路由service开发更多资源ubkz.com",
+      "from": "A[7.3]-7-3路由service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-3路由service开发更多资源ubkz.com",
+      "from": "A[7.3]-7-3路由service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-3路由service开发更多资源ubkz.com",
+      "from": "A[7.3]-7-3路由service开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-3路由service开发更多资源ubkz.com",
+      "from": "A[7.3]-7-3路由service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-3路由service开发更多资源ubkz.com",
+      "from": "A[7.3]-7-3路由service开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-3路由service开发更多资源ubkz.com",
+      "from": "A[7.3]-7-3路由service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "from": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "from": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "from": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "from": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "from": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "from": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "from": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com",
+      "from": "A[7.6]-7-6在k8s中创建nginx-controller资源对象更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "from": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "from": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
       "to": "Ccode_课件_common_prometheus_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "from": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "from": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "from": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "from": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "from": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com",
+      "from": "A[8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "from": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "from": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
       "to": "Ccode_课件_common_prometheus_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "from": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "from": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "from": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "from": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "from": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com",
+      "from": "A[8.2]-8-2gopaas平台prometheus监控安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "from": "A[8.4]-8-4总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "from": "A[8.4]-8-4总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "from": "A[8.4]-8-4总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "from": "A[8.4]-8-4总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "from": "A[8.4]-8-4总结&amp;思考更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "from": "A[8.4]-8-4总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "from": "A[8.4]-8-4总结&amp;思考更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.4]--8-4总结&amp;思考更多资源ubkz.com",
+      "from": "A[8.4]-8-4总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "from": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "from": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "from": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "from": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "from": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "from": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "from": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com",
+      "from": "A[8.3]-8-3gopaas平台监控grafana图标使用说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "from": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "from": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "from": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "from": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "from": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "from": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "from": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com",
+      "from": "A[9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "from": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "from": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "from": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "from": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "from": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "from": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "from": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com",
+      "from": "A[9.2]-9-2gopaas平台ceph核心组件介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "from": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "from": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "from": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "from": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "from": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "from": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "from": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com",
+      "from": "A[9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "from": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "from": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "from": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "from": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
       "to": "Ccode_课件_volumeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "from": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "from": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "from": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com",
+      "from": "A[9.16]-9-16gopaas平台volumeapi开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "from": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "from": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "from": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "from": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "from": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "from": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "from": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com",
+      "from": "A[9.4]-9-4gopaas平台ceph资源购买注意事项更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "from": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "from": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "from": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "from": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "from": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "from": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "from": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com",
+      "from": "A[9.12]-9-12gopaas平台service开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "from": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "from": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "from": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "from": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "from": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "from": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "from": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com",
+      "from": "A[9.11]-9-11gopaas平台pvc模型开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "from": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "from": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "from": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "from": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "from": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "from": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "from": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com",
+      "from": "A[9.15]-9-15gopaas平台servicehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "from": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "from": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "from": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "from": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "from": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "from": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "from": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com",
+      "from": "A[9.5]-9-5gopaas平台ceph安全机器初始化更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "from": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "from": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "from": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "from": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "from": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "from": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "from": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com",
+      "from": "A[9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "from": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
       "to": "Ccode_课件_ceph_2_k8s_使用_CSI_添加_ceph_为存储_md",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "from": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "from": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "from": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "from": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "from": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "from": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com",
+      "from": "A[9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "from": "A[9.17]-9-17总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "from": "A[9.17]-9-17总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "from": "A[9.17]-9-17总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "from": "A[9.17]-9-17总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "from": "A[9.17]-9-17总结&amp;思考更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "from": "A[9.17]-9-17总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "from": "A[9.17]-9-17总结&amp;思考更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.17]--9-17总结&amp;思考更多资源ubkz.com",
+      "from": "A[9.17]-9-17总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "from": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "from": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "from": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "from": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "from": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "from": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "from": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com",
+      "from": "A[9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "from": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "from": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "from": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "from": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "from": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "from": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "from": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com",
+      "from": "A[9.13]-9-13gopaas平台service开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "from": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
       "to": "Ccode_课件_ceph_2_k8s_使用_CSI_添加_ceph_为存储_md",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "from": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "from": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "from": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "from": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "from": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "from": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com",
+      "from": "A[9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "from": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "from": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "from": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "from": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "from": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "from": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "from": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com",
+      "from": "A[9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "from": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "from": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "from": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "from": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "from": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "from": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "from": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com",
+      "from": "A[9.8]-9-8gopaas平台ceph核心组件安装更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "from": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "from": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "to": "Ccode_课件_base_domain_model_base_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "from": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_category_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "from": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_pod_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "from": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_middle_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "from": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "from": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_volume_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com",
+      "from": "A[10.16]-10-16中间件main调整及handler开发（下）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_isv_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "from": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "from": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "from": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "from": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "from": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "from": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "from": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com",
+      "from": "A[10.14]-10-14中间件service对应版本服务代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "from": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "from": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "from": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "from": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "from": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "from": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "from": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com",
+      "from": "A[10.12]-10-12中间件middlewareservice开发（3）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "from": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "from": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "from": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "from": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "from": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "from": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "from": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com",
+      "from": "A[10.8]-10-8中间件类型type和verisonrepository开更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "from": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "from": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "from": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
       "to": "Ccode_课件_podapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "from": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "from": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
       "to": "Ccode_课件_volumeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "from": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
       "to": "Ccode_课件_svcapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "from": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
       "to": "Ccode_课件_routeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com",
+      "from": "A[10.19]-10-19中间件前端页面以及核心api开发（下）更多资源",
       "to": "Ccode_课件_middlewareapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "from": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "from": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "from": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
       "to": "Ccode_课件_podapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "from": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "from": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
       "to": "Ccode_课件_volumeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "from": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
       "to": "Ccode_课件_svcapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "from": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
       "to": "Ccode_课件_routeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com",
+      "from": "A[10.18]-10-18中间件前端页面以及核心api开发（中）更多资源",
       "to": "Ccode_课件_middlewareapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "from": "A[10.11]-10-11中间件service开发（2）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "from": "A[10.11]-10-11中间件service开发（2）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "from": "A[10.11]-10-11中间件service开发（2）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "from": "A[10.11]-10-11中间件service开发（2）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "from": "A[10.11]-10-11中间件service开发（2）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "from": "A[10.11]-10-11中间件service开发（2）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "from": "A[10.11]-10-11中间件service开发（2）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.11]--10-11中间件service开发（2）更多资源ubkz.com",
+      "from": "A[10.11]-10-11中间件service开发（2）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "from": "A[10.6]-10-6中间件类型type和version创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "from": "A[10.6]-10-6中间件类型type和version创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "from": "A[10.6]-10-6中间件类型type和version创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "from": "A[10.6]-10-6中间件类型type和version创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "from": "A[10.6]-10-6中间件类型type和version创建更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "from": "A[10.6]-10-6中间件类型type和version创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "from": "A[10.6]-10-6中间件类型type和version创建更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6中间件类型type和version创建更多资源ubkz.com",
+      "from": "A[10.6]-10-6中间件类型type和version创建更多资源",
       "to": "Ccode_课件_middleware_domain_model_middle_version_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "from": "A[10.10]-10-10中间件service开发（1）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "from": "A[10.10]-10-10中间件service开发（1）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "from": "A[10.10]-10-10中间件service开发（1）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "from": "A[10.10]-10-10中间件service开发（1）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "from": "A[10.10]-10-10中间件service开发（1）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "from": "A[10.10]-10-10中间件service开发（1）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "from": "A[10.10]-10-10中间件service开发（1）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.10]--10-10中间件service开发（1）更多资源ubkz.com",
+      "from": "A[10.10]-10-10中间件service开发（1）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "from": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "from": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "from": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "from": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "from": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "from": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "from": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com",
+      "from": "A[10.7]-10-7中间件middlewarerepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "from": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "from": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "from": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
       "to": "Ccode_课件_podapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "from": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "from": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
       "to": "Ccode_课件_volumeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "from": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
       "to": "Ccode_课件_svcapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "from": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
       "to": "Ccode_课件_routeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com",
+      "from": "A[10.17]-10-17中间件前端页面以及核心api开发（上）更多资源",
       "to": "Ccode_课件_middlewareapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "from": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "from": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "to": "Ccode_课件_base_domain_model_base_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "from": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_category_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "from": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_pod_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "from": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_middle_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "from": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "from": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_volume_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com",
+      "from": "A[10.15]-10-15中间件main调整及handler开发（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_isv_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "from": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "from": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "from": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "from": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "from": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "from": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "from": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com",
+      "from": "A[10.13]-10-13中间件middlewareservice开发（4）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "from": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "from": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "from": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "from": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "from": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "from": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "from": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com",
+      "from": "A[10.4]-10-4中间件model-middleconfig创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "from": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "from": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "from": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "from": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "from": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "from": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "from": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com",
+      "from": "A[10.2]-10-2gopaas平台中间件model-middle_port更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "from": "A[10.3]-10-3中间件model-middle_env创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "from": "A[10.3]-10-3中间件model-middle_env创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "from": "A[10.3]-10-3中间件model-middle_env创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "from": "A[10.3]-10-3中间件model-middle_env创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "from": "A[10.3]-10-3中间件model-middle_env创建更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "from": "A[10.3]-10-3中间件model-middle_env创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "from": "A[10.3]-10-3中间件model-middle_env创建更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3中间件model-middle_env创建更多资源ubkz.com",
+      "from": "A[10.3]-10-3中间件model-middle_env创建更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "from": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
       "to": "Ccode_课件_go_paas_html_email_compose_html",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "from": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "from": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "from": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "from": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "from": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "from": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com",
+      "from": "A[10.1]-10-1go云原生paas平台中间件model-middlewa更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "from": "A[11.13]-11-13总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "from": "A[11.13]-11-13总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "from": "A[11.13]-11-13总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "from": "A[11.13]-11-13总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "from": "A[11.13]-11-13总结&amp;思考更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "from": "A[11.13]-11-13总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "from": "A[11.13]-11-13总结&amp;思考更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.13]--11-13总结&amp;思考更多资源ubkz.com",
+      "from": "A[11.13]-11-13总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "from": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "from": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "from": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "from": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "from": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "from": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "from": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com",
+      "from": "A[11.9]-11-9云应用市场apiform表单处理研发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "from": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "from": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "from": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "from": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "from": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "from": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "from": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com",
+      "from": "A[11.6]-11-6云应用市场服务端proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "from": "A[11.11]-11-11云应用addappstore（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "from": "A[11.11]-11-11云应用addappstore（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "from": "A[11.11]-11-11云应用addappstore（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "from": "A[11.11]-11-11云应用addappstore（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "from": "A[11.11]-11-11云应用addappstore（中）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "from": "A[11.11]-11-11云应用addappstore（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "from": "A[11.11]-11-11云应用addappstore（中）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.11]--11-11云应用addappstore（中）更多资源ubkz.com",
+      "from": "A[11.11]-11-11云应用addappstore（中）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "from": "A[11.3]-11-3云应用辅助信息model开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "from": "A[11.3]-11-3云应用辅助信息model开发更多资源",
       "to": "Ccode_课件_base_domain_model_base_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "from": "A[11.3]-11-3云应用辅助信息model开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_category_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "from": "A[11.3]-11-3云应用辅助信息model开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_pod_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "from": "A[11.3]-11-3云应用辅助信息model开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_middle_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "from": "A[11.3]-11-3云应用辅助信息model开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "from": "A[11.3]-11-3云应用辅助信息model开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_volume_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-3云应用辅助信息model开发更多资源ubkz.com",
+      "from": "A[11.3]-11-3云应用辅助信息model开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_isv_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "from": "A[11.5]-11-5云应用平台service代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "from": "A[11.5]-11-5云应用平台service代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "from": "A[11.5]-11-5云应用平台service代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "from": "A[11.5]-11-5云应用平台service代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "from": "A[11.5]-11-5云应用平台service代码开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "from": "A[11.5]-11-5云应用平台service代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "from": "A[11.5]-11-5云应用平台service代码开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.5]--11-5云应用平台service代码开发更多资源ubkz.com",
+      "from": "A[11.5]-11-5云应用平台service代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "from": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "from": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "from": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "from": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "from": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "from": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "from": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com",
+      "from": "A[11.10]-11-10云应用添加应用addappstore接口（上）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "from": "A[11.8]-11-8云应用市场apiproto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "from": "A[11.8]-11-8云应用市场apiproto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "from": "A[11.8]-11-8云应用市场apiproto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "from": "A[11.8]-11-8云应用市场apiproto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "from": "A[11.8]-11-8云应用市场apiproto开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "from": "A[11.8]-11-8云应用市场apiproto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "from": "A[11.8]-11-8云应用市场apiproto开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.8]--11-8云应用市场apiproto开发更多资源ubkz.com",
+      "from": "A[11.8]-11-8云应用市场apiproto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "from": "A[11.1]-11-1云应用市场开发介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "from": "A[11.1]-11-1云应用市场开发介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "from": "A[11.1]-11-1云应用市场开发介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "from": "A[11.1]-11-1云应用市场开发介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "from": "A[11.1]-11-1云应用市场开发介绍更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "from": "A[11.1]-11-1云应用市场开发介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "from": "A[11.1]-11-1云应用市场开发介绍更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-1云应用市场开发介绍更多资源ubkz.com",
+      "from": "A[11.1]-11-1云应用市场开发介绍更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "from": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "from": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "from": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "from": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "from": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "from": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "from": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com",
+      "from": "A[11.2]-11-2云应用app_store模型开发及管理说明更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "from": "A[11.4]-11-4云应用市场repository代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "from": "A[11.4]-11-4云应用市场repository代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "from": "A[11.4]-11-4云应用市场repository代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "from": "A[11.4]-11-4云应用市场repository代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "from": "A[11.4]-11-4云应用市场repository代码开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "from": "A[11.4]-11-4云应用市场repository代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "from": "A[11.4]-11-4云应用市场repository代码开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.4]--11-4云应用市场repository代码开发更多资源ubkz.com",
+      "from": "A[11.4]-11-4云应用市场repository代码开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "from": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "from": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "from": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "from": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "from": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "from": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "from": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com",
+      "from": "A[11.7]-11-7云应用市场服务端handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "from": "A[11.12]-11-12云应用市场api开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "from": "A[11.12]-11-12云应用市场api开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "from": "A[11.12]-11-12云应用市场api开发（下）更多资源",
       "to": "Ccode_课件_podapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "from": "A[11.12]-11-12云应用市场api开发（下）更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "from": "A[11.12]-11-12云应用市场api开发（下）更多资源",
       "to": "Ccode_课件_volumeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "from": "A[11.12]-11-12云应用市场api开发（下）更多资源",
       "to": "Ccode_课件_svcapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "from": "A[11.12]-11-12云应用市场api开发（下）更多资源",
       "to": "Ccode_课件_routeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.12]--11-12云应用市场api开发（下）更多资源ubkz.com",
+      "from": "A[11.12]-11-12云应用市场api开发（下）更多资源",
       "to": "Ccode_课件_middlewareapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "from": "A[12.14]-12-14用户中前端api开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "from": "A[12.14]-12-14用户中前端api开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "from": "A[12.14]-12-14用户中前端api开发更多资源",
       "to": "Ccode_课件_podapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "from": "A[12.14]-12-14用户中前端api开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "from": "A[12.14]-12-14用户中前端api开发更多资源",
       "to": "Ccode_课件_volumeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "from": "A[12.14]-12-14用户中前端api开发更多资源",
       "to": "Ccode_课件_svcapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "from": "A[12.14]-12-14用户中前端api开发更多资源",
       "to": "Ccode_课件_routeapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.14]--12-14用户中前端api开发更多资源ubkz.com",
+      "from": "A[12.14]-12-14用户中前端api开发更多资源",
       "to": "Ccode_课件_middlewareapi_filebeat_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "from": "A[12.15]-12-15总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "from": "A[12.15]-12-15总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "from": "A[12.15]-12-15总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "from": "A[12.15]-12-15总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "from": "A[12.15]-12-15总结&amp;思考更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "from": "A[12.15]-12-15总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "from": "A[12.15]-12-15总结&amp;思考更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.15]--12-15总结&amp;思考更多资源ubkz.com",
+      "from": "A[12.15]-12-15总结&amp;思考更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "from": "A[12.2]-12-2元原生平台userrepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "from": "A[12.2]-12-2元原生平台userrepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "from": "A[12.2]-12-2元原生平台userrepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "from": "A[12.2]-12-2元原生平台userrepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "from": "A[12.2]-12-2元原生平台userrepository开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "from": "A[12.2]-12-2元原生平台userrepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "from": "A[12.2]-12-2元原生平台userrepository开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.2]--12-2元原生平台userrepository开发更多资源ubkz.com",
+      "from": "A[12.2]-12-2元原生平台userrepository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "from": "A[12.11]-12-11用户中心-userhandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "from": "A[12.11]-12-11用户中心-userhandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "from": "A[12.11]-12-11用户中心-userhandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "from": "A[12.11]-12-11用户中心-userhandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "from": "A[12.11]-12-11用户中心-userhandler开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "from": "A[12.11]-12-11用户中心-userhandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "from": "A[12.11]-12-11用户中心-userhandler开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.11]--12-11用户中心-userhandler开发更多资源ubkz.com",
+      "from": "A[12.11]-12-11用户中心-userhandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "from": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "from": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "from": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "from": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "from": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "from": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "from": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com",
+      "from": "A[12.12]-12-12用户中心-rolehandler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "from": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "from": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "from": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "from": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "from": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "from": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "from": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com",
+      "from": "A[12.13]-12-13用户中心-权限-handler开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "from": "A[12.7]-12-7用户中心-role-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "from": "A[12.7]-12-7用户中心-role-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "from": "A[12.7]-12-7用户中心-role-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "from": "A[12.7]-12-7用户中心-role-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "from": "A[12.7]-12-7用户中心-role-service开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "from": "A[12.7]-12-7用户中心-role-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "from": "A[12.7]-12-7用户中心-role-service开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.7]--12-7用户中心-role-service开发更多资源ubkz.com",
+      "from": "A[12.7]-12-7用户中心-role-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "from": "A[12.8]-12-8用户中心-权限-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "from": "A[12.8]-12-8用户中心-权限-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "from": "A[12.8]-12-8用户中心-权限-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "from": "A[12.8]-12-8用户中心-权限-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "from": "A[12.8]-12-8用户中心-权限-service开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "from": "A[12.8]-12-8用户中心-权限-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "from": "A[12.8]-12-8用户中心-权限-service开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.8]--12-8用户中心-权限-service开发更多资源ubkz.com",
+      "from": "A[12.8]-12-8用户中心-权限-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "from": "A[12.6]-12-6用户中心-user-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "from": "A[12.6]-12-6用户中心-user-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "from": "A[12.6]-12-6用户中心-user-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "from": "A[12.6]-12-6用户中心-user-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "from": "A[12.6]-12-6用户中心-user-service开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "from": "A[12.6]-12-6用户中心-user-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "from": "A[12.6]-12-6用户中心-user-service开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.6]--12-6用户中心-user-service开发更多资源ubkz.com",
+      "from": "A[12.6]-12-6用户中心-user-service开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.5]-12-5用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "from": "A[12.9]-12-9用户中心-user-proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "from": "A[12.9]-12-9用户中心-user-proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "from": "A[12.9]-12-9用户中心-user-proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "from": "A[12.9]-12-9用户中心-user-proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "from": "A[12.9]-12-9用户中心-user-proto开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "from": "A[12.9]-12-9用户中心-user-proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "from": "A[12.9]-12-9用户中心-user-proto开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.9]--12-9用户中心-user-proto开发更多资源ubkz.com",
+      "from": "A[12.9]-12-9用户中心-user-proto开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com",
+      "from": "A[12.4]-12-4用户中心-权限-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "from": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "from": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "from": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "from": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "from": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "from": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "from": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com",
+      "from": "A[12.3]-12-3用户中心-角色-repository开发更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "from": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "from": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "from": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "from": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "from": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "from": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "from": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com",
+      "from": "A[12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "from": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_elasticsearch_config_elasticsearch_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "from": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_kibana_config_kibana_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "from": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_config_logstash_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "from": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_logstash_pipeline_logstash_conf",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "from": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "to": "Ccode_课件_common_swap_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "from": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "to": "Ccode_课件_docker_compose_chapter2_docker_compose_yml",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "from": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "to": "Ccode_课件_appstore_domain_model_app_comment_go",
       "relation": "uses-code"
     },
     {
-      "from": "A[12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com",
+      "from": "A[12.1]-12-1云原生平台用户中心-user-role-permissi更多资源",
       "to": "Ccode_课件_docker_compose_chapter3_prometheus_yml",
       "relation": "uses-code"
     }

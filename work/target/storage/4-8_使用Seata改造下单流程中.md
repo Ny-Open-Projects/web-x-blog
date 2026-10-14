@@ -3,16 +3,20 @@
 ## 纲要
 
 - Seata 三大角色与本次改造的目标形态
-  - TC（seata-server）注册到 Nacos，配置由 Nacos 托管
-  - 业务库与 Seata 依赖库共享同一个 MySQL 实例做全局事务管理
-- seata-server 部署
-  - `registry.conf`：注册中心指向 Nacos
-  - `config.txt` + `nacos-config.sh`：把 store 配置灌入 Nacos
-  - 后台启动 seata-server，监听 8091
-- 客户端（RM/TM）接入
-  - pom 依赖：druid、actuator、`seata-spring-boot-starter`、`nacos-client`、`spring-cloud-alibaba-seata`
-  - `application.properties`：service / registry 两段配置
-  - 一行代码改造：`@Transactional` → `@GlobalTransactional`
+## 📎 文本↔代码关联
+
+本讲对应课件源码（去品牌化副本，位于 `code/socialecom/`；包名已由原占位包名统一改写为 `com.social.ecom`）：
+
+| 代码文件 | 正文提及 | 职责 |
+| --- | --- | --- |
+| `code/socialecom/第四章代码/socialecom/src/main/resources/application.properties` | 13 次 | 应用配置（数据源 / MyBatis-Plus 日志 / 端口） |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/pojo/Trade.java` | 6 次 | 实体类，主键 `IdType.AUTO` 自增，含自动填充时间字段 |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/TradeMapper.java` | 3 次 | `Trade` 的 MyBatis-Plus Mapper 接口 |
+| `code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TradeMapper.xml` | 3 次 | Mapper XML（SQL 映射） |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/service/StockService.java` | 2 次 | `Stock` 业务服务接口 |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/service/TradeService.java` | 2 次 | `Trade` 业务服务接口 |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/service/impl/TradeServiceImpl.java` | 2 次 | `Trade` 业务服务实现（继承 ServiceImpl） |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/pojo/Stock.java` | 1 次 | 实体类，主键 `IdType.AUTO` 自增，含自动填充时间字段 |
 
 ## 改造前的架构视角
 

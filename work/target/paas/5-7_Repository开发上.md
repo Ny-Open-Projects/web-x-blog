@@ -21,7 +21,7 @@
 package repository
 
 import (
-	"git.imooc.com/coding-535/pod/domain/model"
+	"git.example.com/coding-535/pod/domain/model"
 	"github.com/jinzhu/gorm"
 )
 

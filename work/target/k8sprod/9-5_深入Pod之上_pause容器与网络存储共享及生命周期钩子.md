@@ -269,8 +269,8 @@ spec:
   hostAliases:
     - ip: "10.155.20.120"
       hostnames:
-        - web.imooc.com
-        - web2.imooc.com
+        - web.example.com
+        - web2.example.com
 ```
 
 > 踩过一个坑：**字段名是 `hostnames`（有 s），写成 `hostname` 会报错。**
@@ -281,7 +281,7 @@ spec:
 kubectl delete -f pod-volume.yaml -n dev
 kubectl create -f pod-volume.yaml -n dev
 kubectl exec -it pod-volume -n dev -c web -- cat /etc/hosts
-# 10.155.20.120   web.imooc.com  web2.imooc.com
+# 10.155.20.120   web.example.com  web2.example.com
 ```
 
 **两个容器里都能看到这条 hosts 配置。**
@@ -433,7 +433,7 @@ spec:
   hostAliases:
     - ip: "10.155.20.120"
       hostnames:
-        - web.imooc.com
+        - web.example.com
   containers:
     - name: web
       image: springboot-web:v1

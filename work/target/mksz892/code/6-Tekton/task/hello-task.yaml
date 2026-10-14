@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: hello
+spec:
+  steps:
+    - name: echo-1
+      image: alpine
+      script: |
+        #!/bin/sh
+        echo "Hello alpine"   
+    - name: echo-2
+      image: alpine
+      script: |
+        #!/bin/sh
+        echo "Hello alpine:3.16"       

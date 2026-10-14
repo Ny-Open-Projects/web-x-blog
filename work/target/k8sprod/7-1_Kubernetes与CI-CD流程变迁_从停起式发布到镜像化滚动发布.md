@@ -155,7 +155,7 @@ set -e
 mvn clean package -DskipTests
 
 # 2) 打镜像、打 tag 用 commit id，保证可追溯
-IMAGE="hub.imooc.com/library/springboot-web:${GIT_COMMIT:0:8}"
+IMAGE="hub.example.com/library/springboot-web:${GIT_COMMIT:0:8}"
 docker build -t "$IMAGE" .
 
 # 3) 推仓库
@@ -192,7 +192,7 @@ spec:
     spec:
       containers:
         - name: springboot-web
-          image: hub.imooc.com/library/springboot-web:latest
+          image: hub.example.com/library/springboot-web:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -236,7 +236,7 @@ spec:
     spec:
       containers:
         - name: springboot-web
-          image: hub.imooc.com/library/springboot-web:latest
+          image: hub.example.com/library/springboot-web:latest
           volumeMounts:
             - name: config
               mountPath: /config

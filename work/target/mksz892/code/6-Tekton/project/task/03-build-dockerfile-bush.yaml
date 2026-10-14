@@ -1,0 +1,37 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: image-build-and-push
+spec:
+  workspaces:
+    - name: code
+    - name: aliyun-image-registry-secert
+      mountPath: /kaniko/.docker
+  params:
+    - name: image-tag
+  steps:
+    - name: image-build-and-push
+      image: gcr.io/kaniko-project/executor:latest
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        runAsUser: 0
+      env:
+        - name: DOCKER_CONFIG
+          value: /kaniko/.docker
+      command:
+        - /kaniko/executor
+      args:
+        - --dockerfile=Dockerfile
+        - --context=$(workspaces.code.path)/node
+        - --destination=registry.cn-hangzhou.aliyuncs.com/tool-bucket/public:$(params.image-tag)
+        - --cache=true
+        - --cache-repo=registry.cn-hangzhou.aliyuncs.com/tool-bucket/public
+        - --cache-copy-layers
+      volumeMounts:
+        - name: npm-cache
+          mountPath: /usr/local/node
+  volumes:
+    - name: npm-cache
+      persistentVolumeClaim:
+        claimName: tekton-npm-cache-pvc

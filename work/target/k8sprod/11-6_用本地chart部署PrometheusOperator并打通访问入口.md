@@ -21,7 +21,7 @@ tags: [Helm, Chart, prometheus-operator, CRD, Alertmanager, ServiceMonitor, kube
 其实理论上这一步特别简单，一条命令就能把整套 Prometheus 监控体系立起来：
 
 ```bash
-helm install --name imoocprom stable/prometheus-operator
+helm install -name exampleprom stable/prometheus-operator
 ```
 
 但现实有两个坎：
@@ -57,7 +57,7 @@ cp -r charts/stable/prometheus-operator .
 
 ```bash
 helm install --values values.yaml \
-  --name imoocprom \
+  -name exampleprom \
   --namespace monitoring \
   ./prometheus-operator
 ```
@@ -130,7 +130,7 @@ kubectl get servicemonitor -n monitoring
 apiVersion: monitoring.coreos.com/v1
 kind: Alertmanager
 metadata:
-  name: imoocprom-alertmanager   # 名字跟 release 前缀对齐
+  name: exampleprom-alertmanager   # 名字跟 release 前缀对齐
   namespace: monitoring
 spec:
   replicas: 3                    # 副本数
@@ -138,7 +138,7 @@ spec:
   alertmanagerImage:             # 依赖的镜像名
     repository: quay.io/prometheus/alertmanager
     tag: v0.20.0
-  externalUrl: http://alertmanager.imooc.com   # 对外访问地址
+  externalUrl: http://alertmanager.example.com   # 对外访问地址
 ```
 
 下面的配置描述了它依赖的镜像、对外访问地址、日志、副本数、使用的 Service 等具体信息。Prometheus Operator 的 controller 就是根据这些信息，去创建出对应的 Alertmanager Deployment、Service 这些 Kubernetes 自带对象。
@@ -160,14 +160,14 @@ grep -n "image" prometheus-operator/values.yaml
 
 ```bash
 # 改 values.yaml 里的镜像地址前缀
-#   原: k8s.gcr.io/xxx          → 改成 registry.cn-hangzhou.aliyuncs.com/imooc/xxx
-#   原: quay.io/xxx             → 改成 registry.cn-hangzhou.aliyuncs.com/imooc/xxx
+#   原: k8s.gcr.io/xxx          → 改成 registry.cn-hangzhou.aliyuncs.com/example/xxx
+#   原: quay.io/xxx             → 改成 registry.cn-hangzhou.aliyuncs.com/example/xxx
 ```
 
 具体升级方法：
 
 ```bash
-helm upgrade imoocprom ./prometheus-operator \
+helm upgrade exampleprom ./prometheus-operator \
   -f prometheus-operator/charts/grafana/values.yaml
 ```
 
@@ -183,7 +183,7 @@ kubectl get pod -n monitoring -o yaml | grep -A2 image
 
 另外两个可以预见会出问题的镜像：
 
-1. Grafana 的 `6.1.6` 版本，同样替换成 `registry.cn-hangzhou.aliyuncs.com/imooc` 前缀
+1. Grafana 的 `6.1.6` 版本，同样替换成 `registry.cn-hangzhou.aliyuncs.com/example` 前缀
 2. kube-state-metrics —— 这个镜像不是在主 `values.yaml` 里定义的，得再挖一层：
 
 ```bash
@@ -204,21 +204,21 @@ kubectl get pod -n monitoring
 
 ```text
 NAME                                                     READY   STATUS    RESTARTS   AGE
-alertmanager-imoocprom-alertmanager-0                     1/1     Running   0          5m
-grafana-imoocprom-grafana-5f7d9c8b6-x7k2p                 1/1     Running   0          5m
+alertmanager-exampleprom-alertmanager-0                     1/1     Running   0          5m
+grafana-exampleprom-grafana-5f7d9c8b6-x7k2p                 1/1     Running   0          5m
 kube-state-metrics-xxxxx                                  1/1     Running   0          5m
 node-exporter-xxxxx                                       1/1     Running   0          5m
 node-exporter-yyyyy                                       1/1     Running   0          5m
 node-exporter-zzzzz                                       1/1     Running   0          5m
-prometheus-imoocprom-operator-6c9d8f7b4-h5s2m             1/1     Running   0          5m
-prometheus-imoocprom-prometheus-0                         1/1     Running   1          5m
+prometheus-exampleprom-operator-6c9d8f7b4-h5s2m             1/1     Running   0          5m
+prometheus-exampleprom-prometheus-0                         1/1     Running   1          5m
 ```
 
 更细致地看一下：
 
 ```bash
 kubectl get deploy -n monitoring
-# 三个 Deployment，都以 Helm 名字 imoocprom 开头：
+# 三个 Deployment，都以 Helm 名字 exampleprom 开头：
 #   kube-state-metrics
 #   prometheus-operator（自定义控制器那个 Pod）
 #   （Grafana 也在其中）
@@ -241,7 +241,7 @@ kubectl get svc -n monitoring
 # alertmanager 有一个 service，clusterIP: None（headless）
 # grafana 有一个 service，端口 80
 # kube-state-metrics / node-exporter 各有一个
-# alertmanager-imoocprom-prometheus-operator / prometheus 本身
+# alertmanager-exampleprom-prometheus-operator / prometheus 本身
 ```
 
 这些自动创建的东西，还包括角色、权限的定义，全都在这个 `prometheus-operator` 文件夹里描述。就像插件一样，把这个文件夹里的所有东西创建出来，插在集群上。
@@ -249,7 +249,7 @@ kubectl get svc -n monitoring
 拔掉也很简单：
 
 ```bash
-helm delete imoocprom
+helm delete exampleprom
 # 删完之后还要手动删一下 CRD
 kubectl delete crd prometheusrules.monitoring.coreos.com
 kubectl delete crd alertmanagers.monitoring.coreos.com
@@ -278,7 +278,7 @@ graph TB
             STS2[sts/prometheus]
             GRA[deploy/grafana]
         end
-        SVC[svc/imoocprom-prometheus :80 → 9090]
+        SVC[svc/exampleprom-prometheus :80 → 9090]
     end
     CR1 -->|控制器 reconcile| STS1
     CR2 -->|控制器 reconcile| STS2
@@ -311,19 +311,19 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: prometheus.imooc.com
+    - host: prometheus.example.com
       http:
         paths:
           - path: /
             backend:
-              serviceName: imoocprom-prometheus
+              serviceName: exampleprom-prometheus
               servicePort: 80
 ```
 
 用 `kubectl create` 建好之后，再改一下本地 hosts：
 
 ```text
-127.0.0.1 prometheus.imooc.com
+127.0.0.1 prometheus.example.com
 ```
 
 ## API 速览
@@ -352,12 +352,12 @@ cp -r charts/stable/prometheus-node-exporter prometheus-operator/charts/
 cp -r charts/stable/grafana              prometheus-operator/charts/
 
 # 2. 改镜像（能拉到的除外）
-sed -i 's#k8s.gcr.io/#registry.cn-hangzhou.aliyuncs.com/imooc/#g' prometheus-operator/values.yaml
-sed -i 's#k8s.gcr.io/#registry.cn-hangzhou.aliyuncs.com/imooc/#g' prometheus-operator/charts/kube-state-metrics/values.yaml
-sed -i 's#quay.io/#registry.cn-hangzhou.aliyuncs.com/imooc/#g' prometheus-operator/charts/grafana/values.yaml
+sed -i 's#k8s.gcr.io/#registry.cn-hangzhou.aliyuncs.com/example/#g' prometheus-operator/values.yaml
+sed -i 's#k8s.gcr.io/#registry.cn-hangzhou.aliyuncs.com/example/#g' prometheus-operator/charts/kube-state-metrics/values.yaml
+sed -i 's#quay.io/#registry.cn-hangzhou.aliyuncs.com/example/#g' prometheus-operator/charts/grafana/values.yaml
 
 # 3. 装
-helm install -f values.yaml --name imoocprom --namespace monitoring ./prometheus-operator
+helm install -f values.yaml -name exampleprom -namespace monitoring ./prometheus-operator
 
 # 4. 验收
 kubectl get pod -n monitoring
@@ -367,7 +367,7 @@ kubectl get crd
 
 # 5. 暴露
 kubectl create -f prometheus-ingress.yaml
-echo "127.0.0.1 prometheus.imooc.com" >> /etc/hosts
+echo "127.0.0.1 prometheus.example.com" >> /etc/hosts
 ```
 
 集群最终的资源结构：
@@ -380,17 +380,17 @@ monitoring/
 │   ├── prometheusrules.monitoring.coreos.com
 │   └── servicemonitors.monitoring.coreos.com
 ├── pod/
-│   ├── alertmanager-imoocprom-alertmanager-0
-│   ├── prometheus-imoocprom-prometheus-0
-│   ├── prometheus-imoocprom-operator-xxxxx
-│   ├── grafana-imoocprom-grafana-xxxxx
+│   ├── alertmanager-exampleprom-alertmanager-0
+│   ├── prometheus-exampleprom-prometheus-0
+│   ├── prometheus-exampleprom-operator-xxxxx
+│   ├── grafana-exampleprom-grafana-xxxxx
 │   ├── kube-state-metrics-xxxxx
 │   └── node-exporter-{n1,n2,n3}
 ├── deploy.apps/{kube-state-metrics,prometheus-operator,grafana}
 ├── daemonset.apps/node-exporter
-├── statefulset.apps/{alertmanager-imoocprom-alertmanager,imoocprom-prometheus}
-├── svc/{alertmanager,imoocprom-grafana,imoocprom-prometheus,...}
-└── ingress.extensions/prometheus  →  prometheus.imooc.com
+├── statefulset.apps/{alertmanager-exampleprom-alertmanager,exampleprom-prometheus}
+├── svc/{alertmanager,exampleprom-grafana,exampleprom-prometheus,...}
+└── ingress.extensions/prometheus  →  prometheus.example.com
 ```
 
 | 现象 | 原因 | 处理 |

@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: pipelinerun-params-04
+spec:
+  pipelineRef:
+    name: pipeline-params
+  params:
+    - name: giturl
+      value: gitlab.example.com/golang/go.git
+    - name: branch
+      value: main

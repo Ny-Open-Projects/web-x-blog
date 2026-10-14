@@ -76,10 +76,10 @@ tracing:
   ingress:
     enabled: true
     hosts:
-      - istio-tracing.imooc.com
+      - istio-tracing.example.com
 ```
 
-看上面是不是用到了 Jaeger 的镜像——`provider: jaeger`，tracing 目前的 provider 是 jaeger，所以他会用这个镜像，我们也把它改成自己的仓库（`registry.cn-hangzhou.aliyuncs.com/imooc`）。
+看上面是不是用到了 Jaeger 的镜像——`provider: jaeger`，tracing 目前的 provider 是 jaeger，所以他会用这个镜像，我们也把它改成自己的仓库（`registry.cn-hangzhou.aliyuncs.com/example`）。
 
 ```bash
 helm template istio-core --namespace istio-system > istio.yaml
@@ -89,7 +89,7 @@ kubectl apply -f istio.yaml
 istio-system 下应该有一个新的 tracing 的 Pod。这时候下载镜像有点问题——到节点上看能不能拉下来：
 
 ```bash
-# registry.cn-hangzhou.aliyuncs.com/imooc/...
+# registry.cn-hangzhou.aliyuncs.com/example/...
 # 哦，后面多了一级：多了个 tracing 的目录
 ```
 
@@ -107,7 +107,7 @@ kubectl get pod -n istio-system
 
 ```bash
 # 本机 hosts
-echo "<ingress 节点 IP> istio-tracing.imooc.com" >> /etc/hosts
+echo "<ingress 节点 IP> istio-tracing.example.com" >> /etc/hosts
 ```
 
 打开浏览器访问，default backend 404。看看 service——istio-system 里 tracing 是有的，clusterIP、80 都没问题；看 ingress：
@@ -115,11 +115,11 @@ echo "<ingress 节点 IP> istio-tracing.imooc.com" >> /etc/hosts
 ```bash
 kubectl get ingress -n istio-system
 kubectl describe ingress istio-tracing -n istio-system
-# host: istio-tracing.imooc.com
+# host: istio-tracing.example.com
 # path: /jaeger     ← 最下边也有一个 path 叫 jaeger
 ```
 
-那就这么访问：域名加上 path——`http://istio-tracing.imooc.com/jaeger`。
+那就这么访问：域名加上 path——`http://istio-tracing.example.com/jaeger`。
 
 进去可以看到这边可以选择 service，现在什么数据都没有。
 
@@ -189,7 +189,7 @@ readiness: httpGet ... delay: 200s
 
 ### Zipkin 界面
 
-访问还是刚才那个 `istio-tracing.imooc.com` 加一个 path `/zipkin`：
+访问还是刚才那个 `istio-tracing.example.com` 加一个 path `/zipkin`：
 
 - 第一个是服务名，也可以选 span 名、远程服务名，时间间隔可以根据时间戳去查询，学习时间等各种查询条件
 - 数据可能还没进来，多访问几次、刷新几下就有了
@@ -249,7 +249,7 @@ tracing:
   ingress:
     enabled: true
     hosts:
-      - istio-tracing.imooc.com
+      - istio-tracing.example.com
 EOF
 helm template istio-core --namespace istio-system > istio.yaml
 kubectl apply -f istio.yaml
@@ -257,8 +257,8 @@ kubectl get pod -n istio-system | grep tracing
 
 # 2. hosts + 带 path 访问
 INGRESS_IP=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.clusterIP}')
-echo "$INGRESS_IP istio-tracing.imooc.com" >> /etc/hosts
-# http://istio-tracing.imooc.com/jaeger
+echo "$INGRESS_IP istio-tracing.example.com" >> /etc/hosts
+# http://istio-tracing.example.com/jaeger
 
 # 3. 造数据（100 次，采样 1% 大约抓到 1 条）
 for i in $(seq 100); do curl -s -o /dev/null http://$INGRESS_HOST:$INGRESS_PORT/productpage; done
@@ -266,7 +266,7 @@ for i in $(seq 100); do curl -s -o /dev/null http://$INGRESS_HOST:$INGRESS_PORT/
 # 4. 换成 Zipkin：provider 改 zipkin，先删旧的再 apply
 helm delete "$RELEASE"
 kubectl apply -f istio.yaml
-# http://istio-tracing.imooc.com/zipkin
+# http://istio-tracing.example.com/zipkin
 ```
 
 两种后端的对照：

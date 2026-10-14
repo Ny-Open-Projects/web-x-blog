@@ -1,0 +1,17 @@
+pipeline {
+    agent {
+        node {
+            label 'slave'
+        }
+    }
+
+    stages {
+        stage('Hello') {
+            steps {
+                script {
+                  sh 'hostname;pwd;free -h;touch a.txt'   
+                }
+            }
+        }
+    }
+}

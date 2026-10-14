@@ -1,0 +1,21 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: kubectl-apply
+spec:
+  workspaces:
+    - name: code
+    - name: kubeconfig-secret 
+      mountPath: /root/.kube
+  params:
+    - name: image-tag
+  steps:
+    - name: kubectl-apply
+      image: registry.cn-hangzhou.aliyuncs.com/tool-bucket/tool:kubectl
+      imagePullPolicy: IfNotPresent
+      script: |
+        tag=$(params.image-tag)
+        cd $(workspaces.code.path)/node 
+        sed -i "s#image: .*#image: registry.cn-hangzhou.aliyuncs.com/tool-bucket/public:${tag}#" deploy.yaml
+        kubectl apply -f deploy.yaml 

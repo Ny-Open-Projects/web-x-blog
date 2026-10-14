@@ -3,19 +3,22 @@
 ## 纲要
 
 - 客户端配置收尾
-  - `seata.config.*`：配置中心地址、命名空间、分组
-  - `seata.service.*`：事务分组映射与全局事务开关
-  - `client.rm.report-success-enable`：阶段一上报开关
-- 兼容性改造
-  - Seata 1.4.2 对 `DATETIME` 解析的缺陷
-  - 把业务表的时间字段统一改成 `TIMESTAMP`
-- AT 模式运行观测
-  - 一阶段本地提交立即生效，不等全局事务结束
-  - `global_table` 中的运行中全局事务
-  - `undo_log` 中的逆向 SQL（`rollback_info`）
-- 完整验证
-  - 断点中断导致 RM 与 TC 失联，触发一阶段回滚
-  - 无断点正常下单，订单入库、库存扣减、undo_log 被清理
+## 📎 文本↔代码关联
+
+本讲对应课件源码（去品牌化副本，位于 `code/socialecom/`；包名已由原占位包名统一改写为 `com.social.ecom`）：
+
+| 代码文件 | 正文提及 | 职责 |
+| --- | --- | --- |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/pojo/Trade.java` | 7 次 | 实体类，主键 `IdType.AUTO` 自增，含自动填充时间字段 |
+| `code/socialecom/第四章代码/socialecom/src/main/resources/application.properties` | 4 次 | 应用配置（数据源 / MyBatis-Plus 日志 / 端口） |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/SocialecomApplication.java` | 3 次 | Spring Boot 启动类（组件扫描入口） |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/TradeMapper.java` | 3 次 | `Trade` 的 MyBatis-Plus Mapper 接口 |
+| `code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TradeMapper.xml` | 3 次 | Mapper XML（SQL 映射） |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/service/StockService.java` | 2 次 | `Stock` 业务服务接口 |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/service/SkuService.java` | 2 次 | `Sku` 业务服务接口 |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/service/TradeService.java` | 2 次 | `Trade` 业务服务接口 |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/service/impl/TradeServiceImpl.java` | 2 次 | `Trade` 业务服务实现（继承 ServiceImpl） |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/pojo/Stock.java` | 1 次 | 实体类，主键 `IdType.AUTO` 自增，含自动填充时间字段 |
 
 ## 补齐客户端剩余配置
 

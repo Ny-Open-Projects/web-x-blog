@@ -9,6 +9,10 @@
 - BoxService 的 putBox 语义：一条消息同时写入发件箱与粉丝收件箱，大 V 走特殊策略
 - RowKey 生成工具类的完整实现与单元测试思路
 
+## 📎 代码说明
+
+本讲代码以**内联片段**形式呈现在正文中。课程课件仅发布第 2/3/4 章（MySQL 核心能力）的完整工程源码，本讲所属章节未随课件发布独立源码文件，故不做外部文件关联，请以正文片段为准。
+
 ## 为什么需要收件箱与发件箱
 
 Feed 流的数据模型可以拆成两层：
@@ -53,7 +57,7 @@ create 'inbox', 'base'
 由于 HBase 侧没有 schema，字段的定义与校验必须由应用层承担。两个实体的字段几乎一致，区别在于 `userId` 的语义：
 
 ```java
-package com.imooc.socialecom.pojo;
+package com.social.ecom.pojo;
 
 import java.util.Date;
 
@@ -109,7 +113,7 @@ public class OutboxInfo {
 ```
 
 ```java
-package com.imooc.socialecom.pojo;
+package com.social.ecom.pojo;
 
 import java.util.Date;
 
@@ -141,9 +145,9 @@ public class InboxInfo {
 服务接口只暴露一个入口，把"投递策略"收敛在实现类内部：
 
 ```java
-package com.imooc.socialecom.service;
+package com.social.ecom.service;
 
-import com.imooc.socialecom.pojo.MessageInfo;
+import com.social.ecom.pojo.MessageInfo;
 
 public interface BoxService {
 
@@ -159,11 +163,11 @@ public interface BoxService {
 实现类上需要注入两类依赖：HBase 连接，以及上一章封装的关注关系仓储（用于拿到粉丝列表）：
 
 ```java
-package com.imooc.socialecom.service.impl;
+package com.social.ecom.service.impl;
 
-import com.imooc.socialecom.pojo.MessageInfo;
-import com.imooc.socialecom.repository.NeoUserRepository;
-import com.imooc.socialecom.service.BoxService;
+import com.social.ecom.pojo.MessageInfo;
+import com.social.ecom.repository.NeoUserRepository;
+import com.social.ecom.service.BoxService;
 import org.apache.hadoop.hbase.client.Connection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -230,7 +234,7 @@ flowchart LR
 ## RowKey 生成实现
 
 ```java
-package com.imooc.socialecom.helper;
+package com.social.ecom.helper;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

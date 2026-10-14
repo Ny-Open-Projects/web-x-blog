@@ -82,7 +82,7 @@ spec:
             - containerPort: 8080
 ```
 
-配好 Ingress（`web-recreate.imooc.com`）后浏览器访问正常。随便改点东西触发更新 —— 比如给 `template.metadata.labels` 加一个 `type: webapp`：
+配好 Ingress（`web-recreate.example.com`）后浏览器访问正常。随便改点东西触发更新 —— 比如给 `template.metadata.labels` 加一个 `type: webapp`：
 
 ```bash
 kubectl apply -f web-recreate.yaml -n dev
@@ -165,7 +165,7 @@ strategy:
 
 ```bash
 while true; do
-  curl -s http://web-rollingupdate.imooc.com/hello?name=michael
+  curl -s http://web-rollingupdate.example.com/hello?name=michael
   echo
   sleep 0.2
 done
@@ -214,7 +214,7 @@ kubectl get pod -n dev
 **当前处于一个稳定状态：有新版本可用、也有旧版本可用。** 这时候反复访问，会间歇访问到两个服务 —— **这正好给了你一个测试机会**：
 
 ```bash
-while true; do curl -s http://web-rollingupdate.imooc.com/hello?name=michael; echo; sleep 0.2; done
+while true; do curl -s http://web-rollingupdate.example.com/hello?name=michael; echo; sleep 0.2; done
 ```
 
 > 典型用法：**有 10 个实例的服务，滚动到第一个实例启动就 pause 掉**，先验证新版本有没有问题；没问题再继续。
@@ -425,7 +425,7 @@ spec:
 # 终端一：持续探测
 while true; do
   DATE=$(date +%H:%M:%S)
-  RESP=$(curl -s -m 3 http://web-rollingupdate.imooc.com/hello?name=michael)
+  RESP=$(curl -s -m 3 http://web-rollingupdate.example.com/hello?name=michael)
   echo "${DATE} ${RESP}"
   sleep 0.2
 done
@@ -471,7 +471,7 @@ kubectl patch svc web-bluegreen -n dev -p '{"spec":{"selector":{"app":"web-blueg
 kubectl patch svc web-bluegreen -n dev -p '{"spec":{"selector":{"app":"web-bluegreen"}}}'
 
 # 观察流量比例
-for i in $(seq 1 10); do curl -s http://web-bluegreen.imooc.com/hello?name=michael; echo; done
+for i in $(seq 1 10); do curl -s http://web-bluegreen.example.com/hello?name=michael; echo; done
 ```
 
 ### 总结

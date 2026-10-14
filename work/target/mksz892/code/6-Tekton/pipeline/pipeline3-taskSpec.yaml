@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: security-scans
+spec:
+  tasks:
+    - name: scorecards
+      taskSpec:
+        steps:
+          - image: alpine
+            name: step-1
+            script: |
+              echo "Generating scorecard report ..."
+    - name: codeql
+      taskSpec:
+        steps:
+          - image: alpine
+            name: step-1
+            script: |
+              echo "Generating codeql report ..."

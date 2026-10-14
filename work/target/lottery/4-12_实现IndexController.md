@@ -17,7 +17,7 @@ package controllers
 
 import (
 	"github.com/kataras/iris"
-	"imooc.com/lottery/services"
+	"example.com/lottery/services"
 )
 
 type IndexController struct {

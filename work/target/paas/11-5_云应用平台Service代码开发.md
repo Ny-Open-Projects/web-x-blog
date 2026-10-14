@@ -20,8 +20,8 @@
 package service
 
 import (
-    "git.imooc.com/coding-535/appStore/domain/model"
-    "git.imooc.com/coding-535/appStore/domain/repository"
+    "git.example.com/coding-535/appStore/domain/model"
+    "git.example.com/coding-535/appStore/domain/repository"
     "k8s.io/client-go/kubernetes"
 )
 

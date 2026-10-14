@@ -1,0 +1,38 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: cm-with-message
+spec:
+  components:
+    - name: podinfo
+      outputs:
+        - name: message
+          valueFrom: output.status.conditions[0].message
+        - name: ip
+          valueFrom: outputs.service.spec.clusterIP
+      properties:
+        image: stefanprodan/podinfo:4.0.3
+      type: webservice
+      traits:
+        - type: expose
+          properties:
+            port: [ 80 ]
+    - name: configmap
+      dependsOn:
+        - podinfo
+      properties:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: deployment-msg
+      type: raw
+      inputs:
+        - from: message
+          parameterKey: data.msg
+        - from: ip
+          parameterKey: data.ip
+  policies:
+    - name: topo
+      properties:
+        clusters: [ "local"]
+      type: topology

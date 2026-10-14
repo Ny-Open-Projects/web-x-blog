@@ -51,7 +51,7 @@ package datasource
 import (
 	"sync"
 
-	"imooc.com/lottery/conf"
+	"example.com/lottery/conf"
 	"github.com/gomodule/redigo/redis"
 )
 
@@ -107,7 +107,7 @@ import (
 	"fmt"
 	"time"
 
-	"imooc.com/lottery/conf"
+	"example.com/lottery/conf"
 	"github.com/gomodule/redigo/redis"
 )
 

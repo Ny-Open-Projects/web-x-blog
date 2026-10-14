@@ -1,0 +1,71 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-node-project
+spec:
+  params:
+    - name: giturl
+    - name: branch
+  workspaces:
+    - name: code
+    - name: aliyun-image-registry-secert
+    - name: kubeconfig-secret
+  tasks:
+    - name: git-clone
+      taskRef:
+        name: git-clone
+      params:
+        - name: giturl
+          value: "$(params.giturl)"
+        - name: branch
+          value: "$(params.branch)"
+      workspaces:
+        - name: code
+          workspace: code
+    - name: generate-build-tag
+      taskRef:
+        name: generate-build-tag
+      params:
+        - name: branch
+          value: "$(params.branch)"
+      runAfter:
+        - git-clone
+    - name: image-build-and-push
+      taskRef:
+        name: image-build-and-push
+      params:
+        - name: image-tag
+          value: "$(tasks.generate-build-tag.results.datetime)"
+      workspaces:
+        - name: aliyun-image-registry-secert
+          workspace: aliyun-image-registry-secert
+        - name: code
+          workspace: code
+      runAfter:
+        - generate-build-tag
+    - name: kubectl-apply
+      taskRef:
+        name: kubectl-apply
+      params:
+        - name: image-tag
+          value: "$(tasks.generate-build-tag.results.datetime)"
+      workspaces:
+        - name: kubeconfig-secret 
+          workspace: kubeconfig-secret 
+        - name: code
+          workspace: code
+      runAfter:
+        - image-build-and-push
+  finally:
+    - name: cleanup-workspace-and-alert
+      taskRef:
+        name: cleanup-workspace-and-alert
+      params:
+        - name: task1Status
+          value: "$(tasks.git-clone.status)"
+        - name: task2Status
+          value: "$(tasks.generate-build-tag.status)"
+        - name: task3Status
+          value: "$(tasks.image-build-and-push.status)"
+        - name: task4Status
+          value: "$(tasks.kubectl-apply.status)"

@@ -129,7 +129,7 @@ flowchart LR
 
 Ingress 的思路是把"怎么转发"这件事抽象成一条配置，交给用户来声明：
 
-- 配一个域名 host，比如 `api.imooc.com`
+- 配一个域名 host，比如 `api.example.com`
 - 在这个域名下再配一个路径 path，比如 `/api`
 - 声明这个路径下的请求要转发给哪个 Service
 
@@ -137,7 +137,7 @@ Ingress 的思路是把"怎么转发"这件事抽象成一条配置，交给用�
 
 ```mermaid
 flowchart LR
-    CLIENT["浏览器 / 外部客户端"] -->|"api.imooc.com/api"| NG["Ingress Controller<br/>内置 Nginx"]
+    CLIENT["浏览器 / 外部客户端"] ->|"api.example.com/api"| NG["Ingress Controller<br/>内置 Nginx"]
     NG -->|"监听事件自动同步配置"| IC["Ingress 资源"]
     IC -->|"host + path"| SVC["Service api-service"]
     SVC --> P1["Pod API-1"]
@@ -323,7 +323,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: api.imooc.com
+    - host: api.example.com
       http:
         paths:
           - path: /api

@@ -1,0 +1,28 @@
+kind: pipeline   
+type: kubernetes  
+name: default    
+
+clone:
+  depth: 1
+
+steps:
+- name: dingtalk
+  image: lddsb/drone-dingtalk-message
+  settings:
+    token: https://oapi.dingtalk.com/robot/send?access_token=3c33679524b26a80e35f0d4babf57ed1f968c6422ceb941b375568f5b950ad64
+    type: markdown
+
+- name: send
+  image: plugins/webhook
+  settings:
+    debug: true
+    urls:
+      - https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=2b6b1245-614e-43da-9724-b941234910f9
+    content_type: application/json
+    template: |
+      {
+        "msgtype": "text",
+        "text": {
+         "content": "owner: {{ repo.owner }}\nRepo: {{ repo.name }}\nStatus: {{ build.status }}"
+        }
+      }

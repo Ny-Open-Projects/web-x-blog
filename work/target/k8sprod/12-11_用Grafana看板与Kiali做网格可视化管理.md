@@ -9,7 +9,7 @@ tags: [Istio, Grafana, Kiali, dashboard, P50/P90/P99, 网格可视化, Istio Con
 ## 纲要
 
 - 插件里带有一个预配置的 Grafana Dashboard，可以直接对网格的流量进行监控
-- 开 Grafana 三件事：`grafana.enabled: true`、镜像换源、开 ingress 配 `istio-grafana.imooc.com`
+- 开 Grafana 三件事：`grafana.enabled: true`、镜像换源、开 ingress 配 `istio-grafana.example.com`
 - `contextPath` 要设成根目录，不然访问会打回 default backend
 - 仪表盘已经预置好：Mixer Performance、Pilot、Service、Workload 等组件相关看板
 - Service 面板看请求速率与成功率（global request rate 1.16 PS），Workload 面板看 P50 / P90 / P99 延迟
@@ -30,25 +30,25 @@ tags: [Istio, Grafana, Kiali, dashboard, P50/P90/P99, 网格可视化, Istio Con
 grafana:
   enabled: true
   image:
-    repository: registry.cn-hangzhou.aliyuncs.com/imooc
+    repository: registry.cn-hangzhou.aliyuncs.com/example
   ingress:
     enabled: true
     hosts:
-      - istio-grafana.imooc.com
+      - istio-grafana.example.com
   contextPath: /
 ```
 
-`repository` 确实是原来的，改成自己的仓库（杭州那个 `registry.cn-hangzhou.aliyuncs.com/imooc/istio`）。下边还有吗？好了，下边没有什么需要改的了。
+`repository` 确实是原来的，改成自己的仓库（杭州那个 `registry.cn-hangzhou.aliyuncs.com/example/istio`）。下边还有吗？好了，下边没有什么需要改的了。
 
-然后还有一个 ingress，我们也一块给它开启吧——肯定是要访问的 `istio-grafana.imooc.com`。`contextPath` 这个我们改成根（`/`）呗，其他的不需要。继续去生成一下 istio.yaml，生成模板文件，apply。
+然后还有一个 ingress，我们也一块给它开启吧——肯定是要访问的 `istio-grafana.example.com`。`contextPath` 这个我们改成根（`/`）呗，其他的不需要。继续去生成一下 istio.yaml，生成模板文件，apply。
 
 下一步就可以去检查 Grafana 的服务是否运行——没问题，运行着。然后通过 Grafana 的 UI 打开 Istio 仪表盘就可以访问了。访问之前，配置一个 hosts：
 
 ```bash
-echo "<ingress 节点 IP> istio-grafana.imooc.com" >> /etc/hosts
+echo "<ingress 节点 IP> istio-grafana.example.com" >> /etc/hosts
 ```
 
-访问 `istio-grafana.imooc.com`，确实是可以访问了。
+访问 `istio-grafana.example.com`，确实是可以访问了。
 
 ### 看板里有什么
 
@@ -90,20 +90,20 @@ kubectl create secret generic kiali \
 ```yaml
 kiali:
   enabled: true
-  image: registry.cn-hangzhou.aliyuncs.com/imooc    # 镜像要改
+  image: registry.cn-hangzhou.aliyuncs.com/example    # 镜像要改
   contextPath: /                                    # 访问 UI 的 contextPath 改掉
   ingress:
     enabled: true
     hosts:
-      - istio-kiali.imooc.com
+      - istio-kiali.example.com
 ```
 
-首先一个 Docker 的镜像，我们就需要改了（改一下镜像地址）；然后 `contextPath`——我们改掉，访问它 UI 的时候用；是不是还应该有一个 ingress？既然有 UI 的话，一并给它都改掉，hosts 是 `istio-kiali.imooc.com`，其他的就不需要改了。然后再生成一下 istio.yaml，再生成一下带有 Kiali 的配置。
+首先一个 Docker 的镜像，我们就需要改了（改一下镜像地址）；然后 `contextPath`——我们改掉，访问它 UI 的时候用；是不是还应该有一个 ingress？既然有 UI 的话，一并给它都改掉，hosts 是 `istio-kiali.example.com`，其他的就不需要改了。然后再生成一下 istio.yaml，再生成一下带有 Kiali 的配置。
 
 bookinfo 应用早就部署完了。验证一下肯定没问题；给网格发送流量，然后访问 Kiali 的 service——行了，然后就可以去访问了；不过还不行，我们还要配置一下 hosts。
 
 ```bash
-echo "<ingress 节点 IP> istio-kiali.imooc.com" >> /etc/hosts
+echo "<ingress 节点 IP> istio-kiali.example.com" >> /etc/hosts
 ```
 
 访问一下——503，说明我们的服务是不是还没起来？
@@ -180,11 +180,11 @@ graph LR
 | --- | --- | --- |
 | 开 Grafana | `grafana.enabled: true` | 插件自带预置 Dashboard |
 | Grafana 换镜像 | charts/grafana 的 `image.repository` | 换成自己的仓库 |
-| 暴露 Grafana | `grafana.ingress.enabled: true` + hosts | `istio-grafana.imooc.com` |
+| 暴露 Grafana | `grafana.ingress.enabled: true` + hosts | `istio-grafana.example.com` |
 | 修 404 | `grafana.contextPath: /` | 否则 default backend |
 | 看延迟分位 | Service / Workload 面板 | P50 / P90 / P99 |
 | Kiali 登录凭证 | `kubectl create secret generic kiali --from-literal=username=admin --from-literal=password=mysecret` | 用户名密码就是登录信息 |
-| 开 Kiali | `kiali.enabled: true` + 镜像 + contextPath + ingress | hosts 写 `istio-kiali.imooc.com` |
+| 开 Kiali | `kiali.enabled: true` + 镜像 + contextPath + ingress | hosts 写 `istio-kiali.example.com` |
 | 读改配置 | Kiali → Istio Config | Gateway / VirtualService 可在线改存 |
 | 看调用关系 | Kiali → Graph | 是版本级关系，不是单请求链路 |
 
@@ -193,23 +193,23 @@ graph LR
 ```bash
 # 1. 开 Grafana + ingress
 #    grafana.enabled: true
-#    grafana.image.repository: registry.cn-hangzhou.aliyuncs.com/imooc
-#    grafana.ingress.enabled: true  hosts: [istio-grafana.imooc.com]
+#    grafana.image.repository: registry.cn-hangzhou.aliyuncs.com/example
+#    grafana.ingress.enabled: true  hosts: [istio-grafana.example.com]
 #    grafana.contextPath: /
 helm template istio-core --namespace istio-system > istio.yaml
 kubectl apply -f istio.yaml
-echo "<ingress IP> istio-grafana.imooc.com" >> /etc/hosts
-# 打开 http://istio-grafana.imooc.com  → 刷新 bookinfo 造流量
+echo "<ingress IP> istio-grafana.example.com" >> /etc/hosts
+# 打开 http://istio-grafana.example.com  → 刷新 bookinfo 造流量
 
 # 2. Kiali
 kubectl -n istio-system create secret generic kiali \
   --from-literal=username=admin --from-literal=password=mysecret
 #    kiali.enabled: true
 #    kiali image + contextPath: /
-#    kiali.ingress.enabled: true  hosts: [istio-kiali.imooc.com]
+#    kiali.ingress.enabled: true  hosts: [istio-kiali.example.com]
 kubectl apply -f istio.yaml
 kubectl get pod -n istio-system      # ImagePullBackOff 就查 values 里多的一层目录
-echo "<ingress IP> istio-kiali.imooc.com" >> /etc/hosts
+echo "<ingress IP> istio-kiali.example.com" >> /etc/hosts
 # 登录 admin / mysecret
 ```
 

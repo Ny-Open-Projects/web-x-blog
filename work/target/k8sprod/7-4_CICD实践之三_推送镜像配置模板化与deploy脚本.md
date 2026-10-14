@@ -34,7 +34,7 @@ VERSION=${VERSION:-$(date +%Y%m%d%H%M%S)}
 把版本填进镜像名。构建与推送统一提取成一个变量 `IMAGE`，build 与 push 都用这一个对象，build 之前先打印一行"正在构建镜像"，整个脚本看起来就完整了：
 
 ```bash
-IMAGE="hub.imooc.com/library/${JOB_NAME}:${VERSION}"
+IMAGE="hub.example.com/library/${JOB_NAME}:${VERSION}"
 
 echo "building image: ${IMAGE}"
 docker build -t ${IMAGE} .
@@ -60,7 +60,7 @@ docker build -t ${IMAGE} .
 **第三次失败，卡在 push。** push 没有权限，需要先登录私有仓库。把仓库地址复制下来，用户名密码填好，**只在 Jenkins 这台机器上登录一次**就行：
 
 ```bash
-docker login hub.imooc.com
+docker login hub.example.com
 ```
 
 再重试，镜像成功 push 上去，镜像构建这一阶段就算完了。
@@ -90,7 +90,7 @@ docker login hub.imooc.com
 
 第二个，IMAGE 是上一阶段 buildimage 构建出来的，构建完并没有告诉任何人，脚本拿不到。解决办法是**用本地文件通讯**：把镜像名 echo 到一个文件里，写到工作空间下，比如 `$WORKSPACE/image`；下一个脚本从这个文件把内容取出来，就拿到镜像名了。
 
-第三个，`HOST` 在 Pipeline 脚本里再定义一个环境变量就行，比如 `HOST=k8sweb.imooc.com`。
+第三个，`HOST` 在 Pipeline 脚本里再定义一个环境变量就行，比如 `HOST=k8sweb.example.com`。
 
 三个变量都拿到了，先打印出来核对一遍，再去做替换。
 
@@ -215,7 +215,7 @@ spec:
 buildimage.sh 末尾把镜像名落盘：
 
 ```bash
-IMAGE="hub.imooc.com/library/${JOB_NAME}:${VERSION}"
+IMAGE="hub.example.com/library/${JOB_NAME}:${VERSION}"
 echo "building image: ${IMAGE}"
 docker build -t ${IMAGE} .
 docker push ${IMAGE}
@@ -230,14 +230,14 @@ pipeline {
 
     environment {
         BUILD_DIR = '/root/buildworkspace'
-        HOST      = 'k8sweb.imooc.com'
+        HOST      = 'k8sweb.example.com'
     }
 
     stages {
         stage('拉取代码') {
             steps {
                 git branch: 'main',
-                    url: 'https://gitee.com/imooc/imooc-k8sdemo.git'
+                    url: 'https://gitee.com/example/example-k8sdemo.git'
             }
         }
         stage('Maven 构建') {
@@ -283,14 +283,14 @@ pipeline {
 
     environment {
         BUILD_DIR = '/root/buildworkspace'
-        HOST      = 'k8sweb.imooc.com'
+        HOST      = 'k8sweb.example.com'
     }
 
     stages {
         stage('拉取代码') {
             steps {
                 git branch: 'main',
-                    url: 'https://gitee.com/imooc/imooc-k8sdemo.git'
+                    url: 'https://gitee.com/example/example-k8sdemo.git'
             }
         }
         stage('Maven 构建') {
@@ -310,12 +310,12 @@ pipeline {
 
 ```bash
 # 先登录私有仓库
-docker login hub.imooc.com
+docker login hub.example.com
 
 # 手动喂一遍变量，避免每次都走完整流水线
 WORKSPACE=/root/.jenkins/workspace/k8swebdemo \
 JOB_NAME=k8swebdemo \
-HOST=k8sweb.imooc.com \
+HOST=k8sweb.example.com \
 bash /root/scripts/deploy.sh
 ```
 
@@ -341,7 +341,7 @@ kubectl apply -f ./web.yaml
 grep -n "__" ./web.yaml
 
 # 四、域名没生效，确认 Ingress 的 host 与客户端 Host 头一致
-curl -s -o /dev/null -w "%{http_code}\n" http://192.155.20.120/ -H "Host: k8sweb.imooc.com"
+curl -s -o /dev/null -w "%{http_code}\n" http://192.155.20.120/ -H "Host: k8sweb.example.com"
 
 # 五、部署后副本没起来，看事件与探针
 kubectl describe pod -l app=k8swebdemo | tail -20

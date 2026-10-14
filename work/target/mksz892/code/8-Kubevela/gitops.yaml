@@ -1,0 +1,22 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: kubevela-gitops
+  namespace: test-app
+spec:
+  components:
+  - name: gitops-config
+    type: kustomize
+    properties:
+      repoType: git
+      # 将此处替换成你需要监听的 git 配置仓库地址
+      url: http://gitlab.example.com/kubevela/gitops.git
+      # 如果是私有仓库，还需要关联 git secret
+      secretRef: git-secret
+      # 自动拉取配置的时间间隔，此处设置为1分钟
+      pullInterval: 1m
+      git:
+        # 监听变动的分支 
+        branch: main
+      # 监听变动的路径，指向仓库中 app 目录下的文件
+      path: ./app

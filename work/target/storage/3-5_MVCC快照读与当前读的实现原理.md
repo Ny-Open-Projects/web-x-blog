@@ -3,18 +3,9 @@
 ## 纲要
 
 - 两组关键概念
-  - 快照读（Snapshot Read）：走 MVCC 多版本视图控制，不加锁
-  - 当前读（Current Read）：走锁争夺，包含行锁、间隙锁、表锁
-- 快照读如何工作
-  - 行记录背后的 `version` 版本号（InnoDB 内部，非应用层乐观锁字段）
-  - 事务开启时取全局 transaction id，依据"已提交的最新版本"判定可见性
-  - 为什么事务生命周期内永远读到同一份快照
-- 当前读如何工作
-  - `select for update` 必定读最新版本，读不到就阻塞等锁
-  - 由此推导出 `update` / `insert` / `delete` 天然就是当前读
-- 锁的三种形态
-  - 表锁、行锁的判定：查询条件是否走了索引
-  - `select * from user for update` 为什么极度不推荐
+## 📎 代码说明
+
+本讲代码以**内联片段**形式呈现在正文中。本章课件源码（`code/socialecom/第三章代码/`）中无正文直接引用的类文件，故不做文件级关联，请以正文片段为准。
 
 ## 正文
 
@@ -53,11 +44,11 @@
 
 ```mermaid
 flowchart TD
-    A["insert id=1, version=1<br/>username=IMOOC"] --> B["事务T1: UPDATE username=IMOOC2"]
-    B --> C["生成 version=2 的快照<br/>username=IMOOC2, 未提交"]
+    A["insert id=1, version=1<br/>username=USER"] --> B["事务T1: UPDATE username=USER2"]
+    B --> C["生成 version=2 的快照<br/>username=USER2, 未提交"]
     C --> D{"事务T2 发起 SELECT"}
     D -->|"version=2 未提交"| E["不可见, 回退到 version=1"]
-    E --> F["T2 读到 username=IMOOC"]
+    E --> F["T2 读到 username=USER"]
     C --> G["T1 COMMIT"]
     G --> H{"T2 再次 SELECT"}
     H --> I["仍读 version=1 的快照<br/>T2 生命周期内不变"]
@@ -81,7 +72,7 @@ flowchart TD
 ```sql
 -- 事务 A
 BEGIN;
-UPDATE user SET username = 'IMOOC2' WHERE id = 1;   -- 未提交
+UPDATE user SET username = 'USER2' WHERE id = 1;   -- 未提交
 
 -- 事务 B
 BEGIN;
@@ -95,7 +86,7 @@ SELECT * FROM user WHERE id = 1 FOR UPDATE;         -- 阻塞，直到 A 提交
 
 两条路都走不通，唯一的办法就是**让 B 等待**。这也解释了 `SELECT FOR UPDATE` 为什么会给行记录加锁：本质原因是 `id = 1` 这条数据正处于"已修改待提交"状态，而事务 A 在执行 `UPDATE`（本身就是当前读）时已经优先给这条记录上了锁。B 的当前读隐含着对这条行锁的争夺，自然拿不到锁。
 
-一旦事务 A `COMMIT`，B 的当前读解锁，就能读到最新的 `version = 2`、`username = IMOOC2`。
+一旦事务 A `COMMIT`，B 的当前读解锁，就能读到最新的 `version = 2`、`username = USER2`。
 
 > 换句话说：**当前读是"我要读最新且已可见的版本，读不到就等"，而"等"的表现形式就是锁等待。**
 
@@ -141,7 +132,7 @@ SELECT * FROM user WHERE username = 'unique_name' FOR UPDATE;
 
 ```sql
 -- 先快照读拿主键（不加锁）
-SELECT id FROM user WHERE username = 'IMOOC1';
+SELECT id FROM user WHERE username = 'USER1';
 
 -- 再用主键当前读逐行加锁处理
 SELECT * FROM user WHERE id = 1 FOR UPDATE;

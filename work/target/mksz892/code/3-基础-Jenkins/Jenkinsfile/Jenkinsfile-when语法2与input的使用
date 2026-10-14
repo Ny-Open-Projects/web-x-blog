@@ -1,0 +1,56 @@
+pipeline {
+    agent any 
+    options {
+        timestamps() 
+        parallelsAlwaysFailFast()
+        disableConcurrentBuilds(abortPrevious: true) 
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        skipDefaultCheckout() 
+    }	
+    parameters {
+        choice choices: ['master', 'pre', 'test'], name: 'branch'
+    }
+    environment {
+		DEPLOY_TO = 'production'
+    }   
+    stages {
+        stage('Example Deploy') {
+            when {
+                anyOf {
+                    expression { DEPLOY_TO ==~ /(production|masters)/ }
+                    expression {
+                        return BUILD_NUMBER >= 100
+                    }
+                }
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }		
+        stage('deploy') {
+            when {
+                not {
+                    equals expected: branch, actual: 'master'
+                }
+            }
+            steps {
+                echo "deploy success"
+            }
+        }		
+        stage('审核发布') {
+            input {
+                message "这个构建你自已确认吗?"
+                ok "是的，我确认."
+                //parameters {
+                //    string(name: 'PERSON', defaultValue: '我要发布', description: '你是为什么什么原因要构建呢?')
+                //}
+            }
+            steps {
+				script{
+                    cleanWs()
+                    //echo "${PERSON}"                  
+				}
+            }
+        }	        
+    }
+}

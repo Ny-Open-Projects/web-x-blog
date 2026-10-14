@@ -1,0 +1,17 @@
+kind: pipeline   
+type: kubernetes  
+name: default    
+
+clone:
+  disable: true
+
+steps:
+- name: trigger jenkins job
+  image: appleboy/drone-jenkins
+  settings:
+    url: http://10.0.7.101:32000
+    user: test
+    token: 11740bb8ccb6ad506efa0d8de2eb90df26
+    job: jenkins-kaniko
+
+

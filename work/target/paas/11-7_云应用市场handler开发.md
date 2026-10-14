@@ -17,11 +17,11 @@ package handler
 
 import (
 	"context"
-	"git.imooc.com/coding-535/appStore/domain/model"
-	"git.imooc.com/coding-535/appStore/domain/service"
-	"git.imooc.com/coding-535/common"
+	"git.example.com/coding-535/appStore/domain/model"
+	"git.example.com/coding-535/appStore/domain/service"
+	"git.example.com/coding-535/common"
 	log "github.com/asim/go-micro/v3/logger"
-	appStore "git.imooc.com/coding-535/appStore/proto/appStore"
+	appStore "git.example.com/coding-535/appStore/proto/appStore"
 	"strconv"
 )
 

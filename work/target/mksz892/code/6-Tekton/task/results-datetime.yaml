@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: results-datetime
+spec:
+  results:
+    - name: datetime
+  steps:
+    - name: define-datetime
+      image: alpine:3.16
+      imagePullPolicy: IfNotPresent
+      script: |
+        #!/bin/sh
+        datetime=`date +%Y%m%d-%H%M%S`
+        echo -n ${datetime} | tee $(results.datetime.path)        
+    - name: echo-datetime
+      image: alpine:3.16
+      imagePullPolicy: IfNotPresent
+      script: |
+        #!/bin/sh
+        echo $(results.datetime.path)
+        ls -la $(results.datetime.path)
+        cat $(results.datetime.path)

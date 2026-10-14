@@ -1,0 +1,39 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-clone
+spec:
+  description: Clone the code repository to the workspace.
+  params:
+    - name: giturl
+    - name: branch
+  workspaces:
+    - name: code
+  steps:
+    - name: git-clone
+      image: bitnami/git:latest
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: git_username
+          valueFrom:
+            secretKeyRef:
+              name: gitlab-secert
+              key: username
+        - name: git_password
+          valueFrom:
+            secretKeyRef:
+              name: gitlab-secert
+              key: password
+      script: |
+        url=$(params.giturl)
+        new_url=$(echo $url | awk -F"http://" '{print $2}')
+        branch=$(params.branch)
+        build_branch=$(echo "$branch" | awk -F'/' '{print $NF}')
+        echo ${build_branch} ${new_url} ${git_username}:${git_password}
+        git clone -b ${build_branch} -v http://${git_username}:${git_password}@${new_url} $(workspaces.code.path)/node
+    - name: list-file
+      image: alpine
+      imagePullPolicy: IfNotPresent
+      command:
+        - /bin/sh
+      args: ['-c', 'ls -la $(workspaces.code.path)/node']

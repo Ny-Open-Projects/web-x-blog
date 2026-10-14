@@ -1,0 +1,31 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: first-vela-app
+  namespace: test
+spec:
+  components:
+    - name: express-server
+      type: webservice
+      properties:
+        image: oamdev/hello-world
+        ports:
+         - port: 8000
+           expose: true
+      traits:
+        - type: scaler
+          properties:
+            replicas: 1
+  policies:
+    - name: target-local-k8s
+      type: topology
+      properties:
+        clusters: ["local"]
+        namespace: "test-app"
+
+  workflow:
+    steps:
+      - name: deploy-to-local-k8s
+        type: deploy
+        properties:
+          policies: ["target-local-k8s"]

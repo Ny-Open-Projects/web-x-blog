@@ -1,0 +1,19 @@
+kind: pipeline    # 资源类型
+type: kubernetes  # 管道类型：kubernetes、docker、ssh、exec等
+name: default     # 管道名称
+
+clone:
+  depth: 1
+
+steps:
+- name: step1
+  image: alpine
+  commands:
+  - ls -la
+    
+- name: step2
+  image: alpine
+  commands:
+  - pwd
+  - ls -la
+

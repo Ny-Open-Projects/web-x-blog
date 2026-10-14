@@ -3,14 +3,17 @@
 ## 纲要
 
 - 章节定位
-  - 承接第二章的 `MySQL + Docker` 部署、`Spring Boot` 基础 Web 框架、`MyBatisPlus` 用户模块 CRUD
-  - 目标是把第二章的"能跑"升级为"能承载新零售核心的门店与商品能力"
-- 本章三段式路线
-  - 选型认知：先看清 MySQL 的优劣势边界，明确它在什么情况下能发挥性能极限
-  - 能力内功：事务、索引、读写三大基础能力的原理与调优
-  - 领域落地：新零售领域模型设计 + 商品/门店业务实现
-- 读者收益
-  - 建立"选型—调优—建模"的完整链路视角，而不是停留在 CRUD
+## 📎 文本↔代码关联
+
+本讲对应课件源码（去品牌化副本，位于 `code/socialecom/`；包名已由原占位包名统一改写为 `com.social.ecom`）：
+
+| 代码文件 | 正文提及 | 职责 |
+| --- | --- | --- |
+| `code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/pojo/Shop.java` | 3 次 | 实体类，主键 `IdType.AUTO` 自增，含乐观锁 `version` 字段，含自动填充时间字段 |
+| `code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/pojo/Seller.java` | 3 次 | 实体类，主键 `IdType.AUTO` 自增，含乐观锁 `version` 字段，含自动填充时间字段 |
+| `code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/pojo/SkuAttributeInfo.java` | 2 次 | 实体类，主键 `IdType.AUTO` 自增，含自动填充时间字段 |
+| `code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/pojo/Stock.java` | 2 次 | 实体类，主键 `IdType.AUTO` 自增，含自动填充时间字段 |
+| `code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/pojo/Item.java` | 2 次 | 实体类，主键 `IdType.AUTO` 自增，含自动填充时间字段 |
 
 ## 正文
 
@@ -57,7 +60,7 @@ flowchart LR
 技术能力最终要落到模型上。本章后半段会把一个典型的新零售商品域拆成可落地的实体，并用 MyBatisPlus 完成全套实现：
 
 ```dir
-com.imooc.socialecom
+com.social.ecom
 ├── pojo            领域实体：Seller / Shop / Item / Sku / SkuAttributeInfo / Stock
 ├── mapper          数据访问层
 ├── service         领域服务：级联查询、详情组装

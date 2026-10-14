@@ -1,0 +1,50 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: app-with-k8s-objects
+  namespace: test-app
+spec:
+  components:
+    - name: k8s-demo-service
+      type: k8s-objects
+      properties:
+        objects:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: nginx-object 
+            spec:
+              replicas: 2
+              selector:
+                matchLabels:
+                  app: nginx
+              template:
+                metadata:
+                  labels:
+                    app: nginx
+                spec:
+                  containers:
+                    - image: nginx
+                      name: nginx
+                      ports:
+                        - containerPort: 80
+          - apiVersion: v1
+            kind: Service
+            metadata:
+              labels:
+                app: nginx
+              name: nginx-object
+            spec:
+              ports:
+                - name: http
+                  port: 80
+                  protocol: TCP
+                  targetPort: 80
+              selector:
+                app: nginx
+  policies:
+    - name: topology-hangzhou-clusters
+      type: topology
+      properties:
+        clusters: ["test-k8s", "local"]
+        namespace: test-app

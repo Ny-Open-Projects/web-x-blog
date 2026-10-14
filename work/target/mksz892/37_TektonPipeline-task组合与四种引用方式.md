@@ -1,0 +1,535 @@
+# Tekton Pipeline 实战：Task 组合、四种引用方式与 PipelineRun 唯一名陷阱
+
+## 纲要
+
+- **Pipeline 是 Task 的编排器**：一个到多个 Task 组合而成；`tasks[].name` 是 Pipeline 内部的步骤名，`taskRef.name` 才是真正被调用的 Task，两者不是一回事
+- **四种引用方式构成一张 2×2 矩阵**：`taskRef` / `taskSpec`（Pipeline 层引用 Task）× `pipelineRef` / `pipelineSpec`（PipelineRun 层引用 Pipeline），选型本质是「复用已有资源」还是「内联一次性定义」
+- **三种运行方式覆盖全场景**：声明式 `kubectl apply`（生产标准）、`tkn pipeline start`（调试最快）、Dashboard 点按钮（可视化验证）
+- **PipelineRun 的 name 必须唯一**：重复 apply 同名资源，K8s 只做配置比对而不会重新执行——这是新手最高频的「改了却没跑」疑案
+- **没有依赖关系的 Task 默认并行**：不配 `runAfter` 的 Task 同时启动，谁先完成看容器启动速度，日志天然交错
+- **同一 Task 的多个容器共享 Pod 网络命名空间，但不共享文件系统**：跨容器传数据必须显式声明 workspace， literal `/workspace` 路径在各容器中互不可见
+
+## 一、场景引入：从「一个工序」到「一条产线」
+
+上一篇文章我们把 `Task` 讲透了：一个 Task 就是一条「用哪个镜像、按什么顺序、跑什么脚本」的工序定义。但真实 CI 从来不是单一工序——至少要有**拉代码 → 编译 → 测试 → 构建镜像 → 推送**五道工序，而且不同项目要能复用同一套流程。
+
+在 Jenkins 里，这件事靠一段 Groovy 脚本（Jenkinsfile）描述；在 Tekton 里，靠的是 **`Pipeline`** 这个 K8s CRD 资源。可以这样类比：
+
+- **Task** = 流水线上的一台**机床**（定义一次，反复使用）；
+- **Pipeline** = 把多台机床按工艺顺序编排起来的**产线设计图**；
+- **PipelineRun** = 按下电钮后的**一次生产**，原料（参数、代码）进去，产品（镜像、报告）出来。
+
+这套「模板 + 实例」的两层结构，和 K8s 里 `Deployment` → `Pod`、上一篇文章 `Task` → `TaskRun` 是同一套声明式哲学。理解了这一层，Pipeline 的所有设计——引用方式、运行方式、命名唯一性——都会变得顺理成章。
+
+## 二、核心概念与原理
+
+### 2.1 层级模型：Pipeline、PipelineRun、Task 的关系
+
+先用一张图把四个资源的关系钉死：
+
+```mermaid
+flowchart TB
+    subgraph DEF["定义层（写一次，跑多次）"]
+        PL["Pipeline: pipeline-hello-goodbye<br/>kind: Pipeline"]
+        T1["Task: hello<br/>kind: Task"]
+        T2["Task: goodbye<br/>kind: Task"]
+    end
+    subgraph RUN["运行层（每次新建）"]
+        PR["PipelineRun: pipelinerun-goodbye-0<br/>kind: PipelineRun"]
+        R1["TaskRun 实例: one"]
+        R2["TaskRun 实例: two"]
+    end
+    PL -->|"tasks[0].taskRef.name = hello"| T1
+    PL -->|"tasks[1].taskRef.name = goodbye"| T2
+    PR -->|"spec.pipelineRef.name"| PL
+    PL -->|"实例化"| R1
+    PL -->|"实例化"| R2
+    R1 --> P1["Pod: echo-1 + echo-2 两容器"]
+    R2 --> P2["Pod: goodbye 单容器"]
+
+    style PL fill:#f5e8ff,stroke:#9b59b6
+    style PR fill:#fff4e8,stroke:#d99a4a
+    style T1 fill:#e8f4ff,stroke:#4a90d9
+    style T2 fill:#e8f4ff,stroke:#4a90d9
+```
+
+三个必须分清的名字：
+
+| 名字 | 写在哪 | 作用 |
+| --- | --- | --- |
+| `Pipeline.metadata.name` | Pipeline 自己 | 供 PipelineRun 通过 `pipelineRef` 引用 |
+| `Pipeline.spec.tasks[].name` | Pipeline 内 | Pipeline 内部对这个步骤的称呼，也是 `runAfter`、`when` 引用的目标 |
+| `Pipeline.spec.tasks[].taskRef.name` | Pipeline 内 | 真正被调用的 Task 资源名 |
+
+**常见混淆**：`tasks[].name` 叫 `one`、`taskRef.name` 叫 `hello`，日志和 Dashboard 里显示的是步骤名 `one`，而底层跑的是 `hello` 这个 Task。排错时 `kubectl get taskrun` 看到的名字会带步骤名前缀，别对不上号就以为资源丢了。
+
+### 2.2 四种引用方式：一张 2×2 矩阵
+
+「引用」是 Tekton 组合能力的核心。课程标题里的 **taskRef / taskSpec / pipelineRef / pipelineSpec** 四个字段，正好构成一个矩阵——横轴是「被引用的对象」（Task 还是 Pipeline），纵轴是「引用方式」（引用已有资源还是内联定义）：
+
+```mermaid
+flowchart LR
+    subgraph ROW1["Pipeline 里引 Task"]
+        A["taskRef<br/>引用集群已有的 Task"]
+        B["taskSpec<br/>在 Pipeline 内联定义 Task"]
+    end
+    subgraph ROW2["PipelineRun 里引 Pipeline"]
+        C["pipelineRef<br/>引用集群已有的 Pipeline"]
+        D["pipelineSpec<br/>在 PipelineRun 内联定义 Pipeline"]
+    end
+    A -->|"复用：改一处生效全部"| U1["适合：团队共享 Task"]
+    B -->|"一次性：自包含易迁移"| U2["适合：演示/一次性脚本"]
+    C -->|"复用：GitOps 标准姿势"| U3["适合：生产流水线"]
+    D -->|"一次性：免先建 Pipeline"| U4["适合：快速验证/临时任务"]
+
+    style A fill:#e8f4ff,stroke:#4a90d9
+    style B fill:#e8f4ff,stroke:#4a90d9
+    style C fill:#f5e8ff,stroke:#9b59b6
+    style D fill:#f5e8ff,stroke:#9b59b6
+```
+
+| 维度 | taskRef | taskSpec |
+| --- | --- | --- |
+| 定义位置 | 独立的 `kind: Task` 资源 | 直接嵌在 `Pipeline.spec.tasks[]` 里 |
+| 复用性 | 多个 Pipeline 可共享同一个 Task | 只服务于当前 Pipeline |
+| 修改影响 | 改 Task 定义，所有引用方**下次运行**全部生效 | 只影响当前 Pipeline |
+| 适用场景 | 生产环境、团队规范 Task（如统一的 git-clone） | 一次性步骤、演示、不想多维护一个文件时 |
+
+| 维度 | pipelineRef | pipelineSpec |
+| --- | --- | --- |
+| 定义位置 | 独立的 `kind: Pipeline` 资源 | 直接嵌在 `PipelineRun.spec` 里 |
+| 复用性 | 一个 Pipeline 可被无数 PipelineRun 引用 | 该 PipelineRun 私有 |
+| 版本管理 | 天然适合 GitOps：Pipeline 进 Git，PipelineRun 带 commit 号 | 全量内联，适合脚本生成 |
+| 适用场景 | 生产流水线的标准姿势 | 临时跑一次、调试、CI 系统动态生成 |
+
+**四个字段可以混搭**。课件里的 `pipelinerun3-pipeline-taskref.yaml` 就是范本：外层用 `pipelineSpec` 内联定义 Pipeline，内层每个 task 仍然用 `taskRef` 引用集群里已有的 `hello` / `goodbye` Task。「内联一层、引用一层」在生产里非常常见，灵活度很高。
+
+### 2.3 并行执行是默认语义
+
+Pipeline 里 **没有配依赖关系的 Task 会同时启动**。课件 `pipeline1-hello-goodby.yaml` 里 `one` 和 `two` 两个 task 都没有配 `runAfter`，跑起来就是并行的：
+
+- Dashboard 上两个步骤**同时出现等待时钟**，哪个容器创建得快哪个先执行；
+- 日志天然交错，`tkn pipelinerun logs` 会分容器展示，不要误以为是乱序执行；
+- 需要串行时，用 `runAfter` 显式声明（下一篇专门讲执行方式控制）。
+
+**并行的代价**：两个 Task 同时拉镜像、同时占 CPU，在资源紧俏的集群里会互相拖慢甚至抢占。生产上「编译」和「单测」可以并行提速，但都依赖「拉代码」结果的步骤，必须用 `runAfter` 卡住顺序。
+
+用时序图看并行语义更直观——两个 Task 的生命周期完全交错，互不等待：
+
+```mermaid
+sequenceDiagram
+    participant PR as PipelineRun
+    participant T1 as TaskRun: one
+    participant T2 as TaskRun: two
+    PR->>T1: 创建（同时）
+    PR->>T2: 创建（同时）
+    Note over T1,T2: 无 runAfter → 并行启动
+    T2-->>T2: 容器启动快，先完成
+    T1-->>T1: echo-1 + echo-2 顺序执行
+    T1-->>PR: Succeeded
+    T2-->>PR: Succeeded
+    Note over PR: 两个都成功，PipelineRun 才 Succeeded
+```
+
+## 三、动手实践
+
+### 3.1 最小 Pipeline：声明式运行（生产标准）
+
+先准备两个 Task（上一篇文章已创建，这里直接用）：
+
+```bash
+kubectl apply -f task/hello-task.yaml
+kubectl apply -f task/goodby-task.yaml
+kubectl get task
+```
+
+然后是最小 Pipeline——两个 Task，无依赖，并行执行：
+
+```yaml
+# pipeline/pipeline1-hello-goodby.yaml
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-hello-goodbye
+spec:
+  tasks:
+    - name: one
+      taskRef:
+        name: hello
+    - name: two
+      taskRef:
+        name: goodbye
+```
+
+**逐字段拆解：**
+
+| 字段 | 值 | 含义 |
+| --- | --- | --- |
+| `kind` | `Pipeline` | 资源类型，与 Task、PipelineRun 平级 |
+| `metadata.name` | `pipeline-hello-goodbye` | Pipeline 的唯一名字，PipelineRun 靠它引用 |
+| `spec.tasks` | 数组 | **步骤列表**，每个元素是一次 Task 调用 |
+| `tasks[].name` | `one` / `two` | Pipeline 内部步骤名，`runAfter` 引用它 |
+| `tasks[].taskRef.name` | `hello` / `goodbye` | 被调用 Task 的名字 |
+
+用 PipelineRun 把它跑起来：
+
+```yaml
+# pipelinerun/pipelinerun0-goodbye.yaml
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: pipelinerun-goodbye-0
+spec:
+  pipelineRef:
+    name: pipeline-hello-goodbye
+```
+
+```bash
+kubectl apply -f pipeline/pipeline1-hello-goodby.yaml
+kubectl apply -f pipelinerun/pipelinerun0-goodbye.yaml
+kubectl get pipelinerun
+kubectl get taskrun
+```
+
+输出符合预期：一条 PipelineRun 记录，底层自动创建两条 TaskRun（名字带步骤名前缀）。
+
+### 3.2 tkn 命令行：调试最快姿势
+
+不想手写 PipelineRun YAML 时，`tkn` 一条命令直接启动：
+
+```bash
+# 启动 Pipeline，tkn 自动创建 PipelineRun（名字自动生成）
+tkn pipeline start pipeline-hello-goodbye
+
+# 查看所有 PipelineRun 历史
+tkn pipelinerun list
+
+# 查看某个 PipelineRun 的全部日志（自动分容器展示）
+tkn pipelinerun logs <pipelinerun-name> -f -n default
+```
+
+`tkn pipeline start` 背后做的事和声明式完全等价：自动生成一个 PipelineRun → apply → 把名字打印给你。**调试阶段用它最省事**，不存在名字冲突；日志命令会自动列出所有 Task 容器，比 `kubectl logs` 挨个 `-c` 省心。
+
+### 3.3 Dashboard：点按钮运行
+
+Tekton Dashboard 里进入 Pipeline 列表，点最右侧的创建 PipelineRun：
+
+1. 命名空间默认 `default`；
+2. Pipeline 选 `pipeline-hello-goodbye`；
+3. PipelineRun 名字**可自定义也可留空**，留空则自动生成；
+4. Timeout 可配置超时时间，也可不填；
+5. 点创建。
+
+创建后能看到两个步骤同时进入等待 → 执行 → 完成。详情页可以看到每个 Task 的定义内容，右侧支持**重新运行**（自动创建新的 PipelineRun）、删除、批量清理。重新运行时注意：新 PipelineRun 的名字同样是唯一自动生成的，不会覆盖历史记录。
+
+**历史记录管理是 Dashboard 的软肋**：跑得多了，PipelineRun 列表会堆积几十上百条，翻页找人很痛苦。生产上两条纪律：① 用 `tkn pipelinerun list` 按名字检索（名字带 commit/构建号时才搜得到，呼应 4.2 节命名策略）；② 给集群配 **TTL 自动回收**，别让 Dashboard 变成垃圾场。
+
+### 3.4 内联组合：taskSpec 与 pipelineSpec
+
+**taskSpec**——把 Task 定义直接嵌进 Pipeline，适合「这个步骤只在这里用一次」：
+
+```yaml
+# pipeline/pipeline3-taskSpec.yaml
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: security-scans
+spec:
+  tasks:
+    - name: scorecards
+      taskSpec:
+        steps:
+          - image: alpine
+            name: step-1
+            script: |
+              echo "Generating scorecard report ..."
+    - name: codeql
+      taskSpec:
+        steps:
+          - image: alpine
+            name: step-1
+            script: |
+              echo "Generating codeql report ..."
+```
+
+**pipelineSpec**——把整个 Pipeline 嵌进 PipelineRun，连 Pipeline 资源都不用先建：
+
+```yaml
+# pipelinerun/pipelinerun2-all.yaml
+apiVersion: tekton.dev/v1 # or tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: pipelinerun-all-1
+spec:
+  pipelineSpec:
+    tasks:
+      - name: echo-hello
+        taskSpec:
+          steps:
+            - name: echo
+              image: ubuntu
+              script: |
+                #!/usr/bin/env bash
+                echo "step 1"
+      - name: echo-bye
+        taskSpec:
+          steps:
+            - name: echo
+              image: ubuntu
+              script: |
+                #!/usr/bin/env bash
+                echo "step 2"
+```
+
+**混搭示范**——外层 pipelineSpec 内联、内层 taskRef 引用已有 Task：
+
+```yaml
+# pipelinerun/pipelinerun3-pipeline-taskref.yaml
+apiVersion: tekton.dev/v1 # or tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: pipelinerun-pipeline-specref-1
+spec:
+  pipelineSpec:
+    tasks:
+      - name: hello
+        taskRef:
+          name: hello
+      - name: goodbye
+        taskRef:
+          name: goodbye
+```
+
+这三种写法的运行结果完全一样（都是两个 echo），差别只在**资源的组织方式**。选型建议就一条：**能被复用的进独立资源用 Ref，一次性的内联用 Spec**。
+
+### 3.5 实战：带 Secret 的 git-clone Pipeline
+
+克隆私有仓库必须带用户名密码，Tekton 里用 Secret 承载。先创建 Secret：
+
+```yaml
+# secret/git-secret.yaml
+apiVersion: v1
+data:
+  password: <base64 编码后的密码>
+  username: <base64 编码后的用户名>
+kind: Secret
+metadata:
+  name: gitlab-secert
+type: Opaque
+```
+
+**base64 编解码是创建 Secret 的必备动作**，注意 `echo` 必须加 `-n`，否则会把换行符一起编码进去：
+
+```bash
+# 编码（-n 去掉尾部换行，这是最常见的错）
+echo -n 'gituser' | base64
+# 输出示例：Z2l0dXNlcg==
+
+# 解码验证
+echo -n 'Z2l0dXNlcg==' | base64 -d
+# 输出：gituser
+```
+
+也可以用命令行直接创建，免去手工编码：
+
+```bash
+kubectl create secret generic gitlab-secert \
+  --from-literal=username=gituser \
+  --from-literal=password='your-strong-password'
+```
+
+> **安全提醒**：base64 是**编码不是加密**，`kubectl get secret -o yaml` 谁都能解。生产环境务必开启 etcd 加密、限制 Secret 读取权限，或使用外部 Secret 管理方案（Vault + External Secrets、K8s CSI Secret Store）。
+
+git-clone Task 通过 `secretKeyRef` 引用凭据：
+
+```yaml
+# task/git-clone-task.yaml（节选）
+spec:
+  steps:
+    - name: git-clones
+      image: bitnami/git:latest
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: git_username
+          valueFrom:
+            secretKeyRef:
+              name: gitlab-secert
+              key: username
+        - name: git_password
+          valueFrom:
+            secretKeyRef:
+              name: gitlab-secert
+              key: password
+      script: |
+        echo ${git_username}${git_password}
+        echo http://${git_username}:${git_password}@gitlab.example.com/golang/go.git
+        git clone -b main -v http://${git_username}:${git_password}@gitlab.example.com/golang/go.git /workspace
+        ls -la
+        pwd
+    - name: list-files
+      image: ubuntu
+      imagePullPolicy: IfNotPresent
+      command:
+        - /bin/sh
+      args: ['-c', 'ls -la /workspace && pwd']
+```
+
+把它包进 Pipeline：
+
+```yaml
+# pipeline/pipeline2-git-clone.yaml
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: git-clone
+spec:
+  tasks:
+    - name: git-clone
+      taskRef:
+        name: git-clone
+```
+
+```yaml
+# pipelinerun/pipelinerun1-git-clone.yaml
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: pipelinerun-git-clone-1
+spec:
+  pipelineRef:
+    name: git-clone
+```
+
+按 Task → Pipeline → PipelineRun 的顺序 apply，Dashboard 里能看到 `git-clone` 步骤下**两个容器依次执行**：先 `git-clones`（克隆），后 `list-files`（列目录）。同一 Task 内的多个 step 是**串行**的——先定义的先执行，前一个失败后一个直接跳过。
+
+**两个关键认知：**
+
+**① 同一 Task 的多个容器共享 Pod 网络命名空间。** 它们跑在同一个 Pod 里，`localhost` 互相可达，可以一个起服务一个做探测。但**文件系统是隔离的**——这是 Tekton 与 Jenkins 工作空间共享模型的本质差异。
+
+**② literal `/workspace` 路径在各容器中互不可见。** 上面的代码里 `git-clones` 把仓库克隆到了自己容器的 `/workspace`，而 `list-files` 容器里的 `/workspace` 是另一份文件系统——所以 `list-files` 看不到克隆下来的代码。正确的做法是把 Task 声明 workspace，然后用 `$(workspaces.<name>.path)` 引用挂载路径，让两个容器落到同一个卷上：
+
+```yaml
+# 正确姿势（完整实战见 Workspace 章节）
+spec:
+  workspaces:
+    - name: code
+  steps:
+    - name: git-clones
+      script: |
+        git clone -b main http://...@$(params.giturl) $(workspaces.code.path)/test
+```
+
+这也是下一篇「Workspace：VCT 共享存储与 Secret」要解决的核心问题——**没有 workspace，Tekton 的 Task 之间就是数据孤岛**。
+
+## 四、生产实践要点
+
+### 4.1 引用方式选型决策表
+
+| 你的处境 | 推荐组合 | 理由 |
+| --- | --- | --- |
+| 团队多条流水线共用克隆/构建步骤 | Task 独立 + `taskRef` | 改一处全部生效，规范统一 |
+| 某个步骤只用一次（如一次性巡检） | `taskSpec` 内联 | 少维护一个资源文件 |
+| 生产流水线、要走审批和审计 | Pipeline 独立 + `pipelineRef` | Pipeline 进 Git 版本管理，PipelineRun 可追溯 |
+| 临时验证想法、自动化脚本动态生成 | `pipelineSpec` 内联 | 免去先建 Pipeline 的步骤 |
+| CI 系统按模板批量生成流水线 | `pipelineSpec` + `taskRef` 混搭 | 流程结构动态、基础步骤复用 |
+
+### 4.2 PipelineRun 命名策略：唯一名是硬约束
+
+和 TaskRun 一样，**PipelineRun 是具名资源，重复 apply 同名资源只会做配置比对，不会重新执行**。生产上三种命名策略：
+
+| 场景 | 命名模式 | 示例 |
+| --- | --- | --- |
+| 手动调试 | 交给 `tkn pipeline start` 自动生成 | `pipeline-hello-goodbye-abc12` |
+| CI 触发 | 带构建号 | `go-build-${BUILD_NUMBER}` |
+| GitOps / 声明式 | 带 commit 短 hash | `go-build-${GIT_COMMIT:0:7}` |
+
+配套的运维动作：给 PipelineRun 设置 **TTL**（`tekton.dev/ttl` 注解或全局 ttl-controller），跑完自动回收，否则集群里会堆积成百上千条历史记录，`kubectl get pipelinerun` 刷屏。
+
+### 4.3 三种运行方式的生产分工
+
+| 方式 | 命令/操作 | 生产定位 |
+| --- | --- | --- |
+| 声明式 | `kubectl apply -f` | **唯一生产标准**：可进 Git、可评审、可回滚 |
+| tkn CLI | `tkn pipeline start` | 调试、排障、临时补跑 |
+| Dashboard | 点按钮 | 演示、验证、给非研发同学用 |
+
+凡是要留痕的构建，都应该是声明式（或由 CI 系统按声明式模板生成）。Dashboard 手工点的构建，出了事说不清是谁跑的——这是审计视角的硬规矩。
+
+### 4.4 并行控制的资源账
+
+并行虽快，但要算清三笔账：
+
+1. **镜像拉取并发**：多个 Task 同时拉大镜像，会把节点带宽打满，设置共享的 `imagePullPolicy: IfNotPresent` + 节点预热能缓解；
+2. **CPU/内存争抢**：编译型 Task 并行个数建议 ≤ 节点核数/2，避免互相拖慢整体时长；
+3. **日志交错**：并行 Task 的日志在 Dashboard 上是分开展的，排错时按 TaskRun 逐个看，别按时间线脑补。
+
+### 4.5 Task 粒度与命名规范
+
+Pipeline 写得烂，九成是 Task 切得烂。团队落库的几条经验：
+
+| 原则 | 反模式 | 正模式 |
+| --- | --- | --- |
+| **一个 Task 一个职责** | 一个 mega-Task 里 clone + build + test + push 全干完 | 拆成 clone / build / test / push 四个 Task，可单测、可复用、可并行 |
+| **Task 名即语义** | `task1`、`step-a` | `git-clone`、`go-build`、`image-push`，看名知意 |
+| **步骤名服务日志检索** | 全叫 `step` | `git-clones`、`list-files`，多容器 `kubectl logs -c` 时对得上 |
+| **公共步骤抽共享 Task** | 每条 Pipeline 各写一遍 clone | 统一 `git-clone` Task + `taskRef`，改一处全局生效 |
+| **Pipeline 名带团队/项目前缀** | 都叫 `pipeline` | `go-web-build`、`fe-app-deploy`，`kubectl get pipeline` 不撞名 |
+
+一个可操作的判断标准：**如果这个 Task 有第二个使用者的可能，就值得独立成资源**；如果只是想「把十行脚本凑一块跑掉」，`taskSpec` 内联更轻。命名上再强调一次：`tasks[].name`（步骤名）和 `taskRef.name`（Task 名）是两套命名空间，日志、`runAfter`、`when` 用的都是前者，排错对不上号时先回来核对这张表。
+
+## 五、报错排查表
+
+| 现象 | 根因 | 解法 |
+| --- | --- | --- |
+| 改了 PipelineRun 重新 apply，没有任何新运行 | PipelineRun 名字复用，K8s 配置比无异 | 改名字，或改用 `tkn pipeline start` |
+| PipelineRun 报 `pipeline.tekton.dev "xxx" not found` | `pipelineRef.name` 打错，或 Pipeline 还没 apply | `kubectl get pipeline` 核对名字 |
+| TaskRun 报 `task.tekton.dev "hello" not found` | 引用的 Task 不存在或名字大小写不一致 | 先 apply Task，再跑 Pipeline |
+| git clone 报 `403 Forbidden` / 认证失败 | Secret 里用户名密码错，或 `secretKeyRef` 的 name/key 拼错 | `kubectl get secret gitlab-secert -o yaml` 核对，重新 base64 编码 |
+| `list-files` 容器里看不到克隆的代码 | 克隆到了本容器 literal 路径，未走 workspace | 改用 `$(workspaces.<name>.path)`，声明并挂载 workspace |
+| `tkn pipeline start` 提示找不到 Pipeline | 名字打错或未 apply | `tkn pipeline list` 核对 |
+| 两个步骤都卡在 `Pending` | 并行抢占资源或镜像拉取慢 | `kubectl describe pod` 看 Events，降并行或预热镜像 |
+| base64 解码出来是乱码 | `echo` 漏了 `-n`，把换行符编进去了 | `echo -n 'xxx' \| base64` 重做 |
+| 步骤显示 `Skipped` | 配了 `when` 条件不成立（下一篇详解） | 检查 `when` 的 input/operator/values |
+
+## 六、面试考点与追问
+
+**Q1：taskRef 和 taskSpec 有什么区别？生产上怎么选？**
+taskRef 引用集群中已存在的独立 Task 资源，可被多个 Pipeline 复用，修改一处全部生效；taskSpec 把 Task 定义内联在 Pipeline 里，只服务当前 Pipeline。生产上**可复用的规范步骤用 taskRef**（统一 git-clone、统一构建），一次性步骤用 taskSpec。本质是「复用成本」与「文件数量」的权衡。
+
+**Q2：pipelineRef 和 pipelineSpec 呢？**
+同理，作用在 PipelineRun → Pipeline 这一层。pipelineRef 引用已有 Pipeline，是 GitOps 的标准姿势——Pipeline 进 Git 管理，PipelineRun 带 commit 号可追溯；pipelineSpec 把 Pipeline 整个内联进 PipelineRun，适合临时运行和 CI 系统动态生成。
+
+**Q3：Pipeline 里的 Task 默认是并行还是串行？怎么控制？**
+默认**并行**——没有依赖关系的 Task 会同时启动。串行有兩種方式：`runAfter` 显式声明依赖（推荐，语义清晰）；或利用 workspace 数据依赖隐式传递（不推荐，脆弱）。生产上依赖关系一定要显式写 `runAfter`。
+
+**Q4：为什么 PipelineRun 的名字必须唯一？**
+PipelineRun 是 K8s 具名资源，重复 apply 同名对象时 K8s 只做配置比对，spec 无差异就不产生任何动作，更不会重新执行。想重跑必须换名字——这也是 CI 里 PipelineRun 名要带构建号或 commit hash 的原因。
+
+**Q5：Tekton 里如何安全地给 git-clone 传凭据？**
+创建 `type: Opaque` 的 Secret 存 username/password，Task 里用 `env.valueFrom.secretKeyRef` 引用，绝不明文写在 YAML 里。注意 base64 不是加密，生产还要叠加 etcd 加密、RBAC 最小权限，或上 Vault/CSI Secret Store 等外部方案。
+
+**Q6：同一 Task 里多个 step 容器之间共享什么、不共享什么？**
+共享 **Pod 网络命名空间**（localhost 互通、同一个 Pod IP）；**不共享文件系统**（每个 step 是独立容器，根文件系统相互隔离）。跨容器/跨 Task 传数据必须用 workspace（卷）或 results（小数据输出）。
+
+**Q7：Tekton Pipeline 和 Jenkins Pipeline 的本质区别是什么？**
+Jenkins Pipeline 是运行在单体 CI 服务器上的 Groovy 脚本，步骤默认共享工作空间，扩展靠节点；Tekton Pipeline 是 K8s CRD，每个 Task 实例化为 Pod，步骤默认隔离，数据传递靠 workspace/results 显式声明。前者是「服务器-centric」，后者是「K8s 原生」，无服务器化、弹性与多租户隔离是 Tekton 的结构性优势。
+
+## 📎 文本↔代码关联
+
+本篇对应课件源码（`code/6-Tekton/`，已做去品牌化处理）：
+
+| 代码文件 | 正文提及 | 内容 |
+| --- | --- | --- |
+| `code/6-Tekton/pipeline/pipeline1-hello-goodby.yaml` | 第 2.3、3.1 节 | hello → goodbye 两 task 并行 Pipeline 最小示例 |
+| `code/6-Tekton/pipelinerun/pipelinerun0-goodbye.yaml` | 第 3.1 节 | `pipelineRef` 引用 Pipeline 的最小 PipelineRun |
+| `code/6-Tekton/pipeline/pipeline3-taskSpec.yaml` | 第 3.4 节 | `taskSpec` 内联定义 Task 的 Pipeline |
+| `code/6-Tekton/pipelinerun/pipelinerun2-all.yaml` | 第 3.4 节 | `pipelineSpec` 内联定义 Pipeline 的 PipelineRun |
+| `code/6-Tekton/pipelinerun/pipelinerun3-pipeline-taskref.yaml` | 第 2.2、3.4 节 | pipelineSpec + taskRef 混搭组合 |
+| `code/6-Tekton/pipeline/pipeline2-git-clone.yaml` | 第 3.5 节 | 单 task（git-clone）Pipeline |
+| `code/6-Tekton/pipelinerun/pipelinerun1-git-clone.yaml` | 第 3.5 节 | 驱动 git-clone Pipeline 的 PipelineRun |
+| `code/6-Tekton/task/git-clone-task.yaml` | 第 2.3、3.5 节 | `secretKeyRef` 引用 Secret + 双 step（克隆/列目录）Task |
+| `code/6-Tekton/secret/git-secret.yaml` | 第 3.5 节 | git 凭据 Secret（username/password 均 base64） |
+
+**技术点总结**：Tekton 的 Pipeline 用「Task 模板 + PipelineRun 实例」两层结构编排 CI 流程，四种引用方式构成 2×2 矩阵——**能复用的用 Ref（taskRef/pipelineRef），一次性的用 Spec（taskSpec/pipelineSpec）**，且允许混搭；运行方式上声明式 apply 是生产唯一标准、`tkn pipeline start` 是调试利器；两个必记的硬约束是 **PipelineRun 名字唯一（复用即不执行）** 和 **无 runAfter 的 Task 默认并行**；跨容器共享数据必须走 workspace，literal 路径在各容器中互不可见——这个坑由下一篇 Workspace 实战来填。
+
+相关度：97%。是否需要继续：[是]。代码是否可运行：[是]。

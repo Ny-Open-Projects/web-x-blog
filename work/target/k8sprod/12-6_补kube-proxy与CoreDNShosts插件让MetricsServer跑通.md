@@ -164,7 +164,7 @@ spec:
     spec:
       containers:
         - name: metrics-server
-          image: registry.cn-hangzhou.aliyuncs.com/imooc/metrics-server:v0.3.3
+          image: registry.cn-hangzhou.aliyuncs.com/example/metrics-server:v0.3.3
           args:
             - --kubelet-insecure-tls
 ```

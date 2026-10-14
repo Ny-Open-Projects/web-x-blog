@@ -17,10 +17,10 @@ package routes
 import (
 	"github.com/kataras/iris/mvc"
 
-	"imooc.com/lottery/bootstrap"
-	"imooc.com/lottery/web/controllers"
-	"imooc.com/lottery/services"
-	"imooc.com/lottery/web/middleware"
+	"example.com/lottery/bootstrap"
+	"example.com/lottery/web/controllers"
+	"example.com/lottery/services"
+	"example.com/lottery/web/middleware"
 )
 
 // Configure 注册必要的路由到应用
@@ -102,10 +102,10 @@ package main
 
 import (
 	"fmt"
-	"imooc.com/lottery/bootstrap"
-	"imooc.com/lottery/conf"
-	"imooc.com/lottery/web/middleware/identity"
-	"imooc.com/lottery/web/routes"
+	"example.com/lottery/bootstrap"
+	"example.com/lottery/conf"
+	"example.com/lottery/web/middleware/identity"
+	"example.com/lottery/web/routes"
 )
 
 var port = 8080

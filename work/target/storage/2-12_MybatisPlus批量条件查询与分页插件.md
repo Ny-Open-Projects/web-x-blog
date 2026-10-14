@@ -9,13 +9,14 @@
 
 ## 📎 文本↔代码关联
 
-| 讲稿内容 | 代码位置（`work/source/9.../code/socialecom`） | 提炼片段 |
-| --- | --- | --- |
-| 批量查询 `selectBatchIds` | `第二章代码/.../controller/UserController.java` | `batchget` 方法 |
-| 条件查询与分页 | `第二章代码/.../controller/UserController.java` | `getbycondition` 方法 |
-| 分页插件装配 | `第二章代码/.../helper/MybatisPlusConfig.java` | `PaginationInnerInterceptor` |
+本讲对应课件源码（去品牌化副本，位于 `code/socialecom/`；包名已由原占位包名统一改写为 `com.social.ecom`）：
 
-> 片段取自第二章真实代码；下文对原来的调试过程做了精简，仅保留可用形态。
+| 代码文件 | 正文提及 | 职责 |
+| --- | --- | --- |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/pojo/User.java` | 7 次 | 实体类，主键 `IdType.AUTO` 自增，含乐观锁 `version` 字段，含自动填充时间字段 |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/base/JsonReturnType.java` | 7 次 | 统一 JSON 返回结构（code / message / data） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java` | 4 次 | MyBatis-Plus 配置类（乐观锁插件 / 分页插件） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/controller/UserController.java` | 1 次 | HTTP 接口层，路由前缀 `/user`；端点：`/get`、`/create`、`/update`、`/getforupdate`、`/updatebyversion`、`batchget`、`getbycondition` |
 
 ## 批量查询
 

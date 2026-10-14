@@ -10,6 +10,10 @@
 - 建表 DDL：`message` 表拆 `base` 与 `count` 两个列簇
 - `put` 写入与 `get` 读取的完整 Java 实现，以及二进制交互约定
 
+## 📎 代码说明
+
+本讲代码以**内联片段**形式呈现在正文中。课程课件仅发布第 2/3/4 章（MySQL 核心能力）的完整工程源码，本讲所属章节未随课件发布独立源码文件，故不做外部文件关联，请以正文片段为准。
+
 ## 为什么要先把消息实体建模出来
 
 Feed 流是带时序的 message 列表，但在处理时序之前，必须先有一个"消息本体"的存储。也就是用户分享出去的商品卡片、门店卡片这些信息。
@@ -61,7 +65,7 @@ hbase.zookeeper.property.clientPort=2181
 然后装配连接：
 
 ```java
-package com.imooc.socialecom.config;
+package com.social.ecom.config;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HConstants;
@@ -106,7 +110,7 @@ public class CustomHBaseConfiguration {
 ## 消息实体设计
 
 ```java
-package com.imooc.socialecom.pojo;
+package com.social.ecom.pojo;
 
 /**
  * 消息实体：用户分享出去的商品 / 门店卡片
@@ -225,9 +229,9 @@ flowchart TB
 ## 服务接口
 
 ```java
-package com.imooc.socialecom.service;
+package com.social.ecom.service;
 
-import com.imooc.socialecom.pojo.MessageInfo;
+import com.social.ecom.pojo.MessageInfo;
 
 import java.io.IOException;
 
@@ -248,10 +252,10 @@ public interface MessageService {
 ## 写入实现
 
 ```java
-package com.imooc.socialecom.service.impl;
+package com.social.ecom.service.impl;
 
-import com.imooc.socialecom.pojo.MessageInfo;
-import com.imooc.socialecom.service.MessageService;
+import com.social.ecom.pojo.MessageInfo;
+import com.social.ecom.service.MessageService;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;

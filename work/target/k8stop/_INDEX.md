@@ -16,7 +16,7 @@
 
 | # | 编号 | 标题 | 字数 | 文件 |
 | --- | --- | --- | --- | --- |
-| 1 | 1-1 | 课时1：课程介绍 | 3955 | `1-1 课时1：课程介绍【 微信号：itcodeba 】-迅捷文字转语音-176…` |
+| 1 | 1-1 | 课时1：课程介绍 | 3955 | `1-1 课时1：课程介绍【 微信号：itcodeba 】…` |
 | 2 | 10-1 | 课时1：二进制Kubernetes升级说明 | 2752 | `10-1 课时1：二进制Kubernetes升级说明【 微信号：itcodeba…` |
 | 3 | 10-2 | 课时2：二进制Etcd集群升级 | 3268 | `10-2 课时2：二进制Etcd集群升级【 微信号：itcodeba 】-迅捷文…` |
 | 4 | 10-3 | 课时3：二进制Kubernetes 1.19升级说明 | 7158 | `10-3 课时3：二进制Kubernetes 1.19升级说明【 微信号：itc…` |
@@ -24,13 +24,13 @@
 | 6 | 10-5 | 课时5：二进制Kubernetes升级Node和Calico | 6691 | `10-5 课时5：二进制Kubernetes升级Node和Calico【 微信号…` |
 | 7 | 10-6 | 课时6：二进制Kubernetes升级CoreDNS | 3483 | `10-6 课时6：二进制Kubernetes升级CoreDNS【 微信号：itc…` |
 | 8 | 2-1 | Kubeadm高可用安装基本说明 | 4886 | `2-1 Kubeadm高可用安装基本说明【 微信号：itcodeba 】-迅捷文…` |
-| 9 | 2-10 | 集群验证 | 1717 | `2-10 集群验证【 微信号：itcodeba 】-迅捷文字转语音-176059…` |
+| 9 | 2-10 | 集群验证 | 1717 | `2-10 集群验证【 微信号：itcodeba 】…` |
 | 10 | 2-11 | Kuboard：Dashboard另一种选择 | 4395 | `2-11 Kuboard：Dashboard另一种选择【 微信号：itcodeb…` |
-| 11 | 2-2 | k8s高可用架构解析 **（已合并）** | 2665 | `2-2 k8s高可用架构解析【 微信号：itcodeba 】-迅捷文字转语音-1…` |
+| 11 | 2-2 | k8s高可用架构解析 **（已合并）** | 2665 | `2-2 k8s高可用架构解析【 微信号：itcodeba 】…` |
 | 12 | 2-3 | Kubeadm基本环境配置 | 4105 | `2-3 Kubeadm基本环境配置【 微信号：itcodeba 】-迅捷文字转语…` |
 | 13 | 2-4 | Kubeadm基本组件安装 | 2373 | `2-4 Kubeadm基本组件安装【 微信号：itcodeba 】-迅捷文字转语…` |
 | 14 | 2-5 | Kubeadm高可用组件安装 | 1743 | `2-5 Kubeadm高可用组件安装【 微信号：itcodeba 】-迅捷文字转…` |
-| 15 | 2-6 | Kubeadm集群初始化 | 3714 | `2-6 Kubeadm集群初始化【 微信号：itcodeba 】-迅捷文字转语音…` |
+| 15 | 2-6 | Kubeadm集群初始化 | 3714 | `2-6 Kubeadm集群初始化【 微信号：itcodeba 】…` |
 | 16 | 2-7 | 高可用Master及Token过期处理 | 2368 | `2-7 高可用Master及Token过期处理【 微信号：itcodeba 】-…` |
 | 17 | 2-8 | Kubeadm Node节点配置 | 604 | `2-8 Kubeadm Node节点配置【 微信号：itcodeba 】-迅捷文…` |
 | 18 | 2-9 | Dashboard&Metrics Server安装 | 1143 | `2-9 Dashboard&Metrics Server安装【 微信号：itco…` |
@@ -41,19 +41,19 @@
 | 23 | 3-13 | Bootstrapping Kubelet启动过程 | 4332 | `3-13 Bootstrapping Kubelet启动过程【 微信号：itco…` |
 | 24 | 3-14 | Bootstrapping CSR申请和证书颁发原理 | 7105 | `3-14 Bootstrapping CSR申请和证书颁发原理【 微信号：itc…` |
 | 25 | 3-15 | Bootstrapping 证书自动续期原理 | 4312 | `3-15 Bootstrapping 证书自动续期原理【 微信号：itcodeb…` |
-| 26 | 3-2 | k8s高可用架构解析 **（已合并）** | 2665 | `3-2 k8s高可用架构解析【 微信号：itcodeba 】-迅捷文字转语音-1…` |
-| 27 | 3-3 | 二进制高可用基本配置 | 5757 | `3-3 二进制高可用基本配置【 微信号：itcodeba 】-迅捷文字转语音-1…` |
-| 28 | 3-4 | 二进制系统和内核升级 | 1790 | `3-4 二进制系统和内核升级【 微信号：itcodeba 】-迅捷文字转语音-1…` |
-| 29 | 3-5 | 二进制基本组件安装 | 3214 | `3-5 二进制基本组件安装【 微信号：itcodeba 】-迅捷文字转语音-17…` |
-| 30 | 3-6 | 二进制生成证书详解 | 10308 | `3-6 二进制生成证书详解【 微信号：itcodeba 】-迅捷文字转语音-17…` |
+| 26 | 3-2 | k8s高可用架构解析 **（已合并）** | 2665 | `3-2 k8s高可用架构解析【 微信号：itcodeba 】…` |
+| 27 | 3-3 | 二进制高可用基本配置 | 5757 | `3-3 二进制高可用基本配置【 微信号：itcodeba 】…` |
+| 28 | 3-4 | 二进制系统和内核升级 | 1790 | `3-4 二进制系统和内核升级【 微信号：itcodeba 】…` |
+| 29 | 3-5 | 二进制基本组件安装 | 3214 | `3-5 二进制基本组件安装【 微信号：itcodeba 】…` |
+| 30 | 3-6 | 二进制生成证书详解 | 10308 | `3-6 二进制生成证书详解【 微信号：itcodeba 】…` |
 | 31 | 3-7 | 二进制高可用及k8s组件配置 | 4541 | `3-7 二进制高可用及k8s组件配置【 微信号：itcodeba 】-迅捷文字转…` |
 | 32 | 3-8 | 二进制安装TLS Bootstrapping自动颁发证书 | 1949 | `3-8 二进制安装TLS Bootstrapping自动颁发证书【 微信号：it…` |
-| 33 | 3-9 | 二进制Node节点配置 | 5140 | `3-9 二进制Node节点配置【 微信号：itcodeba 】-迅捷文字转语音-…` |
-| 34 | 4-1 | 课时1：Docker基础 | 3714 | `4-1 课时1：Docker基础【 微信号：itcodeba 】-迅捷文字转语音…` |
+| 33 | 3-9 | 二进制Node节点配置 | 5140 | `3-9 二进制Node节点配置【 微信号：itcodeba 】…` |
+| 34 | 4-1 | 课时1：Docker基础 | 3714 | `4-1 课时1：Docker基础【 微信号：itcodeba 】…` |
 | 35 | 4-2 | 课时2：Docker基本命令上 | 10157 | `4-2 课时2：Docker基本命令上【 微信号：itcodeba 】-迅捷文字…` |
 | 36 | 4-3 | 课时3：Docker基本命令下 | 3015 | `4-3 课时3：Docker基本命令下【 微信号：itcodeba 】-迅捷文字…` |
 | 37 | 4-4 | 课时4：Dockerfile用法 | 10513 | `4-4 课时4：Dockerfile用法【 微信号：itcodeba 】-迅捷文…` |
-| 38 | 4-5 | 课时5：制作小镜像上 | 3720 | `4-5 课时5：制作小镜像上【 微信号：itcodeba 】-迅捷文字转语音-1…` |
+| 38 | 4-5 | 课时5：制作小镜像上 | 3720 | `4-5 课时5：制作小镜像上【 微信号：itcodeba 】…` |
 | 39 | 4-6 | 课时6：多阶段制作小镜像下 | 4384 | `4-6 课时6：多阶段制作小镜像下【 微信号：itcodeba 】-迅捷文字转语…` |
 | 40 | 4-7 | 课时7：Scratch镜像 | 2126 | `4-7 课时7：Scratch镜像【 微信号：itcodeba 】-迅捷文字转语…` |
 | 41 | 5-1 | 为什么要用Kubernetes？ | 3388 | `5-1 为什么要用Kubernetes？【 微信号：itcodeba 】-迅捷文…` |
@@ -67,7 +67,7 @@
 | 49 | 5-17 | Deployment更新暂停和恢复 | 2015 | `5-17 Deployment更新暂停和恢复【 微信号：itcodeba 】-迅…` |
 | 50 | 5-18 | Deployment更新注意事项 | 2650 | `5-18 Deployment更新注意事项【 微信号：itcodeba 】-迅捷…` |
 | 51 | 5-19 | 有状态应用管理StatefulSet概念 | 3255 | `5-19 有状态应用管理StatefulSet概念【 微信号：itcodeba …` |
-| 52 | 5-2 | Master节点 | 5484 | `5-2 Master节点【 微信号：itcodeba 】-迅捷文字转语音-176…` |
+| 52 | 5-2 | Master节点 | 5484 | `5-2 Master节点【 微信号：itcodeba 】…` |
 | 53 | 5-20 | 创建一个StatefulSet应用 | 2734 | `5-20 创建一个StatefulSet应用【 微信号：itcodeba 】-迅…` |
 | 54 | 5-21 | StatefulSet扩容缩容 | 2601 | `5-21 StatefulSet扩容缩容【 微信号：itcodeba 】-迅捷文…` |
 | 55 | 5-22 | StatefulSet更新策略 | 2635 | `5-22 StatefulSet更新策略【 微信号：itcodeba 】-迅捷文…` |
@@ -78,18 +78,18 @@
 | 60 | 5-27 | DaemonSet的更新和回滚 | 1950 | `5-27 DaemonSet的更新和回滚【 微信号：itcodeba 】-迅捷文…` |
 | 61 | 5-28 | Label&Selector | 5798 | `5-28 Label&Selector【 微信号：itcodeba 】-迅捷文字…` |
 | 62 | 5-29 | 在k8s上是如何发布服务的 | 5594 | `5-29 在k8s上是如何发布服务的【 微信号：itcodeba 】-迅捷文字转…` |
-| 63 | 5-3 | Node节点 | 7371 | `5-3 Node节点【 微信号：itcodeba 】-迅捷文字转语音-17605…` |
-| 64 | 5-30 | 什么是Service | 3386 | `5-30 什么是Service【 微信号：itcodeba 】-迅捷文字转语音-…` |
-| 65 | 5-31 | 定义一个Service | 5285 | `5-31 定义一个Service【 微信号：itcodeba 】-迅捷文字转语音…` |
+| 63 | 5-3 | Node节点 | 7371 | `5-3 Node节点【 微信号：itcodeba 】…` |
+| 64 | 5-30 | 什么是Service | 3386 | `5-30 什么是Service【 微信号：itcodeba 】…` |
+| 65 | 5-31 | 定义一个Service | 5285 | `5-31 定义一个Service【 微信号：itcodeba 】…` |
 | 66 | 5-32 | 使用Service代理k8s外部服务 | 5363 | `5-32 使用Service代理k8s外部服务【 微信号：itcodeba 】-…` |
 | 67 | 5-33 | 使用Service反代外部域名 | 1518 | `5-33 使用Service反代外部域名【 微信号：itcodeba 】-迅捷文…` |
-| 68 | 5-34 | Service常用类型 | 3036 | `5-34 Service常用类型【 微信号：itcodeba 】-迅捷文字转语音…` |
-| 69 | 5-35 | 什么是Ingress？ | 3773 | `5-35 什么是Ingress？【 微信号：itcodeba 】-迅捷文字转语音…` |
+| 68 | 5-34 | Service常用类型 | 3036 | `5-34 Service常用类型【 微信号：itcodeba 】…` |
+| 69 | 5-35 | 什么是Ingress？ | 3773 | `5-35 什么是Ingress？【 微信号：itcodeba 】…` |
 | 70 | 5-36 | 使用helm安装ingress | 5887 | `5-36 使用helm安装ingress【 微信号：itcodeba 】-迅捷文…` |
-| 71 | 5-37 | Ingress简单使用 | 7875 | `5-37 Ingress简单使用【 微信号：itcodeba 】-迅捷文字转语音…` |
+| 71 | 5-37 | Ingress简单使用 | 7875 | `5-37 Ingress简单使用【 微信号：itcodeba 】…` |
 | 72 | 5-38 | Ingress多域名使用 | 1372 | `5-38 Ingress多域名使用【 微信号：itcodeba 】-迅捷文字转语…` |
-| 73 | 5-39 | HPA自动扩缩容 | 4680 | `5-39 HPA自动扩缩容【 微信号：itcodeba 】-迅捷文字转语音-17…` |
-| 74 | 5-4 | 什么是Pod？ | 3882 | `5-4 什么是Pod？【 微信号：itcodeba 】-迅捷文字转语音-1760…` |
+| 73 | 5-39 | HPA自动扩缩容 | 4680 | `5-39 HPA自动扩缩容【 微信号：itcodeba 】…` |
+| 74 | 5-4 | 什么是Pod？ | 3882 | `5-4 什么是Pod？【 微信号：itcodeba 】…` |
 | 75 | 5-40 | k8s配置管理ConfigMap | 12101 | `5-40 k8s配置管理ConfigMap【 微信号：itcodeba 】-迅捷…` |
 | 76 | 5-41 | k8s加密数据管理Secret | 6989 | `5-41 k8s加密数据管理Secret【 微信号：itcodeba 】-迅捷文…` |
 | 77 | 5-42 | ConfigMap&Secret使用SubPath | 2680 | `5-42 ConfigMap&Secret使用SubPath【 微信号：itco…` |
@@ -98,31 +98,31 @@
 | 80 | 5-45 | k8s存储Volumes介绍 | 3759 | `5-45 k8s存储Volumes介绍【 微信号：itcodeba 】-迅捷文字…` |
 | 81 | 5-46 | Volumes HostPath挂载宿主机路径 | 2247 | `5-46 Volumes HostPath挂载宿主机路径【 微信号：itcode…` |
 | 82 | 5-47 | Volumes EmptyDir实现数据共享 | 3577 | `5-47 Volumes EmptyDir实现数据共享【 微信号：itcodeb…` |
-| 83 | 5-48 | 挂载NFS至容器 | 2787 | `5-48 挂载NFS至容器【 微信号：itcodeba 】-迅捷文字转语音-17…` |
+| 83 | 5-48 | 挂载NFS至容器 | 2787 | `5-48 挂载NFS至容器【 微信号：itcodeba 】…` |
 | 84 | 5-49 | 持久化存储PV&PVC概念上 | 9048 | `5-49 持久化存储PV&PVC概念上【 微信号：itcodeba 】-迅捷文字…` |
-| 85 | 5-5 | 为什么要引入Pod | 2265 | `5-5 为什么要引入Pod【 微信号：itcodeba 】-迅捷文字转语音-17…` |
-| 86 | 5-50 | PV&PVC概念下 | 460 | `5-50 PV&PVC概念下【 微信号：itcodeba 】-迅捷文字转语音-1…` |
-| 87 | 5-51 | PV&PVC入门 | 3880 | `5-51 PV&PVC入门【 微信号：itcodeba 】-迅捷文字转语音-17…` |
-| 88 | 5-52 | PV&PVC补充 | 6073 | `5-52 PV&PVC补充【 微信号：itcodeba 】-迅捷文字转语音-17…` |
-| 89 | 5-53 | CronJob计划任务 | 4678 | `5-53 CronJob计划任务【 微信号：itcodeba 】-迅捷文字转语音…` |
+| 85 | 5-5 | 为什么要引入Pod | 2265 | `5-5 为什么要引入Pod【 微信号：itcodeba 】…` |
+| 86 | 5-50 | PV&PVC概念下 | 460 | `5-50 PV&PVC概念下【 微信号：itcodeba 】…` |
+| 87 | 5-51 | PV&PVC入门 | 3880 | `5-51 PV&PVC入门【 微信号：itcodeba 】…` |
+| 88 | 5-52 | PV&PVC补充 | 6073 | `5-52 PV&PVC补充【 微信号：itcodeba 】…` |
+| 89 | 5-53 | CronJob计划任务 | 4678 | `5-53 CronJob计划任务【 微信号：itcodeba 】…` |
 | 90 | 5-54 | 污点和容忍Taint&Toleration入门 | 5509 | `5-54 污点和容忍Taint&Toleration入门【 微信号：itcode…` |
 | 91 | 5-55 | Taint&Toleration补充 | 5444 | `5-55 Taint&Toleration补充【 微信号：itcodeba 】-…` |
 | 92 | 5-56 | 初始化容器InitContainer | 3145 | `5-56 初始化容器InitContainer【 微信号：itcodeba 】-…` |
 | 93 | 5-57 | Affinity亲和力入门 | 4335 | `5-57 Affinity亲和力入门【 微信号：itcodeba 】-迅捷文字转…` |
 | 94 | 5-58 | 节点亲和力NodeAffinity使用 | 5263 | `5-58 节点亲和力NodeAffinity使用【 微信号：itcodeba 】…` |
-| 95 | 5-59 | Pod亲和力和反亲和力 | 3681 | `5-59 Pod亲和力和反亲和力【 微信号：itcodeba 】-迅捷文字转语音…` |
-| 96 | 5-6 | 定义一个Pod | 9463 | `5-6 定义一个Pod【 微信号：itcodeba 】-迅捷文字转语音-1760…` |
+| 95 | 5-59 | Pod亲和力和反亲和力 | 3681 | `5-59 Pod亲和力和反亲和力【 微信号：itcodeba 】…` |
+| 96 | 5-6 | 定义一个Pod | 9463 | `5-6 定义一个Pod【 微信号：itcodeba 】…` |
 | 97 | 5-60 | Topology拓扑域概念 | 2954 | `5-60 Topology拓扑域概念【 微信号：itcodeba 】-迅捷文字转…` |
 | 98 | 5-61 | 使用Topology实现多地多机房部署 | 4108 | `5-61 使用Topology实现多地多机房部署【 微信号：itcodeba 】…` |
-| 99 | 5-62 | 临时容器概念和配置 | 3191 | `5-62 临时容器概念和配置【 微信号：itcodeba 】-迅捷文字转语音-1…` |
+| 99 | 5-62 | 临时容器概念和配置 | 3191 | `5-62 临时容器概念和配置【 微信号：itcodeba 】…` |
 | 100 | 5-63 | 使用临时容器在线debug | 3896 | `5-63 使用临时容器在线debug【 微信号：itcodeba 】-迅捷文字转…` |
-| 101 | 5-64 | RBAC权限管理概念 | 11393 | `5-64 RBAC权限管理概念【 微信号：itcodeba 】-迅捷文字转语音-…` |
-| 102 | 5-65 | RBAC使用 | 8582 | `5-65 RBAC使用【 微信号：itcodeba 】-迅捷文字转语音-1760…` |
+| 101 | 5-64 | RBAC权限管理概念 | 11393 | `5-64 RBAC权限管理概念【 微信号：itcodeba 】…` |
+| 102 | 5-65 | RBAC使用 | 8582 | `5-65 RBAC使用【 微信号：itcodeba 】…` |
 | 103 | 5-7 | 零宕机发布应用必备知识：Pod三种探针 | 3629 | `5-7 零宕机发布应用必备知识：Pod三种探针【 微信号：itcodeba 】-…` |
 | 104 | 5-8 | 零宕机必备知识：StartupProbe | 7591 | `5-8 零宕机必备知识：StartupProbe【 微信号：itcodeba 】…` |
 | 105 | 5-9 | 零宕机必备知识：Liveness和Readiness | 3008 | `5-9 零宕机必备知识：Liveness和Readiness【 微信号：itco…` |
 | 106 | 6-1 | 课时1： 安装一键式k8s资源平台Ratel到k8s集群中 | 3023 | `6-1 课时1： 安装一键式k8s资源平台Ratel到k8s集群中【 微信号：i…` |
-| 107 | 6-10 | 课时10：Rook部署 | 5067 | `6-10 课时10：Rook部署【 微信号：itcodeba 】-迅捷文字转语音…` |
+| 107 | 6-10 | 课时10：Rook部署 | 5067 | `6-10 课时10：Rook部署【 微信号：itcodeba 】…` |
 | 108 | 6-11 | 课时11：使用Rook部署Ceph集群上 | 396 | `6-11 课时11：使用Rook部署Ceph集群上【 微信号：itcodeba …` |
 | 109 | 6-12 | 课时12：使用Rook部署Ceph集群下 | 3273 | `6-12 课时12：使用Rook部署Ceph集群下【 微信号：itcodeba …` |
 | 110 | 6-13 | 课时13：创建块存储类型的动态存储 | 3121 | `6-13 课时13：创建块存储类型的动态存储【 微信号：itcodeba 】-迅…` |
@@ -135,7 +135,7 @@
 | 117 | 6-2 | 课时2： Ratel简单使用 | 7145 | `6-2 课时2： Ratel简单使用【 微信号：itcodeba 】-迅捷文字转…` |
 | 118 | 6-20 | 课时20：PVC快照和回滚 | 3562 | `6-20 课时20：PVC快照和回滚【 微信号：itcodeba 】-迅捷文字转…` |
 | 119 | 6-21 | 课时21：Rook Ceph xfs_repair问题修复 | 8213 | `6-21 课时21：Rook Ceph xfs_repair问题修复【 微信号：…` |
-| 120 | 6-22 | 课时22：存储回顾 | 3353 | `6-22 课时22：存储回顾【 微信号：itcodeba 】-迅捷文字转语音-1…` |
+| 120 | 6-22 | 课时22：存储回顾 | 3353 | `6-22 课时22：存储回顾【 微信号：itcodeba 】…` |
 | 121 | 6-23 | 课时23：容器化中间件基本说明 | 1479 | `6-23 课时23：容器化中间件基本说明【 微信号：itcodeba 】-迅捷文…` |
 | 122 | 6-24 | 课时24：如何部署一个容器到k8s | 7422 | `6-24 课时24：如何部署一个容器到k8s【 微信号：itcodeba 】-迅…` |
 | 123 | 6-25 | 课时25：部署Redis Operator | 5649 | `6-25 课时25：部署Redis Operator【 微信号：itcodeba…` |
@@ -143,7 +143,7 @@
 | 125 | 6-27 | 课时27：在k8s上部署Redis集群下 | 4503 | `6-27 课时27：在k8s上部署Redis集群下【 微信号：itcodeba …` |
 | 126 | 6-28 | 课时28：Redis集群扩容和缩容 | 4764 | `6-28 课时28：Redis集群扩容和缩容【 微信号：itcodeba 】-迅…` |
 | 127 | 6-29 | 课时29：部署RabbitMQ集群到k8s | 5767 | `6-29 课时29：部署RabbitMQ集群到k8s【 微信号：itcodeba…` |
-| 128 | 6-3 | 课时3： 准入控制 | 5166 | `6-3 课时3： 准入控制【 微信号：itcodeba 】-迅捷文字转语音-17…` |
+| 128 | 6-3 | 课时3： 准入控制 | 5166 | `6-3 课时3： 准入控制【 微信号：itcodeba 】…` |
 | 129 | 6-30 | 课时30：解决RabbitMQ密码不生效问题 | 2291 | `6-30 课时30：解决RabbitMQ密码不生效问题【 微信号：itcodeb…` |
 | 130 | 6-31 | 课时31：RabbitMQ扩容和缩容 | 3248 | `6-31 课时31：RabbitMQ扩容和缩容【 微信号：itcodeba 】-…` |
 | 131 | 6-32 | 课时32：Helm v3安装使用 | 3666 | `6-32 课时32：Helm v3安装使用【 微信号：itcodeba 】-迅捷…` |
@@ -161,7 +161,7 @@
 | 143 | 6-7 | 课时7： RBAC实现不同用户不同权限 | 2379 | `6-7 课时7： RBAC实现不同用户不同权限【 微信号：itcodeba 】-…` |
 | 144 | 6-8 | 课时8： ServiceAccount权限管理 | 4944 | `6-8 课时8： ServiceAccount权限管理【 微信号：itcodeb…` |
 | 145 | 6-9 | 课时9： 云原生存储Rook介绍 | 6187 | `6-9 课时9： 云原生存储Rook介绍【 微信号：itcodeba 】-迅捷文…` |
-| 146 | 7-1 | 课时1：EFK日志收集 | 8015 | `7-1 课时1：EFK日志收集【 微信号：itcodeba 】-迅捷文字转语音-…` |
+| 146 | 7-1 | 课时1：EFK日志收集 | 8015 | `7-1 课时1：EFK日志收集【 微信号：itcodeba 】…` |
 | 147 | 7-10 | 课时10：Prometheus监控etcd集群 | 7727 | `7-10 课时10：Prometheus监控etcd集群【 微信号：itcode…` |
 | 148 | 7-11 | 课时11：Prometheus Exporter | 8324 | `7-11 课时11：Prometheus Exporter【 微信号：itcod…` |
 | 149 | 7-12 | 课时12：Prometheus黑盒监控 | 3765 | `7-12 课时12：Prometheus黑盒监控【 微信号：itcodeba 】…` |
@@ -217,7 +217,7 @@
 | 199 | 9-3 | 课时3：Jenkins声明式流水线入门 | 9239 | `9-3 课时3：Jenkins声明式流水线入门【 微信号：itcodeba 】-…` |
 | 200 | 9-4 | 课时4：Jenkins变量使用 | 4373 | `9-4 课时4：Jenkins变量使用【 微信号：itcodeba 】-迅捷文字…` |
 | 201 | 9-5 | 课时5：Jenkins级联变量 | 2878 | `9-5 课时5：Jenkins级联变量【 微信号：itcodeba 】-迅捷文字…` |
-| 202 | 9-6 | 课时6：镜像仓库配置 | 4374 | `9-6 课时6：镜像仓库配置【 微信号：itcodeba 】-迅捷文字转语音-1…` |
+| 202 | 9-6 | 课时6：镜像仓库配置 | 4374 | `9-6 课时6：镜像仓库配置【 微信号：itcodeba 】…` |
 | 203 | 9-7 | 课时7：GitLab安装配置 | 2432 | `9-7 课时7：GitLab安装配置【 微信号：itcodeba 】-迅捷文字转…` |
 | 204 | 9-8 | 课时8： Jenkins Credentials配置 | 1597 | `9-8 课时8： Jenkins Credentials配置【 微信号：itco…` |
 | 205 | 9-9 | 课时9：Jenkins BlueOcean入门 | 8392 | `9-9 课时9：Jenkins BlueOcean入门【 微信号：itcodeb…` |

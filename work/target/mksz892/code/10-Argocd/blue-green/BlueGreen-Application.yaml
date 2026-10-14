@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-blue-green
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: guestbook-blue-green
+    repoURL: http://git.example.com/argocd/appconfig.git
+    targetRevision: HEAD
+    
+    

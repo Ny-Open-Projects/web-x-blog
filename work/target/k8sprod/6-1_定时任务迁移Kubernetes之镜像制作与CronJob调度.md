@@ -74,8 +74,8 @@ docker images | grep openjdk
 镜像拉下来之后，第一件事是打 tag 推到自己的私有仓库，后面反复使用速度就快了：
 
 ```bash
-docker tag openjdk:8 hub.imooc.com/library/openjdk:8
-docker push hub.imooc.com/library/openjdk:8
+docker tag openjdk:8 hub.example.com/library/openjdk:8
+docker push hub.example.com/library/openjdk:8
 ```
 
 顺带一提，如果 push 的时候发现仓库起不来，先去仓库所在节点把服务拉起：
@@ -96,8 +96,8 @@ docker ps | grep harbor
 
 ```bash
 # 克隆项目到 master 节点
-git clone https://gitee.com/imooc/imooc-k8s-demo.git
-cd imooc-k8s-demo/chronjob-demo
+git clone https://gitee.com/example/example-k8s-demo.git
+cd example-k8s-demo/chronjob-demo
 
 # 打包
 mvn clean package
@@ -110,7 +110,7 @@ ls -lh target/*.jar
 
 ```bash
 # 把 jar 加进 classpath，主类的 package 名写全
-java -cp target/chronjob-demo-1.0.jar com.imooc.k8s.ChronJobDemo
+java -cp target/chronjob-demo-1.0.jar com.example.k8s.ChronJobDemo
 ```
 
 跑起来输出 `I will work for 11 秒`，睡完退出，再正常停掉，这一步就算确认完毕。
@@ -122,7 +122,7 @@ chronjob-demo 项目结构
 │   └── main
 │       └── java
 │           └── com
-│               └── imooc
+│               └── example
 │                   └── k8s
 │                       └── ChronJobDemo.java（唯一的主类）
 └── target
@@ -138,7 +138,7 @@ FROM openjdk:8
 
 COPY chronjob-demo-1.0.jar /root/chronjobdemo.jar
 
-ENTRYPOINT ["java", "-cp", "/root/chronjobdemo.jar", "com.imooc.k8s.ChronJobDemo"]
+ENTRYPOINT ["java", "-cp", "/root/chronjobdemo.jar", "com.example.k8s.ChronJobDemo"]
 ```
 
 ENTRYPOINT 写成数组形式，第一个参数是可执行文件，后面的依次是参数，最后一个是主类名。写成 exec 数组还有个好处：Java 进程就是容器的 1 号进程，`docker stop` 能直接收到信号，不用额外处理。
@@ -155,8 +155,8 @@ docker run -it chronjob-demo:1
 确认没问题就打 tag 推到仓库：
 
 ```bash
-docker tag chronjob-demo:1 hub.imooc.com/library/chronjob:v1
-docker push hub.imooc.com/library/chronjob:v1
+docker tag chronjob-demo:1 hub.example.com/library/chronjob:v1
+docker push hub.example.com/library/chronjob:v1
 ```
 
 镜像完全就绪，第一步结束。
@@ -201,7 +201,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: chronjob
-              image: hub.imooc.com/library/chronjob:v1
+              image: hub.example.com/library/chronjob:v1
 ```
 
 字段逐个拆开看：
@@ -291,27 +291,27 @@ kubectl logs -l job-name=chronjob-demo-28419370
 ```bash
 # 1) 拉基础镜像并推到私有仓库
 docker pull openjdk:8
-docker tag openjdk:8 hub.imooc.com/library/openjdk:8
-docker push hub.imooc.com/library/openjdk:8
+docker tag openjdk:8 hub.example.com/library/openjdk:8
+docker push hub.example.com/library/openjdk:8
 
 # 2) 克隆项目并打包
-git clone https://gitee.com/imooc/imooc-k8s-demo.git
-cd imooc-k8s-demo/chronjob-demo
+git clone https://gitee.com/example/example-k8s-demo.git
+cd example-k8s-demo/chronjob-demo
 mvn clean package
-java -cp target/chronjob-demo-1.0.jar com.imooc.k8s.ChronJobDemo
+java -cp target/chronjob-demo-1.0.jar com.example.k8s.ChronJobDemo
 
 # 3) 写 Dockerfile 并构建
 cat > Dockerfile <<'EOF'
 FROM openjdk:8
 COPY chronjob-demo-1.0.jar /root/chronjobdemo.jar
-ENTRYPOINT ["java", "-cp", "/root/chronjobdemo.jar", "com.imooc.k8s.ChronJobDemo"]
+ENTRYPOINT ["java", "-cp", "/root/chronjobdemo.jar", "com.example.k8s.ChronJobDemo"]
 EOF
 docker build -t chronjob-demo:1 .
 
 # 4) 验证并推送
 docker run -it chronjob-demo:1
-docker tag chronjob-demo:1 hub.imooc.com/library/chronjob:v1
-docker push hub.imooc.com/library/chronjob:v1
+docker tag chronjob-demo:1 hub.example.com/library/chronjob:v1
+docker push hub.example.com/library/chronjob:v1
 ```
 
 ### 2. 一份可直接用的 CronJob
@@ -336,7 +336,7 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: chronjob
-              image: hub.imooc.com/library/chronjob:v1
+              image: hub.example.com/library/chronjob:v1
               resources:
                 requests:
                   cpu: 100m

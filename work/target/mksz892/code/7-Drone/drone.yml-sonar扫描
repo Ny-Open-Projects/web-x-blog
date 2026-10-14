@@ -1,0 +1,41 @@
+kind: pipeline   
+type: kubernetes  
+name: default    
+
+clone:
+  depth: 1
+
+steps:
+- name: sonar-scanr
+  pull: if-not-exsits
+  image: kytay/sonar-node-plugin
+  settings:
+    sonar_host:
+      from_secret: sonar_host
+    sonar_token:
+      from_secret: sonar_token
+    use_node_version: 16.18.1
+
+- name: qualityGateStatus
+  pull: if-not-exsits
+  image: curlimages/curl
+  environment:
+    sonar_admin:
+      from_secret: sonar_admin
+    sonar_passwd:
+      from_secret: sonar_passwd
+    sonar_host:
+      from_secret: sonar_host  
+  commands:
+  - |
+    status=`curl -s -u $sonar_admin:$sonar_passwd $sonar_host/api/project_branches/list?project=$DRONE_REPO_NAMESPACE%3A$DRONE_REPO_NAME | awk -F'qualityGateStatus":"' '{print $2}' | awk -F '"' '{print $1}'`
+    echo "###############"
+    echo $sonar_admin $sonar_passwd $sonar_host $DRONE_TAG
+    echo $status         
+    echo "################"                      
+    if [ "$status" = "OK" ]; then
+      echo "Status is OK. Performing next steps..."
+    else
+      echo "Status is not OK. Exiting with an error."
+      exit 1
+    fi

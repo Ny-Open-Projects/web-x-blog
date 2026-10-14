@@ -3,21 +3,9 @@
 ## 纲要
 
 - 部署角色全景
-  - Nacos：注册中心 + 配置中心（类比 ZooKeeper），管理 Seata 集群与应用间的通信
-  - Seata Server（TC）：独立进程，需要一块 DB 来存放全局事务生命周期数据
-  - Java 应用（客户端）：连 Nacos 发现 TC，业务库与 `undo_log` 同库
-  - 课程简化：把 Seata 的 DB 与业务库合并复用同一个 `socialecom` 库
-- Nacos 单机启动与命名空间
-  - `startup.sh -m standalone`：单机必须 standalone，否则默认集群模式起不来
-  - 默认端口 8848，登录 `nacos/nacos`
-  - 新建命名空间 `seata_group`，命名空间 ID 必须取自 `config.txt` 的 `registry.conf`，用于路由寻址
-- Seata Server 的 DB 存储模式
-  - `file.conf` 中 `store.mode=db`，MySQL 驱动，落到 `socialecom` 库
-  - 涉及 `global_table` / `branch_table` / `lock_table`
-- 五张关键表的职责
-  - 服务端三张：`global_table`、`branch_table`、`distributed_lock`
-  - 业务库一张：`undo_log`（AT 模式逆向 SQL）
-  - 全部来自 `DDL.sql`，在 `socialecom` 库一次性执行
+## 📎 代码说明
+
+本讲代码以**内联片段**形式呈现在正文中。本章课件源码（`code/socialecom/第四章代码/`）中无正文直接引用的类文件，故不做文件级关联，请以正文片段为准。
 
 ## 为什么需要这套部署
 

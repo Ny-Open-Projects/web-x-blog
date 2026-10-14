@@ -121,7 +121,7 @@ Tiller 是以 Deployment 的方式部署在 Kubernetes 集群里的。这里有�
 ```bash
 # 指定自己可用的镜像来装 Tiller，这条命令比较长
 # 先给变量赋值，例如：
-# TILLER_IMAGE_REPO=registry.cn-hangzhou.aliyuncs.com/imooc
+# TILLER_IMAGE_REPO=registry.cn-hangzhou.aliyuncs.com/example
 # STABLE_REPO_URL=https://kubernetes-charts.storage.googleapis.com
 # CHARTS_URL=https://mirrors.aliyun.com/kubernetes/charts
 helm init \
@@ -237,7 +237,7 @@ helm version --client       # 输出 v2.13.1
 
 # 2. 装 Tiller（镜像与 repo 换成自己能拉到的）
 # 先给变量赋值，例如：
-# TILLER_IMAGE_REPO=registry.cn-hangzhou.aliyuncs.com/imooc
+# TILLER_IMAGE_REPO=registry.cn-hangzhou.aliyuncs.com/example
 # STABLE_REPO_URL=https://kubernetes-charts.storage.googleapis.com
 # CHARTS_URL=https://mirrors.aliyun.com/kubernetes/charts
 helm init \

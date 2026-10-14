@@ -9,14 +9,16 @@
 
 ## 📎 文本↔代码关联
 
-| 讲稿内容 | 代码位置（`work/source/9.../code/socialecom`） | 提炼片段 |
-| --- | --- | --- |
-| MybatisPlus 与原生 Mybatis 的对比、用户表设计 | `第二章代码/socialecom/src/main/java/com/imooc/socialecom/pojo/User.java` | `User` 实体、`@TableId(type=AUTO)`、`@TableField` 时间填充 |
-| Mapper 层定义 | `第二章代码/.../mapper/UserMapper.java` | `extends BaseMapper<User>` |
-| 控制器按主键查询 | `第二章代码/.../controller/UserController.java` | `get` 方法、`selectById` |
-| 分页与乐观锁插件声明 | `第二章代码/.../helper/MybatisPlusConfig.java` | `MybatisPlusInterceptor` 装配 |
+本讲对应课件源码（去品牌化副本，位于 `code/socialecom/`；包名已由原占位包名统一改写为 `com.social.ecom`）：
 
-> 代码均为仓库中真实存在的第二章代码，片段可直接运行；下文仅截取与本节相关部分。
+| 代码文件 | 正文提及 | 职责 |
+| --- | --- | --- |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/pojo/User.java` | 8 次 | 实体类，主键 `IdType.AUTO` 自增，含乐观锁 `version` 字段，含自动填充时间字段 |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java` | 7 次 | `User` 的 MyBatis-Plus Mapper 接口 |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/controller/UserController.java` | 4 次 | HTTP 接口层，路由前缀 `/user`；端点：`/get`、`/create`、`/update`、`/getforupdate`、`/updatebyversion`、`batchget`、`getbycondition` |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/base/JsonReturnType.java` | 4 次 | 统一 JSON 返回结构（code / message / data） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/SocialecomApplication.java` | 2 次 | Spring Boot 启动类（组件扫描入口） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java` | 1 次 | MyBatis-Plus 配置类（乐观锁插件 / 分页插件） |
 
 ## 为什么选择 MybatisPlus
 
@@ -44,17 +46,17 @@
 1. **字符串字段尽量 `NOT NULL` 且默认空串**。MySQL 中 `NULL` 会削弱索引的优化与查询能力，因此统一用空字符串代替 `NULL`。
 2. **时间字段不依赖数据库默认时间戳**，由应用层通过自动填充策略写入，便于统一控制。
 
-手动插入一条测试数据（`id=1`，用户名 `imooc`，密码 `123456`，手机号任意）后即可开始编码。
+手动插入一条测试数据（`id=1`，用户名 `social`，密码 `123456`，手机号任意）后即可开始编码。
 
 ## 搭建 Mapper 与实体
 
 定义 Mapper 接口，让它继承 MybatisPlus 提供的 `BaseMapper`：
 
 ```java
-package com.imooc.socialecom.mapper;
+package com.social.ecom.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.imooc.socialecom.pojo.User;
+import com.social.ecom.pojo.User;
 
 public interface UserMapper extends BaseMapper<User> {
 }

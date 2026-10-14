@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test-trigger
+spec:
+  params:
+    - name: giturl
+    - name: branch
+  steps:
+    - name: list-file
+      image: ubuntu
+      imagePullPolicy: IfNotPresent
+      script:
+        echo $(params.giturl) $(params.branch)

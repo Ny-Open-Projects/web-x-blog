@@ -56,7 +56,7 @@ categories:
 
 ### 镜像 tag 要动态生成
 
-东西备齐就能 `docker build -t` 了。镜像名是 `hub.imooc.com/library/${JOB_NAME}:版本`。
+东西备齐就能 `docker build -t` 了。镜像名是 `hub.example.com/library/${JOB_NAME}:版本`。
 
 版本怎么写？写死肯定不行——每次构建都打同一个版本，那每次构建出来的东西就分不清了，这不可接受。所以得给它生成一个版本号。
 
@@ -65,7 +65,7 @@ flowchart LR
     A["Maven 构建产物<br/>$WORKSPACE/webdemo/target/*.war"] -->|"解压到 ./root"| D["DOCKER_DIR 构建目录"]
     B["项目 dockerfiles/"] -->|"COPY 进来"| D
     C["Dockerfile"] -->|"复制进来"| D
-    D -->|"docker build -t"| E["hub.imooc.com/library/k8swebdemo:版本"]
+    D ->|"docker build -t"| E["hub.example.com/library/k8swebdemo:版本"]
     E -->|"docker push（下一阶段）"| F["私有仓库"]
 ```
 
@@ -124,7 +124,7 @@ fi
 ls -l
 
 # ---------- 3. 构建镜像 ----------
-IMAGE="hub.imooc.com/library/${JOB_NAME}:${VERSION}"
+IMAGE="hub.example.com/library/${JOB_NAME}:${VERSION}"
 docker build -t "${IMAGE}" .
 echo "image built: ${IMAGE}"
 ```
@@ -144,7 +144,7 @@ echo "image built: ${IMAGE}"
     ├── Dockerfile（从项目复制过来）
     ├── dockerfiles（从项目复制过来）
     ├── root（war 解压后的内容，即镜像里 /root 的原型）
-    └── 镜像 tag: hub.imooc.com/library/k8swebdemo:版本
+    └── 镜像 tag: hub.example.com/library/k8swebdemo:版本
 ```
 
 ## Pipeline 里怎么接上
@@ -163,7 +163,7 @@ pipeline {
         stage('拉取代码') {
             steps {
                 git branch: 'main',
-                    url: 'https://gitee.com/imooc/imooc-k8sdemo.git'
+                    url: 'https://gitee.com/example/example-k8sdemo.git'
             }
         }
 

@@ -1,0 +1,41 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: gateway-vela-app
+  namespace: test-app
+spec:
+  components:
+    - name: express-server-1
+      type: webservice
+      properties:
+        image: canary-deploy.1853whitleyave.com
+        ports:
+         - port: 8090
+           expose: true
+      traits:
+        - type: scaler
+          properties:
+            replicas: 1
+        - type: gateway
+          properties:
+            domain: www.example.com
+            http:
+              "/": 8090
+            classInSpec: true
+            class: alb  
+            annotations:
+              alb.ingress.kubernetes.io/backend-protocol: HTTP
+              alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+  policies:
+    - name: target-local-k8s
+      type: topology
+      properties:
+        clusters: ["local"]
+        namespace: "test-app"
+
+  workflow:
+    steps:
+      - name: deploy-to-local-k8s
+        type: deploy
+        properties:
+          policies: ["target-local-k8s"]

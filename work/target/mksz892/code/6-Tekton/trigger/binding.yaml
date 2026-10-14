@@ -1,0 +1,10 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: common-tb
+spec:
+  params:
+  - name: git-repo-url
+    value: $(body.project.http_url)
+  - name: build-branch
+    value: $(body.ref)

@@ -26,8 +26,8 @@
 package service
 
 import (
-	"git.imooc.com/coding-535/base/domain/model"
-	"git.imooc.com/coding-535/base/domain/repository"
+	"git.example.com/coding-535/base/domain/model"
+	"git.example.com/coding-535/base/domain/repository"
 )
 
 // 接口类型

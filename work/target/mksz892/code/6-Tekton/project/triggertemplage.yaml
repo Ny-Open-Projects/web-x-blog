@@ -1,0 +1,38 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: node-tt
+  namespace: default
+spec:
+  params:
+  - name: git-repo-url
+  - name: build-branch
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      generateName: node-trigger-run-
+    spec:
+      pipelineRef:
+        name: pipeline-node-project
+      params:
+        - name: giturl
+          value: $(tt.params.git-repo-url)
+        - name: branch
+          value:  $(tt.params.build-branch) 
+      workspaces:
+        - name: code
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 12M
+              storageClassName: nfs-client
+        - name: aliyun-image-registry-secert
+          secret:
+            secretName: aliyun-image-registry-secert
+        - name: kubeconfig-secret 
+          secret:
+            secretName: kubeconfig-secret 

@@ -10,14 +10,14 @@
 
 ## 📎 文本↔代码关联
 
-| 讲稿内容 | 代码位置（`work/source/9.../code/socialecom`） | 提炼片段 |
-| --- | --- | --- |
-| 乐观锁插件装配 | `第二章代码/.../helper/MybatisPlusConfig.java` | `OptimisticLockerInnerInterceptor` 注册 |
-| 实体版本字段 | `第二章代码/.../pojo/User.java` | `@Version private int version;` |
-| 悲观锁 `for update` 实现 | `第二章代码/.../controller/UserController.java` | `getforupdate` 方法 |
-| 乐观锁更新与失败判定 | `第二章代码/.../controller/UserController.java` | `updatebyversion` 方法 |
+本讲对应课件源码（去品牌化副本，位于 `code/socialecom/`；包名已由原占位包名统一改写为 `com.social.ecom`）：
 
-> 以下片段取自第二章真实代码，可直接运行；为聚焦主题做了精简。
+| 代码文件 | 正文提及 | 职责 |
+| --- | --- | --- |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/base/JsonReturnType.java` | 6 次 | 统一 JSON 返回结构（code / message / data） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java` | 5 次 | MyBatis-Plus 配置类（乐观锁插件 / 分页插件） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/pojo/User.java` | 5 次 | 实体类，主键 `IdType.AUTO` 自增，含乐观锁 `version` 字段，含自动填充时间字段 |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/controller/UserController.java` | 3 次 | HTTP 接口层，路由前缀 `/user`；端点：`/get`、`/create`、`/update`、`/getforupdate`、`/updatebyversion`、`batchget`、`getbycondition` |
 
 ## 数据库层的悲观锁：SELECT ... FOR UPDATE
 

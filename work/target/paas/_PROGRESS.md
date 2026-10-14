@@ -11,7 +11,7 @@
 | done | 4 | 1-4 | 1-4云原生PaaS平台与服务网格0217_ev | 827 | `1-4_云原生PaaS平台与服务网格.md` |
 | done | 5 | 1-5 | 1-5云原生GoPaaS平台与低代码0257_ev | 966 | `1-5_GoPaaS平台与低代码关系.md` |
 | done | 6 | 2-1 | 2-1环境安装级版本说明0315_ev | 1284 | `2-1_环境安装与版本说明.md` |
-| done | 7 | 2-2 | 2-2go代理和慕课网git设置0654_ev | 2327 | `2-2_Go代理与慕课网Git设置.md` |
+| done | 7 | 2-2 | 2-2go代理和课程平台git设置0654_ev | 2327 | `2-2_Go代理与课程平台Git设置.md` |
 | done | 8 | 2-3 | 2-3项目目录结构1030_ev | 3635 | `2-3_项目目录结构.md` |
 | done | 9 | 2-4 | 2-4cap-tool代码目录生成proto文件生成1202_ev | 4272 | `2-4_cap-tool代码目录与proto生成.md` |
 | done | 10 | 2-5 | 2-5docker-composeyml编写和常见用法0918_ev | 3360 | `2-5_docker-compose编写与用法.md` |
@@ -37,7 +37,7 @@
 | done | 30 | 4-9 | 4-9总结思考0344_ev | 1305 | `4-9_K8s快速入门总结思考.md` |
 | done | 31 | 5-1 | 5-1PaaS平台应用开发-Deployment介绍1106_ev | 4143 | `5-1_Deployment介绍.md` |
 | done | 32 | 5-2 | 5-2PaaS平台Pod基本概念依据调度策略介绍1622_ev | 5609 | `5-2_Pod概念与调度策略.md` |
-| done | 33 | 5-3 | 5-3必看基于慕课网gomod的相关设置0356_ev | 1315 | `5-3_gomod设置.md` |
+| done | 33 | 5-3 | 5-3必看基于课程平台gomod的相关设置0356_ev | 1315 | `5-3_gomod设置.md` |
 | done | 34 | 5-4 | 5-4GOPaaS平台开发工程目录创建及说明0842_ev | 2682 | `5-4_工程目录说明.md` |
 | done | 35 | 5-5 | 5-5GoPaaS平台Pod模型的开发上1234_ev | 3273 | `5-5_Pod模型开发上.md` |
 | done | 36 | 5-6 | 5-6GoPaaS平台Pod模型的开发下0724_ev | 2420 | `5-6_Pod模型开发下.md` |
@@ -61,8 +61,8 @@
 | done | 54 | 5-24 | 5-24API完善及pod前端页面开发上1411_ev | 3843 | `5-24_API完善与pod前端页面上.md` |
 | done | 55 | 5-25 | 5-25API完善及pod前端页面开发下1157_ev | 3108 | `5-25_API完善与pod前端页面下.md` |
 | done | 56 | 5-26 | 5-26总结思考0703_ev | 2532 | `5-26_总结思考.md` |
-| done | 57 | [10.9]中间件proto文件开发更多资源ubkz.com | [10.9] 中间件 proto 文件开发更多资源ubkz.com | 1845 | `10.9_中间件Proto定义.md` |
-| done | 58 | [10.20]总结&思考更多资源ubkz.com | [10.20] 总结&思考更多资源ubkz.com | 611 | `10.20_中间件总结与思考.md` |
+| done | 57 | [10.9]中间件proto文件开发更多资源| [10.9] 中间件 proto 文件开发更多资源| 1845 | `10.9_中间件Proto定义.md` |
+| done | 58 | [10.20]总结&思考更多资源| [10.20] 总结&思考更多资源| 611 | `10.20_中间件总结与思考.md` |
 | done | 59 | [6.3]--6-3service服务端model模型开发 | [6.3]--6-3Service服务端model模型开发 | 2970 | `6.3_Service服务端model模型开发.md` |
 | done | 60 | [6.6]--6-6svcapi工程创建及接口业务逻辑开发 | [6.6]--6-6svcAPI工程创建及接口业务逻辑开发 | 5063 | `6.6_svcAPI工程创建及接口业务逻辑开发.md` |
 | done | 61 | [6.5]--6-5service服务开发 | [6.5]--6-5Service服务开发 | 6510 | `6.5_Service服务开发.md` |
@@ -71,77 +71,77 @@
 | done | 64 | [6.4]--6-4service服务端proto文件开发及代码生成 | [6.4]--6-4service服务端proto文件开发及代码生成 | 751 | `6.4_service服务端proto文件开发及代码生成.md` |
 | done | 65 | [6.1]--6-1service类型原理介绍 | [6.1]--6-1Service类型原理介绍 | 6885 | `6.1_Service类型原理介绍.md` |
 | done | 66 | [6.2]--6-2cap-v2,cap-tool,cap-api-gatew | [6.2]--6-2cap-v2,cap-tool,cap-api-gatew | 1548 | `6.2_cap工具链与网关.md` |
-| done | 67 | [7.2]--7-2路由model与repository开发调整更多资源ubkz.com | [7.2]--7-2路由model与repository开发调整更多资源ubkz.com | 2562 | `7-2_路由model与repository开发.md` |
-| done | 68 | [7.1]--7-1路由ingress架构详解更多资源ubkz.com | [7.1]--7-1路由ingress架构详解更多资源ubkz.com | 3549 | `7-1_ingress架构详解.md` |
-| done | 69 | [7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com | [7.7]--7-7route前端管理页面及效果演示更多资源ubkz.com | 2143 | `7-7_路由前端管理与演示.md` |
-| done | 70 | [7.8]--7-8总结&amp;思考更多资源ubkz.com | [7.8]--7-8总结&amp;思考更多资源ubkz.com | 1842 | `7-8_路由总结与思考.md` |
-| done | 71 | [7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com | [7.4]--7-4路由handler逻辑开发和注意事项更多资源ubkz.com | 2454 | `7-4_路由handler开发.md` |
-| done | 72 | [7.5]--7-5route对外api的开发更多资源ubkz.com | [7.5]--7-5route对外API的开发更多资源ubkz.com | 3216 | `7-5_路由对外API开发.md` |
-| done | 73 | [7.3]--7-3路由service开发更多资源ubkz.com | [7.3]--7-3路由service开发更多资源ubkz.com | 4313 | `7-3_路由service开发.md` |
-| done | 74 | [7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com | [7.6]--7-6在k8s中创建nginx-controller资源对象更多资源ubkz.com | 1227 | `7-6_k8s部署nginxcontroller.md` |
-| done | 75 | [8.1]--8-1gopaas平台监控系统prometheus架构介绍更多资源ubkz.com | [8.1]--8-1GoPaaS平台监控系统Prometheus架构介绍更多资源ubkz.com | 3491 | `8-1_Prometheus架构介绍.md` |
-| done | 76 | [8.2]--8-2gopaas平台prometheus监控安装更多资源ubkz.com | [8.2]--8-2GoPaaS平台Prometheus监控安装更多资源ubkz.com | 2149 | `8-2_Prometheus监控安装.md` |
-| done | 77 | [8.4]--8-4总结&amp;思考更多资源ubkz.com | [8.4]--8-4总结&amp;思考更多资源ubkz.com | 1392 | `8-4_总结思考.md` |
-| done | 78 | [8.3]--8-3gopaas平台监控grafana图标使用说明更多资源ubkz.com | [8.3]--8-3GoPaaS平台监控Grafana图标使用说明更多资源ubkz.com | 2986 | `8-3_Grafana图表使用说明.md` |
-| done | 79 | [9.6]--9-6gopaas平台cephadm安装基础集群（上）更多资源ubkz.com | [9.6]--9-6GoPaaS平台cephadm安装基础集群（上）更多资源ubkz.com | 3136 | `9.6_Cephadm安装基础集群上.md` |
-| done | 80 | [9.2]--9-2gopaas平台ceph核心组件介绍更多资源ubkz.com | [9.2]--9-2GoPaaS平台Ceph核心组件介绍更多资源ubkz.com | 1440 | `9.2_Ceph核心组件介绍.md` |
-| done | 81 | [9.3]--9-3gopaas平台ceph存储过程及核心概念介绍更多资源ubkz.com | [9.3]--9-3GoPaaS平台Ceph存储过程及核心概念介绍更多资源ubkz.com | 3315 | `9.3_Ceph存储过程与核心概念.md` |
-| done | 82 | [9.16]--9-16gopaas平台volumeapi开发更多资源ubkz.com | [9.16]--9-16GoPaaS平台volumeapi开发更多资源ubkz.com | 2265 | `9.16_VolumeAPI开发.md` |
-| done | 83 | [9.4]--9-4gopaas平台ceph资源购买注意事项更多资源ubkz.com | [9.4]--9-4GoPaaS平台Ceph资源购买注意事项更多资源ubkz.com | 2684 | `9.4_Ceph资源购买注意事项.md` |
-| done | 84 | [9.12]--9-12gopaas平台service开发（上）更多资源ubkz.com | [9.12]--9-12GoPaaS平台Service开发（上）更多资源ubkz.com | 2468 | `9.12_存储Service开发上.md` |
-| done | 85 | [9.11]--9-11gopaas平台pvc模型开发更多资源ubkz.com | [9.11]--9-11GoPaaS平台PVC模型开发更多资源ubkz.com | 2264 | `9.11_PVC模型开发.md` |
-| done | 86 | [9.15]--9-15gopaas平台servicehandler开发更多资源ubkz.com | [9.15]--9-15GoPaaS平台ServiceHandler开发更多资源ubkz.com | 1957 | `9.15_存储ServiceHandler开发.md` |
-| done | 87 | [9.5]--9-5gopaas平台ceph安全机器初始化更多资源ubkz.com | [9.5]--9-5GoPaaS平台Ceph安全机器初始化更多资源ubkz.com | 1846 | `9.5_Ceph安全机器初始化.md` |
-| done | 88 | [9.7]--9-7gopaas平台cephadm安装基础集群（下）更多资源ubkz.com | [9.7]--9-7GoPaaS平台cephadm安装基础集群（下）更多资源ubkz.com | 3824 | `9-7_cephadm安装基础集群下.md` |
-| done | 89 | [9.9]--9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源ubkz.com | [9.9]--9-9GoPaaS平台k8s通过CSI方式添加外部Ceph系统（更多资源ubkz.com | 3721 | `9-9_k8s通过CSI添加外部Ceph上.md` |
-| done | 90 | [9.17]--9-17总结&amp;思考更多资源ubkz.com | [9.17]--9-17总结&amp;思考更多资源ubkz.com | 1509 | `9-17_总结与思考.md` |
-| done | 91 | [9.1]--9-1gopaas平台分布式存储ceph架构介绍更多资源ubkz.com | [9.1]--9-1GoPaaS平台分布式存储Ceph架构介绍更多资源ubkz.com | 3317 | `9-1_Ceph架构介绍.md` |
-| done | 92 | [9.13]--9-13gopaas平台service开发（下）更多资源ubkz.com | [9.13]--9-13GoPaaS平台Service开发（下）更多资源ubkz.com | 2602 | `9-13_Service开发下.md` |
-| done | 93 | [9.10]--9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源ubkz.com | [9.10]--9-10GoPaaS平台k8s通过CSI方式添加外部Ceph系统更多资源ubkz.com | 3380 | `9-10_k8s通过CSI添加外部Ceph下.md` |
-| done | 94 | [9.14]--9-14gopaas平台pv与pvc的关系和原理说明更多资源ubkz.com | [9.14]--9-14GoPaaS平台PV与PVC的关系和原理说明更多资源ubkz.com | 4905 | `9-14_PV与PVC关系原理.md` |
-| done | 95 | [9.8]--9-8gopaas平台ceph核心组件安装更多资源ubkz.com | [9.8]--9-8GoPaaS平台ceph核心组件安装更多资源ubkz.com | 2911 | `9-8_ceph核心组件安装.md` |
-| done | 96 | [10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com | [10.16]--10-16中间件main调整及handler开发（下）更多资源ubkz.com | 1770 | `10.16_中间件main与handler开发下.md` |
-| done | 97 | [10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com | [10.14]--10-14中间件service对应版本服务代码开发更多资源ubkz.com | 1661 | `10.14_中间件类型与版本服务.md` |
-| done | 98 | [10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com | [10.12]--10-12中间件middlewareservice开发（3）更多资源ubkz.com | 2550 | `10.12_中间件服务层开发三.md` |
-| done | 99 | [10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com | [10.8]--10-8中间件类型type和verisonrepository开更多资源ubkz.com | 1302 | `10.8_中间件类型仓储.md` |
-| done | 100 | [10.19]--10-19中间件前端页面以及核心api开发（下）更多资源ubkz.com | [10.19]--10-19中间件前端页面以及核心API开发（下）更多资源ubkz.com | 2947 | `10.19_中间件前端页面与核心API开发下.md` |
-| done | 101 | [10.18]--10-18中间件前端页面以及核心api开发（中）更多资源ubkz.com | [10.18]--10-18中间件前端页面以及核心API开发（中）更多资源ubkz.com | 2768 | `10.18_中间件前端页面与核心API开发中.md` |
-| done | 102 | [10.11]--10-11中间件service开发（2）更多资源ubkz.com | [10.11]--10-11中间件service开发（2）更多资源ubkz.com | 629 | `10.11_中间件服务层二.md` |
-| done | 103 | [10.6]--10-6中间件类型type和version创建更多资源ubkz.com | [10.6]--10-6中间件类型type和version创建更多资源ubkz.com | 958 | `10.6_中间件类型与版本模型.md` |
-| done | 104 | [10.10]--10-10中间件service开发（1）更多资源ubkz.com | [10.10]--10-10中间件service开发（1）更多资源ubkz.com | 2089 | `10-10_中间件服务层开发上.md` |
-| done | 105 | [10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com | [10.7]--10-7中间件middlewarerepository开发更多资源ubkz.com | 1672 | `10-7_中间件仓储层开发.md` |
-| done | 106 | [10.17]--10-17中间件前端页面以及核心api开发（上）更多资源ubkz.com | [10.17]--10-17中间件前端页面以及核心API开发（上）更多资源ubkz.com | 2485 | `10-17_中间件前端页面与核心API开发上.md` |
-| done | 107 | [10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com | [10.15]--10-15中间件main调整及handler开发（上）更多资源ubkz.com | 2732 | `10-15_中间件main与handler开发上.md` |
-| done | 108 | [10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com | [10.13]--10-13中间件middlewareservice开发（4）更多资源ubkz.com | 1918 | `10-13_中间件服务层开发下.md` |
-| done | 109 | [10.4]--10-4中间件model-middleconfig创建更多资源ubkz.com | [10.4]--10-4中间件model-MiddleConfig创建更多资源ubkz.com | 501 | `10-4_中间件MiddleConfig模型.md` |
-| done | 110 | [10.2]--10-2gopaas平台中间件model-middle_port更多资源ubkz.com | [10.2]--10-2GoPAAS平台中间件model-middle_port更多资源ubkz.com | 607 | `10-2_中间件MiddlePort模型.md` |
-| done | 111 | [10.3]--10-3中间件model-middle_env创建更多资源ubkz.com | [10.3]--10-3中间件model-middle_env创建更多资源ubkz.com | 587 | `10.3_中间件环境变量模型.md` |
-| done | 112 | [10.1]--10-1go云原生paas平台中间件model-middlewa更多资源ubkz.com | [10.1]--10-1Go云原生PaaS平台中间件model-middlewa更多资源ubkz.com | 2212 | `10-1_中间件Middleware主模型.md` |
-| done | 113 | [11.13]--11-13总结&amp;思考更多资源ubkz.com | [11.13]--11-13总结&amp;思考更多资源ubkz.com | 957 | `11.13_云应用市场总结与思考.md` |
-| done | 114 | [11.9]--11-9云应用市场apiform表单处理研发更多资源ubkz.com | [11.9]--11-9云应用市场APIform表单处理研发更多资源ubkz.com | 2165 | `11.9_云应用市场API表单处理.md` |
-| done | 115 | [11.6]--11-6云应用市场服务端proto开发更多资源ubkz.com | [11.6]--11-6云应用市场服务端Proto开发更多资源ubkz.com | 1573 | `11.6_云应用市场服务端Proto开发.md` |
-| done | 116 | [11.11]--11-11云应用addappstore（中）更多资源ubkz.com | [11.11]--11-11云应用addAppStore（中）更多资源ubkz.com | 741 | `11.11_云应用AddAppStore中.md` |
-| done | 117 | [11.3]--11-3云应用辅助信息model开发更多资源ubkz.com | [11.3]--11-3云应用辅助信息model开发更多资源ubkz.com | 2017 | `11.3_云应用辅助信息Model开发.md` |
-| done | 118 | [11.5]--11-5云应用平台service代码开发更多资源ubkz.com | [11.5]--11-5云应用平台Service代码开发更多资源ubkz.com | 821 | `11.5_云应用平台Service代码开发.md` |
-| done | 119 | [11.10]--11-10云应用添加应用addappstore接口（上）更多资源ubkz.com | [11.10]--11-10云应用添加应用addAppStore接口（上）更多资源ubkz.com | 1146 | `11.10_云应用AddAppStore接口上.md` |
-| done | 120 | [11.8]--11-8云应用市场apiproto开发更多资源ubkz.com | [11.8]--11-8云应用市场APiProto开发更多资源ubkz.com | 1676 | `11-8_云应用市场ApiProto开发.md` |
-| done | 121 | [11.1]--11-1云应用市场开发介绍更多资源ubkz.com | [11.1]--11-1云应用市场开发介绍更多资源ubkz.com | 614 | `11-1_云应用市场开发介绍.md` |
-| done | 122 | [11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com | [11.2]--11-2云应用app_store模型开发及管理说明更多资源ubkz.com | 2764 | `11-2_app_store模型开发.md` |
-| done | 123 | [11.4]--11-4云应用市场repository代码开发更多资源ubkz.com | [11.4]--11-4云应用市场repository代码开发更多资源ubkz.com | 2718 | `11-4_云应用市场repository开发.md` |
-| done | 124 | [11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com | [11.7]--11-7云应用市场服务端handler开发更多资源ubkz.com | 1863 | `11-7_云应用市场handler开发.md` |
-| done | 125 | [11.12]--11-12云应用市场api开发（下）更多资源ubkz.com | [11.12]--11-12云应用市场API开发（下）更多资源ubkz.com | 1137 | `11-12_云应用市场API开发下.md` |
-| done | 126 | [12.14]--12-14用户中前端api开发更多资源ubkz.com | [12.14]--12-14用户中前端API开发更多资源ubkz.com | 4303 | `12-14_用户中心前端API开发.md` |
-| done | 127 | [12.15]--12-15总结&amp;思考更多资源ubkz.com | [12.15]--12-15总结&amp;思考更多资源ubkz.com | 1294 | `12-15_用户中心总结与思考.md` |
-| done | 128 | [12.2]--12-2元原生平台userrepository开发更多资源ubkz.com | [12.2]--12-2元原生平台userrepository开发更多资源ubkz.com | 2986 | `12-2_用户仓储开发.md` |
-| done | 129 | [12.11]--12-11用户中心-userhandler开发更多资源ubkz.com | [12.11]--12-11用户中心-userhandler开发更多资源ubkz.com | 1181 | `12-11_用户Handler开发.md` |
-| done | 130 | [12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com | [12.12]--12-12用户中心-rolehandler开发更多资源ubkz.com | 1393 | `12-12_角色Handler开发.md` |
-| done | 131 | [12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com | [12.13]--12-13用户中心-权限-handler开发更多资源ubkz.com | 1210 | `12-13_权限Handler开发.md` |
-| done | 132 | [12.7]--12-7用户中心-role-service开发更多资源ubkz.com | [12.7]--12-7用户中心-role-service开发更多资源ubkz.com | 692 | `12-7_角色Service开发.md` |
-| done | 133 | [12.8]--12-8用户中心-权限-service开发更多资源ubkz.com | [12.8]--12-8用户中心-权限-service开发更多资源ubkz.com | 314 | `12-8_权限Service开发.md` |
-| done | 134 | [12.6]--12-6用户中心-user-service开发更多资源ubkz.com | [12.6]--12-6用户中心-user-service开发更多资源ubkz.com | 759 | `12.6_用户服务开发.md` |
-| done | 135 | [12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com | [12.5]--12-5用户中心-权限-repository开发更多资源ubkz.com | 517 | `12.5_权限数据层开发.md` |
-| done | 136 | [12.9]--12-9用户中心-user-proto开发更多资源ubkz.com | [12.9]--12-9用户中心-user-proto开发更多资源ubkz.com | 770 | `12.9_用户proto接口定义.md` |
-| done | 137 | [12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com | [12.4]--12-4用户中心-权限-repository开发更多资源ubkz.com | 517 | `12.4_权限数据层开发.md` |
-| done | 138 | [12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com | [12.3]--12-3用户中心-角色-repository开发更多资源ubkz.com | 1659 | `12.3_角色数据层开发.md` |
-| done | 139 | [12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com | [12.10]--12-10用户中心-角色-权限-proto开发及生成更多资源ubkz.com | 1341 | `12.10_角色权限proto定义及生成.md` |
-| done | 140 | [12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com | [12.1]--12-1云原生平台用户中心-user-role-permissi更多资源ubkz.com | 2923 | `12.1_用户中心模型设计.md` |
+| done | 67 | [7.2]-7-2路由model与repository开发调整更多资源| [7.2]-7-2路由model与repository开发调整更多资源| 2562 | `7-2_路由model与repository开发.md` |
+| done | 68 | [7.1]-7-1路由ingress架构详解更多资源| [7.1]-7-1路由ingress架构详解更多资源| 3549 | `7-1_ingress架构详解.md` |
+| done | 69 | [7.7]-7-7route前端管理页面及效果演示更多资源| [7.7]-7-7route前端管理页面及效果演示更多资源| 2143 | `7-7_路由前端管理与演示.md` |
+| done | 70 | [7.8]-7-8总结&amp;思考更多资源| [7.8]-7-8总结&amp;思考更多资源| 1842 | `7-8_路由总结与思考.md` |
+| done | 71 | [7.4]-7-4路由handler逻辑开发和注意事项更多资源| [7.4]-7-4路由handler逻辑开发和注意事项更多资源| 2454 | `7-4_路由handler开发.md` |
+| done | 72 | [7.5]-7-5route对外api的开发更多资源| [7.5]-7-5route对外API的开发更多资源| 3216 | `7-5_路由对外API开发.md` |
+| done | 73 | [7.3]-7-3路由service开发更多资源| [7.3]-7-3路由service开发更多资源| 4313 | `7-3_路由service开发.md` |
+| done | 74 | [7.6]-7-6在k8s中创建nginx-controller资源对象更多资源| [7.6]-7-6在k8s中创建nginx-controller资源对象更多资源| 1227 | `7-6_k8s部署nginxcontroller.md` |
+| done | 75 | [8.1]-8-1gopaas平台监控系统prometheus架构介绍更多资源| [8.1]-8-1GoPaaS平台监控系统Prometheus架构介绍更多资源| 3491 | `8-1_Prometheus架构介绍.md` |
+| done | 76 | [8.2]-8-2gopaas平台prometheus监控安装更多资源| [8.2]-8-2GoPaaS平台Prometheus监控安装更多资源| 2149 | `8-2_Prometheus监控安装.md` |
+| done | 77 | [8.4]-8-4总结&amp;思考更多资源| [8.4]-8-4总结&amp;思考更多资源| 1392 | `8-4_总结思考.md` |
+| done | 78 | [8.3]-8-3gopaas平台监控grafana图标使用说明更多资源| [8.3]-8-3GoPaaS平台监控Grafana图标使用说明更多资源| 2986 | `8-3_Grafana图表使用说明.md` |
+| done | 79 | [9.6]-9-6gopaas平台cephadm安装基础集群（上）更多资源| [9.6]-9-6GoPaaS平台cephadm安装基础集群（上）更多资源| 3136 | `9.6_Cephadm安装基础集群上.md` |
+| done | 80 | [9.2]-9-2gopaas平台ceph核心组件介绍更多资源| [9.2]-9-2GoPaaS平台Ceph核心组件介绍更多资源| 1440 | `9.2_Ceph核心组件介绍.md` |
+| done | 81 | [9.3]-9-3gopaas平台ceph存储过程及核心概念介绍更多资源| [9.3]-9-3GoPaaS平台Ceph存储过程及核心概念介绍更多资源| 3315 | `9.3_Ceph存储过程与核心概念.md` |
+| done | 82 | [9.16]-9-16gopaas平台volumeapi开发更多资源| [9.16]-9-16GoPaaS平台volumeapi开发更多资源| 2265 | `9.16_VolumeAPI开发.md` |
+| done | 83 | [9.4]-9-4gopaas平台ceph资源购买注意事项更多资源| [9.4]-9-4GoPaaS平台Ceph资源购买注意事项更多资源| 2684 | `9.4_Ceph资源购买注意事项.md` |
+| done | 84 | [9.12]-9-12gopaas平台service开发（上）更多资源| [9.12]-9-12GoPaaS平台Service开发（上）更多资源| 2468 | `9.12_存储Service开发上.md` |
+| done | 85 | [9.11]-9-11gopaas平台pvc模型开发更多资源| [9.11]-9-11GoPaaS平台PVC模型开发更多资源| 2264 | `9.11_PVC模型开发.md` |
+| done | 86 | [9.15]-9-15gopaas平台servicehandler开发更多资源| [9.15]-9-15GoPaaS平台ServiceHandler开发更多资源| 1957 | `9.15_存储ServiceHandler开发.md` |
+| done | 87 | [9.5]-9-5gopaas平台ceph安全机器初始化更多资源| [9.5]-9-5GoPaaS平台Ceph安全机器初始化更多资源| 1846 | `9.5_Ceph安全机器初始化.md` |
+| done | 88 | [9.7]-9-7gopaas平台cephadm安装基础集群（下）更多资源| [9.7]-9-7GoPaaS平台cephadm安装基础集群（下）更多资源| 3824 | `9-7_cephadm安装基础集群下.md` |
+| done | 89 | [9.9]-9-9gopaas平台k8s通过csi方式添加外部ceph系统（更多资源| [9.9]-9-9GoPaaS平台k8s通过CSI方式添加外部Ceph系统（更多资源| 3721 | `9-9_k8s通过CSI添加外部Ceph上.md` |
+| done | 90 | [9.17]-9-17总结&amp;思考更多资源| [9.17]-9-17总结&amp;思考更多资源| 1509 | `9-17_总结与思考.md` |
+| done | 91 | [9.1]-9-1gopaas平台分布式存储ceph架构介绍更多资源| [9.1]-9-1GoPaaS平台分布式存储Ceph架构介绍更多资源| 3317 | `9-1_Ceph架构介绍.md` |
+| done | 92 | [9.13]-9-13gopaas平台service开发（下）更多资源| [9.13]-9-13GoPaaS平台Service开发（下）更多资源| 2602 | `9-13_Service开发下.md` |
+| done | 93 | [9.10]-9-10gopaas平台k8s通过csi方式添加外部ceph系统更多资源| [9.10]-9-10GoPaaS平台k8s通过CSI方式添加外部Ceph系统更多资源| 3380 | `9-10_k8s通过CSI添加外部Ceph下.md` |
+| done | 94 | [9.14]-9-14gopaas平台pv与pvc的关系和原理说明更多资源| [9.14]-9-14GoPaaS平台PV与PVC的关系和原理说明更多资源| 4905 | `9-14_PV与PVC关系原理.md` |
+| done | 95 | [9.8]-9-8gopaas平台ceph核心组件安装更多资源| [9.8]-9-8GoPaaS平台ceph核心组件安装更多资源| 2911 | `9-8_ceph核心组件安装.md` |
+| done | 96 | [10.16]-10-16中间件main调整及handler开发（下）更多资源| [10.16]-10-16中间件main调整及handler开发（下）更多资源| 1770 | `10.16_中间件main与handler开发下.md` |
+| done | 97 | [10.14]-10-14中间件service对应版本服务代码开发更多资源| [10.14]-10-14中间件service对应版本服务代码开发更多资源| 1661 | `10.14_中间件类型与版本服务.md` |
+| done | 98 | [10.12]-10-12中间件middlewareservice开发（3）更多资源| [10.12]-10-12中间件middlewareservice开发（3）更多资源| 2550 | `10.12_中间件服务层开发三.md` |
+| done | 99 | [10.8]-10-8中间件类型type和verisonrepository开更多资源| [10.8]-10-8中间件类型type和verisonrepository开更多资源| 1302 | `10.8_中间件类型仓储.md` |
+| done | 100 | [10.19]-10-19中间件前端页面以及核心api开发（下）更多资源| [10.19]-10-19中间件前端页面以及核心API开发（下）更多资源| 2947 | `10.19_中间件前端页面与核心API开发下.md` |
+| done | 101 | [10.18]-10-18中间件前端页面以及核心api开发（中）更多资源| [10.18]-10-18中间件前端页面以及核心API开发（中）更多资源| 2768 | `10.18_中间件前端页面与核心API开发中.md` |
+| done | 102 | [10.11]-10-11中间件service开发（2）更多资源| [10.11]-10-11中间件service开发（2）更多资源| 629 | `10.11_中间件服务层二.md` |
+| done | 103 | [10.6]-10-6中间件类型type和version创建更多资源| [10.6]-10-6中间件类型type和version创建更多资源| 958 | `10.6_中间件类型与版本模型.md` |
+| done | 104 | [10.10]-10-10中间件service开发（1）更多资源| [10.10]-10-10中间件service开发（1）更多资源| 2089 | `10-10_中间件服务层开发上.md` |
+| done | 105 | [10.7]-10-7中间件middlewarerepository开发更多资源| [10.7]-10-7中间件middlewarerepository开发更多资源| 1672 | `10-7_中间件仓储层开发.md` |
+| done | 106 | [10.17]-10-17中间件前端页面以及核心api开发（上）更多资源| [10.17]-10-17中间件前端页面以及核心API开发（上）更多资源| 2485 | `10-17_中间件前端页面与核心API开发上.md` |
+| done | 107 | [10.15]-10-15中间件main调整及handler开发（上）更多资源| [10.15]-10-15中间件main调整及handler开发（上）更多资源| 2732 | `10-15_中间件main与handler开发上.md` |
+| done | 108 | [10.13]-10-13中间件middlewareservice开发（4）更多资源| [10.13]-10-13中间件middlewareservice开发（4）更多资源| 1918 | `10-13_中间件服务层开发下.md` |
+| done | 109 | [10.4]-10-4中间件model-middleconfig创建更多资源| [10.4]-10-4中间件model-MiddleConfig创建更多资源| 501 | `10-4_中间件MiddleConfig模型.md` |
+| done | 110 | [10.2]-10-2gopaas平台中间件model-middle_port更多资源| [10.2]-10-2GoPAAS平台中间件model-middle_port更多资源| 607 | `10-2_中间件MiddlePort模型.md` |
+| done | 111 | [10.3]-10-3中间件model-middle_env创建更多资源| [10.3]-10-3中间件model-middle_env创建更多资源| 587 | `10.3_中间件环境变量模型.md` |
+| done | 112 | [10.1]-10-1go云原生paas平台中间件model-middlewa更多资源| [10.1]-10-1Go云原生PaaS平台中间件model-middlewa更多资源| 2212 | `10-1_中间件Middleware主模型.md` |
+| done | 113 | [11.13]-11-13总结&amp;思考更多资源| [11.13]-11-13总结&amp;思考更多资源| 957 | `11.13_云应用市场总结与思考.md` |
+| done | 114 | [11.9]-11-9云应用市场apiform表单处理研发更多资源| [11.9]-11-9云应用市场APIform表单处理研发更多资源| 2165 | `11.9_云应用市场API表单处理.md` |
+| done | 115 | [11.6]-11-6云应用市场服务端proto开发更多资源| [11.6]-11-6云应用市场服务端Proto开发更多资源| 1573 | `11.6_云应用市场服务端Proto开发.md` |
+| done | 116 | [11.11]-11-11云应用addappstore（中）更多资源| [11.11]-11-11云应用addAppStore（中）更多资源| 741 | `11.11_云应用AddAppStore中.md` |
+| done | 117 | [11.3]-11-3云应用辅助信息model开发更多资源| [11.3]-11-3云应用辅助信息model开发更多资源| 2017 | `11.3_云应用辅助信息Model开发.md` |
+| done | 118 | [11.5]-11-5云应用平台service代码开发更多资源| [11.5]-11-5云应用平台Service代码开发更多资源| 821 | `11.5_云应用平台Service代码开发.md` |
+| done | 119 | [11.10]-11-10云应用添加应用addappstore接口（上）更多资源| [11.10]-11-10云应用添加应用addAppStore接口（上）更多资源| 1146 | `11.10_云应用AddAppStore接口上.md` |
+| done | 120 | [11.8]-11-8云应用市场apiproto开发更多资源| [11.8]-11-8云应用市场APiProto开发更多资源| 1676 | `11-8_云应用市场ApiProto开发.md` |
+| done | 121 | [11.1]-11-1云应用市场开发介绍更多资源| [11.1]-11-1云应用市场开发介绍更多资源| 614 | `11-1_云应用市场开发介绍.md` |
+| done | 122 | [11.2]-11-2云应用app_store模型开发及管理说明更多资源| [11.2]-11-2云应用app_store模型开发及管理说明更多资源| 2764 | `11-2_app_store模型开发.md` |
+| done | 123 | [11.4]-11-4云应用市场repository代码开发更多资源| [11.4]-11-4云应用市场repository代码开发更多资源| 2718 | `11-4_云应用市场repository开发.md` |
+| done | 124 | [11.7]-11-7云应用市场服务端handler开发更多资源| [11.7]-11-7云应用市场服务端handler开发更多资源| 1863 | `11-7_云应用市场handler开发.md` |
+| done | 125 | [11.12]-11-12云应用市场api开发（下）更多资源| [11.12]-11-12云应用市场API开发（下）更多资源| 1137 | `11-12_云应用市场API开发下.md` |
+| done | 126 | [12.14]-12-14用户中前端api开发更多资源| [12.14]-12-14用户中前端API开发更多资源| 4303 | `12-14_用户中心前端API开发.md` |
+| done | 127 | [12.15]-12-15总结&amp;思考更多资源| [12.15]-12-15总结&amp;思考更多资源| 1294 | `12-15_用户中心总结与思考.md` |
+| done | 128 | [12.2]-12-2元原生平台userrepository开发更多资源| [12.2]-12-2元原生平台userrepository开发更多资源| 2986 | `12-2_用户仓储开发.md` |
+| done | 129 | [12.11]-12-11用户中心-userhandler开发更多资源| [12.11]-12-11用户中心-userhandler开发更多资源| 1181 | `12-11_用户Handler开发.md` |
+| done | 130 | [12.12]-12-12用户中心-rolehandler开发更多资源| [12.12]-12-12用户中心-rolehandler开发更多资源| 1393 | `12-12_角色Handler开发.md` |
+| done | 131 | [12.13]-12-13用户中心-权限-handler开发更多资源| [12.13]-12-13用户中心-权限-handler开发更多资源| 1210 | `12-13_权限Handler开发.md` |
+| done | 132 | [12.7]-12-7用户中心-role-service开发更多资源| [12.7]-12-7用户中心-role-service开发更多资源| 692 | `12-7_角色Service开发.md` |
+| done | 133 | [12.8]-12-8用户中心-权限-service开发更多资源| [12.8]-12-8用户中心-权限-service开发更多资源| 314 | `12-8_权限Service开发.md` |
+| done | 134 | [12.6]-12-6用户中心-user-service开发更多资源| [12.6]-12-6用户中心-user-service开发更多资源| 759 | `12.6_用户服务开发.md` |
+| done | 135 | [12.5]-12-5用户中心-权限-repository开发更多资源| [12.5]-12-5用户中心-权限-repository开发更多资源| 517 | `12.5_权限数据层开发.md` |
+| done | 136 | [12.9]-12-9用户中心-user-proto开发更多资源| [12.9]-12-9用户中心-user-proto开发更多资源| 770 | `12.9_用户proto接口定义.md` |
+| done | 137 | [12.4]-12-4用户中心-权限-repository开发更多资源| [12.4]-12-4用户中心-权限-repository开发更多资源| 517 | `12.4_权限数据层开发.md` |
+| done | 138 | [12.3]-12-3用户中心-角色-repository开发更多资源| [12.3]-12-3用户中心-角色-repository开发更多资源| 1659 | `12.3_角色数据层开发.md` |
+| done | 139 | [12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源| [12.10]-12-10用户中心-角色-权限-proto开发及生成更多资源| 1341 | `12.10_角色权限proto定义及生成.md` |
+| done | 140 | [12.1]-12-1云原生平台用户中心-user-role-permissi更多资源| [12.1]-12-1云原生平台用户中心-user-role-permissi更多资源| 2923 | `12.1_用户中心模型设计.md` |

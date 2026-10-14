@@ -64,8 +64,8 @@ Ingress 就是在外部网络和集群内部服务之间打通的一个接口，
 
 ```mermaid
 flowchart LR
-    OUT["集群外客户端"] -->|"foo.imooc.com/foo"| IC["Ingress Controller"]
-    OUT -->|"bar.imooc.com/bar"| IC
+    OUT["集群外客户端"] ->|"foo.example.com/foo"| IC["Ingress Controller"]
+    OUT ->|"bar.example.com/bar"| IC
     IC -->|"path 匹配"| SVC1["Service svc-foo"]
     IC -->|"host 匹配"| SVC2["Service svc-bar"]
     SVC1 --> P1["Pod A"]
@@ -326,7 +326,7 @@ kubectl describe ingress test-ingress
 apiVersion: v1
 kind: Secret
 metadata:
-  name: imooc-tls
+  name: example-tls
   namespace: default
 type: kubernetes.io/tls
 data:
@@ -342,10 +342,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - api.imooc.com
-      secretName: imooc-tls
+        - api.example.com
+      secretName: example-tls
   rules:
-    - host: api.imooc.com
+    - host: api.example.com
       http:
         paths:
           - path: /

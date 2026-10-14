@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $T-Service$-deployment
+spec:
+  selector:
+    matchLabels:
+      app: $T-Service$
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: $T-Service$
+    spec:
+      containers:
+      - name: $T-Service$
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80

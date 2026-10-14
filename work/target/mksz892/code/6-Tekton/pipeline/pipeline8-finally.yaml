@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-finally
+spec:
+  tasks:
+    - name: sleep
+      taskRef:
+        name: sleep
+      timeout: 1s
+    - name: goodbye
+      taskRef:
+        name: goodbye
+      runAfter:
+        - sleep
+  finally:
+    - name: cleanup
+      taskRef:
+        name: hello

@@ -39,7 +39,7 @@ pom 里依赖也少：一个 `spring-boot-starter-parent` 父依赖，一个 `sp
 到主节点上把项目打包，确认产物：
 
 ```bash
-cd imooc-k8s-demo/springbootwebdemo
+cd example-k8s-demo/springbootwebdemo
 mvn clean package
 ls -lh target/*.jar
 ```
@@ -71,7 +71,7 @@ springbootwebdemo 项目结构
 ├── src
 │   └── main
 │       ├── java
-│       │   └── com/imooc/k8s
+│       │   └── com/example/k8s
 │       │       ├── ServiceApplication.java（@SpringBootApplication）
 │       │       └── controller/DemoController.java（/hello/hello）
 │       └── resources
@@ -106,8 +106,8 @@ docker run -it -p 8080:8080 springboot-web:1
 容器能正常起来、接口能访问，说明镜像没问题。然后推到私有仓库：
 
 ```bash
-docker tag springboot-web:1 hub.imooc.com/library/springbootweb:v1
-docker push hub.imooc.com/library/springbootweb:v1
+docker tag springboot-web:1 hub.example.com/library/springbootweb:v1
+docker push hub.example.com/library/springbootweb:v1
 ```
 
 镜像这一侧就完工了。
@@ -140,7 +140,7 @@ spec:
     spec:
       containers:
         - name: springboot-web
-          image: hub.imooc.com/library/springbootweb:v1
+          image: hub.example.com/library/springbootweb:v1
           ports:
             - containerPort: 8080
 ---
@@ -165,7 +165,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: springboot.imooc.com
+    - host: springboot.example.com
       http:
         paths:
           - path: /
@@ -183,7 +183,7 @@ spec:
 
 **Service。** 因为配 Ingress 的时候要指定后端 Service，所以这一段不能省。类型是默认的 ClusterIP，`port: 80`、`targetPort: 8080`——Service 自己的端口是 80，转发到容器的 8080。Service 的 selector 要**跟 Deployment 的名字对应上，名字写一样**，这样它才能找到 Deployment 管理下的那些 Pod。
 
-**Ingress。** 配一个域名 `springboot.imooc.com`，再配一个路径，这个域名下所有路径的转发都指向 `springboot-web-demo` 这个 Service，servicePort 对应 Service 定义的 80。
+**Ingress。** 配一个域名 `springboot.example.com`，再配一个路径，这个域名下所有路径的转发都指向 `springboot-web-demo` 这个 Service，servicePort 对应 Service 定义的 80。
 
 三段之间的连接点其实就两个：Deployment 的 label 被 Service 的 selector 选中，Service 的名字被 Ingress 的 backend 引用。
 
@@ -199,14 +199,14 @@ spec:
 │   └── targetPort: 8080 → 转发到容器
 │
 └── Ingress/springboot-web-demo
-    ├── host: springboot.imooc.com
+    ├── host: springboot.example.com
     ├── path: /（Prefix）
     └── backend service: springboot-web-demo，port 80  ← 命中上面 Service
 ```
 
 ```mermaid
 flowchart LR
-    B["浏览器<br/>springboot.imooc.com"] -->|"80"| IC["Ingress Controller<br/>hostNetwork 节点 80"]
+    B["浏览器<br/>springboot.example.com"] ->|"80"| IC["Ingress Controller<br/>hostNetwork 节点 80"]
     IC -->|"host+path 匹配"| SVC["Service springboot-web-demo"]
     SVC -->|"ClusterIP:80 → 8080"| P1["Pod springboot-web-demo-xxxxx"]
     SVC -->|"负载均衡"| P2["Pod springboot-web-demo-yyyyy"]
@@ -224,10 +224,10 @@ kubectl get pod -l app=springboot-web-demo -o wide
 Pod 进入 Running 状态。本机配一条 hosts 指向 Controller 所在的节点：
 
 ```bash
-echo "192.155.20.120 springboot.imooc.com" | sudo tee -a /etc/hosts
+echo "192.155.20.120 springboot.example.com" | sudo tee -a /etc/hosts
 ```
 
-浏览器打开 `http://springboot.imooc.com/hello/hello?name=michael`，返回内容和本地跑的一模一样：
+浏览器打开 `http://springboot.example.com/hello/hello?name=michael`，返回内容和本地跑的一模一样：
 
 ```
 hello michael, i'm springbootwebdemocontroller
@@ -254,7 +254,7 @@ hello michael, i'm springbootwebdemocontroller
 
 ```bash
 # 打包并确认产物
-cd imooc-k8s-demo/springbootwebdemo
+cd example-k8s-demo/springbootwebdemo
 mvn clean package
 jar tf target/springboot-web-demo-1.0.jar | grep -E "BOOT-INF/lib|application"
 
@@ -272,8 +272,8 @@ docker build -t springboot-web:1 .
 docker run -it --rm -p 8080:8080 springboot-web:1
 
 # 推仓库
-docker tag springboot-web:1 hub.imooc.com/library/springbootweb:v1
-docker push hub.imooc.com/library/springbootweb:v1
+docker tag springboot-web:1 hub.example.com/library/springbootweb:v1
+docker push hub.example.com/library/springbootweb:v1
 ```
 
 ### 2. 三段配置一次 apply
@@ -299,7 +299,7 @@ kubectl run curl-test --image=curlimages/curl --rm -it --restart=Never -- \
   curl -s http://springboot-web-demo/hello/hello?name=michael
 
 # 带 Host 头从入口直接打
-curl -s http://192.155.20.120/hello/hello?name=michael -H "Host: springboot.imooc.com"
+curl -s http://192.155.20.120/hello/hello?name=michael -H "Host: springboot.example.com"
 
 # 看应用日志
 kubectl logs -l app=springboot-web-demo -f
@@ -316,7 +316,7 @@ kubectl get pod -l app=springboot-web-demo -o wide
 
 # 连续请求，观察打到不同 Pod 上
 for i in 1 2 3 4 5 6; do
-  curl -s "http://192.155.20.120/hello/hello?name=michael" -H "Host: springboot.imooc.com"
+  curl -s "http://192.155.20.120/hello/hello?name=michael" -H "Host: springboot.example.com"
   kubectl get pod -l app=springboot-web-demo --no-headers -o custom-columns=:metadata.name | head -1
 done
 ```

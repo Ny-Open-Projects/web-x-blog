@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-runafter
+spec:
+  tasks:
+    - name: sleep
+      taskRef:
+        name: sleep
+    - name: goodbye
+      taskRef:
+        name: goodbye
+      runAfter:
+        - sleep

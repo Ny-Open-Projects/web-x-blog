@@ -16,8 +16,8 @@ Repository 首先定义一组接口 `IAppStoreRepository`，把「需要操作�
 package repository
 
 import (
-	"git.imooc.com/coding-535/appStore/domain/model"
-	"git.imooc.com/coding-535/common"
+	"git.example.com/coding-535/appStore/domain/model"
+	"git.example.com/coding-535/common"
 	"github.com/jinzhu/gorm"
 )
 

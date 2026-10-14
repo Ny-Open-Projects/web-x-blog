@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-results
+spec:
+  tasks:
+    - name: results-datetime
+      taskRef:
+        name: results-datetime
+    - name: echo-results-datetime
+      taskRef:
+        name: echo-results-datetime
+      params:
+        - name: datetime
+          value: "$(tasks.results-datetime.results.datetime)"

@@ -1,0 +1,31 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: gitops-app
+  namespace: test-app
+spec:
+  components: 
+    - name: gitops-server
+      type: webservice
+      properties:
+        image: oamdev/hello-world:v1
+        ports:
+         - port: 8000
+           expose: true
+      traits:
+        - type: scaler
+          properties:
+            replicas: 1
+  policies:
+    - name: target-local-k8s
+      type: topology
+      properties:
+        clusters: [""]
+        namespace: "testlocal-app"
+  workflow:
+    steps:
+      - name: deploy-to-local-k8s
+        type: deploy
+        properties:
+          policies: ["target-local-k8s"]
+

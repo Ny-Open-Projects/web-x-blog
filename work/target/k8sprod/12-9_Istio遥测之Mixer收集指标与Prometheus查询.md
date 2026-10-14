@@ -147,7 +147,7 @@ kubectl apply -f metrics.yaml
 
 然后在 Kubernetes 中为 Prometheus 设置端口转发去看——但**我们没有必要这么去做**，它相当于是一个临时的处理方案，把 Prometheus 的端口暴露在集群外的一种方法。既然已经有了 ingress，直接给 Prometheus 做一个 Ingress 就行。
 
-看前面 Helm 的 istio 配置里应该有一个 Prometheus，看看它有没有配置 ingress——`ingress.enabled`，我们可以设置一个 host，叫 `istio-prometheus.imooc.com`，其他的不用动。把这段复制出来，重新生成一个模板：
+看前面 Helm 的 istio 配置里应该有一个 Prometheus，看看它有没有配置 ingress——`ingress.enabled`，我们可以设置一个 host，叫 `istio-prometheus.example.com`，其他的不用动。把这段复制出来，重新生成一个模板：
 
 ```bash
 helm template istio-core --namespace istio-system > istio.yaml
@@ -155,7 +155,7 @@ kubectl apply -f istio.yaml
 kubectl get ingress -n istio-system
 ```
 
-生成了一个 ingress。然后到本机修改 hosts，复制一行，把 ingress 地址指向节点 IP（`istio-prometheus.imooc.com`）。
+生成了一个 ingress。然后到本机修改 hosts，复制一行，把 ingress 地址指向节点 IP（`istio-prometheus.example.com`）。
 
 访问一下——**404，没有找到 Prometheus**。看看是不是有地方配错了：生成的 path 叫 prometheus，当时我们预想的这个域名应该写在前面，其实后面跟一个 path 没有必要，看有没有地方配置这个 contextPath——看到了一个 `contextPath`，把它设置为根目录 `/`，再重新 apply 一次，ingress 变成根目录了，再访问——可以访问了。
 
@@ -234,7 +234,7 @@ kubectl get instance,handler,rule -n istio-system
 helm template istio-core --namespace istio-system > istio.yaml
 kubectl apply -f istio.yaml
 kubectl get ingress -n istio-system
-echo "<ingress 节点 IP> istio-prometheus.imooc.com" >> /etc/hosts
+echo "<ingress 节点 IP> istio-prometheus.example.com" >> /etc/hosts
 
 # 3. 造点流量再看指标
 curl http://<任意节点>:8888/productpage
@@ -253,7 +253,7 @@ istio-system/
 ├── instance/doublerequestcount              # 定义指标结构（value=2，取自 Envoy 属性）
 ├── handler/doublehandler                    # prometheus adapter 输出
 ├── rule/doublehandler                       # 无 match → 全局
-├── ingress/istio-prometheus                # host: istio-prometheus.imooc.com, path: /
+├── ingress/istio-prometheus                # host: istio-prometheus.example.com, path: /
 └── pod/{istio-mixer-*, istio-pilot-*, istio-galley-*}
 default/
 └── pod/{productpage,details,reviews-v1,v2,v3}  # 每个都带 Envoy sidecar

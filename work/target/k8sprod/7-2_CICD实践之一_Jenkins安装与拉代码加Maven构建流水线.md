@@ -101,7 +101,7 @@ pipeline {
         stage('拉取代码') {
             steps {
                 git branch: 'main',
-                    url: 'https://gitee.com/imooc/imooc-k8sdemo.git'
+                    url: 'https://gitee.com/example/example-k8sdemo.git'
             }
         }
     }
@@ -124,7 +124,7 @@ pipeline {
         stage('拉取代码') {
             steps {
                 git branch: 'main',
-                    url: 'https://gitee.com/imooc/imooc-k8sdemo.git'
+                    url: 'https://gitee.com/example/example-k8sdemo.git'
             }
         }
 
@@ -205,7 +205,7 @@ pipeline {
             steps {
                 echo '开始拉取代码'
                 git branch: 'main',
-                    url: 'https://gitee.com/imooc/imooc-k8sdemo.git'
+                    url: 'https://gitee.com/example/example-k8sdemo.git'
             }
         }
 
@@ -241,7 +241,7 @@ ps -ef | grep jenkins.war | grep -v grep
 ss -lnt | grep 8080
 
 # 二、拉不到代码，先在本机验证地址可用性
-git ls-remote https://gitee.com/imooc/imooc-k8sdemo.git
+git ls-remote https://gitee.com/example/example-k8sdemo.git
 
 # 三、Maven 构建慢，是正常的首次拉依赖，别急
 # 可以先在机器上手工跑一次把仓库喂热

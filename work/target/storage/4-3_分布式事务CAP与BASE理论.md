@@ -3,20 +3,14 @@
 ## 纲要
 
 - 为什么下单流程会碰到分布式事务
-  - 本地事务版本：订单与库存同库，`@Transactional` 即可覆盖
-  - 拆分后：扣库存落在独立服务/独立库（stockDB），生成订单在 tradeDB，跨库需分布式事务
-- CAP 理论
-  - C 一致性、A 可用性、P 分区容错性，三者只能取其二
-  - 分布式环境必选 P，只能在 C 与 A 之间取舍
-  - 本地事务没有分区容错诉求，因此 C、A 可同时满足
-- BASE 理论
-  - BA 基本可用、S 柔性状态、E 最终一致
-  - 强一致降级为「基本可用 + 最终一致」是互联网的普遍选择
-- 四种分布式事务实现方案
-  - 二阶段提交（XA）：唯一满足强一致的方案
-  - TCC（Try-Confirm-Cancel）：应用层模拟二阶段，保最终一致
-  - 最大努力提交型：尽力提交每一段，最终一致
-  - 事务型消息（RocketMQ）：基于消息的柔性最终一致
+## 📎 文本↔代码关联
+
+本讲对应课件源码（去品牌化副本，位于 `code/socialecom/`；包名已由原占位包名统一改写为 `com.social.ecom`）：
+
+| 代码文件 | 正文提及 | 职责 |
+| --- | --- | --- |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/service/impl/TradeServiceImpl.java` | 2 次 | `Trade` 业务服务实现（继承 ServiceImpl） |
+| `code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/pojo/Trade.java` | 1 次 | 实体类，主键 `IdType.AUTO` 自增，含自动填充时间字段 |
 
 ## 问题的起点：本地事务何时不够用
 

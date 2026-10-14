@@ -111,8 +111,8 @@ kubectl get pod          # 默认命名空间下六个 Pod
 
 ```bash
 # 把这一段修改一下：所有 image 以 istio 开头的，都换成自己的镜像仓库
-# registry.cn-hangzhou.aliyuncs.com/imooc/istio-<原镜像名>
-sed -i 's#image:"istio/#image: registry.cn-hangzhou.aliyuncs.com/imooc/istio-#g' bookinfo.yaml
+# registry.cn-hangzhou.aliyuncs.com/example/istio-<原镜像名>
+sed -i 's#image:"istio/#image: registry.cn-hangzhou.aliyuncs.com/example/istio-#g' bookinfo.yaml
 grep image bookinfo.yaml
 ```
 

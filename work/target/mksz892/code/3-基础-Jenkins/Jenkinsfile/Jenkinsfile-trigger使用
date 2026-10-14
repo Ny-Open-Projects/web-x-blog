@@ -1,0 +1,55 @@
+pipeline {
+    agent any 
+
+    triggers {
+        GenericTrigger (
+            causeString: 'Generic Cause', 
+            genericVariables: 
+            [[defaultValue: '', key: 'branch_name', regexpFilter: '', value: '$.ref'],
+            [defaultValue: '', key: 'giturl', regexpFilter: '', value: '$.project.git_http_url']], 
+            printContributedVariables: true, 
+            printPostContent: true, 
+            regexpFilterExpression: '', 
+            regexpFilterText: '', 
+            token: 'webhook-token', 
+            tokenCredentialId: ''
+        )
+    }
+
+    options {        
+        timestamps() 
+        parallelsAlwaysFailFast()
+        disableConcurrentBuilds(abortPrevious: true) 
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        skipDefaultCheckout() 
+    }	
+
+    parameters {
+        choice choices: ['refs/heads/main', 'refs/heads/pre', 'refs/heads/test'], name: 'branch_name'
+        string defaultValue: 'http://gitlab.example.com/golang/go.git', name: 'giturl'
+    }
+	
+    stages {
+        stage('branch-gitrul'){
+            steps {
+                script {
+                    branch = branch_name - 'refs/heads/'
+                    print "${branch}"
+                    print "${giturl}"    
+                    checkout scmGit(branches: [[name: "${branch}"]], 
+                    extensions: [], 
+                    userRemoteConfigs: [[credentialsId: 'gitlab', url: "${giturl}"]])    
+                }
+            }
+        }
+        stage('clone') {
+            steps {
+				script{
+                     //cleanWs()  
+                     sh "ls -la"
+                     
+				}
+            }
+        }	
+    }
+}

@@ -1,0 +1,32 @@
+kubectl edit cm argocd-cm -n argocd
+apiVersion: v1
+data:
+  dex.config: |
+    connectors:
+      - type: ldap
+        name: ldap用户登陆
+        id: ldap
+        config:
+          host: gitlab.example.com:389
+          insecureNoSSL: true
+          insecureSkipVerify: true
+          bindDN: "$dex.ldap.bindDN"
+          bindPW: "$dex.ldap.bindPW"
+          usernamePrompt: username
+          userSearch:
+            baseDN: ou=user,dc=example,dc=com
+            filter: ""
+            username: cn
+            idAttr: uid
+            emailAttr: mail
+          groupSearch: 
+            baseDN: ou=group,dc=example,dc=com
+            filter: "(cn=argocd)" 
+            userMatchers:
+            - userAttr: DN
+              groupAttr: uniqueMember
+            nameAttr: cn
+  url: https://10.0.7.101:30295        
+# 修改账户密码
+kubectl -n argocd patch secrets argocd-secret --patch "{\"data\":{\"dex.ldap.bindPW\":\"$(echo youer-password | base64 -w 0)\"}}"
+kubectl -n argocd patch secrets argocd-secret --patch "{\"data\":{\"dex.ldap.bindDN\":\"$(echo cn=admin,dc=example,dc=com | base64 -w 0)\"}}"

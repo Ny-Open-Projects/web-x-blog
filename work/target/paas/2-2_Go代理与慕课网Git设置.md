@@ -47,11 +47,11 @@ go env -w GOPRIVATE=git.example.com,github.com/your-org
 
 ## 私有仓库的 Git 协议改写
 
-部分私有代码平台（如课程所用的慕课网）使用 SSH 协议且端口并非标准 22，而是 80。此时 `go get` 内部基于 HTTPS 克隆会失败，需要通过 `git config` 把 HTTPS 地址重写为 SSH 地址：
+部分私有代码平台（如课程所用的课程平台）使用 SSH 协议且端口并非标准 22，而是 80。此时 `go get` 内部基于 HTTPS 克隆会失败，需要通过 `git config` 把 HTTPS 地址重写为 SSH 地址：
 
 ```bash
 # 将平台 HTTPS 地址统一改写为 SSH（端口 80 必须显式写出，不可省略）
-git config --global url."ssh://git@git.imooc.com:80".insteadOf "https://git.imooc.com/"
+git config -global url."ssh://git@git.example.com:80".insteadOf "https://git.example.com/"
 ```
 
 要点：
@@ -97,10 +97,10 @@ go env -w GOPROXY=https://goproxy.cn,direct
 go env -w GOSUMDB=off
 
 # 2. 私有模块绕开代理
-go env -w GOPRIVATE=git.imooc.com
+go env -w GOPRIVATE=git.example.com
 
 # 3. 私有平台使用 SSH（端口 80）而非默认 HTTPS
-git config --global url."ssh://git@git.imooc.com:80".insteadOf "https://git.imooc.com/"
+git config -global url."ssh://git@git.example.com:80".insteadOf "https://git.example.com/"
 
 # 4. 验证
 go env

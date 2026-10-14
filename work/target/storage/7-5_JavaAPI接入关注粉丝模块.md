@@ -9,6 +9,10 @@
 - `UserRepository` 继承 `Neo4jRepository`，用 `@Query` 写 CQL 实现增节点、建关注关系、拉关注列表、拉粉丝列表
 - `UserController` 暴露 follow / listfollow / listfans 三个接口，把 UserNode 转回业务 User 返回
 
+## 📎 代码说明
+
+本讲代码以**内联片段**形式呈现在正文中。课程课件仅发布第 2/3/4 章（MySQL 核心能力）的完整工程源码，本讲所属章节未随课件发布独立源码文件，故不做外部文件关联，请以正文片段为准。
+
 ## 依赖与连接配置
 
 项目的固定套路是：先把存储本身搞透，用它自带的 GUI 把最基础的 CRUD 练熟，结合业务诉求设计流程，最后才把 Java API 接进来。上来就写 Java 代码、对存储基础能力没认知，很容易把自己绕晕。
@@ -36,9 +40,9 @@ spring.neo4j.authentication.password=123456
 
 ```java
 @SpringBootApplication
-@MapperScan("com.imooc.socialcomments.mapper")
-@EntityScan(basePackages = "com.imooc.socialcomments.neoentity")
-@EnableNeo4jRepositories(basePackages = "com.imooc.socialcomments.neomap")
+@MapperScan("com.social.socialcomments.mapper")
+@EntityScan(basePackages = "com.social.socialcomments.neoentity")
+@EnableNeo4jRepositories(basePackages = "com.social.socialcomments.neomap")
 public class SocialApplication {
     public static void main(String[] args) {
         SpringApplication.run(SocialApplication.class, args);

@@ -221,7 +221,7 @@ func CacheGet(data []byte) (*Profile, error) {
 }
 
 func main() {
-	p := Profile{ID: 1, Name: "imooc"}
+	p := Profile{ID: 1, Name: "example"}
 
 	blob, err := CacheSet(p)
 	if err != nil {

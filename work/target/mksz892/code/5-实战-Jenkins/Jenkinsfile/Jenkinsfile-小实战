@@ -1,0 +1,138 @@
+#!groovy
+
+@Library('jenkins-shared-library@main') _
+
+def checkout = new org.checkout()
+def tools = new org.color()
+
+pipeline {
+
+	agent { 
+		node { 
+			label "slave"
+		}
+	}
+
+    options {
+      timestamps()      
+      parallelsAlwaysFailFast()
+      timeout(time: 600, unit: 'SECONDS') 
+      disableConcurrentBuilds(abortPrevious: true) 
+      buildDiscarder(logRotator(numToKeepStr: '30'))
+      skipDefaultCheckout() 
+    }
+
+    parameters {
+        extendedChoice defaultValue: 'main', description: '构建分支', descriptionPropertyValue: 'main,master', multiSelectDelimiter: ',', name: 'build_branch',
+        quoteValue: false, saveJSONParameterToFile: false, type: 'PT_RADIO', value: 'main,master', visibleItemCount: 5        
+    }
+
+    environment {
+        String year = new Date().format("yyyy") 
+        String month = new Date().format("MMdd") 
+        String day = new Date().format("HHmm") 
+        String second = new Date().format("ss")
+		image_prefix = "registry.cn-hangzhou.aliyuncs.com/tool-bucket/tool"   
+        giturl = "http://gitlab.example.com/golang/go.git"     
+    }
+
+    stages {
+        stage('1. 拉取代码') {
+            steps {
+                script {
+                    cleanWs()
+                    // 需要安装ansiColor插件
+                    tools.PrintMessage("1.拉取代码","blue")
+                    checkout.scm(build_branch,giturl)
+                }
+            }
+        }
+        stage('2. 构建镜像') {             
+            steps {
+                script {                    
+                    tools.PrintMessage("2.构建镜像","blue")
+                    try{       
+                        ImageTag = "${image_prefix}:${BUILD_USER}-${build_branch}-${year}${month}${day}${second}-${BUILD_TAG}"
+                        sh """
+                            docker run --rm \
+                                -v `pwd`:/workspace \
+                                -v /root/.docker/config.json:/kaniko/.docker/config.json:ro \
+                                gcr.io/kaniko-project/executor:latest \
+                                --dockerfile=Dockerfile \
+                                --destination=${ImageTag} \
+                                --cache-copy-layers \
+                                --cache=true \
+                                --cache-repo=${image_prefix} \
+                        """
+                    }catch (error){
+                        env.error = sh (returnStdout: true, script: "echo 第1步构建镜像失败：${error}").trim()
+                        echo "Caught: ${error}"
+                        sh "exit 1"
+                    }
+                }
+            }
+        }
+        stage('3.部署') {
+            steps {
+                script {
+                    tools.PrintMessage("3.部署","blue")
+                    sh """
+                        sed -i "s#image: .*#image: ${ImageTag}#" deploy.yaml
+                        kubectl apply -f deploy.yaml
+                    """
+                }
+            }
+        }        
+    }
+
+    post {
+        failure {
+			script{
+				sh "echo failure"
+			}
+        }
+        success {
+			script  {
+              sh """
+                curl -X POST -H "Content-Type: application/json" \
+                        -d '
+                        {
+                        "msg_type": "post",
+                        "content": {
+                                "post": {
+                                        "zh_cn": {
+                                                "title": "Jenkins执行结束-app-${BUILD_TAG}项目",
+                                                "content": 
+                                                        [
+                                                            [       
+                                                                {
+                                                                        "tag": "text",
+                                                                        "text": "构建结果: "
+                                                                },
+                                                                {
+                                                                        "tag": "text",
+                                                                        "text": "成功-app"
+                                                                }
+                                                            ]
+                                                        ]
+                                                  }
+                                         }
+                                    }
+                        }               
+                ' \
+                    https://open.feishu.cn/open-apis/bot/v2/hook/e117c9b1-1428-4393-85b4-4cf605304dbb											  
+              """      
+            }               
+        }                                  
+		unstable {
+			script{
+				sh "echo 构建不稳定"
+			}
+		}
+		aborted {
+			script{
+				currentBuild.displayName = "${BUILD_NUMBER}次构建！构建取消!!!"
+			}
+		}
+    }
+}

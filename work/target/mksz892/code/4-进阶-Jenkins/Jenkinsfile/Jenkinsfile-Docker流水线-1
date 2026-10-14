@@ -1,0 +1,49 @@
+pipeline {
+    agent {
+        node {
+            label 'slave'
+        } 
+    }
+    stages { 
+        stage('Build') {
+            agent {
+                docker {
+					label 'slave'
+                    image 'maven:3.9.3-eclipse-temurin-17'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }        
+            steps {
+                sh 'mvn --version;touch a.txt;ls -l /root/.m2/build.txt'
+            }
+        }        
+        stage('alpine ls') {
+            agent {
+                docker {
+					label 'slave'
+                    image 'alpine:3.14'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }             
+            steps {
+                script {
+                    sh """
+						ls -la;pwd
+                        ls -la /root/.m2/build.txt
+                        echo "#########################"
+                    """
+                }
+            }
+        }  
+		stage('slave-test') {
+            steps {
+                script {
+                    sh """
+                        ls -la;pwd
+                        echo "#########################"
+                    """
+                }
+            }
+        } 
+	}
+}	

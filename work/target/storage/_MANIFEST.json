@@ -50,1265 +50,1265 @@
   },
   "articles": [
     {
-      "id": "[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
-      "title": "[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】",
+      "id": "[1.1]-1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业",
+      "title": "[1.1]-1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业",
       "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】-迅捷文字转语音-1791007989224zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}-第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.1]-1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业zh.txt"
       ],
       "words": 1723,
       "merged": false,
       "tokens": [
         "ldquo",
         "rdquo",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】",
-      "title": "[1.7]--1-7数据库解决方案不仅仅是CRUD那么简单【海量资源：ubkz.com】",
+      "id": "[1.7]-1-7数据库解决方案不仅仅是crud那么简单",
+      "title": "[1.7]-1-7数据库解决方案不仅仅是CRUD那么简单",
       "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.7]--1-7数据库解决方案不仅仅是CRUD那么简单【海量资源：ubkz.com】-迅捷文字转语音-1791008200467zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}-第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.7]-1-7数据库解决方案不仅仅是CRUD那么简单zh.txt"
       ],
       "words": 1323,
       "merged": false,
       "tokens": [
         "crud",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
-      "title": "[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】",
+      "id": "[1.6]-1-6为什么互联网没有万能的解决方案",
+      "title": "[1.6]-1-6为什么互联网没有万能的解决方案",
       "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】-迅捷文字转语音-1791008022963zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}-第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.6]-1-6为什么互联网没有万能的解决方案zh.txt"
       ],
       "words": 1410,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
-      "title": "[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】",
+      "id": "[1.3]-1-3为什么要做服务端架构分层",
+      "title": "[1.3]-1-3为什么要做服务端架构分层",
       "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】-迅捷文字转语音-1791008009285zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}-第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.3]-1-3为什么要做服务端架构分层zh.txt"
       ],
       "words": 551,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
-      "title": "[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】",
+      "id": "[1.5]-1-5数据库存储的瓶颈与短板效应",
+      "title": "[1.5]-1-5数据库存储的瓶颈与短板效应",
       "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】-迅捷文字转语音-1791008020081zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}-第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.5]-1-5数据库存储的瓶颈与短板效应zh.txt"
       ],
       "words": 495,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
-      "title": "[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】",
+      "id": "[1.2]-1-2服务端架构常见的分层方案",
+      "title": "[1.2]-1-2服务端架构常见的分层方案",
       "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】-迅捷文字转语音-1791007998613zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}-第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.2]-1-2服务端架构常见的分层方案zh.txt"
       ],
       "words": 1035,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
-      "title": "[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】",
+      "id": "[1.4]-1-4为什么存储数据库在架构分层中那么重要",
+      "title": "[1.4]-1-4为什么存储数据库在架构分层中那么重要",
       "chapter": "{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}--第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】-迅捷文字转语音-1791008013871zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{1}-第1章如何用更优的数据存储方案，打造更稳定的架构？/[1.4]-1-4为什么存储数据库在架构分层中那么重要zh.txt"
       ],
       "words": 1236,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
-      "title": "[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】",
+      "id": "[2.1]-2-1社交新零售业务场景的发展",
+      "title": "[2.1]-2-1社交新零售业务场景的发展",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】-迅捷文字转语音-1791008236432zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.1]-2-1社交新零售业务场景的发展zh.txt"
       ],
       "words": 3149,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
-      "title": "[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】",
+      "id": "[2.3]-2-3全局视角看问题，实现全景的技术支撑架构（中）",
+      "title": "[2.3]-2-3全局视角看问题，实现全景的技术支撑架构（中）",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】-迅捷文字转语音-1791008253872zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.3]-2-3全局视角看问题，实现全景的技术支撑架构（中）zh.txt"
       ],
       "words": 3320,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[2.13]--2-13本章小结【海量资源：ubkz.com】",
-      "title": "[2.13]--2-13本章小结【海量资源：ubkz.com】",
+      "id": "[2.13]-2-13本章小结",
+      "title": "[2.13]-2-13本章小结",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.13]--2-13本章小结【海量资源：ubkz.com】-迅捷文字转语音-1791008505965zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.13]-2-13本章小结zh.txt"
       ],
       "words": 327,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
-      "title": "[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】",
+      "id": "[2.6]-2-6使用docker解决mysql的高效部署",
+      "title": "[2.6]-2-6使用docker解决mysql的高效部署",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】-迅捷文字转语音-1791008276529zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.6]-2-6使用docker解决mysql的高效部署zh.txt"
       ],
       "words": 4893,
       "merged": false,
       "tokens": [
         "docker",
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】",
-      "title": "[2.10]--2-10MybatisPlus进阶，高效的ORM代码实现（上）【海量资源：ubkz.com】",
+      "id": "[2.10]-2-10mybatisplus进阶，高效的orm代码实现（上）",
+      "title": "[2.10]-2-10MybatisPlus进阶，高效的ORM代码实现（上）",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.10]--2-10MybatisPlus进阶，高效的ORM代码实现（上）【海量资源：ubkz.com】-迅捷文字转语音-1791008478637zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.10]-2-10MybatisPlus进阶，高效的ORM代码实现（上）zh.txt"
       ],
       "words": 2965,
       "merged": false,
       "tokens": [
         "mybatisplus",
         "orm",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java"
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java"
       ]
     },
     {
-      "id": "[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
-      "title": "[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】",
+      "id": "[2.2]-2-2全局视角看问题，实现全景的技术支撑架构（上）",
+      "title": "[2.2]-2-2全局视角看问题，实现全景的技术支撑架构（上）",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】-迅捷文字转语音-1791008245937zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.2]-2-2全局视角看问题，实现全景的技术支撑架构（上）zh.txt"
       ],
       "words": 1659,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】",
-      "title": "[2.11]--2-11MybatisPlus进阶，高效的ORM代码实现（中）【海量资源：ubkz.com】",
+      "id": "[2.11]-2-11mybatisplus进阶，高效的orm代码实现（中）",
+      "title": "[2.11]-2-11MybatisPlus进阶，高效的ORM代码实现（中）",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.11]--2-11MybatisPlus进阶，高效的ORM代码实现（中）【海量资源：ubkz.com】-迅捷文字转语音-1791008487982zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.11]-2-11MybatisPlus进阶，高效的ORM代码实现（中）zh.txt"
       ],
       "words": 2814,
       "merged": false,
       "tokens": [
         "mybatisplus",
         "orm",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java"
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java"
       ]
     },
     {
-      "id": "[2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】",
-      "title": "[2.5]--2-5高效部署之容器化利器Docker【海量资源：ubkz.com】",
+      "id": "[2.5]-2-5高效部署之容器化利器docker",
+      "title": "[2.5]-2-5高效部署之容器化利器Docker",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.5]--2-5高效部署之容器化利器Docker【海量资源：ubkz.com】-迅捷文字转语音-1791008261566zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.5]-2-5高效部署之容器化利器Dockerzh.txt"
       ],
       "words": 5669,
       "merged": false,
       "tokens": [
         "docker",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】",
-      "title": "[2.12]--2-12MybatisPlus进阶，高效的ORM代码实现（下）【海量资源：ubkz.com】",
+      "id": "[2.12]-2-12mybatisplus进阶，高效的orm代码实现（下）",
+      "title": "[2.12]-2-12MybatisPlus进阶，高效的ORM代码实现（下）",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.12]--2-12MybatisPlus进阶，高效的ORM代码实现（下）【海量资源：ubkz.com】-迅捷文字转语音-1791008496745zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.12]-2-12MybatisPlus进阶，高效的ORM代码实现（下）zh.txt"
       ],
       "words": 3818,
       "merged": false,
       "tokens": [
         "mybatisplus",
         "orm",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java"
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java"
       ]
     },
     {
-      "id": "[2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
-      "title": "[2.9]--2-9MybatisPlus基础能力搭建用户模块（下）【海量资源：ubkz.com】",
+      "id": "[2.9]-2-9mybatisplus基础能力搭建用户模块（下）",
+      "title": "[2.9]-2-9MybatisPlus基础能力搭建用户模块（下）",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.9]--2-9MybatisPlus基础能力搭建用户模块（下）【海量资源：ubkz.com】-迅捷文字转语音-1791008466762zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.9]-2-9MybatisPlus基础能力搭建用户模块（下）zh.txt"
       ],
       "words": 4510,
       "merged": false,
       "tokens": [
         "mybatisplus",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java"
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java"
       ]
     },
     {
-      "id": "[2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
-      "title": "[2.8]--2-8MybatisPlus基础能力搭建用户模块（上）【海量资源：ubkz.com】",
+      "id": "[2.8]-2-8mybatisplus基础能力搭建用户模块（上）",
+      "title": "[2.8]-2-8MybatisPlus基础能力搭建用户模块（上）",
       "chapter": "{2}--第2章社交新零售业务场景的演进与架构方案设计",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}--第2章社交新零售业务场景的演进与架构方案设计/[2.8]--2-8MybatisPlus基础能力搭建用户模块（上）【海量资源：ubkz.com】-迅捷文字转语音-1791008286836zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{2}-第2章社交新零售业务场景的演进与架构方案设计/[2.8]-2-8MybatisPlus基础能力搭建用户模块（上）zh.txt"
       ],
       "words": 3243,
       "merged": false,
       "tokens": [
         "mybatisplus",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/helper/MybatisPlusConfig.java",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/MybatisPlusGenerator.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/helper/MybatisPlusConfig.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/MybatisPlusGenerator.java",
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java"
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java"
       ]
     },
     {
-      "id": "[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
-      "title": "[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】",
+      "id": "[3.19]-3-19导购流程：搜索与详情浏览（下）",
+      "title": "[3.19]-3-19导购流程：搜索与详情浏览（下）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】-迅捷文字转语音-1791009342123zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.19]-3-19导购流程：搜索与详情浏览（下）zh.txt"
       ],
       "words": 3294,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
-      "title": "[3.3]--3-3Mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】",
+      "id": "[3.3]-3-3mysql如何提供事务_索引_读写的基础能力（1）",
+      "title": "[3.3]-3-3Mysql如何提供事务_索引_读写的基础能力（1）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.3]--3-3Mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】-迅捷文字转语音-1791008644957zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.3]-3-3Mysql如何提供事务_索引_读写的基础能力（1）zh.txt"
       ],
       "words": 2540,
       "merged": false,
       "tokens": [
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
-      "title": "[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】",
+      "id": "[3.13]-3-13发布基石：商家与门店（下）",
+      "title": "[3.13]-3-13发布基石：商家与门店（下）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】-迅捷文字转语音-1791009058765zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.13]-3-13发布基石：商家与门店（下）zh.txt"
       ],
       "words": 2658,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
-      "title": "[3.5]--3-5Mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】",
+      "id": "[3.5]-3-5mysql如何提供事务_索引_读写的基础能力（3）",
+      "title": "[3.5]-3-5Mysql如何提供事务_索引_读写的基础能力（3）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.5]--3-5Mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】-迅捷文字转语音-1791008662132zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.5]-3-5Mysql如何提供事务_索引_读写的基础能力（3）zh.txt"
       ],
       "words": 3486,
       "merged": false,
       "tokens": [
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.1]--3-1本章概览【海量资源：ubkz.com】",
-      "title": "[3.1]--3-1本章概览【海量资源：ubkz.com】",
+      "id": "[3.1]-3-1本章概览",
+      "title": "[3.1]-3-1本章概览",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.1]--3-1本章概览【海量资源：ubkz.com】-迅捷文字转语音-1791008631766zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.1]-3-1本章概览zh.txt"
       ],
       "words": 288,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
-      "title": "[3.7]--3-7Mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】",
+      "id": "[3.7]-3-7mysql如何提供事务_索引_读写的基础能力（5）",
+      "title": "[3.7]-3-7Mysql如何提供事务_索引_读写的基础能力（5）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.7]--3-7Mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】-迅捷文字转语音-1791008821898zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.7]-3-7Mysql如何提供事务_索引_读写的基础能力（5）zh.txt"
       ],
       "words": 3904,
       "merged": false,
       "tokens": [
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
-      "title": "[3.6]--3-6Mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】",
+      "id": "[3.6]-3-6mysql如何提供事务_索引_读写的基础能力（4）",
+      "title": "[3.6]-3-6Mysql如何提供事务_索引_读写的基础能力（4）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.6]--3-6Mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】-迅捷文字转语音-1791008671104zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.6]-3-6Mysql如何提供事务_索引_读写的基础能力（4）zh.txt"
       ],
       "words": 1151,
       "merged": false,
       "tokens": [
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
-      "title": "[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】",
+      "id": "[3.18]-3-18导购流程：搜索与详情浏览（上）",
+      "title": "[3.18]-3-18导购流程：搜索与详情浏览（上）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】-迅捷文字转语音-1791009124209zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.18]-3-18导购流程：搜索与详情浏览（上）zh.txt"
       ],
       "words": 5437,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
-      "title": "[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】",
+      "id": "[3.12]-3-12发布基石：商家与门店（上）",
+      "title": "[3.12]-3-12发布基石：商家与门店（上）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】-迅捷文字转语音-1791008867044zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.12]-3-12发布基石：商家与门店（上）zh.txt"
       ],
       "words": 3118,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】",
-      "title": "[3.2]--3-2Mysql选型优劣势【海量资源：ubkz.com】",
+      "id": "[3.2]-3-2mysql选型优劣势",
+      "title": "[3.2]-3-2Mysql选型优劣势",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.2]--3-2Mysql选型优劣势【海量资源：ubkz.com】-迅捷文字转语音-1791008635581zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.2]-3-2Mysql选型优劣势zh.txt"
       ],
       "words": 2573,
       "merged": false,
       "tokens": [
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
-      "title": "[3.4]--3-4Mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】",
+      "id": "[3.4]-3-4mysql如何提供事务_索引_读写的基础能力（2）",
+      "title": "[3.4]-3-4Mysql如何提供事务_索引_读写的基础能力（2）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.4]--3-4Mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】-迅捷文字转语音-1791008652420zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.4]-3-4Mysql如何提供事务_索引_读写的基础能力（2）zh.txt"
       ],
       "words": 3068,
       "merged": false,
       "tokens": [
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
-      "title": "[3.8]--3-8Mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】",
+      "id": "[3.8]-3-8mysql高性能配置-读写能力提升的秘诀（上）",
+      "title": "[3.8]-3-8Mysql高性能配置-读写能力提升的秘诀（上）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.8]--3-8Mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】-迅捷文字转语音-1791008830528zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.8]-3-8Mysql高性能配置-读写能力提升的秘诀（上）zh.txt"
       ],
       "words": 4942,
       "merged": false,
       "tokens": [
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
-      "title": "[3.9]--3-9Mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】",
+      "id": "[3.9]-3-9mysql高性能配置-读写能力提升的秘诀（下）",
+      "title": "[3.9]-3-9Mysql高性能配置-读写能力提升的秘诀（下）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.9]--3-9Mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】-迅捷文字转语音-1791008844519zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.9]-3-9Mysql高性能配置-读写能力提升的秘诀（下）zh.txt"
       ],
       "words": 3379,
       "merged": false,
       "tokens": [
         "mysql",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】",
-      "title": "[3.16]--3-16交易核心：SKU-库存模型的发布（上）【海量资源：ubkz.com】",
+      "id": "[3.16]-3-16交易核心：sku-库存模型的发布（上）",
+      "title": "[3.16]-3-16交易核心：SKU-库存模型的发布（上）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.16]--3-16交易核心：SKU-库存模型的发布（上）【海量资源：ubkz.com】-迅捷文字转语音-1791009099568zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.16]-3-16交易核心：SKU-库存模型的发布（上）zh.txt"
       ],
       "words": 5059,
       "merged": false,
       "tokens": [
         "sku-",
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】",
-      "title": "[3.17]--3-17交易核心：SKU-库存模型的发布（下）【海量资源：ubkz.com】",
+      "id": "[3.17]-3-17交易核心：sku-库存模型的发布（下）",
+      "title": "[3.17]-3-17交易核心：SKU-库存模型的发布（下）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.17]--3-17交易核心：SKU-库存模型的发布（下）【海量资源：ubkz.com】-迅捷文字转语音-1791009113597zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.17]-3-17交易核心：SKU-库存模型的发布（下）zh.txt"
       ],
       "words": 3734,
       "merged": false,
       "tokens": [
         "sku-",
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
-      "title": "[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】",
+      "id": "[3.10]-3-10领域驱动设计-领域模型的重要性（上）",
+      "title": "[3.10]-3-10领域驱动设计-领域模型的重要性（上）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】-迅捷文字转语音-1791008854860zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.10]-3-10领域驱动设计-领域模型的重要性（上）zh.txt"
       ],
       "words": 3336,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
-      "title": "[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】",
+      "id": "[3.11]-3-11领域驱动设计-领域模型的重要性（下）",
+      "title": "[3.11]-3-11领域驱动设计-领域模型的重要性（下）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】-迅捷文字转语音-1791008861997zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.11]-3-11领域驱动设计-领域模型的重要性（下）zh.txt"
       ],
       "words": 2144,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
-      "title": "[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】",
+      "id": "[3.14]-3-14导购核心：商品-类目-品牌-属性库模型的发布（上）",
+      "title": "[3.14]-3-14导购核心：商品-类目-品牌-属性库模型的发布（上）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】-迅捷文字转语音-1791009069382zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.14]-3-14导购核心：商品-类目-品牌-属性库模型的发布（上）zh.txt"
       ],
       "words": 2312,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
-      "title": "[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】",
+      "id": "[3.15]-3-15导购核心：商品-类目-品牌-属性库模型的发布（下）",
+      "title": "[3.15]-3-15导购核心：商品-类目-品牌-属性库模型的发布（下）",
       "chapter": "{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}--第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】-迅捷文字转语音-1791009078901zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{3}-第3章发挥Mysql选型优势，构建新零售核心门店与商品能力/[3.15]-3-15导购核心：商品-类目-品牌-属性库模型的发布（下）zh.txt"
       ],
       "words": 4377,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com",
         "mysql"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
-      "title": "[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】",
+      "id": "[4.3]-4-3如何用分布式事务保证下单流程一致性（上）",
+      "title": "[4.3]-4-3如何用分布式事务保证下单流程一致性（上）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】-迅捷文字转语音-1791009812435zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.3]-4-3如何用分布式事务保证下单流程一致性（上）zh.txt"
       ],
       "words": 2434,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】",
-      "title": "[4.7]--4-7使用Seata改造下单流程（上）【海量资源：ubkz.com】",
+      "id": "[4.7]-4-7使用seata改造下单流程（上）",
+      "title": "[4.7]-4-7使用Seata改造下单流程（上）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.7]--4-7使用Seata改造下单流程（上）【海量资源：ubkz.com】-迅捷文字转语音-1791010224604zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.7]-4-7使用Seata改造下单流程（上）zh.txt"
       ],
       "words": 4378,
       "merged": false,
       "tokens": [
         "seata",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
-      "title": "[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】",
+      "id": "[4.11]-4-11支付成功：支付及防重流程（下）",
+      "title": "[4.11]-4-11支付成功：支付及防重流程（下）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】-迅捷文字转语音-1791010265065zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.11]-4-11支付成功：支付及防重流程（下）zh.txt"
       ],
       "words": 4515,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
-      "title": "[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】",
+      "id": "[4.5]-4-5如何用分布式事务保证下单流程一致性（下）",
+      "title": "[4.5]-4-5如何用分布式事务保证下单流程一致性（下）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】-迅捷文字转语音-1791009832385zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.5]-4-5如何用分布式事务保证下单流程一致性（下）zh.txt"
       ],
       "words": 2315,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
-      "title": "[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】",
+      "id": "[4.1]-4-1下单交易：使用流程串联下单动作（上）",
+      "title": "[4.1]-4-1下单交易：使用流程串联下单动作（上）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】-迅捷文字转语音-1791009777149zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.1]-4-1下单交易：使用流程串联下单动作（上）zh.txt"
       ],
       "words": 1807,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
-      "title": "[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】",
+      "id": "[4.10]-4-10支付成功：支付及防重流程（上）",
+      "title": "[4.10]-4-10支付成功：支付及防重流程（上）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】-迅捷文字转语音-1791010255370zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.10]-4-10支付成功：支付及防重流程（上）zh.txt"
       ],
       "words": 4075,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
-      "title": "[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】",
+      "id": "[4.12]-4-12用户操作完整性：手动取消订单流程",
+      "title": "[4.12]-4-12用户操作完整性：手动取消订单流程",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】-迅捷文字转语音-1791010276531zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.12]-4-12用户操作完整性：手动取消订单流程zh.txt"
       ],
       "words": 3549,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
-      "title": "[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】",
+      "id": "[4.13]-4-13保证生命周期完整性：自动取消订单流程（上）",
+      "title": "[4.13]-4-13保证生命周期完整性：自动取消订单流程（上）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】-迅捷文字转语音-1791010563000zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.13]-4-13保证生命周期完整性：自动取消订单流程（上）zh.txt"
       ],
       "words": 2485,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
-      "title": "[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】",
+      "id": "[4.14]-4-14保证生命周期完整性：自动取消订单流程（下）",
+      "title": "[4.14]-4-14保证生命周期完整性：自动取消订单流程（下）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】-迅捷文字转语音-1791010572015zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.14]-4-14保证生命周期完整性：自动取消订单流程（下）zh.txt"
       ],
       "words": 3732,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
-      "title": "[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】",
+      "id": "[4.4]-4-4如何用分布式事务保证下单流程一致性（中）",
+      "title": "[4.4]-4-4如何用分布式事务保证下单流程一致性（中）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】-迅捷文字转语音-1791009818976zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.4]-4-4如何用分布式事务保证下单流程一致性（中）zh.txt"
       ],
       "words": 5431,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】",
-      "title": "[4.6]--4-6Seata对分布式事务的支持【海量资源：ubkz.com】",
+      "id": "[4.6]-4-6seata对分布式事务的支持",
+      "title": "[4.6]-4-6Seata对分布式事务的支持",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.6]--4-6Seata对分布式事务的支持【海量资源：ubkz.com】-迅捷文字转语音-1791009838555zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.6]-4-6Seata对分布式事务的支持zh.txt"
       ],
       "words": 4949,
       "merged": false,
       "tokens": [
         "seata",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
-      "title": "[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】",
+      "id": "[4.2]-4-2下单交易：使用流程串联下单动作（下）",
+      "title": "[4.2]-4-2下单交易：使用流程串联下单动作（下）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】-迅捷文字转语音-1791009788490zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.2]-4-2下单交易：使用流程串联下单动作（下）zh.txt"
       ],
       "words": 5629,
       "merged": false,
       "tokens": [
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】",
-      "title": "[4.8]--4-8使用Seata改造下单流程（中）【海量资源：ubkz.com】",
+      "id": "[4.8]-4-8使用seata改造下单流程（中）",
+      "title": "[4.8]-4-8使用Seata改造下单流程（中）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.8]--4-8使用Seata改造下单流程（中）【海量资源：ubkz.com】-迅捷文字转语音-1791010236589zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.8]-4-8使用Seata改造下单流程（中）zh.txt"
       ],
       "words": 4223,
       "merged": false,
       "tokens": [
         "seata",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
     {
-      "id": "[4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】",
-      "title": "[4.9]--4-9使用Seata改造下单流程（下）【海量资源：ubkz.com】",
+      "id": "[4.9]-4-9使用seata改造下单流程（下）",
+      "title": "[4.9]-4-9使用Seata改造下单流程（下）",
       "chapter": "{4}--第4章高事务保证要求的交易核心能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}--第4章高事务保证要求的交易核心能力/[4.9]--4-9使用Seata改造下单流程（下）【海量资源：ubkz.com】-迅捷文字转语音-1791010248553zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{4}-第4章高事务保证要求的交易核心能力/[4.9]-4-9使用Seata改造下单流程（下）zh.txt"
       ],
       "words": 1723,
       "merged": false,
       "tokens": [
         "seata",
-        "ubkz",
+        "",
         "com"
       ],
       "code_refs": [
         "code/socialecom/README.md",
-        "code/socialecom/第四章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第二章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/UserMapper.java",
+        "code/socialecom/第四章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
         "code/socialecom/第三章代码/socialecom/src/main/resources/mapper/SkuMapper.xml",
-        "code/socialecom/第三章代码/socialecom/src/main/java/com/imooc/socialecom/mapper/xml/SkuMapper.xml",
+        "code/socialecom/第三章代码/socialecom/src/main/java/com/social/ecom/mapper/xml/SkuMapper.xml",
         "code/socialecom/第四章代码/socialecom/src/main/resources/mapper/TestMapper.xml"
       ]
     },
@@ -1317,7 +1317,7 @@
       "title": "[5.1]--5-1Redis选型优劣势",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.1]--5-1Redis选型优劣势-迅捷文字转语音-1791010665274zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.1]-5-1Redis选型优劣势zh.txt"
       ],
       "words": 1843,
       "merged": false,
@@ -1331,7 +1331,7 @@
       "title": "[5.5]--5-5实用的Redis分布式解决方案（1）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.5]--5-5实用的Redis分布式解决方案（1）-迅捷文字转语音-1791010700679zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.5]-5-5实用的Redis分布式解决方案（1）zh.txt"
       ],
       "words": 2956,
       "merged": false,
@@ -1345,7 +1345,7 @@
       "title": "[5.7]--5-7实用的Redis分布式解决方案（3）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.7]--5-7实用的Redis分布式解决方案（3）-迅捷文字转语音-1791010888074zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.7]-5-7实用的Redis分布式解决方案（3）zh.txt"
       ],
       "words": 3860,
       "merged": false,
@@ -1359,7 +1359,7 @@
       "title": "[5.16]--5-16主从不一致我们该怎么办",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.16]--5-16主从不一致我们该怎么办-迅捷文字转语音-1791011189611zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.16]-5-16主从不一致我们该怎么办zh.txt"
       ],
       "words": 1849,
       "merged": false,
@@ -1373,7 +1373,7 @@
       "title": "[5.11]--5-11商品详情缓存化提升查询性能（上）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.11]--5-11商品详情缓存化提升查询性能（上）-迅捷文字转语音-1791010920274zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.11]-5-11商品详情缓存化提升查询性能（上）zh.txt"
       ],
       "words": 5211,
       "merged": false,
@@ -1387,7 +1387,7 @@
       "title": "[5.14]--5-14动手部署Mysql读写分离集群",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.14]--5-14动手部署Mysql读写分离集群-迅捷文字转语音-1791011168070zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.14]-5-14动手部署Mysql读写分离集群zh.txt"
       ],
       "words": 6628,
       "merged": false,
@@ -1402,7 +1402,7 @@
       "title": "[5.10]--5-10动手使用Redis",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.10]--5-10动手使用Redis-迅捷文字转语音-1791010916617zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.10]-5-10动手使用Rediszh.txt"
       ],
       "words": 1024,
       "merged": false,
@@ -1416,7 +1416,7 @@
       "title": "[5.3]--5-3为什么Redis那么快（中）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.3]--5-3为什么Redis那么快（中）-迅捷文字转语音-1791010684043zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.3]-5-3为什么Redis那么快（中）zh.txt"
       ],
       "words": 5198,
       "merged": false,
@@ -1430,7 +1430,7 @@
       "title": "[5.15]--5-15改造项目兜底住Mysql性能极限",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.15]--5-15改造项目兜底住Mysql性能极限-迅捷文字转语音-1791011184167zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.15]-5-15改造项目兜底住Mysql性能极限zh.txt"
       ],
       "words": 1884,
       "merged": false,
@@ -1445,7 +1445,7 @@
       "title": "[5.4]--5-4为什么Redis那么快（下）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.4]--5-4为什么Redis那么快（下）-迅捷文字转语音-1791010695606zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.4]-5-4为什么Redis那么快（下）zh.txt"
       ],
       "words": 2278,
       "merged": false,
@@ -1459,7 +1459,7 @@
       "title": "[5.8]--5-8实用的Redis分布式解决方案（4）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.8]--5-8实用的Redis分布式解决方案（4）-迅捷文字转语音-1791010898984zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.8]-5-8实用的Redis分布式解决方案（4）zh.txt"
       ],
       "words": 2248,
       "merged": false,
@@ -1473,7 +1473,7 @@
       "title": "[5.6]--5-6实用的Redis分布式解决方案（2）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.6]--5-6实用的Redis分布式解决方案（2）-迅捷文字转语音-1791010707056zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.6]-5-6实用的Redis分布式解决方案（2）zh.txt"
       ],
       "words": 3639,
       "merged": false,
@@ -1487,7 +1487,7 @@
       "title": "[5.2]--5-2为什么Redis那么快（上）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.2]--5-2为什么Redis那么快（上）-迅捷文字转语音-1791010671775zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.2]-5-2为什么Redis那么快（上）zh.txt"
       ],
       "words": 3510,
       "merged": false,
@@ -1501,7 +1501,7 @@
       "title": "[5.12]--5-12商品详情缓存化提升查询性能（下）",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.12]--5-12商品详情缓存化提升查询性能（下）-迅捷文字转语音-1791010929789zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.12]-5-12商品详情缓存化提升查询性能（下）zh.txt"
       ],
       "words": 2810,
       "merged": false,
@@ -1515,7 +1515,7 @@
       "title": "[5.13]--5-13mysql读写分离的原理",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.13]--5-13mysql读写分离的原理-迅捷文字转语音-1791011151692zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.13]-5-13mysql读写分离的原理zh.txt"
       ],
       "words": 5184,
       "merged": false,
@@ -1530,7 +1530,7 @@
       "title": "[5.9]--5-9如何规避Redis缓存的短板",
       "chapter": "{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}--第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.9]--5-9如何规避Redis缓存的短板-迅捷文字转语音-1791010906160zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{5}-第5章内存数据库Redis及读写分离解决查询性能瓶颈/[5.9]-5-9如何规避Redis缓存的短板zh.txt"
       ],
       "words": 4214,
       "merged": false,
@@ -1544,7 +1544,7 @@
       "title": "[6.12]--6-12增量索引构建（下）",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.12]--6-12增量索引构建（下）-迅捷文字转语音-1791011707685zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.12]-6-12增量索引构建（下）zh.txt"
       ],
       "words": 5450,
       "merged": false,
@@ -1558,7 +1558,7 @@
       "title": "[6.11]--6-11增量索引构建（上）",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.11]--6-11增量索引构建（上）-迅捷文字转语音-1791011696251zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.11]-6-11增量索引构建（上）zh.txt"
       ],
       "words": 4355,
       "merged": false,
@@ -1572,7 +1572,7 @@
       "title": "[6.9]--6-9全量索引构建",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.9]--6-9全量索引构建-迅捷文字转语音-1791011674749zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.9]-6-9全量索引构建zh.txt"
       ],
       "words": 4311,
       "merged": false,
@@ -1586,7 +1586,7 @@
       "title": "[6.4]--6-4为什么ElasticSearch适合做全文搜索（3）",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.4]--6-4为什么ElasticSearch适合做全文搜索（3）-迅捷文字转语音-1791011361277zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.4]-6-4为什么ElasticSearch适合做全文搜索（3）zh.txt"
       ],
       "words": 4076,
       "merged": false,
@@ -1600,7 +1600,7 @@
       "title": "[6.2]--6-2为什么ElasticSearch适合做全文搜索（1）",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.2]--6-2为什么ElasticSearch适合做全文搜索（1）-迅捷文字转语音-1791011343401zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.2]-6-2为什么ElasticSearch适合做全文搜索（1）zh.txt"
       ],
       "words": 3618,
       "merged": false,
@@ -1614,7 +1614,7 @@
       "title": "[6.1]--6-1ElasticSearch选型优劣势",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.1]--6-1ElasticSearch选型优劣势-迅捷文字转语音-1791011332641zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.1]-6-1ElasticSearch选型优劣势zh.txt"
       ],
       "words": 2598,
       "merged": false,
@@ -1628,7 +1628,7 @@
       "title": "[6.13]--6-13改造商品搜索能力",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.13]--6-13改造商品搜索能力-迅捷文字转语音-1791012394853zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.13]-6-13改造商品搜索能力zh.txt"
       ],
       "words": 3030,
       "merged": false,
@@ -1642,7 +1642,7 @@
       "title": "[6.7]--6-7ES性能提升及高可用方案（下）",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.7]--6-7ES性能提升及高可用方案（下）-迅捷文字转语音-1791011647619zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.7]-6-7ES性能提升及高可用方案（下）zh.txt"
       ],
       "words": 4961,
       "merged": false,
@@ -1656,7 +1656,7 @@
       "title": "[6.8]--6-8动手使用ES",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.8]--6-8动手使用ES-迅捷文字转语音-1791011661587zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.8]-6-8动手使用ESzh.txt"
       ],
       "words": 4953,
       "merged": false,
@@ -1670,7 +1670,7 @@
       "title": "[6.5]--6-5为什么ElasticSearch适合做全文搜索（4）",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.5]--6-5为什么ElasticSearch适合做全文搜索（4）-迅捷文字转语音-1791011374703zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.5]-6-5为什么ElasticSearch适合做全文搜索（4）zh.txt"
       ],
       "words": 2087,
       "merged": false,
@@ -1684,7 +1684,7 @@
       "title": "[6.3]--6-3为什么ElasticSearch适合做全文搜索（2）",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.3]--6-3为什么ElasticSearch适合做全文搜索（2）-迅捷文字转语音-1791011353799zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.3]-6-3为什么ElasticSearch适合做全文搜索（2）zh.txt"
       ],
       "words": 1899,
       "merged": false,
@@ -1698,7 +1698,7 @@
       "title": "[6.6]--6-6ES性能提升及高可用方案（上）",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.6]--6-6ES性能提升及高可用方案（上）-迅捷文字转语音-1791011382073zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.6]-6-6ES性能提升及高可用方案（上）zh.txt"
       ],
       "words": 4428,
       "merged": false,
@@ -1712,7 +1712,7 @@
       "title": "[6.10]--6-10全量索引构建",
       "chapter": "{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}--第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.10]--6-10全量索引构建-迅捷文字转语音-1791011685924zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{6}-第6章搜索型存储ElasticSearch引擎实现全文搜索能力/[6.10]-6-10全量索引构建zh.txt"
       ],
       "words": 4084,
       "merged": false,
@@ -1726,7 +1726,7 @@
       "title": "[7.4]--7-4关注粉丝能力设计（上）",
       "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}--第7章社交图关系下的图数据库Neo4J解决方案/[7.4]--7-4关注粉丝能力设计（上）-迅捷文字转语音-1791012475000zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}-第7章社交图关系下的图数据库Neo4J解决方案/[7.4]-7-4关注粉丝能力设计（上）zh.txt"
       ],
       "words": 2110,
       "merged": false,
@@ -1740,7 +1740,7 @@
       "title": "[7.3]--7-3动手使用neo4j（下）",
       "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}--第7章社交图关系下的图数据库Neo4J解决方案/[7.3]--7-3动手使用neo4j（下）-迅捷文字转语音-1791012465786zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}-第7章社交图关系下的图数据库Neo4J解决方案/[7.3]-7-3动手使用neo4j（下）zh.txt"
       ],
       "words": 3391,
       "merged": false,
@@ -1754,7 +1754,7 @@
       "title": "[7.2]--7-2动手使用neo4j（上）",
       "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}--第7章社交图关系下的图数据库Neo4J解决方案/[7.2]--7-2动手使用neo4j（上）-迅捷文字转语音-1791012453976zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}-第7章社交图关系下的图数据库Neo4J解决方案/[7.2]-7-2动手使用neo4j（上）zh.txt"
       ],
       "words": 4971,
       "merged": false,
@@ -1768,7 +1768,7 @@
       "title": "[7.6]--7-6关注粉丝能力设计（下）",
       "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}--第7章社交图关系下的图数据库Neo4J解决方案/[7.6]--7-6关注粉丝能力设计（下）-迅捷文字转语音-1791012493493zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}-第7章社交图关系下的图数据库Neo4J解决方案/[7.6]-7-6关注粉丝能力设计（下）zh.txt"
       ],
       "words": 1363,
       "merged": false,
@@ -1782,7 +1782,7 @@
       "title": "[7.5]--7-5关注粉丝能力设计（中）",
       "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}--第7章社交图关系下的图数据库Neo4J解决方案/[7.5]--7-5关注粉丝能力设计（中）-迅捷文字转语音-1791012480962zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}-第7章社交图关系下的图数据库Neo4J解决方案/[7.5]-7-5关注粉丝能力设计（中）zh.txt"
       ],
       "words": 5129,
       "merged": false,
@@ -1796,7 +1796,7 @@
       "title": "[7.7]--7-7Neo4J分布式集群方案",
       "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}--第7章社交图关系下的图数据库Neo4J解决方案/[7.7]--7-7Neo4J分布式集群方案-迅捷文字转语音-1791012684030zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}-第7章社交图关系下的图数据库Neo4J解决方案/[7.7]-7-7Neo4J分布式集群方案zh.txt"
       ],
       "words": 4383,
       "merged": false,
@@ -1810,7 +1810,7 @@
       "title": "[7.1]--7-1图形数据结构存储如何支撑",
       "chapter": "{7}--第7章社交图关系下的图数据库Neo4J解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}--第7章社交图关系下的图数据库Neo4J解决方案/[7.1]--7-1图形数据结构存储如何支撑-迅捷文字转语音-1791012440984zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{7}-第7章社交图关系下的图数据库Neo4J解决方案/[7.1]-7-1图形数据结构存储如何支撑zh.txt"
       ],
       "words": 3384,
       "merged": false,
@@ -1824,7 +1824,7 @@
       "title": "[8.15]--8-15推拉混合模式的实践（下）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.15]--8-15推拉混合模式的实践（下）-迅捷文字转语音-1791013352446zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.15]-8-15推拉混合模式的实践（下）zh.txt"
       ],
       "words": 4887,
       "merged": false,
@@ -1839,7 +1839,7 @@
       "title": "[8.9]--8-9使用JavaAPI接入HBase消息实体（下）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.9]--8-9使用JavaAPI接入HBase消息实体（下）-迅捷文字转语音-1791013022279zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.9]-8-9使用JavaAPI接入HBase消息实体（下）zh.txt"
       ],
       "words": 1641,
       "merged": false,
@@ -1855,7 +1855,7 @@
       "title": "[8.12]--8-12Feed流之经典推拉设计模式（3）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.12]--8-12Feed流之经典推拉设计模式（3）-迅捷文字转语音-1791013059528zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.12]-8-12Feed流之经典推拉设计模式（3）zh.txt"
       ],
       "words": 2885,
       "merged": false,
@@ -1870,7 +1870,7 @@
       "title": "[8.1]--8-1Feed流的场景支撑难在哪里",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.1]--8-1Feed流的场景支撑难在哪里-迅捷文字转语音-1791012729515zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.1]-8-1Feed流的场景支撑难在哪里zh.txt"
       ],
       "words": 2010,
       "merged": false,
@@ -1885,7 +1885,7 @@
       "title": "[8.10]--8-10Feed流之经典推拉设计模式（1）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.10]--8-10Feed流之经典推拉设计模式（1）-迅捷文字转语音-1791013029557zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.10]-8-10Feed流之经典推拉设计模式（1）zh.txt"
       ],
       "words": 4950,
       "merged": false,
@@ -1900,7 +1900,7 @@
       "title": "[8.14]--8-14推拉混合模式的实践（上）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.14]--8-14推拉混合模式的实践（上）-迅捷文字转语音-1791013341234zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.14]-8-14推拉混合模式的实践（上）zh.txt"
       ],
       "words": 3373,
       "merged": false,
@@ -1915,7 +1915,7 @@
       "title": "[8.3]--8-3HBase原理及优劣势（中）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.3]--8-3HBase原理及优劣势（中）-迅捷文字转语音-1791012744862zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.3]-8-3HBase原理及优劣势（中）zh.txt"
       ],
       "words": 2740,
       "merged": false,
@@ -1930,7 +1930,7 @@
       "title": "[8.13]--8-13Feed流之经典推拉设计模式（4）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.13]--8-13Feed流之经典推拉设计模式（4）-迅捷文字转语音-1791013069180zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.13]-8-13Feed流之经典推拉设计模式（4）zh.txt"
       ],
       "words": 2345,
       "merged": false,
@@ -1945,7 +1945,7 @@
       "title": "[8.2]--8-2HBase原理及优劣势（上）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.2]--8-2HBase原理及优劣势（上）-迅捷文字转语音-1791012736981zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.2]-8-2HBase原理及优劣势（上）zh.txt"
       ],
       "words": 2244,
       "merged": false,
@@ -1960,7 +1960,7 @@
       "title": "[8.11]--8-11Feed流之经典推拉设计模式（2）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.11]--8-11Feed流之经典推拉设计模式（2）-迅捷文字转语音-1791013046936zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.11]-8-11Feed流之经典推拉设计模式（2）zh.txt"
       ],
       "words": 3233,
       "merged": false,
@@ -1975,7 +1975,7 @@
       "title": "[8.7]--8-7使用JavaAPI接入HBase消息实体（上）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.7]--8-7使用JavaAPI接入HBase消息实体（上）-迅捷文字转语音-1791012778646zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.7]-8-7使用JavaAPI接入HBase消息实体（上）zh.txt"
       ],
       "words": 5009,
       "merged": false,
@@ -1991,7 +1991,7 @@
       "title": "[8.5]--8-5动手使用HBase",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.5]--8-5动手使用HBase-迅捷文字转语音-1791012754956zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.5]-8-5动手使用HBasezh.txt"
       ],
       "words": 4968,
       "merged": false,
@@ -2006,7 +2006,7 @@
       "title": "[8.8]--8-8使用JavaAPI接入HBase消息实体（中）",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.8]--8-8使用JavaAPI接入HBase消息实体（中）-迅捷文字转语音-1791013010980zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.8]-8-8使用JavaAPI接入HBase消息实体（中）zh.txt"
       ],
       "words": 3451,
       "merged": false,
@@ -2022,7 +2022,7 @@
       "title": "[8.6]--8-6HBase中的RowKey为什么那么重要",
       "chapter": "{8}--第8章Feed流时序性数据存储场景下的HBase解决方案",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}--第8章Feed流时序性数据存储场景下的HBase解决方案/[8.6]--8-6HBase中的RowKey为什么那么重要-迅捷文字转语音-1791012767491zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{8}-第8章Feed流时序性数据存储场景下的HBase解决方案/[8.6]-8-6HBase中的RowKey为什么那么重要zh.txt"
       ],
       "words": 5418,
       "merged": false,
@@ -2038,7 +2038,7 @@
       "title": "[9.6]--9-6使用JavaAPI实现点赞评论能力（下）",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.6]--9-6使用JavaAPI实现点赞评论能力（下）-迅捷文字转语音-1791013774567zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.6]-9-6使用JavaAPI实现点赞评论能力（下）zh.txt"
       ],
       "words": 3089,
       "merged": false,
@@ -2053,7 +2053,7 @@
       "title": "[9.8]--9-8削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题（下）",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.8]--9-8削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题（下）-迅捷文字转语音-1791013792317zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.8]-9-8削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题（下）zh.txt"
       ],
       "words": 3302,
       "merged": false,
@@ -2067,7 +2067,7 @@
       "title": "[9.3]--9-3动手使用mongodb",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.3]--9-3动手使用mongodb-迅捷文字转语音-1791013484101zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.3]-9-3动手使用mongodbzh.txt"
       ],
       "words": 4099,
       "merged": false,
@@ -2081,7 +2081,7 @@
       "title": "[9.9]--9-9MongoDB分布式扩展",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.9]--9-9MongoDB分布式扩展-迅捷文字转语音-1791013801784zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.9]-9-9MongoDB分布式扩展zh.txt"
       ],
       "words": 1847,
       "merged": false,
@@ -2095,7 +2095,7 @@
       "title": "[9.7]--9-7削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题（上）",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.7]--9-7削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题（上）-迅捷文字转语音-1791013783926zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.7]-9-7削峰聚集能力的脉冲方案解决评论及点赞数量叠加问题（上）zh.txt"
       ],
       "words": 2757,
       "merged": false,
@@ -2109,7 +2109,7 @@
       "title": "[9.4]--9-4使用JavaAPI实现点赞评论能力（上）",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.4]--9-4使用JavaAPI实现点赞评论能力（上）-迅捷文字转语音-1791013500019zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.4]-9-4使用JavaAPI实现点赞评论能力（上）zh.txt"
       ],
       "words": 1644,
       "merged": false,
@@ -2124,8 +2124,8 @@
       "title": "[9.5]--9-5使用JavaAPI实现点赞评论能力（中）",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.5]--9-5使用JavaAPI实现点赞评论能力（中）(1)-迅捷文字转语音-1791013505170zh.txt",
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.5]--9-5使用JavaAPI实现点赞评论能力（中）-迅捷文字转语音-1791013515724zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.5]-9-5使用JavaAPI实现点赞评论能力（中）(1)zh.txt",
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.5]-9-5使用JavaAPI实现点赞评论能力（中）zh.txt"
       ],
       "words": 7694,
       "merged": true,
@@ -2140,7 +2140,7 @@
       "title": "[9.1]--9-1点赞评论场景解析",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.1]--9-1点赞评论场景解析-迅捷文字转语音-1791013467839zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.1]-9-1点赞评论场景解析zh.txt"
       ],
       "words": 932,
       "merged": false,
@@ -2154,7 +2154,7 @@
       "title": "[9.2]--9-2MongoDB原理及优劣势",
       "chapter": "{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论",
       "sources": [
-        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}--第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.2]--9-2MongoDB原理及优劣势-迅捷文字转语音-1791013473416zh.txt"
+        "work/source/9.mksz615-6大数据库，挖掘7种业务场景的存储更优解[完结]/{9}-第9章最像关系型数据库的非关系型数据库mongoDB满足点赞评论/[9.2]-9-2MongoDB原理及优劣势zh.txt"
       ],
       "words": 3918,
       "merged": false,

@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: cleanup-workspace-and-alert
+  namespace: default
+spec:
+  params:
+    - name: task1Status
+    - name: task2Status
+    - name: task3Status
+    - name: task4Status
+  steps:
+    - name: task-alert
+      image: curlimages/curl
+      imagePullPolicy: IfNotPresent
+      script: |
+        if [ $(params.task1Status) == "Failed" ];then
+          export status="Failed | reason: task1 git clone execute failed,please check"
+          echo "$status"
+        elif [ $(params.task2Status) == "Failed" ];then
+          export status="Failed | reason: task2 generate-build-tag execute failed,please check"
+          echo "$status"
+        elif [ $(params.task3Status) == "Failed" ];then
+          export status="Failed | reason: task3 build push execute failed,please check"
+          echo "$status"
+        elif [ $(params.task4Status) == "Failed" ];then
+          export status="Failed | reason: task4 kubectl apply execute failed,please check"
+          echo "$status"
+        else
+          status="success"
+          echo "$status"
+        fi

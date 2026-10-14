@@ -1,0 +1,91 @@
+#!groovy
+
+@Library('jenkins-shared-library@main') _
+
+def tools = new org.color()
+def checkout = new org.checkout()
+
+pipeline {
+
+	agent {
+        label 'slave'
+    }
+
+    options {
+      timestamps()      
+      parallelsAlwaysFailFast()
+      timeout(time: 600, unit: 'SECONDS') 
+      disableConcurrentBuilds(abortPrevious: true) 
+      buildDiscarder(logRotator(numToKeepStr: '30'))
+      skipDefaultCheckout() 
+    }
+
+    environment {
+        String year = new Date().format("yyyy") 
+        String month = new Date().format("MMdd") 
+        String day = new Date().format("HHmm") 
+        String second = new Date().format("ss")
+		images_head = "registry.cn-hangzhou.aliyuncs.com"   
+        giturl = "http://gitlab.example.com/golang/go.git"           
+    }
+
+    parameters {
+        choice choices: ['main', 'pre', 'test'], name: 'branch_name'
+    }
+
+    stages {
+        stage('克隆代码') {
+            agent {
+                docker {
+                    label 'slave'
+                    image 'registry.cn-hangzhou.aliyuncs.com/tool-bucket/tool:git'
+                }
+            }   
+            steps {
+                script {
+                    cleanWs() 
+                    tools.PrintMessage("1.克隆代码","blue")   
+                    checkout.scm(branch_name,giturl)
+                }
+            }
+        }        
+        stage('sonar扫描') {
+            agent {
+                docker {
+                    label 'slave'
+                    image 'sonarsource/sonar-scanner-cli'
+                }
+            }        
+            steps {
+                script {
+                    tools.PrintMessage("1.sonar扫描","blue")              
+                    withSonarQubeEnv('sonarqube') {
+                        sh """
+                        sonar-scanner \
+                        -Dsonar.projectKey=test-go \
+                        -Dsonar.projectName=test-go \
+                        -Dsonar.projectVersion=test-go-${BUILD_NUMBER} \
+                        -Dsonar.ws.timeout=30 \
+                        -Dsonar.sources=. \
+                        -Dsonar.sourceEncoding=UTF-8
+                        sleep 3
+                    """
+                    }
+                }  
+            }
+        }
+        stage("Quality Gate"){           
+            steps {
+                script {      
+                    tools.PrintMessage("2.Quality Gate","blue")
+                    timeout(time: 10, unit: 'SECONDS') { 
+                        def qg = waitForQualityGate('sonarqube') 
+                        if (qg.status != 'OK') {
+                            error "未通过Sonarqube的代码质量阈检查，请及时修改！failure: ${qg.status}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+} 

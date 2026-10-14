@@ -48,9 +48,9 @@ Repository 层封装对 MySQL 的读写，接口定义如下：
 package repository
 
 import (
-	"git.imooc.com/coding-535/common"
+	"git.example.com/coding-535/common"
 	"github.com/jinzhu/gorm"
-	"git.imooc.com/coding-535/route/domain/model"
+	"git.example.com/coding-535/route/domain/model"
 )
 
 type IRouteRepository interface {

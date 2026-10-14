@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-timeout
+spec:
+  tasks:
+    - name: sleep
+      timeout: 2s
+      taskRef:
+        name: sleep
+    - name: goodbye
+      taskRef:
+        name: goodbye

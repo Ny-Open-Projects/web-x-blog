@@ -1,0 +1,28 @@
+kind: pipeline   
+type: kubernetes  
+nam.drone copye: default    
+
+clone:
+  disable: true
+
+steps:
+- name: kaniko
+  image: plugins/kaniko
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: registry.cn-hangzhou.aliyuncs.com/cicd-demo/app
+    tags: "${DRONE_REPO_NAME}-${DRONE_BRANCH}-${DRONE_BUILD_NUMBER}"
+
+- name: deploy
+  image: quay.io/honestbee/drone-kubernetes
+  settings:
+    kubernetes_server: https://10.0.7.100:6443
+    kubernetes_token: eyJhbGciOiJSUzI1NiIsImtpZCI6ImplQ09MUUJKLU1VVGJRenNuTmVwd2F1cm5xZm1ua01VQ1k0ZVhpNkVpRUEifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRyb25lLXRva2VuIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImRyb25lIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNmM1NWI2ZjYtZTVmYS00ODNmLWJjOGEtZjIxMDAwZWQwOGUyIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmRlZmF1bHQ6ZHJvbmUifQ.I70eu9h2H4LOoy4Rsck_wnkvDdlx7RHybAuRzHnaekItrR8JrOc3X91Gb-VeSGRhpuXc7wJu8ayc8HGJGH_DgFWNsKEUF_fdinxxeU21g1obVOvrcPbqePGPLTIjGdxDxibj66Q-sMXt6NmzvXjRXyHww-jcOb5tBqTZneRDtMTWrIYunLusD6ZCejcMtRVvyZWNZN3rmFSF7a1Z57h-Oqj66EfxlAn6IJdhH601Qy-Pwxj5QCc77HyOfr9pVE2SF7h-4sGmDGtO3uVON5C69E5EOYltpBUId_-w8jZTvilFH_R7MFNIYEeB6-RTMnc_xQqfNMijqFeQQMYfzhUG4w
+    namespace: default
+    deployment: golang-deployment
+    repo: registry.cn-hangzhou.aliyuncs.com/cicd-demo/app
+    container: golang
+    tag: "${DRONE_REPO_NAME}-${DRONE_BRANCH}-${DRONE_BUILD_NUMBER}"

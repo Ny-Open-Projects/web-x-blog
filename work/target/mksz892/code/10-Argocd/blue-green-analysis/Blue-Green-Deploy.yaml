@@ -1,0 +1,102 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: go-api-blus-green-analysis
+spec:
+  args:
+  - name: service-name
+  metrics:
+  - name: go-api-blus-green-metrics
+  # 注意：当前没有请求的时候，由于没有数据，访问result[0]将会引发索引越界错误，所以会报message: 'metric "success-rate" assessed Error due to consecutiveErrors (5) > consecutiveErrorLimit(4): "Error Message: reflect: slice index out of range"'。
+  #   # value: '[NaN]'  # 没有数据的时候会出现的第一种情况，使用result[0] != result[0] <== NaN不等于任何数，可判断为NaN
+  #     # value: '[]' # 没有数据的时候会出现的第一种情况，当为空值的时候，使用len(result) == 0
+    successCondition: (len(result) == 0 or result[0] != result[0] or result[0] >= 0.95 )
+    interval: 60s
+    count: 3
+    failureLimit: 1
+    provider:
+      prometheus:
+        address: http://prometheus.istio-system.svc.cluster.local:9090
+        query: |
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}",response_code!~"5.*"}[1m]
+          )) /
+          sum(irate(
+            istio_requests_total{reporter="source",destination_service=~"{{args.service-name}}"}[1m]
+          ))
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: go-api-blus-green
+spec:
+  strategy:
+    blueGreen: 
+      activeService: go-api-blus-green-service
+      previewService: go-api-blus-green-service-preview
+      autoPromotionEnabled: true
+      scaleDownDelaySeconds: 1200
+      postPromotionAnalysis:
+        templates:
+        - templateName: go-api-blus-green-analysis
+        args:
+        - name: service-name
+          value: go-api-blus-green-service.default.svc.cluster.local
+  revisionHistoryLimit: 6    
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-api-blus-green-selector
+  template:
+    metadata:
+      labels:
+        app: go-api-blus-green-selector   
+    spec:
+      containers:
+      - name: go-api-blus-green
+        #image: oamdev/testapp:v1
+        image: registry.cn-hangzhou.aliyuncs.com/tool-bucket/tool:gotest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: go-api-blus-green-service-preview
+spec:
+  type: ClusterIP
+  ports:
+  - name: go-api-blus-green-service-port-preview
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: go-api-blus-green-selector
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: go-api-blus-green-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: go-api-blus-green-service-port
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: go-api-blus-green-selector 
+    
+# kubectl get analysisrun
+# kubectl describe analysisrun xxx
+
+# kubectl get analysisrun
+# kubectl describe analysisrun xxx
+#   kubectl run -it --rm temp-container --image=alpine:3.16 --restart=Never sh
+# apk add curl 
+# 请求正常接口
+ # while true;do sleep 1;curl -I go-api-blus-green-service.default.svc.cluster.local/status200 ;done
+#请求故障接口
+#while true;do sleep 1;curl -I go-api-blus-green-service.default.svc.cluster.local/status500 ;done

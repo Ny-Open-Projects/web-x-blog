@@ -1,0 +1,24 @@
+kind: pipeline   
+type: kubernetes  
+name: default    
+
+#clone:
+#  disable: true
+
+steps:
+- name: step1  
+  pull: if-not-exsits
+  image: alpine:3.16
+  commands:
+  - echo $DRONE_BRANCH
+  - echo $DRONE_BUILD_NUMBER
+  - echo $DRONE_BUILD_EVENT
+  - echo $DRONE_TAG
+  - echo $DRONE_STAGE_STATUS
+  - echo $DRONE_STAGE_NUMBER
+  - echo $DRONE_STAGE_NAME
+  - echo $DRONE_REPO_NAME
+  - echo $DRONE_REPO
+  - echo $DRONE_REPO_LINK
+  - echo $DRONE_REPO_NAMESPACE
+    

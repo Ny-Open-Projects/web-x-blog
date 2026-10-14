@@ -151,7 +151,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: dubbo-demo
-          image: hub.imooc.com/library/dubbo-demo:v1
+          image: hub.example.com/library/dubbo-demo:v1
           env:
             - name: DUBBO_PORT
               value: "20881"
@@ -279,7 +279,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: dubbo-demo
-          image: hub.imooc.com/library/dubbo-demo:v1
+          image: hub.example.com/library/dubbo-demo:v1
           env:
             - name: DUBBO_PORT
               value: "20881"

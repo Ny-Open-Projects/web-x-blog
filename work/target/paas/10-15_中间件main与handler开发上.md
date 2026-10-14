@@ -62,10 +62,10 @@ package handler
 
 import (
 	"context"
-	"git.imooc.com/coding-535/common"
-	"git.imooc.com/coding-535/middleware/domain/model"
-	"git.imooc.com/coding-535/middleware/domain/service"
-	middleware "git.imooc.com/coding-535/middleware/proto/middleware"
+	"git.example.com/coding-535/common"
+	"git.example.com/coding-535/middleware/domain/model"
+	"git.example.com/coding-535/middleware/domain/service"
+	middleware "git.example.com/coding-535/middleware/proto/middleware"
 	"log"
 )
 

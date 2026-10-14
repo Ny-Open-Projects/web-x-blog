@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-params
+spec:
+  params:
+    - name: giturl
+      type: string
+    - name: branch
+      type: string
+  tasks:
+    - name: clone
+      taskRef:
+        name: parameters-git-clone-task
+      params:
+        - name: giturl
+          value: "$(params.giturl)"
+        - name: branch
+          value: "$(params.branch)"
+    - name: goodbye
+      taskRef:
+        name: goodbye
+      runAfter:
+        - clone

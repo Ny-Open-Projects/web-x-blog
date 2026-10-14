@@ -5,15 +5,9 @@
 - Redis 四类分布式部署策略：主从、哨兵、Redis Cluster、基于 Cluster 源码改造的分片
 - 单机模式：client 直连单节点，节点挂则全挂，存在单点问题
 - 主从模式（Redis 2.0+）
-  - 首次同步：master 传 RDB，slave 内存回放
-  - 增量同步：master 的写命令被 slave 监听并回放（命令传播，不依赖 AOF）
-  - 写走 master、读走 slave，覆盖绝大多数单机房的读写分离场景
-  - 短板：master 挂了 slave 无法自动切主
-- 哨兵模式（Sentinel）
-  - Sentinel 与 master/slave 保持心跳，监控存活
-  - client 启动先找 Sentinel 寻址（获取 master/slave 地址）
-  - master 故障 → Sentinel 心跳超时 → 提升 slave 为 master，并向 client 推送新配置
-  - 旧 master 恢复后被降级为 slave；本质类似微服务的注册中心
+## 📎 代码说明
+
+本讲为**原理 / 架构 / 选型**篇，正文以图示与推演为主，无配套代码片段，课程课件亦未提供本章源码文件。
 
 ## Redis 为什么适合做分布式缓存
 

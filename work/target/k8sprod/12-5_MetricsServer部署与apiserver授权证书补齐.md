@@ -64,7 +64,7 @@ kubectl get pod -n kube-system | grep metrics
 
 它跑到哪个命名空间下？确认一下有没有 metrics-server deployment。单独部署的肯定有 deploy。
 
-看它的 image，这个 image 是没有的——把镜像前缀改一下，所有镜像都在这个仓库里找：`registry.cn-hangzhou.aliyuncs.com/imooc`。
+看它的 image，这个 image 是没有的——把镜像前缀改一下，所有镜像都在这个仓库里找：`registry.cn-hangzhou.aliyuncs.com/example`。
 
 改完再来一遍，得确保 Pod 正常运行。等一会儿——怎么还是 `ImagePullBackOff`？
 

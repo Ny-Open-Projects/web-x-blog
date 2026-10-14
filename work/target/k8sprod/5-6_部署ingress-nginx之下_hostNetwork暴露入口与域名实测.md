@@ -43,8 +43,8 @@ kubectl get all -n ingress-nginx
 
 ```bash
 # 在两个 worker 节点上都执行，保证镜像本地有
-docker pull registry.aliyuncs.com/imooc/default-http-backend:5
-docker tag registry.aliyuncs.com/imooc/default-http-backend:5 \
+docker pull registry.aliyuncs.com/example/default-http-backend:5
+docker tag registry.aliyuncs.com/example/default-http-backend:5 \
   default-http-backend:5
 ```
 
@@ -141,7 +141,7 @@ ss -lnt | grep -E ':80|:443'
 
 ```mermaid
 flowchart LR
-    B["浏览器"] -->|"tomcat.imooc.com"| N120["worker-120 节点 80 端口<br/>hostNetwork 直占"]
+    B["浏览器"] ->|"tomcat.example.com"| N120["worker-120 节点 80 端口<br/>hostNetwork 直占"]
     N120 --> IC["ingress-nginx-controller Pod"]
     IC -->|"按 host+path 匹配"| SVC["Service tomcat-demo<br/>port 80"]
     SVC --> P["tomcat Pod<br/>containerPort 8080"]
@@ -210,7 +210,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: tomcat.imooc.com
+    - host: tomcat.example.com
       http:
         paths:
           - path: /
@@ -226,8 +226,8 @@ spec:
 
 ```bash
 # 本机 /etc/hosts
-echo "192.155.20.120 tomcat.imooc.com" | sudo tee -a /etc/hosts
-echo "192.155.20.120 api.imooc.com" | sudo tee -a /etc/hosts
+echo "192.155.20.120 tomcat.example.com" | sudo tee -a /etc/hosts
+echo "192.155.20.120 api.example.com" | sudo tee -a /etc/hosts
 ```
 
 ```bash
@@ -238,7 +238,7 @@ kubectl get pod -l app=tomcat-demo -o wide
 
 ## 两种失败返回，成因完全不同
 
-浏览器先访问没配规则的那个域名（api.imooc.com），返回的是：
+浏览器先访问没配规则的那个域名（api.example.com），返回的是：
 
 ```
 404 defaultbackend
@@ -246,7 +246,7 @@ kubectl get pod -l app=tomcat-demo -o wide
 
 这个页面正是 default-http-backend 那个 Pod 返回的，意思是 Controller 收到了请求，但**找不到对应的 Ingress 规则**。因为确实没给它配，所以落到了默认后端，属于配置缺失。
 
-再访问配了规则但 Pod 还没好的那个域名（tomcat.imooc.com），返回的是 **503**。原因是 Ingress 和 Service 都在，规则也匹配上了，可 Service 背后的 Pod 还处在 ContainerCreating，压根没有可用的 endpoint，Controller 只能返回服务不可用。
+再访问配了规则但 Pod 还没好的那个域名（tomcat.example.com），返回的是 **503**。原因是 Ingress 和 Service 都在，规则也匹配上了，可 Service 背后的 Pod 还处在 ContainerCreating，压根没有可用的 endpoint，Controller 只能返回服务不可用。
 
 两种返回差别很大，排查方向也完全不同：
 
@@ -297,8 +297,8 @@ kubectl get pod -n ingress-nginx -o wide -w
 
 ```bash
 # 在 120 与 121 两个节点都执行
-docker pull registry.aliyuncs.com/imooc/default-http-backend:5
-docker tag registry.aliyuncs.com/imooc/default-http-backend:5 default-http-backend:5
+docker pull registry.aliyuncs.com/example/default-http-backend:5
+docker tag registry.aliyuncs.com/example/default-http-backend:5 default-http-backend:5
 docker images | grep default-http-backend
 ```
 
@@ -323,13 +323,13 @@ kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=50
 
 ```bash
 # 没配规则的域名 → 404 defaultbackend
-curl -I http://192.155.20.120/ -H "Host: api.imooc.com"
+curl -I http://192.155.20.120/ -H "Host: api.example.com"
 
 # 规则命中但 Pod 没好 → 503
-curl -I http://192.155.20.120/ -H "Host: tomcat.imooc.com"
+curl -I http://192.155.20.120/ -H "Host: tomcat.example.com"
 
 # 后端就绪之后 → 200
-curl -s -o /dev/null -w "%{http_code}\n" http://192.155.20.120/ -H "Host: tomcat.imooc.com"
+curl -s -o /dev/null -w "%{http_code}\n" http://192.155.20.120/ -H "Host: tomcat.example.com"
 ```
 
 用 `-H "Host: ..."` 指定 Host 头，效果跟浏览器里输域名完全一致，比改 hosts 更省事，用来区分是不是规则本身的问题很顺手。

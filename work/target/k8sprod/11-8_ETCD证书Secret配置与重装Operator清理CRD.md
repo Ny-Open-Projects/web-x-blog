@@ -100,25 +100,25 @@ prometheus:
 改完执行：
 
 ```bash
-helm upgrade imoocprom ./prometheus-operator -f values.yaml
+helm upgrade exampleprom ./prometheus-operator -f values.yaml
 ```
 
 结果报错：
 
 ```text
-no endpoints with name imoocgreen/controlmanager found
+no endpoints with name examplegreen/controlmanager found
 ```
 
 这个异常在更新的时候确实会遇到，修改某些文件会引发。没关系，可以用一种更彻底的方式：**先把监控组件全部删掉，重新来一遍**。因为唯一的依赖就是这个 prometheus-operator 插件，相当于一条命令拔下来、再一条命令装上去，而我们的调整已经完全保存在这个文件夹里了，跟 Kubernetes 集群不再有任何关系。
 
 ```bash
 # 1. 先删 release
-helm delete imoocprom
+helm delete exampleprom
 # 看 helm list 还没删完，再删一次
-helm delete imoocprom
+helm delete exampleprom
 
 # 如果还删不掉，加 --purge 强制移除，不放到回收站
-helm delete imoocprom --purge
+helm delete exampleprom -purge
 
 # 2. 手动清理 CRD（四个）
 kubectl get crd | grep coreos
@@ -132,7 +132,7 @@ kubectl get crd | grep coreos | awk '{print $1}' | xargs kubectl delete crd
 重新部署：
 
 ```bash
-helm install -f values.yaml --name imoocprom --namespace monitoring ./prometheus-operator
+helm install -f values.yaml -name exampleprom -namespace monitoring ./prometheus-operator
 ```
 
 等组件都跑起来，`kubectl get pod -n monitoring` 看一眼。
@@ -244,9 +244,9 @@ sed -i 's#--bind-address=127.0.0.1#--bind-address=10.15.20.50#' /etc/kubernetes/
 systemctl restart kube-scheduler kube-controller-manager
 
 # 4. 卸载重装（比死磕 upgrade 快）
-helm delete imoocprom --purge
+helm delete exampleprom -purge
 kubectl get crd | grep coreos | awk '{print $1}' | xargs kubectl delete crd
-helm install -f values.yaml --name imoocprom --namespace monitoring ./prometheus-operator
+helm install -f values.yaml -name exampleprom -namespace monitoring ./prometheus-operator
 
 # 5. 验收
 kubectl get pod -n monitoring
@@ -258,13 +258,13 @@ kubectl get pod -n monitoring
 monitoring/
 ├── secret/etcd-certs              # ca.pem / etcd.pem / etcd-key.pem 三份
 ├── secret/prometheus-im.mock-k8s-stack       # chart 生成的 Prometheus 配置
-├── pod/prometheus-imoocprom-prometheus-0     # 宿主挂载了 etcd-certs
-├── pod/prometheus-imoocprom-operator-xxxxx
+├── pod/prometheus-exampleprom-prometheus-0     # 宿主挂载了 etcd-certs
+├── pod/prometheus-exampleprom-operator-xxxxx
 ├── pod/kube-state-metrics-xxxxx
 ├── pod/node-exporter-{n1,n2,n3}
-├── pod/alertmanager-imoocprom-alertmanager-0
-├── deploy.apps/grafana-imoocprom-grafana
-├── svc/{alertmanager,imoocprom-prometheus,...}
+├── pod/alertmanager-exampleprom-alertmanager-0
+├── deploy.apps/grafana-exampleprom-grafana
+├── svc/{alertmanager,exampleprom-prometheus,...}
 └── crd/*.monitoring.coreos.com    # 重装时会被重建
 ```
 

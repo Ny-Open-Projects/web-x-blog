@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: pipelinerun-vct-2
+spec:
+  pipelineRef:
+    name: pipeline-vct
+  params:
+    - name: giturl
+      value: gitlab.example.com/golang/go.git
+    - name: branch
+      value: main
+  workspaces:
+    - name: code
+      volumeClaimTemplate:
+        spec:
+          storageClassName: nfs-client
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 12M

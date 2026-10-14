@@ -70,7 +70,7 @@ categories:
 进到项目里的 dubbo-demo，直接 package 会报 `could not find dubbo-demo-api`，因为 api 模块还没装进本地仓库。先把 api 装了，再回去 package：
 
 ```bash
-cd imooc-k8s-demo/dubbo-demo
+cd example-k8s-demo/dubbo-demo
 mvn install -pl dubbo-demo-api
 mvn clean package
 ```
@@ -282,7 +282,7 @@ ss -lnt | grep 20880          # 端口已释放
 nohup java \
   -Dserver.name=dubbo-demo \
   -cp "confDIR:$(ls lib | sed 's|^|lib/|' | tr '\n' ':')" \
-  com.imooc.DubboDemo > logs/stdout.log 2>&1 &
+  com.example.DubboDemo > logs/stdout.log 2>&1 &
 echo $! > logs/dubbo.pid
 echo "started pid $!"
 ```
@@ -293,7 +293,7 @@ echo "started pid $!"
 exec java \
   -Dserver.name=dubbo-demo \
   -cp "confDIR:$(ls lib | sed 's|^|lib/|' | tr '\n' ':')" \
-  com.imooc.DubboDemo > logs/stdout.log 2>&1
+  com.example.DubboDemo > logs/stdout.log 2>&1
 ```
 
 用 `exec` 替换掉当前 shell 进程，java 直接接管 PID 1，不仅不会退出，还能保证 `kubectl stop` 发出的终止信号原样传给 java，避免进程收不到信号直接被杀。

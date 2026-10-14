@@ -8,2870 +8,2870 @@
   "nodes": [
     {
       "id": "A13-2",
-      "label": "13-2 面向对象开发的核心思想和概念【更多教程ubkz.com】",
+      "label": "13-2 面向对象开发的核心思想和概念【更多教程",
       "type": "article",
       "chapter": "第13章 程序设计之设计模式详解",
       "words": 4315
     },
     {
       "id": "A13-3",
-      "label": "13-3 面向对象编程——接口的基本设计【更多教程ubkz.com】",
+      "label": "13-3 面向对象编程——接口的基本设计【更多教程",
       "type": "article",
       "chapter": "第13章 程序设计之设计模式详解",
       "words": 2590
     },
     {
       "id": "A13-4",
-      "label": "13-4 面向对象编程——类的实现与继承【更多教程ubkz.com】",
+      "label": "13-4 面向对象编程——类的实现与继承【更多教程",
       "type": "article",
       "chapter": "第13章 程序设计之设计模式详解",
       "words": 2427
     },
     {
       "id": "A13-5",
-      "label": "13-5 面向对象编程——继承的使用原则【更多教程ubkz.com】",
+      "label": "13-5 面向对象编程——继承的使用原则【更多教程",
       "type": "article",
       "chapter": "第13章 程序设计之设计模式详解",
       "words": 2331
     },
     {
       "id": "A16-1",
-      "label": "16-1 课程总结（一）【更多教程ubkz.com】",
+      "label": "16-1 课程总结（一）【更多教程",
       "type": "article",
       "chapter": "第16章 面试复盘-预祝大家斩获offer拿高薪",
       "words": 1459
     },
     {
       "id": "A16-2",
-      "label": "16-2 课程总结（二）【更多教程ubkz.com】",
+      "label": "16-2 课程总结（二）【更多教程",
       "type": "article",
       "chapter": "第16章 面试复盘-预祝大家斩获offer拿高薪",
       "words": 1705
     },
     {
       "id": "A16-3",
-      "label": "16-3 课程展望【更多教程ubkz.com】",
+      "label": "16-3 课程展望【更多教程",
       "type": "article",
       "chapter": "第16章 面试复盘-预祝大家斩获offer拿高薪",
       "words": 915
     },
     {
-      "id": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "label": "[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
       "type": "article",
-      "chapter": "{1}--第1章2021后端校招面试直通车，提前锁定大厂offer-导学",
+      "chapter": "{1}-第1章2021后端校招面试直通车，提前锁定大厂offer-导学",
       "words": 3141
     },
     {
-      "id": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[2.3]--2-4请简述常见HTTP状态码及含义&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "label": "[2.3]-2-4请简述常见HTTP状态码及含义——",
       "type": "article",
-      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "chapter": "{2}-第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
       "words": 6858
     },
     {
-      "id": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;DNS_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "label": "[2.6]-2-7请简述域名系统的工作流程——DNS",
       "type": "article",
-      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "chapter": "{2}-第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
       "words": 3856
     },
     {
-      "id": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "label": "[2.4]-2-5请简述对称加密、非对称加密的异同——",
       "type": "article",
-      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "chapter": "{2}-第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
       "words": 5808
     },
     {
-      "id": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[2.5]--2-6请简述HTTPS加密认证的过程&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[2.5]-2-6请简述https加密认证的过程——",
+      "label": "[2.5]-2-6请简述HTTPS加密认证的过程——",
       "type": "article",
-      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "chapter": "{2}-第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
       "words": 3298
     },
     {
-      "id": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[2.1]--2-2TCP、UDP协议分别属于什么层&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "label": "[2.1]-2-2TCP、UDP协议分别属于什么层——",
       "type": "article",
-      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "chapter": "{2}-第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
       "words": 5737
     },
     {
-      "id": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[2.7]--2-8你了解DNS攻击吗？是什么原理&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "label": "[2.7]-2-8你了解DNS攻击吗？是什么原理——",
       "type": "article",
-      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "chapter": "{2}-第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
       "words": 3132
     },
     {
-      "id": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[2.2]--2-3请简述HTTP1.0、1.1、2.0的主要区别&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "label": "[2.2]-2-3请简述HTTP1.0、1.1、2.0的主要区别—",
       "type": "article",
-      "chapter": "{2}--第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
+      "chapter": "{2}-第2章网络协议面试核心之HTTP、HTTPS、DNS协议",
       "words": 6864
     },
     {
-      "id": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[3.7]--3-8请简述什么是SYNflood攻击&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "label": "[3.7]-3-8请简述什么是SYNflood攻击——",
       "type": "article",
-      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "chapter": "{3}-第3章网络协议面试核心之IP、TCP、UDP协议",
       "words": 3295
     },
     {
-      "id": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[3.1]--3-2请简述TCP与UDP协议的区别&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "label": "[3.1]-3-2请简述TCP与UDP协议的区别——",
       "type": "article",
-      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "chapter": "{3}-第3章网络协议面试核心之IP、TCP、UDP协议",
       "words": 5842
     },
     {
-      "id": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;TCP_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "label": "[3.4]-3-5请简述滑动窗口的工作过程——TCP",
       "type": "article",
-      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "chapter": "{3}-第3章网络协议面试核心之IP、TCP、UDP协议",
       "words": 4199
     },
     {
-      "id": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[3.8]--3-9什么是VPN？请简述VPN的原理&mdash;&mdash_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "label": "[3.8]-3-9什么是VPN？请简述VPN的原理——",
       "type": "article",
-      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "chapter": "{3}-第3章网络协议面试核心之IP、TCP、UDP协议",
       "words": 3474
     },
     {
-      "id": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[3.2]--3-3TCP协议为什么需要三次握手&mdash;&mdash;T_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "label": "[3.2]-3-3TCP协议为什么需要三次握手——T",
       "type": "article",
-      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "chapter": "{3}-第3章网络协议面试核心之IP、TCP、UDP协议",
       "words": 6890
     },
     {
-      "id": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[3.3]--3-4请简述什么是TIME_WAIT状态&mdash;&mdas_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "label": "[3.3]-3-4请简述什么是TIME_WAIT状态—&mdas",
       "type": "article",
-      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "chapter": "{3}-第3章网络协议面试核心之IP、TCP、UDP协议",
       "words": 3382
     },
     {
-      "id": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;TCP粘_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "label": "[3.6]-3-7什么是粘包？如何解决？——TCP粘",
       "type": "article",
-      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "chapter": "{3}-第3章网络协议面试核心之IP、TCP、UDP协议",
       "words": 3695
     },
     {
-      "id": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[3.5]--3-6请介绍常见的TCP拥塞避免算法&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "label": "[3.5]-3-6请介绍常见的TCP拥塞避免算法——",
       "type": "article",
-      "chapter": "{3}--第3章网络协议面试核心之IP、TCP、UDP协议",
+      "chapter": "{3}-第3章网络协议面试核心之IP、TCP、UDP协议",
       "words": 3892
     },
     {
-      "id": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "label": "[4.2]-4-3请简述同步与异步的区别——进程状态",
       "type": "article",
-      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "chapter": "{4}-第4章操作系统核心之进程、线程与协程",
       "words": 4390
     },
     {
-      "id": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[4.5]--4-6IO密集型任务部署需要注意什么&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "label": "[4.5]-4-6IO密集型任务部署需要注意什么——",
       "type": "article",
-      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "chapter": "{4}-第4章操作系统核心之进程、线程与协程",
       "words": 3957
     },
     {
-      "id": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "label": "[4.1]-4-2请简述对进程的理解——操作系统的进",
       "type": "article",
-      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "chapter": "{4}-第4章操作系统核心之进程、线程与协程",
       "words": 2903
     },
     {
-      "id": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "label": "[4.6]-4-7协程是什么？为什么需要协程——协程",
       "type": "article",
-      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "chapter": "{4}-第4章操作系统核心之进程、线程与协程",
       "words": 4690
     },
     {
-      "id": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "label": "[4.4]-4-5请简述什么是操作系统的内核态——用",
       "type": "article",
-      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "chapter": "{4}-第4章操作系统核心之进程、线程与协程",
       "words": 4153
     },
     {
-      "id": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "label": "[4.3]-4-4请简述进程和线程的区别——操作系统",
       "type": "article",
-      "chapter": "{4}--第4章操作系统核心之进程、线程与协程",
+      "chapter": "{4}-第4章操作系统核心之进程、线程与协程",
       "words": 3280
     },
     {
-      "id": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;Lin_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "label": "[5.5]-5-6软链接与硬链接有什么区别——Lin",
       "type": "article",
-      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "chapter": "{5}-第5章操作系统核心之存储系统详解",
       "words": 4748
     },
     {
-      "id": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[5.6]--5-7请简述服务器部署的RAID&mdash;&mdash;磁盘_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "label": "[5.6]-5-7请简述服务器部署的RAID——磁盘",
       "type": "article",
-      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "chapter": "{5}-第5章操作系统核心之存储系统详解",
       "words": 3622
     },
     {
-      "id": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "label": "[5.3]-5-4请简述操作系统中的缺页中断——操作",
       "type": "article",
-      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "chapter": "{5}-第5章操作系统核心之存储系统详解",
       "words": 4911
     },
     {
-      "id": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "label": "[5.1]-5-2请简述系统设计中缓存的作用——存储",
       "type": "article",
-      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "chapter": "{5}-第5章操作系统核心之存储系统详解",
       "words": 3533
     },
     {
-      "id": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[5.4]--5-5请编程实现LRU算法&mdash;&mdash;页面置换算_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "label": "[5.4]-5-5请编程实现LRU算法——页面置换算",
       "type": "article",
-      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "chapter": "{5}-第5章操作系统核心之存储系统详解",
       "words": 3891
     },
     {
-      "id": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "label": "[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
       "type": "article",
-      "chapter": "{5}--第5章操作系统核心之存储系统详解",
+      "chapter": "{5}-第5章操作系统核心之存储系统详解",
       "words": 3814
     },
     {
-      "id": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "label": "[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
       "type": "article",
-      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "chapter": "{6}-第6章计算机系统之锁、同步与通信",
       "words": 3718
     },
     {
-      "id": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "label": "[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
       "type": "article",
-      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "chapter": "{6}-第6章计算机系统之锁、同步与通信",
       "words": 4571
     },
     {
-      "id": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "label": "[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
       "type": "article",
-      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "chapter": "{6}-第6章计算机系统之锁、同步与通信",
       "words": 3872
     },
     {
-      "id": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "label": "[6.7]-6-8请简述项目中分布式锁的实现方式——",
       "type": "article",
-      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "chapter": "{6}-第6章计算机系统之锁、同步与通信",
       "words": 3994
     },
     {
-      "id": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "label": "[6.5]-6-6进程间有哪些同步的方式——进程间通",
       "type": "article",
-      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "chapter": "{6}-第6章计算机系统之锁、同步与通信",
       "words": 4749
     },
     {
-      "id": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;CAS_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "label": "[6.6]-6-7请简述无锁数据结构的原理——CAS",
       "type": "article",
-      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "chapter": "{6}-第6章计算机系统之锁、同步与通信",
       "words": 3722
     },
     {
-      "id": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[6.2]--6-3线程-进程同步问题三大经典案例详解_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "label": "[6.2]-6-3线程-进程同步问题三大经典案例详解",
       "type": "article",
-      "chapter": "{6}--第6章计算机系统之锁、同步与通信",
+      "chapter": "{6}-第6章计算机系统之锁、同步与通信",
       "words": 4492
     },
     {
-      "id": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "label": "[7.5]-7-6请简述动态链接和静态链接的区别——",
       "type": "article",
-      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "chapter": "{7}-第7章计算机系统之编程语言与运行原理",
       "words": 4300
     },
     {
-      "id": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "label": "[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
       "type": "article",
-      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "chapter": "{7}-第7章计算机系统之编程语言与运行原理",
       "words": 4342
     },
     {
-      "id": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[7.4]--7-5请简述什么是JIT技术&mdash;&mdash;程序运行_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "label": "[7.4]-7-5请简述什么是JIT技术——程序运行",
       "type": "article",
-      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "chapter": "{7}-第7章计算机系统之编程语言与运行原理",
       "words": 4588
     },
     {
-      "id": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[7.3]--7-4编译器原理剖析_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[7.3]-7-4编译器原理剖析",
+      "label": "[7.3]-7-4编译器原理剖析",
       "type": "article",
-      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "chapter": "{7}-第7章计算机系统之编程语言与运行原理",
       "words": 3390
     },
     {
-      "id": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "label": "[7.1]--7-2计算机的层次结构划分详解_一手IT课程资源+微信2268731，网站ubkz.com",
+      "id": "A[7.1]-7-2计算机的层次结构划分详解",
+      "label": "[7.1]-7-2计算机的层次结构划分详解",
       "type": "article",
-      "chapter": "{7}--第7章计算机系统之编程语言与运行原理",
+      "chapter": "{7}-第7章计算机系统之编程语言与运行原理",
       "words": 3179
     },
     {
-      "id": "A[8.2]--8-3链表结构详解&mdash;&mdash;单向链表、双向链表",
-      "label": "[8.2]--8-3链表结构详解&mdash;&mdash;单向链表、双向链表",
+      "id": "A[8.2]-8-3链表结构详解——单向链表、双向链表",
+      "label": "[8.2]-8-3链表结构详解——单向链表、双向链表",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 2540
     },
     {
-      "id": "A[8.4]--8-5链表算法题实战详解",
-      "label": "[8.4]--8-5链表算法题实战详解（二）",
+      "id": "A[8.4]-8-5链表算法题实战详解",
+      "label": "[8.4]-8-5链表算法题实战详解（二）",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 6712
     },
     {
-      "id": "A[8.7]--8-8数组、栈、队列实战详解",
-      "label": "[8.7]--8-8数组、栈、队列实战详解（一）",
+      "id": "A[8.7]-8-8数组、栈、队列实战详解",
+      "label": "[8.7]-8-8数组、栈、队列实战详解（一）",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 3555
     },
     {
-      "id": "A[8.3]--8-4链表算法题实战详解",
-      "label": "[8.3]--8-4链表算法题实战详解（一）",
+      "id": "A[8.3]-8-4链表算法题实战详解",
+      "label": "[8.3]-8-4链表算法题实战详解（一）",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 8281
     },
     {
-      "id": "A[8.1]--8-2时间复杂度与空间复杂度",
-      "label": "[8.1]--8-2时间复杂度与空间复杂度",
+      "id": "A[8.1]-8-2时间复杂度与空间复杂度",
+      "label": "[8.1]-8-2时间复杂度与空间复杂度",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 4308
     },
     {
-      "id": "A[8.5]--8-6基础数据结构&mdash;&mdash;数组、栈、队列",
-      "label": "[8.5]--8-6基础数据结构&mdash;&mdash;数组、栈、队列",
+      "id": "A[8.5]-8-6基础数据结构——数组、栈、队列",
+      "label": "[8.5]-8-6基础数据结构——数组、栈、队列",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 1692
     },
     {
-      "id": "A[8.10]--8-11数组、栈、队列实战详解",
-      "label": "[8.10]--8-11数组、栈、队列实战详解（四）",
+      "id": "A[8.10]-8-11数组、栈、队列实战详解",
+      "label": "[8.10]-8-11数组、栈、队列实战详解（四）",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 1965
     },
     {
-      "id": "A[8.6]--8-7数组、栈、队列实战详解",
-      "label": "[8.6]--8-7数组、栈、队列实战详解（一）",
+      "id": "A[8.6]-8-7数组、栈、队列实战详解",
+      "label": "[8.6]-8-7数组、栈、队列实战详解（一）",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 3555
     },
     {
-      "id": "A[8.8]--8-9数组、栈、队列实战详解",
-      "label": "[8.8]--8-9数组、栈、队列实战详解（二）",
+      "id": "A[8.8]-8-9数组、栈、队列实战详解",
+      "label": "[8.8]-8-9数组、栈、队列实战详解（二）",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 5005
     },
     {
-      "id": "A[8.9]--8-10数组、栈、队列实战详解",
-      "label": "[8.9]--8-10数组、栈、队列实战详解（三）",
+      "id": "A[8.9]-8-10数组、栈、队列实战详解",
+      "label": "[8.9]-8-10数组、栈、队列实战详解（三）",
       "type": "article",
-      "chapter": "{8}--第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
+      "chapter": "{8}-第8章数据结构与算法之链表、栈、队列与二叉树iclass=new",
       "words": 2790
     },
     {
-      "id": "A[9.5]--9-5回溯算法题模板与实战详解",
-      "label": "[9.5]--9-5回溯算法题模板与实战详解（二）",
+      "id": "A[9.5]-9-5回溯算法题模板与实战详解",
+      "label": "[9.5]-9-5回溯算法题模板与实战详解（二）",
       "type": "article",
-      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "chapter": "{9}-第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
       "words": 6173
     },
     {
-      "id": "A[9.4]--9-4回溯算法题模板与实战详解",
-      "label": "[9.4]--9-4回溯算法题模板与实战详解（一）",
+      "id": "A[9.4]-9-4回溯算法题模板与实战详解",
+      "label": "[9.4]-9-4回溯算法题模板与实战详解（一）",
       "type": "article",
-      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "chapter": "{9}-第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
       "words": 5458
     },
     {
-      "id": "A[9.1]--9-1&mdash;&mdash;基础算法详解&mdash;&m",
-      "label": "[9.1]--9-1&mdash;&mdash;基础算法详解&mdash;&m",
+      "id": "A[9.1]-9-1——基础算法详解—&m",
+      "label": "[9.1]-9-1——基础算法详解—&m",
       "type": "article",
-      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "chapter": "{9}-第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
       "words": 2847
     },
     {
-      "id": "A[9.3]--9-3广度优先搜索(bfs)实战详解",
-      "label": "[9.3]--9-3广度优先搜索(BFS)实战详解",
+      "id": "A[9.3]-9-3广度优先搜索(bfs)实战详解",
+      "label": "[9.3]-9-3广度优先搜索(BFS)实战详解",
       "type": "article",
-      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "chapter": "{9}-第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
       "words": 7189
     },
     {
-      "id": "A[9.2]--9-2深度优先搜索(dfs)实战详解",
-      "label": "[9.2]--9-2深度优先搜索(DFS)实战详解",
+      "id": "A[9.2]-9-2深度优先搜索(dfs)实战详解",
+      "label": "[9.2]-9-2深度优先搜索(DFS)实战详解",
       "type": "article",
-      "chapter": "{9}--第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
+      "chapter": "{9}-第9章数据结构与算法之排序、回溯、贪心、搜索与动态规划iclas",
       "words": 5875
     },
     {
-      "id": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "label": "[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "label": "[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
       "type": "article",
-      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "chapter": "{10}-第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
       "words": 3897
     },
     {
-      "id": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "label": "[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "label": "[10.2]-10-2数据库的设计、创建与维护，",
       "type": "article",
-      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "chapter": "{10}-第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
       "words": 2172
     },
     {
-      "id": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "label": "[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "label": "[10.4]-10-4char、varchar和text有什么区别—，",
       "type": "article",
-      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "chapter": "{10}-第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
       "words": 5594
     },
     {
-      "id": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "label": "[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "label": "[10.3]-10-3数据表的设计、创建与维护，",
       "type": "article",
-      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "chapter": "{10}-第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
       "words": 4428
     },
     {
-      "id": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "label": "[10.5]--10-5请简述数据库的ACID属性&mdash;&mdash;A_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "label": "[10.5]-10-5请简述数据库的ACID属性——A，",
       "type": "article",
-      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "chapter": "{10}-第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
       "words": 3294
     },
     {
-      "id": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "label": "[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "label": "[10.1]-10-1概念理清：关系数据库与其他数据库，",
       "type": "article",
-      "chapter": "{10}--第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
+      "chapter": "{10}-第10章数据库核心之DB、表、视图、事务与函数iclass=ne",
       "words": 4250
     },
     {
-      "id": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "label": "[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "label": "[11.3]-11-4请简述什么是联合索引——联合索引，",
       "type": "article",
-      "chapter": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "chapter": "{11}-第11章数据库核心之索引、性能与安全iclass=new_tag",
       "words": 4568
     },
     {
-      "id": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "label": "[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "label": "[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
       "type": "article",
-      "chapter": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "chapter": "{11}-第11章数据库核心之索引、性能与安全iclass=new_tag",
       "words": 4224
     },
     {
-      "id": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "label": "[11.6]--11-7MySQL权限维护详解_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[11.6]-11-7mysql权限维护详解，",
+      "label": "[11.6]-11-7MySQL权限维护详解，",
       "type": "article",
-      "chapter": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "chapter": "{11}-第11章数据库核心之索引、性能与安全iclass=new_tag",
       "words": 4452
     },
     {
-      "id": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "label": "[11.1]--11-2为什么使用B+树做索引&mdash;&mdash;MyS_ubkz.com，一手IT课程+微信2268731",
+      "id": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "label": "[11.1]-11-2为什么使用B+树做索引——MyS，",
       "type": "article",
-      "chapter": "{11}--第11章数据库核心之索引、性能与安全iclass=new_tag",
+      "chapter": "{11}-第11章数据库核心之索引、性能与安全iclass=new_tag",
       "words": 3970
     },
     {
-      "id": "A[12.1]--12-2设计模式之单例模式详解",
-      "label": "[12.1]--12-2设计模式之单例模式详解",
+      "id": "A[12.1]-12-2设计模式之单例模式详解",
+      "label": "[12.1]-12-2设计模式之单例模式详解",
       "type": "article",
-      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "chapter": "{12}-第12章程序设计之面向对象编程",
       "words": 3813
     },
     {
-      "id": "A[12.2]--12-3设计模式之建造者模式详解",
-      "label": "[12.2]--12-3设计模式之建造者模式详解",
+      "id": "A[12.2]-12-3设计模式之建造者模式详解",
+      "label": "[12.2]-12-3设计模式之建造者模式详解",
       "type": "article",
-      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "chapter": "{12}-第12章程序设计之面向对象编程",
       "words": 3010
     },
     {
-      "id": "A[12.3]--12-4设计模式之适配器模式详解",
-      "label": "[12.3]--12-4设计模式之适配器模式详解",
+      "id": "A[12.3]-12-4设计模式之适配器模式详解",
+      "label": "[12.3]-12-4设计模式之适配器模式详解",
       "type": "article",
-      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "chapter": "{12}-第12章程序设计之面向对象编程",
       "words": 2639
     },
     {
-      "id": "A[12.4]--12-5设计模式之装饰器模式详解",
-      "label": "[12.4]--12-5设计模式之装饰器模式详解",
+      "id": "A[12.4]-12-5设计模式之装饰器模式详解",
+      "label": "[12.4]-12-5设计模式之装饰器模式详解",
       "type": "article",
-      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "chapter": "{12}-第12章程序设计之面向对象编程",
       "words": 2342
     },
     {
-      "id": "A[12.5]--12-6设计模式之代理模式详解",
-      "label": "[12.5]--12-6设计模式之代理模式详解",
+      "id": "A[12.5]-12-6设计模式之代理模式详解",
+      "label": "[12.5]-12-6设计模式之代理模式详解",
       "type": "article",
-      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "chapter": "{12}-第12章程序设计之面向对象编程",
       "words": 2758
     },
     {
-      "id": "A[12.6]--12-7系统设计模式的七大原则",
-      "label": "[12.6]--12-7系统设计模式的七大原则",
+      "id": "A[12.6]-12-7系统设计模式的七大原则",
+      "label": "[12.6]-12-7系统设计模式的七大原则",
       "type": "article",
-      "chapter": "{12}--第12章程序设计之面向对象编程",
+      "chapter": "{12}-第12章程序设计之面向对象编程",
       "words": 4399
     },
     {
-      "id": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
-      "label": "code/recruitment/src/main/java/com/imooc/dddq/code/L122.java",
+      "id": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
+      "label": "code/recruitment/src/main/java/com/example/dddq/code/L122.java",
       "type": "code"
     },
     {
-      "id": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
-      "label": "code/recruitment/src/main/java/com/imooc/dddq/code/L198.java",
+      "id": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
+      "label": "code/recruitment/src/main/java/com/example/dddq/code/L198.java",
       "type": "code"
     },
     {
-      "id": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
-      "label": "code/recruitment/src/main/java/com/imooc/dddq/code/Offer09.java",
+      "id": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
+      "label": "code/recruitment/src/main/java/com/example/dddq/code/Offer09.java",
       "type": "code"
     },
     {
-      "id": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
-      "label": "code/recruitment/src/main/java/com/imooc/dddq/code/L55.java",
+      "id": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
+      "label": "code/recruitment/src/main/java/com/example/dddq/code/L55.java",
       "type": "code"
     },
     {
-      "id": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
-      "label": "code/recruitment/src/main/java/com/imooc/dddq/code/L142.java",
+      "id": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
+      "label": "code/recruitment/src/main/java/com/example/dddq/code/L142.java",
       "type": "code"
     },
     {
-      "id": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
-      "label": "code/recruitment/src/main/java/com/imooc/dddq/code/L206.java",
+      "id": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
+      "label": "code/recruitment/src/main/java/com/example/dddq/code/L206.java",
       "type": "code"
     },
     {
-      "id": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
-      "label": "code/recruitment/src/main/java/com/imooc/dddq/code/L860.java",
+      "id": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
+      "label": "code/recruitment/src/main/java/com/example/dddq/code/L860.java",
       "type": "code"
     },
     {
-      "id": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
-      "label": "code/recruitment/src/main/java/com/imooc/dddq/code/L141.java",
+      "id": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
+      "label": "code/recruitment/src/main/java/com/example/dddq/code/L141.java",
       "type": "code"
     }
   ],
   "edges": [
     {
       "from": "A13-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-4",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-4",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-4",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-4",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-4",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-4",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-4",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-4",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-5",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-5",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-5",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-5",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-5",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-5",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-5",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
       "from": "A13-5",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-1",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-1",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-1",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-1",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-1",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-1",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-1",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-1",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-2",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
       "from": "A16-3",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[1.1]--1-1新后端校招面试直通车，提前锁定大厂offer-导学_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[1.1]-1-1新后端校招面试直通车，提前锁定大厂offer-导学",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.3]--2-4请简述常见http状态码及含义&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[2.3]-2-4请简述常见http状态码及含义——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.6]--2-7请简述域名系统的工作流程&mdash;&mdash;dns_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[2.6]-2-7请简述域名系统的工作流程——dns",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.4]--2-5请简述对称加密、非对称加密的异同&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[2.4]-2-5请简述对称加密、非对称加密的异同——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[2.5]-2-6请简述https加密认证的过程——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[2.5]-2-6请简述https加密认证的过程——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[2.5]-2-6请简述https加密认证的过程——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[2.5]-2-6请简述https加密认证的过程——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[2.5]-2-6请简述https加密认证的过程——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[2.5]-2-6请简述https加密认证的过程——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[2.5]-2-6请简述https加密认证的过程——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.5]--2-6请简述https加密认证的过程&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[2.5]-2-6请简述https加密认证的过程——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.1]--2-2tcp、udp协议分别属于什么层&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[2.1]-2-2tcp、udp协议分别属于什么层——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.7]--2-8你了解dns攻击吗？是什么原理&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[2.7]-2-8你了解dns攻击吗？是什么原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[2.2]--2-3请简述http1.0、1.1、2.0的主要区别&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[2.2]-2-3请简述http1.0、1.1、2.0的主要区别—",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.7]--3-8请简述什么是synflood攻击&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[3.7]-3-8请简述什么是synflood攻击——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.1]--3-2请简述tcp与udp协议的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[3.1]-3-2请简述tcp与udp协议的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.4]--3-5请简述滑动窗口的工作过程&mdash;&mdash;tcp_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[3.4]-3-5请简述滑动窗口的工作过程——tcp",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.8]--3-9什么是vpn？请简述vpn的原理&mdash;&mdash_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[3.8]-3-9什么是vpn？请简述vpn的原理——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.2]--3-3tcp协议为什么需要三次握手&mdash;&mdash;t_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[3.2]-3-3tcp协议为什么需要三次握手——t",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.3]--3-4请简述什么是time_wait状态&mdash;&mdas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[3.3]-3-4请简述什么是time_wait状态—&mdas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.6]--3-7什么是粘包？如何解决？&mdash;&mdash;tcp粘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[3.6]-3-7什么是粘包？如何解决？——tcp粘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[3.5]--3-6请介绍常见的tcp拥塞避免算法&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[3.5]-3-6请介绍常见的tcp拥塞避免算法——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.2]--4-3请简述同步与异步的区别&mdash;&mdash;进程状态_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[4.2]-4-3请简述同步与异步的区别——进程状态",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.5]--4-6io密集型任务部署需要注意什么&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[4.5]-4-6io密集型任务部署需要注意什么——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.1]--4-2请简述对进程的理解&mdash;&mdash;操作系统的进_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[4.1]-4-2请简述对进程的理解——操作系统的进",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.6]--4-7协程是什么？为什么需要协程&mdash;&mdash;协程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[4.6]-4-7协程是什么？为什么需要协程——协程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.4]--4-5请简述什么是操作系统的内核态&mdash;&mdash;用_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[4.4]-4-5请简述什么是操作系统的内核态——用",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[4.3]--4-4请简述进程和线程的区别&mdash;&mdash;操作系统_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[4.3]-4-4请简述进程和线程的区别——操作系统",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.5]--5-6软链接与硬链接有什么区别&mdash;&mdash;lin_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[5.5]-5-6软链接与硬链接有什么区别——lin",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.6]--5-7请简述服务器部署的raid&mdash;&mdash;磁盘_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[5.6]-5-7请简述服务器部署的raid——磁盘",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.3]--5-4请简述操作系统中的缺页中断&mdash;&mdash;操作_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[5.3]-5-4请简述操作系统中的缺页中断——操作",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.1]--5-2请简述系统设计中缓存的作用&mdash;&mdash;存储_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[5.1]-5-2请简述系统设计中缓存的作用——存储",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.4]--5-5请编程实现lru算法&mdash;&mdash;页面置换算_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[5.4]-5-5请编程实现lru算法——页面置换算",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[5.2]--5-3请简述操作系统的虚拟内存&mdash;&mdash;虚拟内_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[5.2]-5-3请简述操作系统的虚拟内存——虚拟内",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.4]--6-5请简述互斥锁与自旋锁的区别&mdash;&mdash;线程_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[6.4]-6-5请简述互斥锁与自旋锁的区别——线程",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.1]--6-2请谈谈对死锁必要条件的理解&mdash;&mdash;死锁_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[6.1]-6-2请谈谈对死锁必要条件的理解——死锁",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.3]--6-4请简述乐观锁、悲观锁、可重入锁&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[6.3]-6-4请简述乐观锁、悲观锁、可重入锁——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.7]--6-8请简述项目中分布式锁的实现方式&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[6.7]-6-8请简述项目中分布式锁的实现方式——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.5]--6-6进程间有哪些同步的方式&mdash;&mdash;进程间通_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[6.5]-6-6进程间有哪些同步的方式——进程间通",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.6]--6-7请简述无锁数据结构的原理&mdash;&mdash;cas_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[6.6]-6-7请简述无锁数据结构的原理——cas",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[6.2]--6-3线程-进程同步问题三大经典案例详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[6.2]-6-3线程-进程同步问题三大经典案例详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.5]--7-6请简述动态链接和静态链接的区别&mdash;&mdash;_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[7.5]-7-6请简述动态链接和静态链接的区别——",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.2]--7-3什么是字节码？编译和解释有什么区别？&mdash;&mda_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[7.2]-7-3什么是字节码？编译和解释有什么区别？—&mda",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.4]--7-5请简述什么是jit技术&mdash;&mdash;程序运行_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[7.4]-7-5请简述什么是jit技术——程序运行",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[7.3]-7-4编译器原理剖析",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[7.3]-7-4编译器原理剖析",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[7.3]-7-4编译器原理剖析",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[7.3]-7-4编译器原理剖析",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[7.3]-7-4编译器原理剖析",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[7.3]-7-4编译器原理剖析",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[7.3]-7-4编译器原理剖析",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.3]--7-4编译器原理剖析_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[7.3]-7-4编译器原理剖析",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[7.1]-7-2计算机的层次结构划分详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[7.1]-7-2计算机的层次结构划分详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[7.1]-7-2计算机的层次结构划分详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[7.1]-7-2计算机的层次结构划分详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[7.1]-7-2计算机的层次结构划分详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[7.1]-7-2计算机的层次结构划分详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[7.1]-7-2计算机的层次结构划分详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[7.1]--7-2计算机的层次结构划分详解_一手it课程资源+微信2268731，网站ubkz.com",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[7.1]-7-2计算机的层次结构划分详解",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.6]--10-6请简述脏读、幻不可重复度、幻读的概念&mdash;&md_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[10.6]-10-6请简述脏读、幻不可重复度、幻读的概念—&md，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.2]--10-2数据库的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[10.2]-10-2数据库的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.4]--10-4char、varchar和text有什么区别&mdash_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[10.4]-10-4char、varchar和text有什么区别—，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.3]--10-3数据表的设计、创建与维护_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[10.3]-10-3数据表的设计、创建与维护，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.5]--10-5请简述数据库的acid属性&mdash;&mdash;a_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[10.5]-10-5请简述数据库的acid属性——a，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[10.1]--10-1概念理清：关系数据库与其他数据库_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[10.1]-10-1概念理清：关系数据库与其他数据库，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.3]--11-4请简述什么是联合索引&mdash;&mdash;联合索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[11.3]-11-4请简述什么是联合索引——联合索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.2]--11-3请简述什么是聚簇索引&mdash;&mdash;聚簇索引_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[11.2]-11-3请简述什么是聚簇索引——聚簇索引，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[11.6]-11-7mysql权限维护详解，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[11.6]-11-7mysql权限维护详解，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[11.6]-11-7mysql权限维护详解，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[11.6]-11-7mysql权限维护详解，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[11.6]-11-7mysql权限维护详解，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[11.6]-11-7mysql权限维护详解，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[11.6]-11-7mysql权限维护详解，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.6]--11-7mysql权限维护详解_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[11.6]-11-7mysql权限维护详解，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L122_java",
+      "from": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L122_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L198_java",
+      "from": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L198_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_Offer09_java",
+      "from": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_Offer09_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L55_java",
+      "from": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L55_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L142_java",
+      "from": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L142_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L206_java",
+      "from": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L206_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L860_java",
+      "from": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L860_java",
       "relation": "uses-code"
     },
     {
-      "from": "A[11.1]--11-2为什么使用b+树做索引&mdash;&mdash;mys_ubkz.com，一手it课程+微信",
-      "to": "Ccode_recruitment_src_main_java_com_imooc_dddq_code_L141_java",
+      "from": "A[11.1]-11-2为什么使用b+树做索引——mys，",
+      "to": "Ccode_recruitment_src_main_java_com_example_dddq_code_L141_java",
       "relation": "uses-code"
     }
   ]

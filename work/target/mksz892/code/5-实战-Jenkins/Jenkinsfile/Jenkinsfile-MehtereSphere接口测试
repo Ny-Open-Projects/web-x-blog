@@ -1,0 +1,38 @@
+#!groovy
+
+pipeline {
+
+	agent {
+        label 'slave'
+    }
+
+    options {
+      timestamps()      
+      parallelsAlwaysFailFast()
+      timeout(time: 600, unit: 'SECONDS') 
+      disableConcurrentBuilds(abortPrevious: true) 
+      buildDiscarder(logRotator(numToKeepStr: '30'))
+      skipDefaultCheckout() 
+    }
+    
+    stages {
+        stage('metershpere测试') {
+            steps {
+                    meterSphere method: 'testPlan',
+                    mode: 'serial', 
+                    msAccessKey: 'OYPWJwNk9vi6JNiF', 
+                    msEndpoint: 'http://10.0.7.27:8081/', 
+                    msSecretKey: '7D0UlTZXXTZMt0fD', 
+                    openMode: 'auth', 
+                    projectId: 'a6ad182f-f6f1-44de-bdc7-3e6aef7c9e84', 
+                    projectName: '', 
+                    projectType: 'projectId', 
+                    resourcePoolId: '237d98d4-40b9-11ee-a07c-0242ac1e0a09', 
+                    testCaseId: '', testCaseName: '', 
+                    testPlanId: '99355526-981f-4927-bd6d-b37e54eb00c1', 
+                    testPlanName: '', 
+                    workspaceId: '4d144486-dc2a-4282-acd6-9b449869eeae'
+                }  
+            }
+        }
+} 

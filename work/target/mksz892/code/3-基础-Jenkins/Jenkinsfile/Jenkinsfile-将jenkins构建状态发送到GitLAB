@@ -1,0 +1,33 @@
+pipeline {
+    agent any 
+    options {
+        gitLabConnection('jenkins-gitlab')
+        timestamps() 
+        parallelsAlwaysFailFast()
+        disableConcurrentBuilds(abortPrevious: true) 
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        //skipDefaultCheckout() 
+    }	
+    stages {
+        stage('branch-gitrul'){
+            steps {
+                script {
+                    updateGitlabCommitStatus name: 'build', state: 'running'
+                    //sh "pw"
+                    echo "hello world"
+                }
+            }
+        }	
+    }
+	post {		
+		aborted {
+            updateGitlabCommitStatus name: 'build', state: 'canceled'            
+		}
+		failure{
+            updateGitlabCommitStatus name: 'build', state: 'failed'
+		}		
+		success{
+            updateGitlabCommitStatus name: 'build', state: 'success'
+		}
+	}
+}

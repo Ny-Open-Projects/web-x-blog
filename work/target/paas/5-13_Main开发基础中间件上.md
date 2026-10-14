@@ -34,7 +34,7 @@ var (
 import (
 	"github.com/micro/go-micro/v3/registry"
 	"github.com/micro/go-micro/v3/config"
-	_common "git.imooc.com/coding-535/common" // 课程通用包
+	_common "git.example.com/coding-535/common" // 课程通用包
 )
 
 func main() {

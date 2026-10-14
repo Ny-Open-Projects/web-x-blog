@@ -32,11 +32,11 @@ disableNunjucks: true
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: imoocprom-prometheus-kube-etcd
+  name: exampleprom-prometheus-kube-etcd
   namespace: monitoring
   labels:
     app: prometheus-operator
-    prometheus: imoocprom
+    prometheus: exampleprom
 spec:
   groups:
     - name: kube-etcd
@@ -86,10 +86,10 @@ Prometheus 的东西看得差不多了，下面去看 Grafana 提供了哪些图
 
 ```bash
 kubectl get svc -n monitoring | grep grafana
-# imooc-prometheus-grafana   <clusterIP>  80/TCP
+# example-prometheus-grafana   <clusterIP>  80/TCP
 ```
 
-在 `deepinrelease` 项目 12 小节里已经准备好了 Ingress，域名叫 `grafana.imooc.com`，serviceName 就是刚才看到的那个，端口 80，直接用：
+在 `deepinrelease` 项目 12 小节里已经准备好了 Ingress，域名叫 `grafana.example.com`，serviceName 就是刚才看到的那个，端口 80，直接用：
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -101,16 +101,16 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: grafana.imooc.com
+    - host: grafana.example.com
       http:
         paths:
           - path: /
             backend:
-              serviceName: imooc-prometheus-grafana
+              serviceName: example-prometheus-grafana
               servicePort: 80
 ```
 
-本地 hosts 加一行 `127.0.0.1 grafana.imooc.com`，打开——确实能访问。那用户名是什么？这是个问题，去查。
+本地 hosts 加一行 `127.0.0.1 grafana.example.com`，打开——确实能访问。那用户名是什么？这是个问题，去查。
 
 ### 密码不是猜的，是解码出来的
 
@@ -118,7 +118,7 @@ spec:
 
 ```bash
 kubectl get secret -n monitoring | grep grafana
-kubectl get secret imooc-prometheus-grafana -n monitoring -o yaml
+kubectl get secret example-prometheus-grafana -n monitoring -o yaml
 ```
 
 secret 里的 `admin-user` 和 `admin-password` 都是 base64 编码的，解开：
@@ -168,8 +168,8 @@ alertmanager:
     global:
       resolve_timeout: 5m
       smtp_smart_host: 'smtp.163.com:25'
-      smtp_from: 'imoocdat@163.com'
-      smtp_auth_username: 'imoocdat@163.com'
+      smtp_from: 'exampledat@163.com'
+      smtp_auth_username: 'exampledat@163.com'
       smtp_auth_password: 'smtpAuthPasswordHere'
     route:
       receiver: emailAlerts
@@ -178,7 +178,7 @@ alertmanager:
     receivers:
       - name: emailAlerts
         email_config:
-          to: 'imoocdat@163.com'
+          to: 'exampledat@163.com'
           send_resolved: true
 ```
 
@@ -199,7 +199,7 @@ Alertmanager 支持很多种报警方式，常见的组件都支持，还可以�
 ### 生效并验证
 
 ```bash
-helm upgrade imoocprom ./prometheus-operator -f values.yaml
+helm upgrade exampleprom ./prometheus-operator -f values.yaml
 ```
 
 打开邮箱，已经是未读邮件状态，刷新一下——目前还是没有邮件进来。那就制造一个：把 ETCD 给它 stop 一下，强制来一个问题，考验一下它。
@@ -268,11 +268,11 @@ spec:
 EOF
 
 # 2. 拿 Grafana 密码
-kubectl -n monitoring get secret imooc-prometheus-grafana -o jsonpath='{.data.admin-password}' | base64 -d
-kubectl -n monitoring get secret imooc-prometheus-grafana -o jsonpath='{.data.admin-user}' | base64 -d
+kubectl -n monitoring get secret example-prometheus-grafana -o jsonpath='{.data.admin-password}' | base64 -d
+kubectl -n monitoring get secret example-prometheus-grafana -o jsonpath='{.data.admin-user}' | base64 -d
 
 # 3. 配完 alertmanager 之后
-helm upgrade imoocprom ./prometheus-operator -f values.yaml
+helm upgrade exampleprom ./prometheus-operator -f values.yaml
 
 # 4. 验证：把 etcd 停掉，看邮箱
 systemctl stop etcd
@@ -287,14 +287,14 @@ systemctl start etcd
 monitoring/
 ├── crd/prometheusrules.monitoring.coreos.com
 ├── prometheusrule/
-│   ├── imoocprom-prometheus-kube-etcd      # chart 默认生成
-│   ├── imoocprom-prometheus-kube-apiserver
-│   ├── imoocprom-prometheus-kube-pods
+│   ├── exampleprom-prometheus-kube-etcd      # chart 默认生成
+│   ├── exampleprom-prometheus-kube-apiserver
+│   ├── exampleprom-prometheus-kube-pods
 │   └── my-etcd-rules                        # 手写，脱离 Helm 管理
 ├── configmap/alertmanager-im.mock-config   # alertmanager.config 渲染结果
-├── secret/imooc-prometheus-grafana         # admin-user / admin-password
-├── pod/alertmanager-imoocprom-alertmanager-0
-├── pod/grafana-imoocprom-grafana-xxxxx
+├── secret/example-prometheus-grafana         # admin-user / admin-password
+├── pod/alertmanager-exampleprom-alertmanager-0
+├── pod/grafana-exampleprom-grafana-xxxxx
 └── ingress.extensions/{prometheus,grafana}
 ```
 

@@ -16,7 +16,7 @@ categories:
 ## 纲要
 
 - 给 nginx 写一份 restart.sh：停容器、删容器、以 host 网络重新挂载配置启动
-- 用域名而不是 IP 访问 Harbor：本地 hosts 把 harbor.imooc.com 绑到 50
+- 用域名而不是 IP 访问 Harbor：本地 hosts 把 harbor.example.com 绑到 50
 - 删掉默认的 library 公开仓库，新建一个业务项目
 - 命令行 push 前的两道关：daemon.json 加 insecure-registries + 建一个可推送的用户
 - 用户创建后在项目成员里给「开发人员」角色才有 push 权限
@@ -52,15 +52,15 @@ docker logs harbor-nginx 2>&1 | tail -5        # 没有报错日志
 
 ## 第二步：用域名访问 Harbor
 
-五零是可以正常访问的。但是通过 IP 访问肯定不是一个好的方式，最好是去配置一个域名：在本地给它绑一个 hosts，绑定到五零上，域名就叫做 **harbor.imooc.com**。然后就可以用这个域名去访问了。
+五零是可以正常访问的。但是通过 IP 访问肯定不是一个好的方式，最好是去配置一个域名：在本地给它绑一个 hosts，绑定到五零上，域名就叫做 **harbor.example.com**。然后就可以用这个域名去访问了。
 
 ```bash
 # 各台机器的 /etc/hosts
-192.155.20.50  harbor.imooc.com
+192.155.20.50  harbor.example.com
 ```
 
 ```bash
-curl -I http://harbor.imooc.com | head -1
+curl -I http://harbor.example.com | head -1
 # HTTP/1.1 200 OK
 ```
 
@@ -68,33 +68,33 @@ curl -I http://harbor.imooc.com | head -1
 
 登录进去看一看里面的仓库。里面有一个 library 是公开的、默认的一个仓库，把它删掉，没有什么用。
 
-然后去新建一个项目，项目的名字就叫 **imooc**。内网是没有关系的，谁都可以 push，所以创建这个项目时直接允许任何人推送。
+然后去新建一个项目，项目的名字就叫 **example**。内网是没有关系的，谁都可以 push，所以创建这个项目时直接允许任何人推送。
 
 ```bash
-# UI 操作：项目 → 新建项目 → 名称 imooc → 访问级别（内网可公开）
+# UI 操作：项目 → 新建项目 → 名称 example → 访问级别（内网可公开）
 ```
 
 ## 第四步：命令行 push
 
-接下来尝试用命令行给这个项目 push 一个镜像上来，看能不能成功。在 50 上先得有一个镜像，把这个 nginx:1.13.12 打一个 tag：打成 `harbor.imooc.com/imooc/nginx:1.13.12`。
+接下来尝试用命令行给这个项目 push 一个镜像上来，看能不能成功。在 50 上先得有一个镜像，把这个 nginx:1.13.12 打一个 tag：打成 `harbor.example.com/example/nginx:1.13.12`。
 
-这个域名也得配一个 hosts——编辑 hosts 文件，把 50 配置为 harbor.imooc.com，然后去试一下能不能 push 上去。
+这个域名也得配一个 hosts——编辑 hosts 文件，把 50 配置为 harbor.example.com，然后去试一下能不能 push 上去。
 
 ```bash
-docker tag nginx:1.13.12 harbor.imooc.com/imooc/nginx:1.13.12
+docker tag nginx:1.13.12 harbor.example.com/example/nginx:1.13.12
 ```
 
 ```text
-$ docker push harbor.imooc.com/imooc/nginx:1.13.12
+$ docker push harbor.example.com/example/nginx:1.13.12
 The push refers to a repository [...]
-Get https://harbor.imooc.com/v2/: dial tcp ...:443       ← 443 报出来肯定不对
+Get https://harbor.example.com/v2/: dial tcp ...:443       ← 443 报出来肯定不对
 ```
 
-因为我们用的是 HTTP 的 Harbor，所以还要对 docker 做一个配置：编辑 docker 的配置文件 `/etc/docker/daemon.json`，如果不存在就新建一个；文件格式是 json，在里面用到了一个 **`insecure-registries`**——意思是允许通过 HTTP 来访问的这个镜像仓库，它是一个**数组**，可以有很多项；这里只有一个 harbor.imooc.com 配置这一项就可以了。
+因为我们用的是 HTTP 的 Harbor，所以还要对 docker 做一个配置：编辑 docker 的配置文件 `/etc/docker/daemon.json`，如果不存在就新建一个；文件格式是 json，在里面用到了一个 **`insecure-registries`**——意思是允许通过 HTTP 来访问的这个镜像仓库，它是一个**数组**，可以有很多项；这里只有一个 harbor.example.com 配置这一项就可以了。
 
 ```json
 {
-  "insecure-registries": ["harbor.imooc.com"]
+  "insecure-registries": ["harbor.example.com"]
 }
 ```
 
@@ -103,7 +103,7 @@ Get https://harbor.imooc.com/v2/: dial tcp ...:443       ← 443 报出来肯定
 ```bash
 systemctl restart docker
 bash /root/restart.sh
-docker push harbor.imooc.com/imooc/nginx:1.13.12
+docker push harbor.example.com/example/nginx:1.13.12
 ```
 
 ```text
@@ -118,7 +118,7 @@ denied: requested access to the resource is denied     ← 因为没有登录
 系统管理 → 用户管理 → 新建用户
   用户名：pusher
   密码：……（不要用太短的密码）
-项目 imooc → 成员 → 添加 pusher，角色选「开发人员」
+项目 example → 成员 → 添加 pusher，角色选「开发人员」
 ```
 
 接下来就可以使用这个用户去 push 镜像了：
@@ -126,29 +126,29 @@ denied: requested access to the resource is denied     ← 因为没有登录
 ```bash
 # 密码不写进命令历史，用环境变量
 read -rsp 'Harbor password: ' HARBOR_PWD && echo
-docker login harbor.imooc.com -u pusher -p "$HARBOR_PWD"
+docker login harbor.example.com -u pusher -p "$HARBOR_PWD"
 # Login Succeeded
 
-docker push harbor.imooc.com/imooc/nginx:1.13.12
+docker push harbor.example.com/example/nginx:1.13.12
 # 这回是正常的，push 过程中还复制成功了（镜像同步完成）
 ```
 
 ## 第五步：到另一个节点 pull
 
-再去另一个节点——去 120 或者 121 上给它 pull 一下，看能不能拉下来——也需要配一个 host（192.155.20.50  harbor.imooc.com）。
+再去另一个节点——去 120 或者 121 上给它 pull 一下，看能不能拉下来——也需要配一个 host（192.155.20.50  harbor.example.com）。
 
 ```bash
-echo "192.155.20.50 harbor.imooc.com" >> /etc/hosts
+echo "192.155.20.50 harbor.example.com" >> /etc/hosts
 cat > /etc/docker/daemon.json <<'EOF'
 {
-  "insecure-registries": ["harbor.imooc.com"]
+  "insecure-registries": ["harbor.example.com"]
 }
 EOF
 systemctl restart docker
 ```
 
 ```text
-$ docker pull harbor.imooc.com/imooc/nginx:1.13.12
+$ docker pull harbor.example.com/example/nginx:1.13.12
 Error response from daemon: ... insecure ...        ← daemon.json 没生效/没重启干净
 ```
 
@@ -157,8 +157,8 @@ Error response from daemon: ... insecure ...        ← daemon.json 没生效/�
 ```bash
 docker start harbor-nginx
 sleep 20
-docker pull harbor.imooc.com/imooc/nginx:1.13.12
-# nginx:1.13.12: Pulling from imooc/nginx
+docker pull harbor.example.com/example/nginx:1.13.12
+# nginx:1.13.12: Pulling from example/nginx
 # Digest: sha256:...   Status: Downloaded newer image ...
 ```
 
@@ -179,7 +179,7 @@ push、pull 都能跑，就去再配置一个双主复制。双主复制要分�
 然后选一个目标，再选触发模式：**手动、即刻、定时**三种，这里选择**即刻**；并且同时勾选「删除本地镜像的同时也会去同步删除远程的镜像」。保存一下。
 
 ```text
-项目 imooc → 复制 → 新建规则
+项目 example → 复制 → 新建规则
   规则名称：到120
   镜像过滤器：（不选 = 同步该项目下全部镜像；也可按 仓库 / tag / label 过滤）
   目标：120（192.155.20.120）
@@ -201,7 +201,7 @@ push、pull 都能跑，就去再配置一个双主复制。双主复制要分�
 
 ```mermaid
 flowchart TB
-    A["50（master）\nharbor.imooc.com\nnginx stream 代理"] --> B["120：Harbor A"]
+    A["50（master）\nharbor.example.com\nnginx stream 代理"] -> B["120：Harbor A"]
     A --> C["121：Harbor B"]
     B -->|"目标：121\n规则：到121\n即刻 / 无过滤"| C
     C -->|"目标：120\n规则：到120\n即刻 / 无过滤"| B
@@ -213,7 +213,7 @@ flowchart TB
 
 | 环节 | 踩到的坑 | 正确做法 |
 | --- | --- | --- |
-| 域名解析 | 直接用 IP 访问 | hosts 里把 harbor.imooc.com 指向 50（nginx 代理） |
+| 域名解析 | 直接用 IP 访问 | hosts 里把 harbor.example.com 指向 50（nginx 代理） |
 | 协议 | push 报 443 | Harbor 走 HTTP，daemon.json 加 `insecure-registries` |
 | 生效 | 改完配置不生效 | 重启 docker 后要把 nginx 容器用 restart.sh 拉起来 |
 | 权限 | push 报 access denied | 建 pusher 用户 → 在项目成员里给「开发人员」角色 |
@@ -224,7 +224,7 @@ flowchart TB
 
 ```text
 50（master）
-├── /etc/hosts                  → 192.155.20.50  harbor.imooc.com
+├── /etc/hosts                  → 192.155.20.50  harbor.example.com
 ├── /etc/docker/daemon.json     → insecure-registries
 ├── /root/restart.sh            → stop/rm/run harbor-nginx
 └── /root/ngx/nginx.conf        → stream upstream hub + listen 80
@@ -248,11 +248,11 @@ flowchart TB
 | --- | --- | --- |
 | 重启 Harbor 代理 | `bash /root/restart.sh` | stop + rm + run（host 网络） |
 | 看 nginx 有没有起 | `docker logs harbor-nginx` | 无报错才往下走 |
-| 域名解析 | 各节点 `/etc/hosts` 加 `192.155.20.50 harbor.imooc.com` | 生产上换正式 DNS |
+| 域名解析 | 各节点 `/etc/hosts` 加 `192.155.20.50 harbor.example.com` | 生产上换正式 DNS |
 | 允许 HTTP 仓库 | `/etc/docker/daemon.json` 的 `insecure-registries` | 数组，可多项 |
 | 建推送用户 | UI：系统管理 → 用户管理 → 新建 | 别用太短的密码 |
 | 给推送权限 | UI：项目 → 成员 → 角色选「开发人员」 | 只有该角色才有 push 权 |
-| 登录验证 | `docker login harbor.imooc.com -u pusher` | 出 Succeeded 再 push |
+| 登录验证 | `docker login harbor.example.com -u pusher` | 出 Succeeded 再 push |
 | 手动同步 | UI：项目 → 复制 → 新建规则（即刻） | 也可手动触发已建规则 |
 | 看复制任务 | 点开规则看 transferred / 开始 / 完成时间 | finish 才是成功 |
 
@@ -264,43 +264,43 @@ flowchart TB
 
 ```bash
 bash /root/restart.sh
-echo "192.155.20.50 harbor.imooc.com" >> /etc/hosts
-curl -I http://harbor.imooc.com | head -1
+echo "192.155.20.50 harbor.example.com" >> /etc/hosts
+curl -I http://harbor.example.com | head -1
 # HTTP/1.1 200 OK
 ```
 
-**第二段：推一个镜像进 imooc 项目**
+**第二段：推一个镜像进 example 项目**
 
 ```bash
-docker tag nginx:1.13.12 harbor.imooc.com/imooc/nginx:1.13.12
+docker tag nginx:1.13.12 harbor.example.com/example/nginx:1.13.12
 
 # ① 允许 HTTP 仓库
 cat > /etc/docker/daemon.json <<'EOF'
-{ "insecure-registries": ["harbor.imooc.com"] }
+{ "insecure-registries": ["harbor.example.com"] }
 EOF
 systemctl restart docker
 bash /root/restart.sh              # docker 重启会把 nginx 容器带走，重新拉起
 
 # ② 用有权限的用户登录
-docker login harbor.imooc.com -u pusher -p '<密码>'
+docker login harbor.example.com -u pusher -p '<密码>'
 # Login Succeeded
 
-docker push harbor.imooc.com/imooc/nginx:1.13.12
+docker push harbor.example.com/example/nginx:1.13.12
 # 1.13.12: digest: sha256:xxxx size: 952
 ```
 
 **第三段：另一个节点拉下来**
 
 ```bash
-echo "192.155.20.50 harbor.imooc.com" >> /etc/hosts
+echo "192.155.20.50 harbor.example.com" >> /etc/hosts
 cat > /etc/docker/daemon.json <<'EOF'
-{ "insecure-registries": ["harbor.imooc.com"] }
+{ "insecure-registries": ["harbor.example.com"] }
 EOF
 systemctl restart docker
 docker start harbor-nginx
 sleep 20                            # worker 上 k8s 组件多，docker 起来慢
-docker pull harbor.imooc.com/imooc/nginx:1.13.12
-# Status: Downloaded newer image for harbor.imooc.com/imooc/nginx:1.13.12
+docker pull harbor.example.com/example/nginx:1.13.12
+# Status: Downloaded newer image for harbor.example.com/example/nginx:1.13.12
 ```
 
 **第四段：两边互配复制规则**
@@ -308,22 +308,22 @@ docker pull harbor.imooc.com/imooc/nginx:1.13.12
 ```bash
 # 121 上（也可用 120 同法）
 # 1) 仓库管理 → 新建目标：名称 120，地址 192.155.20.120，admin/Harbor12345，测试连接
-# 2) 项目 imooc → 复制 → 新建规则：到120，过滤器留空，目标 120，触发模式「即刻」
+# 2) 项目 example → 复制 → 新建规则：到120，过滤器留空，目标 120，触发模式「即刻」
 # 3) 点开规则看状态 → finish，transferred = N
 
 # 120 上
 # 1) 仓库管理 → 新建目标：名称 121，地址 192.155.20.121
-# 2) 项目 imooc → 复制 → 新建规则：到121，目标 121，即刻
+# 2) 项目 example → 复制 → 新建规则：到121，目标 121，即刻
 # 3) 回到 121 刷新：项目与镜像都已在，且不会再重复传输（比对签名一致即跳过）
 ```
 
-配置完之后做一次故障演练也不难：把 120 上 Harbor 停掉，继续用 `harbor.imooc.com` push，请求会被 nginx 落到 121 上完成——因为两个点各有全量镜像，数据不丢、入口不断。
+配置完之后做一次故障演练也不难：把 120 上 Harbor 停掉，继续用 `harbor.example.com` push，请求会被 nginx 落到 121 上完成——因为两个点各有全量镜像，数据不丢、入口不断。
 
 ### 总结
 
 - nginx 代理用 restart 脚本管理：先 `docker stop / rm harbor-nginx`，再 `docker run -d --network host` 并把 nginx.conf 挂到 `/etc/nginx/nginx.conf`，镜像用 nginx:1.13.12。
-- 访问入口用域名 harbor.imooc.com 而不是裸 IP，各节点在 /etc/hosts 里把域名指向 50（生产环境换正式 DNS）。
-- 默认那个公开的 library 仓库删掉没用，新建一个业务项目（imooc）并允许内网任何人推送。
+- 访问入口用域名 harbor.example.com 而不是裸 IP，各节点在 /etc/hosts 里把域名指向 50（生产环境换正式 DNS）。
+- 默认那个公开的 library 仓库删掉没用，新建一个业务项目（example）并允许内网任何人推送。
 - 命令行 push 必须先解决两件事：一是 daemon.json 里加 `insecure-registries`（Harbor 是 HTTP，否则会去连 443 报错），二是建一个专用用户并在项目成员里给它「开发人员」角色，否则就是 access denied。
 - docker 重启会把 nginx 容器一起带走，重启后要重新跑 restart.sh，这是本段最容易漏的一步。
 - 到另一个节点 pull 同样要配 hosts 与 insecure-registries；worker 节点上跑了很多 Kubernetes 负载，docker 与 Harbor 完全起来需要多等一会儿。

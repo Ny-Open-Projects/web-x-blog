@@ -1,0 +1,23 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: event-listener
+spec:
+  serviceAccountName: tekton-triggers-gitlab-sa
+  triggers:
+  - name: go-gitlab-push-events-trigger
+    interceptors:
+    - ref:
+        name: "gitlab"
+      params:
+      - name: "secretRef"
+        value:
+          secretName: go-gitlab-webhook-token
+          secretKey: SecretToken
+      - name: "eventTypes"
+        value:
+          - "Push Hook"
+    bindings:
+    - ref: common-tb
+    template:
+      ref: go-tt

@@ -1,0 +1,33 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: if-timeout
+  namespace: test-app
+spec:
+  components:
+  - name: if-and-timeout
+    type: webservice
+    properties:
+      image: nginx
+      ports:
+        - port: 80
+  workflow:
+    steps:
+      - type: vela-cli
+        name: flushcdn
+        properties:
+          image: alpine
+          command:
+          - /bin/sh  
+          - -c  
+          - echo 'flush cdn'
+        timeout: 60s
+      - type: vela-cli
+        name: alert
+        if: status.flushcdn.succeeded
+        properties:
+          image: alpine
+          command:
+          - /bin/sh  
+          - -c  
+          - echo 'alert success'

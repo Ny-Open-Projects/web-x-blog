@@ -9,6 +9,10 @@
 - 全量同步：`mysqldump` 导出 `test.sql`，`docker cp` 到 slave 回放
 - slave 用 `CHANGE MASTER TO` 指向主库虚拟 IP（docker inspect 查），`START SLAVE` 验证级联更新
 
+## 📎 代码说明
+
+本讲代码以**内联片段**形式呈现在正文中。课程课件仅发布第 2/3/4 章（MySQL 核心能力）的完整工程源码，本讲所属章节未随课件发布独立源码文件，故不做外部文件关联，请以正文片段为准。
+
 ## 一、主库开启 binlog
 
 主从复制依赖 binlog，先改主库配置。进主库容器，找到 `/etc/my.cnf`（默认几乎没有 binlog 相关内容），把它 `docker cp` 导出到本地修改，改完再导回：

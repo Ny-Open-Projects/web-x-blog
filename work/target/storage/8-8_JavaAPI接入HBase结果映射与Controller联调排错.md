@@ -9,6 +9,10 @@
 - 用 Postman 验证写入，再用 HBase Shell 核对数据
 - 从异常现象反推根因的排查路径
 
+## 📎 代码说明
+
+本讲代码以**内联片段**形式呈现在正文中。课程课件仅发布第 2/3/4 章（MySQL 核心能力）的完整工程源码，本讲所属章节未随课件发布独立源码文件，故不做外部文件关联，请以正文片段为准。
+
 ## 结果集映射：把 Result 还原成对象
 
 HBase 的 `Result` 是一堆 `byte[]`，映射回 POJO 时要分两类处理。
@@ -83,11 +87,11 @@ private Integer intVal(Result result, String family, String qualifier) {
 ## Controller 暴露接口
 
 ```java
-package com.imooc.socialecom.controller;
+package com.social.ecom.controller;
 
-import com.imooc.socialecom.helper.JsonReturnType;
-import com.imooc.socialecom.pojo.MessageInfo;
-import com.imooc.socialecom.service.MessageService;
+import com.social.ecom.helper.JsonReturnType;
+import com.social.ecom.pojo.MessageInfo;
+import com.social.ecom.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

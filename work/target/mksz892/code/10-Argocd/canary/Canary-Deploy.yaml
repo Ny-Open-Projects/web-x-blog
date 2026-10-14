@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: go-api-canary
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: go-api-canary
+  template:
+    metadata:
+      labels:
+        app: go-api-canary
+    spec:
+      containers:
+      - name: go-api
+        image: nginx:1.15.4
+        ports:
+        - containerPort: 80
+  minReadySeconds: 30
+  revisionHistoryLimit: 3
+  strategy:
+    canary: 
+      maxSurge: "25%"
+      maxUnavailable: 0
+      steps:
+      - setWeight: 10
+      - pause:
+          duration: 1h
+      - setWeight: 20
+      - pause: {}

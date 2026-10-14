@@ -17,8 +17,8 @@ package handler
 
 import (
     "context"
-    "git.imooc.com/coding-535/pod/proto/pod"
-    "git.imooc.com/coding-535/podApi/proto/podApi"
+    "git.example.com/coding-535/pod/proto/pod"
+    "git.example.com/coding-535/podApi/proto/podApi"
 )
 
 type PodApi struct {

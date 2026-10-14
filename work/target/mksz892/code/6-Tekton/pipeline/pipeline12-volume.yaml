@@ -1,0 +1,40 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-volume
+spec:
+  params:
+    - name: giturl
+      type: string
+    - name: branch
+      type: string
+  workspaces:
+    - name: code
+    - name: aliyun-image-registry-secert
+  tasks:
+    - name: clone
+      taskRef:
+        name: vct-git-clone-task
+      params:
+        - name: giturl
+          value: "$(params.giturl)"
+        - name: branch
+          value: "$(params.branch)"
+      workspaces:
+        - name: code
+          workspace: code
+    - name: volume-image-build-and-push
+      taskRef:
+        name: volume-image-build-and-push
+      workspaces:
+        - name: aliyun-image-registry-secert
+          workspace: aliyun-image-registry-secert
+        - name: code
+          workspace: code
+      runAfter:
+        - clone
+    - name: ls-npm-cache
+      taskRef:
+        name: ls-npm-cache
+      runAfter:
+        - volume-image-build-and-push

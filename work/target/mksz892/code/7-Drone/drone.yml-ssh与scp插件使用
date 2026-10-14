@@ -1,0 +1,31 @@
+kind: pipeline   
+type: kubernetes  
+name: default    
+
+clone:
+  depth: 1
+
+steps:
+- name: scp files
+  image: appleboy/drone-scp
+  settings:
+    host: gitlab.example.com
+    username: root
+    password: 123
+    port: 22
+    target: /tmp
+    source: main.go
+
+- name: ssh
+  image: appleboy/drone-ssh
+  settings:
+    host:
+      - gitlab.example.com
+    username: root
+    password: 123
+    port: 22
+    command_timeout: 2m
+    script:
+      - ls -ls /tmp
+      - hostname
+

@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: ls-files
+spec:
+  workspaces:
+    - name: code
+  steps:
+    - name: ls-files
+      image: ubuntu
+      imagePullPolicy: IfNotPresent
+      script: |
+        #!/bin/bash
+        cd $(workspaces.code.path)/test
+        pwd
+        ls -la $(workspaces.code.path)/test

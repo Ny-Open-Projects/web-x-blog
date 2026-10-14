@@ -50,7 +50,7 @@ podApi/
 └── Makefile            # 简化 proto 生成/构建命令
 ```
 
-模块名按网关约定命名，例如 `git.imooc.com/coding-535/podApi`（来自 `go.mod`）。
+模块名按网关约定命名，例如 `git.example.com/coding-535/podApi`（来自 `go.mod`）。
 
 ## 编写 proto 文件
 

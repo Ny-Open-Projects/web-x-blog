@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-retries
+spec:
+  tasks:
+    - name: sleep
+      timeout: 2s
+      retries: 3
+      taskRef:
+        name: sleep
+    - name: goodbye
+      taskRef:
+        name: goodbye

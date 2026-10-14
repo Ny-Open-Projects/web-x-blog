@@ -1,0 +1,42 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+   name: canary-demo
+   namespace: test-app
+   annotations:
+      app.oam.dev/publishVersion: v2
+spec:
+   components:
+      - name: canary-demo
+        type: webservice
+        properties:
+           image: wangyikewyk/canarydemo:v2
+           ports:
+              - port: 8090
+        traits:
+           - type: scaler
+             properties:
+                replicas: 3
+           - type: gateway
+             properties:
+                domain: canary-deploy.1853whitleyave.com
+                http:
+                   "/version": 8090
+   workflow:
+      steps:
+         - type: canary-deploy
+           name: rollout-20
+           properties:
+              weight: 20
+         - name: suspend-1st
+           type: suspend
+         - type: canary-deploy
+           name: rollout-50
+           properties:
+              weight: 50
+         - name: suspend-2nd
+           type: suspend
+         - type: canary-deploy
+           name: rollout-100
+           properties:
+              weight: 100

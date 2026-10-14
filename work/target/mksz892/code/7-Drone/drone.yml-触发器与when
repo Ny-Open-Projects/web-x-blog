@@ -1,0 +1,30 @@
+kind: pipeline   
+type: kubernetes  
+name: default    
+
+clone:
+  depth: 1
+
+steps:
+- name: step1
+  image: alpine
+  commands:
+  - laqw
+
+- name: alert
+  image: alpine
+  commands:
+  - echo "alert..." 
+  when:
+    status:
+    - failure
+    #- success
+  
+
+trigger:      
+  branch:
+  - test
+  - main  
+  event:
+  - push
+  

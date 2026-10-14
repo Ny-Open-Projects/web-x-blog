@@ -124,7 +124,7 @@ tar -zxvf istio-1.1.7.tar.gz
 
 ```bash
 # values.yaml 里把所有镜像前缀换成自己的仓库
-# registry.cn-hangzhou.aliyuncs.com/imooc/...
+# registry.cn-hangzhou.aliyuncs.com/example/...
 ```
 
 ### 裸机没有 LoadBalancer
@@ -244,7 +244,7 @@ init 这部分做完，接下来就是正式去部署 Istio 的核心组件了�
 
 ```bash
 # 1. 环境清理
-helm delete imoocprom --purge
+helm delete exampleprom -purge
 kubectl get crd | grep coreos | awk '{print $1}' | xargs kubectl delete crd
 kubectl delete namespace monitoring
 

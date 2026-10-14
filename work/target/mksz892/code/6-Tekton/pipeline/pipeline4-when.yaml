@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-when
+spec:
+  tasks:
+    - name: hello
+      taskRef:
+        name: hello
+      when:
+        - input: "foos"
+          operator: "in"
+          values: ["foos", "bar"]
+    - name: goodbye
+      taskRef:
+        name: goodbye

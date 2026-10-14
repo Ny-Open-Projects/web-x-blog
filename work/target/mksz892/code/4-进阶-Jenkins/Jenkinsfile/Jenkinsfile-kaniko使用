@@ -1,0 +1,47 @@
+#!groovy
+
+pipeline {
+
+	agent { 
+		node { 
+			label "slave"
+		}
+	}
+
+    environment {
+        String year = new Date().format("yyyy") 
+        String month = new Date().format("MMdd") 
+        String day = new Date().format("HHmm") 
+        String second = new Date().format("ss")
+		image_prefix = "registry.cn-hangzhou.aliyuncs.com/cicd-demo/app"        
+    }
+
+    stages {
+        stage('1. 构建镜像'){ 
+            steps{
+                script{
+                    try{       
+                        env.docker_image = "${image_prefix}:main-${year}${month}${day}${second}-${BUILD_ID}"
+                        retry(3) {
+                            sh """
+                                docker run --rm \
+                                    -v `pwd`:/workspace \
+                                    -v /root/.docker/config.json:/kaniko/.docker/config.json:ro \
+                                    gcr.io/kaniko-project/executor:latest \
+                                    --dockerfile=Dockerfile \
+                                    --destination=${docker_image} \
+                                    --cache-copy-layers \
+                                    --cache=true \
+                                    --cache-repo=${image_prefix} \
+                            """
+                        }
+                    }catch (error){
+                        env.error = sh (returnStdout: true, script: "echo 第1步构建镜像失败：${error}").trim()
+                        echo "Caught: ${error}"
+                        sh "exit 1"
+                    }
+                }
+            }
+        }
+    }
+}

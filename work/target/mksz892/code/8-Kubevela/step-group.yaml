@@ -1,0 +1,39 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: sub-success
+spec:
+  components:
+    - name: express-server1
+      type: webservice
+      properties:
+        image: crccheck/hello-world
+    - name: express-server2
+      type: webservice
+      properties:
+        image: crccheck/hello-world
+    - name: express-server3
+      type: webservice
+      properties:
+        image: crccheck/hello-world
+
+  workflow:
+    steps:
+      - name: step1
+        type: apply-component
+        properties:
+          component: express-server1
+        cluster: local
+      - name: step2
+        type: step-group
+        subSteps:
+          - name: step2-sub1
+            type: apply-component
+            properties:
+              component: express-server2
+            cluster: local
+          - name: step2-sub2
+            type: apply-component
+            properties:
+              component: express-server3
+            cluster: test-k8s

@@ -1,0 +1,31 @@
+kind: pipeline   
+type: kubernetes  
+name: default    
+
+clone:
+  depth: 1
+
+steps:
+- name: step1  
+  pull: if-not-exsits
+  image: alpine:3.16
+  commands:
+  - echo "step1"
+  - sleep 5
+
+- name: step2
+  pull: if-not-exsits
+  image: alpine:3.16
+  commands:
+  - echo "step2"
+  - sleep 5
+
+- name: step3
+  pull: if-not-exsits
+  image: alpine:3.16
+  commands:
+  - echo "step3" 
+
+  depends_on:
+  - step1
+  - step2

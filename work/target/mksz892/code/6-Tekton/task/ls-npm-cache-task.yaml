@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: ls-npm-cache
+spec:
+  steps:
+    - name: goodbye
+      image: ubuntu
+      imagePullPolicy: IfNotPresent
+      script: |
+        #!/bin/bash
+        ls -la /usr/local/node/node_modules
+      volumeMounts:
+        - name: npm-cache
+          mountPath: /usr/local/node
+  volumes:
+    - name: npm-cache
+      persistentVolumeClaim:
+        claimName: tekton-npm-cache-pvc

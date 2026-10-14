@@ -148,7 +148,7 @@ metadata:
   name: dbpass
 type: Opaque
 data:
-  username: aW1vb2M=          # echo -n imooc | base64
+  username: aW1vb2M=          # echo -n example | base64
   password: bW9vYzEyMw==
 ```
 
@@ -165,7 +165,7 @@ Secret 清单结构
 base64 的生成方式很简单：
 
 ```bash
-echo -n imooc | base64
+echo -n example | base64
 # aW1vb2M=
 ```
 
@@ -198,7 +198,7 @@ kubectl create -f pod-secret.yaml
 kubectl exec -it pod-secret -- ls /db-secret
 # password  username
 kubectl exec -it pod-secret -- cat /db-secret/username
-# imooc
+# example
 ```
 
 **程序就可以通过访问这个目录下的文件拿到用户名和密码去连数据库了。**
@@ -217,7 +217,7 @@ data:
 kubectl apply -f secret.yaml
 sleep 10
 kubectl exec -it pod-secret -- cat /db-secret/password
-# imooc
+# example
 ```
 
 **等一小段时间的延迟之后，容器里的文件内容就被更新了。相当于可以动态修改容器里面的配置**，而不用重建 Pod。
@@ -450,7 +450,7 @@ kubectl exec -it pod-downwardapi -- cat /etc/podinfo/mem-request
 | --- | --- | --- |
 | 投射卷声明 | `volumes[].projected.sources[]` | Secret / ConfigMap / Downward API 三选一或组合 |
 | 查看内置 Secret | `kubectl get secret` | `default-token-xxxxx` 是 ServiceAccount 用的 |
-| base64 编码 | `echo -n imooc \| base64` | **必须加 `-n`，别把换行编进去** |
+| base64 编码 | `echo -n example \| base64` | **必须加 `-n`，别把换行编进去** |
 | 自建 Secret | `type: Opaque` | 自己用的都是这个类型 |
 | Secret 热更新 | `kubectl apply -f secret.yaml` | 容器内文件自动更新，有短暂延迟 |
 | 从文件建 ConfigMap | `kubectl create configmap NAME --from-file=xxx` | 文件名即为 key |
@@ -467,7 +467,7 @@ kubectl exec -it pod-downwardapi -- cat /etc/podinfo/mem-request
 
 ```bash
 # 一、准备 base64 凭据
-echo -n imooc    | base64     # aW1vb2M=
+echo -n example    | base64     # aW1vb2M=
 echo -n mooc123  | base64     # bW9vYzEyMw==
 
 # 二、创建 Secret 并挂载到 Pod

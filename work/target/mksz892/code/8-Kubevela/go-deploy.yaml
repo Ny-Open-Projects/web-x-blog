@@ -1,0 +1,78 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: golang
+  namespace: test-app
+spec:
+  components:
+  - name: golang
+    properties:
+      exposeType: ClusterIP
+      image: nginx:1.10
+      imagePullPolicy: IfNotPresent  
+      #imagePullSecrets:
+      #- name: registrykey
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 80
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 15
+      ports:
+      - expose: true
+        port: 80
+        protocol: TCP
+      readinessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 80
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 15
+    traits:
+    - properties:
+        replicas: 2
+      type: scaler
+    - properties:
+        cpu: "0.001"
+        limits:
+          cpu: "1"
+          memory: 1512Mi
+        memory: 10Mi
+        requests:
+          cpu: "0.01"
+          memory: 112Mi
+      type: resource
+    - properties:
+        failureThreshold: 3
+        httpGet:
+          path: /
+          port: 80
+          scheme: HTTP
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        timeoutSeconds: 15
+      type: startup-probe
+    type: webservice
+  policies:
+  - name: test-golang
+    properties:
+      clusters:
+      - local-test
+      namespace: test-app
+    type: topology
+  workflow:
+    steps:
+      - type: suspend          
+        name: suspend        
+        timeout: 43200s       
+      - type: deploy
+        name: deploy-golang-to-prodEnv
+        properties:
+          policies: ["test-golang"] 
+

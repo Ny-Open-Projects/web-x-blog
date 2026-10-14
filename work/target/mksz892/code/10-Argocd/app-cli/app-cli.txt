@@ -1,0 +1,20 @@
+# 列出app 
+argocd app list
+
+# 查看guestbook示例的详细信息
+argocd app get my-app
+  
+# Delete an app
+argocd app delete my-app
+  
+# 执行同步
+argocd app sync my-app
+   
+启用自动同步
+argocd app setmy-app --sync-pold$d$icy automated
+  
+启动自动修剪
+argocd app set my-app --auto-prune
+  
+自动自我修复
+argocd app set my-app --self-heal

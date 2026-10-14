@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: git-clone
+spec:
+  description: Clone the code repository to the workspace. 
+  steps:
+    - name: git-clones
+      image: bitnami/git:latest
+      imagePullPolicy: IfNotPresent
+      env: 
+        - name: git_username
+          valueFrom: 
+            secretKeyRef: 
+              name: gitlab-secert
+              key: username 
+        - name: git_password
+          valueFrom: 
+            secretKeyRef: 
+              name: gitlab-secert
+              key: password       
+      script: |
+        echo ${git_username}${git_password}
+        echo http://${git_username}:${git_password}@gitlab.example.com/golang/go.git
+        git clone -b main -v http://${git_username}:${git_password}@gitlab.example.com/golang/go.git /workspace
+        ls -la
+        pwd 
+    - name: list-files
+      image: ubuntu
+      imagePullPolicy: IfNotPresent
+      command:
+        - /bin/sh
+      args: ['-c', 'ls -la /workspace && pwd']

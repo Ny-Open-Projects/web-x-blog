@@ -1,0 +1,28 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: image-build-and-push
+spec:
+  workspaces:
+    - name: code
+    - name: aliyun-image-registry-secert
+      mountPath: /kaniko/.docker
+  steps:
+    - name: image-build-and-push
+      image: gcr.io/kaniko-project/executor:latest
+      imagePullPolicy: IfNotPresent
+      securityContext:
+        runAsUser: 0
+      env:
+        - name: DOCKER_CONFIG
+          value: /kaniko/.docker
+      command:
+        - /kaniko/executor
+      args:
+        - --dockerfile=Dockerfile
+        - --context=$(workspaces.code.path)/test
+        - --destination=registry.cn-hangzhou.aliyuncs.com/cicd-demo/app:test
+        - --cache=true
+        - --cache-repo=registry.cn-shenzhen.aliyuncs.com/cicd-demo/app
+        - --cache-copy-layers

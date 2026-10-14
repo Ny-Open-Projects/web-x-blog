@@ -1,0 +1,59 @@
+pipeline {
+    agent {
+        node {
+            label 'slave'
+        } 
+    }
+    environment {
+		images_head = "registry.cn-hangzhou.aliyuncs.com"
+    }  
+
+    stages { 
+        stage('Build') {
+            agent {
+                docker {
+                    label 'slave'
+                    image 'maven:3.9.3-eclipse-temurin-17'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }        
+            steps {
+                sh 'mvn --version'
+            }
+        }        
+        stage('Hello') {
+            agent {
+                docker { 
+                    label 'slave'
+                    image 'alpine:3.14' 
+                }
+            }
+            steps {
+                script {
+                    sh """
+                        ls -la
+                        pwd
+                        hostname
+                        echo "#########################"
+                    """
+                }
+            }
+        }         
+        stage('build-2') {          
+            steps {
+                script {
+                    sh """
+                    ls -la 
+                    pwd
+                    hostname
+                    """
+                    docker.withRegistry("https://${images_head}", 'aliyun-images-registry') {
+                        def customImage = docker.build("${images_head}/cicd-demo/app:${BUILD_TAG}-${GIT_COMMIT}")
+                        customImage.push()                                              
+                    }                        
+                }                
+            }
+        }
+                                        
+    }
+}

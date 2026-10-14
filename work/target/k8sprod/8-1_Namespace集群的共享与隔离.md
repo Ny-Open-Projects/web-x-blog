@@ -141,7 +141,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: web-dev.imooc.com
+    - host: web-dev.example.com
       http:
         paths:
           - path: /
@@ -158,7 +158,7 @@ namespace-dev/
 ├── namespace-dev.yaml   Namespace 定义，name: dev
 └── web-dev.yaml         Deployment + Service + Ingress
                          每段 metadata 都带 namespace: dev
-                         Ingress 的 host 改成 web-dev.imooc.com
+                         Ingress 的 host 改成 web-dev.example.com
 ```
 
 创建之后直接 `kubectl get pod`：**什么都看不到**，看到的还是 `default` 里的那些。

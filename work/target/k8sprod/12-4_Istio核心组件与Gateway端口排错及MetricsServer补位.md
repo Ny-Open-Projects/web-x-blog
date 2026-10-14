@@ -45,7 +45,7 @@ Helm 目录里有一些没用的，删掉：那个 `canh`（values serviceaccoun
 | `kiali` | 没开启 | 后面会讲 |
 | `istioCNI.enabled` | false | 我们选用的是准入控制这个方案 |
 
-再看下面 global 的一些设置：`global.hub` 是 `docker.io/istio`，这块还是要修改——毕竟有的时候会下载不了镜像，对应改成 `registry.cn-hangzhou.aliyuncs.com/imooc`。
+再看下面 global 的一些设置：`global.hub` 是 `docker.io/istio`，这块还是要修改——毕竟有的时候会下载不了镜像，对应改成 `registry.cn-hangzhou.aliyuncs.com/example`。
 
 顺带说一句，刚才看文档时提到 Istio 对外访问方式默认是 loadBalancer，要改成 nodePort；在 values 里搜 `loadBalancer` 没搜到，先不管，等渲染出来再看。
 
@@ -67,16 +67,16 @@ metadata:
   namespace: istio-system
   labels:
     app: galley
-    release: imoocistio
+    release: exampleistio
 spec:
   minAvailable: 1
   selector:
     matchLabels:
       app: galley
-      release: imoocistio
+      release: exampleistio
 ```
 
-它的配置有名字、有 namespace、有对应的 label，还有一个 `minAvailable`——最小可用的数值是 1。对应的是拥有这些 label 的 Pod（app=galley，release=imoocistio）。
+它的配置有名字、有 namespace、有对应的 label，还有一个 `minAvailable`——最小可用的数值是 1。对应的是拥有这些 label 的 Pod（app=galley，release=exampleistio）。
 
 意思就是说：这个 Pod 在这个集群中最少需要一个实例，不能再少了。
 
@@ -194,7 +194,7 @@ unable to fetch metrics from resource metric API. the server couldn't find the r
 # 1. 精简 chart 目录，用 default values
 rm -rf values-serviceaccount.yaml weave
 vi values.yaml
-#   global.hub: registry.cn-hangzhou.aliyuncs.com/imooc
+#   global.hub: registry.cn-hangzhou.aliyuncs.com/example
 #   mixer.image / prometheus.image / grafana.image 逐个核对
 
 # 2. 渲染

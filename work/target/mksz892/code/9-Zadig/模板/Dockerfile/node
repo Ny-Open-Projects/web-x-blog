@@ -1,0 +1,12 @@
+FROM registry.cn-hangzhou.aliyuncs.com/tool-bucket/tool:node-16.20.2-alpine3.18
+
+WORKDIR /node
+
+COPY . ..
+
+RUN pwd;ls -la
+
+EXPOSE 8080
+
+CMD ["yarn","run","start"]
+

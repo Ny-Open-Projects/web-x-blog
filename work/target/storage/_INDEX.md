@@ -22,57 +22,57 @@
 
 | # | 编号 | 标题 | 字数 | 合并 | 关联代码 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】 | [1.1]--1-1没有&ldquo;万能&rdquo;的技术手段，只有适合业【海量资源：ubkz.com】 | 1723 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 2 | [1.7]--1-7数据库解决方案不仅仅是crud那么简单【海量资源：ubkz.com】 | [1.7]--1-7数据库解决方案不仅仅是CRUD那么简单【海量资源：ubkz.com】 | 1323 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 3 | [1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】 | [1.6]--1-6为什么互联网没有万能的解决方案【海量资源：ubkz.com】 | 1410 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 4 | [1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】 | [1.3]--1-3为什么要做服务端架构分层【海量资源：ubkz.com】 | 551 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 5 | [1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】 | [1.5]--1-5数据库存储的瓶颈与短板效应【海量资源：ubkz.com】 | 495 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 6 | [1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】 | [1.2]--1-2服务端架构常见的分层方案【海量资源：ubkz.com】 | 1035 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 7 | [1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】 | [1.4]--1-4为什么存储数据库在架构分层中那么重要【海量资源：ubkz.com】 | 1236 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 8 | [2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】 | [2.1]--2-1社交新零售业务场景的发展【海量资源：ubkz.com】 | 3149 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 9 | [2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】 | [2.3]--2-3全局视角看问题，实现全景的技术支撑架构（中）【海量资源：ubkz.com】 | 3320 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 10 | [2.13]--2-13本章小结【海量资源：ubkz.com】 | [2.13]--2-13本章小结【海量资源：ubkz.com】 | 327 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 11 | [2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】 | [2.6]--2-6使用docker解决mysql的高效部署【海量资源：ubkz.com】 | 4893 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 12 | [2.10]--2-10mybatisplus进阶，高效的orm代码实现（上）【海量资源：ubkz.com】 | [2.10]--2-10MybatisPlus进阶，高效的ORM代码实现（上）【海量资源：ubkz.com】 | 2965 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
-| 13 | [2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】 | [2.2]--2-2全局视角看问题，实现全景的技术支撑架构（上）【海量资源：ubkz.com】 | 1659 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 14 | [2.11]--2-11mybatisplus进阶，高效的orm代码实现（中）【海量资源：ubkz.com】 | [2.11]--2-11MybatisPlus进阶，高效的ORM代码实现（中）【海量资源：ubkz.com】 | 2814 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
-| 15 | [2.5]--2-5高效部署之容器化利器docker【海量资源：ubkz.com】 | [2.5]--2-5高效部署之容器化利器Docker【海量资源：ubkz.com】 | 5669 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 16 | [2.12]--2-12mybatisplus进阶，高效的orm代码实现（下）【海量资源：ubkz.com】 | [2.12]--2-12MybatisPlus进阶，高效的ORM代码实现（下）【海量资源：ubkz.com】 | 3818 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
-| 17 | [2.9]--2-9mybatisplus基础能力搭建用户模块（下）【海量资源：ubkz.com】 | [2.9]--2-9MybatisPlus基础能力搭建用户模块（下）【海量资源：ubkz.com】 | 4510 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
-| 18 | [2.8]--2-8mybatisplus基础能力搭建用户模块（上）【海量资源：ubkz.com】 | [2.8]--2-8MybatisPlus基础能力搭建用户模块（上）【海量资源：ubkz.com】 | 3243 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
-| 19 | [3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】 | [3.19]--3-19导购流程：搜索与详情浏览（下）【海量资源：ubkz.com】 | 3294 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 20 | [3.3]--3-3mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】 | [3.3]--3-3Mysql如何提供事务_索引_读写的基础能力（1）【海量资源：ubkz.com】 | 2540 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 21 | [3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】 | [3.13]--3-13发布基石：商家与门店（下）【海量资源：ubkz.com】 | 2658 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 22 | [3.5]--3-5mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】 | [3.5]--3-5Mysql如何提供事务_索引_读写的基础能力（3）【海量资源：ubkz.com】 | 3486 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 23 | [3.1]--3-1本章概览【海量资源：ubkz.com】 | [3.1]--3-1本章概览【海量资源：ubkz.com】 | 288 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 24 | [3.7]--3-7mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】 | [3.7]--3-7Mysql如何提供事务_索引_读写的基础能力（5）【海量资源：ubkz.com】 | 3904 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 25 | [3.6]--3-6mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】 | [3.6]--3-6Mysql如何提供事务_索引_读写的基础能力（4）【海量资源：ubkz.com】 | 1151 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 26 | [3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】 | [3.18]--3-18导购流程：搜索与详情浏览（上）【海量资源：ubkz.com】 | 5437 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 27 | [3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】 | [3.12]--3-12发布基石：商家与门店（上）【海量资源：ubkz.com】 | 3118 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 28 | [3.2]--3-2mysql选型优劣势【海量资源：ubkz.com】 | [3.2]--3-2Mysql选型优劣势【海量资源：ubkz.com】 | 2573 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 29 | [3.4]--3-4mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】 | [3.4]--3-4Mysql如何提供事务_索引_读写的基础能力（2）【海量资源：ubkz.com】 | 3068 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 30 | [3.8]--3-8mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】 | [3.8]--3-8Mysql高性能配置-读写能力提升的秘诀（上）【海量资源：ubkz.com】 | 4942 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 31 | [3.9]--3-9mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】 | [3.9]--3-9Mysql高性能配置-读写能力提升的秘诀（下）【海量资源：ubkz.com】 | 3379 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 32 | [3.16]--3-16交易核心：sku-库存模型的发布（上）【海量资源：ubkz.com】 | [3.16]--3-16交易核心：SKU-库存模型的发布（上）【海量资源：ubkz.com】 | 5059 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 33 | [3.17]--3-17交易核心：sku-库存模型的发布（下）【海量资源：ubkz.com】 | [3.17]--3-17交易核心：SKU-库存模型的发布（下）【海量资源：ubkz.com】 | 3734 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 34 | [3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】 | [3.10]--3-10领域驱动设计-领域模型的重要性（上）【海量资源：ubkz.com】 | 3336 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 35 | [3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】 | [3.11]--3-11领域驱动设计-领域模型的重要性（下）【海量资源：ubkz.com】 | 2144 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 36 | [3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】 | [3.14]--3-14导购核心：商品-类目-品牌-属性库模型的发布（上）【海量资源：ubkz.com】 | 2312 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 37 | [3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】 | [3.15]--3-15导购核心：商品-类目-品牌-属性库模型的发布（下）【海量资源：ubkz.com】 | 4377 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 38 | [4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】 | [4.3]--4-3如何用分布式事务保证下单流程一致性（上）【海量资源：ubkz.com】 | 2434 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 39 | [4.7]--4-7使用seata改造下单流程（上）【海量资源：ubkz.com】 | [4.7]--4-7使用Seata改造下单流程（上）【海量资源：ubkz.com】 | 4378 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 40 | [4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】 | [4.11]--4-11支付成功：支付及防重流程（下）【海量资源：ubkz.com】 | 4515 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 41 | [4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】 | [4.5]--4-5如何用分布式事务保证下单流程一致性（下）【海量资源：ubkz.com】 | 2315 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 42 | [4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】 | [4.1]--4-1下单交易：使用流程串联下单动作（上）【海量资源：ubkz.com】 | 1807 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 43 | [4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】 | [4.10]--4-10支付成功：支付及防重流程（上）【海量资源：ubkz.com】 | 4075 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 44 | [4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】 | [4.12]--4-12用户操作完整性：手动取消订单流程【海量资源：ubkz.com】 | 3549 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 45 | [4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】 | [4.13]--4-13保证生命周期完整性：自动取消订单流程（上）【海量资源：ubkz.com】 | 2485 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 46 | [4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】 | [4.14]--4-14保证生命周期完整性：自动取消订单流程（下）【海量资源：ubkz.com】 | 3732 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 47 | [4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】 | [4.4]--4-4如何用分布式事务保证下单流程一致性（中）【海量资源：ubkz.com】 | 5431 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 48 | [4.6]--4-6seata对分布式事务的支持【海量资源：ubkz.com】 | [4.6]--4-6Seata对分布式事务的支持【海量资源：ubkz.com】 | 4949 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 49 | [4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】 | [4.2]--4-2下单交易：使用流程串联下单动作（下）【海量资源：ubkz.com】 | 5629 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 50 | [4.8]--4-8使用seata改造下单流程（中）【海量资源：ubkz.com】 | [4.8]--4-8使用Seata改造下单流程（中）【海量资源：ubkz.com】 | 4223 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
-| 51 | [4.9]--4-9使用seata改造下单流程（下）【海量资源：ubkz.com】 | [4.9]--4-9使用Seata改造下单流程（下）【海量资源：ubkz.com】 | 1723 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 1 | [1.1]-1-1没有“万能”的技术手段，只有适合业| [1.1]-1-1没有“万能”的技术手段，只有适合业| 1723 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 2 | [1.7]-1-7数据库解决方案不仅仅是crud那么简单| [1.7]-1-7数据库解决方案不仅仅是CRUD那么简单| 1323 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 3 | [1.6]-1-6为什么互联网没有万能的解决方案| [1.6]-1-6为什么互联网没有万能的解决方案| 1410 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 4 | [1.3]-1-3为什么要做服务端架构分层| [1.3]-1-3为什么要做服务端架构分层| 551 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 5 | [1.5]-1-5数据库存储的瓶颈与短板效应| [1.5]-1-5数据库存储的瓶颈与短板效应| 495 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 6 | [1.2]-1-2服务端架构常见的分层方案| [1.2]-1-2服务端架构常见的分层方案| 1035 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 7 | [1.4]-1-4为什么存储数据库在架构分层中那么重要| [1.4]-1-4为什么存储数据库在架构分层中那么重要| 1236 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 8 | [2.1]-2-1社交新零售业务场景的发展| [2.1]-2-1社交新零售业务场景的发展| 3149 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 9 | [2.3]-2-3全局视角看问题，实现全景的技术支撑架构（中）| [2.3]-2-3全局视角看问题，实现全景的技术支撑架构（中）| 3320 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 10 | [2.13]-2-13本章小结| [2.13]-2-13本章小结| 327 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 11 | [2.6]-2-6使用docker解决mysql的高效部署| [2.6]-2-6使用docker解决mysql的高效部署| 4893 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 12 | [2.10]-2-10mybatisplus进阶，高效的orm代码实现（上）| [2.10]-2-10MybatisPlus进阶，高效的ORM代码实现（上）| 2965 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
+| 13 | [2.2]-2-2全局视角看问题，实现全景的技术支撑架构（上）| [2.2]-2-2全局视角看问题，实现全景的技术支撑架构（上）| 1659 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 14 | [2.11]-2-11mybatisplus进阶，高效的orm代码实现（中）| [2.11]-2-11MybatisPlus进阶，高效的ORM代码实现（中）| 2814 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
+| 15 | [2.5]-2-5高效部署之容器化利器docker| [2.5]-2-5高效部署之容器化利器Docker| 5669 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 16 | [2.12]-2-12mybatisplus进阶，高效的orm代码实现（下）| [2.12]-2-12MybatisPlus进阶，高效的ORM代码实现（下）| 3818 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
+| 17 | [2.9]-2-9mybatisplus基础能力搭建用户模块（下）| [2.9]-2-9MybatisPlus基础能力搭建用户模块（下）| 4510 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
+| 18 | [2.8]-2-8mybatisplus基础能力搭建用户模块（上）| [2.8]-2-8MybatisPlus基础能力搭建用户模块（上）| 3243 | 否 | `MybatisPlusConfig.java`, `MybatisPlusConfig.java`, `MybatisPlusConfig.java` |
+| 19 | [3.19]-3-19导购流程：搜索与详情浏览（下）| [3.19]-3-19导购流程：搜索与详情浏览（下）| 3294 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 20 | [3.3]-3-3mysql如何提供事务_索引_读写的基础能力（1）| [3.3]-3-3Mysql如何提供事务_索引_读写的基础能力（1）| 2540 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 21 | [3.13]-3-13发布基石：商家与门店（下）| [3.13]-3-13发布基石：商家与门店（下）| 2658 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 22 | [3.5]-3-5mysql如何提供事务_索引_读写的基础能力（3）| [3.5]-3-5Mysql如何提供事务_索引_读写的基础能力（3）| 3486 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 23 | [3.1]-3-1本章概览| [3.1]-3-1本章概览| 288 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 24 | [3.7]-3-7mysql如何提供事务_索引_读写的基础能力（5）| [3.7]-3-7Mysql如何提供事务_索引_读写的基础能力（5）| 3904 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 25 | [3.6]-3-6mysql如何提供事务_索引_读写的基础能力（4）| [3.6]-3-6Mysql如何提供事务_索引_读写的基础能力（4）| 1151 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 26 | [3.18]-3-18导购流程：搜索与详情浏览（上）| [3.18]-3-18导购流程：搜索与详情浏览（上）| 5437 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 27 | [3.12]-3-12发布基石：商家与门店（上）| [3.12]-3-12发布基石：商家与门店（上）| 3118 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 28 | [3.2]-3-2mysql选型优劣势| [3.2]-3-2Mysql选型优劣势| 2573 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 29 | [3.4]-3-4mysql如何提供事务_索引_读写的基础能力（2）| [3.4]-3-4Mysql如何提供事务_索引_读写的基础能力（2）| 3068 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 30 | [3.8]-3-8mysql高性能配置-读写能力提升的秘诀（上）| [3.8]-3-8Mysql高性能配置-读写能力提升的秘诀（上）| 4942 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 31 | [3.9]-3-9mysql高性能配置-读写能力提升的秘诀（下）| [3.9]-3-9Mysql高性能配置-读写能力提升的秘诀（下）| 3379 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 32 | [3.16]-3-16交易核心：sku-库存模型的发布（上）| [3.16]-3-16交易核心：SKU-库存模型的发布（上）| 5059 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 33 | [3.17]-3-17交易核心：sku-库存模型的发布（下）| [3.17]-3-17交易核心：SKU-库存模型的发布（下）| 3734 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 34 | [3.10]-3-10领域驱动设计-领域模型的重要性（上）| [3.10]-3-10领域驱动设计-领域模型的重要性（上）| 3336 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 35 | [3.11]-3-11领域驱动设计-领域模型的重要性（下）| [3.11]-3-11领域驱动设计-领域模型的重要性（下）| 2144 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 36 | [3.14]-3-14导购核心：商品-类目-品牌-属性库模型的发布（上）| [3.14]-3-14导购核心：商品-类目-品牌-属性库模型的发布（上）| 2312 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 37 | [3.15]-3-15导购核心：商品-类目-品牌-属性库模型的发布（下）| [3.15]-3-15导购核心：商品-类目-品牌-属性库模型的发布（下）| 4377 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 38 | [4.3]-4-3如何用分布式事务保证下单流程一致性（上）| [4.3]-4-3如何用分布式事务保证下单流程一致性（上）| 2434 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 39 | [4.7]-4-7使用seata改造下单流程（上）| [4.7]-4-7使用Seata改造下单流程（上）| 4378 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 40 | [4.11]-4-11支付成功：支付及防重流程（下）| [4.11]-4-11支付成功：支付及防重流程（下）| 4515 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 41 | [4.5]-4-5如何用分布式事务保证下单流程一致性（下）| [4.5]-4-5如何用分布式事务保证下单流程一致性（下）| 2315 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 42 | [4.1]-4-1下单交易：使用流程串联下单动作（上）| [4.1]-4-1下单交易：使用流程串联下单动作（上）| 1807 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 43 | [4.10]-4-10支付成功：支付及防重流程（上）| [4.10]-4-10支付成功：支付及防重流程（上）| 4075 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 44 | [4.12]-4-12用户操作完整性：手动取消订单流程| [4.12]-4-12用户操作完整性：手动取消订单流程| 3549 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 45 | [4.13]-4-13保证生命周期完整性：自动取消订单流程（上）| [4.13]-4-13保证生命周期完整性：自动取消订单流程（上）| 2485 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 46 | [4.14]-4-14保证生命周期完整性：自动取消订单流程（下）| [4.14]-4-14保证生命周期完整性：自动取消订单流程（下）| 3732 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 47 | [4.4]-4-4如何用分布式事务保证下单流程一致性（中）| [4.4]-4-4如何用分布式事务保证下单流程一致性（中）| 5431 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 48 | [4.6]-4-6seata对分布式事务的支持| [4.6]-4-6Seata对分布式事务的支持| 4949 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 49 | [4.2]-4-2下单交易：使用流程串联下单动作（下）| [4.2]-4-2下单交易：使用流程串联下单动作（下）| 5629 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 50 | [4.8]-4-8使用seata改造下单流程（中）| [4.8]-4-8使用Seata改造下单流程（中）| 4223 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
+| 51 | [4.9]-4-9使用seata改造下单流程（下）| [4.9]-4-9使用Seata改造下单流程（下）| 1723 | 否 | `README.md`, `UserMapper.java`, `UserMapper.java` |
 | 52 | [5.1]--5-1redis选型优劣势 | [5.1]--5-1Redis选型优劣势 | 1843 | 否 | — |
 | 53 | [5.5]--5-5实用的redis分布式解决方案 | [5.5]--5-5实用的Redis分布式解决方案（1） | 2956 | 否 | — |
 | 54 | [5.7]--5-7实用的redis分布式解决方案 | [5.7]--5-7实用的Redis分布式解决方案（3） | 3860 | 否 | — |

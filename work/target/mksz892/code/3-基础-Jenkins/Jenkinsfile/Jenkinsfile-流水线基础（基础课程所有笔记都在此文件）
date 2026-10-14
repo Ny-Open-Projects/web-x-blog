@@ -1,0 +1,218 @@
+pipeline {
+    agent any 
+
+    triggers {
+        GenericTrigger (
+            causeString: 'Generic Cause', 
+            genericVariables: 
+            [[defaultValue: '', key: 'branch_name', regexpFilter: '', value: '$.ref'],
+            [defaultValue: '', key: 'giturl', regexpFilter: '', value: '$.project.git_http_url']], 
+            printContributedVariables: true, 
+            printPostContent: true, 
+            regexpFilterExpression: '', 
+            regexpFilterText: '', 
+            token: 'webhook-token', 
+            tokenCredentialId: ''
+        )
+    }
+
+    options {
+        gitLabConnection('jenkins-gitlab')
+        //retry(3) 
+        //timeout(time: 1, unit: 'SECONDS') 
+        //buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '7', numToKeepStr: '20')
+        timestamps() 
+        parallelsAlwaysFailFast()
+        disableConcurrentBuilds(abortPrevious: true) 
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+        skipDefaultCheckout() 
+    }	
+
+    parameters {
+        choice choices: ['refs/heads/main', 'refs/heads/pre', 'refs/heads/test'], name: 'branch_name'
+        string defaultValue: 'http://gitlab.example.com/golang/go.git', name: 'giturl'
+    }
+	
+	//triggers {
+	//	cron('* * * * *')
+	//}
+	
+    environment {
+        CC = 'clang'  // 全局环境变量
+		SERVICE_CREDS = credentials('gitlab')
+		DEPLOY_TO = 'production'
+    }   
+
+    stages {
+        stage('branch-gitrul'){
+            steps {
+                script {
+                    branch = branch_name - 'refs/heads/'
+                    print "${branch}"
+                    print "${giturl}"
+                    //checkout changelog: false, 
+                    //poll: false, 
+                    //scm: scmGit(branches: [[name: "${branch}"]], 
+                    //extensions: [], 
+                    //userRemoteConfigs: [[credentialsId: 'gitlab', url: "${giturl}"]])                    
+                }
+            }
+        }
+
+        stage('审核发布') {
+            //input {
+            //    message "这个构建你自已确认吗?"
+            //    ok "是的，我确认."
+            //    parameters {
+            //        string(name: 'PERSON', defaultValue: '我要发布', description: '你是为什么什么原因要构建呢?')
+            //    }
+            //}
+            steps {
+                //echo "Hello, ${PERSON}, nice to meet you."
+				script{
+					 manager.addShortText("构建用户: test")
+                     cleanWs()  
+                     sh "ls -la"
+                     checkout scm
+                     sh "ls -la"
+                     
+				}
+            }
+        }	
+        stage('git clone') {
+            steps {
+				script {
+					//currentBuild.description = "这个是自定义的构建搭述信息"
+					//currentBuild.displayName = 'Build #123'
+					echo "####构建用户#####"
+					//wrap([$class: 'BuildUser']) { 
+					//	echo "${BUILD_USER}"
+					//} 	
+					echo "#################"
+					sh  '''
+						echo "部署项目: ${JOB_NAME}"						
+						echo "构建ID: ${BUILD_NUMBER}" 
+						echo "部署阶段：${STAGE_NAME}"
+				'''
+					//sh "touch a.txt"
+					//cleanWs()  
+				}
+                timeout(time: 3, unit: 'SECONDS') {
+                    //sh "git clone abc.git"
+                    //sh "sleep 10"
+                    sh 'echo "Hello,\nworld!"'
+                    sh 'echo \'Hello,\nworld!\''
+                    sh "echo 'Hello,\nworld!'"
+                    sh "echo \"Hello,\nworld!\""
+                    sh """echo "Hello,
+world!\""""
+                    sh """echo 'Hello,
+world!'"""
+                   sh '''echo 'Hello,
+world!\''''
+                   sh '''echo "Hello,
+world!"'''
+                }
+            }
+			post {
+				failure{
+					echo "git clone failure"
+				}
+			}
+        }
+        stage('echo environment') {
+            environment {
+                name = 'json'  // 全局环境变量
+            }            
+            steps {
+                sh "echo $CC $name"
+            }
+        }
+        stage('echo environment test') {
+            steps {
+            	withEnv(['name1=join','name2=jack']){ 
+                	echo "my name is ${env.name1}"
+                	sh ' echo "my name is ${name2}"'
+                }                
+                sh "echo $CC"
+                script {
+                      env.name3 = "peter"                 
+                      env.name4 = "lisha"
+                      env.name5 = "Dom"
+                      echo "my name is ${env.name3}"
+                      echo "=============="
+                      print name5
+                }
+                echo "my name is ${env.name3}"
+                sh 'echo "my name is ${name4}"'               
+            }
+        } 
+		stage('test credentials'){
+			steps{
+				sh 'echo $SERVICE_CREDS'
+				sh 'echo "Service user is $SERVICE_CREDS_USR"'
+				sh 'echo "Service user is $SERVICE_CREDS_PSW"'
+			}
+		}
+		stage('parallel test'){
+			parallel{
+				stage('parallerl-1'){
+					steps{
+						sh "echo 'parallerl-1'"
+					}
+				}
+				stage('parallerl-2'){
+					steps{
+						sh "echo 'parallerl-2'"
+					}
+				}				
+			}
+		}
+        stage('Example Deploy') {
+            when {
+                anyOf {
+                    expression { DEPLOY_TO ==~ /(production|masters)/ }
+                    expression {
+                        return BUILD_NUMBER >= 100
+                    }
+                }
+            }
+            steps {
+                echo 'Deploying'
+            }
+        }		
+        stage('deploy') {
+            when {
+                not {
+                    equals expected: branch, actual: 'master'
+                }
+            }
+            steps {
+                echo "deploy success"
+            }
+        }		
+    }
+	post {
+		always {
+			echo "always"
+		}		
+		aborted {
+			echo "aborted"
+            updateGitlabCommitStatus name: 'build', state: 'canceled'            
+		}
+		failure{
+            updateGitlabCommitStatus name: 'build', state: 'failed'
+			script {
+				currentBuild.description = "部署失败"
+				currentBuild.displayName = 'fail'                
+			}
+		}		
+		success{
+            updateGitlabCommitStatus name: 'build', state: 'success'
+			script {
+				currentBuild.description = "部署成功"
+				currentBuild.displayName = 'success'
+			}
+		}
+	}
+}

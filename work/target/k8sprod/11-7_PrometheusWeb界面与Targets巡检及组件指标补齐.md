@@ -19,7 +19,7 @@ tags: [Prometheus, PromQL, Graph, Targets, relabel, ServiceMonitor, kube-control
 
 ## 先去 Web 界面看看
 
-上一节集群部署起来了，接着去访问 `prometheus.imooc.com`。
+上一节集群部署起来了，接着去访问 `prometheus.example.com`。
 
 进来就是首页，首页其实就是一个查询页面。在这里可以输入 PromQL 直接查数据，也可以从下拉里选指标；选一个指标，点 **Execute** 执行查询，下面出结果，左边的图表区域会画出数据变化趋势。
 
@@ -189,7 +189,7 @@ kubectl create secret generic etcd-client-secret \
 
 ```mermaid
 graph LR
-    V[values.yaml 改配置] --> U[helm upgrade imoocprom]
+    V[values.yaml 改配置] -> U[helm upgrade exampleprom]
     U --> CH[prometheus-operator chart 模板渲染]
     CH --> SM[生成 ServiceMonitor / PodMonitor]
     SM --> P[Prometheus Operator 控制器 reconcile]
@@ -230,12 +230,12 @@ graph TB
 | 协议对不对 | `values.yaml` → `serviceMonitor.https.scheme` | http / https，配错抓不到 |
 | 安全抓 etcd | `securityConfig` / tlsConfig | caFile、certFile、keyFile、insecureSkipVerify |
 | 建证书 secret | `kubectl create secret generic <名>` | `--from-file` 带三个文件 |
-| 让改动生效 | `helm upgrade imoocprom ./prometheus-operator` | 改完必须 upgrade |
+| 让改动生效 | `helm upgrade exampleprom ./prometheus-operator` | 改完必须 upgrade |
 
 ## Demo 示例
 
 ```bash
-# 1. 打开界面直接验：https://prometheus.imooc.com
+# 1. 打开界面直接验：https://prometheus.example.com
 
 # 2. 改 kube-controller-manager
 vi prometheus-operator/values.yaml
@@ -257,7 +257,7 @@ vi prometheus-operator/values.yaml
 #   挂上 caFile / certFile / keyFile
 
 # 5. 生效并验收
-helm upgrade imoocprom ./prometheus-operator -f values.yaml
+helm upgrade exampleprom ./prometheus-operator -f values.yaml
 kubectl -n monitoring get secret etcd-client-secret
 ```
 

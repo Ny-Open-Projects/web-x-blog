@@ -9,6 +9,20 @@
 - 一个典型的排错案例：SQL 日志定位字段重复拼接
 - `@JsonFormat` 定制时间序列化格式
 
+## 📎 文本↔代码关联
+
+本讲对应课件源码（去品牌化副本，位于 `code/socialecom/`；包名已由原占位包名统一改写为 `com.social.ecom`）：
+
+| 代码文件 | 正文提及 | 职责 |
+| --- | --- | --- |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/base/JsonReturnType.java` | 21 次 | 统一 JSON 返回结构（code / message / data） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/pojo/User.java` | 7 次 | 实体类，主键 `IdType.AUTO` 自增，含乐观锁 `version` 字段，含自动填充时间字段 |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/SocialecomApplication.java` | 3 次 | Spring Boot 启动类（组件扫描入口） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/helper/CustomMetaObjectHandler.java` | 3 次 | MyBatis-Plus 字段自动填充处理器（create/update 时间） |
+| `code/socialecom/第二章代码/socialecom/src/main/resources/application.properties` | 2 次 | 应用配置（数据源 / MyBatis-Plus 日志 / 端口） |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/mapper/UserMapper.java` | 2 次 | `User` 的 MyBatis-Plus Mapper 接口 |
+| `code/socialecom/第二章代码/socialecom/src/main/java/com/social/ecom/controller/UserController.java` | 2 次 | HTTP 接口层，路由前缀 `/user`；端点：`/get`、`/create`、`/update`、`/getforupdate`、`/updatebyversion`、`batchget`、`getbycondition` |
+
 ## 统一返回结构
 
 直接在响应体里返回领域对象，无法完备地描述接口遇到错误或发生异常的情况。因此需要定义 `status` 与 `data` 组合的通用返回结构。
@@ -16,7 +30,7 @@
 在 `base` 包下新建 `JsonReturnType`：
 
 ```java
-package com.imooc.socialecom.base;
+package com.social.ecom.base;
 
 public class JsonReturnType {
 
@@ -156,7 +170,7 @@ private Date updateTime;
 在 `helper` 包下新增填充处理器，并用 `@Component` 交给 Spring 管理：
 
 ```java
-package com.imooc.socialecom.helper;
+package com.social.ecom.helper;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
@@ -287,7 +301,7 @@ server.port=9090
 
 ```java
 @SpringBootApplication
-@MapperScan("com.imooc.socialecom.mapper")
+@MapperScan("com.social.ecom.mapper")
 public class SocialecomApplication {
     public static void main(String[] args) {
         SpringApplication.run(SocialecomApplication.class, args);
@@ -300,7 +314,7 @@ public class SocialecomApplication {
 ```bash
 curl 'http://localhost:9090/user/create?userName=xyz&userTel=13512345678&userPassword=pwd'
 curl 'http://localhost:9090/user/get?id=2'
-curl 'http://localhost:9090/user/update?id=2&userName=imooc'
+curl 'http://localhost:9090/user/update?id=2&userName=social'
 ```
 
 ### 关键依赖

@@ -1,0 +1,32 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-vct
+spec:
+  params:
+    - name: giturl
+      type: string
+    - name: branch
+      type: string
+  workspaces:
+    - name: code
+  tasks:
+    - name: clone
+      taskRef:
+        name: vct-git-clone-task
+      params:
+        - name: giturl
+          value: "$(params.giturl)"
+        - name: branch
+          value: "$(params.branch)"
+      workspaces:
+        - name: code
+          workspace: code
+    - name: ls-files
+      taskRef:
+        name: ls-files
+      runAfter:
+        - clone
+      workspaces:
+        - name: code
+          workspace: code

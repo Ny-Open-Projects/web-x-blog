@@ -18,10 +18,10 @@ package handler
 
 import (
     "context"
-    "git.imooc.com/coding-535/common"
-    "git.imooc.com/coding-535/pod/domain/model"
-    "git.imooc.com/coding-535/pod/domain/service"
-    "git.imooc.com/coding-535/pod/proto/pod"
+    "git.example.com/coding-535/common"
+    "git.example.com/coding-535/pod/domain/model"
+    "git.example.com/coding-535/pod/domain/service"
+    "git.example.com/coding-535/pod/proto/pod"
     "strconv"
 )
 

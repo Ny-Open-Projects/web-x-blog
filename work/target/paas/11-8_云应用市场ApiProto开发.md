@@ -41,7 +41,7 @@ package handler
 
 import (
 	"context"
-	appStore "git.imooc.com/coding-535/appStore/proto/appStore"
+	appStore "git.example.com/coding-535/appStore/proto/appStore"
 	"github.com/asim/go-micro/v3/client"
 	log "github.com/asim/go-micro/v3/logger"
 )
