@@ -1,4 +1,4 @@
-# 代码扫描与镜像构建：Sonar / Kaniko / Docker 插件实战
+# 51. 代码扫描与镜像构建：Sonar / Kaniko / Docker 插件实战
 
 ## 纲要
 
@@ -87,7 +87,7 @@ steps:
 - name: jenkins-call
   image: plugins/jenkins
   settings:
-    url: http://10.0.0.1          # Jenkins 地址
+    url: http://jenkins.example.com          # Jenkins 地址
     user: test                    # Jenkins 账户
     token: <from_secret>          # Jenkins 用户设置里生成的 API token
     job: <job名称>                 # 要调用的 Jenkins job
@@ -269,4 +269,3 @@ Drone 生态未覆盖但 Jenkins 已有的能力——课程场景是 MeterSpher
 
 **技术点总结**：Drone 把流水线两大主业做成了「插件即镜像」的开箱形态——**质量门禁**：内置 sonar 插件扫代码（settings 传 host/token/Node 版本）+ curl 打质量阀 API（管理员 basic auth、`组:仓库` 项目 key、`%3A` 编码、awk 两级抠 `qualityGateStatus`）实现 OK 放行/非 OK `exit 1` 熔断，与 Jenkins 的 `waitForQualityGate` 回调机制相比是「扫完即查」的轮询式判断；**镜像构建**：`plugins/docker` 与 `plugins/kaniko` 配置同构（registry/repo/tags），tag 用 `仓库名-分支-构建号` 三件套，课程推荐 kaniko——与 Jenkins/Tekton 篇同一引擎，知识跨工具平移；两个现场经验：docker 插件 connection refused 先重试（时序问题非配置错）、Secret 必须先于引用配好；最后 drone-jenkins 插件提供了「生态未覆盖能力调 Jenkins」的过渡桥（MeterSphere 场景），凭证与 job 权限按最小化配置。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

@@ -1,17 +1,17 @@
-# Drone 部署与 GitLab 接入：OAuth 应用、启动参数与首次授权全流程
+# 45. Drone 部署与 GitLab 接入：OAuth 应用、启动参数与首次授权全流程
 
 ## 纲要
 
 - **部署 Drone 的前提是在 GitLab 建一个 OAuth 应用**：拿回 Client ID / Client Secret，Drone 才能「代表用户」登录 GitLab、拉取仓库、继承权限
 - **回调 URL 必须是 `http://<drone地址>/login`**：OAuth 授权的跳回地址，多写少写一个字符都会登录循环
 - **核心启动参数八项**：GitLab Server、Client ID / Secret、RPC Secret、Server Host、协议端口、管理员账户——每项都对应链路中的一个断点
-- **RPC Secret 是 Server 与 Runner 的共享暗号**：Runner 部署时必须填同一个值，这是下一篇的前置知识点
+- **RPC Secret 是 Server 与 Runner 的共享暗号**：Runner 部署时必须填同一个值，这是下面的前置知识点
 - **一个 Drone Server 只能连一个 GitLab**：多套 GitLab 就要部署多个 Server，端口规划要预留
 - **激活是构建的总开关**：仓库同步过来只是「可见」，对仓库有管理员权限的账户点「Activate」后才能构建
 
 ## 一、场景引入：Server 跑起来了，然后呢？
 
-上一篇建立了整体认知：Drone = 轻量 CI + 插件即镜像 + 配置文件即流水线。但真要把系统用起来，第一道现实关卡是**部署与接入**——这和我们装 Jenkins 时「容器跑起来只是开始，还得接 LDAP、配系统」是同一类问题，只不过 Drone 的接入对象是 GitLab。
+前面建立了整体认知：Drone = 轻量 CI + 插件即镜像 + 配置文件即流水线。但真要把系统用起来，第一道现实关卡是**部署与接入**——这和我们装 Jenkins 时「容器跑起来只是开始，还得接 LDAP、配系统」是同一类问题，只不过 Drone 的接入对象是 GitLab。
 
 本篇按讲稿顺序完成三件事：**① 在 GitLab 管理中心创建 OAuth 应用；② 用 `docker run` 把 Drone Server 跑起来（八项核心参数逐个拆解）；③ 首次访问授权 + 页面功能巡览 + 仓库同步与激活**。做完这三步，Drone 就从「一个容器」变成「团队可用的 CI 平台」。
 
@@ -47,7 +47,7 @@ sequenceDiagram
 | **回调 URL（Redirect URI）** | `http://<drone访问地址>/login` | GitLab 授权后 302 跳回的地址，**必须与 Drone 实际访问地址一致**，路径固定 `/login` |
 | **权限范围（Scopes）** | `api`（完整读写）+ `read_user`（只读用户信息） | `api` 让 Drone 能读写仓库、配置 Webhook；`read_user` 让 Drone 识别登录账户身份 |
 
-> 课程演示中回调地址形如 `http://10.0.7.30:82/login`（Drone 对外端口为 82 的场景）。「可信任/机密（Confidential）」复选框按演示去掉；保存后页面会给出 **Application ID** 与 **Secret**——这两个值就是启动参数里的 Client ID / Client Secret，**Secret 只展示一次，先拷贝再关页面**。
+> 课程演示中回调地址形如 `http://gitlab.example.com:82/login`（Drone 对外端口为 82 的场景）。「可信任/机密（Confidential）」复选框按演示去掉；保存后页面会给出 **Application ID** 与 **Secret**——这两个值就是启动参数里的 Client ID / Client Secret，**Secret 只展示一次，先拷贝再关页面**。
 
 ### 2.3 启动参数全景：八项核心配置
 
@@ -80,7 +80,7 @@ Drone Server 通过一对 Client ID/Secret 连接**一个** GitLab 实例。如�
 
 ```text
 名称:        drone
-回调 URL:    http://10.0.7.30:82/login
+回调 URL:    http://gitlab.example.com:82/login
 信任范围:
   ☑ api        完整读写（仓库、Webhook、状态回写）
   ☑ read_user  只读用户信息（识别登录账户）
@@ -100,11 +100,11 @@ docker run -d \
   --name drone \
   --restart always \
   -v /var/lib/drone:/data \
-  -e DRONE_GITLAB_SERVER=http://10.0.7.30 \
-  -e DRONE_GITLAB_CLIENT_ID=<GitLab 应用 ID> \
-  -e DRONE_GITLAB_CLIENT_SECRET=<GitLab 应用 Secret> \
-  -e DRONE_RPC_SECRET=<与 Runner 一致的共享密钥> \
-  -e DRONE_SERVER_HOST=10.0.7.30:80 \
+  -e DRONE_GITLAB_SERVER=http://gitlab.example.com \
+  -e DRONE_GITLAB_CLIENT_ID=$GITLAB_APP_ID \
+  -e DRONE_GITLAB_CLIENT_SECRET=$GITLAB_APP_SECRET \
+  -e DRONE_RPC_SECRET=$RPC_SECRET \
+  -e DRONE_SERVER_HOST=gitlab.example.com:80 \
   -e DRONE_SERVER_PROTO=http \
   -e DRONE_USER_CREATE=username:chengxu,admin:true \
   -p 82:80 \
@@ -119,10 +119,10 @@ docker run -d \
 | `--name drone` | 容器名 | 日志排查入口：`docker logs drone` |
 | `--restart always` | 重启策略 | **无论何种原因退出（含手动 stop 外的异常）都自动拉起**，生产必备 |
 | `-v /var/lib/drone:/data` | 数据卷 | Drone 全部状态（用户、仓库、激活记录）落盘，**删容器不删数据** |
-| `DRONE_GITLAB_SERVER` | `http://10.0.7.30` | 本环境 GitLab 地址（不含端口即默认 80） |
+| `DRONE_GITLAB_SERVER` | `http://gitlab.example.com` | 本环境 GitLab 地址（不含端口即默认 80） |
 | `DRONE_GITLAB_CLIENT_ID/SECRET` | 3.1 步拷贝的值 | OAuth 凭证，**Secret 不要写死在公开仓库的脚本里** |
 | `DRONE_RPC_SECRET` | 共享密钥 | Runner 部署时原样填同一个值（#47 详解） |
-| `DRONE_SERVER_HOST` | `10.0.7.30:80` | Drone 对外访问地址（讲稿按容器端口书写；实际对外以映射端口 82 为准） |
+| `DRONE_SERVER_HOST` | `gitlab.example.com:80` | Drone 对外访问地址（讲稿按容器端口书写；实际对外以映射端口 82 为准） |
 | `DRONE_SERVER_PROTO` | `http` | 内网演示关闭 HTTPS 强制 |
 | `DRONE_USER_CREATE` | `username:chengxu,admin:true` | **初始化管理员**：用户名 `chengxu`，管理员标记 `true`。该账户可以是 GitLab（或已接 LDAP 的 GitLab）里的任意账户 |
 | `-p 82:80 -p 443:443` | 端口映射 | 宿主 80 被 GitLab 占用，Drone 改占 82；443 留给将来的 HTTPS |
@@ -132,7 +132,7 @@ docker run -d \
 
 ### 3.3 第三步：首次访问与授权
 
-浏览器访问 `http://10.0.7.30:82`，页面出现 **Authorize（授权）** 按钮：
+浏览器访问 `http://gitlab.example.com:82`，页面出现 **Authorize（授权）** 按钮：
 
 1. 点击授权 → 302 跳转到 GitLab 登录页。**若浏览器已登录 GitLab，会直接跳过密码输入**（单点登录行为）；想切换账户必须先退出 GitLab 并清理 Drone 的登录缓存。
 2. 输入 GitLab 账号密码（或免登）→ GitLab 询问是否授权应用 → 提交。
@@ -214,4 +214,3 @@ GitLab OAuth 授权完成后按回调 URL 302 跳回应用，Drone 的授权码�
 
 **技术点总结**：Drone 接入 GitLab 的完整链路是「OAuth 应用 → docker run 八项参数 → 授权登录 → 同步激活」：先在 GitLab 管理中心建应用拿回 Client ID/Secret（回调 URL 固定为 Drone 地址 + `/login`，scope 选 `api` + `read_user`），再用 `docker run` 部署 Server——GitLab 地址、OAuth 凭证、RPC 共享密钥、Server Host/协议、管理员账户、端口映射八项核心参数各对应链路一个断点，其中 80 端口让位 GitLab、协议默认 https 需显式改 http 是演示环境两大坑。登录后仓库「同步（Sync）」只是可见，「激活（Activate）」才是构建总开关，且激活权按仓库判给 GitLab 管理员而非 Drone 系统管理员。生产维度：RPC Secret 随机化、HTTPS 与回调 URL 同窗口切换、数据卷备份、多 GitLab 多 Server 的地址规范，是把演示链路转为企业部署的必修课。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

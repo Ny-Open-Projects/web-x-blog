@@ -1,4 +1,4 @@
-# Sidecar 与 Worker 组件、K8s-Object 多集群交付：多容器注入与原生资源实战
+# 59. Sidecar 与 Worker 组件、K8s-Object 多集群交付：多容器注入与原生资源实战
 
 ## 纲要
 
@@ -30,7 +30,7 @@ KubeVela 的组件类型决定了「这个负载在 K8s 里长成什么样」。
 | `webservice` | 需要对外提供 HTTP 服务的应用 | **是**——自动创建 Service + 可选 Ingress/Gateway | Deployment + Service |
 | `worker` | 后台任务、定时任务、日志处理 | **否**——不建 Service | 多容器 Deployment |
 | `k8s-objects` | 直接使用 K8s 原生资源定义 | 取决于你写的原生 YAML | 原样 apply 的任意资源 |
-| `gateway` | 统一入口、域名路由（上一篇简述） | **是**——网关资源 | Ingress/ALB 等 |
+| `gateway` | 统一入口、域名路由（前面简述） | **是**——网关资源 | Ingress/ALB 等 |
 
 **选型口诀：有流量入口选 `webservice`，纯后台选 `worker`，存量原生 YAML 不想重构选 `k8s-objects`。** 把后台任务错选成 `webservice` 的后果：KubeVela 会贴心帮你建一个 Service——没有后端端口可指，或者指了个没人监听的端口，纯属噪音。
 
@@ -153,7 +153,7 @@ kubectl get pods -n test-app
 课程实测路径：部署后 `vela ls` 能看到应用名 `vela-app-with-sidecar`、组件名 `log-gen-worker`、类型 `worker`（TRAITS 列可见 `sidecar`）、STATUS 最终转 `healthy`；`kubectl get pods` 能看到 Pod 从 `0/2`（两个容器都没就绪）走到 `2/2 Running`——**READY 列的 `2` 就是「一个 Pod 两个容器」的直接证据**。想眼见为实，进 sidecar 容器看输出：
 
 ```bash
-kubectl logs -n test-app <pod-name> -c count-log
+kubectl logs -n test-app $POD_NAME -c count-log
 # 预期持续输出：0: Wed Oct 14 ... / 1: ... / 2: ...
 ```
 
@@ -220,7 +220,7 @@ spec:
 | `properties.objects[0]` | `apps/v1 Deployment` | 原生 Deployment：2 副本、nginx 镜像、containerPort 80——**和你手写的一模一样，没有 OAM 包装** |
 | `properties.objects[1]` | `v1 Service` | 原生 Service：80 → 80，selector `app: nginx` 与 Deployment 标签对上 |
 | `policies[0].type` | `topology` | 部署拓扑策略：决定「发到哪些集群、哪个命名空间」 |
-| `policies[0].properties.clusters` | `["test-k8s", "local"]` | **多集群核心字段**：一次定义、两处落地 |
+| `policies[0].properties.clusters` | `["test-k8s","local"]` | **多集群核心字段**：一次定义、两处落地 |
 | `policies[0].properties.namespace` | `test-app` | 目标集群上的统一命名空间 |
 | （无 `workflow`） | — | 省略 workflow 时默认单步部署，直接按策略 apply |
 
@@ -245,9 +245,9 @@ kubectl get svc -n test-app               # 预期看到 nginx-object
 
 1. **sidecar 卷必须「同名同路径」**：主容器声明 `varlog:/var/log`，sidecar 引用 `varlog:/var/log`。名字错配的报错很隐蔽（Pod 起不来但 Application 显示 progressing），排查时先 `kubectl describe pod` 看事件。
 2. **sidecar 适合日志/监控/代理注入，不适合业务耦合**：sidecar 与主容器**同生共死**，主容器挂了 sidecar 也退；把有状态业务写进 sidecar 会拖垮整个 Pod 的可用性。
-3. **`worker` 的伸缩用 `scaler` 特征**：`worker` 组件同样支持 `traits: [{type: scaler, properties: {replicas: N}}]`，别因为「不对外」就忘了副本数。
+3. **`worker` 的伸缩用 `scaler` 特征**：`worker` 组件同样支持 `traits: [{type: scaler,properties: {replicas: N}}]`，别因为「不对外」就忘了副本数。
 4. **多集群先解决网络与凭据，再谈交付**：`topology` 只管「往哪 apply」，不管「集群间是否互通、kubeconfig 是否过期」。生产多集群建议：kubeconfig 用 Secret 托管、定期轮换；跨集群网络（Pod CIDR 互通）提前规划。
-5. **`k8s-objects` 与 OAM 特征不要混用幻想**：选了原生对象，`scaler`/`gateway`/`sidecar` 这些特征都用不上；要「原生起步、逐步 OAM 化」，正确路径是先把资源托管（下一篇讲 `vela adopt`），再迁移到 `webservice`。
+5. **`k8s-objects` 与 OAM 特征不要混用幻想**：选了原生对象，`scaler`/`gateway`/`sidecar` 这些特征都用不上；要「原生起步、逐步 OAM 化」，正确路径是先把资源托管（下面讲 `vela adopt`），再迁移到 `webservice`。
 6. **命名空间分层管理**：Application CR 在 `test-app`（管理面），业务负载也在 `test-app`（业务面）——课程演示是同一命名空间；生产建议管理面与业务面分离，删除应用时的级联影响面更可控。
 
 ## 五、报错排查表
@@ -255,7 +255,7 @@ kubectl get svc -n test-app               # 预期看到 nginx-object
 | 现象 | 根因 | 解法 |
 | --- | --- | --- |
 | `kubectl get pods` 显示 Pod 存在但 READY `0/2` | sidecar 容器未就绪：卷名错配或 `tail` 目标文件还没生成 | 核对 `volumes[].name` 两边一致；确认主容器已启动并创建 `/var/log/date.log` |
-| 应用部署成功但 KubeVela 控制台搜不到 | 该应用是直接 `kubectl apply` 创建的，**从未被 KubeVela 纳管** | 用 `vela adopt` 托管（见下一篇），或统一走 `vela up` 交付 |
+| 应用部署成功但 KubeVela 控制台搜不到 | 该应用是直接 `kubectl apply` 创建的，**从未被 KubeVela 纳管** | 用 `vela adopt` 托管（见下面），或统一走 `vela up` 交付 |
 | `vela up` 报集群不存在 | `topology.clusters` 里的集群名未注册（如 `test-k8s`） | 先 `vela cluster join <name> --kubeconfig-path <file>`；单集群可复用同一 kubeconfig 注册第二个名字 |
 | `k8s-objects` 部署后资源没出现 | 原生 YAML 字段写错（如 selector 与 template 标签不匹配）被 K8s 静默拒绝或报错 | `kubectl describe` 看 Events；`k8s-objects` 的内容按原生规范逐字段校对 |
 | `vela status` 一直 progressing 不 healthy | 默认单步部署卡住：常见于镜像拉取失败或副本数不满足 | `kubectl get pods` 看 CrashLoop/ImagePull；修镜像或资源后重新 `vela up` |
@@ -276,10 +276,10 @@ A：同 Pod 同生共死。Pod 调度到节点后两个容器共享网络命名�
 A：`webservice` 是 OAM 抽象模型——KubeVela 按组件规范生成 Deployment/Service 并支持运维特征增强；`k8s-objects` 是原生资源直通——`properties.objects` 里写什么就 apply 什么，适合存量 YAML，但用不了 OAM 特征体系。
 
 **Q5：`topology` 策略的作用？多集群交付的最小配置是什么？**
-A：`topology` 声明应用部署的目标集群（`clusters` 数组）与命名空间（`namespace`）。最小配置就是一个 `type: topology` 的策略 + `clusters: ["集群A", "集群B"]`；集群需提前注册，否则 `vela up` 报集群不存在。
+A：`topology` 声明应用部署的目标集群（`clusters` 数组）与命名空间（`namespace`）。最小配置就是一个 `type: topology` 的策略 + `clusters: ["集群A","集群B"]`；集群需提前注册，否则 `vela up` 报集群不存在。
 
 **Q6：不写 `workflow` 时 KubeVela 怎么部署？**
-A：系统生成默认单步部署——直接按策略把组件 apply 到目标集群，适合一次性交付。需要灰度、暂停审核、条件分支时才显式定义 workflow（下一篇展开）。
+A：系统生成默认单步部署——直接按策略把组件 apply 到目标集群，适合一次性交付。需要灰度、暂停审核、条件分支时才显式定义 workflow（下面展开）。
 
 **Q7：单集群环境如何演练多集群交付？**
 A：把同一份 kubeconfig 以不同集群名注册两次（如 `local` 与 `test-k8s`），即可在拓扑策略里声明两个「集群」；真实多集群环境则各集群一份 kubeconfig，注意先打通网络与凭据。
@@ -294,4 +294,3 @@ A：把同一份 kubeconfig 以不同集群名注册两次（如 `local` 与 `te
 
 **技术点总结**：本篇拿下了 KubeVela 交付模型的最后两块拼图——**Sidecar 容器注入**让一个 Pod 内容纳「干活的 + 看场的」多容器协作，`worker` 组件明确标记「不对外」的后台负载；**`k8s-objects` + `topology`** 打通「原生资源原样交付 + 多集群一次定义多处落地」。至此 webservice / worker / k8s-objects / gateway 四大组件类型全部亮相，组件选型的口诀可以固化为：**有对外入口选 webservice、纯后台选 worker、存量原生 YAML 选 k8s-objects、统一域名入口配 gateway**。多集群不是玄学，本质是「应用定义与部署目标解耦」——先注册集群，再在 topology 里列名字，交付动作交给默认单步或显式 workflow。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

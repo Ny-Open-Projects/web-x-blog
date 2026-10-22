@@ -1,4 +1,4 @@
-# Tekton Pipeline 执行方式控制：when / timeout / retries / runAfter / finally 五件套
+# 38. Tekton Pipeline 执行方式控制：when / timeout / retries / runAfter / finally 五件套
 
 ## 纲要
 
@@ -11,7 +11,7 @@
 
 ## 一、场景引入：流水线不是「一条道跑到黑」
 
-上一篇我们把 Task 编排成了 Pipeline，但那样画出来的产线是「死」的：每个 Task 无条件执行、无限期等待、失败即整体崩盘。真实生产要的是「活」的流程控制：
+前面我们把 Task 编排成了 Pipeline，但那样画出来的产线是「死」的：每个 Task 无条件执行、无限期等待、失败即整体崩盘。真实生产要的是「活」的流程控制：
 
 - **条件跳过**：只在发布 tag 上才执行部署步骤，普通 push 跳过——这是 `when`；
 - **超时熔断**：某个 Task 卡死 10 分钟，不能无限占着集群资源——这是 `timeout`；
@@ -177,7 +177,7 @@ kubectl apply -f pipeline/pipeline7-runAfter.yaml
 kubectl apply -f pipeline/pipeline8-finally.yaml
 ```
 
-每个 Pipeline 都可以用上一篇的三种方式运行，调试期推荐 `tkn`：
+每个 Pipeline 都可以用前面的三种方式运行，调试期推荐 `tkn`：
 
 ```bash
 tkn pipeline start pipeline-when
@@ -233,7 +233,7 @@ kubectl get taskrun
 kubectl get pipelinerun
 
 # 某个 TaskRun 的详细事件（超时/取消的原因在这里）
-kubectl describe taskrun <name>
+kubectl describe taskrun $NAME
 ```
 
 状态机对照：
@@ -301,7 +301,7 @@ flowchart LR
       values: ["pass"]
 ```
 
-「单测通过才部署」「代码覆盖率达标的才发生产」这类门禁，靠的就是 `results` + `when` 的组合，不需要任何脚本判断。results 的完整用法在后续章节展开。
+「单测通过才部署」「代码覆盖率达标的才发生产」这类门禁，靠的就是 `results` + `when` 的组合，不需要任何脚本判断。results 的完整用法在后续展开。
 
 ### 4.5 取消与删除：finally 的一个版本差异
 
@@ -359,4 +359,3 @@ task 级管单个步骤，触发时该 TaskRun 取消、下游跳过、finally �
 
 **技术点总结**：Tekton 用五个声明式字段把流水线从「一条道跑到黑」变成「可条件、可熔断、可重试、可编排、可兜底」的生产级流程——**`when` 决定要不要跑、`timeout` 决定跑多久、`retries` 对抗瞬时故障、`runAfter` 表达显式依赖、`finally` 保证成败都收尾**；实践中最容易栽的三个坑是 `retries` 与 `timeout` 的乘积效应（最坏耗时成倍放大）、`runAfter` 填错成 Task 名而非步骤名、以及以为 finally 会救活已经失败的流水线（它只兜底，不改结局）。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

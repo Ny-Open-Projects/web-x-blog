@@ -1,4 +1,4 @@
-# Argo Rollout 蓝绿与灰度发布实战：从配置到切流量全流程
+# 83. Argo Rollout 蓝绿与灰度发布实战：从配置到切流量全流程
 
 ## 纲要
 
@@ -20,7 +20,7 @@
 | **Argo Rollout 控制器** | Rollout CRD + 调和逻辑 | 建命名空间 + apply 安装清单 |
 | **Argo Rollouts Dashboard** | 页面发布/回滚/查看部署情况 | apply 安装清单（端口 **31517**） |
 | **kubectl argo rollouts 插件** | 终端操作 Rollout | 下载二进制 mv 到 `/usr/local/bin` |
-| （依赖）Argo CD | git 同步 Rollout 资源 | 前文已装 |
+| （依赖）Argo CD | git 同步 Rollout 资源 | 前面已装 |
 
 Dashboard 访问：`http://<IP>:31517` → 切到 `default` 命名空间即可看到 Rollout 应用。插件的意义：**页面点 promote 之外的一切都能脚本化**——`promote`/`pause`/`abort`/`status`/`restart`/`history`，CI 里无人值守发布靠它。
 
@@ -102,14 +102,14 @@ spec:
 ```bash
 # 查看 Rollout 及应用
 kubectl argo rollouts list
-kubectl argo rollouts history <rollout-name>
+kubectl argo rollouts history $ROLLOUT_NAME
 
 # 常用动作（对应页面按钮）
-kubectl argo rollouts promote <rollout>   # 通过/切换流量
-kubectl argo rollouts pause <rollout>
-kubectl argo rollouts abort <rollout>     # 中止并回滚
-kubectl argo rollouts status <rollout>
-kubectl argo rollouts restart <rollout>
+kubectl argo rollouts promote $ROLLOUT   # 通过/切换流量
+kubectl argo rollouts pause $ROLLOUT
+kubectl argo rollouts abort $ROLLOUT     # 中止并回滚
+kubectl argo rollouts status $ROLLOUT
+kubectl argo rollouts restart $ROLLOUT
 ```
 
 课程实拍：`kubectl argo rollouts` 下有两个应用——`购物-API-蓝绿`（不健康，另一个实验遗留）+ 刚创建的蓝绿应用（健康）；`history` 显示版本历史。
@@ -342,4 +342,3 @@ maxSurge 25% 意味着发布期间最多额外占用 25% 副本的容量——�
 
 **技术点总结**：Argo Rollout 实战 = 环境四件套（控制器 + Dashboard + kubectl 插件 + Argo CD）+ 两套发布策略。蓝绿五配置里**两个 Service 是硬性要求**，`autoPromotionEnabled` 决定自动还是人工切流量，`scaleDownDelaySeconds` 的 1200 秒是回滚黄金窗口。灰度三配置里 **maxSurge 定扩容上限、maxUnavailable 0 保服务不缩水、steps 定放量曲线**——每级 setWeight 都是「再信一点」，每个 pause 都是「停下来看看」，`pause: {}` 把最终放量权留给人。两条实战铁律：**灰度至少 2 副本、应用名实例内唯一**。回滚的终极形态（abort）在这里只是手速，叠加 #84 流量分析后才是自动。
 
-相关度：97%。是否需要继续：[是]。代码是否可运行：[是]。

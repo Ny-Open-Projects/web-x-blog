@@ -1,4 +1,4 @@
-# KubeVela 概述、部署与核心概念：OAM 抽象层入门
+# 54. KubeVela 概述、部署与核心概念：OAM 抽象层入门
 
 ## 纲要
 
@@ -113,10 +113,12 @@ flowchart TB
 
 ### 3.1 安装 vela CLI 与 KubeVela 核心
 
-KubeVela 的一切操作从 `vela` 命令行开始。课程环境：服务器 `10.0.7.100`，集群已就绪。
+KubeVela 的一切操作从 `vela` 命令行开始。课程环境：服务器 `k8s.example.com`，集群已就绪。
 
 ```bash
 # ① 安装 vela CLI（官方一键脚本）
+# ⚠️ 管道执行前先下载审阅：curl -fsSL -o install.sh https://kubevela.io/script/install.sh && less install.sh
+# 以下为课程演示的一键方式；生产环境建议走审阅后执行或固定版本
 curl -fsSL https://kubevela.io/script/install.sh | bash
 
 # ② 安装 KubeVela 核心（写入 vela-system 命名空间）
@@ -156,13 +158,13 @@ vela addon enable velaux serviceType=LoadBalancer   # 云集群有 LB 时
 vela addon enable velaux serviceType=NodePort       # 自建集群，走 节点IP:NodePort
 ```
 
-课程现场用端口转发暴露后，通过 `http://10.0.7.100:<端口>` 访问到登录页。**首次登录**：默认账号 `admin`，初始密码 `VelaUX12345`（官方默认值，首次登录强制修改——课程现场即重新设定了管理员密码，**生产环境务必换强密码**）。
+课程现场用端口转发暴露后，通过 `http://k8s.example.com:<端口>` 访问到登录页。**首次登录**：默认账号 `admin`，初始密码 `VelaUX12345`（官方默认值，首次登录强制修改——课程现场即重新设定了管理员密码，**生产环境务必换强密码**）。
 
 **外接数据库（生产必看）**：VelaUX 支持 **Kubernetes（默认，数据存集群内 CR）与 MongoDB** 两种数据库。课程原话：默认走 Kubernetes，生产建议外接 MongoDB。启用时追加数据库参数：
 
 ```bash
 vela addon enable velaux dbType=mongodb \
-  dbURL=mongodb://<user>:<password>@<mongodb-host>:27017/kubevela
+  dbURL=mongodb://$DB_USER:$DB_PASSWORD@$MONGODB_HOST:27017/kubevela
 ```
 
 （不同 KubeVela 版本的参数名略有差异，早期版本为分别指定数据库类型、用户名、密码、地址；以 `vela addon status velaux` 提示为准。）
@@ -228,7 +230,7 @@ spec:
 | `components[0]` | 组件 | 「部署一个服务由组件组成；组件定义**部署哪个镜像、名字是什么**」——本例 `express-server`，镜像 `oamdev/hello-world`，端口 8000 |
 | `components[0].traits[0]` | 运维特征 | 讲稿口述示例为 ingress 类特征（域名、HTTP 路径 `/`、端口 8000）；课件用 scaler 定义**副本数 1**——两者都是 trait，只是运维侧面不同 |
 | `policies[0]` | 执行策略 | topology 策略：交付到 `local` 集群的 `test-app` 命名空间——「部署到哪个集群、哪个命名空间由交付目标定义」 |
-| `workflow.steps[0]` | 部署工作流 | 一个 `deploy` 步骤，引用策略 `target-local-k8s`——复杂工作流（预发 → 审核 → 生产）就是多个步骤的编排，后续章节展开 |
+| `workflow.steps[0]` | 部署工作流 | 一个 `deploy` 步骤，引用策略 `target-local-k8s`——复杂工作流（预发 → 审核 → 生产）就是多个步骤的编排，后续展开 |
 
 **部署与查看**：
 
@@ -268,7 +270,7 @@ kubectl get crd | grep oam | awk '{print $1}' | xargs kubectl delete crd
 4. **默认密码必须首登即改**：`admin` / `VelaUX12345` 是公开常识，暴露在外网接口上等于裸奔；管理面板仅管理员可访问，配合 LDAP（#55 讲）收敛到统一认证。
 5. **serviceType 按暴露面选择**：开发用 `port-forward`（零暴露面），团队内网用 `NodePort`，云上正式用 `LoadBalancer` + 域名 + TLS——默认 `ClusterIP` 不对外，是最安全的起点。
 6. **插件生态是双刃剑**：addon 机制让能力扩展极便利（Argo CD 等插件），但每个插件都是往集群里装东西——上线前评估插件的维护状态与权限范围，禁用一个即可自动清理。
-7. **工作流的「人工审核」步骤是合规利器**：生产发布链插一个 `suspend` 步骤，审核记录天然沉淀在平台里——比「群里喊一声就上线」可审计得多（工作流详细配置在后续章节）。
+7. **工作流的「人工审核」步骤是合规利器**：生产发布链插一个 `suspend` 步骤，审核记录天然沉淀在平台里——比「群里喊一声就上线」可审计得多（工作流详细配置在后续）。
 8. **卸载前确认依赖**：删 CRD 前必须确认 CR 已删净，否则残留 CR 会变成「孤儿资源」，KubeVela 没了但工作负载还在跑，治理失控。
 
 ## 五、报错排查表
@@ -317,6 +319,5 @@ KubeVela 的输入是「已经构建好的镜像 + 交付声明」，输出是�
 | `code/8-Kubevela/first-app.yaml` | 2.1、3.4 节 | CD 篇 Hello World：`express-server` webservice 组件（镜像 `oamdev/hello-world`、8000 端口 expose）+ scaler trait（1 副本）+ topology 策略（local 集群 / `test-app` 命名空间）+ deploy 工作流步骤，四要素齐全 |
 | `code/8-Kubevela/hello-world.yaml` | 3.4 节 | 同构对照样例：应用名 `gitops-app`、镜像 `oamdev/hello-world:v1`、`clusters: [""]`、命名空间 `test-app` / `testlocal-app`——演示「结构不变、参数微调」的抽象层价值 |
 
-**技术点总结**：CD 篇开篇把 KubeVela 的「骨架」立起来——**定位**：基于 OAM 在 K8s 资源之上再抽象一层的云原生应用平台，核心价值在多云多集群混合环境的**一次声明、多处交付、差异化配置**（拓扑策略实现 A 集群 3 副本、B 集群 2 副本）；**模型**：OAM 四要素——组件（交付什么制品）、运维特征（副本数/域名，定义在组件之下）、执行策略（交付目标与拓扑）、工作流（先预发后审核再生产的步骤编排），VelaUX 控制台以**项目 → 应用 → 组件/运维特征 + 环境/交付目标**五概念承接；**落地**：`vela` CLI 装核心 → `vela addon enable velaux` 装 UI → 按 ClusterIP/NodePort/LoadBalancer 三类型暴露（默认 ClusterIP 最安全）→ 默认 `admin`/`VelaUX12345` 首登强改 → 生产外接 MongoDB 解耦元数据；`first-app.yaml` 用「组件 + scaler + topology + deploy」四段式把全部概念落到一份可部署的 YAML，是后续交付方式、工作流、CUE 扩展等所有章节的基准样例；卸载 SOP（删应用 → 禁插件 → uninstall → 清 CRD）顺序即依赖序，反序必被拦。CI 篇到此正式交棒，下一篇讲 KubeVela 接入 OpenLDAP 统一认证。
+**技术点总结**：CD 篇开篇把 KubeVela 的「骨架」立起来——**定位**：基于 OAM 在 K8s 资源之上再抽象一层的云原生应用平台，核心价值在多云多集群混合环境的**一次声明、多处交付、差异化配置**（拓扑策略实现 A 集群 3 副本、B 集群 2 副本）；**模型**：OAM 四要素——组件（交付什么制品）、运维特征（副本数/域名，定义在组件之下）、执行策略（交付目标与拓扑）、工作流（先预发后审核再生产的步骤编排），VelaUX 控制台以**项目 → 应用 → 组件/运维特征 + 环境/交付目标**五概念承接；**落地**：`vela` CLI 装核心 → `vela addon enable velaux` 装 UI → 按 ClusterIP/NodePort/LoadBalancer 三类型暴露（默认 ClusterIP 最安全）→ 默认 `admin`/`VelaUX12345` 首登强改 → 生产外接 MongoDB 解耦元数据；`first-app.yaml` 用「组件 + scaler + topology + deploy」四段式把全部概念落到一份可部署的 YAML，是后续交付方式、工作流、CUE 扩展等所有章节的基准样例；卸载 SOP（删应用 → 禁插件 → uninstall → 清 CRD）顺序即依赖序，反序必被拦。CI 篇到此正式交棒，下面讲 KubeVela 接入 OpenLDAP 统一认证。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

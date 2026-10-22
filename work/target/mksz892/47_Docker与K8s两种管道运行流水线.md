@@ -1,4 +1,4 @@
-# Docker 与 K8s 两种管道运行流水线：Runner 部署与 kubernetes 管道配置
+# 47. Docker 与 K8s 两种管道运行流水线：Runner 部署与 kubernetes 管道配置
 
 ## 纲要
 
@@ -72,8 +72,8 @@ docker run -d \
   --restart always \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -e DRONE_RPC_PROTO=http \
-  -e DRONE_RPC_HOST=10.0.7.30:80 \
-  -e DRONE_RPC_SECRET=<与 Drone Server 的 RPC Secret 完全一致> \
+  -e DRONE_RPC_HOST=gitlab.example.com:80 \
+  -e DRONE_RPC_SECRET="$RPC_SECRET" \
   -e DRONE_RUNNER_CAPACITY=10 \
   -e DRONE_RUNNER_NAME=docker-runner \
   -p 3000:3000 \
@@ -86,7 +86,7 @@ docker run -d \
 | --- | --- | --- |
 | `-v /var/run/docker.sock:/var/run/docker.sock` | 挂载 docker socket | **Docker Runner 的核心**：Runner 通过 socket 指挥宿主机 docker 拉起步骤容器 |
 | `DRONE_RPC_PROTO` | `http` | 与 Server 协议一致 |
-| `DRONE_RPC_HOST` | `10.0.7.30:80` | Server 主机名 + 端口（讲稿演示值；**以 Server 实际可达地址为准**，本案例 Server 对外映射为 82，连不上就改 82） |
+| `DRONE_RPC_HOST` | `gitlab.example.com:80` | Server 主机名 + 端口（讲稿演示值；**以 Server 实际可达地址为准**，本案例 Server 对外映射为 82，连不上就改 82） |
 | `DRONE_RPC_SECRET` | 共享密钥 | 与 Server 侧逐字符一致（讲稿演示值为「67045 开头、991 结尾」的短串，**生产必须随机长串**） |
 | `DRONE_RUNNER_CAPACITY` | `10` | 同时执行 10 个构建（默认 2，按机器规格调整） |
 | `DRONE_RUNNER_NAME` | `docker-runner` | Runner 名字，Server 页面按名字区分多个 Runner |
@@ -166,7 +166,7 @@ spec:
         - containerPort: 3000
         env:
         - name: DRONE_RPC_HOST
-          value: "10.0.7.30:82"
+          value: "gitlab.example.com:82"
         - name: DRONE_RPC_PROTO
           value: "http"
         - name: DRONE_RPC_SECRET
@@ -312,4 +312,3 @@ Runner 要通过 K8s API 创建构建 Pod、读取 Pod 日志，这些操作都�
 
 **技术点总结**：Runner 是 Drone 的执行手脚，接入 Server 只需 RPC 三要素——`DRONE_RPC_HOST`（主机:端口）、`DRONE_RPC_PROTO`（协议）、`DRONE_RPC_SECRET`（共享密钥），三者与 Server 完全一致且网络可达，日志出现「成功连接远程服务器」即验收通过。两条部署路线：Docker Runner 靠挂载 `docker.sock` 在宿主机起步骤容器（简单但是特权操作，限专用构建机），`DRONE_RUNNER_CAPACITY` 控制并发（默认 2）；K8s Runner 先配 RBAC（pods 创建/删除 + pods/log 读取）再以 Deployment 部署，每步骤一个 Pod，弹性与隔离性更佳，是生产主线。管道配置侧，`type: kubernetes` 的 `.drone.yml` 骨架 = kind/type/name 三件套 + `clone.depth` 浅克隆 + 串行 steps + `image_pull_secrets` 私有镜像凭证；两个最深的坑是「每步骤独立 Pod、文件不互通」与课件里的 `pull: if-not-exsits` 拼写错误（正确值 `if-not-exists`）。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

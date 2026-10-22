@@ -1,4 +1,4 @@
-# Deploy 部署与 SSH/SCP/S3、钉钉 Webhook 报警插件实战
+# 52. Deploy 部署与 SSH/SCP/S3、钉钉 Webhook 报警插件实战
 
 ## 纲要
 
@@ -16,7 +16,7 @@
 1. **上线**：镜像 push 到仓库只是「造出了货」，还得把它部署到 K8s 集群里跑起来；
 2. **通知**：流水线成功了没人知道、失败了没人管——构建结果必须主动推到人的眼前。
 
-课程这三小节正好各管一块：**Deploy 插件**（部署到 K8s）、**SSH/SCP/S3 插件**（产物分发与远程执行）、**钉钉与 Webhook 插件**（构建报警）。到本篇结束，Drone 章节的所有「单点插件」就全部讲完，下一篇（#53）进入七步流水线的项目综合实战。
+课程这三小节正好各管一块：**Deploy 插件**（部署到 K8s）、**SSH/SCP/S3 插件**（产物分发与远程执行）、**钉钉与 Webhook 插件**（构建报警）。到本篇结束，Drone 章节的所有「单点插件」就全部讲完，下面（#53）进入七步流水线的项目综合实战。
 
 一个建立直觉的类比：**kaniko 是工厂（造产品），deploy 插件是物流（把货摆上货架），scp/ssh 是闪送（点对点送货上门），报警插件是短信通知（告诉你货到了没）**。工厂造得再好，物流和通知不通，整条链路就是断的。
 
@@ -30,7 +30,7 @@
 flowchart LR
     A["clone<br/>拉代码"] --> B["kaniko<br/>构建并推送镜像<br/>repo + tag"]
     B --> C["deploy 插件<br/>honestbee/drone-kubernetes"]
-    C -->|"PATCH deployment.spec.template.spec.containers[].image"| D["K8s API Server<br/>10.0.7.100:6443"]
+    C -->|"PATCH deployment.spec.template.spec.containers[].image"| D["K8s API Server<br/>k8s.example.com:6443"]
     D --> E["Deployment 滚动更新<br/>Pod 逐个替换新镜像"]
     C -.->|"鉴权"| F["kubernetes_token<br/>ServiceAccount JWT"]
 ```
@@ -39,7 +39,7 @@ flowchart LR
 
 | 分组 | 字段 | 含义 | 课程演示值 |
 | --- | --- | --- | --- |
-| 连哪 | `kubernetes_server` | K8s apiserver 访问地址（kubeconfig 里抄） | `https://10.0.7.100:6443` |
+| 连哪 | `kubernetes_server` | K8s apiserver 访问地址（kubeconfig 里抄） | `https://k8s.example.com:6443` |
 | 连谁 | `kubernetes_token` | ServiceAccount 的 JWT 令牌 | Secret 注入 |
 | 改哪 | `namespace` | Deployment 所在命名空间 | `default` |
 | 改哪 | `deployment` | 要更新的 Deployment 名称 | `nginx-deployment`（课件代码为 `golang-deployment`） |
@@ -72,7 +72,7 @@ kubectl create token drone
 2. **`create token` 是有时效的**：默认 1 小时过期（`--duration` 可调）。流水线是持续跑的，**生产环境要么定期轮换 Secret，要么按插件版本改用长期凭证机制**，否则某天所有部署集体失效；
 3. **课程绑定的是集群管理员（admin）**——教学环境图省事。**生产必须最小化**：只授「patch 指定 namespace 下 deployment」的权限（Role + RoleBinding，甚至限定 resourceNames），CI 令牌泄漏的爆炸半径就等于它的权限半径。
 
-**server 地址从哪来**：登录服务器打开 `~/.kube/config`，搜 `server:` 即是 apiserver 地址与端口（课程为 `https://10.0.7.100:6443`）。注意三要素——**地址、令牌、目标资源（namespace/deployment/container）必须同时正确且可达**，缺一不可。
+**server 地址从哪来**：登录服务器打开 `~/.kube/config`，搜 `server:` 即是 apiserver 地址与端口（课程为 `https://k8s.example.com:6443`）。注意三要素——**地址、令牌、目标资源（namespace/deployment/container）必须同时正确且可达**，缺一不可。
 
 ### 2.3 SCP 与 SSH 插件：产物分发与远程执行
 
@@ -82,7 +82,7 @@ kubectl create token drone
 | --- | --- | --- |
 | 定位 | 把构建产物**拷到**目标机 | 在目标机上**执行**命令/脚本 |
 | 核心字段 | `host` / `username` / `password` / `port` / `target` / `source` | `host`（**列表**，可多机）/ `username` / `password` / `port` / `command_timeout` / `script` |
-| 课程演示 | 仓库里的 `main.go` → `10.0.7.30:/tmp` | 在 `10.0.7.30` 上跑 `ls -ls /tmp` 与 `hostname` |
+| 课程演示 | 仓库里的 `main.go` → `gitlab.example.com:/tmp` | 在 `gitlab.example.com` 上跑 `ls -ls /tmp` 与 `hostname` |
 
 两个设计要点：
 
@@ -160,7 +160,7 @@ steps:
 - name: deploy
   image: quay.io/honestbee/drone-kubernetes   # 境外源，国内建议先同步到内网仓库（见下方说明）
   settings:
-    kubernetes_server: https://10.0.7.100:6443
+    kubernetes_server: https://k8s.example.com:6443
     kubernetes_token: <ServiceAccount JWT，建议经 Secret 注入>
     namespace: default
     deployment: golang-deployment
@@ -173,7 +173,7 @@ steps:
 
 | 字段 | 值 | 说明 |
 | --- | --- | --- |
-| `kubernetes_server` | `https://10.0.7.100:6443` | kubeconfig 里的 apiserver 地址，协议 https + 端口 6443 |
+| `kubernetes_server` | `https://k8s.example.com:6443` | kubeconfig 里的 apiserver 地址，协议 https + 端口 6443 |
 | `kubernetes_token` | JWT | `kubectl create token drone` 产出；**课件为内联演示，生产必须 `from_secret`** |
 | `namespace` | `default` | 目标 Deployment 所在命名空间 |
 | `deployment` | `golang-deployment` | 现场演示用 `nginx-deployment`，按实际目标改 |
@@ -231,7 +231,7 @@ steps:
       - hostname                  # 验证执行的是哪台机
 ```
 
-课程第 119 次构建的现场证据链：克隆完成 → SCP 把 `main.go` 拷到 `10.0.7.30` 的 `/tmp` → SSH 执行 `ls -ls /tmp` 能看到 `main.go`、`hostname` 返回 `test`（目标机主机名）。**「拷完再验」是个好习惯**：`ls` 证明文件到了，`hostname` 证明命令发对了机器——两条输出都是排查「文件去哪了」时的第一手证据。
+课程第 119 次构建的现场证据链：克隆完成 → SCP 把 `main.go` 拷到 `gitlab.example.com` 的 `/tmp` → SSH 执行 `ls -ls /tmp` 能看到 `main.go`、`hostname` 返回 `test`（目标机主机名）。**「拷完再验」是个好习惯**：`ls` 证明文件到了，`hostname` 证明命令发对了机器——两条输出都是排查「文件去哪了」时的第一手证据。
 
 ### 3.3 实例三：钉钉 + Webhook 报警
 
@@ -279,7 +279,7 @@ steps:
 5. **权限最小化**：教学绑定 admin 集群角色；生产给「仅 patch 目标 namespace 的 deployment」的 Role，并把 SA、RoleBinding 的创建纳入 Terraform/Ansible 管理，避免「谁手动创建的没人记得」。
 6. **SCP/SSH 优先密钥而非密码**：`appleboy` 两插件均支持 SSH key（`ssh_key` 经 Secret 注入），免密且可轮换；密码方式在等保/审计场景直接不合格。
 7. **`command_timeout` 必配**：远程脚本可能卡死（等输入、网络分区、对端 hang），不配超时等于让流水线陪绑。
-8. **报警降噪**：钉钉/Webhook 步骤配合 `when: status: [failure, changed]` 之类条件（#48），只在异常或状态变化时发；`debug: true` 常开——报警通道自身的故障必须是可见的。
+8. **报警降噪**：钉钉/Webhook 步骤配合 `when: status: [failure,changed]` 之类条件（#48），只在异常或状态变化时发；`debug: true` 常开——报警通道自身的故障必须是可见的。
 9. **S3 插件按云平台裁剪**：非 AWS 环境不装；国内云用 OSS/COS 的 CLI 走 SSH 步骤即可，别为了「课程讲了」而引入用不上的插件。
 
 ## 五、报错排查表
@@ -329,6 +329,5 @@ deploy 插件只改 Deployment 的 image 引用，不负责镜像拉取权限。
 | `code/7-Drone/drone.yml-ssh与scp插件使用` | 2.3、3.2 节 | `appleboy/drone-scp` 拷 `main.go` 到目标机 `/tmp` + `appleboy/drone-ssh` 执行 `ls` / `hostname`，`command_timeout: 2m` |
 | `code/7-Drone/drone.yml-钉钉与企业微信报警插件使用` | 2.5、3.3 节 | `lddsb/drone-dingtalk-message`（token + markdown）与 `plugins/webhook`（debug: true、企业微信 URL、`{{ repo.owner }}` 等模板变量） |
 
-**技术点总结**：本片把 Drone 流水线的「最后一公里」补齐——**部署侧**，`honestbee/drone-kubernetes` 插件以「改 Deployment 镜像 tag」这一最轻动作接入 K8s：server/token 解决鉴权（SA + 角色绑定 + `create token` 签 JWT，注意默认时效与最小权限），namespace/deployment/container 定位目标，repo/tag 与 kaniko 严格同源保证「部署的正是刚构建的」；讲稿现场两个坑——repo 缺仓库地址导致验证失败（补齐重试即过）、Deployment 更新成功但 Pod 拉不到私有镜像（imagePullSecrets 缺失，部署成功≠服务可用）。**分发侧**，`appleboy/drone-scp` / `drone-ssh` 覆盖非 K8s 环境：SCP 送产物（source→target）、SSH 跑脚本（host 列表 + command_timeout 防卡死），密码密钥走 Secret；S3 插件限 AWS 场景，非 AWS 云用 OSS/COS CLI 替代。**通知侧**，钉钉插件仅 token + type 两项，Webhook 插件靠 urls/content_type/template 推送任意 JSON 接口，模板变量 `{{ repo.owner }}`/`{{ repo.name }}`/`{{ build.status }}` 交代构建结果，**`debug: true` 是必须常开的自诊断开关**——报警失败必须可见。至此 Drone 单点插件全部讲完，下一篇进入七步流水线项目实战与三大 CI 工具横评。
+**技术点总结**：本片把 Drone 流水线的「最后一公里」补齐——**部署侧**，`honestbee/drone-kubernetes` 插件以「改 Deployment 镜像 tag」这一最轻动作接入 K8s：server/token 解决鉴权（SA + 角色绑定 + `create token` 签 JWT，注意默认时效与最小权限），namespace/deployment/container 定位目标，repo/tag 与 kaniko 严格同源保证「部署的正是刚构建的」；讲稿现场两个坑——repo 缺仓库地址导致验证失败（补齐重试即过）、Deployment 更新成功但 Pod 拉不到私有镜像（imagePullSecrets 缺失，部署成功≠服务可用）。**分发侧**，`appleboy/drone-scp` / `drone-ssh` 覆盖非 K8s 环境：SCP 送产物（source→target）、SSH 跑脚本（host 列表 + command_timeout 防卡死），密码密钥走 Secret；S3 插件限 AWS 场景，非 AWS 云用 OSS/COS CLI 替代。**通知侧**，钉钉插件仅 token + type 两项，Webhook 插件靠 urls/content_type/template 推送任意 JSON 接口，模板变量 `{{ repo.owner }}`/`{{ repo.name }}`/`{{ build.status }}` 交代构建结果，**`debug: true` 是必须常开的自诊断开关**——报警失败必须可见。至此 Drone 单点插件全部讲完，下面进入七步流水线项目实战与三大 CI 工具横评。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

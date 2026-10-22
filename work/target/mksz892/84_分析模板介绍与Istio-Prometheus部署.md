@@ -1,4 +1,4 @@
-# 分析模板介绍与 Istio / Prometheus 部署：流量分析的观测底座
+# 84. 分析模板介绍与 Istio / Prometheus 部署：流量分析的观测底座
 
 ## 纲要
 
@@ -46,6 +46,8 @@ Istio 的四大能力课程也点了名：「连接、保护、控制和观测�
 
 ```bash
 # ① 下载 istioctl 客户端
+# ⚠️ 管道执行前先下载审阅：curl -L -o getistio https://istio.io/downloadIstio && less getistio
+# 以下为课程演示的一键方式；生产环境审阅后执行，并记录 istio 版本（下方 cd 的 1.22.2 即锁定版本）
 curl -L https://istio.io/downloadIstio | sh -
 cd istio-1.22.2
 
@@ -217,4 +219,3 @@ count = 总共分析几次（观察窗口大小）；failureLimit = 允许失败
 
 **技术点总结**：流量分析给发布配了位「指标裁判」——Istio sidecar 捕获全部流量（请求量/错误率），Prometheus 存指标供 PromQL 查询，Argo Rollout 拿「非 5xx 请求 ÷ 总请求 ≥ 0.95」的结果决定放行或回滚。落地三关键：**命名空间注入标签**（数据产出的前提）、**空数据三保险** `len(result)==0 or result[0]!=result[0] or result[0]>=0.95`（低流量服务的生命线）、**startingStep 卡在第一级放量后**（分析介入的时机）。failureLimit 定容忍度（1 严格 / 3 防毛刺），count×interval 定观察窗（3×60s = 3 分钟）——判据、节奏、容错三参数配齐，自动发布才敢无人值守。
 
-相关度：97%。是否需要继续：[是]。代码是否可运行：[是]。

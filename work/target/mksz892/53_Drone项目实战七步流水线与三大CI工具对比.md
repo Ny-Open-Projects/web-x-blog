@@ -1,4 +1,4 @@
-# Drone 项目实战：七步流水线串联与三大 CI 工具对比（含本章总结）
+# 53. Drone 项目实战：七步流水线串联与三大 CI 工具对比（含本章总结）
 
 ## 纲要
 
@@ -15,7 +15,7 @@
 
 本节的七步项目实战就是这张考卷。课程原话：每个步骤其实都是我们前面所学习过的内容，**很多插件都是内置的，并不需要我们再自己去搞**。这句话道破了 Drone 的设计哲学——**流水线的复杂度不在插件，在编排**。
 
-同时本节还对三大 CI 工具（Jenkins / Tekton / Drone）做横评收尾，并给出 Drone 章节的九个重点清单。学完本节，CI 篇正式收官，下一篇（#54）进入持续交付（CD）的 KubeVela。
+同时本节还对三大 CI 工具（Jenkins / Tekton / Drone）做横评收尾，并给出 Drone 章节的九个重点清单。学完本节，CI 篇正式收官，下面（#54）进入持续交付（CD）的 KubeVela。
 
 ## 二、核心概念与原理
 
@@ -149,7 +149,7 @@ steps:
 - name: deploy                   # ⑤ 部署到 K8s
   image: quay.io/honestbee/drone-kubernetes
   settings:
-    kubernetes_server: https://10.0.7.100:6443
+    kubernetes_server: https://k8s.example.com:6443
     kubernetes_token: <ServiceAccount JWT，Secret 注入>
     namespace: default
     deployment: nginx-deployment
@@ -160,7 +160,7 @@ steps:
 - name: 接口测试                  # ⑥ 借道 Jenkins 调 MeterSphere
   image: appleboy/drone-jenkins
   settings:
-    url: http://10.0.7.101:32000
+    url: http://node1.example.com:32000
     user: test
     token: <Jenkins API token，Secret 注入>
     job: aa
@@ -197,7 +197,7 @@ steps:
 4. **`use_node_version` 与项目技术栈对齐**：sonar 插件扫描用的 Node 版本要匹配被扫项目（课程 16.18.1），否则 scanner 自身先崩。
 5. **分支策略配触发器（#48）**：实战流水线应配「main/test/PR 触发、其他不触发」，否则每个 feature 分支的提交都跑一遍七步，队列堵死——课程点名的「用得最多」的配置。
 6. **并行只加在无依赖步骤间**：②③④⑤⑥⑦ 是强顺序链，没有可并行的；可并行的典型是「多个语言的单测」「多个镜像的构建」（#49）——并行是压缩手段，不是默认姿势。
-7. **报警接 when 条件**：`when: status: [failure, changed]` 之类，只报异常与状态翻转；全成功也报的流水线，三天后群里就没人看了。
+7. **报警接 when 条件**：`when: status: [failure,changed]` 之类，只报异常与状态翻转；全成功也报的流水线，三天后群里就没人看了。
 8. **CI 工具选型先查「子组」**：用 Drone 前确认项目不在 GitLab 子组下；已深陷子组的团队，直接评估 Jenkins/Tekton，别硬拧。
 
 ## 五、报错排查表
@@ -245,6 +245,5 @@ Drone 生态未覆盖但 Jenkins 已有的能力，课程场景是 MeterSphere �
 | `code/7-Drone/drone.yml-项目实战` | 2.1、三 节 | 七步实战流水线：clone → sonar-scanr → qualityGateStatus（curl+awk，非 OK `exit 1`）→ kaniko → deploy（nginx-deployment）→ 接口测试（drone-jenkins 调 job `aa`）→ 企业微信 webhook 报警；含 `pull: if-not-exsits` 原文拼写 |
 | `code/7-Drone/drone.yml-Jenkins插件使用` | 2.2、三 节 | 极简单步骤桥接样例：`clone.disable: true` + `appleboy/drone-jenkins` 调 Jenkins job `jenkins-kaniko`，演示「Drone 只触发、Jenkins 干活」的过渡模式 |
 
-**技术点总结**：本篇是 Drone 章节的「总装 + 横评 + 收尾」。**七步流水线**（克隆 → sonar 扫描 → 质量阀 → kaniko 构建 → K8s 部署 → 接口测试 → 企业微信报警）的全部零件都在前八篇讲过，编排逻辑体现为三条铁序——质量校验在构建前（不干净的代码不进制品库）、测试在部署后（测真实环境）、报警在最后（报最终态）；质量阀用 `curl` + awk 轮询 SonarQube 的 `qualityGateStatus`，与 Jenkins 的 `waitForQualityGate` 回调机制殊途同归；接口测试借道 `drone-jenkins` 桥接 MeterSphere，是「Drone 做调度入口、Jenkins 做遗留适配层」的过渡范式，另有单步骤极简版演示纯触发模式。**三大 CI 工具横评**结论：Jenkins 是老将（历史悠久、基本每家公司都用、生态最大），Tekton 是 K8s 原生派（不用 K8s 或用不熟 K8s 的团队玩不转），Drone 是轻量派（yml 进仓库即构建、不分配权限不建项目）但**硬伤是不支持 GitLab 子组**——选型第一排查项；不用 K8s 选 Jenkins，用 K8s 在 Tekton/Drone 间按熟悉度选，最终看企业环境、项目形态与团队熟悉度三者的匹配。**本章九重点**：kubectl 客户端、触发器（用得最多：main/test/PR 触发）、Secret、环境变量、when、卷、并行、deployment 插件、sonar 插件——CI 篇到此收官，下一篇进入 CD 篇 KubeVela。
+**技术点总结**：本篇是 Drone 章节的「总装 + 横评 + 收尾」。**七步流水线**（克隆 → sonar 扫描 → 质量阀 → kaniko 构建 → K8s 部署 → 接口测试 → 企业微信报警）的全部零件都在前八篇讲过，编排逻辑体现为三条铁序——质量校验在构建前（不干净的代码不进制品库）、测试在部署后（测真实环境）、报警在最后（报最终态）；质量阀用 `curl` + awk 轮询 SonarQube 的 `qualityGateStatus`，与 Jenkins 的 `waitForQualityGate` 回调机制殊途同归；接口测试借道 `drone-jenkins` 桥接 MeterSphere，是「Drone 做调度入口、Jenkins 做遗留适配层」的过渡范式，另有单步骤极简版演示纯触发模式。**三大 CI 工具横评**结论：Jenkins 是老将（历史悠久、基本每家公司都用、生态最大），Tekton 是 K8s 原生派（不用 K8s 或用不熟 K8s 的团队玩不转），Drone 是轻量派（yml 进仓库即构建、不分配权限不建项目）但**硬伤是不支持 GitLab 子组**——选型第一排查项；不用 K8s 选 Jenkins，用 K8s 在 Tekton/Drone 间按熟悉度选，最终看企业环境、项目形态与团队熟悉度三者的匹配。**本章九重点**：kubectl 客户端、触发器（用得最多：main/test/PR 触发）、Secret、环境变量、when、卷、并行、deployment 插件、sonar 插件——CI 篇到此收官，下面进入 CD 篇 KubeVela。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

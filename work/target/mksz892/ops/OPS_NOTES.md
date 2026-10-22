@@ -145,3 +145,61 @@ grep -rn "10\.0\.7\." ./ || echo "OK: 无示例 IP 残留"
 ---
 
 **维护说明**：本附录随 90 篇博客一同维护。新增环境类问题请追加到对应章节，并同步更新主进度表。
+
+---
+
+## 附二 · 代码执行红线（v2 审计新增，2026-10-15）
+
+### 1. 教学代码占位符铁律：`<xxx>` 是 shell 重定向操作符
+
+`kubectl describe taskrun <name>` 照抄必报 `bash: syntax error near unexpected token 'newline'`——`<` `>` 被 bash 解析为输入重定向。**全库 16 个文件 43 处已统一变量化为 `$VAR`**（如 `$APP_NAME`/`$ROLLOUT`/`$GIT_USER`），既修了语法又把示例升级成生产脚本形态。后续新增内容一律遵守：
+
+```bash
+# ❌ 照抄报错
+vela adopt <deployment-name> <service-name> --apply --name <app-name>
+# ✅ 生产真身
+vela adopt $DEPLOY_NAME $SVC_NAME --apply --name $APP_NAME
+```
+
+自检命令（应输出 `OK: bash 块无裸尖括号占位符`，2026-10-15 实测通过）：
+
+```bash
+cd work/target/mksz892 && /Users/Wang/.workbuddy/binaries/python/envs/default/bin/python3 -c "
+import os, re
+bad = []
+for fn in sorted(os.listdir('.')):
+    if not fn.endswith('.md') or fn in ('_PROGRESS.md','_INDEX.md'): continue
+    lines = open(fn, encoding='utf-8').read().split('\n')
+    in_bash = False
+    for i, l in enumerate(lines):
+        if l.startswith('\`\`\`bash') or l.startswith('\`\`\`sh'): in_bash = True; continue
+        if in_bash and l.startswith('\`\`\`'): in_bash = False; continue
+        if in_bash and not l.strip().startswith('#'):
+            for ph in re.findall(r'<[A-Za-z一-龥][^<>\`\n]*>', l):
+                bad.append(f'{fn}:{i+1}: {ph}')
+print('\n'.join(bad) if bad else 'OK: bash 块无裸尖括号占位符')
+"
+```
+
+> 注意别用 grep 自查——mermaid 箭头 `-->` 会大量误报；必须用状态机只查 bash 块命令行。
+> Jenkins DSL / YAML 字段值里的 `<占位符>`（如 `msAccessKey: '<你的AccessKey>'`）在引号内合法，不在清洗范围。
+
+### 2. 代码块入库前四线校验（新内容必跑）
+
+```bash
+# bash 语法（最便宜，3 秒抓照抄必错）
+# yaml / json / groovy / bash 四线 + 17 类安全模式：跑 /tmp/audit_mksz892_code.py
+/Users/Wang/.workbuddy/binaries/python/envs/default/bin/python3 /tmp/audit_mksz892_code.py
+```
+
+判据：`bash_fail / yaml_fail / json_fail / groovy_fail` 全为 0；`sec_hits` 逐条过人工（P0 必须带生产提示，P1 确认是占位符或 from_secret 引用）。
+
+### 3. 生产边界提示的加注位置（不删演示命令）
+
+| 命令 | 提示加在哪 |
+| --- | --- |
+| `argocd login --insecure` | 命令块首行注释：仅限内网自签证书，生产配受信证书 |
+| kaniko `runAsUser: 0` | securityContext 内注释：镜像要求 root；PSS restricted 用 BuildKit rootless 或 SA 豁免 |
+| `curl ... \| bash/sh` | 前置注释：先下载审阅 + 锁版本 |
+| `image: xxx:latest` | 行尾注释：生产锁版本 tag |
+| 凭据类参数 | 用 flag 传参 + 提醒 shell history / ps 泄漏 |

@@ -1,4 +1,4 @@
-# Argo CD 概述、介绍与部署：GitOps 部署工具入门
+# 76. Argo CD 概述、介绍与部署：GitOps 部署工具入门
 
 ## 纲要
 
@@ -133,7 +133,7 @@ kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.pas
 
 ### 3.5 第五步：登录验证
 
-浏览器访问 `http://<节点IP>:<NodePort>`（课程环境 `http://10.0.7.101:31650`）→ 高级/继续访问 → 登录页 → 用户名 **admin** + 初始密码 → 登录成功，页面 UserInfo 显示 admin。
+浏览器访问 `http://<节点IP>:<NodePort>`（课程环境 `http://node1.example.com:31650`）→ 高级/继续访问 → 登录页 → 用户名 **admin** + 初始密码 → 登录成功，页面 UserInfo 显示 admin。
 
 > **安全第一步**：登录后立即改密码（#81 的 `argocd account update-password`），初始密码是公开文档里写明的，暴露在公网等于没锁门。
 
@@ -186,4 +186,3 @@ GitOps 是以 git 仓库为唯一事实源的部署模式：期望状态声明�
 
 **技术点总结**：Argo CD 是用于 K8s 的声明式 GitOps 部署工具——应用资源清单住进 git 仓库，Argo CD 轮询（默认 3 分钟，可 webhook 加速）感知变化并自动同步到集群，人只碰 git、不碰集群。部署五步：命名空间 → apply 安装清单 → CLI → NodePort 暴露 → 初始密码登录（第一件事改密）。它的能力边界同样清晰：**只做 CD 不做 CI**，与 Jenkins/Tekton 的接缝是「git 里那一行 image tag」——这条接缝在 #89 综合实战会完整跑通。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

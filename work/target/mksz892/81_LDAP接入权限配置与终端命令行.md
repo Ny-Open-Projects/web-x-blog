@@ -1,4 +1,4 @@
-# Argo CD LDAP 接入、权限配置与终端命令行
+# 81. Argo CD LDAP 接入、权限配置与终端命令行
 
 ## 纲要
 
@@ -52,7 +52,7 @@ data:
             - userAttr: DN
               groupAttr: uniqueMember
             nameAttr: cn
-  url: https://10.0.7.101:30295       # Argo CD 访问地址
+  url: https://node1.example.com:30295       # Argo CD 访问地址
 ```
 
 三个匹配块各司其职：**userSearch** 定「哪些人是用户」（baseDN 在 `ou=user`）、**groupSearch** 定「哪些组的人能登录」（filter 过滤 `cn=argocd`）、**userMatchers** 定「用户怎么绑到组」（DN 对 uniqueMember）。
@@ -73,7 +73,7 @@ kubectl -n argocd patch secrets argocd-secret --patch \
 > ```bash
 > # macOS
 > kubectl -n argocd patch secrets argocd-secret --patch \
->   "{\"data\":{\"dex.ldap.bindPW\":\"$(echo your-password | base64)\"}}"
+> "{\"data\":{\"dex.ldap.bindPW\":\"$(echo your-password | base64)\"}}"
 > ```
 > 折行的 base64 值带换行符，Secret 解码后凭据会错——这是「配了却登不上」的常见暗坑。
 
@@ -109,7 +109,7 @@ g, testblue, role:org-2             # 自定义角色：sync+update+log+exec
 ```
 
 - **`p` 行 = 策略条目（policy）**：`role:<名字>` + 资源类型 + 动作 + 对象 + `allow/deny`；
-- **`g` 行 = 主条目（group binding）**：`<LDAP组名>, role:<角色名>`——组内用户继承角色权限。
+- **`g` 行 = 主条目（group binding）**：`<LDAP组名>,role:<角色名>`——组内用户继承角色权限。
 
 ### 3.2 资源、动作与对象
 
@@ -136,7 +136,8 @@ g, testblue, role:org-2             # 自定义角色：sync+update+log+exec
 所有 `argocd app` 命令的前置是**登录**：
 
 ```bash
-argocd login 10.0.7.101:32471 --insecure --username admin
+# ⚠️ --insecure 跳过 TLS 校验，仅限内网自签证书的演示环境；生产应为 Argo CD 配置受信证书后去掉该参数
+argocd login node1.example.com:32471 --insecure --username admin
 ```
 
 之后覆盖日常全部操作（课件 `app-cli.txt` 清单）：
@@ -174,7 +175,7 @@ argocd login 10.0.7.101:32471 --insecure --username admin
 | LDAP 用户加进组仍无权 | 组类型选错 / 过滤器不匹配 | 组用 groupOfUniqueNames；核对 `(cn=argocd)` 与 nameAttr |
 | bindDN/PW 报错 | secret 没 patch / base64 错 | 用 patch 命令注入，核对 base64 编码 |
 | 删除/更新按钮报权限不足 | RBAC 没配对应动作 | p 行加 delete/update + allow |
-| 终端入口点了进不去 | 没配 exec 策略 | p 行加 `exec, *, *, allow` 并绑组 |
+| 终端入口点了进不去 | 没配 exec 策略 | p 行加 `exec,*,*,allow` 并绑组 |
 | CLI 命令报无权限 | 没登录 | `argocd login <ip:port> --insecure` |
 
 ## 七、面试考点与追问
@@ -186,7 +187,7 @@ argocd login 10.0.7.101:32471 --insecure --username admin
 认证（能登录）与授权（能看什么）分离——RBAC 默认零权限。要在 `argocd-rbac-cm` 里用 `g` 行把 LDAP 组绑到带权限的角色。
 
 **Q3：RBAC 的 p 行与 g 行分别是什么？**
-p 行定义角色权限：`p, role:xxx, <资源>, <动作>, <对象>, allow`；g 行做组绑定：`g, <LDAP组>, role:xxx`。组内用户继承角色权限。
+p 行定义角色权限：`p,role:xxx,<资源>,<动作>,<对象>,allow`；g 行做组绑定：`g,<LDAP组>,role:xxx`。组内用户继承角色权限。
 
 **Q4：RBAC 支持哪些资源与动作？对象怎么限定范围？**
 资源：applications/clusters/projects/applicationsets/exec 等；动作：get/create/delete/sync/update 等；对象 `*` 表示全部，或 `项目名/应用名` 限定到具体应用。
@@ -210,4 +211,3 @@ p 行定义角色权限：`p, role:xxx, <资源>, <动作>, <对象>, allow`；g
 
 **技术点总结**：Argo CD 的账号体系 = **Dex 管认证 + RBAC 管授权 + CLI 管脚本**三件套。LDAP 接入三部曲：目录建组（groupOfUniqueNames）→ `argocd-cm` 配 dex.config（userSearch/groupSearch/userMatchers 三匹配）→ 重启 dex-server 与 argocd-server；凭据走 `argocd-secret` patch，配置凭据分离。RBAC 两行式：p 行定「角色能对什么资源做什么动作」（application/cluster/project/exec × get/delete/sync/update，对象 `*` 或 `项目/应用`），g 行把 LDAP 组绑上去——认证成功零权限是常态，授权必须显式配。exec 授权是容器终端的钥匙，CLI 登录是脚本化的门票——三件事齐了，Argo CD 才从 demo 变成团队基础设施。
 
-相关度：97%。是否需要继续：[是]。代码是否可运行：[是]。

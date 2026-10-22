@@ -1,4 +1,4 @@
-# CUE 基础语法与自定义扩展模板：从看懂 KubeVela 底层到自己写模块
+# 64. CUE 基础语法与自定义扩展模板：从看懂 KubeVela 底层到自己写模块
 
 ## 纲要
 
@@ -30,8 +30,8 @@
 | **浮点 float** | `a: 1.5` | `a: 1.5` |
 | **整数 int** | `b: 1` | `b: 1` |
 | **字符串 string** | `c: "..."`（**必须双引号**） | `c: "blahblahblah"` |
-| **数组 array** | `d: [1, 2, 3]`（中括号、逗号分隔） | `d: [1, 2, 3, 1, 2, 3, 1, 2, 3]` |
-| **结构体 struct** | `f: { key: value, ... }`（花括号、key-value 对） | `f: { a: 1.5, b: 1, d: [1,2,3], g: { h: "abc" } }` |
+| **数组 array** | `d: [1,2,3]`（中括号、逗号分隔） | `d: [1,2,3,1,2,3,1,2,3]` |
+| **结构体 struct** | `f: { key: value,... }`（花括号、key-value 对） | `f: { a: 1.5,b: 1,d: [1,2,3],g: { h: "abc" } }` |
 | **布尔 bool** | `e: true / false` | `e: true` |
 
 两个特殊成员：
@@ -201,11 +201,11 @@ j: null
 | `a: 1.5` | 浮点 | 「左边是变量名，然后通过冒号分割，右边是它的值」 |
 | `b: 1` | 整数 | int 类型 |
 | `c: "blahblahblah"` | 字符串 | 「字符串类型需要用双引号给它引起来」 |
-| `d: [1, 2, 3, ...]` | 数组 | 「右边通过中括号括起来，数值通过逗号分割」 |
+| `d: [1,2,3,...]` | 数组 | 「右边通过中括号括起来，数值通过逗号分割」 |
 | `e: true` | 布尔 | 「包括有 true 或者 false」 |
 | `f: { ... }` | 结构体 | 「通过花括号括起来，里面的内容是 key-value」——且可嵌套（`g: { h: "abc" }`） |
 | `j: null` | 空类型 | 「则为空类型」 |
-| `#abc: { ... }` | 自定义类型 | 「变量名前面加上一个井 # 代表自定义类型，花括号里面是我们的类型定义」——字段可继续声明基础类型（x: int）或嵌套结构（z: { a: float, b: bool }） |
+| `#abc: { ... }` | 自定义类型 | 「变量名前面加上一个井 # 代表自定义类型，花括号里面是我们的类型定义」——字段可继续声明基础类型（x: int）或嵌套结构（z: { a: float,b: bool }） |
 
 ### 3.2 `my-comp.cue`：YAML 直转出来的「定型模块」完整引用
 
@@ -469,7 +469,7 @@ vela def list --type component | grep my-comp   # 确认已删：找不到即删
 A：KubeVela 的组件、运维特征、策略、流水线底层全部用 CUE 实现。会 CUE 就能在默认模板不满足需求时改进它、或自定义新模块——比如默认 gateway 没有注解参数，可以自己加。
 
 **Q2：CUE 的基础类型有哪些？自定义类型怎么标？**
-A：float/int/string/array/struct/bool，外加 null 空类型；自定义类型在变量名前加 `#`（如 `#abc: { x: int, y: string }`）。所有定义统一骨架：左变量名、冒号、右值。
+A：float/int/string/array/struct/bool，外加 null 空类型；自定义类型在变量名前加 `#`（如 `#abc: { x: int,y: string }`）。所有定义统一骨架：左变量名、冒号、右值。
 
 **Q3：CUE 里「选填变量」「默认值」「条件判断」分别怎么写？**
 A：选填用问号 `a?: int`；默认值用星号 `a: *1 | int`（类型联合里 `*` 标记默认）；条件用 `if`，判空写 `!= _|_`（`_|_` 是底类型/空），如 `if param.givenName != _|_ { annotations["x"] = param.givenName }`。
@@ -484,7 +484,7 @@ A：转出来的模块把 image、port 全部写死，`parameter: {}` 为空—�
 A：看 `parameter` 块——为空则定型不可复用；有参数（且参数合理使用 `*默认值`、`?` 选填）则可灵活调用。参数就是模块的 API 契约。
 
 **Q7：给默认 gateway 模块加注解功能的完整思路？**
-A：`vela def edit gateway` 进入编辑 → 在 parameter 加可选参数 `annotations?: [string]: string` → 在模板输出里加「判空 + for 循环」：`if parameter.annotations != _|_ { for k, v in parameter.annotations { "\(k)": v } }` → 业务 YAML 的 gateway 特征里传 annotations 键值对 → `vela up` 部署，Ingress 上可见注解。核心技巧：**只加可选参数，不动原有必填参数，保证向后兼容**。
+A：`vela def edit gateway` 进入编辑 → 在 parameter 加可选参数 `annotations?: [string]: string` → 在模板输出里加「判空 + for 循环」：`if parameter.annotations != _|_ { for k,v in parameter.annotations { "\(k)": v } }` → 业务 YAML 的 gateway 特征里传 annotations 键值对 → `vela up` 部署，Ingress 上可见注解。核心技巧：**只加可选参数，不动原有必填参数，保证向后兼容**。
 
 ## 📎 文本↔代码关联
 
@@ -495,4 +495,3 @@ A：`vela def edit gateway` 进入编辑 → 在 parameter 加可选参数 `anno
 
 **技术点总结**：CUE 是 KubeVela 的「母语」——组件、特征、策略、流水线皆由它写成，读懂它就拿到了「改造默认模板」的钥匙。语法层六类基础类型共用一个骨架（变量名: 值），四个进阶语法撑起模块化：**`*默认值 | 类型`、`?` 选填、`if` 条件、for 遍历**；工程层 `vela def` 七件套（init/apply/vet/list/get/edit/delete）覆盖自定义模块全生命周期；认知层一条分水岭——**`parameter: {}` 是定型模具，`parameter` 有参才是活模板**，YAML 直转的模块必须把写死的 image/port 改成传参才能复用。课程终极实战（gateway 加注解）把全篇串成一条线：**加可选参数（`annotations?:`）→ 判空（`!= _|_`）→ for 循环注入（`"\(k)": v`）→ 业务侧传参 → Ingress 生效**。生产三纪律：只加不改保兼容、改造先备份、`.cue` 源文件进 git 并过 `vela def vet` 卡点。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

@@ -1,4 +1,4 @@
-# KubeVela 项目实战与总结：GitOps 交付 golang 应用与全章知识收束
+# 65. KubeVela 项目实战与总结：GitOps 交付 golang 应用与全章知识收束
 
 ## 纲要
 
@@ -14,7 +14,7 @@
 
 本章实战给出 KubeVela 的**终极交付形态——GitOps**：先把 golang 应用的 YAML 提交进 git 仓库，再部署一个 GitOps 监控应用。之后发生的一切都不需要你：仓库文件有变动 → 监控应用每分钟巡检 → 发现变动 → 自动把最新 YAML 部署到集群。**你唯一的动作是 `git commit & push`。**
 
-这就是「声明式交付」的完全体：**git 仓库是事实源，集群是被拉齐的对象，平台是永不停歇的 reconciliation 循环**。本篇把 golang 项目的实战走完，再对整个第 8 章做知识收束。
+这就是「声明式交付」的完全体：**git 仓库是事实源，集群是被拉齐的对象，平台是永不停歇的 reconciliation 循环**。本篇把 golang 项目的实战走完，再对整个前述做知识收束。
 
 ## 二、核心概念与原理
 
@@ -303,7 +303,7 @@ A：suspend 暂停等待人工审核，43200 秒（12 小时）内没人审核�
 **Q6：本章总结的三个重点掌握内容是什么？**
 A：① 熟悉内置组件/特征/策略/工作流（用得最多：webservice、scaler 副本、topology 部署集群、suspend+deploy）；② 能看懂 CUE 模板并改进（默认不满足就改，或自定义后引用）；③ 熟练 GitOps 交付（git 仓库管 YAML，提交即部署）。
 
-**Q7：KubeVela 第 8 章整体画一张「能力地图」，你怎么组织？**
+**Q7：KubeVela 前述整体画一张「能力地图」，你怎么组织？**
 A：四层——组件（定义形态：webservice/worker/k8s-objects 等）、特征（定义运维：scaler/gateway/sidecar/注解等）、策略（定义目标：topology/override）、工作流（定义节奏：deploy/suspend/notification/vela-cli）；三条交付路径——手动（vela up/UI）、触发（Jenkins curl）、GitOps（仓库巡检）；两重治理——报警（notification 双分支）与权限（平台角色 × 项目角色）；一个底座——CUE（一切模块的母语，可读可改可自定义）。
 
 ## 📎 文本↔代码关联
@@ -316,4 +316,3 @@ A：四层——组件（定义形态：webservice/worker/k8s-objects 等）、�
 
 **技术点总结**：本章是 KubeVela 篇的收官之战——**GitOps 项目实战**把「提交 git 即部署」走通：监控应用（kustomize）盯仓库、业务 YAML（go-deploy.yaml）自动落地、版本时间戳与 git 提交互为审计；被交付的实战文件是**配置全家桶**：三探针（存活/就绪/启动）+ resource 双区（requests/limits）+ suspend 审核（43200s 超时保险）+ deploy 按策略部署，单文件覆盖运维全要素。一条铁律必须刻进运维手册：**GitOps 删除走 git 不点控制台**——删前台应用会被分钟级拉回，彻底删除要么删监控应用、要么删仓库文件。回看全章，KubeVela 的能力版图至此完整：四层模型（组件/特征/策略/工作流）× 三条交付路径（手动/触发/GitOps）× 双重治理（报警/权限）× 一个 CUE 底座——**会查（vela show/def）、会写（OAM YAML）、会改（CUE 模板）、会自动（GitOps）**，这正是课程总结里「重点掌握」的四字真言。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

@@ -1,4 +1,4 @@
-# Zadig 部署于 K8s 集群：版本矩阵、依赖准备与一键安装实战
+# 67. Zadig 部署于 K8s 集群：版本矩阵、依赖准备与一键安装实战
 
 ## 纲要
 
@@ -9,9 +9,9 @@
 - **成功的唯一标准**：`kubectl -n zadig get pod` 全部 **Running**；验证用 `IP:32760` 访问，初始密码在环境变量里
 - **install.sh 参数全解**：`EMAIL`/`PASSWORD`/`ENCRYPTION_KEY`/`STORAGE_SIZE` 等十余个变量，`DRY_RUN` 先彩排再真装
 
-## 一、场景引入：交付平台还没装上， pipeline 无从谈起
+## 一、场景引入：交付平台还没装上，pipeline 无从谈起
 
-上一节明确了 Zadig 是「一个平台打通构建、测试、交付」的云原生 CD 系统。平台再好，**先得把它装进集群**。Zadig 不是单机软件——它由 API Server、Dashboard、MySQL、MongoDB、MinIO 等十多个组件构成，全部以 K8s 工作负载形式运行。装它本质上是一次**中型分布式系统的落地**。
+前面明确了 Zadig 是「一个平台打通构建、测试、交付」的云原生 CD 系统。平台再好，**先得把它装进集群**。Zadig 不是单机软件——它由 API Server、Dashboard、MySQL、MongoDB、MinIO 等十多个组件构成，全部以 K8s 工作负载形式运行。装它本质上是一次**中型分布式系统的落地**。
 
 这也是很多团队第一次装 Zadig 卡壳的原因：脚本明明跑了，页面打不开；Pod 起了，一半 CrashLoopBackOff。根因几乎都绕不开两件事——**前置版本不达标**、**依赖组件（数据库/存储）没就绪**。本篇按课程实操顺序，把「版本体检 → 依赖部署 → 环境变量 → 一键安装 → 验证」五步一次讲透。
 
@@ -22,9 +22,9 @@
 ```mermaid
 flowchart TB
     subgraph EXT["集群外依赖"]
-        NFS["NFS 服务器<br/>10.0.7.11:/data/nfs/minio"]
-        MYSQL[("MySQL ≥ 5.7<br/>10.0.7.30:3306")]
-        MONGO[("MongoDB ≥ 3.4<br/>10.0.7.30:27017")]
+        NFS["NFS 服务器<br/>nfs.example.com:/data/nfs/minio"]
+        MYSQL[("MySQL ≥ 5.7<br/>gitlab.example.com:3306")]
+        MONGO[("MongoDB ≥ 3.4<br/>gitlab.example.com:27017")]
     end
     subgraph ZADIG["Zadig 命名空间（-n zadig）"]
         APIS["zadig-apiserver"]
@@ -58,7 +58,7 @@ flowchart TB
 | **MongoDB** | **≥ 3.4** | 低版本缺少 Zadig 依赖的聚合/索引能力 |
 | **MySQL** | **≥ 5.7** | 字符集/JSON 字段支持不足，建表失败 |
 
-课程实操环境：K8s **1.25**（在支持区间内），MySQL 与 MongoDB 均跑在 `10.0.7.30`，端口分别映射 **3306** 与 **27017**。
+课程实操环境：K8s **1.25**（在支持区间内），MySQL 与 MongoDB 均跑在 `gitlab.example.com`，端口分别映射 **3306** 与 **27017**。
 
 > **生产提示**：上限 1.26 是硬约束——K8s 1.27+ 移除了部分 Zadig 1.18 依赖的 Beta API。升级集群前先核对 Zadig 版本兼容矩阵，别让「集群先行、平台后到」把路堵死。
 
@@ -84,13 +84,13 @@ install.sh 里 `ZADIG_VERSION=1.18.0` 不是随意写的，课程专门解释了
 
 ### 3.1 第一步：docker-compose 部署 MySQL 与 MongoDB
 
-课程把两个数据库放在 `10.0.7.30` 的 `docker-mysql-mongodb` 目录，用一份 `docker-compose.yaml` 同时起两个服务：
+课程把两个数据库放在 `gitlab.example.com` 的 `docker-mysql-mongodb` 目录，用一份 `docker-compose.yaml` 同时起两个服务：
 
 ```yaml
 version: "3"
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:8.0                            # 生产锁版本：不要用 latest，明确大版本便于复现与升级窗口管理
     environment:
       MYSQL_ROOT_PASSWORD: "请替换为强密码"      # root 密码
       MYSQL_DATABASE: zadig                      # Zadig 业务库
@@ -119,17 +119,17 @@ docker compose up -d
 ss -lntp | grep -E '3306|27017'
 ```
 
-**连通性必须跨机验证**——这是最容易被跳过、又最致命的一步。 Zadig 装在 `10.0.7.100`（master 节点），数据库在 `10.0.7.30`，跨主机网络不通的话，Zadig  Pod 会反复重启且日志只有连接超时：
+**连通性必须跨机验证**——这是最容易被跳过、又最致命的一步。 Zadig 装在 `k8s.example.com`（master 节点），数据库在 `gitlab.example.com`，跨主机网络不通的话，Zadig Pod 会反复重启且日志只有连接超时：
 
 ```bash
-# 在 Zadig 所在 master 节点（10.0.7.100）上测试
-telnet 10.0.7.30 3306      # MySQL
-telnet 10.0.7.30 27017     # MongoDB
+# 在 Zadig 所在 master 节点（k8s.example.com）上测试
+telnet gitlab.example.com 3306      # MySQL
+telnet gitlab.example.com 27017     # MongoDB
 ```
 
 ### 3.2 第二步：部署 MinIO 持久化 PV
 
-Zadig 内置 MinIO 组件存构建产物，它需要一块持久化存储。课程用 NFS 提供 PV——`10.0.7.11` 上已准备好 `/data/nfs/minio` 目录，直接应用声明：
+Zadig 内置 MinIO 组件存构建产物，它需要一块持久化存储。课程用 NFS 提供 PV——`nfs.example.com` 上已准备好 `/data/nfs/minio` 目录，直接应用声明：
 
 ```yaml
 # minio-pv.yaml
@@ -145,7 +145,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain   # 回收策略：保留数据
   nfs:
     path: /data/nfs/minio           # NFS 服务器上的路径
-    server: 10.0.7.11               # NFS 服务器地址
+    server: nfs.example.com               # NFS 服务器地址
 ```
 
 ```bash
@@ -160,30 +160,30 @@ kubectl get pv minio-pv
 | `capacity.storage` | `20Gi` | 构建产物容量，微服务团队 20G 起步，镜像仓库另算 |
 | `accessModes` | `ReadWriteOnce` | MinIO 单实例挂载，RWO 足够；多副本不行 |
 | `persistentVolumeReclaimPolicy` | `Retain` | **删 PV 不删数据**——构建产物是审计资产，误删不可逆，必须 Retain |
-| `nfs.server` / `nfs.path` | `10.0.7.11:/data/nfs/minio` | 目录需提前存在且权限开放；NFS 版本与 K8s 节点挂载参数匹配 |
+| `nfs.server` / `nfs.path` | `nfs.example.com:/data/nfs/minio` | 目录需提前存在且权限开放；NFS 版本与 K8s 节点挂载参数匹配 |
 
 > **坑点预警**：PV 的 `Retain` 与 Pod 重建后的**重新绑定**是两回事。PV 已存在且 Available，Zadig 的 PVC 会自动绑定；若 PV 被错误释放成 `Failed`，需手工清理 claimRef 才能重新绑定。
 
 ### 3.3 第三步：配置环境变量
 
-在 Zadig 所在 master 节点（`10.0.7.100`）导出安装参数：
+在 Zadig 所在 master 节点（`k8s.example.com`）导出安装参数：
 
 ```bash
 # Zadig 访问入口：IP + PORT 二选一（或 DOMAIN）
-export IP=10.0.7.101            # NodePort 对外暴露的节点 IP
+export IP=node1.example.com            # NodePort 对外暴露的节点 IP
 export PORT=32760               # 对外暴露端口
 export EMAIL="admin@example.com"     # 初始管理员邮箱
 export PASSWORD="请替换为强密码"       # 初始管理员密码（课程环境为 zadig）
 
 # 外置数据库连接
-export MYSQL_HOST=10.0.7.30
+export MYSQL_HOST=gitlab.example.com
 export MYSQL_PORT=3306
 export MYSQL_USERNAME=root
 export MYSQL_PASSWORD="请替换"
-export MONGO_URI="mongodb://用户名:密码@10.0.7.30:27017/zadig?authSource=admin"
+export MONGO_URI="mongodb://用户名:密码@gitlab.example.com:27017/zadig?authSource=admin"
 ```
 
-安装完成后即可通过 `http://10.0.7.101:32760` 访问 Zadig。
+安装完成后即可通过 `http://node1.example.com:32760` 访问 Zadig。
 
 ### 3.4 第四步：一键安装
 
@@ -211,7 +211,7 @@ kubectl -n zadig get pod
 # 刚装完 minio 相关 Pod 可能短暂 pending，PVC 绑定后转 Running
 ```
 
-再打开浏览器访问 `http://10.0.7.101:32760`，用 `EMAIL`/`PASSWORD` 登录——能看到 Dashboard 即部署成功。
+再打开浏览器访问 `http://node1.example.com:32760`，用 `EMAIL`/`PASSWORD` 登录——能看到 Dashboard 即部署成功。
 
 ## 四、install.sh 参数全解（生产必读）
 
@@ -238,7 +238,7 @@ kubectl -n zadig get pod
 1. **版本矩阵先于一切**：K8s 1.16~1.26 / MySQL ≥5.7 / MongoDB ≥3.4，装前逐项核对，别让脚本报错误导你去查网络。
 2. **数据库外置是生产底线**：课程为省事用了内置库 + 单机 docker-compose，生产请外置 MySQL 主从与 MongoDB 副本集，Zadig 重启不丢业务数据。
 3. **ENCRYPTION_KEY 是「数据生死符」**：它加密系统内的敏感配置（仓库密码、token）。丢失 = 所有凭据不可解密，只能重置。外置密钥管理系统，别只留在终端历史里。
-4. **NFS 是单点**：MinIO 的 PV 挂在 `10.0.7.11:/data/nfs/minio`，NFS 宕机则构建产物不可用。有条件换 Ceph/CSI 分布式存储，或至少做好 NFS 高可用。
+4. **NFS 是单点**：MinIO 的 PV 挂在 `nfs.example.com:/data/nfs/minio`，NFS 宕机则构建产物不可用。有条件换 Ceph/CSI 分布式存储，或至少做好 NFS 高可用。
 5. **端口冲突排查**：3306/27017 若宿主机已被占用，compose 起不来；`ss -lntp` 先行确认，课程正是先查端口再启动。
 6. **初始密码立即改**：默认 `admin@example.com` + 弱密码是公网扫描器的活靶子；登录后第一时间改密并绑定 LDAP（#68）。
 7. **重装先清理**：`install.sh` 的 `cleanup` 只删 `~/.koderover`。重装前需 `helm uninstall -n zadig` 并处理残留 PVC/PV，否则新装会撞上旧数据。
@@ -247,13 +247,13 @@ kubectl -n zadig get pod
 
 | 现象 | 根因 | 解法 |
 | --- | --- | --- |
-| Pod 全部 CrashLoopBackOff，日志 `connect ECONNREFUSED 3306/27017` | 数据库未起或跨主机网络不通 | `telnet 10.0.7.30 3306` 验证；先起 compose 再装 Zadig |
-| MinIO Pod 一直 Pending | PV 未创建或 NFS 目录不存在 | `kubectl get pv`；确认 `10.0.7.11:/data/nfs/minio` 存在且可写 |
+| Pod 全部 CrashLoopBackOff，日志 `connect ECONNREFUSED 3306/27017` | 数据库未起或跨主机网络不通 | `telnet gitlab.example.com 3306` 验证；先起 compose 再装 Zadig |
+| MinIO Pod 一直 Pending | PV 未创建或 NFS 目录不存在 | `kubectl get pv`；确认 `nfs.example.com:/data/nfs/minio` 存在且可写 |
 | 页面 502/打不开 | IP/PORT 与 NodePort 实际映射不符 | `kubectl -n zadig get svc` 核对 `httpNodePort` 是否等于 `PORT` |
 | 安装报 `Either IP+PORT or DOMAIN should be provided` | `ensure_endpoint` 校验失败 | `IP`/`PORT` 同时导出，或改用 `DOMAIN` |
 | 重装后历史构建/配置全丢 | ENCRYPTION_KEY 随机变了，凭据解不开 | 重装时显式传入首次安装保存的 key |
 | helm 下载 chart 超时 | 国内访问 koderover chart 仓库慢 | 配置代理或提前 `helm repo pull` 到本地后离线安装 |
-| Pod Pending：`0/3 nodes available, insufficient cpu` | 集群规格不足，Zadig 组件资源请求高 | 扩容节点或调低非核心组件 requests |
+| Pod Pending：`0/3 nodes available,insufficient cpu` | 集群规格不足，Zadig 组件资源请求高 | 扩容节点或调低非核心组件 requests |
 
 ## 七、面试考点与追问
 
@@ -283,8 +283,7 @@ MySQL 存业务数据（项目、服务、工作流定义）；MongoDB 存构建
 | 代码文件 | 正文提及 | 内容 |
 | --- | --- | --- |
 | `code/9-Zadig/install.sh` | 3.3 环境变量、3.4 一键安装、第四节参数全解 | Zadig 官方一键安装脚本：锁 `ZADIG_VERSION=1.18.0`，含全部环境变量说明表、`ensure_*` 参数组装、helm 自动安装、`helm upgrade --install` 部署与加密密钥打印 |
-| `code/9-Zadig/minio-pv.yaml` | 3.2 第二步 | 内置 MinIO 的 NFS 持久化 PV：20Gi / ReadWriteOnce / Retain / `10.0.7.11:/data/nfs/minio`，对应正文字段拆解表 |
+| `code/9-Zadig/minio-pv.yaml` | 3.2 第二步 | 内置 MinIO 的 NFS 持久化 PV：20Gi / ReadWriteOnce / Retain / `nfs.example.com:/data/nfs/minio`，对应正文字段拆解表 |
 
 **技术点总结**：Zadig 部署 = 版本体检（K8s 1.16~1.26、MySQL ≥5.7、MongoDB ≥3.4）→ 依赖先行（compose 起数据库、NFS PV 备好存储）→ 环境变量（IP+PORT、数据库 URI、初始账号）→ `install.sh` 一键 Helm 安装 → `kubectl -n zadig get pod` 全 Running 验收。版本策略上锁 1.18.0 社区版功能天花板；生产维度上，数据库外置、ENCRYPTION_KEY 备份、初始密码立即改、NFS 单点治理，是这套部署从「课程环境」走向「生产可用」的四个关键加固点。
 
-相关度：96%。是否需要继续：[是]。代码是否可运行：[是]。

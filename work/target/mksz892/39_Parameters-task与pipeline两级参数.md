@@ -1,4 +1,4 @@
-# Tekton Parameters 实战：Task 与 Pipeline 两级参数、三级传参链与名字一致性铁律
+# 39. Tekton Parameters 实战：Task 与 Pipeline 两级参数、三级传参链与名字一致性铁律
 
 ## 纲要
 
@@ -54,7 +54,7 @@ spec:
       type: string
   steps:
     - name: git-clone
-      image: bitnami/git:latest
+      image: bitnami/git:latest      # ⚠️ 生产锁版本：改为具体 tag（形如 <版本号>-debian-12-r<修订>），latest 会随上游发布静默变更
       script: |
         echo ${git_username} ${git_password}
         git clone -b $(params.branch) -v http://${git_username}:${git_password}@$(params.giturl)
@@ -220,7 +220,7 @@ Error: missing parameter(s): giturl
 
 PipelineRun 的 `spec.params` 会**原样落在资源里**，`kubectl get pipelinerun <name> -o yaml` 一眼看穿，Git 里提交的 YAML 同样裸奔。所以：
 
-- **密码/token 不进 params**：Task 里用 `env.valueFrom.secretKeyRef` 引用（见上一篇 git-clone 的写法）；
+- **密码/token 不进 params**：Task 里用 `env.valueFrom.secretKeyRef` 引用（见前面 git-clone 的写法）；
 - 仓库地址里也别嵌凭据（`http://user:pass@host` 这种），凭据与地址分离，地址可以放心参数化；
 - 需要「加密参数」的场景，Tekton 没有内置方案，走「Secret 存值 + 参数只存 Secret 的 key」的间接模式。
 
@@ -231,7 +231,7 @@ PipelineRun 的 `spec.params` 会**原样落在资源里**，`kubectl get pipeli
 | PipelineRun YAML | `spec.params` | 声明式、GitOps、CI 系统生成 |
 | `tkn` 命令行 | `-p name=value` | 手工调试、临时补跑 |
 | Dashboard 表单 | 创建运行时填写 | 演示、非研发同学操作 |
-| Trigger binding | Webhook 事件字段映射 | 全自动触发（后续章节展开） |
+| Trigger binding | Webhook 事件字段映射 | 全自动触发（后续展开） |
 
 同一个 Pipeline 四种入口都能驱动，这正是「参数化 = 复用」的体现：**流水线定义一次，入口随意换**。
 
@@ -291,4 +291,3 @@ Task 参数作用域在单个 Task 内（含其所有 step）；Pipeline 参数�
 
 **技术点总结**：Tekton 参数化是一条「PipelineRun → Pipeline → tasks[].params → Task → script」的五级显式链路，**参数名逐级一致是唯一铁律**，对不上就报参数缺失；实践守住三条线——**地址传不带协议头的形式**（防双协议）、**密码走 Secret 不走 params**（params 全明文）、**必填不配 default**（让缺失尽早暴露）。把这三条和参数化设计用对，一套流水线就能真正服务所有项目和所有分支。
 
-相关度：96%。是否需要继续：[是]。代码是否可运行：[是]。

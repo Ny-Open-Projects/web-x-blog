@@ -1,4 +1,4 @@
-# Tekton Workspace 实战：VCT 动态共享存储、Secret 挂载与镜像推送全流程
+# 40. Tekton Workspace 实战：VCT 动态共享存储、Secret 挂载与镜像推送全流程
 
 ## 纲要
 
@@ -108,7 +108,7 @@ Tekton 为每个 workspace 提供了三个运行时变量：
 | `$(workspaces.<name>.bound)` | 该 workspace 是否被成功绑定（true/false） | 配合 `optional: true` 做「有缓存用缓存」的优雅降级 |
 | `$(workspaces.<name>.claim)` | 底层 PVC 的名字（仅 PVC/VCT 类型有值） | 调试时定位卷 |
 
-**永远用 `$(workspaces.<name>.path)`，不要硬编码 `/workspace`**——挂载路径由 Tekton 管理，硬编码在不同版本、不同配置下都可能对不上。这是上一篇 literal `/workspace` 踩坑的根治办法。
+**永远用 `$(workspaces.<name>.path)`，不要硬编码 `/workspace`**——挂载路径由 Tekton 管理，硬编码在不同版本、不同配置下都可能对不上。这是前面 literal `/workspace` 踩坑的根治办法。
 
 ## 三、动手实践
 
@@ -131,7 +131,7 @@ spec:
     - name: code
   steps:
     - name: git-clone
-      image: bitnami/git:latest
+      image: bitnami/git:latest      # ⚠️ 生产锁版本：改为具体 tag（形如 <版本号>-debian-12-r<修订>），latest 会随上游发布静默变更
       imagePullPolicy: IfNotPresent
       env:
         - name: git_username
@@ -161,7 +161,7 @@ spec:
       args: ['-c', 'ls -la $(workspaces.code.path)/test']
 ```
 
-**与上一篇 literal 版的三个关键差异：**
+**与前面 literal 版的三个关键差异：**
 
 | 差异点 | literal 版（git-clone-task.yaml） | VCT 版（vct-git-clone-task.yaml） |
 | --- | --- | --- |
@@ -378,9 +378,11 @@ spec:
       mountPath: /kaniko/.docker
   steps:
     - name: image-build-and-push
-      image: gcr.io/kaniko-project/executor:latest
+      image: gcr.io/kaniko-project/executor:latest   # ⚠️ 生产锁版本：kaniko 官方以 latest 滚动发布，固定到 v1.x.y 保证可追溯
       imagePullPolicy: IfNotPresent
       securityContext:
+        # kaniko 官方镜像要求 root 读写 /kaniko 工作区；集群若启用 Pod Security
+        # restricted 禁止 root，需换非 root 构建方案（BuildKit rootless）或为该 SA 申请豁免
         runAsUser: 0
       env:
         - name: DOCKER_CONFIG
@@ -486,7 +488,7 @@ flowchart TB
 课件实测：Dashboard 上选 VCT 类型创建 PipelineRun，直接报**无可用卷绑定**错误——Dashboard 的创建表单对 VCT 支持不完整。这个限制的工程含义很大：
 
 - **手工触发**：用 `tkn pipeline start`（`-w name=code,volumeClaimTemplateFile=vct.yaml`）或 `kubectl apply` 声明式；
-- **自动触发**：必须走 **Tekton Trigger**（EventListener + TriggerBinding + TriggerTemplate，后续章节展开），由系统生成 PipelineRun；
+- **自动触发**：必须走 **Tekton Trigger**（EventListener + TriggerBinding + TriggerTemplate，后续展开），由系统生成 PipelineRun；
 - **只想手工点的团队**：要么忍受不了 VCT 而退用预创建 PVC，要么把触发统一收到 CI 系统/Trigger——**生产流水线的入口必须是可编程的**，Dashboard 点按钮只适合演示。
 
 ### 4.4 镜像 tag 规范：拒绝 latest 和写死
@@ -500,7 +502,7 @@ flowchart TB
 | 语义版本 | `app:v1.4.2` | 发布流水线用，配合 Git tag |
 | 日期 + hash | `app:20261014-a1b2c3d` | 兼顾可读与唯一 |
 
-`--destination` 支持变量替换，把 tag 做成参数（上一篇的参数化）或由触发器从 Webhook 事件提取，**任何写死的 tag 都是回滚时的噩梦**。
+`--destination` 支持变量替换，把 tag 做成参数（前面的参数化）或由触发器从 Webhook 事件提取，**任何写死的 tag 都是回滚时的噩梦**。
 
 ### 4.5 CI/CD 分工：构建与部署解耦
 
@@ -519,7 +521,7 @@ flowchart TB
 | --- | --- |
 | Secret 内容 | base64 是编码不是加密；开 etcd 加密、RBAC 最小权限，或上 Vault/CSI |
 | 镜像仓库凭据 | 用只读 Secret workspace 挂载，绝不以 `-p` 参数或明文 env 传递 |
-| kaniko 权限 | `runAsUser: 0` 是 kaniko 官方镜像要求；如安全策略禁止 root，用 distroless/替代方案 |
+| kaniko 权限 | `runAsUser: 0` 是 kaniko 官方镜像要求；集群启用 Pod Security restricted 禁止 root 时，改用非 root 构建方案（BuildKit rootless）或为该 ServiceAccount 申请豁免 |
 | workspace 隔离 | VCT 天然隔离；用 PVC 缓存时按项目分卷，避免跨项目写冲突 |
 | 构建缓存 | `--cache-repo` 指向独立缓存仓库，别污染正式仓库 tag 列表 |
 
@@ -579,4 +581,3 @@ VCT 适合「一次构建一份独立空间」：源码、构建产物，用完�
 
 **技术点总结**：Workspace 是 Tekton 打通 Task 数据孤岛的传送带，四种存储件各司其职——**跨 Task 传数据用 VCT（随流水线创建回收、天然隔离）、Task 内中转用 emptyDir、送机密配置用只读的 Secret/ConfigMap**；VCT 落地要过「四级声明链 + 动态 StorageClass」两关，脚本里一律用 `$(workspaces.<名字>.path)` 而非硬编码路径；镜像推送场景的标准姿势是「docker config.json 存 Secret → mountPath 挂到 kaniko 读取位 → DOCKER_CONFIG 指路」；最后记住架构铁律——**CI 只构建镜像，部署与审核交给 CD 工具**，生产入口必须是可编程的（tkn/声明式/Trigger），Dashboard 点按钮只配演示。
 
-相关度：96%。是否需要继续：[是]。代码是否可运行：[是]。

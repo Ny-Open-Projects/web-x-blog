@@ -1,8 +1,8 @@
-# Tekton Trigger 实战：EventListener 部署、三大核心组件与 GitLab Webhook 自动触发
+# 42. Tekton Trigger 实战：EventListener 部署、三大核心组件与 GitLab Webhook 自动触发
 
 ## 纲要
 
-- **Trigger 是 Tekton 的「事件入口」**：代码 push、MR、tag 等仓库事件发生后，由 Webhook 把事件payload  POST 给 EventListener，自动创建 PipelineRun——没有它，每条流水线都得手工 `tkn pipeline start`
+- **Trigger 是 Tekton 的「事件入口」**：代码 push、MR、tag 等仓库事件发生后，由 Webhook 把事件payload POST 给 EventListener，自动创建 PipelineRun——没有它，每条流水线都得手工 `tkn pipeline start`
 - **三大核心组件各司其职**：**EventListener** 监听并接收事件（跑成一个 Pod + Service），**TriggerBinding** 把事件 payload 映射成参数变量，**TriggerTemplate** 定义「触发后执行哪个流水线、传什么参数」
 - **部署是独立步骤**：Tekton Pipeline 装好不代表有触发器，`tekton-triggers` 要单独安装，Dashboard 上才会出现 EventListener / TriggerBinding / TriggerTemplate 资源
 - **完整链路是八步**：SA（权限）→ Secret（token 校验）→ EventListener（监听）→ Ingress（暴露）→ TriggerBinding（收参数）→ TriggerTemplate（定流水线）→ Pipeline → Task
@@ -99,7 +99,7 @@ stringData:
   SecretToken: "<在 GitLab Webhook 里填写的同一个 Secret Token>"
 ```
 
-GitLab Webhook 支持配置 **Secret Token**：GitLab 每次 POST 会带 `X-Gitlab-Token` 头，服务端比对一致才认账。这个 Secret 就是服务端保存的「标准答案」， key 名 `SecretToken` 是 GitLab 拦截器的约定。**两边值必须一模一样**——这是纯字符串比对，多一个空格都不算匹配。
+GitLab Webhook 支持配置 **Secret Token**：GitLab 每次 POST 会带 `X-Gitlab-Token` 头，服务端比对一致才认账。这个 Secret 就是服务端保存的「标准答案」，key 名 `SecretToken` 是 GitLab 拦截器的约定。**两边值必须一模一样**——这是纯字符串比对，多一个空格都不算匹配。
 
 ### 3.3 第三步：创建 EventListener（监听 + 验签 + 分流）
 
@@ -367,4 +367,3 @@ GitLab 每次 POST 带 `X-Gitlab-Token` 头；EventListener 的 gitlab 拦截器
 
 **技术点总结**：Tekton Trigger 用「EventListener + TriggerBinding + TriggerTemplate」三件套把「push 代码」变成「自动跑流水线」：Listener 以 Pod 形式守在内网入口，用 gitlab 拦截器完成 Secret Token 验签和 `Push Hook` 事件过滤；Binding 从事件 payload 里提取仓库地址与分支；Template 内嵌 PipelineRun 模板，靠 `generateName` 保证每次触发构建名唯一，靠 `$(tt.params.*)` 把外部数据一路送进 Task。落地顺序固定为八步：SA、Secret、EventListener、Ingress、Binding、Template、Pipeline、Task，GitLab 侧只填 URL + Token + Push events 三项。安全上记住：token 双向一致是底线，Ingress 隔离与 SA 最小权限是生产必选项。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

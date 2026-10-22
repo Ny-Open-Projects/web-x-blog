@@ -1,4 +1,4 @@
-# Tekton Volume 与 Results 实战：跨流水线持久化缓存与 Task 间数据传递
+# 41. Tekton Volume 与 Results 实战：跨流水线持久化缓存与 Task 间数据传递
 
 ## 纲要
 
@@ -11,7 +11,7 @@
 
 ## 一、场景引入：上次构建装的依赖，这次还要再装一遍？
 
-上一篇我们把 Workspace 的 VCT 玩明白了：同一流水线里，代码从 clone Task 流向 build Task，一切顺畅。但把它放到**日复一日的真实构建**里，一个尖锐的问题就冒出来了。
+前面我们把 Workspace 的 VCT 玩明白了：同一流水线里，代码从 clone Task 流向 build Task，一切顺畅。但把它放到**日复一日的真实构建**里，一个尖锐的问题就冒出来了。
 
 以前端项目为例，`npm install` 每次都要从 registry 拉几百兆依赖包，慢则几分钟。聪明如你想到：那我把依赖包缓存下来不就行了？于是你把 npm 缓存目录挂了个卷。可下一构建发现——**缓存没了**。原因不在缓存配置，在 Tekton：VCT 卷的生命周期**绑定单次 PipelineRun**，流水线一结束卷就回收，你辛辛苦苦拉的 `node_modules` 跟着一起陪葬。
 
@@ -36,7 +36,7 @@ flowchart LR
     subgraph P2["流水线 A（第 2 次构建）"]
         T3["clone Task"] --> T4["build Task"]
     end
-    PVC["持久卷 PV/PVC<br/>NFS 10.0.7.11:/data/nfs/npm-cache<br/>跨流水线、跨构建长期存在"] -.挂载.-> T2
+    PVC["持久卷 PV/PVC<br/>NFS nfs.example.com:/data/nfs/npm-cache<br/>跨流水线、跨构建长期存在"] -.挂载.-> T2
     PVC -.挂载.-> T4
     VCT -.销毁.-> X["数据丢失"]
     PVC --> Y["数据保留<br/>下次构建直接命中"]
@@ -55,7 +55,7 @@ flowchart LR
 
 PV（PersistentVolume）和 PVC（PersistentVolumeClaim）是 K8s 的标准概念，Tekton 没有发明任何新东西，只是 workspace 多了一种绑定来源：
 
-- **PV**：集群里**实际存在的存储资源**。本课用 NFS——一台 `10.0.7.11` 服务器导出 `/data/nfs/npm-cache` 目录，容量 5Gi。PV 描述的是「存储在哪里、多大、什么访问模式」；
+- **PV**：集群里**实际存在的存储资源**。本课用 NFS——一台 `nfs.example.com` 服务器导出 `/data/nfs/npm-cache` 目录，容量 5Gi。PV 描述的是「存储在哪里、多大、什么访问模式」；
 - **PVC**：使用方提交的**领用申请**：「我要 5Gi、能多节点读写」。K8s 控制平面负责撮合 PV 与 PVC，绑定成功后状态变 `Bound`；
 - **workspace 绑定 PVC**：Pipeline 声明 workspace → Task 里挂到容器路径（本课是 `/usr/local`）→ 容器内读写的就是 NFS 上的数据。
 
@@ -84,7 +84,7 @@ flowchart LR
 
 ### 3.1 持久化缓存：PV / PVC 准备
 
-先落 K8s 侧的存储。NFS 服务器（`10.0.7.11`）上先建好导出目录 `/data/nfs/npm-cache`，然后创建 PV：
+先落 K8s 侧的存储。NFS 服务器（`nfs.example.com`）上先建好导出目录 `/data/nfs/npm-cache`，然后创建 PV：
 
 ```yaml
 # nfs/pv.yaml —— 集群里的实际存储资源
@@ -100,7 +100,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     path: /data/nfs/npm-cache
-    server: 10.0.7.11
+    server: nfs.example.com
 ```
 
 逐字段拆解：
@@ -111,7 +111,7 @@ spec:
 | `capacity.storage` | `5Gi` | 声明的存储容量，需与 PVC 申请匹配或更大 |
 | `accessModes` | `ReadWriteMany` | **RWX，多节点同时读写**，Tekton 多 Task 跨节点调度的刚需 |
 | `persistentVolumeReclaimPolicy` | `Retain` | PVC 删除后**保留底层数据**，缓存卷必须用这个（`Delete` 会把 NFS 数据删掉） |
-| `nfs.server` / `nfs.path` | `10.0.7.11` / `/data/nfs/npm-cache` | NFS 服务端地址与导出目录，服务器上需提前创建并开放导出 |
+| `nfs.server` / `nfs.path` | `nfs.example.com` / `/data/nfs/npm-cache` | NFS 服务端地址与导出目录，服务器上需提前创建并开放导出 |
 
 接着创建 PVC——使用方视角的「领用单」：
 
@@ -192,7 +192,7 @@ spec:
 | 片段 | 作用 |
 | --- | --- |
 | `params: giturl / branch` | 仓库地址与分支参数化，PipelineRun 传入，避免把仓库地址焊死在流水线里 |
-| `workspaces: code / aliyun-image-registry-secert` | 两条通道：代码走 VCT，镜像仓库凭据走 Secret（上一篇的用法） |
+| `workspaces: code / aliyun-image-registry-secert` | 两条通道：代码走 VCT，镜像仓库凭据走 Secret（前面的用法） |
 | Task `clone` | 引用 `vct-git-clone-task`，把源码克隆进 `code` workspace，giturl/branch 用 `$(params.*)` 透传 |
 | Task `volume-image-build-and-push` | **本课主角**：`runAfter: clone` 保证拿到代码后再构建；同时挂载凭据 workspace 用于推送镜像 |
 | Task `ls-npm-cache` | 收尾验证：`runAfter` 挂在构建之后，列出 npm 缓存目录内容，直观证明缓存生效 |
@@ -358,7 +358,7 @@ spec:
 2. **`persistentVolumeReclaimPolicy: Retain` 是缓存卷的底线**。用 `Delete` 的话 PVC 一删 NFS 上的数据被清空，缓存白攒；反过来临时构建产物卷可以用 `Delete` 让 K8s 自动回收。
 3. **多流水线共用缓存卷要防并发写冲突**。两条流水线同时 `npm install` 写同一 `node_modules` 会互相踩踏（半装的包被对方读到）。生产上要么按仓库/项目分卷（`npm-cache-vue` / `npm-cache-go`），要么接受「缓存偶尔失效重装」的最终一致性，**不要追求强一致**。
 4. **RWX 存储的性能天花板要心里有数**。NFS 在大量小文件场景（`node_modules` 正是）延迟明显，构建提速主要来自「省掉网络拉包」，不是「NFS 读得快」；对 I/O 敏感的场景（C++、大 monorepo）建议评估 CSI 本地卷或分布式缓存（BuildKit cache export）。
-5. **Result 只传小数据**。Result 落地是文件， Tekton 对 result 体积有上限（官方建议控制在 KB 级），**传文件、传目录一律走 workspace**，别把构建产物塞进 result。
+5. **Result 只传小数据**。Result 落地是文件，Tekton 对 result 体积有上限（官方建议控制在 KB 级），**传文件、传目录一律走 workspace**，别把构建产物塞进 result。
 6. **`echo -n` 的换行陷阱要写进团队规范**。少一个 `-n`，tag 尾部带换行，kaniko push 报 `invalid reference format`——这类问题日志里看不出来，值看着「一模一样」，必须用 `cat -A` 或十六进制查看才能发现。
 7. **敏感信息绝不走 Result**。Result 会出现在 PipelineRun 状态和 Dashboard 上，相当于半公开；token、密码走 Secret 挂载，Results 只放构建号、commit SHA、镜像摘要这类非敏感值。
 8. **PV/PVC 与 VCT 混用时要画清数据分层**：源码和构建产物（一次性）走 VCT；依赖缓存、共享工具链（留存）走 PV/PVC；凭据（只读）走 Secret。三类卷在一条流水线里协同，是 Tekton 企业级流水线的标准形态。
@@ -414,4 +414,3 @@ Tekton 在每个 step 容器预置 `/tekton/results/` 目录，`$(results.<名>.
 
 **技术点总结**：本篇把 Tekton 的数据能力补齐成了闭环——workspace 负责「文件级」传递（VCT 一次性、PV/PVC 持久化、Secret 只读），Results 负责「标量级」传递（Task 声明输出、`tee` 写入结果文件、Pipeline 内 `$(tasks.<名>.results.<名>)` 引用并自动建立隐式依赖）。npm 缓存案例给出了生产范式：代码走 VCT、依赖缓存走 NFS 持久卷、构建号走 Results，三类机制分层协作；再配上 `Retain` 回收策略、RWX 访问模式、`echo -n` 防换行这几个关键细节，就能搭建起「依赖越跑越快、镜像 tag 全程可追溯」的企业级 CI 流水线。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

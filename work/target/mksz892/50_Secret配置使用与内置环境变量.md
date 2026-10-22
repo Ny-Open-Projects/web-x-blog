@@ -1,4 +1,4 @@
-# Secret 配置使用与内置环境变量：终端化管理与流水线变量全景
+# 50. Secret 配置使用与内置环境变量：终端化管理与流水线变量全景
 
 ## 纲要
 
@@ -40,7 +40,7 @@ install -t /usr/local/bin drone
 
 | 变量 | 值 |
 | --- | --- |
-| `DRONE_SERVER` | Drone Server 地址（如 `http://10.0.7.30:82`） |
+| `DRONE_SERVER` | Drone Server 地址（如 `http://gitlab.example.com:82`） |
 | `DRONE_TOKEN` | 个人 token（用户菜单里生成，**等价于账户密码，妥善保管**） |
 
 配好后用 `drone info` 验证：能打印出当前 Drone 服务器信息/版本，即「有权限对这台服务器做 Secret 增删改」——**没有这两个变量，任何 secret 命令都因无权限失败**（课程现场：直接执行报未配置）。
@@ -234,4 +234,3 @@ steps:
 
 **技术点总结**：Secret 管理有页面与 CLI 两条路——CLI 前置是「装二进制 + 配 `DRONE_SERVER`/`DRONE_TOKEN`」，命令族按作用域分两家：`drone secret`（仓库级，`--repository 组/仓库`）与 `drone orgsecret`（组织级，基于 GitLab 组，组内仓库全可调用），共享凭证建组织级、仓库特例建同名仓库级覆盖。引用语法是两层名字：`environment.<变量名>.from_secret: <secret名>`——变量名自定义、secret 名精确匹配，混用即静默为空。内置变量侧，`DRONE_REPO_NAME`/`DRONE_BRANCH`/`DRONE_BUILD_NUMBER` 三件套是镜像 tag 标准原料，`DRONE_BUILD_LINK`/`DRONE_REPO_LINK`/`DRONE_STAGE_NAME` 是报警四要素，`DRONE_BUILD_EVENT` 是发布闸——把 3.2 的 echo 清单存成模板，新流水线跑一次即完成变量对表。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。

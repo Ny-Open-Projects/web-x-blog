@@ -1,4 +1,4 @@
-# Tekton Pipeline 实战：Task 组合、四种引用方式与 PipelineRun 唯一名陷阱
+# 37. Tekton Pipeline 实战：Task 组合、四种引用方式与 PipelineRun 唯一名陷阱
 
 ## 纲要
 
@@ -7,11 +7,11 @@
 - **三种运行方式覆盖全场景**：声明式 `kubectl apply`（生产标准）、`tkn pipeline start`（调试最快）、Dashboard 点按钮（可视化验证）
 - **PipelineRun 的 name 必须唯一**：重复 apply 同名资源，K8s 只做配置比对而不会重新执行——这是新手最高频的「改了却没跑」疑案
 - **没有依赖关系的 Task 默认并行**：不配 `runAfter` 的 Task 同时启动，谁先完成看容器启动速度，日志天然交错
-- **同一 Task 的多个容器共享 Pod 网络命名空间，但不共享文件系统**：跨容器传数据必须显式声明 workspace， literal `/workspace` 路径在各容器中互不可见
+- **同一 Task 的多个容器共享 Pod 网络命名空间，但不共享文件系统**：跨容器传数据必须显式声明 workspace，literal `/workspace` 路径在各容器中互不可见
 
 ## 一、场景引入：从「一个工序」到「一条产线」
 
-上一篇文章我们把 `Task` 讲透了：一个 Task 就是一条「用哪个镜像、按什么顺序、跑什么脚本」的工序定义。但真实 CI 从来不是单一工序——至少要有**拉代码 → 编译 → 测试 → 构建镜像 → 推送**五道工序，而且不同项目要能复用同一套流程。
+前面文章我们把 `Task` 讲透了：一个 Task 就是一条「用哪个镜像、按什么顺序、跑什么脚本」的工序定义。但真实 CI 从来不是单一工序——至少要有**拉代码 → 编译 → 测试 → 构建镜像 → 推送**五道工序，而且不同项目要能复用同一套流程。
 
 在 Jenkins 里，这件事靠一段 Groovy 脚本（Jenkinsfile）描述；在 Tekton 里，靠的是 **`Pipeline`** 这个 K8s CRD 资源。可以这样类比：
 
@@ -19,7 +19,7 @@
 - **Pipeline** = 把多台机床按工艺顺序编排起来的**产线设计图**；
 - **PipelineRun** = 按下电钮后的**一次生产**，原料（参数、代码）进去，产品（镜像、报告）出来。
 
-这套「模板 + 实例」的两层结构，和 K8s 里 `Deployment` → `Pod`、上一篇文章 `Task` → `TaskRun` 是同一套声明式哲学。理解了这一层，Pipeline 的所有设计——引用方式、运行方式、命名唯一性——都会变得顺理成章。
+这套「模板 + 实例」的两层结构，和 K8s 里 `Deployment` → `Pod`、前面文章 `Task` → `TaskRun` 是同一套声明式哲学。理解了这一层，Pipeline 的所有设计——引用方式、运行方式、命名唯一性——都会变得顺理成章。
 
 ## 二、核心概念与原理
 
@@ -110,7 +110,7 @@ Pipeline 里 **没有配依赖关系的 Task 会同时启动**。课件 `pipelin
 
 - Dashboard 上两个步骤**同时出现等待时钟**，哪个容器创建得快哪个先执行；
 - 日志天然交错，`tkn pipelinerun logs` 会分容器展示，不要误以为是乱序执行；
-- 需要串行时，用 `runAfter` 显式声明（下一篇专门讲执行方式控制）。
+- 需要串行时，用 `runAfter` 显式声明（下面专门讲执行方式控制）。
 
 **并行的代价**：两个 Task 同时拉镜像、同时占 CPU，在资源紧俏的集群里会互相拖慢甚至抢占。生产上「编译」和「单测」可以并行提速，但都依赖「拉代码」结果的步骤，必须用 `runAfter` 卡住顺序。
 
@@ -135,7 +135,7 @@ sequenceDiagram
 
 ### 3.1 最小 Pipeline：声明式运行（生产标准）
 
-先准备两个 Task（上一篇文章已创建，这里直接用）：
+先准备两个 Task（前面文章已创建，这里直接用）：
 
 ```bash
 kubectl apply -f task/hello-task.yaml
@@ -205,7 +205,7 @@ tkn pipeline start pipeline-hello-goodbye
 tkn pipelinerun list
 
 # 查看某个 PipelineRun 的全部日志（自动分容器展示）
-tkn pipelinerun logs <pipelinerun-name> -f -n default
+tkn pipelinerun logs $PIPELINERUN_NAME -f -n default
 ```
 
 `tkn pipeline start` 背后做的事和声明式完全等价：自动生成一个 PipelineRun → apply → 把名字打印给你。**调试阶段用它最省事**，不存在名字冲突；日志命令会自动列出所有 Task 容器，比 `kubectl logs` 挨个 `-c` 省心。
@@ -347,7 +347,7 @@ git-clone Task 通过 `secretKeyRef` 引用凭据：
 spec:
   steps:
     - name: git-clones
-      image: bitnami/git:latest
+      image: bitnami/git:latest      # ⚠️ 生产锁版本：改为具体 tag（形如 <版本号>-debian-12-r<修订>），latest 会随上游发布静默变更
       imagePullPolicy: IfNotPresent
       env:
         - name: git_username
@@ -419,7 +419,7 @@ spec:
         git clone -b main http://...@$(params.giturl) $(workspaces.code.path)/test
 ```
 
-这也是下一篇「Workspace：VCT 共享存储与 Secret」要解决的核心问题——**没有 workspace，Tekton 的 Task 之间就是数据孤岛**。
+这也是下面「Workspace：VCT 共享存储与 Secret」要解决的核心问题——**没有 workspace，Tekton 的 Task 之间就是数据孤岛**。
 
 ## 四、生产实践要点
 
@@ -489,7 +489,7 @@ Pipeline 写得烂，九成是 Task 切得烂。团队落库的几条经验：
 | `tkn pipeline start` 提示找不到 Pipeline | 名字打错或未 apply | `tkn pipeline list` 核对 |
 | 两个步骤都卡在 `Pending` | 并行抢占资源或镜像拉取慢 | `kubectl describe pod` 看 Events，降并行或预热镜像 |
 | base64 解码出来是乱码 | `echo` 漏了 `-n`，把换行符编进去了 | `echo -n 'xxx' \| base64` 重做 |
-| 步骤显示 `Skipped` | 配了 `when` 条件不成立（下一篇详解） | 检查 `when` 的 input/operator/values |
+| 步骤显示 `Skipped` | 配了 `when` 条件不成立（下面详解） | 检查 `when` 的 input/operator/values |
 
 ## 六、面试考点与追问
 
@@ -530,6 +530,5 @@ Jenkins Pipeline 是运行在单体 CI 服务器上的 Groovy 脚本，步骤默
 | `code/6-Tekton/task/git-clone-task.yaml` | 第 2.3、3.5 节 | `secretKeyRef` 引用 Secret + 双 step（克隆/列目录）Task |
 | `code/6-Tekton/secret/git-secret.yaml` | 第 3.5 节 | git 凭据 Secret（username/password 均 base64） |
 
-**技术点总结**：Tekton 的 Pipeline 用「Task 模板 + PipelineRun 实例」两层结构编排 CI 流程，四种引用方式构成 2×2 矩阵——**能复用的用 Ref（taskRef/pipelineRef），一次性的用 Spec（taskSpec/pipelineSpec）**，且允许混搭；运行方式上声明式 apply 是生产唯一标准、`tkn pipeline start` 是调试利器；两个必记的硬约束是 **PipelineRun 名字唯一（复用即不执行）** 和 **无 runAfter 的 Task 默认并行**；跨容器共享数据必须走 workspace，literal 路径在各容器中互不可见——这个坑由下一篇 Workspace 实战来填。
+**技术点总结**：Tekton 的 Pipeline 用「Task 模板 + PipelineRun 实例」两层结构编排 CI 流程，四种引用方式构成 2×2 矩阵——**能复用的用 Ref（taskRef/pipelineRef），一次性的用 Spec（taskSpec/pipelineSpec）**，且允许混搭；运行方式上声明式 apply 是生产唯一标准、`tkn pipeline start` 是调试利器；两个必记的硬约束是 **PipelineRun 名字唯一（复用即不执行）** 和 **无 runAfter 的 Task 默认并行**；跨容器共享数据必须走 workspace，literal 路径在各容器中互不可见——这个坑由下面 Workspace 实战来填。
 
-相关度：97%。是否需要继续：[是]。代码是否可运行：[是]。

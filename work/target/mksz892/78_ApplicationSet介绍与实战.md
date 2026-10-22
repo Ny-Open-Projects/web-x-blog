@@ -1,4 +1,4 @@
-# ApplicationSet 介绍与实战：一个 YAML 管理多环境多集群部署
+# 78. ApplicationSet 介绍与实战：一个 YAML 管理多环境多集群部署
 
 ## 纲要
 
@@ -160,4 +160,3 @@ Application 是单个部署契约；ApplicationSet 是 Application 的工厂—�
 
 **技术点总结**：ApplicationSet = Application 的批量工厂，机制是**生成器产参数 + 模板吃占位符**：list 生成器显式列出「集群名 + 地址」对，模板用 `{{cluster}}`、`{{url}}` 渲染出 N 个 Application，path 里的 `{{cluster}}` 让多环境读同仓不同目录。它把「改一处生效全部环境」从理想变成日常，但纪律同样鲜明：**生成物只能通过模板管理，页面删单个应用会被控制器自动生成回来**——要删就连 YAML 一起删。适用边界清晰：同构环境批量分发是主场，环境差异大时退回多 Application 精细管。
 
-相关度：96%。是否需要继续：[是]。代码是否可运行：[是]。

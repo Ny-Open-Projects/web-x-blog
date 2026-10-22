@@ -1,4 +1,4 @@
-# Argo CD Application 资源详解与实战：接入集群、仓库与三大存储模式
+# 77. Argo CD Application 资源详解与实战：接入集群、仓库与三大存储模式
 
 ## 纲要
 
@@ -44,10 +44,10 @@ flowchart TB
 kubectl config get-contexts
 
 # ② 登录 Argo CD（IP:端口，不加协议；从 Argo CD 所在服务器执行）
-argocd login 10.0.7.101:31650 --username admin
+argocd login node1.example.com:31650 --username admin
 
 # ③ 把上下文加入 Argo CD（--upsert 覆盖式添加，不加可能添加失败）
-argocd cluster add <context-name> --name local-k8s --upsert
+argocd cluster add $CONTEXT_NAME --name local-k8s --upsert
 
 # ④ 查看集群列表（不知道子命令直接回车可看帮助）
 argocd cluster list
@@ -59,12 +59,14 @@ argocd cluster list
 
 ```bash
 # 添加仓库（地址 + 用户名密码 + 起名）
-argocd repo add http://10.0.7.63/argocd/appconfig.git <username> <password> --name appconfig
+# ⚠️ 凭据不要走位置参数——位置参数会进 shell history，也会被同机其他用户从 ps 看到；
+# 用 --username/--password flag，密码建议从环境变量传入；更稳妥的做法是走 Argo CD 页面添加（存为 Server Secret）
+argocd repo add http://git.example.com/argocd/appconfig.git --username "$GIT_USER" --password "$GIT_PASSWORD" --name appconfig
 
 # 查看 / 详情 / 删除
 argocd repo list
-argocd repo get http://10.0.7.63/argocd/appconfig.git
-argocd repo rm http://10.0.7.63/argocd/appconfig.git
+argocd repo get http://git.example.com/argocd/appconfig.git
+argocd repo rm http://git.example.com/argocd/appconfig.git
 ```
 
 页面同样可操作：Settings → Repos → Add（课程实拍：初始 repos 列表为空，添加后状态显示成功）。课程还演示了一个小坑——**仓库 IP 填错**（63 写成别的），添加不成功，改成正确地址后即刻成功；这也说明 `repo add` 是带连通性验证的，填错当场报错，不会留个假成功。**「集群接入 + 仓库接入」是 apply 任何 Application 前的两个硬前置**——课程反复强调：「要放在我们部署的 Argo CD 集群当中，然后现在我们来运行一下……在部署之前，我们必须要把这个集群给它添加到 Argo CD 集群当中，以及这个要读的仓库地址，必须要添加到我们的集群当中。」
@@ -160,7 +162,7 @@ spec:
 | 字段 | 含义 | 课程实战值 |
 | --- | --- | --- |
 | `spec.project` | 隶属项目（分类 + RBAC 粒度） | `default` |
-| `spec.source.repoURL` | 清单所在仓库 | `http://10.0.7.63/argocd/appconfig.git` |
+| `spec.source.repoURL` | 清单所在仓库 | `http://git.example.com/argocd/appconfig.git` |
 | `spec.source.targetRevision` | 目标版本 | `HEAD`（或 `main` 分支名） |
 | `spec.source.path` | 仓库内清单目录 | `guestbook` |
 | `spec.destination.server` | 目标集群 API 地址 | `https://kubernetes.default.svc` |
@@ -311,4 +313,3 @@ Missing：仓库有声明的资源但集群里缺失（被删或没部署过）�
 
 **技术点总结**：Application 是 Argo CD 的核心契约——**source（git 仓库哪个路径）+ destination（哪个集群哪个命名空间）**两块必配，project 做分类。落地三件套前置：`cluster add` 接集群、`repo add` 接仓库、project 分群，三者齐了才 apply。清单组织两种模式按维护性取舍：对应分支（回滚隔离好）vs 对应目录（通用修改快）；高阶玩法用多来源（Helm chart + git 路径）与 `$values` 外置 values。行为特征牢记：**默认只检测 diff 不自动同步**（安全特性，可做变更预览），sync 是显式动作；Missing/OutOfSync 都能靠 sync 拉回一致；应用名实例内唯一，重名必坑。
 
-相关度：97%。是否需要继续：[是]。代码是否可运行：[是]。

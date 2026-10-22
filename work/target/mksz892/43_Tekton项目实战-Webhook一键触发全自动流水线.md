@@ -1,4 +1,4 @@
-# Tekton 项目实战：GitLab Webhook 一键触发「克隆 → 构建 → 推送 → 部署」全自动流水线（含本章总结）
+# 43. Tekton 项目实战：GitLab Webhook 一键触发「克隆 → 构建 → 推送 → 部署」全自动流水线（含本章总结）
 
 ## 纲要
 
@@ -13,7 +13,7 @@
 
 前九篇我们造齐了零件：Task 会定义、Pipeline 会编排、Workspace 会传数据、Results 会传参数、Trigger 会听 Webhook。但企业里老板不会问「你的 Task 写得怎么样」，只会问：**「我 push 一行代码，到部署上线要几步？」**
 
-答案应该是：一步。`git push`，然后没有然后——克隆、生成版本号、构建镜像、推送仓库、sed 改镜像名、kubectl apply 部署、失败报警，全部由流水线自动完成，全程无人工。本篇就是把这套「全自动发布流水线」完整搭出来。它也是第 6 章 Tekton 的终篇，最后附本章知识总结，作为进入 Drone / KubeVela / Argo CD 等后续 CD 工具前的收官。
+答案应该是：一步。`git push`，然后没有然后——克隆、生成版本号、构建镜像、推送仓库、sed 改镜像名、kubectl apply 部署、失败报警，全部由流水线自动完成，全程无人工。本篇就是把这套「全自动发布流水线」完整搭出来。它也是前述 Tekton 的终篇，最后附本章知识总结，作为进入 Drone / KubeVela / Argo CD 等后续 CD 工具前的收官。
 
 ## 二、整体架构：一条 Trigger 驱动的四段式流水线
 
@@ -148,7 +148,7 @@ spec:
             secretName: kubeconfig-secret
 ```
 
-比上一篇的模板多了第三个 workspace：`kubeconfig-secret`——**部署 Task 需要操作 K8s 的凭证**，同样是 Secret 只读挂载。三个 workspace 的归属：code 传源码（VCT），aliyun secret 供 kaniko 推镜像，kubeconfig secret 供 kubectl 部署。**三条通道在 Template 里一次绑定，触发时自动带出**。
+比前面的模板多了第三个 workspace：`kubeconfig-secret`——**部署 Task 需要操作 K8s 的凭证**，同样是 Secret 只读挂载。三个 workspace 的归属：code 传源码（VCT），aliyun secret 供 kaniko 推镜像，kubeconfig secret 供 kubectl 部署。**三条通道在 Template 里一次绑定，触发时自动带出**。
 
 ### 3.3 流水线层：四 Task + finally 的编排
 
@@ -250,7 +250,7 @@ spec:
     - name: code
   steps:
     - name: git-clone
-      image: bitnami/git:latest
+      image: bitnami/git:latest      # ⚠️ 生产锁版本：改为具体 tag（形如 <版本号>-debian-12-r<修订>），latest 会随上游发布静默变更
       imagePullPolicy: IfNotPresent
       env:
         - name: git_username
@@ -312,7 +312,7 @@ spec:
         echo -n ${buildId} | tee $(results.datetime.path)
 ```
 
-在上一篇 `results-datetime` 基础上做了两处升级：
+在前面 `results-datetime` 基础上做了两处升级：
 
 1. **分支同样要净化**：`refs/heads/main` 取 `main`，与 clone Task 同样的手法；
 2. **tag 拼接分支维度**：`node-20261014-172256-main`——时间戳保证唯一，分支名让人一眼看出这条镜像来自哪个分支。**这个 result 就是全流水线的「版本号中枢」**：Pipeline 里两个下游 Task 都引用它，一个推镜像、一个改部署，版本严格一致。
@@ -335,9 +335,11 @@ spec:
     - name: image-tag
   steps:
     - name: image-build-and-push
-      image: gcr.io/kaniko-project/executor:latest
+      image: gcr.io/kaniko-project/executor:latest   # ⚠️ 生产锁版本：kaniko 官方以 latest 滚动发布，固定到 v1.x.y 保证可追溯
       imagePullPolicy: IfNotPresent
       securityContext:
+        # kaniko 官方镜像要求 root 读写 /kaniko 工作区；集群若启用 Pod Security
+        # restricted 禁止 root，需换非 root 构建方案（BuildKit rootless）或为该 SA 申请豁免
         runAsUser: 0
       env:
         - name: DOCKER_CONFIG
@@ -527,6 +529,5 @@ Pipeline 的 finally Task 用 `$(tasks.<task名>.status)` 取各 Task 的执行�
 | `code/6-Tekton/task/volume-build-dockerfile-bush.yaml` | 3.6 节 | 带 `tekton-npm-cache-pvc` 挂载的构建 Task，destination 指向 demo 仓库 |
 | `code/6-Tekton/task/ls-npm-cache-task.yaml` | 3.6 节 | Task `ls-npm-cache`：挂载缓存卷并 `ls node_modules`，验证缓存生效 |
 
-**技术点总结**：本篇把 Tekton 章的所有零件装配成一条完整的企业级流水线——EventListener 双 trigger + 不同 Secret token 实现多项目分流；TriggerBinding 提取 GitLab payload，TriggerTemplate 用 generateName 创建唯一 PipelineRun；Pipeline 串起「clone（URL/分支净化）→ 生成 tag（时间戳+分支写 result）→ kaniko 构建推送（层缓存+npm 缓存卷）→ kubectl 部署（kubeconfig 挂载 + sed 换镜像名）」四步，tag 同源保证推送与部署严格一致，finally 汇总四步状态输出可扩展的报警。至此第 6 章收官：Task/TaskRun/Pipeline/PipelineRun 四件套 + 执行方式控制 + 三大数据机制 + Webhook 触发器，构成了 Tekton 企业落地的完整能力版图，后续进入 Drone、KubeVela、Argo CD 等 CD 工具时，这套「事件→参数→构建→部署→报警」的心智模型可以整体迁移。
+**技术点总结**：本篇把 Tekton 章的所有零件装配成一条完整的企业级流水线——EventListener 双 trigger + 不同 Secret token 实现多项目分流；TriggerBinding 提取 GitLab payload，TriggerTemplate 用 generateName 创建唯一 PipelineRun；Pipeline 串起「clone（URL/分支净化）→ 生成 tag（时间戳+分支写 result）→ kaniko 构建推送（层缓存+npm 缓存卷）→ kubectl 部署（kubeconfig 挂载 + sed 换镜像名）」四步，tag 同源保证推送与部署严格一致，finally 汇总四步状态输出可扩展的报警。至此前述收官：Task/TaskRun/Pipeline/PipelineRun 四件套 + 执行方式控制 + 三大数据机制 + Webhook 触发器，构成了 Tekton 企业落地的完整能力版图，后续进入 Drone、KubeVela、Argo CD 等 CD 工具时，这套「事件→参数→构建→部署→报警」的心智模型可以整体迁移。
 
-相关度：95%。是否需要继续：[是]。代码是否可运行：[是]。
