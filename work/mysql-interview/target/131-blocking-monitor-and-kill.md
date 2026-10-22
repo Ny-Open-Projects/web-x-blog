@@ -1,0 +1,53 @@
+# 131 阻塞怎么查、怎么解
+
+> 分类：管理监控 | 难度：L3 | 题型：事故题 | 频率：高 | 关键词：**innodb_lock_waits** / **sys schema** / **data_locks** / **KILL** / **30 秒阈值**
+> 原文锚点：第 136~174 段「5.7 之前用 information_schema 的 INNODB_LOCKS 与 INNODB_TRX 关联查询，5.7 之后只需查 sys.innodb_lock_waits 一张表」
+
+## 一句话总述
+查阻塞：**5.7 及以后直接查 `sys.innodb_lock_waits`**（8.0 底层改走 `performance_schema.data_locks`）；查到后用 `KILL <阻塞源线程 id>` 解开。
+
+## 面试官视角
+- **考察意图**：线上卡死了你能不能在 30 秒内定位到是谁堵的——这题几乎必考。
+- **P5** 知道有 `SHOW PROCESSLIST` / **P6** 能说出 `sys.innodb_lock_waits` 与 8.0 的 `data_locks` / **P7** 会补「只能抓到**仍在运行**的语句，已执行完但未提交的事务**抓不到原 SQL**，要靠 `INNODB_TRX.trx_query` 为 NULL 来判断它是个空闲长事务」。
+- **红旗**：「阻塞和死锁一回事」；「KILL 掉等待的那个线程」；「5.7 和 8.0 查法一样」。
+- **惊艳点**：要 KILL 的是**持有锁的线程**，不是被阻塞的线程——杀错方向只会让业务继续报错（8.0.36 `[经验]`）。
+
+## 主问答
+**Q：数据库突然卡住了，你怎么查是谁在堵？**
+**A：**
+1. **先给结论**：查 `sys.innodb_lock_waits`（8.0）拿到**被阻塞线程**与**阻塞源线程**的对应关系，评估后 `KILL` 阻塞源。
+2. **再给机制**：5.7 之前要把 `information_schema.INNODB_LOCKS` 与 `INNODB_TRX` 自己关联，还得写「等待超过 N 秒」的判断；5.7 起 `sys.innodb_lock_waits` 把这些封装好，8.0 又把底层表从 `INNODB_LOCKS` 换成 `performance_schema.data_locks`。
+3. **最后给边界**：视图只能抓到**当前正在等待**的锁；如果源事务的 SQL 已执行完但**未提交**（空闲长事务），`trx_query` 会是 NULL，抓不到原始语句，只能靠 `trx_started` 的时间戳判断它开了多久。
+**加分层**：KILL 之前先确认对方是不是核心业务事务；更稳妥是先让应用侧回滚，KILL 是最后的手段。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 阻塞和死锁一样吗 | 概念 | 不一样 | 换题 |
+| L2 | 5.7+ 查哪张表 | 基础 | sys.innodb_lock_waits | 判 P5 |
+| L3 | 8.0 底层换了什么 | 版本感 | performance_schema.data_locks | 判 P6 |
+| L4 | 该 KILL 谁 | 边界 | KILL 持锁方 | 判 P6+ |
+| L5 | 抓不到源 SQL 怎么办 | 实战 | 看 trx_started 判空闲长事务 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| 5.7 起有 `sys.innodb_lock_waits`（验证 8.0.36） | **8.0 移除 `information_schema.INNODB_LOCKS`**，改 `performance_schema.data_locks` | 5.7 查 sys 视图；8.0 用同一视图，底层已换表 |
+
+## 关键代码
+```sql
+-- 8.0 / 5.7：一行看全「谁等谁」
+SELECT waiting_pid, waiting_query, blocking_pid, blocking_query, wait_age_secs
+FROM sys.innodb_lock_waits WHERE wait_age_secs > 30;
+-- 确认阻塞源是不是空闲长事务（trx_query 为 NULL = 语句已跑完但没提交）
+SELECT trx_id, trx_started, trx_query, trx_rows_locked
+FROM information_schema.innodb_trx ORDER BY trx_started LIMIT 5;
+-- KILL 的是【持锁方】：KILL <blocking_pid>
+```
+
+## ⚠️ 原文纠错
+原文演示中「抓取不到阻塞源的语句，因为线程一中的 update 已经执行完成」——观察正确，但**未给出根因解释与替代判据**（`trx_query` 为 NULL 时应看 `trx_started` 判断空闲长事务），已补全。原文称「超过三十秒才把阻塞查出来」是演示用的自定义阈值，已写明属阈值可配置。机翻「inoDBTRX / datatelocals / INNODBloc / q掉十二」还原为 **`INNODB_TRX` / `data_locks` / `INNODB_LOCKS` / KILL 12**。
+
+## 总结与追问预判
+- 查 sys 视图 → 认准持锁方 → 谨慎 KILL。
+- 下一题：见 132（死锁 vs 阻塞）、092（锁兼容矩阵）。

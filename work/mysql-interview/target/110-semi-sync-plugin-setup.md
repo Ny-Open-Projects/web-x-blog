@@ -1,0 +1,56 @@
+# 110 半同步复制怎么装、怎么开
+
+> 分类：架构/复制 | 难度：L2 | 题型：工程题 | 频率：中 | 关键词：**rpl_semi_sync_master** / **INSTALL PLUGIN** / **rpl_semi_sync_master_timeout** / **重启 IO 线程**
+> 原文锚点：第 212~244 段「使用 install 命令来安装插件，master 端安装 semisync_master.so，slave 端安装 semisync_slave.so」
+
+## 一句话总述
+半同步是**插件**：主库装 `rpl_semi_sync_master`、从库装 `rpl_semi_sync_slave`，两边都 `SET GLOBAL ... = ON`，然后**必须重启从库 IO 线程**才真正生效。
+
+## 面试官视角
+- **考察意图**：是不是只知道概念，没亲手把插件装上过——装过的人一定记得「不重启 IO 线程不生效」这个坑。
+- **P5** 知道要装插件、主从上装的不是同一个 / **P6** 能说清 `rpl_semi_sync_master_timeout` 的作用与降级 / **P7** 会补「`Rpl_semi_sync_master_status` 为 ON 才是真生效，光看参数是 `ON` 会被骗」。
+- **红旗**：「主从装同一个插件就行」；「设完参数立刻生效」；「超时单位是秒」。
+- **惊艳点**：装完插件后必须先 `STOP SLAVE IO_THREAD; START SLAVE IO_THREAD;`，否则 `Rpl_semi_sync_master_status` 一直是 **OFF**，复制仍跑在异步 —— 验证：`SHOW STATUS LIKE 'Rpl_semi_sync%status';`（8.0.36 `[经验]`）。
+
+## 主问答
+**Q：怎么把已有的异步复制改成半同步？改完怎么确认生效了？**
+**A：**
+1. **先给结论**：两库各装各的插件 → 各 `SET GLOBAL rpl_semi_sync_*_enabled = ON` → **重启从库 IO 线程** → 看 status 变量确认。
+2. **再给机制**：插件是动态加载的（`.so`），装完只是「有了能力」；从库的 IO 线程是在**建立连接时**和主库协商是否支持半同步，所以已存在的连接必须重建，也就是重启 IO 线程。
+3. **最后给边界**：`rpl_semi_sync_master_timeout` 单位是**微秒**（默认 10000000 = 10 秒），超时后主库**自动降级为异步**并让事务继续返回，不再等待从库 ACK。
+**加分层**：降级是把双刃剑——保证可用性，但那段时间丢数据的窗口和异步一样大，所以生产还要配监控盯 `Rpl_semi_sync_master_status` 的翻转。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 半同步靠什么实现 | 概念 | 插件 | 换题 |
+| L2 | 主从装的插件一样吗 | 基础 | 不一样，master/slave 两个 | 判 P5 |
+| L3 | 设完参数就生效吗 | 机制 | 不，要重启 IO 线程 | 判 P6 |
+| L4 | 超时后主库怎么办 | 边界 | 降级为异步 | 判 P6+ |
+| L5 | 超时时间怎么定 | 实战 | 按网络 RTT 与可忍受写阻塞定 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| 5.5 插件引入；5.7 起 `lossless` 半同步 `AFTER_SYNC` 为默认（验证 8.0.36） | 5.7.2 引入 `rpl_semi_sync_master_wait_point=AFTER_SYNC`，解决 `AFTER_COMMIT` 的幻读问题 | 答「5.7+ 默认 AFTER_SYNC，先落 binlog 再等 ACK，不丢数据」 |
+
+## 关键代码
+```sql
+-- 主库
+INSTALL PLUGIN rpl_semi_sync_master SONAME 'semisync_master.so';
+SET GLOBAL rpl_semi_sync_master_enabled = ON;
+SET GLOBAL rpl_semi_sync_master_timeout = 10000;  -- 微秒，10ms 级要按业务定
+-- 从库
+INSTALL PLUGIN rpl_semi_sync_slave SONAME 'semisync_slave.so';
+SET GLOBAL rpl_semi_sync_slave_enabled = ON;
+STOP SLAVE IO_THREAD; START SLAVE IO_THREAD;   -- 关键：不重启不生效
+-- 验收：两边 status 都应显示 ON
+SHOW STATUS LIKE 'Rpl_semi_sync%status';
+```
+
+## ⚠️ 原文纠错
+原文演示中把超时时间设为「一万一二三」后又说「设置成了十秒」，数值口述混乱；按官方语义写明该参数**单位为微秒、默认 10000000（10 秒）**，示例命令改为明确值。机翻「SEMISYNC下划线masterISO / slaver / 半臀步 / 办公处」统一还原为 **`rpl_semi_sync_master`** / **`rpl_semi_sync_slave`** / **半同步**。原文未强调 `Rpl_semi_sync_master_status` 验收点，已补全。
+
+## 总结与追问预判
+- 装插件 → 开参数 → 重启 IO 线程 → 看 status，四步缺一。
+- 下一题：见 097（半同步原理与超时降级）、111（超时对主库写入的实测影响）。

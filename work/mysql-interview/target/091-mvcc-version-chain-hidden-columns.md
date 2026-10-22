@@ -1,0 +1,52 @@
+# 091 MVCC 版本链与行隐藏列
+
+> 分类：存储引擎/事务 | 难度：L3 | 题型：八股题 | 频率：高 | 关键词：**undo log** / **版本链** / **DB_TRX_ID** / **DB_ROLL_PTR**
+> 原文锚点：第 431~440 段「利用到了我们之前所说的 undo log 来实现了这个多版本的并发控制」
+
+## 一句话总述
+InnoDB 每行带隐藏列（事务 ID、回滚指针）与 undo 日志一起把一行串成**版本链**，读事务按可见性规则沿链挑一个旧版本返回。
+
+## 面试官视角
+- **考察意图**：能不能从「有 MVCC」推进到「版本从哪来、怎么串起来」。
+- **P5** 说得出靠 undo log / **P6** 能说出隐藏列 + 回滚指针串链 / **P7** 能讲清可见性判定与 purge 何时回收旧版本 `[经验]`。
+- **红旗**：「旧版本存在内存里」；「每个事务一份整表副本」；把 undo 与 redo 的分工说反。
+- **惊艳点**：旧版本**只要还有事务可能需要，就不能被 purge**，所以长事务会让 history list length 单调上涨 —— 验证：`SELECT name, count FROM information_schema.innodb_metrics WHERE name='trx_rseg_history_len'`（8.0.36 `[经验]`）。
+
+## 主问答
+**Q：MVCC 到底是怎么实现的？多版本存在哪里？**
+**A：**
+1. **先给结论**：多版本**存在 undo 日志里**，不是复制整行，也不是给每个事务造副本表。
+2. **再给机制**：行记录上有隐藏列 `DB_TRX_ID`（最后修改它的事务 ID）与 `DB_ROLL_PTR`（指向 undo 中的上一版本）。每次 UPDATE 把旧值写进 undo 并用回滚指针串起来，形成由新到旧的**版本链**；读事务拿自己的 ReadView 沿链比对事务 ID，找到第一个可见版本即返回。
+3. **最后给边界**：DELETE 在 InnoDB 里只是打删除标记，同样进版本链；链无限变长会拖慢一致性读，靠后台 purge 线程在**没有任何事务再需要它时**回收。
+**加分层**：这正是「长事务有害」的根因——它钉住了最老的 ReadView，purge 追不上（见 090）。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | MVCC 全称 | 概念 | 多版本并发控制 | 换题 |
+| L2 | 旧版本存哪 | 基础 | undo log | 判 P5 |
+| L3 | 怎么定位对应版本 | 机制 | 隐藏列 + 回滚指针串链 | 判 P6 |
+| L4 | 旧版本何时被删 | 边界 | purge 线程回收 | 判 P6+ |
+| L5 | 长事务对 undo 的影响 | 实战 | history list 上涨 / 表空间膨胀 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| 5.5~8.0（验证 8.0.36） | 5.6 起 undo 可独立表空间；8.0 默认独立 undo 表空间 | 按「undo 存版本 + 隐藏列串链」答，8.0 只改存放位置不改机制 |
+
+## 关键代码
+```sql
+-- 观察版本链压力：history list length 长时间不降 = 有长事务钉住旧 ReadView
+SELECT name, count FROM information_schema.innodb_metrics
+ WHERE name = 'trx_rseg_history_len';
+-- 找出最老的活动事务（purge 的拦路石）
+SELECT trx_id, trx_started, trx_query FROM information_schema.innodb_trx
+ ORDER BY trx_started LIMIT 5;
+```
+
+## ⚠️ 原文纠错
+原文称 MVCC 实现「比较复杂，为便于理解做了简化」，只提到「通过数据行中的几个特殊标识符」实现，未点名 `DB_TRX_ID` / `DB_ROLL_PTR`；此处按 InnoDB 公认实现补全并标 `[经验]`。原文把 undo 记为「安度 log」、redo 记为「灰度 log」，已还原为 undo / redo。
+
+## 总结与追问预判
+- 版本链 = 行隐藏列 + undo；purge 决定它何时消失。
+- 下一题：见 093（快照读 vs 当前读）、094（RC 与 RR 差异）。

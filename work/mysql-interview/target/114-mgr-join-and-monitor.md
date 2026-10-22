@@ -1,0 +1,56 @@
+# 114 MGR 后续节点怎么加入、集群状态看哪张表
+
+> 分类：架构/复制 | 难度：L3 | 题型：工程题 | 频率：中 | 关键词：**group_replication_recovery** / **replication_group_members** / **MEMBER_ROLE** / **super_read_only**
+> 原文锚点：第 840~885 段「第二个节点只需要指定 master_user 和 password，for channel group_replication_recovery……通过 performance_schema 下的表查看成员状态」
+
+## 一句话总述
+第 2、3 个节点和第一个的区别只有两点：**不设 `bootstrap_group=OFF`**、**配置 `group_replication_recovery` 通道的复制账号**；集群状态一律看 `performance_schema` 下的两张表。
+
+## 面试官视角
+- **考察意图**：知不知道 MGR 的「加入」本质是**先做一次分布式恢复（recovery）再用组通信同步**——这是理解新节点为什么加入慢的关键。
+- **P5** 知道后续节点不用 bootstrap / **P6** 能说出 recovery 通道的作用与 `CHANGE MASTER TO ... FOR CHANNEL` / **P7** 会补「新节点数据量差距大时 recovery 会拖很久，生产通常先用备份预置数据再拉起」。
+- **红旗**：「每个节点都要 bootstrap」；「MGR 不需要复制账号」；「看 `SHOW SLAVE STATUS` 判断 MGR 状态」。
+- **惊艳点**：MGR 单主模式下，**非 primary 节点会被自动置为 `super_read_only=ON`**，连有 SUPER 权限的用户也写不进去 —— 验证：在非主节点执行写操作，报 `ERROR 1290 ... super-read-only`（8.0.36 `[经验]`）。
+
+## 主问答
+**Q：三节点 MGR，第一个起来了，第二第三个怎么加？怎么确认加成功了？**
+**A：**
+1. **先给结论**：后续节点**不要**开 `bootstrap_group`，只需配 recovery 通道的复制账号后 `START GROUP_REPLICATION`，新节点会先从集群里某个 donor 拉全量（分布式恢复），补齐后才进入 ONLINE。
+2. **再给机制**：recovery 走的是 **MGR 自建的 `group_replication_recovery` 通道**（本质仍是基于 GTID 的异步复制），所以必须给它账号密码；这也是为什么 MGR 底层仍依赖异步复制那套链路。
+3. **最后给边界**：恢复阶段节点状态是 `RECOVERING`，不是 `ONLINE`；数据量大时会卡很久，此时别误判为失败，看 `replication_group_member_stats` 里的队列长度判断进度。
+**加分层**：验收看两张表——`replication_group_members` 看成员与 `MEMBER_ROLE`（PRIMARY/SECONDARY），`replication_group_member_stats` 看事务队列与冲突，别用 `SHOW SLAVE STATUS`。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 后续节点要 bootstrap 吗 | 概念 | 不需要 | 换题 |
+| L2 | 加入时账号配在哪 | 基础 | recovery 通道 | 判 P5 |
+| L3 | 为什么新节点加入慢 | 机制 | 先做分布式恢复 | 判 P6 |
+| L4 | 状态看哪张表 | 边界 | members + member_stats | 判 P6+ |
+| L5 | 大实例怎么加速加入 | 实战 | 先用备份预置数据 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| 5.7.17~8.0（验证 8.0.36） | 8.0.23 起 `CHANGE MASTER TO` 改名 `CHANGE REPLICATION SOURCE TO`，通道名不变 | 通道名 `group_replication_recovery` 全版本一致，命令名按版本选 |
+
+## 关键代码
+```sql
+-- 第 2/3 个节点：只配 recovery 通道，不 bootstrap
+CHANGE MASTER TO MASTER_USER='repl', MASTER_PASSWORD='***'
+  FOR CHANNEL 'group_replication_recovery';
+START GROUP_REPLICATION;
+-- 验收一：成员与角色（ONLINE + PRIMARY/SECONDARY）
+SELECT MEMBER_ID, MEMBER_HOST, MEMBER_STATE, MEMBER_ROLE
+  FROM performance_schema.replication_group_members;
+-- 验收二：恢复进度与冲突（RECOVERING 阶段看队列）
+SELECT MEMBER_ID, COUNT_TRANSACTIONS_IN_QUEUE, COUNT_TRANSACTIONS_REMOTE_IN_APPLIER_QUEUE
+  FROM performance_schema.replication_group_member_stats;
+```
+
+## ⚠️ 原文纠错
+原文说「在异步复制中必须指定 master_host，这里并不需要指定」——结论正确（组复制由组通信层发现成员），但**未点明 recovery 通道的本质**：它仍是一次基于 GTID 的点对点复制，只是 host 由组复制自动选定 donor；已补全。机翻「changemaster / stargrouprevication / camery / sec / 总复制」还原为 **`CHANGE MASTER TO` / `START GROUP_REPLICATION` / PRIMARY / SECONDARY / 组复制**。原文「performance 是蒂吗」还原为 **`performance_schema`**。
+
+## 总结与追问预判
+- 加入 = recovery 补数据 + 组通信同步，验收只认 `performance_schema` 两张表。
+- 下一题：见 113（MGR 前置参数）、115（MGR 限制与常见问题）。

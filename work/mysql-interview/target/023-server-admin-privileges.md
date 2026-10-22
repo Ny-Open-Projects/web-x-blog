@@ -1,0 +1,58 @@
+# 023 服务器管理类权限
+
+> 分类：用户管理 | 难度：L2 | 题型：八股题 | 频率：高 | 关键词：**SUPER** / **GRANT OPTION** / **CREATE USER** / **PROCESS**
+> 原文锚点：第 56~61 段「服务器管理权限常用的主要有 create user、grant option、super、process…只有 DBA 才需要使用」
+
+## 一句话总述
+服务器管理类权限是**实例级**的，能改全局状态或再生成账号，**只该给 DBA**；给普通应用账号属于严重越权。
+
+## 面试官视角
+- **考察意图**：看你在授权时有没有"最小权限"这根弦，尤其是否知道 SUPER 的杀伤力。
+- **P5** 能说出 CREATE USER、GRANT OPTION、SUPER 三种。
+- **P6** 能逐个说清作用：CREATE USER 建账号、GRANT OPTION 允许把权限转授他人、SUPER 做全局管理、PROCESS 看全部线程。
+- **P7** 能指出 GRANT OPTION 与 SUPER 会造成**权限扩散**，并说明 8.0 用动态权限（如 `SYSTEM_VARIABLES_ADMIN`）把 SUPER 拆细。
+- **红旗**：① 给应用账号开 SUPER"方便排查"；② 以为 GRANT OPTION 只是"授权给自己"；③ 不知道 SUPER 能 `SET GLOBAL` 改运行时参数。
+- **惊艳点**：**8.0 把 SUPER 拆成一批动态权限**（`SYSTEM_VARIABLES_ADMIN`、`ROLE_ADMIN` 等），可以只给"改变量"不给"kill 线程" `[源码]` —— 验证：`SHOW PRIVILEGES;` 输出里 8.0 会列出这些动态权限。
+
+## 主问答
+**Q（面试官原话）：** 你们给应用账号都开什么权限？SUPER 权限能随便给吗？
+
+**A：**
+1. **结论**：**绝不给应用账号开管理类权限**；CREATE USER、GRANT OPTION、SUPER、PROCESS 属于 DBA 专有。
+2. **机制**：`CREATE USER` 用于建账号；`GRANT OPTION` 让持有者**能把已有权限再转授给别人**（权限会扩散）；`SUPER` 允许 `SET GLOBAL`、KILL 任意会话等管理命令；`PROCESS` 允许查看所有会话。
+3. **边界**：8.0 起 SUPER 被拆成多个**动态权限**，可按需要最小授予，比如只给 `SYSTEM_VARIABLES_ADMIN` 而不给完整 SUPER。
+
+**加分层**：`GRANT OPTION` 是最容易被忽视的"权限放大器"——拿到它的人可以把权限二次分发，审计时很难收敛。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 管理类权限有哪些 | 概念 | CREATE USER / GRANT OPTION / SUPER / PROCESS | 换题 → 不及格 |
+| L2 | SUPER 能干什么 | 机制 | SET GLOBAL、KILL 会话 | 判 P5 |
+| L3 | GRANT OPTION 有什么风险 | 安全意识 | 权限可被二次转授 | 判 P6 |
+| L4 | 8.0 有什么改进 | 版本演进 | SUPER 拆为动态权限 | 判 P6+ |
+| L5 | 线上怎么审计越权 | 工程实践 | 定期 `SHOW GRANTS` 巡检 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| 5.7 及之前 | SUPER 是"一揽子"管理权限 | 答"严格控制、只给 DBA" |
+| 8.0 | 引入**动态权限**，SUPER 被拆分细化 | 现在应补一句"8.0 可用动态权限做最小化拆分" |
+
+## 关键代码
+```sql
+-- 巡检：找出持有高危管理权限的非 DBA 账号
+SELECT user, host FROM mysql.user
+ WHERE Super_priv = 'Y' OR Grant_priv = 'Y' OR Create_user_priv = 'Y'
+   OR Process_priv = 'Y';
+-- 8.0：只给改全局变量的能力，不给完整 SUPER
+GRANT SYSTEM_VARIABLES_ADMIN ON *.* TO 'ops'@'10.0.0.%';
+```
+
+## ⚠️ 原文纠错
+原文列管理权限时读作的"删除"一项，按上下文（与 CREATE USER、GRANT OPTION、SUPER 并列）判断应为 **PROCESS** 权限（用于 `SHOW PROCESSLIST`）`[存疑]`；已在卡面按 PROCESS 还原。另原文说 SUPER 用于"设置全局变量、kill 线程、执行 CHANGE MASTER"——与官方一致，无错误。
+
+## 总结与追问预判
+- 管理类权限 = 实例级 + 可扩散，**应用账号一律不给**，尤其 SUPER。
+- 8.0 可用动态权限把 SUPER 拆细，做到"能改变量但不能 kill"。
+- 下一题：见 024（DDL 权限）、025（DML 权限）、029（最小权限原则）。

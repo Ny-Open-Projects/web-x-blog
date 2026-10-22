@@ -1,0 +1,56 @@
+# 106 异步复制搭建：主库侧要做什么
+
+> 分类：架构/复制 | 难度：L2 | 题型：工程题 | 频率：高 | 关键词：**server_id** / **log_bin** / **mysqldump --master-data** / **复制账号**
+> 原文锚点：第 120~184 段「在 master 实例上对数据库实例的数据进行备份，备份时候要加上 master 的参数」
+
+## 一句话总述
+主库侧三件事：确认 **`server_id` + `log_bin` + `server_uuid`** 就绪 → 建专用复制账号并授权 → 用 **`mysqldump --master-data`** 打一份带位点/GTID 的全量备份给从库。
+
+## 面试官视角
+- **考察意图**：是不是只在测试环境敲过 `CHANGE MASTER TO`，没做过「带业务数据上线从库」。
+- **P5** 说得出主库要开 binlog 和唯一 server_id / **P6** 能解释 `--master-data` 为什么要加、它记了什么 / **P7** 会补一句「备份期间主库仍在写入，所以必须靠位点或 GTID 对齐，而不是靠备份文件本身」。
+- **红旗**：「主库不用开 binlog」；「从库直接拷数据文件就行」；「server_id 相同没关系」。
+- **惊艳点**：`--master-data=2` 会把 `CHANGE MASTER TO MASTER_LOG_FILE=..., MASTER_LOG_POS=...` 以**注释**形式写进 dump 文件头；开 GTID 时改为记录 `SET @@GLOBAL.GTID_PURGED` —— 验证：`head -30 dump.sql`（8.0.36 `[经验]`）。
+
+## 主问答
+**Q：线上一主一从，主库已经跑了一年有 500G 数据，你怎么把从库挂上去？**
+**A：**
+1. **先给结论**：不能只配 `CHANGE MASTER TO`，必须先做一次**带位点信息的一致性全量备份**并恢复到从库，再让从库从该位点追增量。
+2. **再给机制**：`mysqldump --master-data=2 --single-transaction --all-databases` 在一个事务内拿到一致性快照，同时把备份**那一刻**的 binlog 文件名与偏移量（或 GTID 集合）写进 dump 头；从库导入后从这个位点继续拉增量，中间不丢不重。
+3. **最后给边界**：`--single-transaction` 只保证 **InnoDB** 的一致性，混用 MyISAM 时要加 `--lock-all-tables`；备份期间若有 DDL，快照仍可能被污染。
+**加分层**：500G 用逻辑备份太慢，生产更常见的是 XtraBackup 物理备份 + `xtrabackup_binlog_info`，快一个数量级。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 主库必须开什么 | 概念 | binlog + server_id | 换题 |
+| L2 | 为什么要先备份 | 流程 | 从库要有历史数据基线 | 判 P5 |
+| L3 | --master-data 记了什么 | 机制 | 位点或 GTID 集合 | 判 P6 |
+| L4 | 500G 还用 mysqldump 吗 | 权衡 | 换 XtraBackup 物理备份 | 判 P6+ |
+| L5 | 备份期间主库写入怎么办 | 实战 | 靠位点/GTID 追增量 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| 5.6~8.0（验证 8.0.36） | 5.6 起可选 GTID；8.0 起 `--master-data` 与 `--source-data` 并存 | 按「开 GTID 就用 GTID 对齐」答；8.0 建议写 `SOURCE_*` 新写法 |
+
+## 关键代码
+```sql
+-- 主库：确认复制前置条件
+SELECT @@server_id, @@log_bin, @@server_uuid;
+-- 建专用复制账号（最小权限）
+CREATE USER 'repl'@'192.168.1.%' IDENTIFIED BY '***';
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'192.168.1.%';
+```
+```bash
+# 打带位点的一致性全量备份（2 = 以注释形式写入，1 = 可执行形式）
+mysqldump --single-transaction --master-data=2 --all-databases > dump.sql
+head -30 dump.sql | grep -i 'CHANGE MASTER\|GTID_PURGED'
+```
+
+## ⚠️ 原文纠错
+原文说「在 master 上对整个数据库实例的数据进行备份，备份时候要加上 master 的参数」——「master 的参数」实际指 **`--master-data`**（原文口播成「masterdate」），已还原。原文「把权限给到 repl 用户」未明说权限名，按官方要求补全为 `REPLICATION SLAVE`（8.0 起也可写 `REPLICATION SLAVE` 的同义新名）。未发现其他技术错误。
+
+## 总结与追问预判
+- 主库侧 = 开 binlog → 建账号 → 打带位点备份，三步缺一不可。
+- 下一题：见 107（复制账号与认证插件）、108（从库侧要做什么）。
