@@ -1,0 +1,135 @@
+# 57. Go APM 监控系统实战: 为 gRPC 接口创建 QPS 与错误数指标
+
+## 纲要
+
+- gRPC 监控与 HTTP 思路一致，区别在于**协议不同**，且**客户端与服务端两侧都要埋点**
+- 客户端额外记录**对端服务名（peer server）**，用于观测「调用了谁」；客户端侧同时把网络耗时计入延迟
+- 已有的 trace 拦截器，在其中追加指标统计逻辑即可（不再引入 etcd 等组件，保持原生）
+- 服务端逻辑与 HTTP 类似：按 `type=grpc`、`method`、`status` 统计次数与耗时；gRPC 成功状态码为 `0`
+- 应用服务名通过**编译输出文件名（`-o`）**固定，避免运行环境随机命名导致 `app` 标签漂移
+
+## 正文
+
+### 客户端与服务端都要监控
+
+HTTP 只需要在服务端埋点；gRPC 不同，除了服务端，还要监控**客户端**发起的调用——因为客户端侧能把「网络延迟」也统计进去。所以要在 `metrics` 里同时建立服务端的指标和客户端的指标。
+
+客户端指标多一个维度：对端服务名（`server`）。客户端必须知道自己调用的是哪个 gRPC 服务，因此新增 `server` 标签表示对端服务名称，便于回答「我当前这个服务在频繁调用谁」。
+
+### 在已有 trace 拦截器中追加埋点
+
+之前已经写好了一个 gRPC 拦截器（用于链路追踪 trace）。不必另起炉灶，直接在其中追加指标统计：
+
+**客户端拦截器**：函数结束时用 Histogram 的 `Observe` 记录耗时；在最前面用 Counter 的 `Inc` 记录次数。标签依次为 `type=grpc`、`method`（方法名）、`server`（对端服务名）。对端服务名原本在生产中由 etcd 读取，但本节为了聚焦监控、不引入额外复杂度，直接由调用方显式传入。
+
+**服务端拦截器**：同样在方法处理前后统计。标签为 `type=grpc`、`method`（gRPC 方法）、`status`（返回状态码）。gRPC 中**成功的状态码是 `0`**，出错才非零，所以错误数面板要统计 `status != "0"`。
+
+```go
+// 服务端：处理前计数 +1，处理后记录耗时与状态码
+serverHandleTotal.WithLabelValues("grpc", method, "self").Inc()
+serverHandleSeconds.WithLabelValues("grpc", method, "self", fmt.Sprint(code)).Observe(elapsed)
+```
+
+### 固定应用服务名
+
+运行服务时，`app` 标签的值取自程序名。如果依赖 IDE 随机命名，每次编译出来的名字不稳定，会导致 `app` 标签漂移、面板无法稳定聚合。正确做法是在编译时显式指定输出文件名：
+
+```bash
+go build -o orderservice main.go   # app 标签固定为 orderservice
+go build -o userservice main.go
+go build -o skuservice main.go
+```
+
+同理为 `userservice`、`skuservice` 各自固定名称，重启后它们的 `app` 标签就不会再变。
+
+```mermaid
+flowchart LR
+    subgraph Client
+        CI[客户端拦截器] -->|type=grpc,method,server| CM[grpc_handle_total / seconds]
+    end
+    subgraph Server
+        SI[服务端拦截器] -->|type=grpc,method,status| SM[grpc_handle_total / seconds]
+    end
+    CM --> EX[/metrics]
+    SM --> EX
+    EX --> P[Prometheus]
+```
+
+## Demo 示例
+
+下面给出可独立运行的程序，模拟 gRPC 客户端 / 服务端两侧的埋点逻辑（为保持可运行，省略 gRPC 网络依赖，仅演示指标记录逻辑，协议维度统一为 `grpc`）。
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+
+	"github.com/prometheus/client_golang/prometheus"
+)
+
+// 根据讲稿逻辑补充：gRPC 客户端/服务端指标，协议维度 type=grpc
+var (
+	grpcHandleTotal = prometheus.NewCounterVec(
+		prometheus.CounterOpts{Name: "grpc_handle_total", Help: "gRPC 请求数"},
+		[]string{"type", "method", "server"}, // server: 客户端侧表示对端服务名
+	)
+	grpcHandleSeconds = prometheus.NewHistogramVec(
+		prometheus.HistogramOpts{
+			Name:    "grpc_handle_seconds",
+			Help:    "gRPC 耗时（秒，含网络）",
+			Buckets: []float64{0.01, 0.05, 0.1, 0.5, 1, 5},
+		},
+		[]string{"type", "method", "server", "status"},
+	)
+)
+
+func init() {
+	prometheus.MustRegister(grpcHandleTotal, grpcHandleSeconds)
+}
+
+// recordClient 模拟 gRPC 客户端拦截器埋点：携带对端服务名
+func recordClient(method, peerServer string, code int, elapsed time.Duration) {
+	grpcHandleTotal.WithLabelValues("grpc", method, peerServer).Inc()
+	grpcHandleSeconds.WithLabelValues("grpc", method, peerServer, fmt.Sprint(code)).Observe(elapsed.Seconds())
+}
+
+// recordServer 模拟 gRPC 服务端拦截器埋点：status=0 表示成功
+func recordServer(method string, code int, elapsed time.Duration) {
+	grpcHandleTotal.WithLabelValues("grpc", method, "self").Inc()
+	grpcHandleSeconds.WithLabelValues("grpc", method, "self", fmt.Sprint(code)).Observe(elapsed.Seconds())
+}
+
+func main() {
+	t0 := time.Now()
+	time.Sleep(20 * time.Millisecond)
+	// 客户端调用 orderservice 的 CreateOrder，成功 code=0
+	recordClient("OrderService/CreateOrder", "orderservice", 0, time.Since(t0))
+	// 服务端处理同一次调用
+	recordServer("OrderService/CreateOrder", 0, 18*time.Millisecond)
+	fmt.Println("gRPC 客户端/服务端指标已记录，通过 /metrics 暴露后由 Prometheus 抓取")
+}
+```
+
+### 运行说明
+
+```bash
+go mod init grpc-metric-demo
+go get github.com/prometheus/client_golang/prometheus
+go run main.go
+```
+
+### 代码说明
+
+- `type=grpc` 与 HTTP 的 `type=http` 共用同一套面板模板，仅靠标签值区分协议
+- 客户端 `server` 标签记录对端服务名，可回答「谁在调谁」；服务端侧该维度填 `"self"`
+- gRPC 成功码为 `0`，错误数用 `status != "0"` 过滤
+
+### 技术点总结
+
+- gRPC 与 HTTP 监控同源，差异仅在协议标签与「客户端也要埋点」
+- 客户端埋点额外带 `server`（对端服务名），并把网络耗时计入延迟
+- 复用已有 trace 拦截器追加统计，避免重复建设
+- 用 `go build -o <name>` 固定 `app` 标签，防止运行环境随机命名导致标签漂移
+

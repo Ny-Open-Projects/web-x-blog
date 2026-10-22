@@ -1,0 +1,188 @@
+# 38. Go APM 监控系统实战: 装饰器实现 SQL 执行方法
+
+## 纲要
+
+- 基础上，补全各包装类型的方法体，让 hooks 真正在 SQL 前后被调用
+- `wrapperStmt` 的 `StmtQueryContext` / `StmtExecContext`：先 `Before`、再委托真实 statement、再 `After`，出错走 `OnError`
+- `wrapperConn` 的 `QueryContext` / `ExecContext`：同样前后包 hooks
+- `wrapperConn.PrepareContext`：委托真实连接 prepare，但把返回的 statement 再包成 `wrapperStmt`（prepare 阶段只建语句、不执行，不调 hooks）
+- `nameValuesToInterface`：把 `[]driver.NamedValue` 转成 `[]interface{}`，供 hooks 使用
+- 验证：用一个 `testDriver` 包装 mysql 驱动并注册，执行一条查询，观察 `Before` / `After` 被打印出来
+
+## 补全 statement 的方法体
+
+`wrapperStmt` 包的是真实 `driver.Stmt`。执行时思路一致：调用前跑 `Before`，委托真实语句执行，执行后跑 `After`，出错跑 `OnError`。由于 `query` 在建 statement 时已知，直接作为属性存进结构体。
+
+```go
+// sqlwrapper/stmt.go —— 根据讲稿逻辑补充
+package sqlwrapper
+
+import (
+	"context"
+	"database/sql/driver"
+)
+
+type wrapperStmt struct {
+	stmt  driver.Stmt
+	query string
+	hooks Hooks
+}
+
+func (s *wrapperStmt) Close() error              { return s.stmt.Close() }
+func (s *wrapperStmt) NumInput() int             { return s.stmt.NumInput() }
+func (s *wrapperStmt) ColumnConverter(idx int) driver.ValueConverter {
+	return s.stmt.ColumnConverter(idx)
+}
+
+func (s *wrapperStmt) QueryContext(ctx context.Context, args []driver.NamedValue) (driver.Rows, error) {
+	if ctx, err := s.hooks.Before(ctx, s.query, args); err != nil {
+		return nil, err
+	}
+	rows, err := s.stmt.QueryContext(ctx, args)
+	if err != nil {
+		_ = s.hooks.OnError(ctx, s.query, args, err)
+		return nil, err
+	}
+	if err := s.hooks.After(ctx, s.query, args); err != nil {
+		return nil, err
+	}
+	return rows, nil
+}
+
+func (s *wrapperStmt) ExecContext(ctx context.Context, args []driver.NamedValue) (driver.Result, error) {
+	if ctx, err := s.hooks.Before(ctx, s.query, args); err != nil {
+		return nil, err
+	}
+	res, err := s.stmt.ExecContext(ctx, args)
+	if err != nil {
+		_ = s.hooks.OnError(ctx, s.query, args, err)
+		return nil, err
+	}
+	if err := s.hooks.After(ctx, s.query, args); err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+```
+
+因为 `go-sql-driver/mysql` 的 statement 一定实现了 `StmtQueryContext` / `StmtExecContext`，我们的 `wrapperStmt` 也实现这两个接口后，标准库会稳定地走到这里，不会退化到老路径。
+
+## 补全 conn 的方法体
+
+`wrapperConn` 上的查询 / 写入同理，并在 `PrepareContext` 里把真实 statement 包成 `wrapperStmt`：
+
+```go
+// sqlwrapper/conn.go —— 根据讲稿逻辑补充
+package sqlwrapper
+
+import (
+	"context"
+	"database/sql/driver"
+)
+
+type wrapperConn struct {
+	conn  driver.Conn
+	hooks Hooks
+}
+
+func (c *wrapperConn) Prepare(query string) (driver.Stmt, error) {
+	stmt, err := c.conn.Prepare(query)
+	if err != nil {
+		return nil, err
+	}
+	return &wrapperStmt{stmt: stmt, query: query, hooks: c.hooks}, nil
+}
+
+func (c *wrapperConn) PrepareContext(ctx context.Context, query string) (driver.Stmt, error) {
+	// prepare 只是建立语句，尚未执行 SQL，不调用 hooks
+	stmt, err := c.conn.PrepareContext(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+	return &wrapperStmt{stmt: stmt, query: query, hooks: c.hooks}, nil
+}
+
+func (c *wrapperConn) QueryContext(ctx context.Context, query string, args []driver.NamedValue) (driver.Rows, error) {
+	if ctx, err := c.hooks.Before(ctx, query, args); err != nil {
+		return nil, err
+	}
+	rows, err := c.conn.QueryContext(ctx, query, args)
+	if err != nil {
+		_ = c.hooks.OnError(ctx, query, args, err)
+		return nil, err
+	}
+	if err := c.hooks.After(ctx, query, args); err != nil {
+		return nil, err
+	}
+	return rows, nil
+}
+
+func (c *wrapperConn) ExecContext(ctx context.Context, query string, args []driver.NamedValue) (driver.Result, error) {
+	if ctx, err := c.hooks.Before(ctx, query, args); err != nil {
+		return nil, err
+	}
+	res, err := c.conn.ExecContext(ctx, query, args)
+	if err != nil {
+		_ = c.hooks.OnError(ctx, query, args, err)
+		return nil, err
+	}
+	if err := c.hooks.After(ctx, query, args); err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+```
+
+## nameValuesToInterface：参数转换
+
+hooks 拿到的 `args` 是 `[]driver.NamedValue`。为了方便后续记录日志 / 属性，统一转成 `[]interface{}`：
+
+```go
+// nameValuesToInterface 把命名参数切片转成普通接口切片
+func nameValuesToInterfaces(args []driver.NamedValue) []interface{} {
+	out := make([]interface{}, len(args))
+	for i, a := range args {
+		out[i] = a // 注意：这里先整体传入，真正取值修正
+	}
+	return out
+}
+```
+
+> 这一步会做一次关键修正：应当取 `a.Value`（真实参数值），而非整个 `driver.NamedValue` 类型。
+
+## 验证：用 testDriver 证明装饰生效
+
+用一个什么都不做、只打印 SQL 的 `testDriver` 注册成新名字，执行一条查询，确认 `Before` / `After` 被触发：
+
+```go
+// 测试片段（示意）—— 根据讲稿逻辑补充
+func TestSQLWrapper(t *testing.T) {
+	Register("mysql-with-hooks", Hooks{
+		Before: func(ctx context.Context, q string, a []driver.NamedValue) (context.Context, error) {
+			fmt.Println("before:", q)
+			return ctx, nil
+		},
+		After: func(ctx context.Context, q string, a []driver.NamedValue) error {
+			fmt.Println("after:", q)
+			return nil
+		},
+	})
+
+	db, err := sql.Open("mysql-with-hooks", "user:pass@tcp(127.0.0.1:3306)/test")
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, _ = db.Query("SELECT 1")
+}
+```
+
+运行后能看到 SQL 语句被 `Before` / `After` 正确打印出来——证明我们自己的 Driver / Conn 已经在 SQL 执行前后接管了逻辑。
+
+## 技术点总结
+
+- statement 与 conn 的方法体结构一致：Before → 委托真实执行 → After，出错 OnError
+- `PrepareContext` 只包装 statement，不调用 hooks（因为此时还没真正执行 SQL）
+- 必须实现 `StmtQueryContext` / `StmtExecContext`，否则 prepare 路径漏掉插桩
+- `nameValuesToInterfaces` 统一参数形态，但取值方式需修正
+- 用 `testDriver` 注册新驱动名即可验证装饰是否生效
+
