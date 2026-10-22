@@ -1,0 +1,5 @@
+用到的embedi模型embedi模型是IIG系统的一个重要的组成部分。
+在IIG系统构建过程中，其中一个最关键的是如何为IG应用挑选合适的embedi模型。
+所以在这一章中，我们会先说明一下embedding模型的一个重要作用。
+接着我们会了解一下embedding模型是如何训练的，并介绍当前主流的embedding模型，最重要的是我们会讲解一下如何为RAG挑选embedding模型。
+在最后我们会通过实战去加深对embedding模型的一个认识。
