@@ -1,0 +1,77 @@
+# 51. Zapier 扩展与 ChatGPT 生态产品：Mailgun / Notion / Fine-tune
+
+## 纲要
+
+- **Zapier 计费**：免费试用约 1000 次任务；付费档如 Starter（年付更便宜）、Professional（$49/月 约 2000 任务）等，以官网为准。
+- **邮件服务商 Mailgun**：群发可达率高、各收信方授权；免费额度 1 万封/月；需域名（.com 约 70-80 元/月）+ SPF/DKIM/MX 记录；receiving/sending 模块 + 丰富 events（bounce/complain/delivery/unsubscribe/list）。
+- **HTML 邮件模板**：Mailgun 等内置行内 HTML 模板（账单告警/操作等），可让 LLM 生成 600-800 宽模板，把正文嵌入 content 区。
+- **Notion 摘要**：Zapier 接 Notion，用便宜 3.5 Turbo 把笔记摘要回写，基础玩法。
+- **Fine-tune 成本**：GPT-3.5 微调训练 $0.008/1k token（≈500 汉字）、推理 $0.006/1k token；50 万字语料训练约 $8（≈57 元），远低于国内大模型。
+- **生态产品**：OpenCat（移动端 App）、ChatGPT Web（桌面端）、OpenAI Translator（画词翻译+润色+总结，桌面端，月费几元，比 DeepL 便宜且功能多）；微信接入方案不可持久（打字速度检测判机器人）。
+
+> 本章按课程口径重构；产品名已规范化（Zapier/Mailgun/DeepL/OpenCat）；剥离营销与课程群引流。
+
+## 一、Zapier 计费与邮件服务商
+
+- **计费**：注册后约 1000 次免费试用任务；付费按档（Starter 年付划算、Professional $49/月约 2000 任务），以官网当期为准。
+- **为何用邮件服务商而非公共邮箱**：公共邮箱（如 163/QQ）每日群发限量；Mailgun 等被各大收信方授权，可达率高，买几万封额度前持续代发。Mailgun 免费 1 万封/月，需自购域名绑定子域名发信。
+
+## 二、Mailgun 配置
+
+- **域名与记录**：买 .com 域名（约 70-80 元/月），绑子域名；设 SPF/DKIM/MX。腾讯企业邮 MX 校验未过但不影响发信（发信只需验证域名所有权）。
+- **模块**：receiving（收信，可 create route 转发/存储/通知/stop）、sending（发信，支持 API 或对接 Zapier）。
+- **Events**：newbounce（退信）、complain（投诉）、delivery（成功）、unsubscribe（退订）、newlist（新增订阅）等；newlist 常用于网站订阅后 API 写入 mailing list 触发后续流水。
+
+## 三、HTML 邮件模板
+
+- Mailgun 提供行内 HTML 模板（销售/订阅/告警/操作等），下载解压改样式。
+- 让 LLM 生成 600-800 宽邮件模板，把响应正文放入模板 content 区（位置可换）。
+
+## 四、Notion 摘要与 Fine-tune
+
+- **Notion 摘要**：Zapier 编辑流水线，ChatGPT prompt「用中文把 Notion 指定内容（标题/创建日期/详情）摘要」→ 创建 Notion 页，基础能力强。
+- **Fine-tune（微调）**：OpenAI 后台可视化上传知识库训专属模型；GPT-3.5 微调训练 $0.008/1k token（≈500 汉字）、推理 $0.006/1k token。50 万字绘本/故事语料训练约 $8（≈57 元）。可训故事/考题/学习模型。
+
+## 五、ChatGPT 生态产品
+
+- **OpenCat**：公司内移动端访问方案（App）。
+- **ChatGPT Web**：桌面端工具（水龙头/自申 API 后用）。
+- **OpenAI Translator**：用 OpenAI 接口「画词翻译」，质量比肩 DeepL；支持多语言、总结、分析、润色（polish）；桌面端（DMG 供 macOS，含 M1/M2/M3），填 API Key 选服务方与模型（如 turbo-1106 优惠），月费几元，远低于 DeepL 最低档。
+- **微信接入**：有微信接 GPT 方案可玩但不可持久——微信监测打字速度（常人每分钟几十字），机器人快回复多字易被判定；公司内多用 OpenCat 类 App。
+
+## 六、FAQ
+
+**Q1：Mailgun 免费额度与前置？**
+免费 1 万封/月；需购域名（约 70-80 元/月）绑子域名 + SPF/DKIM/MX 记录。
+
+**Q2：微调 50 万字语料多少钱？**
+GPT-3.5 微调约 $8（≈57 元），推理 $0.006/1k token，比国内大模型便宜。
+
+**Q3：微信接 GPT 能用吗？**
+仅可玩，不可持久；微信按打字速度判机器人，群内多用易封；公司内用 OpenCat 类 App。
+
+**Q4：OpenAI Translator 比 DeepL 好在哪？**
+画词翻译质量比肩 DeepL，且自带总结/分析/润色，桌面端月费几元，功能与性价比更优。
+
+## 七、面试高频问答
+
+**1. 为什么邮件群发要用 Mailgun 而非公共邮箱？**
+公共邮箱每日群发限量、易判垃圾源；Mailgun 被收信方授权、可达率高、有免费额度与完整事件回调。
+
+**2. 简述 Fine-tune 成本结构。**
+GPT-3.5 训练 $0.008/1k token、推理 $0.006/1k token；中等语料（如 50 万字）训练约 $8，远低于自训或国内模型。
+
+**3. Zapier 在 AI 工作流里的角色？**
+低代码串起邮件/Notion/LLM 等，触发器+Action 拼装自动化，无需写代码即可接 ChatGPT API。
+
+**4. 生产环境自动邮件的合规注意？**
+用授权邮件服务商、设退订/投诉事件处理、验证域名所有权、避免被判定垃圾源。
+
+## 八、ops 提示（生态）
+
+> **群发走服务商**：营销/订阅用 Mailgun 等授权服务商，公共邮箱易限流。
+>
+> **微调比自训省**：中小语料用 OpenAI Fine-tune，成本极低、流程简化。
+>
+> **翻译用 Translator**：画词翻译+润色+总结，月费几元，性价比胜 DeepL。
+

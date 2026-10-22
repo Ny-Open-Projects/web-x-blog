@@ -1,0 +1,184 @@
+{
+  "course": "mksz952",
+  "desc": "LangChain4j",
+  "src_mt": "source/18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践",
+  "code_source": "done/18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/code/unzip-target/课件代码",
+  "code_status": "已解压19文件(10 docx课件+3 zip+1 sql)",
+  "chapters": [
+    {
+      "chapter": "第10章 万物互联：MCP智能宇宙启航",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第10章 万物互联：MCP智能宇宙启航",
+      "mt_files": 7,
+      "src_bytes": 47445,
+      "out_bytes": 12462,
+      "ratio": "0.26x",
+      "code_status": "源代码卷未挂载，本章为 MCP 章（定义/两传输模式/三端架构/百度地图接入五步/StdioMcpTransport源码），代码块为课程口径重构示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "53_MCP是什么与为什么需要.md",
+        "54_MCP协议架构与接入百度地图实战.md",
+        "55_MCP对接背后流程与脚本源码.md"
+      ]
+    },
+    {
+      "chapter": "第1章 大模型启蒙：AI世界观构建",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第1章 大模型启蒙：AI世界观构建",
+      "mt_files": 10,
+      "src_bytes": 69814,
+      "out_bytes": 30650,
+      "ratio": "0.44x",
+      "code_status": "源代码卷未挂载(/Volumes 仅 Macintosh HD)，本章为世界观/对比理论章，无工程代码提取；代码块为课程口径示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "1_课程导学为什么Java工程师要学LangChain4j.md",
+        "2_AI大模型世界观架构全景与应用开发本质.md",
+        "3_向量数据库与模型微调RAG雏形与LoRA低参微调.md",
+        "4_LangChain4j框架解密与开发应用场景.md",
+        "5_SpringAI与LangChain4j技术路线深度对比.md"
+      ]
+    },
+    {
+      "chapter": "第2章 接入模型：LangChain4j接入生态实战",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第2章 接入模型：LangChain4j接入生态实战",
+      "mt_files": 10,
+      "src_bytes": 49399,
+      "out_bytes": 31465,
+      "ratio": "0.64x",
+      "code_status": "源代码卷未挂载(/Volumes 仅 Macintosh HD)，本章为接入实战章，代码块为课程口径重构示意（SpringBoot骨架/OpenAIChatModel/QwenChatModel/WanxImageModel/工厂模式）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "6_SpringBoot基础工程搭建环境准备与LangChain4j接入前置.md",
+        "7_LangChain4j接入第一个大模型核心概念与HelloWorld.md",
+        "8_LangChain4j整合SpringBootStarter自动装配.md",
+        "9_大模型生态全景SuperCLUE评测与模型支持矩阵.md",
+        "10_接入DeepSeek原生大模型.md",
+        "11_阿里百炼平台接入通义千问与DeepSeek实战.md",
+        "12_接入阿里千义万象图片生成模型ImageModel.md",
+        "13_工厂模式统一多模型接入层.md"
+      ]
+    },
+    {
+      "chapter": "第3章 解放生产力：AiService智能代理",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第3章 解放生产力：AiService智能代理",
+      "mt_files": 4,
+      "src_bytes": 14494,
+      "out_bytes": 10592,
+      "ratio": "0.73x",
+      "code_status": "源代码卷未挂载，本章为 AiService 原理/创建/消息类型，代码块为课程口径重构示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "14_AiService核心原理动态代理与能力封装.md",
+        "15_AiService创建实战create与注解方式.md",
+        "16_AiService消息类型UserMessage与SystemMessage.md"
+      ]
+    },
+    {
+      "chapter": "第4章 记忆宫殿：ChatMemory对话记忆",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第4章 记忆宫殿：ChatMemory对话记忆",
+      "mt_files": 8,
+      "src_bytes": 41339,
+      "out_bytes": 20203,
+      "ratio": "0.49x",
+      "code_status": "源代码卷未挂载，本章为 ChatMemory 原理/整合/隔离/源码/存储选型/MySQL持久化，代码块为课程口径重构示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "17_聊天记忆原理与手动实现.md",
+        "18_AiService整合ChatMemory记忆组件.md",
+        "19_ChatMemory会话隔离机制memoryId.md",
+        "20_ChatMemory源码剖析默认内存存储.md",
+        "21_ChatMemory存储介质选型与切换.md",
+        "22_自定义MySQL持久化存储介质.md"
+      ]
+    },
+    {
+      "chapter": "第5章 咒语工程：提示词角色操纵术",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第5章 咒语工程：提示词角色操纵术",
+      "mt_files": 8,
+      "src_bytes": 43190,
+      "out_bytes": 16467,
+      "ratio": "0.38x",
+      "code_status": "源代码卷未挂载，本章为提示词工程（System/User/结构化/法律助手），代码块为课程口径重构示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "23_系统提示词SystemMessage角色约束.md",
+        "24_用户提示词UserMessage与多参数占位符.md",
+        "25_系统提示词进阶日期占位与文件加载.md",
+        "26_结构化输出基础类型与自定义对象.md",
+        "27_落地实践专业法律咨询助手.md"
+      ]
+    },
+    {
+      "chapter": "第6章 超能扩展：Tools外部能力集成",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第6章 超能扩展：Tools外部能力集成",
+      "mt_files": 4,
+      "src_bytes": 28651,
+      "out_bytes": 10281,
+      "ratio": "0.36x",
+      "code_status": "源代码卷未挂载，本章为 Tools 函数调用（概念/流程/电商落地），代码块为课程口径重构示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "28_Tools概念与注解函数调用.md",
+        "29_函数调用流程剖析从提示词到本地执行.md",
+        "30_落地实践电商客服机器人.md"
+      ]
+    },
+    {
+      "chapter": "第7章 案例实战：AI招领助手开发V1",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第7章 案例实战：AI招领助手开发V1",
+      "mt_files": 23,
+      "src_bytes": 168876,
+      "out_bytes": 54543,
+      "ratio": "0.32x",
+      "code_status": "源代码卷未挂载，本章为大型案例章（意图分析/丢失登记/多AiService隔离/BaseEntity持久化/AOP切面/自定义记忆Tool/修改与防幻觉/找到登记/beta6优化），代码块为课程口径重构示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "31_项目介绍与系统架构设计.md",
+        "32_基础工程搭建与环境配置测试.md",
+        "33_用户意图分析模块IntentionOutput.md",
+        "34_失物登记功能与提示词设计.md",
+        "35_多AiService隔离与系统提示词位置.md",
+        "36_数据持久化BaseEntity与lostregister.md",
+        "37_AOP切面持久化会话记录ChatFlow.md",
+        "38_自定义会话记忆Tool与上下文隔离重构.md",
+        "39_失物登记修改与幻觉防护.md",
+        "40_会话记录查询删除与找到失物登记及优化总结.md"
+      ]
+    },
+    {
+      "chapter": "第8章 开天眼：向量知识库智能增强",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第8章 开天眼：向量知识库智能增强",
+      "mt_files": 19,
+      "src_bytes": 119404,
+      "out_bytes": 35055,
+      "ratio": "0.29x",
+      "code_status": "源代码卷未挂载，本章为 RAG 章（RAGvs微调/向量搜索/EmbeddingStore源码/Token/百炼Embedding/Pinecone/京东外卖落地），代码块为课程口径重构示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "41_RAG与微调应用场景对比与选型.md",
+        "42_向量搜索原理从向量到语义相似度.md",
+        "43_RAG全流程建立索引与检索增强生成.md",
+        "44_文档加载与解析DocumentLoader与Parser.md",
+        "45_文档分割器递归分割重叠与自定义.md",
+        "46_向量转换与存储EmbeddingModel与EmbeddingStore及源码剖析.md",
+        "47_Token计费与百炼Embedding模型接入.md",
+        "48_Pinecone向量数据库接入.md",
+        "49_京东外卖客服RAG落地实践全链路.md"
+      ]
+    },
+    {
+      "chapter": "第9章 案例实战：AI招领助手开发V2",
+      "mt_dir": "18.mksz952-Java大模型工程能力必修课，LangChain4j入门到实践/第9章 案例实战：AI招领助手开发V2",
+      "mt_files": 7,
+      "src_bytes": 43000,
+      "out_bytes": 13112,
+      "ratio": "0.30x",
+      "code_status": "源代码卷未挂载，本章为招领助手V2案例（RagConfig向量索引/失物查询RAG双Tool/业务层流式实现），代码块为课程口径重构示意",
+      "code_artifacts": [],
+      "blog_cards": [
+        "50_V2索引建立从foundregister到向量库.md",
+        "51_V2失物查询RAG整合大模型.md",
+        "52_V2业务层实现与测试.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "course": "mksz737",
+  "desc": "提示词工程",
+  "src_mt": "source/15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]",
+  "code_source": "done/mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/code/unzip-target/00 其他资料",
+  "code_status": "资料已解压(373文件:313pdf/16md/2xmind/13xlsx)；zip-source加密不用管",
+  "chapters": [
+    {
+      "chapter": "01 第1章 AI时代：提示词工程的崛起",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/01 第1章 AI时代：提示词工程的崛起",
+      "mt_files": 1,
+      "src_bytes": 20900,
+      "out_bytes": 9711,
+      "ratio": "0.46x",
+      "code_status": "提示词工程理论课，无代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "1_AI时代提示词工程的崛起与课程导学.md"
+      ]
+    },
+    {
+      "chapter": "02 第2章 AI与提示词工程：机遇、挑战与市场展望",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/02 第2章 AI与提示词工程：机遇、挑战与市场展望",
+      "mt_files": 5,
+      "src_bytes": 58747,
+      "out_bytes": 25133,
+      "ratio": "0.43x",
+      "code_status": "提示词工程理论课，无代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "2_AI风口催生提示词工程新岗位与市场需求.md",
+        "3_ChatGPT能力演进与通用Prompt提效实战.md",
+        "4_PromptEngineering概念技术与提示词聚合网站.md",
+        "5_AI时代机遇与挑战哪些工作可能会消失.md"
+      ]
+    },
+    {
+      "chapter": "03 第3章 实践环境准备：模型选择、工具推荐与配置实践",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/03 第3章 实践环境准备：模型选择、工具推荐与配置实践",
+      "mt_files": 9,
+      "src_bytes": 126689,
+      "out_bytes": 37451,
+      "ratio": "0.30x",
+      "code_status": "提示词工程理论+工具课，无代码提取；卡片为知识重构（选型/硬件/平台/合规/平替/团队）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "6_大模型选型开源闭源与商用版权合规.md",
+        "7_本地部署硬件选型与GPU租赁.md",
+        "8_国外大模型平台与对比Playground.md",
+        "9_国内大模型平台横向测评与选型.md",
+        "10_付费AI工具值不值ChatGPTPlus与Midjourney.md",
+        "11_合规访问ChatGPT海外账户开户与注册支付.md",
+        "12_ChatGPT平替方案大合集.md",
+        "13_团队环境配置与GPT工作流集成.md"
+      ]
+    },
+    {
+      "chapter": "04 第4章 Prompt提示词策略：编写原则、优化技巧与结构探讨",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/04 第4章 Prompt提示词策略：编写原则、优化技巧与结构探讨",
+      "mt_files": 5,
+      "src_bytes": 52118,
+      "out_bytes": 16299,
+      "ratio": "0.31x",
+      "code_status": "提示词工程理论+原则课，无代码提取；卡片为知识重构（吴恩达课指引/两大原则/优化策略与结构）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "14_吴恩达Prompt工程课程指引.md",
+        "15_原则一使用明确且具体的指令四大策略.md",
+        "16_原则二给模型时间去思考拆解与限定范围.md",
+        "17_五大Prompt优化策略与Prompt基础结构总览.md"
+      ]
+    },
+    {
+      "chapter": "05 第5章 八大通识技能：提示词如何拓宽视野与提升效率",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/05 第5章 八大通识技能：提示词如何拓宽视野与提升效率",
+      "mt_files": 8,
+      "src_bytes": 78098,
+      "out_bytes": 24335,
+      "ratio": "0.31x",
+      "code_status": "提示词工程理论+通识技巧课，无代码提取；卡片为知识重构（八技巧总览/角色双技巧/背景与长度精度/分阶段结构化/自定义指令）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "18_八大通识技能总览让Prompt拓宽视野与提升效率.md",
+        "19_为AI设角色与为自己设角色背书技巧一二.md",
+        "20_明确问题提供背景与限制回复长度精度技巧三四.md",
+        "21_分阶段提问明确目的与结构化思考技巧五六七.md",
+        "22_系统化设计你的自定义指令ChatGPT专属技巧八.md"
+      ]
+    },
+    {
+      "chapter": "06 第6章 职场大师：提示词通用技能，助力职场",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/06 第6章 职场大师：提示词通用技能，助力职场",
+      "mt_files": 7,
+      "src_bytes": 82839,
+      "out_bytes": 25756,
+      "ratio": "0.31x",
+      "code_status": "提示词工程职场应用课，无代码提取；卡片为知识重构（PRD周报/会议纪要/学习效率/读书提效/笔记OKR/教育场景）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "23_职场专业写作PRD文档与周报模仿.md",
+        "24_会议纪要自动化语音转文字与LLM摘要.md",
+        "25_学习效率提升名词解释与费曼学习法.md",
+        "26_读书提效总结一本书与基于目标选择性阅读.md",
+        "27_整理笔记撰写总结与职场数据复盘OKR.md",
+        "28_教育场景模拟面试英语学习文献翻译与心理指导.md"
+      ]
+    },
+    {
+      "chapter": "07 第7章 码农利器：程序员的提示词实战",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/07 第7章 码农利器：程序员的提示词实战",
+      "mt_files": 9,
+      "src_bytes": 126617,
+      "out_bytes": 28165,
+      "ratio": "0.22x",
+      "code_status": "提示词工程程序员实战课，无代码提取；卡片为知识重构（AI编程工具/验证想法/自定义GPT/周报/简历/多角色产品/职场交际）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "29_AI编程辅助工具横向对比CodeiumCopilotCursor.md",
+        "30_大模型辅助编程快速验证想法.md",
+        "31_自定义GPT与GPTs生态微调知识库.md",
+        "32_程序员周报结构git总结与黄金比例.md",
+        "33_个性化简历避坑与按JD优化.md",
+        "34_想法变产品多角色AI协作.md",
+        "35_职场交际与回复技术邮件.md"
+      ]
+    },
+    {
+      "chapter": "08 第8章 副业加速：内容创作与营销的新武器",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/08 第8章 副业加速：内容创作与营销的新武器",
+      "mt_files": 6,
+      "src_bytes": 85676,
+      "out_bytes": 20950,
+      "ratio": "0.24x",
+      "code_status": "提示词工程副业内容营销课，无代码提取；卡片为知识重构（短视频脚本/借鉴再创作/营销短信/小红书/公众号软文/文章润色）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "36_短视频脚本编写爆款公式与风格定制.md",
+        "37_学会借鉴效仿达人编写大纲与再创作.md",
+        "38_营销短信编写与群发自动化.md",
+        "39_小红书软文爆款关键词与违禁词规避.md",
+        "40_知识付费公众号软文形式与仿写.md",
+        "41_文章润色画面感与情感导向.md"
+      ]
+    },
+    {
+      "chapter": "09 第9章 深入技术原理：主流LLM模型介绍",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/09 第9章 深入技术原理：主流LLM模型介绍",
+      "mt_files": 6,
+      "src_bytes": 126829,
+      "out_bytes": 39449,
+      "ratio": "0.31x",
+      "code_status": "提示词工程理论+技术原理课，无代码提取；卡片为知识重构（LLM原理/局限性/发展历史/代码模型/图像模型/绘图环境）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "42_LLM工作原理与Transformer自注意力词向量与涌现能力.md",
+        "43_LLM局限性伦理政治安全内容审核与Prompt攻击防护.md",
+        "44_LLM发展历史统计神经预训练大规模GPTBERT谱系与涌现拐点.md",
+        "45_代码生成模型CodexAlphaCodeStarCoderDeepSeekCoder与训练原理.md",
+        "46_图像生成模型DALLEStableDiffusion与GNNLLM对齐视频生成.md",
+        "47_绘图环境部署秋叶整合包ComfyUIModelScopeHFC站与网络代理.md"
+      ]
+    },
+    {
+      "chapter": "10 第10章 ChatGPT探索之旅：从模型限制到插件生态的全景",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/10 第10章 ChatGPT探索之旅：从模型限制到插件生态的全景",
+      "mt_files": 6,
+      "src_bytes": 97775,
+      "out_bytes": 31836,
+      "ratio": "0.33x",
+      "code_status": "提示词工程 ChatGPT 生态课，无代码提取；卡片为知识重构（能力限制/爆发大事记/Zapier实战/生态产品/插件推荐/官网子站）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "48_ChatGPT能力与限制八类局限与对应解法.md",
+        "49_ChatGPT爆发大事记OpenAI时间线与宫斗股权剖析.md",
+        "50_Zapier自动化邮件回复ChatGPT替代人工实战.md",
+        "51_Zapier扩展与ChatGPT生态产品MailgunNotionFineTune.md",
+        "52_ChatGPTPlus插件推荐联网计算绘图与AIGC视频.md",
+        "53_OpenAI官网被忽视的两个子站Platform与社区论坛.md"
+      ]
+    },
+    {
+      "chapter": "11 第11章 商业化思维启示录：如何利用LLM模型开创商机",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/11 第11章 商业化思维启示录：如何利用LLM模型开创商机",
+      "mt_files": 5,
+      "src_bytes": 80372,
+      "out_bytes": 25326,
+      "ratio": "0.32x",
+      "code_status": "提示词工程商业化思维课，无代码提取；卡片为知识重构（泼冷水识别/Character.AI情绪价值/Zapier类AIGC小说/跨境联盟营销/产品经理点线面体）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "54_泼冷水冷静看待用ChatGPT一天赚xxx元骗局识别与普通人三原则.md",
+        "55_商业化思维1CharacterAI与名人对话产品的思考低风险项目.md",
+        "56_商业化思维2ChatGPT创作童话故事与小说剪映实操.md",
+        "57_商业化思维3用GPT开发购物网站搞钱联盟营销与跨境电商.md",
+        "58_商业化应用落地进阶产品经理Prompt点线面体.md"
+      ]
+    },
+    {
+      "chapter": "12 第12章 提示词进阶：框架、颜色理论与多语言应用",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/12 第12章 提示词进阶：框架、颜色理论与多语言应用",
+      "mt_files": 4,
+      "src_bytes": 62347,
+      "out_bytes": 21888,
+      "ratio": "0.35x",
+      "code_status": "提示词工程进阶课，无代码提取；卡片为知识重构（辩证看结构模型/Excel十一组件知识库/两个万能技巧/黄金26条原则与前沿工具）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "59_如何形成自己的提示词知识库思路辩证看结构模型噱头.md",
+        "60_实战自制提示词知识库Excel十一组件LLM扩写.md",
+        "61_如何让GPT更准确两个万能提示词技巧.md",
+        "62_提示词黄金26条原则与AI前沿工具推荐.md"
+      ]
+    },
+    {
+      "chapter": "13 第13章 AI绘图：创意与技术的结合",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/13 第13章 AI绘图：创意与技术的结合",
+      "mt_files": 15,
+      "src_bytes": 164448,
+      "out_bytes": 39481,
+      "ratio": "0.24x",
+      "code_status": "AI绘图课（MJ+SD+AutoDL），无代码提取；卡片为知识重构（MJ入门/LLM联动订阅/进阶种子重绘换脸/对比DALL·E3/商业化/V6；SD介绍/安装界面；AutoDL租用/部署全流程）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "63_Midjourney入门注册Discord部署prompt结构与参数提示词生成反推.md",
+        "64_Midjourney与大模型联动写提示词及订阅取消订阅.md",
+        "65_Midjourney进阶图片种子局部重绘Remix与换脸.md",
+        "66_Midjourney与DALLE3实测对比人物动物风景风格Logo.md",
+        "67_Midjourney商业化落地应用场景与版权字体提示.md",
+        "68_MidjourneyV6重大更新提示词重写六大要素与style参数.md",
+        "69_StableDiffusion介绍硬件选型WebUI与ComfyUI及Civitai模型下载.md",
+        "70_StableDiffusion安装与WebUI界面汉化插件配置Linux实战.md",
+        "71_AutoDL租用GPU选配与文件传输公网网盘.md",
+        "72_AutoDL部署StableDiffusion全流程手动安装保存镜像社区镜像模型市场克隆实例Conda.md"
+      ]
+    },
+    {
+      "chapter": "14 第14章 贾维斯化身：AI Agent作为未来的超能助理",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/14 第14章 贾维斯化身：AI Agent作为未来的超能助理",
+      "mt_files": 7,
+      "src_bytes": 90035,
+      "out_bytes": 26371,
+      "ratio": "0.29x",
+      "code_status": "AI Agent 课，无代码提取；卡片为知识重构（Agent定义/两方向/AutoGPT/AgentGPT/Prompt技巧/生态全景/AppAgent）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "73_什么是AIAgent定义感知计划行动循环与记忆长链技术.md",
+        "74_AIAgent两大方向自主代理与生成式代理AutoGPTBabyAGIAgentGPT斯坦福虚拟小镇.md",
+        "75_上手AutoGPT本地安装配置与人口比博文实战.md",
+        "76_上手AgentGPT网页配置旅行规划与博客助手及定价.md",
+        "77_AIAgent内置Prompt技巧API文档链长链AutoGPTBabyAGI模板与三大局限.md",
+        "78_AIAgent生态全景开源vs商用OpenInterpreterLlamaIndex向量化与ChatGLM.md",
+        "79_扩展AppAgent让LLM操作移动AppADB计算机视觉GPT-4V.md"
+      ]
+    },
+    {
+      "chapter": "15 第15章 人工智能领域未来的发展",
+      "mt_dir": "15.mksz737-AI人人必修-提示词工程+大模型多场景实战[完结]/15 第15章 人工智能领域未来的发展",
+      "mt_files": 6,
+      "src_bytes": 96069,
+      "out_bytes": 25149,
+      "ratio": "0.26x",
+      "code_status": "AI 未来课，无代码提取；卡片为知识重构（行业格局/落地方向/就业影响/学习指南/私有化训练/课程总结）",
+      "code_artifacts": [],
+      "blog_cards": [
+        "80_2023AI行业格局八大赛道流量PV价值巨头独角兽与创业避坑.md",
+        "81_AI落地好方向与创业准则智能驾驶游戏NPC拥抱大模型不强制结合.md",
+        "82_AI对社会与就业影响WEF自动化岗位增强岗位与四建议.md",
+        "83_AI学习指南三层级路径平台与资源推荐.md",
+        "84_私有化训练vs部署与商业化成本GPT-3LLaMA训练费用智谱GLM微调实例.md",
+        "85_课程总结从提示词到AIAgent与未来全景回顾.md"
+      ]
+    }
+  ]
+}

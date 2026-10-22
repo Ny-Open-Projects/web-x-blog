@@ -1,0 +1,89 @@
+# 28. Tools 函数调用：概念与注解
+
+## 纲要
+
+- **本质**：大模型**不执行**函数，只「决定调用哪个函数 + 参数」；真正执行的是你的本地代码
+- **价值**：补强大模型短板（复杂计算 / 实时数据 / 外部操作：发邮件、智能家居、查库）
+- **核心注解**：`@Tool(name,value)` 标记工具方法；`@P(value,required)` 描述参数；`@ToolMemoryId` 取 memoryId
+- **接入**：`@AiService(tools="beanName")` 引入工具 Bean
+- **示例**：`Calculator.sum(a,b)` 加法工具被模型本地调用
+
+> 本章讲清 Tools 是什么与注解怎么写，按课程口径重构；代码为课程示意，去品牌与脱敏处理。
+
+## 一、为什么需要 Tools
+
+- 大模型不擅长复杂计算、实时数据、外部操作。
+- 把本地方法（计算 / 查库 / 发邮件 / 控设备）暴露给模型，模型按语义决定调用。
+- 模型拿到工具结果 + 原提示词，综合给出准确回答。
+
+> **关键**：大模型本身不会跑函数，它只产出「调用意图」（函数名 + 参数），由应用层执行。
+
+## 二、定义工具
+
+```java
+public class Calculator {
+    @Tool(name = "sum", value = "加法计算")
+    public double sum(@P(value = "加数一", required = true) double a,
+                      @P(value = "加数二", required = true) double b) {
+        return a + b;
+    }
+}
+```
+
+- `@Tool`：`name` 缺省取方法名；`value` 是工具描述，帮模型理解用途。
+- `@P`：`value` 描述参数含义；`required` 默认 `true`（是否必填）。
+
+## 三、接入 AiService
+
+```java
+@Configuration
+class Cfg {
+    @Bean Calculator calculator() { return new Calculator(); }
+}
+
+@AiService(tools = "calculator")   // 引入工具 Bean 名
+public interface Assistant {
+    String chat(String message);
+}
+```
+
+调用 `assistant.chat("123 加 321 等于多少？")` → 模型本地调用 `sum` → 结果回传 → 综合回答。
+
+## 四、@ToolMemoryId 取会话 ID
+
+本地方法若需当前 `memoryId`，用注解注入：
+
+```java
+@Tool(name = "sum", value = "加法计算")
+public double sum(@ToolMemoryId String memoryId,
+                  @P("加数一") double a, @P("加数二") double b) {
+    log.info("会话: {}", memoryId);
+    return a + b;
+}
+```
+
+## 五、FAQ
+
+**Q1：大模型真的会执行我的方法吗？**
+不会；它只返回调用意图，执行的是你本地代码。
+
+**Q2：工具命名重要吗？**
+极其重要；`name` / `value` / `@P` 描述不清，模型可能调错或漏调。
+
+**Q3：required 默认？**
+`true`；非必填参数显式设 `required = false`。
+
+## 六、面试高频问答
+
+1. **Tools 解决什么？** 弥补大模型计算 / 实时 / 外部操作短板，扩展能力边界。
+2. **@Tool 与 @P 作用？** @Tool 声明工具（名+描述），@P 描述参数语义与必填。
+3. **模型与工具的关系？** 模型决策调用，应用执行，结果回灌模型综合回答。
+
+## 七、ops 提示
+
+> **描述即契约**：工具名 / 描述 / 参数说明是模型调用的「说明书」，务必清晰准确。
+>
+> **安全边界**：工具可能触发发邮件 / 删库等副作用，生产加权限校验与确认。
+>
+> **可观测**：记录每次 ToolExecutionRequest（函数名 + 参数），便于排错与审计。
+

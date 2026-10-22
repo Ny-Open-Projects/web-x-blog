@@ -1,0 +1,219 @@
+{
+  "course": "mksz920",
+  "desc": "RAG全栈",
+  "src_mt": "source/16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用",
+  "code_source": "done/mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/code/unzip-target",
+  "code_status": "外层zip加密(passphrase待解)；erag代码可从GitHub huihuiz2026/RAG_erag-master 取；主notebooks(128MB)锁密码",
+  "chapters": [
+    {
+      "chapter": "第10章 基于知识图谱【金融智库】：从RAG到Graph RAG，让企业知识图谱更智能",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第10章 基于知识图谱【金融智库】：从RAG到Graph RAG，让企业知识图谱更智能",
+      "mt_files": 8,
+      "src_bytes": 93392,
+      "out_bytes": 29054,
+      "ratio": "0.31x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "24_知识图谱是什么与金融智库三元组数据.md",
+        "25_图数据库Neo4j与Cypher实战.md",
+        "26_实战构建金融智库知识图谱.md",
+        "27_普通RAGvsGraphRAG与GraphRAG实战Pipeline.md"
+      ]
+    },
+    {
+      "chapter": "第11章 基于知识图谱【金融智库】：从RAG到agenticRAG，实现自动切换不同信息源",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第11章 基于知识图谱【金融智库】：从RAG到agenticRAG，实现自动切换不同信息源",
+      "mt_files": 6,
+      "src_bytes": 26906,
+      "out_bytes": 18527,
+      "ratio": "0.69x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "28_AI智能体Agent是什么与RAG结合方式.md",
+        "29_ReAct框架推理与行动并行的Agent思维.md",
+        "30_agenticRAG实战基于ReAct的多文档RAGRouter.md"
+      ]
+    },
+    {
+      "chapter": "第12章 【RAG扩展】企业员工助手-接口和界面开发",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第12章 【RAG扩展】企业员工助手-接口和界面开发",
+      "mt_files": 4,
+      "src_bytes": 34408,
+      "out_bytes": 13371,
+      "ratio": "0.55x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "31_Gradio界面开发基础与项目部署.md",
+        "32_实战Gradio整合三大模块UI与事件处理部署.md"
+      ]
+    },
+    {
+      "chapter": "第13章 【RAG进阶】企业员工助手-项目进阶：RAG微调",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第13章 【RAG进阶】企业员工助手-项目进阶：RAG微调",
+      "mt_files": 1,
+      "src_bytes": 1102,
+      "out_bytes": 15836,
+      "ratio": "14.37x",
+      "code_status": "参考开源标准实现补全：PEFT/LoRA + QLoRA + sentence-transformers/FlagEmbedding + LLaMA-Factory 全流程，卡片含 LoRA 原理/训练/合并、QLoRA 4-bit、Embedding 对比损失微调、框架数据准备→训练→跟踪的真实可运行代码；课程代码卷未挂载，按开源标准重构，非逐文件提取",
+      "code_artifacts": [
+        "LoRA: peft.LoraConfig(r=8,lora_alpha=16,target_modules=[q_proj,v_proj]) + get_peft_model + merge_and_unload",
+        "QLoRA: BitsAndBytesConfig(load_in_4bit) + prepare_model_for_kbit_training",
+        "HF Trainer: tokenize(alpaca) + TrainingArguments(bf16,lr=2e-4) + trainer.train",
+        "Embedding: sentence_transformers SentenceTransformer(bge-small-zh) + MultipleNegativesRankingLoss/TripletLoss + fit",
+        "FlagEmbedding: BAAI/bge 官方 finetune 脚本（含 LLM 蒸馏）",
+        "LLaMA-Factory: dataset_info.json 注册 + lora_sft.yaml + llamafactory-cli train/webui"
+      ],
+      "blog_cards": [
+        "33_RAG微调章节导览与两模型微调必要性.md"
+      ]
+    },
+    {
+      "chapter": "第14章 企业员工助手-总结和展望",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第14章 企业员工助手-总结和展望",
+      "mt_files": 2,
+      "src_bytes": 20702,
+      "out_bytes": 11741,
+      "ratio": "0.57x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "34_课程全景回顾RAG全栈五大模块思维导图.md",
+        "35_课程扩展方向与AI岗位面试技巧.md"
+      ]
+    },
+    {
+      "chapter": "第1章 课程学习必知——助你顺利学习以及避坑",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第1章 课程学习必知——助你顺利学习以及避坑",
+      "mt_files": 1,
+      "src_bytes": 9483,
+      "out_bytes": 7279,
+      "ratio": "0.77x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "1_RAG全栈课程导学与RAG核心定位Agent与知识库双基石.md"
+      ]
+    },
+    {
+      "chapter": "第2章 掌握未来AI趋势：RAG引领大语言模型新纪元",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第2章 掌握未来AI趋势：RAG引领大语言模型新纪元",
+      "mt_files": 6,
+      "src_bytes": 13526,
+      "out_bytes": 8471,
+      "ratio": "0.63x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "2_RAG填补大模型短板三大核心与longcontext下是否仍需RAG.md"
+      ]
+    },
+    {
+      "chapter": "第3章 【企业级专业选型】RAG核心一：挑选符合企业的【优秀】大语言基石模型",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第3章 【企业级专业选型】RAG核心一：挑选符合企业的【优秀】大语言基石模型",
+      "mt_files": 9,
+      "src_bytes": 66486,
+      "out_bytes": 19581,
+      "ratio": "0.29x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "3_大模型原理入门tokenTransformer与训练三阶段能力分类.md",
+        "4_国内外大模型产品全景与三种调用方式GPUCPUOllamaAPI.md",
+        "5_分辨模型好坏RAG选型四大步骤与项目角色能力差异.md"
+      ]
+    },
+    {
+      "chapter": "第4章 【企业级专业选型】RAG核心二：挑选合适RAG的向量Embedding模型",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第4章 【企业级专业选型】RAG核心二：挑选合适RAG的向量Embedding模型",
+      "mt_files": 7,
+      "src_bytes": 30700,
+      "out_bytes": 11270,
+      "ratio": "0.37x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "6_Embedding是什么为何重要与怎么炼成BERTMLMNSP.md",
+        "7_主流中文Embedding模型GTEBGE与MTEB选型六维度实战调用.md"
+      ]
+    },
+    {
+      "chapter": "第5章 【企业级专业选型】RAG核心三：企业级的向量数据库选型和高效使用",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第5章 【企业级专业选型】RAG核心三：企业级的向量数据库选型和高效使用",
+      "mt_files": 8,
+      "src_bytes": 51618,
+      "out_bytes": 18116,
+      "ratio": "0.35x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "8_向量数据库是什么Chroma与Milvus对比与企业级要求.md",
+        "9_向量相似性搜索与索引优化FlatIVFHNSWPQ及选型.md",
+        "10_实战部署Chroma与Milvus基本操作与高可用设计.md"
+      ]
+    },
+    {
+      "chapter": "第6章 【企业员工智能问答助手-实现V1.0版】高效处理企业复杂业务数据",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第6章 【企业员工智能问答助手-实现V1.0版】高效处理企业复杂业务数据",
+      "mt_files": 7,
+      "src_bytes": 48456,
+      "out_bytes": 17263,
+      "ratio": "0.36x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "11_企业数据复杂多样与垃圾进垃圾出数据质量原则.md",
+        "12_RAG如何读取多样性文档解析方法与工具全景.md",
+        "13_文档分块策略递归与语义分块及实战.md"
+      ]
+    },
+    {
+      "chapter": "第7章 【企业员工智能问答助手-实现V1.0版】搭建制度问答baseline RAG",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第7章 【企业员工智能问答助手-实现V1.0版】搭建制度问答baseline RAG",
+      "mt_files": 6,
+      "src_bytes": 21218,
+      "out_bytes": 10369,
+      "ratio": "0.49x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "14_企业员工制度问答助手需求分析技术选型与架构设计.md",
+        "15_实战搭建制度问答RAGbaseline与传统AI开发思维转变.md"
+      ]
+    },
+    {
+      "chapter": "第8章 【企业员工智能问答助手-评估V1.0版】有效评估RAG是提升的关键",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第8章 【企业员工智能问答助手-评估V1.0版】有效评估RAG是提升的关键",
+      "mt_files": 6,
+      "src_bytes": 27543,
+      "out_bytes": 11192,
+      "ratio": "0.41x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "16_RAG评估标准三大步骤与Ragas框架四大指标.md",
+        "17_实战用Ragas评估制度问答与评估后迭代行动.md"
+      ]
+    },
+    {
+      "chapter": "第9章 【企业员工智能问答助手-实现V2.0版】提升RAG的【14种】检索增强技能",
+      "mt_dir": "16.mksz920-RAG全栈技术从基础到精通 ，打造高精准AI应用/第9章 【企业员工智能问答助手-实现V2.0版】提升RAG的【14种】检索增强技能",
+      "mt_files": 18,
+      "src_bytes": 158177,
+      "out_bytes": 46872,
+      "ratio": "0.30x",
+      "code_status": "外部代码卷未挂载/加密，无真实代码提取；卡片为知识重构",
+      "code_artifacts": [],
+      "blog_cards": [
+        "18_RAG进化之路与三种设计框架及稀疏稠密检索.md",
+        "19_查询增强五种方法Query2docHyDE子问题改写StepBack.md",
+        "20_多索引增强三种策略与融合检索RRF实战.md",
+        "21_重排序Re-rank与迭代检索增强生成实战.md",
+        "22_Self-RAG自我评估增强与LangGraph工作流实战.md",
+        "23_检索增强技术全景总结与企业代码规范代码管理.md"
+      ]
+    }
+  ]
+}

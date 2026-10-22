@@ -1,0 +1,101 @@
+# 10. 实战部署 Chroma 与 Milvus、基本操作与高可用设计
+
+## 纲要
+
+- **Chroma 实战**：`pip install chromadb` → `chroma run --path <持久化路径> --host <ip> --port 8000` 起服务端；客户端 `chromadb.HttpClient(host,port=8000)` 连接；用 sentence-transformers 封装 GTE 作 embedding 函数；`create_collection(name,embedding_function,metadata={"hnsw:space":"cosine"})`；`add(documents,ids,metadatas)`；`query(n_results)` 向量检索；`where` 做 metadata 过滤（支持 == / != / > / >= / < / <= 及多条件 and / or），`where_document` 做文档关键词混合检索。Chroma 自动建 HNSW 索引。
+- **Milvus 实战**：Docker 部署，`pymilvus` 连接（`host=127.0.0.1,port=19530`）；建集合前先定义 **schema**（PK varchar、文档 varchar、embedding float_vector(1024)、metadata 字段如 words）；入库需**手动**把文档转向量再 insert；`create_index`（如 IVF，metric_type=L2，nlist=128）；`load` 后 `search(anns_field,param={"metric_type":"L2"},limit,output_fields)`；支持 `expr` 混合过滤（如 `words < 10`）。
+- **手写索引加深理解**：用 numpy 实现 Flat（全表扫描欧式距离得 id 187）；用 kmeans 实现 IVF（分 100 块 → 找最近块 → 块内扫描；取 top-3 块提高精度后命中 187）。
+- **高可用三原则**：① 分布式部署 + 负载均衡（如 nginx）避免单点；② 容错冗余（主备集群，故障自动切换）；③ 监控告警（随时掌握线上状态、第一时间干预）。
+- 本章按课程口径重构；产品 / 框架名已规范化（Chroma / Milvus / nginx / GTE / sentence-transformers / kmeans）；剥离营销与课程群引流。
+
+## 一、Chroma 部署与基础操作
+
+- **安装 / 启动**：`pip install chromadb`；`chroma run --path ./data --host 0.0.0.0 --port 8000`（持久化路径在 `./data`，服务监听 8000）。
+- **连接 / 建集合**：
+  ```python
+  import chromadb
+  client = chromadb.HttpClient(host="127.0.0.1", port=8000)
+  # embedding 函数基于 sentence-transformers 加载 GTE
+  collection = client.create_collection(
+      name="RAGDB",
+      embedding_function=gt_embed_fn,           # GTE 封装
+      metadata={"hnsw:space": "cosine"})        # 指定 HNSW 空间为余弦
+  ```
+- **入库**：`collection.add(documents=[...],ids=["id1","id2","id3"],metadatas=[{...},{...},{...}])`；metadata 可后续过滤。
+- **检索**：
+ - 向量检索：`collection.query(query_texts=["问题"],n_results=2)` 返回最相似文档 + metadata。
+ - 混合检索：`where={"verse": 5}` 先按 metadata 过滤再向量检索；`where_document={"$contains":"索引"}` 先按文档关键词过滤再向量检索。
+ - 多条件：`where={"verse": {"$lt": 10},"type": {"$eq": 5}}`（and）；也支持 or。
+- **索引**：Chroma 仅 HNSW 且创建集合时自动建，无需手动。
+
+## 二、Milvus 部署与基础操作
+
+- **连接 / 定义 schema**：
+  ```python
+  from pymilvus import connections, Collection, FieldSchema, CollectionSchema
+  connections.connect(host="127.0.0.1", port=19530)
+  fields = [
+      FieldSchema(name="pk",        dtype="varchar",  is_primary=True, max_length=100),
+      FieldSchema(name="document",  dtype="varchar",  max_length=...),
+      FieldSchema(name="embedding", dtype="float_vector", dim=1024),
+      FieldSchema(name="words",     dtype="varchar",  max_length=...),  # 元数据
+  ]
+  ```
+- **入库（手动向量化）**：Milvus 不像 Chroma 自动向量化，需先用 GTE 把文档转 embedding，再组装 `ids/documents/embeddings/metadatas` 调 `insert` + `flush`。
+- **建索引 / 检索**：
+  ```python
+  collection.create_index(field_name="embedding",
+                          index_params={"index_type":"IVF_FLAT","metric_type":"L2","params":{"nlist":128}})
+  collection.load()
+  collection.search(data=[query_vec], anns_field="embedding",
+                   param={"metric_type":"L2"}, limit=2, output_fields=["document","words"])
+  ```
+- 混合检索：在 search 中加 `expr="words < 10"` 先做 metadata 过滤。
+
+## 三、手写 Flat 与 IVF 理解索引
+
+- **Flat**：query 与 dataset（128 维、1000 条）逐条算欧式距离 → 排序 → 取最小 id（例：187）。
+- **IVF**：kmeans 分 100 块得块中心 → 检索时先算 query 与各块中心距离取最近块 → 块内全表扫描。只取 1 块可能漏召（近似），**取 top-3 块**扩大范围后命中与全表扫描一致的 187。
+
+## 四、企业级高可用设计原则
+
+1. **分布式部署 + 负载均衡**：用 nginx 等做分流，避免单点故障导致服务不可用。
+2. **容错冗余**：主备双集群，主集群故障自动切备集群。
+3. **监控告警**：对系统监控 + 告警，第一时间知晓线上异常并干预恢复。
+
+## 五、FAQ
+
+**Q1：Chroma 和 Milvus 入库最大区别？**
+Chroma 在 `add` 时自动用 embedding 函数向量化；Milvus 需先手动把文档转向量再插入。
+
+**Q2：为什么 Milvus 要手动建索引？**
+它支持多种索引类型与相似度，需按场景指定（如 IVF_FLAT + L2），而非单一默认。
+
+**Q3：metadata 过滤为什么能提效？**
+先按结构化属性缩小候选集，再做向量检索，大幅减少相似度计算量、提精度。
+
+**Q4：手写 IVF 取多块中心的意义？**
+弥补块划分不精确导致的漏召，用少量额外计算换召回精度。
+
+## 六、面试高频问答
+
+**1. Chroma 与 Milvus 在「向量化 / 建索引」上的差异？**
+Chroma 自动向量化 + 自动建 HNSW；Milvus 手动向量化 + 手动建多类型索引。
+
+**2. Milvus 建集合为什么要先定义 schema？**
+需声明 PK、文档、embedding 维度、metadata 字段，才能正确建表与建索引。
+
+**3. 手写 IVF 为何取 top-3 块？**
+单块可能漏掉真最近向量，多块中心扩大召回范围以提升近似精度。
+
+**4. 企业高可用三原则？**
+分布式 + 负载均衡、主备冗余自动切换、监控告警。
+
+## 七、ops 提示（增效）
+
+> **Chroma 入门快**：中小项目直接 `chroma run` + `add`/`query`，省心。
+>
+> **Milvus 控得细**：中大型务必手动定 schema、选索引、建混合过滤。
+>
+> **高可用别省**：上线即配主备 + 监控，避免单点宕机。
+

@@ -1,0 +1,70 @@
+# 69. Stable Diffusion 介绍：硬件选型、WebUI 与 ComfyUI、Civitai 模型下载
+
+## 纲要
+
+- **与 MJ 区别**：MJ 黑盒，SD 是丰富控制台（本地部署需高配显卡，英伟达优先，AMD 少支持）；可改局部参数、按己意出图。
+- **硬件方案**：40 系有条件/30 系性价比（可双卡），或租赁；租赁平台 AutoDL（3090 夜间约 1 元/h、包月 600+）、Colab（免费 T4 15G、后台运行、挂 Google Drive、24h 限）。
+- **UI 两方案**：SD WebUI（填空式，新手友好）、ComfyUI（流程化节点，专业可玩性高，custom_nodes 丢插件即启用，批量任务优，新特性跟进快）。
+- **国内访问**：GitHub 难直连 → 秋叶整合包（B站置顶评论下载，Windows 优化更新）；macOS 用官方命令装。
+- **模型站 Civitai**：models 下载，most downloaded/all time 筛热门（麦娜 mix 二次元、写实等）；模型含基础模型（~3.x G，数亿图训练）+ VAE + ControlNet + LoRA。
+- **参数认知**：对照模型页右侧说明理解 sampler（采样器）、CFG scale（关联性，越高越贴合提示）、正向/反向提示词、seed。
+
+> 本章按课程口径重构；产品名已规范化（Stable Diffusion/ComfyUI/Civitai/Colab/AutoDL/Google Drive）；剥离营销与课程群引流。
+
+## 一、SD 与 MJ 的根本差异
+
+- MJ 黑盒商用、无硬件成本；SD 开源本地控制台，需高配英伟达显卡自部署。
+- SD 可深度调参、改局部，适合团队本地化。
+
+## 二、硬件与租赁
+
+- 显卡：英伟达优先（40 系/30 系性价比，可双 30 系）；AMD 支持版本少。
+- 租赁：AutoDL（3090 夜间便宜、包月划算）、Colab（免费 T4 15G、后台运行、挂 Drive、24h 限，适推理测试）。
+
+## 三、UI 方案：WebUI vs ComfyUI
+
+- WebUI：填空式选项，新手舒服；扩展窗口装插件（网址/列表）。
+- ComfyUI：节点流程，专业可玩性高，custom_nodes 丢插件即启用；批任务、新特性跟进快；实时性紧跟 SD。
+
+## 四、国内安装与模型下载
+
+- 国内 GitHub 难连 → 秋叶整合包（B站置顶评论，Windows 优化）；macOS 官方命令装（一句命令 + python 环境）。
+- Civitai 下模型：most downloaded/all time 筛热门；基础模型 + VAE + ControlNet + LoRA。
+- 理解参数：对照模型页右侧（sampler/CFG scale/正反向提示词/seed）快速上手。
+
+## 五、FAQ
+
+**Q1：SD 为什么比 MJ 门槛高？**
+需自部署 + 高配显卡 + 环境配置，MJ 仅账号即可。
+
+**Q2：WebUI 与 ComfyUI 怎么选？**
+新手 WebUI 填空式；专业/批量/追新特性用 ComfyUI。
+
+**Q3：没显卡怎么玩 SD？**
+租 AutoDL/Colab，或 Windows 用秋叶整合包 + 本地中端卡。
+
+**Q4：模型从哪下？**
+Civitai 按下载量筛热门，含基础模型/VAE/ControlNet/LoRA。
+
+## 六、面试高频问答
+
+**1. SD 与 MJ 核心差异？**
+MJ 黑盒无硬件成本；SD 开源本地控制台需高配显卡自部署。
+
+**2. 两类 UI 的定位？**
+WebUI 新手填空式；ComfyUI 专业节点流程、批量优。
+
+**3. CFG scale 是什么？**
+无分类器引导比例，通俗即"关联性"，越高越贴合提示词。
+
+**4. 国内怎么装 SD？**
+秋叶整合包（Windows）/官方命令（macOS）；GitHub 难连需代理。
+
+## 七、ops 提示（增效）
+
+> **显卡选英伟达**：AMD 支持版本少，后期麻烦多。
+>
+> **追新用 dev 分支**：WebUI 切 dev 分支界面/功能更新、修 bug（注意依赖冲突）。
+>
+> **模型页即说明书**：Civitai 右侧 prompt/步数/seed 直接抄。
+

@@ -1,0 +1,107 @@
+# 5. Spring AI 与 LangChain4j 技术路线深度对比
+
+## 纲要
+
+- **对比基线**：基于 2025.4 参数；资料取自官网（最权威）；两框架都在迭代
+- **社区热度**：LangChain4j **7.2k** > Spring AI **4.8k**；成长/接受速度更快
+- **运行环境**：两框架均 **JDK 17+**；Spring AI 另需 **SpringBoot 3.x**（硬要求）
+- **聊天模型**：主流国际/国内（千帆/智谱/通义/DeepSeek 均支持，LangChain4j 官网列表更新略延迟）
+- **向量/多模态**：LangChain4j 不支持音频，支持向量/多模态图形/分类/排序模型；Spring AI 文档把特性揉一大块、RAG 不熟
+- **编程式开发**：Spring AI = ChatClient API；LangChain4j = 低层 Bicycle API + **更高层 AiService**（接口+注解自动代理，体验更优）
+- **RAG 能力**：LangChain4j 功能/考虑点更多（metadata 过滤/路由/文档切割/多格式解析默认支持）；Spring AI RAG 文档臃肿难懂、技术不成熟
+- **文档与案例**：LangChain4j 条理清晰、每文档带可跑案例；Spring AI 文档臃肿条理不清
+- **存储**：Spring AI 强调 SpringData 一致封装；LangChain4j 简单粗暴直接给向量存储库 + 向量库 API
+- **开发体验**：LangChain4j 封装 70% 企业 AI 场景为 AiService（注解式，像调本地方法）；Spring 源码优秀但集成式
+- **可观测性**：Spring AI 更详细丰富；LangChain4j 仅 PromptModel 实测支持，不友好
+- **MCP**：两者均支持服务端/客户端
+- **结构化输出 / 提示模板**：均支持；LangChain4j 用 AiService + @UserMessage 注解式构建模板更省代码
+- **web 搜索引擎**：LangChain4j 支持；Spring AI 不支持
+- **服务器连接**：Spring AI 借 Spring 生态集成度更优；LangChain4j 可能需自行开发
+
+> 概念章，按课程口径重构；无代码，重选型维度与取舍。
+
+## 一、核心维度对比表
+
+| 维度 | LangChain4j | Spring AI |
+|---|---|---|
+| 社区热度(GitHub) | **7.2k** | 4.8k |
+| 运行环境 | JDK 17+ | JDK 17+ + SpringBoot 3.x |
+| 聊天模型 | 主流国际/国内全覆盖 | 同（含 Spring AI 阿里子项目） |
+| 向量/多模态 | 向量/图形/分类/排序；**不支持音频** | 向量/图形/音频均支持 |
+| 编程式开发 | Bicycle API + **AiService**（注解自动代理） | ChatClient API + 接口注解（代理设计体现较弱） |
+| RAG | 功能丰富（metadata过滤/路由/多格式解析默认支持） | 文档臃肿、技术不成熟 |
+| 文档案例 | 条理清晰、每文档带可跑案例 | 臃肿、条理不清 |
+| 存储 | 直接给向量存储库+API（简单粗暴） | SpringData 一致封装 |
+| 开发体验 | AiService 注解式，像调本地方法 | 延续 Spring 集成式，源码优秀 |
+| 日志 | 需引 OpenAI loggst 组件 | 基于 SpringBoot 打印 |
+| 可观测性 | 仅 PromptModel 实测支持，不友好 | 更详细丰富 |
+| MCP | 支持服务端/客户端 | 支持 |
+| 结构化输出 | 支持 | 支持 |
+| 提示模板 | AiService + @UserMessage 注解式（省代码） | 支持但需自写较多代码 |
+| web 搜索引擎 | **支持** | 不支持 |
+| 服务器连接 | 可能需自行开发 | Spring 生态集成度更优 |
+
+## 二、选型建议
+
+> **按业务场景取舍，框架有支持好/不好**：
+
+1. **做 RAG 落地** → 选 **LangChain4j**（特性丰富、工作量更少）。
+2. **版本迭代与社区** → LangChain4j 增速与关注度更高，遇问题社区响应快。
+3. **关注聊天模型覆盖** → 两框架都覆盖主流；留意后续可能用到的模型。
+4. **关注核心特性**（ChatMemory/提示词）→ 都要纳入考虑。
+5. **需 web 搜索引擎 / 注解式提示模板** → LangChain4j 更优。
+6. **深度绑定 Spring 生态 / 服务器资源连接** → Spring AI 集成度更优。
+
+## 三、FAQ
+
+**Q1：两框架热度谁高？**
+LangChain4j 7.2k > Spring AI 4.8k，成长更快。
+
+**Q2：运行环境差异？**
+都 JDK17+；Spring AI 另需 SpringBoot 3.x 硬要求。
+
+**Q3：RAG 谁强？**
+LangChain4j 功能/考虑点更多，Spring AI RAG 文档臃肿不成熟。
+
+**Q4：AiService 是什么？**
+LangChain4j 高层 API，接口+注解自动代理，开发体验优于 Spring AI 的代理设计。
+
+**Q5：谁文档案例好？**
+LangChain4j 条理清晰带可跑案例；Spring AI 文档臃肿。
+
+**Q6：可观测性谁好？**
+Spring AI 更详细丰富；LangChain4j 仅 PromptModel 实测支持。
+
+## 四、面试高频问答
+
+**1. Spring AI 与 LangChain4j 怎么选？**
+按场景：RAG 落地选 LangChain4j（特性丰富）；深度 Spring 生态/服务器连接选 Spring AI。
+
+**2. LangChain4j 相对优势？**
+社区更活跃、RAG 功能强、AiService 注解式开发体验好、文档案例清晰、支持 web 搜索引擎。
+
+**3. Spring AI 相对优势？**
+Spring 生态无缝衔接、可观测性文档详细、服务器资源连接集成度高。
+
+**4. 两框架共同要求？**
+JDK 17+；都支持 ChatMemory、MCP、结构化输出、提示模板。
+
+**5. AiService 价值？**
+接口+注解自动代理，像调本地方法完成与模型交互，开发效率极高。
+
+**6. RAG 为何企业重视？**
+未来 AI 应用重点；LangChain4j 默认支持 metadata 过滤/路由/多格式解析，落地工作量少。
+
+## 五、ops 提示（选型与落地）
+
+> **不盲目追热度**：LangChain4j 热度高但 beta 阶段；生产锁版本，文档与 API 可能有出入。
+>
+> **RAG 优先验证**：若项目核心是 RAG，先用 LangChain4j 验证，特性默认齐备少踩坑。
+>
+> **Spring 既有资产**：已有 SpringBoot 微服务的团队，Spring AI 集成成本更低（除非 RAG 为重）。
+>
+> **可观测性短板**：LangChain4j 可观测性弱，生产需补 PromptModel 之外的 tracing（如 OpenTelemetry）。
+>
+> **音频/多模态需求**：需音频模型选 Spring AI（LangChain4j 不支持音频）。
+
+> **mksz952 前述收官**：AI 世界观 + LangChain4j 框架定位 + 选型对比全部建立。

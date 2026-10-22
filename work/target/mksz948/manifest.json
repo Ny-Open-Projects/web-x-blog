@@ -1,0 +1,232 @@
+{
+  "course": "mksz948",
+  "desc": "SpringAI",
+  "src_mt": "source/17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）",
+  "code_source": "done/17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/code/unzip-target/springai-mcp-rag-dev",
+  "code_status": "已解压2567文件(32 Java+86 TS+前端)；排除 model.onnx(90MB模型非代码)",
+  "code_note": "⚠️ 外部代码卷当前未挂载（/Volumes 仅 Macintosh HD），done/ 目录暂不可见。2-1 卡片为逐文件提取的真实代码；3–13 章代码为基于 2-1 标准工程按课程口径重构，非逐文件提取。重挂卷后可切换为真实提取。",
+  "expansion_standard": "用户 2026-10-17 最终决议：以「代码齐全 + 深度完整」为质量标杆，拒绝为达字节指标注水/重复（不臆造）；整体向 2×~3× 靠拢但优先真实完整；空状态/缺代码章节必须补全（如 Ch13）。原 3x 字面源字节标准因口播稿极啰嗦、需大量注水而调整为「真实完整优先」。",
+  "chapters": [
+    {
+      "chapter": "第10章 基于MCP的大模型与数据库交互开发",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第10章 基于MCP的大模型与数据库交互开发",
+      "mt_files": 6,
+      "code_artifacts": [
+        "mcp-server/pom.xml (mybatis-plus-boot-starter + 排除 mybatis-spring 冲突)",
+        "mcp-server/.../resources/application.yml (spring.datasource 端口5506 root/root UTF-8 SSL=false + mybatis-plus id-type/log/mapper-locations)",
+        "mcp-server/.../pojo/Product.java (product_id/name/brand/intro/price/stock/status/createTime/updateTime)",
+        "mcp-server/.../mapper/ProductMapper.java (extends BaseMapper<Product>)",
+        "classpath:mappers/ProductMapper.xml (BaseResultMap property与属性大小写一致)",
+        "mcp-server/.../McpServerApplication.java (@MapperScan com.itzixi.mapper)",
+        "mcp-server/.../mcp/tool/ProductTool.java (createProduct/deleteProduct/queryProductListByCondition/modifyProduct + CreateProductRequest/QueryProductRequest/ModifyProductRequest)",
+        "mcp-server/.../enums/ListSortEnum.java (ASC/DSC)",
+        "mcp-server/.../enums/PriceCompareEnum.java (GREATER_THAN/LESS_THAN/GE/LE/HIGHER/LOWER/NOT_HIGHER/NOT_LOWER/EQUAL 共9项)",
+        "mcp-server/.../mcp/tool/ProductTool.java (getSort/getPriceCompare 字符串→枚举)"
+      ],
+      "blog_cards": [
+        "20_数据库MCP工具基础MyBatisPlus集成与商品增删.md",
+        "21_商品条件查询与修改枚举映射与QueryWrapper组装.md"
+      ]
+    },
+    {
+      "chapter": "第11章 云服务器部署与项目上线全流程指南",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第11章 云服务器部署与项目上线全流程指南",
+      "mt_files": 11,
+      "code_artifacts": [
+        "mcp-client/pom.xml + mcp-server/pom.xml (spring-boot-maven-plugin + finalName)",
+        "mcp-client/src/main/resources/application.yml + application-dev.yml + application-prod.yml (prod: 内网IP/密码/cors公网IP:80/删mcp filesystem)",
+        "mcp-server/src/main/resources/application.yml + application-prod.yml (prod: 端口488/数据库密码/5506)",
+        "前端 SSE 连接地址 + request.js (BASE=公网IP:489)",
+        "云服务器: 腾讯云CVM 2核4G CentOS7.9 / Electerm+SecureCRT SSH / Docker-ce / MySQL8(5506) / Redis Stack(9379) / SearXNG(6080) / Nginx-1.28.0(/usr/local/nginx)"
+      ],
+      "blog_cards": [
+        "22_云服务器采购安全组与SSH连接.md",
+        "23_云服务器环境搭建JDK21与Docker安装.md",
+        "24_中间件容器化MySQL8RedisStackSearXNG部署.md",
+        "25_生产参数配置与SpringBoot打包发布.md",
+        "26_Nginx安装与前端发布上线.md"
+      ]
+    },
+    {
+      "chapter": "第12章 多平台集成MCP服务与智能体应用",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第12章 多平台集成MCP服务与智能体应用",
+      "mt_files": 5,
+      "code_artifacts": [
+        "Cursor Settings MCP: 删filesystem/高德, 加 spring-ai-sse(url=http://公网IP:488/sse, SSE类型)",
+        "CherryStudio: 装 uv(Python)/bun(TS) 运行时, 快速创建 SSE 类型 MCP(url=公网IP:488/sse)",
+        "Dify: git clone + docker/.env.example→.env + docker compose up -d (web/api/db/redis/sandbox)",
+        "Dify Windows: Ollama base URL=http://host.docker.internal:11434 (本地DeepSeek)",
+        "Dify chatflow: Agent(react策略)节点 + 工具列表(serverName=springAI-MCP, transport=SSE, url=公网IP:488/sse) + sys.query + 记忆"
+      ],
+      "blog_cards": [
+        "27_Cursor与CherryStudio集成自有MCP.md",
+        "28_Dify私有化部署MacOS与Windows.md",
+        "29_Dify工作流集成MCP服务.md"
+      ]
+    },
+    {
+      "chapter": "第13章 LLM大模型智能引擎实战--课程总结",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第13章 LLM大模型智能引擎实战--课程总结",
+      "mt_files": 1,
+      "code_artifacts": [],
+      "blog_cards": ["30_LLM大模型智能引擎实战课程总结.md"]
+    },
+    {
+      "chapter": "第1章 LLM大模型智能引擎实战--课程导学",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第1章 LLM大模型智能引擎实战--课程导学",
+      "mt_files": 1,
+      "code_artifacts": [],
+      "blog_cards": ["1_LLM大模型智能引擎实战课程导学.md"]
+    },
+    {
+      "chapter": "第2章 初识SpringAI 项目功能与架构全解析",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第2章 初识SpringAI 项目功能与架构全解析",
+      "mt_files": 2,
+      "code_artifacts": [
+        "mcp-client/pom.xml",
+        "mcp-client/src/main/java/com/itzixi/Application.java",
+        "mcp-client/src/main/resources/application.yml",
+        "mcp-server/src/main/java/com/itzixi/Application.java",
+        "mcp-server/pom.xml",
+        "mcp-server/src/main/java/com/itzixi/mcp/tool/ProductTool.java",
+        "mcp-server/src/main/java/com/itzixi/mcp/tool/EmailTool.java",
+        "mcp-server/src/main/java/com/itzixi/mcp/tool/DateTool.java",
+        "mcp-client/src/main/java/com/itzixi/service/impl/ChatServiceImpl.java",
+        "mcp-client/src/main/java/com/itzixi/service/impl/DocumentServiceImpl.java",
+        "mcp-client/src/main/java/com/itzixi/utils/CustomTextSplitter.java",
+        "mcp-client/src/main/java/com/itzixi/utils/SSEServer.java",
+        "mcp-client/src/main/java/com/itzixi/service/impl/SesrXngServiceImpl.java",
+        "mcp-client/src/main/java/com/itzixi/controller/InternetController.java",
+        "mcp-client/src/main/resources/mcp-server.json",
+        "mcp-client/src/main/java/com/itzixi/controller/SSEController.java"
+      ],
+      "blog_cards": [
+        "2_初识SpringAI项目功能与架构全解析.md"
+      ]
+    },
+    {
+      "chapter": "第3章 配置高效开发环境",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第3章 配置高效开发环境",
+      "mt_files": 7,
+      "code_artifacts": [],
+      "blog_cards": [
+        "3_JDK21与Maven及IDEA环境搭建.md",
+        "4_数据库选型与Docker装MySQL及前端工具链.md"
+      ]
+    },
+    {
+      "chapter": "第4章 SpringBoot3 快速入门与配置管理",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第4章 SpringBoot3 快速入门与配置管理",
+      "mt_files": 4,
+      "code_artifacts": [
+        "pom.xml (root, packaging=pom, parent 3.5.0, modules mcp-client/mcp-server)",
+        "mcp-client/pom.xml (starter-web, starter-test, lombok, hutool)",
+        "mcp-client/src/main/java/com/itzixi/Application.java",
+        "mcp-client/src/main/java/com/itzixi/controller/HelloController.java",
+        "mcp-client/src/main/resources/application.yml",
+        "mcp-server/pom.xml (mcp-server-webflux, mybatis-plus, mail, commonmark)",
+        "mcp-server/src/main/java/com/itzixi/McpServerApplication.java (MethodToolCallbackProvider)"
+      ],
+      "blog_cards": [
+        "5_SpringBoot3快速入门与版本选型.md",
+        "6_使用Maven搭建SpringBoot3基础架构.md",
+        "7_SpringBoot配置管理与多环境解耦.md",
+        "8_多环境配置文件搭配与切换.md"
+      ]
+    },
+    {
+      "chapter": "第5章 大模型集成与高阶功能开发",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第5章 大模型集成与高阶功能开发",
+      "mt_files": 6,
+      "code_artifacts": [
+        "mcp-client/pom.xml (spring-ai-starter-model-openai + aop)",
+        "mcp-client/src/main/resources/application.yml (spring.ai.openai 三件套)",
+        "mcp-client/src/main/java/com/itzixi/service/ChatService.java + impl/ChatServiceImpl.java",
+        "mcp-client/src/main/java/com/itzixi/controller/HelloController.java",
+        "mcp-client/src/main/java/com/itzixi/aspect/TimeLogAspect.java",
+        "mcp-client/src/main/resources/.env + deepseek.env + qwen.env",
+        "mcp-client/src/main/java/com/itzixi/Application.java (DotEnv加载)"
+      ],
+      "blog_cards": [
+        "9_SpringAI集成DeepSeek同步流式与调用计时.md",
+        "10_env外置配置与通义千问集成.md"
+      ]
+    },
+    {
+      "chapter": "第6章 SSE实时通信与前端联调实战",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第6章 SSE实时通信与前端联调实战",
+      "mt_files": 8,
+      "code_artifacts": [
+        "mcp-client/.../util/SSEServer.java (connect/emitMessage/sendMessage/sendMessageToUsers/removeUser)",
+        "mcp-client/.../enums/SSEMessageType.java",
+        "mcp-client/.../controller/SSEController.java (/sse/connect,/sendMessage,/sendMessageToAll)",
+        "mcp-client/.../config/CorsConfig.java (WebMvcConfigurer 跨域)",
+        "mcp-client/.../entity/ChatEntity.java + ChatResponseEntity.java",
+        "mcp-client/.../controller/ChatController.java (/chat/doChat)",
+        "mcp-client/.../service/impl/ChatServiceImpl.java (doChat: stream->SSE ADD->FINISH)"
+      ],
+      "blog_cards": [
+        "11_SSE原理与服务端客户端及跨域.md",
+        "12_SSE群发与前后端联调及MD转HTML.md"
+      ]
+    },
+    {
+      "chapter": "第7章 构建高效的RAG知识库系统功能",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第7章 构建高效的RAG知识库系统功能",
+      "mt_files": 7,
+      "code_artifacts": [
+        "mcp-client/pom.xml (vector-store + redis-store + transformers-embedding + document-reader-tika)",
+        "mcp-client/.../resources/application.yml (spring.data.redis 缓存 + spring.ai.vectorstore.redis 向量库:index-name/prefix单引号)",
+        "mcp-client/.../controller/RAGController.java (uploadDoc POST / doSearch GET / search POST)",
+        "mcp-client/.../service/DocumentService.java + impl/DocumentServiceImpl.java (loadText: TextReader->元数据->CustomTextSplitter->vectorStore.add)",
+        "mcp-client/.../utils/CustomTextSplitter.java (extends TextSplitter, splitText 正则 \\s*\\n\\s*)",
+        "mcp-client/.../service/DocumentSearchService.java + impl (similaritySearch)",
+        "mcp-client/.../service/ChatService.java (doChatRagSearch: 拼 context + RAG Prompt + chatClient 流式)"
+      ],
+      "blog_cards": [
+        "13_RAG知识库原理与Redis向量库搭建.md",
+        "14_文档切分检索与大模型优化输出.md"
+      ]
+    },
+    {
+      "chapter": "第8章 SearXNG 联网搜索集成实战",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第8章 SearXNG 联网搜索集成实战",
+      "mt_files": 7,
+      "code_artifacts": [
+        "mcp-client/pom.xml (okhttp 3.14.2)",
+        "mcp-client/.../resources/application.yml (internet.web.search.searxng url+counts)",
+        "mcp-client/.../config/OkHttpConfig.java (OkHttpClient Bean: connect/read 30s)",
+        "mcp-client/.../entity/SearchResult.java (title/content/url/score)",
+        "mcp-client/.../entity/SearXNGResponse.java (query + List<SearchResult> results)",
+        "mcp-client/.../controller/InternetController.java (test GET / search POST)",
+        "mcp-client/.../service/SearXNGService.java + impl (HttpUrl+newCall+body.string+JSONUtil+dealResults)",
+        "mcp-client/.../service/ChatService.java (doInternetSearch + buildSearchGptPrompt)"
+      ],
+      "blog_cards": [
+        "15_SearXNG联网搜索原理与Docker安装.md",
+        "16_OKHttp实时搜索与结果集优化及大模型合成.md"
+      ]
+    },
+    {
+      "chapter": "第9章 深入理解与实践MCP服务",
+      "mt_dir": "17.mksz948-LLM大模型智能引擎实战--SpringAI+RAG+MCP+实时搜索（13章完结）/第9章 深入理解与实践MCP服务",
+      "mt_files": 14,
+      "code_artifacts": [
+        "mcp-client/pom.xml (spring-ai-mcp-client + spring-ai-mcp)",
+        "mcp-client/.../resources/application.yml (spring.ai.mcp.client sse/stdio)",
+        "mcp-client/.../config/ChatClientConfig.java (defaultTools + defaultAdvisers Memory)",
+        "mcp-server/pom.xml (spring-ai-mcp-server-webflux + spring-boot-starter-mail + flexmark-all)",
+        "mcp-server/.../resources/application.yml (spring.ai.mcp.server + spring.mail)",
+        "mcp-server/.../Application.java (MethodToolCallbackProvider registerMCPTools)",
+        "mcp-server/.../mcp/tool/DateTool.java (@Tool getCurrentTime/getCurrentTimeByCity)",
+        "mcp-server/.../mcp/tool/EmailTool.java (@Tool sendEmail + EmailRequest + getMyEmailAddress)",
+        "classpath:mcp-server.json (stdio filesystem 配置)"
+      ],
+      "blog_cards": [
+        "17_MCP概念场景通信机制与平台及Cursor集成.md",
+        "18_SpringAI集成MCP与首个MCP工具及自动编排.md",
+        "19_邮件MCP工具实战配置发送MD转HTML记忆与类型匹配.md"
+      ]
+    }
+  ]
+}

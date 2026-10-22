@@ -1,0 +1,73 @@
+# 12. 接入阿里千义万象：图片生成模型 ImageModel
+
+## 纲要
+
+- **万象是什么**：阿里百炼的图片生成大模型（text-to-image），按提示词生成图片
+- **API 形态**：`ImageModel` 接口（非聊天模型），返回图片 URL
+- **接入方式**：原生 `WanxImageModel.builder()` 构造（非 Spring 自动装配）
+- **模型版本**：`wanx2.1`
+- **调用结果**：`Response<Image>` 中取 `content().url()`
+
+> 本章演示多模态（文生图）接入，按课程口径重构；代码为课程示意，密钥脱敏。
+
+## 一、万象定位
+
+在阿里百炼模型广场，万象属于「图片生成」类模型：给它一段定制提示词，它返回生成的图片。与其他聊天模型不同，它走 **`ImageModel`** 接口而非 `ChatLanguageModel`。
+
+## 二、接入代码
+
+万象在 LangChain4j 中以原生方式构造（不走 Spring 自动装配），需显式 `builder`：
+
+```java
+import dev.langchain4j.community.model.dashscope.WanxImageModel;
+import dev.langchain4j.data.image.Image;
+import dev.langchain4j.model.output.Response;
+
+public class WanxDemo {
+    public static void main(String[] args) {
+        WanxImageModel wanx = WanxImageModel.builder()
+                .apiKey("YOUR_DASHSCOPE_API_KEY")
+                .modelName("wanx2.1")
+                .build();
+
+        Response<Image> resp = wanx.generate("一只在太空中的猫");
+        String url = resp.content().url();
+        System.out.println("生成图片地址：" + url);
+    }
+}
+```
+
+访问返回的 URL 即可看到万象生成的图片。
+
+```mermaid
+flowchart LR
+A[构造 WanxImageModel] --> B[generate 提示词]
+B --> C[Response<Image>]
+C --> D[content().url() 取图片地址]
+```
+
+## 三、FAQ
+
+**Q1：万象和普通聊天模型能用同一套注入吗？**
+不能；它是 `ImageModel` 类型，需单独构造或通过其专属 Starter 注入。
+
+**Q2：返回的是图片文件还是 URL？**
+默认返回图片 URL，自行下载或前端展示。
+
+**Q3：模型名必须 wanx2.1 吗？**
+按百炼当前版本，`wanx2.1` 是可用版本；以官方文档为准。
+
+## 四、面试高频问答
+
+1. **LangChain4j 如何支持多模态？** 除 `ChatLanguageModel` 外，另有 `ImageModel` / 语音等专用接口。
+2. **文生图与一般对话调用差异？** 接口类型不同（ImageModel vs ChatModel），返回结构不同（URL vs 文本）。
+3. **万象接入要点？** 原生 builder 构造，配 apiKey 与 modelName（wanx2.1）。
+
+## 五、ops 提示
+
+> **密钥复用**：万象与通义千问同属百炼，可共用 `DASHSCOPE_API_KEY`。
+>
+> **成本控制**：图片生成按次计费，前端展示注意防盗链与频次限制。
+>
+> **模型开通**：同百炼其他模型，首次需在广场开通万象。
+
