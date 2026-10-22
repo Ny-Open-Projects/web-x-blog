@@ -19,3 +19,11 @@ ibdata1
 ib_logfile0
 ib_logfile1
 *.ibd
+
+# Python 运行时/缓存、本地安全备份、流水线日志（transient，不入库）
+__pycache__/
+*.pyc
+*.sqlite3
+*.log
+*.out
+ai/backups/
