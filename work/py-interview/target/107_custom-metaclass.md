@@ -1,0 +1,60 @@
+# 107. 自定义元类：重写 __new__ 拦截类的创建
+
+> 分类：编程范式/元类 | 难度：L3 | 题型：工程题 | 频率：中 | 关键词：**__new__** / **metaclass=** / **属性改写** / **类创建钩子**
+> 原文锚点：第 84~102 段「编写一个元类，把类的属性名称改成小写」
+
+## 一句话总述
+自定义元类 = **继承 `type` 并重写 `__new__(mcs, name, bases, attrs)`**，在类对象**生成前**改写 `attrs` 字典，最后 `return type.__new__(mcs, name, bases, new_attrs)`；使用时写 `class X(metaclass=...)`。
+
+## 面试官视角
+- **考察意图**：看你是否真的理解"类创建是可拦截的"，而不只是背概念。
+- **P5** 知道要继承 `type` / **P6** 能写出 `__new__` 的四参数签名并正确 `return` / **P7** 能说明为什么**跳过 dunder**（改写 `__init__` 等会毁掉类）以及为何必须用 `type.__new__` 而非 `type(...)` `[源码]`。
+- **红旗**：① 重写的是 `__init__` 却声称在"生成前"改（属性已定型）；② 忘记 `return`，类变成 `None`；③ 用 `type(name, bases, attrs)` 硬调导致**丢掉自定义元类自身**。
+- **惊艳点**：过滤条件要写 `k.startswith('__')` ——**魔术方法必须保留原名**，否则类直接不可用。验证：`dir()` 中仅非 dunder 名称被小写化，类仍可实例化 `[实测]`。
+
+## 主问答
+**Q：怎么编写自己的元类？它能做什么？**
+**A：**
+1. **写法**：`class LowerAttrMeta(type):` 重写 `__new__(mcs, name, bases, attrs)`；`mcs` 是**元类自身**（约定名，类比 `self`/`cls`）。
+2. **改写**：遍历 `attrs`，**非魔术方法**（不以 `__` 开头）的名称改成小写，其余保持原样，组装成新字典。
+3. **返回**：`return type.__new__(mcs, name, bases, lower_attrs)`，用当前元类创建类；使用时 `class Foo(metaclass=LowerAttrMeta):`。
+**加分层**：元类 `__new__` 里也能做**注册**（把类加进注册表）、**校验**（强制子类实现某方法）、**注入**（统一加属性），这三类才是框架里的主流用法。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 元类怎么定义 | 语法 | 继承 type | 换题 → 不及格 |
+| L2 | __new__ 几个参数 | 签名 | mcs/name/bases/attrs | 判 P5 |
+| L3 | 为什么跳过 dunder | 边界 | 改写会毁掉类 | 判 P6 |
+| L4 | 返回值是什么 | 机制 | 类对象 | 判 P6+ |
+| L5 | 还能用来干嘛 | 迁移 | 注册/校验/注入 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| Python 3.x | `metaclass=` 关键字 | 推荐写法 |
+| Python 2.x | `__metaclass__` 类属性 | 老代码里仍可见 |
+| 属性改写时机 | 类体执行后、类创建前 | 说明钩子位置 |
+
+## 关键代码
+```python
+class LowerAttrMeta(type):
+    def __new__(mcs, name, bases, attrs):
+        lower = {k if k.startswith('__') else k.lower(): v
+                 for k, v in attrs.items()}      # 魔术方法保留原名
+        return type.__new__(mcs, name, bases, lower)
+
+class Foo(metaclass=LowerAttrMeta):
+    BAR = 1
+    def HELLO(self): return 'hi'
+
+print([n for n in dir(Foo) if not n.startswith('_')])  # ['bar', 'hello']
+print(Foo().hello())                                   # hi
+```
+
+## ⚠️ 原文纠错
+原文"元类继承 type 并重写 `__new__`、遍历属性跳过魔术方法、返回 `type.__new__`"，实现思路正确，予以保留；原文示例把属性名统一小写，运行结果与描述一致。原文称 `__new__` 用来"生成实例"，在元类语境下准确表述应为**生成类对象**（类本身是元类的实例），卡面已按此措辞。转写中的音译词已还原为标准术语。
+
+## 总结与追问预判
+- 继承 `type` → 重写 `__new__` → 改 `attrs` → `type.__new__` 返回；跳过 dunder。
+- 下一题：**元类在 ORM 中的应用**（108）。

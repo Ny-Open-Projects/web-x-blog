@@ -1,0 +1,63 @@
+# 124. 惰性计算：@property 让昂贵属性用到才算
+
+> 分类：编程范式/设计模式 | 难度：L2 | 题型：工程题 | 频率：中 | 关键词：**惰性计算** / **@property** / **缓存属性** / **functools.cached_property**
+> 原文锚点：第 12 段「惰性计算模式，Python property 可以实现延迟计算，访问属性时才做计算」
+
+## 一句话总述
+**惰性计算**把昂贵计算**推迟到真正访问属性的那一刻**，并**缓存结果**：Python 里用 `@property`（每次都算）或 `functools.cached_property`（**只算一次**）实现，调用方始终写 `obj.x` 而非 `obj.get_x()`。
+
+## 面试官视角
+- **考察意图**：考 `@property` 的**真实用途**（不只是把方法伪装成属性）与缓存语义差别。
+- **P5** 知道 `@property` 能把方法变属性 / **P6** 能写出"首次访问时计算并存进实例 `__dict__`"的惰性版 / **P7** 能区分 `@property` 与 `cached_property` 并指出**实例必须可变**（有 `__dict__`，`__slots__` 类不可用） `[源码]`。
+- **红旗**：① 以为 `@property` 自带缓存（它**每次访问都重新计算**）；② 在 cached_property 上还想加 setter（语义冲突）；③ 不知道 `__slots__` 类无法用 `cached_property`。
+- **惊艳点**：`cached_property` 的实现原理就是**算完把值写进实例 `__dict__`**，实例属性优先级高于类上的描述符，于是第二次访问**根本走不到描述符**。验证：多次访问只打印一次计算日志 `[实测]`。
+
+## 主问答
+**Q：什么是惰性计算？Python 里怎么实现？**
+**A：**
+1. **定义**：把开销大的计算推迟到**访问属性时**才执行，避免对象创建时就付全部代价。
+2. **`@property`**：把方法变成属性访问（`obj.total` 而非 `obj.total()`），但**每次访问都会重算**。
+3. **缓存版**：`functools.cached_property`（3.8+）**只算一次**并缓存到实例；3.8 之前手写——在 property 里把结果存进 `self.__dict__['x']` 或用一个 `self._x` 哨兵。
+**加分层**：适用边界——结果**不变且构造昂贵**才缓存；若依赖会变的外部状态（当前时间、数据库），缓存会导致读到**过期数据**，此时用 `property` 每次算，或提供显式失效方法。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 惰性计算是什么 | 概念 | 用到才算 | 换题 → 不及格 |
+| L2 | 怎么实现 | 语法 | @property | 判 P5 |
+| L3 | property 会缓存吗 | 机制 | 不会，每次重算 | 判 P6 |
+| L4 | 只算一次怎么做 | 方案 | cached_property | 判 P6+ |
+| L5 | 什么情况不能用 | 边界 | __slots__/可变结果 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| Python 3.8+ | functools.cached_property | 首选内置 |
+| Python <3.8 | 手写缓存到 __dict__ | 说明兼容写法 |
+| __slots__ 类 | 无实例 __dict__ | 不可用，改显式缓存 |
+
+## 关键代码
+```python
+import functools
+
+class Report:
+    def __init__(self, rows): self.rows = rows
+
+    @property
+    def total(self):                 # 每次访问都重算
+        print('calc total'); return sum(self.rows)
+
+    @functools.cached_property
+    def summary(self):               # 只算一次，结果写进实例 __dict__
+        print('calc summary'); return {'n': len(self.rows), 'sum': sum(self.rows)}
+
+r = Report([1, 2, 3])
+r.summary; r.summary                 # 只打印一次 calc summary
+```
+
+## ⚠️ 原文纠错
+原文"惰性计算模式，我们可以使用 Python 的 property 实现延迟计算，当访问属性时才去做相应的计算操作"，表述正确，予以保留。需补充的是：**`@property` 本身不缓存**，每次访问都会重新计算；要"只算一次"应使用 `functools.cached_property`（3.8+）或手写缓存，卡面已按此区分并注明。转写中的音译词已还原为标准术语。
+
+## 总结与追问预判
+- 惰性 = **用到才算**；`property` 每次算、`cached_property` 只算一次；`__slots__` 类不可用缓存版。
+- 下一题：**对象池**（125）、**类变量共享**（103）。

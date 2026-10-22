@@ -1,0 +1,55 @@
+# 65. sorted、bisect、heapq 各自解决什么问题
+
+> 分类：算法与数据结构/内置算法 | 难度：L2 | 题型：八股题 | 频率：中 | 关键词：**sorted** / **bisect** / **heapq** / **TopN**
+> 原文锚点：第 22~27 段「排序算法就是 sorted…二分的话 python 提供了一个 bisect 模块…还有堆相关的算法」
+
+## 一句话总述
+三个内置工具分工明确：**sorted** 负责一次性排序，**bisect** 负责**有序序列**上的二分定位，**heapq** 负责在**动态数据流**里高效维护最值/TopN。
+
+## 面试官视角
+- **考察意图**：看你是"自己造轮子"还是知道这些现成的标准库。
+- **P5** 知道三者存在 / **P6** 能说清各自适用场景与复杂度 / **P7** 能拿 heapq 解 TopN、拿 bisect 维护有序表并指出它们的局限。
+- **红旗**：① 用 `sorted` 全排再去首元素求 TopN（应为 heapq）；② 对无序列表用 bisect；③ 以为 heapq 是完整的堆类。
+- **惊艳点**：`heapq` 是**小顶堆**，求 TopN 大值要用 `nlargest`；且它操作的是**普通 list**（原地堆化）。验证：`heapq.heapify(a)` 后 a 满足堆性质 `[实测]`。
+
+## 主问答
+**Q：Python 内置的排序/二分/堆工具有哪些？什么时候用？**
+**A：**
+1. **先给结论**：`sorted`（或 `list.sort`）做排序，底层 Timsort，**O(n log n) 且稳定**；`bisect` 在**已排序**序列上做二分查找/插入，**O(log n)**；`heapq` 在列表上维护小顶堆，取最值 **O(1)**、推入弹出 **O(log n)**。
+2. **再给场景**：静态数据取前 N 大用 `heapq.nlargest(n, data)`（n 远小于总数时比全排快）；持续到来的数据流求中位数/TopN 用堆；频繁在有序表中定位用 bisect。
+3. **最后给边界**：bisect **要求输入已排序**，否则结果无意义；heapq 只提供**函数**（heapify/heappush/heappop），不是容器类；`sorted` 返回新列表，`list.sort` 原地排。
+**加分层**：`sorted` 的 `key` 是关键生产力——多级排序用 `key=lambda x: (-x.score, x.name)`，比手写比较函数更地道。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 内置排序叫什么 | 术语 | sorted / list.sort | 换题 → 不及格 |
+| L2 | 二分用什么 | 术语 | bisect | 判 P5 |
+| L3 | TopN 怎么取 | 权衡 | heapq.nlargest | 判 P6 |
+| L4 | 复杂度各多少 | 分析 | n log n / log n / log n | 判 P6+ |
+| L5 | 各自前提条件 | 边界 | bisect 须有序 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| 全版本 | Timsort 稳定排序 | 稳定性可直接依赖 |
+| Python 3.5+ | `heapq` 合并迭代器、`nlargest` 支持 key | 多路归并用 heapq.merge |
+
+## 关键代码
+```python
+import bisect, heapq
+data = [5, 1, 3, 9, 2]
+print(sorted(data, key=lambda x: -x))        # 降序
+a = [1, 3, 5, 7]
+print(bisect.bisect_left(a, 5), bisect.insort(a, 4), a)  # 2, None, [1,3,4,5,7]
+print(heapq.nlargest(2, data), heapq.nsmallest(2, data)) # [9, 5] [1, 2]
+h = [5, 1, 3]; heapq.heapify(h)
+heapq.heappush(h, 0); print(heapq.heappop(h), h)         # 0 —— 小顶堆
+```
+
+## ⚠️ 原文纠错
+原文提到这三个模块的方向正确；需补正两点：① `heapq` 实现的是**小顶堆**，取最大需 `nlargest` 或取负；② `bisect` 只在**已排序**输入上成立，原文未强调。转写中的音译模块名已统一还原为 sorted / bisect / heapq。未发现其他技术错误。
+
+## 总结与追问预判
+- 一次性排 = sorted；有序序列定位 = bisect；动态最值/TopN = heapq。
+- 下一题：见 64（算法面范围）、50（工具全景）。

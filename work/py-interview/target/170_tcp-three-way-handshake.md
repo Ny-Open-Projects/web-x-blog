@@ -1,0 +1,52 @@
+# 170. TCP 三次握手
+
+> 分类：网络 | 难度：L2 | 题型：原理题 | 频率：高 | 关键词：**三次握手** / **SYN/ACK** / **序列号** / **状态转换**
+> 原文锚点：第 42~78 段「TCP 三次握手：SYN/ACK/SEQ，状态转换 SYN_SENT/SYN_RCVD/ESTABLISHED，建议用 Wireshark 抓包理解」
+
+## 一句话总述
+TCP 建立连接需**三次握手**：客户端发 **SYN**（seq=j）→ 服务端回 **SYN+ACK**（ack=j+1, seq=k）→ 客户端回 **ACK**（ack=k+1）。状态上客户端经 `SYN_SENT`→`ESTABLISHED`，服务端经 `SYN_RCVD`→`ESTABLISHED`。
+
+## 面试官视角
+- **考察意图**：是否真懂"为什么是三次而非两次"，以及能否复现每次报文内容与状态机。
+- **P5** 能口述三步与 SYN/ACK 含义 / **P6** 能讲清序列号/确认号如何 +1、状态转换 / **P7** 能答"为什么两次不够"（防历史失效连接、双方确认收发能力）。
+- **红旗**：把第三次 ACK 说成"服务端发给客户端"；或认为握手前就能发数据。
+- **惊艳点**：第三次握手可**携带 HTTP 请求数据**（延后发送，Linux 默认开启），握手完成即首字节已到 —— 验证：`tcpdump` 抓包可见第三次 ACK 带 payload `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 说一下 TCP 三次握手的过程？为什么是三次？
+
+**A · 标准答案骨架：**
+1. **先给结论**：三次握手 = **SYN → SYN+ACK → ACK**，双方各确认"我能发、你能收"。
+2. **再给机制**：① 客户端 `SYN`（seq=j），状态 `SYN_SENT`；② 服务端 `SYN+ACK`（ack=j+1, seq=k），状态 `SYN_RCVD`；③ 客户端 `ACK`（ack=k+1），双方进入 `ESTABLISHED`。
+3. **最后给边界**：核心是**双向确认**——两次只能单方确认，无法证明服务端能收到客户端的后续数据；第三次让服务端确认"客户端收发了得"。
+
+**加分层**：面试能亲手在纸上画出"左右两端 + 每步报文（SYN/ACK/SEQ/ACK号）+ 状态"，比背图更可信 `[经验]`。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 哪三步 | 基本认知 | SYN/ACK/ACK | 换题 → 不及格 |
+| L2 | 为什么是三次 | 是否背的 | 双向确认收发 | 判 P5 |
+| L3 | 各状态名 | 有没有真理解 | SYN_SENT/SYN_RCVD/EST | 判 P6 |
+| L4 | 两次行不行 | 架构判断 | 防历史失效连接 | 判 P6+ |
+| L5 | 你抓过握手包吗 | 实战经验 | Wireshark/tcpdump | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| RFC 793 至今 | 无 | 三次握手稳定；可提 TCP Fast Open 允许首次带数据 |
+
+## 关键代码
+```python
+import socket
+# create_connection 内部由 OS 完成三次握手 [实测]
+s = socket.create_connection(("www.example.com", 80), timeout=5)
+# 握手成功才返回；失败抛 TimeoutError/ConnectionRefused
+```
+
+## ⚠️ 原文纠错
+原文第 42~78 段音译需还原：「**yshock/yshoge/yshark/yshop**」→ **Wireshark（抓包工具）**；「**SCK/CK**」→ **ACK**；「**SIN/SCQ**」→ **SYN/SEQ**；「**senfllight**」→ **client（客户端）**；「**SYreceived**」→ **SYN_RCVD（SYN received）**；「**establish**」→ **ESTABLISHED**。握手机制（SYN/ACK/序列号+1、状态转换）正确。核对范围：第 42~78 段三次握手。
+
+## 总结与追问预判
+- 三次握手 SYN→SYN+ACK→ACK，双向确认；状态 SYN_SENT/SYN_RCVD/ESTABLISHED。
+- 顺势会问：**四次挥手（见 171 卡）**、**TCP vs UDP（见 172 卡）**。

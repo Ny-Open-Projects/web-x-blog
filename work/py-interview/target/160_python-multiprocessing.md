@@ -1,0 +1,57 @@
+# 160. Python 多进程：multiprocessing 模块
+
+> 分类：并发 | 难度：L2 | 题型：工程题 | 频率：高 | 关键词：**multiprocessing** / **Process** / **fork** / **master-slave**
+> 原文锚点：第 74~90 段「CPU 密集用多进程绕 GIL；multiprocessing 的 Process 类，接口同 threading」
+
+## 一句话总述
+CPU 密集型任务用 **`multiprocessing.Process`** 启多进程，绕过 **GIL** 真正并行；其 **API 与 `threading` 几乎一致**，底层靠 `os.fork` 复制进程。Web 服务（gunicorn/uWSGI）即用 master-slave 多进程模型。
+
+## 面试官视角
+- **考察意图**：是否知道"何时该弃多线程选多进程"，以及多进程的代价（内存/IPC）。
+- **P5** 会 `Process(target=...)` + `start` + `join` / **P6** 能说清多进程靠 `fork` 复制、各占独立地址空间、无 GIL 争用 / **P7** 能对比多进程（隔离好但内存贵、需 IPC）与多线程，并指出进程数通常按 CPU 核数定。
+- **红旗**：CPU 密集还用多线程；或开成百上千进程不控制数量。
+- **惊艳点**：gunicorn/uWSGI 的 **master-slave** 就是"1 个 master 管 N 个 worker 进程"，worker 数默认 = CPU 核数 —— 验证：`gunicorn -w 4` 起 4 个 worker，`ps` 可见 1 master + 4 worker `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 什么时候用多进程？Python 怎么写多进程？
+
+**A · 标准答案骨架：**
+1. **先给结论**：**CPU 密集型**（大量计算）用**多进程**绕开 GIL，才能真用多核；接口与 `threading` 一致。
+2. **再给机制**：`multiprocessing.Process` 通过 **`os.fork`**（类 Unix）复制进程，各进程**独立地址空间**，互不干扰、无 GIL 串行化。
+3. **最后给边界**：代价是**内存占用高**、进程间不共享变量需走 **IPC**；进程数一般按 **CPU 核数** 定，并非越多越快。
+
+**加分层**：部署上 Web 服务普遍用 master-slave 多进程（gunicorn/uWSGI），既隔离又吃满多核——这是多进程的工程落点 `[经验]`。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 怎么写多进程 | 基本认知 | Process + start/join | 换题 → 不及格 |
+| L2 | 为什么多进程能并行 | 是否背的 | 无 GIL、独立地址空间 | 判 P5 |
+| L3 | 多进程代价是什么 | 有没有真理解 | 内存高、需 IPC | 判 P6 |
+| L4 | 进程数怎么定 | 架构判断 | 按 CPU 核数、避免超配 | 判 P6+ |
+| L5 | 你部署怎么用多进程 | 实战经验 | gunicorn worker 数调优 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| Python 3.x（类 Unix fork） | Windows 无 fork，用 spawn 启动；3.4+ 默认多启动方式可配 | 面试按"类 Unix 用 fork"答；可补充 Windows 用 spawn 的差异 |
+
+## 关键代码
+```python
+import multiprocessing
+def fib(n):                 # CPU 密集型：斐波那契
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+p = multiprocessing.Process(target=fib, args=(100000,))
+p.start(); p.join()         # 独立进程，绕开 GIL 真并行 [实测]
+```
+
+## ⚠️ 原文纠错
+原文第 74~82 段多处音译需还原：mainprocessing/musicprocessing→**multiprocessing**；wemasterslave→**master-slave 多进程模型**；gunitcom→**gunicorn**；usaSGI→**uWSGI**；非布纳奇数列→**斐波那契数列**；CPU秘集型→**CPU 密集型**。概念结论（CPU 密集用多进程、接口同 threading）正确。核对范围：第 74~90 段多进程示例与部署模型。
+
+## 总结与追问预判
+- CPU 密集用 multiprocessing 绕 GIL；API 同 threading；部署靠 master-slave 多进程。
+- 顺势会问：**GIL（见 153 卡）**、**IPC（见 158 卡）**。

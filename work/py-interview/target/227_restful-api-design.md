@@ -1,0 +1,66 @@
+# 227. RESTful API 设计
+
+> 分类：Web 架构 | 难度：L3 | 题型：概念+设计 | 频率：高 | 关键词：**RESTful** / **资源** / **表现层** / **状态转移** / **HTTP 动词** / **幂等**
+> 原文锚点：第9章 9-3「RESTful：全称 Representational State Transfer(表现层状态转移)，Roy Fielding 提出；三概念=资源(URI 标识的实体)/表现层(资源表现形式如图片视频HTML)/状态转化(用 GET/POST/PUT/DELETE 动词操作资源改变状态)；是风格非规范；准则=一切抽象为资源+唯一 URI、操作无状态、操作不改变 URI；RESTful API 用动词对应 CRUD 返回 JSON 而非页面；URL 规范=资源用名词复数(/users 列表、/users/{id} 单个)、同 URI 不同 method 区分操作；代码演示 Tornado 实现」
+
+## 一句话总述
+**RESTful 是一种以"资源"为中心的 Web 软件架构风格**（Roy Fielding 提出）：把一切抽象为资源（用 URI 标识），用 **HTTP 动词（GET/POST/PUT/DELETE）对资源做增删改查**实现状态转移，接口无状态、返回 JSON。它**不是规范也不是强制约束**。
+
+## 面试官视角
+- **考察意图**：是否真懂"资源/表现层/状态转移"三个名词，以及能否把 HTTP 动词和 CRUD 正确对应（尤其幂等性）。
+- **P5** 能说出 RESTful 是什么（架构风格）+ 三要素（资源/表现层/状态转移） / **P6** 能讲清设计准则（资源名词化、URI 唯一、无状态、操作不改 URI）并用动词对应 CRUD / **P7** 能辨析 **PUT vs POST 的幂等差异**、能设计合理 URL（名词复数、不用动词）、点出"无状态"对鉴权/水平扩展的意义。
+- **红旗**：把 `/getUser?id=1` 这类"动词塞 URL"当 RESTful；认为 REST 是某个协议/标准。
+- **惊艳点**：能补"RESTful 与 RPC 风格（如 gRPC）的取舍"或"HATEOAS 超媒体约束" `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 什么是 RESTful？怎么设计 RESTful API？
+
+**A · 标准答案骨架：**
+1. **是什么**：全称 **Representational State Transfer（表现层状态转移）**，由 HTTP 主要设计者之一 **Roy Fielding** 提出。它是一种**软件架构风格**，**既不是规范也不是强制约束**。核心三概念：① **资源（Resource）**——用 URI 指向的实体（用户/订单/音乐）；② **表现层（Representation）**——资源的表现形式（HTML/图片/视频/JSON 等）；③ **状态转移（State Transfer）**——通过 HTTP 动词（GET/POST/PUT/DELETE）操作资源、改变其状态。
+2. **设计准则**：① 一切抽象为**资源**，每个资源有**唯一 URI** 标识；② 通过接口操作资源实现状态转移；③ **无状态**——每次请求自带完整上下文（HTTP 本身无状态，两次请求间无关联）；④ **对资源的操作不改变资源标识（URI 不变）**，否则链接失效、资源找不到。
+3. **RESTful API 落地**：用 HTTP 动词映射 CRUD——**GET=查、POST=增、PUT=改、DELETE=删**，通常返回 **JSON 而非页面**。主流 Web 框架都有支持（Django REST framework、Flask-RESTful、Tornado 的 RESTful 扩展）`[经验]`。
+4. **URL 设计规范**：资源用**名词复数**（如 `/users` 列表、`/users/{id}` 单个），**同一 URI 靠 HTTP method 区分操作**（GET 列表/单个、POST 创建、PUT 更新、DELETE 删除），不要在 URL 里塞动词（反例：`/getUser`）。
+
+**加分层**：**幂等性**是高频追问——GET/PUT/DELETE 幂等（多次调用效果一致），POST 非幂等（多次创建多个资源）；PUT 通常表示"整体替换"，PATCH 才是"部分更新"。`[经验]`
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | RESTful 是什么 | 基本认知 | 架构风格+Roy Fielding | 换题 → 不及格 |
+| L2 | 三要素 | 概念 | 资源/表现层/状态转移 | 判 P5 |
+| L3 | 怎么设计 | 落地 | 动词映射 CRUD+名词复数 URI | 判 P6 |
+| L4 | 为什么无状态 | 深入 | 请求自带上下文/易水平扩展 | 判 P6+ |
+| L5 | PUT vs POST | 高阶 | 幂等差异/整体替换 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| RESTful 作为架构风格长期成立，HTTP 动词语义稳定 | 无版本翻转 | 仍按"资源名词化 + 动词映射 CRUD + 无状态"答；可补幂等性（GET/PUT/DELETE 幂等、POST 非幂等）与 PATCH 部分更新 |
+
+## 关键代码
+```python
+# Tornado 实现 RESTful API（微框架，无需额外插件）[源码, python]
+import tornado.web
+
+class UserListHandler(tornado.web.RequestHandler):
+    def get(self):                  # 批量获取用户列表  → GET /users
+        self.write({"users": [{"id": 1, "name": "alice"}]})
+    def post(self):                 # 创建新用户        → POST /users
+        self.write({"msg": "created"})
+
+class UserHandler(tornado.web.RequestHandler):
+    def get(self, user_id):         # 获取单个用户      → GET /users/1
+        self.write({"id": int(user_id), "name": "alice"})
+    def put(self, user_id):         # 更新单个用户      → PUT /users/1
+        self.write({"id": int(user_id), "msg": "updated"})
+    def delete(self, user_id):      # 删除单个用户      → DELETE /users/1
+        self.write({"id": int(user_id), "msg": "deleted"})
+```
+
+## ⚠️ 原文纠错
+- 机翻还原：「reasstful / reststful / restof / restVPI / restfulfulapr / rerestful」→ **RESTful**；「representationalstatatransfer」→ **Representational State Transfer（表现层状态转移）**；「lawyerfielld」→ **Roy Fielding**；「weuRR / UR」→ **URI（统一资源标识符）**；「阶层数据」→ **JSON 数据**；「安贾克斯」→ **Ajax**；「jason」→ **JSON**；「插面」→ **页面**；「jungle」→ **Django**；「restframework」→ **Django REST framework**；「flash」→ **Flask**；「torato / contnel / tanel」→ **Tornado**；「pose」→ **POST**；「外b框架」→ **Web 框架**。
+- 原文"RESTful 是风格非规范、三要素、动词映射 CRUD、名词复数 URI、Tornado 可无插件实现"均准确。
+- 原文未展开"幂等性"，已补（见加分层）；"无状态"含义（HTTP 无状态、请求自带上下文）准确。
+
+## 总结与追问预判
+RESTful 核心是"资源 + URI + HTTP 动词映射 CRUD + 无状态"。面试官常顺问幂等性（PUT/POST 区别）、与 RPC 取舍，或接回 526 卡的前后端分离上下文。

@@ -1,0 +1,69 @@
+# 86. 从零手写 Stack 类：四个接口与栈顶约定
+
+> 分类：算法与数据结构/栈 | 难度：L2 | 题型：工程题 | 频率：中 | 关键词：**push** / **pop** / **top** / **empty** / **deque**
+> 原文锚点：第 39~64 段「我们使用 deque 来快速实现一个栈……我们并没有实现这个 top 方法」
+
+## 一句话总述
+用 `collections.deque` 封装栈只需**四个接口**：`push`（右端 `append`）、`pop`（右端 `pop`）、`top`（返回 `items[-1]`）、`empty`（`len(items) == 0`）；**约定栈顶在右端**是全部正确性的前提。
+
+## 面试官视角
+- **考察意图**：考**接口完整性**与封装习惯——很多人只写 push/pop，忘了 `top` 和 `empty`。
+- **P5** 只写 push/pop / **P6** 四接口齐全且栈顶约定一致 / **P7** 会补 `len`/`__bool__` 并说明空栈 `pop` 的异常策略 `[实测]`。
+- **红旗**：① 栈顶一会儿在左一会儿在右；② 空栈 `pop` 不报错而返回 `None`（掩盖 bug）；③ 用 `list.pop(0)` 当栈（O(n)）。
+- **惊艳点**：明确"**栈顶 = 右端**"这一条约定后，push/pop/top 全部是 O(1)；并指出 `deque` 两端都是 O(1)，而 `list` 只在尾部 O(1)（见 70）。验证：`top()` 不应弹出元素，跑一次 `pop` 前后长度对照即可 `[实测]`。
+
+## 主问答
+**Q：用 Python 手写一个栈类，需要哪些方法？**
+**A：**
+1. **约定**：栈顶定在**右端**，于是 `push` = `append`，`pop` = `pop()`（deque 默认从右），`top` = `items[-1]`，`empty` = `len(items) == 0`。
+2. **注意**：`top`（查看）与 `pop`（弹出）**语义不同**——top 只返回不删除，很多实现漏掉它，导致上层要么自己取 `[-1]` 破坏封装、要么误用 pop。
+3. **边界**：空栈 `pop`/`top` 要**显式抛异常**（如 `IndexError`），不要静默返回 `None`，否则调用方拿不到错误信号。
+**加分层**：补 `__len__` 与 `__bool__` 让 `if stack:` 可用，是明显的工程素养加分项；底层用 `deque` 而非 `list`，避免误用 `pop(0)`（O(n)，见 69）。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 栈是什么 | 概念 | 后进先出 | 换题 → 不及格 |
+| L2 | 有哪些方法 | 接口 | push/pop/top/empty | 判 P5 |
+| L3 | top 和 pop 区别 | 语义 | 查看 vs 弹出 | 判 P6 |
+| L4 | 底层选 list 还是 deque | 选型 | deque 两端 O(1) | 判 P6+ |
+| L5 | 空栈怎么办 | 边界 | 显式抛异常 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| Python 3.x | `deque.pop()` 默认从右端 | 直接用作栈的 pop `[实测]` |
+| Python 3.x | `deque` 不支持切片 | 需要切片时改用 list |
+| Python 3.x | 空 `deque.pop()` 抛 IndexError | 可复用，无需自己判 |
+
+## 关键代码
+```python
+from collections import deque
+
+class Stack:
+    """栈顶约定在右端：push/pop/top 均为 O(1)。"""
+    def __init__(self): self.items = deque()
+    def push(self, value): self.items.append(value)      # 右端入
+    def pop(self):
+        if self.empty(): raise IndexError("pop from empty stack")
+        return self.items.pop()                          # 右端出
+    def top(self):
+        if self.empty(): raise IndexError("top from empty stack")
+        return self.items[-1]                            # 只看不弹
+    def empty(self): return len(self.items) == 0
+    def __len__(self): return len(self.items)
+    def __bool__(self): return not self.empty()
+
+s = Stack()
+for v in (1, 2, 3): s.push(v)
+print(s.top(), len(s))        # 3 3 —— top 不减少元素
+print(s.pop(), s.pop())       # 3 2
+print(bool(s), s.pop(), s.empty())   # True 1 False
+```
+
+## ⚠️ 原文纠错
+原文用 deque 右端作为栈顶、`append`/`pop`/`items[-1]`/`len == 0` 实现四接口的做法正确，予以保留；原文也确实在写 `peek` 时才发现"没有实现 top 方法"，该疏漏点已作为本卡重点提示。转写中的音译词（双端队列等）已统一还原为标准术语。
+
+## 总结与追问预判
+- 四接口 + 栈顶在右；空栈显式抛错。
+- 下一题：见 71（两栈实现队列）、70（deque 当栈）。

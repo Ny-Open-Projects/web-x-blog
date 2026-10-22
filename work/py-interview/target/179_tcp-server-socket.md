@@ -1,0 +1,56 @@
+# 179. TCP 服务端 Socket 编程
+
+> 分类：网络/Python | 难度：L2 | 题型：工程题 | 频率：中 | 关键词：**bind** / **listen** / **accept** / **阻塞**
+> 原文锚点：第 16~49 段「服务端：bind 绑定端口→listen 监听→accept 阻塞等待→recv/send→close；accept 返回新 connection 与地址」
+
+## 一句话总述
+TCP 服务端流程：**`socket()`→`bind(端口)`→`listen()`→`accept()`（阻塞等新连接）→`recv/send`→`close()`**。`accept` 返回**新的连接 socket**（与客户端的通信通道）和客户端地址；原监听 socket 继续等下一个连接。
+
+## 面试官视角
+- **考察意图**：是否真写过 TCP 服务端，理解"监听 socket"与"连接 socket"是两回事。
+- **P5** 能说出 bind/listen/accept 顺序 / **P6** 能讲清 accept 阻塞、新连接 socket 与监听 socket 区别 / **P7** 能指出单线程 accept 一次只服务一个客户端、需用多线程/IO 多路复用（select/epoll）才能并发。
+- **红旗**：把 accept 返回的 socket 当成"监听 socket"继续 accept；或认为服务端调 connect。
+- **惊艳点**：`accept` 在**没有连接时阻塞**整个线程，所以生产服务端必用**多线程/asyncio/事件循环**而非裸 accept 串行——这正是 Web 框架底层做的事 —— 验证：`strace` 能看到 accept 系统调用阻塞 `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 用 Python 写一个 TCP 服务端，流程是怎样的？
+
+**A · 标准答案骨架：**
+1. **先给结论**：服务端固定四步——**绑定端口 `bind` → 监听 `listen` → 阻塞接连接 `accept` → 读写 `recv/send`**。
+2. **再给机制**：`bind(("0.0.0.0", 端口))` 绑定本地端口；`listen()` 开始排队；`accept()` 阻塞直到客户端到达，返回**新的连接 socket + 客户端地址**；原监听 socket 不负责数据、继续等下一个。
+3. **最后给边界**：裸 accept 是**串行**的（一次服务一个）；要并发必须配合多线程、`asyncio` 或 `select/epoll`。
+
+**加分层**：监听 socket 与连接 socket 职责分离，是"一个端口服务海量连接"的结构基础——Web 服务器（uWSGI/gunicorn）本质就是 accept 后的调度器 `[经验]`。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 服务端几步 | 基本认知 | bind/listen/accept | 换题 → 不及格 |
+| L2 | accept 干嘛 | 是否背的 | 阻塞等连接/返回新 socket | 判 P5 |
+| L3 | 监听socket≠连接socket | 有没有真理解 | 两 socket 职责分离 | 判 P6 |
+| L4 | 怎么并发服务 | 架构判断 | 多线程/asyncio/epoll | 判 P6+ |
+| L5 | 你写过并发服务端吗 | 实战经验 | 线程池/事件循环 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| Python 3.x | 无 | `socket` API 稳定；可提 `with socket` 上下文自动 close |
+
+## 关键代码
+```python
+import socket
+srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+srv.bind(("0.0.0.0", 8888))   # 绑定本地端口 [实测]
+srv.listen(5)                  # 开始监听，积压队列 5
+conn, addr = srv.accept()      # 阻塞，直到客户端到达，返回新连接 socket
+data = conn.recv(1024)         # 收字节（需 decode）
+conn.sendall(b"hello")         # 发字节
+conn.close()
+```
+
+## ⚠️ 原文纠错
+原文第 16~49 段音译需还原：「**TCB/TTP**」→ **TCP**；「**sooft/sobmit/sosolit/solid/socmm/socistream/southstream/soccit/surfit**」→ **socket**；「**band**」→ **bind**；「**liata**」→ **listen**；「**rate/readwrde**」→ **read/write**；「**sense握手**」→ **三次握手（three-way handshake）**；「**扣端/可i**」→ **客户端（client）**；「**四个八**」→ **8888（端口）**；「**timestring/timeSTR**」→ **time string（时间字符串）**；「**cint**」→ **conn（连接 socket）**。服务端流程（bind→listen→accept 阻塞→recv/send→close）正确。核对范围：第 16~49 段 TCP 服务端编程。
+
+## 总结与追问预判
+- 服务端：bind→listen→accept(阻塞,返回新连接)→recv/send→close。
+- 顺势会问：**TCP 客户端（见 180 卡）**、**三次握手（见 170 卡）**。

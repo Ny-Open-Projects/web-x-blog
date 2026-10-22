@@ -1,0 +1,58 @@
+# 188. asyncio 与 aiohttp
+
+> 分类：网络 | 难度：L2 | 题型：工程题 | 频率：中 | 关键词：**asyncio** / **aiohttp** / **协程** / **事件循环** / **async/await** / **Guido**
+> 原文锚点：第 52~64 段「asyncio 是 Python3 引入的基于协程的内置并发库（Guido 主导的 Tulip 项目），协程 + 事件循环，底层仍是 IO 多路复用；aiohttp 是基于 asyncio 的异步 HTTP 库」
+
+## 一句话总述
+**asyncio** 是 Python3 标准库里的**原生协程并发框架**（`async/await` + 事件循环，底层 IO 多路复用），由 Guido 主导的 Tulip 项目演化而来；**aiohttp** 是基于它实现的异步 HTTP 客户端/服务器库——两者现在已是 Python 异步生态的基石。
+
+## 面试官视角
+- **考察意图**：是否真正用 asyncio 写过代码，并理解"协程 + 事件循环"与 greenlet/回调模型的区别。
+- **P5** 能说出 asyncio 是标准库、用 async/await / **P6** 能讲清协程在 IO 等待点让出控制权、事件循环调度、底层走 epoll / **P7** 能对比 asyncio 与 gevent/Tornado（原生 vs 第三方、协程 vs greenlet/回调），并说清生态现状。
+- **红旗**：以为 asyncio 能加速 CPU 密集任务（只解决 IO 并发，CPU 密集要用多进程）；或认为"协程 = 并行"（单线程内是并发非并行）。
+- **惊艳点**：asyncio 的 `loop` 底层就是 **`selectors` 的 DefaultSelector**（Linux→epoll）——和我们前面手写的多路复用是同一套，只是用协程把"回调地狱"改写成了顺序代码 `[源码]`（CPython `asyncio/selector_events.py`）。
+
+## 主问答
+**Q（面试官原话）：** asyncio 是什么？它和 gevent、Tornado 比有什么不同？现在生产能用吗？
+
+**A · 标准答案骨架：**
+1. **先给结论**：asyncio 是 **Python3 标准库**的**原生协程框架**，用 `async/await` 写、事件循环调度，底层仍是 **epoll/kqueue**；与 gevent（greenlet+monkey patch）、Tornado（IOLoop+回调）是同一目标的三种封装。
+2. **再给机制**：`async def` 定义协程，在 `await` 的 IO 等待点**主动让出控制权**给事件循环，循环在其他协程就绪时切回；`aiohttp` 提供 `ClientSession` 做异步 HTTP——**写起来是顺序代码，跑起来是并发 IO**。
+3. **最后给边界**：asyncio **只解决 IO 并发，不加速 CPU 密集**（CPU 密集要 `run_in_executor` 或 `multiprocessing`）；单线程内是**并发非并行**（无 GIL 释放）；且**必须全程 async 库**（混用同步阻塞调用会卡住循环）。
+
+**加分层**：生态早已成熟——**FastAPI（基于 asyncio）/ Uvicorn / aiohttp** 已在大规模生产使用；原文"asyncio 未经生产检验"是 **Python3.4~3.5 时代的过时判断**，现在（3.7+ 稳定、3.10+ 完善）完全可以上生产 `[经验]`。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | asyncio 是什么 | 基本认知 | 标准库协程框架 | 换题 → 不及格 |
+| L2 | 协程怎么调度 | 是否背的 | await 让出/事件循环 | 判 P5 |
+| L3 | 与 gevent 区别 | 真理解 | 原生协程 vs greenlet | 判 P6 |
+| L4 | 生态/生产可用 | 架构判断 | FastAPI/Uvicorn 已生产 | 判 P6+ |
+| L5 | CPU 密集怎么办 | 实战经验 | run_in_executor/多进程 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| Python 3.4 引入 asyncio（provisional） | 3.5 加 async/await（PEP 492）；3.7 标记稳定 | 现在：asyncio 稳定，FastAPI/Uvicorn/aiohttp 已大规模生产；原文"生态不成熟"为 3.4~3.5 时期过时观点 |
+
+## 关键代码
+```python
+import asyncio, aiohttp
+# asyncio 原生协程 + aiohttp 异步 HTTP [实测, py3.13]
+async def fetch(session, i):
+    async with session.get("https://httpbin.org/get") as r:
+        text = await r.text()
+    print(i, len(text))
+async def main():
+    async with aiohttp.ClientSession() as s:
+        await asyncio.gather(*(fetch(s, i) for i in range(10)))   # 10 个并发请求
+asyncio.run(main())
+```
+
+## ⚠️ 原文纠错
+原文音译需还原：「**asiRO / sro / s三l / l三l / CCIO / siglRO / ARYCTP / AROHTDP / LORGGDP / LOHTTPP / LOIGGDP / sinkIO**」→ **asyncio / aiohttp**；「**s三l项目**」→ **asyncio（Tulip）项目，由 Guido 主导**；「**LOIGGDP / LOHTTPP**」→ **aiohttp（提供 ClientSession）**；「**HTTPB**」→ **httpbin**；「**sorhTTP**」→ **HTTP 请求**；「**消费者编程**」→ **异步编程**；「**RO多路复用**」→ **IO 多路复用**。重要事实翻转：原文称"asyncio 生态不成熟、没公司大规模使用、很多公司还没上 Python3"是 **Python3.4~3.5 时代（约 2015–2017）的过时判断**；如今 asyncio 已在 **3.7 稳定、3.10+ 完善**，FastAPI/Uvicorn/aiohttp 已大规模生产使用。概念正确：asyncio 基于协程+事件循环、底层 IO 多路复用。核对范围：第 52~64 段 asyncio 与 aiohttp。
+
+## 总结与追问预判
+- asyncio 是标准库原生协程框架，底层 epoll；aiohttp 做异步 HTTP；生态已成熟可上生产。
+- 顺势会问：**gevent/Tornado（见 186/487 卡）**、**IO 多路复用底层（见 182/483 卡）**、**GIL 与并发（见 153 卡）**。

@@ -1,0 +1,56 @@
+# 56. OrderedDict 保的是什么序，现在还需要它吗
+
+> 分类：算法与数据结构/collections | 难度：L2 | 题型：八股题 | 频率：中 | 关键词：**OrderedDict** / **插入顺序** / **move_to_end**
+> 原文锚点：第 59~68 段「它能记住 k 进入的顺序…而不是说这个 k 是有序的」
+
+## 一句话总述
+`OrderedDict` 记住的是 **key 第一次插入的顺序**，**不是 key 的字典序**；Python 3.7 起普通 dict 也保序，所以它现在的价值集中在 `move_to_end` 与 `popitem(last=False)`。
+
+## 面试官视角
+- **考察意图**：区分"插入顺序"与"排序"，并判断你是否知道 3.7 这个分水岭。
+- **P5** 知道它保序 / **P6** 说清保的是插入序、且 3.7 后 dict 也保序 / **P7** 能说出底层循环双向链表与"何时仍必须用 OrderedDict"。
+- **红旗**：① 说它"让 key 有序"；② 以为 3.7 后 OrderedDict 完全没用；③ 把 `move_to_end` 记成 `move_to_front`。
+- **惊艳点**：`==` 比较时 OrderedDict **会考虑顺序**，普通 dict 不会——`OrderedDict(a=1,b=2) != OrderedDict(b=1,a=2)`。验证：两条语句对比 `[实测]`。
+
+## 主问答
+**Q：OrderedDict 和普通 dict 有什么区别？现在还用得上吗？**
+**A：**
+1. **先给结论**：它记住 **key 首次插入的顺序**（不是字典序）；底层用**循环双向链表**维护这个顺序，因此多占内存。
+2. **再给变化**：Python **3.7 起 dict 已保证插入顺序**，纯"保序"需求直接用 dict 即可，OrderedDict 不再是必需。
+3. **最后给残留价值**：`move_to_end(key)` 把键挪到头/尾、`popitem(last=False)` 从**头部**弹出——这两个**顺序敏感操作** dict 没有，实现 LRU 缓存正是靠它们。
+**加分层**：相等性比较上 OrderedDict **顺序敏感**，dict 不敏感；需要"顺序参与相等判断"的场景（如配置序列化比对）要用它。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 它保什么序 | 术语 | 插入顺序 | 换题 → 不及格 |
+| L2 | 是排序吗 | 概念 | 不是字典序 | 判 P5 |
+| L3 | 3.7 后还有用吗 | 版本 | 保序用 dict 即可 | 判 P6 |
+| L4 | 有什么独有方法 | 机制 | move_to_end/popitem | 判 P6+ |
+| L5 | 底层怎么保序 | 源码 | 循环双向链表 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| Python 3.7+ | dict 正式保证插入顺序 | 保序用 dict；顺序敏感操作才用 OrderedDict |
+| Python 3.2+ | `move_to_end` / `popitem(last=)` 可用 | LRU 实现依赖这两个方法 |
+
+## 关键代码
+```python
+from collections import OrderedDict
+od = OrderedDict()
+od["c"] = 3; od["a"] = 1; od["b"] = 2
+print(list(od.keys()))              # ['c', 'a', 'b'] —— 插入序，非字典序
+od.move_to_end("c")                 # c 挪到尾部（最新）
+print(list(od.keys()))              # ['a', 'b', 'c']
+print(od.popitem(last=False))       # ('a', 1) —— 从头部弹出最旧的
+print(OrderedDict(a=1,b=2) == OrderedDict(b=1,a=2))  # False 顺序敏感
+print({"a":1,"b":2} == {"b":2,"a":1})                # True  dict 不敏感
+```
+
+## ⚠️ 原文纠错
+原文强调"不是 key 的字典序"这一纠正本身正确；但原文未提及 **Python 3.7 起 dict 已保序**这一关键变化，卡面已补正并给出当前选型建议。转写中的音译词已统一还原为 OrderedDict / dict。
+
+## 总结与追问预判
+- 保插入序、非排序；3.7 后独有价值在 `move_to_end` 与头部 `popitem`。
+- 下一题：见 62（LRU 实现）、57（defaultdict）。

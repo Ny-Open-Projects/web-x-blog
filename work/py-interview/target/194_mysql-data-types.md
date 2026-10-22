@@ -1,0 +1,56 @@
+# 194. MySQL 常用数据类型与显示宽度误区
+
+> 分类：数据库 | 难度：L2 | 题型：概念题 | 频率：中 | 关键词：**CHAR** / **VARCHAR** / **INT(10)** / **显示宽度** / **DATETIME** / **TIMESTAMP**
+> 原文锚点：第 85~104 段「MySQL 类型分字符串/数值/日期三类；CHAR 定长、VARCHAR 变长、TEXT 长文本；INT(10) 的 10 是显示宽度非字节；TIMESTAMP 4 字节但只到 2038 年」
+
+## 一句话总述
+MySQL 类型分三类：**字符串**（CHAR 定长 / VARCHAR 变长 / TEXT 长文本）、**数值**（TINYINT/SMALLINT/INT/BIGINT/FLOAT/DOUBLE）、**日期**（DATETIME 8 字节 / TIMESTAMP 4 字节）。**关键误区：`INT(10)` 的 10 是显示宽度，不是字节数也不是取值范围——INT 永远是 4 字节**。
+
+## 面试官视角
+- **考察意图**：是否踩过"显示宽度"的坑，能否按业务正确选型。
+- **P5** 能说出字符串/数值/日期三类及代表类型 / **P6** 能讲清 CHAR vs VARCHAR（定长 vs 变长）、INT(10) 是显示宽度非范围、BIGINT 存 64 位发号器 / **P7** 能说清 TIMESTAMP 的 **2038 年上限（Y2038）**与 DATETIME 的选择，以及 FLOAT/DOUBLE 的精度陷阱（金额用 DECIMAL）。
+- **红旗**：认为 `INT(10)` 能存 10 字节或范围更大；或存储金额用 FLOAT/DOUBLE（精度丢失，应用 DECIMAL）。
+- **惊艳点**：`INT(10)` 与 `INT(20)` **占用的存储完全一样（都 4 字节）**，括号里的数字只影响 `ZEROFILL` 显示宽度——这是初学者最高频的误解 `[源码]`（MySQL 数据类型文档）。
+
+## 主问答
+**Q（面试官原话）：** MySQL 有哪些常用数据类型？`INT(10)` 里的 10 是什么意思？
+
+**A · 标准答案骨架：**
+1. **先给结论**：三大类——**字符串、数值、日期**；`INT(10)` 的 10 是**显示宽度**，与字节数、取值范围都无关。
+2. **再给机制**：**CHAR(n)** 定长（不足补空格，适合短且定长如 MD5/性别），**VARCHAR(n)** 变长（按实际长度存，适合不定长），**TEXT** 存长文本；**数值** TINYINT/SMALLINT/INT/BIGINT 分别 1/2/4/8 字节，64 位发号器用 BIGINT；**日期** DATETIME 8 字节、TIMESTAMP 4 字节。
+3. **最后给边界**：TIMESTAMP 因 4 字节整数范围限制，**只能表示到 2038 年**（Y2038 问题），超此用 DATETIME；**金额绝不用 FLOAT/DOUBLE**（二进制浮点精度丢失），用 **DECIMAL**；`INT(n)` 的 n 不改存储。
+
+**加分层**：VARCHAR 有最大行 65535 字节与字符集长度约束，超长文本才上 TEXT/MEDIUMTEXT；定长且短用 CHAR 更省碎片 `[经验]`。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 有哪些类型 | 基本认知 | 字符串/数值/日期 | 换题 → 不及格 |
+| L2 | INT(10) 含义 | 是否背的 | 显示宽度非范围 | 判 P5 |
+| L3 | CHAR vs VARCHAR | 真理解 | 定长 vs 变长 | 判 P6 |
+| L4 | TIMESTAMP 上限 | 架构判断 | Y2038 + DECIMAL 金额 | 判 P6+ |
+| L5 | 你设计过表 | 实战经验 | 字符集/行上限约束 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| MySQL 5.x/8.x 数据类型语义至今 | 无 | INT(n) 仅为显示宽度；TIMESTAMP 2038 上限不变；金额用 DECIMAL |
+
+## 关键代码
+```sql
+-- 类型定义示例：CHAR 定长、VARCHAR 变长、INT(10) 仅显示宽度、DECIMAL 金额 [实测]
+CREATE TABLE user (
+  md5 CHAR(32),                       -- 定长 32
+  name VARCHAR(64),                   -- 变长，最多 64 字符
+  id BIGINT,                          -- 8 字节，存雪花 ID
+  amount DECIMAL(12,2),               -- 金额不用 FLOAT/DOUBLE
+  created DATETIME                    -- 跨 2038 用 DATETIME
+);
+```
+
+## ⚠️ 原文纠错
+原文音译需还原：「**叉**」→ **CHAR**；「**ver叉**」→ **VARCHAR**；「**vertext / text**」→ **TEXT**；「**tinyint / smallint / int / bigant / buililint**」→ **TINYINT / SMALLINT / INT / BIGINT**；「**float / double**」正确（浮点）；「**les / lift / length**」→ **显示宽度（display width）**；「**daadtime**」→ **DATETIME**；「**timestep / timesteable**」→ **TIMESTAMP**；「**六十四位 / 发号器**」→ **64 位发号器（雪花算法等）**。概念正确：三类类型划分、CHAR 定长/VARCHAR 变长/TEXT 长文本、INT(n) 是显示宽度非字节、`INT` 始终 4 字节、TIMESTAMP 4 字节但仅到 2038 年。核对范围：第 85~104 段 数据类型。
+
+## 总结与追问预判
+- 三类类型；INT(n) 是显示宽度非范围；TIMESTAMP 有 2038 上限；金额用 DECIMAL。
+- 顺势会问：**InnoDB 引擎（见 195 卡）**、**事务与 ACID（见 189 卡）**。

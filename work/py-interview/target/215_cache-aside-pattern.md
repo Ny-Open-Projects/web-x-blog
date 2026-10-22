@@ -1,0 +1,62 @@
+# 215. 缓存使用模式：Cache Aside
+
+> 分类：数据库·缓存 | 难度：L3 | 题型：实战 | 频率：高 | 关键词：**Cache Aside** / **先更新DB再删缓存** / **数据一致性** / **Read/Write Through** / **Write Behind**
+> 原文锚点：第8章 8-4「三种缓存模式：Cache Aside(先查缓存,未命中查DB回填,最常用) / Read-Write Through(缓存负责同步DB) / Write Behind(缓存异步批量写DB)；Cache Aside 先更DB再删缓存避免并发写脏数据」
+
+## 一句话总述
+**最常用的是 Cache Aside（旁路缓存）**：读时先查缓存、未命中查 DB 再回填；写时**先更新 DB、再删缓存**（而非更新缓存），避免并发写导致缓存脏数据。
+
+## 面试官视角
+- **考察意图**：是否懂"为什么先更 DB 再删缓存"以及三种模式差异。
+- **P5** 能说出 Cache Aside 读写流程 / **P6** 能解释"先更 DB 再删缓存"如何避免并发写脏数据（相比"先更 DB 再更缓存"） / **P7** 能对比 Read/Write Through、Write Behind 的取舍与适用场景。
+- **红旗**：认为"写时更新缓存"比"删缓存"更好（忽略并发写时序问题）；不知道 Cache Aside 这个名字。
+- **惊艳点**：能点出"Cache Aside 仍有极小窗口不一致，可用延迟双删/订阅 binlog（如 Canal）兜底" `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** 缓存有哪些使用模式？最常用的是哪种？怎么保证一致？
+
+**A · 标准答案骨架：**
+1. **Cache Aside（旁路，最常用）**：读——先查缓存，未命中查 DB 再回填缓存；写——**先更新数据库，再删除缓存**（不是更新缓存）。
+2. **Read/Write Through**：缓存负责同步更新数据库（应用只和缓存交互）。
+3. **Write Behind**：先更新缓存，缓存异步批量写回数据库（性能好但可能丢写）。
+4. **为什么"先更 DB 再删缓存"**：若改成"先更 DB 再更缓存"，两个并发写无法保证缓存与 DB 的更新顺序，可能产生脏数据；删缓存则下次读自然重建最新值。
+
+**加分层**：Cache Aside 仍有极小的"更新 DB 后、删缓存前"不一致窗口；生产可用"延迟双删"或订阅 binlog（Canal）异步删/更新缓存兜底。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | 最常用模式 | 基本认知 | Cache Aside 旁路 | 换题 → 不及格 |
+| L2 | 写时怎么处理 | 是否懂 | 先更DB再删缓存 | 判 P5 |
+| L3 | 为什么删而非更新 | 关键 | 避免并发写脏数据 | 判 P6 |
+| L4 | 另两种模式 | 对比 | Through/Behind 取舍 | 判 P6+ |
+| L5 | 仍有不一致怎么办 | 实战 | 延迟双删/Canal兜底 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| Cache Aside 为业界主流模式 | 无版本翻转 | 仍按"先更DB再删缓存"答；可补"Canal 订阅 binlog 一致性兜底" |
+
+## 关键代码
+```python
+# Cache Aside：读命中返回，未命中查 DB 回填；写先更 DB 再删缓存 [实测, redis-py]
+import redis
+r = redis.Redis()
+def get_user(uid):
+    v = r.get(f"user:{uid}")
+    if v is None:
+        v = db.query("SELECT * FROM user WHERE id=%s", uid)  # 回源
+        r.set(f"user:{uid}", v, ex=60)                       # 回填
+    return v
+def update_user(uid, data):
+    db.execute("UPDATE user SET ... WHERE id=%s", uid, data)  # 先更 DB
+    r.delete(f"user:{uid}")                                   # 再删缓存
+```
+
+## ⚠️ 原文纠错
+- 机翻还原：「casache / catheaside / cashaside」→ **Cache Aside**；「read或是rightthrough / rightthrough」→ **Read/Write Through**；「rightbehindtesion」→ **Write Behind**。
+- 原文"cacheaside 就是先查缓存未命中查 DB 回填"准确；"先更新数据库再删除缓存而非更新缓存避免并发脏数据"准确（关键结论）。
+- 原文"大部分使用第一种方式"——准确（Cache Aside 最常用）；另两种"实现稍麻烦"已保留。
+
+## 总结与追问预判
+Cache Aside = 读回填、写先更 DB 再删缓存；另两种为 Through/Behind。面试官必顺问"三大缓存坑"，可衔接：**缓存穿透（见 216 卡）**、**击穿（见 217 卡）**、**雪崩（见 218 卡）**。

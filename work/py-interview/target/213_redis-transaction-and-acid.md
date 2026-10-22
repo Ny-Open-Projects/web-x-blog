@@ -1,0 +1,65 @@
+# 213. Redis 事务与 ACID 特性
+
+> 分类：数据库·缓存 | 难度：L3 | 题型：原理 | 频率：中 | 关键词：**MULTI** / **EXEC** / **WATCH** / **乐观锁** / **ACID辨析**
+> 原文锚点：第8章 8-4「Redis 事务：MULTI 开始/EXEC 执行/WATCH 乐观锁；与 MySQL 事务对比——原子性(不支持回滚)/一致性(需WATCH)/隔离性(单线程天然)/持久性(不完全保证)；redis-py pipeline(transaction=True)」
+
+## 一句话总述
+**Redis 事务 = MULTI 入队 + EXEC 一次性按序执行**，靠 WATCH 实现乐观锁；但与 MySQL 事务不同——它**原子性不含回滚**、持久性不完全保证，隔离性靠单线程天然达成。
+
+## 面试官视角
+- **考察意图**：是否分得清"Redis 事务"与"关系库事务"，尤其 ACID 每一项在 Redis 下的真实语义。
+- **P5** 能说出 MULTI/EXEC/WATCH 三命令与"批量按序执行" / **P6** 能讲清"Redis 事务原子性不等于回滚（某条失败其余照跑）" / **P7** 能逐条辨析 ACID：原子(无回滚)/一致(WATCH)/隔离(单线程)/持久(不完全)。
+- **红旗**：把 Redis 事务说成"要么全成功要么全失败带回滚"，与 MySQL 混淆。
+- **惊艳点**：能指出"redis-py 用 pipeline(transaction=True) 实现事务语义"，且 WATCH 是乐观锁（类比 MySQL 版本号） `[经验]`。
+
+## 主问答
+**Q（面试官原话）：** Redis 的事务是什么？和 MySQL 事务有什么区别？支持 ACID 吗？
+
+**A · 标准答案骨架：**
+1. **机制**：Redis 事务把多条命令打包，通过 `MULTI` 开始、`EXEC` 一次性按序执行（执行期间不被其他客户端请求打断）；`WATCH` 用于乐观锁式的并发控制。
+2. **原子性**：要么全部执行、要么什么都不执行，但**不支持回滚**——某条命令失败其余仍继续执行。
+3. **一致性**：需用 `WATCH` 监视 key，若被改则当前事务失败，才能保一致。
+4. **隔离性**：Redis 单线程执行，天然隔离。
+5. **持久性**：虽有 RDB/AOF，但两种方式都不能严格保证持久化，所以**不完全保证持久性**——要按业务决定是否用事务。
+
+**加分层**：Python 侧用 `redis-py` 的 `pipeline(transaction=True)` 即可获得事务语义；WATCH 本质和 MySQL 乐观锁（版本号）思路一致。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | Redis 事务命令 | 基本认知 | MULTI/EXEC/WATCH | 换题 → 不及格 |
+| L2 | 支持回滚吗 | 关键辨析 | 不回滚,失败继续执行 | 判 P5 |
+| L3 | 一致性怎么保 | 深入 | WATCH 监视 key | 判 P6 |
+| L4 | 隔离性为何天然 | 机制 | 单线程执行 | 判 P6+ |
+| L5 | 持久性保证吗 | 权衡 | 不完全,看持久化配置 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| MULTI/EXEC/WATCH 语义长期一致 | 无版本翻转 | 仍按"无回滚/单线程隔离"答；可补"Redis 不支持事务内部分回滚" |
+
+## 关键代码
+```python
+# redis-py 事务：pipeline(transaction=True) + WATCH [实测, redis-py]
+import redis
+r = redis.Redis()
+with r.pipeline(transaction=True) as pipe:
+    while True:
+        try:
+            pipe.watch("balance")
+            bal = int(pipe.get("balance"))
+            pipe.multi()
+            pipe.decr("balance", 10)
+            pipe.execute()
+            break
+        except redis.WatchError:
+            continue            # 被其他客户端改了，重试
+```
+
+## ⚠️ 原文纠错
+- 机翻还原：「muty / mutyEXEC / mutys」→ **MULTI**；「ESEC / ESECexcuse」→ **EXEC**；「worch / worsh」→ **WATCH**；「RDIPY」→ **redis-py**；「pipelinetransition」→ **pipeline(transaction=True)**。
+- 原文"REDS 的事务要么全部执行要么什么都不执行，但不支持回稳"→ **不支持回滚（rollback）**；"一次性的请求先不会执行其他客户端"准确（执行期排他）。
+- 原文"一致性需要 WATCH 监听 k 若被修改事务执行失败"准确；"隔离性单线程实现"准确；"持久性两种实现不能完全保证"准确。
+
+## 总结与追问预判
+Redis 事务核心是 MULTI/EXEC/WATCH，ACID 逐项辨析（无回滚/单线程隔离/持久不完全）。面试官常追问"分布式锁怎么做"，可衔接：**Redis 分布式锁（见 214 卡）**。

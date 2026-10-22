@@ -1,0 +1,55 @@
+# 132. MVC 与 MTV：解耦展示逻辑与业务逻辑
+
+> 分类：编程范式/设计模式 | 难度：L2 | 题型：八股题 | 频率：高 | 关键词：**MVC** / **MTV** / **解耦** / **Django**
+> 原文锚点：第 13~16 段「MVC 解耦展示逻辑跟业务逻辑；Django 是 MTV 模式，T 即 template」
+
+## 一句话总述
+**MVC** 把应用拆成**模型（数据/业务）、视图（展示）、控制器（流转）**三层以解耦；**Django 的 MTV** 是它的变体——**M**odel、**T**emplate（展示）、**V**iew（负责控制器式的业务流转）。
+
+## 面试官视角
+- **考察意图**：考你是否真的用过 Web 框架，能否说清 MVC 各层职责，以及 MTV 和 MVC 的**对应关系**（常有人把 Django 的 V 误当成视图）。
+- **P5** 能说出 M/V/C 三层 / **P6** 能正确映射 **MTV：M=M，T=V（展示），V=C（流转）**，并指出视图层与模板层的边界 / **P7** 能指出 MVC **不是银弹**——过度分层在小项目里反而增加样板，以及现代前端把 V 彻底搬到客户端 `[经验]`。
+- **红旗**：① 说"Django 的 View 是 MVC 的 View（展示）"（错，它是 Controller 角色）；② 把 Model 当成"只是数据库表"（Model 含业务规则）；③ 认为 MVC 强制要求三层物理分离。
+- **惊艳点**：MTV 与 MVC **一一对应**——Django 的 **Template = MVC 的 View**，**View = MVC 的 Controller**，所以 Django 仍属 MVC 思想。验证：Django 的 `views.py` 处理请求流转而非渲染 HTML `[经验]`。
+
+## 主问答
+**Q：说说 MVC，Django 为什么叫 MTV？**
+**A：**
+1. **结论**：MVC 把系统分成**模型（数据与规则）、视图（界面）、控制器（接收请求、调度）**，彼此解耦。
+2. **机制**：Django 的 **MTV** 是同名换皮——**Model** 同 MVC 的 M；**Template** 承担 MVC 的**视图（展示）**；**View** 承担 MVC 的**控制器（业务流转）**。所以 Django 的 View 不是"展示层"。
+3. **边界**：MVC 是**思想**不是强制结构；小项目硬分三层只会增加样板，应按规模取舍。
+**加分层**：现代 SPA 把 V 移到前端，后端只留 M + 接口（C 的角色弱化），MV* 边界在演化。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+|---|---|---|---|---|
+| L1 | MVC 三层 | 概念 | M/V/C | 换题 → 不及格 |
+| L2 | MTV 怎么对应 | 映射 | T=V展示,V=C流转 | 判 P5 |
+| L3 | Django View 是啥 | 纠偏 | 控制器角色 | 判 P6 |
+| L4 | MVC 适用边界 | 判断 | 小项目样板多 | 判 P6+ |
+| L5 | 前后端分离演进 | 深入 | V 移到前端 | 答上判 P7 |
+
+## 版本与兼容性
+| 结论成立版本 | 翻转点 | 现在怎么答 |
+|---|---|---|
+| 与框架无关 | MVC 思想提出于 70s | 按职责解耦作答 |
+| Django 全版本 | MTV 命名 | V=控制器,T=展示 |
+| 现代前端 | SPA 把 V 移前端 | 后端只剩 M+接口 |
+
+## 关键代码
+```python
+# Django MTV 对应 MVC
+# models.py  -> M (数据/业务规则)
+# templates/ -> T = MVC 的 View(展示)
+# views.py   -> V = MVC 的 Controller(请求流转)
+from django.http import HttpResponse
+def article(request):               # 这是"控制器"，不是展示层
+    return HttpResponse("hello")    # 真正展示交给 template
+```
+
+## ⚠️ 原文纠错
+原文"model view controller 也就是 MAC 模式"——机翻 `MAC` 实为 **MVC**（model-view-controller）；"jungle"实为 **Django**；"MTV 的 T 即 template"正确。原文"平常使用各种框架大同小异，都使用 MVC，常被问到的是适配器、代理、MVC"——准确。原文未展开 MTV 与 MVC 的精确映射（Django 的 View 实为 Controller 角色），卡面在机制与惊艳点补充该纠偏 `[经验]`。无事实性错误，仅术语音译需还原。
+
+## 总结与追问预判
+- MVC 三层解耦；**MTV 中 T=展示、V=流转**，Django 的 View 不是视图层。
+- 下一题：**代理模式**（126）、**适配器模式**（128）。
