@@ -27,3 +27,6 @@ __pycache__/
 *.log
 *.out
 ai/backups/
+
+# 课程验证代码生成的图片产物
+work/quant-site/content/data/*.png
