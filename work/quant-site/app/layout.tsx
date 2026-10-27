@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   keywords: ["量化交易", "量化投资", "ETF", "短线择时", "A/B 实验", "数据分析", "模拟盘", "回测"],
   icons: { icon: "/favicon.svg" },
   openGraph: { type: "website", locale: "zh_CN", siteName: "网锋量化 QuantSite" },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
