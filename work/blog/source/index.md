@@ -1,11 +1,29 @@
 ---
-title: 首页
-date: 2026-10-01 20:00:00
+title: 课程总览
+layout: false
 ---
 
-> 技术笔记与面试题库。
+<h1 style='margin-bottom:6px'>课程总览</h1>
+<p style='color:#666'>共 <b>19</b> 门课 / <b>3282</b> 篇笔记。点课程进入，再点单篇看细节。</p>
 
-本站内容来自 `work/target/`，由 agent 从 `work/source/` 的机器翻译素材转换而来。
-
-- 分类：Elasticsearch / Kubernetes / Go / Python / SQL
-- 每篇是**一张题目卡**：考点、答案、追问、质检状态
+<div style='display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:18px'>
+  <a href='/categories/Elasticsearch与Go实战/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>Elasticsearch与Go实战</div><div style='color:#888;font-size:13px;margin-top:6px'>134 篇 · 目录 es</div></a>
+  <a href='/categories/APM监控系统实战/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>APM监控系统实战</div><div style='color:#888;font-size:13px;margin-top:6px'>112 篇 · 目录 apm</div></a>
+  <a href='/categories/Go面试题集/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>Go面试题集</div><div style='color:#888;font-size:13px;margin-top:6px'>1402 篇 · 目录 go-interview</div></a>
+  <a href='/categories/MySQL面试题集/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>MySQL面试题集</div><div style='color:#888;font-size:13px;margin-top:6px'>154 篇 · 目录 mysql-interview</div></a>
+  <a href='/categories/Python服务端面试题集/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>Python服务端面试题集</div><div style='color:#888;font-size:13px;margin-top:6px'>238 篇 · 目录 py-interview</div></a>
+  <a href='/categories/云原生CI/CD实战/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>云原生CI/CD实战</div><div style='color:#888;font-size:13px;margin-top:6px'>98 篇 · 目录 mksz892</div></a>
+  <a href='/categories/提示词工程与大模型实战/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>提示词工程与大模型实战</div><div style='color:#888;font-size:13px;margin-top:6px'>86 篇 · 目录 mksz737</div></a>
+  <a href='/categories/RAG全栈技术/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>RAG全栈技术</div><div style='color:#888;font-size:13px;margin-top:6px'>36 篇 · 目录 mksz920</div></a>
+  <a href='/categories/SpringAI与RAG实战/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>SpringAI与RAG实战</div><div style='color:#888;font-size:13px;margin-top:6px'>31 篇 · 目录 mksz948</div></a>
+  <a href='/categories/LangChain4j实战/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>LangChain4j实战</div><div style='color:#888;font-size:13px;margin-top:6px'>56 篇 · 目录 mksz952</div></a>
+  <a href='/categories/Kubernetes与云原生KCNA/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>Kubernetes与云原生KCNA</div><div style='color:#888;font-size:13px;margin-top:6px'>123 篇 · 目录 kcna</div></a>
+  <a href='/categories/Kubernetes集群部署/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>Kubernetes集群部署</div><div style='color:#888;font-size:13px;margin-top:6px'>207 篇 · 目录 k8stop</div></a>
+  <a href='/categories/Kubernetes认证CKA/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>Kubernetes认证CKA</div><div style='color:#888;font-size:13px;margin-top:6px'>89 篇 · 目录 cka</div></a>
+  <a href='/categories/Kubernetes生产实践/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>Kubernetes生产实践</div><div style='color:#888;font-size:13px;margin-top:6px'>71 篇 · 目录 k8sprod</div></a>
+  <a href='/categories/Go高并发抽奖项目/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>Go高并发抽奖项目</div><div style='color:#888;font-size:13px;margin-top:6px'>107 篇 · 目录 lottery</div></a>
+  <a href='/categories/自主开发PaaS平台/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>自主开发PaaS平台</div><div style='color:#888;font-size:13px;margin-top:6px'>143 篇 · 目录 paas</div></a>
+  <a href='/categories/后端校招面试/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>后端校招面试</div><div style='color:#888;font-size:13px;margin-top:6px'>80 篇 · 目录 campus</div></a>
+  <a href='/categories/六大数据库存储实战/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>六大数据库存储实战</div><div style='color:#888;font-size:13px;margin-top:6px'>113 篇 · 目录 storage</div></a>
+  <a href='/categories/代码片段/' style='display:block;border:1px solid #e3e8ef;border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit'><div style='font-weight:700;font-size:16px'>代码片段</div><div style='color:#888;font-size:13px;margin-top:6px'>2 篇 · 目录 code</div></a>
+</div>

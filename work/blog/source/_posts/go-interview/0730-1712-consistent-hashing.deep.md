@@ -1,0 +1,60 @@
+---
+disableNunjucks: true
+title: "1712-consistent-hashing.deep"
+date: 2026-10-10 09:09:51
+categories: [Go面试题集]
+tags: [Go面试题集]
+---
+
+## 思路与架构
+一致性哈希解决的是「**分布式系统中 key→节点 映射在拓扑变化时如何最小化数据迁移**」这一核心问题。其架构由三层组成：
+
+1. **哈希空间层**：固定为 `2^32` 的环形逻辑空间（0 与 2^32-1 相接），与物理节点数解耦。
+2. **映射层**：
+   - 节点映射：真实节点（IP/ID）→ 哈希 → 环上位置；引入虚拟节点后变为「真实节点 → N 个虚拟节点 → 环上随机位置」。
+   - 数据映射：数据 key → 哈希 → 环上位置 → **顺时针第一个节点**。
+3. **寻址层**：基于「有序虚拟节点数组 + 二分查找（`sort.Search`）」实现 O(log V) 顺时针寻址，并对环尾做 wrap-around 回绕。
+
+对比普通取模哈希 `hash(key) % N`：N 变化即全量重映射；一致性哈希让迁移量从 O(全部) 降为 O(相邻 1/N 区间)。
+
+## 方案取舍
+| 维度 | 普通取模哈希 | 一致性哈希（无虚拟节点） | 一致性哈希 + 虚拟节点 |
+| --- | --- | --- | --- |
+| 扩容迁移量 | 全量（≈100%） | 相邻 1/N | 相邻 1/N（均衡更优） |
+| 数据分布 | 均匀 | 节点少时倾斜 | 近似均匀 |
+| 热点/雪崩风险 | 高（雪崩） | 中（区间不均） | 低 |
+| 权重支持 | 无 | 无 | 有（按虚拟节点数） |
+| 实现复杂度 | O(1) | O(log V) | O(log V) |
+
+**取舍结论**：一致性哈希以「轻微查找常数 + 一定内存（ring 表）」为代价，换来「平滑扩容 + 抗雪崩」，是分布式缓存/存储的默认选择；虚拟节点进一步用空间换均衡与权重能力，几乎总是推荐开启。
+
+**与 Redis Cluster 的差异**：Redis 不用经典虚拟节点环，而用 **16384 个预分配哈希槽（slot）**，key 经 `CRC16 % 16384` 落到 slot，slot 再绑定节点。迁移单位是 slot（整槽搬迁），思想同源（减少迁移），但机制不同——不要混为一谈。
+
+## 答题技巧
+1. **先讲痛点再讲方案**：从「`% N` 扩容全量迁移→雪崩」切入，自然引出一致性哈希，逻辑最顺。
+2. **画图辅助**：口述「环 + 3 节点 + 数据顺时针箭头 + 新增节点只搬一段」，比纯文字清晰。
+3. **数字显专业**：虚拟节点经验值 100~200/节点（Redis 160）、查找 O(log V)、迁移量约 1/N。
+4. **高阶加分点**：① 明确指出环回（wrap-around）边界；② 区分经典环与 Redis 槽位；③ 提到虚拟节点顺带解决权重与稳定性。
+5. **避坑**：绝不把 slot 说成虚拟节点；绝不声称「天然均匀」（无虚拟节点时会倾斜）。
+
+## 细节与核心 API
+
+```go
+import ("hash/crc32"; "sort"; "strconv")
+type Ring struct { hashes []uint32; nodes  []string }
+func (r *Ring) Add(node string, vnodes int) {
+    for i := 0; i < vnodes; i++ {
+        h := crc32.ChecksumIEEE([]byte(node + "#" + strconv.Itoa(i)))
+        r.hashes = append(r.hashes, h); r.nodes = append(r.nodes, node)
+    }
+    sort.Slice(r.hashes, func(i, j int) bool { return r.hashes[i] < r.hashes[j] })
+}
+func (r *Ring) Get(key string) string {
+    h := crc32.ChecksumIEEE([]byte(key))
+    i := sort.Search(len(r.hashes), func(i int) bool { return r.hashes[i] >= h })
+    if i == len(r.hashes) { i = 0 } // 环回
+    return r.nodes[i]
+}
+// 虚拟节点(vnodes)打散数据，节点增减只迁移 1/N 的 key（vs 取模 N 全部重映射）
+// 应用：分布式缓存/存储分片，扩缩容时最小化数据迁移
+```

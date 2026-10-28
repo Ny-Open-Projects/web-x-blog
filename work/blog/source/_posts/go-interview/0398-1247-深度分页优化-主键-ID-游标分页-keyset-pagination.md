@@ -1,0 +1,82 @@
+---
+disableNunjucks: true
+title: "1247 深度分页优化：主键 ID 游标分页（keyset pagination）"
+date: 2026-10-10 07:26:43
+categories: [Go面试题集]
+tags: [Go面试题集]
+---
+
+> 分类：MySQL/分页 | 难度：L3 | 题型：方案题 | 频率：高 | 关键词：**游标分页**/**keyset**/**miniID**/**ORDER BY id LIMIT**/**避免 OFFSET**/**批次遍历**
+> 原文锚点：第 1~48 段「定义 miniID、for 循环批次查 WHERE id > miniID ORDER BY id LIMIT 10、取每批最大 ID 续查」
+
+## 一句话总述
+按**主键 ID 有序**的深度分页，用**游标分页（keyset pagination）**替代 `LIMIT m, n`：每批以「上一批最大 ID」为下界 `WHERE id > miniID ORDER BY id LIMIT k`，天然避开大 OFFSET 的回表/排序放大，是千万级表全量遍历与深翻页的标准解法。
+
+## 面试官视角
+- 考察意图：是否理解 `LIMIT m, n` 在 m 大时慢的根因，能否给出游标分页实现并讲清边界。
+- 分档：P5 知用 `id > lastId` 替代 OFFSET；P6 能量化代价、写批次循环；P7 知游标分页的排序稳定性与缺主键表退化。
+- 红旗答案：把「游标分页」说成「还是 LIMIT 只是 page 变大」；忽略 ID 不连续（有删除）导致每批条数≠k。
+- 惊艳点：点出「ID 有空洞时每批实际返回数 ≤k、循环退出条件看空结果集而非凑满页」，以及「删除行使前 k 行 ID 不连续，须以结果集为空判终止」 [经验]。
+
+## 主问答
+**Q（面试官原话）：** 千万级表翻到很深的页（比如第 100 万页）很慢，怎么优化？
+**A：**
+1. **根因**：`LIMIT m, n` 中 m 越大，引擎要先定位/跳过前 m 行（常需排序 + 回表），m 接近全表时几乎扫全表，IO 放大严重 [经验]。
+2. **指针游标解法**：改用 `WHERE id > :miniID ORDER BY id ASC LIMIT :k`——`miniID` 初始 0，每批取回后把「本批最大 id」赋给 `miniID` 作为下批下界，循环直到结果集为空即遍历完 [经验]。
+3. **实现要点**：每批条数固定 k（如 10）但与「第几页」无关；ID 不连续（有删除）时每批实际返回 ≤k，必须**以结果集为空**作为终止条件而非凑满 k；出错批次 `continue` 跳过保整体进度 [经验]。
+
+## 追问链
+| 层 | 追问 | 在测什么 | 怎么接 | 答不出停在哪档 |
+| --- | --- | --- | --- | --- |
+| L1 | 深翻页为啥慢？ | 根因 | OFFSET 大扫前 m 行 | P5 |
+| L2 | 怎么改？ | 解法 | id > lastId 游标 | P6 |
+| L3 | 有删除咋办？ | 鲁棒 | 空集判终止、批≤k | P6 |
+| L4 | 非自增主键？ | 退化 | 需稳定有序键 | P7 |
+| L5 | 并发写入一致？ | 工程 | 快照/游标键无空洞 | P7+ |
+
+## 版本与兼容性
+- 本卡只给「按主键排序」场景解法；**按二级索引/类目字段排序**用覆盖索引两查询拆分见 1247 [边界]。
+- `LIMIT m, n` 代价分析、回表 IO 放大见 1246 与 `1217-secondary-leaf-backtable`，本卡只讲「怎么优化」不重述慢因 [边界]。
+
+## 关键代码
+
+```sql
+-- 游标分页：每批以「上一批最大 id」为下界，天然避开大 OFFSET
+-- miniID 初值 0；取回后令 miniID = 本批最大 id，循环直至结果集为空
+SELECT id, name, age
+FROM   user
+WHERE  id > :miniID          -- 上一批最大 id，首批传 0
+ORDER  BY id ASC
+LIMIT  :pageSize;            -- 每批固定条数，与「第几页」无关
+```
+
+```go
+// 批次遍历全表：以每批最大 id 续查，结果集为空即结束（ID 有删除时每批≤pageSize）
+func scanAll(db *sql.DB, pageSize int) error {
+    var miniID int64 = 0
+    batch := 0
+    for {
+        users, err := queryBatch(db, miniID, pageSize) // WHERE id > miniID ORDER BY id LIMIT pageSize
+        if err != nil {
+            log.Printf("batch err: %v, skip", err)
+            continue // 跳过本批，继续下一批
+        }
+        if len(users) == 0 {
+            log.Printf("traverse done, total batches=%d", batch)
+            return nil // 表已查完
+        }
+        batch++
+        miniID = users[len(users)-1].ID // 取本批最后一条（id 最大）作为下批下界
+        if batch <= 2 {
+            log.Printf("batch=%d users=%v", batch, users)
+        }
+    }
+}
+```
+
+## 总结与追问预判
+游标分页是「用上一页的游标当过滤条件」，把 O(m+n) 跳过变成 O(n) 顺序扫。适用于按有序唯一键翻页/全量导出；不适合「任意跳到第 N 页」的前端分页器（需额外书签）。
+
+## ⚠️ 原文纠错
+1. 事实核校： [经验] 游标分页以 `id > miniID` 续查、每批最大 ID 续作下界、结果集为空即终止、删除行致 ID 不连续——均正确。
+2. 崩坏词归一：源码将若干术语音译为崩坏词，本卡统一为规范术语（游标分页、主键、批次遍历、结果集、占位符等）。

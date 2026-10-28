@@ -48,7 +48,7 @@ exclude:
 index_generator:
   per_page: 20
   layout: index
-  enable: true
+  enable: true    # 首页=最新文章(分页20)；按课程浏览走 /courses/ 与 /categories/<课程名>/
 
 archive_generator:
   per_page: 100

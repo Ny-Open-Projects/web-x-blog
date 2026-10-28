@@ -1,0 +1,52 @@
+---
+disableNunjucks: true
+title: "1418 Kafka 重复消费全景（根因 → 质量标准 → Kafka 机制 → 业务幂等）"
+date: 2026-10-10 08:50:44
+categories: [Go面试题集]
+tags: [Go面试题集]
+---
+
+> 分类：消息中间件 / Kafka · 全景 | 难度：L3 | 题型：深挖 | 关键词：**重复消费** / **offset** / **幂等** / **exactly-once**
+> 原文锚点：第 1~60 段「根因 + 三质量标准 + Kafka 机制 + 业务层幂等」
+
+## 思路与架构
+避免重复消费分四层，本波聚焦"业务层幂等"这一真 gap，Kafka 机制层与既有卡互补：
+1. **根因层（1418-kafka-dup-root）**：业务已处理但 offset 未提交；三触发场景（宕机/自动提交/rebalance 超时）。
+2. **质量标准层（1418-kafka-dup-root）**：at-most/at-least/exactly-once；Kafka 普通消费泊 exactly-once 难。
+3. **Kafka 机制层（1418-producer-idempotent + 既有 1417/147）**：幂等/事务生产者（0.11/0.14）、手动提交（见 1417）、rebalance 触发（见 147）。
+4. **业务幂等层（1418-idempotent-consumption，本波核心 gap）**：DB 唯一索引 / ES 文档ID / 去重表 / Redis 缓存——端到端去重最后一道网。
+
+## 方案取舍
+| 手段 | 去重范围 | 适用 | 边界 |
+|---|---|---|---|
+| 幂等生产者 | producer 单分区 | 去重发送端 | 消费端仍可能重投 |
+| 手动提交 | 减重复概率 | 高可靠场景 | 见 1417 |
+| DB 唯一索引 | 消费逻辑 | 关系型存储 | 最简单 |
+| 去重表/全局ID | 消费逻辑 | 跨服务 | 需原子 |
+| Redis 缓存 | 消费逻辑 | 高性能 | 依赖可用性 |
+
+## 答题技巧
+- 答重复消费按"根因→质量标准→Kafka 机制→业务幂等"递进。
+- 口诀：**offset 滞后生重复，质量标准定边界；producer 去重非根治，消费逻辑幂等才兜底**。
+- 易混点：幂等生产者只去重发送端，端到端精确一次必须消费逻辑幂等。
+
+## 细节与核心 API
+
+**业务幂等层（端到端去重最后一道网，四种落地）：**
+
+```sql
+-- ① DB 唯一索引（最简单，关系型存储）
+CREATE UNIQUE INDEX uk_order_id ON orders(order_id);
+```
+```sql
+-- ② 去重表（跨服务，需原子）
+INSERT INTO dedup(msg_key, handled_at) VALUES(?, now()) ON CONFLICT DO NOTHING;
+```
+```go
+// ③ Redis 缓存 msg_key（高性能，带 TTL，依赖可用性）
+if !redis.SetNX(ctx, "dedup:"+msgKey, 1, 24*time.Hour) { return nil } // 已处理则跳过
+// ④ ES 文档 ID（同 ID 覆盖写）
+es.Index("idx").Id(msgKey).Document(doc).Do(ctx)
+```
+
+**口诀：offset 滞后生重复 → 质量标准定边界（at-least-once）→ 消费逻辑幂等才兜底。**
