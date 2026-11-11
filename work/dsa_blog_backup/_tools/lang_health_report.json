@@ -1,0 +1,2873 @@
+{
+ "go": {
+  "lang": "go",
+  "total": 992,
+  "stub": 991,
+  "stub_files": [
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_108_将有序数组转换为二叉搜索树/solution_1_1_____1_________________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_108_将有序数组转换为二叉搜索树/solution_4_4_____4______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_108_将有序数组转换为二叉搜索树/solution_3_3_____3________________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_108_将有序数组转换为二叉搜索树/solution_2_2_____2_________________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_110_平衡二叉树/solution_2_2_____2_________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_110_平衡二叉树/solution_1_1_____1_________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_4_1_____1_____BFS_.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_6_3____3_____BFS____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_9_3_____3______BFS____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_5_2____2_____BFS______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_7_1_____1______BFS_.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_102_二叉树的层序遍历/solution_8_2_____2______BFS______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_654_最大二叉树/solution_2_2_____2____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_654_最大二叉树/solution_1_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_654_最大二叉树/solution_3_3_____3______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_230_二叉搜索树中第_k_小的元素/solution_1_1_____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_230_二叉搜索树中第_k_小的元素/solution_2_2____2_________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_101_对称二叉树/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_101_对称二叉树/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_101_对称二叉树/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_101_对称二叉树/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_101_对称二叉树/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_101_对称二叉树/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_101_对称二叉树/solution_7___7.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_8___8.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_9___9.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_145_二叉树的后序遍历/solution_7___7.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_107_二叉树的层序遍历_ii/solution_1_1_____1________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_107_二叉树的层序遍历_ii/solution_2_2_____2________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_8_2_____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_7_1______1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_5_1_____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_9_1______1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_6_2_____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_98_验证二叉搜索树/solution_10_2______2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_8___8.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_9___9.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_94_二叉树的中序遍历/solution_7___7.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_257_二叉树的所有路径/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_257_二叉树的所有路径/solution_2_2_____2_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_226_翻转二叉树/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_226_翻转二叉树/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_226_翻转二叉树/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_226_翻转二叉树/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_226_翻转二叉树/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_226_翻转二叉树/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_515_在每个树行中找最大值/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_515_在每个树行中找最大值/solution_2_2_____2_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_109_有序链表转换二叉搜索树/solution_3_2____2____________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_109_有序链表转换二叉搜索树/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_109_有序链表转换二叉搜索树/solution_2_1____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_114_二叉树展开为链表/solution_1_1____1___________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_114_二叉树展开为链表/solution_4_4____4_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_114_二叉树展开为链表/solution_3_3____3_____________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_114_二叉树展开为链表/solution_2_2____2___________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_8___8.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_9___9.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_104_二叉树的最大深度/solution_7___7.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_543_二叉树的直径/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_543_二叉树的直径/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_1____1______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_3_2____2_________next___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_429_n_叉树的层序遍历/solution_2_2_____2_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_429_n_叉树的层序遍历/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_7_1_____1_____BFS_.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_4_1_____1_____BFS_.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_9_3_____3____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_6_3_____3____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_8_2_____2_____BFS______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_111_二叉树的最小深度/solution_5_2_____2_____BFS______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_144_二叉树的前序遍历/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_144_二叉树的前序遍历/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_144_二叉树的前序遍历/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_144_二叉树的前序遍历/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_144_二叉树的前序遍历/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_144_二叉树的前序遍历/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_700_二叉搜索树中的搜索/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_700_二叉搜索树中的搜索/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_701_二叉搜索树中的插入操作/solution_2_2_____2___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_701_二叉搜索树中的插入操作/solution_1_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_236_二叉树的最近公共祖先/solution_1_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_236_二叉树的最近公共祖先/solution_2_2_____2____2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_236_二叉树的最近公共祖先/solution_3_3_____3______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_404_左叶子之和/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_404_左叶子之和/solution_3_3_____3_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_404_左叶子之和/solution_2_2_____2___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_617_合并二叉树/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_617_合并二叉树/solution_2_2_____2_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_222_完全二叉树的节点个数/solution_2_2____2___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_222_完全二叉树的节点个数/solution_3_3____3______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_100_相同的树/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_100_相同的树/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_100_相同的树/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_100_相同的树/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_100_相同的树/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_100_相同的树/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_513_找树左下角的值/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_513_找树左下角的值/solution_2_2_____2_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_572_另一棵树的子树/solution_3_3_____3_____________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_572_另一棵树的子树/solution_2_2_____2______________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_572_另一棵树的子树/solution_1_1_____1___________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_9_4____4________BFS_.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_11_1_____1________DFS_.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_7_2____2____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_15_5____5________DFS____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_12_2____2____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_13_3____3_________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_10_5____5________DFS____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_8_3____3_________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_6_1_____1________DFS_.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_112_路径总和/solution_14_4____4________BFS_.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_199_二叉树的右视图/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_199_二叉树的右视图/solution_2_2_____2_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_637_二叉树的层平均值/solution_2_2_____2_______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_2_1____1______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_3_2____2_________next___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_2_1_____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_3_2_____2________next___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_8___8.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_14___14.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_15___15.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_12___12.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_13___13.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_9___9.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_10___10.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_7___7.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_41_缺失的第一个正数/solution_11___11.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_179_最大数/solution_3_3_____3___-____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_179_最大数/solution_1_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_179_最大数/solution_2_2_____2___-__.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_8___8.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_9___9.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_922_按奇偶排序数组_ii/solution_7___7.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_8___8.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_12___12.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_9___9.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_10___10.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_7___7.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_164_最大间距/solution_11___11.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_21_合并两个有序链表/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_21_合并两个有序链表/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_21_合并两个有序链表/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_21_合并两个有序链表/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_21_合并两个有序链表/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_21_合并两个有序链表/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_15_三数之和/solution_2_2_____2_________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_15_三数之和/solution_1_1_____1_________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_937_重新排列日志文件/solution_1_1_____1______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_18_四数之和/solution_1_1_____1__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_18_四数之和/solution_2_2_____2________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_2_2_____2______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_1_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_350_两个数组的交集_ii/solution_1_1_____1____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_350_两个数组的交集_ii/solution_2_2____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_128_最长连续序列/solution_1_1_____1_____Set.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_128_最长连续序列/solution_2_2_____2____Set___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_128_最长连续序列/solution_3_3____3_______________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_8___8.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_14___14.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_15___15.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_20___20.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_12___12.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_13___13.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_19___19.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_18___18.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_16___16.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_17___17.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_9___9.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_10___10.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_7___7.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_349_两个数组的交集/solution_11___11.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_3_无重复字符的最长子串/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_3_无重复字符的最长子串/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_3_无重复字符的最长子串/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_3_无重复字符的最长子串/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_3_无重复字符的最长子串/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_3_无重复字符的最长子串/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_1_两数之和/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_1_两数之和/solution_5___5.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_1_两数之和/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_1_两数之和/solution_6___6.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_1_两数之和/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_1_两数之和/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_76_最小覆盖子串/solution_2___2.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_76_最小覆盖子串/solution_1___1.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/hash/lc_76_最小覆盖子串/solution_3___3.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_2_2_____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_8_2_____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_6_3____3_________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_5_2_____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_4_1____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_3_3____3_________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_1_1____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_9_3____3_________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_605_种花问题/solution_7_1____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_136_只出现一次的数字/solution_2_2_____2____Set______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_136_只出现一次的数字/solution_1_1_____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_541_反转字符串_ii/solution_1_1_____1____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_384_打乱数组/solution_2_2_____2_Fisher-Yates_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_384_打乱数组/solution_1_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_380_o(1)_时间插入、删除和获取随机元素/solution_1_1_____1___________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_209_长度最小的子数组/solution_2_2_____2___________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_209_长度最小的子数组/solution_1_1_____1_________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_209_长度最小的子数组/solution_4___4.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_209_长度最小的子数组/solution_3_3_____3_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_383_赎金信/solution_2_2____2_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_383_赎金信/solution_1_1_____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_7_3_____3___________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_2_2_____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_12_4_____4_______________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_4_4____4_______________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_8_4_____4_______________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_6_2_____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_9_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_10_2_____2__________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_11_3_____3___________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_3_3____3___________________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_1_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_89_格雷编码/solution_5_1_____1___.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_167_两数之和_ii_-_输入有序数组/solution_2_2_____2_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_167_两数之和_ii_-_输入有序数组/solution_1_1_____1______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_905_按奇偶排序数组/solution_2_2_____2____________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_905_按奇偶排序数组/solution_1_1_____1______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_905_按奇偶排序数组/solution_3_3_____3______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_977_有序数组的平方/solution_2_2_____2____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_977_有序数组的平方/solution_1_1_____1______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_977_有序数组的平方/solution_3_3_____3_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_4_1____1______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_1_1_____1________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_2_2___2____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_3_3_____3________.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_8_2____2____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_7_1____1______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_6_3____3______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_9_3____3______.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_17_电话号码的字母组合/solution_5_2____2____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_283_移动零/solution_1_1_____1_____.go",
+   "/Users/Wang/Code/webfault-ai/dsa/go/array/lc_914_卡牌分组/solution_5_2_____2_______.go",
+   "... +691 more"
+  ],
+  "compile_or_run_fail": 1,
+  "fail_files": [
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/go/concurrency/lc_1114_按序打印/solution_1_1_____1____synchronization.go",
+    "exit status 2"
+   ]
+  ],
+  "runnable": 0,
+  "broken_pattern_files": [],
+  "broken_pattern_counts": {}
+ },
+ "java": {
+  "lang": "java",
+  "total": 992,
+  "stub": 68,
+  "stub_files": [
+   "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_101_对称二叉树/solution_3___3.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_6___6.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_8___8.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_9___9.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_10___10.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_384_打乱数组/solution_1_1_____1___.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_384_打乱数组/solution_2_2_____2_Fisher-Yates_____.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_380_o(1)_时间插入、删除和获取随机元素/solution_1_1_____1___________.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/other/lc_2166_设计位集/solution_1_1_____1_______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/other/lc_2166_设计位集/solution_2_2_____2______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/linked_list/lc_237_删除链表中的节点/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/linked_list/lc_234_回文链表/solution_3_3_____3______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/linked_list/lc_146_lru_缓存/solution_1_1_____1____Map.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/linked_list/lc_146_lru_缓存/solution_2_2_____2____________.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/concurrency/lc_1114_按序打印/solution_1_1_____1____synchronization.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/concurrency/lc_2721_并行执行异步函数/solution_1_1_____1____async_await___.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/concurrency/lc_2721_并行执行异步函数/solution_2_2_____2____then_catch___.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134150438_希尔排序/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_2___2.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_4___4.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_3___3.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_2___2.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134085384_选择排序/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134083295_归并排序/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133468244_堆和实现最小堆类/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134191965_基数排序/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134172583_计数排序/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134172583_计数排序/solution_4___4.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134172583_计数排序/solution_3___3.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134066237_冒泡排序/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134066237_冒泡排序/solution_2___2.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134066237_冒泡排序/solution_5___5.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134066237_冒泡排序/solution_4___4.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134066237_冒泡排序/solution_3___3.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_2___2.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_4___4.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_3___3.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134082074_插入排序/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134097112_实现_lru_缓存算法功能/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134097112_实现_lru_缓存算法功能/solution_2___2.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134097112_实现_lru_缓存算法功能/solution_3___3.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/notes/lc_134217002_顺序查找/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/heap/lc_208_实现_trie_(前缀树)/solution_1_1_____1_____.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/heap/lc_208_实现_trie_(前缀树)/solution_2_2_____2_______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/heap/lc_215_数组中的第k个最大元素/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/heap/lc_313_超级丑数/solution_3___3.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/heap/lc_295_数据流的中位数/solution_3_3_____3___________.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/heap/lc_295_数据流的中位数/solution_1_1_____1_____.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/queue/lc_933_最近的请求次数/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/queue/lc_622_设计循环队列/solution_2_2____2_____.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/queue/lc_622_设计循环队列/solution_1_1_____1______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/string/lc_557_反转字符串中的单词_iii/solution_8___8.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_641_设计循环双端队列/solution_1_1_____1___.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_641_设计循环双端队列/solution_2_2_____2___.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_232_用栈实现队列/solution_1_1_____1____.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_03_05_栈排序/solution_2_2____2_______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_03_05_栈排序/solution_1_1_____1______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_341_扁平化嵌套列表迭代器/solution_1___1.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_341_扁平化嵌套列表迭代器/solution_3_2_____2__.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_341_扁平化嵌套列表迭代器/solution_2_1_____1_______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_155_最小栈/solution_1_1_____1____.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_155_最小栈/solution_2_2_____2_______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_225_用队列实现栈/solution_2_2_____2______.java",
+   "/Users/Wang/Code/webfault-ai/dsa/java/stack/lc_225_用队列实现栈/solution_1_1_____1______.java"
+  ],
+  "compile_or_run_fail": 664,
+  "fail_files": [
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_108_将有序数组转换为二叉搜索树/solution_1_1_____1_________________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpu_r60khv/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_108_将有序数组转换为二叉搜索树/solution_2_2_____2_________________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpoljglpw7/solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_108_将有序数组转换为二叉搜索树/solution_4_4_____4______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpgfg5emc1/solution444.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_108_将有序数组转换为二叉搜索树/solution_3_3_____3________________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbza5gel6/solution333.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_110_平衡二叉树/solution_1_1_____1_________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmppsbba7q3/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_110_平衡二叉树/solution_2_2_____2_________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp_bfk3fdp/solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_4_1_____1_____BFS_.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpt6gobucq/lc102_solution_4_1_____1_____BFS_.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_9_3_____3______BFS____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmptabb7_om/solution_9_3_____3______BFS____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_6_3____3_____BFS____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp1o5qs0ox/solution_6_3____3_____BFS____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_8_2_____2______BFS______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp22tm7vlv/solution_8_2_____2______BFS______.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpdlq28ayu/solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_5_2____2_____BFS______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp6msmpwaw/solution_5_2____2_____BFS______.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmplkz9p3v8/solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmps7ar3t3r/solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_102_二叉树的层序遍历/solution_7_1_____1______BFS_.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpf0765kuy/solution_7_1_____1______BFS_.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_654_最大二叉树/solution_2_2_____2____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpmwfw20x5/solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_654_最大二叉树/solution_1_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp_zzmnc4a/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_654_最大二叉树/solution_3_3_____3______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp4exv3qt_/solution333.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_230_二叉搜索树中第_k_小的元素/solution_2_2____2_________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpcld_l2p5/solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_230_二叉搜索树中第_k_小的元素/solution_1_1_____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpplmh4xuz/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_101_对称二叉树/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmph9biuaiu/solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_101_对称二叉树/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp97ee_gbj/lc101_solution_6___6.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_101_对称二叉树/solution_7___7.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp55f_siio/lc101_solution_7___7.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_101_对称二叉树/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0hcyi38n/solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_101_对称二叉树/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbyvol3pj/lc101_solution_5___5.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_101_对称二叉树/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpksjy9con/lc101_solution_4___4.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpvo3dqgv1/solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpjv9imax8/lc145_solution_6___6.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_8___8.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp6eyhfa2v/lc145_solution_8___8.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_9___9.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3s7oxsbf/lc145_solution_9___9.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_7___7.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3vp06uan/lc145_solution_7___7.java:31: 错误: 无法将类 lc145_solution_7___7中的方法 postorderTraversal应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpg1fqliym/solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp58r54ltx/lc145_solution_5___5.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0e_gflyw/lc145_solution_4___4.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_145_二叉树的后序遍历/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp97zm2gyf/solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_107_二叉树的层序遍历_ii/solution_2_2_____2________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpddujegv4/solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_107_二叉树的层序遍历_ii/solution_1_1_____1________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp_yprgt53/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmprqgee6hj/lc98_solution_1___1.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_7_1______1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp_lfv10g4/solution_7_1______1_____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_9_1______1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpciak1tfl/solution_9_1______1_____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_8_2_____2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpluyjj2a_/solution_8_2_____2__________.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmplgyc2_d8/lc98_solution_2___2.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_6_2_____2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpekrqev06/solution622.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_5_1_____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpzw3z6gvf/solution511.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpqzi70x_w/lc98_solution_4___4.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp62z0uye0/lc98_solution_3___3.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_98_验证二叉搜索树/solution_10_2______2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpi_vkxcyz/solution_10_2______2__________.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpn6wa9i15/solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpz7r5_fxw/lc94_solution_6___6.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_8___8.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp_z9cryox/lc94_solution_8___8.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_9___9.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpc4x0cc_d/lc94_solution_9___9.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_7___7.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpwbu7x3h6/lc94_solution_7___7.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpm50uot8m/solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8t22u66d/lc94_solution_5___5.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3ag3tljf/lc94_solution_4___4.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_94_二叉树的中序遍历/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp6iqgfl6u/solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_257_二叉树的所有路径/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp5e07ud55/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_257_二叉树的所有路径/solution_2_2_____2_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3ace7rei/solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_226_翻转二叉树/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpau345chr/solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_226_翻转二叉树/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpib4jd97k/lc226_solution_6___6.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_226_翻转二叉树/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp9f161ycg/solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_226_翻转二叉树/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0bdjqmv5/lc226_solution_5___5.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_226_翻转二叉树/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpec15a922/lc226_solution_4___4.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_226_翻转二叉树/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp12madkuo/lc226_solution_3___3.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_515_在每个树行中找最大值/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbajtjk45/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_515_在每个树行中找最大值/solution_2_2_____2_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpkp7jbke3/solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_109_有序链表转换二叉搜索树/solution_3_2____2____________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp2_acg22w/solution_3_2____2____________.java:48: 错误: 无法将类 solution_3_2____2____________中的方法 sortedListToBST应用"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_109_有序链表转换二叉搜索树/solution_2_1____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbe7oh4g5/solution_2_1____1___.java:48: 错误: 无法将类 solution_2_1____1___中的方法 sortedListToBST应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_109_有序链表转换二叉搜索树/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpw2if86xk/lc109_solution_1___1.java:44: 错误: 无法将类 lc109_solution_1___1中的方法 sortedListToBST应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmplhor1ywn/solution_4_3_____3_____.java:43: 错误: 无法将类 solution_4_3_____3_____中的方法 sortedListToBST应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_114_二叉树展开为链表/solution_1_1____1___________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpnag6czl5/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_114_二叉树展开为链表/solution_3_3____3_____________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpfi_nyjus/solution_3_3____3_____________.java:43: 错误: 无法将类 solution_3_3____3_____________中的方法 flatten应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_114_二叉树展开为链表/solution_2_2____2___________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpeams74ix/solution_2_2____2___________.java:45: 错误: 无法将类 solution_2_2____2___________中的方法 flatten应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_114_二叉树展开为链表/solution_4_4____4_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp805t09bj/solution_4_4____4_______.java:42: 错误: 无法将类 solution_4_4____4_______中的方法 flatten应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpmt2dqf2e/solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpg3faizzv/lc104_solution_6___6.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_8___8.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp7p75or83/lc104_solution_8___8.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_9___9.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpi6hw48pe/lc104_solution_9___9.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_7___7.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbb3ux0ve/lc104_solution_7___7.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp2zwlp17_/solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8304r2t4/lc104_solution_5___5.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpxscjzeva/lc104_solution_4___4.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_104_二叉树的最大深度/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp7l46jz_g/solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_543_二叉树的直径/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpyl2j7qf7/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_543_二叉树的直径/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbisyv6ud/lc543_solution_2___2.java:32: 错误: 无法将类 lc543_solution_2___2中的方法 diameterOfBinaryTree应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp4ql736zh/lc117_solution_1___1.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_3_2____2_________next___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpz_xjq05t/solution322next.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_1____1______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpf0u61mk_/lc117_solution_2_1____1______.java:39: 错误: 无法将类 lc117_solution_2_1____1______中的方法 connect应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_429_n_叉树的层序遍历/solution_2_2_____2_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmptlazfl1f/solution_2_2_____2_____.java:36: 错误: 无法将类 solution_2_2_____2_____中的方法 levelOrder应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_429_n_叉树的层序遍历/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0xg3vhen/lc429_solution_1_1_____1_______.java:36: 错误: 无法将类 lc429_solution_1_1_____1_______中的方法 levelOrder应用到"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_4_1_____1_____BFS_.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpatx7ljrv/lc111_solution_4_1_____1_____BFS_.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_6_3_____3____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpj17pt_na/solution_6_3_____3____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_9_3_____3____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpzmg9hv5t/solution_9_3_____3____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp76ont3vn/lc111_solution_1___1.java:24: 错误: 无法将类 lc111_solution_1___1中的方法 minDepth应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_8_2_____2_____BFS______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpd88yhv09/solution_8_2_____2_____BFS______.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_7_1_____1_____BFS_.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpgpuq1tnj/solution_7_1_____1_____BFS_.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpt8d9sjpd/lc111_solution_2___2.java:36: 错误: 无法将类 lc111_solution_2___2中的方法 minDepth应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_5_2_____2_____BFS______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmprhvcdjcl/solution_5_2_____2_____BFS______.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_111_二叉树的最小深度/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp7yymif8w/solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_144_二叉树的前序遍历/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp2_dkp9b6/lc144_solution_1___1.java:30: 错误: 无法将类 lc144_solution_1___1中的方法 preorderTraversal应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_144_二叉树的前序遍历/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpr5qpevhc/lc144_solution_6___6.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_144_二叉树的前序遍历/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpvmywwsgu/lc144_solution_2___2.java:29: 错误: 无法将类 lc144_solution_2___2中的方法 preorderTraversal应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_144_二叉树的前序遍历/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpohr1j8ky/lc144_solution_5___5.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_144_二叉树的前序遍历/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpebon6qjs/lc144_solution_4___4.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_144_二叉树的前序遍历/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpaovo_1ug/lc144_solution_3___3.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_700_二叉搜索树中的搜索/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbs9661ai/solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_700_二叉搜索树中的搜索/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmplx9blpvr/lc700_solution_2___2.java:27: 错误: 无法将类 lc700_solution_2___2中的方法 searchBST应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_701_二叉搜索树中的插入操作/solution_1_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0i2j3jt8/lc701_solution_1_1_____1___.java:26: 错误: 无法将类 lc701_solution_1_1_____1___中的方法 insertIntoBST应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_701_二叉搜索树中的插入操作/solution_2_2_____2___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpd9jbmdp7/lc701_solution_2_2_____2___.java:37: 错误: 无法将类 lc701_solution_2_2_____2___中的方法 insertIntoBST应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_236_二叉树的最近公共祖先/solution_1_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpiy1_qlgf/lc236_solution_1_1_____1___.java:28: 错误: 无法将类 lc236_solution_1_1_____1___中的方法 lowestCommonAncestor应"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_236_二叉树的最近公共祖先/solution_2_2_____2____2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpx3k0yxbd/solution_2_2_____2____2.java:27: 错误: 无法将类 solution_2_2_____2____2中的方法 lowestCommonAncestor应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_236_二叉树的最近公共祖先/solution_3_3_____3______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpsl_ivg46/solution_3_3_____3______.java:41: 错误: 无法将类 solution_3_3_____3______中的方法 lowestCommonAncestor应用到给定类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_404_左叶子之和/solution_3_3_____3_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp5aeh9f_f/solution_3_3_____3_______.java:37: 错误: 无法将类 solution_3_3_____3_______中的方法 sumOfLeftLeaves应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_404_左叶子之和/solution_2_2_____2___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpe89e937b/lc404_solution_2_2_____2___.java:37: 错误: 无法将类 lc404_solution_2_2_____2___中的方法 sumOfLeftLeaves应用到给定类"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_404_左叶子之和/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpupxxqhl1/lc404_solution_1_1_____1_______.java:25: 错误: 无法将类 lc404_solution_1_1_____1_______中的方法 sumOfLeftLeav"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_617_合并二叉树/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpw_hswa2b/lc617_solution_1_1_____1_______.java:25: 错误: 无法将类 lc617_solution_1_1_____1_______中的方法 mergeTrees应用到"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_617_合并二叉树/solution_2_2_____2_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpsc730oia/lc617_solution_2_2_____2_______.java:25: 错误: 无法将类 lc617_solution_2_2_____2_______中的方法 mergeTrees应用到"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_222_完全二叉树的节点个数/solution_3_3____3______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp9otpwlm7/solution_3_3____3______.java:49: 错误: 无法将类 solution_3_3____3______中的方法 countNodes应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_222_完全二叉树的节点个数/solution_2_2____2___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp1_voo9p5/solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpeukvit5v/solution_1_1_____1___________.java:44: 错误: 无法将类 solution_1_1_____1___________中的方法 countNodes应用到给定类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_100_相同的树/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmplj655yxo/lc100_solution_1___1.java:23: 错误: 无法将类 lc100_solution_1___1中的方法 isSameTree应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_100_相同的树/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpqv9nzz9x/lc100_solution_6___6.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_100_相同的树/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp7tkh2l19/lc100_solution_2___2.java:23: 错误: 无法将类 lc100_solution_2___2中的方法 isSameTree应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_100_相同的树/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpws7wymhu/lc100_solution_5___5.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_100_相同的树/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpa66yts7i/lc100_solution_4___4.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_100_相同的树/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpobol7r0c/lc100_solution_3___3.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_513_找树左下角的值/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3y84361g/lc513_solution_1_1_____1_______.java:32: 错误: 无法将类 lc513_solution_1_1_____1_______中的方法 findBottomLef"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_513_找树左下角的值/solution_2_2_____2_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpjak9_1ph/lc513_solution_2_2_____2_______.java:34: 错误: 无法将类 lc513_solution_2_2_____2_______中的方法 findBottomLef"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_572_另一棵树的子树/solution_3_3_____3_____________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpxf837_k1/solution_3_3_____3_____________.java:33: 错误: 无法将类 solution_3_3_____3_____________中的方法 isSubtree应用到给"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_572_另一棵树的子树/solution_1_1_____1___________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpyl5l24ya/solution111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_572_另一棵树的子树/solution_2_2_____2______________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpxdbxo6xl/solution_2_2_____2______________.java:28: 错误: 无法将类 solution_2_2_____2______________中的方法 isSubtree应用"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_10_5____5________DFS____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp7zakgncw/solution_10_5____5________DFS____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_14_4____4________BFS_.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpnza3hsi6/solution_14_4____4________BFS_.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_11_1_____1________DFS_.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpswih36yn/solution_11_1_____1________DFS_.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_8_3____3_________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpr5lcq_cf/solution_8_3____3_________.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_6_1_____1________DFS_.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp6ih4dt92/solution_6_1_____1________DFS_.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpnwa902o8/lc112_solution_1___1.java:25: 错误: 无法将类 lc112_solution_1___1中的方法 hasPathSum应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_9_4____4________BFS_.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0o31rlid/solution_9_4____4________BFS_.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_12_2____2____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8v9lb98y/solution_12_2____2____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_7_2____2____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpxd4aqr84/solution_7_2____2____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp_4uhkqzz/lc112_solution_2___2.java:25: 错误: 无法将类 lc112_solution_2___2中的方法 hasPathSum应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpyz_agi82/lc112_solution_5___5.java:25: 错误: 无法将类 lc112_solution_5___5中的方法 hasPathSum应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_13_3____3_________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp20zk6e2m/solution_13_3____3_________.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0ks5sx1x/lc112_solution_4___4.java:39: 错误: 无法将类 lc112_solution_4___4中的方法 hasPathSum应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_15_5____5________DFS____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmplzd8sacr/solution_15_5____5________DFS____.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_112_路径总和/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp00460m7a/solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_199_二叉树的右视图/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3eknnrvn/lc199_solution_1_1_____1_______.java:35: 错误: 无法将类 lc199_solution_1_1_____1_______中的方法 rightSideView"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_199_二叉树的右视图/solution_2_2_____2_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpttnbtv7b/lc199_solution_2_2_____2_______.java:31: 错误: 无法将类 lc199_solution_2_2_____2_______中的方法 rightSideView"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpnqk0yxap/lc637_solution_1_1_____1_______.java:35: 错误: 无法将类 lc637_solution_1_1_____1_______中的方法 averageOfLeve"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_637_二叉树的层平均值/solution_2_2_____2_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp62eb6ux7/lc637_solution_2_2_____2_______.java:35: 错误: 无法将类 lc637_solution_2_2_____2_______中的方法 averageOfLeve"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp6a13t70x/solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_3_2____2_________next___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbxa924h3/solution322next.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_2_1_____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpzg2ojig_/solution_2_1_____1_____.java:36: 错误: 无法将类 solution_2_1_____1_____中的方法 connect应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_3_2_____2________next___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpbtnbwkn8/solution_3_2_____2________next___.java:39: 错误: 无法将类 solution_3_2_____2________next___中的方法 connect应用"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_2_1____1______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpqwx8o4oy/lc116_solution_2_1____1______.java:36: 错误: 无法将类 lc116_solution_2_1____1______中的方法 connect应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_12___12.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0dj7jqmw/lc41_solution1212.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_15___15.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpxpzijy4r/lc41_solution1515.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpkcanbvev/lc41_solution66.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_8___8.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpxta29ygr/lc41_solution88.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_9___9.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0d13ey6z/lc41_solution99.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_7___7.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpvelvywne/lc41_solution77.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_11___11.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpm87a5tpd/lc41_solution1111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_10___10.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpp9uucbgz/lc41_solution1010.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_14___14.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpukszthpr/lc41_solution1414.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_41_缺失的第一个正数/solution_13___13.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpp1hjbsqq/lc41_solution1313.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_922_按奇偶排序数组_ii/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0k9_wn_7/lc922_solution66.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_922_按奇偶排序数组_ii/solution_8___8.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmponffxzom/lc922_solution88.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_922_按奇偶排序数组_ii/solution_9___9.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpw61oj4ds/lc922_solution99.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_922_按奇偶排序数组_ii/solution_7___7.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp6ibouy07/lc922_solution77.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_922_按奇偶排序数组_ii/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpgajfdhoy/lc922_solution55.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_922_按奇偶排序数组_ii/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpr2i1jfj7/lc922_solution44.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpo22ow3pb/lc164_solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_12___12.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpm0jhm6lk/lc164_solution1212.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp5wms_bwa/lc164_solution66.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_8___8.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpx_gr4nhl/lc164_solution88.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_9___9.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmph4ig_5jm/lc164_solution99.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_7___7.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpst0bhpmc/lc164_solution77.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_11___11.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpu3sd82yq/lc164_solution1111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_10___10.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpov89qadj/lc164_solution1010.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpd415uzwq/lc164_solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_164_最大间距/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpeqp4daxw/lc164_solution55.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_21_合并两个有序链表/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpq6arazs7/lc21_solution11.java:45: 错误: 无法将类 lc21_solution11中的方法 mergeTwoLists应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_21_合并两个有序链表/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpciwfbkut/lc21_solution66.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_21_合并两个有序链表/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpe5e6aoxs/lc21_solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_21_合并两个有序链表/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8t_yuhw1/lc21_solution55.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_21_合并两个有序链表/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmphmdi96x9/lc21_solution44.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/sort/lc_21_合并两个有序链表/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpituh8m9t/lc21_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_20___20.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpejfx7ios/solution2020.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_12___12.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3udgqshp/lc349_solution1212.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_15___15.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0dpx8do3/lc349_solution1515.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_7___7.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpm522n05i/lc349_solution77.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_18___18.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpiwh7uv1z/solution1818.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_16___16.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpt4t5bfc8/lc349_solution1616.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_11___11.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpvpy49uyi/lc349_solution1111.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_17___17.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpgl_bzu56/solution1717.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_19___19.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpg05p1lvx/solution1919.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_14___14.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpgrp8dhny/lc349_solution1414.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_349_两个数组的交集/solution_13___13.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpr9cewr7t/lc349_solution1313.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_3_无重复字符的最长子串/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpc2kzhu3q/lc3_solution11.java:25: 错误: 无法将类 lc3_solution11中的方法 lengthOfLongestSubstring应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_3_无重复字符的最长子串/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8p5ut604/lc3_solution66.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_3_无重复字符的最长子串/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpo6xo0qoy/lc3_solution22.java:25: 错误: 无法将类 lc3_solution22中的方法 lengthOfLongestSubstring应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_3_无重复字符的最长子串/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8ie5edt4/lc3_solution55.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_3_无重复字符的最长子串/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpxpuc4lq0/lc3_solution44.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_3_无重复字符的最长子串/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpds882ngv/lc3_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_1_两数之和/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpdjw057wn/lc1_solution66.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_1_两数之和/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpatj2etk_/lc1_solution55.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_1_两数之和/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8k745edj/lc1_solution44.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_1_两数之和/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpn3apkfda/lc1_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_76_最小覆盖子串/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmplmb8nv2y/lc76_solution11.java:44: 错误: 无法将类 lc76_solution11中的方法 minWindow应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_76_最小覆盖子串/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpmxl3i527/lc76_solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/hash/lc_76_最小覆盖子串/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp5zcgfy1_/lc76_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_605_种花问题/solution_6_3____3_________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpqhmlf4hk/lc605_solution633.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_605_种花问题/solution_4_1____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpt3mdz_1c/lc605_solution411.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_605_种花问题/solution_7_1____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp649palkx/lc605_solution711.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_605_种花问题/solution_8_2_____2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpl8mhf5kg/lc605_solution822.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_605_种花问题/solution_5_2_____2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpd8cmrh6r/lc605_solution522.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_605_种花问题/solution_9_3____3_________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpsce1qied/lc605_solution933.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_541_反转字符串_ii/solution_1_1_____1____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp5awygdzw/lc541_solution111.java:25: 错误: 无法将类 lc541_solution111中的方法 reverseStr应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_383_赎金信/solution_2_2____2_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpof60g28b/lc383_solution222.java:23: 错误: 无法将类 lc383_solution222中的方法 canConstruct应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_383_赎金信/solution_1_1_____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp9htetuwu/lc383_solution111.java:24: 错误: 无法将类 lc383_solution111中的方法 canConstruct应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_10_2_____2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp1m0ko9n2/solution1022.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_1_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp1tt23fnr/lc89_solution111.java:19: 错误: 无法将类 lc89_solution111中的方法 grayCode应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_7_3_____3___________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpgm2_rnaz/lc89_solution733.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_9_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmprnje35i3/lc89_solution911.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_3_3____3___________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpwbmbth97/lc89_solution333.java:19: 错误: 无法将类 lc89_solution333中的方法 grayCode应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_4_4____4_______________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpj_sadsru/lc89_solution444.java:17: 错误: 无法将类 lc89_solution444中的方法 grayCode应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_12_4_____4_______________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpk9bjbrjx/lc89_solution1244.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_2_2_____2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpp6vdqk9q/lc89_solution222.java:20: 错误: 无法将类 lc89_solution222中的方法 grayCode应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_5_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpft9v3ebo/lc89_solution511.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_8_4_____4_______________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0z3511mu/lc89_solution844.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_6_2_____2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpqqnw1qjh/lc89_solution622.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_89_格雷编码/solution_11_3_____3___________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpuo8cum5l/lc89_solution1133.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_3_3_____3________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpeguzk9ct/lc17_solution333.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_6_3____3______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmppxeyc7t_/lc17_solution633.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_2_2___2____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpopvvi0k1/lc17_solution222.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_5_2____2____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpkoro7w8s/lc17_solution522.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_9_3____3______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpkxh3u76x/lc17_solution933.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_1_1_____1________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp5dzaud8u/lc17_solution111.java:33: 错误: 无法将类 lc17_solution111中的方法 letterCombinations应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_8_2____2____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0r2lzp7n/lc17_solution822.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_7_1____1______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0cfp6p1e/lc17_solution711.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_17_电话号码的字母组合/solution_4_1____1______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmprwn9v4jm/lc17_solution411.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_914_卡牌分组/solution_8_2_____2_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpyg08jd4g/lc914_solution822.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_914_卡牌分组/solution_7_1____1______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpu7duo_qj/lc914_solution711.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_914_卡牌分组/solution_4_1____1______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpa2as7qff/lc914_solution411.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_914_卡牌分组/solution_9_3______3__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpmdeqkosl/lc914_solution933.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_914_卡牌分组/solution_6_3______3__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpehry76qn/lc914_solution633.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/array/lc_914_卡牌分组/solution_5_2_____2_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpi_eg5egf/lc914_solution522.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_131_分割回文串/solution_1_1_____1______________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpt34w7wgr/lc131_solution111.java:44: 错误: 无法将类 lc131_solution111中的方法 partition应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_131_分割回文串/solution_2_2_____2____________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp9250f4cq/lc131_solution222.java:59: 错误: 无法将类 lc131_solution222中的方法 partition应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_93_复原_ip_地址/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp358ps32u/lc93_solution11.java:39: 错误: 无法将类 lc93_solution11中的方法 restoreIpAddresses应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_93_复原_ip_地址/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpnkbo45sx/lc93_solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_93_复原_ip_地址/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpgz57gtnf/lc93_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_77_组合/solution_3_3_____3_______.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpi51gfkpw/lc77_solution333.java:31: 错误: 无法将类 lc77_solution333中的方法 combine应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_77_组合/solution_2_2_____2__________________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpr_f5h91r/lc77_solution222.java:28: 错误: 无法将类 lc77_solution222中的方法 combine应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_77_组合/solution_1_1_____1___________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp25_y3oki/lc77_solution111.java:30: 错误: 无法将类 lc77_solution111中的方法 combine应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_51_n_皇后/solution_1_1_____1_________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp0kxzhgwf/lc51_solution111.java:59: 错误: 无法将类 lc51_solution111中的方法 solveNQueens应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_51_n_皇后/solution_3_3_____3___-____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpuwaigexv/lc51_solution333.java:50: 错误: 无法将类 lc51_solution333中的方法 solveNQueens应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_51_n_皇后/solution_2_2_____2__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpfet1zxey/lc51_solution222.java:59: 错误: 无法将类 lc51_solution222中的方法 solveNQueens应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_37_解数独/solution_1_1_____1____.java",
+    "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -5 out of bounds for length 9"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_37_解数独/solution_2_2_____2_______.java",
+    "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 9"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_46_全排列/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpt77ndgvq/lc46_solution66.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_46_全排列/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmppf3mdpm5/lc46_solution55.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_46_全排列/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpnsxid9m9/lc46_solution44.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_46_全排列/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmplxpwzlpf/lc46_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_78_子集/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpil3dh5hc/lc78_solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/backtrack/lc_78_子集/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmppwolifbh/lc78_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_69_x_的平方根/solution_4_4____4__________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpovjnpwy7/lc69_solution444.java:21: 错误: 无法将类 lc69_solution444中的方法 mySqrt应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_69_x_的平方根/solution_1_1_____1________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpqyv0yj_3/lc69_solution111.java:14: 错误: 无法将类 lc69_solution111中的方法 mySqrt应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_69_x_的平方根/solution_2_2_____2_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8klwx5td/lc69_solution222.java:22: 错误: 无法将类 lc69_solution222中的方法 mySqrt应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_69_x_的平方根/solution_3_3_____3_________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpv41j0dkn/lc69_solution333.java:24: 错误: 无法将类 lc69_solution333中的方法 mySqrt应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_374_猜数字大小/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpx6l5_xo5/lc374_solution11.java:26: 错误: 无法将类 lc374_solution11中的方法 guessNumber应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_374_猜数字大小/solution_6___6.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpy6a7qym4/lc374_solution66.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_374_猜数字大小/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpht6zjm6v/lc374_solution22.java:25: 错误: 无法将类 lc374_solution22中的方法 guessNumber应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_374_猜数字大小/solution_5___5.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpme0f2q97/lc374_solution55.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_374_猜数字大小/solution_4___4.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpossscfsp/lc374_solution44.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_374_猜数字大小/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmps6ceb4ll/lc374_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_704_二分查找/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpk9_iq261/lc704_solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/binary_search/lc_704_二分查找/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpmiid2tt4/lc704_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_65_有效数字/solution_5_2_____2________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpaggyep99/lc65_solution522.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_65_有效数字/solution_6_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpfik_nv_w/lc65_solution611.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_65_有效数字/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpavfyiaj8/lc65_solution11.java:13: 错误: 无法将类 lc65_solution11中的方法 isNumber应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_65_有效数字/solution_7_2_____2________.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpf50vctrk/lc65_solution722.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_65_有效数字/solution_4_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpxbtpa3kq/lc65_solution411.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_65_有效数字/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpekf17lku/lc65_solution22.java:24: 错误: 无法将类 lc65_solution22中的方法 isNumber应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_65_有效数字/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp8w839f42/lc65_solution33.java:58: 错误: 无法将类 lc65_solution33中的方法 isNumber应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_417_太平洋大西洋水流问题/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpgt37nwux/lc417_solution22.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_417_太平洋大西洋水流问题/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmphg0ycao5/lc417_solution33.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_133_克隆图/solution_7_2____2_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmps70bn7od/lc133_solution722.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_133_克隆图/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpuitnvvyb/lc133_solution11.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_133_克隆图/solution_6_1_____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpqrm_bd74/lc133_solution611.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_133_克隆图/solution_5_2____2_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpa5a6pk23/lc133_solution522.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_133_克隆图/solution_2___2.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp1c9b0p4r/lc133_solution22.java:38: 错误: 无法将类 lc133_solution22中的方法 cloneGraph应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_133_克隆图/solution_4_1_____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp691mp4x3/lc133_solution411.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/graph/lc_133_克隆图/solution_3___3.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpcuo9n0vs/lc133_solution33.java:35: 错误: 无法将类 lc133_solution33中的方法 cloneGraph应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/other/lc_1797_设计一个验证系统/solution_1_主解法.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3k1loer4/lc1797_solution1.java:12: 错误: 此处不允许使用 '空' 类型"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/other/lc_202_快乐数/solution_1___1.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpwrclb0xt/lc202_solution11.java:27: 错误: 无法将类 lc202_solution11中的方法 isHappy应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/other/lc_202_快乐数/solution_2_2_____2___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpn5qdssns/lc202_solution22.java:28: 错误: 无法将类 lc202_solution22中的方法 isHappy应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/other/lc_292_nim_游戏/solution_1_1_____1_____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp74ytr6m8/lc292_solution111.java:12: 错误: 无法将类 lc292_solution111中的方法 canWinNim应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/other/lc_242_有效的字母异位词/solution_2_2_____2____.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmp3zkpwn8d/lc242_solution222.java:21: 错误: 无法将类 lc242_solution222中的方法 isAnagram应用到给定类型;"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/java/other/lc_242_有效的字母异位词/solution_1_1_____1___.java",
+    "/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/tmpw61ucfd1/lc242_solution111.java:23: 错误: 无法将类 lc242_solution111中的方法 isAnagram应用到给定类型;"
+   ],
+   "... +364 more"
+  ],
+  "runnable": 260,
+  "broken_pattern_files": [],
+  "broken_pattern_counts": {}
+ },
+ "ts": {
+  "lang": "ts",
+  "total": 992,
+  "stub": 0,
+  "stub_files": [],
+  "compile_or_run_fail": 122,
+  "fail_files": [
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_1_1_____1___.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_1_1_____1___.ts:32"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_3_3_____3______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_3_3_____3______.ts:34"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_2_2_____2____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_2_2_____2____.ts:46"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.ts:37"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.ts:28"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_10___10.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_10___10.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_11___11.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_11___11.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_7___7.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_7___7.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_4___4.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_4___4.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_9___9.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_9___9.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_1___1.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_1___1.ts:23"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_6___6.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_6___6.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_12___12.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_12___12.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_13___13.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_13___13.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_8___8.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_8___8.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_14___14.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_14___14.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_15___15.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_15___15.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_2___2.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_2___2.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_5___5.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_5___5.ts:18"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_3___3.ts",
+    "file:///Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_%E6%9C%80%E5%A4%A7%E9%97%B4%E8%B7%9D/solution_3___3.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_15_三数之和/solution_2_2_____2_________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_15_三数之和/solution_2_2_____2_________.ts:21"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_18_四数之和/solution_2_2_____2________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_18_四数之和/solution_2_2_____2________.ts:30"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_18_四数之和/solution_1_1_____1__________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_18_四数之和/solution_1_1_____1__________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_350_两个数组的交集_ii/solution_2_2____2__________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_350_两个数组的交集_ii/solution_2_2____2__________.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_349_两个数组的交集/solution_8___8.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_349_两个数组的交集/solution_8___8.ts:8"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_4___4.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_4___4.ts:18"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_3___3.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_3___3.ts:18"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_1___1.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_1___1.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_6___6.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_6___6.ts:18"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_5___5.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_5___5.ts:18"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_4___4.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_4___4.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_3_3_____3_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_3_3_____3_____.ts:24"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_1_1_____1_________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_1_1_____1_________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_2_2_____2___________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_2_2_____2___________.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_11_3_____3___________________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_11_3_____3___________________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_3_3____3___________________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_3_3____3___________________.ts:16"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_1_1_____1___.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_1_1_____1___.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_5_1_____1___.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_5_1_____1___.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_8_4_____4_______________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_8_4_____4_______________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_6_2_____2__________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_6_2_____2__________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_9_1_____1___.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_9_1_____1___.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_10_2_____2__________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_10_2_____2__________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_7_3_____3___________________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_7_3_____3___________________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_2_2_____2__________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_2_2_____2__________.ts:16"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_4_4____4_______________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_4_4____4_______________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_12_4_____4_______________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_12_4_____4_______________.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_167_两数之和_ii_-_输入有序数组/solution_1_1_____1______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_167_两数之和_ii_-_输入有序数组/solution_1_1_____1______.ts:16"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_977_有序数组的平方/solution_3_3_____3_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_977_有序数组的平方/solution_3_3_____3_____.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_47_全排列_ii/solution_2_2_____2_____-___.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_47_全排列_ii/solution_2_2_____2_____-___.ts:16"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_51_n_皇后/solution_2_2_____2__________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_51_n_皇后/solution_2_2_____2__________.ts:24"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_37_解数独/solution_3_3_____3______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_37_解数独/solution_3_3_____3______.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_37_解数独/solution_2_2_____2_______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_37_解数独/solution_2_2_____2_______.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_69_x_的平方根/solution_3_3_____3_________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_69_x_的平方根/solution_3_3_____3_________.ts:17"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_35_搜索插入位置/solution_1_1_____1_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_35_搜索插入位置/solution_1_1_____1_____.ts:18"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_3___3.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_3___3.ts:11"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_1___1.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_1___1.ts:12"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_2___2.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_2___2.ts:11"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_4___4.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_4___4.ts:7"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_3___3.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_3___3.ts:7"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_1___1.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_1___1.ts:7"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_2___2.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_2___2.ts:7"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134073792_快速排序/solution_2___2.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134073792_快速排序/solution_2___2.ts:30"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134191965_基数排序/solution_2___2.ts",
+    "file:///Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134191965_%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/solution_2___2.ts:13"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134172583_计数排序/solution_2___2.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134172583_计数排序/solution_2___2.ts:11"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/heap/lc_215_数组中的第k个最大元素/solution_3___3.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/heap/lc_215_数组中的第k个最大元素/solution_3___3.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_4___4.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_4___4.ts:12"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_3___3.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_3___3.ts:12"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_1___1.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_1___1.ts:13"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_6___6.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_6___6.ts:12"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_2___2.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_2___2.ts:13"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_5___5.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_5___5.ts:12"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_455_分饼干/solution_2___2.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_455_分饼干/solution_2___2.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_45_跳跃游戏_ii/solution_2_2_____2______________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_45_跳跃游戏_ii/solution_2_2_____2______________.ts:17"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_45_跳跃游戏_ii/solution_1_1_____1__________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_45_跳跃游戏_ii/solution_1_1_____1__________.ts:18"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_452_用最少数量的箭引爆气球/solution_1_1_____1_________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_452_用最少数量的箭引爆气球/solution_1_1_____1_________.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_435_无重叠区间/solution_1_1_____1____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_435_无重叠区间/solution_1_1_____1____.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_3_3_____3______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_3_3_____3______.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.ts:23"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_2_2_____2_________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_2_2_____2_________.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_877_石子游戏/solution_1_1_____1_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_877_石子游戏/solution_1_1_____1_____.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_877_石子游戏/solution_2_2_____2_____-___.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_877_石子游戏/solution_2_2_____2_____-___.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_1027_最长等差数列/solution_1_1_____1_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_1027_最长等差数列/solution_1_1_____1_____.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_674_最长连续递增序列/solution_2_2_____2______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_674_最长连续递增序列/solution_2_2_____2______.ts:12"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_674_最长连续递增序列/solution_1_1_____1____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_674_最长连续递增序列/solution_1_1_____1____.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.ts:33"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_53_最大子数组和/solution_2_2____2______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_53_最大子数组和/solution_2_2____2______.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_300_最长递增子序列/solution_2_2_____2___________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_300_最长递增子序列/solution_2_2_____2___________.ts:21"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_2_2_____2______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_2_2_____2______.ts:16"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_1_1_____1____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_1_1_____1____.ts:16"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_4_4_____4______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_4_4_____4______.ts:24"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_714_买卖股票的最佳时机含手续费/solution_2_2_____2____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_714_买卖股票的最佳时机含手续费/solution_2_2_____2____.ts:16"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_322_零钱兑换/solution_1_1_____1_______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_322_零钱兑换/solution_1_1_____1_______.ts:14"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_165_比较版本号/solution_1_1_____1_______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_165_比较版本号/solution_1_1_____1_______.ts:17"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_165_比较版本号/solution_2_2_____2____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_165_比较版本号/solution_2_2_____2____.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_567_字符串的排列/solution_3_3_____3____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_567_字符串的排列/solution_3_3_____3____.ts:31"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.ts:44"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_10___10.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_10___10.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_11___11.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_11___11.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_7___7.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_7___7.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_4___4.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_4___4.ts:44"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_9___9.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_9___9.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_3___3.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_3___3.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_1___1.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_1___1.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_12___12.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_12___12.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_13___13.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_13___13.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_8___8.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_8___8.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_14___14.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_14___14.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_15___15.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_15___15.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_2___2.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_20_有效的括号/solution_2___2.ts:43"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_2042_检查句子中的数字是否递增/solution_2_2_____2_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_2042_检查句子中的数字是否递增/solution_2_2_____2_____.ts:15"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_791_自定义字符串排序/solution_2_2_____2_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_791_自定义字符串排序/solution_2_2_____2_____.ts:24"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_150_逆波兰表达式求值/solution_1_1_____1_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_150_逆波兰表达式求值/solution_1_1_____1_____.ts:23"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_150_逆波兰表达式求值/solution_2_2_____2_______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_150_逆波兰表达式求值/solution_2_2_____2_______.ts:17"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.ts:25"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_151_反转字符串中的单词/solution_2_2_____2___________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_151_反转字符串中的单词/solution_2_2_____2___________.ts:17"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_03_05_栈排序/solution_2_2____2_______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_03_05_栈排序/solution_2_2____2_______.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_03_05_栈排序/solution_1_1_____1______.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_03_05_栈排序/solution_1_1_____1______.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_2454_下一个更大元素_iv/solution_1_1_____1___________.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_2454_下一个更大元素_iv/solution_1_1_____1___________.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_2454_下一个更大元素_iv/solution_2_2_____2_____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_2454_下一个更大元素_iv/solution_2_2_____2_____.ts:19"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_556_下一个更大元素_iii/solution_2_2_____2___.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_556_下一个更大元素_iii/solution_2_2_____2___.ts:35"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_739_每日温度/solution_2_2____2____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_739_每日温度/solution_2_2____2____.ts:20"
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/matrix/lc_1329_将矩阵按对角线排序/solution_2_2_____2____.ts",
+    "/Users/Wang/Code/webfault-ai/dsa/ts/matrix/lc_1329_将矩阵按对角线排序/solution_2_2_____2____.ts:19"
+   ]
+  ],
+  "runnable": 870,
+  "broken_pattern_files": [
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_1_1_____1___.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_3_3_____3______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_654_最大二叉树/solution_2_2_____2____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_10___10.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_11___11.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_7___7.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_4___4.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_9___9.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_1___1.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_6___6.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_12___12.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_13___13.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_8___8.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_14___14.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_15___15.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_2___2.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_41_缺失的第一个正数/solution_5___5.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_179_最大数/solution_3_3_____3___-____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_10___10.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_11___11.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_7___7.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_4___4.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_9___9.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_3___3.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_1___1.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_6___6.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_12___12.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_8___8.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_2___2.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_164_最大间距/solution_5___5.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_15_三数之和/solution_2_2_____2_________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_18_四数之和/solution_2_2_____2________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/sort/lc_18_四数之和/solution_1_1_____1__________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_350_两个数组的交集_ii/solution_2_2____2__________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_4___4.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_3___3.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_1___1.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_6___6.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/hash/lc_3_无重复字符的最长子串/solution_5___5.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_4___4.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_3_3_____3_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_1_1_____1_________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_209_长度最小的子数组/solution_2_2_____2___________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_11_3_____3___________________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_3_3____3___________________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_1_1_____1___.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_5_1_____1___.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_8_4_____4_______________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_6_2_____2__________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_9_1_____1___.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_10_2_____2__________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_7_3_____3___________________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_2_2_____2__________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_4_4____4_______________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_89_格雷编码/solution_12_4_____4_______________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_167_两数之和_ii_-_输入有序数组/solution_1_1_____1______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_977_有序数组的平方/solution_3_3_____3_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_914_卡牌分组/solution_3_3_____3__________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/array/lc_914_卡牌分组/solution_2_2_____2_______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_79_单词搜索/solution_2_2_____2______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_39_组合总和/solution_2_2_____2____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_47_全排列_ii/solution_2_2_____2_____-___.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_51_n_皇后/solution_2_2_____2__________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_37_解数独/solution_3_3_____3______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/backtrack/lc_37_解数独/solution_2_2_____2_______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_69_x_的平方根/solution_3_3_____3_________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_35_搜索插入位置/solution_1_1_____1_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_3___3.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_1___1.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/binary_search/lc_704_二分查找/solution_2___2.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134073792_快速排序/solution_2___2.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134191965_基数排序/solution_2___2.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_134172583_计数排序/solution_2___2.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_1___1.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/heap/lc_215_数组中的第k个最大元素/solution_3___3.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_4___4.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_3___3.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_1___1.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_6___6.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_2___2.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_122_买卖股票的最佳时机ii/solution_5___5.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_455_分饼干/solution_2___2.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_45_跳跃游戏_ii/solution_2_2_____2______________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_45_跳跃游戏_ii/solution_1_1_____1__________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_452_用最少数量的箭引爆气球/solution_1_1_____1_________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/greedy/lc_435_无重叠区间/solution_1_1_____1____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_3_3_____3______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_3105_最长的严格递增或递减子数组/solution_2_2_____2_________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_877_石子游戏/solution_1_1_____1_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_877_石子游戏/solution_2_2_____2_____-___.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_2407_最长递增子序列_ii/solution_1_1_____1_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_1027_最长等差数列/solution_1_1_____1_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_674_最长连续递增序列/solution_2_2_____2______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_674_最长连续递增序列/solution_1_1_____1____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_53_最大子数组和/solution_2_2____2______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_300_最长递增子序列/solution_2_2_____2___________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_115_不同的子序列/solution_1___1.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_2_2_____2______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_1_1_____1____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_121_买卖股票的最佳时机/solution_4_4_____4______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_714_买卖股票的最佳时机含手续费/solution_2_2_____2____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_322_零钱兑换/solution_2_2_____2______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/dp/lc_322_零钱兑换/solution_1_1_____1_______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_165_比较版本号/solution_1_1_____1_______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_165_比较版本号/solution_2_2_____2____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_567_字符串的排列/solution_3_3_____3____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_2042_检查句子中的数字是否递增/solution_2_2_____2_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_791_自定义字符串排序/solution_2_2_____2_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_125_验证回文串/solution_3_3____3___________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_125_验证回文串/solution_1_1_____1_________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/string/lc_125_验证回文串/solution_2_2_____2_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_150_逆波兰表达式求值/solution_1_1_____1_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_150_逆波兰表达式求值/solution_2_2_____2_______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_151_反转字符串中的单词/solution_2_2_____2___________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_03_05_栈排序/solution_2_2____2_______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_03_05_栈排序/solution_1_1_____1______.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_2454_下一个更大元素_iv/solution_1_1_____1___________.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_2454_下一个更大元素_iv/solution_2_2_____2_____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_556_下一个更大元素_iii/solution_2_2_____2___.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/stack/lc_739_每日温度/solution_2_2____2____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/matrix/lc_1329_将矩阵按对角线排序/solution_1_1_____1___.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ],
+   [
+    "/Users/Wang/Code/webfault-ai/dsa/ts/matrix/lc_1329_将矩阵按对角线排序/solution_2_2_____2____.ts",
+    [
+     "BROKEN_marker"
+    ]
+   ]
+  ],
+  "broken_pattern_counts": {
+   "BROKEN_marker": 128
+  }
+ }
+}

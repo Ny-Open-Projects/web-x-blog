@@ -1,0 +1,134 @@
+[
+ {
+  "rel": "go/array/lc_268_丢失的数字/solution_1_1_____1_____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_448_找到所有数组中消失的数字/solution_1_1_____1_____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/binary_search/lc_69_x_的平方根/solution_1_1_____1________.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/binary_search/lc_69_x_的平方根/solution_2_2_____2_____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/binary_search/lc_69_x_的平方根/solution_3_3_____3_________.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/binary_search/lc_69_x_的平方根/solution_4_4____4__________.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_62_不同路径/solution_1_1_____1______.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_62_不同路径/solution_2_2____2_______.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_62_不同路径/solution_3_3_____3______.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_62_不同路径/solution_4_4_____4_________.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/string/lc_67_二进制求和/solution_1_1_____1_____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_268_丢失的数字/solution_1_1_____1_____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_448_找到所有数组中消失的数字/solution_1_1_____1_____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/binary_search/lc_69_x_的平方根/solution_1_1_____1________.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/binary_search/lc_69_x_的平方根/solution_2_2_____2_____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/binary_search/lc_69_x_的平方根/solution_3_3_____3_________.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/binary_search/lc_69_x_的平方根/solution_4_4____4__________.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_62_不同路径/solution_1_1_____1______.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_62_不同路径/solution_2_2____2_______.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_62_不同路径/solution_3_3_____3______.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_62_不同路径/solution_4_4_____4_________.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/string/lc_67_二进制求和/solution_1_1_____1_____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_268_丢失的数字/solution_1_1_____1_____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_448_找到所有数组中消失的数字/solution_1_1_____1_____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/binary_search/lc_69_x_的平方根/solution_1_1_____1________.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/binary_search/lc_69_x_的平方根/solution_2_2_____2_____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/binary_search/lc_69_x_的平方根/solution_3_3_____3_________.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/binary_search/lc_69_x_的平方根/solution_4_4____4__________.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_62_不同路径/solution_1_1_____1______.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_62_不同路径/solution_2_2____2_______.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_62_不同路径/solution_3_3_____3______.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_62_不同路径/solution_4_4_____4_________.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/string/lc_67_二进制求和/solution_1_1_____1_____.ts",
+  "status": "done_pass"
+ }
+]

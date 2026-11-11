@@ -1,0 +1,52 @@
+// 来源（blog）：https://blog.csdn.net/tyro_java/article/details/130482987
+// LeetCode 621. 任务调度器 — Rust 版
+
+// 方案4（26 位频率桶公式法）
+fn least_interval(tasks: &[char], n: i32) -> i32 {
+    // 定义函数/方法 least_interval
+    let mut freq = [0i32; 26]; // 把 [0i32; 26]; 写入 let mut freq
+    for &t in tasks {
+        // for 按位与 另一字符串 in tasks {
+        freq[(t as u8 - b'A') as usize] += 1; // 把 1; 写入 freq[(t as u8 - b'A') as usize] +
+    }
+    let mut max_freq = 0; // 把 0; 写入 let mut max_freq
+    for &f in freq.iter() {
+        // for 按位与 f in 频次表.iter() {
+        if f > max_freq {
+            // 若 f 超过 max_freq
+            max_freq = f; // 把 f; 写入 max_freq
+        }
+    }
+    let mut same = 0; // 把 0; 写入 let mut same
+    for &f in freq.iter() {
+        // for 按位与 f in 频次表.iter() {
+        if f == max_freq {
+            // 若 f 等于 max_freq
+            same += 1; // same累加 1
+        }
+    }
+    std::cmp::max((max_freq - 1) * (n + 1) + same, tasks.len() as i32)
+}
+
+fn main() {
+    // 程序入口：跑内嵌自测用例
+    // 与 TS 事实源内嵌用例一致
+    let cases: Vec<(Vec<char>, i32, i32)> = vec![
+        (vec!['A', 'A', 'A', 'B', 'B', 'B'], 2, 8),
+        (vec!['A', 'A', 'A', 'A'], 2, 10),
+        (vec!['A', 'B', 'C', 'D'], 0, 4),
+    ];
+    for (tasks, n, want) in cases {
+        // for (tasks, 元素个数, want) in cases {
+        let got = least_interval(&tasks, n); // 把 least_interval( 按位与 tasks, 元素个数) 存入 got
+        assert!(
+            got == want,
+            "FAIL least_interval({:?},{})={} want {}",
+            tasks,
+            n,
+            got,
+            want
+        ); // 断言校验
+    }
+    println!("PASS"); // 全部用例通过，输出 PASS
+}

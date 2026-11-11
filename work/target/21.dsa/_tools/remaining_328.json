@@ -1,0 +1,1642 @@
+[
+ {
+  "rel": "ts/binary_search/lc_153_寻找旋转排序数组中的最小值/solution_1_1____1______.ts",
+  "python_ref": "python/binary_search/lc_153_寻找旋转排序数组中的最小值/solution_1_1____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/binary_search/lc_35_搜索插入位置/solution_1_1_____1_____.ts",
+  "python_ref": "python/binary_search/lc_35_搜索插入位置/solution_1_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/binary_search/lc_704_二分查找/solution_1___1.ts",
+  "python_ref": "python/binary_search/lc_704_二分查找/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/binary_search/lc_704_二分查找/solution_2___2.ts",
+  "python_ref": "python/binary_search/lc_704_二分查找/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/binary_search/lc_704_二分查找/solution_3___3.ts",
+  "python_ref": "python/binary_search/lc_704_二分查找/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/concurrency/lc_1114_按序打印/solution_1_1_____1____synchronization.ts",
+  "python_ref": "python/concurrency/lc_1114_按序打印/solution_1_1_____1____synchronization.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/concurrency/lc_2637_有时间限制的_promise_对象/solution_1___1.ts",
+  "python_ref": "python/concurrency/lc_2637_有时间限制的_promise_对象/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/concurrency/lc_2637_有时间限制的_promise_对象/solution_2_2____2______Timeout.ts",
+  "python_ref": "python/concurrency/lc_2637_有时间限制的_promise_对象/solution_2_2____2______Timeout.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/concurrency/lc_2721_并行执行异步函数/solution_1_1_____1____async_await___.ts",
+  "python_ref": "python/concurrency/lc_2721_并行执行异步函数/solution_1_1_____1____async_await___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/concurrency/lc_2721_并行执行异步函数/solution_2_2_____2____then_catch___.ts",
+  "python_ref": "python/concurrency/lc_2721_并行执行异步函数/solution_2_2_____2____then_catch___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_115_不同的子序列/solution_1___1.ts",
+  "python_ref": "python/dp/lc_115_不同的子序列/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_115_不同的子序列/solution_2_2_____2_________.ts",
+  "python_ref": "python/dp/lc_115_不同的子序列/solution_2_2_____2_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_115_不同的子序列/solution_3_3_____3_________.ts",
+  "python_ref": "python/dp/lc_115_不同的子序列/solution_3_3_____3_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_115_不同的子序列/solution_4_4_____4______.ts",
+  "python_ref": "python/dp/lc_115_不同的子序列/solution_4_4_____4______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_1494_并行课程_ii/solution_1_1_____1____________.ts",
+  "python_ref": "python/dp/lc_1494_并行课程_ii/solution_1_1_____1____________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.ts",
+  "python_ref": "python/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_300_最长递增子序列/solution_1_1_____1______.ts",
+  "python_ref": "python/dp/lc_300_最长递增子序列/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_300_最长递增子序列/solution_2_2_____2___________.ts",
+  "python_ref": "python/dp/lc_300_最长递增子序列/solution_2_2_____2___________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.ts",
+  "python_ref": "python/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_3105_最长的严格递增或递减子数组/solution_2_2_____2_________.ts",
+  "python_ref": "python/dp/lc_3105_最长的严格递增或递减子数组/solution_2_2_____2_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_3105_最长的严格递增或递减子数组/solution_3_3_____3______.ts",
+  "python_ref": "python/dp/lc_3105_最长的严格递增或递减子数组/solution_3_3_____3______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_337_打家劫舍_iii/solution_1_1_____1___________.ts",
+  "python_ref": "python/dp/lc_337_打家劫舍_iii/solution_1_1_____1___________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_337_打家劫舍_iii/solution_2_2_____2______________.ts",
+  "python_ref": "python/dp/lc_337_打家劫舍_iii/solution_2_2_____2______________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_583_两个字符串的删除操作/solution_1_1_____1_________.ts",
+  "python_ref": "python/dp/lc_583_两个字符串的删除操作/solution_1_1_____1_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_583_两个字符串的删除操作/solution_2_2_____2______.ts",
+  "python_ref": "python/dp/lc_583_两个字符串的删除操作/solution_2_2_____2______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_63_不同路径_ii/solution_1___1.ts",
+  "python_ref": "python/dp/lc_63_不同路径_ii/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_63_不同路径_ii/solution_2___2.ts",
+  "python_ref": "python/dp/lc_63_不同路径_ii/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_63_不同路径_ii/solution_3___3.ts",
+  "python_ref": "python/dp/lc_63_不同路径_ii/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_63_不同路径_ii/solution_4___4.ts",
+  "python_ref": "python/dp/lc_63_不同路径_ii/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_63_不同路径_ii/solution_5___5.ts",
+  "python_ref": "python/dp/lc_63_不同路径_ii/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_63_不同路径_ii/solution_6___6.ts",
+  "python_ref": "python/dp/lc_63_不同路径_ii/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_673_最长递增子序列的个数/solution_1_1_____1______.ts",
+  "python_ref": "python/dp/lc_673_最长递增子序列的个数/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_673_最长递增子序列的个数/solution_2_2_____2_________________.ts",
+  "python_ref": "python/dp/lc_673_最长递增子序列的个数/solution_2_2_____2_________________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_714_买卖股票的最佳时机含手续费/solution_1_1_____1______.ts",
+  "python_ref": "python/dp/lc_714_买卖股票的最佳时机含手续费/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_714_买卖股票的最佳时机含手续费/solution_2_2_____2____.ts",
+  "python_ref": "python/dp/lc_714_买卖股票的最佳时机含手续费/solution_2_2_____2____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_72_编辑距离/solution_1_1_____1______.ts",
+  "python_ref": "python/dp/lc_72_编辑距离/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_72_编辑距离/solution_2_2_____2__________.ts",
+  "python_ref": "python/dp/lc_72_编辑距离/solution_2_2_____2__________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_926_将字符串翻转到单调递增/solution_1_1_____1______.ts",
+  "python_ref": "python/dp/lc_926_将字符串翻转到单调递增/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/dp/lc_926_将字符串翻转到单调递增/solution_2_2_____2_________.ts",
+  "python_ref": "python/dp/lc_926_将字符串翻转到单调递增/solution_2_2_____2_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_133_克隆图/solution_1___1.ts",
+  "python_ref": "python/graph/lc_133_克隆图/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_133_克隆图/solution_2___2.ts",
+  "python_ref": "python/graph/lc_133_克隆图/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_133_克隆图/solution_3___3.ts",
+  "python_ref": "python/graph/lc_133_克隆图/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_133_克隆图/solution_4_1_____1_____.ts",
+  "python_ref": "python/graph/lc_133_克隆图/solution_4_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_133_克隆图/solution_5_2____2_____.ts",
+  "python_ref": "python/graph/lc_133_克隆图/solution_5_2____2_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_133_克隆图/solution_6_1_____1_____.ts",
+  "python_ref": "python/graph/lc_133_克隆图/solution_6_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_133_克隆图/solution_7_2____2_____.ts",
+  "python_ref": "python/graph/lc_133_克隆图/solution_7_2____2_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_417_太平洋大西洋水流问题/solution_1___1.ts",
+  "python_ref": "python/graph/lc_417_太平洋大西洋水流问题/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_417_太平洋大西洋水流问题/solution_2___2.ts",
+  "python_ref": "python/graph/lc_417_太平洋大西洋水流问题/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_417_太平洋大西洋水流问题/solution_3___3.ts",
+  "python_ref": "python/graph/lc_417_太平洋大西洋水流问题/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_65_有效数字/solution_1___1.ts",
+  "python_ref": "python/graph/lc_65_有效数字/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_65_有效数字/solution_2___2.ts",
+  "python_ref": "python/graph/lc_65_有效数字/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_65_有效数字/solution_3___3.ts",
+  "python_ref": "python/graph/lc_65_有效数字/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_65_有效数字/solution_4_1_____1___.ts",
+  "python_ref": "python/graph/lc_65_有效数字/solution_4_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_65_有效数字/solution_5_2_____2________.ts",
+  "python_ref": "python/graph/lc_65_有效数字/solution_5_2_____2________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_65_有效数字/solution_6_1_____1___.ts",
+  "python_ref": "python/graph/lc_65_有效数字/solution_6_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/graph/lc_65_有效数字/solution_7_2_____2________.ts",
+  "python_ref": "python/graph/lc_65_有效数字/solution_7_2_____2________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_452_用最少数量的箭引爆气球/solution_1_1_____1_________.ts",
+  "python_ref": "python/greedy/lc_452_用最少数量的箭引爆气球/solution_1_1_____1_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_452_用最少数量的箭引爆气球/solution_2_2_____2____________.ts",
+  "python_ref": "python/greedy/lc_452_用最少数量的箭引爆气球/solution_2_2_____2____________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_45_跳跃游戏_ii/solution_1_1_____1__________.ts",
+  "python_ref": "python/greedy/lc_45_跳跃游戏_ii/solution_1_1_____1__________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_45_跳跃游戏_ii/solution_2_2_____2______________.ts",
+  "python_ref": "python/greedy/lc_45_跳跃游戏_ii/solution_2_2_____2______________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_55_跳跃游戏/solution_1_主解法.ts",
+  "python_ref": "python/greedy/lc_55_跳跃游戏/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_649_dota2_参议院/solution_1_1_____1____________.ts",
+  "python_ref": "python/greedy/lc_649_dota2_参议院/solution_1_1_____1____________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_649_dota2_参议院/solution_2_2_____2____.ts",
+  "python_ref": "python/greedy/lc_649_dota2_参议院/solution_2_2_____2____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_860_柠檬水找零/solution_2___2.ts",
+  "python_ref": "python/greedy/lc_860_柠檬水找零/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_860_柠檬水找零/solution_4___4.ts",
+  "python_ref": "python/greedy/lc_860_柠檬水找零/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/greedy/lc_860_柠檬水找零/solution_6___6.ts",
+  "python_ref": "python/greedy/lc_860_柠檬水找零/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_3_无重复字符的最长子串/solution_1___1.ts",
+  "python_ref": "python/hash/lc_3_无重复字符的最长子串/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_3_无重复字符的最长子串/solution_2___2.ts",
+  "python_ref": "python/hash/lc_3_无重复字符的最长子串/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_3_无重复字符的最长子串/solution_3___3.ts",
+  "python_ref": "python/hash/lc_3_无重复字符的最长子串/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_3_无重复字符的最长子串/solution_4___4.ts",
+  "python_ref": "python/hash/lc_3_无重复字符的最长子串/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_3_无重复字符的最长子串/solution_5___5.ts",
+  "python_ref": "python/hash/lc_3_无重复字符的最长子串/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_3_无重复字符的最长子串/solution_6___6.ts",
+  "python_ref": "python/hash/lc_3_无重复字符的最长子串/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_76_最小覆盖子串/solution_1___1.ts",
+  "python_ref": "python/hash/lc_76_最小覆盖子串/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_76_最小覆盖子串/solution_2___2.ts",
+  "python_ref": "python/hash/lc_76_最小覆盖子串/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/hash/lc_76_最小覆盖子串/solution_3___3.ts",
+  "python_ref": "python/hash/lc_76_最小覆盖子串/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_208_实现_trie_(前缀树)/solution_1_1_____1_____.ts",
+  "python_ref": "python/heap/lc_208_实现_trie_(前缀树)/solution_1_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_208_实现_trie_(前缀树)/solution_2_2_____2_______.ts",
+  "python_ref": "python/heap/lc_208_实现_trie_(前缀树)/solution_2_2_____2_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_295_数据流的中位数/solution_1_1_____1_____.ts",
+  "python_ref": "python/heap/lc_295_数据流的中位数/solution_1_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.ts",
+  "python_ref": "python/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_295_数据流的中位数/solution_3_3_____3___________.ts",
+  "python_ref": "python/heap/lc_295_数据流的中位数/solution_3_3_____3___________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_313_超级丑数/solution_1___1.ts",
+  "python_ref": "python/heap/lc_313_超级丑数/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_313_超级丑数/solution_2___2.ts",
+  "python_ref": "python/heap/lc_313_超级丑数/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_313_超级丑数/solution_3___3.ts",
+  "python_ref": "python/heap/lc_313_超级丑数/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_313_超级丑数/solution_4_1_____1______.ts",
+  "python_ref": "python/heap/lc_313_超级丑数/solution_4_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_313_超级丑数/solution_5_1_____1_____.ts",
+  "python_ref": "python/heap/lc_313_超级丑数/solution_5_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_347_前k个高频元素/solution_1___1.ts",
+  "python_ref": "python/heap/lc_347_前k个高频元素/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_347_前k个高频元素/solution_2___2.ts",
+  "python_ref": "python/heap/lc_347_前k个高频元素/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_347_前k个高频元素/solution_3___3.ts",
+  "python_ref": "python/heap/lc_347_前k个高频元素/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_347_前k个高频元素/solution_4___4.ts",
+  "python_ref": "python/heap/lc_347_前k个高频元素/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_347_前k个高频元素/solution_5___5.ts",
+  "python_ref": "python/heap/lc_347_前k个高频元素/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_347_前k个高频元素/solution_6___6.ts",
+  "python_ref": "python/heap/lc_347_前k个高频元素/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_451_根据字符出现频率排序/solution_1_1____1_____________sort_Map__.ts",
+  "python_ref": "python/heap/lc_451_根据字符出现频率排序/solution_1_1____1_____________sort_Map__.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_451_根据字符出现频率排序/solution_2___2.ts",
+  "python_ref": "python/heap/lc_451_根据字符出现频率排序/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_451_根据字符出现频率排序/solution_3_1____1_______.ts",
+  "python_ref": "python/heap/lc_451_根据字符出现频率排序/solution_3_1____1_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_451_根据字符出现频率排序/solution_4_2_____2____.ts",
+  "python_ref": "python/heap/lc_451_根据字符出现频率排序/solution_4_2_____2____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_451_根据字符出现频率排序/solution_5_1____1_map____.ts",
+  "python_ref": "python/heap/lc_451_根据字符出现频率排序/solution_5_1____1_map____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_451_根据字符出现频率排序/solution_6_2_____2__.ts",
+  "python_ref": "python/heap/lc_451_根据字符出现频率排序/solution_6_2_____2__.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/heap/lc_502_ipo/solution_1_主解法.ts",
+  "python_ref": "python/heap/lc_502_ipo/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_148_排序链表/solution_1___1.ts",
+  "python_ref": "python/linked_list/lc_148_排序链表/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_148_排序链表/solution_2___2.ts",
+  "python_ref": "python/linked_list/lc_148_排序链表/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_148_排序链表/solution_3___3.ts",
+  "python_ref": "python/linked_list/lc_148_排序链表/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_148_排序链表/solution_4___4.ts",
+  "python_ref": "python/linked_list/lc_148_排序链表/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_148_排序链表/solution_5___5.ts",
+  "python_ref": "python/linked_list/lc_148_排序链表/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_160_相交链表/solution_1_1_____1__________.ts",
+  "python_ref": "python/linked_list/lc_160_相交链表/solution_1_1_____1__________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_160_相交链表/solution_2_2_____2_____.ts",
+  "python_ref": "python/linked_list/lc_160_相交链表/solution_2_2_____2_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_19_删除链表的倒数第_n_个结点/solution_2_2_____2___while.ts",
+  "python_ref": "python/linked_list/lc_19_删除链表的倒数第_n_个结点/solution_2_2_____2___while.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_203_移除链表元素/solution_1_1_____1____.ts",
+  "python_ref": "python/linked_list/lc_203_移除链表元素/solution_1_1_____1____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_203_移除链表元素/solution_2_2_____2____.ts",
+  "python_ref": "python/linked_list/lc_203_移除链表元素/solution_2_2_____2____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_206_反转链表/solution_2___2.ts",
+  "python_ref": "python/linked_list/lc_206_反转链表/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_206_反转链表/solution_6___6.ts",
+  "python_ref": "python/linked_list/lc_206_反转链表/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_460_lfu_缓存/solution_1_主解法.ts",
+  "python_ref": "python/linked_list/lc_460_lfu_缓存/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_707_设计链表/solution_1_主解法.ts",
+  "python_ref": "python/linked_list/lc_707_设计链表/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_83_删除排序链表中的重复元素/solution_1___1.ts",
+  "python_ref": "python/linked_list/lc_83_删除排序链表中的重复元素/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_83_删除排序链表中的重复元素/solution_4___4.ts",
+  "python_ref": "python/linked_list/lc_83_删除排序链表中的重复元素/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_83_删除排序链表中的重复元素/solution_5___5.ts",
+  "python_ref": "python/linked_list/lc_83_删除排序链表中的重复元素/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_83_删除排序链表中的重复元素/solution_6___6.ts",
+  "python_ref": "python/linked_list/lc_83_删除排序链表中的重复元素/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_876_链表的中间结点/solution_1_1_____1____.ts",
+  "python_ref": "python/linked_list/lc_876_链表的中间结点/solution_1_1_____1____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_876_链表的中间结点/solution_2_2_____2______.ts",
+  "python_ref": "python/linked_list/lc_876_链表的中间结点/solution_2_2_____2______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_876_链表的中间结点/solution_3_3_____3_______.ts",
+  "python_ref": "python/linked_list/lc_876_链表的中间结点/solution_3_3_____3_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_92_反转链表_ii/solution_1_1_____1______.ts",
+  "python_ref": "python/linked_list/lc_92_反转链表_ii/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/linked_list/lc_92_反转链表_ii/solution_2_2_____2_____________________.ts",
+  "python_ref": "python/linked_list/lc_92_反转链表_ii/solution_2_2_____2_____________________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/matrix/lc_1329_将矩阵按对角线排序/solution_1_1_____1___.ts",
+  "python_ref": "python/matrix/lc_1329_将矩阵按对角线排序/solution_1_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/matrix/lc_1329_将矩阵按对角线排序/solution_2_2_____2____.ts",
+  "python_ref": "python/matrix/lc_1329_将矩阵按对角线排序/solution_2_2_____2____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/matrix/lc_54_螺旋矩阵/solution_1___1.ts",
+  "python_ref": "python/matrix/lc_54_螺旋矩阵/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/matrix/lc_54_螺旋矩阵/solution_2_1____1_________.ts",
+  "python_ref": "python/matrix/lc_54_螺旋矩阵/solution_2_1____1_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/matrix/lc_54_螺旋矩阵/solution_3_1____1_________.ts",
+  "python_ref": "python/matrix/lc_54_螺旋矩阵/solution_3_1____1_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_1___1.ts",
+  "python_ref": "python/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_2___2.ts",
+  "python_ref": "python/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_3___3.ts",
+  "python_ref": "python/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_4___4.ts",
+  "python_ref": "python/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_5___5.ts",
+  "python_ref": "python/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_6___6.ts",
+  "python_ref": "python/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_7___7.ts",
+  "python_ref": "python/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_7___7.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_105893757_栈排序分析/solution_1___1.ts",
+  "python_ref": "python/notes/lc_105893757_栈排序分析/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_105893757_栈排序分析/solution_2___2.ts",
+  "python_ref": "python/notes/lc_105893757_栈排序分析/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_105893757_栈排序分析/solution_3___3.ts",
+  "python_ref": "python/notes/lc_105893757_栈排序分析/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_105893757_栈排序分析/solution_4___4.ts",
+  "python_ref": "python/notes/lc_105893757_栈排序分析/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107431726_最大红矩形分析/solution_1___1.ts",
+  "python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107431726_最大红矩形分析/solution_2___2.ts",
+  "python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107431726_最大红矩形分析/solution_3___3.ts",
+  "python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107431726_最大红矩形分析/solution_4___4.ts",
+  "python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107431726_最大红矩形分析/solution_5___5.ts",
+  "python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107435426_字典序最大问题分析/solution_1___1.ts",
+  "python_ref": "python/notes/lc_107435426_字典序最大问题分析/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107435426_字典序最大问题分析/solution_2___2.ts",
+  "python_ref": "python/notes/lc_107435426_字典序最大问题分析/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107435426_字典序最大问题分析/solution_3___3.ts",
+  "python_ref": "python/notes/lc_107435426_字典序最大问题分析/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107435426_字典序最大问题分析/solution_4___4.ts",
+  "python_ref": "python/notes/lc_107435426_字典序最大问题分析/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_1___1.ts",
+  "python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_2___2.ts",
+  "python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_3___3.ts",
+  "python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_4___4.ts",
+  "python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_5___5.ts",
+  "python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_6___6.ts",
+  "python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_1___1.ts",
+  "python_ref": "python/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_2___2.ts",
+  "python_ref": "python/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_3___3.ts",
+  "python_ref": "python/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107579658_抽象思维之转换视角_提炼共性/solution_1___1.ts",
+  "python_ref": "python/notes/lc_107579658_抽象思维之转换视角_提炼共性/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_10___10.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_10___10.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_11___11.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_11___11.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_12___12.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_12___12.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_13___13.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_13___13.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_1___1.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_2___2.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_3___3.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_4___4.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_5___5.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_6___6.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_7___7.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_7___7.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_8___8.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_8___8.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_9___9.ts",
+  "python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_9___9.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107836586_big-o记号_数据结构与算法的关系以及几种基本的数据结构/solution_1_主解法.ts",
+  "python_ref": "python/notes/lc_107836586_big-o记号_数据结构与算法的关系以及几种基本的数据结构/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107849059_gnome_sort_bubble_sort以及贪心策略的相关对比改进/solution_1___1.ts",
+  "python_ref": "python/notes/lc_107849059_gnome_sort_bubble_sort以及贪心策略的相关对比改进/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_107868749_贪心策略之matrixsorting_pfc_coding_huffmantre/solution_1_主解法.ts",
+  "python_ref": "python/notes/lc_107868749_贪心策略之matrixsorting_pfc_coding_huffmantre/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_108013114_贪心策略之bst&bbst_hashtable+dictionary+map_p/solution_1___1.ts",
+  "python_ref": "python/notes/lc_108013114_贪心策略之bst&bbst_hashtable+dictionary+map_p/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_108717090_减治策略之详解dijkstra算法/solution_1___1.ts",
+  "python_ref": "python/notes/lc_108717090_减治策略之详解dijkstra算法/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_1___1.ts",
+  "python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_2___2.ts",
+  "python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_3___3.ts",
+  "python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_4___4.ts",
+  "python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_5___5.ts",
+  "python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_113548046_图搜索之bfs详解/solution_1___1.ts",
+  "python_ref": "python/notes/lc_113548046_图搜索之bfs详解/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_113764246_图搜索之dfs详解/solution_1___1.ts",
+  "python_ref": "python/notes/lc_113764246_图搜索之dfs详解/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_113764246_图搜索之dfs详解/solution_2___2.ts",
+  "python_ref": "python/notes/lc_113764246_图搜索之dfs详解/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_1___1.ts",
+  "python_ref": "python/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_2___2.ts",
+  "python_ref": "python/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_3___3.ts",
+  "python_ref": "python/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_1___1.ts",
+  "python_ref": "python/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_2___2.ts",
+  "python_ref": "python/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_3___3.ts",
+  "python_ref": "python/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_4___4.ts",
+  "python_ref": "python/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133468244_堆和实现最小堆类/solution_1___1.ts",
+  "python_ref": "python/notes/lc_133468244_堆和实现最小堆类/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133468244_堆和实现最小堆类/solution_2___2.ts",
+  "python_ref": "python/notes/lc_133468244_堆和实现最小堆类/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133468244_堆和实现最小堆类/solution_3___3.ts",
+  "python_ref": "python/notes/lc_133468244_堆和实现最小堆类/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_1___1.ts",
+  "python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_2___2.ts",
+  "python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_3___3.ts",
+  "python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_4___4.ts",
+  "python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_5___5.ts",
+  "python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_6___6.ts",
+  "python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134082074_插入排序/solution_1___1.ts",
+  "python_ref": "python/notes/lc_134082074_插入排序/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134082074_插入排序/solution_2___2.ts",
+  "python_ref": "python/notes/lc_134082074_插入排序/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134082074_插入排序/solution_3___3.ts",
+  "python_ref": "python/notes/lc_134082074_插入排序/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134083295_归并排序/solution_1___1.ts",
+  "python_ref": "python/notes/lc_134083295_归并排序/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134083295_归并排序/solution_2___2.ts",
+  "python_ref": "python/notes/lc_134083295_归并排序/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134083295_归并排序/solution_3___3.ts",
+  "python_ref": "python/notes/lc_134083295_归并排序/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134083295_归并排序/solution_4___4.ts",
+  "python_ref": "python/notes/lc_134083295_归并排序/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134083295_归并排序/solution_5___5.ts",
+  "python_ref": "python/notes/lc_134083295_归并排序/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134083295_归并排序/solution_6___6.ts",
+  "python_ref": "python/notes/lc_134083295_归并排序/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134085384_选择排序/solution_1___1.ts",
+  "python_ref": "python/notes/lc_134085384_选择排序/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134085384_选择排序/solution_2___2.ts",
+  "python_ref": "python/notes/lc_134085384_选择排序/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134085384_选择排序/solution_3___3.ts",
+  "python_ref": "python/notes/lc_134085384_选择排序/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134085409_堆排序/solution_1_主解法.ts",
+  "python_ref": "python/notes/lc_134085409_堆排序/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134150438_希尔排序/solution_1___1.ts",
+  "python_ref": "python/notes/lc_134150438_希尔排序/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134150438_希尔排序/solution_2___2.ts",
+  "python_ref": "python/notes/lc_134150438_希尔排序/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134150438_希尔排序/solution_3___3.ts",
+  "python_ref": "python/notes/lc_134150438_希尔排序/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134217002_顺序查找/solution_1___1.ts",
+  "python_ref": "python/notes/lc_134217002_顺序查找/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_134217002_顺序查找/solution_3___3.ts",
+  "python_ref": "python/notes/lc_134217002_顺序查找/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列/solution_1_主解法.ts",
+  "python_ref": "python/notes/lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_1___1.ts",
+  "python_ref": "python/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_2_2_____2_____-__.ts",
+  "python_ref": "python/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_2_2_____2_____-__.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_1___1.ts",
+  "python_ref": "python/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_2___2.ts",
+  "python_ref": "python/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_1797_设计一个验证系统/solution_1_主解法.ts",
+  "python_ref": "python/other/lc_1797_设计一个验证系统/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_202_快乐数/solution_1___1.ts",
+  "python_ref": "python/other/lc_202_快乐数/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_202_快乐数/solution_2_2_____2___.ts",
+  "python_ref": "python/other/lc_202_快乐数/solution_2_2_____2___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_2166_设计位集/solution_1_1_____1_______.ts",
+  "python_ref": "python/other/lc_2166_设计位集/solution_1_1_____1_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_2166_设计位集/solution_2_2_____2______.ts",
+  "python_ref": "python/other/lc_2166_设计位集/solution_2_2_____2______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_217_存在重复元素/solution_1_1_____1___.ts",
+  "python_ref": "python/other/lc_217_存在重复元素/solution_1_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_292_nim_游戏/solution_1_1_____1_____.ts",
+  "python_ref": "python/other/lc_292_nim_游戏/solution_1_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_326_3_的幂/solution_1_1_____1____.ts",
+  "python_ref": "python/other/lc_326_3_的幂/solution_1_1_____1____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/other/lc_326_3_的幂/solution_2_2_____2_________3______.ts",
+  "python_ref": "python/other/lc_326_3_的幂/solution_2_2_____2_________3______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_1_1_____1___.ts",
+  "python_ref": "python/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_1_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_2_2_____2______.ts",
+  "python_ref": "python/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_2_2_____2______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_15_三数之和/solution_1_1_____1_________.ts",
+  "python_ref": "python/sort/lc_15_三数之和/solution_1_1_____1_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_15_三数之和/solution_2_2_____2_________.ts",
+  "python_ref": "python/sort/lc_15_三数之和/solution_2_2_____2_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_179_最大数/solution_1_1_____1___.ts",
+  "python_ref": "python/sort/lc_179_最大数/solution_1_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_179_最大数/solution_2_2_____2___-__.ts",
+  "python_ref": "python/sort/lc_179_最大数/solution_2_2_____2___-__.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_179_最大数/solution_3_3_____3___-____.ts",
+  "python_ref": "python/sort/lc_179_最大数/solution_3_3_____3___-____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_18_四数之和/solution_1_1_____1__________.ts",
+  "python_ref": "python/sort/lc_18_四数之和/solution_1_1_____1__________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_18_四数之和/solution_2_2_____2________.ts",
+  "python_ref": "python/sort/lc_18_四数之和/solution_2_2_____2________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_1___1.ts",
+  "python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_4___4.ts",
+  "python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_5___5.ts",
+  "python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_6___6.ts",
+  "python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_8___8.ts",
+  "python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_8___8.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_9___9.ts",
+  "python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_9___9.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/sort/lc_937_重新排列日志文件/solution_1_1_____1______.ts",
+  "python_ref": "python/sort/lc_937_重新排列日志文件/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_03_05_栈排序/solution_1_1_____1______.ts",
+  "python_ref": "python/stack/lc_03_05_栈排序/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_03_05_栈排序/solution_2_2____2_______.ts",
+  "python_ref": "python/stack/lc_03_05_栈排序/solution_2_2____2_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_1472_设计浏览器历史记录/solution_1_主解法.ts",
+  "python_ref": "python/stack/lc_1472_设计浏览器历史记录/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_151_反转字符串中的单词/solution_1_1_____1________.ts",
+  "python_ref": "python/stack/lc_151_反转字符串中的单词/solution_1_1_____1________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_151_反转字符串中的单词/solution_2_2_____2___________.ts",
+  "python_ref": "python/stack/lc_151_反转字符串中的单词/solution_2_2_____2___________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.ts",
+  "python_ref": "python/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_1685_有序数组中差绝对值之和/solution_1_1_____1____.ts",
+  "python_ref": "python/stack/lc_1685_有序数组中差绝对值之和/solution_1_1_____1____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_1685_有序数组中差绝对值之和/solution_2___2.ts",
+  "python_ref": "python/stack/lc_1685_有序数组中差绝对值之和/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_1685_有序数组中差绝对值之和/solution_3_3_____3___________________.ts",
+  "python_ref": "python/stack/lc_1685_有序数组中差绝对值之和/solution_3_3_____3___________________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_225_用队列实现栈/solution_1_1_____1______.ts",
+  "python_ref": "python/stack/lc_225_用队列实现栈/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_225_用队列实现栈/solution_2_2_____2______.ts",
+  "python_ref": "python/stack/lc_225_用队列实现栈/solution_2_2_____2______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_2454_下一个更大元素_iv/solution_1_1_____1___________.ts",
+  "python_ref": "python/stack/lc_2454_下一个更大元素_iv/solution_1_1_____1___________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_2454_下一个更大元素_iv/solution_2_2_____2_____.ts",
+  "python_ref": "python/stack/lc_2454_下一个更大元素_iv/solution_2_2_____2_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_27_移除元素/solution_1___1.ts",
+  "python_ref": "python/stack/lc_27_移除元素/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_27_移除元素/solution_2_1_____1____.ts",
+  "python_ref": "python/stack/lc_27_移除元素/solution_2_1_____1____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_27_移除元素/solution_3_2_____2______.ts",
+  "python_ref": "python/stack/lc_27_移除元素/solution_3_2_____2______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_3100_换水问题_ii/solution_1___1.ts",
+  "python_ref": "python/stack/lc_3100_换水问题_ii/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_3100_换水问题_ii/solution_2___2.ts",
+  "python_ref": "python/stack/lc_3100_换水问题_ii/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_503_下一个更大元素_ii/solution_1_主解法.ts",
+  "python_ref": "python/stack/lc_503_下一个更大元素_ii/solution_1_主解法.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_641_设计循环双端队列/solution_1_1_____1___.ts",
+  "python_ref": "python/stack/lc_641_设计循环双端队列/solution_1_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_641_设计循环双端队列/solution_2_2_____2___.ts",
+  "python_ref": "python/stack/lc_641_设计循环双端队列/solution_2_2_____2___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_71_简化路径/solution_1_1_____1____.ts",
+  "python_ref": "python/stack/lc_71_简化路径/solution_1_1_____1____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_71_简化路径/solution_2_2_____2__.ts",
+  "python_ref": "python/stack/lc_71_简化路径/solution_2_2_____2__.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_739_每日温度/solution_1_1_____1___.ts",
+  "python_ref": "python/stack/lc_739_每日温度/solution_1_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/stack/lc_739_每日温度/solution_2_2____2____.ts",
+  "python_ref": "python/stack/lc_739_每日温度/solution_2_2____2____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1_1_____1_____.ts",
+  "python_ref": "python/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_2_____2________next___.ts",
+  "python_ref": "python/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_2_____2________next___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_165_比较版本号/solution_1_1_____1_______.ts",
+  "python_ref": "python/string/lc_165_比较版本号/solution_1_1_____1_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_415_字符串相加/solution_1_1_____1___.ts",
+  "python_ref": "python/string/lc_415_字符串相加/solution_1_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_415_字符串相加/solution_2_2____2____.ts",
+  "python_ref": "python/string/lc_415_字符串相加/solution_2_2____2____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_482_密钥格式化/solution_1_1_____2___.ts",
+  "python_ref": "python/string/lc_482_密钥格式化/solution_1_1_____2___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_482_密钥格式化/solution_2_2_____2______.ts",
+  "python_ref": "python/string/lc_482_密钥格式化/solution_2_2_____2______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_567_字符串的排列/solution_1_1_____1_____.ts",
+  "python_ref": "python/string/lc_567_字符串的排列/solution_1_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_567_字符串的排列/solution_2_2_____2_______.ts",
+  "python_ref": "python/string/lc_567_字符串的排列/solution_2_2_____2_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_567_字符串的排列/solution_3_3_____3____.ts",
+  "python_ref": "python/string/lc_567_字符串的排列/solution_3_3_____3____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_791_自定义字符串排序/solution_1_1_____1______.ts",
+  "python_ref": "python/string/lc_791_自定义字符串排序/solution_1_1_____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_791_自定义字符串排序/solution_2_2_____2_____.ts",
+  "python_ref": "python/string/lc_791_自定义字符串排序/solution_2_2_____2_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_8_字符串转换整数_(atoi)/solution_1_1_____1____.ts",
+  "python_ref": "python/string/lc_8_字符串转换整数_(atoi)/solution_1_1_____1____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.ts",
+  "python_ref": "python/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_100_相同的树/solution_1___1.ts",
+  "python_ref": "python/tree/lc_100_相同的树/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_100_相同的树/solution_3___3.ts",
+  "python_ref": "python/tree/lc_100_相同的树/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_100_相同的树/solution_4___4.ts",
+  "python_ref": "python/tree/lc_100_相同的树/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_100_相同的树/solution_5___5.ts",
+  "python_ref": "python/tree/lc_100_相同的树/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_100_相同的树/solution_6___6.ts",
+  "python_ref": "python/tree/lc_100_相同的树/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_104_二叉树的最大深度/solution_1___1.ts",
+  "python_ref": "python/tree/lc_104_二叉树的最大深度/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_104_二叉树的最大深度/solution_2___2.ts",
+  "python_ref": "python/tree/lc_104_二叉树的最大深度/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_104_二叉树的最大深度/solution_4___4.ts",
+  "python_ref": "python/tree/lc_104_二叉树的最大深度/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_104_二叉树的最大深度/solution_5___5.ts",
+  "python_ref": "python/tree/lc_104_二叉树的最大深度/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_104_二叉树的最大深度/solution_6___6.ts",
+  "python_ref": "python/tree/lc_104_二叉树的最大深度/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_104_二叉树的最大深度/solution_7___7.ts",
+  "python_ref": "python/tree/lc_104_二叉树的最大深度/solution_7___7.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_104_二叉树的最大深度/solution_8___8.ts",
+  "python_ref": "python/tree/lc_104_二叉树的最大深度/solution_8___8.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_104_二叉树的最大深度/solution_9___9.ts",
+  "python_ref": "python/tree/lc_104_二叉树的最大深度/solution_9___9.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_107_二叉树的层序遍历_ii/solution_1_1_____1________.ts",
+  "python_ref": "python/tree/lc_107_二叉树的层序遍历_ii/solution_1_1_____1________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_107_二叉树的层序遍历_ii/solution_2_2_____2________.ts",
+  "python_ref": "python/tree/lc_107_二叉树的层序遍历_ii/solution_2_2_____2________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_1___1.ts",
+  "python_ref": "python/tree/lc_109_有序链表转换二叉搜索树/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_2_1____1___.ts",
+  "python_ref": "python/tree/lc_109_有序链表转换二叉搜索树/solution_2_1____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_3_2____2____________.ts",
+  "python_ref": "python/tree/lc_109_有序链表转换二叉搜索树/solution_3_2____2____________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.ts",
+  "python_ref": "python/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_110_平衡二叉树/solution_1_1_____1_________.ts",
+  "python_ref": "python/tree/lc_110_平衡二叉树/solution_1_1_____1_________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1___1.ts",
+  "python_ref": "python/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1___1.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_1____1______.ts",
+  "python_ref": "python/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_1____1______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_3_2____2_________next___.ts",
+  "python_ref": "python/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_3_2____2_________next___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_144_二叉树的前序遍历/solution_2___2.ts",
+  "python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_144_二叉树的前序遍历/solution_3___3.ts",
+  "python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_3___3.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_144_二叉树的前序遍历/solution_4___4.ts",
+  "python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_4___4.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_144_二叉树的前序遍历/solution_5___5.ts",
+  "python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_5___5.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_144_二叉树的前序遍历/solution_6___6.ts",
+  "python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_6___6.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.ts",
+  "python_ref": "python/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_222_完全二叉树的节点个数/solution_2_2____2___.ts",
+  "python_ref": "python/tree/lc_222_完全二叉树的节点个数/solution_2_2____2___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_230_二叉搜索树中第_k_小的元素/solution_1_1_____1_____.ts",
+  "python_ref": "python/tree/lc_230_二叉搜索树中第_k_小的元素/solution_1_1_____1_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_257_二叉树的所有路径/solution_1_1_____1_______.ts",
+  "python_ref": "python/tree/lc_257_二叉树的所有路径/solution_1_1_____1_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_404_左叶子之和/solution_1_1_____1_______.ts",
+  "python_ref": "python/tree/lc_404_左叶子之和/solution_1_1_____1_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_404_左叶子之和/solution_2_2_____2___.ts",
+  "python_ref": "python/tree/lc_404_左叶子之和/solution_2_2_____2___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_404_左叶子之和/solution_3_3_____3_______.ts",
+  "python_ref": "python/tree/lc_404_左叶子之和/solution_3_3_____3_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_429_n_叉树的层序遍历/solution_2_2_____2_____.ts",
+  "python_ref": "python/tree/lc_429_n_叉树的层序遍历/solution_2_2_____2_____.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_515_在每个树行中找最大值/solution_2_2_____2_______.ts",
+  "python_ref": "python/tree/lc_515_在每个树行中找最大值/solution_2_2_____2_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_543_二叉树的直径/solution_2___2.ts",
+  "python_ref": "python/tree/lc_543_二叉树的直径/solution_2___2.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_617_合并二叉树/solution_1_1_____1_______.ts",
+  "python_ref": "python/tree/lc_617_合并二叉树/solution_1_1_____1_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.ts",
+  "python_ref": "python/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_637_二叉树的层平均值/solution_2_2_____2_______.ts",
+  "python_ref": "python/tree/lc_637_二叉树的层平均值/solution_2_2_____2_______.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_701_二叉搜索树中的插入操作/solution_1_1_____1___.ts",
+  "python_ref": "python/tree/lc_701_二叉搜索树中的插入操作/solution_1_1_____1___.py",
+  "lang": "ts"
+ },
+ {
+  "rel": "ts/tree/lc_701_二叉搜索树中的插入操作/solution_2_2_____2___.ts",
+  "python_ref": "python/tree/lc_701_二叉搜索树中的插入操作/solution_2_2_____2___.py",
+  "lang": "ts"
+ }
+]

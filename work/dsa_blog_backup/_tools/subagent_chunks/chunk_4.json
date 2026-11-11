@@ -1,0 +1,326 @@
+{
+"chunk": 4,
+"count": 64,
+"rels": [
+{
+"rel": "ts/stack/lc_503_下一个更大元素_ii/solution_1_主解法.ts",
+"python_ref": "python/stack/lc_503_下一个更大元素_ii/solution_1_主解法.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_641_设计循环双端队列/solution_1_1_____1___.ts",
+"python_ref": "python/stack/lc_641_设计循环双端队列/solution_1_1_____1___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_641_设计循环双端队列/solution_2_2_____2___.ts",
+"python_ref": "python/stack/lc_641_设计循环双端队列/solution_2_2_____2___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_71_简化路径/solution_1_1_____1____.ts",
+"python_ref": "python/stack/lc_71_简化路径/solution_1_1_____1____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_71_简化路径/solution_2_2_____2__.ts",
+"python_ref": "python/stack/lc_71_简化路径/solution_2_2_____2__.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_739_每日温度/solution_1_1_____1___.ts",
+"python_ref": "python/stack/lc_739_每日温度/solution_1_1_____1___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_739_每日温度/solution_2_2____2____.ts",
+"python_ref": "python/stack/lc_739_每日温度/solution_2_2____2____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1_1_____1_____.ts",
+"python_ref": "python/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1_1_____1_____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_2_____2________next___.ts",
+"python_ref": "python/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_2_____2________next___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_165_比较版本号/solution_1_1_____1_______.ts",
+"python_ref": "python/string/lc_165_比较版本号/solution_1_1_____1_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_415_字符串相加/solution_1_1_____1___.ts",
+"python_ref": "python/string/lc_415_字符串相加/solution_1_1_____1___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_415_字符串相加/solution_2_2____2____.ts",
+"python_ref": "python/string/lc_415_字符串相加/solution_2_2____2____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_482_密钥格式化/solution_1_1_____2___.ts",
+"python_ref": "python/string/lc_482_密钥格式化/solution_1_1_____2___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_482_密钥格式化/solution_2_2_____2______.ts",
+"python_ref": "python/string/lc_482_密钥格式化/solution_2_2_____2______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_567_字符串的排列/solution_1_1_____1_____.ts",
+"python_ref": "python/string/lc_567_字符串的排列/solution_1_1_____1_____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_567_字符串的排列/solution_2_2_____2_______.ts",
+"python_ref": "python/string/lc_567_字符串的排列/solution_2_2_____2_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_567_字符串的排列/solution_3_3_____3____.ts",
+"python_ref": "python/string/lc_567_字符串的排列/solution_3_3_____3____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_791_自定义字符串排序/solution_1_1_____1______.ts",
+"python_ref": "python/string/lc_791_自定义字符串排序/solution_1_1_____1______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_791_自定义字符串排序/solution_2_2_____2_____.ts",
+"python_ref": "python/string/lc_791_自定义字符串排序/solution_2_2_____2_____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_8_字符串转换整数_(atoi)/solution_1_1_____1____.ts",
+"python_ref": "python/string/lc_8_字符串转换整数_(atoi)/solution_1_1_____1____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.ts",
+"python_ref": "python/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_100_相同的树/solution_1___1.ts",
+"python_ref": "python/tree/lc_100_相同的树/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_100_相同的树/solution_3___3.ts",
+"python_ref": "python/tree/lc_100_相同的树/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_100_相同的树/solution_4___4.ts",
+"python_ref": "python/tree/lc_100_相同的树/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_100_相同的树/solution_5___5.ts",
+"python_ref": "python/tree/lc_100_相同的树/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_100_相同的树/solution_6___6.ts",
+"python_ref": "python/tree/lc_100_相同的树/solution_6___6.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_104_二叉树的最大深度/solution_1___1.ts",
+"python_ref": "python/tree/lc_104_二叉树的最大深度/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_104_二叉树的最大深度/solution_2___2.ts",
+"python_ref": "python/tree/lc_104_二叉树的最大深度/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_104_二叉树的最大深度/solution_4___4.ts",
+"python_ref": "python/tree/lc_104_二叉树的最大深度/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_104_二叉树的最大深度/solution_5___5.ts",
+"python_ref": "python/tree/lc_104_二叉树的最大深度/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_104_二叉树的最大深度/solution_6___6.ts",
+"python_ref": "python/tree/lc_104_二叉树的最大深度/solution_6___6.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_104_二叉树的最大深度/solution_7___7.ts",
+"python_ref": "python/tree/lc_104_二叉树的最大深度/solution_7___7.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_104_二叉树的最大深度/solution_8___8.ts",
+"python_ref": "python/tree/lc_104_二叉树的最大深度/solution_8___8.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_104_二叉树的最大深度/solution_9___9.ts",
+"python_ref": "python/tree/lc_104_二叉树的最大深度/solution_9___9.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_107_二叉树的层序遍历_ii/solution_1_1_____1________.ts",
+"python_ref": "python/tree/lc_107_二叉树的层序遍历_ii/solution_1_1_____1________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_107_二叉树的层序遍历_ii/solution_2_2_____2________.ts",
+"python_ref": "python/tree/lc_107_二叉树的层序遍历_ii/solution_2_2_____2________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_1___1.ts",
+"python_ref": "python/tree/lc_109_有序链表转换二叉搜索树/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_2_1____1___.ts",
+"python_ref": "python/tree/lc_109_有序链表转换二叉搜索树/solution_2_1____1___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_3_2____2____________.ts",
+"python_ref": "python/tree/lc_109_有序链表转换二叉搜索树/solution_3_2____2____________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.ts",
+"python_ref": "python/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_110_平衡二叉树/solution_1_1_____1_________.ts",
+"python_ref": "python/tree/lc_110_平衡二叉树/solution_1_1_____1_________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1___1.ts",
+"python_ref": "python/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_1____1______.ts",
+"python_ref": "python/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_2_1____1______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_3_2____2_________next___.ts",
+"python_ref": "python/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_3_2____2_________next___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_144_二叉树的前序遍历/solution_2___2.ts",
+"python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_144_二叉树的前序遍历/solution_3___3.ts",
+"python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_144_二叉树的前序遍历/solution_4___4.ts",
+"python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_144_二叉树的前序遍历/solution_5___5.ts",
+"python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_144_二叉树的前序遍历/solution_6___6.ts",
+"python_ref": "python/tree/lc_144_二叉树的前序遍历/solution_6___6.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.ts",
+"python_ref": "python/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_222_完全二叉树的节点个数/solution_2_2____2___.ts",
+"python_ref": "python/tree/lc_222_完全二叉树的节点个数/solution_2_2____2___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_230_二叉搜索树中第_k_小的元素/solution_1_1_____1_____.ts",
+"python_ref": "python/tree/lc_230_二叉搜索树中第_k_小的元素/solution_1_1_____1_____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_257_二叉树的所有路径/solution_1_1_____1_______.ts",
+"python_ref": "python/tree/lc_257_二叉树的所有路径/solution_1_1_____1_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_404_左叶子之和/solution_1_1_____1_______.ts",
+"python_ref": "python/tree/lc_404_左叶子之和/solution_1_1_____1_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_404_左叶子之和/solution_2_2_____2___.ts",
+"python_ref": "python/tree/lc_404_左叶子之和/solution_2_2_____2___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_404_左叶子之和/solution_3_3_____3_______.ts",
+"python_ref": "python/tree/lc_404_左叶子之和/solution_3_3_____3_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_429_n_叉树的层序遍历/solution_2_2_____2_____.ts",
+"python_ref": "python/tree/lc_429_n_叉树的层序遍历/solution_2_2_____2_____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_515_在每个树行中找最大值/solution_2_2_____2_______.ts",
+"python_ref": "python/tree/lc_515_在每个树行中找最大值/solution_2_2_____2_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_543_二叉树的直径/solution_2___2.ts",
+"python_ref": "python/tree/lc_543_二叉树的直径/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_617_合并二叉树/solution_1_1_____1_______.ts",
+"python_ref": "python/tree/lc_617_合并二叉树/solution_1_1_____1_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.ts",
+"python_ref": "python/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_637_二叉树的层平均值/solution_2_2_____2_______.ts",
+"python_ref": "python/tree/lc_637_二叉树的层平均值/solution_2_2_____2_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_701_二叉搜索树中的插入操作/solution_1_1_____1___.ts",
+"python_ref": "python/tree/lc_701_二叉搜索树中的插入操作/solution_1_1_____1___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/tree/lc_701_二叉搜索树中的插入操作/solution_2_2_____2___.ts",
+"python_ref": "python/tree/lc_701_二叉搜索树中的插入操作/solution_2_2_____2___.py",
+"lang": "ts"
+}
+]
+}

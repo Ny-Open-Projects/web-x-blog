@@ -1,0 +1,669 @@
+{
+ "scanned": 11019,
+ "findings": {
+  "c/heap/lc_295_数据流的中位数/solution_1_1_____1_____.c": [
+   [
+    "R5-浮点相等",
+    "solution_1_1_____1_____.c: != 3.0"
+   ]
+  ],
+  "c/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.c": [
+   [
+    "R5-浮点相等",
+    "solution_2_2_____2_____-___.c: != 3.0"
+   ]
+  ],
+  "c/heap/lc_295_数据流的中位数/solution_3_3_____3___________.c": [
+   [
+    "R5-浮点相等",
+    "solution_3_3_____3___________.c: != 3.0"
+   ]
+  ],
+  "c/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_3___3.c": [
+   [
+    "R5-浮点相等",
+    "solution_3___3.c: != 0.0"
+   ]
+  ],
+  "cpp/heap/lc_295_数据流的中位数/solution_1_1_____1_____.cpp": [
+   [
+    "R5-浮点相等",
+    "solution_1_1_____1_____.cpp: == 3.0"
+   ]
+  ],
+  "cpp/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.cpp": [
+   [
+    "R5-浮点相等",
+    "solution_2_2_____2_____-___.cpp: == 3.0"
+   ]
+  ],
+  "cpp/heap/lc_295_数据流的中位数/solution_3_3_____3___________.cpp": [
+   [
+    "R5-浮点相等",
+    "solution_3_3_____3___________.cpp: == 3.0"
+   ]
+  ],
+  "cpp/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_3___3.cpp": [
+   [
+    "R5-浮点相等",
+    "solution_3___3.cpp: != 0.0"
+   ]
+  ],
+  "dart/heap/lc_295_数据流的中位数/solution_1_1_____1_____.dart": [
+   [
+    "R5-浮点相等",
+    "solution_1_1_____1_____.dart: != 3.0"
+   ]
+  ],
+  "dart/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.dart": [
+   [
+    "R5-浮点相等",
+    "solution_2_2_____2_____-___.dart: != 3.0"
+   ]
+  ],
+  "dart/heap/lc_295_数据流的中位数/solution_3_3_____3___________.dart": [
+   [
+    "R5-浮点相等",
+    "solution_3_3_____3___________.dart: != 3.0"
+   ]
+  ],
+  "dart/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_3___3.dart": [
+   [
+    "R5-浮点相等",
+    "solution_3___3.dart: != 0.0"
+   ]
+  ],
+  "java/heap/lc_295_数据流的中位数/solution_1_1_____1_____.java": [
+   [
+    "R5-浮点相等",
+    "solution_1_1_____1_____.java: != 3.0"
+   ]
+  ],
+  "java/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.java": [
+   [
+    "R5-浮点相等",
+    "solution_2_2_____2_____-___.java: != 3.0"
+   ]
+  ],
+  "java/heap/lc_295_数据流的中位数/solution_3_3_____3___________.java": [
+   [
+    "R5-浮点相等",
+    "solution_3_3_____3___________.java: != 3.0"
+   ]
+  ],
+  "java/heap/lc_502_ipo/solution_1_主解法.java": [
+   [
+    "R1-比较器溢出",
+    "solution_1_主解法.java: (a, b) -> b - a"
+   ]
+  ],
+  "lua/hash/lc_76_最小覆盖子串/solution_1___1.lua": [
+   [
+    "R3-lua pairs",
+    "solution_1___1.lua: pairs(target) 疑似顺序数组"
+   ]
+  ],
+  "lua/hash/lc_76_最小覆盖子串/solution_2___2.lua": [
+   [
+    "R3-lua pairs",
+    "solution_2___2.lua: pairs(target) 疑似顺序数组"
+   ]
+  ],
+  "lua/hash/lc_76_最小覆盖子串/solution_3___3.lua": [
+   [
+    "R3-lua pairs",
+    "solution_3___3.lua: pairs(target) 疑似顺序数组"
+   ]
+  ],
+  "lua/heap/lc_295_数据流的中位数/solution_1_1_____1_____.lua": [
+   [
+    "R5-浮点相等",
+    "solution_1_1_____1_____.lua: == 1.5"
+   ]
+  ],
+  "lua/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.lua": [
+   [
+    "R5-浮点相等",
+    "solution_2_2_____2_____-___.lua: == 1.5"
+   ]
+  ],
+  "lua/heap/lc_295_数据流的中位数/solution_3_3_____3___________.lua": [
+   [
+    "R5-浮点相等",
+    "solution_3_3_____3___________.lua: == 1.5"
+   ]
+  ],
+  "lua/matrix/lc_1329_将矩阵按对角线排序/solution_1_1_____1___.lua": [
+   [
+    "R3-lua pairs",
+    "solution_1_1_____1___.lua: pairs(diags) 疑似顺序数组"
+   ]
+  ],
+  "lua/matrix/lc_1329_将矩阵按对角线排序/solution_2_2_____2____.lua": [
+   [
+    "R3-lua pairs",
+    "solution_2_2_____2____.lua: pairs(diags) 疑似顺序数组"
+   ]
+  ],
+  "lua/string/lc_567_字符串的排列/solution_1_1_____1_____.lua": [
+   [
+    "R3-lua pairs",
+    "solution_1_1_____1_____.lua: pairs(s2c) 疑似顺序数组"
+   ]
+  ],
+  "lua/string/lc_567_字符串的排列/solution_2_2_____2_______.lua": [
+   [
+    "R3-lua pairs",
+    "solution_2_2_____2_______.lua: pairs(s2c) 疑似顺序数组"
+   ]
+  ],
+  "lua/string/lc_567_字符串的排列/solution_3_3_____3____.lua": [
+   [
+    "R3-lua pairs",
+    "solution_3_3_____3____.lua: pairs(s2c) 疑似顺序数组"
+   ]
+  ],
+  "r/dp/lc_1143_最长公共子序列/solution_1_1_____1______.R": [
+   [
+    "R4-R降序",
+    "solution_1_1_____1______.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1_1_____1______.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_115_不同的子序列/solution_1___1.R": [
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:m 无守卫"
+   ]
+  ],
+  "r/dp/lc_115_不同的子序列/solution_2_2_____2_________.R": [
+   [
+    "R4-R降序",
+    "solution_2_2_____2_________.R: 1:m 无守卫"
+   ]
+  ],
+  "r/dp/lc_115_不同的子序列/solution_3_3_____3_________.R": [
+   [
+    "R4-R降序",
+    "solution_3_3_____3_________.R: 1:m 无守卫"
+   ]
+  ],
+  "r/dp/lc_115_不同的子序列/solution_4_4_____4______.R": [
+   [
+    "R4-R降序",
+    "solution_4_4_____4______.R: 1:m 无守卫"
+   ]
+  ],
+  "r/dp/lc_1494_并行课程_ii/solution_1_1_____1____________.R": [
+   [
+    "R4-R降序",
+    "solution_1_1_____1____________.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.R": [
+   [
+    "R4-R降序",
+    "solution_2_2_____2___________.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_2050_并行课程_iii/solution_1_1_____1______.R": [
+   [
+    "R4-R降序",
+    "solution_1_1_____1______.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_2050_并行课程_iii/solution_2_2_____2__________.R": [
+   [
+    "R4-R降序",
+    "solution_2_2_____2__________.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_322_零钱兑换/solution_1_1_____1_______.R": [
+   [
+    "R4-R降序",
+    "solution_1_1_____1_______.R: 1:amount 无守卫"
+   ]
+  ],
+  "r/dp/lc_322_零钱兑换/solution_2_2_____2______.R": [
+   [
+    "R4-R降序",
+    "solution_2_2_____2______.R: 1:amount 无守卫"
+   ]
+  ],
+  "r/dp/lc_322_零钱兑换/solution_3_3_____3___________.R": [
+   [
+    "R4-R降序",
+    "solution_3_3_____3___________.R: 1:amount 无守卫"
+   ]
+  ],
+  "r/dp/lc_583_两个字符串的删除操作/solution_1_1_____1_________.R": [
+   [
+    "R4-R降序",
+    "solution_1_1_____1_________.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1_1_____1_________.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_583_两个字符串的删除操作/solution_2_2_____2______.R": [
+   [
+    "R4-R降序",
+    "solution_2_2_____2______.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_2_2_____2______.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_63_不同路径_ii/solution_1___1.R": [
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_63_不同路径_ii/solution_2___2.R": [
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_63_不同路径_ii/solution_3___3.R": [
+   [
+    "R4-R降序",
+    "solution_3___3.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_3___3.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_63_不同路径_ii/solution_4___4.R": [
+   [
+    "R4-R降序",
+    "solution_4___4.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_4___4.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_63_不同路径_ii/solution_5___5.R": [
+   [
+    "R4-R降序",
+    "solution_5___5.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_5___5.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_63_不同路径_ii/solution_6___6.R": [
+   [
+    "R4-R降序",
+    "solution_6___6.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_6___6.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_72_编辑距离/solution_1_1_____1______.R": [
+   [
+    "R4-R降序",
+    "solution_1_1_____1______.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1_1_____1______.R: 1:n 无守卫"
+   ]
+  ],
+  "r/dp/lc_72_编辑距离/solution_2_2_____2__________.R": [
+   [
+    "R4-R降序",
+    "solution_2_2_____2__________.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_2_2_____2__________.R: 1:n 无守卫"
+   ]
+  ],
+  "r/heap/lc_295_数据流的中位数/solution_1_1_____1_____.R": [
+   [
+    "R5-浮点相等",
+    "solution_1_1_____1_____.R: == 1.5"
+   ]
+  ],
+  "r/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.R": [
+   [
+    "R5-浮点相等",
+    "solution_2_2_____2_____-___.R: == 1.5"
+   ]
+  ],
+  "r/heap/lc_295_数据流的中位数/solution_3_3_____3___________.R": [
+   [
+    "R5-浮点相等",
+    "solution_3_3_____3___________.R: == 1.5"
+   ]
+  ],
+  "r/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_1___1.R": [
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:length 无守卫"
+   ]
+  ],
+  "r/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_2___2.R": [
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:length 无守卫"
+   ]
+  ],
+  "r/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_3___3.R": [
+   [
+    "R4-R降序",
+    "solution_3___3.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_5___5.R": [
+   [
+    "R4-R降序",
+    "solution_5___5.R: 1:length 无守卫"
+   ]
+  ],
+  "r/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_7___7.R": [
+   [
+    "R4-R降序",
+    "solution_7___7.R: 1:length 无守卫"
+   ]
+  ],
+  "r/notes/lc_107431726_最大红矩形分析/solution_1___1.R": [
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:n 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:n 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:m 无守卫"
+   ]
+  ],
+  "r/notes/lc_107431726_最大红矩形分析/solution_2___2.R": [
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:n 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:n 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:m 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:m 无守卫"
+   ]
+  ],
+  "r/notes/lc_107431726_最大红矩形分析/solution_3___3.R": [
+   [
+    "R4-R降序",
+    "solution_3___3.R: 1:n 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_3___3.R: 1:m 无守卫"
+   ]
+  ],
+  "r/notes/lc_107431726_最大红矩形分析/solution_4___4.R": [
+   [
+    "R4-R降序",
+    "solution_4___4.R: 1:n 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_4___4.R: 1:m 无守卫"
+   ]
+  ],
+  "r/notes/lc_107431726_最大红矩形分析/solution_5___5.R": [
+   [
+    "R4-R降序",
+    "solution_5___5.R: 1:n 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_5___5.R: 1:m 无守卫"
+   ]
+  ],
+  "r/notes/lc_107490876_计算思维之分书和八皇后问题/solution_3___3.R": [
+   [
+    "R4-R降序",
+    "solution_3___3.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_107490876_计算思维之分书和八皇后问题/solution_4___4.R": [
+   [
+    "R4-R降序",
+    "solution_4___4.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_1___1.R": [
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_2___2.R": [
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_3___3.R": [
+   [
+    "R4-R降序",
+    "solution_3___3.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_10___10.R": [
+   [
+    "R4-R降序",
+    "solution_10___10.R: 1:rn 无守卫"
+   ]
+  ],
+  "r/notes/lc_107868749_贪心策略之matrixsorting_pfc_coding_huffmantre/solution_1_主解法.R": [
+   [
+    "R4-R降序",
+    "solution_1_主解法.R: 1:cols 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1_主解法.R: 1:rows 无守卫"
+   ],
+   [
+    "R4-R降序",
+    "solution_1_主解法.R: 1:rows 无守卫"
+   ]
+  ],
+  "r/notes/lc_108717090_减治策略之详解dijkstra算法/solution_1___1.R": [
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_1___1.R": [
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_2___2.R": [
+   [
+    "R4-R降序",
+    "solution_2___2.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_5___5.R": [
+   [
+    "R4-R降序",
+    "solution_5___5.R: 1:n 无守卫"
+   ]
+  ],
+  "r/notes/lc_113951689_动态规划之lcs_0/solution_1_最长公共子序列.R": [
+   [
+    "R4-R降序",
+    "solution_1_最长公共子序列.R: 1:nchar 无守卫"
+   ]
+  ],
+  "r/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_1___1.R": [
+   [
+    "R4-R降序",
+    "solution_1___1.R: 1:size 无守卫"
+   ]
+  ],
+  "r/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_2_1____1______.R": [
+   [
+    "R4-R降序",
+    "solution_2_1____1______.R: 1:size 无守卫"
+   ]
+  ],
+  "r/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_2_1_____1_____.R": [
+   [
+    "R4-R降序",
+    "solution_2_1_____1_____.R: 1:size 无守卫"
+   ]
+  ],
+  "r/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_3_2____2_________next___.R": [
+   [
+    "R4-R降序",
+    "solution_3_2____2_________next___.R: 1:size 无守卫"
+   ]
+  ],
+  "r/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_3_2_____2________next___.R": [
+   [
+    "R4-R降序",
+    "solution_3_2_____2________next___.R: 1:size 无守卫"
+   ]
+  ],
+  "rust/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_3___3.rs": [
+   [
+    "R5-浮点相等",
+    "solution_3___3.rs: != 0.0"
+   ]
+  ],
+  "ts/backtrack/lc_47_全排列_ii/solution_1_1_____1_____.ts": [
+   [
+    "R11-sort无比较器",
+    "solution_1_1_____1_____.ts: .sort()"
+   ]
+  ],
+  "ts/backtrack/lc_47_全排列_ii/solution_2_2_____2_____-___.ts": [
+   [
+    "R11-sort无比较器",
+    "solution_2_2_____2_____-___.ts: .sort()"
+   ]
+  ],
+  "ts/backtrack/lc_77_组合/solution_1_1_____1___________.ts": [
+   [
+    "R11-sort无比较器",
+    "solution_1_1_____1___________.ts: .sort()"
+   ]
+  ],
+  "ts/backtrack/lc_77_组合/solution_2_2_____2__________________.ts": [
+   [
+    "R11-sort无比较器",
+    "solution_2_2_____2__________________.ts: .sort()"
+   ]
+  ],
+  "ts/backtrack/lc_77_组合/solution_3_3_____3_______.ts": [
+   [
+    "R11-sort无比较器",
+    "solution_3_3_____3_______.ts: .sort()"
+   ]
+  ],
+  "ts/binary_search/lc_374_猜数字大小/solution_1___1.ts": [
+   [
+    "R6-引用比较",
+    "solution_1___1.ts: res === 0)"
+   ]
+  ],
+  "ts/binary_search/lc_374_猜数字大小/solution_2___2.ts": [
+   [
+    "R6-引用比较",
+    "solution_2___2.ts: res === 0)"
+   ]
+  ],
+  "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_2___2.ts": [
+   [
+    "R11-sort无比较器",
+    "solution_2___2.ts: .sort()"
+   ]
+  ],
+  "zig/heap/lc_295_数据流的中位数/solution_1_1_____1_____.zig": [
+   [
+    "R5-浮点相等",
+    "solution_1_1_____1_____.zig: != 3.0"
+   ]
+  ],
+  "zig/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.zig": [
+   [
+    "R5-浮点相等",
+    "solution_2_2_____2_____-___.zig: != 3.0"
+   ]
+  ],
+  "zig/heap/lc_295_数据流的中位数/solution_3_3_____3___________.zig": [
+   [
+    "R5-浮点相等",
+    "solution_3_3_____3___________.zig: != 3.0"
+   ]
+  ],
+  "zig/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_3___3.zig": [
+   [
+    "R5-浮点相等",
+    "solution_3___3.zig: != 0.0"
+   ]
+  ]
+ },
+ "summary": {
+  "R5-浮点相等": 26,
+  "R1-比较器溢出": 1,
+  "R3-lua pairs": 8,
+  "R4-R降序": 75,
+  "R11-sort无比较器": 6,
+  "R6-引用比较": 2
+ }
+}

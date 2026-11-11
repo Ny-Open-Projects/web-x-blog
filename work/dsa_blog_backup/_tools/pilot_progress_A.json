@@ -1,0 +1,590 @@
+[
+  {
+    "rel": "go/dp/lc_121_买卖股票的最佳时机/solution_1_1_____1____.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_121_买卖股票的最佳时机/solution_2_2_____2______.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_121_买卖股票的最佳时机/solution_3_3_____3_________.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_121_买卖股票的最佳时机/solution_4_4_____4______.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_121_买卖股票的最佳时机/solution_5_5_____5______.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_121_买卖股票的最佳时机/solution_6_6_____6_________.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_10___10.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_11___11.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_1___1.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_2___2.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_3___3.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_4___4.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_5___5.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_6___6.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_7___7.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_8___8.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_198_打家劫舍/solution_9___9.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_53_最大子数组和/solution_1_1_____1______.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_53_最大子数组和/solution_2_2____2______.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_53_最大子数组和/solution_3_3____3____.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_70_爬楼梯/solution_1___1.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_70_爬楼梯/solution_2___2.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_70_爬楼梯/solution_3___3.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_70_爬楼梯/solution_4___4.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_70_爬楼梯/solution_5___5.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_70_爬楼梯/solution_6___6.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_70_爬楼梯/solution_7___7.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/dp/lc_70_爬楼梯/solution_8___8.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/hash/lc_1_两数之和/solution_1___1.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/hash/lc_1_两数之和/solution_2___2.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/hash/lc_1_两数之和/solution_3___3.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/hash/lc_1_两数之和/solution_4___4.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/hash/lc_1_两数之和/solution_5___5.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/hash/lc_1_两数之和/solution_6___6.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_10___10.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_11___11.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_12___12.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_13___13.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_14___14.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_15___15.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_1___1.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_2___2.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_3___3.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_4___4.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_5___5.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_6___6.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_7___7.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_8___8.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "go/sort/lc_41_缺失的第一个正数/solution_9___9.go",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_121_买卖股票的最佳时机/solution_1_1_____1____.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_121_买卖股票的最佳时机/solution_2_2_____2______.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_121_买卖股票的最佳时机/solution_3_3_____3_________.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_121_买卖股票的最佳时机/solution_4_4_____4______.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_121_买卖股票的最佳时机/solution_5_5_____5______.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_121_买卖股票的最佳时机/solution_6_6_____6_________.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_10___10.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_11___11.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_1___1.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_2___2.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_3___3.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_4___4.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_5___5.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_6___6.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_7___7.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_8___8.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_198_打家劫舍/solution_9___9.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_53_最大子数组和/solution_1_1_____1______.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_53_最大子数组和/solution_2_2____2______.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_53_最大子数组和/solution_3_3____3____.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_70_爬楼梯/solution_1___1.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_70_爬楼梯/solution_2___2.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_70_爬楼梯/solution_3___3.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_70_爬楼梯/solution_4___4.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_70_爬楼梯/solution_5___5.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_70_爬楼梯/solution_6___6.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_70_爬楼梯/solution_7___7.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/dp/lc_70_爬楼梯/solution_8___8.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/hash/lc_1_两数之和/solution_1___1.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/hash/lc_1_两数之和/solution_2___2.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/hash/lc_1_两数之和/solution_3___3.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/hash/lc_1_两数之和/solution_4___4.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/hash/lc_1_两数之和/solution_5___5.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/hash/lc_1_两数之和/solution_6___6.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_10___10.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_11___11.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_12___12.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_13___13.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_14___14.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_15___15.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_1___1.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_2___2.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_3___3.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_4___4.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_5___5.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_6___6.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_7___7.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_8___8.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "java/sort/lc_41_缺失的第一个正数/solution_9___9.java",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_121_买卖股票的最佳时机/solution_1_1_____1____.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_121_买卖股票的最佳时机/solution_2_2_____2______.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_121_买卖股票的最佳时机/solution_3_3_____3_________.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_121_买卖股票的最佳时机/solution_4_4_____4______.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_121_买卖股票的最佳时机/solution_5_5_____5______.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_121_买卖股票的最佳时机/solution_6_6_____6_________.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_10___10.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_11___11.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_1___1.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_2___2.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_3___3.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_4___4.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_5___5.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_6___6.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_7___7.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_8___8.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_198_打家劫舍/solution_9___9.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_53_最大子数组和/solution_1_1_____1______.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_53_最大子数组和/solution_2_2____2______.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_53_最大子数组和/solution_3_3____3____.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_70_爬楼梯/solution_1___1.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_70_爬楼梯/solution_2___2.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_70_爬楼梯/solution_3___3.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_70_爬楼梯/solution_4___4.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_70_爬楼梯/solution_5___5.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_70_爬楼梯/solution_6___6.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_70_爬楼梯/solution_7___7.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/dp/lc_70_爬楼梯/solution_8___8.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/hash/lc_1_两数之和/solution_1___1.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/hash/lc_1_两数之和/solution_2___2.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/hash/lc_1_两数之和/solution_3___3.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/hash/lc_1_两数之和/solution_4___4.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/hash/lc_1_两数之和/solution_5___5.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/hash/lc_1_两数之和/solution_6___6.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_10___10.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_11___11.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_12___12.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_13___13.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_14___14.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_15___15.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_1___1.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_2___2.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_3___3.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_4___4.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_5___5.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_6___6.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_7___7.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_8___8.ts",
+    "status": "done_pass"
+  },
+  {
+    "rel": "ts/sort/lc_41_缺失的第一个正数/solution_9___9.ts",
+    "status": "done_pass"
+  }
+]

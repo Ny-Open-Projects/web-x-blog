@@ -1,0 +1,80 @@
+{"rel":"java/notes/lc_134053461_侏儒排序/solution_2___2.java","status":"done_pass","note":"gnome_sort_v2 faithful, array eq"}
+{"rel":"java/notes/lc_134053461_侏儒排序/solution_3___3.java","status":"done_pass","note":"gnome_sort_v1 faithful"}
+{"rel":"java/notes/lc_134053461_侏儒排序/solution_4___4.java","status":"done_pass","note":"gnome_sort_v2 faithful"}
+{"rel":"java/notes/lc_134053461_侏儒排序/solution_5___5.java","status":"done_pass","note":"gnome_sort_v2 faithful"}
+{"rel":"java/notes/lc_134053461_侏儒排序/solution_6___6.java","status":"done_pass","note":"gnome_sort_v1 faithful"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_1___1.java","status":"done_pass","note":"quick_sort_v1 list-based"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_2___2.java","status":"done_pass","note":"Lomuto partition quickSort"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_3___3.java","status":"done_pass","note":"median-of-3 partition"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_4___4.java","status":"done_pass","note":"quick_sort_v1 list-based"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_5___5.java","status":"done_pass","note":"Hoare partition quick_sort_v2"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_6___6.java","status":"done_pass","note":"median-of-3 partition"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_7___7.java","status":"done_pass","note":"quick_sort_v1 list-based"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_8___8.java","status":"done_pass","note":"Hoare partition quick_sort_v2"}
+{"rel":"java/notes/lc_134073792_快速排序/solution_9___9.java","status":"done_pass","note":"median-of-3 partition"}
+{"rel":"java/notes/lc_134085384_选择排序/solution_1___1.java","status":"done_pass","note":"selection sort returns array"}
+{"rel":"java/notes/lc_134085384_选择排序/solution_2___2.java","status":"done_pass","note":"selection sort in-place"}
+{"rel":"java/notes/lc_134085384_选择排序/solution_3___3.java","status":"done_pass","note":"selection sort copy"}
+{"rel":"java/notes/lc_134085409_堆排序/solution_1_主解法.java","status":"done_pass","note":"heap_sort + MaxHeap pops"}
+{"rel":"java/notes/lc_134097112_实现_lru_缓存算法功能/solution_1___1.java","status":"done_pass","note":"LRU dict-based"}
+{"rel":"java/notes/lc_134097112_实现_lru_缓存算法功能/solution_2___2.java","status":"done_pass","note":"LRU LinkedHashMap"}
+{"rel":"java/notes/lc_134097112_实现_lru_缓存算法功能/solution_3___3.java","status":"done_pass","note":"LRU doubly-linked list"}
+{"rel":"java/notes/lc_134150438_希尔排序/solution_1___1.java","status":"done_pass","note":"shell sort"}
+{"rel":"java/notes/lc_134150438_希尔排序/solution_2___2.java","status":"done_pass","note":"shell sort"}
+{"rel":"java/notes/lc_134150438_希尔排序/solution_3___3.java","status":"done_pass","note":"shell sort"}
+{"rel":"java/notes/lc_134191965_基数排序/solution_3_1_____1______.java","status":"done_pass","note":"radix sort LSD"}
+{"rel":"java/notes/lc_134191965_基数排序/solution_4_1_____1______.java","status":"done_pass","note":"radix sort LSD"}
+{"rel":"java/notes/lc_134217002_顺序查找/solution_1___1.java","status":"done_pass","note":"sequential search"}
+{"rel":"java/notes/lc_134217002_顺序查找/solution_2___2.java","status":"done_pass","note":"sequential search"}
+{"rel":"java/notes/lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列/solution_1_主解法.java","status":"done_pass","note":"verify postorder BST"}
+{"rel":"java/notes/lc_98685358_数据结构与算法笔记_农夫过河问题python3实现/solution_1___1.java","status":"done_pass","note":"BFS farmer crossing"}
+{"rel":"java/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_1___1.java","status":"done_pass","note":"two_sum/max_sub_array/rotate"}
+{"rel":"java/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_2___2.java","status":"done_pass","note":"two_sum/max_sub_array/rotate"}
+{"rel":"java/other/lc_1797_设计一个验证系统/solution_1_主解法.java","status":"done_pass","note":"AuthenticationManager"}
+{"rel":"java/other/lc_202_快乐数/solution_1___1.java","status":"done_pass","note":"bitSquareSum helper"}
+{"rel":"java/other/lc_202_快乐数/solution_2_2_____2___.java","status":"done_pass","note":"getNum isHappy"}
+{"rel":"java/other/lc_217_存在重复元素/solution_1_1_____1___.java","status":"done_pass","note":"containsDuplicate set"}
+{"rel":"java/other/lc_217_存在重复元素/solution_2_2_____2____.java","status":"done_pass","note":"containsDuplicate sort"}
+{"rel":"java/other/lc_292_nim_游戏/solution_1_1_____1_____.java","status":"done_pass","note":"canWinNim n%4!=0"}
+{"rel":"java/other/lc_326_3_的幂/solution_1_1_____1____.java","status":"done_pass","note":"isPowerOfThree loop"}
+{"rel":"java/other/lc_326_3_的幂/solution_2_2_____2_________3______.java","status":"done_pass","note":"isPowerOfThree max%n"}
+{"rel":"java/queue/lc_933_最近的请求次数/solution_1___1.java","status":"done_pass","note":"RecentCounter deque 4 pings"}
+{"rel":"java/queue/lc_933_最近的请求次数/solution_2___2.java","status":"done_pass","note":"RecentCounter array+front 3 pings"}
+{"rel":"java/queue/lc_933_最近的请求次数/solution_3___3.java","status":"done_pass","note":"RecentCounter deque 3 pings"}
+{"rel":"java/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_1_1_____1___.java","status":"done_pass","note":"onesCount helper"}
+{"rel":"java/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_2_2_____2______.java","status":"done_pass","note":"sortByBits"}
+{"rel":"java/sort/lc_15_三数之和/solution_1_1_____1_________.java","status":"done_pass","note":"threeSum first/second"}
+{"rel":"java/sort/lc_15_三数之和/solution_2_2_____2_________.java","status":"done_pass","note":"threeSum two-pointer"}
+{"rel":"java/sort/lc_18_四数之和/solution_1_1_____1__________.java","status":"done_pass","note":"fourSum two-loop"}
+{"rel":"java/sort/lc_18_四数之和/solution_2_2_____2________.java","status":"done_pass","note":"fourSum dfs"}
+{"rel":"java/sort/lc_922_按奇偶排序数组_ii/solution_1___1.java","status":"done_pass","note":"parity sort-first"}
+{"rel":"java/sort/lc_922_按奇偶排序数组_ii/solution_2___2.java","status":"done_pass","note":"parity place-original"}
+{"rel":"java/sort/lc_922_按奇偶排序数组_ii/solution_4___4.java","status":"done_pass","note":"parity in-place swap"}
+{"rel":"java/sort/lc_922_按奇偶排序数组_ii/solution_5___5.java","status":"done_pass","note":"parity in-place swap"}
+{"rel":"java/sort/lc_922_按奇偶排序数组_ii/solution_6___6.java","status":"done_pass","note":"parity in-place swap"}
+{"rel":"java/sort/lc_922_按奇偶排序数组_ii/solution_7___7.java","status":"done_pass","note":"parity in-place swap"}
+{"rel":"java/sort/lc_922_按奇偶排序数组_ii/solution_8___8.java","status":"done_pass","note":"parity in-place swap"}
+{"rel":"java/sort/lc_922_按奇偶排序数组_ii/solution_9___9.java","status":"done_pass","note":"parity two-pointer new array"}
+{"rel":"java/sort/lc_937_重新排列日志文件/solution_1_1_____1______.java","status":"done_pass","note":"reorder log files"}
+{"rel": "java/stack/lc_1047_删除字符串中的所有相邻重复项/solution_1_1_____1___.java", "status": "done_pass", "note": "stack removeDuplicates"}
+{"rel": "java/stack/lc_1047_删除字符串中的所有相邻重复项/solution_2_2_____2____.java", "status": "done_pass", "note": "stack removeDuplicates continue"}
+{"rel": "java/stack/lc_1472_设计浏览器历史记录/solution_1_主解法.java", "status": "done_pass", "note": "BrowserHistory"}
+{"rel": "java/stack/lc_155_最小栈/solution_1_1_____1____.java", "status": "done_pass", "note": "MinStack inf seed"}
+{"rel": "java/stack/lc_155_最小栈/solution_2_2_____2_______.java", "status": "done_pass", "note": "MinStack last()"}
+{"rel": "java/stack/lc_225_用队列实现栈/solution_1_1_____1______.java", "status": "done_pass", "note": "MyStack two-deque"}
+{"rel": "java/stack/lc_225_用队列实现栈/solution_2_2_____2______.java", "status": "done_pass", "note": "MyStack single-deque rotate"}
+{"rel": "java/stack/lc_232_用栈实现队列/solution_1_1_____1____.java", "status": "done_pass", "note": "MyQueue"}
+{"rel": "java/stack/lc_27_移除元素/solution_1___1.java", "status": "done_pass", "note": "removeElement left pointer"}
+{"rel": "java/stack/lc_27_移除元素/solution_2_1_____1____.java", "status": "done_pass", "note": "removeElement right pointer"}
+{"rel": "java/stack/lc_27_移除元素/solution_3_2_____2______.java", "status": "done_pass", "note": "removeElement two-ends"}
+{"rel": "java/stack/lc_3100_换水问题_ii/solution_1___1.java", "status": "done_pass", "note": "maxBottlesDrunk loop"}
+{"rel": "java/stack/lc_3100_换水问题_ii/solution_2___2.java", "status": "done_pass", "note": "maxBottlesDrunk flag"}
+{"rel": "java/stack/lc_341_扁平化嵌套列表迭代器/solution_1___1.java", "status": "done_pass", "note": "stub returns null"}
+{"rel": "java/stack/lc_341_扁平化嵌套列表迭代器/solution_2_1_____1_______.java", "status": "done_pass", "note": "NestedIterator dfs"}
+{"rel": "java/stack/lc_341_扁平化嵌套列表迭代器/solution_3_2_____2__.java", "status": "done_pass", "note": "NestedIterator lazy stack"}
+{"rel": "java/stack/lc_341_扁平化嵌套列表迭代器/solution_4_3_____3_____.java", "status": "done_pass", "note": "flatArray stack"}
+{"rel": "java/stack/lc_503_下一个更大元素_ii/solution_1_主解法.java", "status": "done_pass", "note": "nextGreaterElements circular"}
+{"rel": "java/stack/lc_556_下一个更大元素_iii/solution_1_1_____1______.java", "status": "done_pass", "note": "nextGreaterElement III string"}
+{"rel": "java/stack/lc_556_下一个更大元素_iii/solution_2_2_____2___.java", "status": "done_pass", "note": "nextGreaterElement III math"}
+{"rel": "java/stack/lc_641_设计循环双端队列/solution_1_1_____1___.java", "status": "done_pass", "note": "MyCircularDeque array"}
+{"rel": "java/stack/lc_641_设计循环双端队列/solution_2_2_____2___.java", "status": "done_pass", "note": "MyCircularDeque list"}

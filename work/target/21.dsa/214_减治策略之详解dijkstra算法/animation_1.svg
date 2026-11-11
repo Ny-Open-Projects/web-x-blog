@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" font-family="system-ui,sans-serif">
+<rect width="560" height="300" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">方案1（优先队列实现单源最短路） · 方案 1（自动循环）</text>
+<g style="animation: st0 9.799999999999999s linear infinite both">
+<rect x="72" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="146" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="220" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="294" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="368" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="442" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<text x="105" y="162" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">front</text>
+<text x="105" y="86" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">rear</text>
+<text x="280" y="245" text-anchor="middle" fill="#94A3B8" font-size="14">空队列，front = rear = 0</text>
+</g>
+<g style="animation: st1 9.799999999999999s linear infinite both">
+<rect x="72" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#FACC15" stroke-width="2"/>
+<text x="105" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">10</text>
+<rect x="146" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="220" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="294" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="368" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="442" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<text x="105" y="162" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">front</text>
+<text x="179" y="86" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">rear</text>
+<text x="280" y="245" text-anchor="middle" fill="#94A3B8" font-size="14">enqueue(10) → rear 后移</text>
+</g>
+<g style="animation: st2 9.799999999999999s linear infinite both">
+<rect x="72" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#34D399" stroke-width="2"/>
+<text x="105" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">10</text>
+<rect x="146" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#FACC15" stroke-width="2"/>
+<text x="179" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">20</text>
+<rect x="220" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="294" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="368" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="442" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<text x="105" y="162" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">front</text>
+<text x="253" y="86" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">rear</text>
+<text x="280" y="245" text-anchor="middle" fill="#94A3B8" font-size="14">enqueue(20) → rear 后移</text>
+</g>
+<g style="animation: st3 9.799999999999999s linear infinite both">
+<rect x="72" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#34D399" stroke-width="2"/>
+<text x="105" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">10</text>
+<rect x="146" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#334155" stroke-width="2"/>
+<text x="179" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">20</text>
+<rect x="220" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#FACC15" stroke-width="2"/>
+<text x="253" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">30</text>
+<rect x="294" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="368" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="442" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<text x="105" y="162" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">front</text>
+<text x="327" y="86" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">rear</text>
+<text x="280" y="245" text-anchor="middle" fill="#94A3B8" font-size="14">enqueue(30) → rear 后移</text>
+</g>
+<g style="animation: st4 9.799999999999999s linear infinite both">
+<rect x="72" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="146" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#34D399" stroke-width="2"/>
+<text x="179" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">20</text>
+<rect x="220" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#FACC15" stroke-width="2"/>
+<text x="253" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">30</text>
+<rect x="294" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="368" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="442" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<text x="179" y="162" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">front</text>
+<text x="327" y="86" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">rear</text>
+<text x="280" y="245" text-anchor="middle" fill="#94A3B8" font-size="14">dequeue() → 10，front 后移</text>
+</g>
+<g style="animation: st5 9.799999999999999s linear infinite both">
+<rect x="72" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="146" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="220" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#FACC15" stroke-width="2"/>
+<text x="253" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">30</text>
+<rect x="294" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="368" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="442" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<text x="253" y="162" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">front</text>
+<text x="327" y="86" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">rear</text>
+<text x="280" y="245" text-anchor="middle" fill="#94A3B8" font-size="14">dequeue() → 20，front 后移</text>
+</g>
+<g style="animation: st6 9.799999999999999s linear infinite both">
+<rect x="72" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="146" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="220" y="96" width="66" height="44" rx="8" fill="#4A90D9" stroke="#FACC15" stroke-width="2"/>
+<text x="253" y="125" text-anchor="middle" fill="#F1F5F9" font-size="17" font-weight="700">30</text>
+<rect x="294" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="368" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<rect x="442" y="96" width="66" height="44" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+<text x="253" y="162" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">front</text>
+<text x="327" y="86" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">rear</text>
+<text x="280" y="245" text-anchor="middle" fill="#94A3B8" font-size="14">队列剩余元素：先入先出（FIFO）</text>
+</g>
+<style>
+.st0 {opacity:0} @keyframes st0 {0%{opacity:0}0.00%{opacity:0}1.71%{opacity:1}12.57%{opacity:1}14.29%{opacity:0}100%{opacity:0}}
+.st1 {opacity:0} @keyframes st1 {0%{opacity:0}14.29%{opacity:0}16.00%{opacity:1}26.86%{opacity:1}28.57%{opacity:0}100%{opacity:0}}
+.st2 {opacity:0} @keyframes st2 {0%{opacity:0}28.57%{opacity:0}30.29%{opacity:1}41.14%{opacity:1}42.86%{opacity:0}100%{opacity:0}}
+.st3 {opacity:0} @keyframes st3 {0%{opacity:0}42.86%{opacity:0}44.57%{opacity:1}55.43%{opacity:1}57.14%{opacity:0}100%{opacity:0}}
+.st4 {opacity:0} @keyframes st4 {0%{opacity:0}57.14%{opacity:0}58.86%{opacity:1}69.71%{opacity:1}71.43%{opacity:0}100%{opacity:0}}
+.st5 {opacity:0} @keyframes st5 {0%{opacity:0}71.43%{opacity:0}73.14%{opacity:1}84.00%{opacity:1}85.71%{opacity:0}100%{opacity:0}}
+.st6 {opacity:0} @keyframes st6 {0%{opacity:0}85.71%{opacity:0}87.43%{opacity:1}98.29%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style>
+</svg>

@@ -1,0 +1,80 @@
+{"rel":"go/stack/lc_150_逆波兰表达式求值/solution_2_2_____2_______.go","status":"done_pass","note":"evalRPN faithful + 3 cases"}
+{"rel":"go/stack/lc_151_反转字符串中的单词/solution_1_1_____1________.go","status":"done_pass","note":"reverseWords Fields"}
+{"rel":"go/stack/lc_151_反转字符串中的单词/solution_2_2_____2___________.go","status":"done_pass","note":"reverseWords trim/reverse"}
+{"rel":"go/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.go","status":"done_pass","note":"reverseWords insert"}
+{"rel":"go/stack/lc_155_最小栈/solution_1_1_____1____.go","status":"done_pass","note":"MinStack min_stack"}
+{"rel":"go/stack/lc_155_最小栈/solution_2_2_____2_______.go","status":"done_pass","note":"MinStack mins"}
+{"rel":"go/stack/lc_1685_有序数组中差绝对值之和/solution_1_1_____1____.go","status":"done_pass","note":"getSumAbsoluteDifferences v1"}
+{"rel":"go/stack/lc_1685_有序数组中差绝对值之和/solution_2___2.go","status":"done_pass","note":"getSumAbsoluteDifferences v2"}
+{"rel":"go/stack/lc_1685_有序数组中差绝对值之和/solution_3_3_____3___________________.go","status":"done_pass","note":"getSumAbsoluteDifferences v3"}
+{"rel":"go/stack/lc_225_用队列实现栈/solution_1_1_____1______.go","status":"done_pass","note":"MyStack 2 queues"}
+{"rel":"go/stack/lc_225_用队列实现栈/solution_2_2_____2______.go","status":"done_pass","note":"MyStack 1 queue"}
+{"rel":"go/stack/lc_232_用栈实现队列/solution_1_1_____1____.go","status":"done_pass","note":"MyQueue"}
+{"rel":"go/stack/lc_2454_下一个更大元素_iv/solution_1_1_____1___________.go","status":"done_pass","note":"secondGreaterElement pq"}
+{"rel":"go/stack/lc_2454_下一个更大元素_iv/solution_2_2_____2_____.go","status":"done_pass","note":"secondGreaterElement st2 (buggy ref preserved)"}
+{"rel":"go/stack/lc_27_移除元素/solution_1___1.go","status":"done_pass","note":"removeElement two-pointer left"}
+{"rel":"go/stack/lc_27_移除元素/solution_2_1_____1____.go","status":"done_pass","note":"removeElement swap"}
+{"rel":"go/stack/lc_27_移除元素/solution_3_2_____2______.go","status":"done_pass","note":"removeElement both-ends"}
+{"rel":"go/stack/lc_496_下一个更大元素_i/solution_1_主解法.go","status":"done_pass","note":"nextGreaterElement"}
+{"rel":"go/stack/lc_503_下一个更大元素_ii/solution_1_主解法.go","status":"done_pass","note":"nextGreaterElements circular"}
+{"rel":"go/stack/lc_556_下一个更大元素_iii/solution_1_1_____1______.go","status":"done_pass","note":"nextGreaterElement III permutation"}
+{"rel":"go/stack/lc_556_下一个更大元素_iii/solution_2_2_____2___.go","status":"done_pass","note":"nextGreaterElement III math (safe inputs)"}
+{"rel":"go/stack/lc_641_设计循环双端队列/solution_1_1_____1___.go","status":"done_pass","note":"MyCircularDeque array"}
+{"rel":"go/stack/lc_641_设计循环双端队列/solution_2_2_____2___.go","status":"done_pass","note":"MyCircularDeque array v2"}
+{"rel":"go/stack/lc_71_简化路径/solution_2_2_____2__.go","status":"done_pass","note":"simplifyPath"}
+{"rel":"go/stack/lc_739_每日温度/solution_1_1_____1___.go","status":"done_pass","note":"dailyTemperatures bucket"}
+{"rel":"go/stack/lc_739_每日温度/solution_2_2____2____.go","status":"done_pass","note":"dailyTemperatures stack"}
+{"rel":"go/string/lc_2042_检查句子中的数字是否递增/solution_2_2_____2_____.go","status":"done_pass","note":"areNumbersAscending"}
+{"rel":"go/string/lc_20_有效的括号/solution_2___2.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_4___4.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_5___5.go","status":"done_pass","note":"isValid replace"}
+{"rel":"go/string/lc_20_有效的括号/solution_6___6.go","status":"done_pass","note":"isValid odd+stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_7___7.go","status":"done_pass","note":"isValid odd+stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_9___9.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_10___10.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_11___11.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_12___12.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_13___13.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_14___14.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_20_有效的括号/solution_15___15.go","status":"done_pass","note":"isValid stack"}
+{"rel":"go/string/lc_43_字符串相乘/solution_1_1_____1____.go","status":"done_pass","note":"multiply"}
+{"rel":"go/string/lc_43_字符串相乘/solution_2_2_____2____.go","status":"done_pass","note":"multiply"}
+{"rel":"go/string/lc_482_密钥格式化/solution_1_1_____2___.go","status":"done_pass","note":"licenseKeyFormatting"}
+{"rel":"go/string/lc_482_密钥格式化/solution_2_2_____2______.go","status":"done_pass","note":"licenseKeyFormatting"}
+{"rel":"go/string/lc_791_自定义字符串排序/solution_1_1_____1______.go","status":"done_pass","note":"customSortString"}
+{"rel":"go/string/lc_791_自定义字符串排序/solution_2_2_____2_____.go","status":"done_pass","note":"customSortString"}
+{"rel":"go/string/lc_8_字符串转换整数_(atoi)/solution_1_1_____1____.go","status":"done_pass","note":"myAtoi automaton"}
+{"rel":"go/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.go","status":"done_pass","note":"myAtoi strip"}
+{"rel": "go/tree/lc_100_相同的树/solution_2___2.go", "status": "done_pass", "note": "isSameTree BFS queue"}
+{"rel": "go/tree/lc_100_相同的树/solution_4___4.go", "status": "done_pass", "note": "isSameTree BFS queue"}
+{"rel": "go/tree/lc_100_相同的树/solution_6___6.go", "status": "done_pass", "note": "isSameTree BFS queue"}
+{"rel": "go/tree/lc_101_对称二叉树/solution_1___1.go", "status": "done_pass", "note": "isSymmetric recursive mirror"}
+{"rel": "go/tree/lc_101_对称二叉树/solution_2___2.go", "status": "done_pass", "note": "isSymmetric iterative queue"}
+{"rel": "go/tree/lc_101_对称二叉树/solution_3___3.go", "status": "done_pass", "note": "isSymmetric recursive mirror"}
+{"rel": "go/tree/lc_101_对称二叉树/solution_5___5.go", "status": "done_pass", "note": "isSymmetric recursive mirror"}
+{"rel": "go/tree/lc_101_对称二叉树/solution_7___7.go", "status": "done_pass", "note": "isSymmetric recursive mirror"}
+{"rel": "go/tree/lc_102_二叉树的层序遍历/solution_1___1.go", "status": "done_pass", "note": "levelOrder BFS by level index (fixed idx bug in ref)"}
+{"rel": "go/tree/lc_102_二叉树的层序遍历/solution_5_2____2_____BFS______.go", "status": "done_pass", "note": "levelOrder BFS by level size"}
+{"rel": "go/tree/lc_102_二叉树的层序遍历/solution_7_1_____1______BFS_.go", "status": "done_pass", "note": "levelOrder BFS by level size"}
+{"rel": "go/tree/lc_102_二叉树的层序遍历/solution_8_2_____2______BFS______.go", "status": "done_pass", "note": "levelOrder BFS by level size"}
+{"rel": "go/tree/lc_102_二叉树的层序遍历/solution_9_3_____3______BFS____.go", "status": "done_pass", "note": "levelOrder BFS by level size"}
+{"rel": "go/tree/lc_104_二叉树的最大深度/solution_1___1.go", "status": "done_pass", "note": "maxDepth DFS leaf depth"}
+{"rel": "go/tree/lc_104_二叉树的最大深度/solution_4___4.go", "status": "done_pass", "note": "maxDepth recursive 1+max"}
+{"rel": "go/tree/lc_104_二叉树的最大深度/solution_6___6.go", "status": "done_pass", "note": "maxDepth recursive 1+max"}
+{"rel": "go/tree/lc_104_二叉树的最大深度/solution_8___8.go", "status": "done_pass", "note": "maxDepth recursive 1+max"}
+{"rel": "go/tree/lc_104_二叉树的最大深度/solution_9___9.go", "status": "done_pass", "note": "maxDepth recursive 1+max"}
+{"rel": "go/tree/lc_107_二叉树的层序遍历_ii/solution_2_2_____2________.go", "status": "done_pass", "note": "levelOrderBottom DFS+reverse (fixed return None typo)"}
+{"rel": "go/tree/lc_108_将有序数组转换为二叉搜索树/solution_2_2_____2_________________________.go", "status": "done_pass", "note": "sortedArrayToBST mid=(l+r+1)/2"}
+{"rel": "go/tree/lc_108_将有序数组转换为二叉搜索树/solution_3_3_____3________________________.go", "status": "done_pass", "note": "sortedArrayToBST mid=(l+r)/2 (ref random; kept deterministic), inorder=sorted"}
+{"rel": "go/tree/lc_109_有序链表转换二叉搜索树/solution_2_1____1___.go", "status": "done_pass", "note": "sortedListToBST fast/slow median, inorder=sorted"}
+{"rel": "go/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.go", "status": "done_pass", "note": "sortedListToBST fast/slow median, inorder=sorted"}
+{"rel": "go/tree/lc_110_平衡二叉树/solution_1_1_____1_________.go", "status": "done_pass", "note": "isBalanced height check"}
+{"rel": "go/tree/lc_111_二叉树的最小深度/solution_2___2.go", "status": "done_pass", "note": "minDepth BFS (append-then-check order)"}
+{"rel": "go/tree/lc_111_二叉树的最小深度/solution_3___3.go", "status": "done_pass", "note": "minDepth recursive"}
+{"rel": "go/tree/lc_111_二叉树的最小深度/solution_5_2_____2_____BFS______.go", "status": "done_pass", "note": "minDepth BFS"}
+{"rel": "go/tree/lc_111_二叉树的最小深度/solution_6_3_____3____.go", "status": "done_pass", "note": "minDepth BFS"}
+{"rel": "go/tree/lc_111_二叉树的最小深度/solution_7_1_____1_____BFS_.go", "status": "done_pass", "note": "minDepth BFS"}
+{"rel": "go/tree/lc_111_二叉树的最小深度/solution_8_2_____2_____BFS______.go", "status": "done_pass", "note": "minDepth BFS"}
+{"rel": "go/tree/lc_112_路径总和/solution_10_5____5________DFS____.go", "status": "done_pass", "note": "hasPathSum DFS"}
+{"rel": "go/tree/lc_112_路径总和/solution_11_1_____1________DFS_.go", "status": "done_pass", "note": "hasPathSum DFS"}
+{"rel": "go/tree/lc_112_路径总和/solution_13_3____3_________.go", "status": "done_pass", "note": "hasPathSum DFS"}

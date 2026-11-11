@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="364" viewBox="0 0 560 364" font-family="system-ui,sans-serif">
+<rect width="560" height="364" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">哈希辅助 · 方案 7（自动循环）</text>
+<g style="animation: st0 9.0s linear infinite both">
+<rect x="78" y="74" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="98" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 0</text>
+<rect x="78" y="122" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="146" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 1</text>
+<rect x="78" y="170" width="70" height="36" rx="8" fill="#FACC15"/>
+<text x="113" y="194" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 2</text>
+<rect x="168" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">12</text>
+<line x1="148" y1="188" x2="168" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="218" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="242" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 3</text>
+<rect x="78" y="266" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="290" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 4</text>
+<text x="280" y="340" text-anchor="middle" fill="#94A3B8" font-size="14">insert(12)：hash = 12 % 5 = 2</text>
+</g>
+<g style="animation: st1 9.0s linear infinite both">
+<rect x="78" y="74" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="98" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 0</text>
+<rect x="78" y="122" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="146" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 1</text>
+<rect x="78" y="170" width="70" height="36" rx="8" fill="#FACC15"/>
+<text x="113" y="194" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 2</text>
+<rect x="168" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">12</text>
+<line x1="148" y1="188" x2="168" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="260" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="289" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<line x1="226" y1="188" x2="260" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="218" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="242" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 3</text>
+<rect x="78" y="266" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="290" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 4</text>
+<text x="280" y="340" text-anchor="middle" fill="#94A3B8" font-size="14">insert(7)：hash = 7 % 5 = 2（冲突，链到表尾）</text>
+</g>
+<g style="animation: st2 9.0s linear infinite both">
+<rect x="78" y="74" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="98" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 0</text>
+<rect x="78" y="122" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="146" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 1</text>
+<rect x="78" y="170" width="70" height="36" rx="8" fill="#FACC15"/>
+<text x="113" y="194" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 2</text>
+<rect x="168" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">12</text>
+<line x1="148" y1="188" x2="168" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="260" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="289" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<line x1="226" y1="188" x2="260" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="352" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="381" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">22</text>
+<line x1="318" y1="188" x2="352" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="218" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="242" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 3</text>
+<rect x="78" y="266" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="290" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 4</text>
+<text x="280" y="340" text-anchor="middle" fill="#94A3B8" font-size="14">insert(22)：hash = 22 % 5 = 2（冲突，链到表尾）</text>
+</g>
+<g style="animation: st3 9.0s linear infinite both">
+<rect x="78" y="74" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="98" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 0</text>
+<rect x="78" y="122" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="146" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 1</text>
+<rect x="78" y="170" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="194" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 2</text>
+<rect x="168" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">12</text>
+<line x1="148" y1="188" x2="168" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="260" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="289" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<line x1="226" y1="188" x2="260" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="352" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="381" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">22</text>
+<line x1="318" y1="188" x2="352" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="218" width="70" height="36" rx="8" fill="#FACC15"/>
+<text x="113" y="242" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 3</text>
+<rect x="168" y="218" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="242" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">8</text>
+<line x1="148" y1="236" x2="168" y2="236" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="266" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="290" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 4</text>
+<text x="280" y="340" text-anchor="middle" fill="#94A3B8" font-size="14">insert(8)：hash = 8 % 5 = 3</text>
+</g>
+<g style="animation: st4 9.0s linear infinite both">
+<rect x="78" y="74" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="98" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 0</text>
+<rect x="78" y="122" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="146" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 1</text>
+<rect x="78" y="170" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="194" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 2</text>
+<rect x="168" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">12</text>
+<line x1="148" y1="188" x2="168" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="260" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="289" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<line x1="226" y1="188" x2="260" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="352" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="381" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">22</text>
+<line x1="318" y1="188" x2="352" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="218" width="70" height="36" rx="8" fill="#FACC15"/>
+<text x="113" y="242" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 3</text>
+<rect x="168" y="218" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="242" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">8</text>
+<line x1="148" y1="236" x2="168" y2="236" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="260" y="218" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="289" y="242" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<line x1="226" y1="236" x2="260" y2="236" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="266" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="290" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 4</text>
+<text x="280" y="340" text-anchor="middle" fill="#94A3B8" font-size="14">insert(3)：hash = 3 % 5 = 3（冲突，链到表尾）</text>
+</g>
+<g style="animation: st5 9.0s linear infinite both">
+<rect x="78" y="74" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="98" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 0</text>
+<rect x="78" y="122" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="146" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 1</text>
+<rect x="78" y="170" width="70" height="36" rx="8" fill="#FACC15"/>
+<text x="113" y="194" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 2</text>
+<rect x="168" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">12</text>
+<line x1="148" y1="188" x2="168" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="260" y="170" width="58" height="36" rx="8" fill="#34D399"/>
+<text x="289" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<line x1="226" y1="188" x2="260" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="352" y="170" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="381" y="194" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">22</text>
+<line x1="318" y1="188" x2="352" y2="188" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="218" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="242" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 3</text>
+<rect x="168" y="218" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="197" y="242" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">8</text>
+<line x1="148" y1="236" x2="168" y2="236" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="260" y="218" width="58" height="36" rx="8" fill="#4A90D9"/>
+<text x="289" y="242" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<line x1="226" y1="236" x2="260" y2="236" stroke="#E2E8F0" stroke-width="2" marker-end="url(#harr)"/>
+<rect x="78" y="266" width="70" height="36" rx="8" fill="#334155"/>
+<text x="113" y="290" text-anchor="middle" fill="#E2E8F0" font-size="15" font-weight="700">桶 4</text>
+<text x="280" y="340" text-anchor="middle" fill="#94A3B8" font-size="14">find(7)：桶 2 沿链查找 → 命中</text>
+</g>
+<defs><marker id="harr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#E2E8F0"/></marker></defs>
+<style>
+.st0 {opacity:0} @keyframes st0 {0%{opacity:0}0.00%{opacity:0}2.00%{opacity:1}14.67%{opacity:1}16.67%{opacity:0}100%{opacity:0}}
+.st1 {opacity:0} @keyframes st1 {0%{opacity:0}16.67%{opacity:0}18.67%{opacity:1}31.33%{opacity:1}33.33%{opacity:0}100%{opacity:0}}
+.st2 {opacity:0} @keyframes st2 {0%{opacity:0}33.33%{opacity:0}35.33%{opacity:1}48.00%{opacity:1}50.00%{opacity:0}100%{opacity:0}}
+.st3 {opacity:0} @keyframes st3 {0%{opacity:0}50.00%{opacity:0}52.00%{opacity:1}64.67%{opacity:1}66.67%{opacity:0}100%{opacity:0}}
+.st4 {opacity:0} @keyframes st4 {0%{opacity:0}66.67%{opacity:0}68.67%{opacity:1}81.33%{opacity:1}83.33%{opacity:0}100%{opacity:0}}
+.st5 {opacity:0} @keyframes st5 {0%{opacity:0}83.33%{opacity:0}85.33%{opacity:1}98.00%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style>
+</svg>

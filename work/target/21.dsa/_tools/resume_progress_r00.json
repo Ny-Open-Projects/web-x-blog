@@ -1,0 +1,80 @@
+{"rel":"go/array/lc_167_两数之和_ii_-_输入有序数组/solution_1_1_____1______.go","status":"done_pass","note":"two-pointer binary search per element"}
+{"rel":"go/array/lc_167_两数之和_ii_-_输入有序数组/solution_2_2_____2_____.go","status":"done_pass","note":"two-pointer"}
+{"rel":"go/array/lc_17_电话号码的字母组合/solution_1_1_____1________.go","status":"done_pass","note":"recursive comb"}
+{"rel":"go/array/lc_17_电话号码的字母组合/solution_2_2___2____.go","status":"done_pass","note":"iterative"}
+{"rel":"go/array/lc_17_电话号码的字母组合/solution_3_3_____3________.go","status":"done_pass","note":"iterative"}
+{"rel":"go/array/lc_17_电话号码的字母组合/solution_4_1____1______.go","status":"done_pass","note":"iterative"}
+{"rel":"go/array/lc_17_电话号码的字母组合/solution_5_2____2____.go","status":"done_pass","note":"iterative combos"}
+{"rel":"go/array/lc_17_电话号码的字母组合/solution_7_1____1______.go","status":"done_pass","note":"iterative combos"}
+{"rel":"go/array/lc_17_电话号码的字母组合/solution_8_2____2____.go","status":"done_pass","note":"backtrack"}
+{"rel":"go/array/lc_17_电话号码的字母组合/solution_9_3____3______.go","status":"done_pass","note":"iterative combos"}
+{"rel":"go/array/lc_209_长度最小的子数组/solution_1_1_____1_________.go","status":"done_pass","note":"O(n^2) sliding"}
+{"rel":"go/array/lc_209_长度最小的子数组/solution_2_2_____2___________.go","status":"done_pass","note":"prefix sum + bisect"}
+{"rel":"go/array/lc_380_o(1)_时间插入、删除和获取随机元素/solution_1_1_____1___________.go","status":"done_pass","note":"RandomizedSet with property checks"}
+{"rel":"go/array/lc_384_打乱数组/solution_1_1_____1___.go","status":"done_pass","note":"shuffle permutation + reset"}
+{"rel":"go/array/lc_384_打乱数组/solution_2_2_____2_Fisher-Yates_____.go","status":"done_pass","note":"Fisher-Yates permutation + reset"}
+{"rel":"go/array/lc_541_反转字符串_ii/solution_1_1_____1____.go","status":"done_pass","note":"reverseStr"}
+{"rel":"go/array/lc_89_格雷编码/solution_10_2_____2__________.go","status":"done_pass","note":"reflect gray code"}
+{"rel":"go/array/lc_89_格雷编码/solution_12_4_____4_______________.go","status":"done_pass","note":"reflect gray code"}
+{"rel":"go/array/lc_89_格雷编码/solution_2_2_____2__________.go","status":"done_pass","note":"[0,1] base gray code"}
+{"rel":"go/array/lc_89_格雷编码/solution_3_3____3___________________.go","status":"done_pass","note":"[0,1] base gray code"}
+{"rel":"go/array/lc_89_格雷编码/solution_4_4____4_______________.go","status":"done_pass","note":"formula gray code"}
+{"rel":"go/array/lc_89_格雷编码/solution_7_3_____3___________________.go","status":"done_pass","note":"reflect gray code"}
+{"rel":"go/array/lc_89_格雷编码/solution_8_4_____4_______________.go","status":"done_pass","note":"reflect gray code"}
+{"rel":"go/array/lc_89_格雷编码/solution_9_1_____1___.go","status":"done_pass","note":"reflect gray code"}
+{"rel":"go/array/lc_905_按奇偶排序数组/solution_1_1_____1______.go","status":"done_pass","note":"two-pass fill"}
+{"rel":"go/array/lc_905_按奇偶排序数组/solution_2_2_____2____________.go","status":"done_pass","note":"two-pointer fill"}
+{"rel":"go/array/lc_905_按奇偶排序数组/solution_3_3_____3______.go","status":"done_pass","note":"in-place two-pointer swap"}
+{"rel":"go/array/lc_914_卡牌分组/solution_1_1____1______.go","status":"done_pass","note":"brute force X"}
+{"rel":"go/array/lc_914_卡牌分组/solution_2_2_____2_______.go","status":"done_pass","note":"gcd of counts"}
+{"rel":"go/array/lc_914_卡牌分组/solution_3_3_____3__________.go","status":"done_pass","note":"gcd of counts"}
+{"rel":"go/array/lc_914_卡牌分组/solution_4_1____1______.go","status":"done_pass","note":"gcd of counts"}
+{"rel":"go/array/lc_914_卡牌分组/solution_5_2_____2_______.go","status":"done_pass","note":"brute force X"}
+{"rel":"go/array/lc_914_卡牌分组/solution_6_3______3__________.go","status":"done_pass","note":"gcd of counts"}
+{"rel":"go/array/lc_914_卡牌分组/solution_7_1____1______.go","status":"done_pass","note":"gcd of counts"}
+{"rel":"go/array/lc_914_卡牌分组/solution_8_2_____2_______.go","status":"done_pass","note":"gcd of counts"}
+{"rel":"go/array/lc_914_卡牌分组/solution_9_3______3__________.go","status":"done_pass","note":"gcd of counts"}
+{"rel":"go/array/lc_977_有序数组的平方/solution_1_1_____1______.go","status":"done_pass","note":"sort squares"}
+{"rel":"go/array/lc_977_有序数组的平方/solution_2_2_____2____.go","status":"done_pass","note":"merge two-pointer"}
+{"rel":"go/array/lc_977_有序数组的平方/solution_3_3_____3_____.go","status":"done_pass","note":"two-pointer from ends"}
+{"rel":"go/backtrack/lc_37_解数独/solution_1_1_____1____.go","status":"done_pass","note":"backtrack sudoku, validate solution"}
+{"rel":"go/backtrack/lc_37_解数独/solution_3_3_____3______.go","status":"done_pass","note":"backtrack sudoku, validate"}
+{"rel":"go/backtrack/lc_39_组合总和/solution_1_1_____1______.go","status":"done_pass","note":"combinationSum backtrack"}
+{"rel":"go/backtrack/lc_39_组合总和/solution_2_2_____2____.go","status":"done_pass","note":"combinationSum backtrack"}
+{"rel":"go/backtrack/lc_46_全排列/solution_1___1.go","status":"done_pass","note":"permute used-array"}
+{"rel":"go/backtrack/lc_46_全排列/solution_2___2.go","status":"done_pass","note":"permute swap"}
+{"rel":"go/backtrack/lc_46_全排列/solution_3___3.go","status":"done_pass","note":"permute used-array"}
+{"rel":"go/backtrack/lc_46_全排列/solution_4___4.go","status":"done_pass","note":"permute swap"}
+{"rel":"go/backtrack/lc_46_全排列/solution_5___5.go","status":"done_pass","note":"permute used-array [0,1]"}
+{"rel":"go/backtrack/lc_46_全排列/solution_6___6.go","status":"done_pass","note":"permute swap"}
+{"rel":"go/backtrack/lc_47_全排列_ii/solution_1_1_____1_____.go","status":"done_pass","note":"permuteUnique dedupe"}
+{"rel":"go/backtrack/lc_51_n_皇后/solution_1_1_____1_________.go","status":"done_pass","note":"N-Queens set-based"}
+{"rel":"go/backtrack/lc_51_n_皇后/solution_2_2_____2__________.go","status":"done_pass","note":"N-Queens board-append"}
+{"rel":"go/backtrack/lc_51_n_皇后/solution_3_3_____3___-____.go","status":"done_pass","note":"N-Queens bool-arrays"}
+{"rel":"go/backtrack/lc_77_组合/solution_1_1_____1___________.go","status":"done_pass","note":"combine"}
+{"rel":"go/backtrack/lc_77_组合/solution_2_2_____2__________________.go","status":"done_pass","note":"combine"}
+{"rel":"go/backtrack/lc_77_组合/solution_3_3_____3_______.go","status":"done_pass","note":"combine"}
+{"rel":"go/backtrack/lc_78_子集/solution_1___1.go","status":"done_pass","note":"subsets"}
+{"rel":"go/backtrack/lc_78_子集/solution_2___2.go","status":"done_pass","note":"subsets"}
+{"rel":"go/backtrack/lc_79_单词搜索/solution_1_1_____1____.go","status":"done_pass","note":"word search exist"}
+{"rel":"go/backtrack/lc_93_复原_ip_地址/solution_1___1.go","status":"done_pass","note":"faithful stub returning []"}
+{"rel": "go/backtrack/lc_93_复原_ip_地址/solution_3___3.go", "status": "done_pass", "note": "restoreIpAddresses backtrack"}
+{"rel": "go/binary_search/lc_153_寻找旋转排序数组中的最小值/solution_1_1____1______.go", "status": "done_pass", "note": "findMin binary search"}
+{"rel": "go/binary_search/lc_35_搜索插入位置/solution_1_1_____1_____.go", "status": "done_pass", "note": "searchInsert binary search"}
+{"rel": "go/concurrency/lc_1114_按序打印/solution_1_1_____1____synchronization.go", "status": "done_pass", "note": "Foo channel ordering"}
+{"rel": "go/concurrency/lc_2637_有时间限制的_promise_对象/solution_1___1.go", "status": "done_pass", "note": "timeLimit timeout case"}
+{"rel": "go/concurrency/lc_2637_有时间限制的_promise_对象/solution_2_2____2______Timeout.go", "status": "done_pass", "note": "timeLimit timeout+success"}
+{"rel": "go/concurrency/lc_2721_并行执行异步函数/solution_1_1_____1____async_await___.go", "status": "done_pass", "note": "promiseAll gather"}
+{"rel": "go/concurrency/lc_2721_并行执行异步函数/solution_2_2_____2____then_catch___.go", "status": "done_pass", "note": "promiseAll then/catch"}
+{"rel": "go/dp/lc_1027_最长等差数列/solution_1_1_____1_____.go", "status": "done_pass", "note": "longestArithSeqLength DP"}
+{"rel": "go/dp/lc_1143_最长公共子序列/solution_1_1_____1______.go", "status": "done_pass", "note": "longestCommonSubsequence 2D DP"}
+{"rel": "go/dp/lc_115_不同的子序列/solution_1___1.go", "status": "done_pass", "note": "numDistinct DP"}
+{"rel": "go/dp/lc_115_不同的子序列/solution_3_3_____3_________.go", "status": "done_pass", "note": "numDistinct memo"}
+{"rel": "go/dp/lc_1494_并行课程_ii/solution_1_1_____1____________.go", "status": "done_pass", "note": "minNumberOfSemesters DFS"}
+{"rel": "go/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.go", "status": "done_pass", "note": "minNumberOfSemesters DFS"}
+{"rel": "go/dp/lc_2050_并行课程_iii/solution_1_1_____1______.go", "status": "done_pass", "note": "minimumTime topo dp"}
+{"rel": "go/dp/lc_2050_并行课程_iii/solution_2_2_____2__________.go", "status": "done_pass", "note": "minimumTime topo dp"}
+{"rel": "go/dp/lc_213_打家劫舍_ii/solution_1_1_____1_____.go", "status": "done_pass", "note": "rob dp1/dp2 (faithful, ref has dp2 bug for n>=4)"}
+{"rel": "go/dp/lc_213_打家劫舍_ii/solution_3_3_____3_________.go", "status": "done_pass", "note": "rob robRange"}
+{"rel": "go/dp/lc_213_打家劫舍_ii/solution_4_4_____4_____.go", "status": "done_pass", "note": "rob helper f0/f1"}
+{"rel": "go/dp/lc_2407_最长递增子序列_ii/solution_1_1_____1_____.go", "status": "done_pass", "note": "lengthOfLIS segtree"}

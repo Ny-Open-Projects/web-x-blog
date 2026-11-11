@@ -1,0 +1,80 @@
+{"rel":"go/dp/lc_300_最长递增子序列/solution_1_1_____1______.go","status":"done_pass","note":"lengthOfLIS O(n^2)"}
+{"rel":"go/dp/lc_300_最长递增子序列/solution_2_2_____2___________.go","status":"done_pass","note":"lengthOfLIS O(n log n)"}
+{"rel":"go/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.go","status":"done_pass","note":"longestMonotonicSubarray inc/dec counters"}
+{"rel":"go/dp/lc_3105_最长的严格递增或递减子数组/solution_2_2_____2_________.go","status":"done_pass","note":"longestMonotonicSubarray two-pointer runs"}
+{"rel":"go/dp/lc_3105_最长的严格递增或递减子数组/solution_3_3_____3______.go","status":"done_pass","note":"longestMonotonicSubarray two passes"}
+{"rel":"go/dp/lc_392_判断子序列/solution_1_1_____1_____.go","status":"done_pass","note":"isSubsequence single pointer"}
+{"rel":"go/dp/lc_392_判断子序列/solution_2_2_____2_____.go","status":"done_pass","note":"isSubsequence double pointer"}
+{"rel":"go/dp/lc_392_判断子序列/solution_3_3____3______.go","status":"done_pass","note":"isSubsequence returns true (faithful to ref)"}
+{"rel":"go/dp/lc_392_判断子序列/solution_4_4____4_________.go","status":"done_pass","note":"isSubsequence dp"}
+{"rel":"go/dp/lc_583_两个字符串的删除操作/solution_1_1_____1_________.go","status":"done_pass","note":"minDistance LCS-based"}
+{"rel":"go/dp/lc_583_两个字符串的删除操作/solution_2_2_____2______.go","status":"done_pass","note":"minDistance edit distance"}
+{"rel":"go/dp/lc_63_不同路径_ii/solution_1___1.go","status":"done_pass","note":"uniquePathsWithObstacles"}
+{"rel":"go/dp/lc_63_不同路径_ii/solution_3___3.go","status":"done_pass","note":"uniquePathsWithObstacles"}
+{"rel":"go/dp/lc_63_不同路径_ii/solution_4___4.go","status":"done_pass","note":"uniquePathsWithObstacles with early return"}
+{"rel":"go/dp/lc_63_不同路径_ii/solution_5___5.go","status":"done_pass","note":"uniquePathsWithObstacles"}
+{"rel":"go/dp/lc_63_不同路径_ii/solution_6___6.go","status":"done_pass","note":"uniquePathsWithObstacles"}
+{"rel":"go/dp/lc_673_最长递增子序列的个数/solution_1_1_____1______.go","status":"done_pass","note":"findNumberOfLIS O(n^2)"}
+{"rel":"go/dp/lc_673_最长递增子序列的个数/solution_2_2_____2_________________.go","status":"done_pass","note":"findNumberOfLIS O(n log n) faithful to ref"}
+{"rel":"go/dp/lc_714_买卖股票的最佳时机含手续费/solution_1_1_____1______.go","status":"done_pass","note":"maxProfit fee"}
+{"rel":"go/dp/lc_714_买卖股票的最佳时机含手续费/solution_2_2_____2____.go","status":"done_pass","note":"maxProfit fee"}
+{"rel":"go/dp/lc_72_编辑距离/solution_2_2_____2__________.go","status":"done_pass","note":"minDistance edit distance"}
+{"rel":"go/dp/lc_877_石子游戏/solution_2_2_____2_____-___.go","status":"done_pass","note":"stoneGame returns true (faithful to ref)"}
+{"rel":"go/dp/lc_877_石子游戏/solution_3_3_____3___.go","status":"done_pass","note":"stoneGame returns true (faithful to ref)"}
+{"rel":"go/graph/lc_65_有效数字/solution_1___1.go","status":"done_pass","note":"isNumber simple DFA logic"}
+{"rel":"go/graph/lc_65_有效数字/solution_2___2.go","status":"done_pass","note":"isNumber simple DFA logic"}
+{"rel":"go/graph/lc_65_有效数字/solution_3___3.go","status":"done_pass","note":"isNumber simple DFA logic"}
+{"rel":"go/graph/lc_65_有效数字/solution_4_1_____1___.go","status":"done_pass","note":"isNumber state machine"}
+{"rel":"go/graph/lc_65_有效数字/solution_5_2_____2________.go","status":"done_pass","note":"isNumber state machine"}
+{"rel":"go/graph/lc_65_有效数字/solution_6_1_____1___.go","status":"done_pass","note":"isNumber state machine"}
+{"rel":"go/graph/lc_65_有效数字/solution_7_2_____2________.go","status":"done_pass","note":"isNumber state machine"}
+{"rel":"go/greedy/lc_122_买卖股票的最佳时机ii/solution_1___1.go","status":"done_pass","note":"maxProfit greedy"}
+{"rel":"go/greedy/lc_122_买卖股票的最佳时机ii/solution_2___2.go","status":"done_pass","note":"maxProfit greedy"}
+{"rel":"go/greedy/lc_122_买卖股票的最佳时机ii/solution_3___3.go","status":"done_pass","note":"maxProfit peak-valley"}
+{"rel":"go/greedy/lc_122_买卖股票的最佳时机ii/solution_4___4.go","status":"done_pass","note":"maxProfit dp"}
+{"rel":"go/greedy/lc_122_买卖股票的最佳时机ii/solution_5___5.go","status":"done_pass","note":"maxProfit greedy"}
+{"rel":"go/greedy/lc_122_买卖股票的最佳时机ii/solution_6___6.go","status":"done_pass","note":"maxProfit greedy"}
+{"rel":"go/greedy/lc_1518_换水问题/solution_1_1_____1___.go","status":"done_pass","note":"numWaterBottles"}
+{"rel":"go/greedy/lc_1518_换水问题/solution_2_2_____2___.go","status":"done_pass","note":"numWaterBottles"}
+{"rel":"go/greedy/lc_435_无重叠区间/solution_1_1_____1____.go","status":"done_pass","note":"eraseOverlapIntervals"}
+{"rel":"go/greedy/lc_435_无重叠区间/solution_2_2_____2_____________.go","status":"done_pass","note":"eraseOverlapIntervals"}
+{"rel":"go/greedy/lc_452_用最少数量的箭引爆气球/solution_1_1_____1_________.go","status":"done_pass","note":"findMinArrowShots"}
+{"rel":"go/greedy/lc_452_用最少数量的箭引爆气球/solution_2_2_____2____________.go","status":"done_pass","note":"findMinArrowShots"}
+{"rel":"go/greedy/lc_45_跳跃游戏_ii/solution_1_1_____1__________.go","status":"done_pass","note":"jump reverse greedy"}
+{"rel":"go/greedy/lc_45_跳跃游戏_ii/solution_2_2_____2______________.go","status":"done_pass","note":"jump forward greedy"}
+{"rel":"go/greedy/lc_55_跳跃游戏/solution_1_主解法.go","status":"done_pass","note":"canJump greedy"}
+{"rel":"go/hash/lc_350_两个数组的交集_ii/solution_1_1_____1____.go","status":"done_pass","note":"intersect hashmap"}
+{"rel":"go/hash/lc_350_两个数组的交集_ii/solution_2_2____2__________.go","status":"done_pass","note":"intersect two-pointer sort"}
+{"rel":"go/hash/lc_3_无重复字符的最长子串/solution_1___1.go","status":"done_pass","note":"lengthOfLongestSubstring sliding window"}
+{"rel":"go/hash/lc_3_无重复字符的最长子串/solution_2___2.go","status":"done_pass","note":"lengthOfLongestSubstring sliding window"}
+{"rel":"go/hash/lc_3_无重复字符的最长子串/solution_3___3.go","status":"done_pass","note":"lengthOfLongestSubstring last-pos map"}
+{"rel":"go/hash/lc_3_无重复字符的最长子串/solution_4___4.go","status":"done_pass","note":"lengthOfLongestSubstring last-pos map"}
+{"rel":"go/hash/lc_3_无重复字符的最长子串/solution_6___6.go","status":"done_pass","note":"lengthOfLongestSubstring last-pos map"}
+{"rel":"go/hash/lc_76_最小覆盖子串/solution_1___1.go","status":"done_pass","note":"minWindow formed/required"}
+{"rel":"go/hash/lc_76_最小覆盖子串/solution_2___2.go","status":"done_pass","note":"minWindow need/mSize"}
+{"rel":"go/hash/lc_76_最小覆盖子串/solution_3___3.go","status":"done_pass","note":"minWindow need/mSize"}
+{"rel":"go/heap/lc_208_实现_trie_(前缀树)/solution_1_1_____1_____.go","status":"done_pass","note":"Trie insert/search/startsWith map[rune]"}
+{"rel":"go/heap/lc_208_实现_trie_(前缀树)/solution_2_2_____2_______.go","status":"done_pass","note":"Trie insert/search/startsWith map[rune]"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_10_2____2_________________1.go","status":"done_pass","note":"mergeKLists collect+sort+rebuild"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_12_4_____4_____.go","status":"done_pass","note":"mergeKLists k-way min-heap idx tiebreak"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_1_1____1____.go","status":"done_pass","note":"mergeKLists hand-rolled MinHeap"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_2_2____2__________________1.go","status":"done_pass","note":"mergeKLists Status/PQ"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_4_4____4______.go","status":"done_pass","note":"mergeKLists divide&conquer top-down"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_5_1_____1____.go","status":"done_pass","note":"mergeKLists min-heap idx tiebreak"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_6_2____2_________________1.go","status":"done_pass","note":"mergeKLists min-heap id(cnt) tiebreak"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_7_3____3_____.go","status":"done_pass","note":"mergeKLists divide&conquer <= merge"}
+{"rel":"go/heap/lc_23_合并k个升序链表/solution_8_4____4_____.go","status":"done_pass","note":"mergeKLists bottom-up pair merge"}
+{"rel":"go/heap/lc_313_超级丑数/solution_1___1.go","status":"done_pass","note":"nthSuperUglyNumber placeholder n=1 -> 1"}
+{"rel":"go/heap/lc_313_超级丑数/solution_2___2.go","status":"done_pass","note":"nthSuperUglyNumber placeholder n=1 -> 1"}
+{"rel":"go/heap/lc_313_超级丑数/solution_3___3.go","status":"done_pass","note":"nthSuperUglyNumber dp-pointer"}
+{"rel":"go/heap/lc_313_超级丑数/solution_4_1_____1______.go","status":"done_pass","note":"nthSuperUglyNumber heap-dedup"}
+{"rel":"go/heap/lc_313_超级丑数/solution_5_1_____1_____.go","status":"done_pass","note":"nthSuperUglyNumber dp-min"}
+{"rel":"go/heap/lc_502_ipo/solution_1_主解法.go","status":"done_pass","note":"findMaximizedCapital max-heap"}
+{"rel":"go/linked_list/lc_146_lru_缓存/solution_1_1_____1____Map.go","status":"done_pass","note":"LRUCache ordered-map (slice order)"}
+{"rel":"go/linked_list/lc_146_lru_缓存/solution_2_2_____2____________.go","status":"done_pass","note":"LRUCache doubly-linked list"}
+{"rel":"go/linked_list/lc_148_排序链表/solution_1___1.go","status":"done_pass","note":"sortList collect+sort+writeback"}
+{"rel":"go/linked_list/lc_148_排序链表/solution_2___2.go","status":"done_pass","note":"sortList collect nodes+relink"}
+{"rel":"go/linked_list/lc_148_排序链表/solution_3___3.go","status":"done_pass","note":"sortList merge sort"}
+{"rel":"go/linked_list/lc_148_排序链表/solution_5___5.go","status":"done_pass","note":"sortList merge sort"}
+{"rel":"go/linked_list/lc_148_排序链表/solution_6___6.go","status":"done_pass","note":"sortList merge sort"}
+{"rel":"go/linked_list/lc_148_排序链表/solution_7___7.go","status":"done_pass","note":"sortList merge sort"}

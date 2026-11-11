@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" font-family="system-ui,sans-serif">
+<rect width="560" height="300" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">前缀和 + 二分查找 · 方案 2（自动循环）</text>
+<g style="animation:bs0 2.8s linear infinite both">
+<rect x="50" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="76" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="110" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="136" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">3</text>
+<rect x="170" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="196" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">5</text>
+<rect x="230" y="120" width="52" height="44" rx="8" fill="#FACC15"/>
+<text x="256" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">7</text>
+<rect x="290" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="316" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">9</text>
+<rect x="350" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="376" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">11</text>
+<rect x="410" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="436" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">13</text>
+<rect x="470" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="496" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">15</text>
+<path d="M 76 94 L 69 85 L 83 85 Z" fill="#38BDF8"/>
+<path d="M 76 190 L 69 199 L 83 199 Z" fill="#38BDF8"/>
+<path d="M 496 94 L 489 85 L 503 85 Z" fill="#38BDF8"/>
+<path d="M 496 190 L 489 199 L 503 199 Z" fill="#38BDF8"/>
+<text x="280" y="240" text-anchor="middle" fill="#94A3B8" font-size="14">区间[0,7] 探测 mid=3（值7）→ 7&lt;11 收左</text>
+</g>
+<g style="animation:bs1 2.8s linear infinite both">
+<rect x="50" y="120" width="52" height="44" rx="8" fill="#1E293B"/>
+<text x="76" y="148" text-anchor="middle" fill="#64748B" font-size="16" font-weight="700">1</text>
+<rect x="110" y="120" width="52" height="44" rx="8" fill="#1E293B"/>
+<text x="136" y="148" text-anchor="middle" fill="#64748B" font-size="16" font-weight="700">3</text>
+<rect x="170" y="120" width="52" height="44" rx="8" fill="#1E293B"/>
+<text x="196" y="148" text-anchor="middle" fill="#64748B" font-size="16" font-weight="700">5</text>
+<rect x="230" y="120" width="52" height="44" rx="8" fill="#1E293B"/>
+<text x="256" y="148" text-anchor="middle" fill="#64748B" font-size="16" font-weight="700">7</text>
+<rect x="290" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="316" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">9</text>
+<rect x="350" y="120" width="52" height="44" rx="8" fill="#34D399"/>
+<text x="376" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">11</text>
+<rect x="410" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="436" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">13</text>
+<rect x="470" y="120" width="52" height="44" rx="8" fill="#334155"/>
+<text x="496" y="148" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">15</text>
+<path d="M 316 94 L 309 85 L 323 85 Z" fill="#38BDF8"/>
+<path d="M 316 190 L 309 199 L 323 199 Z" fill="#38BDF8"/>
+<path d="M 496 94 L 489 85 L 503 85 Z" fill="#38BDF8"/>
+<path d="M 496 190 L 489 199 L 503 199 Z" fill="#38BDF8"/>
+<text x="280" y="240" text-anchor="middle" fill="#94A3B8" font-size="14">区间[4,7] 探测 mid=5（值11）→ 命中!</text>
+</g>
+<style>
+.bs0{opacity:0} @keyframes bs0{0%{opacity:0}0.00%{opacity:0}5.00%{opacity:1}45.00%{opacity:1}50.00%{opacity:0}100%{opacity:0}}
+.bs1{opacity:0} @keyframes bs1{0%{opacity:0}50.00%{opacity:0}55.00%{opacity:1}95.00%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style></svg>

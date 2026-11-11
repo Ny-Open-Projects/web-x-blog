@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" font-family="system-ui,sans-serif">
+<rect width="560" height="300" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">模拟 · 方案 1（自动循环）</text>
+<g style="animation: st0 4.5s linear infinite both">
+<rect x="78" y="94" width="72" height="46" rx="8" fill="#FACC15"/>
+<text x="114" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">2</text>
+<rect x="166" y="94" width="72" height="46" rx="8" fill="#4A90D9"/>
+<text x="202" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">7</text>
+<rect x="254" y="94" width="72" height="46" rx="8" fill="#4A90D9"/>
+<text x="290" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">11</text>
+<rect x="342" y="94" width="72" height="46" rx="8" fill="#FACC15"/>
+<text x="378" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">15</text>
+<polygon points="114,86 106,72 122,72" fill="#FACC15"/>
+<text x="114" y="66" text-anchor="middle" fill="#FACC15" font-size="14" font-weight="700">L</text>
+<polygon points="378,86 370,72 386,72" fill="#FACC15"/>
+<text x="378" y="66" text-anchor="middle" fill="#FACC15" font-size="14" font-weight="700">R</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">arr[L] + arr[R] = 17 &gt; 9，R 左移</text>
+</g>
+<g style="animation: st1 4.5s linear infinite both">
+<rect x="78" y="94" width="72" height="46" rx="8" fill="#FACC15"/>
+<text x="114" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">2</text>
+<rect x="166" y="94" width="72" height="46" rx="8" fill="#4A90D9"/>
+<text x="202" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">7</text>
+<rect x="254" y="94" width="72" height="46" rx="8" fill="#FACC15"/>
+<text x="290" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">11</text>
+<rect x="342" y="94" width="72" height="46" rx="8" fill="#4A90D9"/>
+<text x="378" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">15</text>
+<polygon points="114,86 106,72 122,72" fill="#FACC15"/>
+<text x="114" y="66" text-anchor="middle" fill="#FACC15" font-size="14" font-weight="700">L</text>
+<polygon points="290,86 282,72 298,72" fill="#FACC15"/>
+<text x="290" y="66" text-anchor="middle" fill="#FACC15" font-size="14" font-weight="700">R</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">arr[L] + arr[R] = 13 &gt; 9，R 左移</text>
+</g>
+<g style="animation: st2 4.5s linear infinite both">
+<rect x="78" y="94" width="72" height="46" rx="8" fill="#34D399"/>
+<text x="114" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">2</text>
+<rect x="166" y="94" width="72" height="46" rx="8" fill="#34D399"/>
+<text x="202" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">7</text>
+<rect x="254" y="94" width="72" height="46" rx="8" fill="#4A90D9"/>
+<text x="290" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">11</text>
+<rect x="342" y="94" width="72" height="46" rx="8" fill="#4A90D9"/>
+<text x="378" y="124" text-anchor="middle" fill="#F1F5F9" font-size="19" font-weight="700">15</text>
+<polygon points="114,86 106,72 122,72" fill="#FACC15"/>
+<text x="114" y="66" text-anchor="middle" fill="#FACC15" font-size="14" font-weight="700">L</text>
+<polygon points="202,86 194,72 210,72" fill="#FACC15"/>
+<text x="202" y="66" text-anchor="middle" fill="#FACC15" font-size="14" font-weight="700">R</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">arr[L] + arr[R] = 9 = 9，命中！</text>
+</g>
+<style>
+.st0 {opacity:0} @keyframes st0 {0%{opacity:0}0.00%{opacity:0}4.00%{opacity:1}29.33%{opacity:1}33.33%{opacity:0}100%{opacity:0}}
+.st1 {opacity:0} @keyframes st1 {0%{opacity:0}33.33%{opacity:0}37.33%{opacity:1}62.67%{opacity:1}66.67%{opacity:0}100%{opacity:0}}
+.st2 {opacity:0} @keyframes st2 {0%{opacity:0}66.67%{opacity:0}70.67%{opacity:1}96.00%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style>
+</svg>

@@ -1,0 +1,285 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="320" viewBox="0 0 560 320" font-family="system-ui,sans-serif">
+<rect width="560" height="320" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">冒泡排序 · 两两比较 &amp; 交换（自动循环播放）</text>
+<g style="animation: st0 22.0s linear infinite both">
+<rect x="60" y="60.0" width="44" height="190.0" rx="6" fill="#F87171"/>
+<text x="82" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="118" y="98.0" width="44" height="152.0" rx="6" fill="#F87171"/>
+<text x="140" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="176" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="198" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="234" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="256" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="292" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="314" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 1 轮 · 比较 arr[0] 与 arr[1] → 交换</text>
+</g>
+<g style="animation: st1 22.0s linear infinite both">
+<rect x="60" y="98.0" width="44" height="152.0" rx="6" fill="#F87171"/>
+<text x="82" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="118" y="60.0" width="44" height="190.0" rx="6" fill="#F87171"/>
+<text x="140" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="176" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="198" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="234" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="256" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="292" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="314" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 1 轮 · 比较 arr[0] 与 arr[1] → 交换</text>
+</g>
+<g style="animation: st2 22.0s linear infinite both">
+<rect x="60" y="98.0" width="44" height="152.0" rx="6" fill="#FFB347"/>
+<text x="82" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="118" y="60.0" width="44" height="190.0" rx="6" fill="#F87171"/>
+<text x="140" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="176" y="136.0" width="44" height="114.0" rx="6" fill="#F87171"/>
+<text x="198" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="234" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="256" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="292" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="314" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 1 轮 · 比较 arr[1] 与 arr[2] → 交换</text>
+</g>
+<g style="animation: st3 22.0s linear infinite both">
+<rect x="60" y="98.0" width="44" height="152.0" rx="6" fill="#FFB347"/>
+<text x="82" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="118" y="136.0" width="44" height="114.0" rx="6" fill="#F87171"/>
+<text x="140" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="176" y="60.0" width="44" height="190.0" rx="6" fill="#F87171"/>
+<text x="198" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="234" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="256" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="292" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="314" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 1 轮 · 比较 arr[1] 与 arr[2] → 交换</text>
+</g>
+<g style="animation: st4 22.0s linear infinite both">
+<rect x="60" y="98.0" width="44" height="152.0" rx="6" fill="#FFB347"/>
+<text x="82" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="118" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="140" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="176" y="60.0" width="44" height="190.0" rx="6" fill="#F87171"/>
+<text x="198" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="234" y="174.0" width="44" height="76.0" rx="6" fill="#F87171"/>
+<text x="256" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="292" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="314" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 1 轮 · 比较 arr[2] 与 arr[3] → 交换</text>
+</g>
+<g style="animation: st5 22.0s linear infinite both">
+<rect x="60" y="98.0" width="44" height="152.0" rx="6" fill="#FFB347"/>
+<text x="82" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="118" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="140" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="176" y="174.0" width="44" height="76.0" rx="6" fill="#F87171"/>
+<text x="198" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="234" y="60.0" width="44" height="190.0" rx="6" fill="#F87171"/>
+<text x="256" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="292" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="314" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 1 轮 · 比较 arr[2] 与 arr[3] → 交换</text>
+</g>
+<g style="animation: st6 22.0s linear infinite both">
+<rect x="60" y="98.0" width="44" height="152.0" rx="6" fill="#FFB347"/>
+<text x="82" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="118" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="140" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="176" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="198" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="234" y="60.0" width="44" height="190.0" rx="6" fill="#F87171"/>
+<text x="256" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="292" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="314" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 1 轮 · 比较 arr[3] 与 arr[4] → 交换</text>
+</g>
+<g style="animation: st7 22.0s linear infinite both">
+<rect x="60" y="98.0" width="44" height="152.0" rx="6" fill="#FFB347"/>
+<text x="82" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="118" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="140" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="176" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="198" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="234" y="212.0" width="44" height="38.0" rx="6" fill="#F87171"/>
+<text x="256" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 1 轮 · 比较 arr[3] 与 arr[4] → 交换</text>
+</g>
+<g style="animation: st8 22.0s linear infinite both">
+<rect x="60" y="98.0" width="44" height="152.0" rx="6" fill="#F87171"/>
+<text x="82" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="118" y="136.0" width="44" height="114.0" rx="6" fill="#F87171"/>
+<text x="140" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="176" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="198" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="234" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="256" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 2 轮 · 比较 arr[0] 与 arr[1] → 交换</text>
+</g>
+<g style="animation: st9 22.0s linear infinite both">
+<rect x="60" y="136.0" width="44" height="114.0" rx="6" fill="#F87171"/>
+<text x="82" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="118" y="98.0" width="44" height="152.0" rx="6" fill="#F87171"/>
+<text x="140" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="176" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="198" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="234" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="256" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 2 轮 · 比较 arr[0] 与 arr[1] → 交换</text>
+</g>
+<g style="animation: st10 22.0s linear infinite both">
+<rect x="60" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="82" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="118" y="98.0" width="44" height="152.0" rx="6" fill="#F87171"/>
+<text x="140" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="176" y="174.0" width="44" height="76.0" rx="6" fill="#F87171"/>
+<text x="198" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="234" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="256" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 2 轮 · 比较 arr[1] 与 arr[2] → 交换</text>
+</g>
+<g style="animation: st11 22.0s linear infinite both">
+<rect x="60" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="82" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="118" y="174.0" width="44" height="76.0" rx="6" fill="#F87171"/>
+<text x="140" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="176" y="98.0" width="44" height="152.0" rx="6" fill="#F87171"/>
+<text x="198" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="234" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="256" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 2 轮 · 比较 arr[1] 与 arr[2] → 交换</text>
+</g>
+<g style="animation: st12 22.0s linear infinite both">
+<rect x="60" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="82" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="118" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="140" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="176" y="98.0" width="44" height="152.0" rx="6" fill="#F87171"/>
+<text x="198" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="234" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="256" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 2 轮 · 比较 arr[2] 与 arr[3] → 交换</text>
+</g>
+<g style="animation: st13 22.0s linear infinite both">
+<rect x="60" y="136.0" width="44" height="114.0" rx="6" fill="#50C878"/>
+<text x="82" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="118" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="140" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="176" y="212.0" width="44" height="38.0" rx="6" fill="#F87171"/>
+<text x="198" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="234" y="98.0" width="44" height="152.0" rx="6" fill="#34D399"/>
+<text x="256" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 2 轮 · 比较 arr[2] 与 arr[3] → 交换</text>
+</g>
+<g style="animation: st14 22.0s linear infinite both">
+<rect x="60" y="136.0" width="44" height="114.0" rx="6" fill="#F87171"/>
+<text x="82" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="118" y="174.0" width="44" height="76.0" rx="6" fill="#F87171"/>
+<text x="140" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="176" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="198" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="234" y="98.0" width="44" height="152.0" rx="6" fill="#34D399"/>
+<text x="256" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 3 轮 · 比较 arr[0] 与 arr[1] → 交换</text>
+</g>
+<g style="animation: st15 22.0s linear infinite both">
+<rect x="60" y="174.0" width="44" height="76.0" rx="6" fill="#F87171"/>
+<text x="82" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="118" y="136.0" width="44" height="114.0" rx="6" fill="#F87171"/>
+<text x="140" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="176" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="198" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="234" y="98.0" width="44" height="152.0" rx="6" fill="#34D399"/>
+<text x="256" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 3 轮 · 比较 arr[0] 与 arr[1] → 交换</text>
+</g>
+<g style="animation: st16 22.0s linear infinite both">
+<rect x="60" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="82" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="118" y="136.0" width="44" height="114.0" rx="6" fill="#F87171"/>
+<text x="140" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="176" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="198" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="234" y="98.0" width="44" height="152.0" rx="6" fill="#34D399"/>
+<text x="256" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 3 轮 · 比较 arr[1] 与 arr[2] → 交换</text>
+</g>
+<g style="animation: st17 22.0s linear infinite both">
+<rect x="60" y="174.0" width="44" height="76.0" rx="6" fill="#7B68EE"/>
+<text x="82" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="118" y="212.0" width="44" height="38.0" rx="6" fill="#F87171"/>
+<text x="140" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="176" y="136.0" width="44" height="114.0" rx="6" fill="#34D399"/>
+<text x="198" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="234" y="98.0" width="44" height="152.0" rx="6" fill="#34D399"/>
+<text x="256" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 3 轮 · 比较 arr[1] 与 arr[2] → 交换</text>
+</g>
+<g style="animation: st18 22.0s linear infinite both">
+<rect x="60" y="174.0" width="44" height="76.0" rx="6" fill="#F87171"/>
+<text x="82" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="118" y="212.0" width="44" height="38.0" rx="6" fill="#34D399"/>
+<text x="140" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="176" y="136.0" width="44" height="114.0" rx="6" fill="#34D399"/>
+<text x="198" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="234" y="98.0" width="44" height="152.0" rx="6" fill="#34D399"/>
+<text x="256" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 4 轮 · 比较 arr[0] 与 arr[1] → 交换</text>
+</g>
+<g style="animation: st19 22.0s linear infinite both">
+<rect x="60" y="212.0" width="44" height="38.0" rx="6" fill="#F87171"/>
+<text x="82" y="204.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="118" y="174.0" width="44" height="76.0" rx="6" fill="#34D399"/>
+<text x="140" y="166.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="176" y="136.0" width="44" height="114.0" rx="6" fill="#34D399"/>
+<text x="198" y="128.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="234" y="98.0" width="44" height="152.0" rx="6" fill="#34D399"/>
+<text x="256" y="90.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<rect x="292" y="60.0" width="44" height="190.0" rx="6" fill="#34D399"/>
+<text x="314" y="52.0" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<text x="280" y="285" text-anchor="middle" fill="#94A3B8" font-size="13">第 4 轮 · 比较 arr[0] 与 arr[1] → 交换</text>
+</g>
+<style>
+.st0 {opacity:0} @keyframes st0 {0%{opacity:0}0.00%{opacity:0}0.60%{opacity:1}4.40%{opacity:1}5.00%{opacity:0}100%{opacity:0}}
+.st1 {opacity:0} @keyframes st1 {0%{opacity:0}5.00%{opacity:0}5.60%{opacity:1}9.40%{opacity:1}10.00%{opacity:0}100%{opacity:0}}
+.st2 {opacity:0} @keyframes st2 {0%{opacity:0}10.00%{opacity:0}10.60%{opacity:1}14.40%{opacity:1}15.00%{opacity:0}100%{opacity:0}}
+.st3 {opacity:0} @keyframes st3 {0%{opacity:0}15.00%{opacity:0}15.60%{opacity:1}19.40%{opacity:1}20.00%{opacity:0}100%{opacity:0}}
+.st4 {opacity:0} @keyframes st4 {0%{opacity:0}20.00%{opacity:0}20.60%{opacity:1}24.40%{opacity:1}25.00%{opacity:0}100%{opacity:0}}
+.st5 {opacity:0} @keyframes st5 {0%{opacity:0}25.00%{opacity:0}25.60%{opacity:1}29.40%{opacity:1}30.00%{opacity:0}100%{opacity:0}}
+.st6 {opacity:0} @keyframes st6 {0%{opacity:0}30.00%{opacity:0}30.60%{opacity:1}34.40%{opacity:1}35.00%{opacity:0}100%{opacity:0}}
+.st7 {opacity:0} @keyframes st7 {0%{opacity:0}35.00%{opacity:0}35.60%{opacity:1}39.40%{opacity:1}40.00%{opacity:0}100%{opacity:0}}
+.st8 {opacity:0} @keyframes st8 {0%{opacity:0}40.00%{opacity:0}40.60%{opacity:1}44.40%{opacity:1}45.00%{opacity:0}100%{opacity:0}}
+.st9 {opacity:0} @keyframes st9 {0%{opacity:0}45.00%{opacity:0}45.60%{opacity:1}49.40%{opacity:1}50.00%{opacity:0}100%{opacity:0}}
+.st10 {opacity:0} @keyframes st10 {0%{opacity:0}50.00%{opacity:0}50.60%{opacity:1}54.40%{opacity:1}55.00%{opacity:0}100%{opacity:0}}
+.st11 {opacity:0} @keyframes st11 {0%{opacity:0}55.00%{opacity:0}55.60%{opacity:1}59.40%{opacity:1}60.00%{opacity:0}100%{opacity:0}}
+.st12 {opacity:0} @keyframes st12 {0%{opacity:0}60.00%{opacity:0}60.60%{opacity:1}64.40%{opacity:1}65.00%{opacity:0}100%{opacity:0}}
+.st13 {opacity:0} @keyframes st13 {0%{opacity:0}65.00%{opacity:0}65.60%{opacity:1}69.40%{opacity:1}70.00%{opacity:0}100%{opacity:0}}
+.st14 {opacity:0} @keyframes st14 {0%{opacity:0}70.00%{opacity:0}70.60%{opacity:1}74.40%{opacity:1}75.00%{opacity:0}100%{opacity:0}}
+.st15 {opacity:0} @keyframes st15 {0%{opacity:0}75.00%{opacity:0}75.60%{opacity:1}79.40%{opacity:1}80.00%{opacity:0}100%{opacity:0}}
+.st16 {opacity:0} @keyframes st16 {0%{opacity:0}80.00%{opacity:0}80.60%{opacity:1}84.40%{opacity:1}85.00%{opacity:0}100%{opacity:0}}
+.st17 {opacity:0} @keyframes st17 {0%{opacity:0}85.00%{opacity:0}85.60%{opacity:1}89.40%{opacity:1}90.00%{opacity:0}100%{opacity:0}}
+.st18 {opacity:0} @keyframes st18 {0%{opacity:0}90.00%{opacity:0}90.60%{opacity:1}94.40%{opacity:1}95.00%{opacity:0}100%{opacity:0}}
+.st19 {opacity:0} @keyframes st19 {0%{opacity:0}95.00%{opacity:0}95.60%{opacity:1}99.40%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style></svg>

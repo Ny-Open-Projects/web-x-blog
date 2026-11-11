@@ -1,0 +1,170 @@
+[
+ {
+  "rel": "go/matrix/lc_48_旋转矩阵/solution_1___1.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/matrix/lc_48_旋转矩阵/solution_2___2.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/matrix/lc_48_旋转矩阵/solution_3___3.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/matrix/lc_48_旋转矩阵/solution_1___1.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/matrix/lc_48_旋转矩阵/solution_2___2.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/matrix/lc_48_旋转矩阵/solution_3___3.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/matrix/lc_48_旋转矩阵/solution_1___1.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/matrix/lc_48_旋转矩阵/solution_2___2.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/matrix/lc_48_旋转矩阵/solution_3___3.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_344_反转字符串/solution_1_1_____1____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_344_反转字符串/solution_2_2_____2_______.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_344_反转字符串/solution_1_1_____1____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_344_反转字符串/solution_2_2_____2_______.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_344_反转字符串/solution_1_1_____1____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_344_反转字符串/solution_2_2_____2_______.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_75_颜色分类/solution_1_1_____1____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_75_颜色分类/solution_2_2_____2____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_75_颜色分类/solution_3_3_____3_______.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_75_颜色分类/solution_1_1_____1____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_75_颜色分类/solution_2_2_____2____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_75_颜色分类/solution_3_3_____3_______.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_75_颜色分类/solution_1_1_____1____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_75_颜色分类/solution_2_2_____2____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_75_颜色分类/solution_3_3_____3_______.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_746_使用最小花费爬楼梯/solution_1_1_____1______.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_746_使用最小花费爬楼梯/solution_2___2.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_746_使用最小花费爬楼梯/solution_3_2_____2_________.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_746_使用最小花费爬楼梯/solution_4_3_____3____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/dp/lc_746_使用最小花费爬楼梯/solution_5_4_____4______.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_746_使用最小花费爬楼梯/solution_1_1_____1______.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_746_使用最小花费爬楼梯/solution_2___2.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_746_使用最小花费爬楼梯/solution_3_2_____2_________.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_746_使用最小花费爬楼梯/solution_4_3_____3____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/dp/lc_746_使用最小花费爬楼梯/solution_5_4_____4______.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_746_使用最小花费爬楼梯/solution_1_1_____1______.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_746_使用最小花费爬楼梯/solution_2___2.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_746_使用最小花费爬楼梯/solution_3_2_____2_________.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_746_使用最小花费爬楼梯/solution_4_3_____3____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/dp/lc_746_使用最小花费爬楼梯/solution_5_4_____4______.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_485_最大连续1的个数/solution_1___1.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_485_最大连续1的个数/solution_1___1.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_485_最大连续1的个数/solution_1___1.ts",
+  "status": "done_pass"
+ }
+]

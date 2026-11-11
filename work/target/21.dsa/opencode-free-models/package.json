@@ -1,0 +1,21 @@
+{
+  "name": "@local/opencode-free-models",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "meta": {
+    "title": "OpenCode Free Models",
+    "description": "通过 OpenCode Zen 接入免费模型（Big Pickle、Nemotron、MiMo、Ling 等）"
+  },
+  "icon": "./icon.svg"
+}

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" font-family="system-ui,sans-serif">
+<rect width="560" height="300" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">排序预处理 · 方案 13（自动循环）</text>
+<g style="animation: st0 7.2s linear infinite both">
+<rect x="62" y="80" width="64" height="100" rx="6" fill="#4A90D9"/>
+<text x="94" y="73" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="140" y="128" width="64" height="52" rx="6" fill="#4A90D9"/>
+<text x="172" y="121" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="218" y="16" width="64" height="164" rx="6" fill="#4A90D9"/>
+<text x="250" y="9" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">9</text>
+<rect x="296" y="144" width="64" height="36" rx="6" fill="#4A90D9"/>
+<text x="328" y="137" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="374" y="48" width="64" height="132" rx="6" fill="#4A90D9"/>
+<text x="406" y="41" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<rect x="452" y="112" width="64" height="68" rx="6" fill="#4A90D9"/>
+<text x="484" y="105" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">分：递归拆到单元素</text>
+</g>
+<g style="animation: st1 7.2s linear infinite both">
+<rect x="62" y="128" width="64" height="52" rx="6" fill="#60A5FA"/>
+<text x="94" y="121" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="140" y="80" width="64" height="100" rx="6" fill="#60A5FA"/>
+<text x="172" y="73" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="218" y="144" width="64" height="36" rx="6" fill="#60A5FA"/>
+<text x="250" y="137" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="296" y="16" width="64" height="164" rx="6" fill="#60A5FA"/>
+<text x="328" y="9" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">9</text>
+<rect x="374" y="112" width="64" height="68" rx="6" fill="#60A5FA"/>
+<text x="406" y="105" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="452" y="48" width="64" height="132" rx="6" fill="#60A5FA"/>
+<text x="484" y="41" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">两两归并：[2,5] [1,9] [3,7]</text>
+</g>
+<g style="animation: st2 7.2s linear infinite both">
+<rect x="62" y="144" width="64" height="36" rx="6" fill="#C084FC"/>
+<text x="94" y="137" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="140" y="128" width="64" height="52" rx="6" fill="#C084FC"/>
+<text x="172" y="121" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="218" y="80" width="64" height="100" rx="6" fill="#C084FC"/>
+<text x="250" y="73" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="296" y="16" width="64" height="164" rx="6" fill="#C084FC"/>
+<text x="328" y="9" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">9</text>
+<rect x="374" y="112" width="64" height="68" rx="6" fill="#60A5FA"/>
+<text x="406" y="105" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="452" y="48" width="64" height="132" rx="6" fill="#60A5FA"/>
+<text x="484" y="41" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">归并 [2,5] + [1,9] → [1,2,5,9]</text>
+</g>
+<g style="animation: st3 7.2s linear infinite both">
+<rect x="62" y="144" width="64" height="36" rx="6" fill="#34D399"/>
+<text x="94" y="137" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<rect x="140" y="128" width="64" height="52" rx="6" fill="#34D399"/>
+<text x="172" y="121" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<rect x="218" y="112" width="64" height="68" rx="6" fill="#34D399"/>
+<text x="250" y="105" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<rect x="296" y="80" width="64" height="100" rx="6" fill="#34D399"/>
+<text x="328" y="73" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">5</text>
+<rect x="374" y="48" width="64" height="132" rx="6" fill="#34D399"/>
+<text x="406" y="41" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">7</text>
+<rect x="452" y="16" width="64" height="164" rx="6" fill="#34D399"/>
+<text x="484" y="9" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">9</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">最终归并 → 全局有序</text>
+</g>
+<style>
+.st0 {opacity:0} @keyframes st0 {0%{opacity:0}0.00%{opacity:0}3.00%{opacity:1}22.00%{opacity:1}25.00%{opacity:0}100%{opacity:0}}
+.st1 {opacity:0} @keyframes st1 {0%{opacity:0}25.00%{opacity:0}28.00%{opacity:1}47.00%{opacity:1}50.00%{opacity:0}100%{opacity:0}}
+.st2 {opacity:0} @keyframes st2 {0%{opacity:0}50.00%{opacity:0}53.00%{opacity:1}72.00%{opacity:1}75.00%{opacity:0}100%{opacity:0}}
+.st3 {opacity:0} @keyframes st3 {0%{opacity:0}75.00%{opacity:0}78.00%{opacity:1}97.00%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style>
+</svg>

@@ -1,0 +1,5 @@
+{"rel": "ts/concurrency/lc_1114_按序打印/solution_1_1_____1____synchronization.ts", "status": "done_pass", "note": "faithful ts rewrite + async demo(); verified PASS"}
+{"rel": "ts/concurrency/lc_2637_有时间限制的_promise_对象/solution_1___1.ts", "status": "done_pass", "note": "faithful ts rewrite + async demo(); verified PASS"}
+{"rel": "ts/concurrency/lc_2637_有时间限制的_promise_对象/solution_2_2____2______Timeout.ts", "status": "done_pass", "note": "faithful ts rewrite + async demo(); verified PASS"}
+{"rel": "ts/concurrency/lc_2721_并行执行异步函数/solution_1_1_____1____async_await___.ts", "status": "done_pass", "note": "faithful ts rewrite + async demo(); verified PASS"}
+{"rel": "ts/concurrency/lc_2721_并行执行异步函数/solution_2_2_____2____then_catch___.ts", "status": "done_pass", "note": "faithful ts rewrite + async demo(); verified PASS"}

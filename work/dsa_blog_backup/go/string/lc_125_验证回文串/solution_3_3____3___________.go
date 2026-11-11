@@ -1,0 +1,49 @@
+// 来源（blog）：https://blog.csdn.net/tyro_java/article/details/145114949
+package main // 引入依赖
+
+import (
+	"fmt"     // 「fmt」
+	"os"      // 「os」
+	"unicode" // 「unicode」
+)
+
+// isPalindrome 验证回文串（使用 unicode 工具函数筛选）。
+// 忠实翻译 Python 参考实现：t = [c.lower() for c in s if c.isalnum()]; t == t[::-1]
+func isPalindrome(s string) bool { // 定义判定函数 isPalindrome
+	filtered := make([]rune, 0, len(s)) // 把 make([]rune, 0, 长度(字符串)) 写入 filtered :
+	for _, r := range s {               // 同时取 _ 与 右指针 遍历
+		if unicode.IsLetter(r) || unicode.IsDigit(r) { // 若 unicode.IsLetter(右指针) 或 unicode.IsDigit(右指针
+			filtered = append(filtered, unicode.ToLower(r)) // 把 append(filtered, unicode.ToLower(右指针)) 写入 filtered
+		}
+	}
+	for i, j := 0, len(filtered)-1; i < j; i, j = i+1, j-1 {
+		if filtered[i] != filtered[j] { // 若 filtered[下标 i] 不等于 filtered[下标 j]
+			return false // 返回 false
+		}
+	}
+	return true // 返回 true
+}
+
+func main() { // 程序入口：跑内嵌自测用例
+	// 用例来自 _tools/correctness_check.py PROBLEMS["lc_125_验证回文串"]
+	cases := []struct { // 把 []struct { 写入 cases :
+		s    string // 字符串 string
+		want bool   // want bool
+	}{ // }{
+		{"A man, a plan, a canal: Panama", true},
+		{"race a car", false},
+		{" ", true},
+	}
+	allOK := true             // 把 true 写入 allOK :
+	for _, c := range cases { // 同时取 _ 与 字符 遍历
+		got := isPalindrome(c.s) // 把 isPalindrome(字符.字符串) 写入 got :
+		if got != c.want {       // 若 got 不等于 字符.want
+			allOK = false                                                         // 把 false 写入 allOK
+			fmt.Printf("FAIL isPalindrome(%q) = %v, want %v\n", c.s, got, c.want) // 打印输出
+		}
+	}
+	if !allOK { // 若 取反 allOK
+		os.Exit(1) // os.Exit(1)
+	}
+	fmt.Println("PASS") // 全部用例通过，输出 PASS
+}

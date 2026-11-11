@@ -1,0 +1,40 @@
+// 来源（blog）：https://blog.csdn.net/tyro_java/article/details/130482987
+// LeetCode 621. 任务调度器 — Zig 版
+const std = @import("std"); // 把 @import(「std」) 存入 std
+
+// 方案2（Counter 公式法）
+// Zig 无内建哈希表：用 26 桶计数等价 Counter（任务均为大写字母，只统计出现过的任务）
+fn leastInterval(tasks: []const []const u8, n: i32) i32 { // 定义函数/方法 leastInterval
+    var count = [_]i32{0} ** 26; // 把 [_]i32{0} 乘 乘 26 存入 计数
+    for (tasks) |t| { // 逐个取出 tasks 的元素（另一字符串）
+        count[t[0] - 'A'] += 1; // 把 1; 写入 count[t[0] - 'A'] +
+    }
+    var max_count: i32 = 0; // 把 0; 写入 var max_count: i32
+    for (count) |v| { // 逐个取出 计数 的元素（值）
+        if (v > max_count) max_count = v; // 若 值 超过 max_count) max_count 赋值为 值;
+    }
+    var max_count_tasks: i32 = 0; // 把 0; 写入 var max_count_tasks: i32
+    for (count) |v| { // 逐个取出 计数 的元素（值）
+        if (v > 0 and v == max_count) max_count_tasks += 1; // 若 值 超过 0 and 值 等于 max_count) max_count_tasks 累加 1;
+    }
+    const total: i32 = @intCast(tasks.len); // 把 @intCast(tasks.长度); 写入 const total: i32
+    return @max(total, (max_count - 1) * (n + 1) + max_count_tasks); // 返回 @取较大值 总和, (max_count 减 1) 乘 (元素个数 加 1) 加 max_count_tasks)
+}
+
+pub fn main() !void { // 程序入口：跑内嵌自测用例
+    // 与 TS 事实源内嵌用例一致
+    const Case = struct { tasks: []const []const u8, n: i32, want: i32 };
+    const cases = [_]Case{ // 把 [_]Case{ 存入 cases
+        .{ .tasks = &.{ "A", "A", "A", "B", "B", "B" }, .n = 2, .want = 8 },
+        .{ .tasks = &.{ "A", "A", "A", "A" }, .n = 2, .want = 10 },
+        .{ .tasks = &.{ "A", "B", "C", "D" }, .n = 0, .want = 4 },
+    };
+    for (cases, 0..) |c, i| { // for (cases, 0..) 按位或 字符, 下标 i 按位或 {
+        const got = leastInterval(c.tasks, c.n); // 把 leastInterval(字符.tasks, 字符.元素个数) 存入 got
+        if (got != c.want) { // 若 got 不等于 字符.want
+            std.debug.print("FAIL case {d} got {d} want {d}\n", .{ i, got, c.want }); // 打印输出
+            return error.TestFailed; // 返回 error.TestFailed
+        }
+    }
+    std.debug.print("PASS\n", .{}); // 全部用例通过，输出 PASS
+}

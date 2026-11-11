@@ -1,0 +1,6 @@
+# Registers the opencode-free-models plugin that auto-configures
+# the opencode provider with free models in llm-pi-ai settings.
+- insert:
+    - id: opencode-free-models
+      name: '@local/opencode-free-models'
+      config: {}

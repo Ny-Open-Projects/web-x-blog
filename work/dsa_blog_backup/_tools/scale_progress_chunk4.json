@@ -1,0 +1,443 @@
+{"rel": "java/greedy/lc_122_买卖股票的最佳时机ii/solution_3___3.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/greedy/lc_122_买卖股票的最佳时机ii/solution_4___4.java", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_4___4.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_10___10.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_111_二叉树的最小深度/solution_2___2.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_111_二叉树的最小深度/solution_6_3_____3____.ts", "status": "done_pass", "note": "verified"}
+{"rel": "java/tree/lc_98_验证二叉搜索树/solution_10_2______2__________.java", "status": "done_pass", "note": "verified"}
+{"rel": "go/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_1___1.go", "status": "done_pass", "note": "verified"}
+{"rel": "go/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_2___2.go", "status": "done_pass", "note": "verified"}
+{"rel": "ts/heap/lc_23_合并k个升序链表/solution_3_3____3______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/heap/lc_23_合并k个升序链表/solution_5_1_____1____.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/heap/lc_23_合并k个升序链表/solution_7_3____3_____.ts", "status": "done_pass", "note": "verified"}
+{"rel": "java/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_3___3.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_4___4.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/heap/lc_215_数组中的第k个最大元素/solution_7___7.java", "status": "done_pass", "note": "verified"}
+{"rel": "ts/stack/lc_682_棒球比赛/solution_3___3.ts", "status": "done_pass", "note": "verified"}
+{"rel": "java/binary_search/lc_374_猜数字大小/solution_3___3.java", "status": "done_pass", "note": "verified"}
+{"rel": "go/dp/lc_509_斐波那契数/solution_4___4.go", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_107490876_计算思维之分书和八皇后问题/solution_6___6.ts", "status": "done_pass", "note": "verified"}
+{"rel": "go/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_1___1.go", "status": "done_pass", "note": "verified"}
+{"rel": "go/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_5___5.go", "status": "done_pass", "note": "verified"}
+{"rel": "java/tree/lc_102_二叉树的层序遍历/solution_4_1_____1_____BFS_.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/tree/lc_102_二叉树的层序遍历/solution_6_3____3_____BFS____.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/notes/lc_113951689_动态规划之lcs_0/1-knapsack_transitive-closure/solution_1___1.java", "status": "done_pass", "note": "verified"}
+{"rel": "go/notes/lc_107490876_计算思维之分书和八皇后问题/solution_1___1.go", "status": "done_pass", "note": "verified"}
+{"rel": "go/notes/lc_107490876_计算思维之分书和八皇后问题/solution_2___2.go", "status": "done_pass", "note": "verified"}
+{"rel": "java/string/lc_557_反转字符串中的单词_iii/solution_6___6.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/string/lc_557_反转字符串中的单词_iii/solution_9___9.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/string/lc_557_反转字符串中的单词_iii/solution_13___13.java", "status": "done_pass", "note": "verified"}
+{"rel": "ts/sort/lc_21_合并两个有序链表/solution_2___2.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/sort/lc_21_合并两个有序链表/solution_4___4.ts", "status": "done_pass", "note": "verified"}
+{"rel": "java/notes/lc_134066237_冒泡排序/solution_8___8.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/notes/lc_134172583_计数排序/solution_4___4.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/notes/lc_134172583_计数排序/solution_11___11.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/dp/lc_63_不同路径_ii/solution_2___2.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/dp/lc_63_不同路径_ii/solution_4___4.java", "status": "done_pass", "note": "verified"}
+{"rel": "ts/dp/lc_518_零钱兑换_ii/solution_2_2_____2______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/linked_list/lc_237_删除链表中的节点/solution_2___2.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/queue/lc_621_任务调度器/solution_4___4.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/string/lc_696_计数二进制子串/solution_10___10.ts", "status": "done_pass", "note": "verified [rel typo fixed by leader: solution_10__10.ts -> solution_10___10.ts]"}
+{"rel": "ts/notes/lc_134066237_冒泡排序/solution_6___6.ts", "status": "done_pass", "note": "verified"}
+{"rel": "java/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_9___9.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/tree/lc_94_二叉树的中序遍历/solution_4___4.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/tree/lc_94_二叉树的中序遍历/solution_5___5.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/tree/lc_94_二叉树的中序遍历/solution_7___7.java", "status": "done_pass", "note": "verified"}
+{"rel": "java/tree/lc_94_二叉树的中序遍历/solution_9___9.java", "status": "done_pass", "note": "verified"}
+{"rel": "go/graph/lc_133_克隆图/solution_5_2____2_____.go", "status": "done_pass", "note": "BFS cloneGraph 忠实翻译 pyref solution_5_2____2_____.py；同上 4 用例"}
+{"rel": "java/hash/lc_3_无重复字符的最长子串/solution_1___1.java", "status": "done_pass", "note": "set滑窗忠实翻译 pyref solution_1___1.py；6用例(want由pyref实跑)；顶层类 lc3_solution11"}
+{"rel": "java/hash/lc_3_无重复字符的最长子串/solution_2___2.java", "status": "done_pass", "note": "set滑窗忠实翻译 pyref solution_2___2.py；同上；顶层类 lc3_solution22"}
+{"rel": "java/hash/lc_3_无重复字符的最长子串/solution_5___5.java", "status": "done_pass", "note": "last字典滑窗忠实翻译 pyref solution_5___5.py；同上；顶层类 lc3_solution55"}
+{"rel": "java/array/lc_605_种花问题/solution_1_1____1_____.java", "status": "done_pass", "note": "贪心种植忠实翻译 pyref solution_1；5用例 want 由 7 个 pyref 实跑一致；顶层类 lc605_solution111"}
+{"rel": "java/array/lc_605_种花问题/solution_5_2_____2__________.java", "status": "done_pass", "note": "贪心种植忠实翻译 pyref solution_5；同上；顶层类 lc605_solution522"}
+{"rel": "java/array/lc_605_种花问题/solution_6_3____3_________________.java", "status": "done_pass", "note": "l/r双指针忠实翻译 pyref solution_6；同上；顶层类 lc605_solution633"}
+{"rel": "ts/stack/lc_1047_删除字符串中的所有相邻重复项/solution_2_2_____2____.ts", "status": "done_pass", "note": "栈消消乐(continue变体)忠实翻译 pyref solution_2；同上；demo(); 结尾自调用"}
+{"rel": "go/backtrack/lc_131_分割回文串/solution_2_2_____2____________.go", "status": "done_pass", "note": "同上，pyref solution_2"}
+{"rel": "ts/array/lc_89_格雷编码/solution_7_3_____3___________________.ts", "status": "done_pass", "note": "[0]起镜像追加 grayCode 忠实翻译 pyref solution_7；同上；demo(); 结尾"}
+{"rel": "ts/array/lc_89_格雷编码/solution_10_2_____2__________.ts", "status": "done_pass", "note": "[0]起镜像追加 grayCode 忠实翻译 pyref solution_10；同上；demo(); 结尾"}
+{"rel": "go/dp/lc_787_k_站中转内最便宜的航班/solution_4___4.go", "status": "done_pass", "note": "标准Bellman-Ford 忠实翻译 pyref solution_4；同上"}
+{"rel": "go/dp/lc_787_k_站中转内最便宜的航班/solution_5___5.go", "status": "done_pass", "note": "邻接矩阵Bellman-Ford 忠实翻译 pyref solution_5；同上"}
+{"rel": "go/dp/lc_787_k_站中转内最便宜的航班/solution_10___10.go", "status": "done_pass", "note": "标准Bellman-Ford 忠实翻译 pyref solution_10；同上"}
+{"rel": "java/heap/lc_313_超级丑数/solution_4_1_____1______.java", "status": "done_pass", "note": "最小堆(跳过重复值) 忠实翻译 pyref solution_4；比较器按(val,j)字典序对应 python 元组比较；8用例；顶层类 lc313_solution411"}
+{"rel": "ts/notes/lc_107450699_计算思维之谁做的好事与刑侦作案问题/solution_1___1.ts", "status": "done_pass", "note": "翻译自 py solution_1（思路一字符枚举）；断言 solve()=C 与 truthCounts=[1,2,3,2]；rc=0 含 PASS"}
+{"rel": "go/dp/lc_674_最长连续递增序列/solution_1_1_____1____.go", "status": "done_pass", "note": "忠实翻译 py s1（cur>ans 更新）；6 用例含空/单元素/全等/递减边界；rc=0 含 PASS"}
+{"rel": "go/dp/lc_674_最长连续递增序列/solution_3_3_____3______.go", "status": "done_pass", "note": "忠实翻译 py s3（dp 数组版）；6 用例同上；rc=0 含 PASS"}
+{"rel": "ts/string/lc_2042_检查句子中的数字是否递增/solution_2_2_____2_____.ts", "status": "done_pass", "note": "翻译 py s2（与 s1 逻辑相同）；同 7 用例；rc=0 含 PASS"}
+{"rel": "java/string/lc_696_计数二进制子串/solution_2___2.java", "status": "done_pass", "note": "翻译 py s2（group while 分组法）；9 用例 want=[6,4,2,0,0,3,3,3,1]； 顶层 Main；javac+java rc=0 含 PASS"}
+{"rel": "java/string/lc_696_计数二进制子串/solution_6___6.java", "status": "done_pass", "note": "翻译 py s6（group while 分组法）；9 用例 want=[6,4,2,0,0,3,3,3,1]； 顶层 Main；javac+java rc=0 含 PASS"}
+{"rel": "java/string/lc_696_计数二进制子串/solution_8___8.java", "status": "done_pass", "note": "翻译 py s8（group while 分组法）；9 用例 want=[6,4,2,0,0,3,3,3,1]； 顶层 Main；javac+java rc=0 含 PASS"}
+{"rel": "java/string/lc_696_计数二进制子串/solution_10___10.java", "status": "done_pass", "note": "翻译 py s10（group while 分组法）；9 用例 want=[6,4,2,0,0,3,3,3,1]； 顶层 Main；javac+java rc=0 含 PASS"}
+{"rel": "ts/tree/lc_112_路径总和/solution_13_3____3_________.ts", "status": "done_pass", "note": "翻译 py s13 递归版（同 s3 逻辑）；8 用例同上；rc=0 含 PASS"}
+{"rel": "java/notes/lc_134083295_归并排序/solution_2___2.java", "status": "done_pass", "note": "faithful merge sort, gate PASS"}
+{"rel": "go/notes/lc_134073792_快速排序/solution_1___1.go", "status": "done_pass", "note": "quicksort faithful, gate PASS"}
+{"rel": "go/notes/lc_134073792_快速排序/solution_2___2.go", "status": "done_pass", "note": "quicksort faithful, gate PASS"}
+{"rel": "go/notes/lc_134066237_冒泡排序/solution_7___7.go", "status": "done_pass", "note": "bubble sort faithful, gate PASS"}
+{"rel": "go/tree/lc_199_二叉树的右视图/solution_2_2_____2_______.go", "status": "done_pass", "note": "faithful go, gate PASS"}
+{"rel": "go/sort/lc_164_最大间距/solution_2___2.go", "status": "done_pass", "note": "max gap faithful, gate PASS"}
+{"rel": "java/tree/lc_101_对称二叉树/solution_7___7.java", "status": "done_pass", "note": "isSymmetric recursive faithful, gate PASS"}
+{"rel": "java/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_6___6.java", "status": "done_pass", "note": "build_synthetic faithful, gate PASS"}
+{"rel": "java/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_7___7.java", "status": "done_pass", "note": "full_pipeline faithful, gate PASS"}
+{"rel": "ts/string/lc_20_有效的括号/solution_1___1.ts", "status": "done_pass", "note": "isValid stack faithful, gate PASS"}
+{"rel": "ts/string/lc_20_有效的括号/solution_8___8.ts", "status": "done_pass", "note": "isValid stack faithful, gate PASS"}
+{"rel": "ts/heap/lc_215_数组中的第k个最大元素/solution_5___5.ts", "status": "done_pass", "note": "findKthLargest nlargest faithful, gate PASS"}
+{"rel": "ts/heap/lc_215_数组中的第k个最大元素/solution_10___10.ts", "status": "done_pass", "note": "find_kth_largest counting-sort faithful, gate PASS"}
+{"rel": "ts/binary_search/lc_374_猜数字大小/solution_3___3.ts", "status": "done_pass", "note": "guessNumber iterative alt-guess faithful, gate PASS"}
+{"rel": "ts/binary_search/lc_374_猜数字大小/solution_4___4.ts", "status": "done_pass", "note": "guessNumber iterative alt-guess faithful, gate PASS"}
+{"rel": "ts/dp/lc_2050_并行课程_iii/solution_2_2_____2__________.ts", "status": "done_pass", "note": "minimumTime topo+dp faithful, gate PASS"}
+{"rel": "ts/stack/lc_155_最小栈/solution_1_1_____1____.ts", "status": "done_pass", "note": "MinStack x_stack+min_stack faithful, gate PASS"}
+{"rel": "java/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_1___1.java", "status": "done_pass", "note": "faithful java port of linear_search, PASS"}
+{"rel": "java/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_3___3.java", "status": "done_pass", "note": "faithful java port of bubble_sort, PASS"}
+{"rel": "java/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_4___4.java", "status": "done_pass", "note": "faithful java port of quick_sort, PASS"}
+{"rel": "java/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_7___7.java", "status": "done_pass", "note": "faithful java port of merge_sort, PASS"}
+{"rel": "ts/sort/lc_164_最大间距/solution_6___6.ts", "status": "done_pass", "note": "faithful ts port maximumGap, 4 cases PASS"}
+{"rel": "ts/sort/lc_164_最大间距/solution_7___7.ts", "status": "done_pass", "note": "faithful ts port maximumGap, 4 cases PASS"}
+{"rel": "java/notes/lc_107490876_计算思维之分书和八皇后问题/solution_2___2.java", "status": "done_pass", "note": "faithful java port, PASS"}
+{"rel": "java/notes/lc_107490876_计算思维之分书和八皇后问题/solution_3___3.java", "status": "done_pass", "note": "faithful java port, PASS"}
+{"rel": "java/notes/lc_107490876_计算思维之分书和八皇后问题/solution_5___5.java", "status": "done_pass", "note": "faithful java port, PASS"}
+{"rel": "java/notes/lc_107490876_计算思维之分书和八皇后问题/solution_6___6.java", "status": "done_pass", "note": "faithful java port, PASS"}
+{"rel": "ts/dp/lc_787_k_站中转内最便宜的航班/solution_3___3.ts", "status": "done_pass", "note": "faithful ts findCheapestPrice, 4 cases PASS"}
+{"rel": "ts/dp/lc_787_k_站中转内最便宜的航班/solution_8___8.ts", "status": "done_pass", "note": "faithful ts findCheapestPrice, 4 cases PASS"}
+{"rel": "ts/dp/lc_787_k_站中转内最便宜的航班/solution_10___10.ts", "status": "done_pass", "note": "faithful ts findCheapestPrice, 4 cases PASS"}
+{"rel": "ts/stack/lc_556_下一个更大元素_iii/solution_2_2_____2___.ts", "status": "done_pass", "note": "faithful ts nextGreaterElement math, PASS"}
+{"rel": "go/string/lc_557_反转字符串中的单词_iii/solution_2___2.go", "status": "done_pass", "note": "faithful go reverseWords, PASS"}
+{"rel": "go/string/lc_557_反转字符串中的单词_iii/solution_3___3.go", "status": "done_pass", "note": "faithful go reverseWords, PASS"}
+{"rel": "go/string/lc_557_反转字符串中的单词_iii/solution_15___15.go", "status": "done_pass", "note": "faithful go reverseWords, PASS"}
+{"rel": "java/queue/lc_622_设计循环队列/solution_2_2____2_____.java", "status": "done_pass", "note": "faithful java circular queue, PASS"}
+{"rel": "java/queue/lc_622_设计循环队列/solution_3_1_____1______.java", "status": "done_pass", "note": "faithful java circular queue, PASS"}
+{"rel": "java/greedy/lc_860_柠檬水找零/solution_2___2.java", "status": "done_pass", "note": "faithful java lemonadeChange, PASS"}
+{"rel": "ts/tree/lc_572_另一棵树的子树/solution_1_1_____1___________.ts", "status": "done_pass", "note": "faithful port of python isSubtree, 3 cases PASS"}
+{"rel": "ts/tree/lc_572_另一棵树的子树/solution_2_2_____2______________.ts", "status": "done_pass", "note": "faithful port of python getMaxElement returns True, 2 cases PASS"}
+{"rel": "ts/tree/lc_654_最大二叉树/solution_3_3_____3______.ts", "status": "done_pass", "note": "faithful port stack, 4 cases PASS"}
+{"rel": "ts/stack/lc_341_扁平化嵌套列表迭代器/solution_1___1.ts", "status": "done_pass", "note": "faithful port solution returns null, 2 cases PASS"}
+{"rel": "ts/stack/lc_341_扁平化嵌套列表迭代器/solution_2_1_____1_______.ts", "status": "done_pass", "note": "faithful port NestedIterator DFS, 2 cases PASS"}
+{"rel": "ts/stack/lc_341_扁平化嵌套列表迭代器/solution_4_3_____3_____.ts", "status": "done_pass", "note": "faithful port flatArray, 3 cases PASS"}
+{"rel": "java/stack/lc_682_棒球比赛/solution_5___5.java", "status": "done_pass", "note": "faithful port calPoints, 2 cases PASS"}
+{"rel": "ts/tree/lc_102_二叉树的层序遍历/solution_1___1.ts", "status": "done_pass", "note": "faithful levelOrder BFS, 3 cases PASS"}
+{"rel": "ts/tree/lc_102_二叉树的层序遍历/solution_9_3_____3______BFS____.ts", "status": "done_pass", "note": "faithful levelOrder BFS, 3 cases PASS"}
+{"rel": "ts/tree/lc_145_二叉树的后序遍历/solution_1___1.ts", "status": "done_pass", "note": "faithful postorder, 3 cases PASS"}
+{"rel": "java/notes/lc_107435426_字典序最大问题分析/solution_1___1.java", "status": "done_pass", "note": "faithful port getResult bruteforce, 4 cases PASS"}
+{"rel": "ts/tree/lc_94_二叉树的中序遍历/solution_1___1.ts", "status": "done_pass", "note": "faithful inorder, 3 cases PASS"}
+{"rel": "ts/tree/lc_94_二叉树的中序遍历/solution_6___6.ts", "status": "done_pass", "note": "faithful inorder, 3 cases PASS"}
+{"rel": "java/dp/lc_787_k_站中转内最便宜的航班/solution_10___10.java", "status": "done_pass", "note": "faithful Bellman-Ford port, 3 cases PASS"}
+{"rel": "java/dp/lc_787_k_站中转内最便宜的航班/solution_5___5.java", "status": "done_pass", "note": "faithful Bellman-Ford port, 3 cases PASS"}
+{"rel": "ts/queue/lc_622_设计循环队列/solution_5_1_____1______.ts", "status": "done_pass", "note": "faithful MyCircularQueue port, 9-step sequence PASS"}
+{"rel": "go/linked_list/lc_141_环形链表/solution_3___3.go", "status": "done_pass", "note": "faithful Floyd cycle detection, 4 cases PASS"}
+{"rel": "go/linked_list/lc_141_环形链表/solution_5___5.go", "status": "done_pass", "note": "faithful Floyd cycle detection, 4 cases PASS"}
+{"rel": "go/linked_list/lc_141_环形链表/solution_6___6.go", "status": "done_pass", "note": "faithful Floyd cycle detection, 4 cases PASS"}
+{"rel": "go/linked_list/lc_141_环形链表/solution_7___7.go", "status": "done_pass", "note": "faithful Floyd cycle detection, 4 cases PASS"}
+{"rel": "go/linked_list/lc_141_环形链表/solution_9___9.go", "status": "done_pass", "note": "faithful Floyd cycle detection, 4 cases PASS"}
+{"rel": "java/sort/lc_164_最大间距/solution_10___10.java", "status": "done_pass", "note": "faithful bucket pigeonhole maximumGap, 3 cases PASS"}
+{"rel": "ts/notes/lc_134073792_快速排序/solution_6___6.ts", "status": "done_pass", "note": "faithful Lomuto quicksort, 4 cases PASS"}
+{"rel": "ts/notes/lc_134073792_快速排序/solution_8___8.ts", "status": "done_pass", "note": "faithful Lomuto quicksort, 4 cases PASS"}
+{"rel": "java/linked_list/lc_237_删除链表中的节点/solution_1___1.java", "status": "done_pass", "note": "faithful deleteNode with null guard, 2 cases PASS"}
+{"rel": "java/tree/lc_112_路径总和/solution_12_2____2____.java", "status": "done_pass", "note": "faithful hasPathSum, faithful DFS path sum, 5 cases PASS"}
+{"rel": "java/tree/lc_112_路径总和/solution_3___3.java", "status": "done_pass", "note": "faithful hasPathSum, faithful DFS path sum, 5 cases PASS"}
+{"rel": "java/tree/lc_112_路径总和/solution_8_3____3_________.java", "status": "done_pass", "note": "faithful hasPathSum, faithful DFS path sum, 5 cases PASS"}
+{"rel": "ts/linked_list/lc_141_环形链表/solution_4___4.ts", "status": "done_pass", "note": "faithful ts port of hasCycle slow-fast, 4 cases PASS"}
+{"rel": "ts/linked_list/lc_141_环形链表/solution_6___6.ts", "status": "done_pass", "note": "faithful ts port of hasCycle slow-fast, 4 cases PASS"}
+{"rel": "ts/linked_list/lc_141_环形链表/solution_8___8.ts", "status": "done_pass", "note": "faithful ts port of hasCycle slow-fast, 4 cases PASS"}
+{"rel": "ts/linked_list/lc_141_环形链表/solution_14___14.ts", "status": "done_pass", "note": "faithful ts port of hasCycle slow-fast, 4 cases PASS"}
+{"rel": "ts/linked_list/lc_141_环形链表/solution_15___15.ts", "status": "done_pass", "note": "faithful ts port of hasCycle slow-fast, 4 cases PASS"}
+{"rel": "ts/array/lc_17_电话号码的字母组合/solution_5_2____2____.ts", "status": "done_pass", "note": "faithful ts port of letterCombinations, 3 cases PASS"}
+{"rel": "go/heap/lc_215_数组中的第k个最大元素/solution_4___4.go", "status": "done_pass", "note": "faithful go port of findKthLargest, 2-3 cases PASS"}
+{"rel": "go/heap/lc_215_数组中的第k个最大元素/solution_12___12.go", "status": "done_pass", "note": "faithful go port of findKthLargest, 2-3 cases PASS"}
+{"rel": "ts/array/lc_605_种花问题/solution_9_3____3_________________.ts", "status": "done_pass", "note": "faithful ts port of canPlaceFlowers, 3 cases PASS"}
+{"rel": "go/tree/lc_572_另一棵树的子树/solution_1_1_____1___________.go", "status": "done_pass", "note": "faithful go port of isSubtree, 3 cases PASS"}
+{"rel": "ts/notes/lc_113951689_动态规划之lcs_0/1-knapsack_transitive-closure/solution_1___1.ts", "status": "done_pass", "note": "faithful ts port of LCS dp, PASS"}
+{"rel": "go/array/lc_605_种花问题/solution_4_1____1_____.go", "status": "done_pass", "note": "faithful port of python canPlaceFlowers, 3 cases PASS"}
+{"rel": "go/array/lc_605_种花问题/solution_7_1____1_____.go", "status": "done_pass", "note": "faithful port of python canPlaceFlowers, 3 cases PASS"}
+{"rel": "go/array/lc_605_种花问题/solution_9_3____3_________________.go", "status": "done_pass", "note": "faithful port of python canPlaceFlowers, 3 cases PASS"}
+{"rel": "java/array/lc_914_卡牌分组/solution_3_3_____3__________.java", "status": "done_pass", "note": "faithful java port of python hasGroupsSizeX, 2-3 cases PASS"}
+{"rel": "java/array/lc_914_卡牌分组/solution_4_1____1______.java", "status": "done_pass", "note": "faithful java port of python hasGroupsSizeX, 2-3 cases PASS"}
+{"rel": "java/array/lc_914_卡牌分组/solution_7_1____1______.java", "status": "done_pass", "note": "faithful java port of python hasGroupsSizeX, 2-3 cases PASS"}
+{"rel": "java/stack/lc_1685_有序数组中差绝对值之和/solution_2___2.java", "status": "done_pass", "note": "faithful java port getSumAbsoluteDifferences, 2 cases PASS"}
+{"rel": "java/linked_list/lc_83_删除排序链表中的重复元素/solution_1___1.java", "status": "done_pass", "note": "faithful java port deleteDuplicates linked-list, 4 cases PASS"}
+{"rel": "go/notes/lc_134191965_基数排序/solution_2___2.go", "status": "done_pass", "note": "faithful go port radixSort, 2-3 cases PASS"}
+{"rel": "go/string/lc_415_字符串相加/solution_1_1_____1___.go", "status": "done_pass", "note": "faithful go port addStrings, 4 cases PASS"}
+{"rel": "ts/tree/lc_116_填充每个节点的下一个右侧节点指针/solution_2_1_____1_____.ts", "status": "done_pass", "note": "faithful ts port connect next pointers tree, 2 cases PASS"}
+{"rel": "ts/notes/lc_134172583_计数排序/solution_4___4.ts", "status": "done_pass", "note": "faithful ts port countSort, 2 cases PASS"}
+{"rel": "ts/notes/lc_134172583_计数排序/solution_5___5.ts", "status": "done_pass", "note": "faithful ts port countSort, 2 cases PASS"}
+{"rel": "ts/notes/lc_134172583_计数排序/solution_6___6.ts", "status": "done_pass", "note": "faithful ts port countSort, 2 cases PASS"}
+{"rel": "ts/tree/lc_226_翻转二叉树/solution_3___3.ts", "status": "done_pass", "note": "faithful ts port invertTree, 2 cases PASS"}
+{"rel": "ts/tree/lc_98_验证二叉搜索树/solution_3___3.ts", "status": "done_pass", "note": "faithful TS port of python isValidBST inorder prev, 2 cases PASS"}
+{"rel": "ts/tree/lc_98_验证二叉搜索树/solution_6_2_____2__________.ts", "status": "done_pass", "note": "faithful TS port of python isValidBST inorder iter, 2 cases PASS"}
+{"rel": "go/greedy/lc_455_分饼干/solution_4___4.go", "status": "done_pass", "note": "faithful go port findContentChildren two-ptr i,j, 2 cases PASS"}
+{"rel": "java/tree/lc_144_二叉树的前序遍历/solution_3___3.java", "status": "done_pass", "note": "faithful java port preorder Morris, 3 cases PASS"}
+{"rel": "java/tree/lc_144_二叉树的前序遍历/solution_6___6.java", "status": "done_pass", "note": "faithful java port preorder stack, 3 cases PASS"}
+{"rel": "go/heap/lc_347_前k个高频元素/solution_1___1.go", "status": "done_pass", "note": "faithful go port topKFrequent min-heap, 2 cases PASS"}
+{"rel": "go/heap/lc_347_前k个高频元素/solution_6___6.go", "status": "done_pass", "note": "faithful go port topKFrequent bucket, 2 cases PASS"}
+{"rel": "java/linked_list/lc_141_环形链表/solution_6___6.java", "status": "done_pass", "note": "faithful java port hasCycle mutation, 4 cases PASS"}
+{"rel": "java/linked_list/lc_141_环形链表/solution_7___7.java", "status": "done_pass", "note": "faithful java port hasCycle visited dict, 4 cases PASS"}
+{"rel": "go/tree/lc_145_二叉树的后序遍历/solution_2___2.go", "status": "done_pass", "note": "faithful go port postorder returns empty, 2 cases PASS"}
+{"rel": "go/tree/lc_145_二叉树的后序遍历/solution_5___5.go", "status": "done_pass", "note": "faithful go port postorder dfs, 3 cases PASS"}
+{"rel": "go/tree/lc_145_二叉树的后序遍历/solution_8___8.go", "status": "done_pass", "note": "faithful go port postorder iterative prev, 3 cases PASS"}
+{"rel": "ts/greedy/lc_455_分饼干/solution_2___2.ts", "status": "done_pass", "note": "faithful TS port findContentChildren two-ptr, 2 cases PASS"}
+{"rel": "java/tree/lc_104_二叉树的最大深度/solution_5___5.java", "status": "done_pass", "note": "faithful java port maxDepth recursive, 2 cases PASS"}
+{"rel": "java/tree/lc_104_二叉树的最大深度/solution_6___6.java", "status": "done_pass", "note": "faithful java port maxDepth recursive, 2 cases PASS"}
+{"rel": "java/tree/lc_104_二叉树的最大深度/solution_9___9.java", "status": "done_pass", "note": "faithful java port maxDepth recursive, 2 cases PASS"}
+{"rel": "ts/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_3___3.ts", "status": "done_pass", "note": "faithful TS port Proto get method inside class, cases PASS"}
+{"rel": "java/tree/lc_404_左叶子之和/solution_1_1_____1_______.java", "status": "done_pass", "note": "faithful java port sumOfLeftLeaves iterative stack, tree 24 + null 0 PASS"}
+{"rel": "java/sort/lc_21_合并两个有序链表/solution_5___5.java", "status": "done_pass", "note": "faithful java port mergeTwoLists iterative res, 4 cases PASS"}
+{"rel": "java/array/lc_89_格雷编码/solution_10_2_____2__________.java", "status": "done_pass", "note": "java_gray PASS"}
+{"rel": "java/array/lc_89_格雷编码/solution_11_3_____3___________________.java", "status": "done_pass", "note": "java_gray PASS"}
+{"rel": "java/heap/lc_23_合并k个升序链表/solution_10_2____2_________________1.java", "status": "done_pass", "note": "java_mergeK PASS"}
+{"rel": "java/heap/lc_23_合并k个升序链表/solution_11_3_____3_____.java", "status": "done_pass", "note": "java_mergeK PASS"}
+{"rel": "java/heap/lc_23_合并k个升序链表/solution_3_3____3______.java", "status": "done_pass", "note": "java_mergeK PASS"}
+{"rel": "java/backtrack/lc_46_全排列/solution_2___2.java", "status": "done_pass", "note": "java_perm PASS"}
+{"rel": "java/backtrack/lc_46_全排列/solution_6___6.java", "status": "done_pass", "note": "java_perm PASS"}
+{"rel": "go/greedy/lc_860_柠檬水找零/solution_5___5.go", "status": "done_pass", "note": "go_lemon PASS"}
+{"rel": "java/tree/lc_226_翻转二叉树/solution_5___5.java", "status": "done_pass", "note": "java_invert PASS"}
+{"rel": "ts/array/lc_914_卡牌分组/solution_3_3_____3__________.ts", "status": "done_pass", "note": "ts_card PASS"}
+{"rel": "ts/array/lc_914_卡牌分组/solution_4_1____1______.ts", "status": "done_pass", "note": "ts_card PASS"}
+{"rel": "ts/linked_list/lc_2_两数相加/solution_6___6.ts", "status": "done_pass", "note": "ts_add PASS"}
+{"rel": "java/notes/lc_133651611_图及其深度和广度优先遍历实现/solution_3___3.java", "status": "done_pass", "note": "java_graph PASS"}
+{"rel": "java/notes/lc_133651611_图及其深度和广度优先遍历实现/solution_7___7.java", "status": "done_pass", "note": "java_graph PASS"}
+{"rel": "java/notes/lc_133651611_图及其深度和广度优先遍历实现/solution_8___8.java", "status": "done_pass", "note": "java_graph PASS"}
+{"rel": "java/greedy/lc_455_分饼干/solution_2___2.java", "status": "done_pass", "note": "java_cookie PASS"}
+{"rel": "java/greedy/lc_455_分饼干/solution_6___6.java", "status": "done_pass", "note": "java_cookie PASS"}
+{"rel": "ts/string/lc_557_反转字符串中的单词_iii/solution_1___1.ts", "status": "done_pass", "note": "ts_rev PASS"}
+{"rel": "ts/string/lc_557_反转字符串中的单词_iii/solution_2___2.ts", "status": "done_pass", "note": "ts_rev PASS"}
+{"rel": "go/array/lc_167_两数之和_ii_-_输入有序数组/solution_1_1_____1______.go", "status": "done_pass", "note": "two-pointer binary search per element"}
+{"rel": "go/array/lc_17_电话号码的字母组合/solution_2_2___2____.go", "status": "done_pass", "note": "iterative"}
+{"rel": "go/array/lc_17_电话号码的字母组合/solution_5_2____2____.go", "status": "done_pass", "note": "iterative combos"}
+{"rel": "go/array/lc_17_电话号码的字母组合/solution_9_3____3______.go", "status": "done_pass", "note": "iterative combos"}
+{"rel": "go/array/lc_209_长度最小的子数组/solution_1_1_____1_________.go", "status": "done_pass", "note": "O(n^2) sliding"}
+{"rel": "go/array/lc_541_反转字符串_ii/solution_1_1_____1____.go", "status": "done_pass", "note": "reverseStr"}
+{"rel": "go/array/lc_89_格雷编码/solution_10_2_____2__________.go", "status": "done_pass", "note": "reflect gray code"}
+{"rel": "go/array/lc_914_卡牌分组/solution_8_2_____2_______.go", "status": "done_pass", "note": "gcd of counts"}
+{"rel": "go/array/lc_977_有序数组的平方/solution_3_3_____3_____.go", "status": "done_pass", "note": "two-pointer from ends"}
+{"rel": "go/backtrack/lc_39_组合总和/solution_1_1_____1______.go", "status": "done_pass", "note": "combinationSum backtrack"}
+{"rel": "go/backtrack/lc_51_n_皇后/solution_1_1_____1_________.go", "status": "done_pass", "note": "N-Queens set-based"}
+{"rel": "go/backtrack/lc_93_复原_ip_地址/solution_3___3.go", "status": "done_pass", "note": "restoreIpAddresses backtrack"}
+{"rel": "go/concurrency/lc_1114_按序打印/solution_1_1_____1____synchronization.go", "status": "done_pass", "note": "Foo channel ordering"}
+{"rel": "go/dp/lc_1494_并行课程_ii/solution_1_1_____1____________.go", "status": "done_pass", "note": "minNumberOfSemesters DFS"}
+{"rel": "go/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.go", "status": "done_pass", "note": "minNumberOfSemesters DFS"}
+{"rel": "go/dp/lc_213_打家劫舍_ii/solution_1_1_____1_____.go", "status": "done_pass", "note": "rob dp1/dp2 (faithful, ref has dp2 bug for n>=4)"}
+{"rel": "go/notes/lc_107524703_计算思维之人鬼渡河问题/solution_3___3.go", "status": "done_pass", "note": "triage reverified PASS"}
+{"rel": "go/string/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1_1_____1_____.go", "status": "done_pass", "note": "triage reverified PASS"}
+{"rel": "go/tree/lc_144_二叉树的前序遍历/solution_3___3.go", "status": "done_pass", "note": "triage reverified PASS"}
+{"rel": "go/tree/lc_700_二叉搜索树中的搜索/solution_1___1.go", "status": "done_pass", "note": "triage reverified PASS"}
+{"rel": "java/notes/lc_134191965_基数排序/solution_1___1.java", "status": "done_pass", "note": "triage reverified PASS"}
+{"rel": "java/stack/lc_03_05_栈排序/solution_2_2____2_______.java", "status": "done_pass", "note": "triage reverified PASS"}
+{"rel": "go/dp/lc_3105_最长的严格递增或递减子数组/solution_3_3_____3______.go", "status": "done_pass", "note": "longestMonotonicSubarray two passes"}
+{"rel": "go/dp/lc_63_不同路径_ii/solution_5___5.go", "status": "done_pass", "note": "uniquePathsWithObstacles"}
+{"rel": "go/dp/lc_714_买卖股票的最佳时机含手续费/solution_1_1_____1______.go", "status": "done_pass", "note": "maxProfit fee"}
+{"rel": "go/dp/lc_877_石子游戏/solution_3_3_____3___.go", "status": "done_pass", "note": "stoneGame returns true (faithful to ref)"}
+{"rel": "go/graph/lc_65_有效数字/solution_3___3.go", "status": "done_pass", "note": "isNumber simple DFA logic"}
+{"rel": "go/greedy/lc_1518_换水问题/solution_2_2_____2___.go", "status": "done_pass", "note": "numWaterBottles"}
+{"rel": "go/hash/lc_3_无重复字符的最长子串/solution_2___2.go", "status": "done_pass", "note": "lengthOfLongestSubstring sliding window"}
+{"rel": "go/hash/lc_3_无重复字符的最长子串/solution_3___3.go", "status": "done_pass", "note": "lengthOfLongestSubstring last-pos map"}
+{"rel": "go/hash/lc_3_无重复字符的最长子串/solution_4___4.go", "status": "done_pass", "note": "lengthOfLongestSubstring last-pos map"}
+{"rel": "go/hash/lc_76_最小覆盖子串/solution_3___3.go", "status": "done_pass", "note": "minWindow need/mSize"}
+{"rel": "go/heap/lc_208_实现_trie_(前缀树)/solution_2_2_____2_______.go", "status": "done_pass", "note": "Trie insert/search/startsWith map[rune]"}
+{"rel": "go/heap/lc_23_合并k个升序链表/solution_10_2____2_________________1.go", "status": "done_pass", "note": "mergeKLists collect+sort+rebuild"}
+{"rel": "go/heap/lc_23_合并k个升序链表/solution_12_4_____4_____.go", "status": "done_pass", "note": "mergeKLists k-way min-heap idx tiebreak"}
+{"rel": "go/heap/lc_313_超级丑数/solution_1___1.go", "status": "done_pass", "note": "nthSuperUglyNumber placeholder n=1 -> 1"}
+{"rel": "go/linked_list/lc_148_排序链表/solution_5___5.go", "status": "done_pass", "note": "sortList merge sort"}
+{"rel": "go/linked_list/lc_148_排序链表/solution_7___7.go", "status": "done_pass", "note": "sortList merge sort"}
+{"rel": "go/linked_list/lc_19_删除链表的倒数第_n_个结点/solution_4_4_____4____.go", "status": "done_pass", "note": "removeNthFromEnd two-pointer"}
+{"rel": "go/linked_list/lc_237_删除链表中的节点/solution_2___2.go", "status": "done_pass", "note": "deleteNode in-place"}
+{"rel": "go/linked_list/lc_237_删除链表中的节点/solution_3___3.go", "status": "done_pass", "note": "deleteNode nil-safe"}
+{"rel": "go/linked_list/lc_2_两数相加/solution_2___2.go", "status": "done_pass", "note": "addTwoNumbers head/tail"}
+{"rel": "go/linked_list/lc_83_删除排序链表中的重复元素/solution_3___3.go", "status": "done_pass", "note": "reference-buggy output [2]"}
+{"rel": "go/linked_list/lc_876_链表的中间结点/solution_1_1_____1____.go", "status": "done_pass", "note": "middleNode array"}
+{"rel": "go/linked_list/lc_92_反转链表_ii/solution_1_1_____1______.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/matrix/lc_54_螺旋矩阵/solution_3_1____1_________.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/notes/lc_107391023_求直方图最大面积算法分析/solution_5___5.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/notes/lc_107391023_求直方图最大面积算法分析/solution_6___6.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_2___2.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/notes/lc_133468244_堆和实现最小堆类/solution_1___1.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/notes/lc_133468244_堆和实现最小堆类/solution_3___3.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_3___3.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_5___5.go", "status": "done_pass", "note": "verified PASS (go run rc=0, stdout contains PASS)"}
+{"rel": "go/notes/lc_134083295_归并排序/solution_6___6.go", "status": "done_pass", "note": "mergeSort in-place"}
+{"rel": "go/notes/lc_134085384_选择排序/solution_3___3.go", "status": "done_pass", "note": "selectionSort copy"}
+{"rel": "go/notes/lc_134150438_希尔排序/solution_1___1.go", "status": "done_pass", "note": "shellSort return"}
+{"rel": "go/notes/lc_134205361_桶排序/solution_3___3.go", "status": "done_pass", "note": "bucketSort float"}
+{"rel": "go/notes/lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列/solution_1_主解法.go", "status": "done_pass", "note": "verifyPostorder recursive"}
+{"rel": "go/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_2_2_____2_____-__.go", "status": "done_pass", "note": "dfs stub per python ref"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_4___4.go", "status": "done_pass", "note": "quickSort"}
+{"rel": "go/other/lc_202_快乐数/solution_2_2_____2___.go", "status": "done_pass", "note": "getNum happy"}
+{"rel": "go/queue/lc_26_删除有序数组中的重复项/solution_3_2_____2_______.go", "status": "done_pass", "note": "removeDuplicates"}
+{"rel": "go/queue/lc_622_设计循环队列/solution_4_2____2_____.go", "status": "done_pass", "note": "MyCircularQueue"}
+{"rel": "go/sort/lc_21_合并两个有序链表/solution_5___5.go", "status": "done_pass", "note": "mergeTwoLists res"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_1___1.go", "status": "done_pass", "note": "sortArrayByParityII sort-based"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_5___5.go", "status": "done_pass", "note": "sortArrayByParityII swap"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_6___6.go", "status": "done_pass", "note": "sortArrayByParityII swap"}
+{"rel": "go/stack/lc_03_05_栈排序/solution_2_2____2_______.go", "status": "done_pass", "note": "SortedStack temp-stack"}
+{"rel": "go/stack/lc_1047_删除字符串中的所有相邻重复项/solution_2_2_____2____.go", "status": "done_pass", "note": "removeDuplicates"}
+{"rel": "go/stack/lc_1472_设计浏览器历史记录/solution_1_主解法.go", "status": "done_pass", "note": "BrowserHistory"}
+{"rel": "go/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.go", "status": "done_pass", "note": "reverseWords insert"}
+{"rel": "go/stack/lc_155_最小栈/solution_1_1_____1____.go", "status": "done_pass", "note": "MinStack min_stack"}
+{"rel": "go/stack/lc_155_最小栈/solution_2_2_____2_______.go", "status": "done_pass", "note": "MinStack mins"}
+{"rel": "go/string/lc_20_有效的括号/solution_7___7.go", "status": "done_pass", "note": "isValid odd+stack"}
+{"rel": "go/string/lc_20_有效的括号/solution_14___14.go", "status": "done_pass", "note": "isValid stack"}
+{"rel": "go/string/lc_20_有效的括号/solution_15___15.go", "status": "done_pass", "note": "isValid stack"}
+{"rel": "go/tree/lc_102_二叉树的层序遍历/solution_7_1_____1______BFS_.go", "status": "done_pass", "note": "levelOrder BFS by level size"}
+{"rel": "go/tree/lc_102_二叉树的层序遍历/solution_8_2_____2______BFS______.go", "status": "done_pass", "note": "levelOrder BFS by level size"}
+{"rel": "go/tree/lc_102_二叉树的层序遍历/solution_9_3_____3______BFS____.go", "status": "done_pass", "note": "levelOrder BFS by level size"}
+{"rel": "go/tree/lc_104_二叉树的最大深度/solution_1___1.go", "status": "done_pass", "note": "maxDepth DFS leaf depth"}
+{"rel": "go/tree/lc_104_二叉树的最大深度/solution_9___9.go", "status": "done_pass", "note": "maxDepth recursive 1+max"}
+{"rel": "go/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.go", "status": "done_pass", "note": "sortedListToBST fast/slow median, inorder=sorted"}
+{"rel": "go/tree/lc_111_二叉树的最小深度/solution_5_2_____2_____BFS______.go", "status": "done_pass", "note": "minDepth BFS"}
+{"rel": "go/tree/lc_112_路径总和/solution_11_1_____1________DFS_.go", "status": "done_pass", "note": "hasPathSum DFS"}
+{"rel": "go/tree/lc_112_路径总和/solution_15_5____5________DFS____.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_112_路径总和/solution_6_1_____1________DFS_.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_3_2____2_________next___.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_222_完全二叉树的节点个数/solution_1_1_____1___________.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_222_完全二叉树的节点个数/solution_3_3____3______.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_226_翻转二叉树/solution_3___3.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_226_翻转二叉树/solution_6___6.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_429_n_叉树的层序遍历/solution_1_1_____1_______.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_94_二叉树的中序遍历/solution_5___5.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_98_验证二叉搜索树/solution_4___4.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_98_验证二叉搜索树/solution_6_2_____2__________.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_98_验证二叉搜索树/solution_9_1______1_____.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_515_在每个树行中找最大值/solution_1_1_____1_______.go", "status": "done_pass", "note": "PASS"}
+{"rel": "go/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.go", "status": "done_pass", "note": "PASS"}
+{"rel": "java/array/lc_17_电话号码的字母组合/solution_1_1_____1________.java", "status": "done_pass", "note": "PASS"}
+{"rel": "java/array/lc_17_电话号码的字母组合/solution_3_3_____3________.java", "status": "done_pass", "note": "PASS"}
+{"rel": "java/array/lc_17_电话号码的字母组合/solution_4_1____1______.java", "status": "done_pass", "note": "PASS"}
+{"rel": "java/array/lc_380_o(1)_时间插入、删除和获取随机元素/solution_1_1_____1___________.java", "status": "done_pass", "note": "PASS"}
+{"rel": "java/array/lc_905_按奇偶排序数组/solution_1_1_____1______.java", "status": "done_pass", "note": "PASS"}
+{"rel": "java/array/lc_905_按奇偶排序数组/solution_3_3_____3______.java", "status": "done_pass", "note": "PASS"}
+{"rel": "java/backtrack/lc_37_解数独/solution_1_1_____1____.java", "status": "done_pass", "note": "PASS"}
+{"rel": "java/binary_search/lc_704_二分查找/solution_1___1.java", "status": "done_pass", "note": "binary search harness 3 cases"}
+{"rel": "java/concurrency/lc_2637_有时间限制的_promise_对象/solution_1___1.java", "status": "done_pass", "note": "timeLimit timeout test"}
+{"rel": "java/concurrency/lc_2637_有时间限制的_promise_对象/solution_2_2____2______Timeout.java", "status": "done_pass", "note": "timeLimit timeout test"}
+{"rel": "java/concurrency/lc_2721_并行执行异步函数/solution_1_1_____1____async_await___.java", "status": "done_pass", "note": "promiseAll parallel results"}
+{"rel": "java/dp/lc_123_买卖股票的最佳时机_iii/solution_1_1_____1_____.java", "status": "done_pass", "note": "maxProfit want 2 for [1,2,3]"}
+{"rel": "java/dp/lc_1494_并行课程_ii/solution_1_1_____1____________.java", "status": "done_pass", "note": "bitmask+combos want 3"}
+{"rel": "java/dp/lc_213_打家劫舍_ii/solution_2_2_____2_____.java", "status": "done_pass", "note": "rob want 3"}
+{"rel": "java/dp/lc_2407_最长递增子序列_ii/solution_1_1_____1_____.java", "status": "done_pass", "note": "segment tree LIS want 5"}
+{"rel": "java/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.java", "status": "done_pass", "note": "monotonic want 2"}
+{"rel": "java/dp/lc_926_将字符串翻转到单调递增/solution_2_2_____2_________.java", "status": "done_pass", "note": "minFlipsMonoIncr want 1"}
+{"rel": "java/graph/lc_417_太平洋大西洋水流问题/solution_1___1.java", "status": "done_pass", "note": "pacificAtlantic want 7 cells"}
+{"rel": "java/graph/lc_417_太平洋大西洋水流问题/solution_3___3.java", "status": "done_pass", "note": "pacificAtlantic want 7 cells"}
+{"rel": "java/graph/lc_65_有效数字/solution_2___2.java", "status": "done_pass", "note": "isNumber simple approach"}
+{"rel": "java/graph/lc_65_有效数字/solution_7_2_____2________.java", "status": "done_pass", "note": "isNumber DFA"}
+{"rel": "java/greedy/lc_1518_换水问题/solution_2_2_____2___.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_435_无重叠区间/solution_1_1_____1____.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/hash/lc_76_最小覆盖子串/solution_1___1.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_208_实现_trie_(前缀树)/solution_2_2_____2_______.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_295_数据流的中位数/solution_2_2_____2_____-___.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_347_前k个高频元素/solution_2___2.java", "status": "done_pass", "note": "topKFrequent sorted approach"}
+{"rel": "java/heap/lc_451_根据字符出现频率排序/solution_4_2_____2____.java", "status": "done_pass", "note": "bucket"}
+{"rel": "java/heap/lc_451_根据字符出现频率排序/solution_6_2_____2__.java", "status": "done_pass", "note": "max-heap"}
+{"rel": "java/linked_list/lc_206_反转链表/solution_1___1.java", "status": "done_pass", "note": "reverseList"}
+{"rel": "java/linked_list/lc_206_反转链表/solution_2___2.java", "status": "done_pass", "note": "reverseList"}
+{"rel": "java/linked_list/lc_206_反转链表/solution_3___3.java", "status": "done_pass", "note": "reverseList"}
+{"rel": "java/linked_list/lc_203_移除链表元素/solution_1_1_____1____.java", "status": "done_pass", "note": "removeElements recursive"}
+{"rel": "java/linked_list/lc_876_链表的中间结点/solution_3_3_____3_______.java", "status": "done_pass", "note": "middleNode array"}
+{"rel": "java/matrix/lc_54_螺旋矩阵/solution_1___1.java", "status": "done_pass", "note": "spiralOrder"}
+{"rel": "java/matrix/lc_54_螺旋矩阵/solution_3_1____1_________.java", "status": "done_pass", "note": "spiralOrder"}
+{"rel": "java/notes/lc_105893757_栈排序分析/solution_1___1.java", "status": "done_pass", "note": "stack sort"}
+{"rel": "java/notes/lc_107450699_计算思维之谁做的好事与刑侦作案问题/solution_2___2.java", "status": "done_pass", "note": "logic puzzle"}
+{"rel": "java/notes/lc_116567013_pm/solution_4___4.java", "status": "done_pass", "note": "string match / kmp"}
+{"rel": "java/notes/lc_134073792_快速排序/solution_1___1.java", "status": "done_pass", "note": "quick_sort_v1 list-based"}
+{"rel": "java/notes/lc_134073792_快速排序/solution_4___4.java", "status": "done_pass", "note": "quick_sort_v1 list-based"}
+{"rel": "java/notes/lc_134073792_快速排序/solution_5___5.java", "status": "done_pass", "note": "Hoare partition quick_sort_v2"}
+{"rel": "java/notes/lc_134085384_选择排序/solution_3___3.java", "status": "done_pass", "note": "selection sort copy"}
+{"rel": "java/notes/lc_134150438_希尔排序/solution_2___2.java", "status": "done_pass", "note": "shell sort"}
+{"rel": "java/notes/lc_134217002_顺序查找/solution_2___2.java", "status": "done_pass", "note": "sequential search"}
+{"rel": "java/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_2___2.java", "status": "done_pass", "note": "two_sum/max_sub_array/rotate"}
+{"rel": "java/other/lc_217_存在重复元素/solution_2_2_____2____.java", "status": "done_pass", "note": "containsDuplicate sort"}
+{"rel": "java/other/lc_326_3_的幂/solution_1_1_____1____.java", "status": "done_pass", "note": "isPowerOfThree loop"}
+{"rel": "java/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_2_2_____2______.java", "status": "done_pass", "note": "sortByBits"}
+{"rel": "java/sort/lc_922_按奇偶排序数组_ii/solution_4___4.java", "status": "done_pass", "note": "parity in-place swap"}
+{"rel": "java/sort/lc_922_按奇偶排序数组_ii/solution_5___5.java", "status": "done_pass", "note": "parity in-place swap"}
+{"rel": "java/sort/lc_922_按奇偶排序数组_ii/solution_6___6.java", "status": "done_pass", "note": "parity in-place swap"}
+{"rel": "java/stack/lc_1047_删除字符串中的所有相邻重复项/solution_2_2_____2____.java", "status": "done_pass", "note": "stack removeDuplicates continue"}
+{"rel": "java/stack/lc_155_最小栈/solution_2_2_____2_______.java", "status": "done_pass", "note": "MinStack last()"}
+{"rel": "java/stack/lc_225_用队列实现栈/solution_2_2_____2______.java", "status": "done_pass", "note": "MyStack single-deque rotate"}
+{"rel": "java/stack/lc_232_用栈实现队列/solution_1_1_____1____.java", "status": "done_pass", "note": "MyQueue"}
+{"rel": "java/stack/lc_3100_换水问题_ii/solution_2___2.java", "status": "done_pass", "note": "maxBottlesDrunk flag"}
+{"rel": "java/stack/lc_341_扁平化嵌套列表迭代器/solution_3_2_____2__.java", "status": "done_pass", "note": "NestedIterator lazy stack"}
+{"rel": "java/stack/lc_641_设计循环双端队列/solution_2_2_____2___.java", "status": "done_pass", "note": "MyCircularDeque list"}
+{"rel": "java/stack/lc_71_简化路径/solution_2_2_____2__.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_165_比较版本号/solution_2_2_____2____.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_20_有效的括号/solution_10___10.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_20_有效的括号/solution_12___12.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_20_有效的括号/solution_13___13.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_20_有效的括号/solution_14___14.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_415_字符串相加/solution_1_1_____1___.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_482_密钥格式化/solution_1_1_____2___.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_8_字符串转换整数_(atoi)/solution_1_1_____1____.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/string/lc_8_字符串转换整数_(atoi)/solution_2_2_____2___________.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_100_相同的树/solution_6___6.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_111_二叉树的最小深度/solution_1___1.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_111_二叉树的最小深度/solution_2___2.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_111_二叉树的最小深度/solution_5_2_____2_____BFS______.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_111_二叉树的最小深度/solution_9_3_____3____.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_114_二叉树展开为链表/solution_1_1____1___________.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_114_二叉树展开为链表/solution_3_3____3_____________.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_145_二叉树的后序遍历/solution_4___4.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_145_二叉树的后序遍历/solution_6___6.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_257_二叉树的所有路径/solution_2_2_____2_______.java", "status": "done_pass", "note": "chunk09 remediated (sanitized)"}
+{"rel": "java/tree/lc_572_另一棵树的子树/solution_1_1_____1___________.java", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "java/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.java", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "java/tree/lc_637_二叉树的层平均值/solution_2_2_____2_______.java", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "java/tree/lc_701_二叉搜索树中的插入操作/solution_1_1_____1___.java", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "ts/array/lc_209_长度最小的子数组/solution_1_1_____1_________.ts", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "ts/array/lc_209_长度最小的子数组/solution_4___4.ts", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "ts/array/lc_541_反转字符串_ii/solution_1_1_____1____.ts", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "ts/array/lc_977_有序数组的平方/solution_3_3_____3_____.ts", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "ts/backtrack/lc_39_组合总和/solution_1_1_____1______.ts", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "ts/backtrack/lc_47_全排列_ii/solution_1_1_____1_____.ts", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "ts/backtrack/lc_77_组合/solution_1_1_____1___________.ts", "status": "done_pass", "note": "inline faithful rewrite + runtime PASS (2026-10-15)"}
+{"rel": "ts/concurrency/lc_2637_有时间限制的_promise_对象/solution_1___1.ts", "status": "done_pass", "note": "faithful ts rewrite + async demo(); verified PASS"}
+{"rel": "ts/matrix/lc_54_螺旋矩阵/solution_1___1.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/matrix/lc_54_螺旋矩阵/solution_3_1____1_________.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/string/lc_415_字符串相加/solution_1_1_____1___.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/string/lc_415_字符串相加/solution_2_2____2____.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/string/lc_482_密钥格式化/solution_1_1_____2___.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/string/lc_567_字符串的排列/solution_1_1_____1_____.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/other/lc_202_快乐数/solution_1___1.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/greedy/lc_55_跳跃游戏/solution_1_主解法.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/graph/lc_133_克隆图/solution_1___1.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/graph/lc_133_克隆图/solution_2___2.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/graph/lc_133_克隆图/solution_7_2____2_____.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/graph/lc_417_太平洋大西洋水流问题/solution_1___1.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/graph/lc_65_有效数字/solution_1___1.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/graph/lc_65_有效数字/solution_2___2.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/sort/lc_179_最大数/solution_2_2_____2___-__.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/sort/lc_18_四数之和/solution_2_2_____2________.ts", "status": "done_pass", "note": "faithful ts rewrite + demo(); verified PASS"}
+{"rel": "ts/tree/lc_117_填充每个节点的下一个右侧节点指针_ii/solution_1___1.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_108013114_贪心策略之bst&bbst_hashtable+dictionary+map_p/solution_1___1.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_134083295_归并排序/solution_3___3.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_429_n_叉树的层序遍历/solution_2_2_____2_____.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/linked_list/lc_83_删除排序链表中的重复元素/solution_6___6.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/dp/lc_300_最长递增子序列/solution_1_1_____1______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/stack/lc_27_移除元素/solution_2_1_____1____.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_515_在每个树行中找最大值/solution_2_2_____2_______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_2___2.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/linked_list/lc_876_链表的中间结点/solution_1_1_____1____.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_617_合并二叉树/solution_1_1_____1_______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_4_3_____3_____.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_4___4.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_107868749_贪心策略之matrixsorting_pfc_coding_huffmantre/solution_1_主解法.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/stack/lc_641_设计循环双端队列/solution_1_1_____1___.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_1___1.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_105893757_栈排序分析/solution_2___2.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/linked_list/lc_160_相交链表/solution_2_2_____2_____.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/heap/lc_295_数据流的中位数/solution_3_3_____3___________.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_105893757_栈排序分析/solution_1___1.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列/solution_1_主解法.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_222_完全二叉树的节点个数/solution_2_2____2___.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/stack/lc_1685_有序数组中差绝对值之和/solution_3_3_____3___________________.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/linked_list/lc_83_删除排序链表中的重复元素/solution_4___4.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_637_二叉树的层平均值/solution_1_1_____1_______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_404_左叶子之和/solution_3_3_____3_______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/stack/lc_739_每日温度/solution_1_1_____1___.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_107836586_big-o记号_数据结构与算法的关系以及几种基本的数据结构/solution_1_主解法.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_109_有序链表转换二叉搜索树/solution_2_1____1___.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/heap/lc_451_根据字符出现频率排序/solution_3_1____1_______.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/linked_list/lc_148_排序链表/solution_4___4.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/dp/lc_337_打家劫舍_iii/solution_1_1_____1___________.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_100_相同的树/solution_1___1.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/stack/lc_3100_换水问题_ii/solution_2___2.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_543_二叉树的直径/solution_2___2.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_2___2.ts", "status": "done_pass", "note": "verified"}
+{"rel": "ts/tree/lc_104_二叉树的最大深度/solution_8___8.ts", "status": "done_pass", "note": "verified"}

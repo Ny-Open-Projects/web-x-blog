@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="310" viewBox="0 0 560 310" font-family="system-ui,sans-serif">
+<rect width="560" height="310" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">方案2（一维 DP 滚动数组） · 方案 2（自动循环）</text>
+<g style="animation:dp2 1.7600000000000002s linear 0.0s 1 both">
+<rect x="64" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="88" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">0</text>
+<rect x="120" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="144" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="176" y="110" width="48" height="46" rx="8" fill="#34D399"/>
+<text x="200" y="140" text-anchor="middle" fill="#0F172A" font-size="16" font-weight="700">1</text>
+<rect x="232" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="288" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="344" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="400" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="456" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<path d="M 88 102 Q 144 70 200 102" stroke="#38BDF8" fill="none" stroke-width="2"/>
+<path d="M 144 102 Q 172 70 200 102" stroke="#F472B6" fill="none" stroke-width="2"/>
+<text x="280" y="230" text-anchor="middle" fill="#94A3B8" font-size="14">dp[2] = dp[1] + dp[0] = 1</text>
+</g>
+<g style="animation:dp3 1.7600000000000002s linear 0.8s 1 both">
+<rect x="64" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="88" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">0</text>
+<rect x="120" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="144" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="176" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="200" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="232" y="110" width="48" height="46" rx="8" fill="#34D399"/>
+<text x="256" y="140" text-anchor="middle" fill="#0F172A" font-size="16" font-weight="700">2</text>
+<rect x="288" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="344" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="400" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="456" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<path d="M 144 102 Q 200 70 256 102" stroke="#38BDF8" fill="none" stroke-width="2"/>
+<path d="M 200 102 Q 228 70 256 102" stroke="#F472B6" fill="none" stroke-width="2"/>
+<text x="280" y="230" text-anchor="middle" fill="#94A3B8" font-size="14">dp[3] = dp[2] + dp[1] = 2</text>
+</g>
+<g style="animation:dp4 1.7600000000000002s linear 1.6s 1 both">
+<rect x="64" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="88" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">0</text>
+<rect x="120" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="144" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="176" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="200" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="232" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="256" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">2</text>
+<rect x="288" y="110" width="48" height="46" rx="8" fill="#34D399"/>
+<text x="312" y="140" text-anchor="middle" fill="#0F172A" font-size="16" font-weight="700">3</text>
+<rect x="344" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="400" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="456" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<path d="M 200 102 Q 256 70 312 102" stroke="#38BDF8" fill="none" stroke-width="2"/>
+<path d="M 256 102 Q 284 70 312 102" stroke="#F472B6" fill="none" stroke-width="2"/>
+<text x="280" y="230" text-anchor="middle" fill="#94A3B8" font-size="14">dp[4] = dp[3] + dp[2] = 3</text>
+</g>
+<g style="animation:dp5 1.7600000000000002s linear 2.4000000000000004s 1 both">
+<rect x="64" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="88" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">0</text>
+<rect x="120" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="144" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="176" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="200" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="232" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="256" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">2</text>
+<rect x="288" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="312" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">3</text>
+<rect x="344" y="110" width="48" height="46" rx="8" fill="#34D399"/>
+<text x="368" y="140" text-anchor="middle" fill="#0F172A" font-size="16" font-weight="700">5</text>
+<rect x="400" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<rect x="456" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<path d="M 256 102 Q 312 70 368 102" stroke="#38BDF8" fill="none" stroke-width="2"/>
+<path d="M 312 102 Q 340 70 368 102" stroke="#F472B6" fill="none" stroke-width="2"/>
+<text x="280" y="230" text-anchor="middle" fill="#94A3B8" font-size="14">dp[5] = dp[4] + dp[3] = 5</text>
+</g>
+<g style="animation:dp6 1.7600000000000002s linear 3.2s 1 both">
+<rect x="64" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="88" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">0</text>
+<rect x="120" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="144" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="176" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="200" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="232" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="256" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">2</text>
+<rect x="288" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="312" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">3</text>
+<rect x="344" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="368" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">5</text>
+<rect x="400" y="110" width="48" height="46" rx="8" fill="#34D399"/>
+<text x="424" y="140" text-anchor="middle" fill="#0F172A" font-size="16" font-weight="700">8</text>
+<rect x="456" y="110" width="48" height="46" rx="8" fill="#1E293B"/>
+<path d="M 312 102 Q 368 70 424 102" stroke="#38BDF8" fill="none" stroke-width="2"/>
+<path d="M 368 102 Q 396 70 424 102" stroke="#F472B6" fill="none" stroke-width="2"/>
+<text x="280" y="230" text-anchor="middle" fill="#94A3B8" font-size="14">dp[6] = dp[5] + dp[4] = 8</text>
+</g>
+<g style="animation:dp7 1.7600000000000002s linear 4.0s 1 both">
+<rect x="64" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="88" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">0</text>
+<rect x="120" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="144" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="176" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="200" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">1</text>
+<rect x="232" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="256" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">2</text>
+<rect x="288" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="312" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">3</text>
+<rect x="344" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="368" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">5</text>
+<rect x="400" y="110" width="48" height="46" rx="8" fill="#334155"/>
+<text x="424" y="140" text-anchor="middle" fill="#F1F5F9" font-size="16" font-weight="700">8</text>
+<rect x="456" y="110" width="48" height="46" rx="8" fill="#34D399"/>
+<text x="480" y="140" text-anchor="middle" fill="#0F172A" font-size="16" font-weight="700">13</text>
+<path d="M 368 102 Q 424 70 480 102" stroke="#38BDF8" fill="none" stroke-width="2"/>
+<path d="M 424 102 Q 452 70 480 102" stroke="#F472B6" fill="none" stroke-width="2"/>
+<text x="280" y="230" text-anchor="middle" fill="#94A3B8" font-size="14">dp[7] = dp[6] + dp[5] = 13</text>
+</g>
+<style>
+.dp2{opacity:0} @keyframes dp2{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:1}}
+.dp3{opacity:0} @keyframes dp3{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:1}}
+.dp4{opacity:0} @keyframes dp4{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:1}}
+.dp5{opacity:0} @keyframes dp5{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:1}}
+.dp6{opacity:0} @keyframes dp6{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:1}}
+.dp7{opacity:0} @keyframes dp7{0%{opacity:0}15%{opacity:1}80%{opacity:1}100%{opacity:1}}
+</style></svg>

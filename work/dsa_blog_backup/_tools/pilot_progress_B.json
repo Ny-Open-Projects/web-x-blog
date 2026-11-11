@@ -1,0 +1,98 @@
+[
+ {
+  "rel": "go/other/lc_242_有效的字母异位词/solution_1_1_____1___.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/other/lc_242_有效的字母异位词/solution_2_2_____2____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/other/lc_242_有效的字母异位词/solution_1_1_____1___.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/other/lc_242_有效的字母异位词/solution_2_2_____2____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/other/lc_242_有效的字母异位词/solution_1_1_____1___.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/other/lc_242_有效的字母异位词/solution_2_2_____2____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/string/lc_125_验证回文串/solution_1_1_____1_________.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/string/lc_125_验证回文串/solution_2_2_____2_____.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/string/lc_125_验证回文串/solution_3_3____3___________.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/string/lc_125_验证回文串/solution_1_1_____1_________.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/string/lc_125_验证回文串/solution_2_2_____2_____.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/string/lc_125_验证回文串/solution_3_3____3___________.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/string/lc_125_验证回文串/solution_1_1_____1_________.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/string/lc_125_验证回文串/solution_2_2_____2_____.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/string/lc_125_验证回文串/solution_3_3____3___________.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_66_加一/solution_1.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_66_加一/solution_1.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_66_加一/solution_1.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/string/lc_58_最后一个单词的长度/solution_1.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/string/lc_58_最后一个单词的长度/solution_1.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/string/lc_58_最后一个单词的长度/solution_1.ts",
+  "status": "done_pass"
+ },
+ {
+  "rel": "go/array/lc_169_多数元素/solution_1.go",
+  "status": "done_pass"
+ },
+ {
+  "rel": "java/array/lc_169_多数元素/solution_1.java",
+  "status": "done_pass"
+ },
+ {
+  "rel": "ts/array/lc_169_多数元素/solution_1.ts",
+  "status": "done_pass"
+ }
+]

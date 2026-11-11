@@ -1,0 +1,49 @@
+// 来源（blog）：https://blog.csdn.net/tyro_java/article/details/104107934
+package com.webfault.dsa; // 引入依赖
+
+import java.util.*; // 引入依赖
+
+class Main { // 定义类型
+
+  static boolean[] detectEdgesSobel(int[] image) { // 定义函数/方法 detectEdgesSobel
+    boolean[] edges = new boolean[image.length]; // 把 new boolean[image.长度]; 写入 boolean[] edges
+    if (image.length < 2) return edges; // 若 image.长度 小于 2，直接返回 边集
+    edges[0] =
+        Math.abs(image[1] - image[0]) > 50; // 把 Math.取绝对值 image[1] 减 image[0]) 超过 50; 写入 edges[0]
+    for (int i = 1; i < image.length - 1; i++)
+      edges[i] =
+          Math.abs(image[i + 1] - image[i - 1]) > 50; // 让 下标 i 从 1 开始计数，下标 i 小于 image.长度 减 1 就继续
+    edges[image.length - 1] = Math.abs(image[image.length - 1] - image[image.length - 2]) > 50;
+    return edges; // 返回 边集
+  }
+
+  static int recognizeCaptcha(int[] bg, int[] puzzle) { // 定义函数/方法 recognizeCaptcha
+    boolean[] bgEdges = detectEdgesSobel(bg); // 把 detectEdgesSobel(bg); 写入 boolean[] bgEdges
+    boolean[] puzzleEdges =
+        detectEdgesSobel(puzzle); // 把 detectEdgesSobel(puzzle); 写入 boolean[] puzzleEdges
+    int bestX = 0, bestScore = -1; // 把 0, bestScore 赋值为 减 1 存入 bestX
+    for (int x = 0;
+        x <= bg.length - puzzle.length;
+        x++) { // 让 x 从 0 开始计数，x 不超过 bg.长度 减 puzzle.长度 就继续
+      int score = 0; // 把 0 存入 score
+      for (int y = 0; y < puzzle.length; y++)
+        if (bgEdges[x + y] && puzzleEdges[y]) score++; // 让 y 从 0 开始计数，y 小于 puzzle.长度 就继续
+      if (score > bestScore) {
+        bestScore = score;
+        bestX = x;
+      } // 若 score 超过 bestScore) { bestScore 赋值为 score; bestX 赋值为 x; }
+    }
+    return bestX; // 返回 bestX
+  }
+
+  public static void main(String[] args) { // public static void main(String[] args) {
+    int[] bg = {10, 10, 10, 10, 200, 200, 200, 200}; // 把 {10,10,10,10,200,200,200,200}; 写入 int[] bg
+    int[] puzzle = {10, 200, 200, 200}; // 把 {10,200,200,200}; 写入 int[] puzzle
+    int got = recognizeCaptcha(bg, puzzle); // 把 recognizeCaptcha(bg, puzzle) 存入 got
+    if (got != 3) {
+      System.out.println("FAIL got " + got + " want 3");
+      throw new RuntimeException("FAILED");
+    }
+    System.out.println("PASS"); // 全部用例通过，输出 PASS
+  }
+}

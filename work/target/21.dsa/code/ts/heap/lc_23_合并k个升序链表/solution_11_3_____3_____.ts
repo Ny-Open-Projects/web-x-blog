@@ -1,0 +1,97 @@
+// 来源（blog）：https://blog.csdn.net/tyro_java/article/details/133499836
+export function demo(): void {
+  // 程序入口：跑内嵌自测用例
+  class ListNode {
+    // 定义类型
+    val: number; // 值: number;
+    next: ListNode | null; // 下一个: ListNode 按位或 null;
+    constructor(val?: number, next?: ListNode | null) {
+      // constructor(值?: number, 下一个?: ListNode 按位或 null) {
+      this.val = val === undefined ? 0 : val; // 把 值 全等于 undefined ? 0 : 值; 写入 值
+      this.next = next === undefined ? null : next; // 把 下一个 全等于 undefined ? null : 下一个; 写入 下一个
+    }
+  }
+
+  function mergeTwo(a: ListNode | null, b: ListNode | null): ListNode | null {
+    // 定义函数/方法 mergeTwo
+    if (a === null) return b; // 若 数组 全等于 null，直接返回 b
+    if (b === null) return a; // 若 b 全等于 null，直接返回 数组
+    if (a.val <= b.val) {
+      // 若 数组.值 不超过 b.值
+      a.next = mergeTwo(a.next, b); // 把 mergeTwo(数组.下一个, b); 写入 下一个
+      return a; // 返回 数组
+    } else {
+      // 否则
+      b.next = mergeTwo(a, b.next); // 把 mergeTwo(数组, b.下一个); 写入 下一个
+      return b; // 返回 b
+    }
+  }
+
+  // 合并 K 个升序链表 - 方案: 递归逐条合并 (merge(l0, merge(l1, ...)))
+  function merge_k_lists(lists: Array<ListNode | null>): ListNode | null {
+    // 定义函数/方法 merge_k_lists
+    if (lists.length === 0) return null; // 若 lists.长度 全等于 0，直接返回 null
+
+    const mergeRest = (i: number): ListNode | null => {
+      if (i === lists.length - 1) return lists[i]; // 若 下标 i 全等于 lists.长度 减 1，直接返回 lists[下标 i]
+      return mergeTwo(lists[i], mergeRest(i + 1)); // 返回 mergeTwo(lists[下标 i], mergeRest(下标 i 加 1))
+    };
+
+    return mergeRest(0); // 返回 mergeRest(0)
+  }
+
+  function build(vals: number[]): ListNode | null {
+    // 定义函数/方法 build
+    const dummy = new ListNode(0); // 把 new ListNode(0) 存入 哨兵节点
+    let cur = dummy; // 把 哨兵节点 存入 当前值
+    for (const v of vals) {
+      cur.next = new ListNode(v);
+      cur = cur.next;
+    } // 把 new ListNode(值); 当前值 赋值为 当前值.下一个; } 写入 下一个
+    return dummy.next; // 返回 哨兵节点.下一个
+  }
+
+  function toList(node: ListNode | null): number[] {
+    // 定义函数/方法 toList
+    const res: number[] = []; // 把 []; 写入 const res: number[]
+    while (node) {
+      res.push(node.val);
+      node = node.next;
+    } // 循环，直到不满足「节点) { 结果 追加 节点.值); 节点 赋值为 节点.下一个; }」
+    return res; // 返回 结果
+  }
+
+  const cases: { in: number[][]; want: number[] }[] = [
+    {
+      in: [
+        [1, 4, 5],
+        [1, 3, 4],
+        [2, 6],
+      ],
+      want: [1, 1, 2, 3, 4, 4, 5, 6],
+    },
+    { in: [], want: [] },
+    { in: [[1]], want: [1] },
+    { in: [[1], [0]], want: [0, 1] },
+    {
+      in: [
+        [-2, -1],
+        [0, 3],
+      ],
+      want: [-2, -1, 0, 3],
+    },
+    { in: [[5], [1, 2, 3], [4]], want: [1, 2, 3, 4, 5] },
+  ];
+  let fail = false; // 把 false 存入 fail
+  for (const c of cases) {
+    // for (const 字符 of cases) {
+    const got = toList(merge_k_lists(c.in.map(build))); // 把 toList(merge_k_lists(字符.in.映射表(build))) 存入 got
+    if (got.length !== c.want.length || got.some((v, i) => v !== c.want[i])) {
+      fail = true; // 把 true 存入 fail
+      console.log('FAIL merge_k_lists(%o)=%o want %o', c.in, got, c.want); // 打印输出
+    }
+  }
+  if (fail) throw new Error('FAILED'); // 若 fail) throw new Error(「FAILED」);
+  console.log('PASS'); // 全部用例通过，输出 PASS
+}
+demo(); // demo();

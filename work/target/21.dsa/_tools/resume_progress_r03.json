@@ -1,0 +1,80 @@
+{"rel": "go/notes/lc_134083295_归并排序/solution_5___5.go", "status": "done_pass", "note": "mergeSort recursive"}
+{"rel": "go/notes/lc_134083295_归并排序/solution_6___6.go", "status": "done_pass", "note": "mergeSort in-place"}
+{"rel": "go/notes/lc_134085384_选择排序/solution_1___1.go", "status": "done_pass", "note": "selectionSort returns"}
+{"rel": "go/notes/lc_134085384_选择排序/solution_2___2.go", "status": "done_pass", "note": "selectionSort in-place"}
+{"rel": "go/notes/lc_134085384_选择排序/solution_3___3.go", "status": "done_pass", "note": "selectionSort copy"}
+{"rel": "go/notes/lc_134085409_堆排序/solution_1_主解法.go", "status": "done_pass", "note": "heapSort + MaxHeap"}
+{"rel": "go/notes/lc_134217002_顺序查找/solution_2___2.go", "status": "done_pass", "note": "seqSearch"}
+{"rel": "go/notes/lc_134097112_实现_lru_缓存算法功能/solution_1___1.go", "status": "done_pass", "note": "LRU dict+order"}
+{"rel": "go/notes/lc_134097112_实现_lru_缓存算法功能/solution_2___2.go", "status": "done_pass", "note": "LRU container/list"}
+{"rel": "go/notes/lc_134097112_实现_lru_缓存算法功能/solution_3___3.go", "status": "done_pass", "note": "LRU manual DLL"}
+{"rel": "go/notes/lc_134150438_希尔排序/solution_1___1.go", "status": "done_pass", "note": "shellSort return"}
+{"rel": "go/notes/lc_134150438_希尔排序/solution_2___2.go", "status": "done_pass", "note": "shellSort return"}
+{"rel": "go/notes/lc_134150438_希尔排序/solution_3___3.go", "status": "done_pass", "note": "shellSort in-place"}
+{"rel": "go/notes/lc_134205361_桶排序/solution_1___1.go", "status": "done_pass", "note": "getIndex k-th smallest"}
+{"rel": "go/notes/lc_134205361_桶排序/solution_2___2.go", "status": "done_pass", "note": "bucketSort int"}
+{"rel": "go/notes/lc_134205361_桶排序/solution_3___3.go", "status": "done_pass", "note": "bucketSort float"}
+{"rel": "go/notes/lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列/solution_1_主解法.go", "status": "done_pass", "note": "verifyPostorder recursive"}
+{"rel": "go/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_1___1.go", "status": "done_pass", "note": "dfs stub per python ref"}
+{"rel": "go/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_2_2_____2_____-__.go", "status": "done_pass", "note": "dfs stub per python ref"}
+{"rel": "go/notes/lc_98685358_数据结构与算法笔记_农夫过河问题python3实现/solution_1___1.go", "status": "done_pass", "note": "farmer river BFS"}
+{"rel": "go/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_1___1.go", "status": "done_pass", "note": "twoSum/maxSub/rotate"}
+{"rel": "go/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_2___2.go", "status": "done_pass", "note": "twoSum/maxSub/rotate"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_1___1.go", "status": "done_pass", "note": "linearSearch"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_2___2.go", "status": "done_pass", "note": "binarySearch"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_3___3.go", "status": "done_pass", "note": "bubbleSort"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_4___4.go", "status": "done_pass", "note": "quickSort"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_5___5.go", "status": "done_pass", "note": "selectionSort"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_6___6.go", "status": "done_pass", "note": "insertionSort"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_7___7.go", "status": "done_pass", "note": "mergeSort"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_8___8.go", "status": "done_pass", "note": "heapSort"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_9___9.go", "status": "done_pass", "note": "fib"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_10___10.go", "status": "done_pass", "note": "twoSum"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_11___11.go", "status": "done_pass", "note": "matrixMultiply"}
+{"rel": "go/notes/lc_93536806_数据结构与算法笔记_复杂度/solution_12___12.go", "status": "done_pass", "note": "hanoi"}
+{"rel": "go/other/lc_1797_设计一个验证系统/solution_1_主解法.go", "status": "done_pass", "note": "AuthenticationManager"}
+{"rel": "go/other/lc_202_快乐数/solution_1___1.go", "status": "done_pass", "note": "bitSquareSum"}
+{"rel": "go/other/lc_202_快乐数/solution_2_2_____2___.go", "status": "done_pass", "note": "getNum happy"}
+{"rel": "go/other/lc_2166_设计位集/solution_1_1_____1_______.go", "status": "done_pass", "note": "Bitset"}
+{"rel": "go/other/lc_2166_设计位集/solution_2_2_____2______.go", "status": "done_pass", "note": "Bitset"}
+{"rel": "go/other/lc_217_存在重复元素/solution_1_1_____1___.go", "status": "done_pass", "note": "containsDuplicate"}
+{"rel": "go/other/lc_217_存在重复元素/solution_2_2_____2____.go", "status": "done_pass", "note": "containsDuplicate"}
+{"rel": "go/other/lc_292_nim_游戏/solution_1_1_____1_____.go", "status": "done_pass", "note": "canWinNim"}
+{"rel": "go/other/lc_326_3_的幂/solution_1_1_____1____.go", "status": "done_pass", "note": "isPowerOfThree"}
+{"rel": "go/queue/lc_26_删除有序数组中的重复项/solution_1___1.go", "status": "done_pass", "note": "removeDuplicates"}
+{"rel": "go/queue/lc_26_删除有序数组中的重复项/solution_2_1_____1_____.go", "status": "done_pass", "note": "removeDuplicates"}
+{"rel": "go/queue/lc_26_删除有序数组中的重复项/solution_3_2_____2_______.go", "status": "done_pass", "note": "removeDuplicates"}
+{"rel": "go/queue/lc_622_设计循环队列/solution_1_1_____1______.go", "status": "done_pass", "note": "MyCircularQueue"}
+{"rel": "go/queue/lc_622_设计循环队列/solution_2_2____2_____.go", "status": "done_pass", "note": "MyCircularQueue"}
+{"rel": "go/queue/lc_622_设计循环队列/solution_3_1_____1______.go", "status": "done_pass", "note": "MyCircularQueue"}
+{"rel": "go/queue/lc_622_设计循环队列/solution_4_2____2_____.go", "status": "done_pass", "note": "MyCircularQueue"}
+{"rel": "go/queue/lc_622_设计循环队列/solution_5_1_____1______.go", "status": "done_pass", "note": "MyCircularQueue"}
+{"rel": "go/queue/lc_622_设计循环队列/solution_6_2____2_____.go", "status": "done_pass", "note": "MyCircularQueue"}
+{"rel": "go/queue/lc_933_最近的请求次数/solution_1___1.go", "status": "done_pass", "note": "RecentCounter"}
+{"rel": "go/queue/lc_933_最近的请求次数/solution_2___2.go", "status": "done_pass", "note": "RecentCounter"}
+{"rel": "go/queue/lc_933_最近的请求次数/solution_3___3.go", "status": "done_pass", "note": "RecentCounter"}
+{"rel": "go/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_1_1_____1___.go", "status": "done_pass", "note": "onesCount"}
+{"rel": "go/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_2_2_____2______.go", "status": "done_pass", "note": "sortByBits bit[10001]"}
+{"rel": "go/sort/lc_15_三数之和/solution_2_2_____2_________.go", "status": "done_pass", "note": "threeSum two-pointer"}
+{"rel": "go/sort/lc_18_四数之和/solution_1_1_____1__________.go", "status": "done_pass", "note": "fourSum with pruning"}
+{"rel": "go/sort/lc_18_四数之和/solution_2_2_____2________.go", "status": "done_pass", "note": "fourSum nested"}
+{"rel": "go/sort/lc_937_重新排列日志文件/solution_1_1_____1______.go", "status": "done_pass", "note": "reorderLogFiles"}
+{"rel": "go/sort/lc_21_合并两个有序链表/solution_1___1.go", "status": "done_pass", "note": "mergeTwoLists iterative"}
+{"rel": "go/sort/lc_21_合并两个有序链表/solution_3___3.go", "status": "done_pass", "note": "mergeTwoLists recursive"}
+{"rel": "go/sort/lc_21_合并两个有序链表/solution_4___4.go", "status": "done_pass", "note": "mergeTwoLists res"}
+{"rel": "go/sort/lc_21_合并两个有序链表/solution_5___5.go", "status": "done_pass", "note": "mergeTwoLists res"}
+{"rel": "go/sort/lc_21_合并两个有序链表/solution_6___6.go", "status": "done_pass", "note": "mergeTwoLists res"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_1___1.go", "status": "done_pass", "note": "sortArrayByParityII sort-based"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_2___2.go", "status": "done_pass", "note": "sortArrayByParityII sort-based"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_4___4.go", "status": "done_pass", "note": "sortArrayByParityII swap"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_5___5.go", "status": "done_pass", "note": "sortArrayByParityII swap"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_6___6.go", "status": "done_pass", "note": "sortArrayByParityII swap"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_7___7.go", "status": "done_pass", "note": "sortArrayByParityII swap"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_8___8.go", "status": "done_pass", "note": "sortArrayByParityII swap"}
+{"rel": "go/sort/lc_922_按奇偶排序数组_ii/solution_9___9.go", "status": "done_pass", "note": "sortArrayByParityII res-based"}
+{"rel": "go/stack/lc_03_05_栈排序/solution_1_1_____1______.go", "status": "done_pass", "note": "SortedStack two-stack"}
+{"rel": "go/stack/lc_03_05_栈排序/solution_2_2____2_______.go", "status": "done_pass", "note": "SortedStack temp-stack"}
+{"rel": "go/stack/lc_1047_删除字符串中的所有相邻重复项/solution_1_1_____1___.go", "status": "done_pass", "note": "removeDuplicates"}
+{"rel": "go/stack/lc_1047_删除字符串中的所有相邻重复项/solution_2_2_____2____.go", "status": "done_pass", "note": "removeDuplicates"}
+{"rel": "go/stack/lc_1472_设计浏览器历史记录/solution_1_主解法.go", "status": "done_pass", "note": "BrowserHistory"}
+{"rel": "go/stack/lc_150_逆波兰表达式求值/solution_1_1_____1_____.go", "status": "done_pass", "note": "evalRPN"}

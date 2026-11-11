@@ -1,0 +1,102 @@
+// 来源（blog）：https://blog.csdn.net/tyro_java/article/details/144993168
+// LeetCode 108. 将有序数组转换为二叉搜索树 — C++ 版（方案4）
+#include <cassert>  // 引入头文件
+#include <cstdint>  // 引入头文件
+#include <iostream> // 引入头文件
+#include <optional> // 引入头文件
+#include <queue>    // 引入头文件
+#include <vector>   // 引入头文件
+
+struct TreeNode {    // 定义类型
+    int val;         // int 值;
+    TreeNode *left;  // TreeNode 乘 左边界;
+    TreeNode *right; // TreeNode 乘 右边界;
+    explicit TreeNode(int v) : val(v), left(nullptr), right(nullptr) {}
+};
+
+static TreeNode *build_tree(const std::vector<std::optional<int>> &vals) {
+    if (vals.empty() || !vals[0].has_value())
+        return nullptr; // 若 vals 是否为空 或 取反 vals[0].has_value()，直接返回 nullptr
+    auto *root = new TreeNode(*vals[0]); // 把 new TreeNode( 乘 vals[0]); 写入 auto *root
+    std::queue<TreeNode *> q;            // std::队列 小于 TreeNode 乘 超过 节点;
+    q.push(root);                        // 把 根节点 压入栈/数组尾部
+    size_t i = 1;                        // 把 1; 写入 size_t i
+    while (!q.empty() &&
+           i < vals.size()) { // 循环，直到不满足「取反 节点 是否为空 且 下标 i 小于 vals.大小(」
+        TreeNode *node = q.front();                  // 把 节点.front(); 写入 TreeNode *node
+        q.pop();                                     // 弹出栈顶元素
+        if (i < vals.size()) {                       // 若 下标 i 小于 vals.大小(
+            if (vals[i].has_value()) {               // 若 vals[下标 i].has_value(
+                node->left = new TreeNode(*vals[i]); // 把 new TreeNode( 乘 vals[下标 i]); 写入 node->left
+                q.push(node->left);                  // 把 节点 减 超过 左边界 压入栈/数组尾部
+            }
+            ++i; // 加一 下标 i;
+        }
+        if (i < vals.size()) {                        // 若 下标 i 小于 vals.大小(
+            if (vals[i].has_value()) {                // 若 vals[下标 i].has_value(
+                node->right = new TreeNode(*vals[i]); // 把 new TreeNode( 乘 vals[下标 i]); 写入 node->right
+                q.push(node->right); // 把 节点 减 超过 右边界 压入栈/数组尾部
+            }
+            ++i; // 加一 下标 i;
+        }
+    }
+    return root; // 返回 根节点
+}
+
+static void free_tree(TreeNode *n) { // 定义函数/方法 free_tree
+    if (!n)
+        return;          // 若 取反 元素个数) return;
+    free_tree(n->left);  // free_tree(元素个数 减 超过 左边界);
+    free_tree(n->right); // free_tree(元素个数 减 超过 右边界);
+    delete n;            // delete 元素个数;
+}
+static bool sameTree(const TreeNode *p, const TreeNode *q) { // 定义函数/方法 sameTree
+    if (!p && !q)
+        return true; // 若 取反 节点 且 取反 节点，直接返回 true
+    if (!p || !q || p->val != q->val)
+        return false; // 若 取反 节点 或 取反 节点 或 节点 减 超过 值 不等于 节点 减 超过 值，直接返回 false
+    return sameTree(p->left, q->left) && sameTree(p->right, q->right);
+}
+static std::vector<int>
+levelsFlat(TreeNode *root) { // static std::vector 小于 int 超过 levelsFlat(TreeNode 乘 根节点) {
+    std::vector<int> out;    // std::vector 小于 int 超过 out;
+    if (!root)
+        return out;           // 若 取反 根节点，直接返回 out
+    std::queue<TreeNode *> q; // std::队列 小于 TreeNode 乘 超过 节点;
+    q.push(root);             // 把 根节点 压入栈/数组尾部
+    while (!q.empty()) {      // 循环，直到不满足「取反 节点.empty(」
+        auto *n = q.front();
+        q.pop();               // 弹出栈顶元素
+        out.push_back(n->val); // out 追加 元素个数 减 超过 值);
+        if (n->left)
+            q.push(n->left); // 若 元素个数 减 超过 左边界) 节点 追加 元素个数 减 超过 左边界);
+        if (n->right)
+            q.push(n->right); // 若 元素个数 减 超过 右边界) 节点 追加 元素个数 减 超过 右边界);
+    }
+    return out; // 返回 out
+}
+
+static TreeNode *helper(const std::vector<int> &nums, int left, int right) {
+    if (left > right)
+        return nullptr;                  // 若 左边界 超过 右边界，直接返回 nullptr
+    int mid = left + (right - left) / 2; // 把 左边界 加 (右边界 减 左边界) 除以 2 存入 中点
+    auto *root = new TreeNode(nums[mid]);     // 把 new TreeNode(数组[中点]); 写入 auto *root
+    root->left = helper(nums, left, mid - 1); // 把 helper(数组, 左边界, 中点 减 1); 写入 root->left
+    root->right = helper(nums, mid + 1, right); // 把 helper(数组, 中点 加 1, 右边界); 写入 root->right
+    return root;                                // 返回 根节点
+}
+static TreeNode *sortedArrayToBST(const std::vector<int> &nums) {
+    if (nums.empty())
+        return nullptr; // 若 数组 是否为空，直接返回 nullptr
+    return helper(nums, 0,
+                  static_cast<int>(nums.size()) -
+                      1); // 返回 helper(数组, 0, static_cast 小于 int 超过 (数组.大小()) 减 1)
+}
+int main() { // 程序入口：跑内嵌自测用例
+    assert(sameTree(sortedArrayToBST({-10, -3, 0, 5, 9}),
+                    build_tree({0, -10, 5, std::nullopt, -3, std::nullopt, 9}))); // 断言校验
+    assert(sameTree(sortedArrayToBST({1}), build_tree({1})));                     // 断言校验
+    assert(sortedArrayToBST({}) == nullptr);                                      // 断言校验
+    std::cout << "PASS" << std::endl; // 全部用例通过，输出 PASS
+    return 0;                         // 返回 0
+}

@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="320" viewBox="0 0 560 320" font-family="system-ui,sans-serif">
+<rect width="560" height="320" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">基于集合的回溯 · 方案 1（自动循环）</text>
+<g style="animation: st0 10.2s linear infinite both">
+<rect x="150" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="150" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="153" y="69" width="40" height="40" rx="6" fill="#FACC15" opacity="0.28"/>
+<text x="173" y="102" text-anchor="middle" font-size="26" fill="#FACC15">♛</text>
+<text x="280" y="290" text-anchor="middle" fill="#94A3B8" font-size="14">第 0 列：尝试第 0 行</text>
+</g>
+<g style="animation: st1 10.2s linear infinite both">
+<rect x="150" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="150" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="153" y="69" width="40" height="40" rx="6" fill="#F87171" opacity="0.28"/>
+<text x="173" y="102" text-anchor="middle" font-size="26" fill="#F87171">♛</text>
+<text x="280" y="290" text-anchor="middle" fill="#94A3B8" font-size="14">后续列无位置可放 → 回溯，撤销该皇后</text>
+</g>
+<g style="animation: st2 10.2s linear infinite both">
+<rect x="150" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="150" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="153" y="115" width="40" height="40" rx="6" fill="#FACC15" opacity="0.28"/>
+<text x="173" y="148" text-anchor="middle" font-size="26" fill="#FACC15">♛</text>
+<text x="280" y="290" text-anchor="middle" fill="#94A3B8" font-size="14">第 0 列改放第 1 行</text>
+</g>
+<g style="animation: st3 10.2s linear infinite both">
+<rect x="150" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="150" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="153" y="115" width="40" height="40" rx="6" fill="#FACC15" opacity="0.28"/>
+<text x="173" y="148" text-anchor="middle" font-size="26" fill="#FACC15">♛</text>
+<rect x="199" y="207" width="40" height="40" rx="6" fill="#FACC15" opacity="0.28"/>
+<text x="219" y="240" text-anchor="middle" font-size="26" fill="#FACC15">♛</text>
+<text x="280" y="290" text-anchor="middle" fill="#94A3B8" font-size="14">第 1 列：第 3 行安全</text>
+</g>
+<g style="animation: st4 10.2s linear infinite both">
+<rect x="150" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="150" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="153" y="115" width="40" height="40" rx="6" fill="#FACC15" opacity="0.28"/>
+<text x="173" y="148" text-anchor="middle" font-size="26" fill="#FACC15">♛</text>
+<rect x="199" y="207" width="40" height="40" rx="6" fill="#FACC15" opacity="0.28"/>
+<text x="219" y="240" text-anchor="middle" font-size="26" fill="#FACC15">♛</text>
+<rect x="245" y="69" width="40" height="40" rx="6" fill="#FACC15" opacity="0.28"/>
+<text x="265" y="102" text-anchor="middle" font-size="26" fill="#FACC15">♛</text>
+<text x="280" y="290" text-anchor="middle" fill="#94A3B8" font-size="14">第 2 列：第 0 行安全</text>
+</g>
+<g style="animation: st5 10.2s linear infinite both">
+<rect x="150" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="66" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="66" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="112" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="112" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="150" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="196" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="242" y="158" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="288" y="158" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="150" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="196" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="242" y="204" width="46" height="46" fill="#26334D" stroke="#334155"/>
+<rect x="288" y="204" width="46" height="46" fill="#1E293B" stroke="#334155"/>
+<rect x="153" y="115" width="40" height="40" rx="6" fill="#34D399" opacity="0.28"/>
+<text x="173" y="148" text-anchor="middle" font-size="26" fill="#34D399">♛</text>
+<rect x="199" y="207" width="40" height="40" rx="6" fill="#34D399" opacity="0.28"/>
+<text x="219" y="240" text-anchor="middle" font-size="26" fill="#34D399">♛</text>
+<rect x="245" y="69" width="40" height="40" rx="6" fill="#34D399" opacity="0.28"/>
+<text x="265" y="102" text-anchor="middle" font-size="26" fill="#34D399">♛</text>
+<rect x="291" y="161" width="40" height="40" rx="6" fill="#34D399" opacity="0.28"/>
+<text x="311" y="194" text-anchor="middle" font-size="26" fill="#34D399">♛</text>
+<text x="280" y="290" text-anchor="middle" fill="#94A3B8" font-size="14">第 3 列：第 2 行安全 → 解为 [1, 3, 0, 2]</text>
+</g>
+<style>
+.st0 {opacity:0} @keyframes st0 {0%{opacity:0}0.00%{opacity:0}2.00%{opacity:1}14.67%{opacity:1}16.67%{opacity:0}100%{opacity:0}}
+.st1 {opacity:0} @keyframes st1 {0%{opacity:0}16.67%{opacity:0}18.67%{opacity:1}31.33%{opacity:1}33.33%{opacity:0}100%{opacity:0}}
+.st2 {opacity:0} @keyframes st2 {0%{opacity:0}33.33%{opacity:0}35.33%{opacity:1}48.00%{opacity:1}50.00%{opacity:0}100%{opacity:0}}
+.st3 {opacity:0} @keyframes st3 {0%{opacity:0}50.00%{opacity:0}52.00%{opacity:1}64.67%{opacity:1}66.67%{opacity:0}100%{opacity:0}}
+.st4 {opacity:0} @keyframes st4 {0%{opacity:0}66.67%{opacity:0}68.67%{opacity:1}81.33%{opacity:1}83.33%{opacity:0}100%{opacity:0}}
+.st5 {opacity:0} @keyframes st5 {0%{opacity:0}83.33%{opacity:0}85.33%{opacity:1}98.00%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style>
+</svg>

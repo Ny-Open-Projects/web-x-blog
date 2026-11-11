@@ -1,0 +1,80 @@
+{"rel":"java/heap/lc_347_前k个高频元素/solution_2___2.java","status":"done_pass","note":"topKFrequent sorted approach"}
+{"rel":"java/heap/lc_347_前k个高频元素/solution_3___3.java","status":"done_pass","note":"topKFrequent min-heap"}
+{"rel":"java/heap/lc_347_前k个高频元素/solution_4___4.java","status":"done_pass","note":"topKFrequent nlargest"}
+{"rel":"java/heap/lc_347_前k个高频元素/solution_5___5.java","status":"done_pass","note":"topKFrequent min-heap"}
+{"rel":"java/heap/lc_347_前k个高频元素/solution_6___6.java","status":"done_pass","note":"topKFrequent bucket"}
+{"rel":"java/heap/lc_451_根据字符出现频率排序/solution_1_1____1_____________sort_Map__.java","status":"done_pass","note":"sorted-map"}
+{"rel":"java/heap/lc_451_根据字符出现频率排序/solution_2___2.java","status":"done_pass","note":"max-heap"}
+{"rel":"java/heap/lc_451_根据字符出现频率排序/solution_3_1____1_______.java","status":"done_pass","note":"dict-sort"}
+{"rel":"java/heap/lc_451_根据字符出现频率排序/solution_4_2_____2____.java","status":"done_pass","note":"bucket"}
+{"rel":"java/heap/lc_451_根据字符出现频率排序/solution_5_1____1_map____.java","status":"done_pass","note":"dict-sort"}
+{"rel":"java/heap/lc_451_根据字符出现频率排序/solution_6_2_____2__.java","status":"done_pass","note":"max-heap"}
+{"rel":"java/heap/lc_502_ipo/solution_1_主解法.java","status":"done_pass","note":"findMaximizedCapital"}
+{"rel":"java/linked_list/lc_206_反转链表/solution_1___1.java","status":"done_pass","note":"reverseList"}
+{"rel":"java/linked_list/lc_206_反转链表/solution_2___2.java","status":"done_pass","note":"reverseList"}
+{"rel":"java/linked_list/lc_206_反转链表/solution_3___3.java","status":"done_pass","note":"reverseList"}
+{"rel":"java/linked_list/lc_206_反转链表/solution_4___4.java","status":"done_pass","note":"reverseList"}
+{"rel":"java/linked_list/lc_206_反转链表/solution_6___6.java","status":"done_pass","note":"reverseList"}
+{"rel":"java/linked_list/lc_142_环形链表_ii/solution_1_1_____1_____.java","status":"done_pass","note":"detectCycle set"}
+{"rel":"java/linked_list/lc_142_环形链表_ii/solution_2_2_____2______.java","status":"done_pass","note":"detectCycle Floyd"}
+{"rel":"java/linked_list/lc_160_相交链表/solution_1_1_____1__________.java","status":"done_pass","note":"getIntersectionNode set"}
+{"rel":"java/linked_list/lc_160_相交链表/solution_2_2_____2_____.java","status":"done_pass","note":"getIntersectionNode two-pointer"}
+{"rel":"java/linked_list/lc_19_删除链表的倒数第_n_个结点/solution_2_2_____2___while.java","status":"done_pass","note":"removeNthFromEnd"}
+{"rel":"java/linked_list/lc_19_删除链表的倒数第_n_个结点/solution_4_4_____4____.java","status":"done_pass","note":"removeNthFromEnd"}
+{"rel":"java/linked_list/lc_203_移除链表元素/solution_1_1_____1____.java","status":"done_pass","note":"removeElements recursive"}
+{"rel":"java/linked_list/lc_203_移除链表元素/solution_2_2_____2____.java","status":"done_pass","note":"removeElements iterative"}
+{"rel":"java/linked_list/lc_2_两数相加/solution_1___1.java","status":"done_pass","note":"addTwoNumbers"}
+{"rel":"java/linked_list/lc_2_两数相加/solution_2___2.java","status":"done_pass","note":"addTwoNumbers"}
+{"rel":"java/linked_list/lc_2_两数相加/solution_4___4.java","status":"done_pass","note":"addTwoNumbers"}
+{"rel":"java/linked_list/lc_2_两数相加/solution_5___5.java","status":"done_pass","note":"addTwoNumbers"}
+{"rel":"java/linked_list/lc_2_两数相加/solution_6___6.java","status":"done_pass","note":"addTwoNumbers"}
+{"rel":"java/linked_list/lc_876_链表的中间结点/solution_1_1_____1____.java","status":"done_pass","note":"middleNode fast-slow"}
+{"rel":"java/linked_list/lc_876_链表的中间结点/solution_2_2_____2______.java","status":"done_pass","note":"middleNode count"}
+{"rel":"java/linked_list/lc_876_链表的中间结点/solution_3_3_____3_______.java","status":"done_pass","note":"middleNode array"}
+{"rel":"java/linked_list/lc_92_反转链表_ii/solution_1_1_____1______.java","status":"done_pass","note":"reverseBetween"}
+{"rel":"java/linked_list/lc_92_反转链表_ii/solution_3_3____3______.java","status":"done_pass","note":"reverseBetween"}
+{"rel":"java/matrix/lc_1329_将矩阵按对角线排序/solution_1_1_____1___.java","status":"done_pass","note":"diagonalSort"}
+{"rel":"java/matrix/lc_1329_将矩阵按对角线排序/solution_2_2_____2____.java","status":"done_pass","note":"diagonalSort"}
+{"rel":"java/matrix/lc_54_螺旋矩阵/solution_1___1.java","status":"done_pass","note":"spiralOrder"}
+{"rel":"java/matrix/lc_54_螺旋矩阵/solution_2_1____1_________.java","status":"done_pass","note":"spiralOrder"}
+{"rel":"java/matrix/lc_54_螺旋矩阵/solution_3_1____1_________.java","status":"done_pass","note":"spiralOrder"}
+{"rel":"java/notes/lc_107391023_求直方图最大面积算法分析/solution_1___1.java","status":"done_pass","note":"histogram max area"}
+{"rel":"java/notes/lc_107391023_求直方图最大面积算法分析/solution_2___2.java","status":"done_pass","note":"histogram max area"}
+{"rel":"java/notes/lc_107391023_求直方图最大面积算法分析/solution_3___3.java","status":"done_pass","note":"histogram max area"}
+{"rel":"java/notes/lc_107391023_求直方图最大面积算法分析/solution_4___4.java","status":"done_pass","note":"histogram max area"}
+{"rel":"java/notes/lc_107391023_求直方图最大面积算法分析/solution_5___5.java","status":"done_pass","note":"histogram max area"}
+{"rel":"java/notes/lc_107391023_求直方图最大面积算法分析/solution_6___6.java","status":"done_pass","note":"histogram max area"}
+{"rel":"java/notes/lc_105893757_栈排序分析/solution_1___1.java","status":"done_pass","note":"stack sort"}
+{"rel":"java/notes/lc_105893757_栈排序分析/solution_2___2.java","status":"done_pass","note":"stack sort"}
+{"rel":"java/notes/lc_105893757_栈排序分析/solution_3___3.java","status":"done_pass","note":"stack sort"}
+{"rel":"java/notes/lc_105893757_栈排序分析/solution_4___4.java","status":"done_pass","note":"stack sort"}
+{"rel":"java/notes/lc_107450699_计算思维之谁做的好事与刑侦作案问题/solution_1___1.java","status":"done_pass","note":"logic puzzle"}
+{"rel":"java/notes/lc_107450699_计算思维之谁做的好事与刑侦作案问题/solution_2___2.java","status":"done_pass","note":"logic puzzle"}
+{"rel":"java/notes/lc_107450699_计算思维之谁做的好事与刑侦作案问题/solution_3___3.java","status":"done_pass","note":"logic puzzle"}
+{"rel":"java/notes/lc_107579658_抽象思维之转换视角_提炼共性/solution_1___1.java","status":"done_pass","note":"book/queen backtrack"}
+{"rel":"java/notes/lc_107868749_贪心策略之matrixsorting_pfc_coding_huffmantre/solution_1_主解法.java","status":"done_pass","note":"matrix sort + huffman"}
+{"rel":"java/notes/lc_108013114_贪心策略之bst&bbst_hashtable+dictionary+map_p/solution_1___1.java","status":"done_pass","note":"bst + kruskal"}
+{"rel":"java/notes/lc_108717090_减治策略之详解dijkstra算法/solution_1___1.java","status":"done_pass","note":"dijkstra"}
+{"rel":"java/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_1___1.java","status":"done_pass","note":"max subarray / merge sort"}
+{"rel":"java/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_2___2.java","status":"done_pass","note":"max subarray / merge sort"}
+{"rel":"java/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_3___3.java","status":"done_pass","note":"max subarray / merge sort"}
+{"rel":"java/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_4___4.java","status":"done_pass","note":"max subarray / merge sort"}
+{"rel":"java/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_5___5.java","status":"done_pass","note":"max subarray / merge sort"}
+{"rel":"java/notes/lc_112548608_计算思维之经典农夫过河问题c++实现/solution_1___1.java","status":"done_pass","note":"farmer crossing"}
+{"rel":"java/notes/lc_113764246_图搜索之dfs详解/solution_1___1.java","status":"done_pass","note":"dfs/topo"}
+{"rel":"java/notes/lc_113764246_图搜索之dfs详解/solution_2___2.java","status":"done_pass","note":"dfs/topo"}
+{"rel":"java/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_1___1.java","status":"done_pass","note":"fib/power/lmp"}
+{"rel":"java/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_2___2.java","status":"done_pass","note":"fib/power/lmp"}
+{"rel":"java/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_3___3.java","status":"done_pass","note":"fib/power/lmp"}
+{"rel":"java/notes/lc_116567013_pm/solution_1___1.java","status":"done_pass","note":"string match / kmp"}
+{"rel":"java/notes/lc_116567013_pm/solution_2___2.java","status":"done_pass","note":"string match / kmp"}
+{"rel":"java/notes/lc_116567013_pm/solution_3___3.java","status":"done_pass","note":"string match / kmp"}
+{"rel":"java/notes/lc_116567013_pm/solution_4___4.java","status":"done_pass","note":"string match / kmp"}
+{"rel":"java/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_1___1.java","status":"done_pass","note":"prototype chain"}
+{"rel":"java/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_2___2.java","status":"done_pass","note":"prototype chain"}
+{"rel":"java/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_3___3.java","status":"done_pass","note":"prototype chain"}
+{"rel":"java/notes/lc_133270489_基于链表实现js中的原型链原理与算法实现/solution_4___4.java","status":"done_pass","note":"prototype chain"}
+{"rel":"java/notes/lc_133468244_堆和实现最小堆类/solution_1___1.java","status":"done_pass","note":"min heap"}
+{"rel":"java/notes/lc_133468244_堆和实现最小堆类/solution_2___2.java","status":"done_pass","note":"min heap"}
+{"rel":"java/notes/lc_133468244_堆和实现最小堆类/solution_3___3.java","status":"done_pass","note":"min heap"}
+{"rel":"java/notes/lc_134053461_侏儒排序/solution_1___1.java","status":"done_pass","note":"gnome sort"}

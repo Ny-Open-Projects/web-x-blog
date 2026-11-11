@@ -1,0 +1,61 @@
+# LeetCode 208. 实现 Trie (前缀树) (ts)
+
+> 来源：[Wang's Blog](https://blog.csdn.net/tyro_java/article/details/145248170)
+> 语言：**ts**（博客原文）
+
+## 题目描述
+
+- - 
+- Trie（发音类似 “try”）或者说 前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补全和拼写检查
+- - 
+- 请你实现 Trie 类：
+- - Trie() 初始化前缀树对象
+- - void insert(String word) 向前缀树中插入字符串 word
+- - boolean search(String word) 如果字符串 word 在前缀树中，返回 true（即，在检索之前已经插入）；否则，返回 false
+- - boolean startsWith(String prefix) 如果之前已经插入的字符串 word 的前缀之一为 prefix ，返回 true ；否则，返回 false
+
+## 示例
+
+```
+输入
+["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+[[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+输出
+[null, null, true, false, true, null, true]
+
+输入
+["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+[[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+输出
+[null, null, true, false, true, null, true]
+解释
+ Trie trie = new Trie();
+ trie.insert(“apple”);
+ trie.search(“apple”); // 返回 True
+ trie.search(“app”); // 返回 False
+ trie.startsWith(“app”); // 返回 True
+ trie.insert(“app”);
+ trie.search(“app”); // 返回 True
+```
+
+## 提示
+
+- 1 <= word.length, prefix.length <= 2000
+- word 和 prefix 仅由小写英文字母组成
+- insert、search 和 startsWith 调用次数 总计 不超过 3 * 
+ 1
+ 0
+ 4
+ 10^4
+ 104 次
+
+## 进阶
+
+(无)
+
+## 解法列表
+
+| 方案 | 文件 | 来源语言 |
+| --- | --- | --- |
+| 1 ) 方案1: 字典树 | `solution_1_1_)_方案1_字典树.ts` | ts |
+| 2 ) 方案2: 另一种方案 | `solution_2_2_)_方案2_另一种方案.ts` | ts |

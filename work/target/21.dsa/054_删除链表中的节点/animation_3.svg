@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" font-family="system-ui,sans-serif">
+<rect width="560" height="300" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">带空指针守卫 · 方案 3（自动循环）</text>
+<g style="animation: st0 9.0s linear infinite both">
+<rect x="46" y="109" width="72" height="42" rx="9" fill="#FACC15"/>
+<text x="82" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">1</text>
+<rect x="160" y="109" width="72" height="42" rx="9" fill="#4A90D9"/>
+<text x="196" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">2</text>
+<rect x="274" y="109" width="72" height="42" rx="9" fill="#4A90D9"/>
+<text x="310" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">3</text>
+<rect x="388" y="109" width="72" height="42" rx="9" fill="#4A90D9"/>
+<text x="424" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">4</text>
+<rect x="508" y="112" width="52" height="36" rx="8" fill="#334155"/>
+<text x="534" y="136" text-anchor="middle" fill="#94A3B8" font-size="14">null</text>
+<line x1="118" y1="132" x2="160" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="232" y1="132" x2="274" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="346" y1="132" x2="388" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="82" y="174" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">cur</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">初始：prev = null，cur 指向头节点</text>
+</g>
+<g style="animation: st1 9.0s linear infinite both">
+<rect x="46" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="82" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">1</text>
+<rect x="160" y="109" width="72" height="42" rx="9" fill="#FACC15"/>
+<text x="196" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">2</text>
+<rect x="274" y="109" width="72" height="42" rx="9" fill="#4A90D9"/>
+<text x="310" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">3</text>
+<rect x="388" y="109" width="72" height="42" rx="9" fill="#4A90D9"/>
+<text x="424" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">4</text>
+<rect x="508" y="112" width="52" height="36" rx="8" fill="#334155"/>
+<text x="534" y="136" text-anchor="middle" fill="#94A3B8" font-size="14">null</text>
+<line x1="346" y1="132" x2="388" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="232" y1="132" x2="274" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="460" y1="132" x2="508" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="118" y1="132" x2="508" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="82" y="174" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">prev</text>
+<text x="196" y="174" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">cur</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">1 反转指向 null</text>
+</g>
+<g style="animation: st2 9.0s linear infinite both">
+<rect x="46" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="82" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">1</text>
+<rect x="160" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="196" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">2</text>
+<rect x="274" y="109" width="72" height="42" rx="9" fill="#FACC15"/>
+<text x="310" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">3</text>
+<rect x="388" y="109" width="72" height="42" rx="9" fill="#4A90D9"/>
+<text x="424" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">4</text>
+<rect x="508" y="112" width="52" height="36" rx="8" fill="#334155"/>
+<text x="534" y="136" text-anchor="middle" fill="#94A3B8" font-size="14">null</text>
+<line x1="232" y1="132" x2="118" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="346" y1="132" x2="388" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="460" y1="132" x2="508" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="118" y1="132" x2="508" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="196" y="174" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">prev</text>
+<text x="310" y="174" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">cur</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">2 反转指向 1</text>
+</g>
+<g style="animation: st3 9.0s linear infinite both">
+<rect x="46" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="82" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">1</text>
+<rect x="160" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="196" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">2</text>
+<rect x="274" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="310" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">3</text>
+<rect x="388" y="109" width="72" height="42" rx="9" fill="#FACC15"/>
+<text x="424" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">4</text>
+<rect x="508" y="112" width="52" height="36" rx="8" fill="#334155"/>
+<text x="534" y="136" text-anchor="middle" fill="#94A3B8" font-size="14">null</text>
+<line x1="232" y1="132" x2="118" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="460" y1="132" x2="508" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="346" y1="132" x2="232" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="118" y1="132" x2="508" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="310" y="174" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">prev</text>
+<text x="424" y="174" text-anchor="middle" fill="#FACC15" font-size="13" font-weight="700">cur</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">3 反转指向 2</text>
+</g>
+<g style="animation: st4 9.0s linear infinite both">
+<rect x="46" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="82" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">1</text>
+<rect x="160" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="196" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">2</text>
+<rect x="274" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="310" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">3</text>
+<rect x="388" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="424" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">4</text>
+<rect x="508" y="112" width="52" height="36" rx="8" fill="#334155"/>
+<text x="534" y="136" text-anchor="middle" fill="#94A3B8" font-size="14">null</text>
+<line x1="232" y1="132" x2="118" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="460" y1="132" x2="346" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="346" y1="132" x2="232" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="118" y1="132" x2="508" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="424" y="174" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">prev</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">4 反转指向 3</text>
+</g>
+<g style="animation: st5 9.0s linear infinite both">
+<rect x="46" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="82" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">1</text>
+<rect x="160" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="196" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">2</text>
+<rect x="274" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="310" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">3</text>
+<rect x="388" y="109" width="72" height="42" rx="9" fill="#34D399"/>
+<text x="424" y="136" text-anchor="middle" fill="#F1F5F9" font-size="18" font-weight="700">4</text>
+<rect x="508" y="112" width="52" height="36" rx="8" fill="#334155"/>
+<text x="534" y="136" text-anchor="middle" fill="#94A3B8" font-size="14">null</text>
+<line x1="232" y1="132" x2="118" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="460" y1="132" x2="346" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="346" y1="132" x2="232" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<line x1="118" y1="132" x2="508" y2="132" stroke="#E2E8F0" stroke-width="2.5" marker-end="url(#arr)"/>
+<text x="424" y="174" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">prev</text>
+<text x="280" y="255" text-anchor="middle" fill="#94A3B8" font-size="14">完成！新头节点 = 最后一个节点</text>
+</g>
+<defs><marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#E2E8F0"/></marker></defs>
+<style>
+.st0 {opacity:0} @keyframes st0 {0%{opacity:0}0.00%{opacity:0}2.00%{opacity:1}14.67%{opacity:1}16.67%{opacity:0}100%{opacity:0}}
+.st1 {opacity:0} @keyframes st1 {0%{opacity:0}16.67%{opacity:0}18.67%{opacity:1}31.33%{opacity:1}33.33%{opacity:0}100%{opacity:0}}
+.st2 {opacity:0} @keyframes st2 {0%{opacity:0}33.33%{opacity:0}35.33%{opacity:1}48.00%{opacity:1}50.00%{opacity:0}100%{opacity:0}}
+.st3 {opacity:0} @keyframes st3 {0%{opacity:0}50.00%{opacity:0}52.00%{opacity:1}64.67%{opacity:1}66.67%{opacity:0}100%{opacity:0}}
+.st4 {opacity:0} @keyframes st4 {0%{opacity:0}66.67%{opacity:0}68.67%{opacity:1}81.33%{opacity:1}83.33%{opacity:0}100%{opacity:0}}
+.st5 {opacity:0} @keyframes st5 {0%{opacity:0}83.33%{opacity:0}85.33%{opacity:1}98.00%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style>
+</svg>

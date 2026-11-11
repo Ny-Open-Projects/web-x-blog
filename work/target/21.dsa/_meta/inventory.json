@@ -1,0 +1,2764 @@
+{
+ "lc_136_只出现一次的数字": {
+  "topic": "array",
+  "id": "136",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2____Set______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_167_两数之和_ii_-_输入有序数组": {
+  "topic": "array",
+  "id": "167",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2_____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_169_多数元素": {
+  "topic": "array",
+  "id": "169",
+  "solutions": [
+   "solution_1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_17_电话号码的字母组合": {
+  "topic": "array",
+  "id": "17",
+  "solutions": [
+   "solution_1_1_____1________",
+   "solution_2_2___2____",
+   "solution_3_3_____3________",
+   "solution_4_1____1______",
+   "solution_5_2____2____",
+   "solution_6_3____3______",
+   "solution_7_1____1______",
+   "solution_8_2____2____",
+   "solution_9_3____3______"
+  ],
+  "n_solutions": 9
+ },
+ "lc_209_长度最小的子数组": {
+  "topic": "array",
+  "id": "209",
+  "solutions": [
+   "solution_1_1_____1_________",
+   "solution_2_2_____2___________",
+   "solution_3_3_____3_____",
+   "solution_4___4"
+  ],
+  "n_solutions": 4
+ },
+ "lc_238_除自身以外数组的乘积": {
+  "topic": "array",
+  "id": "238",
+  "solutions": [
+   "solution_1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_268_丢失的数字": {
+  "topic": "array",
+  "id": "268",
+  "solutions": [
+   "solution_1_1_____1_____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_283_移动零": {
+  "topic": "array",
+  "id": "283",
+  "solutions": [
+   "solution_1_1_____1_____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_344_反转字符串": {
+  "topic": "array",
+  "id": "344",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_380_o(1)_时间插入、删除和获取随机元素": {
+  "topic": "array",
+  "id": "380",
+  "solutions": [
+   "solution_1_1_____1___________"
+  ],
+  "n_solutions": 1
+ },
+ "lc_383_赎金信": {
+  "topic": "array",
+  "id": "383",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2____2_____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_384_打乱数组": {
+  "topic": "array",
+  "id": "384",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2_Fisher-Yates_____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_448_找到所有数组中消失的数字": {
+  "topic": "array",
+  "id": "448",
+  "solutions": [
+   "solution_1_1_____1_____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_485_最大连续1的个数": {
+  "topic": "array",
+  "id": "485",
+  "solutions": [
+   "solution_1___1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_541_反转字符串_ii": {
+  "topic": "array",
+  "id": "541",
+  "solutions": [
+   "solution_1_1_____1____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_605_种花问题": {
+  "topic": "array",
+  "id": "605",
+  "solutions": [
+   "solution_1_1____1_____",
+   "solution_2_2_____2__________",
+   "solution_3_3____3_________________",
+   "solution_4_1____1_____",
+   "solution_5_2_____2__________",
+   "solution_6_3____3_________________",
+   "solution_7_1____1_____",
+   "solution_8_2_____2__________",
+   "solution_9_3____3_________________"
+  ],
+  "n_solutions": 9
+ },
+ "lc_66_加一": {
+  "topic": "array",
+  "id": "66",
+  "solutions": [
+   "solution_1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_75_颜色分类": {
+  "topic": "array",
+  "id": "75",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2____",
+   "solution_3_3_____3_______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_89_格雷编码": {
+  "topic": "array",
+  "id": "89",
+  "solutions": [
+   "solution_10_2_____2__________",
+   "solution_11_3_____3___________________",
+   "solution_12_4_____4_______________",
+   "solution_1_1_____1___",
+   "solution_2_2_____2__________",
+   "solution_3_3____3___________________",
+   "solution_4_4____4_______________",
+   "solution_5_1_____1___",
+   "solution_6_2_____2__________",
+   "solution_7_3_____3___________________",
+   "solution_8_4_____4_______________",
+   "solution_9_1_____1___"
+  ],
+  "n_solutions": 12
+ },
+ "lc_905_按奇偶排序数组": {
+  "topic": "array",
+  "id": "905",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2____________",
+   "solution_3_3_____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_914_卡牌分组": {
+  "topic": "array",
+  "id": "914",
+  "solutions": [
+   "solution_1_1____1______",
+   "solution_2_2_____2_______",
+   "solution_3_3_____3__________",
+   "solution_4_1____1______",
+   "solution_5_2_____2_______",
+   "solution_6_3______3__________",
+   "solution_7_1____1______",
+   "solution_8_2_____2_______",
+   "solution_9_3______3__________"
+  ],
+  "n_solutions": 9
+ },
+ "lc_977_有序数组的平方": {
+  "topic": "array",
+  "id": "977",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2____",
+   "solution_3_3_____3_____"
+  ],
+  "n_solutions": 3
+ },
+ "lc_131_分割回文串": {
+  "topic": "backtrack",
+  "id": "131",
+  "solutions": [
+   "solution_1_1_____1______________",
+   "solution_2_2_____2____________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_37_解数独": {
+  "topic": "backtrack",
+  "id": "37",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2_______",
+   "solution_3_3_____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_39_组合总和": {
+  "topic": "backtrack",
+  "id": "39",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_46_全排列": {
+  "topic": "backtrack",
+  "id": "46",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_47_全排列_ii": {
+  "topic": "backtrack",
+  "id": "47",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_____-___"
+  ],
+  "n_solutions": 2
+ },
+ "lc_51_n_皇后": {
+  "topic": "backtrack",
+  "id": "51",
+  "solutions": [
+   "solution_1_1_____1_________",
+   "solution_2_2_____2__________",
+   "solution_3_3_____3___-____"
+  ],
+  "n_solutions": 3
+ },
+ "lc_77_组合": {
+  "topic": "backtrack",
+  "id": "77",
+  "solutions": [
+   "solution_1_1_____1___________",
+   "solution_2_2_____2__________________",
+   "solution_3_3_____3_______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_78_子集": {
+  "topic": "backtrack",
+  "id": "78",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_79_单词搜索": {
+  "topic": "backtrack",
+  "id": "79",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_93_复原_ip_地址": {
+  "topic": "backtrack",
+  "id": "93",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_153_寻找旋转排序数组中的最小值": {
+  "topic": "binary_search",
+  "id": "153",
+  "solutions": [
+   "solution_1_1____1______"
+  ],
+  "n_solutions": 1
+ },
+ "lc_35_搜索插入位置": {
+  "topic": "binary_search",
+  "id": "35",
+  "solutions": [
+   "solution_1_1_____1_____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_374_猜数字大小": {
+  "topic": "binary_search",
+  "id": "374",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_69_x_的平方根": {
+  "topic": "binary_search",
+  "id": "69",
+  "solutions": [
+   "solution_1_1_____1________",
+   "solution_2_2_____2_____",
+   "solution_3_3_____3_________",
+   "solution_4_4____4__________"
+  ],
+  "n_solutions": 4
+ },
+ "lc_704_二分查找": {
+  "topic": "binary_search",
+  "id": "704",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_1114_按序打印": {
+  "topic": "concurrency",
+  "id": "1114",
+  "solutions": [
+   "solution_1_1_____1____synchronization"
+  ],
+  "n_solutions": 1
+ },
+ "lc_2637_有时间限制的_promise_对象": {
+  "topic": "concurrency",
+  "id": "2637",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_2____2______Timeout"
+  ],
+  "n_solutions": 2
+ },
+ "lc_2721_并行执行异步函数": {
+  "topic": "concurrency",
+  "id": "2721",
+  "solutions": [
+   "solution_1_1_____1____async_await___",
+   "solution_2_2_____2____then_catch___"
+  ],
+  "n_solutions": 2
+ },
+ "lc_1027_最长等差数列": {
+  "topic": "dp",
+  "id": "1027",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_______Map____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_1143_最长公共子序列": {
+  "topic": "dp",
+  "id": "1143",
+  "solutions": [
+   "solution_1_1_____1______"
+  ],
+  "n_solutions": 1
+ },
+ "lc_115_不同的子序列": {
+  "topic": "dp",
+  "id": "115",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_2_____2_________",
+   "solution_3_3_____3_________",
+   "solution_4_4_____4______"
+  ],
+  "n_solutions": 4
+ },
+ "lc_121_买卖股票的最佳时机": {
+  "topic": "dp",
+  "id": "121",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2______",
+   "solution_3_3_____3_________",
+   "solution_4_4_____4______",
+   "solution_5_5_____5______",
+   "solution_6_6_____6_________"
+  ],
+  "n_solutions": 6
+ },
+ "lc_123_买卖股票的最佳时机_iii": {
+  "topic": "dp",
+  "id": "123",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_1494_并行课程_ii": {
+  "topic": "dp",
+  "id": "1494",
+  "solutions": [
+   "solution_1_1_____1____________",
+   "solution_2_2_____2___________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_198_打家劫舍": {
+  "topic": "dp",
+  "id": "198",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 11
+ },
+ "lc_2050_并行课程_iii": {
+  "topic": "dp",
+  "id": "2050",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2__________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_213_打家劫舍_ii": {
+  "topic": "dp",
+  "id": "213",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_____",
+   "solution_3_3_____3_________",
+   "solution_4_4_____4_____"
+  ],
+  "n_solutions": 4
+ },
+ "lc_2407_最长递增子序列_ii": {
+  "topic": "dp",
+  "id": "2407",
+  "solutions": [
+   "solution_1_1_____1_____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_300_最长递增子序列": {
+  "topic": "dp",
+  "id": "300",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2___________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_3105_最长的严格递增或递减子数组": {
+  "topic": "dp",
+  "id": "3105",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2_________",
+   "solution_3_3_____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_322_零钱兑换": {
+  "topic": "dp",
+  "id": "322",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2______",
+   "solution_3_3_____3___________"
+  ],
+  "n_solutions": 3
+ },
+ "lc_337_打家劫舍_iii": {
+  "topic": "dp",
+  "id": "337",
+  "solutions": [
+   "solution_1_1_____1___________",
+   "solution_2_2_____2______________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_392_判断子序列": {
+  "topic": "dp",
+  "id": "392",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_____",
+   "solution_3_3____3______",
+   "solution_4_4____4_________"
+  ],
+  "n_solutions": 4
+ },
+ "lc_509_斐波那契数": {
+  "topic": "dp",
+  "id": "509",
+  "solutions": [
+   "solution_10___10",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 10
+ },
+ "lc_518_零钱兑换_ii": {
+  "topic": "dp",
+  "id": "518",
+  "solutions": [
+   "solution_1_1_____1_______________________",
+   "solution_2_2_____2______",
+   "solution_3_3_____3_________",
+   "solution_4_4_____4_________"
+  ],
+  "n_solutions": 4
+ },
+ "lc_53_最大子数组和": {
+  "topic": "dp",
+  "id": "53",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2____2______",
+   "solution_3_3____3____"
+  ],
+  "n_solutions": 3
+ },
+ "lc_583_两个字符串的删除操作": {
+  "topic": "dp",
+  "id": "583",
+  "solutions": [
+   "solution_1_1_____1_________",
+   "solution_2_2_____2______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_62_不同路径": {
+  "topic": "dp",
+  "id": "62",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2____2_______",
+   "solution_3_3_____3______",
+   "solution_4_4_____4_________"
+  ],
+  "n_solutions": 4
+ },
+ "lc_63_不同路径_ii": {
+  "topic": "dp",
+  "id": "63",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_673_最长递增子序列的个数": {
+  "topic": "dp",
+  "id": "673",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2_________________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_674_最长连续递增序列": {
+  "topic": "dp",
+  "id": "674",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2______",
+   "solution_3_3_____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_70_爬楼梯": {
+  "topic": "dp",
+  "id": "70",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8"
+  ],
+  "n_solutions": 8
+ },
+ "lc_714_买卖股票的最佳时机含手续费": {
+  "topic": "dp",
+  "id": "714",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_72_编辑距离": {
+  "topic": "dp",
+  "id": "72",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2__________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_746_使用最小花费爬楼梯": {
+  "topic": "dp",
+  "id": "746",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2___2",
+   "solution_3_2_____2_________",
+   "solution_4_3_____3____",
+   "solution_5_4_____4______"
+  ],
+  "n_solutions": 5
+ },
+ "lc_787_k_站中转内最便宜的航班": {
+  "topic": "dp",
+  "id": "787",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 11
+ },
+ "lc_877_石子游戏": {
+  "topic": "dp",
+  "id": "877",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_____-___",
+   "solution_3_3_____3___"
+  ],
+  "n_solutions": 3
+ },
+ "lc_926_将字符串翻转到单调递增": {
+  "topic": "dp",
+  "id": "926",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2_________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_133_克隆图": {
+  "topic": "graph",
+  "id": "133",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4_1_____1_____",
+   "solution_5_2____2_____",
+   "solution_6_1_____1_____",
+   "solution_7_2____2_____"
+  ],
+  "n_solutions": 7
+ },
+ "lc_417_太平洋大西洋水流问题": {
+  "topic": "graph",
+  "id": "417",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_65_有效数字": {
+  "topic": "graph",
+  "id": "65",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4_1_____1___",
+   "solution_5_2_____2________",
+   "solution_6_1_____1___",
+   "solution_7_2_____2________"
+  ],
+  "n_solutions": 7
+ },
+ "lc_122_买卖股票的最佳时机ii": {
+  "topic": "greedy",
+  "id": "122",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_1518_换水问题": {
+  "topic": "greedy",
+  "id": "1518",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2___"
+  ],
+  "n_solutions": 2
+ },
+ "lc_435_无重叠区间": {
+  "topic": "greedy",
+  "id": "435",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2_____________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_452_用最少数量的箭引爆气球": {
+  "topic": "greedy",
+  "id": "452",
+  "solutions": [
+   "solution_1_1_____1_________",
+   "solution_2_2_____2____________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_455_分饼干": {
+  "topic": "greedy",
+  "id": "455",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_45_跳跃游戏_ii": {
+  "topic": "greedy",
+  "id": "45",
+  "solutions": [
+   "solution_1_1_____1__________",
+   "solution_2_2_____2______________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_55_跳跃游戏": {
+  "topic": "greedy",
+  "id": "55",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_649_dota2_参议院": {
+  "topic": "greedy",
+  "id": "649",
+  "solutions": [
+   "solution_1_1_____1____________",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_860_柠檬水找零": {
+  "topic": "greedy",
+  "id": "860",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_128_最长连续序列": {
+  "topic": "hash",
+  "id": "128",
+  "solutions": [
+   "solution_1_1_____1_____Set",
+   "solution_2_2_____2____Set___",
+   "solution_3_3____3_______________"
+  ],
+  "n_solutions": 3
+ },
+ "lc_1_两数之和": {
+  "topic": "hash",
+  "id": "1",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_349_两个数组的交集": {
+  "topic": "hash",
+  "id": "349",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_13___13",
+   "solution_14___14",
+   "solution_15___15",
+   "solution_16___16",
+   "solution_17___17",
+   "solution_18___18",
+   "solution_19___19",
+   "solution_1___1",
+   "solution_20___20",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 20
+ },
+ "lc_350_两个数组的交集_ii": {
+  "topic": "hash",
+  "id": "350",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2____2__________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_3_无重复字符的最长子串": {
+  "topic": "hash",
+  "id": "3",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_76_最小覆盖子串": {
+  "topic": "hash",
+  "id": "76",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_208_实现_trie_(前缀树)": {
+  "topic": "heap",
+  "id": "208",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_215_数组中的第k个最大元素": {
+  "topic": "heap",
+  "id": "215",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 12
+ },
+ "lc_23_合并k个升序链表": {
+  "topic": "heap",
+  "id": "23",
+  "solutions": [
+   "solution_10_2____2_________________1",
+   "solution_11_3_____3_____",
+   "solution_12_4_____4_____",
+   "solution_1_1____1____",
+   "solution_2_2____2__________________1",
+   "solution_3_3____3______",
+   "solution_4_4____4______",
+   "solution_5_1_____1____",
+   "solution_6_2____2_________________1",
+   "solution_7_3____3_____",
+   "solution_8_4____4_____",
+   "solution_9_1_____1____"
+  ],
+  "n_solutions": 12
+ },
+ "lc_295_数据流的中位数": {
+  "topic": "heap",
+  "id": "295",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_____-___",
+   "solution_3_3_____3___________"
+  ],
+  "n_solutions": 3
+ },
+ "lc_313_超级丑数": {
+  "topic": "heap",
+  "id": "313",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4_1_____1______",
+   "solution_5_1_____1_____"
+  ],
+  "n_solutions": 5
+ },
+ "lc_347_前k个高频元素": {
+  "topic": "heap",
+  "id": "347",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_451_根据字符出现频率排序": {
+  "topic": "heap",
+  "id": "451",
+  "solutions": [
+   "solution_1_1____1_____________sort_Map__",
+   "solution_2___2",
+   "solution_3_1____1_______",
+   "solution_4_2_____2____",
+   "solution_5_1____1_map____",
+   "solution_6_2_____2__"
+  ],
+  "n_solutions": 6
+ },
+ "lc_502_ipo": {
+  "topic": "heap",
+  "id": "502",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_141_环形链表": {
+  "topic": "linked_list",
+  "id": "141",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_13___13",
+   "solution_14___14",
+   "solution_15___15",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 15
+ },
+ "lc_142_环形链表_ii": {
+  "topic": "linked_list",
+  "id": "142",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_146_lru_缓存": {
+  "topic": "linked_list",
+  "id": "146",
+  "solutions": [
+   "solution_1_1_____1____Map",
+   "solution_2_2_____2____________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_148_排序链表": {
+  "topic": "linked_list",
+  "id": "148",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7"
+  ],
+  "n_solutions": 7
+ },
+ "lc_160_相交链表": {
+  "topic": "linked_list",
+  "id": "160",
+  "solutions": [
+   "solution_1_1_____1__________",
+   "solution_2_2_____2_____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_19_删除链表的倒数第_n_个结点": {
+  "topic": "linked_list",
+  "id": "19",
+  "solutions": [
+   "solution_1_1_____1________",
+   "solution_2_2_____2___while",
+   "solution_3_3_____3__",
+   "solution_4_4_____4____"
+  ],
+  "n_solutions": 4
+ },
+ "lc_203_移除链表元素": {
+  "topic": "linked_list",
+  "id": "203",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_206_反转链表": {
+  "topic": "linked_list",
+  "id": "206",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_234_回文链表": {
+  "topic": "linked_list",
+  "id": "234",
+  "solutions": [
+   "solution_1_1_____1________________",
+   "solution_2_2_____2____",
+   "solution_3_3_____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_237_删除链表中的节点": {
+  "topic": "linked_list",
+  "id": "237",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4"
+  ],
+  "n_solutions": 4
+ },
+ "lc_2_两数相加": {
+  "topic": "linked_list",
+  "id": "2",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_460_lfu_缓存": {
+  "topic": "linked_list",
+  "id": "460",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_707_设计链表": {
+  "topic": "linked_list",
+  "id": "707",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_83_删除排序链表中的重复元素": {
+  "topic": "linked_list",
+  "id": "83",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_876_链表的中间结点": {
+  "topic": "linked_list",
+  "id": "876",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2______",
+   "solution_3_3_____3_______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_92_反转链表_ii": {
+  "topic": "linked_list",
+  "id": "92",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2_____________________",
+   "solution_3_3____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_1329_将矩阵按对角线排序": {
+  "topic": "matrix",
+  "id": "1329",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_48_旋转矩阵": {
+  "topic": "matrix",
+  "id": "48",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_54_螺旋矩阵": {
+  "topic": "matrix",
+  "id": "54",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_1____1_________",
+   "solution_3_1____1_________"
+  ],
+  "n_solutions": 3
+ },
+ "lc_104107934_python笔记_滑动验证码的识别算法": {
+  "topic": "notes",
+  "id": "104107934",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7"
+  ],
+  "n_solutions": 7
+ },
+ "lc_105893757_栈排序分析": {
+  "topic": "notes",
+  "id": "105893757",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4"
+  ],
+  "n_solutions": 4
+ },
+ "lc_107391023_求直方图最大面积算法分析": {
+  "topic": "notes",
+  "id": "107391023",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_107431726_最大红矩形分析": {
+  "topic": "notes",
+  "id": "107431726",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5"
+  ],
+  "n_solutions": 5
+ },
+ "lc_107435426_字典序最大问题分析": {
+  "topic": "notes",
+  "id": "107435426",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4"
+  ],
+  "n_solutions": 4
+ },
+ "lc_107450699_计算思维之谁做的好事与刑侦作案问题": {
+  "topic": "notes",
+  "id": "107450699",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_107475776_计算思维之下楼梯台阶和象棋跳马问题": {
+  "topic": "notes",
+  "id": "107475776",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_107490876_计算思维之分书和八皇后问题": {
+  "topic": "notes",
+  "id": "107490876",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7"
+  ],
+  "n_solutions": 7
+ },
+ "lc_107524703_计算思维之人鬼渡河问题": {
+  "topic": "notes",
+  "id": "107524703",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4"
+  ],
+  "n_solutions": 4
+ },
+ "lc_107573690_抽象思维之对比算法_发现共性": {
+  "topic": "notes",
+  "id": "107573690",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_107579658_抽象思维之转换视角_提炼共性": {
+  "topic": "notes",
+  "id": "107579658",
+  "solutions": [
+   "solution_1___1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_107737496_抽象思维之代码重构_隔离变化": {
+  "topic": "notes",
+  "id": "107737496",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_13___13",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 13
+ },
+ "lc_107836586_big-o记号_数据结构与算法的关系以及几种基本的数据结构": {
+  "topic": "notes",
+  "id": "107836586",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_107849059_gnome_sort_bubble_sort以及贪心策略的相关对比改进": {
+  "topic": "notes",
+  "id": "107849059",
+  "solutions": [
+   "solution_1___1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_107868749_贪心策略之matrixsorting_pfc_coding_huffmantre": {
+  "topic": "notes",
+  "id": "107868749",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_108013114_贪心策略之bst&bbst_hashtable+dictionary+map_p": {
+  "topic": "notes",
+  "id": "108013114",
+  "solutions": [
+   "solution_1___1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_108673483_减治策略之heap_binarysearch_selectionsort_hea": {
+  "topic": "notes",
+  "id": "108673483",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_108717090_减治策略之详解dijkstra算法": {
+  "topic": "notes",
+  "id": "108717090",
+  "solutions": [
+   "solution_1___1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_110240695_分治策略之greatest_slice_2-way_merge_counting": {
+  "topic": "notes",
+  "id": "110240695",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5"
+  ],
+  "n_solutions": 5
+ },
+ "lc_112548608_计算思维之经典农夫过河问题c++实现": {
+  "topic": "notes",
+  "id": "112548608",
+  "solutions": [
+   "solution_1___1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_113548046_图搜索之bfs详解": {
+  "topic": "notes",
+  "id": "113548046",
+  "solutions": [
+   "solution_1___1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_113764246_图搜索之dfs详解": {
+  "topic": "notes",
+  "id": "113764246",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2"
+  ],
+  "n_solutions": 2
+ },
+ "lc_113877588_动态规划之fibonacci_power_spu_lmp": {
+  "topic": "notes",
+  "id": "113877588",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_113951689_动态规划之lcs_0": {
+  "topic": "notes",
+  "id": "113951689",
+  "solutions": [],
+  "n_solutions": 0
+ },
+ "lc_116567013_pm": {
+  "topic": "notes",
+  "id": "116567013",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4"
+  ],
+  "n_solutions": 4
+ },
+ "lc_133270489_基于链表实现js中的原型链原理与算法实现": {
+  "topic": "notes",
+  "id": "133270489",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4"
+  ],
+  "n_solutions": 4
+ },
+ "lc_133278676_使用链表指针获取json节点值的算法实现": {
+  "topic": "notes",
+  "id": "133278676",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4"
+  ],
+  "n_solutions": 4
+ },
+ "lc_133468244_堆和实现最小堆类": {
+  "topic": "notes",
+  "id": "133468244",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_133530983_实现最大堆类的两种方式及实现堆排序": {
+  "topic": "notes",
+  "id": "133530983",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_133651611_图及其深度和广度优先遍历实现": {
+  "topic": "notes",
+  "id": "133651611",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8"
+  ],
+  "n_solutions": 8
+ },
+ "lc_134053461_侏儒排序": {
+  "topic": "notes",
+  "id": "134053461",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_134066237_冒泡排序": {
+  "topic": "notes",
+  "id": "134066237",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_13___13",
+   "solution_14___14",
+   "solution_15___15",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 15
+ },
+ "lc_134073792_快速排序": {
+  "topic": "notes",
+  "id": "134073792",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 9
+ },
+ "lc_134082074_插入排序": {
+  "topic": "notes",
+  "id": "134082074",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_134083295_归并排序": {
+  "topic": "notes",
+  "id": "134083295",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_134085384_选择排序": {
+  "topic": "notes",
+  "id": "134085384",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_134085409_堆排序": {
+  "topic": "sort",
+  "id": "134085409",
+  "solutions": [],
+  "n_solutions": 0
+ },
+ "lc_134097112_实现_lru_缓存算法功能": {
+  "topic": "notes",
+  "id": "134097112",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_134150438_希尔排序": {
+  "topic": "notes",
+  "id": "134150438",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_134172583_计数排序": {
+  "topic": "notes",
+  "id": "134172583",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 12
+ },
+ "lc_134191965_基数排序": {
+  "topic": "notes",
+  "id": "134191965",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3_1_____1______",
+   "solution_4_1_____1______"
+  ],
+  "n_solutions": 4
+ },
+ "lc_134205361_桶排序": {
+  "topic": "notes",
+  "id": "134205361",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_134217002_顺序查找": {
+  "topic": "notes",
+  "id": "134217002",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列": {
+  "topic": "notes",
+  "id": "145355207",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_145370679_leetcode_lcp_10._二叉树任务调度": {
+  "topic": "notes",
+  "id": "145370679",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_2_____2_____-__"
+  ],
+  "n_solutions": 2
+ },
+ "lc_93536806_数据结构与算法笔记_复杂度": {
+  "topic": "notes",
+  "id": "93536806",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 12
+ },
+ "lc_98685358_数据结构与算法笔记_农夫过河问题python3实现": {
+  "topic": "notes",
+  "id": "98685358",
+  "solutions": [
+   "solution_1___1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_99759428_python笔记_数据结构与算法之数组操作": {
+  "topic": "notes",
+  "id": "99759428",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2"
+  ],
+  "n_solutions": 2
+ },
+ "lc_1797_设计一个验证系统": {
+  "topic": "other",
+  "id": "1797",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_202_快乐数": {
+  "topic": "other",
+  "id": "202",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_2_____2___"
+  ],
+  "n_solutions": 2
+ },
+ "lc_2166_设计位集": {
+  "topic": "other",
+  "id": "2166",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_217_存在重复元素": {
+  "topic": "other",
+  "id": "217",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_242_有效的字母异位词": {
+  "topic": "other",
+  "id": "242",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_292_nim_游戏": {
+  "topic": "other",
+  "id": "292",
+  "solutions": [
+   "solution_1_1_____1_____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_326_3_的幂": {
+  "topic": "other",
+  "id": "326",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2_________3______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_26_删除有序数组中的重复项": {
+  "topic": "queue",
+  "id": "26",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_1_____1_____",
+   "solution_3_2_____2_______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_621_任务调度器": {
+  "topic": "queue",
+  "id": "621",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_622_设计循环队列": {
+  "topic": "queue",
+  "id": "622",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2____2_____",
+   "solution_3_1_____1______",
+   "solution_4_2____2_____",
+   "solution_5_1_____1______",
+   "solution_6_2____2_____"
+  ],
+  "n_solutions": 6
+ },
+ "lc_933_最近的请求次数": {
+  "topic": "queue",
+  "id": "933",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3"
+  ],
+  "n_solutions": 3
+ },
+ "lc_1356_根据数字二进制下_1_的数目排序": {
+  "topic": "sort",
+  "id": "1356",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_15_三数之和": {
+  "topic": "sort",
+  "id": "15",
+  "solutions": [
+   "solution_1_1_____1_________",
+   "solution_2_2_____2_________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_164_最大间距": {
+  "topic": "sort",
+  "id": "164",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 12
+ },
+ "lc_179_最大数": {
+  "topic": "sort",
+  "id": "179",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2___-__",
+   "solution_3_3_____3___-____"
+  ],
+  "n_solutions": 3
+ },
+ "lc_18_四数之和": {
+  "topic": "sort",
+  "id": "18",
+  "solutions": [
+   "solution_1_1_____1__________",
+   "solution_2_2_____2________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_21_合并两个有序链表": {
+  "topic": "sort",
+  "id": "21",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_41_缺失的第一个正数": {
+  "topic": "sort",
+  "id": "41",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_13___13",
+   "solution_14___14",
+   "solution_15___15",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 15
+ },
+ "lc_922_按奇偶排序数组_ii": {
+  "topic": "sort",
+  "id": "922",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 9
+ },
+ "lc_937_重新排列日志文件": {
+  "topic": "sort",
+  "id": "937",
+  "solutions": [
+   "solution_1_1_____1______"
+  ],
+  "n_solutions": 1
+ },
+ "lc_03_05_栈排序": {
+  "topic": "stack",
+  "id": "03",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_1047_删除字符串中的所有相邻重复项": {
+  "topic": "stack",
+  "id": "1047",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_145355207_验证二叉搜索树的后序遍历序列": {
+  "topic": "stack",
+  "id": "145355207",
+  "solutions": [],
+  "n_solutions": 0
+ },
+ "lc_1472_设计浏览器历史记录": {
+  "topic": "stack",
+  "id": "1472",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_150_逆波兰表达式求值": {
+  "topic": "stack",
+  "id": "150",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_151_反转字符串中的单词": {
+  "topic": "stack",
+  "id": "151",
+  "solutions": [
+   "solution_1_1_____1________",
+   "solution_2_2_____2___________",
+   "solution_3_3_____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_155_最小栈": {
+  "topic": "stack",
+  "id": "155",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_1685_有序数组中差绝对值之和": {
+  "topic": "stack",
+  "id": "1685",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2___2",
+   "solution_3_3_____3___________________"
+  ],
+  "n_solutions": 3
+ },
+ "lc_225_用队列实现栈": {
+  "topic": "stack",
+  "id": "225",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_232_用栈实现队列": {
+  "topic": "stack",
+  "id": "232",
+  "solutions": [
+   "solution_1_1_____1____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_2454_下一个更大元素_iv": {
+  "topic": "stack",
+  "id": "2454",
+  "solutions": [
+   "solution_1_1_____1___________",
+   "solution_2_2_____2_____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_27_移除元素": {
+  "topic": "stack",
+  "id": "27",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_1_____1____",
+   "solution_3_2_____2______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_3100_换水问题_ii": {
+  "topic": "stack",
+  "id": "3100",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2"
+  ],
+  "n_solutions": 2
+ },
+ "lc_341_扁平化嵌套列表迭代器": {
+  "topic": "stack",
+  "id": "341",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_1_____1_______",
+   "solution_3_2_____2__",
+   "solution_4_3_____3_____"
+  ],
+  "n_solutions": 4
+ },
+ "lc_496_下一个更大元素_i": {
+  "topic": "stack",
+  "id": "496",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_503_下一个更大元素_ii": {
+  "topic": "stack",
+  "id": "503",
+  "solutions": [
+   "solution_1_主解法"
+  ],
+  "n_solutions": 1
+ },
+ "lc_556_下一个更大元素_iii": {
+  "topic": "stack",
+  "id": "556",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2___"
+  ],
+  "n_solutions": 2
+ },
+ "lc_641_设计循环双端队列": {
+  "topic": "stack",
+  "id": "641",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2___"
+  ],
+  "n_solutions": 2
+ },
+ "lc_682_棒球比赛": {
+  "topic": "stack",
+  "id": "682",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 9
+ },
+ "lc_71_简化路径": {
+  "topic": "stack",
+  "id": "71",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2__"
+  ],
+  "n_solutions": 2
+ },
+ "lc_739_每日温度": {
+  "topic": "stack",
+  "id": "739",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_117_填充每个节点的下一个右侧节点指针_ii": {
+  "topic": "tree",
+  "id": "117",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_1____1______",
+   "solution_3_2____2_________next___"
+  ],
+  "n_solutions": 3
+ },
+ "lc_125_验证回文串": {
+  "topic": "string",
+  "id": "125",
+  "solutions": [
+   "solution_1_1_____1_________",
+   "solution_2_2_____2_____",
+   "solution_3_3____3___________"
+  ],
+  "n_solutions": 3
+ },
+ "lc_165_比较版本号": {
+  "topic": "string",
+  "id": "165",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_2042_检查句子中的数字是否递增": {
+  "topic": "string",
+  "id": "2042",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_20_有效的括号": {
+  "topic": "string",
+  "id": "20",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_13___13",
+   "solution_14___14",
+   "solution_15___15",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 15
+ },
+ "lc_415_字符串相加": {
+  "topic": "string",
+  "id": "415",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_43_字符串相乘": {
+  "topic": "string",
+  "id": "43",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_482_密钥格式化": {
+  "topic": "string",
+  "id": "482",
+  "solutions": [
+   "solution_1_1_____2___",
+   "solution_2_2_____2______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_557_反转字符串中的单词_iii": {
+  "topic": "string",
+  "id": "557",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_13___13",
+   "solution_14___14",
+   "solution_15___15",
+   "solution_16___16",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 16
+ },
+ "lc_567_字符串的排列": {
+  "topic": "string",
+  "id": "567",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2_____2_______",
+   "solution_3_3_____3____"
+  ],
+  "n_solutions": 3
+ },
+ "lc_58_最后一个单词的长度": {
+  "topic": "string",
+  "id": "58",
+  "solutions": [
+   "solution_1"
+  ],
+  "n_solutions": 1
+ },
+ "lc_67_二进制求和": {
+  "topic": "string",
+  "id": "67",
+  "solutions": [
+   "solution_1_1_____1_____"
+  ],
+  "n_solutions": 1
+ },
+ "lc_696_计数二进制子串": {
+  "topic": "string",
+  "id": "696",
+  "solutions": [
+   "solution_10___10",
+   "solution_11___11",
+   "solution_12___12",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 12
+ },
+ "lc_791_自定义字符串排序": {
+  "topic": "string",
+  "id": "791",
+  "solutions": [
+   "solution_1_1_____1______",
+   "solution_2_2_____2_____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_8_字符串转换整数_(atoi)": {
+  "topic": "string",
+  "id": "8",
+  "solutions": [
+   "solution_1_1_____1____",
+   "solution_2_2_____2___________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_100_相同的树": {
+  "topic": "tree",
+  "id": "100",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_101_对称二叉树": {
+  "topic": "tree",
+  "id": "101",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7"
+  ],
+  "n_solutions": 7
+ },
+ "lc_102_二叉树的层序遍历": {
+  "topic": "tree",
+  "id": "102",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4_1_____1_____BFS_",
+   "solution_5_2____2_____BFS______",
+   "solution_6_3____3_____BFS____",
+   "solution_7_1_____1______BFS_",
+   "solution_8_2_____2______BFS______",
+   "solution_9_3_____3______BFS____"
+  ],
+  "n_solutions": 9
+ },
+ "lc_104_二叉树的最大深度": {
+  "topic": "tree",
+  "id": "104",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 9
+ },
+ "lc_107_二叉树的层序遍历_ii": {
+  "topic": "tree",
+  "id": "107",
+  "solutions": [
+   "solution_1_1_____1________",
+   "solution_2_2_____2________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_108_将有序数组转换为二叉搜索树": {
+  "topic": "tree",
+  "id": "108",
+  "solutions": [
+   "solution_1_1_____1_________________________",
+   "solution_2_2_____2_________________________",
+   "solution_3_3_____3________________________",
+   "solution_4_4_____4______"
+  ],
+  "n_solutions": 4
+ },
+ "lc_109_有序链表转换二叉搜索树": {
+  "topic": "tree",
+  "id": "109",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_1____1___",
+   "solution_3_2____2____________",
+   "solution_4_3_____3_____"
+  ],
+  "n_solutions": 4
+ },
+ "lc_110_平衡二叉树": {
+  "topic": "tree",
+  "id": "110",
+  "solutions": [
+   "solution_1_1_____1_________",
+   "solution_2_2_____2_________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_111_二叉树的最小深度": {
+  "topic": "tree",
+  "id": "111",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4_1_____1_____BFS_",
+   "solution_5_2_____2_____BFS______",
+   "solution_6_3_____3____",
+   "solution_7_1_____1_____BFS_",
+   "solution_8_2_____2_____BFS______",
+   "solution_9_3_____3____"
+  ],
+  "n_solutions": 9
+ },
+ "lc_112_路径总和": {
+  "topic": "tree",
+  "id": "112",
+  "solutions": [
+   "solution_10_5____5________DFS____",
+   "solution_11_1_____1________DFS_",
+   "solution_12_2____2____",
+   "solution_13_3____3_________",
+   "solution_14_4____4________BFS_",
+   "solution_15_5____5________DFS____",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6_1_____1________DFS_",
+   "solution_7_2____2____",
+   "solution_8_3____3_________",
+   "solution_9_4____4________BFS_"
+  ],
+  "n_solutions": 15
+ },
+ "lc_114_二叉树展开为链表": {
+  "topic": "tree",
+  "id": "114",
+  "solutions": [
+   "solution_1_1____1___________",
+   "solution_2_2____2___________",
+   "solution_3_3____3_____________",
+   "solution_4_4____4_______"
+  ],
+  "n_solutions": 4
+ },
+ "lc_116_填充每个节点的下一个右侧节点指针": {
+  "topic": "tree",
+  "id": "116",
+  "solutions": [
+   "solution_1___1",
+   "solution_2_1____1______",
+   "solution_2_1_____1_____",
+   "solution_3_2____2_________next___",
+   "solution_3_2_____2________next___"
+  ],
+  "n_solutions": 5
+ },
+ "lc_144_二叉树的前序遍历": {
+  "topic": "tree",
+  "id": "144",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_145370679_二叉树任务调度": {
+  "topic": "tree",
+  "id": "145370679",
+  "solutions": [],
+  "n_solutions": 0
+ },
+ "lc_145_二叉树的后序遍历": {
+  "topic": "tree",
+  "id": "145",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 9
+ },
+ "lc_199_二叉树的右视图": {
+  "topic": "tree",
+  "id": "199",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_222_完全二叉树的节点个数": {
+  "topic": "tree",
+  "id": "222",
+  "solutions": [
+   "solution_1_1_____1___________",
+   "solution_2_2____2___",
+   "solution_3_3____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_226_翻转二叉树": {
+  "topic": "tree",
+  "id": "226",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6"
+  ],
+  "n_solutions": 6
+ },
+ "lc_230_二叉搜索树中第_k_小的元素": {
+  "topic": "tree",
+  "id": "230",
+  "solutions": [
+   "solution_1_1_____1_____",
+   "solution_2_2____2_________"
+  ],
+  "n_solutions": 2
+ },
+ "lc_236_二叉树的最近公共祖先": {
+  "topic": "tree",
+  "id": "236",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2____2",
+   "solution_3_3_____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_257_二叉树的所有路径": {
+  "topic": "tree",
+  "id": "257",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_404_左叶子之和": {
+  "topic": "tree",
+  "id": "404",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2___",
+   "solution_3_3_____3_______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_429_n_叉树的层序遍历": {
+  "topic": "tree",
+  "id": "429",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2_____"
+  ],
+  "n_solutions": 2
+ },
+ "lc_513_找树左下角的值": {
+  "topic": "tree",
+  "id": "513",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_515_在每个树行中找最大值": {
+  "topic": "tree",
+  "id": "515",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_543_二叉树的直径": {
+  "topic": "tree",
+  "id": "543",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2___2"
+  ],
+  "n_solutions": 2
+ },
+ "lc_572_另一棵树的子树": {
+  "topic": "tree",
+  "id": "572",
+  "solutions": [
+   "solution_1_1_____1___________",
+   "solution_2_2_____2______________",
+   "solution_3_3_____3_____________"
+  ],
+  "n_solutions": 3
+ },
+ "lc_617_合并二叉树": {
+  "topic": "tree",
+  "id": "617",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_637_二叉树的层平均值": {
+  "topic": "tree",
+  "id": "637",
+  "solutions": [
+   "solution_1_1_____1_______",
+   "solution_2_2_____2_______"
+  ],
+  "n_solutions": 2
+ },
+ "lc_654_最大二叉树": {
+  "topic": "tree",
+  "id": "654",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2____",
+   "solution_3_3_____3______"
+  ],
+  "n_solutions": 3
+ },
+ "lc_700_二叉搜索树中的搜索": {
+  "topic": "tree",
+  "id": "700",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2"
+  ],
+  "n_solutions": 2
+ },
+ "lc_701_二叉搜索树中的插入操作": {
+  "topic": "tree",
+  "id": "701",
+  "solutions": [
+   "solution_1_1_____1___",
+   "solution_2_2_____2___"
+  ],
+  "n_solutions": 2
+ },
+ "lc_94_二叉树的中序遍历": {
+  "topic": "tree",
+  "id": "94",
+  "solutions": [
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5___5",
+   "solution_6___6",
+   "solution_7___7",
+   "solution_8___8",
+   "solution_9___9"
+  ],
+  "n_solutions": 9
+ },
+ "lc_98_验证二叉搜索树": {
+  "topic": "tree",
+  "id": "98",
+  "solutions": [
+   "solution_10_2______2__________",
+   "solution_1___1",
+   "solution_2___2",
+   "solution_3___3",
+   "solution_4___4",
+   "solution_5_1_____1_____",
+   "solution_6_2_____2__________",
+   "solution_7_1______1_____",
+   "solution_8_2_____2__________",
+   "solution_9_1______1_____"
+  ],
+  "n_solutions": 10
+ }
+}

@@ -1,0 +1,336 @@
+{
+"chunk": 2,
+"count": 66,
+"rels": [
+{
+"rel": "ts/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_7___7.ts",
+"python_ref": "python/notes/lc_104107934_python笔记_滑动验证码的识别算法/solution_7___7.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_105893757_栈排序分析/solution_1___1.ts",
+"python_ref": "python/notes/lc_105893757_栈排序分析/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_105893757_栈排序分析/solution_2___2.ts",
+"python_ref": "python/notes/lc_105893757_栈排序分析/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_105893757_栈排序分析/solution_3___3.ts",
+"python_ref": "python/notes/lc_105893757_栈排序分析/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_105893757_栈排序分析/solution_4___4.ts",
+"python_ref": "python/notes/lc_105893757_栈排序分析/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107431726_最大红矩形分析/solution_1___1.ts",
+"python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107431726_最大红矩形分析/solution_2___2.ts",
+"python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107431726_最大红矩形分析/solution_3___3.ts",
+"python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107431726_最大红矩形分析/solution_4___4.ts",
+"python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107431726_最大红矩形分析/solution_5___5.ts",
+"python_ref": "python/notes/lc_107431726_最大红矩形分析/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107435426_字典序最大问题分析/solution_1___1.ts",
+"python_ref": "python/notes/lc_107435426_字典序最大问题分析/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107435426_字典序最大问题分析/solution_2___2.ts",
+"python_ref": "python/notes/lc_107435426_字典序最大问题分析/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107435426_字典序最大问题分析/solution_3___3.ts",
+"python_ref": "python/notes/lc_107435426_字典序最大问题分析/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107435426_字典序最大问题分析/solution_4___4.ts",
+"python_ref": "python/notes/lc_107435426_字典序最大问题分析/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_1___1.ts",
+"python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_2___2.ts",
+"python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_3___3.ts",
+"python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_4___4.ts",
+"python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_5___5.ts",
+"python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_6___6.ts",
+"python_ref": "python/notes/lc_107475776_计算思维之下楼梯台阶和象棋跳马问题/solution_6___6.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_1___1.ts",
+"python_ref": "python/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_2___2.ts",
+"python_ref": "python/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_3___3.ts",
+"python_ref": "python/notes/lc_107573690_抽象思维之对比算法_发现共性/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107579658_抽象思维之转换视角_提炼共性/solution_1___1.ts",
+"python_ref": "python/notes/lc_107579658_抽象思维之转换视角_提炼共性/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_10___10.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_10___10.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_11___11.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_11___11.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_12___12.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_12___12.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_13___13.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_13___13.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_1___1.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_2___2.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_3___3.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_4___4.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_5___5.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_6___6.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_6___6.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_7___7.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_7___7.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_8___8.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_8___8.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_9___9.ts",
+"python_ref": "python/notes/lc_107737496_抽象思维之代码重构_隔离变化/solution_9___9.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107836586_big-o记号_数据结构与算法的关系以及几种基本的数据结构/solution_1_主解法.ts",
+"python_ref": "python/notes/lc_107836586_big-o记号_数据结构与算法的关系以及几种基本的数据结构/solution_1_主解法.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107849059_gnome_sort_bubble_sort以及贪心策略的相关对比改进/solution_1___1.ts",
+"python_ref": "python/notes/lc_107849059_gnome_sort_bubble_sort以及贪心策略的相关对比改进/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_107868749_贪心策略之matrixsorting_pfc_coding_huffmantre/solution_1_主解法.ts",
+"python_ref": "python/notes/lc_107868749_贪心策略之matrixsorting_pfc_coding_huffmantre/solution_1_主解法.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_108013114_贪心策略之bst&bbst_hashtable+dictionary+map_p/solution_1___1.ts",
+"python_ref": "python/notes/lc_108013114_贪心策略之bst&bbst_hashtable+dictionary+map_p/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_108717090_减治策略之详解dijkstra算法/solution_1___1.ts",
+"python_ref": "python/notes/lc_108717090_减治策略之详解dijkstra算法/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_1___1.ts",
+"python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_2___2.ts",
+"python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_3___3.ts",
+"python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_4___4.ts",
+"python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_5___5.ts",
+"python_ref": "python/notes/lc_110240695_分治策略之greatest_slice_2-way_merge_counting/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_113548046_图搜索之bfs详解/solution_1___1.ts",
+"python_ref": "python/notes/lc_113548046_图搜索之bfs详解/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_113764246_图搜索之dfs详解/solution_1___1.ts",
+"python_ref": "python/notes/lc_113764246_图搜索之dfs详解/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_113764246_图搜索之dfs详解/solution_2___2.ts",
+"python_ref": "python/notes/lc_113764246_图搜索之dfs详解/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_1___1.ts",
+"python_ref": "python/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_2___2.ts",
+"python_ref": "python/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_3___3.ts",
+"python_ref": "python/notes/lc_113877588_动态规划之fibonacci_power_spu_lmp/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_1___1.ts",
+"python_ref": "python/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_2___2.ts",
+"python_ref": "python/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_3___3.ts",
+"python_ref": "python/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_4___4.ts",
+"python_ref": "python/notes/lc_133278676_使用链表指针获取json节点值的算法实现/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133468244_堆和实现最小堆类/solution_1___1.ts",
+"python_ref": "python/notes/lc_133468244_堆和实现最小堆类/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133468244_堆和实现最小堆类/solution_2___2.ts",
+"python_ref": "python/notes/lc_133468244_堆和实现最小堆类/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133468244_堆和实现最小堆类/solution_3___3.ts",
+"python_ref": "python/notes/lc_133468244_堆和实现最小堆类/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_1___1.ts",
+"python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_2___2.ts",
+"python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_3___3.ts",
+"python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_4___4.ts",
+"python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_5___5.ts",
+"python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_6___6.ts",
+"python_ref": "python/notes/lc_133530983_实现最大堆类的两种方式及实现堆排序/solution_6___6.py",
+"lang": "ts"
+}
+]
+}

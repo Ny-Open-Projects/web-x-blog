@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="300" viewBox="0 0 560 300" font-family="system-ui,sans-serif">
+<rect width="560" height="300" rx="12" fill="#0F172A"/>
+<text x="280" y="34" text-anchor="middle" fill="#E2E8F0" font-size="17" font-weight="600">贪心 · 跳跃游戏（维护最远可达边界，自动循环播放）</text>
+<g style="animation: st0 8.0s linear infinite both">
+<rect x="66" y="90" width="66" height="80" rx="6" fill="#FACC15"/>
+<text x="99" y="83" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<text x="99" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 0</text>
+<rect x="146" y="64" width="66" height="106" rx="6" fill="#334155"/>
+<text x="179" y="57" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<text x="179" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 1</text>
+<rect x="226" y="116" width="66" height="54" rx="6" fill="#334155"/>
+<text x="259" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="259" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 2</text>
+<rect x="306" y="116" width="66" height="54" rx="6" fill="#334155"/>
+<text x="339" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="339" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 3</text>
+<rect x="386" y="38" width="66" height="132" rx="6" fill="#334155"/>
+<text x="419" y="31" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<text x="419" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 4</text>
+<line x1="58" y1="200" x2="218" y2="200" stroke="#34D399" stroke-width="3"/>
+<text x="259" y="218" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">最远可达 2</text>
+<text x="280" y="270" text-anchor="middle" fill="#94A3B8" font-size="14">i = 0：最远可达 = max(2, 0 + 2) = 2</text>
+</g>
+<g style="animation: st1 8.0s linear infinite both">
+<rect x="66" y="90" width="66" height="80" rx="6" fill="#4A90D9"/>
+<text x="99" y="83" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<text x="99" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 0</text>
+<rect x="146" y="64" width="66" height="106" rx="6" fill="#FACC15"/>
+<text x="179" y="57" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<text x="179" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 1</text>
+<rect x="226" y="116" width="66" height="54" rx="6" fill="#4A90D9"/>
+<text x="259" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="259" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 2</text>
+<rect x="306" y="116" width="66" height="54" rx="6" fill="#34D399"/>
+<text x="339" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="339" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 3</text>
+<rect x="386" y="38" width="66" height="132" rx="6" fill="#334155"/>
+<text x="419" y="31" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<text x="419" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 4</text>
+<line x1="58" y1="200" x2="378" y2="200" stroke="#34D399" stroke-width="3"/>
+<text x="419" y="218" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">最远可达 4</text>
+<text x="280" y="270" text-anchor="middle" fill="#94A3B8" font-size="14">i = 1：最远可达 = max(4, 1 + 3) = 4 → 已覆盖终点！</text>
+</g>
+<g style="animation: st2 8.0s linear infinite both">
+<rect x="66" y="90" width="66" height="80" rx="6" fill="#4A90D9"/>
+<text x="99" y="83" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<text x="99" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 0</text>
+<rect x="146" y="64" width="66" height="106" rx="6" fill="#34D399"/>
+<text x="179" y="57" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<text x="179" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 1</text>
+<rect x="226" y="116" width="66" height="54" rx="6" fill="#FACC15"/>
+<text x="259" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="259" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 2</text>
+<rect x="306" y="116" width="66" height="54" rx="6" fill="#34D399"/>
+<text x="339" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="339" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 3</text>
+<rect x="386" y="38" width="66" height="132" rx="6" fill="#334155"/>
+<text x="419" y="31" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<text x="419" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 4</text>
+<line x1="58" y1="200" x2="378" y2="200" stroke="#34D399" stroke-width="3"/>
+<text x="419" y="218" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">最远可达 4</text>
+<text x="280" y="270" text-anchor="middle" fill="#94A3B8" font-size="14">i = 2：最远可达 = max(4, 2 + 1) = 4 → 已覆盖终点！</text>
+</g>
+<g style="animation: st3 8.0s linear infinite both">
+<rect x="66" y="90" width="66" height="80" rx="6" fill="#4A90D9"/>
+<text x="99" y="83" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<text x="99" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 0</text>
+<rect x="146" y="64" width="66" height="106" rx="6" fill="#34D399"/>
+<text x="179" y="57" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<text x="179" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 1</text>
+<rect x="226" y="116" width="66" height="54" rx="6" fill="#4A90D9"/>
+<text x="259" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="259" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 2</text>
+<rect x="306" y="116" width="66" height="54" rx="6" fill="#FACC15"/>
+<text x="339" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="339" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 3</text>
+<rect x="386" y="38" width="66" height="132" rx="6" fill="#334155"/>
+<text x="419" y="31" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<text x="419" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 4</text>
+<line x1="58" y1="200" x2="378" y2="200" stroke="#34D399" stroke-width="3"/>
+<text x="419" y="218" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">最远可达 4</text>
+<text x="280" y="270" text-anchor="middle" fill="#94A3B8" font-size="14">i = 3：最远可达 = max(4, 3 + 1) = 4 → 已覆盖终点！</text>
+</g>
+<g style="animation: st4 8.0s linear infinite both">
+<rect x="66" y="90" width="66" height="80" rx="6" fill="#4A90D9"/>
+<text x="99" y="83" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">2</text>
+<text x="99" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 0</text>
+<rect x="146" y="64" width="66" height="106" rx="6" fill="#34D399"/>
+<text x="179" y="57" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">3</text>
+<text x="179" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 1</text>
+<rect x="226" y="116" width="66" height="54" rx="6" fill="#4A90D9"/>
+<text x="259" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="259" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 2</text>
+<rect x="306" y="116" width="66" height="54" rx="6" fill="#34D399"/>
+<text x="339" y="109" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">1</text>
+<text x="339" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 3</text>
+<rect x="386" y="38" width="66" height="132" rx="6" fill="#FACC15"/>
+<text x="419" y="31" text-anchor="middle" fill="#F1F5F9" font-size="15" font-weight="700">4</text>
+<text x="419" y="188" text-anchor="middle" fill="#94A3B8" font-size="13">idx 4</text>
+<line x1="58" y1="200" x2="536" y2="200" stroke="#34D399" stroke-width="3"/>
+<text x="500" y="218" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">最远可达 8</text>
+<text x="280" y="270" text-anchor="middle" fill="#94A3B8" font-size="14">i = 4：最远可达 = max(8, 4 + 4) = 8 → 已覆盖终点！</text>
+</g>
+<style>
+.st0 {opacity:0} @keyframes st0 {0%{opacity:0}0.00%{opacity:0}2.40%{opacity:1}17.60%{opacity:1}20.00%{opacity:0}100%{opacity:0}}
+.st1 {opacity:0} @keyframes st1 {0%{opacity:0}20.00%{opacity:0}22.40%{opacity:1}37.60%{opacity:1}40.00%{opacity:0}100%{opacity:0}}
+.st2 {opacity:0} @keyframes st2 {0%{opacity:0}40.00%{opacity:0}42.40%{opacity:1}57.60%{opacity:1}60.00%{opacity:0}100%{opacity:0}}
+.st3 {opacity:0} @keyframes st3 {0%{opacity:0}60.00%{opacity:0}62.40%{opacity:1}77.60%{opacity:1}80.00%{opacity:0}100%{opacity:0}}
+.st4 {opacity:0} @keyframes st4 {0%{opacity:0}80.00%{opacity:0}82.40%{opacity:1}97.60%{opacity:1}100.00%{opacity:0}100%{opacity:0}}
+</style>
+</svg>

@@ -1,0 +1,51 @@
+# LeetCode 03.05. 栈排序 (ts)
+
+> 来源：[Wang's Blog](https://blog.csdn.net/tyro_java/article/details/145397311)
+> 语言：**ts**（博客原文）
+
+## 题目描述
+
+- - 栈排序。 编写程序，对栈进行排序使最小元素位于栈顶。最多只能使用一个其他的临时栈存放数据，但不得将元素复制到别的数据结构（如数组）中。该栈支持如下操作：push、pop、peek 和 isEmpty。当栈为空时，peek 返回 -1。
+
+## 示例
+
+```
+输入：
+["SortedStack", "push", "push", "peek", "pop", "peek"]
+[[], [1], [2], [], [], []]
+ 输出：
+[null,null,null,1,null,2]
+
+输入：
+["SortedStack", "push", "push", "peek", "pop", "peek"]
+[[], [1], [2], [], [], []]
+ 输出：
+[null,null,null,1,null,2]
+
+输入： 
+["SortedStack", "pop", "pop", "push", "pop", "isEmpty"]
+[[], [], [], [1], [], []]
+ 输出：
+[null,null,null,null,null,true]
+
+输入： 
+["SortedStack", "pop", "pop", "push", "pop", "isEmpty"]
+[[], [], [], [1], [], []]
+ 输出：
+[null,null,null,null,null,true]
+```
+
+## 提示
+
+- 栈中的元素数目在[0, 5000]范围内
+
+## 进阶
+
+(无)
+
+## 解法列表
+
+| 方案 | 文件 | 来源语言 |
+| --- | --- | --- |
+| 1 ) 方案1：栈和辅助栈 | `solution_1_1_)_方案1_栈和辅助栈.ts` | ts |
+| 2 ）方案2：基于 栈排序 | `solution_2_2_）方案2_基于_栈排序.ts` | ts |

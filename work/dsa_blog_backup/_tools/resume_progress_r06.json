@@ -1,0 +1,80 @@
+{"rel":"java/backtrack/lc_51_n_皇后/solution_3_3_____3___-____.java","status":"done_pass","note":"faithful N-queens backtracking, harness asserts 4-queens solutions"}
+{"rel":"java/backtrack/lc_79_单词搜索/solution_1_1_____1____.java","status":"done_pass","note":"word search; harness ABD=true ZZZ=false"}
+{"rel":"java/backtrack/lc_79_单词搜索/solution_2_2_____2______.java","status":"done_pass","note":"word search; harness ABD=true ZZZ=false"}
+{"rel":"java/backtrack/lc_93_复原_ip_地址/solution_1___1.java","status":"done_pass","note":"python ref is stub returning []; faithful"}
+{"rel":"java/backtrack/lc_93_复原_ip_地址/solution_2___2.java","status":"done_pass","note":"IP backtracking; want 2 valid IPs for 25525511135"}
+{"rel":"java/backtrack/lc_93_复原_ip_地址/solution_3___3.java","status":"done_pass","note":"IP backtracking; want 2 valid IPs for 25525511135"}
+{"rel":"java/binary_search/lc_704_二分查找/solution_1___1.java","status":"done_pass","note":"binary search harness 3 cases"}
+{"rel":"java/binary_search/lc_704_二分查找/solution_2___2.java","status":"done_pass","note":"binary search harness 3 cases"}
+{"rel":"java/binary_search/lc_704_二分查找/solution_3___3.java","status":"done_pass","note":"binary search harness 3 cases"}
+{"rel":"java/concurrency/lc_1114_按序打印/solution_1_1_____1____synchronization.java","status":"done_pass","note":"Foo semaphore ordering test"}
+{"rel":"java/concurrency/lc_2637_有时间限制的_promise_对象/solution_1___1.java","status":"done_pass","note":"timeLimit timeout test"}
+{"rel":"java/concurrency/lc_2637_有时间限制的_promise_对象/solution_2_2____2______Timeout.java","status":"done_pass","note":"timeLimit timeout test"}
+{"rel":"java/concurrency/lc_2721_并行执行异步函数/solution_1_1_____1____async_await___.java","status":"done_pass","note":"promiseAll parallel results"}
+{"rel":"java/concurrency/lc_2721_并行执行异步函数/solution_2_2_____2____then_catch___.java","status":"done_pass","note":"promiseAll with error capture"}
+{"rel":"java/dp/lc_1027_最长等差数列/solution_1_1_____1_____.java","status":"done_pass","note":"HashMap DP, want 3 for [9,4,7,2,10]"}
+{"rel":"java/dp/lc_1027_最长等差数列/solution_2_2_____2_______Map____.java","status":"done_pass","note":"HashMap DP, want 4 for [3,6,9,12]"}
+{"rel":"java/dp/lc_1143_最长公共子序列/solution_1_1_____1______.java","status":"done_pass","note":"LCS want 3"}
+{"rel":"java/dp/lc_123_买卖股票的最佳时机_iii/solution_1_1_____1_____.java","status":"done_pass","note":"maxProfit want 2 for [1,2,3]"}
+{"rel":"java/dp/lc_123_买卖股票的最佳时机_iii/solution_2_2_____2_________.java","status":"done_pass","note":"maxProfit want 6"}
+{"rel":"java/dp/lc_1494_并行课程_ii/solution_1_1_____1____________.java","status":"done_pass","note":"bitmask+combos want 3"}
+{"rel":"java/dp/lc_1494_并行课程_ii/solution_2_2_____2___________.java","status":"done_pass","note":"bitmask+combos want 3"}
+{"rel":"java/dp/lc_213_打家劫舍_ii/solution_1_1_____1_____.java","status":"done_pass","note":"rob want 3"}
+{"rel":"java/dp/lc_213_打家劫舍_ii/solution_2_2_____2_____.java","status":"done_pass","note":"rob want 3"}
+{"rel":"java/dp/lc_213_打家劫舍_ii/solution_3_3_____3_________.java","status":"done_pass","note":"rob want 3"}
+{"rel":"java/dp/lc_213_打家劫舍_ii/solution_4_4_____4_____.java","status":"done_pass","note":"rob want 3"}
+{"rel":"java/dp/lc_2407_最长递增子序列_ii/solution_1_1_____1_____.java","status":"done_pass","note":"segment tree LIS want 5"}
+{"rel":"java/dp/lc_3105_最长的严格递增或递减子数组/solution_1_1_____1______.java","status":"done_pass","note":"monotonic want 2"}
+{"rel":"java/dp/lc_3105_最长的严格递增或递减子数组/solution_2_2_____2_________.java","status":"done_pass","note":"monotonic want 2"}
+{"rel":"java/dp/lc_3105_最长的严格递增或递减子数组/solution_3_3_____3______.java","status":"done_pass","note":"monotonic want 2"}
+{"rel":"java/dp/lc_518_零钱兑换_ii/solution_1_1_____1_______________________.java","status":"done_pass","note":"change want 4"}
+{"rel":"java/dp/lc_518_零钱兑换_ii/solution_2_2_____2______.java","status":"done_pass","note":"change want 4"}
+{"rel":"java/dp/lc_518_零钱兑换_ii/solution_3_3_____3_________.java","status":"done_pass","note":"change want 4"}
+{"rel":"java/dp/lc_518_零钱兑换_ii/solution_4_4_____4_________.java","status":"done_pass","note":"change want 4"}
+{"rel":"java/dp/lc_673_最长递增子序列的个数/solution_1_1_____1______.java","status":"done_pass","note":"findNumberOfLIS want 2"}
+{"rel":"java/dp/lc_673_最长递增子序列的个数/solution_2_2_____2_________________.java","status":"done_pass","note":"findNumberOfLIS want 2"}
+{"rel":"java/dp/lc_72_编辑距离/solution_1_1_____1______.java","status":"done_pass","note":"minDistance want 3"}
+{"rel":"java/dp/lc_877_石子游戏/solution_1_1_____1_____.java","status":"done_pass","note":"stoneGame DP want true"}
+{"rel":"java/dp/lc_877_石子游戏/solution_2_2_____2_____-___.java","status":"done_pass","note":"stoneGame want true"}
+{"rel":"java/dp/lc_877_石子游戏/solution_3_3_____3___.java","status":"done_pass","note":"stoneGame want true"}
+{"rel":"java/dp/lc_926_将字符串翻转到单调递增/solution_1_1_____1______.java","status":"done_pass","note":"minFlipsMonoIncr want 1"}
+{"rel":"java/dp/lc_926_将字符串翻转到单调递增/solution_2_2_____2_________.java","status":"done_pass","note":"minFlipsMonoIncr want 1"}
+{"rel":"java/graph/lc_133_克隆图/solution_1___1.java","status":"done_pass","note":"cloneGraph BFS, signature check"}
+{"rel":"java/graph/lc_133_克隆图/solution_2___2.java","status":"done_pass","note":"cloneGraph DFS, signature check"}
+{"rel":"java/graph/lc_133_克隆图/solution_3___3.java","status":"done_pass","note":"cloneGraph DFS, signature check"}
+{"rel":"java/graph/lc_133_克隆图/solution_4_1_____1_____.java","status":"done_pass","note":"cloneGraph BFS, signature check"}
+{"rel":"java/graph/lc_133_克隆图/solution_5_2____2_____.java","status":"done_pass","note":"cloneGraph BFS, signature check"}
+{"rel":"java/graph/lc_133_克隆图/solution_6_1_____1_____.java","status":"done_pass","note":"cloneGraph BFS, signature check"}
+{"rel":"java/graph/lc_133_克隆图/solution_7_2____2_____.java","status":"done_pass","note":"cloneGraph BFS, signature check"}
+{"rel":"java/graph/lc_417_太平洋大西洋水流问题/solution_1___1.java","status":"done_pass","note":"pacificAtlantic want 7 cells"}
+{"rel":"java/graph/lc_417_太平洋大西洋水流问题/solution_2___2.java","status":"done_pass","note":"pacificAtlantic want 7 cells"}
+{"rel":"java/graph/lc_417_太平洋大西洋水流问题/solution_3___3.java","status":"done_pass","note":"pacificAtlantic want 7 cells"}
+{"rel":"java/graph/lc_65_有效数字/solution_1___1.java","status":"done_pass","note":"isNumber simple approach"}
+{"rel":"java/graph/lc_65_有效数字/solution_2___2.java","status":"done_pass","note":"isNumber simple approach"}
+{"rel":"java/graph/lc_65_有效数字/solution_3___3.java","status":"done_pass","note":"isNumber DFA"}
+{"rel":"java/graph/lc_65_有效数字/solution_4_1_____1___.java","status":"done_pass","note":"isNumber DFA"}
+{"rel":"java/graph/lc_65_有效数字/solution_5_2_____2________.java","status":"done_pass","note":"isNumber DFA"}
+{"rel":"java/graph/lc_65_有效数字/solution_6_1_____1___.java","status":"done_pass","note":"isNumber DFA"}
+{"rel":"java/graph/lc_65_有效数字/solution_7_2_____2________.java","status":"done_pass","note":"isNumber DFA"}
+{"rel": "java/greedy/lc_1518_\u6362\u6c34\u95ee\u9898/solution_1_1_____1___.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_1518_\u6362\u6c34\u95ee\u9898/solution_2_2_____2___.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_435_\u65e0\u91cd\u53e0\u533a\u95f4/solution_1_1_____1____.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_435_\u65e0\u91cd\u53e0\u533a\u95f4/solution_2_2_____2_____________.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_452_\u7528\u6700\u5c11\u6570\u91cf\u7684\u7bad\u5f15\u7206\u6c14\u7403/solution_1_1_____1_________.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_452_\u7528\u6700\u5c11\u6570\u91cf\u7684\u7bad\u5f15\u7206\u6c14\u7403/solution_2_2_____2____________.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_45_\u8df3\u8dc3\u6e38\u620f_ii/solution_1_1_____1__________.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_45_\u8df3\u8dc3\u6e38\u620f_ii/solution_2_2_____2______________.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_55_\u8df3\u8dc3\u6e38\u620f/solution_1_\u4e3b\u89e3\u6cd5.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_649_dota2_\u53c2\u8bae\u9662/solution_1_1_____1____________.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/greedy/lc_649_dota2_\u53c2\u8bae\u9662/solution_2_2_____2____.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/hash/lc_350_\u4e24\u4e2a\u6570\u7ec4\u7684\u4ea4\u96c6_ii/solution_1_1_____1____.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/hash/lc_350_\u4e24\u4e2a\u6570\u7ec4\u7684\u4ea4\u96c6_ii/solution_2_2____2__________.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/hash/lc_76_\u6700\u5c0f\u8986\u76d6\u5b50\u4e32/solution_1___1.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/hash/lc_76_\u6700\u5c0f\u8986\u76d6\u5b50\u4e32/solution_2___2.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/hash/lc_76_\u6700\u5c0f\u8986\u76d6\u5b50\u4e32/solution_3___3.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_208_\u5b9e\u73b0_trie_(\u524d\u7f00\u6811)/solution_1_1_____1_____.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_208_\u5b9e\u73b0_trie_(\u524d\u7f00\u6811)/solution_2_2_____2_______.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_295_\u6570\u636e\u6d41\u7684\u4e2d\u4f4d\u6570/solution_1_1_____1_____.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_295_\u6570\u636e\u6d41\u7684\u4e2d\u4f4d\u6570/solution_2_2_____2_____-___.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_295_\u6570\u636e\u6d41\u7684\u4e2d\u4f4d\u6570/solution_3_3_____3___________.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}
+{"rel": "java/heap/lc_347_\u524dk\u4e2a\u9ad8\u9891\u5143\u7d20/solution_1___1.java", "status": "done_pass", "note": "compiled, ran, asserted vs python ground truth"}

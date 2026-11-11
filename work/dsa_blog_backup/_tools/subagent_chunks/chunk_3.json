@@ -1,0 +1,336 @@
+{
+"chunk": 3,
+"count": 66,
+"rels": [
+{
+"rel": "ts/notes/lc_134082074_插入排序/solution_1___1.ts",
+"python_ref": "python/notes/lc_134082074_插入排序/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134082074_插入排序/solution_2___2.ts",
+"python_ref": "python/notes/lc_134082074_插入排序/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134082074_插入排序/solution_3___3.ts",
+"python_ref": "python/notes/lc_134082074_插入排序/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134083295_归并排序/solution_1___1.ts",
+"python_ref": "python/notes/lc_134083295_归并排序/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134083295_归并排序/solution_2___2.ts",
+"python_ref": "python/notes/lc_134083295_归并排序/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134083295_归并排序/solution_3___3.ts",
+"python_ref": "python/notes/lc_134083295_归并排序/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134083295_归并排序/solution_4___4.ts",
+"python_ref": "python/notes/lc_134083295_归并排序/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134083295_归并排序/solution_5___5.ts",
+"python_ref": "python/notes/lc_134083295_归并排序/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134083295_归并排序/solution_6___6.ts",
+"python_ref": "python/notes/lc_134083295_归并排序/solution_6___6.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134085384_选择排序/solution_1___1.ts",
+"python_ref": "python/notes/lc_134085384_选择排序/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134085384_选择排序/solution_2___2.ts",
+"python_ref": "python/notes/lc_134085384_选择排序/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134085384_选择排序/solution_3___3.ts",
+"python_ref": "python/notes/lc_134085384_选择排序/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134085409_堆排序/solution_1_主解法.ts",
+"python_ref": "python/notes/lc_134085409_堆排序/solution_1_主解法.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134150438_希尔排序/solution_1___1.ts",
+"python_ref": "python/notes/lc_134150438_希尔排序/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134150438_希尔排序/solution_2___2.ts",
+"python_ref": "python/notes/lc_134150438_希尔排序/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134150438_希尔排序/solution_3___3.ts",
+"python_ref": "python/notes/lc_134150438_希尔排序/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134217002_顺序查找/solution_1___1.ts",
+"python_ref": "python/notes/lc_134217002_顺序查找/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_134217002_顺序查找/solution_3___3.ts",
+"python_ref": "python/notes/lc_134217002_顺序查找/solution_3___3.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列/solution_1_主解法.ts",
+"python_ref": "python/notes/lc_145355207_leetcode_lcr_152._验证二叉搜索树的后序遍历序列/solution_1_主解法.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_1___1.ts",
+"python_ref": "python/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_2_2_____2_____-__.ts",
+"python_ref": "python/notes/lc_145370679_leetcode_lcp_10._二叉树任务调度/solution_2_2_____2_____-__.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_1___1.ts",
+"python_ref": "python/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_2___2.ts",
+"python_ref": "python/notes/lc_99759428_python笔记_数据结构与算法之数组操作/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_1797_设计一个验证系统/solution_1_主解法.ts",
+"python_ref": "python/other/lc_1797_设计一个验证系统/solution_1_主解法.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_202_快乐数/solution_1___1.ts",
+"python_ref": "python/other/lc_202_快乐数/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_202_快乐数/solution_2_2_____2___.ts",
+"python_ref": "python/other/lc_202_快乐数/solution_2_2_____2___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_2166_设计位集/solution_1_1_____1_______.ts",
+"python_ref": "python/other/lc_2166_设计位集/solution_1_1_____1_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_2166_设计位集/solution_2_2_____2______.ts",
+"python_ref": "python/other/lc_2166_设计位集/solution_2_2_____2______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_217_存在重复元素/solution_1_1_____1___.ts",
+"python_ref": "python/other/lc_217_存在重复元素/solution_1_1_____1___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_292_nim_游戏/solution_1_1_____1_____.ts",
+"python_ref": "python/other/lc_292_nim_游戏/solution_1_1_____1_____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_326_3_的幂/solution_1_1_____1____.ts",
+"python_ref": "python/other/lc_326_3_的幂/solution_1_1_____1____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/other/lc_326_3_的幂/solution_2_2_____2_________3______.ts",
+"python_ref": "python/other/lc_326_3_的幂/solution_2_2_____2_________3______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_1_1_____1___.ts",
+"python_ref": "python/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_1_1_____1___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_2_2_____2______.ts",
+"python_ref": "python/sort/lc_1356_根据数字二进制下_1_的数目排序/solution_2_2_____2______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_15_三数之和/solution_1_1_____1_________.ts",
+"python_ref": "python/sort/lc_15_三数之和/solution_1_1_____1_________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_15_三数之和/solution_2_2_____2_________.ts",
+"python_ref": "python/sort/lc_15_三数之和/solution_2_2_____2_________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_179_最大数/solution_1_1_____1___.ts",
+"python_ref": "python/sort/lc_179_最大数/solution_1_1_____1___.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_179_最大数/solution_2_2_____2___-__.ts",
+"python_ref": "python/sort/lc_179_最大数/solution_2_2_____2___-__.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_179_最大数/solution_3_3_____3___-____.ts",
+"python_ref": "python/sort/lc_179_最大数/solution_3_3_____3___-____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_18_四数之和/solution_1_1_____1__________.ts",
+"python_ref": "python/sort/lc_18_四数之和/solution_1_1_____1__________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_18_四数之和/solution_2_2_____2________.ts",
+"python_ref": "python/sort/lc_18_四数之和/solution_2_2_____2________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_1___1.ts",
+"python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_4___4.ts",
+"python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_4___4.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_5___5.ts",
+"python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_5___5.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_6___6.ts",
+"python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_6___6.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_8___8.ts",
+"python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_8___8.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_922_按奇偶排序数组_ii/solution_9___9.ts",
+"python_ref": "python/sort/lc_922_按奇偶排序数组_ii/solution_9___9.py",
+"lang": "ts"
+},
+{
+"rel": "ts/sort/lc_937_重新排列日志文件/solution_1_1_____1______.ts",
+"python_ref": "python/sort/lc_937_重新排列日志文件/solution_1_1_____1______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_03_05_栈排序/solution_1_1_____1______.ts",
+"python_ref": "python/stack/lc_03_05_栈排序/solution_1_1_____1______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_03_05_栈排序/solution_2_2____2_______.ts",
+"python_ref": "python/stack/lc_03_05_栈排序/solution_2_2____2_______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_1472_设计浏览器历史记录/solution_1_主解法.ts",
+"python_ref": "python/stack/lc_1472_设计浏览器历史记录/solution_1_主解法.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_151_反转字符串中的单词/solution_1_1_____1________.ts",
+"python_ref": "python/stack/lc_151_反转字符串中的单词/solution_1_1_____1________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_151_反转字符串中的单词/solution_2_2_____2___________.ts",
+"python_ref": "python/stack/lc_151_反转字符串中的单词/solution_2_2_____2___________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.ts",
+"python_ref": "python/stack/lc_151_反转字符串中的单词/solution_3_3_____3______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_1685_有序数组中差绝对值之和/solution_1_1_____1____.ts",
+"python_ref": "python/stack/lc_1685_有序数组中差绝对值之和/solution_1_1_____1____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_1685_有序数组中差绝对值之和/solution_2___2.ts",
+"python_ref": "python/stack/lc_1685_有序数组中差绝对值之和/solution_2___2.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_1685_有序数组中差绝对值之和/solution_3_3_____3___________________.ts",
+"python_ref": "python/stack/lc_1685_有序数组中差绝对值之和/solution_3_3_____3___________________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_225_用队列实现栈/solution_1_1_____1______.ts",
+"python_ref": "python/stack/lc_225_用队列实现栈/solution_1_1_____1______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_225_用队列实现栈/solution_2_2_____2______.ts",
+"python_ref": "python/stack/lc_225_用队列实现栈/solution_2_2_____2______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_2454_下一个更大元素_iv/solution_1_1_____1___________.ts",
+"python_ref": "python/stack/lc_2454_下一个更大元素_iv/solution_1_1_____1___________.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_2454_下一个更大元素_iv/solution_2_2_____2_____.ts",
+"python_ref": "python/stack/lc_2454_下一个更大元素_iv/solution_2_2_____2_____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_27_移除元素/solution_1___1.ts",
+"python_ref": "python/stack/lc_27_移除元素/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_27_移除元素/solution_2_1_____1____.ts",
+"python_ref": "python/stack/lc_27_移除元素/solution_2_1_____1____.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_27_移除元素/solution_3_2_____2______.ts",
+"python_ref": "python/stack/lc_27_移除元素/solution_3_2_____2______.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_3100_换水问题_ii/solution_1___1.ts",
+"python_ref": "python/stack/lc_3100_换水问题_ii/solution_1___1.py",
+"lang": "ts"
+},
+{
+"rel": "ts/stack/lc_3100_换水问题_ii/solution_2___2.ts",
+"python_ref": "python/stack/lc_3100_换水问题_ii/solution_2___2.py",
+"lang": "ts"
+}
+]
+}
