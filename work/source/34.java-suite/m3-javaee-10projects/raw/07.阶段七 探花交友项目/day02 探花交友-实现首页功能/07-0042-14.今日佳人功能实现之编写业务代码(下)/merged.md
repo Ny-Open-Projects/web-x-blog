@@ -1,0 +1,212 @@
+# 14.今日佳人功能实现之编写业务代码（下）
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day02 探花交友-实现首页功能
+- 源文件：07.阶段七 探花交友项目\day02 探花交友-实现首页功能\14.今日佳人功能实现之编写业务代码（下）_【海量资源尽在 666java.com】.mp4
+- 时长 16分54秒（音频 1015s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们就来测试一下刚刚我们所写的这个方法然后呢我们测试的是需要这个token的所以说呢我们还是需要整合到我们的SSO去做一个测试那么在我们的SSO里面呢我们登录的时候呢要发送这个验证码那么我们为了这个测试方便呢我们就去修改一下我们之前的一个发送这个验证码的一个逻辑然后呢去不做真实的一个发送
+[00:30] 生成一个固定的验证码那么用于我们方便做测试那么我们简单的把之前的发送验证码的逻辑我们简单的来调一下那么就是在我们的SMS Service中的一个Sender Check Code这个方法中然后我们来看一下
+[00:52] 这个位置是不是做真正的一个验证码的一个发送啊那我们把它注释掉啊然后呢我们就直接去生成啊这样一个验证码就好了比如说我们就生成这个123456呃然后呢就好了就简单吧这个呃code呢就是这个13456吧这样我们会呃使用起来更加的方便啊那么接下来呢我们把我们的服务呢都跑起来那么首先第一个呢是需要把我们这个呃double的这个服务呢跑起来
+[01:22] 那我们找到我们这个启动类啊然后我们去执行一下然后呢把我们这个服务呢去注册到我们的注册中心好那么现在呢我们这个呃double的这个服务呢就已经跑起来了那我们可以呢在资料中呢去找到我们有一个呃ZK的啊这样的一个查看工具那么我们可以去呃打开它呢去连接到我们的这个ZK
+[01:47] 然后我们去查看一下可以看到在这个位置有一个double的这样的一个目录那么点开可以看一下就是我们所注册的这个服务那么下面就是它的一个提供者我们可以来浏览一下对吧是不是就是我们的那个recommend user API这样的一个实现OK好那么这个就是我们的这个把它就跑起来对吧好那么接下来我们再把我们的SSO跑起来那我们来跑一下
+[02:16] 那么把它跑起来在这然后我们来执行一下走好我们来等待它的一个执行好那么现在我们服务就已经跑起来了那么接下来我们就来测试一下那么来打开我们的REST Client的测试工具我们先来测试的是什么我们先要去做一个login这个动作然后去发送验证码对吧
+[02:46] 那我们来找一下这个是login然后呢这个发送的这个手机号啊我们来找一下就是我们的应用的这个手机号那么就是这个啊然后呢我们去输入一下它然后呢我们点击这个send发送那么可以看到是不是发送成功了那么接下来呢我们就用这个手机号呢去做一个登录啊那么有一个这个教验对吧教验这个登录那么手机号呢
+[03:15] 我们刷新一下这个可能会有点问题那么我们把这个呢改一下它然后呢这个改成12123456总共是我们的这个六位对吧验证码然后点击发送走那么这样的话我们是不是就得到了我们这个token对吧那么这个token我们是不是就可以
+[03:39] 拿来去做一个使用了对吧然后呢我们到目前为止是不是已经得到这个token了那么接下来呢我们把这个我们这个server呢也跑起来啊那我们在这呢我们也跑起来然后呢我们用debug的形式呢去跑起来然后呢在我们的这个在我们的Controller这个位置啊可以打断点或者说我们可以直接写一个测试用例啊去做一个测试了那么这样我们就直接来做一个
+[04:08] 测试用力去做一个写个测试用力测试我们在下面去写一个包就叫com.tank花然后点server然后在下面我们去写一个测试用力叫做什么呢test那么test什么todaytodaybest那么我们就去来测试它然后
+[04:35] 给他添加两个注解那么一个呢叫做Spring Boot test另外一个叫做什么呢run with然后呢写一个spring这个run写给他然后呢下面呢我们就可以把我们写的这个什么呢叫做today这个best Service呢去注入进来我们对这个Service做一个
+[04:59] 测试就可以了那么Service测试通过那么Controller肯定是ok的对吧好那我们就来测试它里面的一个就是这个query这个方法那我们就把这个方法来拷贝一下那我们来直接测试这个方法就可以了这个是一个关键的一个方法然后呢我们写一个word写一个test写一个它然后呢我们把这个queue呢改成大写然后呢上面加一个test注解
+[05:28] 好,那么我们就要用this.servicequery它那么这个token就是我们刚刚所得到的这个token对吧我们把这个token来拷贝一下那么就是刚刚的这个token然后我们把它丢到这儿然后我们根据这个token去做一个测试把这个token传递过去然后它就会得到一个我们这个today best这样的一个对象
+[05:56] 那么我们就把这个对象呢就打印出来哎好嘞好那么就可以完成一个测试了那我们在我们这个Service中打一个断点然后呢我们来debug启动我们这个测试用力啊就可以了好那我们来等待一下它的一个执行好那么断点呢就现在已经进入了我们来看一下这个token呢就是我们刚刚所传入的这个值然后呢首先呢它需要去查询一下啊我们的这个
+[06:25] 优的对象就根据SSO的接口去做一个查询那么我们就跟进去来看一下然后我们可以看到这个URL是不是就是刚刚我们在配置文件中所配置的这样的一个地址然后下面往下面走OK是不是拿到数据了然后反序列化得到一个优的对象然后继续往下面看这个就去做一个具体的一个查询然后我们就通过那么这个位置报错了
+[06:54] 那我们来看一下它是什么错误啊那么显然呢在这个位置呢就说错了那我们可以看它说这个找不到这个类啊就是这个object id啊这个类那么这个类呢我们是会有这样的一个问题啊就是这个类是我们的这个mongodb相关的一些这个包没有导入进来那么原因是什么呢原因是在我们在写这个pub文件的时候啊
+[07:23] 那么我们去引入这个interface的时候呢我们把它呢给排除掉了那么这样我们先把这个排除掉的我们先打开啊就是说我们不做一个排除然后呢我们再来做一个测试那我们来看它会怎么样啊那我们再次去做一个执行走好那么我们重新跑起来了然后锻炼的也进入了啊那么我们可以来执行一下看它有没有问题啊然后呢走走走
+[07:50] 其实可以看到在这个位置呢我们已经拿到了我们这个today best这个对象啊那么这个对象有没有问题呢其实会发现呢也没有问题对吧也是这个ID等于13然后呢他的这个原分值呢是98OK没有问题那么我们为什么之前要把我们之前这个引路就排除掉spin boot的一个spin boot的这个
+[08:14] MongoDB这样的依赖呢原因是什么来看一下啊那其实呢在我们的这个运行的日子中啊会发现会有这样的一个问题就是当我们的这个依赖中呢去导入了这个MongoDB就是Spring Boot MongoDB的这个依赖的时候呢它呢会自动会去
+[08:34] 创建一个MongoDB的一个这个连接那么我们其实在我们的工程中呢我们根本没有必要去连接到这个MongoDB然后它呢会自动做一个这样的连接我们在配置文件中呢也没有去配置相关的一些配置项的话那么会抛出这个一场所以说呢我们为了解决这个问题啊那么可以这样去说就说解决这个问题呢我们其实有两种解决方案
+[09:00] 那么第一种解决方案呢就是我们在前面给大家所讲的就是这种啊就是我们可以把不需要的这一样给它排除掉那么这样的话呢就可以解决这个问题了啊解决这个问题那么但是呢它就会带来一个问题就是我们刚刚所看到的那么在我们的所需要的对象中所使用了一些mongo db相关的一些API的话那么就不就会报错了就不能使用了这个是第一种解决方案第二种解决方案呢我们可以去加
+[09:30] 助解去做一个解决啊那么一会儿呢我们给大家来演示一下第二种这个解决方案那么OK好的我们先来继续先测试我们刚刚这个结果啊看他是怎么样啊OK不OK啊然后呢我们继续往下面走这样的话我们去查询我们的一个用户信息啊就是用户ID为13的这个用户信息那我们可以往下面走那么走到这呢我们来看一下这个下面的一个这个内容啊就是
+[09:57] ID是等于13它的一个这个头像也有然后呢昵称都有这是不是已经都有了OK好然后呢我们就直接通过吧走那么通过之后呢我们就来看一下看一下我们的这个断点的一个这样的一个就是我们最后的一个输出结果的一个输出呢是在这那么显然呢是不是就没有问题那么OK那么多疑
+[10:21] OK的对吧好那么我们来看这个图片对不对啊那么显然呢我们这个图片呢它也是OK的对吧好嘞好那么接下来呢我们来给大家去演示一下就是说我们如何通过注解的这个方式呢去解决刚刚的这个问题啊那么在我们之前的一个解决方案的是我们可以把它呢排除掉这样的话呢这个问题也可以得到一个解决对吧那么这个是这个方案一那么方案二的话
+[10:51] 这个就是启动内中了有一个spin boot obligation这个中的我们去做一些这个排除那我们排除掉谁呢排除掉有一个叫做mongo啊mongomongo auto auto configure.class把这个排除掉并且呢还有一个叫做mongomongo然后呢有一个叫做date
+[11:20] auto configuration.class那么把这两个排除掉那么我们在启动的时候呢它呢也就不会再次给我们去报这个错误了就是去做一个自动的一个这样的一个连接了那么OK在刚才的这个错误啊那么这样我们把这个错误呢我们来截一个图啊截一个图这样的也是一种解决方案好那么我们去截一个图
+[11:45] 接下来之后呢一会儿我们添加到我们的讲义中啊然后呢我们再次去做一个执行我们看他执行的结果啊会怎么样好那我们稍微等待一下好那么我们就重新启动OK了那么来看一下现在呢在启动的时候呢就没有刚才那个错误了那么我们可以再去通过一下通过这个执行那么最终呢其实可以看到这个结果呢跟我们刚才所预期的这个结果呢其实是一样的啊那么也就是说我们这个
+[12:12] 刚刚这个错误其实是不是有两种解决方案呢在我们讲一中之前呢是给出第一种解决方案那么刚才我们呢也给大家讲了第二种这个解决方案啊也可以去解决这个问题啊好那么接下来呢我们就把我们这个server这个工程呢我们就跑起来我们通过我们的这个web的形式呢去做一个测试啊看它啊会是否是OK的呢那我们来稍微等待一下它的一个启动
+[12:37] 好那么现在呢就启动好了接下来呢我们就来测试一下啊那么我们这个端口呢是18081那我们就来测一下那么我们去访问一下啊这个就是我们的然后冒号啊来一个什么呢冒号18081然后呢我们来看一下我们的这个请求的一个路径啊就是探花啊探花然后呢有一个叫做
+[13:06] today best然后呢去添加给他然后呢我们下面这个发起一个get请求需要添加一个我们的一个请求的一个投信息就是我们这个token那把之前的这个token呢我们就来拷贝过来然后呢去做一个测试啊好那么我们去这个位置去做一个测试走我们来等待一下他的一个执行
+[13:33] OK那么可以看到呢这个结果是不是OK的呀那么刚刚我们去测试完完成Service那么这个Controller只要正常这个web能够跑起来那么它肯定是OK的对吧好嘞好那么这个呢我们就已经测试完成了那么接下来呢我们就在这个位置来把我们刚刚的这个解决方案呢来给大家来写一下啊就是我们这个我们写到这个最后面吧写到这个位置测试的时候那么我们测试的时候然后呢
+[14:04] 需要在这个位置那么我们去把我们的这个测试这一块给大家来写一下就是那么2点我们这个应该写的是就是就写到这吧就在这里那么就是2.5点2.5.5这样的一个测试就是我们去解决解决这个mongomongo db解决这个mongo db这个
+[14:37] 呃启动啊启动的一个bug啊启动的一个bug那么首先呢我们对他呢去说明一下啊就是那么在我们的这个项目啊中呃添加了这个蒙狗蒙狗的这个依赖的话啊那么这个spreetboot就会自动啊自动然后呢去啊呃自动去啊连接
+[15:06] 连接这个本地的一个这个蒙古蒙古那么由于由于他什么呢由于他连接无上会导致什么会导致会导致出错会导致这个出错那么为了解决这个问题呢解决有两种方案对吧有两种方案那么第一种这个方案呢我们就排除排除
+[15:38] 排除掉这个蒙古的这个依赖那么第二种解决方案呢就是在我们的spreetboot中添加我们的一些这个排除自动配置的这个注解自动注解那么上面这个呢我们在前面讲一通是不是已经给出大家这个解决方案了对吧那么下面的这个呢我们刚刚是不是也去我们应该把这个图呢给大家就截过来错误呢就是
+[16:08] 这样的一个错误啊然后呢要解决这个问题啊解决这个问题的解决方案呢就是我们刚刚在我们的这个启动类中啊所写的这样的一个配置啊那我们可以把它就拿过来就写到这吧那么我们就写一个这个写给他那么通过我们这个配置对吧我们这就写一个吧就是排除掉排除我们的一个mongo
+[16:35] Mongo的自动的一个配置啊好那么这样的话呢是不是问题就得到一个解决了好那么关于我们这个功能的一个实现呢那我们就先讲到这里那么这样的话呢我们是不是就已经实现了我们查询这个今日佳人啊这样的一个功能
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何实现一个基于 Spring Boot 和 Dubbo 的“今日最佳”推荐服务，包括服务端代码编写、测试、配置以及前端接口调用和 Nginx 反向代理的部署。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示 `TodayBestService` 服务类代码，其中包含根据 token 查询用户、创建 TodayBest 对象并填充用户信息的逻辑。
+画面2：展示 `my-tanhu-dubbo-Service` 项目的 `application.properties` 配置文件，配置了 Dubbo 服务名、协议、端口、注册中心地址和 MongoDB 数据库连接。
+画面3：展示使用 Advanced REST client 发起一个 POST 请求到 `/user/login` 接口，请求体为 JSON 格式，包含 token。
+画面4：展示 `TodayBestController` 控制器代码，使用 `@GetMapping` 注解定义了 `/todayBest` 接口，通过 `@RequestHeader("Authorization")` 获取 token。
+画面5：展示 `TestTodayBest` 单元测试类，使用 `@SpringBootTest` 和 `@RunWith(SpringJUnit4ClassRunner.class)` 注解，测试 `TodayBestService`。
+画面6：展示 `TestTodayBest` 测试类中 `queryTodayBest` 方法的断点调试，查看 `user` 对象的值。
+画面7：展示测试运行时控制台输出的异常日志，提示 `RpcException: Failed to invoke the method queryWithMaxScore`。
+画面8：展示测试运行时控制台输出的异常日志，提示 `MongoSocketOpenException: Exception opening socket`。
+画面9：展示 `TodayBestService` 服务类中填充用户信息的代码逻辑。
+画面10：展示 `ServerApplication` 启动时控制台输出的异常日志，提示 `MongoSocketOpenException: Exception opening socket`。
+画面11：展示 `ServerApplication` 类中 `@MapperScan` 注解的配置，用于扫描 Mapper 接口。
+画面12：展示 `TodayBestController` 控制器类中 `@GetMapping` 注解的代码。
+画面13：展示 Typora 编辑器中的文档，内容为“2.6. 统一接口服务入口”，并包含“2.6.1. 部署安装Nginx”和“2.6.2. 修改配置”的说明，其中包含启动 Nginx 的命令和修改 `Nginx.conf` 文件的配置。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+public TodayBest queryTodayBest(String token) {
+    //根据token查询当前登录的用户信息
+    User user = this.userService.queryUserByToken(token);
+    if (user == null) {
+        return null;
+    }
+
+    TodayBest todayBest = this.recommendUserService.queryTodayBest(user.getId());
+    if(todayBest == null) {
+        todayBest = new TodayBest();
+        todayBest.setId(defaultUserId);
+        todayBest.setRateValue(95L);
+    }
+
+    // 补全用户信息
+    UserInfo userInfo = this.userInfoService.queryUserInfoById(todayBest.getId());
+    if(null != userInfo) {
+        todayBest.setAge(userInfo.getAge());
+        todayBest.setAvatar(userInfo.getLogo());
+        todayBest.setGender(userInfo.getSex().name().toLowerCase());
+        todayBest.setNickname(userInfo.getNickName());
+        todayBest.setTags(StringUtils.split(userInfo.getTags(), separatorChar));
+    }
+    return todayBest;
+}
+```
+
+画面2：
+```properties
+spring.application.name=itcast-tanhu-dubbo-Service
+
+dubbo.scan.basePackages=com.tanhu.dubbo.server
+dubbo.application.name=dubbo-provider-tanhu
+
+dubbo.protocol.name=dubbo
+dubbo.protocol.port=20880
+
+dubbo.registry.address=ZooKeeper://192.168.31.81:2181
+dubbo.registry.client=zkclient
+
+spring.data.mongodb.uri=mongodb://192.168.31.81:27017/tanhu
+```
+
+画面3：
+```json
+{
+  "token": "1766236353"
+}
+```
+
+画面4：
+```java
+@AutoWired
+private TodayBestService todayBestService;
+
+@GetMapping("/todayBest")
+public TodayBest queryTodayBest(@RequestHeader("Authorization") String token) {
+    return this.todayBestService.queryTodayBest(token);
+}
+```
+
+画面5：
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+@SpringBootTest
+@RunWith(SpringJUnit4ClassRunner.class)
+public class TestTodayBest {
+    @Autowired
+    private TodayBestService todayBestService;
+}
+```
+
+画面6：
+```java
+private RecommendUserService recommendUserService;
+@Value("${tanhu.sso.default.user}")
+private Long defaultUserId;
+```
+
+画面7：
+```java
+com.alibaba.dubbo.rpc.RpcException: Failed to invoke the method queryWithMaxScore
+java.lang.NoSuchFieldError: LongId
+at java.lang.Class.getDeclaredFields0(Native Method)
+at java.lang.Class.privateGetDeclaredFields(Class.java:2598)
+at com.alibaba.com.caucho.hessian.io.JavaDeserializer.getFieldMap(JavaDeserializer.java:122)
+at com.alibaba.com.caucho.hessian.io.JavaSerializerFactory.getDefaultDeserializer(JavaSerializerFactory.java:118)
+at com.alibaba.com.caucho.hessian.io.SerializerFactory.getDeserializer(SerializerFactory.java:118)
+```
+
+画面8：
+```java
+com.mongodb.MongoSocketOpenException: Exception opening socket
+at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:67)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:74)
+at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused: connect
+at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:380)
+at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:177)
+at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+at java.net.Socket.connect(Socket.java:589)
+at java.net.Socket.connect(Socket.java:538)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:180)
+at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:18
+

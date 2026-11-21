@@ -1,0 +1,201 @@
+# 19-构造代码生成器环境：配置界面
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day12-代码生成器原理分析
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day12-代码生成器原理分析\19-构造代码生成器环境：配置界面_【海量资源尽在 ubkz.com】.mp4
+- 时长 10分45秒（音频 645s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] OK那好了接下来呢把这些实体类跟工具类全部都导入进来之后那接下来我们关注的其实还是这张图形啊你会发现在这张图形当中呢其实就是当我们选择了数据库类型和IP等等等等之后我有一个测试连接这边呢是不是要根据潜入的这些内容是不是要跟数据库进行交互获取到MySQL当中所有数据库它的一个列表没错吧各位
+[00:32] 所以在我们这边还需要创建一个工具类专门去获取一下数据库列表相应的这些内容OK好了在这边呢我们去创建一个工具类右键new一个class好了这个class叫做databaseutilsOK那对于这个databaseutils我们里面的代码应该写成什么样的其实这个不难
+[01:00] 其实这个我们之前都玩过一些测试主要目的我们是不是要去获取到数据高MySQL中所有的数据库名称没错吧那这个代码或者这个需求我们似曾相识之前是不是写过所以导到我们之前的代码这个其实属于Database MetalData里面的一个简单的测试好了接下来我们可以找到这块代码Ctrl C拿过来
+[01:33] Ctrl VOK缺少一个Connection这就是拿过来我们改吧改吧直接就能用了OKCtrl C拿过来Ctrl V好了接着把这个代码做一个简单的修改首先上面这个我们的主要目的就是获取数据库连接好了StaticGetConnectionC-O-N-E-C-T-I-N好了注意Connection好了获取数据库Private
+[02:14] C-O-N-N-E-C-T-L-N没错OK那这样一来我们可以通过上文这个方法就能够得到数据库的connection链接那注意了咱们现在写的是driverurlusernamepassword等等等等这些内容那我们是不是已经把这些内容封装到了叫做databasedatabase这个实体类当中了呀里面是不是有usernamepasswordurldriver那这个
+[02:41] 封装进来之后我们是不是直接从这边拿数据就可以了所以这些内容我们就可以都不要了接着我们做一个简单的替换就可以username db 打点 get username好了 password db 打点 get password当然了 driver 同样 db 打点 get driver好了这边就是直接 return 了db 打点 get url好了这样一来我们获取数据库链接这个方法
+[03:15] 就写好了那接下来关注的是第二个方法那第二个方法呢这回ETA test也去掉那注意我们现在同样也是static是一个工具类嘛STATIC那这回我们得到的是一个粒子集合里面全部都是死菌类型的数据库的名称而这个方法名呢比如说就叫做get schemerss-c-h-e-m-a-s那注意
+[03:43] 我们最终要调用的是这个方法那这个方法里面呢我们传过来其实也是你用户输入的这个数据库信息那用户输入到数据库信息之后获取原数据我们就可以通过get connection把db传递下去这种方式是不是来进行获取了这边有一个错误啊异常OK那这样一来那这样一来原数据获取到了好了接着获取所有的列表那这回就不是打印的事了
+[04:10] 我们是不是要封装到一个list集合当中并且把为array list好了那接下来list打点add好了我们rs.get screen好了我们之前说过拿第一个就可以了OK好了当然这个写法呢现在还有一点点小小的问题啊这边就get connection呢我放到上边吧get connection因为这个连接可能有一个释放的这么一个操作
+[04:48] Connection好了底下Connection打点CloseOK那这样一来我这个工具类方法呢其实也写的差不多了直接Return ListOK那这样一来我的工具类也已经写好了那这个工具类写好了之后接下来我们关注的是什么呢是这样的就是说啊我们要想做到这种UI的这种界面其实这个UI界面有很多种我这边只不过是用了一个表现形式更好的一些用Swin来做但是这个Swin是一个比较淘汰的这么一个技术
+[05:20] 所以SWIN UI界面不需要各位重点去掌握它那这个UI界面在今天的代码当中也给各位提供了资源好了找到工具代码继续往里找找到UI把里面的内容Ctrl C拷过来能把它放到我们的Java代码的就放到UI这个目录下了UIOKCtrl V全部都拷过来那拷过来之后简单的和各位说一下我们关注的是Java代码不是什么什么.form
+[05:52] 点放我们是通过一些工具去画制绘制图形的时候它生成的一些配置文件这个我们不需要关注那我们的这个入口呢其实相当于我们绘图里面的第一张第一张图形这第一张图形里面它是哪个界面注意找到的是DatabaseUtil这个DatabaseUtil打开之后这边报一个错误这个错误本来是想给各位惊喜就是直接能用但是不行为啥呢所以我借助DatabaseUtil首先要去获取到所有数据库的名称
+[06:22] 这个名称应该写错了我替换一下OK那这样一来不会报任何的错误那好了这个界面如何进行运行呢其实很简单直接执行里面写好的闷方法即可当然了这边简单的说一下由于是一个死问程序它不需要我们重点关注因为它是一个比较淘汰的一个技术或者比较落后的一个技术了OK当然了如果各位有兴趣的话其实可以把它改成我们的网页的这种形式其实也可以好了在这边选择数据库类型
+[06:53] 我们选择的是MySQL IP没问题用户名root密码123456注意点击测试调用的就是我们刚才写的这个工具类Skimmer那接着得到所有的列表这边呢借助我们的UI给它展示出来来一起来试一下测试你发现没问题所有都有比如说呢我这边关注的是IHM那接下来我点击下一步跳转到代码生成器的第二个界面在第二个界面当中
+[07:23] 注意我要做什么首先这个模板就是说你的模板要放到什么地方那在我们这个工程当中我准备要把模板放到当前工程的一个文件夹下比如这个文件夹呢我就叫做模板我就叫模板就写中文我这个支持中文好了模板当中呢比如说呢咱们以后呢写要写很多种模板比如说呢可以写一个我们sprintboot程序的模板
+[07:55] 那比如说呢我可能还有其他的模板比如说呢就是有我们叫做Vue的前端界面界面模板当然是很多种模板我把这些模板是放到一个一个的文件夹下各位应该能理解吧OK那好了这边选择模板抱歉我再去执行一下执行下面的方法好了root123456mycircle测试没问题接下来hm根据这个数据库
+[08:31] 下一步我们这边选择你究竟是用Spring Boot程序的模板还是用VUE界面的模板那你只需要把你自己的模板内容是放到对应的文件夹下我这边是不是就能识别出来没错吧OK那上面这个模板其实说明了什么只是你模板所在的路径这个能理解吧那里面有很多的模板我们通过扎瓦程序去读取这个文件夹下的所有咱们定义好的模板进行代码生成的一个工作
+[08:59] 好了接着第二部分就是代码生成路径我们可以自己随便填当然你可以自己填写也可以这边去选择比如说我就想要生成到一盘就到就生成在这你的包的文件夹名项目名称叫什么我叫 ahm好了包名比如说我叫com.itcom.it随便写吧cn.itcast.比如说叫test项目的中文名称比如说就是测试
+[09:30] 作者IT custom好了我们刚才选的顾项目名这些数据库的信息他也给我带过来当然了这个无所谓好那接下来注意点击生成代码好了你点生成代码之后注意我没有真正的生成咱们今天只是搭建了一个基本的环境你会发现把我页面传递的这些内容全部都给我输出出来那输出在哪输出的各位找到第二个界面
+[10:01] 第二个界面叫做code utils对应的是第二个界面在第二个界面底下遗留了一个方法这个方法呢这边也说了它是一个UI调用我们代码生成器的一个入口这个入口为我们提供了很多个参数比如说有模板第一个参数是模板所在的路径第二个参数是不是你要生成代码所在的路径没错吧第三个参数其实代表的是你填的控制的一些信息
+[10:25] 第四个参数其实代表的是你传递过来的一些数据库的信息那这些信息我们都已经拿到了那接下来我们是不是就可以写我们真正代码生成器最核心的一部分根据传递的这些内容去生成我们的代码OK
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何通过 Java 工具类连接数据库、获取数据库元数据，并为后续代码生成准备环境。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示了“代码生成器 v1.0”工具的两个配置窗口，左侧是数据库连接配置（服务IP: 127.0.0.1），右侧是工程配置（项目名称、作者等），并用红色箭头指示配置流程。
+画面 2: 显示了 IntelliJ IDEA 中的 `DataBaseMetaTest.java` 文件，内容为空，用于后续测试。
+画面 3: 显示了 `DataBaseUtils.java` 文件的代码，包含获取数据库连接的静态方法 `getConnection()`，其中使用了 `Properties`、`DriverManager` 等类。
+画面 4: 在 `getConnection()` 方法中，代码已修改为使用 `db` 对象获取数据库连接信息，包括 URL、用户名、密码等。
+画面 5: 代码中 `getConnection()` 方法已完善，使用 `db` 对象获取数据库连接信息。
+画面 6: 在 `getSchemas()` 方法中，代码已修改为使用 `db` 对象获取数据库连接信息。
+画面 7: 在 `getSchemas()` 方法中，代码已修改为使用 `db` 对象获取数据库连接信息。
+画面 8: 展示了 Windows 资源管理器中 `day12` 目录下的 `ui` 文件夹，其中包含 `CodeUtil.form`、`DatabaseUtil.form`、`DatabaseUtil.java` 等文件。
+画面 9: 在 IntelliJ IDEA 中，`DatabaseUtil.java` 文件的代码已修改，包含获取数据库连接和获取数据库列表的方法。
+画面 10: 在 `DatabaseUtil.java` 文件中，代码已修改，包含 `main` 方法和 `JButton`、`JComboBox` 等组件的声明。
+画面 11: 在 IntelliJ IDEA 中，弹出“新建目录”对话框，提示输入新目录名。
+画面 12: 在 IntelliJ IDEA 中，`DatabaseUtil.java` 文件的代码已修改，包含获取数据库连接和获取数据库列表的方法。
+画面 13: 在 IntelliJ IDEA 中，弹出“代码生成器”对话框，配置了生成路径和文件类型。
+画面 14: 在 IntelliJ IDEA 中，`CodeUtil.java` 文件的代码已修改，包含 `generator` 方法，用于生成代码。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 3 代码：
+```java
+import java.util.Properties;
+public class DataBaseUtils {
+    //获取到mysql中所有的数据库名称
+    //获取到mysql中所有的数据库名称
+    public static Connection getConnection() throws Exception {
+        String url = "jdbc:mysql://127.0.0.1:3306/";
+        String user = "root";
+        String password = "123456";
+        String driver = "com.mysql.jdbc.Driver";
+        Properties props = new Properties();
+        props.put("remarksReporting","true");//获取数据库的备注信息
+        props.put("user",user);
+        props.put("password",password);
+        Class.forName(driver);//注册驱动
+        connection = DriverManager.getConnection(url,props);
+    }
+}
+```
+
+画面 4 代码：
+```java
+public static Connection getConnection(Database db) throws Exception {
+    Properties props = new Properties();
+    props.put("remarksReporting","true");//获取数据库的备注信息
+    props.put("user",db.getUserName());
+    props.put("password",db.getPassword());
+    Class.forName(db.getDriver());//注册驱动
+    connection = DriverManager.getConnection(db.getUrl(),props);
+}
+```
+
+画面 5 代码：
+```java
+public static Connection getConnection(Database db) throws Exception {
+    Properties props = new Properties();
+    props.put("remarksReporting","true");//获取数据库的备注信息
+    props.put("user",db.getUserName());
+    props.put("password",db.getPassword());
+    Class.forName(db.getDriver());//注册驱动
+    return DriverManager.getConnection(db.getUrl(),props);
+}
+```
+
+画面 6 代码：
+```java
+public static List<String> getSchemas(Database db) throws Exception {
+    Connection connection = getConnection(db);
+    DatabaseMetaData metaData = connection.getMetaData();
+    //获取所有的数据库列表
+    ResultSet rs = metaData.getCatalogs();
+    List<String> list = new ArrayList<>();
+    while (rs.next()) {
+        list.add(rs.getString(columnindex: 1));
+    }
+    rs.close();
+    connection.close();
+    return list;
+}
+```
+
+画面 7 代码：
+```java
+public static List<String> getSchemas(Database db) throws Exception {
+    Connection connection = getConnection(db);
+    DatabaseMetaData metaData = connection.getMetaData();
+    //获取所有的数据库列表
+    ResultSet rs = metaData.getCatalogs();
+    List<String> list = new ArrayList<>();
+    while (rs.next()) {
+        list.add(rs.getString(columnindex: 1));
+    }
+    rs.close();
+    connection.close();
+    return list;
+}
+```
+
+画面 9 代码：
+```java
+public class DataBaseUtil {
+    //获取到mysql中所有的数据库名称
+    //获取到mysql中所有的数据库名称
+    public static Connection getConnection(Database db) throws Exception {
+        Properties props = new Properties();
+        props.put("remarksReporting","true");//获取数据库的备注信息
+        props.put("user",db.getUserName());
+        props.put("password",db.getPassword());
+        Class.forName(db.getDriver());//注册驱动
+        return DriverManager.getConnection(db.getUrl(),props);
+    }
+    //获取数据库列表
+    public static List<String> getSchemas(Database db) throws Exception {
+        Connection connection = getConnection(db);
+        DatabaseMetaData metaData = connection.getMetaData();
+        //获取所有的数据库列表
+        ResultSet rs = metaData.getCatalogs();
+        List<String> list = new ArrayList<>();
+        while (rs.next()) {
+            list.add(rs.getString(columnindex: 1));
+        }
+        rs.close();
+        connection.close();
+        return list;
+    }
+}
+```
+
+画面 10 代码：
+```java
+public static void main(String args[]) {
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new DatabaseUtil().setVisible(true);
+        }
+    });
+}
+//GEN-BEGIN:variables
+// Variables declaration - do not modify
+private JButton jButton1;
+private JButton jButton2;
+private JComboBox<String> jComboBox1;
+private JComboBox<String> jComboBox2;
+private JLabel jLabel1;
+private JLabel jLabel2;
+//GEN-END:variables
+```
+
+画面 14 代码：
+```java
+private void generator(String templetPath,String outpath,Settings settings,Database db) {
+    System.out.println(templetPath);
+    System.out.println(outpath);
+    System.out.println(settings);
+    System.out.println(db);
+    GeneratorFacade gf = new GeneratorFacade(templetPath,outpath,settings);
+    gf.generator(db);
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

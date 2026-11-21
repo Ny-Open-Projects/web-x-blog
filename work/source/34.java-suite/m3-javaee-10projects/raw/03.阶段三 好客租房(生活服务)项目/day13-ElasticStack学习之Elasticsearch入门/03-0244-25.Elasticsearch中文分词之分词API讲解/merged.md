@@ -1,0 +1,137 @@
+# 25.Elasticsearch中文分词之分词API讲解
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day13-ElasticStack学习之Elasticsearch入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day13-ElasticStack学习之Elasticsearch入门\25.Elasticsearch中文分词之分词API讲解【海量资源尽在 ubkz.com】.mp4
+- 时长 4分40秒（音频 280s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好,那么接下来呢,我们来看一下中文分词那么首先呢,我们先来看一下什么是分词那么分词呢,其实就是将我们的一个文本转化成一系列单词的一个过程这个过程呢,就称之为一个分词那么其实有些时候呢,也叫是一个文本的一个分析那么在ELAC设计中呢,我们把它称之为叫AnalysisOK,那么下面呢,我们举一个例子啊就是说,这个我是中国人啊,去做一个分词的话
+[00:29] 那么分词得到的结果应该是这样的我是中国人或者说我是中国还有中国人啊都可以啊因为中国也是一个词对吧也可以做这样的一个分词啊OK好那么下面我们来看一下分词的这个API那么我们可以通过啊ElectroSource为我们提供的一个这样的一个API然后呢我们去做一个分词的一个
+[00:55] 测试分析一个测试你比如说那么我们通过一个下滑线underlayer然后去做一个分词那么我们把Hello World传递进去使用一个什么呢标准的一个分词器做一个分词那我们来看一下它的一个效果那我们把这个拷贝过来那么把它往这一丢然后发起的是一个post请求没问题是它好嘞然后我们把下面这个内容拷贝过来然后往这一贴那么来看一下那么我们指定它是一个
+[01:25] 是一个这个标准的分子器那么看它的结果是什么那么它的结果呢显然是把我们的这个刚刚输入的一个hello world然后呢我们就做了一个分词做了一个分词然后呢是不是分了两个词一个是hello一个就是worldok那么标准的分子器它呢对英文的分词是比较好分的因为只要有空格一分就好了对吧ok好那么这个呢其实就是
+[01:50] 一个分词分词当然了在我们这个结果中他还返回了一些我们这个单词所在的一些位置可以看到这两个位置start和end offset所在的位置ok好那么下面你也可以去指定锁引去做一些分词比如说我们 idcast这个是不是我们的一个锁引那么在我们 idcast 中
+[02:16] 我们现在这个有还有数据吗我看一下啊那么ITcast这个里面有数据那么他是不是有这个爱好啊那么我们是不是可以针对这个听音乐那么我们去做一个这样的一个分词对吧我们来看一下那么我们去把它呢来考一下然后呢拷贝到这来那么这个是指定了我们的一个所以然后呢去做一个分词那么前面的是没有做一个指定然后呢我们把这个内容拷贝过来
+[02:44] 我们来看一下效果那么在这个里面呢我们同样的我们是去指定了一个分词器那就是一个标准的分词器然后呢还有一个呢是指定它的一个字段那么就是我们那个爱好这个字段然后呢书的文本是听音乐我们来看它的一个结果会怎么样那么可以看到它的结果呢是把我们这个听音乐啊分成了三个字因为它是一个标准分词嘛标准分词器呢它呢是对英文分词是比较友好的
+[03:14] 对中文分词是想象存在问题的那么听音乐那么应该是音乐是一个词对吧音乐是一个词的但是他把音乐这两个字也分开了OK好嘞那么我们也可以通过这种方式去做一些调试那么这个就说我们什么时候我们什么时候去用这种做一个分词那么做一个分词的测试那么什么时候用这样的一些分词做一些测试呢其实是
+[03:42] 我们比如说我们想要去测试一下我们的某一个分子器那么对于某一句话它这个分子结果是怎么样的那么仅仅是这样的话那么你可以采用这种方式去做一个测试那么如果呢我们现在比如说啊我们基于我们这个所以呢去开发了一个我们的一个这个项目对吧然后呢我们会发现那么用户呢在输入某些词的时候得到的结果呢不是
+[04:10] 这个很匹配的结果那么这个时候呢我们是不是就可以通过这种方式来指定我们这个所以然后呢去指定这个分子器指定我们的字段去做一个这样指定这个输入的一个关键词去做一个分词去查看它这个结果这样的话是不是就可以方便我们去排查这个问题所在啊OK好这是这两个API的一个用途啊OK好那么关于我们这个分词的一些这个介绍以及它的一个API的一个讲解我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 Elasticsearch 的分词 API 对文本进行分词分析，并展示分词结果及词在原文本中的位置信息。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示 PDF 文档中“4.2、分词api”章节，内容为指定分词器进行分词的示例，包含一个 POST 请求的 JSON 请求体：{ "analyzer": "standard", "text": "hello world" }。
+画面 2: PDF 文档页面，展示分词结果的 JSON 格式，其中 "token": "world" 被高亮显示。
+画面 3: Postman 工具界面，显示一个 POST 请求，URL 为 http://172.16.55.185:9200/_analyze，Body 中包含 JSON 数据：{ "analyzer": "standard", "text": "hello world" }。
+画面 4: Postman 工具界面，显示请求成功后返回的 JSON 响应，内容为：{ "tokens": [ { "token": "hello", "start_offset": 0, "end_offset": 5, "type": "ALPHANUM", "position": 0 }, { "token": "world", "start_offset": 6, "end_offset": 11, "type": "ALPHANUM", "position": 1 } ] }。
+画面 5: PDF 文档页面，展示“指定索引分词”章节，包含一个 POST 请求的 JSON 请求体：{ "analyzer": "standard", "field": "hobby", "text": "听音乐" }。
+画面 6: Elasticsearch Head 插件界面，显示索引列表，选中了 "hobby" 索引。
+画面 7: Elasticsearch Head 插件界面，显示 "hobby" 索引下的文档数据，包含字段：id, name, age, mail, hobby。
+画面 8: Elasticsearch Head 插件界面，显示 "hobby" 索引下的文档数据，包含字段：id, name, age, mail, hobby。
+画面 9: Postman 工具界面，显示一个 POST 请求，URL 为 http://172.16.55.185:9200/_analyze，Body 中包含 JSON 数据：{ "analyzer": "standard", "field": "hobby", "text": "听音乐" }。
+画面 10: Postman 工具界面，显示请求成功后返回的 JSON 响应，内容为：{ "tokens": [ { "token": "听", "start_offset": 0, "end_offset": 1, "type": "IDEOGRAPHIC", "position": 0 }, { "token": "乐", "start_offset": 2, "end_offset": 3, "type": "IDEOGRAPHIC", "position": 1 } ] }。
+画面 11: Postman 工具界面，显示请求成功后返回的 JSON 响应，内容为：{ "tokens": [ { "token": "听", "start_offset": 0, "end_offset": 1, "type": "IDEOGRAPHIC", "position": 0 }, { "token": "乐", "start_offset": 2, "end_offset": 3, "type": "IDEOGRAPHIC", "position": 1 } ] }。
+画面 12: PDF 文档页面，展示“4.2、分词api”章节，内容为指定分词器进行分词的示例，包含一个 POST 请求的 JSON 请求体：{ "analyzer": "standard", "text": "hello world" }。
+画面 13: PDF 文档页面，展示“指定索引分词”章节，包含一个 POST 请求的 JSON 请求体：{ "analyzer": "standard", "field": "hobby", "text": "听音乐" }。
+画面 14: PDF 文档页面，展示“4.3、内置分词”章节下的“4.3.1、Standard”子章节，内容为 Standard 标准分词，按单词切分，并会转化成小写，包含一个 POST 请求的 JSON 请求体：{ "analyzer": "standard", "text": "听音乐" }。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+POST http://172.16.55.185:9200/_analyze
+{
+  "analyzer": "standard",
+  "text": "hello world"
+}
+
+画面 2:
+{
+  -1: {
+    "token": "world",
+    "start_offset": 6,
+    "end_offset": 11,
+    "type": "ALPHANUM",
+    "position": 1
+  }
+}
+
+画面 3:
+{
+  "analyzer": "standard",
+  "text": "hello world"
+}
+
+画面 4:
+{
+  "tokens": [
+    {
+      "token": "hello",
+      "start_offset": 0,
+      "end_offset": 5,
+      "type": "ALPHANUM",
+      "position": 0
+    },
+    {
+      "token": "world",
+      "start_offset": 6,
+      "end_offset": 11,
+      "type": "ALPHANUM",
+      "position": 1
+    }
+  ]
+}
+
+画面 5:
+POST http://172.16.55.185:9200/_analyze
+{
+  "analyzer": "standard",
+  "field": "hobby",
+  "text": "听音乐"
+}
+
+画面 9:
+{
+  "analyzer": "standard",
+  "field": "hobby",
+  "text": "听音乐"
+}
+
+画面 10:
+{
+  "tokens": [
+    {
+      "token": "听",
+      "start_offset": 0,
+      "end_offset": 1,
+      "type": "IDEOGRAPHIC",
+      "position": 0
+    },
+    {
+      "token": "乐",
+      "start_offset": 2,
+      "end_offset": 3,
+      "type": "IDEOGRAPHIC",
+      "position": 1
+    }
+  ]
+}
+
+画面 14:
+POST http://172.16.55.185:9200/_analyze
+{
+  "analyzer": "standard",
+  "text": "听音乐"
+}
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 1: PPT 标题为“4.2、分词api”，副标题为“指定分词器进行分词”。
+画面 5: PPT 标题为“指定索引分词”。
+画面 14: PPT 标题为“4.3、内置分词”，子标题为“4.3.1、Standard”，内容为“Standard 标准分词，按单词切分，并会转化成小写”。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

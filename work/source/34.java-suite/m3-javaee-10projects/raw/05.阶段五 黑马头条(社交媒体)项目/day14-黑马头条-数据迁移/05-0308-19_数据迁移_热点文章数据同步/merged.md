@@ -1,0 +1,201 @@
+# 19_数据迁移_热点文章数据同步
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day14-黑马头条-数据迁移
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day14-黑马头条-数据迁移\19_数据迁移_热点文章数据同步【海量资源尽在 666java.com】.mp4
+- 时长 9分29秒（音频 569s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们再来做第三个啊就是说当前的热点数据的迁移那这个定时呢咱们一会儿再做好吧这个比较简单啊咱们先做这个定热点数据的迁移那这个呢咱们要去接收消息那这个消息啊其实你看这块啊是热点数据计算完之后呢需要去发送一条消息那这个消息呢可以这样看啊咱们之前呢其实已经发送了咱们可以打开当前的Article然后这有个Service有一个叫做
+[00:28] AAP hot article Service安排啊打开它之后呢你看这块啊你再去计算出热点文章之后呢你同时就发送了一个文章那这个这个内容呢其实就是热点文章数据里边包含了文章的ID所以说呢咱们呢就直接用它就可以了不需要再去重新去定义消息去发送了啊这个消息已经发送了这时候呢你只需要干嘛呢只需要在这一方呢去接收一个消息就可以
+[00:55] 好吧那接入消息呢咱们可以看一下啊打开这咱们去创建某一个类好再去写一下啊然后在这去创建一个类方式怎么着直线Kafkalisten然后这是范形是死尊死尊好ctrl i中的是让这个方法去重写一下这个呢是加一个东西叫compound再加一个log4j2好了然后呢你需要去注入两个东西
+[01:29] 这个我就从这考过来啊都是需要去出这两个好吧好那考过来之后呢下面呢咱们就可以去写他的什么方法应该是消息名称get一个叫做out article就是接收热点文章数据然后下面呢咱们就可以去在这里边去写一些逻辑那这个逻辑的话呢主要呢是就是从当前热点文章中去解析出当前的文章的ID这时候呢咱们可以在这去写然后在下面还是
+[02:01] 按一个日志log点音赋然后呢是什么接收到接收到热点文章数据好吧热点文章啊然后呢是说一个date吧冒号冒号然后是date这个date呢其实就是他好然后下面呢咱们就可以去拿到这个datadate.value然后这是个value还要去判断说none
+[02:36] 不等于当前的value然后呢就可以去解析解析的同时呢咱们还是要去怎么着呢还要去用另一个东西啊它最终呢是一个AP号的article messagemessage不等于一个num然后呢去myport.readvalue然后是readvalue啊myport啊没错myport.readvalue然后把当前那个value装进去最终它返回的就是当前的这个类型
+[03:07] 这个需要去try cache一下谁呀这不就是message吗错了啊拿到它之后呢这时候你需要去try cache一下好拿到数据之后呢你这时候呢你再去拿到它的文章的ID比如说messagergetdater你看是不是有个文章ID啊这时候呢就能拿到当前的文章ID你直接判断当前的文章ID不为空就可以了啊这边是有一个
+[03:44] 不等于当前的article idarticle id然后呢你就可以去调用方法这个方法呢咱们需要去入一个serviceprivate然后是ap howarticle Service就是它我们需要去用一个同步同步的方法而有一个叫做hot ap article就是它然后呢就是把当前的article id装进去那这样的话呢咱们就算是
+[04:19] 结束之后咱们在这打个断点启动一下当前这个项目让他去接收消息是吧好稍等这个接收完消息之后他需要去保存两份第一个是保存到数据库第二个是保存哪保存到mongo中所以说咱们把mongo也打开稍等一下连上当前的这个地址这次叫什么呢article db是吧这里边有数据是吗
+[05:09] 目前的话是有数据的啊查看一下呗这样我把它给删了啊先先先把它给删了好吧删完之后呢咱们一会儿再去测试一下删掉不要了好来这一块呢内容已经拿到了是吧啊这我之前发过消息啊我先给它放行啊我先不管它了啊放行放行放行好这时候呢咱们可以去启动当前的Article就可以了因为这个啊
+[05:44] 它启动的时候呢它会自动的去扫描什么的你看啊它自动的会去调用当前的计算分值是吧去计算当前的热点文章然后呢是就会自动的去发送消息所以说呢你只需要做一个事启动当前这个项目就可以当然呢你也得在当前的这个AP article中啊去找到一条数据比如说我找这条数据吧好吧把它给改成今天点OK把这个也行好吧
+[06:13] 刷新一下你看他这个的时候呢就有两条数据是吧好那这个拿到之后啊咱们接着往下看啊好这个数据又来了是吧嗯我看看是对不对啊这是他的没错啊我放行放行放行放行放行放行好咱们等着啊等着看他还能不能带来消息打开当前的这个号他article listener监听然后在这打个断点好吧
+[06:48] 在这打个点看看这个项目启动完了没有启动完了没事然后咱们在这去清除一下然后咱们就可以看一下这个数据应该是他保存了吗又保存了两条是吧咱们就把它删了不要了remove这个也不要了好然后咱们就可以看一下ok你看这数据是不是已经拿到了然后往下走走走好先去拿到当前这个article2d这个article2d是10
+[07:21] 160你看跟这个是不是能对应上当前的10160是不是就是第二条啊10160啊好往下走往下走的时候呢咱们就会调这个方法啊我们就可以去跟一下打打那点好吧过来之后呢首先呢他就会去查数据那查数据呢他就会去从两块内容查数据第一块内容呢就是说从当前的数据库中去查如果说没有从当前的HBase中去查好往下走啊
+[07:49] 好来了啊这个呢就是先去查数据库啊看有没有呢有是吧当前是有文章的啊然后呢你呃当然他就有的话呢就不会再去从hbase中去查询了好往下走这时候你拿到这对象之后啊咱们要去同步同步到两块啊第一个是同步到当前的数据库第二个是同步到当前的蒙古好吧好往下走但这里边他也有逻辑逻辑呢就是说我先数据库的时候啊那先会先去查询
+[08:21] 先去查询看有没有如果说有的话呢他就不需要再次去同步了你可以看一下看看有没有看数据已同步这个文章是在咱当前的article中表中已经存在了所以说他不需要再次去同步好咱们看一下当前的mongomongo你可以打断点在这好过来刚才我是把数据给删了没有数据然后这时候你可以往下走好往下走
+[08:51] 他就会先去查询你看查询完之后有没有数据呢是当那是那个的话呢那这时候呢咱们就要去干嘛呢就要去同步了啊又要去往当前的mongodb中去保存一条数据好你看这样的话是不是就保存成功了那保存完之后呢你可以刷一下这个数据是不是来了好吧行那这个啊咱们这个当前的这个热点文章的同步啊咱们也做完了啊咱们可以放行
+[09:17] 发行完之后他又会去接受消息啊因为这边呢他是做了一个两分钟的这种这种定时任务啊他会不停的去监听消息好吧那行那这个咱们就做完了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何通过 Kafka 消息监听器接收热点文章数据，并调用服务层将数据同步至 MongoDB 数据库。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 展示项目结构，选中 `src/main/java/com/heima/migration/Kafka/listener/MigrationHotArticleListener.java` 文件。
+画面2: 展示 `ApHotArticleServiceImpl.java` 中的 `computeHotArticle` 方法，用于计算热点文章列表，并调用 `kafkaSender.sendHotArticleMessages(hot)` 发送消息。
+画面3: 展示 `MigrationHotArticleListener.java` 文件顶部的包声明和导入语句，包括 `org.apache.Kafka.clients.consumer.ConsumerRecord`。
+画面4: 展示 `MigrationHotArticleListener.java` 中的 `onMessage` 方法，其中 `log.info("接收到热点文章数据: {}", data);` 用于日志记录。
+画面5: 展示 `MigrationHotArticleListener.java` 中的 `onMessage` 方法，正在输入 `String value = data.value();`。
+画面6: 展示 `MigrationHotArticleListener.java` 中的 `onMessage` 方法，正在输入 `ApHotArticleMessage message = null;`。
+画面7: 展示 `MigrationHotArticleListener.java` 中的 `onMessage` 方法，正在输入 `Integer articleId = message.getData().getArticleId();`。
+画面8: 展示 MongoDB 数据库的 `articles` 集合，其中包含 `articleId: 10160` 的文档。
+画面9: 展示 `ApHotArticleQuartz.java` 文件，这是一个 Quartz 定时任务类，用于触发热点文章同步。
+画面10: 展示 `MigrationHotArticleListener.java` 中的 `onMessage` 方法，正在输入 `if (null != articleId) { apHotArticleService.hotApArticle(articleId); }`。
+画面11: 展示 `MigrationHotArticleListener.java` 中的 `onMessage` 方法，正在输入 `Integer articleId = message.getData().getArticleId();`。
+画面12: 展示 `ApHotArticleServiceImpl.java` 中的 `hotApArticle` 方法，用于将热点文章数据同步至 MongoDB。
+画面13: 展示 `ApHotArticleServiceImpl.java` 中的 `hotApArticleToMongoService` 方法，用于将热点文章数据写入 MongoDB。
+画面14: 展示 `MigrationHotArticleListener.java` 中的 `onMessage` 方法，正在输入 `log.info("接收到热点文章数据: {}", data);`。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（逐字抄录）：
+画面2:
+```java
+String lastDay = DateTime.now().minusDays(1).toString("yyyy-MM-dd 00:00:00");
+List<Article> articleList = apArticleMapper.loadLastArticleForHot(lastDay);
+List<ApHotArticles> hotArticleList = computeHotArticle(articleList);
+//分页
+List<ApBehaviorEntry> entryList = apBehaviorMapper.selectEntryList();
+for (ApHotArticles hot : hotArticleList) {
+    apHotArticlesMapper.insert(hot);
+    //每个用户保存一份热点文章
+    saveArticleForEntryList(hot, entryList);
+}
+```
+
+画面3:
+```java
+package com.heima.migration.Kafka.listener;
+import com.heima.common.Kafka.KafkaListener;
+import org.apache.Kafka.clients.consumer.ConsumerRecord;
+import org.apache.Kafka.clients.consumer.Consumer;
+import org.apache.Kafka.clients.consumer.ConsumerConfig;
+import org.apache.Kafka.clients.consumer.ConsumerRecords;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import
+

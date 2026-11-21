@@ -1,0 +1,271 @@
+# 2.16 Quartz示例
+
+- 阶段：06.阶段六 冷链监控平台项目
+- 章节：day2 微服务框架与基础服务
+- 源文件：06.阶段六 冷链监控平台项目\day2 微服务框架与基础服务\2.16 Quartz示例_【海量资源尽在 666java.com】.mp4
+- 时长 8分51秒（音频 531s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 下面呢我们给大家演示一下我们如何开发一个couple的一个任务调度那么首先呢我们先创建一个model而这个model呢我们选择maven工程比如叫com.groupid加com.it黑码然后artifact id呢就叫couple demo然后点击next然后工程的名字couple-demo然后点击finish
+[00:36] 这个时候我们就有了一个工程那么下一步的话我们就创建我们的一些类这个类里边来讲是有两个类一个类叫做我们具体要执行的任务另外一个类就是我们的主程序那么我们添加com.ithema.cause.demo.cause.demo这个是我们的主程序类那么还有另外一个类的话是我们的一个job
+[01:11] 我们就叫做causecause job那cause job的话它是一个具体执行的任务这个具体执行任务呢它有一个唯一的需要继承的或者说需要实现的是implement有一个叫jobjob这个方法这个job方法的话那首先的话这个job方法我们现在引入不了因为为什么呢因为我们还没有添加我们的cause的一个cause的一个坐标那么我们需要添加我们cause坐标
+[01:47] dependencies然后在这里边呢我们添加dependencies然后这个cause坐标是org.cause-sky就了然后它的artifact的ID呢其实就叫cause然后这个版本villainvillain是2.3.0OK我们此时就引入了这个cause的包
+[02:27] 那引入完了之后我们再看一看我们的cause jobcause job这个时候我们就能够把我们的cause job给它加入进来了那它需要实现的一个方法就是executeexecute方法overrideexecute那这个方法这个方法里边我们用了非常非常简单我们就给它打印出来打印出来打印出来什么呢打印出来定时任务正在执行定时任务
+[03:03] 正在执行然后我们就打印这一句话那接下来呢我们再cause demo这是我们的主程序那么主程序里边我们要添加一个main函数这个main函数里边就执行我们的定时任务而这个定时任务我们的执行需要包括几部分第一我们要创建一个任务对象也就是说我们要做什么那第二步的话我们要创建什么呢
+[03:37] 我们要创建一个触发器创建触发对象也就是trigger这个指的是什么时间做那第三步的话就是我们要创建scheduler任务调度创建任务调度这个scheduler就是我们的任务调度OK我们来开始我们创建我们的要做什么这个叫做什么呢就是一个job detailsjob
+[04:24] 这个job detail呢我们等于等于job builderjob builder然后new一个job而new一个job就new什么呢new我们的causecause job是这个类然后呢给它build这个时候我们已经创建了一个任务对象那第二步的话我们要创建一个触发器这个触发器就是trigger这个trigger
+[05:01] 等于我们的triggerBuilder.newTrigger然后newTrigger的格下的有一个位置schedule我们用一些时间按不同的时间来进行创建那么这个的话是我们用一个简单的就是simple的一个simple的一个scheduleBuilder然后它呢
+[05:37] 可以选择我们的repeat hour forever就是每小时永远执行每小时然后呢minutes或者说是我们的second也就是说每秒钟都在执行然后呢一直一直执行到最后这是我们的这个这个trigger然后执行了这个时间之后呢下一步的话我们就要把我们build就用一个build的方法也就是说我们这个trigger已经创建完了对吧
+[06:09] 我们创建完了之后下一步的话第三步我们就可以创建我们的任务调度了任务调度的话我们添加一个try catch啊他会有他会有些资源上的也要求try catch那么catch什么呢catch的话实际上是一个skeptualexception然后我们把它给打印出来一点print那么在我们的try里边我们要执行skeptualskeptual
+[06:44] 等于std是该就了的factor然后这个schedule的一个工厂然后获得default的一个schedule然后此时我们就获得了一个默认的schedule那么下一步的话我们就执行schedule的schedule方法然后这个schedule方法里边有一个job然后再加上一个triggerok那此时我们就把我们的job和schedule和trigger来结合起来了
+[07:16] 那么下一步的话我们就直接执行Sky9的一个start方法然后把它调度起来运行起来那下一步我们来执行一下看看我们这个执行的效果那么它的执行效果应该是我们每秒钟都执行一次而执行的执行的是什么呢执行的具体任务就是我们的这个jobcause job这个cause job它会打印正在定时任务正在执行然后它是每秒钟执行一次
+[07:46] 那么我们看到这个程序是正常的执行了它是每秒钟执行一次的那我们在我们的程序里边开发定时任务我们需要开发什么东西呢第一我需要开发这个job的具体内容那么比如我在这里边我可以执行我们额外的我们自己的一些动作执行我们自己的业务业务任务那另外一块我们需要开发什么
+[08:16] 那么有话我们需要开发我们的什么时间做对吧我到底是每天执行啊每小时执行啊或者说是呃什么时间来执行这个是我们需要的需要做的一个一些事情那么这样的话我们就给大家演示了我们如何来开发一个schedule的就是我们开发一个定时任务而这个定时任务我们使用的是courters那么courters来讲的话最主要的核心的就是我们要开发我们自己的这个定时任务的业务逻辑
+[08:46] 好这我们对于quotas的一个演示就给大家介绍到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 IntelliJ IDEA 中使用 Quartz 定时任务框架，编写一个简单的定时任务并运行。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 打开项目结构，显示了包含多个模块的项目，当前选中的是 "quartz-demo" 模块。
+画面 2: 在 "quartz-demo" 项目中，右键点击 "src/main/java" 目录，弹出菜单，准备创建新类。
+画面 3: 显示 "pom.xml" 文件内容，其中包含 Maven 依赖配置，用于引入 Quartz 库。
+画面 4: 在 "QuartzDemo.java" 文件中，开始编写代码，导入 Quartz 包。
+画面 5: 在 "QuartzDemo.java" 文件中，定义了类的包名和主方法。
+画面 6: 在 "QuartzDemo.java" 文件中，添加了注释，说明要创建一个任务对象。
+画面 7: 在 "QuartzDemo.java" 文件中，添加了注释，说明要创建任务触发器。
+画面 8: 在 "QuartzDemo.java" 文件中，开始编写创建 JobDetail 对象的代码。
+画面 9: 在 "QuartzDemo.java" 文件中，开始编写创建 Trigger 对象的代码。
+画面 10: 在 "QuartzDemo.java" 文件中，使用 TriggerBuilder 创建触发器，并设置调度规则。
+画面 11: 在 "QuartzDemo.java" 文件中，开始编写创建 Scheduler 对象的代码。
+画面 12: 在 "QuartzDemo.java" 文件中，使用 StdSchedulerFactory 获取 Scheduler 实例。
+画面 13: 在 "QuartzDemo.java" 文件中，完成 Scheduler 的创建和启动代码。
+画面 14: 在 "QuartzDemo.java" 文件中，运行程序，控制台显示任务执行完成。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 3 的 pom.xml 内容：
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ithema</groupId>
+    <artifactId>quartz-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.quartz</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
+```
+
+画面 4 的代码：
+```java
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+public class QuartzJob implements Job {
+
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        System.out.println("定时任务正在执行...");
+    }
+}
+```
+
+画面 5 的代码：
+```java
+package com.ithema.quartz.demo;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+    }
+}
+```
+
+画面 6 的代码：
+```java
+package com.ithema.quartz.demo;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+        //1. 创建一个任务对象，做什么
+    }
+}
+```
+
+画面 7 的代码：
+```java
+package com.ithema.quartz.demo;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+        //1. 创建一个任务对象，做什么
+        //2. 创建任务触发器，trigger：什么时间队
+    }
+}
+```
+
+画面 8 的代码：
+```java
+package com.ithema.quartz.demo;
+
+import org.quartz.JobDetail;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+        //1. 创建一个任务对象，做什么
+        JobDetail job = JobBuilder.newJob(QuartzJob.class).build();
+    }
+}
+```
+
+画面 9 的代码：
+```java
+package com.ithema.quartz.demo;
+
+import org.quartz.JobDetail;
+import org.quartz.Trigger;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+        //1. 创建一个任务对象，做什么
+        JobDetail job = JobBuilder.newJob(QuartzJob.class).build();
+        //2. 创建任务触发器，trigger：什么时间队
+        Trigger trigger = TriggerBuilder.newTrigger();
+    }
+}
+```
+
+画面 10 的代码：
+```java
+package com.ithema.quartz.demo;
+
+import org.quartz.JobDetail;
+import org.quartz.Trigger;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+        //1. 创建一个任务对象，做什么
+        JobDetail job = JobBuilder.newJob(QuartzJob.class).build();
+        //2. 创建任务触发器，trigger：什么时间队
+        Trigger trigger = TriggerBuilder.newTrigger()
+                .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever()).build();
+    }
+}
+```
+
+画面 11 的代码：
+```java
+package com.ithema.quartz.demo;
+
+import org.quartz.JobDetail;
+import org.quartz.Trigger;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+        //1. 创建一个任务对象，做什么
+        JobDetail job = JobBuilder.newJob(QuartzJob.class).build();
+        //2. 创建任务触发器，trigger：什么时间队
+        Trigger trigger = TriggerBuilder.newTrigger()
+                .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever()).build();
+        //3. 创建任务调度，scheduler：任务调度
+        try {
+            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+画面 12 的代码：
+```java
+package com.ithema.quartz.demo;
+
+import org.quartz.JobDetail;
+import org.quartz.Trigger;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+        //1. 创建一个任务对象，做什么
+        JobDetail job = JobBuilder.newJob(QuartzJob.class).build();
+        //2. 创建任务触发器，trigger：什么时间队
+        Trigger trigger = TriggerBuilder.newTrigger()
+                .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever()).build();
+        //3. 创建任务调度，scheduler：任务调度
+        try {
+            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+画面 13 的代码：
+```java
+package com.ithema.quartz.demo;
+
+import org.quartz.JobDetail;
+import org.quartz.Trigger;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
+
+public class QuartzDemo {
+    public static void main(String[] args) {
+        //1. 创建一个任务对象，做什么
+        JobDetail job = JobBuilder.newJob(QuartzJob.class).build();
+        //2. 创建任务触发器，trigger：什么时间队
+        Trigger trigger = TriggerBuilder.newTrigger()
+                .withSchedule(SimpleScheduleBuilder.repeatSecondlyForever()).build();
+        //3. 创建任务调度，scheduler：任务调度
+        try {
+            Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+            scheduler.scheduleJob(job, trigger);
+            scheduler.start();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+画面 14 的代码：
+```java
+package com.ithema.quartz.demo;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+
+public class QuartzJob implements Job {
+
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        System.out.println("定时任务正在执行...");
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

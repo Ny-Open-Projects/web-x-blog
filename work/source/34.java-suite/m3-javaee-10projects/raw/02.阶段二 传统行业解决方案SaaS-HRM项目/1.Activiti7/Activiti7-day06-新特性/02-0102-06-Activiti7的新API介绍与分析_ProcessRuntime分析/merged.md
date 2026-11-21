@@ -1,0 +1,214 @@
+# 06-Activiti7的新API介绍与分析_ProcessRuntime分析
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：1.Activiti7/Activiti7-day06-新特性
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\1.Activiti7\Activiti7-day06-新特性\06-Activiti7的新API介绍与分析_ProcessRuntime分析_【海量资源尽在 ubkz.com】.mp4
+- 时长 15分28秒（音频 929s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 下面我们一起来介绍Activity的API在Activity 7里边它为了使得我们的操作更加简单特别在原有的API的基础上再次进行了分装所以说我们学习Activity 7的API它主要包括有Process Runtime和Task Runtime这样的两个接口我们先来介绍
+[00:31] process runtime这个接口在我们开始早期的开发文档中各位还就是我早期给各位打开的快速开发的文档在这个文档部分我们现在就可以一起来看我们的这个process runtime这个API这个API我们可以看到它说跟我们前面的这个runtime
+[00:59] 这个task runtime是一样的流行但是如果你想去开始使用我们的这个process runtime的API你应该先去引入它相关的依赖对不对然后我们的目标是提供更多的flexibility这是我们的提供更多的灵活性以及进一步分离我们的这个runtime
+[01:29] 在未来进一步分离我们的这个run time的but for now但是对于我们目前而言我们的这个the same sprint boot start它提供了这个boss提供了这个task run time和我们的possess run time的API都提供有那这code from the section
+[01:59] 从代码部分我们将会发现inside the activity API basic process example这样的一段代码其实你可以从我们的example模块里头去找它的对应的依赖真正它对应的code代码是这样的我在这边也特别给各位可以看一下我们真正
+[02:28] 将来怎么样去用我们的Process Runtime如果要去用我们的Process Runtime的话在使用之前我们一定要去将我们的角色信息要设置好为什么一定要去做这样的一个工作是因为我们的activity与我们的Spring Boot整合之后它默认情况下依赖的是我们的
+[02:57] 依赖的是我们的这个Spring Securator所以说我们在做这个部分工作的时候一定要去将我们的Spring Securator添加进来如果不添加进来的话那对应的你这个权限Activity因为Activity不管是你用什么样的版本它始终都有用户对吧有组有组任务或者是自己过人任务对不对都会有这样的概念那这个时候就必须有用户信息
+[03:26] 而activity7和spleenboot整合我们对应的默认情况下用的就是我们的spleen security来实现我们的用户权限信息所以我们在这个部分必须要将我们的spleen security引入进来这个部分我们引入的话就需要添加我们的activity相用的用户决策信息用户决策信息我们为了能够更好的去实现我们的注入
+[03:55] 这个时候我们可以用ata-autowheel直接注入我们的Process Runtime或者用ata-autowheel注入我们的circuit-utilcircuit-util对应的类我们后期会给各位从我们官方的示例中找到所以各位不用特别担心当我们把所需要用到的依赖添加进来之后我们下面要做的事情就是
+[04:25] 我们可以去使用我们的这个ProcessRuntime相关的方法来实现我们流程定义信息的查看只要调用它的Process Definition之然后呢你可以用枫叶查看的方式这样我们就可以拿到我们的Process Definition这就是我们的这个流程定义信息然后将流程定义信息就可以进一步输出这是我们这里面大概是这样做的
+[04:52] 当然后面还会有比如说这个人加入了以我们的定时任务的方式来实现我们的流程的启动流程实例的启动我们流程实例的启动用的是ProcessRuntime的Start方法当然在启动的过程中你还可以设置我们流程定义的key以及我们流程实例的名称对吧以及我们对应的一些变量都是用这种方式来做的通过刚才这个示例其实我们基本上已经
+[05:22] 能够学会我们将来用activity新特性activity7的新特性怎么样去做我们的这个流程实力的流程定义的部署对吧以及我们对应的这个流程呢流程将来如果流程要实力要起那我们怎么样去起对不对这些的一些内容都给各位介绍清楚了那其中这里面有这样的一段话这段话呢我们
+[05:52] 可以来读一下就是我们的Process definitionneed to be placed inside在这个目录下对不对我们的activity7这里面要求了我们的流程定义信息一定是放在这个目录下是SRCmind resource底下起名字叫ProcessingProcessing就一定是放在这个目录下但如果你放在这个目录下的话那我们的流程
+[06:21] 将来就会自动实现我们的流程流程部署也就是说你整个流程一旦启动的时候不需要我们还像原来一样去专门做部署啊那如果用activity新特性的话我们就不需要去做这个工作了那这一点呢这一点啊后续我们可以演示的时候让各位看到效果啊好这是我呢根据我们的这个官方文档啊大致粗略的给各位介绍了一下我们的这个
+[06:52] 叫做Process Runtime这个接口具体怎么样去用它对吧当然我们也可以回到我们的代码部分我这边也已经有一个自己写好的Activity7新特性开发的一个小案例在这个案例部分过一会看到我们将来如果要去真正去用的话我们就直接是叫Process RuntimeAtaAutoValue一注入进来那就可以用了注入进来可以用我们也可以直接点进去
+[07:22] 这个时候我们就可以看到它的 interface 的源码对吧这部分源码跟我们官方文档所提供的Process Runtime 的源码应该是一模一样的各位可以看到是完全一样的这只是一个接口对不对如果各位还记得我之前说过的一句话就是说我们activity7只是将我们activity早期的API进一步封装
+[07:51] 于是就有了一个叫Process Runtime这样的一个接口那有同学就会思考那我这里头也没瞅见他怎么封装的对不对我们原来所学习的Activity主要就是过种Service对吧这个不知道各位同学是否还有印象啊那我们可以一起再给各位来看一下啊那在早期呢我们所学习的这个Activity中我们主要就是啊给各位介绍了我们的这个过种的
+[08:19] 过程的Service接口对吧比如说我们过人任务或者是打开这个吧那在这个文档中我们就可以看到啊它的这个架构图在它的架构图部分我们就可以看到是不是由过程reported Service来实现部署runtime Service对吧来实现我们的这个流程实力的启动task Service来实现我们的这个任务的完成对不对那现在在我们的activity7的新特性里头啊
+[08:48] 这些Service你都看不见了它替代而来的是我们的这个相用的什么什么runtime对不对而给我们的这个runtime就一个是process runtime另外一个是另外一个是我们的这个task runtime对吧这就是我们给各位要给各位介绍的两个新特性一个是process runtime一个是我们的一个是我们的这个task runtime这两个部分我们再回到
+[09:17] 回到我们的这个源代码中来啊那如果我想去看我们的这个Process Runtime的具体的实现类我们将会发现啊的确是被封装了现在呢我们可以看到Process Runtime这个接口的唯一的一个实现类是叫做Process Runtime Employment那这个实现类呢它里面有一个啊有一个叫做Pre-authorizing
+[09:46] 各位呢你可以看啊pre-authorization这样的一个这样的一个注解呢它本身啊是我们的这个是我们的Spring Secure Rate啊所提供的因为我们呢在做这个工作的时候必须要把Spring Secure Rate引入进来现在咱们同学能不能明白那是因为我们的这个Activity 7
+[10:12] 默认的源代码很多地方都给咱们加了这样的activity期的这样的一些权限控制知道吗而且刚才咱们说必须要去将我们的这个activityuser所对应的这个所对应的这个角色信息一定要一定要加你不加你加那就用不了原因是什么现在咱们同学明白了吗那是因为我们的这个splint circulate里头明确限定了它必须具有这样的角色对不对所以说
+[10:41] 我在学习这个activity7的时候我就感到了有一个困惑这个困惑是什么就是我们这一版activity7对于我们的Spring Circulate依赖性是非常强的所以说这东西将来未来的发展方向这个时候我之前在做介绍趋势的时候就给各位说的很清楚了因为这一版的强依赖
+[11:09] 也好也不好对不对你这么强依赖了将来比如说我不会是不是secret的那我学这个那是不是感觉就应该是就应该是有一些前置的技术有屏障对吧那我们打开了这个实现内之后各位可以看到啊来这是什么Repository Service我们再看看这是什么Runtime Service这就是印证了我前面给各位说的一句话
+[11:40] 我们的Processed Runtime这个接口真正所对应的实现在我们注入进来之后它真正本质是什么呢在你注入进来之后它真正本质其实就是Processed Runtime Employment这个实例的真正就是这个实例的对象对不对而这个实例的对象中又完全封装了我们的Reported Service和我们的这个Runtime Service所以说真正背后
+[12:09] 底层或者是底层干活其实真正你要做流程部署还是他你要做我们的这个流程实力启动我告诉各位还是他是run time Service这个后续我们可以自己更正圆满的时候你完全可以得到这样的结论所以说我们的这个activity7它所对应的这个process run time它真正本质现在各位同学明白了没有
+[12:35] 它真正的本质只是对于我们的这个早期activity5和6所对应的那一堆Service进行了进一步的封装封装之后我们就有一个这样的接口和实现类对不对将来啊我们将来写代码肯定是进一步更简洁了但是呢它底层怎么干活的这个细节啊我们相当于进一步被屏蔽了这个是好事也是不好的地方啊
+[13:05] 灵活性下降了当然有人就会思考这样的一个问题他说老师我不用process runtime完了我想在我们的自己写加码代码的时候然后我在这里面还把我们早期所对应的比如说我们对应的runtime Service我把runtime Service注入进来这样做是否
+[13:35] 是否可以呢对吧我告诉各位的就是如果你想这样做呢也就是说虽然他给咱们封装了一套新的API但我不想用这套新的API我就想用原来我们老的这一套API就是直接使用过程Service直接这样用可不可以我告诉各位我们如果想直接这样用的话也是完全可以的所以说
+[14:05] 有了这个开放的口子之后就这一点开放之后那我们对应的这个灵活性是不是相当于又补回来了对吧那就相当于说如果说你熟悉了这套API的话你想用这套新的API来做我们activity开发是可以的但是呢如果你想你想用我们老的这种方式也是可以的明白是吧当然我们呢在这个地方也可以选择新的老的混在一起用是不是
+[14:35] 这种方式也可以这是我在这里头给各位大致把我们的这个process runtime对应的这个接口以及实现内还有一个我们为什么要去把splint-circuit引入进来而且是必须的你不这样做是不行的而且这个官方文档你还必须有activity user对应的这种角色对不对如果没有这种角色是直接不能访问的
+[15:02] 那对呢刚才我们通过查看他的这个activity的process runtime的实现类各位同学也应该看得非常的清楚对不对也就是说你要去访问这个类你必须要提前做一个这样的授权那就是判断你是否有一个这样的角色如果没有这个角色对不起你不能进这是我们代码层次就是这样的
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+讲解 Activiti 7 新的 ProcessRuntime API 的使用方法，包括如何通过注入该对象来操作流程定义，并涉及 Spring Security 的集成。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 PPT 页面，标题为“2.5 Activiti 新的 API 介绍”，内容指出要学习 ProcessRuntime 接口和 TaskRuntime 接口。
+画面2：展示 GitHub 页面，链接为 https://github.com/Activiti/activiti-developers-guide/blob/master/getting-started/getting-started-activiti-core.md，标题为“Getting Started with Activiti Core”。
+画面3：展示 GitHub 页面，显示 ProcessRuntime 接口的 Java 代码定义，包括方法如 processDefinition(String processDefinitionId)、start(StartProcessPayload payload) 等，并提示需要角色“ACTIVITI_USER”。
+画面4：展示 PPT 页面，内容提到使用 ProcessRuntime 时需要 Spring Security，并给出代码示例链接：https://github.com/Activiti/Activiti-examples/blob/master/activiti-api-basic-process-example/src/main/java/org/activiti/examples/DemoApplication.java#132。
+画面5：展示 GitHub 页面，显示 Java 代码，使用 ProcessRuntime.start(ProcessPayloadBuilder).start() 启动流程实例，并设置变量。
+画面6：展示 GitHub 页面，显示 Java 代码，通过 processRuntime.processDefinitions(Pagable.of(0, 10)) 获取流程定义列表，并提示流程定义需放置在 /src/main/resources/processes/ 目录下。
+画面7：展示 GitHub 页面，内容与画面6类似，再次强调流程定义需放置在 /src/main/resources/processes/ 目录下。
+画面8：展示 Windows 文件资源管理器，显示文件夹“Activiti7-day03”下的 PDF 文档。
+画面9：展示 PPT 页面，内容与画面4相同，强调需要 Spring Security。
+画面10：展示 IntelliJ IDEA 的代码编辑器，显示 ProcessRuntimeImpl 类的源码，包含 import 语句和类定义。
+画面11：展示 IntelliJ IDEA 的代码编辑器，显示 Activiti7DemoApplicationTests 类的测试代码，包含 @Autowired 注解注入 ProcessRuntime 和 TaskRuntime。
+画面12：展示 IntelliJ IDEA 的代码编辑器，显示 Activiti7DemoApplicationTests 类的测试代码，将 TaskRuntime 注解改为 RuntimeService。
+画面13：展示 IntelliJ IDEA 的代码编辑器，显示 Activiti7DemoApplicationTests 类的测试代码，注释为“查看流程定义”。
+画面14：展示 IntelliJ IDEA 的代码编辑器，显示 ProcessRuntimeImpl 类的源码，弹出“CantRun”对话框，显示“已运行”状态。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面3：
+```java
+public interface ProcessRuntime {
+    ProcessRuntimeConfiguration configuration();
+    ProcessDefinition processDefinition(String processDefinitionId);
+    Page processDefinitions(Pageable pageable);
+    Page processDefinitions(Pageable pageable);
+    ProcessInstance start(StartProcessPayload payload);
+    Page processInstances(Pageable pageable);
+    ProcessInstance processInstance(String processInstanceID);
+    ProcessInstance suspend(SuspendProcessPayload payload);
+    ProcessInstance resume(ResumeProcessPayload payload);
+    ProcessInstance delete(DeleteProcessPayload payload);
+    void signal(SignalPayload payload);
+    ...
+}
+```
+画面4：
+```java
+@Authored
+private ProcessRuntime processRuntime;
+@Authored
+private SecurityUtil securityUtil;
+```
+画面5：
+```java
+@Scheduled(initialDelay = 1000, fixedDelay = 1000)
+public void processText() {
+    securityUtil.logInAs("system");
+    String content = pickRandomString();
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
+    logger.info("Processing content: " + content);
+    ProcessInstance processInstance = processRuntime
+            .start(ProcessPayloadBuilder
+                    .start()
+                    .withProcessDefinitionKey("categorizeProcess")
+                    .withVariable("content", content)
+                    .build());
+    logger.info(">>> Created Process Instance: " + processInstance);
+}
+```
+画面6：
+```java
+Page processDefinitionPage = processRuntime
+        .processDefinitions(Pagable.of(0, 10));
+logger.info("> Available Process definitions: " + processDefinitionPage.getTotalItems());
+for (ProcessDefinition pd : processDefinitionPage.getContent()) {
+    logger.info("c : Process definition: " + pd);
+}
+```
+画面10：
+```java
+import org.activiti.api.common.spring.security.policies.SecurityPolicyAccess;
+import org.activiti.api.engine.RepositoryService;
+import org.activiti.api.engine.RuntimeService;
+import org.activiti.api.runtime.model.ProcessDefinition;
+import org.activiti.api.runtime.model.ProcessInstance;
+import org.activiti.api.runtime.model.VariableInstance;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload;
+import org.activiti.api.runtime.model.VariableInstancePayload
+

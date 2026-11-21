@@ -1,0 +1,149 @@
+# 12-Activiti7与SpringBoot整合-实现流程实例启动
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：1.Activiti7/Activiti7-day07-审批中心模块开发
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\1.Activiti7\Activiti7-day07-审批中心模块开发\12-Activiti7与SpringBoot整合-实现流程实例启动_【海量资源尽在 ubkz.com】.mp4
+- 时长 7分31秒（音频 452s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 那下面我们开始继续来完成下一个环节就是我们将我们的这个流程实例启动起来那启动起来呢我们一样也是通过我们的这个Process Runtime来做那具体的这个代码大致是这样的首先呢我们去完成我们的这个Spring Securator的认证工作对不对那下一个环节我们就可以来做我们的Process Runtime来点Start的方法来启动我们的这个流程实例
+[00:28] 具体启动的过程中我们需要用到一个Process Preload Builder的Start方法然后我们可以通过Viz开头的这个方法来写我们的这个流程定义的key最后调用Builder这样我们就可以实现我们流程定义信息的启动好那我们呢现在也可以来做这个工作那我们的流程定义信息一旦启动我们的这个Task表中就会有记录目前呢
+[00:57] 它是没有任何记录的对吧那现在我们就可以来完成这个工作要去做这个工作一样对于我们而言首先我可以去把整个这个框架给它拿出来copy对不对那现在我们再去写一下现在就是要完成我们的流程定义要去启动启动我们的这个流程定义启动流程启动流程实例好这是我们要完成的工作那这个工作具体怎么来做呢对的那我们呢
+[01:27] 应该是通过这种代码test的这个test的就是我们启动啊叫做start我们的实例啊instance好我叫一个这样的名字啊具体启动的这个代码各位同学啊我们的也是可以快速给它完成啊还是需要借助于我们的这个学习文档啊因为activity目前它的参考资料的确非常少啊所以我们要完成这个工作就还是需要依赖于我们官方文档啊
+[01:57] 好,我们这个时候可以来找一下那各位同学在这个部分你就可以看到有一个叫做Process Runtime调用它的Start方法,对不对然后这里面有一个Process Pre-Hold Build的Start然后可以调用它的一系列的位置方法,对不对比如说我们可以去添加我们流程定义的Key添加我们流程实例的名称还可以设置我们流程变量最后你调用Build的方法
+[02:26] 这样基本上就完成了我们流程实例的这个创建那这个工作我们也可以copy拿过来所以说会发现如果咱们的英文功力稍微好一些的话那整个这个过程对于我们来说不是很难我们陆续也会感受到真正我们将来要去挑战我们的新技术的话主要是英文文档这一关是咱们要去过的
+[02:56] 通过这种方式,我们的Process Runtime的Start方法我们这边,我们的流程定义的Key,来我们一起看一下开始我们在输出我们流程定义信息的时候,其中我们可以观察到它的Key是叫做myProcess-1所以我copy一下把这个部分Ctrl V,扔到我们这个部分来叫myProcess1这样我们就完成了我们的流程实例的Edit
+[03:24] 的一个具体的这个创建啊那当它启动好了那我们最后还可以来输出我们的这个流程实例的相关的信息对不对比如说我把它的ID输出一下那我们也可以完成这个工作啊好那这一段啊这一段我们的这个主要作用给各位再写一下啊是启动我们的流程实例啊启动我们流程实例然后呢最后这个工作sout我们来输出一下我们的
+[03:51] 叫做 process useStore是点getID,对吧当然你可以输出更多的信息那也有同学可以思考我们如果我们先把它跑起来先跑起来再说我们来看一下运行的效果好,走那现在我们就可以一起来看一下它运行的结果好,现在我们可以我们可以看到它已经加载完了加载完了我们来看一下它是否
+[04:26] 输出了我们的这个流程实例的ID其实就是这个但是因为我前面没有去加上这个加上这个汉字来进行区分所以咱们在看的时候感受不是很好对吧那我可以加上叫做流程这叫做流程实例冒号对吧流程实例ID然后冒号这样我们基本上就完成这个工作了当然你呢也可以直接
+[04:54] 这是4841,最后四位回到我们的数据库表中,我们可以来看当我们启动流程实例,我们可以来看看这是我们的流程定义信息我们的实例信息,我看看能不能找一下这个时候我们就会看到一个exclusion id是不是4841结尾这样我们完成了我们的流程实例的启动
+[05:24] 其实各位可以发现我们并没有寄多代码然后如果说你想进一步去分析它执行的过程这个时候我们就可以进一步去进到这个Start的方法里面好,我们可以进一步这样直接进入它的这个Start的方法中去看去对不对进到实现内这是它真正去调用的是Process Runtime Employment实现内的这个Start的方法
+[05:51] 而这个start的方法真正在执行的时候呢我们可以来走一下看看啊它是如何被启动的对吧好我们再走啊而你会发现它在这里面真正去走这个走这个start这是我们流程定义信息啊这是最后最后我们可以看一下啊
+[06:21] Business Key,这是移动载这里的设置内容设置内容最后它去调用了我们的这个Stars的方法我们来看一下它真正本质上调用的是谁的Stars的方法这个就显得很关键了你发现它真正本质上是不是调用的是我们的这个this.runtimeService里头的方法而我们真正要去启动是不是就是调用我们的这个runtimeService
+[06:50] 来实现我们的实力的启动所以说它真正的本质还是去调用我们相关的方法来实现我们的实力的启动这一点就是给各位说了一下我们真正的本质从这个角度上我们可以看出我们早期给各位介绍的像Runtime ServiceReport Service对吧和我们的Task Service那一堆Service其实还是真正的本质对不对好这是我们用
+[07:20] Activity7与Spring Boot整合之后的启动流程实例主要是调用Process Runtime的Start方法来实现我们实例的启动
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何通过代码启动 Activiti 流程实例，并演示了相关测试和源码分析。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 展示了 PDF 文档中“3.4.3 启动流程实例”的代码示例，包含 `testStartProcess()` 方法，用于启动流程实例并打印流程实例 ID。
+画面2: 在 IDEA 中展示 `ActivityTest.java` 文件，`testDefinition()` 方法用于查询流程定义，打印流程定义的个数和名称。
+画面3: IDEA 中 `ActivityTest.java` 文件，`testDefinition()` 方法被注释，显示了流程定义查询的代码。
+画面4: 浏览器中显示 GitHub 上的 Activiti 示例代码，包含 `processText()` 方法和 `ProcessInstance` 启动代码。
+画面5: IDEA 中 `ActivityTest.java` 文件，`testStartInstance()` 方法用于启动流程实例，使用 `ProcessRuntime` 和 `ProcessInstance`。
+画面6: PDF 文档中“3.4.3 启动流程实例”的代码示例，与画面1相同。
+画面7: IDEA 中 `ActivityTest.java` 文件，`testStartInstance()` 方法，使用 `ProcessRuntime` 启动名为 "myProcess_1" 的流程实例。
+画面8: IDEA 中 `ActivityTest.java` 文件，`testStartInstance()` 方法，显示了启动流程实例的代码。
+画面9: IDEA 中 `ActivityTest.java` 文件，`testStartInstance()` 方法，显示了启动流程实例的代码。
+画面10: IDEA 中 `ActivityTest.java` 文件，`testStartInstance()` 方法，显示了启动流程实例的代码。
+画面11: IDEA 中 `ActivityTest.java` 文件，`testStartInstance()` 方法，显示了启动流程实例的代码。
+画面12: IDEA 中 `ProcessRuntimeImpl.java` 文件，`start()` 方法的源码，用于启动流程实例。
+画面13: IDEA 中 `ProcessRuntimeImpl.java` 文件，`start()` 方法的源码，显示了流程定义 ID 或 Key 的校验逻辑。
+画面14: IDEA 中 `ActivityTest.java` 文件，`testStartInstance()` 方法，显示了启动流程实例的代码。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面1:
+```java
+/**
+ * 启动流程实例
+ */
+@Test
+public void testStartProcess() {
+    securityUtil.loginAs("system");
+    ProcessInstance processInstance = processRuntime
+            .start(ProcessPayloadBuilder.start()
+                    .withProcessDefinitionKey("myProcess")
+                    .build());
+    System.out.println("流程实例 ID：" + processInstance.getId());
+}
+```
+
+画面2:
+```java
+public void testDefinition() {
+    securityUtil.loginAs(username: "salaby"); // springsecurity 的认证工作
+    Page processDefinitionPage = processRuntime
+            .processDefinitionPage(Pageable.of(startIndex: 0, maxItems: 10));
+    System.out.println("流程定义的个数：" + processDefinitionPage.getTotalItems());
+    for (Object pd : processDefinitionPage.getContent()) {
+        System.out.println("流程定义：" + pd);
+    }
+}
+```
+
+画面4:
+```java
+@Scheduled(initialDelay = 1000, fixedDelay = 1000)
+public void processText() {
+    securityUtil.logInAs("system");
+    String content = this.simpleDateFormat.format(new Date());
+    logger.info("Processing content：" + content);
+    ProcessInstance processInstance = processRuntime
+            .start(ProcessPayloadBuilder
+                    .start()
+                    .withProcessDefinitionKey("categorizeProcess")
+                    .withContent(content)
+                    .build());
+}
+```
+
+画面5:
+```java
+public void testStartInstance() {
+    securityUtil.loginAs(username: "salaby"); // springsecurity 的认证工作
+    ProcessInstance processInstance = processRuntime
+            .start(ProcessPayloadBuilder
+                    .start()
+                    .withProcessDefinitionKey("categorizeProcess")
+                    .build());
+}
+```
+
+画面7:
+```java
+public void testStartInstance() {
+    securityUtil.loginAs(username: "salaby"); // springsecurity 的认证工作
+    ProcessInstance processInstance = processRuntime
+            .start(ProcessPayloadBuilder
+                    .start()
+                    .withProcessDefinitionKey("myProcess_1")
+                    .build());
+    System.out.println("流程实例ID：" + processInstance.getId());
+}
+```
+
+画面12:
+```java
+public ProcessInstance start(ProcessRuntimeConfiguration configuration) { return this.configuration; }
+public ProcessInstance start(StartProcessPayload startProcessPayload) {
+    ProcessDefinition processDefinition = null;
+    if (startProcessPayload.getProcessDefinitionId() != null) {
+        processDefinition = this.processDefinition(startProcessPayload.getProcessDefinitionId());
+    }
+    if (processDefinition == null && startProcessPayload.getProcessDefinitionKey() != null) {
+        processDefinition = this.processDefinition(startProcessPayload.getProcessDefinitionKey());
+    }
+    if (processDefinition == null) {
+        if (this.securityPolicyManager.canWrite(processDefinition.getKey())) {
+            throw new ActivitiForbiddenException("Operation not permitted for " + processDefinition.getKey() + " due security policy violation");
+        } else {
+            return this.processInstanceConvert.from(this.runtimeService.createProcessInstanceBuilder()
+                    .processDefinitionId(startProcessPayload.getProcessDefinitionId())
+                    .processDefinitionKey(startProcessPayload.getProcessDefinitionKey())
+                    .build());
+        }
+    }
+}
+```
+
+4) PPT 标题、架构图/流程图的结构、表格数据：
+画面1: PPT 标题为“3.4.3 启动流程实例”，内容包含代码示例。
+画面6: PPT 标题为“3.4.3 启动流程实例”，内容与画面1相同。
+画面4: 浏览器中显示 GitHub 页面，包含代码示例和说明文字。
+
+5) 无。
+

@@ -1,0 +1,267 @@
+# 05.我的喜欢之喜欢数列表（app服务实现）
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day11 探花交友-我的中心
+- 源文件：07.阶段七 探花交友项目\day11 探花交友-我的中心\05.我的喜欢之喜欢数列表（app服务实现）_【海量资源尽在 666java.com】.mp4
+- 时长 23分26秒（音频 1406s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好 那么接下来我们就来实现我们的APP的服务接口那么首先我们来看一个Controller我们先把这个Controller我们就来拷贝一下然后丢到我们这个UrisController中那么找到我们这个server这个工程那么找到这个下面我们找到Controller下面有一个叫做UrisController然后把它丢到最下面来这个方法
+[00:25] 好那我们来看一下这个的一个实现啊那么这个呢是我们啊有集成了有四个接口的这样的一个接口了那么这个由这个type去做一个区分然后呢一呢是相互关注二呢是我关注三呢粉丝四呢就是谁看过我啊这样的一个实现然后呢我们来看一下那么在这个里面呢我们做了这样的一个处理就是首先呢这个可能之前我没有这样处理过就是这样保证我们的配置呢最小呢
+[00:54] 可以做到这个1因为在前端做测试的时候可能有些是会传递一些这个比如说传递0或者是传递-1这样的值去给到我们的Controller那我们可以这样去处理一下就可以保证我们的配置的最小是到最小等于1因为我们取的是最大对吧只要比1大那就是取得它如果比1小拿到1其实我们就可以限制我们最小值了好然后下面我们就通过我们的这个
+[01:23] 方法然后传递了有4个参数一个是type一个是配置一个是什么还有我们的配置size还有什么 nickname就是做一些搜索了好那么接下来我们就在我们 Service中去做一个实现然后我们到这来做一个实现好我们来看这个里面怎么样去做实现首先肯定我们需要拿到一个
+[01:51] 这个Ura这个对象对吧那么就是叫做UraStayLocal.get这个方法拿到然后呢我们接下来呢就我们这样我们先来去定一个PagePage什么呢PageResult对象等于new一个PageResult最后呢我们给它去做一个return啊返回然后呢我们给它set一个这个Page啊就是Page然后呢我们再去set一个什么呢
+[02:21] set一个pages那么pages我们肯定也是0对吧然后我们再去set一个counts那也是0然后我们再去set一个我们的一个这个pages size那么就叫pages size好那么先把这个设置好那么当然这个里面还最重要的一个就是我们的一个items这个我们放到最后去做一个set操作
+[02:47] 那么接下来我们肯定需要处理的是我们这个type对不对那么这个type是什么我们就需要来先把我们这个Controller的注射我们先就拷贝过来因为我们一会要参考于type去做实现那么我们需要去对我们这个type去做一个我们的一个返回对吧好那么我们来看一下我们的是不是需要通过一个switch然后对type去做一个操作对吧
+[03:16] 对type呢那么然后呢这个type呢这个我们是不是叫value of这个写的不对了应该是type改成这个type那么对type呢去做一个这个操作那么我们去设置case1如果是1的时候那应该怎么做那么先写一个break然后呢如果是2那应该怎么做我们先把这个结构呢我们先
+[03:42] 给他呢写出来然后呢如果是三啊如果是四啊那么会怎么样去写那么如果是一个是这个是三啊下面这个呢是四啊如果是
+[03:53] 这两个的话这四个的话分别是怎么去做那我们就需要分别来写这个里面内容那么首先呢我们需要来考虑一下就是我们最终的所响应的这个数据那么这个数据呢我们是需要去创建一个这个VO的就是根据我们下面这个结构去创建我们的一个这个VO的那么这个VO对象呢我们现在看一下讲一中有没有如果没有的话那么我给大家来找一下这个VO
+[04:21] 那么现在这个呢是没有这个VO对吧那我来找一下好这个呢就叫user这个like然后呢listVO那么把它呢我们就来拷贝到我们的这个包里面来那么下面呢我们就来看一下我们的这个VO这个对象那么有我们的ID然后呢这个ID呢就是我们的这个用户的这个ID了对吧然后呢我们去大家这个ID不是我们当前用户啊就是
+[04:51] 我们的这个就是查询的啊这个对方的这个用户ID啊然后下面这个头像这个是尼称啊这个性别年龄啊然后呢等等这个大家应该都认识然后呢下面这个是婚姻状态然后呢下面是一个匹配度那么其实就是我们那个缘分值了啊那么接下来呢我们就需要来分装它啊那么其实可以看到在这个里面呢是不是有一些关于我们用户相关信息的一些内容啊所以说呢我们又需要去通过由ID是不是去做一个查询了
+[05:19] 那么接下来呢我们来看一下我们具体的一个这个实现那么还是要找到我们刚才的这个叫做urusurus这个那么来看一下啊server下面啊就这个然后呢下面一个他啊好那么我们来看一下这个具体的一个实现那么其实在这个位置啊那我们就需要定义一个叫做我们的一个叫做urusurusids等于new一个reve list
+[05:48] 然后呢我们其实在1234这个里面的都需要最终是分装我们这个UIDS最后去做一个查询啊就可以了那么其实这个结果应该大家能够理解啊然后呢我们就在下面这个位置去拿一下啊那么这个呢是1呢如果是type等于1呢那就代表着我们需要查询的是相互关注那么接下来呢我们就通过我们的一个叫做Uderlike API
+[06:16] 然后呢去做一个查询然后呢传递一个这个user id然后呢我们再传递一个叫做page然后再传递一个page size这样的话是不是就搞定了对吧然后呢我们来看一下在这个里面呢是不是就拿到一个page info拿到一个page info那么如果呢我们在这个位置拿到之后那我们就需要去做一个便利了需要便利那么我们就需要去
+[06:45] 这个UreidsAnd去添加一个诶我们给这个便利是不是不对啊我重新便利一下这个应该便利的是谁呢我们就是PageInfo中的getRecord便利它然后呢我们就需要去做一个And这个操作叫Ureids就And操作然后呢Record.get要注意
+[07:09] 那么这个位置我们使用谁呢我们使用的是U的ID因为我们所查询的是相互喜欢的列表就是我喜欢别人别人也喜欢我对吧站在别人那个角度来讲这个U的ID对吧那么我们查询的是别就是我们查询的是这个对方所以我们要拿到这个是U的ID那么不是那个like U的ID这个大家能不能够去理解那么就是在我们的
+[07:37] 这个数据中啊就是对方就是他喜欢我的那个数据就是UID是他的ID然后呢我们这个like UID呢是我的ID所以说要拿的是他的ID啊这个逻辑大家一定要这个这个把它能够想清楚要不然的话就会做错了啊然后这是第一个这个操作对吧那么第二个这个操作呢就是我们需要去查询的是我的关注那么这个逻辑呢也是基本上一样但是要注意一下啊就是我们在这个位置查询的就是
+[08:07] query什么呢like list然后呢这个里面我们要拿取拿的就不是UID了是我们的like UID大家想一下为什么就是我喜欢的是吧我的数据查出来就是我所喜欢的数据啊那我们当然需要拿到的是对方的这个ID了那么这是第二个那么第三个呢它同样的也是需要去做这样的一个查询
+[08:30] 那我们去做一个query一个粉丝的这个列表那么大家想一下粉丝列表那么又需要去拿的是谁的ID呢同样拿的是谁呢我们叫U的ID对吧是别人啊喜欢我所以拿的是这个U的ID啊好嘞那么这样的话呢我们是不是就拿到这个数据了对吧那么下面还有我们的第四个啊这个操作
+[08:56] 那么这个操作呢它就不是通过这个API来完成了它是通过我们的一个叫做VistVist然后呢API那么我们上面是不是还没有啊那么没有的话我们就来引入一下那我们去引入它啊然后呢Vist这个API然后呢我们去把它呢把它引入进来
+[09:24] 好然后呢我们通过reface去做一个引入然后呢我们去设置呢这个呢这个要WarsenWarsen版本的是1.0 1.0.0这样的一个版本好嘞那么这样的话呢我们就实现去导入进来了然后呢在下面这个位置我们就来做一个实现那我们通过这个叫做
+[09:47] Visto然后API然后做一个top查询top查询是有三个那么我们需要选择返回的是这个就是PageInfo的那么需要传递三个参数第一个就是u.getid然后第二个就是page第三个就是page size然后他拿到的其实也是这个PageInfo然后我们接下来就需要去做一个
+[10:12] 便利这个又便利错了那么应该便利的就是我们PageInfo中的recode达到就是我们的vst这个对象然后我们就把这个usids.end添加一个这个vst应该叫recode,recode点什么呢
+[10:34] get这个访客的ID因为我们拿到对方嘛对方来访问我拿到这个对方这个ID那么当然了如果说我们这块要有一个这个default的话那我们应该怎么办呢default其实我们就没有这个没有这种情况但是如果万一有这个情况的话那我们就做什么事情我们就直接break吧直接这个break那么我们的这个就保证这个集合为空就可以了
+[11:02] 那么接下来呢我们肯定的是需要去做一个是否围空的一个判断对吧那我们就调用这个ConnexionUtils.isEmpty然后判断我们这个U的ids是否围空如果他要是围空的话那我们直接return page result就可以了那么如果要是不围空呢我们继续往下面去走那我们就需要做查询了对吧那我们通过this
+[11:32] 点这个user info servicequery这个user info list那么我们需要传递一个叫做queryqueryrop对象那么这个呢也是user info然后呢这个叫queryropnew一个queryrop然后呢我们去给它去做一个设置然后呢我们在这个位置就去做一个硬操作对吧
+[12:02] 然后叫user下滑线ID然后我们把叫做userids去传递进来这是第一个条件第二个条件我们就需要判断一下我们的叫什么呢is not blank not blank username我们传user叫username我们来看一下
+[12:29] 是NikName不是UrlName叫NikName那么这个如果NikName不为空的话那我们就需要添加一个条件了那么叫like这个操作那么这个字段呢我们来看一下那么在我们UrlInfo中啊它就叫这个这个我们应该用下滑线啊看我们的表结构啊那就用下滑线吧下滑线NikName然后呢这个值呢它就是我们的传入的这个NikName啊
+[12:59] 那么如果不为空呢我们再去添加这个条件然后呢我们有了它之后去做一个查询最终查询到就是一个Ureinfo的一个list那么接下来呢我们就需要去遍历我们这个list了去遍历它然后呢当然了最终呢我们是需要得到一个我们的一个叫UrelikeUrelike list vo这样的一个集合
+[13:27] 等于new一个arraylist那么最终我们把这个page size然后set一个items然后把我们这个user1把这个user like list vo对象给它丢进来最后返回就可以了那么这个里面我们就需要去分装我们的一个这个user like list vo这个对象那么我们去给它分装一个对象那么去做一个设置然后我们调用user
+[13:55] like listvos然后呢去做一个按的一个添加对吧然后呢把VO对象给它加进去好那么这个结构呢就搞定了接下来我们就填充这个数据那么首先呢给大家填充的是比如说呢这个叫NikonameNikoname呢我们就直接使用u.info.nikoname好那么我们来拷贝几个
+[14:19] 然后下面我们再去填充匹配值我们最后做一个处理然后还有我们的一个性别然后 sex然后点name然后转成一个小写然后我们再来去设置什么比如说我们 id就是我们的用户的 id那么给他一个 user id好然后这个搞定我们继续再set一个谁在下面这个是我们的一个
+[14:47] 学历对吧那我们就直接拿到这个EDU就可以了然后呢再继续set一个city那么我们就直接get一个city啊就ok然后呢set一个我们的一个这个叫什么头像是吧然后呢这个拿到我们的一个头像啊就ok然后呢还有什么吗我们来看一下set还有一个age年龄那么age还有吗再来set一下那么还有就是我们的一个婚姻的一个状态啊那么我们需要拿到我们的一个
+[15:17] 这个婚姻状态那么我们在这个里面呢就需要去判断一下了对吧那么如果那么我们这个你应该去判断一下了那我们就去忽略吧忽略这个小写对吧忽略这个大小写然后呢如果他当然我们这个如果是做中文就没必要去忽略大小写那就直接如果等于这个已婚
+[15:47] 已婚的话那我们就应该是来一个什么的问号1啊冒号0啊这样的一个这个操作那么到这里呢我们是不是都已经啊set完了是不是没了对吧就剩啊最后一个我们匹配的一个这个就是我们的一个这个得分或者说我们的一个缘分值了那么这个就是我们的一个缘分值那么这个缘分值呢我们需要通过我们的recommend
+[16:16] 然后去做一个查询所以在上面我们就需要去把我们的一个recommend然后叫做userservice去注入进来这个是我们做一个注入那么在这个位置去做一个注入那么这个是我们所自己写的这样的一个Service然后这个里面是有一个查询方法的对吧那我们就直接来查了那我们就应该在这个位置我们定义一个double等于score
+[16:44] 它等于什么呢就是race.command your Service.query这个score那第一个呢ID就是用户ID就我们当前的用户IDget ID第二个呢就是your info中的点get一个your ID那么我们去查询我们当前这个用户和这个用户的一个这个缘分值啊这样的话我们就可以去查到它了那么这个位置呢由于我们
+[17:11] 就是我们正常情况下他一定能够查到数据的对不对但是可能在一些特殊情况下面呢我们这个数据是查不到的所以呢我们就做一个特殊的一个处理那么如果这个score它等于这个0的话等于这个0因为在这个里面我们查询的时候呢它呢会返回这个0对吧我们来看一下啊那么看它的实现那么这个里面如果等于空是不是会返回0啊
+[17:38] 所以说我们在这个位置去做一个这个等于0的一个判断啊那么如果等于0呢那我们就给它去随机生成一个啊我们的这个缘分值呃前面我说了这个只是我们去做一个呃这个特殊情况的一个处理也比如说30到90吧啊这样的一个缘分值啊这个就是特殊啊特殊啊情况下的呃下的这个
+[18:08] 这个这个缘分值的这个生成那么生成生成那么一般情况下都会都会有这个值的都会有这个值的好那么如果说这样处理完成之后就给它丢进来这样的话呢我们是不是就完成了我们来看一下这个里面它这个是要求的是一个int类型那我们就直接给它来一个点点int value这样的话就
+[18:39] 达到他的int的这个部分啊这样的话呢我们就搞定了然后呢我们把它呢也丢到这个结合里面来最后添加进来这样的话就OK了啊那么我们是不是就相当于一口气呢我们去把这四个这个接口都已经写完了那么接下来呢我们就把这个服务呢跑起来那我们来测试一下好那么这个服务呢我们都已经跑起来了那么还是呢我们把这个就是投屏呢我们打开啊来测试一下啊那么
+[19:09] 这边呢我来连接一下然后呢去我们直接在我们手机上去做一个操作好那么现在呢就连接好了那么行接下来我们来测试一下那么首先呢我们去点到这个内网然后呢去保存一下然后呢我们去登录一下去做一个测试然后呢上一次还没有
+[19:36] 上一次还没有失效是吧我们稍微等一下那么当然了其实这个逻辑啊就是呃我们之前所编写这个就是登录逻辑呢稍微有一点点问题啊其实我们可以呃在这个点上面把它去优化一下就是那我们在我们去做一个这个用户登录的时候那么呃如果说我们去一旦这个用户登录成功那么来看一下啊那么如果说走到这那么就是
+[20:06] 走到这肯定用户就登录成功了不等不相等就返回错误了如果要是在这个位置要是就是我们登录成功了我们把这个逻辑调一下吧登录成功了或者说就是我们的一个验证码验证码正确那么正确的就应该把之前那个验证码给它删除掉对吧那我们就直接做一个deli的操作这样的话我们就不用每次等那个时间了然后去我们就直接来一个
+[20:35] delete一个操作这样的话就可以了验证码正确然后去删除之前的验证码OK好那么我们可以把这个SSO重启一下这个以后我们就不会有遇到这样的一些问题了好那我把这个SSO重启一下好那么现在我们再来去测试一下然后我们点击获取这个验证码然后我们去做一个登录
+[21:04] 然后呢我们就会进入到我们的首页了对吧首页是OK的没有问题然后呢进入到我们的这个我的这个模块然后呢我们点击这个相互喜欢然后点击进来之后呢可以看到是不是有三条这个数据了那么后面它还会有这个叫做取消喜欢的这个操作这个操作呢我们一会儿来做一个实现然后呢上面呢还有这个喜欢的这个列表然后呢还有就是
+[21:33] 粉丝的这个列表哎呀OK是不是没有问题啊然后呢我们还有第四个这个接口呢是在我们的这个里面啊我们来查看一下看一下有没有问题是不是同样也是啊没有问题的呀这个呢就是我们的一个谁看过我的一个实现那么到这里呢我们这四个这接口列表的一个接口的一个展现啊是不是就OK了好那么接下来呢我们来看一下我们的这个讲义啊那么在我们的这个实现中呢在呃
+[22:03] 跟我们的讲义中的写的也基本上的也差不多那么就是做这样的一个判断然后去做一个查询那么唯一有一点点不同的就在这个位置他没有对尼克内姆去做一个操作那么在我们的里面我们来找一下在里面把这个叫做尼克内姆然后我们逻辑给大家来拷贝一下那么我们是需要去做这样的一个
+[22:29] 处理的当然我们刚刚是不是还没有去测试我们可以测一下那么应该是我们的这个搜索到这个里面吧点击这个喜欢这个里面来我们搜一下比如说搜一下这个我这个点这个搜索那么其实并没有什么反应原因是那么我们这个APP这一端呢暂时还没有实现这个搜索这一块但是我们的服务端是不是已经就支持了如果说能够去发起请求去携带这个
+[22:57] Nikoneme的话那么我们也会去做一个like的一个查询呢对吧好嘞好那么我们把这个逻辑呢要记得去加上去啊然后呢最后呢就会实现这样的一个效果了那么我们就不按照这个就是测试我们的API了那么直接看最终的效果就可以了对吧然后呢可以看到各种这个列表就能够就出来了并且这个呢我们也看过了对吧OK好那么关于我们这个查询的这个喜欢这个列表这个API的一个实现呢那我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现用户关注、粉丝、查看记录等业务的后端接口，包括控制器层参数处理、服务层逻辑分发与数据组装，以及Redis缓存校验逻辑。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示UserController中@GetMapping("/friends/{type}")方法，定义了type、page、pageSize、nickname四个参数及其默认值和必填要求。
+画面2：展示UsersService中queryLikeList方法的实现，调用userLikeApi的queryEachLikeList、queryLikeCount、queryFanCount方法获取数据。
+画面3：展示UserController中@GetMapping("/friends/{type}")方法的完整代码，包含try-catch异常处理和返回ResponseEntity。
+画面4：展示UsersService中queryLikeList方法的switch语句，case 1调用queryEachLikeList，case 2调用queryLikeList，case 3调用queryFanList，case 4调用topVisitor。
+画面5：展示case 2的代码，调用userLikeApi的queryLikeList方法。
+画面6：展示case 4的代码，调用visitorsApi的topVisitor方法。
+画面7：展示case 4的代码，调用visitorsApi的topVisitor方法，提示用户选择类型。
+画面8：展示UsersService中queryLikeList方法的后续代码，使用QueryWrapper进行用户信息查询。
+画面9：展示UsersService中queryLikeList方法的后续代码，使用UserLikeListVo对象封装用户信息。
+画面10：展示UsersService中queryLikeList方法的后续代码，将UserLikeListVo对象添加到PageResult中并返回。
+画面11：展示UsersService中queryLikeList方法的后续代码，调用recommendUserService的queryScore方法。
+画面12：展示UsersService中queryLikeList方法的后续代码，调用redisTemplate的OpsForValue的get方法获取缓存值。
+画面13：展示UsersService中queryLikeList方法的switch语句，case 4调用visitorsApi的topVisitor方法。
+画面14：展示手机端“谁看过我”页面的UI界面，显示最近访问用户列表。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+@GetMapping("/friends/{type}")
+public ResponseEntity<PageResult> queryLikeList(@PathVariable("type") String type,
+        @RequestParam(value = "page", defaultValue = "1") Integer page,
+        @RequestParam(value = "pagesize", defaultValue = "10") Integer pageSize,
+        @RequestParam(value = "nickname", required = false) string nickname) {
+    try {
+        page = Math.max(1, page);
+        PageResult pageResult = this.userService.queryLikeList(integer.valueOf(type), page, pageSize, nickname);
+        return ResponseEntity.ok(pageResult);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+```
+
+画面2：
+```java
+public PageResult queryLikeList(Integer valueOf, Integer page, Integer pageSize, String nickname) {
+    User user = UserThreadLocal.get();
+    PageResult pageResult = new PageResult();
+    pageResult.setPage(page);
+    pageResult.setPages(0);
+    return pageResult;
+}
+```
+
+画面3：
+```java
+@GetMapping("/friends/{type}")
+public ResponseEntity<PageResult> queryLikeList(@PathVariable("type") String type,
+        @RequestParam(value = "page", defaultValue = "1") Integer page,
+        @RequestParam(value = "pagesize", defaultValue = "10") Integer pageSize,
+        @RequestParam(value = "nickname", required = false) string nickname) {
+    try {
+        page = Math.max(1, page);
+        PageResult pageResult = this.userService.queryLikeList(integer.valueOf(type), page, pageSize, nickname);
+        return ResponseEntity.ok(pageResult);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+```
+
+画面4：
+```java
+switch (type) {
+    case 1: {
+        PageInfo<UserLike> pageInfo = this.userLikeApi.queryEachLikeList(user.getId(), page, pageSize);
+        for (UserLike record : pageInfo.getRecords()) {
+            userIds.add(record.getUserId());
+        }
+        break;
+    }
+    case 2: {
+        PageInfo<UserLike> pageInfo = this.userLikeApi.queryLikeList(user.getId(), page, pageSize);
+        for (UserLike record : pageInfo.getRecords()) {
+            userIds.add(record.getLikeUserId());
+        }
+        break;
+    }
+    case 3: {
+        PageInfo<UserLike> pageInfo = this.userLikeApi.queryFanList(user.getId(), page, pageSize);
+        for (UserLike record : pageInfo.getRecords()) {
+            userIds.add(record.getLikeUserId());
+        }
+        break;
+    }
+    case 4: {
+        PageInfo<Visitors> pageInfo = this.visitorsApi.topVisitor(user.getId(), page, pageSize);
+        for (Visitors record : pageInfo.getRecords()) {
+            userIds.add(record.getVisitorUserId());
+        }
+        break;
+    }
+    default: {
+        break;
+    }
+}
+```
+
+画面5：
+```java
+case 2: {
+    PageInfo<UserLike> pageInfo = this.userLikeApi.queryLikeList(user.getId(), page, pageSize);
+    for (UserLike record : pageInfo.getRecords()) {
+        userIds.add(record.getLikeUserId());
+    }
+    break;
+}
+```
+
+画面6：
+```java
+case 4: {
+    PageInfo<Visitors> pageInfo = this.visitorsApi.topVisitor(user.getId(), page, pageSize);
+    for (Visitors record : pageInfo.getRecords()) {
+        userIds.add(record.getVisitorUserId());
+    }
+    break;
+}
+```
+
+画面7：
+```java
+case 4: {
+    PageInfo<Visitors> pageInfo = this.visitorsApi.topVisitor(user.getId(), page, pageSize);
+    for (Visitors record : pageInfo.getRecords()) {
+        userIds.add(record.getVisitorUserId());
+    }
+    break;
+}
+```
+
+画面8：
+```java
+if (CollectionUtils.isEmpty(userIds)) {
+    return pageResult;
+}
+QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+queryWrapper.in("user_id", userIds);
+if (StringUtils.isNotBlank(nickname)) {
+    queryWrapper.like("nick_name", nickname);
+}
+List<UserInfo> userInfoList = this.userInfoService.queryUserInfoList(queryWrapper);
+return pageResult;
+```
+
+画面9：
+```java
+for (UserInfo userInfo : userInfoList) {
+    UserLikeListVo userLikeListVo = new UserLikeListVo();
+    userLikeListVo.setNickname(userInfo.getNickName());
+    userLikeListVo.setGender(userInfo.getSex().name().toLowerCase());
+    userLikeListVo.setEducation(userInfo.getEdu());
+    userLikeListVo.setCity(userInfo.getCity());
+    userLikeListVo.setAvatar(userInfo.getLogo());
+    userLikeListVo.setAge(userInfo.getAge());
+    userLikeListVo.setMarriage(StringUtils.equals(userInfo.getMarriage(), "已婚") ? 1 : 0);
+    userLikeListVo.setMatchRate(userInfo.getMatchRate());
+    userLikeListVo.setId(userInfo.getId());
+    userLikeListVo.setCity(userInfo.getCity());
+    userLikeListVo.setAvatar(userInfo.getLogo());
+    userLikeListVo.setAge(userInfo.getAge());
+    userLikeListVo.setMarriage(StringUtils.equals(userInfo.getMarriage(), "已婚") ? 1 : 0);
+    userLikeListVo.setMatchRate(userInfo.getMatchRate());
+    userLikeListVo.setId(userInfo.getId());
+    userLikeListVo.setCity(userInfo.getCity());
+    userLikeListVo.setAvatar(userInfo.getLogo());
+    userLikeListVo.setAge(userInfo.getAge());
+    userLikeListVo.setMarriage(StringUtils.equals(userInfo.getMarriage(), "已婚") ? 1 : 0);
+    userLikeListVo.setMatchRate(userInfo.getMatchRate());
+    userLikeListVo.setId(userInfo.getId());
+    userLikeListVo.setCity(userInfo.getCity());
+    userLikeListVo.setAvatar(userInfo.getLogo());
+    userLikeListVo.setAge(userInfo.getAge());
+    userLikeListVo.setMarriage(StringUtils.equals(userInfo.getMarriage(), "已婚") ? 1 : 0);
+    userLikeListVo.setMatchRate(userInfo.getMatchRate());
+    userLikeListVo.setId(userInfo.getId());
+    userLikeListVo.setCity(userInfo.getCity());
+    userLikeListVo.setAvatar(userInfo.getLogo());
+    userLikeListVo.setAge(userInfo.getAge());
+    userLikeListVo.setMarriage(StringUtils.equals(userInfo.getMarriage(), "已婚") ? 1 : 0);
+    userLikeListVo.setMatchRate(userInfo.getMatchRate());
+    userLikeListVo.setId(userInfo.getId());
+    userLikeListVo.setCity(userInfo.getCity());
+    userLikeListVo.setAvatar(userInfo.getLogo());
+    userLikeListVo.setAge(userInfo.getAge());
+    userLikeListVo.setMarriage(StringUtils.equals(userInfo.getMarriage(), "已婚") ? 1 : 0);
+    userLikeListVo.setMatchRate(userInfo.getMatchRate());
+    userLikeListVo.setId(userInfo.getId());
+    userLikeListVo.setCity(userInfo.getCity());
+    userLikeListVo.setAvatar(userInfo.getLogo());
+    userLikeListVo.setAge(userInfo.getAge());
+    userLikeListVo.setMarriage(StringUtils.equals(userInfo.getMarriage(), "已婚") ? 1 : 0);
+    userLikeListVo.setMatchRate(userInfo.getMatchRate());
+    userLikeListVo.setId(userInfo.getId());
+    userLikeListVo.setCity(userInfo.getCity());
+    userLikeListVo.setAvatar(userInfo.getLogo());
+

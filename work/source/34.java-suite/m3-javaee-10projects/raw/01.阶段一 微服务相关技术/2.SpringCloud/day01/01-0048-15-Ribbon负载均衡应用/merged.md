@@ -1,0 +1,251 @@
+# 15-Ribbon负载均衡应用
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：2.SpringCloud/day01
+- 源文件：01.阶段一 微服务相关技术\2.SpringCloud\day01\15-Ribbon负载均衡应用_【海量资源尽在 ubkz.com】.mp4
+- 时长 12分33秒（音频 754s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] Ribbon 负载均衡应用在这一小节中我们的主要目标是配置启动两个用户服务在Consumer-Demo中使用服务名实现根据用户ID获取用户前面可以通过工具类拼接服务地址获取数据具体打开IDA查看代码分析在前面中我们使用了一个工具类叫做Discovery Client工具类根据服务名称获取Urica中的
+[00:31] 服务实例列表再获取到第一个服务实例根据他的信息拼接一个服务地址利用rest template访问这个地址获取到数据那现在我们的想法就是直接去用rest template访问一个以服务名称作为一个服务路径的地址并获取到数据如果要这样做的话应该怎么做我们回到笔记中我们的期望呢是可以需求是可以使用rest
+[01:01] template访问类似这样的一个地址获取服务数据那具体应该如何去实现还有怎么去实现很明显这个地址呢是不通的因为根本没有这么一个服务地址访问不了好如果要做到这样的话我们可以使用ribbon负载均衡那它是如何做到的呢它会在执行
+[01:40] REST Template发送服务地址请求的时候使用负载均衡拦截器拦截拦截到以后呢根据服务名获取服务地址列表使用Ribbon负载均衡算法从服务地址列表中
+[02:12] 选择一个服务地址访问该地址获取服务数据OK这就是如果使用的ribbon的做法那具体我们应该如何来去实现分析它的一个实现步骤这一个服务能如果要有多个实例的话也就是有多个实例服务的地址那么你要去启动多个user-Service实例
+[02:48] 这个实例我们原来已经有了一个端口是9091我们可以再配一个9092配置完这一个实例以后呢接着我们要去修改rest template实例化方法要添加负载均衡注解3是修改consumer Controller这个里边我们要
+[03:16] 把请求的地址改成是这么一个情况而不再用刚才看到的拼接的方式改完以后我们再去测试验证负载均衡好接下来我们打开IDA按照分析来去实现启动多个user-Service实例那么我们去改变它的服务提供工程user-Service中的一个配置软件这个端口当然就不能冲突了所以我们改造程式用这边变量的方式
+[03:47] 如果是有提供这个port那么使用这个提供的如果没有使用提供的这个port背面的话呢那我们使用的是9091这么一个端口号再去修改它的配置项启动配置项这边不用动我们起一个更好辨别的名称9091再复制一个9092端口要不冲突所以我们来设置它的值
+[04:19] -大低port等于9092再来起启动90919092起好以后我们还要去改造那个服务的消费工程中rest template的一个实例化方法添加一个注解负载均衡注解at low balance加加好后呢接着我们再去改造它的一个处理器
+[05:03] 我们就不再使用这种拼接方式了直接使用服务名称的方式去访问获得到服务数据把它注释掉它的地址user我们再来拼接这个ID地址我们就这样拼接好了拼接好后接着我们再去看一下Ureka中有没有把我们的两个服务的提供工程就两个实例给注册上去我们刷新Ureka是在的9091
+[05:46] 9092完了以后呢我们去访问一个服务消费工程的路径看一下能不能把这个数据正常的给获取出来刷新要在这一边我们这个工程好像没起我们来启动一下消费工程启动启好以后呢我们验证的点就是这个地址呢是不存在的如果真的我们的负载均衡是起了作用的话可以拦截这个服务名获取到地址然后再去访问好我们验证一下打开浏览器再刷新
+[06:25] 见到了没有问题也就说明我们的负载均衡配置是可以的没有问题接下来呢我们就想它到底是如何做到的虽然刚才我们分析的时候说它有一个拦截器那到底又是如何加载我们去看一下它的一个这个加载原理在我们用ribbon的时候呢这个ribbon是根据我们当时添加的这个注解就是这个启动器就刚才注解呢是我们的low balance
+[06:57] 那这个Low Balance你要有去解析它的一个解析器还就是如何去自动去装载这些负载均衡的那我们当初加这个Eureka的时候会传递依赖我们Ribbon相关的一些依赖包那它里边呢就有这么一个东西找到一个工程就我们的Consumer Gun Demo中Eureka的里边有一个叫做Ribbon的就它好这Ribbon里面呢我们就可以看到它依赖了这些东西
+[07:28] 所以我们Ribbon是这么依赖过来具体我们的自动的负载均衡拦截器的配置包括它的一个应用是怎么配它在这边去加载的有一个common dropout我们找到它它里面就有定义自动去加载负载均衡找一下就是它找到后这里面当时我们学习springboard的时候已经了解到它这边是有一个
+[08:11] 我们的配置文件里面已经配置定好了一大堆的自动加载配置类好这边就有一个叫做自动我们来看一下有一个叫low balancedlow balanceralter configuration负载均衡自动配置类好找到以后呢接着我们打开就发现这一个类里面有一些东西看到呢它里面有一个配置配置了一个叫做
+[08:46] 拦截器配置类对象里面的添加负载均衡拦截器拦截器里面加了好一些东西那他具体为什么能够加载到他说如果你是没有用这个template的话那么就会去实例化他那很明显我们现在的是没有的我们用的是rest template也就是说用的是他ok而没有用一个叫做retry template好他会去加载这么一个配置那加了以后呢我们的这个
+[09:14] 负载均衡拦截器到底又做了一些什么拦截我们点击进去看进来以后呢就发现它有这些配置包括它一个拦截的方法拦截方法中又看它是执行了一些内容我们跟进去看执行的方法执行执行好到这来以后呢还是一个执行方法好到这来以后我们去打个断点这个消费工程我们当时是启动的我们现在把它变成是
+[09:47] debug方式启动debug方式启动以后我们再去访问刚才浏览器的这个地址看一下它的一个拦截地址是如何切换的就获取了服务以后我们看一下服务内容刷新进来了进来后呢现在看的是9092
+[10:17] 因为我们想知道呢就是这个服务名是user刚Service的到底你现在访问的是我们的两个实例的哪一个实例就我们现在有9091跟9092好所以现在他是9092我们先让他放行F9过了过了以后接下来我们再刷新再刷新再刷一次又进来了进来这次是9091再放行放了以后接着我们再刷新好再进来9092好就发现原来
+[10:47] 这个Ribbon默认的一个负载均衡策略是用的轮循也就是第一次是9092第二次就是9091轮着来OK这就是我们Ribbon的一个源码它在这边去拦截并且呢它会将我们的服务名替换成可以访问的服务地址OK那么回到讲义中也来了解一下开启的我们已经开启了配置的也配置了然后如果我们要去改变一个负载均衡策略的话
+[11:18] 因为它默认的用的是轮循我们刚才看源码已经看到效果那如果要去改变成随机那你可以去这么配那我这边就不再配置演示了如果大家要配置的话你可以这么配好然后源码跟踪我们刚才也是通过这个comments的包里面找到一个附带均衡拦截器配置类里面呢有一个附带均衡拦截器它跟进去以后呢就可以找到真正执行的时候会根据服务名称找到具体的服务地址再去访问OK这就是我们的一个
+[11:47] 关于Ribbon负载均衡的一个应用我们回到笔记中来进行小结那我们刚才讲了那么多其实也就不外乎就是在实例化res template的时候使用一个注解叫做at lowbalance服务地址直接可以使用服务名去访问数据OK
+[12:27] 就可以得到我们的服务数据了这就是我们的一个Ribbon负载均衡的应用所有内容
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 Spring Cloud Ribbon 实现服务的负载均衡，通过修改 ConsumerController 中的 RestTemplate 调用方式，使其能自动从 Eureka 服务列表中选择一个可用实例进行请求。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 展示了 consumer-demo 项目的结构，重点是 ConsumerController.java 文件，其中包含使用 RestTemplate 和 DiscoveryClient 的代码，用于根据用户 ID 获取用户信息。
+画面2: 展示了课程 PPT 的“15. Ribbon负载均衡应用”章节，列出了实现步骤：启动多个 user-Service 实例、修改 RestTemplate 实例化方法、修改 ConsumerController。
+画面3: 展示了 user-Service 的 application.yml 配置文件，其中配置了服务名、端口、数据库连接、Eureka 服务注册地址等。
+画面4: 展示了 ConsumerController.java 文件，代码中注释了“//代码中url中的user-Service”并显示了硬编码的 URL。
+画面5: 展示了 ConsumerController.java 文件，代码中使用了 discoveryClient 获取服务实例，但 URL 仍为硬编码。
+画面6: 展示了 consumer-demo 项目的 pom.xml 文件，其中包含了 spring-cloud-starter-netflix-Eureka-client 依赖。
+画面7: 展示了 Maven 仓库中 spring-cloud-commons-2.1.1.RELEASE.jar 的内容，显示了其内部的 META-INF 和 spring-configuration 目录。
+画面8: 展示了 spring-cloud-commons 源码中的 LoadBalancerAutoConfiguration.java 文件，其中包含 @Configuration 和 @ConditionalOnMissingBean 注解。
+画面9: 展示了 LoadBalancerAutoConfiguration.java 文件，代码中定义了 loadBalancedRestTemplateInitializerDeprecated 方法。
+画面10: 展示了 RibbonLoadBalancerClient.java 文件，其中包含 execute 方法，用于选择服务实例并执行请求。
+画面11: 展示了调试界面，显示了 RibbonLoadBalancerClient 的 execute 方法执行过程，变量 server 的值为 "127.0.0.1:9092"。
+画面12: 展示了浏览器访问 http://localhost:8080/consumer/8 的结果，返回了用户信息 JSON 数据。
+画面13: 展示了课程 PPT 的“在RestTemplate的配置方法上添加@LoadBalanced注解”部分，以及修改 ConsumerController.java 的代码示例。
+画面14: 展示了课程 PPT 的“15. Ribbon负载均衡应用”章节，其中包含“小结”和“16. 熔断器Hystrix简介”章节的标题。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1:
+```java
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+@RestController
+public class ConsumerController {
+    @Autowired
+    private RestTemplate restTemplate;
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    @RequestMapping("/id")
+    public User queryById(@PathVariable Long id) {
+        String url = "http://localhost:9091/user/" + id;
+        return restTemplate.getForObject(url, User.class);
+    }
+}
+```
+
+画面2:
+```markdown
+小结：
+Ribbon提供了轮询、随机两种负载均衡算法（默认是轮询）可以实现从地址列表中使用负载均衡算法获取地址进行服务调用。
+
+15. Ribbon负载均衡应用
+
+目标：配置启动两个用户服务，在consumer-demo中使用服务名实现根据用户id获取用户
+
+分析：
+需求：可以使用RestTemplate访问http://user-Service/user/获取服务数据。
+可以使用Ribbon负载均衡：在执行RestTemplate发送服务地址请求的时候，使用负载均衡拦截器拦截，根据服务名获取服务地址列表，使用Ribbon负载均衡算法从服务地址列表中选择一个服务地址，访问该地址获取服务数据。
+
+实现步骤：
+1. 启动多个user-Service实例（9091,9092）；
+2. 修改RestTemplate实例化方法，添加负载均衡注解；
+3. 修改ConsumerController；
+```
+
+画面3:
+```yaml
+server:
+  port: 9091
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Spring Cloud
+    username: root
+    password: root
+  application:
+    name: user-Service
+  Eureka:
+    client:
+      Service-url:
+        defaultZone: http://127.0.0.1:10066/Eureka
+      prefer-ip-address: true
+      # Eureka
+      ip-address: 127.0.1
+      lease-renewal-interval-in-seconds: 5
+      lease-expiration-duration-in-seconds: 5
+```
+
+画面4:
+```java
+//代码中url中的user-Service
+List<ServiceInstance> serviceInstances = discoveryClient.getInstances("user-Service");
+ServiceInstance serviceInstance = serviceInstances.get(0);
+String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/" + id;
+return restTemplate.getForObject(url, User.class);
+```
+
+画面5:
+```java
+//获取Eureka中注册的user-Service的实例
+List<ServiceInstance> serviceInstances = discoveryClient.getInstances("user-Service");
+ServiceInstance serviceInstance = serviceInstances.get(0);
+String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/" + id;
+return restTemplate.getForObject(url, User.class);
+```
+
+画面6:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>consumer-demo</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-Eureka-client</artifactId>
+        </dependency>
+    </dependencies>
+</project>
+```
+
+画面7:
+```text
+META-INF
+spring-configuration
+spring-configuration-metadata.json
+```
+
+画面8:
+```java
+@RequiredArgsConstructor
+private List<LoadBalancerRequestTransformer> transformers = Collections.emptyList();
+
+@Bean
+public SmartInitializingSingleton loadBalancedRestTemplateInitializerDeprecated(
+        final ObjectProvider<List<RestTemplateCustomizer>> restTemplateCustomizers) {
+    return () -> restTemplateCustomizers.orderedStream().forEach(
+            (restTemplateCustomizer) -> {
+                for (RestTemplate restTemplate : loadBalancedAutoConfiguration.this.restTemplates) {
+                    restTemplateCustomizer.customize(restTemplate);
+                }
+            });
+}
+
+@Bean
+@ConditionalOnMissingBean
+public LoadBalancerRequestFactory loadBalancerRequestFactory(
+        LoadBalancerClient loadBalancerClient, this.transformers) {
+    return new LoadBalancerRequestFactory(loadBalancerClient, this.transformers);
+}
+
+@Configuration
+@ConditionalOnMissingBean
+static class LoadBalancerAutoConfiguration {
+    @Autowired(required = false)
+    private List<LoadBalancerRequestTransformer> transformers = Collections.emptyList();
+
+    @Bean
+    public SmartInitializingSingleton loadBalancedRestTemplateInitializerDeprecated(
+            final ObjectProvider<List<RestTemplateCustomizer>> restTemplateCustomizers) {
+        return () -> restTemplateCustomizers.orderedStream().forEach(
+                (restTemplateCustomizer) -> {
+                    for (RestTemplate restTemplate : loadBalancedAutoConfiguration.this.restTemplates) {
+                        restTemplateCustomizer.customize(restTemplate);
+                    }
+                });
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public LoadBalancerRequestFactory loadBalancerRequestFactory(
+            LoadBalancerClient loadBalancerClient, this.transformers) {
+        return new LoadBalancerRequestFactory(loadBalancerClient, this.transformers);
+    }
+}
+```
+
+画面9:
+```java
+@RequiredArgsConstructor
+private List<LoadBalancerRequestTransformer> transformers = Collections.emptyList();
+
+@Bean
+public SmartInitializingSingleton loadBalancedRestTemplateInitializerDeprecated(
+        final ObjectProvider<List<RestTemplateCustomizer>> restTemplateCustomizers) {
+    return () -> restTemplateCustomizers.orderedStream().forEach(
+            (restTemplateCustomizer) -> {
+                for (RestTemplate restTemplate : loadBalancedAutoConfiguration.this.restTemplates) {
+                    restTemplateCustomizer.customize(restTemplate);
+                }
+            });
+}
+
+@Bean
+@ConditionalOnMissingBean
+public LoadBalancerRequestFactory loadBalancerRequestFactory(
+        LoadBalancerClient loadBalancerClient, this.transformers) {
+    return new LoadBalancerRequestFactory(loadBalancerClient, this.transformers);
+}
+
+@Configuration
+@ConditionalOnMissingBean
+static class LoadBalancerAutoConfiguration {
+    @Autowired(required = false)
+    private List<LoadBalancerRequestTransformer> transformers = Collections.emptyList();
+
+    @Bean
+    public SmartInitializingSingleton loadBalancedRestTemplateInitializerDeprecated(
+            final ObjectProvider<List<RestTemplateCustomizer>>
+

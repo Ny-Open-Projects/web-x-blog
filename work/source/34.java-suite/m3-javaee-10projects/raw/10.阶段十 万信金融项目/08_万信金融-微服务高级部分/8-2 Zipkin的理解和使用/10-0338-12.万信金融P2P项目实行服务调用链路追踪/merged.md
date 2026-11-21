@@ -1,0 +1,135 @@
+# 12.万信金融P2P项目实行服务调用链路追踪
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：08_万信金融-微服务高级部分/8-2 Zipkin的理解和使用
+- 源文件：10.阶段十 万信金融项目\08_万信金融-微服务高级部分\8-2 Zipkin的理解和使用\12.万信金融P2P项目实行服务调用链路追踪_【海量资源尽在 666java.com】.mp4
+- 时长 14分15秒（音频 855s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 其实目前呢我们已经把Sluth还有Zaking相关的这些内容呢全部给大家讲完了那咱接下来就回到我们万信金融P2P项目里边我们把服务链路调用追踪啊给它集成到咱们这个P2P项目当中因为咱们这个项目它肯定啊也需要这个什么呀服务链路追踪嘛
+[00:28] 那具体怎么集成呢那跟咱们前面的这个什么样入门案例是一样的大概会有一些步骤对吧咱们接下来一起参考讲义首先的话就是需要引入相关的依赖那自然就是一个是slose的一个是什么呀对viking那这些依赖引到什么地方引到哪个工程里边呢大家看我们这说的是引入到什么呀万信p2p API这个工程那为什么要引入到API这个工程里边那别的工程还需要引入这些依赖吗
+[00:57] 这个不知道大家有没有印象啊来咱看看第一张当时讲义里边的这块内容这是不是咱们这个什么呀万信金融P2P项目基础工程的一个关系图对不对大家看一下啊我们这个几乎所有的微服务工程啊它都依赖了谁啊依赖了这个API工程你看这个图对不对而我们的API工程呢又依赖谁啊火曼工程是不是然后火曼工程呢是继承了咱们这个副工程这个关系还有影响吧
+[01:28] 所以说呢你只需要怎么着啊对你只需要把Flux还有Zkin这两个依赖呢给它导入到什么地方对导入到这个API工程里边其实就可以了它里边有了那也就意味着别的web工程也就有了啊我这是需要大家注意的那你就去API工程里边查一查这两个依赖有没有导入进去啊它有可能导入过也有可能什么呀没导入过反正你要检查检查
+[01:57] 大家看我这是不是已经导入过了啊你得看你的代码啊我的导入呢你的不一定导入啊没有导入的话你就粘过来就行了这是第一步这个依赖依赖咱需要引进来引进来之后第二步就是配置呗对不对这个咱们前面咱在讲这个什么呀入门案例的时候呢啊sluth还有zking是不是都有一些配置要进行啊有三块代码大家看一看附近附近一个是开启这个什么呀对这个sluth还有就是设置zking的这个什么服务地址
+[02:26] 还有就是设置这个什么采样率啊咱们采样率呢设置都是一就是百分之百采样这个效果会比较明显一些呃那这些配置呢在我们这个p2p项目当中呢你不能直接给他写到什么呀本地的配置文件当中啊大家应该有印象咱是不是用的Apollo是不是说这些配置呢我们应该放到什么Apollo当中那放到Apollo到什么地方呢我们最好是给他放到这个quoman啊template这个项目当中为什么放到这个项目里边
+[02:55] 因为这个项目大家应该还有印象它是一个通用配置模板对不对就是一些通用的公用的一些配置我们都会放到这个项目里边那这个跟Sluice Z King相关的一些配置它也是通用的对不对将来有可能别的这些微服务都需要这块配置是不是所以咱应该把它啊把这三行配置给它放到这个项目当中啊我们可以单独新建一个什么呀名称空间嘛起一个名字是不是那我这边呢也已经配置过了
+[03:25] 可以看这个你的Apollo你需要自己这个操作一下的啊在这有点账吗对不对添加然后名字起这么一个名字然后呢把这三行配置给他放到这就行没错吧最后别忘了点击这个什么呀发布这配置就搞定搞定完之后呢还是跟Apollo相关的啊咱们呢这个我们刚才这个代码配置代码这三行是不是放到这个command template当中那别的这些项目
+[03:57] 就是你需要用到这三行配置的这些项目你是不是需要关联一下这个名称空间有印象吧比如你的account啊getaway啊ua啊consumer等等等等这个你要看情况了啊你哪个wave需要用这三行配置你就需要关联一下这些名称空间怎么关联大家还有印象吗我这儿呢应该好多都已经关联过了啊你说我以consumer为例啊你应该是不是应该是点击添加
+[04:24] 然后在这是不是关联公共name space然后在这是不是选择咱刚才加了这个什么呀对你关联然后呢你会发现你看在下边这是不是就有了这些配置没错吧所以说你需要做这个操作啊关联这个名称空间这个操作关联完之后还没完还没完我们在相关的这些微服的这个配偶链当中是不是还需要把这个名称空间给他干什么呀对给他引进来
+[04:53] 这个名称空间你不引进来的话其实你那里边有这三行配置其实我们这个微服务是不是也没有读取到对不对那你看看你可以找找你比如说这个阿康的你找一找他的这个YML这个配置就这块有印象吗这块你你应该你检查检查吧你看你引入了没有我这好像还没引入呢是不是没引入吧那你往后加呗逗号隔开
+[05:23] 你要看中文还是英文啊粘过来然后呢我们再找几个吧consumeryml是不是我们也要大概你检查一下啊应该是多美意因为这是咱是咱这个什么呀新建的名称空间吗consumer然后你比如说这个网关最后面我们给它加上然后还有谁啊ua是不是挑这几个也是加到最后
+[06:08] 这个你千万不要忘了否则你你那些配置其实跟没配是一样的啊一定要加一下那么这个搞完之后其实这个集成的这个工作就完事了啊我们下来就可以进行什么呀对就可以进行测试了啊那我们这呢就以登录功能为例进行测试啊因为呃这个集成完毕之后其实你好多功能啊万一p2p当中好多功能是不是都可以拿来测试啊我这呢只是以登录为例给你演示一下这个效果有没有出来就行了
+[06:39] 那我们是得先启动Z King还有相关的一些微服务吗对不对Z King的话我这边已经启动过了大家看一下然后这个相关的微服务的话那自然就是跟登录相关的对不对登录相关的微服务咱找一找登录相关的微服务你看我下边这儿注册中心不用说了对吧Consumer呀GitAway呀Account呀UA呀这个你要是时间长忘了的话你可以找一找那个这个图嘛对不对你看这里边都涉及到谁
+[07:09] 你给他启动一下但是这里边还有个网关啊这个图里边没有体现你你你可别忘了验证码服务咱不用启动吧因为咱当时讲完之后是不是说了可以采用密码模式进行登录吗就是说那个验证码那个地方填一个密码就行了那个密码其实我们默认是不是就是手机号码就这个验证码不启动也可以呃那我们就把这些都给他起一下啊这个谁啊这个注册中心启动过了对吧好最后启动一下
+[07:41] 然后这个gateway启动一下account对吧启动一下然后这个谁啊uaa启动一下那我们就等待他们全部启动完毕接下来就可以进行登录来进行这个测试我们看一下应该是都已经启动完了控制台你可以大概过一遍啊看有没有报错信息吧应该都没问题是不是然后当然你的这个前端工程也需要启动啊或者说要不你用
+[08:13] 这个什么铺存慢也可以进行测试都行啊我这边前的过程都已经启动过了来看一下这个登录界面我是不是都已经打开了是不是打开了那咱接下来就可以进行这个什么呀进行登录了是不是进行登录进行登录的话我们找个手机号吧咱这个手机号账号的信息应该是在这个点里啊对吧那我们应该随便找一个都可以吧来我们试一下
+[08:45] 密码是不是也是这个手机号对不对咱当时默认了嘛咱把这边清一下然后点击这个什么呀对点击登录稍等片刻啊登录成功了对吧登录成功之后呢咱怎么看这个效果呀怎么看效果你是不是就直接去这个什么呀9411这个端口里面是看这个图形的这个展示信息就行了是不是那如果没有问题的话我们是不是就是9411这个端口对不对我们刷新一下看能不能查到相关的信息
+[09:19] 看是不是已经有了对不对就已经有了哪个是呀因为咱这个登录这个业务里边所涉及到的这个什么呀微服调用还是挺多的它里边还涉及到什么注册了对不对你看这应该是这个应该是这个这个是登录的先是到网关了是不是先到网关因为咱万信金融P2B项目是不是强端分离嘛你强端发了所有请求先到网关然后网关又找到谁呀UA然后UA又找到什么呀Account是不是
+[09:50] 然后你点进去还可以看这里边的这个详情嘛这个网关的这咱之前都说过嘛这是那个令牌那个请求是不是这是UA的最后这个什么呀AccountAccount应该是做那个登录账号密码的一个校验嘛对不对你看这个就相当于我们已经把这个什么呀对把服务链路追踪给它集成到咱们这个什么呀对万信金融P2P这个平台里边
+[10:25] 只不过这儿呢我只是以这个什么呀对以这个登录功能为例给你做了一个展示而已那这里边呢其实还有一个功能需要给大家演示一下就是咱们前面讲过的那个依赖分析大家还有印象吗刚讲过的依赖分析就这个依赖分析呢是ZKing呢可以以图形化的方式把微服务之间的这个依赖关系是不是给展示出来那咱现在呢在外信金融P2P项目当中是不是已经集成了这个服务链路追踪
+[10:54] 那他也应该把什么呀对跟登录有关的这个微服务之间的这个依赖关系给给干什么呀展示出来用图形的形式对不对给展示出来所以咱们接下来把这块给他演示一下怎么演示去哪瞅这个这个依赖关系图啊对很简单我们点击这个什么依赖这个菜单是不是就行了点击一下哎大家看这儿是已经展示出来了对不对那咱看看这个图首先咱看这个图他很清晰的展示出来
+[11:23] 各个微服务之间的这个什么呀对依赖关系或者说调用关系大家能看出来我们几乎啊前端发的所有的请求是不是都要先经过谁啊对你能看出来都要先经过网关啊网关再分发请求到什么呀consumer呀或者ua呀或者说什么呀all account这是你首先能看出来然后你还能看出来这个微服务之间谁调用谁谁什么呀依赖谁这个我觉得大家一看箭头是不是就能观察出来这个我就不再过头说了啊
+[11:53] 那这里边的话我们要拿着这个图给大家做一个对照哪个图呢就是这个注册登录流程图那其实跟登录有关的微服务咱前面提过啊跟登录像微服务是不是无非就是一个网关对吧这不用说了你看这17181920网关然后就是什么呀UA然后就是什么呀统一账号啊你看这里边也有体现的有这网关UA然后到什么呀统一账号其实这个链路啊
+[12:24] 就是哪个呀对就是搞登录的啊搞登录的那也同学老师那下面这个网关直接就到看的这根调用对吧这个线这个箭头这个调用是干嘛的那这个呢是你看这你看一二对吧这块是干嘛这块是不是要获取验证码了虽然咱这次呢没有通过验证码的方式但但是呢他是不是还要去访问这个统一账号服务
+[12:52] 我们来判断那个啥我们是启用的是验证啊模式还是还是什么呀还是这个密码模式对不对所以说呢网关啊前段发请求之后网关还要发请求到什么呀到同一账户啊看看这一块是验证码的模式还是什么呀还是密码的模式啊所以说他这里边的话会涉及到这个一个箭头大家看一下给他微就网关直接到哪啊然后上面这个调用是咋发生的呢
+[13:19] 网关直接到什么呀consumer对不对网关直接到consumer是这儿大家看我们前端我们登录成功之后是不是就到这个主界面上对吧在主界面上我们的前端会发请求到哪到consumer大家看是不是当然你发的这个请求肯定也是先经过网关网关再分发请求到什么呀到consumer所以这个请求跟咱登录没关系是你登录成功之后到这个主界面的时候他自己发了一个请求但是呢他也会把这个
+[13:48] 这次请求这个依赖关系给干什么呀对给展示出来就是上面这这根线啊这个箭头因为咱们呃前面是不是在consumer啊ua啊account啊github这里边这几个wifu里边是不是都加入了那个什么呀对链路追踪啊所以说跟这几个wifu相关的请求呢他都会把这个依赖关系给你展示出来啊这是最后吧我们把这个依赖关系呢也给大家演示一下
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示万信金融P2P项目集成Spring Cloud Sleuth与Zipkin进行服务链路追踪的完整步骤。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示PPT标题“4. 万信金融P2P项目集成服务链路追踪”及“4.1 集成步骤”，内容包括在`wanxin2p-api`工程的`pom.xml`中添加Sleuth和Zipkin依赖。
+画面2：在IDEA中展示`wanxin2p-api`的`pom.xml`文件，已添加`spring-cloud-starter-sleuth`和`spring-cloud-starter-zipkin`依赖。
+画面3：在Apollo配置中心的`micro_service.spring-zipkin`命名空间下，配置了`spring.sleuth.enabled=true`和`spring.zipkin.base-url=http://localhost:9411`。
+画面4：在Apollo配置中心的`consumer-Service`应用下，展示其关联的多个命名空间，包括`micro_service.spring-boot-http`、`micro_service.spring-Eureka`等。
+画面5：在IDEA中展示`wanxin2p-gateway-server`的`application.yml`文件，其中配置了`spring.zipkin`相关属性。
+画面6：在IDEA中展示`wanxin2p-uaa-Service`的`application.yml`文件，配置了`spring.application.name=uaa-Service`和`apollo.namespaces`。
+画面7：在IDEA中展示`wanxin2p-uaa-Service`的`application.yml`文件，配置了`spring.application.name=uaa-Service`和`apollo.namespaces`。
+画面8：在浏览器中展示登录页面，同时打开开发者工具查看网络请求，显示了页面加载的资源列表。
+画面9：在浏览器中访问Zipkin的`/`页面，显示了服务追踪查询的表单。
+画面10：在浏览器中访问Zipkin的`/traces`页面，显示了具体的追踪信息，包括`http.method=POST`、`http.path=/account/session`等。
+画面11：在浏览器中访问Zipkin的`/dependency`页面，显示了服务调用关系图，`gateway-server`指向`uaa-Service`，`uaa-Service`指向`account-Service`。
+画面12：在浏览器中访问Zipkin的`/dependency`页面，显示了服务调用关系图，`gateway-server`指向`consumer-Service`和`uaa-Service`，`uaa-Service`指向`account-Service`。
+画面13：在浏览器中访问Zipkin的`/dependency`页面，显示了服务调用关系图，`gateway-server`指向`consumer-Service`和`uaa-Service`，`uaa-Service`指向`account-Service`。
+画面14：在浏览器中访问Zipkin的`/dependency`页面，显示了服务调用关系图，`gateway-server`指向`consumer-Service`和`uaa-Service`，`uaa-Service`指向`account-Service`。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```xml
+1. 在wanxin2p-api工程的pom.xml中增加如下依赖
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-zipkin</artifactId>
+</dependency>
+```
+画面2：
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-zipkin</artifactId>
+</dependency>
+```
+画面3：
+```properties
+# 开启Sleuth
+spring.sleuth.enabled=true
+# 设置zipkin服务地址
+spring.zipkin.base-url=http://localhost:9411
+# 采样率，取信范围[0-1]
+```
+画面5：
+```yaml
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+```
+画面6：
+```yaml
+app:
+  id: uaa-Service
+apollo:
+  bootstrap:
+    enabled: true
+    eagerLoad: true
+namespaces: application,micro_service.spring-boot-druid,micro_service.spring-boot-http,micro_service.spring-boot-redis,micro_service.spring-cloud-hystrix,micro_service.spring-cloud-ribbon,micro_service.spring-cloud-zipkin
+spring:
+  application:
+    name: uaa-Service
+```
+画面7：
+```yaml
+app:
+  id: uaa-Service
+apollo:
+  bootstrap:
+    enabled: true
+    eagerLoad: true
+namespaces: application,micro_service.spring-boot-druid,micro_service.spring-boot-http,micro_service.spring-boot-redis,micro_service.spring-cloud-hystrix,micro_service.spring-cloud-ribbon,micro_service.spring-cloud-zipkin
+spring:
+  application:
+    name: uaa-Service
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：PPT标题“4. 万信金融P2P项目集成服务链路追踪”及“4.1 集成步骤”。
+画面11：架构图显示`gateway-server`指向`uaa-Service`，`uaa-Service`指向`account-Service`。
+画面12：架构图显示`gateway-server`指向`consumer-Service`和`uaa-Service`，`uaa-Service`指向`account-Service`。
+画面13：架构图显示`gateway-server`指向`consumer-Service`和`uaa-Service`，`uaa-Service`指向`account-Service`。
+画面14：架构图显示`gateway-server`指向`consumer-Service`和`uaa-Service`，`uaa-Service`指向`account-Service`。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

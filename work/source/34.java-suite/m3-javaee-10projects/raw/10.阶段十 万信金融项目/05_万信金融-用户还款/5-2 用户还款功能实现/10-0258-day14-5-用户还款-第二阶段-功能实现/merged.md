@@ -1,0 +1,249 @@
+# day14-5-用户还款-第二阶段-功能实现
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：05_万信金融-用户还款/5-2 用户还款功能实现
+- 源文件：10.阶段十 万信金融项目\05_万信金融-用户还款\5-2 用户还款功能实现\day14-5-用户还款-第二阶段-功能实现_【海量资源尽在 666java.com】.mp4
+- 时长 15分49秒（音频 949s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 刚才我们把用户还款业务当中第一阶段的代码全部开发完毕也次日通过了那咱接下来开始开发第二阶段的功能第二阶段功能的话是不是从1.3一直到什么1.10对不对那这里边大家看一下是不是还款服务该发请求到哪对到存款代理服务然后存款代理服务在跟谁进行交货
+[00:27] 对跟银行的存款系统交付那么整个第二阶段最终啊最终要实现的功能就是冻结这个什么呀还款人的还款金额啊就在账户里边我刚才说了嘛前面咱也分析过了啊比如说他这个月啊这期要还一千块钱那么第二个阶段他最终要搞定的目标就是把账户当中这一千块钱给他先干什么呀冻结了所以说我们把这一步呢称之为是还款的
+[00:58] 预处理然后呢咱看第二阶段这个功能啊包括这个代码对于大家来说啊应该会比较简单或比较熟悉一些为啥呢大家想想我们从一开始开户对吧到后来的发标投标啊等等等等咱前面开发了好多功能是不是都会跟谁打交道从网代理服务打交道从网代理服务里边他要实现的这个功能是不是基本上都是什么呀一模一样
+[01:28] 对不对所以这些代码呢咱前面已经开发过多次了这个东西呢对于大家来说是比较熟悉的啊所以这里边的话我们这次有些代码呢我就不再从头给你敲了啊这是需要大家注意的那咱这个开始开发这个第二阶段这个功能吧咱从哪开始呢这里边还有一个细节问题这个问题呢还是跟谁有关呢跟啊跟这个咱们用户还款呢整个业务是不是跟前端没关系吗是不是那咱
+[01:57] 在这个前面是不是准备了一个什么呀业务操作的一个出发的一个什么样入口对吧跟这是有关系的那我们在那个入口里边是把第一阶段一点一点这步都测试完了测完之后是不是该走一点三了那这步的出发也得放到这个什么呀对那个入口里边啊也得放到入口里边大家看一下你找找那个入口那个代码是在这对不对这是咱那个入口了你看这是那个第一阶段接口一这是第二
+[02:27] 第一阶段的接口二是不是然后接下来我们其实该走这个谁呀按照顺序是不是该走这个接口三了对不对该走这块代码那我准备呢把这块代码呢单独封装到一个方法里边那封装好这个方法之后呢我将来开发完之后是不是在这是不是调用一下这个方法是不是就触发这个什么呀对一调用就触发1.3哎这个代码往后走了就是第二阶段这个业务就开始触发执行明白什么意思吗
+[02:57] 所以这个接口三呢其实指的就是我们需要在右层啊就是来定义这么一个触发的一个一个入口啊就是第二阶段啊这个触发的这个入口这我们需要封装一个方法呃那咱看看讲义吧讲义的话他说了哎我们需要在要藏对吧再新增一个什么呀对还款预处理的这样一个方法一个接口那咱找到这个谁啊业务层的这个接口业务层的接口
+[03:30] 就这我们在这呢再增加一个方法这叫什么呀对还款预处理刚才我们分析了这个阶段最终的目的就是冻结什么呀对冻结用户的还款金好那接下来看这个方法这个方法也比较简单啊大家看一下方案的名字叫pre-repayment对不对有一个法案只是不二类型那肯定是出表成功force表示失败对不对
+[04:06] 然后咱看这两个参数啊一个是什么呀还款计划一个是什么呀还款预处理的一个流水号这个大家应该比较熟悉了嘛我们以前说过啊凡是跟这个存款代理服务这个打交道啊我们都会这个什么呀生成一个什么呀对request number就是一个流水号那咱这次呢是在做这个还款预处理啊所以说这儿呢也会有一个request number
+[04:34] 那这个第一个参数repayment plan的话它里边的数据啊将来是要被谁啊被存款代理服务往哪发往银行那边发的啊所以说我们这里边呢也需要啊把这个repayment plan就是缓缓计划啊作为参数也放到上说这是咱们这个在右头嘛需要新增的这么一个方法那我就把这一块拿过来拿过来之后呢咱们今天是不是该实现这个功能了去哪去对
+[05:17] 实现内容了这应该要报错了对不对因为咱又新增了一个方法了来解扣一下好咱把这个方法生成一下好在这对不对那我们说了在这个方法里边要干啥呀那要干啥你看这个图嘛你看第二第二阶段上来就是先通过非应干什么呀发远程请求啊是不是你看还款服务要往哪存款单位服务要发请求通过非应发那我是不是首先得做一个准备工作呀什么准备工作呀
+[05:46] 我是不是得先把这个非应代理给先干什么呀对定义出来啊在哪在还款服务这边吧所以说你一定要看这个图啊在还款服务啊这边有个包而进它这个包但是这个包目前是空的对不对所以我们需要定义这个非应代理啊或者定义这个接口这个名字的话咱要跟讲义保持一致它叫啥名啊叫depository urgentapi urgent真来这是一个接口
+[06:17] 那咱在这个接口里边的话就需要加一些必要的一些注解那飞这一块的话大家也是非常非常熟悉的啊那这块代码我也不再从头给大家敲了那大家看一下这个飞行可来呢是用来设置往哪个微服发请求的对不对然后呢这个方法上面这个post mapping是用来设置具体请求的这个什么呀路径啊那这个呢应该对应的是不是哪应该对应的是
+[06:44] 存管代理服务那边的某个什么呀对某个Controller啊或者说Controller里边的某个什么呀方法那这一块这个代码啊或者说这个存管代理服务这边对应的这个Controller那块代码咱以前已经开发过啊已经开发过了啊咱们前面应该是在发表投标的时候都往这发过请求啊所以说那边代码咱们不用管你直接把这个非应代理或者非应这个接口呢给它定义出来就行了
+[07:12] 那这里边大家看一下我们是封装了一个类啊叫user auto pretranscending request这个类咱其实也都已经用过啊就是我刚才说的嘛因为我们往这发请求是不是在那个什么呀发标啊投标的时候都已经用过了啊所以说相关的整个这一套东西跟之前都是一样只不过这一次呢不是这个谁啊不是这个什么呀交易中心啊往这个什么呀
+[07:40] 代理服发请求而换成了什么呀还款服务还款服务呢还缺这个东西所以说呢我就把这一块拿过来那这是咱的一个准备工作咱要做到位这个搞定之后咱接下来是不是就可以回到这个什么呀要藏在这对吧我们就开始实现功能就是还款预处理那咱接下来还需要看一下这个图你看这里边咱要实现功能是不是就从1.3开始先通过飞影去发请求对吧然后发完请求之后的话怎么着
+[08:12] 对从来戴利福是不是开始跟谁进行交货银行的从来系统对吧整个这块代码咱以前已经开发过了啊就在发表投标时候都已经开发过了说咱们这儿呢直接调用就行了调完之后呢是不是就返回这个什么呀对这个结果大概的这个比较简单啊那咱分成几个步骤呢三个步骤吧第一步我们需要构造这个什么呀请求数据
+[08:38] 因为你看1.3是不是要要要往这个村代理服这边发请求发请求的时候是需要传过来一些数据的我们先把这个数据给它封装封装一下而构造出来然后那数据有了之后第二个就是要干什么呀对就开始通过飞应去请求谁呀存管代理服那存管代理服那边处理完之后呢他是不是就该返回结果了对不对那我们这边就是要接收这个返回的这个什么呀结果
+[09:05] 我们大概的话给他分成这三个步骤那咱接下来一步一步来吧先说第一步构造请求数据这个请求数据刚才我们在定义这个谁呀定义这个什么呀非硬代理的时候大家看到是不是就是封装成这种类型把他需要的数据就从来代理服那边需要的数据呢全部塞到这里边然后第二步我们在请求这个从来代理服务的时候是不是就扔到这就传过去了对不对所以我们需要
+[09:35] 把数据呢往这个类当中进行什么呀封装那咋封装呢那是new一下然后他里边要啥我是不是就往里边塞一堆东西对不对你看这这个类我们再熟悉一下你看这里边有冻结的金额呀流水号呀投资人的这个标识啊对不对你预处理的业务类型你是发标投标还是我们这次是什么呀还款对不对还有一些什么标底号啊这个等等相关的一些什么ID对吧预处理业务的ID等等等等
+[10:09] 所以我们需要给这些属性复制这块代码咱之前写过咱们在前面来实现这个功能的时候我们之前一般的做法是封装一个方法然后呢在这个方里面你有一个对象然后给他一堆属性感觉复制那咱接下来去讲义里边看一看这个方法在哪呢在这你看看是不是因为他传进来一个什么呀还眼计划还有那个什么呀流水号对不对然后在这里边你看是不是就溜了
+[10:44] 一个对象然后是不是开始掉这一堆什么呀对setfart开始往里边给值嘛给完值之后就返回来那这个代码呢我也不再给大家编写了这个一个是它比较简单虽然代码看着有点多它其实又非常简单啊就是拧一个对象然后给这个属性复制另外呢咱这个代码呢咱之前这个经常写咱接下来从上往下过一遍啊
+[11:26] 咱熟悉熟悉他都往里边封装了哪些数据吧这是发现对吧这是两个什么呀参数啊然后咱一个一个来首先呢他是拗了一个对象嘛对吧这不用说然后接下来就是先往里边存了一个什么呀冻结金额这个金额是不是就在这个什么还款计划里边啊你看所以说他从对象里边掉给他方法就得到这个冻结金额然后呢就是封装这个预处理业务类型咱这次这个要处理的业务是不是就是还款吗
+[11:58] 那这个值呢或者这个字符上你不能随便乱写我们有一个什么呀有一个枚举大家看一下就这个我们可以进去抽一是不是黄款咱以前是不是搞过什么投标吗这是业务业务类型啊然后他还需要什么呀标底号标底号呢这些信息都是从这个什么黄款计划里边哎通过给他发就得到了啊然后呢还有这个什么呀请求流水号请留上二十本我们将来会在这传进来对不对啊然后呢还有这个什么呀啊对这个用户的这个
+[12:30] 标识还有这个什么呀给缓缓计划他的这个ID啊主界然后最后呢就封装完了把这个对象就返回了那有了这个方法之后呢我在这个地方第一步在这是不是就可以调用这个方法然后呢就把这个参数给他传进去呗一个是repayment plan啊一个是这个流水号哎那大家看一下我这个第几步就搞定了对第一步就搞定了啊就是构造请求数据
+[13:01] 那数据有了之后或者封装好之后我们接下来就可以调用什么非印代理去发请求了我首先是不是得把非印代理给它注入进来我们这还没有注入过at然后就是谁private刚才我们那个代理叫depository对吧depository应该是注入进来之后我们就可以调用刚才咱定义的方法
+[13:36] 是不是就往这发起远程请求了啊啊这个大家都比较熟悉代码跑到哪去了在这来咱开始调用这个方法就是是这个方法吗对就是这个方法然后呢把这个上面封装好的这个数据啊就这个对象呢给他扔进去没错吧然后呢这样代码一直行的话是不是就相当于就开始一点三月发请求了对不对
+[14:07] 然后到存款代理服务那边从那里服务呢然后就开始走一点4一直到什么一点9这块功能咱不用管之前已经开发过了那他指引完之后是不是该该该返回东西了对不对我们在这要做一个接收他返回的还是咱比较熟悉的那个什么呀rest responserest i s tst response那这个范型呢是子符串起个啥名字呢就叫rest response
+[14:39] 结果是不是就在这个对象里边那咱接下来就可以返回这个结果了return怎么取这个值大家看一下他这是不是要布尔类型对不对要布尔类型那他这里边返回的应该是比如说成功的话是不是那五个零有印象吗五个零那他这要的是布尔类型我是不是得做一个一个什么对比就行了我点get什么rease out不就是得到那个什么那五个零那个值了
+[15:09] 然后呢我跟这个什么呀跟那个五个零五个零是我们以前是从哪取的呀对从这吧点成功是他对不对别忘了要调用他的给他扣的话得到自我帅这个不又表示那五个零就表示成功吗那我从这里边取一下这个结果然后跟呢这个五个零做一个对比如果是处就证明成功了如果这个一对比发现两个值不一样就是否则就证明咱这一块处理什么呀失败
+[15:41] 所以说这是第二阶段的代码咱就开发完了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现还款服务中，通过 Feign 调用存管代理服务进行预授权交易的业务逻辑。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 RepaymentController 中的 @PostMapping("/start-repayment") 方法，用于启动还款流程，接收 ProjectWithTendersDTO 参数。
+画面2：展示还款服务与存管代理服务、存管系统的交互流程图，包含多个步骤如“生成还款计划”、“生成交易记录”、“预处理请求”等。
+画面3：与画面2相同，为流程图的延续展示。
+画面4：展示 RepaymentServiceImpl 中的 executeRepayment 方法，用于执行还款逻辑，调用 saveRepaymentPlan 方法。
+画面5：展示 PPT 页面，内容为“4.2 功能实现”，包含 FeignClient 定义的接口 @FeignClient(value = "depository-agent-Service") 和在 RepaymentServiceImpl 中实现的 preRepayment 方法。
+画面6：与画面2相同，为流程图的延续展示。
+画面7：展示 UserAutoPreTransactionRequest 类的定义，包含 @ApiModelProperty 注解的字段如 amount、requestNo、userNo 等。
+画面8：展示 RepaymentServiceImpl 中的 preRepayment 方法，用于调用存管代理服务的 userAutoPreTransaction 方法。
+画面9：展示 RepaymentServiceImpl 中的 preRepayment 方法，用于构造 UserAutoPreTransactionRequest 对象。
+画面10：展示 RepaymentServiceImpl 中的 preRepayment 方法，用于设置请求流水号。
+画面11：展示 RepaymentServiceImpl 的类定义，包含 @Service、@Transactional 注解，以及注入的 Mapper 对象。
+画面12：展示 RepaymentServiceImpl 中的 startRepayment 方法，用于生成 RepaymentDetail 对象并插入数据库。
+画面13：展示 RepaymentServiceImpl 中的 preRepayment 方法，用于调用存管代理服务的 userAutoPreTransaction 方法。
+画面14：展示 RepaymentServiceImpl 中的 preRepayment 方法，用于返回调用存管代理服务的结果。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+@ImplicitParam(name = "projectWithTendersDTO", value = "通过i5获取的信息",
+        required = true, dataType = "ProjectWithTendersDTO",
+        paramType = "body")
+@PostMapping("/start-repayment")
+public RestResponse<String> startRepayment(@RequestBody ProjectWithTenderDTO projectWithTendersDTO) {
+    String result = repaymentService.startRepayment(projectWithTendersDTO);
+    return RestResponse.success(result);
+}
+```
+
+画面4：
+```java
+@Override
+public void executeRepayment(String date) {
+    //查询到期的还款计划
+    List<RepaymentPlan> repaymentPlanList = selectDueRepayment(date);
+    //生成还款明细
+    repaymentPlanList.forEach(repaymentPlan -> {
+        RepaymentDetail repaymentDetail = saveRepaymentDetail(repaymentPlan);
+    });
+    //未完待续
+}
+
+@Override
+public Boolean preRepayment(RepaymentPlan repaymentPlan, String preRequestNo) {
+    return null;
+}
+
+//保存还款计划到数据库
+public String saveRepaymentPlan(ProjectWithTendersDTO projectWithTendersDTO,
+        RepaymentPlan repaymentPlan) {
+}
+```
+
+画面5：
+```java
+@FeignClient(value = "depository-agent-Service")
+public interface DepositoryAgentApiAgent {
+    @PostMapping("/user-auto-pre-transaction")
+    RestResponse<String> userAutoPreTransaction(@RequestBody UserAutoPreTransactionRequest userAutoPreTransactionRequest);
+}
+
+@AutoWired
+private DepositoryAgentApiAgent depositoryAgentApiAgent;
+```
+
+画面7：
+```java
+public class UserAutoPreTransactionRequest {
+    @ApiModelProperty(value = "冻结金额")
+    private BigDecimal amount;
+    @ApiModelProperty(value = "请求流水号")
+    private String requestNo;
+    @ApiModelProperty(value = "投资人用户编码")
+    private String userNo;
+    @ApiModelProperty(value = "预处理业务类型")
+    private String bizType;
+    @ApiModelProperty(value = "红包金额")
+    private BigDecimal preMarketingAmount;
+    @ApiModelProperty(value = "备注")
+    private String remark;
+}
+```
+
+画面8：
+```java
+@Override
+public Boolean preRepayment(RepaymentPlan repaymentPlan, String preRequestNo) {
+    //1. 请求数据
+    final UserAutoPreTransactionRequest userAutoPreTransactionRequest =
+            generateUserAutoPreTransactionRequest(repaymentPlan, preRequestNo);
+    //2. 请求存管代理服务
+    final RestResponse<String> restResponse = depositoryAgentApiAgent
+            .userAutoPreTransaction(userAutoPreTransactionRequest);
+    //3. 返回结果
+    return DepositoryReturnCode.RETURN_CODE_00000.equals(restResponse.getResult());
+}
+```
+
+画面9：
+```java
+private UserAutoPreTransactionRequest generateUserAutoPreTransactionRequest(RepaymentPlan repaymentPlan, String preRequestNo) {
+    // 构造请求对象
+    UserAutoPreTransactionRequest userAutoPreTransactionRequest = new UserAutoPreTransactionRequest();
+    // 冻结金额
+    userAutoPreTransactionRequest.setAmount(repaymentPlan.getAmount());
+    // 预处理业务类型
+    userAutoPreTransactionRequest.setBizType(PreprocessBusinessTypeCode.REPAYMENT.getCode());
+    // 标的号
+    userAutoPreTransactionRequest.setProjectNo(repaymentPlan.getProjectNo());
+    // 请求流水号
+    userAutoPreTransactionRequest.setRequestNo(preRequestNo);
+    // 投资人用户编码
+    userAutoPreTransactionRequest.setUserNo(repaymentPlan.getUserNo());
+    // 关联业务实体标识
+    userAutoPreTransactionRequest.setBidId(repaymentPlan.getId());
+    // 返回结果
+    return userAutoPreTransactionRequest;
+}
+```
+
+画面11：
+```java
+@Service
+@RequiredArgsConstructor
+public class RepaymentServiceImpl implements RepaymentService {
+    @Autowired
+    private PlanMapper planMapper;
+    @Autowired
+    private ReceivablePlanMapper receivablePlanMapper;
+    @Autowired
+    private RepaymentDetailMapper repaymentDetailMapper;
+    @Transactional(rollbackFor = BusinessException.class)
+    public String startRepayment(ProjectWithTendersDTO projectWithTendersDTO) {
+        //生成借款人还款计划
+    }
+}
+```
+
+画面12：
+```java
+if (repaymentPlan != null) {
+    repaymentDetail = new RepaymentDetail();
+    //还款计划标识
+    repaymentDetail.setRepaymentPlanId(repaymentPlan.getId());
+    //实付金额
+    repaymentDetail.setAmount(repaymentPlan.getAmount());
+    //实际还款时间
+    repaymentDetail.setRepaymentDate(LocalDateTime.now());
+    //请求流水号
+    repaymentDetail.setRequestNo(CooloUtil.getNo(CodePrefixCode.CODE_REQUEST_PREFIX));
+    //未同步
+    repaymentDetail.setStatus(StatusCode.STATUS_OUT.getCode());
+    //保存详情
+    repaymentDetailMapper.insert(repaymentDetail);
+}
+return repaymentDetail;
+```
+
+画面13：
+```java
+@Override
+public Boolean preRepayment(RepaymentPlan repaymentPlan, String preRequestNo) {
+    //1. 请求数据
+    UserAutoPreTransactionRequest userAutoPreTransactionRequest = generateUserAutoPreTransactionRequest(repaymentPlan, preRequestNo);
+    //2. 请求存管代理服务
+    RestResponse<String> restResponse = depositoryAgentApiAgent.userAutoPreTransaction(userAutoPreTransactionRequest);
+    //3. 返回结果
+    return restResponse.getResult().equals(DeputyReturnCode.RETURN_CODE_00000);
+}
+```
+
+画面14：
+```java
+@Override
+public Boolean preRepayment(RepaymentPlan repaymentPlan, String preRequestNo) {
+    //1. 请求数据
+    UserAutoPreTransactionRequest userAutoPreTransactionRequest = generateUserAutoPreTransactionRequest(repaymentPlan, preRequestNo);
+    //2. 请求存管代理服务
+    RestResponse<String> restResponse = depositoryAgentApiAgent.userAutoPreTransaction(userAutoPreTransactionRequest);
+    //3. 返回结果
+    return restResponse.getResult().equals(DeputyReturnCode.RETURN_CODE_00000);
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面5：PPT 标题为“4.2 功能实现”，内容包含：
+- 定义 Feign 代理：@FeignClient(value = "depository-agent-Service")
+- 在 RepaymentServiceImpl 类中实现 preRepayment 方法。
+
+画面2、3、6：展示还款服务与存管代理服务、存管系统的交互流程图，包含以下步骤：
+- 还款服务 → 存管代理服务 → 存管系统
+- 步骤1.1：查询到期的还款计划
+- 步骤1.2：生成还款计划，状态为“未同步”
+- 步骤1.3：生成还款明细，状态为“未同步”
+- 步骤1.4：通过存管生成签名及账单
+- 步骤1.5：保存交易记录，状态为“未同步”
+- 步骤1.6：预处理请求，状态为“处理中”
+- 步骤1.7：存管处理成功，状态为“已处理”
+- 步骤1.8：更新交易记录，状态为“已同步”
+- 步骤1.9：更新交易记录，状态为“已同步”
+- 步骤1.10：还款
+

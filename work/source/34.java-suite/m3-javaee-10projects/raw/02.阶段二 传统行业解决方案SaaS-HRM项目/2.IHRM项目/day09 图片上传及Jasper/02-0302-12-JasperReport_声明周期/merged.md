@@ -1,0 +1,146 @@
+# 12-JasperReport：声明周期
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day09 图片上传及Jasper
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day09 图片上传及Jasper\12-JasperReport：声明周期_【海量资源尽在 ubkz.com】.mp4
+- 时长 8分17秒（音频 497s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 简单的对这个Jasper Report做了一个介绍那我们接下来呢就是对Jasper Report我们要想用它进行开发第一个开发步骤做一个简单的总结那在这里面呢要跟各位简单的来聊一下就是Jasper Report它的一个生命周期当然了有人习惯将生命周期有人习惯叫开发的这么几个阶段那并且呢和各位简单的来聊一下就是对于Jasper Report它的一个内部原理究竟是什么样的
+[00:31] 那当然了除了这个之外我们最终会总结出我们如果要想使用Jasper Report进行报表的一个生成我们的一个开发流程又是怎么样那我们接下来就一个一个的来看首先呢就是对于Jasper Report来说呢有人习惯把Jasper Report从开始到最后生成PDF分成三个阶段那我们这边叫做它的一个生命周期那其实有的朋友就说了生成一个PDF嘛哪有这么
+[01:01] 费劲哪有这么麻烦呀直接点一个按钮报表就PDF就生成了吗其实不是这样那PDF只是完整一个生命周期的最后一个阶段那整个生成PDF是有三个阶段第一个阶段我们把它叫做设计那这个设计阶段是什么含义是这样就以我当前给各位讲课的这个PDF来举例那一个PDF呢有可能有自己的表头有可能有自己的结尾部分有中间的数据填充的部分
+[01:30] 那为了让一个PDF更加好看一些是不是应该有这么一个样式的一个设计啊所以第一件事就是一个设计阶段就是再去对PDF它的一个报表样式再做设计那设计好了之后我们要进入到第二个阶段那第二个阶段是干嘛的呢那第二个阶段其实就是有了PDF的总的报表的样式接着加上数据是不是就能对这个报表进行把它让它
+[01:59] 显示出更加丰满的我们需要的内容啊没错吧所以第二个阶段呢叫做执行阶段有人也习惯把它称之为数据填充阶段也就是第一个报表全部设计好了但是里面数据都没有那第二个报表加上数据那把报表的基本的雏形都已经准备好了那接着第三个阶段就是把你这些报表输出出来也就是比如说以PDF形式打印下载
+[02:26] 能理解吧所以对于一个Jasper Report它的生平周期有三个阶段那这个三个阶段有设计阶段有执行阶段有输出阶段那设计阶段呢其实就是生成一个模板那这个模板包含了我整个PDF报表的它一个布局比如说呢上面头是什么尾是什么等等那第二个呢就是执行阶段那执行阶段就是在这个报表模板当中填充数据那填充好的数据接着第三个阶段就是输出
+[02:54] 输出就是以PDF形式进行下载或者以其他的形式展示就是这个含义那当然了这三个阶段里面呢还涉及到了很多的一些细节问题那这些细节问题呢我是以代码的形式和各位简单的来聊一下好了这个代码呢在今天资料当中呢也给各位准备了好了我们简单的来看一下在今天的资源这边有一个生命周期测试的这么一个代码
+[03:23] 好了这边呢我们可以打开我们的idea在这边还是就刚才七牛云的这个空工程里来了我创建一个modelcn.itcast好了这边呢我就叫做jasperreport吧jasper我call一下就叫jr吧jr-demook就叫jr-demo好了那这个工程里面呢我们需要引入坐标那这个坐标呢在今天资料当中给各位准备了
+[03:54] 注意这个是快速的去搞这么一个工程里面有这么几行代码需要跟各位简单的对它的生命周期做一个说明这个代码呢不需要各位掌握好了这个坐标呢我拷过来拷过来之后呢让它去构建多一底盆对啥OK好了坐标有了那接下来呢这边写一个测试类sin.itcast.gr我就叫做.grdemo了
+[04:27] OK里面这个代码呢比较简单也给各位准备好了直接想都不要想直接callCtrl C好了这边Ctrl V好了这个代码呢我需要跟各位做一个解释这个代码里面有这么三个方法第一个叫做create jasper好了第二个呢叫做create jrprint好了第三个叫做
+[05:01] show pdf那第一个方法其实这几个方法其实对应的是我们刚才说过的生命周期里面涉及到的一些内容那首先呢我们这边是不是有一个设计阶段那设计阶段最终是要得到一个模型这么一个模板那这个模板呢在Jasper Report里面它叫做什么它叫做JRXXML叫做JRXXML那它的本质呢其实就是一个XML文件
+[05:29] 能理解吧所以我们设计成功之后我们要得到一个文件这个文件它的本质是一个SML那在今天的资料当中也给各位准备好了一个JRXSML来看Test01那好了我们接下来把它打开你看一下是不是就是一个Jasper Report一个SML配置文件那这个配置文件里面这边会对一些内容进行了一个声明比如说这边会输出一句话好强大比如说它的字体华文送体那底下会有一个
+[05:59] 配置叫做配置footer这个是不是代表的是一个页的页角那这个页角里面输出一句话看日播客出品划分送体好了那这边呢还有一个page header就是页头那这个页头里面注意image是一张图片所以这个就是我们创建好的一个XML的模板好了那这个模板创建好了之后接下来我们关注的就是第二个点第二个点呢就是要进行执行那执行
+[06:30] 那怎么执行那执行呢其实就需要将JR XML给它编译成.JASPER文件那通过这个JASPER文件去执行把数据填充到这个JASPER文件当中所以我们第二步需要把第一步的这个XML转化成JASPER文件那有了JASPER文件再结合上数据再结合上数据才能构造我整个PDF的这么一个结构
+[07:03] 能理解吧好了接着第三件事第三件事输出输出阶段其实就比较简单了输出阶段其实就是把我们之前扎子盆文件加上数据给以其他的形式展示出来比如说我们可以预览一下PDF比如说可以撇载PDF这个是我们三个阶段接下来我这个代码其实就是围绕着这三个阶段来做文章的首先第一个代码它代表的什么含义就是将我们的PDF模板创建为编译
+[07:36] 编译为叫做JASPER文件好了接着第二件事第二件事就是将JASPER文件和我们的数据进行填充那填充之后也会获得一个对象那这个对象叫做JRPRINT当然这个代码呢不需要各位去重点掌握这个代码不重要那咱们主要是看一下分析它的一个原理就可以了好了第三个其实就是展示了
+[08:14] 我们叫预览OK
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲JasperReport的生命周期（设计、执行、输出三个阶段）及其在Java项目中的开发步骤和相关代码实现。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 展示JasperReport生命周期图，包含设计阶段（MyReport.jrxml）、执行阶段（MyReport.jasper + Data）、输出阶段（MyReport.pdf），并说明三个阶段分别为设计、执行、输出。
+画面2: PPT标题为“4.2 JasperReport原理简述”，下方有地址和电话信息。
+画面3: PPT标题为“4 JasperReport的开发步骤”，子标题“4.1 JasperReport生命周期”，内容与画面1相同。
+画面4: 与画面1内容相同，展示JasperReport生命周期图。
+画面5: IntelliJ IDEA界面，显示项目“qinlu-demo”。
+画面6: Windows资源管理器，显示“生命周期测试”文件夹下的“PDFTest.java”、“pom.xml”、“test01.jrxml”文件。
+画面7: IntelliJ IDEA中打开的“pom.xml”文件，内容为Maven配置。
+画面8: IntelliJ IDEA中右键“jr-demo”项目，弹出“Find Usages”等选项。
+画面9: Windows资源管理器，显示“生命周期测试”文件夹下的“PDFTest.java”、“pom.xml”、“test01.jrxml”文件。
+画面10: IntelliJ IDEA中打开的“JDemo.java”文件，包含三个方法：createJasper、createJprint、showPdf。
+画面11: PPT标题为“4.2 JasperReport原理简述”，内容与画面1相同。
+画面12: Notepad++中打开的“test01.jrxml”文件，内容为JasperReport设计文件。
+画面13: PPT标题为“4.2 JasperReport原理简述”，内容与画面1相同。
+画面14: IntelliJ IDEA中打开的“JDemo.java”文件，显示“createJprint”方法的代码。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面7: pom.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.itcast</groupId>
+    <artifactId>jr-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <pr>
+
+画面10: JDemo.java
+public static void main(String[] args) {
+    try {
+        String path = "C://Users//ThinkPad//Desktop//ihrm//day9//资源//test01.jrxml";
+        JasperCompileManager.compileReportToFile(path);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    public static void createJprint(){
+        try {
+            String path = "C://Users//ThinkPad//Desktop//ihrm//day9//资源//test01.jasper";
+            //通过Jasper文件填充数据，生成报表
+            JasperFillManager.fillReportToFile(path, new HashMap(), new JREmptyDataSource());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showPdf(){
+        try {
+            String path = "C://Users//ThinkPad//Desktop//ihrm//day9//资源//test01.jasper";
+            JasperViewer.viewReport(path, isXMLFile: false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+画面12: test01.jrxml
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/jasperreports.xsd">
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="6.14.0"/>
+    <property name="ireport.jasperReportVersion" value="
+

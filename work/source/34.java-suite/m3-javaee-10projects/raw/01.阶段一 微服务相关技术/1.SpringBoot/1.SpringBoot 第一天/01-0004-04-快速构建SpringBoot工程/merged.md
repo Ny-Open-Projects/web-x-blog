@@ -1,0 +1,137 @@
+# 04-快速构建SpringBoot工程
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：1.SpringBoot/1.SpringBoot 第一天
+- 源文件：01.阶段一 微服务相关技术\1.SpringBoot\1.SpringBoot 第一天\04-快速构建SpringBoot工程_【海量资源尽在 ubkz.com】.mp4
+- 时长 8分34秒（音频 514s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 介绍完Spring Boot快速入门的一个工程搭建的方式之后很多同学说那个破幕文件我不会写然后那个引导类我也不会写其实这些东西都是一些固定的写法都比较简单但是有同学就是说我不想写怎么办呢IDEA的工具很强大它为我们提供了一种快速构建Spring Boot工程的一种方式那么接下来我们就来使用IDEA
+[00:30] 来进行一个快速构建Spring Boot的工程并且呢也同样定义一个Hello Controller然后返回Hello Spring Boot好接下来我们来打开这个idea然后呢我们把这个控制台给它关掉关掉之后呢我们还是同样建一个模块好右键你有一个模块这个模块呢刚才我们选择的是这个Maven那么接下来我们在这个地方快速构建我们选择这个Spring对吧
+[00:59] 选择Spring呢你看注意上面有一个提示啊它说Create Spring Boot ApplicationsUsing Spring Boot Starters快速构建的方式选择它选择它之后呢这有一些默认的选项你的SDK的版本就是你的JDK版本我这个地方用的是1.8然后呢选择一个构建的一个网址这个网址呢是start.spring.io这个网址呢待会我们需要来访问看一下现在我们先不管我们下一步就行了
+[01:28] 下一步之后呢这个地方是需要连网的如果你没有网络这个界面是打不开的然后呢接下来他让你写对应的group IDartifact ID就是你的坐标我们写com.it黑码吧然后呢这个地方我们就写一个sprintboot.init隐匿的这种初始化的这种方式好contra c弄完了之后呢接下来让你选你是mayweb的项目呢你看这有很多的构建工具啊
+[01:57] 主要有两种一个是Maven的项目还是一个Grade的项目我们当然是Maven项目了你选择的语言是用Java呢Cultaline呢还是什么语言我们用Java语言当然打包方式用Jar呢还是WAR肯定是jar 包了版本呢八版本没有问题然后接下来这个地方就是你项目的一个一些坐标的信息NameWash然后呢这个是描述信息啊都可以删掉其实没什么用呢然后下一步这个地方就是我们的Spring Boot这个项目的一个包
+[02:27] 那个包呢我们就就叫这个名吧我们也不改了我们下一步下一步之后呢这个地方就非常的好了你刚才不是记不住这些依赖吗没有关系他给你提供了一种图形化的界面你自己选就行了勾选就行了比如说你要做web开发这个地方有一个web看好stream-web好我把它勾上勾上之后呢你注意看这个地方就有一个了对吧那么比如说你将来要执行做一些其他的操作
+[02:55] 比如说你要做安全控制这个地方有Spring Security等等我们当然现在只是一个web其他的我们后期用到了我们再来讲解然后我们下一步下一步之后这是我们的工程的名称我们的构建路基好Finish这样我们Spring Boot的工程就构建好了好了之后稍等一下它需要去下载一些东西那么构建好了之后我们来看这个项目好Spring Boot init里边有这么一些东西
+[03:24] 这些东西呢你可以都忽略掉当然呢你可以把它删除掉没什么用啊比如说这是Git的ignore就是Git的忽略的东西好那么我们打开PoM文件看一下看一下这个地方首先它帮我引入了是不是这个地方引入了一个parent对吧引入了一个parent引入了parent之后呢帮我规定了这个Java的washing就是我们使用1.8的这么一个编译的版本然后呢帮我们引入了一个starter-web刚才我们勾选的这个对不对
+[03:53] 还帮我引入了一个叫做StarterGunTest就是我们测试用的这么一个工具或者说依赖坐标OK吧然后呢还帮我引入了一个Maven的Plugin这个我们也可以删除掉当然留着也没有关系那么这个PoM文件它帮我自动生成了并且呢帮我把需要的东西都引进来了然后呢我们再来看SRCMANJavaCOM这个包里边有了吧然后呢引导类你看SpringBootInit
+[04:24] 这是我们的项目的这个地方呢叫做我们项目的目录对吧引导类来看一下引导类里边Spring Boot Application注解帮我加好的然后呢这项代码呢他也帮我写好的对吧其实呢我们直接就可以来启动这个项目了但是呢这个地方我们还是没有编写那个Controller没有关系待会我们把Controller写一下就可以了可以看一下启动是没有任何问题的停掉之后呢我们接着来看
+[04:55] 除了这个地方呢它其实还帮我去在resource里边写了这么一些文件夹然后呢写了一个配置文件的一个空文件这个文件待会我们会重点讲解现在我们用不到配置然后接下来在test里边它也帮我写好了这个test的gunit test的这么一些空代码我只需要在这里边填东西就可以了那么至于这个gunit待会我们再来讲解那么这一块呢我们看到了它帮我去写好了这个pom文件
+[05:25] 帮我写好了这个启动的引导类那么接下来我们在这个地方直接来写一个Controller就可以了比如说叫做hello controllerOK然后呢在里边我们该写我们的代码就写就行了request rest Controller然后呢同样我们在这里边写一个方法public string叫做hello好然后呢我们在这里边返回一个字符串就可以了比如说hello spring
+[05:54] boot222对吧刚才我们是第一个我们为了以示区分同样我们在这写一个request mapping然后写一个路径hello代码就写完了非常的简单然后启动一下这个项目启动完成了之后我们来访问一下看一下能不能访问到hello supremeboot222这么一行字符串弄完了之后我们把这个路径复制一下复制一下之后好
+[06:25] 哈喽还是这个路径因为刚才我们那个服务已经停掉了走来看这行字幕串就成功的访问到了所以呢使用Spring Boot用来快速的构建其实是非常简单的IDEA这个功能还是比较强大的那么IDEA它依赖的是谁呢我们来看一看其实这个地方呢我们再来说一下Null一个模块然后呢选择这个SpringInitLayer这么一个东西
+[06:52] 它有这么一个网址这个网址大家来看一看叫做starter.sprint.io我们可以来看一下这其实并不是我们idea提供的功能是Sprint Boot给我们提供的功能当然我们也可以去在这个地方去找一下输入这个网址也可以但是如果你记不住的话你知道怎么找到它就可以了我们进到Sprint的官网然后来看这个Sprint Boot下边这个地方有一个
+[07:22] getting started点进去点进去之后呢这个地方很熟悉是吧好我们在这个地方点进去这就是我们刚才那个网址start.sprint.io快速来构建Sprint Boot工程的这么一个网址你看是不是让你选择你是什么项目类型Maven的还是Grade的我们当然是Maven的语言是Java的然后呢Sprint Boot的版本2.1.8是最新的稳定版这都是Snapshot这种测试版本OK
+[07:50] 那么这个弄完了之后呢我们的项目的一个组ID然后呢artifact ID然后呢让我们选择一些选项我们都可以不用去选然后dependencies就是让我们选择依赖了你看这个地方就有很多比如说你在这地方可以搜索搜索一下比如说你要做web开发你看这个地方spring-web加过来这个地方就加过来了当然你不想要把它删掉纯图性化界面操作的就不需要我们再去记这些依赖的坐标了
+[08:18] 非常的方便好那么我们也介绍完了使用idea来快速的构建Stream Boot的工程那么将来呢为了方便期间我们再构建工程我们可能就用这种方式来构建了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 IntelliJ IDEA 通过 Spring Initializr 创建一个 Spring Boot 项目，并编写一个简单的 RESTful 控制器并运行。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：打开 IntelliJ IDEA，显示项目“Spring Boot-helloworld”，运行窗口显示“HelloApplication”已运行。
+画面2：点击“New Module”，选择“Spring Initializr”创建 Spring Boot 项目。
+画面3：在 Spring Initializr 中选择“Web”依赖。
+画面4：显示项目 `pom.xml` 文件，其中包含父依赖和版本信息。
+画面5：在 `pom.xml` 中高亮显示 `<build>` 标签内的插件配置。
+画面6：显示 `SpringbootinitApplication.java` 文件，包含 `@SpringBootApplication` 注解和 `main` 方法。
+画面7：显示 `application.properties` 文件，同时控制台显示 Spring Boot 应用已启动。
+画面8：在项目结构中选中 `SpringbootinitApplicationTests.java`，准备编写测试类。
+画面9：在 `HelloController.java` 中编写控制器代码，使用 `@RestController` 和 `@RequestMapping` 注解。
+画面10：浏览器访问 `http://localhost:8080/hello`，页面显示“hello Spring Boot !”。
+画面11：在 IntelliJ IDEA 中，通过“File”菜单打开“Settings”设置。
+画面12：在浏览器中搜索“spring.io”，显示搜索结果。
+画面13：访问 Spring 官网的“Building an Application with Spring Boot”指南页面。
+画面14：在 IntelliJ IDEA 中，显示 `HelloController.java` 文件，代码已编写完成。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面4 `pom.xml`：
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.6.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.ithema</groupId>
+    <artifactId>Spring Boot-init</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Spring Boot-init</name>
+    <description>demo project for Spring Boot</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
+画面5 `pom.xml`：
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+```
+
+画面6 `SpringbootinitApplication.java`：
+```java
+package com.ithema.springboottinit;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+@SpringBootApplication
+public class SpringbootinitApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootinitApplication.class, args);
+    }
+}
+```
+
+画面9 `HelloController.java`：
+```java
+package com.ithema.springboottinit;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+public class HelloController {
+    @RequestMapping("/hello")
+    public String hello() {
+        return "hello Spring Boot 222!";
+    }
+}
+```
+
+4) PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面13：Spring 官网“Building an Application with Spring Boot”页面，包含“Get the Code”区域，提供 HTTPS 和 SSH 两种方式下载代码，以及“Push to Pivotal”按钮。
+
+5) 无。
+

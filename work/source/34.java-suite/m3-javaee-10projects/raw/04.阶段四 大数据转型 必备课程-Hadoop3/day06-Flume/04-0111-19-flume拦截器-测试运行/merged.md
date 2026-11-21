@@ -1,0 +1,135 @@
+# 19-flume拦截器-测试运行
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day06-Flume
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day06-Flume\19-flume拦截器-测试运行【海量资源尽在 ubkz.com】.mp4
+- 时长 5分37秒（音频 337s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 在配置好之后呢接下来我们就来测试一下好在测试之前呢我们先去写一个脚本这个脚本呢可以像文件中呢不停的写数据我们可以在这个在node01和node02上呢写一个设要脚本注意两个都要写为什么呢因为呢我们的node01需要监控这三个文件node02呢也需要监控好那我在这个在这个node02上在这个目录下面
+[00:29] 这样在这个目录下面我们来创建这么一个目录吧再打开这个咱们先看这个灵异好我们可以用make第二-p地归创建创建这么一个目录好回到这个export Service这个目录下面好在这里呢我们来写一个脚本文件好写个脚本文件搜在这个文件里面呢我们写一写脚本内容我们来看这个内容干了什么事好稍等
+[01:07] 这个是一个非常简单的一个wire循环这个每次循环的时候呢它执行三个data命令并且向这三个文件呢分别输出对应的日志数据OK那么这里边呢大家注意这个里边呢每隔0.5秒那么都会去生成这么些数据OK这个相当于呢向这个文件呢不停的增加一些日志信息就可以了好这是这个脚本那么同样的我们呢需要在
+[01:34] node02上也去做这么一个事情那这样子我可以呢我在node02上我也建了这个目录make dr好把这个路径呢复制一下也建了这么一个目录好然后创建好创建完之后我们回到这里export service114好在这里我们来建一个文件建一个也是创建一个这么一个脚本或者说你直接从第二台复制一个过来也行
+[02:06] 进到sharehouse里面去scp survey.shnode02 copy到node02$pwd好我们来检测一下这里边已经有了好有了之后呢我们接下来就可以启动我们的脚本好那么这个里边呢启动的时候呢看这张图我们应该先启动谁呢大家想想是启动这个node01node02还是node03很显然我们应该先启动node03
+[02:37] 因为node03需要等待这个数据OK那我在这里呢我就启动node03120这台机子我来启动好回到这个主模录在这里的话呢我们来启动node03把这句话呢直接复制过来走一下回车好node03已经起来了那么起来之后呢再启动node01和node02好我们先启动node02吧好在这里把node02
+[03:10] 这句话拿过来走这个目录不对回到应该回到Export Service Apache Flume走这个也启动了启动之后再启动诺诺01Port Service Apache Flume来启动它俩启动的方式是一样的好启动了完成之后我们还要向脚本文件中添加数据那怎么添加呢我们需要运行那个share脚本在这个share伺里面
+[03:47] 有个shservice走好这个时候我们就开始运行了运行了之后我们看看有没有反应你看它是不是在收到数据啊OK这是node01已经启动这个脚本那我把node02这个脚本呢也启动一下来我们呢可浓一个绘画好在这里我们来稍等在我们的export Service shells里面呢我们shservice.走
+[04:20] 我们来看也启动了两台都在去收集数据我们来看看Note03你看它不停的在收集数据那还要看看我们的这个HDFS呢有没有收到数据因为我们刚才画这个图啊我们最终把数据呢放在HDFS对应的目录下面放在哪个目录呢我们来看一下我们是放在这个根目录下面一个sourcesource下面logs来打开我们这个我们来访问
+[04:49] Node 015070在这里找到我们有一个saucesauce里边logs你看到没有它是不是分成了三个目录你两台主机access.log它的日志就放在这里你看这里边有个文件文件夹进去这是它对应的文件而这个里面ngx的数据都放在这里还有在向后翻web的数据都放在这里
+[05:18] 我不管你有多少台主机只要你们的这些拦截器的键是相同的那么它就会分到同一个目录OK那么到此呢就证明了我们这个拦截器是可以使用的OK那么关于拦截器的使用呢我们就先说到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 node01 和 node02 上开发 shell 脚本模拟生成日志数据，并在 node03 上配置 Flume 服务以收集这些日志数据。
+
+2) 按时间顺序列出每张画面的要点：
+   画面1：在 node01 上创建并编辑 shell 脚本 server.sh，用于模拟生成 access.log、web.log 和 Nginx.log 日志。
+   画面2：在 node01 上使用 scp 命令将配置文件 exec_source_avro_sink.conf 分发到 node02。
+   画面3：在 node01 上编辑 server.sh 脚本，添加写入日志文件的命令。
+   画面4：在 node01 上编辑 server.sh 脚本，完成写入日志文件和休眠的代码。
+   画面5：在 node01 上使用 scp 命令将 server.sh 脚本分发到 node02。
+   画面6：在 node03 上配置 Flume，定义 source、interceptor、channel 和 sink。
+   画面7：在 node03 上启动 Flume 服务，显示加载 Hadoop 和 Hive 库的环境信息。
+
+3) 画面里出现的代码、配置、命令、目录结构、SQL、XML/YAML 配置：
+   画面1：
+   ```
+   cd /export/servers/shells
+   vim server.sh
+   ```
+   ```
+   #!/bin/bash
+   while true
+   do
+   date >> /export/servers/taillogs/access.log
+   date >> /export/servers/taillogs/web.log
+   date >> /export/servers/taillogs/Nginx.log
+   sleep 0.5;
+   done
+   ```
+
+   画面2：
+   ```
+   [root@node01 conf]# ls
+   agent.conf
+   exec_source_avro_sink.conf
+   ...
+   [root@node01 conf]# scp exec_source_avro_sink.conf node02:$PWD
+   100% 1392 1.4KB/s 00:00
+   ```
+
+   画面3：
+   ```
+   #!/bin/bash
+   while true
+   do
+   date >> /export/servers/taillogs/access.log
+   date >> /export/servers/taillogs/web.log
+   date >> /export/servers/taillogs/Nginx.log
+   sleep 0.5;
+   done
+   ```
+
+   画面4：
+   ```
+   #!/bin/bash
+   while true
+   do
+   date >> /export/servers/taillogs/access.log
+   date >> /export/servers/taillogs/web.log
+   date >> /export/servers/taillogs/Nginx.log
+   sleep 0.5;
+   done
+   ```
+
+   画面5：
+   ```
+   [root@node01 shells]# cd ..
+   [root@node01 servers]# ls
+   Apache-Flume-1.8.0-bin Hadoop-3.1.1 shell taillogs ZooKeeper-3.4.9
+   ...
+   [root@node01 shells]# scp server.sh node02:$PWD
+   100% 188 0.2KB/s 00:00
+   ```
+
+   画面6：
+   ```
+   a1.channels = c1
+   #定义source
+   a1.sources.r1.type = avro
+   a1.sources.r1.bind = node03
+   a1.sources.r1.port = 41414
+   #添加时间拦截器
+   a1.sources.r1.interceptors = i1
+   a1.sources.r1.interceptors.i1.type = org.apache.flume.interceptor.TimestampInterceptor$Builder
+   #定义channels
+   a1.channels.c1.type = memory
+   a1.channels.c1.capacity = 20000
+   a1.channels.c1.transactionCapacity = 10000
+   #定义sinks
+   a1.sinks.k1.type = hdfs
+   a1.sinks.k1.hdfs.path=hdfs://192.168.174.100:8020/source/logs/%{type}/%Y%m%d
+   "avro_source_hdfs_sink.conf" [New] 38L, 1195C written
+   [root@node03 conf]# cd ..
+   [root@node03 apache-flume-1.8.0-bin]#
+   ```
+
+   画面7：
+   ```
+   Info: Sourcing environment configuration script /export/servers/apache-flume-1.8.0-bin/conf/flume-env.sh
+   Info: Including Hadoop libraries found via /export/servers/Hadoop-3.1.1/conf/flume-env.sh for Hive access
+   Info: Including Hive libraries found via /export/servers/Hadoop-3.1.1/share/Hadoop/Hive/lib/ for Hive access
+   ...
+   SLF4J: Class path contains multiple SLF4J bindings
+   SLF4J: Found binding in [jar:file:/export/servers/Hadoop-3.1.1/share/Hadoop/common/lib/slf4j-log4j1.6.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+   SLF4J: Found binding in [jar:file:/export/servers/Hadoop-3.1.1/share/Hadoop/common/lib/slf4j-log4j1.7.25.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+   SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+   ```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+   无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+

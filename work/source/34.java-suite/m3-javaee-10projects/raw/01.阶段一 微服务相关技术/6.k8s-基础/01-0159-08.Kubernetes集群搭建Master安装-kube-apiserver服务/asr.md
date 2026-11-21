@@ -1,0 +1,21 @@
+# 声音线转写：08.Kubernetes集群搭建Master安装-kube-apiserver服务
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：6.Kubernetes-基础
+- 源文件：01.阶段一 微服务相关技术\6.Kubernetes-基础\08.Kubernetes集群搭建Master安装-kube-apiserver服务_【海量资源尽在 ubkz.com】.mp4
+- 时长：5分7秒（音频 307s）
+- 转写：faster-whisper-large-v3 / 语言 zh / 10 段
+- 生成时间：2026-10-27 10:30:10
+
+## 逐段转写（教师原声）
+
+[00:00] 下面我们去把我们的Kubernetes相关的服务安装上首先第一个我们去安装一下Kubernetes API Server我们需要把我们Kubernetes安装这个文件去导入到我们当前的目录下我们退一下CD我们K8s里面我们要RJ去把我们当前的K8s的相关的文件导进来我们这里面应该有个K8s这儿
+[00:30] 我们的资料里边这个我们要把Kubernetes Server Linux这个文件导进来之前我们已经介绍过了你可以在网上把它下载下来这样的话我一会儿把它再解压开我们就可以去来进行我们当前Kubernetes的API Server服务的安装我们来看一下它这里边还没有完成有点慢这个文件稍微有点大OK了我这个已经上传完了
+[01:00] 然后我们可以看一下我们把它解压开JSVF我们的Comlabs我们等它解压完我们去进入它的目录下面去看一看在我们Comlabs API Server安装其实跟刚才的步骤是一样的我们需要把我们指定的这三个文件copy一下也是copy到user的bmool下你可以去执行这条命令
+[01:30] 在我们当前这下面再创建一个Kubernetes server的一个服务那再去做它的一个配置文件就可以了那我们看一下这边完成解压完了以后呢我们LL一下现在呢我已经解压开了那我进入我这个Kubernetes这个目录下面大家看进入这个server这个目录在这个下面呢还有个beam目录在这下面我们可以找到我们想要的文件这里边说我们首先要做的事情是
+[02:00] 将这么几个文件呢copy过去稍等一个是Kuber-API server那我们这里面应该可以找到Kuber-API server还有一个是Kuber-ControllerManager就是它还有一个是Kuber Schedule那我们就可以把它copy一下刚才说的Kuber-API server然后还有一个是Kuber-ControllerManager还有一个是Kuber-Schedule
+[02:29] OK你把这几个文件都拷贝到user下的bin目录下把他们都拷贝过去拷贝过去以后其实我们就相当已经把服务安装完了接下来你在这个下面去编辑我们当前的这么一个文件也就是它的Service文件我们需要vi一下user下的lab下的我们的systemd下的system再去创建一个文件
+[02:59] couple-api-server.serverse这个文件是不存在的我们去把它手动编辑一下在这里呢你把这段配置粘贴过来OKshift jj这样的话就OK了然后呢你再去创建一下它的配置文件把这个相关的配置信息标注一下那我们需要呢去先创建一个make dir
+[03:29] 目录ETC下我们的ETSORRY应该是ETC下的KUBERNETESKUBERNETES我们创建这个目录然后呢我们在这个目录下呀去创建它的一个配置文件叫APISERVER这个文件注意这个文件里面呢我们要写些命令你粘贴的时候也要注意了
+[03:57] 这个命令啊是这样的首先呢我们来看一下这里呢我们指定etcd的服务的ip然后呢指定了一下我们随可以去访问也说0.000都可以这个注意一下然后呢我们又指定了对外开放的端口然后指定了我们这个整个集群的一些整个集群的哎稍等整个集群的这个网关
+[04:28] 我们把这都给它往上缩进一下OK这个里边也是我们把这个格式稍微调整一下要不然我们后续会有问题的这样的话我们配置文件就可以了是不是这你把这些都做完以后我们其实对于我这个Kubernetes API Server就已经安装完成了

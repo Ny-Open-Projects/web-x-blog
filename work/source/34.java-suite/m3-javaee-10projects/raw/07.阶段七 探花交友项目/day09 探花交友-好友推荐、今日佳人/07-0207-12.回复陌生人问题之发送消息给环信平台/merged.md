@@ -1,0 +1,148 @@
+# 12.回复陌生人问题之发送消息给环信平台
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day09 探花交友-好友推荐、今日佳人
+- 源文件：07.阶段七 探花交友项目\day09 探花交友-好友推荐、今日佳人\12.回复陌生人问题之发送消息给环信平台_【海量资源尽在 666java.com】.mp4
+- 时长 16分55秒（音频 1015s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好,那么接下来呢,我们来看一下回复陌生人的问题那么首先呢,我们先来看一下我们的Mock接口是在这个位置啊,就是回复陌生人问题那么我们需要去向这个地址呢,去发起一个Post请求然后呢,我们需要提交两个参数那么一个呢,是UID,一个是Replay就是他的回复啊那么我们响应呢,只要响应状态码呢,就可以了那么前面我们分析过,就是说我们去
+[00:29] 回复完成陌生的问题之后其实我们是需要去发送我们的消息给我们的环信平台的所以说我们主要是要去发送这个消息那么下面我们就来实现发送消息给环信那么前面我们所有和环信进行交互的一些接口我们都是放到我们的SSO系统去做一个完成所以说我们发消息给环信也是去
+[00:57] 集成到我们的SSO里面来那么首先呢我们来看一下环信的一个开发文档那么在环信的开发文档中啊有一个叫做发送文本消息因为这一块我们只需要发送文本消息呢就可以了然后呢我们要注意的是呢由于现在呢他就是我当前要去提交问题的这个人呢
+[01:18] 他和我的就是对方的其实并不是好友啊并不能够直接去发送消息那么他呢是需要去通过我们的系统去做发送也就是说要去相当于是去使用我们系统这个角色给对方去发送一个消息那么在我们的环境这个平台呢那么要注意了发送这个文本消息的时候啊那么下面有一个这个from这个字段那么如果from为空就代表着什么呢默认走的是admin
+[01:48] 那么也就是我们这个呃代表着我们系统去发出的这样的一个消息那么如果有form的话那么就会说我这个消息来源于谁啊所以这一点要注意那么呃接下来呢我们就来看一下这个消息的一个具体发送的一个文那么这个呢是他的一个提交的一个地址然后下面这个是他的请求啊投信息然后呢下面这个是请求的一些参数
+[02:12] 那么这个是响应参数那么下面这是一个请求的一个示例啊下面是成功的说这个200那么如果是message结构有问题呢那就是响应这个400然后呢还有就401啊等等那么接下来呢我们就参考这个文档中的这个地址啊以及它的一些参数那么以及它的这个示例那么我们来编写我们的这样的一个这个代码啊那么我们还是先回到我们的SSO这个系统
+[02:40] 那么是在我们的这个位置啊呃然后呢我们找到我们的一个Controller找到我们的Controller叫做环信啊Controller呃然后呢接下来呢我们就在这个位置啊去编写我们这个代码那么我们首先呢写一个呃public然后呢response entity那么这个t呢其实我们就不需要返回内容返回空的啊就可以了然后呢我们写一个叫send的一个message一个这样的一个方法那么我们把它呃设置为这是一个
+[03:09] post 什么呢post 我们的一个 mapping那么设置一个 message好 然后呢我们去设置一个 request param我们需要接收这么几个参数那么第一个参数呢就是我们比如说叫 target就是目标你要发送给谁那我们写一个应该叫 stream target这第一个这个参数那么第二个这个参数呢我们需要去接收一个 request param message
+[03:38] 然后呢我们给他设置一个message啊然后呢我们再这第二个这个参数那么第三个参数呢就是我们的一个什么呢type啊就是你发送的消息是什么类型的那么写一个这个type然后呢stream啊type好那么我们是需要这三个啊这个字段那么大家还缺少一个对吧那么就是你的消息的一个我们的一个这个你看这三个就够了那么
+[04:08] 只是说我们这个type要注意啊那么这个type呢其实是那么它的类型是比较多的有文本类型啊图片还有位置啊等等那我们可以给它设置一个默认值那么比如说我们可以设置一个这个什么呢value啊value等于它然后呢default value啊等于谁呢那就是我们的一个这个text啊就是我们的一个文本也默认了我们发送的就是我们的一个文本
+[04:36] 好那么这样的话呢我们是不是就基本上把我们这个SSO对外所提供的一个接口呢就定义好了那么接下来呢我们就去调用啊我们的这个环信Service里面呢我们定义一个叫做Send a Message这个方法然后我们去做一个消息的一个发送那么传递Target a Message然后呢再传递一个Type传递一个Type
+[05:00] 然后呢他的返回值呢我们期望他返回的是一个布尔类型对吧就是消息是否发送成功啊然后呢一个布尔值那么我们可以去做一个判断那么如果是为true的话那我们就return什么呢我们的一个200对吧然后呢response.ok啊设置一个no啊就可以了然后呢如果一旦出现异常的话那我们来一个try开始处理
+[05:29] 那么如果出现异常的话那我们就return一个就上面这个了那就是return这个500好那么这样的话呢就我们这个Controller是不是就ok了那么写一个注释啊这个就叫发送消息给谁呢给我们的环信啊平台啊好那么这是这个方法那么接下来我们只要实现这个方法是不是就搞定了对吧好那我们把这个结构呢我们先啊创建出来那我们来看一下这里面的内容的一个编写
+[05:59] 那么首先呢我们来拼接我们的这个URL就叫target吧target URL等于谁呢我们先拿到我们上面的这个环细config里面的一个URL然后呢我们再去做一个拼接那我们拼接谁呢就是加到我们这个环细config.get谁呢就是originame然后呢我们再去再去
+[06:28] 应该我们到这加一个斜杠然后我们再去做一个添加race.huanxinconfig.app.name然后我们再去加一个什么我们来看一下我们的文档那么在文档这个位置就会有一个autoname然后加一个app name再加一个messages那么我们再去加一个斜杠messages
+[06:55] OK那么这个URL呢是不是我们就搞定了那么接下来呢我们就去拼接我们的一个请求啊那么首先呢我们肯定需要拿到我们的token那么就通过我们的一个环信token Service.get一个token拿到这个token然后呢我们需要去请求时候去携带它啊对不对那么下面呢我们就需要去设置我们的请求头啊
+[07:24] 那么请求头呢前面我们写过所以说我们就直接把这个就拷贝过来了那么我们来拷贝一下那么拷贝到这个位置来好嘞好那么这个就是请求头来对比一下我们的这个文档啊发现的是没有问题的对吧
+[07:40] 就是这样的一个请求头下面呢我们来看一下我们的请求的参数啊请求的参数那么请求参数呢最终的是需要发送一个json那么我们需要定义一个map啊再去转一个json那么我们定义一个stream然后呢来一个object啊叫做requestestparam那么我们去定义一个我们的这个请求的一个这个map
+[08:08] 那么需要设置哪些参数呢我们一起来看一下那么点put就要去设置第一个呢就是我们这个target type那么这个呢它是发送的目标的类型那么这个us代表是发送给用户这个呢是代表发送给群这个是发送给这个聊天室那么显然呢我们肯定是发送给用户就设置这个us那么还需要设置哪些呢
+[08:36] 这个target就是我们的一个发送的一个目标那么要注意在这里需要使用的是宿主宿主长度建议不要大于20即使只有一个用户的情况下也要使用这种宿主的这种形式所以说我们就来给它设置一下所以在这个位置那么这个一定是一个宿主所以我们可以通过一个
+[09:04] 然后点as a list那么把我们这个target那么即使我们只有一个目标那么也是需要去设置一个
+[09:14] 宿主的然后呢设置一个他这是我们的第二个这个参数啊那么下面我们来看一下message和这个type啊from其实我们这个是不需要的啊那我们就不管他啊然后呢我们来看这两个那么这两个呢我们不能直接往这去丢啊为什么呢我们来看一下下面的一个请求那么我们这个message它其实包含了什么呢包含了两部分那么一个呢是type一个是message
+[09:40] 它会作为一个人体啊那么也就是说在我们的这个位置啊我们还是需要再来定义一个什么呢我们的一个map它呢就是我们的一个叫做message的一个parametermessage param那么它呢会有两个这个参数啊两个这个参数那么第一个这个参数呢就是我们的一个这个message消息那我们来写一下它就是message消息啊message那么这是第一个这个参数那么第二个这个参数呢需要给它设置一个type
+[10:09] 那么这个type就是我们所传入的这个type那么这样的话呢就构造了一个这个message的一个param然后我们需要把这个map再丢到这个什么请求的一个param里面来那么这个那么这个就去掉它了那我们还需要去设置谁呢需要设置一个这个message你可以看一下在这那么它需要设置的是这个message那么我们需要来写一个message然后再设置一个
+[10:39] message一个param这个大家要注意一下那么这个是在他的文档中写的并不是很明确的这样的一个分装但是我们通过他下面的一个请求的一个示例能够看出他其实是这样去做一个编写的那么我们这个from就不需要了那么我们可以去写一下就是什么呢这个from那么我们就不设置它了那么我们把它设置什么呢就是设置空吧
+[11:06] 这只空那我们去加一个这样的一个注释啊那么以后再看代码的时候我们就知道了那么我们其实不设置它的一个目的呢就是要以我们的一个系统去做一个这个发送啊那么接下来呢我们就可以去发送我们这个消息了对不对那我们就去做一个http edit的一个分装那么我们就来定一个http edit啊去做一个分装
+[11:30] 它呢是一个stream那么就叫http-edit等于new一个http-edit那么它呢需要有两个这个参数第一个参数呢就是我们请求帖通这个map.adj.value.extrame谁呢就是我们的request paramo第一个参数那么第二个参数呢就是我们的一个什么呢叫handles就是我们的一个请求头那么它呢会有个异常啊那么这样我们把这一块内容呢全部给它去做一个
+[12:00] 异常的一个补货好嘞好那么我们去把它来拿掉直接用exception去做一个补货然后呢接下来呢我们在接下来我们在这个位置那我们就可以去通过this.我们的这个就是resttemplate然后呢去发起一个post请求post for一个什么edited
+[12:24] 那么需要传递三个参数第一个就是我们target URL那么第二个呢就是我们的一个这个http的一个edit第三个就是我们的一个响应响应我们就给他设置一个classstreamclass就可以了那我们来拿到他的一个response这个edit那么然后呢我们其实最后return谁呢return我们response
+[12:51] this.get什么呢states code value是不是等于200就可以了只要是等于200那肯定这个消息就发送成功了如果不是那消息就发送失败那么这样的话我们这个方法就已经写好了那么接下来我们来对它做一个测试好那么接下来我们就把这个服务就重新启动起来了那么下面我们就来做一个测试在这个位置来打一个断点然后我们去
+[13:20] 进入到我们的这个rest.acland去做一个测试然后呢我们请求地址呢我们需要去改一下改成这个User还信然后呢我们把它呢来改一下User少一个斜杠啊那么就是User还信然后下面呢有一个message发起的是一个post请求那么这个啊其实我们就就不需要了对吧那么我们这个就把答案留着也可以啊
+[13:45] 没有关系的然后呢下面呢我们给他设置三个请求的参数第一个呢是我们的这个target发送给谁呢比如说呢我们可以发送给57这个用户然后呢我们第二个呢就是message发送的一个消息内容是什么
+[14:03] 第三个呢是type那么这个可以不用去写然后呢消息内容呢我们需要去找一下之前的我们的这个消息啊我们找一下那么是在我们前面啊在第五天的时候对吧然后呢我们去学习过这个消息那么我们去找一下我们这个发送消息给这个客户端这一块那我们把这个内容呢就拷贝过来了我们拷贝一下啊这个是我们发送消息的一个内容当然你可以目前可以随便去写啊因为
+[14:31] 我们还没有去真正去去整合到我们的APP里面去做一个测试啊那我们就这么来写吧比如说我当天用户呢是1啊然后呢 nickname呢就是黑马小妹然后呢这个是问题啊这个是这个回答然后呢我们去发起一个请求然后呢走那么哎看一下这一块呢是什么呢404对吧那么是不是我们这个地址啊写的是有问题呢我们这个是不是还没有
+[15:00] 我们写了它这个是对的那么是不是还没有去重启这边我把服务重启一下那么这个SSO服务重启了一下其实并不是重启的问题是我们刚刚这个位置写的一个问题就是我们扫一个S那么我们把这个S我们来加上来叫messages然后我们再次做一个请求走
+[15:22] 那么我们来看一下锻炼是不是就已经来了然后呢下面是我们的这个参数啊没有问题那我们就进入到我们的这个Service方法那我们来看一下那么我们来看一下我们target URL是这样的一个地址那么是不是也是跟这个地址啊是一样的啊这样的一个地址或者说我们可以看一下是在啊这个位置啊这个地址然后呢下面呢我们去获取我们的token啊那么我们
+[15:51] 稍等一下需要去加载我们的token那么token呢也就拿到了然后呢我们继续往下面走去设置我们的请求头然后呢再设置我们的请求的参数啊请求的参数然后呢我们再去设置一个http的一个add然后呢我们去发起这个请求哎注意那么这个呢是不我们就已经就拿到了一个响应体它的并且呢是200对吧然后呢我们就直接啊往后走哎
+[16:19] 看它的返回是不是就是一个true那么就说明什么呢我们这个消息是不是已经就发送成功了那就说明我们的这个接口的编写是不是也就完成了那我们就其实已经完成了发送消息给我们的环境了对吧好那么接下来呢我们来看一下讲义那么在讲义中呢首先这个是control了这个定义然后呢下面这个呢是具体Service的一个编写跟我们刚刚写的呢应该是一样的啊然后我们做了一个测试
+[16:45] 会发现了消息是能够去发送到我们的环信平台的OK好那么关于我们这个发送消息给环信呢那我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何通过 Java 代码实现一个“添加好友”功能的 RESTful 接口，并通过 Postman 和 Mock 服务进行测试。
+
+2) 按时间顺序列出每张画面的要点：
+画面 1: 展示了 Mock 服务中“查询陌生人问题”接口的基本信息和请求参数，包括 Headers 中的 Content-Type 和 Authorization。
+画面 2: 展示了 IM 开发文档中关于消息接口的定义，包括 target、msg、type、from 参数，以及请求示例的 curl 命令。
+画面 3: 展示了 IntelliJ IDEA 中 HuanXinController.java 文件，其中定义了 @PostMapping 注解的 contactUsers 方法。
+画面 4: 展示了 HuanXinController.java 文件中 sendMsg 方法的调用位置。
+画面 5: 展示了 HuanXinService.java 文件中 sendMsg 方法的定义，返回值为 Boolean。
+画面 6: 展示了 HuanXinService.java 文件中 contactUsers 方法的实现，其中构建了 HttpEntity 并设置了 Authorization 头。
+画面 7: 展示了 HuanXinService.java 文件中 sendMsg 方法的实现，使用了 requestParam.put 方法。
+画面 8: 展示了 HuanXinService.java 文件中 sendMsg 方法的实现，使用了 Map 的 put 方法。
+画面 9: 展示了 HuanXinService.java 文件中 sendMsg 方法的实现，定义了 HttpEntity 和 HttpHeaders。
+画面 10: 展示了 HuanXinService.java 文件中 sendMsg 方法的实现，调用了 this.restTemplate.postForEntity。
+画面 11: 展示了 Postman 中对“查询陌生人问题”接口的测试，设置 Authorization 头并发送 GET 请求。
+画面 12: 展示了 Postman 中对“发送消息”接口的测试，设置 target、msg 参数并发送 POST 请求。
+画面 13: 展示了 HuanXinService.java 文件中 sendMsg 方法的实现，调试时查看了 requestParam 和 msgParam 的内容。
+画面 14: 展示了 Typora 中的文档，内容为“4.6.3.3. 实现服务接口”和“4.6.3.1. TodayBestController”部分的代码。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面 3:
+```java
+@PostMapping("contacts/{owner_username}/{friend_username}")
+public ResponseEntity<Void> contactUsers(@PathVariable("owner_username") Long userId, @PathVariable("friend_username") Long friendId) {
+    try {
+        boolean result = this.huanXinService.contactUsers(userId, friendId);
+        if (result) {
+            return ResponseEntity.ok(null);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return ResponseEntity.ok(null);
+}
+```
+画面 4:
+```java
+this.huanXinService.sendMsg(Ta);
+```
+画面 5:
+```java
+public Boolean sendMsg(String target, String msg, String type) {
+    return null;
+}
+```
+画面 6:
+```java
+public boolean contactUsers(Long userId, Long friendId) {
+    String targetUrl = this.huanXinConfig.getOrgUrl() + this.huanXinConfig.getOrgName() + "/" + this.huanXinConfig.getAppName() + "/users/" + userId + "/contacts/users/" + friendId;
+    try {
+        String token = this.huanXinTokenService.getToken();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Type", "application/json");
+        headers.add("Authorization", "Bearer " + token);
+        HttpEntity<String> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(targetUrl, httpEntity, String.class);
+        return responseEntity.getStatusCodeValue() == 200;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+```
+画面 7:
+```java
+requestParam.put("target_type", "users");
+```
+画面 8:
+```java
+requestParam.put("target", Arrays.asList(target));
+```
+画面 9:
+```java
+HttpEntity<String> httpEntity = new HttpEntity<>(headers);
+```
+画面 10:
+```java
+this.restTemplate.postForEntity(targetUrl, httpEntity, String.class);
+```
+画面 13:
+```java
+requestParam.put("target_type", "users");
+```
+画面 14:
+```java
+// 回复陌生人问题
+@GetMapping("/strangerQuestions")
+public ResponseEntity<String> strangerQuestions() {
+    return ResponseEntity.ok("ok");
+}
+```
+
+4) PPT 标题、架构图/流程图的结构、表格数据：
+画面 14: Typora 文档中包含标题“4.6.3.3. 实现服务接口”和“4.6.3.1. TodayBestController”，以及代码片段。
+
+5) 无。
+

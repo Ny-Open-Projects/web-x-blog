@@ -1,0 +1,119 @@
+# 画面线理解：02.了解Beats
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day16-ElasticStack学习之Beats、Kibana、Logstash
+- 源文件：03.阶段三 好客租房(生活服务)项目\day16-ElasticStack学习之Beats、Kibana、Logstash\02.了解Beats【海量资源尽在 ubkz.com】.mp4
+- 抽帧：14 帧 @ 00:05, 02:10, 02:14, 03:00, 03:15, 03:36, 04:07, 04:39, 04:58, 05:29, 05:40, 05:43, 05:45, 05:52
+- 模型：Qwen3-VL-8B-Instruct-Q4_K_M
+- 生成时间：2026-10-27 23:15:32
+
+1) 这一组画面整体在讲什么（一句话）：
+介绍 ElasticStack 架构中的 Beats 组件，包括其功能、系列采集群和与 Elasticsearch、Logstash、Kibana 的集成关系。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1:
+- PPT 标题：ElasticStack的组成。
+- 图表内容：展示 ElasticStack 架构，包括“采集一切数据的Beats”（含 Filebeat、Metricbeat、Packetbeat、Heartbeat、Winlogbeat）→ “Ship” → “核心存储和检索引擎”（elasticsearch）→ “数据可视化”（kibana）。
+- 图表内容：elasticsearch → “Parse & Transform” → logstash。
+- 图表内容：logstash → “Ship” → elasticsearch。
+- 图表内容：elasticsearch → “Visualize” → kibana。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头。
+- 图表内容：elasticsearch 与 kibana 之间有双向箭头。
+- 图表内容：elasticsearch 与 logstash 之间有双向箭头

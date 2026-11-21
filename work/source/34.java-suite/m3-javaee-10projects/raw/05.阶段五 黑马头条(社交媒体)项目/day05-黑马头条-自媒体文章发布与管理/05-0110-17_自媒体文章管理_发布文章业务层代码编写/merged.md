@@ -1,0 +1,93 @@
+# 17_自媒体文章管理_发布文章业务层代码编写
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day05-黑马头条-自媒体文章发布与管理
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day05-黑马头条-自媒体文章发布与管理\17_自媒体文章管理_发布文章业务层代码编写【海量资源尽在 666java.com】.mp4
+- 时长 9分35秒（音频 575s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们就继续往下讲啊刚才咱们是把这个发布文章的Service这个时间内已经写完了业务都在外面写完了然后下面咱们还要再去做另外一个东西就是查询所有的channel这个channel的话就是频道是吧在你发布文章的时候啊这有一个初始化的频道啊你应该是展示所有的频道让让他去选择让用户去选择啊因为这个频因为这个文章呢肯定要属于某一个频道啊所以说咱们要去把这个频道的查询也可以做一做啊
+[00:29] 首先呢咱们在这啊还要再去创建一个Service它是一个Service叫adchina好吧adchina Service好这里边有一个方法返回值不一样啊返回值的话是一个list里边装的是adchina就它啊所有的china那先打一下包好吧然后呢咱们用slack好完事了啊没有参数好吧这是查询查询所有的
+[01:04] 行到吧行那这个拿到之后呢咱们就可以在这去写他的实现类啊mplmpl啊这个类然后是implement让他去实现刚才的adpino Service行ctrl i一下啊用的在这去加一个Service注解好你参与所有的话首先呢你得把maple注入进来啊嗯就卖的adpinomaple
+[01:45] 按进来之后呢可以直接去到这个方法啊点select all 完事了这样的话就是查询了所有的频道好吧那这个加完之后啊咱们下面就来去写接口啊写接口啊这个接口的话就是在这个API上面去写啊那这块呢咱们首先呢要去写两三个吧应该是三个啊首先呢是发布文章呢咱们需要几个一个是提交文章一个是什么保存保存什么保存草稿是吧
+[02:14] 所以说咱们在这先去把这个文章这个结果先去创建出来比如叫什么叫newscontrollerapi好吧在这加完之后咱们在这我继续下一个方法publicpublic response result然后是submitnews好吧这个名字其实就无所谓说你要是知道是保存啥就可以了行那这下面叫什么下面是wmnews
+[02:48] 需要传递的DQ然后这是保存文章下面还有一个保存什么呢先写吧保存草稿是吧然后是save草稿是叫a好吧然后是news就这么写然后下面是什么呢这是保存草稿
+[03:20] 那这个参数啊其实跟当前保存文章的参数是一模一样的只是它两个方式不一样只是名称不太一样行加完之后啊咱们顺便啊再把这个channel也给加进来channel也给加进来行咱们在这儿就直接去写个东西再去创建一个接口adchannelcontrollerapi好吧这个加上之后呢咱们点OK
+[03:51] 一会咱们再去实现当前的接口行这个接口里边只有一个方法这个方法咱们还要写出来的这个就是slack的public response without然后是slack的这样的话咱们就算是做完了做完之后咱们就再往下看再往下看该怎么去写把这关了关了之后咱们在这去分别去
+[04:22] 找当前的Controller去实现这两个接口好吧打开mediacontroller在这呢去创建一个类这个叫什么news Controller是吧那让他去实现谁啊实现有一个接口implement newscontroller api有两个方法是吧好加诸姐呗request Controller然后是哎脱了啊什么request
+[04:58] mypingreqrequestmyping里边这个这个参数是啥呢这个参数怎么这么写啊看好了啊api什么v1media-news啊这是news啊行那这个加完之后啊咱们现在就可以注入咱们的serviceprivate叫newsservice好吧行那这个注入进来啊进来之后呢这时候呢咱们就可以调用方法了
+[05:32] 那这方法的话呢这里边呢是R有一个save news这个参数是tue第二个参数是啥呢这样参数就变啊这样参数里边咱们其实常量量里边有一个东西media constants什么呢还有一个wm-news有一个什么summit这是1这是1啊保存文章就是1如果是修改文章或者要保存草原的话就是啥呢就是0好我先看啊
+[06:05] 这边有个draft这是0其实咱们已经是固定好了后期的话不是后期应该是后边的逻辑的话也是这么定义的一就是保存文章0就是保存草稿其实这个最终的话咱们都是保存到一个表中其实都是保存到这个表中只是有一个type是不一样的
+[06:37] 就是哪个菜包应该看一下啊找到这个文章吧啊这啊无非呢就这不一样有无非呢这个状态这个状态啊是一个零或者是一啊就两个有两个操作如果你提交的话就是一如果是草稿的话就是零啊其他也没有什么东西啊行啊走逻辑是一样的好吧行那这个咱们先写到这啊但是这里边还要补全叫post myping啊这里边是什么叫submitsubmit好吧然后的话这加一个什么一个request body
+[07:08] request body这是一样这是加上post mapping写错了ust post mapping然后是这叫什么sale request perfect好吧那这叫什么request body完事了这样的话咱们这个接口就算是做完了关注说吧还有一个接口是吧所以说你在这再去创建一个接口就是关于频道那个ad channel Controller
+[07:43] 好让他去实现这个接口implement ad-tynoapi是吧control i一下上面不全叫什么rest Controller然后是request mapping那这个这个地址咱们该怎么写呢这个的话咱们也是跟之前是一样差不多但是这个这个那啥就不一样了这个模块就不一样了api什么v1放什么tyno好吧这是tyno然后呢
+[08:18] 方法里边呢咱们可以先注入啊先注入当前serviceprivate然后什么了ad final Service好好过去了之后呢咱们再去什么啊就这一个是吧嗯行那这个好像不太对是吧你看这个东西好像是什么最终反过来它是个集合但是你要反过来是个response result那这东西很简单啊直接干嘛呢直接去在这response result
+[08:54] 不可以留掉它,你把后面这个一盒装进去就完事了好吧好这样就可以了啊上面还要再加一些东西啊,破色埋屏然后呢咱们就可以干嘛呢这个你也可以去设置其他的比如说我没有参数你也可以设置成不设置成破色埋屏也可以咱们就设置它就可以了好吧叫做怪色埋屏没有参数啊然后这里边咱们写啥呢叫Chinos叫Chinos要获取所有
+[09:26] 所有的好吧加个S就可以了好吧行那这个接口啊我们就写到这好吧
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中定义接口、实现类、控制器，并通过数据库操作实现新闻稿件的增删改查功能。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 展示了 IDEA 中的项目结构，当前选中的是 `AdChannelServiceImpl` 类。
+- 代码内容：`public interface AdChannelService { List<AdChannel> selectAll(); }`。
+- 画面左侧导航栏显示当前章节为“5.1.4 代码实现”。
+
+画面 2：
+- 展示了 `AdChannelService` 接口的定义，位于 `com.heima.media.Service` 包下。
+- 代码内容：`public interface AdChannelService { List<AdChannel> selectAll(); }`。
+- 项目结构中显示了 `AdChannelServiceImpl` 的实现类。
+
+画面 3：
+- 展示了 `AdChannelServiceImpl` 类的代码，位于 `com.heima.media.Service.impl` 包下。
+- 代码内容：`import com.heima.media.Service.AdChannelService; import com.heima.model.admin.po.AdChannel; import org.springframework.stereotype.Service; import java.util.List; @Service public class AdChannelServiceImpl implements AdChannelService { @Override public List<AdChannel> selectAll() { return null; } }`。
+
+画面 4：
+- 展示了项目结构，当前选中的是 `heima-leadnews-media` 模块。
+- 项目结构中包含 `src/main/java`、`src/main/resources` 等目录。
+
+画面 5：
+- 展示了在 `heima-leadnews-apis` 模块中创建新类的对话框。
+- 对话框中 `Name` 字段为空，`Kind` 选择为 `Interface`。
+
+画面 6：
+- 展示了 `NewsControllerApi` 接口的代码，位于 `com.heima.media.apis` 包下。
+- 代码内容：`public interface NewsControllerApi { public ResponseResult submitNews(NewsDto dto); public ResponseResult saveDraftNews(NewsDto dto); }`。
+
+画面 7：
+- 展示了项目结构，当前选中的是 `heima-leadnews-apis` 模块。
+- 项目结构中包含 `src/main/java`、`src/main/resources` 等目录。
+
+画面 8：
+- 展示了 `NewsController` 类的代码，位于 `com.heima.media.Controller` 包下。
+- 代码内容：`import com.heima.media.apis.NewsControllerApi; import com.heima.model.common.dto.ResponseResult; import com.heima.model.media.dto.NewsDto; import org.springframework.web.bind.annotation.RestController; @RestController public class NewsController implements NewsControllerApi { }`。
+
+画面 9：
+- 展示了 `NewsController` 类的代码，位于 `com.heima.media.Controller` 包下。
+- 代码内容：`import com.heima.model.common.dto.ResponseResult; import com.heima.model.media.dto.NewsDto; import org.springframework.web.bind.annotation.RestController; @RestController public class NewsController implements NewsControllerApi { @Autowired private NewsService newsService; @Override public ResponseResult submitNews(NewsDto dto) { return newsService.saveNews(dto); } @Override public ResponseResult saveDraftNews(NewsDto dto) { return null; } }`。
+
+画面 10：
+- 展示了 Navicat for MySQL 的界面，显示了 `wm_news` 数据库中的 `channel` 表。
+- 表中包含 `channel_id`、`labels`、`created_time`、`submitted_time`、`status`、`publish_time`、`reason`、`article_id`、`images`、`enable` 等字段。
+
+画面 11：
+- 展示了 `NewsController` 类的代码，位于 `com.heima.media.Controller` 包下。
+- 代码内容：`import com.heima.model.common.dto.ResponseResult; import com.heima.model.media.dto.NewsDto; import org.springframework.web.bind.annotation.RestController; @RestController public class NewsController implements NewsControllerApi { @Autowired private NewsService newsService; @Override public ResponseResult submitNews(NewsDto dto) { return newsService.saveNews(dto); } @Override public ResponseResult saveDraftNews(NewsDto dto) { return newsService.saveDraftNews(dto, WM_NEWS_DRAFT_STATUS); } }`。
+
+画面 12：
+- 展示了 `AdChannelControllerApi` 接口的代码，位于 `com.heima.media.Controller` 包下。
+- 代码内容：`import com.heima.media.apis.AdChannelControllerApi; import com.heima.model.common.dto.ResponseResult; import org.springframework.web.bind.annotation.RestController; @RestController public class AdChannelController implements AdChannelControllerApi { }`。
+
+画面 13：
+- 展示了 `AdChannelController` 类的代码，位于 `com.heima.media.Controller` 包下。
+- 代码内容：`import com.heima.media.apis.AdChannelControllerApi; import com.heima.media.Service.AdChannelService; import com.heima.model.common.dto.ResponseResult; import org.springframework.web.bind.annotation.RestController; @RestController public class AdChannelController implements AdChannelControllerApi { @Autowired private AdChannelService adChannelService; @Override public ResponseResult selectAll() { return null; } }`。
+
+画面 14：
+- 展示了 `AdChannelController` 类的代码，位于 `com.heima.media.Controller` 包下。
+- 代码内容：`import com.heima.media.apis.AdChannelControllerApi; import com.heima.media.Service.AdChannelService; import com.heima.model.common.dto.ResponseResult; import org.springframework.web.bind.annotation.RestController; @RestController public class AdChannelController implements AdChannelControllerApi { @Autowired private AdChannelService adChannelService; @Override public ResponseResult selectAll() { return ResponseResult.okResult(adChannelService.selectAll()); } }`。
+

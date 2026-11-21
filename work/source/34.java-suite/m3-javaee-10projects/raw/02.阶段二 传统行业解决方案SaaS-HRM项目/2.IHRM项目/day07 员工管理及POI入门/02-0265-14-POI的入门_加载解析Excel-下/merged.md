@@ -1,0 +1,205 @@
+# 14-POI的入门：加载解析Excel-下
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day07 员工管理及POI入门
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day07 员工管理及POI入门\14-POI的入门：加载解析Excel-下_【海量资源尽在 ubkz.com】.mp4
+- 时长 12分38秒（音频 758s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 那接下来呢我们关注的就是去获取每一个单元格当中的这个内容那获取每一个单元格这个内容如何去做呢是这样的就是说对于Excel来说要处理这个单元格内容它有一点点麻烦它跟往里写不一样你往出读跟写不一样往里写的时候你直接调用它的CellValue方法就可以了但是你往出读自不然为什么呢是跟这个Excel
+[00:31] 它的特性有关对于Excel来说各位来看我这边可以写一一可以写一张三可以写一年龄不同的这些内容其实在Excel里面它的数据类型它是定义是不一样的有很多所以对于我们要想往出读数据就涉及到一个类型的转化这么一个工作你需要看一下你当前格子它的数据类型是什么样如果它是一个死菌的
+[01:01] 那么得到的就是一个死菌自负创那如果你得到的是一个补令那咱们就应该以补令的方式去获取所以我们接下来关注的就是这个内容如何根据类型去获取到那我们要去获取的话其实很简单首先第一件事这个内容呢我就不写这边了我写一个新的方法public staticobject比如说就叫做get sale value
+[01:35] 好了我们把这个sell传递进来好了那我一会直接调用这个sitgetvalue是不是就可以了OK那接下来呢我想关注的是这个方法里面首先呢对于这个sell来说我们第一件事就是获取到单元格类型单元格的数据类型那这个单元格数据类型如何去获取注意sell打点它有一个getselltype这么一个方法
+[02:17] 那这个cell type究竟是什么大家可以来看到点进去来看到这个指的是cell type就指的是我们单元格数据类型它有很多种它是一个枚举那这里面呢有空blank不令代表的是我们的不令类型的好了还有死菌代表的是一个死菌类型的还有一个比如说呢这个formal这个代表什么呢注意因为我们单元格里面各位是不是还有一个计算公式啊它其实代表的是这个单元格是一个计算公式那还有一个叫做
+[02:47] 就是我们的number就是数字了那各位会发现啊那如果说一个日期如何表示那这个就有疑问了那你发现如果是一个data是一个日期那这里面没有data呀那注意在excel当中这个日期全部都是以数字的形式给我们体现出来的所以这个number它其实又能代表数字又能代表是一个日期能理解吧所以接下来我们就是说了对于一个单元格里面的内容如何去做
+[03:18] 如何去获取如何拿到它的类型其实根据Cell Type来进行判断所以我们接下来关注的就是拿到单元格当中的内容要根据类型获取格数据类型获取我们的数据好了这个如何去做呢那其实就是判断做判断Switch好了Switch我们现在判断的逻辑其实就是Cell TypeOK
+[03:54] 好了那这个Cellcat里面呢它要比如说我们要判断的类型有很多比如说呢就是来一个case这边有提示啊我们来一个case死菌那如果是死菌类型的那我们这边呢直接就可以返回我们得到它的死菌类型的数据就可以了好了为了跟大家统一啊这边呢我先把返回值也写一下object类型的就是value那如果是死菌类型的话那我这边value就等于注意
+[04:26] 不同的类型你获取它的获取这个值的方式也不一样这个是它比较特殊的一个点或者是比较麻烦的一个点如果是死菌类型我们如何获取借助的是sell打点getsellget死菌sellvalue这边有get死菌sellvalue如果是死菌类型的得到的就是一个死菌sellvalueOKbreak好了继续对齐一下case
+[05:01] 那我们string搞定了之后接下来关注的就是一个叫做blin如果这边是一个blin类型的那我们应该如何去做呢那value就等于注意sell打点getblin sell value你会发现不同的类型咱们获取数据的方式也不一样OK那继续往下case那这回我们关注的就来一个数字吧那么对于数字类型那如何去做呢因为我们刚才说过
+[05:34] 那对于数字类型它包含的又是两种一种呢代表的是日期那还有一种代表的就是我们真正的叫做数字了那针对这种情况我们如何就能知道了你这玩意儿它是一个数字啊那如何知道它是一个日期啊那注意我们这边做一个判断在PUI当中它有一个叫做DataUtil的一个工具类DataUtil工具类打点它就可以判断一下is
+[06:08] sell data formatted sale他判断一下你当前的这个这个数字啊究竟是不是日期他能判断出来好了如果不是不是日期他必然就是数字了好了那接下来呢如果是日期格式的那这种情况我们如何处理也很简单well等于sell打点get data sale value那这个就是比较麻烦的一点但是他不难啊
+[06:39] sell打点我们叫做get numbersell value好了那其实写到这儿呢基本上都已经差不多了当然了还有还有一个啊如果说case如果是case来一个就它吧这个代表什么含义呢代表的是我们的表达式公式好了如果是一个公式呢value等于sell打点get sell我们的公式类型就它得到公式即可
+[07:16] 抱歉上面没写break好了这边break接着来一default如果碰到其他类型的不管了好了判断结束之后最后return value好了这个其实就是想跟各位来做一个获取Excel表格内容的一个说明其实对Excel表格它是分成了很多种类型的有死菌有补令有number还有我们的公式类型的针对不同的类型你想获取里面的值调的方法也是不一样的
+[07:57] 所以我这边需要一个判断,那根据不同的类型得到它的不同的取值,那这边有一个比较特殊的就是这边数字类型,那针对数字类型,它既能表示日期又能表示一个数字,那表示日期的时候我们就需要做判断,data utils打点判断一下,那如果不是日期它变成数字,那这个数字也有讲究,它这个方法得到的数字不管你这个excel里面怎么体现的,不管是1或者18,
+[08:26] 不管怎么体现的你得到的永远是大宝这个就是它比较特殊的这么一点OK那这样这个方法我们写好了写好了之后我们可以在这边调用一把即可ObjectOBG或者Value等于GetSaleValue把我们的Sale传递进去那传递进去我们就可以通过我们的随便Milder打点AppendValue再打点再来一个符号吧OK
+[09:00] 这样一来我这个方法就已经写好了写好了之后我们来看一下能不能够把数据读取出来走好了各位会发现第一行没问题底下我们的值1.0好了我们这个它其实把这11变成了一个数字了我们刚才说过对于在excel当中它其实是默认得到的是一个double类型OK1.0张三18北京也没问题后面得到的是我们一个
+[09:33] 不知道各位有没有发现啊就是说呢现在我这个报表呢已经能够读取出来了并且呢这边什么序号等等还有这个张三李四王五等等貌似和我们这个excel是一模一样的但是各位忽略了一个问题我这边的数据有四条但是我这边打印出来的是不是只有三条啊那这个究竟又是因为什么呢注意这个需要跟各位做一个解释是这样的
+[10:04] 就是说呢我这边有个row number的小于sheet打点get last row number这边呢我写到上边写到上边sheet打点get last row number它得到的其实就是最后一行行的索引索引那也就意味着get last row number它得到的是0 1 2 3 4得到的就是4那我这边那我这边
+[10:42] 小于4我就开始进行处理小于4就是012301230123重要的事情说三遍所以我们这个肉是不是就循环了三条没错吧那这样一来我们是不是拿到了张三李四王五还有我们这个标题的部分这个就符合我们的需求符合我们打印出的效果那除了这个玩意之外呢还有一个肉点get last的sale number那这个肉点get last
+[11:12] 这个什么意思注意一个是得到行这个玩意是不是得到的是单元格那这个得到单元格得到什么就是得到最后一个单元格的行号就是这个号码我觉得意思吧也就是说那上面得到的所以底下得到的就不是所以底下得到的是1234567
+[11:40] 那我们小于7的时候0 1 2 3 4 5 6是不是都能涵盖J这一列所以各位这个一定要注意get last row number和get last cell number虽然都叫last的某某某但是它处理起来是不一样的那我们怎么去解决这个问题是不是在循环行的时候以小于等于的形式来做那我们得到的是40 1 2 3 4是不是就能涵盖所有的内容了
+[12:10] 所以在这边我们再去执行一下你会发现所有的内容都已经有了并且呢这边呢你也可以把这个行号或者这个列的这个号码也给它打印出来看一下是不是就是我跟各位聊的这些内容OK那这样一来我们整个Excel读取相应的内容咱们就已经全部都搞定了各位刚才聊的这个千万要注意
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 Apache POI 库读取 Excel 文件中的数据并输出到控制台。
+
+2) 按时间顺序列出每张画面的要点：
+画面 1: 展示了 Excel 文件 "demo.xlsx"，其中包含序号、姓名、年龄、家庭住址、出生日期等列的数据。
+画面 2: 展示了 POI 库中 CellType.class 的反编译代码，定义了单元格类型常量。
+画面 3: 展示了在 IntelliJ IDEA 中编写 Java 代码，使用 switch 语句处理单元格类型。
+画面 4: 展示了代码中获取工作表的行数并遍历每一行，获取单元格内容。
+画面 5: 展示了代码中获取单元格类型并根据类型进行处理。
+画面 6: 展示了代码中处理日期格式单元格的逻辑，使用 Date 类型。
+画面 7: 展示了代码中处理日期格式单元格的逻辑，使用 Date 类型。
+画面 8: 展示了代码中处理日期格式单元格的逻辑，使用 Date 类型。
+画面 9: 展示了代码中处理日期格式单元格的逻辑，使用 Date 类型。
+画面 10: 展示了代码中处理日期格式单元格的逻辑，使用 Date 类型。
+画面 11: 展示了程序运行后，控制台输出了 Excel 文件中每一行每一列的数据。
+画面 12: 展示了 Excel 文件 "demo.xlsx"，其中包含序号、姓名、年龄、家庭住址、出生日期等列的数据。
+画面 13: 展示了 Excel 文件 "demo.xlsx"，其中包含序号、姓名、年龄、家庭住址、出生日期等列的数据。
+画面 14: 展示了代码中获取工作表的行数并遍历每一行，获取单元格内容。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```java
+package org.apache.poi.ss.usermodel;
+import org.apache.poi.util.internal;
+public enum CellType {
+    @internal
+    since - "POI 3.15 beta 3"
+    _NONE(1),
+    NUMERIC(2),
+    STRING(3),
+    FORMULA(4),
+    BLANK(5),
+    BOOLEAN(4),
+    ERROR(5);
+```
+
+画面 3:
+```java
+switch (celltype) {
+case STRING:
+```
+
+画面 4:
+```java
+Sheet sheet = wb.getSheetAt(0); //参数，索引
+//3.获取sheet中每一行，和每一个单元格
+for (int rownum = 0; rownum < sheet.getLastRowNum(); rownum++) {
+```
+
+画面 5:
+```java
+switch (celltype) {
+case STRING:
+case BOOLEAN:
+case NUMERIC:
+```
+
+画面 6:
+```java
+if (DateUtil.isCellDateFormatted(cell)) {
+    value = cell.getDateCellValue();
+} else {
+    value = cell.getNumericCellValue();
+}
+```
+
+画面 7:
+```java
+if (DateUtil.isCellDateFormatted(cell)) {
+    value = cell.getDateCellValue();
+} else {
+    value = cell.getNumericCellValue();
+}
+```
+
+画面 8:
+```java
+if (DateUtil.isCellDateFormatted(cell)) {
+    value = cell.getDateCellValue();
+} else {
+    value = cell.getNumericCellValue();
+}
+```
+
+画面 9:
+```java
+if (DateUtil.isCellDateFormatted(cell)) {
+    value = cell.getDateCellValue();
+} else {
+    value = cell.getNumericCellValue();
+}
+```
+
+画面 10:
+```java
+if (DateUtil.isCellDateFormatted(cell)) {
+    value = cell.getDateCellValue();
+} else {
+    value = cell.getNumericCellValue();
+}
+```
+
+画面 11:
+```java
+Process finished with exit code 0
+```
+
+画面 12:
+```java
+//1.根据excel文件创建工作簿
+Workbook wb = new XSSFWorkbook(path: "E:\\excel\\poi\\demo.xlsx");
+//2.获取sheet
+Sheet sheet = wb.getSheetAt(0); //参数，索引
+//3.获取sheet中每一行，和每一个单元格
+for (int rownum = 0; rownum < sheet.getLastRowNum(); rownum++) {
+    Row row = sheet.getRow(rownum); //根据索引获取每一行
+    StringBuilder sb = new StringBuilder();
+    for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
+        Cell cell = row.getCell(cellNum); //根据索引获取每一个单元格
+        Object value = getCellValue(cell);
+        sb.append(value).append(" ");
+    }
+    System.out.println(sb.toString());
+}
+```
+
+画面 13:
+```java
+//1.根据excel文件创建工作簿
+Workbook wb = new XSSFWorkbook(path: "E:\\excel\\poi\\demo.xlsx");
+//2.获取sheet
+Sheet sheet = wb.getSheetAt(0); //参数，索引
+//3.获取sheet中每一行，和每一个单元格
+for (int rownum = 0; rownum < sheet.getLastRowNum(); rownum++) {
+    Row row = sheet.getRow(rownum); //根据索引获取每一行
+    StringBuilder sb = new StringBuilder();
+    for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
+        Cell cell = row.getCell(cellNum); //根据索引获取每一个单元格
+        Object value = getCellValue(cell);
+        sb.append(value).append(" ");
+    }
+    System.out.println(sb.toString());
+}
+```
+
+画面 14:
+```java
+//1.根据excel文件创建工作簿
+Workbook wb = new XSSFWorkbook(path: "E:\\excel\\poi\\demo.xlsx");
+//2.获取sheet
+Sheet sheet = wb.getSheetAt(0); //参数，索引
+//3.获取sheet中每一行，和每一个单元格
+for (int rownum = 0; rownum < sheet.getLastRowNum(); rownum++) {
+    Row row = sheet.getRow(rownum); //根据索引获取每一行
+    StringBuilder sb = new StringBuilder();
+    for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
+        Cell cell = row.getCell(cellNum); //根据索引获取每一个单元格
+        Object value = getCellValue(cell);
+        sb.append(value).append(" ");
+    }
+    System.out.println(sb.toString());
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

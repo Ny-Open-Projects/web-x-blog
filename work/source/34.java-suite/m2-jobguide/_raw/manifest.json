@@ -1,0 +1,65 @@
+{
+  "task_id": "08、阶段八 就业指导课+拓展学习_20261025_235658",
+  "input": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习",
+  "vision_model": "qwen3-vl",
+  "videos": [
+    {
+      "video_id": "Java市场篇",
+      "source_video": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习\\02、第二章 Java市场篇\\Java市场篇.mp4",
+      "audio_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\audio_line\\Java市场篇",
+      "vision_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\vision_line\\Java市场篇",
+      "status": "done"
+    },
+    {
+      "video_id": "工作篇",
+      "source_video": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习\\01、第一章 工作篇\\工作篇.mp4",
+      "audio_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\audio_line\\工作篇",
+      "vision_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\vision_line\\工作篇",
+      "status": "done"
+    },
+    {
+      "video_id": "求职篇1简历制作",
+      "source_video": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习\\03、第三章 求职篇\\求职篇1简历制作.mp4",
+      "audio_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\audio_line\\求职篇1简历制作",
+      "vision_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\vision_line\\求职篇1简历制作",
+      "status": "done"
+    },
+    {
+      "video_id": "求职篇2简历投递技巧",
+      "source_video": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习\\03、第三章 求职篇\\求职篇2简历投递技巧.mp4",
+      "audio_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\audio_line\\求职篇2简历投递技巧",
+      "vision_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\vision_line\\求职篇2简历投递技巧",
+      "status": "done"
+    },
+    {
+      "video_id": "试用期篇1",
+      "source_video": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习\\05、第五章 试用期篇\\试用期篇1.mp4",
+      "audio_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\audio_line\\试用期篇1",
+      "vision_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\vision_line\\试用期篇1",
+      "status": "done"
+    },
+    {
+      "video_id": "试用期篇2",
+      "source_video": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习\\05、第五章 试用期篇\\试用期篇2.mp4",
+      "audio_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\audio_line\\试用期篇2",
+      "vision_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\vision_line\\试用期篇2",
+      "status": "done"
+    },
+    {
+      "video_id": "面试篇1",
+      "source_video": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习\\04、第四章 面试篇\\面试篇1.mp4",
+      "audio_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\audio_line\\面试篇1",
+      "vision_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\vision_line\\面试篇1",
+      "status": "done"
+    },
+    {
+      "video_id": "面试篇2",
+      "source_video": "F:\\java\\博学谷-JavaEE在线就业班2022年+中级进修课+精英进阶价值14980元\\08、阶段八 就业指导课+拓展学习\\04、第四章 面试篇\\面试篇2.mp4",
+      "audio_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\audio_line\\面试篇2",
+      "vision_line": "D:\\ai\\video2text\\output\\08、阶段八 就业指导课+拓展学习_20261025_235658\\vision_line\\面试篇2",
+      "status": "done"
+    }
+  ],
+  "created": "2026-10-26T00:36:37",
+  "note": "融合成稿 <video_id>_merged.md 已由管线自动产出（本地朴素合并；配置 FUSE_API_ENDPOINT 可改用外部大模型提质）。"
+}

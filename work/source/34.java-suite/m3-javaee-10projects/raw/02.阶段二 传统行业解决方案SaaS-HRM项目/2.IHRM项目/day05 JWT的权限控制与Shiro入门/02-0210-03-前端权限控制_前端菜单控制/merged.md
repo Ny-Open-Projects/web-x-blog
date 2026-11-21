@@ -1,0 +1,171 @@
+# 03-前端权限控制：前端菜单控制
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day05 JWT的权限控制与Shiro入门
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day05 JWT的权限控制与Shiro入门\03-前端权限控制：前端菜单控制_【海量资源尽在 ubkz.com】.mp4
+- 时长 8分54秒（音频 534s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 我们把这个基本的代码已经写好了之后呢接来我们就是可以把这个服务启动起来一起来看一下其实这边呢我们用到的这个Service方法呢其实就是我们昨天写的这个翻到那翻到里面呢根据这些判断我们就灵活的去运用了一把好这边判断一下这个传递的参数是唯空那这边呢给他传递了一个NV哎抱歉Visible那这个Visible这边呢来看是不是应该是一个死菌类型的一个参数啊所以这边呢应该是加上双引号才对
+[00:32] 抱歉一那这样一来我这个代码写好了我们就可以把这个程序呢给它运行起来找到我们这个系统微服务的启动类OK执行好了现在我们的微服务端的已经运行成功了我们不再去管它了接下来我们关注的就是我们的前端的一块内容那在我们前端呢我先去使用VS Code进行打开那打开了之后呢在我这个前端呢需要各位需要改一点点内容
+[01:04] 改的内容是这样的由于我这个前端呢是使用的是人家配置好的这么一套架构所以里面可能有自己的一套人家的逻辑那人家逻辑有什么首先第一个就是我们发现之前所有的内容你玩这个操作的时候好像不需要登录那之所以不需要登录是因为在他这边配置了有自己的EZMOOC也就是我们的模拟数据那模拟数据呢其中有登录的
+[01:30] 有获取用户信息的那在哪配置全部都在index里面进行体现了所以我们现在呢就不再需要这个获取用户数据的也不再需要人家这个登录的了好了我把这个人家模拟数据接口给它关闭那接下来那找到我们的API找到我们的base有一个frame.js这个frame.js是人家这个框架自带的一些API那其中呢人家配置好了登录和我们的profile也就是我们的获取信息的内容
+[02:00] 登录接口底下呢就是我们获取用户信息的那各位可以看一下人家发送的是发送到frame下的login发送到frame下的profile那对于我们而言昨天我们写过了用户的登录以及用户的这个获取信息是不是全部写到了叫做sys下的login和sys下的我们叫做profile所以对于这个呢我们要做一个修改frame改成sys好了这边frame改成sys
+[02:33] OK那除了这两个我们需要修改之外呢还有一个点我们需要修改就是找到Dashboard里面的一个Store找到里面的user.js这个user.js呢找到这边呢login by username好了是这样的就是说呢人家这套逻辑里面他之前设计的是你这个token不是放到data里也就是跟我们的这个API不太相符我们可以一起来看一下我们的APIVocalhost801
+[03:06] 那我们用户登录成功那返回的这个数据是不是在data部分啊那么可以看一下人甲模拟的这个数据人甲模拟数据这个login里面它是放到data里面吗也是放到data里面啊抱歉人甲模拟这个数据也是放到data里面那这个就不应该有这个错误啊那这个不管了那我们要修改一下修改到哪呢就是在这边我们的user.js部分
+[03:37] 在user.cs部分呢其中它是用的是response.data.data这个指的是获取登录来看发送登录但发送登录了之后它从登录信息里面res.data.data代表的是你登录返回的所有数据res.data代表所有数据.data是不是代表的是这个死菌我们的token啊但是你会发现人家又继续用的是data.tokendata.token等等所以这个data.token已经没有这个数据了我们的t
+[04:07] token是不是现在就代表的是这个data值啊所以我们这边要做一个简单的修改让它方便进行存储我们的token信息OK那这样一来呢我们都已经改好了那改好了之后我们可以启动我们的服务这边npm run dv这个启动起来相对来说呢会有点点慢啊各位耐心呢等待一下就可以了好了我们的服务已经启动成功了那启动成功了之后
+[04:48] 各位我们可以呢打开我们的8080端口那这回呢我们就需要做一个简单的登录处理那这个登录处理可以看一下上边访问的是-login那对于这个-login而言-login而言这个页面究竟在哪呢其实是在我们的dashboard里面的page继续往下找有一个login.voe这是它的一个登录页面那这个登录页面其中呢有一些内容呢需要给它改掉啊改掉
+[05:20] 还有上边也有些内容需要给它改掉比如说这边它有一个默认的用户名比如说有一个默认的登录密码那我们换成我们自己的180001好了密码是123456OK保存一下好了那接下来呢我们就开始进行一个登录看一下登录能不能获取相应的数据好了打开F12我们一边登录一边去看一下效果点击登录好了各位来看它发送了登录请求那发送登录请求我们以后响一个
+[05:57] Data里面是我们的token字符创那Header传递的就是用户名码好了那接下来还有一个Profile它紧接着又发送了一个Profile的这么一个请求注意人家带了一个投信息投信息Bear就是我们刚才传递的token它又携带过去接着我们给它发送了响应那这个响应里面有API的相应的内容好了还有我们的Pounds相的内容以及我们的Menu相的内容
+[06:24] 那这样一来我们就可以完成登录的这么一个操作那并且左边所有内容都已经有那好了除了咱们这个账号之外那还有一个账号别忘了我们还有002这个002指的是我们的企业管理员我登录进去左边都有好那接下来再来再退出那这边的003我再登录你会发现效果这菜单好像没有做任何的操作对不对啊
+[06:52] 那所以对于我们来说接下来就是关注的如何可以让这个菜单动态的给它进行显示其实这个动态显示呢其实很简单其实很简单我们只需要动动小手修改一点点人家的代码这个框架的代码即可那这个框架代码我们要修改什么地方DASBOD找到我们刚才的
+[07:16] 搞到我们刚才的这个死洞里面找到user.js找到user.js跟我一起来修改一点点内容user.js抱歉不在user.js应该是在这个权限.js这个权限.js当中这边呢人家有一注视动态构造权限列表我们只需要把这两个注视的内容打开把底下这个给它注视掉即可我再保存一把注意我们来看现在003
+[07:51] 什么权限都没有好了我再退出这边呢换成001注意超级管理员SaaS平台的所有内容都有了好了接下来咱们因为我们都说过了SaaS平台管理员有所有权限好了接下来再退出我们有一个企业管理员002登录那你会发现它只有企业相关的一些配置我们的SaaS管理是不是也已经没有了OK当然了我们在这边呢可以对员工进行一个简单的配置比如说呢我们这边有一个员工003
+[08:21] 这个员工呢可以给他分配一个角色比如说分配成人事经理分配成人事经理提交好了那对这个人事经理呢这个角色进行一个分配权限那比如说呢我只给他分配员工管理的确定好了那接下来我退出我们这回再去登录003这个用户你会发现他已经多了员工管理的这些内容那这样以来我们前端的这个控制其实也已经控制住了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示一个基于 Spring Boot 后端和 Vue 前端的 SAAS 人力资源管理系统（HRM）的开发与运行过程，包括后端权限控制逻辑、前端页面交互及 API 调用。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- IDE：IntelliJ IDEA，项目路径为 `ihrm_parent`。
+- 代码文件：`UserController.java`，展示用户权限校验逻辑。
+- 代码片段：
+  ```java
+  String token = authorization.replace(target: "Bearer ", replacement: "");
+  //3.解析Token
+  Claims claims = jwttUtils.parseJwt(token);
+  String userid = claims.getDid();
+  //获取当前用户
+  User user = userService.findById(userid);
+  ProfileResult result = null;
+  if("user".equals(user.getLevel())) {
+      result = new ProfileResult(user);
+  }else {
+      Map map = new HashMap();
+      if("admin".equals(user.getLevel())) {
+          map.put("envVisible", "1");
+      }
+      List<Permission> list = permissionService.findAll(map);
+      result = new ProfileResult(ResultCode.SUCCESS, result);
+  }
+  return new Result(ResultCode.SUCCESS, result);
+  ```
+
+画面 2：
+- IDE：IntelliJ IDEA，项目路径为 `ihrm_parent`。
+- 代码文件：`SystemApplication.java`，展示 Spring Boot 启动类。
+- 代码片段：
+  ```java
+  package com.ihrm.system;
+  //1.配置Spring Boot包扫描
+  @SpringBootApplication(scanBasePackages = "com.ihrm")
+  //2.配置jpa注解扫描
+  @EntityScan(value = "com.ihrm.domain.system")
+  public class SystemApplication {
+      //启动方法
+      public static void main(String[] args) { SpringApplication.run(SystemApplication.class, args); }
+      @Bean
+      public IdWorker idWorker() { return new IdWorker(); }
+      @Bean
+      public JwtUtils jwtUtils() { return new JwtUtils(); }
+  }
+  ```
+
+画面 3：
+- IDE：Visual Studio Code，打开 `user.js` 文件，界面为空白。
+
+画面 4：
+- IDE：IntelliJ IDEA，项目路径为 `ihrm_parent`。
+- 代码文件：`UserController.java`，展示用户权限校验逻辑。
+- 代码片段：
+  ```java
+  @RequestMapping(value = "/profile", method = RequestMethod.POST)
+  public Result profile(HttpRequest request) throws Exception {
+      //1.从请求头中获取token，名称-Authorization
+      String authorization = request.getHeader("Authorization");
+      if(StringUtils.isEmpty(authorization)) {
+          throw new CommonException(ResultCode.UNAUTHENTICATED);
+      }
+      //2.解析Bearer令牌
+      String token = authorization.replace(target: "Bearer ", replacement: "");
+      Claims claims = jwttUtils.parseJwt(token);
+      String userid = claims.getDid();
+      //获取用户信息
+  }
+  ```
+
+画面 5：
+- 多窗口界面：Visual Studio Code、IntelliJ IDEA、SQLyog、PDF 文档、API 文档。
+- 代码文件：`user.js`，展示登录逻辑。
+- 代码片段：
+  ```javascript
+  LoginByUserName({ commit }, userInfo) {
+      return new Promise((resolve, reject) => {
+          axios.post('/api/login', userInfo).then(res => {
+              commit('SET_TOKEN', res.data.token);
+              localStorage.setItem('token', res.data.token);
+              resolve();
+          }).catch(err => {
+              reject(err);
+          });
+      });
+  }
+  ```
+
+画面 6：
+- 浏览器：访问 `localhost:801`，显示 SAAS-HRM API 文档页面。
+
+画面 7：
+- 多窗口界面：Visual Studio Code、IntelliJ IDEA、SQLyog、PDF 文档、API 文档。
+- 代码文件：`user.js`，展示登录逻辑。
+- 代码片段：
+  ```javascript
+  LoginByUserName({ commit }, userInfo) {
+      return new Promise((resolve, reject) => {
+          axios.post('/api/login', userInfo).then(res => {
+              commit('SET_TOKEN', res.data.token);
+              localStorage.setItem('token', res.data.token);
+              resolve();
+          }).catch(err => {
+              reject(err);
+          });
+      });
+  }
+  ```
+
+画面 8：
+- 浏览器：访问 `localhost:8011`，显示 SAAS-HRM 登录页面。
+
+画面 9：
+- IDE：Visual Studio Code，打开 `login.Vue` 文件。
+- 代码片段：
+  ```Vue
+  <input type="text" v-model="loginForm.username" autocomplete="off" placeholder="用户名" />
+  <input type="password" v-model="loginForm.password" autocomplete="off" placeholder="密码" />
+  <div class="login-btn">
+      <button @click="handleLogin">登录</button>
+  </div>
+  ```
+
+画面 10：
+- 浏览器：访问 `localhost:8080/#/login`，显示登录页面。
+- 网络面板：显示登录请求成功，返回状态码 200。
+
+画面 11：
+- 浏览器：访问 `localhost:8080/#/dashboard`，页面空白。
+
+画面 12：
+- 浏览器：访问 `localhost:8080/#/dashboard`，页面空白。
+
+画面 13：
+- 浏览器：访问 `localhost:8080/#/employees`，显示员工管理页面。
+
+画面 14：
+- 浏览器：访问 `localhost:8080/#/employees`，显示员工管理页面，包含工作日历和快速导航。
+

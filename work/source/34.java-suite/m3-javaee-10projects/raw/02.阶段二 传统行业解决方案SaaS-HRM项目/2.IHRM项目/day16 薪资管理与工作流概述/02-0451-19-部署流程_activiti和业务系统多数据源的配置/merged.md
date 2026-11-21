@@ -1,0 +1,156 @@
+# 19-部署流程：activiti和业务系统多数据源的配置
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day16 薪资管理与工作流概述
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day16 薪资管理与工作流概述\19-部署流程：activiti和业务系统多数据源的配置_【海量资源尽在 ubkz.com】.mp4
+- 时长 10分33秒（音频 633s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 那目前呢我们已经完成了我们工作流这个基本模块的一个工程搭建的工作那这个结构搭建好了之后当前这个工程还存在一些小小的问题那我们需要把它解决掉那这个问题呢在什么地方我们打开配置文件一起来分析一下那配置文件打开之后呢我们重点关注的就是第二部分内容数据库连接池那各位会发现啊
+[00:31] 我的数据库连接池现在准备了两个一个叫做ACT那这个ACT对应的是我数据库当中的这个ACT数据库那这个是Activity所设计到的所有数据库表那除了这个之外呢还有一个叫做IHM代表的是我们当前人力资源管理系统所用到的所有数据库没错吧那各位那我们现在有两套数据库表那我们这回你究竟应该
+[01:01] 怎么进行查询呢好了这回我们一起来看一下好了一张图形呢我们来分析一下首先呢左边是我们的系统就是IHRMIHRM系统OK那接着呢右边呢这回挂载了两个不同的数据库那一个数据库是我们的activity数据库数据库那接下来呢还有一个是我们的IHRM业务数据库业务数据库
+[01:41] 那activity相应的工作列入流程需要用到的是activity数据库那我们的业务是不是要用到的是业务数据库一共有两个没错吧这个是HM那上面的就是ACT那针对这个我们应该怎么做呢各位来看那我们的业务数据库大家都知道我们用的是Sprint Data JPA这套开发流程来完成开发的好了这边就是我们通过Sprint Data JPA来进行开发
+[02:12] 那上边呢我们不用自己去写什么数据库操作不用去写这些色彩绘具全部都借助的是activity它内置的内置的数据库操作来供我们进行数据库查询那我们要做的事情呢就是配置两个不同的数据源那上面这个就是我们工作流数据源
+[02:43] 那下边这个代表的是我们的业务数据库的业务数据员没错吧那这样一来我们进行操作的话那如果跟工作流相关的通过工作流数据员操作数据库那如果是跟我们的业务系统挂钩的那通过业务系统去挂钩我们的业务数据库各位能理解什么意思吗
+[03:04] OK那好了接下来呢我们一起来看一下或者我们一起来说一下对于咱们这种两个数据源应该怎么进行配置还有一个就是说如果对于多数据源的话咱们这个Spring Data JPA应该如何处理那对于我们来说呢咱们急切关注的事情首先第一个就是要配置两个数据库连接池Data Source配置两个Data Source一个代表的是ACT
+[03:36] 一个代表的是IHIHM那接下来还有第二个那第二个是这样的就是我们要去对于SpringData整合的一个开发开发那我们需要去重新去配置它的数据库连接池重新去配置SpringDataJPA所涉及到的这些有逻辑比如说呢对于SpringDataJPA来说咱们要重写要重写的逻辑比较多比如说entity
+[04:12] Manager比如说要配置里面的TransactionManager这个就是我们接下来急切要做的这么一个事情那接下来呢我说一下咱们要配置两个DataSource那上边Activity对于这个Activity数据库来说这个DataSource注意啊咱们不能给它指定因为我们改不了它的源码所以我们两个DataSource一个默认的唯一首选的那首选的只能是
+[04:42] activity对应数据库的数据源那我们在SpringData JPA的时候用我们第二个备选的业务数据源来进行开发就可以了这个就是我们配置的一个小小的规则或者小小的一个技巧好了这些呢我们都看过了之后接下来呢我们就开始着手把这个相关的配置工作呢给它完成出来那对于这个配置工作相应的这个逻辑或者相应的代码呢比较多那也不需要各位
+[05:10] 一行一行把它写出来在今天给各位准备的课程资料当中我们一起来找一下课程资料好了找到抱歉找到我们的资料注意这里面那个工具代码多数据源配置那我们需要把这两个类Ctrl C给它拷到我们的工程的目录下来Ctrl V拷过来那拷过来之后呢注意我简单的说一下第一个Data Source Config
+[05:43] 这个是我们的一个多数据源配置配置类在这个里面呢我们配置了两个DataSource各位来看一个呢是我们的Activity的DataSource一个代表的是我们的HMDataSource好了第一个是ACTIActivity数据库连接池注意各位这有个小小的细节Primary代表的是它是一个也代表它是我们的主配置也就是说默认而言它用到的是
+[06:18] 我们的activity的数据库连接池这个是默认的一个选项好了那接下来呢还有第二个第二个呢是我们的IHMDataSource业务数据库连接池那注意我们要用业务数据库连接池的话咱们就要用的话就需要明确指定好了是不是应该要指定它这个名字呀OK好了那这个是我们的多数据源的配置我们配置了两个数据源那
+[06:50] 这个配置的代码呢其实没有那么复杂第一个创建一个对象第二个配置是我们的主数据好了接着第三个注意第三个呢是从哪来的是不是从我们的Spring Boot配置文件当中去拿到ACT里面摄影的这些配置信息哎能看到吧好那接下来
+[07:11] 在我们的代码当中直接通过一个DataSource Builder的形式就可以创建出一个DataSource这个都比较简单好了我们的数据源配置已经搞定了回到这张图形来看是不是还有第二个部分也就是SpringDataJPA那在SpringDataJPA当中我们明确就需要给它指定是不是要用这个IHMDataSource好那这个配置在什么地方呢各位来看这边有一个JPA Repository Configuration
+[07:42] 那打开这个配置文件咱们简单的来看一下注意同样也是一个配置类上边指定的是我们要自己去定义GPA相关的一些配置信息那自己指定的配置信息有什么第一个就是代理的DL接口所在的包那需要各位一定要注意了我这边写了一个base package指定的一个包叫做AU
+[08:10] dit.do那所以呢你如果想要让我们这套配置生效的话那我们所有的这些do的接口只能给它放到这个do所在的包下这是必须的好了那接着第二个那entity manager factory指的是我们的entity manager这个工厂那这个工厂呢我们底下需要创建那同样的事务控制器那底下也同样也要创建
+[08:39] 好那接下来里面这些代码呢不需要各位重点的记忆我们写一下上面是在去创建工厂好那接下来底下创建事务事务管理器那需要各位注意不管是工厂还是我们这边事务管理器我们都需要DataSource那这个DataSource就是我们刚刚定义好的IHM DataSource那这样一来我们所有的这一套逻辑就已经连接起来了那这边有一个
+[09:17] 注意事项是这样的那SpringDataGP会自动扫描我们的实体类以及上面的注解那同样的我在这边也有一个扫描配置扫描的扫描的扫描的实体类所以对于我们来说咱们要想让这套程序能够不受影响的跑起来
+[09:47] 那我们的do要放到这个包下那我们的实体类是不是要放到这个叫做entity这个包下呀那需要各位注意啊这个工程比较特殊那我就在这边呢不把这些实体类放到什么common里了我就放到上边让这个效果呢看起来更加好一些OK那这样一来我们的双数据源配置就已经配置好了一套数据源是我们的主数据源是用来支持activity数据库的
+[10:17] 那另一套数据源是我们的业务数据源叫做IHM Data Source那我们的IHM这个系统全部是用的GPA来进行开发所以我们又重写了GPA涉及到的Entity Manager涉及到的Transaction Manager
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Spring Boot 项目中配置两个数据源（activiti 和 ihrm），并为 JPA 仓库配置 EntityManager 和 TransactionManager。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：在 IntelliJ IDEA 中，选中并高亮显示 `application.yml` 文件，该文件位于 `src/main/resources/` 目录下，内容为 Spring Boot 的配置，包含 `spring.datasource`、`shrm`、`redis`、`jpa` 等配置项。
+画面2：聚焦于 `application.yml` 文件内容，展示 `spring.datasource` 下的 `act` 数据源配置（用于 Activiti）和 `shrm` 数据源配置（用于业务）。
+画面3：在绘图工具中，绘制一个名为“HRM 系统”的矩形框，右侧绘制一个名为“activiti数据库”的椭圆框。
+画面4：在绘图工具中，在“activiti数据库”椭圆框下方新增一个名为“业务数据库”的椭圆框，并标注“ihrm”。
+画面5：在绘图工具中，在“HRM 系统”框右侧添加文字“Activiti内置数据库操作”和“工作流数据库”，并添加文字“SpringDataJPA 开发”和“业务数据源”。
+画面6：在文件资源管理器中，显示了包含“day/4”、“day/5”、“day/6”等文件夹的目录结构。
+画面7：在 IntelliJ IDEA 中，选中并高亮显示 `AuditDatasourceConfig.java` 文件，该文件位于 `src/main/java/com/ihrm/audit/` 目录下。
+画面8：聚焦于 `AuditDatasourceConfig.java` 文件内容，展示其配置两个数据源的代码。
+画面9：在绘图工具中，从“HRM 系统”框引出两条线，分别指向“activiti数据库”和“业务数据库”，并在线上标注“1.配置两个DataSource(act,ihrm)”和“2.SpringDataJPA并发: entityManager transactionManager”。
+画面10：在 IntelliJ IDEA 中，选中并高亮显示 `JpaRepositoriesConfig.java` 文件，该文件位于 `src/main/java/com/ihrm/audit/` 目录下。
+画面11：聚焦于 `JpaRepositoriesConfig.java` 文件内容，展示其配置 `@EnableJpaRepositories` 注解和 `@Autowired` 注解的代码。
+画面12：聚焦于 `JpaRepositoriesConfig.java` 文件内容，展示其配置 `@Bean` 注解的 `LocalContainerEntityManagerFactoryBean` 和 `PlatformTransactionManager` 的代码。
+画面13：在 IntelliJ IDEA 中，弹出“New Package”对话框，提示输入新包名。
+画面14：在 IntelliJ IDEA 中，选中并高亮显示 `JpaRepositoriesConfig.java` 文件，该文件位于 `src/main/java/com/ihrm/audit/` 目录下，文件内容与画面12相同。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```yaml
+#spring配置
+spring:
+  application:
+    name: ihrm-audit #指定服务名
+  datasource:
+    act:
+      jdbc-url: jdbc:mysql://localhost:3306/act?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+      username: root
+      password: 111111
+      driver-class-name: com.mysql.jdbc.Driver
+    shrm:
+      jdbc-url: jdbc:mysql://localhost:3306/ihrm?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT
+      username: root
+      password: 111111
+      driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  jpa:
+    database: MySQL
+    show-sql: true
+    open-in-view: true
+    activiti:
+      history-level: full
+      db-history-used: true
+    Eureka:
+      client:
+```
+
+画面7：
+```java
+package com.ihrm.audit;
+
+import com.ihrm.audit;
+@Configuration
+public class AuditDatasourceConfig extends AbstractProcessEngineAutoConfiguration {
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix = "spring.datasource.act")
+    @Qualifier("activitiDataSource")
+    public DataSource activitiDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.ihrm")
+    @Qualifier("ihrmDataSource")
+    public DataSource ihrmDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+}
+```
+
+画面10：
+```java
+package com.ihrm.audit;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@Configuration
+@EnableJpaRepositories(basePackages = "com.ihrm.audit.dao",
+        entityManagerFactoryRef = "ihrmEntityManager",
+        transactionManagerRef = "ihrmTransactionManager")
+public class JpaRepositoriesConfig {
+    @Autowired
+    private Environment env;
+    @Autowired
+    @Qualifier("ihrmDataSource")
+    private DataSource ihrmDataSource;
+    @Bean
+    @Primary
+    public LocalContainerEntityManagerFactoryBean ihmEntityManager() {
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(ihrmDataSource);
+        em.setPackagesToScan(new String[]{"com.ihrm.audit.entity"});
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        em.setJpaVendorAdapter(vendorAdapter);
+        HashMap<String, Object> properties = new HashMap<>();
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        em.setJpaPropertyMap(properties);
+        return em;
+    }
+    @Bean
+    @Primary
+    public PlatformTransactionManager ihrmTransactionManager() {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(ihrmEntityManager().getObject());
+        return transactionManager;
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面3：架构图包含“HRM 系统”指向“activiti数据库”。
+画面4：架构图包含“HRM 系统”指向“activiti数据库”和“业务数据库”。
+画面5：架构图包含“HRM 系统”指向“activiti数据库”和“业务数据库”，并标注“Activiti内置数据库操作”和“SpringDataJPA 开发”。
+画面9：架构图包含“HRM 系统”指向“activiti数据库”和“业务数据库”，并标注“1.配置两个DataSource(act,ihrm)”和“2.SpringDataJPA并发: entityManager transactionManager”。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+

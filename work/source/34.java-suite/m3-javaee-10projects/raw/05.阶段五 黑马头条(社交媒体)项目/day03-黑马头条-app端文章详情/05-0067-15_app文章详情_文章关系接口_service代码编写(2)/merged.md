@@ -1,0 +1,209 @@
+# 15_app文章详情_文章关系接口_service代码编写(2)
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day03-黑马头条-app端文章详情
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day03-黑马头条-app端文章详情\15_app文章详情_文章关系接口_service代码编写(2)【海量资源尽在 666java.com】.mp4
+- 时长 15分38秒（音频 939s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那咱们下面就继续往下写啊那这个咱们就写的该写第二步了啊第二步的话就是咱们要去查看一个收藏表条件就是当前的entry id和当前的article id所以说呢咱们现在啊先去注入一个当前的什么东西啊注入一个当前的呃就是收藏表的mypro是吧咱们在上面去写一下啊这个收藏表是叫什么来着private ap collection是吧ap
+[00:30] 然后是把它给注入进来然后是然后咱们再去查询通过它去查询查询条件就是前的三个而这个是Burst然后第二个就是当前的你看那个OBRIZID其实就是谁就是当前的VPPHARVA.GETID其实就是当前的这个ID
+[00:58] 第三个呢其实就是articulate然后这里边还有一个材数就是type这个type是谁呢打开这个表来看一下这个type就是当前的收藏表type就是当前的一个零文章然后一是动态目前的话呢其实都是啥呢都是文章所以说你在这写个零就可以
+[01:23] 写个0就可以啊那写0的话可能这个不太合适是吧有可能啊咱这样啊那个写死的话不太好所以说咱们在这啊这个之前的DP Connection这个类里边呢就咱们已经设置一个这种枚举枚举啊咱们怎么拿呢其实就是个范形你拿到typetype里边去拿到articlearticle就是几啊就是0对article就是0啊所以说咱们写的时候呢这可以这么写
+[01:50] 然后是你可以写上AP collection.article然后是.getcode就可以了这时候呢其实写这么一串内容就是一样然后咱们可以返回返回的话就是然后呢咱们就去判断呗看看它呢到底有没有值如果它不等于空说明啥呢说明这个文章是不是已经被收藏了呀
+[02:21] 收藏的话你们在这是不是就该给他重新复制了不是force是啥是出那这样的话我们这个啊这个内容就算是完了好那么咱那咱们下面就看着看这个啊下面就看继续看这个东西那这个简单该怎么去设置呢其实他也是通过当前的entry ID和什么article ID是吧所以说呢你这时候啊你应该第一件事首先是把当前的myport给注入进来是吧private好
+[02:52] 一批like是my my啊然后是奥特威尔啊好注意了之后呢咱们再去查询就就行了啊好可以往下走往下走而有一个slack的list来然后这里边呢咱们要去传有参数啊一个参数是boss然后第二个呢第二个就是当前的obj id其实还是谁啊还是当前的设备的
+[03:24] 然后第三个是dto.articleid然后这个其实有这三个参数还有第四个参数第四个参数是啥你可以看一下是一个typetype是谁还是在看当前那个表你一旦不熟悉之后你只能是看表去查看点一下这个type的话其实哪呢这有一个什么文章和动态就这个内容其实还是谁
+[03:51] 其实还是文章和动态啊那其实跟咱们那个收藏是差不多的那这块内容呢咱们呢其实就都是啥呢都是文章是吧所以说呢那还可以附用当前上面这个东西当然也传个零就可以了啊好点万然后这时候就去拿到了当前这个东西拿到了之后呢咱们就可以判断了啊那怎么判断呢首先呢它肯定是不能干嘛呢不能是等于难是吧
+[04:24] 然后呢然后这里边其实咱们还要多做一个判断吧多做一个判断啊这个判断的话就是当前的有一个操作啊有一个操作啊这个操作是哪吒呢你可以再看一下这个表这里边呢是有一个operator点赞或者是取消点赞啊点赞或者取消点赞那这时候呢那咱们那咱们该怎么去设置呢现在这个呢咱们也是在当前的APlikebecome表表中的是设置这东西是吧咱们那个在对应的
+[04:54] 当前的实体内容也设置的东西啊来看一看啊那这里边呢其实也有个东西就是当前的operate就是操作是吧你到底是点赞的还是取消点赞你看like就是0console就是取消点赞console就是取消点赞啊所以说咱们在这啊多做一波判断的意思就是你看看到底是不是点赞的行为所以说呢咱们在这查啊打什么R at option
+[05:25] 啊 option 等于等于谁呢等于 ap likes 什么呢r type 啊不是 type应该是 operation operation 啊什么啊 like 而 get code这个值啊其实这么这么一大串呢其实就拿到谁啊我拿到了当前的哪个值啊你看啊这里边是不是有一个我看看是啊是这个啊呃这里边是不是有一个 like like get code 是不是0啊看看也其实
+[05:57] 这么一串拿到的也是零也是零啊如果说他都没问题啊这里边应该还加一个东西啊这个按的符号啊如果说他都没问题的话这首eat slack不是改成啥的呢这不是就改成了数啊是吧他现在已经点赞了啊行那下面继续往下看啊下面是有一个不喜欢不喜欢的话相对比较简单为什么说他不说他简单的
+[06:25] 英文的这块内容咱们传的参数就两个它不需要分表是吧不需要分表所以说咱们在这还要再去老套路还是在这去设置当前的什么注入当前的AP unlike然后是注入完Mapper之后咱们再去查询好投加进来好我背一下然后是到下面
+[06:55] 然后第一个值其实就是当前的entryid ap-entry.getid然后第二个值就是dto.articleid完了这时候咱们就可以查出来一个对象对象里边咱们就可以去判断这判断的话其实跟上面的判断是差不多的首先它是不能为空并且为什么要并且因为这里边其实还有个值值是哪个
+[07:26] 值啊就是当前的一个type这type是谁呢type说了啊type就是一个不喜欢或者是取消不喜欢啊不喜欢和取消不喜欢大家一定要注意啊所以说呢咱们要去判断当前那个type查出来的type跟当前这个type是不是一样的啊看看到底是不是0就可以了啊所以说咱们在这啊那是说APlike behaviorat type没等于谁呢
+[07:55] 等于当前的一个分形是吧Rget应该不是get啊Rtype什么like这个呢其实后这一串啊后这串还是相当于谁呀相当于是一个0如果这时候他已经是真的不喜欢了那这时候呢咱们就可以去把它呢it's like等于啥呀本来是first应该是设置为
+[08:25] 好那这个咱们就算是做完了咱们再看第五个第五个的话稍微麻烦一些咱们要做两步操作第一步呢我们要去通过当前的作者ID去查询作者信息那行那咱们先做这一步好吧先做这一步这一步的话首先你是不是还得去注入一个当前的MIFR当然这里边需要两个还有一个关注的咱们把这两个都注入进来好吧好来private a u t h
+[09:01] 然后是把这个注入进来然后下面的话咱们再去注入一个吧private谁啊apuseron好注入进来之后咱们现在下面就可以去查了好拷贝一下.slack的byid其实这个里边的参数其实就是谁
+[09:34] 就是当前的DTO中的什么Site Author ID其实就是它从点外下就能拿到当前的作者信息作者里边其实就有什么东西咱们之前说过里边是不是有个叫App社交账号ID就是User ID行拿到这个之后咱们下面再去看查看观众表根据当前用人的User ID
+[10:01] 当前登录人的User ID和作者的User ID去查询如果有数据说明已经关注没有数据说明没有关注那这个呢咱们首先呢得先去判断判断啥呢因为这里边啊说了啊当前登录人的User ID那当前登录人咱们拿到了吗是不是咱们一开始的时候在这个Service一开始的时候在这去拿了一个运送的信息啊其实这个就是谁啊
+[10:29] 对这个就是登录人是吧但是你要是按用它查它必须得登录吧所以说呢咱们在这啊说它云浪的情况下啊并且呢下面还有很多条件我们再来说啊首先呢是它也不能等云浪它也不能等云浪两个都等云浪的话那肯定是不行的是吧然后再往下看的话呢是当前啊往下是cpu
+[11:00] poster.usrid它呢也不能等于呢如果说这三个都等三个有一个等于那的话咱们这个条件就不能成立就不能去查询当前那个关注表了因为咱们这个条件是必须的条件是必须的条件啊行那这个时候咱们就可以查了啊查的话就就很简单了啊就是根据咱们当前注入的当前那个myproposter.usrid然后第一个是poster
+[11:29] 大家注意啊,这个boost就不能直接去写了不能直接写这个boost了啊为什么不能直接写呢?
+[11:38] 你还是得去分析一下这个表这个表呢,再往下看啊这个表其实它是一个user id那这个user id咱们有吗?
+[11:48] 有的是吧,user id是有的啊那这时候呢,咱们需要去干嘛呢?
+[11:54] 需要去根据user id去分表那这个id不知道,没有事
+[11:59] 因为不知道的话咱们还可以去按照第一组去查询所以说在这啊加什么东西utus.group1然后这里边传一个谁呀传一个是当前的user.getidok那这个呢其实按照这个条件去查就可以了然后再往下看啊然后第二个参数是啥呢第二个参数其实就是当前的user.getid第三个参数就是前的ap
+[12:30] poster.at user id好吧好在这时候呢咱们就能查出这东西了说什么我看稍等啊说是这是一个量的行但是我这里边传的时候它是必须是一个什么呢必须是一个integer那就很简单啊.intervalue那就完了啊好那这个查出来之后呢咱们就可以去判断啊判断啊判断啥呢直接判断就可以了它如果说jp
+[13:06] 等于None的话呢我们就可以直接去说明已经关注了啊关注的话咱们在这啊这是不是设了个force啊还是说它啊然后咱们在这加上那这个就是true那这样的话咱们就算是设置完了设置完之后里边是不是要返回啊你看返回一个response result那咱们还要看当前那个接口定义打开当前的接口
+[13:38] 这有一个基本定义这里边他要要求要求有一个格式就是当前的一个阶层阶层里边是有什么这么东西然后是反过来是出发是吧所以说咱们现在在这再去定义一个东西要想起返回的话咱们在这再去定义一个卖卖然后是死然后下面是一个 object好吧你说你要对等于一个又一个什么阿西
+[14:12] 阿西麦好吧方式往这边去装数据呗一个值啥呢一个值就是当前的一丝腐烙是吧啊其实无所谓啊你切两个都行这个值啊大家一定要注意啊这个值到底是大写还是小写这个您看接口看接口啊这个接口是不是小写啊所以说可能就是小写啊这种写的时候呢其实要接口就写的话也不会出错啊然后是意思这是一个啊然后再看第二个这个呢你可以看一下
+[14:43] 这个是不是 is like is like 好你直接考考过来就可以了然后第二个是 is like好然后再往下看呗这就比较简单了啊然后是哪个is unlikeis and好然后是 data.put然后做一个啥呢做个是 is collection 是吧然后是 is collection 完了那这样的话咱们最终的是把这个 data
+[15:22] 往哪装啊往当前的一个什么placeboss.ok把当前的data放进去是不是解除了呀那这时候咱们Service就算是写完了啊
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Java 服务层中实现文章点赞、收藏、关注等行为的逻辑，包括数据库操作和状态判断。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示 `ApplikeInfoServiceImp.java` 中的点赞逻辑，通过 `apBehaviorEntryMapper` 查询行为记录，初始化点赞、收藏、关注状态。
+画面 2: 鼠标悬停在 `apBehaviorEntryMapper.selectById` 方法上，显示方法签名和注释。
+画面 3: 代码中调用 `apCollectionMapper.selectForEntryId` 查询收藏状态，设置 `isCollection`。
+画面 4: 代码中调用 `apLikesBehaviorMapper.selectLastLike` 查询点赞状态，设置 `islike`。
+画面 5: 代码中调用 `apLikesBehaviorMapper.selectLastUnLike` 查询取消点赞状态，设置 `isunlike`。
+画面 6: 展示 `ApplikeInfoServiceImp.java` 中的 `loadArticleBehavior` 方法，定义了 `apBehaviorEntryMapper`、`apCollectionMapper`、`apLikesBehaviorMapper` 等字段。
+画面 7: 代码中调用 `apLikesBehaviorMapper.selectLastLike` 查询点赞状态，设置 `islike`。
+画面 8: 代码中调用 `apAuthorMapper.selectById` 查询作者信息，设置 `authorId`。
+画面 9: 代码中调用 `apAuthorMapper.selectById` 查询作者信息，设置 `authorId`。
+画面 10: 展示 `ApplikeInfoServiceImp.java` 中的 `loadArticleBehavior` 方法，定义了 `apBehaviorEntryMapper`、`apCollectionMapper`、`apLikesBehaviorMapper` 等字段。
+画面 11: 代码中调用 `apUserFollowMapper.selectByFollowId` 查询关注状态，设置 `isFollow`。
+画面 12: 代码中调用 `apUserFollowMapper.selectByFollowId` 查询关注状态，设置 `isFollow`。
+画面 13: 代码中创建 `Map<String, Object> data`，并放入 `isFollow`、`islike`、`isunlike`、`isCollection` 等状态。
+画面 14: 代码中返回 `ResponseResult.okResult(data)`，将状态数据封装返回。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```java
+long userId = null;
+if(user!=null){
+    userId = user.getlD();
+}
+ApBehaviorEntry apBehaviorEntry = apBehaviorEntryMapper.selectByUserlDOrEquipmentlD(userId, dto.getEquipmentId());
+boolean islike = false, islike = false, isCollection = false, isFollow=false;
+String burst = BurstUtils.groundId(apBehaviorEntry.getlD());
+//2. 通过entry和articleId去查看点赞表，看看是否有数据，有数据就说明已经点赞，否则就是没有点赞
+//3. 通过entry和articleId去查看点赞表，看看是否有数据，有数据就说明已经点赞，否则就是没有点赞
+//4. 通过entry和articleId去查看不喜欢表，看看是否有数据，有数据就说明不喜欢，否则就是喜欢
+//5. 通过authorId去app的id userlD(app账号信息id)
+//查看关注表，根据当前登录人的userlD与作者的app账号id去查询，如果有数据，就说明已经关注，没有则说明没有关注
+return null.
+```
+
+画面 2:
+```java
+ApBehaviorEntry apBehaviorEntry = apBehaviorEntryMapper.selectByUserlDOrEquipmentlD(userId, dto.getEquipmentId());
+boolean islike = false, islike = false, isCollection = false, isFollow=false;
+String burst = BurstUtils.groundId(apBehaviorEntry.getlD());
+//2. 通过entry和articleId去查看点赞表，看看是否有数据，有数据就说明已经点赞，否则就是没有点赞
+//3. 通过entry和articleId去查看点赞表，看看是否有数据，有数据就说明已经点赞，否则就是没有点赞
+//4. 通过entry和articleId去查看不喜欢表，看看是否有数据，有数据就说明不喜欢，否则就是喜欢
+//5. 通过authorId去app的id userlD(app账号信息id)
+//查看关注表，根据当前登录人的userlD与作者的app账号id去查询，如果有数据，就说明已经关注，没有则说明没有关注
+return null.
+```
+
+画面 3:
+```java
+ApCollection apCollection = apCollectionMapper.selectForEntryId(burst, apBehaviorEntry.getlD(), dto.getArticleId(), ApCollection.Type.ARTICLE.getlD());
+if(apCollection!=null){
+    isCollection=true;
+}
+```
+
+画面 4:
+```java
+apLikesBehaviorMapper.selectLastLike(burst, apBehaviorEntry.getlD(), dto.getArticleId());
+```
+
+画面 5:
+```java
+if(apLikesBehavior!=null && apLikesBehavior.getOperation() == ApLikesBehavior.Type.LIKE.getCode()){
+    islike = true;
+}
+if(apLikesBehavior!=null && apLikesBehavior.getOperation() == ApLikesBehavior.Type.UNLIKE.getCode()){
+    islike = false;
+}
+```
+
+画面 6:
+```java
+@Autowried
+private ApBehaviorEntryMapper apBehaviorEntryMapper;
+@Autowried
+private ApCollectionMapper apCollectionMapper;
+@Autowried
+private ApLikesBehaviorMapper apLikesBehaviorMapper;
+@Autowried
+private ApUnlikesBehaviorMapper apUnlikesBehaviorMapper;
+@Override
+public ResponseResult loadArticleBehavior(ArticleInfoDto dto) {
+    ApUser user = ApoThreadLocalUtils.getUser();
+    //用户与设备不能同时为空
+    if(user==null && dto.getEquipmentId()!=null){
+        return ResponseResult.errorResult(AppErrorCodeEnum.PARAM_REQUIRER);
+    }
+```
+
+画面 7:
+```java
+if(apLikesBehavior!=null && apLikesBehavior.getOperation() == ApLikesBehavior.Type.UNLIKE.getCode()){
+    islike = false;
+}
+```
+
+画面 8:
+```java
+ApAuthor apauthor = apAuthorMapper.selectById(dto.getAuthorId());
+```
+
+画面 9:
+```java
+ApAuthor apauthor = apAuthorMapper.selectById(dto.getAuthorId());
+```
+
+画面 10:
+```java
+@Autowried
+private ApBehaviorEntryMapper apBehaviorEntryMapper;
+@Autowried
+private ApCollectionMapper apCollectionMapper;
+@Autowried
+private ApLikesBehaviorMapper apLikesBehaviorMapper;
+@Autowried
+private ApUnlikesBehaviorMapper apUnlikesBehaviorMapper;
+@Override
+public ResponseResult loadArticleBehavior(ArticleInfoDto dto) {
+    ApUser user = ApoThreadLocalUtils.getUser();
+    //用户与设备不能同时为空
+    if(user==null && dto.getEquipmentId()!=null){
+        return ResponseResult.errorResult(AppErrorCodeEnum.PARAM_REQUIRER);
+    }
+```
+
+画面 11:
+```java
+if(apUserFollow!=null && apUserFollow.getFollowId()!=null){
+    isFollow=true;
+}
+```
+
+画面 12:
+```java
+if(apUserFollow!=null && apUserFollow.getFollowId()!=null){
+    isFollow=true;
+}
+```
+
+画面 13:
+```java
+Map<String, Object> data = new HashMap<>();
+data.put("isFollow", isFollow);
+data.put("islike", islike);
+data.put("isunlike", isunlike);
+data.put("isCollection", isCollection);
+```
+
+画面 14:
+```java
+return ResponseResult.okResult(data);
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

@@ -1,0 +1,235 @@
+# 14-工程搭建：搭建子工程之搭建实体类模块和lombok插件
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day01 SAAS-HRM系统概述与搭建环境
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day01 SAAS-HRM系统概述与搭建环境\14-工程搭建：搭建子工程之搭建实体类模块和lombok插件_【海量资源尽在 ubkz.com】.mp4
+- 时长 10分8秒（音频 609s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 我们公共的工区类的这个子模块呢搭建好了那接下来呢我们要去搭建一个公共的实体类模块那在我们的所有的代码当中呢可能不同的工程都要引用这些实体类的内容所以呢我给它抽象出一个模块咱们交货起来更加方便一些那咱们的操作步骤呢很简单第一个呢咱们就构建一个工程就可以了接着引入箱的坐标那这个工程的名称呢叫做IHM Common
+[00:31] 下划线modelok打开idea打开idea右键创建一个model当然了还是基于maybend点击next那这个模型子模块的名称我们把它称之为ihrmihrm下划线comm1再下划线modelmodelnext点击finish
+[00:58] 那这个模块创建好了之后那接下来需要引入相应的我们叫做坐标那找到我们的讲义直接把这端坐标引入过来即可Ctrl V好了坐标也引进来了那我这个idea这边出现了一个问题就是说我创建的工程Java目录和Resource目录它没有标志那我右键做一个简单的修改即可Java目录SourceRoot改成咱们的原版目录
+[01:30] resource意思右键同样可以修改mark directory as resource root一个改成Java一个改成我们的配置文件OK那在Java目录下我做一个简单的说明做一个简单的说明这边呢受影响的全部都关掉我做一个说明是这样的我们可能这工程呢划分成很多的模块那不同的模块可能有自己的不同的实体类所以我在这边呢以包的形式进行区分
+[02:00] 我起一个包来举例package比如说呢我可能有一个企业的这么一个服务企业里面呢可能有自己的实体类那我把它放到com.ihrm.domain下那接下来呢我以服务名命名或者以模块名命名比如说我有个模块可能要叫做companyc-o-m-p-a-n-y
+[02:24] 那接下来company下的实体类我都放到这个包下如果说还有其他的比如说系统操作的放到这个包下这个应该各位能理解好了我这边起一个名字就叫做company好了在这个company包下呢我去创建一个class我做一个注释的一些说明是这样的我创建一个class比如说我有一个company这么一个实体类
+[02:53] 那在这个实体类,咱们可以写很多的属性,比如说有private死菌类型的,我们叫ID,比如说还可以有死菌类型的,我们叫做Name,那我写两个属性就够了。
+[03:10] 那我想说的是,我们自己再去编写实体类代码,除了有属性之外,我们一般还要写构造方法,那除了构造方法之外,我们还要写getter,setter方法。
+[03:26] 那这个写这些方法就有点麻烦那传统的方式呢我们在这边就要去生成相应的get set或者构造方法了生成构造方法control insert好了比如说构造或者生成get set好了那比如说我生成get set方法我们一起来看一下如何使用psvm举例子比如说我要用的company就是companycompany
+[03:58] 等于new一个company那好了我里面可以设置一些值点比如说叫setName好了传至博客OK那接着我想说明的是这个getSet方法太麻烦了能不能给它删掉呢大家一看我一删报错了那接下来跟各位来介绍一个插件这个插件可以显著的提高我们编写实体类代码的效率
+[04:36] 它叫做LambookBeOK插件那这个Lambook插件它的主要目的呢其实就是使用注解的形式来去替换我们的gettersetter构造方法的那这个插件如何使用很简单咱们要做两件事第一件事安装插件第二件事使用注解配置
+[05:17] 那安装插件干什么咱们其实只需要在工程中引入相应的插件坐标即可那这个工程呢我们已经创建好了注意我把它放到了复工程POM文件当中来打开一起来看好了底下找找来了Lambook插件就在这OK那这个插件我们
+[05:50] 配置好了之后那接下来我们就可以使用插件里面的注解去替换我们的getter setter方法OK一起来看一下这个注解应该配置到什么地方就是配置到我们的实体类上即可咱们刚才现在不是没有set方法吗那很简单我们只需要在实体类上面配置一个注解即可比如说setterOK
+[06:25] 好了这边引入坐标引入坐标setter没问题OK那好了这样一来呢我们就已经把这个setter这个注解配置好了那配置好了之后呢各位来看刚才这个setname也不会报错了当然了这边呢刚才我坐标有一个坐标引错了抱歉好了这回把这个import到上边一下OK那这样一来set方法
+[06:57] 咱们就已经描述好那其实除了set方法之外呢它还有很多比如说这里面呢我们还可以调用company打点打点get目前来说没有get方法那很简单只需要在类上边ata gettergetter即可那这样你再去试打点get name get id都已经有了那其实除了这些注解之外呢还有一些注解比如说ata
+[07:30] contract也就是说我们这边要用它的全部属性的构造方法all-axe contractor那除了这些之外呢还有比如说no-axe contractor或者all-axe contractor这个代表的就是无餐构造代表的是满餐构造所以对于这些注解来说使用起来比较简单at-setterat-getter
+[08:03] 还有at no args还有at all args好了这边做一个简单的总结说明那set指的是set方法那还有getter那见名之意getter方法那同样的还有就是无参构造那底下就是满参构造OK好了这个删掉了那满参构造究竟能不能用我们也可以做一个测试啊比如说
+[08:47] 来一个来一个你看也没报错它同样也有没错吧好了这个就是我们注解的一个使用当然有的朋友会觉得getter方法或者set方法或者no-args-contract写起来太麻烦那写起来太麻烦怎么办呢它还支持一个更加简化的写法叫做eta data那eta data一出场setter getter可以不要了no-args也可以不要了
+[09:15] OK好了这个ata data也写一下一个注解底所有它可以描述我们的setter描述我们的getter还有我们的构造方法等等好了这个就是来跟各位聊的我们搭建了一个基本的我们实体类的这么一个模块在这个实体类模块当中需要各位注意两个点第一个点我们以包名结尾
+[09:49] 最后写我们模块名的方式区分不同模块里面的实体类第二个就是我们在配置实体类当中使用这个Longbook插件去替换我们传统的Gate Set的方法当然Longbook使用起来很简单安装一把接着使用注解配置A即可
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+构建并配置一个用于企业级HRM系统的公共实体类模块，包括创建模块、引入坐标、编写实体类并使用Lombok注解自动生成getter/setter方法。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示项目结构，当前选中“5.5 搭建公共的实体类模块”，并用红色箭头标注“ihrm_common”为“domain类模块”，“ihrm_parent”为“工具类模块”。
+画面2：展示父模块“ihrm_parent”的pom.xml文件内容，其中定义了<parent>和<properties>，并包含一个<dependency>。
+画面3：展示子模块“ihrm_common_model”的pom.xml文件内容，其中定义了<parent>和<dependencies>。
+画面4：在“ihrm_common_model”模块的src/main/java目录下，弹出“New Package”对话框，提示输入新包名。
+画面5：在“com.ihrm.domain.company”包下创建并打开“Company.java”文件，光标位于“private”关键字前。
+画面6：弹出“Select Fields to Generate Getters and Setters”对话框，选中“id”和“name”字段，准备生成getter/setter方法。
+画面7：在“Company.java”中，已生成getter/setter方法，光标位于“public static void main(String[] args) {”行，下方有“Company”类的图标。
+画面8：在项目结构中选中“ihrm_parent”的pom.xml文件。
+画面9：在“Company.java”中，光标位于“@Data”注解上方，显示了Lombok注解的使用说明。
+画面10：在“Company.java”中，光标位于“@Data”注解上方，显示了Lombok注解的使用说明。
+画面11：在“Company.java”中，光标位于“@Data”注解上方，显示了Lombok注解的使用说明。
+画面12：在“Company.java”中，光标位于“@Data”注解上方，显示了Lombok注解的使用说明。
+画面13：在“Company.java”中，光标位于“@Data”注解上方，显示了Lombok注解的使用说明。
+画面14：在“Company.java”中，光标位于“@Data”注解上方，显示了Lombok注解的使用说明。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+(1) 构建子模块ihrm_common_model
+(2) 引入坐标
+<dependencies>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+</dependencies>
+
+画面2：
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>2.0.5.RELEASE</version>
+<relativePath/>
+</parent>
+
+<properties>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+<java.version>1.8</java.version>
+<fastjson.version>1.2.47</fastjson.version>
+</properties>
+
+<dependencies>
+<groupId>org.springframework.boot</groupId>
+
+画面3：
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<modelVersion>4.0.0</modelVersion>
+
+<parent>
+<groupId>com.ihrm</groupId>
+<artifactId>ihrm_parent</artifactId>
+<version>1.0-SNAPSHOT</version>
+</parent>
+
+<artifactId>ihrm_common_model</artifactId>
+
+<dependencies>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+<groupId>com.ihrm</groupId>
+<artifactId>ihrm_common</artifactId>
+<version>1.0-SNAPSHOT</version>
+</dependency>
+</dependencies>
+
+画面4：
+New Package
+Enter new package name:
+
+画面5：
+package com.ihrm.domain.company;
+public class Company {
+private
+
+画面6：
+Select Fields to Generate Getters and Setters
+Getter template: IntelliJ Default
+Setter template: IntelliJ Default
+com.ihrm.domain.company.Company
+idString
+nameString
+
+画面7：
+package com.ihrm.domain.company;
+public class Company {
+private String id;
+private String name;
+public String getId() {
+return id;
+}
+public void setId(String id) {
+this.id = id;
+}
+public String getName() {
+return name;
+}
+public void setName(String name) {
+this.name = name;
+}
+public static void main(String[] args) {
+Company
+
+画面8：
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>2.0.5.RELEASE</version>
+<relativePath/>
+</parent>
+
+<properties>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+<java.version>1.8</java.version>
+<fastjson.version>1.2.47</fastjson.version>
+</properties>
+
+<dependencies>
+<groupId>org.springframework.boot</groupId>
+
+画面9：
+@lombok 插件：使用注解的形式省略getter setter，构造方法
+如何使用插件：
+1. 安装插件（在工程中引入相应的插件坐标即可）
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>1.16.16</version>
+</dependency>
+2. 使用注解配置到实体类上
+
+画面10：
+@lombok 插件：使用注解的形式省略getter setter，构造方法
+如何使用插件：
+1. 安装插件（在工程中引入相应的插件坐标即可）
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>1.16.16</version>
+</dependency>
+2. 使用注解配置到实体类上
+
+画面11：
+@lombok 插件：使用注解的形式省略getter setter，构造方法
+如何使用插件：
+1. 安装插件（在工程中引入相应的插件坐标即可）
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>1.16.16</version>
+</dependency>
+2. 使用注解配置到实体类上
+
+画面12：
+@lombok 插件：使用注解的形式省略getter setter，构造方法
+如何使用插件：
+1. 安装插件（在工程中引入相应的插件坐标即可）
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>1.16.16</version>
+</dependency>
+2. 使用注解配置到实体类上
+
+画面13：
+@lombok 插件：使用注解的形式省略getter setter，构造方法
+如何使用插件：
+1. 安装插件（在工程中引入相应的插件坐标即可）
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>1.16.16</version>
+</dependency>
+2. 使用注解配置到实体类上
+
+画面14：
+@lombok 插件：使用注解的形式省略getter setter，构造方法
+如何使用插件：
+1. 安装插件（在工程中引入相应的插件坐标即可）
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<version>1.16.16</version>
+</dependency>
+2. 使用注解配置到实体类上
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：PPT标题为“4.5 搭建公共的实体类模块”，并用红色箭头标注“ihrm_common”为“domain类模块”，“ihrm_parent”为“工具类模块”。
+画面9：在“Company.java”中，显示了Lombok注解的使用说明，包括“@Setter”、“@Getter”、“@AllArgsConstructor”、“@NoArgsConstructor”、“@Data”等注解。
+画面10：在“Company.java”中，显示了Lombok注解的使用说明，包括“@Setter”、“@Getter”、“@AllArgsConstructor”、“@NoArgsConstructor”、“@Data”等注解。
+画面11：在“Company.java”中，显示了Lombok注解的使用说明，包括“@Setter”、“@Getter”、“@AllArgsConstructor
+

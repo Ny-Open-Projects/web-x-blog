@@ -1,0 +1,240 @@
+# 15-Activiti完成请假流程处理及过程分析
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：1.Activiti7/Activiti7-day02-工作流使用
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\1.Activiti7\Activiti7-day02-工作流使用\15-Activiti完成请假流程处理及过程分析_【海量资源尽在 ubkz.com】.mp4
+- 时长 15分46秒（音频 946s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 下面我们就把刚才我们所跑的请假的整个流程我都想给它处理完了所以现在我们可以把这两个节点的处理工作也都给它全都给它跑完跑完到最后执行到我们的end event我们一起来观察一下我们的数据库所对应的这些表的一些变化情况
+[00:29] 也是帮助各位进一步去理解我们工作流具体一步一步它都是怎么走的对吧好了下面我们再回到我们的这个程序代码回到程序代码我可以平凡的去做这几个工作那你会发现刚才我们在这一段其实主要就是完成了张三张三对于他自己任务的一个处理工作对吧那各位思考一下如果张三完成了他的这个任务处理那下一步
+[00:58] 是不是就应该轮到我们的这个理事来完成理事的这个任务对不对所以呢我在这里头啊把刚才我们啊张三完成任务啊这个就是叫做啊张三这个啊张三任务列表的查询对吧好那其实呢我们在这边呢下一步我这里头要做的那就是作为我们的作为我们的第二个执行的节点啊
+[01:28] 那就是叫做理事对吧理事完成啊理事完成用户完成啊自己任务列表的查询对吧这就是我们可以做的啊当然了这个里头查出来我们都知道啊因为我们这一次其实这个理事要完成自己的任务那理事完成的这个任务有几个呢
+[01:55] 那李氏从这个节点的信息我们刚才会观察到李氏在这里头要走的自己的任务就只有一个李氏只有一项自己的任务要去处理所以呢我们这个部分就可以进一步去控制我们的这个李氏的任务对不对这是这个意思啊下面我们就可以呢把我们的这个李氏要去完成的这个任务就给他再去处理一下对吧所以我现在
+[02:26] 可以先用查询的这个方法把理事的任务是不是先查出来查出来之后我们这个时候再去查看任务列表对吧当然也有同学会思考说啊说啥意思呢说你看我们这个任务啊我们这个地方点这个任务只有好我们把前面这个部分也给它去掉啊给它去掉然后这个时候呢我们这个时候就直接再去调用它的方法
+[02:59] 叫做点这里头我记得应该是有一个查询一个唯一结果的一个方法我们看一下如果你仔细观察你会发现它这里头不仅有类似的还有类似的配给通过类似的配给这个方法的调用我们就可以去实现它的封印效果还可以做排序我们看看这里面是否可以找到一个
+[03:28] 叫做single result有这样的一个方法这个方法我记得应该就是显示唯一的一个任务对吧如果说当前的这个理事只有一个任务的话那你这个时候其实呢可以用一个task来接收对不对那如果用一个task接收的话那我们将来这边也就不需要循环了对吧只要直接把这个task任务往外一输出就可以了好这个时候
+[03:56] 就相当于是这个意思我只要把这个地方一去掉那这样我们就可以直接输出李氏作为这个用户他的一个任务是什么对吧这时候我们再执行看一下效果好咱们同学就一起可以看到目前李氏他一查询自己的任务咱们就可以查到李氏自己的任务是什么呢对吧他这一次输出的这个任务ID就变成了叫做55002对不对
+[04:29] 那就是说我们李氏要执行的是5002这个任务这个任务是什么呢是部门经理审批对不对那目前李氏有没有完成这个任务呢应该没有他只是把自己的任务查询了一下对吧那如果李氏要去完成自己的任务的话那这个地方我们可以这样做啊比如说我copy一份同样的我把这个人住掉啊那这个部分我就可以给各位写一下啊这是我们张三完成自己的任务对吧
+[04:58] 张三完成自己的任务当他完成了自己的任务于是我们的整个流程就会继续往后进一步推进对不对那推进的话就进入到我们的李四要去完成自己的任务对吧于是我们就进入到李四完成自己的任务对吧那李四完成自己的任务他又怎么去完成呢对吧那一样的我们这个时候就需要去把这个任务的ID
+[05:27] 叫做5002对吧5002就直接拿过来用一次那就把我们的这个complete改成叫做5002改成5002整个我们的这个理事要完成的任务就应该说做完了那理事完成的这个任务其实我们将来又可以去观察这一堆表的这个变化情况对吧好那现在我们可以啊先把这个任务跑完啊我们来观察一下那目前的这个任务就已经跑完了啊
+[06:01] 跑完我们就从下面这边往上看吧我们来看RU task现在这里面有没有变成总经理我们开始是部门经理省批对不对那现在变成了总经理而且呢这个执行者是王武对不对Sign设置为我们的王武那王武到底有没有把这个任务做完呢应该说他只是有了开始时间对吧他的这个
+[06:28] 结束时间点是现在根本都不知道对不对然后我们如果再去查看查看这个history相关的这个记录我们就可以看到它的这个结束时间点是没有值的我们可以看一下比如说我们来看history叫做act incidence我们来看一下这个act incidence那现在各位就可以看到又多了一条记录这条记录就是叫做整经理省对不对整经理省
+[06:56] 我们看一下它的结束时间现在是不知道因为这个任务还没有做完我们这个时候接着来看一下就RU对吧RU identity link这个都不用想这个表中的记录又会多一个对吧我们看一下RU那就这个现在我们的参与者又多了一个王武对吧又多了一个王武我们再看我们的这个exclusionexclusion就这个表
+[07:26] 那这个表呢我们观察一下啊这个表好像是一直都是这样的是吧好像没有变化啊这个表好像是没有变化那我们这个表这一次做操作的时候注意一下啊大家注意一下这个表是没有变化的啊那我们再看这个表叫做我把这个团给各位改一下啊就是说我们这一次做这个任务完成的时候好像是这个sq型啊没有变化对吧那我们再看下一个吧就看我们的这个
+[07:59] 叫Task InstanceTask Instance我们再来关注一下它是否有变化HITask Instance那你发现明显多了一条记录对吧我们的这个Identity LinkIdentity Link这不也明显多了一个王武的参与者对吧我们刚才这个表已经看过了吧就是我们的这个任务任务的这个具体的一些节点包括现在已经进入到整经理审评了对吧
+[08:29] 整经理审批因为现在没有审批完所以他没有结束时间这就是大致时间那如果这个任务我们再去推进的话各位同学我们可以看到你将来还可以把这个地方进一步变了对吧比如说我这个时候再去查任务的话那我这个时候查的就不是我们的这个理事的这个任务了那将来我们要查就可以直接让他查王武的任务对吧那也有同学会思考
+[08:58] 我们可不可以啊在这里边直接将用户的这个任务列表查出来查完了立即就把这个任务处理掉呢对吧而刚才我们在这边呢做这个操作的时候总是说我要先查一下任务对不对查完之后然后我们这个时候说再去处理一下对吧那我们可不可以啊比如说这个时候我就稍微改一下啊这边叫做改成王对吧
+[09:27] 那这样我们就可以把网五的任务查出来对吧网五的任务都查出来了我是只要再加一步就把它处理掉了这个整个这个工作就做完了吧当然你也还可以按我们刚才这个步骤去做啊你按这个步骤去做的话那就是先查网五的任务对不对那网五的任务一旦查询出来我们这边呢就直接可以去写了对吧执行比如说就是叫做750的这个任务了对吧那现在我想呢在这里边
+[09:57] 给各位做一个做一点点的改进就是说将我们的这个任务的查询工作和我们的这个任务处理工作结合放到一起大家能明白吧那现在这个地方就是我打算再去给各位做一个新的尝试就是叫做查询查询当前用户的任务并处理掉对不对并处理掉
+[10:24] 这样就相当于把我们的这个用户的这个任务查询工作和我们任务的这个处理工作合二为一对吧那好现在我们的这个第三步就变了啊第三步就应该变成查询当前用户的任务查询当前用户的任务了如果你只是考虑有一个任务的话那我们这个上就用叫singlesingle result吧
+[10:53] 如果我们考虑有多个任务的话我们就用类似的现在我们就可以来做了比如说叫做task Service然后我一样的可以去调用我们的就是curatorcurator task query对吧这样我们就可以查到一个query对象当我们有了这个query对象我们就可以进一步去调用我们之前的这个叫做流程叫做process definition key是不是
+[11:21] 那这个key因为我们是一个请假的流程对吧那这个key我都记住了就是叫holiday好然后呢我们再去做处理的话那就是要设置我们当前这个任务到底是谁去执行吧那我们当前的这个用户其实是谁啊其实就是我们的王武对吧所以呢我在这边可以进一步去设置我们的这个当前这个任务到底是谁去执行对吧
+[11:48] 那这个任务就是我们的这个taskassign设置为晚五那这样晚五就可以去完成我们的这个任务好当晚五设置好了我们如果说只是有唯一的这样的一个任务的话那我们其实可以使用single result当然要注意有人会思考有同学会思考如果说我们这一次查询出来的结果是两条或者是更多的记录那对不起你不能用这个方法了
+[12:18] 你就只能把这个方法改成类似的方法对不对这个这一点过于要注意一下那我这边呢直接就可以得到一个task的任务对吧那这个工作我们就算是完成了当我们把这个任务都已经拿到了那我问你我们之前一直所说的这个任务的ID这个任务的ID还要我们自己去写一个具体的数字吗那就不必要了
+[12:44] 那我们只需要通过调用我们的这个task.getID是不是作为一个参数直接传入进来就可以了这一点各位啊应该又能够明白啊那我们就直接用task叫.getID对吧那这样我们就相当于将我们的这个任务的查询工作和我们的这个任务处理工作两个步骤并在了一起啊当然
+[13:11] 我们也可以把这个任务的ID输出一下比如说我们这个地方再加一个叫做输出任务的ID对吧那这时候我们就可以直接输出叫做task.getID对吧这样就可以把这个任务的ID给它输出然后我们一起来看一下这个执行的效果好现在我就直接运行它就可以了对吧
+[13:36] 因为通过它就可以把这个任务先查出来查出来之后立即处理掉对不对你会发现这个任务是750了对吧好我们这个时候再观察我们这些表的一些变化情况那我们先来看这个RU task那task现在里头就没有了因为整个这个流程已经结束了对不对所以这个表里头就没有任何的任务了我们之前讲这个表也说了这个表总是把我们当前正要执行的这个任务放进来你想
+[14:05] 当我们的这个整经理一旦批完结束之后我们整个这个流程就算是已经结束了对不对已经结束了已经到达它了所以我们的这个RUTask这个表中没有任何的记录当然我们这个时候再去看这张表就是我们的这个identity link这个时候你会发现我们运行时RU的很多表中的记录好像都不见了对不对你看了吗都不见了吧RU还有
+[14:32] 没有了我们再来看看我们的历史信息历史信息注意这点各位一定要注意就是RU它是我们流程实力正在跑的时候run timerun time不正在运行的时候对不对一旦它运行结束了之后让RU对应的这些表里头就没有必要把记录的信息把流程的信息还要存起来对不对对应的这些记录这个流程的信息将来就自然就全都搬移到我们的HI
+[15:01] history相关的这个表中来了我们来看一下这时候你会发现这是总经理啊总经理执行啊当然这个总经理执行的这个end time的结束时间肯定也就有了吧我们再来看看整个这个流程后会了是不是到晚五就结束了对吧因为晚五是我们这里头最后的一个环节对吧是总经理审批嘛然后我们再看看我们的这个act用试图那这个表是不是最终也就变成这样了整个这个流程我们就认为啊已经跑完了
+[15:31] 这个呢是我们关于我们的这个用户任务处理以及对于后面这个表的影响给各位从头到尾跟了一个完整的流程
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何通过 Java 代码调用 Activiti 工作流引擎的 TaskService 来查询和完成用户任务。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示 ActivitiCompleteTask 类的 main 方法，获取默认流程引擎，调用 taskService.complete() 完成任务 ID 为 "5082" 的任务。
+画面 2: 展示 ActivitiTaskQuery 类的 main 方法，获取流程引擎，调用 taskService.createTaskQuery().processDefinitionKey("holiday").taskAssignee("lishi").list() 查询任务。
+画面 3: 展示 ActivitiTaskQuery 类的 main 方法，获取流程引擎，调用 taskService.createTaskQuery().processDefinitionKey("holiday").taskAssignee("lishi").list() 查询任务，并通过 for 循环打印任务信息。
+画面 4: 展示 ActivitiTaskQuery 类的 main 方法，获取流程引擎，调用 taskService.createTaskQuery().processDefinitionKey("holiday").taskAssignee("lishi").list() 查询任务，并通过 for 循环打印任务信息。
+画面 5: 展示 ActivitiTaskQuery 类的 main 方法，获取流程引擎，调用 taskService.createTaskQuery().processDefinitionKey("holiday").taskAssignee("lishi").list() 查询任务，并通过 for 循环打印任务信息。
+画面 6: 展示 ActivitiCompleteTask 类的 main 方法，获取流程引擎，调用 taskService.complete("5082") 完成任务。
+画面 7: 展示 ActivitiCompleteTask 类的 main 方法，获取流程引擎，调用 taskService.complete("5082") 完成任务。
+画面 8: 展示 ActivitiTaskQuery 类的 main 方法，获取流程引擎，调用 taskService.createTaskQuery().processDefinitionKey("holiday").taskAssignee("lishi").list() 查询任务。
+画面 9: 展示 ActivitiTaskQuery 类的 main 方法，获取流程引擎，调用 taskService.createTaskQuery().processDefinitionKey("holiday").taskAssignee("lishi").list() 查询任务，并通过 for 循环打印任务信息。
+画面 10: 展示 ActivitiCompleteTask 类的 main 方法，获取流程引擎，调用 taskService.complete("5082") 完成任务。
+画面 11: 展示 ActivitiCompleteTask 类的 main 方法，获取流程引擎，调用 taskService.createTaskQuery().processDefinitionKey("holiday").taskAssignee("lishi").list() 查询任务。
+画面 12: 展示 ActivitiCompleteTask 类的 main 方法，获取流程引擎，调用 taskService.createTaskQuery().processDefinitionKey("holiday").taskAssignee("lishi").list() 查询任务，并通过 for 循环打印任务信息。
+画面 13: 展示 MySQL 数据库中 act_ru_task 表的数据，显示任务 ID、任务名称、负责人、开始时间等信息。
+画面 14: 展示一个 PPT 页面，标题为“完成任务”，内容为一个 Java 单元测试方法，用于完成任务。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```java
+public class ActivitiCompleteTask {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine实例
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.得到TaskService对象
+        TaskService taskService = processEngine.getTaskService();
+        //3.处理任务，结合当前用户任务列表的查询操作的话，任务ID:5082
+        taskService.complete("5082");
+    }
+}
+```
+
+画面 2:
+```java
+package com.ithema.activiti;
+
+import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskService;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.ProcessEngines;
+
+/**
+ * 查询当前用户的任务列表
+ */
+public class ActivitiTaskQuery {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine实例
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.得到TaskService对象
+        TaskService taskService = processEngine.getTaskService();
+        //3.根据流程定义的key，负责人assignee来实现当前用户的任务列表查询
+        Task task = taskService.createTaskQuery()
+                .processDefinitionKey("holiday")
+                .taskAssignee("lishi")
+                .singleResult();
+    }
+}
+```
+
+画面 3:
+```java
+//4.任务列表的展示
+for(Task task : taskList){
+    System.out.println("流程实例ID:"+task.getProcessInstanceId());
+    System.out.println("任务ID:"+task.getId());
+    System.out.println("任务负责人:"+task.getAssignee());
+    System.out.println("任务名称:"+task.getName());
+}
+```
+
+画面 4:
+```java
+//4.任务列表的展示
+for(Task task : taskList){
+    System.out.println("流程实例ID:"+task.getProcessInstanceId());
+    System.out.println("任务ID:"+task.getId());
+    System.out.println("任务负责人:"+task.getAssignee());
+    System.out.println("任务名称:"+task.getName());
+}
+```
+
+画面 5:
+```java
+//4.任务列表的展示
+for(Task task : taskList){
+    System.out.println("流程实例ID:"+task.getProcessInstanceId());
+    System.out.println("任务ID:"+task.getId());
+    System.out.println("任务负责人:"+task.getAssignee());
+    System.out.println("任务名称:"+task.getName());
+}
+```
+
+画面 6:
+```java
+public class ActivitiCompleteTask {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine实例
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.得到TaskService对象
+        TaskService taskService = processEngine.getTaskService();
+        //3.处理任务，结合当前用户任务列表的查询操作的话，任务ID:5082
+        taskService.complete("5082");
+    }
+}
+```
+
+画面 7:
+```java
+public class ActivitiCompleteTask {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine实例
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.得到TaskService对象
+        TaskService taskService = processEngine.getTaskService();
+        //3.处理任务，结合当前用户任务列表的查询操作的话，任务ID:5082
+        taskService.complete("5082");
+    }
+}
+```
+
+画面 8:
+```java
+//3.根据流程定义的key，负责人assignee来实现当前用户的任务列表查询
+Task task = taskService.createTaskQuery()
+        .processDefinitionKey("holiday")
+        .taskAssignee("lishi")
+        .singleResult();
+```
+
+画面 9:
+```java
+//4.任务列表的展示
+for(Task task : taskList){
+    System.out.println("流程实例ID:"+task.getProcessInstanceId());
+    System.out.println("任务ID:"+task.getId());
+    System.out.println("任务负责人:"+task.getAssignee());
+    System.out.println("任务名称:"+task.getName());
+}
+```
+
+画面 10:
+```java
+public class ActivitiCompleteTask {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine实例
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.得到TaskService对象
+        TaskService taskService = processEngine.getTaskService();
+        //3.处理任务，结合当前用户任务列表的查询操作的话，任务ID:5082
+        taskService.complete("5082");
+    }
+}
+```
+
+画面 11:
+```java
+//3.查询当前用户的任务并根据流程定义的key，负责人assignee来实现当前用户的任务列表查询
+taskService.createTaskQuery()
+        .processDefinitionKey("holiday")
+        .taskAssignee("lishi")
+        .list();
+```
+
+画面 12:
+```java
+//3.查询当前用户的任务并根据流程定义的key，负责人assignee来实现当前用户的任务列表查询
+taskService.createTaskQuery()
+        .processDefinitionKey("holiday")
+        .taskAssignee("lishi")
+        .list();
+```
+
+画面 13:
+```sql
+CALL PROC_INST_ID  ACT_TASK  ACT_CAUS  ASSIGNEE  START_TIME  END_TIME  LOCATION  SELE_S_REASON  TENANT_ID
+1001  1001  1001  zhangsan  2016-10-24 15:24:12  11992075  (NULL)  (NULL)
+1002  1002  1002  lishi  2016-10-24 15:24:13  1415575  (NULL)  (NULL)
+```
+
+画面 14:
+```java
+//完成任务
+@Test
+public void completTask(){
+    //任务id
+    String taskId = "8395";
+    //创建TaskService
+    TaskService taskService = processEngine.getTaskService();
+    //完成任务
+    taskService.complete(taskId);
+    System.out
+

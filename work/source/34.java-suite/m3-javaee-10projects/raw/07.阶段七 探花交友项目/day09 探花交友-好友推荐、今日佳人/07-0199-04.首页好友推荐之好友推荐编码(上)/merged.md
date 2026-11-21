@@ -1,0 +1,253 @@
+# 04.首页好友推荐之好友推荐编码（上）
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day09 探花交友-好友推荐、今日佳人
+- 源文件：07.阶段七 探花交友项目\day09 探花交友-好友推荐、今日佳人\04.首页好友推荐之好友推荐编码（上）_【海量资源尽在 666java.com】.mp4
+- 时长 25分59秒（音频 1559s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好,那么接下来呢我们就来编写我们的Spark程序那我们来去实现我们上面所说的我们这个好友的推荐那么首先呢我们先来看一下我们的配置那么我们需要配置两个点那么第一个点呢是我们需要配置我们这个MongoDB的一个output就是一个输出那么输出呢是输出到我们的RecommendUra这张表里面来这第一个这个点那么第二个呢是
+[00:27] 我们需要配置我们的GDPC的一些连接相关的信息因为我们是要读取我们的Minescope的表然后呢拿到这个数据之后啊然后呢我们再去做一些计算处理
+[00:40] 那么所以说呢我们要配置这两个啊那么首先呢我们先找到啊我们的这个SPARG这个项目然后呢我们找到APP啊Publish这个文件啊然后呢我们去添加这个配置那我们把这个output啊这个添加过来那么要注意啊这个呢是输出啊前面呢我们是input啊这个是变成什么呢output输出好那么这是第一个啊这个添加那么第二个呢我们把这个mycircle的一些相关的一些连接的信息呢
+[01:10] 我们都拷贝过来放到这好那么这个配置文件呢就搞定了那么接下来呢我们就需要在我们这个工程中啊去添加一个MySQL的驱动啊那我们要去MySQL里面去加载数据嘛驱动肯定是需要有的好那把它来拷贝一下我们就丢到这来
+[01:30] 这样的话呢我们这个MySQL的一个驱动包啊就已经导入进来了那么接下来呢我们就来编写我们的这个程序啊那我们就写一个叫做类啊叫SparkSpark我们叫什么UserRecommend好那么我们去写一个这个Recommend程序啊那么下面呢我们写一个Mate方法VM啊好
+[02:03] 那么接下来呢我们来看一下这个里面的内容的编写那么首先呢我们是需要啊去载入我们外部的配置文件啊这个跟我们之前啊所写的内容呢是一样的先去读取到我们这个APP的一个publish文件那么有异常呢我们就给它去抛出啊好那么except去做一个抛出那么接下来呢我们就来构造出啊我们的一个
+[02:32] Spark的一个这个上下文配置先来构造出这样的一个配置那么我们设置这个app name就是它然后must就是这个local然后去设置我们的一个mongodb的一个output那么之前我们是input把它改成什么output去做一个输出
+[02:57] 那么输出到哪里呢输出到就是我们刚刚所写的这个配置那我们来这个里面来靠吧那就是这个key呢就是它对吧把它呢来拷贝一下然后呢我们来拷贝到这里好那么这样的话呢我们这个配置呢是不是就啊已经就搞定了那么跟我们之前的也是一样的啊只是说我们之前的数据的来源是来源于我们的这个就是mongodb啊
+[03:24] 而我们现在的数据来源呢是来源于我们的这个MySQL但是我们的输出呢是要输出到我们的MongoDB里面来这块的区别大家注意一下那么接下来呢我们就需要去干嘛呢去加载我们的一个MySQL的一个数据啊那我们先来加载这个数据那么下面呢我们要通过这个SparkSpark一个session
+[03:48] 那么我们通过它的一个build然后我们去设置一个我们上面的一个sparkconfig那么然后我们再去get去create创建一个Spark session那么我们想要去加载数据我们必须要通过Spark session去做一个加载我们的一个数据把它去构造出来然后我们通过我们的Spark session
+[04:17] 然后呢它呢有一个叫做read啊去读取然后呢有一个jdbc啊去做一个jdbc数据的一个加载那么它呢需要有三个参数啊第一个参数呢就是我们的url那么url呢就是刚刚我们在配置文件啊所配置的那个配置项那么所以呢我们通过这个publish然后呢点getpublish然后呢这个publish呢我们来找一下就是我们刚刚啊所写的
+[04:45] 这个就是它GDPC.URL那么把它呢就写过来好嘞那么这就是我们这个URL这个配置把它呢丢到这个里面来那么第二个这个参数呢我们可以来看一下第二个参数呢它呢是就我们看这个吧那么第二个这个参数呢它呢就是谁呢我们的表第三个呢就是一些配置项那么接下来呢我们就来给它设置一下第二个参数就是我们的表名
+[05:11] 那么我们要读取的表显然的是要读取我们的这个什么呢table u的info这张表那我们来读取一下那么去设置一下这个表第二个参数那么第三个参数呢我们需要给大家来设置一些相关的一些这个就是连接信息就是我们的这个驱动啊或者用户名密码等等啊那么接下来呢我们就来把这个拷贝一下吧那我们这个就不写了那我们找到下面这个代码
+[05:39] 是在这块这个位置把它拿过来那么非常简单就是去设置我们的一些这个驱动和用户名用户名和这个密码那么驱动和这个用户密码都是来源于我们前面这个配置然后我们给他去做这样的一个连接然后我们通过这个GDPC然后去做一个读取读取之后我们就可以去什么呢他有一个方法叫叫to什么呢
+[06:09] to一个java的一个rdd那么这样的话呢我们就拿到这个rdd了那么有了我们这个rdd之后啊那么我们这个呢就啊就更好做了对吧那我们应该这样来写叫user info然后呢这个rdd啊好那么我们有了这个user infordd之后呢我们先可以来测试一下啊就是通过这个user infordd然后呢哎稍等一下啊点一个
+[06:37] 让我们就直接来一个这个循环对吧for each循环然后我们去把我们的每一行就打印出来我们来看一下然后我们去做一个show做一个这个road这样的一个打印好那么接下来我们来看一下这个数据那么可以看到这个数据就已经都打印出来了那就说明了我们现在是不是已经成功的
+[07:03] 通过我们的SPARK这个程序呢去加载到了我们的MySQL的一个数据啊好那么这个我们就可以去掉了那么接下来我们就需要对我们这个数据呢去做一个处理了那么怎么处理呢来看一下我们刚刚的画的这个图啊那么在这个图里面呢其实呢我们是需要针对我们这个表里面的每一条数据然后呢再和我们当前这个表里面的其他的这个数据呢我们需要做一次这个对比然后呢去计算它们的一个相似性
+[07:32] 那么你比如说呢我第一条需要去和每一个这个数据是不是做一个对比当然我不需要和第一条去对比对吧那么第二条那第三条第四条就做这样的一个对比那么同理所有的数据是不是都需要去做一次这样的一个对比啊那么怎么样去得到或者怎么样去计算出这样的一个结果呢其实我们就要计算出什么呢需要计算出我们这张表的啊计算出我们这张
+[08:00] 表数据的什么迪卡尔级那么迪卡尔级那么我们要计算出这个迪卡尔级这样的话我们就可以去做一些相关的计算了那么我们通过这个U的音符RDD调用它的一个Cartesian这样的一个方法
+[08:20] 那么我们去就可以去得到一个我们的一个迪卡尔级了那么我们再把这个RD进去再传进去啊那么这样的话呢我们就得到我们的一个这两个表的一个迪卡尔级的这样的一张表那么我们接下来呢就对我们这个表呢我们可以去做对我们的这个
+[08:38] 那么我们去做一个这个for each的一个便利啊那我们来看一下我们这个数据啊到底是长什么样的一个这个数据对吧那我们把这个呢就打印出来好那我们可以来看一下那么走好那我们来等待它的一个执行好那么我们这个数据呢就已经显示出来了那么接下来呢我们就把这个数据呢我们来拷贝出来啊我们来分析一下分析一下这个数据那么我们一直往上面去拉吧
+[09:08] 然后呢我们拉到这个就看不出来了对吧那么我们可以从这块看也可以啊就是那么可以看到我们第一条这个数据啊这个是79对吧在79这条数据然后呢往后面看啊那么这个是79这条数据然后呢往后面看那么然后呢这个是什么呢这个是43对吧43那么也就是说
+[09:32] 那么下面第二条这个数据那么这样我们就我们简单的拿三条数据来看吧这样的话我们看的可能会更清楚一点啊那我们来看一下这个数据那么这个呢是第一条数据啊这个是79这一条然后呢它所对应的下面的这一条呢是43啊这条数据然后呢下面这个是79还是同样这条数据啊它所对应的就是什么呢下面的44看到了吗啊在这儿就44这条数据
+[10:02] 然后呢下面再往下面看啊那么79又会对到谁呢45然后呢一直去做这样的一个这个数据啊那么就我们就可以看到是不是把79然后呢和所有的对比完成之后呢就会进入到这个80那我们可以来看一下这个79可以看到这面是不是80啊80的话又会从哪条数据开始呢我们来看一下它呢又会从我们的这个应该是从第一条这个数据开始来看一下对不对啊
+[10:30] 那么可以看到是不是第一条第二条第三条那么这样的话呢我们就得到了这样的一张表就是那么就是一个D卡尔级的这样的一张表那么就是拥有了所有的对比的这个数据啊但是需要注意的是呢这个里面它同样的会存在一个数据就是我第一条这个数据
+[10:49] 会和我第一条这个数据去做一个对比本身我其实这个是没必要对比的但是呢它也肯定会出现一个这样的相乘几的这样的一个结果啊那么这样的话呢我们需要在我们一会计算的时候呢需要把这条数据给它排除掉好那么接下来呢我们就来看一下如何去做一个处理那么这个便利呢我们就不需要了那么接下来呢我们就需要去做我们的一个计算了对吧计算我们的一个用户的一个相似度啊相似度
+[11:18] 那么接下来呢我们就需要按照我们前面所提到的谁呢是不是我们的这个规则去做一个计算那么下面呢我们对我们这个DK2G呢去做一个我们的一个这个便利啊那么我们去做一个什么呢map to pair这样的一个便利好那么我们就拿到它吧拿到这个肉吧把它改成这个肉肉然后呢
+[11:48] 然后下面呢我们来看一下这个里面去怎么去操作啊那么首先呢我们在这个里面呢需要去拿到我们的肉点get什么呢点什么呢这个1就是我们前面的这个数据啊然后呢这个是我们的我们把它定义为这是什么呢这是我们的一个肉1啊然后呢我们再去拿到我们的肉2啊拿到2那么这个1这条数据其实就是我们刚才所看到的我们这个
+[12:17] 往后面看吧这个就是我们前面的这个79这条数据然后呢肉二呢就是我们后面43这条数据那么我们是不是就可以对比这两个数据它的一些这个内容啊那么按照我们规则去做一个这个对比呢就可以了那么接下来呢我们需要去拿到我们的这个肉一里面的一个我们的一个这个ID用户ID
+[12:41] 那么用户ID呢在哪里呢我们来看一下那我们这个用户ID呢它呢是位于我们的来看一下啊它是我们的第二个这个字段那么我们需要去输入什么呢这个1啊因为下标呢是从0开始的啊然后呢这个就是我们的这个叫什么呢就叫那么我们这样来写吧这个叫然后呢叫
+[13:03] user id 1然后呢我们再来拿一个row 2里面的这个user id 2这个是我们的两个这个用户的id那么接下来呢我们就需要去判断我们的一个就是什么呢就相当于自己和自己去做一个这个对比那么就是我们判断什么呢就是自己与自己的一个对比这样的一个这个数据
+[13:32] 那我们判断一下那么就是这个UraID1它的这个long value如果等于UraID2.long value的话那么就是说其实这条数据呢我们是不需要去做一个这个对比的但是呢我们又没有办法把这个数据给它丢弃掉那我们只能是返回一个我们按照我们之前所去
+[13:59] 写了我们这个推荐的这样的一个结构就new一个什么呢这个triple2triple2这样的一个去new一个triple2triple2这样的一个对象那么我们这个triple2呢它呢其实我们这样吧我们还是先这个地方我们先我们一会儿再说这个return吧那我们先
+[14:21] 去return一个null先保证我们这个代码的一个编写那么下面呢我们就继续往下面一些逻辑啊回过头来再写这块的一个这个return那么在我们最后啊那么其实我们最后return我们要return谁呢需要去new一个我们这个triple2啊那么triple2呢其实我们是需要它是一个kv结构那么k是谁呢我们先可以去把k呢设置为是一个null
+[14:47] 那么V呢其实我们需要设置说我们这个Rating对象所以说我们在这块啊需要设置我们的一个RatingRating对象然后呢Rating等于去New一个这个Rating那么Rating呢我们把它先丢到这来丢到这个Rating这个位置放到这那么Rating呢需要有三个参数第一个参数呢我们来看一下第一个这个参数是用户ID第二个参数呢是我们的产品ID
+[15:16] 那么用户ID肯定就是我们当前这个用户ID对吧而这个产品ID其实就是谁呢就是我们的这个所对比的用户ID比如说我们认为这个左边的这个就是用户ID右边这个呢就是我谁呢错了这个是我们用户ID那么这个是这个用户ID那么我会把它呢去作为我们的一个产品ID所以说呢我们就是我们这个什么呢就是UID2就是这个产品ID
+[15:44] 做这样的一个对比然后呢这个Rate就它的一个得分所以我们还需要去计算它的一个得分对吧那么我们在这个位置呢就是需要去设置谁呢UseID1.什么呢Intervalue啊第二个呢设置是UseID2.Intervalue那第三个呢就是我们的一个这个Score得分那我们在这个位置啊需要去定义我们的一个这个Score啊得分那么它呢我们设置为是一个0
+[16:13] 然后我们把这个score就丢到这儿来好嘞好那么这就是我们那个rating那么上面这个return其实也是一样的这个道理那么我们就把它就拿过来放到这儿丢到这儿来那么把上面的这个就去掉而这个rating我们就直接把它来拷贝一下
+[16:30] 其实是一样的啊只是我们这个score呢要变成什么变成0啊变成0因为这条数据就不参与到我们的这个计算中了因为它是0肯定就没有任何的影响啊所以说呢我们是就可以做这样的一个return了啊那么接下来呢我们来看一下这个k啊k是谁呢那么k呢我们是需要去和我们的一个10去取模啊那我们可以回顾一下前面的一个这个计算啊那么可以看到这个位置是不是需要去
+[17:00] 设置一个key那么我们之前呢是通过一个day的时间和时去取模是方便我们后面去计算我们的最佳的一个模型但是我们在这一块呢我们又没有我们的一个时间
+[17:13] 那我们只能是怎么呢去去构造这样的一个类似于时间的一个数据啊那么是一个什么数据呢我们可以这样来玩那么我们去设置我们的一个这个key啊那我们来看一下那我们可以定义一个什么呢我们的一个key啊它等于这个usid1加上一个usid2然后呢我们再去加一个什么呢我们的一个随机数啊然后呢next along就可以了
+[17:42] 那么我们为什么要这样去做啊那么我们要保证我们的一个数据呢去得到一个相对比较公平或者说比较合理这样的一个分布啊那我们拿到这个key之后呢去key再去和谁呢和我们的这个10呢
+[18:01] 去做一个取模这个操作然后呢下面这个也是一样的啊那么这样的话呢我们把这个基本的一个结构呢是不是就已经搞定了那么接下来呢我们就来这个位置计算我们的一个得分啊那么首先呢我们需要计算的是我们谁呢计算我们的一个年龄啊年龄差那么这个应该怎么去计算呢那我们需要去拿到我们的一个年龄那么通过这个肉依啊我们就这样来吧
+[18:28] row1.getget水呢getint那么我们的getint几呢我们需要数一下我们这个数据啊那我们这样我们还是得拿到我们的这个数据啊那么我们先拿一条啊先拿一条这个出来然后呢我们丢到这儿那来看一下那我们这个数据它的一个在第几个啊那么年龄那我们就把这个这个去掉一点吧这个太长了啊我们看起来不方便那我们来看一下啊这个是1
+[18:58] 二三啊然后呢四五六然后呢这个是这个是七对吧这个是我们的一个年龄就在这个标签的后面是年龄啊我们来看一下对不对啊那么在我们的这个标签的后面那么哎标签的后面是我们的这个A字啊那我们来数一下看第几个啊这个是一二三二四五六七啊是
+[19:25] 第七个那么第七个我们下标就是谁下标是不是就是我们的6对吧那么所以说我们需要去做一个判断去做一个判断那我们去这个是我们的第一个用户那我们拿到第二个用户他什么的getint谁呢6去做一个计算当然了这个时候我们需要去计算他的一个什么年龄差那么有可能
+[19:52] 计算出这是个正数或者是一个负数啊所以说呢我们需要去得到啊得到他的一个什么呢他的一个这个就是绝对值啊通过一个mesh点什么呢abs去得到一个这个啊这个什么呢就是绝对值啊那么我们把这个呢定义为就叫他的一个什么呢就叫啊age吧diff啊diff就是他的一个年龄差那我们下面去做一个判断啊
+[20:22] 那么如果这个diff如果这个年龄差在0到2岁之间呢那我们就给他记这个30分那么我们就判断如果他小于等于2的话那我们就设置一个score去加一个什么呢加等于20这个逻辑然后呢else那么我们设计这个else一幅判断那么如果这个年龄差
+[20:49] 在什么呢在我们的这个三到五岁之间也就是说它呢要大于大于等于什么呢这个三然后呢并且这个小于什么呢我们的一个五或者说小于等于都可以那么就小于五吧那么小于五的话
+[21:12] 那我们就来给它小于等于吧小于等于那么如果在大于等于3然后呢小于等于5的话那我们这给它记的就是10分那我们就score去加一个谁呢加一个这个10那么我们再设置一个else if如果是5到如果是大于等于什么呢5
+[21:34] 然后呢应该是大于5啊大于5并且呢是小于等于10的话那我们得给他记的就是10分哎哎我们来看一下啊呃上面这个记的是20分啊刚刚这个看错了20分哎呃哦上面这个30啊这个302010然后呢else呢就是0那就不去记分了啊那么这样的话呢我们是不是就计算出他的一个年龄差的这样的一个得分那么下面呢我们去计算谁呢
+[22:03] 计算它的一个性别那么性别我们就可以来做直接做判断就是Row1.getSendGetInt那我们这个性别是在我们的年龄的前面所以说就通过这个5下标5去获取就可以了如果它两个这个Row2.getInt然后设置这个5如果这两个不相等那我们就给它需要设置几呢得分
+[22:33] 来看一下规则那么这个得分呢就设置谁呢设置30分啊去加一个30如果是同性那么就相对这两个相等啊那么这两个相等呢是不计分的那就是零啊不做一个计分那么这个就是我们的性别那么接下来呢我们来看一下计算我们的一个城市啊所在的一个城市那我们来看一下我们的数据
+[22:54] 那我们的数据呢是这样的一个数据就是它的程式呢是这样去写啊那我们只要对比它前面的这个呃就是横杠前面的这个程式呢就可以了只要相等那么我们就去做一个这个加分那我们就还是得这样来写啊那我们通过一个就是我们 row1.getRstree呃然后挤呢看一下这个下标
+[23:18] 那么这个下标呢它呢是在我们的AGE的这个这个是6 7 8也就是这个下标呢是8然后呢这个拿到是我们的这个CT1就是城市那我们需要去截取一下那我们还是通过Stream有ToolsStableStreamBifu去做一个截取然后呢拿到它然后呢拿到它然后呢去截取谁呢
+[23:43] 截取横杠前面的它然后呢这个其实就是拿到我们的一个CityCity1然后呢OK好那么我们再来拿到我们的City2这样的一个这样的一个值那我们去判断一下那么如果这两个要是EQ相等的话City1然后呢City2如果这两个要是相等OK好那么我们就给它设置多少分呢来看一下
+[24:13] 那么如果层次这个位置相同的话就是20分不同就是零分那就直接去设置这个再去加20再去加20这样的话呢就可以了那么接下来呢我们再去计算它的什么呢计算它的学历计算它的学历那么我们同理那么我们就这样来拿吧漏一点get谁呢get string然后呢我们来看它的一个下标
+[24:40] 它的一个学历呢是在哪里呢是不是在A字的下面啊那么就是7对吧它的下标呢就是7然后呢我们拿到这个呢是肉二然后呢我们来看一下它的一个那个什么呢叫做EDU1啊然后呢下面再来看一下这个EDU2啊那么这两个这个值
+[25:03] 那么如果他们俩要是也相等的话那么我们还需要继续再去加一下对吧那么跟这个判断就一样了string有tils.equus然后呢edu1然后呢edu2那么如果这两个要是相等的话那么我们就给它设置多少呢来看一下我们的这个规则那么也是这个20那加20就可以了如果不相等呢那我们就不做一个这个计算了
+[25:32] 那么这样的话我们其实就完成了我们这样的一个计算最终我们是不是就会得到我们的一个trip这样的一个数据对吧那我们来去接受一下这个就是我们的一个比如说我们就叫我们的一个javapairrdd就叫它好那么我们就拿到它了ok好那么我们这个就先讲到这里那么下面下个视频我们再继续
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spark 中读取 MongoDB 和 MySQL 数据，并基于用户属性计算用户相似度，用于推荐系统。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：展示课程大纲，当前章节为“1.2.1. 编写Spark程序”，并显示配置文件中 Spark 连接 MongoDB 和 MySQL 的配置项。
+画面 2：展示 Spark 程序入口，加载外部配置文件 app.properties，构建 SparkConf 并创建 JavaSparkContext。
+画面 3：展示项目目录结构，重点在 src/main/java/com/tanhua/Spark/mongo/SparkUserRecommend.java 文件。
+画面 4：展示 SparkUserRecommend.java 中加载 MySQL 数据的代码，使用 SparkSession 读取数据库。
+画面 5：展示设置数据库连接属性的代码，包括驱动、用户名、密码等。
+画面 6：展示 EditPlus 编辑器中用户数据文件（u_data）的内容，包含用户 ID、年龄、性别、城市、学历等字段。
+画面 7：展示 EditPlus 中用户数据文件的详细内容，包含用户 ID、年龄、性别、城市、学历等字段。
+画面 8：展示 SparkUserRecommend.java 中计算用户相似度的代码，使用 cartesian 方法生成笛卡尔积。
+画面 9：展示计算用户相似度的代码，过滤掉用户自己与自己的对比。
+画面 10：展示计算用户相似度的代码，提取用户 ID。
+画面 11：展示计算用户相似度的代码，计算年龄差。
+画面 12：展示计算用户相似度的代码，计算用户年龄差。
+画面 13：展示计算用户相似度的代码，计算用户城市是否相同。
+画面 14：展示计算用户相似度的代码，计算用户学历是否相同。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1：
+Spark.mongodb.input.uri = mongodb://192.168.31.81:27017/tanhua_recommend_uanti_20191009
+roadReferencePrimaryPreferred
+Spark.mongodb.output.uri = mongodb://192.168.31.81:27017/tanhua_recommend_uanti_20191009
+roadReferencePrimaryPreferred
+jdbc.url = jdbc:mysql://192.168.31.81:3306/tanhua_recommend_user?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+jdbc.username = root
+jdbc.password = 0194907
+jdbc.driverClassName = com.mysql.cj.jdbc.Driver
+
+画面 2：
+public static void main(String[] args) throws Exception {
+    InputStream inputStream = SparkQuaZi.class.getClassLoader().getResourceAsStream(name: "app.properties");
+    Properties properties = new Properties();
+    properties.load(inputStream);
+    // 构建Spark配置
+    SparkConf sparkConf = new SparkConf()
+        .setAppName("SparkQuaZi")
+        .setMaster("Local[*]")
+        .set("Spark.mongodb.input.uri", properties.getProperty("Spark.mongodb.input.uri"));
+    // 构建Spark上下文
+    JavaSparkContext jsc = new JavaSparkContext(sparkConf);
+    // 加载MongoDB中的数据
+    JavaMongoRDD<Document> rdd = MongoSpark.load(jsc);
+    // 打印测试数据
+    rdd.foreach(document -> System.out.println(document.toJson()));
+    // 在数据中会存在，同一个用户对不同的动作（相同动作）进行操作，需要合并操作
+}
+
+画面 3：
+SparkSession sparkSession = SparkSession.builder().config(sparkConf).getOrCreate();
+String url = properties.getProperty("jdbc.url");
+// 设置数据库连接信息
+Properties connectionProperties = new Properties();
+connectionProperties.put("driver", properties.getProperty("jdbc.driver-class-name"));
+connectionProperties.put("user", properties.getProperty("jdbc.username"));
+connectionProperties.put("password", properties.getProperty("jdbc.password"));
+JavaRDD<Row> userInfoRdd = sparkSession.read().format("jdbc").option("url", url).option("dbtable", "tb_user_info", connectionProperties).load();
+
+画面 4：
+SparkSession sparkSession = SparkSession.builder().config(sparkConf).getOrCreate();
+String url = properties.getProperty("jdbc.url");
+// 设置数据库连接信息
+Properties connectionProperties = new Properties();
+connectionProperties.put("driver", properties.getProperty("jdbc.driver-class-name"));
+connectionProperties.put("user", properties.getProperty("jdbc.username"));
+connectionProperties.put("password", properties.getProperty("jdbc.password"));
+JavaRDD<Row> userInfoRdd = sparkSession.read().format("jdbc").option("url", url).option("dbtable", "tb_user_info", connectionProperties).load();
+
+画面 5：
+// 设置数据库连接信息
+Properties connectionProperties = new Properties();
+connectionProperties.put("driver", properties.getProperty("jdbc.driver-class-name"));
+connectionProperties.put("user", properties.getProperty("jdbc.username"));
+connectionProperties.put("password", properties.getProperty("jdbc.password"));
+JavaRDD<Row> userInfoRdd = sparkSession.read().format("jdbc").option("url", url).option("dbtable", "tb_user_info", connectionProperties).load();
+
+画面 6：
+无代码内容。
+
+画面 7：
+无代码内容。
+
+画面 8：
+cartesian.mapToPair(row -> {
+    Row row1 = row._1();
+    Row row2 = row._2();
+    Long userId1 = row1.getLong(1);
+    Long userId2 = row2.getLong(1);
+    // 自己与自己对比
+    if (userId1.longValue() == userId2.longValue()) {
+        return new Tuple2<>(null,_);
+    }
+    return new Tuple2<>(null,_);
+});
+
+画面 9：
+cartesian.mapToPair(row -> {
+    Row row1 = row._1();
+    Row row2 = row._2();
+    Long userId1 = row1.getLong(1);
+    Long userId2 = row2.getLong(1);
+    // 自己与自己对比
+    if (userId1.longValue() == userId2.longValue()) {
+        return new Tuple2<>(null,_);
+    }
+    return new Tuple2<>(null,_);
+});
+
+画面 10：
+cartesian.mapToPair(row -> {
+    Row row1 = row._1();
+    Row row2 = row._2();
+    Long userId1 = row1.getLong(1);
+    Long userId2 = row2.getLong(1);
+    // 自己与自己对比
+    if (userId1.longValue() == userId2.longValue()) {
+        return new Tuple2<>(null,_);
+    }
+    return new Tuple2<>(null,_);
+});
+
+画面 11：
+cartesian.mapToPair(row -> {
+    Row row1 = row._1();
+    Row row2 = row._2();
+    Long userId1 = row1.getLong(1);
+    Long userId2 = row2.getLong(1);
+    // 自己与自己对比
+    if (userId1.longValue() == userId2.longValue()) {
+        return new Tuple2<>(null,_);
+    }
+    return new Tuple2<>(null,_);
+});
+
+画面 12：
+cartesian.mapToPair(row -> {
+    Row row1 = row._1();
+    Row row2 = row._2();
+    Long userId1 = row1.getLong(1);
+    Long userId2 = row2.getLong(1);
+    // 自己与自己对比
+    if (userId1.longValue() == userId2.longValue()) {
+        return new Tuple2<>(null,_);
+    }
+    return new Tuple2<>(null,_);
+});
+
+画面 13：
+cartesian.mapToPair(row -> {
+    Row row1 = row._1();
+    Row row2 = row._2();
+    Long userId1 = row1.getLong(1);
+    Long userId2 = row2.getLong(1);
+    // 自己与自己对比
+    if (userId1.longValue() == userId2.longValue()) {
+        return new Tuple2<>(null,_);
+    }
+    return new Tuple2<>(null,_);
+});
+
+画面 14：
+cartesian.mapToPair(row -> {
+    Row row1 = row._1();
+    Row row2 = row._2();
+    Long userId1 = row1.getLong(1);
+    Long userId2 = row2.getLong(1);
+    // 自己与自己对比
+    if (userId1.longValue() == userId2.longValue()) {
+        return new Tuple2<>(null,_);
+    }
+    return new Tuple2<>(null,_);
+});
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无 PPT 标题、架构图/流程图或表格数据。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

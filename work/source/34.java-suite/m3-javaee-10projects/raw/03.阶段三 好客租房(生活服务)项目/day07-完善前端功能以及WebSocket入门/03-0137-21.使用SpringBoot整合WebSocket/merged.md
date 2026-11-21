@@ -1,0 +1,302 @@
+# 21.使用SpringBoot整合WebSocket
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day07-完善前端功能以及WebSocket入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day07-完善前端功能以及WebSocket入门\21.使用SpringBoot整合WebSocket【海量资源尽在 ubkz.com】.mp4
+- 时长 10分44秒（音频 645s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么我们接着继续啊前面呢我们通过编码的形式呢我们去实现了WebSocket的客户端以及服务端那么其实我们可以看到它的代码呢并不复杂啊并不复杂但是呢我们可以把它的使用的变得更简单一点啊虽然它不复杂但是我们可以变得更简单
+[00:20] 那么是什么呢就是Spring对WebSocket的形式做了支持可以让我们在使用WebSocket变得更加的简单我们就去来去学习一下Spring如何去在Spring中如何去使用WebSocket看他怎么去做整合的当然我们主要是在Spring boot的下面去整合我们的WebSocket所以我们来看一下那么下面我们首先先把依赖先导入进来那么我们现在要玩的是
+[00:50] 什么呢我Spring Boot是不是所以呢我们需要呃先停掉吧然后呢我们需要的是给我们这个pom呢先给他增加一个什么呢parent对吧先增加一个parent就是我们Spring Boot的这个parent那么增加好之后啊那么下面我们就需要导入所需要的依赖了那么要注意的就是呃我们前面所导的这个就要把它住掉了为什么要把它住掉呢原因是在Spring Boot的内部
+[01:17] 他呢已经集成了Tomcat的一些这个包啊然后呢他就会和我们的这个包呢有冲突所以呢我要把它住掉然后呢我们再把这个Spring Boot的这个什么呢STAR这个web socket把这个导入进来那么这样的话呢我们就可以直接去做一个编写了
+[01:37] 他就把一些相关的一代的全部就引用进来了OK好那么有了这个基础之后那下面我们就去来编写这个我们具体的这个代码编写代码那么编写这个代码的其实呢主要是我们需要分两步去做那么我们这样我们一步一步来那么先去创建一个包这个包呢我们就叫他sprint就是我们WebSocket的sprint的一个实现那么来看一下sprint是怎么去实现他的呢
+[02:04] 那么首先第一步呢我们其实是需要写一个这个hander写我们这个hander那么这个hander呢是做什么的呢它呢其实就是在跟我们刚刚写这个一样就是写这个具体的业务逻辑的就是说你需要怎么去处理比如说有客户端发消息给我们了我们应该怎么去处理怎么样去接收那我们又如何去给客户端怎么去发消息啊所有的这个逻辑呢都写到这个里面来
+[02:30] 那么他其实是要去做一个接口做一个这个继承去继承我们的这个有个叫Task的Task就是我们的一个文本是吧然后一个WebSocket的Handle去继承它继承它然后我们来做一个继承继承它把这个包子导入进来那么导入进来之后我们在这个里面就可以去重写一些方法重写附内中的一些方法OK
+[02:58] 那么我们来看一下重写什么方法呢重写有一个方法叫做handle text这个message就是我们的一个获取这个消息获取这个消息那么这样我就把这个案例直接拷过来吧我们去看一下这个代码的一个实现把这个相关的包一导入就可以了那么这个是什么意思呢就是当我们的客户端呢去给我们的服务端去发消息的时候呢我们就会执行我们这个方法
+[03:25] 然后呢我把这个打印出来就是获取到这个消息把消息内容打印出来然后呢我们向我们的这个客户端注意下面这个代码它是什么呢是向客户端发送这个消息发送这个消息就是说消息有收到是不是跟我们刚刚所见的那个功能是一样的对吧然后呢下面这个呢我们其实做了一个模拟的一个实验就是说如果这个客户端发送给我们的消息
+[03:56] 是10注意是10这个字不创的话那么我们就做一个循环向我们的服务端去发送这个消息发送失调这个消息就是这样做这样的一个模拟就是说应该大家也用过微信在微信中是不是有一些公众号是不是你回复什么关键字他就给你去做一个这样的一个响应就是做这样的一个模拟的一个实现OK
+[04:21] 好那么这个是第一个这个方法就是我们拿到消息方法那第二个呢就是这个叫叫什么呢这个是连接的时候啊这个是我们当我们的客户端与我们的服务端建立连接的时候呢我们需要可以去执行这个方法
+[04:39] 那么我们可以去打印一句话对吧打印一句话就说我们已经建立连接了或者说我们的直接就向我们的这个服务端去发一个消息说欢迎连接到我们的ws这个服务ok这个是不是跟我们刚刚所写的那个欢迎是一样的ok然后呢如果关闭的话那么也可以去写他的这个after close这个方法
+[05:00] 可以看到这个是不是close这个方法然后断开这个连接OK好那么大概就我们写这么几个就够了就够了然后这是我们的第一步第一步那么有了这个handle之后我们具体业务逻辑是不是都在这个里面去写接下来我们要写它的一个配置类就是configure那么我们把这个configure我们也来创建一下然后创建一个这个类就叫WebSocket的configure
+[05:25] 它是要去实现我们的这个接口就是web socket configure这样的一个接口实现它那么先把这个包导入进来导入进来之后我们就去实现这个里面的一个方法它需要实现的是一个注册这个方法那么接下来我们就需要给这个类添加两个注解首先第一个是叫configuration就是标记为这是我们的配置的一个类然后下面我们就需要给它去加一个叫enable
+[05:53] WebSocket这样的一个注解就是标明这是一个WebSocket的一个服务去启用一个WebSocket然后在这个里面我们需要去完成我们的hander的一个注册那么其实我们可以看到这个方法的名字是不是叫registerwebsocket的hander那么就去做一个这样的一个注册那么注册谁其实要注册我们前面所写的一个myhander那么我们就需要把这个myhander我们去把它加入到我们的sprint的容器中然后在我们的
+[06:21] 这个配置内容的去就可以把它是注入进来了,写一个myHandle然后呢,把它是不是注入进来那么这个时候呢,会发现编译器呢,对他有一个报错啊这个没关系,这个只是编译器的一个错误因为我们现在没有写Spring Boot的一个启动类所以呢,他会提示我们说这个类呢,是注入不进来的,OK那么在下面这个位置呢,我们就可以调用Registry,然后呢点
+[06:48] and这个handle然后呢就是this.myhandle就把我们的handle注册进去然后呢给它一个后面的一个请求的一个路径比如说叫ws去做一个请求OK那么到这儿我们就已经完成了一个注册了那么这个我们就搞定那么下面呢我们就需要去写一个什么呢写我们的一个启动类啊写我们的一个启动类那么把这个启动类呢我们拷过来那么我们把它拷到就拷到哪里呢拷到这儿吧
+[07:19] 然后在WebSocket的下面然后我们写这样的一个myapplication然后去做一个这样的一个启动这个启动类非常简单就是直接去直接通过spring的这个application如果去启动就OK了好那么启动起来之后我们是不是就已经有了这样的一个WebSocket的服务你看这个错误是不是就没有了好那么下面我们来测试一下看它是否OK呢
+[07:46] 来等待它的一个启动啊等待它一个启动好那么现在我们这个服务呢它就启动起来了它的端口呢默认是8080所以呢我们来测试一下看它是否能够连接成功呢比如说我们就拿这个为例吧啊然后呢这个改成8080然后呢后面的这个改成什么WS对吧因为我们刚刚在这个位置所写的这个是不是WS啊然后呢点击这个建立连开启这个连接走
+[08:20] 但是发现呢建立这个连接是出错了为什么出错呢我们来看一下那么在这个里面呢你会发现它呢是不允许去做一个连接的其实还是什么问题呢还是我们那跨域的问题啊我们需要在这个位置呢我们给它去设置一个允许所有的这个所有的这个地址去做一个跨域的一个请求所以我们把它设置为是一个新啊然后呢我们来重启这个服务那么这样的话呢它就能够成功的去访问到我们这个WS了
+[08:51] 好那我们再来做一个测试那么等待它的一个等待它的一个重启那么重启成功之后呢就可以做测试了那么去连接到ws周那么可以看到现在是不是就连接成功了那么我们是不是就连接成功之后呢就会收到一个消息欢迎连接到ws服务这个是不是就是刚刚我们在myhander这个里面所实现的这个on这个after这个
+[09:19] 就是连接就是在连接之后去执行的我们的这样的一个方法在这个里面我们是不是向我们的客户端发送了这样的一个一条消息OK那么现在我是不是可以尝试的向服务端是不是去发消息比如说发一个你好那么他是不是会给我个响应说消息已收到是不是你看你好是不是消息已收到那么是不是就是刚刚我们缩写的这个逻辑那么我们来看一下控制台在控制台中有没有去输出这个消息呢是不是也有就是你好
+[09:48] 然后我们是不是可以尝试的发一个什么10还记得我们刚刚所写的逻辑吗如果发送的是一个10的话我们是不是就会接收到10条消息然后我们发送走你可以看到消息一直在发是不是0到9是不是有10条消息OK好那么这个是不是就是我们Spring Boot的这样Spring Boot所去整合我们WebSocket的一个实现相对还是比较容易的对吧其实你可以看到它要比我们去原生使用
+[10:18] 呃原生的这个注解去实现的变得更简单了就是我们不需要去写那个什么啊open呢呃还有啊message这样的一些注解而是去去实现一些呃去继承一个类啊继承这个类那么就可以去重写类中的一个方法就可以去编写我们具体一些业务逻辑了那么ok好那么关于这个sprint boot去整合我们的web socket我们就讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中整合 WebSocket，包括添加依赖、编写处理器、配置类和启动应用。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 PPT 页面，标题为“6.5. Spring Boot整合WebSocket”，并开始讲解导入依赖。
+画面2：在 IDEA 中编辑 pom.xml 文件，添加了 Spring Boot 的父依赖和自定义的 WebSocket 依赖。
+画面3：在 pom.xml 中，继续编辑依赖部分，移除了注释的 javaee-api 依赖，并添加了 spring-boot-starter-WebSocket 依赖。
+画面4：在 MyWebSocket.java 文件中，定义了 @ServerEndpoint 注解的类，包含 onOpen、onClose、onMessage 方法。
+画面5：在 MyHandler.java 文件中，定义了 TextWebSocketHandler 的子类，重写了 handleTextMessage 方法，用于处理文本消息。
+画面6：在 MyHandler.java 文件中，继续编辑，添加了 afterConnectionEstablished 和 afterConnectionClosed 方法。
+画面7：在 IDEA 中，显示了 PPT 页面，其中包含多个代码截图和一个“运行”按钮。
+画面8：在 WebSocketConfig.java 文件中，定义了 @Configuration 和 @EnableWebSocket 注解的类，用于配置 WebSocket。
+画面9：在 WebSocketConfig.java 文件中，编辑 registerWebSocketHandlers 方法，准备注册处理器。
+画面10：在 MyApplication.java 文件中，定义了 @SpringBootApplication 注解的主类，包含 main 方法。
+画面11：在浏览器中打开 index.html 页面，显示了 WebSocket 的前端界面。
+画面12：在 IDEA 中，显示了 MyHandler.java 文件的代码，并在控制台中显示了应用启动日志。
+画面13：在 PPT 页面中，展示了 MyApplication.java 的代码，用于启动 Spring Boot 应用。
+画面14：在 PPT 页面中，展示了 6.5.2 节“编写WebSocketHandler”的内容，包括需要实现的接口和导入的包。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+ http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.0.RELEASE</version>
+    </parent>
+    <groupId>cn.itcast.WebSocket</groupId>
+    <artifactId>itcast-WebSocket</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- 配置Tomcat插件 -->
+        </plugins>
+    </build>
+</project>
+```
+
+画面2：
+```xml
+<dependency>
+    <artifactId>javaee-api</artifactId>
+    <version>7.0</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+画面3：
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-WebSocket</artifactId>
+</dependency>
+```
+
+画面4：
+```java
+@ServerEndpoint("/WebSocket/{uid}")
+public class MyWebSocket {
+    @OnOpen
+    public void onOpen(Session session, @PathParam(value = "uid") String uid) {
+        System.out.println("WebSocket已经连接：" + session);
+        session.getBasicRemote().sendText("uid:" + uid + "，你好！欢迎登陆系统");
+    }
+
+    @OnClose
+    public void onClose(Session session) {
+        System.out.println("WebSocket已经关闭：" + session);
+    }
+
+    @OnMessage
+    public void onMessage(String message, Session session) throws IOException {
+        System.out.println("收到客户端发来的消息 --> " + message);
+        try {
+            session.getBasicRemote().sendText("收到消息：" + message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+画面5：
+```java
+import java.io.IOException;
+
+public class MyHandler extends TextWebSocketHandler {
+    @Override
+    public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
+        System.out.println("收到消息：" + message.getPayload());
+        if (message.getPayload().equals("10")) {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                session.sendMessage(new TextMessage("消息：" + i));
+            }
+        }
+    }
+}
+```
+
+画面6：
+```java
+@Override
+public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+    session.sendMessage(new TextMessage("欢迎连接到ws服务"));
+}
+
+@Override
+public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    System.out.println("断开连接！");
+}
+```
+
+画面8：
+```java
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+
+@Configuration
+@EnableWebSocket
+public class WebSocketConfig implements WebSocketConfigurer {
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+    }
+}
+```
+
+画面9：
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageHandler;
+import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
+
+public class WebSocketConfig implements WebSocketConfigurer {
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(myHandler(), "/WebSocket").addInterceptors(new HttpSessionHandshakeInterceptor());
+    }
+}
+```
+
+画面10：
+```java
+package cn.itcast.WebSocket;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+```
+
+画面12：
+```java
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+@Component
+public class MyHandler extends TextWebSocketHandler {
+    @Override
+    public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
+        System.out.println("获取到消息：" + message.getPayload());
+        if (message.getPayload().equals("10")) {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                session.sendMessage(new TextMessage("消息：" + i));
+            }
+        }
+    }
+}
+```
+
+画面13：
+```java
+@Bean
+public WebsocketHandler myHandler() {
+    return new MyHandler();
+}
+```
+
+画面14：
+```java
+package cn.itcast.WebSocket.spring;
+
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.WebSocketHandler;
+
+public class MyWebSocketHandler implements WebSocketHandler {
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        session.sendMessage(new TextMessage("欢迎连接到ws服务"));
+    }
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        System.out.println("断开连接！");
+    }
+
+    @Override
+    public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+        if (message.getPayload().equals("10")) {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                session.sendMessage(new TextMessage("消息：" + i));
+            }
+        }
+    }
+
+    @Override
+    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
+        System.out.println("传输错误：" + exception.getMessage());
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：PPT 标题为“6.5. Spring Boot整合WebSocket”，内容为“Spring
+

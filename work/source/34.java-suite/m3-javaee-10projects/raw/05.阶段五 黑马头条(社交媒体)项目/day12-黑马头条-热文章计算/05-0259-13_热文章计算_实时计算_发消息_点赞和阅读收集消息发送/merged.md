@@ -1,0 +1,185 @@
+# 13_热文章计算_实时计算_发消息_点赞和阅读收集消息发送
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day12-黑马头条-热文章计算
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day12-黑马头条-热文章计算\13_热文章计算_实时计算_发消息_点赞和阅读收集消息发送【海量资源尽在 666java.com】.mp4
+- 时长 8分28秒（音频 509s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面咱们就继续刚才这个方法定义完之后有可能还太懵是吧没有事咱们下面就来去做一个具体的事具体的事是什么意思就是说看看谁去调用这些方法好吧刚才说了其实咱们已经怎么着是谁调用是当前的点赞取消点赞或者是阅读是吧这样咱们就具体的去写咱们可以看一下当前的具体行为的发送
+[00:29] 这里边首先是一个点赞还有啥呢还有一个收藏还有一个阅读关于当前的比如说修改比如说里边还有什么这种收藏还有什么的转发当然那两个咱们并没有做所以说咱们现在只需要去做两块一个是点赞的一个是阅读的把这两个给做一下咱们后期会测的时候其实也方便测那行这时候你看
+[00:58] 首先你看看一下点赞其实收藏跟阅读的思路是一样的首先看点赞这一块是保存点赞信息的时候怎么样去判断判断什么判断你到底是不是点赞是like那就是点赞是console那就是取消点赞然后我调的方法就不一样你看一个是send message plus另外一个啥呢另外一个是send message reduce好吧这样的话就是-1这是加1好吧阅读的话目前的话都是加1
+[01:27] 目前都是加一他不可能是减一你看完之后你说再不看了那这事不行是吧那行那这个就是两个消息也就是说这个方法具体在哪去调用刚才没说了那像那这样那他最终的咱们要去调用当前的这个send message plus或者是他是吧但是这里边还要去封装个消息这消息其实就是具体的也有根据业务相关的消息比如说我点赞的
+[01:57] 是吧我什么阅读的那肯定两个对象是不一样的所以说呢你要封装成不同的消息才行那这时候呢咱们还需要再去定义当前的消息啊这时候你再点定义啊还是在当前的Kafkamessage里面在这去创建一个包啊这个包叫啥呢叫behind吧好然后呢你在这去创建一个类user like message
+[02:26] 然后让他去继承当前的Kafkamessage这个范型是怎样这个范型就是ap user likes没有ap user like没有like吗我看看ap user like怎么没有我看看我看这个是怎么写的ap like behaviorap likes behavior好吧然后是实现这个方法是他的名称
+[03:01] 我们看起什么样啊一个user likesuser likes这时候是不是还要再去写两个构造方法啊public user like message好第一个是无参第二个呢是有参user like message有参的话这个参数就怎样就是ap like have a date不用一下当前的附类的就完事啊
+[03:32] 那行那这个就给你完了啊呀咱们顺便呢也把当前的这个收藏啊阅读啊也也做一下还是在这去创建一个构建咱们这有一个类他然后呢咱们就在这去剂成谁呀一层卡不卡啊付卡i t 只要 ap reid 开门吧好 control i 这个名称咱们叫啥呢叫都是绿的是吧
+[04:11] 那这个还得还得需要有他的什么呢有他的这种构造啊public user read message第二个呢是public user read message然后是这是有餐的啊有餐的话是谁呀AP read那这样的话咱们这个消息的内容咱们就算是做完了啊
+[04:47] 但是最终的消息发送咱们还是得去写是吧所以说咱们在这还得去找到当前具体保存当前的这种收藏不是收藏点赞的一个类找到当前的这种具体的实现类找到它然后这有一个AAPLex Behaviour Service按扁上往下找就这东西这个其实你就判断一下判断这个insert等于1那为什么要这么判断呢
+[05:19] 反回的是影响的函数是吧其实你保存一边那是保存一条它保存成功的话它肯定会返回一个1好吧然后下面咱们就可以再次一判断要判断啥判断是getOperation等于一个APLikesBehaviour.Operation.Like.GetCode
+[05:51] 这样的话呢其实就是它是一个什么它是一个点赞ok然后咱们再往下看呗if要是不是点赞那就是取消点赞呢看上前这个呢是个like还有啥呢还有一个concludeconclude就是取消的意思啊这时候呢你就可以去发消息了啊好那这时候发消息之前呢你在这去注入一个上前写完的那个就是发消息的这个类是吧e-h-a-b-i-s-e-n-d-e是吧
+[06:25] 好就他好注入进来之后呢这时候你可以去调方法这个调的就是那个send message to last好吧这是加一然后下边那个呢下边这个是点一reduce这里边需要消息啊一个是new一个什么new一个当前的咱们哪个消息啊就是刚才咱们封装那个消息是吧叫user like message这里边需要个参数是谁啊
+[06:58] 就是当前的然后第二个就是user id有user id第三个你给一个处就可以了默认咱们目前的话都是往article中去发消息下面是消息内容是一样的只是方法不一样消息内容是一模一样这样的话咱们消息就算是发送了发送完之后咱们这还有一个叫read这个咱们也要做
+[07:30] 打开然后你找到这找到这你在这判断就可以了啊说啊这个kunk等于等于一OK啊那就是保存了然后呢你就可以去发送了那发送之前呢你还得去读当前的这个类啊privatehouse behaviormessage center是吧加上之后呢这时候你就可以去发消息刚才说了啊这个呢它只有啥呢只有一个啊就加一没有简易啊
+[08:08] 这时候你可以去new一个什么user read message里边装的第一个就是ap read behavior然后第二个呢第二个的话就是当前的user id第三个也是出默认都是出好吗那行那这样的话咱们就算是设置完了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在用户点赞和阅读行为中，通过 Kafka 发送消息，实现行为事件的异步处理。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示项目结构，重点是 `BehaviorMessageSender` 类，其中 `sendMessagePlus` 方法用于发送点赞消息，`sendMessageReduce` 方法用于发送阅读消息，参数包含 `apUserId` 和 `isSendToArticle`。
+画面2：PPT页面，标题为“3.1.5 具体行为消息发送”，内容包括“（1）点赞”和“（2）阅读”两个部分，分别对应创建 `UserLikesMessage` 和 `UserReadMessage` 实体类。
+画面3：PPT页面，展示“（2）阅读”部分，重点是创建 `UserReadMessage` 实体类。
+画面4：IDE中展示 `UserLikesMessage` 类的代码，位于 `com.heima.common.Kafka.messages.behavior` 包下，继承自 `KafkaMessage<ApLikesBehavior>`。
+画面5：IDE中展示 `UserLikesMessage` 类的代码，展示其 `getDataType` 方法和 `hashCode` 方法。
+画面6：PPT页面，展示“（1）点赞”部分，重点是 `ApLikesBehaviorServiceImpl` 类中的 `saveLikesBehavior` 方法。
+画面7：PPT页面，展示“（2）阅读”部分，重点是 `UserReadMessage` 实体类。
+画面8：PPT页面，展示“（2）阅读”部分，重点是 `UserReadMessage` 实体类。
+画面9：IDE中展示 `ApLikesBehaviorServiceImpl` 类的代码，展示 `saveLikesBehavior` 方法中创建 `ApLikesBehavior` 对象并设置属性。
+画面10：IDE中展示 `ApLikesBehaviorServiceImpl` 类的代码，展示 `saveLikesBehavior` 方法中插入数据库并根据操作类型调用 `behaviorMessageSender` 发送消息。
+画面11：IDE中展示 `ApLikesBehaviorServiceImpl` 类的代码，展示 `sendMessagePlus` 方法的调用。
+画面12：IDE中展示 `ApLikesBehaviorServiceImpl` 类的代码，展示 `sendMessageReduce` 方法的调用。
+画面13：IDE中展示 `AppReadBehaviorServiceImpl` 类的代码，展示 `saveReadBehavior` 方法的开始部分。
+画面14：IDE中展示 `AppReadBehaviorServiceImpl` 类的代码，展示 `sendMessagePlus` 方法的调用。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+public void sendMessagePlus(KafkaMessage message, Long apUserId, boolean isSendToArticle) {
+    UpdateArticleMessage temp = parseMessage(message, apUserId, 1);
+    kafkaSender.sendArticleUpdateBus(temp);
+}
+```
+画面2：
+```java
+public class UserLikesMessage extends KafkaMessage<ApLikesBehavior> {
+    public UserLikesMessage() {
+    }
+    public UserLikesMessage(ApLikesBehavior data) {
+        super(data);
+    }
+    @Override
+    public String getType() {
+        return "user-likes";
+    }
+}
+```
+画面6：
+```java
+@Override
+public ResponseResult saveLikesBehavior(LikesBehaviorDto dto) {
+    //......上面代码省略
+    int temp = aplikesBehaviorMapper.insert(alb);
+    if (insert != 1) {
+        if (alb.getOperation() == ApLikesBehavior.Operation.LIKE.getCode()) {
+            behaviorMessageSender.sendMessagePlus(new UserLikesMessage(alb), userId, true);
+        } else if (alb.getOperation() == ApLikesBehavior.Operation.CANCEL.getCode()) {
+            behaviorMessageSender.sendMessageReduce(new UserLikesMessage(alb), userId, true);
+        }
+        return ResponseResult.okResult(temp);
+    }
+}
+```
+画面9：
+```java
+ApLikesBehavior alb = new ApLikesBehavior();
+alb.setEntryId(dto.getEntryId());
+alb.setBehaviorEntryId(dto.getBehaviorEntryId());
+alb.setUserId(dto.getUserId());
+alb.setTypeId(dto.getTypeId());
+alb.setOperation(dto.getOperation());
+alb.setTimestamp(ChronoUtils.encrypt(alb.getId(), alb.getBehaviorEntryId()));
+```
+画面10：
+```java
+int insert = aplikesBehaviorMapper.insert(alb);
+if (insert != 1) {
+    if (alb.getOperation() == ApLikesBehavior.Operation.LIKE.getCode()) {
+        behaviorMessageSender.sendMessagePlus(new UserLikesMessage(alb), userId, true);
+    } else if (alb.getOperation() == ApLikesBehavior.Operation.CANCEL.getCode()) {
+        behaviorMessageSender.sendMessageReduce(new UserLikesMessage(alb), userId, true);
+    }
+    return ResponseResult.okResult(insert);
+}
+```
+画面13：
+```java
+@Override
+public ResponseResult saveReadBehavior(ReadBehaviorDto dto) {
+    //获取用户信息，获取设备id
+    ApReadBehavior apReadBehavior = ApReadBehaviorUtils.getApReadBehavior(dto);
+    //根据当前的用户信息设置设备id，ap_behavior_entry_id
+    apReadBehavior.setEntryId(dto.getEntryId());
+    apReadBehavior.setUpdatedTime(new Date());
+    apReadBehavior.setReadDuration(dto.getReadDuration());
+    apReadBehavior.setReadTime(new Date());
+    apReadBehavior.setReadType(dto.getReadType());
+    apReadBehavior.setReadUserId(dto.getUserId());
+    apReadBehavior.setReadBehaviorEntryId(dto.getReadBehaviorEntryId());
+    apReadBehavior.setReadBehaviorId(dto.getReadBehaviorId());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getReadBehaviorType());
+    apReadBehavior.setReadBehaviorStatus(dto.getReadBehaviorStatus());
+    apReadBehavior.setReadBehaviorTime(dto.getReadBehaviorTime());
+    apReadBehavior.setReadBehaviorDuration(dto.getReadBehaviorDuration());
+    apReadBehavior.setReadBehaviorCount(dto.getReadBehaviorCount());
+    apReadBehavior.setReadBehaviorType(dto.getRead
+

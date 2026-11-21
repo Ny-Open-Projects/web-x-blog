@@ -1,0 +1,138 @@
+# 08-自定义局部过滤器
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：2.SpringCloud/day02
+- 源文件：01.阶段一 微服务相关技术\2.SpringCloud\day02\08-自定义局部过滤器_【海量资源尽在 ubkz.com】.mp4
+- 时长 13分37秒（音频 816s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 自定义局部过滤器在这一小节中我们的主要目标是按照默认过滤器编写并配置一个自定义局部过滤器该过滤器可以通过配置文件中的参数名称获取请求的参数值那具体我们的需求呢是这么一个需求就是在过滤器中将这么一个地址参数name的值获取到并
+[00:44] 输出到控制台输出以后呢这个参数不一定是每一次都叫name我们可能会变化也就是参数名是可变的需要可以通过配置过滤器的时候做到配置参数名这时候参数名就是可变的了
+[01:23] 只要你去配置我们的过滤器的时候指定不同的参数名我们以后获取的这个参数就是指定的这个参数对应的值这就是需求以后如果指定了一个叫H那你获取就是请求地址中H的对应参数的值那现在是NAND的话就获取的是NAND对应的参数值具体如何去实现我们来分析它的实现步骤那步骤呢第一个是要去配置这个过滤器那过滤器配置的时候
+[01:54] 我们又了解到这个过滤器在编写的时候呢就有一个特征要有这么一个后缀叫做gatewayfilter factory那既然是我们自定义的过滤器我们可以起个名称叫my parent所以你配置的时候只要配置这一部分的名称就可以了我们配置配置以后呢接下来你要有这个过滤器我们要去编写过滤器
+[02:23] 之后再去测试验证我们的过滤器是否能够取到请求地址中指定参数名称对应的值分析完成我们接下来按照分析去实现打开IDEA我们去配置一个过滤器再来一个针对这个路由又约好我们的过滤器名称叫myparent它的名称我们获取的是请求路径中name对应的值配置完成
+[02:55] 完了后接下来你要去编写过滤器编写那又在我们简介中了解到呢这个过滤器要实现一个接口那从我们的这个讲义中了解到这个接口呢它有一个抽象类就是它所有的过滤器都要去实现接口但是它直接继承的是一个抽象的一个类那我们编写的也可以这样做好所以打开开发工具一样的去继承一个抽象的类
+[03:34] 这个名称后缀就是 gateway filter factory是不变的然后继承一个抽象类这抽象类叫 extract gateway filter factory它要指定一个范型那范型就是一个配置那这个配置呢就是要去动态接收我们的这个名称的一个类它里面指定一个它其实是name value的但是我们只有一个名称没有值
+[04:04] 不可能是知道请求地址中的值是什么那么参数名称是可以定的所以你要有一个配置类我们现在是没有的造一个出来配置一个内部的类就可以了而且这也不变所以我们配置的是static class来个config这里面我们就只有一个属性你假设呢叫做parent这个parent的意思对应的就是对应在配置过滤器的时候指定的
+[04:40] 参数名那也就是在我们这边就是name就是他好你把这一个想象成name就可以了这个名称是随便起的接着呢再来继续我们生成他的getSet这边指定在我们自己这一个类里面的配置.config有了以后呢接下来他还是有错提示那具体我们应该怎么来去写呢其实我们没有写过
+[05:19] 可以去参考他已有的这种过滤器好我们参考一个搜索一下我们去参考呢是添加请求的参数的过滤器我们参考是这个点击他是这么做的他又有继承一个抽象类我们进去继续看好他要去编写这一些东西包括配置我们已经有了具体的过滤器实现类实现方法是在这个apply中
+[05:48] 那Apply我们现在还没写一会再来写所以把这个要拿过来就是构造方法指定的是当前我们的配置Config好这边我们指定一个常量来写一个StaticFinalString其实指定的也就是我们这边指定的这个Parent这一个值要跟它一致与配置内中的一致我们再去应用它
+[06:29] 我们没有名称跟值只有一个名称所以这个value key就没有了好这一个就搞定这两个是不可少的晚上接下来我们再去实现control oapply是这个你点击ok去重写这个apply方法那这apply方法返回的是一个接口那接口不可能直接实例化我们来看一下这个接口这接口里面呢就有对应的方法那我们要去写一个匿名实现类
+[07:00] 那我们学了JDK8可以这么写而且这个方法呢返回的是这个它里面有两个参数exchange跟chain回到我们这边return的时候我们就这么写exchangechain这里面呢我们去编写逻辑那它其实最重要返回的是getway filter我们直接return这个chain让它继续的执行其他的过滤器就可以了点filter我们把这个exchange给
+[07:43] 设置进去好就完了里面呢我们要做的逻辑就是获取请求参数中parent对应的参数名的值的参数值那这个parent呢就对应的就是请求路径中的参数名称你设置的name就是namename对应的参数值那到底这个请求有没有包含这个参数是一个问题所以我们先去获取到
+[08:17] 请求的所有参数看一下它是否有包含我们这次要用的这个parent也就是这里面对应的值好所以我们去处理一下判断获取到一个请求先exchange.getRequest得到Request以后接着我们再去判断if请求的参数中有没有包含我们这一次的比如说name这个name呢config.我们直接注入了
+[08:51] 那就直接用这个对象点parent你传进来的呢就已经被复制了这个你就把它想象成name就可以了就我们其实因为是执行这个处理这个请求的我们把这个地址也拿过来分析在分析的笔记中这个地址拿过来会更加清楚一些那这个呢config.parent在我们到了apply方法的时候对应的就是name所以现在判断就是说你请求
+[09:26] 这个参数里面就是这一串里面有没有包含内呢有有的话那么我们就获取它的值OK就来获取request.get参数点获取到我们的这个参数对应的值那它的值呢我们看一下它返回的类型是什么它返回的类型是一个列表那既然是列表我们可以直接把它输出其实也就是只有一个值的那么来一个for each把它输出
+[10:03] 每一个呢都是一个value然后我们要做的事情是把它打印出来好我们格式化打印这是局部过滤器然后它里面参数的名称包括它对应的值我们也输出出来对应的值呢这个参数的名称是confident parent对应的值是这个value好因为你是循环的去处理我们的列表那每一个
+[10:49] 迭代就是一个具体的值那现在其实也就只有一个值也就是我们的itcast如果以我们这个地址来说的话那就会把我们的名称name打出来等于什么打出来好这就是我们的一个过滤器的内容已经全部编写完成了完成以后呢我们的过滤器要是配置成一个组件所以加个注解component加了以后接下来全部做完以后我们就来去启动测试验证有没有问题我们来启动成功的标准
+[11:19] 当我们访问一个请求地址的时候如果地址中包含有我们看一下启动有没有报错包含有我们的Name的话呢它就可以在我们控制台输出我们刚才写的那句话现在没有报错的会输出这句话如果没有那就不会也不会有任何影响就只是不会有任何输出而已那现在打开浏览器来去访问这样直接刷新呢是不会获取到任何参数的因为你没有包含Name我们看控制台
+[11:52] 不会有刚才的这个局部过滤器的输出但如果这时候呢我们的这个请求地址是加了一个参数的话好我们来加就是Name等于ITX当年等于其他什么都可以那就应该有输出我们现在看回控制台有输出如果我们把这个值给改了的话你改成叫黑马回车那在控制台也能够获取到对应的值那如果是我们这时候要获取的是不叫做Name了叫做H
+[12:21] 这样的话那么你如果要获取到我们现在是获取不了的因为你这个不是叫NAND我们只获取请求路径中NAND的值那现在它是获取不了的那如果要获取那我们就通过配置的时候去修改把这个NAND改成H就可以用了好这就是我们的一个自定义局部过滤器的使用那我们回到笔记中来进行小结我们就把刚才的过滤器给粘上来要去
+[12:55] 配置要去实现过滤器配置的话因为比较简短跟我们前面是一样的我们不用粘了好就是说明一下与其他过滤器的配置一致那就看你要些什么参数可以设置我们只有一个那就设置一个就可以了好这就是我们自定义局部过滤器的所有内容
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Cloud Gateway 中自定义局部过滤器，通过配置文件动态获取请求参数并输出。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示课程PPT内容，介绍自定义局部过滤器的目标和需求。
+画面2：在IDEA中创建名为 MyParamGatewayFilterFactory 的类。
+画面3：在 MyParamGatewayFilterFactory 类中定义 Config 静态内部类。
+画面4：展示 AbstractNameValueGatewayFilterFactory 的继承结构和 NameValueConfig 类。
+画面5：展示 MyParamGatewayFilterFactory 类的完整代码结构。
+画面6：在 MyParamGatewayFilterFactory 类中定义静态常量和配置类。
+画面7：在 MyParamGatewayFilterFactory 类中实现 apply 方法。
+画面8：在 apply 方法中获取请求参数并进行判断。
+画面9：在 apply 方法中获取参数值并打印。
+画面10：在控制台中查看服务启动日志。
+画面11：在控制台中查看过滤器执行日志。
+画面12：在浏览器中访问接口，查看返回结果。
+画面13：展示课程PPT内容，介绍自定义局部过滤器的实现步骤。
+画面14：展示 MyParamGatewayFilterFactory 类的完整代码。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面2：
+package com.itheima.gateway.filter;
+public class MyParamGatewayFilterFactory {
+
+画面3：
+public static class Config {
+}
+
+画面4：
+import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
+public abstract class AbstractNameValueGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory.NameValueConfig {
+}
+
+画面5：
+import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
+public abstract class AbstractNameValueGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory.NameValueConfig {
+}
+
+画面6：
+import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
+public abstract class AbstractNameValueGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory.NameValueConfig {
+}
+
+画面7：
+import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
+public abstract class AbstractNameValueGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory.NameValueConfig {
+}
+
+画面8：
+import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
+public abstract class AbstractNameValueGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory.NameValueConfig {
+}
+
+画面9：
+import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
+public abstract class AbstractNameValueGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory.NameValueConfig {
+}
+
+画面10：
+画面11：
+画面12：
+{
+  "id": 5,
+  "username": "itheima",
+  "password": "123456",
+  "name": "张三",
+  "age": 21,
+  "sex": 2,
+  "birthday": "2005-07-07T16:00:00.000+0000",
+  "created": "2014-09-22T03:41:15.000+0000",
+  "updated": "2014-09-22T03:41:15.000+0000",
+  "note": "光棍看雪第11条"
+}
+
+画面13：
+实现步骤：
+1. 配置过滤器；
+2. 编写过滤器；
+3. 测试
+
+画面14：
+package com.itheima.gateway.filter;
+import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.stereotype.Component;
+import java.util.Arrays;
+import java.util.List;
+@Component
+public class MyParamGatewayFilterFactory extends AbstractGatewayFilterFactory<MyParamGatewayFilterFactory.Config> {
+    static final String PARAM_NAME = "param";
+    public MyParamGatewayFilterFactory() {
+        super(Config.class);
+    }
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：标题为“8. 自定义局部过滤器”，目标为“按照默认过滤器编写并配置一个自定义局部过滤器，该过滤器可以通过配置文件中的参数名称获取请求的参数值”，需求为“在过滤器中将http://localhost:10010/api/user/8?name=itcast中的参数name的值获取到并输出到控制台”，小结为“使用场景：请求鉴权、异常处理、记录调用时长等”。
+画面13：标题为“实现步骤”，内容为“1. 配置过滤器；2. 编写过滤器；3. 测试”，小结为“配置：与其他过滤器的配置一致。实现过滤器”。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+只输出上述内容，不要客套开场白。
+

@@ -1,0 +1,193 @@
+# 05-热门学科排名-NiFi生产用户选课数据保存到MySQL&并进行实时采集
+
+- 阶段：08.阶段八 智慧学成项目
+- 章节：03.第三章 智慧学成-课程分析/3.热门学科排名
+- 源文件：08.阶段八 智慧学成项目\03.第三章 智慧学成-课程分析\3.热门学科排名\05-热门学科排名-NiFi生产用户选课数据保存到MySQL&并进行实时采集_【海量资源尽在 666java.com】.mp4
+- 时长 7分17秒（音频 437s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 前边呢,咱们学习了使用NiFi采集咱们学生人数的原始数据,就是用户选客的数据。
+[00:08] 咱们采集的方式呢,是使用NiFi监控MySQL改变,然后进行的实时采集。
+[00:15] 但是呢,有一个问题,因为呢,咱们这里是直接将学生在线这个在线教育平台的数据库拿过来,然后呢,进行一个采集的。
+[00:26] 这里的数据你想。
+[00:27] 进行添加的时候进行采集添加采集呢只能在这里边手动的执行insert语句然后呢咱们才能监控到mycircle的改变采集到咱们的数据仓库中这种呢方式可行但是呢就是不能大量的生产数据咱们呢接下来就是使用nify生产数据来保存到咱们的mycircle中就是保存到咱们
+[00:55] 学生在线这个用户选客这个买色后中保存到这个中之后呢咱们这里内发的处理器呢这个地方他呢就监控这个改变只要你这边生产数据保存到买色后了他这里呢监控到改变就实时的可以保存到哪啊就可以保存到咱们的数据仓库中这里呢咱们还先回讲一这里的调度流程是
+[01:23] 使用咱们的查询先是查询数据库的一个处理器就是这个这个处理器呢它的一个作用是获取咱们用户的ID以及课程的ID因为咱们虽然是生产数据也要尽量的保持是真实的数据这里呢根据咱们的用户ID和课程ID生成真实数据然后呢进行一个批量生产的一个操作接下来呢就是一系列的转换
+[01:53] 把获取到的数据呢转换成json然后呢对json进行切割获取json的具体的一个值然后呢然后这个是把值进行转换给到咱们的生产脚本这个脚本呢就是具体的一个生产脚本这里就是这个还是使用的python生产的脚本呢它还是json格式的它是一个json数组这里呢把json给切割掉也就是说获取到每一个
+[02:22] 把数组切分成每一个项然后呢这里根据它这个每一项取值然后保存到咱们的mycircle中接下来呢咱们就把这个处理器呢直接导入到咱们的NiFi调度上面然后呢进行一个生产数据这里呢生产数据的脚本咱们生产的数据是1到60天的也就是生产的是两个月的数据这个地方呢说明一下也就是方便咱们后期
+[02:52] 后期的就是数据的清洗以及数据的统计分析这里呢生产的是60天的数据这个60天也是随机的好接下来咱们进行脚本的一个这个原始数据的一个生产的一个来拍调度首先呢还是上传模板这里呢是使用生产数据的方式把这个呢处理器组给上传上来上传完成之后呢咱们还是使用添加模板的方式把它给加进来这个
+[03:23] 把它拖进来然后呢是认为学科排名数据生产用户选客这个导入进来之后呢它也需要一个配置在这个地方咱们呢直接右键卡飞一个首先呢咱们是把这个买SERVO的链接给启用了买SERVO的链接启用之后呢咱们来看刷新一下好这个就OK了咱们再来看一下这个处理器组那边的内容
+[03:55] 这个地方有两个使用MySQL的,第一个就是咱们获取用户的ID以及客户的ID,最后一个就是往MySQL中放。
+[04:04] 咱们在最终配置的时候,你可以看到MySQL链接是不是只用配置一次就行了?
+[04:10] 上面使用的好缓存服务,它是自动的,咱们不用管。
+[04:14] 这里只用把MySQL配置了,直接启用即可。
+[04:17] 哎,不对,这个地方还不正直接启用,这个我就犯了一个错误。
+[04:22] 咱们需要配置什么?
+[04:23] MySQL的原码上传上来。
+[04:25] 这个地方的密码是不是会没有啊咱们需要配置满Circle的密码OK配置完成之后呢它会密码虽然说还是隐藏的但是它这个地方显示Value Set就是说已经把这个值给设置了也就是说你们在操作的时候千万不要犯这个错误这个时候呢就可以启用了一定不要忘记配置满Circle的密码好配置完成之后呢咱们再回到上一层这个地方呢咱们监控满Circle的改变
+[04:56] 往咱们数据仓库中放数据这个处理器是不是一直在启动呢一直在启动咱们这里就可以直接启动它启动完成之后呢咱们来观看这个已经有数据了咱们来看放到买车后中门只要这个地方有数据了就说明放入成功了目前还没走到这OK接着走这里呢可以看到已经有数据了咱们返回一下这里呢在这里边刷可以看到已经有数据了咱们来看
+[05:28] 这个读到没就是监控myserhood这个可以看到这个地方呢也有数据在走了但是他那个对联是不是还没有执行完成啊咱们稍微等待一下因为前边的话生成myserhood的数据他是脚本生成的他这个数据生成就非常快了这个地方可以看到已经有2000多条数据了咱们呢先稍微把它给停了由于这个地方生产数据比较快但是咱们Hive的话insert的时候他要执行那个map reduce
+[05:58] 就是执行一些计算它呢相对来说是比较慢的咱们来HOE上刷一下看这个地方进来没好也可以看到有一部分数据了但是呢咱们这个地方还是可以看到对列里边是不是还没有执行完成啊虽然说对列里边没有执行完成咱们这个整个测试是不是已经是OK的了就是咱们这里的整个测试已经是OK的了这个地方咱们在文档中也提了这个地方的一个mycircle
+[06:30] 害物插入数据的时候它是会有一定的一个缓冲时间的好咱们再回到本节的开始通过本节的学习呢咱们需要掌握的是能够使用NiFi生产数据并且保存到咱们的数据仓库中这里边呢涉及了两个处理器组的调度第一个呢就是咱们生产数据的一个处理器组第二个呢就是监控MySQL用户选客的一个处理器组并将监控到的数据保存到咱们的数据仓库中
+[07:01] 这是咱们所使用到两个数据组通过学习咱们就是最终要将数据保存到咱们数据仓库中为后面的数据清洗做基础好咱们这里也测试完成了视频到这里结束
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 NiFi 结合 Python 脚本生成模拟用户数据并写入 MySQL 数据库。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示课程目录，当前位于“3.3.4 NiFi生产数据”章节，同时显示 Navicat Premium 中的数据库表结构，SQL 查询语句为：SELECT * FROM `xc_learning`.`xc_learning_course` LIMIT 1,000。
+画面2：展示 PPT 内容，标题为“3.3.4 NiFi生产数据”，子标题“3.3.4.1 NiFi 调用流程”，内容说明 NiFi 调用流程：QueryDatabaseTable → ConvertAvroToJSON → SplitJson → EvaluateJsonPath → ReplaceText → ExecuteScript → SplitJson → EvaluateJsonPath → PutSQL。
+画面3：与画面2内容相同，为 PPT 页面的延续。
+画面4：展示课程目录，鼠标悬停在“3.3.4.3 生产数据python脚本”上，下方显示“nifi 流程.vm代码路径”。
+画面5：展示 NiFi 流程界面，显示“数据生产：用户选课-ToMySQL”流程的运行状态，包含“QueryDatabaseTable”组件。
+画面6：在 NiFi 界面中弹出“Upload Template”对话框，包含“Select Template”搜索框和“CANCEL”、“UPLOAD”按钮。
+画面7：在 NiFi 界面中显示“0, 数据生产：用户选课-ToMySQL Configuration”配置页面，包含“GENERAL”和“CONTROLLER SERVICES”标签页，表格中显示“DistributedMapCacheServer”和“MySQL连接”两个服务，状态为“Enabled”。
+画面8：在 NiFi 界面中显示“0, 数据生产：用户选课-ToMySQL Configuration”配置页面，表格中“MySQL连接”服务的状态被改为“Disabled”。
+画面9：在 NiFi 界面中显示“数据生产：用户选课-ToMySQL”流程的运行状态，包含“QueryDatabaseTable”组件。
+画面10：展示 Navicat Premium 中的数据库表结构，SQL 查询语句为：SELECT * FROM `xc_learning`.`xc_learning_course` LIMIT 1,000。
+画面11：展示 NiFi 流程界面，显示“数据生产：用户选课-ToMySQL”流程的完整组件连接，包括 QueryDatabaseTable、ConvertAvroToJSON、SplitJson、EvaluateJsonPath、ReplaceText、ExecuteScript、SplitJson、EvaluateJsonPath、PutSQL 等组件。
+画面12：展示 Hue 的 Table Browser 页面，页面正在加载中，显示“Table Browser”标题。
+画面13：展示课程目录，鼠标悬停在“3.3.4.4 测试”上，下方显示“nifi 流程.vm代码路径”。
+画面14：与画面2内容相同，为 PPT 页面的延续。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面13代码：
+```python
+import random
+import time, datetime
+import uuid
+import json
+import io
+from org.apache.commons.io import IOUtils
+from java.nio.charset import StandardCharsets
+from org.apache.nifi.processors.script import Import ExecuteScript
+
+def datestamp():
+    now.info = datetime.datetime.now()
+    delta = datetime.timedelta(random.randint(1, 60))
+    time.info = now.info + delta
+    for_time = time.info.strftime('%Y-%m-%d %H:%M:%S')
+    times = int(time.mktime(time.strptime(for_time, '%Y-%m-%d %H:%M:%S')))
+    return times
+
+class PutStreamCallback(StreamCallback):
+    def __init__(self):
+        pass
+
+    def process(self, inputStream, outputStream):
+        uc = str(IOUtils.toString(inputStream, StandardCharsets.UTF_8)).split(",")
+        arr = []
+        obj = {}
+        obj['learning_course_id'] = str(uuid.uuid4()).replace("-", "")
+        obj['course_id'] = uc[0]
+        obj['user_id'] = uc[1]
+        obj['valid'] = uc[2]
+        obj['start'] = uc[3]
+        obj['end'] = uc[4]
+        obj['create_time'] = times
+        obj['update_time'] = times
+        obj['delete_flag'] = 0
+        obj['create_user'] = "admin"
+        obj['update_user'] = "admin"
+        obj['create_dept'] = 0
+        obj['update_dept'] = 0
+        obj['create_ip'] = "127.0.0.1"
+        obj['update_ip'] = "127.0.0.1"
+        obj['create_source'] = "1"
+        obj['update_source'] = "1"
+        obj['create_type'] = "1"
+        obj['update_type'] = "1"
+        obj['create_reason'] = "1"
+        obj['update_reason'] = "1"
+        obj['create_note'] = "1"
+        obj['update_note'] = "1"
+        obj['create_time'] = times
+        obj['update_time'] = times
+        obj['delete_flag'] = 0
+        obj['create_user'] = "admin"
+        obj['update_user'] = "admin"
+        obj['create_dept'] = 0
+        obj['update_dept'] = 0
+        obj['create_ip'] = "127.0.0.1"
+        obj['update_ip'] = "127.0.0.1"
+        obj['create_source'] = "1"
+        obj['update_source'] = "1"
+        obj['create_type'] = "1"
+        obj['update_type'] = "1"
+        obj['create_reason'] = "1"
+        obj['update_reason'] = "1"
+        obj['create_note'] = "1"
+        obj['update_note'] = "1"
+        obj['create_time'] = times
+        obj['update_time'] = times
+        obj['delete_flag'] = 0
+        obj['create_user'] = "admin"
+        obj['update_user'] = "admin"
+        obj['create_dept'] = 0
+        obj['update_dept'] = 0
+        obj['create_ip'] = "127.0.0.1"
+        obj['update_ip'] = "127.0.0.1"
+        obj['create_source'] = "1"
+        obj['update_source'] = "1"
+        obj['create_type'] = "1"
+        obj['update_type'] = "1"
+        obj['create_reason'] = "1"
+        obj['update_reason'] = "1"
+        obj['create_note'] = "1"
+        obj['update_note'] = "1"
+        obj['create_time'] = times
+        obj['update_time'] = times
+        obj['delete_flag'] = 0
+        obj['create_user'] = "admin"
+        obj['update_user'] = "admin"
+        obj['create_dept'] = 0
+        obj['update_dept'] = 0
+        obj['create_ip'] = "127.0.0.1"
+        obj['update_ip'] = "127.0.0.1"
+        obj['create_source'] = "1"
+        obj['update_source'] = "1"
+        obj['create_type'] = "1"
+        obj['update_type'] = "1"
+        obj['create_reason'] = "1"
+        obj['update_reason'] = "1"
+        obj['create_note'] = "1"
+        obj['update_note'] = "1"
+        obj['create_time'] = times
+        obj['update_time'] = times
+        obj['delete_flag'] = 0
+        obj['create_user'] = "admin"
+        obj['update_user'] = "admin"
+        obj['create_dept'] = 0
+        obj['update_dept'] = 0
+        obj['create_ip'] = "127.0.0.1"
+        obj['update_ip'] = "127.0.0.1"
+        obj['create_source'] = "1"
+        obj['update_source'] = "1"
+        obj['create_type'] = "1"
+        obj['update_type'] = "1"
+        obj['create_reason'] = "1"
+        obj['update_reason'] = "1"
+        obj['create_note'] = "1"
+        obj['update_note'] = "1"
+        obj['create_time'] = times
+        obj['update_time'] = times
+        obj['delete_flag'] = 0
+        obj['create_user'] = "admin"
+        obj['update_user'] = "admin"
+        obj['create_dept'] = 0
+        obj['update_dept'] = 0
+        obj['create_ip'] = "127.0.0.1"
+        obj['update_ip'] = "127.0.0.1"
+        obj['create_source'] = "1"
+        obj['update_source'] = "1"
+        obj['create_type'] = "1"
+        obj['update_type'] = "1"
+        obj['create_reason'] = "1"
+        obj['update_reason'] = "1"
+        obj['create_note'] = "1"
+        obj['update_note'] = "1"
+        obj['create
+

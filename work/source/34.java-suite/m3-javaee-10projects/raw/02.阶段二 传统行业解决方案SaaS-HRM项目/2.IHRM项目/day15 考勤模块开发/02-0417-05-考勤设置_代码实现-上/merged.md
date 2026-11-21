@@ -1,0 +1,230 @@
+# 05-考勤设置：代码实现-上
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day15 考勤模块开发
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day15 考勤模块开发\05-考勤设置：代码实现-上_【海量资源尽在 ubkz.com】.mp4
+- 时长 14分21秒（音频 861s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 那接下来呢我们就开始编写代码完成相应的这个烤琴的相应设置那在这边呢烤琴设置和这个烤琴管理的相应代码呢我们把它放到一个新的微服务当中所以接下来呢我们这边就涉及到一个小小的环境搭建的这么一个过程那我们就需要在页面上在我们的代码里创建一个新的模块那在这个模块当中去完成我们相应的代码
+[00:33] OK 咱们开始那这个模块名称呢我就和我们讲义上保持一致了Ctrl C回到我们打开第二当中在上方右键创建一个新的model点击NextOK Finish那这个模块呢我们创建出来了之后接下来呢里面必然需要相应的坐标那对于这些坐标各位不需要再去记忆了在今天的资料当中第15天已经把相应的
+[01:10] 咱们这个基本工程里面所涉及到的这些依赖呢给各位准备好了直接Ctrl Ccall到我们这边Ctrl VOK好了那这样一来呢我们当前的这个碰文件也已经给它搞定了那接下来呢我们就需要去编写对应的咱们的启动类还有相应的配置首先呢在这边去创建一个创建一个包
+[01:43] 好了叫做scom.ihrm.atte代表的是我们的考勤模块那接下来呢咱们就可以在里面编写对应的一个启动类了这个启动类呢可以任意从一个地方咱们拷一段好了Ctrl C拷一段过来Ctrl V拷进来那这个启动类呢我可以给它起一个名字啊好了就叫做我们的考勤AttendanceATTANDANCEApplication
+[02:31] OK这边呢让它哎没问题这些没用的我就删掉了那注意这个包呢我去扫描哎也可以那这样一来咱们这个启动类也已经准备好了那有了启动类同样的咱们需要相应的配置文件那这个配置文件也是从其他地方咱们拷一段过来了Ctrl C拿过来Ctrl V拷过来好了拷过来之后呢这回我们这个对应的微幅呢我们就叫做9005
+[03:11] 那对应的咱们的微服务名称也改一下咱们就叫做DandenseATTENDANCEOK这是我们的服务名称好了像数据库像我们要用到的Redis等等等等这样一来保持一致就可以了那这样一来呢咱们这个对应的模块创建就已经创建到这个程度了那接下来呢就是这样的
+[03:39] 对于一些基本的代码呢各位不需要再去额外的进行编写了比如说DU因为咱们之前分析过DU层的代码基本上都是差不多的就是实现接口实现接口集成接口集成接口那SERVE层基本代码基本上也是差不多的没错吧所以这些代码呢在今天资料当中呢都给各位准备好了那我们要做的事情就是把资料当中给各位准备好的
+[04:05] 基本的DU基本的Service以及生成好的这些实体类给它copy到对应到我们的模块下就可以了好了那我们开始来看一下怎么去做回到我们这边我们来找到这个在工具类里我们现在用到的是这个口琴模块没错吧那在里面呢给各位准备好了对应的好了我们的第一个包呢是箱子实体类我改一下名字啊叫做实体类
+[04:37] 那有 deal 有 Service我们要做的事情呢就是把箱子这些内容呢给它call到对应的位置其实就可以了好了把这个 duman 相应的实体类呢ctrl c 给它call到我们的model 箱子位置下ok来一个包起一个名字就叫做 a t ta d e 吧call进来ok 实体类呢我们全部都call过来之后呢继续咱们继续就是准备 Service 了那找到这边
+[05:15] 创建一个包我们一个叫做SERVICE别创建了直接从这边拷把带着包名的Service DOcontrol C拿到我们这边idea当中control V拷完好了那拷过来之后呢这边呢简单的和各位介绍一下那我们现在拷过来的DO呢这个比较多
+[05:40] 那其实除了我们这边设置相关的这几个实体类和DU之外呢我还把烤琴所设计到的一些实体类注意啊这回说的是烤琴不是我们这边的设置了而是烤琴管理所设计到的一些实体类我也一并全部拷过来了主要是为了我们一会儿节省一下时间OK那这边呢咱们拷过来之后呢DU层其实里面的代码呢都比较简单打开来看
+[06:07] 基本上就没什么代码全部都是一些工具当然了里面还涉及到一些简单的设置可能要用到的一些DO呢这些的方法我已经准备好了这个用到哪个咱们和各位说哪个就可以了好了DO准备好了之后呢这边还有相应的Service那对于Service呢简单的交代一下其实对于Service里面的没有任何的代码抱歉这边还有一些错误啊把这些错误呢给它做一个修改
+[06:47] 是在之前准备资料的时候呢可能有些地方遗漏了有些地方遗漏了这个没关系把这个也给它搞定好了那这些Service呢其实各位都看到了全部都是空的没有什么特别多的技术含量啊OK好了那接下来咱们就把这个环境呢其实已经搭建的差不多了那我们就可以完成一个小小的功能
+[07:27] 就是做这边的设置功能咱们就做第一个出勤设置那当然除了出勤设置之外还有请假扣款加班其实跟第一个它的逻辑都是差不多的我就以第一个为例和各位来看一下咱们应该怎么做首先是这样的就是说咱们请求过来刚才看过了请求的是到一个item下刷新一把咱们来看一下请求路径item下请求过来就是cfg att item
+[08:07] 那这边的参数呢会给我们传递过来一个部门的ID过来没错吧OK好了那接下来呢咱们就开始编写一个Controller把这个方法呢给它写好那其实这个方法很简单就是一点击查询然后呢进行一个更新其实就可以了那好了接下来呢咱们就可以配置一个Controller注意啊这几个设置呢为什么单独拿出来讲呢是因为它请求的这个Controller都是CFG来进行开头的
+[08:36] 所以回到我们这个代码当中呢我们就可以自己去编写一个controllercon tr o l l e rcontroller起一个名字来一个类就是con figtr o l l e rcontroller注意这个里面的专门全部都是做设置配置考勤设置的con tr o l l e rcontroller好了那接下来上边呢常规的操作了at reset Controller
+[09:14] at request mapping好了我们的附路径cftok没问题那这边呢为了方便我们的操作继承base Controller好了那接下来呢咱们先去完成第一个请求请求路径呢在这边呢咱们拿过来好了这边呢有一个参数department id那需要各位注意啊这个请求呢咱们看到的没有api因为api是我们前端加的一个前缀这个请求到后台是没有的行吧
+[09:48] OK好了那接着回到我们这边获取考勤的设置请求链接呢在这儿摆着请求方式呢是Post我们有一个请求的Post参数这个参数就是我们的Department IDOK那接着我们开始配置一个方法At Request MyPin好了我们的请求路径呢就是这个Item没问题那接着来Method我们用的是Post请求
+[10:30] 好了继续再来public result类型的返回值result类型返回值那我们起一个方法呢就叫做atte atte就是config吧好了这个result我们倒一下包哎别印错包好了那接下来里面有一个参数就是我们的死菌类型的department idok call管没问题那注意那在里面呢咱们要去完成的操作呢其实就是为了查询没错吧那为了查询那我们查询的依据呢
+[11:09] 除了有这个部门ID之外是不是还有我们的企业ID啊所以这边呢我们需要Service咱们就需要把serviceall to where一来注入进来那这边呢简单的和各位说一下我们这边呢查询的是对查询的是这边的考勤这张表考勤这张表attendance config所以我们要用attendance config对应的do来进行操作嘛哎抱歉Service来进行操作所以在上边呢咱们来找一下
+[11:39] 那注意我这边的Service全部Service都显到了这个configuration Service当中各位发现里面用到的是所有的这些do所以我们这边Service只用一个就可以了configuration serviceconfiguration Service因为因为这个代码呢如果写多个一个do对应一个的话那Service时间太多了但是我们这个方法呢又用的比较实里面的方法呢可能就用一个保存就用一个查看所以把它合并都写到一个configuration Service所以我们这边就开始通过
+[12:14] configuring Service点因为呢可以起一个方法名就是get atte config那接着我们把这个查询的这些参数呢传递过去department id肯定要有当然了也要有我们的company id因为我们这边不同的企业它有不同的部门是不是里面都会涉及到不同的考题设置所以我们这查询还要涉及到还要设置到的
+[12:41] 就是要有其 id 那这样一来我们查询成功了之后得到的这个返回值是什么类型的我们可以一起来找一下找到我们对应的实体类那我们是做考前的config 所以就它了ac 等于那最后返回 returnnew 一个s u c creturn new 一个 result好了我们 result code 点success 那接着把 ac 传递过去这都是我们之前制定好的
+[13:21] 代码编写的这个规范那Service找方法在Service当中补充一个方法这个就是查询我们的考勤设置那查询考勤设置Service就要调用do了那我们do用的是考勤do所以考勤do点注意find by是这样的我们这个考勤do咱们说了需要根据其ID和部门ID来查而对应的数据库当中恰恰
+[13:50] 它就有其ID是恰恰就部门ID我们就用这两个来进行查询啊所以呢我们这个DO方法呢就是根据其ID和部门ID是不是来进行查询所以这个方法呢我就不写了之前就已经准备好了把参数传递过去把参数传递过去那这样一来我们的查询方法return是不是就已经写好了呀当了这个DO呢还没自己没写是因为这个方法比较简单这边就不浪费时间了
+[14:20] 謝謝
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中创建并配置考勤模块，包括目录结构、配置文件、服务层和控制器层的代码编写。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 PPT 页面，标题为“2.3 环境搭建”下的“2.3.1 创建考勤模块”，并显示了项目目录结构，其中 `src/main/java/com.ihrm.attte` 包下包含 `client`、`Controller`、`dao`、`Service` 等子包，以及 `AttendanceApplication` 和 `ShiroConfiguration` 类。
+画面2：显示记事本程序，空白页面，无内容。
+画面3：在 IntelliJ IDEA 中打开 `SystemApplication.java`，代码中包含 Spring Boot 的配置注解，如 `@SpringBootApplication`、`@EnableDiscoveryClient`、`@EnableFeignClients`，并定义了 `main` 方法和两个静态方法 `getIdWorker()` 和 `getJwtUtils()`。
+画面4：在 IntelliJ IDEA 中打开 `application.yml` 文件，内容为服务注册与配置，包括 Eureka 服务地址、端口、数据库连接信息（MySQL）、Redis 配置等。
+画面5：在 IntelliJ IDEA 中，项目结构视图显示 `ihrm_common_model` 模块下的 `atte` 包，右侧为 IDE 的欢迎界面。
+画面6：在 IntelliJ IDEA 中，项目结构视图显示 `ihrm_attendance` 模块下的 `dao` 包，同时弹出一个 PDF 文件窗口，显示了 `day15.pdf` 的内容。
+画面7：在 IntelliJ IDEA 中打开 `AtteService.java`，代码中定义了 `@Service` 注解的类，包含多个 `@Autowired` 注入的 DAO 对象。
+画面8：在 IntelliJ IDEA 中打开 `ReportService.java`，代码中定义了 `@Service` 注解的类，包含一个 `@Autowired` 注入的 `ArchiveMonthlyDao` 对象。
+画面9：在浏览器中打开 `localhost:8080/#/attendances/index` 页面，显示了考勤状态的错误信息，状态码为 404。
+画面10：在 IntelliJ IDEA 中打开 `ConfigController.java`，代码中包含 `@RestController` 注解，以及 `@RequestMapping` 注解。
+画面11：在 IntelliJ IDEA 中打开 `ConfigController.java`，代码中定义了 `@RequestMapping(value = "/atte/item", method = POST)` 的方法。
+画面12：在 SQLyog 中打开数据库表结构，显示了 `atte_attendance_config` 表的字段信息，包括 `company_id`、`department_id`、`create_date` 等字段。
+画面13：在 IntelliJ IDEA 中打开 `ConfigController.java`，代码中定义了 `@RequestMapping(value = "/atte/item", method = POST)` 的方法，并注入了 `ConfigurationService`。
+画面14：在 IntelliJ IDEA 中打开 `ConfigurationService.java`，代码中定义了 `@Autowired` 注入的多个 DAO 对象，并包含一个 `getAtteConfig` 方法，用于根据公司 ID 和部门 ID 查询考勤配置。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```
+创建考勤模块 ihrm_attendance
+    ▼ ihrm_attendance
+        ▼ src
+            ▼ main
+                ▼ java
+                    ▼ com.ihrm.attte
+                        ▼ client
+                        ▼ Controller
+                        ▼ dao
+                        ▼ Service
+                        ▼ AttendanceApplication
+                        ▼ ShiroConfiguration
+```
+
+画面3：
+```java
+package com.ihrm.attte;
+//配置Spring Boot的包扫描
+@SpringBootApplication(scanBasePackages = "com.ihrm")
+//配置jpa注解的包
+@EntityScan(value = "com.ihrm.domain.system")
+@EnableFeignClient
+@EnableDiscoveryClient
+public class SystemApplication {
+    /**
+     * 启动方法
+     */
+    public static void main(String[] args) { SpringApplication.run(SystemApplication.class, args); }
+    @Bean
+    public IdWorker idWorker() { return new IdWorker(); }
+    @Bean
+    public JwtUtils jwtUtils() { return new JwtUtils(); }
+    //不 session
+    @Bean
+    public OpenEntityManagerInViewFilter openEntityManagerInViewFilter() { return new OpenEntityManagerInViewFilter(); }
+}
+```
+
+画面4：
+```yaml
+#注册到Eureka的服务地址
+Eureka:
+  Service-url:
+    defaultZone: http://127.0.0.1:8008/Eureka/
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+#服务端口
+server:
+  port: 8005
+#数据库配置
+spring:
+  application:
+    name: ihrm social securitys #指定服务名
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ihrm_attendance?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 111111
+    hikari:
+      maximum-pool-size: 2
+#redis配置
+redis:
+  host: 127.0.0.1
+  port: 6379
+  jpa:
+```
+
+画面7：
+```java
+package com.ihrm.attte.Service;
+import com.ihrm.attte.Service;
+@Service
+public class AtteService {
+    @Autowired
+    private IdWorker idWorker;
+    @Autowired
+    private AttendanceDao attendanceDao;
+    @Autowired
+    private DeductionDictDao deductionDictDao;
+    @Autowired
+    private DaysMonthlyDao daysMonthlyDao;
+    @Autowired
+    private DepartmentDao departmentDao;
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private AttendanceConfigDao attendanceConfigDao;
+}
+```
+
+画面8：
+```java
+package com.ihrm.attte.Service;
+import com.ihrm.attte.dao.ArchiveMonthlyDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
+@Service
+public class ReportService {
+    @Autowired
+    private ArchiveMonthlyDao archiveMonthlyDao;
+}
+```
+
+画面10：
+```java
+package com.ihrm.attte.Controller;
+import org.springframework.web.bind.annotation.*;
+@RestController
+public class ConfigController {
+}
+```
+
+画面11：
+```java
+package com.ihrm.attte.Controller;
+import org.springframework.web.bind.annotation.*;
+@RestController
+@RequestMapping("/cfg")
+public class ConfigController extends BaseController{
+    @RequestMapping(value = "/atte/item", method = POST)
+    public Result atteConfig(String departmentId) {
+        configurationService.getAtteConfig(companyId, departmentId);
+    }
+}
+```
+
+画面13：
+```java
+package com.ihrm.attte.Controller;
+import org.springframework.web.bind.annotation.*;
+@RestController
+@RequestMapping("/atte/item")
+public class ConfigController extends BaseController{
+    @Autowired
+    private ConfigurationService configurationService;
+    @RequestMapping(value = "/atte/item", method = POST)
+    public Result atteConfig(String departmentId) {
+        configurationService.getAtteConfig(companyId, departmentId);
+    }
+}
+```
+
+画面14：
+```java
+private AttendanceConfigDao attendanceConfigDao;
+private LeaveConfigDao leaveConfigDao;
+private DeductionDictDao deductionDictDao;
+private ExtraDutyConfigDao extraDutyConfigDao;
+private ExtraDutyRuleDao extraDutyRuleDao;
+private DayOffConfigDao dayOffConfigDao;
+private IdWorker idWorker;
+//查询考勤设置
+public AttendanceConfig getAtteConfig(String companyId, String departmentId) {
+    return attendanceConfigDao.findByCompanyIdAndDepartmentId(companyId, departmentId);
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：PPT 标题为“2.3 环境搭建”，子标题为“2.3.1 创建考勤模块”，并显示了项目目录结构。
+画面10：PPT 中显示了 `ConfigController` 类的注解信息，包括 `@RestController`、`@RequestMapping` 等。
+画面11：PPT 中显示了 `ConfigController` 类的注解信息，包括 `@RequestMapping(value = "/atte/item", method = POST)`。
+画面12：SQLyog 中显示了 `atte_attendance_config` 表的字段信息，包括 `company_id`、`department_id`、`create_date` 等字段。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

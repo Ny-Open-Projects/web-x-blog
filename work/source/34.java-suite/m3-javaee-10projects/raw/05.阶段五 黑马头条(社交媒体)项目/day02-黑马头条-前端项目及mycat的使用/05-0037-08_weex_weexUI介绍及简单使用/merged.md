@@ -1,0 +1,258 @@
+# 08_weex_weexUI介绍及简单使用
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day02-黑马头条-前端项目及mycat的使用
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day02-黑马头条-前端项目及mycat的使用\08_weex_weexUI介绍及简单使用【海量资源尽在 666java.com】.mp4
+- 时长 10分2秒（音频 603s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好各位那咱们就继续往下讲下面咱们去说一个VIX UI那这个是一个基于VIX的副交互轻量级高性能的UI组件库那这个呢其实咱们跟咱们之前学习过的二轮波UI呢是非常类似的它是基于VIX进行做的那这个呢是它的一个官方文档咱们可以打开来看一眼拷贝一下啊这个就试试吧拷贝粘贴到这啊
+[00:32] 在这之后咱们可以看一下这个就是它的官网刚才那段话其实就是这段话刚才我读那段话行往下看这里边是有一些样例咱们可以作为参考比如说布局导航还有数据的输入咱们主要是做两个东西可以去看一眼比如说这里边是有个导航里边有一个叫做底部标签栏底部标签栏其实就是这东西
+[01:00] 它可以给予某一个这种标签底部的标签是切换里边的内容然后触发之后是去展示不同的信息咱们在手机的APP上这样的例子是大量存在的那这个到底怎么做呢其实非常简单咱们既然使用了VIX UI这东西它是给你提供了一些方法咱们可以拷贝一下
+[01:26] 考到哪呢考到咱们当前的这种慢点view里边好,Ctrl A一下Ctrl V当然这些内容我已经保存下来了其实不用担心行,那这个内容目前的话咱们不用重启直接看下效果就可以了效果说报错了报错完之后在里边其实应该是少一个什么呢看这说这里边是没有找到一个文件没有找到一个文件
+[01:55] 没找到一个文件什么文件呢就是一个config.js文件那这文件在这呢你看啊当你去把这个代码拷进来之后呢这里边需要去引入一个点什么config需要去引入一个js文件因为下面是用到了当前的一些js所以说呢你在这啊直接去创建一个在R3C下面啊创建一个文件叫啥呢叫config.js好又错了
+[02:25] 找到jarosquib有没有取消走了不要了删了重新创建右键config.js好那js这个内容到底是啥呢咱们还可以在这看这里边告诉你了如果说你要是找不着的话是吧你可以找例子例子里边是这它给你提供了个地址这地址其实是一个GitHub上的地址这里边其实就包含了你所需要的config.js里边的内容好回车
+[02:57] 好你看这个呢其实就是config.js的内容好拷贝拷贝好拷贝完之后呢咱们直接去放到当前这个文件里边就可以了啊那放到文件之后呢咱们可以在这去直接看效果好这个效果就出来了看到了吗这样的话是不是就能去展示当前的这种下面的这种什么导航栏啊OK没问题啊那回过头来呢那咱们来再去看一下当前这个代码啊那代码的话呢来看一下啊
+[03:28] 首先呢这是有一个vx table是吧是一个这种啊算是一个按钮嘛算是啊然后呢是他这里边啊是有一个table啊table tiles其实呢就是咱们的下面这东西就是下面的这东西那到底是有几项啊比如咱们用思想首页啊特别推荐什么消息中心还有什么
+[03:53] 我的主页那这个是怎么来的呢咱们还可以再看啊他这个怎么来的是要推啊table tiles然后下面的是应该是哪啊应该是他是吧他从哪来的从config.table tilesok啊其实呢都是在当前这个config.js中去定义的打开打完之后呢其实你这里边你会发现啊这里边其实有一个table tilestitles啊titles啊里边就有很多个对象
+[04:21] 那这个呢一个一个的对象呢其实就是刚才咱们看到的目前的那种导航的某一个东西是吧比如说你看到的首页特别之艳消费中心我的主页都在这去定义好了没问题啊当然啊在这里边还有一些属性咱们可以看一下啊比如说呃title是吧首页啊这是他的一个标题然后还有一个是iconicon是一个图标是吧这是个图标然后下面是一个选中的图标其实都一样啊标题
+[04:51] 图标和选中的图标那选中和非选中呢它效果是不一样的你看首页比如说我选特别推荐的时候它本来是灰色的是吧我点一下它是不是就变亮了那样式是不一样的它用的是两个图标行如果说你要想换图标的话呢你就直接把这个图片给换了就可以了其实这个东西就非常简单然后下面还有一个叫5那5的话呢就是说目前的话呢是有5条消息你没有查看咱们可以看一下你看这是不是有个5啊
+[05:21] 看到了吧你看这边还有个红点嘛那这红点的话怎么做的呢这有个DOT等于True这样的话就是表明当前是有没查看的内容你需要去查看下面还有一些这种样式样式的话就无所谓了这个你考过来就可以了然后下面还有个东西当我去点击某一项的时候我想去触发一个事件就是我想去切换当前的这种内容那怎么办呢那这个东西其实也很简单就是
+[05:49] 在你考过来代码里边呢它有一个方法就这个方法当你去考这个方法之后呢你就可以去切换某一个栏目下面的内容咱们可以打印一下这OLED一点什么配置好吧咱们也打这个配置啊拿到配置之后呢你可以去再去刷新一下啊刷新好它自动刷新是吧好点你看点1是吧我再点回来
+[06:18] 也就是说从零开始零一二这二是吧那这个就是三对吧没问题啊那这样的话呢你就可以基于当前这个触发的方法切换的方法呢去设置一些内容好那这个呢其实就是刚才咱们说的这个底部必要签栏啊其实非常简单里边也有些参数那个大家可以看一眼咱们在黑马斯角里边用的就是它再说第二个就是有一个
+[06:45] 顶部标签栏其实跟底部标签栏是差不多的咱们也可以去设置一下比如说你也可以把它给拷贝一下还是当前的view,来Ctrl V一下好可以看效果这效果你看这个当前这些东西是不是跑到上面了其实它的道理是一样的可以看一眼这个道理其实就是上面它这个标题这个table page它也是当前这个table
+[07:23] titles里边呢也是当前的从config中去拿的值但这个值的话呢很显然刚才咱们设置的时候像这也应该是底部的标签是吧咱们可以设置一个顶部的啊那底部的内容呢其实这也给你提供了一个地址你也可以把它给拷过来咱们也打开好打开之后呢咱们也可以把它给拷贝一下啊把刚才那个config的gs的给它替换就可以了啊好control a control v
+[07:56] 这好像有问题是吧好来刷一下看一下效果吧你看这样的话是不是哎这东西就出来了是吧没问题啊当然了这里边呢也有一些方法咱们可以去查看一下比如说呢咱们往下看啊嗯先看页面吧好吧这里边其实有这个方法你去切换栏目的时候呢他会去触发当前的这个方法啊那下面的其实呢咱们在
+[08:24] 页面或者咱们的文章列表展示的时候用的就是这个东西啊就是你可以干嘛呢你可以在这里边去做一个循环比如说你把文章的信息呢用当前的list去编列出来就可以了好吧这东西咱们之前都讲过啊比如说list标签是吧sale标签还有还有什么还有text是吧最终去展示你的数据当然这里边还有v-4咱们可以去循环某一个数据列表是吧OK啊那这些都没有问题啊
+[08:51] 那这个设置完之后呢咱们这个还有一个方法咱们要去知道啊就是刚才这个方法啊这个方法呢其实就在下面他也已经提供了啊就是哪个方法呢就是当前的这个方法咱们也可以一点配置他是默认从几开始啊默认是从零开始对吧OK啊那咱们再刷新一下啊好点一是吧再点回来哎零是吧没问题啊
+[09:21] 那怎么去打开页面的时候出发一个呢咱们一会去说这个文章里边的时候咱们还会再去讲这个东西好吧关于当前的这个Mix UI咱们就讲到这大家也可以去课下去看一眼或者说从里边如果你想要去找到什么样的效果的话这里边大部分都是有的好吧比如说有代言格是吧有幻灯片的还有一些这种
+[09:48] 导航栏是吧导航栏说过了还有倒计时单选的还有数据展示的一些东西比如说日历的还有复文本的它都有好吧行那这个呢咱们把这个VIX UI咱们就讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Weex 项目中配置和使用 WxcTabBar 和 WxcTabPage 组件，通过修改配置文件和模板代码实现自定义的 tabBar 和页面内容。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示 Weex 预览界面，手机模拟器显示“传智播客”应用，右侧有二维码提示使用 Weex playground app 扫描。
+画面 2: 在 WebStorm 中打开 Weex 项目，展示 main.Vue 文件中定义了列表刷新和加载指示器的模板与脚本部分，包含一个 stream 对象和 onLoading 方法。
+画面 3: 在 main.Vue 文件中，展示 WxcTabBar 组件的引入和配置，包括 tabTitles 和 tabStyles 的导入，以及计算属性 tabPageHeight。
+画面 4: 在 WebStorm 中，右键点击项目目录，弹出“New”菜单，准备创建新文件。
+画面 5: 在 GitHub 上查看 weex-ui 仓库中的 tab-bar/config.js 文件，展示 tabIconTitles 数组的配置，包含标题、图标和徽章信息。
+画面 6: Weex 预览界面，手机模拟器显示空白页面，底部有五个图标按钮。
+画面 7: 在项目中打开 config.js 文件，展示 tabTitles 配置，包含“首页”、“特别推荐”、“消息中心”和“我的主页”等条目，其中“我的主页”设置了 dot: true。
+画面 8: 在 config.js 文件中，展示 tabStyles 配置，包括背景色、标题颜色、字体大小、padding 等样式属性。
+画面 9: Weex 预览界面，手机模拟器显示“我的主页”页面，底部五个图标按钮。
+画面 10: 在 main.Vue 文件中，展示 WxcTabBar 组件的 created 生命周期钩子和 methods 中的 wxcTabBarCurrentTabSelected 方法。
+画面 11: 在浏览器中打开 GitHub 上的 tab-page/config.js 文件，查看配置内容。
+画面 12: 在 main.Vue 文件中，展示 tab-page 的样式和模板代码，包括 .cell 和 .item-container 的样式定义。
+画面 13: 在 main.Vue 文件中，展示 WxcTabPage 的模板代码，包括 v-for 循环渲染列表项，每个项包含一个 wxcPanItem 组件。
+画面 14: 在 GitHub 上浏览 weex-ui 仓库，点击“wxc-page-calendar”组件链接，进入其文档页面。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```Vue
+<loading v-if="loading" :display="loading ? 'show' : 'hide'">
+  <text>Loading ...</text>
+  <loading-indicator></loading-indicator>
+</loading>
+<cell v-for="num in lists" :key="num">
+  <text>{{num}}</text>
+</cell>
+<refresh @refresh="onRefresh" :display="refreshing ? 'show' : 'hide'">
+  <text>Refreshing</text>
+  <loading-indicator></loading-indicator>
+</refresh>
+```
+```js
+const stream = weex.requireModule('stream') || {};
+export default {
+  data: () => ({
+    lists: ['A', 'B', 'C', 'D', 'E', 'A'],
+    refreshing: false,
+  }),
+  methods: function () {
+    this.lists = ['1', '2', '3'];
+  }
+}
+```
+
+画面 3:
+```Vue
+<div class="item-container" :style="contentStyle"><text>我的主页</text></div>
+<style scoped>
+.item-container {
+  width: 750px;
+  background-color: #f2f3f4;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+<script>
+import { WxcTabBar, Utils } from 'weex-ui';
+// https://github.com/alibaba/weex-ui/blob/master/example/tab-bar/config.js
+import Config from './config';
+export default {
+  components: { WxcTabBar },
+  data: () => ({
+    tabTitles: Config.tabTitles,
+    tabStyles: Config.tabStyles,
+  }),
+  created () {
+    const tabPageHeight = utils.env.getPageHeight();
+    // 如果页面高度不固定，可以用下面这个计算高度的方法
+    // const tabPageHeight = env.deviceHeight * env.deviceWidth / 750;
+    const tabStyles = this;
+  }
+}
+</script>
+```
+
+画面 5:
+```js
+// tabIconTitles 配置
+tabIconTitles: [
+  {
+    title: '首页',
+    codePoint: 'ue001',
+  },
+  {
+    title: '特别推荐',
+    codePoint: 'ue002',
+  },
+  {
+    title: '消息中心',
+    codePoint: 'ue003',
+    badge: 5,
+  },
+  {
+    title: '我的主页',
+    codePoint: 'ue004',
+    dot: true,
+  }
+]
+```
+
+画面 7:
+```js
+export default {
+  // 正常模式 tab title 配置
+  tabTitles: [
+    {
+      title: '首页',
+      icon: 'https://gw.alicdn.com/tfs/TB1HudSpxXXXXXcXXXXXXXXXX-72-72.png',
+      activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk1XkXXXXXcXXXXXXXXXX-72-72.png',
+    },
+    {
+      title: '特别推荐',
+      icon: 'https://gw.alicdn.com/tfs/TB1ARoKsXXXXXcXXXXXXXXXX-72-72.png',
+      activeIcon: 'https://gw.alicdn.com/tfs/TB1kCk1XkXXXXXcXXXXXXXXXX-72-72.png',
+    },
+    {
+      title: '消息中心',
+      icon: 'https://gw.alicdn.com/tfs/TB1VMK5sXXXXXcXXXXXXXXXX-72-72.png',
+      activeIcon: 'https://gw.alicdn.com/tfs/TB1aTg2SXkXXXXXcXXXXXXXXXX-72-72.png',
+      badge: 5,
+    },
+    {
+      title: '我的主页',
+      icon: 'https://gw.alicdn.com/tfs/TB1o3tSXXXXXcXXXXXXXXXX-72-72.png',
+      activeIcon: 'https://gw.alicdn.com/tfs/TB1LhMhSpXXXXXcXXXXXXXXXX-72-72.png',
+      dot: true,
+    }
+  ],
+  tabStyles: {
+    bgColor: '#FFFFFF',
+    titleColor: '#666666',
+    activeTitleColor: '#303030',
+    activeBgColor: '#FFFFFF',
+    isActiveTitleBold: true,
+    iconId: 70,
+    iconHeight: 70,
+    width: 160,
+    height: 170,
+    fontSize: 24,
+    textPaddingLeft: 10,
+    textPaddingRight: 10,
+  }
+}
+```
+
+画面 8:
+```js
+tabStyles: {
+  bgColor: '#FFFFFF',
+  titleColor: '#666666',
+  activeTitleColor: '#303030',
+  activeBgColor: '#FFFFFF',
+  isActiveTitleBold: true,
+  iconId: 70,
+  iconHeight: 70,
+  width: 160,
+  height: 170,
+  fontSize: 24,
+  textPaddingLeft: 10,
+  textPaddingRight: 10,
+  // 使用 iconfont 模式的 tab title 配置
+  tabIconTitles: [
+    {
+      title: '首页',
+      codePoint: 'ue001',
+    },
+    {
+      title: '特别推荐',
+      codePoint: 'ue002',
+    },
+    {
+      title: '消息中心',
+      codePoint: 'ue003',
+      badge: 5,
+    },
+    {
+      title: '我的主页',
+      codePoint: 'ue004',
+      dot: true,
+    }
+  ]
+}
+```
+
+画面 10:
+```js
+const tabPageHeight = utils.env.getPageHeight();
+// 如果页面高度不固定，可以用下面这个计算高度的方法
+// const tabPageHeight = env.deviceHeight * env.deviceWidth / 750;
+const tabStyles = this;
+methods: {
+  wxcTabBarCurrentTabSelected (e) {
+    const index = e.page;
+    // console.log(index);
+    alert(e.page);
+  }
+}
+```
+
+画面 12:
+```css
+.cell {
+  background-color: #ffffff;
+}
+.cell {
+  width: 750px;
+  height: 300px;
+  border-bottom-width: 1px;
+  border-style: solid;
+  border-color: #e8e8e8;
+}
+```
+
+画面 13:
+```Vue
+<template>
+  <wxc-tab-page :tab-style="tabStyles"
+                :tab-page-height="tabPageHeight"
+                @wxcTabPageCurrentTabSelected="wxcTabPageCurrentTabSelected">
+    <list v-for="(item, key) in tabList"
+

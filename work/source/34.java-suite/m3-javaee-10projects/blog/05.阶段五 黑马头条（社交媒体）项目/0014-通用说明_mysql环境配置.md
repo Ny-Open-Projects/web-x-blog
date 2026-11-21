@@ -1,0 +1,219 @@
+# MySQL 环境配置：手写 Hikari 数据源与 SqlSessionFactoryBean
+
+common 工程要给整个头条类资讯项目的所有微服务提供一套统一的连库方案，它决定了两件事：数据库参数从哪来，以及连接池与 MyBatis 由谁装配。这一课不走 Spring Boot 默认装配的老路，配置文件只放占位符，值由上一课的三份环境文件在构建时填入；装配代码自己写配置类，连接池换成 Hikari，MyBatis 用 `SqlSessionFactoryBean` 手工整合。看完这条链路，服务启动后能直接查库的原因就全部落在纸面上了。
+
+## 先给结论
+
+- common 工程 resources 下有 `mysql-core-jdbc.properties`，七项内容：连接四项（url、username、password、driver）加上 mapper 目录、别名包、事务切面表达式；值为占位符，构建时由环境 properties 填充。
+- 配置类 `MysqlCoreConfig` 三个注解各司其职：`@PropertySource` 读配置文件，`@ConfigurationProperties(prefix = "mysql.core")` 按松散绑定把 `jdbc.username` 映射到字段 `jdbcUsername`，`@MapperScan` 扫描 model 工程的 mapper 接口包。
+- 连接池用 `HikariDataSource`，Spring Boot 体系里最快的连接池，设置连接四项与最大连接数 50、最小空闲 5。
+- `SqlSessionFactoryBean` 手工装配：注入数据源、别名包取自配置、mapper 文件位置用 `classpath*:mappers/**/*Mapper.xml` 通配跨模块扫描；再开启驼峰映射与 log4j2 SQL 日志。
+- 配置文件里的密码反转存储，读取时用 `StringUtils.reverse` 还原，避免明文入库。
+
+## 配置文件：七项占位符与环境的衔接
+
+common 工程 resources 目录下的 `mysql-core-jdbc.properties` 是连库参数的唯一出口（键与值按画面线整理，数据库名与包名按项目口径改写）：
+
+```properties
+# 连接四项：值是占位符，构建时由 maven_test.properties 等环境文件填充
+mysql.core.jdbc.url=${mysql.core.jdbc.url}
+mysql.core.jdbc.username=${mysql.core.jdbc.username}
+mysql.core.jdbc.password=${mysql.core.jdbc.password}
+mysql.core.jdbc.driver=${mysql.core.jdbc.driver}
+
+# mapper 文件存放目录
+mysql.core.root.mapper=${mysql.core.root.mapper}
+# 别名包扫描范围
+mysql.core.aliases.package=${mysql.core.aliases.package}
+# 事务切面表达式，事务管理配置时消费
+mysql.core.tx.scan.package=${mysql.core.tx.scan.package}
+```
+
+等号右边的 `${...}` 就是多环境课里说的占位符：Maven 的 resources 插件在打包时，把这里同名键替换成当前 profile 参数文件里的值，测试环境得到 localhost 地址，生产包得到机房 IP。配置文件自身不含任何真实值，环境切换对它透明。别名包指向 model 工程的 pojos，mapper 目录指向 model 工程的 mappers 文件夹，那里存放所有模块的 mapper xml；事务切面表达式这一项留给事务管理配置消费，本课装配时用不到，先认识它。
+
+## 配置类骨架：三个注解与一个属性类
+
+配置类放在 common 工程的 mysql 包下，先搭骨架（按画面线整理补全的可编译版本，属性绑定按可运行形式还原为独立属性类）：
+
+```java
+package com.study.headline.common.mysql.core;
+
+import com.zaxxer.hikari.HikariDataSource;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.logging.log4j2.Log4j2Impl;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.sql.DataSource;
+import java.io.IOException;
+
+@Configuration
+@PropertySource("classpath:mysql-core-jdbc.properties")
+@MapperScan(basePackages = "com.study.headline.model.mappers",
+            sqlSessionFactoryRef = "sqlSessionFactoryBean")
+@EnableTransactionManagement
+public class MysqlCoreConfig {
+
+    @Autowired
+    private MysqlCoreProperties mysqlCoreProperties;
+
+    // 数据源 Bean 与 SqlSessionFactoryBean Bean 见下文，import 集中在此列出
+}
+```
+
+三个注解的分工要分清。**`@PropertySource` 负责把配置文件加载进环境。** classpath 下那份占位符文件（构建后已是真实值）由此进入 Spring 的属性体系。**`@ConfigurationProperties` 负责绑定。** 属性类单独定义，加 lombok 的 `@Data` 省去 getter 与 setter：
+
+```java
+package com.study.headline.common.mysql.core;
+
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+
+@Data
+@Configuration
+@ConfigurationProperties(prefix = "mysql.core")
+public class MysqlCoreProperties {
+    private String jdbcUsername;   // 对应 mysql.core.jdbc.username
+    private String jdbcPassword;   // 对应 mysql.core.jdbc.password
+    private String jdbcUrl;        // 对应 mysql.core.jdbc.url
+    private String jdbcDriver;     // 对应 mysql.core.jdbc.driver
+    private String rootMapper;     // 对应 mysql.core.root.mapper
+    private String aliasesPackage; // 对应 mysql.core.aliases.package
+    private String txScanPackage;  // 对应 mysql.core.tx.scan.package
+}
+```
+
+绑定走松散绑定规则：配置键里连字符后的字母变大写、点号逐级对应，`jdbc.username` 就落到字段 `jdbcUsername` 上。配置键写的是小写加连字符的形态，Java 字段按驼峰命名，两边自动对上，这是 Spring Boot 推行的读取方式。**`@MapperScan` 负责生成 mapper 代理。** model 工程的 mappers 包下定义了所有 Mapper 接口，扫描该包即可为接口创建代理对象；工程里工厂可能有多个，`sqlSessionFactoryRef` 明确指定接口代理挂在哪个 `SqlSessionFactoryBean` 上，避免绑定错工厂。
+
+## 连接池：HikariDataSource 四项与两个池参数
+
+老的 C3P0、Druid 一类连接池不再使用，改用 Hikari，它在 Spring Boot 体系内以速度见长，是官方默认连接池。数据源 Bean 只做一件事，创建 Hikari 连接池并设置参数：
+
+```java
+@Bean
+public DataSource getDataSource() {
+    HikariDataSource dataSource = new HikariDataSource();
+    // 连接四项全部取自属性类
+    dataSource.setJdbcUrl(mysqlCoreProperties.getJdbcUrl());
+    dataSource.setUsername(mysqlCoreProperties.getJdbcUsername());
+    dataSource.setPassword(getRealPassword(mysqlCoreProperties.getJdbcPassword()));
+    dataSource.setDriverClassName(mysqlCoreProperties.getJdbcDriver());
+    // 池参数：最大连接 50，最小空闲 5
+    dataSource.setMaximumPoolSize(50);
+    dataSource.setMinimumIdle(5);
+    return dataSource;
+}
+```
+
+密码那行多了一层处理：配置文件里存的是反转后的字符串，比如真实密码是 root，文件里写成 toor，读取时反转回来才是真密码。还原方法在配置类里：
+
+```java
+/** 密码反转还原：配置存储的是反转后的字符串 */
+public String getRealPassword(String password) {
+    return StringUtils.reverse(password);
+}
+```
+
+`StringUtils.reverse` 来自 commons-lang3，入参出参都是字符串，一行完成反转。存反转值挡不住有心人，但至少避免密码明文直接躺在配置与制品里，属于轻量混淆；生产环境的密码管理还应交给配置中心或密钥管理服务。连接池参数的含义按池字面理解即可：最大连接数 50 是并发上限，最小空闲 5 保证常备连接，突发请求不用临时建连。
+
+## SqlSessionFactoryBean：把 MyBatis 装进容器
+
+整合 MyBatis 的本质是创建一个 `SqlSessionFactoryBean` 放进 Spring 容器，四项核心设置逐一出现：
+
+```java
+@Bean
+public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) throws IOException {
+    SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+    // 一、数据源：按名称注入上面定义的那个
+    factoryBean.setDataSource(dataSource);
+    // 二、别名包：取自配置文件
+    factoryBean.setTypeAliasesPackage(mysqlCoreProperties.getAliasesPackage());
+    // 三、mapper 文件位置：拼接通配路径，跨模块扫描
+    PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+    factoryBean.setMapperLocations(resolver.getResources(getMappPath()));
+    // 四、MyBatis 全局配置：驼峰映射与 SQL 日志
+    org.apache.ibatis.session.Configuration configuration =
+            new org.apache.ibatis.session.Configuration();
+    configuration.setMapUnderscoreToCamelCase(true);
+    configuration.setLogImpl(Log4j2Impl.class);
+    factoryBean.setConfiguration(configuration);
+    return factoryBean;
+}
+
+/** mapper 文件位置拼接，目录取自配置而非写死 */
+private String getMappPath() {
+    return new StringBuilder("classpath*:")                       // 跨模块扫描前缀
+            .append(mysqlCoreProperties.getRootMapper())          // 目录：mappers
+            .append("/**/*Mapper.xml")                            // 递归匹配全部 Mapper 文件
+            .toString();
+}
+```
+
+数据源直接把上面那个 Bean 的方法参数注入进来，容器按名称匹配到同一个实例。mapper 文件位置注意通配符的两层含义：`classpath*:` 才会扫所有模块的 jar，`classpath:` 只扫本模块，model 工程里的 xml 就会漏掉；`/**/*Mapper.xml` 递归匹配目录下所有以 Mapper.xml 结尾的文件。驼峰映射解决下划线到驼峰的转换：表字段 `user_name` 自动映射到实体属性 `userName`，MyBatis 默认不开启，实体字段全是 null 的经典问题多半源于此。SQL 日志实现指向 log4j2，与工程的日志体系保持一致，调试时能在控制台看到完整 SQL 与参数。启动装配的完整链路如下图：
+
+```mermaid
+flowchart LR
+    MV["构建：filtering 填充占位符"] --> PF["mysql-core-jdbc.properties 拿到真实值"]
+    PF --> PROP["MysqlCoreProperties 属性绑定"]
+    PROP --> DS["HikariDataSource Bean：四项加池参数"]
+    DS --> SFB["SqlSessionFactoryBean Bean：别名 mapper 位置 驼峰"]
+    SFB --> MS["@MapperScan 生成 Mapper 接口代理"]
+    MS --> SVC["Service 注入 Mapper 即可查询"]
+```
+
+关键路径是三个 Bean 的装配顺序：属性绑定先行，数据源其次，工厂 Bean 最后，`@MapperScan` 的代理对象挂在指定工厂上，整条链在启动阶段一次完成。
+
+## 跑通第一条查询
+
+验证标准很简单：应用能启动，说明占位符已填充、四项连接参数正确、池能建立连接、代理对象能生成；再从容器里取一个 Mapper 查出一条数据，整条链路就闭环了。按主流写法补全的测试类如下（Mapper 接口与 xml 按 model 工程 mappers 目录的规范编写，资料包内无工程源码）：
+
+```java
+@SpringBootTest
+public class MysqlCoreConfigTest {
+
+    @Autowired
+    private ApArticleMapper apArticleMapper;
+
+    @Test
+    public void testFirstQuery() {
+        // 第一条查询：按 id 查文章，标题能打印即连库成功
+        ApArticle article = apArticleMapper.selectByPrimaryKey(1L);
+        System.out.println(article.getTitle());
+    }
+}
+```
+
+启动日志里能看到两条信号：Hikari 池的启动输出（连接池初始化的毫秒数），以及 mapper 代理的注册信息。查询返回数据后，驼峰映射是否生效也可以顺带验证：实体里 `createdTime` 这类属性有值，说明下划线字段映射正常。
+
+## 常见误区
+
+- **驱动类名照抄旧示例。** MySQL 8 驱动类名是 `com.mysql.cj.jdbc.Driver`，旧类名 `com.mysql.jdbc.Driver` 已废弃；同时连接串必须带 `serverTimezone=Asia/Shanghai` 一类的时区参数，否则启动直接抛时区异常，时间字段读写还会偏移。
+- **mapperLocations 写成 `classpath:`。** 单星前缀只扫本模块，model 工程 jar 里的 xml 全部漏扫，启动不报错但一执行查询就报 Invalid bound statement；跨模块必须用 `classpath*:`。
+- **驼峰映射忘记开启。** 表字段下划线、实体驼峰是约定，MyBatis 默认不转换，查询结果大量字段为 null 时先检查 `mapUnderscoreToCamelCase`。
+- **多个工厂时 `@MapperScan` 不指定 `sqlSessionFactoryRef`。** 容器里有多个 SqlSessionFactory 时代理对象可能绑错工厂，事务与数据源跟着错位；工程里明确指定了 ref，自定义装配时这条不能省。
+
+## 面试可能被问到的问题
+
+1. 面试官追问：「Spring Boot 已经提供了数据源与 MyBatis 的默认装配，为什么还要自己写配置类？」
+   答：默认装配来自官方 starter，行为固定在约定里；统一工程需要定制连接池参数、密码还原处理、跨模块的 mapper 扫描位置与全局映射规则，手写配置类把这些决策收口到 common 一处，所有微服务共享同一套装配逻辑，也便于统一升级与排查。
+2. 面试官追问：「@ConfigurationProperties 的属性绑定规则是什么？」
+   答：按前缀加字段名的松散绑定，配置键 `mysql.core.jdbc.username` 在前缀 `mysql.core` 之下，剩余部分 `jdbc.username` 匹配驼峰字段 `jdbcUsername`，连字符、下划线与驼峰之间自动转换。相比 `@Value` 逐个取值，它批量绑定、类型安全，还能配合校验注解。
+3. 面试官追问：「Hikari 为什么快，最大连接数与最小空闲数怎么权衡？」
+   答：Hikari 在字节码优化、代理类精简、FastList 代替 ArrayList 与无锁化设计上做了大量工作，连接借还路径极短。最大连接数按数据库承载与并发峰值设置，盲目调大会引发数据库连接风暴；最小空闲数保证突发流量免建连等待，过大则浪费资源，工程里 50 与 5 是典型搭配。
+4. 面试官追问：「classpath 与 classpath* 在扫描资源时有什么区别？」
+   答：`classpath:` 从第一个匹配的类加载根开始查找，找到即止，通常只覆盖当前模块；`classpath*:` 遍历所有类路径来源，包括依赖 jar 里的资源。聚合工程里 mapper xml 在 model 模块，运行时在业务服务的依赖里，必须用 `classpath*:` 才能扫全。
+5. 面试官追问：「mapUnderscoreToCamelCase 解决什么问题，不开会怎样？」
+   答：数据库列名按规范是下划线风格，Java 属性按规范是驼峰风格，MyBatis 默认按列名精确匹配属性名，不开启时 `user_name` 查出来赋不到 `userName` 上，结果字段为 null。开启后自动完成下划线到驼峰的映射，或者在 xml 里为每个列写 result 映射，前者明显省力。
+
+## 配套资料
+
+- 代码：`materials/code/05/头条day01/`，内层资料目录含数据库规范设计说明书、PowerDesigner 使用手册与前后台项目原型 HTML；原始目录与文件名冠以项目原名，正文统一以「头条类资讯项目」指代。
+- 说明：`MysqlCoreConfig`、`MysqlCoreProperties` 与测试类不在本课资料包内，文中类为按画面线代码片段整理补全的可运行版本（属性类与反序列化细节按可编译形式还原，测试类为主流写法补全），包名统一改写为 `com.study.headline`；七项配置键、池参数 50 与 5、驼峰映射、mapper 通配路径与密码反转逻辑按课件画面线与口播口径整理。

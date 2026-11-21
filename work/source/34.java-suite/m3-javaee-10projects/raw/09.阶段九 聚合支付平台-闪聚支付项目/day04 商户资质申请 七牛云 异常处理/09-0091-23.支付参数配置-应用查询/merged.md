@@ -1,0 +1,208 @@
+# 23.支付参数配置-应用查询
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day04 商户资质申请 七牛云 异常处理
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day04 商户资质申请 七牛云 异常处理\23.支付参数配置-应用查询【海量资源尽在 666java.com】.mp4
+- 时长 10分15秒（音频 615s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好最后呢我们来实现一个应用查询的接口因为我们应用创建成功呢前端呢要查询我们创建的应用所以这里边呢我们专门提供两个接口来供他查询一个接口呢是查询某商户下边所有的应用列表另外一个就是根据应用的ID来查询应用好了那下边呢我们就来准备写这个接口啊好首先呢我们这个接口是要写在先写商户服务再写我们的商户平台应用
+[00:29] 也就是先写我们的double服务接口再写我们的这个http的接口好那么在这个app Service当中啊这里边我们是不是要定义接口呢好那这个接口怎么定义呢查询根据商户我们要查询它下边的列表对吧传入的参数是商户的id返回的是不是就是我们说的这个list对吧好那先帮我们写一下啊一个是返回的是一个list嗯然后呢还有一个传入的
+[00:58] 就是我们的什么啊商户的ID啊然后抛的一层呢还是我们说的这个business啊这是一个根据什么商户查询应用列表还有一个呢是根据应用的ID来查询应用的信息啊根据应用的ID的话那我们这个应用的ID你注意啊它不是应用表的这个组件我要强调一下因为我说了
+[01:24] APP ID后边我们都用这个ID了这个组件呢就是纯数据库表所用的一个组件我们业务都用这个APP ID好那么你呢要传一个APP的ID对吧然后呢让他如果有问题抛出一个异常这是不是就OK了好我们加一个注释吧这就是根据商户的ID查询应用列表也就是查询这个商户下面的应用列表对不对这是商户ID然后这个呢
+[01:56] 这就是根据APP的ID啊根据应用的ID来查询应用的信息懂吧好那么接口定义好我们现在呢就开始写接口的实现嗯那在这呢我们让把这个接口的实现给它暴露出来好吧然后这里边呢怎么写那肯定要用到我们的这个APPMapperAPPMapper这里边我们是不是要查一个list呀对吧所以这里边我们用select list然后呢我们new啊
+[02:28] 用它的一个条件构造器Lambda然后queryRubber好然后这里边我们主要是来查应用所以它的范围型指定App然后Equals现在它要根据商户的ID所以这里边我们应该是App里面应该有一个叫商户的ID是不是所以这个是不是就搞定但这里边有一个问题你看它查到了这个AppsList它是里边放的Entity对吧
+[02:57] 并不是放在DTO啊所以这里面我们需要用到MapStruct然后呢进行什么进行转换啊这里面有一个应用的什么啊嗯拷贝是吧然后呢Instance然后呢List转转一下啊这是不是就行了各位这个代码写好了吧那今天还有一个啊这个呢就是啊应用的Mapper然后呢
+[03:28] select by id这个不对千万不要这样by id指的是组件对吧你现在是app id对不对千万不要这么玩那你就是slack的谁啊你反正根据app id也可以查询一个嘛那么你就是slack的one然后呢你用一个lamb的这里边呢我们就可以继续写然后呢然后呢谁啊那里边是不是就是我们要根据我们说的这个app id来
+[03:57] 查询了呀嗯这时候呢就让它返回OK了吧哎不对报错了为啥报错因为它返回的是一个啥Entity对不对你需要用Converter这个转换你把它转换由Entity转成DTO看懂了吧好这就是我们说的商户服务的这个接口咱们这不就写好了
+[04:28] 那想好了之后呢你是个查询嘛现在我们是不是需要在Controller当中也定义呀对吧Controller定义那么就在三户平台应用下边我们来定义这个接口那么好那现在呢我们来看一下那这个接口就比较简单了那么你就需要在哪里呀在我们的三户平台应用这里边Controller对吧在这我们定义定义它这里边参数我们来看一下首先你呢是
+[04:57] 查询根据商户ID来查询根据商户ID商户ID是当前登录商户的这个什么他的身份对不对所以这里边呢各位你只需要从Token当中来拿就行了这个接口定义就不需要参数不需要参数那不需要参数我们刚才说了嘛商户的ID要从Token当中来解析这是不是就解析到了解析到了之后呢你就调用刚才我写的这个
+[05:25] 根据商户ID来查询的接口这就搞定了对吧然后接下来再看我们刚才是不是还有根据应用的ID来查询应用的信息那这个呢也比较简单它就传一个参数就行了并且通过什么通过pass参数来传递好这个我要给大家说一下因为这个我们没有用过看好这里边我们要做的事是什么是根据应用的ID来查询应用信息
+[05:56] 根据英文ID你是不是要传一个ID啊对不对你传一个ID的话这里边这个ID怎么传呢注意怎么传呢ID还不简单吗那就定一个变量就完事了但是这个ID你看我们的接口你就知道了它是这么传的看好
+[06:19] 怎么传的通过pass传的我们学过Spring MVC如果通过pass来传参你需要加一个pass variable懂吧然后这里边呢哎你要干嘛你要跟上一个什么你的这个啊与pass里边的这个名称一样的懂吧就表示什么表示这个名称要从这个什么行参当中来拿
+[06:43] 对不对所以这里边一定要注意好那现在呢我们说那我们还需要做一件事就是怎么弄定义Swagger的这个接口Swagger接口的参数怎么定义那这时候有几点你需要注意原来我们我经常写的我可能就给你拷贝了现在呢我需要给你写一遍这叫应用的ID对不对名称名称是啥名称和他保持一致行吧然后还有那这个
+[07:14] Data type呢Data type就是我们说的stream对吧还有一个我告诉你这儿这是我说的关键点了Param type原来我们学过query body现在我们要学一个pass也就是说通过pass方式来传参你要这么写大家看懂了吗好这个如果搞定了这就简单了我们就直接来调用它的方法然后呢直接把应用的ID传给它就完事
+[07:45] 可以吧好那现在呢我们把三户服务起来然后把应用的这个也起来啊我们现在就可以来测试了对吧好那现在我们来看一下啊都让它起来之后呢我们就可以直接通过Swagger的页面我们来看看这个接口到底对不对嗯应用相关看一下这不是查询三户下的应用看一下吗对不对然后下面是根据这个
+[08:20] 应用的ID来查询是不是那我们看那如果你要用Postman来测的话还是刚才说的你要不要嫌麻烦因为这个过程我跟你说这个过程是非常对我们有帮助的注意这是一个刚才我们定义的是一个创建应用对不对下面在这个创建应用在这儿拖进去
+[08:44] 在这好然后在这再定一个这就是我们说的什么根据商户的ID来查询应用是吧然后呢我们来看啊根据商户的ID来查询应用的话我们需要怎么做get那你看一下我们把这个URL先拷贝过来行不行然后呢刚才我们的这个URL是啥呀是不是叫my-apps对吧
+[09:14] 好那这是get那现在呢我们要做的事是不是要往里边放什么呀放大家应该猜到了放token对不对因为我们说现在我们没有登录就是用token来来存储商户的ID嘛所以这里边呢我们来这是auth authorization是吧好搞定现在我是不是就可以来发送了对吧看
+[09:41] 是不是你看它的结构是不是一个素组你看这里面有多个应用都可以显示对不对啊好了那你说还有一个结构是不是根据ID来测试根据ID来测试我们简单一些通过SWIGER来测行不行根据ID来测试这里面很简单来我们从我们的数据库当中找一个应用找哪个就找这个吧行不行你把它填到这执行我们来看是不是拿到这两个接口我们是不是就做完了
+[10:10] 对就比较简单啊查询是吧好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示商户服务应用查询接口的定义、实现及调用过程，包括服务层接口、控制层接口、数据库操作及接口测试。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示课程大纲，当前章节为“4.3 应用查询”，子章节“4.3.1 商户服务应用查询接口”下的“4.3.1.1 接口定义”，并显示了接口定义代码：List<AppDTO> queryAppByMerchant(Long merchantId) throws BusinessException;
+画面2：在IDE中展示AppService接口定义，包含createApp和queryAppByMerchant方法，鼠标悬停在queryAppByMerchant方法上。
+画面3：在IDE中展示AppService接口定义，鼠标悬停在queryAppByMerchant方法上，显示方法签名。
+画面4：在IDE中展示AppService接口定义，鼠标悬停在queryAppByMerchant方法上，显示方法签名。
+画面5：在IDE中展示AppService接口实现，显示queryAppByMerchant方法的实现，使用了LambdaQueryWrapper和selectList。
+画面6：在IDE中展示AppService接口实现，显示getAppById方法的实现，使用了LambdaQueryWrapper和selectOne。
+画面7：展示课程大纲，当前章节为“4.3.2 商户平台应用查询接口”，子章节“4.3.2.1 接口定义”，并显示了接口定义代码：@ApiOperation("查询商户下的应用列表") @GetMapping(value = "/my/apps") public List<AppDTO> queryByApps() { Long merchantId = SecurityUtil.getMerchantId(); return appService.queryAppByMerchant(merchantId); }
+画面8：在IDE中展示AppController类，显示queryByApps方法的实现，调用appService.queryAppByMerchant。
+画面9：在IDE中展示AppController类，显示getApp方法的实现，调用appService.getAppById。
+画面10：在IDE中展示AppController类，显示getApp方法的实现，调用appService.getAppById。
+画面11：在IDE中展示AppController类，显示getApp方法的实现，调用appService.getAppById。
+画面12：在Swagger UI中展示GET /my/apps/{appId}接口，显示参数appId和响应示例。
+画面13：在Postman中展示GET请求，地址为http://localhost:57010/merchant/my/apps，请求头Authorization包含Bearer token，请求体为JSON格式。
+画面14：展示课程大纲，当前章节为“4.3 应用查询”，子章节“4.3.1 商户服务应用查询接口”，并显示了“二、商户应该配置哪些第三方支付渠道的参数呢？”的内容。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+/**
+ * 查询商户下的应用列表
+ * @param merchantId
+ * @return
+ */
+List<AppDTO> queryAppByMerchant(Long merchantId) throws BusinessException;
+```
+画面2：
+```java
+/**
+ * 应用管理相关的接口。
+ * Created by Administrator.
+ */
+public interface AppService {
+
+    /**
+     * 创建应用
+     * @param merchantId 商户id
+     * @param appDTO 应用信息
+     * @return 创建成功的应用信息
+     * @throws BusinessException
+     */
+    AppDTO createApp(Long merchantId, AppDTO appDTO) throws BusinessException;
+
+    List<AppDTO> queryAppByMerchant(Long merchantId) throws BusinessException;
+```
+画面3：
+```java
+/**
+ * 应用管理相关的接口。
+ * Created by Administrator.
+ */
+public interface AppService {
+
+    /**
+     * 创建应用
+     * @param merchantId 商户id
+     * @param appDTO 应用信息
+     * @return 创建成功的应用信息
+     * @throws BusinessException
+     */
+    AppDTO createApp(Long merchantId, AppDTO appDTO) throws BusinessException;
+
+    List<AppDTO> queryAppByMerchant(Long merchantId) throws BusinessException;
+```
+画面4：
+```java
+/**
+ * 应用管理相关的接口。
+ * Created by Administrator.
+ */
+public interface AppService {
+
+    /**
+     * 创建应用
+     * @param merchantId 商户id
+     * @param appDTO 应用信息
+     * @return 创建成功的应用信息
+     * @throws BusinessException
+     */
+    AppDTO createApp(Long merchantId, AppDTO appDTO) throws BusinessException;
+
+    List<AppDTO> queryAppByMerchant(Long merchantId) throws BusinessException;
+```
+画面5：
+```java
+@Override
+public List<AppDTO> queryAppByMerchant(Long merchantId) throws BusinessException {
+    List<AppDTO> apps = appMapper.selectList(new LambdaQueryWrapper<App>().eq(App::getMerchantId, merchantId));
+    return apps;
+}
+```
+画面6：
+```java
+@Override
+public AppDTO getAppById(String appId) throws BusinessException {
+    App app = appMapper.selectOne(new LambdaQueryWrapper<App>().eq(App::getAppId, appId));
+    return app;
+}
+```
+画面7：
+```java
+@ApiOperation("查询商户下的应用列表")
+@GetMapping(value = "/my/apps")
+public List<AppDTO> queryByApps() {
+    Long merchantId = SecurityUtil.getMerchantId();
+    return appService.queryAppByMerchant(merchantId);
+}
+```
+画面8：
+```java
+@ApiOperation("查询商户下的应用列表")
+@GetMapping(value = "/my/apps")
+public List<AppDTO> queryByApps() {
+    Long merchantId = SecurityUtil.getMerchantId();
+    return appService.queryAppByMerchant(merchantId);
+}
+```
+画面9：
+```java
+@ApiOperation("根据应用id查询应用信息")
+@GetMapping(value = "/my/apps/{appId}")
+public AppDTO getApp(@PathVariable("appId") String appId) {
+    return appService.getAppById(appId);
+}
+```
+画面10：
+```java
+@ApiOperation("根据应用id查询应用信息")
+@GetMapping(value = "/my/apps/{appId}")
+public AppDTO getApp(@PathVariable("appId") String appId) {
+    return appService.getAppById(appId);
+}
+```
+画面11：
+```java
+@ApiOperation("根据应用id查询应用信息")
+@GetMapping(value = "/my/apps/{appId}")
+public AppDTO getApp(@PathVariable("appId") String appId) {
+    return appService.getAppById(appId);
+}
+```
+画面12：
+```json
+{
+  "appId": "string",
+  "appname": "string",
+  "merchantId": 0,
+  "notifyUrl": "string",
+  "publicKey": "string"
+}
+```
+画面13：
+```json
+{
+  "appId": "merchant-0812-40ab-9811-478a6b57fe",
+  "appname": "充值网银",
+  "merchantId": 12112208148344425,
+  "notifyUrl": "string",
+  "publicKey": "string"
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：PPT标题为“4.3 应用查询”，子标题“4.3.1 商户服务应用查询接口”，子子标题“4.3.1.1 接口定义”。
+画面7：PPT标题为“4.3.2 商户平台应用查询接口”，子标题“4.3.2.1 接口定义”。
+画面14：PPT标题为“4.3 应用查询”，子标题“4.3.1 商户服务应用查询接口”，子子标题“4.3.1.1 接口定义”，并显示了“二、商户应该配置哪些第三方支付渠道的参数呢？”的内容。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

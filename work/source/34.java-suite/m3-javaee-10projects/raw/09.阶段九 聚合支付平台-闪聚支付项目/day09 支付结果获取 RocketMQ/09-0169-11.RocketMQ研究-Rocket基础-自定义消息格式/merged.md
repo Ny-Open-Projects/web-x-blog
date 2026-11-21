@@ -1,0 +1,211 @@
+# 11.RocketMQ研究-Rocket基础-自定义消息格式
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day09 支付结果获取 RocketMQ
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day09 支付结果获取 RocketMQ\11.RocketMQ研究-Rocket基础-自定义消息格式【海量资源尽在 666java.com】.mp4
+- 时长 10分26秒（音频 627s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那下边呢我们继续来学习RockitMQ的基础知识在前边呢我们分别演示了同步一步发送消息那消息的内容啊大家可以看到它就是一个字符串对不对那在实际企业生产开发当中啊这个消息的内容可能是复杂的那比如说可能是一个复杂对象的这个内容对不对所以呢我们现在为了演示我们整个要自定义消息格式这个功能我们需要先来创建一个模型类
+[00:30] 然后呢我们准备在生产者这儿我们建一个model这个包然后在这个里边呢我们去创建一个叫orderxt这个类的名字就表示它是一个订单的什么扩展类啊然后呢我们这个过程我就不再去敲代码了然后复制过去大家看一下这个代码能看懂吗报错了报错了大家知道这是啥错吗这个注解是不是就是Lombok的注解对吧Lombok的注解呢这里边呢
+[01:00] 那我们是其实可以把它给你也可以引到复工程这样生产者消费者都能用了是吧我们就引一个long bulk行吧好这样就OK了然后呢这样的话它的这个model模型类型它就应该不再报错了我们得需要把它导进去好导进去了这是一个日期类型你看它有几个属性一个是ID你看你主要看什么你主要看的类型字幕串日期long
+[01:29] 是不是都有了对那我们现在就来看我们准备的我们准备发这个消息就是order.ext好那么再回到讲义我们要发的话生产者嘛肯定是要怎么发呀我们要建一个方法去发对不对好那大家来看我在这呢就准备在这再建一个方法这个方法呢就准备发送什么对发送对象这发送对象怎么发呢
+[01:56] 发送对象你肯定还得先指定一个topic这都没得说的对吧但是你这呢就可以指定什么了就可以指定我们刚才的这个什么order ext大家看这个方法大家我觉得就比较亲切为什么因为我们实际的项目当中很多应该都要这么做对不对来我们把它写一下你看写错了写到写错地了
+[02:29] 应该是发送对象好发送对象在这是吧好那么我们来看那发送对象怎么发送呢首先还是要用这个rocket mqtemplate关键就是它怎么个用法对不对它怎么用法看啊这里边有一些方法这都不是我们要的方法它有一个方法啊来找一下就这方法这个方法从字面意义上呢我们应该也能猜得到了它是什么呀
+[03:01] 它是先转换再发送对先转换再发送有人说老师那你转的是啥呀对它是要把这个对象呀将这个对象呀转成JSON串发送你注意那有人说老师这个convert and send的这个方法它是一个同步还是异步的方法吗那我们判断一下呀同步方法老师告诉大家了一定是有返回值的呀
+[03:31] 你说你看它有返回值吗你找啊你看它没有返回值你不要着急啊后边还有了里头还有啊在里头继续找Ctrl加T继续找对吧你看它是不是开始转换了吗你看这是不是有一个发送继续找再再找你看这里边是不是开始发我问你各位只找到根了它是一个同步还是一个异步对它有返回值它一定是一个什么同步方法所以这个发送对象我们现在呢就用这个Compare的Anderson的
+[04:01] 应该说是一个同步发送对象消息大家理解吗好了那么这个我就写好了那接下来我们是不是就可以来测试一下呀怎么测试我们仍然是要建一个测试的方法建一个测试方法那这时候建这个测试方法的话我们就想呀这个是要发对象了对不对要发对象了我就单独再建一个什么topic
+[04:28] 我就不在原来的这个my topic的里边去发了为了和原来区别开为什么因为很有可能后边我还要去针对对象呢我专门建一个consumer这个consumer他一定是监听不是监听这个my topic我让他监听另外一个大家懂了吗那我让监听我起一个叫OBG吧我让你监听他这是第一条对象消息这个对象消息说白了就是把对象转成杰森川方大家理解了吧好那现在呢我怎么弄
+[04:58] 调一下啊sendmsgbyjason对吧好你看因为你是啥呀因为你是对象嘛所以你这儿你不能去弄个字符串了你得溜出来一个对象对吧并且你这溜对象呢因为我说了嘛咱们主要是看看它的各种类型嘛所以这个ID我随便添一些啊就造数据把这些属性呢都造一下就看它能不能发
+[05:28] moneymoney呢我就随便造吧好然后再来一个有一个日期嘛日期咱们就六一个日期就得了行吧我就先造这么多然后呢你把它放进去这是不是就开始发了对那好了现在呢我就开始执行那老师告诉大家刚才说他是要干嘛对先转换再发送先转成Jason Chuan再发送那发到哪了呢是发到我们说的这个叫mytopic
+[05:58] -obj的主题下边了对不对那么发送成功了之后有人说老师那这个consumer他也不会接吗因为他监听的不是这个主题他肯定接不到消息那我们就可以借助于管理端那么我们来看他的这个消息里头有没有一个叫my topic obj那我们可以查一下里面的确有条消息我们看内容果然是我们的json数据看懂了吗
+[06:24] 这是不是就是按照我说的先转换成JSON串来发送对这个就是我们在生产当中常用的方法对就把这个调用这个convert and send它就自动转成JSON那么还有一点那你自动转成JSON各位那有人说老师那我想接收那我怎么接收呀接收到我我怎么接收如果你想消费它其实也很简单那其实各位你像原来
+[06:55] 我们写了一个消费端的程序这消费端的程序原来是不是可以接收支付串啊对不对那你别忘了你Jason是不是也是支付串啊你把这个Jason串拿到了你想转成对象是不是也可以转成对象啊对它就比较简单所以这个消费端大家看这个代码应该也能看得懂是不是啊接收支付串然后呢转成对象是不是就可以对好那这个就是我们说的什么哎这个是自定义消息格式
+[07:22] 另外还有提供的一个叫什么呢我们还可以使用新的这个监听的类型这个呢我也要给大家演示一下因为我们刚才我们现在建的这个监听的类型你会发现它是要什么呀监听的是mytopic并不是mytopicobj另外它把这个信息是以字幕串形式来接对不对那下面我要给大家演示一个什么呢我要演示一个来监听
+[07:49] 我们刚才新建的这个topic那新建的这个topic呢咱们叫做my topic对吧然后呢-obg是不是这个然后呢咱们是不是还得给它一个什么给它一个生产消费者的组吧消费者的组消费者的组的话我们给它起一个组名然后呢这个呢我们和讲义保持一致啊就是后面加一个obg就行好关键的问题在这
+[08:16] 我们让它实现原来我们说的这个监听嘛对吧那我问你你原来你看你原来代码咋写的你原来的代码你是实现了一个你看它是个范形嘛指定字幕串就表示接过来消息把它转成字幕串而现在呢我不写字幕串了因为你是传对象嘛那我就直接写什么对我其实可以直接写这个对象嘛注意你看它这个没有这个类型因为我们原来是在生产端建的这个
+[08:45] 模型那简单考过去好model可以吧然后呢考过去那我问你现在它是不是也有这个order ext有了吧就消费端是吧消费端呢它就可以直接来以这个对象的形式把它接到对这样你会发现它的行三你看它是不是就行三是不是就是order ext了那我问你这你是不是就很轻而易举的就拿到了
+[09:19] 对吧好注意看啊那我就准备把这个消费端的程序再重启一下一重启它现在既监听了mytopic又监听了mytopic的-obg这两个主题是吧其中有一个是不是就可以直接拿对象了对不对你看各位是不是就打印出来了那这怎么打印这么多呢还是我原来说的这个里边原来有一些堆积的消息我们把它清一下现在我再发一下看啊我再发走这是发了又发了一个对象吧又发了一个
+[09:50] 又发了一个对象的话你看它能打印出来吗你看出来了吧这是不是就是我们刚才测试发的这就是我们发现我们就可以在这个里头你看如果你是传对象的我们就可以直接定义对象范形当中是写对象类型是不是好这样的话就符合我们生产上很多场景开发了
+[10:12] 这就是我们的自定义消息格式这一小节呢我们主要讲了生产当中我们主要是要以Jason来传输整个消息甚至你消费端呢也可以直接通过对象方式来接收好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 Spring Boot 和 RocketMQ 实现同步消息的发送与接收，包括定义消息实体类、生产者和消费者代码，以及在控制台查看消息。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示课程目录结构，当前位于“2.3.2 发送同步消息”部分，右侧代码编辑器显示 OrderExt 类的定义，包含 id、createTime、money、title 字段。
+画面2：在 IDE 中展示 ProducerSimpleTest.java 文件，代码中包含 onApplicationEvent 方法，用于处理发送失败的回调。
+画面3：展示项目结构，选中 OrderExt 类，右侧代码编辑器显示 OrderExt 类的定义，包含 id、createTime、money、title 字段。
+画面4：展示 ProducerSimpleTest.java 文件，代码中包含 sendSyncMsg 方法，用于发送同步消息。
+画面5：展示 AbstractMessageSendingTemplate.java 文件，代码中包含 convertAndSend 方法，用于发送消息。
+画面6：展示 ProducerSimpleTest.java 文件，代码中包含 testSendSyncMsg 方法，用于测试同步消息发送。
+画面7：展示 OrderExt 类的代码，代码中包含 setId、setMoney、setCreateTime、setTitle 方法。
+画面8：展示 RocketMQ 控制台，显示消息列表，包含 Message ID、Tag、Key、StoreTime 等信息。
+画面9：展示课程目录结构，当前位于“2.3.3 消费者工程”部分，右侧代码编辑器显示 ConsumerSimple 类的定义，包含 onMessage 方法。
+画面10：展示 ConsumerSimple.java 文件，代码中包含 @Component 注解和 RocketMQMessageListener 注解。
+画面11：展示 ConsumerSimpleObj.java 文件，代码中包含 @Component 注解和 RocketMQMessageListener 注解。
+画面12：展示 ConsumerSimpleObj.java 文件，代码中包含 @Component 注解和 RocketMQMessageListener 注解。
+画面13：展示 ConsumerSimpleObj.java 文件，代码中包含 @Component 注解和 RocketMQMessageListener 注解，右侧控制台显示消息接收日志。
+画面14：展示课程目录结构，当前位于“2.7 延迟消息”部分，右侧代码编辑器显示 ConsumerSimpleObj 类的定义，包含 onMessage 方法。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@Data
+@NoArgsConstructor
+@ToString
+public class OrderExt implements Serializable {
+    private String id;
+    private Date createTime;
+    private Long money;
+    private String title;
+}
+```
+
+画面2：
+```java
+@Override
+public void onApplicationEvent( Throwable throwable ) {
+    System.out.println(throwable.getMessage());
+}
+```
+
+画面3：
+```java
+public class OrderExt implements Serializable {
+    private String id;
+    private Date createTime;
+    private Long money;
+    private String title;
+}
+```
+
+画面4：
+```java
+public void sendSyncMsg(String topic, String msg) {
+    rocketMQTemplate.asyncSendTopic(topic, msg, new SendCallback() {
+        @Override
+        public void onSuccess(SendResult sendResult) {
+            System.out.println(sendResult);
+        }
+        @Override
+        public void onException(Throwable throwable) {
+            System.out.println(throwable.getMessage());
+        }
+    });
+}
+```
+
+画面5：
+```java
+public void convertAndSend(Object destination, Object payload, Map<String, Object> headers) {
+    this.convertAndSend(destination, payload, headers, MessagePostProcessor(null));
+}
+```
+
+画面6：
+```java
+public void testSendSyncMsg() {
+    producerSimple.sendSyncMsg("my-topic", "条目同步消息");
+    try {
+        Thread.sleep(5000);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+```
+
+画面7：
+```java
+OrderExt orderExt = new OrderExt();
+orderExt.setId("11222");
+orderExt.setMoney(168L);
+orderExt.setCreateTime(new Date());
+orderExt.setTitle("测试");
+```
+
+画面8：
+无代码，仅显示 RocketMQ 控制台界面。
+
+画面9：
+```java
+@Component
+@RocketMQMessageListener(topic = "my_topic", consumerGroup = "demo_consumer_group")
+public class ConsumerSimple implements RocketMQListener<String> {
+    @Override
+    public void onMessage(String s) {
+        System.out.println(s);
+    }
+}
+```
+
+画面10：
+```java
+package com.shanjugy.test.RocketMQ.message;
+
+import org.springframework.stereotype.Component;
+
+@Component
+@RocketMQMessageListener(topic = "my-topic", consumerGroup = "demo-consumer-group")
+public class ConsumerSimple implements RocketMQListener<String> {
+}
+```
+
+画面11：
+```java
+@Component
+@RocketMQMessageListener(topic = "my-topic-obj", consumerGroup = "demo-consumer-group-obj")
+public class ConsumerSimpleObj implements RocketMQListener<String> {
+}
+```
+
+画面12：
+```java
+@Component
+@RocketMQMessageListener(topic = "my-topic-obj", consumerGroup = "demo-consumer-group-obj")
+public class ConsumerSimpleObj implements RocketMQListener<String> {
+}
+```
+
+画面13：
+```java
+@Component
+@RocketMQMessageListener(topic = "my-topic-obj", consumerGroup = "demo-consumer-group-obj")
+public class ConsumerSimpleObj implements RocketMQListener<String> {
+    @Override
+    public void onMessage(String s) {
+        System.out.println(s);
+    }
+}
+```
+
+画面14：
+```java
+@Component
+@RocketMQMessageListener(topic = "my-topic-obj", consumerGroup = "demo-consumer-group-obj")
+public class ConsumerSimpleObj implements RocketMQListener<OrderExt> {
+    @Override
+    public void onMessage(OrderExt orderExt) {
+        System.out.println(orderExt);
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：PPT标题为“2.3.2 发送同步消息”，目录结构显示“2.3.2 发送同步消息”。
+画面9：PPT标题为“消费者”，目录结构显示“2.3.3 消费者工程”。
+画面14：PPT标题为“2.7 延迟消息”，目录结构显示“2.7 延迟消息”。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

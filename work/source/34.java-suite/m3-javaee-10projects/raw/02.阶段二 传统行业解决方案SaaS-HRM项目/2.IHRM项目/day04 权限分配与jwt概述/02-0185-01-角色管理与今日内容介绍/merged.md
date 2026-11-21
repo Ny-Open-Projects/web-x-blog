@@ -1,0 +1,193 @@
+# 01-角色管理与今日内容介绍
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day04 权限分配与jwt概述
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day04 权限分配与jwt概述\01-角色管理与今日内容介绍_【海量资源尽在 ubkz.com】.mp4
+- 时长 11分7秒（音频 667s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 各位朋友大家好,今天是我们这个系统的第四天那在讲正式内容之前呢,有必要对我们昨天留了一个简单的作业,做一个简单的说明就是对于昨天来说呢,我们留了一个就是叫做角色管理的一套基本增伤改查的一个操作那我们先简单的看一下,这套代码呢在今天的代码当中呢会给各位都下发下去
+[00:26] 那其中呢一共就包含这么四个部分第一个呢角色的实体类我们之前已经说过了那接着角色DO也没什么可说的那接着Service那基本上和我们之前的套路一样就是在这个Service当中呢去完成我们角色基本的增删改查的这些操作基本上都是一模一样的这边呢还有一个带分页的一个查询基本上就是这些内容那当然了还有它的Controller那Controller这边呢有添加角色
+[00:55] 有更新删除根据ID查询还有分页等等这些内容呢各位应该都不陌生简单的说一下其实就可以了好了那对于我们这个角色呢完全的代码都是按照我们的API来进行构造的API来进行构造的里面的新增和我们之前套路基本上都是一模一样的那这个代码呢我们简单的来过一下新增
+[01:20] 那新增角色呢是其实是某一个企业里面的一个角色ID那这个角色ID呢就是根据我们之间的代码就是先用一个我们写好的工具里面隐藏的这么一个1来构造那之后呢我们会对它进行一个简单的改造的一个过程好了有了写了ID呢接下来调用Service进行保存其中我们可以通过我们的ID生成器自动生成一个ID接着进行一个保存操作
+[01:45] 那好了接下来就是update更新那对于更新而言其实就是根据ID进行更新那你传递过来这个IDID呢其实已经复制到row这个对象当中了那好了接下来update的时候根据ID进行查询查询好了之后我们去设置它的描述信息设置角色的名称接着进行一个更新操作那还有呢这边就是删除删除更简单了就是直接detaby ID
+[02:11] 好了接下来最后一个就是根据ID获取根据ID获取就是Find by ID里面的套路基本上是一样的Find by ID.get最后一个就是查询角色查询角色和我们之前是一模一样的在这里面得到根据企业ID进行查询拿到它里面的企业ID的名称还有它的size这里面的get SPC是我们之前写好的公共的根据企业获取special occasion的这么一个方法
+[02:37] OK那这样一来呢我们这几个方法跟各位做了一个简单的说明那接下来呢就是看一下前端那在前端这边呢我已经把角色相同内容全部配置到model-setting这个模块里面那对于各位而言呢在今天的资料当中把相关的这个代码已经给各位下发下去了前端的代码我们要用到的是model-setting
+[03:01] 以及model里面设置的这么几个API那这个API呢用到的是一个我们叫做角色.js这是我们的API好了那把这个API引入到我们的API目录下好了接着把我们这个model-setting引入到我们的这个这边那接下来注册到我们的Vue当中注册注册那注册好了之后我们来看一下就是model-setting首先呢我们都知道找到的是路由
+[03:31] 在路由当中找到setting page indexsetting page index那index里面的内容呢比较简单tables角色那我们显示的是哪个显示的是row来看row就是中间这一段中间这一段用到了一个我们的绑定的组件又找到row listrow list是谁就是我们comp
+[03:56] components里面的row-listcomponents里面的row-list那这样以来里面基本的角色的列表看table列表内容能拿到好了这边呢还有一个分页的组件那这边有dialog隐藏的一个弹出层好了这边还有一个我一会要完成的一个分配权限的这么一个弹出层里面的这个代码呢基本上都比较简单都是通过调用方法完成操作而已好了如果感兴趣的话呢其实可以简单的去看一下咱们这些代码都写过我就不再一行一行的去削了
+[04:28] 好了我们可以简单的看一下效果找到我们的工程我现在已经启动起来了找到公司设置来看这边有角色新增一个角色我们看一下好不好使OK那好了我们查看一下修改改成一改成一走也没问题那删除同样也可以那这个就是简单的和各位看了一下我们这个角色相关的这个作业OK简单的说了一下我们这个角色管理那接下来呢我们回到讲义部分
+[04:59] 来看一下今天第四天的内容那对于今天呢第一块我们要来看一下就是全线管理相应的内容这个全线包含我们之前说过的真正的全线和全线里面代表的资源因为我们都知道我们这边系统是通过基于RBAC模式演化过来的一套具有资源的这么一个全线系统那首先呢我们第一块就是全线管理的基本增伤改善操作
+[05:29] 那这些我们搞定了之后加上我们昨天完成的用户管理部门管理角色管理和权限和资源管理那我们基本的所有元素都已经搞定了那接下来我们要完成的其实就是对于角色究竟有什么权限进行分配一个用户究竟属于哪一个角色进行分配所以第二块和第三块我们完成的是分配角色和分配权限的这么两块功能而这些我们都准备好了之后呢接下来呢我们就来看一下
+[05:59] 对于一些常见的我们要做权限的认证要不要做用户登录的认证和权限的一个授权那么看一下基本的这些认证它有什么样的一些方式那我们其实也学了很多认证的一种方法了比如说呢我们之前学过的session cookie等等但是我们没有系统的总结过所以我们第四块就是总结一下哎常见的这几种认证机制那我们最后一块呢就是来看一下在我们这个这个hrm
+[06:28] 人力资源管理系统当中我们是如何做用户认证因为先做认证再做授权那这就是我们今天要完成的一些内容其实第一块第二块第三块还是在最后的权限做准备数据上面的一些内容那底下才是真正的看一下我们常见的认证或者授权常见的一些手段OK那我们这边呢简单的说了一下今天的内容那接着我们来看第一框
+[06:57] 就是一个全线控制那对于我们的整个系统的全线控制来说其实一共涉及到了很多张表在我们今天的资料当中给各位准备了一个我们操作全线相应的数据库的表的一个结构图当然了也是通过PubList在那给它画出来那么可以简单的来浏览一下昨天呢我们完成了用户相应的这张表的一个处理
+[07:26] 那还有一个角色这张表的一个处理那这两张表我们搞定了之后接下来今天全线相关的我们完成的是全线表全线菜单资源全线按钮资源全线API资源这四张表的增删改查当然这四张表里面呢它还有是有这么一个特点有这么一个特点那API它是一个全线
+[07:54] 我们的按钮它是一个权限这边是菜单对比的一个前线那么可以得知API和权限之间Pont和权限之间和我们的Menu和权限之间它们之间的一个关系是不是应该就是一个一对一关系啊OK好了这个图呢看起来还是有点别扭啊这边不是中文我就看一看API好了这边一给它改个名字我就改成按钮了这边菜单好了权限
+[08:34] 那其实很简单的这个道理他们都是一对一一对一一对一那接下来我想跟各位要说的是我们权限管理要做的事情究竟是什么基本增伤改查这一事都明白所以我们要做的事情是不是就是权限表要添加数据的时候那对应着像某一个API或者按钮或者菜单的表里面统一添加数据那删除同样的这边删这边也删这边删这边也删没错吧所以对于我们今天这个操作来说难度呢稍微会有一点点
+[09:04] 就涉及到两个表的这么一个操作那除了这个之外呢还有一个需要跟各位来聊的一件事啊就是这边有一个权限表那对于权限表里面有菜单有按钮和API那我们整个系统的不管是菜单和按钮或者API来说它是公共的一套咱们只有一套那不同的企业登陆到我们这个系统来说它的菜单应该都是一模一样的
+[09:30] 也就是说我有人力资源这个菜单那你应该也有所以对于资源我们的录入或者对于我们菜单或者对于API或者对于权限这些录入是应该是由我们SaaS管理员来做那SaaS管理员录入进去之后那每个企业他只能看到这些共同的一些内容所以这里面的是一些共享的一些资源就是每一个企业都能看到
+[09:54] 那这句话又来了那就是说呢对于权限或者对于这些菜单而言它某一些可能并不是给企业去看的比如说呢我们可以在我们的系统当中管理我们的SaaS平台那管理SaaS平台那我们之前做过一个SaaS平台的一个管理那SaaS平台管理咱们的一个租户或者我们的一个企业它能看到吗所以显然它不能看所以在我这边权限的时候控制了一个属性叫做权限的一个可见性的这么一个状态
+[10:24] 那如果这是一个比较高级的一个状态那比较高级的一个菜单那可能企业就看不到我这边给他设置为零常规的一些菜单是不是企业都可以去看呀那这样一来就比较明确了那如果是对于我们的普通租户企业来说他可能只能看到某些内容那对于我们这边如果有一个SaaS平台管理员他是不是可以看到所有啊OK好了那这个就是跟各位简单的来聊了一下
+[10:54] 我们今天全线管理要做的事情以及对全线管理里面这几张表需要各位注意的一些字段做了一个大致的说明
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示一个基于 Spring Boot 和 Vue 的 HRM 系统中角色管理模块的后端 Java 代码实现与前端 Vue 页面交互逻辑。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 显示 IntelliJ IDEA 中 `Role.java` 实体类代码，定义了角色的属性（id, name, description, companyId）。
+- 代码中包含注解 `@Entity`、`@Table(name = "pe_role")`、`@Getter`。
+- 屏幕下方显示终端窗口，其中包含注释“//未维护中间表”、“//角色与用户 多对多”。
+
+画面 2：
+- 显示 IntelliJ IDEA 中 `RoleService.java` 服务层代码。
+- 代码包含 `@Autowired` 注解注入 `PermissionDao`。
+- 定义了 `save` 方法用于保存角色，`update` 方法用于更新角色，`findById` 方法用于根据 ID 查询角色，`findAll` 方法用于根据公司 ID 查询所有角色。
+
+画面 3：
+- 显示 IntelliJ IDEA 中 `RoleController.java` 控制器层代码。
+- 代码包含 `@RequestMapping` 注解定义了角色的增删改查接口。
+- 屏幕下方显示了两个窗口，分别是“元数据 - 透视图”和“元数据 - 模型”。
+
+画面 4：
+- 显示 IntelliJ IDEA 中 `BaseController.java` 基础控制器代码。
+- 代码包含 `protected` 修饰的 `HttpServletRequest`、`HttpServletResponse`、`String companyName` 等成员变量。
+- 代码中包含注释“//日的使用 companyid = 1”、“//this.companyName = “传智播客””。
+
+画面 5：
+- 显示 IntelliJ IDEA 中 `RoleController.java` 控制器层代码。
+- 代码包含 `@RequestMapping` 注解定义了角色的增删改查接口。
+- 代码中包含注释“//分页查询角色”。
+
+画面 6：
+- 显示 IntelliJ IDEA 中 `RoleController.java` 控制器层代码。
+- 代码包含 `@RequestMapping` 注解定义了角色的分页查询接口。
+- 代码中包含注释“//分页查询角色”。
+
+画面 7：
+- 显示 Visual Studio Code 中 `Index.Vue` 文件的 Vue 组件代码。
+- 代码包含 `el-tabs`、`el-tab-pane`、`<component v-bind="roleList">` 等 Vue 组件。
+- 代码中包含注释“//角色列表”。
+
+画面 8：
+- 显示 Visual Studio Code 中 `role-list.Vue` 文件的 Vue 组件代码。
+- 代码包含 `el-dialog`、`el-form-item`、`el-button` 等 Vue 组件。
+- 代码中包含注释“//弹出框”。
+
+画面 9：
+- 显示 Visual Studio Code 中 `role-list.Vue` 文件的 Vue 组件代码。
+- 代码包含 `handleQuery`、`saveOrUpdate`、`update` 等方法。
+- 代码中包含注释“//保存或更新”。
+
+画面 10：
+- 显示浏览器中 HRM 系统的角色管理页面。
+- 页面显示了角色列表，包括“人员管理”、“人事专员”、“薪资专员”等角色。
+- 页面中有一个弹窗提示“本次操作将删除xxx1，请确认角色将不可恢复，您确定要删除吗？”。
+
+画面 11：
+- 显示电脑桌面，背景为“黑马程序员 | 博学谷”的标志。
+
+画面 12：
+- 显示 PowerDesigner 中的物理数据模型图。
+- 图中包含 `bs_user`、`pe_role`、`pe_permission`、`pe_role_permission` 等表。
+- 表之间通过外键关系连接，如 `pe_role` 与 `pe_role_permission` 通过 `role_id` 关联。
+
+画面 13：
+- 显示 PowerDesigner 中的物理数据模型图。
+- 图中包含 `bs_user`、`pe_role`、`pe_permission`、`pe_role_permission` 等表。
+- 表之间通过外键关系连接，如 `pe_role` 与 `pe_role_permission` 通过 `role_id` 关联。
+
+画面 14：
+- 显示 PowerDesigner 中的物理数据模型图。
+- 图中包含 `bs_user`、`pe_role`、`pe_permission`、`pe_role_permission` 等表。
+- 表之间通过外键关系连接，如 `pe_role` 与 `pe_role_permission` 通过 `role_id` 关联。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1：
+```java
+package com.ihrm.domain.system;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.Swagger.annotations.ApiModel;
+import io.Swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener
+

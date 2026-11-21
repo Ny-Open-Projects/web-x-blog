@@ -1,0 +1,120 @@
+# 21-网站流量日志分析-获取Visit表模型
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day07-Azkaban.Sqoop
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day07-Azkaban.Sqoop\21-网站流量日志分析-获取Visit表模型【海量资源尽在 ubkz.com】.mp4
+- 时长 6分44秒（音频 405s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 接下来我们来看下一个表模型就是Visit表模型这个表模型是这样的前面有一个Session这个Session是不会重复的因为它会把相同的Session的数据放在同一行而这个里面是它的一个IP这个字段是我这个Session的一个起始访问时间这个是结束访问时间A.html是起始的访问页面C.html是结束的访问页面
+[00:31] 而这个R呢是在session中我访问了几个页面OK这是一个visit表模型它其实代表了一次独立的访问而这个呢是第二个session那么我们如何由上上一个表模型得到下一个表模型呢我们来思考这个问题好要去解决这个问题的话呢我们最核心的一个点就是在写Mapper reduce的时候这个表模型里面谁作为我们的K2
+[01:01] 大家思考一下谁做我们的K2好那么你看在这个上面呢我们的session是可以重复的但是到下面之后呢我们的session是只有一个那这个时候我们可以把session作为我们的K2而做我们的K2之后呢相同session的数据呢会放到同一个集合那我可以对这个集合的内容进行排序排完序之后呢我们来看我可以在这个排序的集合里边
+[01:30] 获取第一个时间也就是我们的起始时间获取最后一个时间就是我们的结束时间获取第一个页面起始页面获取最后一个页面结束页面而且这个集合的长度是不是就是我们访问页面的个数我们可以通过这个信息呢来获取那接下来我们来看一下这个代码好打开ID在这里呢我们还有个代码叫click stream visit我们来看一下首先呢直接看我们的
+[02:00] 在MAP阶段我们的K1V1Lang Ratable然后呢这个V1呢是每一行数据而我们的K2V2我们来看一下我们的这个K2其实就是我们的Session而我们的V2呢这里定了一个加热并这个加热并是PageView加热并我们来看一下好这里边有Session有这个什么请求路径啊时间啊请求啊步长啊等等这个和我们刚才那个加热并差不多
+[02:30] 来我们回来回到刚才这个好那接下来我来继续看这个map在这个map里边呢我拿到一行的数据注意这一行数据呢是你上一次分析之后得到的数据看一下上一次得到什么数据其实我们上一次得到的是这么一行数据好我拿到这一行数据之后呢我可以用-001对它进行切割切割完之后呢我们可以把步长取出来这个地方呢是
+[02:59] Field5就是第五个下标它是不长接下来我们在这个PageView并里边呢我们做一个设置用一个set方法给它设置进去好设置完之后呢你看我可以把这个K2和V2写到上下文中K2这个K呢我们来看是谁K是TaskTask呢里边设置了一个Session也就是我们的SessionID所以说我们的SessionID作为K2
+[03:28] 我们的VR呢其实就是这一行数据把它呢重新把这一行数据设给设置给PVB好这个MAP阶段呢就干了这么一件事其实就是将将我们的Session作为K2那接下来我们进入Reduce阶段在Reduce阶段之后呢我们把相同Session的数据放在这个集合了接下来我再定一个集合这个Full循环不用说是将我们这个ET-Aribor这个集合中的内容
+[03:57] 拷贝到我们的array list好做一个深拷贝拷贝完之后呢接下来对我们这个array list的集合的数据进行排序你看这里很神奇在排序的时候它的规则是按照什么呢stampstamp是按照步长进行排序也就是说你的你的这个stamp是1你就在前面如果是3就在后面排完序之后呢接下来
+[04:24] 我们的结果呢因为只要一个起始时间和结束时间所以说排完序之后呢这个进入的页面和进入的时间我只需要获取第一个而离开的页面和离开的时间我只需要获取最后一个那最后一个就是这个数组长度减一这是一个路径而这是一个什么呢这是一个时间好那么还有呢这个地方呢还有一个东西就是说我们最后在这个session中访问了几个页面呢
+[04:53] 那这个不就是我们数组的长度吗好拿到这个之后呢经过这么一个拼接好最终我们就得到我们想要的数据那再把这个数据呢写到下一个上下文中OK写到下下下一个环节中也就是我们的这个整个的一个输出里面去好那么经过了这个步骤之后呢我们就得到我们想要的数据了好所以说呢经过这么一个处理的话呢我们想要的这个过程讲的这个数据我们就能拿到
+[05:22] 那这个呢我们也可以放在集群里面运行在这里呢我就不运行了我们来直接看结果好在这个位置在我的这个data里边呢有一个叫output3这里边就是我想要的数据我们来打开看一下吧好打开看一下稍等一下好这里边就是我们想要的数据你看这里边前面这个session呢是不会重复的因为它把相同的session的数据合在了一起那这个呢
+[05:56] 地方就是进入的时间这是离开的时间后面呢其中一个页面是进入的页面而这个呢是离开的页面OK那这个基本上我们就处理完了好了到此为止的话呢我们这两个表模型我们已经拿到了好拿到之后呢我们来看我们做到哪一步了回到我们最初的这个图向上呢翻找到我们这个分析的时候这个模型向上翻这个图我们到这个地方呢
+[06:26] 其实我们相当于把这个数据呢相当于把这个数据呢经过了一个收集而且经过了一个处理那接下来我们就可以把这个数据呢存到我们的害物表里面去好那么关于呢它这个数据的V的表模型我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何通过 MapReduce 程序将原始点击流日志数据（session 级别）转换为 visit 表模型，以便进行后续的用户行为分析。
+
+2) 按时间顺序列出每张画面的要点：
+画面001: 展示了原始的 session 数据结构，包含 session ID、IP、访问时间、页面、时长等信息，并用箭头指向 session003 的数据行，说明其包含两个页面访问记录。
+画面002: 与画面001类似，但箭头指向 session003 的第二个页面访问记录，强调 session 会话中包含多个页面访问。
+画面003: 在 IntelliJ IDEA 中展示 ClickStreamPageView.java 文件，其中包含 job.setMapOutputValueClass(PageViewsBean.class)、job.setOutputKeyClass(NullWritable.class)、job.setOutputValueClass(VisitBean.class) 等配置，以及 ClickStreamVisitMapper 类的 map 方法，用于将原始日志行解析为 PageViewsBean 对象。
+画面004: 与画面003 类似，但高亮显示了 ClickStreamVisitMapper 类中 map 方法的代码，特别是将字段赋值给 pvBean 对象的部分。
+画面005: 与画面004 类似，但高亮显示了 map 方法中设置 pvBean 的 session 字段的代码：pvBean.setSession(session);。
+画面006: 展示 ClickStreamVisitReducer 类的 reduce 方法，用于对 PageViewsBean 对象进行聚合处理。
+画面007: 与画面006 类似，但高亮显示了 reduce 方法中用于对 PageViewsBean 列表进行排序的 Comparator 比较器代码：return o1.getStep() > o2.getStep() ? 1 : -1;。
+画面008: 与画面007 类似，但高亮显示了 reduce 方法中创建 VisitBean 并设置其属性的代码，包括 visitBean.setPageVisits(pvBeansList.size());。
+画面009: 展示了 PPT 页面，标题为“3.1 点击流模型 pageviews 表”，内容包括 Pageviews 表模型数据生成的代码示例和数据格式说明。
+画面010: 展示了 Hadoop 输出目录下的 part-r-00000 文件，右键菜单显示“编辑 with Notepad++”选项。
+画面011: 展示了 Notepad++ 中打开的 part-r-00000 文件内容，显示了经过 MapReduce 处理后的数据，包含 session ID、IP、时间戳、页面路径、URL 等字段。
+画面012: 与画面011 类似，但显示了 part-r-00000 文件中更详细的数据行，包含具体的页面路径和 URL。
+画面013: 展示了 PPT 页面，标题为“3.1 点击流模型 pageviews 表”，内容包括 Pageviews 表模型数据生成的代码示例和数据格式说明。
+画面014: 展示了 PPT 页面，标题为“3.1 点击流模型 pageviews 表”，内容包括一个架构图，显示了从 Web 系统到 HDFS、MapReduce、Hive、Sqoop 最终到 MySQL 的数据处理流程。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面003:
+job.setMapOutputValueClass(PageViewsBean.class);
+job.setOutputKeyClass(NullWritable.class);
+job.setOutputValueClass(VisitBean.class);
+boolean res = job.waitForCompletion(true);
+return res==0;
+
+// 以session作为key，发送数据给reducer
+static class ClickStreamVisitMapper extends Mapper<LongWritable, Text, Text, PageViewsBean> {
+    PageViewsBean pvBean = new PageViewsBean();
+    Text k = new Text();
+    @Override
+    protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+        String line = value.toString();
+        String[] fields = line.split("\t");
+        int step = Integer.parseInt(fields[5]);
+        // (string session, string remote_addr, string request, int step, string stayLong, string referer, string url, string timeStr)
+        pvBean.set(fields[0], fields[1], fields[2], fields[3], fields[4], step, fields[6], fields[7], fields[8], fields[9]);
+        k.set(pvBean.getSession());
+        context.write(k, pvBean);
+    }
+}
+
+画面006:
+static class ClickStreamVisitReducer extends Reducer<Text, PageViewsBean, NullWritable, VisitBean> {
+    @Override
+    protected void reduce(Text session, Iterable<PageViewsBean> pvBeans, Context context) throws IOException, InterruptedException {
+        // 将pvBeans按step排序
+        ArrayList<PageViewsBean> pvBeansList = new ArrayList<PageViewsBean>();
+        for (PageViewsBean pvBean : pvBeans) {
+            PageViewsBean bean = new PageViewsBean();
+            try {
+                BeanUtils.copyProperties(bean, pvBean);
+                pvBeansList.add(bean);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Collections.sort(pvBeansList, new Comparator<PageViewsBean>() {
+            @Override
+            public int compare(PageViewsBean o1, PageViewsBean o2) {
+                return o1.getStep() > o2.getStep() ? 1 : -1;
+            }
+        });
+        // 取这次visit的所有pageview记录，将数据放入VisitBean中
+        VisitBean visitBean = new VisitBean();
+        // 取visit的首记录
+        visitBean.setInPage(pvBeansList.get(0).getRequest());
+        visitBean.setInTime(pvBeansList.get(0).getTimeStr());
+        // 取visit的尾记录
+        visitBean.setOutPage(pvBeansList.get(pvBeansList.size() - 1).getRequest());
+        visitBean.setOutTime(pvBeansList.get(pvBeansList.size() - 1).getTimeStr());
+        // visit访问的页面数
+        visitBean.setPageVisits(pvBeansList.size());
+        // 来访者的ip
+        visitBean.setRemote_addr(pvBeansList.get(0).getRemote_addr());
+        // 本次visit的referer
+        visitBean.setReferal(pvBeansList.get(0).getReferal());
+        visitBean.setSession(session.toString());
+        context.write(NullWritable.get(), visitBean);
+    }
+}
+
+4) PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面014:
+架构图结构：
+- Web 系统 → HDFS
+- HDFS → MapReduce
+- MapReduce → Hive
+- Hive → Sqoop
+- Sqoop → MySQL
+
+5) 无
+

@@ -1,0 +1,235 @@
+# 03即时查询-技术方案-代码演示-保存-代码
+
+- 阶段：08.阶段八 智慧学成项目
+- 章节：05.第五章 智慧学成-即时查询
+- 源文件：08.阶段八 智慧学成项目\05.第五章 智慧学成-即时查询\03即时查询-技术方案-代码演示-保存-代码_【海量资源尽在 666java.com】.mp4
+- 时长 15分27秒（音频 928s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 前面呢,咱们已经介绍了技术方案。
+[00:04] 技术方案中呢,HBase以及Elasticsearch是咱们学习过程中新加入的两个大数据组件。
+[00:14] 接下来呢,针对这两个组件,有一个代码演示。
+[00:18] 代码演示呢,主要演示了数据的保存,是保存到HBase所有的Elasticsearch,以及呢,这里的数据查询。
+[00:30] EleskaSERV中的Rowkey然后根据Rowkey在HBase中进行查询分别是一个保存操作和一个查询操作咱们首先来看保存操作咱们来切到开发工具这里咱们已经准备好了咱们基础的工程这里是对咱们工程的一个描述以及获取SPARK的环境变量
+[01:02] 包括准备ES的表明,HBase的表明和列明,以及这里的HBase攻击类。
+[01:09] HBase攻击类呢,这里咱们只出示了基础的参数。
+[01:14] 重要的功能呢,就是获取任务的配置以及创建表呢,咱们是需要编写的。
+[01:21] 获取任务创建表呢,是在这个位置,获取任务呢,是在这个位置。
+[01:27] 接下来呢,是准备基础数据。
+[01:30] 准备完基础数据之后呢,就是
+[01:33] 保存HBase和EleskSearch这个具体的一个保存代码咱们需要完成的一共是这三项内容第一个就是创建表第二个是获取HBase的任务配置接下来是保存到HBase以及EleskSearch这里EleskSearch就剪成s好 咱们首先来编写创建表的代码
+[01:58] 这个创建表呢,咱们这个地方的参数已经准备好了,分别是表名和列名。
+[02:05] 前面呢,咱们已经初始化了HBase的配置,分别是Connexion还有Admin,咱们呢就使用这些配置。
+[02:15] 这里创建表,咱们呢首先是要判断的是这个表是否存在。
+[02:20] 如果表和列已经存在,如果表已经存在,那就没必要创建了。
+[02:26] 如果表不存在,咱们再进行。
+[02:28] 列的一个表和列的一个创建这里呢咱们是首先是取反这里使用HBase的admin这里边有一个table.exe这个地方呢你只用把表名给咱们这里是table.name把table.name给传过来即可传过来之后呢如果它是存在的那怎么咱们就不操作但是这个地方取反就是如果它是不存在的咱们呢就进行一个创建操作
+[03:00] 这里呢加个注释判断表是否存在这里呢, 衣服条件是表不存在的情况下, 咱们来进行表的一个创建这里呢, 创建表是使用的htable distir这个呢, 它主要就是创建生成的一个表描述咱们呢, 这里要传输的谁呀, 就是table name但是这个table name呢, 它是
+[03:36] 不识别了,咱们需要使用tableName,HBase提供的tableName,tabHBase提供的tableName,ValueOf,把传入的这个String转换成HBase所识别的这种表明。
+[03:56] 转型完成之后,咱们使用一个变量来接收它。
+[04:00] 这里就是table.distr,有了它之后,咱们表的描述,
+[04:07] 生成完成了之后接下来就是生成列的一个描述这里呢咱们在表的描述上进行列的描述的一个添加这里是使用addfamily就是添加一个成员然后呢这里是列的描述使用呢是HBase提供的列描述这里呢把列名给传进来传来之后呢接下来就是使用HBase的Lemme进行一个表的一个创建
+[04:35] carrier table这里呢把咱们创建的表描述给添加进来这里呢到此创建表就完成了咱们把主事给加一下这是创建表描述描述接下来呢是创建列的描述接下来呢是创建表创建表完成之后呢咱们接下来呢就是获取HBase的一个
+[05:22] 任务的一个配置咱们来切到任务配置的过去这里呢主要是根据这个任务呢后期咱们有一个保存操作根据这个任务进行一个保存这里呢传输的是表明咱们来编写它的代码首先呢是new一个java的config这里呢它需要的是一个
+[05:47] HBase本身的Config,上面已经处理好,直接使用getConfig这个方法进行获取获取完成之后,它得到了一个JobConf得到一个JobConf之后,就可以进行JobConf的配置这里直接set即可,需要set的就是表的输出格式
+[06:17] set table auto put format它在一个输出格式这里是out table咱们把表面给加进来表面加进来之后咱们第一个设置就完成了接下来配置第二个设置这里第二个设置是直接设置咱们的table maptable auto put format这个format这里就是set table
+[06:53] 这里没有table,这里是setAutoPutFormat这里设置的就是咱们具体的一个类使用哪个类进行一个格式化咱们使用的是tableAutoPutFormat这里是classOf因为它需要的是一个类名把这个传进给它就行了传进完成之后咱们获取HBase任务的配置就算完成了
+[07:21] 把这个变量进行一个返回变量这个进行返回之后呢咱们接下来就可以进行hbase和alaska search的一个保存操作这里呢咱们按照咱们这个技术方案上面索引是索引查询的字段以及呢咱们的rowkey在这个地方呢咱们rowkey呢就是这个地方准备的这个person类的他这个ID当做rowkey
+[07:53] 咱们这个地方仅是为了测试,所以就进行一个缩影的时候,ES中缩影的时候就缩影所有的值,咱们就不做其他的配置,首先就是ES中数据的一个缩影,ES中的数据的缩影,咱们在咱们的项目中,这个地方ES,
+[08:18] 和咱们Spark的一个整合代码已经配置好在这个地方呢直接可以使用ES使用Spark的ES的这个保存代码进行一个相关的保存它的方法呢就是ES Spark circle进行一个保存它直接就是save to ES这个地方save to ES的时候咱们就可以把咱们那个数据给传过来但是呢它这个地方它要求的是啥咱们可以点进来看一下
+[08:48] 这个是dataset它要求的是dataset咱们呢这个地方没有dataset只有rdd就使用Spark的carrier.dataset把它给转换成dataset转换成dataset之后呢接下来是咱们es要保存到的表明前面呢咱们已经定义好这个地方就是es要保存的表明把它就传递过来就行了这个呢就完成了
+[09:18] 保存到ES的一个操作这个由于是之前已经不是之前已经整合是那个Spark和ES已经整合咱们呢这里就可以直接使用ES的相关配置咱们在这个地方就是环境获取环境变量这个地方已经配置这个地方呢如果ES的表明不为空这个地方有一个ESConfig就配置了ES相关的一个配置就是咱们学成智慧学成
+[09:50] 这个ES的环境因为咱们ES之前编排的时候已经编排好这里是直接使用的好咱们呢接下来来编写保存到HBase的代码保存到HBase呢它就相对来说没有ES那么简单因为HBase呢它是有一些转换操作的因为HBase保存的时候它是需要转换成HBase的一个put类咱们呢进行一个转换
+[10:22] 这里直接rdd.map进行一个rdd的操作使用map算子进行操作这里是person类咱们就把这个变量命名为p咱们接下来在这个里边就是转换为把这个p转换为put类这个put就是咱们HBase能识别的相关的一个类
+[10:55] 这里呢转换它咱们现在是没有相关的没有相关的工具就是没有相关的工具类咱们呢就在这里直接转换首先呢需要咱们来创建一个port变量它呢直接new一个port类就是hbase的一个port类这里newport类的时候它需要传一个rowkey这里呢咱们的rowkey就是person id直接是p.id就行
+[11:30] 这个地方呢你直接传它是不识别的因为你可以看在这个地方点进来看它呢只支持这个bat而且这个bat类型呢咱们是要通过hbase提供的工具类进行一个转换这个我看一下是hbase提供的吗对bat4.2bat是hbase提供的把这个数据传过来就行了这个地方呢就是设置ok好
+[12:05] Rocket设置完成之后呢,咱们接下来就是对列的一个设置,加一下注射,设置列,这个地方呢就是put.addColorm,这个地方addColorm和咱们上面直接设置Rocket的时候也是一样的,它呢不光要指定你的一个列名,还要指定你的数据以及数据的相关类型,咱们列名呢在上面呢也已经指定好。
+[12:38] 这个地方呢,他接收的也是可以看到,要么是buffer,要么是beta类型,beta数组类型,咱们呢,还是使用上面HBase提供的这种转换的方式,把它转换成beta4,这是咱们的列名,列名完成之后呢,是具体的这个列中的项,因为咱们这个地方列名呢,它是定的那是demo,color1,但是它那个项呢,现在咱们这个person类呢,一共是,
+[13:09] 除了这个ID以外还有Name以及Edge咱们把这个项也给添加进来这个咱们首先就要添加的是还是要用BAT4转换2BAT4这里咱们添加的是先添加Name接下来就是具体的一个数据BAT4.2BAT咱们P.NameName有了之后咱们接下来要传的就是谁Edge
+[13:40] 这个地方就可以快速的进行一个修改了好这个转换轮完成之后呢咱们需要把这个put给返回掉返回之后呢咱们后边就可以使用这个Spark的c5操作进行直接的一个保存这里呢是new一个直接返回在这个括号内啊new一个im
+[14:12] mm, write bytes table把这个呢,bytes把它给写成一个table这个地方呢,咱们需要的参数就是下面后边就是一个put前面是把这个对象给new出来它代表呢,是把这个bytes变成一个table后边呢,就是咱们具体的这个put它呢,就是代表,因为这里边数据类型都是bytes
+[14:43] 好,接下来呢,这个写完之后就是咱们那个保存操作,这个时候就可以直接调C5 as a Hadoop的dataset这个呢,set Hadoop的这个dataset,它需要的是一个可以看到它需要到的一个是jobconf,这个jobconf呢就是咱们上面准备的就是hbase的任务把它给这个地方配置进来呢,就可以直接进行一个保存操作来加个度数
+[15:14] 进行保存这个保存完成之后就算OK了好这个呢代码咱们写到这里测试呢就给下个视频进行测试
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 Spark 结合 HBase 和 Elasticsearch 实现数据的实时分析与存储。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示技术方案架构图，包含“实时查询”、“数据采集”、“数据仓库”、“数据分析”、“查询接口”等模块，以及“HBase 数据”和“Elasticsearch 数据”两个数据存储模块，数据流向从“实时查询”经“数据采集”到“数据仓库”，再分发至“HBase 数据”和“Elasticsearch 数据”，最终由“查询接口”调用。
+画面2：展示 Scala 代码，定义了 SparkSession 和 HBase 表名、列名，准备数据。
+画面3：继续展示 Scala 代码，初始化 HBaseUtils 并创建 HBase 表。
+画面4：展示 HBaseConfiguration 配置，设置 ZK 地址和端口。
+画面5：展示 HBaseUtils 的 createTable 方法，用于创建 HBase 表。
+画面6：展示 HBaseConfiguration 的 getConf 方法，用于获取配置。
+画面7：展示 HBaseUtils 的 createTable 方法，用于创建 HBase 表。
+画面8：展示 Scala 代码，导入 Elasticsearch 的相关类型。
+画面9：展示 Scala 代码，使用 EsSparkSQL 将 Spark 数据写入 Elasticsearch。
+画面10：展示 Elasticsearch 的配置，设置节点、端口、索引等。
+画面11：展示 HBase 客户端的源码，导入相关包。
+画面12：展示 HBase Put 操作的代码，添加列。
+画面13：展示 HBase Put 操作的代码，添加列。
+画面14：展示 HBase Put 操作的代码，添加列并保存。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+1. 采集相关数据及相关的维度存储到数据仓库
+2. 使用Spark统计分析相关数据，结果存储到数据仓库
+3. 把统计结果保存到Hbase，使用ES索引查询字段及RowKey
+4. 业务使用时，在ES中查询RowKey，根据RowKey在Hbase查询数据
+
+画面2：
+object Save {
+  case class Person(id: String, name: String, age: String)
+  def main(args: Array[String]): Unit = {
+    val esTableName = "demo/doc"
+    val Spark = t1Environment.getSparkSession(this.getClass.getSimpleName, esTableName)
+    import Spark.implicits._
+    val hbaseTableName = "demo"
+    val hbaseColumnName = "demo_col1"
+    val hbaseUtils = new HbaseUtils
+    hbaseUtils.createTable(hbaseTableName, hbaseColumnName)
+    val jobConf = hbaseUtils.getJobConf(hbaseTableName)
+    val rdd = sc.parallelize(Array(Person("a1", "张三", "38岁"), Person("a2", "李四", "29岁"), Person("a3", "王五", "21岁")))
+    // todo @HBase - es
+    Spark.close()
+  }
+}
+
+画面3：
+object Save {
+  case class Person(id: String, name: String, age: String)
+  def main(args: Array[String]): Unit = {
+    val esTableName = "demo/doc"
+    val Spark = t1Environment.getSparkSession(this.getClass.getSimpleName, esTableName)
+    import Spark.implicits._
+    val hbaseTableName = "demo"
+    val hbaseColumnName = "demo_col1"
+    val hbaseUtils = new HbaseUtils
+    hbaseUtils.createTable(hbaseTableName, hbaseColumnName)
+    val jobConf = hbaseUtils.getJobConf(hbaseTableName)
+    val rdd = sc.parallelize(Array(Person("a1", "张三", "38岁"), Person("a2", "李四", "29岁"), Person("a3", "王五", "21岁")))
+    // todo @HBase - es
+    Spark.close()
+  }
+}
+
+画面4：
+val conf = HBaseConfiguration.create()
+conf.set(Constants.ZOOKEEPER_QUORUM, "xc-online-rk")
+conf.set(Constants.ZOOKEEPER_CLIENT_PORT, "2181")
+conf
+
+画面5：
+def createTable(tableName: String, columnName: String): Unit = {
+  if (!HBaseAdmin.tableExists(tableName)) {
+    val tableDescriptor = new HTableDescriptor(TableName.valueOf(tableName))
+    tableDescriptor.addFamily(new HColumnDescriptor(columnName))
+    hbaseAdmin.createTable(tableDescriptor)
+  }
+}
+
+画面6：
+def getConf(tableName: String): Unit = {
+  val conf = HBaseConfiguration.create()
+  conf.set(Constants.ZOOKEEPER_QUORUM, "xc-online-rk")
+  conf.set(Constants.ZOOKEEPER_CLIENT_PORT, "2181")
+  conf
+}
+
+画面7：
+object Save {
+  case class Person(id: String, name: String, age: String)
+  def main(args: Array[String]): Unit = {
+    val esTableName = "demo/doc"
+    val Spark = t1Environment.getSparkSession(this.getClass.getSimpleName, esTableName)
+    import Spark.implicits._
+    val hbaseTableName = "demo"
+    val hbaseColumnName = "demo_col1"
+    val hbaseUtils = new HbaseUtils
+    hbaseUtils.createTable(hbaseTableName, hbaseColumnName)
+    val jobConf = hbaseUtils.getJobConf(hbaseTableName)
+    val rdd = sc.parallelize(Array(Person("a1", "张三", "38岁"), Person("a2", "李四", "29岁"), Person("a3", "王五", "21岁")))
+    // todo @HBase - es
+    Spark.close()
+  }
+}
+
+画面8：
+import org.Elasticsearch.Spark.sql._
+import org.Elasticsearch.Spark._
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.EsSparkSQL_type
+import org.Elasticsearch.Spark.sql.E
+

@@ -1,0 +1,299 @@
+# 03.Mybatis-Plus-快速入门-开发测试
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day02 环境搭建 Mybatis-Plus Swagger
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day02 环境搭建 Mybatis-Plus Swagger\03.Mybatis-Plus-快速入门-开发测试【海量资源尽在 666java.com】.mp4
+- 时长 7分1秒（音频 422s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢我们继续来编写mybattlesplus的快速入门程序那刚才我们已经准备好了环境包括PU就类型都已经创建好了那接下来我们要做什么呀是不是要做开发要编写Mapper了是吗编写Mapper那这里边呢我们来写一个Mapper的接口因为我们有了这个原来mybattles的基础那这里边我们去写起来就比较简单啊
+[00:25] 但是它和MyBatis有点区别因为我们现在用的是MyBatis Plus所以这里面各位它需要干嘛继承一个MyBatis Plus一个BaseMapBaseMap里面你需要指定你用的它所对应的一个模型类就是我们其实这个模型类对应的这个表就是TB下滑键User表这就是一个Mapper我们就创建好了创建好了之后各位那有时候老师现在他能用吗
+[00:53] 你没发现吗它其实是继承一个base map你看它里面有很多的这个方法都可以用那现在我如果想测试这个Mapper到底能不能用怎么测试呢因为它是基于Spring Boot来创建这个工程所以我们还需要来创建一个Spring Boot的这个启动类好根据讲义上我们来创建一下Spring Boot的启动类这个大家应该都不陌生了就创建Spring Boot
+[01:21] 创建Spring Boot然后呢你不光要创建Spring Boot的这个启动类上边我们是不是要加一个注解呀然后呢还要做一件事就是Mapper的一个扫描的路径的指定就是你要扫描什么呢你是不是要扫描这个Mapper的这个接口啊所以你需要把它的这个包路径在启动类这儿呢给它指定了大家看到吗然后这里边呢我们是不是就可以来写这个MEM方法
+[01:53] 闷方的话的话那就比较简单然后run对吧然后呢这个不对啊这个应该是我们把这个类名给写错了看见吗类名好然后这样的话各位我们是不是就可以怎么弄啊我们是不是就可以在这儿把这个类的名字然后呢写进去这样启动类是不是就搞定有时候老师呢怎么做呀启动嘛
+[02:22] 那我们其实不用启动的因为我们这只是一个什么只有持有层的代码我们要这么做吧我们写一个单元测试的这个类单元测试类然后呢单元测试我们来运这个测试呀这个user map好那么我们要写这个单元测试的这个类首先我们建一个包这个包名记着啊这个包名和启动类所在的这个包保持一致看见吗
+[02:51] 也是CNN ITCast MP看见吗然后在这个里边我们去创建这个测试用力的这个什么这个测试类这个测试类呢注意这个测试类我们当初在添加依赖的时候是不是就把这个Spring Boot Test你看这个依赖就加进去了对吧所以这里边呢我们就直接可以基于Spring Boot Test的这种方式呢我们来进行测试啊因为它你看Spring Boot Test它是不是有一个这个注解啊
+[03:19] 然后呢你还要加一个run withrun with spring runner和我们当初讲spring的单元测试方法稍微有些类似啊好那这里面呢我们要测试的话怎么做呀我是不是得写一个测试方法对吧test我们要测什么呀比如说我们简单一下因为入门程序嘛我们比如说我们就测一个查询行不行我们就查询一下这张表好那现在呢我们准备怎么做查询
+[03:48] tb下滑页user它的记录那这时候其实你马上想到的是刚才我们写的那个Mapper我们目的是测它对不对所以你是不是要把它给注进去对吧所以那你这样我们要autowire把它注进去报错了报错了其实这个是idea它的一个什么一个因为它注册这个user Mapper是一个接口其实我们可以不用让它提示错误
+[04:18] 因为我把这个错误给它屏蔽掉太智能了然后这里面我们就可以调用它的什么它的有一个叫slag list看见吗slag list它里面要传一个什么参数后边我们会讲它会传一个什么条件的一个组装器说这个参数我们暂时写成空然后我们就拿到了所有的记录所有的记录拿到了之后我们其实就可以在这打一段点然后我们怎么弄运行我们现在就来看一下它到底能不能跑通
+[04:48] 来看一下好那这里边好像有点问题了吧错了吧哎错了那为啥啊因为你你这个类名是吧和这个文件名字是不是不对应啊我们是不是需要改一下呀哎这样是不是应该就OK了再走选择这个啊执行这个测试用力的这个方法嗯然后这打一端点嘛来看
+[05:24] 断点到了之后呢我们来看你看我查到了五条记录大家看到了吗五条记录那五条记录是不是就是我们数据库里边这五条记录了那从这个测试结果上来看各位我们MyBetisPlus这个入门程序我们就实现了你看我们总结下它的步骤啊很简单首先其实它和我们当初学习MyBetis的步骤差不多啊也是要创建一个POGO对不对创建POGO创建POGO之后呢我们就可以编写Mapper
+[05:54] 只不过什么呀和原来我们写myptest的这个程序不一样这个Mapper呢我们当初不仅写接口还要写一个Mapper插描的应声文件对吧那其实这里面我们没有写应声文件对吧它也可以用但它用的它只限于什么它只限于这里头的这些通用方法如果你说我要自定义这个我们的Mapper里面的circle语句那
+[06:18] 你就需要写映射文件了后面我们会去定义我们先把整个MapDaysPlus的流程先快速入门一下稍后我们就会去详细的去讲这样的话你会发现Mapper的开发是不是就很简单其实简单理解你会发现MapDaysPlus是不是给我们一个叫BaseMapper你就可以继承它直接就用里头的这些方法刚才我们是不是测试一个叫SelectList的方法我们就查询到了所有的什么记录
+[06:48] 那到这儿大家是不是就理解了吧那么到这儿为止呢我们这个快速入门的程序咱们是不是就编写完成了好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Spring Boot 项目中使用 MyBatis-Plus 框架进行数据库操作，并编写单元测试。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：
+- 展示了项目结构，包含 src/main/java 下的 cn.itecast.mp 包，以及 src/main/resources/application.properties。
+- 展示了 User.java 实体类代码，其中包含 @TableName("tb_user") 注解和多个 @TableField 注解。
+画面2：
+- 展示了 UserMapper.java 接口代码，继承自 BaseMapper<User>。
+- 展示了 BaseMapper 中的常用方法，如 insert、selectById、selectList 等。
+画面3：
+- 展示了 SpringBootApplication.java 文件，其中包含 @SpringBootApplication 注解。
+- 展示了 @SpringBootApplication 注解的源码，包含 @ComponentScan、@EnableAutoConfiguration 等。
+画面4：
+- 展示了 SpringBootApplication.java 文件，其中包含 @MapperScan 注解，指定扫描包为 "cn.itecast.mp.Mapper"。
+画面5：
+- 展示了在项目中右键创建新包的对话框，提示输入新包名。
+画面6：
+- 展示了在项目中右键创建新类的对话框，提示输入类名。
+画面7：
+- 展示了 UserMapperTest.java 文件，其中包含 @SpringBootTest 注解。
+画面8：
+- 展示了 UserMapperTest.java 文件，其中包含 @RunWith(SpringRunner.class) 注解。
+画面9：
+- 展示了 UserMapperTest.java 文件，其中包含 @SpringBootTest 注解和 @RunWith(SpringRunner.class) 注解。
+画面10：
+- 展示了 MyApplication.java 文件，其中包含 @SpringBootApplication 注解。
+- 展示了编译错误信息，提示 "MyApplication" 类必须在名为 "MyApplication.java" 的文件中声明。
+画面11：
+- 展示了 UserMapperTest.java 文件，其中包含测试方法 testSelect()。
+- 展示了测试方法中的代码，调用 userMapper.selectList() 方法。
+画面12：
+- 展示了 UserMapperTest.java 文件，其中包含测试方法 testSelect()。
+- 展示了测试方法中的代码，调用 userMapper.selectList() 方法。
+画面13：
+- 展示了 BaseMapper.java 文件，其中包含 deleteById、deleteBatchIds、update 等方法。
+画面14：
+- 展示了 MyBatis-Plus 的介绍文档，其中包含 MyBatis-Plus 的介绍、官网、GitHub 地址、码云地址等信息。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+@TableMame("tb_user")
+public class User {
+    @TableId("id")//指定主键字段名
+    private Long id;
+    @TableField("user_name")//指定对应字段名
+    private String userName;
+    private String password;
+    @TableField("NAME")
+    private String name;
+    @TableField("AGE")
+    private Integer age;
+    private String email;
+    @TableField("birthday")
+    private LocalDate birthday;
+}
+```
+画面2：
+```java
+package cn.itecast.mp.Mapper;
+import com.baomidou.mybatisplus.core.Mapper.BaseMapper;
+/**
+ * Created by Administrator.
+ */
+public interface UserMapper extends BaseMapper<User> {
+}
+```
+画面3：
+```java
+@SpringBootApplication
+public class SpringBootApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootApplication.class, args);
+    }
+}
+```
+画面4：
+```java
+@SpringBootApplication
+@MapperScan("cn.itecast.mp.Mapper")
+public class SpringBootApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(SpringBootApplication.class, args);
+    }
+}
+```
+画面7：
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UserMapperTest {
+}
+```
+画面8：
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UserMapperTest {
+    @Autowired
+    private UserMapper userMapper;
+}
+```
+画面9：
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UserMapperTest {
+    @Autowired
+    private UserMapper userMapper;
+    @Test
+    public void testSelect() {
+        List<User> users = userMapper.selectList(null);
+        System.out.println(users);
+    }
+}
+```
+画面13：
+```java
+package com.baomidou.mybatisplus.core.Mapper;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org
+

@@ -1,0 +1,169 @@
+# 06_自媒体_素材管理_图片上传接口开发
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day05-黑马头条-自媒体文章发布与管理
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day05-黑马头条-自媒体文章发布与管理\06_自媒体_素材管理_图片上传接口开发【海量资源尽在 666java.com】.mp4
+- 时长 19分27秒（音频 1168s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们就来完成当前素材上传的接口啊咱们首先呢还是老套路先看一下当前这个接口的定义首先第一个呢就是当前这个东西啊你看当前这是URL啊这没啥可说的是吧这个大家都已经知道了那下面这个啥呢这是Modepad View那这是啥呀这个呢其实就是上传文件的类型对吧
+[00:24] 咱们之前呢在SpriteMAC的课上其实已经讲过了这个呢你要再想去接触一个文件的类型的话咱们都是用它都用它在行程中去定义它就能使用SpriteMAC来去接触文件了好吧然后下面还有一个就是当前的一个WM Material那这个呢其实就是一个自媒体的图文素材表那这个表呢咱们可以打开看一眼啊就这我已经打开了就它就它啊首先主键
+[00:53] 是吧Semit用户啊还有啥呢图片地址这里边需要去保存一个图片地址就是说啊咱们再去上传文件的时候呢需要上传到FastDMS中同时你也应该保存一条数据到这个表中啊保存一条数据到这个表中啊来看看图片地址图片地址是吧还有你到底是图片的还是视频的是吧你是否收藏啊还有是否还有一个创建时间对吧OK啊那这个表大家已经清晰了啊
+[01:23] 咱们下面要做的事呢其实就是不仅要去上传发的电子还要去保存到一条信息到这个表中好吧行咱们接着往下看啊下面咱们就是些类的定义那这个呢首先是一个麦普就是说咱们首先呢是要去往这个表中去存数据那就是要去创建一个麦普文件好吧来打开啊那这个麦普文件呢咱们往下看啊就是当前这个
+[01:47] 这个你看这个包名是变了啊在那边变了咱们还去创建当前的这个打开当前的modomybus里边有个vmedia就他啊呃其实这个呢咱们这个有已经动作了一个登录了啊所以说这个呢咱们直接在这创建就可以了好吧和拷贝过来之后呢你看他这个参数呢就是一场呢就是当前的某一个对象是吧就是个对象啊然后呢这里边啊咱们需要去创建一个myapp文件打开
+[02:24] 拷贝一份然后前面是materi好吧点OK之后咱们就把这个内容就把它删掉删掉然后自己补然后这是wmmateri然后下面咱们就是做一个保存所以说咱们还是从当前的这种讲义中拷贝过来拷贝之后你看这个东西比较简单就是说就只是做了一个保存
+[02:58] 只是做了个保存啊这里边内容呢就是当前的是一个参数这是一个参数啊但这里边还有两个参数啊两个参数这个呢其实就是啥呢首先你的当前的key啥是个ID然后是生成主件吗是true需要去生成主件其实这个呢是使用mycat去生成主件的啊mycat咱们也可以看那表看那表那这块是不是有一个他呀其实呢就是在这去生成主件之后啊
+[03:29] 你还要在mycat里边也设置为主件就可以了好吧那但这个这东西啊咱们可以验证一下啊验证的话怎么验证啊其实你可以打开当前的地盘是吧然后打找到developer然后是找谁啊mycat winconfig找到skymer.charmar文件打开你去搜一下这个表啊搜一下这个表掌声F找找下一个你看
+[03:59] 这是不是一个auto increment其实为什么要两个都配其实后期咱们需要用到一个主件返回主件返回所以说你在这设置个自增在这设置个自增然后后期的话咱们再去用到的时候就能拿到当前它给生成后的这个主件值是吧那这你需要去设置一个自增然后你在这也需要去设置一个自增
+[04:25] 好吧两个都需要啊但是咱们现在暂时用不着这个你先去理解一下OK行那这个设置完之后啊咱们下面就来写Service啊Service啊那Service的话呢就是就是一个上传就是上传啊咱们一块来写写首先呢咱们还是打开咱们自己的media然后是找到Service在这啊去新创建一个当前的接口这个接口呢怎么叫啥呢叫metry m a e r i a l
+[04:57] 然后Service好吧然后这里边有个方法怎么统一返回Response里到他然后是upload测试是啥看他说了哪个叫MartinArtView是吧好然后这个就是图片上传上传图片下面咱们就来写下当前这个Service实践类打开在这去创建一个类
+[05:36] 让是impl好吧然后点ok然后让他去实现当前咱们写这个东西好i就在这你首先在这加个东西叫什么Service然后再加什么c u p u r e n g好吧防止爆错这里边咱们要去做上传的话刚才说了你需要去做两个字是吧首先咱们要去注入谁注入一个当前自己的什么mytree叫什么
+[06:08] WM是吧YF啊就是这个东西啊好加这个东西之后呢咱们为了能够保存咱们还要去怎么着要去注入谁啊要去注入一个FastD148因为咱们要干嘛要去上传嘛好好这两个准备完之后呢咱们下面呢就来去做最终在里边需要写啥呢怎么写呢其实里边咱们首先呢要做第一个事就是
+[06:36] 这个咱们需要去验证啊首先要获取用户获取当前登录用户然后呢验证参数然后是干嘛上传上传图片到fast dfs中吧上传成功以后保存一条数据到哪啊把麦水表用wwm杠
+[07:12] M1MAPI L好吧都表中一条数据可以了啊好那咱们下面步骤啊分析完了那咱们下面就一步一步去做好吧首先第一步呢咱们要获取登录用户那这个登录用户怎么获取啊这里边咱们还是要用到一个工具里WM Thread local utils.get user其实这个就是自媒体的用户好拿到用户之后啊咱们就可以直接没有登录肯定是不行的所以说WM
+[07:41] user 等一等一浪的话咱们又哎直接返回就可以了说啊你这会你你不登录的话没法操作好吧哎什么的bassbox而 i rock 知道然后呢是 app应该是之前有个有一个提示啊叫没有没有通路的时候可能不行哎然而呃需要登录是吧要登录啊好那这是一个提示然后下面咱们又验证参数啊验证参数
+[08:14] 也还要去判当前你的参数有问题比如MultipathFuel怎么着如果说等于None的话就不行了这时候你的文件就不能上传了所以说咱们还直接去返回一个参数的批发就可以了好吧点Param然后是下面这个这是参数分法在这个说完之后咱们下面就来去进行上传上传之前其实咱们还要去做些事
+[08:42] 为最终啊你看啊比如说发死s点upload这里边需要有两个参数第一个是fuel name这个其实很容易拿是吧第二个呢就是一个什么ext name其实就是后缀名是吧ok啊首先如果说他没问题咱们可以先把刚才这个fuel点gets然后第二个是什么ext name那这个name怎么拿呢name啊这name咱们这样这么难啊来看一下啊首先在这
+[09:13] 是一叉鸡内幕的道理什么呢来找下面咱们就来说一下啊现在咱们要去拿到当前这个名称好小儿小儿get一个全名这下这就是他的一个文件的名称啊拿到文件名称之后呢咱们就可以直接去结了啊结了他拿到的名称啥呢比如说叫aa点什么gp啊有可能量啊我们只要啥呢只要gpg啊只要gpg
+[09:46] 那怎么办呢咱们那就结呗怎么结啊好来看一下啊在这呢你可以直接用它去结点subst然后呢怎么怎么办呢还是他找到最后一个点啊点last最后一个点然后是再加1这时候呢就能去拿到谁呀能拿到某一个啥呢某一个xt name就是一个后缀名好吧
+[10:15] 那这后编咱们为了演练一些所以说咱们在这如果说它不是图片的话咱们就不让它上传好吧如果说不是张琴的图片也不让上传那怎么办咱们可以这样咱们可以用一个证则去设置比如说cxtname.match就是它这边你可以去设置一些证则比如说它啥呢第一个gif好吧gif可以让它上传
+[10:45] 或者是不等于png或者是不等于什么gpg或者叫gpgp1g只有这四个啊只有这四个才能上传不然我不让你上传好吧那这时候如果说不等于这四个的话咱们也让他去干嘛呢直接告诉他你这个格式不正确啊这里边咱们应该是有个参数的叫什么叫emit
+[11:14] 叫ParamodeImageFormatError就是你的图片格式有我们可以直接提示一下这东西再往下看那这个下面该怎么写其实这个已经上传了是吧那这个报错是我看看是要抛一场是吧那么这样咱们try一下try完之后这时候就能拿到一个文件ID了就是FuID好吧就是FuID拿到这个文件ID之后那咱们干嘛呢
+[11:46] 当然这块他需要报错如果说他上传失败的话咱最好是在这去提示一下打日志好吧打日志啊打日志的方式在这你可以去在这加一个什么sale后期助解下面就可以在这去写写这东西就是为了方便后期搞错误的时候比较方便一些好吧那么怎么写比如说user加引号哪个user咱们可以传个传输过来
+[12:17] load fillfuse啥呢哪个fuse呢是你可以to啊tfs然后是破了啊然后是代表是啥呢你也可以去设置比如说info然后最终呢你可以把这个参数调整起来比如说第一个参数是user.ktd是当前这个用户然后呢第二个呢你可以去设置当前的什么名称就是当前这个图片的文件名称啊
+[12:52] 第三个呢你还可以去设置当前的意义点什么是你的错误信息好吧最终啊咱们这就算设置完了那你也可以去直接委屈委屈啥呢委屈你的说你的服务器有问题是吧咱们如果说这个这个这个啊不能确定到底是什么问题因为这个内容的话咱们不能确定到底是是服务器问题还是单板问题或者说你的图片的其他问题啊所以说在这在这如果说这问题不能确定的话呢你可以直接
+[13:22] 统一响应是什么呢response.ilresult里边呢咱们可以去设置一个什么比如还有个东西你看啊点什么server.irror可以设置一个什么服务器异常服务器异常说你这个错误不确定的话你都可以返回一个服务器的异常行啊那这那目前为止呢咱们这个啊就算是上传成功了都没问题啊然后下面呢咱们就来去保存数据对吧OK啊
+[13:52] 如果说那这块都没问题那肯定是上传成功了上传成功后就保存数据保存数据怎么保存呢首先咱们在这去创建前这个是吧啊啊你扭一个然后咱们就填成成成数据呗而sat time 然后就扭一个date这个比较容易啊哦下面还有啥呢wm啊然后是sat id不用设啊可能是呢先是type吧这个type是这样啊
+[14:24] 我可以看一下这里边是零零是图片一是视频那应该说设计设计啊咱们现在是不是都是图片呢是这个零就可以了啊他说包错没有问题啊这个话你可以强转一下因为他这个都是short好吧都是short啊那下面再往下看啊那啥呢嗯其实还有一个非常重要的就是当前的文件ID.setfuel嗯seturururur其实呢这个ur其实就是当前谁啊
+[14:53] 那个非UID但是这个非UID啊非UID非UID哎非UID呢在这呢是吧那这样你可以把它给把它挪出来挪出来啊等于那先让它等于那啊最终呢咱们把它呢它设置成功之后呢再给它复制啊把这非UID呢就给它放到这就完事了好吧行那再往下看啊再往下看那这个好像不太合适因为它这个非UID啊它并不能直接访问
+[15:27] 最终的你需要去加一个当前的服务器的地址才行我的服务器地址是多少啊是192.168.25.133所以说你应该把当前这个view当前这个什么服务器的地址给拼上去然后最终才能去展示当前这个图片那这时候啊那咱们就可以在这啊可以在当前的配置文件中去加个东西比如说我在这去加一个什么嗯我看叫配一种叫啥啊叫view
+[15:58] server url 是吧好拷贝一下啊等于谁呢等于一个http拷贝拷过来啊拷过来啊一样的啊好这个呢就是我当前图片服务器的一个纸然后这时候呢你要想去拼接的话你首先呢得把当前那个给注入进来注入进来怎么做啊private叫string的怎么玩的叫fillfill server url好吧注入的是谁呀
+[16:32] 用个8686啊用一个什么他啊他啊道乐福啊最终是把他给考过来把他给考过来注入进来这时候就有值了啊拿到他之后呢你就可以用了啊在这如果你返回的时候呢你可以直接加上他再加上他可以了好吧那可以了啊这样的话呢其实你再去拿到当前这个URL的时候呢其实就是一个在路径的就是应该在访问路径能访问的
+[17:04] 一个路径你可以看一下当前的数据啊那大家的数据的话你看啊嗯这一块没有是吧啊这个没有啊其实咱们最终正常去保存的时候应该是要去访问的时候啊都是当前的什么目前你要是无线ID的话是他但你要去在一边上访问的时候这个不能访问你需要去加谁啊加上前面的一个服务器的地址好吧加上服务器的地址啊这个是对的啊存的时候是这么存啊存的时候这么存
+[17:32] 对不好意思这个存的时候还是这么去存但最终返回的时候你应该加上这个serve的URL所以说怎么在这代码还要改一改这个东西你先不能加存的时候就是一个文件ID然后咱们再往下看最终你返回的时候把这个serve的URL给它加上就可以了好吧然后再往下看然后还有哪些没设呢然后是WMWMRset
+[18:02] 这个其实咱们也可以设置为0因为它目前的话收藏了吗默认是没有收藏的照好然后再往下看还有一个是当前的什么set还有吗url type connection iduser id 这些需要去设user.get id对wm user.get id好那这样的话就说完了说完之后咱们就可以去干嘛去可以去保存了.insert就把当前的一个
+[18:35] 保存进去最终啊你要去返回的时候呢你不能直接返回他因为这个URL啊跟他说了这个URL他只是保存的当前这么一个路径这是文件ID但文件ID并不能在硬币上访问你需要干嘛呢需要去拼接上你的服务器的地址所以说啊咱们在这重新复制把它呢重新复制我背一下前面这加上呢加上feo server URL加上我给他这个就对了啊
+[19:05] 最终你返回的时候,response,ok,把当前的wm就把它material,就把这个图文的底像,到当前的ok里面就完事了好吧那这样的话,最终咱们就可以去拿到当前的Ur去进行展示了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现图片上传接口的后端代码，包括接口定义、Mapper接口、XML映射文件、Service实现类及配置文件。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示文档中“4.2.2 接口定义”部分，包含接口名称 /api/v1/media/material/upload_picture、请求DTO WmMaterial、以及参数错误码定义。
+画面2：展示IDEA中WmMaterialMapper.java文件，定义了insert方法。
+画面3：展示文件资源管理器中conf目录下的配置文件列表，包括schema、sequence、partition-range等配置文件。
+画面4：展示IDEA中创建XML文件的弹窗，正在创建WmMaterialMapper.xml文件。
+画面5：展示IDEA中MaterialServiceImpl.java文件，定义了uploadPicture方法。
+画面6：展示IDEA中MaterialServiceImpl.java文件，开始编写uploadPicture方法的实现。
+画面7：展示IDEA中MaterialServiceImpl.java文件，添加了获取当前登录用户和参数校验逻辑。
+画面8：展示IDEA中MaterialServiceImpl.java文件，添加了文件格式校验逻辑。
+画面9：展示IDEA中MaterialServiceImpl.java文件，添加了文件上传到FastDFS的逻辑。
+画面10：展示IDEA中MaterialServiceImpl.java文件，添加了创建WmMaterial对象并设置属性的逻辑。
+画面11：展示IDEA中MaterialServiceImpl.java文件，完成WmMaterial对象的属性设置。
+画面12：展示IDEA中MaterialServiceImpl.java文件，添加了将WmMaterial对象插入数据库的逻辑。
+画面13：展示IDEA中MaterialServiceImpl.java文件，完成将WmMaterial对象插入数据库的逻辑。
+画面14：展示IDEA中MaterialServiceImpl.java文件，完成将WmMaterial对象插入数据库并返回结果的逻辑。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+接口名称 /api/v1/media/material/upload_picture
+请求DTO WmMaterial
+响应DTO WmMaterial
+(2) CODE定义
+PARAM_INVALID PARAM_INVALID(501,"无效参数")。
+PARAM_IMAGE_FORMAT_ERROR PARAM_IMAGE_FORMAT_ERROR(502,"图片格式有误")
+SERVER_ERROR SERVER_ERROR(503,"服务器内部错误")。
+
+画面2：
+package com.heima.model.mappers.wmedia;
+import com.heima.model.media.pojos.WmMaterial;
+public interface WmMaterialMapper {
+int insert(WmMaterial record);
+}
+
+画面4：
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0.0//EN" "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+<Mapper namespace="com.heima.model.mappers.wmedia.WmMaterialMapper">
+<resultMap id="BaseResultMap" type="com.heima.model.mappers.wmedia.WmMaterial">
+<id column="id" property="id" />
+<result column="user_id" property="userId" />
+<result column="created_time" property="createdTime" />
+<result column="type" property="type" />
+<result column="collection" property="collection" />
+<result column="url" property="url" />
+<result column="title" property="title" />
+<result column="description" property="description" />
+<result column="file_size" property="fileSize" />
+<result column="file_type" property="fileType" />
+<result column="file_name" property="fileName" />
+<result column="file_ext" property="fileExt" />
+<result column="file_md5" property="fileMd5" />
+<result column="file_sha1" property="fileSha1" />
+<result column="file_sha256" property="fileSha256" />
+<result column="file_sha512" property="fileSha512" />
+<result column="file_crc32" property="fileCrc32" />
+<result column="file_crc64" property="fileCrc64" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64c" property="fileCrc64c" />
+<result column="file_crc32c" property="fileCrc32c" />
+<result column="file_crc64
+

@@ -1,0 +1,291 @@
+# 20.立即支付-交易服务支付宝下单-接口实现-保存订单
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day08 C扫B支付 生成门店二维码
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day08 C扫B支付 生成门店二维码\20.立即支付-交易服务支付宝下单-接口实现-保存订单【海量资源尽在 666java.com】.mp4
+- 时长 18分20秒（音频 1100s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢我们来实现交易服务支付宝下单接口的实现那么整个接口的实现过程中啊咱们说要做几件事啊就这个接口呢我们说是要接收前端订单确认页面点击确认支付的请求是吧然后呢他拿到订单信息那最终这里边呢他肯定将来会干嘛呀会调用第三方的这个支付宝的下单接口但是
+[00:29] 第三方的支付宝的下单接口我们说是当初是由支付渠道代理服务是不是来完成了所以我们就要调用支付渠道代理服务对吧然后呢来实现这个第三方支付宝的下单对也是通过支付渠道代理服务来调第三方支付宝然后还有一个事啊就是你在调第三方支付宝之前你还要保存订单
+[00:59] 大家懂吗所以这两件事一先一后先保存订单那保存订单指的是就把订单保存到咱们自己散去平台然后呢再调第三方支付宝来下单最后支付这样好那分析清楚之后我们现在就来实现那实现的过程中啊我们要保存订单这里面我们就要用到一些工具类啊
+[01:23] 包括调用其他的一些这个交易服务的接口等等所以这里边呢我们打开这个资料里面是不是有有几个工具类我们拷贝一下这个工具类呢我们来看它是哪里的它是一个这个是common的common然后这个呢看一下好那我们把这两个都拷到common的这个
+[01:55] YouTube包下这两个工具类一个是雪花片的这个生成算法这个雪花雪花片算法当初我们在讲MyBetisPlus都说过了它是一个生成组件的一个什么算法对吧所以其实后边我们要插入我们的这个订单表的记录我们就会用到这个工具类了另外还有我们现在要实现这个东西有保存呀又是调
+[02:24] 第三方的这个渠道代理服务呀所以我们不建议在这你看这是一个control line是吧那我建议你呢单独写一个Service的接口对那这个单独定一个Service的接口我们把它叫做submitorderbyali也就是我们调ali的这个什么这个接口我们在哪里定呀当前是不是在交易服务呀所以呢我们在交易服务来做这个事
+[02:53] 那交易服务呢咱们把这个接口先定义出来好吧然后在这呢找到那这个接口是啥接口啊这个接口就是从字面以上你可以理解清楚其实就是一个叫支付宝的一个什么订单保存的接口对吧那支付宝订单保存的话我们所有的订单信息我们统一都用这个pay order DTO我们都用这个pay order DTO来接
+[03:24] 那么这个pay order DTO的这个类型其实是和我们数据库当中的一个pay order这个表它是基本上对应的这个表呢就是我们的订单表里边有很多的订单的这个字段后边我们在插入的时候我们再去分析先不看所以
+[03:47] 这个字面以上你都知道了这是我们的订单表后边加个DTO是不是就其实基本上里边的东西就对应了我们的订单表的东西了是吧好然后呢他要回传回来就是他呢是要支付宝订单保存嘛他要保存这个支付宝订单嘛然后呢最终他要返回这么一个结果但是现在呢我把这个接口先给你写出来了写出来之后呢我让你思考一件事啊注意看这好像有问题了
+[04:17] 是吧没有没有的话这样咱们加一个依赖就行了那这个刚才那个是要pay哪个是这个就是支付渠道代理服我们引它的一个API引它的API就行了为什么因为我们这里边是需要它的一个你看就是payment response DTO的这个类型的懂吧那我现在把这个介绍我跟你说一下具体为啥我要定义这么一个东西
+[04:46] 因为我们说要在control当中要把刚才我说的那几个事一个是保存订单一个是调渠道代理服务我们要做很多事吧很多事难免会出现一些业务逻辑所以我就准备呢在交易服务上呢单独定义一个叫保存支付宝订单的这么一个接口而这个接口的职责呢它就是第一它要保存订单到
+[05:16] 我们散聚平台对我们散聚平台然后第二他要调用支付渠道代理服务来最终调用什么支付宝的接口大家理解了吧就这样一个论点所以将来肯定是在这个control了里边我们会去调用谁啊就调用我刚才写的对调用这个方法来实现什么来实现
+[05:44] 这个保存订单然后呢调用支付区的代理服务最终调支付宝大家理解吗好那现在呢我们的主战场呢就到我们说的Service这个里头了那下面呢我们就在交易服务的Service这儿我们把这个接口给它报出来然后呢来实现好在这个里边我们刚才分析的非常清楚第一步我们要做一件事就是保存订单
+[06:13] 到我们的散剧平台数据库第二件事我刚才也说了是要调用支付渠道代理服务然后呢干嘛然后调用支付宝下单借口大家理解吧好那我们首先做第一件事就是保存订单首先做第一件事保存订单那么做第一件事保存订单的话其实你要保存订单的话其实这个
+[06:45] 其实很好实现比如说那我们保存订单保存订单怎么保存就将订单保存到我们散尽平台数据库对吧我先写一个save的方法叫save我准备保存订单我就放到这个方法了行吧然后我让它回传回来那这样的话我就写了一个save方法写save方法的目的是啥呢就是为了
+[07:12] 后边可能有其他的一些这个接口也需要保存订单的时候呢我就让他调这个方法了所以在这儿呢我就只会让他调这么一个方法然后呢把它传进去哎这是不是就保存订单了大家理解吗这不就成了吗那么那下面我们是不是就开始在这里头写保存订单呀保存订单那怎么保存最终我们肯定会用这个pay order Mapper
+[07:39] 对那这样的话我们在这里头是不是要把我们订单的这个Mapper也注入进去订单我们当前应该是第一次接触吧所以我们打开数据库看一下订单里边有很多的字段啊但是有些字段我们暂时先用不到第一个肯定要用到我们散具支付的订单号使用雪花片算法当初我们讲买VTES Plus都说过啊那没有这个忘记的大家可以去看一下雪花片算法百度一下然后后边是三户号对吧门店应用
+[08:10] 这几个字段前面都比较熟悉啊这几个字段是啊原始支付渠道原始支付渠道仓库原始支付渠道订单号指的是什么原始指的是我们呢要调支付宝的下单那这个呢所有的都是支付宝的信息懂了吧哎你比如说将来支付宝下单成功了之后呢支付宝会有一个单号那好我们就把这个原始渠道单号写到这个数据库其他的也一样
+[08:33] 当然这几个字段目前来说我们先暂时用不到回头我们再去这个拿到这个支付结果的时候我们再说当前我们这个肯定是空了因为现在我们先暂时不管它后面还有一个聚合支付的渠道聚合支付渠道这个是啥呢就当初我们是不是知道我们要把支付宝微信都聚合起来那在我们有一张支付渠道表看见吗那这个是不是就是阿里的这个什么
+[09:02] WAP手机网站支付的这个渠道这是微信的这个JSAPI的渠道是吧所以如果现在我们下单是通过这个阿里的手机网站下单那好在刚才订单这个字段当中的这个支付渠道这你要把这个阿里配下滑线WAP就那个支付渠道的人那个名字把它放进去好然后商户的订单的话暂时现在还用不到为什么因为我们后边可能
+[09:31] 其他的商户平台要接入我们散剧平台那么我们散剧平台那么这个商户对我们散剧平台来说它就是我们的商户其实就相当于啥就是我们接支付宝我们是支付宝的商户其他商户接我们它就是散剧平台的商户所以这个订单就是其他系统第三方系统接咱们他把他的订单号给咱们传暂时这个字段我们先不用
+[10:00] 回头我们再做第三方接入的时候再用这个是订单的标题不用说了吧订单的描述这个是总金额人民币默认人民币然后还有什么自定义的参数这个自定义的参数包括这个用于统计分析这些都是我们给后边留的预留字段交易状态这个肯定需要然后这个错误代码回头再说然后这个设备号这个也暂时不要还有这个客户端IP肯定需要
+[10:30] 就是谁下单的嘛然后创建时间更新时间定单过去时间这个应该大家知道原来我们在做支付渠道参数那个支付渠道配置接口的时候我们是不是遇到过呀其实就是支付宝好像也需要一个定单过去时间然后我们这呢就把这个定单过去时间呢设到这将来调支付宝呢就把这个定单过去时间拿到传给支付宝就行了这个是最终支付成功的一个什么时间好
+[10:56] 这个字段基本上我们分析了一遍就是你脑子里边先有一个大概印象后边我们去插入的时候再说来看一下下边我们要做一件事是不是就是要保存订单保存订单我们刚才看到那么多字段我们怎么做里边因为这里边你看有很多东西都已经传进来了对不对很多东西传进来传进来的话没有传进来的我们就需要去干嘛需要去处理了有时候老师哪些传进来哪些没传你别忘了
+[11:26] 这个方法是谁调的是不是这个submit order by Ali调而这个方法就submit by Ali这个方法是谁调呢是不是最终我们说的由交易服务我们写的Controller他来调对吧那所以说他接到的这一堆参数他都会原样传给你但是订单表当中所需要的参数就是不在这个范围的
+[11:51] 那么就需要我们刚才说在保存订单的时候来设置了那么这里边哪些参数需要哪些参数不需要呢你像标题包袋这些都有了对吧那么有几项东西我们得需要注意哪些东西呢你比如根据刚才我们所说的你比如说的它是使用的是人民币对吧那这个你得写字还有过期时间别人是不会跟你说的
+[12:19] 那你得自己我们说保存订单的时候我们的订单过去时间是30分钟以后就过去了还有订单的创建时间订单的状态包括订单号这些东西别人给你传的时候是不会给你传的那我们自己就是交易服务自己他需要把这个事呢把这个数据呢给他搞定好那下面呢我们就来把这几项写一下首先一项呢我们是需要用这个转换把这个
+[12:47] DTO转成Entity因为最终我们去Save的时候就是去Insert的时候一定是需要去调用的是我们说的这个Entity对吧所以后边我们是不是会采用你看我们会怎么做呀Insert这个是不是就是插入订单大家理解了吗好那下面呢我们说那你还要什么呀刚才不说了吗一个是订单号订单号呢我们准备采用这个
+[13:24] 什么呀叫做雪花片的算法雪花片算法这里面刚才我是不是考了一个工具类呀那个工具类呢我们直接拿过来里边呢我们就直接可以雕用的好这就是我们采用雪花算法雪花片算法来生成电缆号那大家可以看到这个
+[13:49] 它的这个方法你看它有个前缀啊叫散聚SG是吧然后呢这个你看是不是就调用我们刚才说的这个工具类然后它拿到了最终生成了一个ID就是我们的组件订单号好那还有注意啊这个订单号啊这个订单号啊它虽然是唯一的但是它不是组件你注意看你看组件都有一个ID但你看这是不是单独有个订单号大家理解吗还有怎么呢还有就是我们说的你是不是还得有很多的信息然后这里面我们瞧瞧
+[14:20] 那还有一个基本的那比如说这个创建时间对不对创建时间创建时间的话这里边呢我们就当前时间然后呢你创建时间你是不是还得有一个过期时间对吧过期时间那过期时间的话这里边我们怎么弄啊过期时间我们说是30分钟以后对吧30分钟以后这里边我们要用它的一个什么这个local data time的一个就以当前时间为基准
+[14:52] 然后呢往后数30分钟这个方法我们点开瞧一瞧你没发现吗这个方法呢其实你看它可以加一部分的这个时间单位对吧加一部分的时间单位假如我写个30那30到底是啥呢30那我们认为它就是一个什么它是一个分钟对吧那分钟的话这里边呢它有一个子类型我们可以拿到瞧一瞧
+[15:20] 你看就是它那里边呢有很多的这个单位对吧有分有毫秒有分钟有秒是吧那你把它给拿到这我们写分钟就行了对吧好这个这样的话是不是就表示我们说这个订单的过期时间是30分钟后对吧好还有什么呢其实这些都是我们说前端他们前边是没有给我们传到的嘛我们都需要还有一个就是说我们要设咱们这个
+[15:56] 它的金额的类型是什么呢人民币这个叫怎么样这个CN表示China是吧那后边是不是就是表示元对吧人民币好这样的话基本上我们这个保存的这个就快写完了还有一个就是说各位你最终你这个订单的状态是啥
+[16:28] 就是你插入到数据库这个订单的状态是什么呢订单的状态的话我们得看数据库里面都好多值有什么订单升成啊这个支付成功啊处理业务处理完成啊我们当前状态肯定是零也就是当前是什么订单刚升成嘛还没有支付嘛这个是订单的状态订单状态是零那这个零就表示啥呢零就表示订单升成成功对吧
+[16:58] 好这样的话我们就把这个订单就插入成功了插入成功你看它结果要的是一个DTO所以你肯定要把它给把entity把它转成DTO这样的话我们这个方法就搞定搞定这儿你看你是不是要调用一下就完事了那调用的时候要注意调用的时候这里边我们说那你去调它你这个是啥你这个保存订单方法一定记着它是个公用方法
+[17:29] 你别看它是个私有方法它是个公用的就是微信过来也调它支付宝也过来也调它因为保存订单到我们本地数据库到我们散区平台数据库而这个方法是支付宝订单你看见了吗那你支付宝订单你保存的时候对你注意你得写一个东西刚才我在分析字段的时候说过里面有一个叫支付渠道对
+[17:53] 这个支付渠道当初我们说它其实是我们系统当中定义了很多编码你当前这个方法是支付宝保存订单所以这个支付渠道你可以写死成我们系统的编码就是叫阿里配WAP这就是保存订单对第一步保存订单我们完成之后后边我们就可以去调用支付宝进行下单好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示一个支付订单服务的代码实现，包括控制器、服务接口、服务实现、数据库表结构及相关的配置和工具类。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 PayController.java 中的 createAllPayOrder 方法，用于处理支付宝下单请求，方法注释说明了业务逻辑。
+画面2：展示项目结构，当前选中的是 shanjupay-transaction-Service 模块。
+画面3：展示 TransactionService.java 接口，定义了 createStoredOrderCode 方法，用于生成支付订单号。
+画面4：展示 shanjupay-transaction-api 模块的 pom.xml 文件，其中定义了依赖项，包括 shanjupay-common 和 shanjupay-payment-agent。
+画面5：展示 TransactionServiceImpl.java 中的 save 方法，用于保存支付订单，方法注释说明了业务逻辑。
+画面6：展示 TransactionServiceImpl.java 中的类定义，包含 @Service 注解和对 appService、merchantService 的引用。
+画面7：展示数据库表结构，当前选中的是 pay_order 表。
+画面8：展示 TransactionServiceImpl.java 中的类定义，包含 @Service 注解和对 appService、merchantService 的引用。
+画面9：展示 PPT 内容，标题为“5.4.2.1 保存订单”，详细说明了 save 方法的实现逻辑。
+画面10：展示 TransactionServiceImpl.java 中的 save 方法，调用 PayOrderConvert.INSTANCE.dto2entity 方法将 DTO 转换为实体。
+画面11：展示 TransactionServiceImpl.java 中的 save 方法，调用 payOrderMapper.insert 方法插入订单。
+画面12：展示 TransactionServiceImpl.java 中的 save 方法，弹出选择 ChronoUnit 的下拉框，用于设置过期时间。
+画面13：展示数据库表结构，当前选中的是 pay_order 表，显示了字段及其类型。
+画面14：展示 PPT 内容，标题为“5.4.2.1 保存订单”，详细说明了 save 方法的实现逻辑，其中设置了支付币种为“CNY”。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+return "forward:/pay-page-error";
+/*
+ * 支付宝的下单接口，前端订单确认页面，点击确认支付，请求进来
+ * @param orderConfirmVO 订单信息
+ * @param request
+ * @param response
+ */
+@ApiOperation("支付宝门店下单付款")
+@PostMapping("/createAllPayOrder")
+public void createAllPayOrderForStore(OrderConfirmVO orderConfirmVO, HttpServletRequest request, HttpServletResponse response) {
+    //订单页面跳转
+}
+```
+
+画面2：
+```
+shanjuay
+├── shanjupay-common
+├── shanjupay-gateway
+├── shanjupay-merchant
+├── shanjupay-merchant-application
+├── shanjupay-transaction
+├── shanjupay-transaction-api
+├── shanjupay-transaction-Service
+├── shanjupay-transaction-Service-api
+└── shanjupay-transaction-Service
+```
+
+画面3：
+```java
+import com.shanjupay.transaction.api.dto.QRCCodeDto;
+/**
+ * 交易相关的服务接口
+ * Created by Administrator
+ */
+public interface TransactionService {
+    /**
+     * 生成支付订单号
+     * @param qrCodeDto
+     * @return 支付入口（url），携带与参数（有传入的参数转换成，用Base64编码）
+     * @throws BusinessException
+     */
+    String createStoredOrderCode(QRCCodeDto qrCodeDto) throws BusinessException;
+    //支付订单保存
+    void submitOrderById();
+}
+```
+
+画面4：
+```xml
+<modelVersion>4.0.0</modelVersion>
+<artifactId>shanjupay-transaction-api</artifactId>
+<groupId>com.shanjupay</groupId>
+<version>1.0-SNAPSHOT</version>
+<dependencies>
+    <dependency>
+        <groupId>com.shanjupay</groupId>
+        <artifactId>shanjupay-common</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>com.shanjupay</groupId>
+        <artifactId>shanjupay-payment-agent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+</dependencies>
+<build>
+    <plugins>
+        <plugin>
+```
+
+画面5：
+```java
+/**
+ * 保存支付订单，1、保存订单到网关平台，2、调用支付代理服务调用支付宝的接口
+ * @param payOrderDTO
+ * @return
+ * @throws BusinessException
+ */
+@Override
+public PaymentResponseDto submitOrderById(PayOrderDTO payOrderDTO) throws BusinessException {
+    //保存订单到网关平台
+    //调用支付代理服务，调用支付宝下单接口
+    return null;
+}
+```
+
+画面6：
+```java
+@Service
+@Version(1.0)
+public class TransactionServiceImpl implements TransactionService {
+    //从配置文件读取支付入口地址
+    @Value("${shanjupay.payurl}")
+    String payurl;
+    @Reference
+    AppService appService;
+    @Reference
+    MerchantService merchantService;
+    @Autowired
+    PayOrderMapper payOrderMapper;
+    //支付订单
+    private PayOrder payOrder;
+    //支付订单实体
+    private PayOrderEntity payOrderEntity;
+    //支付订单DTO
+    private PayOrderDTO payOrderDTO;
+    //支付订单Mapper
+    private PayOrderMapper payOrderMapper;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository payOrderRepository;
+    //支付订单Service
+    private PayOrderService payOrderService;
+    //支付订单Controller
+    private PayOrderController payOrderController;
+    //支付订单Repository
+    private PayOrderRepository pay
+

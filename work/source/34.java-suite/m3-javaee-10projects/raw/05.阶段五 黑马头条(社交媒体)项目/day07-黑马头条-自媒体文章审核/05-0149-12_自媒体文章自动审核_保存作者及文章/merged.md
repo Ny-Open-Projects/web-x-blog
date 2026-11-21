@@ -1,0 +1,286 @@
+# 12_自媒体文章自动审核_保存作者及文章
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day07-黑马头条-自媒体文章审核
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day07-黑马头条-自媒体文章审核\12_自媒体文章自动审核_保存作者及文章【海量资源尽在 666java.com】.mp4
+- 时长 19分3秒（音频 1143s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们就来完成保存数据的这一步骤啊首先呢咱们要去保存什么哪些数据呢其实首先保存第一个是当前的EP author啊作者这作者啊当前保存文章的时候需要依赖于作者啊所以说要去保存作者好下面呢你要紧接着要去保存谁啊紧接着应该哎什么情况这是我重新设一下啊好要去保存当前的EP author
+[00:30] 然后紧接着呢要去保存当前的什么AP article然后下面呢再去保存这两个好吧这两个其实顺序无所谓好吧顺序无所谓啊是这样的啊他保存的时候呢需要去依赖于他他保存的时候这时候呢需要去依赖于他啊所以说这个顺序啊这个顺序起码你不能改好吧然后下面还有一个就是要去创建所以创建ES所以好吧那这个就是咱们的
+[01:01] 我们分别再来去做一下我现在咱们要去拿到先去传现它是吧这时候呢我们就可以直接去注入一个东西啊注入谁呢嗯这个东西我刚刚拉进来的啊就说咱们首先要去保存的话先去把这个mypro注入进来是吧就是刚才我写那个啊private然后是app-author-mypro是吧注进来之后呢咱们就可以可以去用它的一个东西
+[01:31] 这里边首先咱们要去会直接去调隐色的那调谁呢首先你要去根据当前的名称或者ID去查询他如果说当前有作者的话咱们就没有必要再去保存了如果有的话咱们就用没有的话咱们再去保存一个是这个套路那行那咱们下面先去查一下根据当前的名称查那名称怎么来呢比如这里边有个名称叫author name是吧是根据当前的author name去查的
+[02:01] author name又该怎么去拿呢?
+[02:04] 这儿找个东西啊好author name其实这样啊咱们author name呢是通过当前的wm user去拿的wm user啊因为这个啊因为当前的wm news里边呢它有一个user id通过这个user id呢就可以拿到当前wm user所以说啊咱们在这儿啊还要去查询出来wm user这时候我们可以去判断一下啊if wm news.get什么呢
+[02:31] user id不等于空不等于难然后这时候我们就可以干嘛呢就可以去查询了查询的时候咱们就可以去把wm usermypr这时候把它给注入进来注入之后你就可以通过当前的id.getuserid做了什么呢select by id然后是wm news.getuserid
+[03:04] 这时候呢你就可以去拿到一个wmuser好吧这里边呢其实呢就有什么呢这里边其实就有当前的你要的东西嗯可以再判断啊如果说wmu4等于空是吧然后呢咱们就可以去这些传件了再多做一部分那也行啊wmu4.get.get.name是吧哎是错了啊
+[03:38] 不等于那啊这时候呢咱们可以把当前那个阅值直接放过来就可以了这时候呢其实你就可以去查到当前的author信息author有可能是空有可能是空啊咱们可以去评断一下啊如果说ap author它呢等于等于那或者呢或者是ap author.getid它等于等于空
+[04:10] 这时候呢,咱们就可以去new了一个东西了啊ap author 等于new一个ap author然后下面咱们就可以去创建了ap author.set可以,把这个值给它创完就可以了比如说user iduser id这个不是已经拿到了吗wm newwm use.get user id好,再往下r,什么呢r set
+[04:41] 一个叫corrida time好吧这个无所谓啊你又一个什么再往下ap author rsettype我默认给个1就可以好吧这个1是啥意思你可以看一下啊当前的这种wm authorwm author找到authorap author说错了啊当前的作者嘛作者ap author
+[05:18] type1是签约合作优惠是吧二是平台自媒体人就咱们可以给2给2别人给1好然后再往下看然后还有啥呢apauthor.set什么name是吧这个name的话其实你就是当你谁就是当你那个author name好吧行再往下看还有吗apauthor.set什么呢set一个wmnews这个ID的话跟那个ID不一样是吧
+[05:51] 是他的IDuser.getID用的你就可以去照用他用他去去保存就可以了好,insert我把在前的AP author装进去那这样的话咱们就算是保存了一个好吧那这个呢就是算是保存了啊这保存保存查询保存这个值啊咱们就拿到了那这时候咱们就可以
+[06:27] 他呢把他干嘛呢可以把他的抽出来啊出出来啊因为咱们下面要用下面要用所以说你不出来可能不太合适你说咱们在这啊拨到最上面好吧拨到最上面啊啊上于一个浪好这时候咱们就把它给删掉那这时候咱们就算是就是完了啊一个保存完了然后下面咱们再去保存啊就是当前的什么阿提考阿提考
+[06:56] 这时候咱们就可以去打开当下AP article然后看表里边它需要哪些东西咱们怎么着可以去打开当前表AP article这里边有文章作者ID文章作者ID需要作者昵称咱们可以拿频道咱们需要查频道名称咱们需要查布局的话咱们又可以去设置好吧标记的话咱们暂时不用
+[07:27] 还有啥呢文章的图片咱们一会儿也会去设置啊还有文章的标签标签的话咱们也可以去设置点赞数量收藏评论阅读咱们暂时不设啊像这些咱们都不设啊创建时间咱们可以设一个发布时间就是当前时间也不对是吧发布时间应该是当前那个发布文章的时候他给我带过来的啊我带过来一个文章带过来一个东西同步状态咱们可以不设来源的话咱们也可以不设啊来源可以设置一个自媒体OK设置一个自媒体也可以啊
+[07:58] 行那这个咱们把这表说完之后啊咱们就可以去保存了啊那这里边啊有一个东西咱们要去设置啊比如说当前的有一个做料的咱们首先要拿到是吧这里边还有还有还有需要什么东西吗我看看啊嗯没了是吧没了啊好没了啊这时候都有一个频道这个频道的话咱们需要去查询一次才能获取到当前的频道好吧那行那咱们下面呢就来去写当前代码啊
+[08:27] 这代表因为咱们那个也需要当前的一个需要当前的一个作者的一个ID所以说呢咱们在这啊这呢去往上去写不用去写也行啊在这写也可以是吧往下往下走然后呢咱们就可以去new出来一个AP articleAP articleAP article等于new一个AP article然后呢咱们就可以去设置了啊比如说
+[08:58] 我们要设置一个aparticle.set什么呢setCandle的话咱们一路在设好吧一路在设啊首先设一个authoridauthorid其实咱们刚才去保存了一个是吧保存了一个这时候咱们怎么去做呢咱们应该在这先去判断一下建议去最后判断一下然后是什么呢apauthor不等于none不等于none的时候我们再去设这个值要不然你别设了
+[09:30] 好吧然后是怎么着是ap author.getid是吧这个就是那个id啊这个为什么我做了我看看啊这个lang是吧里边呢它是不也是个lang吗.int valuelang value啊就是int value是吧int value等会这是一个integer这是需要一个lang啊那就写错了是吧什么lang value啊
+[10:09] 那这样就可以了然后咱们再往下设然后看还要啥点咱们是有一个叫做author name是也有那这样咱们直接在里边去设AP article.set author name就是以前的什么AP author.get name不过就是它的作者名称然后再往下设就是AP article.set
+[10:39] 目前的一个TennoID咱们一路在设啊CTID不设这种程式这叫它的一个收藏不设这些都不设啊然后以密室咱们需要设是吧密室需要设咱们一路在设啊然后还有啥呢创建时间发布时间创建时间设一下吧好然后再往下你看还有啥呢先把电网咱们把这个Tenno给它设一下吧Tenno啊
+[11:09] 这个Channel的话呢你需要去查啊需要去查WM News里边呢咱们有一个getChannel IDChannel ID啊这时候呢他就能拿到一个Channel ID是吧比如说呢你在这儿啊去通过Channel ID去查询他的名称就可以了啊咱们在这儿啊再去做指一下啊比如说在下边写吧在下边写啊然后if刚前的Channel ID不等于none然后呢咱们就可以去查询了查询的时候呢咱们在这儿啊再去输入一个Map
+[11:43] privateid chanelmypr好然后注进来注进来之后呢咱们就可以去查询了啊select primekey就是channel id然后呢就能拿到一个channel好吧这时候呢咱们就可以去设置了aaparticle.setchannel idchannel id的话其实就是channel id然后第二个呢就是aaparticle.setchannel name
+[12:18] setChinalName就是现在adChinal.setName是吧没问题啊那这个咱们就设置完了啊再往下看那还需要哪些东西呢这里边咱们要的设置的咱们基本上都设置完了比如说这些东西是吧下面还有一些东西就是layoutlayout的话咱们也可以去设置比如说叫什么aparticle.setLayout
+[12:46] 这liost的话其实就是wm news里边.type这个type的话其实就是对应谁呀就是当前的这个布局布局然后再往下ap article.set titletitle你要说wm news.set title好然后再往下还有吗还有一个就是有一个authorid咱们也说完了行那下面还有一个比较难的
+[13:16] 这个难的的话就是当前的什么图片当前的图片啊这图片呢该怎么去设呢首先呢咱们还是要把这个图片给处理一下图片给处理一下啊首先咱们可以拿到当前的图片那这图片有吗收到啊这图片呢其实就在哪啊wmnews.getimages就这个呢其实在保存w5章的时候呢其实就能拿到当前的一个图片信息
+[13:47] 是一个死命的图串这里边啊他多个图片呢是以多号分割的是以多号分割的但是呢这里边啊他有一个有一个问题什么问题呢就这个里边的图片呢他并没有去干嘛呢并没有去设置什么呢设置当前的访问路径存的是啥呢存的是一个文件ID文件ID啊应该算是把当前服务器的地址拼到前边服务器的地址这有一个
+[14:18] server url这时候呢要终于增加了这样的效果然后最终的是保存到前的AP article中因为他AP article最终是要访问图片的所以说啊咱们在这需要去做一个处理做一个处理啊那处理起来呢其实比较简单啊咱们在这直接去设置比如说bifimages不等于呢然后呢咱们就可以处理了处理的方式呢就是首先呢拿images.split
+[14:50] 以多少分割,以多少分割啊,其中它返回的是一个数组好,下面呢,咱们就可以去循环当前这个数组啊split,就split吧直接用数学循环也行是吧好,int i等于0,然后呢,i小于谁啊split.length,mouse i++下面呢,咱们就可以去设置了啊那这个设置的时候呢,咱们要去
+[15:20] 加上当前的这种server URL那这server URL咱们有吗咱们现在好像是没有是吧咱们可以在之前的方式中会直接注入进来是吧那注入怎么注入呢咱们可以找一下啊找一下之前怎么注入的之前哪块用了还知道吗之前咱们用的时候是不是当前的一个叫做Media中心用到了是吧所以说咱们在这啊找到当前的application把这个给拷贝一下好点呢找到当前的admin
+[15:50] 我的面下面的有一个叫做他卡着啊我这之后呢咱们就可以在当前的类上可以关了啊嗯行可以啊在在咱们这个审核这一块呢去注入一个东西在上面private 子顿的feel serverurl好吧这叫他啊然后下面呢咱们就可以去用86
+[16:27] 引号是吧然后是交流服务这叫啥呢跟他一样是吧拷贝一下啊好放到这这时候他就是怎么样我们要拼接着当前的一个组块是吧那咱直接写啊直接写啥呢咱们还要再去设置一个东西啊如果说啥呢大于零啊第一个咱们不拼接啊然后呢咱们就sb点什么嗯open这个sb没有是吧还没有设是吧
+[16:58] 是啊你在这你需要去创建个东西啊创建一个string buildersb等于new一个string builder啊好然后呢下面咱们就可以去拼接了sb点什么糖先拼接一个头号啊然后呢下面往下看然后呢不是sb点punt先去拼接的谁啊先去拼接的是server url叫fuelserver url好下面
+[17:29] 捏的什么ISB点什么Pند前面的SpritzSpritz谁呢好吧因为这里边可能有多个图片好吧行那最终呢咱们就可以去设置了啊在这你可以去直接存tp article点什么set以秘之s这里边存的时候呢就是ISB点什么susbok那这样就可以了啊
+[17:57] 重新给他存一下就可以好吧那到目前的话呢这个该有的值啊咱们都设置完了啊我看里边还少什么东西啊那这里边给我看这个里边啊orange来源的话咱们就设一个吧好吧设一个啊咱们可以设立一个处啊设一个处或者说不设也没用事好吧不设也没事啊行那咱们就先不设了好吧行目前的话这个RTO的数据呢咱们就准备的差不多这时候呢咱们就可以去保存了啊保存就很简单了
+[18:27] 你要去入当前的myp private然后是aparticle然后是myp author然后是注进来之后呢在这啊srinsert把当前的aparticle注入进去就完事了好吧那目前的话咱们这个文章呢也保存了好咱们先断一下一会再去保存这两个
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中，通过 Java 代码实现文章审核成功后，自动创建作者和文章记录并插入数据库。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 在 ReviewMediaArticleServiceImpl.java 中，展示 reviewSuccessSaveAll 方法的开头，声明了 spAuthorMapper 和 spArticle_config 等注解，准备处理审核通过的逻辑。
+画面 2: 展示了 reviewSuccessSaveAll 方法中，通过 walUserMapper 根据用户 ID 查询用户信息，并准备根据作者名查询作者。
+画面 3: 展示了 reviewSuccessSaveAll 方法中，通过 spAuthorMapper 根据作者名查询作者，如果作者不存在则创建新作者。
+画面 4: 展示了 Navicat for MySQL 中的 ap_article 表数据，用于验证文章数据的插入。
+画面 5: 展示了 reviewSuccessSaveAll 方法中，创建新的 ApAuthor 对象并设置其属性，然后调用 spAuthorMapper.insert 插入数据库。
+画面 6: 展示了 reviewSuccessSaveAll 方法中，创建新的 ApArticle 对象并设置其属性，准备插入文章数据。
+画面 7: 展示了 reviewSuccessSaveAll 方法中，为 ApArticle 对象设置作者名和作者 ID。
+画面 8: 展示了 reviewSuccessSaveAll 方法中，为 ApArticle 对象设置频道 ID 和频道名。
+画面 9: 展示了 reviewSuccessSaveAll 方法中，为 ApArticle 对象设置城市 ID 和评论信息。
+画面 10: 展示了 Navicat for MySQL 中的 ap_article 表结构，用于验证文章表的字段定义。
+画面 11: 展示了 reviewSuccessSaveAll 方法中，处理文章图片的逻辑，通过 split 方法分割图片 URL 并拼接。
+画面 12: 展示了 reviewSuccessSaveAll 方法中，处理图片 URL 的逻辑，使用 StringBuilder 拼接图片 URL。
+画面 13: 展示了 reviewSuccessSaveAll 方法中，将拼接好的图片 URL 设置到 ApArticle 对象中。
+画面 14: 展示了 reviewSuccessSaveAll 方法中，调用 apArticleMapper.insert 将文章数据插入数据库。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```java
+private @Autowired spAuthorMapper;
+// 保存数据
+* sp_article_config
+* sp_article
+* sp_article_content
+* sp_author
+* sp_param
+* sp_article
+private void reviewSuccessSaveAll(WithNews walNews) {
+}
+```
+
+画面 2:
+```java
+private @Autowired spAuthorMapper;
+private @Autowired spArticleMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollectionMapper;
+private @Autowired spArticleConfigMapper;
+private @Autowired spArticleContentMapper;
+private @Autowired spArticleMapper;
+private @Autowired spAuthorMapper;
+private @Autowired spUserMapper;
+private @Autowired spChannelMapper;
+private @Autowired spCityMapper;
+private @Autowired spCommentMapper;
+private @Autowired spForwardMapper;
+private @Autowired spCollection
+

@@ -1,0 +1,164 @@
+# 18.功能开发之发送短信验证码
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day01 探花交友-项目搭建以及登录完善个人信息
+- 源文件：07.阶段七 探花交友项目\day01 探花交友-项目搭建以及登录完善个人信息\18.功能开发之发送短信验证码_【海量资源尽在 666java.com】.mp4
+- 时长 14分45秒（音频 885s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们来看一下发送短信验证码那么我们这个短信验证码呢选用第三方平台呢叫做云资讯啊这样的一个平台那我们可以打开来看一下啊呃他呢就是这样的一个网站啊这样的一个平台那么呃大家呢没有账号的话去注册一个啊注册一个登录就可以了那么其实我在这个位置呢已经就登录进来了啊那么登录进来之后呢那么我们就可以去使用了
+[00:27] 那么首先呢我们需要去创建一个应用那么点击这个账户中心然后在这个位置呢有一个应用管理然后呢在这呢可以去点击这个创建应用啊那么我在这个位置呢已经创建了一个这个碳花这个应用了那么下面这个hello001呢是他默认的一个应用啊好那么在这个位置呢我们点击创建那么你可以随便写一个名字啊或者跟我讲跟我一样写这个碳花也可以啊
+[00:55] 然后呢创建完成之后呢我们就可以去使用它了但是要注意的是那么我们要发送的是这个验证码短信那么它默认的是没有上线的这个应用的只能是发送给你当前所注册的这个用户的这个手机号那么所以呢我们需要在这个位置去添加我们几个这个手机号给你它那么可以它说
+[01:23] 最多支持添加六个测试账号那么我在这个位置呢由于我这两个是我的手机号啊那么所以我添加了两个啊这个手机号在里面那么如果你有需求的话可以再添加一些其他的手机号OK那么这样的话呢就可以向这两个手机号去发送这个测试的短信了好那么这样的话呢我们这个就已经测试完成了那么接下来呢我们需要去创建一个短信的模板
+[01:51] 那么创建这个模板呢我们来找一下啊是在这个位置呢有一个短信然后下面呢有一个模板库然后呢在这个位置呢我们需要点击这个创建模板啊那么其实可以看到在这个位置我已经是已经创建了一个这个验证码的模板啊那么它呢有一个这个模板的ID这个是我们需要的数据然后呢中间有一些模板内容呢是这么来玩啊那么点击这个创建模板然后呢
+[02:21] 我们可以在这个位置去写我们相关的内容那么也可以从这个模板库中去导入啊比如说我们去使用它说你的这个签名那前面需要签名的那我们可以写这个探花探花交友那么后面的就会有这个您的验证码是这个大括号一请在大括号二内输入这个去输入一个验证码那么这个大括号一和大括号二代表什么它代表的是
+[02:50] 站位服务提示就是我们的便利那么所以呢可以看到那么我之前所创建的这个模板库呢是这样的就是签名的是太花交友然后呢验证码内容的是您的验证码是这有一个站位服然后呢后面有括号就是如非本人操作请忽略是这样的一个验证码那么可以看一下那么这个就是我所创建的验证码那么当我们提交之后呢
+[03:18] 我们这个模板呢其实它是处于一个带审核的一个状态那么只有审核通过之后呢才能够使用那么大家在创建完成之后呢就稍微等待一下那么大概会过半个小时左右吧那么它就能够去审核通过那么审核通过之后呢会有一个短信的一个通知那么就可以去使用了那么到这里呢其实我们已经就完成了在这个平台的一些设置
+[03:46] 那么接下来我们就可以来编写 API去做一个发送短信了好那么下面我们就来看一下它的一个短信API那么它是在这个位置我们一起来看一下那么其实我们可以看到在这个位置下面它有些参数比如说我们要去指定 sID就是我们的账户的ID要指定 tokenApp ID还有template ID就是模板ID然后还有一些相关的参数那么按照这个参数
+[04:16] 最终我们所提交的是一个json字部创把我们的一些参数去拿到提交一下就可以了最终响应的就是这样的一个响应那么比如说我们得到一个60这样的一个code的话就代表我们验证码已经发送成功了那么大概就这样一个逻辑其实整个逻辑是非常简单的一个这样的一个逻辑好那么下面我们就来实际的来调用一下它的逻辑那么其实它的返回
+[04:43] 返回状态码呢其实可以看到在下面有很多那么我们最常用的一个就是这个就是6个0然后呢OK就代表发送成功了当然了也会有其他的一些这个返回的一个状态码大家可以一一去查看一下好嘞好那么接下来呢我们就实际的来编写代码然后去测试一下这个短信的发送那么前面其实我们提到过在这个位置呢我们其实是需要向这个地址
+[05:11] 去发送一个http的请求那我们就需要有个http的客户端那么在这个位置呢我们将使用sprintbot所提供的这个rest template去发送这个http请求那么当然了前提是我们在使用这个rest template的时候呢需要对它去做一个配置那我们就来配置一下那么我们需要
+[05:36] 在我们这个SSO系统中呢先来创建一个这个config这个包然后呢在这个包里面呢我们再去去把这个配置呢就拷过来这个之前应该也都用过啊那我们就直接拷过来了那么是这样的一个啊这样的一个配置那么可以看到呢我们这个类呢是不是添加了一个configure这样的一个注解是不是就标明这是一个配置类
+[06:03] 然后我们在这个位置加了一个bin这样的一个注解然后我们就可以去最后去把这个什么rest template去载入到Spring的容器了那么我们这个位置是需要这样的一个factory的那么下面这个位置是不是定义了一个factory它是不是就会注入到这个位置来OK去做这样的一个注入最后就会有一个rest template了那么OK那么当然了在这个位置我们去设置了一个
+[06:32] 我们的一个中文的一个编码那么其实我们设置的是一个message converter哎 ok那么他的编码的设置是一个utf-8好嘞好那么有了他之后呢我们就可以去发起请求了那么我们来看一下具体怎么玩呢下面呢我们就需要去编写一个我们的一个这个sm这个Service然后去做一个实现那么也就是说我们需要呢在这个下面啊去创建一个包叫做Service
+[07:02] 然后我们在这个Service下面这个包创建一个类叫做smsservice然后我们把它要标记为这是一个Service那么然后在这个里面我们要去注入谁呢注入我们的rest这个template把它注入进来就刚刚我们去载入到我们这容器的一个这样的一个template那么下面我们就可以去写具体的逻辑了
+[07:30] 那么这个具体逻辑的分装呢我就不一一去分装了啊那我们就来看一下这个里面的呃发送了这样的一个逻辑啊在哪呢在这把这个就拷贝过来呃然后呢所需要的一些包呢就来导入一下把这个呢呃导入进来然后呢这个map那么就需要我们使用一个jackson的一个包那么需要他我们定一个static吧然后呢objectjectmap
+[07:58] 然后来一个map好等于new一个objector map好嘞好那么这样的话我们就ok了其实来看一下那么这个地址我们可以看到这个地址其实就是我们刚刚所看到的是不是就这个地址就它没有问题对吧然后下面设置一些参数最后把我们参数pyramus是一个map
+[08:23] 然后我们去做一个post这样的一个请求做一个post请求那么在resttemplate中会自动将我们param就是map去序列化成一个阶层字幕创那么就是最终所需要的这样的一个阶层字幕创去做一个提交了那么接下来我们就需要去找到我们这几个信息那么SID还有tokenappid还有templateid我们一一来找一下
+[08:50] 那么我们还是回到之前的我们那个就是点击登录一下那么回到之前的我们这个控制台然后我们去找一下相关的信息那我们找到这个下面有一个应用管理找一下这个应用我们看一下它那么这个是可以看到我们的应用这个是不是就是我们的APP ID那么这个是不是我们需要对吧
+[09:18] 那么APP ID是不是就是在这里对吧那么还需要一些其他的应用我们来找一下看它是在哪里呢那么我们要点击这个短信然后呢在下面的这个位置可以看到是不是我们所需要的数据呢其实都在这里APP ID刚才我们已经复制到了还有一个就是SID那我们点击这个复制一下好那么SID呢其实就是它其实就是它然后呢还有就是我们的这个Token
+[09:46] 那么token这个的其实是我们查看不到的那我们需要去查看一下当然了他是需要去发送一个手机验证码那么我来输入一下叫G09这个好像有点看不清楚那我来换一下换一个验证码然后这个比较容易识别了4268Z2然后我们去发送短信验证码
+[10:17] 好 那我来查看一下手机好 那么我这个手机上面已经收到这个验证码是5889这样一个验证码等你确定好 那么这样的话我们其实就已经看到看到了我们这个token那么我们把这个token来拷贝一下那么就拷贝到拷贝到这个位置来那么就是对吗41F没问题就它然后还有下面有一个叫tempid
+[10:46] 这个就是我们的模板ID那么找到我们之前的这个模板那么其实可以看到在这个位置就是一个487的这个那487656是我们的模板ID那么下面就基本上我们这样的话是不是就OK了然后呢下面可以看看一下这个代码在这个位置呢是生成我们的这个这是不是四位应该是六位那我们去生成这个六位数的一个验证码
+[11:13] 然后1 5个0然后到6个9之间去生成一个随机数就作为我们的验证码了然后生成之后可以看到最后我们拿到响应因为是这个是不是就向第三方平台去发送请求那么body是不是拿到我们的响应那么我们对拿到的body去做一个json的解析那么解析之后如果拿到code是6个0的话那么就表示发送成功了
+[11:42] 那么最后就返回这个pyramid就可以了那我们来看一下这个pyramid我们来看一下那么它的响应呢可以看到响应呢响应是在这道那么如果这个code是6个0那就是成功了对吧成功了OK好那么我们返回的这个我们return的这个pyramid是谁呢其实就是我们所生成的一个验证码因为我们这个验证码呢是需要去
+[12:10] 保存到我们的REDIS对不对所以我们要把它返回回去ok好那么到这里其实发送就已经是ok了那么接下来我们来编写一个测试用力来我们来测试一下那么我们要进入到哪里我们进入到 test 下面创建一个测试用力的包这个包叫什么叫 com.tankhwa.sso.Service那么
+[12:37] 我们要测试谁测试是我们的 sm Service所以我们写一个叫做什么 tests m s Service好那么我们去需要给他加一个注解叫 sprint boot sprint boot test然后再加一个 run with 是什么呢junit叫做什么junitjunit 然后
+[13:08] 那么应该是叫什么呢叫screen啊jmonitor啊哎他就ok了啊好那么接下来呢我们就可以在这个位置呢去注入谁呢去注入刚刚我们所定义的这个sm Service把它呢去注进来去做一个测试了好那么然后呢我在这个位置呢就写一个方法啊public返回值word test什么呢send
+[13:37] 然后我们在这个位置去写一个test注解然后我们就调用这个this.smservice.sendmessage需要一个手机号那么这个手机号就写我的然后我们把它的响应就是我们这个短信验证码叫什么code然后我们把它就打印出来code好那么我们来执行一下
+[14:08] 好那么等待它的一个执行那么ok那么可以看到呢在这个位置呢已经把这个短信验证码呢就已经啊打印出来了那我来看一下我的手机啊有没有收到这个短信验证码那么哎呃已经收到了那么没错也就是这个794799啊是一样的那么这个大家可以去测试一下是没有问题的啊那么ok那么到这里呢我们其实已经就完成了我们这个
+[14:37] 短信验证码的这样的一个发送了好那么关于这个短信验证码的发送那就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在云之讯平台创建应用、获取短信验证码接口，并在 Spring Boot 项目中编写代码调用该接口发送短信。
+
+2) 按时间顺序列出每张画面的要点：
+画面 1: 在云之讯开发者控制台的“应用管理”页面，查看已创建的应用“tanhua”和“hello-001”，并准备点击“申请上线”按钮。
+画面 2: 点击“申请上线”后弹出“添加号码”窗口，要求输入“商户ID”、“用户验证码”、“图片验证码”和“输入验证码”。
+画面 3: 页面跳转至短信模板查询页面，但内容为空。
+画面 4: 查看云之讯开放平台的短信接口文档，显示了请求参数和 JSON 响应示例。
+画面 5: 在 Typora 编辑器中打开项目文档，定位到“3.6.4. 编写代码”章节，准备编写配置类。
+画面 6: 在 IntelliJ IDEA 中打开 `RestTemplateConfig.java` 文件，编写配置类 `RestTemplateConfig`，用于配置 `RestTemplate` 和 `ClientHttpRequestFactory`。
+画面 7: 在 IntelliJ IDEA 中打开 `SmsService.java` 文件，查看类结构和成员变量。
+画面 8: 在 `SmsService.java` 中，为 `@Service` 注解的类添加 `@Autowired` 注解，注入 `RestTemplate`。
+画面 9: 在 `SmsService.java` 中编写 `sendSms` 方法，构造请求参数并使用 `restTemplate.postForEntity` 发送请求，解析响应体。
+画面 10: 在云之讯开发者控制台的“短信”页面，弹出“验证手机”窗口，输入手机号、图片验证码和输入验证码。
+画面 11: 查看云之讯开放平台的短信接口文档，显示了 JSON 响应示例。
+画面 12: 在 IntelliJ IDEA 中创建新类 `TestSmsService.java`。
+画面 13: 在 `TestSmsService.java` 中编写测试代码，调用 `smsService.sendSms` 方法。
+画面 14: 在 Typora 编辑器中查看“3.6.6. mock接口”章节，显示了 mock 接口的地址和请求参数。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面 5:
+```markdown
+3.6.4. 编写代码
+配置RestTemplateConfig：
+```
+
+画面 6:
+```java
+package com.tanhua.sso.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.converter.StringHttpMessageConverter;
+
+@Configuration
+public class RestTemplateConfig {
+
+    @Bean
+    public RestTemplate restTemplate(ClientHttpRequestFactory factory) {
+        RestTemplate restTemplate = new RestTemplate(factory);
+        restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+        return restTemplate;
+    }
+
+    @Bean
+    public ClientHttpRequestFactory simpleClientHttpRequestFactory() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setReadTimeout(5000); // 单位为ms
+        factory.setConnectTimeout(5000); // 单位为ms
+        return factory;
+    }
+}
+```
+
+画面 7:
+```java
+package com.tanhua.sso.Service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class SmsService {
+```
+
+画面 8:
+```java
+@Service
+public class SmsService {
+
+    @Autowired
+    private RestTemplate restTemplate;
+```
+
+画面 9:
+```java
+public String sendSms(String mobile) {
+    String url = "https://open.ucpass.com/sms/sendsms";
+    Map<String, Object> params = new HashMap<>();
+    params.put("sid", "*******");
+    params.put("token", "*******");
+    params.put("appid", "*******");
+    params.put("templateid", "*******");
+    params.put("mobile", mobile);
+    // 生成6位随机数
+    params.put("param", RandomUtils.nextInt(100000, 999999));
+    ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(url, params, String.class);
+    String body = responseEntity.getBody();
+    try {
+        JsonNode jsonNode = MAPPER.readTree(body);
+```
+
+画面 12:
+```java
+package com.tanhua.sso.Service;
+
+public class TestSmsService {
+```
+
+画面 13:
+```java
+public class TestSmsService {
+
+    @Autowired
+    private SmsService smsService;
+
+    public void test() {
+        String result = smsService.sendSms("158****7941");
+        System.out.println(result);
+    }
+}
+```
+
+4) PPT 标题、架构图/流程图的结构、表格数据：
+画面 5: 标题为“3.6.4. 编写代码”，内容包含“配置RestTemplateConfig”。
+画面 14: 标题为“3.6.6. mock接口”，内容包含“地址：https://mock.boxuegu.com/project/164/interface/api/11011”，以及“请求参数”和“返回数据”表格。
+
+5) 无。
+

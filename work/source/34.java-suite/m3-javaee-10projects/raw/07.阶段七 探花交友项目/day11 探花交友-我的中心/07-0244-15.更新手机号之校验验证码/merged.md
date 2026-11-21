@@ -1,0 +1,223 @@
+# 15.更新手机号之校验验证码
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day11 探花交友-我的中心
+- 源文件：07.阶段七 探花交友项目\day11 探花交友-我的中心\15.更新手机号之校验验证码_【海量资源尽在 666java.com】.mp4
+- 时长 10分51秒（音频 651s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们来看一下我们的校验验证码就是对我们失误的验证码呢去做一个校验啊那么下面呢我们还是先来看一下我们的mock接口啊就是这个就是我们的校验啊验证码然后地址呢是这样的一个地址然后呢参数呢是有一个叫做验证码这样的一个参数啊然后呢我们是需要通过它传递的一个验证码跟我们在redis中所保存的验证码呢去做一个对比如果相等的话那就是
+[00:28] 验证码是正确的如果不相等难的就是不正确的然后呢我们数据的返回呢是会有一个这个就是json的一个数据返回啊然后呢去标识是否验证啊验证通过就是是否是匹配的那么接下来呢我们就来编写一下这个逻辑啊那么首先呢我们还是要先回到啊就是先回到我们的Controller啊这个里面来那我们来看一下那么
+[00:54] Controller中呢我们还是需要去重新再来写一个校验的一个方法那么就我们就直接来写吧public那么返回值呢就是一个response at tt呢我们显然呢是返回一个值对吧那我们就返回一个这个就是我们的一个map吧object好那么我们把这个方法名呢来拷贝一下就是做一个验证码的一个校验然后呢我们需要有
+[01:25] 两个参数对吧一个呢就是我们这个请求头里面的一个token那么另外一个呢就是我们的一个请求体啊请求体那么请求体呢使用requestbody去做一个获取然后呢我们去得到一个map死去来一个objectobject然后呢这个叫paramount好那么接下来呢我们就去这个位置啊去我们去那个去写一个注释啊
+[01:55] 写一个注释说明那么这个就是我们去校验我们的一个验证码这样的一个逻辑然后呢我们来看一下这个逻辑是怎么样去做一个编写那么我们拿到这个Param之后啊那么我们肯定是需要去获取到我们的这个值对吧所以说呢我们需要通过这个Param然后点get去拿到谁呢去拿到我们的一个这个就是code啊那么拿到它当然了这个其实我们
+[02:24] 可以直接把它是设置为什么呢String对吧这不错这样我们用起来就更方便一点那么这个其实就是我们的一个codecode等于它好然后呢我们接下来呢就去调用我们的这个叫做就是我们的这个应该是叫userservice然后呢去做一个教验啊那么需要传递这么几个参数那第一个参数呢就是code第二个参数呢就是我们的token
+[02:54] 好嘞好 这样的话呢我们期望它所返回的就是一个布尔值了布尔值那么布尔值等于它好 然后呢我们接下来呢就需要去分装我们的响应的一个结果了那我们来分装一下result等于ult等于new一个hcmap然后呢resultresult.putput一个谁呢
+[03:28] 就是这个参考我们的文档了啊就是下面的一个他一个教研的一个结果啊那么他呢就是我们这个布尔了好那么你可以看到他的一个类型呢就是布尔类型然后呢我们就可以去return了return一个responseresponse entity.ok然后呢把这个result呢就进去然后呢我们去做一个try catch的一个处理
+[03:55] 那么如果走到最下面呢那就是肯定是出错了那就响应500好嘞好那这样的话就我们这control了是不是就搞定了我们是不是还缺少一个叫一个路径post mapping那我们来拷问一下上面的这个地址然后呢把前面这个us给它去掉好嘞这样的话就OK了那么接下来呢我们就来编写我们的us Service中的这个教验的这个方法往后面走
+[04:24] 好那么来看一下这个教验这个方法怎么去做啊那么我们肯定是先要去拿到我们的这个验证码那么验证码我们存到哪里去了呢是不是存到我们release啊所以说呢我们需要去先把我们的releasetemplate是不是先注进来先注到我们这个里面来然后呢我们再去做一个获取那么我们的这个key啊这个key呢我们是不是写到这个位置来了当然我们最好是应该
+[04:54] 给他写到上面去对吧我们写一个public static final然后呢写一个street然后呢我们这个就叫radius然后呢key他的一个前缀key然后呢叫prefix然后呢他等于谁呢就等于上面的一个他这样的话呢我们就去直接引用就可以了不要再去写这个字不创了那么我们去把它这个地方还有地方再引用吗
+[05:24] 我们来搜一下就一个地方啊就在一个地方对吧那我们就直接去做这样的一个拼接就好了好那么我们设置为这是一个public那么其他地方是不是也可以去使用它了所以说呢我们就应该这么来玩拿到一个key然后呢去get操作那么在我们的这个位置啊然后呢我们可以看到那么这个呢我们就需要通过我们的这个sms
+[05:56] Service点通过这个类直接去点它然后呢去拿到一个mobile那么mobile呢就是我们的这个用户是吧拿到的那么所以说我们还是需要先通过我们的token呢去做一个查询然后呢这个user呢就可以点get一个mobile拿到一个拿到一个它然后呢我们去拿到一个value这个值啊那么接下来呢我们就需要去做一个
+[06:24] 判断了如果两个要是相等的话那我们肯定需要return true那我们就那么这样吧我们就下面给它return false然后在上面呢我们这个位置去做一个EQ的一个判断value和一个code那么如果这两个要是相等的话那么就是验证码正确对吧如果验证码正确呢我们就需要当然肯定是return true这个门
+[06:54] 这个没有任何的疑问对吧那么关键的在这个位置我们还是需要去它校验完成之后那我们就应该把这个验证码给它去干嘛呢delete删除掉所以说呢我们需要类似点这个ready是template然后呢通过一个delete去做一个删除把它删除掉这样的话呢我们就相当于这个验证码用过之后的这应该是失效了所以说呢我就应该把它就delete掉那么这个我们就不需要了
+[07:23] 那我们就直接去做一个删除然后呢去return这个true好嘞好那么这样的话呢我们就可以看到这个逻辑是不是也就OK了对吧好那么接下来呢我们就来测试一下把这个SSO呢再重启一下好那么接下来呢我们就来测试一下那么还是呢我通过这个手机号呢去做一个登录然后呢输入这个验证码
+[07:51] 然后呢进入到我们的这个主页然后呢我们就进入到我这个我的这个模块中然后呢进入到这个修改手机这个模块然后呢我们去输入获取这个验证码它是不是就获取成功了那么之前呢我们这个那么这个呢是刚刚我们是有断点那我们就重新来获取一下那我们重来一下就是点击这个
+[08:21] 获取验证码那么发送失败啊这个是由于我们呃刚刚呢这个就是发送的还没有去失效啊这样我们就在这个位置吧我们就来登录一次啊如果登录一次的话那么它肯定就已经失效了那么再次登录肯定就没了对吧呃然后呢我们接下来呢我们再来获取一下走获取啊获取了然后呢我们输入验证码123456
+[08:46] 然后呢我们把断点呢打到我们刚刚的这个校验腌制码的这个位置来然后呢点击下一步请求是不是就来了然后呢我们继续往下面去走然后呢来看一下这个效果啊拿到我们的123456然后呢去做一个校验啊那么我们来看一下拿到这个U的没有问题拿到这个K没有问题然后呢就获取这个值发现没有问题然后呢把它删除掉再往下面走
+[09:15] 走走走是不是逻辑是没有问题的但是呢我们现在这个它已经超时了那我们就重来一次啊重来修改一次然后呢把断点呢就去掉好那么我们去点击这个修改手机号然后呢输入先去获取然后呢我们输入验证码123随便我们先输一个789随便输错一个然后呢我们点击下一步它抵制我们这个验证码输入错误然后呢我们再输入456的时候它肯定正确然后就会走到这个下一步来啊
+[09:46] 所以说呢我们这个第二步我们的一个校验短信验证码是逻辑是不是也就OK了那我们来看一下我们的讲义啊讲义中呢应该跟我们写的稍微有一点点这个不同啊这个响应这块这块会有点问题啊这样我们来把它去调一下就是我们这个Controller啊那么是在这个位置对吧那我们把它拷贝一下然后呢贴到我们这个讲义中来那么正确的应该是这样去写啊
+[10:12] 然后我们用的Service中的一个编写我们刚刚是不是也处理了一些逻辑所以说我们就在这个位置我们就去把它拷贝过来先去查询然后我们这个里面也去做了一个判断如果是相等的话那么就retent to但是我们把这个验证码就要给它删除掉然后并且我们把这个就是它的一个ready is done key的一个前缀我们也抽离成一个它的一个
+[10:41] 全局的一个静态的这样的一个变量啊所以方便我们下地方呢直接去使用它OK好那么关于我们这个验证码的一个校验呢那我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示一个基于 Spring Boot 的手机验证码功能的前后端实现，包括接口定义、控制器逻辑、服务层处理、Redis 缓存和短信发送逻辑。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示了 Mocky 网站上定义的手机验证码接口，包含请求头 Authorization 和请求体参数 verificationCode，以及返回数据结构（verification: boolean）。
+画面 2: 展示了 UsersController.java 中的 sendVerificationCode 方法，用于发送验证码，接收 token 并调用 userService。
+画面 3: 展示了 UsersController.java 中的 checkVerificationCode 方法，用于校验验证码，接收 RequestBody 参数。
+画面 4: 展示了 checkVerificationCode 方法中获取参数的代码，使用 String param.get("verificationCode")。
+画面 5: 展示了 Map<String, Object> 类型的参数处理，调用 result.put("verification", bool)。
+画面 6: 展示了 checkVerificationCode 方法的完整逻辑，包括获取参数、调用 userService.checkVerificationCode、构建返回结果。
+画面 7: 展示了 SmsService.java 中的 sendCheckCode 方法，用于发送短信验证码，使用 RedisTemplate 检查验证码是否已发送。
+画面 8: 展示了 UserService.java 中的 sendVerificationCode 方法，通过 token 查询用户并调用 smsService.sendCheckCode。
+画面 9: 展示了 UserService.java 中的 checkVerificationCode 方法，通过 token 查询用户并校验 Redis 中的验证码。
+画面 10: 展示了手机端 App 的界面，用于演示验证码功能。
+画面 11: 展示了 Advanced REST Client 中发送 POST 请求，请求体为 {"phone": "18621359863", "verificationCode": "123456"}。
+画面 12: 展示了 UserService.java 中的 checkVerificationCode 方法，校验成功后删除 Redis 中的验证码。
+画面 13: 展示了 UsersController.java 中的 checkVerificationCode 方法，返回包含 verification 字段的响应。
+画面 14: 展示了 Typora 编辑器中的 day11 说明文档，内容为 UserService.java 中 checkVerificationCode 方法的注释和代码。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```java
+@PostMapping("phone/sendVerificationCode")
+public ResponseEntity<Void> sendVerificationCode(@RequestHeader("Authorization") String token){
+    try {
+        Boolean bool = this.usersService.sendVerificationCode(token);
+        if(bool){
+            return ResponseEntity.ok(null);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+}
+```
+
+画面 3:
+```java
+public ResponseEntityMap<String, Object> checkVerificationCode(@RequestBody Map<String, String> param, @RequestHeader("Authorization") String token) {
+```
+
+画面 4:
+```java
+String param.get("verificationCode");
+```
+
+画面 5:
+```java
+result.put("verification", bool);
+```
+
+画面 6:
+```java
+public ResponseEntityMap<String, Object> checkVerificationCode(@RequestBody Map<String, String> param, @RequestHeader("Authorization") String token) {
+    try {
+        String code = param.get("verificationCode");
+        Boolean bool = this.usersService.checkVerificationCode(code, token);
+        Map<String, Object> result = new HashMap<>();
+        result.put("verification", bool);
+        return ResponseEntity.ok(result);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+}
+```
+
+画面 7:
+```java
+private RedisTemplate<String, String> redisTemplate;
+
+public Map<String, Object> sendCheckCode(String mobile) {
+    Map<String, Object> result = new HashMap<>(initialCapacity: 2);
+    try {
+        String redisKey = "CHECK_CODE" + mobile;
+        String value = this.redisTemplate.opsForValue().get(redisKey);
+        if (StringUtils.isNotBlank(value)) {
+            result.put("msg", "上一次发送的验证码还未失效");
+            return result;
+        }
+        // 发送短信验证码
+        String code = "123456";
+        if (null == code) {
+            result.put("msg", "发送短信验证码失败");
+        }
+        result.put("code", 2);
+        return result;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return result;
+}
+```
+
+画面 8:
+```java
+@Autowired
+private SmsService smsService;
+@Autowired
+private UserService userService;
+@Autowired
+private RedisTemplate<String, String> redisTemplate;
+
+public Boolean sendVerificationCode(String token) {
+    User user = this.userService.queryUserByToken(token);
+    if (null == user) {
+        return false;
+    }
+    String mobile = user.getMobile();
+    Map<String, Object> result = this.smsService.sendCheckCode(mobile);
+    return ((Integer) result.get("code")).intValue() == 3;
+}
+
+public Boolean checkVerificationCode(String code, String token) {
+```
+
+画面 9:
+```java
+String redisKey = SmsService.REDIS_KEY_PREFIX + user.getMobile();
+String value = this.redisTemplate.opsForValue().get(redisKey);
+if (StringUtils.equals(value, code)) {
+    // 验证码正确
+    this.redisTemplate.delete(redisKey);
+    return true;
+}
+return false;
+```
+
+画面 11:
+```json
+{
+  "phone": "18621359863",
+  "verificationCode": "123456"
+}
+```
+
+画面 12:
+```java
+if (StringUtils.equals(value, code)) {
+    // 验证码正确
+    this.redisTemplate.delete(redisKey);
+    return true;
+}
+return false;
+```
+
+画面 13:
+```java
+public ResponseEntityMap<String, Object> checkVerificationCode(@RequestBody Map<String, String> param, @RequestHeader("Authorization") String token) {
+    try {
+        String code = param.get("verificationCode");
+        Boolean bool = this.usersService.checkVerificationCode(code, token);
+        Map<String, Object> result = new HashMap<>();
+        result.put("verification", bool);
+        return ResponseEntity.ok(result);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+}
+```
+
+画面 14:
+```java
+public Boolean checkVerificationCode(String code, String token) {
+    // 查询用户的手机号
+    User user = this.userService.queryUserByToken(token);
+    if (null == user) {
+        return false;
+    }
+    String redisKey = SmsService.REDIS_KEY_PREFIX + user.getMobile();
+    String value = this.redisTemplate.opsForValue().get(redisKey);
+    if (StringUtils.equals(value, code)) {
+        // 验证码正确
+        this.redisTemplate.delete(redisKey);
+        return true;
+    }
+    return false;
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

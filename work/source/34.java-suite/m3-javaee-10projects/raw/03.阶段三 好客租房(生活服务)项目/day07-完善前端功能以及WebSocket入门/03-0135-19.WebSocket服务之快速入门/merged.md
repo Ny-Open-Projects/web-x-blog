@@ -1,0 +1,174 @@
+# 19.WebSocket服务之快速入门
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day07-完善前端功能以及WebSocket入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day07-完善前端功能以及WebSocket入门\19.WebSocket服务之快速入门【海量资源尽在 ubkz.com】.mp4
+- 时长 17分36秒（音频 1056s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好,那么下面呢,我们对WebSocket呢,我做一个快速的一个入门,我们来创建一下这个工程去做一个学习那么我们在这个位置吧,去点击一下new一个projector,然后呢,去通过这个manage去做一个构建,然后呢下一步,好,然后gobid呢,就是cn.itcast,然后呢点什么呢,叫WebSocket
+[00:26] 然后呢artifact id呢就itcast-web-websocketok把这个靠一下然后点击下一步然后呢去拷贝过来点击finish完成然后呢new window然后呢在这个里面去做一个测试啊那么现在呢我们的工程呢就已经创建好了那么创建好之后呢我们把一些必要的一些依赖包的导入进来那么首先呢我们需要导入的是
+[00:55] 这个依赖来看一下什么依赖呢它是java x这个包下面的java e的API然后版本是c 0ok那么在这个里面它对WebSocket做了支持所以说我们要去使用它ok那么要注意的是我们我现在创建这个工程它的依赖并不会马上的生效为什么呢原因是我们没有去给它去enable一个auto import我们把它一个去
+[01:23] 点一下他那么这样的话他就可以自动去把这个依赖加入到我们的工程里面来了你可以看一下在这是不是有一些有个这个依赖了哎ok好那么我们还需要什么呢还需要去指定他的一些这个插件啊那么我们这样来写吧然后在这个里面呢来一个build然后呢来一个plugins然后呢我们写这样的一个pluginplugin然后把它来靠一下
+[01:57] 好 那么这个插件这个是我们那个编译这个插件我们把它设置为是1.8然后下面我们需要去引入一个Tomcat这个插件因为我们一会要去通过Tomcat是不是来启动我们这个服务对吧所以说我们要去使用一下这个Tomcat这个插件那么在这我们使用的是Tomcat7这个插件ok好 然后这个相关的依赖我们就搞定了那么接下来我们就要去写这个代码
+[02:23] 那么写代码之前我们需要有必要的先把WebSocket的几个相关的一些注解给大家简单来说一下一会我们会使用到这么几个注解那么首先第一个是这个叫server endpoint就是说我们去在类上面去
+[02:39] 加一个这样的注解就会声明这是一个WebSocket的服务OK后面这个是他的一个请求的地址然后后面的这个大括号UID是我们可以根据这种方式去传递参数那个大括号的这个是他的一个站位服务OK还有一个注解是on open这个是我们的客户端与我们的服务端去建立连接的时候去调会调用这个方法
+[03:06] 叫这个方法那么我们在这个里面可以通过这个pass param来获取我们前面这个位置所传入的这个参数ok还有就是叫on all on close那么这个是在我们的连接关闭的时候去做一个执行还有个on message就是我们的客户端
+[03:25] 向我们的服务端来发送这个消息或者发送数据的时候我们会执行这个方法OK当然了我们怎么样去向客户端发数据呢是通过这种方式通过一个session它的一个绘画绘画对象然后通过拿到一个basic的一个remote然后send text去做一个发送就可以去发送到我们的客户端了好那么下面我们就来写这样的一个demo的一个案例然后我们来使用这么几个注解我们来用一下
+[03:55] 那么先体会一下那么在这个里面我们来创建一个包就叫cn.itcast然后WebSocket好那么在这个下面我们来创建一个类创建一个类这个类我们就叫什么就叫来看一下就叫mywebsocket比较简单的一个名字叫mywebsocket然后我们前面是不是也讲过这么几个注解
+[04:23] 那咱们一个一个来看一下那么首先呢我们需要给他添加的是这个组件就是叫server-and-port他呢是指定我这是一个web-socket的服务哎把这个包的这个也相关这个包导入进来那么在这个位置呢你可以传递这个参数也可以不传递啊也可以不传递那么我就传递吧当然如果不传递你去掉就好了啊去掉就好了那么我就传递他吧那边因为我们可以就顺手去演示一下这个传递参数啊
+[04:52] 然后呢下面呢我们就要去添加它的一些注解首先第一个注解是on什么呢openon open是在建立连接的时候我们要去执行这个方法那么我这个方法名就叫on open那么on open的时候呢它呢会传递啊传递参数给我们什么参数呢就session这个参数啊session这个参数那么把它拷过来那么这个session呢就是我们的一个绘画
+[05:18] 或者说是我们的一个这个通道OK那么还有什么参数呢就是如果你在这个位置有传递了这个我们的UID那么你就在这个位置去加我们的参数如果没有传递那就不需要去做一个添加了那么OK好的这样吧我就先不要这个UID了然后呢我们也不加这个参数一会我们在写完之后呢我们再来添加一个参数再去做一个测试这个大家更容易去理解一些那么在这个位置呢我就可以去打印一句话对吧打印一句话叫什么呢
+[05:48] 就是这个叫WebSocket已经连接已经连接OK好那么打印这句话那么我可以是不是把这个session这个也打印出来对吧把它这个对象打印出来然后大家可以想一下这个是我的什么呢你看这个是不是我的一个客户端这个是我的一个服务端那么客户端是不是向服务端是不是先去做一个握手就是说我需要去建立这个连接了
+[06:18] 那么我可以建立连接之后呢那么我服务端是不是建立连接这个比如说啊假设这个就是他们之间的一个这个通道啊这个通道那么我现在已经建立这个连接了那么建立连接的时候那么服务端是不是应该给他一个反馈啊对不对比如说某某某什么欢迎登录系统对吧欢迎访问这个系统啊等等等等就这样的一个反馈对吧是不是我们应该应该给谁呢是不是给我们的一个给这个客户端啊
+[06:48] 客户端一个响应对吧客户端这个响应就是说欢迎你欢迎登录欢迎登录系统OK或者说欢迎不是登录或者连接这样的话大家不要误以为说我要去真的做登录这个意思好那么怎么样去向客户端给他去发消息呢就通过这个sessionsession.get什么basic remote然后去做一个发送
+[07:19] 然后发送什么呢就是欢迎您欢迎登录系统OK好那么这样的话我们就会向客户端是不是发一个这样的一个消息了那么在这个位置有一个异常那么我们把这个异常的抛出抛到这个里面来OK好那么这样的话我们第一个这个就搞定了那么下面的还有一个呢是on什么的on这个on oon什么呢close吧close而这个方法呢是在
+[07:49] 我们关闭的时候去做一个执行叫uncloseok那么关闭那么我们就来写一句话吧这个就是叫已经关闭那么在这个里面呢也可以让他去传递我们这个session对象来看一下这个是不是uncloseunclose我们来看一看这个能不能拿到这个对象吧ok然后呢已经关闭然后呢下面呢我们
+[08:21] 还有一个呢是这个on那个message这个就是客户端向我们去发消息那我们来看一下这个应该怎么去写有一个and on一个message然后呢我们去把这个拷过来有这样的一个方法on这个message这个呢就是我们的客户端向我们的服务端去发这个消息然后呢这个send呢send呢这个message呢就是发消息的内容那么我们打一句话
+[08:53] 就是叫什么呢收到客户端发来的消息然后呢是什么呢加一个message好那么当我们发到消息之后当我们收到消息之后呢我们可以给什么呢给这个客户端客户端一个反馈对吧反馈比如说我们就来一个什么呢session.getBasicRemote.sendText叫什么呢消息已收到
+[09:27] 这样的话我们是不是就实现了这样的一个效果对吧一旦我们收到消息给他做一个反馈那么当然了我们可以模拟一个我们服务端收到的就是经过一些处理然后给他一个这个反馈那么我们可以做一个stray的是吧比如说我们停顿200毫秒停顿这个200毫秒然后我们再去继续往下面去走给他加一个try cut吧OK好那这样的话我们就实现这样的一个效果
+[09:55] 这个代码相对是比较简单代码相信大家都能够理解也能够看懂OK好那么我们来看一下基本上是一样的那么下面我们就需要去做一个测试当然测试的时候我们需要先把我们Tomcat跑起来那么Tomcat怎么跑我们来看一下刚刚我们在POM文件中是不是我们去配置了一个Tomcat的插件然后它的端口是808然后pass是杠所以我们就可以直接来启动它了那么找到我们这个plugins找到
+[10:24] 没有Tomcat吗没有Tomcat那就刷一下好Tomcat来了然后呢我们找到Tomcat7冒后这个Raw然后呢双击然后呢他就会去启动一个Tomcat那么启动Tomcat呢就可以去访问啊就可以去访问我们的这个服务了但是呢会发现有点问题啊就是说在这个位他说没有跳过一个飞蛙的一个这样的工程就是他发现我们的工程啊他不是一个外部工程
+[10:51] 那么应该怎么玩呢在这个里面缺一个配置缺一个就是我们的一个package配置它应该是一个挖包的一个形式然后我们再来启动它那么这样的话我们的一个Tomcat就会跑起来了那么肯定有同学会有疑问老师我们在这个位置就写这样的一个代码对吧就写这样的一个诸解那么Tomcat它就能够识别到这是一个web服务吗不需要做额外的一些配置吗是不需要的
+[11:19] 直接你写一个他就可以了写给他他就会自动去做一个识别那么下面呢我们就需要去对他做一个测试对他做一个测试那么测试呢我们就需要通过我们的WebSocket的客户端的工具去做一个测试那么我们可以通过这个Chrome插件的一种方式或者说我们通过一个在线的工具去做一个测试这两个都可以我分别的给大家来演示一下那么首先第一种呢是我们可以通过一个客户端的工具比如像这个客户端
+[11:48] 那么这个客户端的大家可以去到我们的谷歌这个商店去做一个搜索能够找到这样的一个客户端的工具ok然后呢我们在这个位置呢有一个url那么是不是就要去输入我们的一个地址那么要注意的是我们的客户端与我们的服务端进行通信的时候他所采用的一个协议呢叫ws注意ws是不是就是WebSocket的这个意思啊不是那个stp冒号刷鞋杠而是ws冒号刷鞋杠
+[12:16] 然后后面这个地址怎么填它就填我们的服务器的地址是不是127.0.0.1冒号多少是不是刚刚我们可以看到我们的端口所配置的是8082所以在这个位置我们就给它写一个8082然后下面是什么我们就要去找到我们的 mywebsocket是不是就是一个WebSocket对吧那么把它
+[12:43] 丢过来然后我们点击这个open那么这个时候客户端就需要跟我们的服务端建立一个连接然后我们走OK这样的话我们可以再看到在这个位置是不是有一个状态叫一个open的就是已经建立这个连接了那么建立连接之后我们可以看到在下面这个位置是不是就是服务端向我们客户端会发来一个消息说欢迎登录系统我们来看一下我们的控制台有没有去打印一句话是不是WebSocket已经建立建立连接已经连接
+[13:12] 那么OK是不是已经建立这两个连接了好那么如果我点击这个close的话是不是就把关闭掉了对吧连接已经关闭那么可以看到在这个位置是不是也能够去关闭我们这个WebSocket把这个连接也关闭掉了好嘞那么我们再次打开把它清空掉把这个我们也清空掉然后我们再次打开走打开我们的这个控制台然后我是不是可以向我的服务端是不是发消息了比如说
+[13:42] 我发一个你好然后我去发送点击这个send去发送那么发送可以看到注意这个橙色的字体就代表着我发出去的消息然后黑色这个代表的是服务端给我反馈回的消息那么是不是我一发送一个你好那么服务端是不是就收到客户端发来的消息了你好然后服务端是不是停顿了200毫秒向我们的客户端是不是发送一个消息就是消息已收到是不是我可以看到消息已收到
+[14:11] OK这就是一个简单一个WebSocket这样的一个实现然后还可以通过我们的一个这个在线的一个工具在线的一个工具就是这个工具其实这个在线的工具还是比较好用的个人感觉是比前面的工具要好用一些所以比较推荐大家使用这个工具你也不用去安装这个插件了OK那我把这个地址的call过来那么往这一call那么我们去点函式这样call过来之后
+[14:40] 点击这个开启一个连接那么这个时候呢会发现我们已经连接已经建立连接了然后在右侧这个位置呢我们可以看到是不是显示的说欢迎登录系统然后呢我们在这个位置呢就可以去发消息比如说发你好然后点击发送走消息就收到那么我们在这个位置啊它还有一个功能呢就是可以一直做一个这个循环的一个发送啊就是我比如说我发送内容就是你好
+[15:09] 或者是发一个OK吧然后我们点击这个开始发送你可以看到他每一秒钟前面有一个1每一秒钟都会向我们的服务器是不是去发消息然后服务器再给他个响应说已收到OK消息收到好那么停止发送OK好就是这样的一个演示好那么接下来我们来测试一下就是刚刚我们所说的如果说如果说我们是需要有个参数的话那么应该怎么做是不是在后面这个位置
+[15:38] 去更一个什么呢UID比如说传递一个用户的ID然后呢我们在这个里面呢就可以去拿到他的一个UID那么UID呢我们通过一个叫做叫pass啊pyram然后呢指定他的名字指定他的一个value吧value名字等于什么呢等于这个UID然后呢我们去拿到他stream吧UID好那么拿到这个UID之后
+[16:05] 那么我们是不是就可以把它去显示出来比如说谁某某某对吧加一个什么的你好你好然后欢迎登录系统是不是我们可以写这样的一句话好那么然后呢我们再次把这个服务器呢启动起来我们来测试一下带有这个参数的这个连接那么我们在这个位置显然是已经有一个参数了所以你如果去依然是这样去开启连接的话那肯定是开启不了的对吧
+[16:37] 能开启吗我们来看一下那么这个是开启不了你看是不是开启不了开启不了发生错误发生错误了开启不了那么就需要在后面我们去更一个这个ID比如说我们更了一个1然后点击这个开启连接走现在我们就开启连接了然后你看服务端是不是给我们返回回的消息就是1你好欢迎登录系统比如说我在这个位置我写一个叫张三走
+[17:05] 那么是不是他就会反馈消息说哎张三您好欢迎登录系统OK这个呢就是关于一个参数的一个演示啊OK好那么我们这个呃基本的一个服务端的这样的一个演示或者说一个代码的一个编写呢我们就讲到这里那么主要的就是这么几个注解的一个使用啊那么相对是比较容易的一种啊这样的一个实现啊
+[17:29] OK好那么关于这个快速的一个入门我们服务端这一块的一个代码的编写就讲到这
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 Java WebSocket API 创建一个简单的 WebSocket 服务并进行测试。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示 PDF 文档中“6.4.1. 创建itcast-WebSocket工程”章节，其中包含 pom.xml 文件的开头部分，显示了 Maven 项目的基本配置。
+画面 2: 在 IntelliJ IDEA 中展示 pom.xml 文件，高亮显示了 <dependency> 标签，其中定义了 <groupId>javaee</groupId> 和 <artifactId>javaee-api</artifactId>。
+画面 3: 展示 PDF 文档中关于 Tomcat 配置的 Maven 插件部分，包含 <plugin> 标签内配置的 <configuration>。
+画面 4: 展示 PDF 文档中“6.4.2. WebSocket的相关注解说明”章节，列出了 @ServerEndpoint、@OnOpen、@OnClose、@OnMessage 等注解的用法说明。
+画面 5: 在 IntelliJ IDEA 中展示 MyWebSocket.java 文件，高亮显示了 @ServerEndpoint 注解，并在下方显示了 Session 类的自动补全建议。
+画面 6: 在 IntelliJ IDEA 中展示 MyWebSocket.java 文件，编写了 onOpen 方法，其中包含 System.out.println 和 session.getBasicRemote().sendText 方法。
+画面 7: 在 IntelliJ IDEA 中展示 MyWebSocket.java 文件，光标位于 onMessage 方法的定义处，显示了自动补全的 Session 类相关方法。
+画面 8: 在 IntelliJ IDEA 中展示 MyWebSocket.java 文件，完整显示了 onOpen、onClose、onMessage 和 onError 方法的代码。
+画面 9: 在 IntelliJ IDEA 中展示 pom.xml 文件，高亮显示了 <build> 标签内的 <plugins> 配置，其中包含 tomcat7-maven-plugin 的配置。
+画面 10: 展示 PDF 文档中“6.4.4. 测试”章节，说明可以直接启动 Tomcat 进行测试，并提供了 Simple WebSocket Client 的在线工具链接。
+画面 11: 展示 Simple WebSocket Client 浏览器插件界面，URL 设置为 ws://127.0.0.1:8082/WebSocket，状态为 CLOSED，准备连接。
+画面 12: 展示 Simple WebSocket Client 浏览器插件界面，URL 设置为 ws://127.0.0.1:8082/WebSocket，状态为 OPENED，已连接成功。
+画面 13: 展示在线 WebSocket 测试工具 easyswoole 的界面，显示了服务器配置和消息记录，其中包含“CLOSED -> 1006 CLOSE_NORMAL”的状态信息。
+画面 14: 展示 PDF 文档中“6.4.1. 创建itcast-WebSocket工程”章节，再次显示了 pom.xml 文件的开头部分。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+```
+
+画面 2:
+```xml
+<dependency>
+    <groupId>javaee</groupId>
+    <artifactId>javaee-api</artifactId>
+    <version>7.0</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+画面 3:
+```xml
+<configuration>
+    <target>1.8</target>
+    <encoding>UTF-8</encoding>
+</configuration>
+```
+
+画面 4:
+```text
+@ServerEndpoint("/WebSocket/{uid}")
+@OnOpen
+public void onOpen(Session session, @PathParam("uid") String uid) throws IOException {
+}
+@OnClose
+public void onClose() {
+}
+@OnMessage
+public void onMessage(String message, Session session) throws IOException {
+}
+```
+
+画面 5:
+```java
+package cn.itcast.WebSocket;
+import javax.WebSocket.OnOpen;
+import javax.WebSocket.server.ServerEndpoint;
+@ServerEndpoint("/WebSocket/{uid}")
+public class MyWebSocket {
+    @OnOpen
+    public void onOpen(Session session) {
+    }
+}
+```
+
+画面 6:
+```java
+@OnOpen
+public void onOpen(Session session) throws IOException {
+    System.out.println("WebSocket已经连接" + session);
+    session.getBasicRemote().sendText("欢迎登陆系统");
+}
+```
+
+画面 7:
+```java
+public void onMessage(String message, Session session) throws IOException {
+    System.out.println("接收到消息：" + message);
+    session.getBasicRemote().sendText("消息已收到");
+}
+```
+
+画面 8:
+```java
+public void onError(Session session, Throwable error) {
+    error.printStackTrace();
+}
+```
+
+画面 9:
+```xml
+<plugin>
+    <groupId>org.apache.Tomcat.maven</groupId>
+    <artifactId>tomcat7-maven-plugin</artifactId>
+    <version>2.2.2</version>
+    <configuration>
+        <port>8082</port>
+        <path>/</path>
+    </configuration>
+</plugin>
+```
+
+画面 10:
+```text
+https://chrome.google.com/webstore/detail/simple-WebSocket-client/pdflhobingboilbdejvdjgjhcodoov
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 4: PPT 标题为“6.4.2. WebSocket的相关注解说明”，内容为对 @ServerEndpoint、@OnOpen、@OnClose、@OnMessage 等注解的说明。
+画面 10: PPT 标题为“6.4.4. 测试”，内容为测试方法说明和在线工具链接。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

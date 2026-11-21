@@ -1,0 +1,192 @@
+# 22-社保管理：数据归档
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day14 微服务网关与社保模块开发
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day14 微服务网关与社保模块开发\22-社保管理：数据归档_【海量资源尽在 ubkz.com】.mp4
+- 时长 18分2秒（音频 1083s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 好了现在呢我们已经查询出了这个7月份的这个报表那这个报表我们设置好了之后接下来呢我们就可以对当前这个月份的报表呢进行归档那归档其实说的简单一点就是把我们刚才查询的这个记录啊给它放到对应的这个归档历史以及对应的归档明细这个表里面好了那接着我们来看一下如何去做回到这边这边底下有一个按钮我们打开F12来看一下它发送的请求
+[00:30] 那我一点归档之后他说了你确定要归档吗那这边呢说了如果说之前7月份报表你归档过他会把之前的内容全部进行覆盖就这么一个含义那接下来呢我们点击确定好了你会发现他发送的请求哎到了我们的社保模块黑锤好了月份后面是我们的一个归档的这么一个路径上好了那对于我们来说Ctrl C回到我们的Ctrl代码里
+[00:58] 好了那接下来我们就是归档当月数据归档数据归档好了同样的我们在这边呢去配置一个对应的请求Ctrl C这边拿过来Ctrl V好了那我们请求的是History各位来看这玩意儿其实就是我们一个动态的参数OK来进行替换那接下来我们的请求方法是什么呢就是一个Pose的请求过来好了那接下来那在我这个数据当中咱们只有
+[01:38] 一项其实就是这个ear mouse那后面这个什么什么type对我们来说就没有了好了那这样一来我当前的这个方法呢就已经定义出来了那这边呢归档成功我们并不需要任何的返回其实就是我们数据库内部的一个操作而已那我们要做数据归档里面可能设计的表呢有多个表所以我们把它全部放到Service层哎咱们来做那我们这边就可以直接调用Service点就叫做数据归档
+[02:07] 那注意我们数据归档呢往里面存的值呢第一个传递过来的参数第一个就是我们的年份年月第二个存的就是我们的company id那Service层呢少方法我们就在Service层当中添加一个方法ok这个就是我们的社保数据归档那对于这个社保数据归档我们刚才做过一个小小的说明其实就是把我们刚才查出来这个列表是不是把它分门别类的
+[02:39] 存到我们的数据库当中是不是就可以了所以在这边呢我们要做的事情呢没有各位想象的那么难那么咱们要做的事情首先呢第一个事情就是查询我们的归档归档的这个明细的数据
+[02:57] 好了咱们查询那查询出来之后接下来咱们要归档的又还有一个历史表是不是还有一个明细表他们两个是一个一对多关系所以我们还有一个就是归档的一个主表的一个数据那对于这个归档的一个主表数据我们也可以做一个查询就是查询是否已经查询当月是否是否已经归档咱们就查询一下这个归档数据是否有
+[03:30] 那这边呢就是第三个那这边就是第三个就是如果存在已归档数据我们其实就是做一个小小的更新处理就是把它覆盖就可以了那接着第四个就是不存在已归档的这个已归档的数据那么直接就是保存
+[03:56] 就可以了没错吧好那接下来呢咱们就开始把这个代码呢一个一个给它完善出来查询归档的明细数据很简单我们之前玩过一个就是get这个reportsget reports好了那接下来把我们的年月传进去接下来把我们的企业ID传进去分号这样一来得到的是我们的归档的明细数据details那接下来我们要查询一下这个数据呢是否已经归过档了
+[04:31] 那这个查询怎么办呢其实也不难我们之前这写了一个查询归档历史类似点Find里面说过了需要两个参数一个是yearMouse一个是我们的commonID其实就是用这些方法给它拼凑出来好那这边我们可以一起来试一下if这玩意儿呢就是等一等一闹如果这玩意儿等一闹呢我们就需要自己new一个new一个拿过来
+[05:11] 好了这边就是换一个位置吧OK好了呢这个new出来之后注意因为我们要往里存的时候呢可能还要设计一下它设计到的这个年份还有月份所以我们这边就可以不存在的话打点setset一下我们的comedy id打点setset一下我们的就是year month就是我们的年月
+[05:40] 因为这些都是一些最基本的数据所以需要给它设置上那接着是不是再去完成我们的保存箱的这些操作啊OK好那接下来咱就开始进行一个保存当然我们要做保存的话这个还有一个需要各位注意的地方就是我们需要设置一下它的ID啊set ID好了ID就是ID worker好了这个ID worker呢现在是没有注入进来啊在上边at autovirt private
+[06:13] ID workerOK ID worker因为保存嘛咱们需要自己去设置下ID点next idOK那好了接着我们底下就可以把这个玩意给它保存出来了deal.save好那这边我说一下就是我们这个现在保存的是这个归档的这个对象那有的朋友就说了上边啊你这边呢查出来再保存这有什么目的呢会有什么意义呢是这样的
+[06:50] 咱们可以看一下这张表主表这个表里面有ID有company ID有year还有credit time那注意后面是不是还有三个参数啊这三个参数是当前这个公司在六月份企业付出的一些总的社保金额员工付出的总的社保金额以及总的社保金额那所以你在进行重新归档的时候这三个参数是不是可能会发生变化呀
+[07:19] 没错吧所以我想说我们这边呢在进行保存或者覆盖之前我们需要对数据进行一下计算在数据进行计算我就写到上面这个部分就是计算当月企业与员工支出的支出的支出的所有社保社保金额好那接下来呢咱们来看一下对于这个呢
+[07:54] 计算应该怎么算其实这个计算起来呢很简单我们先去定义几个参数啊big sampleenter就是entr那比如说我就叫money等于new一个big sample这个是商业大数据的类型主要是废了房子我们这边有小数出错的一些问题啊personpersonsonok两个
+[08:21] 那接下来呢我们就可以怎么办呢就是说啊所有的这些社保的这些参数呢全部在这个社保明细里面有因为刚才我们查过大家都知道那我们就可以在这边呢做一个for循环循环上边的这个list集合好了接下来呢企业部分就等于企业部分.add.get注意啊这几个单词呢比较拗口啊第一个pro
+[09:00] 开头了presentpresentpresentfoundenterprise这个代表的是我们企业部分这个代表的是我们支出的这个企业所支出的这个公积金部分那接下来呢这边呢除了这个公积金部分我们还要加上企业所支出的这个社保的这个部分点加上点add好了点get我们来找一下这个
+[09:41] 东西太多了在其实在我们这边都有啊刚才是一个公积金的还应该有一个企业的社保的一个总金额啊就差哎这个是社保的总金额的部分啊那这样一来企业的总金我们设置好那接下来还有一个就是我们的个人部分那个人部分呢同样也是这个意思啊基本上都差不多了来找一下这边有个人同样的这边有个人
+[10:29] 各位发现这个代码呢你说难嘛没那么难但是啊注意的事情还比较多那我们这边把这个总金额全部都设置好了之后呢底下我们这边就可以去设置一下我们当前这个历史里面的所设计到金额点set enterprise payment企业设计的总金额拿过来好了再来点set员工设计的总金额拿过来好了再来点
+[11:04] set有一个total是他们两个的总金额相加点add这个没办法用big example要想做相加的话就得是对象点add把另一个对象加进去好了那这样一来呢咱们现在就已经完成了我们这个对象的一个保存啊这个对象保存咱们搞定了之后接下来呢继续往下看我们现在只是保存了当前的主表数据那还有一个明细宝数据是不是我们也需要给它保存起来
+[11:39] 那这个明细表数据保存呢其实就有一点点麻烦了那怎么保存呢咱们可以这样同样也是再去循环一下当前的这个列表好了这回就不需要再去额外记录了我们直接进行保存即可好了这边我们在保存的时候呢同样要设置它的ID.setIDIDworker.next
+[12:11] 好了那除了这个ID之外呢别忘了他们两个之间有某种关系是一个一对多关系所以这里面要保存一个对于我们归档历史的一个外建啊就是要set一下归档历史的这个ID这个ID在哪呢就是我们当前保存之后的这个ID打点get ID拿过来那接着我们可以调用这个的do点save一个一个的保存进去就可以了好了这样一来呢我们这个归档的这个代码呢咱就已经都写好了
+[12:44] 但是这个归档代码呢其实还是有点不太好的地方比如说这边保存为了防止它出现问题我们可以做一个判断就是这玩意儿这其实可以做一个小小的判断就是说这玩意儿如果等于等于None好了来试一下如果等于等于None的话咱们可以给它来一个就是可以设置为0啊就是Nu一个B一个Desemple来一个0否则就是还是这一个这一大段这个比较好
+[13:26] 比较多啊好了这边呢我们可以来一边量第一个de-sample比如说呢就是T1等于好了接着有T2T3T4主要是为了防止它这边出现空指针的这个异常情况这个没有办法就是一个一个来进行替换了四个都需要进行设置主要是为了防止出现空指针好那接下来上边这个就是T1好了这个就是T2
+[14:14] 好了这个就是T3好了这个就是T4所以这是一个三元运算符就判断一下如果你查出来折纳给它来一个0这边呢如果不是纳就是直接这么用就行了好了这样一来我们这个方法就已经写好了我们重新启动一下耐心等待看一下我们这个最后一个方法究竟写的怎么样OK好了这边呢已经启动成功了回到我们的页面部分来刷新一把504没关系是因为我们这个做网关还没有反应过来耐心等待一下
+[14:50] 好了那接着回到我们的数据库表来刷新那注意在我们的数据库表里面呢现在有这么四条记录啊注意这边其实这个19年7月份我已经设置过了我把它删掉现在只剩下三条了那接着我们一起来归档一下试一下走这边报了一个错误就是说那个这个create time不能为none来这个错误呢其实这样的就是我们这个数据库设置啊
+[15:28] 来找到我们这个数据库那各位来看这个数据库表里面都有这个GridTime那我这个GridTime呢其实按表设计的时候呢设计成了不能为空来改变表GridTime你看非空必须的好了那接着我把这个先设置过来保证一下我们代码没错啊那接着还有一个表呢就是我们这边Detail表Detail表来看一下有没有这个同样的设置改变表
+[16:00] 这个没有那接着我们再来试一下归档7月份走究竟成功没成功我也不太清楚看一下日志好了这个应该是已经成功了那回到我们的数据库来看一下刚才呢这边呢有没记错的话应该有三条记录现在这个ID不一致啊好了这个什么原因呢回到我们这个代码部分来查一下可能是出现在这个位置
+[16:50] 因为它保存了多次应该就是没有查询出来数据啊那么来看一下这个方法第一个传递是COMMUNYID第二个传递的是ERMOS这两个参数应该是传错了好了来找到这个地方呢咱们把它改正过来OK再重启好了我们现在呢已经把TOMCAT启动成功了回到我们这边再来试一下那在试之前呢数据库里面的这个数据啊先给它删掉
+[17:30] OK接着再试一下归档归到我们数据库这边应该是做网关没有反应过来来归档好了应该是归档成功了回到我们的这边数据库来试一下走有一条记录没问题好了接下来再来试一下再归档一次来回到数据库刷新这样一来就没有问题了没错吧OK
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 iHRM 人事管理系统中，通过后端 Java 代码实现社保报表的生成与数据归档功能，并展示对应的数据库操作。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示 iHRM 系统的社保报表页面，显示员工社保信息，包含“归档7月份报表”和“新增报表”按钮。
+画面 2: 展示 IntelliJ IDEA 中 SocialSecurityController.java 文件，其中定义了 @RequestMapping 注解的 getReports 方法，用于获取社保报表数据。
+画面 3: 展示 ArchiveService.java 文件，其中 getReports 方法的定义，用于获取报表数据。
+画面 4: 展示 ArchiveService.java 文件，其中 archive 方法的定义，用于处理社保数据归档逻辑。
+画面 5: 展示 ArchiveService.java 文件，其中 archive 方法的代码，正在使用 BigDecimal 类型的变量 enterMoney 和 personMoney 来计算总金额。
+画面 6: 展示 ArchiveService.java 文件，其中 archive 方法的代码，正在使用 BigDecimal 类型的变量 enterMoney 和 personMoney 来计算总金额。
+画面 7: 展示 ArchiveService.java 文件，其中 archive 方法的代码，正在使用 BigDecimal 类型的变量 enterMoney 和 personMoney 来计算总金额。
+画面 8: 展示 ArchiveService.java 文件，其中 archive 方法的代码，正在使用 BigDecimal 类型的变量 enterMoney 和 personMoney 来计算总金额。
+画面 9: 展示 ArchiveService.java 文件，其中 archive 方法的代码，正在使用 BigDecimal 类型的变量 enterMoney 和 personMoney 来计算总金额。
+画面 10: 展示 iHRM 系统的社保报表页面，显示一个空的报表，准备进行新增或归档操作。
+画面 11: 展示 SQLyog 数据库管理工具，显示 ss_archive 表的数据，包含 company_id、years_months、creation_time、enterprise_payment、personal_payment、total 字段。
+画面 12: 展示 IntelliJ IDEA 中的运行面板，显示 SocialSecurityApplication 已成功启动。
+画面 13: 展示 SQLyog 数据库管理工具，显示 ss_archive 表的数据，其中一条记录的 years_months 字段值为 '201907'。
+画面 14: 展示 SQLyog 数据库管理工具，显示 ss_archive 表的数据，其中一条记录的 years_months 字段值为 '201907'。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```java
+@RequestMapping(value = "/histories/{yearMonth}",method = RequestMethod.GET)
+public Result HistoryDetail(@PathVariable String yearMonth,int optype) throws Exception {
+    List<ArchiveDetail> list = new ArrayList<>();
+    if(optype == 1) {
+        // 深山白，查询当月的社保数据
+        list = archiveService.getReports(yearMonth,companyId);
+    }
+    return new Result(ResultCode.SUCCESS,list);
+}
+```
+
+画面 3:
+```java
+public void archive(String yearMonth, String companyId) {
+    // 1.查询当月的明细数据
+    List<ArchiveDetail> archiveDetails = getReports(yearMonth, companyId);
+    // 2.查询当月是否已经归档
+    Archive archive = this.findArchive(yearMonth, companyId);
+    // 3.不存在已归档的，保存
+    if(archive == null) {
+        archive = new Archive();
+        archive.setCompanyId(companyId);
+        archive.setYearsMonth(yearMonth);
+        archive.setIdWorker.nextId();
+        archive.setEnterprisePayment(enterMoney);
+        archive.setPersonalPayment(personMoney);
+        archiveDao.save(archive);
+        for (ArchiveDetail archiveDetail : archiveDetails) {
+            archiveDetail.setArchiveId(archive.getId());
+            archiveDetail.setArchive(archive);
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal());
+            archiveDetail.setCreateTime(new Date());
+            archiveDetail.setUpdateTime(new Date());
+            archiveDetail.setUserId(userSocialSecurity);
+            archiveDetail.setSocialSecurityEnterprise(archiveDetail.getSocialSecurityEnterprise());
+            archiveDetail.setSocialSecurityIndividual(archiveDetail.getSocialSecurityIndividual());
+            archiveDetail.setProventFundEnterprise(archiveDetail.getProventFundEnterprise());
+            archiveDetail.setProventFundIndividual(archiveDetail.getProventFundIndividual());
+            archiveDetail.setTotal(archiveDetail.getTotal
+

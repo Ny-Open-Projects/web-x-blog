@@ -1,0 +1,200 @@
+# 7.Freemarker基础-模板引擎介绍
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day08 C扫B支付 生成门店二维码
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day08 C扫B支付 生成门店二维码\7.Freemarker基础-模板引擎介绍【海量资源尽在 666java.com】.mp4
+- 时长 9分10秒（音频 550s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢我们进入支付入口的开发那么在前边呢我们生成了二维码当用户一扫二维码呢会进入到我们的支付入口那支付入口这其实是一个订单确认的页面大家看到是吧那么这个订单确认的页面需要我们自己来实现那这里边呢我们会使用Fremarker模板引擎技术来实现这个页面的渲染那说到这个渲染呢
+[00:30] 我们最早期学习的有JSP那其实市面上还有一些比如说FreeMarker包括这个Velocity包括Zimilife等这些都是一些这个服务端渲染页面的一些技术那本项目呢采用FreeMarker模板引擎这个技术来实现我们刚才看到的这个订单确认页面的渲染那FreeMarker呢其实在市面上应用还比较广泛
+[00:59] 好下面呢我们就进入Furmark技术的一个研究来那通过Furmark技术的一个研究呢我们要掌握一些基础的知识至少我们能够看得懂刚才我们说的这个订单确认页面的它的一些Furmark的标签代码好了那首先呢我们来看一下Furmark入门然后呢包括一些基础指令我们从第一个开始入门Furmark是Java开发的一个模板引擎
+[01:30] 那有时候老师这里边有个专业名词什么叫模板引擎呀那这里边各位既然说模板引擎那大家都应该想到了对模板到底什么是模板呢其实下面有一张图大家看一下那各位在右边这里边它就是一个什么最终输出的HTML这个应该大家都不陌生从大家学习一些基础的HTML的知识的时候
+[02:02] 应该就做过类似的一些小例子上面对吧有一个HTML标签当然还有学过什么table呀div呀等等啊那这都是什么HTML的一些网页但是这个各位最终我们知道那我们的加大程序在Tomcat上运行最终是不是会在服务端生成这么一个网页输出到浏览器对吧所以我们的重点是要讨论左边
+[02:31] 就是这个服务端是怎么样把这个页面给它生成然后呢响应给浏览器的最上边这个大家看到是不是有一个叫template那这个就是我们所说的什么模板那其实你会看到啊这个模板你看它是不是也有这个html标签那其实我们发现跟我们当初学的jsp是不是类似也就是说这个模板呀
+[03:03] 其实就是在HTML的网页里边嵌入了一些什么你看不懂的这些字符而这个你看不懂的这个字符正是FreeMark的标签就类似于我们早期学习JSP的比如说JSTL标签对吧包括JSP的一些标签等等所以这就是FreeMark的标签
+[03:29] 那其实你可以想象就知道了这个标签里边的这个内幕其实它是一个变量名那最终经过服务端的渲染那其实很简单就是拿到这个变量的值然后呢拼装到这个模板里边那是不是就生成了这么一个HTML的页面你看这个word这其实就是这个内幕的一个变量值大家理解了吧那好那这个问题来了那这个变量值怎么设置进去呢
+[04:00] 其实这个变量值啊就是我们的加码对象对我们可以设置一些我们的加码的一些比如说这个基本的变量呀包括我们说比较复杂的一些自定义的一些这个对象类型啊都可以那么Fremarker呢通过它的标签都可以解析到你看下边这就是我们设置了一个模型用一个名词出来了刚才我说我是一个模板
+[04:30] 对吧那模板它只是一个HTML网页的一个什么内容布局加上里边FreeMark的标签而标签里边的变量其实就是我们所说的什么模型也就是模板加数据模型就能组成最终输出我们的HTML网页对这就是模板引擎的技术有时候老师那它怎么输出呀
+[04:59] 其实很简单各位在这个model里边我们是不是设置了内幕值叫word而在这个模板当中是不是有一个firmark的标签$你看见吗里边是不是有个内幕就是这个内幕和这个内幕对和这个wordword是不是就是内幕的值这个内幕其实就是对就是内幕属性的值了所以firmark呢它整个在解析的时候呢它就会从根据这个标签里边的内幕呢
+[05:28] 就去取出这个模型里边的这个内幕变量的值然后呢把它替换掉这个$4号的位置这个事就是word对吧这个html就产生了这就是我们说的模板引擎好了其实我们刚才说嘛模板引擎有好多技术我们呢采用Fullmarker模板引擎就是模板加数据模型就能输出html网页对吧
+[05:58] 那其实我刚才看到这个图呢我们大概理解了模板引擎的一个流程那你其实下面又举了一个例子你可以再看一下我们知道数据模型在加码当中不光有基本类型还有类似的mapPUGO等复杂类型是吧所以你看数据模型啊可以非常复杂上面是不是一个数据模型下边就是一个模板那好了来你来看啊你来看就是下边这个模板将来最终输出什么样的HTML
+[06:27] 好你只要看到$那这个是不是就是Foremark的标签user找吧user你看这是不是就是user的值那将来各位这个标题下面是不是就是welcome然后big john是吧然后后边还有你看这是个$这是一个超连接是吧你看这里头各位这个是不是就对应了什么对就对应了这个数据模型里面的这个属性
+[06:56] 大家看到吗你看呢其实这个这个数据模型它的这个什么是一个复杂类型你会发现它有两个属性一个URL一个内幕那你会发现我如果我如果想取它的URL的属性你看我是不是中间来一个点就可以取到了那是不是就是我们说的定义我们自定义一些加码对象取它的属性值就采用这种方式所以说其实跟我们写加码代码是类似的
+[07:26] 只不过这里面没有调用get只不过是直接是属性名然后他点属性名就可以拿到这样的话我们说经过free marker的渲染就产生了这么一个最终输出的网页内容这个我相信大家应该都能看得懂吧所以也就是这个链接部分它就会从模型数据当中来拿到这个值把它最终放到html的这个网页的地方最终就输出了一个
+[07:56] HTML网页好以上呢我们就介绍了FreeMark的模板引擎简单理解就是模型加什么模板模型指的是数据模型是吧模板就是我们说包含有HTML网页和FreeMark标签的这个模板那么经过FreeMark的渲染就能输出一个HTML的一个页面但有人说老师那光能输出HTML页面吗其实也不然
+[08:26] 也就是说其实你说我不要HTML对吧那假如说举个例子举个例子它就是一个什么它就是一个Java类假如说现在我让你用这个代码把这个Java类给我生成啥意思你现在这生成的是不是输出了一个HTML网页那我准备这个模板我让你给我写成一个Java类的模板那里边对你照样可以用代码生成Java类
+[08:53] 我们前边学习过MyBatis Plus的自动生成工具它就是使用的FreeMark对不对所以说这个模板非常灵活OK那这个就是FreeMark的模板引擎好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+讲解支付入口的需求分析，并重点介绍 FreeMarker 模板引擎的基础概念、工作原理和数据模型使用方法。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1:
+- 标题：“4 支付入口”，子标题：“4.1 需求分析”。
+- 内容描述：“买方扫描门店二维码，进入支付入口，即进入订单确认页面，流程如下：1) 顾客扫描二维码；2) 进入订单确认页面。”
+- 展示一个“向商家付款”的支付页面截图，包含“商品名称”、“订单项目”、“付款金额”和“立即支付”按钮。
+
+画面 2:
+- 标题：“4 支付入口”，子标题：“4.1 需求分析”。
+- 内容描述：“买方扫描门店二维码，进入支付入口，即进入订单确认页面，流程如下：1) 顾客扫描二维码；2) 进入订单确认页面。”
+- 展示一个“向商家付款”的支付页面截图，包含“商品名称”、“订单项目”、“付款金额”和“立即支付”按钮。
+
+画面 3:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“1、freemaker是一个用java开发的模板引擎”。
+
+画面 4:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.2 FreeMarker快速入门”。
+- 内容描述：“freemarker作为springmvc一种视图格式，默认情况下SpringMVC支持freemarker视图格式。需要创建Spring Boot-freemarker工程用于测试模板。”
+- 展示一个 HTML 模板代码示例和其输出结果。
+
+画面 5:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“1、freemaker是一个用java开发的模板引擎”。
+- 展示一个 FreeMarker 工作原理的流程图：Template → FreeMarker → Output。
+
+画面 6:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“1、freemaker是一个用java开发的模板引擎”。
+- 展示一个 FreeMarker 工作原理的流程图：Template → FreeMarker → Output。
+- 展示一个 Java 代码片段：`model.setName("World");`。
+
+画面 7:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“2、模板+数据模型→输出”。
+- 展示一个 FreeMarker 工作原理的流程图：Template → FreeMarker → Output。
+- 展示一个 Java 代码片段：`model.setName("World");`。
+- 展示一个官方示例链接：`https://freemarker.apache.org/docs/dgui_quickstart_basics.html`。
+
+画面 8:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“2、模板+数据模型→输出”。
+- 展示一个 FreeMarker 工作原理的流程图：Template → FreeMarker → Output。
+- 展示一个官方示例链接：`https://freemarker.apache.org/docs/dgui_quickstart_basics.html`。
+- 展示一个数据模型（DATA MODEL）的结构：
+```text
+(root)
+  - user = "Big Joe"
+  - latestProduct
+    - url = "products/greenmouse.html"
+    - name = "green mouse"
+```
+
+画面 9:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“2、模板+数据模型→输出”。
+- 展示一个数据模型（DATA MODEL）的结构：
+```text
+(root)
+  - user = "Big Joe"
+  - latestProduct
+    - url = "products/greenmouse.html"
+    - name = "green mouse"
+```
+- 展示一个模板（TEMPLATE）的代码：
+```html
+<html>
+<head>
+<title>Welcome!</title>
+</head>
+<body>
+<h1>Welcome ${user}!</h1>
+<p>Our latest product:
+<a href="${latestProduct.url}">${latestProduct.name}</a>
+</body>
+</html>
+```
+
+画面 10:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“2、模板+数据模型→输出”。
+- 展示一个数据模型（DATA MODEL）的结构：
+```text
+(root)
+  - user = "Big Joe"
+  - latestProduct
+    - url = "products/greenmouse.html"
+    - name = "green mouse"
+```
+- 展示一个模板（TEMPLATE）的代码：
+```html
+<html>
+<head>
+<title>Welcome!</title>
+</head>
+<body>
+<h1>Welcome ${user}!</h1>
+<p>Our latest product:
+<a href="${latestProduct.url}">${latestProduct.name}</a>
+</body>
+</html>
+```
+
+画面 11:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“2、模板+数据模型→输出”。
+- 展示一个数据模型（DATA MODEL）的结构：
+```text
+(root)
+  - user = "Big Joe"
+  - latestProduct
+    - url = "products/greenmouse.html"
+    - name = "green mouse"
+```
+- 展示一个模板（TEMPLATE）的代码：
+```html
+<html>
+<head>
+<title>Welcome!</title>
+</head>
+<body>
+<h1>Welcome ${user}!</h1>
+<p>Our latest product:
+<a href="${latestProduct.url}">${latestProduct.name}</a>
+</body>
+</html>
+```
+
+画面 12:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“2、模板+数据模型→输出”。
+- 展示一个数据模型（DATA MODEL）的结构：
+```text
+(root)
+  - user = "Big Joe"
+  - latestProduct
+    - url = "products/greenmouse.html"
+    - name = "green mouse"
+```
+- 展示一个模板（TEMPLATE）的代码：
+```html
+<html>
+<head>
+<title>Welcome!</title>
+</head>
+<body>
+<h1>Welcome ${user}!</h1>
+<p>Our latest product:
+<a href="${latestProduct.url}">${latestProduct.name}</a>
+</body>
+</html>
+```
+
+画面 13:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“1、freemaker是一个用java开发的模板引擎”。
+- 展示一个 FreeMarker 工作原理的流程图：Template → FreeMarker → Output。
+- 展示一个 Java 代码片段：`model.setName("World");`。
+
+画面 14:
+- 标题：“Freemarker基础”，子标题：“1 FreeMarker 入门”，子子标题：“1.1 FreeMarker介绍”。
+- 内容描述：“2、模板+数据模型→输出”。
+- 展示一个 FreeMarker 工作原理的流程图：Template → FreeMarker → Output。
+- 展示一个 Java 代码片段：`model.setName("World");`。
+- 展示一个官方示例链接：`https://freemarker.apache.org/docs/dgui_quickstart_basics.html`。
+

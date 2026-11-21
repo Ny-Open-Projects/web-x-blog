@@ -1,0 +1,190 @@
+# 02.Kubernetes快速入门
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：6.k8s-基础
+- 源文件：01.阶段一 微服务相关技术\6.k8s-基础\02.Kubernetes快速入门_【海量资源尽在 ubkz.com】.mp4
+- 时长 11分12秒（音频 673s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 接下来我们用一个Kubernetes快速入门案例来把我们Kubernetes的使用或者说它的作用再介绍一下来看一下Kubernetes快速入门案例我们主要有三步第一步是做一个环境的准备我们要去关闭我们的防火墙然后安装我们的ETCD然后我们把相关的服务启动
+[00:22] 第二步我们要去做一个配置这里边配置我们主要是去使用Colonize做一个Tomcat的部署第三步我们就进行一个测试其实我当前电脑上已经完成了一次我们当前快速入门的案例你可以在浏览器上直接访问我的143可以看到我们当前的Tomcat服务器
+[00:48] 那在这里呢我们的配置过程中啊有两个文件一个是我们Tomcat的一个replication Controller的一个配置文件还有一个是我们Tomcat的一个svc的配置文件这两个配置文件呢都是我们Kubernetes需要的它是帮助我们建立我们的这个应用以及进行我们的服务的这个控制那这里面说到这儿呢我们就来去把我们刚才说的这个快速入门案例啊去做一下
+[01:16] 那我当前呢又新建了一台这个机器这是一个144那在这里呢我们按照讲义上说讲解的去做一下操作首先呢你关闭防火墙OK然后呢我们刚才是A宝让他去DC宝去把它禁用了然后我们现在stop的第二步呢他告诉你说你要去安装ETCD和空耐斯软件那这里呢有个问题就是说大家呢在安装前呢建议先去
+[01:47] YAM一次update一下我的电脑已经update过了你保证你的YAM是一个最新版本然后再去执行我们当前这个操作把我们ETCD以及我们的Colonize的相关的一些软件都装一下相关的服务都装一下这个过程中大家会发现它其实也会帮助我们把Docker都装上这个过程我们稍等一下它稍微有点慢好了我们这里面已经安装完成了
+[02:18] 接下来我们就要把相关的服务起来首先我们启动etcd那么启动完以后你可以通过system Controller然后stace去etcd查看一下看到我们当前的服务是一个active running状态我们当前用的是sand os7这个版本接下来我们要去启动Docker大家在启动Docker的时候可能会出问题我们可以看一下
+[02:50] 在这里边我启动Docker它是显示我们启动失败了那这里告诉你说如果Docker启动失败请参考我们当前这个配置文件的一个叫做S这个文件里面的参数改一下然后再重启你的机器再重启Docker就可以了那我们照着做一下vi我们etc下的sysconfig下的它然后我们在这里边去把当前的这个参数改一下
+[03:19] 改成我们的叫DISABLEDOK然后save to JJ我们退一下接下来呢我去重启一下我的电脑重启以后呢我们再去把我们这个到处服务起来就应该OK了稍等一下我现在这个服务看一下我们是否起来了这是我当前这台机器啊它还没有起来好了现在呢已经启动成功我们重新连一下
+[03:54] 然后我把我的防火墙Systemctl stop fle wld然后我们再去看一下Systemctl我们去start一下我们的etcd然后再去Systemctl我们的strt start一下我们的Docker然后我们可以看一下docr
+[04:20] 它的状态也是一个running接下来呢你就照着讲义上把我们Kubernetes相关的一些服务啊都起来这是它的API server的然后呢这是我们的一个Controller manager还有它的schedulectrl c还有一个是它的kubernetes还有一个是kubernetes proxyctrl cok这样呢我把相关的服务都启动了那建议大家呢
+[05:00] 其实在每个服务啊起完以后呢你去简单查看一下的状态它是否是启动的OK吧那这样呢我们整个快入门第一部分就是关于环境准备这块我就完成了那下面呢我们需要去做配置那我可以在我当前的user下的local下我创建一个Kubernetes这么一个目录我进入到这里边去Kubernetes这个目录
+[05:28] 那我呢可以新建两个文件一个是我们当前的一个replication Controller的配置文件还有一个是关于我们的server的配置文件那这个配置文件内容呢我们先不用深究啊你只需要知道它里面其实配置了我们当前的镜像例如说我们的Tomcat镜像还有呢它配置了我们服务对外这个暴露的接口我们访问的是8000其实它真正对外暴露的是一个3001OK吧那我们在这里呢
+[05:56] 可以找到我准备好的配置文件你可以把内容直接粘贴过去在这我去新建一个我现在去创建一个mytomcat我们的一个rc.yaml文件我们配置文件都是yaml格式的我们先把这个内容拿过来Ctrl C I然后我们去把它粘进来保存一下save to jj
+[06:26] 大家在写配置文件的时候如果你自己想手动写一定要注意YAML文件的一些特殊性像我们这个APSWatson然后冒号后面一定要有空格OK吧还有我们需要一个文件是叫做mytomcat-svc.yaml文件这个文件里面我们要拷配的是这样的Ctrl A Ctrl COK保存一下save.jp
+[06:56] 这样的话呢我两个配置文件都准备好了接下来呢你就要在这里边呢去执行一下命令通过我们的这个CoopCoopController第一个呢是我们CoopController我们一个create-fmytomcat我们的rc的配置文件执行它就会告诉你呢我们会把我们当前replication controllermytomcat created也就是说我们现在已经把它
+[07:25] 创建出来了你可以通过get pose之类的你可以看应该是get pose但是现在看不到对吧一会我给大家说解决这个问题现在我们再来看一下cooperctr我们再去把刚才的这个server这个server文件我也把它创建一下这样的话的Service也创建了
+[07:53] 你可以通过cooper Controller get svc你可以看一下这时候我们是不是就有了一个Service这叫matomcatok吧那刚才我在这里边呢去执行那get pose的时候啊他拿不到数据呢蒋义善也跟大家说了这里边有些问题啊例如说我们现在呢不能去看到这个pose就是说你no resource found这问题呢你需要怎么办呢
+[08:19] 他告诉你啊首先呢你要去编辑一个文件我们参照他去做一下这里边告诉你说呀首先我们要VI一个配置文件ETC下的Kubernetes下的一个API Server这么一个配置文件然后告诉你在这里呢找到一个叫做Kubernetes什么Controller我们找一下应该是最后一个我记得是不是它是吧应该是这儿吧
+[08:51] 他告诉你在这里面呢你要去去掉一个选项去掉哪个选项呢有个叫做Service account也就是说我们在这里面找一下看看他是不是有个Service account的值你把这个值啊删掉哎我把这个值呢删掉然后呢保存一下保存完以后我记得没错他好像需要你去重启一下我们的这个API服务也就是说你在这里边
+[09:26] Systemctl restart Cooper API SERVER你把这个服务重启一下然后呢你再通过 Cooper get pose你就能看到我们当前有两个麦克风
+[09:44] Tomcat这么一个pod这个两个值或者说为什么有两个呢其实是在我们的配置文件里面去定义的在这里边我们在这定义的时候你看到了吧我定义它的值为两个其实它就会帮助我去创建两个OK了那这样的话呢我们整个操作基本OK了但是呢你通过浏览器去访问的时候你会发现其实还是有问题的也就是说你还会访问失败
+[10:14] 在这里边你在访问的过程中啊他应该是有问题的那这里边的问题其实有很多我们可以看一下就是说在我们的讲义里边也跟大家说了在整个过程中如果你遇到了一些问题什么样的问题呢例如DAO科破失败啊还有你访问不了外网这些问题应该如何解决那这里呢我就先停一下我们先把刚才讲的关于快速入门的案例啊过程再说一下
+[10:40] 第一个过程呢第一个操作就是我们需要做一个环境准备我们需要关闭防火墙然后呢安装我们的这个ETCD和Chromless软件然后把相关的服务起来最后呢这个位置你需要注意一下DAO客如果启动失败怎么办第二个呢就是我们需要做配置文件你要配置一个Replication Controller的配置文件还有一个是Service的那第三个呢做测试而我们刚才的测试是失败的是存在问题的
+[11:07] 接下来我们就要讲一下这些问题
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 CentOS 系统上安装和配置 Kubernetes 集群，包括关闭防火墙、安装 Docker、启动 Kubernetes 各组件、创建并部署一个 Tomcat 应用。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1:
+- 展示了课程大纲，当前章节为“1.1.2 Kubernetes 快速入门”。
+- 右侧列出安装步骤：关闭 CentOS 防火墙、安装 etcd 和 Kubernetes 软件、启动服务（systemctl start etcd、systemctl start Docker）。
+- 提示：如果 Docker 未自动生效，需参考 /etc/sysconfig/Docker，将 selinux 后面的值改为 disabled。
+
+画面 2:
+- 展示了 Kubernetes 部署的 YAML 文件内容，用于创建名为 mytomcat 的 Service。
+- YAML 文件内容：
+  ```yaml
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: mytomcat
+  spec:
+    type: NodePort
+    ports:
+      - port: 8080
+        nodePort: 30000
+    selector:
+      app: mytomcat
+  ```
+- 命令行提示：`kubectl create -f mytomcat.svc.yaml`
+
+画面 3:
+- 展示了多个窗口，包括 Kubernetes 集群的架构图、多个节点的 SSH 连接、以及一个正在运行的 Tomcat 应用。
+- 窗口标题包括：“K8s 集群”、“K8s 集群架构图”、“Apache Tomcat 8.5.33”等。
+- 画面下方显示了启动服务的命令：`systemctl start kube-scheduler` 和 `systemctl start kubelet`。
+
+画面 4:
+- 展示了 SecureCRT 连接的 CentOS 系统终端。
+- 终端显示了 Docker 的安装包列表和系统信息。
+- 系统信息：
+  ```
+  sshd AES-256-CTR 24.1 24日 11月19日 VT100
+  ```
+
+画面 5:
+- 展示了 SecureCRT 终端中执行的命令：`systemctl status etcd` 和 `systemctl start Docker`。
+- `systemctl status etcd` 输出显示 etcd 服务正在运行。
+- `systemctl start Docker` 命令执行后，终端显示 Docker 服务启动成功。
+
+画面 6:
+- 展示了 VMware Workstation 中的虚拟机界面。
+- 虚拟机名称为 “Kubernetes-quickstart-demo”。
+- 界面显示了多个虚拟机的列表，包括 “node1”、“node2”、“Kubernetes-master” 等。
+
+画面 7:
+- 展示了 SecureCRT 终端中执行的命令：`systemctl start kube-apiserver`、`systemctl start kube-Controller-manager`、`systemctl start kube-scheduler`。
+- 命令执行后，终端显示服务启动成功。
+
+画面 8:
+- 展示了 SecureCRT 终端中执行的命令：`systemctl start kube-proxy`。
+- 命令执行后，终端显示 kube-proxy 服务启动成功。
+- 命令行提示：`[root@localhost Kubernetes]#`
+
+画面 9:
+- 展示了 Notepad++ 编辑器中的 YAML 文件内容。
+- 文件内容与画面 2 中的 YAML 文件相同。
+- 右侧显示了网络配置文件夹结构，包括 “network-scripts”、“ifcfg-ens33”、“ifcfg-lo” 等。
+
+画面 10:
+- 展示了 PPT 页面，标题为“1.2 Kubernetes 基本架构与常用术语”。
+- 内容包括：
+  - 外部访问的限制：只能在节点上访问，其他主机无法访问。
+  - 解决方案：
+    1. `vim /etc/sysctl.conf`
+    2. `net.ipv4.ip_forward=1`
+  - 解决 kubelet get pods 无资源问题：
+    1. `vim /etc/kubernetes/apiserver`
+    2. 找 `KUBE_ADMISSION_CONTROL`
+    3. 去掉 ServiceAccount，保存退出，`systemctl restart kube-apiserver`
+
+画面 11:
+- 展示了 PPT 页面，标题为“1.2 Kubernetes 基本架构与常用术语”。
+- 内容与画面 10 相同。
+
+画面 12:
+- 展示了 SecureCRT 终端中执行的命令：`Docker pull Docker.io/tanyej/pod-infrastructure`、`Docker tag tanyej/pod-infrastructure 192.168.126.143:5000/pod-infrastructure`、`Docker push 192.168.126.143:5000/pod-infrastructure`。
+- 修改了 KUBELET 的配置文件。
+- 重启服务命令：`systemctl restart kube-apiserver`、`systemctl restart kube-Controller-manager`、`systemctl restart kube-scheduler`、`systemctl restart kube-proxy`。
+- 命令行提示：`[root@localhost Kubernetes]# kubectl get pods`
+
+画面 13:
+- 展示了课程大纲，当前章节为“1.1.2 Kubernetes 快速入门”。
+- 右侧列出安装步骤：关闭 CentOS 防火墙、安装 etcd 和 Kubernetes 软件、启动服务（systemctl start etcd、systemctl start Docker）。
+- 提示：如果 Docker 未自动生效，需参考 /etc/sysconfig/Docker，将 selinux 后面的值改为 disabled。
+
+画面 14:
+- 展示了 PPT 页面，标题为“为什么使用 Kubernetes”。
+- 内容包括：
+  - 使用 Kubernetes 的原因：可以快速上线开发的系统，支持微服务架构。
+  - Kubernetes 的特点：一个服务的请求可以被多个节点处理，支持横向扩展。
+- 展示了“1.1.2 Kubernetes 快速入门”章节的详细内容。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号），这是最重要的部分：
+画面 2:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mytomcat
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30000
+  selector:
+    app: mytomcat
+```
+
+画面 12:
+```bash
+Docker pull Docker.io/tanyej/pod-infrastructure
+Docker tag tanyej/pod-infrastructure 192.168.126.143:5000/pod-infrastructure
+Docker push 192.168.126.143:5000/pod-infrastructure
+```
+
+画面 12:
+```bash
+修改 KUBELET, POD, INFRA_CONTAINER="pod-infra-container-image:192.168.126.143:5000/pod-infrastructure:latest"
+```
+
+画面 12:
+```bash
+systemctl restart kube-apiserver systemctl restart kube-Controller-manager systemctl restart kube-scheduler systemctl restart kube-proxy
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 10:
+- 标题：“1.2 Kubernetes 基本架构与常用术语”
+- 内容：
+  - 外部访问的限制：只能在节点上访问，其他主机无法访问。
+  - 解决方案：
+    1. `vim /etc/sysctl.conf`
+    2. `net.ipv4.ip_forward=1`
+  - 解决 kubelet get pods 无资源问题：
+    1. `vim /etc/kubernetes/apiserver`
+    2. 找 `KUBE_ADMISSION_CONTROL`
+    3. 去掉 ServiceAccount，保存退出，`systemctl restart kube-apiserver`
+
+画面 14:
+- 标题：“为什么使用 Kubernetes”
+- 内容：
+  - 使用 Kubernetes 的原因：可以快速上线开发的系统，支持微服务架构。
+  - Kubernetes 的特点：一个服务的请求可以被多个节点处理，支持横向扩展。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

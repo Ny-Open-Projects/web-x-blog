@@ -1,0 +1,229 @@
+# 03-ETL-数据清洗-课程访问量清洗-过滤机器人&关联维度
+
+- 阶段：08.阶段八 智慧学成项目
+- 章节：03.第三章 智慧学成-课程分析/1.数据清洗
+- 源文件：08.阶段八 智慧学成项目\03.第三章 智慧学成-课程分析\1.数据清洗\03-ETL-数据清洗-课程访问量清洗-过滤机器人&关联维度_【海量资源尽在 666java.com】.mp4
+- 时长 15分48秒（音频 948s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 前面上已经把维度数据和课程防御量的原始数据给拿到拿到之后呢咱们按照咱们的清洗步骤就开始关联维度数据呢关联维度数据过滤机器人及气虫这些操作咱们呢按照步骤现在开始具体的一个清洗操作在清洗的时候关联维度和过滤机器人是同时做的咱们呢
+[00:30] 现在就开始进行代码的一个编写这里呢咱们拿到原始数据之后原始数据咱们在文档上是有体现的咱们来切到文档上看到咱们的原始数据原始数据这是咱们原始数据的字段有这么多这个地方存储方式呢是以按行存储以-t进行那个分隔就是分隔每一个值分隔完成之后呢然后又以-n进行换合
+[01:02] 换行咱们在分隔的时候为了拿到每个字段需要对它进行一个切分首先呢就是数据的一个切分这里加上注射进行清洗这个地方呢先进来的就是数据的一个切分这里点我看一下加在哪input这个地方就加在这可以首先呢进行它一个是数据的一个切割
+[01:43] 这里分隔的是杠器,底还是在这然后这是数据分割拿到每个字段拿到每个字段之后,咱们是不是要进行一个过滤操作这里过滤咱们首先过滤的就是机器人过滤完机器人之后,咱们再进行一个维度的关联
+[02:23] 因为先把垃圾数据给过滤掉后面呢你在进行操作的时候它这个计算量就比较小咱们上面进行了一个分隔分隔完成之后呢这里使用filter过滤的时候它拿到的就是一个数组咱们呢这里就用变量AR进行一个表示这个时候呢就能拿到咱们的这个变量了拿到咱们这个数组了咱们需要
+[02:51] 根据咱们的数据结构进行一个清洗这里呢机器人的一个标识咱们是通过浏览器这个user gint来进行获取的它那个各个字段已经分成数组数组索引是从0开始的咱们来看一下user gint是在哪个位置0 1 2 3 4 5在第五个位置这个时候呢咱们就需要根据索引把值给拿出来
+[03:21] 拿到值之后呢咱们这个地方就是有一个contents操作如果它包含或者是等于咱们那个机器人是不是就让它就让它变成一个pass掉搬成一个垃圾数据这里呢机器人是i e b o t这个地方用robot进行一个操作如果它包含了是不是咱们是不需要的一个数据呢但是呢这个地方
+[03:53] 只有为处的情况下它才会向后走为处向后走呢咱们就对它进行一个什么样的操作取反操作不包含机器人的咱们让它程序向后走过滤完机器人的之后呢咱们这个地方呢还需要一个操作是关联维度这就是咱们真正的关联维度操作了关联维度接着使用点进行一个向下计算这里呢还使用map操作
+[04:25] 这个时候这里就随便起一个变量名叫tmptmp这个时候其实还是一个数组还是一个数组咱们需要把最终的一个数据给封装到咱们的事实表中vzeta vzeta feta这个事实表中封装到事实表中咱们是不是要根据这个事实表进行每个字段的一个获取咱们来找到咱们的事实表这里
+[04:56] 来搜一下VZ这是BIZBIZ的话是业务的咱们接着往下搜加一个F这是咱们的试试表试试表的话这个时候咱们由于咱们是最终是需要把它给创建出来的这里就把它给打下班打完之后这里是咱们需要封装的资格从第一个开始到最后一个首先他是谁首先他是这个ID
+[05:30] 这个ID咱们前面已经说过了它是使用UUID生成的这个时候把它给右边分割一下分割完了之后这样好看一点咱们首先要封装的是第一个参数第一个参数呢咱们前面说过了它是使用UUID来获取的使用UUID来获取的话咱们这个地方有一个工具类是有一个str的工具类这个呢是有一个获取UID的一个方法咱们直接把这个方法给导进来
+[06:00] 这个由于方法的导入它有的时候自动导包不好使咱们就采用手动导包的方式把它就导进来这个呢直接就是get uuid第一个字段然后第二个字段是谁啊第二个字段就是课程维度的idcursor dim id这个是不是就是咱们课程房量的一个数据啊咱们来看方课程房量在数组的第几个课程房量在数组的第一个位置这个时候呢直接就是
+[06:28] temp是一个数组它是第一个位置就是下标索引就是0然后呢接着是接着是这个时间维度时间维度咱们需要去HDFS上看前台采集的时候是采集到了还是需要咱们计算咱们来切到HDFS上这呢就是咱们原始数据咱们来打开看一下这里呢两条数据因为有两个user ginter第二个字段是咱们的
+[06:59] 时间维度ID这里它没有传没有传的话咱们一直说了是不是它可以通过VistTime进行一个获取VistTime是谁VistTime索引是在这咱们刚才说了这个是第五个索引这个时间是多少时间就是第六个索引了时间是第六个的话咱们需要在上面获取这个索引给它起个变量这叫TimeTimeDim吧
+[07:33] 然后呢它是根据咱们第六个索引进行一个计算的Ctrl C一下第六个索引计算的话这个值是一个浪值它能直接变成一个时间那种格式的一个维度ID吗是不能的咱们需要进行一个转换这里呢咱们日期供给类已经提供了它有一个get sd2你传过来一个浪类型的值然后呢根据这个表达式格式化成对应的一个数据
+[08:04] 咱们还是需要手动把它给导入进来手动导包导完之后呢咱们就可以进行一个使用了这里get str获取完之后呢它这个地方需要一个时间维度的一个格式咱们需要来看一下这个地方它要报了一个错它需要的是一个string类型的但是呢咱们传的是一个它需要的是一个lang类型的咱们传的是一个string类型的这个地方呢直接to lang就行了
+[08:42] 把它转成一个浪类型的接下来呢它需要是一个就是表达式咱们需要去看一下咱们的维度ID的表达式是什么样的咱们看一下事例事例数据的话是年月日这个地方是不是还有一个小时啊09这个地方是代表小时的意思这个表达式有咱们直接就拿过来这是咱们的时间维度ID时间维度ID有了之后接下来是什么呀接下来是
+[09:16] 区域维度区域维度的话上面是不是已经获取了获取了之后咱们直接用map进行get操作就行了进行get操作的时候这个地方获取区域的维度进行get操作的时候是不是你还有一个IP工具类把这个真正的IP转换成咱们的一个城市这个获取维度这个应该是关联区域维度上面注释也加一下格式化时间维度
+[09:56] 距离维度的话咱们是通过它进行一个get操作这里呢get咱们看IP是在第几个索引0 1 2 3IP的话就是在索引3咱们呢直接是这里需要使用IP攻击类把IP转换成时间转换成城市转换成城市呢之后就可以进行get操作咱们呢这有一个IP攻击类
+[10:24] 它呢,这个地方有一个方法,就是获取区域,根据IP的自负算值,然后呢,查找出来它对应的一个区域这个地方呢,还是需要一个手动导包的一个过程把它就导过来这个,因为IDR不会自动把这个方法给导进来,所以呢,咱们采用手动导包的方式区域的IP,IP的位置,咱们刚才查了它是在第三个位置,所以是三个位置
+[10:56] 接下来呢由于这个返回值是一个什么呀是一个option里面包含了一个字符数是咱们最终需要的值这个地方进行一个get操作得到呢咱们的区域加个标注吧区域维度区域维度有了之后接下来咱们开始公司维度公司维度那更好办了公司维度是通过课程ID进行来获取的关联公司维度
+[11:33] 课程的话是在这个公司这个map里边compo map里边咱们呢进行一个获取操作这里获取的话就直接使用咱们的表达设计行第一个元素就是咱们的课程ID直接进行一个获取获取完了之后把它给取出来这个时候呢给它一个变量就是咱们的公司公司维度变量名字叫com下划线jm
+[12:06] 公司维度拿到了之后呢接下来IPIP是不是原封不动呢IP原封不动的情况下咱们要做的事就是来直接把它索引给拿过来就行了按照索引拿过来咱们刚才这个地方已经用了它的索引是第三个所以说我这里就直接粘过来接下来是SessionSession是不是也是原封不动的咱们来看Session是第一个0 1 2 Session是第二个这里呢
+[12:36] 把它session改成2session完了之后呢接下来是cleaner typecleaner type是不是user gintuser gint也是原封不动的这里是第几个刚才是不是已经用过了没记错的话就是第五个0 1 2 3 4 5第五个把这个改成5接下来是withit timewithit time是不是也是原封不动啊这个地方是不是也是用过了withit time它是第六个这个地方是6
+[13:09] 这个有的时候接下来的话咱们还有三个是什么值啊年月日这个是分区数据分区数据的话咱们这个time dim是不是已经有了在这的年月日是不是通过这个使用split的切割的方式就可以直接拿到的使用这个杠横杠切割可以拿到这每一位的值每一位的值的话咱们只用的谁啊年月日这个变量就叫1md咱们这里的话直接1md
+[13:39] 0,YMD1,YMD2是不是就拿到它的所有值了但是呢,这个地方报了一个错它说需要的是让类型的但是找到了一个什么String是不是要转换一下就行了toRound,这个地方YMD toRound为啥点不出来呢点不出来的话直接过来粘一下,看它还报不好错OK,粘过来就行了
+[14:22] 粘回来之后咱们这里的数据封装还有关联维度是不是已经OK了这里有两个报错看是哪报的错这里报了一个错Encode Unit这个地方咱们已经隐私转换导过了这两个是可以不用管的这个也是一样的隐私转换已经导入成功之后这个错的话可以不管按照咱们的这个代码关联维度和过滤机器人已经完成
+[14:56] 完成之后呢这个的话给它一个返回值先给它一个返回值得到了一个咱们关联维度的一个操作就叫visitvisit这是初步清洗的就叫clean嘛clean完成之后咱们还有一步什么操作没执行呢这个地方可不是一步啊这个地方去重虽然说清洗程序还有一步咱们后边还有那个要保存到数据仓库中的操作
+[15:29] 这里呢接下来是去虫去虫的话咱们留到下节再讲这里呢就是把过滤机器人和关联维度给完成了本节呢就到这里这个变量呢等会咱们再使用
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 Spark 编写代码，对课程访问数据进行清洗、转换和聚合，生成事实表。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示 Spark 代码，定义了两个 Map 变量 areaMap 和 compMap，分别用于映射城市和公司维度，以及读取 Hive 表数据的 SQL 语句。代码中定义了 val date_info = "2019-11-04" 和 val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")。
+画面2：展示 PPT 页面，标题为“4.4.2 数据清洗分析”，表格列出了课程访问事实表字段与对应维度表字段的映射关系。
+画面3：展示 Spark 代码，继续编写数据清洗逻辑，使用 .map(_.split(regex = "t")) 分割数据行，并使用 .filter(arr => arr.contains("Robot")) 过滤掉机器人访问记录。
+画面4：展示 Spark 代码，继续编写数据清洗逻辑，使用 .map(_.split(regex = "t")) 分割数据行，并使用 .filter(arr => arr.contains("Robot")) 过滤掉机器人访问记录。
+画面5：展示 Scala 代码，定义了 case class CourseVisitFact，包含 course_visit_fact_id、course_dim_id、time_dim_id、area_dim_id、company_dim_id、client_ip、client_sessionid、user_agent、client_type、visit_time、years、months、days 等字段。
+画面6：展示项目结构，选中了 target 目录下的 pom.xml 文件。
+画面7：展示 Hue 数据浏览器界面，显示了 /user/Hive/external/data_course/course_visit_source/2019-11-04/... 的数据文件内容，包含访问记录的详细信息。
+画面8：展示 Spark 代码，定义了 object VisitSourceToFact，包含 Spark 会话和主函数，以及两个 Map 变量 areaMap 和 compMap。
+画面9：展示 Spark 代码，继续编写数据清洗逻辑，使用 .map(_.split(regex = "t")) 分割数据行，并使用 .filter(arr => arr.contains("Robot")) 过滤掉机器人访问记录。
+画面10：展示 Spark 代码，继续编写数据清洗逻辑，使用 .map(_.split(regex = "t")) 分割数据行，并使用 .filter(arr => arr.contains("Robot")) 过滤掉机器人访问记录。
+画面11：展示 PPT 页面，标题为“2.3.1 ODS层数据结构”，表格列出了事实表字段、维度表字段、数据格式和数据样例。
+画面12：展示 Spark 代码，继续编写数据清洗逻辑，使用 .map(_.split(regex = "t")) 分割数据行，并使用 .filter(arr => arr.contains("Robot")) 过滤掉机器人访问记录。
+画面13：展示 Spark 代码，继续编写数据清洗逻辑，使用 .map(_.split(regex = "t")) 分割数据行，并使用 .filter(arr => arr.contains("Robot")) 过滤掉机器人访问记录。
+画面14：展示 Spark 代码，继续编写数据清洗逻辑，使用 .map(_.split(regex = "t")) 分割数据行，并使用 .filter(arr => arr.contains("Robot")) 过滤掉机器人访问记录。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（逐字抄录）：
+画面1：
+val Spark = ETLEnvironment.getSparkSession(this.getClass.getSimpleName)
+def main(args: Array[String]): Unit = {
+  import Spark.implicits._
+  var areaMap = Map[String, String]()
+  Spark.sql(sqlText = "SELECT * FROM data_dimen.area_dim").as[AreaDim].map(x => {
+    areaMap += (x.city_name -> x.area_dim_id.toString)
+  })
+  var compMap = Map[String, String]()
+  Spark.sql(sqlText = "SELECT * FROM data_dimen.course_dim").as[CourseDim].map(x => {
+    compMap += (x.course_dim_id -> x.company_id)
+  })
+  val sc = Spark.sparkContext
+  val date_info = "2019-11-04"
+  val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+}
+
+画面2：
+课程访问事实表字段 | 对应维度表字段 | 字段说明
+--|--|--|
+course_visit_fact_id | - | 课程访问事实表主键，id自动生成
+course_dim_id | course_id | 课程id，课程维度表主键
+time_dim_id | time_dim_id | 时间维度id，也可根据访问时间维度计算
+area_dim_id | client_ip | 区域id，根据用户ip，在区域维度表获取
+company_dim_id | course_id | 公司id，根据课程id，在公司维度表获取
+client_ip | client_ip | 用户ip
+client_sessionid | session_id | 用户会话id
+client_type | user_agent | 浏览器类型
+visit_time | visit_time | 访问时间
+years | visit_time | 访问时间 - 年（也可根据时间维度）
+months | visit_time | 访问时间 - 月（也可根据时间维度）
+days | visit_time | 访问时间 - 天（也可根据时间维度）
+
+画面3：
+val sc = Spark.sparkContext
+val date_info = "2019-11-04"
+val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+Input
+// 数据分割字符串中字段
+.map(_.split(regex = "t"))
+// 过滤机器人
+.filter(arr => {
+  arr(5).contains("Robot")
+})
+}
+
+画面4：
+val sc = Spark.sparkContext
+val date_info = "2019-11-04"
+val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+Input
+// 数据分割字符串中字段
+.map(_.split(regex = "t"))
+// 过滤机器人
+.filter(arr => {
+  arr(5).contains("Robot")
+})
+}
+
+画面5：
+case class CourseVisitFact(
+  course_visit_fact_id: String,
+  course_dim_id: String,
+  time_dim_id: String,
+  area_dim_id: String,
+  company_dim_id: String,
+  client_ip: String,
+  client_sessionid: String,
+  // user-agent
+  client_type: String,
+  visit_time: Long,
+  years: String,
+  months: String,
+  days: String
+)
+
+画面6：
+无代码或配置内容。
+
+画面7：
+无代码或配置内容。
+
+画面8：
+object VisitSourceToFact {
+  val Spark = ETLEnvironment.getSparkSession(this.getClass.getSimpleName)
+  def main(args: Array[String]): Unit = {
+    import Spark.implicits._
+    var areaMap = Map[String, String]()
+    Spark.sql(sqlText = "SELECT * FROM data_dimen.area_dim").as[AreaDim].map(x => {
+      areaMap += (x.city_name -> x.area_dim_id.toString)
+    })
+    var compMap = Map[String, String]()
+    Spark.sql(sqlText = "SELECT * FROM data_dimen.course_dim").as[CourseDim].map(x => {
+      compMap += (x.course_dim_id -> x.company_id)
+    })
+  }
+}
+
+画面9：
+val sc = Spark.sparkContext
+val date_info = "2019-11-04"
+val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+Input
+// 数据分割字符串中字段
+.map(_.split(regex = "t"))
+// 过滤机器人
+.filter(arr => {
+  arr(5).contains("Robot")
+})
+}
+
+画面10：
+val sc = Spark.sparkContext
+val date_info = "2019-11-04"
+val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+Input
+// 数据分割字符串中字段
+.map(_.split(regex = "t"))
+// 过滤机器人
+.filter(arr => {
+  arr(5).contains("Robot")
+})
+}
+
+画面11：
+无代码或配置内容。
+
+画面12：
+val sc = Spark.sparkContext
+val date_info = "2019-11-04"
+val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+Input
+// 数据分割字符串中字段
+.map(_.split(regex = "t"))
+// 过滤机器人
+.filter(arr => {
+  arr(5).contains("Robot")
+})
+}
+
+画面13：
+val sc = Spark.sparkContext
+val date_info = "2019-11-04"
+val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+Input
+// 数据分割字符串中字段
+.map(_.split(regex = "t"))
+// 过滤机器人
+.filter(arr => {
+  arr(5).contains("Robot")
+})
+}
+
+画面14：
+val sc = Spark.sparkContext
+val date_info = "2019-11-04"
+val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+Input
+// 数据分割字符串中字段
+.map(_.split(regex = "t"))
+// 过滤机器人
+.filter(arr => {
+  arr(5).contains("Robot")
+})
+}
+
+4)
+

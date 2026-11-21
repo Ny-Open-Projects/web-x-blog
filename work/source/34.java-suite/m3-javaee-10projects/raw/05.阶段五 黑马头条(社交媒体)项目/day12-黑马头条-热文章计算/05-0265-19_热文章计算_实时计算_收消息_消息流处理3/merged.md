@@ -1,0 +1,161 @@
+# 19_热文章计算_实时计算_收消息_消息流处理3
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day12-黑马头条-热文章计算
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day12-黑马头条-热文章计算\19_热文章计算_实时计算_收消息_消息流处理3【海量资源尽在 666java.com】.mp4
+- 时长 6分6秒（音频 367s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们就继续我想讲啊下面咱们就来去编写一下这个方法啊那有的有的同学可能就说了老师这个不对啊你说把这东西要转换成这么一个对象好像不行啊为啥呢因为我这块是不是转回的是一个死镇的景啊那你怎么去返回对象呢其实这样啊咱们呢先去通过这两个去解析解析完之后呢去封装成这样的对象啊然后呢是再把它包装到这里边最终呢把这个对象干嘛呢
+[00:29] 转成一个接生伺服券然后再去返回这样就可以了这样的话当我这个类去接收的时候解析起来就比较容易了所以说咱们先去解析一下好吧解析的方式说了咱们要去创建很多的这种类首先咱们要去Ret真的是咱们的返回值第二个咱们要去用出来这么个类项好我们叫temp.u好
+[01:02] 第二个咱们还要再去拗出来另外一个就想这个是真正装消息的这个tto等于拗一个article拿到它之后一会再去设置值首先咱们还是要去设置里边的参数第一个参数就是article id第二个参数就是当前的这么一个串首先咱们还是用可以用什么可以用正能表达式去获取里边的值就可以了好吧或者获取值怎么获取
+[01:32] 首先咱们可以在这去定义一个正则这正则咱们可以考过来就这么个东西好 这边去找什么找当前的什么从这个字幕上去找什么找当前的数字只找数字前面是like什么有command有什么collection有什么viewsOK 找数字那该怎么去找呢下面就可以定义什么一个pattern比如说pattern然后咱们就可以去先去编译一下
+[02:05] 然后是把当前这个21 exception然后最终它会返一个这种好后你就可以去找了在这找呢2点有一个叫做卖匹配V在哪匹配匹配当前的V6这个V6它就会返回一个这种像这个对象怎么叫吗好吧对象咱们就可以去判断看看它有没有值发言的要去判断
+[02:40] 没有值的话呢咱们就可以设值没有值的话呢就简单了没有值的话呢咱们就可以直接去复空啊复空了比如说啊你看dto.set有一个connect他们是0下面还有dto.set什么comment他也是0这上面没找着啊dto.set什么以前的like也是0叫什么dto.set一个叫做view他也是0好吧这四个都是0
+[03:11] 如果说早着的话呢那你这时候该怎么办呢早着的话首先呢第一个是这个是他是有顺序的是吧是吧其实这个顺序是不是按照这个顺序走的呀没问题这时候呢你就可以干嘛呢你就可以去拿到里边的笔我们可以用mint.group哪一个呢一个值好吧第一个值啊我们可以拿到第二个值而这个报错了咱们可以先去怎么着呢用lang
+[03:43] Value Off,咱们可以把这个价格装进去这样就不抱错了啊都可以去终招这个就不是1,这不是1了这是3这是4,我再去确定一下啊前的这个顺序啊一定要跟你的顺序要保持一致要不然的话这个值有可能会复错好吧行那这样的话咱们就算是说完了啊然后最终的咱们就可以去给他转成Jason 揍串是吧
+[04:18] 当然这里边还少了一个值叫setArticleId这个ArticleId也设置进去这个咱们可以用integer.valueOf把当前的ArticleId转进去最终咱们可以temp.setData就可以把当前的DataData装进去这样设置完之后你再把当前的temp干嘛呢转成json返回就可以了转成json怎么转呢
+[04:48] 用mypro.有一个叫做write writevalue writevalue writevalue s3你就可以把temp装进去最终它就会去返回一个字符串我们用ret接收 需要去拋出异常那就拋呗 直接也行
+[05:22] 你把当前这个RAT返回就可以了好那这样的话这个字符串呢就算是写完了那整个类啊接收的类呢咱们也写完了简单的总结一下啊那这块内容啊这块内容啊是首先呢我们要去接收消息这是要发送消息那发送的消息是啥就是当前这个类的返回值那现在返回的呢其实就是一个字符串
+[05:47] 并且呢是这么一个奏传咱们现在已经给他奉装了这时候你再去接收的时候那就不要装逸了因为我都是从对象转过来的那我能再转过去吗完全可以好吧行那这样啊那咱们先写到这一会呢咱们再去接收这个消息
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Java 中使用正则表达式和 Pattern 类解析 Kafka 消息中的文章访问数据，并将其转换为结构化的 ArticleVisitStreamDto 对象，最终通过 ObjectMapper 序列化为 JSON。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 展示了 ArticleIncHandleListener.java 文件中 format001 方法的定义，该方法用于处理文章访问数据。
+画面2: 展示了 ArticleIncHandleListener.java 文件中 @Component 注解和 onMessage 方法的定义，用于监听 Kafka 消息。
+画面3: 展示了 format001 方法中创建 ArticleVisitStreamMessage 和 ArticleVisitStreamDto 对象，并定义正则表达式。
+画面4: 展示了正则表达式 String regex = "COLLECTION:((\\d+),COMMENT:((\\d+),LIKES:((\\d+),VIEWS:((\\d+)"; 的完整定义。
+画面5: 展示了 Pattern 类的 matcher 方法用于匹配字符串。
+画面6: 展示了 if (mat.find()) {} 语句块，用于处理匹配成功的情况。
+画面7: 展示了 else 语句块，用于处理匹配失败的情况。
+画面8: 展示了 Long 类型的 valueOf 方法，用于将字符串转换为 Long 类型。
+画面9: 展示了 ArticleVisitStreamDto 类的 setArticleId 方法，用于设置文章 ID。
+画面10: 展示了 ObjectWriter 类的 writeValueAsString 方法，用于将对象序列化为 JSON 字符串。
+画面11: 展示了 try-catch 块，用于处理序列化过程中的异常。
+画面12: 展示了 KStream 的 map 和 aggregate 方法，用于处理流数据。
+画面13: 展示了 format 方法的返回值，用于返回格式化的字符串。
+画面14: 展示了 ArticleIncHandleListener.java 文件中 onMessage 方法的定义，用于处理 Kafka 消息。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面3:
+```java
+private String format001(String articleId, String value) {
+    String ret = "";
+    ArticleVisitStreamMessage temp = new ArticleVisitStreamMessage();
+    ArticleVisitStreamDto dto = new ArticleVisitStreamDto();
+    String regex = "COLLECTION:((\\d+),COMMENT:((\\d+),LIKES:((\\d+),VIEWS:((\\d+)";
+    Pattern pat = Pattern.compile(regex);
+    Matcher mat = pat.matcher(value);
+    if (mat.find()) {
+        dto.setCollect(Long.valueOf(mat.group(1)));
+        dto.setComment(Long.valueOf(mat.group(2)));
+        dto.setLike(Long.valueOf(mat.group(3)));
+        dto.setView(Long.valueOf(mat.group(4)));
+    } else {
+        dto.setCollect(0);
+        dto.setComment(0);
+        dto.setLike(0);
+        dto.setView(0);
+    }
+    dto.setArticleId(Integer.valueOf(articleId));
+    temp.setData(dto);
+    try {
+        ret = Mapper.writeValueAsString(temp);
+    } catch (JsonProcessingException e) {
+        e.printStackTrace();
+    }
+    return ret;
+}
+```
+
+画面4:
+```java
+String regex = "COLLECTION:((\\d+),COMMENT:((\\d+),LIKES:((\\d+),VIEWS:((\\d+)";
+```
+
+画面5:
+```java
+Pattern pat = Pattern.compile(regex);
+Matcher mat = pat.matcher(value);
+```
+
+画面6:
+```java
+if (mat.find()) {
+```
+
+画面7:
+```java
+} else {
+    dto.setCollect(0);
+    dto.setComment(0);
+    dto.setLike(0);
+    dto.setView(0);
+}
+```
+
+画面8:
+```java
+dto.setCollect(Long.valueOf(mat.group(1)));
+dto.setComment(Long.valueOf(mat.group(2)));
+dto.setLike(Long.valueOf(mat.group(3)));
+dto.setView(Long.valueOf(mat.group(4)));
+```
+
+画面9:
+```java
+dto.setArticleId(Integer.valueOf(articleId));
+```
+
+画面10:
+```java
+ret = Mapper.writeValueAsString(temp);
+```
+
+画面11:
+```java
+try {
+    ret = Mapper.writeValueAsString(temp);
+} catch (JsonProcessingException e) {
+    e.printStackTrace();
+}
+```
+
+画面12:
+```java
+return stream.map((key, val) -> {
+    UpdateArticleMessage value = format(val);
+    System.out.println(value);
+    return new KeyValue<>(key, value);
+}).groupByKey().windowedBy(TimeWindows.of(10000)).aggregate(new Initializer<String>() {
+    @Override
+    public String apply() {
+        return "COLLECTION:0,COMMENT:0,LIKES:0,VIEWS:0";
+    }
+});
+```
+
+画面13:
+```java
+private UpdateArticleMessage format(String val) {
+    UpdateArticleMessage msg = null;
+    try {
+        msg = Mapper.readValue(val, UpdateArticleMessage.class);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return msg;
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

@@ -1,0 +1,234 @@
+# 10_后端通用封装-CommonDao
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day06-黑马头条-通用后端
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day06-黑马头条-通用后端\10_后端通用封装-CommonDao【海量资源尽在 666java.com】.mp4
+- 时长 14分56秒（音频 896s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们再去封装另外一个啊就是当前的一个common dao那这个呢就是他去封装了一些咱们需要用到的一些增伤改查的东西啊咱们可以大概的看一眼这个common dao是吧你看里边啊查询里边有一个list还有什么还有一个count那这个呢很显然就是咱们要统计是吧还有在条件查询还有count在条件查询还有吧看到了吗还有什么updateinsert和delete
+[00:29] 那就是查询的时候可能稍微麻烦一些好吧那咱们这样啊咱们就手动去写下好吧来咱咱们一块去实现一下这个过程然后在这啊咱们去创建一个DL啊这个还没有啊在这去创建一个DLDL是讲什么commonDL错了这是个接口是这个接口interface然后呢首先呢咱们会要去定义一个查询比如说咱们要返回啥呢
+[01:00] 就是返回值的话咱们不返回一个哈希麦普就可以哈希麦普就相当于一个对象是吧我们也可以当成一个哈希麦普是可以的好吧因为现在最终你不知道返回是什么类型啊还有什么呢还有一个是什么叫list这方法这里边有什么参数呢一个参数就是一个string的table nametable name然后第二个呢就是呃因为这个list里边咱们有可能会分译了所以说咱们会有一个
+[01:32] int start 或者什么int size好这个很好写啊咱们呢现在目前的话呢那也看笔记啊咱们不会去采用配置文件的方式啊咱们主要采用的是啥呢主要采用的是注解啊使用的是注解啊就是在这写怎么写啊比如说咱们要查询是slack是吧是slack的啊那里边啊咱们可以写四个语句比如说slack的听查询所有嘛不捞吗谁
+[02:02] 那Flam是谁呢?
+[02:04] 还没有表明啊这时候咱们可以拼接拼接的话用谁啊用Flam大括号这个是谁啊这个就是之前的FableName然后呢然后下面是有一个Limit然后呢一个是引号我们的Start第二个呢就是咱们的Size引号Size
+[02:27] 好那这样就说这完了最终啊你需要在这儿去设置一个返回值的类型就resultresulttype我们可以指定一个类型类型谁啊类型不就是hashimaphashimap2好那这样就说这完了啊说这完之后啊这里边还有个问题它现在是有三个参数它是不是有可能会找不到某一个值进行复制啊有可能吧
+[02:59] 有可能所以说咱们在这儿去加什么东西加一个prim是吧去区分到底是哪个值也是tableName下面这个呢下面这个是咱们的start还有一个拷贝一下这是size好那这个啊这个咱们就做完了这个方法是干嘛用的还知道吧这个方法就是无条件的查询查询所有
+[03:35] 查询所有啊行咱们写第二个就第二个的话咱们写啥名呢我们写返回个int叫listcomp嗯c-o-u-n-t啊这个参数呢其实是一样的这个参数跟咱们这个是差不多的但他不需要分页啊只需要一个保名就可以把这个都拷贝一下这个这个搜索语怎么写啊slack的啊然后里边是slack的新这是什么
+[04:09] slack count 行是吧counting然后是flom什么flom是不是还是要拼接当下这个table内幕啊好你防止写错啊直接去拷贝就可以了好吧行那这个咱们就做完了当然它的一个返回值的话呢返回值的话咱们可以设定是吧without type它这个呢咱们可以设置为integer.classint是没有class的啊那这个咱们就说完了啊再往下看啊
+[04:41] 这时候咱们这两个都是不在条件的咱们是不是可以设置在条件的好条件的话咱们写比如说叫list for where反位值反位值跟前面是一样的都是当前一个list里边是hashmap这样就完了这个条件就比较多一些这个条件就是当前的好名考过来
+[05:12] 第二个呢咱们也需要当前的什么也需要当前的分页也需要分页啊通通考过来还需要什么东西吗那说了无意义嘛所以说你还要在这去加东西加一个什么子顿的无意义当然你还需要去加一个param去加上啊无意义放进去好这样就完了啊下面咱们就来去写他的select这个select怎么写啊
+[05:46] slack的星是吧还是星啊flum谁呀flum就是当前的表名是吧table name好下面是无意义那这个无意义的话那该怎么写呢因为它这个也是无意义那这是条件的就这样啊我简单解释一下当前这个无意义呢它是从哪开始啊这是从and比如说and name等于或者说and什么呢
+[06:16] password是吧password等于是从这开始的它并没有带will并没有带will啊这时候呢你应该是在前面先加上will然后呢再去拼接目前的什么呢目前的这个will条件当前的关系所以说啊咱们在这啊先去设置一个固定的值什么固定的值呢就是1等等值1等于1然后呢你再去拼接目前的will就可以了这就写拼接啊
+[06:49] 好这是五月啊这是五月好然后下面还有什么呢上面这个是一样是吧叫 limit 咱们直接考过来啊就是上面这个东西好那这样的话就说是完了啊那说这完之后啊咱们在这啊再去加一个 result这是哈西麦点 glass 哦不是完了嗯还有一个啊咱们再去拷贝一份好吧嗯这个呢是要保什么 count will count
+[07:29] Count里边咱们还可以再去设置这样这个名字不是不能不叫listCountForWire这里边需要啥需要的话把名需要吗需要这个Wire需要吗需要这个分页还需要吗分页就不需要了是吧所以咱们把后边这个参数删了就可以了当然里边咱们也要删好那这样我们就设置完了好明白吧
+[08:00] 好了啊那这个不是大群大群这四个呢咱们都已经做完了下面还有还有三个啊就是修改和删除有新增是吧那咱们一次来说一下啊首先咱们先写修改吧比如说这个的话咱们通常会返回一个int例行啊这个int例行的话就是你要去中影影响了多少行什么叫update好吧然后呢写一个肯定就是把名呗啊卡过来第二个是啥呢第二个
+[08:34] 第二个啊第二个的话就是咱们的你要去设置的无约条件无约条件啊好咱们在这去加把这个物业也考过来那除了无约条件之外还有吗这里边还要再加一个再加一个说死镇类型的吗赛特斯那这个呢其实就是某一些字段的某一些字段的值啊行那咱们这啊先去加上这样之后呢咱们先写下搜索写完搜索之后你就能明白了啊好赛特斯
+[09:07] 好,这个src怎么写啊我们在这去加一个up这里边咱们写src语句是吧叫update首先呢还是要拼接当前那个名paypal name然后呢是set是谁呢拼接拼接的话就是set s对这个就是set s因为这个是不是某一个某一个匹儿啊然后呢然后是后面是你的vr条件vr
+[09:38] 等于1然后然后呢就是前的5月这个能看明白吧好了这个能看明白啊这个赛子里边其实又涵盘了当前的什么呢什么意思这什么意思理解吧这个赛子就相当于什么相当于相当于比如说有一个内幕啊内幕等于按的不是按的是逗号是吧然后是什么password的or d password等于哎这东西
+[10:12] 你看明白吧这是以逗号隔开的啊上面是他们是空格这是逗号好了啊那这个就是修改当然这个你还要再去设置它的返回到resultresulttype是integer.class好那这个呢其实就是这样是吧这个呢就是修改我们再去写一个啊写一个新增int这样啊insert下面这个新增的话该怎么写啊
+[10:47] 首先第一个值永远都是谁啊永远都是table永远都是table内幕啊就是当前的表名然后下面呢下面的话咱们还有一个叫fuse啊fuse你的你的什么呢你的字段还有啥呢还有一个values这样叫啊然后呢咱们这再去下一个param然后是这啥这就是跟他的fuse啊下面这个呢values
+[11:22] 好那这个表这个搜索区该怎么写什么insert就是insert into然后是小米人是吧table name然后干嘛然后的话呢就是你当前的什么东西啊怎么用quad扩起来啊第一个呢就是fuse我们要运进当前的当前的字段fuse第二个呢是咱们要加一个加什么
+[11:54] 加一个values然后第二个呢是你的values要拼接values这里边啊values可以了啊那这里边很简单就是你的字段是吧所有字段这个呢是你的值当然这个顺序是有要求的咱们会咱们一会拼接当前这个circle的时候也是有要求的好吧然后再往下看啊然后下面是怎么着是without也是还是integer.class就完了好吧
+[12:29] 行那这个设置完之后啊嗯这个能不能运上啊能运上啊没问题啊现在还有最后一个是吧只是这是什么update delete是吧int然后是delete然后第一个值呢第一个值就是当前的还是table啊第二个是呢因为这个删除啊通常呢都是根据某一个条件是吧所以说你肯定是有啥呢肯定是有位置啊肯定是有位置啊就是你把位置也拷过来就完事了
+[13:00] 行那这样的话咱们就可以去 delete然后是什么 deleteplum好名好大家一定要注意啊当前这个拼接表的时候一定要用dollar符用井号啊不能有井号啊这个dollar符呢是拼接用井号是站位符它是不一样的好吧然后是什么vr写错了啊vr1然后呢是拼接当前的什么
+[13:33] 当前的无意识条件完了咱们现在要求只能删除一条所以说让他去查询挑出来可以好吧行咱们在这再去设立一个result type然后这是miger.us这个咱们就算是封装完了这个就是通用的map不叫通用的do这里边我要去说一下用这个咱们最终是要注入到Service去使用的
+[14:04] 所以说你在这去加一个Mapper的诸解这样的话你才能让Spring去管理同时呢你要想让他去加Spring容器管理之后呢加这个还得再去设置个东西还要再设置一个在哪设置啊在当前扫描的这个地儿啊你要再去加一个MapperMapper scan你要去设置要扫描到当前的拨名Com.黑码然后是Admin
+[14:36] OK那这样就可以了啊刚才说了啊这个要生成代理之后呢要去注入到当前的common Service里边才能用好吧这个你加热之后呢放到死闷容器中之后才行好那这个通用的DL啊咱们就说到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+创建并编写一个通用的 MyBatis DAO 接口 CommonDao，用于支持分页查询、统计、条件查询和增删改等通用数据库操作。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示了课程大纲中“4.6 CommonDao”章节，说明要创建 CommonDao 接口，使用注解方式提供通用的列表查询和增删改功能，并使用 #{...} 拼接字符串方式，生成动态的 SQL 语句。
+画面 2: 在 IDEA 中，通过“Create New Class”对话框，创建名为 “dao.CommonDao” 的新 Java 类。
+画面 3: 在 CommonDao.java 文件中，开始编写接口定义，导入必要的包，如 java.util.HashMap, java.util.List。
+画面 4: 继续编写接口，添加了 @Mapper 注解，并定义了第一个方法：List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size)。
+画面 5: 在方法定义中，使用 @Select 注解，编写了 SQL 语句：select * from ${tableName} limit #{start},#{size}。
+画面 6: 为方法添加了 @ResultType(HashMap.class) 注解，指定返回值类型。
+画面 7: 继续编写接口，添加了第二个方法：int listCount(String tableName)。
+画面 8: 为 listCount 方法添加了 @Select 注解，编写了 SQL 语句：select count(*) from ${tableName}。
+画面 9: 为 listCount 方法添加了 @ResultType(Integer.class) 注解，指定返回值类型。
+画面 10: 继续编写接口，添加了第三个方法：List<HashMap> listWhere(String tableName, @Param("where") String where, @Param("start") int start, @Param("size") int size)。
+画面 11: 为 listWhere 方法添加了 @Select 注解，编写了 SQL 语句：select * from ${tableName} where 1=1 and ${where} limit #{start},#{size}。
+画面 12: 为 listWhere 方法添加了 @ResultType(HashMap.class) 注解，指定返回值类型。
+画面 13: 继续编写接口，添加了第四个方法：int update(String tableName, @Param("where") String where, @Param("sets") String sets)。
+画面 14: 为 update 方法添加了 @Update 注解，编写了 SQL 语句：update ${tableName} set ${sets} where ${where}。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```
+4.6 CommonDao
+创建com.heima.admin.dao.CommonDao类，使用注解方式提供通用的列表查询和增删改功能，并使用#{...}拼接字符串方式，生成动态的SQL语句。
+```
+
+画面 2:
+```
+Create New Class
+Name: dao.CommonDao
+Kind: Class
+```
+
+画面 3:
+```
+package com.heima.admin.dao;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+```
+
+画面 4:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+```
+
+画面 5:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+    @Select
+```
+
+画面 6:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+    @Select
+    @ResultType(Integer.class)
+    int listCount(String tableName);
+```
+
+画面 7:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+    @Select("select count(*) from ${tableName}")
+    @ResultType(Integer.class)
+    int listCount(String tableName);
+    @Select
+```
+
+画面 8:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+    @Select("select count(*) from ${tableName}")
+    @ResultType(Integer.class)
+    int listCount(String tableName);
+    @Select("select * from ${tableName} where 1=1 and ${where} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> listWhere(String tableName, @Param("where") String where, @Param("start") int start, @Param("size") int size);
+```
+
+画面 9:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+    @Select("select count(*) from ${tableName}")
+    @ResultType(Integer.class)
+    int listCount(String tableName);
+    @Select("select * from ${tableName} where 1=1 and ${where} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> listWhere(String tableName, @Param("where") String where, @Param("start") int start, @Param("size") int size);
+    @Update
+```
+
+画面 10:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+    @Select("select count(*) from ${tableName}")
+    @ResultType(Integer.class)
+    int listCount(String tableName);
+    @Select("select * from ${tableName} where 1=1 and ${where} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> listWhere(String tableName, @Param("where") String where, @Param("start") int start, @Param("size") int size);
+    @Update("update ${tableName} set ${sets} where ${where}")
+    @ResultType(Integer.class)
+    int update(String tableName, @Param("where") String where, @Param("sets") String sets);
+```
+
+画面 11:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+    @Select("select count(*) from ${tableName}")
+    @ResultType(Integer.class)
+    int listCount(String tableName);
+    @Select("select * from ${tableName} where 1=1 and ${where} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> listWhere(String tableName, @Param("where") String where, @Param("start") int start, @Param("size") int size);
+    @Update("update ${tableName} set ${sets} where ${where}")
+    @ResultType(Integer.class)
+    int update(String tableName, @Param("where") String where, @Param("sets") String sets);
+    @Insert
+```
+
+画面 12:
+```
+package com.heima.admin.dao;
+import org.apache.ibatis.annotations.*;
+import java.util.HashMap;
+import java.util.List;
+public interface CommonDao {
+    @Select("select * from ${tableName} limit #{start},#{size}")
+    @ResultType(HashMap.class)
+    List<HashMap> list(String tableName, @Param("start") int start, @Param("size") int size);
+    @Select("select count(*) from ${tableName}")
+    @ResultType(Integer.class)
+    int listCount(String tableName);
+    @Select("select * from ${tableName} where 1=1 and ${where
+

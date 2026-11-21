@@ -1,0 +1,122 @@
+# 2.2 Springboot工程创建
+
+- 阶段：06.阶段六 冷链监控平台项目
+- 章节：day2 微服务框架与基础服务
+- 源文件：06.阶段六 冷链监控平台项目\day2 微服务框架与基础服务\2.2 Springboot工程创建_【海量资源尽在 666java.com】.mp4
+- 时长 11分36秒（音频 696s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 大家好前面呢我们给大家介绍了我们整个冷链设备监控平台用到的是SpinBoot来创建的所有的这些微服务那么所以第一步我们需要能够快速的创建我们SpinBoot的应用那么传统的创建SpinBoot的应用其实很简单那么比如在我们的ID工具里边我们创建一个啊Create一个Project而这个创建Project的时候我们可以选择我们Project的类型是一个Maven的
+[00:28] 然后选择我们的JDK的版本比如说是1.8那么我们点击next那么在这个里边我们输入我们的工程的名呃group idgroup id叫做com.it可以吗然后呢我们的it fact id比如我们当前的这个artifact id呢是我们叫做code common我们的公共组件然后我们可以点击next我们选择我们整个工程所在的一个
+[00:58] 目录比如我们现在把它放到我们的一个project下边的一个新建一个目录比如说叫code project然后呢我们选择当前project就是当前的这个工程所在的一个目录就是这样的一个目录我们点击finish那此时idea工具会给我们创建一个空白的一个MVM工程
+[01:32] 这个空白的main文工程里边它的目录结构其实已经有了比如我们的一些SIC目录然后SIC下的main java和resource目录和一个pub文件这些已经创建好了这是一种方式我们可以来创建那么下一步的话我们就可以引入我们的一些比如说我们的dependency也就是说我们依赖的一些什么包比如说我们的spin boot
+[02:00] 我们在这个地方可以添加我们的Spring Boot的一个依赖的一个Dependency的一个jar 包或者说坐标我们在这里面添加上就往下一步步的向下操作这是一种方式那么我们现在呢给大家介绍另外一种方式这种方式呢相对来讲也比较简单一些我们可以打开我们的浏览器这个浏览器里边呢有一个Spring官网提供的一个创建Spring Boot应用的
+[02:30] 一个方式比如这个官网的地址呢叫starter.spring.io那么打开这个网站之后呢我们可以看到里面有一些比如像我们的啊输入选择我们的project的类型选择我们的开发语言是java的或者是cultaline或者是gravy的cultaline和gravy是不同的这种开发语言或者脚本语言编程语言
+[02:58] 那么我们选的是Java编程语言然后选择我们的Spring Boot的一个版本号这个Spring Boot的版本我们可以选择2.2.2那么这是当前的一个最新的一个版本那么Snapshot还有一个Snapshot这是什么意思呢Snapshot指的是当前正在属于开发中的一个版本它并不是一个release或者并不是一个稳定的版本有可能会发生一些变化那么下一步的话我们就可以输入我们
+[03:26] project或者工程的一些数据了比如说叫group idgroup id我们可以输入我们的叫commoncommon.it黑码然后呢我们的artifact id呢我们可以输入我们当前的artifact id比如说像叫code-common那么下一步我们可以点击我们的option然后输入我们的整个项目的一些介绍比如说叫公共组件
+[03:57] 组件工程然后我们的packagepackage的话可以稍微更改一点这个地方就叫com.ithema.code.com然后呢我们使用的java的版本它最终的来讲的话是一个package是一个java那么java的版本呢我们选的是8那么下一步是非常重要的一点就是说我们当前这个工程它的一些依赖的包
+[04:27] 比如在这个依赖包里面我们可以输入什么呢我们可以选择Lambook我们把这个添加进来我们可以把我们的Spring Configuration Process给它添加进来还有就是我们的比如我们的什么呢我们可以现在是输入我选择一个选择一个什么选择一个我看一下我们可以选择它有好多种我们先简单的介绍一下它的一些依赖的一些东西比如
+[04:55] 在这里边是有开发工具开发工具像LandBook或者说Spring Boot的一个DEV的一个tool那么web里边的话包括什么用web的或者是我们的rest的repository然后还有其他的一些都是web开发的相关的一些坐标再往下的话我们还可以使用比如说我们的frame maker或者说是Growth template
+[05:24] 这些都是我们的一些组件的或者说就模板的一些引擎那么安全的话像我们可以选择或者是说我们可以选择客户端服务器端的那么我们可以选择GDPC的一个或者说SpringData的一个GDPC等等这些都是一些组件的一些坐标
+[05:50] 这种方式我们可以有什么好处呢我们点选中我们感兴趣的比如说我们可以选一个repetitemq的选择卡不卡的选完了之后呢我们可以生成一个比如我们可以先点这个xplotxplot是一个预览我们点开预览的时候我们就能够看到我们当前这个工程它的一个预览的情况就是泡沫文件预览的一个情况OK我们可以看到这样的一个情况了
+[06:19] 比如说他当前的工程这是泡沫文件那么工程的方法工程的一些啊包名是什么工程的工程的整个的一个结构是什么他的泡沫文件里边有什么我们可以点击downloaddownload之后选择保存文件我们点击确定保存保存之后呢我们就把我们的这个工程保存到我们的啊保存到我们的比如说我们的这个的里边去当然了现在应该是
+[06:47] 选择我们退回一下选择generate我们点generate之后呢我们进行保存保存整个的一个工程那么整个工程的话我们选择我们的目录这个目录我们可以选择点击在我们project下那它添加之后呢我们就能够看到这个工程已经下载完了OK我们下载完了之后呢我们可以把它进行一下解压解压我们解压到当前的目录里边
+[07:22] 那此时这个工程已经有了我们可以把它导入到我们的工程里边我们添加我们的model然后添加一个model我们import model就是我们的code common然后选择的是import model的类型是maven的然后点击next点击next然后finish那此时我们这个工程已经创建完了
+[07:51] 那么这种创建方式有一个比较好的好处是我们的一些POM文件的一些坐标其实都可以添加进来了此时他还在加载那么这些坐标呢其实就是我们在工程里边选择的他依赖的一些jar 包这是我们在用这种方式来创建的一个我们的Spring Boot Maven的一个工程
+[08:17] 当然了如果说我们不这样创建我们使用第一种方式来创建我们的什么呢来创建我们的工程的时候我们可以如何我们如何来选择我们的一个jar 包或者说选择一个一个袜包呢那么我们可以输入一个mavinmvin然后呢下一个关键是repositary.com然后在这个里边的话我们可以
+[08:45] 输入或者选择我们的Maven依赖的一个包那么我们现在其实正在打开而打开的话稍微有一点点慢MavenRepository.com没错就是这个网址OK它打开了我们的这个Maven的Repository也就是说我们POM文件依赖的那么假设我想输入一个比如说Submit Boot我们想依赖于它的那么我们可以看到我们的Submit Boot的工程我们点开它
+[09:17] 这是business sparing boot那就是商业版的一个sparing boot但是我们要想用sparing boot的一个starter我们点它那么我们还可以看到这里边有一些我们sparing boot的一些依赖也就是说在这个地方我们直接把我们的sparing boot的依赖给拷贝过来那么拷贝到我们的前面的工程里边我们直接在这里边添加上而这个时候我们其实就可以用到了我们的sparing boot了
+[09:48] 当然这个Spring Boot也不是我们常用的一个Spring Boot它是一个Caml来封装的我们通过这个方式就是给大家来演示一下我们如何来使用Spring Boot或者如何来使用我们这个网站来把我们的一些需要引用的一些这个POM或者说组件的一些坐标给它查找到然后呢引入到我们的工程里面去OK
+[10:16] 这是我们今天给大家介绍的通过两种方式来创建我们的整个啊sperm boot的一个应用一个方式是我们通过sperm的官网上提供的这种选择另外一个就是我们通过Java的啊ID工具来创建project创建project的时候呢我们可以选择project的类型这种类型是妹妹的然后一步步向下来那么他的
+[10:42] 价包或者他的引用的依赖包呢我们可以通过网址来搜索搜索我们想要的到底是哪一个哪一个这个工程或者哪一个依赖的依赖的泡沫文件呢坐标那还有另外一种方式我们可以在百度里面搜索比如说我们百度里边百度搜索我搜索什么呢我搜索我们的比如说savent boot坐标那么搜索常用的一些坐标之后我们点击
+[11:14] 随便点击一个点击一个它其实有很多就把一些坐标告诉我们了我们可以把它拷贝到我们的工程里边去这也是一种方式所以根据大家的一个情况来进行一些选择我们要充分的利用网络上的一些资源来使用来开发和创建我们的一个工程
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 IntelliJ IDEA 创建 Spring Boot 项目，并通过 Spring Initializr 选择依赖项，最终导入并配置 Maven 项目结构。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：打开 IntelliJ IDEA，准备创建新项目，左侧显示课程目录，右侧显示 Spring Boot 项目结构图。
+画面2：在文件资源管理器中，显示“cold-project”文件夹，准备导入项目。
+画面3：在 Spring Initializr 网站上，选择“Spring Session”和“Rest Repositories HAL Browser”依赖项。
+画面4：在 Spring Initializr 网站上，展开“Security”分类，选择“Spring Security”和“OAuth2 Client”依赖项。
+画面5：显示下载的“cold-common.zip”压缩包内容，其中包含 pom.xml 文件，内容如下：
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.ithema</groupId>
+    <artifactId>cold-common</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>cold-common</name>
+    <description>公共组件库</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+    </dependencies>
+</project>
+画面6：在文件资源管理器中，显示“cold-project”和“cold-common.zip”两个文件。
+画面7：在 IntelliJ IDEA 中，打开“Project Structure”对话框，设置源码目录和测试目录。
+画面8：在 Spring Initializr 网站上，选择“Spring for Apache Kafka Streams”依赖项。
+画面9：在浏览器中，搜索“mvnrepository”。
+画面10：在 Maven Repository 网站上，搜索“Spring Boot Starter :: Camel :: Spring Boot”。
+画面11：在 Maven Repository 网站上，搜索“Spring Boot”，显示搜索结果。
+画面12：在 IntelliJ IDEA 中，打开“cold-common”项目，显示 pom.xml 文件内容，其中“<version>3.0.0</version>”被选中。
+画面13：在浏览器中，搜索“baidu.com”。
+画面14：在 IntelliJ IDEA 中，显示“cold-common”项目的 pom.xml 文件，其中“<version>3.0.0</version>”被选中。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置：
+画面5：
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.ithema</groupId>
+    <artifactId>cold-common</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>cold-common</name>
+    <description>公共组件库</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+    </dependencies>
+</project>
+
+4) PPT 标题、架构图/流程图的结构、表格数据：
+画面1：右侧显示服务注册中心、服务发现、定时任务等组件的架构图。
+画面3：显示 Spring Initializr 网站的依赖项选择界面。
+画面4：显示 Spring Initializr 网站的“Security”分类下的依赖项。
+画面8：显示 Spring Initializr 网站的“Messaging”分类下的依赖项。
+画面10：显示 Maven Repository 网站的“Spring Boot Starter :: Camel :: Spring Boot”页面。
+画面11：显示 Maven Repository 网站的“Spring Boot”搜索结果页面。
+
+5) 无。
+

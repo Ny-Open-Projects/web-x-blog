@@ -1,0 +1,236 @@
+# day12-13-满标放款-接口4-业务层-保存还款计划
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：04_万信金融-投标放款/4-5 满标放款功能实现
+- 源文件：10.阶段十 万信金融项目\04_万信金融-投标放款\4-5 满标放款功能实现\day12-13-满标放款-接口4-业务层-保存还款计划_【海量资源尽在 666java.com】.mp4
+- 时长 20分33秒（音频 1234s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 刚才呢我们把还款计划已经生成了那接下来咱就开始实现保存这个什么呀还款计划到数据库中那这块代码呢稍微有点复杂我们准备呢单独抽取出来一个方法来实现这个保存功能那这块呢咱跟讲义保持一致咱查一查这个讲义里面这个方法的定义看一看应该就是这你看保存这个还款计划到什么呀到数据库
+[00:31] 咱把这个方法定义部分这块拿过来跟讲义保持一致是单独啊单独我们抽取出来了一个方法好大家看一看啊这个方法的名字就叫save什么呀repayment plan对不对要几个参数呀两个参数一个是标底信息一个就是这个什么呀缓缓计划咱是不是在这刚生成的这个缓缓计划对吧把这两块信息传进来然后进行保存
+[01:01] 保存完之后呢我们这个方法其实还有一个返回值啊大家看一下这为啥会有返回值呢按说保存成功之后就完事了吧为什么还要返回一个集合对不对这里边还要把这个这个什么呀这是谁啊repayment plan是不是还有一个实体类就是这个还款计划了我们还要把数据封扔到这里边存储到一个集合里边返回呢那我们返回这个东西主要是为这一步做准备的那么一会儿呢我们在生成投资人的应收明细的时候他是需要用到这些数据的
+[01:30] 说这块大家注意就是我们这个方法主要的功能还是要保存这个什么还款计划但是同时呢把相关的一些数据返回为这个什么呀生成投资人优胜明细给他做一些这个什么数据的一些准备那咱接下来就开始在这个方案里边编写代码来实现数据库的一个什么呀保存功能那咱这个保存功能其实说白了啊大家注意看看就是往这个表里边保存数据啊哪个表呢咱看看啊数据库是P2P Repairment
+[01:59] 然后呢有一个表叫repayment plan这个表呢以前让大家看过这个里边其实就是保存什么还款计划你看这里边都有哪些信息投标人的信息标底的信息期数还款的利息还款的本金本息和对不对应还的时间还款的状态等等等等那其实呢我们现在要实现的这个什么呀保存还款计划这个功能其实就是往这个表里边插数据而且呢你要注意啊它这个插多少条数据呢跟这个期数有关
+[02:29] 举个例子比如说我借钱借了12个月那你接下来就要往这个表里边保存多少条数据12条数据它是一期一条数据一期一条记录明白什么意思吧这是需要注意这叫还款计划对不对计划嘛就是第一个月还多少钱第二个月还多少钱第三个月还多少钱这叫计划所以你要是借了12个月这里边就一下子差多少条数据
+[02:52] 对12条数据啊这个大家一定要注意那保存很简单其实我们说白了跟以前套一样我们应该是不是有一个跟这个表对应的一个什么实体类刚才你也看到就叫什么repaymentprime是不是因为它对应的就是这个表了然后呢这里边的每个属性是不是都对应这个表里边的每个什么呀子段那我们既然要做的是比如new一个什么呀应该不是new一个了new好多个这跟期数有关吗我们之前说对吧
+[03:23] 那总体的思想就是我们要newrepayment的plan这么一个对象然后呢开始干什么呀对downset的方法给这些东西干什么呀都复职复完职之后呢是不是就可以进行保存其实功能很简单但是这个代码掀下来比较麻烦为什么麻烦大家看到字段比较多也就是说这个属性非常多啊但是它不难
+[03:46] 那咱接下来就把这块代码的编写一下啊我们回到Service这边找到这个方法那咱首先这样子吧咱参考讲义啊咱先把这个集合给创建出来因为咱刚才提到过了我们这个方法最终是不是有一个例子的集合的这种一个什么呀返回值我们先把它创建出来先准备着起一个名字就叫做repayment plan list直接new
+[04:17] 先把这个集合创建出来先准备着啊因为一会我们在保存这个还款计划的时候呢这个集合里边慢慢就有数据了然后呢最终就可以把这个集合返回了这是我们把集合创建好创建好之后呢接下来呢我们要想这个保存还款计划我们首先是得先获得一些数据对吧那有些数据呢我们基本上就是从这个里边来取这是谁啊这个是不是我们上一步就是生成的这个什么呀
+[04:46] 是不是还款计划对吧将来我调到这个方案的时候是不是要把它干什么呀对要把它作为参议传进来而它里边就有一些数据我们需要获取到获取到之后呢才可以随着这个什么呀还款计划一起保存到数据库里边所以咱接下来要从这里边取一些数据也就是说相当于是做一些准备工作啊那都取哪些数据呢咱一起看一看首先我要取的就是每一期的利息还款吧你是分好多期来还的每一期都有利息对吧
+[05:15] 先是获取这个什么呀每期的这个什么利息这个呢是通过它里边的一个方法我们叫什么叫get这里边都已经封装好了get哪个呢我们看应该是这个方法它返回的是一个什么呀对map集合我们接下来接收一下起个名字起个名字呢我们就叫in
+[05:50] 这里边是不是有范形对不对这个范形的话你可以参考这个方法应该是比一个integer一个什么呀big decimal那么这里边的integer就是这个键对吧它就表示第几期然后big decimal这个值就表示每一期要还的什么
+[06:27] 利息啊因此呢他是设计成一个什么呀卖不集合这个比较好理解接下来我们还要获取啥接下来我们要获取就是平台的什么呀对收取的利息去路去平台他也要收一些利息要不然pwp平台装啥活着是不是那我们这个数据从哪去还是从这个参数里边来去啊调用他的另外一个get方法叫哪个呀这个啊commission map
+[07:02] 然后他返回来同样也是一个什么呀map集合那么类型呢跟上面是一模一样的整过来然后起一个名字我们的名字就叫commission这是平台利息平台利息也是按期收取的嘛键仍然是第几期然后后边这个值就是这个什么呀平台收取的利息
+[07:30] 那接下来我们还要获取啥我们还要获取什么呀本金呀有利息就有本金呀对不对本金还是大头我们就是要给人家获取每期的这个什么呀对本金本息和吗你每一期叫还本金要还什么呀还利息那么这个本金怎么获取啊还是通过这个参数我们换另外一个方法叫get principal什么呀map
+[08:00] 这个MAP集合里边导到的就是什么导到就是每一期的什么本金那么它反复的仍然也是一个什么对也是一个MAP集合一样的这个键就是第几期这个值就是什么每一期你要还的这个什么本金但这呢我们先停一下我们不着急着声明一个MAP集合去接收它我们接下来考虑考虑后边的事那你看我的每一期的利息这个平台的利息包括本金这些数据我都获取到了
+[08:29] 获取到之后呢大家知道我们前面提到我们说如果说我这个缓缓计划是12期的话我将来是不是要往表里边保存12条数据记录是不是也就是说呢这明显是一个循环保存那这个12期这个12怎么获取到就这个7数怎么获取到怎么获取到大家想一下我们这个MAP集合的长度不就表示7数吗你要是12期的话这个MAP集合的长度应该就是什么呀12那这个MAP集合的长度是12吗
+[09:01] 肯定都是12嘛这几个MAP集合的长度应该都是什么呀一样的你有多少期的利息肯定就有多少期的这个什么呀本金嘛对不对那考虑到我们接下来是要进行这个什么呀循环保存而且呢这个循环的次数跟这个集合的长度正好是什么呀是一致的或者对应着呢对不对所以说呢我在这儿得到这个本金的时候呢我不着急着啊用一个MAP集合去存储我接下来就直接对它进行什么呀便利了
+[09:31] 我用for each直接对它进行便利便利的过程当中我自然能得到这个本金而且便利的过程当中我是吧还可以进行什么我可以做接下来要做的一个工作就是循环保存每一期的这个什么呀缓缓计划给它保存到属于库里所以我们这呢要这么写我们通过这个什么呀for each那这里边怎么写这里边的话其实就是lambda表达式了这里边我们给它补充一下k两个参数嘛一个键一个什么呀
+[10:01] 对一个值然后呢Lamb表示是不是应该是这么字来写没错吧那我们在这个学习过程当中既可以得到每一期的本金又可以干什么呀对去保存每一期的这个什么呀还款计划那具体怎么保存呢那你肯定是不是要你有实体类的对象了我们刚才提到过我们这个还款计划是不是要往这个表里边来保存那这个表是不是一定会对应一个什么呀实体类
+[10:31] 这个前面大家见过是不是就叫repayment plan所以说呢你就应该去在这个什么循环里边去创建这个对象创建完对象之后调setter方案网里边复制复安值之后是不是调什么呀数据访问层直接进行保存就行了所以接下来的话我们应该就是直接要干什么呀对new这个repayment plan这个实体类对象然后呢我们这里边声明一个变量
+[11:05] 你看我们这个创建对象的这个代码是放在这个循环里面我们刚才说了你要是有12期你这已经应该创建12个这个对象我将来就保存12条数据对吧那接下来这个对象出现出来之后是不是归掉他的一堆什么呀对一堆这个什么呀setter方法大家看一下很多很多然后这里边好多数据啊好多这个值就来自于这个第一个参数project的dto就标底相关的一些信息嘛我们要汇聚出来然后通过setter
+[11:34] 把复制进去这块代码的话我就不再一个一个给大家写了啊因为他纯粹就是掉色的方法给属性复制呢我们就从讲义里边给他拿过来就行了我们找一找这一块的这个代码大家看应该是这吧是不是你看下面就是一堆这个set的方法复制的我们拿过来过一遍就行我咱一起过一遍啊一行一行来首先你看这里边就存了有什么呀对标底的这个什么呀ID还有什么呀
+[12:12] 发标人的这个用户标识consumer id对不对发标人的用户编码user number对吧还有标底的这个什么呀编码project number这些信息是不是都是从第一个参数project dto里边来取出来那然后还有什么呀对还有七刷这个七刷其实是谁呀k k是谁呀k不就是这个值吗那这个值不就是这个map集合里边那个键吗刚才说了
+[12:40] 这个键就表示第几期嘛就是七数和这写的是k然后呢接下来我们还要干什么设置什么呀对还款的这个什么呀还款的利息就是每一期应该还的利息那这个利息的话我们是不是应该放到这个什么呀这个集合里边对不对这会啥报错呀intr这个不太对我改一下应该是什么呀est对吧
+[13:12] 我们在这一步是不是已经得到了每一期的利息对吧但是我现在要的是那个利息那个值那怎么办你把七数给我我们说了这个键这个键是不是又表示七数那值就是具体的利息嘛所以说这个K呢是不是在这就表示七数嘛你把键给他他给他方法得到就是什么呀对就是利息接下来这设置的是什么呀本金对吧这个本金呢就是从当前集合里外来取嘛那就是这个谁呀
+[13:40] V嘛就是这个值麦克集合里边的一个值对不对就这个V直接拿来用就行了呃然后再接下来就是本锡和吗本金加上利息啊那这里边唯一点需要大家注意的就是这个求和的话这个地方不能用加法啊不能用加号应该是用什么呀ADD方法因为呢这个本金和利息它的类型都是什么呀对比个decimal类型的啊不是基本数据类型这个一定要注意了
+[14:09] 然后接下来还要设置这个英环时间这个大家比较熟悉这个很多学员都用过这个信用卡是不是信用卡你借了银行的钱之后是不是接下来每个月或者每一期都要进行还钱所以这边有一个什么英环时间那么这个英环时间怎么算出来怎么算出来这个英环时间呢其实就是拿着当前的时间我们现在不是在保存这个什么呀还款计划吗对不对
+[14:39] 那么在保存还款计划的时候这个还款计划这个就是当前的这个时间然后呢这个应还时间怎么算呢应还时间就是当前时间加上这个kk是谁啊k就是这个什么呀7说对不对map集合里边这个键就是这个k就是7说嘛那为什么说是加上这个7说你看他调的这个方法local data time然后add什么呀month对不对就是累加这个月说啥意思呢
+[15:11] 你比如说当前时间是三月当前时间是三月啊你看也就是说我保存这个还款计划的时候这个时间是三月那K的值如果是一就是第一期那这一累加现在是三月吗K是一的话一累加是不是四月就是第一期我要还就是从四月份开始玩明白吧那如果K是二就是第二期那三加二就是几就是五月那我第二期应该还的时间就是五月份嘛明白什么意思吗
+[15:39] 就是当前时间加上这个七数单位是月算出来的就是什么呀英环时间然后呢接下来英环状态呢默认值就是什么呀0就表示贷款然后还有这个缓缓计划创建时间呢这个不用说就是当前时间了那还有下面就是什么呀平台佣金对吧平台佣金的话你从前面的哪个集合来取这个集合来取就行了也是把七数作为键给他给他发反而就是一个什么呀佣金就是这个值
+[16:13] 那到这儿的话我们基本上就把这个谁啊repayment plan这个对象里边这个一堆属性的值全部都干什么都给过了啊给完之后接下来就是开始开始进行保存啊保存的话我们是不是要调用这个什么呀Mapper接口就是数据访问层那它是不是还没有注入进来对不对那因此呢我们需要在最上面啊来个注入plan什么呀Mapper数据访问层咱前面都已经搞定过了
+[16:52] 输入进来之后呢这儿咱就不用报错了啊不会报错了我们调用它的什么insert的方法啊然后把这个对象直接扔进去它就保存到什么呀数据库里边所以从这儿啊一直到哪儿呀到就是整个这个循环内吧啊都是在往数据库里边保存这个什么呀缓缓进啊我们说了你有12期它就会没有12个对象然后设置这个属性的值然后进行什么呀对通过insert的方法进行保存就会保存12条数据这是保存功能就搞定
+[17:22] 然后最后呢别忘了啊别忘了干什么呀对别忘了我们要把这些对象全部都存到这个什么呀对存到这个集合里边然后最后这个方法的最后我们还要干什么呀我们还要返回这个集合这个大家还有印象吗我们这个方法当时在定义的时候我们说过这个方法是不是有一个反而值就是一个粒子的集合这个集合的作用是不是将来要在这一步是不是需要使用对不对所以说最后这一块代码你千万不要忘记
+[17:55] 那目前呢咱们就把保存还款计划到数据库的这个方案就搞定了搞定完之后我们是不是需要在这儿进行什么呀是不是需要在这儿进行调用嘛对不对我们是抽取出来一个方法所以说需要在这儿调用然后调用的时候呢这里边是不是就要干什么呀对就要传参数了啊一个是那个什么呀project DTO一个就是这个什么呀对生成的还款计划然后这个方案我们说了是不是有
+[18:23] 一个什么呀list类型的一个返回值啊我们需要在这给他干什么呀接收一下我们就叫plan list那么这个返回值是不是将来在这一步要用他要从这里边取一些什么呀数据的那这个保存还款计划到数据库这块代码咱基本上整的就差不多了最后呢我们再加一点这个逻辑到这里边啊哪一块逻辑呢
+[18:50] 就是这个缓缓方式我们前面提到过我们目前的缓缓方式是不是只针对这个等而本息的这种但是将来呢我们的平台有可能也会提供别的一些什么呀缓缓方式啊所以说呢我们这样的最好是目前啊目前加这么一个判断就是判断一下这个缓缓方式它是哪一种这样呢我们要获取到它的这个什么呀缓缓方式然后呢跟谁进行比较啊跟等而本息
+[19:20] 等额本息这个值呢我们是封装到这个地方了叫repaymentvcode我们都已经封装好这里边你看一下我们将来有可能还有别的什么还款方式一次性还款对不对一夜暴富了对不对我就直接一次性还款还有等额本金还有什么呀先锡后半对不对但是我们刚才说了我们目前只考虑什么呀我们目前只考虑这个等额本金所以说呢我们这呢要做这么一个什么呀
+[19:48] 对一个判断你要调用getcode的话达到具体的这个值如果我一判断你是这个什么呀你的还款方式是等了本息的话我是不是才接下来才干什么呀对才走这一块代码那如果不是呢如果不是的话目前我们就简单处理一下就先返回什么呀因为我们目前呢别的还款方式我们暂时不考虑我们加这么一个
+[20:22] 逻辑判断吧就是针对还款方式是哪一种我们加了一个判断那保存还款计划整个这块代码呢咱们目前就全部编写完了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+讲解如何在万通金融项目中实现等额本息还款计划的计算与数据库持久化，包括相关实体类、服务层代码及数据库表结构。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示课程文档，讲解等额本息还款方式的计算公式。
+画面2：展示数据库表结构，列出还款计划表（repayment_plan）的字段和索引。
+画面3：展示还款计划实体类（RepaymentPlan）的代码，包含金额、应还款日期、状态等字段。
+画面4：展示服务层代码，定义了保存还款计划的方法。
+画面5：展示服务层代码，调用固定还款计算工具类（FixedRepayment）获取利息和本金映射。
+画面6：展示服务层代码，使用循环创建还款计划对象并设置属性。
+画面7：展示课程文档目录，定位到还款服务功能实现章节。
+画面8：展示服务层代码，设置还款计划对象的属性，包括项目ID、借款人信息、期数、利息、本金等。
+画面9：展示服务层代码，设置还款计划的应还款日期、状态和创建时间，然后调用Mapper插入数据库。
+画面10：展示服务层代码，定义了还款服务接口（RepaymentService）和实现类（RepaymentServiceImpl）。
+画面11：展示服务层代码，设置还款计划对象的借款人ID、项目编号、期数、利息、本金等属性。
+画面12：展示服务层代码，调用saveRepaymentPlan方法保存还款计划。
+画面13：展示服务层代码，根据还款方式判断是否是等额本息还款。
+画面14：展示服务层代码，如果还款方式不是等额本息，则返回-1。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+月利率 = 借款年利率 / 12
+每月还款额=借款本金×[1+月利率]^(n-1)×月利率 / [1+月利率]^(n-1) - 1]
+第n月还款额 = 本金×月利率×[1+月利率]^(n-1) - 1] / [1+月利率]^(n-1) - 1]
+
+画面2：
+Columns (13)
+| COLUMN_NAME | DATA_TYPE | NULL | DEFAULT | COMMENT |
+|-------------|-----------|------|---------|---------|
+| CONSUMER_ID | bigint(20) | NOT NULL | | 借款人用户标识 |
+| USER_NO | varchar(50) | NOT NULL | | 借款人用户编码 |
+| PROJECT_NO | varchar(120) | NOT NULL | | 借款人项目编号 |
+| INTEREST | decimal(17,10) | NOT NULL | | 利息 |
+| PRINCIPAL | decimal(17,10) | NOT NULL | | 本金 |
+| SHOULD_REPAYMENT_DATE | datetime | NULL | | 应还款日期 |
+| REPAYMENT_STATUS | varchar(50) | NOT NULL | | 计划创建状态 |
+| CREATE_DATE | datetime | NULL | | 年化利率(平台佣金，利息) |
+| COMMISSION | decimal(10,2) | NULL | | 平台佣金 |
+
+画面3：
+private BigDecimal amount;
+@ApiModelProperty("应还款日期")
+private LocalDate shouldRepaymentDate;
+@ApiModelProperty("还款状态")
+private String repaymentStatus;
+@ApiModelProperty("创建时间")
+private LocalDateTime createDate;
+
+画面4：
+//保存还款计划到数据库
+public List<RepaymentPlan> saveRepaymentPlan(ProjectDTO projectDTO,
+EqualInterestRepayment fixedRepayment) {
+
+画面5：
+List<RepaymentPlan> repaymentPlanList = new ArrayList<>();
+//获取每期利息
+final Map<Integer, BigDecimal> interestMap = fixedRepayment.getInterestMap();
+//平台收取佣金
+final Map<Integer, BigDecimal> commissionMap = fixedRepayment.getCommissionMap();
+//获取每期本金
+fixedRepayment.getPrincipalMap().forEach((k, v) -> {
+画面6：
+final RepaymentPlan repaymentPlan = new RepaymentPlan();
+//新的还款计划
+repaymentPlan.setProjectId(projectDTO.getProjectId());
+//借款人用户标识
+repaymentPlan.setConsumerId(projectDTO.getConsumerId());
+//借款人用户编码
+repaymentPlan.setProjectNo(projectDTO.getProjectNo());
+//期数
+repaymentPlan.setNumberOffPeriods(k);
+//当前还款利息
+repaymentPlan.setInterest(interestMap.get(k));
+//还款本金
+repaymentPlan.setPrincipal(v);
+
+画面7：
+//平台收取佣金
+final Map<Integer, BigDecimal> commissionMap = fixedRepayment.getCommissionMap();
+//获取每期本金
+fixedRepayment.getPrincipalMap().forEach((k, v) -> {
+//新的还款计划
+final RepaymentPlan repaymentPlan = new RepaymentPlan();
+//借款人用户标识
+repaymentPlan.setConsumerId(projectDTO.getConsumerId());
+//借款人用户编码
+repaymentPlan.setProjectNo(projectDTO.getProjectNo());
+//期数
+repaymentPlan.setNumberOffPeriods(k);
+//当前还款利息
+repaymentPlan.setInterest(interestMap.get(k));
+//还款本金
+repaymentPlan.setPrincipal(v);
+
+画面8：
+//平台收取佣金
+final Map<Integer, BigDecimal> commissionMap = fixedRepayment.getCommissionMap();
+//获取每期本金
+fixedRepayment.getPrincipalMap().forEach((k, v) -> {
+//新的还款计划
+final RepaymentPlan repaymentPlan = new RepaymentPlan();
+//借款人用户标识
+repaymentPlan.setConsumerId(projectDTO.getConsumerId());
+//借款人用户编码
+repaymentPlan.setProjectNo(projectDTO.getProjectNo());
+//期数
+repaymentPlan.setNumberOffPeriods(k);
+//当前还款利息
+repaymentPlan.setInterest(interestMap.get(k));
+//还款本金
+repaymentPlan.setPrincipal(v);
+
+画面9：
+//应还款日期，当前业务等待
+repaymentPlan.setShouldRepaymentDate(DateUtil.now());
+//计划创建时间
+repaymentPlan.setCreateDate("0");
+//设置平台佣金
+repaymentPlan.setCommission(commissionMap.get(k));
+//保存到数据库
+planMapper.insert(repaymentPlan);
+repaymentPlanList.add(repaymentPlan);
+
+画面10：
+package cn.ictast.wanxing2p.repayment.Service;
+import ...
+@Service
+@Qualifier("repaymentService")
+public class RepaymentServiceImpl implements RepaymentService {
+
+画面11：
+//平台收取佣金
+final Map<Integer, BigDecimal> commissionMap = fixedRepayment.getCommissionMap();
+//获取每期本金
+fixedRepayment.getPrincipalMap().forEach((k, v) -> {
+//新的还款计划
+final RepaymentPlan repaymentPlan = new RepaymentPlan();
+//借款人用户标识
+repaymentPlan.setConsumerId(projectDTO.getConsumerId());
+//借款人用户编码
+repaymentPlan.setProjectNo(projectDTO.getProjectNo());
+//期数
+repaymentPlan.setNumberOffPeriods(k);
+//当前还款利息
+repaymentPlan.setInterest(interestMap.get(k));
+//还款本金
+repaymentPlan.setPrincipal(v);
+
+画面12：
+//保存还款计划到数据库
+public List<RepaymentPlan> planList = saveRepaymentPlan(projectDTO, fixedRepayment);
+
+画面13：
+//计算还款的月数
+Double cell = Math.ceil(projectDTO.getPeriod() / 30.0);
+Integer month = ceil.intValue();
+//还款方式，只计付等额本息
+String repaymentWay = projectDTO.getRepaymentWay();
+if (repaymentWay.equals(RepaymentWayCode.FIXED_REPAYMENT.getCode())) {
+
+画面14：
+//计算还款的月数
+Double cell = Math.ceil(projectDTO.getPeriod() / 30.0);
+Integer month = ceil.intValue();
+//还款方式，只计付等额本息
+String repaymentWay = projectDTO.getRepaymentWay();
+if (repaymentWay.equals(RepaymentWayCode.FIXED_REPAYMENT.getCode())) {
+EqualInterestRepayment fixedRepayment = RepaymentUtil.fixedRepayment(projectDTO.getAmount(), projectDTO.getPeriod());
+List<RepaymentPlan> planList = saveRepaymentPlan(projectDTO, fixedRepayment);
+} else {
+return "-1";
+}
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：PPT标题为“3.2.5 还款服务启动还款接口(接口④)”，子标题“3.2.5.1 还款方式”。
+画面7：PPT标题为“3.2.5 还款服务启动还款接口(接口④)”，子标题“3.2.5.2 功能实现”。
+画面13：PPT标题为“3.2.5 还款服务启动还款接口(接口④)”，子标题“3.2.5.5 生还款计划”。
+画面14：PPT标题为“3.2.5 还款服务启动还款接口(接口④)”，子标题“3.2.5.6 生成投资人应收明细”。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

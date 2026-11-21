@@ -1,0 +1,170 @@
+# 13-HDFS的API操作-获取文件列表信息
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day02-HDFS
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day02-HDFS\13-HDFS的API操作-获取文件列表信息【海量资源尽在 ubkz.com】.mp4
+- 时长 10分58秒（音频 658s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 写完failsystem的四种获取方式之后接下来我们可以通过获取的这个failsystem对我们hdfs的文件进行操作咱们先看第一个操作遍历hdfs所有文件什么意思呢我们来看这个hdfs的文件系统在这个根目录下面呢有很多的文件和一些文件夹那我想干嘛呢我想通过java api来去遍历这里边所有的文件信息
+[00:29] 来我们看如何去实现首先呢要去遍历根目录下面所有文件信息我们第一步呢还是要获取一个fail system我们说过你获取fail system就相当于你可以拿到我们HDFS所有的原数据信息那这里边呢用的是用的是这种你用一个get方法你用一个UI然后再你用一个configuration获取完文件系统之后呢接下来
+[00:58] 用了一个方法叫listfiles这个newpath指定从根目录开始而这个处呢表示是地归通过地归的方式呢获取那比如说呢我有一个目录那我加一个处之后呢它可以获取这个目录下面所有的子目录那获取完之后呢你会发现它返回了一个迭代器接下来呢我就可以便利这个迭代器然后呢去获取文件的一些详情好大概是这个思路接下来
+[01:28] 我们来实现一下好打开我们的ID在这里呢我们来做个注释我们要去获取目录下所有的文件信息好在这里呢我们加个单元测试public void我们来写一个方法叫叫list吧listgetgetlist
+[02:02] FailSystemOK那我们来把这个代码实现一下第一步干嘛呢第一步我们要获取FailSystem对象FailSystem那我们通过这个FailSystem的一个get方法用这个第一个参数呢是UI我们拗一个URI然后给它一个HDFS路径HDFS冒号刚刚Node01这个对外端口是8020
+[02:36] 第二个呢我们来new一个configuration对象好拿到这个fail system拿到之后呢把这个异常呢咱们先直接抛吧OK抛弃一下那接下来呢我们第二步我们需要干嘛呢我们需要呢通过这个fail system呢来获取某一个目录下面的所有文件信息好在这里呢我们有一个方法叫list fails制定
+[03:05] 你从哪个目录获取是否使用地归的方式来我们来看第二步获取指定目录下的所有文件信息就是File System有个方法叫List Files大家看这个参数这个参数第一个是一个pass那么我们new一个pass对象好这个导包也是Apache的Hadoop的一个FS包这里边呢我要指定一个路径
+[03:37] 表示我从根路径开始后面这个表示你是否使用递归这个如果我写个除呢表示我既要获取当前目录它的一个信息我还要获取它的子目录的信息来使用递归的方式来我们来获取一个返回值这个呢是一个remote iterator这是一个迭代器这里边呢我们把这个变量设为iterator这是一个迭代器好这个迭代器里面呢存放了我们所有的文件信息
+[04:07] 那接下来呢我们需要去便利迭代器便利迭代器怎么便利呢我们可以这样写一个well循环然后呢这个地方呢我们使用迭代器etl有个方法叫hide next判断有没有下一个元素如果有了我就去获取它对应的元素那接下来就是获取每一个文件每一个文件详情
+[04:41] 详细信息OK怎么做呢这里边ETELECTOR有个方法叫next通过这个next方法我们就可以获取了一个文件的一个详细一个信息放在这个对象叫locate file system这个status我起个名字叫file status这里面就包含了一个文件的一些详细信息比如说文件的大小文件的名字或者文件的路径
+[05:13] 都可以那我们接下来呢我们需要通过这个对象呢来获取一些文件的一些信息比如说我们可以获取这个文件的路径它的存储路径那我们来试一下获取文件的应该说获取每一个文件每一个文件的存储路径我们来看一下那这个地方就是fail systemfail status一个方法叫guide path
+[05:44] 给它pass我们可以直接打印一下把这个呢扔进来直接打印它的路径这个路径呢它的格式是这样的它的格式应该是HDFS开头然后呢这个地方呢后面呢跟上它的一个路径好了这是它的一个存储路径那比如说我们还可以获取呢这个文件的名字我们加个杠杠这个文件的名字呢我们先要获取这个pass
+[06:15] 然后呢在后面第二个方法叫get name好这个是获取一个文件的一个名字好这是一个存储路径的问题那你也可以获取别的信息比如说我们还可以获取呢获取文件的块信息就是block信息block存储信息也就是说一个文件呢它是切分成多个block而每一个block是不是有三个副本我们这些信息都可以获取那这里边还有一个方法
+[06:46] failstaters我们通过它来获取它有个方法叫getblocklocations我们可以通过它来获取来它返回一个数组这个数组里边呢就包含了这个文件它的一个block信息那比如说呢我想知道这个文件呢有有什么呢有几个block就是被切分成几个block我们可以打印一下比如说我们可以打印每个文件的
+[07:16] block数码每个文件的block数目这个地方你可以直接打印这个数组的一个长度这个数组的长度呢就决定了这个文件的block个数来我们来试一下sortblocklocation.这个数组长度是length我们通过length呢就可以知道它的block的个数你比如说我们在这个hdfs的文件呢它的文件基本上都比较小可能一个block就可以了
+[07:45] 所以说这个值一般都是1咱们在这里边一般都是1好这个那接下来我们还可以获取每一个block副本它的一个存储位置我们可以打印打印每一个block副本的存储位置比如说它存储在哪个主机上我们也可以去获取来我们来看这个里边一个block locations我们可以遍历这个数组
+[08:17] 我们来编例一下好编例完之后呢每一个呢数组里面的一个元素就是它的一个block的一个存储信息我们可以通过这个block location有个方法叫guide host这个呢就是每个副本它的存储主机的位置来我们来拿到这是一个block这个host里边存放的就是主机位置我们也可以再次编例编例完之后呢我们来打印一下好那这个时候呢
+[08:46] 我们打印一下host后面的加个分格符加个分格符OK那这样子的话呢我们就把这个信息呢全部给它打印出来了那接下来呢我们来看一下这个效果我们来执行一下稍等来看这个结果好你看到打印很多内容我们从上到下来看一下首先呢这个是每个文件它的一个路径你看它的存储路径呢是从HDFS开始
+[09:21] Node01 8020在哪个位置呢在Export Service下面这是它的一个绝对路径那后面呢我还打印了这个文件的名字我们先后看这个地方呢在这里我记得我还打印了这个文件的名字这个是一个来看这是一个文件的路径这是文件的路径而这个后面还有一个文件的名字这个名字在哪里呢我们来看一下
+[09:51] 这个名字哦在这里你看杠杠杠这个后面是文件的名字这个名字太长了是不是啊来咱看这是文件的路径而后面呢是这个文件的名字啊这个获取了获取完之后呢咱们接着再看你看这个地方是一这是什么意思呢这个其实呢就是我刚才说过的每个文件呢它的block的数量哎这个数组的长度就是这个文件的block数因为我们的文件呢基本上都是没有超过128兆的所以说呢
+[10:21] 一个block就基本上把这个文件已经存储了好那接下来呢还有每一个block它的副本存储的位置咱们知道每一个block是三个副本那它们分别存放的哪个主机呢我们来看你看node01node02node03这是三个主机它们存放在这些主机上那图案呢每一个block都是有三个副本好那这个呢就说明了我们这个API呢是没有问题的
+[10:50] 好这是他的一个获取目录下文件的所有信息我们呢就先说到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 Java API 遍历 HDFS 中的所有文件并获取每个文件的路径、名称和 Block 存储位置信息。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示 HDFS 文件系统 API 的四种获取文件系统的方式，其中第四种方式使用 new URI 和 new Configuration 构造 FileSystem 对象。
+画面2：展示如何使用 API 遍历 HDFS 中所有文件，代码中使用 FileSystem.listFiles() 获取 RemoteIterator，然后通过 hasNext() 和 next() 遍历。
+画面3：IDE 中显示代码，光标位于 getFileSystem4() 方法的定义处，展示获取文件系统第四种方式的代码。
+画面4：IDE 中显示代码，光标位于 getFileSystem4() 方法的定义处，展示获取文件系统第四种方式的代码。
+画面5：IDE 中显示代码，光标位于 listFiles() 方法的返回值 RemoteIterator<LocatedFileStatus> 上，展示其类型。
+画面6：IDE 中显示代码，光标位于 while 循环体中，展示如何获取每个文件的详细信息。
+画面7：IDE 中显示代码，光标位于 System.out.println(fileStatus.getPath().getFileName()); 行，展示获取文件名。
+画面8：IDE 中显示代码，光标位于 System.out.println(blockLocations.length); 行，展示打印 Block 数量。
+画面9：IDE 中显示代码，光标位于 getFileSystem1() 方法的定义处，展示获取文件系统第一种方式的代码。
+画面10：IDE 中显示代码，光标位于 getFileSystem1() 方法的定义处，展示获取文件系统第一种方式的代码。
+画面11：运行结果窗口显示程序成功执行，输出了 HDFS 中某个文件的路径。
+画面12：运行结果窗口显示程序成功执行，输出了 HDFS 中某个文件的路径。
+画面13：运行结果窗口显示程序成功执行，输出了 HDFS 中某个文件的 Block 存储位置。
+画面14：IDE 中显示代码，光标位于 for 循环中，展示如何遍历每个 Block 的存储位置。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+@Test
+public void getFileSystem4() throws Exception{
+    FileSystem fileSystem = FileSystem.newInstance(new URI("hdfs://node01:8020"), new Configuration());
+    System.out.println(fileSystem.toString());
+}
+```
+
+画面2：
+```java
+@Test
+public void listMyFiles() throws Exception{
+    FileSystem fileSystem = FileSystem.get(new URI("hdfs://192.168.52.250:8828"), new Configuration());
+    RemoteIterator<LocatedFileStatus> locatedFileStatusRemoteIterator = fileSystem.listFiles(new Path("/"), true);
+    while (locatedFileStatusRemoteIterator.hasNext()){
+        LocatedFileStatus next = locatedFileStatusRemoteIterator.next();
+        System.out.println(next.getPath().toString());
+    }
+    fileSystem.close();
+}
+```
+
+画面3：
+```java
+@Test
+public void getFileSystem4() throws Exception {
+    FileSystem fileSystem = FileSystem.newInstance(new URI("hdfs://node01:8020"), new Configuration());
+    System.out.println(fileSystem.toString());
+}
+```
+
+画面4：
+```java
+@Test
+public void getFileSystem4() throws Exception {
+    FileSystem fileSystem = FileSystem.newInstance(new URI("hdfs://node01:8020"), new Configuration());
+    System.out.println(fileSystem.toString());
+}
+```
+
+画面5：
+```java
+RemoteIterator<LocatedFileStatus> iterator = fileSystem.listFiles(new Path("/"), true);
+```
+
+画面6：
+```java
+while (iterator.hasNext()){
+    //获取每一个文件详细信息
+    LocatedFileStatus fileStatus = iterator.next();
+```
+
+画面7：
+```java
+System.out.println(fileStatus.getPath().getFileName()); //hdfs://
+```
+
+画面8：
+```java
+System.out.println(blockLocations.length);
+```
+
+画面9：
+```java
+@Test
+public void getFileSystem1() throws Exception {
+    FileSystem fileSystem = FileSystem.get(new URI("hdfs://node01:8020"), new Configuration());
+    System.out.println(fileSystem.toString());
+}
+```
+
+画面10：
+```java
+@Test
+public void getFileSystem1() throws Exception {
+    FileSystem fileSystem = FileSystem.get(new URI("hdfs://node01:8020"), new Configuration());
+    System.out.println(fileSystem.toString());
+}
+```
+
+画面11：
+```text
+556071533781.jhist---job_15559081963_0001-1556074220928-root-QuasiMonteCarlo-155607456128-2-1-SUCCEEDED-default-1556074333781.jhist
+```
+
+画面12：
+```text
+D:\develop\jdk8.0\bin\java ...
+hdfs://node01:8020/export/servers/Hadoop-3.1.1/datas/jobsitory/DoneDats/2019/04/24/000000/job_1555938431963_0001-1556074220928-root-QuasiMonteCarlo-155607456128-2-1-SUCCEEDED-default-1556074333781.jhist
+```
+
+画面13：
+```text
+node01.Hadoop.com
+node02.Hadoop.com
+node03.Hadoop.com
+hdfs://node01:8020/export/servers/Hadoop-3.1.1/datas/jobsitory/DoneDats/2019/04/24/000000/job_1555938431963_0001-1556074220928-root-QuasiMonteCarlo-155607456128-2-1-SUCCEEDED-default-1556074333781.jhist
+```
+
+画面14：
+```java
+for (BlockLocation blockLocation : blockLocations) {
+    String[] hosts = blockLocation.get_hosts();
+    for (String host : hosts) {
+        System.out.println(host);
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

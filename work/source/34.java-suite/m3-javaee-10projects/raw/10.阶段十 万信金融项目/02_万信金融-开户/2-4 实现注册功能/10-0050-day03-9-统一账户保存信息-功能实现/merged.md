@@ -1,0 +1,282 @@
+# day03-9-统一账户保存信息-功能实现
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：02_万信金融-开户/2-4 实现注册功能
+- 源文件：10.阶段十 万信金融项目\02_万信金融-开户\2-4 实现注册功能\day03-9-统一账户保存信息-功能实现_【海量资源尽在 666java.com】.mp4
+- 时长 15分26秒（音频 926s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 接口定义好之后呢咱接下来就该在右层来实现什么呀功能了对不对这个功能其实对咱来说还是比较简单的主要是通过谁啊对MP我们的好基友对吧实现一个增删改查当中的增就是保存就OK了那咱找到哪个微服啊对还是account Service这个微服找到Service先定义这个什么呀接口
+[00:30] 打开这个接口呢往这里边呢再定义一个什么呀方法以后呢像这个位置的这个代码你就不用自己重新敲了直接从control那里边干什么呀从这干什么呀粘过来一个呗粘过来改一下就OK了那我们在企业当中我们也要追求效率然后呢把这个干什么呀干掉还有需要做调整的吗瞅一瞅那肯定这儿就不能要了嘛因为这是业务层嘛对不对业务层是没有这个什么rest response的
+[01:02] 右层的话我们只需要反而给他一个啊抗的什么DTO就OK我这个要干掉干掉大家看可以吗可以了啊对不对你想加注视加了注视不想加就不加了反正我们在表演层那块加了都有注视所以这是接口接口搞定了之后呢接下来是不是该搞实现类啊这应该会报错吧好我们把这个方法给重写一下然后点击OK好这是一个空实现目前对吧
+[01:46] 这边注释我也不加了啊这个当然我建议大家在写的时候呢最好是加一下这个注释那这里边这个代码怎么实现我们刚才说了主要是通过MP去实现一个什么功能保存功能是不是保存功能的话咱前面讲过MP是不是对药层进行了封装对吧你看前面咱实现别的功能的时候它是不是都
+[02:10] 继承了这个Service impr这是不是mp的对不对它里边应该封装的有一个保存的方法那根据咱以往的经验我们猜应该猜出来它叫什么样应该是save吧你看这就是save我们就应该调用这个方法但是大家瞅一瞅啊这个方法它要求你传进来的是一个什么类型的一个一个参数account是不是实体类对吧但是你看看咱手头上有的是account register dto
+[02:42] 并不是他想要的那个什么呀那咱有没有这个实体类呢咱找好找一下啊有没有有你看啊那为什么MP要的是这个要的不是这个DTO的一下呢这个你要注意了啊咱当时在讲MP的时候说过这个类是不是跟咱的那个Akana表建立了这个怎么叫怎么说呢叫映射关系是不是实体类和表之间的这个什么呀
+[03:12] 你还记得这些注解吗有印象吧所以说呢人家的save方法要的一定是什么呀ArcCount对象不是咱自定义的这个什么呀DTO对象但是我们想要保存的数据是不是在这里那你说怎么办怎么办那你只能麻烦一点把这里边只取出来再存到什么呀ArcCount对象里边就OK了是不是倒腾一下就行了所以这个代码咱应该是这么写
+[03:42] 自己NEO一个ACC OONT对吧ACC OONT等于NEOACC OONT直接NEO一个空对象然后呢调set方法往里边存数据存数据的时候这个数据从哪来啊那当然是不是从这儿来这是不是这个从前端发过来的那个注册的信息是不是啊我们只能这么做了那接下来的话咱就纯手工的把这个数据取出来再导通一下存到这里我看他
+[04:13] 点都需要存哪些呢set一个set username吧行吧先set username这个username怎么办我们说了这些信息都是从哪来的呀对这些信息呢全部都是从register DTO里边来的所以说我接下来这是不是要get一下就是accountregister DTO点它应该有get什么username对下面都一样account点
+[04:48] 接下来给哪个的手机号吧目标然后accountregisterdto.get什么目标还有啥信息用个名手机号然后接下来就是什么密码account.set应该是password对吧然后就是accountregisterdto.getpassword但是这个密码这个地方之前提到过一次不知道大家还有没有印象
+[05:22] 就说这个密码咱当时在讲短信验证码服务的时候最后给大家说过啊说过一句话非常关键我们找一下那个短信验证码短信验证码的话是在这个地方看你还有印象没有啊短信验证码我们给他打开看这最下边因为我们说了以后的话你每次都要登录是不是都要启动这个c0.jma很麻烦
+[06:01] 所以你将来为了省事的话你可以把短信验证码这个功能给它干什么呀关掉就是那个Apollo里边改成什么呀FORCE就给那么这时候呢它开启的就是什么模式密码登录模式就不是验证码不是短信码是密码那这个时候这个密码是啥密码就是什么呀手机号我们把手机号作为什么呀对密码作验证码那我们在注册的时候呢会加入这个功能那其实就是现在这个时候就是现在这个时候
+[06:30] 就我们要在这要把这个功能给他干什么呀加进去就是说呢一旦你开启了这个短信研码这个功能呢我们在这种情况下默认呢就要把这个手机号作为密码先给他干什么呀存进去将来这个短信研码这个功能你关了关了没事我当时是不是已经把手机号作为密码存进去了吗对不对你接下来就可以拿手机号作为密码直接登就行了所以说这里边呢我们就需要做一个判断
+[07:02] 判断什么判断我看前面前面少注意我们把这个东西给注意就是之前这个功能我们是在哪注入稍等一下我粘过来就行了在sms Service里就这个东西我们给它粘过来粘到这里对我们就要判断它它是一个不耳类型对不对我们就是要判断它
+[07:42] 如果是处的话我们这个时候就注册的时候就应该把手机号作为默认的密码先存进去将来万一你说我嫌麻烦把这个短信研究码功能给干掉了那我的密码就是什么手机号为这个事情提前做铺垫那这里边我怎么写那这里边的话其实就是这行代码我们再给它粘过来粘过来之后呢这儿就不是get password了是什么呀而是什么呀get什么呀mobile对没错
+[08:13] get mobile就手机号直接作为密码这是一个非常重要的一个细节需要大家注意另外呢关于VMware这一块呢我们为了提高安全性我们要进行加密我们要进行加密不是说这个明文直接存在我们要给它加密一下怎么加密呢这里边呢我们给大家提供的有工具类我们找一找有一个工具类工具类咱应该是在哪放着工具类咱应该是在Coreman对吧我们找一找
+[08:43] 找找这个工具类YouTube里面对吧这个工具类呢应该是叫password的YouTube看找找有没有有就是它你看是不是采用了一个MD5的一个加密方式对吧这里边有现成的一个方法我们而且是静态的嘛我们直接调用就OK了然后呢这个方法大概的作用简单给大家说一说大概的作用就是把你的原始的这个密码传进来这个方法经过一系列的这个操作之后返回给你呢就是加密后的那个密碗
+[09:15] 就这么简单对于我们来说所以咱们在这儿的话需要对咱们这个原始的密码进行加密然后存到数据库里面所以这儿呢我们就要调用password什么呀util是吧就这个它的一个静态方法然后呢把咱们原始的这个密码放进去提高安全性那下边这个地方也是一样的手机号我们要对它
+[09:48] 进行加密因为他要作为密码使用嘛哎你要加密一下哎这就差不多然后接下来呢有一些这个属性的指示我们目前可以直接给他写死的就是采用默认值的都有哪些地方呢你比如说这个呃用户的类型就这set to men这个是啥东西呢点进去看一看这个实体内啊他呢是表示可以说是客户的类型吧就说你是
+[10:22] 普通的这种用户还是说这个企业对不对我们给它分成了这两种我们跳到这边看一看这里边有注视的就是说它是C端用户还是什么呀B端用户我们现在默认都是C端的你给一个值C就行这边那就是因为它是字幕刷类型嘛我这就是双引号这给个什么呀C就OK了那这个设置好之后呢咱们接下来是不是就可以调用什么呀C5方法进行
+[10:57] 我们现在有account对象了扔给他就行了ACC OUNT对不对那调用MP的save方案我们就能完成了保存保存完之后呢保存完之后呢你要注意看咱这个方案要求返回的是不是一个DTO对象那怎么办那你还得再麻烦一下把这个account给他再转换成什么呀account DTO就行了这里边关于这块一定要
+[11:26] 再给大家强调一下大家一定要再看一看咱那个编码规范规范里边呢我们在那个哪个地方啊分层那个地方给大家说了我们的实体类分哪几种有DTO有DO有VO好几种这里边他都负责哪一块对吧每一层用哪一种这个实体类你下去一定要再看一看那我们现在呢这个这个返回的东西是不是要给controllercontroller是把这个东西传输给这个前端所以说我们这个地方要用DTO
+[11:55] 不能用普通的这个就是DO或者是VO一定是用这个DTO对象那所以说我们需要把这个Account对象给它转换成什么呀DTO然后返回就行那这个地方怎么转换呢那无非也是跟前面这一块一样把Account里边的属性值取出来然后给谁呀给DTO那这一块呢我们直接封装好一个方法直接给大家用就行了我们就不再一点一点手敲了我们找到这个地方给它粘过来
+[12:25] 就这这个代码很简单就是我们不想再花费时间去写这个代码扔过来大家自己看一下那么大家看一下这个方案的代码非常非常简单啊这就是传进来的奥康纳对象对不对然后这里边我自己拗了一个dto对象然后调用这个大家都见过吧这是apache的还是spring的因为这个apache和spring都有啊我们用的是spring的它的效率应该会高一些这个copy properties方法指的就是什么呀
+[13:02] 指的就是把这个对象里边所有的属性的值全部付给谁后边这个对象这样子我们就完成了两个对象的一个什么转换很简单所以说我这在返回的时候怎么返回我是不是要调用这个方法然后把谁扔进来就行了咱的可抗它对象对给他扔进来就行了扔进来之后他最终会把他里边所有属性的值全部给谁全部给付给DTO然后就返回我们作为返还值
+[13:35] 就返回给谁啊Controller就ok这咱右层的代码怎么写啊写完之后呢咱顺手啊顺手呢把Controller里边这个代码给他补充一下就行因为咱当时这是一个空时线了还有印象吗然后这呢很简单怎么写那就是调用什么呀调层就行了嘛调层就是叫accaccountservice.register然后把这个什么呀dto对象给他扔进去
+[14:04] 当然你直接这么返回是不对的啊因为咱们右层这个地方它返回的是一个DTO对象而我们的表现层最终是不是要给它包装成Rest什么呀Response那跟上面不一样嘛对不对这样Success方法封一下就行包一下这是不是又搞定了对不对Return多写一个生我这个套路都是一样另外还有一个细节大家特别特别需要注意啊我觉得我呢是写这个代码时候容易忘大家也是一样你看这少不少东西啊
+[14:42] 少东西吗少东西吧看出来没有对我们这少加一个注解叫at什么呀对request什么body没错这个很容易忘误错了request body一定要注意非常非常容易忘request body这个一定要加上不加的话你应该知道意味着啥将来前端发过来的这个东西到这这是不是接受不了对不对
+[15:13] 所以这个系列一定要注意那目前呢咱这个统一账户微服务这边已经实现了把注册相关的这个信息进行了这个什么样保存
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现账户注册功能，包括定义接口、编写服务层代码、处理密码加密、以及控制器层的请求映射。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：在AccountService接口中定义register方法，使用AccountDTO作为参数。
+画面2：在AccountServiceImpl类中实现register方法，通过MyBatis-Plus实现数据保存。
+画面3：展示Account实体类中定义的字段，包括手机号、密码、盐值等。
+画面4：在AccountServiceImpl中，通过AccountMapper将AccountDTO转换为Account实体。
+画面5：在AccountServiceImpl中，使用AccountMapper将AccountDTO转换为Account实体。
+画面6：在AccountServiceImpl中，使用AccountMapper将AccountDTO转换为Account实体。
+画面7：在AccountServiceImpl中，使用AccountMapper将AccountDTO转换为Account实体。
+画面8：在AccountServiceImpl中，使用AccountMapper将AccountDTO转换为Account实体。
+画面9：展示PasswordUtil类中生成随机盐值和加密密码的代码。
+画面10：在AccountServiceImpl中，调用PasswordUtil生成密码。
+画面11：在AccountServiceImpl中，调用PasswordUtil生成密码。
+画面12：在AccountServiceImpl中，将Account实体转换为AccountDTO。
+画面13：在AccountController中，调用AccountService的register方法。
+画面14：在AccountController中，定义register方法，接收AccountRegisterDTO并返回RestResponse。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+/**
+ * 账户注册
+ * @param registerDTO 注册信息
+ * @return
+ */
+AccountDTO register(AccountRegisterDTO registerDTO);
+```
+
+画面2：
+```java
+import com.baomidou.mybatisplus.extension.Service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements AccountService {
+    private SmsService smsService;
+
+    public RestResponse getSMSCode(String mobile) {
+        return smsService.getSMSCode(mobile);
+    }
+
+    public Integer checkMobile(String mobile, String key, String code) {
+        smsService.verifySmsCode(key, code);
+        QueryWrapper<Account> wrapper = new QueryWrapper<>();
+        wrapper.eq("mobile", mobile);
+        int count = count(wrapper);
+        return count;
+    }
+}
+```
+
+画面3：
+```java
+@TableName("account")
+public class Account {
+    @TableField("MOBILE")
+    private String mobile;
+
+    @TableField("PASSWORD")
+    private String password;
+
+    @TableField("SALT")
+    private String salt;
+
+    // 密码状态
+}
+```
+
+画面4：
+```java
+public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
+    Account account = new Account();
+    account.setUserName(accountRegisterDTO.getUserName());
+    account.setPassword(accountRegisterDTO.getPassword());
+    account.setMobile(accountRegisterDTO.getMobile());
+    account.setDomain("e");
+    save(account);
+    return null;
+}
+```
+
+画面5：
+```java
+public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
+    Account account = new Account();
+    account.setUserName(accountRegisterDTO.getUserName());
+    account.setPassword(accountRegisterDTO.getPassword());
+    account.setMobile(accountRegisterDTO.getMobile());
+    account.setDomain("e");
+    save(account);
+    return null;
+}
+```
+
+画面6：
+```java
+public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
+    Account account = new Account();
+    account.setUserName(accountRegisterDTO.getUserName());
+    account.setPassword(accountRegisterDTO.getPassword());
+    account.setMobile(accountRegisterDTO.getMobile());
+    account.setDomain("e");
+    save(account);
+    return null;
+}
+```
+
+画面7：
+```java
+import com.baomidou.mybatisplus.extension.Service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements AccountService {
+    private SmsService smsService;
+
+    @Override
+    public RestResponse getSMSCode(String mobile) {
+        return smsService.getSMSCode(mobile);
+    }
+
+    @Override
+    public Integer checkMobile(String mobile, String key, String code) {
+        smsService.verifySmsCode(key, code);
+        QueryWrapper<Account> wrapper = new QueryWrapper<>();
+        wrapper.eq("mobile", mobile);
+        int count = count(wrapper);
+        return count;
+    }
+}
+```
+
+画面8：
+```java
+public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
+    Account account = new Account();
+    account.setUserName(accountRegisterDTO.getUserName());
+    account.setPassword(accountRegisterDTO.getPassword());
+    account.setMobile(accountRegisterDTO.getMobile());
+    account.setDomain("e");
+    save(account);
+    return null;
+}
+```
+
+画面9：
+```java
+public static String generate(String password) {
+    Random r = new Random();
+    StringBuilder sb = new StringBuilder(capacity: 16);
+    sb.append(r.nextInt(99999999)).append(r.nextInt(99999999));
+    int len = sb.length();
+    if (len < 16) {
+        for (int i = 0; i < 16 - len; i++) {
+            sb.append("0");
+        }
+    }
+    String salt = sb.toString();
+    password = md5Hex(password + salt);
+    char[] cs = new char[48];
+    for (int i = 0; i < 48; i += 3) {
+        cs[i] = password.charAt(i / 3 * 2);
+        cs[i + 1] = password.charAt(i / 3 * 2 + 1);
+        cs[i + 2] = salt.charAt(i / 3);
+    }
+    return new String(cs);
+}
+```
+
+画面10：
+```java
+public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
+    Account account = new Account();
+    account.setUserName(accountRegisterDTO.getUserName());
+    account.setPassword(accountRegisterDTO.getPassword());
+    account.setMobile(accountRegisterDTO.getMobile());
+    account.setDomain("e");
+    save(account);
+    return null;
+}
+```
+
+画面11：
+```java
+public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
+    Account account = new Account();
+    account.setUserName(accountRegisterDTO.getUserName());
+    account.setPassword(accountRegisterDTO.getPassword());
+    account.setMobile(accountRegisterDTO.getMobile());
+    account.setDomain("e");
+    save(account);
+    return null;
+}
+```
+
+画面12：
+```java
+private AccountDTO convertAccountEntityToDTO(Account entity) {
+    if (entity == null) {
+        return null;
+    }
+    AccountDTO dto = new AccountDTO();
+    BeanUtils.copyProperties(entity, dto);
+    return dto;
+}
+```
+
+画面13：
+```java
+@Override
+public AccountDTO register(AccountRegisterDTO accountRegisterDTO) {
+    Account account = new Account();
+    account.setUserName(accountRegisterDTO.getUserName());
+    account.setPassword(accountRegisterDTO.getPassword());
+    account.setMobile(accountRegisterDTO.getMobile());
+    account.setDomain("e");
+    save(account);
+    return null;
+}
+```
+
+画面14：
+```java
+@Override
+@RequestMapping("/mobiles")
+public RestResponse register(@RequestBody AccountRegisterDTO accountRegisterDTO) {
+    return RestResponse.success(AccountService.register(accountRegisterDTO));
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

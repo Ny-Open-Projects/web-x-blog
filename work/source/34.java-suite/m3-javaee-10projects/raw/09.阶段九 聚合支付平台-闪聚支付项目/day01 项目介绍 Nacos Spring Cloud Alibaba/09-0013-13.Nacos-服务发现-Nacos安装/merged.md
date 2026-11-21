@@ -1,0 +1,75 @@
+# 13.Nacos-服务发现-Nacos安装
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day01 项目介绍 Nacos Spring Cloud Alibaba
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day01 项目介绍 Nacos Spring Cloud Alibaba\13.Nacos-服务发现-Nacos安装【海量资源尽在 666java.com】.mp4
+- 时长 7分55秒（音频 475s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢我们来安装一下NexusNexus呢是一个服务发现中心我们通过流程呢我们可以发现其实我们各个微服务里边有服务发现的客户端它是要通过网络呢和服务发现中心进行交互从服务发现中心来获取服务注册表的信息对吧所以其实Nexus呢就相当于一个什么相当于一个服务端
+[00:27] 所以我们要安装一下NetCourse Server好那现在我们来看NetCourse它的运行依赖于加码环境它从这个至少是JDK 1.8以上我们本项目采用的是JDK 1.8开发所以呢我们是可以用我们本项目的这个JDK环境来运行NetCourse的
+[00:48] 另外它的操作系统支持的也比较广泛还有我们说Nikos它要进行编译是基于Maven所以我们要用3.2以上版本的Maven好了现在我们可以下载它的原码进行编译当然也可以直接下载它的Zip包在课程资料当中我们已经给大家提供了Nikos下载好的1.1.3版本的一个Zip包我们只需要解压这样的话
+[01:17] 这个程序呢我们就可以去运行它了在这个目录当中大家可以看到里边是不是有bin有bin目录是不是就是一些运行的一些什么可执行文件对吧还有一些配置文件还有它的这个target的target的包是不是就是它的一些什么所打的Necros的一个jar 包嘛也可以直接运行这个jar 包好程序还是比较简单的
+[01:43] 这是编译好的我们直接可以运行哪个其实我们直接运行bin下边的一个什么叫startup就可以了因为我现在用的环境是Windows环境所以这里边我们要运行startup.cmd如果你是什么Linux环境的话这里边你要运行Linux它的sh的这个脚本就可以其实这里边我们双击它这就可以直接运行了它的安装方法非常简单下载zip包然后解压就可以
+[02:12] 那现在呢我们运营起来之后呢我们现在就可以进入到Nexus它的默认端口是8848所以这里面呢我们直接打开浏览器打开浏览器然后呢回车这里面大家可以看到是不是就进来了它的默认的用户名是Nexus密码也是Nexus好点击提交是不是就进来了这就是它的一个什么界面好那至于这里边呢
+[02:42] 它有两大功能一个是配置管理一个是服务管理对吧当然它自己也可以布成集群所以第三个功能是集群管理进到这个界面就说明你安装成功了但是有一点我要说一下其实你要知道回头我们去里边新增一些配置对吧所以这里边它就要NetHouse要进行数据存储默认情况下NetHouse并没有存储在我们比如说常用的这个MaskSource数据库的
+[03:11] 所以这里边我们准备这么做我们用MySQL数据库作为Nexus的存储默认Nexus是使用自己的一个数据库进行存我们为了将来数据方便所以我们就去用MySQL来存Nexus的数据怎么做呢看我们的文档首先你需要安装MySQL所以这里边我们来看我们要安装MySQL我们这里边用的是5.7版本的MySQL
+[03:39] 安装完了之后呢我们是需要去新建mycircle的这个数据库新建一个数据库然后呢把它给我们提供的Necrosmycircle.circle这个脚本呢导一下那么就自动创建了一些表然后呢去修改Necros里面的配置文件让它连接到我们的数据库就行了整个过程也是非常简单的
+[04:01] 好那现在呢安装数据库的这个过程我就不演示了因为前面我们已经讲过MySQL课程那这里边呢我们就可以连上我们的MySQL可以吧连上MySQL之后呢这里边注意你用一个MySQL的客户端工具连上去之后这里边呢因为我的环境原来是有这个Networks的环境呢我们要重新安装一下所以这里边呢我就给大家呢把原来我的这个数据库呢给它干掉好
+[04:29] 干掉之后呢下边呢我就准备重新来安装一下这个Necros的这个数据库根据文档我们是不是需要创建Necros下滑线configure数据库好创建然后它的字幕机选UTF-8然后它的这个排序规则我们选这个general CI然后创建这时候数据库是不是OK了创建数据库完成了之后呢再看文档
+[04:58] 它是不是有一个叫circle脚本这circle脚本在哪里是不是就在刚才我们安装的这个configure这个目录里面对吧里面是不是有一个这个necros-circle的circle对吧然后这里面呢很简单我们只需要右键然后呢导入执行外部脚本看一下吧然后我们选择哎桌面然后呢我们选到刚才的这个脚本然后执行这时候呢它就会
+[05:27] 自动的来创建一些表然后这里边我们刷新你看表是不是就OK了这数据库是不是就安装好了数据库安装好了之后呢我们要让Necros连上这个数据库怎么做呢我们是需要打开Necros的配置文件里边有一个application.properties然后呢打开之后呢我们根据文档啊我们来找到里边的配置注意根据我给大家提供的文档哎你看你搜不到是吧搜不到没关系
+[05:56] 对我们是需要复制它然后呢我们在这里找一个位置我们把它配起来对吧这就表示我们的数据源的环境用的是Mescal然后呢我们再配置它的一个地址注意那这个地址的配置你就从讲义上拷贝就可以了然后这里边呢我们是本机吧现在我的环境是本机你就127127.0.1可以吧然后呢这里边呢我们还要注意它的
+[06:28] 账号就是数据库的账号和名称和密码那你就根据你自己的来输入账号密码就行了好OK了OK了之后呢我们把Nikols干掉然后呢再来重启Nikols重启Nikols好那起来之后呢我们是不是就可以来访问Nikols这个时候你要注意它就是会连上我们整个的这个什么Mansacro数据库了连上Mansacro数据库呢这里边我们就可以来
+[06:59] 访问NetCourse访问NetCourse来刷新是吧就正常那你说老师那你怎么去检验它到底是不是MySQL数据库呢其实当我们连上去之后呢注意回头我们去创建一些配置信息的时候啊在这个表当中呢就会有一些什么有一些数据了现在呢其实我们还没有讲这个具体的功能所以呢现在你可能判断不出来
+[07:28] 当然你也可以简单的去随便去添一个东西将来这些东西呢我们会去讲比如说你随便添一下发布一下那这时候你会发现你看数据是不是就有了数据有了其实在数据库里面它最终会保存到数据库里头你看见吗所以这就说明NetCourse是不是就连上了我们的数据库了好那到这我们是不是就完成了NetCourse的整个安装的过程包括使用外部Mansion数据库来存储数据的过程好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Windows 系统上安装并启动 Nacos 服务，并配置其使用外部 MySQL 数据库。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示课程 PPT 大纲，当前章节为“2.2 安装 Nacos Server”，内容介绍 Nacos 是一个开源的服务发现与配置管理平台，官网地址为 https://Nacos.io，主要功能包括服务发现与健康检查、动态配置管理、动态 DNS 服务等。
+画面 2: 在 Windows 文件资源管理器中，显示 Nacos 服务包解压后的文件夹，文件夹名为 “Nacos-server-1.1.3”。
+画面 3: 在文件夹内，鼠标选中 “conf” 子目录。
+画面 4: 在命令提示符窗口中，执行了启动脚本，但窗口显示为黑色，未显示任何输出。
+画面 5: 浏览器访问 Nacos 管理界面，弹出登录框，提示用户输入用户名和密码。
+画面 6: 展示课程 PPT 大纲，当前章节为“2.2 安装 Nacos Server”，并显示 Nacos 的登录页面，提示使用默认用户名“Nacos”和密码“Nacos”登录。
+画面 7: 在 IntelliJ IDEA 中打开项目，显示项目结构，其中包含 “nacos_config” 文件夹。
+画面 8: 在 IntelliJ IDEA 中，弹出“创建数据库”对话框，设置数据库名为 “nacos_config”，字符集为 “utf8”，并选择默认数据库。
+画面 9: 在 IntelliJ IDEA 中，弹出“从一个文件执行复制”对话框，提示用户确认执行 “nacos_config” 文件。
+画面 10: 在 Windows 文件资源管理器中，显示 “Nacos-server-1.1.3” 文件夹内的 “conf” 子目录，其中包含 “Nacos-logback.xml” 和 “Nacos.sql” 文件。
+画面 11: 展示课程 PPT 大纲，当前章节为“2.2.4 外部 mysql 数据库支持”，并显示配置步骤：安装数据库、初始化数据库、修改 application.properties 文件。其中，application.properties 文件内容为：
+spring.datasource.platform=mysql
+db.num=1
+db.url.0=jdbc:mysql://111.162.196.16:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+db.user=nacos_devtest
+db.password=youdontknow
+画面 12: 在命令提示符窗口中，执行了启动脚本，显示 Nacos 服务启动日志，最终显示 “Nacos started successfully in stand alone mode.”。
+画面 13: 在 IntelliJ IDEA 中，打开 “nacos_config” 文件夹，显示数据库表结构，其中包含 “data_id”、“group_id”、“datum_id”、“gmt_modified”、“app_name”、“tenant_id” 等字段。
+画面 14: 展示课程 PPT 大纲，当前章节为“2.2.4 外部 mysql 数据库支持”，并显示配置步骤：安装数据库、初始化数据库、修改 application.properties 文件。其中，application.properties 文件内容为：
+spring.datasource.platform=mysql
+db.num=1
+db.url.0=jdbc:mysql://111.162.196.16:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+db.user=nacos_devtest
+db.password=youdontknow
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 11 和 14 中的 application.properties 文件内容：
+spring.datasource.platform=mysql
+db.num=1
+db.url.0=jdbc:mysql://111.162.196.16:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true
+db.user=nacos_devtest
+db.password=youdontknow
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 1: PPT 标题为“Nacos - 服务发现和配置管理”，章节为“1 微服务架构”和“2 Nacos 服务发现”，子章节包括“2.1 Nacos 简介”、“2.2 安装 Nacos Server”、“2.3 RESTful 服务发现”等。
+画面 6: PPT 标题为“Nacos - 服务发现和配置管理”，章节为“2.2 安装 Nacos Server”，并显示 Nacos 登录页面，提示使用默认用户名“Nacos”和密码“Nacos”登录。
+画面 11 和 14: PPT 标题为“2.2.4 外部 mysql 数据库支持”，内容包括三个步骤：安装数据库、初始化数据库、修改 application.properties 文件。其中，application.properties 文件内容如上所述。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

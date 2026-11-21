@@ -1,0 +1,327 @@
+# day10-2-标的信息检索-交易中心-定义接口
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：03_万信金融-发标/3-13 实现标的信息检索功能
+- 源文件：10.阶段十 万信金融项目\03_万信金融-发标\3-13 实现标的信息检索功能\day10-2-标的信息检索-交易中心-定义接口_【海量资源尽在 666java.com】.mp4
+- 时长 8分20秒（音频 501s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 刚才呢我们把开发环境快速搭建了一下我们是不是新增了一个内容检索微服务工程对吧然后阿卜罗上的配置也搞定了也测试通过那接下来咱就该动动小手开始实现功能我们要实现哪个功能对就是标底信息的快速检索功能要从ES的索引库里边进行查询
+[00:25] 那要实验这个功能的话我们一共涉及到两个微服务咱们接下来回顾一下这个时序图啊看哪呢看这儿啊找一找在这里看这个图大家看这儿啊前端呢是不是要发请求先到哪先到交易中心那么前端发请求的时候呢这个请求里边就会带有什么呀带有查询的条件是吧呃分野信息排序信息等等那
+[00:53] 随着请求一起先到交易中心交易中心说你要是从ES索引库里边查那我得找谁对交易中心说了我得找内容检索服务所以说这儿就会发生一个非远程调用然后内容检索服务就开始从ES索引库里边进行对数据的查询查完之后返回结果然后内容检索服务再把结果返回给交易中心交易中心再把结果封装一下返回前端前端进行展示就OK了
+[01:22] 所以说这里边一共涉及到两个微服务分别是交易中心和内容检索服务而且呢这里边大家一定要注意交易中心这块其实他基本上没做啥事他是不是主要是发起一个远程调用去哪去内容检索服务这边所以说核心的代码核心的功能其实都是在内容检索服务这边实现的所以这是需要大家注意的因此呢这个功能就是标的快速检索这个功能里边涉及到交易中心这块代码呢我就不在现场跟大家编写了
+[01:52] 因为这块代码第一个是比较简单第二个是咱前面都已经类似的代码已经编写过好几遍那我重点的话会讲解或者说编写内容检索服务这一块的这个代码这是咱们把这个标的快速检索这个功能这个需求和它的流程我们大概回顾一下那接下来跟之前一样我们是不是要先定义接口是吧我们应该定义几块接口
+[02:20] 那肯定是两块嘛一块是这个交易中心的一块是内容检索服务的咱一个一个来吧先说这个交易中心交易中心这边呢我们就是在transcation API对吧这个接口当中呢新增一个方法query projects然后我们看这个参数吧大家比较熟DTO对象是封装查询条件的pay number pay size这是封装分页数据的sort byorder是封装对排序信息的
+[02:52] 然后反而值呢是一个配给view对象啊里边的范型是dto然后呢再封装成rest response就返回给谁啊遣卖了我这是这个接口然后呢这个接口定义好之后呢我们是不是像以前一样顺手在扛周遭当中来一个什么呀空实现那扛绕当中呢这一堆大家都知道这是sweat的这个注解我就不再过头说了你也不用敲啊你就直接站过去用就行了那这里边大家需要关注的就是这个访问路径吧
+[03:22] posed 请求是吧反而路径啊然后呢还有就是这个dt对象这要加 request 的 body 注解这个前端传过来是一个json 数据这是一个目前是一个空时线那么这块代码啊就是结局中心这边的这个接口包括 control 这呢我在工程里边已经实现过了大家可以瞅一眼刚才说了在中心这块代码我就不在现场边想大家看一眼就行了这是吧然后 control 了你也瞅一眼
+[03:57] 除了这一堆是吧这是交易中心这边搞定交易中心搞定之后咱接下来就要搞定哪块对内容检索服务这边的接口定义这个工程是不是咱新导进来所以说我们需要在API工程当中新建包还要再新建接口定义方法那咱就去API工程里边在这新建一个包我们叫search
+[04:33] 对叫search然后在search这个包里边呢新建一个接口名字呢我们跟简易宝是一致的叫content search API接口然后呢我们看这个接口这个接口其实跟刚才交易中心那个接口是一样的基本上是一样为啥因为交易中心是把数据传给这个谁啊检索服务这边所以说他们基本上是一样你看这边发表没有无所谓的你看这些参数一样吗
+[05:05] 一样吧反正是一样吗那比一模一样了是不是啊这一块呢我们就拿过来了然后这边你要注意我们是不是缺一个类是封装那个什么呀成立条件的叫project query params bto这个类的话你就去资料文件夹里边找呗或者他那你可以看一下他应该是考到哪个地方API search model是吧那也就是说呢我们是不是需要再建一个子宝啊
+[05:44] 在这里边需要新建一个子包叫modl然后呢把刚才这个类给他跑过来就行就有了对吧这里边就是那些条件了这一堆大家现在自己看一下就行我这边自动导播就没有错了是不是这是这个接口吧我们就定义好里边还是这个查询的一个方法那我定义好之后呢咱接下来还是顺手去哪顺手呢去control
+[06:14] 把这个Controller来一个空时线吧咱应该去哪去内容检索微服这边这个Controller需要重新建啊这里边应该是没有Controller这连个包都没吗那我们建一个包吧建一个包啊c-u-n-t-r-o-l-e-r然后呢在这里边呢我们要新建一个Controller类这个名字呢我们要跟讲义保持一致往下走
+[06:52] 叫content searchcontroller 整过来整完之后呢咱接下来接着看讲义这里边呢大家看到还是一堆什么呀对一堆sweag的这个注解咱不用管它啊然后呢你要重点看的第一个就是这个访问路径对不对大家看这儿是什么开头的呀L开头还有印象吧咱以前碰见过多次L打头的什么意思对这个接口呢主要是跟咱们给谁用的呀
+[07:26] 对他不对前端暴露就是前端是防不到这的是给别的微服务去内部法文的啊所以说这种呢一般都是L打头的然后呢注意这些啊这个什么呀注解啊SpyMVC的这些注解千万不要忘那这块呢待会比较简单我也直接拿过来SWAG的这些注解你就不要自己手敲了啊比较耽误事你直接粘过来拿用就行了知道他是什么意思就OK了马上他自动挡一下包这样呢格式我稍微动一下
+[08:06] 其他格是你自己调吧这是咱们把哪一块的接口也定义好了呀对内容检索微服务这边的接口以及control这类我们都全部定义好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中，通过定义接口和控制器类，实现对“标的”信息的快速检索功能，重点讲解了 @ApiImplicitParam 注解的使用和相关代码结构。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 展示了 IDEA 编辑器界面，左侧是项目结构，右侧是文档内容。
+- 文档标题为“4.6 标的快速检索”，子标题“4.6.1 接口定义”和“4.6.1.1 交易中心标的的查询接口”。
+- 代码片段：在 TransactionApi 接口中定义了查询方法。
+```java
+/**
+ * 标的信息快速检索
+ * @param projectQueryDTO
+ * @param pageNo
+ * @param pageSize
+ * @param sortBy
+ * @param order
+ * @return
+ */
+RestResponse<PageVO<ProjectDTO>> queryProjects(ProjectQueryDTO projectQueryDTO,
+Integer pageNo, Integer pageSize, String sortBy,String order);
+```
+
+画面 2：
+- 展示了 TransactionController 类中实现该方法的代码。
+- 代码片段：使用 @ApiImplicitParams 注解定义了多个参数。
+```java
+@Override
+@ApiOperation("从ES检索标的的信息")
+@ApiImplicitParams({
+@ApiImplicitParam(name = "projectQueryDTO", value = "标的的信息条件对象",
+required = true, dataType = "projectQueryDTO", paramType = "body"),
+@ApiImplicitParam(name = "pageNo", value = "页码", paramType = "query",
+dataType = "int", required = true, paramType = "query"),
+@ApiImplicitParam(name = "pageSize", value = "每页记录数", required = true,
+dataType = "int", paramType = "query"),
+@ApiImplicitParam(name = "sortBy", value = "排序字段", required = false,
+dataType = "string", paramType = "query"),
+@ApiImplicitParam(name = "order", value = "顺序", required = false,
+dataType = "string", paramType = "query")
+})
+```
+
+画面 3：
+- 展示了 TransactionApi 接口的源码，与画面 1 中的代码一致。
+- 代码片段：与画面 1 中的代码相同。
+
+画面 4：
+- 展示了 TransactionController 类中实现该方法的代码，与画面 2 中的代码一致。
+- 代码片段：与画面 2 中的代码相同。
+
+画面 5：
+- 展示了 IDEA 编辑器界面，用户正在右键点击“transaction”包，弹出“New”菜单。
+- 选项包括：Java Class、Kotlin File、File、Package、HTML File、JavaScript File、TypeScript File、Package.json、XML Configuration File、Diagram 等。
+
+画面 6：
+- 展示了“New”菜单中的“Class”选项被选中，准备创建一个新类。
+- 窗口显示“Create New Class”，名称为“ContentSearchApi”。
+
+画面 7：
+- 展示了文件资源管理器，显示了多个 Java 文件。
+- 选中了“ProjectQueryParamsDTO.java”文件，其内容为：
+```java
+@Data
+@Import
+@Description("标的的检索参数")
+public class ProjectQueryParamsDTO {
+private String name;
+private Integer id;
+private Integer status;
+private Long projectId;
+private String description;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String startPeriod;
+@ApiModelProperty("起止时间")
+private String endPeriod;
+@ApiModelProperty("起止时间")
+private String startAnnual;
+@ApiModelProperty("起止时间")
+private String endAnnual;
+@ApiModelProperty("起止时间")
+private String startDate;
+@ApiModelProperty("起止时间")
+private String endDate;
+@ApiModelProperty("起止时间")
+private String
+

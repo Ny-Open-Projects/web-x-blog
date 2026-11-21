@@ -1,0 +1,237 @@
+# 18_数据迁移_文章审核后同步数据
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day14-黑马头条-数据迁移
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day14-黑马头条-数据迁移\18_数据迁移_文章审核后同步数据【海量资源尽在 666java.com】.mp4
+- 时长 14分7秒（音频 847s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面咱们就继续往下讲刚才咱们是把全量数据给做完了做完之后这一步有一个效果没有出来就是说你同步完之后这个状态应该是改成一他刚才是改成一了刚才没让大家看到这个同步完成功之后就是一以前是什么同步之前是零是吧那好咱们下面再去做另外一个就是做这一块关于
+[00:25] 目前的热点数据呢咱们一会儿再去做好吧先去把这个文章这一块呢先去保存到HBase啊好那这个内容你可以看一下啊首先呢这块内容呢就是你要去发送消息那咋发送消息呢就是去审核文章的地方去发送消息那哪一块审核文章还知道吗就是咱们的admin端有两个部分第一个是什么第一个是当前的这种爬虫还有还有什么还有一个自媒体的文章是不是都需要进行审核呀
+[00:54] 审核通过之后咱们在当前的迁移系统里边去做一个监听然后是获取到当前的文章ID然后再通过文章ID去保存到HBase中好了那行那就这么流程这时候你看这里边你要去定义它的消息这个消息刚刚我是定义了其实比较简单了行了然后你找到谁你首先要找到发消息的位置哪一块就是当前的admin
+[01:24] 当然你要想去定义消息的话呢你需要在common中去定义我这是刚刚是定义了一个消息这个消息咱们之前定义过了啊这个并没有用着现在咱们再去用一下好吧就是审核成功之后的消息然后这是第一步然后第二个呢你需要在这你需要在当前的这个Kafka的跑跑地址里边呢再去定义这么个东西好定义它啊然后呢你在当前的Kafka的Kafkatopicconfig
+[01:57] 这里边呢去读取当前的消息名称OK啊那这就完了当然这里边还有消息要封装是吧咱们在这有一个叫做卡布卡森德里边去发送了一个审核成功的消息当然这里边啊你需要提前准备当前的ArticleAudit什么Success那这个咱们之前是说过的啊所以说这份内容呢你需要去把它给定义出来然后呢再把它给定义出来那这个呢这个是一个消息的风采类是吧
+[02:26] 你的消息内容是放到了当前的这个包装类里边这个类里边啊就比较简单了主要呢是有一个i know d还有什么article id其实咱们最主要是就是拿一个哪个呢就是拿article id就可以了当然你要告诉他类型其实目前的话呢你要是去做迁移的话呢别管是你的什么自媒体还是你的爬虫这时候呢咱们都需要进行迁移所以说呢你不指定类型也是没有没有问题的
+[02:52] 好吧那行那这个做完之后啊那这时候你需要在哪去发送消息呢你需要在你的审核的地方啊咱们可以打开当前的审核的代码打开Service咱们就做一个例子吧好吧做哪个呢就是当前的这个自媒体吧好那这块啊你需要去干嘛呢你需要在审核成功之后
+[03:20] 然后呢去发送消息你看这个状态改为9之后呢就是审核成功了那这时候呢你需要在当前的内装去注入一个KafkaCenter往上翻啊往上翻然后你在这啊先去注入一个东西什么Private KafkaCenter就它好先把它给注入进来然后呢你在这去调用方法调用审核成功之后的方法啊来去发送当前的文章的信息
+[03:50] 点有一个send的第一个是吧这里边需要去装一个内装一个消息消息是钢琴的这个这个呢里边有些属性咱们需要去设置啊比如说咱们先去new出来这么个对象new一下好然后呢你往里边去信息点set一个叫做article id那这个呢就是aparticle.get id你把它你的文章id装进去啊这是最重要的一个
+[04:22] 再去装一个东西啊Rset一个叫做type这个type的话你也可以去设置一个A article audit什么一个successR有一个article typeR咱们现在是媒体是吧所以说就设置第二个然后呢你把这个对象啊放进去这样的话消息呢就算是发送了那这消息发送之后啊那哪去接收呢是不是需要在当前的哪啊当前的这个
+[04:51] migration是吧这里边你要去创建一个监听的类好在这去创建一个包然后是Kafkalistenerok然后咱们在这去创建一个类去接收这个类就是叫做他在这去创建一个接口一个类然后是让他去实现当前的Kafkalistener是吧好Ctrl I
+[05:30] 这里面就这个咱们先把这个可以设置下然后这是好吧把这个咱们删掉不要了好不两个就可以我现在得让他被管理再加个logo4j2好这一块内容咱们就要去设置了我现在这个是消息的名称那消息名称怎么办咱们是不是在这去注入一个类叫Kafkacopic config
+[06:02] 这里边因为你可以读取谁呀不去前的这种名称而get有一个叫做这个东西啊这就是他的消息名称啊你发送消息的时候呢你看这个呢其实要跟这个对应上是吧那行那这个拿到之后呢咱们在这再去这个东西privateobjectmap把他也注入进来为什么要注入他呢这个咱们需要去
+[06:35] 解析对象是吧说这是个DATE是吧这时候呢你要干嘛呢你要去先去打印出来的DATE啊我们可以我看看啊这样咱们先去打印当前这个DATE然后呢咱们再去解析成这样的对象然后最终的是调用这个SERVICE就可以了好吧来咱们写一下我先这样我把这个范形啊给加上啊因为刚才是加的时候没有加范形范形加上啊那个对应上的应该是啊删了吧
+[07:09] 这看出来啊好一个好稍等啊你看这样的话是不是就就创建了一个东西啊好稍微有点卡稍等啊那在这呢你把这个变量给改一改改成date好了我把那个买开的先关了啊然后咱们先去写程序然后一会呢咱们可以再启动一下好吧下面呢咱们就可以去干嘛呢就可以在这去接收消息啊那这消息接收的话呢首先呢咱们要去打印一句一句话啊好咱们在这先打印
+[07:48] 打印个日志log.有个info然后呢是说接收到接收到啊接收到审核消息这消息是啥呢打印一下呗好吧行那这个咱们就印完之后呢下面咱们就可以去拿到值值呢就是date.value这个value呢其实就是一个消息是吧然后咱们下面就可以去判断一下啊啥呢None不等于当前的value
+[08:21] 然后呢咱们就会去解析那解析成呢其实最最最终啊解析成一个什么东西啊就是当前的一个对象是吧就是当前这个对象所以说呢咱们可以先去啊这个对象啊先去把它给创建出来等于message等于一个num这里边啊需要去哎这种什么case一下啊然后呢咱们可以去调用当前这个mypro.jr有一个read value然后呢你可以把当前的个volume啊volume装进去
+[08:51] 最终他要返回的值是什么呢当前这个对象是derclass然后呢你就可以去点吧就能去找到当前的message这个message跟他是一样的啊用他去接收就可以了啊这个呢需要去try cache一下好那拿到这个消息之后呢下面呢咱们就可以去获取消息了啊获取值了然后是message.get这个呢就是当前的具体消息的这个类
+[09:21] 那这个列里边这里边其实它又包含什么包含了当前的ArticleID好了那咱们下面就可以去判断最终你要去获取到当前的文章ID不等于当前的对象好下面咱们就可以去获取当前的IDauditSuccess.getArticleID然后这个就是ArticleID
+[09:54] 然后你最好是再去做一个判断啊判断的就是none不等于当前的article id然后呢就可以去调用Service去什么呢同步文章这时候呢你需要去在这去注入一个类Service啊什么articlerti quality Service把它注入进来之后呢你就可以去动了啊这里边啊调用的是哪个呢用的是一个叫做db
+[10:29] Base当然是这个方法这个是有测案数的就是ArticleID那这样的话咱们这个监听啊写完了啊然后下面呢咱们就来去测试一下好吧咱们在这去打个断点然后呢把这个项目给启动起来启动起来啊好启动启动完之后呢咱们在这去准备一些准备一些数据啊比如说我在这啊去找到WM News你看啊当前呢我去找这条数据去测试咱们刷信息啊
+[11:00] 嗯稍等哦这个mycircle没连是吧好我现在连上了啊连上之后呢这这个内容呢就能查出来啊比如说我现在就要去审核当前这个文章这时候呢我把它状态改成1好吧然后是点一下对号刷新一下状态就是140啊4101然后呢你打开当前的额德命端去审核审核的话呢嗯稍等看啊好这块是到这了是吧
+[11:27] 咱们不用管他啊咱们直接放行吧好吧这份咱自己自己自己去执行吧现在呢咱们主要是测试当前这个监听啊然后呢你打开当前的这一块内容啊这有个测试啊打开他的一个测试去审核文章文章你看这会审核的就是4101并且是当前的什么自媒体端是吧你可以去直接去发送消息当然你也可以去debug然后呢你在这啊你的这个发消息的地儿呢你可以去打断点啊
+[11:59] 往下找刚才写的代码然后就是哪啊好就这啊就这等等等等看看能不能到这啊这个审核之前咱们测过应该是没有问题的啊好到这了是吧这是review color Service这是啥呀啊又到这了是吧这个咱们先放行不要了不要他了啊好这个到这了啊然后往下走走走好往下执行应该的消息是不是就发送了咱们可以直接去哎
+[12:39] 往下走了啊OK你看这个消息是不是马上就能接收到了那接收到之后呢你可以看一下啊咱们可以看一下代码看这个消息到底有没有接收到哎看这个message啊能不能拿到当前的这个对象这个对象拿到了并且呢这个ID是不是拿到了就是21100好吧这是阿迪的啊好往下走这时候呢就应该去干嘛呢去审核应该是叫同步啊在这打个联好
+[13:08] 然后放行过来然后呢往下走走走先去获取当前的article这种应该是叫组合的一个类是吧看看能不能获取到啊往下执行你看当前这里边有没有数据呢好看这啊这里边是不是已经包含了当前的什么这四个值啊OK啊没问题啊那这样的话咱们已经拿到了当前的数据是吧拿到数据之后呢下面这一步呢就是
+[13:40] 转换成了HBase storage然后再去存储到HBase中那这事就完成了好往下走走看看能不能执行成功往下执行稍等好这时候咱们就算是成功了你看到了吗添加storage到HBase完成好吧现在这个数据咱们已经加上了好我们放行就可以
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲：文章审核成功后，通过 Kafka 发送消息，触发异步数据同步到数据库的流程。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示数据库表 ap_article 的数据，包含 likes、collection、comment、views、province_id、city_id、county_id、created_time、publish_time、sync_status、origin 等字段，当前查询语句为 SELECT * FROM ap_article LIMIT 0, 1000。
+画面2：展示 KafkaSender.java 文件内容，包含 sendSubmitArticleAuthMessage、sendArticleAuditSuccessMessage、sendArticleUpdateBus 方法，用于发送不同类型的 Kafka 消息。
+画面3：展示 ReviewMediaArticleServiceImpl.java 文件内容，包含审核成功后发送用户消息的逻辑，调用 kafkaSender.sendArticleAuditSuccessMessage。
+画面4：展示 ReviewMediaArticleServiceImpl.java 文件内容，包含审核成功后更新文章状态和发送用户消息的逻辑。
+画面5：展示 ReviewMediaArticleServiceImpl.java 文件内容，包含审核成功后更新文章状态和发送用户消息的逻辑，其中注释“文章审核成功”。
+画面6：展示 MigrationAuditSuccessArticleListener.java 文件内容，包含 onMessage 方法，用于处理 Kafka 消息。
+画面7：展示 MigrationAuditSuccessArticleListener.java 文件内容，包含 onMessage 方法，用于处理 Kafka 消息。
+画面8：展示 MigrationAuditSuccessArticleListener.java 文件内容，包含 sendSubmitArticleAuthMessage、sendArticleAuditSuccessMessage、sendArticleUpdateBus 方法。
+画面9：展示 MigrationAuditSuccessArticleListener.java 文件内容，包含 onMessage 方法，用于处理 Kafka 消息。
+画面10：展示 MigrationAuditSuccessArticleListener.java 文件内容，包含 onMessage 方法，用于处理 Kafka 消息。
+画面11：展示 ArticleQuantityService.java 文件内容，包含 getArticleQuantityList 方法，用于获取文章数量列表。
+画面12：展示 ReviewArticleTest.java 文件内容，包含测试审核成功后发送消息的逻辑。
+画面13：展示 ArticleQuantityService.java 文件内容，包含 dbToBase 方法，用于将数据同步到数据库。
+画面14：展示 ArticleQuantityService.java 文件内容，包含 dbToBase 方法，用于将数据同步到数据库，日志显示“异步数据库到base同步完成”。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面2：
+```java
+public void sendSubmitArticleAuthMessage(SubmitArticleAuthMessage message) {
+    this.sendMessage(kafkaTopicConfig.getSubmitArticleAuth(), UUID.randomUUID().toString(), message);
+}
+
+public void sendArticleAuditSuccessMessage(ArticleAuditSuccessMessage message) {
+    ArticleAuditSuccessMessage temp = new ArticleAuditSuccessMessage();
+    temp.setData(message);
+    this.sendMessage(kafkaTopicConfig.getArticleAuditSuccess(), UUID.randomUUID().toString(), temp);
+}
+
+public void sendArticleUpdateBus(KafkaMessage message) {
+    this.sendMessage(kafkaTopicConfig.getArticleUpdateBus(), UUID.randomUUID().toString(), message);
+}
+```
+
+画面3：
+```java
+kafkaSender.sendArticleAuditSuccessMessage(articleAuditSuccess);
+ApUserMessage apUserMessage = new ApUserMessage();
+apUserMessage.setUserId(awdewo.getUserId());
+apUserMessage.setCreatedTime(new Date());
+apUserMessage.setIsRead(false);
+apUserMessage.setContent("文章审核成功");
+apUserMessage.setTypeId(108);
+apUserMessageMapper.insertSelective(apUserMessage);
+```
+
+画面4：
+```java
+if (result != null && !result.isSuccessed()) {
+    log.error("插入文章索引失败。message: {}", result.getErrorMessage());
+}
+//修改windows的状态为 9
+wifone.setArticleId(apArticle.getId());
+updateWindows(windows, short4, message); //审核成功
+kafkaSender.sendArticleAuditSuccessMessage(articleAuditSuccess);
+```
+
+画面6：
+```java
+import com.heima.common.Kafka.KafkaListener;
+import org.apache.Kafka.clients.consumer.ConsumerRecord;
+import org.apache.Kafka.clients.consumer.Consumer;
+import org.apache.Kafka.clients.consumer.ConsumerConfig;
+import org.apache.Kafka.clients.consumer.ConsumerRecords;
+import org.apache.Kafka.clients.consumer.ConsumerTimeoutException;
+import org.apache.Kafka.clients.consumer.OffsetAndMetadata;
+import org.apache.Kafka.clients.consumer.OffsetCommitCallback;
+import org.apache.Kafka.clients.consumer.OffsetResetStrategy;
+import org.apache.Kafka.clients.consumer.KafkaConsumer;
+import org.apache.Kafka.common.TopicPartition;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache.Kafka.common.serialization.ByteArraySerializer;
+import org.apache.Kafka.common.serialization.Serde;
+import org.apache.Kafka.common.serialization.Serdes;
+import org.apache.Kafka.common.serialization.StringDeserializer;
+import org.apache.Kafka.common.serialization.StringSerializer;
+import org.apache.Kafka.common.serialization.ByteArrayDeserializer;
+import org.apache
+

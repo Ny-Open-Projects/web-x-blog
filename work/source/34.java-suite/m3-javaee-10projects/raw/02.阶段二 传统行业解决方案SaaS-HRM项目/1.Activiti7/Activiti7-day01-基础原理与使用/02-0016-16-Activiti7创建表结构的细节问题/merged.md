@@ -1,0 +1,167 @@
+# 16-Activiti7创建表结构的细节问题
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：1.Activiti7/Activiti7-day01-基础原理与使用
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\1.Activiti7\Activiti7-day01-基础原理与使用\16-Activiti7创建表结构的细节问题_【海量资源尽在 ubkz.com】.mp4
+- 时长 9分12秒（音频 552s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 那刚才我们通过了创建加码代码的方式我们已经完成了这25张表的这个创建对吧那如果我再去执行那这个时候是不是相当于表会重新创建啊那我们这个25张表并不是每次都需要去创建对不对所以像我们的这个process engine这个对象呢在初始化的时候那我们
+[00:26] 相当于整个这个项目在运行的时候只需要创建Process Engine这个对象只要创建一次就可以了对吧如果每次都创建的话那我们对的这个表中表25张表就会平凡的创建对吧现在如果给你一个机会去把这25张表快速给它删掉我们再来演示这里头的一些细节工作张同学会怎么思考那就来删表呗一个一个删呗那特别麻烦啊所以呢我在这里头啊直接来Job
+[00:57] job database对吧这是最快捷的嘛acti viti那这目前就是这种方式啊然后呢我们删完之后我再去create database对吧acti viti因为我们这个库里头现在目前没有任何的内容嘛对吧好然后再去执行它这个时候你再去刷一下我们整个这个整个这个库啊整个这个库应该activity就在这啊
+[01:31] 这个刚才没刷着没刷着是吧这个时候表就不存在了那这样我们就把这刚才创建的25张表就直接删掉了那删掉了我们现在来讲很多细节问题这些细节问题的第一个是我们一起来关注一下我们的这个配置文件关于我们的这个dbcp我们这个部分没啥说的那我们的这个standard lineprocess engine configuration这个对象我们要来说一说
+[02:00] 这是我们在这里要创建一个创建我们的这个单独运行的Process Engine的配置对象Process的配置对象那我们直接给它起的名字是叫做Process Engine Configuration对吧那要注意这个名称我们这里边就直接叫做Process Engine Configuration那你想这个ID的名字可不可以随便起呢比如说我就改个名字加了个01
+[02:29] 那加了个01只是这个这个bin的ID号变了对吧其他所有内容都没变我们这个时候再去执行大家思考一下是否还可以运行成功呢我们可以测啊这个答案应该是不能成功好我们可以看到这次就测试失败对吧那为什么就测试失败呢我们一起来找啊它这里边给了一个具体的这个错误原因叫做No such bin definition exception
+[02:59] 没有一个这样bin的定义nobin name的没有一个什么样的bin的名字呢叫做process engine configurationavailable提供对吧没有一个这样名称为这样bin的一个一个bin的提供没有提供一个名称为这个名字的一个bin对不对那其实主要原因是因为我刚才在这个activityconfigure.xml文件中把它加了个01对吧所以呢
+[03:28] 我们这里头这就要求啊我们默认情况下我们的这个bin的名字就应该是叫做process engine configuration对吧叫做默认啊默认情况下默认情况下这个bin的名字啊bin的名称是是这个bin的ID啊我们叫做bin的ID应该要等于叫process engine configuration对吧所以呢如果你起成别的名字那对不起
+[04:00] 它就不认了假如说我就想叫一个这样的名字我还希望我们的代码能够成功跑起来那要注意的是我们这个地方我们叫做CreatedProcessEngineConfigurationFromResource这个方法其实还提供有一个存在的形式它就是叫做第一个参数是我们的Resource就是我们配置文件的名字第二个参数就是我们bin的名称
+[04:31] 是一个字符状所以我现在control v叫做processengineconf一个a型01这样我们其实就已经可以搞定了这个地方我们就说一下第一个常数对吧如果你用这种形式的话第一个常数是代表配置文件是我们的配置文件名称对吧而第二个常数代表的是什么呢第二个常数是我们的这个就是叫做bin
+[05:02] bin的id是我们的process engine configurationbin的id对吧第二个参数是我们是process engine configuration的bin的id是这个意思这样如果你去运行肯定是可以跑起来的我们还要再介绍一个这里头具体的这两个property其中第一个property代表的是注入我们的数据源注入这个data source
+[05:32] 所以第一个应该是各位非常好理解的对吧那这个地方就是代表代表数据源对吧我们要注入一个这样的数据源那它的第二个参数代表什么意思呢第二个参数这个地方是代表我们的叫做是否是否生成表结构生成我们的表结构那我们这个地方是DatePaceSchemUpdate设置为去
+[06:03] 设置为去后呢将来我们就会去生成我们数据库的这个表结构那对呢它的这个操作套路是什么啊它是如果这个表结构不存在它就给你生成如果存在了它就不生成那么一起来看一下啊这边呢有一个关于我们的Database Scam Update应该会有一个它的这个参数说明啊我看一下啊好这个地方我们除了这个现在除了这个取之为取之为我们的这个
+[06:34] 去之外它其实还可以比如说取之为force取之为force它对这个时候就不会去创建我们的这个数据库的这个表结构了就是你没有没有我也不会给你创建那这个其实就情况不是特别好了对吧好这是我们在这个里头把这个database scam update也给各位特别的说了一下刚才我们已经把这个人改成01了对吧现在我们就可以整体上来测试一下它是否可以运行对不对
+[07:02] 现在我们可以重新再去执行一把来看一下效果现在各位可以看到它又开始可以成功跑起来了又可以成功运行我们如果去刷这个表结构的话应该是已经出来了表结构就出来了这时候我们基本上就可以各位补充了一些具体的细节问题当然也有同学会思考因为你这个配置文件也是自己手工在这里要加载的那有同学就会思考
+[07:34] 我们把这个名字改成别的名字比如说在这个activity后面也加个01叫activity01.cfg.xml那这样我们在这个也加个01对不对activity01.coffee.xml我告诉各位这个其实如果你去测试的话应该也是可以成功的这个部分我就不带着各位再去测了这是一个小细节的点除了这个细节的点其实我们这边还有一个细节的点就是
+[08:03] 我们这个Data Source其实这一段内容是你现在单独配置的如果你不单独配置的话直接把这样的一些Property直接扔到我们的Standard Processor Engine Configuration直接扔到这里头来它其实也是可以跑起来的对应的这个部分应该是应该是一个小细节也是一个小细节各位如果要去测试的话你可以测试一下
+[08:32] 就是说啥意思呢就是说这个这个bin里头的这样的一些property啊copy你也可以把这一项不要了啥意思啊就是这一项不要了这一项你住掉然后呢你把这一段内容直接给它内定了那这样你去运行其实也是可以的各位可以看到这些参数在这里边其实也都是支持的对吧这是我们啊在这里头直接给各位啊加的这一段内容啊那现在呢
+[09:08] 我们基本上就完成了刚才给各位介绍的这个细节问题
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何通过 Spring 配置文件初始化 Activiti 流程引擎并自动创建数据库表结构。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：MySQL Workbench 界面，连接到本地数据库，左侧显示 information_schema 数据库结构，右侧查询编辑器为空。
+画面2：MySQL Workbench 界面，光标在查询编辑器中，准备输入 SQL。
+画面3：MySQL Workbench 界面，查询编辑器中输入了 SQL 语句：
+drop database activiti;
+create database activiti;
+画面4：IntelliJ IDEA 界面，打开 activiti1 项目，显示 activiti.cfg.xml 文件内容，其中包含数据源配置和流程引擎配置，下方终端显示测试通过。
+画面5：IntelliJ IDEA 界面，显示 ActivitiTest.java 文件，其中 testGenTable 方法注释说明了流程引擎配置的创建方式，下方终端显示测试失败。
+画面6：IntelliJ IDEA 界面，显示 activiti.cfg.xml 文件，光标在 processEngineConfiguration01 bean 的 databaseSchemaUpdate 属性上。
+画面7：IntelliJ IDEA 界面，显示 activiti.cfg.xml 文件，光标在 processEngineConfiguration01 bean 的 databaseSchemaUpdate 属性上，下方终端显示测试失败。
+画面8：PPT 页面，标题为“3.3.3 ActivitiTest”，内容说明通过 createProcessEngineConfigurationFromResource 方法可以使用不同的 beanName。
+画面9：PPT 页面，标题为“3.3.7 数据库表的命名规则”，内容说明 Activiti 表以 ACT_ 开头，第二部分是两个字母标识，如 ACT_RE_* 表示 repository，ACT_RU_* 表示 runtime，ACT_ID_* 表示 identity，ACT_GE_* 表示 general。
+画面10：IntelliJ IDEA 界面，显示 ActivitiTest.java 文件，代码中使用了 createProcessEngineConfigurationFromResource 方法，参数为 activiti.cfg.xml 和 processEngineConfiguration01。
+画面11：MySQL Workbench 界面，查询编辑器中输入了 SQL 语句：
+drop database activiti;
+create database activiti;
+画面12：IntelliJ IDEA 界面，显示 activiti.cfg.xml 文件，光标在 processEngineConfiguration01 bean 的 databaseSchemaUpdate 属性上，下方终端显示测试通过。
+画面13：PPT 页面，标题为“此时我们查看数据库，创建了 25 张表，结果如下：”，下方列出数据库表名，如 act_re_procdef、act_ru_event_subscr 等。
+画面14：IntelliJ IDEA 界面，显示 activiti.cfg.xml 文件，光标在 processEngineConfiguration01 bean 的 databaseSchemaUpdate 属性上，下方终端显示测试通过。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（逐字抄录）：
+画面3：
+drop database activiti;
+create database activiti;
+
+画面4：
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/activiti" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>
+    <!-- activiti单运行时的processEngine配置对象(processEngineConfiguration)，使用单启动方式
+        默认情况下，beanId为processEngineConfiguration
+    -->
+    <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="databaseSchemaUpdate" value="true"/>
+    </bean>
+</beans>
+
+画面5：
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.ProcessEngineConfiguration;
+import org.junit.Test;
+
+public class ActivitiTest {
+
+    @Test
+    public void testGenTable(){
+        //1.创建ProcessEngineConfiguration对象，第一个参数：配置文件名称，第二个参数：processEngineConfiguration beanId
+        ProcessEngineConfiguration configuration = ProcessEngineConfiguration
+                .createProcessEngineConfigurationFromResource("activiti.cfg.xml", "processEngineConfiguration");
+        //2.创建ProcessEngine对象
+        ProcessEngine processEngine = configuration.buildProcessEngine();
+        //3.输出processEngine对象
+        System.out.println(processEngine);
+    }
+}
+
+画面6：
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/activiti" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>
+    <!-- activiti单运行时的processEngine配置对象(processEngineConfiguration)，使用单启动方式
+        默认情况下，beanId为processEngineConfiguration
+    -->
+    <bean id="processEngineConfiguration01" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="databaseSchemaUpdate" value="true"/>
+    </bean>
+</beans>
+
+画面10：
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.ProcessEngineConfiguration;
+import org.junit.Test;
+
+public class ActivitiTest {
+
+    @Test
+    public void testGenTable(){
+        //1.创建ProcessEngineConfiguration对象，第一个参数：配置文件名称，第二个参数：processEngineConfiguration beanId
+        ProcessEngineConfiguration configuration = ProcessEngineConfiguration
+                .createProcessEngineConfigurationFromResource("activiti.cfg.xml", "processEngineConfiguration01");
+        //2.创建ProcessEngine对象
+        ProcessEngine processEngine = configuration.buildProcessEngine();
+        //3.输出processEngine对象
+        System.out.println(processEngine);
+    }
+}
+
+画面12：
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/activiti" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+    </bean>
+    <!-- activiti单运行时的processEngine配置对象(processEngineConfiguration)，使用单启动方式
+        默认情况下，beanId为processEngineConfiguration
+    -->
+    <bean id="processEngineConfiguration01" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="databaseSchemaUpdate" value="true"/>
+    </bean>
+</beans>
+
+4) PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面8：PPT 标题为“3.3.3 ActivitiTest”，内容说明通过 createProcessEngineConfigurationFromResource 方法可以使用不同的 beanName。
+画面9：PPT 标题为“3.3.7 数据库表的命名规则”，内容说明 Activiti 表以 ACT_ 开头，第二部分是两个字母标识，如 ACT_RE_* 表示 repository，ACT_RU_* 表示 runtime，ACT_ID_* 表示 identity，ACT_GE_* 表示 general。
+画面13：PPT 标题为“此时我们查看数据库，创建了 25 张表，结果如下：”，下方列出数据库表名，如 act_re_procdef、act_ru_event_subscr 等。
+
+5) 无。
+

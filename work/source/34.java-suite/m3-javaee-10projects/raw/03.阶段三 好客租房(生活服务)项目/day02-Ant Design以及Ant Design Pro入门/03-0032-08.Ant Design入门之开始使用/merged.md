@@ -1,0 +1,187 @@
+# 08.Ant Design入门之开始使用
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day02-Ant Design以及Ant Design Pro入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day02-Ant Design以及Ant Design Pro入门\08.Ant Design入门之开始使用【海量资源尽在 ubkz.com】.mp4
+- 时长 12分56秒（音频 777s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们就正式的来使用这个AntD-RAN那么我们要想使用它呢我们先利把它引入进来那我们来看一下怎么样去引入呢那么AntD-RAN呢它呢是一个服务于企业级产品的一个设计的一个体系啊然后它的组件呢是基于React的实现那么这个AntD呢就是简称啊就是AntD-RAN的简称就是AntD
+[00:26] 然后被发布为是一个NPM的包方便开发者安装并使用由于我们使用的是UMI整个的一个构架的工具那么我们就可以非常方便的去引入这个Entity那么我们其实只需要在我们引入这个插件中有个叫做UMI Plugin Reactor这个插件那么我们只需要在这个插件中我们对这个Entity这个功能给它做一个开启
+[00:53] 那么我们这个项目中呢我们就已经引入了Ant Design蒂所以说还是非常方便的对吧那么在前面的我们这个插件我们是不是也用过对吧在这个插件中呢当时我们是不是配置了一个DVA的这样的一个开启的一个动作那么我们接下来再给它添加一个Ant Design蒂包号2那么我们就已经把这个Ant Design蒂加误到我们的一个工程中了哎OK好那我们来写一下
+[01:20] 那么打开我们这个config配置文件在config配置文件下面我们再来添加一个叫什么antd然后冒号什么去那么要注意的是你现在我有两个配置是吧我这个位置要加一个逗号对吧做一个这样的一个分割好然后我们接着继续往下面看到这我们就已经去完成了一个我们按的d的一个引路那么接下来我们就来看一下怎么去用
+[01:45] 那么在前面我们说过它的官网呢是不是在在这啊它的一个组件啊但我们来看一下它呢其实有支持非常多的一些组件包括有些上不下什么按钮呢一些标签呢图标呢等等你看这个都是它的制作一些按钮是不是都非常漂亮啊非常漂亮我看一下像这样的一些按钮都是很漂亮的一些按钮还有这种loading状态的一种按钮然后呢还有这种是这种分页啊分页式的一种
+[02:15] 按钮ok然后呢你可以看到左边啊左边有很多的一些功能我们大致的浏览一下吧包括你看在这个位置呢有一些个什么layout是不是做这个布局对吧做这种布局然后呢下面呢还有一些他其他的一些这个组件像导航类的啊这样的一些这个组件比方说像这个面包屑那么有这样的一些这个效果你看这样的效果啊这样的效果啊这样的一些效果啊等等然后呢有一些像这种什么下拉的菜单呢
+[02:45] 下来菜单点一下它你可以看到是不是有很多这样的一个功能然后还有像这menu的导航菜单对吧这个是横着的这样的menu导航菜单那么还有什么呢还有这个数字这种的对吧展开合起来然后还有这样的这样风格的对吧这种黑色这种风格的看起来还是很炫酷的OK好那么我们接着可以继续往下面看它的组件非常非常多我们大致点几个吧
+[03:15] 包括你看像有这种日期的选择框对吧那看一下你看有这样的一些效果是吧还是非常不错的这个选择开始和结束的一个日期对吧然后还有一些像什么呢像这种评分评分的一种组件这样的一些评分组件是非常优秀的做的非常好OK好那么还有像什么呢像这种什么呢叫选择器
+[03:45] 来看一下对吧可以这样的选择这样的选择这样的一些效果大家都可以自己去点一点去看一看然后呢还有像这种什么像头像呢这种组件它其实已经支持了非常非常多这种组件那我们去开发一个后台系统这个组件呢基本上是够用的还有像这种走马灯就是做这种广告你看有这种广告点击点击之类的点击点击切换
+[04:16] OK然后我们可以再看一下包括有这个typestypes标签页这个我们在开发过程中也是用的非常多的一会我们就以这个为例来给大家去讲一讲怎么去用咱们去演示一下还有这个什么对话框这种对话框也是我们用的比较多的是吧点击打开像这种对话框用的也是比较多的然后还有像
+[04:44] 这个什么全局提示进度条这个有些时候我们用的也是比较多的像上传的时候我是不是可以做一些这样的进度条这样的一个效果还是很不错的然后你可以看一下它还有一些怎么回到顶部这样的一种效果回到顶部这种效果然后这种OK那么这个是它代码演示代码演示可以看一下
+[05:15] 这个是他代码的,你看在左边是不是在这儿这有一个这样的一个效果然后这个就是blue是这个的效果OK好那么这个就是他整体的一个组件好那么下面我们就以一个为例就我们刚刚所说的tabs以它为例这个标签页它也是一个很重要的一个组件那我们就来看一下那么
+[05:42] 这个按下dren它这个组件到底怎么去用啊比如说我们现在就想使用这个tabs那么应该怎么用呢那么我们最好的文档啊不是说看笔记啊也不是看我们这个讲义而是说我们去看官方给我们这个文档那么你可以看到下面它有个演示演示的是不是就有这样的效果然后呢在下面这个位置呢是有一个说明然后注意点击后面这个位置有一个这个show code
+[06:08] 就是查看它的一个代码写什么样的代码就能够实现这样的效果呢对吧好那么我们就来看一下那么通过这个代码就能够去实现这样的效果那么我们是不是就可以参考这个代码来实现这个tabs对吧或者说来使用这个tabs好那我们来看一下怎么去用那么我们在这个位置我们创建一个我们的自己的一个解决文件叫什么呢叫mytabs
+[06:36] 好然后来看一下那么这个怎么用呢那么我们是不是要看一下那么它我们本身是不是使用的是React对吧那么我们先写一个React的一个组件然后呢我们再结合这个代码我们来做一个使用那么来看一下怎么去玩呢那么首先呢我们是先写import导入导入一个什么呢React对吧form谁呢这不就是React然后呢下面我们写一个lane然后呢写名字就叫mytabs
+[07:06] 然后呢继承谁呢是不是React.component然后呢我们在这个里面写一个方法叫random方法哎ok我们先把这个框架呢我们先打好然后在这个位置呢写一个export导出default然后来一个my什么的tips然后呢我们最终要写的内容是不是就是在这个run的这个里面去写啊哎ok没错那么return什么的return是不是要写一个这个括号对吧括号实现
+[07:37] 没有封号也是可以的好那么这个里面内容呢我们先不写一会儿我们再来写内容那么我们来看一下它怎么去用呢那么首先呢我们想要去使用这个Type-C组件那么你第一就应该先把这个组件导入进来来看一下在第一步第一步我们导入这个我们需要使用的组件这是我们第一步
+[08:03] 那么我们需要这个tabs那么你就把这个tabs导入进来那么你要需要其他的一些组件那就导入其他的ok好那么我们就把它导入进来了那么导入进来之后我们来看一下它需要怎么玩
+[08:16] 那么在官方给我们的示例中呢他使用的这个叫reactome run的去这样的去用代码的形式去完成啊那么其实他跟我们写的这个是一样的啊那么我们就可以把这个中间的这个html这个代码部分的内容直接拷贝到我们这个里面来注意直接拷贝进来那么直接拷贝进来之后呢我们是不是就可以尝试去访问一下那么看能不能够访问呢那么刷新一下你看在这个位置是不是有个my types走
+[08:45] 那么显然他是不是报错了报什么错呢来看一下那么首先他报错说有一个叫callback是一个unified是找不到的对吧那么我们来看一下在这个位置是不是有一个他有一个unchange一个callback也就是一个callback函数那么我们是不是就需要给他定义一个callback函数那么我们来看callback函数在这我们拷贝一下拷贝到外面去拷贝到这是不是我们已经定义了callback好然后我们再来刷新看效果
+[09:15] 依然发现还是报错他说这个叫tab什么的panel然后这个是没有定义的对吧那么这个没有那么这个怎么办呢我们来看一下注意这个并不是通过他直接引入而是怎么的来参考官方的文档他是通过一个tabs点点出这个对象所以我们把它拿过来也就是说我们在这个页面中所需要的一些所需要的一些组件你看在这是不是他使用了这个tab panel
+[09:45] 这样的一个组件那么这个组件是它的一个直组件所以要通过它点拿到它这个直组件那么以后我们的写法呢也基本都会有这样的一个写法就是它的直组件呢我们都是可以直接做一个定义当然了还有种写法是这样的就是我们如果你不想在上面定义的话你下面可以这么去玩这样去写这样去写这样去写好那么我们把它拿掉也是OK的来刷新看效果
+[10:12] 可以看一下是不是也是OK的没有问题那么这样写是不是就会相对比较麻烦一点那么是不是你每一个这个panel都需要这样去写那么我们还不如怎么呢就统一给它写一个定义那么下面是不是我们直接使用就可以了这样的效果也是一样的是一样的效果你看type1 type2 type3好那么我们要想去改变它的内容的值是不是在这个里面直接去写内容就可以了对吧来一个什么呢比如说我们第一个内容我们就写一个hello
+[10:44] 哈喽什么的对吧然后呢这个我的啊我的第一个table啊tables好来看一下这个效果啊你看是不是就已经显示出来了那么这个组件我们是不是就已经引用进来了哎OK那么当我们点击每一个组件的时候呢它会执行一个回调函数叫callback然后呢去打印个日志把这个key打印出来key是什么呢key就它是它的一个每一个它的一个
+[11:15] 这个类似于组件的一个ID对吧好那么把它打印出来看一下效果那么把它先清空一下我们看效果点二点三点一OK是不是就会有这样的一个效果那么到这儿我们这个tabs组件是不是就应用进来了那么我们只是以一个组件为例那么其他的组件是不是都是一样的包括你看
+[11:38] 像这种他说有图标的用组件怎么用那我们是不是只需要点击一下哎看一下他的官方所写这个事例怎么去用那我们直接去用是不是就可以了对吧包括你看像这种比方说我们要有一个上传的一个组件那么我们是不是也可以看到哦比如说我需要这样的一个上传组件那么我是不是就可以点击这个位置对吧来看一下他的一个代码那么怎么去用哎OK然后包括你可以看到这个位置是不是有一个这种
+[12:04] 图片的这种预览的功能你觉得比这种比较好你需要那么你就可以看一下它的原码对吧它是怎么样实现的那么参考这个代码是不是就能够去完成了ok它会预览这样的一个效果ok好那么关于关于我们基本的一个组件的使用我们就讲到这里那么我就以这个tabs为例其他我们就不一一去给它展示了那么要它展示的话它的
+[12:34] 整个的实践也是都是一样的好那么也希望大家能够根据我们第一个tabs之后然后多去官方的去找一些这种组件然后去使用一下那么这样的话我们就可以把按的底的按的用的会比较熟一点好那么关于第一个组件的使用我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 React 项目中使用 Ant Design 的 Tabs 组件，并通过代码实践解决组件导入和使用中的错误。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 在 IntelliJ IDEA 中查看项目结构，编辑 `config.js` 文件，其中包含插件配置。
+画面2: 浏览 Ant Design 官网的 Button 组件文档页面。
+画面3: 浏览 Ant Design 官网的 Menu 组件文档页面，展示下拉菜单效果。
+画面4: 浏览 Ant Design 官网的 Rate 组件文档页面。
+画面5: 浏览 Ant Design 官网的 Modal 组件文档页面。
+画面6: 浏览 Ant Design 官网的 BackTop 组件文档页面，展示代码示例。
+画面7: 浏览 Ant Design 官网的 Tabs 组件文档页面。
+画面8: 在 IntelliJ IDEA 中编辑 `MyTabs.js` 文件，正在导入 React。
+画面9: 在 Ant Design 官网的 Tabs 组件文档页面，展示代码示例。
+画面10: 在浏览器中显示错误信息，提示 `ReferenceError: TabPane is not defined`，并展示错误堆栈。
+画面11: 在 IntelliJ IDEA 中编辑 `MyTabs.js` 文件，导入 `Tabs` 组件并定义组件结构。
+画面12: 在 IntelliJ IDEA 中编辑 `MyTabs.js` 文件，修改 `TabPane` 的标签文本。
+画面13: 在 Typora 中查看 Markdown 文档，内容为 Ant Design Tabs 组件的使用说明。
+画面14: 在 Typora 中查看 Markdown 文档，内容为 Ant Design Tabs 组件的使用说明，展示代码示例。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1:
+```javascript
+// 导出一个对象，暂时设置为空对象，后期再填充内容
+export default {
+  plugins: [
+    'umi-plugin-React', {
+      // 暂时不启用任何功能
+      dva: true, // 开启了dva功能,
+    }
+  ]
+};
+```
+
+画面8:
+```javascript
+import React from 'React';
+```
+
+画面9:
+```javascript
+import { Tabs } from 'antd';
+
+const callback = (key) => {
+  console.log(key);
+}
+
+ReactDOM.render(
+  <Tabs defaultActiveKey="1" onChange={callback}>
+    <TabPane tab="Tab 1" key="1">Content of Tab Pane 1</TabPane>
+    <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
+    <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
+  </Tabs>
+  mountNode
+);
+```
+
+画面11:
+```javascript
+import React from 'React';
+import { Tabs } from 'antd'; // 第一步，导入需要使用的组件
+
+function callback(key) {
+  console.log(key);
+}
+
+class MyTabs extends React.Component {
+  render() {
+    return (
+      <Tabs defaultActiveKey="1" onChange={callback}>
+        <TabPane tab="Tab 1" key="1">Content of Tab Pane 1</TabPane>
+        <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
+        <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
+      </Tabs>
+    )
+  }
+}
+
+export default MyTabs;
+```
+
+画面12:
+```javascript
+import React from 'React';
+import { Tabs } from 'antd'; // 第一步，导入需要使用的组件
+
+function callback(key) {
+  console.log(key);
+}
+
+class MyTabs extends React.Component {
+  render() {
+    return (
+      <Tabs defaultActiveKey="1" onChange={callback}>
+        <TabPane tab="Tab 1" key="1">Hello antd wo de 第一个 tab</TabPane>
+        <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
+        <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
+      </Tabs>
+    )
+  }
+}
+
+export default MyTabs;
+```
+
+画面13:
+```javascript
+export default {
+  plugins: [
+    'umi-plugin-React', {
+      dva: true, // 开启dva功能
+      antd: true, // 开启Ant Design功能
+    }
+  ]
+};
+```
+
+画面14:
+```javascript
+import React from 'React';
+import { Tabs } from 'antd';
+
+const TabPane = Tabs.TabPane;
+
+function callback(key) {
+  console.log(key);
+}
+
+class MyTabs extends React.Component {
+  render() {
+    return (
+      <Tabs defaultActiveKey="1" onChange={callback}>
+        <TabPane tab="Tab 1" key="1">Content of Tab Pane 1</TabPane>
+        <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
+        <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
+      </Tabs>
+    )
+  }
+}
+
+export default MyTabs;
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面13: PPT 标题为“2.2.2、小试牛DAO”，内容为“接下来，我们开始使用 antd 的组件，以 tabs 组件为例，地址：https://ant.design/components/tabs-cn/”，并附有代码示例。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+

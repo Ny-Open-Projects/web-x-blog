@@ -1,0 +1,213 @@
+# 05-实时分析-今日访问量-概述&数据采集
+
+- 阶段：08.阶段八 智慧学成项目
+- 章节：04.第四章 智慧学成-平板看台
+- 源文件：08.阶段八 智慧学成项目\04.第四章 智慧学成-平板看台\05-实时分析-今日访问量-概述&数据采集_【海量资源尽在 666java.com】.mp4
+- 时长 4分29秒（音频 270s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 接下来,咱们对今日访问量这个指标进行实时的统计分析。
+[00:07] 通过这个指标的学习,咱们需要掌握能够采集实时分析所需要的原始数据,能够编写统计分析的代码,最终将统计结果保存到Redis中供业务使用。
+[00:23] 咱们首先来看数据采集。
+[00:26] 这里客能访问量的数据采集在第二章ETL章节,咱们搭建采集系统的时候已经采集了咱们客能访问量的数据,咱们来切到采集系统的文档来回忆一下。
+[00:40] 在咱们部署采集系统的时候,主要部署了三个服务,第一个Kafka Connection,这个呢,它是将Kafka的数据同步到HDFS中。
+[00:55] 因为咱们当时是离线分析,是需要同步到HDFS上,然后再做分析的。
+[01:02] 第二个呢,是咱们的采集服务。
+[01:05] 采集服务是将用户的买点数据同步到Kafka中,Kafka呢,再同步到咱们的HDFS上,这是之前的流程。
+[01:16] 接下来呢,是用户前端。
+[01:19] 用户前端系统呢,就是用户在访问页面的时候。
+[01:24] 根据对应的页面的一个JS买点,获取用户的一个防卫行为,根据获取的行为数据发送到咱们的采集服务,采集服务再把数据发送到Kafka中,Kafka中就有了相当的一个数据。
+[01:43] 这些系统就构成了咱们整个的一个采集系统,用户在访问课程页面的时候就能获取到用户的访问数据。
+[01:55] 同步到咱们的Kafka中这些系统呢咱们前边已经布置好这里呢直接点击进行浏览就行你也可以把这个地址呢复制到浏览器中进行一个打开这里呢打开之后咱们那个买点页面呢就是在这个页面中进行一个买点的咱们这个时候就可以登录到咱们的Kafka中执行一个命令来查看咱们的一个数据
+[02:24] 是否能实时的获取用户的一个法案数据咱们来登录到咱们的Kafka中这里呢咱们首先要切换到咱们的容器中Kafka的容器中使用Dark EXEC命令咱们需要进入的容器呢是Kafka终端呢是BASH进入之后呢咱们当前的目录是OPT目录咱们呢切换到Kafka的BA目录中把刚才的命令给粘过来
+[02:57] 咱们呢课程访问量的topic就是visit topic咱们敲回车这个时候呢就可以监控咱们这个topic中的数据了因为咱们这个地方模拟的是消费者只要咱们页面上的数据买点数据进入了通过采集系统进入了咱们的Kafka中这个地方呢就可以实时的刷新咱们来刷新页面看数据是否可以同步进来这里呢已经可以看到
+[03:27] 咱们已经有一个访问数据了再次刷新可以看到数据呢是可以同步进来的数据进来之后呢就说明咱们这个采集是OK的没有问题的到此呢咱们使用咱们第二张采集系统搭建好的课程访问量这个实时采集来采集咱们今日访问量实时分析所需要的数据这个呢就OK了咱们呢直接使用原来的系统
+[03:58] 来达到咱们实时采集的这个效果咱们呢是可以通过终端进行一个查看的通过终端连接到咱们Kafka上可以实时的拿到咱们那个用户的访问数据好咱们呢今日访问量的数据采集就到这里通过学习呢需要理解咱们是使用原来搭建好的系统进行的一个实时采集好视频呢就到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在学成在线平台设置学习兴趣，并通过终端操作Kafka集群来消费“访问量”主题数据，用于后续的实时分析。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示课程文档“4 部署”章节，列出软件环境要求：Jdk: 1.8, Nginx: 1.6, Hadoop: 2.6.5, Kafka: 2.2.0, - Kafka-connect (配置参考: Kafka-Connector使用文档), ZooKeeper: 3.4.5。
+画面2：展示“4.4.1 负载均衡启动”部分，说明buried.jar服务的启动方式：java -jar buried.jar，并列出三个服务的IP和端口：172.16.0.161:12100, 172.16.0.162:12100, 172.16.0.163:12100。
+画面3：展示学成在线平台“设置学习兴趣”页面，用户可选择前端、Java、大数据、安卓、iOS、PHP等方向的技能标签。
+画面4：展示学成在线平台首页，包含“来~用语言撩遍全宇宙”的宣传语和课程分类导航。
+画面5：展示终端窗口，执行命令进入Kafka容器：Docker exec -it xc-online-Kafka bash，并列出Kafka目录下的脚本文件。
+画面6：终端窗口中执行命令进入Kafka目录并列出脚本文件，准备消费数据。
+画面7：学成在线平台页面，显示“我的课程表”弹窗，列出“继续学习 程序语言设计”等课程。
+画面8：学成在线平台页面，显示“我的课程表”弹窗，列出“继续学习 程序语言设计”等课程。
+画面9：终端窗口中列出Kafka脚本文件，准备消费数据。
+画面10：学成在线平台页面，显示“PHP基础视频”课程的“环境搭建”、“函数”、“文件”、“正则”等模块。
+画面11：学成在线平台“设置学习兴趣”页面，用户可选择前端、Java、大数据、安卓、iOS、PHP等方向的技能标签。
+画面12：学成在线平台“设置学习兴趣”页面，用户可选择前端、Java、大数据、安卓、iOS、PHP等方向的技能标签。
+画面13：展示课程文档“2 今日访问量”章节，列出“2.1 数据采集”和“2.2 统计分析”部分，其中“2.1 数据采集”参考“第二章 ETL 采集博访问量数据”，并给出查看Kafka中指定topic数据的命令：# 模拟消费查看topic数据.sh /Kafka-console-consumer.sh --bootstrap-server xc-online-Kafka:9092 --topic visit_topic。
+画面14：终端窗口中执行命令消费Kafka主题数据，输出结果包含IP地址、浏览器信息等，如：102.168.0.5, 102.168.0.5, 102.168.0.5。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+Jdk: 1.8
+Nginx: 1.6
+Hadoop: 2.6.5
+Kafka: 2.2.0
+- Kafka-connect (配置参考: Kafka-Connector使用文档)
+ZooKeeper: 3.4.5
+
+画面2：
+java -jar buried.jar
+# 采集服务buried
+172.16.0.161:12100
+172.16.0.162:12100
+172.16.0.163:12100
+
+画面5：
+Docker exec -it xc-online-Kafka bash
+/root
+[root@xc-online-Kafka opt]# ls
+[root@xc-online-Kafka opt]# cd Kafka
+kafka_2.11-2.2.0/bin
+[root@xc-online-Kafka bin]# ls
+
+画面6：
+[root@xc-online-Kafka bin]# ls
+connect-distributed.sh
+Kafka-console-consumer.sh
+Kafka-console-producer.sh
+Kafka-consumer-groups.sh
+Kafka-delegation-tokens.sh
+Kafka-delete-records.sh
+Kafka-dump-log.sh
+Kafka-log-darsh.sh
+Kafka-mirror-maker.sh
+Kafka-preferred-replica-election.sh
+Kafka-producer-perf-test.sh
+Kafka-reassign-partitions.sh
+Kafka-replica-verification.sh
+Kafka-run-class.sh
+Kafka-server-start.sh
+Kafka-server-stop.sh
+Kafka-streams-application-reset.sh
+Kafka-toools.sh
+Kafka-verifiable-producer.sh
+Kafka-verify.sh
+Kafka-ZooKeeper.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell.sh
+Kafka-ZooKeeper-security-migration.sh
+Kafka-ZooKeeper-server-start.sh
+Kafka-ZooKeeper-server-stop.sh
+Kafka-ZooKeeper-shell
+

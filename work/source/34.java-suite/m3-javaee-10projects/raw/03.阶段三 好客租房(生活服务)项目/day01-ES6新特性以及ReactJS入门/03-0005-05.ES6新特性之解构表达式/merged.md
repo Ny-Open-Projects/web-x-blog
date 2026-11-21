@@ -1,0 +1,327 @@
+# 05.ES6新特性之解构表达式
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day01-ES6新特性以及ReactJS入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day01-ES6新特性以及ReactJS入门\05.ES6新特性之解构表达式【海量资源尽在 ubkz.com】.mp4
+- 时长 6分48秒（音频 408s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们来看一下ES6的另外一个新特性就叫什么呢结构表达式那么什么是结构表达式呢它是这样的啊就是说ES6中的允许我们按照一定的模式从什么呢宿主或什么的对象中提取它的值然后对变量进行负值这种方式就被称之为叫做结构
+[00:30] 真的叫结构那么这个呢我们单从文字上面去理解的话是有点抽象的下面呢我们直接来看一个案例那么大家就明白了那么首先呢我们先来看一下如何去从素组中直接去干嘛呢提取值也就是这个素组的一个结构好那我们来看一下那么我们把这个刚刚这个案例呢这个删掉然后呢我们这样咱们把这个拷过来假设呢我现在呢
+[00:59] 已经有一个这个数组AR数组那么是不是有123那么我是不是可以通过什么呢通过这个console对吧我把它打印出来点log我通过下标是不是可以拿到值来看一下下标1能拿到值吗来打印一下刷新那么我们可以看到当然可以拿到对不对这个是我们之前的一种这种写法
+[01:25] 和用法对不对那么在ES6中我们如何能够快速的去拿到我数组中的这个元素的数据呢还是可以这样去拿的你可以用net也可以用const都行都是一个变量的一个定义那么定义个什么呢我直接定义个数组然后呢这个里面我来一个什么x然后呢y然后呢z等于什么呢arrarr好嘞
+[01:53] 那么这样的话我直接就会什么呢就是说我这个数组中的XYZ会直接对应到这个数组中的123并且拿到它的值然后给我的XYZ进行做一个负值操作那么我们来打印一下看是否能够把XY
+[02:15] 还有什么呢我们的Z打印出来那么如果能够成功的打印就说明是不是解构成功了看到了吗哎呀OK这样就解构成功了那么大家有种认为老师哎你看仅在这个位置你是通过三个什么去设置那么有些时候呢我可能不需要这三个我只需要第一个啊或者我只需要前两个那就可以了那么那应该怎么办
+[02:41] 那么其实你还可以这么去玩啊比如说我们来一个什么呢X1X1那么我把这个打印出来点什么呢logX1那么注意我的ARR现在是不是有三个数据那么我这个里面是不是只定义了一个那么这样的话它能不能够拿到一个呢当然是可以的如果你要需要
+[03:06] 全部的那么就全部拿到如果你只需要其中的某一些那么就单独这样去获取也是可以的那么OK这个就是什么叫做宿主的结构宿主的结构刚刚我们也讲过了是不是你可以匹配一个可以匹配一个好那么下面我们来看一下对象的结构
+[03:24] 对象的结构那么这种方式和宿主的就差不多我们来测试一下那么假设现在我们有一个person这个对象那么我们对这个对象去做一个解构那么假设我现在有一个对象叫person那么他有name有edge有language就是说他的编程语言好那么我们来看一下我怎样去解构他呢我可以这样去解构来一个什么呢来一个我的
+[03:53] 注意不能用素组因为它对象所以我们要用一个大括号那么我用这name edge来个什么language对吧然后把它拿过来然后等于什么person注意你看这个跟我们刚刚的素组是不是差不多差不多对吧那么我分别用name去拿它的谁name那么edge分别去拿它的edgelanguage是不是拿它language
+[04:20] OK好大家要注意的是这个language它本身又是一个什么数组好那么接下来呢我们把它打印出来console.logname然后呢age然后呢language好把它打印出来我们来看一下这个效果然后呢我们刷新找来看一下那么你可以看到第一个jack是不是就他的name对吧你看是不是就是他的这个name第二个呢年龄是不是就是
+[04:49] 21岁21然后后面这个呢是打印刷的一个数组它本身呢又是一个数组大家有同学说老师这个变量的名字是不是必须要和你这个对象中的属性的名字是不是一样呢没错这样是一样的大家有同学说老师能不能不一样当然也是可以的你比如说你比如说那么我现在我的内幕
+[05:17] 我不叫内幕我叫N怎么办你可以这样来这样来就是说可以这样来怎么来呢注意这个内幕还是不变这个内幕是指什么呢是指你这个对象中的属性名称那么你想给哪个变量复制呢来一个冒号来一个N能看明白吗这个N就是你新进行设置的一个变量而这个内幕呢它指的是我这个对象中的属性
+[05:47] 那么同理这个A字是不是可以设置为A然后language可以设置为什么L那么我现在要打印的是不是就是一个N然后A和L这个大家能够理解吗就是说我是不是现在给我的一个新的变量做了命名就是叫NAL
+[06:06] 那么它所对应的我对象中的属性就是name, age和language好那我们来做一个测试那么结果肯定都是什么一样的来看一下你看答应结果是不是一样OK好那么这个就是我们讲的对象的一个结构对象结构那么有了这种方式之后当我们去从对象或者说从我们的宿主中去获取数据的时候这不就变得非常的方便那么你直接
+[06:32] 去定义就可以了那么OK以后大家看到这种方式的一个定义是指它是指什么呢它是一个叫结构表达式结构表达式好那么关于这个结构表达式呢我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲 ES6 新特性中的解构赋值（Destructuring）语法，包括数组解构和对象解构。
+
+2) 按时间顺序列出每张画面的要点：
+画面 1:
+- 代码内容：在 HTML 文件中，使用 JavaScript 的字符串方法，如 includes、startsWith、endsWith。
+- 代码片段：
+  ```javascript
+  let str = "hello heima";
+  console.log(str, "中是否包含了 heima", str.includes("heima"));
+  console.log(str, "中是否包含 baima", str.includes("baima"));
+  console.log(str, "中是否以 hello 开头", str.startsWith("hello"));
+  console.log(str, "中是否以 heima 开头", str.startsWith("heima"));
+  console.log(str, "中是否以 hello 结束", str.endsWith("hello"));
+  console.log(str, "中是否以 heima 结束", str.endsWith("heima"));
+  let str2 = "abc 123";
+  ```
+
+画面 2:
+- 代码内容：在 HTML 文件中，定义一个数组并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  let arr = [1,2,3];
+  console.log(arr[1]);
+  ```
+
+画面 3:
+- 代码内容：在 HTML 文件中，定义一个数组并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  let arr = [1,2,3];
+  let [x, y, z] = arr;
+  console.log(x, y, z);
+  ```
+
+画面 4:
+- 代码内容：在 HTML 文件中，定义一个数组并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  let arr = [1,2,3];
+  let [x, y, z] = arr;
+  console.log(x);
+  ```
+
+画面 5:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 6:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 7:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 8:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 9:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 10:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 11:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 12:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 13:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+画面 14:
+- 代码内容：在 HTML 文件中，定义一个对象并使用 console.log 输出。
+- 代码片段：
+  ```javascript
+  const person = {
+    name: "jack",
+    age: 21,
+    language: ["java", "js", "css"]
+  };
+  let [name, age, language] = person;
+  console.log(name, age, language);
+  ```
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号），这是最重要的部分：
+画面 1:
+```javascript
+let str = "hello heima";
+console.log(str, "中是否包含了 heima", str.includes("heima"));
+console.log(str, "中是否包含 baima", str.includes("baima"));
+console.log(str, "中是否以 hello 开头", str.startsWith("hello"));
+console.log(str, "中是否以 heima 开头", str.startsWith("heima"));
+console.log(str, "中是否以 hello 结束", str.endsWith("hello"));
+console.log(str, "中是否以 heima 结束", str.endsWith("heima"));
+let str2 = "abc 123";
+```
+
+画面 2:
+```javascript
+let arr = [1,2,3];
+console.log(arr[1]);
+```
+
+画面 3:
+```javascript
+let arr = [1,2,3];
+let [x, y, z] = arr;
+console.log(x, y, z);
+```
+
+画面 4:
+```javascript
+let arr = [1,2,3];
+let [x, y, z] = arr;
+console.log(x);
+```
+
+画面 5:
+```javascript
+const person = {
+  name: "jack",
+  age: 21,
+  language: ["java", "js", "css"]
+};
+let [name, age, language] = person;
+console.log(name, age, language);
+```
+
+画面 6:
+```javascript
+const person = {
+  name: "jack",
+  age: 21,
+  language: ["java", "js", "css"]
+};
+let [name, age, language] = person;
+console.log(name, age, language);
+```
+
+画面 7:
+```javascript
+const person = {
+  name: "jack",
+  age: 21,
+  language: ["java", "js", "css"]
+};
+let [name, age, language] = person;
+console.log(name, age, language);
+```
+
+画面 8:
+```javascript
+const person = {
+  name: "jack",
+  age: 21,
+  language: ["java", "js", "css"]
+};
+let [name, age, language] = person;
+console.log(name, age, language);
+```
+
+画面 9:
+```javascript
+const person = {
+  name: "jack",
+  age: 21,
+  language: ["java", "js", "css"]
+};
+let [name, age, language] = person;
+console.log(name, age, language);
+```
+
+画面 10:
+```javascript
+const person = {
+  name: "jack",
+  age: 21,
+  language: ["java", "js", "css"]
+};
+let [name, age, language] = person;
+console.log(name, age, language);
+```
+
+画面 11:
+```javascript
+const person = {
+  name: "jack",
+  age: 21,
+  language: ["java", "js", "css"]
+};
+let [name, age, language] = person;
+console.log(name, age, language);
+```
+
+画面 12:
+```javascript
+const person = {
+  name: "jack",
+  age: 21,
+  language: ["java", "js", "css"]
+};
+let [name, age, language] = person;
+console.log(name, age, language);
+```
+
+画面 13:
+```javascript
+const person = {
+

@@ -1,0 +1,122 @@
+# 6-MapReduce-流量统计求和-Reducer和JobMain代码编写
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day04-MapReduce高级
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day04-MapReduce高级\6-MapReduce-流量统计求和-Reducer和JobMain代码编写【海量资源尽在 ubkz.com】.mp4
+- 时长 9分17秒（音频 558s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 接下来呢继续写我们的代码刚才呢写完Mapper咱们接下来呢再写reducer这个reducer呢它也需要去继承一个reducer这里边呢我们要指定一个K2 V2和K3 V3我们的K2呢是一个test的手机号然后加上一个flowbin好这个地方我们先倒个包吧然后呢我们的K3 V3呢大家注意我们的K3 V3刚才分析过了K3呢在这里
+[00:34] K3还是我们的手机号而V3呢也是一个flowbin只是说这个flowbin呢将我们相同手机号这个集合中的每个字段相加然后呢这个V3这个flowbin呢是各个字段相加之后的一个流量好那我们这里面呢我们是K3还是手机号而这个V3呢也是一个flowbin接下来我们来重写reduce方法在这个reduce方法中呢我们需要做一件事情
+[01:03] 就是将我们的K2V2变成K3V3那么要去变成K3V3的话呢首先K3其实还是我们以前的K2因为它们都是手机号嘛这个好去弄那关键是怎么把这个V3给它弄出来呢我们来看看我们刚才的分析这个V3呢它其实是我们相同手机号呢它会放在一个结合中我们只需要呢
+[01:31] 将这些集合中的每一个浮楼并这是浮楼并这个又是一个浮楼并将这两个浮楼并的字段相加就可以了比如说这个18加上1515呢加上91116呢加上918而后面这个954呢加上4938分别相加相加完之后呢把它们每个字段的和在封装的新的浮楼并里边那么这个浮楼并是不是就可以做我们的V3了
+[02:01] 那接下来呢我们就来实现这么一个功能好在这里呢我们呢先去这样我们因为要便利这个结合便利一个呢我们要去进行一个相加这里边呢我先去new一个flowbinnew一个flowbin然后呢生成一个flowbin接下来我要便利这个结合便利一个flowbin呢将它的各个字段相加那相加之后呢我还要去把它们的
+[02:29] 把它们的值保存起来所以说我需要定义四个变量我把这个flowbin里边的四个变量都拿过来吧这个里边都拿过来拿过来之后呢我们放在我们的reducer这里边来这个private我去掉好拿到这里拿到这里之后呢我们给它初始化一个0都给它初始化一个0因为要求和嘛这个必须要给0好给0之后呢接下来我们来便利
+[03:08] 便利一个然后呢我们求和放在对应的变量里边去首先呢我们来做第一个upflow这个上行包总数加等value便利一个然后我们再加累加一下value点什么呢get upflow好这个第一个求完了第二个是downflow那这个地方我们用加等value点get downflow第三个是upcount flow加等value
+[03:40] 点get counter flow好后面那个是downdown counter flow那这个是加等value点getget应该是down counter flow好那这个就写完了我们来检查一下up flowup flowdown flow然后呢up counter然后down counter那这个加加完之后呢我们相当于这四个变量都有值了有值了之后呢我们还需要呢将它设置到这个
+[04:11] 所以说呢这是flowbeam然后呢.set分别来算upflow那就是upflow然后呢flowbeam.setdownflow那就是downflow第三flowbeam.setupcountflowupcountflow最后一个flowbeam.setdowncountflow好那这个呢我们就设置好了
+[04:44] 好那我们来问K2 V2是它那K3 V3呢是我们的手机号和我们的一个新的flowbin那这里呢其实我们的K3 V3已经有了K3呢还是我们的原来的KV3呢是不是就是我们现在封装的flowbin呢所以说呢这里我们只需要呢将K3 V3写到上下文中就可以了说是context.writeK3还是我们原来的KV3呢是我们新的flowbin
+[05:14] 在这里我给大家加一个注释简单加一个注释这一步是封装新的flowbin这个flowbin里边呢所有的字段呢都是相同手机号各个字段之和那么这个呢是将k3和v3写入上下文种那么这个Mapper方法呢我们就写完了写完之后呢
+[05:50] 我们再把这个主类呢主类方法写一下也就是这个焦闷写一下要写这个的话呢我们首先要去干嘛呢需要去继承一个configure的configure的然后呢实现一个接口叫to然后重写这里边的一个方法这里边的代码基本上和我们之前是一样的所以说呢我们直接呢可以把之前的这个模板拷过来然后做一下修改就可以了来我们把这个
+[06:21] run方法和mint方法拷贝拷贝过来直接替换那么这里边呢我们需要改哪些部分呢首先这个地方它报错我们来看为什么报错我把它重新把它重新删掉我们来看一下这个是一个叫mint这样我把它直接拿过来好粘贴一下粘贴完之后呢我们来做一些修改这个地方呢是to那我这个地方呢我让它倒个包
+[07:04] 哦就回来我们来导个包那哦这个to导包导错了啊我说他怎么报错了这个to导包导错了OK我们要导这个Hadoop里边这个包好那么接下来我们来做一些修改首先呢这个job这个对象的他的名字呢我们改一下这个地方呢不是word count是flow count啊这个名字呢可以随便写那这个地方呢我们打成加包放在集群上运行这个job呢用我们自己的
+[07:34] 把前面这个其他的一个包去掉用我们自己的这个设置输入类型呢还是input的format而这个输入的路径呢我们来改一下我们的改成out在根目录下边有个outout下面呢有一个我们写一个这个是输入路径是吧输入路径应该不是out应该是inputinput下面呢我们来写一个叫flow count好这是input目录
+[08:02] 接下来向下看,这个地方Mapper我们用的是flow count Mapper而我们的K2和V2呢,K2是test,而我们的V2呢是一个flowbin,我们来改一下那接下来呢,这个地方规约呢我们没有用,所以说我们直接删掉这个reducer呢,我们用的reducer是flow,我们用的reducer是flow,count reducer
+[08:34] 我们的Reduce的一个输出类型也就是我们的K3V3我们是K3是Test的手机号我们的V3呢是一个Flowbin那接下来再看这个输出输出类型呢用的是这个而我们的输出路径呢我们来改一下我们应该是改成一个out下面有一个叫flow flow count然后out我们写这么一个路径这个路径呢它会自动创建好那接下来再想想看这个地方呢不变
+[09:04] 下面呢有一个焦闷我们用我们自己的一个焦闷好那么这样子的话我们就把这个代码主方法写完了写完之后呢接下来我们来进行一下测试
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何编写一个 Hadoop MapReduce 程序，重点是实现一个自定义的 FlowCountReducer 类和 JobMain 驱动类，用于对流量数据进行统计。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示项目结构，当前编辑的是 FlowCountReducer.java 文件，位于包 cn.itcast.mapproduce_flowcount 中，准备编写 reducer 逻辑。
+画面2：展示 Map 阶段和 Reduce 阶段的数据流转示意图，Map 阶段将 Text 转换为 FlowBean，Reduce 阶段对 FlowBean 进行聚合。
+画面3：在 Map 阶段示意图中，左侧添加了 LongWritable 作为 Key，表示 Map 阶段输出的 Key 类型。
+画面4：在 FlowCountReducer.java 中，开始编写 reduce 方法，声明了变量 upFlow、downFlow、upCountFlow、downCountFlow。
+画面5：在 reduce 方法中，使用 value.getUpCountFlow() 获取 FlowBean 中的 upCountFlow 值。
+画面6：查看 FlowBean 类的结构，确认其包含 upFlow、downFlow、upCountFlow、downCountFlow 等字段。
+画面7：在 reduce 方法中，将 value.getUpCountFlow() 的值累加到 upFlow 变量中。
+画面8：在 reduce 方法中，将 value.getDownCountFlow() 的值累加到 downCountFlow 变量中。
+画面9：在 JobMain.java 中，开始编写主类，导入必要的包。
+画面10：在 JobMain.java 中，编写 run 方法的骨架，返回 0。
+画面11：在 JobMain.java 中，创建 Job 对象，并设置输入格式、输入路径、Mapper 类、输出 Key 类和 Value 类。
+画面12：在 JobMain.java 中，设置 Combiner 类。
+画面13：在 JobMain.java 中，设置 Reducer 类、Reduce 阶段的输出 Key 类和 Value 类。
+画面14：在 JobMain.java 中，设置输出格式和输出路径。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（逐字抄录）：
+画面4：
+```java
+package cn.itcast.mapproduce_flowcount;
+
+import org.apache.Hadoop.io.Text;
+import org.apache.Hadoop.mapreduce.Reducer;
+import java.io.IOException;
+
+public class FlowCountReducer extends Reducer<Text, FlowBean, Text, FlowBean> {
+    @Override
+    protected void reduce(Text key, Iterable<FlowBean> values, Context context) throws IOException, InterruptedException {
+        FlowBean flowBean = new FlowBean();
+        Integer upFlow = 0;
+        Integer downFlow = 0;
+        Integer upCountFlow = 0;
+        Integer downCountFlow = 0;
+        for (FlowBean value : values) {
+            upFlow += value.getUpFlow();
+            downFlow += value.getDownFlow();
+            upCountFlow += value.getUpCountFlow();
+            downCountFlow += value.getDownCountFlow();
+        }
+        flowBean.setUpFlow(upFlow);
+        flowBean.setDownFlow(downFlow);
+        flowBean.setUpCountFlow(upCountFlow);
+        flowBean.setDownCountFlow(downCountFlow);
+    }
+}
+```
+
+画面11：
+```java
+package cn.itcast.mapproduce;
+
+import org.apache.Hadoop.mapreduce.Job;
+import org.apache.Hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.Hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.Hadoop.util.Tool;
+import org.apache.Hadoop.util.ToolRunner;
+import java.io.IOException;
+
+public class JobMain extends Configured implements Tool {
+    @Override
+    public int run(String[] strings) throws Exception {
+        Job job = Job.getInstance(super.getConf(), "mapproduce_wordcount");
+        job.setJarByClass(JobMain.class);
+        job.setInputFormatClass(TextInputFormat.class);
+        TextInputFormat.addInputPath(job, new Path("hdfs://node01:8020/input/flowcount"));
+        job.setMapperClass(FlowCountMapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(FlowBean.class);
+        job.setCombinerClass(MyCombiner.class);
+        job.setReducerClass(FlowCountReducer.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(FlowBean.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
+        TextOutputFormat.setOutputPath(job, new Path("hdfs://node01:8020/out/flowcount"));
+        return job.waitForCompletion(true) ? 0 : 1;
+    }
+}
+```
+
+4) PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面2：Map 阶段：Text (V1) → FlowBean (V2)；Reduce 阶段：FlowBean (V3) → 文件。
+画面3：Map 阶段：LongWritable (K1) → FlowBean (V2)；Reduce 阶段：FlowBean (V3) → 文件。
+画面11：Job 设置流程：设置输入格式 → 设置输入路径 → 设置 Mapper 类 → 设置 Map 阶段输出类型 → 设置 Reducer 类 → 设置 Reduce 阶段输出类型 → 设置 Combiner 类 → 设置输出格式 → 设置输出路径。
+画面12：Job 设置流程：设置输入格式 → 设置输入路径 → 设置 Mapper 类 → 设置 Map 阶段输出类型 → 设置 Reducer 类 → 设置 Reduce 阶段输出类型 → 设置 Combiner 类 → 设置输出格式 → 设置输出路径。
+画面13：Job 设置流程：设置输入格式 → 设置输入路径 → 设置 Mapper 类 → 设置 Map 阶段输出类型 → 设置 Reducer 类 → 设置 Reduce 阶段输出类型 → 设置 Combiner 类 → 设置输出格式 → 设置输出路径。
+画面14：Job 设置流程：设置输入格式 → 设置输入路径 → 设置 Mapper 类 → 设置 Map 阶段输出类型 → 设置 Reducer 类 → 设置 Reduce 阶段输出类型 → 设置 Combiner 类 → 设置输出格式 → 设置输出路径。
+
+5) 无。
+

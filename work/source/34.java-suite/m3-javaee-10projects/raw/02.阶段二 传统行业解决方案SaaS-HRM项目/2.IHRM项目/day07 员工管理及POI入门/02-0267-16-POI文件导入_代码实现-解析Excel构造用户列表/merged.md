@@ -1,0 +1,269 @@
+# 16-POI文件导入：代码实现-解析Excel构造用户列表
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day07 员工管理及POI入门
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day07 员工管理及POI入门\16-POI文件导入：代码实现-解析Excel构造用户列表_【海量资源尽在 ubkz.com】.mp4
+- 时长 11分52秒（音频 713s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 那我们这个文件上传导入Excel用户报表的这个方法我们写好了接下来呢就是这个方法题里面的内容我们应该如何去做那对于我们而言对于我们而言我们要做的事情呢其实就是文件上传了这个Excel批量的对这个用户进行添加所以我们想方设法的重点围绕的就是这么两件事情首先呢第一件事情我们就是解析Excel
+[00:30] 那解析Excel之后呢第二件事我们是不是通过解析Excel获取到我们的用户叫做数据列表因为你上传过来的各位来看Excel打开其实就是一个用户列表一行代表一个用户那接下来呢构造了用户列表接着我们可以就是批量保存用户所以对于我们而言这个代码就是这么三个部分组成的首先呢咱们来看解析Excel如何去做
+[00:59] 那解析Excel我们之前呢就写过很多的这个案例的一个代码其实就是根据Excel进行读取拿到里面的数据不就在这儿呢吗那接下来呢我们就不用废话了直接把这一段代码Ctrl Ccopy过来好了copy过来呢之后对里面的抱歉这边还有一个小的拿到数据的这么一个方法Ctrl C把这个方法呢我也写到这边了也写到这边了那好了接下来呢就是说对于我们这个方法拷过来的拷过来的
+[01:35] 做一个小的一个主事好了接着就是说你解析Excel的时候这边咱们要得到Workbook得到Workbook首先XSF Workbook是否满足我们的需要注意我们这边的数据格式是不是就是2007版本所以没有问题接下来在我们New的时候这回就没有路径了注意各位我们调用打开它的构造方法简单的来看一下它有很多个构造方法
+[02:01] 很多个那其中是不是就有一个可以接收流信息的这么一个勾搭方法这是一个流信息所以对于我们而言这个就好办了因为对于这个money part这个fail这个对象而言它里面就是我们文件上传的所有内容包含文件名包含文件的所有直接流所以对于我们而言构造的时候fail打点get input streamOK这边会有一个异常做一个简单的处理
+[02:33] OK那这样一来各位会发现我呢其实就已经根据文件上传的这个内容构造出了我的workbook那剩下的事情就是根据我们的Excel进行解析进行获取数据就够了好了这边呢剩下的事情呢就需要我们仔细的一点点来分析对于我们来说各位来看读取Excel首先读取的页是第一页第一个sheet那接下来第一行有数据吗没有
+[03:03] 那所以对于我们来说读取数据是不是应该从第二行开始那第二行索引是不是应该是一行所以我们打开我们的代码做一个简单的修改那我们之前呢这边根据索引进行循环那根据索引进行循环的时候这边说了我们的数据在第一行OK那好了继续继续往下走往下走这边的这个string buffer呢我就不要了好了这些注释呢咱们之前都写过了我就不写了
+[03:36] 好了这个buffer呢我就全部都删掉了那各位来看各位来看那对于我这个案例来说底下底下是不是得到其中有数据的这一行然后呢拿到这一行去循环便利里面的每一个格子也就单元格那构造单元格的时候我们这回这个数据单元格是不是第一个第二个也是第二个开头所以对于我们来说0 1所以这边是不是也是从1开始啊
+[04:04] OK那这样一来我基本循环的这个题咱们就也都写好了那循环题写好了之后那接下来我们要做的事情就是我们的第二步就是想方设法的获取用户的数据列表那获取用户数据列表首先呢list咱都知道了是一个list集合所以我来new一个relist这个做准备那接下来每一行
+[04:32] 是不是代表的就是一个用户对象所以我在这边咱们就开始准备左手构造user我先写结构啊这代码一会再填嘛好那接下来呢对于我们来说就可以list.adduser好了还是那句话我先写结构我先写结构剩下这个user里面的属性究竟是什么咱们一个一个往里填其实就可以了OK
+[05:02] 好了呢这样一来呢我基本的结构我们已经写好了那剩下就是关注的剩下就是关注的我们应该把每一个格子里面的属性都拿出来每个格子里面的数据都拿出来一个格子其实代表的是拥护对象的一个属性我们想方设法的set进去不就可以了吗OK好了我们回到代码在这边呢咱们就开始着手对这个user对象进行复制那我们对象进复制呢咱们可以这样啊就是说
+[05:31] 我们可以在U的里面写一个构造方法然后呢把这个每一个每一行里面的所有数据全部都拿出来然后呢在构造方法里面对它进行一个拼装那这样一来咱们的代码就显得稍微简洁一点能够理解吧那所以呢在这边呢我就可以object values等于new一个object注意这个object是我写一个数组拿这个数组去接收这个格子里面的所有的内容
+[06:00] 并且呢这些数组呢它是有顺序的所以对于我们一会儿来说拿到的数组第一个就是用户名第二个不就是手机号吗OK好了那回到代码呢在这边那我这个数组的长度究竟有多长那这个是我们需要考量的一个小的一个点那对于这个数组而言其实呢它的长度是不是就应该是我这个单元格的这么一个长度啊OK好了那接着我们一起来实现它肉点get last cell numberOK
+[06:33] 就这么长就够了好了那剩下的事情呢就比较简单了我们就可以呢拿到里面的value然后呢直接复制到这个values当中cell number等于valueOK那这样一来呢其实就相当于我循环了每一个格子把所有的数据都拿出来放到values里那放到values之后我把这个values存到我们的user构造方法当中那我只需要写一个构造方法是不是就可以把所有的数据都复制进来
+[07:07] 那我们这个代码就写的稍微好看一点那接下来呢我们就会找到用户的这个实体类对象写一个他的构造方法PublicUder那我们现在得到的是一个Object类型的一个Values这么一些属性好了那接下来就是说那对于我这个构造方法里面呢其实是跟我这边有顺序的是跟这个有顺序的好了
+[07:39] 好了那接下来呢就可以对这个用户里面的属性情复制了类似点我们user name等于values那注意我这回这个values写几啊这个是我们需要关注的啊是这样的就是我们这个values呢它的长度各位会发现是跟我这个单元格的格子的总量有关的也就是说这么长那如果有的朋友直接说写零号元素那零号元素不就是空吗所以对我们而言是不是从一开始啊
+[08:07] 所以我这边用户名应该是在1这个位置OK那当然了它是一个我们叫做object类型所以在这边呢打点to screen哎即可好了第一个用户名搞定了接着第二个就是mobile那需要各位注意这个mobilevalue就是雷次叠加嘛一次叠加value2那接着我想说的是那对于这个value2而言那对于这个value2而言哎就是我们的手机号但是各位来看这玩意
+[08:40] 是不是像一个这个数字啊所以呢这个这个玩意儿呢其实是在PUI操作的时候呢它可能会面临两个问题第一个问题它可能把它变成数字第二个问题呢就是说可能是数字的话面临一个科学技术法的问题当然了这个玩意儿呢咱们先写上一会儿呢想办法把它改正其实就可以了好了接着第三个类似点我们的公号Worker Number等于Value
+[09:14] L4三点图死剧好了继续再来类似点我们的叫做聘用的形式form of entry deployOK等于好了就是我快点写了这个是四了好了接下来还有第五个入职时间类似点form类似点entry of time
+[09:47] OK等于注意这个需要做一个强制转型的这么一个操作也就是说我这边是一个时间的一个类型Data这回呢就变成了5OK好了上面这边报一个错啊是因为我这边这个聘用形式是一个引提者是一个引提者所以对于这个引提者来说注意我要做他对他做一个简单的处理那我们都知道对于EPO来说呢他其实得到的不管是一个什么样的数字我们来看聘用形式是一个1或者123
+[10:23] 那在PUI里面是把它转化成一个double啊所以呢这边呢我们需要对它做一个简单的处理就是把double转成我们的叫做int那怎么做呢也不难value4好了value4这边呢用一个double一个转化double好了接下来呢既然是一个double类型呢它就可以调用它的方法点int value来处理了OK好了呢接下来呢最后一个最后一个注意这个是一个部门编码啊
+[11:04] 那对于这个部门编码它真的是我们的部门ID吗显然不是但是呢为了以后我们方便自己查询我先请写成了部门ID了好了这边呢就是我们叫做value思6.2OK那这样一来我的构造方法其实普通完成了希望各位注意啊这边有一个问题就是最后这边有一个问题就是这个部门编码不等于不等于我们的部门ID
+[11:36] 我们一会还要对它进行处理OK那各位这样一来呢其实我已经第二件事搞定了构造了用户列表那用户列表咱们也写好了剩下的事情不就是最后一件事叫做批量保存用户码
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中通过 Controller 层读取 Excel 文件并解析数据，同时展示如何使用 Feign 客户端调用远程服务。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1:
+- 在 IntelliJ IDEA 中打开 UserContoller.java 文件。
+- 代码中定义了三个 @Autowired 注入的成员变量：PermissionService、JwtUtils、DepartmentFeignClient。
+- 定义了两个方法：importUser 用于导入 Excel 文件，testFeign 用于测试 Feign 客户端。
+
+画面 2:
+- 弹出“Select Classes to Import”对话框，提示导入缺失的 Apache POI 类库。
+- 选中 org.apache.poi.ss.usermodel.Cell、org.apache.poi.ss.usermodel.Row、org.apache.poi.ss.usermodel.Sheet 三个类。
+
+画面 3:
+- 显示一个 Excel 文件“导入测试模板.xlsx”，其中包含用户数据，列标题包括：用户名、手机号、工号、聘用形式、入职时间、部门编码。
+
+画面 4:
+- 在 UserContoller.java 中，代码正在实现 importUser 方法。
+- 代码注释说明：1.1. 解析 Excel 文件创建工作簿，1.2. 获取 Sheet，2. 获取用户数据列表，3. 批量保存用户。
+
+画面 5:
+- 显示 Excel 文件“导入测试模板.xlsx”，光标位于单元格 A18。
+
+画面 6:
+- 在 UserContoller.java 中，代码正在实现 importUser 方法。
+- 代码注释说明：1.1. 解析 Excel 文件创建工作簿，1.2. 获取 Sheet，2. 获取用户数据列表，3. 批量保存用户。
+- 代码中新增了 List<User> list = new ArrayList<>(); 用于存储用户数据。
+
+画面 7:
+- 显示 Excel 文件“导入测试模板.xlsx”，光标位于单元格 A20。
+
+画面 8:
+- 在 UserContoller.java 中，代码正在实现 importUser 方法。
+- 代码注释说明：1.1. 解析 Excel 文件创建工作簿，1.2. 获取 Sheet，2. 获取用户数据列表，3. 批量保存用户。
+- 代码中新增了 User user = new User(); 用于创建用户对象。
+
+画面 9:
+- 显示 Excel 文件“导入测试模板.xlsx”，光标位于单元格 B2。
+
+画面 10:
+- 在 IntelliJ IDEA 中打开 User.java 文件。
+- 代码中定义了 User 类的属性，包括 departmentName、level、username、mobile、workNumber、formOfEmployment、timeOfEntry、roles。
+- 代码中使用了 @JsonIgnore、@ManyToMany、@JoinTable 等注解。
+
+画面 11:
+- 在 IntelliJ IDEA 中打开 User.java 文件。
+- 代码中定义了 User 类的属性，包括 departmentName、level、username、mobile、workNumber、formOfEmployment、timeOfEntry、roles。
+- 代码中使用了 @JsonIgnore、@ManyToMany、@JoinTable 等注解。
+- 代码中新增了 this.workNumber = values[2].toString(); 用于设置工号。
+
+画面 12:
+- 在 IntelliJ IDEA 中打开 User.java 文件。
+- 代码中定义了 User 类的属性，包括 departmentName、level、username、mobile、workNumber、formOfEmployment、timeOfEntry、roles。
+- 代码中使用了 @JsonIgnore、@ManyToMany、@JoinTable 等注解。
+- 代码中新增了 this.timeOfEntry = (Date) values[4]; 用于设置入职时间。
+
+画面 13:
+- 在 IntelliJ IDEA 中打开 User.java 文件。
+- 代码中定义了 User 类的属性，包括 departmentName、level、username、mobile、workNumber、formOfEmployment、timeOfEntry、roles。
+- 代码中使用了 @JsonIgnore、@ManyToMany、@JoinTable 等注解。
+- 代码中新增了 this.formOfEmployment = (String) values[3]; 用于设置聘用形式。
+
+画面 14:
+- 在 UserContoller.java 中，代码正在实现 importUser 方法。
+- 代码注释说明：1.1. 解析 Excel 文件创建工作簿，1.2. 获取 Sheet，2. 获取用户数据列表，3. 批量保存用户。
+- 代码中新增了 Object value = null; 用于初始化单元格值。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号），这是最重要的部分：
+画面 1:
+```java
+@Autowired
+private PermissionService permissionService;
+
+@Autowired
+private JwtUtils jwtUtils;
+
+@Autowired
+private DepartmentFeignClient departmentFeignClient,
+
+@RequestMapping(value = "/user/import", method = RequestMethod.POST)
+public Result importUser(@RequestParam(name = "file") MultipartFile file) {
+    //1.解析Excel
+    return new Result(ResultCode.SUCCESS);
+}
+
+/**
+ * 调试Feign组件
+ * 调用系统微服务的/tost接口上传部门id，通过feign部门服务获取部门信息
+ */
+@RequestMapping(value = "/test/{id}", method = RequestMethod.GET)
+public Result testFeign(@PathVariable(value = "id") String id) {
+    Result result = departmentFeignClient.FindById(id);
+}
+```
+
+画面 2:
+```java
+org.apache.poi.ss.usermodel.Cell
+org.apache.poi.ss.usermodel.Row
+org.apache.poi.ss.usermodel.Sheet
+```
+
+画面 4:
+```java
+@RequestMapping(value = "/user/import", method = RequestMethod.POST)
+public Result importUser(@RequestParam(name = "file") MultipartFile file) throws Exception {
+    //1.解析Excel文件创建工作簿
+    Workbook wb = new XSSFWorkbook(file.getInputStream());
+    //1.2.获取Sheet
+    Sheet sheet = wb.getSheetAt(0); //获取第一个Sheet
+    //2.获取用户数据列表
+    List<User> list = new ArrayList<>();
+    for (int rowNum = 1; rowNum < sheet.getLastRowNum(); rowNum++) {
+        Row row = sheet.getRow(rowNum);
+        for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
+            Cell cell = row.getCell(cellNum);
+            Object value = getCellValue(cell);
+            sb.append(value).append("-");
+        }
+        System.out.println(sb.toString());
+    }
+    //3.批量保存用户
+    return new Result(ResultCode.SUCCESS);
+}
+```
+
+画面 6:
+```java
+//2.获取用户数据列表
+List<User> list = new ArrayList<>();
+for (int rowNum = 1; rowNum < sheet.getLastRowNum(); rowNum++) {
+    Row row = sheet.getRow(rowNum);
+    for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
+        Cell cell = row.getCell(cellNum);
+        Object value = getCellValue(cell);
+        values[cellNum] = value;
+    }
+    User user = new User();
+    list.add(user);
+}
+//3.批量保存用户
+return new Result(ResultCode.SUCCESS);
+```
+
+画面 8:
+```java
+//2.获取用户数据列表
+List<User> list = new ArrayList<>();
+for (int rowNum = 1; rowNum < sheet.getLastRowNum(); rowNum++) {
+    Row row = sheet.getRow(rowNum);
+    for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
+        Cell cell = row.getCell(cellNum);
+        Object value = getCellValue(cell);
+        values[cellNum] = value;
+    }
+    User user = new User();
+    list.add(user);
+}
+//3.批量保存用户
+return new Result(ResultCode.SUCCESS);
+```
+
+画面 10:
+```java
+private String departmentName;
+private String level;
+private String username;
+private String mobile;
+private String workNumber;
+private String formOfEmployment;
+private Date timeOfEntry;
+private Set<Role> roles = new HashSet<>();
+```
+
+画面 11:
+```java
+private String departmentName;
+private String level;
+private String username;
+private String mobile;
+private String workNumber;
+private String formOfEmployment;
+private Date timeOfEntry;
+private Set<Role> roles = new HashSet<>();
+```
+
+画面 12:
+```java
+private String departmentName;
+private String level;
+private String username;
+private String mobile;
+private String workNumber;
+private String formOfEmployment;
+private Date timeOfEntry;
+private Set<Role> roles = new HashSet<>();
+```
+
+画面 13:
+```java
+private String departmentName;
+private String level;
+private String username;
+private String mobile;
+private String workNumber;
+private String formOfEmployment;
+private Date timeOfEntry;
+private Set<Role> roles = new HashSet<>();
+```
+
+画面 14:
+```java
+//2.获取用户数据列表
+List<User> list = new ArrayList<>();
+for (int rowNum = 1; rowNum < sheet.getLastRowNum(); rowNum++) {
+    Row row = sheet.getRow(rowNum);
+    for (int cellNum = 0; cellNum < row.getLastCellNum(); cellNum++) {
+        Cell cell = row.getCell(cellNum);
+        Object value = getCellValue(cell);
+        values[cellNum] = value;
+    }
+    User user = new User();
+    list.add(user);
+}
+//3.批量保存用户
+return new Result(ResultCode.SUCCESS);
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价
+

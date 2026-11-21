@@ -1,0 +1,88 @@
+# 18.SentinelDashboard图形化控制台
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：08_万信金融-微服务高级部分/8-3 Sentinel的理解和使用
+- 源文件：10.阶段十 万信金融项目\08_万信金融-微服务高级部分\8-3 Sentinel的理解和使用\18.SentinelDashboard图形化控制台_【海量资源尽在 666java.com】.mp4
+- 时长 6分50秒（音频 410s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好刚才呢我们对Sentino入门案例呢进行了测试我们通过这个什么页面是能看出来这个限流的这个效果是不是已经出来了对不对但是限流的详情啊我们是不是得看它的这个什么呀认识文件但是我们说了这个认识文件呢重文本这里边一堆数字对不对我们观察起来非常的不方便那咱接下来就给大家介绍一个神器吧对不对Sentino配套的这个什么呀图形化的控制台
+[00:30] 他就可以把这一堆纯文本的数据给你转换成什么图形化的方式展示出来非常的直观啊那咱接下来看看这个图形化控制台该怎么使用呢非常简单你从网上啊去下载这么一个jar 包就是dashboard他的一个jar 包然后呢通过java-gar对吧通过java命令就可以把这个控制台给他干什么呀跑起来
+[00:56] 那么在启动的时候呢你可以自己设置它的一个什么呀端口号啊我这呢是什么呀四个九咱们先把它跑起来再说那在咱们的客栈里面啊资料文件夹里边就有哪个就这个是不是然后呢你就在这个命令行窗口嘛实行这个加上命令就行了就会是大家看这个dashboard是不是也是基于spin boot是不是一个独立的一个服务吧这就启动完了
+[01:32] 听完之后呢听完之后呢你就可以访问了呀我们刚才设置他的端口是四个角嘛那你就通过这儿对吧往这儿发请求对吧直接就可以访问这个单身报道点击一下允许给大家看他是不是还得先登录一下对吧很高大上啊那么这个他默认的账号和密码都是什么呀森体脑你看看啊默认的账号密码都是什么呀我这儿曾经登录过了所以说他这儿已经记录下来我直接点击什么呀登录哎
+[02:03] 我们是不是就进入到这个控制台了对吧但是这里边目前没有数据啊为啥没有数据呢因为你这边没有发请求啊没有进行测试嘛它这里边自然是空的对不对那我是不是接下来哎我刷新几次这边就有数据了呢试试呗刷新刷新我再快点刷对吧慢点刷然后看这个刷新有数据吗哎没数据啊这是咋回事呢那我们还缺一步啊还缺一步缺哪一步我们需要增加一个配置再
+[02:35] 这个Spring Boot的配置键里面增加这么一行配置这个配置干嘛这个配置其实就是设置这个什么呀Dashboard它的这个什么IP地址什么呀端口号的你只有做了这个设置它才可以把这个什么呀对刚才你看到的这一堆日志数据给给干什么呀它才知道是网站干什么呀传输传到这之后呢这个Dashboard这个控制台就会把那一堆日志数据展示成什么呀对图形化的这个
+[03:06] 就是说我们需要增加这么一个配置咱找到咱的这个什么配置文件对不对在这加个注释吧这是设置什么呀dashboard的这个什么呀我就写个地址啊那我们又增加了一个配置之后我是不是得重启一下这个微服对不对重启一下啊好已经启动完毕了咱接下来再次进行测试我是不是得先这边刷新对吧我可以慢一点刷几次
+[03:45] 然后呢再快一点刷几次然后回到控制台刷新有数据了吧Sentinel demo这个就是咱那个那个微服的名字嘛然后你看这里边一堆菜典对吧我们前面说过啊这个阿里巴巴的Sentinel它的功能非常非常多只不过我们这次主主主要是讲了一个什么呀对限流啊你点这试试监控哎你看这边东西就出来了这是不是咱的那个资源的名字吧你忘了咱这个资源的名字是不是叫哈喽啊
+[04:16] 在哪在Service里是不是叫hello对不对你看这展示的就是资源的名字然后这你看是比如图形化的方式哎几点几分对不对然后这边呢啊就是通过的这个次数对不对这是拒绝的什么呀次数还有这个什么呀响应的时间其实这些一啊什么四啊二啊这些时间其实都是从哪来的呀对他其实读取的就是这个什么日志文件里边的这些数据只不过呢是转换成这个什么呀
+[04:45] 图形化的方式给你展示出来而已所以说这个看起来就非常的这个什么呀直观我们可以再刷一下有了是不是然后有的学生说老师下边怎么也有个东西他叫杠哈喽对不对这是哈喽这是咋回事那这里边呢我们要给大家说一说这个不带杠的这个哈喽才是我们本次入门案例当中是不是受保护的资源我们是不是对他进行这个什么呀限流啊那下面这个杠哈喽是啥这个杠哈喽指的就是这个
+[05:23] 就这个你是不是往这发请求来这是哪这是这个control那吗是它不是所以说你一定要注意它这个控制台里边下边这个杠哈楼其实指的是这个地方指的是这个请求那也就是说我们的Cintiq会对这种请求就是你往微服务或者说往control那发了这种请求会进行监控注意我说的是监控我没有说对它进行限流只是进行监控
+[05:52] 就是他会统计啊你往这发了几次这个什么呀请求但是没有对他进行这个什么呀限流啊你看我在这再给你刷新刷新快点对吧然后你看这边你看这边他有这个拒绝的这个次数吗没有没有就证明他只是统计了一下这个什么呀对请求的次数而已你看我们上面这个哈喽他有没有拒绝次数有有证明是我们对他进行了限流就是要求的那个哈喽方法啊
+[06:26] 而Ctrl当中这个请求Sentino只是做了这个什么只是做统计只是做监控这个引量主义它俩可是不一样的这是我们把这个什么对Sentino Dashboard这个什么图形化的这个控制台我们简单给大家演示了一下怎么去使用
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何配置并使用 Spring Cloud Alibaba Sentinel 控制台进行流量控制和监控。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：浏览器访问 http://localhost:5000/Sentinel/hello，页面显示“系统繁忙，请稍候”。
+画面2：文件资源管理器显示包含 Sentinel-dashboard.jar 文件的目录，文件名和大小信息可见。
+画面3：PDF 文档页面显示“2.2 Sentinel-Dashboard图形化控制台”，并给出启动命令：java -Dserver.port=9999 -jar Sentinel-dashboard.jar，同时提示默认用户名和密码均为 Sentinel。
+画面4：浏览器访问 http://localhost:5000/Sentinel/hello，页面显示“系统繁忙，请稍候”。
+画面5：浏览器打开 Sentinel Dashboard 登录页面，用户名和密码输入框已填入“Sentinel”。
+画面6：浏览器登录页面，鼠标光标在“登录”按钮附近。
+画面7：IDEA 编辑器中显示 application.properties 文件内容，其中包含配置：spring.application.name=SentinelDemo、server.port=5000、server.servlet.context-path=/Sentinel，以及 spring.cloud.Sentinel.transport.dashboard=localhost:9999。
+画面8：IDEA 控制台显示 Spring Boot 应用启动日志，包括初始化 DispatcherServlet 和完成初始化。
+画面9：Sentinel 控制台页面显示“SentinelDemo”，左侧菜单栏包含“首页”、“实时监控”、“数据埋点”、“流控规则”、“降级规则”、“热点规则”、“系统规则”、“授权规则”、“机器列表”等选项。
+画面10：Sentinel 控制台页面显示“SentinelDemo”的实时监控数据，包含“hello”资源的 QPS、拒绝 QPS、响应时间图表和数据表格。
+画面11：IDEA 编辑器中显示 TestService.java 代码，其中使用 @SentinelResource 注解配置资源名“hello”和异常处理器“exceptionHandler”。
+画面12：浏览器访问 http://localhost:5000/Sentinel/hello，页面显示“Hello Sentinel”。
+画面13：IDEA 编辑器中显示 TestController.java 代码，其中使用 @GetMapping 注解映射“/hello”路径，调用 TestService 的 hello 方法。
+画面14：PDF 文档页面显示“2.3 限流规则详解”，并列出限流规则参数：1. resource：资源名，2. grade：限流类型（QPS 或并发线程数），3. count：限流阈值。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面3：
+java -Dserver.port=9999 -jar Sentinel-dashboard.jar
+注意：需要 JDK 版本为 1.8 及以上版本
+然后通过浏览器打开 http://localhost:9999 即可访问 Dashboard，默认用户名和密码都是 Sentinel
+
+画面7：
+spring.application.name=SentinelDemo
+server.port=5000
+server.servlet.context-path=/Sentinel
+# 设置 dashboard 的地址
+spring.cloud.Sentinel.transport.dashboard=localhost:9999
+
+画面11：
+@SentinelResource(value = "hello", blockHandler = "exceptionHandler")
+public String hello() {
+    return "Hello Sentinel";
+}
+
+public String exceptionHandler(FlowException e) {
+    e.printStackTrace();
+    return "系统繁忙，请稍候";
+}
+
+画面13：
+@Target
+public class TestController {
+    @Autowired
+    private TestService testService;
+
+    @GetMapping("hello")
+    public String hello() {
+        return testService.hello();
+    }
+}
+
+4) PPT 标题、架构图/流程图的结构、表格数据：
+画面3：PPT 标题为“2.2 Sentinel-Dashboard图形化控制台”，内容包含启动命令和登录信息。
+画面14：PPT 标题为“2.3 限流规则详解”，内容包含限流规则参数列表。
+画面9：Sentinel 控制台左侧菜单栏包含“首页”、“实时监控”、“数据埋点”、“流控规则”、“降级规则”、“热点规则”、“系统规则”、“授权规则”、“机器列表”等选项。
+画面10：Sentinel 控制台页面显示“SentinelDemo”的实时监控数据，包含“hello”资源的 QPS、拒绝 QPS、响应时间图表和数据表格。
+
+5) 无。
+

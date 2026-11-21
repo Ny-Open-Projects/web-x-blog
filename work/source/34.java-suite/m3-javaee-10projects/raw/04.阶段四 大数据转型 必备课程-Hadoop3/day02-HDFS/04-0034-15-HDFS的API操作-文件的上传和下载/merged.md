@@ -1,0 +1,271 @@
+# 15-HDFS的API操作-文件的上传和下载
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day02-HDFS
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day02-HDFS\15-HDFS的API操作-文件的上传和下载【海量资源尽在 ubkz.com】.mp4
+- 时长 11分30秒（音频 691s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 接下来我们来看一下文件的下载和文件的上传文件的下载呢就是我从HDFS上下载一个文件到本地这个怎么实现呢第一步还是获取FileSitter的对象第二步呢我们需要去通过一个Open方法然后呢去得到一个HDFS文件的一个输入流然后呢再获取一个本地文件它的一个输出流有了输入流有了输出流之后呢
+[00:29] 我们来通过一个工具类就是IoTools工具类通过一个copy方法将输入流里边的文件数据然后复制到一个输出流就可以了最后把这些文件给关闭来我们来演示一下打开我们的ID在这里我们先注视一下就是实现文件的下载我们来public void这个地方我们来写个
+[01:03] 就是download file然后写个test好在这里我们第一步还是获取file system对象好这个和之前是一样的我呢可以把下面这个直接拷贝过来好获取完file system拷贝一场那第二步干嘛呢我们要实现文件的拷贝呢文件的复制呢需要有两个流一个是输入流一个是输出流
+[01:39] 那么输入流就是读数据我们既然是下载我们是不是应该从HDFS上读数据所以说读数据我们要获取HDFS文件的输入流我们要从那边读那获取输入流怎么获取呢这里边有一个方法叫open来我们来看一下用failsystem这个方法叫open然后你有一个pass路径
+[02:10] 你要去读哪个文件呢咱们来看我们的HDFS比如说这里边有个叫timer.txt就这个文件我们来看我们可以写个根目录下面有个timer.txt我要获取这个文件的输入流input stream那有了输入流之后还不行啊是不是还得有输出流啊有了输出流之后才能实现文件的复制第三步获取
+[02:42] 获取谁的输出流呢我下载我要把HDFS的文件写到本地那是不是获取本地文件的输出流好那这个时候呢我们可以用new个fileoutput stream我们可以new一个什么呢我们可以new一个file好这里边呢我们来指定一个路径比如说呢我们来指定一盘下面的timer.txt好指定这么一个路径
+[03:13] 那我们拿到这个output stream我们拿到了一个输流我们又拿到了一个输出流那接下来我是不是在这两个流之间实现个文件的复制是不是就可以了好第四步实现文件的拷贝或者叫复制好那这个时候呢我们用一个工具类这个工具类呢叫ioutils稍等ioutils好这个包呢
+[03:44] 我们来看一下我们io youtube我们来选择一个apache的一个这个包来我们来看apache下面有个commons.io这里边有两个是不是我们应该是选Hadoop这个选Hadoop然后这里边有一个copysorry不是Hadoop是这个我把它这个包先删掉我们应该选
+[04:15] 选哪个我们应该选org-commons-l这个包它有个方法叫拷贝好这个里边呢第一个参数选的是输入流就是input stream第二个呢是一个output stream好这个流写完之后呢它就可以实现文件的复制好最后一步呢我们可以关闭释放资源关闭流OK那关闭流的话呢我们用也是用ioutils里边有一个方法这个方法叫
+[04:44] close criteria这个地方呢我们先关闭输流然后再关闭这个输出流最后呢我们可以把这个fail system也给它关闭了好我们来close一下OK关闭了好关闭完之后呢我们来测试一下这个代码来看能否实现文件的一个下载来在这加一个单元测试执行一下稍等好
+[05:26] 没有问题没有问题之后呢我们回到我们的一盘回到我们的一盘好在这里呢我们来看有没有一个timer的贴体有我们点开打开看这里边有没有数据是不是有两行数据好这个呢就把文件呢已经下载到本地了好这是实现文件的下载好那么其实实现文件的下载呢还有一种更简单的方式我们来看一下第二种方式这个呢是方式一
+[05:55] 我们再来一个方式二方式二的话呢我把这个模板呢也直接拷过来这个地方呢我写个test2那如何实现第二种方式呢我们第一步还是获取failsetter对象第二步我们可以调用调用一个方法调用方法直接实现文件的一个下载在failsetter里边有一个方法我们来找一下叫copy
+[06:34] to local filecopy to local file那你从这个名字你可以看到呢就是我要去拷贝把这个把文件拷贝到本地的一个文件这里边有两个参数第一个参数是一个pass第二个参数也是一个pass那么来去做一下第一个参数我们new一个pass打准这个pass这个pass呢代表什么意思呢我们可以进去这个pass呢代表我们的数据呢从哪里来
+[07:03] 而这个呢表示我们的数据呢到哪里去这是分别是两个路径分别两个路径我们来开做一下我们的数据呢从哪里来呢从我们的这个根目的下面一个timer.tst我们要到哪里去呢我们这个数据呢要到new一个pass好要到这个比如说我换一个盘吧f盘下面一个timer.tst好
+[07:34] 这样的一个方法就可以实现文件的复制我们最后呢可以把File System呢也给关闭一下好来我们看一下能否实现同样的功能来执行一下走好稍等哎没有问题没有问题之后呢我们来看F盘有没有对应的F盘里面有一个timers的贴替好打开是不是也依然能够实现文件的下载你会发现这种方式呢
+[08:09] 这种方式非常简单其实就是一个copy to local file这是第二种方式如果以后用的时候大家可以采用第二种方式那我们既可以实现文件的下载呢其实我们还可以实现文件的上传来看一下HDFS的文件上传文件上传呢它其实呢只是调了一个方法叫copy from local file你看刚才是什么呢刚才它这个
+[08:37] 它这个方法名字叫copy to local file而这个呢叫copy from local file也就是说我要拷贝从本地拷贝拷贝到哪里去呢我们是不是拷贝到我们的HDFS上好接下来呢我们来看一下这个怎么去实现好在这里我们来实现文件的上传加个单元测试public void
+[09:08] 文件上叫uploadFailTest好那么接下来呢我们第一步我们还是获取FailSystem的对象我直接拷贝过来抛一个异常好接下来呢第二步我们可以调用方法实现文件的上传怎么实现这个文件的上传呢我们需要调个方法FailSystem有个方法叫什么呢我要实现文件的上传那就是copyFromLocal
+[09:48] 表示我要从本地上传一个文件好这个地方呢我们你有一个pass这个表示数据从哪里来那大家想想这个是数据的来源的地方那你说我是写本地的一个路径呢还是写HDFS路径很显然我们是不是应该写本地的好SRC那这地方呢比如说我在一盘下面有一个文件我们来看一盘这里有个文件叫hello.txthello.txt
+[10:19] 好这个表示我数据的来源而这个表示我数据的目的地那我再new个pass这个pass呢我们是指定是hdfs的那这个地方我们要把它放在我们的根目录下面我们的放个hello.txt这个表示把我本地的一个hello.txt复制到根路你下面hello.txt我的根目录下面看看有没有这个文件好没有没有的话呢我们来直接运行看看
+[10:49] 能否把它上传上去最后呢我把它关闭failsystem.close来我们来运一下执行稍等稍等好没有问题没有问题之后呢我们来直接刷新看一下你会发现已经把这个hello.ttt上传成功了OK这就是文件的一个上传非常简单好到这里呢我们既实现了文件的下载又实现了文件的上传
+[11:26] 好那我们呢就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 Java API 实现 HDFS 文件的下载和上传操作。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 HDFS 文件下载的代码示例，使用 FileSystem.get() 获取文件系统对象，然后通过 open() 获取输入流，再通过 copy() 方法复制到本地。
+画面2：展示 HDFS 文件下载的完整代码，包括获取文件系统对象、打开输入流、创建输出流、复制文件、关闭流。
+画面3：展示 HDFS 文件下载的代码，重点在获取输入流和输出流。
+画面4：展示 HDFS 文件下载的代码，重点在使用 IOUtils.copy() 方法复制文件。
+画面5：展示 HDFS 文件下载的代码，重点在使用 IOUtils.copy() 方法复制文件，并添加了关闭流的代码。
+画面6：展示 HDFS 文件下载的代码，重点在使用 IOUtils.copy() 方法复制文件，并添加了关闭流的代码。
+画面7：展示本地文件系统中的文件夹和文件，包括 timer.txt 文件。
+画面8：展示 HDFS 文件下载的代码，重点在使用 FileSystem.copyToLocalFile() 方法直接下载文件。
+画面9：展示 HDFS 文件下载的代码，重点在使用 FileSystem.copyToLocalFile() 方法直接下载文件。
+画面10：展示 HDFS 文件下载的代码，重点在使用 FileSystem.copyToLocalFile() 方法直接下载文件。
+画面11：展示 HDFS 文件上传的代码，重点在使用 FileSystem.copyFromLocalFile() 方法上传文件。
+画面12：展示 HDFS 文件上传的代码，重点在使用 FileSystem.copyFromLocalFile() 方法上传文件。
+画面13：展示 HDFS 文件上传的代码，重点在使用 FileSystem.copyFromLocalFile() 方法上传文件。
+画面14：展示 HDFS 文件上传的代码，重点在使用 FileSystem.copyFromLocalFile() 方法上传文件。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+Configuration();
+boolean mkdirs = filesystem.mkdirs(new Path("/hello/mydir/test"));
+filesystem.close();
+```
+画面2：
+```java
+@Test
+public void getFileLocal() throws Exception {
+    FileSystem fileSystem = FileSystem.get(new URI("hdfs://192.168.52.250:8020"), new Configuration());
+    FSDataInputStream inputStream = fileSystem.open(new Path("/timer.txt"));
+    FileOutputStream outputStream = new FileOutputStream(new File("E:/timer.txt"));
+    IOUtils.copy(inputStream, outputStream);
+    IOUtils.closeQuietly(inputStream);
+    IOUtils.closeQuietly(outputStream);
+    fileSystem.close();
+}
+```
+画面3：
+```java
+//实现文件的下载
+public void downloadFile() throws URIException, IOException {
+    //1:获取FileSystem对象
+    FileSystem fileSystem = FileSystem.get(new URI("hdfs://node01:8020"), new Configuration());
+    //2:获取Hdfs文件的输入流
+    FSDataInputStream inputStream = fileSystem.open(new Path("/timer.txt"));
+    //3:获取本地文件的输出流
+    FileOutputStream outputStream = new FileOutputStream(new File("E:/timer.txt"));
+    //4:实现文件的复制
+    IOUtils.copy(inputStream, outputStream);
+}
+```
+画面4：
+```java
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.conf.Configuration;
+import org.apache.Hadoop.fs.FSDataInputStream;
+import org.apache.Hadoop.fs.FSDataOutputStream;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus;
+import org.apache.Hadoop.fs.FileSystem;
+import org.apache.Hadoop.fs.Path;
+import org.apache.Hadoop.fs.FileStatus
+

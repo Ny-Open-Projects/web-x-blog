@@ -1,0 +1,188 @@
+# 14-Activiti排他网关-测试新的请假流程效果
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：1.Activiti7/Activiti7-day05-进阶3
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\1.Activiti7\Activiti7-day05-进阶3\14-Activiti排他网关-测试新的请假流程效果_【海量资源尽在 ubkz.com】.mp4
+- 时长 12分32秒（音频 753s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:05] 那下面我们就开始啊把我们的这个排他网关的这个具体的效果给各位展示一下啊比如说我把刚才的这个这个exclusive gateway test我改一个叫test02出来啊好01我就不要了那我们这边主要就是测试我们的排他网关了对吧好把这个给他改一下啊那我们这边呢已经啊把我们的这个势力加入了我们的这个已经啊叫做啊已经
+[00:34] 已经加入了我们的排他网关来进行测试我们可以一起来看一下因为我们已经在这边加入了我们的排他网关我们要做的第一个工作就是要去将我们的流程定义直接部署出来所以说我们再回到我们的流程定义部署的代码中就是这个部分
+[01:02] 那要注意的就是我们这一次部署的应该是在我们的这个Digram的D05的这个目录下对吧然后走的不是我们的这个Holiday4而是我们的Holiday5对不对所以说这个路径呢在这边也要改一下啊看小微能站来啊然后走的是我们的这个Holiday5的PNG对吧那这样我们就可以来实现我们的这个流程部署啊好各位可以看一下啊我来先刷一下看看我们的这个库是否已经清了啊
+[01:31] 现在整个户没清其实不清也可以主要就是我们在这里为了能够看出更好的效果好比如说我再刷一下然后我们再回到这边这时候我来做流程做流程的流程定义的部署我们来看一下效果这边已经开始建表了好各位可以看到我们这边
+[01:56] 这个有一个Holiday5的PNG它说not find是没有找到的注意因为我们并没有去把BPMN文件去生成它的PNG文件要不行我就直接把这个人注掉注掉就相当于我们没有PNG文件没有PNG文件其实整个流程运行整个过程是不会出任何问题的我这个时候可以这样做重新
+[02:22] 再把我们整个的这个表给它清了啊比如说我们这个手重新再跑一遍吧那就是再次做我们的这个流程部署对吧因为我们这个图没有去弄啊当然你也可以把这个PNG图给它弄出来对吧好各位可以看到我们的这个请假流程已经部署进去了啊那部署好了我们呢这边呢我们这边直接啊可以把它直接住掉对吧好
+[02:49] 这是我完成了我们的整个这个流程的部署啊流程部署如果没问题那咱们同学应该也非常清楚啊这时候直接到这去看去对吧我们现在可以看到啊这里面就加入了我们的这个exclusive对不对加入了我们的这个是否有排他网关啊我们这边是有排他网关的对吧然后呢我们的这个张三李四王五对吧这些都没问题啊然后是赵六对吧好下面我们可以
+[03:19] 接着来做我们的流程实例的启动要去做流程实例的启动我们可以把这张直接再打开好各位注意一下这一次我们启动流程实例的时候一样的也需要给我们的Holiday的天数去付一个值对吧我们直接付5天可以吧因为把Holiday的Number付值为5的话将来是这根线的条件成立同时这根线的条件也成立
+[03:47] 那我们刚才在早期没有加排他网关的情况下是不是这两个都为处的话是不是这俩节点就会同时执行那现在我们加入了排他网关之后肯定就不会同时都执行对吧好我们正好要的就是这个效果所以说现在我们直接可以来执行了对吧就直接用五天来测试好我们再看一下我们看一下这个部分是什么原因我知道了因为我们对应的开始了已经把这个图给他
+[04:18] 把这个ID已经改成了Holiday Exclusive所以说我们这边再去执行的时候我们的这个Business Key我们的这个流程定义的Key就已经改了后续的这个部分是不是也改了我提前可以给你改一下然后现在我们这个时候再去启动一次因为刚才启动肯定是没有成功的因为我们的这个Key是不存在的它没有办法去启动成功对不对它说No Process
+[04:48] deployed with key没有一个my process1的流程被部署进来所以它肯定启动不了现在我们就可以再去启动了因为我们刚才key是写错了好我们这个时候再走各位就可以看到我们的流程流程实例已经启动起来了它的ID是2501当我们的实例启动好了下一个工作我们就可以接着往后走了下一个工作就是
+[05:17] 我们可以去让我们的任务不断的往后推进了对不对好我们再走回到这边再来看一下目前走第一个环节的话应该是走的这个节点对不对请假单的填写而请假单的填写到底是谁呢我们也可以来打开我们的RU task这个地方就可以看到请假单应该是谁来填是我们的张商来填对吧好copy直接放到这边来
+[05:46] 再走的话直接用张商来做我们的这个流程的作为一个任务的执行人让张商完成自己的任务就可以了好我们来看一下效果那现在张商就已经完成任务了对吧张商完成任务下一步是谁呢是部门经理对不对而我们的部门经理是李氏对吧所以copy再让李氏来完成他的任务Ctrl V扔到这来对吧好这时候我们再去执行
+[06:16] 再去执行这时候就会进入到我们的理事来完成自己的任务各位可以看到理事完成任务之后注意啊这时候我们的这两个条件其实还都是成立的对吧因为5是大于3的同时5也是大于1的对吧所以将来两个都是成立的两根线都会去但是我们在这个地方加了排谈网关我们早期也特别给各位说过啊当
+[06:43] 加入了排他网关之后他只会选择一个为去的分支执行对不对即使两个分支都为去他也只能够选择一个去执行那这一点就跟我们没有加排他网关完全不一样了对吧好我们来看一下刚才我们执行之后的这个效果是否是否是只有一个过一回看到我们这个时候就直接走的是总经理而不是两根线都执行对不对那有时候会思考我们这次走的时候为什么走的是这个总经理呢对不对
+[07:13] 那这个地方我们要来一起看一下啊我们看哪个地方啊看我们的这个copy复制一下啊看我们这个部分Countryway扔到这来啊那这样我们就有了一个Holiday5啊然后直接打开它对吧那我们刚才直接走的是这个走的是这个总经理对吧而不是走这个人事经理存档对不对那为什么会这样呢对吧那各位同学要注意啊
+[07:41] 我们如果说两根线都为true的话默认情况下啊两根线都为true默认情况下他走ID这个值更小的这个条件明白是吧他就会走5而人是经理存档他的ID是7明白是吧所以他呢默认情况下他走这个ID取值为更小的这个分支啊理解意思吗当这样做我们最起码可以控制说
+[08:08] 我们的这个流程将来在执行的时候不可能说两个分支同时成立两个分支同时都走这是不可能的加入排行官之后他顶多只能走一个对不对那如果按照我们现在的现有的这个条件那是不是就是王武要去执行他的任务好我们这个时候可以再去把我们的任务让他跑完比如说我们把李四这个地方就再次改成我们的王武然后再去执行
+[08:36] 这样我们就可以看到我们的王武就把任务完成了当王武跑完自己的任务应该说整个这个流程就已经进入到我们的人事经理存档对吧于是这个时候这个时候就进入到我们的这个照六对不对因为我们按这个套路走嘛当王武完成工作王武完成工作就走他的下一项对不对而他的下一项是不是就是这根线顺下来就是我们的人事经理存档对不对最后到结束
+[09:02] 那现在我们可以再去把我们的这个人事经理存档的这个环节给他跑完对不对那这个地方造6那我们的造6再去执行我们的任务走当他完成任务我们的整个这个流程就执行结束了那你再去刷他应该表中就没有任何记录对吧然后你再去看我们的这个act instance这个时候你就可以看到我们整个执行这个环节天下几年当部门经理省
+[09:29] 然后是整经理省然后是人事经理存档最后到eventend event对吧整个这个流程就是按我们预期的这个步骤在执行啊那这样我们基本上啊加入排他网关进来之后各位我们的这个意义就已经体现出来了对吧当然也有同学会思考如果说我两个加入的加入了排他网关之后第一个分支判断的这个结果不为处第二个分支判断的条件也不为处
+[09:58] 那这个时候排他网关到底走哪个呢各位啊排他网关只能够说当多过条件同时成立的时候我只能选一个对不对如果说这些条件都不成立的时候那排他网关那这个时候他也没找明白意思吗他也没找那这个时候会怎么办呢那我们这个地方将来如果说所有的这些网关出去的这些线条件都不满足那这个时候一样也会抛异常他会他会给我们抛一个就
+[10:29] No outgoing sequence flow of the exclusive gateway他会给我们来一个没有也就是说没有哪个峰值可以走啊在我们的这个排他网关的这个部分没有哪个峰值可以走那这个时候也一样会给我们啊报一个这样的错啊这样我们基本上啊给各位把我们的这个排他网关所对应的这个效果就给各位展示出来了啊
+[10:58] 那将来我们在某些情况下其实是需要加入我们的排谈网关主要是我们防止这些条件将来同时都成立同时都走这个时候排谈网关就会起到我们的这个真实的作用他会在这里面选择一个ID更小的值然后去走它对不对那我们将来比如说我们将来我可以去调整它对不对让它的这个ID取值更小也就是说
+[11:26] 但如果这些条件都成立的话优先走人事经理直接存档而不经过我们的总经理对不对这样我们的流程做起来应该会比之前更合理一些对不对而不是两个节点同时都走对吧好我们的排他网关给各位啊就演示出对应的效果了啊那给各位现在呢总结一下啊我们的排他网关就是当多个条件同时都达到满足的条件
+[11:54] 他会选择一个ID取之更小的这个流程去找对不对另外一个就是在排他网关过来之后如果说两个条件同时都不满足或者说这些条件都不满足这些条件没有一个都满足的情况下那这个时候我们排他网关其实他也没有办法他也没有办法那都不满足排他网关那这个时候即便有排他网关他也只能报错因为他不知道哪一个条件将来是成立的对吧都不成立嘛
+[12:24] 都不成立了就都不走都不走在这个地方那一样也是报错了报出一个异常不知道怎么走了对吧
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 Activiti 工作流引擎部署 BPMN 流程定义，并通过 Java 代码启动流程实例、处理任务，以及在流程图中配置排他网关的条件分支。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：
+- 代码：在 `ExclusiveGateWayTest01.java` 中，使用 `repositoryService.createDeployment()` 方法部署流程定义，指定资源文件路径为 `diagram/holiday4.bpmn` 和 `diagram/holiday4.png`，并设置部署名称为“请假申请流程”。
+- 代码：部署完成后，打印部署名称和 ID。
+
+画面2：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面1类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面3：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面2类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面4：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面3类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面5：
+- 代码：在 `Activiti-7` 的 SQL 客户端中，显示了 BPMN 流程定义的 XML 内容，包括流程定义 ID、名称、版本、活动定义等信息。
+
+画面6：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面5类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面7：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面6类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面8：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面7类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面9：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面8类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面10：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面9类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面11：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面10类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面12：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面11类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面13：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面12类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+画面14：
+- 代码：在 `ExclusiveGateWayTest02.java` 中，代码结构与画面13类似，但部署的资源文件路径改为 `diagram/day05/holiday5.bpmn` 和 `diagram/day05/holiday5.png`，部署名称为“请假申请流程”。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+//1.部署流程定义
+//2.得到ProcessEngine实例
+ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+//3.得到RepositoryService实例
+RepositoryService repositoryService = processEngine.getRepositoryService();
+//4.进行部署
+Deployment deployment = repositoryService.createDeployment()
+		.addClasspathResource("diagram/holiday4.bpmn") //添加bpmn资源
+		.addClasspathResource("diagram/holiday4.png") //添加图片资源
+		.name("请假申请流程")
+		.deploy();
+//5.输出部署的一些信息
+System.out.println(deployment.getName());
+System.out.println(deployment.getDeploymentId());
+```
+
+画面2：
+```java
+//1.部署流程定义
+//2.得到ProcessEngine实例
+ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+//3.得到RepositoryService实例
+RepositoryService repositoryService = processEngine.getRepositoryService();
+//4.进行部署
+Deployment deployment = repositoryService.createDeployment()
+		.addClasspathResource("diagram/day05/holiday5.bpmn") //添加bpmn资源
+		.addClasspathResource("diagram/day05/holiday5.png") //添加图片资源
+		.name("请假申请流程")
+		.deploy();
+//5.输出部署的一些信息
+System.out.println(deployment.getName());
+System.out.println(deployment.getDeploymentId());
+```
+
+画面3：
+```java
+//1.部署流程定义
+//2.得到ProcessEngine实例
+ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+//3.得到RepositoryService实例
+RepositoryService repositoryService = processEngine.getRepositoryService();
+//4.进行部署
+Deployment deployment = repositoryService.createDeployment()
+		.addClasspathResource("diagram/day05/holiday5.bpmn") //添加bpmn资源
+		.addClasspathResource("diagram/day05/holiday5.png") //添加图片资源
+		.name("请假申请流程")
+		.deploy();
+//5.输出部署的一些信息
+System.out.println(deployment.getName());
+System.out.println(deployment.getDeploymentId());
+```
+
+画面4：
+```java
+//1.部署流程定义
+//2.得到ProcessEngine实例
+ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+//3.得到RepositoryService实例
+RepositoryService repositoryService = processEngine.getRepositoryService();
+//4.进行部署
+Deployment deployment = repositoryService.createDeployment()
+		.addClasspathResource("diagram/day05/holiday5.bpmn") //添加bpmn资源
+		.addClasspathResource("diagram/day05/holiday5.png") //添加图片资源
+		.name("请假申请流程")
+		.deploy();
+//5.输出部署的一些信息
+System.out.println(deployment.getName());
+System.out.println(deployment.getDeploymentId());
+```
+
+画面5：
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:activiti="http://activiti.org/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd
+		http://activiti.org/bpmn activiti.xsd">
+	<process id="holiday" name="ExclusiveGateWay" isExecutable="true">
+		<startEvent id="startEvent" name="开始事件"></startEvent>
+		<userTask id="userTask" name="部门经理审批" activiti:assignee="wangwu"></userTask>
+		<exclusiveGateway id="exclusiveGateway" name="排他网关" activiti:default="true">
+			<sequenceFlow id="flow1" sourceRef="userTask" targetRef="endEvent"></sequenceFlow>
+			<sequenceFlow id="flow2" sourceRef="userTask" targetRef="endEvent"></sequenceFlow>
+		</exclusiveGateway>
+		<endEvent id="endEvent" name="结束事件"></endEvent>
+		<sequenceFlow id="flow3" sourceRef="startEvent" targetRef="userTask"></sequenceFlow>
+		<sequenceFlow id="flow4" sourceRef="userTask" targetRef="exclusiveGateway"></sequenceFlow>
+		<sequenceFlow id="flow5" sourceRef="exclusiveGateway" targetRef="endEvent"></sequenceFlow>
+	</process>
+</definitions>
+```
+
+画面6：
+```java
+//1.部署流程定义
+//2.得到ProcessEngine实例
+ProcessEngine processEngine = ProcessEngines.getDefaultProcess
+

@@ -1,0 +1,266 @@
+# 20_数据保存_频道_service_查询标签2
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day09-黑马头条-爬虫内容解析
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day09-黑马头条-爬虫内容解析\20_数据保存_频道_service_查询标签2【海量资源尽在 666java.com】.mp4
+- 时长 7分32秒（音频 452s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面咱们就把这个方法这两个方法给去写一下首先这个方法该怎么去写呢?
+[00:07] 咱们要去判断要去过滤过滤之后咱们可以再去保存怎么过滤呢?
+[00:14] 也就是说咱们现在从当前的这个串中应该这样说从这个串中去找有没有它有它的话咱们就删掉最终剩下的部分咱们要进行保存的操作是吧
+[00:27] 所以说这会咱们就可以在这直接去判断如果说它不为空它目前的话好像是不太为空参数的话咱们本身就是查询出来的东西不为空并且非什么pnp labels.isEmpty如果说它真的不为空的话这时候咱们就可以循环了循环的话至少要注意用最原始的循环因为你要往里边去有可能会删东西是吧
+[01:00] 小于当前的tmptmptmp labels.size好是i++然后怎么办然后你可以再做一个循环这个循环的话其实你就可以循环谁循环这个ad labels.当前的一个错拿到之后咱们在这就可以去进行判断怎么判断你可以拿到当前的tmp
+[01:33] 中的某一项是吧我说它是包含了什么呢包含了当前adlabel中的什么getname就是说目前这个串中哎我也查出来了我从书中查出来了查出来之后呢那咱们就没有必要再真去重新保存了这时候呢咱们就要去删除啊删除啊删除呢点RemoRemo谁呢Remo i就可以了
+[02:00] 或者下标去删除OK那这样的话咱们就算删除完了删除成功之后啊来再去判断一下当前这个东西到底有没有删除完比如说他还是不等于空那这时候里边还有数据啊那还有数据的话说明怎么办说明这里边是不是需要进行保存的有新的数据啊这时候呢咱们还是判断一下不回空这时候呢你就可以进行去保存了
+[02:30] 这保持咱们就可以调用下边调用下边这个东西反而不对直接去弄它就可以了你把当前MP table labels装进去可以了最终你要返回那返回谁你最终要返回的是不是就返回它是吧返回的就是当前这个东西ok好了为什么返回它就这里边
+[02:57] 如果说他要是没找着这一块没有走的话他就说循环了好大一圈没找着的话你是不是正常去把数据库中的给返回OK如果说他找着了他找着之后是不是添加一条数据所以说你需要把这个数据装到当前这个集合中你把它装进去就可以了这样的话就算是这个逻辑逻辑就这么写就算是OK了好吧这是一个过滤
+[03:27] 当然这一块我要有一个提醒一下因为这一块内容咱们写的时候稍微有点问题因为这个tmp labels它是看它是从一个数组转换过来了这时候有可能你在去操作下标的时候有可能会出问题所以说你在这直接去new一下new一个让它去转成array这样把它再放进去
+[03:55] 我重新去构造一下当前集合这样的话没问题了行这是一个方法是吧咱们下面还要再去先完成当前的第二个方法这个方法其实相对来说比较简单一些咱们可以干嘛咱们可以直接去在这判断如果说如果说当前的等于空还是要去判断就这个你不判断也行因为上面其实已经判断了对吧我让你问的也没事
+[04:25] 我们可以在这直接做循环tmp labels.for拿到它之后呢其实这个呢就是一个label就是一个label拿到label之后呢你就可以直接去添加直接去添加了啊那添加的话呢这时候咱们可以在上面啊上面去创建一个这样的集合让它去返回大家这个别记住啊咱们是又重新去做了一个
+[04:57] 搜到了一个方法所以说咱们最好是跟笔记保持一致好在这你去添加添加爱的去给了添加谁的有一个爱的label爱的label的方法然后把这当前那个label放进去好这时候这个方法还没有咱们一会创建出来这时候你需要把当前的jdlabellist返回就可以了好那这个方法就只是保存了
+[05:27] 这个方法就比较好写来看一下保存保存操作当然这个你要去存的话就是adlabel是吧你直接去new出来一个adlabel等于new一个adlabel好把这个值给设置设完就可以了里边有一个name就是还有就是adlabel.settype咱们给一个出就可以了
+[05:59] 然后下面还有一个叫adlabel.setPerRateTime就一个当前时间最终咱们要去照用当前adlabel.micro.error一个insertinsert里边咱们需要去把当前的adlabel装进去最终把它给返回返回之后其实里边还有一个问题有几段咱们在这一块说了什么问题就是说这会
+[06:25] 需要去返回最终最终是要去拿到当前adlabel的什么ID值是吧保存之后的ID值因为最终我返回的时候你看我这去返回的时候是不是只拿了当前的ID如果说你新保存的ID那怎么拿呢是不是咱们在之前学过怎么办呢咱们在这在当前的myper文件中得需要加个东西目前这个没有加咱们可以看一下你看这块其实并没有去设置一个主件
+[06:54] 没有设置逐渐返回所以说你在这需要加一个东西这个咱们之前设置过所以说你直接从之前的这种代码中拷过来就可以了就这段然后是找到当前的Mapadlabel然后你放到当前insert的上面insert的上面你把idea都把它删了最终就这么个东西就可以了
+[07:19] 好吧这样的话咱们就算是设了一个主件返回在你进行保存操作的时候他就会把主件给带回来好吧行这个单本咱们就写完了下一步咱们就来测试一下
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+在 IntelliJ IDEA 中编写并调试一个用于处理广告标签（AdLabel）的 Java 服务类，涉及集合过滤、数据库映射和 SQL 语句配置。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 编辑器中显示 `AdLabelServiceImpl.java` 文件，光标位于 `private List<AdLabel> addLabelList(List<String> tmplabels, List<AdLabel> adlabelList)` 方法的开头。
+- 代码注释为“过滤保存”、“@param tmplabels”、“@param adlabelList”、“@return”。
+- 项目结构显示 `src/main/java/com/heima/crawler/Service/impl/` 下的 `AdLabelServiceImpl.java`。
+
+画面 2：
+- 光标移动到 `for (int i = 0; i < tmplabels.size(); i++)` 循环的起始位置。
+- 代码注释为“过滤保存”、“@param tmplabels”、“@param adlabelList”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 3：
+- 光标位于 `if (tmplabels != null && !tmplabels.isEmpty())` 条件判断语句中。
+- 代码注释为“过滤保存”、“@param tmplabels”、“@param adlabelList”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 4：
+- 光标位于 `if (tmplabels.get(i) != 0)` 条件判断语句中。
+- 代码注释为“过滤保存”、“@param tmplabels”、“@param adlabelList”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 5：
+- 光标位于 `if (tmplabels.get(i).contains(adlabel.getname()))` 条件判断语句中。
+- 代码注释为“过滤保存”、“@param tmplabels”、“@param adlabelList”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 6：
+- 光标位于 `if (tmplabels.get(i).contains(adlabel.getname()))` 条件判断语句中。
+- 代码注释为“过滤保存”、“@param tmplabels”、“@param adlabelList”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 7：
+- 光标位于 `if (tmplabels != null && !tmplabels.isEmpty())` 条件判断语句中。
+- 代码注释为“过滤保存”、“@param tmplabels”、“@param adlabelList”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 8：
+- 光标位于 `for (String label : tmplabels)` 循环的起始位置。
+- 代码注释为“保存操作”、“@param label”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 9：
+- 光标位于 `adlabelList.add(label)` 语句中。
+- 代码注释为“保存操作”、“@param label”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 10：
+- 光标位于 `adlabel.setTypes(1)` 语句中。
+- 代码注释为“保存操作”、“@param label”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 11：
+- 光标位于 `adlabelMapper.insert(adlabel)` 语句中。
+- 代码注释为“保存操作”、“@param label”、“@return”。
+- 项目结构与画面 1 相同。
+
+画面 12：
+- 光标位于 `AdLabelMapper.xml` 文件中，显示 `<insert id="insertSelective" parameterType="com.heima.model.admin.pojos.AdLabel">` 语句。
+- 项目结构显示 `src/main/resources/mappers/admin/` 下的 `AdLabelMapper.xml`。
+
+画面 13：
+- 光标位于 `AdLabelMapper.xml` 文件中，显示 `<insert id="insertSelective" parameterType="com.heima.model.admin.pojos.AdLabel">` 语句。
+- 项目结构与画面 12 相同。
+
+画面 14：
+- 光标位于 `AdLabelMapper.xml` 文件中，显示 `<insert id="insertSelective" parameterType="com.heima.model.admin.pojos.AdLabel">` 语句。
+- 项目结构与画面 12 相同。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1：
+```java
+private List<AdLabel> addLabelList(List<String> tmplabels, List<AdLabel> adlabelList) {
+```
+
+画面 2：
+```java
+for (int i = 0; i < tmplabels.size(); i++) {
+```
+
+画面 3：
+```java
+if (tmplabels != null && !tmplabels.isEmpty()) {
+```
+
+画面 4：
+```java
+if (tmplabels.get(i) != 0)
+```
+
+画面 5：
+```java
+if (tmplabels.get(i).contains(adlabel.getname())) {
+```
+
+画面 6：
+```java
+if (tmplabels.get(i).contains(adlabel.getname())) {
+```
+
+画面 7：
+```java
+if (tmplabels != null && !tmplabels.isEmpty()) {
+```
+
+画面 8：
+```java
+for (String label : tmplabels) {
+```
+
+画面 9：
+```java
+adlabelList.add(label);
+```
+
+画面 10：
+```java
+adlabel.setTypes(1);
+```
+
+画面 11：
+```java
+adlabelMapper.insert(adlabel);
+```
+
+画面 12：
+```xml
+<insert id="insertSelective" parameterType="com.heima.model.admin.pojos.AdLabel">
+    insert into ad_label
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+            id,
+        </if>
+        <if test="name != null">
+            name,
+        </if>
+        <if test="type != null">
+            type,
+        </if>
+        <if test="createdTime != null">
+            created_time,
+        </if>
+    </trim>
+    values
+    <if test="id != null">
+        #{id},
+    </if>
+    <if test="name != null">
+        #{name},
+    </if>
+    <if test="type != null">
+        #{type},
+    </if>
+    <if test="createdTime != null">
+        #{createdTime},
+    </if>
+</insert>
+```
+
+画面 13：
+```xml
+<insert id="insertSelective" parameterType="com.heima.model.admin.pojos.AdLabel">
+    insert into ad_label
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+            id,
+        </if>
+        <if test="name != null">
+            name,
+        </if>
+        <if test="type != null">
+            type,
+        </if>
+        <if test="createdTime != null">
+            created_time,
+        </if>
+    </trim>
+    values
+    <if test="id != null">
+        #{id},
+    </if>
+    <if test="name != null">
+        #{name},
+    </if>
+    <if test="type != null">
+        #{type},
+    </if>
+    <if test="createdTime != null">
+        #{createdTime},
+    </if>
+</insert>
+```
+
+画面 14：
+```xml
+<insert id="insertSelective" parameterType="com.heima.model.admin.pojos.AdLabel">
+    insert into ad_label
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+            id,
+        </if>
+        <if test="name != null">
+            name,
+        </if>
+        <if test="type != null">
+            type,
+        </if>
+        <if test="createdTime != null">
+            created_time,
+        </if>
+    </trim>
+    values
+    <if test="id != null">
+        #{id},
+    </if>
+    <if test="name != null">
+        #{name},
+    </if>
+    <if test="type != null">
+        #{type},
+    </if>
+    <if test="createdTime != null">
+        #{createdTime},
+    </if>
+</insert>
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

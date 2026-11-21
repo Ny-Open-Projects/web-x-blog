@@ -1,0 +1,17 @@
+# 声音线转写：12.Kubernetes集群搭建Node安装-准备工作
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：6.Kubernetes-基础
+- 源文件：01.阶段一 微服务相关技术\6.Kubernetes-基础\12.Kubernetes集群搭建Node安装-准备工作_【海量资源尽在 ubkz.com】.mp4
+- 时长：2分55秒（音频 175s）
+- 转写：faster-whisper-large-v3 / 语言 zh / 6 段
+- 生成时间：2026-10-27 10:30:32
+
+## 逐段转写（教师原声）
+
+[00:00] 下面呢我们说一下node节点安装那么无论我们的node1节点还是后续我们的node2节点那么他们在安装之前呢都有一些准备工作那么第一件事呢他是需要把我们这个kubernetes的一些安装的文件或者一些服务啊给他安装到我们当前的这个节点上一个是kubernetes还有一个是kubeproxy那我们先把这个事情做一下啊我呢在当前的user下local
+[00:29] 创建了一个Kubernetes目录那我们可以通过RG命令去把我们当前的这个Kubernetes软件给它装过来我先把它上传上来上传上来以后我们把它解压开然后找到我们的Kubernetes和Kubernetes proxycopy到user BIM目录下那第二件事就是我们必须在在node节点上去安装Docker那么大家可以参考我们之前master节点上的Docker的安装
+[01:00] 我们看一下这边是否传完了马上就完事现在已经84%了88%我们这个上传完以后一会我去把这个coupleit和我们当前的这个coolproxy文件给它找到copy到userbin一下那我在这里边tar-jxvf我们的tar那这里边我们稍微等一下等它把它解压完解压完以后我们再去操作
+[01:26] 那关于这个node节点啊这个前期准备就这么两件事大家一定要注意了还有就是你要注意我这个node节点跟我讲一上在最开始关于进行搭建的我们这个IP地址是有差异的你一定要注意了我们现在这个文件上写的是140和141这是我们的master和我的node而我真实操作中我的master是147我的node是148那回来我们还是看到这
+[01:54] 我现在已经把它解压开了然后我们lcd进我们的Kubernetes这文件然后我们再来看cd我们的server然后cd我的bim目录下找到我们要的Kubernetes还有一个叫做Kubernetes我们cp一下我们把这个Kubernetes还有这个Kubernetes-proxy这两个文件copy到我们user下的bim目录下
+[02:25] OK,这是第一件事我们关于这个node节点的要准备的第二件事就是关于我们的这个Docker安装我说了你参考我们的原来master里面的Docker安装我的YAML我的镜像都已经配置好了那我只需要去YAML install我们的Docker-enjne然后呢我干挖一下我去安装它把它安装完我们整个node节点的准备工作就完成了

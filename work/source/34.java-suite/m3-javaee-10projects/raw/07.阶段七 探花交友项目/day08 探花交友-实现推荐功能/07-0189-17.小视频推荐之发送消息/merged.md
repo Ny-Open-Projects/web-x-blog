@@ -1,0 +1,280 @@
+# 17.小视频推荐之发送消息
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day08 探花交友-实现推荐功能
+- 源文件：07.阶段七 探花交友项目\day08 探花交友-实现推荐功能\17.小视频推荐之发送消息_【海量资源尽在 666java.com】.mp4
+- 时长 11分20秒（音频 681s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们来看一下小视频的推荐那么前面呢我们已经完成了我们动态的推荐那么其实我们这个小视频的推荐的实现呢和我们动态推荐的实现呢也是非常相似的啊所以说我们就一起来做一下那么首先第一个呢我们为我们之前的一个这个video这个对象呢去添加一个自征ID啊这样的一个
+[00:26] 那么增加的是一个vid这样的一个字段那么我们来找到之前的我们的这个interface中的我们这个对象找到他然后呢找到这个video然后呢这个里面呢我们来添加一个叫做什么呢叫做vid然后呢下面呢我们需要去修改一下我们的这个新增的逻辑那么在我们的这个找到这个Service叫video api
+[00:56] 然后这里面呢我们去给他再去啊增加一个什么呢set什么呢呃vid啊vid呃然后呢上面我们把这个Service要id Service把id Service呢注入进来啊把它注入进来好那么注入进来之后呢我们就可以去调用这个id servicecreate idtap呢我们就是这个呃video然后呢这个我们这个id呢就是
+[01:26] 那叫什么呢就是这个video.getid然后呢这样的话呢我们就得到它的一个自增长的一个ID了对吧下面这个是自增长ID好那么这个搞定之后啊那么我们是不是就可以去能够去满足后面我们推荐的这样的一个数据模型好那么下面呢我们来看一下我们这个小视频的这个动态的一个计分规则那么我们对它的一个定义呢是这样的就是
+[01:58] 发布呢我们给他去记两分然后呢点赞呢是记五分啊评论呢是记十分啊这样的一个规则那么其实可以看到呢我们这个小视频的这个操作啊要比我们之前的圈子中的一个动态呢要少一些那么接下来呢我们来看一下消息的发送
+[02:21] 那么首先呢我们可以看到我们编写一个叫做videoMQ啊Service那我们把这个Service呢来拷贝一下然后呢把它拷贝到啊我们的这个server这个工程中好那我们来找到我们这个server这个工程拷到这个里面来呃这个呢就是我们那个video然后呢MQ的一个Service呃然后呢我们其实可以看到呢在这个Service中啊那么定义了一些方法啊这个呢是发布啊小视频的调用的这个方法
+[02:51] 然后呢这个是点赞然后这个是取消点赞还有一个评论啊这么几个操作然后呢我们来看一下那么最后呢他都会调用啊this.这个send message去做一个发送那么这个跟我们前面写法呢也是非常啊消失的然后呢我们去拿到我们当前的登录的用户
+[03:12] 然后呢我们去通过medio id然后拿到个video对象当然了这个我们是不是还没有啊这个方法啊对吧那我们就给他来定义一下这个方法好那么我们嗯点击进去来看一下好那么我们就写一个video啊video然后呢这个query video by id啊那么by id呢我们这个呢定义为是一个这个stream啊好那么这个呢就是我们去
+[03:40] 根据ID查询我们这个小视频啊小视频好嘞好那么这个方法呢就定义好了呃那么接下来呢我们就在我们的这个Service中啊去做一个一些这个操作啊好那么我们去实现这个方法啊实现它呃然后呢这个ID呢我们怎么样去查询它呢那我们就通过啊
+[04:07] 通过我们ZS.MongoTemplate然后呢FindByID去做一个查询New一个ObjectID然后呢ID传递给他然后呢我们写一个这个radio.class好嘞好那么这样的话呢我们根据组件查询呢是不是就已经搞定了然后呢我们再回到前面的我们这个就是我们的这个消息这个Service就是radioMQ Service
+[04:36] 这个里面呢是不是就可以去查询这个video这个对象了然后呢我们查询到之后就去构建这个消息啊那么有这个UID啊还有Date时间然后呢还有Video ID还有VID啊还有Type然后呢我们去发送这个消息到我们的这个topic就是碳化啊video然后呢去做这样的一个发送消息那么其实到这里呢我们这个消息发送啊是不是就
+[05:05] 基本上是不是就OK了对吧然后我们只需要在Controller中做调用就可以了那么跟之前的逻辑是一样的我们还是回到我们这个video Controller然后我们来首先来看一下我们的第一个操作就是save video那么就是我们去保存我们的一个video那么这个应该怎么去做呢当我们去保存成功之后
+[05:31] 那我们就应该把那个Service我们先来注入一下叫做什么呢叫做videovideo mqservice把它注入进来把它注入然后呢我们去调用this.video mqservice.什么呢叫video然后呢message好那么就它然后呢我们还需要的是一个
+[05:56] 呃 id 对吧 video 的 id那么但是他并没有返回那么跟之前一样也需要去给他的修改一下那么去改成什么呢改成这个之不错呃然后呢在这个位置呢需要 return 他然后呢 return 好那我们把这个之前这个这个方法也调一下这个返回的是一个之不错然后呢我们去找到 video api 的一个实现类那么这个位置呢就会要改成啊之不错了
+[06:24] 然后呢他返回呢就是那然后下面这个返回呢那我们就直接返回这个video点什么呢点get什么IDget这个ID返回他的一个ID就OK好然后呢在这个位置呢就简单了直接通过一个字幕创然后呢ID去做一个接收那么如果判断如果这个IDis not empty如果ID不为空的话
+[06:52] 那就说明什么呢就说明已经是就是保存成功了那我们去发消息对吧发送发送这个消息然后呢我们把它呢来拷贝一下然后来看一下小视频的这个这个是列表这个呢我们这个我现在先不处理然后呢视频的点赞那么我们就写到这来写到这来对吧当然了我们如果写到这呢会有一点问题就是我们应该是
+[07:23] 在执行成功之后那我们再去发送这个消息那么这个应该怎么做呢应该是这样来做就是我们把它呢先丢到上面来因为我们要用的是这个moments Controller中的这个点赞的这个方法那么我们就去使用一个这个edit然后呢最后返回的还是这个edit只是说我们需要做一个判断判断我们这个edit点get state code value
+[07:52] code一一之二叉叉叉那么只要是成功的啊就可以了因为我们这个里面呢最后他返回要不就是这个啊500要不就是这个200啊所以说我们只要判断他是二叉叉叉啊这种成功啊就可以了如果是成功的话那我们就发送这个消息这样如果会更严谨一些ok好嘞好那么这样的话呢我们就点赞是不是就搞定了下面呢还有这个呢是取消点赞啊他的这个实现的逻辑啊
+[08:22] 也是哎我们这个方法没有改变啊这个得改点然后呢我们写一个这个like啊这个才对啊好那么下面的这个是这个是取消点在那就是dislike啊好那么这个修改了和刚才这个是一样的啊那我们就来改一下吧好那么我们还是去拿到他的一个att然后呢最后return一个att好那么我们去做一个判断这个att
+[08:52] 点get a stace code一日二叉叉叉success然后呢我们再去发送这个取消点赞的这样的一个消息那我们就点我们他取消点赞然后呢下面这个呢是评论这个逻辑呢也是一样的好那我们就还是把它丢到上面来吧丢到上面然后呢他的这个返回值呢也是一个edit那么我们return这个edit好然后呢
+[09:22] 好那我们在里面去做一个判断如果edit.statecode.112xx然后呢我们就调用this.这个videoMQservice.然后呢我们做一个这个就是调用comment就是我们的一个评论那我们去传入这个videoID这样的话就OK了加一个注释发送发送这个消息
+[09:51] 好那么这个呢哦哦错了啊这个是我们的这个消息列表对吧那么这个评论列表应该我们写到这个里面来啊这个地方我们刚刚写的有点问题啊我们来调一下那么这个呢我们还是直接去调用它吧那把它我们来去除一下啊改一下啊还是回到原来这个状态啊那么下面呢我们在这个里面啊这个呢还是去拿到它啊然后呢我们去在这儿调用
+[10:22] 然后呢我们还是呢去拿到它的一个add体实体然后呢return add体好这样的话就搞定了这个呢是评论啊然后呢评论点赞呢我们这个就没有了评论取消点赞没有用户关注这个也没有那么我们会发送这么几个消息啊OK好那么这样的话呢我们其实就完成了啊这个Controller中的一个这个调用啊那我们检查一下看有没有问题啊那么首先第一个呢是
+[10:52] 我们去做一个C5的时候调用它没有问题然后呢小视频列表这个不查询然后呢点赞呢是这个like没问题取消点赞呢是dislike评论提交评论有ok好没有问题了然后呢这个呢我们其实是不是就已经啊搞定了这个就是消息的一个这个发送对吧ok好那么关于我们小视频的这个消息的一个发送呢那我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现视频推荐系统的后端功能，包括视频自增ID、动态计分规则、消息发送、点赞、评论、关注等核心业务逻辑。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示视频实体类Video的定义，包含@Document注解、@Data、@AllArgsConstructor、@NoArgsConstructor等注解，以及字段如videoId、userId、title、locationName等。
+画面2：展示VideoApiImpl类中的saveVideo方法，用于保存视频对象，调用mongoTemplate.save(video)。
+画面3：展示修改后的VideoApiImpl类，添加了视频ID生成、创建时间设置、动态计分规则的逻辑。
+画面4：展示VideoMQService类中的likeVideoMsg、disLikeVideoMsg、commentVideoMsg方法，用于处理视频点赞、取消点赞、评论消息。
+画面5：展示MongoTemplate的API方法，用于操作MongoDB数据库。
+画面6：展示VideoMQService类的包和导入语句，以及类定义。
+画面7：展示VideoController类中的saveVideo方法，用于接收前端上传的视频文件并调用videoService.saveVideo方法。
+画面8：展示VideoApiImpl类中的saveVideo方法，添加了视频ID生成、创建时间设置、动态计分规则的逻辑。
+画面9：展示VideoController类中的likeComment方法，用于处理视频评论点赞。
+画面10：展示VideoController类中的likeComment方法，添加了视频点赞成功后发送消息的逻辑。
+画面11：展示VideoController类中的queryCommentsList方法，用于查询视频评论列表。
+画面12：展示VideoController类中的saveComments方法，用于保存评论。
+画面13：展示VideoController类中的saveVideo方法，用于接收前端上传的视频文件并调用videoService.saveVideo方法。
+画面14：展示VideoController类中的saveUserFocusComments方法，用于保存用户关注的评论。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+package com.lanhua.dubbo.server.pojo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(collection = "video")
+public class Video implements java.io.Serializable {
+    private static final long serialVersionUID = -3137323368493387L;
+    private ObjectId id; //主键id
+    private Long vid;
+    private Long userId;
+    private String title;
+    private String longitude; //经度
+    private String latitude; //纬度
+    private String locationName; //位置名称
+}
+```
+
+画面2：
+```java
+@Service(version = "1.0.0")
+public class VideoApiImpl implements VideoApi {
+    @Autowired
+    private MongoTemplate mongoTemplate;
+    @Override
+    public Boolean saveVideo(Video video) {
+        if (video.getUserId() == null) {
+            return false;
+        }
+        video.setField("videoId", video.getId());
+        video.setField("created", System.currentTimeMillis());
+        this.mongoTemplate.save(video);
+        return true;
+    }
+}
+```
+
+画面3：
+```java
+@Override
+public Boolean saveVideo(Video video) {
+    if (video.getUserId() == null) {
+        return false;
+    }
+    video.setId(ObjectId.get());
+    video.setCreated(System.currentTimeMillis());
+    //生成vid
+    video.setVid(this.idService.created("video", video.getId().toString()));
+    this.mongoTemplate.save(video);
+    return true;
+}
+```
+
+画面4：
+```java
+public Boolean likeVideoMsg(String videoId) { return this.sendMsg(videoId, type: 2); }
+public Boolean disLikeVideoMsg(String videoId) { return this.sendMsg(videoId, type: 3); }
+public Boolean commentVideoMsg(String videoId) { return this.sendMsg(videoId, type: 4); }
+```
+
+画面5：
+```java
+find(Query query, Class<T> entityClass, String collectionName)
+save(T objectToSave, String collectionName)
+findId(Object id, Class<T> entityClass, String collectionName)
+remove(Query query, Class<T> entityClass, String collectionName)
+remove(Class<T> domainType)
+remove(Object object, String collectionName)
+```
+
+画面6：
+```java
+package com.tanhu.server.Service;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.tanhu.dubbo.server.api.QuanziApi;
+import com.tanhu.dubbo.server.api.Publish;
+import com.tanhu.server.pojo.Video;
+import com.tanhu.server.utils.UserThreadLocal;
+import org.apache.RocketMQ.spring.core.RocketMQTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.Map;
+@Service
+public class VideoMQService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(VideoMQService.class);
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
+}
+```
+
+画面7：
+```java
+private CommentsController commentsController;
+@Autowired
+private VideoMQService videoMQService;
+@PostMapping("/video")
+public ResponseEntity<Void> saveVideo(@RequestParam(value = "videoThumbnail", required = false) MultipartFile picFile,
+                                     @RequestParam(value = "videoFile", required = false) MultipartFile videoFile) {
+    try {
+        Boolean bool = this.videoService.saveVideo(picFile, videoFile);
+        if (bool) {
+            return ResponseEntity.ok();
+        } else {
+            throw new RuntimeException("保存失败");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+```
+
+画面8：
+```java
+@Override
+public String saveVideo(Video video) {
+    if (video.getUserId() == null) {
+        return null;
+    }
+    video.setId(ObjectId.get());
+    video.setCreated(System.currentTimeMillis());
+    video.setVid(this.idService.created("video", video.getId().toString()));
+    this.mongoTemplate.save(video);
+    return video.getId().toString();
+}
+```
+
+画面9：
+```java
+@PostMapping("/{id}/like")
+public ResponseEntity<Long> likeComment(@PathVariable("id") String videoId) {
+    ResponseEntity<Long> entity = this.movementsController.likeComment(videoId);
+    if(entity.getStatusCode().is2xxSuccessful()) {
+        this.videoMQService.transmitMsg(videoId);
+        return entity;
+    }
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+}
+```
+
+画面10：
+```java
+@PostMapping("/{id}/like")
+public ResponseEntity<Long> likeComment(@PathVariable("id") String videoId) {
+    ResponseEntity<Long> entity = this.movementsController.likeComment(videoId);
+    if(entity.getStatusCode().is2xxSuccessful()) {
+        this.videoMQService.transmitMsg(videoId);
+        return entity;
+    }
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+}
+```
+
+画面11：
+```java
+@GetMapping("/{id}/comments")
+public ResponseEntity<PageResult> queryCommentsList(@PathVariable("id") String videoId,
+                                                   @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                   @RequestParam(value = "pagesize", defaultValue = "10") Integer pagesize) {
+    return this.commentsController.queryCommentsList(videoId, page, pagesize);
+}
+```
+
+画面12：
+```java
+@PostMapping("/{id}/comments")
+public ResponseEntity<Void> saveComments(@RequestBody Map<String, String> param,
+                                        @PathVariable("id") String videoId) {
+    param.put("movementId", videoId);
+    return this.commentsController.saveComments(param);
+}
+```
+
+画面13：
+```java
+@PostMapping("/video")
+public ResponseEntity<Void> saveVideo(@RequestParam(value = "videoThumbnail", required = false) MultipartFile picFile,
+                                     @RequestParam(value = "videoFile", required = false) MultipartFile videoFile) {
+    try {
+        String id = this.videoService.saveVideo(picFile, videoFile);
+        if (StringUtils.isEmpty(id)) {
+            return ResponseEntity.ok(null);
+        }
+        this.videoMQService.commentVideoMsg(videoId);
+        return ResponseEntity.ok();
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+```
+
+画面14：
+```java
+@GetMapping("/{id}/userFocus")
+public ResponseEntity<Void> saveUserFocusComments(@PathVariable("id") Long userId) {
+    try {
+        Boolean bool = this.videoService.followUser(userId);
+        if (bool) {
+            return ResponseEntity.ok();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

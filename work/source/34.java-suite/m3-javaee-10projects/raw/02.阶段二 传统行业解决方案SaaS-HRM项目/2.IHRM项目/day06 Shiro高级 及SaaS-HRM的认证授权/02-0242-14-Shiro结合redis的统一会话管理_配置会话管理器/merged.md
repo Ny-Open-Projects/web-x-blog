@@ -1,0 +1,155 @@
+# 14-Shiro结合redis的统一会话管理：配置会话管理器
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day06 Shiro高级 及SaaS-HRM的认证授权
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day06 Shiro高级 及SaaS-HRM的认证授权\14-Shiro结合redis的统一会话管理：配置会话管理器_【海量资源尽在 ubkz.com】.mp4
+- 时长 11分28秒（音频 688s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 我们完成了自定义shareware当中的绘画管理器这么一个工作那么在这个自定义的这个绘画管理器里面主要完成的是获取这个session id的一个机制好了这些我们都写好了之后剩下的事情全部都是围绕的配置所以在这边呢我把受影响的目录全部都关掉打开shareware那个配置内我们叫做shareware configuration在这个shareware configuration里面完成所有接下来的一些额外的配置工作
+[00:30] 那这个配置工作我就走到中间这一段了那注意这个配置工作其实是有迹可循的那我们需要打开我们第五天的这个讲义其中有一个有一个我们叫做shadow的这张图形各位应该还有印象那在这个里面呢咱们都知道security manager里面管理了我们的realme u那realme u里面继续来看他也管理了我们叫做session manager那session manager通过session do去访问我们这个ready的服务器当然了
+[01:00] 除了Ready服务器还有可以是Servlet里面的绘画管理等等所以对于我们而言接下来要进行配置配置的点有如下几个第一个我们自定义的Session Manager要写上那自定Session Manager要借助Session DO那这个Session DO我们的插件提供了或者我们的依赖的jar 包里面有所以我们把它也声明出来那把它声明出来之后但在这个Session DO里面我们要跟Ready的交互那需要有Ready的相关配置等等
+[01:27] 所以接下来的我们要加载的这个配置是有迹可循的一共有这么几块我们一起来看一下首先呢第一个我们叫做redis的redis就叫控制器当了这个redis这个控制器呢其实它主要目的呢就是去操作我们叫做操作redisok它主要目的就是操作redis当然了其实操作redis有很多种途径比如说呢我们可以通过
+[02:03] Spring Data Redis比如可以通过Jadis等等等等都可以去做那我们这边呢就不自己去写了因为我们这个导渡那个jar 包或者我们的那个坐标里面其实都有那除了这个之外我们要做的第二件事也是一个配置那第二个配置我们要配置什么呢注意就是一个叫做Session DO好了Session DO我们配置好了之后接着有第三个配置第三个配置就是我们自定义的会话管理器
+[02:38] OK那第三个配置配置好了之后接下来就是还有一个那第四个呢比较简单其实都是一般常见的一些配置第四个是这样的就是说在Shareware当中它默认有缓存的机制它有一个缓存管理器那这个缓存管理器呢我们再打开讲义来看就是一个叫做Cache Manager那我们都有了Redis了所以我们这个Cache Manager也用Redis来描述或者用它来替换其实就可以了当然了如果你不写也可以也行也没有问题
+[03:07] 好了基本的这几个配置我们看过了之后我们一个一个来看如何去做首先第一个那Redis控制就不得不提需要这么几个配置首先第一个叫做死菌类型的我们叫做host就是我们Redis服务器的地址究竟在哪我们最好是以参数的形式传递过来ata value$我们放到了我们的配置文件里面所以sprint.我们叫做redis.host
+[03:38] 好了第一个搞定那除了host之外呢还应该有我们叫做part那这边就是part好了其实这边呢prt其实我们这边呢已经在配置文件当中有体现了就在这边OK好了那这两个我们基本的属性放置好了那接下来就是redis管理器控制器这玩意儿是我们的插件提供的或者我们这个jar 包里有的所以我们直接用创建出来对象即可很简单public叫做redis manager
+[04:08] 注意我们刚才的share.reddit插件包里面有提供好的好了这边呢来一方法了就用它的名字了里面要做的事情很简单new出来对象并返回即可等于new一个拿过来好了看一下它有没有一些构造方法没有构造方法那我们只能一个一个set值了打点我们叫做set host好了打点set
+[04:47] 抱歉首字母小写set apart好了part好了那接下来并返回returnOK好了第一个我们就已经搞定了那接下来呢就是session do那session do呢也比较简单public我们这回得到的是一个session do注意这个session do呢其实也是通过这个我们的插件包或者我们整合的redis-shadow里面提供了那这个session do叫做什么叫做redis就叫session
+[05:24] DS就叫session dealOK好了那这个也叫session deal吧方法名都跟他的名字一样了要不太长了好了这边呢同样的逻辑control ce session deal等于new一个session deal拿过来好了接下来呢这个session deal注意我们之前看过咱们的看过我们这张图形我们都知道对于session deal里面要通过redis这边catch也就通过redis
+[05:55] 进行访问那Redis我们是不是通过一个Redis Manager来做的所以对于SessionDuo而言打点我们要set叫做Redis Manager那我们直接调用Redis Manager方法其实就可以了设置进去OKreturn好那这样一来我们的SessionDuo其实也已经搞定了那接下来SessionDuo我们做好了之后就是最后一个就是我们第三个叫做绘画管理器
+[06:26] 那绘画管理器呢public default叫做web session manager好了就叫session manager太长了随便起好了那接下来这里面呢我们要做的事情注意这回不能用default web session manager因为我们写过它的一个子类那我们写的叫做cassume session manager所以这边呢session manager等于new一个cassume session manager我们都知道对于session manager而言
+[07:00] session manager是通过还是回来这张图session manager是通过session do来进行调用的所以我们是不是应该告诉session manager它的session do究竟是什么呀所以呢这边的逻辑基本上都是大同小异的所以我这边session manager打点我们叫做set session do那这个session do在哪呢不就是redis session do吗所以也拿过来OK那这个逻辑呢我们其实也就已经写好了
+[07:29] 下了之后接着returnsessionmanagerOK好了这三步呢抱歉啊这个是int类型的int类型好了那这样一来我们这三个都写好了都写好之后还有一个缓存管理器那对于这个缓存管理器这个代码呢基本上比较简单那其实我们可以简单的写一下就是public redis catch就是创建一个对象返回其实就可以了catch就叫catch manager了
+[08:01] 好了这边呢直接Redis Catch ManagerRedis Catch Manager等于你有一个Redis Catch Manager这个逻辑都是一样的创建一个对象即可注意这个呢是缓存管理器缓存管理器也是要跟Redis打交道所以我需要Set Redis Manager跟缓存打交道我们跟缓存进行操作全部都封装了一个对象叫做Redis Manager所以直接调用过来即可Return
+[08:32] 这边基本的代码逻辑都是一样的OK那这样一来我这几步新增的配置主要是为了指定我们使用新的或者自定义的绘画管理器把我们的绘画数据保存到ready当中当然了如果说以后你的工程也是想用我这一套的话也要放到ready的话直接call过来其实都可以一点都不需要改造好了那这些我们基本都配置好了之后还有一个点我们需要改造改造哪就是我们这个安全管理器
+[09:02] 那我们的安卷管理器默认使用的是default web security manager那这个default security manager它其实默认使用的没有用我们它其实默认使用的绘画管理是什么呢叫做severate container session manager就是我们的http session那我们现在是不是自定义了所以我需要告诉它我不用默认的我要用我自己的那我这个如何去做这就是我们
+[09:29] 最后要做的事情统一的把我们的绘画管理器告诉安全管理器就是将我们自定义的绘画管理器注册到我们的安全管管理器中这个比较绕啊各位要明白什么意思好了那这一步如何去做很简单security manager打点set session manager
+[10:00] 你把这session manager告他其实就可以了那我们这个呢写了一个方法就叫做session manager吧好了接着还有一个这边直接都写上了因为这个session manager当中呢它有绘画它有缓存管理的这么一个概念它其实有缓存的这么一个概念那其实呢我们也可以就是将我们自定义的redis缓存管理器注册到安全管理器中那这个注册的过程
+[10:30] 跟商品这个基本上差不多打点叫做set catch manager我们写了一个redis catch manager基本上都是一样的这个是叫redis叫做catch manager抱歉catch managerOK好了那这样一来我整个的配置就已经都写好了其实各位会发现整合redis那用自定义的绘画管理器去定义我们的绘画的一个存储过程
+[11:03] 那我们写的代码很少全部都是配置而这些配置基本上都是固定的我们配置要配置redis这个管理器redis的管理器配置好了session dosession do要用到redis管理器去跟redis进行交互那接下来呢就是说session do有了那我们要绘制绘画管理器那绘画管理器是通过session do操作的所以我们一步一步的它的一个潜逃循环的这么一个过程OK
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+在 Spring Boot 项目中，通过 Shiro 框架实现基于 Redis 的会话管理与权限控制，包括自定义 SessionManager、RedisSessionDAO 和缓存管理器的配置。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：展示 CustomSessionManager.java 中的 getSessionId 方法，用于从请求头中获取 sessionid，若无则生成新 sessionid。
+画面 2：展示 PPT 页面，标题为“4.1.2 与 Spring Security 的对比”，内容对比 Shiro 与 Spring Security 的特性，如 API 简单性、支持的数据源、签名方式和性能。
+画面 3：展示 ShiroConfiguration.java 代码，配置 filterMap，设置 "/user/**" 路径需要认证。
+画面 4：展示 ShiroConfiguration.java 代码，定义 Redis 的 host 和 port 属性，用于连接 Redis。
+画面 5：展示 ShiroConfiguration.java 代码，定义 RedisManager 类，用于操作 Redis。
+画面 6：展示 ShiroConfiguration.java 代码，显示 IDE 的类型提示，提示用户可以按 Ctrl+Shift+Enter 来移动光标。
+画面 7：展示 ShiroConfiguration.java 代码，定义 RedisSessionDAO，用于操作 Redis 会话。
+画面 8：展示 ShiroConfiguration.java 代码，显示 IDE 的类型提示，提示用户可以按 Ctrl+Shift+Enter 来移动光标。
+画面 9：展示 ShiroConfiguration.java 代码，定义 CustomSessionManager 并设置其 SessionDAO。
+画面 10：展示 ShiroConfiguration.java 代码，定义 RedisCacheManager，用于缓存管理。
+画面 11：展示 ShiroConfiguration.java 代码，显示 IDE 的类型提示，提示用户可以按 Ctrl+Shift+Enter 来移动光标。
+画面 12：展示 ShiroConfiguration.java 代码，定义 CustomRealm、SecurityManager 和 ShiroFilterFactoryBean，用于权限控制和过滤器配置。
+画面 13：展示 ShiroConfiguration.java 代码，显示 Redis 的 host 和 port 属性。
+画面 14：展示 ShiroConfiguration.java 代码，定义 RedisCacheManager 并设置其 RedisManager。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1：
+```java
+//头信息中具有sessionid
+//请求头：Authorization, sessionid
+//指定sessionId的获取方式
+protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
+    //获取请求头Authorization中的值
+    String id = WebUtils.toHttp(request).getHeader("Authorization");
+    if(StringUtils.isEmpty(id)) {
+        //如果没有携带，生成新的sessionid
+        return super.getSessionId(request, response);
+    } else {
+        //返回sessionid;
+        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_SOURCE, "header");
+        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID, id);
+        request.setAttribute(ShiroHttpServletRequest.REFERENCED_SESSION_ID_IS_VALID, Boolean.TRUE);
+        return id;
+    }
+}
+```
+
+画面 3：
+```java
+//用过滤器的形式配置请求地址的依赖权限
+//filterMap.put("/user/home", ""); //不具有指定的权限，跳转到setUnauthorizedUrl地址
+//用过滤器的形式配置请求地址的依赖角色
+//filterMap.put("/user/home", "roles[系统管理员]");
+filterMap.put("/user/**", "authc"); //当前请求地址必须认证之后可以访问
+filterFactory.setFilterChainDefinitionMap(filterMap);
+return filterFactory;
+```
+
+画面 4：
+```java
+@Value("${spring.redis.host}")
+private String host;
+@Value("${spring.redis.port}")
+private String port;
+```
+
+画面 5：
+```java
+public RedisManager redisManager() {
+    RedisManager redisManager = new RedisManager();
+    redisManager.setHost(host);
+    redisManager.setPort(port);
+    return redisManager;
+}
+```
+
+画面 7：
+```java
+public RedisSessionDAO redisSessionDAO() {
+    RedisSessionDAO sessionDAO = new RedisSessionDAO();
+    sessionDAO.setRedisManager(redisManager());
+    return sessionDAO;
+}
+```
+
+画面 9：
+```java
+public DefaultWebSessionManager sessionManager() {
+    CustomSessionManager sessionManager = new CustomSessionManager();
+    sessionManager.setSessionDAO(redisSessionDAO());
+    return sessionManager;
+}
+```
+
+画面 10：
+```java
+public RedisCacheManager cacheManager() {
+    RedisCacheManager redisCacheManager = new RedisCacheManager();
+    redisCacheManager.setRedisManager(redisManager());
+    return redisCacheManager;
+}
+```
+
+画面 12：
+```java
+//1.创建过滤器工厂
+public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+    ShiroFilterFactoryBean filterFactory = new ShiroFilterFactoryBean();
+    filterFactory.setSecurityManager(securityManager);
+    return filterFactory;
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 2：
+标题：4.1.2 与 Spring Security 的对比
+内容：
+- Shiro较之 Spring Security，Shiro在保持强大功能的同时，还在简单性和灵活性方面拥有巨大优势。
+  1. 简于理解的 Java Security API；
+  2. 支持多种数据源（LDAP，JDBC，Kerberos，ActiveDirectory等）；
+  3. 对角色的简单的签名（访问控制），支持多种度的签名；
+  4. 支持一级缓存，以提升应用的性能。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

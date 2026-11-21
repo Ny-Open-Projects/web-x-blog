@@ -1,0 +1,132 @@
+# day12-16-满标放款-前后端集成测试
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：04_万信金融-投标放款/4-5 满标放款功能实现
+- 源文件：10.阶段十 万信金融项目\04_万信金融-投标放款\4-5 满标放款功能实现\day12-16-满标放款-前后端集成测试_【海量资源尽在 666java.com】.mp4
+- 时长 14分35秒（音频 876s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 好截止到目前呢我们已经把满标放款整个这一块的业务功能呢基本上呢是开发完毕了啊接下来的话我们就要进行前后端集成测试那么这个测试呢也比较的麻烦啊所以说呢我这呢又用这个一个文本文件拉了一个清单啊咱对照这个清单呢进行这个前后端集成测试
+[00:30] 首先第一个呢就是大家得清楚我们都需要启动哪些服务或者说程序啊咱一起看一看两个前端工程对不对哪两个前端工程一个这个对不对用户的前端吧一个是咱们P2P平台的这个什么呀P2P管理平台的前端是不是这是两个前端我们都要启动然后就是Apollo不用说了然后P2P所有的微服务工程还有银行
+[01:00] 存款系统对不对好redis还有Elasticsearch那所有的这些东西呢我在我的电脑上提前都已经启动好了啊我这呢就不再一个一个给你演示了你看这大概这是Apollo啊对不对这俩一个是redis一个是Elasticsearch然后这是所有的这个什么呀微服务我也都启动好了包括前端工程大家看我都已经打开了啊登录过了这是启动性的啊然后呢接下来
+[01:31] 有一个非常重要的一个事情大家一定一定要注意的就是这个测试数据的一个准备工作因为我们这儿是不是要测试这个满标放款那也就是说呢在满标放款之前我们是不是已经测试过这个什么呀发标测试过什么呀投标对吧等等然后投标的时候可以让他满标嘛对不对那这个时候呢就是发标的时候这个标底信息啊投标的这些信息这些信息这些数据
+[01:59] 你必须保证它是规范的正确的有效的因为咱满标放款都要用到这些数据如果你之前产生的这个标底的信息啊投标这个信息有问题或者不是很规范不是很有效那我建议你要么去数据库里边直接手动的进行修改或者造一些数据要么你就是这个怎么说登陆咱们这个万信金融的这个前段你重新发个新标然后重新呢
+[02:29] 挑几个账户登录上去进行什么投标然后让他买标然后呢这个产生一些什么呀数据产生一些规范的有效的一个数据这个你看你准备怎么做吧这里边反正我挑了几个关键点给大家说了总之就是我刚才说的那一句话你必须保证你之前产生的这些数据是规范的正确的有效的这个非常非常重要很有可能是这样
+[02:57] 就是说我们的代码基本上没啥问题但是老是出问题报错那最后我们发现都是因为我们之前产生的一些数据不规范引起的或者不正确这个无效引起所以这块呢我觉得是非常非常重要的一点因为咱以前经常做一些测试可能那些数据会会会怎么着不规范甚至是错误的一些数据这很正常所以这点大家尤为重要我在进行这个
+[03:26] 功能测试之前其实我就把我的相关的一些标底的信息啊投标的一些信息我都过了一遍有些数据不完整的不规范的我都给他做了一个人工的一个修改说这是需要大家注意的然后我们都要测试哪些功能呢这个测试的这些功能其实主要是对照这个表不是这个表是这个图这个图那这里面不是四个接口吗对不对那咱就看看这个四个接口最终产生的效果有没有出来吗
+[03:57] 咱要知道咱这个功能有没有问题对不对那这里边大概挑了几个比如说这个什么呀保存交易记录的时候这个状态有没有从未同步改成已同步其实这个功能咱应该是没问题的这个功能咱之前都反复测试过了对不对那其实我们可以重点测试这个嘛12看这个什么呀投标信息有没有改成已放款还有这个什么呀这个标底的状态对不对有没有改成什么呀还款中
+[04:25] 是不是其实你检查这两个状态就行只要这两个状态盖成功了那就证明咱们这个满标放款的这个这个代码是没有问题然后这呢要提醒大家注意一点我这个清单里边有就是这个功能咱暂时测试不了就是启动还款生成还款计划应用明细这个功能咱暂时测试不了就是这个2223这个代码咱都编写过了你有印象吗但是目前
+[04:54] 不能测试为啥不能测试因为22这一步咱没有搞定啊我不知道你还有没有印象啊呃我一找一找你看这个22的话22什么交易中心发请求对不对发请求到这个什么呀还款服务咱当时这个代码是没有编写的啊是有原因的来我跟你说说应该是要我藏对不对你看这不是第一阶段第二阶段啊他这是第几阶段啊应该是最后了对不对哎这你看我当时编码的时候这不是
+[05:22] 但是给大家解释说明了啊解释说明了这个当时说的是这个接口四就是22这一步是不是涉及到一个分布式事物的一个问题这个呢咱还没有讲到所以说呢咱是把23就这个功能在咱该开发开发过了但是22这一步咱目前还没有实现啊还没有实现所以说呢这一块的功能咱暂时不测试等到呢咱们把这个分布式事物这个问题给解决了咱
+[05:52] 那个时候再进行一次测试啊这是需要大家注意的呃所以说我们一会测试的时候其实主要是看到这一块观察一下数据库观察观察控制台有没有报错就OK了这是咱们把这个呃强端集成测试吧相关的一些准备工作啊一些注意事项都要测试哪些功能我们整体先给大家说一遍然后呢接下来呢咱就开始进行测试啊该启动的我都已经启动过了啊咱就可以进行测试
+[06:21] 那么我这里边挑的还是这个之前咱们在投标的时候这个谁呀左丘左丘那个第一次借款拿了这个标的信息我当时是不是挑了这个投标的时候是不是用五个人进行的投标你还有一项吗是不是五个人然后你看现在这一说完证明这个标的是不是已经满标了吗左丘这个对不对已经满标我挑的是这块的数据进行测试的那咱们这个测试是不是应该是从哪开始
+[06:51] 是不是应该是从这个前端就是咱们P2P平台的这个管理前端是不是从这开始的对不对我这个管理前端也打开了我们刷新一下然后呢你看这一块是这个什么呀发完标之后的一个审核我们不应该是这儿应该是这儿你看这儿是不是说什么呀满标放款审核对吧我们点击一下然后这时候呢你看
+[07:26] 他就会做查询啊把什么呀处于满标状态的这个标的信息给干什么呀查出来我测试的数据是这个就是左丘先生第一次接款他要借一万两千块钱吧已经干什么呀已经满标了啊现在已经满标刚才让你看到了是不是是不是显示已售完吗有有五人出借吗已经满标了啊我是拿他做测试那我接下来应该是点什么呀对我应该是点击这个什么审核啊然后点击什么呀通过对
+[07:57] 从这儿这是咱们入口啊我把这儿清理一下那我一点一通过的话它是不是相当于是就是第一步对吧管理员满标复审通过嘛然后是不是开始走咱们后边这个接口一接口二接口三对不对整个这个流程啊那咱接下来走一下通过出问题了啊出问题的话咱们看一看他报啥错呀1013存款代理服务失败哦
+[08:30] 这个错误的话咱跟你以往的经验应该是哪到哪的错应该是交易中心跟存款代理服务之间在交互的时候出的问题对不对你看他这儿错码是15013你可以去交易中心代码里边找一找交易中心那就是这一块就是这个要求你找找他哪个地方抛的是15013你看这是不是这俩都是1013
+[08:59] 你可以大概瞅一瞅看能好瞅不好这个这个错误嗯那应该是哪个衣服啊对应该是这个衣服这个衣服有啥问题啊好我们看一看它是哪有问题啊应该是这个衣服啊对应的是这个衣服出问题了出问题它走的是这个else对不对抛出来的150113当然也有可能是里边这个衣服这都是有可能的嗯
+[09:40] 这个衣服咱先瞅瞅相关的这一块袋子吧我们看看这儿它这是在通过飞影访问这个什么呀存款代理服对吧我们看存款代理服那边出问题了没有存款代理服这边有人报错没有你看思考语句都出来了是不是那没有报错呢证明这行应该是没问题的没问题然后接下来走衣服但是呢他没有走衣服直接是不是就走else抛了这个1013这个异常对不对
+[10:12] 那是这个衣服这行有问题吗我们看这个衣服这行有啥问题啊哦衣服这行有问题有问题啊你看里边这个衣服你看出来有问题了吗你看当这个存款代理服执行成功之后它是不是返回的有值是就是那五个零嘛然后我们取出来这个结果是不是要跟五个零做依库的判断对不对你看我们这少写啥你看这是不是少写东西这个应该是一个枚举对象是不是你这个得到是一个什么呀字母串呀
+[10:44] 你字符串跟一个美举对象咋比啊我们这儿是少调用一个方法叫get什么呀code嘛导导那个五个零那个字符串嘛对不对这个应该是当时编写的时候漏掉了啊你看下面这都写了对不对这往下写了啊这是一个小问题啊不细心造成的那咱接下来应该把这个谁呀对这个交易中心这个微幅我们需要重新一下这是一个小错误我们等待它启动完毕然后接下来再进行测试
+[11:24] 那一会我们再次进行测试的时候大家主要就是观察这俩就那状态一个是投标信息有没有改成这个什么呀以放款嘛还就是标底信息应该改成什么呀放款中它原来的那个状态应该是满标嘛现在应该是改成这个放款中这启动完了启动完之后呢咱们把这个相关的这个空位台给它清一清然后呢接下来我把这也清一清然后接下来咱再次发现就
+[11:53] 还是左修先生第一次借款对吧审核通过诶成功了对不对看前段这应该是成功了啊返回这个这个成功了呃然后我们看控制台吧先看控制台有没有报错啊这是存管代理服务这边大家看是不是他开始保存这个什么呀对这个交易记录了你看这应该是更新你看是不是更新状态了对吧没错吧呃然后我们看交易中心这边有没有报错控制台
+[12:25] 也没有报错啊这边你看这是什么语句啊也是发出了update的语句应该是更新也是更新那个那个那个状态的啊咱一会去表里边瞅一瞅你看是不是也没报错对不对啊没有报错呃其他的咱就不需要观察了对不对还还跟他们没关系那咱就去表里边瞅一瞅表里边咱要瞅啥一个是这个什么呀交易中心投标信息的这个状态有没有改成已放款投标
+[12:56] 交易中心是在哪里交易中心是在这儿对吧投标应该是tender对不对就是这五个人嘛投了标我们看他的状态找一找状态就是这个状态原来可不是这个值这是新改的这已经改了嘛你看这个还能观察啥呀这个表应该别的应该是观察不了了吧别的应该观察不了然后我们再观察观察那个谁呀
+[13:28] 标底的状态对吧标底的状态改成缓缓中标底状态咱很清楚上一个状态应该是满标对不对Fully F U L L Y现在我们看改了没有标底应该是Project对不对Project左邮先生第一次见到是不是这个标标底对不对我们拿他做的测试状态我们找一找状态在哪在这你看这个值原来是Fully大家应该有印象对不对你看现在盖成了什么样
+[13:59] 对不对就指引杆没有问题吧其实我们观察这两个状态基本上就已经确定确定啥咱们接口一接口二接口三整个这一块代码是没问题接口四呢咱暂时测试不了等到后边我们把这个分布式事物的问题给它解决了到时候再进行测试这是目前吧我们对满标放款业务现有的这个功能了
+[14:29] 进行了这个什么呀前后端集成测试已经测试完了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲一个贷款项目从发起、审核、放款到还款的全流程业务逻辑与对应的代码实现。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示一个贷款业务流程图，包含“调用方APP”、“交易中心”、“存管代理”、“还款服务”、“存管系统”等模块，描述了从用户发起贷款到最终还款的流程。
+画面2：展示贷款管理后台的“贷款列表”，列出了“张伟先生5次借款”、“张伟先生4次借款”等记录，状态为“募集中”，年化利率10%。
+画面3：展示贷款业务流程图，聚焦在“交易中心”和“存管代理”之间的交互。
+画面4：展示IDE中“ProjectService.java”文件，列出“测试功能”包括：1. 查看存管服务是否保存交易记录；2. 查看交易中心是否修改项目状态；3. 查看还款服务是否生成并保存还款计划；4. 查看还款服务是否收到后端测试。
+画面5：展示贷款详情页面，显示“张伟先生”贷款信息，金额12000元，期限12个月，借款人信息包括姓名、年龄、性别、手机号、身份证号。
+画面6：展示贷款业务流程图，聚焦在“交易中心”和“存管代理”之间的交互。
+画面7：展示IDE中“ProjectService.java”文件，代码部分为：RestResponse<String> modifyProjectStatus = depositoryAgentApiAgent.modifyProjectStatus(modifyProjectStatus); if (modifyProjectStatus.getRemit().equals(DepositoryReturnCode.RETURN_CODE_0000.getcode())) { project.setStatus(ProjectCode.REPAYING.getCode()); updateProject(); }
+画面8：展示IDE中“ProjectService.java”文件，代码部分为：ProjectWithTenderDTO project = new ProjectWithTenderDTO(); project.setProjectId(projectId); project.setTenderList(tenderList); project.setCommissionInvestorAnnualRate(configService.getCommissionInvestorAnnualRate()); project.setCommissionBorrowerAnnualRate(configService.getBorrowerAnnualRate());
+画面9：展示IDE中“ProjectService.java”文件，代码部分为：LoadRequest loadRequest = generateLoanRequest(project, tenderList, commission); RestResponse<String> restResponse = depositoryAgentApiAgent.confirmLoan(loadRequest); if (restResponse.getRemit().equals(DepositoryReturnCode.RETURN_CODE_0000.getcode())) { updateTenderStatusAlreadyLoan(tenderList); }
+画面10：展示IDE中“ProjectService.java”文件，代码部分为：ModifyProjectStatusDTO modifyProjectStatusDTO = new ModifyProjectStatusDTO(); modifyProjectStatusDTO.setProjectId(project.getId()); modifyProjectStatusDTO.setProjectStatus(ProjectCode.REPAYING.getCode()); modifyProjectStatusDTO.setRequestId(loadRequest.getRequestId());
+画面11：展示IDE中“ProjectService.java”文件，代码部分为：ModifyProjectStatusDTO modifyProjectStatusDTO = new ModifyProjectStatusDTO(); modifyProjectStatusDTO.setProjectId(project.getId()); modifyProjectStatusDTO.setProjectStatus(ProjectCode.REPAYING.getCode()); modifyProjectStatusDTO.setRequestId(loadRequest.getRequestId());
+画面12：展示IDE中“ProjectService.java”文件，代码部分为：ModifyProjectStatusDTO modifyProjectStatusDTO = new ModifyProjectStatusDTO(); modifyProjectStatusDTO.setProjectId(project.getId()); modifyProjectStatusDTO.setProjectStatus(ProjectCode.REPAYING.getCode()); modifyProjectStatusDTO.setRequestId(loadRequest.getRequestId());
+画面13：展示数据库管理工具，显示“p2p_transaction_0.sql”文件，表结构包括“AMOUNT”、“TENDER_STATUS”、“CREATE_DATE”、“REQUEST_ID”、“STATUS”、“PROJECT_NAME”、“PROJECT_PERIODS”、“PROJECT_ANNUAL_RATE”等字段。
+画面14：展示贷款业务流程图，聚焦在“交易中心”和“存管代理”之间的交互。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号），这是最重要的部分：
+画面4：
+```java
+测试功能：
+1. 查看存管服务是否保存交易记录，状态是否从“未同步”改为“已同步”
+2. 查看交易中心是否修改项目状态为“已放款”
+3. 查看还款服务是否生成并保存还款计划，且还款计划收到后端测试
+```
+
+画面7：
+```java
+RestResponse<String> modifyProjectStatus = depositoryAgentApiAgent.modifyProjectStatus(modifyProjectStatus); 
+if (modifyProjectStatus.getRemit().equals(DepositoryReturnCode.RETURN_CODE_0000.getcode())) { 
+    project.setStatus(ProjectCode.REPAYING.getCode()); 
+    updateProject(); 
+}
+```
+
+画面8：
+```java
+ProjectWithTenderDTO project = new ProjectWithTenderDTO(); 
+project.setProjectId(projectId); 
+project.setTenderList(tenderList); 
+project.setCommissionInvestorAnnualRate(configService.getCommissionInvestorAnnualRate()); 
+project.setCommissionBorrowerAnnualRate(configService.getBorrowerAnnualRate());
+```
+
+画面9：
+```java
+LoadRequest loadRequest = generateLoanRequest(project, tenderList, commission); 
+RestResponse<String> restResponse = depositoryAgentApiAgent.confirmLoan(loadRequest); 
+if (restResponse.getRemit().equals(DepositoryReturnCode.RETURN_CODE_0000.getcode())) { 
+    updateTenderStatusAlreadyLoan(tenderList); 
+}
+```
+
+画面10：
+```java
+ModifyProjectStatusDTO modifyProjectStatusDTO = new ModifyProjectStatusDTO(); 
+modifyProjectStatusDTO.setProjectId(project.getId()); 
+modifyProjectStatusDTO.setProjectStatus(ProjectCode.REPAYING.getCode()); 
+modifyProjectStatusDTO.setRequestId(loadRequest.getRequestId());
+```
+
+画面12：
+```java
+ModifyProjectStatusDTO modifyProjectStatusDTO = new ModifyProjectStatusDTO(); 
+modifyProjectStatusDTO.setProjectId(project.getId()); 
+modifyProjectStatusDTO.setProjectStatus(ProjectCode.REPAYING.getCode()); 
+modifyProjectStatusDTO.setRequestId(loadRequest.getRequestId());
+```
+
+画面13：
+```sql
+AMOUNT
+TENDER_STATUS
+CREATE_DATE
+REQUEST_ID
+STATUS
+PROJECT_NAME
+PROJECT_PERIODS
+PROJECT_ANNUAL_RATE
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1、3、6、14：展示一个贷款业务流程图，包含“调用方APP”、“交易中心”、“存管代理”、“还款服务”、“存管系统”等模块，描述了从用户发起贷款到最终还款的流程。
+画面2：展示贷款管理后台的“贷款列表”，列出了“张伟先生5次借款”、“张伟先生4次借款”等记录，状态为“募集中”，年化利率10%。
+画面5：展示贷款详情页面，显示“张伟先生”贷款信息，金额12000元，期限12个月，借款人信息包括姓名、年龄、性别、手机号、身份证号。
+画面13：展示数据库管理工具，显示“p2p_transaction_0.sql”文件，表结构包括“AMOUNT”、“TENDER_STATUS”、“CREATE_DATE”、“REQUEST_ID”、“STATUS”、“PROJECT_NAME”、“PROJECT_PERIODS”、“PROJECT_ANNUAL_RATE”等字段。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+

@@ -1,0 +1,113 @@
+# 27.Elasticsearch中文分词之IK分词器的使用
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day13-ElasticStack学习之Elasticsearch入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day13-ElasticStack学习之Elasticsearch入门\27.Elasticsearch中文分词之IK分词器的使用【海量资源尽在 ubkz.com】.mp4
+- 时长 9分55秒（音频 595s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们来看一下中文分词那么首先我们需要去说一下的就是中文分词它的难点在于哪难点就在于我们这个汉语啊它的一个语言的一个特性啊就是它没有明显的一个词汇的一个分界点那么分割的位置不一样它表达的意思可能是不一样的但是呢比如像这个英语中啊它可以以空格作为一个分割符
+[00:25] 对吧那么如果我们中文分割分割不正确的话就会有这个歧义那我们来看一下比如说像这句话叫我爱炒肉丝那么你如果是这样去分割的话就是我爱吃这个炒肉丝对不对对吧然后呢如果说你要这么去分的话就是我爱炒肉丝就代表着你爱去做做这道菜所以说你的这个词词会怎么去分割
+[00:52] 对吧这个意思它是不一样的意思是不一样的所以说这个就是中文分词的一个难点所在那么当然了虽然它难但是并不代表它不能解决OK那么所以呢我们也会有一些常用的一些中文分词器老外做不了咱们的这个中文分词但是我们国人可以自己去写对吧那么大概有这么几个这有个IKIK应该是非常著名的知名的这样的一个分词器
+[01:19] 还有一个这个叫JBA这个呢是在Python中用的一个非常火的这样的一个分子器这个呢是清华大学的应该是他们搞的一个分子器吧大概是这个样子啊那么感兴趣的同学可以去查一下啊那么在这里呢我们推荐使用的是谁呢IK分子器因为它是比较成熟也是比较就是效率比较高的这样的一个分子器我们来看一下啊这个IK分子器呢其实是在
+[01:47] 2016年的时候就已经推出了就推出了然后呢他呢采用的一种算法叫做比较牛逼的一个算法来看一下叫什么呢叫正向迭代最细力度切分算法那么这个算法呢是不是从名字上面来去看的话是不是就非常的牛啊对吧他呢去有什么呢80万每秒的这样的一个处理能力啊非常非常快啊OK那么这个我们就不详细去读了啊大家可以自己去阅读一下
+[02:17] 那么在这个位置需要去提的一点的是这个IK分子器啊他的这个作者啊其实早就已经不维护啊这个项目了那么我们这个呃这个IK分子器elag search的一个他其实是一个插件啊这个插件是第三呃第三方或者说有有些有有有个哥们吧他去维护的这样的一个项目啊那么我们可以打开来看一下这个要注意并不是官方的这个
+[02:44] 这个作者去维护的这样的一个项目了OK那么我们来看一下那么它的所适用的一些版本那么可以看到那么我们这个must组这个版本的话那么是适用于适用于我们这个6.X以上的ES的那么我们使用的ES是6.5.4所以我们使用这个最新版就可以了那么其实我们可以看到在这个release中release中有一个最新版是不是就是这个6.5.4
+[03:12] 对吧6.5.4那么你直接下载就可以了当然大家也不需要下载了我已经给你们下载好了就在资料中可以找到那么下面我们来看它的用法怎么去用那它使用也是非常简单的那么有两种方式那么我们推荐使用第一种方式就可以了那么第一种方式就是我们下载得到一个我们的一个压缩包然后Zip的压缩包然后我们做一个Unzip的一个解压解压到我们的一个
+[03:41] ELECT SEARCH中的PLUGINS然后创建一个IK这个目录把这个解压后的解压之后的一些文件全部都丢到这个里面就可以了这是这种方式那么下面的我们也参考这个文档它的一些这个说明就是这个文档的说明我们来做一些这个操作那么如果我们使用的是非Docker的运行的话那么你直接去做一个解压就可以了
+[04:08] 非常非常简单做解压之后呢做一个重启就OK了那么如果你使用的是Docker的这个运行的方法的话那么就会相对麻烦那么一点点那么为什么麻烦呢是我们需要去进入这个Docker这个容器然后呢去把这个插件的拷贝进去然后呢再去做一个解压那么它才会去做生效那么在这我们其实要强调一点其实我们并不推荐去直接去修改
+[04:37] 容器修改容器的这样的一个这种操作的方法大家也不是说完全不可以在不得已的情况下或者说在我们做测试的时候再这样去做那么如果我们真正要去要去这种方式去做的话我们应该去把我们的这个容器呢去
+[04:53] commit提交一个版本然后做这样的一个修改那么我们在这个位置仅仅是为了一些给大家演示这个效果那么我们就直接把这个压缩包拷贝到容器的内部然后做个解压操作ok好那么我们先把这个给大家说清楚那么我们先把这个命令我们先拷贝过来看一下这个命令那么这个命令是什么意思我们来看一下就是我们拷贝我们这个
+[05:22] temp目录下面的这个压缩包去哪里呢去我们的容器下面的这个位置啊那么就是那么我们先来检查一下吧先来检查一下啊那么在我们的这个temp下面有没有这样的一个压缩包呢有有这样的压缩包那么我们就可以把它去拷贝到我们的容器中了那么做这样的一个拷贝走好那么拷贝进去了那么拷贝进去之后啊那么我们就需要去进入我们这个容器
+[05:49] 我们来看一下进入容器那么进入容器之后呢它就会自动的进入到我们的这个目录啊然后呢我们进入这个plugins这个目录下面然后呢可以看到是不是有这样的一个这个压缩包啊然后呢我们创建一个目录叫做ik然后呢我们去unzip这个这样吧我们我们是应该这样啊我们先把它呢移动到我们的这个ik中
+[06:18] 然后我们进入 IK然后我们再去做一个解压对吧好把它解压出来那么解压出来之后那么我们压缩包就没用了把它删掉那么就叫elaxsets.zip压缩包把它删掉OK好这样的话我们就已经是把我们 IK 分子器已经就丢到我们的插件中了那么接下来我们就
+[06:43] 去我退出接下来我们把我们的一个容器做一个重启就可以了那么做一个什么restartrestart好那么我们等待它的一个重新启动就可以了好那么我们可以看到现在已经就重新跑起来了那么在这个位置有一个关键点在这那么我们其实会发现它已经就加载到了我们这个插件就是onlinersik这个插件ok
+[07:12] 好那么下面呢我们就来测试一下看IK有没有生效啊那么我们怎么去测试呢我们就把这个拷过来那么拷贝到刚刚的Postman里面那么要注意的是在这个位置啊我们指定了使用的是一个IK分子器这个呢就是我们一个IK分子器的一个默认的一个名字啊叫IK MaxWord那么有同学老师你这个怎么知道是这个名字啊那么其实我们看一下官方这个文档啊就知道了
+[07:42] 那么可以看到在下面的他在去做创建这个mapping的时候那么可以看到是不是就是指定的一个分子器的名字就是他呀所以在这个位置呢我们就知道他的一个分子器的名字了啊但你能不能改他名字也可以改啊去修改他配置文件就可以了那么这块我们就不用去做一个修改那么直接使用他就OK了这个也没有什么太大的问题啊然后呢我们来测试一下我是中国人然后呢去去做让他做一个分子我们看一下这个效果走
+[08:12] 那么他分词的一个结果呢就这样的结果啊我是中国人你看中国人是不是就会认为是一个词啊对吧然后呢还有中国也是一个词国人是不是也是一个词啊OK那么我们是不是还可以去测试一下啊叫什么呢比如说叫什么呢我爱炒肉丝对吧看他会分词什么样的效果啊炒肉丝炒肉丝啊来看一下这个效果
+[08:40] 那么它这个结果呢就是我爱炒你看肉丝对吧它是这样的做一个划分那么这个肉丝是不是就是一个词汇啊就是一个单词啊OK那么当然了IK呢它还支持我们的自定义扩展我们这个词汇比如说什么意思啊那么我们来简单的说一下说一下这个意思就是那么把这个词呢比如说叫什么呢比如说我在船只播客
+[09:09] 播客学习那我们来搜索看一下走那么其实我们可以看到在这个里面呢你看我在传志播客学习那么他只认识什么呢学习是一个词但是呢其实这个传志播客这四个字呢也是一个这个词对吧那么我们也可以自定义就说我们可以给IT呢自定义这样的一个单词那么让他去认识我们这个传志播客
+[09:38] 那么把这个传输播客呢认为是一个单词啊也是可以去做到的啊哎OK好嘞那么呃这个呢就是IK分词器的一个使用哎OK那么讲到这呢我们是不是就把这个中文分词器啊就讲完了那么OK好那么关于这个中文分词那我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Elasticsearch 中安装并测试 IK 中文分词插件。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示《中文分词》章节内容，说明中文分词难点及示例“我爱/炒肉丝”。
+画面2：展示 GitHub 仓库页面，介绍 IK Analysis for Elasticsearch 插件及其支持的版本。
+画面3：展示 GitHub 仓库的代码目录结构，包含 config、src、licenses 等文件夹。
+画面4：展示插件安装说明，包含下载预编译包或使用插件安装命令，以及创建索引和映射的快速示例。
+画面5：在终端中列出 /tmp 目录下的文件，显示下载的 ik-6.5.4.zip 文件。
+画面6：在终端中执行 Docker cp 命令，将 ik-6.5.4.zip 文件复制到 Elasticsearch 容器内。
+画面7：在终端中进入 Elasticsearch 容器，进入 plugins 目录。
+画面8：在终端中解压 ik-6.5.4.zip 文件，列出解压后的文件。
+画面9：展示 Elasticsearch 启动日志，显示 IK 分词插件已加载。
+画面10：展示 PDF 文档中测试 IK 分词的命令和结果示例。
+画面11：在 Postman 中发送 POST 请求测试 IK 分词，请求体为 {"analyzer": "ik_max_word", "text": "我是中国人"}。
+画面12：在 Postman 中修改请求体，测试文本“我喜欢吃苹果”。
+画面13：在 Postman 中修改请求体，测试文本“北京的天气真好”。
+画面14：展示 PDF 文档中 IK 分词插件的安装方法和测试命令。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+{
+  "token": "If the document doesn't already exist",
+  "start_offset": 0,
+  "end_offset": 3,
+  "type": "word",
+  "position": 0
+}
+画面2：
+IK version  ES version
+master  6.x -> master
+6.3.0  6.3.0
+6.2.4  6.2.4
+画面4：
+1.download or compile
+  • optional 1 download pre-build package from here: https://github.com/medcl/Elasticsearch-analysis-ik/releases
+    create plugin folder cd your-es-root/plugins && mkdir ik
+    unzip plugin to folder your-es-root/plugins/ik
+  • optional 2 - use Elasticsearch-plugin to install (supported from version v5.5.1):
+    ./bin/Elasticsearch-plugin install https://github.com/medcl/Elasticsearch-analysis-ik/releases/download/v5.3.8/Elasticsearch-analysis-ik-5.3.8.zip
+    NOTE: replace 5.3.8 to your own Elasticsearch version
+2.restart Elasticsearch
+Quick Example
+1.create a index
+curl -XPUT http://localhost:9200/index
+2.create a mapping
+画面5：
+root@itcast:/tmp# ll
+画面6：
+root@itcast:/tmp# Docker cp /tmp/Elasticsearch-analysis-ik-6.5.4.zip Elasticsearch:/usr/share/Elasticsearch/plugins/
+画面7：
+[root@itcast Elasticsearch]# cd plugins/
+[root@itcast plugins]# ll
+画面8：
+[root@itcast ik]# ll
+画面9：
+[2019-01-11T12:43:36,634][INFO ][o.e.p.PluginsService] [VsaJSG] loaded module [x-pack-watcher]
+[2019-01-11T12:43:36,637][INFO ][o.e.p.PluginsService] [VsaJSG] loaded plugin [analysis-ik]
+[2019-01-11T12:43:36,637][INFO ][o.e.p.PluginsService] [VsaJSG] loaded plugin [ingest-geopoint]
+[2019-01-11T12:43:36,637][INFO ][o.e.p.PluginsService] [VsaJSG] loaded plugin [ingest-user-agent]
+[2019-01-11T12:43:36,637][INFO ][o.e.x.s.FileRolesMessageHandler] [VsaJSG] parsed [0] roles from file /usr/share/Elasticsearch/config/roles.yml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] Controller [64 bit] Version 6.3.4 (build 1608688527239) Copyright © 2018 Elasticsearch BV
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] using discovery type [single-node] and host Controller [settings]
+[2019-01-11T12:43:36,637][INFO ][o.e.n.Node] [VsaJSG] initialized
+[2019-01-11T12:43:36,637][INFO ][o.e.n.Node] [VsaJSG] started
+[2019-01-11T12:43:36,637][INFO ][o.e.n.Node] [VsaJSG] publish address [172.16.55.185:9300], bound addresses [172.16.55.185:9200]
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T12:43:36,637][INFO ][o.e.x.m.p.CoptDiscoveryModule] [VsaJSG] tried to load config from /usr/share/Elasticsearch/plugins/ik/config/analysis-ik/config.xml
+[2019-01-11T1
+

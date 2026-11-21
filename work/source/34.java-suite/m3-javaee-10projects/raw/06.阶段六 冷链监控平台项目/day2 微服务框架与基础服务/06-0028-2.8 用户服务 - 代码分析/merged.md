@@ -1,0 +1,212 @@
+# 2.8 用户服务 - 代码分析
+
+- 阶段：06.阶段六 冷链监控平台项目
+- 章节：day2 微服务框架与基础服务
+- 源文件：06.阶段六 冷链监控平台项目\day2 微服务框架与基础服务\2.8 用户服务 - 代码分析_【海量资源尽在 666java.com】.mp4
+- 时长 17分28秒（音频 1048s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 前面我们给大家介绍了用户服务它的整体的一个业务模型也就是我们整个的这个数据模型和我们的代码结构那么针对于我们所有的向前端提供API的这样的一些服务来讲的话整体的代码结构基本都比较类似都属于我们有Controller层有具体的实现的Service层还有我们的实体类和我们的道层然后呢有
+[00:27] 正确的一个比如说规范化的一个返回结果这是基本上所有的都是类似如此的这样的一个服务那么我们看一看我们代码结构里边是如何来实现的那首先呢我们整个的工程是一个Spring Boot的一个项目所以我们在我们的Spring Boot工程里边我们添加我们这个主类里边添加我们的Spring Boot的一个application这样的一个注解那么我们本身希望把我们这个服务呢
+[00:56] 注册到我们的Unicore服务的中心里边所以在我们的Unicore的在我们整个工程的application这样的一个样本文件里边我们添加了我们的Unicore的服务注册中心的地址那么这个地址的配置呢就是我们前面也给大家介绍过那么我们主要现在来给大家讲一讲我们的这个配置文件那么这个因为我们当前的Spinbot应用那么我们
+[01:23] 需要有一个application的yaml文件或者application.property文件那么yaml文件呢它实际上它的组织结构看起来比较舒服一点如果是property文件的话应该就是类似于server.Tomcat.url-encoding等于utf-8但是如果我们针对于我们的这个yaml文件的话它就是变成这样的一个结构那首先我们看一看我们整个服务这个服务来讲的话我们把
+[01:52] 我们配置的是我们的一个我们的整个工程它的一个URL地址也就是说我们当前的这个服务它向外开放的一个服务的地址是斜杠的一个code那第二个来讲的话是我们当前的这个工程它的一个名字这个名字叫code-user而这个名字呢是在我们服务处的中心里边能够体现出来的也就是说我们从网有某一个接口的话我们从网页的方式来访问的时候它的
+[02:21] 前面是一个斜杠U的那么在服务处的中心里边我们看到它的其实是一个code杠U的当然我们两者我们在我们的整个Solverlet的也就是说我们的URL链接地址的时候我们也可以把它改成我们code杠U的另外一部分是我们要对Mapetis的一个配置我们在Mapetis Plus里边配置里边在这个地方Mapper-location
+[02:47] 那么这个指的是我们Mapleis里边的相应的一些XML文件比如说我们的道层的一个XML文件那么默认的情况下其实是我们没如果只是增删改查的情况我们是不需要的那么我们有其他的服务的时候我们可以添加一个添加相应的这个XML那么这个名字呢和我们道层的名字其实是相同的那么另外一个地方需要大家
+[03:15] 注意一点的是我们在MapleX Plus里边我们需要扫描的实体的对象实体的包路径那么这个实体包路径呢我们本身我们user这个系统服务它的包呢放在我们的common工程里边比如说就在我们的common的com.idkma.com.com下面的一个user这个包里边的entity所以呢我们扫描
+[03:45] 实体的时候我们把所有的entity实体就是entity包路径下的所有的实体全部都扫描一遍那么当然我们在这我们也可以直接改成了叫user对吧我们也可以改成user另外一个需要大家注意的是我们对于 db-config这个配置的使用那么db-config是做什么呢我们有一个是id的type id的类型
+[04:15] 如果是说我们这个ID类型是Auto大写的Auto的话那么就是数据库的一个主件的其实是ID自增的如果是Input的话是我们自己的程序里边自动生成的一个ID那么这个ID如果是ID WorkerID下汇源Worker那么这个ID的话就是一个全局唯一的一个数字类型的一个ID那么当然了这个地方也可以改成叫UOID
+[04:42] 如果是UUID的话就是我们Java的UUID生成的这个UUID那另外一个是说我们的这个column-underline这个呢如果设置为初的话那指的是我们对于一些表明的表的一个设置它是驼峰下的一个下划线转换我们要把它进行转换一下比如我们的实体类我们可以看一下我们这个实体类这个实体类
+[05:12] 这个实体类的话它对应的是user entity这个实体那么它对应的包呢其实表的名字呢叫sys下划线user那就是我们的就是我们的这个表那么sys下划线user的话我们刚才给大家看到的我们的这个application里边配置了它设置为true那么我们就把我们的实体对象
+[05:41] 一个是刚才我们表里边的另外一个就是我们实体对象的假设我们实体对象有一个use大写的ID这是本身是一个驼峰的一个写法对吧我们驼峰写法的话是use-id那么我们在表里边的话它其实就变成了一个use下划线ID全小写的我们打开这个表里边我们看一眼对它就是这样的一个use下划线-id那么对于这个而create下划线
+[06:13] U的下滑线ID呢我们在我们的实体对象里边我们要把它改成create大写的U的大写的ID这样的话它其实就是把我们的驼峰和我们的下滑线进行了一个转换这是我们在Marketplace Plus里边大家需要注意的一点那我们另外一个是说我们的整个它选择的
+[06:43] 就是现在可用的或者说是现在激活的一个活动的一个profile文件呢我们选的是deevee这个deevee是什么意思呢就是在这儿我们本身有了一个application的yam文件那么我们还有还有其他的一些配置其他的配置包括我们一些更详细化的一些配置那么更详细化的配置比如说我们在生产环境里面是什么样子的我们在
+[07:06] 测试环境是什么样的我们在开发环境是什么样的因为大家可以看到我们刚才说的我们整个server的名字我们整个工程的名字然后呢我们的一些Mobility Plus的一些设置或者说其他的一些设置这些东西其实都是固定的对于开发环境是这样的对于测试环境是这样的对于我们生产环境也是这样的但是还有一些和环境相关的一些信息比如说我们的
+[07:34] 数据库的啊Uricard服务注册中心的一个地址数据库的一个IP地址那么对于开发环境和测试环境其实是不一样的对吧那么在这种情况下我们可以选择或者说可以有其他的一些一些这个配置文件那么这其他配置文件比如说我可以创建一个application然后下划线的一个txt.yaml文件那么在这个yaml文件里边我们就可以位置放错了
+[08:03] 我们放到放在这那么在这里面的时候我们就可以把它刚才又犯了一个错误它是一个不是一个下滑线的它是一个中间是一个纯杖的那么也就是说我们现在有两个两个配置固件一个叫dev的一个叫test的那么我们可以把我们的整个的跑过来跑过来变成一个dev的变成一个test的而test的Unicore服务助纸中心我们可以设置成一个别的一个路径
+[08:36] 比如说这个里面就是test.uric.idheima.com然后uric那么我们的配置我们的数据库也可以连接其他的配置信息我们不同的IP地址不同的数据库不同的名字用户名密码这是我们针对于测试环境的但是我们在程序启动的时候它选的是怎么选的它就是根据我们这个spring-profiles的active的那么如果选择第一位的话
+[09:06] 那么它实际上会把avgation-dev的yaml文件给加载进来但是如果我在这里边要输入一个test的话那它就会把第二个文件给它加载进来了这个时候其实就是我们可以我们动态的来把我们的不同的这个配置文件给加载进来它是起了这么一个一个作用我们再恢复过来刚才我们在test文件里边这个输入的其实是随便输入的一个给大家演示一下如何来
+[09:34] 进行一个处理的一个过程那么我们看一看我们的代码我们根据刚才我们讲的我们的整个代码结构呢是由Controller调用Service层然后再调用我们的实体层和道层那么实体层和道层大家可以我们提前的话我们在我们的这个common这个工程里边添加进来了这个道层的话比如说这个道层它其实就和和我们的实体层是相应的是对应的那么这个实体层呢
+[10:03] 就是C4 user entity它呢对应的是我们的C4下滑线user这张表里面的实体那么里边每一个字段呢就和我们表里面的每个字段是一样的那在我们进行了建好了我们的实体层建好了我们的道层之后下一步的话我们就创建我们的这个Controller层那么Controller的话是我们需要定义一个类那么这个类呢
+[10:31] 我们需要添加注解而这个注解就是rest Controller那么表明它是一个Controller的一个API那么我们需要给这个API呢创建一个添加一个注解叫rest mapping也就是说它是变成了sys-user这个是指的是我们当前这里边的服务的服务的一个地址那么比如说这个login那实际的一个地址就是sys-user-login
+[11:01] 这样的话是这个API它的一个地址但是呢它还不太完全为什么说不太完全呢因为我们在application里边给我们当前的这个整个项目又添加了一个路径那么这个路径就是code所以说针对于刚才我们看到的这个登录的这个API那么它的完整的地址就是我们的IPIP比如说http然后IP
+[11:33] 然后呢我们的端口然后再加上我们的什么呢code这个code就是我们在application的样本文件里面添加的然后就是我们的this-user-login所以它的一个API那么是包含了这么几部分一部分是IP和端口一部分是工程的一个名字工程的一个server来的context就是说我们整个的这个地址
+[12:07] 那么另外一个就是我们在这个类前面加的这块的一个地址那么最后一部分就是我们登录的啊我们API的这个这个地址因为我们在这里边我们还可以添加其他的对不对比如说像在像在我们这个类里边我们有一个login我们有一个logout那针对于他来讲的话其实他的这个地址就变成了一个什么呢就变成了我们的loginlog变成了我们这个在这个地方写logout对吧那前面部分其实是一样的但是后半部分是不一样的
+[12:37] 对吧我们来看一看我们的loginlogin的话是我们用户进行登录的它是传递过来我们用户名和密码那么它传递的参数呢其实就是我们的一个有一个定义的一个类叫sysloginform那么sysloginform呢也在我们实体层里边那么这个实体层里边它其实包含了用户名密码然后后边的这两个字段其实是没有用的没有用到的一个字段我们其实把它删除掉其实也是OK的那电外一部分的话是
+[13:07] 我们当前传递过来的我们是用什么方式来传递的POST记不记得我们刚开始给大家介绍我们的这个前后端分离开发规范时候我们介绍RESTful的一个API那么RESTful API里边它其实有一个POST方法那么我们是用POST提交的还是使用GET提交的那么在我们的这个工程里边或者在我们Spring Boot这样的应用里边它可以有POST,AddPostMapping或者是AddGetMapping
+[13:37] 比如说我们也可以当然这我只是做了一个举例子我们在这其实可以做用at get mapping那么它提交过来的其实就是一个get的方法对吧那么我们看代码程序题里边那么它在进行提交过来之后呢提交过来的是参数这个参数是一个是一个类似于这种body或者说类似于组装过来的一个数据结构那么这个数据结构实际上是个json的字符串
+[14:04] 我们拿到这个阶层字符trag之后呢我们要根据我们的有一个sysuser Service也就是说我们在我们的这个Service层在我们Service层来调用有Controller层调用Service层了那么此时的这个sysuser Service呢就是我们添加了一个注解那么这个注解呢就是我们的这个Service层Service层它提供了一个query user name
+[14:33] 那么我们看一看我们这个Service层里边的啊我们在这个地方有个serviceservice有一个sysuser那然后这个sysuser里边其实呃sysuser Service这里边有一个我们根据用户名查询我们系统用户的一个一个方法而这个方法有一个具体这是实际上是一个接口嘛那么接口就有一个具体的实现而这个具体实现的话我们先定义了一个at Service因为我们在这儿定义了
+[15:00] 添加了我们的一个at Service所以我们在Controller里边在这里边我们可以添加一个注解而这个注解就能够把当前的这个Service给它引入进来也就是说当我们的因为我们添加了一个at Service之后当我们整个spin boot启动的时候当前的这个实体bin或者说这个java的一个bin那么就已经注入到了我们的容器里边了那么我们在我们的其他的Controller层就可以直接来使用它了我们不需要
+[15:31] 去new一个Service对吧而我们在Service实现的时候它实现了什么它用的是mybusinessplus里边的一个base Mapper那么base Mapper的有一个query by username这个地方是怎么实现的这个地方实际上是我们在我们的resource Mapper里边我们有一个sys user dot这样的一个xml文件而这个xml文件我们在这里边添加我们的一个circle语句
+[16:00] 而这个色数语句比如说大家需要注意的一点是第一我们这个ID这是一个select对吧select ID是什么ID是我们在我们的sysuser Service里边添加的这个方法的名字它俩要保持一致也就是说我们到层的就是到的这个Xmlsysuser到.xml文件里边的这个地方的这个ID就是我们Service里边的
+[16:31] 这个方法的名字那第二个需要注意的是我们有个返回类型对吧我们返回类型我们根据这个我们返回是个什么东西呢我们返回的是一个实体对象而这个实体对象就叫做this user entity那么我们在Service里边也是要返回this user entity这是我们的整个的一个用Mobility Plus来实现的我们查询根据我们参数来查询的这是我们在这个地方
+[16:57] 给大家做了一个讲解希望大家能够理解我们从Controller层要调用我们Service层而Service层要访问我们的因为通过我们的MapleTestPlus来访问我们的数据库进行查询而进行查询的时候它我们定义的只需要定义一个道层的一个XML那么这个道的XML的话我们的ID就和我们的Service的ID是一样的我们的返回值就是和我们的这个方法里边就是接口的方法里边的这个返回值是一样的
+[17:26] 这是我们根据
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示一个基于 Spring Boot 的用户登录模块的代码实现，包括项目结构、配置文件、数据库连接、Controller、Service 和 Dao 层的代码编写。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示项目结构图，包含 cold-ui、cold-user、cold-common 三个模块，以及 Spring Boot 容器内 Controller、Service、ServiceImpl、Dao、Entity、Result、PageUtils、TokenGenerator 等组件的调用关系。
+画面2：展示 application.yml 配置文件，包含 server、spring、mybatis-plus、db-config 等配置项。
+画面3：展示 mybatis-plus 的配置，包括 Mapper-scan、typeAliasesPackage、global-config、db-config 等。
+画面4：展示数据库管理工具，连接到 cold-user 数据库，显示表结构。
+画面5：展示 application.yml 中的 db-config 配置，包括数据库类型、id-type、field-strategy、column-underline、logic-delete-value、logic-not-delete-value、banner 等。
+画面6：展示 application.yml 中的 mybatis-plus 配置，包括 map-underscore-to-camel-case、cache-enabled、call-setters-on-nulls、jdbc-type-for-null 等。
+画面7：展示在 IDEA 中将 application-test.yml 移动到 resources/Mapper 目录下的操作。
+画面8：展示 application-dev.yml 中的 datasource 配置，包括 driver-class-name、url、username、password、initial-size、max-active、min-idle、max-wait、pool-prepared-statements、max-pool-prepared-statement-per-connection-size、time-between-eviction-runs-millis 等。
+画面9：再次展示项目结构图，强调 Controller 层。
+画面10：展示 SysLoginController.java 中的 @RestController、@RequestMapping、@Autowired、@PostMapping 等注解和登录逻辑。
+画面11：展示 SysLoginController.java 中的登录逻辑，包括判断用户是否存在、密码是否正确、生成 token 并返回。
+画面12：展示 SysLoginController.java 中的 @PostMapping 注解和方法签名。
+画面13：展示 SysUserServiceImpl.java 中的 Service 实现，包括查询用户的方法。
+画面14：展示 SysUserService.java 接口，定义了根据用户名查询用户的方法。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面2：
+server:
+  Tomcat:
+    uri-encoding: UTF-8
+    max-threads: 100
+    min-spare-threads: 30
+    connection-timeout: 1000ms
+  servlet:
+    context-path: /cold
+
+spring:
+  application:
+    name: cold-user
+    # 开发环境
+    profiles:
+      active: dev
+    # jackson 日期格式化
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 100MB
+
+画面3：
+mybatis-plus:
+  Mapper-locations: classpath*/Mapper/*.xml
+  typeAliasesPackage: com.ithema.cold.common.%entity
+  global-config:
+    db-config:
+      # 数据库类型
+      db-type: MYSQL
+      # id生成策略
+      id-type: INPUT
+      # 字段策略
+      field-strategy: NOT_NULL
+      # 是否开启下划线转驼峰
+      column-underline: true
+      # 逻辑删除值
+      logic-delete-value: -1
+      # 逻辑不删除值
+      logic-not-delete-value: 0
+      # banner
+      banner: false
+
+画面5：
+db-config:
+  # 数据库类型
+  db-type: MYSQL
+  # id生成策略
+  id-type: INPUT
+  # 字段策略
+  field-strategy: NOT_NULL
+  # 是否开启下划线转驼峰
+  column-underline: true
+  # 逻辑删除值
+  logic-delete-value: -1
+  # 逻辑不删除值
+  logic-not-delete-value: 0
+  # banner
+  banner: false
+
+画面6：
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: "null"
+
+画面8：
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://172.17.0.143:3306/cold-user?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+      username: cold
+      password: cold123
+      initial-size: 10
+      max-active: 100
+      min-idle: 50
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 300000
+
+画面10：
+@RestController
+@RequestMapping("/sys/user")
+public class SysLoginController {
+  @Autowired
+  private SysUserServiceImpl sysUserService;
+  @Autowired
+  private SysUserTokenService sysUserTokenService;
+
+  /**
+   * 登录 http://ip:端口/cold/sys/user/login
+   */
+  @PostMapping("/login")
+  public Map<String, Object> login(@RequestBody SysLoginForm form) throws IOException {
+    //用户信息
+    SysUserEntity user = sysUserService.queryByUserName(form.getUsername());
+    //密码不正确，返回错误
+    if(user == null || !user.getPassword().equals(SHA256Hash.formPassword(form.getPassword(), user.getSalt()).toHex())) {
+      return Result.error("帐号或密码不正确");
+    }
+    //生成token，并存入数据库
+    Result = sysUserTokenService.createToken(user.getUserId());
+    return Result;
+  }
+}
+
+画面13：
+@Service("sysUserService")
+public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
+
+  @Override
+  public SysUserEntity queryByUserName(String username) {
+    return baseMapper.queryByUserName(username);
+  }
+}
+
+画面14：
+public interface SysUserService extends IService<SysUserEntity> {
+  /**
+   * 根据用户名，查询用户
+   */
+  SysUserEntity queryByUserName(String username);
+}
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面1：PPT 标题为“5.2 代码实现”，子标题“5.2.1 代码结构”。架构图显示：cold-ui 指向 cold-user；cold-user 内部包含 Spring Boot 容器，容器内 Controller 指向 Service，Service 指向 ServiceImpl；cold-user 指向 cold-common；cold-common 内部包含 Dao 指向 Entity，Entity 指向 Result、PageUtils、TokenGenerator。
+画面9：PPT 标题为“5.2.2 登录接口”，子标题“1. Controller”。架构图与画面1相同。
+画面10：无 PPT 标题，但显示了 SysLoginController 类的代码。
+画面11：无 PPT 标题，但显示了 SysLoginController 类的代码。
+画面12：无 PPT 标题，但显示了 SysLoginController 类的代码。
+画面13：无 PPT 标题，但显示了 SysUserServiceImpl 类的代码。
+画面14：无 PPT 标题，但显示了 SysUserService 接口的代码。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

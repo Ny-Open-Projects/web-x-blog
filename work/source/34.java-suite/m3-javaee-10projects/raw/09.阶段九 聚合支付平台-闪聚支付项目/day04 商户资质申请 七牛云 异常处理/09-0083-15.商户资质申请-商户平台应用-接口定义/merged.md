@@ -1,0 +1,282 @@
+# 15.商户资质申请-商户平台应用-接口定义
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day04 商户资质申请 七牛云 异常处理
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day04 商户资质申请 七牛云 异常处理\15.商户资质申请-商户平台应用-接口定义【海量资源尽在 666java.com】.mp4
+- 时长 5分28秒（音频 328s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好 下面呢我们来实现商户平台应用自制申请的接口根据交互图那么刚才我们完成的是不是就是接口二部分好 那下面呢我们要做接口三接口三呢就是商户平台应用对前端提供一个http的接口供前端来请求然后呢这个接口呢接到数据之后呢会调用接口二然后呢调用我们的double服务最后将商户信息呢保存到我们的商户表这是整个流程好了 那下面我们就开始来写了
+[00:30] 那这个是商户平台应用的接口所以我们现在应该转到商户平台应用工程也就是这个application这个工程好那么在这个工程当中呢打开Controller也就是在这儿我要定义一个什么一个接口这个接口刚才说的很清楚是什么呀叫做资质申请好那么我们打开讲义啊因为这里边要定http接口我们要知道这个url以及这个http的方法所以这个
+[00:58] 你直接从讲义上拷贝不要来回改为什么因为前端前端工程不需要我们开发所以前端工程呢已经跟这个地址做交互了所以你要改了之后呢后边我们进行前五端联调他会报错有问题好这定好了之后下面我们就分析吧现在我们分析什么呢就是这个接口他要接收什么数据啊什么数据是不是自治申请啊他是不是要接收这么多数据对
+[01:25] 那介绍这么多数据其实这些数据基本上还是我们说商户信息表当中的数据对不对商户信息表当中的数据其实刚才我们在商户服务里边我们用到了一个DTO还有印象吧这DTO其实有很多的字段你看是不是都和这个表单上能够对应起来对不对但是DTO当中你要知道它有一个什么ID
+[01:48] 对吧因为我们之前说过这个DTO可能作为更新的对象所以呢这个DTO呢在Service当中呢它是一个比较比较全的这么一个什么类型但是如果对于前后端分离开发那么我就建议你啊特别是对于这一种什么特别是对于这一种比较字段多的这种类型并且里边有略微的调整你比如说商户资质申请它是不可能传这个审核状态的对不对也不可能传出户ID的是不是所以我就建议你啊
+[02:18] 来定义一个什么一个VO我之前是不是说过但是我说了嘛如果说你这个DTO的字段正好和这个什么和这个表单的数据对应上那你就直接用DTO但是现在呢我建议你用这个什么VO因为里面有好几个字段是对不上的好那下面呢我们就到商户平台应用这里面在VO这边我们新建一个什么VO这个VO是不是就是我们说的什么
+[02:46] 叫做资质申请的一个信息好那么这个整个VU的编写啊我就不再去手工敲了大家这些代码都认识特别是这些字段要知道和我们什么表单上是一一对应的所以我就直接复制了好那么我们把它复制进去之后呢各位现在这个VU这个类型是不是就是我们Controller要写的这个
+[03:16] 资质申请的接口参数的类型啊所以这里边呢我们就可以来看一下啊那这个接口呢我们这里边就可以直接来把这个类型的数据作为我们的什么接口的参数行吧好那这个就是我们刚才定义的叫做什么叫做Marchint DTOVO对吧好了那么当然
+[03:42] 现在呢你将来要暴露SWAG文档给开发人员看对吧所以这里边呢我们还得有一个SWAG文档那这个定义的过程呢我又不再去敲了因为我前面已经写过很多次了所以这个这个方法你要知道啊方法你看这个内幕要和它保持一致看见吧好这是一个说明这里边有几个点就是required必填还有一个这个类型对吧数据类型它俩一致还有
+[04:10] Parameter type将来这个是通过什么body的方式以json数据传进来所以这里面呢我们还要写一个东西啊叫传入数据转换成json这里面是不是就有一个quest body啊好到这儿呢这个接口是不是就定义好了呀好了那么这个接口定义好了之后呢接下来我们要思考一个事啊那么这里面要怎么写各位要怎么写
+[04:36] 有时候老师那不简单吗你不就定调用刚才我们写的那个叫什么呀Marchint Service里边有一个刚才是叫Oplay Marchint这是不是就是我们说的什么申请什么自制申请嘛你传的商货ID这是自制申请信息对不对所以这里边呢他要传俩参数嘛好看见了吗那现在呢问题就来了呀问题是啥
+[05:06] 你看你怎么样把这两个参数传进来呢这是不是我们的问题啊首先要解决这个商户ID啊对这商户ID你怎么传进来哎大家思考一下哎大家思考一下好我们的这个接口定义部分呢先到这你呢也思考一下好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲商户平台应用资质申请的接口定义、实现及前端表单交互流程。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：讲解接口定义，展示在MerchantService中定义的applyMerchant接口代码。
+画面2：展示商户平台资质申请的前端表单，包含企业信息、行业类型、证件上传等字段。
+画面3：展示商户平台资质申请表单的“联系人信息”部分，包括联系人、电话、地址等输入框。
+画面4：展示MerchantDTO类的代码，包含联系人姓名、手机号、地址、审核状态、用户ID等字段。
+画面5：在IDE中高亮显示MerchantDTO类中的“审核状态”字段。
+画面6：展示商户平台资质申请表单的“行业类型”下拉框，选中“教育/昆山教育/IT教育”。
+画面7：讲解根据原型编写商户资质申请VO：MerchantDetailVO，并展示其类定义的开头部分。
+画面8：展示MerchantDetailVO类中定义的字段，包括企业地址、行业类型、营业执照、身份证正反面、联系人、联系人地址等。
+画面9：讲解在MerchantController中定义saveMerchant接口，展示其方法签名和@ApiImplicitParam注解。
+画面10：在IDE中展示MerchantController的代码，包含saveMerchant方法和测试方法。
+画面11：在IDE中展示MerchantController的代码，包含saveMerchant方法和测试方法，光标在“@ApiImplicitParam”注解上。
+画面12：在IDE中展示文件上传的代码，包含生成文件名、文件后缀、文件名等逻辑。
+画面13：在IDE中展示MerchantController的代码，包含saveMerchant方法调用merchantService.applyMerchant()。
+画面14：在IDE中展示MerchantController的代码，包含saveMerchant方法调用merchantService.applyMerchant()，光标在方法调用处。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面1：
+```java
+/**
+ * 资质申请
+ * @param merchantId 商户id
+ * @param merchantDTO 资质申请信息
+ * @throws BusinessException
+ */
+public void applyMerchant(Long merchantId,MerchantDTO merchantDTO) throws BusinessException;
+```
+
+画面4：
+```java
+@ApiModelProperty(value = "联系人姓名")
+private String username;
+
+@ApiModelProperty(value = "联系人手机号(关联统一账号)")
+private String mobile;
+
+@ApiModelProperty(value = "联系人地址")
+private String contactsAddress;
+
+@ApiModelProperty(value = "审核状态 0-未申请,1-已申请待审核,2-审核通过,3-审核拒绝")
+private String auditStatus;
+
+@ApiModelProperty(value = "商户ID,关联统一用户")
+private Long tenantId;
+```
+
+画面7：
+```java
+package com.shanjupay.merchant.vo;
+
+import io.Swagger.annotations.ApiModel;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger.annotations.ApiModelProperty;
+import io.Swagger
+

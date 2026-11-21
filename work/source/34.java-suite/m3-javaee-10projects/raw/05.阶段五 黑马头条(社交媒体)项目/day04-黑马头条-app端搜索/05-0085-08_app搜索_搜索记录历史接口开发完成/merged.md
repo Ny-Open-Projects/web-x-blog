@@ -1,0 +1,259 @@
+# 08_app搜索_搜索记录历史接口开发完成
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day04-黑马头条-app端搜索
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day04-黑马头条-app端搜索\08_app搜索_搜索记录历史接口开发完成【海量资源尽在 666java.com】.mp4
+- 时长 18分49秒（音频 1130s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们就来去开吧啊首先呢咱们来看一下第一个接口啊是查询搜索记录接口搜索记录其实就是说你搜索完之后呢它是需要去记录一下的啊那这个呢咱们先去查啊先去查咱们可以先去看一下当前这个接口的定义啊第一个呢就是说咱们这有一个接口名称就是它这是它那个URL是吧然后这DTO
+[00:26] DTO的话就是说你从前台需要传递过来什么参数那你大家认为需要前台传递到后台什么参数呢一般查的时候是不是说某一个人的这种搜索记录啊对肯定是啥呢肯定是咱们之前说过的一个叫什么叫什么设备ID是吧因为设备ID是不是能查出来行为实体行为实体就能确定你到底是个设备还是一个用户是不是可以啊可以啊
+[00:53] 最终咱们要返回的其实就是response里边装了个列表列表里边就是当前AP user search当前这个表中的数据咱们也可以查一下这个表咱们把它关掉这个表在这叫AP user search找一找user search好这表你看这表非常简单第一个是主件第二是用户ID
+[01:22] 其实就是entry IDentry ID的话其实也可能是一个设备ID好吧当然还有搜索的词当前的状态还有创建时间这个表非常小也比较简单行那咱们下面就来去写代码写代码首先咱们还是要去写MAP这个MAP其实MAP非常简单咱们只需要去查询根据当前的什么设备ID根据当前的设备ID去查询这个列表就可以
+[01:51] 设备地区产品那边有某一个用户下面有可能会有多个搜索记录对吧行这个Maple咱们还是直接考一下用这个这个因为咱们主要是写业务来考哪啊考到是不是当前的model下面有一个叫什么打开当前的Maple然后是APP还是这个考一下考完之后你可以看一下把这个包倒一下没错
+[02:24] 你可以看一下就是slack的byentryid这里边就有两个一个是当前的entryid这还有参数叫是limit其实咱们要去查询出来多少条查询出来多少条那这条的话咱们也可以去做线准你也可以去传也可以去传比如说咱们查询二条十条都可以那行那这个设完之后咱们还要再去创建映射文件来打开当前的mypress然后是拷贝一个
+[02:54] 哎呀呢这个叫什么user search是吧跟上面一样啊user search好那这样就完了啊之后呢可以把内容给他删了然后呢然后在这去也要改一改啊叫apuser search map好咱们把这个配置文件也考一下啊就是当前有一个reduce map啊有一个circle的片段还有一个select
+[03:30] 我来看一看吧这个映射文件咱们之前就说了映射的配置就之前就说过然后下面是一个搜索编段就是你当前表录的某一个字段是吧然后是slack的by entry id那这个呢其实咱们最终要的一个效果就是当前的一个查询的方法它就是根据当前entry id去查询并且状态是1的状态统一都是1才能用1是有效的然后下面还有一个就是corrida time其实无所谓这是排序然后最终是limit
+[04:00] Limit咱们要去干嘛呢要去查询多少条出来好吧行啊那这个咱们就创建完了啊创建完之后呢咱们最终呢就可以去写当前的业务代码那这业务代码怎么写呢业务代码首先呢咱们是要在Article在Article这一块啊去做啊在这啊首先呢你可以在这去创建一个Service你看啊这里边是不是要创建Service啊好在这去创建一个Service这是一个接口
+[04:31] 叫什么呢叫AP article最终咱们的结果都是去搜索什么呢搜索当前的文章search serviceAP article search Service没问题啊最终咱们这里有个方法方法就是查询历史记录统一都返回response result是吧response result然后咱们这个叫find user search
+[05:10] 参数是啥呢参数的话刚才没看了参数其实就是前面一个什么user search DTO就是咱们在这已经说好的这里面需要去传一个设备ID过来就这user search DTO这个就是这就是啥呢发寻搜索历史
+[05:39] 那这个啊咱们就算定义完了定义完之后呢咱们在这就可以去写下当前的实现类这个实现类我考虑一下太长了然后是impl然后是让他去实现刚才定义的接口impliment是吧aprt codeservice就他在这加一个Service这里边该怎么去写呢想一下该怎么去写呢其实咱们可以上来直接查
+[06:21] 那查完之后是不是这边有条件呢这里边是不是有条件什么条件N除以ID那你现在有N除以ID吗是不是没有N除以ID是吧所以说啊在这啊干嘛呢先获取实体行为实体ID然后再干嘛呢然后再去查询什么呢去查询当前的搜索因为呢条件就是当前的行为实体的ID
+[06:52] 那这个行为实体怎么拿呢行为实体的话咱们之前其实已经做过很多次了咱们专门可以去抽出来一个方法去做好吧上边啊那方法呢其实我可以去我可以考过来啊这个方法咱们之前已经写过最少有800遍了其实都一样都是拿到当前的一个entry拿到当前的行为实体考过来之后咱们再说一说
+[07:22] 这里边需要去注入一个啊我们先注入注入完之后大家这个代码应该很容易看懂啊稍等啊privit然后是ap behavior entry Mapper做完之后呢你可以看一下这个方法有问题那这个呢咱们可以去看一下在这去先加这东西吧sale per warning省得爆错好来看一下啊这个方法啊就是说我这有一个dto有个dto然后呢我通过
+[08:02] 当前的设备ID去查当然这两个都不能为空咱们之前也讲过很多次了这个代码咱们已经写过很多次了然后最终是都没有事我就可以通过当前运用户或者设备ID去拿到什么呢拿到当前的行为实体最终咱们把当前行为实体放到当前这个什么responseok里面就可以了如果说你要想去获取的话你干嘛呢你直接去调用当前这个方法就可以
+[08:30] 直接调用这个方法就可以啊你传啥呢传的是就是UserSearchDTO那就很容易了是吧那就很容易了啊那咱们就写一写啊首先呢咱们先不判断这个东西首先咱们还要去判断其他的条件这里边啊还有一个除了当前那个EntryD还有什么条件呢其实还有一个就是当前的什么看这是不是有个Limit呀是吧这个Limit也就是说这个Limit咱们最好是做一下判断比如说
+[08:59] 然后呢是dto.getPageSize其实就是它PageSize啊如果说它大于50不让它大于50好吧或者是啥呢或者是dto.getPageSize小于1小于1也不行吧小于1也可以啊但是小于1的话这个参数肯定是不对的参数肯定是不对的
+[09:29] 所以说咱们在这儿赌来去小于0吧好吧小于0啊然后呢咱们在这儿就可以说他干嘛呢说你这个啊参数有问题啊response without errorok那这时候咱们就可以设立一个aapph就是参数有问题可以了下面呢咱们就可以获取当前的行为实体ID了我们这个行为实体ID就是getInjuryID那个就是参数就是
+[10:03] 反回一个 response result然后这个 response result 呢其实咱们叫 result 啊我们可以判断一下判断啥呢其实要是正常返回 ok 的话呢咱们这里边其实还有一个值还有一个值啊它里边会返回一个啊一个是 success success所以说咱们在这儿啊就可以判断判断啥呢就是说 resultgetcodegetcode 啊这等于谁呢等于
+[10:33] HTTP叫什么?
+[10:34] 一个叫做success.su.r.code如果说它不等于它的话其实等于不对如果说它不等于它的话咱们干嘛呢返回,返回啥呢?
+[10:47] 直接return当前的regal就可以了因为这个regal就是有可能错了因为它没走到这一步的话它有可能会走到这一步这一步可能就是错误那错误的话咱们直接去
+[11:04] 返回当前这个response without就完事了好吧行如果说这都没事的话那咱们现在就可以去查询了啊查询的话首先呢你在这去注入当前一个MAP哪个MAP哪个MAPPRAVIS是不是刚刚写那个APU searchMAP注入进来注入进来之后呢咱们在这去拷贝一下Rslack的introid
+[11:33] 这个参数的话刚才说了这个参数第一个是result什么getData它这个Data里边装的是啥呢装的就是int.id好吧然后第二个参数呢就是BTO中的什么setPageS这个是list吧好吧这好像有问题是吧说它是一个integer那咱们就在这简单去处理一下好吧
+[12:08] 对呃强转下得了好吧是个int嗯是哪了等一下啊没问题啊然后最终的咱们就可以返回了叫responseresult.opresult然后把例子装进去那这个咱们就算是Service啊咱们就算是设置完了啊那设置完之后啊咱们接着往下写下面该写哪了下面是不是该写咱们的什么咱们的API接口了是吧所以说啊咱们在这啊
+[12:43] 打开当前的这个东西在哪去写呢咱们可以呢还是在当前的articlearticle里我们去写article这个啊在这啊再去创建一个类这个类呢就是当前的什么叫article然后searchsearch啊controllerATI是一个介绍然后呢怎么写呢这个还是去查询当前的什么是吧response
+[13:19] Respose 写造然后这里边是叫什么Find User Search传输参数就是User SearchUser Search完了啊用的这个其实咱们在这再去写个注释也行查询查询搜索搜索搜索历史
+[13:54] 行那下面呢咱们就来去创建当前对应的还是在article里边啊在这打开右键创建一个类这个类就是article searchcontroller把API删掉啊点OK让他去实现当前的接口out加回车control i完了一会儿在这去加东西啊叫什么requestcontroller然后是requestmyping
+[14:23] 这个该怎么写呢其实你可以去看一下当前的这首定义或者说你看下代码也行最好是跟老师保持一致因为前台代码这东西你不能随便定义好吧这往下走往下走好就这东西他们好玩再说这个其实你看API varticle这是下面article下面又去定义了一个叫什么search这是search
+[14:55] 然后呢你可以在你具体的方法中再去其他的比如说我这是叫load search history就是呃加载搜索历史是吧什么post同一堆post啊然后前面加杠啊老师打高嗯加起来也没事啊那这个加完之后啊你在这就可以用Service Service就比较简单了直接注入就可以了呗privateap article search
+[15:29] Service好然后在这去加上它然后在这调用就完事了啊改而bind然后dpu传进去完事好吧那这样就完了啊但这里边还要少东西是吧因为咱们一般都是pulse请求所以说你在这去加一个request body好了啊加完之后啊咱们就来可以去测试一下啊那个测试的话呢还是按照之前的方式去测就是通过谁呢通过一个mokemvc去测试啊
+[15:59] 你在这再去创建一个类这个类其实就是谁就是当前的什么不是这个Controller是吧不是Controller怎么叫article searchcontrollertest好吧行ok这个环境的话写一下也行叫superion boot test然后是run with是吧那别写了好吧写了因为这个比较简单那这样咱们就从笔记中考过来省得是浪费时间
+[16:37] 然后呢这个前面这些东西咱们要考过来这在在在板咱们写的太多了要不然就这样没时间了好下面再往下看没有技术含量然后把这个测试我也考过来在板比较固定每次写一遍可能也没有啥太大意思不要找一下好了那简单说一下你看还是用MocMEC去发请求发这个Post请求然后这个地址你千万千万别写错地址千万不要写错地址应该给你的
+[17:15] 当前Controller一定要对应上一定要对应上然后呢然后就是你要传什么值传值的话目前我传两个因为咱们现在有两个猜测第一个猜测就是当前的什么设备ID第二个就是你要查询多少条记录对吧最终咱们可以看一下当前这个表叫user search这表呢其实有很多数据当然这个状态这个什么设备ID为一的其实有那么多咱们可以查一下看看最终把数据给展
+[17:42] 给返回去就可以了啊行咱们来去执行一下走看看有没有什么问题哦那这块运行完了来看一看啊看看能不能找到咱们的数据嗯往下走往下走往下走往下走好来了啊稍等你看最终是操作成功你看你的数据是不是也拿到了是吧没问题啊最终咱们的数据就算是正常给拿到了啊这个我看看啊稍等啊第一咱们去检查一下一下啊比如说
+[18:20] 训练是吧还有啥呢还有一个是黑马程序员对吧还有一个黑马程序员啊咱们可以看一下啊看有没有是吧你看这啊一这是一黑马程序员一个黑马程序员然后一个是训练这两个是一所以说咱们就是有的啊行那这个数据咱们就说到这啊
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲：实现一个根据用户ID和设备ID查询用户搜索历史的后端功能，包括数据库表结构、Mapper接口定义、XML映射文件、Service层实现、Controller层接口以及单元测试。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示数据库表 ap_hot_words 的数据，其中一条记录的 created_time 为 2019-09-20 06:46:18，底部显示 SQL 更新语句 UPDATE ap_hot_words SET created_time='2019-09-20 06:46:18' WHERE (id=7)。
+画面2：在 IntelliJ IDEA 中展示 ApUserSearchMapper 接口，定义了 selectById 方法，参数为 @Param("entryId") Integer entryId 和 @Param("limit") int limit。
+画面3：在 IntelliJ IDEA 中展示 ApUserSearchMapper.xml 文件，其中包含 resultMap 和 sql 标签，定义了 Base_Column_List 和 selectById 查询语句。
+画面4：在 Typora 中展示文档，内容为 4.1.4 代码思路分析和 4.1.5 代码实现，其中提到创建接口 ApArticleSearchService。
+画面5：在 Typora 中展示文档，内容为 4.1.5 代码实现，其中提到创建类 ApUserSearch 和接口 ApUserSearchMapper。
+画面6：在 IntelliJ IDEA 中展示 ApArticleSearchServiceImpl.java 文件，其中包含 getEntryId 方法和 findUserSearch 方法的实现。
+画面7：在 IntelliJ IDEA 中展示 ApArticleSearchServiceImpl.java 文件，其中包含 findUserSearch 方法的实现，调用 apBehaviorEntryMapper.selectByUserDeviceId。
+画面8：在 IntelliJ IDEA 中展示 ApArticleSearchServiceImpl.java 文件，其中包含 findUserSearch 方法的实现，调用 apBehaviorEntryMapper.selectByUserDeviceId。
+画面9：在 IntelliJ IDEA 中展示 ApArticleSearchServiceImpl.java 文件，其中包含 findUserSearch 方法的实现，调用 apBehaviorEntryMapper.selectByUserDeviceId。
+画面10：在 IntelliJ IDEA 中展示 ArticleSearchControllerApi 接口，其中定义了 findUserSearch 方法。
+画面11：在 Typora 中展示文档，内容为 4.1.6 单元测试，其中提到使用 MockMvc 进行接口测试。
+画面12：在 IntelliJ IDEA 中展示 ArticleSearchController.java 文件，其中定义了 @PostMapping("/load_search_history") 方法。
+画面13：在 IntelliJ IDEA 中展示 ArticleSearchControllerTest.java 文件，其中定义了 testLoadArticleInfo 方法，使用 MockMvc 进行测试。
+画面14：展示数据库表 ap_user_search 的数据，其中包含多条记录，底部显示 SQL 查询语句 SELECT * FROM ap_user_search LIMIT 0, 1000。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面1：
+UPDATE ap_hot_words SET created_time='2019-09-20 06:46:18' WHERE (id=7)
+
+画面2：
+public interface ApUserSearchMapper {
+    List<ApUserSearch> selectById(@Param("entryId") Integer entryId, @Param("limit") int limit);
+}
+
+画面3：
+<resultMap id="Base_Column_List" type="com.heima.model.user.pojos.ApUserSearch">
+    <id column="id" property="id" />
+    <result column="entry_id" property="entryId" />
+    <result column="keyword" property="keyword" />
+    <result column="status" property="status" />
+    <result column="created_time" property="createdTime" />
+</resultMap>
+
+<sql id="selectById" resultType="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ap_user_search
+    where entry_id = #{entryId} and status = 1
+    order by created_time desc limit #{limit}
+</sql>
+
+画面4：
+(1)ApArticleSearchService
+创建类：com.heima.article.Service.ApArticleSearchService
+定义状态的枚举类：
+
+public interface ApArticleSearchService {
+    // 新增搜索记录
+    @Param userSearchDto
+    Return
+    /
+}
+
+画面5：
+创建类 com.heima.model.user.pojos.ApUserSearch
+public class ApUserSearch {
+    private Integer id;
+    private Integer entryId;
+    private String keyword;
+    private Integer status;
+    private Date createdTime;
+}
+
+(2)ApUserSearchMapper
+创建类 com.heima.model.mappers.app.ApUserSearchMapper
+定义根据entryId查询历史记录方法：
+public interface ApUserSearchMapper {
+    // 根据entryId查询历史记录
+    @Param entryId
+    Return
+    List<ApUserSearch> selectById(@Param("entryId") Integer entryId, @Param("limit") int limit);
+}
+
+画面6：
+public ResponseResult getEntryId(UserSearchDto dto) {
+    ApUser user = AppThreadLocalUtils.getUser();
+    // 用户设备不能为空
+    if(user == null && dto.getEquipmentId() == null) {
+        return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_REQUIRE);
+    }
+    Long userId = null;
+    if(user != null) {
+        userId = user.getId();
+    }
+    ApBehaviorEntry apBehaviorEntry = apBehaviorEntryMapper.selectByUserDeviceId(userId, dto.getEquipmentId());
+    if(apBehaviorEntry == null) {
+        return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+    }
+    return ResponseResult.okResult(apBehaviorEntry.getEntryId());
+}
+
+@Override
+public ResponseResult findUserSearch(UserSearchDto dto) {
+    // 分页参数校验
+    if(dto.getPageSize() > 50 || dto.getPageSize() < 0) {
+        return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+    }
+    // 获取行为id
+    ResponseResult result = getEntryId(dto);
+    if(result.getCode() != AppHttpCodeEnum.SUCCESS.getCode()) {
+        return result;
+    }
+    // 查询搜索记录
+    return null;
+}
+
+画面7：
+if(apBehaviorEntry == null) {
+    return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+}
+return ResponseResult.okResult(apBehaviorEntry.getEntryId());
+
+@Override
+public ResponseResult findUserSearch(UserSearchDto dto) {
+    if(dto.getPageSize() > 50 || dto.getPageSize() < 0) {
+        return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+    }
+    // 获取行为id
+    ResponseResult result = getEntryId(dto);
+    if(result.getCode() != AppHttpCodeEnum.SUCCESS.getCode()) {
+        return result;
+    }
+    // 查询搜索记录
+    return null;
+}
+
+画面8：
+// 行为实体以及任务，逻辑上这里必须有值，除非参数错误
+if(apBehaviorEntry == null) {
+    return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+}
+return ResponseResult.okResult(apBehaviorEntry.getEntryId());
+
+@Override
+public ResponseResult findUserSearch(UserSearchDto dto) {
+    if(dto.getPageSize() > 50 || dto.getPageSize() < 0) {
+        return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+    }
+    // 获取行为id
+    ResponseResult result = getEntryId(dto);
+    if(result.getCode() != AppHttpCodeEnum.SUCCESS.getCode()) {
+        return result;
+    }
+    // 查询搜索记录
+    return null;
+}
+
+画面9：
+// 行为实体以及任务，逻辑上这里必须有值，除非参数错误
+if(apBehaviorEntry == null) {
+    return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+}
+return ResponseResult.okResult(apBehaviorEntry.getEntryId());
+
+@Override
+public ResponseResult findUserSearch(UserSearchDto dto) {
+    if(dto.getPageSize() > 50 || dto.getPageSize() < 0) {
+        return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+    }
+    // 获取行为id
+    ResponseResult result = getEntryId(dto);
+    if(result.getCode() != AppHttpCodeEnum.SUCCESS.getCode()) {
+        return result;
+    }
+    // 查询搜索记录
+    return null;
+}
+
+画面10：
+package com.heima.article.apis;
+import com.heima.model.common.dtos.ResponseResult;
+public interface ArticleSearchControllerApi {
+    public ResponseResult findUserSearch(@RequestBody UserSearchDto userSearchDto);
+}
+
+画面11：
+@Autowired
+private ApArticleSearchService apArticleSearchService;
+@PostMapping("/load_search_history")
+public ResponseResult findUserSearch(@RequestBody UserSearchDto userSearchDto) {
+    return apArticleSearchService.findUserSearch(userSearchDto);
+}
+
+画面12：
+@Autowired
+private ApArticleSearchService apArticleSearchService;
+@PostMapping("/load_search_history")
+public ResponseResult findUserSearch(@RequestBody UserSearchDto userSearchDto) {
+    return apArticleSearchService.findUserSearch(userSearchDto);
+}
+
+画面13：
+@Autowired
+private ApArticleSearchService apArticleSearchService;
+@PostMapping("/load_search_history")
+public ResponseResult findUserSearch(@RequestBody UserSearchDto userSearchDto) {
+    return apArticleSearchService.findUserSearch(userSearchDto);
+}
+
+画面14：
+SELECT * FROM ap_user_search LIMIT 0, 1000
+
+4) PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面4：PPT标题为“4.1.4 代码思路分析”和“4.1.5 代码实现”，内容包括代码思路分析和代码实现。
+画面11：PPT标题为“4.1.6
+

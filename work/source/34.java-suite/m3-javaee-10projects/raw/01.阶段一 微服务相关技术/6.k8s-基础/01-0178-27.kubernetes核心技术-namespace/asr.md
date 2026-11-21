@@ -1,0 +1,19 @@
+# 声音线转写：27.kubernetes核心技术-namespace
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：6.Kubernetes-基础
+- 源文件：01.阶段一 微服务相关技术\6.Kubernetes-基础\27.kubernetes核心技术-namespace_【海量资源尽在 ubkz.com】.mp4
+- 时长：3分16秒（音频 196s）
+- 转写：faster-whisper-large-v3 / 语言 zh / 8 段
+- 生成时间：2026-10-27 10:33:04
+
+## 逐段转写（教师原声）
+
+[00:00] 那下面呢我们再介绍一下Namespace那Namespace在很多情况下呢是用于实现多用户的一个资源隔离那么我们通过将集群内部的资源对象分配到不同的Namespace中啊形成这种逻辑上的一个分组注意啊它是一个逻辑上的
+[00:19] 那么便于不同的分组在共享使用整个集群的资源同时还能被分别管理那ChromeLens集群在启动时会创建一个叫做Defund的一个Namespace如果你不指定Namespace则用户创建的Pos的RC Service都将被系统创建到这个默认的Defund的Namespace下我们可以看一下properctl.getPos那我们这里面创建了一些Pos那我们
+[00:47] 可以Kuberctl dscrib我们可以看一个假设叫当前这里面有个叫myy吧那大家看一下我们当前这里边它的namespace就是一个defund那这是因为我在前期创建他们时我根本就没有指定我当前的namespace那它就呢
+[01:08] 使用了一个默认的namespace那么我们也可以去手动创建一个namespace那大家看一下这是一个我们创建namespace过程那这是一个pose我给我这个pose呢去指定了当前的namespace是devicement然后呢我们就可以去在查看它的过程中通过杠杠namespace加上我们一个devicement去查看我们当前这个命名空间下的pose那我们可以看一下
+[01:37] 这里边我已经把文件创建出来我们cat一下有个demo6我们的namespace这是我们创建了一个namespace这个名字就叫做我们的devaluant然后大家再看一个demo6我们当前有一个pod这是我通过创建一个pod来
+[02:02] 指定它的名称空间叫Devaluement那我们可以通过Kubectl get pose这个时候你在创建它的时候你是找不到我们Devaluement下的这些pode而你看到的其实是默认的那如果说我们要看这个Devaluement下面你就可以这么办name of space等于Devaluement
+[02:30] 这个时候你是能看到我当前definitment这个名称空间下的pose那好这是说我们namespace怎么去创建以及怎么查看那一定要知道我们通过namespace其实是做了一个什么逻辑上的分组那它的作用呢就是用于我们这个对资源的一个分别的管理或者说一个方便的管理那么
+[02:57] 如果我们不去在创建这些RC啊POD的时候你没有去指定它的名称空间它是一个默认的那你要去想指定呢也可以在我们在创建它时可以通过Namespace然后呢去指定你当前的一个Namespace

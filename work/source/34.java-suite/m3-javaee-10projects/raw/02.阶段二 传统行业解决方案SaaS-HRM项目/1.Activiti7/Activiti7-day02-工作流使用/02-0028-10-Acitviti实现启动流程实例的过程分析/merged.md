@@ -1,0 +1,256 @@
+# 10-Acitviti实现启动流程实例的过程分析
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：1.Activiti7/Activiti7-day02-工作流使用
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\1.Activiti7\Activiti7-day02-工作流使用\10-Acitviti实现启动流程实例的过程分析_【海量资源尽在 ubkz.com】.mp4
+- 时长 8分27秒（音频 507s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好各位同学啊刚才呢我们通过这个流程啊实例的启动呢我们在这边呢输出了一些信息啊其中刚才呢输出的这个输出的这个部署的ID它是唯空啊就说明呢它是找不到的啊那我刚才在这里边呢我又加了这样的一行代码这是来输出我们流程定义的ID啊叫做get process definition ID那这个get
+[00:27] getProcessDefaultNationID呢各位可以看到它其实输出的是有一个结果的啊而我们输出的这个ID它也是有一个结果对吧我们是叫做2201对吧然后对应的我们的activity活动的ID啊它也是空啊那这个是我们刚才输出的这个结果啊那现在呢我们就一起回到这边来啊你比如说这个holo的冒号4冒号1对吧那这个其实是我们的这个表中是
+[00:57] 去找我们的这个流程定义信息啊比如说我们去找一下啊那正好我们是不是有一个这样的Holiday,1,4是正好可以找到的那现在呢我们也一起啊去分析一下就是刚才我们在做这个流程实例的启动的时候那它背后其实它的背后影响的又是哪些表呢对吧背后影响的表啊
+[01:24] 完了我们再去对于这些表进一步分析对吧下面我们就可以一起进一步来跟踪像这些表中都是之前的这个老的数据对吧这个没有记录这个表呢是目前新产生的一张新产生的这些记录对吧那我们可以看到我们这个表是叫做HI HistoryAct Instance对吧这是我们的这个活动
+[01:53] 我们的这个活动的一些实例证明了我们目前呢已经完成了我们正在要去做的是我们的这个我们已经完成了有一个start event我们的这个开始节点已经读取完成了然后还有一个就是我们的这个填写请假单的这个工作目前张商是不是应该要做啊但是张商做这个工作了吗对吧我们通过分析这个记录你就发现他没有end time这就说明这个工作应该是
+[02:23] 没有做这个工作对吧比如说正好我们应该要下一步正要去执行这个工作但是这个工作呢还没有执行完对不对所以这个表中就产生了由我们将来已经执行完或正在要去做的这个工作对吧但是如果说这个工作没有还没有开始做的话那对于这个工作的结束时间就应该是不存在的
+[02:48] 一旦我比如说我们的这个填写请假单的工作做完了那我们的这个end time的这个结束时间也就有了对吧那好我们进一步再来分析其他的表那这个表没有记录没有记录对吧这个地方就有这个这个表有记录我们来看一下它叫做我们的hi identity link这个表呢其实我们在分析的时候各位可以看到那它主要加的就是我们的这个参与者对吧就是
+[03:19] 我们这张表有哪些participant有哪些参加者对吧或者说参与者对吧好这是这个表这个表存在也是有意义的然后我们这个时候再往后看这张表那这张表又是我们新加入进来的有一条记录对吧这个可以看到了我们有一个实力的实力的用时通常这个表应该是我们
+[03:49] 这一次特别加入进来的对吧因为这是流程实例嘛而我们开始在这有一个叫做PROC Defining流程实例然后呢是我们12点是具体的这个时间点加入进来的我们然后再去观察下一个表下一个表就是我们的任务任务表呢现在各位可以看到它也是有记录的因为目前正好有一个任务对吧是谁要去执行对不对
+[04:18] 是填写请假单的这个任务我们看看是张商要去执行对吧张商开始执行也就是说走到你这个流程的时候是这个时间点真正我们开始真正去完成啊申请要去做这个时间以及我们的这个完成时间目前的应该都是不存在的对吧好我们接着再来分析一个啊这个表没有记录啊没有记录对吧然后我们这是我们早期的这张表已经有记录啊摸动表还是没有记录对吧
+[04:48] 这张表有记录也是我们第一个环节走下来的表啊然后我们再去看我们的RU开头的表啊execution那我们目前的这个execution表里头是有记录的因为我们这一次真正在执行的时候啊那我们将来立即要去执行的这个节点信息应该进入到哪个地方呢我们可以一起看一下啊目前这是我们的执行开始的时间啊这两条这个记录呢
+[05:21] 这个记录是我们真正要去执行的一时Q型啊就是后续我们的流程实例对吧要走要要要要去走这个两个部分啊然后呢你会发现我们的这个actit啊这是我们的活动的ID对吧这个表也是最近新添加进来的啊但是这个好这个表中的这个记录好像对于我们目前来看的话好像作用不是很大对吧我们先分析到这啊
+[05:47] 那我们接着下面再来看有一个叫做identity link对吧那这个表其实对于我们来说有意义的啊因为这个表里头记录了有我们当前的这个参与者对吧谁是这个流程实力张三目前是应该要去要去干活的一个人啊那我们接着往后再来看我们的integration这里头没有记录job没有记录啊然后话题的job对吧以及我们的task任务任务呢这个表这个表中
+[06:16] 现在是有记录的啊而且这个表呢会记录了当前是哪一个任务对吧是我们填写请假单的这个任务那填写请假单的这个任务是谁要做的任务对不对他的开始时间啊以及以及以及我们这个里头所看见的所看见的这个他真正确定的这个时间对吧这个时间目前因为他没有执行那个这个任务啊
+[06:44] 我们的这个time job这个没有记录这个流程运行的变量没有记录所以我们通过这次分析我们可以看到在我们启动一个流程实例的时候其实背后已经影响到这样的一些表对不对那这每一张表分别里头就代表了一些什么样的行业对吧你像这个地方代表的是我们的任务对吧这个是我们的任务表
+[07:12] 而这个代表的这个表和我们的这个表呢主要是我们的这个参与者对吧参与者的信息啊参与者信息包括像下面的这个表啊也都是我们的这个参与者的信息对吧而这个execution表代表的是我们的这个执行啊执行表啊而我们的task instance代表的是我们的这个任务叫做啊我们的任务实力对吧任务实力任务实力啊或sys instance这个代表的是我们的什么呢
+[07:42] 这个也代表的是我们的一个流程实例对吧这个代表的是我们的流程实例信息而我们的act instance代表的是我们的活动的实例对吧我们可以看一下这个act instance里头真正记录的是不是将来已经完成的这个活动有哪些对吧叫做已完成的叫做已完成的活动已完成的活动信息对吧
+[08:09] 那这几张表呢我们基本上就给各位分析出来了那将来我们再去完成我们的这个流程实例启动的时候其实我们就开始慢慢要去关注啊四个history三个ru对吧关注这七张表就可以了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何通过 Java 代码启动一个 Activiti 工作流实例，并展示其在数据库中创建的表结构和运行时日志。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 2：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 3：
+- 显示 MySQL 数据库管理工具界面。
+- SQL 语句：drop database activiti; create database activiti;。
+- 该语句用于删除并重新创建名为 activiti 的数据库。
+
+画面 4：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 5：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 6：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 7：
+- 显示 MySQL 数据库管理工具界面。
+- SQL 语句：drop database activiti; create database activiti;。
+- 该语句用于删除并重新创建名为 activiti 的数据库。
+
+画面 8：
+- 显示 MySQL 数据库管理工具界面。
+- 列出了 activiti 数据库中的表，包括 act_hi_actinst, act_hi_identitylink, act_hi_procinst, act_hi_taskinst, act_ru_execution, act_ru_identitylink, act_ru_task 等。
+
+画面 9：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 10：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 11：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 12：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 13：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+画面 14：
+- 显示 Java 代码，用于启动流程实例。
+- 代码中打印了流程部署 ID、流程定义 ID、流程实例 ID 和活动 ID。
+- 控制台输出显示流程启动成功，退出码为 0。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1：
+```java
+ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+//2.得到RuntimeService服务
+RuntimeService runtimeService = processEngine.getRuntimeService();
+//3.创建流程实例，流程定义的key需要知道 holiday
+ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday");
+//4.输出流程相关信息
+System.out.println("流程部署ID"+processInstance.getDeploymentId());
+System.out.println("流程定义ID"+processInstance.getProcessDefinitionId());
+System.out.println("流程实例ID"+processInstance.getId());
+System.out.println("活动ID"+processInstance.getActivityId());
+```
+
+画面 3：
+```sql
+drop database activiti;
+create database activiti;
+```
+
+画面 4：
+```java
+System.out.println("流程部署ID"+processInstance.getDeploymentId());//holiday:1:4
+System.out.println("流程定义ID"+processInstance.getProcessDefinitionId());//holiday:1:4
+System.out.println("流程实例ID"+processInstance.getId());//2001
+System.out.println("活动ID"+processInstance.getActivityId());//null
+```
+
+画面 5：
+```java
+public class ActivitiStartInstance {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine对象
+        ProcessEngine processEngine = ProcessEngines.getDefault(ProcessEngine());
+        //2.得到RuntimeService服务
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.创建流程实例，流程定义的key需要知道 holiday
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday");
+        //4.输出流程相关信息
+        System.out.println("流程部署ID"+processInstance.getDeploymentId());
+        System.out.println("流程定义ID"+processInstance.getProcessDefinitionId());
+        System.out.println("流程实例ID"+processInstance.getId());
+        System.out.println("活动ID"+processInstance.getActivityId());
+    }
+}
+```
+
+画面 6：
+```java
+public class ActivitiStartInstance {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine对象
+        ProcessEngine processEngine = ProcessEngines.getDefault(ProcessEngine());
+        //2.得到RuntimeService服务
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.创建流程实例，流程定义的key需要知道 holiday
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday");
+        //4.输出流程相关信息
+        System.out.println("流程部署ID"+processInstance.getDeploymentId());
+        System.out.println("流程定义ID"+processInstance.getProcessDefinitionId());
+        System.out.println("流程实例ID"+processInstance.getId());
+        System.out.println("活动ID"+processInstance.getActivityId());
+    }
+}
+```
+
+画面 7：
+```sql
+drop database activiti;
+create database activiti;
+```
+
+画面 8：
+```sql
+act_hi_actinst
+act_hi_identitylink
+act_hi_procinst
+act_hi_taskinst
+act_ru_execution
+act_ru_identitylink
+act_ru_task
+```
+
+画面 9：
+```java
+public class ActivitiStartInstance {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine对象
+        ProcessEngine processEngine = ProcessEngines.getDefault(ProcessEngine());
+        //2.得到RuntimeService服务
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.创建流程实例，流程定义的key需要知道 holiday
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday");
+        //4.输出流程相关信息
+        System.out.println("流程部署ID"+processInstance.getDeploymentId());
+        System.out.println("流程定义ID"+processInstance.getProcessDefinitionId());
+        System.out.println("流程实例ID"+processInstance.getId());
+        System.out.println("活动ID"+processInstance.getActivityId());
+    }
+}
+```
+
+画面 10：
+```java
+public class ActivitiStartInstance {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine对象
+        ProcessEngine processEngine = ProcessEngines.getDefault(ProcessEngine());
+        //2.得到RuntimeService服务
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.创建流程实例，流程定义的key需要知道 holiday
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday");
+        //4.输出流程相关信息
+        System.out.println("流程部署ID"+processInstance.getDeploymentId());
+        System.out.println("流程定义ID"+processInstance.getProcessDefinitionId());
+        System.out.println("流程实例ID"+processInstance.getId());
+        System.out.println("活动ID"+processInstance.getActivityId());
+    }
+}
+```
+
+画面 11：
+```java
+public class ActivitiStartInstance {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine对象
+        ProcessEngine processEngine = ProcessEngines.getDefault(ProcessEngine());
+        //2.得到RuntimeService服务
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.创建流程实例，流程定义的key需要知道 holiday
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holiday");
+        //4.输出流程相关信息
+        System.out.println("流程部署ID"+processInstance.getDeploymentId());
+        System.out.println("流程定义ID"+processInstance.getProcessDefinitionId());
+        System.out.println("流程实例ID"+processInstance.getId());
+        System.out.println("活动ID"+processInstance.getActivityId());
+    }
+}
+```
+
+画面 12：
+```java
+import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.runtime.ProcessInstance;
+
+public class ActivitiStartInstance {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine对象
+        ProcessEngine processEngine = ProcessEngines.getDefault
+

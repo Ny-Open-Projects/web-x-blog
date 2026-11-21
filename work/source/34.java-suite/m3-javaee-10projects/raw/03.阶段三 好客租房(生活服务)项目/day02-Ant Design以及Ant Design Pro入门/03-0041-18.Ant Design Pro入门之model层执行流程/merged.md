@@ -1,0 +1,242 @@
+# 18.Ant Design Pro入门之model层执行流程
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day02-Ant Design以及Ant Design Pro入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day02-Ant Design以及Ant Design Pro入门\18.Ant Design Pro入门之model层执行流程【海量资源尽在 ubkz.com】.mp4
+- 时长 13分37秒（音频 817s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么有了前面的我们这个新增页面啊我们就可以在pro这个项目中啊去新增我们自定义的这个页面那我们就可以去写这我们的一些功能了对吧但是大家可以想一下啊就是说我们如果要去写这样的一个表格这样的页面啊那么这个表格这个页面中的数据它是怎么样去加载到的对吧
+[00:28] 然后呢他又是如何在这个页面中呢显示出来的啊等等所以呢我们必须呢是有必要啊搞清楚pro这个项目那么他的这个整个这个model这一块的一个数据的是的一个怎么样的一个流程去在页面中去把它展现出来的所以呢下面我们所讲的这个内容就是pro中的model的一个执行的一个流程这个更多的是我们要去读懂他的一个这个代码
+[00:57] 只有我们读懂他这个代码之后呢我们就知道哦他这个在pro中他是怎么样去做一个执行的那我们后续基于这个项目去做开发的时候那我们是不是就应该按照他的这种流程然后呢去编写代码这样的话我们是不是就能够很好的去利用这个框架作为我们的一个基础框架然后去做一个开发这个大家能够理解这个意思吗所以呢我们接下来呢就以这个叫
+[01:25] 查询表格为例我们来看一下这个数据它到底是怎么样出来的所以下面我们更多的是讲它的一些源码讲它的一种代码的一些这种原理性的一些东西好,我们一起来看一下那么首先我们需要找到这个页面这个页面它所对应的这个JS文件在哪里其实我们关注点要放在这里你看是不是有一个list下面有一个table list
+[01:52] 所以呢他所对的页面呢一定是在这个src下面有一个pages下面一定有一个什么的list对吧然后呢下面再来一个叫做叫做table list看到了吗是table list啊往往是不是就是这样的一个规则啊那么在这个页面中呢其实我们可以看到他的整个页面编写还是比较复杂的大概呢总行数啊代码总行数有600多行那么还是相对比较复杂的一个页面啊
+[02:19] 因为为什么会这么复杂呢因为它这个里面多了一些这个搜索或者说查询的这样的一些功能包括你看它有简单的搜索还有什么展开复杂的搜索做了这样的一个功能所以它是相对比较复杂的那么我们应该来看一下解读一下它这个代码那么我们怎么样去解读呢我们先抓这个重点和关键点其他一些非关键点的我们就不做一个去抓取也不做一个讲解了
+[02:49] 那么等到你用到的时候再去研究就可以了那么我们先来看一下它这个表格是从哪生成的呢我们来找一下那么再告诉大家一个窍门的那么无论你这个这个这个组件啊你写的多么复杂那么其实你都逃不开什么的这个run的这个方法所以呢我们先要看它一定是由它是不是来渲染生成的我们这个页面这个大家能够理解吗哎呀ok
+[03:15] 好,那么我们找到render这个方法那么在这个里面我们找谁找return前面写了这么一堆我们先可以不用管我们先找returnreturn什么return下面你看这有一个叫pager然后有一个card显然是我们的一个查询是不是那么我们查询我们先不管它对吧我们继续往下面看我们走到下面下面这个位置
+[03:43] 多了在这儿这是他的一个查询那么在这儿呢有一个叫做一个标准的一个table的这个一个标签那么这个标签呢是干嘛的呢我们来看一下它呢是导入了一个叫在我们的一个根目录下面的一个组件啊下面有一个这个表格那么显然呢这个组件点不过去啊点不过去我们来找一下啊那么大家还记得吗我们前面其实提到过啊就是
+[04:13] 这个目录所存放的是project项目的一个什么呢就是通用的一个组件他丢到这个里面来那么我们来看一下这个里面他做了一个什么事情呢他就是去还是找他里面的这个方法那么这个里面他最终其实返回的是一个什么其实是不是就是一个table就是我们刚刚所使用的这个underdesign的他的一个UI的一个组件
+[04:39] 一个table那么这个里面有一个叫data source大家应该还有印象那么是不是通过这个data source是不是就可以拿到数据最后把这个数据是不是给它展现出来它就这样的逻辑我们来看list那么list从哪来要看一下list是不是就是来源于this.prop中对吧那么这个又是从哪里来的是不是我们这个页面中是不是给它传递过去的对吧传递过去大家看一下怎么传递它是通过什么
+[05:09] 通过一个Data属性是不是做一个传递那么前面我们在讲这个讲这个ReactJS基础的时候是不是就说过那么我们引入一个自定义的一个组件的时候是不是通过这个属性的方式可以传递数据把Data传递过去你看从这个里面是不是就可以拿到一个Data数据对吧Data然后设置一个List下面是不是就可以使用这个List了那么在这个位置需要给大家去强调的一点是大家要注意的是
+[05:39] 那么他的这种写法这种写法这种写法其实大家也并不陌生在ES6里面这种写法叫什么叫结构表达式对不对那么是不是就是说我们通过this.propStore拿到这个里面的data然后呢再去给他付一个值对吧付一个变量哎付一个变量那么这个叫结构表达式啊这个大家别不认识啊那么哎OK好
+[06:05] 那么这是他的一个解构表达式那么拿到这样的一个数据好那么咱们接着继续往下面看那么又回到我们的table list这个页面那么我们来看一下这个date又从哪里来的呢往下面点那么date是不是又是通过一个解构表达式拿到一个通过这个list点prop store拿到一个这个row那么我们来看一下这个row我们去往下面走这个找不到了对吧
+[06:33] 它里面的它那么这个从哪来的呢大家可以想一下前面我们是不是讲过对吧那么它的数据是不是一定也是丢到model里面的那么它怎么来的呢一定是通过这个类上面会有一个什么呢是不是我们的一个什么呢是不是注解或者说一个连接器对吧然后呢我们来看一下那么通过这个里面是不是就可以去拿到这样的一个
+[07:01] 通过 connect连接器是不是连接的就可以把我们的数据绑定到this.purpose中是不是有一个这样的数据那么这个数据又从哪来的那么显然是不是通过model去来的那么我找一下model在哪里那么它的对应的model其实是在这个它的目录下面有个models那么有一个roges在这个里面是不是我们可以看到在这对吧reduce
+[07:28] 那么reduce最终返回这个数据中是不是包含了一个什么呢包含了一个 date和一个展开的一个state的数据那么这个state我们来看一下这个state是不是上面的这个state的数据对吧ok那么这个就是我们所返回的数据对吧就是返回这个数据那么是不是拿到这里面的数据ok好那么拿到这个里面的数据
+[07:57] 那么拿到这个数据之后这是我们看到的是他一个就是去更新之后去拿这个数据那么当我们这个页面加载完成之后呢他怎么样去拿到我们初始这个数据呢来看一下那么初始数据是不是也是需要在页面完成之后去调用某一个方法其实可以看到是不是在这这个大家也并不陌生吧是不是就在我们页面去加载完成之后呢我们去做这样的一个dispatcher
+[08:25] 那么dispatch是不是就去调用我们model里面的这个方法就fetch去拿一个数据我来看一下是不是就是在哪里呢在这你看是不是有一个异步的这样的一个方法去拿数据那么通过这个call是不是去做一个查询那么要注意的是那么当我们这个查询结束之后它会调用这个put对吧put是不是就去执行我们的reduce里面这个方法
+[08:54] 那么你可以看到调用什么调用 save 方法调用它通过 X那么我或者我们的 result是不是就拿到一个结果拿到一个结果数据好那么接着继续往下面看那么在这个位置它扣去调用一个叫做 queryRule这样的一个对象这个对象又从哪来的又通过 Service API 来的那么我们又需要找到一个 Service下面的一个 API 在这
+[09:23] Service下面API在这个里面我们去找到谁找到来找一下找到这个里面有个叫query row找到他API搜一下就在这你看是不是通过他是不是去做一个查询去查询查询执行是不是通过执行是不是就API下面这个row然后后面传递一些参数
+[09:47] 然后如果request那么这个request又是哪来的呢是不是就是我们前面所用的util下面有一个requestjs是不是就是我们去分装的一个request请求的这样的一个工具的一个类或者一个包好那么我们可以看到那么最终的在API里面是不是就会做一个异步的这个请求这样的返回然后返回到我们这个里面我们拿到数据然后就会进入到我们这个里面
+[10:16] 对吧然后他数据就会返回了那么我们在页面中是不是就会拿到数据这东西不就可以展现出来了这个就是他的一个执行的一个流程那么显然的他现在数据是不是也做了一个mog的操作那我们来看他的mog在哪里呢那么往下面找来看一下mog是在这样我们还是直接去找是不是在这个有一个mog目录下面是不是有一个use那么这个里面是不是有个叫get you你看一下
+[10:46] 那么这个下面来我们来找一下你看这个当我们请求这个APIget请求的时候是不是有一个getRule这个方法这个方法呢又去做一些系列的分装这个代码我们就不详细去解读了反正就是说它对我们这个数据是不是做一些这种模拟Mock最终返回是不是就这样的一个数据所以说这个呢就是它整个的一个执行的一个这个过程那么我们来
+[11:15] 看一下这个讲义那么首先我们通过这个table list这个页面查看主要的逻辑是不是在这那么他是不是调用了自定义的一个这样的一个table的一个组件然后把这个data传递给他就会生成这样的一个页面那么我们这个data又从哪里来的呢对吧那么data中是不是又通过是注意这个data是不是又通过我们的这个就通过我们的power process中
+[11:43] 的这个row是不是拿到一个对的这个数据而这个prop是从数据从哪来的呢是不是又是通过我们的一个connect的一个连接器这样的一个修饰符是不是拿到我们的一个数据当然这里所使用的是一个解构表达式这个大家一定要去认识这样的一个写法它是一个解构表达式好然后有了它之后我们就可以在我们的modus下面的row.js中可以看到通过我们返回的一个数据是不是就拿到这样的一个数据了对吧拿到它这样的一个数据OK
+[12:13] 好然后我们可以看到在初始化的时候在页面加载完的时候是不是我们组件当我们的组件全部加载完成之后我们就去去dispatch去执行我model中的一个fit方法那么在我们的model fit方法中是不是就是可以看到是不是这样的一个方法去加载数据对吧加载数据加载完成之后他又去调用 sale这个sale是不是前面所定的 sale方法ok
+[12:42] 然后在API这个里面又定义了这个query这个方法然后MOOC呢是不是就在这个MOOC下面去做一个完成那么这个它整个的一个执行过程其实跟我们前面所讲的这个过程呢是大同小异啊是一样的一个流程的那么当我们把这个过程搞清楚之后呢我们是不是就可以模拟或者说参考它这种过程来开发我们的一个功能了哎呀OK好那么
+[13:08] 关于这个model的执行流程呢我们就讲到这里希望大家呢就参考我刚才所讲的这些它的这个原理那么大家呢实际要去查看一下它的一些代码然后把这个原理一定要搞清楚因为后面我们再去写代码的时候呢我们就会直接按照它这种流程呢去编写我们的代码OK好那么关于这个pro中的model的一个执行过程呢我们就讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲 Ant Design Pro 项目中 TableList 页面的前端代码实现与数据交互逻辑，包括组件结构、状态管理、表单操作和 API 请求处理。
+
+2) 按时间顺序列出每张画面的要点：
+画面 1: 展示 Ant Design Pro 项目中“查询表格”页面的前端 UI 界面，包含筛选条件、操作按钮和数据表格。
+画面 2: 在 IntelliJ IDEA 中展示项目目录结构，选中了 `pages/list/TableList.js` 文件。
+画面 3: 展示“查询表格”页面 UI，鼠标悬停在操作栏。
+画面 4: 在 `TableList.js` 文件中，展示 `render` 函数内嵌的菜单组件代码，以及 `const menu` 和 `const parentMethods` 的定义。
+画面 5: 在 `TableList.js` 文件中，展示 `StandardTable` 组件的配置代码，包括 `selectedRows`、`loading`、`data`、`columns`、`onSelectRow` 和 `onChange` 等属性。
+画面 6: 展示“查询表格”页面 UI。
+画面 7: 在 `TableList.js` 文件中，高亮显示 `StandardTable` 组件的配置代码。
+画面 8: 在 `TableList.js` 文件中，展示 `@connect` 高阶组件装饰器和 `class TableList extends PureComponent` 的定义，以及 `columns` 数组的初始配置。
+画面 9: 在 IntelliJ IDEA 中展示项目目录结构，选中了 `modules/tableList.js` 文件。
+画面 10: 在 `modules/rule.js` 文件中，展示 `addRule`、`removeRule` 和 `updateRule` 的异步操作逻辑，以及 `reducers` 中的 `save` 函数。
+画面 11: 在 `request.js` 文件中，展示 `checkStatus` 函数用于处理 HTTP 状态码，以及 `cachedSave` 函数用于缓存响应数据。
+画面 12: 在 `TableList.js` 文件中，展示 `componentDidMount` 生命周期方法和 `handleStandardTableChange` 函数的代码。
+画面 13: 在 Typora 编辑器中打开的 `讲义.md` 文件，展示 `rule.js` 中的 `effects` 代码片段和 `queryRule` 函数的定义，以及 `mock` 目录结构。
+画面 14: 在 Typora 编辑器中打开的 `讲义.md` 文件，展示“pro 中的 model 执行流程”图示和 `TableList.js` 中 `StandardTable` 的主要逻辑代码。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（逐字抄录）：
+画面 4:
+```jsx
+<Button>
+  <a style={{ marginLeft: 8 }} onClick={this.LoggleForm}>
+    <Icon type="up" />
+  </a>
+</div>
+</Form>
+```
+```jsx
+const menu = {
+  <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
+    <Menu.Item key="remove">删除</Menu.Item>
+    <Menu.Item key="approval">批量审核</Menu.Item>
+  </Menu>
+};
+const parentMethods = {
+```
+画面 5:
+```jsx
+{selectedRows.length > 0 && (
+  <span>
+    <Button>批量操作</Button>
+    <Dropdown overlay={menu}>
+      <Button>
+        更多操作 <Icon type="down" />
+      </Button>
+    </Dropdown>
+  </span>
+)}
+<StandardTable
+  selectedRows={selectedRows}
+  loading={loading}
+  data={data}
+  columns={this.columns}
+  onSelectRow={this.handleSelectRows}
+  onChange={this.handleStandardTableChange}
+/>
+<Card>
+  <CreateForm {...parentMethods} modalVisible={modalVisible} />
+  {stepFormValues && Object.keys(stepFormValues).length ? (
+    <UpdateForm
+      {...parentMethods}
+      updateModalVisible={updateModalVisible}
+      values={stepFormValues}
+    />
+  ) : null}
+</Card>
+```
+画面 8:
+```jsx
+@connect(({ rule, loading }) => ({
+  rule,
+  loading: loading.models.rule,
+}))
+@Form.create()
+class TableList extends PureComponent {
+  state = {
+    modalVisible: false,
+    updateModalVisible: false,
+    expandForm: false,
+    selectedRows: [],
+    formValues: {},
+    stepFormValues: [],
+  };
+  columns = [
+    {
+      title: '规则名称',
+      dataIndex: 'name',
+    },
+  ];
+```
+画面 10:
+```js
+const response = yield call(addRule, payload);
+yield put({
+  type: 'save',
+  payload: response,
+});
+if (callback) callback();
+```
+```js
+reducers: {
+  save(state, action) {
+    return {
+      ...state,
+    };
+  },
+```
+画面 11:
+```js
+const checkStatus = response => {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
+  const errorText = codeMessage[response.status] || response.statusText;
+  notification.error({
+    message: '请求错误 ' + `${response.status}: ${response.url}`,
+    description: errorText,
+  });
+  const error = new Error(errorText);
+  error.name = response.status;
+  error.response = response;
+  throw error;
+};
+const cachedSave = (response, hashcode) => {
+  /* Clone a response data and store it in sessionStorage
+  * Does not support data other than json, Cache only json
+  */
+  const contentType = response.headers.get('Content-Type');
+```
+画面 12:
+```jsx
+<Fragment>
+  <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
+  <Divider type="vertical" />
+  <a href="">订阅警报</a>
+</Fragment>
+```
+```js
+componentDidMount() {
+  this.props.dispatch({
+    type: 'rule/fetch',
+  });
+}
+handleStandardTableChange = (pagination, filtersArg, sorter) => {
+  const { dispatch } = this.props;
+  const { formValues } = this.state;
+  const filters = Object.keys(filtersArg).reduce((obj, key) => {
+    const newObj = { ...obj };
+    newObj[key] = getValue(filtersArg[key]);
+    return newObj;
+  }, {});
+  const param = {
+    currentPage: pagination.current,
+    pageSize: pagination.pageSize,
+  };
+```
+画面 13:
+```js
+effects: {
+  *fetch({ payload }, { call, put }) {
+    const response = yield call(queryRule, payload);
+    yield put({
+      type: 'save',
+      payload: response,
+    });
+  },
+}
+```
+```js
+export async function queryRule (params) {
+  return request(`/api/rule?${stringify(params)}`);
+}
+```
+```markdown
+- 当前目录：
+  - geographic
+  - charts
+  - geographic
+  - notices
+  - profile
+  - rule.js
+```
+画面 14:
+```jsx
+<StandardTable
+  selectedRows={selectedRows}
+  loading={loading}
+  data={data}
+  columns={this.columns}
+  onSelectRow={this.handleSelectRows}
+  onChange={this.handleStandardTableChange}
+/>
+```
+
+4) PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面 14: PPT 标题为“3.2.4、pro 中的 model 执行流程”，图示中“查询表格”页面的“操作”按钮指向“批量操作”和“更多操作”菜单，菜单项“删除”和“批量审核”分别指向“删除规则”和“批量审核规则”操作。表格数据包含“规则名称”、“描述”、“服务调用次数”、“状态”、“上次调度时间”和“操作”列。
+
+5) 无。
+

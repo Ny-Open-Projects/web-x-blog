@@ -1,0 +1,81 @@
+# 画面线理解：13_爬虫数据排重_测试
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day10-黑马头条-爬虫数据保存
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day10-黑马头条-爬虫数据保存\13_爬虫数据排重_测试【海量资源尽在 666java.com】.mp4
+- 抽帧：14 帧 @ 00:04, 00:22, 00:37, 00:56, 01:24, 01:58, 02:24, 02:53, 03:04, 03:20, 03:37, 04:10, 04:21, 04:52
+- 模型：Qwen3-VL-8B-Instruct-Q4_K_M
+- 生成时间：2026-10-28 15:08:07
+
+1) 这一组画面整体在讲什么（一句话）：
+演示一个基于 Spring Boot 的爬虫项目中，如何通过测试类启动调度器并调试其处理流程，重点展示调度器如何根据 URL 类型判断是否进行正向爬取。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：
+- 展示了 `DbaRedisScheduler.java` 文件中的 `isDuplicate` 方法，用于判断 URL 是否重复。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handleType: {}", request.getUrl(), handleType);`。
+- 代码中包含日志输出：`log.info("反向爬取，不进行url排重");`。
+- 代码中包含日志输出：`log.info("url排重开始，url: {}, handle

@@ -1,0 +1,113 @@
+# 14-SpringBoot监控-actuator基本使用
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：1.SpringBoot/2.SpringBoot 第二天
+- 源文件：01.阶段一 微服务相关技术\1.SpringBoot\2.SpringBoot 第二天\14-SpringBoot监控-actuator基本使用_【海量资源尽在 ubkz.com】.mp4
+- 时长 8分39秒（音频 520s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 介绍完Spring Boot的原理分析这么一个模块之后接下来我们来说Spring Boot下一个模块叫做Spring Boot的监控那么说到这个监控其实我们就知道我们之前说我们在项目Spring Boot项目启动了之后我们期望去监控它的一些状态的信息内存使用情况等等那现在你能做吗做不了而Spring Boot给我们提供了这么一个功能就是监控的插件Spring Boot它自带的监控插件
+[00:30] 那么这个监控插件呢它可以帮助我们就实现内部的运行情况的监控比如说监控一些状况啊病的加减情况啊配置的属性信息啊配置的日志文件信息啊等等啊它都可以监控监控很多的信息的而这个Spring Boot的监控用起来非常的简单它只需要导入这么一个依赖坐标就可以了就是这个Spring Boot Stutter Actuator那么这个坐标导进去
+[00:59] 导进去之后呢就完事了然后你就可以用了然后访问这么一个URL路径啊就是actuator这么一个路径然后就可以来查看对应的你想要的一些信息了动态的来获取啊接下来我们在idea里边来演示一下还是一样我们创建这么一个模块新的一个模块然后呢下一步下一步之后呢我们把这个模块呢给它触发好com.it黑马
+[01:27] 然后呢叫做sprintboot-actoactoactoator下一步然后你如果记不住刚才那个坐标的话没关系你在这个地方ops这个地方有的话可以勾啊对吧选项勾一下然后呢我们最好弄成web的一个功能然后待会我们要用下一步然后呢finish这样呢我们这个模块呢就初始化好了非常的容易也非常的简单
+[01:53] 那么这个模块出刷好了之后呢我们打开这个actuator这个pum文件我们可以看一下你看一下这个坐标它是不是帮你倒了web的模块它是不是也帮你倒了OK那么现在呢话不多说我们直接来启动这个东西就可以了好启一下启一下之后呢我们直接来访问这个路径刚才看了那个路径-actuator这个路径如果你也记不住没关系这个地方是有提示的启动的地方你可以看一下
+[02:26] 这个地方这个地方这个地方呢他说Exposing就是暴露暴露了两个Endpoint暴露了两个EndpointEndpoint呢就是暴露的可以访问的这个东西翻译过来叫做买点或者端点就是可以访问的两个路径然后呢这两个路径呢你可以访问通过什么访问呢通过这个URL路径去访问好嘞那么接下来我们就来访问一下看一下情况Localhost冒号
+[02:56] 8080下的这个路径对吧访问一下访问一下之后它返回了这么一个JSON的字幕串这个JSON字幕串呢为了方便看我们搞一个json.cn这个网站我们把它格式化一下你可以看一下右边就是我们这个JSON这个JSON呢是一些Linux就是一些URL那么这里边呢self表示了我们刚才自己的这个路径呢就不说了
+[03:23] 然后呢下边是两个功能一个是健康相关的功能一个是info相关的功能你看健康开头的三个info的有一个那么我们先来看info这个这个URL给你放着了你点一下就可以了它返回了一个空的JSON的字幕串返回了空的有什么用呢我们可以来看一下这个info怎么能让它有信息其实就是来获取配置文件里边以info开头的那些属性的信息
+[03:52] 好比如info.name等于章三就是将来你想info少写个o对吧info然后接下来info.age等于23好写完了写完了之后重启一下那么将来你会看到name和章三是这些属性对应的值了我们直接可以在这地方看得到刷一下你看name章三age23是不是看到了好这个先不说比较简单那么我们来看第二个健康
+[04:24] 健康相关的呢我们来看一下这个路径点一下点一下之后呢它告诉你说status up表示啥呢表示当前这个应用up就是好着呢健康着呢当就是失败了有问题了那么这个也太简单了只有一个up是吧我想看更完整的信息怎么办呢也可以开启它默认没有开启完整的信息OK因为不是很安全嘛因为将来如果说你这个程序
+[04:54] 开了这个actuator这么一个监控的功能并且暴露到公网上边别人知道了之后通过这个访问hearst那一看就你把你的一些完整的信息就看到了他需要看到的是一个up挺好的对吧你想自己测试看你可以开启开启了之后最后你上线关了就可以了我们需要去开启健康检查的完整信息那么这个地方健康是这个单词hearst
+[05:23] 那么里边有一个叫做show details就是显示详细的描述它默认之是never就是不显示那么这个for details呢就是完整信息的话呢有一个值叫做always开完了之后呢你重新启动一下现在你可以来看完整的详细信息了好我们再来刷新一下来看哎这又返回了一个json信息我们同样呢把它放到一个json里边去格式化一下json.cn好格式化一下
+[05:52] 格式化一下之后呢这个details有描述了这是我们的desk space就是我们的磁盘空间然后呢状态是好着呢对吧然后呢detail呢详细的描述总共有多大然后呢空闲有多大它的一个乏值是多少对吧OK啊因为现在我们没有什么组件所以呢它只有磁盘的一个监控那么如果这个健康检查还可以检查你引入的一些第三方的组件比如说数据库啊对吧比如说你引入的redis啊它都可以检查
+[06:21] 好可以看一下我们就引一个redis为例我们在这呢引一个redis的起步依赖data-redis好引完了之后呢我现在注意看哈我现在什么都没有干没有干呢之后之后呢我们把项目重新启动一下启动完事之后你注意来看现在redis没开啊它默认是不是这个地方连接我本机的redis我没有开redis
+[06:51] 那么现在我们再来看这个健康的一个检查那么除了磁盘还有就是redis了而redis呢一定不是up是dump失败了刷一下你看有了吧有了之后呢ctrl c复制过来我们把它放到里边来看一下整个的项目的情况呢是dump不好了就不那么愉快了是吧详细的描述呢磁盘是up没有问题但是redis呢那就是dump了为啥呢
+[07:21] 没有启动嘛是吧我们把Redis起一下本机的Redis在今天资料里边起一下起一下之后这样就启动好了启动好了之后呢我们再来刷新啊刷新这个刷一下你看现在是不是好了呀Ctrl A Ctrl CCtrl A Ctrl V那么现在呢你的Redis就变成up了那么将来我们可以通过这个健康的检查来去监控我当前这个应用它的健康到底健不健康有没有问题
+[07:50] 那么有问题的话呢具体是哪个组件有问题了是你磁盘装板了坏了对吧读取不倒文件了还是你的redis有问题还是数据库有问题然后呢可以针对性的去修复当你修复好了之后呢再一重启再一刷它就变好了ok它其实就是像redis发送这些连接就是乒乓的一种机制好嘞那么这两个一个健康的一个info的我们就简单的介绍了一下那么对于这个
+[08:18] Extra这个监控只能监控这两个吗其实当然不是了它可以监控很多只不过默认情况下其他的都是关闭着的那么接下来我们就要来介绍如何来开启对应的其他的监控的信息那么在这基本的使用我们先介绍到这个地方
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中集成并使用 Actuator 监控端点，包括添加依赖、配置属性和访问健康检查与信息端点。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: PPT 标题页，介绍 Spring Boot 监控概述，说明 Actuator 可用于监控程序内部运行情况。
+画面 2: IDEA 中创建新模块，选择初始化服务 URL 为 https://start.spring.io。
+画面 3: 显示 pom.xml 文件内容，包含 spring-boot-starter-actuator 依赖和 spring-boot-maven-plugin 插件。
+画面 4: 显示 SpringBootActuatorApplication.java 主类，包含 @SpringBootApplication 注解和 main 方法。
+画面 5: 浏览器访问 http://localhost:8080/hello，页面显示百度首页，表明应用已启动并能响应请求。
+画面 6: 浏览器访问 http://localhost:8080/actuator/info，页面为空白，表示该端点尚未配置或未启用。
+画面 7: IDEA 中显示 application.properties 文件内容，包含 info.name 和 info.age 属性，以及 management.endpoint.info.enabled=true。
+画面 8: 浏览器访问 http://localhost:8080/actuator/health，页面为空白，表示健康检查端点尚未配置或未启用。
+画面 9: IDEA 中显示 application.properties 文件内容，添加了 management.endpoint.health.show-details=always。
+画面 10: IDEA 中显示项目结构，展开 src/main/java 和 src/main/resources 目录。
+画面 11: IDEA 中显示 pom.xml 文件内容，包含 spring-boot-starter-redis 依赖。
+画面 12: 浏览器访问 http://localhost:8080/actuator/health，页面显示 JSON 格式的健康检查信息，包含 diskSpace 和 redis 等组件状态。
+画面 13: 浏览器访问 http://localhost:8080/actuator/health，页面显示 JSON 格式的健康检查信息，包含 diskSpace 和 redis 等组件状态。
+画面 14: 浏览器访问 http://localhost:8080/actuator，页面显示 JSON 格式的端点列表，包含 health、info、metrics 等端点。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 3:
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+</dependencies>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+```
+
+画面 7:
+```properties
+info.name=zhangcan
+info.age=2
+management.endpoint.info.enabled=true
+```
+
+画面 9:
+```properties
+info.name=zhangcan
+info.age=2
+# 并且健康检查的详细信息
+management.endpoint.health.show-details=always
+```
+
+画面 11:
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-redis</artifactId>
+    </dependency>
+</dependencies>
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 1: PPT 标题为“Spring Boot 监控”，副标题为“Spring Boot 监控概述”，内容说明 Actuator 可用于监控程序内部运行情况。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

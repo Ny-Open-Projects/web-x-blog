@@ -1,0 +1,147 @@
+# 19-hrm中的jwt认证：用户登录-下
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day04 权限分配与jwt概述
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day04 权限分配与jwt概述\19-hrm中的jwt认证：用户登录-下_【海量资源尽在 ubkz.com】.mp4
+- 时长 5分39秒（音频 339s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 我们引入了JWT工具类之后接下来我们就可以构造登录成功的token数据登录成功的token数据很简单JWT.utils打点我们有一个叫做create JWT里面存的数据有很多其中可以拿到yoder.get idyoder.get yoder name因为前两个我们存到了它的id和subject当中接下来就是构造一些我们的自定义新的一些数据这些数据是以map集合的
+[00:31] 形式往里进行存放的所以我构造一个map集合出来等于new一个hashimap那接下来呢我们就可以向map集合当中存储很多的数据打点put比如说呢我要存company id因为你登录的这个用户呢可能从属于某一个企业所以我这边呢company id要放进去好了那我们就可以user打点get company id存进去
+[00:58] 好了当了这个用户数据里面呢可能还有企业的名称所以我继续往里存一个企业名称c-u-m-p-a-n-y name好了那接下来这边就是user.getcompany name那这样一来就可以把map集合交给JWT让他帮我生成我们所需要的token内容那token生成好了之后那接下来呢我们就可以构造最后的返回返回这回呢代表的就是成功了
+[01:28] 点succeed好了那接下来呢这个result方法当中呢我除了有code之外还可以传递一些我们的data数据那这回data代表的就是token那这样一来我这个登录方法呢其实就已经写好了诶注意各位这边有一个点呢想让跟各位简单的聊一下就是说呢我们可以看一下我们的API找到软器诶这个是我们的API那在API当中呢有一个点需要跟各位来声明啊
+[01:56] 就是说呢,它前端请求的这个用户登录数据是放到了请求包的体当中,那放到了请求包的体当中,那我们这边获取的时候就不能直接这样写,不能这样写,那么应该怎么做呢?
+[02:12] 它在请求体当中,我们需要使用ata request包的,把你请求体的内容封装成我们需要的对象,所以我来一个map集合出来,string,string,
+[02:28] OK好了接下来这个就是login map全部的参数都在里面但是这是由于它是请求体当中所以在这边我们需要从map当中获取mobile等于打点getmobile好了在请求体当中我们就需要把它构造成对象才能去获取OK那这样一来我们就已经把当前的这个登录方法都写好了那
+[03:04] 都写好了之后呢其中还有一个就是我们需要做一个简单的配置因为我们这个JWT工具类JWT工具类是不是要从配置文件的JWT.config这里面获取到你的私钥获取到你的实现时间所以接下来呢我们需要在配置文件当前你用哪个模块用我们就需要在哪个模块当中添加新的配置那好了我们系统模块当中找到它做最后一项配置
+[03:35] 你们放到了JWT这边OK那JWT给它起了一个名字呢叫做Config那Config那Config当中呢可能又有我们自己的配置比如说有key比如说有TTL好了keykey呢比如说就叫做sas就叫做sassas-hihm
+[04:08] 好了接着呢来一个TTL那TTL呢随便给他一个时间就可以了36360000好了一个小时超时OK那这样一来呢我基本的这个用户登录就已经搞定了那接下来我们可以把这个呢系统微服务重启一下我们来看一下效果走把它启动下来我们来看一下效果好了这边的系统在启动那接下来呢我们打开Postman我已经打开了那在Postman这边呢我们可以
+[04:40] 构造一些我们登录的一些数据请求到Syslogin这个端口下那好了这边的构造的数据我已经准备好了各位可以跟我一起来随便看一下比如说呢我数据库里面有很多的用户数据比如说呢这边有一个1380000什么什么2好了我传递的密码12345我先传错走你会发现系统繁忙
+[05:12] 这个系统繁忙应该是我构造这个JSON有问题好了这边加一逗号走这边告诉我密码错误你用密码就输错了那么刚才简单的看了一下它的密码应该是123456所以我这边拿过来123456走这回再去登录那这样一来咱们的token信息就已经获取到了现在已经放到了data部分和我们API显示的内容是一模一样的OK
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+在 Spring Boot 项目中，演示如何在 UserController 中实现用户登录功能，包括使用 JWT 生成令牌、将用户信息封装到令牌中，并展示相关配置和数据库表结构。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 在 UserController.java 中，展示登录方法的逻辑，使用 JwtUtils.createJwt() 生成 JWT 令牌。
+画面 2: 在 UserController.java 中，将 JwtUtils.createJwt(user.getId(), user.getUsername()) 作为登录成功后的返回值。
+画面 3: 在 UserController.java 中，登录成功后，将用户信息（如 companyId、companyName）放入 Map 中，再调用 JwtUtils.createJwt() 生成令牌。
+画面 4: 在 UserController.java 中，使用 User 类的 getCompanyId() 方法获取公司 ID。
+画面 5: 在 UserController.java 中，使用 User 类的 getCompanyName() 方法获取公司名称。
+画面 6: 展示了 SAAS-HRM 系统的 API 文档，登录接口 /login 的参数和响应。
+画面 7: 在 UserController.java 中，将生成的令牌 token 作为返回值。
+画面 8: 在 UserController.java 中，将登录方法的参数从 String 类型改为 @RequestBody Map<String, String> loginMap。
+画面 9: 在 UserController.java 中，使用 @RequestBody Map<String, String> loginMap 作为登录方法的参数，并调用 loginMap.get("mobile") 获取手机号。
+画面 10: 在 UserController.java 中，将登录方法的参数改为 @RequestBody Map<String, String> loginMap，并使用 loginMap.get("mobile") 和 loginMap.get("password") 获取手机号和密码。
+画面 11: 在 application.yml 中，展示数据库配置信息，包括 driver-class-name、url、username、password 等。
+画面 12: 在 application.yml 中，展示 JWT 配置信息，包括 jwt: config:。
+画面 13: 在 SQLyog 中，展示用户表（user）的数据，包括 mobile、username、password 等字段。
+画面 14: 展示了 SAAS-HRM 系统的 API 文档，登录接口 /login 的响应示例。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```java
+public Result login(String mobile,String password) {
+    User user = userService.findByMobile(mobile);
+    if(user == null || user.getPassword().equals(password)) {
+        return new Result(ResultCode.MOBILEORPASSWORDERROR);
+    }else {
+        //登录成功
+        jwtUtils.createJwt(user.getId(),user.getUsername());
+    }
+}
+```
+
+画面 2:
+```java
+else {
+    //登录成功
+    jwtUtils.createJwt(user.getId(),user.getUsername());
+}
+```
+
+画面 3:
+```java
+else {
+    //登录成功
+    Map<String,Object> map = new HashMap<>();
+    map.put("companyId",user.getCompanyId());
+    map.put("companyName",user.getCompanyName());
+    jwtUtils.createJwt(user.getId(),user.getUsername());
+}
+```
+
+画面 4:
+```java
+map.put("companyId",user.getCompanyId());
+```
+
+画面 5:
+```java
+map.put("companyName",user.getCompanyName());
+```
+
+画面 7:
+```java
+String token = jwtUtils.createJwt(user.getId(), user.getUsername());
+return new Result(ResultCode.SUCCESS,token);
+```
+
+画面 8:
+```java
+public Result login(@RequestBody Map<String,String> loginMap) {
+```
+
+画面 9:
+```java
+public Result login(@RequestBody Map<String,String> loginMap) {
+    String mobile = loginMap.get("mobile");
+    String password = loginMap.get("password");
+```
+
+画面 10:
+```java
+public Result login(@RequestBody Map<String,String> loginMap) {
+    String mobile = loginMap.get("mobile");
+    String password = loginMap.get("password");
+    User user = userService.findByMobile(mobile);
+    if(user == null || user.getPassword().equals(password)) {
+        return new Result(ResultCode.MOBILEORPASSWORDERROR);
+    }else {
+        //登录成功
+        Map<String,Object> map = new HashMap<>();
+        map.put("companyId",user.getCompanyId());
+        map.put("companyName",user.getCompanyName());
+        String token = jwtUtils.createJwt(user.getId(), user.getUsername(), map);
+        return new Result(ResultCode.SUCCESS,token);
+    }
+}
+```
+
+画面 11:
+```yaml
+#数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hrm?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 111111
+```
+
+画面 12:
+```yaml
+jwt:
+  config:
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

@@ -1,0 +1,116 @@
+# 8-flume案例-文件数据采集-步骤分析
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day06-Flume
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day06-Flume\8-flume案例-文件数据采集-步骤分析【海量资源尽在 ubkz.com】.mp4
+- 时长 10分19秒（音频 619s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 接下来我们来看一个新的案例这个案例是采集文件到HDFS先看这个需求就是在日常的业务系统中我们经常会使用log4g这个日志服务来生成一些日志随着时间的积累那么这个日志文件的内容会不断的增加那有时候我们需要将这个日志文件中新增加的数据实时的采集到HDFS
+[00:29] 那为要去满足这个需求呢我们需要使用FloomFloom那如何去完成这个需求呢我们想一下如果要去使用Floom采集那怎么去做呢是不是还是我们刚才那个步骤啊来我们回到这个画图在这里呢我们还是看一下刚才我们Floom的一个步骤一共有三步那么第一步呢我们要写配置文件第二步启动Floom的实例第三步
+[00:58] 运行测试那我们一步来说先看第一个我们需要写一个配置文件好那么这个配置文件里边呢一共分四步第一步我们需要配置三个组件的名字我们还是拿过来做一个分析好把它拿过来好这个组件的名字呢你可以自己去指定我看看一下这个讲义好在这里呢我们这个组件的名字呢把它直接拿过来好放在我们
+[01:31] 这个位置那么第一小步这一步就完成了它的名字是Source1Sync1Channel1咱们再看第二步我们来配置Source其实配置Source有个很关键的点我们要配置一个什么Source我们的Source也就是数据从哪里来我们说过了我们需要监控一个日志文件的变化比如说这里边这里边有一个文件这个文件在哪里呢我们来和讲义保持一致来看一下讲义
+[02:03] 比如说呢在我们来看一下在export Service tail log下面一个access log就这个文件好那我把它缩短一点吧我就直接写最后这个文件的名字好就这个文件我要去监控这个文件的一个变化那么请问我如何去监控一个文件的变化并采集数据呢就是我怎么知道这个文件变化呢我们可以使用一个命令这个命令叫
+[02:36] til-f后面呢跟上这个文件的名字好那么这个命令呢它的特点是它可以将这个文件变化的结果呢进行输出那好了那也就是说如果我的sauce能够监控这个命令的结果那么它是不是间接的也能监控这个文件的变化呀所以说我们这个sauce呢其实就是监控这个til-f命令的结果
+[03:07] 那哪一种source可以去监控一个命令的结果呢我们来看一下阿巴奇的一个官网Floom的官网来我们点开点开之后这里有个表格这个表格里边呢咱以前看过这里是列出了一些常用的source大家请看在这里有一个source的type它是一个escc它说呢它是来执行一个unix一个什么进程然后读取它的一个输出结果这个呢
+[03:35] 你可以认为它是可以监控一个Linux命令的一个执行结果因为Unix呢就是Linux的一个前身也就是说我们的Source类型只要写exec就可以了好那么我们这个Source就确定了来看如何去配置这个Source打开我们的讲义在这里好这个就是我们的Source我把它剪切一下拿过来好回到这里这是我们的Source我们一起来看一下
+[04:14] 我把这个图片拉大一点稍等好了之后我把这个再剪切一下拉到这里好回到我们的画图重新粘贴一下好来我们看这个是我们的source的配置第一个source的类型是escc这个是监控一个命令的输出结果接下来呢还有一个这个地方呢是command表示你要监控哪个命令的执行结果我们执行的命令是to-f
+[05:01] 后面跟的是我们这个文件它监控这个文件的变化那这个地方呢它说source的channel其实这个呢可以不要这个可以放在最后来设置OK那么这个呢我们就配好了好这是我们的source那接下来第三呢我们要配置channel一样的我们配置channel放在这位置好看channel怎么配置channel的话在这个位置拿过来粘一下
+[05:36] 这个配置channel的时候没有任何意外channel是存数据我们还是存到内存里边我们用的是一个memoryOKmemory存到内存里边这个地方呢有个keep alivealive这个什么意思呢这个其实是一个时间这个时间是120秒也如果说呢当我的channel呢已经数据已经存满了那么think是不是来消费这个数据或者说来拿这个数据
+[06:02] 那么我存满之后呢我最多给你多长时间呢我给你120秒这个意思好所以说这是一个等待时间啊等待时间好如果说超过了一个时间之后呢我就会报错这个时间还有一种可能呢就说这个千等钟数据已经空了那空了之后呢think是不是要等待这个数据啊我等待多长时间呢也是120秒啊这是一个keep alive你呢可以不用设它有个默认时间我们不用管
+[06:30] OK那接下来还有个capacity和translocation capacity这个大家说过了这个就是channel的一个容量还有一次处理数据的一个容量它是单位是event好那么这个channel配完了配完之后呢我们再来配sync配这个sync好这个sync呢表示我们的数据要到哪里去我们来拿一下这个地方呢这个sync好这个sync呢在这个位置它的数据特别多
+[07:02] 虽然它的参数很多其实很多的数据我们都见过我把这个再拉一下稍等我们再来剪切一下这个参数没有占完把这个再复制一下好再来剪切把这个干掉我们再来粘贴好了那么我们来看一下这些数据这个sync里边大部分的参数我们都见过我们来只说一些没见过的
+[07:39] 这个pass表示我们采集的数据呢要放在HDFS那个位置我们要放在这个根目录下边一个weblogflom collection下边有一个两个两级文件夹分别是年月日和小时分钟这么一个文件夹还有一个prefix它这个文件的前缀OK文件的前缀还有最大呢可以打开多少多少文件这个是5000
+[08:06] Bit size咱们说过一次性可以像那个对列中存多少个event好还有呢这个fail type是文件类型这个文件类型呢这个地方写的是一个datastreamdatastream是一个普通的文件它是一个写到的文件类型OK还有一个写的一个格式呢是test类型我们类型还有一个rule sizerule count还有一个rule interval这个呢
+[08:36] 表示的是文件的滚动的一个大小滚动的一个这个count表示event的个数还有滚动的一个时间这三个只要有一个满足那么它就会生成新的文件还有一个这个round呢其实表示的是我们的文件夹的一个滚动的一个周期这个地方是10分钟10分钟呢它会创造一个新的文件夹就在最后这个地方OK还有一个使用本地时间戳OK这是一个think的配置那接下来呢我们再看
+[09:06] 最后一个就是将它们三个呢整合在一起是这个我来看一下好这个地方呢只需要有最后一句话就行了最后两句话这么一个配置好拿过来放在这里好那么这个地方呢是sauce1对应的channel是channel1而sync呢对应的channel是sync1OK那么到这里为止呢我们就把这整个配置完了好那么记住我们的sauce用的是哪个呢
+[09:39] 用的是exec这是我们的source标一下这是我们的source记住我们的channel我们的channel用的是memory记住我们的sync我们的sync用的是什么呢hdfs也就是我们把数据呢放在hdfs上OK这是它整个的一个整个的一个配置好那么关于呢它的一个基本的配置呢我们就说到这里好那么接下来呢我们就可以
+[10:15] 去把这个代码呢给大家实现一下
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何配置Flume Agent，通过Source、Channel和Sink三个组件实现日志文件到HDFS的采集与传输。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：
+- 展示Flume Agent架构图：Source → Channel → Sink。
+- 实现步骤：
+  1) 写一个配置文件: xxx.conf
+  2) 配置Source
+  3) 配置Channel
+  4) 配置Sink
+  5) 将Source, Channel和Sink组合在一起
+  2) 启动Flume的Agent实例
+  3) 运行测试
+
+画面2：
+- PPT标题：分析。
+- 根据需求，首先定义以下3大要素：
+  - 采集源，即Source——监控文件内容更新：exec tail -F file
+  - 下沉目标，即Sink——HDFS文件系统：hdfs sink
+  - Source和Sink之间的传递通道——channel，可用file channel 也可以用 内存channel
+- Step 1: 定义 Flume 配置文件
+  ```bash
+  cd /export/servers/apache-flume-1.8.0-bin/conf
+  vim tail-file.conf
+  ```
+  ```properties
+  agent1.sources = sourcel
+  agent1.sinks = sinkl
+  agent1.channels = channell
+  # Describe/configure tail -F sourcel
+  agent1.sources.sourcel.type = exec
+  agent1.sources.sourcel.command = tail -F /export/servers/taillogs/access_log
+  agent1.sources.sourcel.channels = channell
+  # Describe sinkl
+  agent1.sinks.sinkl.type = hdfs
+  ```
+
+画面3：
+- 继续展示Step 1: 定义 Flume 配置文件。
+- 在画面2的基础上，补充了Sink的HDFS配置：
+  ```properties
+  agent1.sinks.sinkl.type = hdfs
+  #a1.sinks.sinkl.channel = c1
+  agent1.sinks.sinkl.hdfs.path = hdfs://node01:8020/weblog/flume-collection/Ky-Xm-SD/SH-AP
+  agent1.sinks.sinkl.hdfs.filePrefix = access_log
+  agent1.sinks.sinkl.hdfs.maxOpenFiles = 5000
+  agent1.sinks.sinkl.hdfs.batchSize = 100
+  ```
+
+画面4：
+- 展示了Flume Agent架构图：Source → Channel → Sink。
+- 在画面1的基础上，增加了对“配置Source”部分的说明：
+  ```properties
+  agent1.sources.sourcel.type = exec
+  agent1.sources.sourcel.command = tail -F /export/servers/taillogs/access_log
+  ```
+
+画面5：
+- 展示了Flume Agent架构图：Source → Channel → Sink。
+- 在画面4的基础上，画面下方显示了Windows任务栏，包含多个文件夹图标，如“Hadoop (空)”、“SecureCRT6”等。
+
+画面6：
+- 展示了Flume Agent架构图：Source → Channel → Sink。
+- 在画面4的基础上，画面下方显示了Windows任务栏，仅显示“任务管理器”图标。
+
+画面7：
+- 展示了Flume Agent架构图：Source → Channel → Sink。
+- 实现步骤：
+  1) 写一个配置文件: xxx.conf
+  2) 配置Source
+  3) 配置Channel
+  4) 配置Sink
+  5) 将Source, Channel和Sink组合在一起
+  2) 启动Flume的Agent实例
+  3) 运行测试
+- 在画面1的基础上，增加了对“配置Channel”的说明：
+  ```properties
+  agent1.channels.channell.type = memory
+  agent1.channels.channell.keep-alive = 120
+  agent1.channels.channell.capacity = 500000
+  agent1.channels.channell.transactionCapacity = 600
+  ```
+

@@ -1,0 +1,221 @@
+# 13-Eureka客户端与服务端配置
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：2.SpringCloud/day01
+- 源文件：01.阶段一 微服务相关技术\2.SpringCloud\day01\13-Eureka客户端与服务端配置_【海量资源尽在 ubkz.com】.mp4
+- 时长 20分38秒（音频 1239s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] Ureka客户端与服务端配置在这一小节中我们的主要目标是配置Ureka客户端user-Service的注册、续约等配置下配置Ureka客户端consumer-demo获取服务间隔时间了解失效剔除和自我保护那在这边我们要去配置两类工程分别是我们的Ureka客户端工程客户端工程还有是Ureka服务端工程
+[00:29] 那服务端工程呢我们就只有一个就是我们当初搭建的Eureka-Server而我们的客户端工程呢有两个分别是第一个我们提供服务的User-Service服务提供工程接着呢再是一个Consumer-Demo这个是服务消费工程那这些工程里面都可以去配置一些什么参数好第一个服务提供工程里面我们可以使用服务
+[01:01] 地址使用IP的方式接着可以去配置它的续约好 完了以后接着我们再去配置消费工程中的一些参数比如说获取服务地址的频率这个我们可以去配置OK完了以后接下来到我们的服务端工程服务端工程我们可以去配置的东西有失效剔除意思就是
+[01:34] 当我们的哪一个服务是已经崩溃了不能使用了如何将它从Ureka服务端给去除掉然后是自我保护自我保护万一又发生了网络意外那这个服务呢其实是暂时性的不可用好后续还是可用的如果网络好的话那如果你直接把它剔除掉那就不太科学其实这个自我保护呢前面我们已经见到了就是当初在Ureka
+[02:01] 界面中看到的那一排红色的字体出现的时候就是启动了自我保护功能OK这就是我们要在这一节中去配置的现在打开我们的讲义来去配置首先是我们的服务注册部分地址的一个使用那我们的服务注册到Ureka注册中心的时候呢它会将我们这一些服务实例呢保存到一个双层MAT结构中第一层
+[02:29] MetKey就是一个服务ID也就是配置文件中配置的这个名称第二层MetKey是服务的实例ID也就是一般它结构是host将serviceID加port形如这个结构然后呢我们具体对应的值就是服务的实例对象OK也就是一个服务名称的话可以对应多个实例好那我们具体配置实例的时候这些服务可以是指定IP地址的
+[02:59] OK那么现在的情况如何我们打开开发工具来了解现在启动了我们的服务然后我们在页面中访问并且能对他打个断点的话在这边去查看他现在的一个地址这个后是什么内容那他默认是localhost也就主机名而不是我们的IP我们来刷新我们见到这两个服务都是在的刷新打开IDA进来我们下一步
+[03:29] F8现在看到URL地址的是前面我们定制的现在都没改因为这33号还没有执行所以他还是localhost部分我们就接着往下走F8好走了以后也就说这一段代码已经执行了执行后呢他结果还是localhost也就是说这个实例里面的host值呢是localhostok而不是我们期望的这个IP地址好他没有用这个用的是我们的hostoklocalhost然后我们往下走
+[03:59] 让他过那现在呢我们想配置这个不使用主机host名而是使用IP的话那我们可以在配置文件中去配置他的一个实例的一个配置项好instance然后接着我们配置一个叫做prefer id address我们改成to使用IP那IP是什么呢IP地址我们可以指定IP address好他地址我们指定127.0.0.1
+[04:29] 那具体这两个配置项它的意思第一个是更在有选择情况下就是更倾向更倾向使用IP地址而不是host名那下面这一个具体的IP你可以指定这就是IP地址了OK好那我们如果这样配置以后看一下刚才的情况是否有改观至少这个
+[04:59] Localhost应该要改成127.0.0.1我们来去重启首先是我们的提供服务的工程我们去重启一下那这个Dashboard出现的情况是当如果是Springboard项目有两个的时候它会在右下角提醒你说要不要Run这个Dashboard你点击Run Dashboard它就会出现这个面板了OK然后接着呢如果没有的同学那你在这边去启动也是一样的好
+[05:25] OK我们刚才只启动了一个服务提供的那消费的工程没有重启我们来重启一下重启后我们再重新去访问再进行测试看一下它的效果是不是可以看到我们的一个IP地址也就在这一段同样的打了断点接着我们去访问打开浏览器再次刷新刷新后接着我们再到这来继续往下走F8好现在已经见到改了
+[05:53] 原来是localhost现在改成是我们指定的IP地址127.0.0.1OK这就是它的一个改变那回到我们的Urica注册中心大家要注意的点就是这一个地方刚才改了IP以后呢这是不变的不是说改的是它而是显示这个还是host加我们的Service id加端口你在用的时候改的刚才改的配置项是对你在调用我们的服务的时候也就是消费工程中
+[06:23] 去获取到实例的时候那这个host呢他使用的是IPOK我们再回到讲义中继续往下走配置完这一个以后呢接着我们再去配置一个服务的续约续约的话呢意思就是当我们的服务注册完了以后服务提供者会维持一个心跳也就是定时向Ureka Server发起一个REST请求告诉他I'm still alive这个我们称为服务的续约OK也叫Renew那我们有两个
+[06:52] 参数可以去配置这个续约的行为第一个呢是你多久续约一次默认是每隔30秒向Urica Server发起请求告诉他这个服务是可用的那如果是真的到了30秒没发送那我会等你90秒左右如果你还是没有发那这个服务呢就会即将被定时去扫描到并剔除出这个服务列表OK所以我们可以去通过这两个去配置他的一个续约时间
+[07:20] 还有剔除服务的一个服务失效时间好我们去打开开发工具来去配置到这边来我们去配置两个第一个呢是叫做renewalrenewal好renewal时间它默认是30秒那我们可以配置成5秒单位默认是秒然后另外一个呢是我们的服务失效时间
+[07:55] 时效时间默认是90秒那我们也可以去配置好这两个分别第一个呢是续约间隔第二个呢是服务时效时间默认90秒那我们现在改成是5秒这个间隔时间呢也有默认默认30秒好我们配置了配置以后呢你现在直接测的话没有太大的意义好现在因为他要等这些时间包括呢我们的这个剔除的话
+[08:32] 他要等进行一个自我保护的一个设置那其实你也可以去测也没有关系我们可以去重启好来重启吧重启我们的user application重启来去再次访问我们再打开这个浏览器中一会去刷新重启好以后我们去刷新刷以后接下来回到开发工具中把我们的这个服务给停止好就是我们提供的服务的user-Service工程去停止它
+[09:04] 停止后呢按照我们的这个配置那就是每隔5秒钟会去续约那如果不续约再会等5秒钟如果没有那就会将这个服务呢去剔除但是这个剔除呢是在我们的Urica上面去剔除的而且它的剔除也不是到了这个5秒就一定会去剔除现在按照我们的配置它只是说这个是可以被剔除的那到底什么时候真正剔除它是由我们的Urica中还有一个配置项后续我们也会讲到它好
+[09:32] 要定时去扫然后把这个服务给剔除出这个Eureka服务地址列表我们刷新好现在是没有被剔除出就是我们已经把这个具体的服务呢给停止了因为他现在发现呢你有可能是因为网络造成的原因好他现在没有去直接剔除他启动了一个保护机制包括呢我们还有一个设置定时任务因为他那个时间就会比较长默认是60秒也就一分钟他会定时的去扫
+[10:00] 那我们现在还没有改到那一个配置项OK那改了这个以后接着我们还可以去改其他的东西改什么呢我们回到讲义中可以改一个拉取服务列表的一个时间间隔就是在我们的服务消费工程中因为你要去获取到服务地址列表所以呢我们可以去改变它的一个拉取服务的间隔那一般默认它是30秒去拉一次你也可以去改变那么我们可以到我们的工程中去改一下
+[10:29] 到服务的消费工程配置文件我们找到去改变它我们在这边factregistintervalsecond默认是30那我们可以改成55就太频繁了我们10获取或是拉取服务地址列表间隔时间默认30秒我们现在改成10秒OK这是
+[11:09] 在我们的服务消费工程中可以去配置的配置项那这个服务呢我们可以再次启动然后我们的这个消费工程也可以去启动看一下它报报错好配置完这个以后呢因为这个没有太大效果就是我们的服务可以即时被去拉取完了以后接着我们再到Eureka服务端工程中去配置一些内容它的内容可以配置失效的一个剔除跟自我保护首先是一个服务的下限
+[11:39] 那服务下线的是当如果我们的服务正常关闭的时候呢他会发一个请求告诉有理可他下线了所以接收到以后可以把他的服务状态置为下线状态OK还就是个失效剔除那这个呢就是当如果在服务续约超时以后默认是90秒像刚才说的一样那到了以后呢我们这个UricaSERVO会定时的去每隔
+[12:04] 60秒去扫一下这些服务如果是发现有这些没有序约的服务呢他会从我们的Urica服务地址列表中给剔除好实际要剔除的一个配置可以通过这个EvasionInterval好去配置它那也就是在我们的服务端工程中进行配置的一定要注意这是服务端这边去配置的东西不是两个客户端OK那接着呢我们去配置一下我们的Urica刚才的启动好是没有报错的不影响那既然如此我们就到我们的
+[12:34] Eureka中去配置一下刚才的一个间隔时间是服务端的叫做EVITEVITION INTERVERSE我们给它设置个它默认是60秒这一个是服务失效剔除时间间隔默认60秒60秒那我们这个60呢这个是毫秒它的单位
+[13:18] 好这就是60秒OK这个配置以后呢接下来我们可以去重启但是我们还有一个配置就是一个自我保护就我们现在演示一下自我保护先就是这个红色的部分好当我们的服务给突然停止以后呢那它会显示我们先刷新好这是启动好的启动后呢接着我们把这个提供服务的工程给停止停止后我们再来刷新好现在没有出现
+[13:50] 接着再来再启动因为这个自动保护有一个机制就是在15分钟里面如果是续约的服务比例低于85%所以它不是随便就出现的它是在15有一个时间范围然后有一个比例如果出现这样的一个比例的话那么他就会认为可能是因为网络的原因
+[14:18] 那他就不会直接把服务给直接剔除掉而是会保留所以他会提示你说他起了保护机制他不确定这些服务是不是可用的OK他又不敢去直接剔除掉因为这样剔除就不合理因为如果他网络是恢复了的话那这些服务又是可用的OK所以呢他有一个保护机制的模式可以去开启那我们现在再来刷一下好我们再来把它停止我想模拟一个这个出现的情况
+[14:50] 停止以后接着我们在这个也把它停止停止启动起了以后接着我们再把它停止就是在一定时间里面这些服务本来要到时间去续约的但是都没有去续约好我们也配置了续约的间隔是5秒如果5秒我都没有去续约的话现在已经起好了7号我们把它停止OK停了以后接下来我们再去启动
+[15:40] 好他现在已经检测到退出了就我们的一个剔除了这个服务是正常退出因为我们刚才是正常退出他还发送了请求告诉我们的Urica他是要退出的我们再把它停止OK停了以后我们再来去刷新好这个服务现在是没有被直接剔除这时候在关了以后我们现在再去刷新的话他就已经可以出现我们这种启动自我保护模式也就出现这个
+[16:11] 那个请求显示的提示信息了他说紧急情况然后呢说这个是有一个百分比我们配置的刚才好续约的然后呢现在是启动了保护模式OK如果我们不想见到这种红色字体的话配置我们可以去配置我们的Urica服务端然后呢让他不启动保护模式因为其
+[16:35] 你现在我们在开发尤其在开发中你起了这个是没有意义的我们如果停止了就是停止了不是因为网络的原因因为所有的服务都在我们自己的机器上基本不太可能出现网络的原因所以这个可以把它禁止那打开我们的开发工具去配置它的一个配置文件也就是到我们的Eureka的配置文件中去配置在这边我们去配置一个叫做unableableself-preservation它默认是true我们现在改成false
+[17:08] 好这个的意思就是关闭自我保护模式默认是打开的OK关闭以后就不会见到刚才那个字体了那刚才大家看我在要测试显示出来这一个的时候呢要去重复的去关闭我们的服务达到一定的比例才会显示所以这个是有一定的概率的不是说你百分百每一次都这样如果有同学一定要测试出这个来那你就
+[17:39] 疯狂的启动吧OK接着呢我们再去重启一下这个服务Ureka重启以后那因为我们已经关闭了自我保护模式你即使呢出现了刚才那个百分比的话它也会直接剔除掉OK就已经不再是进行保护模式了那我们讲义中也有对应的说明就是我们关闭了的话那这个字体至少就肯定不会出现而且它也不会启动这个保护模式也就不会出现这个百分比
+[18:09] 直接把这个服务给剔除OK好我们起好了再来刷新我们的这个Urica搜索端的Self Preservation Mode is Turn Off已经被关闭了OK这就是我们刚才配置已经生效好它已经关闭这个服务没有的就是已经被剔除掉就我们刚才呢出现保护模式这个明明我是已经不提供服务了但是它也会列在我们的服务名单中就服务地址中那这是不太好的尤其在开发的时候OK
+[18:40] 建议大家开发手把这个给关闭掉OK现在我们回到笔记中来小结刚才配置的一些内容配置的东西呢主要包括有一些三个工程三个工程都是配置文件的配置那首先是user-Service工程中还有就是一个consumerconsumer-demo还有是我们的eurekaeureka-server这三个工程都有对应的配置我们把它拿过来给大家看一下
+[19:11] 分别第一个我们的Urica就是第三个我们最后配置我们第一个先还有是我们的消费工程的配置还有是Urica server也就是服务端它的一个配置配置的内容有server的配置呢我们当时配置了这些前面的Urica就不写了不拿过来了你到时候直接粘贴到我们Urica的节点下面接下来再是我们的一个consumer
+[20:03] consumer部分我们配置了那把这一段拿过来大家参考更加明显一些还是一个服务端的Eureka-server这边我们配置的是这一些内容好主要呢我们配置的是server这一块这两个配置项ok这就是我们的一个关于Eureka客户端和服务器端的配置所有内容
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何配置 Eureka Server 高可用集群以及 Eureka 客户端与服务端的注册与发现机制。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 展示课程 PPT，标题为“12. Eureka Server高可用配置”和“13. Eureka客户端与服务端配置”，说明目标是启动两个 Eureka Server 实例并配置客户端注册与发现。
+画面2: IDE 中展示 consumer-demo 项目的 ConsumerController.java 代码，其中包含通过 EurekaClient 获取服务实例的逻辑，并在调试器中查看了服务实例信息。
+画面3: IDE 中展示 user-Service 项目的 application.yml 配置文件，其中配置了 Service-url 为 http://127.0.0.1:10086/Eureka，并在控制台查看了服务注册日志。
+画面4: 展示课程 PPT，内容为服务注册的说明，包括服务提供者如何注册到 Eureka Server，以及如何配置 instance 以使用 IP 地址注册。
+画面5: IDE 中展示 user-Service 项目的 application.yml 配置文件，其中配置了 Eureka.instance.prefer-ip-address: true，并在控制台查看了服务注册日志。
+画面6: IDE 中展示 consumer-demo 项目的 application.yml 配置文件，其中配置了 Eureka.client.Service-url.defaultZone: http://127.0.0.1:10086/Eureka，并在控制台查看了服务注册日志。
+画面7: IDE 中展示 Eureka-server 项目的 application.yml 配置文件，其中配置了 Eureka.client.register-with-Eureka: false 和 Eureka.client.fetch-registry: false，并在控制台查看了服务注册日志。
+画面8: IDE 中展示 Eureka-server 项目的 application.yml 配置文件，其中配置了 Eureka.client.register-with-Eureka: false 和 Eureka.client.fetch-registry: false，并在控制台查看了服务注册日志。
+画面9: IDE 中展示 Eureka-server 项目的 application.yml 配置文件，其中配置了 Eureka.client.register-with-Eureka: false 和 Eureka.client.fetch-registry: false，并在控制台查看了服务注册日志。
+画面10: IDE 中展示 user-Service 项目的 application.yml 配置文件，其中配置了 Eureka.instance.prefer-ip-address: true，并在控制台查看了服务注册日志。
+画面11: IDE 中展示 Eureka-server 项目的 application.yml 配置文件，其中配置了 Eureka.client.register-with-Eureka: false 和 Eureka.client.fetch-registry: false，并在控制台查看了服务注册日志。
+画面12: 展示课程 PPT，标题为“13. Eureka客户端与服务端配置”和“14. 负载均衡Ribbon简介”，说明目标是配置客户端注册与发现。
+画面13: IDE 中展示 Eureka-server 项目的 application.yml 配置文件，其中配置了 Eureka.client.register-with-Eureka: false 和 Eureka.client.fetch-registry: false，并在控制台查看了服务注册日志。
+画面14: 展示课程 PPT，内容为服务注册的说明，包括服务提供者如何注册到 Eureka Server，以及如何配置 instance 以使用 IP 地址注册。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置：
+画面2:
+```java
+public User queryById(@PathVariable long id) {
+    String url = "http://localhost:8081/user/" + id;
+    List<ServiceInstance> serviceInstances = discoveryClient.getInstances("user-Service");
+    url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/user/" + id;
+    return restTemplate.getForObject(url, User.class);
+}
+```
+
+画面3:
+```yaml
+Eureka:
+  Service-url:
+    defaultZone: http://127.0.0.1:10086/Eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+```
+
+画面4:
+```yaml
+Eureka:
+  instance:
+    ip-address: 127.0.0.1 # ip地址
+    prefer-ip-address: true # 更倾向于使用ip，而不是hostname
+```
+
+画面5:
+```yaml
+Eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  lease-renewal-interval-in-seconds: 5
+  lease-expiration-duration-in-seconds: 5
+```
+
+画面6:
+```yaml
+spring:
+  application:
+    name: consumer-demo
+Eureka:
+  client:
+    Service-url:
+      defaultZone: http://127.0.0.1:10086/Eureka
+    registry-fetch-interval-seconds: 10
+```
+
+画面7:
+```yaml
+server:
+  port: 8086
+spring:
+  application:
+    name: Eureka-server
+Eureka:
+  client:
+    Service-url:
+      defaultZone: http://127.0.0.1:10086/Eureka
+    register-with-Eureka: false
+    fetch-registry: false
+  server:
+    eviction-interval-timer-in-ms: 60000
+```
+
+画面8:
+```yaml
+Eureka:
+  client:
+    Service-url:
+      defaultZone: http://127.0.0.1:10086/Eureka
+    register-with-Eureka: false
+    fetch-registry: false
+  server:
+    eviction-interval-timer-in-ms: 60000
+```
+
+画面9:
+```yaml
+Eureka:
+  client:
+    Service-url:
+      defaultZone: http://127.0.0.1:10086/Eureka
+    register-with-Eureka: false
+    fetch-registry: false
+  server:
+    eviction-interval-timer-in-ms: 60000
+```
+
+画面10:
+```yaml
+Eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  lease-renewal-interval-in-seconds: 5
+  lease-expiration-duration-in-seconds: 5
+```
+
+画面11:
+```yaml
+Eureka:
+  client:
+    Service-url:
+      defaultZone: http://127.0.0.1:10086/Eureka
+    register-with-Eureka: false
+    fetch-registry: false
+  server:
+    eviction-interval-timer-in-ms: 60000
+```
+
+画面12:
+```yaml
+Eureka:
+  client:
+    Service-url:
+      defaultZone: http://127.0.0.1:10086/Eureka
+    register-with-Eureka: false
+    fetch-registry: false
+```
+
+画面13:
+```yaml
+Eureka:
+  client:
+    Service-url:
+      defaultZone: http://127.0.0.1:10086/Eureka
+    register-with-Eureka: false
+    fetch-registry: false
+```
+
+画面14:
+```yaml
+Eureka:
+  instance:
+    ip-address: 127.0.0.1
+    prefer-ip-address: true
+  lease-renewal-interval-in-seconds: 5
+  lease-expiration-duration-in-seconds: 5
+```
+
+4) PPT 标题、架构图/流程图的结构、表格数据：
+画面1: 标题为“12. Eureka Server高可用配置”和“13. Eureka客户端与服务端配置”，目标是启动两个 Eureka Server 实例并配置客户端注册与发现。
+画面4: 标题为“服务注册”，内容为服务提供者如何注册到 Eureka Server，以及如何配置 instance 以使用 IP 地址注册。
+画面12: 标题为“13. Eureka客户端与服务端配置”和“14. 负载均衡Ribbon简介”，目标是配置客户端注册与发现。
+
+5) 无。
+

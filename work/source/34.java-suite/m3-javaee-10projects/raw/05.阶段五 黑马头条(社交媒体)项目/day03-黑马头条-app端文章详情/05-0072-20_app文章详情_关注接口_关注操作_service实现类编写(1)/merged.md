@@ -1,0 +1,284 @@
+# 20_app文章详情_关注接口_关注操作_service实现类编写(1)
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day03-黑马头条-app端文章详情
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day03-黑马头条-app端文章详情\20_app文章详情_关注接口_关注操作_service实现类编写(1)【海量资源尽在 666java.com】.mp4
+- 时长 24分40秒（音频 1480s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们就来把当前这个Service的实现类给实现一下啊首先呢咱们刚才把这个步骤给大概去分析了一下咱们一步一步一步来啊首先咱们要获取当前的一个什么follow的ID那就是当前关注人的ID啊那这时候咱们的方法你要知道它就是一个关注或者取消关注的一个操作对吧首先呢咱们在这先去判断一下啊大家应该养成习惯起手式应该都需要去做判断啊首先判断啥呢判断当前的
+[00:29] 如果说它等于0的话如果说你什么没点的话我不可能让你去调我的方法是吧t o点get不说是小于0也是不行的因为咱们只有0和1或者啥呢它大于0也不行不是大于2是大于1大于1也不行如果说有这样操作的话呢那就说明你的参数是无效的啊咱们就直接给它返回就可以了好吧error without
+[00:59] 然后是APPHTTP稍等啊然后是说这个参数有问题咱们可以在后边去适当的去描述一下比如说描述啥的描述什么说你这个什么无效的参数无效的operationopreaproperatl说你这个参数啊无效啊好然后再往下看啊如果说这个东这个也没有事啊没有事的话咱们就可以去拿到当前的一个
+[01:28] 这种flowed id了啊那这个flowed id到底该怎么拿你看啊在下面写啊t o.get user id其实这个user id呢就是当前的一个flowed id这咱们可以给它改名叫follow idok拿这个id之后呢你看啊这个id之后呢那这个是不能保证是有值的不能保证这时候咱们可以去做一个判断啊往下走
+[02:01] 怎么判断的你看如果说他等于等于那并且呢并且里边DTO里边还有一个参数DTO有一个at author id如果说他也等于空的话这时候那你这个flow id就拿不着了拿不着了这时候如果说他为空的话咱们可以通过当前那个author id去查询查询完之后咱们可以再获取到当前的叫作者的app账号id对吧
+[02:35] 这一步咱们之前也做过这时候如果说他两个都为难的话那这个显然是不合理的所以说咱们直接给他返回参数有问题就可以了这时候这个就不是无效参数了应该是啥呢说你这个low id或什么呢或当前的那么authorid不能同时被空好吧那再往下看如果说这一步没问题我们再往下看如果说他还是一判断
+[03:08] EF 啥呢你看这里边是还是flow的如果说flow到底等一等一none的话这个最终咱们还是要去判断当前这个IT到底是是否等一none如果说这种情况它还是等一none的话咱们就可以去查了查什么呢你看如果说它等一none它肯定是不等一none的如果说走到这的话没问题吧因为刚才是判断的是当前这两个都未none的时候它这就返回了如果说它是none它不会none的话咱们就可以去查怎么查呢
+[03:39] 咱们就可以根据当前的用户去查啊啊作者信息去查所以说咱们在这儿先去录一个private然后是dp啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
+[04:11] 在这去直接查就可以了.slack的ID就是当前的PTO中的userID这时候去拿到一个用户用户里边咱们就可以直接去通过他setuserID这个userID其实就是这样这个就是关注人的ID已经有了报导是吧
+[04:39] 嗯,没什么事啊,咱们直接去设置一个英特巴6,就完事了啊行,这个咱们做完之后啊这个Float到底拿到没拿到呢?
+[04:51] 按理说到现在呢,基本上都已经拿到了但是咱们这还要再做一步判断啊如果它不为空的话,咱们再去复制啊jp,不等于弄然后呢,咱们在这儿再去复加值然后再往下看啊
+[05:08] 如果说已经到这之后呢那么下面的就可以真正的去做事了啊那做事之前呢这佛罗多迪啊还要再判断一下啊为了严谨一下好那如果说你经过那么多步他还是唯空的话呢这时候那就真为空了真为空的话那这时候咱们就也不能让我能让他往下走了这时候咱们就可以去设置一个说你那个数据啊不存在好而
+[05:41] 说你的数据不存在咱们可以在这设计一个就是说关注人就没有关注人不存在好吧如果说他能过了这一步过这一步之后呢咱们就可以真正的去做项目搜索去判断用户到底是否关注然后再去关注的时候怎么办不关注的时候又该怎么办是吧那这时候咱们往下走1 2 3 4 1 2
+[06:13] 好把这个东西都烤上去啊烤上去那时候咱们就要去判断了啊如果说不这一步啊说到底肯定是有值的是吧肯定是有值的啊这时候呢咱们就可以通过当前的一个东西去查了但查询之前呢还是要去多做一个判断啊判断啊这个判断的话呢就是你要是你到底是是否已经关注没问题吧是否已经关注啊行那在这再去判断一个吧
+[06:46] 就是dto.setoperation等于0等于0的话是什么意思啊止不住啊OK关注else呢else的话就是取消关注对吧那这时候啊咱们就基本上啊基本上就已经做完了当然里边还要好像少一步因为你关注的时候要去保存是不是得有用户信息啊对吧所以说在这啊再去
+[07:21] 用户信息给拿到用户信息呢就是当前的什么app threadlocal youtube.get user是吧然后点玩这时候就能拿到用户信息不说用户信息不为空的话啊user不等云浪的时候啊咱们呢再去做工作好吧好但是如果说他为空怎么办呢他为空的话就是说明他没有通他们直接对坑啊就是类似
+[07:55] ok这时候呢咱们就可以去设立一个app里边咱们有一个是叫做need login你需要去登录之后才能投诉好吧那这一块呢咱们就应该去写当前的保存和取消的逻辑了那这块咱们再去重新封装一个方法好吧一个里边要写的话就太长了咱们把这个
+[08:24] 主逻辑的咱们再去封装一层那这时候咱们就写一个flow比如说叫flow user id然后这里边传两个参数哪两个参数应该是三个第一个是user信息第二个是当前的flow的id第三个是当前的dto.article id因为这个咱们一会还要去保存关注的行为行为里边需要用到article id好吧行那这个咱们直接return就可以了
+[08:54] 下面这个咱们一样下面这个一样这个article就不要了因为咱们取消的时候不需要去保存关注的行为就不需要article了所以说咱们在这写个console这两个方法没有咱们就创建出来好吧创建一个好吧再去创建好再去创建第二个好这两个方法就创建出来了创建出来之后咱们在这首先去写第一个
+[09:30] 先写第一个啊然后再写第二个第一个呢就是处理啥呢处理关注的逻辑是吧然后这个呢处理取消关注的逻辑好咱们呢先去写这个处理关注的逻辑啊咱们一会儿再说取消逻辑好吧那这个该怎么去写呢那该怎么去写呢首先呢咱们还是一步步写其实这里边最主要的就是做
+[10:04] 两三个事吧三个事啊那三个事呢就是第一个呢要去保存当前那个当前那个user blog第二个是保存那个那个粉丝是吧第三个是要去保存关注的行为这个关注行为呢其实就是一个Service咱们已经保送完了咱们直接去调用一下就可以了那把这三个事给做了就可以了啊行那咱们下面咱们就去写这个逻辑啊在这个保存之前呢你应当啊还要再去判断一下啊判断方前
+[10:36] 应该是当前用户应该是判断用户是否存在这个用户就是floatid这时候咱们可以去再去查一下jp user这个user没有是吧应该是去用户的信息表查出来privatejp user myper加进来之后考备一下.selectid然后是floatid
+[11:08] 看看这个flow关注的人到底存在不存在啊如果说他为空的话呢如果说ap tpu4等于none这时候这个关注人还是不存在的所以说我们这个还是得去返回一个basebounce result.irror result还是什么这个数据是说你的数据已经存在了date not instance好下面就说
+[11:38] 说啥呢嗯说的啊说你的关注人关注用户不存在关注用户不存在好吧行再往下看如果说这一步过了啊这步过了之后呢咱们又就要去保存当前的这种那个就是刚才说的一个啊保存当今这东西啊这考过来吧好吧卡这卡这吧好吧先保存它那保存之前呢咱们为了严谨性还要再去查一次看看有没有当前的这条数据如果有数据的话咱们就
+[12:11] 不需要进行保险的对吧所以说咱们在这再去注入一个东西啊谁呀privateprivate ap user flowap user flow my pro是吧然后他咱们顺便啊把那个当前的粉丝这个也注入进来啊ap user funmy pro好啊这个注进来之后呢不知道吗不对不要他啊一批
+[12:51] 写错了是吧cpus fun然后是完了啊删掉行那这两个注入进来之后呢咱们在这先先去查第一个啊先去查当前这个有没有哎而sliced第一个呢是birthbirth的话其实咱们就比较熟悉了啊ur youtube.r应该是groupgroup1这group1里边的第一个值是啥呢
+[13:21] 那这时候其实你应当还要再去看谁呢还要再去看当前这个userflow当前这个表是怎么去进行分表的用哪个资算进行分表的啊我们可以打开当前那个之前咱们定义的东西啊打开这往上找找找路由定义路由定义里边呢咱们找到这个表啊这个表的话就是userflow找到它你看这个是不是userid啊那这个userid你要知道啊这个userid其实是谁啊其实就是咱们当前的哪个值
+[13:52] 就是user当前登录的用户的ID对吧所以说你在这设置一个user.getID这个就是分表的字段好第二个参数参数来看一下就是user.getID第三个参数就是当前的什么flow到底那就是flow到底好吧这个拿到了之后咱们就去判断如果说AP user flow
+[14:26] 他等一等一浪怎么办没有保存呗他不等一浪那样他不等一浪的话说明说明当前的用户是不是已经关注了呀所以说咱们在这直接列设就可以了啊列设placebounce.hero说你这个东西啊写错了啊app说你这东西啊已经存在了叫什么叫date数据已经存在也就是说咱们这个已经什么已关注
+[14:58] 咱们重点呢是写写当前这个逻辑这里边需要去进行保存那保存之前呢其实咱们要去做两块保存这个都知道吧做两块保存啊做哪两块保存呢第一个是保存当前的这个表第二个呢是要保存当前这个表是吧所以说咱们保存之前呢还是要再去判断一下啊判断哪个呢判断应该是他啊先去查询当前那个fans
+[15:27] 我们有值有值的话呢因为当前这些条件啊看看查询有没有值有值的话呢我们就不保存了没值咱们再进行保存好吧然后点之前咱们写过一个slack的byid的话啊hushbursturidutilsrrobo1这个id是谁呢这个id其实就变了这是flow的id啊这是flow的id啊这个大家一定要注意啊咱们还可以打开当前的fans往上找
+[15:57] 找找找找好userfan你看他这个虽然也是userid但是这个userid应该是当前的什么被关注人的id被关注人的id所以说这块一定要区分清楚好吧那现在的粉丝是谁粉丝就是当前登录人的id这个userid应该是floatid因为floatid是被关注人的id对吧所以说在这你应该是写floatid然后下面还有点条件然后条件的话是
+[16:28] 那这个userid就是flow.id最后一个材数呢这个faceid就是user.id没蒙吧千万不要蒙这个我再去说一遍因为这个是粉丝表这个是被关注人的id然后这是他的粉丝粉丝就是当前登录人咱们分表的话就是当前的userid其实就是当前被关注人的id行啊那这个说完之后呢咱们再往下看
+[16:56] 然后再往下设置如果说AP user fun等于等于那那咱们呢就可以去新建并且新增好吧等于什么呢new一个出来呗AP user那这里边需要去设置很多值首先第一个值呢咱们要去设置当前的user fun.user fun.setid这个id啊咱们需要去手动设啊这个id的生成方式呢
+[17:30] 可以看一下这儿现在的方式就是ZKSequence今天早上咱们是不是封装了一个Sequence所以说你要想去用你在这得去加上当前的一个SequenceprivateprivateSequence好诸如下诸如同时你需要去在这一个配置配置我刚才加了就是有一个SequenceConfig你需要去把这个包给扫描一下要不然你注入进来他也会报错也会报错
+[18:05] 所以说在这要加上啊干完之后呢你可以用他的去生成主件了啊而你找到你对应的表不是前面什么一批优色换好然后这时候就能拿到主件了啊然后再往下看啊apu 三番然后点赛特u 三次又是谁现在保存的粉丝是不是不落在地啊我家没问题啊然后再往下啊一批u 三番点赛特干什么
+[18:37] 那这个谁啊就是user.getid对吧然后下面还有个apuser.setpassname就是谁user.getname好吧然后下面还有一些东西啊我就直接考过来好吧这些东西没有什么记录含量啊可以直接从当前的接口里边啊讲习里边给考一下啊往下走走走好呃这块内容呢就是从这啊从这开始考直接考到考到这里就可以了啊
+[19:14] 之后咱们再说一说命名不太一样是吧好粘贴一下吧这还是挺快的是吧说一下这块是有一个叫labellabel是0然后是下面是是否展示还有一个是否是评论是否要通信啥的你可以看一下当前的这个当前的有个user phone找到这里边是有一个是否评密私信是否评密评论是否可见动态咱们目前设置的都是
+[19:46] 这有一个处剩下的都是first好吧当前 burst我要去说一下burst分别自断的因为现在已经知道ID了所以说你是要去用entry去设置首先是拿到的当前的 id其实就是当前 id然后第二个它是分别自断的话就是当前的用户id就是user id其实在这设置完之后这个咱们也能拿到所以说你可以在这直接去设当前的burst
+[20:11] 好了这个粉丝就设置完了设置完之后咱们下面就还要再去做一个保存这个是不是也是NAND啊?
+[20:21] 这个NAND的话咱们就要去mute一下你要去保存保存的时候其实这个里边资产也比较多咱们也可以从这儿拷过来拷过来之后咱们再简单说一说首先它也有一个什么也有ID是吧是clouduser.netclouduser不对
+[20:47] 这个是Tangshan的AP user好date然后这个呢是我先去改改完之后咱们再捋一捋啊行那这个咱们再说一下啊你看目前的话这是AP user flow然后首要一些ID的话是从sales拿的user ID就是当前的user ID因为当前登录人的ID啊这是然后下面是flow的ID就是你要当前登录人关注的ID然后刚才咱们查了一下这个名称其实一开始一开始的时候在这查了一下所以说这个用户是可以拿到
+[21:20] 当前的名称的啊而名称之后呢咱们有时间还有一个级别还有是否要去展示啊这咱们都设置的是一个处啊当然这几个资源其实无所谓是吧啊还有一个BossBoss的话其实也是差不多跟咱们上面的思路是一样的啊他呢也是有一个叫Entry啊因为你这个ID已经拿到了然后第二个的组呢说分表的ID呢资段呢你也拿到了啊所以说你可以去设置当前这个资段到底是哪个资段你可以看当前这个这个讲义这个讲义里边其实已经写的很清晰的啊
+[21:50] 因为咱们设计的时候呢其实你可以看当前的一个这种表其实也是可以的好吧那这个咱们就设置完了那设置完之后呢那这是两步是吧分别去保存了当前的user block和user fun但是呢这里边还要做另外一个事叫什么记录用户关注的行为行为是不是得记录一下呀记录的话其实很简单啊咱们现在呢需要去入当前一个Service那个Service是谁呢咱们之前刚刚写那个啊
+[22:22] 首先是有一个private里面有什么呢appflow比开尔的就它啊好注入一下之后呢咱们可以去直接去调用了rcv它里边需要一个dto这个dto呢其实就是谁啊就是flow的开尔dto然后是写下吧开尔dto就是dto就等于它一个啊
+[22:59] 这里边需要两个参数的没有一设第一个参数就是当前的一个啊服务二第没有了啊然后第二个呢是dto.setarticleid这个articleid咱们也是有的嗯没有吗我看啊这不叫authorid啊这们这设置错了啊这应该传过来的是一个articleid.getarticleid还是写错了啊然后咱们在这名字上改改啊
+[23:44] 改完之后就没事了这是RTICLE好吧然后把它给拷贝一下然后往下走走走走走好考到这之后呢咱们把DTO还过去就可以了最终的千万不要忘了就是进行保存把当前那个user flow给保存了保存那很简单就是在这去pp user flow mypro.insert我把当前那个
+[24:17] user,jp user flow给他返回一个i,把insert不用把insert给返回就可以了return response.okok,把insert的条数返回去我们这个保存就算是完了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现用户关注关系的业务逻辑，包括参数校验、数据库操作和行为记录。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 `AppUserRelationServiceImpl` 类中 `follow` 方法的初始结构，注释说明了“关注操作”、“保存关注关系”、“取消关注”等逻辑。
+画面2：在 `if (dto.getOperation() != null)` 条件下，IDE 提示“无效的 operation 参数”，并显示 `UserRelationDto` 类的成员方法。
+画面3：在 `else if (followId != null)` 分支中，使用 `apAuthorMapper.selectById(dto.getAuthorId())` 查询关注人信息。
+画面4：在 `if (followId != null)` 分支中，IDE 提示“FollowId 或 authorId 不能为空”，并显示 `ApAuthor` 类的成员方法。
+画面5：在 `if (user != null)` 分支中，IDE 提示“Expression expected”，并显示 `UserRelationDto` 类的成员方法。
+画面6：在 `if (apUser != null)` 分支中，IDE 提示“Expression expected”，并显示 `ApUser` 类的成员方法。
+画面7：在 `private ResponseResult followById` 方法中，IDE 提示“Variable 'apUser' is already defined in the scope”，并显示 `ApUser` 类的成员方法。
+画面8：在 `if (apUser != null)` 分支中，IDE 提示“Expression expected”，并显示 `ApUser` 类的成员方法。
+画面9：在 `if (apUser != null)` 分支中，IDE 提示“Expression expected”，并显示 `ApUser` 类的成员方法。
+画面10：展示项目结构，`SequenceConfig` 类位于 `com.heima.user.config` 包下，使用 `@Configuration` 和 `@ComponentScan` 注解。
+画面11：展示 PPT 内容，标题为“3.3 关注接口”，子标题包括“3.3.1 工程结构”、“3.3.2 接口定义”、“3.3.3 Service 代码实现”、“3.3.4 Mapper 实现”、“3.3.5 Service 代码及 Controller 实现”。
+画面12：在 `else` 分支中，创建 `ApUserFollow` 对象，设置属性，调用 `apUserFollowMapper.insert` 插入数据。
+画面13：在 `else` 分支中，创建 `FollowBehaviorDto` 对象，设置属性，调用 `appFollowBehaviorService.saveFollowBehavior` 保存行为。
+画面14：在 `else` 分支中，调用 `apUserFollowMapper.insert` 插入数据，返回 `ResponseResult`。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+import com.heima.model.user.dto.UserRelationDto;
+import com.heima.user.Service.AppUserRelationService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AppUserRelationServiceImpl implements AppUserRelationService {
+
+    @Override
+    public ResponseResult follow(UserRelationDto dto) {
+        //获取到followId
+        //判断当前用户是否已经关注
+        //关注操作
+        //保存ap_user_follow ap_user_fan 存在关注的行为
+        //取消关注
+        //根据ap_user_follow ap_user_fan
+    }
+}
+```
+
+画面2：
+```java
+if (dto.getOperation() != null) {
+    return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID, "无效的 operation 参数");
+}
+```
+
+画面3：
+```java
+else if (followId != null) {
+    ApAuthor apAuthor = apAuthorMapper.selectById(dto.getAuthorId());
+    if (apAuthor != null) {
+        followId = apAuthor.getUserId().intValue();
+    }
+}
+```
+
+画面4：
+```java
+if (followId != null) {
+    return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST, "关注人不存在");
+}
+```
+
+画面5：
+```java
+if (user != null) {
+    if (dto.getOperation() != null) {
+        //关注操作
+        //保存ap_user_follow ap_user_fan 存在关注的行为
+    }
+}
+```
+
+画面6：
+```java
+if (apUser != null) {
+    return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST, "关注用户不存在");
+}
+```
+
+画面7：
+```java
+private ResponseResult followById(ApUser user, Integer followId, Integer authorId) {
+    //判断用户是否存在
+    ApUser apUser = apUserMapper.selectById(followId);
+    if (apUser != null) {
+        //处理关注的逻辑
+        //参数 user
+        //参数 followId
+        //参数 authorId
+        //return
+    }
+}
+```
+
+画面8：
+```java
+if (apUser != null) {
+    return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST, "关注用户不存在");
+}
+```
+
+画面9：
+```java
+if (apUser != null) {
+    return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST, "关注用户不存在");
+}
+```
+
+画面10：
+```java
+package com.heima.user.config;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan("com.heima.common.ZooKeeper")
+public class SequenceConfig {
+
+}
+```
+
+画面11：
+```java
+public ResponseResult follow(UserRelationDto dto) {
+    if (dto.getOperation() == null || dto.getOperation() != 0) {
+        return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID, "无效的 operation 参数");
+    }
+
+    Integer followId = dto.getFollowId();
+    if (followId != null && dto.getAuthorId() != null) {
+        return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_REQUIRE, "followId 或 authorId 不能为空");
+    } else if (followId != null) {
+        ApAuthor apAuthor = apAuthorMapper.selectById(dto.getAuthorId());
+        if (apAuthor != null) {
+            followId = apAuthor.getUserId().intValue();
+        }
+    }
+}
+```
+
+画面12：
+```java
+apUserFollow.setFollowName(user.getNickName());
+apUserFollow.setLevel((short) 0);
+apUserFollow.setIsDisplay(true);
+apUserFollow.setShieldComment(false);
+apUserFollow.setShieldLetter(false);
+apUserFollow.setIsShield(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIsShieldComment(false);
+apUserFollow.setIsShieldLetter(false);
+apUserFollow.setIs
+

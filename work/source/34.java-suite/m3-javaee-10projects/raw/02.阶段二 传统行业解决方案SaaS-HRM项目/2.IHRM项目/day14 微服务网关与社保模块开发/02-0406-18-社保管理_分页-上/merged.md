@@ -1,0 +1,219 @@
+# 18-社保管理：分页-上
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day14 微服务网关与社保模块开发
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day14 微服务网关与社保模块开发\18-社保管理：分页-上_【海量资源尽在 ubkz.com】.mp4
+- 时长 7分53秒（音频 474s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 对于企业的这个社保的设置呢咱们已经完成了那接下来呢就是进入到这个企业员工的具体的参保的一些数据的一个列表页面那在这个页面当中呢前面会展示的是用户的基本属性比如说用户名称手机号公号等等那后边指的是当前这个企业员工
+[00:27] 它社保的一些参谋情况比如说呢有社保的参谋程式公积金的程式社保级数还有公积金级数那这边呢咱们可以一起来看一下我们的页面发送的请求类型以及它的参数究竟是什么好了那注意各位一点社保那这边呢报错了肯定就是我们需要做到的这个功能list那请求的就是我们这边啊社保模块的list方法那这边的请求的方式是post那这边
+[00:58] 请求的参数其实就是页码相关的一些参数那注意了各位那我们要配置的要对应的写这么一个例子方法那这些例子方法呢对应的有参数一个是配置一个是配置size由于是post的方法所以呢会需要把这个参数呢封装成我们的一个方法的一个对象ok那好了接下来呢我们就开始把这个方法呢也给它实现出来搞一个listCtrl c回到我们的代码里
+[01:27] 好了全部写到我们这边的Controller查询企业员工的社保信息列表好了at request mappinglist没问题那接着method我们的请求方法呢刚才说过了是post没错吧好了接着配置一个方法public那方法返回值呢肯定是result这个不用再多啰嗦了那接下来呢我们对应的方法名称就叫做list那需要各位注意啊
+[02:07] 你请求的是一个 post 方法那 post 方法呢所有内容都应该对应的是一个我们的对象所以我这边需要以 request body 来进行接收当了这个对象我们可以给它定义成好了那接下来呢这边可以先去返回一个啊那接下来呢咱们把这个轮廓呢已经写好了那我们想说的是那我们这个代码呢其实要分成两个部分来看待首先呢第一个部分很简单就是
+[02:38] 获取我们的请求参数其实说白了就是我们的页码配置和size好了接下来呢第二件事就是调用se啊vse来进行查询那获取这个呢很简单map.get来一起来看一下传递的参数有两个一个叫配置一个叫做配置size哎配置还有一个呢叫做配置size哎没错吧
+[03:15] OK好了那上面这个呢就是我们可以把它理解为叫做pagep a j e好了再来一个死剧类型的integer类型的integer类型的integer类型的抱歉刚才写错了page set等于map.getOK这边呢做一个强制转型做一个强制转型
+[03:54] 好那这样一来呢我们现在已经获取到了对应的这两个参数那接下来呢调用Service那我们调用Service进行查询哎我们的Service究竟用什么其实我们查询的是用户的这个社保明细或者用户的社保的一个设置那我们查询的其实就这个user这张表哎这张表user score xcurity那这张表代表的是我们用户社保的这么一张表这边也有详细的说明就用保是保信息表那查询这个表呢我们
+[04:26] 用的 Service 就用和他重名了吧好了 Service就是 user score哎就差了啊那这个把它注入进来 at auto whereprivateuserso哎 Service 没问题ok啊那接下来呢我们可以调用这个那进行查询啊起一个方法咱就叫 fand
+[05:07] 好了把这个参数呢给他传递过去肯定有配置这是肯定的以及配置赛当了我们这边查询的是有分页的要查询当前这个企业里面的所有人工的咱们的社保数据所以我们要把comedy id也传进去ok好那这样一来呢咱们就能够得到对应的一个配置对象我们都说过这个是在分页的所以我们叫做配置resultpr等于
+[05:37] 那接着把这个PR放到我们这个理造当中返回是不是就可以了好那现在呢我们所有的问题都围绕在这个翻到上边那在这里面呢搞一个翻到方法这个里面就是我们分页查询用查询查询用户的我们的社保数据那接下来呢在这边呢我有个问题呢就比较好奇了
+[06:05] 那查询这个用户的社保数据我们单单只查询刚才我们看到这张security表各位觉得可以吗这个表里面的数据呢数据量是有限的我们可以看一下这些字段你发现这边有本月用户的ID当前月是为要缴纳社保他的参保程式参保类型工商比例等等等等有很多数据
+[06:29] 那接下来呢就是我们页面上需要的除了有这些参保数据是不是还需要有用户相应的一些基本数据啊哎那这回是不是就应该用到我们这边有一个叫做用户表啊没错吧各位那接下来呢我想跟各位说的是我们现在是基于这种微服务的这种架构方式那微服务这种架构方式那我们这边代码应该怎么写呢那我们这边代码写法其实就需要需要哎借助
+[07:00] FIN或者其他的方式去调用远程微服务微服务先去获取我们的用户的数据是不是接着再在这边查询我们的社保表获取我们的社保信息啊那这种方式呢可以做但是呢有一个不太好的地方因为我们要查询的这个用户数据呢它比较多可能有十多条或者有几十条
+[07:29] 这个跟分页设置有关所以这边呢就比较慢那我们就不用这种方式那在我们的系统当中不管是用户模块的还是其他模块的是不是都在一个数据库表当中啊所以这边呢我就用一个比较取巧的方式我直接用两个表联合查询来完成
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 iHRM 项目中实现企业社保信息的增删改查功能，包括前端页面、后端控制器、服务层代码及数据库操作。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：前端页面展示“本月：社保在缴 公积金在缴 员工 诚聘 入职 离职”功能模块，显示部门、社保城市、公积金城市等筛选条件。
+画面2：浏览器开发者工具 Network 标签页，显示请求头信息，包含 Authorization Bearer Token 和 Content-Type。
+画面3：IntelliJ IDEA 中展示 SocialSecurityController.java 文件，包含 @GetMapping("/settings") 和 @PostMapping("/settings") 方法。
+画面4：IntelliJ IDEA 中展示 SocialSecurityController.java 文件，正在编写 @PostMapping("/list") 方法。
+画面5：IntelliJ IDEA 中展示 SocialSecurityController.java 文件，正在编写 @PostMapping("/list") 方法，使用 Map 获取请求参数。
+画面6：IntelliJ IDEA 中展示 SocialSecurityController.java 文件，正在编写 @PostMapping("/list") 方法，使用 Integer 类型获取 page 和 pageSize。
+画面7：IntelliJ IDEA 中展示 SocialSecurityController.java 文件，正在编写 @PostMapping("/list") 方法，使用 Integer 类型获取 page 和 pageSize。
+画面8：Windows 桌面多窗口视图，显示 SQLyog、IntelliJ IDEA、Postman 等工具窗口。
+画面9：IntelliJ IDEA 中展示 SocialSecurityController.java 文件，正在编写 @PostMapping("/settings") 方法，使用 @Autowired 注解注入 UserSocialService。
+画面10：IntelliJ IDEA 中展示 SocialSecurityController.java 文件，正在编写 @PostMapping("/list") 方法，使用 @Autowired 注解注入 UserSocialService。
+画面11：IntelliJ IDEA 中展示 SocialSecurityController.java 文件，正在编写 @PostMapping("/list") 方法，使用 PageRequest 和 Pageable 分页查询。
+画面12：SQLyog 数据库管理工具，显示 user_social_company 表数据，包含 user_id、enterprises_pay_social_security_this_month、enterprises_pay_the_provider_this_month 等字段。
+画面13：浏览器开发者工具 Network 标签页，显示请求头信息，包含 Authorization Bearer Token 和 Request Payload。
+画面14：IntelliJ IDEA 中展示 UserSocialService.java 文件，正在编写 findAll 方法，注释说明需要使用 Feign 调用远程服务获取用户数据。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面3：
+```java
+public class SocialSecurityController extends BaseController {
+
+    @Autowired
+    private CompanySettingsService companySettingsService;
+
+    /**
+     * 查询企业是否设置过社保
+     */
+    @RequestMapping(value = "/settings", method = RequestMethod.GET)
+    public Result settings() {
+        CompanySettings cs = companySettingsService.findById(companyId);
+        return new Result(ResultCode.SUCCESS, cs);
+    }
+
+    /**
+     * 保存企业设置
+     */
+    @RequestMapping(value = "/settings", method = RequestMethod.POST)
+    public Result saveSettings(@RequestBody CompanySettings companySettings) {
+        companySettings.setCompanyId(companyId);
+        companySettingsService.save(companySettings);
+        return new Result(ResultCode.SUCCESS);
+    }
+
+    /**
+     * 查询企业员工的社保信息列表
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    public Result list(@RequestBody Map map) {
+        // 获取请求参数
+        Integer page = map.get("page");
+        Integer pageSize = map.get("pageSize");
+        // 使用 Service 查询
+        userSocialService.findAll(page, pageSize, companyId);
+        return new Result(ResultCode.SUCCESS);
+    }
+}
+```
+
+画面4：
+```java
+/**
+ * 查询企业员工的社保信息列表
+ */
+@RequestMapping(value = "/list", method = RequestMethod.POST)
+public Result list(@RequestBody Map map) {
+    // 获取请求参数
+    Integer page = map.get("page");
+    Integer pageSize = map.get("pageSize");
+    // 使用 Service 查询
+    userSocialService.findAll(page, pageSize, companyId);
+    return new Result(ResultCode.SUCCESS);
+}
+```
+
+画面5：
+```java
+/**
+ * 查询企业员工的社保信息列表
+ */
+@RequestMapping(value = "/list", method = RequestMethod.POST)
+public Result list(@RequestBody Map map) {
+    // 获取请求参数
+    Integer page = map.get("page");
+    Integer pageSize = map.get("pageSize");
+    // 使用 Service 查询
+    userSocialService.findAll(page, pageSize, companyId);
+    return new Result(ResultCode.SUCCESS);
+}
+```
+
+画面6：
+```java
+/**
+ * 查询企业员工的社保信息列表
+ */
+@RequestMapping(value = "/list", method = RequestMethod.POST)
+public Result list(@RequestBody Map map) {
+    // 获取请求参数
+    Integer page = map.get("page");
+    Integer pageSize = map.get("pageSize");
+    // 使用 Service 查询
+    userSocialService.findAll(page, pageSize, companyId);
+    return new Result(ResultCode.SUCCESS);
+}
+```
+
+画面7：
+```java
+/**
+ * 查询企业员工的社保信息列表
+ */
+@RequestMapping(value = "/list", method = RequestMethod.POST)
+public Result list(@RequestBody Map map) {
+    // 获取请求参数
+    Integer page = map.get("page");
+    Integer pageSize = map.get("pageSize");
+    // 使用 Service 查询
+    userSocialService.findAll(page, pageSize, companyId);
+    return new Result(ResultCode.SUCCESS);
+}
+```
+
+画面9：
+```java
+import com.ihrm.social.Service;
+
+@Service
+public class UserSocialService {
+
+    @Autowired
+    private UserSocialSecurityDao userSocialSecurityDao;
+
+    /**
+     * 分页查询用户社保数据
+     */
+    public PageResult findAll(Integer page, Integer pageSize, String companyId) {
+        // 需要借助 Feign 调用远程服务获取用户数据
+        // 直接在本地获取社保信息
+    }
+}
+```
+
+画面10：
+```java
+import com.ihrm.social.Service;
+
+@Service
+public class UserSocialService {
+
+    @Autowired
+    private UserSocialSecurityDao userSocialSecurityDao;
+
+    /**
+     * 分页查询用户社保数据
+     */
+    public PageResult findAll(Integer page, Integer pageSize, String companyId) {
+        // 需要借助 Feign 调用远程服务获取用户数据
+        // 直接在本地获取社保信息
+    }
+}
+```
+
+画面11：
+```java
+/**
+ * 查询企业员工的社保信息列表
+ */
+@RequestMapping(value = "/list", method = RequestMethod.POST)
+public Result list(@RequestBody Map map) {
+    // 获取请求参数
+    Integer page = map.get("page");
+    Integer pageSize = map.get("pageSize");
+    // 使用 Service 查询
+    userSocialService.findAll(page, pageSize, companyId);
+    return new Result(ResultCode.SUCCESS);
+}
+```
+
+画面12：
+```sql
+SELECT user_id, enterprises_pay_social_security_this_month, enterprises_pay_the_provider_this_month, participating_in
+FROM user_social_company
+```
+
+4) PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+

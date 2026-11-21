@@ -1,0 +1,21 @@
+# 声音线转写：5.7 TableAPI和SQL简介
+
+- 阶段：06.阶段六 冷链监控平台项目
+- 章节：day5 Flink批处理与Table SQL
+- 源文件：06.阶段六 冷链监控平台项目\day5 Flink批处理与Table SQL\5.7 TableAPI和SQL简介_【海量资源尽在 666java.com】.mp4
+- 时长：4分30秒（音频 271s）
+- 转写：faster-whisper-large-v3 / 语言 zh / 10 段
+- 生成时间：2026-10-28 16:28:36
+
+## 逐段转写（教师原声）
+
+[00:00] 大家好,下面我们来给大家介绍一下Flink的Table API和Circle编程那么Flink针对标准的流处理和批处理提供了两种相关的API一个叫做Table API,一个叫做Circle那么Table API允许用户以一种很直观的方式进行Select, Filter, Join等各种操作那么Flink Circle支持它基于Apache Call Set实现的标准的Circle语句
+[00:30] 那么也就是说无论是我们针对于流逝处理还是P处理的一些数据那么我们都可以通过标准的Circle语句来查询我们想要的得到的一个结果Flink Table API和Circle接口和Flink Data Stream的APIData Set API是紧密结合在一起的那么我们来先来看一看我们整个的Flink它的Table API和Circle API的一个架构或者说是在整个体系中的位置那么
+[00:59] 最底层的话是具体的有状态的流处理的一个引擎那么这个流处理引擎呢在上边的话其实就是我们的datastream和dataset的一个API它是我们的整个Flink它的一个核心的API那么基于此之上的呢就是Flink的一个table APIapache callset的这么一个组件那么基于这个组件之上呢其实就是
+[01:27] 先应用从的一个circle那么我们在我们的Flink程序里边可以直接使用circle语句来进行查询添加和删除等各种各样的一些操作那么我们来看一看我们整个的查询过程对于一个客户端来讲啊这这个架构图呢其实是偏向于mycircle的那么左侧部分是mycircle的一个查询过程其实我们的call set或者说我们的Flink它的整个原理和
+[01:57] mycircle的这个原理大致类似那么比如一个客户端这个客户端来讲的话相当于我们的mycircle的一个客户端首先它连接到我们服务器端的时候它先连接一个连接器那么连接器连接完之后呢把相关的请求的circle语句扔到了分析器分析器对于circle语句进行分析结果之后呢它会做一些内部的优化所以就是优化去来
+[02:27] 做的一些操作那么优化器执行完之后呢相关的是执行器具体执行那么这是在circle引擎部分相关的一些东西那么具体的mycircle存储的话它分成不同的一些存储方式比如说inodeb或者说myisam甚至于在它的一些缓存的索引等等这些属于它的存储层的那么和它相类似的或者相对应的其实是什么呢比如在我们的
+[02:56] 上层,Flink上层它用到的是Apache的Cosette这个Circle执行引擎,那么再往下一层的话是DataStream API和DataSet的API,那么最底层的存储层的话是DataStream和DataSet相关的一些Process,那么这个过程呢我们大致的了解一下,在实际的开发过程中我们只需要知道我们对于
+[03:23] Flink的table api和circle api的编程方式是什么样子后边我们会给出一个相关的一个例子然后给大家分析一下这个例子到底是它是如何运行的我们在操作时候如何来操作的那么如果是说我们的程序要引入table api或者circle的话那么需要添加一些依赖这些依赖包括两个部分一部分叫Flink-table-api-java的一个bridge
+[03:51] 那么后边是它的一个版本号这个版本号的话目前的话是2.11另外一个依赖是Flink table planner这个planner类似于我们的一个执行器或者说优化器执行器在这个层面上的一个东西那我们的程序其实很多的时候需要依赖于call set的一些执行器这是我们给大家
+[04:15] 大概的讲解了一下Flink table API和circle API它的一个运行的过程以及它的一个架构的一个大致的原理那么后面我们会给大家介绍Flink table API和circle API的一个示例

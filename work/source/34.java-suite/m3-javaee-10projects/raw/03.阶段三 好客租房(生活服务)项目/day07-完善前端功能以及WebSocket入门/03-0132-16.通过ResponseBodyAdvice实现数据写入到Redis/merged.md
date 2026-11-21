@@ -1,0 +1,269 @@
+# 16.通过ResponseBodyAdvice实现数据写入到Redis
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day07-完善前端功能以及WebSocket入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day07-完善前端功能以及WebSocket入门\16.通过ResponseBodyAdvice实现数据写入到Redis【海量资源尽在 ubkz.com】.mp4
+- 时长 16分43秒（音频 1003s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么我们接着继续前面呢我们是已经实现了我们的缓存逻辑的一个命中这个实现就是我们在进入Controller之前呢我们先去做一个判断做一个命中如果命中就返回没有命中呢就继续去执行Controller的一些逻辑但是呢我们并没有把数据写到我们的readit中那么肯定命中永远都是不能命中的因为里面没有数据嘛对不对
+[00:27] 那我们就来看一下我们又该如何去将我们响应的结果写入到缓存中那么我们可以我们接下来要思考的一个问题呢其实就是我们通过拦截器可以实现吗大家可以想一下通过拦截器可以实现吗那么我们来看一下那么假设啊假设我们现在要通过拦截器去做的话那么显然我们是不是需要去呃去重写或者说实现它的一个方法叫什么呢
+[00:55] 是不是他的一个post方法就是在我们响应在我们这个Controller处理之后是不是去做这样的一个处理但是大家想一下那么我们的Controller所响应的是什么呢所响应的都是一些我们的这个responsibility是不是这样的一些数据那么是不是就需要转成一些json去做一个响应但是在我们的拦截器中大家可以来看一下在我们的这个拦截器中那么他只拿到这个bounce这个对象
+[01:25] 还有什么呢model and view这个对象那么请问model and view中有我们的响应的数据吗肯定没有那么response中能拿到我们的响应数据吗也拿不到所以就是说在这个位置我们根本没有办法去拿到我们的Controller中返回的那个数据就是我们去把它响应那个json那个数据没有办法拿到那个json数据所以说我们采用这个我们的
+[01:50] 拦截器的这个处理这种方式那么显然肯定是不合适的不合适的那么所以说通过拦截器可以实现吗显然是不行的所以我们就需要去寻找另外一种解决方案那么我们需要通过一个什么的叫做Response Body的一个Advice去做一个实现它是什么东西呢它其实是Spring提供的一种高级的用法它可以在我们对Response Body这种处理的
+[02:20] 之前进行做一个拦截进行做一个拦截也就是说我们要对这个响应的结果进行做一个做一个这个阶层的处理那么在这个处理之前我们做一个拦截那么只要我们能够去拦截那么我们是不是就可以去写自己的逻辑了那么这样我们是不是就可以拿到他要写入的那个数据我们把这个数据是不是就可以写入到我们的缓存中了OK好那么下面我们就来看一下这种它的一个用法那么我们还是去找到我们的一个
+[02:49] 找到我们的一个资料在哪呢是在这个里面那么我们还依然把这个代码先贴过来然后我们再去给大家讲解一下都丢到这个里面吧那么在这个里面我们来看一下我们去实现一个Response Body Advice这样的一个接口
+[03:10] 那么我们就去实现它会实现需要实现的两个方法一个是上面这个一个下面这个方法那我们一会儿再来说那么在这个里面呢我们给它添加一个添加一个这个注解叫Controller一个advice就是Controller一个高级的用法就需要去通过它去做一个拦截那么OK那么在这个接口中呢它定义了两个方法一个呢是叫supports就是说你是否需要去做拦截
+[03:37] 如果你返回true就代表需要做拦截如果返回false那就不需要做拦截如果返回true的那么就会执行下面的这个方法如果你返回false的就不会执行这个方法所以说我们来看一下这个里面的一个实现如果我们的这个如果我们的这个拿到return这个type它呢拥有的是个get mapping这样的一个注解就是说如果我们的control中你写了这个什么呢get mapping
+[04:06] 这样的一种处理的话那么那肯定不用说了那肯定需要做一个处理对不对所以呢我们直接所返回的呢其实就是直接返回就是true对不对那么如果说你有什么呢有一个post mapping你的返回你拥有一个post mapping这样的一个注解并且呢那么你请求的你的这个你请求的你这control了你这control的是我们这个
+[04:34] GrabQL Controller的话那么也执行什么意思呢就是说如果因为我们的GrabQL Controller它是一个特例它这个特例所以需要有这样的逻辑如果是我们的GrabQL然后呢并且呢是这个PostMapping的那么这个时候呢也需要做一个处理除此之外其他的都不需要去经过做一个处理就是这样的一个意思所以说
+[05:00] 这个是get那不用说肯定要处理那下面这两个呢是我们的助理特例啊就是我们的grabql-control这个特例ok然后呢我们可以看到那么怎么处理呢就是首先呢他也是去拿到我们的redis key拿到redis key然后呢拿到redis key注意这个方法跟我们前面所写的一个方法是同样一个方法啊所以说为什么我们把它设置为这个静态方法好那么我们拿到拿到这个redis key之后啊
+[05:30] 我们就去做这样的一个判断你返回的数据就是说你返回这个数据你是一个对象还是一个支付创那么有些时候可能是个支付创对不对所以我们就需要在这个位置去做一个判断如果你是支付创那就不需要做任何处理了直接就是你的值是不是就是一个redis这个value那么如果要不是支付创的话那么我们就需要把你这个结果给你序列化成一个json支付创去序列化成一个json
+[05:59] 然后呢把你丢到我们的一个约定器中那么在这个里面呢我们设置它的一个缓存的一个时间是一小时莫名给它设置为一小时OKkey就是我们前面所生成的key那么value呢就是我们的这个value那么在这个里面呢有一个小逻辑刚才也说过了就是如果这么算就不需要序列化了如果不是这么算就需要做序列化这样其实是可以去提升我们的一个这个性能的程序性能的
+[06:29] 因为它本身是个这么串的话就没有必要去做一个训练化了对不对OK然后呢我们最后再返回一个body就是说注意这个方法我们仅仅是添加一个缓存所以说我们在这个位置呢要注意两点第一呢是我们需要把这个逻辑我们给它做一个tricut的一个包裹就是说我们不希望我们的缓存的逻辑来影响到我们正常的一个逻辑这是第一
+[06:55] 第二是那么我们在下面这个位置依然要把我们这个body要去返回因为body并没有去做任何的修改这个里面不可能去修改这个body的我们的流程该怎么走还是怎么走只是我们在我们最终响应之前我们给它添加一个保存到我们的redis这样的一个逻辑这样的逻辑ok好那么现在我们就已经把它加进来了
+[07:19] 那么加进来之后其实我们已经就实现了就实现了我们接下来做一个测试我先把服务先重启一下我先把这个视频做一个暂停好那么现在服务重启好了那么这样我们在这个位置打一个断点然后在下面这个位置也打一个断点我们来看一下它的一个整个的执行那么我们还是以这个为例还是以刚才这个为例然后我们走去做一个查询首先
+[07:47] 他先进入肯定是我们的拦截器对不对然后我们让我们往下走吧走然后走走走走走走走然后到这走到这个里面我们下面这个就不要断点了把它去掉然后继续往下面走拿到key然后去做一个命中没有命中是吧直接去执行我们的control了通过走那么在这个里面去做一个查询注意我在这个位置直接放行走
+[08:15] 那么他就会进入我们刚刚所写的这个response bodyadvice这样的一个类在这个里面去做一个询问是吧做一个判断我们是不是需要去做一个处理那么需要处理吗是get有get这个mapping吗没有那么有post mapping吗是不是我们这个类呢发现发现什么呢是有进出那么他就会执行下面这个方法然后那么通过走那么在我们这个方法中呢我们还是通过这个request去拿到我们的一个key
+[08:45] 拿到一个key然后我们去判断那么响应的结果它是不是我们的字符创你发现它并不是所以我们需要对它去做一个序列化那么序列化之后的一个字符创我们就可以看到它就是这样的一个字符创是不是有个json这样的一个字符创然后我们把它写到我们的readist中然后我们通过走好这样的话是不是就已经写到我们的readist中了那我们当我们再次请求的时候它会怎么样我们来看一下然后我们反正还没走
+[09:14] 走可以看到redis key是不是已经生成了对吧然后呢我们继续往下面走去做一个命中那么你会发现这个时候它是不是已经就结果是命中了命中了我们继续往下面走这样的话是不是就去设置一个响应就可以了不再去执行我们的control了通过control了是不是就没有执行啊但是我们的结果依然还是我们之前的这个结果那么显然我们现在这个是不是就已经就搞定了对不对好那么我们是不是已经就
+[09:44] 已经命中了我们这个数据当然我们可以来测试一下在我们的这个readist中能看到我们这个数据吗来看一下有这个数据那我们来拿一下get一下get我们这条数据看一下是不是就是这样的一个结果数据你看id等于8的这条数据那么就是这条数据对吧list id8这条数据好没有问题那么这个时候是不是我们就搞定了
+[10:12] 对不对啊哎呀OK好那么接下来呢我们来看一下那么我们去整合到我们的前台系统看有没有问题呢来看一下那么整合到我们前台系统那我们去走来看一下那么这个请求那么通过全部都通过然后呢把这个拿掉然后呢把这个也拿掉全部通过把这个断点我们都拿掉了不需要了通过走然后呢OK吗你会发现是不是OK的啊
+[10:42] 但是要注意这是第一次请求是不是因为第一次请求是不是我们就需要去把数据是不是写到我们的reddit中现在你发现是不是有其他两个已经加入进来了那么在第二次刷新的时候是不是才会做一个命中然后我们来看一下效果走第二次刷新就发现有问题了有什么问题呢因为第二次刷新呢他就会去做一个命中命中呢就会执行我们
+[11:11] 这个逻辑啊就是我们刚刚所写的这个拦截器里面的这个逻辑这个逻辑走到这儿但是呢我们会发现它呢会有一些报错啊会报错就是什么呢就是说我们并没有给它支持什么呢这个跨域啊并没有去做一个响应啊并没有做一个响应原因是之前呢我们在Controller中啊比如说我们这个就拿这个mock为例吧mock中是不是我们加了这样的一个注解是不是支持了一个
+[11:41] 我们的一个支持的跨越对吧但是呢现在呢我们的请求呢已经被拦截器是不是拦截下来了那么拦截器拦截下来呢它并不会去执行我们的Controller所以呢它执行了这个位置那么也就是说Controller中的那个注解肯定就不会生效了对不对所以需要在这个位置我们给它添加一个response的一个响应的一个头那我们来给它添加一下就添加啊这么多把这个拷过来
+[12:07] 那么在写入之前呢给他去做这样的一个输出之前呢去做这样的一个添加这个呢就是支持一个跨域啊支持跨域好嘞那么这样咱们把这个好写到这儿就是说我们去支持所有的这个跨域好那么然后呢我们再把这个服务呢重启一下那么我们来整合到我们的前端我们再来测试一下它应该呢就没有问题了好那么我们先把这个视频呢再暂停一下
+[12:34] 好那么现在我们这个服务呢就重启好了那么我们再来刷新一下看效果哎OK那么现在发现就OK了其实呢我们可以去打一个断点啊我们去测一下它究竟是不是已经从缓存中去命中数据了呢我们来看一下然后呢刷新一下就我们就以其中一个为例吧然后呢继续往下面走啊我们去调试一下就好了走你看拿到数据了吗是不是拿到数据了这个是什么呢这个没有拿到
+[13:05] 这个是什么请求呢这个是none对吧没有拿到那就通过通过我们再来看一下啊走然后我们继续往下面走拿到数据了吗也没有拿到数据哎这个是一个什么请求呢嗯我们来看一下他的一个request url啊url是在请求grabql那么grabql为什么没有去
+[13:41] 拿到数据呢刚刚的这个问题呢做了一下调试啊它是这样的一个问题就是我们呢在写这个逻辑的时候缺少一点点的逻辑就是我们对于这个opposites的这个请求啊我们并没有去做一个处理就是它呢也被我们去拦截了就是说我们应该加一个这样的一个判断啊就是如果你是这个它的时候对吧我看一下啊
+[14:14] 叫EQs,Inglokiss那么可以我们可以利用这个方法利用这个方法就是它只要它是任意一个任意一个的话那么就可以了那么一个get还有一个叫Obsense或者你把它写成大写也可以这样的话只要有任意一个那么就直接就去做放行就可以了那么如果是我看
+[14:43] 如果是这个get请求的话那么非get请求不是他的话就做一个放行那么这个时候可能也会有点问题那么这样我们就加到最前面吧就是我们判断一下那么如果你是opposite这种请求的话那就不用说了那么你直接放行就对了应该是这么写叫stream.eqs.eqs.englo然后呢如果拿到你的请求方法
+[15:12] 那么如果是这种Obsense这种方式的话如果这种方式那就直接放行return这个是我们刚刚写的一个代码存在一点这个小的一些bug那么把这个还原回来然后呢这个改成一个getok这个逻辑就对了好那我们再来测试一下把这个服务呢重启一下把视频往前暂停一下好那么服务重启好了我们来可以测一下现在呢就ok了
+[15:43] 那么所有这个Option的这个请求呢就直接在前面的就处理掉了就retin2就OK了这个是我们前面在编码的时候呢没有考虑到的一个细节点啊然后呢通过然后呢走没有问题那么其实我们可以来去测一下啊他的一些查询数据啊查询数据的一些这个请求比如说我们随便拿一个就拿他为例啊然后呢我们到我们这个页面中然后呢请求走然后呢在这个里面呢我们其实可以看到他的数据是已经就可以命中了对吧
+[16:12] 肯定就可以返回数据了然后通过走是不是返回啊这样的数据所以说我们这个缓存逻辑是OK的呃也就是说通过我们刚刚的一个测试啊通过我们这个测试我们发现我们之前写的一个这个private handler这个逻辑是有点问题的啊那么后面呢我把这个补到我们的这个讲义中哎OK这个点大家要注意一下哎好那么关于我们的这个
+[16:37] 把这个结果写到这个缓存中的一个这个逻辑呢我们就实现到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何通过 Spring 的 ResponseBodyAdvice 实现将 HTTP 响应结果写入 Redis 缓存，并处理相关逻辑和 CORS 问题。
+
+2) 按时间顺序列出每张画面的要点：
+画面 1: 展示课程 PPT 第 5.6 节“响应结果写入到缓存”，引出通过 ResponseBodyAdvice 实现将结果写入缓存的思路。
+画面 2: 展示 RedisCacheInterceptor.java 文件中 createRedisKey 方法的代码，用于根据请求 URL 和参数生成 Redis 缓存键。
+画面 3: 展示 MyResponseBodyAdvice.java 文件中 beforeBodyWrite 方法的代码，用于在响应体写入前将数据写入 Redis。
+画面 4: 展示 MyResponseBodyAdvice.java 文件中 supports 方法的代码，用于判断是否支持对特定方法（如 @GetMapping）进行拦截。
+画面 5: 展示 MyResponseBodyAdvice.java 文件中 supports 方法的代码，用于判断是否支持对特定方法（如 @PostMapping）进行拦截。
+画面 6: 展示 MyResponseBodyAdvice.java 文件中 supports 方法的代码，用于判断是否支持对特定方法（如 @PostMapping）进行拦截。
+画面 7: 展示 RedisCacheInterceptor.java 文件中 createRedisKey 方法的代码，用于根据请求 URL 和参数生成 Redis 缓存键。
+画面 8: 展示 RedisCacheInterceptor.java 文件中 prehandle 方法的代码，用于判断请求方式并根据 URL 判断是否需要缓存。
+画面 9: 展示浏览器开发者工具 Network 面板，显示了 CORS（跨域资源共享）错误，提示 Access-Control-Allow-Origin 头缺失。
+画面 10: 展示课程 PPT 第 6 节“WebSocket”，并进入 6.1 节“网站中的消息功能如何实现？”。
+画面 11: 展示 RedisCacheInterceptor.java 文件中 prehandle 方法的代码，用于判断请求方式并根据 URL 判断是否需要缓存。
+画面 12: 展示 RedisCacheInterceptor.java 文件中 prehandle 方法的代码，用于判断请求方式并根据 URL 判断是否需要缓存。
+画面 13: 展示浏览器开发者工具 Network 面板，显示了成功请求的响应信息，包括状态码 200 和响应头。
+画面 14: 展示 MyResponseBodyAdvice.java 文件中 supports 方法的代码，用于判断是否支持对特定方法（如 @GetMapping）进行拦截。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```java
+// 将data数据进行响应
+response.setCharacterEncoding("UTF-8");
+response.setContentType("application/json; charset=utf-8");
+response.getWriter().write(data);
+return false;
+
+public static String createRedisKey(HttpServletRequest request) throws
+        Exception {
+    String paramStr = request.getRequestURI();
+    Map<String, String[]> parameterMap = request.getParameterMap();
+    if (parameterMap.isEmpty()) {
+        paramStr += StringUtils.toString(request.getInputStream(), encoding: "UTF-8");
+    } else {
+        paramStr += Mapper.writeValueAsString(request.getParameterMap());
+    }
+    String redisKey = "WEB_DATA" + DigestUtils.md5Hex(paramStr);
+    return redisKey;
+}
+```
+
+画面 3:
+```java
+if (returnType.hasMethodAnnotation(PostMapping.class) &&
+        StringUtils.equals(GraphQLController.class.getName(), returnType.getExecutable().getDeclaringClass().getName())) {
+    return true;
+}
+
+@Override
+public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
+        Class<? extends HttpMessageConverter<?>> selectedConverterType, Map<String, Object> map, ServerHttpRequest request, ServerHttpResponse response) throws Exception {
+    String redisKey = RedisCacheInterceptor.createRedisKey((ServletServerHttpRequest) request);
+    if (body instanceof String) {
+        redisValue = Mapper.writeValueAsString(body);
+    } else {
+        redisValue = Mapper.writeValueAsString(body);
+    }
+    this.redisTemplate.opsForValue().set(redisKey, redisValue, Duration.ofHours(1));
+    return body;
+}
+```
+
+画面 4:
+```java
+private ObjectMapper Mapper = new ObjectMapper();
+
+@Override
+public boolean supports(MethodParameter returnType, Class<?> converterType) {
+    if (returnType.hasMethodAnnotation(GetMapping.class)) {
+        return true;
+    }
+    if (returnType.hasMethodAnnotation(PostMapping.class) &&
+            StringUtils.equals(GraphQLController.class.getName(), returnType.getExecutable().getDeclaringClass().getName())) {
+        return true;
+    }
+    return false;
+}
+```
+
+画面 5:
+```java
+package cn.itcast.haoke.dubbo.api.interceptor;
+
+import ...
+
+@ControllerAdvice
+public class MyResponseBodyAdvice implements ResponseBodyAdvice {
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+    private ObjectMapper Mapper = new ObjectMapper();
+
+    @Override
+    public boolean supports(MethodParameter returnType, Class<?> converterType) {
+        if (returnType.hasMethodAnnotation(GetMapping.class)) {
+            return true;
+        }
+        if (returnType.hasMethodAnnotation(PostMapping.class) &&
+                StringUtils.equals(GraphQLController.class.getName(), returnType.getExecutable().getDeclaringClass().getName())) {
+            return true;
+        }
+        return false;
+    }
+}
+```
+
+画面 6:
+```java
+package cn.itcast.haoke.dubbo.api.interceptor;
+
+import ...
+
+@ControllerAdvice
+public class MyResponseBodyAdvice implements ResponseBodyAdvice {
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate; redisTemplate: RedisTemplate@8556
+    private ObjectMapper Mapper = new ObjectMapper(); Mapper: ObjectMapper@9152
+
+    @Override
+    public boolean supports(MethodParameter returnType, Class<?> converterType) {
+        if (returnType.hasMethodAnnotation(GetMapping.class)) {
+            return true;
+        }
+        if (returnType.hasMethodAnnotation(PostMapping.class) &&
+                StringUtils.equals(GraphQLController.class.getName(), returnType.getExecutable().getDeclaringClass().getName())) {
+            return true;
+        }
+        return false;
+    }
+}
+```
+
+画面 7:
+```java
+// 通过缓存命中，查看redis.redisKey； 拼接：md5（请求的url + 请求参数）
+String redisKey = createRedisKey(request); redisKey: "WEB_DATA b186676c0de93f3ad35456e027b66df"
+String data = this.redisTemplate.opsForValue().get(redisKey); data: "data"|"HouseResources"
+if (StringUtils.isEmpty(data)) {
+    // 缓存未命中
+    return true;
+}
+```
+
+画面 8:
+```java
+// 判断请求方式，get还是post还是其他...
+if (!StringUtils.equalsIgnoreCase(request.getMethod(), "get")) {
+    if (!StringUtils.equalsIgnoreCase(request.getRequestURI(), "/GraphQL")) {
+        return true;
+    }
+}
+// 通过缓存命中，查看redis.redisKey； 拼接：md5（请求的url + 请求参数）
+String redisKey = createRedisKey(request); redisKey: "WEB_DATA b186676c0de93f3ad35456e027b66df"
+String data = this.redisTemplate.opsForValue().get(redisKey);
+if (StringUtils.isEmpty(data)) {
+    // 缓存未命中
+    return true;
+}
+```
+
+画面 11:
+```java
+// 判断请求方式，get还是post还是其他...
+if (!StringUtils.equalsIgnoreCase(request.getMethod(), "get")) {
+    if (!StringUtils.equalsIgnoreCase(request.getRequestURI(), "/GraphQL")) {
+        return true;
+    }
+}
+// 通过缓存命中，查看redis.redisKey； 拼接：md5（请求的url + 请求参数）
+String redisKey = createRedisKey(request); redisKey: "WEB_DATA b186676c0de93f3ad35456e027b66df"
+String data = this.redisTemplate.opsForValue().get(redisKey);
+if (StringUtils.isEmpty(data)) {
+    // 缓存未命中
+    return true;
+}
+```
+
+画面 12:
+```java
+@Override
+public boolean prehandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    // 判断请求方式，get还是post还是其他...
+    if (!StringUtils.equalsIgnoreCase(request.getMethod(), "get")) {
+        if (!StringUtils.equalsIgnoreCase(request.getRequestURI(), "/GraphQL")) {
+            return true;
+        }
+    }
+    // 通过缓存命中，查看redis.redisKey； 拼接：md5（请求的url + 请求参数）
+    String redisKey = createRedisKey(request); redisKey: "WEB_DATA b186676c0de93f3ad35456e027b66df"
+    String data = this.redisTemplate.opsForValue().get(redisKey);
+    if (StringUtils.isEmpty(data)) {
+        // 缓存未命中
+        return true;
+    }
+}
+```
+
+画面 14:
+```java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.MethodParameter;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
+import java.time.Duration;
+
+@ControllerAdvice
+public class MyResponseBodyAdvice implements ResponseBodyAdvice {
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
+    private ObjectMapper Mapper = new ObjectMapper();
+

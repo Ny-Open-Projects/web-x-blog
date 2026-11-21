@@ -1,0 +1,146 @@
+# day05-3-微服务从请求中取数据
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：02_万信金融-开户/2-9 实现认证拦截功能
+- 源文件：10.阶段十 万信金融项目\02_万信金融-开户\2-9 实现认证拦截功能\day05-3-微服务从请求中取数据_【海量资源尽在 666java.com】.mp4
+- 时长 12分7秒（音频 726s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 刚才呢我们对认证拦截功能进行了测试测试也通过了但是呢咱们认证拦截这个功能呢还没有全部找完还缺一点东西而且也非常重要缺什么东西呢这块代码是不是咱刚才讲过的这个代码对吧这个代码呢它大概的作用是什么呀就是它对另牌进行
+[00:28] 教验而且教验通过之后他是不是会往请求里边存一些数据键呢叫Jason Token那值呢其实无非就是当前登录用户的一些信息是吧这个代码大家应该还会影响那咱现在还缺点啥东西呢那大家想一下这些数据是不是随着请求会被转发到哪呢咱看看这个图啊还要看这个图大家看这啊呃网关这个教验令牌通过之后是不是会
+[01:02] 转发请求到我们的什么呀微服务转发请求的时候是不是就带着一些数据这个数据是不是刚才我们提到的那个JSON token是不是那这个数据呢随着请求就到达微服务这那我们现在缺什么东西我们缺一个功能就是微服务如何从这个请求里边把当前登录用户的那些信息那些数据给取出来就是怎么取数据我们这个代码还没写了还没实现这个没有实现了咱这个认证两页功能就不算完
+[01:31] 所以说咱接下来要做的事咱先明确了就是当网关转发的请求到达微服这的时候微服这边要从请求里边把这个相关的一些数据一些信息给取出来用一用这是我们接下来要做的事那怎么取呢那它不就是一个请求吗请求过来之后微服要想从这里边取数据说实话这个功能其实挺简单的
+[02:00] 通过request.getterparameter对就很传统的这种写法其实这个数据有拿到手这倒是不难倒是挺简单但是这呢大家主要要思考的一个问题就是啥这个取数据我怎么去设计对吧这个代码我怎么去编写更加的方便就使用起来更加的方便什么意思呢你得考虑到这样一种情况那假设是这样假设呢我这个v1里边的Controller有
+[02:31] 三四个有三四个而且每个control里边都要从这个什么呀从网关转发过来的这个请求里边取那个用户的数据怎么办那有的学员会说那有啥怎么办那你哪个control要取你哪个control就写代码取就行了呗那我那有问题如果这四个control都要取那这个取数据的代码我是不是得写四遍而且呢这个代码很明显是不是重复编码
+[03:01] 那这样子是不是就不好虽然这个功能挺简单但是我们肯定是很忌讳这个重复编码那怎么办那这样呢我们就想到了一个比较好的一个解决方案我们准备用拦截器就是Spring MVC的拦截器来实现这个功能那具体怎么来实现呢大家注意看这个图我们准备这么干那么当网关的请求过来的时候大家说
+[03:31] 这个正常情况下这个请求是不是直接就到达了我们微服务的这个什么呀Controller比如说这是一个Controller是不是请求默认情况下应该就直接到咱的Controller对不对Controller就要做这个处理那我们的这个Sprite MVC的拦截器是怎么工作我们的拦截器可以在到达Controller之前先拦截住这个什么呀请求所有的有了拦截器之后呢我们网关转发过来的请求会先经过咱的这个Sprite MVC的拦截器
+[04:01] 那这个拦截器呢他会从请求里边取数据然后做一些处理处理完之后呢他会把这个请求干什么放行那他这边一放行呢这个请求才会到达我们的什么呀而我们的control这个时候呢直接就拿数据去用就行因为在这个拦截器里面他是不是已经取出来数据处理过那这个时候即使你的这个微服有很多control都要从请求里边取数据
+[04:29] 那你这个代码也不用重复编写我这个代码在蓝银器里边写一遍就行了对不对写一遍就行了那将来呢你们都是蓝银器一放行到达哪个control了你这个control直接干什么呀对拿数据用就行了所以就避免了什么情况每个control都要重复的去编写那些代码这种情况就不存在所以我们这呢采用了一个相对来说比较好的一个方案就是把取数据
+[04:56] 这个Diamond我们放到Spring MVC的一个什么呀拦截器里边然后它放行了之后再到达什么呀Control了这是需要大家注意的我们整体的一个解决方案然后呢我们看一下具体该怎么实现这个拦截器这个拦截器呢需要我们自己定义一个你看我这就定义了一个拦截器但是呢我们定义的拦截器呢这个类需要实现Spring MVC的一个接口这是Spring MVC的一个接口
+[05:26] 那要重写这里边的一个方法叫PIE这个PIE它会在什么时候工作呢它叫前置拦截器PIE前置拦截器大家看这个图就这个图刚才我们说了嘛我们这个网关转发的请求过来之后是不是应该先被咱的拦截器拦住然后再到达咱们微服的什么呀Controller里边
+[05:56] 所以咱这个连接器一定是前置的前置指的就是在control了之前要进行处理那你在重写方法的时候呢就要重写这个PIE这个方法就行了然后你再看这个方法是不是有反而值有参数对吧我们先看反而值反而值是一个半的行这个反而值什么意思呢如果你反而处这个连接器有意思就是将来这个请求我会放行放行就表示着这个请求最终会到达control了
+[06:27] 如果这反而放手呢这个拦截器就会把这个请求拦住不放行那不放行的意思就是将来扛出来就就拿不到这个请求了但我们这一定是要放行吧啊已经是要放有一天出那在这个拦截器里边怎么从那个请求里面取数据呢很简单我们说了你看他这有个参数是不是request呢那我们直接调他的getparameter那这个键的名字是不是要跟这保持一致是吧跟这保持一致那就把那个数据取出来取出来之后怎么处理呢
+[06:57] 那你跟这边应该是相反跟这儿应该是相反你看他这儿是不是先转移成杰森然后又进行了base64编码对吧那咱在拦截器里边就应该是先解码解完码之后呢再把杰森串转移成什么加上对象就反过来操作就行你看这儿你看他还这儿还做了一个飞空教验是吧你看这儿他是不是先进行什么解码解码完之后呢再调parts这个方法把那个杰森串转移成什么呀
+[07:27] 对转换成这个一个加热对象就是login user这么一个加热对象这个login user其实就是封装那个用户信息的这里边比如说就有手机号对吧这些信息这个数据处理完之后转换成加热对象之后呢转换对象之后你别忘了我们这个请求是不是要放行放行是不是就大打control那边是不是要取数据那这时候他取的应该就是这个对象那我们仍然需要把这个对象再存到这个谁啊请求里边存进去
+[07:58] 存在手键的名字你就不要换了啊还叫杰森托克就行然后呢这个时候这个请求一放行到达卡车了卡车了是不是直接就可以取到这个什么呀从请求里边啊从这个请求里边直接取到加对象直接拿用就行说这就是咱拦截器啊他所起的一个作用那具体来说咱回到图里呀这个咱代码过完了啊整体来说是这样子那网关呢转发请求到我们的什么呀
+[08:26] 微服务这边但是呢会先被我们微服务的一个什么呀对Sprite MVC的一个拦截器先拦住然后这个拦截器呢会从请求里边取数据当然他取到数据是那种Jason格式的Jason Chuan对吧然后他拿到数据之后呢把他最终转按成什么呀加上对象然后呢再把这个加上对象放到请求里边然后放行放行之后呢这个请求就到达我们微服务的某个什么呀对Controller里边那么Controller要想从请求里边取数据也很简单
+[08:56] 而且他取到的数据是不是就直接就是一个加热对象对吧那用起来就更方便一些这是咱整个拦截器啊他的这个所起到的这个作用吧那么在代码里边来说呢这还没完啊我们虽然把这个拦截器给他定义好但是呢拦截器要想起作用还得进行注册就是还得向框架Smart MVC框架进行注册不注册的话你想Smart MVC怎么知道你这定义了一个拦截器
+[09:25] 他怎么去工作啊对吧怎么去起作用啊所以你得把这个蓝链器相对是告诉给谁啊告诉给框架哎我这定义了一个蓝链器对不对他得起作用那就交给你了交给框架从我们这需要增加一个配置就这一块增加一个配置类啊spa mvc 的一个配置类在这里边其实这个代码很简单啊就是注册一个蓝链器吗你看就接着注册添加一个蓝链器添加蓝链器是不是就是咱那个这个蓝链器这个蓝链器对不对你看poken intercept我们直接拗一个对象
+[09:57] 然后呢后边这个配置是什么意思呢这个配置呢就是这个拦截器会拦截所有的请求杠星星嘛拦截所有的请求什么意思就是你网关转发过来的所有的请求都会先被这个拦截器在上面拦截到就这个意思所以说呢我们自定义这个拦截器要想启动你还得加这个配置然后它最终才能启动啊没有这个配置呢你你这个拦截器就白定义了那这个该讲的东西给大家讲了讲了之后呢这个代码大家不用写
+[10:25] 我们在这个资料文件夹里边其实这两块代码都给大家提供过你直接考到工程里面就行了比如这个token什么呀intercept你看这个代码是不是咱刚才那个代码对不对他要考到什么地方考到consumer这个什么呀一个包叫interceptor这个包我们回到consumer里边在这个地方新建一个包包叫interceptor来念起来然后呢你就把
+[10:58] 这个拦截器类给它Ctrl C然后呢Ctrl V这就粘过来了对吧然后别忘了还没完我们是不是还缺一个配置类对吧拷到这个Configurator包里边就行就是它Smart MVC的一个配置类粘过来然后这样子的话就搞定了那最后呢我们还要提醒大家注意一点那我们刚才是不是把这个拦截器放到Consumer这个微服务工程里呢
+[11:31] 那我问你如果别的工程也需要从这个请求里边取这个用户的一些信息怎么办一样的啊别的微服工程要想这个取数据也是把这两个类一个是拦截器一个是什么配置类考到什么呀他的那个微服工程里边就OK了这个做法都一样说这是这个什么呀我们自定义一个拦截器用来从请求里边取数据的对吧
+[12:00] 这搞定之后呢咱整个认真拦截这个功能才算全部搞啊
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Cloud 微服务架构中，通过自定义拦截器（TokenInterceptor）和网关过滤器（AuthFilter）实现 JWT 认证与用户信息传递。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 显示 IDE 中 AuthFilter.java 文件，代码中将 JSON Token 添加到请求参数中，用于后续服务调用。
+画面 2: 同画面 1，无新增要点。
+画面 3: 展示 PPT 中的系统架构图，包含接入方、网关、认证服务（UAAS）、微服务等模块及其交互关系。
+画面 4: 显示项目文件夹，包含 AuthFilter.java、JWT令牌.png、LoginUser.java 等文件。
+画面 5: IDE 中 AuthFilter.java 文件，高亮显示将 JSON Token 添加到请求参数的代码行。
+画面 6: 播放器中展示 TokenInterceptor.java 代码，用于解析并设置用户登录信息。
+画面 7: 播放器中展示 WebConfig.java 配置类，用于注册 TokenInterceptor 拦截器。
+画面 8: 播放器中展示 TokenInterceptor.java 代码，光标位于设置属性的语句上。
+画面 9: 播放器中展示 TokenInterceptor.java 代码，光标位于设置属性的语句上。
+画面 10: 文件资源管理器中，选中 TokenInterceptor.java 文件。
+画面 11: IDE 中 AuthFilter.java 文件，光标位于将 JSON Token 添加到请求参数的代码行。
+画面 12: IDE 中 AuthFilter.java 文件，光标位于将 JSON Token 添加到请求参数的代码行。
+画面 13: IDE 中 WebConfig.java 文件，显示配置类用于注册拦截器。
+画面 14: 播放器中展示 TokenInterceptor.java 代码，光标位于设置属性的语句上。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```java
+@AuthAuthentication authAuthentication(AuthAuthentication authentication;
+Map<String, String> jsonToken = new HashMap<>();
+(authAuthentication.getAuthRequest().getRequestParameters());
+//3.将jsonToken加入转发服务的request，这样被服务就能通过
+requestContext ctx = RequestContext.getCurrentContext();
+HttpServletRequest request = ctx.getRequest();
+request.getParameterMap(); // 关键步骤，一定要看一下，下面这行代码将能取到值
+Map<String, List<String>> requestQueryParams = ctx.getRequestQueryParams();
+if (requestQueryParams == null) {
+    requestQueryParams = new HashMap<>();
+}
+List<String> arrayList = new ArrayList<>();
+arrayList.add(EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(jsonToken)));
+requestContext.put("jsonToken", arrayList);
+ctx.setRequestQueryParams(requestQueryParams);
+return null
+```
+
+画面 5:
+```java
+List<String> arrayList = new ArrayList<>();
+arrayList.add(EncryptUtil.encodeUTF8StringBase64(JSON.toJSONString(jsonToken)));
+requestContext.put("jsonToken", arrayList);
+ctx.setRequestQueryParams(requestQueryParams);
+return null
+```
+
+画面 6:
+```java
+/**
+ * Token拦截处理
+ */
+public class TokenInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(HttpServletRequest httpServletRequest,
+                             HttpServletResponse httpServletResponse, Object o) {
+        String jsonToken = httpServletRequest.getParameter("jsonToken");
+        if (StringUtils.isNotBlank(jsonToken)) {
+            LoginUser loginUser = JSON
+                    .parseObject(EncryptUtil.decodeUTF8StringBase64(jsonToken),
+                            new TypeReference<LoginUser>() {
+                            });
+            httpServletRequest.setAttribute("jsonToken", loginUser);
+        }
+        return true;
+    }
+}
+```
+
+画面 7:
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new TokenInterceptor()).addPathPatterns("/**");
+    }
+}
+```
+
+画面 13:
+```java
+package cn.itcast.wanxingzp.consumer.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new TokenInterceptor()).addPathPatterns("/**");
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 3: PPT 标题为“P2P项目认证架构图”，架构图包含以下模块及交互：
+- 接入方（Web、移动端、第三方接入） → 网关 → 认证服务（UAAS） → 微服务1、微服务2、微服务3
+- 认证服务（UAAS） → 统一账号服务
+- 认证服务（UAAS） → 上传用户资产权限认证
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

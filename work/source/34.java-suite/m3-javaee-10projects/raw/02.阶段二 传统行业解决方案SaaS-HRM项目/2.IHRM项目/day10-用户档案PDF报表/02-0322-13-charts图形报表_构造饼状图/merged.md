@@ -1,0 +1,132 @@
+# 13-charts图形报表：构造饼状图
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day10-用户档案PDF报表
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day10-用户档案PDF报表\13-charts图形报表：构造饼状图_【海量资源尽在 ubkz.com】.mp4
+- 时长 10分56秒（音频 656s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 好了那接下来呢根据我们刚才的分析就可以创建一个饼状图以及填充上数据来看效果了那首先呢就是说在我这边要传递的内容各位来看大家会发现啊我要传递的是公司和他每一个公司里的员工数量那要传递很多所以我一会传递数据的时候是不是可以借助封装一个渣滑对象的粒子集合这种形式来做
+[00:28] 那粒子经合有了之后我是不是需要将list里面每一个对象的所属性都要给它设置到当前这个模板的field之下所以在这边我去创建field这个图上来那field第一个我就来一个叫做company代表的是我们公司名称OK保存下那它是死尊类型的也没问题那除了company之外
+[01:03] 再去创建一个Field好了这回呢代表的就来一个叫做Count吧修改一下它的类型Lang好了这边呢代表的是员工数量OK那我们现在已经把这两个Field创建好了之后接下来有了Field我们就可以去创建图形了跟刚才的套路一样Chart拖拽过来那拖拽过来之后呢我们现在就用秉桩图勾选上秉桩图点击Next
+[01:34] 那接下来在这个界面我们要做的事情注意要做的事情一共有这么几步首先第一步这个叫做series这玩意儿呢其实你可以把它理解为你创建一个饼状图形的一个名称你可以这么理解那如何去设置名称这个首先点击这三个点点击进来之后选择add那注意这边呢就让你去选择你当前的一个名称你可以随便去写双引号代表的是一个字符串我就不改了直接用默认的finishok好了
+[02:04] 第一个我们创建好了之后接下来我们要去做第二件事key那这个key究竟代表的是什么含义我刚才也跟各位做过介绍key其实代表的是你要展示的这个名称我们要展示的是不是就是企业名称传职博客黑马成员或者其他没错吧所以我们接下来来看一下这个key应该选择什么当然了不能用什么series1了这边key注意去选择
+[02:34] 那选择的值要用什么这边有parameters我们可以传递一些parameters参数我们现在是不是放的是一个粒子集合这种形式传递过来的那里面是不是传递的是对象的所有属性那我们都知道现在用的属性是不是叫做company所以双击companyOK表达式为我们构造好了所以这些表达式你想记就记不想记其实双击也可以都没问题点击finish
+[03:01] OK企业名称有了之后接下来关注的是这边还有它的一些设置比如说这个labellabel其实跟企业名称用一个就够了它们其实代表的是含义是差不多的OK那好了还有一个value那这个value还是跟刚才的张图是不是有一个叫做总员工数量那这个员工数量就代表的是value它是用来计算份额的所以value咱们也去选择一下我们用的是count没错吧好了双击count进来了点击finish
+[03:32] 那这样一来我这个饼状图形其实已经构造的差不多了好了我们点击finishOK那接下来的事情呢就是对这个报表里面的比如说title部分做一些我们自己的样式的一些修改可以给它起一个名字我们用的是饼状图OK那除了这个之外呢还有一些就是我们这个图形的设置如果说这个图形你觉得不太理想的话你想调整一下它的一些基本的属性那如何去做注意鼠标子有电
+[04:09] 点击到这个柄状图然后呢这边找properties那properties里面有很多其中找到chart部分这个chart其实就是对柄状图里面的一些内容在做它的一些设置了比如说这边呢可以选择这个柄状图你可以给它一个title那这个title你可以随便写注意这个其实接收的也是一个表达式啊你点这边进来是一个填写表达式的这么一个界面你可以自己写当然了表达式的话我们可以写一些中文
+[04:40] 我们自己定义一些内容比如说呢就是一个用户份额图形这个是不是中文的引号啊OK改成英文引号点击finish用户柄状图形已经有了当然了这边还有你这个标题应该写到什么位置比如说呢可以写到底部可以写到底部这个就可以自己随便去改了那还有当前这个标题它的一个字体样式字体样式呢
+[05:15] 在这边咱们也做一个修改因为是中文嘛所以划文送体好了可以给它来一个12号字OK那继续往下去找其实还有它基本的一些其他的设置那这些设置呢各位如果感兴趣的话自己去玩其实就可以了我在这边呢就不再去做任何的操作了那这些我们搞定了之后接下来呢这边这个title啊它也是一个字体啊我把这个字体也做一个设置这个就是中文它要操作起来就有这么一点点麻烦
+[05:46] 和我们送题OK那这样一来我当前这个饼状图这个模板已经制作好了那制作好了之后还是我们之前的套路找到图形右键进行编译编译好了之后Ctrl C拿到我们的代码里Ctrl V拷过来那拷过来了创建一个Controller方便我们进行测试这回访问的是06 Controller那我们现在是图形报表
+[06:21] 写严谨charts图形报表那对于这个charts图形报表呢首先关注的是还是回到我们这张图形做分析的时候我们要传递是不是这么一个对象集合那这个对象集合两个属性第一个代表的是企业名称第二个是这个企业里面它员工的数量没错吧所以呢我还需要去构建这么一个对象也写到domain当中来一个class比如说我就叫做user count统计数据的这么一个实体类
+[06:53] 这个实体类当中需要定义两个属性死菌类型的这些属性名称和属性类型一定要跟我们模板当中使用的对应上company死菌类型没问题count是不是lang类型写了一个lang类型那就lang类型吧privateprivatelang类型的countOK生成对应属性的get set方法为了我一会儿构造数据快一点生成它的get set方法和构造方法
+[07:32] 好了这边实体类已经构造好了接下来就是说在我进行参数填充的时候参数填充我们现在使用的同样也要传递一个Java对象的一个集合的DataSource没错吧所以我这边基本上都是一样的只不过我get的list集合不能是user listget user我叫count list所以这边改一下get user count list得到的就是user count的
+[08:03] 利斯集合OK好了接下来就可以去随便创建几个了user countuc uce等于new一个user count比如说我这个的企业名称叫做传志播客我们一共有比如说有一千人一千人浪类型L接下来再来一个二这个比如说叫黑马程序员程序员
+[08:44] 好了里面也有1000人比如说再来一个UC3比如说就是百度百度人也很多比如说也来1000OK接下来就是list.addadd u1 u2 u3UC1没问题这样一来我们的数据也已经构造好了并且以Java bin集合的形式传递进去
+[09:22] 那只不过我上边需要做一个加载模板明儿版名称的一个改造我们叫做插词抱歉我习惯这边call一下因为自己手写的话还是不太靠谱OK听完好了之后重新启动一下当前微服务抱歉停一下这边应该是6了再重新启动OK这边的程序让它重新启动我回到我的浏览器这边6走好了各位来看
+[09:58] 这回呢这个图形呢也给我们展示出来了饼状图没问题用户份额图各位来看其实都是差不多的一个份额就是三分之一嘛没错吧OK那这样一来呢其实我们这个图形也已经展示出来了那其实对于这个charts图表来说呢它还有很多个啊我们回到这边来看一下其实除了这个饼状图之外呢还有很多的图表比如说拿过来一个您可以去创建比如说这边的柱状图
+[10:29] 3D柱状图那但是不管是哪一种图形基本上都是大同小异的这么一个比如说就这柱状图了走一个这边基本上都是一个大同小异的这么一个配置只不过呢它会多一些其他的一些属性让你去选择比如说Gradigray可以选择类型比如说这边还有Value比如说还有Label但是呢不管是什么我们学会了柱状图之后其他的图形基本上都是一模一样OK
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Jaspersoft Studio 中设计一个饼图报表，并通过 Spring Boot 后端生成并预览该报表。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：在 Jaspersoft Studio 中，打开名为 testCharts.jrxml 的报表文件，左侧 Outline 面板显示报表结构，右侧面板显示可拖拽的图表元素（Chart），底部 Preview 预览窗口显示空白报表。
+画面2：在 Outline 面板中，展开 Fields 节点，选中 company 字段，准备用于图表数据绑定。
+画面3：打开 Chart Wizard 的 Dataset 配置页，选择 Main Dataset 作为数据源，准备配置图表数据。
+画面4：在 Chart Wizard 中，将 Label 设置为 $F{company}，准备配置图表标签。
+画面5：将配置好的饼图元素拖拽到报表设计区域，图表元素被选中，Properties 面板显示其位置和大小属性。
+画面6：切换到 IntelliJ IDEA，打开 JasperController05.java 文件，查看 Java 代码中创建报表的逻辑。
+画面7：在 JasperController05.java 中，查看生成报表的代码，包括创建 JRBeanCollectionDataSource 和 JasperPrint 对象。
+画面8：在 IntelliJ IDEA 中，展开项目结构，查看 domain 包下的 User 类。
+画面9：在 IntelliJ IDEA 中，打开 UserCount.java 文件，查看 UserCount 类的定义。
+画面10：在 IntelliJ IDEA 中，查看 UserCount 类的源码，显示其属性和方法。
+画面11：在 IntelliJ IDEA 中，查看 UserCount 类的源码，显示其属性和方法。
+画面12：在 IntelliJ IDEA 中，打开 JasperController05.java 文件，查看 createPdf 方法，用于生成 PDF 报表。
+画面13：在浏览器中预览生成的饼图报表，显示“用户份额图形”，包含“传智播客”、“黑马程序员”、“baidu”三个部分。
+画面14：在 Jaspersoft Studio 中，预览报表，显示“用户份额图形”饼图，图表元素已正确配置。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面6代码：
+```java
+Map parameters = new HashMap<>();
+//1.获取javaBean的数据
+List<User> userList = getUserList();
+//2.通过javaBean的list集合
+JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(userList);
+JasperPrint print = JasperFillManager.fillReport(fis, parameters, ds);
+JasperExportManager.exportReportToPdfStream(print, os);
+```
+
+画面7代码：
+```java
+public List<User> getUserList() {
+    List<User> list = new ArrayList<>();
+    for(int i=0;i<10;i++) {
+        User user = new User(id: i, username: "itcast" + i, company: "传智播客", dept: "讲师", mobile: "1380000000" + i);
+        list.add(user);
+    }
+    for(int i=0;i<5;i++) {
+        User user = new User(id: i, username: "itboim" + i, company: "黑马程序员", dept: "讲师", mobile: "1380000000" + i);
+        list.add(user);
+    }
+    return list;
+}
+```
+
+画面8目录结构：
+```
+src
+  main
+    java
+      cn.itcast
+        Controller
+          JasperController02.java
+          JasperController03.java
+          JasperController04.java
+          JasperController05.java
+          JasperController06.java
+        domain
+          User.java
+          UserCount.java
+    resources
+      templates
+        test.jasper
+        testCharts.jasper
+        testConn.jasper
+        testGroup.jasper
+```
+
+画面12代码：
+```java
+public void createPdf(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    //1.引入jasper文件
+    Resource resource = new ClassPathResource("templates/testCharts.jasper");
+    FileInputSream fis = new fileInputStream(resource.getFile());
+    //2.创建jasperPrint对象
+    ServletOutputStream os = response.getOutputStream();
+    try {
+        Map parameters = new HashMap<>();
+        //1.获取javaBean的数据
+        List<UserCount> userList = getUserCountList();
+        //2.通过javaBean的list集合
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(userList);
+        JasperPrint print = JasperFillManager.fillReport(fis, parameters, ds);
+        JasperExportManager.exportReportToPdfStream(print, os);
+    } catch (JRException e) {
+        e.printStackTrace();
+    } finally {
+        os.flush();
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

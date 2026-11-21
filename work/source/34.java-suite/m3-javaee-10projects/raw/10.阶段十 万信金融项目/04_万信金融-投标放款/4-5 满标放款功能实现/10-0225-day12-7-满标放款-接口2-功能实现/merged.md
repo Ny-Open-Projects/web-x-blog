@@ -1,0 +1,236 @@
+# day12-7-满标放款-接口2-功能实现
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：04_万信金融-投标放款/4-5 满标放款功能实现
+- 源文件：10.阶段十 万信金融项目\04_万信金融-投标放款\4-5 满标放款功能实现\day12-7-满标放款-接口2-功能实现_【海量资源尽在 666java.com】.mp4
+- 时长 13分16秒（音频 796s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 前面的话咱们把接口一啊这块的功能给搞定了接下来按照顺序我们要实现接口二接口二呢大家看一下就是图当中的这一部分对不对大家看看那么这边呢主要是存管代理服务啊他要接收什么呀交易中心发过来的请求这个请求里面是带有数据是吧那这边就要接收数据然后呢生成签名还要保存什么呀交易记录然后呢把
+[00:34] 这个生成的签名啊还有数据啊直接往哪发啊往银行存款系统那边进行发送那这边的话是不是直接开始划拨资金了对不对这儿呢就是真正的一个放款然后呢银行那边处理完之后会返回给我们这个成功不成功的一个结果对不对那么存款代理服务呢然后根据这个结果呢去更新交易记录然后呢他再把这个结果呢返回给谁啊交易中心
+[01:00] 那么大家其实呢我们的业务啊或者我们这个项目开发到这儿的话大家基本上对于这个存款代理服啊这边他到完成的这个功能应该都是很熟悉了吧或者你应该总结出来套路吧他这边干的活是不是几乎都是固定的你不管是你看咱一开始的开户到后来的发标到什么呀满标审核对吧等等的你会发现他这边干的活都是一模一样对不对
+[01:28] 所以说呢这个代码咱都比较熟了啊咱们先来快速的把这块代码的编写一下那个数据防控层咱就不管啊这个老早都已经编写过了咱直接就从业务层开始了存管代理服务咱找一找存管代理服务业务层啊找到接口找到接口是不是要增加一个方法吗新增一个方法就那个接口二啊业务层在这是这个吧对不对那我们需要
+[02:04] 在这呢再加一个方加什么方法呢看讲义吧那就是买标放款这个方法站过来大家瞅一眼吧这跟那个kontrol的那个接口里边定义的差不多看一看发明conform了然后呢我们重点关注的是他有一个参数叫learn request哎这个learn request我们在哪见过吗有没有在哪见过learn request那咱找一找这个learn request啊我们看图我们说了
+[02:45] 这个交易中心在接口一里边他是不是会发请求到哪儿通过代理服务然后呢他是要传过来一些数据这个数据是不是就应该封装成都安request的呢咱找找以前接口一那一块的代码接口一那一块的代码是不是在交易中心嘛这个前后你得能串联起来啊哦咱看一看这个接口一找一找那刚写的方法呢来这儿是这吧这是不是通过fine在往哪往
+[03:18] 从代理服发请求你看这边的数据他是不是在这儿是不是就是那个放款明信了是服装到了哪来啊learn request这个对象里边那从来代理服务这边是不是就是通过还是通过这个对象来进行接收吗这是这个参数它里边都有啥呢我们再看一眼放款明信对不对平台用尽标的编码请留水号标的的id等等那然后呢这个情况代理服务这边就进行处理处理完之后呢是不是会给交易中心返回一个
+[03:49] 呃成功不成功的一个结果对吧这个结果呢跟之前一样还是封装成这种类型这个大家以前都见过这是什么呀这是又从他接口啊我们把这块都定好定好之后呢我们去实现类当中还是实现功能实现类我们就是哎不是这儿啊应该是这个时间来那实现类里边写的代码其实跟咱之前这个地方这是这是干啥的呀这是那个图标的那个处理对不对
+[04:20] 其实跟这个逻辑几乎是什么一模一样那咱先把刚才街口里边新增的这个方法给它生成OK是不是就在这对不对那咱接下来把这块代码呢我们要快速的编写一下你就参考什么呀上面这块代码就行了基本上是一模一样的那首先咱干嘛你就看上面这个代码首先我们是不是要NEO一个交易记录这个对象因为我们要保存嘛那你也是参考这直接就开始什么NEO就行了
+[04:56] depository record等于new depository record然后new的时候都需要给啥数据那你也是看着上面这个东西就行你看人家上面都有啥什么request number对不对还有什么好这个有类型还有这个什么后边是后边这是不是这个参数的类型对不对在后边是什么在后边是这个主件的值对吧这个id
+[05:30] 跟之前一样啊咱开始在这儿也是往这里边直接就进行封装了啊首先就是浪 request不就是咱这个参数吗一定要注意啊这个参数从这里边呢我们要他的一个什么东西request number然后还要啥啊呃我们这儿的业务啊我们这儿的业务呢他是就是请求类型啊其实就是业务类型我们是不是应该叫满标放款对吧这个值呢我们不要自己随便写了
+[05:56] 我们找一个美剧吧depositorydepository我再敲一敲p o s i t o r ydepositoryrequest type code就这个啊点应该是这个买标放款我们调用他的get code的方法啊导到这个字幕上值然后第三个参与就是什么呀
+[06:24] 对象的类型咱这个对象的类型不就是这个谁啊lone request然后再往后呢就是这个对象的ID是不是lone request.get ID好搞定啊这是我们直接new好了一个什么呀交易记录对吧那既然直接保存嘛可不是啊你千万不要忘了我们今天来跟之前一样是要搞什么呀密档性实现对不对密档性实现啊
+[06:57] 怎么实现密等性啊咱们前面是不是封装好的方法我这就不再过头说了啊咱这个进行了不止一次了是不是这个方法咱在当前这个类当中封装好的啊我们把这个谁呀对require对象给他放进去就行了啊他这里边是不是分了三种情况吗进行这个密等性的一个处理他处理完之后呢是不是返回给我们了这么一个类型的一个对象吧response DTO啊就是他我们进来接收一下response DTO吧
+[07:32] 这是密等性实现的要搞定了那接下来我们是不是做一个判断看看这个请求要不要继续往下执行吧怎么判断啊是不是判断它等不等于空是不是我们是不是取反如果它不等于NOW怎么着啊然后我们就结束了就return这个什么呀response detail啊这块你下去再看看之前代码啊这个都是咱最近刚讲过的刚用过那如果它是NOW的话我们这个请求是不是继续往下走那接下来要干啥呀
+[08:03] 下来你看图外接下来不就是什么呀签名啊啊还有什么呀发送请求吗对不对好那咱进来继续编写这个代码那咱这个发请求的时候是不是要获取到最新的这个交易记录吗因为我们要把这个交易记录也发过去对不对所以我们这呢呃查询一下这个交易记录啊获取最新的数据吗那就是跟上面一样啊这个代码其实都一样了你看这哪这是不是调用这个方法了给他安定的拜request number
+[08:37] get entity by request number然后呢从哪取出来这个request number参数到里边呗get request number然后呢我们接收一下它返回来就是还是这个就业记录对象啊我们直接接收一下是获取到最新的然后就可以干什么呀然后我们就干什么呀搞签名呗对不对签名咋搞先把它转按成json格式的数据json.2
+[09:12] 接受是对不对然后呢把这个浪人request先给他放进去然后这就转成接送格式的一个字幕串了我们接下来接收一下接送gson st 安逸先生去那么转成接送串之后呢接下来是不是要对他进行贝斯64这个编码对不对调我们以前说的工具类第二个方法叫 n 口的对不对然后把这个什么呀json
+[09:41] 给他扔进去然后返回的这个字符串呢我们接收一下就是阿姨qdata是不是该准备的东西都已经准备好了吧是不是这应该我们之前说这应该不叫签名这叫准备签名啊叫准备签名啊因为真正的签名是不是一会在我们调的那个方案里边封装好了
+[10:12] 那该准备的都准备好之后我们既然是不是该发请求了对不对发请求用哪个方法我们前面封装好的通用的方法叫send http get这个你还有印象是不是第一个参数是不是我们访问的银行那边的接口就是服务名这服务的名字我们不能随便写我们要从讲义里边给他拿过来就是他了然后第二参数是啥第二参数是什么URL跟上面一样我就直接拿过来了就是这一块一模一样
+[10:48] 对直接拿过来那这呢就是什么呀对url然后后面这俩大家应该也比较熟悉了吧一个是这个reqdata一个是depostery record啊这个代码咱写了很多遍然后呢呃在这个方案里边大家应该还有印象吧他这里边是吧还配了一个蓝键器会在请求发之前会自动进行什么呀签名然后呢具体的是在这儿是不是开始这边发请求发请求之后呢我们这边根据请求的结果是吧还会做一些
+[11:21] 什么互聚的一些处理那我们这边他出来之后是不是把这个结果封装到这里边了我们直接就干什么return就行哎这个搞定这是这个什么右层代码能行啊因为我刚才说了吗这块代码咱已经写了好几遍了那右层代码想了之后呢咱就顺手把Controller里边代码也给他完善一下吧打开这个Controller啊应该是哪个呀应该是这个对吧
+[11:52] 你看这个这里边该干嘛这里边就是调用什么业务层的看方论方法然后把这个参数传过去对不对然后呢我们其实也不用声明变量去干什么来接收我们是不是直接反而又想可以吗不可以啊不可以我们找找咱之前你看跟这个写法是一样你看我们之前风抽取出来的这个方案是不是就派上用场了对不对所以我们这呢还得声明一个变量去接收一下
+[12:26] 然后呢我们在调用这个谁啊其实就走这块儿的我们该抽取的前面都抽取过了啊应该是这么写大家看是不是对吧那这个方法里边都干嘛你要是忘了的话你可以进去看一看了这里边其实就是从传过来这个对象里边把我们想要的比如说这个code呀这个msg给他取出来专门封装到这个rest response里面做象所以这是我们把这个Controller这块代码也给他玩上了一下
+[12:58] 那截至到目前咱就把哪一块代码全部搞定了对接口二啊就是接口二就是34567891011整个这块代码搞定这个我们会相对来说会快一些啊因为我们前面说这块代码咱前面经常编写
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+讲解银行放款流程中，交易服务与代理服务的接口定义、代码实现及系统间调用逻辑。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：
+- 展示了 `TransactionController.java` 文件中的 `@PostMapping("/m/loans/{id}/projectStatus/{approveStatus}")` 接口定义。
+- 代码中使用了 `@ApiImplicitParam` 注解定义了路径参数 `id`、`approveStatus` 和查询参数 `commission`。
+- 代码逻辑是调用 `projectService.loansApprovalStatus` 方法并返回 `RestResponse.success(result)`。
+
+画面2：
+- PPT标题为“3.2.3 存管代理服务确认放款接口(接口②)”。
+- 展示了多个服务组件的图标，包括 Apollo 配置中心、configservice、ApolloPortal、SQLyog Professional、adminService。
+- 底部显示了代码片段：`@Override public DepositoryResponseDTO DepositoryBaseResponse confirmLoan(LoanRequest loanRequest) { ... }`。
+
+画面3：
+- 展示了 `DepositoryRecordService.java` 文件，其中包含 `@Override DepositoryResponseDTO DepositoryBaseResponse userAutoPreTransaction(UserAutoPreTransactionRequest userAutoPreTransactionRequest)` 方法。
+- 代码中注释了“技术预处理”和“审核保单次数”。
+- 方法签名中包含 `confirmLoan(LoanRequest loanRequest)`。
+
+画面4：
+- 展示了项目结构，选中了 `resources` 目录下的 `target` 文件夹。
+- 项目结构中包含 `pom.xml`、`wanningzp-depository-agent-Service.iml` 等文件。
+
+画面5：
+- 展示了 `DepositoryRecordService.java` 文件，弹出窗口显示了 `confirmLoan` 方法的实现。
+- 弹窗中列出了 `confirmLoan` 方法的参数和返回值。
+
+画面6：
+- 展示了 `DepositoryRecordServiceImpl.java` 文件中的 `userAutoPreTransaction` 方法。
+- 代码中包含 `String jsonStr = JSON.toJSONString(userAutoPreTransactionRequest);` 和 `String reqData = EncryptUtil.encodeUTFSStringBase64(jsonString);`。
+- 代码调用了 `figService.getDepositoryUrl(1) + "/Service"`。
+
+画面7：
+- 展示了 `DepositoryRecordServiceImpl.java` 文件中的 `userAutoPreTransaction` 方法。
+- 代码中包含 `String jsonStr = JSON.toJSONString(userAutoPreTransactionRequest);` 和 `String reqData = EncryptUtil.encodeUTFSStringBase64(jsonString);`。
+- 代码调用了 `figService.getDepositoryUrl(1) + "/Service"`。
+
+画面8：
+- 展示了 `DepositoryRecordServiceImpl.java` 文件中的 `confirmLoan` 方法。
+- 代码中包含 `if (responseDTO != null) { return responseDTO; }`。
+- 代码中定义了 `String requestNo = getEntityByRequestNo(loanRequest);`。
+
+画面9：
+- 展示了 `DepositoryRecordServiceImpl.java` 文件中的 `confirmLoan` 方法。
+- 代码中包含 `String requestNo = getEntityByRequestNo(loanRequest);`。
+- 代码中定义了 `LoanRequest` 类的属性和方法。
+
+画面10：
+- 展示了 `DepositoryRecordServiceImpl.java` 文件中的 `confirmLoan` 方法。
+- 代码中包含 `String jsonStr = JSON.toJSONString(loanRequest);`。
+- 代码中定义了 `sendHttpGet` 方法的参数和返回值。
+
+画面11：
+- 展示了 `DepositoryRecordServiceImpl.java` 文件中的 `confirmLoan` 方法。
+- 代码中包含 `String jsonStr = JSON.toJSONString(loanRequest);`。
+- 代码中定义了 `sendHttpGet` 方法的参数和返回值。
+
+画面12：
+- 展示了 `DepositoryRecordServiceImpl.java` 文件中的 `confirmLoan` 方法。
+- 代码中包含 `String platformNo = configService.getPlatformCode();`。
+- 代码中定义了 `sendHttpGet` 方法的参数和返回值。
+
+画面13：
+- 展示了 `DepositoryAgentController.java` 文件中的 `@PostMapping("/confirm-loan")` 和 `@PostMapping("/modify-project-status")` 方法。
+- 代码中使用了 `@ApiImplicitParam` 注解定义了参数。
+
+画面14：
+- 展示了系统架构流程图。
+- 流程图中包含“清算中心”、“存管代理”、“存管系统”等节点。
+- 流程图中包含“1. 管理员确认放款”、“2. 通过存管系统生成放款交易”、“3. 存管系统返回放款结果”等步骤。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+@Override
+@ApiImplicitParams({
+    @ApiImplicitParam(name = "id", value = "标的.id", required = true, dataType = "long", paramType = "path"),
+    @ApiImplicitParam(name = "approveStatus", value = "标的的状态", required = true, dataType = "string", paramType = "path"),
+    @ApiImplicitParam(name = "commission", value = "手续费金额", required = true, dataType = "string", paramType = "query")
+})
+@PostMapping("/m/loans/{id}/projectStatus/{approveStatus}")
+public RestResponse<String> loansApprovalStatus(@PathVariable("id") Long id, @PathVariable("approveStatus") String approveStatus) {
+    String result = projectService.loansApprovalStatus(id, approveStatus, commission);
+    return RestResponse.success(result);
+}
+```
+
+画面2：
+```java
+@Override
+public DepositoryResponseDTO DepositoryBaseResponse confirmLoan(LoanRequest loanRequest) {
+    ...
+}
+```
+
+画面3：
+```java
+@Override
+DepositoryResponseDTO DepositoryBaseResponse userAutoPreTransaction(UserAutoPreTransactionRequest userAutoPreTransactionRequest) {
+    ...
+}
+
+// 审核保单次数
+@Override
+DepositoryResponseDTO DepositoryBaseResponse confirmLoan(LoanRequest loanRequest) {
+    ...
+}
+```
+
+画面4：
+- 无代码。
+
+画面5：
+- 无代码。
+
+画面6：
+```java
+String jsonStr = JSON.toJSONString(userAutoPreTransactionRequest);
+String reqData = EncryptUtil.encodeUTFSStringBase64(jsonString);
+String url = configService.getDepositoryUrl(1) + "/Service";
+return sendHttpGet(serviceName: "USER_AUTO_PRE_TRANSACTION", url, reqData, depositRecord);
+```
+
+画面7：
+```java
+String jsonStr = JSON.toJSONString(userAutoPreTransactionRequest);
+String reqData = EncryptUtil.encodeUTFSStringBase64(jsonString);
+String url = configService.getDepositoryUrl(1) + "/Service";
+return sendHttpGet(serviceName: "USER_AUTO_PRE_TRANSACTION", url, reqData, depositRecord);
+```
+
+画面8：
+```java
+if (responseDTO != null) {
+    return responseDTO;
+}
+String requestNo = getEntityByRequestNo(loanRequest);
+```
+
+画面9：
+```java
+String requestNo = getEntityByRequestNo(loanRequest);
+```
+
+画面10：
+```java
+String jsonStr = JSON.toJSONString(loanRequest);
+private DepositoryResponseDTO DepositoryBaseResponse sendHttpGet(String serviceName, String url, String reqData, DepositoryRecord depositRecord) {
+    ...
+}
+```
+
+画面11：
+```java
+String jsonStr = JSON.toJSONString(loanRequest);
+private DepositoryResponseDTO DepositoryBaseResponse sendHttpGet(String serviceName, String url, String reqData, DepositoryRecord depositRecord) {
+    ...
+}
+```
+
+画面12：
+```java
+String platformNo = configService.getPlatformCode();
+String responseBody = okHttpService
+    .doSyncGet(url + "?serviceName=" + serviceName + "&platformNo=" + platformNo + "&reqData=" + reqData);
+DepositoryResponseDTO DepositoryBaseResponse depositoryResponse = JSON.parseObject(responseBody, new TypeReference<DepositoryResponseDTO>(DepositoryBaseResponse.class) {});
+```
+
+画面13：
+```java
+@Override
+@ApiImplicitParams({
+    @ApiImplicitParam(name = "loanRequest", value = "标的的放款放款信息", required = true, dataType = "LoanRequest", paramType = "body")
+})
+@PostMapping("/confirm-loan")
+public RestResponse<String> confirmLoan(@RequestBody LoanRequest loanRequest) {
+    return null;
+}
+
+@Override
+@ApiImplicitParams({
+    @ApiImplicitParam(name = "modifyProjectStatusDTO", value = "修改标的的状态DTO", required = true, dataType = "ModifyProjectStatusDTO", paramType = "body")
+})
+@PostMapping("/modify-project-status")
+public RestResponse<String> modifyProjectStatus(@RequestBody ModifyProjectStatusDTO modifyProjectStatusDTO) {
+    return null;
+}
+```
+
+画面14：
+- 无代码。
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面2：
+- PPT标题：“3.2.3 存管代理服务确认放款接口(接口②)”。
+- PPT内容包含多个服务组件的图标，包括 Apollo 配置中心、configservice、ApolloPortal、SQLyog Professional、adminService。
+-
+

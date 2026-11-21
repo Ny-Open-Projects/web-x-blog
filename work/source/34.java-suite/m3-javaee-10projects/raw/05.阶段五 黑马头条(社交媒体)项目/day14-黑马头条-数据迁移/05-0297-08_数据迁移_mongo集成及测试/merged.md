@@ -1,0 +1,138 @@
+# 08_数据迁移_mongo集成及测试
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day14-黑马头条-数据迁移
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day14-黑马头条-数据迁移\08_数据迁移_mongo集成及测试【海量资源尽在 666java.com】.mp4
+- 时长 7分26秒（音频 446s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面咱们去说一下这个mongodb的一些工具这个咱们还是要去集成而集成的方式跟这个HBase是类似的首先你得先去干嘛你得先去到这个common下边去拷贝一些东西就是说这里边有一个mongo你把它拷贝到哪拷贝到当前的Java这个common下边有一个叫做mongo你需要去创建一个包好这个拷进来之后
+[00:29] 有这么几个类当然前提条件你得先去连上连上的话这时候咱们文档上有你需要在这去干嘛去连上你的mongo这是你的地址是吧这是你的端口号这是你的数据库名称好吧然后就是这些类了这些类最主要的是当前的mongo db configuration比较简单你看一下它就是一个配置类然后是读了当前的配置文件再往下就是去创建了一个mongo template
+[00:59] 把它是放到了Spring的容器中这时候你只需要在项目中用到一个或者注入当前的MongoTemplate就能直接去用好吧这里边是封装了一些增伤改查的方法OK下面还有一些东西这有一个MongoConstants这有一个表明是吧还有一个就是当前的Entity里边它有一个MongoStorageEntity你看它继承谁呢继承一个叫做StorageEntity
+[01:29] 这个其实就是咱们要存储的一个表里边就包含了很多的数据你看有一个data list是吧他也有rokey还有啥还有这个data list里边其实就是一体的什么你的什么agent class name还有你的是storage entity就是当前的什么当前的这种dq value是吧有86那这个咱们就设置完了设置完之后比较简单这时候你需要
+[01:59] 在当前的这个这个项目里边啊去干嘛呢先去引入要想用的话先引入啊这有一个叫做什么com.2然后是黑马common然后是什么叫mongo这样引入之后呢咱们就可以去写一个测试方法这样就完了啊测试方法咱们来测一测测一个新增测一个查询好吧咱们在这去创建一个类叫mongo test
+[02:33] mongo test它是一个sprinttest然后是run with sprint render.class然后下面就可以去注入谁注入一个叫做mongo template就它拿到它之后咱们就可以去做一些事首先咱们来做一个新增吧y的然后是test c好这是一个test
+[03:06] 然后咱们就可以去新增里边是有很多方法的比如说有一个叫做insert就可以往里边去传一个对象我传哪个对象你就可以往里边传一个AP article还是以这个为例article等于new一个AP article然后是AP article.set对象.set id咱们可以是这个id比如说22222下面是AP
+[03:40] 那几个点赛的抬头吧什么来着要黑马头条说明书说明书啊好下面呢你就可以去保存了保存完之后呢来看一看看怎么着啊能不能保存进去咱们可以打开一个客户端叫4993t是吧打开它然后呢你连上你的数据库mongo数据库啊
+[04:16] 这时候就是当前的ArticleDB这个在哪看其实在咱们这在comment下面comment的下边有一个叫做mongolpublish你看这个是叫ArticleDB是吧当然这个名字你可以随便起如果说你的名字不叫它那就按照你的名字走好吧好打开它之后你可以看一下当前的表它里边是有一点数据的
+[04:43] 你可以view一下是数据迁移是吧111这是我插入的数据呢并不是它了是啥呢是222然后呢是黑马头条说明书好咱们就去保存走稍等一下好马上完成稍等一下咱们看一下这个结果在这去刷新一下就可以好吧咱们刷新刷新刷新好来了看到了吧这时候已经保存成功了可以看一下当前这个数据是不是没问题
+[05:19] 那好那咱们下面呢就来去做一个查询那查询的话呢其实这个方法也是类似的public void然后是test-get1好吧嗯在上面加一个test然后呢是就可以用这个mongo-template点有一个find idfind id啊然后呢这个d是谁呢刚才也看到了这个id呢其实就是他就是他是吧拷贝一下然后是放到这
+[05:51] 第二个就是你要去什么类型的怎么叫AP article class最终的他就能去拿到一个对象怎么叫AP article好吧叫article也行最终的你可以打印一下当前这个article好吧那咱们来试一下看看能不能查询出来走好马上下载完成来看一看好出来了看到了吧你看这数据是不是拿到了222什么黑马头条说明书是吧这样的话就查询出来了
+[06:28] 当然这里边其实有很多的方法你可以再去看一下我们可以点一下啊fine的是吧就fine by the insert还有count啊但还有group remove删除是吧update像这些啊还有合并的一些东西咱们都都能去看啊但是他他有fine out是查询所有对吧那行那这个咱们就不不一个个去说了啊怎么用到的时候呢咱们可以再去说目前这个mongo db呢它是一个文类型的这种数据库是吧
+[06:56] 也是一个no circle的啊比redis要慢一些但是比mycircle要快所以说呢咱们会把一些热点文章的数据呢是存到哪啊存到当前的这种mongo中去存储这个咱们之前啊在数据迁移这块这个分析的时候咱们也说了啊这块内容呢其实是主要存的是当前的什么当前的热点数据啊热点数据啊那行那这个测试呢咱们就说到这下面呢咱们就来去进入下一块内容
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中配置并使用 MongoDB，包括配置文件、实体类、测试类编写及数据操作。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示项目结构，当前选中的是测试类 `MongoTest`，测试已通过。
+画面 2: 切换到 `heima-leadnews-common` 模块，展示 `resources/config` 目录下的多个配置文件。
+画面 3: 查看 `MongoDBConfigure.java` 代码，配置了 MongoDB 的连接参数和模板工厂。
+画面 4: 查看 `StorageData.java` 实体类，定义了目标类名和字段列表。
+画面 5: 在 `IntConfig.java` 中使用 `@ComponentScan` 注解扫描多个包。
+画面 6: 在 `MongoTest.java` 中导入 Spring Boot 测试和 MongoDB 相关依赖。
+画面 7: 在 `MongoTest.java` 中添加 `@Autowired` 注解注入 `MongoTemplate`。
+画面 8: 在 `MongoTest.java` 中调用 `mongoTemplate.insert()` 方法插入数据。
+画面 9: 在 `MongoTest.java` 中设置 `Article` 实体对象的标题，并调用 `insert` 方法。
+画面 10: 在 MongoDB Studio 37 中查看插入的数据，确认数据已存在。
+画面 11: 在 `MongoTest.java` 中编写 `testGetOne()` 方法，通过 `findBrid` 查询数据。
+画面 12: 在 `MongoTest.java` 中使用 `System.out.println(article)` 打印查询结果。
+画面 13: 在 `MongoTest.java` 中执行 `testGetOne()` 方法，终端输出查询到的 `Article` 对象。
+画面 14: 在 `MongoTest.java` 中完成 `testGetOne()` 方法的编写，测试通过。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 3:
+```java
+@Configuration
+@PropertySource("classpath:mongo.properties")
+public class MongoBConfigure {
+    @Value("${mongo.host}")
+    private String host;
+    @Value("${mongo.port}")
+    private int port;
+    @Value("${mongo.dbName}")
+    private String dbName;
+
+    @Bean
+    public MongoTemplate getMongoTemplate() { return new MongoTemplate(getSimpleMongoFactory()); }
+
+    public SimpleMongoDbFactory getSimpleMongoFactory() {
+        return new SimpleMongoDbFactory(new MongoClient(host, port), dbName);
+    }
+}
+```
+
+画面 4:
+```java
+public class StorageData {
+    /**
+     * 目标class 类名
+     */
+    private String targetClassName;
+    /**
+     * 存储的字段列表
+     */
+    private List<StorageEntry> entryList = new ArrayList<StorageEntry>();
+}
+```
+
+画面 5:
+```java
+@Configuration
+@ComponentScan({"com.heima.common.common.init","com.heima.common.mongo","com.heima.common.mysql"})
+@EnableScheduling
+public class InitConfig {
+}
+```
+
+画面 6:
+```java
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
+```
+
+画面 7:
+```java
+@Autowired
+private MongoTemplate mongoTemplate;
+```
+
+画面 8:
+```java
+mongoTemplate.insert();
+```
+
+画面 9:
+```java
+public void testSave() {
+    ApArticle aparticle = new ApArticle();
+    aparticle.setTid(20222);
+    aparticle.setTitle("黑马头条说明书");
+    mongoTemplate.insert(aparticle);
+}
+```
+
+画面 11:
+```java
+public void testGetOne() {
+    ApArticle article = mongoTemplate.findBrid(20222, ApArticle.class);
+}
+```
+
+画面 12:
+```java
+System.out.println(article);
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

@@ -1,0 +1,157 @@
+# 画面线理解：11-代码生成器的实现：核心处理类Generator的实现-中
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day13-代码生成器实现
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day13-代码生成器实现\11-代码生成器的实现：核心处理类Generator的实现-中_【海量资源尽在 ubkz.com】.mp4
+- 抽帧：14 帧 @ 00:18, 01:02, 01:52, 03:03, 03:46, 04:12, 04:28, 04:45, 05:27, 06:04, 06:21, 06:33, 07:01, 07:18
+- 模型：Qwen3-VL-8B-Instruct-Q4_K_M
+- 生成时间：2026-10-27 17:02:31
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 FreeMarker 模板引擎在 Java 中动态生成文件，包括配置模板路径、数据模型、输出路径、设置字符编码、创建输出目录、写入文件并关闭流等步骤。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 在 IntelliJ IDEA 中查看 Generator.java 文件。
+- 代码片段：`String templateFileName = file.getAbsolutePath().replace(this.templatePath, replacement = "");`
+- 代码片段：`String outFilePath = processTemplateString(templateFileName, dataModel);`
+- 代码片段：`Template template = cfg.getTemplate(templateFileName);`
+- 代码片段：`template.setOutputEncoding("utf-8");`
+- 代码片段：`FileUtils.mkdir(outPath);`
+
+画面 2：
+- 展示 Template 类的 API 方法列表，用于设置模板引擎配置。
+- 代码片段：`void setArithmeticEngine(ArithmeticEngine arithmeticEngine)`
+- 代码片段：`void setAutoFlush(boolean autoFlush)`
+- 代码片段：`void setBooleanFormat(String booleanFormat)`
+- 代码片段：`void setClassicCompatible(boolean classicCompatibility)`
+- 代码片段：`void setClassicCompatibleAsInt(int classicCompatibility)`
+- 代码片段：`void setCustomAttribute(String name, Object value)`
+- 代码片段：`void setDateFormat(String dateFormat, Object value)`
+- 代码片段：`void setDateTimeFormat(String dateTimeFormat)`
+- 代码片段：`void setLocale(Locale locale)`
+- 代码片段：`void setNumberFormat(String numberFormat)`
+- 代码片段：`void setObjectWrapper(ObjectWrapper objectWrapper)`
+- 代码片段：`void setOutputEncoding(String outputEncoding)`
+- 代码片段：`void setSetting(String name, String value)`
+- 代码片段：`void setSettings(Properties props)`
+- 代码片段：`void setStrictMode(boolean strict)`
+
+画面 3：
+- 展示 FileUtils 类的 API 方法列表，用于文件操作。
+- 代码片段：`String outPath`
+- 代码片段：`OutputStreamWriter (java.io)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org

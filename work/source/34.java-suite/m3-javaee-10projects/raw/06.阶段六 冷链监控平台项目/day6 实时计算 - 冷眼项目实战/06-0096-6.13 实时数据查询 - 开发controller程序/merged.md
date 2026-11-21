@@ -1,0 +1,267 @@
+# 6.13 实时数据查询 - 开发controller程序
+
+- 阶段：06.阶段六 冷链监控平台项目
+- 章节：day6 实时计算 - 冷眼项目实战
+- 源文件：06.阶段六 冷链监控平台项目\day6 实时计算 - 冷眼项目实战\6.13 实时数据查询 - 开发controller程序_【海量资源尽在 666java.com】.mp4
+- 时长 11分52秒（音频 712s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面我们来开发我们的Controller而这个Controller呢它提供的是我们的这个几个服务几个接口API一个是我们查询我们的仓库的一个list一个是查询我们的实时的一个数据就是实时报警的一个listOK那我们开发我们的Controller而这个Controller呢实际上是在我们的包路径下是com.it黑码.code.monitor
+[00:35] 这么一个类那这个类的来讲的话我们要把它封装成实际上是一个rest的一个接口那么rest接口的话我们需要把它加上restrest Controller的一个注解对吧那第二个来讲的话我们要添加那个URL也就是说request
+[01:07] request mapping那么request mapping就是我们的定义的前端要调用的URL也就叫device然后monitor那此时我要把我们的这个Service at auto whereat auto where的什么呢private我们的message Service
+[01:46] OK那么这个message Service那么我们下一步的话就是定义我们的两个方法一个是定义我们叫做仓库监控列表数据对不对那另外一个的话实际上我们是实时实时监控数据这是两个那第一个的话我们要返回我们的这个监控列表这种监控列表就是我们在这儿
+[02:22] 这个地方监控列表的数据那他他查询的也是我们的同样的表里边那第一个我们要定义我们的这个类我们就要定义我们的方法那这个方法我们定义一个public的一个devicedevicelist然后这个devicelist呢我们要给他传入的是我们at但是现在我们还没加我们的这个返回值了我们的返回值其实就是一个r
+[02:54] R的话是我们在我们的common里边定义的R我们DeviceList里边我们需要去传入参数at什么呢requestParam我们参数实际上是一个map一个stringObjectParam知道为什么我们在后边服务里边调用的是传入的实际上是map类型的吗就是因为我们在Controller里边我们需要的
+[03:37] 我们Controller是从前端页面传给我们的服务端传给我们Controller里边是一个map类型的数据那么我们要把这个map类型数据传到我们的Service层那Service层的一个方法的里边的参数就是我们的一个map类型的OK那我们在这儿的时候我们还需要需要什么呢要定义我们的这个device list的
+[04:05] 它的API具体是一个什么样的对不对因为我们最上层的是是Device Monitor但是它还下边有两个一个是监控仓库的列表一个是监控我们的数据列表所以说在这儿我们就需要再加一层这个URLRequestRequestMapping这个RequestMapping的话我们就可以再加上我们的List当然了这个整个的这个方法它的一个API接口的
+[04:38] 就是device-monitor-list这样的一个API而这个API我们看看我们把它返回成什么呢返回成我们的一个叫message-intent这个列表这个list然后这个list等于什么呢等于我们的message-Service下面的一个query-message-real-time然后我们把我们的参数传过来然后此时它有一个get-record对不对
+[05:12] 这guided regards也是mybdxplus里面我们针对于一个iService它提供的一个方法那么我们这会就得到了我们数据的一个结果得到数据结果之后我们要给它返回拼装返回的一个结果string object map等于一个流hashi map而这个流hashi map的话我们用我们的这个
+[05:49] map.putitemlist然后return r.ok啊mapok那此时我们就能够拿到我们的这个r.ok了也就是说我返回结果实际上是就这样的一个我们来看一下我们的实际的运行效果实际运行效果里边那么当它刷新之后呢我们这个list
+[06:28] 意思他得到的是一个这个的message等于successcode等于0然后items这个前面的这部分就是i.ok对不对result或者说是返回的r.ok的后面的话是我们自己拼装的一个item而这个items其实是包含了我们从数据库里面查询到的数据这个是他自动刷新的我们每个数据的数据的值都在这里面查询出来的这个是我们第一个
+[07:02] 监控的一个接口那第二个来讲我们在开发我们的实时报警的一个接口实时报警接口的话相对也比较简单这个实时报警接口也是一个单表的一个查询然后这个单表查询的情况下我们是我们看到我们的这个实时报警它是一个列表而这个列表我们就直接在我们这儿添加一个at requestrequest一个mapping然后呢在这里边我们定义了我们的叫
+[07:34] real time我们定义public反过来也是r然后呢它是一个real time的值然后它的参数是atrequestparam那么它的类型实际上也是一个map而这个map是string和objectparam
+[08:16] 那此时我们要也要返回一个2点OK2点OK2点OK但是我要把那个内容发返回过来对不对那一样道理我此时我在这个地方的时候我要查询我们的list那这个查询list我们刚才说的时候我们用了一个list的方法list的方法里边我们用的是list getRecord对吧
+[08:44] 我还可以用别的对不对我还可以用ipageipage的来讲的话我们这个配置的是叫message entity类型是这个那么这个例子等于message Service我们也是一样的query realtimeparam那么我得到之后我再给它拼成我们的map的一个返回制object
+[09:28] 为什么这两个方法其实是比较类似但是为什么我们在第二个里边用到这样的一个呢因为第二个方法实时监控它是一个列表对吧然后它是一个它是一个叫做我们的就有分页的但第一个它其实是没分页的那么我们在map里边我们就拼成我们的返回返回结果数据了比如说一个total这个也是前台要求我们传过去的list get total然后map.
+[10:00] map.put我们的配置页数当前的页数然后list.getter配置然后在map.put我们的一个什么呢itemitem然后list.getter record它比它比那个什么它其实是就多了一个多了几个多了几个这个列表
+[10:32] 到了几个这个类别当然我们实际上在开发过程中我们其实只需要用一个就可以了那么我们在这里面只是给大家来演示一下我们来开发这个过程对吧我们在这直接返回过来其实就OK了这是我们开发的我们的这个control当然现在我看看还有一个这个错误不要紧这个错误就是一个提示的我们本身我们在Service里边我们需要添加我们的Service rmpl然后呢它提示了一个错误
+[11:08] 现在这个就是我们的一个我们的这个这个这个什么不对这个地方稍微有个问题我们在这我们需要再加上一个我们的这个Service要把它要把它声明成一个Service那么声明成一个Service的时候at Service然后这个声明成这个Service呢实际上就是一个message Service这个时候其实没问题了
+[11:40] 我们要把它声明成我们这个Service然后这个Service其实就能够拿到了对吧OK这就是我们整个的一个开发我们的Controller这Controller的一个过程
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Spring Boot 项目中实现仓库监控的分页查询功能，包括控制器层和业务层的代码编写。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：在 IntelliJ IDEA 中，右键点击 `com.ithema.cold.monitor.Controller` 包，选择“New” -> “Java Class”，准备创建新的控制器类。
+画面2：在 `MessageController.java` 文件中，输入 `@RestController` 注解，IDE 提示需要导入 `org.springframework.web.bind.annotation.RestController`。
+画面3：在 `MessageController.java` 中，添加了 `@RequestMapping("/device/monitor")` 和 `@Autowired` 注解，并声明了 `private MessageService messageService;`。
+画面4：在 `MessageController.java` 中，添加了 `@RequestMapping("/deviceList")` 方法，用于分页查询设备列表。
+画面5：在 `MessageController.java` 中，为 `@RequestMapping("/deviceList")` 方法添加了 `@RequestParam Map<String, Object> params` 参数。
+画面6：在 `MessageController.java` 中，为 `@RequestMapping("/deviceList")` 方法添加了 `@RequestBody` 注解，并开始编写业务逻辑。
+画面7：在 `MessageController.java` 中，为 `@RequestMapping("/deviceList")` 方法编写了完整的分页查询逻辑，使用 `messageService.queryMessageRealTime(params).getRecords()` 获取数据。
+画面8：切换到浏览器，显示了仓库监控的前端页面，展示了多个仓库的实时温度、湿度等数据。
+画面9：在 `MessageController.java` 中，添加了 `@RequestMapping("/realtime")` 方法，用于查询实时监控数据。
+画面10：在 `MessageController.java` 中，为 `@RequestMapping("/realtime")` 方法添加了 `@RequestBody` 注解，并开始编写业务逻辑。
+画面11：在 `MessageController.java` 中，为 `@RequestMapping("/realtime")` 方法编写了完整的查询逻辑，使用 `messageService.queryMessageRealTime(params).getRecords()` 获取数据。
+画面12：在 `MessageController.java` 中，为 `@RequestMapping("/realtime")` 方法添加了 `Page<MessageEntity> list = messageService.queryMessageRealTime(params);` 并使用 `list.getPages()` 获取分页信息。
+画面13：切换到 `MessageServiceImpl.java` 文件，查看 `queryMessageRealTime` 方法的实现，该方法使用 `QueryWrapper` 进行条件查询。
+画面14：在 `MessageController.java` 中，为 `@RequestMapping("/realtime")` 方法编写了完整的分页查询逻辑，使用 `messageService.queryMessageRealTime(params).getRecords()` 获取数据。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+无
+
+画面2：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import org.springframework.web.bind.annotation.RestController;
+```
+
+画面3：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+}
+```
+
+画面4：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+    @RequestMapping("/deviceList")
+    public R deviceList(@RequestParam Map<String, Object> params) {
+    }
+}
+```
+
+画面5：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+    @RequestMapping("/deviceList")
+    public R deviceList(@RequestParam Map<String, Object> params) {
+    }
+}
+```
+
+画面6：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+    @RequestMapping("/deviceList")
+    public R deviceList(@RequestParam Map<String, Object> params) {
+        List<MessageEntity> list = messageService.queryMessageRealTime(params).getRecords();
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", list);
+        return R.ok(map);
+    }
+}
+```
+
+画面7：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+    @RequestMapping("/deviceList")
+    public R deviceList(@RequestParam Map<String, Object> params) {
+        List<MessageEntity> list = messageService.queryMessageRealTime(params).getRecords();
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", list);
+        return R.ok(map);
+    }
+}
+```
+
+画面8：
+无
+
+画面9：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+    @RequestMapping("/deviceList")
+    public R deviceList(@RequestParam Map<String, Object> params) {
+        List<MessageEntity> list = messageService.queryMessageRealTime(params).getRecords();
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", list);
+        return R.ok(map);
+    }
+    @RequestMapping("/realtime")
+    public R realtime(@RequestParam Map<String, Object> params) {
+    }
+}
+```
+
+画面10：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+    @RequestMapping("/deviceList")
+    public R deviceList(@RequestParam Map<String, Object> params) {
+        List<MessageEntity> list = messageService.queryMessageRealTime(params).getRecords();
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", list);
+        return R.ok(map);
+    }
+    @RequestMapping("/realtime")
+    public R realtime(@RequestParam Map<String, Object> params) {
+    }
+}
+```
+
+画面11：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+    @RequestMapping("/deviceList")
+    public R deviceList(@RequestParam Map<String, Object> params) {
+        List<MessageEntity> list = messageService.queryMessageRealTime(params).getRecords();
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", list);
+        return R.ok(map);
+    }
+    @RequestMapping("/realtime")
+    public R realtime(@RequestParam Map<String, Object> params) {
+        List<MessageEntity> list = messageService.queryMessageRealTime(params).getRecords();
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", list);
+        return R.ok(map);
+    }
+}
+```
+
+画面12：
+```java
+package com.ithema.com.ithema.cold.monitor.Controller;
+import com.ithema.cold.monitor.Service.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+@RequestMapping("/device/monitor")
+public class MessageController {
+    @Autowired
+    private MessageService messageService;
+    @RequestMapping("/deviceList")
+    public R deviceList(@RequestParam Map<String, Object> params) {
+        List<MessageEntity> list = messageService.queryMessageRealTime(params).getRecords();
+        Map<String, Object> map = new HashMap<>();
+        map.put("items", list);
+        return R.ok(map);
+    }
+    @RequestMapping("/realtime")
+    public R realtime(@RequestParam Map<String, Object> params) {
+        Page<MessageEntity> list = messageService.queryMessageRealTime(params);
+        Map<String, Object> map = new HashMap<>();
+        map.put("total", list.getTotal());
+        map.put("pages", list.getPages());
+        map.put("items", list.getRecords());
+        return
+

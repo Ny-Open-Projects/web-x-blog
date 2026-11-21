@@ -1,0 +1,123 @@
+# 10-审批业务概述：数据库表分析
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day17 审批中心
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day17 审批中心\10-审批业务概述：数据库表分析_【海量资源尽在 ubkz.com】.mp4
+- 时长 10分6秒（音频 606s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 刚才简单的对我们系统当中的流程控制相关的业务做了一个小小的说明那我们得知要想通过activity完成比较完美的流程控制需要我们在自己的HR系统当中拓展一些业务流程的数据库表比如说我们要有业务的实例表比如说我们要有业务的任务表比如说我们要有业务的组表等等
+[00:31] 那这些表呢在今天资料当中呢其实已经给各位准备好了比如说呢有一张表呢叫做POC Intense这个POC Intense指的是你发起流程对应的这个流程流程实例那这个流程实例里面包含的字段相对来说呢还是比较多的ID不用多说了Key这个注意一下这个Key代表的是我们流程定义设置的Province Key
+[01:00] 那名称你请假就是请假其他就是其他好那接下来呢还有一个就一个POCProcess State这个代表的是我们当前这个流程的状态那这个流程状态呢会有很多比如说一呢代表审批中二审批通过三审批不通过撤销那接下来呢还有申请人ID申请人申请时间那这些就是你发起申请设置那些基本内容
+[01:29] 好了那接下来还有就是当前节点审批人因为我们都知道那对于你发布的这么一个流程那不同的节点它的审批人可能是不一样比如说呢你准备要发起之后交给部门经理审批那我们就需要把当前审批人设置为部门经理那如果呢
+[01:54] 部门经理审批完成之后是不是可以交由人事部门进行审批那这个时候当前节点审批人是不是就应该是人事所涉及到的相关专员没错吧所以这边呢需要各位注意一下就是审批人咱们需要一直要去进行维护啊好了那除了这些之外呢还有什么审批人的ID啊部门啊还有他的入职时间等等那各位会发现那我们都知道
+[02:23] 这个是我们的拓展的业务表,那拓展业务表当中是不是还应该会有你真正的核心业务所设计的数据?
+[02:34] 没错吧,那注意啊,这边呢,我把这些截一张图截到我们这边,那这边呢,我要做一个小小的说明,好了,是我们的这张表,那在这张表当中没有什么特别和各位要交代的,这边呢,其中有一个就是当前节点。
+[02:57] 需要实时更新因为我们的部门负责人审计完成之后我们就会流转到HR部门那人力资源部门呢它这个当前节点就换了所以我们要实时更新那除了这个之外还有一个这个一定要各位关注一下叫做POC DATE那这个POC DATE呢它是一个放置的全部都是我们申请的申请的一些
+[03:31] 申请的业务数据那你申请的业务数据呢有很多我在这边呢举一个小小的例子比如说请假那请假当中就应该要包含你请假的开始结束时间还有你的请假的原因以及对应的请假天数等等那除了这个请假要有业务数据之外
+[04:01] 可能还有比如说加班那加班呢肯定也有等等什么开始时间结束时间等等那还有一些比如说呢你加班的原因等等等等加班这回就不是天数了而是小时那除了加班之外可能还有离职那离职可能就是离职原因还有离职的相关数据那各位会发现呀那我们的业务数据呢可能不同的流程业务数据是不一样的没错吧
+[04:29] 那业务数据不一样接着它有一个小小的共同点就是业务数据它不是特别多业务数据不多那我们怎么办呢注意我们可以把这个业务数据以JSON的形式给它存到一个字幕串里所以我想说咱们这边申请的是申请人的这些业务数据那这些任人业务数据是什么就是我们业务数据的JSON字幕串比如说
+[05:02] 请假我们开始时间结束时间原金填数构成一个JSON字幕创加班构成一个JSON字幕创离职JSON字幕创因为我们有钱条件就是这个业务数据呢不是特别多可能就是几个字十几个字是不是就搞定了所以把它放到这个JSON的这个Data字符字段里面就可以了好了这个是我们的流程实例的这张表那这张表呢我把这个表的名称呢也call过来PLVC
+[05:33] PROC Intense放到这边那除了这个表之外抱歉那除了这个表之外呢还有一个就是业务流程的这个任务表那业务流程的这个任务表其实就是当前第一个节点谁处理处理意见是什么那接着第二个节点谁处理处理意见是什么还有他的处理状态究竟是驳回还是通过或者是撤销那其实这个呢比较简单
+[06:03] 对应的我们也是数据库当中的一个表叫做POC Task Intense好了那需要各位注意的是这个表明呢先拷过来需要各位一定一定要注意的是我们这边的业务流程的这个任务表和这个业务流程实力表它们之间是有关系的那什么关系各位会发现一个流程是不是要经过多个任务节点它们之间是不是就应该是一个一对多的这么一种关系啊
+[06:34] 那对于这个一对多关系这边呢有一个小小的外界哎就是有这么一个ID各位应该能够看到没错了好了那接下来呢这个表其实没什么可说的就是当前的任务ID等等等等什么处理人什么处理意见等等等等还有就是处理状态好了这个没什么可说的那除了这个表之外还有一张表就叫做group就是我们自定义的组表那注意各位来看
+[07:03] 那自定的这个组的这个表呢叫做user group好了拿过来好了这个user group这个表里面的数据注意啊这回咱们就来看数据了不看这个表相关内容了好了以一段为例一段这个有点太长了我就小截一段一段为例好了拿过来那各位呢能够发现
+[07:50] 对应的这个表里面啊有这么几个基础的字段这几个基础字段呢首先第一个就是组名好了这个呢就是抱歉这个就是组ID吧组组ID好了这个就叫做组名称好了那接下来后面这个你看这玩意像啥是不是代表一条丝扣语句啊哎能理解吗好了那接下来呢有朋友说你设置这个表它的目的是什么样啊那注意
+[08:31] 因为我们都知道在你发起一个流程的时候你发起一个请假的流程一个请假流程为例回到我们这边各位来看咱们别以请假为例了这个就以刚才这个离职为例吧这个离职节省有点多啊那这个加班为例那你发起一个流程的时候你会发现提交之后是不是要到部门审批那部门审批就是部门的负责人来审批那我们对于这个部门审批里面
+[09:03] 是不是给他制定了相应的这么一个候选组没错吧这个候选组我们是不是就是一个候选组的这么一个ID一个名字一段英文那候选组部门的审批人可能有两个可能有三个那这两个三个怎么来那有的朋友说我自己写一表把这两个三个画进去那有的朋友说我自己搞一个
+[09:29] 固定的值把这几个人写进去都可以那我们这边为了更加灵活我们一会去查询节点审批人的时候注意直接给他通过候选组的名称能够得到对应的这么一条搜索语句那搜索语句得到了之后是不是就可以查询最终也能得到这么一个用户啊那这样一来就让我们的操作更加灵活OK好了这个就是简单的和各位说了一下
+[09:59] 我们要做的HRM系统它数据库表相关的这些内容
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+讲解 Activiti 工作流引擎中核心业务数据表（如 proc_instance、proc_task_instance、proc_user_group）的结构与作用，以及如何通过数据库表理解流程实例和任务的存储机制。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示课程 PPT 的“2 业务流程概述”页面，介绍流程相关概念，如审批列表查询、流程申请信息查询、发起流程、提交流程等。
+画面 2: 在 SQLyog 数据库工具中，展示“proc_instance”表的结构，包含字段如 process_id, process_name, process_state, user_id 等。
+画面 3: 在 SQLyog 中，鼠标悬停在“proc_instance”表的“process_id”字段上，弹出字段详细信息。
+画面 4: 在画图软件中，展示“Activiti内置数据库”与“iHRM系统的业务数据表”的对比图，用红色箭头标注“proc_instance”指向“当前节点(实时更新)”。
+画面 5: 与画面 4 相同，但鼠标光标在“proc_instance”字段上。
+画面 6: 与画面 4 相同，但鼠标光标在“proc_instance”字段上。
+画面 7: 在 SQLyog 中，展示“proc_task_instance”表的结构，包含字段如 task_id, assignee, handle_user_name 等。
+画面 8: 与画面 7 相同，但鼠标光标在“proc_task_instance”表的“task_id”字段上。
+画面 9: 与画面 4 相同，但鼠标光标在“proc_task_instance”字段上。
+画面 10: 在 SQLyog 中，展示“proc_user_group”表的结构，包含字段如 user_id, department_id 等。
+画面 11: 与画面 4 相同，但鼠标光标在“proc_user_group”字段上。
+画面 12: 与画面 4 相同，但鼠标光标在“proc_user_group”字段上。
+画面 13: 在浏览器中打开 Activiti Editor 的“Procedures”页面，显示“Business Process Models”界面。
+画面 14: 与画面 4 相同，但鼠标光标在“proc_user_group”字段上。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2 中的 SQL 表结构：
+```sql
+CREATE TABLE `proc_instance` (
+  `process_id` varchar(45) NOT NULL COMMENT '流程ID',
+  `process_name` varchar(200) DEFAULT NULL COMMENT '流程名称',
+  `process_state` varchar(45) DEFAULT NULL COMMENT '流程状态',
+  `user_id` varchar(45) DEFAULT NULL COMMENT '用户ID',
+  `proc_apply_time` datetime DEFAULT NULL COMMENT '申请时间',
+  `proc_cur_node_user_id` varchar(45) DEFAULT NULL COMMENT '当前节点用户ID',
+  `proc_node_id` varchar(45) DEFAULT NULL COMMENT '节点ID',
+  `proc_data` text COMMENT '流程数据',
+  `department_id` varchar(45) DEFAULT NULL COMMENT '部门ID',
+  `department_name` varchar(200) DEFAULT NULL COMMENT '部门名称',
+  `time_of_entry` datetime DEFAULT NULL COMMENT '进入时间',
+  PRIMARY KEY (`process_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+画面 7 中的 SQL 表结构：
+```sql
+CREATE TABLE `proc_task_instance` (
+  `task_id` varchar(45) NOT NULL COMMENT '任务ID',
+  `assignee` varchar(45) DEFAULT NULL COMMENT '任务处理人',
+  `handle_user_name` varchar(200) DEFAULT NULL COMMENT '处理人姓名',
+  `handle_user_id` varchar(45) DEFAULT NULL COMMENT '处理人ID',
+  `handle_type` varchar(45) DEFAULT NULL COMMENT '处理类型',
+  `process_id` varchar(45) DEFAULT NULL COMMENT '流程ID',
+  `proc_node_id` varchar(45) DEFAULT NULL COMMENT '节点ID',
+  `proc_cur_node_user_id` varchar(45) DEFAULT NULL COMMENT '当前节点用户ID',
+  `proc_data` text COMMENT '流程数据',
+  `department_id` varchar(45) DEFAULT NULL COMMENT '部门ID',
+  `department_name` varchar(200) DEFAULT NULL COMMENT '部门名称',
+  `time_of_entry` datetime DEFAULT NULL COMMENT '进入时间',
+  PRIMARY KEY (`task_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+画面 10 中的 SQL 表结构：
+```sql
+CREATE TABLE `proc_user_group` (
+  `user_id` varchar(45) NOT NULL COMMENT '用户ID',
+  `department_id` varchar(45) DEFAULT NULL COMMENT '部门ID',
+  `department_name` varchar(200) DEFAULT NULL COMMENT '部门名称',
+  `user_name` varchar(200) DEFAULT NULL COMMENT '用户名',
+  `user_type` varchar(45) DEFAULT NULL COMMENT '用户类型',
+  `user_status` varchar(45) DEFAULT NULL COMMENT '用户状态',
+  `user_role` varchar(45) DEFAULT NULL COMMENT '用户角色',
+  `user_position` varchar(200) DEFAULT NULL COMMENT '用户职位',
+  `user_phone` varchar(45) DEFAULT NULL COMMENT '用户电话',
+  `user_email` varchar(200) DEFAULT NULL COMMENT '用户邮箱',
+  `user_avatar` varchar(200) DEFAULT NULL COMMENT '用户头像',
+  `user_create_time` datetime DEFAULT NULL COMMENT '用户创建时间',
+  `user_update_time` datetime DEFAULT NULL COMMENT '用户更新时间',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 4、5、6、9、11、12、14: 展示“Activiti内置数据库”与“iHRM系统的业务数据表”的对比图，其中：
+- “proc_instance”指向“当前节点(实时更新)”。
+- “proc_task_instance”指向“当前节点(实时更新)”。
+- “proc_user_group”指向“当前节点(实时更新)”。
+- “proc_instance”指向“业务流程的用户表”。
+- “proc_task_instance”指向“业务流程的任务表”。
+- “proc_user_group”指向“业务流程的用户表”。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

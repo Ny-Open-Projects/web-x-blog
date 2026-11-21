@@ -1,0 +1,161 @@
+# 05.Elasticsearch实现位置查询之搭建集群
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day10 探花交友-Elasticsearch geo实现搜附近
+- 源文件：07.阶段七 探花交友项目\day10 探花交友-Elasticsearch geo实现搜附近\05.Elasticsearch实现位置查询之搭建集群_【海量资源尽在 666java.com】.mp4
+- 时长 12分4秒（音频 724s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们就来看一下我们使用这个Electro Search来实现我们地理位置的一个查询那么前面其实我们也提到过就是我们在我们这个项目中啊给大家来实现啊这两套这个实现逻辑啊那么一个呢是我们通过MongoDB去做一个实现那么接下来呢我们去使用Electro Search去做一个实现那么在Electro Search中啊它呢也有一个叫做GEO的这样的一个
+[00:28] 位置查询的这样的一个索引类型那么可以通过这种方式呢去做一个查询啊那么我们以后在做项目的时候呢其实就是多一个技术的一个选择那么如果我们的项目中呢没有使用MangoDB而使用了ElagSource的话那我们就直接使用ElagSource来做实现就可以了
+[00:48] 那么如果我们项目中使用了MangoDB那么并没有引入这个Elixir的话那使用MangoDB去实现就OK啊没有问题好那么接下来呢我们来看一下Elixir如何去做一个实现当然了我们首先呢需要去搭建我们Elixir的一个集群
+[01:06] 那么要注意我们现在直接去搭建的是集群并不是去搭建一个单节点的这样的一个服务好我们来看一下这个集群该如何去做一个搭建那么我们将会在我们的Linux的平台去做一个搭建并且我们是使用这个Docker这个容器去做一个搭建然后我们要搭建一个三节点的这样的一个集群
+[01:32] 那么首先呢我们需要对我们的这个就是我们那个Linux的一个设置就是要设置它一个单个进程中的一个最大限程数那么Elef设置机群呢对于它呢是有一个这个要求的那么所以说我们需要去修改一下那我们VIM来打开我们的这个文件啊去做一个修改那么在我们最下面的去把它呢就加进来当然了这个我已经加进来了然后呢加进来之后就保存退出
+[02:01] 然后我们去通过下面这个命令去做一个这个生效那么其实可以看到就这个就是我们所设置的这样的一个参数那么有了这个前提之后接下来我们就可以来部署我们的这个ES的一个集群了那么前面我们说过我们要搭建一个三节点的这个集群那么我们要创建三个目录一个是叫node01node02和node03
+[02:29] 那么我们去把这三个目录创建出来它在itcast下面探花叫EScluster然后一个node01,02,03好的我们去做一个创建我们进入到itcast下面有一个探花下面有一个叫做EScluster然后这个下面就会有三个目录
+[02:50] 那么接下来呢我们就需要去给他去设置一些这个配置文件那么配置文件呢主要呢是有两个配置文件那么一个呢叫做JVM的一个Obsense这样的一个配置文件那么另外一个呢就是ElectRest的一个这个配置文件那么我们首先呢需要去把我们的这个JVM的一个Obsense这个文件呢去上传到我们这个目录下面来那我们来找到一个node01啊这个目录
+[03:19] PWD然后呢找到他然后呢我们就我们就拷贝一下啊然后呢到这是不是我们拷贝一下啊到这哎好了来了是吧现在这个下面然后呢我们去上传一个文件啊那么我们的文件呢是在我们的这个资料中啊有这个文件那我们来拷贝一下啊到这然后呢就他啊把他的去做一个上传那么上传之后啊
+[03:51] 那么这个文件呢其实我们已经啊就修改完成了那么有这么多一些配置项啊那么主要呢我们需要去设置它的一个初始的内存和最大的一个内存那我们在这里呢把它设置为是128兆那么这个大家可以根据你的一个机器的情况呢去做一个设置好那么这是我们的第一个啊这个配置然后呢我们把这个JVM这个
+[04:17] Optus这个文件呢我们拷贝到其他的两个里面去就是node02然后呢再拷贝到node03那么这样的话呢我们三个目录中呢都有了这个文件然后接下来呢我们就需要上传我们elag search的yaml文件这个呢主要呢去配置了我们的一些这个集群的一些这个信息那么我们首先在node01下面呢去创建这个文件那我们把这个文件的内容呢我们就
+[04:47] 拷贝过来那么就拷到这啊拷到这然后呢我们可以看到我们指定了我们这个集群的一个名字叫做ESI这个碳化cluster然后呢还有什么node namenode01node master为chew就是说它呢可以被选举为a master那node的一个data呢也设置为chew也是作为一个数据的一个节点那么我们这个network的一个host呢就是我们本机的这个地址
+[05:15] 然后端口的9200这个是我们的一个广播发现我们的一个集群那么也是设置为这个地址然后我们设置最小的一个must节点数是2这个是要去过半数就说我们现在是有三个节点一定要过半数那就是2对吧然后这两个就设置我们的CORS的一个跨域请求的这样的两个参数好我们就保存
+[05:46] 保存退出那么这样的话呢我们第一个文件呢就搞定了那么接下来呢我们进入到我们的第二个这个目录中然后呢我们还是去去创建我们这个文件那我们把下面这个内容呢拷贝过来这个内容跟上面内容呢基本上呢是一样的区别就在于什么呢我们这一块啊有两个区别一个呢就是我们这个node的这个内幕
+[06:11] 这个肯定不能重复然后下面还有就是我们http的一个端口那么是9201刚才是9200那么其他的都是一样的ok好保存那么我们就保存退出好那么这是我们的第二个配置文件我们再进入到我们的第三个目录然后我们同样的也是去做一个
+[06:40] VIM的一个创建啊好嘞那么我们把下面这个内容呢拷贝过来拷贝到这那么这个里面同样的也是两个不同一个就是我们都的内容一个呢就是我们的一个这个端口那么这个是9202其他都是一样的好然后呢我们保存退出那么接下来呢我们来看一下啊那么我们是不是每一个目录下面就拥有了两个这个配置文件那么接下来呢我们就使用我们这个配置文件呢
+[07:11] 我们来创建我们的容器啊那我们来看一下我们这个创建容器的一个命令那么我们通过这个Docker create这个命令然后呢创建一个容器那么我们所使用的这个我们这个镜像呢是Elag Search 6.5.4的这样的一个镜像然后呢设置它呢这个启动就随着我们的系统的启动而启动啊就相当于自启动然后呢我们设置我们的这个容器的一个名字呢叫做什么呢叫ES一个Node01
+[07:40] 然后呢并且网络使用的是host啊这种模式然后呢我们做了一些目录的挂载杠V去指定目录挂载然后呢这个是我们刚刚所指定的配置文件它挂载到容器中的是在这个位置啊然后还有一个杠V呢就指定我们那个JVM的Option它所挂载到容器内部的是这个地址
+[08:02] 然后通过杠V呢注意这块呢不是目录了而是直接去指定我们的一个这个Data的一个存储然后呢是在我们的指向到容器的这个位置中啊那么这个就是我们的Node01同理呢Node02也是类似只是说这个目录改成这个Node0203也是一样改成Node03那我们就一个一个来做一个创建啊那么首先呢我们来创建我们的第一个这个容器哎把它拷贝过来
+[08:32] 这是我们第一个容器啊是不是就搞定了接下来呢我们来创建我们的第二个这个容器到这啊这是我们的容器二然后呢再来创建我们的容器二三好嘞那么这样的话呢我们三个容器是不是都已经啊创建好了那么接下来呢我们就可以去启动我们这三个这个容器了啊启动容器然后启动之后呢我们可以去查看它的一些日志啊比如说我们查看第一个它的一个启动日志
+[09:03] 看有没有报错那我们可以稍微等待一下它的一个这个执行它启动的是需要花一点这个时间去做启动的那么我们来看一下它的一个启动的一个这样的一个日志那么可以看到它正在启动了然后呢它呢是不是也就发现了其他的一些这个节点了对吧那我们可以来看一下比如说我们进入我们进入我们这个就是我们的node02这个日志我们来查看一下
+[09:32] 基本上是不是一样的那么这个node03的这个日志那么刚刚我们启动的时候是我们通过上面这个命令三个一起启动那么你也可以单个去做一个启动启动之后查看日志启动之后查看日志这种方式也可以这两个是货的操作那么接下来我们就通过一个
+[09:54] 我们这个elag search这个工具啊然后呢我们去做一个这个测试啊当然这个工具呢大家应该是安装了如果没有安装的话那么就可以去我们的Chrome的应用商店呢去做一个安装或者说有其他的方式也可以去做一个安装啊那么这个插件呢叫做这个叫做elag search hand啊这个插件啊那么接下来呢我们就来去打开这个插件呢我们来看一下
+[10:22] 那么这个插件呢我们一点击它就打开然后呢去输入我们的地址就是31.81当然这个要换成你自己的IP地址然后呢设置端口呢9200那么可以看到在这个位置是为一个绿色那就代表着集群呢现在非常的健康然后呢下面呢就有三个这个节点对吧然后呢有node0102和03那么其中呢这个node01呢是master其他呢都是什么呢这个重节点
+[10:50] 那么我们也可以在这个位置去创建我们的一个索引比如说我们创建一个test然后分片数的设置为6副本数的设置为2走去做一个创建好创建就成功了我们来看一下那么现在是不是就创建好了大家我们现在看到颜色我们看到这个颜色是集群的颜色是什么是yellow
+[11:14] 这是黄色啊那它说明什么它的副本还没有同步完成啊当我们再次连接的时候它就同步完成了就变成了gray绿色了哎OK那么这个我们的这个呃这个索引库是不是就创建好了那么其实到这里呢我们这个集群是不是就搭建完成了那我们把它删除掉吧点删除那么有了这个工具之后啊我们就可以啊非常方便的在我们的这个界面中啊去操作我们这个elex search啊
+[11:43] 这个集群了好那么到这里呢是吧我们的整个Elexus的集群的一个搭建呢就搭建完成了那么大家呢也通过这种步骤呢一步一步去做一个搭建那我相信也能够很顺利的把这Elexus这个集群呢就搭建起来的OK好那么关于我们的Elexus的一个集群的一个搭建呢那我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+搭建并启动一个包含三个节点的 Elasticsearch 集群，包括配置系统参数、创建目录、复制配置文件和使用 Docker 启动服务。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 内容：在 Typora 编辑器中展示搭建 Elasticsearch 集群的步骤，包含配置文件和命令。
+- 代码：
+  # 单个进程可分配线程数
+  vm /etc/sysctl.conf
+  vm.max_map_count=262144
+  # 立即生效
+  /sbin/sysctl -p
+  mkdir /itcast/tanhua/es-cluster/node01 -p
+  mkdir /itcast/tanhua/es-cluster/node02 -p
+  mkdir /itcast/tanhua/es-cluster/node03 -p
+  # 复制资料目录下的jvm.options到node01, node02, node03目录
+  # 在node01目录下，创建Elasticsearch.yml文件，并输入如下内容：
+  cluster.name: es-tanhua-cluster
+  node.name: node01
+  node.master: true
+  node.data: true
+  network.host: 192.168.31.81
+  http.port: 9200
+
+画面 2：
+- 内容：在 Typora 编辑器中展示搭建 Elasticsearch 集群的步骤，包含配置文件和命令。
+- 代码：
+  # 单个进程可分配线程数
+  vm /etc/sysctl.conf
+  vm.max_map_count=262144
+  # 立即生效
+  /sbin/sysctl -p
+  mkdir /itcast/tanhua/es-cluster/node01 -p
+  mkdir /itcast/tanhua/es-cluster/node02 -p
+  mkdir /itcast/tanhua/es-cluster/node03 -p
+  # 复制资料目录下的jvm.options到node01, node02, node03目录
+  # 在node01目录下，创建Elasticsearch.yml文件，并输入如下内容：
+  cluster.name: es-tanhua-cluster
+  node.name: node01
+  node.master: true
+  node.data: true
+  network.host: 192.168.31.81
+  http.port: 9200
+
+画面 3：
+- 内容：在终端中执行创建目录和进入 node01 目录的命令。
+- 命令：
+  mkdir /itcast/tanhua/es-cluster/node01 -p
+  mkdir /itcast/tanhua/es-cluster/node02 -p
+  mkdir /itcast/tanhua/es-cluster/node03 -p
+  cd /itcast/tanhua/es-cluster/
+  ll
+  cd node01
+  pwd
+
+画面 4：
+- 内容：在终端中执行复制 jvm.options 文件到 node01 目录的命令。
+- 命令：
+  vim jvm.options
+  cp jvm.options .. /node02/
+  cp jvm.options .. /node03/
+
+画面 5：
+- 内容：在终端中执行复制 jvm.options 文件到 node01 目录的命令。
+- 命令：
+  cp jvm.options .. /node02/
+  cp jvm.options .. /node03/
+
+画面 6：
+- 内容：在终端中编辑 Elasticsearch.yml 文件，显示配置内容。
+- 配置：
+  node.name: node02
+  node.master: true
+  node.data: true
+  network.host: 192.168.31.81
+  http.port: 9201
+  discovery.zen.ping.unicast.hosts: ["192.168.31.81"]
+  discovery.zen.minimum_master_nodes: 2
+  http.cors.enabled: true
+  http.cors.allow-origin: "*"
+
+画面 7：
+- 内容：在终端中执行复制 jvm.options 文件到 node02 目录的命令。
+- 命令：
+  cp jvm.options .. /node02/
+  cp jvm.options .. /node03/
+
+画面 8：
+- 内容：在终端中执行使用 Docker 创建 Elasticsearch 容器的命令。
+- 命令：
+  Docker create --restart=always --name es-node01 -p 9200:9200 -v /itcast/tanhua/es-cluster/node01/Elasticsearch.yml:/usr/share/Elasticsearch/config/Elasticsearch.yml -v /itcast/tanhua/es-cluster/node01/jvm.options:/usr/share/Elasticsearch/config/jvm.options -v es-cluster-node01-data:/usr/share/Elasticsearch/data Elasticsearch:6.5.4
+
+画面 9：
+- 内容：在 Typora 编辑器中展示 Docker 启动命令。
+- 代码：
+  Docker start es-node01 && Docker logs -f es-node01
+  Docker start es-node02 && Docker logs -f es-node02
+  Docker start es-node03 && Docker logs -f es-node03
+
+画面 10：
+- 内容：在终端中显示 Docker 容器启动日志。
+- 日志：
+  [2019-10-29T02:57:29,660] [INFO] [o.e.p.PluginsService] [node01] loaded module [Mapper-extras]
+  [2019-10-29T02:57:29,661] [INFO] [o.e.p.PluginsService] [node01] loaded module [parent-join]
+  [2019-10-29T02:57:29,661] [INFO] [o.e.p.PluginsService] [node01] loaded module [rank-eval]
+  [2019-10-29T02:57:29,664] [INFO] [o.e.p.PluginsService] [node01] loaded module [repository-url]
+  [2019-10-29T02:57:29,664] [INFO] [o.e.p.PluginsService] [node01] loaded module [transport-netty4]
+  [2019-10-29T02:57:29,665] [INFO] [o.e.p.PluginsService] [node01] loaded module [tribe]
+  [2019-10-29T02:57:29,666] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-core]
+  [2019-10-29T02:57:29,667] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-graph]
+  [2019-10-29T02:57:29,668] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-logstash]
+  [2019-10-29T02:57:29,668] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-ml]
+  [2019-10-29T02:57:29,669] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-monitoring]
+  [2019-10-29T02:57:29,671] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-rollup]
+  [2019-10-29T02:57:29,671] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-security]
+  [2019-10-29T02:57:29,673] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-sql]
+  [2019-10-29T02:57:29,673] [INFO] [o.e.p.PluginsService] [node01] loaded module [x-pack-watcher]
+  [2019-10-29T02:57:29,674] [INFO] [o.e.p.PluginsService] [node01] loaded plugin [ingest-user-agent]
+  [2019-10-29T02:57:29,674] [INFO] [o.e.p.PluginsService] [node01] loaded plugin [ingest-user-agent]
+  [2019-10-29T02:57:29,675] [INFO
+

@@ -1,0 +1,245 @@
+# 13_文章列表前端_用户行为功能测试
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day02-黑马头条-前端项目及mycat的使用
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day02-黑马头条-前端项目及mycat的使用\13_文章列表前端_用户行为功能测试【海量资源尽在 666java.com】.mp4
+- 时长 8分33秒（音频 513s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 这里改完之后呢那咱们下面就继续往下测啊看看好时不好时那下面咱们就去刷新一下当前这个一面然后呢把这个都清掉啊该清的都清掉然后我去往下找点然后让他去触发当前那个保存的操作好往下走好触发了之后呢咱们点一下看一下啊目前的话你看虽然是200但是好像是缺少参数对吧那为什么会缺少参数呢来看一下啊
+[00:29] 看看报什么错吧首先他们又报错是吧就是说缺少参数那缺少参数的原因呢其实是这样啊在你当前去进行保存的时候这咱们是做了个验证直接就返回了如果说你的参数有问题那他就直接返回那哪块有问题呢说啊当前他为难用户为难或者是当前设备ID也为难的时候他就会说保存就说必须是要有值你这样的话要不然就报错了
+[01:01] 那这个当前用户肯定是为空这没错那当前设备咱们传了吗咱们来看一下啊那这里边好像是传了一个当前的这个设备ID是1固定死了是吧那好像是传到了那传到之后为什么还是为空呢就这里边还少了一个东西当时咱们去写这个的时候是少了一个东西那咱们可以在这打断点啊打断点之后呢咱们再来去看一下看看这里边有没有接收到值就可以了啊好我再去刷新一下
+[01:37] 刷新刷新哦对刷新啊当前这个页面啊我就去滑了滑了就可以啊好来了来了之后呢我们可以看一下啊看这个数据在有没有这数据你会发现都是none都是none啊也就是说当前的呃设备ID跟article IDS呢都没有去复制那这是怎么回事呢呃其实咱们大家都知道啊目前的话咱们是一个pause请求并且是传的是当前一个字幕串那字幕串能直接去转成当前对象吗
+[02:08] 是不是转不了转不了啊转不了的话也就是说你在这块啊你需要加什么东西啊需要去加一个什么斯巴米斯注解叫瑞快死的护底加上这个注解之后呢它才能去把杰森对象封装到正常情况对象中好咱们重启一下再试试啊稍等好正在重启啊重启完之后呢咱们再来去刷新一下比如说我去把这东西都给清掉啊重启完了没好重启完了啊咱们就刷一下
+[02:45] 我在这打断点了啊好来看刷刷刷好来了是吧来了之后呢咱们看一下当前的值有没有啊你看现在是不是就有值了OK啊那这样的话就没有问题啊那咱们直接放行让他看看能不能保存啊好点保存看着返回当前这个返回说500好来看一下啊为什么会报500呢往上拉嗯说啊这块内容呢是有一个primaryprimary
+[03:25] 是主件重复了那这份内容其实咱们当时去写当前的model的时候mypro里边保存的时候咱们给当前的ID是附了一个entry ID是吧咱们说过因为咱们现在还没有集成mycat并不能去帮咱们自动生成这个主件所以说这个ID是自己维护的那这个entry ID都是1如果说它1是保存9条的话那都是1的话肯定是不行对吧所以说这份内容咱们还要改一改改成啥呢
+[03:53] 目前的话是这样啊目前的话咱们先测试啊那可以把它改成先改成article id那这个当前的这个文章id肯定是不重复的ok那这个没问题吧好那咱们呢就来再去重启一下再测一下看看好是不好是后期的话呢咱们去改成当前minecat之后呢那这个id啊会帮咱们自动生成所以说这个id啊到时候咱们就哎直接就改了
+[04:22] 改完之后呢这个ID咱们不用咱们手动去复制了那行那目前的话咱们再来测一下啊刷新一下我看看有没有进入竞争点啊我还得去点一下这个文章点刷刷刷刷刷刷刷刷啊断点是不是过了是吧看看有没有发请求啊啊这边是200是吧你看啊200并且是干嘛呢哎操作成功是吧这时候你可以刷这个表这个表哎就已经保存成功了没问题吧
+[04:54] OK啊那这没问题啊那他刚才啊其实咱们还要再重新回过头来再去分析一下这个代码啊那这代码啊其实目前的这种情况呢实际上他呢首先呢这个呢Perms呢就是咱们刚才记录的一个ID其实就是一个对象对象里边传的是ID是吧并且呢当前这个ID啊必须只等于true等于true之后呢我才会去把当前这个值给拿到
+[05:22] 才会去装到当前的机壳中并且是传到了后端如果说它不为处的话呢它就不能装因为因为啥呢因为刚才咱们在这去分析的时候说了在这没有进行保存的ID复制为处保存之后的ID设置为force那这force该怎么办呢这个force其实也在这处理了你看当前的IDS又重新复给了当前D里边的有个date复给它那date呢直接就返回了
+[05:52] 咱们在这啊拿到当前这个Data之后呢往上往上啊拿到当前这个Data之后呢咱们就直接去给这个里边的所有的ID都重新附了一个值叫Force因为这些东西已经保存过了那保存过的值呢就不允许再进行保存了好那好了那这个呢咱们就把这个行为这块呢也可以讲明白了啊那行啊其实这个呢这些东西呢咱们是自己写的
+[06:21] 那后期呢咱们肯定呢都是基本上啊都是考过来但是要求呢是能够看明白啊能够看明白就可以不要求能够手写出来啊所以说能够看明白就可以因为这里边啊有些样式呢需要去调那调样式的话呢是需要有一些专门的前端去帮咱们去调啊所以说呢这份内容呢大家呢只要能够看明白就可以啊那你看我目前的样式呢好像也不太好看是吧所以说呢咱们还是
+[06:48] 从笔记中已经调好的样式的代码直接拷过来就可以了拷过来之后其实思路都是一样的来看一下就是我刚才写那个从头到尾写的这个思路下一次就可能就不会再去手写了好我直接Ctrl A Ctrl V一下然后这时候咱们再去刷新一下当前的页面说这边报错了是吧那报错之后说这个组件没有那这个组件其实没有事那么现在还用不着咱们可以
+[07:19] 把当前的组件给住掉啊就说当前说这个组件没有他呢其实是当前Vic的一个组件啊所以说咱们在这啊直接去干嘛呢直接去到这直接把它住了就可以了直接把它住了然后他呢给放宝山了就可以了好吧那之后咱们再刷一下看好是不好是啊刷子没有是吧那没有的话你还得再去调一调啊
+[07:54] 当前的组件他得有有的话咱们就放在这里边啊放在这里边之后呢咱们把在他呢在这个组件中再来试一试好那这样的话其实值呢就拿到了啊行那这个其实大家先不用关心后期咱们还会再去调这个微调的一些东西那目前的话呢这东西咱们已经拿到了啊比如说咱们这他里边也有刷新比如说我想去往下看我想去下来刷新是不是也能加的更多呀我想他数据的其实也能去进行保存那好那当前这个
+[08:27] 前端跟后端整合这块呢咱们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲一个基于 Weex 的前端应用如何通过 Vue.js 实现分页加载和行为数据保存功能，并在后端通过 Spring Boot + MyBatis 实现数据持久化。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示 Vue.js 配置文件中 proxyTable 的设置，用于代理请求到后端接口。
+画面2：展示 MyBatis 的 XML 映射文件，定义了保存用户行为数据的 SQL 插入语句。
+画面3：展示 Vue.js 中用于保存行为数据的 JavaScript 逻辑，包含 Promise 和 AJAX 请求。
+画面4：展示 Spring Boot 后端的 Controller 层代码，接收前端请求并调用 Service 层。
+画面5：展示 Spring Boot 后端的 Controller 层代码，方法签名和注解。
+画面6：展示 Weex 预览界面，显示一个搜索页面，包含一个二维码。
+画面7：展示 Weex 预览界面的 Network 面板，显示一个 500 Internal Server Error。
+画面8：展示 MyBatis 的 XML 映射文件，定义了保存用户行为数据的 SQL 插入语句。
+画面9：展示 Spring Boot 后端的 Controller 层代码，方法签名和注解。
+画面10：展示 Vue.js 中用于加载数据的 JavaScript 逻辑，包含 AJAX 请求和数据处理。
+画面11：展示 Vue.js 中用于加载数据的 JavaScript 逻辑，包含 AJAX 请求和数据处理。
+画面12：展示 Vue.js 中用于加载数据的 JavaScript 逻辑，包含 AJAX 请求和数据处理。
+画面13：展示 Vue.js 中用于加载数据的 JavaScript 逻辑，包含 AJAX 请求和数据处理。
+画面14：展示 Weex 预览界面，显示一个搜索页面，包含一个二维码。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```javascript
+// with this option, according to the CSS-loader README
+// (https://github.com/webpack/css-loader#source-map)
+// (In my experience, they generally work as expected,
+//  just be aware of this issue when enabling this option.
+cssSourceMap: false,
+proxyTable: {
+  '/toutiao': {
+    target: 'http://ip:9803/', //源地址
+    changeOrigin: true, //改变源
+    pathRewrite: {
+      '^/toutiao': ''
+    }
+  },
+  '/behavior': {
+    target: 'http://ip:9804/', //源地址
+    changeOrigin: true, //改变源
+    pathRewrite: {
+      '^/behavior': ''
+    }
+  }
+},
+autoOpenBrowser: false,
+errorOverlay: true,
+notifyOnErrors: true,
+htmlOptions: {
+  devScripts: '<script>
+window.addEventListener('load', function () {
+  // 代码省略
+</script>'
+}
+```
+
+画面2：
+```xml
+<select>
+  <insert id="saveShowBehavior">
+    insert into ap_show_behavior (id, entry_id, article_id, is_click, show_time, created_time) values
+    <foreach collection="articleIds" item="item" separator=",">
+      #{item.id}, #{item.new}, #{item.old}, #{item.time}, #{item.createdTime}
+    </foreach>
+  </insert>
+</select>
+```
+
+画面3：
+```javascript
+// 保存行为数据
+function (params) {
+  let ids = [];
+  for(let k in params){
+    if(params[k]){
+      ids.push({id:k});
+    }
+  }
+  console.log(params);
+  if(ids.length > 0){
+    let url = this.Vue.config.urls.get('show_behavior');
+    return new Promise(resolve, reject) => {
+      this.Vue.$request.post(url, JSON.stringify({equipmentId:1, articleIds:ids})).then(d=>{
+        d.data = ids;
+        resolve(d);
+      }).catch(e=>{
+        reject(e);
+      });
+    }
+  }
+}
+
+// 获取请求的URL
+function (dir) {
+  let url = this.Vue.config.urls.get('load');
+  if(dir === 'behavior'){
+    url = this.Vue.config.urls.get('behavior');
+  }
+  return url;
+}
+```
+
+画面4：
+```java
+@Autowired
+private AppShowBehaviorService appShowBehaviorService;
+
+@Override
+public String saveShowBehavior(ShowBehaviorDto dto) {
+  return appShowBehaviorService.saveBehavior(dto);
+}
+```
+
+画面5：
+```java
+@Autowired
+private AppShowBehaviorService appShowBehaviorService;
+
+@PostMapping("/save_behavior")
+public ResponseResult saveShowBehavior(@RequestBody ShowBehaviorDto dto) {
+  return appShowBehaviorService.saveBehavior(dto);
+}
+```
+
+画面6：
+无代码或配置。
+
+画面7：
+无代码或配置。
+
+画面8：
+```xml
+<select>
+  <insert id="saveShowBehavior">
+    insert into ap_show_behavior (id, entry_id, article_id, is_click, show_time, created_time) values
+    <foreach collection="articleIds" item="item" separator=",">
+      #{item.id}, #{item.new}, #{item.old}, #{item.time}, #{item.createdTime}
+    </foreach>
+  </insert>
+</select>
+```
+
+画面9：
+```java
+@Autowired
+private AppShowBehaviorService appShowBehaviorService;
+
+@PostMapping("/save_behavior")
+public ResponseResult saveShowBehavior(@RequestBody ShowBehaviorDto dto) {
+  return appShowBehaviorService.saveBehavior(dto);
+}
+```
+
+画面10：
+```javascript
+// 列表数据
+load() {
+  // 发送请求，并且获取到数据，把数据展示到页面上
+  request.get('/toutiao/api/v1/article/load', this.params).then((res) => {
+    this.tanfer(res.data);
+  });
+}
+
+tanfer: function (data) {
+  let arr = [];
+  for (let i = 0; i < data.length; i++) {
+    let tmp = {
+      id: data[i].id,
+      title: data[i].title,
+      comment: data[i].comment,
+      source: data[i].authorName,
+      date: data[i].publishTime,
+      type: data[i].layout
+    };
+    arr.push(tmp);
+  }
+  this.data = arr;
+}
+```
+
+画面11：
+```html
+<cell>
+  <!-- 上来加载更多 -->
+  <loading :loading="load" :display="showmore" :show="hide" class="loading">
+    <loading-indicator class="loading-icon"></loading-indicator>
+    <text class="loading-text">{{load_more_text}}</text>
+  </loading>
+</cell>
+```
+
+画面12：
+```javascript
+import Home_Bar from '@/components/bars/home_bar.Vue';
+import request from '@/common/request';
+const dom = weex.requireModule('dom');
+import { WxcTabPage, WxcPanItem, Utils, BindEnv } from 'weex-ui';
+import Item0 from '@/components/cells/article_0.Vue';
+import Item1 from '@/components/cells/article_1.Vue';
+import Item2 from '@/components/cells/article_2.Vue';
+import Item3 from '@/components/cells/article_3.Vue';
+import Config from '@/apis/home/api';
+import Api from '@/apis/home/api';
+const modal = weex.requireModule('modal');
+```
+
+画面13：
+```javascript
+tabStyles: Config.tabStyles, // 样式
+tabPageHeight: 134, // 外表高度
+params: {
+  loadId: 1,
+  index: 0,
+  tag: "_all_",
+  size: 10,
+  min_behot_time: 0,
+  max_behot_time: 200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+

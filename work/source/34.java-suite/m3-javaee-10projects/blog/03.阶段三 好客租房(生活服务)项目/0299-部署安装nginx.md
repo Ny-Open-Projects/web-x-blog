@@ -1,0 +1,123 @@
+# 部署机装上 Nginx：依赖、源码编译与第一次启动
+
+后端三个 jar 已经各就各位，前端的 dist 产物也构建完毕，但到这一步为止，浏览器还连不上任何东西：静态文件躺在磁盘上没人对外服务，接口域名、WebSocket 代理这些入口级能力更是无从谈起。这一课把入口补上，在部署机 192.168.1.18 上把 Nginx 装起来、跑起来。
+
+安装方式不止一种，apt 一键装、Docker 拉镜像都行，课程选了最原始的一条：下载源码包，本机编译安装。动作多几步，换来的是对「它依赖什么、装到了哪里、怎么启动」的完整把握，这三件事在后面几课全用得上。
+
+## 先给结论
+
+- 安装四步：apt 补齐编译依赖，解压源码包，`./configure` 做环境检测，`make` 加 `make install` 完成编译安装。
+- 产物默认落在 `/usr/local/nginx`，`conf`、`html`、`logs`、`sbin` 各管一摊。
+- 核心依赖三样：PCRE 供重写与正则匹配用，zlib 供 gzip 压缩用，OpenSSL 供 HTTPS 用，编译时要的是带头文件的开发包。
+- 启动入口是 `/usr/local/nginx/sbin/nginx`，默认监听 80 端口，浏览器能出页面即成功。
+- 课程装的是 1.11.6：版本与编译参数自己说了算，这是源码安装相对包管理器的核心价值。
+
+## 编译安装的完整链路
+
+机器是 Ubuntu，依赖先用 apt 补齐，源码包解压到 `/haoke/nginx` 下，与 haproxy、mycat、rmq 这些中间件目录并排。这个目录之前装过一遍，课程里删掉重来，动作完整走一遍（解压一行按常规写法补全，其余照课程实录）：
+
+```bash
+# 1. 安装编译依赖
+apt install libpcre3 libpcre3-dev zlib1g-dev openssl libssl-dev
+
+# 2. 解压源码包并进入源码目录
+cd /haoke/nginx
+tar -zxvf nginx-1.11.6.tar.gz
+cd nginx-1.11.6
+
+# 3. 环境检测，通过后生成 Makefile
+./configure
+
+# 4. 编译，然后安装到默认目录 /usr/local/nginx
+make
+make install
+```
+
+三样依赖各对应一块核心能力：PCRE 是正则库，`server_name` 与 `location` 的正则匹配、重写模块都靠它；zlib 是压缩库，`gzip on` 压缩响应体的能力来自这里；OpenSSL 支撑 HTTPS。只装运行库还不够，编译要的是带头文件的开发包，所以命令里 `libpcre3-dev` 这类 `-dev` 后缀一个都不能省。
+
+`./configure` 跑完会输出一份配置摘要（课程画面停在摘要开头，全文按 nginx 默认输出补全）：
+
+```text
+Configuration summary
+  + using system PCRE library
+  + using system OpenSSL library
+  + using system zlib library
+
+  nginx path prefix: "/usr/local/nginx"
+  nginx binary file: "/usr/local/nginx/sbin/nginx"
+  nginx configuration prefix: "/usr/local/nginx/conf"
+  nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+  nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+  nginx error log file: "/usr/local/nginx/logs/error.log"
+  nginx http access log file: "/usr/local/nginx/logs/access.log"
+```
+
+这份摘要就是一张「安装说明书」：可执行文件、主配置、pid、日志分别落在哪，日后排查全靠它。源码安装的路径全部可预期，不受发行版打包习惯影响，这是它相对包管理器的一个隐形好处。
+
+## configure 都检查了什么
+
+`./configure` 不是走过场，它逐项探测系统环境。课程画面里能看到它确认了 gcc 5.4.0 编译器，检查了 `poll()`、`dlopen()`、`SO_REUSEPORT` 等系统调用与内核特性，把「这台机器能不能装、怎么装」问了个遍。
+
+**第一，把「装不上」拦在配置阶段。** 依赖缺了、编译器没有，configure 当场报错退出，不会让你在 make 阶段对着满屏编译错误找原因。课程里特意强调：依赖不装齐，安装就不会成功。
+
+**第二，确定模块清单。** Nginx 的功能以模块为单位组织，哪些模块编进二进制、各模块用什么库，都在这一步定下来。源码 `src/http/modules/` 目录下几十个 `ngx_http_*_module.c` 就是候选名单，代理、压缩、日志这些日后要用的能力都出自其中。
+
+**第三，生成 Makefile。** 后续 `make` 与 `make install` 全按这份清单执行。`make` 把源码编译成二进制，`make install` 把二进制、默认配置与欢迎页复制到摘要写明的目录，两步顺序不能颠倒。
+
+## 启动与验证
+
+安装完成后进 `sbin` 启动：
+
+```bash
+cd /usr/local/nginx/sbin/
+./nginx
+```
+
+命令执行完没有任何输出，安静即成功。默认配置监听 80 端口，浏览器访问 `http://192.168.1.18/`：课程画面里返回的是 Nginx 自己吐出的一张页面，只要不是「连接被拒绝」，就说明 80 端口已经归它管。此时安装目录值得认一遍：
+
+```text
+/usr/local/nginx
+├── conf/    # nginx.conf 主配置，后面几课的主角
+├── html/    # 默认站点文件，欢迎页 index.html 在这里
+├── logs/    # access.log 与 error.log
+└── sbin/    # nginx 可执行文件，启动、校验、重载都找它
+```
+
+进程管理通过这个可执行文件下发：`./nginx -t` 校验配置语法，`./nginx -s reload` 热加载配置，`./nginx -s stop` 停止。后面几课每次改完配置都靠 `reload` 生效，不动进程。整条链路串起来看：
+
+```mermaid
+flowchart LR
+    A["apt 补齐编译依赖"] --> B["./configure 环境检测"]
+    B -->|"检测通过"| C["make 编译源码"]
+    C --> D["make install 产物落入 /usr/local/nginx"]
+    D --> E["sbin/nginx 启动监听 80"]
+    E --> F["浏览器访问 192.168.1.18 出页面"]
+```
+
+关键在 configure 这道闸门：环境不满足在这里就停，往下每一步都是确定性的。此刻的 Nginx 还是个空壳，conf 里只有默认站点，真正接管项目从下一课开始：挂载 manage-web 的静态产物、代理 `/haoke` 打头的接口请求，随后再加上 `api.manage.haoke.com` 接口域名与 `im.haoke.com` 的 WebSocket 代理。
+
+## 常见误区
+
+- **跳过依赖直接 configure。** 报错多半是找不到 PCRE 或 zlib，回去把带 `-dev` 后缀的开发包补齐再重新 configure，不要绕过去。
+- **在源码目录里找可执行文件。** 启动入口是安装目录的 `sbin/nginx`，配置与日志路径以 configure 摘要为准；源码目录只负责编译，不是运行目录。
+- **以为启动无声就万事大吉。** 端口被占用时启动同样安静，错误都记在 `logs/error.log` 里，用 `netstat -lntp` 这类命令确认 80 端口的归属再下结论。
+- **卸载全凭记忆找文件。** 源码安装的产物集中在 `/usr/local/nginx`，连同源码目录一起删除即可干净重装，课程开头删掉旧目录重来用的就是这份可预期。
+
+## 面试可能被问到的问题
+
+1. 面试官追问：「Nginx 编译为什么要装 PCRE、zlib、OpenSSL 三样依赖？」
+   答：PCRE 支撑 `rewrite` 模块与正则形式的 `server_name`、`location` 匹配；zlib 支撑 gzip 响应压缩；OpenSSL 支撑 HTTPS。编译期需要的是带头文件的开发包，缺了对应能力就编不进去，configure 阶段会直接暴露。
+2. 面试官追问：「configure、make、make install 各自做了什么？」
+   答：configure 探测编译器与系统特性、确定模块清单并生成 Makefile；make 按 Makefile 把源码编译成二进制；make install 把二进制、默认配置与静态页复制到目标目录。configure 不过关，后面两步无从谈起。
+3. 面试官追问：「源码编译安装与 apt、yum 安装如何取舍？」
+   答：源码安装能钉死版本、按需增减模块与编译参数，路径统一在 `/usr/local/nginx`，代价是要自己管依赖与升级；包管理器省事、升级可控，但版本与模块受发行版约束；容器化部署把编译过程固化进镜像，兼顾可控与可复制。
+4. 面试官追问：「修改 nginx.conf 之后怎样生效，会不会中断服务？」
+   答：先 `nginx -t` 校验语法，再 `nginx -s reload` 热加载。reload 会起一个新 worker 接管流量，旧 worker 处理完存量连接后退出，对在线请求无感，不需要重启进程。
+5. 面试官追问：「Nginx 启动了但页面访问不通，排查顺序是什么？」
+   答：按层缩小范围：确认进程存在，确认 80 端口在监听，服务器本机 curl 排除客户端因素，再查防火墙与安全组，最后看 `error.log`。每一层都有明确的通过与失败判据，别一上来就乱改配置。
+
+## 配套资料
+
+- 本教学日无源码包：`materials/code/03/day18-项目发布以及各种服务集群搭建/` 下仅有解压清单 `_extracted.json`（解压文件数为 1，内容为房源抓取测试数据 `data.json`），与 Nginx 安装无关。
+- 依赖安装命令、源码目录与启动路径抄录自本课画面线；`tar` 解压命令与 configure 摘要全文为按本课操作与 nginx 默认输出补全的示例。
+- Nginx 装好后的第一件事见 `0300-部署后台系统的前端系统(nginx配置).md`：托管 manage-web 静态产物并代理接口请求。

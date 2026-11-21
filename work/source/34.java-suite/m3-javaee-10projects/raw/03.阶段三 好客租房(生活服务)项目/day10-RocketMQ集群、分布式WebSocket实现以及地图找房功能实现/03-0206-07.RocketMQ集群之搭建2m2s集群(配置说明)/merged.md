@@ -1,0 +1,174 @@
+# 07.RocketMQ集群之搭建2m2s集群（配置说明）
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day10-RocketMQ集群、分布式WebSocket实现以及地图找房功能实现
+- 源文件：03.阶段三 好客租房(生活服务)项目\day10-RocketMQ集群、分布式WebSocket实现以及地图找房功能实现\07.RocketMQ集群之搭建2m2s集群（配置说明）【海量资源尽在 ubkz.com】.mp4
+- 时长 10分53秒（音频 653s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好,那么我们接着继续那么接下来我们将动手来搭建我们的LogMQ的集群那么我们将要搭建的是2M2S这样的一个集群什么叫做2M呢?
+[00:13] 就是两个Must,两个Slave这样的一个集群OK,我们依然是通过这个Docker去做一个搭建OK,那么下面我们来看一下
+[00:25] 那么首先我们可以看到在这个位置我们首先搭建两个master的name server这个叫name server1下面这个叫name server02ok那么我们来看一下他的这个命令Docker这个命令那么这个是一个端口的映射对吧然后下面这个是jvm的一些参数这个是设置他的一些目录那么这个是我们logs然后storeok然后下面这个name server2
+[00:55] 它的一个端口要注意了这个后面这个是不是我们的容器内部的端口它依然是9876那么前面的这个呢是9877是我们对外所暴露这个端口那么OK这个一定要注意端口有点不一样啊OK好那么下面呢我们来看一下我们的broker好那么我们来看一下broker它的一些这个配置啊或者它的一些参数那么我们可以看到这个Docker的命令呢我们在这个位置所使用的是
+[01:23] 刚刚Nethost那么这个在前面我们是不是也说过对吧也用过那么我们所使用的是host这种的网络的模式那么我们为什么要使用这种模式呢原因是那么当我们去搭建一个集群的时候我们的broker它的对外需要去暴露有三个端口那么哪三个端口呢第一个这个端口是跟我们的服务端一个交互那么我来画个图吧
+[01:52] 那么在这个位置我们来简单的把这个来说一下那么我们的broker呢要对外去暴露三个端口那么哪三个端口呢我们来看一下比如说这个就是我们的broker那么他对外啊要去暴露三个端口那么我们把这个来表示一下对外所要暴露的这个端口这个呢是一个啊这个呢是两个啊这个呢就是三个那么为什么要有三个呢我们分别的来写一下那么第一个这个端口就是我们的客户端
+[02:22] 就是与客户端客户端交互的这个端口这第一个啊这个端口那么第二个这个端口呢是他与其他集群的一些节点与这个与这个什么呢本集群中的其他节点其他节点这个交互交互的这样的一个端口那么OK这个呢是
+[02:54] 第二个这个端口那么第三个这个端口呢它是什么端口呢它是我们的这个MS就主从进行这个交互的一个端口那么也就是说我们这个block呢对外要暴露有三个这个端口才能够去完成一个集群那么我们为了方便呢我们在这个位置呢就直接使用这个host这种网络的模式直接去占用我们
+[03:22] 跟我们主机的一个端口作为共享那么就可以了要不然的话我们这个地方会写会写三个会比较麻烦一点那么OK好那么我们来看接着继续往下面看那么下面这个是常规的一些参数那么在这个位置可以看到指定我们的Block的配置文件然后在下面这几个是常规的参数那么都把它放到这个Block01下面那么OK那么接下来重点我们来看一下它的一个配置
+[03:50] 好那么下面我们来看一下broker文件的一个配置那么看到这个配置文件或者配置项是不是比之前的配置项要多一些啊那我们一个一个来过一下那么第一个这个叫name server那name server就是去指向我们的name server要注意在这个位置我们是不是要指向我们的两个name server一个是9876一个是9877那么中间呢要通过一个封号做一个分隔
+[04:14] 那么OK这第一个配置那么下面我们来看一下这个是brokercluster name就是我们这个集群的这个名字那么要注意因为我们有什么呢我们有多个这个组对吧有多个这个m那么他们呢要去把它组成一个集群呢靠什么去组成一个集群呢其实通过这个名字那么他们俩的这个集群的名字一样那么OK他们就同属于一个组
+[04:39] 那么这个呢这个所以这个配置也是非常关键也非常重要的啊下面这个参数呢他叫Burk name啊这个呢是去指定我们的Burk的名字啊Burk的名字那么他除了说给我们Burk做一个命名之外其实他还有非常重要的一个作用就是由于我们会搭建的是一个MS这种架构这就是一个是主
+[05:03] 这个是M对吧那么这个是一个S那么MS我们要把它的block name设置成相同那么才会把他们俩组成是一对就是MS这样的一个架构所以说这个block name也非常重要的一个参数那我们接着继续往下面看下面的这个叫block id那么block id那么我们可以看到值等于0那么要注意了那么如果它的值等于0那么代表的什么呢代表它是M如果它是非0比如给它设置为1
+[05:32] 那么它代表的是S哎呀OK这个也要注意那我们来看一下下面的还有这两个参数那么这两个参数呢我们来看一下一个呢是要做delete问一个呢就是failresold time那么这两个参数其实是一对其实一对那么下面的这个参数是指什么呢是指我们那个消息数据在我们的这个服务器上面停留的时间或者是保存的时间是多久呢48小时那么也就是24
+[06:02] 他默认是72我们在这个位置把它是设置成了48那么什么时候对我们的过期的文件去做一些清理的操作是在上面的配置就是04那么04代表什么意思代表是凌晨的4点那么凌晨4点钟的时候会做一个文件的清理把我们一些过期的一些文件给它清理掉OK是这样的一个配置好那么接着继续往下面看那么下面我们可以看到
+[06:31] 这个呢是他伯克的一个角色对吧肉一个角色那么显然的这个是属于什么呢属于一个同步对吧同步的一个组啊同步的一个组那么呃这个同步是不是跟我们前面所所说那个叫什么呢同步双写和异步复制那么显然我们在这个位置所使用的是不是就是个同步的一个双写的一个模式啊OK那么下面的这个叫做刷盘的方式
+[06:58] 这个应该还记得吧在前面的课程中我们讲过那么我们这个文件我们这个数据保存到我们磁盘它有两种方式一种就是同步一种就是一步的刷盘那么在这个位置我们选择的是一步刷盘那么一步刷盘的效率性能是不是要高一些对不对OK好那么我们接着继续往下面看下面还有两个配置项一个叫做Block IP1一个叫Block IP2
+[07:24] 那么这两个呢其实我们都是指向了我们这个机器的一个IP地址在前面的这个我们是不是在前一天做测试的时候会发现如果不设置这个IP那么我们的远程的客户端是没有办法就连接到我们Docker中的这个Blocker对不对因为它是默认是拿到Docker中的一个所生成的一个IP地址那么OK而下面这个IP2是干嘛的呢它是用于我们的主从之间的一个同步
+[07:53] 数据所使用的一个IP地址那么我们也给它设置为这个相同的IP地址那么OK那么下面这个参数很显然它就是一个什么呢监听的一个这个端口监听的一个端口那么OK对于这个端口呢我们简单再说一下就是我们可以看到在这个位置呢是不是我们设置为它的一个监听端口是10911对不对
+[08:16] 那么其实呢它还会有两个这个端口那么刚才我们讲过它呢会有三个这个端口那么我们现在只配置了一个就可以了它呢会在这个端口的基础之上呢去加一啊加一然后呢减二作为它这个端口也就是说会占有什么呢10912然后呢10909作为作为我们的这个一个端口啊会占用这三个端口啊OK好那么接着我们来看下面的配置
+[08:44] 下面这个就是我们第二个这个master这个broker这个master那么我们可以看到名字呢肯定是不一样的对吧下面这个目录它也是不一样的OK那么我们关键来看一下它的配置在这个配置项中那么不一样的有这么几个点第一个是broker的名字是不一样的因为它是第二个组对吧第二个组名字是不一样的这个broker id等于0这个是一样因为它的角色也是组这个一样一样这个都是一样的这个都一样的
+[09:12] 还有什么不一样就这个端口那么前面的我们那个10911这个改成10811这个端口不要和前面的冲突了那么OK好这第二个的配置第三个呢这个是我们的一个slave啊他是broke01的这个slave我们可以看到那么在这个里面呢这个一样那么这个是不是就不这个跟我们前面第一个第一个我master的名字是不是一样的那么要注意在这个位置可以看到他的broke id是不是设置为1了
+[09:42] 那么OK好那么接着继续往下面看那么他的一个这个角色改成一个sleeve那么下面都一样了但是他的一个这个监听端口我们改成10711这个端口是不是跟前面的两个也不能重复啊那么OK好那么接着继续往下面看那么下面的这个呢是我们第二个也就是第二个组的这个sleeve那么他的一个配置呢来看一下那么这前面的都是一样那么这个block name要改成block02
+[10:10] 是不是跟前面的那个master要一样对吧block id也设置为1那么也是一个sleeve这个角色那么这个呢他的角色设置为sleeve然后呢接近端口给他设置为10611那么ok当然了他们每一个他们这个目录啊都是不一样的ok好那么接下来呢我们就需要来动手来去搭建一下啊操作一下那么ok好那我们来实际的操作一下
+[10:37] 这样我们先讲配置那么具体的一个操作我们放到下一个视频里面做一个讲解那么OK那么关于我们搭建2M2S集群的一些配置的一些说明我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+通过 Docker 搭建 RocketMQ 的 2 主 2 从集群，包括创建服务器容器、主从 Broker 容器及启动命令。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示创建 master 服务器的 Docker 命令，包括端口映射、环境变量和镜像版本。
+画面 2: 展示创建第二个 master 服务器的 Docker 命令，与画面 1 命令结构相同。
+画面 3: 展示创建 master broker01 的 Docker 命令，包含挂载配置文件和日志目录。
+画面 4: 展示一个简化的流程图，包含“Consumer”和“与客户端交互的端口”。
+画面 5: 展示一个简化的流程图，包含“与本集群中其他节点交互的端口”。
+画面 6: 展示创建 master broker01 的 Docker 命令，包含挂载配置文件和日志目录。
+画面 7: 展示 master broker01 的配置信息，包括 brokerName、brokerId、brokerRole 等。
+画面 8: 展示创建 master broker02 的 Docker 命令，包含挂载配置文件和日志目录。
+画面 9: 展示 master broker02 的配置信息，包括 brokerName、brokerId、brokerRole 等。
+画面 10: 展示创建 slave broker01 的 Docker 命令，包含挂载配置文件和日志目录。
+画面 11: 展示创建 slave broker02 的 Docker 命令，包含挂载配置文件和日志目录。
+画面 12: 展示启动所有容器的命令：Docker start rmqserver01 rmqbroker02 rmqbroker03 rmqbroker04。
+画面 13: 展示创建 slave broker01 的 Docker 命令，包含挂载配置文件和日志目录。
+画面 14: 展示创建 slave broker01 的 Docker 命令，包含挂载配置文件和日志目录。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```bash
+#创建2master
+#nameserver1
+Docker create -p 9876:9876 --name rmqserver01 \
+-e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m" \
+-e "JAVA_OPTS=-Duser.home=/opt" \
+-v /haoke/rmq/rmqserver01/logs:/opt/logs \
+-v /haoke/rmq/rmqserver01/store:/opt/store \
+foxisho/RocketMQ:server-4.3.2
+
+#nameserver2
+Docker create -p 9877:9876 --name rmqserver02 \
+-e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m" \
+-e "JAVA_OPTS=-Duser.home=/opt" \
+-v /haoke/rmq/rmqserver02/logs:/opt/logs \
+-v /haoke/rmq/rmqserver02/store:/opt/store \
+foxisho/RocketMQ:server-4.3.2
+```
+
+画面 3:
+```bash
+#创建第1个master broker
+#master broker01
+Docker create --net host --name rmqbroker01 \
+-e "JAVA_OPTS=-Duser.home=/opt" \
+-e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m" \
+-v /haoke/rmq/rmqbroker01/conf/broker.conf:/etc/RocketMQ/broker.conf \
+-v /haoke/rmq/rmqbroker01/logs:/opt/logs \
+-v /haoke/rmq/rmqbroker01/store:/opt/store \
+foxisho/RocketMQ:broker-4.3.2
+```
+
+画面 7:
+```properties
+namesrvAddr=172.16.55.185:9876;172.16.55.185:9877
+brokerClusterName=ItcastCluster
+brokerName=broker01
+brokerId=0
+deleteWhen=04
+fileReservedTime=48
+brokerRole=SYNC_MASTER
+flushDiskType=ASYNC_FLUSH
+brokerIP1=172.16.55.185
+brokerIP2=172.16.55.185
+listenPort=10911
+```
+
+画面 8:
+```bash
+#创建第2个master broker
+#master broker02
+Docker create --net host --name rmqbroker02 \
+-e "JAVA_OPTS=-Duser.home=/opt" \
+-e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m" \
+-v /haoke/rmq/rmqbroker02/conf/broker.conf:/etc/RocketMQ/broker.conf \
+-v /haoke/rmq/rmqbroker02/logs:/opt/logs \
+-v /haoke/rmq/rmqbroker02/store:/opt/store \
+foxisho/RocketMQ:broker-4.3.2
+```
+
+画面 9:
+```properties
+namesrvAddr=172.16.55.185:9876;172.16.55.185:9877
+brokerClusterName=ItcastCluster
+brokerName=broker02
+brokerId=0
+deleteWhen=04
+fileReservedTime=48
+brokerRole=SYNC_MASTER
+flushDiskType=ASYNC_FLUSH
+brokerIP1=172.16.55.185
+brokerIP2=172.16.55.185
+listenPort=10911
+```
+
+画面 10:
+```bash
+#创建第1个slave broker
+#slave broker01
+Docker create --net host --name rmqbroker03 \
+-e "JAVA_OPTS=-Duser.home=/opt" \
+-e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m" \
+-v /haoke/rmq/rmqbroker03/conf/broker.conf:/etc/RocketMQ/broker.conf \
+-v /haoke/rmq/rmqbroker03/logs:/opt/logs \
+-v /haoke/rmq/rmqbroker03/store:/opt/store \
+foxisho/RocketMQ:broker-4.3.2
+```
+
+画面 11:
+```bash
+#创建第2个slave broker
+#slave broker02
+Docker create --net host --name rmqbroker04 \
+-e "JAVA_OPTS=-Duser.home=/opt" \
+-e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m -Xmn128m" \
+-v /haoke/rmq/rmqbroker04/conf/broker.conf:/etc/RocketMQ/broker.conf \
+-v /haoke/rmq/rmqbroker04/logs:/opt/logs \
+-v /haoke/rmq/rmqbroker04/store:/opt/store \
+foxisho/RocketMQ:broker-4.3.2
+```
+
+画面 12:
+```bash
+#启动容器
+Docker start rmqserver01 rmqbroker02 rmqbroker03 rmqbroker04
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 4: 展示一个简化的流程图，包含“Consumer”和“与客户端交互的端口”。
+画面 5: 展示一个简化的流程图，包含“与本集群中其他节点交互的端口”。
+画面 3: 展示一个架构图，包含“master broker01”、“broker (Master)”、“broker (Slave)”等节点，以及它们之间的连接关系。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

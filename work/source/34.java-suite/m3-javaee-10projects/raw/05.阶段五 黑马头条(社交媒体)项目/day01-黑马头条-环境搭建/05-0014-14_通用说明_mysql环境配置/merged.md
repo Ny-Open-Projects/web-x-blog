@@ -1,0 +1,198 @@
+# 14_通用说明_mysql环境配置
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day01-黑马头条-环境搭建
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day01-黑马头条-环境搭建\14_通用说明_mysql环境配置【海量资源尽在 666java.com】.mp4
+- 时长 22分34秒（音频 1354s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面呢咱们来说一下MySQL的环境配置啊在咱们整个项目中呢咱们MySQL呢是需要去配置到当前的common的模块下面啊所以说呢这里边是需要去提供一个这样的配置文件就在咱们当前common工程有个resource目录下边有一个什么呢MySQL-jdbc是curlddbc打开就这么一个配置文件啊
+[00:27] 在配置文件里边是有这么几项内容需要去配置首先是前四项这个四项很简单usernamepassword driver这个就是咱们收集后连接的基本四项配置还有下面三项是关于mybodies的三项应该是这两项是mybodies首先是一个mymap文件的存放位置
+[00:50] 好另外一个是别名的包名是吧还有一个是最后一个是事物的这种切记面达式啊咱们需要在这设置那行啊大家应该注意到了目前这个配置文件呢并没有去指定具体的值是吧它也是引入其他的配置文件那为什么要这么做呢哎刚才咱们说了啊现在每一个每一个这种工程下面呢都有这三个配置文件是吧就这三个根据不同的环境来去
+[01:18] 配置不同的参数目前的话呢咱们都是去引入或者引依赖于当前的这个环境配置的这种配置关键好比如说咱们测试库里边啊比如说咱们在开发环境里边都用这个东西你看这七项把它给考翻一下啊这七项呢其实就是对应的这七个内容好那这个值呢你看啊这个值比如说URLOK咱们连接的是本地的一个库那这一块
+[01:46] 这个值就是引用的就是当前的这个东西好吧那这个应该能够看明白啊那行啊当然这个是测试环境如果说你正式环境的话有可能是你的某一个正式环境的库那现在咱们只有咱们在开发的时候呢就只是测试环境所以说咱们只需要在test里边去设置这几项就可以好吧那行那这个说完之后啊
+[02:13] 最终咱们要去连上数据库光有配置还不行咱们在之前去用的时候可能在这配完之后有SWB有些默认值是吧咱们就可以直接去加载咱们今天换一种方式换这种方式当前配置类咱们自己写自己写需要写啥咱想一想无非就是咱们需要去定义什么定义一个连接池是吧
+[02:43] 也就是说你需要去连上数据库这是第一个好吧第二个呢咱们要去整合mybatties整合mybatties的话其实就是去干嘛呢去创建一个circle session file的bin同时呢把它放到spin的容器中咱们需要在这个open模块下边去创建一个类啊这个类呢是在mycircle包下边创建一个类这里叫啥呢咱们再去创建一个call叫什么mycircle call
+[03:13] 这个好吧它是一个配置类首先呢你要不明它是一个配置类的话首先咱们在这去创建什么东西那一个设置一个诸解是吧叫configuration它就是一个配置类那好啊刚才咱们说了啊这里边呢咱们需要去设置两个方法也能把两个方法的返回值呢放到sprint的容器中哪两个方法呢首先是第一个是设置一个什么设置一个数据库的连接池对吧
+[03:43] 好这是第一个啊第二个呢要去整合什么整合 mypaddies其实呢就是有一个circle sessionfactory bit那行这个咱们先来一个一个去说那数据库连接池怎么办呢public是吧咱们返回一个datasource然后呢咱们叫mycircle叫datasource好吧在这里边去
+[04:21] 怎么写呢怎么写其实很简单啊那咱们只需要去在这创建一个连接池最终设置完四项返回行了那咱们今天的咱们就不用咱们之前学过的比如说咱们之前学过什么呢C3P0啊比如说Grid是吧咱们这个连接池啊咱们就不再用了那用哪个呢用这个新的IgridSource它呢目前呢是最快的跟Splitbook的进行之后呢是一个最快的连接池你可以看一下啊
+[04:52] 里边有哪些呢?
+[04:53] datasource.set什么?
+[04:56] pdbc1passwordusername和driverclassname是不是都有啊这四项都有啊咱们先设置一个username那username这个值怎么来?
+[05:12] 这个值的话你是不是应该从当前的配置文件中去读啊
+[05:17] OK那咱们呢也是去采用当前的这种什么Springboard推进的一种方式去读取当前这个配置文件啊首先呢你要想去读的话首先是把这个配置文件给加进来叫PropertySource那这个需要去引入ClassPath就是当前的这个配置文件啊好放到这那放到这之后啊咱们还要再去设置另外一个前提啊就是当前这个配置文件里边啊
+[05:47] 要去读这些内容的话那你怎么读呢首先呢咱们要去设置一个前缀那这个前缀的话其实很简单是不是都是当前的什么mycircle不是mycircle核心的所以说呢一个注解那这注解是啥呢打开这这个注解是叫什么configuration是吧configuration properties这里面呢可以设置一个parfix这个前缀就是谁
+[06:17] 就是 mycircle.curl那具体的值怎么拿呢?
+[06:24] 那个值其实也很容易这个值的话咱们只需要在前面这里去定义属性就可以了比如说咱们直接string的什么?
+[06:37] ddbc user name大家一定要注意我这个写法ddbc user name你看这会怎么写的?
+[06:50] 是不是这么写的OK啊你毕竟那种写的时候属性就是比转换成了这样的一个东西你说把这个中间的杠给去掉并且把杠后边这个字母变成大写就可以了那所有的呢属性你要想去或许到不是这么写你看所有的杠呢咱们都要去把它去掉并且把后边字母变成大写就可以啊那这个咱们比较简单啊咱们就可以直接在这儿去把它给粘过来就可以啊
+[07:20] 好那粘过来之后呢那这个值啊就算是拿到了当然如果你要想去获取值的话呢你得去给当前的属性呢去提供get和set的方法咱们当然之前的是引入过了long book啊所以说咱们直接可以在这加注解就可以了那这时候呢这个所有的属性那get和set的方法呢咱们已经提供了啊那这时候你要想去设置值就很容易了这意思讲什么get cdbc user内容是吧
+[07:50] datasource.getgdbcpassword还有吗有啊datasource.setgdbcurldatasource.seteverclassname
+[08:23] 那是完了啊那是这完之后啊咱们最终的是把当前的这个sauce啊返回就可以了啊好那返回之后呢那这个前的这个这个sauce就放到了spin容器中哎ok那没有问题啊那行那这里边其实还有两项咱们需要去设置一个是最大连接数和一个最小连接数啊那咱们来设一设哎一个是什么最大连接数吧还有一个是
+[08:57] 最小连接数最连接数也可以点的datasource.setmax那就是它是max是50是吧然后下面再设一个最小连接数是在setmin是吧这个是5好那这个我们就设置完了ok这个是数据物连接池那这个还没完是吧咱们需要再去整合一个mypidis
+[09:26] 我们可以再去upload一下它的返回值呢就是circle session factory pin我们的方法名字叫什么呢mycircle叫circle session factory pin那行那这里边那怎么去创建它呢其实很容易咱们直接去创建就可以了new一个什么好circle session factory pin这里边需要设置哪些参数呢首先大家一定要注意啊
+[10:00] 那咱们要设置第一个就是设置什么数据员还有印象吗数据员还有什么还要再设置一个比如别名是不是可以设呀还有什么myper接口代理的什么扫描是不是可以呀可以啊还有咱们再设置一个叫myper文件存储的位置OK我们设置完这几项就可以最终的你把当前的什么呢
+[10:33] 当前的Fight Rebid返回管事咱们一个个一说数据源怎么拿呢数据源都知道咱们在这其实已经定义完了是吧咱们只需要在这个行参中去注入一个当前的数据源就可以了好DataSource那这个呢其实就是就是当前咱们自己的数据源我们可以起个名字这不是没有名字吗起一个
+[11:02] 名字跟他的方法名是一样放到这就可以啊嗯好把它也放到这是按照名称去入那设置就是更简单了那这里边有个方法叫fix3bin.setDataSource有没有是吧就是DataSource那这个数据源就设置完了下面还有别名啊别名的话其实咱们在当前的一纸文件中是已经设置完了
+[11:30] 就是这个别名也就是说咱们需要把当前这个注入进去就完事了啊来放试一下factorbin.setalias是吧factorbin.setaliaseditok那咱们就是list.setaliaseditok那完了这样的话咱们名也就设置完了下面还有一个就是Fiper的接口代理那接入代理怎么办呢接入代理啊其实呢咱们不用在这去设咱们在哪设呢
+[11:59] 咱们可以在这再去加一个诸解这里边就可以去扫描某一个包下面就能去当前下面去接口的创建代理对象那这包在哪呢这包其实是在当前的model下面有一个什么呢有一个mypro的文件夹
+[12:21] 这里边是所有定义的咱们所有的MIPER接口都在这里边定义所以说你只要去扫描当前这个包就可以好好把它放到这就行了那当然在这里边还有一个东西咱们需要去设置一下因为这个呢它不知道到底用的是哪一个circle session factory bin所以说呢你需要去专门去指定一下那这呢咱们需要去加一个bin让Spring去管理所以说咱们在这啊加这个东西
+[12:51] 这里边是有一个circle session factory ref可以引用某一个circle session factory就是咱们自己定义的这个circle session factory那这一块咱们算是定义完了那这个这个Maple接口在里面咱们就不用再去设置了下面是要去设置一个Maple文件存储的位置
+[13:21] 那这位置存到哪呢哎他这个也是存到了当前这个model下边有个resource有一个myprs文件夹里边这里边存放的都是各个模块的mypr文件那行那咱们需要去找到这个文件去存去设置那怎么设呢来看看啊bucket.bin打什么呢打set myprmypr locations是吧是呢你会发现这里边啊
+[13:50] 需要一个resource它并不是一个伺服块伺服块的话咱们设置一个路径就可以了所以说呢咱们这里边啊需要去使用一个工具类去构建当前的这个参数啊哪个呢就是它好宝贝过来啊等于什么呢你去构建完之后呢你看这里边最终返回的时候呢设立什么呢resolver打什么bet result ok
+[14:22] 这里边呢咱们就可以去传一个字符块最终它返回的就是一个resource我们可以把resource放到这这个resource啊这里边需要个参数这个参数呢可以传一个字符块这个字符块呢就是你myper文件存储的位置位置在哪叫class class什么myper是吧下面还有什么下面是怎么有星星好吧
+[14:52] 是以为所有的文件夹和目录是吧都是杠行什么听点插毛只要是插毛结尾的所有的东西咱们都要进行比配是吧那这不知道错了这不知道错了应该是需要去哎拖出异常拖出来啊那行那这块内容呢咱们就算是设置完了大家呢应该还有一些问题咱们再去改造一下啊首先第一个问题呢就是嗯这
+[15:22] 这有一个password你可以看一下我这个密码我这个密码本身是叫root但是我形成了tor也就是说咱们把这个密码给反转了一下咱们需要在这去做一个简单的处理也就是说密码反转密码反转操作怎么办呢咱们写一个publicsdn的什么叫realgetreal
+[15:56] 那这个密码怎么做呢怎么去处理呢咱们首先是拿到当前的Ctbc password好那这个password拿到之后呢它就是一个字幕圈对吧那这字幕圈怎么办呢咱们呢其实咱们之前呢在这有一个类是吧叫utilsw什么vors我们可以反转一下这是谁呢
+[16:29] 反转的就是当前的字母串那它呢反复的也是一个字母串其实这个字母串呢就是已经反转后的字母串比如说你的密码呢是123456那它反转过来又啥呢很聪明654321那在这设置的时候你直接就去returnreturn当前这个reverse就完事了这个咱们设置完之后呢这个拿的时候这块去
+[16:59] 过去密码的时候呢就不是他了因为你要再过去他的话就是TOOR那这个密码是错的所以说怎么办呢咱们要再去拿到谁呀拿到党换之后的拿这样的话我算是算是完了好吧这个密码算是做了一个小小的处理然后下面还有一个这份内容呢你看这个还有个问题就是myporsche明明呢咱们在这其实已经定义了一个
+[17:28] 定义了一个这种算是配置那这时候呢咱们应该是读取当前这个配置并不应该在这个类上去写死那怎么办呢拼呗是吧咱们在这再去设立一个方法啊然后呢就是进阶mypl.xml文件存储位置怎么办呢进阶很容易啊public咱们还是返回一个string然后呢是叫什么set
+[18:02] myperfewpass好吧那这个怎么拼接呢咱们直接为tun的什么new一个strand的什么拼接用哪个strand buffer和booster是不是都行啊好那这里边首先第一个拼接的是classpass对吧就是目前的对端下面这个是活的对吧那就是点什么appendappend谁呀不能写了是吧应该是不谁呀
+[18:33] 我当前的配置文件这么一段应该是他应该是他怎么读啊其实咱们已经哎在这个上面已经注入进来了就是谁呀就是当前的root map好那就是this.get root mapok那就是map4我再去拼接一下opend谁呀opend不就是后边这一段吗inbay放到这之后呢你再去to screen一下就完事了
+[19:05] 这个处理完之后呢咱们在这应该改一改东西不能写死吧剪成啥呢剪成this什么at my profile这时候就算是完了那行啊那这里边咱们改造的基本上差不多在这里边还有最后一个东西啊咱们再去说一下就是有一个开启自动驼峰标识咱们先可以考过来啊咱们可以写一下就是说咱们在这可以再去设置一个开启驼峰标识
+[19:40] 这里面是需要去创建一个configuration这configuration大家注意一下这个是谁呢是bybase提供的configuration找一找就它又一个configuration好这里边咱们需要去设置一个参数是设置这个参数好这里边是有一个这处设完之后就可以设置这种自开启的自动图层的标识它默认是不开启的这时候你可以
+[20:15] 把它加入到set用什么加好这时候呢你就可以把它加入到confir..confir..circle session factory bin里边啊这里边设置一个set configurationconfigurationconfiguration没有吗set不对啊是factory bin而set configuration好把configuration放进去
+[20:56] 那这个到底是什么意思呢咱们在字段中经常会有这么写字的user name那咱们路说你要开启这个之后它会自动帮你转换成什么转换成user name那这个呢它会自动帮你转换成这样的属性帮你去动设那好啊那这个呢咱们再次就做完善了OK那这个呢咱们就算是做好了啊然后下面呢
+[21:27] 好那这个做好之后呢咱们再简单捋一捋啊首先呢咱们在这啊在当前的common下边去设置一个testtest properties是吧这时候可以去定义不同或者说定义开发环境的一些数据的连接配置咱们在当前的这种resource下边创建一个什么关于my circle连接的一个配置应该是这些值应该是读当前的
+[21:55] Maven Test Properties的一些值是吧最终呢咱们这个配置类呢是自己写的就是MySQL Curve Config就是一个配置类那配置类里边呢咱们需要去创建一个数据库连接池是吧设置四项连接上数据库最终呢咱们又去做了一个整合MyBatties的一些操作OK咱们也设置了某一些项目
+[22:18] 好吧那这时候呢只要是项目启动去加载当前这个配置类的时候就会把当前的DataSource和CircleSessionFastBeam放到Spring容器中那这时候就能生效了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中配置 MySQL 数据源和 MyBatis 的 SqlSessionFactory，包括读取配置文件、创建数据源、配置连接池和事务管理。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：展示项目结构，选中 `mysql-core-jdbc.properties` 配置文件，准备进行数据库配置。
+画面 2：展示 `mysql-core-jdbc.properties` 文件内容，包含数据库连接 URL、用户名、密码、驱动等配置。
+画面 3：展示 `MysqlCoreConfig.java` 文件，开始编写配置类，导入 Spring 注解。
+画面 4：在 `MysqlCoreConfig` 类中，使用 `@Configuration` 注解，并通过 `@PropertySource` 注入 `mysql-core-jdbc.properties` 文件。
+画面 5：在 `MysqlCoreConfig` 类中，定义 `HikariDataSource` 实例并设置数据库连接参数。
+画面 6：展示 PPT 内容，标题为“6.5 通用属性说明”，子标题“6.5.2 mysql的环境配置”，并列出“6.5.2.1 数据库连接池”、“6.5.2.2 事务管理”、“6.5.2.3 MyBatis”等小节。
+画面 7：在 `MysqlCoreConfig` 类中，继续编写 `SqlSessionFactoryBean` 的配置，设置数据源和包扫描路径。
+画面 8：切换到 `heima-leadnews-model` 模块，展示其目录结构，选中 `mappers` 目录。
+画面 9：在 `MysqlCoreConfig` 类中，配置 `SqlSessionFactoryBean` 的 `mapperLocations` 属性，用于指定映射文件位置。
+画面 10：在 `MysqlCoreConfig` 类中，配置 `SqlSessionFactoryBean` 的 `configuration` 属性，用于设置 MyBatis 的全局配置。
+画面 11：在 `MysqlCoreConfig` 类中，配置 `SqlSessionFactoryBean` 的 `mapperLocations` 属性，使用 `classpath*:/mappers/` 通配符。
+画面 12：在 `MysqlCoreConfig` 类中，配置 `SqlSessionFactoryBean` 的 `configuration` 属性，设置 `logImpl` 为 `LOG4J2`。
+画面 13：在 `MysqlCoreConfig` 类中，配置 `SqlSessionFactoryBean` 的 `configuration` 属性，设置 `mapUnderscoreToCamelCase` 为 `true`。
+画面 14：在 `MysqlCoreConfig` 类中，添加一个 `getReversePassword` 方法，用于对密码进行反转操作。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2：
+```
+# 日志级别
+log.level=DEBUG
+log.pattern=%d{DEFAULT} [%M] [%nlevel] [%c] %M %n%nMsg%n
+
+# 本地只读
+mysql.core.jdbc.url=jdbc:mysql://localhost:3306/heima_leadnews?autoReconnect=true&useUnicode=true
+mysql.core.jdbc.username=root
+mysql.core.jdbc.password=test
+mysql.core.jdbc.driver=com.mysql.jdbc.Driver
+
+mysql.core.root.Mapper=mappers
+mysql.core.alises.package=com.heima.model.**
+mysql.core.tx.scan.package=execution(* com.heima.Service.*(..))
+
+# admin 用户
+admin.username=admin
+admin.password=admin
+
+hostname.Eureka.server=localhost
+Eureka.client.serviceUrl.defaultZone=http://localhost:8761/Eureka/
+```
+
+画面 3：
+```
+package com.heima.common.mysql.core;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class MysqlCoreConfig {
+    // 设置一个数据库的连接池
+    @Autowired
+    private MysqlCoreConfig mysqlCoreConfig;
+```
+
+画面 4：
+```
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
+import org.springframework.jdbc.datasource.UnwrapDataSource;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookup;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactory;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactory;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactory;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactory;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean;
+import org.springframework.jdbc.datasource.lookup.DataSourceLookupFactoryBeanFactoryBeanFactoryBeanFactoryBean
+

@@ -1,0 +1,112 @@
+# 5-HDFS的Secondarynamenode工作机制
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day02-HDFS
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day02-HDFS\5-HDFS的Secondarynamenode工作机制【海量资源尽在 ubkz.com】.mp4
+- 时长 14分48秒（音频 889s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 我们给大家详细讲解一下HDFS的原数据辅助管理也就是Secondary Name Node我们刚才说过Secondary Name Node它的主要作用是来对Name Node做一个辅助管理来减轻Name Node的负担那在这个Secondary Name Node的辅助管理里面呢有两个非常重要的文件一个叫FS Image一个叫IDIS这个FS Image里面呢它存储的是
+[00:29] 原数据的一个镜像或者说它里面存放的就是所有的原数据这个IDIS呢它存放的是呢客户端最近的一段操作日志就是你做了哪些操作我会做一个记录那么我们的Secondary就是结合这两个文件对我们的Name Node做辅助管理好 它里面是怎么实现的我们来给大家画一张图我们来看首先呢
+[00:59] 有我们的NameNode这是我们的NameNode下面呢是我们的DataNodeDataNode我呢来画三个节点那么这里边呢我们的DataNode由这个NameNode负责维护原数据好接下来我们来看一个问题咱们说NameNode呢保存的是整个HDFS里边的原数据信息那所谓的原数据呢你就理解成呢它是一种特殊的一种数据结构
+[01:48] 这里面保存的比如说你在HDFS里边创建了一个文件它会记录这个文件的比如说路径比如说在根目的下面一个A.T.A.T这个文件它的一些大小比如说EKB这个文件它存储的位置比如说它存放在哪些DataNode上它的块存储是怎么分布的比如说一些块信息OK那么这些是NameNode的原数据
+[02:18] 比如说再来一个比如说还有一个文件叫b.txt那它的文件大小是2kb同样的也存储它的块信息这个NameNode存储这些原数据信息呢它主要是存储在内存中那现在就面临一个问题如果说所有数据呢都存在内存中一旦呢我的NameNode这台主机重启那重启了之后呢这些所有内存的数据就丢失了
+[02:49] 一丢失之后呢我们的原数据没有了没有之后相当于所有的数据呢就找不着了那这个时候呢我们这个集群就坏掉了如何去保证这个问题如何去解决这个问题呢接下来呢我们需要做一件事就是把NameNode中的原数据信息呢要保存在磁盘上好保存在磁盘上那这个时候呢我们要对它做一个持久化存储要做持久化存储呢就会引出两个文件
+[03:19] 我们来画一下一个文件呢叫fsimagefsimage好 还有一个文件呢叫edits这个文件呢是editsedits那这个fsimage呢里边存放的是原数据的镜像原数据的镜像什么叫原数的镜像呢你就理解成啊NameNode在内存中存储的所有信息呢都保存在这个文件里边
+[04:03] 它保存的是一些二进制的一些数据而这个IDIS呢它存储的是最近一段时间对HDFS的日式操作OK日式操作那我们的原数据呢它的持久化就靠这两个文件来去进行保存那我们来说一下这两个文件分别去起一个什么样的作用首先呢这个FS image呢它是一个原数据的镜像那比如说呢
+[04:36] 我这个NameNode在重启的时候我们的这个FS Image呢它需要干一件事情需要将这个文件中的所有数据啊加载到内存中所有数据呢要加载到内存中来恢复这个原数据信息但是呢注意这个光有这个FS Image还不行那如果说比如说呢我最近呢我要对这个HDFS的数据呢进行一些操作修改
+[05:04] 这些最新的修改信息呢FS Image是没有的那最新的修改信息呢保存在哪里呢保存在这个日志文件也就是IDs文件那我比如说我重启了之后呢它需要干两件事情第一件事情要把FS Image的数据呢加进内存第二件事情我们的Name Node还需要将日志操作中的一些操作呢再执行一次然后呢把最近的一些元数据信息
+[05:34] 也要做一些恢复恢复性的操作比如说呢我们在最近一次我们去在这个HDFS里边呢增加了一个文件叫c.txt好比如说增加了c.txt比如说它是3kb那么我们要存它的块信息好大家请听认认听当我在HDFS里边新增加了一个文件之后呢我们的内幕录的会做一件事情第一它会在内存中呢
+[06:08] 去增加一条原数据信息同样的它会在这个edits这个文件中呢增加一条日志信息好那么这两个信息呢都会同步但是fsimage这里边原数据的镜像里边是没有这个cdltit这个记录的好那我当我数据重启了当我name node重启了之后呢我们一方面要将原数据的镜像加在内存中另一方面要将
+[06:36] 最近的日志操作中的一些记录重新也要恢复比如说呢这些C的帖体也要恢复OK那么这个时候呢我们就相当于啊要恢复这个原数据需要做两件事第一加载这个FS image第二件事需要将日志这个日志中的操作要重新执行一次来恢复最新的一些操作注意
+[07:02] 把日志操作呢重新执行一下并不是说又重新建一个C的TAT对不是这样的因为C的TAT它已经在我们的Data Node里边存储了它只需要把日志中记录的一些文件的一些原数据信息啊重新生成一次就可以了好那么这个呢就解决了我们Name Node数据丢失的问题那虽然解决了这个问题但是又面临一个问题如果说呢随着时间的推移时间的推移
+[07:31] 我们的NameNode没有重启没有重启那么FS Image的数据是不会更新的那我们的IDIS会去记录最新的一些操作那么随着时间的推移呢IDIS的数据是不是越来越多呀那它可能呢要去存一年的或者说几年的数据都在这里都在这里那就会造成什么呢一旦NameNode的一旦重启它需要将IDIS中所有的操作要重新走一遍这个时候是非常消耗
+[08:01] 我们的内存和CPU的那怎么去解决这个问题呢这个时候呢我们呢就提出来一个东西这个呢就是Secondary Name Node我来画一下就是Secondary Name NodeSRY然后呢Name Node这个Secondary Name Node干什么事呢它主要是来减轻这个Name Node的压力的这个Secondary Name Node呢它会去做一件事情那它呢
+[08:36] 在满足一定条件的时候会将这个FS image和IDs文件拷贝过来会将这两个文件拷贝过来那什么时候它拷贝过来呢有两个出发条件我们来记一下它这个它拷贝了一个出发条件出发条件第一个出发条件呢是时间时间时间因素你比如说呢我可以去设如果我设一个小时一小时那这个时候呢
+[09:16] 每隔一个小时呢那这个时候呢他就会把这个FS1密集和日记文件的拷贝过来然后进行一个合并还有一种还有一个因素呢就是这个文件大小文件大小因素那这个文件大小呢一般指的是IDIS这个文件如果IDIS文件呢一般默认是64兆如果说超过64兆那这个时候呢他也会把这两个文件呢把它拷贝过来然后呢进行一个合并好
+[09:47] 假如说呢我们是因为时间因素时间我们来放在这位置这是时间如果说我们这里采用的是对不起我来再时间因素如果说比如说我们现在采用的是时间因素一个小时那这个时候呢它会将FS Image和Edits拷贝过来拷贝的时候注意这个FS Image呢一般是直接拷贝过来而这个Edits呢
+[10:33] 拷贝完之后呢它会将原来的数据呢清空既然原来的数据清空你可以这样理解好拿过来之后呢我们的secondary name node会做一件事情将这两个文件呢合并合并出来一个什么呢合并出来一个新的fs image也就是新的原数据镜像我把这个地方呢也拿过来注意它会拷贝出来一个新的fs image
+[11:12] 好拷贝出了一个新的fzimage之后呢这个新的fzimage会干什么事情呢注意我们sector合并完之后呢它会它会在满足一定条件的时候把这个新的fzimage去替换掉原来的fzimage注意啊再来一遍它会将这个新的fzimage替换掉原来的fzimage那么这个替换有什么好处呢大家心想如果说我的name node一直在工作
+[11:42] 那么它可以去在满足一定条件的时候把这两个合在一起合并成一个新的fdmg那相当于这个fdmg得到了更新得到更新之后而且还有一件事情它把addis的数据考过来之后就会避免addis文件的过大OK那如果说哪一天的name node又重启了那这个时候我们的原数据镜像那它是一个最新的而且addis是记录
+[12:12] 最新的一些操作那这个时候呢他再去Name Node再去把这两个文件合并的时候他的压力就非常小了OK那么这个Secondary呢就干这么一件事情在定时的去合并这两个事情也就是说他相当于啊把Name Node本来在重启的时候该干的事情让他给他偷偷去干了而干完之后呢并且他去偷偷的把他的一些成果呢不知不觉的让Name Node去使用
+[12:41] 这就是它的一个基本原理在这里呢我给大家说一下这个fsimage呢它其实并不是一个文件它呢是一组文件而idus也是一样的它也是一组文件来我们来看一下这个文件在我们的讲义里边呢有两个配置在这个hdfset.xml里边第一个就是配置我们的原数据fsimage的存储位置在name node下面一个name node data 4
+[13:11] 而这个IDs呢在这个文件夹下面有个IDs我们来看一下在这儿呢有两个目录我们来进去好 比如说在这里我们来看一下我们来进来先在这里先进入这个NameData4进来之后呢这里边呢有一个目录叫current我们来进current好 进来之后呢你会发现这里边有很多FSImage开头的文件这些呢就是
+[13:40] 我们的原数据镜像文件那还有一个呢就是我们的addis文件也就是日志操作文件把这个拿过来我们来进来看一下进到current这里边呢也有很多文件这些都是日志操作文件好那这个是它的一个内部的基本原理那接下来呢我们来看这里边还有一个小细节在这个call.set的插门里边呢我们可以设置secondary的一个出发条件
+[14:12] 你比如说呢你多长时间合并一次呢这个地方有个P2的默认是一个小时合并一次3600秒有一个小时那还有呢你可以去设置这个什么呢这个大小比如说默认是64兆合并一次如果这两个条件都设的话呢就看哪一个条件先触发那么它就会去执行哪一个OK下面是它的一个执行原理这个呢我给大家讲过了OK那这个就是我们
+[14:42] 这个Secondary Name Node它的一个工作机制我们先说到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+讲解 HDFS 的元数据辅助管理机制，重点介绍 SecondaryNameNode 如何通过 fsimage 和 edits 文件进行元数据合并与同步。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示 HDFS 元数据辅助管理章节，重点介绍 fsimage 和 edits 文件的作用，显示了配置文件中 namenode 相关路径的 XML 配置。
+画面 2: 同画面 1，光标在配置文件中 namenode.edits.dir 路径处，强调 edits 文件的作用。
+画面 3: 展示 HDFS 架构图，namenode 通过 fsimage 和 edits 管理数据块信息，指向多个 datanode。
+画面 4: 展示 SecondaryNameNode 的架构图，其包含 fsimage 和 edits 文件，右侧列出触发条件：1小时和64M。
+画面 5: 展示 SecondaryNameNode 的工作流程，其 fsimage 和 edits 文件合并生成新的 fsimage。
+画面 6: 展示 SecondaryNameNode 与 namenode 的数据同步流程，新的 fsimage 从 SecondaryNameNode 同步到 namenode。
+画面 7: 同画面 1，展示 fsimage 和 edits 文件的 XML 配置。
+画面 8: 展示在命令行中查看 edits 文件列表，显示大量 edits 文件。
+画面 9: 展示在命令行中进入 namenode 的 datanodedatas 目录，列出 fsimage 和 edits 文件。
+画面 10: 展示在命令行中查看 edits 文件列表，显示大量 edits 文件。
+画面 11: 展示 core-site.xml 配置文件中 fs.checkpoint.period 和 fs.checkpoint.size 的配置，以及 SecondaryNameNode 工作流程图。
+画面 12: 展示 SecondaryNameNode 工作流程图，列出三个步骤：1. SecondaryNameNode 读取 NameNode 的 edits；2. 从 NameNode 中获取 fsimage 和 edits；3. 合并后生成新的 fsimage。
+画面 13: 展示 core-site.xml 配置文件中 fs.checkpoint.period 和 fs.checkpoint.size 的配置。
+画面 14: 展示 core-site.xml 配置文件中 fs.checkpoint.period 和 fs.checkpoint.size 的配置，光标在 fs.checkpoint.size 配置项上。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+<property>
+  <name>dfs.namenode.name.dir</name>
+  <value>file:///export/servers/Hadoop-3.1.1/datas/namenode/namenodedatas</value>
+</property>
+<property>
+  <name>dfs.namenode.edits.dir</name>
+  <value>file:///export/servers/Hadoop-3.1.1/datas/dfs/nm/edits</value>
+</property>
+
+画面 7:
+<property>
+  <name>fs.checkpoint.period</name>
+  <value>3600</value>
+</property>
+<property>
+  <name>fs.checkpoint.size</name>
+  <value>87188864</value>
+</property>
+
+画面 11:
+<property>
+  <name>fs.checkpoint.period</name>
+  <value>3600</value>
+</property>
+<property>
+  <name>fs.checkpoint.size</name>
+  <value>87188864</value>
+</property>
+
+画面 13:
+<property>
+  <name>fs.checkpoint.period</name>
+  <value>3600</value>
+</property>
+<property>
+  <name>fs.checkpoint.size</name>
+  <value>87188864</value>
+</property>
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 3: 架构图，namenode 指向三个 datanode，namenode 通过 fsimage 和 edits 管理数据块信息。
+画面 4: 架构图，SecondaryNameNode 包含 fsimage 和 edits 文件，右侧列出触发条件。
+画面 5: 架构图，SecondaryNameNode 的 fsimage 和 edits 文件合并生成新的 fsimage。
+画面 6: 架构图，SecondaryNameNode 的新的 fsimage 同步到 namenode。
+画面 11: 流程图，左侧为元数据节点，右侧为从元数据节点，元数据节点包含 edits 和 fsimage，从元数据节点包含 edits 和 fsimage，元数据节点通过 fsimage 和 edits 合并生成新的 fsimage。
+画面 12: 流程图，列出三个步骤：1. SecondaryNameNode 读取 NameNode 的 edits；2. 从 NameNode 中获取 fsimage 和 edits；3. 合并后生成新的 fsimage。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

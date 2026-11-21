@@ -1,0 +1,136 @@
+# 06-ETL-数据清洗-课程访问量清洗-使用NiFi生产数据并测试
+
+- 阶段：08.阶段八 智慧学成项目
+- 章节：03.第三章 智慧学成-课程分析/1.数据清洗
+- 源文件：08.阶段八 智慧学成项目\03.第三章 智慧学成-课程分析\1.数据清洗\06-ETL-数据清洗-课程访问量清洗-使用NiFi生产数据并测试_【海量资源尽在 666java.com】.mp4
+- 时长 16分4秒（音频 965s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 前边咱们使用JS买点的方式获取数据编写了清洗代码使用JS买点的方式获取的数据相对来说是比较少的这里使用NiFi调度生产数据的方式生成大量测试数据然后再使用数据清洗的代码进行清洗这里NiFi调用的流程是使用QAVTBOS这个组件
+[00:30] 就是这个处理器获取课程的ID通过转换为JSON数据进行JSON数据的一个切割拿到咱们的JSON值这里是使用的JSON pass获取获取到JSON值之后转换成文本数据转换成文本数据交给咱们的脚本这里的脚本还是使用Python脚本进行编写的
+[00:58] 这里呢,Python脚本根据咱们的课程ID生成课程访问量的数据生成课程访问量的数据之后呢,保存到HDFS上咱们Netfile调度的原码已经准备好在授课资料中第二张数据仓库与ETL内的Netfile目录下有一个课程访问量点XML这个呢,就是咱们调度的一个原码接下来切到Netfile这里呢,已经创建好了
+[01:28] 离下分析的一个处理系组又创建了一个课程防暗量流程的处理系组以后和课程防暗量相关的都放到这个组下这里呢咱们来把课程防暗量的原码给上传上来也就是咱们的课程防暗量模板这里选择一下课程防暗量点击上传上传完成之后呢直接使用拖动的方式把它给添加进来这里咱们课程防暗量
+[01:58] 就是2HDFS就是生产的数据保存到HDFS上用于呢离线分析接下来对它进行配置由于这个地方呢查询了数据库需要对数据库的密码进行一个配置配置完成之后呢保存进行然后把这个组件给启用了OK已经启用启用完成之后咱们的配置就完成了这里呢就可以直接启动来生成数据
+[02:32] 这里已经看到数据有流动了走咱们来到咱们的不是咱们现在HDFS上也已经保存成功咱们来切到HDFS上这里呢是VZSource目录这里呢是07这个目录可以看得到这个数据还在增长这里呢已经有测试数据了咱们就可以把它给停下文本文件
+[03:03] 十几兆的文本文件现在的数据量大概已经在至少已经在10万以上了吧因为文本文件按行来存储这个空间占用还是不大的这个呢数据已经有了接下来咱们就是来跑咱们的测试程序这里呢目录刚才咱们看到的是07咱们来跑07目录下这个所有的数据这个执行还是需要一段时间的
+[03:38] 好已经开始执行还在初始化Hive的一个过程中原来咱们这个数据是只有两条的咱们的VDataFate咱们来看一下这里原来只有两条等这个数据跑完咱们再来再次查询回到代码这里还在进上中这里根据日志可以看到它已经读完了咱们的Hadoop上面的数据
+[04:24] 这里还在一个计算过程中好已经完成这里数据已经出来但是发现一个问题时间不对咱们来切到温岛这个地方呢就是咱们这个脚本的一个注意事项Python生成的脚本使用的是时间戳这个地方呢在这个地方是可以看得到的这个地方它生成的数据是时间戳但是呢
+[04:56] GS买点生成的数据是毫秒值咱们编写的代码是根据哪一个来写的是不是根据咱们的GS买点来写的这个地方就需要把时间桌变成毫秒值这个地方需要乘以1000咱们哪些是做了这个操作呢咱们和时间相关都是需要把它给变成一个毫秒值目前来说一共是两个地方
+[05:24] 这个两个地方变成好转接之后呢咱们再次进行一个清洗操作咱们来看一下数据库里边就是咱们数据仓库里边现在有多少数据刷新一下这里现在应该已经是有很多条了刷新VZ2FET走这里显示分区是61个不同的分区有不同的数据咱们来直接进行一个查询SLEPT21CT
+[05:59] 然后呢直接是进行一个countercounter操作counter1from咱们的这是哪个表vzfet表走一下查看一下数据这里还没跑完只要这里没跑完咱们这个数据查询呢就不影响如果这个跑完了之后呢这里查询操作就有影响了因为它又进行了一次保存操作这里还在还在还在执行中因为这个线还没走完
+[06:33] 好,咱们来看一下,这是千万十,十二万数据了,已经十二万数据,咱们来看这个还在正在运行,这个呢到目前为止还没有执行完,说明它这个加了时间之后它计算量增大了,因为每一条数据都要对这个时间进行一个乘一千的一个操作,所以说它计算量增大,这个时间就会变长,咱们稍微暂停一下。
+[07:04] 这里程序已经跑完但是呢你看到这个结果还是不对为什么还是不对呢我这个时间是不是已经改过了其实这个的话是原因是在哪呢虽然说咱们这个地方配置了是覆盖的但是就是由于咱们时间改了所以说它这个数据还在因为咱们时间改成正确的之后这里是2019但是呢2019和20
+[07:34] 和1970它时间是没有关系的所以说这个分区不会有一个覆盖的效果咱们来文件上看一下咱们去事实表看它怎么存储的VZVZFET在这这里你可以看到这是1970年的所有数据把它给干掉因为咱们是不需要的这个呢是咱们2019年的就是正确的数据
+[08:09] 正确的数据的话其实还有问题你在这里可以看得到它是按照什么来分区的按照月来分区的咱们是年月月分区分区完了之后年是对了但是月它出现了这么多的一个数据这个呢其实在咱们文档上也有解释的这个位置咱们的脚本里边控制了生成时间它是1到720天的一个数据随机生成的大概也就是三个月吧
+[08:41] 720天30天是一个月大概是数学不太好大概是这么多天的一个数据这么多天的数据咱们清洗的时候没有对日期进行一个过滤虽然说咱们在代码上这个地方说了我这个数据正常的话我这个DataInfo默认已经过滤了但是咱们现在什么咱们现在是生产的数据
+[09:09] 这个日期这个目录下的数据不是11月7号的不是11月7号的话它是最近大概是720天的一个数据所以说咱们这个地方需要对它进行一个过滤怎么过滤呢还是使用filter然后这里上面还是一个数组咱们还用AR来表示这个地方符号打错了
+[09:43] 它是一个等号加尖点号咱们需要哪些数据呢哪天的数据啊是不是和data infer一样的一个数据啊这里data infer等于谁啊咱们是不是把它给拿过来就行了但是咱们data infer是谁啊等等咱们data infer是谁啊对方是这个这个的格式是什么呀是ymdd没有hh需要把hh去掉这里咱们的数组是
+[10:16] AR不是temp把注射给加一下这个地方呢就是在生产数据时以data infer统计为准统计时需要过滤日期需要过滤日期但是呢我还需要再加一点在测试时报表系统需要大量的数据
+[11:02] 它需要大量的数据你这个地方按天一天一天的清洗是不是很累啊这个时候一般不进行过滤不进行过滤是不是有了数据咱们就可以进行报表系统的一个展示了这里过滤完数据之后呢咱们还需要把这个数据给清掉咱们来跑一下看一下咱们过滤数据是否好使这里呢干掉
+[11:35] 干掉之后呢,咱们这个数据库就围空了,咱们来统计一下,datalock再次执行就行了,它还在运行过程中,等它响应一下,等它执行完成,还是显示datalock,selecting from这个datacourse,代码是没有问题的,如果这次执行还不好使的话,咱们去hev里边进行一个执行,说明HUE有的时候会有一点小问题。
+[12:22] 还是报数据锁定吗saucesauce数据还是在的咱们只是把这个fitVidiaSafe的数据给清掉了好这里它还有问题咱们就来Hive的这个处理器里边进行一个执行Hive的容器这就是刚才切到了Hive的容器咱们呢把咱们的succes宇具这个地方呢需要是一个表明咱们是在咱们这个库看一下是哪个库
+[12:59] 是在data这个库里边data cost d a d a t a c o u r s 1.进行一个查询这里看它数据是否锁定的这里呢它在做各种各样的计算稍微暂停了一下等它计算完成哎好像要完成了已经出现100%了这里可以看得到数据是0数据是0的话说明它清成功了
+[13:36] 这里使用过滤的方式进行一个查询进行一个清洗来看一下HUE好了没再执行一下好像还是很慢咱们看蛋吧执行完成没还在跑OKHUEOK了这里目前还没有计算完成这个地方看到它还在干什么还在初始发害物这里我就稍微暂停一下等它跑完之后咱们继续
+[14:22] 这里程序已经运行完成,咱们可以看到已经得到了正确的结果,而且呢,日期都是7号的,11月7号的,后面呢,这是小时,咱们来数据仓库上看一下,这里它11月7号生成了多少数据,来看一下,费特莫路,刷新一下,这个结果还没出来,咱们看这边的刷新,好像数据这边又被锁了,然后再次查询一下。
+[15:01] 这个的话咱们可以根据这个目录查看这里只有分区的话只有年现在是一个月看7号好只有一天的时间只有一天的数据也就是说咱们这个过滤已经生效过滤生效的话咱们来看这个查询出来没好这个已经出来了是1975条数据过滤已经生效
+[15:29] 那么咱们这个测试就完成了咱们再回到文档配置脚本的说明对脚本的说明在这里这个的话脚本的说明如果你需要控制的话就在这里边改一下不需要控制默认即可测试这个地方的话是进行数据生产的测试还有测试清洗代码好以上的话NiFi生产数据并测试咱们就完成了数据仓库以及E7L的课程也到此就完成
+[16:01] 好,本视频就到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何通过 NiFi 流程生成模拟数据并写入 HDFS，同时展示 Spark 代码对数据进行清洗和写入 Hive 的过程。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 展示 NiFi 调用流程图，包含 QueryDatabaseTable → ConvertAvroToJSON → SplitJson → EvaluateJsonPath → ReplaceText → ExecuteScript → PutHDFS。
+画面2: NiFi 界面，显示“课程访问量流程”流程组。
+画面3: NiFi 界面，显示流程中各处理器的运行状态和数据量。
+画面4: IntelliJ IDEA 中的 Spark 代码，定义了输入路径和 SparkContext。
+画面5: IntelliJ IDEA 中的 Spark 代码，显示了读取的数据内容。
+画面6: IntelliJ IDEA 中的 Spark 代码，显示了时间维度处理逻辑。
+画面7: IntelliJ IDEA 中的 Spark 代码，显示了数据写入 Hive 的日志。
+画面8: IntelliJ IDEA 中的 Spark 代码，显示了时间维度处理逻辑。
+画面9: Hue 文件浏览器界面，弹出确认删除文件的对话框。
+画面10: IntelliJ IDEA 中的 Spark 代码，显示了数据过滤和填充逻辑。
+画面11: Hue 查询界面，显示了表结构和查询历史。
+画面12: 本地终端界面，显示了 Spark 作业的执行日志。
+画面13: Hue 查询界面，显示了 SQL 查询语句。
+画面14: 文档页面，标题为“5.6 再次测试清洗代码”，并提示参考“文档 4.4.4 测试章节”。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面4:
+```scala
+val sc = Spark.sparkContext
+val date_info = "2019-11-07"
+val input = sc.textFile(path = s"/user/Hive/external/data_course/visit_source/${date_info}")
+```
+
+画面5:
+```scala
+1121.248.185.185 185.4040866 45v1 446
+151.256.1.115 1.4040866 45v1 446
+134.8.1.1 1.4040866 45v1 446
+137.138.43.21 1.4040866 45v1 446
+187.17.138.186 1.4040866 45v1 446
+112.117.79.89 1.4040866 45v1 446
+```
+
+画面6:
+```scala
+val time_dim = getDateTime(tmp).toLong * 1000, pattern = "yyyy-MM-dd HH"
+var area_dim = "-1"
+try {
+  area_dim = areaMap.get(getArea(tmp(3))).get
+} catch {
+  case e => e.printStackTrace()
+}
+```
+
+画面7:
+```scala
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,06]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,07]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,08]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,09]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,10]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,11]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,12]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,13]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,14]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,15]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,16]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,17]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,18]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,19]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,20]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,21]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,22]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,23]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,24]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,25]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,26]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,27]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,28]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,29]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,11,30]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,01]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,02]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,03]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,04]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,05]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,06]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,07]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,08]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,09]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,10]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,11]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,12]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,13]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,14]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,15]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,16]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,17]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,12,18]
+INFO HiveMetastore: get partition with auth: db-data_course tbl-course_visit_fact [2019,
+

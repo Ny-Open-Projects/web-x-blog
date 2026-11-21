@@ -1,0 +1,90 @@
+# 21-刷脸登录：测试以及总结
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day11-刷脸登录
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day11-刷脸登录\21-刷脸登录：测试以及总结_【海量资源尽在 ubkz.com】.mp4
+- 时长 5分36秒（音频 336s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 前端的这个工程结构呢我们已经准备好了那接下来呢我们就开始在前端联合上我们的后端一起完成刷脸登录的这个功能那我们应该如何去做呢首先呢就是刷脸登录的这个二维码二维码能够弹接出来但是为了我们课上的效果更加友好一些呢我可以这样去做也就是说呢我不借助手机进行扫码了因为我们之前都知道通过手机扫码之后得到的数据其实就是一个URL地址
+[00:30] 那这个URL地址呢怎么做呢其实我可以在后边也就是在我服务端把这个地址给我打印出来接着我以浏览器的形式打开它进行一个扫码那因为我的笔记本电脑呢是具备摄像头的一个功能的所以对于我来说咱们通过浏览器打开测试起来更加方便一点那好了在这边呢我去打开我的这个代码部分找到Controller找到我们的面部登录的生成二维码部分在这边
+[01:01] 在这边找到我们get里面的一个方法注意我们这边呢直接把这个sot把这个content打开因为它其实代表的是我们拼接好的完整urlok那好了接下来呢我重新启动一下这个工程那这样一来的话我在页面部分点击去刷点登录它就会给我生成一个二维码那生成了二维码之后我是不是从后台这边直接可以把这个二维码拿出来我们来看一下效果没错吧ok好了这边呢我们开始看一下
+[01:32] 服务呢应该是已经启动成功了那好了我这边生成二维码好了已经有了那接下来我们拿到后端的这台这个请求地址即可那我们这个请求地址呢我做一个简单的说明就是说我前端部分呢是一个localhost8080等等一大堆那接下来我关注的其实是我们这个请求路径那我现在测试的时候是在我本机进行测试的
+[01:57] 所以我这边写了一个localhost 8080给它配置到了我们的配置文件里面前半部分这个http.http.ms前半部分那接下来呢如果各位要在线上使用的话这边是不是可以把它配置成我们线上的一个URL地址其实就可以了OK那好了接下来呢为了我们更加直观的能够测试出我这个效果那我打开Fshare各位一起来看一下那你会发现呢我生成二维码之后这边不断的在发动请求
+[02:27] 不断的在发送请求那他发送的一个请求这边就是我们检查二维码状态的这么一个请求地址并且呢这边不同得到的不不停的得到状态都是-1因为我还没有进行一个扫码的一个操作没错吧好了那接下来呢我再去打开一个浏览器好了把它放到右边的这个部分模拟手机用户进行扫码好了我们通过两个对比的形式来看右边我扫码成功之后
+[03:02] 右边扫码进入一个UIL地址这个UIL地址我就直接自己拷回来了如果各位有兴趣的话可以用手机登录的情况来做也可以好了接着我点击回车那会调用我的摄像头展示出我的头像那就目前而言呢我刚才已经在百度云的人脸库当中上传了我自己的一张照片那我上传的照片呢我是写的ID呢是我这个ZBZ这个用户的ID
+[03:28] 这个ZBZ这个用户的ID所以呢我一会儿识别得到的用户ID就应该是ZBZ用户ID相应的内容OK好了这些呢咱们准备好了之后我就开始模拟用户手机扫码进入到浏览器好了进来之后呢各位会发现各位发现右边这边部分呢已经开启了我的摄像头哎这个稍微有点快啊其实已经告诉我验证成功了那验证成功看一下左边的效果哎各位如果会
+[03:57] 仔细看的话那左边其实已经进入到了我的系统首页当中好了我把它全明显示那各位会发现我这样从没有写我的用户名密码什么都没有填写也能够进来是不是就是依托的手机摄像头它扫描面部然后呢进行一个用户匹配进行一个登录的这么一个功能啊OK当然了我们现在进来之后呢是JBZ这个用户JBZ这个用户那当然了
+[04:25] 不管是我进行扫码登录还是我现在进行自己输入用户名密码这种形式进行登录它的效果都是一模一样的都是一模一样的OK那这样一来呢其实我们整个这个刷链登录就已经都实现完成了当然了在这边呢我们还是跟之前一样前端的这个代码呢各位有兴趣的话自己去看一下就可以了当然了前端代码
+[04:54] 不是我们的重点因为这里面涉及到一些比较专业的一些点比如说呢要调用我们的手机摄像头等等OK这个前头代码各位感兴趣的话自己去看一下就可以了那到目前为止呢我们整个的这个刷脸相应登录的这些功能就跟各位全部都学过了那其实对于今天来说我们重点掌握的其实就是刷脸登录它涉及到的一些知识点比如说呢用到了百度云AI比如说的用到了生成二维码等等
+[05:25] 其实我们的核心业务就是对于灵活运用百度云AI以及二维码的一个综合演练而已
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示一个基于人脸识别的登录系统，从后端 Java 代码实现到前端 Vue.js 交互，再到用户实际登录流程。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 iHRM 系统登录页，弹出一个二维码用于人脸识别登录。
+画面2：IDEA 编辑器中显示 `FaceLoginController.java` 代码，包含 `loginByFace` 和 `checkFace` 两个 POST 接口，用于处理人脸识别登录请求。
+画面3：IDEA 编辑器中显示 `FaceLoginService.java` 代码，包含 `getQRCode` 方法，用于生成二维码。
+画面4：IDEA 编辑器中显示 `FaceLoginService.java` 代码，`getQRCode` 方法中 `System.out.println(content);` 用于打印二维码内容。
+画面5：IDEA 控制台输出日志，显示 Spring Boot 启动成功，并打印出生成的二维码 URL：`https://localhost:8080/#/faceLogin?code=1077112622496722944`。
+画面6：浏览器开发者工具 Network 标签页，显示了与二维码相关的请求。
+画面7：浏览器开发者工具 Network 标签页，显示了请求的响应内容：`{"success":true,"code":10000,"message":"操作成功"}`。
+画面8：浏览器开发者工具 Network 标签页，显示了请求的响应内容：`{"success":true,"code":10000,"message":"操作成功"}`。
+画面9：浏览器地址栏输入二维码 URL，页面显示“验证成功”。
+画面10：登录成功后，进入 iHRM 系统的员工管理首页，显示工作日历和快捷导航。
+画面11：点击“首页”按钮，页面跳转到系统首页。
+画面12：VS Code 编辑器中显示 `login.Vue` 文件，包含 `validateUsername` 和 `validatePassword` 函数，用于前端表单校验。
+画面13：VS Code 编辑器中显示 `faceLogin.Vue` 文件，包含 `getUserMedia` 方法，用于获取用户摄像头视频流。
+画面14：PDF 文档页面，显示“第11章 项目总结”内容。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面2：
+```java
+@RequestMapping(value = "/{code}", method = RequestMethod.POST)
+public Result loginByFace(@PathVariable(name = "code") String code, @RequestParam(name = "file") MultipartFile attachment) {
+    String userId = faceLoginService.loginByFace(code, attachment);
+    if (userId != null) {
+        return new Result(ResultCode.SUCCESS);
+    } else {
+        return new Result(ResultCode.FAIL);
+    }
+}
+
+// 图像检测，判断图片中是否含人脸图像
+@RequestMapping(value = "/checkFace", method = RequestMethod.POST)
+public Result checkFace(@RequestParam(name = "file") MultipartFile attachment) throws Exception {
+    String image = Base64Util.encode(attachment.getBytes());
+    Boolean aBoolean = baiduAiUtil.faceCheck(image);
+    if (aBoolean) {
+        return new Result(ResultCode.SUCCESS);
+    } else {
+        return new Result(ResultCode.FAIL);
+    }
+}
+```
+
+画面3：
+```java
+private QRCodeUtil qrCodeUtil;
+private BaiduAiUtil baiduAiUtil;
+private RedisTemplate redisTemplate;
+
+// 生成二维码
+public QRCode getQRCode() throws Exception {
+    // 1.生成唯一码
+    String code = idWorker.nextId() + "";
+    // 2.生成二维码
+    String content = url + "code=" + code;
+    System.out.println(content);
+}
+```
+
+画面5：
+```
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAADc5171AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABCSURBVHgA7ZUxDoAgEAXQv9f/268Q8gQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QXQ8QX
+

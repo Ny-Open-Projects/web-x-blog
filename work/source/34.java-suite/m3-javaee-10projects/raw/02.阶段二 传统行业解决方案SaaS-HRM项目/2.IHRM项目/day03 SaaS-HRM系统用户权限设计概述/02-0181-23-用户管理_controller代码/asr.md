@@ -1,0 +1,22 @@
+# 声音线转写：23-用户管理：Controller代码
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day03 SaaS-HRM系统用户权限设计概述
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day03 SaaS-HRM系统用户权限设计概述\23-用户管理：Controller代码_【海量资源尽在 ubkz.com】.mp4
+- 时长：5分57秒（音频 357s）
+- 转写：faster-whisper-large-v3 / 语言 zh / 11 段
+- 生成时间：2026-10-27 13:25:46
+
+## 逐段转写（教师原声）
+
+[00:00] 那Service呢我们也已经写好了那最后就是我们有一个do层Controller这么一层那跟刚才的套路一样从其他的地方Controller ccopy一个Controller放到系统模块里把它放到c1trol112controller这个包下我叫做user controlleruser Controller那user Controller里面的代码呢其实跟刚才这个部门的基本上都差不多基本增长改查
+[00:33] 好了我从这边呢直接把这个代码拿过来我们做一个简单的改造其实就可以了OK那还有我们最上边的配置要配置它的跨域问题等等等等这些内容好了对于我们系统模块呢访问的全部都是system请求地址好了system当然了我们这边可以给它改成sys简单一些好了接下来里面的autoware我们就可以进行一个简单的改造好了做一个修改
+[01:09] department改成大写userreplace all还有小写的department改成小写的userreplace allOK那这样一来基本的这些内容呢我们已经构造的都差不多了那接着对于细节问题做一个简单的修改那首先呢我们保存封装到user对象里打一下包
+[01:30] 好了对于用户来说保存的时候我们可以设置这个用户他所属的企业也可以设置这个用户他所属的企业名称那好了我这边补充上他企业的名称和企业ID这边就是一个冗余的一个思想因为我查用户的时候可能要调用出企业的一个名称这边写company name当然了company name因为我们这边继承了flareflare里面都已经设置好了
+[02:01] 好了保存写好了那接下来呢就是查询全部查询全部一会儿再说Find by IDFind by ID也有好了接着再修改修改呢也没有什么问题好了最后一个根据ID删除这个都是没有问题的那接下来我们着重关注的其实就是Find All那对于Find All来说呢我们这边看一下API查询全部那Find All会查询传递配置和size以及
+[02:31] HASP, DEC, DTP, Department ID 等等那对于配置和 Size 来说他们请求的全部都是 Get 方法那 Get 方法很简单我们可以把参数直接配置到参数列表那你请求的参数呢有 Page,有 Size, Page, Inter, SizeOK 两个参数搞定了那接下来把底下这几个是不是可以构造成一个 Map 集合那 Map 集合可以借助一个 Path Param
+[03:00] Path Param那么可以借助Path Param把我们请求的这些参数封装到一个Map集合里面就可以了OK倒下包Path Param写错了抱歉Request Param把它封装到一个Map集合里面就可以了一下包OK那接下来呢我们这里面的方法其实就比较简单了我们可以通过User Service打点Find All翻到里面把Map传递过去
+[03:39] 把配置和sales都传递过去就可以了当然了我们这边得到的是一个配置user配置这么一个对象配置userOK那需要各位注意的是啊我们这个配置user呢就需要对它进行一个构造一个返回结果那对于我们构造的返回结果其实怎么构造是一个问题那在我们这边呢
+[04:15] result当中我们构造的时候其实全部把它带分页的放置到一个公共的返回的模型当中这个公共的返回模型呢就叫做page result那page result里面有total有rosesroses代表的是列表total代表的是我们的一个总数量那所以呢我在这边需要去构造page result有时候就userpage result等于new一个page
+[04:45] result那这个配置result里面的参数需要两个第一个呢就是我们的列表第二个就是有多少条那列表呢其实在SpringData这一批分钟的配置对象里面有所以我们这边可以拿过来打点get content得到list好了打点get total点get total elements得到它的总条数即可嗯这边呢有点问题啊换一个位置呢OK可以了
+[05:25] 那这样一来我们已经构造好了PageResult那接下来呢我们就可以做一个返回Result呢把PageResult放到里面哎就可以了那PageResult里面其实里面呢就是有total有ros下桥符合我们API返回标志的有total有rosOK那这样一来我们的Controller其实也就已经写好了当然了这个里面呢还有一个简单的问题啊把它改掉这些不用的tunmood给它删掉OK

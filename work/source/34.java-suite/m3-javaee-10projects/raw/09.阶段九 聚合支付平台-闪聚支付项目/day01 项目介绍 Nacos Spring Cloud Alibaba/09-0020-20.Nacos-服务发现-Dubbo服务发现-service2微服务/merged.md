@@ -1,0 +1,162 @@
+# 20.Nacos-服务发现-Dubbo服务发现-service2微服务
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day01 项目介绍 Nacos Spring Cloud Alibaba
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day01 项目介绍 Nacos Spring Cloud Alibaba\20.Nacos-服务发现-Dubbo服务发现-service2微服务【海量资源尽在 666java.com】.mp4
+- 时长 15分9秒（音频 909s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好,下面我们来搭建一下Double服务架构的测试环境那么根据刚才我们对Double服务架构的这个架构图的理解我们需要去搭建Application还有暴露Double服务的Service1和Service2API网关在后面的课程我们再去讲解我们暂时不搭所以这里边注意看它的测试环境包括复工程我们仍然用
+[00:28] 我们原来测试服务发现用的NetCourse DiscoveryOplication 1其实它相当于一个服务的消费方那么这里面我们可以采用当初我们在进行服务发现测试的时候的NetCourse RESTful Consumer这个工程就是我们看到的这个工程这个我们把它作为Oplication 1另外两个Service 1和Service 2我们需要重新开发因为这两个服务需要对外暴露Double服务API网关后面的课程去讲
+[00:59] 好这个测试环境我们大概理解了之后呢我们现在就准备来搭建搭建什么呢来看一下那首先我们准备搭建从这个流程图上来看的话Service2是不是要供Application1来调用对吧并且Service2也要供Service1来调用所以我们先搭建Service2好那现在呢各位Service2是要暴露Double协议的接口对吧
+[01:28] 那当初我们学过double那它呢其实就是就像编写我们本地的Service方法一样那最后呢会把本地的Service方法对外暴露成网络接口所以说呢这里边我们注意我们写double服务呢其实就跟开发我们本地的Service接口一样差不多因为它叫RPC嘛叫远程方法调用其实就是根据
+[01:56] 虽然是网络调用但是开发过程就像写本地方方法一样非常简单但是有一点大家需要注意就是我们在开发的时候我们是不是需要定义接口啊以及接口的实现类所以这个接口呢为了方便我们其他其他服务去调用所以呢我们准备单独把接口抽在一个叫API的工程中那将来其他服务如果想调用我们的double
+[02:22] 接口的话它只要把这个API呢引入进去然后呢调用这个接口就可以了就非常方便所以呢另外一个就是接口的试验类我们单独在这个server的工程这个工程结构大家明白了之后呢就是我们需要来看一下我们来创建一个是API工程一个是server工程那当然这个service2那么它呢也是要先创建一个副工程好那来看一下那我们怎么做呀
+[02:52] 打开这个这个工程的结构啊然后这里边有一个叫models然后选择新增一个model新增一个model呢我们刚才说嘛他们统一都用复工程就是我们说的NetHouse Discovery是吧然后现在我们新创建一个NetHouse Double Service 2这个微服务好那现在呢我们来看我们是不是就把这个服务呢就创建起来了工程对吧然后接下来呢
+[03:22] 根据我们刚才的理解我们说它下面包括两个子工程一个API一个serverAPI是接口server是不是就是接口实现呀所以这里边呢我们还要继续的来创建就是API和API的一个实现那这时候大家要注意了我还是新建但是这个时候新建复工程就要选择哪个了是不是就是这个service2的这个工程了因为它下边包括两个子工程一个API一个实现对吧好API
+[03:49] 注意这个路径呢大家要注意这个路径选择的时候要注意现在这个路径我们选择的时候要选择哪个呀要选择这个service2下边然后怎么做然后完成这是不是就是API呀那当然有了API是不是还有API的实现呀对所以那这个呢就是API的实现工程来我们继续新增等我把它建完了之后大家再看结构就明白了这个复工程还是service2对吧
+[04:20] 然后呢这是API的实现往下同样的道理它要放在我们的Service2的这个下边好完成好大家来看这时候我创建了一个Double这个暴露Double服务的Service2工程大家看到它下面是不是有一个API合作好那现在呢我们来看那准备下一步是不是先开发接口再开发接口实现类啊好那现在呢我们怎么做呢
+[04:46] 我们先开发Service2的微服务的接口部分这个接口部分呢因为我们是测试所以我们先定一个简单接口就可以了好来我们复制它的这个包名啊在这个API的这个下面创建这个包可以看到来看一下它的包路径是啊COM IT黑码然后呢下面有个叫Micro Service微服务下面有个Service2下面有API是吧里边是不是就定义我们的Service接口啊嗯
+[05:13] 那这个接口的话注意这里边它是一个Service对吧所以这里边呢我们选择interface好它这个这个接口呢其实就是一个非常普通的接口啊非常普通的接口这个接口呢我们给它起个名吧就叫做double service2接口定义好了之后下一步是不是就要写接口实现类了那在哪里啊是不是就是在这个service2-server下边对吧
+[05:41] 那它的这个实现类呢注意看它的实现类的话我们也需要定义一个包定义一个包那这个包呢我们写到加吧这个包下边来看一下各位这个包路径我是不是就定义好了定义好之后呢我们就准备来写这个service2 API的什么实现类实现类这个实现类呢它的后边呢统一我们加一个impl看到吗好然后呢它要实现谁呀
+[06:11] 它是不是要实现刚才的这个service2 API但它俩不在一个工程你没发现吗所以你需要怎么办对所以你需要在这个server这个实现类的这个里头把依赖把刚才我们依赖的这个怎么样service2的这个API呢给它添进去大家理解吗好添进去之后呢其实在这里头我们就可以让它去实现service2 API
+[06:42] 然后在这呢是不是就可以来写一些方法那么在这个方法当中其实这个方法比较好写其实就是retain一个字符串因为我们现在就是要测试这个远程调用所以其实我们不用写一些逻辑回头我们再写又逻辑那现在呢我问你现在这个Service的接口是不是有非常普通的一个Service的接口但如何它怎么样才能暴露成double服务呢对不对这是不是很关键呢那怎么暴露成double服务呢
+[07:11] 对这里边呢我们需要去在server这个接口实现类的工程当中引入double引入double的包好那现在呢引入哪个double的包呢注意看我们要引入这个引入这个那引入这个double的包之后呢在这里我们就可以用一个Service的注解看见啊两个Service注解不要选错啊一个是sprint一个是double的看见吗对注意我建议你
+[07:42] 因为这个Service和Spring的Service名字相同所以我们这里面建议你写成全路径大家看懂了吗这就是这个注解呢这个注解呢将来我们说这个double框架在扫描到这个Service类的时候发现有这个注解它就会把它干嘛对它就会把它暴露成一个网络的一个接口好那现在呢我们来看我们是不是就写完了这个接口的实现类就完成了吧当然我们说了
+[08:13] 在前面学习服务发现的时候所有的微服务是不是都要把自己注册到服务发现中心所以你都需要引一个客户端就是我们说的什么Necros的服务发现的客户端这个大家应该还有印象就是后边你会发现这几个依赖都是标配只要你开发double服务那你就把double的依赖引进去只要你开发微服务不管是应用服务还是double微服务只要你服务
+[08:43] 你就把这个什么把这个Necros的客户端呢Discovery这个客户端引进去就可以了好了那现在呢我们说这个是不是就OK了吧OK了之后呢现在我们是不是还需要一些配置文件我们这里边呢当然还需要启动类啊我们一个一个做啊Spring Boot的工程我们创建一个启动类通常是在这个什么在这个工程的这个根路径下啊启动类那这个就是什么呀叫Spring Boot Application是吧
+[09:14] 好然后呢闷方法Spring Application然后Write是吧好那么启动内创建完成之后接下来我们干啥其实就是配置文件了对吧配置文件好那么这里边呢我们创建一个配置文件由于我们已经把Spring Cloud阿里巴巴相关的包引进来了它会间接的把Spring Cloud包也加进去所以这里边我们会创建一个文件叫bootstrap.yml
+[09:44] 注意这个配置文件很有意思这个配置文件的加载顺序要比原来我们Spring Boot开发的时候所创建的Application YML要干嘛要提前因为后期我会讲解一个配置管理所以我们必须用这个配置文件好这里边我们来配置它的一些信息这个信息比较多但是有些信息我们前边是学习过的大家看这边是不是指定一个我们的服务端口
+[10:13] 下边是不是就是我们的服务的名称对吧然后下边是不是就是我们注册中心的这个地址对吧那这个呢其实我们在用Spring Boot 2.1的时候这个配置呢其实就相当于当我们bin有从名的时候呢我们不让它去报错让它覆盖也就是当两个bin名字相从了如果你不加这个它会干嘛它会报错我们把它加上它就不报错了好那现在呢我们再来看在讲义上边
+[10:39] 还有一坨的配置看好这一堆配置我觉得虽然你没有见过但是你学过double你就不会陌生因为我们知道我们现在写的这个Service的实现类是不是在这个Service包下面是不是会写很多每一个Service的实现类我们上面是不是都要标一个Service的这个注解对当我们说怎么样才能让
+[11:04] double框架找到我们这个Service最终暴露成网络接口呢我们这里边就需要给它指定它要扫描的什么基础包指定它要扫描的基础包看见吗当然你可以指定到什么非常细的这个Service这一层对吧你也可以往前因为它会扫描它这个包下边的子包所有标记有这个Service注解的这些类大家理解吧另外就是说你要暴露什么协议呢你是double协议
+[11:32] 你还是什么RMI协议还是其他的协议因为它支持好多种协议因为这里边我们都统一用Double协议所以这里边我们就指定Double协议将来你暴露的Double协议的接口它的端口号是多少你也需要指定包括你Double协议的接口也要注册到服务注册中心你要指定服务注册中心的地址对吧还包括Double的运维服务开关是否开启包括它的启动时是否检查依赖服务这两项我们暂时把它打成Force回头我们用到再说
+[12:01] OK这就是我们说的什么配置文件是不是就写完了那到这我们说那其实我们现在就可以干嘛可以启动了吧在刚才我们解释的这一堆配置文件大家看参考我的讲义去详细去看一下就可以了其实你理解的时候可以理解一下当初如果你学过基于XML方式来开发Double接口其实我们有很多呢和XML相关的你比如说当初我们开发XML方式的这个Double接口的话你会发现我们是不是要指定一个
+[12:31] 这个注册中心的地址通过这个标签来指定对吧其实这里边呢你是需要相当于联想一下吧因为这里边我们还是用doubleregistry然后呢address是不是指定了这个我们的注册中心地址只不过原来我们采用的是这种插门的方式对好那现在我们怎么做呀我们就可以启动了对不对我们就可以启动了怎么启动那运行它的Spring Boot的这个什么启动类看好
+[13:00] 现在我们做的是不是就是把service2暴露double服务的这个web服务开发完成然后启动完了之后那我们要怎么观察呢它是否注册成功了呢来我们来刷新其实这时候你就会发现哇出来一堆对吧但是其中有一个服务名有一个服务名这是和我们配置文件当中所指定的一个服务名一致的就是double-service2大家看double-service2在这
+[13:28] 对吧但是这个服务呢它连带的有两个这个服务也出来的这两个服务呢你看大家看到名称你都能够猜到它是基于原信息的一会儿我会讲啊基于原信息的一个服务基于原信息的服务也就是这个服务相关的信息呢通过这个服务来获取对吧所以这里边我们主要知道这个服务的名称哪个啊就是double service2和我们配置文件当中相同的这个
+[13:56] 对吧而其他另外自动注册上去的这两个服务呢是double框架自动注册的我们不用管它好到这儿我们说的这个double服务架构service2v服务我们是不是就注册成功了那么它的注册的过程注意我再总结一下首先我们在开发double服务的时候首先我们
+[14:20] 需要分拆两个工程一个是API接口工程一个是server接口实现工程API工程之所以拆分就是将来其他服务想调用我们的这个double服务的时候只需要把这个API干嘛引进去它的依赖那是不是就拿到这个接口了它就可以调用了那么server工程在开发Service实现类的时候大家注意需要在实现类上边需要去写什么呀写一个注解就是这个double的这个注解
+[14:49] 那么这个注解呢double框架会扫描到然后呢把这个整个的这个Service类所有的方法都暴露成什么double协议的接口供其他微服务去调用好那这个就是我们说的double服务架构service2微服务的开发
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何基于 Nacos 和 Dubbo 构建并配置一个名为 service2 的微服务，包括创建工程、定义接口、配置服务注册与发现。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示课程文档，说明本架构采用 Nacos 作为服务发现和配置中心，支持 RESTful 及 Dubbo 服务注册。文档中提到 service1 需要新建，service2 需要新建，api 网关后边课程讲解。
+画面2：在 IntelliJ IDEA 中，打开 “Project Structure” 对话框，准备添加新模块。
+画面3：在 “Select Module Content Root” 对话框中，选择目录 “/teach/changjing/model2/code/Nacos-discovery” 作为模块内容根目录。
+画面4：在项目结构中，选中 “service2-server” 模块，右侧编辑器显示其 pom.xml 文件内容。
+画面5：在 “Create New Class” 对话框中，准备创建新类。
+画面6：在编辑器中，显示创建的 ServiceApi.java 接口文件内容。
+画面7：展示课程文档，讲解微服务架构概念，并附带一个电商系统架构图，图中显示 App/Web 通过 REST API 连接多个服务。
+画面8：在 pom.xml 文件中，显示添加了 spring-cloud-starter-dubbo 依赖。
+画面9：在 pom.xml 文件中，显示添加了 spring-cloud-starter-alibaba-Nacos-discovery 依赖。
+画面10：在项目结构中，选中 “service2-server” 模块，右侧编辑器显示其 bootstrap.yml 文件。
+画面11：在 bootstrap.yml 文件中，显示 dubbo 配置，包括 base-packages、protocol、name、port、registry 等。
+画面12：在 bootstrap.yml 文件中，显示 registry 配置，address 值为 Nacos://127.0.0.1:8848。
+画面13：展示课程文档，解释 bootstrap.yml 中以 dubbo 开头的配置项含义，以及 spring.application.name 的作用。
+画面14：展示课程文档，列出 service2 的接口定义，以及创建 service2-server 工程的步骤。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面4：
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Nacos-dubbo-service2</artifactId>
+        <groupId>com.ithema.Nacos</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>service2-server</artifactId>
+</project>
+```
+
+画面6：
+```java
+package com.ithema.microservice.service2.api;
+
+/**
+ * Created by Administrator.
+ */
+public interface ServiceApi {
+    public String dubboService();
+}
+```
+
+画面8：
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.ithema.Nacos</groupId>
+        <artifactId>service2-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-dubbo</artifactId>
+    </dependency>
+</dependencies>
+```
+
+画面9：
+```xml
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-Nacos-discovery</artifactId>
+</dependency>
+```
+
+画面10：
+```yaml
+cloud:
+  Nacos:
+    discovery:
+      server-addr: 127.0.0.1:8848
+  dubbo:
+    scan:
+      base-packages: com.ithema.microservice.service2.Service
+    protocol:
+      name: dubbo
+      port: 2081
+    registry:
+      address: Nacos://127.0.0.1:8848
+      application:
+        qos-enable: false
+        consumer:
+          check: false
+```
+
+画面13：
+```yaml
+dubbo:
+  scan:
+    base-packages: com.ithema.microservice.service2.Service
+  protocol:
+    name: dubbo
+    port: 2081
+  registry:
+    address: Nacos://127.0.0.1:8848
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面7：
+标题：1.1 微服务架构
+架构图：
+- App/Web
+  - REST API
+  - REST API
+  - REST API
+  - （指向下方的多个服务模块）
+- （下方的多个服务模块，每个模块之间无直接连接，但都通过 REST API 与 App/Web 交互）
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

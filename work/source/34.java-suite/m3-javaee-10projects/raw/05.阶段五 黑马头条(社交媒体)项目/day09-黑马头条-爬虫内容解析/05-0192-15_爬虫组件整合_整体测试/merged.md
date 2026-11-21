@@ -1,0 +1,122 @@
+# 15_爬虫组件整合_整体测试
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day09-黑马头条-爬虫内容解析
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day09-黑马头条-爬虫内容解析\15_爬虫组件整合_整体测试【海量资源尽在 666java.com】.mp4
+- 时长 11分5秒（音频 665s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那咱们就继续啊刚才咱们是把代码都基本上都写完了下面呢咱们就来写一段测试啊写一段测试啊测谁呢其实就测这个管理器就可以了因为这个管理器里面是不是包含了当前的这种蛤虫的启动啊所以说啊咱们在这拷贝一下它然后在这右键去创建一个什么一个测试类加一个test好它是一个测试啊springboard test然后是runways
+[00:28] SpringRunner.class然后咱们就可以入当前的哪个DIVD然后是ProcessingProcessingFlowManager好加一个outviz完了这时候咱们就可以写一个方法叫public void然后是test做个东西是吧这去加一个test这时候咱们就可以调方法了
+[01:04] 方法processing flow.handle就可以了这是一个平向的这块你测试的时候还要注意一下这个咱们需要去做一个睡眠因为内容可能时间会比较长如果说它马上结束的话有可能后面的程序没法执行所以说咱们在这让它去做一个睡眠sredsred.sleep让它睡多长时间
+[01:35] 让它睡很长时间那怎么办呢你说很长时间是多少啊我们可以这么做叫integer.maxvalue让它睡一个非常大的值那这个咱们就干嘛呢就在这去快一下好设置完了设置完之后呢咱们就可以去做些东西当然这个得需要前提做些准备那准备的话呢咱们再去说一下在这配置文件中打开
+[02:05] 那这块呢其实我做了两个啊做两个准备第一个呢就是当前的初始化有儿吧我只是做了一个招儿因为太多了啊要不然爬取时间太长这个时间浪费了就啊所以说你们呢做测试的时候呢你可以把这个都加上啊可能稍微多等一会儿这样的话就是他能爬爬取很多的东西这时候呢我只是让他去爬了一个分类就是招儿好这个分页呢我也没做啊分页我也没做我分页头是零零的话就是小于小于一这时候呢咱们之前的逻辑是
+[02:34] 小于1的就不进行飞跃了咱们直接去爬去就可以了好吧行我改了这两处一个是0一个是0好吧你还要再检查一下检查一下你之前的这个驱动到底有没有效这个驱动就是当前那个这个clumb这个驱动如果说这个没有效果的话或者是路径不对的话它也是会失败的好吧行那这样这个咱们准备完之后下面咱们就来去跑下这个测试看看到底行不行
+[03:04] Dbg.swap稍等啊咱们也可以去进到这个方法handle是调到start task咱们在这里打的你啊start task打的你咱们看一下效果一会儿看看有没有报错有报错咱们就来去调试一下这个错误稍等好好像是没有问题啊咱们可以直接放行他到这了到这这个对象肯定是有的直接到start task里边好咱们可以看一下那这里边呢其实最主要的是调了一个handle
+[03:49] 调了一个handle这个handle咱们可以往下走往下走这是谁其实这个就是注入的当前的所有的实现这个接口的类这个类让斯文去管理的目前有两个一个是download一个是processing这边就是解析这一块当然你也可以去把鼠标放到这可以看一下当前是5个5个的话其实咱们还设置了其他的比如说当前的初日化咱们也加入了
+[04:16] 打漏的也加入了还有这个process应该是有三个有三个你并且它是有顺序的你可以看一下有顺序的首先你获取初始化URL然后第二个你是要去下载第三个就是init第四个是吧是helperhelper是个人空间doc是目标是吧我给这个顺序是可以的如果说这个顺序不对的话它解析或者说它后期爬虫去解析的时候肯定也会出问题
+[04:46] 所以说咱们为什么会之前会一直会设置那个什么优先级还知道吧这个优先级呢就是来去表明当前到底是该会先执行哪一个然后再去执行那个就这个呢也是一个责任链的模式是吧先执行它然后再执行它再执行它再执行它好吧行这是一个顺序的啊行那这个设置我设置完之后啊让他去执行那个handle其实这个handle呢大家都知道啊目前呢这里边呢是有这三个方法里边都有
+[05:12] 其实只有一个方法里边是有值的就是orange.date.parts就是我选中这个为什么它有值呢因为它里边去初始化什么呢初始化了一些这种URL就是最基本的URL就是从配置文件中去读读了一个什么读了一个drawer所以说它就会去爬这个drawerOK这个咱们可以打断点看能不能到这好放心好你会发现到这了到这之后你可以往下走走走
+[05:42] 走好你可以把手机放到这你可以看一下目前的话这个数据只有一个就是咋玩就只有咋玩因为我这个刚才配置人家改了改完之后呢就只有一个咋玩了好放行完之后呢那这时候呢他应该去进行下载这下载的话咱们就不看了直接去放行那下面咱们重点去看一下这个解析这个解析的话咱们都知道啊它是有顺序的首先进入的是这个叫init配置processor对吧没问题啊他首先是进到handle配置
+[06:10] 好然后是进入Helper的什么Helper的handle配置然后是Doc的handle配置好吧行咱们分别在这打断点咱们一块来看一下好我放行稍等保错了吗看看我已经放行了他正在创建驱动其实没有问题他肯定会到这的因为他先要去爬取爬取当前的什么这种初始化的URLok到这了是吧
+[06:44] 到这之后其实这个咱们往下走走走你可以看这个URL这个URL是拥有多少用那么多这个其实就是个人空间里边就是扎入那个扎入那个它里边所有的这种初始化的URL然后咱们就再去获取什么获取这个URL里边的什么URL里边的一些这种算是算啥算是个人空间算是个人空间行再往下走稍等他会把这些东西都去装入到
+[07:16] 当前的spider中的requestspider request然后你看传到了当前这个Helper配置processor看到了吗这时候你再往下走往下走你看这个URL看这个URL的话这URL的话其实就是某一个的什么微信什么东西这个肯定是一个什么个人空间肯定是一个个人空间然后个人空间里面目前我刚才我说了目前这里边咱们没有让他没有让他分页
+[07:43] 这个其实应该是零是吧这个就是一个这种装洗规则咱们就不看了然后最终咱们其实就是要获取当前的当前的这个helper URL list就这个东西这个其实就是当前的这个人这个个人空间下面他有那么多文章20条咱们只抓了20条20条文章这时候咱们就会去走到下一步走哪呢
+[08:10] 这个既然到这之后呢他就会往后传传传给谁啊传给配置这个配置就是谁啊就是doc配置也就是说他就会去进入到这个类去进行解析好咱们把这段点去掉啊因为呢他呢是所有的东西都会去进行一遍因为这只是一个URL如果多一个URL的话他会执行多个URL好吧行我把它放行稍微等一会儿他会解析因为他这个20个呢他都需要去解析解析完之后呢
+[08:38] 他就会到这个目标的这块好稍等啊嗯行这个稍微一点慢啊没事啊稍微等一会稍微等一等吧要不我先暂停一下好刚才呢我是暂停了一小会儿啊大概有一分钟啊一分钟然后呢他到就能到这到这他说之后呢这就是到了当前的doc配置processor然后呢他就会去解析目标解析目标啊他就是某一个人某一个个人空间下的这种所有的文章
+[09:29] 好我先走因为咱们现在没有飞呀你可以看一下当前这个月二十台鼠标放在这这里边其实已经拿到了内容是吧已经拿到内容一共是8个你可以看一下这是authorok都有值这些什么release date咱们也有值是吧没问题然后咱们再往下看这个是不是也有值没问题然后再往下这个其实也有值是吧也有值你可以在这看没问题
+[10:00] 再往下看这有值是吧然后呢这个6是当前的这个转发数啊也是有值的看第七个第七个最后一个啊好这个也是有值的看到了吗这也是有值的啊行那这个都有值之后呢去这边我刚才稍微改了改了点东西啊这个ID啊并不是ID之前咱们写的时候啊在当前这个color config中啊就是说一下啊
+[10:28] Configure中之前的这是写成了class但class并不能抓取这些数据它是一个ID所以说在这你写的时候也把它改了改成一个ID不要写成class就可以了好吧行目前的测试其实到这基本上所有的效果都出来了当然后续咱们还会继续写还会进行比如说排虫有重复的URL咱们就不会再去重新爬去了还有咱们会去解析具体的内容保存到数据库中
+[10:58] OK这两步呢咱们后续还会再做啊嗯行那这个那这个测试呢咱们就说到这里啊
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示一个基于 Spring Boot 的爬虫框架中，如何通过测试类启动流程管理器，并观察其如何根据配置解析页面、提取数据并下载目标资源的完整流程。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 显示项目结构，选中测试类 ProcessingFlowManagerTest，准备运行测试。
+画面 2: 显示测试类 ProcessingFlowManagerTest 的代码，包含 @SpringBootTest 注解和测试方法。
+画面 3: 在测试方法中，通过 @Autowired 注入 ProcessingFlowManager 实例。
+画面 4: 在测试方法中调用 processingFlowManager.handel() 方法。
+画面 5: 启动测试后，控制台输出 Spring Boot 启动日志和配置加载信息。
+画面 6: 在 ProcessingFlowManager 的 handle 方法中，通过 for 循环调用各个处理器的 handlePage 方法。
+画面 7: 显示处理器类 CrawlerInitPageProcessor 的代码，用于初始化页面。
+画面 8: 显示处理器类 CrawlerDoPageProcessor 的代码，用于处理页面数据。
+画面 9: 显示处理器类 CrawlerDoPageProcessor 的代码，处理解析规则。
+画面 10: 显示处理器类 CrawlerDoPageProcessor 的代码，处理下载逻辑。
+画面 11: 显示处理器类 CrawlerDoPageProcessor 的代码，处理数据提取。
+画面 12: 显示处理器类 CrawlerDoPageProcessor 的代码，处理数据提取。
+画面 13: 显示处理器类 CrawlerDoPageProcessor 的代码，处理数据提取。
+画面 14: 显示配置类 CrawlerConfig 的代码，定义了多个解析规则。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```java
+package com.heima.crawler.test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ProcessingFlowManagerTest {
+    private ProcessingFlowManager processingFlowManager;
+}
+```
+
+画面 3:
+```java
+import com.heima.crawler.manager.ProcessingFlowManager;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@Autowired
+private ProcessingFlowManager processingFlowManager;
+```
+
+画面 4:
+```java
+public void test() {
+    processingFlowManager.handel();
+}
+```
+
+画面 5:
+```java
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [WARN] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [WARN] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019-10-21 21:22:03,638 [INFO] main [com.netflix.config.sources.URLConfigurationSource] (unit) No URLs will be polled as dynamic configuration sources.
+2019
+

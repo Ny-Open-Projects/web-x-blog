@@ -1,0 +1,141 @@
+# day06-6-开户第一阶段-功能实现2
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：02_万信金融-开户/2-16 实现开户功能
+- 源文件：10.阶段十 万信金融项目\02_万信金融-开户\2-16 实现开户功能\day06-6-开户第一阶段-功能实现2_【海量资源尽在 666java.com】.mp4
+- 时长 10分11秒（音频 611s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 刚才我们是不是针对开户第一阶段我们抽取了一个什么针对银行卡操作的数据防护层的代码对不对就是这两个bank card我们在开户过程当中一会就要用既然数据防护层搞定了我们接下来就把它的什么药层也搞一下实现一些增伤改善的一些功能目前我们主要是实现查询药层代码我们应该是不是放到Service这个包里
+[00:30] 我们也是要建一个接口一个实现类对我们先建接口接口然后叫啥名呢我们最好跟奖励保持一致啊看这叫bank card Service那这个接口里边我们都需要实现哪些功能定义哪些方法呢咱们先来看一看第一个呢大家看叫get by什么呀consumer id那么建名之意那就是根据什么呀
+[01:04] 用户的ID来获取他的什么呀银行卡信息这有注释啊获取银行卡信息那还有一个就是根据银行卡的什么呀卡号来查询一下银行卡信息啊这两个业务都非常非常简单吧这个根据人吗consumer ID不就是某某个用户某个人吗根据人来查他的银行卡这个就是直接就是根据银行卡号查这个银行卡信息从我们这里边其实就搞定这两个什么查询
+[01:30] 另外大家注意啊我们前面在讲MP的时候说过MP是不是对要层也进行了封装那我们在定义要层的接口的时候是不是要实现MP的这个iService是不是它这里边是不是封装了很多这个基本的自然感察对不对那这块代码呢我就不再敲了接口里边不再敲了啊咱一会实现类在具体实现功能的时候我们把那个代码敲一下这是我们针对银行卡的操作啊然后定义了一个要层的接口和两个方法
+[02:01] 那这里边呢涉及到一个DTO对象叫Bank Card DTO我们现在还没有那从这里边我们找到他粘过来就行了Bank Card DTO我们看他在哪个包里边是不是在API工程对吧Consumer点什么呀Model好你说C然后呢去哪呀API你在用的时候也是这么用呢要查一查他的包啊是不是在这里边对不对粘过来OK好这边已经自动导入了
+[02:34] 说这是右层的这个接口我们定义好定义好之后呢咱接下来就要写它的什么呀实现类了咱接下来定义一个实现类叫bank cardserviceimpl我们看一下要跟讲义保持一致bank cardserviceimpl那么这个地方呢我们这个类一旦一定义好我们立即要想到这边要加一个注解叫什么呀
+[03:03] s12ycservice是不是另外呢大家也有印象啊我们的呃这个右层是不是需要干什么呀继承mp的一个类而且要实现我们刚才的这个接口大家看着是吧我们要继承mp提供的一个Service mp这里边是不是基本的资产感就有然后还要实现我们刚才自定义的这个接口这些呢都是咱之前都已经用过了叫什么呀对叫Service mp2s12
+[03:34] 这边是不是需要指定两个范型对吧第一个是那个卖的借口那就是ban cardban k card map啊第二个就是实体类吗ban k card这是继承mp的这个类然后呢还要实现我们刚才自己定义的这个什么呀借口ban card什么呀
+[04:04] 那么这么一实现这里面立即就报错了为什么呀因为我们是不是有两个方法要重写是吧来生成印象对就是这两个方法那这两个方法是干嘛呢我们刚才也说了这两个方法干嘛呢对一个是根据用户的ID来查他的银行卡信息一个是根据什么呀银行卡号来查他的什么呀银行卡信息那这个是不是都是很简单的一个查询我们就可以调哪个方法对
+[04:36] 给他1给他万你还有印象听了吗应该有印象吧这都是mp封装好了然后这里边是不是使用这个quad warp就是条件封装器我们用的是浪表是那种这这个浪表是的好处是不是这个字段名不容易写错吗是不是哎我们接下来就写一下这块代码直接调给他1放给他1给他1的时候呢这里边呢我们直接就
+[05:06] 你用一个query warp来进行这个条件封装那注意了这个地方是不是有一个范形我们仍然是ban card他呢是ban card我们这个实体内是不是还没点进去看过是不是这个代码其实大家下去自己看就行你看他对应一个表ban card的表银行卡吗银行卡这个表这边你看都有奶子的用户ID银行的编码银行的名称银行卡号手机号等等等等这些其实下去大家自己看一下就行了
+[05:35] 然后拗好之后呢拗好之后我们是不是用的lambda的那种写法对吧直接调lambda然后呢我们这个条件是什么条件那我是不是就判断这个什么呀consumer id是不是等于这个值是不是是一个相等判断那么相等判断咱最常见的也是最熟悉的调哪个方法这个大家都很熟EQ对不对哪个字段呢我们用的是lambda是直接就是用lambda的写法bank card你看这有提示对吧bank card什么呀get
+[06:07] 哎这里边怎么找不着嘞Bank Card 稍等啊我们再看一下这个这边有consumer id 吗有consumer id 对不对哎那为啥这出不来呢稍等啊再重新写Bank啊这次有了Bank Card consumer在哪consumer id 对吧它等于谁呢这个值不就是这个参数啊值就是这个参数那这样子我们就进行了一次什么呀查询
+[06:41] 那查出来呢这个方案肯定有反而值啊反而值就是这个什么呀银行卡呗银行卡这个对象啊banca我们接受一下bancabanca然后呢就把它作为反之返回吗不是的可不行啊这个套路跟以前一样吧你看我们这个返回的都是dto对象但是我们这儿呢是不是这个普通的一个实体类对象对不对所以我们还需要像以前一样把这个banca的给它转换成什么呀
+[07:10] 对DTO对象这个方案咱以前写过没有写过没有写过吧在之前的开发过程当中咱写过这个东西的那接下来我就把这个代码快速的给大家写一下private咱起个名字起个名字就是convert转换的意思转换什么呀bankcrd然后什么呀对entityto to谁呀to dto是吧
+[07:42] 那这个方案有没有仓有没有反应值那肯定得有传进来的是不是就是这个Bank Cup传进来的就是他返回的就是谁啊DTO我们就是做这个转换吧那这里边具体怎么转换我们先判断他我入围空吧万一他是空的你还转啥是不是就不用飞那个进了直接返回空就行了那我就判断如果他怎么着
+[08:10] 对如果他等于那那就省事了其实直接就是return那不用转换那如果他不为空呢不为空的话我们就要进行转换怎么转换呢不知道大家还有没有印象啊我直接就new一个这个对象是直接new的嘛你完之后这个对象里边属性呢直从那来啊是不是要从传进来的半个大半个看的对象里边是不是给他复制过去复制怎么复制你要有印象吗咱当然是不是学过一个
+[08:41] 那个要什么B in YouTube是不是我们用Spring的这个第二那个方法CopyProperties对没错然后呢把这个谁呀BankCard里边属性的值复制给谁呀BankCardDTU这就搞定了转换最后呢我们Return谁呀BankCardDTU这个方法要搞定那这个搞定之后呢我们在这儿是不是就调用一下就OK了没错吧
+[09:13] 那我们这就是直接用return了是不是啊return啊调用这个方法然后传进来这个谁啊对banca搞定这是什么呀这是根据用户的ID去查他的银行卡对吧那这样呢更直接这是根据什么银行卡号来查银行卡差不多吧我就直接复制粘贴过来改一下就完事无非就是条件改一改吧上面是根据什么呀consumer ID下面换成什么呀对这个条件换成对银行卡号就行
+[09:45] 银行卡号是谁啊银行卡号就是card number嘛那么这个值就是传进来这个参数card number好了吗其他地方用不用改对其他地方就不用改就搞定了说这是我们针对银行卡这个操作的什么层要层的代码我们就全部搞定了啊其实就两个查询非常简单
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 waningzp-consumer-Service 项目中，基于 MyBatis-Plus 和 Spring Boot，实现 BankCardService 接口的两个方法：根据用户 ID 查询银行卡信息和根据卡号查询银行卡信息。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示项目结构，选中 BankCardMapper.xml 文件，准备编写 MyBatis 映射文件。
+画面2：展示 PPT 内容，其中包含“BankCardDTO getByCardNumber(String cardNumber)”方法的说明，以及多个服务模块的截图，如 adminService、configService 等。
+画面3：展示 BankCardService 接口定义，包含两个方法：getByConsumerId(Long consumerId) 和 getByCardNumber(String cardNumber)。
+画面4：展示 BankCardServiceImpl.java 文件，准备编写服务实现类。
+画面5：在 BankCardServiceImpl.java 中，导入 Spring Boot 和 MyBatis-Plus 的相关包，并声明类继承 ServiceImpl。
+画面6：在 BankCardServiceImpl.java 中，声明类继承 ServiceImpl，并实现 BankCardService 接口。
+画面7：在 BankCardServiceImpl.java 中，编写 getByConsumerId 方法，使用 QueryWrapper 构造查询条件。
+画面8：在 BankCardServiceImpl.java 中，编写 getByCardNumber 方法，准备使用 QueryWrapper。
+画面9：在 BankCardServiceImpl.java 中，为 getByCardNumber 方法的 QueryWrapper 设置查询条件，使用 lambda 表达式。
+画面10：在 BankCardServiceImpl.java 中，为 getByCardNumber 方法的 QueryWrapper 设置查询条件，使用 lambda 表达式。
+画面11：在 BankCardServiceImpl.java 中，为 getByCardNumber 方法的 QueryWrapper 设置查询条件，使用 lambda 表达式。
+画面12：在 BankCardServiceImpl.java 中，编写 convertBankCardEntityToDTO 方法，用于将实体对象转换为 DTO 对象。
+画面13：在 BankCardServiceImpl.java 中，调用 convertBankCardEntityToDTO 方法，将查询结果转换为 DTO。
+画面14：在 BankCardServiceImpl.java 中，完成 getByCardNumber 方法的编写，返回转换后的 DTO 对象。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+<Xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0/EN" "http://mybatis.org/dtd/mybatis-3-Mapper.dtd">
+<Mapper namespace="cn.itcast.waningzp.consumer.Mapper.BankCardMapper">
+</Mapper>
+
+画面3：
+import com.banndow.mybatplus.extension.Service.IService;
+/**
+ * 用户绑定银行卡信息 服务类
+ */
+public interface BankCardService extends IService<BankCard> {
+    /**
+     * 获取银行卡信息
+     * @param consumerId 用户ID
+     * @return
+     */
+    BankCardDTO getByConsumerId(Long consumerId);
+
+    /**
+     * 获取银行卡信息
+     * @param cardNumber 卡号
+     * @return
+     */
+    BankCardDTO getByCardNumber(String cardNumber);
+}
+
+画面5：
+import org.springframework.stereotype.Service;
+@Service
+public class BankCardServiceImpl extends ServiceImpl<BankCardMapper, BankCard> implements BankCardService {
+
+画面6：
+import cn.itcast.waningzp.consumer.entity.BankCard;
+import cn.itcast.waningzp.consumer.Mapper.BankCardMapper;
+import com.banndow.mybatplus.extension.Service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+@Service
+public class BankCardServiceImpl extends ServiceImpl<BankCardMapper, BankCard> implements BankCardService {
+
+画面7：
+import cn.itcast.waningzp.api.consumer.model.BankCardDTO;
+import cn.itcast.waningzp.consumer.entity.BankCard;
+import cn.itcast.waningzp.consumer.Mapper.BankCardMapper;
+import com.banndow.mybatplus.core.conditions.query.QueryWrapper;
+import com.banndow.mybatplus.extension.Service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
+@Service
+public class BankCardServiceImpl extends ServiceImpl<BankCardMapper, BankCard> implements BankCardService {
+    @Override
+    public BankCardDTO getByConsumerId(Long consumerId) {
+        BankCard bankCard = getOne(new QueryWrapper<BankCard>().lambda().eq(BankCard::getConsumerId, consumerId));
+        return convertBankCardEntityToDTO(bankCard);
+    }
+
+画面12：
+private BankCardDTO convertBankCardEntityToDTO(BankCard bankCard) {
+    if (bankCard == null) {
+        return null;
+    }
+    BankCardDTO bankCardDTO = new BankCardDTO();
+    BeanUtils.copyProperties(bankCard, bankCardDTO);
+    return bankCardDTO;
+}
+
+画面14：
+@Override
+public BankCardDTO getByCardNumber(String cardNumber) {
+    BankCard bankCard = getOne(new QueryWrapper<BankCard>().lambda().eq(BankCard::getCardNumber, cardNumber));
+    return convertBankCardEntityToDTO(bankCard);
+}
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面2：
+PPT 标题：4. 新建 BankCardServiceImpl 类实现上述两个方法：
+内容：
+- BankCardDTO getByCardNumber(String cardNumber);
+- 服务模块截图：
+  - adminService
+  - ApolloPortal
+  - configService
+  - waningzp-discover-server
+  - waningzp-gateway-server
+  - waningzp-usa-Service
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

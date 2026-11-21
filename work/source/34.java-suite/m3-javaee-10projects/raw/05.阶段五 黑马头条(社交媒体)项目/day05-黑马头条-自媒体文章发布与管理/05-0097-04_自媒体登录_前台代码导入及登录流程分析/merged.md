@@ -1,0 +1,211 @@
+# 04_自媒体登录_前台代码导入及登录流程分析
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day05-黑马头条-自媒体文章发布与管理
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day05-黑马头条-自媒体文章发布与管理\04_自媒体登录_前台代码导入及登录流程分析【海量资源尽在 666java.com】.mp4
+- 时长 14分11秒（音频 851s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好刚才呢咱们是把这个登录的后端模互动模块啊就是也就是接口给提供了一个啊然后下面呢咱们就来去整合前端来一块连调一下好吧那首先呢你得先去把这个前端的项目导进来啊这个在今天的资料中呢有一个无线夹啊就是资料无线夹下边有一个这样的一个包叫黑马力的news为微微底啊他呢就是一个前端的微微的工程自媒体的工程这时候呢你解压之后呢用
+[00:30] 当前的webstorm打开开完之后呢来看一眼啊这个呢其实就是标准的一个Vue的交手架开发的首先呢这个目录啊咱们再回顾一下啊首先这两个目录呢是关于交手架的一些配置这个配置的话呢其实这样啊里边咱们需要有一个关注的点就是当前的什么代理啊就是代理啊代理转发有一个东西
+[00:52] 然后下面第四目录呢是咱们的一个这种最最终它是生成的一个原目录无念家这个咱们目前不用关心然后这个呢是啥呀这个的话其实就是谁呀就是相当于咱们整个工程里边所依赖的GS包对吧还有SRC呢咱们存放的是本工程下面的原码原码啊好一个是静态和一个测试啊这就无所谓了啊咱们重点呢还是来分析一下或者说看一下当前SRC目录下边有什么结构啊
+[01:21] 或者有什么目录来看一下首先这里边好再结合图来看一下这里边首先第一个是APS这个就是咱们所有的API都在这里边去定义还有一些图片是吧还有一些就是组件还有什么还有当前的一些这种什么常量是吧常量的GS好样式工具最终有一个view这个view的话就是咱们项目中所需要用到的页面都在这个view中
+[01:50] 咱们可以依次打开首先打开 API代码已经提供了说现在这里边已经提供了各个模块之模块的所需要的JS文件还有就是当前那些图片项目中所依赖的一些图片还有一些组件还有一些这种常量咱们特别是当前的 API.js咱们一会打开还有啥还有样式不看了工具类里边有两个一个是就是request.js
+[02:19] 还有一个是死套死套点GS这些是啥呢咱们一会会再去说好吧然后重点的话呢其实还有一个就是当前这个view这个view的话呢就是咱们项目中所依赖的这种页面都在这个里面啊比如说啊咱们先去看第一个就是当前的登录当前的登录啊登录呢就是在当前登录包下边有一个index.view那这个呢其实就是一个登录的页面
+[02:47] 它是一个标准的这种欧罗马UI或者叫Vue的一个这种页面的配置比如说下面是talenttemplate是吧下面还有个script是一些这种JS文件最下面还有一些style就是一些样式好吧那这个看完之后其实里边还有一个文件大家需要去熟悉就是当前router.js你所有的路由都在这里去配置都在这里去配置
+[03:13] 那行那这个咱们看完之后啊咱们先来再去说一下当前这个登录页面吧那东西面呢其实这个东西呢就是用欧伦买啊欧伦买啊然后里边的是有一些组件使用的是欧伦买啊你看啊当前这第一个呢是有一个表单这个表单的话就是一个什么请输入用名是吧这个就是你要输入的用名v 干modo不就是view的一个指令吗然后下面这个啥呢下面这个是一个密码是一个密码啊
+[03:40] 当然最后你可以去登录登录完之后你可以去触发一个实践就是当前这个时间是吧有问题那想想最终其实这东西这东西其实就是在你的model中去定义的比如说Name和Password就是咱们对应的用户名号命码在你当前的这地儿Rulers里边是定义了Name和Password并且它是做了一些验证验证的方法其实就是上面这个
+[04:04] 要不然你就请输入用名是吧只是提示了一下啊他不能为空啊还有就是这个如果说密码为空的话他也会去提示你输入密码看到了吧行那这个这个是不二不二的话就是离交事件是吧离交事件啊鼠标的离交事件那行那这个呢其实一个非常简单的一面当你去点击登录的时候呢来看一看啊给你登录的时候往下走
+[04:32] 首先在这去判断了一下就是说你这个用户名密码不能微空微空的话就直接被称了并且是提示了一个警告然后如果说你这输入用户名密码了然后他就会发请求他发请求的时候其实就是我选中的这一段代码这个首先是发的这个请求这个请求其实就是谁就是当前他引入的当前这个文件当前这文件引入的一个JS叫API.js找找
+[05:01] 就是API.login在login里边你能找到当前logbyusername咱们可以打开当前APIlogin.js你看这里边是有一个方法就是哪个就是logbyusername这时候它是一个poster请求是吧它是一个poster请求最终你返回完之后它怎么着就怎么着就是说它是你成功之后或者说你请求完之后它应该会返回哪些数据
+[05:30] 是吧行那这个咱们分块看首先看上面部分然后再看下边部分好吧那上面部分其实就是做了一个抢求做了抢求之后你看这个date里边就是一个name和一个passwordname和password这个就是一个标准的这种那么算是ES6的一些语法好再往下看这个是一个UR那UR怎么来呢UR是从当前的哪来的你可以看一下当前的一个叫做
+[05:59] API.你看是不是从当前constance API里边去来的呀所以说你打开啊打开当前的constance API.js你找到login应该在这看啊先去看叫什么叫API user author是吧所以说你在这去找API user author就是他叫login是吧这个其实就是东东这就是东东的请求啊
+[06:25] 这个其实咱们在一开始的时候首先你要去定义当前的这种情形的URL比如说你看下面下面是不是也有一些东西咱们用到的时候咱们再说好吧这个是login这个好像跟咱们后台没有对应上是吧来看一下你们后台是怎么写的咱们后台是不是当前API v1Media然后是login的所以说这个就对应不上了对应不上怎么办咱们这样咱们目前的话都最好是按照当前目录或当前的定义的
+[06:55] URL去定音所以说咱们在后台稍微改一改怎么改这是什么这是login是吧login然后下面这个下面是in因为这个跟这个是当前这个是不是定音上感好了你看当前到这之后它就发请求了并且你的数据是date就是用户名和密码然后最终你响应回来之后如果说code或者等于0等于0就等于成功了然后它是有一个date里边是有个temp
+[07:27] 那time呢其实就是里边有些数据咱们主要是包含两部分第一个就是当前的用户信息是吧用户信息啊还有一个是tokentoken的话是不是咱们接口称称的一些DWT的字符串啊那这个token他干嘛了呢他set了一个user那set user是啥意思啊set user你来看一下set user是引用的谁引用的是当前的这个东西那这东西是谁呢这是stop他啥呀
+[07:55] 它是一个本地的缓存本地的缓存也就是说这句话一加上它就会把当前的Token是写入到本地的缓存中写入到本地的缓存中那写到这有什么好处吗好处就是我再去发请求的时候我就可以从当前这个本地缓存中去获取Token然后呢让后台去验证当前的Token之后到底看看你有没有进行登录
+[08:22] 这个咱们还之前记得吧在这你拿到一个token之后其实它首先会过到当前的common下面哪common下面有一个web有一个wm-server里面有一个叫wm-token-filter其实就是这块它首先是会去过滤到这过滤到这之后往下走它就会把这个token给拿出来拿出来之后它就会有一句非常重要来看看往下走
+[08:53] 它就会往当前的现成中去set一个用户那这时候呢你的用户里边就有值了后期咱们比如说再去做其他模块的时候比如说发布文章啊比如说有一些图有一些素材管理啊它这时候都需要登录的时候呢咱们都可以从当前src的local中去获取到用户这个能明白吧行啊那这个咱们说到这啊咱们接着往下看啊
+[09:19] 那这个设置完之后啊那最终的这个URL咱们也确定了是吧这个这个这个URL其实就是他啊就是他啊呃当然这最最终的他会去找到哪啊最终的会去走到build下面有个build.js不是这个啊不是这个是到config下面有一个index.js啊他就会去走到这个代理进行转发进行转发最终是找到你的9006的地址9006呢其实就是咱们目前后端的一个地址啊
+[09:49] 好吧 关了啊怎么可以看一下当前后端的地址是多少刚才咱们修改单本了啊咱们可以稍微去重启一下再去请求一下好吧一会就能看到当前的地址了啊但这块那单本还有点问题啊再去说一下就这个呢还少一个东西因为他前台传递后台的后台的数据都是json比如说在这写什么一个request 包的话这时候呢数据才能长期收到啊行那这时候呢咱们就可以重启一下啊
+[10:19] 充气完之后咱们就可以去测试一下流程大家一定要知道好稍等好这个项目启动完之后你看这就是966因为这个都是在靠门中统一定义的所以说这个地址大家一定要知道好吧行这时候咱们后台启动了这时候你也可以把前台给启动一下启动之前流程刚才咱们说明白了咱们再说另外一个就是Router.js即使你打开了页面之后默认会去访问到什么的
+[10:53] 默认访问到一个login这个login是谁呢login就在下面定义的可以往下走往下找啊这有个login定义的就是当前的一个路由这个路由就是当前你指定的一个页面这个页面就是在你views下面有一个login有一个index.view其实它就会跳转到登录的页面好咱们启动一下啊启动完之后呢咱们访问访问完之后呢它就会去自动的去跳到当前的index.view就是login下面的啊index.view好稍等啊
+[11:30] 好咱们可以双击一下啊这时候呢这个呢这个页面啊其实就是当前的登录的页面咱们可以输入用户名密码那这用户名密码呢是这样啊在你给你们发的这种啊这种搜索文件中啊其实有应用数据了就是两条第一个是张三123第二个是黑马123456啊咱们可以去试一下啊比如说张三123没有做任何加密啊所以说你直接点登录
+[11:59] 好他就能跳进来了那为什么能跳进来呢其实这这块还有一个问题再说一下在你当前login下面有个indexerview里边啊这里块啊当你去当你去那个code是成功之后啊他就会跳到当前index那这个index在哪呢这个index就在root.js中已经定义好了你可以找啊找到index其实就是这个页面啊这个页面啊这个页面的话就是咱们的一个主页
+[12:29] 就咱们主页你登录完之后呢他就会自动的去跳到当前的主页OK啊这个张三这个内容咱们已经拿到了好吧那证明啊咱们当前这个模块也没有问题当然如果说你要想要想去更深入或者去走这个流程的话也可以在这打算点是吧打算点之后呢你可以这样再重新登录一下比如说你可以在这退出啊比如这是张三你也可以输个错的比如说输了错的吧他也过来了是吧
+[13:01] 过来之后呢你可以看一下张三年的数据呢有没有拿到啊是不是错的啊你可以放行吧那这肯定是动录不上看到吗肯定动录不上啊咱们呢可以输入个正确的123好吧点按通路好他也过来了啊之后呢你可以看一下张前就是张三123没问题往下走呗其实你可以进到Service啊进到Service之后呢你可以在这打个点然后直接放行
+[13:28] 好过来看他微空这两个都有值应该是不会走这个的然后是去拿到当前这个名称这个名称去查用户是吧这用户查到了吗查到了并且密码是123这时候他就会比这密码了比这密码没有问题最终他就会生成token是最终放到micro中直接返回了ok这时候这个流程就算走完了这时候你点确定或者点跳过他就会干嘛呢他就会去跳到当前的页面里边没跳过来是吗
+[13:59] 灯放心你看这一块是不是就跳过来了没问题那这个登录的模块咱们就说到这好吧
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲一个前后端分离的用户登录系统，从前端Vue组件的表单验证、API接口定义，到后端Java的Controller和Service层实现，最后展示登录成功后的前端页面。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示项目文件夹，包含一个名为“heima-leadnews-wemedia.zip”的压缩包，位于“资料”目录下，暗示这是项目源码包。
+画面2：在WebStorm中打开Vue项目，展示`login/index.Vue`文件，其中包含表单验证逻辑，如`validateName`和`validatePass`。
+画面3：继续展示`login/index.Vue`，聚焦于表单元素，如`<el-input type="password"`和`<el-button type="primary"`，以及导入的组件和脚本。
+画面4：展示`login/index.Vue`的脚本部分，定义了`validateName`和`validatePass`函数，用于表单验证。
+画面5：展示`login/index.Vue`的脚本部分，高亮显示了`validateName`和`validatePass`函数的逻辑。
+画面6：在WebStorm中打开`/api`目录，展示`constants.js`文件，其中定义了多个API常量，如`API_LOGIN`、`API_USERAUTH`等。
+画面7：在WebStorm中打开`login.js`文件，展示`loginByUserName`函数，该函数调用`API_USERAUTH`进行登录请求。
+画面8：继续展示`login.js`文件，高亮显示了`if (result.code !== 0)`条件判断，用于处理登录响应。
+画面9：在IntelliJ IDEA中打开`LoginController.java`，展示`@RequestMapping("/in")`注解和`login`方法，用于处理登录请求。
+画面10：在WebStorm中打开`router.js`文件，展示路由配置，其中`path: '/login'`指向`login/index.Vue`。
+画面11：在Navicat for MySQL中打开`user`表，展示用户数据，如`name: 'zhangsan'`，`password: '123456'`。
+画面12：展示前端登录成功后的页面，显示“黑马头条”网站，包含文章列表和数据统计图表。
+画面13：在IntelliJ IDEA中打开`UserLoginServiceImpl.java`，展示`login`方法的实现，包括数据库查询和密码比对逻辑。
+画面14：再次展示前端登录成功后的页面，与画面12相同，确认登录流程完成。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面2：
+```javascript
+if (value === '') {
+  callback(new Error('请输入密码'));
+} else {
+  callback();
+}
+return {
+  checked: true,
+  ruleForm: {
+    name: '',
+    password: '',
+  },
+  rules: {
+    name: {
+      validator: validateName, trigger: 'blur'
+    },
+    password: {
+      validator: validatePass, trigger: 'blur'
+    }
+  },
+  components: {
+  },
+  computed: {
+  },
+  methods: {
+    async submitForm() {
+    }
+  }
+}
+```
+
+画面3：
+```html
+<template>
+  <div class="login">
+    <div class="user-avatar">
+      <img src="/assets/logo_index.png" class="status-icon" ref="ruleForm" class="login-ruleForm">
+      <el-form-item prop="name">
+        <el-input type="text" v-model="ruleForm.name" autocomplete="off" placeholder="请输入账户名"></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password" v-model="ruleForm.password" autocomplete="off" placeholder="请输入密码"></el-input>
+      </el-form-item>
+      <div id="myCode"></div>
+      <el-checkbox v-model="checked" @change="change">已阅读并同意《用户协议》和《隐私条款》</el-checkbox>
+      <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+    </div>
+  </div>
+</template>
+
+<script>
+import { } from '@/components/gt'; // 人机交互验证码
+import { loginByUsername, getMobileCode, getCaptcha } from '@/api/login'
+export default {
+  data() {
+    var validateName = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入用户名'));
+      } else {
+        callback();
+      }
+    }
+  }
+}
+</script>
+```
+
+画面4：
+```javascript
+<script>
+import { } from '@/components/gt'; // 人机交互验证码
+import { loginByUsername, getMobileCode, getCaptcha } from '@/api/login'
+export default {
+  data() {
+    var validateName = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入用户名'));
+      } else {
+        callback();
+      }
+    }
+  }
+}
+</script>
+```
+
+画面5：
+```javascript
+<script>
+import { } from '@/components/gt'; // 人机交互验证码
+import { loginByUsername, getMobileCode, getCaptcha } from '@/api/login'
+export default {
+  data() {
+    var validateName = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入用户名'));
+      } else {
+        callback();
+      }
+    }
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else {
+        callback();
+      }
+    }
+  }
+}
+</script>
+```
+
+画面6：
+```javascript
+export const API_LOGIN = '/login'; // 登录
+export const API_USERAUTH = '/user/auth'; // 用户认证
+export const API_CAPTCHAS = '/captcha'; // 验证码
+export const API_IMAGES_UPLOAD = '/api/v1/media/material/upload_picture'; // 上传图片
+export const API_CHANNEL_LIST = '/api/v1/channel/channels'; // 获取频道列表
+export const API_ARTICLES_LIST = '/api/v1/media/news/list'; // 获取文章列表
+export const API_ARTICLES_SUBMIT = '/api/v1/media/news/submit'; // 提交文章
+export const API_ARTICLES_DELETE = '/api/v1/media/news/del_news'; // 删除文章
+export const API_ARTICLES_UPDATE = '/api/v1/media/news/update'; // 更新文章
+export const API_COMMENTS_LIST = '/api/v1/media/comment/list'; // 获取评论列表
+export const API_COMMENTS_DELETE = '/api/v1/media/comment/delete'; // 删除评论
+export const API_COMMENTS_SUBMIT = '/api/v1/media/comment/submit'; // 提交评论
+export const API_COMMENTS_UPDATE = '/api/v1/media/comment/update'; // 更新评论
+export const API_COMMENTS_STATUS = '/api/v1/media/comment/status'; // 修改评论状态
+export const API_COMMENTS_LIKES = '/api/v1/media/comment/likes'; // 获取评论点赞
+export const API_COMMENTS_LIKES_CANCEL = '/api/v1/media/comment/likes/cancel'; // 取消评论点赞
+export const API_COMMENTS_LIKES_COLLECT = '/api/v1/media/comment/collect'; // 收藏评论
+export const API_COMMENTS_LIKES_UNCOLLECT = '/api/v1/media/comment/uncollect'; // 取消收藏评论
+export const API_COMMENTS_LIKES_REPORT = '/api/v1/media/comment/report'; // 举报评论
+export const API_COMMENTS_LIKES_REPORT_CANCEL = '/api/v1/media/comment/report/cancel'; // 取消举报评论
+export const API_COMMENTS_LIKES_REPORT_LIST = '/api/v1/media/comment/report/list'; // 获取举报评论列表
+export const API_COMMENTS_LIKES_REPORT_DETAIL = '/api/v1/media/comment/report/detail'; // 获取举报评论详情
+export const API_COMMENTS_LIKES_REPORT_HANDLE = '/api/v1/media/comment/report/handle'; // 处理举报评论
+export const API_COMMENTS_LIKES_REPORT_HANDLE_LIST = '/api/v1/media/comment/report/handle/list'; // 获取处理举报评论列表
+export const API_COMMENTS_LIKES_REPORT_HANDLE_DETAIL = '/api/v1/media/comment/report/handle/detail'; // 获取处理举报评论详情
+export const API_COMMENTS_LIKES_REPORT_HANDLE_STATUS = '/api/v1/media/comment/report/handle/status'; // 获取处理举报评论状态
+export const API_COMMENTS_LIKES_REPORT_HANDLE_STATUS_LIST = '/api/v1/media/comment/report/handle/status/list'; // 获取处理举报评论状态列表
+export const API_COMMENTS_LIKES_REPORT_HANDLE_STATUS_DETAIL = '/api/v1/media/comment/report/handle/status/detail'; // 获取处理举报评论状态详情
+export const API_COMMENTS_LIKES_REPORT_HANDLE_STATUS_UPDATE = '/api/v1/media/comment/report/handle/status/update'; // 更新处理举报评论状态
+export const API_COMMENTS_LIKES_REPORT_HANDLE_STATUS_UPDATE_LIST = '/api/v1/media/comment/report/handle/status/update/list'; // 获取更新处理举报评论状态列表
+export const API_COMMENTS_LIKES_REPORT_HANDLE_STATUS_UPDATE_DETAIL = '/api/v1/media/comment/report/handle/status/update/detail'; // 获取更新处理举报评论状态详情
+export const API_COMMENTS_LIKES_REPORT_HANDLE_STATUS_UPDATE_STATUS = '/api/v1/media/comment/report/handle/status/update/status'; // 更新处理举报评论状态
+export const API_COMMENTS_LIKES_REPORT_HANDLE_STATUS_UPDATE_STATUS_LIST =
+

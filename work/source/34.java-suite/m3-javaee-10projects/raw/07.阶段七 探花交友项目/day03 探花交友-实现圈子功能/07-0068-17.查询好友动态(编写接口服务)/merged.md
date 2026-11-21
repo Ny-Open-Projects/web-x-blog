@@ -1,0 +1,245 @@
+# 17.查询好友动态（编写接口服务）
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day03 探花交友-实现圈子功能
+- 源文件：07.阶段七 探花交友项目\day03 探花交友-实现圈子功能\17.查询好友动态（编写接口服务）_【海量资源尽在 666java.com】.mp4
+- 时长 21分0秒（音频 1261s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们来编写我们的服务的这个接口啊那么首先呢我们来参考我们的这个接口文档那么这个呢是我们的一个接口文档然后我们来看一下它的一些请求的地址啊这个呢地址叫做movements然后呢下面呢是我们的这个就是请求的一些参数那么可以看到呢除了这个认证啊token之外呢还有随着我们的一些query的参数
+[00:29] 有page和page size然后呢下面呢是它的返回的数据那么这个返回的数据我们可以看一下它是一个比较典型的一个分页的这样的一个结果然后呢重点呢是在这个item中呢有一些这些相关的一些属性那么这个呢我们需要去编写这样的一个这个pozo这样的一个类啊
+[00:53] 对应那么接下来呢我们就先把这个类呢我们先写出来就叫movins那么就是这样的一个类啊那么我们就把它丢到哪里呢丢到我们这个server啊就是在下面的我们这个server中的一个VO里面来啊丢到
+[01:11] 这个里面放到这好那么这个呢就是Moments这样的一个类我们一起来看一下那么我们可以看到这个Moments呢它有这些属性有ID然后呢动态的ID这个是用户的ID还有头像的尼称性别年龄标签还有文字动态图片动态还有距离
+[01:33] 然后呢发布的时间啊比如说呢它是显示的是十分钟前或者说一个小时之前啊等等然后呢还有点赞数啊评论数喜欢数是否点赞啊是否喜欢有大概这么多的一些这个属性之多那么接下来呢我们将要去分装啊这些数据好那么接下来呢我们首先呢需要在我们的Controller中啊然后呢我们去写相关的一些
+[02:02] 我们去写相关的一些这个方法那么我们来看一下我们的讲义那么在前面其实我们是需要去定义这样的一个方法叫做querypubliclist这样的一个方法那我们来写一下那么public返回值我们就写个response at t那么这个t就叫pay什么result
+[02:25] 那么我们来写一个叫做querypublist然后呢list这个就查询我们的动态然后呢这个就叫get mappingget mapping它呢会有这么几个参数那么首先第一个这个参数呢我们来看一下那么第一个参数呢就是我们的pager对吧那么我们去写一个requestrequest param叫pager然后呢所以是int类型pager
+[02:55] 那么我们再来一个还有一个叫什么呢叫配置size配置size然后呢叫配置size注意这个配置size这个s呢并没有大写它是小写的一个s那么这个叫配置size好那么这样的话呢我们就接收了这么两个参数然后呢我们下面就可以去做一些相关的一些这种处理了
+[03:24] 那么然后呢我们就可以调用谁呢调用用我们的这个之前所写的这个momentus Service呢去做一个query这样的一个查询那我们把这两个参数传递过去一个就是page一个就是page size传递过去那么它的返回值呢将返回就是我们所需要的这个page result对象啊page result对象呃result对象好
+[03:55] 那么有了这个配置reall的对象之后那么我们就可以去就可以去return了return我们的responseEdit.ok然后把这个对象丢回去那么如果我们在执行的过程中那么如果要是出错的话我们就来一个trycat处理那么就给它响应一个500这样的一个状态码那么这个方法就是我们在
+[04:23] 查询好友的动态信息好那么接下来我们来看一下这个方法那我们只需要去实现这个方法就可以了好那么来看这个方法又该如何去做一个实现呢那我们显然的肯定还是先要拿到谁呢拿到我们这个Ura这个对象它等于UraSuiteLocal.get去拿到这个对象然后呢我们将调用我们这个圈子API中的
+[04:53] 这个querypublishlist这个方法那么传递三个参数第一个就是user这个user id第二个就是page第三个的pagesize这三个参数那么它将返回的是一个pagesinfo那么拿到这个pagesinfo那我们是不是就可以拿到里面的谁呢点干的谁呢recode是不是就拿到我们的这个想要的这个数据了对吧recodes那么这个就是我们的这个动态的这个数据
+[05:23] 那么我们需要先去做一个判断吧就是如果我们这个easy empty这个是我们导错了那我们就导谁呢导utils导他吧点easy empty那么如果我们这个recode为空的话那我们是不是就应该return了return谁呢return是一个
+[05:47] 叫做 pageResult对象那我们就来定义一个这个pageResult对象吧等于new一个pageResult对象那么最后呢我们就去啊返回它呢啊就可以了呃那么当我们查到这个数据之后啊那我们就需要给它去做一些分装了比如说counts呢是我们的总数就设置为0然后呢还有一个pageResultset一个pages呢也设置为0因为这两个呢我们分也用不到啊但是呢这个字段需要返回所以
+[06:16] 就给他来设置一下点set谁呢还有一个叫做配置赛人那就是配置赛人然后呢再去设置一个配置要的点sat的配置啊配置那么就是我们这个配置好那么这样的话呢我们是不是就可以去做return了对吧这个就是呃就是相当于什么呢没有查啊没有查询到我们的这个动态动态数据好嘞
+[06:44] 好那么接下来呢我们是不是就需要去遍历啊遍历我们的这个records那么我们目的是不要拿到我们这个publish中的一些这个数据然后呢去做一些分装我们的moments这样的一个对象那我们就先去做一个遍历吧然后呢我们去遍历它然后呢上面我们其实是需要定一个list对吧有个moments
+[07:13] 是这样的一个对象那么叫moments list等于new一个new一个这个list然后呢我们在每一次循环的时候那肯定会有对应的有一个moments这样的一个对象那么最后呢我们把moments list做一个这个填充对吧把它填充进去
+[07:34] 好然后呢接下来呢我们是不是就去分装这个对象对吧那么首先呢来看一下这个ID那么这个ID呢就是我们动态这个ID对吧就是我们这个动态信息ID那么就是getID点什么呢去拿到他的一个字幕创呃然后呢我们再去set一个UraID那就是当前这个呃这个哎这个不是当前的就是我们recode中的这个UraID啊这个别搞错呃然后呢set谁呢还有
+[08:02] 一些这个呃什么呃law count就是这个喜欢那么这个呢我们先设置为呃100吧这个呢我们先设置为他啊当然我们打一个todo啊todo呃然后呢这个是什么呢喜欢素啊喜欢素还有moment时间set什么呢还有还有like count那么这个比方说上次呃设置为80那么这个呢是什么呢这个是呃
+[08:32] 这个是什么呢这个是like那个就点赞对吧这个是点赞点赞数好那么moments.set还有什么呢还有这个呢是距离对吧这个是距离我们来看一下它这个距离的要求呢实际上就是比如说距离几公里那么我们就来写一下吧这个叫什么距离距离那我们来看一下API吧那么API呢要求这个距离是它的一个
+[09:02] 举例比方说就1.2公里啊他应该这样去写那我们就默认吧哎应该是写到这来就是1.2公里这个呢就是谁呢这个就是我们的这个距离对吧然后呢还有mobility时间set那么再来看一下还有谁呢就是呃呃这个这个设置过来对吧然后呢这个就是呃是否喜欢那就设置为一啊这个是是否呃是否喜欢
+[09:32] 那么大家这个我们都需要突露一下因为现在我们暂时还没有这个数据然后到后面我们再去做一个实现好那么这个是是否喜欢那么再来一个点set什么呢这个是否点赞那就设置为0那就是没有点赞那个是否点赞好那么我们再来设置一个继续往下面看然后还有什么呢
+[10:03] 这个是评论数评论数那么我们先设置这个比如说是一个30那么这个是一个评论数那么这个呢其实我们是不是也没有啊那么我们也是todo的啊到后面我们再去做一个这个添加然后呢我们继续做一个set操作那么来看一下还有哪些内容啊还有creator date啊creator date
+[10:29] 那么create data呢这个是我们需要去做一个小的一个处理的那么create data呢我们来看一下这个讲义说明啊他就是说这个其实是需要去
+[10:41] 写出它什么的发布的时间举例呢是这样的就是比如说十分钟之前那么这个呢我们就需要去计算一下计算一下这个时间那我们需要去跟我们当前的这个时间呢去做一个对比那么下面我们需要一个这个工具类啊我们才能够去使用它我们来看一下我们这个工具类啊工具类有没有写出来呢好像没有那我们来找一下这个工具类
+[11:08] 那么我们就需要这样的一个工具类啊叫做relatives然后dataformat啊这样的一个类我们就直接做拷贝吧就拷到我们的这个utils里面来拷到这儿那我们就使用它就可以了当然了我们可以先来去执行一下当然我们先把这个呢先加一个注释吧好先保证我们代码的编译不保错然后呢我们来执行一下看一下这个效果啊其实就是
+[11:32] 我们去格式化这个时间去做一个format就是我们用当前的时间和2013年这个时间做一个对比那我们来看一下最终它会去生成什么样的一个结果比如说生成一年前可能最大就是到这个年最大几年前一年前两年前这样的好那么然后我们就直接使用这个方法的format这个类的format方法就可以了好那我们就使用它吧
+[12:02] 然后我们使用它点它点什么点format需要一个date的对象我们去new一个date然后我们再拿到record.get什么created因为拿到这created它是一个none类型所以需要就是我们的时间戳那么需要先转成一个date的对象然后再去做一个转换OK那么我们再去设置
+[12:30] 看一下还有没有一些需要我们去设置的啊比方说这个ID设置过了Tags这个是和用户相关的和用户相关的那我们就暂时没有了昵称的我们暂时也没有一会我们需要查询用户的信息那么性别也没有这个头像也没有年龄啊这个呢是我们的文字的动态那么Request点该是什么Text那么这个我们是有对吧然后呢再去set什么呢
+[12:59] send一个这个是图片的动态那我们就去拿到我们的一个图片Mediaverse图片的一个动态就可以了当然了我们来看一下在这个位置我们需要的是一个stream的一个宿主而我们在这个位置呢去拿到的是一个集合那我们就需要去把它去转一个集合
+[13:24] 去转成一个宿主啊用一个stream的一个宿主啊这样去做一个转换那么这样转换呢就得到了然后呢我们就把它丢到我们这个集合中了那么接下来呢我们会发现呢我们这个moments中的一些关于用户的一些这个属性的值呢还没有
+[13:43] 那么接下来呢我们就需要给他去填充一下啊那我们接下来呢就需要去查询我们的这个呃优质音负啊相关的一些这个数据那么下面呢在这个位置我们就需要查询用户的信息了那么我们呃用户的信息呢显然呢我们是需要通过我们的数据库去查询对吧那我们上面呢还是需要去把我们的这个叫做优质音负啊Service呢去注入进来把它呢就注入进来
+[14:12] 好那么注进来之后呢我们啊将要通过啊race.这个u的info Service.query u的info list它需要一个query wrap对象那我们就给它去啊分装一个query啊query wrap对象那么query wrap呢我们这个是url对吧叫做query wrap等于new一个query wrap对象啊然后呢我们给它去做一些这个呃set操作啊就是
+[14:42] 我们需要其实去给他设置一个条件条件就是什么硬对吧就是说肯定我们一次要查询多个对吧然后这个就是优的下滑线ID然后ID那么又需要去拿到ids了所以说我们又需要去做一个便利对吧去便利他或者说我们就不需要再写4循环了我们就在上面这个位置再来写一个list
+[15:09] 那么我们去写一个这个none类型的一个list叫userids等于new一个reve list然后呢有了这个userids之后呢我们就在这吧那么就在这里啊这里给他添加一个点and添加一个叫record.getget什么的userid好那么这样的话呢我们就拿到这个userids了然后呢把它丢到这来好那么
+[15:37] 这样的话呢我们是不是就就完成了这样的一个构造对吧那么这个位置是不是有点问题就是这个应该叫做user info对象不是右对象那么我们这个in这个操作我们就放到下面来吧那么我们通过这个叫做什么呢user这个这名字也不太对从里写一下叫做user infoquery wrap然后叫做user infoquery wrap.
+[16:07] 我们去设置一个他啊这样设置就可以了啊然后呢我们把这个wrap对象呢传递给他啊然后呢我们将去就可以得到啊就可以去得到我们的一个这个对象了对吧那么哎这个刚刚没有生成啊那我们就直接来call一下吧那么到这啊拿到他那么这个就是我们那个user info死啊user info死啊等于他或者user info list吧
+[16:37] 这样会比较好一些好然后呢接下来呢我们就需要去便利了便利谁呢首先其实是便利我们的叫做movents list然后呢我们再去做一个还要再去做一个便利然后呢便利我们的info那么这个里面呢我们去拿到我们的这个movents.get user id然后呢get user id然后呢我们再去做一个做一个这个
+[17:07] 点long吧long value如果等于这个url info点get这个url id的话点long value比较它的值如果这两个相等的话那我们这个就相当于找到我们这个url对象了对吧那我们就应该break掉那么其实写到这个位置呢其实我们前面在我们去设置这个url id的时候呢会有个小问题啊就是
+[17:33] 那么我们这个动态可能会有一个人同一个人发布多条动态那这个时候对于我们而言的就可能这个人呢只需要查询一次就可以了所以在这个位置呢我们最好去加一个if判断啊判断什么呢就是url id点如果包含了这个recall的点url id的话如果包含了的话那我们就不添加了对吧所以呢要做一个什么取反对吧如果没有
+[18:02] 没有的话再去做一个添加这个逻辑大家应该能够看懂了吧好然后呢下面来看一下在下面的这个逻辑中那我们就需要去给他去填充继续填充这个数据了.set就是比如说叫什么呢我们来看一下往下面看这个叫什么呢tax那我们就叫做userinfo.get什么呢tax
+[18:31] 然后呢我们需要去对它做一个split了对吧这个之前呢我们也写过啊叫有tools.split它然后呢通过谁呢逗号去做一个分割然后呢我们继续做一个填充那么往下面看啊还有谁呢这个 nickname就是我们的昵称啊就叫urlinfo.get什么呢 nickname然后呢继续填充.set谁呢继续往下面看
+[18:59] 然后还有这个是我们的性别对吧那我们就用这个user info.6.name然后转成一个小写然后去set谁的继续往下面开然后还有就是ID设置过了这个是头像那么就user info.get什么logo然后我们继续设置看一下还有没有那么user ID然后
+[19:28] 年龄 userinfo.getage然后我们继续往下面写还有吗来看一下那么应该是不是就没有了userid这个就没了都齐了那么就是说关于用户的是不是就填充这么几个就OK了那么最后我们是不是就应该干嘛呢最后是不是我们把这个pagepagewithout.set一个什么呢这个叫做items
+[19:57] 放入谁呢放入我们的这个MovementsList最后呢return我们这个pageResult这样的话是不是我们就完成了这样的一个业务逻辑的一个编写好那么接下来呢我们来看一下我们的讲义啊大致的浏览一下这个代码那么应该跟我们写的内容呢应该是差不多的然后呢这个呢前面这个一样对吧然后呢去做了个判断返回然后呢这个去循环它循环它然后呢去构造了一个MomentsList
+[20:26] 然后呢在这个位置去做一个循环当然了我们是不是把这两个循环去合并成了一个循环了这个道理是一样的啊然后呢下面去去设置这个查询的参数然后呢去做一些构建啊当然了我们是把这个图度的内容呢放到上面来而这个讲义中呢是放到下面来那么其实呢这个是一样的啊一样的然后最后做一个返回这个是我们momentus的对象那我们使用就是它啊
+[20:53] OK好那么关于这个具体的一个实现呢那我们就先讲到这里后面呢我们对他呢做一个测试
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 服务端实现“好友动态”功能的接口，包括定义数据模型、编写 Controller 层的分页查询接口、Service 层的业务逻辑处理（如数据转换、用户信息关联等），并配合 Mock 服务进行接口调试。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示了 Mock 服务（mock.boxuegu.com）中“好友动态”接口的详情页，接口状态为“已就绪”，Mock 地址为 https://mock.boxuegu.com/mock/164/movements。
+画面 2: 显示了 Typora 编辑器中的文档 day03.md，内容为“2.4.4. 编写 movementsService”章节，展示了 Movements 对象的 Java 类定义，包含 id、userId、avatar、nickname、gender、age、textContent、imageContent、distance、createDate、commentCount、likeCount、hasLiked、hasLoved 等字段。
+画面 3: 在 IntelliJ IDEA 中，展示了 MovementsController.java 文件中 queryPublishList 方法的代码，该方法接收分页参数并调用 movementsService 的 queryPublishList 方法。
+画面 4: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，其中包含获取用户信息、查询发布列表、判断集合是否为空的逻辑。
+画面 5: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 for 循环的开始处，准备进行数据转换。
+画面 6: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 for 循环内部，正在将 Publish 对象转换为 Movements 对象，并设置点赞数、评论数等属性。
+画面 7: 显示了 Typora 编辑器中的文档 day03.md，内容为“2.4.5. 测试”章节，展示了测试用例的示例数据（helma，30）。
+画面 8: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 for 循环内部，准备进行数据转换。
+画面 9: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 @Autowired 注解下方，准备编写方法体。
+画面 10: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 for 循环内部，准备进行数据转换。
+画面 11: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 for 循环内部，正在设置 Movements 对象的标签、昵称、性别、头像、年龄等属性。
+画面 12: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 for 循环内部，正在设置 Movements 对象的标签、昵称、性别、头像、年龄等属性。
+画面 13: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 for 循环内部，正在设置 Movements 对象的标签、昵称、性别、头像、年龄等属性。
+画面 14: 在 IntelliJ IDEA 中，展示了 MovementsService.java 文件中 queryPublishList 方法的代码，光标位于 for 循环内部，正在设置 Movements 对象的标签、昵称、性别、头像、年龄等属性。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```java
+package com.tanhua.server.vo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+public class Movements {
+    private String id; //动态id
+    private Long userId; //用户id
+    private String avatar; //头像
+    private String nickname; //昵称
+    private String gender; //性别 man woman
+    private Integer age; //年龄
+    private String[] tags; //标签
+    private String textContent; //文字动态
+    private String[] imageContent; //图片动态
+    private String distance; //距离
+    private String createDate; //发布时间：如：10分钟前
+    private Integer commentCount; //评论数
+    private Integer likeCount; //点赞数
+    private Integer hasLiked; //是否点赞（1是，0否）
+    private Integer hasLoved; //是否收藏（1是，0否）
+}
+```
+
+画面 3:
+```java
+@GetMapping
+public ResponseEntity<PageResult> queryPublishList(@RequestParam("page") Integer page,
+                                                  @RequestParam("pagesize") Integer pageSize) {
+    PageResult pageResult = this.movementsService.queryPublishList(page, pageSize);
+    return ResponseEntity.ok(pageResult);
+}
+```
+
+画面 4:
+```java
+public PageResult queryPublishList(Integer page, Integer pageSize) {
+    User user = UserThreadLocal.get();
+    PageInfo<Publish> pageInfo = this.quanZiApi.queryPublishList(user.getId(), page, pageSize);
+    List<Publish> records = pageInfo.getRecords();
+    if (Collections.isEmpty(records)) {
+        return null;
+    }
+}
+```
+
+画面 5:
+```java
+for (Publish record : records) {
+}
+return null;
+```
+
+画面 6:
+```java
+pageResult.setPage(page);
+List<Publish> records = pageInfo.getRecords();
+if (CollectionUtils.isEmpty(records)) {
+    return pageResult;
+}
+List<Movements> movementsList = new ArrayList<>();
+for (Publish record : records) {
+    Movements movements = new Movements();
+    movements.setId(record.getId().toString());
+    movements.setUserId(record.getUserId());
+    movements.setLikeCount(100); //TODO 点赞数
+    movements.setCommentCount(30); //TODO 评论数
+    movements.setDistance(record.getDistance());
+    movementsList.add(movements);
+}
+return null;
+```
+
+画面 7:
+```markdown
+2.4.5. 测试
+helma 30
+```
+
+画面 8:
+```java
+movementsList.add(movements);
+```
+
+画面 9:
+```java
+@Service
+public class MovementsService {
+    @Reference(version = "1.0.0")
+    private QuanZiApi quanZiApi;
+    @Autowired
+    private UserInfoService userInfoService;
+    // ...
+}
+```
+
+画面 10:
+```java
+List<Movements> movementsList = new ArrayList<>();
+List<Long> userIds = new ArrayList<>();
+for (Publish record : records) {
+    Movements movements = new Movements();
+    movements.setId(record.getId().toString());
+    movements.setUserId(record.getUserId());
+    userIds.add(record.getUserId());
+    movementsList.add(movements);
+}
+```
+
+画面 11:
+```java
+QueryWrapper<UserInfo> userInfoQueryWrapper = new QueryWrapper<>();
+userInfoQueryWrapper.in("user_id", userIds);
+List<UserInfo> userInfoList = this.userInfoService.queryUserInfoList(userInfoQueryWrapper);
+for (Movements movements : movementsList) {
+    for (UserInfo userInfo : userInfoList) {
+        if (movements.getUserId().longValue() == userInfo.getUserId().longValue()) {
+            movements.setTags(StringUtils.split(userInfo.getTags(), ','));
+            movements.setNickname(userInfo.getNickName());
+            movements.setGender(userInfo.getSex().name().toLowerCase());
+            movements.setAvatar(userInfo.getLogo());
+            movements.setAge(userInfo.getAge());
+            break;
+        }
+    }
+}
+```
+
+画面 12:
+```java
+movements.setTags(StringUtils.split(userInfo.getTags(), ','));
+movements.setNickname(userInfo.getNickName());
+movements.setGender(userInfo.getSex().name().toLowerCase());
+movements.setAvatar(userInfo.getLogo());
+movements.setAge(userInfo.getAge());
+```
+
+画面 13:
+```java
+movements.setTags(StringUtils.split(userInfo.getTags(), ','));
+movements.setNickname(userInfo.getNickName());
+movements.setGender(userInfo.getSex().name().toLowerCase());
+movements.setAvatar(userInfo.getLogo());
+movements.setAge(userInfo.getAge());
+```
+
+画面 14:
+```java
+movements.setTags(StringUtils.split(userInfo.getTags(), ','));
+movements.setNickname(userInfo.getNickName());
+movements.setGender(userInfo.getSex().name().toLowerCase());
+movements.setAvatar(userInfo.getLogo());
+movements.setAge(userInfo.getAge());
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

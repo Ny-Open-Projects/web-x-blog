@@ -1,0 +1,145 @@
+# day15-19-还款短信提醒-功能测试
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：05_万信金融-用户还款/5-7 实现还款短信提醒功能
+- 源文件：10.阶段十 万信金融项目\05_万信金融-用户还款\5-7 实现还款短信提醒功能\day15-19-还款短信提醒-功能测试_【海量资源尽在 666java.com】.mp4
+- 时长 11分5秒（音频 665s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 好前面呢我们已经把还款短信提醒功能全部开发完毕了接下来呢咱就要进行功能测试怎么测试呢咱跟之前一样吧也是在control当中我们临时的加一个测试方法然后呢给他设置一个防路径将来呢我就在浏览器当中是不是往这发请求就行了往这一发请求呢他就触发这个什么要藏从而呢去执行还款短信提醒这个功能去
+[00:30] 去什么去执行对吧我们应该就能收到短信了说这是我们临时性的一个一个功能测试的一个方法那接下来的话我就找到这个Controller把这个方法呢给它加进去咱回到idea里边啊我们找一找这个Controller大家看这是不是咱以前在测试那个用户还款时候临时加的那个那个测试方法对不对那咱现在再加一个测试方法这个待会我就不再写了
+[01:00] 咱们只是临时的用一下大家看一下啊我们给他配置了一个请求路径是不是将来传过来一个什么呀日期然后呢我一往这发请求他是不是就调用业务层的sendrepeatmentnotify方法我们跟踪一下啊然后是不是就到这了对吧然后在这里边他首先调用这个方法查询到期的什么呀缓缓计划然后便利缓缓计划得到这个什么呀缓缓人的信息进一步呢得到这个什么呀
+[01:33] 手机号是不是然后得到手机号之后呢我们就可以通过调用smsservice当中的这个方法把短信就发出去了这是我们把刚才写的这些代码给他串了一下这是这个什么呀测试方法呢我们就加到control里边了然后呢接下来你要注意的就是呃你看你都需要启动哪些服务和系统啊我这给大家列出来Apollo要启动不用说了因为咱这个
+[02:03] 还款微服务嘛大家知道前面我们讲过啊他是依赖这个什么呀keeper因为你用到了那个前面用到了elastic job嘛然后还款微服要启动还有什么呀用户中心微服要启动为什么要启动用户中心这个微服啊哎你别忘了咱们前面在实现这个功能的时候在这我们是不是是不是通过这个非硬代理往用户中心那边发请求了嘛对不对所以说呢这个用户中心啊这个微服你也得启动下这些都要启动
+[02:35] 然后呢这边呢你看一下我该起的都已经起过了啊租KPOR这边Apollo还有运河中心然后呢这个缓缓微服还没启动我现在把它给启动一下它启动过程当中呢我再给大家强调一个细节问题啊就是这个日期你将来传这个值的时候你是不是通过这个反而入境就是发请求的时候是不是要传一个日期吗这个日期你一定要注意你要想看到效果呀你这个日期必须是跟你这个什么呀
+[03:07] 还款计划这个表里边这个什么呀这个值最起码其中某一个值你要保持一致如果你跟这里边的每个值都不一样的话你应该就查不到数据了嘛是不是查不到数据你这个效果你就看不到比如说我一会发请求的时候我是不是就可以传这么一个值对不对当然你传这个值也是可以的反正你传的这个值必须是你现在表里边已经存在的某一个日期
+[03:37] 这也是你测试到时候需要注意的那好大家看一下我们这个服务已经启动起来启动起来之后呢咱接下来就点击一下这儿啊然后呢开始发请求啊当然这个地方的话这个日期我得改改改成咱这里边的1122吧112211-22然后呢在发请求之前呢我先把控制台给它清一下控制台清一下然后回车
+[04:10] 好我们接下来去控制台看看能不能看到什么效果啊我们当时是不是在控制台打印的有一句话在这在这啊你看给手机号谁谁对吧发了短信还款提醒这是还款日期然后这是什么呀还款计额然后呢我看了一下我的手机当然这个效果大家看不到了啊我看了一下我的手机我的手机上的的确是收到了一条短信这个短信的内容呢其实就是控制台上这个内容
+[04:39] 的确是收到了啊呃这是咱们目前吧相当于把这个呃还款短信提醒这个功能给测试完了啊测完之后呢咱这里边其实顺带着发现了一个bug啊发现了咱代码里边有一点小问题什么小问题呢大家看一下这是咱之前设置的那个那个定时还款任务它是每隔五秒钟在执行对不对
+[05:05] 你看是不是每个5秒钟执行一次每个5秒钟执行一次但是你有没有发现这这里边这块有没有什么问题有什么问题吗来我给大家说一下这个问题其实咱当时测试的时候当时应该是也也出现了只是我当时呢把那个代码给注射掉了啊我一说是咋回事啊一个小问题我要找到这个谁呀MapperMapper接口跑上去在这你看这个问题啊在哪你看啊
+[05:35] 我们现在在这个Mapper接口里边是不是一共定义了两个方法这两个方法的名字是一样的但是参数是一样吗不一样对吧这是一个参数的这是三个参数的那我们在使用ElasticJob来执行这个定时任务的时候我们应该执行的是不是这条搜索语句就是三个参数的但是你看控制台打印的你看控制台打印的搜索语句你会发现它执行的是不是这个相当于它是不是调用的是这个方法执行的是这个搜索语句
+[06:07] 但是其实我们业务层啊你看看我们之前业务层的这个代码我给你找一找咱业务层的这个代码呢写到哪去了我们找一下那个方法咱当时调的应该都是三个参数的啊应该是在上这咱那个叫啥名啊哎你看这看这就在这你看我这是不是调map接口的方法对不对是这个方法你看我这是调那几个参数的三个参数的
+[06:51] 三个参数按说是不是应该匹配这个方法然后执行这条搜索语句对不对你看这条搜索语句你看后边是不是还有这个分片的这个条件是不是但你看控制台有这个条件吗没有分片的条件它相当于走的是第一个方法执行的是这条搜索语句这就有点奇怪这就是一个问题对不对这是一个问题那这是咋回事呢这里边有个细节问题需要大家注意的大家看我讲一个表也提醒大家注意
+[07:19] 他说Mapper接口当中的方法不能重在重在然后你看咱Mapper接口里边是定义了两个方法方法名一样但是参数是什么不一样了这叫重在吗对这叫重在那有的学生说老师加二不是允许进行方法重在吗对加二允许但是这儿的问题在于这个谁啊MyBallisMyBallis这个框架内部会把这个方法名当成什么去使用呢
+[07:49] 当成这个ID当成一个ID的值去使用大家都知道ID的值能不能重复不能重复那所以说呢你虽然语法上这你进行了重载没有问题但是mybattles内部会把方法名当成ID去使用那一旦你的接口里边有两个方法名字都一样这个时候就该出问题了出现的问题就是大家现在看到即使你在业务层调呢是这个三个参数的这个方法其实它执行的还是上面的
+[08:21] 还是这个一个参数的这个方法相当于这个不起作用啊不去做那怎么解决呢那很简单你只需要把这个方法名给他改一下就改成跟他什么呀不一样就行了这个问题就解决了那咱就改名吧对不对把第二个方案的名字给他改一改吧这个名字要一改是不是好几个地方都要都要改对吧连锁反应嗯
+[08:48] 那我们给他起个啥名字后边加个例子的好吧加例子的的这个名字又不一样对吧那然后呢我们的业务层应该就该报错了吧好多地方对吧你看这儿就是哪报错你就改哪个地方的这个发展名就行了啊还有哪还有吗还有报错的吗你可以检查检查还有这个整个地方还有哪报错没了吧是不是也就这一个地方对不对这一个地方我们只需要改这个什么呀Mapper接口那个调用那个地方
+[09:30] 名字给他改了就行了就这个地方是不是咱刚才是不是加了一个list就这改一改就行了其他地方就不用改了不用改了那在咱改完之后咱进来再试试我再重启一下是不是重启一下看看这个空台打印这次看看他执行的是哪个spoly局咱现在Mapper接口里边这两个方法的名字是不一样的咱看这个问题能解决不得好我们等待他启动完毕
+[10:10] 然后看看这个定时任务一执行我们看这个伺候语句执行的是哪一条就行了我们稍等片刻哎开始执行了对不对很明显伺候语跟之前是不一样的对吧你看我们看到这个分片这个条件之后呢我们就知道他现在执行的是不是就是这条伺候语句了那我们刚才说的那个问题是不是就解决了啊所以大家一定要注意在Mapper接口当中定义方案的时候方法的名字最好是不要什么呀
+[10:49] 一样的啊这个一定要注意这个细节这是咱目前吧把这个什么功能给测试完了呀对这个还款短信提醒功能呢就测试完毕了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在还款服务中实现定时短信提醒功能，包括在控制器中添加测试方法、调用服务层、数据库查询以及分页处理等。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示IDEA项目结构，选中config包，准备进行配置或代码修改。
+画面2：PPT页面，标题为“8.4 功能测试”，内容包括在RepaymentController中添加测试方法，以及启动服务后通过浏览器访问的URL。
+画面3：数据库管理工具（SQLyog）界面，显示了还款计划表（repayment_plan）的数据，用于测试。
+画面4：IDEA中RepaymentController.java代码，高亮显示了测试短信提醒的API方法。
+画面5：控制台日志，显示服务启动成功，以及执行SQL查询获取还款计划数据。
+画面6：PlanMapper.java接口代码，定义了查询还款计划的SQL语句。
+画面7：RepaymentServiceImpl.java代码，展示如何通过PlanMapper查询还款计划。
+画面8：RepaymentServiceImpl.java代码，展示如何处理还款计划并生成还款记录。
+画面9：PlanMapper.java接口代码，展示查询还款计划的SQL语句。
+画面10：PlanMapper.java接口代码，展示查询还款计划的SQL语句。
+画面11：RepaymentServiceImpl.java代码，展示如何遍历还款计划并处理。
+画面12：RepaymentServiceImpl.java代码，展示返回操作结果。
+画面13：控制台日志，显示服务启动成功，以及Quartz定时任务配置信息。
+画面14：PPT页面，标题为“8.5 定时还款短信提醒”，内容包括在控制器中添加测试方法，以及启动服务后通过浏览器访问的URL。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置：
+画面2：
+```
+@ApiOperation("测试还款短信提醒")
+@GetMapping("/repayment-notify/{date}")
+public void testRepaymentNotify(@PathVariable String date) {
+    repaymentService.sendRepaymentNotify(date);
+}
+```
+
+画面4：
+```
+@ApiOperation("测试还款短信提醒")
+@GetMapping("/repayment-notify/{date}")
+public void testRepaymentNotify(@PathVariable String date) {
+    repaymentService.sendRepaymentNotify(date);
+}
+```
+
+画面5：
+```
+Execute SQL: SELECT * FROM repayment_plan WHERE DATE_FORMAT(SHOULD_REPAYMENT_DATE, '%Y-%m-%d') = '2019-10-24' AND REPAYMENT_STATUS = '0'
+```
+
+画面6：
+```
+@Select("SELECT * FROM repayment_plan WHERE DATE_FORMAT(SHOULD_REPAYMENT_DATE, 'Y-m-d') = #{date} AND REPAYMENT_STATUS = '0'")
+List<RepaymentPlan> selectDueRepayment(String date);
+
+@Select("SELECT * FROM repayment_plan WHERE DATE_FORMAT(SHOULD_REPAYMENT_DATE, 'Y-m-d') = #{date} AND REPAYMENT_STATUS = '0' AND MOBILE IS NOT NULL")
+List<RepaymentPlan> selectDueRepayment(String date, @Param("shardingCount") int count, @Param("shardingItem") int item);
+```
+
+画面7：
+```
+String preRequest() {
+    List<ReceivablePlan> receivablePlanList = receivablePlanMapper.selectList(Wrappers.<ReceivablePlan>query().eq(ReceivablePlan::getProjectId, repaymentPlan.getProjectId()));
+    RepaymentRequest repaymentRequest = new RepaymentRequest();
+    repaymentRequest.setAmount(repaymentPlan.getAmount());
+    repaymentRequest.setProjectId(repaymentPlan.getProjectId());
+    repaymentRequest.setCommission(repaymentPlan.getCommission());
+    repaymentRequest.setProjectCode(repaymentPlan.getProjectCode());
+    repaymentRequest.setRequestNo(CodeUtil.getCodePrefix(repaymentPlan.getProjectCode(), CodeUtil.CODE_REQUEST_PREFIX));
+    return repaymentRequest;
+}
+```
+
+画面8：
+```
+if (repaymentPlan.equals(RepaymentStatusCode.FIXED_REPAYMENT.getCode())) {
+    EqualInterestRepayment fixedRepayment = RepaymentUtil.fixedRepayment(projectDTO, repaymentPlan, month, projectDTO);
+    List<RepaymentPlan> planList = saveRepaymentPlan(projectDTO, fixedRepayment);
+    // 生成还款人历史明细
+    // 2.1 重新计算存量业务明细
+    tenderDTO.setAmount(0);
+    tenderDTO.setProjectAnnualRate(0);
+    tenderDTO.setProjectId(projectDTO.getProjectId());
+    // 2.2 等待应收回款明细数据
+    EqualInterestRepayment receipt = RepaymentUtil.fixedRepayment(tenderDTO, repaymentPlan, month, projectDTO);
+    // 2.3 生成还款人历史明细
+    repaymentProducer.confirmRepaymentDetail(repaymentPlan, preRequest());
+}
+```
+
+画面11：
+```
+repaymentPlanList.forEach(repaymentPlan -> {
+    RepaymentDetail repaymentDetail = new RepaymentDetail();
+    System.out.println("当前分片：" + "shardingItem" + repaymentPlan);
+    Boolean preRepaymentResult = preRepayment(repaymentPlan, repaymentDetail.getRequestNo());
+    if (preRepaymentResult) {
+        System.out.println("环预处理成功");
+        String preRequest = generateRepaymentRequest(repaymentPlan, preRequest());
+        repaymentProducer.confirmRepaymentDetail(repaymentPlan, preRequest);
+    }
+});
+```
+
+4) PPT 标题、架构图/流程图的结构、表格数据：
+画面2：
+标题：8.4 功能测试
+内容：
+1. 在RepaymentController中添加测试方法。
+2. 启动Apollo、Zookeeper、还款服务和用户中心微服务，通过浏览器访问 http://127.0.0.1:5308 /repayment/repayment-notify/2019-08-30
+
+画面14：
+标题：8.5 定时还款短信提醒
+内容：
+1. 在RepaymentController中添加测试方法。
+2. 启动Apollo、Zookeeper、还款服务和用户中心微服务，通过浏览器访问 http://127.0.0.1:5308 /repayment/repayment-notify/2019-08-30
+
+5) 无。
+

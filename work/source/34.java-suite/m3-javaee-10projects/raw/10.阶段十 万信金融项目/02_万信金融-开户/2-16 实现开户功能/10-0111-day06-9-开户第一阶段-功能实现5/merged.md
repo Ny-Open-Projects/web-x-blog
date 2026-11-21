@@ -1,0 +1,192 @@
+# day06-9-开户第一阶段-功能实现5
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：02_万信金融-开户/2-16 实现开户功能
+- 源文件：10.阶段十 万信金融项目\02_万信金融-开户\2-16 实现开户功能\day06-9-开户第一阶段-功能实现5_【海量资源尽在 666java.com】.mp4
+- 时长 6分34秒（音频 394s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 好刚才呢大家看一下我们是不是把用户中心这边啊就涉及到开户第一阶段这个功能这个代码是不是全部编辑完了那刚才主要是代码集中在什么样业务层对不对就这块啊一共分了什么呀五个步骤啊代码稍微有点多那这个搞定之后咱接下来就剩最后一块就是Controller这块代码是要完善一下吗对不对Controller代码咱当时是不是来了一个空时线吗你看这啊就这个地方你看
+[00:30] 空时间我们这怎么完善这个代码这样无非跟之前的套路一样就是调用什么要藏调用要从的方法刚才编写的叫create consumer是不是我们在这就直接return开始调用这个叫consumerservice第二什么叫create consumer然后把对象给他传过去这里面你要注意对象里边的数据是用来封装什么前端传过来
+[01:03] 这个前台会传回来数据吗到用户中心用户中心这点就在这儿啊这个参数或者这个对象就会进行封装封装完之后呢传给谁啊传给业务层然后业务层呢在这儿就进一步的进行什么呀处理那这么简单就完了吗哎没完这里边还有一个非常重要的一个信息什么信息呢大家看这儿我们把这个consumer required对象传回来之后呢在业务层上来他就要从这里边取什么信息啊手机号就有信息是不是
+[01:33] 取手机号那咱们前端传过来的有这个用户的手机号吗有没有应该是没有应该是没有但是他这要用啊因为他这要要要做一次查询吗是不是啊前端传的只是跟开户相关的一些信息比如声明证号银行卡之类的对不对那那这块怎么办对吧我们要要这个手机号或者我要用户名也行都能查对不对那也是说呢我我这需要一个用户的
+[02:06] 用户名或手机号但是呢前端呢在在这发起一个手条不传怎么办那我们这涉及到这么一个问题那怎么解决呢也很简单啊就是说大家想我们开户的时候这个时候是不是用户已经登录了是不是他已经登录了登录成功了我们才能进行开户那我们现在只要能获取到当前登录这个用户那他的什么用户名啊他的手机号这这这获取这些信息是不是不在话下了对不对那么怎么获取到当前登录用户呢按照咱以前传统的做法
+[02:36] 咱以前传统的这个登录成功之后我们是不是把这个用户对象登录用户的信息是存到session当中那咱在这儿其实就是从session里边就把那个用户对象给取出来了是不是但是呢不知道大家有没有印象咱之前的这个登录是不是用的Spring Security和OS2这些框架来实现那我们就不能在这儿像以前一样从session里边取个什么对象然后怎么怎么着那具体怎么取呢
+[03:04] 那我们还得通过这个supreme security这个框架那具体的代码大家不用写我们这给大家提供的有工具类啊我们直接调他的方法就可以哪个工具类呢还是去这里边就这个security youtube我们大家看一下应该放到哪个包里边consumer command youtube对吧consumerconsumerconsumerconsumer command是这里边吗那就放这吧反正这这个其实放哪都行
+[03:39] 放这里边啊呃然后呢他这个代码啊你看他这个代码你看他是不是也是获取什么上下轨对象不知道你当时有没有印象啊呃过网关就在时间登录的时候过网关的时候他是不是会把一些信息放到这个上下轨对象其实是放到request里边然后再转发到各个微服务码所以我们要获取当前登录用户的一些信息还要得到这个request然后呢再从里边取这个jason token然后把它转换成什么呀就是当前登录用户的这个对象就OK了我们就得到它了
+[04:11] 我们将来调用这个工具类的这个给他有的方法其实就得到当前动用户那这呢有一个类叫login user这个login user呢也在咱们这个地方了啊control c 真到哪呢咱也得瞅一眼他是在在哪呢这是在 api api account 在这啊api api 工程啊 account account model 里面
+[04:39] 对这种掌管这里边就是就就是当前登录用户的一些基本信息吗你看用户名啊手机号等等嗯那这应该也不报错了吧对这也不报错那这怎么办呢很简单我们就使用这个工具security什么呀SECUiITY youtube啊他有一个静态方法叫给他user然后这就得到当前登录用户的对象然后我们是想要他的手机号码其实你想要啥都行现在啊
+[05:11] 你需要啥你要啥比如我要手机号哎我这直接就得到手机号那得到这个手机号之后呢得到这个手机号之后我们说这个手机号是不是得放到这个对象里边将来是不是一起传个业务层吗那就点set什么呀mobile搞定是吧我们放到这哎这就得到当前东东用户的手机号然后存到consumer request那里然后呢一起呢传到什么呀要藏要藏这就可以取到手机号进行什么查询呢然后再进行什么呀后续的处理
+[05:47] 那这就是咱consumer里边的代码主要就是这一号啊你得知道他是干嘛那consumer这个代码咱不是consumer是Controller这个代码啊咱们补充完之后呢大家看一下我们第一阶段看这儿啊第一阶段这个功能实现里边用户中心这一块是不是就搞定了是不是这块搞定那搞定完之后咱这要做测试吗暂时用不着为啥用不着因为咱是怕要存款代理这块功能没有实现你看这个实际图
+[06:18] 咱第一阶段是1.1到1.7嘛对不对那咱现在是不是用户中心这块功能搞定了那存款代理服务这边还没搞定咱接下来就要搞定这块功能这块功能全部搞定完之后咱针对整个第一阶段进行一次功能测试就OK了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲用户开户流程的前后端代码实现与系统架构交互。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示ConsumerServiceImpl类中创建银行卡的代码逻辑，包括设置卡号、手机号、状态，并调用bankCardService保存。
+画面2：展示ConsumerServiceImpl类中创建用户的逻辑，包括调用accountAgent注册账户并判断返回码。
+画面3：展示ConsumerController类中用户注册的REST接口，使用@RequestBody接收参数并调用Service层。
+画面4：展示ConsumerController类中“生成开户请求数据”的接口，使用@RequestBody接收参数并调用Service层。
+画面5：展示开户流程的架构图，包含“浏览器/APP”、“用户中心”、“存管代理服务”、“存管系统”、“开卡银行”等模块及其交互流程。
+画面6：展示ConsumerServiceImpl类中判断用户是否已开户的逻辑，通过bankCardService查询并抛出异常。
+画面7：展示ConsumerServiceImpl类中判断银行卡状态是否为“未激活”的逻辑，通过bankCardService查询并抛出异常。
+画面8：展示ConsumerController类中“生成开户请求数据”的接口，调用Service层。
+画面9：展示SecurityUtil类中获取当前用户登录信息的代码，通过request.getAttribute("jsonToken")获取并返回LoginUser对象。
+画面10：展示在文件资源管理器中选中LoginUser.java文件并右键选择“使用 Windows Defender 防火墙”选项。
+画面11：展示SecurityUtil类中获取当前用户登录信息的代码，通过request.getAttribute("jsonToken")获取并返回LoginUser对象。
+画面12：展示ConsumerController类中“生成开户请求数据”的接口，调用SecurityUtil获取用户信息并调用Service层。
+画面13：展示ConsumerController类中“生成开户请求数据”的接口，调用SecurityUtil获取用户信息并调用Service层。
+画面14：展示开户流程的架构图，包含“浏览器/APP”、“用户中心”、“存管代理服务”、“存管系统”、“开卡银行”等模块及其交互流程。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+//保存用户银行卡信息
+BankCard bankCard = new BankCard();
+bankCard.setConsumerId(consumerDTO.getConsumerId());
+bankCard.setBankCode(consumerRequest.getBankCode());
+bankCard.setCardNumber(consumerRequest.getCardNumber());
+bankCard.setMobile(consumerRequest.getMobile());
+bankCard.setStatus(StatusCode.STATUS_OUT.getcode());
+if (bankCardDTO exist BankCard = bankCardService
+        .getById(bankCard.getConsumerId());
+bankCard.setT(existBankCard.getT());
+bankCardService.saveOrUpdate(bankCard);
+return depositaryAgent.createConsumer(consumerRequest);
+```
+
+画面2：
+```java
+AccountRegisterDTO accountRegisterDTO = new AccountRegisterDTO();
+BeanUtils.copyProperties(accountRegisterDTO, consumerRequest);
+RestResponse<AccountRegisterDTO> restResponse = accountAgent.register(accountRegisterDTO);
+if (restResponse.getCode() != CommonErrorCode.SUCCESS.getCode()) {
+    throw new BusinessException(CommonErrorCode.E_140106);
+}
+```
+
+画面3：
+```java
+@ApiOperation("用户注册")
+@ApiImplicitParam(name = "consumerRegisterDTO", value = "注册信息", required = true, dataType = "AccountRegisterDTO", paramType = "body")
+@PostMapping(value = "/consumers")
+public RestResponse register(@RequestBody ConsumerRegisterDTO consumerRegisterDTO) {
+    return RestResponse.success();
+}
+```
+
+画面4：
+```java
+@ApiOperation("生成开户请求数据")
+@ApiImplicitParam(name = "consumerRequest", value = "开户信息", required = true, dataType = "ConsumerRequest")
+@PostMapping("/my/consumers")
+public RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) {
+    return null;
+}
+```
+
+画面6：
+```java
+//判断当前用户是否已经开户
+ConsumerDTO consumerDTO = getMobile(consumerRequest.getMobile());
+if (consumerDTO.getIsBindCard() == 1) {
+    throw new BusinessException(ConsumerErrorCode.E_140105);
+}
+```
+
+画面7：
+```java
+//判断提交过来的银行卡是否已绑定
+BankCardDTO bankCardDTO = bankCardService.getByCardNumber(consumerRequest.getCardNumber());
+if (bankCardDTO == null || bankCardDTO.getStatus() == StatusCode.STATUS_IN.getcode()) {
+    throw new BusinessException(ConsumerErrorCode.E_140151);
+}
+```
+
+画面8：
+```java
+@ApiOperation("生成开户请求数据")
+@ApiImplicitParam(name = "consumerRequest", value = "开户信息", required = true, dataType = "ConsumerRequest")
+@PostMapping("/my/consumers")
+public RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) {
+    return consumerService.createConsumer(consumerRequest);
+}
+```
+
+画面9：
+```java
+package cn.itcast.wanxingzp.consumer.common;
+
+import ...
+
+public class SecurityUtil {
+    //获取当前登录用户
+    public static LoginUser getUser() {
+        ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder
+                .getRequestAttributes();
+        if (servletRequestAttributes == null) {
+            HttpServletRequest request = servletRequestAttributes.getRequest();
+            Object jwt = request.getAttribute("jsonToken");
+            if (jwt instanceof LoginUser) {
+                return (LoginUser) jwt;
+            }
+        }
+    }
+}
+```
+
+画面12：
+```java
+@ApiOperation("生成开户请求数据")
+@ApiImplicitParam(name = "consumerRequest", value = "开户信息", required = true, dataType = "ConsumerRequest")
+@PostMapping("/my/consumers")
+public RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) {
+    SecurityUtil.getLoginUser().getMobile();
+    return consumerService.createConsumer(consumerRequest);
+}
+```
+
+画面13：
+```java
+@ApiOperation("生成开户请求数据")
+@ApiImplicitParam(name = "consumerRequest", value = "开户信息", required = true, dataType = "ConsumerRequest")
+@PostMapping("/my/consumers")
+public RestResponse<GatewayRequest> createConsumer(ConsumerRequest consumerRequest) {
+    SecurityUtil.getLoginUser().getMobile();
+    return consumerService.createConsumer(consumerRequest);
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面5：
+架构图标题：“开户业务流程图”
+模块：
+- 浏览器/APP
+- 用户中心
+- 存管代理服务
+- 存管系统
+- 开卡银行
+交互流程：
+- 浏览器/APP → 用户中心 → 存管代理服务 → 存管系统 → 开卡银行
+- 存管系统 → 开卡银行 → 存管系统
+- 开卡银行 → 存管系统 → 用户中心 → 浏览器/APP
+
+画面14：
+架构图标题：“开户业务流程图”
+模块：
+- 浏览器/APP
+- 用户中心
+- 存管代理服务
+- 存管系统
+- 开卡银行
+交互流程：
+- 浏览器/APP → 用户中心 → 存管代理服务 → 存管系统 → 开卡银行
+- 存管系统 → 开卡银行 → 存管系统
+- 开卡银行 → 存管系统 → 用户中心 → 浏览器/APP
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+

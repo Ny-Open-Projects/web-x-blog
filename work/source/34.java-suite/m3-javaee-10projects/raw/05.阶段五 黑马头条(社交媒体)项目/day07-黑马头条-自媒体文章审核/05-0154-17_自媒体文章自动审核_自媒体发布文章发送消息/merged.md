@@ -1,0 +1,206 @@
+# 17_自媒体文章自动审核_自媒体发布文章发送消息
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day07-黑马头条-自媒体文章审核
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day07-黑马头条-自媒体文章审核\17_自媒体文章自动审核_自媒体发布文章发送消息【海量资源尽在 666java.com】.mp4
+- 时长 17分7秒（音频 1027s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那下面呢咱们就来去在自媒体端去发布文章的时候呢来发送消息让他进行去审核好吧那看一下那内容啊首先呢咱们需要去定义消息的名称消息的名称啊这个消息名称呢咱们需要在配置文件中去配置首先是这一块是吧在当前的一个TES里边设置一个单通道的一个消息然后呢咱们需要在卡布卡的跑包历史里边再去读一下
+[00:29] 然后最终呢咱们需要在当前那个内容去读到当前这个内容最终呢咱们就可以发消息了啊那这发消息啊这个内容可能稍微稍微麻烦一些咱们并没有像之前说的用卡不卡template直接发消息因为咱们这里边呢需要去封装消息需要去封装消息啊行那咱们先去来完成第一步啊咱们就现在签几个名这个名称就叫做什么
+[00:54] 叫什么Hematopic Submit提交文章审核的一个单通道的消息好吧直接去拷贝一下到哪儿到当前的Common那边有一个Mavencom Test然后在这儿你可以直接去写一下比如说你可以在这去加个注释比如说是文章文章提交审核的消息名称好吧目前的话咱们只是测试
+[01:26] 所以说咱们在这去加了个test不如后期你在正常环境上你可以在这个provider中去设置好吧行那我们在这设置完之后咱们同样的需要在当前的这个Kafka的publist里边去设立个东西怎么设呢一样的其实就是去读取上面这个配置文件是吧其实就是读取配置文件咱们可以把这个注释也拷过来好拿过来之后咱们下面要干嘛呢
+[01:57] 下面呢咱们需要去在这个配置文件中去读也就是说在这个Kafka打开这里有一个Kafkatopic config然后在这你可以去设置一个值比如说咱们叫privatestring什么string的是啥呢你可以在这去把它给拷过来因为呢前边的内容是不是都有显示对呀我们在这去换成一个大鞋然后这个杠成一个大鞋OK那这样就出了
+[02:30] 加了一个date所以说他和赛的方法已经有了行那这个设置完之后啊咱们下面再往下看啊还需要哪些呢下面呢是需要有一个这个这个类这个类呢其实呢就是来封装消息的封装消息啊这个类呢其实已经存在了咱们可以找一找啊嗯有吗有啊这里里边呢你看一个呢是文章的类型第二个是文章的ID为什么会有文章的类型呢
+[03:01] 因为咱们目前的话只是有自媒体文章后期咱们到下一次会去讲咱们的文章其实有两个来源是吧第一个是什么webmedia就是咱们的自媒体第二个就是爬床爬床的文章同样需要审核所以说咱们在这去为了能够更好的通用更好的通用所以说咱们在这去设置这个类型如果说你只是当前的什么自媒体的话这个类型就没有必要存在了
+[03:28] 这能演是吧行啊那这个咱们就说完了啊说完之后啊咱们下面再往下看下面呢还有一个就是进行封装那这个封装呢就不太一样了这个封装最终呢咱们是需要去继承当前一个卡不卡message其实也是为了封装你的数据这个data就是你具体的当前的这个类这个类里边是不是就已经封装了你的当前的数据具体的消息内容啊所以说啊咱们在这啊再去编写一个那这个在哪边写呢
+[03:57] 就这个咱们需要在专门的去创建一个包创建一个包去编写咱们在这去写一下在这咱们以后所有的消息都在这去创建比如说咱们在这messages然后点我们可以写个submitarticleothermessage好吧虽然有点长但是能够看明白好吧行这完之后咱们在这去OK让他这个类干嘛所有的都让去记成
+[04:29] Kafkamessage写错了是吧好这里有个范形范形就是当前你这个类这个类那说完之后咱们打下包好这个type是这个typetype其实就是你消息的名称就你消息的名称那些你名称咱们可以直接考一下不是当前的这个东西当然这个东西你也可以随便设
+[05:03] 你要去接收的时候你知道是哪个就可以了目前的话咱们就这么写就可以了然后咱们要在这再去提供两个方法这方法应该是两个构造一个构造是无参的那为什么要说构造呢又是他说第二个构造是有参的参数是谁参数就是当前的这个这样的话咱们就算设置完了设置完了之后咱们在这去调一下当前的什么
+[05:38] 把这个传进去用的是用不接口的不加负类的前的构造构造函数咱们可以看下这个啊对咱们之前讲过这类啊其实为什么要继承它其实这里边的一些参数啊都已经说的很明白第一个呢咱们有一个尝试次数是吧就是你失败了之后有有几次尝试然后还有就是你的消息的时间还有啥呢还有你的类型这个类型啊这个类型啊咱们这样这个咱们不让他去
+[06:07] 我们就设立一个public就完事了好吧那这个咱们要去设置一下这里边需要有更多的东西需要去设置所以说咱们需要继承当前的这个类好吧行那这个设置完之后咱们下面咱们就可以去发送消息就可以发送消息那发送消息在哪发送咱们是不是之前说过是不是有一个叫Kafka森德找一找好就这个类那Kafka森德其实就是这个方法
+[06:38] 他就可以调用template然后去调send然后去发送消息并且呢他会把你的消息干嘛呢把消息转成了json转成了json去发送啊那具体呢其实呢咱们需要干嘛呢需要去自己去封装一个方法自己封装一个方法啊也就是说咱们下边他去写写一个方法写的public void然后是send什么写呢叫submit吧好吧
+[07:08] Summit article of AUTH message传的什么参数呢传的参数就是当前的这个Submit刚才咱们封装的这个message好它呢就是message然后呢调用谁啊调用当前的send message好里边咱们需要去传参数第一个参数是什么
+[07:41] 第一个三数刚才说了第一个三数是怎样第一个三数是不是就是一个topic的名称啊那topic的名称刚才咱们是不是在这已经设置过了是吧并且呢是让这个类去干嘛让这个类去读了一下所以说咱们在这啊可以用直接可以用当前这个类啊可以直接用当前的这个其实这个呢就是刚才咱们配置的是这个类你看明白吧其实就是其实其实就是就是他啊所以说咱们在这啊
+[08:12] 再去拿过来拿过来之后呢咱们可以用他RAT这样的话就拿到名称了第二个呢第二个的话就是刚才说了一个keykey的话会随便设那现在统一都用谁呢叫UUAT的什么Longan然后他是一个头传所以说他要辞职然后最终呢咱们是把当前的message传进去这样的话消息就算是送了啊行咱们在这儿去加个入室啊
+[08:47] 这是什么呢要发送审核文章的消息好吧其实这个啊这个中的是调用的是下面的这个方法好吧行那这是一步啊然后再往下看还有啥呢还有啥的话最终的咱们可以在具体的发消息的地方去直接去注入注入谁呀注入当前的这个类就可以了注入当前这个类就可以了
+[09:17] 这为什么报错我看一下啊啊这刚才改了啊这边也改成public就完事了好吧那这样就完了啊呃设置完之后啊咱们在这啊就在找到当前发消息的地儿刚才说了发消息在哪发在media还是admin呢那admin是不是接触消息啊所以说咱们发消息是在文章发布的时候去发消息啊所以说你主要呢是在这去写就可以了当然咱们发消息的具体内容刚才咱们也说了其实就是一个什么
+[09:47] 就是一个文章的ID因为咱们审核的时候啊审核的时候是不是只需要文章ID就可以了所以说啊没有问题啊咱们现在消息内容只是一个文章ID就可以啊咱们在这儿啊去找到当前的Media咱们也可以这样啊这个笔记上呢是说啊可以在这儿再去封装一个类再去封装一个类啊然后呢让他呢注入卡普卡Center最终呢是再去调用你的这个发消息的内容实际上呢吧
+[10:17] OK 没问题啊那咱们呢可以也在这啊也可以在这去创建一个当前的包叫Kafka这个名啊然后呢让这个类去让什么shrimp去管理然后呢咱们可以在这去读谁啊读Kafkasinder好读完之后呢下面呢咱们就可以去写写public void这里边需要传什么参数吗其实呢咱们需要去传一个啊咱们要
+[10:51] send message好吧传一个传的是啥呢看啊,当前的这个sender里边打开啊sender里边是不是最重要调另一个方法呀它是不是需要一个message啊所以说你传的其实就是当前这个message你具体发消息的时候你把这个封装了就可以了啊好咱们找到当前的这个然后呢咱们就可以调用Kafka的什么sender.send message就把当前的message传进去就可以了
+[11:24] 错了吗我看看啊稍等啊没问题啊啊不对啊这不应该是send应该是谁啊应该是叫send submit article answer message那是他对吧OK啊没问题啊那这个报错了啊错的原因呢其实也就是让当前的media去加载Kafka的配置所以说咱们在这啊再去创建一个类这个类咱们之前写过啊叫Kafkaconfig然后呢
+[11:58] 上面去加什么configuration然后是下面是compound scan让他去扫描当前的谁啊当前的卡不卡的包common.黑马common好那这样就可以了啊咱们也可以看下这个东西这个东西应该是没有爆错了啊应该是没有爆红了啊那爆红其实也没有事啊他能找着就可以是吧行那这个设置完之后啊咱们下面呢就在具体发布文章的地儿啊去
+[12:33] 发送消息发布文章在哪发呢这个咱们之前在门写过的是在当前的Service里边有一个什么news Service其实咱们最终是在当前保存文章的时候去发送消息看这里边是有一个save news它直接定位到这了因为咱们之前是编写过到save wnews里边它去保存的时候咱们再去发送消息好那咱们就来去设置一下
+[13:02] 在这可以直接去设置说if那为什么要if呢其实咱们要去分断一下真正的是提交的时候提交的时候咱们再去干嘛呢再去真正的去发送消息好来看一下那这个怎么做呢咱们这里边其实有一个typetype的话其实就是提交还是不提交是吧来看一下我们在这去设立一个webmedia-constants.er里边有一个范型叫wm-news
+[13:31] submit来着啊newssubmit if说是1的话它就是提交等于type就是1的话就算是提交了啊那提交完之后呢咱们下面就可以去发送消息了这个发送消息啊首先呢你要去封装你的消息因为咱们真正发送的时候是不是里边是需要一个submit article author message啊所以说你要去封装它我们可以去news来一个啊
+[14:04] 怎么叫message好吧怎么叫author message好吧就叫message吧那这里边其实还需要设个值这里边啊需要有一个什么set他需要设置一个set date这个date是谁呢这个date的话其实就是咱们具体的某一个某一个什么具体消息的这个类是吧这个类这里边是不是封装了当前的ID啊知道你们在这啊设置一个打什么对先去扭出来它啊
+[14:45] 然后咱们再去设置点什么setArticleId这个ArticleId就是WMNews里边的什么.it就是这个ID这个其实就是文章的ID下面还有一个submitArticleOutput然后是点什么setTypeType其实咱们已经固定好了因为目前的话就是什么
+[15:15] 就是自媒体的文章的提交是吧所以说你可以用当前的这个类里边的有一个叫做article type干什么呢里面是有一个media这个其实就是当前自媒体文章那最终设置完之后呢咱们可以这样可以把它呢装进去把它装进去没事了啊设置完之后啊咱们就可以干嘛呢就可以发消息了发消息是不是得去注入当前的admin message center啊
+[15:46] 所以说咱们在这啊前的这个类里边去注入一个private他好那注入进来之后呢咱们可以直接去用一下就可以了啊点信然后是把当前的message装进去是吧这样的话咱们就算是好消息了啊这里边其实还设置个东西啊去说啊咱们在这有一个temp1那这个呢其实为了严谨性啊咱们再去查数据户或者插入或者更新的时候他会插入一行
+[16:23] 因为咱们现在只发送一条消息对吧这每一次审核文章咱们哪一次提交文章咱们就要去发送一条消息所以说咱们在这可以去设立个这东西叫amp0然后它提交完提交完更新完咱们加个短号加个短号之后提交完更新完之后这个time肯定就变成1因为它只能影响一行所以说咱们在这可以多加一步判断如果说它等于等于1
+[16:55] 这样的话比较严谨一些这样的话咱们就算是把这个消息的发送方案咱们就算是说这完了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现自媒体文章发布成功后，通过 Kafka 发送认证消息的完整流程，包括配置、消息实体、发送器和业务逻辑。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 展示了文档中“2.2.4 自媒体发布文章成功后发送消息”章节。
+- 代码片段：`Kafka.topic.submit-article-auth=submit-article-auth`（在 `maven_test.properties` 中）。
+- 代码片段：`String submitArticleAuth;`（在 `KafkaTopicConfig` 类中）。
+- 代码片段：`public class SubmitArticleAuto { ... }`（定义消息类型）。
+
+画面 2：
+- 展示了 `KafkaTopicConfig` 类的代码，其中包含 `@Configuration` 注解和 `@PropertySource` 注解。
+- 代码片段：`@Configuration`。
+- 代码片段：`@PropertySource("classpath:Kafka.properties")`。
+- 代码片段：`String adminTest;`。
+
+画面 3：
+- 展示了 `SubmitArticleAuto` 类的代码，定义了 `ArticleType` 枚举。
+- 代码片段：`public enum ArticleType{ WEMEDIA, CRAWLER; }`。
+
+画面 4：
+- 展示了 `SubmitArticleAuthMessage` 类的代码，它继承自 `KafkaMessage`。
+- 代码片段：`public class SubmitArticleAuthMessage extends KafkaMessage { ... }`。
+
+画面 5：
+- 展示了 `KafkaMessage` 抽象类的代码，定义了消息的通用属性。
+- 代码片段：`public abstract class KafkaMessage { ... }`。
+- 代码片段：`int retry;`。
+- 代码片段：`String type;`。
+- 代码片段：`protected abstract String getType();`。
+
+画面 6：
+- 展示了 `KafkaSender` 类的代码，其中包含 `KafkaTemplate` 和 `ObjectMapper`。
+- 代码片段：`public class KafkaSender { ... }`。
+- 代码片段：`@Autowired KafkaTemplate<String, String> kafkaTemplate;`。
+- 代码片段：`@Autowired ObjectMapper Mapper;`。
+- 代码片段：`public void sendMessage(String topic, String key, KafkaMessage<?> message) { ... }`。
+
+画面 7：
+- 展示了 `KafkaSender` 类的 `sendMessage` 方法的实现。
+- 代码片段：`public void sendMessage(String topic, String key, KafkaMessage<?> message) { ... }`。
+- 代码片段：`this.kafkaTemplate.send(topic, key, Mapper.writeValueAsString(message));`。
+
+画面 8：
+- 展示了 `SubmitArticleAuthMessage` 类的 `getType` 方法。
+- 代码片段：`public String getType() { return "submit-article-auth"; }`。
+
+画面 9：
+- 展示了 `AdminMessageSender` 类的代码，它使用 `KafkaSender`。
+- 代码片段：`public class AdminMessageSender { ... }`。
+- 代码片段：`private KafkaSender kafkaSender;`。
+
+画面 10：
+- 展示了 `AdminMessageSender` 类的 `sendMessage` 方法的实现。
+- 代码片段：`public void sendMessage(SubmitArticleAuthMessage message) { ... }`。
+- 代码片段：`kafkaSender.sendMessage(topic, key, message);`。
+
+画面 11：
+- 展示了 `NewsServiceImpl` 类的 `saveNews` 方法。
+- 代码片段：`private void saveNews(News news, int countImageNum, Short type) { ... }`。
+- 代码片段：`if (countImageNum == ValidaConstants.WM_NEWS_SINGLE_IMAGE) { ... }`。
+- 代码片段：`else if (countImageNum == ValidaConstants.WM_NEWS_MANY_IMAGES) { ... }`。
+- 代码片段：`else { ... }`。
+
+画面 12：
+- 展示了 `NewsServiceImpl` 类的 `saveNews` 方法中，根据文章状态发送认证消息的逻辑。
+- 代码片段：`if (ValidaConstants.WM_NEWS_SUBMIT_STATUS == type) { ... }`。
+- 代码片段：`SubmitArticleAuthMessage message = new SubmitArticleAuthMessage();`。
+- 代码片段：`SubmitArticleAuto submitArticleAuto = new SubmitArticleAuto();`。
+- 代码片段：`submitArticleAuto.setArticleType(SubmitArticleAuto.ArticleType.WEMEDIA);`。
+- 代码片段：`message.setData(submitArticleAuto);`。
+
+画面 13：
+- 展示了 `NewsServiceImpl` 类的 `saveNews` 方法中，设置文章状态和创建时间。
+- 代码片段：`news.setCreatedTime(new Date());`。
+- 代码片段：`news.setEnable(true);`。
+- 代码片段：`news.setStatus(type);`。
+
+画面 14：
+- 展示了 `NewsServiceImpl` 类的 `saveNews` 方法中，创建 `SubmitArticleAuthMessage` 并设置数据。
+- 代码片段：`SubmitArticleAuthMessage message = new SubmitArticleAuthMessage();`。
+- 代码片段：`SubmitArticleAuto submitArticleAuto = new SubmitArticleAuto();`。
+- 代码片段：`submitArticleAuto.setArticleType(SubmitArticleAuto.ArticleType.WEMEDIA);`。
+- 代码片段：`message.setData(submitArticleAuto);`。
+- 代码片段：`adminMessageSender.sendMessage(message);`。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1：
+- `Kafka.topic.submit-article-auth=submit-article-auth`
+- `String submitArticleAuth;`
+
+画面 2：
+- `@Configuration`
+- `@PropertySource("classpath:Kafka.properties")`
+- `String adminTest;`
+
+画面 3：
+- `public enum ArticleType{ WEMEDIA, CRAWLER; }`
+
+画面 4：
+- `public class SubmitArticleAuthMessage extends KafkaMessage { ... }`
+
+画面 5：
+- `public abstract class KafkaMessage { ... }`
+- `int retry;`
+- `String type;`
+- `protected abstract String getType();`
+
+画面 6：
+- `public class KafkaSender { ... }`
+- `@Autowired KafkaTemplate<String, String> kafkaTemplate;`
+- `@Autowired ObjectMapper Mapper;`
+- `public void sendMessage(String topic, String key, KafkaMessage<?> message) { ... }`
+
+画面 7：
+- `public void sendMessage(String topic, String key, KafkaMessage<?> message) { ... }`
+- `this.kafkaTemplate.send(topic, key, Mapper.writeValueAsString(message));`
+
+画面 8：
+- `public String getType() { return "submit-article-auth"; }`
+
+画面 9：
+- `public class AdminMessageSender { ... }`
+- `private KafkaSender kafkaSender;`
+
+画面 10：
+- `public void sendMessage(SubmitArticleAuthMessage message) { ... }`
+- `kafkaSender.sendMessage(topic, key, message);`
+
+画面 11：
+- `private void saveNews(News news, int countImageNum, Short type) { ... }`
+- `if (countImageNum == ValidaConstants.WM_NEWS_SINGLE_IMAGE) { ... }`
+- `else if (countImageNum == ValidaConstants.WM_NEWS_MANY_IMAGES) { ... }`
+- `else { ... }`
+
+画面 12：
+- `if (ValidaConstants.WM_NEWS_SUBMIT_STATUS == type) { ... }`
+- `SubmitArticleAuthMessage message = new SubmitArticleAuthMessage();`
+- `SubmitArticleAuto submitArticleAuto = new SubmitArticleAuto();`
+- `submitArticleAuto.setArticleType(SubmitArticleAuto.ArticleType.WEMEDIA);`
+- `message.setData(submitArticleAuto);`
+
+画面 13：
+- `news.setCreatedTime(new Date());`
+- `news.setEnable(true);`
+- `news.setStatus(type);`
+
+画面 14：
+- `SubmitArticleAuthMessage message = new SubmitArticleAuthMessage();`
+- `SubmitArticleAuto submitArticleAuto = new SubmitArticleAuto();`
+- `submitArticleAuto.setArticleType(SubmitArticleAuto.ArticleType.WEMEDIA);`
+- `message.setData(submitArticleAuto);`
+- `adminMessageSender.sendMessage(message);`
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

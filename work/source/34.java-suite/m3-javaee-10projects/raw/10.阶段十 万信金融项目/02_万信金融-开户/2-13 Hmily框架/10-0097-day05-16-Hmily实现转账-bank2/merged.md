@@ -1,0 +1,282 @@
+# day05-16-Hmily实现转账-bank2
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：02_万信金融-开户/2-13 Hmily框架
+- 源文件：10.阶段十 万信金融项目\02_万信金融-开户\2-13 Hmily框架\day05-16-Hmily实现转账-bank2_【海量资源尽在 666java.com】.mp4
+- 时长 9分14秒（音频 554s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 好刚才呢我们把Bank1这个工程里边代码我们整体呢给学习了一下接下来呢咱就说说Bank2那其实呢大家想一下Bank1和Bank2它俩是不是共同用来实现转账这个业务呢那么Bank2这边其实它这个配置啊对吧这个相关的一些代码其实跟Bank1那边应该是非常非常什么呀相似的那咱们接下来一起学习一下Bank2里边相关的一些代码
+[00:31] 我把这些先关掉咱打开Bank2这里边呢我们首先要看的也是对配置文件配置文件里边呢这个其他这些配置我就不再说了啊咱就重点看Harmony相关的这些配置就OK了这些配置你大概瞅一眼你会发现其实跟Bank1那边基本上是什么呀对一样的我们只说不一样的比如说这儿想一想Bank1当时这是什么值啊
+[01:01] 有印象吗对这应该是出我们当时说了出表什么意思对是事物的发起方那么半颗二是李四这边李四这边是不是这个收钱了对不对所以说他这边应该配一个值是什么呀false他就表示是事物的什么呀算一方这个值非常非常重要你两边一定要配对了下边呢当然也有不一样的地方就是这儿嘛操作数据库不一样那边是半颗一这应该是什么呀半颗二其他配置都是一样
+[01:30] 这些不一样我就不再过头说了你看它的端口号是5608刚才那边是56081这些你在发请求访问的时候一定要注意就OK了这配置当然了跟它相配套的是不是还是那个配置类啊这配置类呢你整体看一下跟半颗一那边基本上是一模一样也是读取配用件里边的这些配置项值然后呢给谁啊给这个
+[01:59] 这个叫什么他叫什么卡飞盖是吧然后最终其实是为了创建出来一个引导对象这对他们的框架来说非常重要的一个对象然后接下来还有什么呀其实接下来无非就是实现这个转账的业务功能那么对于半卡二就李四这边他的业务功能比张三那边要干什么简单多了对你看张三那边是不是还得发起什么远程调样啥的对不对李四这边还需要吗不需要李四这边就坐等什么收钱就行是不是他这里边更简单我们打开control了
+[02:29] 啊丢层咱不再看了这个实体内也不再看了然后咱看看这个什么样要他代码简单啊Controller咱进来看一看controllercontroller这里边也是一个方法交易对吧transfer啊传过来一个什么样余额当然这个余额一定是张三那边是不是传过来比如张三要给李四转1000块钱那这儿将来传过来就是什么呀1000块钱因为张三那边是不是要发起远程调用网站是不是发请求吗是这样啊
+[02:57] 那你再看看当时Bank1的那个那个代理对不对非印代理你看里边代理跟这儿是对应的非印非印代理这儿啊你看这儿是不是Bank2Transfer你看这儿是不是TransferBank2不就是整个Bank2微幅的那个基本反路径吗在Pin上它是不是传过来一个余额吗你看这儿是不是传过来一个余额对不对跟这儿是对应着的啊
+[03:26] 然后这里边同样的是不是该调用右层的update的方法来修改李斯的余额他的余额是不是要增加是不是这里边有两个参数这个是什么对转账的金额这个二是什么二大家也能猜出来的是不是半颗二这边是不是李斯的 id这个标识number对不对写死了写死了那这只是一个案例写死了然后接下来咱跟踪Service里边代码这里边代码也是跟咱
+[03:55] 半颗一一样你重点要关注的是不是就是tryconfirm还要cancel这三块代码对不对那咱看一看吧那么三块啊这个学习过半颗一之后半颗二你就能够这个快速上手就这个这个大家应该能猜到了这个方案应该就相当于那个谁呀try里边来try里边这个就是加油try里注解这就是什么呀对trytry里边其实就干一件事
+[04:27] 什么事就是修改什么呀李斯的余额嘛刚才不是传过来一个二这不是那个转向金额吗对不对调低AO层让他增加相应的这个金额就行了很简单就是增删改查当中的一个对修改但是呢他这个上面这个方案上面是不是加了Hemily注解这是Try那跟Try相配套的是不是有个什么呀Conform还有一个什么呀Cancel是不是对应了这两个方法为啥是这两个方法呢你看他这后边
+[04:56] 跟半卡一一样是不是通过注解进行了设置对不对conform对应的就是这个方法这个发表名能自定义吗可以吗前面说这叫abc的话你这就显成什么abc就行这实际上来设置哪一块代码是对应的什么cancel你看我们这个李斯这边是负责收钱的所以说你看conform这边他其实啥事没干就打印了一句话而已他也不需要做啥事他就是收钱的但是如果说这个转账出问题了他这边是不是要做回滚
+[05:27] 回滚的意思就是你可能刚刚收了1000块钱这要干什么呀把这1000块钱干什么呀减掉乘以-1不就是-1000减掉就行所以这个cancel里边他是要做一些事情就回滚但confirm这里边他没啥好做收钱就收钱收到钱了就行了这只是打一句话而已然后呢你再看啊重点观察一下这个confirm啊cancel啊包括这个try他们方法的返回值都是什么呀对不而理想的
+[05:57] 注意了啊这是他们的特点还有一个特别需要注意的就是这三个方法的参数必须保持一致你看是不是一模一样都有两个参数参数的顺序参数的这个类型说的很一样吗一模一样所以这些是不能你随便乱写的不能改的啊一定一定是要保持什么呀一致这是我们在编写代码当中呢一些需要注意的地方要是非常简单
+[06:24] 最后呢我们再给大家强调一下这个还是启动类吧最后就剩一个启动类启动类上面无非还是加那个那个就这块给大家再强调一下就是在扫描组件的时候要把Harmony它的一些API也扫描一下就行了其他你就不用管这是Bank2那么最后呢我们再给大家强调一下就是将来我们在这个我们一会儿是不是要做测试吗将来在运行的时候是这样
+[06:54] 一定要注意谁是发起方事务的发起方Bank1这边是张三要捡钱谁是事务的参与方Bank2他是李四要收钱是吧然后呢你要注意Harmony是那个他是这个整个这个框架是负责这个什么呀他是充当充当谁呀充当这个充当这个事务管理器负责事务的协调管理他呢具体负责推进A B两边的代码
+[07:25] 运行对不对那当然呢由于呢A这边是事务的发起方B这边是事务的参与方所以说他会先执行A这边的Try里边代码这里边主要就是扣减余额然后呢A这边发起非运远程电流到哪到B这边然后就会执行B这边Try里边的代码这里边代码主要是增加30元对不对那在整个这个Try的代码执行过程当中呢
+[07:56] 事务管理器它也会监控tree里边代码执行的时候有没有问题如果都没有问题就执行对confirm如果有问题那就会执行cancel进行回滚操作这个呢咱前面在讲tcc的时候都反复的强调过了这就不再过多说了那如果confirm和cancel里边代码执行的时候出问题了呢是不是可以进行什么呀对重试
+[08:25] 这是充体你观察控制台你会发现它在重生就是你在这一直在这等这个一直不结束一直不结束当然这个等多长时间是不是跟你这配置的是有关系就这个重生次数你还有印象吗那个重生次数只要我这配的都是什么30次这个这个你可能等的时间就会长一些对那30次都都那个啥都都没有成功那那可能我们将来完善的开发的话可能这会有有一个什么人工处理
+[08:56] 这个咱暂时不考虑这是咱整个吧这个我们使用Harmony这个框架把转账这个经典的案例当中的这个分布式事务问题给解决了一下一会呢咱就进行测试
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 TCC（Try-Confirm-Cancel）模式实现分布式事务，通过代码和架构图展示事务管理器协调两个服务（A账户和B账户）的事务操作。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：展示 BankHmilyServer 启动类，配置了 @EnableDiscoveryClient、@EnableFeignClients，并指定 basePackages 包扫描路径。
+画面2：展示 application.yml 配置文件，包含 druid 数据源配置、hmyl 配置、以及 ribbon 超时设置。
+画面3：展示 DatabaseConfiguration.java，其中通过 @Autowired 注入 Environment，并从配置中读取 hmyl 相关属性设置到 HmilyTransactionBootstrap。
+画面4：展示 AccountInfoServiceImpl.java，其中定义了 updateAccountBalance 方法，用于更新账户余额。
+画面5：展示 Bank2Controller.java，其中定义了 @RequestMapping("/transfer") 的 transfer 方法，用于调用 AccountInfoService。
+画面6：展示 AccountInfoServiceImpl.java，其中定义了 updateAccountBalance 方法，用于更新账户余额。
+画面7：展示 AccountInfoServiceImpl.java，其中定义了 confirmMethod 和 cancelMethod 方法，分别用于确认和取消事务。
+画面8：展示 AccountInfoServiceImpl.java，其中定义了 confirmMethod 方法，用于确认事务。
+画面9：展示 AccountInfoServiceImpl.java，其中定义了 confirmMethod 方法，用于确认事务。
+画面10：展示 AccountInfoServiceImpl.java，其中定义了 confirmMethod 方法，用于确认事务。
+画面11：展示项目结构，选中了 hmily-demo-bank2 目录。
+画面12：展示 Bank2HmilyServer 启动类，配置了 @SpringBootApplication、@EnableDiscoveryClient、@ComponentScan，并指定 basePackages 包扫描路径。
+画面13：展示 PPT 页面，架构图显示事务管理器协调 A 账户和 B 账户的事务操作，包括 try、confirm、cancel 三个阶段。
+画面14：展示 PPT 页面，文字说明 TCC 模式需要每个分支事务实现 Try、Confirm、Cancel 三个操作，以及 TCC 的不足之处。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
+
+@SpringBootApplication(exclude = MongoAutoConfiguration.class)
+@EnableDiscoveryClient
+@EnableFeignClients(basePackages = {"cn.itcast.wanxint.hmyl.demo.bank1","org.dromara.hmyl"})
+@ComponentScan({"cn.itcast.wanxint.hmyl.demo.bank1","org.dromara.hmyl"})
+public class BankHmilyServer {
+    public static void main(String[] args) {
+        SpringApplication.run(BankHmilyServer.class, args);
+    }
+}
+```
+
+画面2：
+```yaml
+password: 123
+type: com.alibaba.druid.pool.DruidDataSource
+driver-class-name: com.mysql.cj.jdbc.Driver
+
+hmyl:
+  serializer: kryo #序列化工具
+  retryMax: 30 #最大重试次数
+  repositorySupport: db #持久化方式
+  started: false #事务参与方
+
+hmilyDbConfig:
+  driverClassName: com.mysql.jdbc.Driver
+  url: jdbc:mysql://localhost:3306/bank?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+  username: root
+  password: 123
+
+ribbon:
+  ConnectTimeout: 600 #设置连接超时时间 default 5000
+  ReadTimeout: 600 #设置读取超时时间 default 5000
+```
+
+画面3：
+```java
+@Autowired
+private Environment env;
+
+public HmilyTransactionBootstrap hmilyTransactionBootstrap(HmilyInitService hmilyInitService) {
+    HmilyTransactionBootstrap hmilyTransactionBootstrap = new HmilyTransactionBootstrap(hmilyInitService);
+    hmilyTransactionBootstrap.setRetryMax(env.getProperty("org.dromara.hmyl.retryMax"));
+    hmilyTransactionBootstrap.setSerializer(env.getProperty("org.dromara.hmyl.serializer"));
+    hmilyTransactionBootstrap.setRepositorySupport(env.getProperty("org.dromara.hmyl.repositorySupport"));
+    HmilyDbConfig hmilyDbConfig = new HmilyDbConfig();
+    hmilyDbConfig.setDriverClassName(env.getProperty("org.dromara.hmyl.hmilyDbConfig.driverClassName"));
+    hmilyDbConfig.setUsername(env.getProperty("org.dromara.hmyl.hmilyDbConfig.username"));
+    hmilyDbConfig.setPassword(env.getProperty("org.dromara.hmyl.hmilyDbConfig.password"));
+    hmilyTransactionBootstrap.setHmilyDbConfig(hmilyDbConfig);
+    return hmilyTransactionBootstrap;
+}
+```
+
+画面4：
+```java
+@Service
+public class AccountInfoServiceImpl implements AccountInfoService {
+
+    @Autowired
+    private AccountInfoDao accountInfoDao;
+
+    @Hmily(confirmMethod = "confirmMethod", cancelMethod = "cancelMethod")
+    public Boolean updateAccountBalance(String accountNo, Double amount) {
+        System.out.println("******** Bank2 Service Begin ...");
+        try {
+            accountInfoDao.updateAccountBalance(accountNo, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        return true;
+    }
+}
+```
+
+画面5：
+```java
+@RestController
+public class Bank2Controller {
+    @Autowired
+    AccountInfoService accountInfoService;
+
+    @RequestMapping("/transfer")
+    public Boolean transfer(@RequestParam("amount") Double amount) {
+        this.accountInfoService.updateAccountBalance("2", amount);
+        return true;
+    }
+}
+```
+
+画面6：
+```java
+@Service
+public class AccountInfoServiceImpl implements AccountInfoService {
+
+    @Autowired
+    private AccountInfoDao accountInfoDao;
+
+    @Hmily(confirmMethod = "confirmMethod", cancelMethod = "cancelMethod")
+    public Boolean updateAccountBalance(String accountNo, Double amount) {
+        System.out.println("******** Bank2 Service Begin ...");
+        try {
+            accountInfoDao.updateAccountBalance(accountNo, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        return true;
+    }
+}
+```
+
+画面7：
+```java
+@Service
+public class AccountInfoServiceImpl implements AccountInfoService {
+
+    @Autowired
+    private AccountInfoDao accountInfoDao;
+
+    @Hmily(confirmMethod = "confirmMethod", cancelMethod = "cancelMethod")
+    public Boolean updateAccountBalance(String accountNo, Double amount) {
+        System.out.println("******** Bank2 Service Begin ...");
+        try {
+            accountInfoDao.updateAccountBalance(accountNo, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        return true;
+    }
+
+    public Boolean confirmMethod(String accountNo, Double amount) {
+        System.out.println("******** Bank2 Service commit ...");
+        return true;
+    }
+
+    public Boolean cancelMethod(String accountNo, Double amount) {
+        accountInfoDao.updateAccountBalance(accountNo, amount - 1);
+        System.out.println("******** Bank2 Service rollback...");
+        return true;
+    }
+}
+```
+
+画面8：
+```java
+@Service
+public class AccountInfoServiceImpl implements AccountInfoService {
+
+    @Autowired
+    private AccountInfoDao accountInfoDao;
+
+    @Hmily(confirmMethod = "confirmMethod", cancelMethod = "cancelMethod")
+    public Boolean updateAccountBalance(String accountNo, Double amount) {
+        System.out.println("******** Bank2 Service Begin ...");
+        try {
+            accountInfoDao.updateAccountBalance(accountNo, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        return true;
+    }
+
+    public Boolean confirmMethod(String accountNo, Double amount) {
+        System.out.println("******** Bank2 Service commit ...");
+        return true;
+    }
+
+    public Boolean cancelMethod(String accountNo, Double amount) {
+        accountInfoDao.updateAccountBalance(accountNo, amount - 1);
+        System.out.println("******** Bank2 Service rollback...");
+        return true;
+    }
+}
+```
+
+画面9：
+```java
+@Service
+public class AccountInfoServiceImpl implements AccountInfoService {
+
+    @Autowired
+    private AccountInfoDao accountInfoDao;
+
+    @Hmily(confirmMethod = "confirmMethod", cancelMethod = "cancelMethod")
+    public Boolean updateAccountBalance(String accountNo, Double amount) {
+        System.out.println("******** Bank2 Service Begin ...");
+        try {
+            accountInfoDao.updateAccountBalance(accountNo, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
+        }
+        return true;
+    }
+
+    public Boolean confirmMethod(String accountNo, Double amount) {
+        System.out.println("******** Bank2 Service commit ...");
+        return true;
+    }
+
+    public Boolean cancelMethod(String accountNo, Double amount) {
+        accountInfoDao.updateAccountBalance(accountNo, amount - 1);
+        System.out.println("******** Bank2 Service rollback...");
+        return true;
+    }
+}
+```
+
+画面10：
+```java
+@Service
+public class AccountInfoServiceImpl implements AccountInfoService {
+
+    @Autowired
+    private AccountInfoDao accountInfoDao;
+
+    @Hmily(confirmMethod = "confirmMethod", cancelMethod = "cancelMethod")
+    public Boolean updateAccount
+

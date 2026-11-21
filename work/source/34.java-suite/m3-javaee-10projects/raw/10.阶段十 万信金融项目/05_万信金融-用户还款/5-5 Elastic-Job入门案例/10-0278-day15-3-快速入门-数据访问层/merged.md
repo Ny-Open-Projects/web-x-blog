@@ -1,0 +1,205 @@
+# day15-3-快速入门-数据访问层
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：05_万信金融-用户还款/5-5 Elastic-Job入门案例
+- 源文件：10.阶段十 万信金融项目\05_万信金融-用户还款\5-5 Elastic-Job入门案例\day15-3-快速入门-数据访问层_【海量资源尽在 666java.com】.mp4
+- 时长 15分56秒（音频 957s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 好环境搭建好之后呢咱接下来就开始搞定这个什么呀入门案例咱先新建一个什么呀Maven工厂啊这个你自己建就行了啊然后参考这个目录结构啊你建一些什么呀包以及他的什么呀子包对不对那我这呢都已经建好了接下来我们一起看一看这里边最基本的一些内容啊比如说这个什么呀Maven依赖啊包括这个基本的这个什么呀配置啊包括什么呀启动类啊这三样
+[00:30] 咱一起来先过一遍啊咱先看看这个谁呀这个泡沫文件咱都引入了哪些依赖啊这个web的对不对然后重点你要看这个啊这个呢就是elastic干教普跟sprint整合的一个包那浪不可不再说了然后mybattis plus因为咱刚才说了嘛咱这个业务是不是要查询数据库查询数据对不对那我这呢数据访问层还是使用的mp啊然后这埋circle的驱动对吧srg
+[01:01] 没了大概我们需要导这几个依赖啊然后呢就是这个什么呀Spring的配置文件啊Spring Boot的配置文件这里边呢我们把基本的配置已经编写好了咱一起看一看吧这些大家都比较熟悉啊那这边我挑几个关键点跟大家说一说比如说这个地方这个地方的话大家一看这个大家应该有印象这个是不是表示这个值是可变的了对不对那为什么我这不给一个固定的取值呢
+[01:29] 因为我们是不是要进行这个什么分片查询对不对所以我至少是不是要启动两个以上的服务器是不是那每个服务器的端口一定是什么呀不一样的吧所以这个值是可变的啊比如我第一台服务器57081第二台服务器就是57082啊再来一台服务器可能就是57083这个可以通过那个启动参数进行配置然后这是这个什么呀数据库这一块的这个配置你看我们连接的是那个MP那个数据库对不对然后这是什么呀
+[01:59] mybattiesplus相关的配置这个什么呀XML文件MAPR接口对应的嘛还有这个什么呀这个实体内所在的这个包这些我不再说了那当然呢一会儿呢我们还需要在这里边配置一些什么呀跟elastic-job相关的一些配置咱到时候再说那接下来呢还有一个什么呀启动内咱看看启动内这个没啥好瞅的就是加了一个MAPR scan它是不是扫描那个什么呀MAPR接口
+[02:30] 就扫描这个mybattiesplus那个Mapper接口那接口咱还没写然后呢还有一个什么样实体类user这个比较简单大家看这个user这个实体类对应呢是不是咱刚才说的这个表tb下方线user对吧然后每个属性都对应里边的这个什么呀子段啊然后这里边大量的使用了这个什么叫longbook这个注解你还有印象吗这是生成getter server方法这是生成无参购导这是生成
+[02:59] 带有所有这个什么样属性的这个构造方法这是最基本的一些内容吧咱整体过一遍那咱接下来就开始编写代码来实现咱这个入门案例然后咱看看这儿吧上面这个这些配置我们刚才是不是过了一遍也比较简单咱接下来看看这儿这里边呢有一些配置是需要我们增加上去手工增加啊这因为这跟这个elastic杠叫不是有关系的
+[03:32] 咱先看看都配了什么东西第一个配置呢其实是设置Zookeeper这个服务的这个地址以及端口号那我们本本机肯定是lookhost端口号默认2181这个你照着写就行了这个其实跟我们前面说了Zookeeper跟什么样有一个是一样它是一个服务微服务注册与管理中心是不是那我的微服务启动的时候是不是要找到这个Zookeeper然后进行什么样注册那你怎么找着这个Zookeeper你是不是得知道Zookeeper这个服务的
+[04:03] IP地址以及什么呀端口号嘛第二个呢是Zookeeper内部的一个什么呀名称空间啊这个值你是可以随便给的啊这个名称空间我大概介绍一下大家知道啊在我们整个这个软件架构当中啊这个Zookeeper呢它是一个通用的一个什么呀服务就是你你任何项目对吧任何微服务都可以往这个Zookeeper里边进行什么呀注册就是你可以共用啊共用一个Zookeeper那你不同的项目不同的业务
+[04:34] 我为了便于这个区分对不对我可以设置这个什么名称空间啊比如说呃这个跟P2P项目相关的这个业务这个定时任务我可以起个什么名字对吧呃将来我们还有别的一些项目或者别的一些业务哎你可以再换一个名字这就是名称空间相当于就是分分类吧然后接下来这两个值就非常非常重要了啊这个myjob.count3这是表示我们要我们设置的这个什么分片总数
+[05:03] 我们前面在讲重要概念的时候说分片就是分工对吧三表是什么意思呢就是我又有一个活我分给几个人去干三个人去干那其实这就是什么意思我要启动三台服务器去完成某个什么什么任务三是这个意思下面这个大家一看应该就明白什么意思吧是不是那个Crow表达式对不对这个表达式表达什么意思什么意思是不是每隔
+[05:31] 五秒钟执行一次对不对每隔五秒钟执行那大家看一看啊下边这些配置是属于咱自定义的配置啊自定义的配置就是等号前这个键是咱自己定义的啊可不是框架里边的配置是完全咱自定义的为什么要把这些配置啊这些值呢搞成配置搞成自定义配置对不对放到这里边是因为这里边好多值它比较灵活可能经常会变比如分片的总数啊
+[06:00] 这个这个什么定时策略啊对吧我们可能呃根据这个业务的需要可能会经常去改这个值啊所以说呢我们就把相关的这几个值吧我们就作为自定义配置啊放到这个配置文件里边那咱接下来的话把这一块我们就拿过来这个我就不带你瞧了吧这个因为咱一看都明白这是干啥了就放到这儿对不对这是配置吧咱就搞到这儿了
+[06:30] 然后咱再往下看启动类咱不再说了包括这个实体类咱刚才都说过了对不对那咱接下来就要把数据访问层给编写一下前面咱提到过我们说了咱这个业务就是查询MP这个数据库里边哪个表的数据对TB下滑线U的就查这几条数据六条数据很简单所以说呢我们是不是需要编写数据访问层数据访问层其实很简单是不是主要就是有一个什么呀user Mapper
+[06:59] 这样一个接口就是Mapper接口就行让他继承什么呀baseMapper接下来回到ID当中找到DAO这个包然后右键新建一个Mapper接口叫什么呀userMapper是吧userMAPP好然后我们看一下这个什么呀我们看一下这个方法的名字叫query user by id我们要跟讲义保证一致query
+[07:34] user by id好这么一个方法那我们重点要讨论的就是它有哪些参数啊以及有什么样的返回值咱先说返回值吧你看看我说要查这个点你说应该返回什么类型的值那肯定得是一个什么呀集合嘛对不对因为你查出来是多条数据说这个方法的返回值很简单是一个list的集合
+[08:02] 范型不用说了是不是就是user类型是不是user类型这是这个什么呀反位值然后参数呢参数的话这个你需要思考思考啊我们是不是要进行分片查询对不对你比如我刚才说的呃我们可以干什么呀按照奇数偶数对吧进行平均一个什么一个一个一个分片都可以啊那我们准备根据这个谁每个字段id这个字段啊根据id这个字段
+[08:34] 怎么分片呢我想尽量的平均去分平均分什么意思呢比如说我有两台服务器那就是每个服务器查几条三条那我要是有三台服务器呢有三台服务器每个服务器就应该查几条两条明白什么意思吗我最终想就是尽量的给它平均分配那这个查询该怎么实现呢对不对那咱们先来思考思考你看比如说举个例子我有
+[09:02] 我分片是三片吗刚才我们说了对吧三片其实就是相当于是什么呀三台服务器是不是三台服务器然后呢一共几条数据啊六条数据然后你大概算出来每台服务器应该是几条对每台服务器差什么呀对两条数据那这个到底怎么算出来那我将来这个这个什么呀
+[09:37] 我不一定是6条数据对我有可能是9条9条数据的话这应该就是什么对美台服务器应该查的就是什么3条对吧那我这个咋进行分工我们刚才说要根据谁ID吗怎么分工是不是你看我们这个VL条件这么写行不行那VLVL前面我就不再说了你都知道是咋回事VL什么样VLID你看好了除以除以谁除以这个3
+[10:06] 三是那个分片数对不对分片总数总数然后让它等于谁呢等于等于这个分片值啥意思呢三台服务器这个三是不是就是这个分片总数对吧那这个分片值其实就是这三台服务器的一个序号注意序号是从零开始的就零一二明白吧
+[10:34] 这叫分片值就是每台服务器的现在一个编号是从零开始的啊那你看我要是这么写512条件我能达到最终这个效果吗你看一下啊我把这个所有语气给你补充完整SELECT FROM谁呀对TB USER然后WHERE你看看后边这个条件咱一起看一看啊
+[10:57] 这个分件总数不用说了它的值是不是就是3对吧ID除以3我要的是不是余数我这是求余数的余数的话它那个函数你看有印象吗叫MODmycircle里边对有个函数叫MOD它就是求余数这么来写就是拿着第一个参数除以第二个参数然后得到它的这个什么呀余数得到它的余数
+[11:26] 来我们举个例子啊就拿着下来这些数据举例子吧你比如说这个第一条数据ID是1对吧1除以几啊除以3嘛对不对1除以3余数是多少余数啊我要余数余数是多少大家算一除以3余数是多少一除以3它余数是1嘛对不对那如果啊这个分辨值是1是不是就成立了那成立的意思就是第一条数据会被谁查询到对编号回1
+[11:55] 这个服务器查了明白什么意思吗这其实相当于在进行分工ID是2呢2除以3余数是多少余数是2对吧那余数是2的话他将来这条数据就会被什么对编号回2的这台服务器查询到一次往后推大家应该都能猜出来啥意思了3除以3余数多少0对不对他就会被分配到什么对
+[12:23] 编号会0的这台服务器上进行什么样查询往后我就不再说了你自己算啊所以说呢我们要想进行分片啊或者说进行分工我们是需要加这么一个条件的就是根据ID根据ID具体的规则呢就是我想尽量的就是平均分配平均的进行这个什么分工那我就拿着ID除以你这个什么总的这个服务器的这个数量就是总的分片数
+[12:49] 然后呢看它的值是等于0等于1还是等于2是不是就平均分配到这三台符记上你看什么意思吧这是这条搜索语句至关重要你看咱们这个什么呀讲义的语言你看他刚才这个搜索语句是咋写你看三星from这个边where你看mod是不是咱那个函数对不对你看这是分片总数后边这个是什么呀对那个那个分片项或者那个分片值
+[13:19] 所以我们通过分析这个搜索局你会发现我们这里边需要不需要参数需要几个参数两个参数是不是好咱接下来的话把这个方法当中的这两个参数给它补上一个叫shard 安静sharding什么我们跟讲义保持一致sharding total count还有一个是sharding item分片项就是哪一台服务器是不是所以说我们需要两个参数
+[13:56] 然后呢咱这个方法咱就定好定好之后呢我们是不是要通过这个什么呀slack的这个注解啊把这条搜扣语句给他写出来那就是slack的新对吧form什么呀tb下销线user where我们刚才说了是不是要这个余数啊对不对谁呀id除以谁呀是不是除以这个值对不对分片总数分片总数
+[14:26] 那这里边是不是要写那个DAO刃大果号这里边要写什么呀我们用井号吧那你就写这个值就行了呗然后这个余数等于几呢看看它等于不等于某一个什么呀分片项那这后边这个值是不是也得这么子来写大家看是不是啊我们跟蒋英做一个对比没错吧对这个值从这儿去后边这个值从这儿去
+[14:59] 然后我们把这个拍二母这个注解也得给他加上你给他加上吧这样这个可动性会更好一些啊这个值得改一下啊然后倒一下包好大家看我们目前这个麦克接口我们定义了一个方法对吧有两个参数和一个反位值然后呢我们要执行的似乎语句是这么样的一个似乎语句啊最后呢别忘了我们这个麦克接口这么写个不行啊我们得继承什么呀
+[15:38] mybattiesplus的这个谁啊对base什么呀然后指定范形就是这个谁啊u字是吧我们得把这块加上就ok了这是我们的数据访问层就搞定
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 Elastic-Job 框架在 Spring Boot 项目中实现分库分表的定时任务，包括项目初始化、依赖配置、数据源配置、实体类定义和分片查询接口的编写。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示项目结构，目录包含 src/main/java、src/main/resources、src/test 等标准 Maven 结构，以及 application.properties 配置文件。
+画面2：展示 pom.xml 文件中添加 Spring Boot Web 依赖。
+画面3：展示 pom.xml 文件中添加 MySQL 数据库驱动依赖和 Lombok 依赖。
+画面4：展示 application.properties 文件中配置 Spring Boot 的 server.port、数据源连接信息、MyBatis 的 Mapper 文件路径和类型别名包。
+画面5：展示 User.java 实体类，包含 ID、用户名、密码、姓名、年龄等字段，并使用 @TableId 和 @TableField 注解。
+画面6：展示 User.java 实体类中 @TableId 注解的 ID 字段。
+画面7：展示 application.properties 文件中配置 ZooKeeper 服务地址、作业命名空间、分片总数和 cron 表达式。
+画面8：展示 UserMapper 接口定义，包含注释说明分片查询逻辑。
+画面9：展示 UserMapper.java 文件的初始状态，准备编写分片查询方法。
+画面10：展示 UserMapper.java 文件中定义分片查询方法的返回类型和参数。
+画面11：展示 pom.xml 文件中添加 Elastic-Job 依赖。
+画面12：展示 UserMapper.java 文件中导入必要的包。
+画面13：展示 UserMapper.java 文件中编写分片查询方法的 SQL 语句。
+画面14：展示 UserMapper.java 文件中完成分片查询方法的定义，继承 BaseMapper 并使用 @Select 注解。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```
+elastic-job-Spring Boot CA\Users\ap
+├── .idea
+├── src
+│   └── main
+│       ├── java
+│       │   └── com.ithema.elasticjob
+│       │       ├── config
+│       │       ├── dao
+│       │       ├── job
+│       │       └── pojo
+│       └── resources
+│           └── application.properties
+└── target
+```
+
+画面2：
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+画面3：
+```xml
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.47</version>
+</dependency>
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <optional>true</optional>
+</dependency>
+```
+
+画面4：
+```properties
+server.port=8081
+spring.application.name=elastic-job-Spring Boot
+logging.level.root=info
+
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/mp?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&allowMultiQueries=true
+spring.datasource.username=root
+spring.datasource.password=123
+
+# 设置Mapper接口所对应的XML文件位置
+mybatis-plus.Mapper-locations = classpath*:Mapper/*.xml
+# 设置别名扫描路径
+mybatis-plus.type-aliases-package = com.ithema.elasticjob.pojo
+```
+
+画面5：
+```java
+@TableId("ID")
+private Long id;
+@TableField("USER_NAME")
+private String userName;
+@TableField("PASSWORD")
+private String password;
+@TableField("NAME")
+private String name;
+@TableField("AGE")
+private Integer age;
+```
+
+画面7：
+```properties
+# ZooKeeper服务地址
+ZooKeeper.connectstring = localhost:2181
+# 作业命名空间
+myjob.namespace = elastic-job-example
+# 分片总数
+myjob.count = 3
+# cron表达式(定时策略)
+myjob.cron = 0/5 * * * * ?
+```
+
+画面8：
+```java
+public interface UserMapper extends BaseMapper<User> {
+    // 通过mod取余进行分片
+    @Select("SELECT * FROM `tb_user` WHERE mod(#shardingTotalCount)#= #{shardingItem}")
+    List<User> queryUserById(@Param("shardingTotalCount") int count,
+                             @Param("shardingItem") int item);
+}
+```
+
+画面10：
+```java
+List<User> queryUserById(int shardingTotalCount, int shardingItem);
+```
+
+画面11：
+```xml
+<dependency>
+    <groupId>com.dangdang</groupId>
+    <artifactId>elastic-job-lite-spring</artifactId>
+    <version>2.1.5</version>
+</dependency>
+```
+
+画面12：
+```java
+import com.ithema.elasticjob.User;
+import java.util.List;
+```
+
+画面13：
+```java
+@Select("select * from tb_user where MOD(id,#{shardingTotalCount})=#{shardingItem}")
+List<User> queryUserById(@Param("shardingTotalCount") int shardingTotalCount,
+                         @Param("shardingItem") int shardingItem);
+```
+
+画面14：
+```java
+import com.baomidou.mybatisplus.core.Mapper.BaseMapper;
+import com.ithema.elasticjob.User;
+import org.apache.ibatis.annotations.Select;
+import java.util.List;
+
+public interface UserMapper extends BaseMapper<User> {
+    @Select("select * from tb_user where MOD(id,#{shardingTotalCount})=#{shardingItem}")
+    List<User> queryUserById(@Param("shardingTotalCount") int shardingTotalCount,
+                             @Param("shardingItem") int shardingItem);
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面8：PPT标题为“5. 数据访问层”，下方展示 UserMapper 接口定义代码。
+画面7：PPT标题为“2.2 入门案例”，下方展示 application.properties 配置文件内容。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+

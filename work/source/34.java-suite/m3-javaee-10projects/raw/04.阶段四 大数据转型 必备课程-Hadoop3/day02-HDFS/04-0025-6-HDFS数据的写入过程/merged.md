@@ -1,0 +1,102 @@
+# 6-HDFS数据的写入过程
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day02-HDFS
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day02-HDFS\6-HDFS数据的写入过程【海量资源尽在 ubkz.com】.mp4
+- 时长 18分0秒（音频 1081s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 我们来学习HDFS文件的写入过程也就是说如果我向HDFS上传一个文件那它是如何将这个文件存储到HDFS上呢我们来看一下这个流程咱们这里呢把这些流程呢通过文字的方式给大家写了一下那这个呢我接下来通过画图的方式给大家详细的讲一下这个过程好在讲之前呢我们先来看一下我们的HDFS在这里呢
+[00:28] 我访问node01然后50070这个是我们NameNode的一个访问端口接下来我来看我们的文件系统好这个就是我们的HDFS文件系统比如说呢我想在这个里边有个目录叫user目录我想在这个user目录里边上传一个文件比如说叫A.T.A.T那上传之后它是如何把这些把这个文件保存在这个文件系统呢
+[00:59] 来我们通过画图的方式那我们知道HDFS呢它是有一个NameNode它是一个主节点这是一个NameNode然后呢有很多的DataNode这是DataNode有三个DataNode然后呢它们之间呢有NateNodeNameNode来管理原数据好接下来我们来一个需求这边呢有一个客户端也就是我们的Client
+[01:57] 这个客户端需要去上传一个文件这个文件是一个A.TAT这个文件多大呢我们认为是300兆如果说这个客户端要向HDFS上传文件这里边我们来看看它的一个步骤首先大家知道我们的文件是300兆这个时候这个文件是需要被切片的
+[02:34] 也就是由客户端来进行切片那把它分成多个block那我们来看一下300兆的文件一个300兆的文件我们来画一下那这个文件呢根据我们的切片的大小每一个block是128兆那么它就会被切成三个block第一个第二个和第三个我们把它着一个色这是第一部分第二部分还有第三部分
+[03:07] 我也给它编个号这个叫blk1blk2blk3好这是三个block那么切完之后呢咱们来看这个文件上传的一个过程首先呢客户端把这个文件切成三个block之后呢他需要做第一件事情就是向我们的NameNode发出一个请求告诉NameNode
+[03:39] 我要去上传一个文件A.td第一步就是请求发出请求请求什么呢上传A.td那么NameNode收到这个请求之后呢NameNode需要做一件事情什么事情呢它需要去它需要去在这个NameNode的原数据这个系统里面呢检测我有没有这个上传的权限还有呢
+[04:14] 去检测这个文件是否已经存在比如说呢我上传A点贴地我上传到哪个目录呢我要上传到user目录好根目录下面user那么他需要去看看这个user目录是否存在而且呢看一下user目录中是否已经有了这个A点贴地所以说呢在这里我们认为他做了第二步这个第二步呢要做一个做一个权限做一个上传
+[04:46] 来我们来做一个上传全线检测OK要做这么一件事情也就是检测一下我们是否可以上传好那么他会做完这个事情做完这个事情之后呢接下来他会做第三步那么第三步假如说我们可以上传这个时候他会给我们的客户端一个恢复告诉我们的客户端可以上传这是第三步可以上传我把这个图呢
+[05:22] 向右边来一点好那么客户端收到了这个上传的一个应答之后呢接下来客户端又会做一件事情那他呢又会向我们的服务器发出啊我要上传第一个block这是第四步这个第四步呢我们写到这里就是请求上传就是block1.ke因为我们这个文件被切成了三个block他要求上传
+[06:09] 这个blockOK那么我们的name node呢收到了这个block1的上传请求之后呢接下来它又会做下面一件事情我们认为是第五步因为呢这个block呢要存的话呢是存在具体的data node里边它要去检测它要去检测检测一个叫data node啊这个信息池这个信息池里边呢它保存了各个data node的一些情况
+[06:44] 你比如说呢你这个DataNode的数据是否已经存满了或者说你这个DataNode呢某个DataNode呢是否当机而看哪个DataNode呢它的空间呢比较充裕那么它就要检测这些信息好检测完之后呢它去会去给出一个方案比如说呢我这个block呢我要存在哪些DataNode那每一个block是不是有三个副本呢它会推出三个DataNode比如说呢我们说DataNode
+[07:14] DN1DN2好DN3那这三个DataNode呢是可以存储block1这个这个block的那这个时候呢他就会把给出的这个方案这个block信息啊再返回给我们的client也就是客户端来我们来看一下好他就会把这个返回给我们的客户端这个是我们的第六步好第六步将将这个
+[07:54] data node列表返回给codeclant好那么这里边呢返回的比如说是dn1dn2还有呢dn3那么clant收到了这个一个block这么一个data node列表之后呢接下来注意这个时候clant呢不会再和name node之间呢直接通信了它接下来会找我们具体的data node也就是说
+[08:29] 比如说呢有三个Data Node那我需要将这个第一个block存到这三个Data Node接下来他开始做第七步那么这个时候他先找到Data Node 1Data Node 1找完之后干什么呢他会在这个客户端和这个Data Node 1之间呢建立一个管道建立一个管道管道呢你就理解成一根水管这根水管呢他可以去传数据建立一个管道我就模拟一下
+[08:59] 好这是我画的一个蓝色的这是第七步这提及不就是和data node之间之间建立管道这个管道呢叫pipeline叫pipeline那么建立管道呢注意因为呢我们这个block呢要有三个副本那这里边呢它给出来三个data node这个时候我们不仅要和这个第一个data node之间建立管道
+[09:33] 同样的那它呢和后面这个Datano的之间也要建立管道来我们再来画一下好和这个Datano的之间也要建立一个管道这是一个管道同样的你给我的列表之间呢都会建立一个Pipeline也就是管道好这个管道呢就建立成功了所以这是第七步和Datano的之间建立Pipeline那这个里边呢这个地方呢我们认为也是第七步
+[10:11] 这个是建立pipe line这个地方建立pipe line这个地方也是建立pipe line那么把这个pipe line建好之后呢第七步完成接下来我们来开始第八步第八步做什么事情呢第八步我们开始传递数据我把第八步呢放在这个位置好第八步那么我们的code开着clant开始发送
+[10:56] 这个发送数据的时候呢它会和这个Data Node之间呢建立一个stream流就是网络流来发数据那发数据它怎么发呢大家注意它把这个比如说这个block呢第一个block是128兆它不是一次性的把这个128兆发过来它是把这个block呢切翻成很多的package这个时候呢注意就是将一个将block数据
+[11:26] 切分成拆分拆分成一个什么呢一个个的packagepacketpacket这个packet呢是多大呢一般是64kok这是64k好了我呢我呢用一个用一个小方块来描述这个数据稍等你比如说呢这里呢我画一个小方块然后呢我来模拟一下好比如说呢这就是一个packet
+[12:03] 它是将这个block里面的数据拆开成一个个的packet来发发这样发好当发到这个datanode之后呢注意这个datanode会做一件事情会做一件事情什么事情呢假如我们认为是第九步那它会将数据保存保存到这个某一个目录保存某一个目录比如说呢它会保存的一个目录叫data目录好注意
+[12:32] 这个时候呢每一个Data Node会将这个数据先保存一下好保存完之后呢接下来它会将这个数据呢继续向后发这地方我再把这个复了一下它会将这个继续向后发好继续向后发那么第二个Data Node拿到这个之后呢它也会将这个数据呢保存在一个目录好然后呢它拿到这个之后呢它也会继续向后发来把这个呢继续向后发
+[13:02] 好发到第三个DataNode里面去好发完之后呢他也会去做这么一个事情保存这个数据好到此为止大家会发现每一次发这个packet他都会在三个这个DataNode列表里面呢分别把这个数据进行保存好保存一个packet之后呢他接下来还会干第二件事情那么当他成功保存之后呢他会给我们的
+[13:30] 前边这个地方一个硬打它有个硬打机制比如说保存成功了我来看一下它会给一个硬打好给个硬打比如说我这里面画第10步这个硬打叫AK硬打机制好那么第三个电信路的把这个硬打机制给第二个那第二个呢同样的它会继续向前面给个硬打机制
+[14:09] 这个地方呢我们认为也是第十步好给他个硬拿记者那么这个第一个内蒙诺的收到之后呢他也会把这个硬拿记者呢给我们最终给我们的客户端好他是这样子那这个地方呢我就不再画了这是第十步给个硬拿记者好那么发完第一个packet之后接下来他就会发第二个packet然后呢同样的保存然后再继续向后发packetpacket发完packet之后呢又会给个硬拿记者就是告诉我们的客户端
+[14:39] 我这个packet收到了好那么依次累推那它会呢把整个block的数据呢全部向后发好发送成功发送成功之后呢我们的client就会收到收到一个应答机制那这个时候呢client呢就知道我这个packet已经发送完了那么这个时候我们的第一个block呢就已经成功的在这三个datanode里边呢已经存储了
+[15:08] 那也就是说一个block已经存了三个副本好存完之后呢相当于第一个block成功存储那第一个block成功存储之后呢接下来注意我们的客户端又会做同样的事情向我们的Name node里边请求上传第二个block好那么这个过程呢和我们刚才讲的过程是一模一样的好这是它的一个整个的一个
+[15:37] 执行的流程我们再简单说一下第一步第一步首先我们的客户端呢需要将我们的文件呢进行切分成不同的block好不同的block之后呢接下来向我们的NameNode发出请求要求上传这个文件并且告诉我上传到哪个目录那NameNode收到之后呢去检测你有没有能力或者说你可不可以上传做一个权限检测好如果说可以上传
+[16:06] 给我们的客户端一个应答表示可以上传那么如果可以上传之后呢接下来我们的客户端需要上传第一个block那这个Name node第五步收到这个上传的一个block请求之后呢它会检测我们哪些Data node是可以用的或者适合你保存数据给出一个列表同样的它会第六步它会把这个Data node列表发送给我们的客户端
+[16:36] 当把这个列表发送给客户端之后我们的客户端呢需要给每一个Data Node去建立一个Pipeline也就是管道这个管道呢你认为是一个一根水管然后呢直接连通各个Data Node接下来我们在存这个上传数据的时候呢它并不是直接把block的数据全部给我们的每一台Data Node而是把这个文件呢
+[17:04] 切分成每一个packet这个packet呢是64k好切分成packet然后呢开始在这个管道中传输数据好传一个datanode那就把这个文件的数据呢保存在data保存在一个目录然后传一个保存在目录传一个保存在目录OK传完第一个packet接下来传第二个packet每传一个packet呢那这个时候呢我们的datanode会给对方一个应答然后应答应答最后呢把这个应答呢给
+[17:33] 好那么这样子的话呢我们总会把第一个block成功的存储在这三台D3中的里面当第一个block存储完之后呢接下来又重复刚才的步骤刚才的步骤然后我们要请求上传第二个block好那么依次类推这就是它的一个整个的一个执行过程好我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲HDFS文件写入和读取过程，包括客户端与NameNode交互、数据块分发至DataNode的机制，以及通过Web界面查看HDFS目录结构。
+
+2) 按时间顺序列出每张画面的要点：
+
+画面1:
+要点：展示HDFS文件写入过程的文字说明，包括Client与NameNode通信、数据块分配给DataNode等步骤。图3-7显示了HDFS数据写入过程的架构图。
+
+画面2:
+要点：标题为“1.7. HDFS 文件读取过程”，开始介绍文件读取流程，第一点说明Client向NameNode发起RPC请求以确定文件block位置。
+
+画面3:
+要点：继续展示HDFS文件写入过程的文字说明，图中光标停留在第4点，描述Client请求DataNode建立pipeline的过程。
+
+画面4:
+要点：展示HDFS文件写入过程的详细说明，包括fsimage与edits文件的管理机制。同时，浏览器窗口显示Google搜索页面。
+
+画面5:
+要点：浏览器窗口中地址栏显示“node01:50070”，准备访问Hadoop的Web管理界面。
+
+画面6:
+要点：浏览器地址栏更新为“node01:50070”，准备访问Hadoop的Web管理界面。
+
+画面7:
+要点：浏览器访问Hadoop的NameNode信息页面，显示Hadoop版本、集群ID等信息。
+
+画面8:
+要点：显示Hadoop NameNode的Overview页面，包含启动时间、版本、编译信息、安全模式状态、文件块统计和内存使用情况。
+
+画面9:
+要点：显示Hadoop的Browse Directory页面，列出HDFS根目录下的文件和目录，包括权限、所有者、大小、修改时间、复制数、块大小和名称。
+
+画面10:
+要点：继续展示Hadoop的Browse Directory页面，光标在页面底部。
+
+画面11:
+要点：打开绘图软件，准备绘制HDFS文件写入过程的示意图。
+
+画面12:
+要点：在绘图软件中绘制了HDFS文件写入过程的示意图，包括Client、NameNode和三个DataNode，标注了上传请求、权限检测和数据块分配。
+
+画面13:
+要点：在绘图软件中完成HDFS文件写入过程的示意图，标注了Client上传文件a.txt到/user目录，NameNode进行权限检测，以及数据块blk1、blk2、blk3分别分配给三个DataNode。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**：
+
+无。
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+
+PPT标题：
+- 画面2: “1.7. HDFS 文件读取过程”
+- 画面12-13: “a.txt 300M”、“Client”、“namenode”、“datanode”等节点，以及“1:发出请求，上传a.txt /user”、“2:上传权限检测”、“3:可以上传”等标注。
+
+架构图/流程图结构：
+- 画面1: 图3-7，Client → NameNode → DataNode（多个）
+- 画面12-13: Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个），Client → namenode → datanode（三个
+

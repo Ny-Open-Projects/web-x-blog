@@ -1,0 +1,173 @@
+# 13-Activiti中流程变量案例的POJO类准备
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：1.Activiti7/Activiti7-day04-进阶2
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\1.Activiti7\Activiti7-day04-进阶2\13-Activiti中流程变量案例的POJO类准备_【海量资源尽在 ubkz.com】.mp4
+- 时长 12分24秒（音频 744s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 那刚才我们已经把我们的这个流程定义的图已经制作出来了下面我们就可以直接的来设置我们的这个global类型的这个流程变量这个流程变量主要就是我们的这个请假天数对吧而这个请假天数在这里边我们可以看出来它是holic对象.number对吧要注意我们在这边相当于把这个难度提升了一下
+[00:30] 因为正常我们如果设置为Number的话只需要设置一个变量就可以了只需要设置一个Number类型的变量完了让它的这个值具体给它一个具体的值这样我们就可以做到这个效果那现在我们这样做呢相当于我们就需要首先得有一个Holler的这样的变量这样的一个对象对象然后有一个Number的属性取值这样才可以做到这个效果
+[00:59] 好,那我们这边再回到这边来当我们的变量的值设置好了将来我们的流程具体的走向就可以决定了,对吧那我们还是按这种方式来比如说启动流程我们打算是在我们的流程启动的时候我们就把变量的值给它设置好然后将来就决定了它具体怎么去走好,咱们可以这样,可以看到
+[01:25] 我们可以还是可以使用我们的这个map集合来进行指的设置这个具体的这个大致的步骤是这样的比如说我们这里头你可以看到它是直接用我们的这个用我们的这个lambor来设置指的对吧我们可以搞一个搞一个这个holding对象这个对象的getlambor属性直接这样来复制这样复制呢在我启动的时候在我们的这个runtime Service的startup process instance by key
+[01:54] 而第二个参数就是我们的这个value各位可以看到跟我们之前的这个assign设置值其实基本上是一样的对吧除了使用我们的这个启动流程实例启动我们的这个流程实例的时候设置值那我们也可以在办理任务的时候去设置值也可以是当前流程实例设置值或者是通过当前任务来设置
+[02:24] 这里面有很多种设置方式对吧那设置的时候我们不仅呢我们不仅可以直接给单独的这个Numbo复制比如说我们这里头直接就给给这个Map结构里头取的是我们的Numbo而Numbo真正的指示呢就是Holiday对象的Numbo对吧当然我们也可以在这里头直接把一个对象放到Map结构里头去我们打算呢这一次我在启动流程实例的时候
+[02:54] 直接放对象这样的话我们呢一起可以来看到这个测试的效果好下面我们基本上就要来实现这个效果那要实现这个效果的话首先呢我们还是回到我们的这个project里面来那我们先来把我们的这个holiday的这样的一个对象需要创建出来HOLIDAY这就是我们的这个holiday的这样的一个对象
+[03:22] 这个对象我们在设置的时候各位同学你要注意一下这个就相当于是我们的一个请假的实体类对吧这是我们的请假实体类它里边主要就是携带我们请假的相关信息对吧这个请假的具体相关信息有哪些比如说我们在这里头来一个叫做integra类型的ID再去整一个比如说实践类型的请假当前到底是谁去请对不对
+[03:52] 这个地方就有一个assign对吧比如说我们的申请人或者叫申请人就是叫做请假的人员holiday name对吧请假申请人这个地方代表的是我们申请人的名字好除了这个我们还可以再去设置我们还有一些什么样的类型可以设置比如说我们在这里头再来一个
+[04:21] 就是我们的begin time对吧begin date就是我们的开始时间对吧开始日期然后再来一个我们比如说我们再去设置一个叫做结束end date对吧这个就是我们的结束时间结束日期是不是好那我这个也设置好了那我们还可以设置什么呢
+[04:48] 比如说当我这个请假还有一个就是我们的这个天数对吧而请假天数呢这个有可能会一个是一个小数你比如说请半天对吧或者请一天半对不对这个时候我们可以给他来一个比如说叫做我们的float那这个就是叫做lamb对吧这个代表的是请假天数请假天数啊好我们还可以搞一个比如说我们在这里上再来一个叫做
+[05:19] 叫做我们的这个请假的理由对不对比如说你是为什么去请假对吧这个地方就是叫做啊室友对不对除了这个呢我们比如说还有一个就是叫做请假的类型对吧类型比如说叫做type这个就是叫做请假类型比如说是病假还是婚假对不对这就是我们在这边给各位啊
+[05:48] 设置的这样的一些曲子啊那我们下一个步骤就可以去生成出它的Git Ct对不对然后全都选上对吧把它们全都选中啊这样我们OK一下对吧好这样我们就把这个请假的实体内给它写完了啊那下一个我们就可以呢把刚刚我们所洗我们所刚刚在这里要制作的这个流程呢给它要发布出去对吧
+[06:17] 要发布出去的话我们这边还可以做一个准备工作那就是我们为了能够发布它我们的这些节点我们看一下这个都是有值的那你比如说这个任务到底谁去完成但是我们的这个assign就并没有具体指定值对不对你可以分别任务也可以用我们的这个变量用yellow比拉斯来做那你也可以在这里直接给它用具体的值对不对
+[06:46] 比如说这是张商好你看我这里头如果简单的做的话这是李四比如说这是我们的赵六可以吗赵六好然后这个地方是我们的王武叫做王武这样我们基本上就把这些也都实现了我们这个图一旦做好了我们可以这样把当前的图直接copy我现在打算给他去
+[07:16] 背诿一下各位是这个意思我们打算把它背诿出来然后这个时候我可以进到我们的这个资料中那就是我们Holly4为什么要把它背诿出来呢所以原因是我这边现在要把它转成要去把它这个扩展名给它改了改成叫做XML这改的主要目标是我们
+[07:45] 希望有一个png的图片制作出来啊那现在我们啊改出来了对不对那现在就可以degramdegram是show好这时候我们就会用bpmn的这个结构给它打开啊那打开它就变成这个结构了对吧那我们下一个工作就可以直接在这个地方去给它另存为一张图片啊那比如说我这个地方啊给过为另存的时候呢
+[08:14] 我就直接放到我机器的这个记盘就是叫activity对吧好你比如说我这个地方放到我们的这个第四天这个资料中去对吧那具体它的这个起名我这边也可以起一下homiday holiday png应该是叫做holiday4 png对吧好没关系我们这边可以到这个地方来看一下它的这个结构
+[08:43] 我们在这个上改个名字也是可以的叫Holo4PNG我们打开看一下就是这个结构这个图我们一旦给它做好了下面我们就可以直接这就是我们刚刚保存的图片再次回到这个部分来康小微叫Holo4PNG当我们改完这个我们就可以进一步把Holo4的XML文件
+[09:12] 我们重新再给它改回来对不对改回来叫做BPMN结尾BPMN结尾Refact这样我们就相当于把Holo第四的流程定义的图基本上就给它做完了对不对准备出我们的这些前期的一些准备工作我们的实体内是不是也准备出来了这些准备工作各位
+[09:42] 是否是充足的呢对吧那我们这个地方之前呢给各位在讲我们的这个流程变量的时候各位啊应该要记得一点就是我们在讲这个cell write这一波类型的时候各位是否还能想得起来我们就说了如果就要将一个POGO存储到我们的这个流程变量中必须实现序列化接口那我们看一下刚刚我们的做这个操作的时候是否考虑了这一点呢对吧
+[10:11] 我们这边应该说是缺乏这一点的我们要去加入一个叫做CLSERI对吧就是这个部分加入它对不对要把它加入进来然后把它加入加入好了其实我们这个部分就已经算是完成了我们前期的准备工作这个地方是各位要注意的注意如果是我们的PoGO类型
+[10:41] 如果是我们的POGO类型一定要实现我们的使用regible接口要实现这个接口否则我们后面在存储这个POGOS就会
+[11:13] 报异常一会我们可以看一下这个效果如果你要测这个效果你也可以把这个先去掉一会我们再说再带着各位一起来看一下这个效果那这样我们把我们的流程定义的图转换成了我们的PNG的图片同时也把我们的实体内给各位制作出来了那后面我们只需要去启动我们的流程实例
+[11:43] 来观察我们的这个流程变量是否负值有值了对不对是否有值了如果一旦有值呢我们将来比如说我设置的是五天那五天的话将来就会走整经历然后再走它对不对就是这样去走假如说我是一天那这个时候就是部门经历走完之后直接就会记录到人事存档对吧这个一会儿我们可以测试完整的效果让各位来看好这是我们的
+[12:12] 为了去实现我们的这个案例所做的一些准备工作就是流程定义的图给它搞好了对吧我们的这个实体内给它做好了对吧
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Activiti 工作流中设置和使用全局流程变量，包括启动流程时设置变量和任务办理时设置变量，并通过 Java 代码实现。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 展示了 BPMN 流程图，包含 StartEvent、用户任务、排他网关、用户任务和 EndEvent。右侧工具栏显示了 BPMN 元素类型。
+画面2: PPT 页面标题为“3.5.3 设置 global 流程变量”，子标题“3.5.3.1 启动流程时设置”，内容说明启动流程时设置流程变量，变量值为请假单信息，作用域为整个流程实例。
+画面3: PPT 页面展示 Java 代码，用于启动流程并设置变量，变量名为“num”，值为 holiday.getNum()。
+画面4: PPT 页面标题为“3.5.3.2 任务办理时设置”，内容说明在完成任务时设置流程变量，变量作用域为整个流程实例。
+画面5: 展示了 BPMN 流程图，与画面1类似，但“请假单审批”任务节点被选中。
+画面6: 展示了 Java 类 Holiday 的定义，包含 id、holidayName、beginDate、endDate、num 字段。
+画面7: 展示了 Java 类 Holiday 的定义，增加了 reason、type 字段，并添加了 Serializable 接口。
+画面8: 展示了 BPMN 流程图，与画面1类似，但“请假单审批”任务节点被选中。
+画面9: 展示了 BPMN 流程图，与画面1类似，但“请假单审批”任务节点被选中。
+画面10: 展示了“Save as image”对话框，用于保存流程图图片。
+画面11: 展示了“Copy”对话框，用于将流程图图片复制到项目资源目录。
+画面12: PPT 页面展示 Java 代码，用于启动流程并设置变量，变量名为“num”，值为 holiday.getNum()。
+画面13: 展示了 Java 类 Holiday 的定义，包含 id、holidayName、beginDate、endDate、num、reason、type 字段，并添加了 Serializable 接口。
+画面14: PPT 页面展示 Java 代码，用于启动流程并设置变量，变量名为“num”，值为 holiday.getNum()。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面3代码：
+```java
+Holiday holiday = new Holiday();
+holiday.setNum(3);
+// 定义流程变量
+Map<String, Object> variables = new HashMap<String, Object>();
+// 变量名是num，变量值是holiday.getNum()，变量名也可以是一个对象
+variables.put("num", holiday.getNum());
+
+RuntimeService runtimeService = processEngine.getRuntimeService();
+ProcessInstance processInstance = runtimeService
+    .startProcessInstanceByKey(processDefinitionKey, variables);
+
+System.out.println("流程实例Id:" + processInstance.getProcessInstanceId());
+```
+
+画面4代码：
+```java
+@Test
+public void completTask() {
+    //任务id
+    String taskId = "";
+    TaskService taskService = processEngine.getTaskService();
+    Holiday holiday = new Holiday();
+    holiday.setNum(4);
+    // 定义流程变量
+    Map<String, Object> variables = new HashMap<String, Object>();
+```
+
+画面6代码：
+```java
+package com.ithema.day04;
+
+import java.util.Date;
+
+/**
+ * 情况没说清
+ */
+public class Holiday {
+    private Integer id;
+    private String holidayName;//申请人名字
+    private Date beginDate;//开始日期
+    private Date endDate;//结束日期
+    private Float num;//请假天数
+    private String reason;//事由
+    private String type;//请假类型
+}
+```
+
+画面7代码：
+```java
+package com.ithema.day04;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * 情况没说清
+ */
+public class Holiday implements Serializable {
+    private Integer id;
+    private String holidayName;//申请人名字
+    private Date beginDate;//开始日期
+    private Date endDate;//结束日期
+    private Float num;//请假天数
+    private String reason;//事由
+    private String type;//请假类型
+}
+```
+
+画面13代码：
+```java
+package com.ithema.day04;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * 情况没说清
+ */
+public class Holiday implements Serializable {
+    private Integer id;
+    private String holidayName;//申请人名字
+    private Date beginDate;//开始日期
+    private Date endDate;//结束日期
+    private Float num;//请假天数
+    private String reason;//事由
+    private String type;//请假类型
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getHolidayName() {
+        return holidayName;
+    }
+
+    public void setHolidayName(String holidayName) {
+        this.holidayName = holidayName;
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面2: PPT 标题“3.5.3 设置 global 流程变量”，子标题“3.5.3.1 启动流程时设置”，内容说明启动流程时设置流程变量，变量值为请假单信息，作用域为整个流程实例。
+画面4: PPT 标题“3.5.3.2 任务办理时设置”，内容说明在完成任务时设置流程变量，变量作用域为整个流程实例。
+画面12: PPT 页面展示 Java 代码，用于启动流程并设置变量，变量名为“num”，值为 holiday.getNum()。
+画面14: PPT 页面展示 Java 代码，用于启动流程并设置变量，变量名为“num”，值为 holiday.getNum()。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+

@@ -1,0 +1,314 @@
+# 8-MapReduce案例-wordcount-JobMain代码
+
+- 阶段：04.阶段四 大数据转型 必备课程-Hadoop3
+- 章节：day03-MapReduce入门
+- 源文件：04.阶段四 大数据转型 必备课程-Hadoop3\day03-MapReduce入门\8-MapReduce案例-wordcount-JobMain代码【海量资源尽在 ubkz.com】.mp4
+- 时长 19分57秒（音频 1197s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 在写完map阶段和reduce阶段的代码之后接下来我们来写我们的主程序大家来想一个问题我们刚才写了一个map阶段写了一个reduce阶段而我们整个map reduce大概需要八个步骤接下来我们需要写的代码把这八个步骤串联在一起然后才能成为一个真正的map reduce接下来我们就来做这个事情在哪里写这个代码呢
+[00:29] 你看我刚才写了一个类叫JobMund我们就在这里写我们的主程序首先呢我们呢需要在这里写一个Mund方法OK写个Mund方法这里是一个入口OK那这个主程序的这个类呢它首先呢有个固定的模板这个类呢要去继承一个类这个类呢叫ConfigureConfiguredOK不仅要去继承这个类呢还要去实现一个接口
+[01:00] implements toOK这个导包的时候一定要导Hadoop YouTube那么这里边为什么报错呢我们需要重写这里边的一个方法这个方法是run方法我把这个呢放上面来吧OK这是run方法好这个可以说是我们MapReduce主程序的一个固定罗板继承configure的实现这个to接口OK那接下来呢
+[01:30] 我们需要在这个闷方法中呢去做一件事情那什么事情呢我们需要去启动我们的任务启动一个任务什么叫任务呢同志们你看我刚才画了一个图那从我们读取原数据开始一直到最后呢我们的Reduce结束然后呢把数据写到文件中这整个你可以看作是一个任务所以说呢我们要串在一起之后呢我们要启动一个任务
+[02:00] 那怎么启动呢这个时候呢有一个类这个类呢叫toRunnerOK这个toRunner中呢有一个方法叫run方法你看这个run方法有三个参数一个是configuration一个是to这个对象而一个呢是一个是一个参数OK那咱一个来说先说第一个它需要传一个configuration对象那我在这里呢new一个configuration对象好生成一个configuration对象
+[02:34] 我把这个对象呢传给他这个configuration对象呢是一个配置对象也就是说以后有一些配置信息就直接放在这个对象里边第二个参数呢它是需要一个什么呢它需要一个往来看它需要一个toto是一个接口我们需要一个这个接口的实现类对象好那大家想一想我们刚才这个Jobman这个类呢它实现了to这个接口那也可以这样说
+[03:04] 这个叫闷呢它也是to接口的实现类那我所以说呢我也可以去new这个叫闷这个对象OK那这个呢也能满足它的参数需求好 咱看第三个参数这个第三个参数呢它是一个数组这个数组呢是一个参数是一个数组组织数组这个组织数组呢其实就是在启动这个任务的时候给它传的参数那这个呢我们可以直接把闷方法
+[03:33] 没方法它的一个ax直接放在这里作为它的参数输入这里边呢有个异常我们先抛一下OK这就可以启动一个任务那这里边呢还有一个返回值这个返回值呢表示我们任务呢执行的一个执行的一个情况如果返回0呢一般认为是执行成功否则呢是执行失败我呢可以在这写个exit然后呢这个exit写个run表示呢
+[04:03] 如果说呢你是这个什么呢你是0表示成功那我就成功退出如果非0那表示失败退出可以加这么一个呃这么一个调用好那这个闷方法写完之后呢大家注意我们这个地方启动一个任务他需要去执行一个run方法他执行这个run方法是调用谁呢大家向上看这里边有个run方法其实在启动一个任务的时候执行的就是这个run方法那所以说接下来呢
+[04:32] 我们再来写这个run方法这个run方法呢是干什么事情呢它其实呢需要在这里去去干嘛呢去生成一个任务或者说叫创建嘛创建一个任务对象也就是说你要把我刚才刚才说的这个八个步骤呢把它看作是一个任务对象然后通过这个任务呢把它们创在一起OK这里边呢需要去创建一个任务对象的话呢
+[05:02] 有一个类这个类呢叫job这个类叫job这个job呢有一个方法这个方法叫get instance好这个get instance呢也有两个参数第一个呢是configuration第二个呢它是一个任务的名字咱先说这个configuration这个configuration呢其实还是下面这个configuration对象你不能在这里直接new一个configuration
+[05:28] 为什么呢因为作为一个任务呢它的配置对象必须是同一个那如何去获取闷方法中的这个configuration呢大家注意这个地方有个有个这个有个小参数的一个传递大家看这个configuration呢其实是传给谁呢其实是传给这个这个类的副类叫configureconfigure到我们点一下进来进来之后呢其实这里边呢我刚才new的configuration其实是传给它了
+[05:57] 这里边有个方法叫有个参数叫configuration就传给它了OK那么我现在我在这里而我的configuration对象是传给了我的负类我如何获取负类的对象咱们这里边可以用一个super里边有个方法叫guideconf这个它就可以获取我刚才的configuration对象这个也是一个固定的模板后面是一个任务的名字
+[06:26] 这个任务的名字你可以随便写比如说我写个map reduce然后word countword count好写完之后呢我们现在呢就创建了一个任务对象叫但是这个任务对象呢里边很多东西都是空的接下来我要对这个任务对象呢进行设置怎么设置呢我们一步有来我们一共有七八七八个步骤第一步我们先第一步第一步
+[07:08] 那么第一步呢我们要去干什么事情了来看我这个流程图我们从头到尾看第一步呢你需要去读取原文件那读取原文件你要去用哪个哪个类呢哪个哪个模板去读呢这个时候呢我们需要设置一个读取原文件的一个类型要用哪个类去读那这个时候呢我们用的是一个test input format用它来读它来读有什么特点呢它会将我们每一行的数据呢生成一个箭支堆
+[07:38] 键呢就是行的偏移量而呢值呢就是这一行的文本数据所以说呢我们第一步要设置读取文件的类OK那么这个时候呢我们可以这样做Job里边呢有一个方法叫setinputformatclass这个地方呢要写上它的一个class对象我那个类叫什么testinputformatOK
+[08:08] 点class也就是说我要用这个类对象去读取我的文本数据读完之后呢读完之后它就变成了k1和v1那k1和v1那么k1呢其实就是行偏量v1呢就是行数据这是我们第一步那你不仅要去告诉我用什么一个对象去读那还要去告诉我从哪里读所以这里边呢还要去设置这么一个东西叫test就是我们刚才写的test input format
+[08:38] 还要去添加一个读取的路径读取的路径这个地方我们来add input path我们要给它一个读取的路径第一个就是一个叫部叫部对象就是你要用哪个任务来读叫部第二个你要去从哪里读这个地方我们要写new path这个path我们要写上我们分布式文件系统的一个路径就是hdfs来冒号杠杠
+[09:07] 这地方可以写load01, 冒号8020,那下面呢,注意,我们的数据在哪里,你就要去设,去哪里读取,我们刚才呢,干了一件事,我把我的这个word count.txt,也就是原文件放在哪里呢,放在根目录下面的word count,所以说你得写这个路径,千万别写错了,OK,要写这个路径,来,我们来看,要写根目录下面的word count,
+[09:37] OK注意要写路径先要写目录的名字不要写文件名OK那这个地方呢导个报好这个完了之后呢也就是说我们已经设置好通过谁来读读取的方式是什么而且呢从哪里读我们设置好这是第一步咱们先来看第二步好那么这个时候拿到这个K1和V1之后呢接下来我们再看这个流程我们是不是把这个数据交给了MAP阶段去处理那这个时候你得告诉我
+[10:07] 你的MAP阶段的代码在哪里所以说第二个我们要设置我们的MAP类设置MAP类也就是说你的MAP在哪里你是怎么去写这个MAP代码的这个时候我们还是用Job一个叫SiteMapClass这里边有一个就是我们需要去设置我们自己的MAP的一个class对象就是我们的MAP是不是在这WorldCount稍等
+[10:38] word count Mapper.classOK要设置这个我们不仅要设置这个我们还要去设置我们word count Mapper呢它的一个输出类型也就是它的输出类型输出类型是什么呢也就是我们的K2和V2的类型我们要去设置map阶段的输出类型所以说呢我们先来来看设置map阶段吧map阶段的输出类型那这个输出类型
+[11:10] 不就是我们的K2和什么K2和V2的类型那么咱们看咱们的K2和V2是什么类型是不是一个是test一个是什么long writable那咱们分别设计一下job.site myper output这个kclassOK咱就写test.classtest.classOK这地方没有导包
+[11:42] 稍等我把它导个报test我看这个地方这个地方是test.class我来导个报这个地方导个报那这个地方选这个hardput.ioOK那还要去设置where的类型这个job.set有个叫map.output这个地方是output.key那这个地方叫output.valueoutput.valueOK那这个地方呢选long.writable.class
+[12:17] OK这是上我们Mapper那上完Mapper之后呢大家注意咱们接下来看看数据到哪里了好上完Mapper之后呢是不是就进入我们的Shafer阶段那这个时候呢大家注意Shafer阶段有四个分区排序规约分组我们今天呢先不去给大家讲这个我们采用默认的分区默认的排序默认的规约和默认的分组所以说我们都采用默认的这里面我给大家解释一下就是说第四这个接下来是第三步
+[12:48] 这是第二步啊这是第三还有呢四五六步六啊采用默认方式默认方式那这几步分别干什么呢就是分区排序归约分组OK像这种方式好所以说呢这一代码呢咱们暂时省略后期呢再给大家详细讲解那接下来该第几步呢
+[13:28] 接下来是该第七步了第七步这个第七步是干嘛呢同志们来咱们再看这个流程图第七步呢也就是suffer阶段结束之后呢咱们要进入reduce阶段所以这个时候我们需要去设置我们的reduce代码在哪里也就是说你的reducereducer类是谁所以说呢和设置map一样第七步要设置设置什么呢设置我们的reducer类OK
+[14:03] 那这个地方我们可以用job.setReducerClass用我们的wordCountReducer它有一个方法呢有一个叫classOK用这个class对象而且呢要设置map设置Reduce阶段的输出类型设置Reduce阶段的输出类型好那这个地方呢这地方呢我们可以去也去设置一下
+[14:37] K class那么我们这个reduce阶段的输出类型是什么呢我们来看K3V3是不是一个test一个long retableOK那咱们将来写一下这是test.classOK再设置job.setoutput valueOKvalue的class那就是long retable.class写完之后呢这是第七步完了大家注意在写这个的时候呢你看
+[15:09] 咱们设置map的时候是map output这里没有map直接output上面是map output value这里是直接output value一定要注意这个区别好第七步上完之后咱们再向后看看接下来该干嘛呢该是不是把这个结果给一个输出一个类这个类叫test output format我们要去设置我们输出的一个类型也就是用什么一个对象来去做输出那这时候
+[15:38] 我们来做第八步第八步这个第八步呢就设置输出类设置输出类那设置输出类还不行是不是还要设置一个什么呢设置一个我们的文件输出到哪个路径下面去对不对OK咱先设置输出类就是job里边叫set output format我们来看有没有class这个地方呢我们写test我们的输出是test output formatder classOK
+[16:12] 那么接下来呢还要去设置它的一个输出的一个路径叫输出到哪里去就是设置输出的路径那同样呢我们要去设一个HDFS的一个输出路径就是test output format.add output path我看我是不是写错了format.set output output path就这个第一个是job对象第二个呢你要设一个路径
+[16:45] 你要去new一个pass这个路径呢我们还要去写hdfshdfs冒号刚刚node01然后呢这里面写8020我要把数据放到哪里去呢我们可以把数据放在根目录下面有一个叫word countout大家注意这个路径是不允许存在的它会自动给你创建我来看一下有没有这个路径好我来看好这里面没有
+[17:15] 没有刷新一下这里是没有的没有的话呢正好OK有的话呢一定要把它删掉OK这个设置完之后呢我们这个八个步骤呢都已经设置完了设置完了好设置完了之后呢还要做一件事情做一件事情那什么事情呢需要用job来调个方法这个方法呢叫wait for completion这个里面呢写一个参数叫true这个是一个固定写法这个表示呢一旦任务提交让我们的任务呢进入一个
+[17:44] 等待状态等待完成状态OK那这个时候它有个返回值这个返回值呢是一个波类型那最后呢我可以让这个方法返回因为这个方法呢有个返回值是int类型那这个返回值呢我可以这样写写个三元算幅比如说B?
+[18:02] 0?
+[18:03] 1也如果说呢你成功了那这个时候呢如果说你是true那就返回0如果说呢是false就返回1其实这个返回值呢
+[18:13] 最终会返回的这个run这个给这个值OK这个是一个固定写法到这里为止呢我们把整个任务呢串在了一起OK我们再来简单的回归一下首先在这mint方法里边呢我们需要用一个toRun来去启动一个任务run方法调run方法这个run方法呢其实就会调用我们上面写的这个run方法OK调这个run方法的时候呢需要传一个配置对象
+[18:42] 然后呢需要传一个这个什么呢to它的一个实现类对象刚好这个类呢实现了一个to接口所以说呢我们直接new了一个jobman这个参数呢是从man方法传进来直接写就行了ok调这个run方法的时候呢它就会执行这里的run方法这个run方法相当于啊把我们map reduce的八个步骤呢是不是串在了一起好串在一起之后呢那其实就是把我们刚才画这个流程图呢
+[19:12] 整个就串在一起OK那么创建一个叫我们任务对象然后呢设置我们的输入设置我们的Mapper类和Mapper它的一个输出类型然后呢这中间这四步呢我们暂时省略设置我们Reducer类以及Reduce的一个输出类型然后呢最后呢设置我们的输出类以及输出的一个路径好最后呢在这个地方呢让我们的任务呢进入一个等待完成状态好最后返回好这是整个一个代码
+[19:41] 这个代码呢可以说是一个固定的一个模板很多时候呢我们只需要修改的一些注点参数就行了好这个写完之后呢接下来我们就可以测试了好关于这个主方法呢我们就先说到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 Java 编写一个完整的 MapReduce 程序，包括 Mapper、Reducer、JobMain 的实现以及配置过程。
+
+2) 按时间顺序列出每张画面的要点：
+画面 1:
+要点：展示 MapReduce 的整体结构，包括 Mapper、Shuffle、Reducer 阶段，并列出 WordCount 的步骤。同时展示上传文件到 HDFS 的命令：hdfs dfs -mkdir /wordcount/ 和 hdfs dfs -put wordcount.txt /wordcount/。
+
+画面 2:
+要点：展示 JobMain 类的初始结构，包含 main 方法和 run 方法的框架。
+
+画面 3:
+要点：展示 ToolRunner 类的 run 方法源码，用于启动 MapReduce 任务。
+
+画面 4:
+要点：在 JobMain 类中，使用 ToolRunner.run 方法启动任务，并创建 Job 实例。
+
+画面 5:
+要点：在 JobMain 类中，设置 Job 的配置，包括设置 Job ID、优先级等。
+
+画面 6:
+要点：在 JobMain 类中，设置 Mapper 类和 InputFormat 类。
+
+画面 7:
+要点：在 JobMain 类中，设置 Mapper 类、输出 Key 类和输出 Value 类。
+
+画面 8:
+要点：展示 MapReduce 的流程图，包括 Map 阶段、Shuffle 阶段和 Reduce 阶段，以及各阶段的输入输出数据格式。
+
+画面 9:
+要点：在 JobMain 类中，设置 Reducer 类、输出 Key 类和输出 Value 类。
+
+画面 10:
+要点：在 JobMain 类中，设置 OutputFormat 类。
+
+画面 11:
+要点：在 JobMain 类中，设置 InputFormat 类和输入路径。
+
+画面 12:
+要点：在 JobMain 类中，设置 OutputFormat 类和输出路径，并调用 waitForCompletion 方法等待任务完成。
+
+画面 13:
+要点：展示 MapReduce 的流程图，包括 Map 阶段、Reduce 阶段和 TextOutputFormat 输出到文件。
+
+画面 14:
+要点：在 JobMain 类中，设置 Reducer 类、输出 Key 类和输出 Value 类，以及 OutputFormat 类。
+
+3) 画面中出现的代码、配置、命令、目录结构、SQL、XML/YAML 配置（逐字原样抄录）：
+画面 1:
+hdfs dfs -mkdir /wordcount/
+hdfs dfs -put wordcount.txt /wordcount/
+
+画面 2:
+package cn.itcast.mapreduce;
+import org.apache.Hadoop.conf.Configured;
+import org.apache.Hadoop.util.Tool;
+public class JobMain extends Configured implements Tool {
+    public static void main(String[] args) {
+    }
+    @Override
+    public int run(String[] strings) throws Exception {
+        return 0;
+    }
+}
+
+画面 3:
+Decomplied class file, bytecode version 2.0 (Java 8)
+@Public
+@Stable
+public class ToolRunner {
+    public ToolRunner() {
+    }
+    public static int run(Configuration conf, Tool tool, String[] args) throws Exception {
+        if (CallerContext.getCurrent() == null) {
+            CallerContext ctx = (new Builder("CLI")).build();
+            CallerContext.setCurrent(ctx);
+        }
+        if (conf == null) {
+            conf = new Configuration();
+        }
+        GenericOptionsParser parser = new GenericOptionsParser(conf, args);
+        tool.setConf(conf);
+        String[] toolArgs = parser.getRemainingArgs();
+    }
+}
+
+画面 4:
+import org.apache.Hadoop.conf.Configured;
+import org.apache.Hadoop.util.Tool;
+public class JobMain extends Configured implements Tool {
+    @Override
+    public int run(String[] strings) throws Exception {
+        Job job = Job.getInstance(super.getConf(), "mapreduce_wordcount");
+        return 0;
+    }
+    public static void main(String[] args) throws Exception {
+        Configuration configuration = new Configuration();
+        int run = ToolRunner.run(configuration, new JobMain(), args);
+        System.exit(run);
+    }
+}
+
+画面 5:
+import org.apache.Hadoop.mapreduce.Job;
+import org.apache.Hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.Hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.Hadoop.util.Tool;
+import org.apache.Hadoop.util.ToolRunner;
+public class JobMain extends Configured implements Tool {
+    @Override
+    public int run(String[] strings) throws Exception {
+        Job job = Job.getInstance(super.getConf(), "mapreduce_wordcount");
+        job.setJobName("mapreduce_wordcount");
+        return 0;
+    }
+    public static void main(String[] args) throws Exception {
+        Configuration configuration = new Configuration();
+        int run = ToolRunner.run(configuration, new JobMain(), args);
+        System.exit(run);
+    }
+}
+
+画面 6:
+import org.apache.Hadoop.mapreduce.Job;
+import org.apache.Hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.Hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.Hadoop.util.Tool;
+import org.apache.Hadoop.util.ToolRunner;
+public class JobMain extends Configured implements Tool {
+    @Override
+    public int run(String[] strings) throws Exception {
+        Job job = Job.getInstance(super.getConf(), "mapreduce_wordcount");
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setMapperClass(WordCountMapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+        return 0;
+    }
+    public static void main(String[] args) throws Exception {
+        Configuration configuration = new Configuration();
+        int run = ToolRunner.run(configuration, new JobMain(), args);
+        System.exit(run);
+    }
+}
+
+画面 7:
+import org.apache.Hadoop.mapreduce.Job;
+import org.apache.Hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.Hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.Hadoop.util.Tool;
+import org.apache.Hadoop.util.ToolRunner;
+public class JobMain extends Configured implements Tool {
+    @Override
+    public int run(String[] strings) throws Exception {
+        Job job = Job.getInstance(super.getConf(), "mapreduce_wordcount");
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setInputPath(new Path("hdfs://node01:8020/wordcount"));
+        job.setMapperClass(WordCountMapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+        return 0;
+    }
+    public static void main(String[] args) throws Exception {
+        Configuration configuration = new Configuration();
+        int run = ToolRunner.run(configuration, new JobMain(), args);
+        System.exit(run);
+    }
+}
+
+画面 8:
+Map阶段
+K1 V1
+0 hello.world
+11 hello.Hadoop
+23 world.hdfs
+33 Hadoop.java
+自动完成
+1:自定义一个Mapper类，重写map方法
+2:在Map方法中将K1和V1转为K2和V2
+world
+hello
+Hadoop
+hdfs
+hello
+world
+Hadoop
+hdfs
+hello
+world
+Hadoop
+hdfs
+Reduce阶段
+新 K2 V2
+hello <1,1>
+world <1,1>
+Hadoop <1,1>
+hdfs <1,1>
+自动完成
+1:自定义Reducer类
+重写reduce方法
+2:在reduce方法中要将新的k2和v2转为k3和v3
+
+画面 9:
+import org.apache.Hadoop.mapreduce.Job;
+import org.apache.Hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.Hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.Hadoop.util.Tool;
+import org.apache.Hadoop.util.ToolRunner;
+public class JobMain extends Configured implements Tool {
+    @Override
+    public int run(String[] strings) throws Exception {
+        Job job = Job.getInstance(super.getConf(), "mapreduce_wordcount");
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setInputPath(new Path("hdfs://node01:8020/wordcount"));
+        job.setMapperClass(WordCountMapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+        job.setReducerClass(WordCountReducer.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(LongWritable.class);
+        return 0;
+    }
+    public static void main(String[] args) throws Exception {
+        Configuration configuration = new Configuration();
+        int run = ToolRunner.run(configuration, new JobMain(), args);
+        System.exit(run);
+    }
+}
+
+画面 10:
+import org.apache.Hadoop.mapreduce.Job;
+import org.apache.Hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.Hadoop.mapreduce.lib.output.TextOutputFormat;
+import org.apache.Hadoop.util.Tool;
+import org.apache.Hadoop.util.ToolRunner;
+public class JobMain extends Configured implements Tool {
+    @Override
+    public int run(String[] strings) throws Exception {
+        Job job = Job.getInstance(super.getConf(), "mapreduce_wordcount");
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setInputPath(new Path("hdfs://node01:8020/wordcount"));
+        job.setMapperClass(WordCountMapper.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(LongWritable.class);
+        job.setReducerClass(WordCountReducer.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(LongWritable.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
+        return 0;
+    }
+    public static void main(String[] args) throws Exception {
+        Configuration configuration = new Configuration();
+        int run = ToolRunner.run(configuration, new JobMain(), args);
+        System.exit(run);
+    }
+}
+
+画面 11:
+import org.apache.Hadoop.mapreduce.Job;
+import org.apache.Hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.Hadoop.map
+

@@ -1,0 +1,205 @@
+# 11.圈子功能实现之编写接口服务（上）
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day03 探花交友-实现圈子功能
+- 源文件：07.阶段七 探花交友项目\day03 探花交友-实现圈子功能\11.圈子功能实现之编写接口服务（上）_【海量资源尽在 666java.com】.mp4
+- 时长 7分23秒（音频 443s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们就基于我们前面所编写的double的这样的一个服务呢我们来编写我们的这个接口服务那么这个呢是为我们的这个前端的啊这样的一个客户端去提供的这样的服务那么首先呢我们来看一下我们的Mock这样的一个接口那么其实可以看到呢在这个位置啊它的一个路径啊就是一个根目的下面有个Moments然后呢下面的是它的请求的一些投信息
+[00:28] 那么可以看到呢这个是我们的这个token对吧然后呢下面是请求的body的数据那么有文字啊信息有图片信息还有位置啊也就是我们的经纬度啊这个是位置名称下面这个呢是经度啊这个是纬度然后呢返回数据呢是
+[00:50] 去返回一个状态码如果是成功的话那就响应200那么如果不是不成功的话那就响应500那么就可以完成这样的一个接口的一个编写了那么接下来呢我们就进入到哪里呢进入到我们的serviceserver这个工程也就是我们下面的这个工程中去编写相关的一些这个代码那么首先呢我们进入这个Controller然后呢我们这个呢要写的是一个momentus就跟他这个用
+[01:18] 一样就可以了那么我们来看一下这个叫 moments然后这个 Controller然后我们去编写这个是一个 restrest Controller然后我们再去写一个 requestrequest mapping然后我们去写一个 moments然后下面我们就需要写一些
+[01:43] 相关的一些业务逻辑了对吧那么我们写这个方法那么根据这个参数来啊那我们就写一个public然后呢这个返回值呢我们应该响应的是一个状态码那么没有响应的值的话那我们写一个word空就可以了然后呢我们做一个sale啊sale啊sale谁呢这个moments或者说用我们这个刚刚锁定的这个什么呢
+[02:08] publish都行都是一个意思然后我们去写一个这个是一个什么请求是一个post请求对吧来看一下上面是一个post请求然后这样的话就搞定了那么接下来我们来看一下这几个参数的获取那么第一个是我们的文字的参数那么写一个request param去做一个获取那么我们来定义一下定义一下这个就叫它
+[02:36] 然后我们再去写下面的一些其他的参数request request param然后我们再去定义一个这个是图片这个图片我们先下面我们再说图片我们先把这个位置先拿到location位置然后我们再去然后我们再去定义一个什么呢request param
+[03:05] 然后呢我们再去定义一个这个精度和纬度对吧然后呢我们也是用这部分去做一个接收然后呢还有一个param然后呢这个是什么呢纬度啊去做一个接收然后呢我们来看一下图片啊图片怎么处理呢图片呢我们是也是通过request param去拿到它有一个这个就是名称啊就叫imager啊contactor然后呢我们指定叫什么
+[03:37] 叫什么呢matupart对吧然后呢matupart fail去做一个接收那么要注意的是呢由于呢我们可以去上传什么多张图片所以在这个位置呢我们需要通过一个什么呢竖组去做一个接收这个是不我们扫一个这个参数的一个接收啊对吧好那么我们来写过来除了这个就是图片之外啊那么含有应该有一个参数
+[04:06] 别忘记是什么呢就是我们的请求投信息request handle那么这个呢我们就来写一个什么呢写一个我们这个token对吧这就是我们那个token了应该写到后面对吧好那么有了这几个参数之后啊那我们这个Controller是不是就可以继续往下面去写这个逻辑了对吧这个呢我们就把它往上面写一点好嘞好那么然后呢我们下面呢
+[04:36] 就需要去通过我们的Service了那我们这样我们先把我们这个Service呢就先创建出来那么是不是在下面这个Service中去创建一个这个moment一个Service然后呢把它标记为这是一个Service注意这个呢是spreet下面这个Service啊那么这个别搞错然后呢在下面呢我们就把它就注入进来了就moment Service然后呢把它呢
+[05:05] 注入进来啊这个位置去做一个注入那么注入完成之后呢我们将使用它这个里面所提供的方法对吧就叫sale什么呢就拷贝吧叫sale moments然后呢我们把这么几个参数呢给它传递过去那么第一个呢是这个文本还有什么呢location我们就按照我们刚刚锁定这个位置吧这个顺序去做一个这个添加然后呢然后
+[05:37] 然后NG然后这个是精度这个是纬度然后去还有一个MultipleFail然后是一个速度还有一个什么呢Token好这几个传递过去然后它的返回值我们所期望其实返回就是谁呢布尔那么等于它那么我们其实做一个判断如果我们这个为2的话那就代表着我们就成功了对吧
+[06:07] 那我们就应该响应什么呢响应200点OK然后呢这个值没有那就给他OK这个None对吧else或者说我们就应该去做一个这个try cut处理吧如果出现异常的话那就应该去return一个什么呢return一个我们这个点什么呢stace然后呢这个
+[06:37] error对吧就是500那就是internal server error点什么呢build好那么这样的话呢我们是不是就这个逻辑呢基本就搞定了对吧然后这个呢就是谁呢这个就是我们的一个我们的一个发布我们的一个动态啊这样的一个这个操作然后呢下面呢我们就去实现我们这个Service中这个方法是不是就搞定了来看一下
+[07:05] 然后我们去写一个他往后面写这个参数会有点多OK好那么接下来我们是不是在这个里面去做完成是不是就OK了把这个Service搞定那么这个接口是不是也就搞定了好那我们来写一下这个逻辑
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Spring Boot 项目中实现一个用于上传图文动态的 API 接口，包括前端 Mock 数据定义、后端 Controller 层参数绑定、Service 层处理逻辑以及异常状态码返回。
+
+2) 按时间顺序列出每张画面的要点：
+画面 1: 在 Mock 服务端界面查看接口基本信息，接口名称为“动态-发布”，方法为 POST，路径为 /movements，当前状态为“已发布”。
+画面 2: 在 IntelliJ IDEA 中，右键点击 Java 文件，弹出菜单，显示“Refactor”、“Show Image Thumbnails”等选项，代码中包含 `this.mongoTemplate.save(timeLine, collectionName: "quanzi_time");`。
+画面 3: 在 Mock 服务端界面，显示“请求参数”部分，其中“Headers”包含“Content-Type: multipart/form-data”和“Authorization”字段，下方弹出一个包含多个窗口缩略图的弹窗。
+画面 4: 在 Mock 服务端界面，显示“Body”部分，参数包括 textContent（文本）、imageContent（文件）、location（位置）、longitude（经度）、latitude（纬度），均设置为必填。
+画面 5: 在 IntelliJ IDEA 中，显示 Spring MVC 的注解列表，包括 @RequestMapping、@RequestBody、@RequestParam 等。
+画面 6: 在 IntelliJ IDEA 中，正在编写 MovementsController 的 saveMovements 方法，参数包括 @RequestParam("textContent") String textContent, @RequestParam("location") String location, @RequestParam("") String token。
+画面 7: 在 IntelliJ IDEA 中，正在编写 MovementsController 的 saveMovements 方法，参数包括 @RequestParam("imageContent")。
+画面 8: 在 Mock 服务端界面，显示接口基本信息，接口名称为“动态-发布”，方法为 POST，路径为 /movements，当前状态为“已发布”。
+画面 9: 在 IntelliJ IDEA 中，显示 MovementsService 类的包声明和 import 语句，包括 org.springframework.stereotype.Service。
+画面 10: 在 IntelliJ IDEA 中，正在编写 MovementsController 的 saveMovements 方法，参数包括 @RequestParam("textContent") String textContent, @RequestParam("location") String location, @RequestParam("longitude") String longitude, @RequestParam("latitude") String latitude, @RequestParam("imageContent") MultipartFile[] imageContent, @RequestHeader("Authorization") String token。
+画面 11: 在 IntelliJ IDEA 中，正在编写 MovementsController 的 saveMovements 方法，调用 this.movementsService.saveMovements(...)。
+画面 12: 在 IntelliJ IDEA 中，正在编写 MovementsController 的 saveMovements 方法，使用 ResponseEntity.status(HttpStatus.)。
+画面 13: 在 IntelliJ IDEA 中，正在编写 MovementsController 的 saveMovements 方法，使用 ResponseEntity.status(HttpStatus.)。
+画面 14: 在 IntelliJ IDEA 中，显示 MovementsService 类的 saveMovements 方法，参数包括 String textContent, String location, String longitude, String latitude, MultipartFile[] imageContent，方法体为 return null;。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面 2:
+```java
+this.mongoTemplate.save(timeLine, collectionName: "quanzi_time");
+```
+
+画面 4:
+```text
+Body:
+参数名称    参数类型    是否必填    示例    备注
+textContent  文本    是    文字动态
+imageContent  文件    是    图片动态（支持多张图片）
+location    文本    是    位置
+longitude    文本    是    经度
+latitude    文本    是    纬度
+```
+
+画面 5:
+```text
+RequestMapping (org.springframework.web.bind.annotation)
+RequestBody (org.springframework.web.bind.annotation)
+RequestParam (org.springframework.web.bind.annotation)
+RequestHeader (org.springframework.web.bind.annotation)
+RequiredArgsConstructor (Lombok)
+RequiredArgsConstructor (org.springframework.web.bind.annotation)
+RequestAttribute (org.springframework.web.bind.annotation)
+RequestDart (org.springframework.web.context.annotation)
+RequestWrapper (javax.xml.ws)
+AnyAnnotation (org.springframework.web.bind.annotation)
+```
+
+画面 6:
+```java
+@RequestBody
+@RequestMapping(value = "movements")
+public ResponseEntity<Void> saveMovements(@RequestParam("textContent") String textContent,
+@RequestHeader("Authorization") String token) {
+```
+
+画面 7:
+```java
+@RequestParam("imageContent")
+```
+
+画面 9:
+```java
+package com.tanhua.server.Service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.RedirectView;
+import org
+

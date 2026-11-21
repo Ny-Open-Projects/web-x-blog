@@ -1,0 +1,143 @@
+# 12.今日佳人功能实现之编写业务代码（上）
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day02 探花交友-实现首页功能
+- 源文件：07.阶段七 探花交友项目\day02 探花交友-实现首页功能\12.今日佳人功能实现之编写业务代码（上）_【海量资源尽在 666java.com】.mp4
+- 时长 12分12秒（音频 733s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好,那么我们接着继续那么前面呢我们已经完成了我们这个服务工程的一个搭建那么接下来呢我们就来实现我们具体的功能那么下面呢我们来看一下我们这个分析那么首先呢我们需要根据我们前端的一个定义的一个结构来定义我们这个加挖的一个对象那么这个呢我们是根据这个前端结构来的然后呢我们需要根据我们的SSO系统所提供的这个接口呢去查询
+[00:27] 当前用户的一个登录的一些这个信息那么我们是不是要根据那个token去做查询呢哎OK好那么第三个呢就是我们要根据我们这个double这个系统所提供的一个这个查询的这个服务呢我们来查询我们的这个今日家人他的一个这个数据啊那么我们大致呢需要做的三件事情那么接下来呢我们就一点一点来看一下啊
+[00:52] 那么首先呢第一个呢是来看一下我们这个Java Beam的一个定义它呢是按照我们前端所定义的这样的一个结构而来的那么我们一起来看一下这个结构啊那么我们这个对象的名字呢叫做Today Best就是我今日啊最佳这样的一个对象啊然后呢我们来看一下我们的这个结构的一个定义那么它呢是不是就完全按照这个结构来的对吧我们可以看到有这个ID啊
+[01:20] 有我们这个头像啊有昵称啊有这个性别啊年龄还有标签那么标签呢是一个什么呢是一个宿主对吧那么点开来看一下它是一个宿主啊那么呃这个呢就是个tags然后下面这个呢是一个缘分值那么也就是说这样的一个对象啊那么接下来呢我们把这个对象呢我们创建出来我们首先呢来创建我们这个包然后呢我们在这个
+[01:48] 就是我们这个server这个下面的去创建一个什么呢VO这个包那就呃直接这样来创建吧那么就来一个什么VO啊这个包呃然后呢我们把这个类呢就拷贝过来那么我们拷到这啊这个就是我们的金日佳人啊这样的一个这个类哎OK这个大家应该都能够看懂啊那么下面呢我们就来编写我们的一个Controller啊就叫today啊best一个Controller那我们来写一下这个Controller然后呢是在哎没有Controller包
+[02:18] 那我们就先来创建一个Controller这个包这个这个写错了有点问题我们来改一下啊这个是LLOK好那么我们去写一个这个类啊就是我们的Controller啊然后呢首先呢把它标记为这是一个什么rest Controller那我们显然最后所响应的呢就是我们的一个这个节省对象对吧所以说呢我们是定一个他啊就可以了
+[02:51] 然后呢我们再定义一个什么request mapping就是我们请求的一个路径那么这个请求路径呢决定于我们这个MOK地址它的一个路径啊那么是不是就是这样的一个路径啊对吧那我们可以在这个位置写谁呢写一个炭花而这个today best呢就放到下面来去写到具体的这个方法上面来做一个完成啊好那么接下来呢我们去定义我们这个方法啊
+[03:17] 那么这个方法它的返回值那是不是就是这个today了对吧today best然后呢就来一个query什么的today best哎呀ok那么我们写这样的一个方法然后呢我们来去写一个request mapping应该我们写什么呢什么请求呢来看一下它是什么get请求对不对所以说我们就写一个get什么mapping这样
+[03:40] 更简洁一点然后呢我们去写一个他的一个请求的一个路径那我们来看一下这个路径是不是要和我们这个锁定的接口路径呢要保持一致啊对吧然后呢来看一下在这个位置他所提交的参数那么没有参数只有一个什么呢请求的投信息就是我们的一个token那我们就来获取这个请求的一个投信息那么通过这个request什么呢hander来做一个获取
+[04:09] 获取谁获取我们这个认证的信息对不对然后呢我们定义他一个StreamStream什么呢Token啊好那么拿到这个Token之后呢下面呢我们是不是就应该去定义我们那个TodayBest一个Service去做一个这个处理了对吧那么我们就需要在我们的这个位置呢来创建一个什么呢Service啊就Service吧Service这个包然后呢我们在这个下面呢
+[04:39] 去创建一个类啊叫做today什么呢best然后Service啊Service然后呢首先我们把它标记为这是一个啊Service要注意这个呢使用的是swin的啊这个Service啊别导入导错了这个包啊好那么呃然后呢我们在我们的这个Controller中啊在Controller中那么我们是不是就可以去注入我们的这个Service去做一个这个处理了哎去做一个处理
+[05:09] 好那么我们把它就注入进来那么注入进来之后我们就需要去调用它的一个方法我们就直接returnreturn race.Service.什么方法名就跟它一样叫querytreebest然后我们把token给它传递过去那么具体的应用逻辑就需要在我们Service中去做完成了我们把这个方法给它创建出来我们来选动它可以的一个方法好那么
+[05:38] OK好那么这样的话呢我们这个框架呢是不是就大件完成了那么接下来我们就在这个Service中来编写我们的具体的业务逻辑那么首先第一个呢就需要在这个位置啊我们先要根据我们这个token是不是去查询我们的当前登录的用户信息啊对吧那么这个呢就需要去调用我们SSO系统的所提供的一个接口服务了
+[06:04] 所以说呢我们在我们这个Service这个位置呢我们再来去创建一个Service叫做什么呢user Service通过这个user Service呢去做一个查询把它标记为这里是一个我们的一个Service然后呢在我们这个Service中啊就是把它呢就注入进来叫做什么呢user Service啊注入进来然后呢我们去做一个注入然后呢我们在这个位置啊
+[06:33] 我们去根据this点这个uservice点是不是可以写一个叫什么呢query user然后呢我们就写一个这个token或者说by token吧好那么他这个方法的返回值呢我们所希望他返回的是一个user对象对吧那么这个user对象我们现在是不是已经有所以说呢我们就把它呢就定义出来好然后呢我们去创建我们的这个方法那么我们来看一下
+[07:03] 那么在这个Service中又该如何实现呢所以它呢就需要什么呢我们来写一个注释啊这个需要什么呢我们去调用调用我们SSO系统的这个接口服务进行查询了那么我们该如何去调用呢在我们的SSO系统中是不是我们提供了一个RESTful啊这样的一个API呢我们来看一下啊在我们的这个
+[07:32] User在下面是不是在这个位置跟是不是有一个根据这个token去查询我们的用户信息的这样的一个切口服务那我们是不是就可以去调用它了呢对吧好那么接下来呢我们在我们这个User Service中呢去通过谁呢通过我们前面所定义的一个叫做什么呢RestRest什么呢Template去做一个调用那么我们把它呢就注入进来那么下面在这个位置是不是我们就可以
+[08:00] 通过这个rest template去做一个啊这个发起这个请求了呢那么我们就通过他呢this.template点什么呢get for object那么给他一个什么呢url对吧给他一个url然后再给他一个我们的一个class啊就可以了那么url是谁呢我们来看一下啊那么url呢是不是我们来看一下啊
+[08:25] 是在这儿是不是有一个Ura下面的这个传递一个token那么我们就在这个位置写一个什么呢这个-Ura下面加谁呢加一个这个什么呢token加个token但是呢要注意这个呢并不是它的一个绝对路径前面呢是不是还会有我们的一个这个请求的一个地址所以说呢在我们前面的配置文件中我们是不是有这样的一个配置那么是不是有这样的一个配置我们把它是不是注释掉了
+[08:54] 那么这个其实就是我们定义的一个SSO的一个URL那么我们需要把这个地址呢去写到配置文件中那么方便我们后期的一个修改那么接下来呢我们就需要把这个值呢去注入到啊我们这个Service中那么就可以去使用它了那么我们定义一个stream然后写一个URL那么就加一个注解叫value啊注解然后呢去写一个这个dollar啊这样去
+[09:23] 到了它括号这样的话就可以去注入这个值了那我们就写一个这个URL然后呢去加一个加一个它做一个这个拼接做一个这个拼接然后呢这个URL是不是就搞定了呢那第二个参数是不是就是我们请求的一个这个响应的类型对吧那就写一个那就写一个什么呢street.什么呢class那么拿到的就是一个什么拿到就是一个字符串
+[09:52] 那么我们就写一个叫什么那叫做json date那么显然拿到的肯定是一个json数据对不对那么拿到这个json数据那么我们还需要把它去做一个反序列化做一个反序列化那么所以在上面这个位置我们需要定义一个谁定义一个我们的一个叫json的一个对象叫做object什么Mapper定义一个Mapper等于new一个new一个object Mapper
+[10:21] 然后呢拿到这个Mapper之后呢我们就可以做一个反序列化了当然了我们可以我们先需要去做一个判断了if如果我们这个is not not empty如果我们这个json date不为空的话我们再去做一个反序列化通过这个Mapper.read什么的value这个方法去做一个反序列化那么把这个json date传递给他
+[10:50] 再传递一个usr对象是不是去做一个啊这样的一个反序列化啊做一个反序列化然后呢我们来看一下啊看一下它那么在这个位置有异常呢我们就来捕获一下哎我们就去啊捕获一下这个异常来看一下啊那我们去加一个这个tricut啊这个处理那么呃一旦啊一旦我们这个呃出异常的话那最后return了啊就可以了这个大家能够看懂吧就是说一旦出异常了
+[11:20] 走到这然后呢去return就ok那么也就是说我们这个return呢就是说如果我们查询到那么就返回urlurl对象url对象如果未查询到那么就返回什么呢返回这个null就返回这个null这个所以说呢在我们这个位置拿到这个url的时候呢
+[11:50] 我们需要去做一个什么呢做一个判断啊做一个判断那么优的等于什么呢哎等于这个呃如果他等于这个空的话啊如果他等于这个空的话那么我们就给他去return啊return就return到吧对吧就return到那么首先我们这个第一步这个操作是不是就搞定了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现“今日佳人”功能，包括定义VO对象、编写Controller、Service层代码，以及调用SSO系统获取用户信息。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示“TodayBest”VO类的定义，包含id、avatar、nickname、gender、age、tags、fateValue等字段，并使用了Lombok注解。
+画面2：在VO类中添加了注释“今日佳人”。
+画面3：在IntelliJ IDEA中，右键“TodayBest”类，选择“Refactor” -> “Rename”，准备重命名。
+画面4：在Mock服务页面，查看“今日佳人”接口的详细信息，包括接口路径、Mock地址、请求头和返回数据。
+画面5：在IntelliJ IDEA中，编写“TodayBestController”类，使用@RestController和@GetMapping注解定义接口。
+画面6：在IntelliJ IDEA中，创建“TodayBestService”类。
+画面7：在“TodayBestService”类中，编写queryTodayBest方法，用于根据token查询用户信息。
+画面8：在“TodayBestService”类中，使用@Autowired注入UserService，并调用其方法查询用户。
+画面9：在“UserService”类中，使用RestTemplate的getForObject方法调用用户服务。
+画面10：在“UserService”类中，为RestTemplate注入，并编写queryUserByToken方法。
+画面11：在“UserController”类中，定义queryUserByToken接口，调用UserService的方法。
+画面12：在“UserService”类中，使用StringUtils判断token是否为空。
+画面13：在“UserService”类中，使用ObjectMapper将JSON字符串转换为User对象。
+画面14：在“TodayBestService”类中，判断查询到的User对象是否为空，为空则返回null。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+package com.tanhua.server.vo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * 今日佳人
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class TodayBest {
+    private Long id;
+    private String avatar;
+    private String nickname;
+    private String gender; //性别 man woman
+    private Integer age;
+    private String[] tags; //缘分值
+    private Long fateValue; //缘分值
+}
+```
+
+画面5：
+```java
+package com.tanhua.server.Controller;
+import com.tanhua.server.vo.TodayBest;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("tanhua")
+public class TodayBestController {
+
+    @GetMapping("todayBest")
+    public TodayBest queryTodayBest() {
+    }
+}
+```
+
+画面7：
+```java
+public TodayBest queryTodayBest(String token) {
+    //根据token查询当前登录的用户信息
+    return null;
+}
+```
+
+画面8：
+```java
+@Autowired
+private UserService userService;
+
+public TodayBest queryTodayBest(String token) {
+    User user = this.userService.queryUserByToken(token);
+    return null;
+}
+```
+
+画面10：
+```java
+public User queryUserByToken(String token) {
+    this.restTemplate.getForObject("/user/" + token, User.class);
+    return null;
+}
+```
+
+画面13：
+```java
+String jsonData = this.restTemplate.getForObject("/user/" + token, String.class);
+if (StringUtils.isEmpty(jsonData)) {
+    return null;
+}
+return MAPPER.readValue(jsonData, User.class);
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无
+

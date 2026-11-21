@@ -1,0 +1,227 @@
+# 15-Activiti流程变量案例-设置POJO类型的值
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：1.Activiti7/Activiti7-day04-进阶2
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\1.Activiti7\Activiti7-day04-进阶2\15-Activiti流程变量案例-设置POJO类型的值_【海量资源尽在 ubkz.com】.mp4
+- 时长 12分36秒（音频 756s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那下面我们就可以啊在我们的这个启动流程的时候就给我们的这个流程变量啊复职啊复职啊那下面再回到这边来啊刚才我们已经完成了这个新的请假流程定义的部署对吧好各位可以看一下啊现在呢我们把这个部分啊copy一份啊然后呢然后我们打算呢在这个里头呢把上边的这个把上边的这个代码直接给它先注掉可以吗
+[00:28] 或者是把这个代码给它注掉我们一起来实现一下这个效果好把它直接注掉对吧把它注掉那下面我们就可以直接到这边来写我们的这个流程流程实力的启动这个具体的效果就是启动就是叫做启动启动我们的这个流程实力我们不仅要启动流程实力同时还要设置
+[01:00] 还有设置我们的流程变量还有设置我们的流程变量的值明白了这就是我们想达到的目标第一个是我们的Process Engine对吧第二个这些地方都需要有变化了好我们可以一起来做一下这个效果第二个我们应该是叫做得到我们的这个Runtime对吧得到我们的Runtime Service这是我们要做的我们也可以观察一下
+[01:29] 刚刚我们在做做这个BPMN文件的时候各位要注意一下我们的这个我们的这个key忘了改了对不对忘了改了要不然我们就直接用这个名字吧要不然的话我们就把把这个地方改了重新再要部署一次对吧这个工作有点麻烦那我们就直接干脆就直接用我们现有的现有的这个叫做my-process下滑线1来作为我们的这个流程定义的key
+[01:59] 如果我们流程定义的key是他的话那我们这个地方将来具体的代码是有一些变化的好我们这边先把 runtime Service得到 runtime Service这个地方非常的简单我们可以通过processengine.getRuntimeService对吧get我们的RuntimeService好下一个工作就已经进入到刚才我们给各位讲的就是我们的流程
+[02:28] 定义的key的问题对吧这个key的问题刚才我们不已经说了吗对呢我们这个key现在呢是叫做my process下滑线1对吧这个很明显这个名字起的不是很好对不对那我们现在将错就错就直接用这个名字来做吧对吧嗯否则的话我们就需要还需要去把这个名字改了改了之后呢刚才我们部署的工作也还需要删了是不是删了之后重新部署一份新的进去啊
+[02:57] 有点麻烦了这个名字只要我们知道是这个名字是吧代表我们的这个新的请假流程就可以了那现在我们呢可以通过我们的这个run time Service然后去做一个做一个starter process instance process process instancestart process instance by key是吧
+[03:26] 这个key就是我们的mypossess下发线1对吧然后呢我们还可以在这里头我们这一次可以使用这个构造使用它的这个参数来实现这个效果那下面我把这个给各位定义一下吧比如说这个就是我们的这个流程定义的key对吧刚才我们说了是叫做mypossess下发线1对吧好copy 再来啊那第二个还有一个点呢是我们这个地方要去设置一个myp记录
+[03:57] 这个MAP集合比如说我们这个地方是用striptease类型作为key而第二个参数是object的比如说我们就搞出一个就叫做Value然后就叫MAP直接叫做MAP等于我们就可以去扭一个HashMap来实现这个效果这样我们这个MAP集合也有了但是MAP集合里面并没有具体去设置我们的请加信息
+[04:27] 对吧那我们这个地方就可以来一个Holiday请假单的信息比如说Holiday等于一个我们的Holiday对吧那你用完这个Holiday它的各个属性其实你都可以设置其实就有一个Numbo的这个值对吧这个Numbo的值比如说我设置为一天是F float类型对吧这样我们就把这个Holiday就已经设置好了
+[04:53] 那Holiday设置好了Holiday要添加到我们的Map集合中去Map.put对吧开始我们设置的这个流程是流程我们这个流程定义的这个变量开始我们是不是叫做叫做HolidayHoliday是不是这个对象名对象名叫Holiday它的属性是不是叫Number那我们这边可以直接把这个Holiday作为我们的这个对象放进去比如说hoHoliday
+[05:21] 这样我们的这个map激活里面就放了一个holiday的对象那我们真正要去实现这个启动流程实例的时候并且呢我们可以啊这个地方就是叫做啊启动流程实例啊启动我们的流程实例并且设置并且设置流程变量的值啊流程变量的值那我们可以来看一下啊第一个应该是传入我们的key对不对
+[05:50] 而第二个可以放我们的MAP集合这样我们基本上就完成了我们的start process instance by key的效果好start process instance by key的效果各位可以看一下它这边爆了有一个问题它说的是没有被初始化我们看一下是我在这个地方写的
+[06:22] 少写了一个等于号对不对这样我们基本上完成了我们的启动流程实例的时候By key不是By id对吧这样写错了By key这样我们基本上就完成了我们的流程实例的启动对不对流程实例启动结束我们这边就可以比如说来输出一些实例的信息输出实例信息Let's out我们看一下比如说Process instance
+[06:52] 比如说我们这个时候就可以就可以把我们的部署部署的 id或者说我们的流程getbusiness key肯定是没指的get process get我们来看一下比如说get name然后我们还可以s out去输出
+[07:23] getProcessUnsponseID是不是这个是可以看一看的好如果我们这一次这些信息会正常输出的话我们将来意味着我们的流程部署流程实例启动就已经完成了启动完成我们最关键的有这样的几个信息各位可以一起去看就是我们的变量明白是吧我们的变量将来应该可以看到流程定义的变量对不对
+[07:53] 好这时候我们来看一下效果啊好执行来观察一下啊好过一会看到名字我们没有设置啊但是我们的这个my process下滑线1冒号1冒号4这个是我们的这个流程定义的key这个流程定义的key是有值的对吧同时呢我们如果观察它的这个insert into的话你会发现它的act ruvalue这个表容
+[08:25] 其实是做了一次insert into对不对那我们可以来看一下就这个表我们刷新一下各位这个时候你就会看到有一个serisable是被序列化了之后的一个结果对吧这个结果就被放进去了那有同学就可以思考如果我们当时没有实现这个序列化结果会怎么样对不对我们一会儿再去演示那各位来看这个实验效果那这是我们说这里头有一个这样的变量对不对
+[08:55] 这个变量具体将来放的是一个什么样的值呢在里边并没有存在哪个地方存了呢我们依然可以继续往上面去看它不仅在这个表中添加了一条记录它还在我们的这个ACT叫做ACT GenuatBite Array这个表中又再次查读了记录
+[09:21] 注意啊这个表中我们之前在做这个流程流程部署的时候其实这个表中是其实这个表中是有记录的啊是有记录的过于这个时候你又发现呢它这里边又重新给我们加入了多了两条记录对吧就是这两条看见了吗这就是VR holiday这就是我们的这个流程定义的变量啊这是我们两个变量就被放入进来了啊
+[09:50] 当然这个地方呢你去打开你看你是看不到东西的因为这是一个序列化之后的一个字符串相当于是那个意思一个串被序列化进来了明白是吗你可以看到它是287byte对吧这是我们完成了我们的这个启动流程实例的时候启动我们的这个流程实例的时候并且给我们的这个流程定义的变量的确是负了有值对吧
+[10:19] 导致了我们的这个表中用用我们的byte array这个表以及我们的这个ru啊ru variable这个表啊来存储了我们的这个流程定义的变量啊好这是我们呢给各位分析啊到我们的流程流程定义的这个变量设置值的时候真正的将来这两张表
+[10:47] 将来这两张表中会加入我们的这个变量的值对不对这两张表还有这张表真正会把我们的这个变量的取值可以放到这两个表中存好对不对只有它存好了我们将来再去走这个流程图的时候才能够从数据库表中将我们的这个Holiday NUMBER真正读取出来Holiday.NUMBER读取出来然后
+[11:16] 才能够决定说我们到底走哪个流程的分支对吧是走这个分支呢还是走这个分支呢对不对这个将来肯定要去读我们刚才所看见的这个byte ray这个表中具体存放的存放的这个对象就是这个对象真正存在这里头将来肯定要通过我们的仿序列化仿序列化来把这个值读取出来然后呢再去
+[11:45] 放到我们的流程定义的变量中然后再去做判断才能够知道我们具体流程的走向对不对这是我们在这个部分主要是给各位完成了一个当我们的流程当我们的流程实例在启动的时候同时它的第二个参数真正给了是给了一个Holody的这样的一个Holody这样的一个变量直接被放入进来了
+[12:13] 是一个POGO的变量对吧直接被放入进来的这个对象被放入进来那肯定是需要做序列化操作的所以说如果我们这个地方不去实现序列化接口各位呢它将来是会爆出异常的是会爆异常的这个结论各位是一定要记住的我们一会儿可以给各位测一下这个效果
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在 Activiti 工作流引擎中部署流程定义、启动流程实例并设置流程变量。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：在 IDEA 中编辑 VariableTest.java，代码用于部署名为“请假流程-流程变量”的 BPMN 图文件（holiday4.bpmn）和 PNG 图片资源。
+画面2：在 IDEA 中编辑 VariableTest.java，代码用于部署流程定义。
+画面3：在 IDEA 中打开 BPMN 图编辑器，显示 holiday4.bpmn 流程图，包含 StartEvent、UserTask、ServiceTask、EndEvent 等节点。
+画面4：在 IDEA 中编辑 VariableTest.java，代码用于启动流程实例。
+画面5：在 IDEA 中编辑 VariableTest.java，代码用于启动流程实例并设置流程变量。
+画面6：在 IDEA 中编辑 VariableTest.java，代码用于启动流程实例并设置流程变量。
+画面7：在 IDEA 中打开 BPMN 图编辑器，显示 holiday4.bpmn 流程图，包含 StartEvent、UserTask、ServiceTask、EndEvent 等节点。
+画面8：在 IDEA 中编辑 VariableTest.java，代码用于启动流程实例并设置流程变量。
+画面9：在 IDEA 中编辑 VariableTest.java，代码用于启动流程实例并输出流程实例 ID。
+画面10：在 MySQL Workbench 中执行 SQL 语句，删除数据库 activiti 并创建新数据库 activiti。
+画面11：在 MySQL Workbench 中执行 SQL 语句，创建表 act_ge_bytearray 和 act_ru_variable。
+画面12：展示 PPT 页面，标题为“3.5.2 流程程度定义”，内容为“请假天数大于等于 3 连续条件”。
+画面13：在 MySQL Workbench 中执行 SQL 语句，创建表 act_ge_bytearray 和 act_ru_variable。
+画面14：在 IDEA 中编辑 Holiday.java，代码定义了一个实现 Serializable 接口的 Holiday 类，包含 id、holidayName、beginDate、endDate、num、reason、type 等字段。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+//启动流程实例：同时部署流程图资源
+public static void main(String[] args) {
+    //1.获取ProcessEngine
+    ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+    //2.获取RepositoryService对象
+    RepositoryService repositoryService = processEngine.getRepositoryService();
+    //3.部署
+    Deployment deploy = repositoryService.createDeployment()
+            .addClasspathResource("diagram/holiday4.bpmn")
+            .addClasspathResource("diagram/holiday4.png")
+            .name("请假流程-流程变量")
+            .deploy();
+    System.out.println(deploy.getId());
+    System.out.println(deploy.getName());
+}
+```
+
+画面4：
+```java
+public class VariableTest {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.获取RuntimeService
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.流程定义的key值
+        String key = "myProcess_1";
+        Map<String, Object> map = new HashMap<>();
+    }
+}
+```
+
+画面5：
+```java
+public class VariableTest {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.获取RuntimeService
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.流程定义的key值
+        String key = "myProcess_1";
+        Map<String, Object> map = new HashMap<>();
+        Holiday holiday = new Holiday();
+        holiday.setNum(1);
+        map.put("holiday", holiday);
+    }
+}
+```
+
+画面6：
+```java
+public class VariableTest {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.获取RuntimeService
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.流程定义的key值
+        String key = "myProcess_1";
+        Map<String, Object> map = new HashMap<>();
+        Holiday holiday = new Holiday();
+        holiday.setNum(1);
+        map.put("holiday", holiday);
+    }
+}
+```
+
+画面7：
+```java
+public class VariableTest {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.获取RuntimeService
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.流程定义的key值
+        String key = "myProcess_1";
+        Map<String, Object> map = new HashMap<>();
+        Holiday holiday = new Holiday();
+        holiday.setNum(1);
+        map.put("holiday", holiday);
+    }
+}
+```
+
+画面8：
+```java
+public class VariableTest {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.获取RuntimeService
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.流程定义的key值
+        String key = "myProcess_1";
+        Map<String, Object> map = new HashMap<>();
+        Holiday holiday = new Holiday();
+        holiday.setNum(1);
+        map.put("holiday", holiday);
+    }
+}
+```
+
+画面9：
+```java
+public class VariableTest {
+    public static void main(String[] args) {
+        //1.获取ProcessEngine
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        //2.获取RuntimeService
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        //3.流程定义的key值
+        String key = "myProcess_1";
+        Map<String, Object> map = new HashMap<>();
+        Holiday holiday = new Holiday();
+        holiday.setNum(1);
+        map.put("holiday", holiday);
+    }
+}
+```
+
+画面10：
+```sql
+drop database activiti;
+create database activiti;
+```
+
+画面11：
+```sql
+create table act_ge_bytearray
+```
+
+画面12：
+无代码或配置。
+
+画面13：
+```sql
+create table act_ge_bytearray
+```
+
+画面14：
+```java
+package com.ithemo.day04;
+import java.io.Serializable;
+import java.util.Date;
+public class Holiday implements Serializable {
+    private Integer id;
+    private String holidayName;//申请人的名字
+    private Date beginDate;//开始日期
+    private Date endDate;//结束日期
+    private Float num;//请假天数
+    private String reason;//事由
+    private String type;
+    public Integer getId() {
+        return id;
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面12：
+PPT 标题：3.5.2 流程程度定义
+PPT 内容：请假天数大于等于 3 连续条件
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+

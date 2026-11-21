@@ -1,0 +1,291 @@
+# 8.Freemarker基础-快速入门
+
+- 阶段：09.阶段九 聚合支付平台-闪聚支付项目
+- 章节：day08 C扫B支付 生成门店二维码
+- 源文件：09.阶段九 聚合支付平台-闪聚支付项目\day08 C扫B支付 生成门店二维码\8.Freemarker基础-快速入门【海量资源尽在 666java.com】.mp4
+- 时长 14分0秒（音频 840s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那接下来我们继续来学习Foremarker的一些基础知识那按照惯例呢我们学习一项新的技术首先我们来一个快速入门好那么我们来看啊最终啊我们要在项目当中引入Foremarker那么我们的项目是基于Spring Boot对吧所以这里边呢我们来写一个测试的工程我们也基于Spring Boot来进行搭建开发好那么我们不要先麻烦啊我们单独来创建一个什么工程注意看
+[00:30] 那现在这个工程呢我们把它叫做test framework行不行好那么就在这呢打开打开然后呢在这我们去new一个model对吧好然后这里面我们让它统一选择我们的副工程好那这个工程各位我们就对创建好了好那么创建好了之后呢我们下边就要想那在这个里边你要想呀我最终我们要用format的模板引擎我们是不是要把
+[01:00] Foremark的一些依赖包括一些配置文件加进去好那我们来看一下那这里边呢我们来看首先呢我们是需要去把它的依赖加进去的那这里边呢依赖各位看一下其实你一看就知道了就是CBD和Foremark的一个什么整合你看是不是Foremark的一个start是吧还有还有什么呢因为它是需要什么服务端渲染
+[01:29] 然后呢最终暴露一个http接口相当于还是需要依赖springmvc那一套所以你需要把springbootweb包也加进去当然后边就是与free marker不相关的一些工具包的比如longbook是吧okhttp包括test这些我们都加进去方便呢我们去测试使用好那么这里边我的依赖呢就加完了接下来我们继续来看它还有配置文件呀对吧配置文件
+[02:00] 那么依赖加进去之后大家可以看到在我的讲义上有一个截图这个form marker我们Spring Boot用的是2.1.3然后它整合的form marker是2.3.28回头大家可以去看一下然后配置文件这里边基础的配置文件我们是需要加进去的什么基础的就是Spring Boot工程基础的配置文件对吧那么这里边我们就怎么弄就直接给大家
+[02:29] 在资料文件夹下我就给大家已经提供好了所以你打开代码然后呢把FirmMark这两个配置笔键你把它拷到我们的这个Test的FirmMark当中好那下面这个是一个日志文件大家都知道那上面呢是一个什么是Spring Boot的一个配置文件好那上面是工程的端口诶 注意看从这开始这就是FirmMark的配置对吧
+[02:57] 那其实我在讲义上给你提供的Foremark的配置还挺多的你用Foremark就是我讲义上Foremark的配置我们覆盖它注意看然后看啥呢注意看里边你大概一看就知道这是一个什么编码对吧那这个呢因为复旦渲染最终我们生成可以生成很多类型的文档包括HTML对吧所以这里边我们让它生成HTML还有一点模板文件它的这个扩展名
+[03:25] 默认是FTL就是如果这一项你不写那么Foremarker默认使用的模板引擎的文件模板文件是FTL也就是说这里边我是完全可以改的对后边我在改的时候你就知道了那时候我的模板文件的扩展名可能就是HTML懂吧好然后呢还有很多的这个配置呢大家可以看一下比如说这里边呢我们来看后边还有什么模板路径对吧模板路径的话还是
+[03:56] 虽然我这里面配了但是呢我要告诉你其实这个模板路径它是可以干嘛可以改的默认是templates假如你说我改成ABC行不行可以那你就这样建一个ABC我把配置更多的给你报出来让你知道还有关闭工程默认的资源属性因为我们知道我们是完全可以自己去添加很多的mapping对吧那这里面呢你可以不用再添加了我们用Fullmarker它的这个资源就可以
+[04:25] 好然后还有如果说Fullmark在渲染的时候出现错误我们让它直接抛出一层OK这些错误呢是这些配置是一些最基础的一些配置啊好那配置就到这儿然后呢我们下面是不是就准备开始来测试了那你测试的时候呢注意我们还没有完成啊因为最终你也知道它是一个模板加数据对吧模板加数据那数据呢数据我们准备使用一个对类
+[04:53] 这个类呢也是非常简单的就是一个student看见了吗所以呢像这些简单的东西呢我就直接把它拿到这儿啊然后呢在这个里边呢我们就把这个类创建一下好其实这个工程啊如果让大家导进去的话可能对就是大家毕竟我们原来是在这个整个大的工程下边对吧我们是有些工程是导的那下面这个简单的测试工程呢我觉得大家
+[05:25] 可以去尝试的手动建一下其实这也不是很复杂OK那现在呢我们就把这个模型也搞定了对吧这个模型类呢我们搞定了之后呢这个将来就是我们去做数据模型的一个什么类型还有一个什么呢那它当然除了这个模型还有一个模板嘛数据模型加模板是不是才能输出啊对吧所以呢其实我们现在再创建一个什么模板好
+[05:54] 其实各位你别看我在这一边去拷贝一边去手写创建等等我告诉你你每一步操作你必须知道你在干啥对吧所以像这些比较简单的东西你虽然在拷贝但是你得知道它是作用是啥这个是不是就是我们说的模板对吧刚才我们说的这是不是我们说的这个模型类将来我们把数据是不是都放到这个类的对象里头了
+[06:21] 到这儿各位我们是不是基本上这个准备工作就快完成了是不是啊然后这个Spring Boot它应该还差一个什么启动类对吧启动类启动类的话一般是在这个跟路径下大家看啊这个包叫COMM3GPETEST FREEMARKER这下边全是Freemarker的一些测试所以说这个启动类我创建到这儿对吧那现在我是不是就可以把这个启动类
+[06:55] 写一下是吧好那怎么写呀那我们是不是写的太多了spring application是吧run然后呢这里边是不是就可以把它class指定一下然后呢给它可能它会传一个参数因为将来Spring Boot工程都是通过jar 包运行是吧OK那各位这是不是这个启动类我也搞定然后呢那现在呢我们说
+[07:25] 我是快速入门嘛那我准备最终我让请求一个Controller然后请求完Controller之后呢我准备让他去在浏览器上边去显示一个什么网页行不行那Controller我们得写一个吧那Controller写的话我们是不是就可以怎么弄我们是不是就可以简单的写一个方法就可以了是吧而写这个方法你要注意你看我怎么写你看我怎么写
+[07:56] 我准备最终是不是要输出一个什么网页了对吧而这个网页就是FreeMarker模板的内容懂吗所以各位各位你来看我怎么写我现在写到这的话我觉得这些工作都是我们前边所学过的都比较简单对吧而现在关键我要做你看可能看不懂的问题了什么东西我现在要return
+[08:26] 对吧returnreturn什么呢我return的这个地址对就是什么这个四图的名称看见了吗有时候老师那你return一个test1那它俩有啥关系注意听test1就是这个模板的名称你还有印象刚才我们在创建配置文件的时候这里边我们看到我是不是指定了一个什么是不是一个.ftl对吧
+[08:55] 那么这个后缀啊注意这个后缀加上刚才你看到的这个Controller里边我指定的这个test懂吧这里边我给你注释一下啊我们说在application对在application yml当中我们配置了什么对配置了free marker的刚才你看到的是不是一个叫ftl的这个后缀那这样的话最终
+[09:28] 最终这个四图的这个路径就是什么呀就是它对吧然后呢加上点FTL懂这个吧所以我就知道了原来它是这么做的大家看到了吗是不是所以你这return一个test的利益的话那么将来它就自动能找到这个什么这个模板
+[09:59] 那你说有时候老是光模板不行你看这里边还有一个变量值对不对那你说这个变量值我咋弄变量值这里边要注意我们这里边我要加几个参数加什么参数其实现在我要做的事就是要设置数据模型而设置数据模型的时候我们知道Spring MVC都是通过什么对行参来传值的
+[10:30] 对吧对所以这里边呢我就可以在里边放一个叫model的一个行参那么我们完全可以怎么做嗯我就写一个name对吧哎看好这个name的值是比较word对吧OK那你看最终这个方法一运行是不是找到了test1.ftl而test1.ftl里边是不是有一个name对吧好了那这时候呢
+[11:00] 这个free marker就会从模型数据当中找这个name那模型数据在哪呢模型数据在这你看见吗模型数据是不是一个map那里面是不是有一个key叫name那他就找到了这个name的值叫word于是乎他就把整个标签free marker的标签替换成值那最终输出到页面的是不是就是合word懂这个过程吗好那下面我是不是就把它写完了呀写完了之后各位看好
+[11:30] 那我只要干嘛启动我们的Spring Boot的启动类是不是就搞定一启动的话各位我们接下来要看这个效果我怎么做看效果怎么做你是不是要访问我们这个工程啊那么我们访问这个工程的话你肯定是需要去找到它的这个地址端口等等对吧然后呢我们是不是就可以来走一个
+[12:01] 看好那最终的地址是啥呀最终的地址肯定是http localhost 8088对不对8088然后呢它的这个工程是哪一个呢工程就是它的什么我们叫做叫test free marker对吧好test free不是我们没有设定一个context我们需要直接从这个Controller直接来拷贝这个叫什么呀
+[12:35] -test1大家看到效果了吧所以这个就是我们说的free marker的一个入门程序来我们再总结一下首先我们要使用free marker首先把它的依赖加进去然后这些都是小意思最关键的问题来了就是我们要设置模板这模板其实就是一个HTML那当然模板的内容你让它生成HTML它是HTML那你说我这里面什么都不要那你说它能输出一个
+[13:08] Hello World吗照样可以大家懂这意思吗所以模板很灵活那我想让它输出一个网页呢那你就按照网页的格式来建模板就行了好了那么还有一点就是除了模板还有数据模型数据模型呢就是在我们的control了当中我们是不是设了一个model对吧你这里边一定要注意就是你这个模板里边标签里边的这个变量一定是根据数据模型来设置的你的数据模型里边是不是有一个name所以你看你这个模板当中是不是有一个name
+[13:37] 大家看懂了吗那如果说如果说我的数据模型当中没有这个值那我问你这模板这它这个内幕会能取到吗那是肯定取不到的对了吧所以这样我们就实现了一个非常简单的一个这个free marker的一个入门程序好
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何使用 Spring Boot 集成 FreeMarker 模板引擎，从创建工程、配置文件、编写模板和控制器到启动应用并测试。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 介绍 FreeMarker 是一个用于 Java 开发的模板引擎，展示其工作原理图（模板、Java object、FreeMarker、Output）。
+画面2: 说明创建 Spring Boot 项目用于测试 FreeMarker，展示父工程的 pom.xml 片段。
+画面3: 展示 test-freemarker 工程的 pom.xml 文件内容，其中包含 Spring Boot 和 FreeMarker 的依赖。
+画面4: 展示 application.yml 文件内容，配置 server.port、spring.application.name 和 freemarker 相关属性。
+画面5: 展示 application.yml 文件中 freemarker 的配置项，包括 charset、content-type、suffix、enabled、template-loader-path、resources、add-mappings、throw-exception-if-no-handler-found。
+画面6: 展示项目结构，重点在 src/main/resources/templates 目录。
+画面7: 介绍创建模板文件 test1.ftl，展示其内容。
+画面8: 展示创建 FreeMarkerTestApplication.java 文件，准备 Spring Boot 启动类。
+画面9: 展示 FreeMarkerTestApplication.java 文件内容，包含 SpringApplication.run 方法。
+画面10: 展示创建 FreeMarkerController.java 文件，包含 @RequestMapping("/test1") 和 return "";。
+画面11: 展示 FreeMarkerController.java 文件内容，添加了 Map<String, Object> model 参数，并设置 model.put("name", "world")。
+画面12: 展示 application.yml 文件中 freemarker 的配置项，包括 suffix 和 template-loader-path。
+画面13: 展示 FreeMarkerController.java 文件内容，完成 model.put("name", "world") 并 return "test1"。
+画面14: 展示创建启动类的代码，展示 @SpringBootApplication 注解和 main 方法。
+
+3) 画面里出现的代码、配置、命令、目录结构、SQL、XML/YAML 配置：
+画面2:
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.3.RELEASE</version>
+</parent>
+
+画面3:
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.3.RELEASE</version>
+    </parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>test-freemarker</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>test-freemarker</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-WebSocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webmvc</artifactId>
+        </dependency>
+
+        <
+

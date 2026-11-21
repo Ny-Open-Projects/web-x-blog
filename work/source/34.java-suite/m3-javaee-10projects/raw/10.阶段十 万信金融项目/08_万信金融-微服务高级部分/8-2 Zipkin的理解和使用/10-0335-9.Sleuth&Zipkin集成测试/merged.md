@@ -1,0 +1,186 @@
+# 9.Sleuth&Zipkin集成测试
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：08_万信金融-微服务高级部分/8-2 Zipkin的理解和使用
+- 源文件：10.阶段十 万信金融项目\08_万信金融-微服务高级部分\8-2 Zipkin的理解和使用\9.Sleuth&Zipkin集成测试_【海量资源尽在 666java.com】.mp4
+- 时长 14分35秒（音频 875s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好前面呢我们已经把slose跟zking集成的这个案例呢全部搞定了接下来呢咱就进行功能测试那在测试之前呢我们还有一个细节问题需要给大家说就是跟采样率有关的一个细节问题那什么是采样率呢咱接下来一起了解一下现在大家都已经知道这个追踪日志是由slose产生的对吧然后日志的这个采集是由谁负责的呀对zking负责
+[00:30] 那Z King在采集日志的时候呢他可以去决定我采集多少这个数据就是这个数据量是可以进行什么设置这个其实就是什么采样率就是我在采集日志信息的时候我可以全部都采集我也可以只采集什么一部分这叫采样率那这是可以进行设置的怎么设置呢我们在这个配偶链当中通过这个代码就可以进行设置
+[00:58] 那么这个采用率的取值范围呢是0到1它是一个百分比啊如果取值为1就是百分之百的进行什么数据采集如果是0.5就是指采集什么呀一半的数据这是采用率那我们这样的具体给大家举了一个例子啊比如说我们假设啊假设一次请求当中包含了四次微幅的这个什么呀调用
+[01:21] 那如果采样率设置为1那就表示ZKIN会对四次微幅调用产生的所有的这个什么呀日日就是百分之百的进行什么呀采集那如果采样率的值你设置为是0.5那就相当于只对什么呀其中的一半对吧这个日日进行什么呀采集所以说这个采样率其实是可以进行设置的那这个时候呢有的同学就会有疑问那这个设置这个有什么意义呢我认为这个
+[01:50] 采样率应该是越高越好对吧采样率越高就是版本我版本都采集那这个数据就很丰富很详细对不对那它展示出来的这个效果或者说展示出来一些细节是不是就会更丰富一些理论来讲的确是如此但是实际开发当中并不是说这个什么呀对采样率什么呀越高就越好不一定为什么呢你要注意
+[02:18] 采集率越高数据是很丰富但是采集的这个压力和负担也很大你举个例子啊比如说我每一次请求然后包含了比如说这个几十次的这个微幅调用而这几十次微幅调用呢可能又会跨越好多个这个什么呀几十个这个什么呀服务器节点那么这时候如果你都百分之百的进行数据采集的话大家想一想这一天下来我们采集的这个数据量也是很惊人的啊
+[02:48] 所以这方面的压力或者负担也会很大所以说呢在实际开发当中采样率并不是越高越好啊这个你一定要注意了这个也没有规定是情况而定那我们目前呢是不是给大家举的是一个demo对吧我们刚才实现的这个案例是不是就是一个demo吗对不对咱这里边这个微幅之间就调用了两三次那在这个demo案例当中啊那你这个采样率我们就可以设置成多少设置成
+[03:17] 一就是百分之百的进行采集啊我们刚才说我们这只是一个demo啊我们这个微幅的调用次非常非常少数据量也非常非常少如果这时候你这个采用率设计这个采用率这个值你设置的非常低的话有可能这个效果就出不来了所以有这么一个细节是需要大家注意的那接下来呢需要把这个采用率这个配置我们给他啊加到咱们这个微幅里啊Service a Service b我们都要加对不对
+[03:47] 因为这我已经加过了这呢我们给成1就是百分百进行采样啊这加个注释吧就是什么呀采样率那微幅B这边我们也需要给它加上这是一个测试前的一个细节吧这个是需要大家注意的这个细节我们搞定之后呢接下来咱就开始进行测试咱这个测试啊分两种情况第一种就是正常测试就是我这个请求或者说这个调用在整个过程当中呢咱的程序没有出现任何问题
+[04:23] 还有种情况就是咱这个电脑中间出现什么呀异常分成这两种情况我们看这个正常和不正常的时候我们的ZKING是不是都可以正常的进行数据的一些什么呀日志的一些什么呀采集那我们首先是要先启动相关的一些系统一些服务对不对ZKING我们要启动我这已经启动过了然后就是注册中心还有这两个什么呀微服务我们看一下注册中心我都启动过了这两个微服务呢
+[04:52] 其实也启动过了但是刚才我们又加了配置对不对那咱就重新启动一下吧微幅A和什么微幅B都重新启动一下一定要记住啊你测试之前要把这个采样率给它加上好我们等待呢这两个微幅呢启动完毕这已经启动完毕了我们把这个控制台给它干什么呀清一下啊清完之后呢咱跟之前一样是不是要开始通过浏览器发请求了对不对先往Service A这边发请求
+[05:27] 让大家看一下咱前面说的这个案例是不是这样向我这发请求然后他呢再通过什么非对不对往微服B发请求微服B呢再通过非发送请求到什么微服A还是这个案例怎么换成非呢那我接下来就直接通过这发起这个请求来大家看这个页面是不是还是打印了那些信息这个咱不关心咱关心的是不是控制台呀对不对
+[05:59] 咱瞅瞅控制台的输出你看这是微服务A这边的控制台输出那跟之前就是那个Sluice那个入门率有区别吗这些信息咱之前讲过你还有印象吗这是Trace ID对吧这是什么呀Spine ID我们说一次请求当中不管发生了几次调用它的Trace ID都是什么呀一样但是呢这个每次调用都会生成一个什么呀对一些Spine ID它可能是这些值可能是什么呀不一样的是不是
+[06:33] 然后呢我们这里面重点要观察的就是这个值这个值明显是不是跟之前的案例是不是不一样呢是不是不一样咱之前那个案例它的这个这个地方的值是多少是force吗咱当时还说过一下啊这个force在哪说过在这吧你看这是不是这个值是force那现在是多少现在是处现在是处表什么意思现在是处就意味着什么呀我们的z king是不是已经开始工作
+[07:08] 他是不是开始采集这些什么呀对日志信息了啊那采集完日志信息之后呢我们是不是要看效果呀怎么看效果呀对咱们前面说过啊这个他采集到信息之后是不是会上传给Zking server我们这个Zking server是不是已经启动过了他现在已经工作了啊那然后呢我们怎么看到这个图形化的这个展示信息呢我们是不是要访问他的这个那个什么呀UI界面啊那个UI界面的访问地址是不是多少就这个地址是吧
+[07:38] 9411这个档口我这边已经打开过了咱们刷信一下没有采集到信息吗好已经有了对不对你可能需要稍等个一小会儿对不对你看我们这采集到信息了Service-a还有什么呀Service-b对吧我们可以点击一下进来之后呢这就是什么呀详细信息吧你看首先我们的请求是不是先到了Service-a然后再到了Service-b然后又到了这个什么呀Service-a
+[08:15] 然后后边你会发现这是你访问每个微服务花费的这个什么呀对时间时间然后呢你还可以再看他的详细信息比如说这个salesa这个我点击一下哎这边就是更详细的一些信息啊因为这里边是不是有时间对不对这个执行的时间啊然后呢请求方式请求的路径访问的哪个controls访问的哪个什么呀对方法
+[08:42] 以及他展示出来的日志当中的那些ID你还有印象吗有没有印象Trace ID还有什么呀对Spot ID你看他其实都有记录然后你再看Stories B也是一样的我们点击一下这边也能看到他详细的一些什么呀时间对不对地址然后这个请求方式具体的访问路径Controller类具体调的哪个方法IP地址端口号等等等等然后还有什么东西对Trace ID是不是
+[09:14] 然后这个partner id我简单给大家说一说这个partner id呢大家看字面意思是不是4id那这个partner id是啥意思呢你看大家知道我们这个调用是不是有一个有一个什么呀有一个顺序对不对第一步到哪第二步到哪那你比如说啊这个呢是第二步调用第二步调用那么这个partner id的值就是第一步调用产生的那个什么呀span id这是需要你注意的
+[09:42] 当然我们现在其实有了这个图形化界面之后我们是不是也不关心这几个ID了然后你看看这个最后一次调用这个详细信息我们也可以打开最后一次调用我们是不是又去通过Fain去访问谁了访问Service A了对不对那还是get请求这是Controller内访问的是Service 2这个方法对不对它里边也有展现一些什么呀ID你看这就是图形化的一个日志信息的一个什么呀展示
+[10:12] 比你在这个控制台看起来是不是好很多吧对不对这是正常情况没问题吧这是正常情况那咱接下来呢故意呢制造一个异常怎么制造异常呢这个办法多了去了对不对咱想让他出个错这个还是很轻松的一件事我们看蒋毅是怎么搞的呀蒋毅蒋毅这是在哪Service b这边你看是不是搞了一个除零异常对不对那好办咱
+[10:42] 跟蒋义保持一致吧Service b 的 Controller 里边因为他是在什么位置啊他是在这个位置那咱也在这吧跟蒋义保持一致吧反正这个造异常吧你你大家都很擅长是不是啊你可以想个任何一个办法给他制造一个异常就行那大家看一下当我们发起请求然后触发这个业呃触发这个什么样微服之间进行调动的时候啊一旦走到这儿是不是该抛异常对不对那咱接下来测试测试这种情况
+[11:14] 那我Service B这个微服务是不是需要重新一下重新一下啊因为我刚才这加了一个代码我们重新一下然后再次进行测试看看Z King会不会收集到这个什么异常的一些信息好这边已经启动完了我们把控制台清一清然后呢我这边是不是再次刷新对不对在这啊再次发信息可惜你看这边是不是果然报错了500对不对
+[11:44] 然后控制台那你想你控制台肯定会报错呀报这个什么呀对这边报的就是500错吗Service b这边应该是报除零的那个异常吧是不是你看这很正常了控制台肯定是要报这些错误那我们其实我也不想看控制台因为我现在有zking嘛对不对他要收集这种信息那我就要看看这个zking的这个图形化界面里边他有没有采集到这些信息对不对这才是我最关心的啊那我们接下来刷新一下
+[12:14] 他有没有采集到这些信息接下来咱看看应该是这对吧也是红色的嘛对不对我们点击一下你看看这边你看颜色很明显是有区分的对不对咱上次做测试的时候你看这里边都是什么呀这叫这叫什么颜色这叫蓝色浅蓝色对不对那你看我们这一次呢这次这个测试的时候就变成这个什么呀红色了对不对这就证明咱这个服务调用的时候出现什么呀出现异常出现问题了
+[12:46] 你还是跟刚才一样可以点击看这里边的这个什么呀详情啊你看我们Service在访问Service A的时候他报的异常就是那500嘛是不是500啊这个500肯定这个异常不是很详细吗因为异常发生的位置不在这不在Service A这边是在Service B那边对吧所以说Service A这边只能给提示一个什么呀500这么一个异常然后呢我们再看看这个Service Bservice B这边应该会提示详细的一个一个异常信息吧对不对
+[13:16] 让我点击一下你看这是不是byzer对不对出零一场这就有提示所以你会发现呢这个zking呢他连异常信息是不是也可以干什么呀也可以收集那将来如果说啊我们是一个很成熟完善的一个项目也上线了我们在我们的项目当中呢集成了sluth对吧集成了zking那将来呢每天是不是会发生很多次的调每次调里边是不是就包含很多次的微幅之间的一个什么呀
+[13:47] 一个调用对不对那将来呢这些信息呢都会被Z King进行什么呀采集啊一旦你发现哪个请求啊或者哪个业务当中你觉得哎有问题对不对那你就可以打开Z King来通过这个图形化的方式进行什么呀分析首先你是不是就可以看颜色对不对这是呃最明显的一个区别啊然后呢去查看这里边详情啊很快呢我们就能干干什么呀对找到
+[14:15] 问题发生了这个什么样位置以及什么样原因然后有针对性的去对解决这些问题就行了这是我们把Sluice跟Zkin集成了这个案例啊给大家做了一些测试啊这个效果呢是目前的是全部都已经展示出来了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 Spring Cloud Sleuth 结合 Zipkin 实现微服务调用链追踪，并展示在 Zipkin 界面中查看追踪数据。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：
+- PPT标题：3.2.1 案例简介
+- 内容：我们对上面的Sleuth入门案例进行改造，采用Eureka作为服务注册与发现中心，采用Feign实现服务间调用，并将追踪日志上报至Zipkin服务端，最终使用Zipkin图形化展示服务调用链追踪情况。
+
+画面2：
+- 内容：启动Zipkin，启动注册中心和两个微服务，然后通过浏览器访问 http://localhost:58021/Service-a/service1，得到以下输出：
+  Service-a-service1---->Service-b-Service---->Service-a-service2
+- 内容：查看控制台日志输出，如下图所示：
+  Console -+ ServiceBootstrap
+  42.830 INFO [sleuth-with-zipkin-Service-a, ddbbcc256a353723, ddbbcc256a353723, true]
+  42.830 INFO [sleuth-with-zipkin-Service-a, ddbbcc256a353723, ddbbcc256a353723, true]
+- 内容：使用浏览器访问 http://localhost:9411，点击查找，可以看到刚刚测试产生的服务调用链路信息。
+
+画面3：
+- IDE界面：IntelliJ IDEA，打开 Service-b 的 application.properties 文件。
+- 代码内容：
+  spring.sleuth.enabled=true
+  #指定zipkin server地址，上报跟踪日志
+  spring.zipkin.base-url=http://localhost:9411
+  #采样率，取值范围0-1
+  spring.sleuth.sampler.probability=1
+
+画面4：
+- PPT标题：2.2 入门案例
+- 子标题：2.2.1 案例简介
+- 内容：创建两个微服务，并通过RestTemplate实现服务之间的调用，形成如下调用链：
+  - 流程图：前端请求 → 服务A（节点1）→ 服务B（节点2）→ 服务A（节点3）
+- 子标题：2.2.2 功能实现
+- 子标题：2.2.1 微服务A
+- 内容：1. 新建一个名字为SleuthDemo的Maven工程
+- 内容：2. 引入依赖
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.3.RELEASE</version>
+    <relativePath/>
+  </parent>
+
+画面5：
+- PPT标题：3.3.3 功能测试
+- 内容：测试细节：在application.properties中设置采样率
+  #采样率，取值范围0-1
+  spring.sleuth.sampler.probability=1
+- 内容：追踪日志由Sleuth产生，日志的采集由Zipkin负责，采集多少数据可以通过采样率（取值范围0-1）进行控制。假设一次请求包含四次微服务调用，如果采样率设置为1，则所有调用产生的日志进行采集；如果采样率设置为0.5，则只对一半调用产生的日志进行采集。采样率越高，数据越丰富，但是采集压力和负担也越大，所以在实际开发中，采样率并不是越高越好，视情况而定。
+
+画面6：
+- PPT标题：3.2.2 功能实现
+- 子标题：3.2.2.1 工程实现
+- 内容：由于涉及到服务注册中心、服务A、服务B三个工程，因此可考虑使用maven工程来统一依赖管理。
+- 内容：在父工程pom中引入Spring Boot及spring cloud依赖：
+
+画面7：
+- 浏览器地址栏：http://localhost:9411/zipkin/
+- 页面内容：Zipkin - Investigate system behavior
+
+画面8：
+- Zipkin 界面：显示追踪详情
+- 标题：sleuth-with-zipkin-Service-b.get/Service: 937.737ms
+- 表格1：服务调用时间
+  Date Time | Relative Time | Annotation | Address
+  2019/11/7 下午10:26:43 | 584.500ms | Client Start | sleuth-with-zipkin-Service-a
+  2019/11/7 下午10:26:43 | 742.859ms | Server Start | sleuth-with-zipkin-Service-b
+  2019/11/7 下午10:26:44 | 1.533s | Client Finish | sleuth-with-zipkin-Service-b
+- 表格2：请求参数
+  Key | Value
+  http.method | GET
+  http.path | /Service-b/Service
+  mvc.Controller.class | ServiceBController
+  mvc.Controller.method | Service
+  Client Address | 127.0.0.1:53992
+
+画面9：
+- IDE界面：IntelliJ IDEA，打开 Service-b 的 application.properties 文件。
+- 代码内容：
+  Eureka.client.serviceUrl.defaultZone = http://localhost:58020/Eureka/
+  #开启Sleuth
+  spring.sleuth.enabled=true
+  #指定zipkin server地址，上报跟踪日志
+  spring.zipkin.base-url=http://localhost:9411
+  #采样率，取值范围0-1
+  spring.sleuth.sampler.probability=1
+
+画面10：
+- IDE界面：IntelliJ IDEA，打开 Service-b 的 ServiceBController.java 文件。
+- 代码内容：
+  package com.libema.sleuth.serviceb.Controller;
+  import ...
+  @RestController
+  public class ServiceBController {
+    @Autowired
+    private ServiceAgent serviceAgent;
+    @GetMapping("Service")
+    public String Service() {
+      String Service = serviceAgent.Service();
+      return "Service-b-Service---->service2";
+    }
+  }
+
+画面11：
+- 浏览器地址栏：http://localhost:58021/Service-a/service1
+- 页面内容：Service-a-service1---->Service-b-Service---->Service-a-service2
+
+画面12：
+- Zipkin 界面：显示追踪详情
+- 标题：sleuth-with-zipkin-Service-b.get/Service: 955.222ms
+- 表格1：服务调用时间
+  Date Time | Relative Time | Annotation | Address
+  2019/11/7 下午10:32:32 | 2.424ms | Client Start | sleuth-with-zipkin-Service-a
+  2019/11/7 下午10:32:32 | 142.177ms | Server Start | sleuth-with-zipkin-Service-b
+  2019/11/7 下午10:32:33 | 957.646ms | Client Finish | sleuth-with-zipkin-Service-a
+- 表格2：请求参数
+  Key | Value
+  http.method | GET
+  http.path | /Service-b/Service
+  mvc.Controller.class | ServiceBController
+  mvc.Controller.method | Service
+  Client Address | 127.0.0.1:53992
+
+画面13：
+- Zipkin 界面：显示追踪详情
+- 标题：sleuth-with-zipkin-Service-b.get/Service: 955.222ms
+- 表格1：服务调用时间
+  Date Time | Relative Time | Annotation | Address
+  2019/11/7 下午10:32:32 | 2.424ms | Client Start | sleuth-with-zipkin-Service-a
+  2019/11/7 下午10:32:32 | 142.177ms | Server Start | sleuth-with-zipkin-Service-b
+  2019/11/7 下午10:32:33 | 957.646ms | Client Finish | sleuth-with-zipkin-Service-a
+- 表格2：请求参数
+  Key | Value
+  http.method | GET
+  http.path | /Service-b/Service
+  mvc.Controller.class | ServiceBController
+  mvc.Controller.method | Service
+  Client Address | 127.0.0.1:53992
+
+画面14：
+- Zipkin 界面：显示追踪详情
+- 标题：sleuth-with-zipkin-Service-b.get/Service: 955.222ms
+- 表格1：服务调用时间
+  Date Time | Relative Time | Annotation
+

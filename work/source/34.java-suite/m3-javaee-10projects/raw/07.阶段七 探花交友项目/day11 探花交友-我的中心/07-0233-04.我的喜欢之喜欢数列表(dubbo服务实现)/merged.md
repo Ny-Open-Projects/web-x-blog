@@ -1,0 +1,234 @@
+# 04.我的喜欢之喜欢数列表（dubbo服务实现）
+
+- 阶段：07.阶段七 探花交友项目
+- 章节：day11 探花交友-我的中心
+- 源文件：07.阶段七 探花交友项目\day11 探花交友-我的中心\04.我的喜欢之喜欢数列表（dubbo服务实现）_【海量资源尽在 666java.com】.mp4
+- 时长 14分13秒（音频 854s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们来看一下我们的查询喜欢的这个列表那么首先呢我们来看一下这个默克接口然后呢这个接口呢其实它是集成了有四个这个接口啊那我们一起来看一下那么是在这个位置啊那么有这个相互关注然后呢我的关注然后呢粉丝还有谁看过我那么前面的三个呢都是和我们的
+[00:28] 这个我喜欢啊相关的一些这个接口但最最后一个呢叫随看鼓鼓啊这个是在哪里去使用呢那么我们给大家来演示一下使用的这个位置啊那我还是把这个就是投屏这个呢我们来打开一下呃然后呢我这边呢需要手机去联一下啊然后呢去做一个这个测试那么稍微等一下我需要去搜一下去联一下它
+[00:55] 那么这样的话就连到我的手机了那我们打开这个探花啊然后呢在这个位置呢我把它改成默克接口然后呢我们来看一下这个效果啊然后呢首先呢去主页那么刚才我们所说的这个列表呢是在这个位置是不是有这个996啊697啊这样的一些这个数据是吧然后我们点击这个数据就会进入
+[01:19] 具体的一些这个页面然后呢会做一些分页啊然后呢像右滑呢可以进入到这个喜欢的这个里面来还可以去进入这个什么的粉丝啊喜欢的这样的一些这个操作啊然后呢这是三个这个接口那么刚刚我们所提到的谁看过我的接口呢是在这个位置就是我们在上面是不是有一个在这个位置啊是不是有一个最近有几人来访啊然后呢我们点击它然后呢下面呢会有一个
+[01:46] 这个列表这个呢是我们之前的没有去实现的啊所以说我们把这个谁看过我的这个接口的下面这个列表呢就在这个位置呢去做一个完成啊那么首先呢我们给大家去演示一下这个功能那么接下来呢我们就来实现这四个这个数据的一个列表的一个展现啊哎OK好那我们把这个呢就先关掉啊一会儿我们再来打开去使用它好那么接下来呢我们来看一下如何去做一个实现那么首先呢我们需要
+[02:16] 在我们的原有的这个Urlake API中的去增加而这三个这个方法都是去查询我们这个列表的前面的是查询我们的数量这个是查询我们的这个列表下面我们就把这个方法我们来拷贝到我们这个接口中那么拷贝进来之后我们再来看一下然后我们找到我们的这个就是double下面的一个interface然后下面我们来找到我们的一个叫做Urlake API
+[02:45] 然后我们加到下面这个位置来好那我们来看一下这个接口的三个新增的三个方法第一个是查询我们的一个就是相互喜欢这样的一个列表那么需要返回的是一个PageInfo然后我们需要有三个参数一个是UID一个就是我们的Page还有PageSize然后下面这个是查询什么就是我喜欢的这样的一个列表那么也有三个参数
+[03:14] 然后呢下面这个呢是去查询我的这个粉丝的这个列表同样的也是有三个参数啊那么所有反文的都是这个配置info啊所以说那么都是需要去做一个分页的啊那么接下来呢我们就来实现我们刚刚所定义的这三个这个方法啊那么我们来实现一下那么首先第一个呢我们就来看一下我们这个
+[03:35] 就是查询我们的这个相互喜欢那么这个里面的逻辑其实是和我们前面的这个逻辑是一样的只是我们前面的查询那个列表这块只要查询我们的一个这个前面查询数量下面我们只要查询这个列表就可以了最后返回这个配置info那么接下来我们就可以把这个代码我们就来拷贝一下
+[04:00] 然后我们一直就拷贝到这然后我们就到这来改造一下然后 return 显然不能 return 对吧所以说我们需要去先去拿到一个 list那么我们应该写一个什么的find 操作然后它的返回就是一个我们的一个 user like list这样的一个集合
+[04:25] 那么最后呢我们去定一个PageInfo那么它呢所需要存放的就是我们的这个UrlLike对象然后呢我们去写一个叫做PageInfo去new一个PageInfo对象最后呢return然后呢PageInfo这样的一个这个对象然后呢我们去做一些set操作set一个set一个PageNumber那就是Page然后呢还有就是我们的一个set一个
+[04:54] 就是配置赛日那就是配置赛日好那么我们继续做一个set操作那么还有就是我们的一个total我们现在不提供我们就设置为0加一个注射就是暂时不提供因为我们前端现在没用不提供然后这个是set total然后再set一个recall那就是我们上面的集合了那就它了
+[05:24] 好那么这样的话呢我们是不是就可以返回我们的一个这个配置info了那么但是这个位置呢我们稍微会有一点点问题就是我们传入这个配置和配置size我们并没有去使用啊所以我们需要给他去添加我们的一个分页啊那么我们在这个位置吧去加一个我们的这个分页啊那么我们就定一个叫做配置啊配置request啊这样的一个对象
+[05:51] 那么等于配置request点然后off然后配置-1对吧然后还有就是配置size然后我们还要去给他去设置一个我们的一个排序sort by然后order desi那么根据谁去做一个倒序排序我们来看一下结构那么这个里面是不是有个created就是我们的创建时间我们去做一个倒序排序把最新的给它展现出来然后
+[06:21] 我们这个query那么又加到这个位置来对吧query2点然后呢位置把它加进来这个是设置什么呢我们的一个分页啊分页好那么这样的话呢我们是不是就实现了一个这个查询了对吧那么接下来我们来看一下那么在我们的这个查询like还有查询我们的粉丝列表中大家其实可以想一下就是那么他的查询逻辑的基本都是一样的只是这个query呢
+[06:49] 不一样所以说呢我们是有必要去把我们的这个就是我们这一块这个逻辑我们去给他去分装一下啊那我们就分装啊这样的一个方法吧就是我们分装一个私有的一个方法那么返回值呢就是一个配置infot呢那就是这个u的like然后呢写一个叫querylist这样的一个
+[07:12] 私有的一个方法那我们接收两个参数一个就是query一个就是query然后呢我们再来接收我们就是就是我们的这个就是我们的这个呃什么呢配置和配置配置和配置size好那我们接收这三个这个参数然后呢我们就把下面的这个就来拷贝过来那么我们就
+[07:43] 最后去做一个return但是呢我们可能需要把代码呢去调一下那么这个呢是没有问题的这个query呢我们就不需要了把它拿走然后呢我们就直接给这个query呢去设置一个位置然后呢去做一个query查询啊就可以了好那么在我们上面这个位置啊那我们就需要这么来玩了这个就不需要了对吧然后这个其实也不需要了
+[08:05] 那我们就在下面这个位置是不是直接调用this.querylist传递这个query2然后呢再传递page和page size这样的话呢我们是不是就搞定了对吧然后呢针对于我们下面的这个querylikelist那就更简单了那我们就直接调用它调用它然后呢我们传一个query是不是就搞定
+[08:26] 那么同样它是不是也是一样的道理啊而我们这个query like list前面是不是我们已经写过这个query了那么是不是就在这个位置那我们把它来拷贝一下那么我们就拷到哪呢拷到这儿然后呢我们就把它丢到下面的这个位置来好这样的话是不是就搞定了然后呢下面的这个呢同样的道理是不是我们找到上面的这个查询粉丝的这个逻辑然后到这儿把它呢也拷贝一下
+[08:55] 然后呢我们啊网站一丢好这样的话我们是不是就搞定了那么这样的话呢我们是不是这三个方法也就啊全部都搞定了好嘞好那么接下来呢我们是不是就可以来测试一下它对吧那么我们可以去写一个我们的一个单元测试啊是不是去去测一下哎这块是有有包错吗我们来看一下啊哪个里面有错误呢然后呢API啊就是就是在这个里面哪里有错误啊他说我们缺少一个
+[09:26] 缺少一个这个语法错误对吧看一下在哪里呢是在这个位置我们缺少一个这个分号这样的话就没有问题了那么下面我们可以来编写一个单元测试我们可以简单的来测试一下那么就在我们这个叫做uselike的一个这个实践中那么下面我们就还调用这个方法这个拷贝一下这个方法然后呢这个就不是count那就是叫做query一个list
+[09:55] 然后呢我们其实我们只要测试一个或者其实我们都测一下也无所谓啊那么我们可以来测一下吧比如说我们就查询我们的相互喜欢吧就是叫query each这个list需要有三个参数一个是usid一个是1一个就是我们场地page size然后它呢就会返回一个page info那么接下来呢我们就需要去便利一下就ok了然后呢就叫page info.getrecords
+[10:24] 那么是不是拿到它了然后我们把这个recall打印出来好那么接下来呢我们就来执行一下当然了我们需要先把这个double呢我们先停掉啊然后我们再来去做一个测试走好那么我们来看一下这个执行的一个结果啊那么这个数据呢是不是就已经都展现出来了
+[10:42] 这样的话呢就没有问题了对吧好那么另外两个查询呢我们就不做一个测试了大家可以自己测一下啊应该是没有问题的那我们接下来来看一下我们的讲义啊那么这个呢就是我们具体的一个实现那么前面的我们是不是也去写了这样的一些方法那么也是分装了一个这样私有的一个方法然后呢接下来呢我们来看一下我们这个就是谁看过我的这个实现那么我们是需要按照一个时间倒训的去做一个查询
+[11:12] 那么我们找到Visto API那么我们来找一下是在前面的我们这个里面来去之前我们是不是只返回的是我们根据一个什么用户ID和数量以及用户ID和我们的时间我们再来添加一个就是做一个分页的这样的一个查询分页的一个查询
+[11:35] 好那么接下来呢我们就需要来实现这个方法那么其实我们在这个位置我们应该返回的是page info对吧那么大家其实我们不返回也可以因为我们实际上我们并没有去使用到它这个里面太多的一些这个内容那么我们只是填充了page number和page size其实这两个呢在我们调用方中也是知道的所以说我们返回list和返回它的这个意义的这个区或者说区别呢并不是很大那么但是如果说我们需要返回我们的
+[12:04] 这个总数的话那意义就不一样了好那么接下来呢我们就来实现一下我们的这个刚刚说去拿这个方法来定这个方法那么我们来看一下这个方法怎么样去做一个实现那么在前面呢我们是不是已经就有了一些这个实现了那我们可以去比如说去参考它去做一个实现那我们来看一下这个呢是做一个这个查询那么
+[12:34] 我们就把它就拿过来了然后呢这个呢也是去做一个查询啊然后呢这个number我们就改成我们的一个这个啊当然0我们改成page-1啊然后呢这个后面这个number呢改成page-size好那么这个这个查询条件呢是没有问题的对吧然后呢我们在这个位置需要去注意一下我们不能直接返回它了因为它返回的是一个这个集合
+[13:00] 反过来是一个集合那么接下来我们同样的是需要去new一个这个PageInfo我们就去new一个它PageInfo叫什么Vest4然后叫PageInfo等于去new一个PageInfo然后我们去returnPageInfo然后我们去做一个设置那么PageInfo.set一个recode那就是我们的VestList
+[13:30] 然后我们设置几个值然后我们再来set一个page size那就是设置一个page size然后set一个page number那么就是一个叫做page对象然后set一个我们total那就设置为0了同样还是暂时不提供这是暂时不提供
+[13:53] 好那么这样的话呢我们就将我们的四个这个接口所需要的一个double的一个服务的一个编写呢是不是就已经啊搞定了那么下面我们只要去编写它的一个具体的一个这个就是APP的一个接口啊就OK了好那么关于我们这个double接口的一个编写呢那我们就先讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲：演示如何在 Dubbo 服务中实现用户点赞列表、粉丝列表和访客列表的分页查询功能，涉及 MongoDB 的查询操作和 PageInfo 分页封装。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：显示 Chrome 浏览器的下载页面，包含三个下载文件：DdHm...mp4（2019年10月30日）、apowermirror-setup-bd.exe（2019年10月30日）、DesktopDemo.3.6.0.win.setup.zip（2019年10月28日）。
+画面2：桌面背景为黑马程序员/博学谷的水印，显示一个手机应用界面，其中包含“ApowerMirror”字样，暗示即将安装或演示该软件。
+画面3：IDE 中显示项目结构，当前选中 `UserLikeApi.java` 文件，其中定义了 `queryEachLikeList` 和 `queryFanList` 方法。
+画面4：IDE 中显示 `UserLikeApiImpl.java` 文件，代码中包含 `queryLikeCount`、`queryFanCount` 和 `queryEachLikeList` 方法的实现，使用了 `MongoTemplate`。
+画面5：IDE 中显示 `UserLikeApiImpl.java` 文件，代码中包含 `queryEachLikeList` 方法的实现，使用了 `MongoTemplate` 和 `PageInfo`。
+画面6：IDE 中显示 `UserLikeApiImpl.java` 文件，代码中包含 `queryEachLikeList` 方法的实现，使用了 `PageRequest` 和 `Sort`。
+画面7：IDE 中显示 `UserLikeApiImpl.java` 文件，代码中光标位于 `PageInfo` 类的定义处，下方有自动补全提示。
+画面8：IDE 中显示 `UserLikeApiImpl.java` 文件，代码中 `queryEachLikeList` 方法的实现，使用了 `PageRequest` 和 `Sort`。
+画面9：IDE 中显示 `UserLikeApiImpl.java` 文件，代码中 `queryLikeList` 方法的实现，使用了 `PageRequest` 和 `Sort`。
+画面10：IDE 中显示 `TestUserLikeApiImpl.java` 文件，代码中包含 `testQueryCounts` 和 `testQueryList` 方法，用于测试 `UserLikeApi`。
+画面11：Typora 编辑器中显示 `day11 详义.md` 文件，内容为“1.4.3. UserLikeApiImpl”部分，包含 `queryLikeList` 方法的伪代码。
+画面12：IDE 中显示 `VisitorsApiImpl.java` 文件，代码中包含 `topVisitor` 方法的实现，使用了 `MongoTemplate`。
+画面13：IDE 中显示 `VisitorsApiImpl.java` 文件，代码中 `topVisitor` 方法的实现，使用了 `PageInfo`。
+画面14：Typora 编辑器中显示 `day11 详义.md` 文件，内容为“1.4.4. VisitorsApi”部分，包含 `topVisitor` 方法的伪代码。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面3：
+```java
+nfo<UserLike> queryEachLikeList(Long userId, Integer page, Integer pageSize);
+nfo<UserLike> queryFanList(Long userId, Integer page, Integer pageSize);
+```
+
+画面4：
+```java
+@Override
+public Long queryLikeCount(Long userId) {
+    return this.mongoTemplate.count(Query.query(Criteria.where("userId").is(userId)), UserLike.class);
+}
+
+@Override
+public long queryFanCount(Long userId) {
+    return this.mongoTemplate.count(Query.query(Criteria.where("likeUserId").is(userId)), UserLike.class);
+}
+
+@Override
+public PageInfo<UserLike> queryEachLikeList(Long userId, Integer page, Integer pageSize) {
+```
+
+画面5：
+```java
+@Override
+public PageInfo<UserLike> queryEachLikeList(Long userId, Integer page, Integer pageSize) {
+    // 查询我的喜欢列表
+    Query query = Query.query(Criteria.where("userId").is(userId));
+    List<UserLike> userLikes = this.mongoTemplate.find(query, UserLike.class);
+
+    // 收集到我的喜欢列表中的 userId（对方）
+    List<Long> likeUserIds = new ArrayList<>();
+    for (UserLike userLike : userLikes) {
+        likeUserIds.add(userLike.getLikeUserId());
+    }
+
+    // 在我的喜欢列表范围内，查询喜欢我的人有哪些
+    Query query2 = Query.query(Criteria.where("userId").in(likeUserIds).and("likeUserId").is(userId);
+    List<UserLike> userLikeList = this.mongoTemplate.find(query2, UserLike.class);
+
+    PageInfo<UserLike> pageInfo = new PageInfo<>();
+    pageInfo.setPageNum(page);
+    pageInfo.setPageSize(pageSize);
+    pageInfo.setTotal(0); // 暂时不提供
+    pageInfo.setRecords(userLikeList);
+
+    return pageInfo;
+}
+```
+
+画面6：
+```java
+@Override
+public PageInfo<UserLike> queryEachLikeList(Long userId, Integer page, Integer pageSize) {
+    // 查询我的喜欢列表
+    Query query = Query.query(Criteria.where("userId").is(userId));
+    List<UserLike> userLikes = this.mongoTemplate.find(query, UserLike.class);
+
+    // 收集到我的喜欢列表中的 userId（对方）
+    List<Long> likeUserIds = new ArrayList<>();
+    for (UserLike userLike : userLikes) {
+        likeUserIds.add(userLike.getLikeUserId());
+    }
+
+    // 在我的喜欢列表范围内，查询喜欢我的人有哪些
+    Query query2 = Query.query(Criteria.where("userId").in(likeUserIds).and("likeUserId").is(userId);
+    List<UserLike> userLikeList = this.mongoTemplate.find(query2, UserLike.class);
+
+    PageInfo<UserLike> pageInfo = new PageInfo<>();
+    pageInfo.setPageNum(page);
+    pageInfo.setPageSize(pageSize);
+    pageInfo.setTotal(0); // 暂时不提供
+    pageInfo.setRecords(userLikeList);
+
+    return pageInfo;
+}
+```
+
+画面7：
+```java
+private PageInfo<UserLike> queryList(Query query, Integer page, Integer pageSize) {
+    PageRequest pageRequest = PageRequest.of(page - 1, pageSize, Sort.by(Sort.Order.desc("created")));
+    query.with(pageRequest);
+    List<UserLike> userLikeList = this.mongoTemplate.find(query, UserLike.class);
+
+    PageInfo<UserLike> pageInfo = new PageInfo<>();
+    pageInfo.setRecords(userLikeList);
+    pageInfo.setTotal(0); // 暂时不提供
+    pageInfo.setPageNum(page);
+    pageInfo.setPageSize(pageSize);
+
+    return pageInfo;
+}
+```
+
+画面8：
+```java
+@Override
+public PageInfo<UserLike> queryEachLikeList(Long userId, Integer page, Integer pageSize) {
+    // 查询我的喜欢列表
+    Query query = Query.query(Criteria.where("userId").is(userId));
+    List<UserLike> userLikes = this.mongoTemplate.find(query, UserLike.class);
+
+    // 收集到我的喜欢列表中的 userId（对方）
+    List<Long> likeUserIds = new ArrayList<>();
+    for (UserLike userLike : userLikes) {
+        likeUserIds.add(userLike.getLikeUserId());
+    }
+
+    // 在我的喜欢列表范围内，查询喜欢我的人有哪些
+    Query query2 = Query.query(Criteria.where("userId").in(likeUserIds).and("likeUserId").is(userId);
+    List<UserLike> userLikeList = this.mongoTemplate.find(query2, UserLike.class);
+
+    PageInfo<UserLike> pageInfo = new PageInfo<>();
+    pageInfo.setPageNum(page);
+    pageInfo.setPageSize(pageSize);
+    pageInfo.setTotal(0); // 暂时不提供
+    pageInfo.setRecords(userLikeList);
+
+    return pageInfo;
+}
+```
+
+画面9：
+```java
+@Override
+public PageInfo<UserLike> queryLikeList(Query query, Integer page, Integer pageSize) {
+    PageRequest pageRequest = PageRequest.of(page - 1, pageSize, Sort.by(Sort.Order.desc("created")));
+    query.with(pageRequest);
+    List<UserLike> userLikeList = this.mongoTemplate.find(query, UserLike.class);
+
+    PageInfo<UserLike> pageInfo = new PageInfo<>();
+    pageInfo.setRecords(userLikeList);
+    pageInfo.setTotal(0); // 暂时不提供
+    pageInfo.setPageNum(page);
+    pageInfo.setPageSize(pageSize);
+
+    return pageInfo;
+}
+```
+
+画面10：
+```java
+@Test
+void testQueryCounts() {
+    this.userLikeApi.saveUserLike(userid: 51, likeUserId: 11);
+    this.userLikeApi.saveUserLike(userid: 61, likeUserId: 11);
+    System.out.println(this.userLikeApi.queryEachLikeCount(userid: 11));
+    System.out.println(this.userLikeApi.queryFanCount(userid: 11));
+}
+
+@Test
+void testQueryList() {
+    PageInfo<UserLike> pageinfo = this.userLikeApi.queryEachLikeList(11, 1, 10);
+}
+```
+
+画面11：
+```markdown
+1.4.3. UserLikeApiImpl
+    public PageInfo<UserLike> queryLikeList(Long userId, Integer page, Integer pageSize) {
+        Query query = Query.query(Criteria.where("userId").is(userId));
+        return this.queryList(query, page, pageSize);
+    }
+
+    private PageInfo<UserLike> queryList(Query query, Integer page, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(page - 1, pageSize, Sort.by(Sort.Order.desc("created")));
+        query.with(pageRequest);
+        List<UserLike> userLikeList = this.mongoTemplate.find(query, UserLike.class);
+

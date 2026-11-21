@@ -1,0 +1,214 @@
+# 11_文档解析_文档管理器
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day09-黑马头条-爬虫内容解析
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day09-黑马头条-爬虫内容解析\11_文档解析_文档管理器【海量资源尽在 666java.com】.mp4
+- 时长 10分48秒（音频 648s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面咱们就继续往下讲啊那下面的这块有一个叫文档管理器那这个类是干嘛的呢来看一下啊文档处理器呢处理管理器呢它就是将三种文档处理器结合起来目前的话其实咱们有三种是吧这个呢咱们有一个处理器啊去把它给结合起来然后从处理化页牢到帮助页到最终的页牢解析咱们都要去合并那合并完之后呢你看咱们可以看这个单本啊首先呢是
+[00:30] 注入当前的一个类东西那这个东西呢其实就是一样就是当前的哪个类啊是当前的这个类那这个类的子类是不是有三个呀有三个啊这时候你看它的它的类型接收是一个list并且用的是resource在这时候呢会把这三个类三个这种死亡管理的类呢都给注入进来这是你要注意啊这时候呢咱们要去做一个post-construct这是一个初始化是吧初始化的方法啊
+[00:59] 那初始化的方法呢首先呢你得干嘛呢你得去做一个这种排序根据优先级去排序排完序之后呢方便后期调用的时候按顺序去调用刚才说了咱们是首先是调用初始化然后是helper然后是doc是吧行啊然后呢这还有一个处理数据啊那处理数据的话呢其实就是去调用了当前的一个handle配置就可以了调用它各自的handle配置就可以好吧
+[01:27] 行 那们下面就来去写下这段单本首先咱们还是在当前的这个包下边因为它是属于谁是属于当前的文档好拷贝一下这它是一个类我现在它让它是compound让Spring去管理那也可以加个出示这个就是爬虫文档流程管理好
+[01:59] 刚才说了这块咱们需要去注入一些东西首先第一个private咱们有一个color helpercolor helper然后是hear helper这个咱们可以用auto reader去注入下面一个private这时候咱们需要用一个集合去接收这个是它的一个什么overselect就是color feature processor好这是一个粒子集合导压包
+[02:33] 放到这儿然后呢咱们可以在这儿去设立一个Obstract叫List好吧当然这个你要注意啊这个是用ResourceR-E-S-O-U-R-C-E这是S-I-N-O-T-I-T-I-O-S-E写的字大家注意习惯性的就写成AutoVisual这个注入这是JDK的一个注解好吧它也可以去注入死闷容器中的一个数据
+[03:04] 这个是一个集合那下面咱们还有一个初始化的方法是吧初始化注入接口顺序的方法顺序的方法主要是计算public void然后怎么叫init persist persisting
+[03:39] 上面去加注点叫什么PostEnspect这是一个出入化这是Spring的一个出入化方法当然这个也是谁也是Face也是JDK提供的好这里边咱们要去写一下主要是对于这三个类进行排序去执行进行这三个类排序执行咱们之前去在每个类上的区都设置了优先级咱们主要的是根据这个优先级去设置就可以
+[04:09] 好,等会在这去判断,if你要先判断的话先判断前这个是不是有值,它然后是不等于呢,看到什么呢?
+[04:21] 它,什么?
+[04:22] isEmply因为它是个集合嘛所以说你可以用isEmply然后是非然后下面咱们就可以去干嘛呢可以去做个排序排序的话咱们可以用啥呢用当前的集合的一个sauce,salt
+[04:42] 这里边咱们可以拗一个compareOK好主要的是有一个compare这里边咱们就可以去设置了来这是oeoeoe但是这个用它好像不太合适或者不太好咱们可以这样咱们可以用上面这个东西用上面这个接口去设置好吧一样的好这个咱们也可以去设置为它
+[05:16] 它是最顶级的一个接口就是说你设置这个类型是完全OK的那这个怎么写呢if o1.get它的一个优先级如果说是大于o2的什么它的优先级的话呢我们就可以return一个什么return一个1然后下面呢
+[05:49] 下面咱们就else if还是这两个啊但是这个是小于我们就return一个什么return一个-1就可以了好吧return-1然后呢如果说咱们没有走这个的话咱们就直接return0那这样的话呢比较大的数啊比较大的数它就往后排这就是一个冒泡算法啊就sort嘛咱们也可以点进去看一看啊那其实也是之前的这么一个东西啊叫做是result
+[06:26] 当然你可以再往下点点的话其实也是一个咱们之前应该是讲过的一个猫包算法行那这个咱们设完之后咱们下面继续往下讲刚才说了这里边还有一个方法获取什么呢获取咱们的一个数据主要就是有一个叫它每一个类中的handle page每一个类中的handle page因为咱们之前写例子的时候写那些这些例子的时候
+[06:55] 都有一个handle配置对吧所以说呢咱们在这需要去调用一下好怎么写呢那咱们再去定义方法叫public void handle它那参数呢其实就是配置好大家后期谁调用谁传这个配置webmagic我们可以写一个注释这个叫什么叫处理数据下面怎么写呢首先呢是拿到这个类型
+[07:33] 那类型的话呢咱们有很多种方式叫color helper还是用color helper吧pager.getHandleType然后是pager.getRequest吧最终呢就能拿到当前那个HandleType下面呢咱们可以拿到它的文档类型文档类型呢其实也是一样color helper.getOptimumType然后呢它呢也是需要一个Request可以了最终呢咱们就可以拿到一个
+[08:03] 然后咱们就可以去判断那啥呢其实不用判断了咱们就可以直接去做循环了用这个去做循环加上之后呢我们在这就可以直接去那判断之前呢咱们还是要获取他的什么获取他的get的一个什么handle type没有handle type吗
+[08:40] 有一个content type没有啊不是get是is啊写错了啊一个是handle type这是一个boot的型是吧这个呢其实就是当前的handle type好这是一个boot的型下面呢还有一个叫obfract啊is document type是document type也是也是一个boot的型拿到这两个boot的型之后呢如果说它俩都为
+[09:16] 都为处的话呢咱们就可以直接去用了因为咱们现在都是正向都是正向现在必须得有值并且到执行到哪一步的时候一定要确定好比如说这个就是初始化这个呢就是配置这个呢这是HIFR这是配置所以说你不能串不能串你写当前这个的时候找一找爱的往上找没有吗我看看这个没有这个
+[09:58] add page说的啊好你看这啊这有一个他的时候你一定要指明当前是到底是哪一级是吧指定是哪一级啊当然这个的咱们这一块呢其实已经设置完了其实就是他好吧就是他啊嗯行那这个设置完之后呢咱们可以去设置一下如果他是为空而是为数是出是出啊他也是出这时候呢咱们就可以去调用了调用呢是obj.handle
+[10:31] 传的就是当前这个好这样的话我们就算是写完了啊当前的这类呢咱们就完了再说一遍啊这个呢是为了能够管理当前的文档的三种三种处理器所以说呢咱们在这儿又去定义了一个管理器
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+讲解爬虫框架中 CrawlerPageProcessorManager 类如何初始化并排序处理流程，以及如何根据页面类型分发处理任务。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 CrawlerPageProcessorManager 类的 initProcessingFlow 方法，用于初始化并按优先级排序处理流程。
+画面2：展示 CrawlerPageProcessorManager 类的 initProcessingFlow 方法，光标位于排序逻辑的 if 条件判断处。
+画面3：展示项目结构，重点在 processor 包下的 impl 子包，其中包含 CrawlerPageProcessorManager 类。
+画面4：展示 CrawlerPageProcessorManager 类的成员变量，包括 @Autowired 注入的 crawlerHelper 和 @Resource 注入的 abstractCrawlerPageProcessorList。
+画面5：展示 CrawlerPageProcessorManager 类的 initProcessingFlow 方法，光标位于 if 条件判断处，准备执行排序。
+画面6：展示 CrawlerPageProcessorManager 类的 compareProcessFlow 方法，光标位于 if 条件判断处，用于比较两个 ProcessFlow 对象的优先级。
+画面7：展示 Arrays 类的 sort 方法源码，用于理解排序算法实现。
+画面8：在 CrawlerPageProcessorManager 类中，光标位于 handle 方法的参数声明处，准备创建 Page 类。
+画面9：展示 CrawlerPageProcessorManager 类的 handle 方法，光标位于 crawlerHelper.getDocType 方法调用处。
+画面10：展示 CrawlerPageProcessorManager 类的 handle 方法，光标位于 for 循环中，准备遍历 abstractCrawlerPageProcessorList。
+画面11：展示 CrawlerPageProcessorManager 类的 handle 方法，光标位于 isHandleType 方法调用处，用于判断处理器是否支持当前页面类型。
+画面12：展示 CrawlerDocPageProcessor 类的 handlePage 方法，光标位于获取目标解析规则列表的代码处。
+画面13：展示 CrawlerHelpPageProcessor 类的 getDocPageList 方法，光标位于判断 URL 是否以 helpUrlSuffix 结尾的代码处。
+画面14：展示 CrawlerPageProcessorManager 类的 initProcessingFlow 方法，光标位于排序逻辑的 return 0 处。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+@Component
+public class CrawlerPageProcessorManager {
+    @Autowired
+    private CrawlerHelper crawlerHelper;
+    @Resource
+    private List<AbstractCrawlerPageProcessor> abstractCrawlerPageProcessorList;
+
+    /**
+     * 初始化注入的接口排序
+     */
+    @PostConstruct
+    private void initProcessingFlow() {
+        if (null == abstractCrawlerPageProcessorList.isEmpty()) {
+            abstractCrawlerPageProcessorList.sort(new Comparator<ProcessFlow>() {
+                public int compare(ProcessFlow p1, ProcessFlow p2) {
+                    if (p1.getPriority() > p2.getPriority()) {
+                        return 1;
+                    } else if (p1.getPriority() < p2.getPriority()) {
+                        return -1;
+                    }
+                    return 0;
+                }
+            });
+        }
+    }
+}
+```
+
+画面3：
+```java
+package com.heima.crawler.process.processor;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CrawlerPageProcessorManager {
+    private org.apache.commons.lang3.StringUtils;
+    private org.apache.commons.lang3.ArrayUtils;
+    private org.apache.commons.lang3.ClassUtils;
+    private org.apache.commons.lang3.reflect.FieldUtils;
+    private org.apache.commons.lang3.reflect.MethodUtils;
+    private org.apache.commons.lang3.reflect.ConstructorUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.GenericUtils;
+    private org.apache.commons.lang3.reflect.ReflectionUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+    private org.apache.commons.lang3.reflect.TypeUtils;
+

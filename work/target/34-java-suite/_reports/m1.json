@@ -1,0 +1,1545 @@
+{
+  "source_files": 260,
+  "processed": 257,
+  "chapters": {
+    "003-01-课程介绍.md": "基础篇",
+    "009-02-二分查找_演示.md": "基础篇",
+    "016-03-二分查找_实现.md": "基础篇",
+    "023-04-二分查找_解决整数溢出_方法1.md": "基础篇",
+    "030-05-二分查找_解决整数溢出_方法2.md": "基础篇",
+    "038-06-二分查找_选择题目1.md": "基础篇",
+    "045-07-二分查找_选择题目2.md": "基础篇",
+    "052-08-二分查找_注意事项.md": "基础篇",
+    "059-09-冒泡排序_演示.md": "基础篇",
+    "066-10-冒泡排序_初步实现.md": "基础篇",
+    "073-11-冒泡排序_优化_减少比较次数.md": "基础篇",
+    "080-12-冒泡排序_优化_减少冒泡次数.md": "基础篇",
+    "087-13-冒泡排序_优化_进一步优化比较次数.md": "基础篇",
+    "094-14-冒泡排序_优化_最终实现.md": "基础篇",
+    "101-15-冒泡排序_总结.md": "基础篇",
+    "108-16-选择排序_演示.md": "基础篇",
+    "115-17-选择排序_实现.md": "基础篇",
+    "122-18-选择排序_vs_冒泡排序.md": "基础篇",
+    "128-19-插入排序_演示.md": "基础篇",
+    "135-20-插入排序_实现.md": "基础篇",
+    "142-21-插入排序_总结.md": "基础篇",
+    "149-22-希尔排序_演示.md": "基础篇",
+    "156-23-插入和选择_推导某一轮排序结果.md": "基础篇",
+    "163-24-快速排序_描述.md": "基础篇",
+    "187-28-快速排序_双边循环_演示.md": "基础篇",
+    "192-29-快速排序_双边循环_实现.md": "基础篇",
+    "197-30-快速排序_双边循环_细节.md": "基础篇",
+    "201-31-快速排序_特点.md": "基础篇",
+    "203-32-ArrayList_扩容规则.md": "基础篇",
+    "217-36-LinkedList_vs_ArrayList_随机访问性能比较.md": "基础篇",
+    "220-37-LinkedList_vs_ArrayList_增删性能比较.md": "基础篇",
+    "223-38-LinkedList_vs_ArrayList_局部性原理_空间占用.md": "基础篇",
+    "226-39-HashMap_数据结构.md": "基础篇",
+    "228-40-HashMap_数据结构_快速查找演示.md": "基础篇",
+    "230-41-HashMap_数据结构_链表过长的解决_扩容.md": "基础篇",
+    "232-42-HashMap_数据结构_链表过长的解决_树化.md": "基础篇",
+    "234-43-HashMap_数据结构_红黑树的意义_树化阈值.md": "基础篇",
+    "237-44-HashMap_数据结构_树退化链表_情况1.md": "基础篇",
+    "238-45-HashMap_数据结构_树退化链表_情况2.md": "基础篇",
+    "239-46-HashMap_索引如何计算.md": "基础篇",
+    "240-47-HashMap_为何要二次哈希.md": "基础篇",
+    "241-48-HashMap_容量为何是2的n次幂.md": "基础篇",
+    "242-49-HashMap_容量不用2的n次幂行不行.md": "基础篇",
+    "243-50-HashMap_put流程.md": "基础篇",
+    "244-51-HashMap_负载因子为何是0.75f.md": "基础篇",
+    "247-54-HashMap_key的要求.md": "基础篇",
+    "248-55-HashMap_hashCode的设计.md": "基础篇",
+    "249-56-单例模式_方式1_饿汉式.md": "基础篇",
+    "250-57-单例模式_方式2_枚举饿汉式.md": "基础篇",
+    "251-58-单例模式_方式3_懒汉式.md": "基础篇",
+    "252-59-单例模式_方式4_DCL懒汉式.md": "基础篇",
+    "253-60-单例模式_方式4_DCL懒汉式_为何加volatile.md": "基础篇",
+    "254-61-单例模式_方式5_内部类懒汉式.md": "基础篇",
+    "255-62-单例模式_在jdk中的体现.md": "基础篇",
+    "002-01-线程状态_java中的线程状态.md": "并发篇",
+    "010-02-线程状态_java中的线程状态_代码演示.md": "并发篇",
+    "017-03-线程状态_五种状态_vs_六种状态.md": "并发篇",
+    "024-04-线程池核心参数_简介.md": "并发篇",
+    "031-05-线程池核心参数_演示.md": "并发篇",
+    "037-06-wait_vs_sleep_区别.md": "并发篇",
+    "044-07-wait_vs_sleep_演示.md": "并发篇",
+    "051-08-lock_vs_synchronized_区别.md": "并发篇",
+    "058-09-lock_阻塞演示.md": "并发篇",
+    "065-10-lock_公平非公平演示.md": "并发篇",
+    "072-11-lock_条件变量演示.md": "并发篇",
+    "079-12-volatile_举例.md": "并发篇",
+    "085-13-volatile_原子性_演示.md": "并发篇",
+    "092-14-volatile_可见性_演示.md": "并发篇",
+    "099-15-volatile_可见性_原因与解决.md": "并发篇",
+    "106-16-volatile_有序性_分析.md": "并发篇",
+    "113-17-volatile_有序性_压测演示.md": "并发篇",
+    "120-18-volatile_有序性_volatile位置不同影响分析.md": "并发篇",
+    "127-19-悲观锁_vs_乐观锁_理论.md": "并发篇",
+    "134-20-悲观锁_vs_乐观锁_Unsafe_cas.md": "并发篇",
+    "141-21-悲观锁_vs_乐观锁_代码对比.md": "并发篇",
+    "148-22-Hashtable_vs_ConcurrentHashMap_区别.md": "并发篇",
+    "155-23-Hashtable_演示.md": "并发篇",
+    "162-24-ConcurrentHashMap_v7_演示并发度.md": "并发篇",
+    "169-25-ConcurrentHashMap_v7_演示索引计算.md": "并发篇",
+    "175-26-ConcurrentHashMap_v7_演示扩容.md": "并发篇",
+    "185-28-ConcurrentHashMap_v8_与7简单比较.md": "并发篇",
+    "190-29-ConcurrentHashMap_v8_构造参数含义.md": "并发篇",
+    "195-30-ConcurrentHashMap_v8_演示并发put.md": "并发篇",
+    "199-31-ConcurrentHashMap_v8_演示扩容.md": "并发篇",
+    "204-32-ConcurrentHashMap_v8_扩容细节.md": "并发篇",
+    "207-33-Iterator_FailFast_FailSafe_演示.md": "并发篇",
+    "208-33-ThreadLocal_作用.md": "并发篇",
+    "211-34-Iterator_FailFast_源码分析.md": "并发篇",
+    "212-34-ThreadLocal_原理.md": "并发篇",
+    "214-35-Iterator_FailSafe_源码分析.md": "并发篇",
+    "215-35-ThreadLocal_key内存释放时机.md": "并发篇",
+    "218-36-ThreadLocal_value内存释放时机_get时.md": "并发篇",
+    "221-37-ThreadLocal_value内存释放时机_set时.md": "并发篇",
+    "224-38-ThreadLocal_value内存释放时机_remove时.md": "并发篇",
+    "245-52-HashMap_并发丢数据.md": "并发篇",
+    "001-01-jvm内存结构_代码执行流程.md": "虚拟机篇",
+    "008-02-jvm内存结构_哪些区域会有内存溢出.md": "虚拟机篇",
+    "015-03-jvm内存结构_方法区_元空间.md": "虚拟机篇",
+    "022-04-jvm内存参数.md": "虚拟机篇",
+    "029-05-jvm垃圾回收算法.md": "虚拟机篇",
+    "036-06-jvm垃圾回收_概述.md": "虚拟机篇",
+    "043-07-jvm垃圾回收_分代回收.md": "虚拟机篇",
+    "050-08-jvm垃圾回收_三色标记.md": "虚拟机篇",
+    "057-09-jvm垃圾回收_并发漏标.md": "虚拟机篇",
+    "064-10-jvm垃圾回收_垃圾回收器.md": "虚拟机篇",
+    "071-11-jvm垃圾回收_垃圾回收器_G1.md": "虚拟机篇",
+    "078-12-jvm垃圾回收_垃圾回收器_G1.md": "虚拟机篇",
+    "086-13-内存溢出_情况1_误用固定大小线程池.md": "虚拟机篇",
+    "093-14-内存溢出_情况2_误用带缓冲线程池.md": "虚拟机篇",
+    "100-15-内存溢出_情况3_一次查询太多数据.md": "虚拟机篇",
+    "107-16-内存溢出_情况4_类太多.md": "虚拟机篇",
+    "114-17-类加载_三个阶段.md": "虚拟机篇",
+    "121-18-类加载_验证类加载是懒惰的.md": "虚拟机篇",
+    "129-19-类加载_验证类对象位于堆.md": "虚拟机篇",
+    "136-20-类加载_验证类静态变量在初始化时赋值.md": "虚拟机篇",
+    "143-21-类加载_如何找到类对象地址.md": "虚拟机篇",
+    "150-22-类加载_类初始化方法原理.md": "虚拟机篇",
+    "157-23-类加载_final修饰基本类型变量的原理.md": "虚拟机篇",
+    "164-24-类加载_将符号引用变为直接引用.md": "虚拟机篇",
+    "171-25-类加载_双亲委派.md": "虚拟机篇",
+    "177-26-类加载_能假冒一个System类吗.md": "虚拟机篇",
+    "181-27-四种引用_概述.md": "虚拟机篇",
+    "186-28-四种引用_虚引用.md": "虚拟机篇",
+    "191-29-四种引用_弱引用.md": "虚拟机篇",
+    "196-30-四种引用_Cleaner.md": "虚拟机篇",
+    "200-31-finalize_概述.md": "虚拟机篇",
+    "205-32-finalize_unfinalized链表.md": "虚拟机篇",
+    "209-33-finalize_调用原理.md": "虚拟机篇",
+    "006-01_spring_refresh_概述.md": "框架篇",
+    "013-02_spring_refresh_01_Environment.md": "框架篇",
+    "020-03_spring_refresh_02_获取BeanFactory.md": "框架篇",
+    "027-04_spring_refresh_03_准备BeanFactory.md": "框架篇",
+    "034-05_spring_refresh_04-05_扩展BeanFactory.md": "框架篇",
+    "041-06_spring_refresh_06_注册bean后处理器.md": "框架篇",
+    "048-07_spring_refresh_07-10_applicationContext各项功能.md": "框架篇",
+    "055-08_spring_refresh_11-12_初始化单例_完成refresh.md": "框架篇",
+    "062-09_spring_refresh_小结.md": "框架篇",
+    "069-10_spring_bean_01_处理名称_检查缓存.md": "框架篇",
+    "076-11_spring_bean_02-03_查找父容器_处理DependsOn.md": "框架篇",
+    "083-12_spring_bean_04_按scope创建.md": "框架篇",
+    "090-13_spring_bean_05_创建bean_创建实例阶段.md": "框架篇",
+    "097-14_spring_bean_05_创建bean_依赖注入阶段.md": "框架篇",
+    "104-15_spring_bean_05_创建bean_依赖注入阶段_相同成员依赖注入优先级.md": "框架篇",
+    "110-16_spring_bean_05_创建bean_初始化阶段.md": "框架篇",
+    "117-17_spring_bean_05_创建bean_注册可销毁bean.md": "框架篇",
+    "124-18_spring_bean_07_销毁bean.md": "框架篇",
+    "130-19_spring_tx_事务失效场景1_检查异常.md": "框架篇",
+    "138-20_spring_tx_事务失效场景2_错误try-catch.md": "框架篇",
+    "145-21_spring_tx_事务失效场景3_切面顺序.md": "框架篇",
+    "152-22_spring_tx_事务失效场景4_非public方法.md": "框架篇",
+    "159-23_spring_tx_事务失效场景5_父子容器.md": "框架篇",
+    "166-24_spring_tx_事务失效场景6_本类方法调用.md": "框架篇",
+    "173-25_spring_tx_事务失效场景7_原子性失效.md": "框架篇",
+    "179-26_spring_tx_事务失效场景8_锁失效.md": "框架篇",
+    "184-27_spring_webmvc_执行流程_初始化.md": "框架篇",
+    "189-28_spring_webmvc_执行流程_匹配.md": "框架篇",
+    "194-29_spring_webmvc_执行流程_执行.md": "框架篇",
+    "198-30_spring_annotation_spring注解.md": "框架篇",
+    "202-31_spring_annotation_webmvc注解.md": "框架篇",
+    "206-32_spring_annotation_boot注解.md": "框架篇",
+    "210-33_spring_annotation_@Configuration_配置类即为工厂.md": "框架篇",
+    "213-34_spring_annotation_@Configuration_工厂方法不能重载.md": "框架篇",
+    "216-35_spring_annotation_@Configuration_配置类默认为代理.md": "框架篇",
+    "219-36_spring_annotation_@Configuration_配置类依赖注入失效.md": "框架篇",
+    "222-37_spring_annotation_@Import_基本使用.md": "框架篇",
+    "225-38_spring_annotation_@Import_DeferredImportSelector.md": "框架篇",
+    "227-39_spring_boot_自动配置_@SpringBootApplication.md": "框架篇",
+    "229-40_spring_boot_自动配置_@EnableAutoConfiguration.md": "框架篇",
+    "231-41_spring_pattern_1~3.md": "框架篇",
+    "233-42_spring_pattern_4~5.md": "框架篇",
+    "235-43_spring_pattern_6~7.md": "框架篇",
+    "236-43_spring_pattern_8~11.md": "框架篇",
+    "256-31_spring_annotation_注解完整速查与高频精讲.md": "框架篇",
+    "007-01_隔离级别_概述.md": "数据库篇",
+    "014-02_隔离级别_错误现象.md": "数据库篇",
+    "021-03_隔离级别_快照读与当前读.md": "数据库篇",
+    "028-04_隔离级别_快照建立时机.md": "数据库篇",
+    "035-05_存储引擎_InnoDB_vs_MyISAM.md": "数据库篇",
+    "042-06_存储引擎_InnoDB_vs_MyISAM_索引不同.md": "数据库篇",
+    "049-07_索引_为何用B+树.md": "数据库篇",
+    "056-08_索引_B树_vs_B+树.md": "数据库篇",
+    "063-09_索引_B+树_新增_查询.md": "数据库篇",
+    "070-10_索引_B+树_删除.md": "数据库篇",
+    "077-11_索引_生效失效_数据准备.md": "数据库篇",
+    "084-12_索引_生效失效_排序.md": "数据库篇",
+    "091-13_索引_生效失效_where.md": "数据库篇",
+    "098-14_索引_生效失效_索引条件下推.md": "数据库篇",
+    "105-15_索引_生效失效_其它.md": "数据库篇",
+    "111-16_一条查询语句的执行流程.md": "数据库篇",
+    "118-17_undo_log.md": "数据库篇",
+    "123-18_redo_log.md": "数据库篇",
+    "139-20_表级锁_表锁.md": "数据库篇",
+    "146-21_表级锁_元数据锁.md": "数据库篇",
+    "153-22_表级锁_意向锁.md": "数据库篇",
+    "160-23_行级锁_间隙锁.md": "数据库篇",
+    "167-24_行级锁_临键锁.md": "数据库篇",
+    "005-01_redis数据类型_概述.md": "缓存篇",
+    "012-02_redis数据类型_String.md": "缓存篇",
+    "019-03_redis数据类型_List.md": "缓存篇",
+    "026-04_redis数据类型_Hash.md": "缓存篇",
+    "033-05_redis数据类型_SortedSet.md": "缓存篇",
+    "040-06_redis数据类型_跳表查询.md": "缓存篇",
+    "047-07_redis_keys命令的问题.md": "缓存篇",
+    "054-08_redis_过期key的删除策略.md": "缓存篇",
+    "061-09_redis持久化_aof.md": "缓存篇",
+    "068-10_redis持久化_aof重写.md": "缓存篇",
+    "075-11_redis持久化_rdb.md": "缓存篇",
+    "082-12_redis持久化_混合持久化.md": "缓存篇",
+    "089-13_redis_缓存击穿.md": "缓存篇",
+    "096-14_redis_缓存雪崩.md": "缓存篇",
+    "103-15_redis_缓存穿透.md": "缓存篇",
+    "112-16_缓存一致性_不能先清缓存.md": "缓存篇",
+    "119-17_缓存一致性_先更新库方案.md": "缓存篇",
+    "125-18_缓存一致性_先更新库方案.md": "缓存篇",
+    "132-19_缓存一致性_锁方案.md": "缓存篇",
+    "137-20_redis_事务_不支持回滚.md": "缓存篇",
+    "144-21_redis_事务_读写不是原子的.md": "缓存篇",
+    "151-22_redis_事务_乐观锁保证原子性.md": "缓存篇",
+    "158-23_redis_事务_lua脚本原子性.md": "缓存篇",
+    "165-24_lru_演示.md": "缓存篇",
+    "172-25_lru_实现_断开节点链接.md": "缓存篇",
+    "178-26_lru_实现_链入头节点.md": "缓存篇",
+    "183-27_lru_实现_删除_查询_新增.md": "缓存篇",
+    "188-28_lru_实现_测试.md": "缓存篇",
+    "193-29_lru_LinkedHashMap实现.md": "缓存篇",
+    "004-01_cap_概述.md": "分布式篇",
+    "011-02_cap_一致性级别.md": "分布式篇",
+    "018-03_paxos_问题提出.md": "分布式篇",
+    "025-04_paxos_角色划分和阶段.md": "分布式篇",
+    "032-05_paxos_算法描述.md": "分布式篇",
+    "039-06_paxos_算法描述_例1.md": "分布式篇",
+    "046-07_paxos_算法描述_例2.md": "分布式篇",
+    "053-08_paxos_算法描述_例3~4.md": "分布式篇",
+    "060-09_paxos_算法描述_例5.md": "分布式篇",
+    "067-10_paxos_算法描述_例6.md": "分布式篇",
+    "074-11_raft_算法概述.md": "分布式篇",
+    "081-12_raft_算法_选举1.md": "分布式篇",
+    "088-13_raft_算法_选举2.md": "分布式篇",
+    "095-14_raft_算法_执行操作.md": "分布式篇",
+    "102-15_raft_算法_leader完整性.md": "分布式篇",
+    "109-16_raft_算法_选民一致性.md": "分布式篇",
+    "116-17_gossip协议.md": "分布式篇",
+    "126-18_通用设计_如何检测节点活着.md": "分布式篇",
+    "131-19_全局锁.md": "分布式篇",
+    "133-19_通用设计_如何实现高可用.md": "分布式篇",
+    "140-20_通用设计_如何生成全局id.md": "分布式篇",
+    "147-21_通用设计_负载均衡策略.md": "分布式篇",
+    "154-22_通用设计_数据分片策略.md": "分布式篇",
+    "161-23_通用设计_分布式事务_2PC.md": "分布式篇",
+    "168-24_通用设计_分布式事务_TCC.md": "分布式篇",
+    "174-25_通用设计_分布式事务_消息队列.md": "分布式篇"
+  },
+  "issues": [],
+  "posts": [
+    {
+      "file": "001-01-jvm内存结构_代码执行流程.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 内存结构：跟着一段代码的执行流程走一遍"
+    },
+    {
+      "file": "002-01-线程状态_java中的线程状态.md",
+      "chapter": "并发篇",
+      "title": "Java 线程有哪几种状态：六种状态和它们之间的转换"
+    },
+    {
+      "file": "003-01-课程介绍.md",
+      "chapter": "基础篇",
+      "title": "课程介绍：这门面试专题讲什么、怎么讲"
+    },
+    {
+      "file": "004-01_cap_概述.md",
+      "chapter": "分布式篇",
+      "title": "CAP 定理：一致性、可用性和分区容忍性怎么权衡"
+    },
+    {
+      "file": "005-01_redis数据类型_概述.md",
+      "chapter": "缓存篇",
+      "title": "Redis 数据类型概览：值的类型和底层编码"
+    },
+    {
+      "file": "006-01_spring_refresh_概述.md",
+      "chapter": "框架篇",
+      "title": "Spring refresh 流程概览：十二个步骤怎么分"
+    },
+    {
+      "file": "007-01_隔离级别_概述.md",
+      "chapter": "数据库篇",
+      "title": "MySQL 事务隔离级别：四种级别和三种读异常"
+    },
+    {
+      "file": "008-02-jvm内存结构_哪些区域会有内存溢出.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 内存结构：哪些区域会产生内存溢出"
+    },
+    {
+      "file": "009-02-二分查找_演示.md",
+      "chapter": "基础篇",
+      "title": "二分查找：折半查找的思路和手写要点"
+    },
+    {
+      "file": "010-02-线程状态_java中的线程状态_代码演示.md",
+      "chapter": "并发篇",
+      "title": "Java 线程状态转换：用调试的方式亲眼验证"
+    },
+    {
+      "file": "011-02_cap_一致性级别.md",
+      "chapter": "分布式篇",
+      "title": "CAP 中的一致性级别：强一致、弱一致和最终一致"
+    },
+    {
+      "file": "012-02_redis数据类型_String.md",
+      "chapter": "缓存篇",
+      "title": "Redis String 数据类型：三种编码和 SDS"
+    },
+    {
+      "file": "013-02_spring_refresh_01_Environment.md",
+      "chapter": "框架篇",
+      "title": "refresh 第一步 prepareRefresh：Environment 和 @Value 解析"
+    },
+    {
+      "file": "014-02_隔离级别_错误现象.md",
+      "chapter": "数据库篇",
+      "title": "隔离级别：脏读、不可重复读与幻读"
+    },
+    {
+      "file": "015-03-jvm内存结构_方法区_元空间.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 内存结构：方法区、永久代与元空间"
+    },
+    {
+      "file": "016-03-二分查找_实现.md",
+      "chapter": "基础篇",
+      "title": "二分查找：五步思路与代码实现"
+    },
+    {
+      "file": "017-03-线程状态_五种状态_vs_六种状态.md",
+      "chapter": "并发篇",
+      "title": "线程状态：操作系统五种与 Java 六种怎么对应"
+    },
+    {
+      "file": "018-03_paxos_问题提出.md",
+      "chapter": "分布式篇",
+      "title": "Paxos 要解决什么问题：从全量同步到多数派"
+    },
+    {
+      "file": "019-03_redis数据类型_List.md",
+      "chapter": "缓存篇",
+      "title": "Redis List 的底层：quicklist 与 ziplist"
+    },
+    {
+      "file": "020-03_spring_refresh_02_获取BeanFactory.md",
+      "chapter": "框架篇",
+      "title": "Spring refresh 第二步：获取 BeanFactory"
+    },
+    {
+      "file": "021-03_隔离级别_快照读与当前读.md",
+      "chapter": "数据库篇",
+      "title": "隔离级别：快照读与当前读"
+    },
+    {
+      "file": "022-04-jvm内存参数.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 内存参数：一道计算题讲透常用参数"
+    },
+    {
+      "file": "023-04-二分查找_解决整数溢出_方法1.md",
+      "chapter": "基础篇",
+      "title": "二分查找的整数溢出问题与第一种解法"
+    },
+    {
+      "file": "024-04-线程池核心参数_简介.md",
+      "chapter": "并发篇",
+      "title": "线程池核心参数：ThreadPoolExecutor 的七个参数"
+    },
+    {
+      "file": "025-04_paxos_角色划分和阶段.md",
+      "chapter": "分布式篇",
+      "title": "Paxos 的角色划分与两个阶段"
+    },
+    {
+      "file": "026-04_redis数据类型_Hash.md",
+      "chapter": "缓存篇",
+      "title": "Redis 数据类型：Hash"
+    },
+    {
+      "file": "027-04_spring_refresh_03_准备BeanFactory.md",
+      "chapter": "框架篇",
+      "title": "Spring refresh 源码解析：准备 BeanFactory"
+    },
+    {
+      "file": "028-04_隔离级别_快照建立时机.md",
+      "chapter": "数据库篇",
+      "title": "隔离级别：可重复读下快照的建立时机"
+    },
+    {
+      "file": "029-05-jvm垃圾回收算法.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 垃圾回收算法"
+    },
+    {
+      "file": "030-05-二分查找_解决整数溢出_方法2.md",
+      "chapter": "基础篇",
+      "title": "二分查找：解决整数溢出方法二"
+    },
+    {
+      "file": "031-05-线程池核心参数_演示.md",
+      "chapter": "并发篇",
+      "title": "线程池核心参数演示"
+    },
+    {
+      "file": "032-05_paxos_算法描述.md",
+      "chapter": "分布式篇",
+      "title": "Paxos 算法描述"
+    },
+    {
+      "file": "033-05_redis数据类型_SortedSet.md",
+      "chapter": "缓存篇",
+      "title": "Redis 数据类型：Sorted Set"
+    },
+    {
+      "file": "034-05_spring_refresh_04-05_扩展BeanFactory.md",
+      "chapter": "框架篇",
+      "title": "Spring refresh 源码解析：扩展 BeanFactory"
+    },
+    {
+      "file": "035-05_存储引擎_InnoDB_vs_MyISAM.md",
+      "chapter": "数据库篇",
+      "title": "存储引擎：InnoDB vs MyISAM"
+    },
+    {
+      "file": "036-06-jvm垃圾回收_概述.md",
+      "chapter": "虚拟机篇",
+      "title": "垃圾回收概述：GC 与分代回收"
+    },
+    {
+      "file": "037-06-wait_vs_sleep_区别.md",
+      "chapter": "并发篇",
+      "title": "wait vs sleep 的区别"
+    },
+    {
+      "file": "038-06-二分查找_选择题目1.md",
+      "chapter": "基础篇",
+      "title": "二分查找面试题：比较次数怎么数"
+    },
+    {
+      "file": "039-06_paxos_算法描述_例1.md",
+      "chapter": "分布式篇",
+      "title": "Basic Paxos 算法例 1：五台机器走一遍无冲突流程"
+    },
+    {
+      "file": "040-06_redis数据类型_跳表查询.md",
+      "chapter": "缓存篇",
+      "title": "跳表查询：skiplist 的查找规则"
+    },
+    {
+      "file": "041-06_spring_refresh_06_注册bean后处理器.md",
+      "chapter": "框架篇",
+      "title": "Spring refresh 第六步：注册 BeanPostProcessor"
+    },
+    {
+      "file": "042-06_存储引擎_InnoDB_vs_MyISAM_索引不同.md",
+      "chapter": "数据库篇",
+      "title": "不同存储引擎的索引区别：InnoDB 与 MyISAM"
+    },
+    {
+      "file": "043-07-jvm垃圾回收_分代回收.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 垃圾回收：分代回收与 GC 规模"
+    },
+    {
+      "file": "044-07-wait_vs_sleep_演示.md",
+      "chapter": "并发篇",
+      "title": "wait 和 sleep 的代码演示：锁与中断"
+    },
+    {
+      "file": "045-07-二分查找_选择题目2.md",
+      "chapter": "基础篇",
+      "title": "二分查找面试题：128 个元素最多比较几次"
+    },
+    {
+      "file": "046-07_paxos_算法描述_例2.md",
+      "chapter": "分布式篇",
+      "title": "Basic Paxos 算法例 2：两个 Proposer 同时提案"
+    },
+    {
+      "file": "047-07_redis_keys命令的问题.md",
+      "chapter": "缓存篇",
+      "title": "Redis 有一亿个 key，还能用 keys 命令吗"
+    },
+    {
+      "file": "048-07_spring_refresh_07-10_applicationContext各项功能.md",
+      "chapter": "框架篇",
+      "title": "Spring refresh 第七到十步：ApplicationContext 的独有功能"
+    },
+    {
+      "file": "049-07_索引_为何用B+树.md",
+      "chapter": "数据库篇",
+      "title": "索引为什么用 B+ 树：从哈希推到 B+ 树"
+    },
+    {
+      "file": "050-08-jvm垃圾回收_三色标记.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 垃圾回收：三色标记"
+    },
+    {
+      "file": "051-08-lock_vs_synchronized_区别.md",
+      "chapter": "并发篇",
+      "title": "Lock vs synchronized：三个层面的对比"
+    },
+    {
+      "file": "052-08-二分查找_注意事项.md",
+      "chapter": "基础篇",
+      "title": "二分查找注意事项：以 JDK 的实现为准"
+    },
+    {
+      "file": "053-08_paxos_算法描述_例3~4.md",
+      "chapter": "分布式篇",
+      "title": "Paxos 算法例3、例4：accept 与 prepare 的先后"
+    },
+    {
+      "file": "054-08_redis_过期key的删除策略.md",
+      "chapter": "缓存篇",
+      "title": "Redis 过期 key 的删除策略：惰性删除加定期删除"
+    },
+    {
+      "file": "055-08_spring_refresh_11-12_初始化单例_完成refresh.md",
+      "chapter": "框架篇",
+      "title": "Spring refresh 第 11、12 步：创建单例与完成 refresh"
+    },
+    {
+      "file": "056-08_索引_B树_vs_B+树.md",
+      "chapter": "数据库篇",
+      "title": "B 树 vs B+ 树：三个区别"
+    },
+    {
+      "file": "057-09-jvm垃圾回收_并发漏标.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 垃圾回收：并发漏标问题与两种解法"
+    },
+    {
+      "file": "058-09-lock_阻塞演示.md",
+      "chapter": "并发篇",
+      "title": "Lock 阻塞队列演示：ReentrantLock 的底层结构"
+    },
+    {
+      "file": "059-09-冒泡排序_演示.md",
+      "chapter": "基础篇",
+      "title": "冒泡排序：相邻比较与交换"
+    },
+    {
+      "file": "060-09_paxos_算法描述_例5.md",
+      "chapter": "分布式篇",
+      "title": "Paxos 算法例5：用两阶段解决顺序问题"
+    },
+    {
+      "file": "061-09_redis持久化_aof.md",
+      "chapter": "缓存篇",
+      "title": "Redis 持久化：AOF 的工作机制"
+    },
+    {
+      "file": "062-09_spring_refresh_小结.md",
+      "chapter": "框架篇",
+      "title": "Spring refresh 十二步小结"
+    },
+    {
+      "file": "063-09_索引_B+树_新增_查询.md",
+      "chapter": "数据库篇",
+      "title": "B+树的新增与查询"
+    },
+    {
+      "file": "064-10-jvm垃圾回收_垃圾回收器.md",
+      "chapter": "虚拟机篇",
+      "title": "JVM 垃圾回收器：Parallel GC 与 CMS"
+    },
+    {
+      "file": "065-10-lock_公平非公平演示.md",
+      "chapter": "并发篇",
+      "title": "Lock 公平锁与非公平锁演示"
+    },
+    {
+      "file": "066-10-冒泡排序_初步实现.md",
+      "chapter": "基础篇",
+      "title": "冒泡排序的初步实现"
+    },
+    {
+      "file": "067-10_paxos_算法描述_例6.md",
+      "chapter": "分布式篇",
+      "title": "Paxos 算法例 6：活锁问题"
+    },
+    {
+      "file": "068-10_redis持久化_aof重写.md",
+      "chapter": "缓存篇",
+      "title": "Redis 持久化：AOF 重写"
+    },
+    {
+      "file": "069-10_spring_bean_01_处理名称_检查缓存.md",
+      "chapter": "框架篇",
+      "title": "Spring bean 生命周期：处理名称与检查缓存"
+    },
+    {
+      "file": "070-10_索引_B+树_删除.md",
+      "chapter": "数据库篇",
+      "title": "B+树的删除操作"
+    },
+    {
+      "file": "071-11-jvm垃圾回收_垃圾回收器_G1.md",
+      "chapter": "虚拟机篇",
+      "title": "G1 垃圾回收器"
+    },
+    {
+      "file": "072-11-lock_条件变量演示.md",
+      "chapter": "并发篇",
+      "title": "Lock 条件变量演示"
+    },
+    {
+      "file": "073-11-冒泡排序_优化_减少比较次数.md",
+      "chapter": "基础篇",
+      "title": "冒泡排序优化：减少比较次数"
+    },
+    {
+      "file": "074-11_raft_算法概述.md",
+      "chapter": "分布式篇",
+      "title": "Raft 算法概述"
+    },
+    {
+      "file": "075-11_redis持久化_rdb.md",
+      "chapter": "缓存篇",
+      "title": "Redis 持久化：RDB"
+    },
+    {
+      "file": "076-11_spring_bean_02-03_查找父容器_处理DependsOn.md",
+      "chapter": "框架篇",
+      "title": "Spring bean 生命周期：查找父容器与处理 DependsOn"
+    },
+    {
+      "file": "077-11_索引_生效失效_数据准备.md",
+      "chapter": "数据库篇",
+      "title": "索引生效与失效：测试数据准备"
+    },
+    {
+      "file": "078-12-jvm垃圾回收_垃圾回收器_G1.md",
+      "chapter": "虚拟机篇",
+      "title": "G1 垃圾回收器：并发标记与混合收集"
+    },
+    {
+      "file": "079-12-volatile_举例.md",
+      "chapter": "并发篇",
+      "title": "volatile 能否保证线程安全"
+    },
+    {
+      "file": "080-12-冒泡排序_优化_减少冒泡次数.md",
+      "chapter": "基础篇",
+      "title": "冒泡排序优化：减少冒泡次数"
+    },
+    {
+      "file": "081-12_raft_算法_选举1.md",
+      "chapter": "分布式篇",
+      "title": "Raft 算法：Leader 选举"
+    },
+    {
+      "file": "082-12_redis持久化_混合持久化.md",
+      "chapter": "缓存篇",
+      "title": "Redis 持久化：混合持久化"
+    },
+    {
+      "file": "083-12_spring_bean_04_按scope创建.md",
+      "chapter": "框架篇",
+      "title": "Spring bean 生命周期：按 Scope 创建"
+    },
+    {
+      "file": "084-12_索引_生效失效_排序.md",
+      "chapter": "数据库篇",
+      "title": "索引在排序中的生效与失效"
+    },
+    {
+      "file": "085-13-volatile_原子性_演示.md",
+      "chapter": "并发篇",
+      "title": "volatile 原子性演示"
+    },
+    {
+      "file": "086-13-内存溢出_情况1_误用固定大小线程池.md",
+      "chapter": "虚拟机篇",
+      "title": "内存溢出情况一：误用固定大小线程池"
+    },
+    {
+      "file": "087-13-冒泡排序_优化_进一步优化比较次数.md",
+      "chapter": "基础篇",
+      "title": "冒泡排序优化：进一步减少比较次数"
+    },
+    {
+      "file": "088-13_raft_算法_选举2.md",
+      "chapter": "分布式篇",
+      "title": "Raft 算法：Leader 选举（文字总结）"
+    },
+    {
+      "file": "089-13_redis_缓存击穿.md",
+      "chapter": "缓存篇",
+      "title": "Redis 缓存击穿"
+    },
+    {
+      "file": "090-13_spring_bean_05_创建bean_创建实例阶段.md",
+      "chapter": "框架篇",
+      "title": "Spring Bean 创建流程：创建实例阶段"
+    },
+    {
+      "file": "091-13_索引_生效失效_where.md",
+      "chapter": "数据库篇",
+      "title": "索引在 WHERE 筛选中的生效与失效"
+    },
+    {
+      "file": "092-14-volatile_可见性_演示.md",
+      "chapter": "并发篇",
+      "title": "volatile 可见性问题演示"
+    },
+    {
+      "file": "093-14-内存溢出_情况2_误用带缓冲线程池.md",
+      "chapter": "虚拟机篇",
+      "title": "内存溢出情况二：误用带缓冲线程池"
+    },
+    {
+      "file": "094-14-冒泡排序_优化_最终实现.md",
+      "chapter": "基础篇",
+      "title": "冒泡排序优化：最终实现"
+    },
+    {
+      "file": "095-14_raft_算法_执行操作.md",
+      "chapter": "分布式篇",
+      "title": "Raft 算法：执行操作（日志复制）"
+    },
+    {
+      "file": "096-14_redis_缓存雪崩.md",
+      "chapter": "缓存篇",
+      "title": "Redis 缓存雪崩"
+    },
+    {
+      "file": "097-14_spring_bean_05_创建bean_依赖注入阶段.md",
+      "chapter": "框架篇",
+      "title": "Spring Bean 创建流程：依赖注入阶段"
+    },
+    {
+      "file": "098-14_索引_生效失效_索引条件下推.md",
+      "chapter": "数据库篇",
+      "title": "索引条件下推：用不上索引的条件，下推到引擎层先过滤"
+    },
+    {
+      "file": "099-15-volatile_可见性_原因与解决.md",
+      "chapter": "并发篇",
+      "title": "volatile 为什么能保证可见性：从一次「永远循环」说起"
+    },
+    {
+      "file": "100-15-内存溢出_情况3_一次查询太多数据.md",
+      "chapter": "虚拟机篇",
+      "title": "一次查询太多数据：百万条记录能把堆打穿"
+    },
+    {
+      "file": "101-15-冒泡排序_总结.md",
+      "chapter": "基础篇",
+      "title": "冒泡排序总结：文字描述和两个优化方向"
+    },
+    {
+      "file": "102-15_raft_算法_leader完整性.md",
+      "chapter": "分布式篇",
+      "title": "Raft 保证安全之一：Leader 日志的完整性"
+    },
+    {
+      "file": "103-15_redis_缓存穿透.md",
+      "chapter": "缓存篇",
+      "title": "缓存穿透：缓存和数据库都没有的 key，每次都被打穿"
+    },
+    {
+      "file": "104-15_spring_bean_05_创建bean_依赖注入阶段_相同成员依赖注入优先级.md",
+      "chapter": "框架篇",
+      "title": "同一个成员配了多种注入方式，谁说了算"
+    },
+    {
+      "file": "105-15_索引_生效失效_其它.md",
+      "chapter": "数据库篇",
+      "title": "索引生效失效的更多例子：覆盖、连接，以及别迷信网上结论"
+    },
+    {
+      "file": "106-16-volatile_有序性_分析.md",
+      "chapter": "并发篇",
+      "title": "volatile 与有序性：用 JCStress 把指令重排序压出来"
+    },
+    {
+      "file": "107-16-内存溢出_情况4_类太多.md",
+      "chapter": "虚拟机篇",
+      "title": "动态生成类太多：元空间也会被撑爆"
+    },
+    {
+      "file": "108-16-选择排序_演示.md",
+      "chapter": "基础篇",
+      "title": "选择排序演示：每一轮挑出最小的放前面"
+    },
+    {
+      "file": "109-16_raft_算法_选民一致性.md",
+      "chapter": "分布式篇",
+      "title": "Raft 保证安全之二：选民日志的一致性"
+    },
+    {
+      "file": "110-16_spring_bean_05_创建bean_初始化阶段.md",
+      "chapter": "框架篇",
+      "title": "Bean 的初始化阶段：Aware、初始化方法与 AOP 代理"
+    },
+    {
+      "file": "111-16_一条查询语句的执行流程.md",
+      "chapter": "数据库篇",
+      "title": "一条查询 SQL 在 MySQL 里是怎么跑完的"
+    },
+    {
+      "file": "112-16_缓存一致性_不能先清缓存.md",
+      "chapter": "缓存篇",
+      "title": "缓存一致性：为什么必须先更新库再删缓存"
+    },
+    {
+      "file": "113-17-volatile_有序性_压测演示.md",
+      "chapter": "并发篇",
+      "title": "用 JCStress 压测重排序：三个用例见真章"
+    },
+    {
+      "file": "114-17-类加载_三个阶段.md",
+      "chapter": "虚拟机篇",
+      "title": "类加载的三个阶段：加载、链接、初始化"
+    },
+    {
+      "file": "115-17-选择排序_实现.md",
+      "chapter": "基础篇",
+      "title": "选择排序的代码实现：两个循环加一次交换"
+    },
+    {
+      "file": "116-17_gossip协议.md",
+      "chapter": "分布式篇",
+      "title": "Gossip 协议：像流言一样把信息传遍集群"
+    },
+    {
+      "file": "117-17_spring_bean_05_创建bean_注册可销毁bean.md",
+      "chapter": "框架篇",
+      "title": "创建 bean 的最后一步：注册可销毁 bean，以及类型转换"
+    },
+    {
+      "file": "118-17_undo_log.md",
+      "chapter": "数据库篇",
+      "title": "undo log：回滚靠它，快照读也靠它"
+    },
+    {
+      "file": "119-17_缓存一致性_先更新库方案.md",
+      "chapter": "缓存篇",
+      "title": "先更新库再清缓存：短暂不一致，但最终一致"
+    },
+    {
+      "file": "120-18-volatile_有序性_volatile位置不同影响分析.md",
+      "chapter": "并发篇",
+      "title": "volatile 加在 x 上还是 y 上：位置决定效果"
+    },
+    {
+      "file": "121-18-类加载_验证类加载是懒惰的.md",
+      "chapter": "虚拟机篇",
+      "title": "用 JHSDB 亲眼验证：类加载确实是懒惰的"
+    },
+    {
+      "file": "122-18-选择排序_vs_冒泡排序.md",
+      "chapter": "基础篇",
+      "title": "选择排序 vs 冒泡排序：谁快，谁稳定"
+    },
+    {
+      "file": "123-18_redo_log.md",
+      "chapter": "数据库篇",
+      "title": "redo log：持久性靠它，崩溃恢复也靠它"
+    },
+    {
+      "file": "124-18_spring_bean_07_销毁bean.md",
+      "chapter": "框架篇",
+      "title": "阶段七：bean 的销毁，以及整个生命周期回顾"
+    },
+    {
+      "file": "125-18_缓存一致性_先更新库方案.md",
+      "chapter": "缓存篇",
+      "title": "先更新库再清缓存也有例外：旧值被回填的那一瞬间"
+    },
+    {
+      "file": "126-18_通用设计_如何检测节点活着.md",
+      "chapter": "分布式篇",
+      "title": "分布式通用设计：怎么判断一个节点还活着"
+    },
+    {
+      "file": "127-19-悲观锁_vs_乐观锁_理论.md",
+      "chapter": "并发篇",
+      "title": "悲观锁与乐观锁：一个让你停下等，一个让你不停重试"
+    },
+    {
+      "file": "128-19-插入排序_演示.md",
+      "chapter": "基础篇",
+      "title": "插入排序演示：把每个元素插到它该在的位置"
+    },
+    {
+      "file": "129-19-类加载_验证类对象位于堆.md",
+      "chapter": "虚拟机篇",
+      "title": "用 HSDB 证明：类对象在堆里，不在方法区"
+    },
+    {
+      "file": "130-19_spring_tx_事务失效场景1_检查异常.md",
+      "chapter": "框架篇",
+      "title": "Spring 事务失效场景之一：抛出检查异常不回滚"
+    },
+    {
+      "file": "131-19_全局锁.md",
+      "chapter": "分布式篇",
+      "title": "全局锁"
+    },
+    {
+      "file": "132-19_缓存一致性_锁方案.md",
+      "chapter": "缓存篇",
+      "title": "缓存一致性：锁方案"
+    },
+    {
+      "file": "133-19_通用设计_如何实现高可用.md",
+      "chapter": "分布式篇",
+      "title": "如何实现高可用"
+    },
+    {
+      "file": "134-20-悲观锁_vs_乐观锁_Unsafe_cas.md",
+      "chapter": "并发篇",
+      "title": "用 Unsafe 与 CAS 演示乐观锁"
+    },
+    {
+      "file": "135-20-插入排序_实现.md",
+      "chapter": "基础篇",
+      "title": "插入排序的实现"
+    },
+    {
+      "file": "136-20-类加载_验证类静态变量在初始化时赋值.md",
+      "chapter": "虚拟机篇",
+      "title": "验证类静态变量在初始化时赋值"
+    },
+    {
+      "file": "137-20_redis_事务_不支持回滚.md",
+      "chapter": "缓存篇",
+      "title": "Redis 事务为什么不支持回滚"
+    },
+    {
+      "file": "138-20_spring_tx_事务失效场景2_错误try-catch.md",
+      "chapter": "框架篇",
+      "title": "Spring 事务失效场景二：try-catch 把异常吞在了最里层"
+    },
+    {
+      "file": "139-20_表级锁_表锁.md",
+      "chapter": "数据库篇",
+      "title": "表级锁之表锁：lock tables 的共享与排他"
+    },
+    {
+      "file": "140-20_通用设计_如何生成全局id.md",
+      "chapter": "分布式篇",
+      "title": "分布式通用设计：如何生成全局 ID"
+    },
+    {
+      "file": "141-21-悲观锁_vs_乐观锁_代码对比.md",
+      "chapter": "并发篇",
+      "title": "悲观锁 vs 乐观锁：从代码执行看线程安全"
+    },
+    {
+      "file": "142-21-插入排序_总结.md",
+      "chapter": "基础篇",
+      "title": "插入排序总结：两个优化加三个优点"
+    },
+    {
+      "file": "143-21-类加载_如何找到类对象地址.md",
+      "chapter": "虚拟机篇",
+      "title": "类加载实战：如何在内存里定位类对象的地址"
+    },
+    {
+      "file": "144-21_redis_事务_读写不是原子的.md",
+      "chapter": "缓存篇",
+      "title": "Redis 事务第二特点：读操作没有意义，读写不原子"
+    },
+    {
+      "file": "145-21_spring_tx_事务失效场景3_切面顺序.md",
+      "chapter": "框架篇",
+      "title": "Spring 事务失效场景三：切面顺序不对，异常传不到事务切面"
+    },
+    {
+      "file": "146-21_表级锁_元数据锁.md",
+      "chapter": "数据库篇",
+      "title": "表级锁之元数据锁：防止 DML 与 DDL 打架"
+    },
+    {
+      "file": "147-21_通用设计_负载均衡策略.md",
+      "chapter": "分布式篇",
+      "title": "分布式通用设计：负载均衡策略"
+    },
+    {
+      "file": "148-22-Hashtable_vs_ConcurrentHashMap_区别.md",
+      "chapter": "并发篇",
+      "title": "Hashtable vs ConcurrentHashMap：并发度的天壤之别"
+    },
+    {
+      "file": "149-22-希尔排序_演示.md",
+      "chapter": "基础篇",
+      "title": "希尔排序：插入排序的改进，让大元素少走弯路"
+    },
+    {
+      "file": "150-22-类加载_类初始化方法原理.md",
+      "chapter": "虚拟机篇",
+      "title": "类初始化方法：静态代码块的底层原理"
+    },
+    {
+      "file": "151-22_redis_事务_乐观锁保证原子性.md",
+      "chapter": "缓存篇",
+      "title": "用乐观锁保证原子性：Redis 事务的 watch 机制"
+    },
+    {
+      "file": "152-22_spring_tx_事务失效场景4_非public方法.md",
+      "chapter": "框架篇",
+      "title": "Spring 事务失效场景四：@Transactional 加在了非 public 方法上"
+    },
+    {
+      "file": "153-22_表级锁_意向锁.md",
+      "chapter": "数据库篇",
+      "title": "表级锁之意向锁：让表锁不用逐行检查"
+    },
+    {
+      "file": "154-22_通用设计_数据分片策略.md",
+      "chapter": "分布式篇",
+      "title": "分布式通用设计：数据分片策略"
+    },
+    {
+      "file": "155-23-Hashtable_演示.md",
+      "chapter": "并发篇",
+      "title": "Hashtable 演示：容量规律与索引计算"
+    },
+    {
+      "file": "156-23-插入和选择_推导某一轮排序结果.md",
+      "chapter": "基础篇",
+      "title": "推导某一轮排序结果：插入排序与选择排序的真题拆解"
+    },
+    {
+      "file": "157-23-类加载_final修饰基本类型变量的原理.md",
+      "chapter": "虚拟机篇",
+      "title": "类加载：final 修饰基本类型变量的原理"
+    },
+    {
+      "file": "158-23_redis_事务_lua脚本原子性.md",
+      "chapter": "缓存篇",
+      "title": "Redis 事务：用 Lua 脚本保证原子性"
+    },
+    {
+      "file": "159-23_spring_tx_事务失效场景5_父子容器.md",
+      "chapter": "框架篇",
+      "title": "Spring 事务失效场景五：父子容器"
+    },
+    {
+      "file": "160-23_行级锁_间隙锁.md",
+      "chapter": "数据库篇",
+      "title": "行级锁：间隙锁"
+    },
+    {
+      "file": "161-23_通用设计_分布式事务_2PC.md",
+      "chapter": "分布式篇",
+      "title": "分布式事务：2PC 两阶段提交"
+    },
+    {
+      "file": "162-24-ConcurrentHashMap_v7_演示并发度.md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v7：演示并发度"
+    },
+    {
+      "file": "163-24-快速排序_描述.md",
+      "chapter": "基础篇",
+      "title": "快速排序：算法描述"
+    },
+    {
+      "file": "164-24-类加载_将符号引用变为直接引用.md",
+      "chapter": "虚拟机篇",
+      "title": "类加载：将符号引用变为直接引用"
+    },
+    {
+      "file": "165-24_lru_演示.md",
+      "chapter": "缓存篇",
+      "title": "LRU Cache：演示"
+    },
+    {
+      "file": "166-24_spring_tx_事务失效场景6_本类方法调用.md",
+      "chapter": "框架篇",
+      "title": "Spring 事务失效场景六：本类方法调用"
+    },
+    {
+      "file": "167-24_行级锁_临键锁.md",
+      "chapter": "数据库篇",
+      "title": "行级锁：临键锁"
+    },
+    {
+      "file": "168-24_通用设计_分布式事务_TCC.md",
+      "chapter": "分布式篇",
+      "title": "分布式事务：TCC 事务补偿"
+    },
+    {
+      "file": "169-25-ConcurrentHashMap_v7_演示索引计算.md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v7：演示索引计算"
+    },
+    {
+      "file": "170-25-快速排序_单边循环(lomuto)_演示.md",
+      "chapter": "基础篇",
+      "title": "快速排序：单边循环（Lomuto）演示"
+    },
+    {
+      "file": "171-25-类加载_双亲委派.md",
+      "chapter": "虚拟机篇",
+      "title": "类加载：双亲委派"
+    },
+    {
+      "file": "172-25_lru_实现_断开节点链接.md",
+      "chapter": "缓存篇",
+      "title": "LRU 实现：断开节点链接"
+    },
+    {
+      "file": "173-25_spring_tx_事务失效场景7_原子性失效.md",
+      "chapter": "框架篇",
+      "title": "Spring 事务失效场景七：原子性失效"
+    },
+    {
+      "file": "174-25_通用设计_分布式事务_消息队列.md",
+      "chapter": "分布式篇",
+      "title": "分布式事务：消息队列（最终一致性方案）"
+    },
+    {
+      "file": "175-26-ConcurrentHashMap_v7_演示扩容.md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v7：演示扩容"
+    },
+    {
+      "file": "176-26-快速排序_单边循环(lomuto)_实现_分区.md",
+      "chapter": "基础篇",
+      "title": "快速排序：单边循环（Lomuto）实现 · 分区"
+    },
+    {
+      "file": "177-26-类加载_能假冒一个System类吗.md",
+      "chapter": "虚拟机篇",
+      "title": "类加载：能假冒一个 System 类吗"
+    },
+    {
+      "file": "178-26_lru_实现_链入头节点.md",
+      "chapter": "缓存篇",
+      "title": "LRU 实现：链入头节点"
+    },
+    {
+      "file": "179-26_spring_tx_事务失效场景8_锁失效.md",
+      "chapter": "框架篇",
+      "title": "Spring 事务失效场景八：锁失效"
+    },
+    {
+      "file": "180-27-ConcurrentHashMap_v7_演示Segment[0].md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v7：演示 Segment[0]"
+    },
+    {
+      "file": "181-27-四种引用_概述.md",
+      "chapter": "虚拟机篇",
+      "title": "四种引用：概述"
+    },
+    {
+      "file": "182-27-快速排序_单边循环(lomuto)_实现_递归.md",
+      "chapter": "基础篇",
+      "title": "快速排序：单边循环（Lomuto）实现 · 递归"
+    },
+    {
+      "file": "183-27_lru_实现_删除_查询_新增.md",
+      "chapter": "缓存篇",
+      "title": "LRU 实现：删除、查询、新增"
+    },
+    {
+      "file": "184-27_spring_webmvc_执行流程_初始化.md",
+      "chapter": "框架篇",
+      "title": "Spring MVC 执行流程：初始化阶段"
+    },
+    {
+      "file": "185-28-ConcurrentHashMap_v8_与7简单比较.md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v8 与 v7 简单比较"
+    },
+    {
+      "file": "186-28-四种引用_虚引用.md",
+      "chapter": "虚拟机篇",
+      "title": "四种引用：虚引用"
+    },
+    {
+      "file": "187-28-快速排序_双边循环_演示.md",
+      "chapter": "基础篇",
+      "title": "快速排序：双边循环分区演示"
+    },
+    {
+      "file": "188-28_lru_实现_测试.md",
+      "chapter": "缓存篇",
+      "title": "LRU 缓存实现：测试与验证"
+    },
+    {
+      "file": "189-28_spring_webmvc_执行流程_匹配.md",
+      "chapter": "框架篇",
+      "title": "Spring MVC 执行流程：匹配阶段"
+    },
+    {
+      "file": "190-29-ConcurrentHashMap_v8_构造参数含义.md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v8：构造参数含义"
+    },
+    {
+      "file": "191-29-四种引用_弱引用.md",
+      "chapter": "虚拟机篇",
+      "title": "四种引用：弱引用与内存泄漏"
+    },
+    {
+      "file": "192-29-快速排序_双边循环_实现.md",
+      "chapter": "基础篇",
+      "title": "快速排序：双边循环分区实现"
+    },
+    {
+      "file": "193-29_lru_LinkedHashMap实现.md",
+      "chapter": "缓存篇",
+      "title": "LRU 缓存：借助 LinkedHashMap 实现"
+    },
+    {
+      "file": "194-29_spring_webmvc_执行流程_执行.md",
+      "chapter": "框架篇",
+      "title": "Spring MVC 执行流程：执行阶段"
+    },
+    {
+      "file": "195-30-ConcurrentHashMap_v8_演示并发put.md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v8：演示并发 put"
+    },
+    {
+      "file": "196-30-四种引用_Cleaner.md",
+      "chapter": "虚拟机篇",
+      "title": "四种引用：Cleaner 与资源清理"
+    },
+    {
+      "file": "197-30-快速排序_双边循环_细节.md",
+      "chapter": "基础篇",
+      "title": "快速排序：双边循环的三个细节"
+    },
+    {
+      "file": "198-30_spring_annotation_spring注解.md",
+      "chapter": "框架篇",
+      "title": "Spring 注解体系总览"
+    },
+    {
+      "file": "199-31-ConcurrentHashMap_v8_演示扩容.md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v8：演示扩容"
+    },
+    {
+      "file": "200-31-finalize_概述.md",
+      "chapter": "虚拟机篇",
+      "title": "finalize 概述：从面试答法到四个疑点"
+    },
+    {
+      "file": "201-31-快速排序_特点.md",
+      "chapter": "基础篇",
+      "title": "快速排序：特点与分区算法对比"
+    },
+    {
+      "file": "202-31_spring_annotation_webmvc注解.md",
+      "chapter": "框架篇",
+      "title": "Spring MVC 注解梳理"
+    },
+    {
+      "file": "203-32-ArrayList_扩容规则.md",
+      "chapter": "基础篇",
+      "title": "ArrayList 扩容规则"
+    },
+    {
+      "file": "204-32-ConcurrentHashMap_v8_扩容细节.md",
+      "chapter": "并发篇",
+      "title": "ConcurrentHashMap v8：扩容中的并发处理"
+    },
+    {
+      "file": "205-32-finalize_unfinalized链表.md",
+      "chapter": "虚拟机篇",
+      "title": "finalize 原理：unfinalized 链表"
+    },
+    {
+      "file": "206-32_spring_annotation_boot注解.md",
+      "chapter": "框架篇",
+      "title": "Spring Boot 注解梳理"
+    },
+    {
+      "file": "207-33-Iterator_FailFast_FailSafe_演示.md",
+      "chapter": "并发篇",
+      "title": "Iterator：FailFast 与 FailSafe 演示"
+    },
+    {
+      "file": "208-33-ThreadLocal_作用.md",
+      "chapter": "并发篇",
+      "title": "ThreadLocal 的作用：线程隔离与线程内共享"
+    },
+    {
+      "file": "209-33-finalize_调用原理.md",
+      "chapter": "虚拟机篇",
+      "title": "finalize 调用原理：ReferenceQueue 与 FinalizerThread"
+    },
+    {
+      "file": "210-33_spring_annotation_@Configuration_配置类即为工厂.md",
+      "chapter": "框架篇",
+      "title": "@Configuration：配置类即为工厂"
+    },
+    {
+      "file": "211-34-Iterator_FailFast_源码分析.md",
+      "chapter": "并发篇",
+      "title": "Iterator 快速失败机制的源码实现"
+    },
+    {
+      "file": "212-34-ThreadLocal_原理.md",
+      "chapter": "并发篇",
+      "title": "ThreadLocal 的实现原理"
+    },
+    {
+      "file": "213-34_spring_annotation_@Configuration_工厂方法不能重载.md",
+      "chapter": "框架篇",
+      "title": "@Bean 工厂方法不支持重载"
+    },
+    {
+      "file": "214-35-Iterator_FailSafe_源码分析.md",
+      "chapter": "并发篇",
+      "title": "安全失败机制的源码实现"
+    },
+    {
+      "file": "215-35-ThreadLocal_key内存释放时机.md",
+      "chapter": "并发篇",
+      "title": "ThreadLocalMap 的 key 为何是弱引用"
+    },
+    {
+      "file": "216-35_spring_annotation_@Configuration_配置类默认为代理.md",
+      "chapter": "框架篇",
+      "title": "@Configuration 默认为配置类生成代理"
+    },
+    {
+      "file": "217-36-LinkedList_vs_ArrayList_随机访问性能比较.md",
+      "chapter": "基础篇",
+      "title": "LinkedList 与 ArrayList：随机访问性能对比"
+    },
+    {
+      "file": "218-36-ThreadLocal_value内存释放时机_get时.md",
+      "chapter": "并发篇",
+      "title": "value 的内存释放时机：get 时"
+    },
+    {
+      "file": "219-36_spring_annotation_@Configuration_配置类依赖注入失效.md",
+      "chapter": "框架篇",
+      "title": "配置类依赖注入失效问题"
+    },
+    {
+      "file": "220-37-LinkedList_vs_ArrayList_增删性能比较.md",
+      "chapter": "基础篇",
+      "title": "LinkedList 与 ArrayList：增删性能比较"
+    },
+    {
+      "file": "221-37-ThreadLocal_value内存释放时机_set时.md",
+      "chapter": "并发篇",
+      "title": "value 的内存释放时机：set 时"
+    },
+    {
+      "file": "222-37_spring_annotation_@Import_基本使用.md",
+      "chapter": "框架篇",
+      "title": "@Import 注解的四种用法"
+    },
+    {
+      "file": "223-38-LinkedList_vs_ArrayList_局部性原理_空间占用.md",
+      "chapter": "基础篇",
+      "title": "局部性原理与 LinkedList 的内存占用"
+    },
+    {
+      "file": "224-38-ThreadLocal_value内存释放时机_remove时.md",
+      "chapter": "并发篇",
+      "title": "value 的内存释放时机：remove 时"
+    },
+    {
+      "file": "225-38_spring_annotation_@Import_DeferredImportSelector.md",
+      "chapter": "框架篇",
+      "title": "DeferredImportSelector 的使用场景"
+    },
+    {
+      "file": "226-39-HashMap_数据结构.md",
+      "chapter": "基础篇",
+      "title": "HashMap 数据结构：1.7 与 1.8 的不同"
+    },
+    {
+      "file": "227-39_spring_boot_自动配置_@SpringBootApplication.md",
+      "chapter": "框架篇",
+      "title": "@SpringBootApplication 注解的组合结构"
+    },
+    {
+      "file": "228-40-HashMap_数据结构_快速查找演示.md",
+      "chapter": "基础篇",
+      "title": "快速查找：哈希表存在的意义"
+    },
+    {
+      "file": "229-40_spring_boot_自动配置_@EnableAutoConfiguration.md",
+      "chapter": "框架篇",
+      "title": "@EnableAutoConfiguration 与自动配置原理"
+    },
+    {
+      "file": "230-41-HashMap_数据结构_链表过长的解决_扩容.md",
+      "chapter": "基础篇",
+      "title": "链表过长的解决：扩容"
+    },
+    {
+      "file": "231-41_spring_pattern_1~3.md",
+      "chapter": "框架篇",
+      "title": "Spring 中的设计模式：单例、建造器、工厂方法"
+    },
+    {
+      "file": "232-42-HashMap_数据结构_链表过长的解决_树化.md",
+      "chapter": "基础篇",
+      "title": "链表过长的解决：树化"
+    },
+    {
+      "file": "233-42_spring_pattern_4~5.md",
+      "chapter": "框架篇",
+      "title": "Spring 中的设计模式：适配器、组合"
+    },
+    {
+      "file": "234-43-HashMap_数据结构_红黑树的意义_树化阈值.md",
+      "chapter": "基础篇",
+      "title": "红黑树的意义与树化阈值为何是 8"
+    },
+    {
+      "file": "235-43_spring_pattern_6~7.md",
+      "chapter": "框架篇",
+      "title": "Spring 中的设计模式：装饰器与代理"
+    },
+    {
+      "file": "236-43_spring_pattern_8~11.md",
+      "chapter": "框架篇",
+      "title": "Spring 中的设计模式：责任链、观察者、策略、模板方法"
+    },
+    {
+      "file": "237-44-HashMap_数据结构_树退化链表_情况1.md",
+      "chapter": "基础篇",
+      "title": "树退化为链表：情况一，扩容拆分"
+    },
+    {
+      "file": "238-45-HashMap_数据结构_树退化链表_情况2.md",
+      "chapter": "基础篇",
+      "title": "树退化为链表：情况二，remove 时结构检查"
+    },
+    {
+      "file": "239-46-HashMap_索引如何计算.md",
+      "chapter": "基础篇",
+      "title": "索引如何计算：二次哈希与按位与优化"
+    },
+    {
+      "file": "240-47-HashMap_为何要二次哈希.md",
+      "chapter": "基础篇",
+      "title": "为何要二次哈希"
+    },
+    {
+      "file": "241-48-HashMap_容量为何是2的n次幂.md",
+      "chapter": "基础篇",
+      "title": "容量为何是 2 的 n 次幂：扩容时的批量迁移优化"
+    },
+    {
+      "file": "242-49-HashMap_容量不用2的n次幂行不行.md",
+      "chapter": "基础篇",
+      "title": "容量不用 2 的 n 次幂行不行"
+    },
+    {
+      "file": "243-50-HashMap_put流程.md",
+      "chapter": "基础篇",
+      "title": "HashMap 的 put 流程（1.7 与 1.8 的差异）"
+    },
+    {
+      "file": "244-51-HashMap_负载因子为何是0.75f.md",
+      "chapter": "基础篇",
+      "title": "HashMap 的负载因子为什么是 0.75f"
+    },
+    {
+      "file": "245-52-HashMap_并发丢数据.md",
+      "chapter": "并发篇",
+      "title": "HashMap 并发丢数据"
+    },
+    {
+      "file": "246-53-HashMap_并发扩容死链(1.7).md",
+      "chapter": "并发篇",
+      "title": "HashMap 并发扩容死链（JDK 1.7）"
+    },
+    {
+      "file": "247-54-HashMap_key的要求.md",
+      "chapter": "基础篇",
+      "title": "HashMap 对 key 的要求"
+    },
+    {
+      "file": "248-55-HashMap_hashCode的设计.md",
+      "chapter": "基础篇",
+      "title": "HashMap 中 hashCode 的设计"
+    },
+    {
+      "file": "249-56-单例模式_方式1_饿汉式.md",
+      "chapter": "基础篇",
+      "title": "单例模式方式一：饿汉式"
+    },
+    {
+      "file": "250-57-单例模式_方式2_枚举饿汉式.md",
+      "chapter": "基础篇",
+      "title": "单例模式方式二：枚举饿汉式"
+    },
+    {
+      "file": "251-58-单例模式_方式3_懒汉式.md",
+      "chapter": "基础篇",
+      "title": "单例模式方式三：懒汉式"
+    },
+    {
+      "file": "252-59-单例模式_方式4_DCL懒汉式.md",
+      "chapter": "基础篇",
+      "title": "单例模式方式四：双重检查锁懒汉式"
+    },
+    {
+      "file": "253-60-单例模式_方式4_DCL懒汉式_为何加volatile.md",
+      "chapter": "基础篇",
+      "title": "DCL 懒汉式为什么要加 volatile"
+    },
+    {
+      "file": "254-61-单例模式_方式5_内部类懒汉式.md",
+      "chapter": "基础篇",
+      "title": "单例模式方式五：内部类懒汉式"
+    },
+    {
+      "file": "255-62-单例模式_在jdk中的体现.md",
+      "chapter": "基础篇",
+      "title": "单例模式在 JDK 中的体现"
+    },
+    {
+      "file": "256-31_spring_annotation_注解完整速查与高频精讲.md",
+      "chapter": "框架篇",
+      "title": "Spring 注解完整速查与缺口精讲"
+    },
+    {
+      "file": "m1-000-Java术语白话注解.md",
+      "chapter": "术语速查",
+      "title": "Java 面试术语白话注解"
+    }
+  ]
+}

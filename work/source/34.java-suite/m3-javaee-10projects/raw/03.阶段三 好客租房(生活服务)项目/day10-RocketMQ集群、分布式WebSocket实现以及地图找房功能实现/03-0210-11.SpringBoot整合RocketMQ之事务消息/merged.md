@@ -1,0 +1,268 @@
+# 11.SpringBoot整合RocketMQ之事务消息
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day10-RocketMQ集群、分布式WebSocket实现以及地图找房功能实现
+- 源文件：03.阶段三 好客租房(生活服务)项目\day10-RocketMQ集群、分布式WebSocket实现以及地图找房功能实现\11.SpringBoot整合RocketMQ之事务消息【海量资源尽在 ubkz.com】.mp4
+- 时长 17分43秒（音频 1063s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好,那么接下来呢我们来看一下使用Spring的Rock Diamond Q整合之后它的一个事物消息是怎么去玩那么我们参考咱们讲义来做一个这个测试好,那么首先呢我们来创建一个包就是我们Transaction这个包把这个包呢我们先创建出来把这个呢我们就先停掉了好嘞,然后呢我们再
+[00:23] 这个位置创建一个哎我们应该在这啊在spoon这个下面创建一个包ok好那么我们相关所有的一些spoon下面的transaction的代码都写到这个里面来呃然后呢首先我们来看一下这个呃这个内容呢是我们去实现了我们transaction的一个list呢然后呢是不是去实现我们前面啊所说的这个接口啊那么这样咱们就把这个
+[00:51] 代码就贴过来吧我们来看一下啊跟我们前面那个写的其实差不多啊就有一点点的区别好我们来看一下他呢去实现啊我们这个接口然后实现他哎OK然后呢嗯实现之后啊我们去给他去呃实现他需要的两个方法那么一个呢是去执行我们的用逻辑对吧一个呢去做一个回查哎OK好
+[01:24] 那么下面呢我们需要给他添加一个这个trisection的一个注解把它加过来OK来看一下啊这个叫做rockmqtrisectionlistener这样的一个注解并且呢我们指定他的一个group就是一个叫mytrisectiongroup当然这个是你制定义的啊那么有一个问题呢就是在这个位置我们要不要加个component
+[01:48] 那去加入到我们的Spring的容器呢有没有必要去加呢其实是没有必要的为什么呢我们来看一下那么当我们点击到这个注解中呢我们会发现其实这个注解中是不是已经包含了component注解那么当我们去使用这个注解的时候那么也就是说它呢是不是就已经包含了那个component那个注解了没有必要再去写了对吧好那么下面我们来看一下这个里面逻辑那么这个呢是我们执行我们的一些业务逻辑对吧这个是
+[02:18] 执行我们的业务逻辑的位置然后呢下面这个方法呢是做什么呢是不是做一个我们的一个回查OK这个我相信大家还记得啊这个回查的一个动作然后呢我们来看一下这个业务逻辑的一个实现啊那么咱们这样咱们把这个贴过来我们应该在上面这个位置啊我们先来定义的是一个map因为我们要去存储
+[02:48] 去存储我们的这个这一个事物或者说这个消息它的一个状态是什么样的一个状态方便于我们后续在这个位置的一个回查对不对啊OK那我们先来看一下我们这个业务逻辑那么咱们把这个就拿过来吧一直到这一直到这OK那么咱们把这个代码就到这然后呢下面这个就不需要了那我们来看一下这个里面的这个代码逻辑啊
+[03:20] 这个代码逻辑呢跟我们之前所实现代码逻辑呢基本上差不多但是呢有一点点的不同啊那我们来看一下在我们的这个位置呢通过我们这个message去获取我们的事物的ID变得比之前复杂那么一点点了变得复杂一些了那么韩剑我们之前怎么去拿的呢我们简单回顾一下啊在我们的这个list呢实现内容中是我们通过一个message
+[03:48] 就可以去拿到他的一个tri-second id非常简单就可以拿到但是呢在我们刚刚的sprint这个里面呢变得麻烦一点为什么会麻烦呢原因是这个message对象他不一样来看一下这个message对象呢是我们这个就是rogmq下面这个message的对象那么我们回到sprint的这个下面这个里面呢他所使用的一个message对象但是他不是他不是我们那个rogmq里面的message而是在
+[04:18] Spring这个下面是不是重新它定义了一个这个message的一个接口所以它是不太一样的但是呢它也可以去拿到我们的这个Transaction ID那么需要通过它的一个get一个headers头然后呢再去get,get谁呢Transaction ID拿到,Transaction ID是稍微麻烦了一点但是它也可以去拿到这个事务的IDOK那么来看一下这个点一下它
+[04:47] 就是trasex id然后呢我们下面是不是执行两个业务逻辑下面的这个是执行我们的操作一下面这个是执行我们的操作二当我们执行完成之后那么我们就需要去返回我们的一个状态那么我们首先返回这个状态呢是这个commit的这个状态对吧就是我们事务的一个提交然后呢在下面这个位置注意在这个位置呢在这个位置呢我们是不是将我们这个状态是不是就丢到哪里呢丢到我们这个
+[05:17] map中OK那么我们那个因为逻辑的执行是不是就OK了那么下面我们来看一下我们的回查的这个动作这个还没说在这个位置呢就是如果出现了任何的异常那么我们是不是就执行下面这个逻辑那么最终返回这个状态这个rollback这个状态然后呢我们在我们这个map中呢所存储的这个事物的一个状态呢就是rollback这个状态那么下面我们在这个位置去
+[05:46] 去做一个回查的时候那么就变得比较容易了那把这个逻辑拷过来那么就直接通过我们上面所定义的一个map去查找到它的一个这个事物的一个状态那么就可以做一个return了来看一下那么首先拿到它的transaction id然后呢我们打印一行打印一个内容当然了我们真正如果做我们在做项目开发的时候
+[06:13] 不应该这样去打印而是应该用日志的方式做打印对不对啊OK然后呢在这个位置直接去通过这个map做一个get就可以了OK这个呢就是我们具体的这个listener就是我们transaction listener的一个实现那么接下来呢我们来看一下我们的一个生产者那么生产者他的代码逻辑又会是怎么样的呢我们把这个吧就直接贴过来好我们拷贝他Ctrl C然后呢进入到我们transaction这个里面
+[06:45] 这个里面呢格式呢稍微有一点点问题简单的来调整一下然后把它然后后面应该是扫一个大括号结束好那么到这里呢这个代码呢就OK了我们来看一下首先呢我们写了这样的一个类对吧Transaction这个类然后呢去给它添加Component的注解然后呢把它加到Spring的容器然后在这个位置呢我们去注一个我们的template然后呢我们下面是不是去发送我们的一个消息
+[07:17] 那么要注意的是那么在我们这个位置去发送消息的时候那么我们所使用的一个API呢是叫做send message in transaction就是我们发一个事务的一个消息然后呢我们要给他指定一个我们producer的一个group就是我们的事务的一个这个group要么注意这个值你不能随便定义你不能随便定义那么你这个值必须要和什么呢前面我们所写的
+[07:46] 这个list中的list诶在哪去了呢是在我们的这个list中的啊list中的这个值要一致啊要和他一致要不然的话那么你是发送是不在一个事物中的啊OK那么我们来看一下啊使用的是这个API这个值呢要通过我们刚刚写注解中的那个值要跟他一致然后呢我们去发一个这个topic然后呢再去发一个message
+[08:15] 那么在这个位置要注意我们发送的这个message发送这个message是通过是sprint下面的这个message就是log.mqsprint写的这个message它是一个接口它需要通过一个message build这个类去构建我们这样的一个message的对象丢给它它不是我们这个log.mq API里面那个message这个一定要注意然后呢发送成功打一句话就是发送消息成功了那么这个就是我们去发送一个
+[08:44] 这个消息那么其实跟我们前面所看到的发送这个消息基本上也差不多只是在这个位置他需要调用这个什么呢in transaction去做一个发送ok好当然了他们都是调用这个log.mqtemplate这个对象去做一个操作那么所以说他里面分装内容还是比较多的那么这个是生产者下面我们来看消费者那么消费者其实没有任何变化
+[09:13] 跟我们之前的消费者是一模一样的那么我们还是把它先丢过来那来看一下那么这个里面的消费者没有任何的变化他呢就是去接收就是去接收我们的这个接收我们这个my topic多了两个s然后拿到消息之后把消息打印出来那么仅此而已是一模一样没有任何区别那么我们知道在事物的这种
+[09:37] 消息中的消费者其实没有过多的参与那么更多的是在生产者发送消息这一端对不对啊好那么下面呢我们来编写它的一个编写它的一个启动类启动类不需要了启动类的话我们在这个位置启动它是不是就能够去扫描到这个它的纸这个包下面的一些内容这个是OK的下面我们只需要给它去编写一个测试用力就可以了那我们把这个测试用力扣过来
+[10:07] 那么我们要在下面这个位置好然后呢我们在上面这个位置是不是把刚刚我们所定义的这个SpringTransaction这样的一个类我们是不是去注入进来PortoSource去注入进来好这样注入进来是不是就可以去做一个发送了那么这样吧我们给它改一个topic吧就叫SpringSpringMyTopic那么我们就加一个TX吧TX
+[10:37] 就代表事物的这样的一个topic然后呢这个是不是我们要把这个topic拷贝然后呢发送到写到我们这个位置来是不是一定要和我们的这个消费者这一端所兼添的这个topic要一致才可以对吧好嘞那么下面我们来看在这个位置呢我们打印的这个发出的消息内容就是我的第一个sprint的什么事物的消息
+[11:04] 好嘞那么我们现在是不是就可以这么来玩了那么首先呢我们需要的是我们先发送一条吧看他能不能够成功的发送能不能做一个成功的发送看有没有错误啊有错误好那我们来看一下这个是什么错误呢好那么我们来看这个错误是什么错误那么这个错误呢在上面这个位置我们来看一下啊他说是我们的Spring ConsumerSpring Consumer
+[11:35] 发现有相同名字的这个Spring Consumer来我们来看一下什么情况那么在这个位置有一个Spring Consumer这个位置是不是也有一个Spring Consumer所以它这个名字啊冲突了所以显然是不可以的啊那么我给它个命名字吧就叫TX吧TX然后呢Consumer那这样的话那么就OK了没有问题了对吧好嘞那么我们再次启动啊再次去做一个这个消息的发送走那么看它是否能够
+[12:05] 发送成功呢好那么我们可以看到在这个位置呢是不是操作执行操作一操作二发送成功那么显然我们整个这个呃整个这个配置发送成功应该是没有任何问题的是ok的那么下面我们就要关键来看一下啊我们的这个消费者那我们把这个消费者重新跑起来跑起来之后呢我们看一下我们这个能不能去呃拿到我们这个事物的这个消息啊好那么我们等待他的一个启动
+[12:36] 那么等到我们启动之后呢我们就会发现在这个位置它已经收到了我们的事物这个消息那我可以再来发一个我们来看一下这个效果啊再来发一个吧那叫第一个那叫第二个啊事物的这个消息那么我们把它把它然后呢再去弄一下那么我们来看它是否能够收到我们的第二个我们这个screen的这个事物的消息那么等待它这个发送那么可以看到有发
+[13:06] 发送操作一操作一然后发送成功然后到这个里面来看一下是不是收到第二个我们的事务这个消息那么接下来我们把这个事务这个代码简单的修改一下我们来测试一下这个事务它是否有生效呢那么也就是说我们在这个位置我们去我们去发送的时候我们把它的这个这个是我们改成一个rollback对吧改成一个rollback那么看它会怎么样
+[13:34] 那么如果这个如果我们改成这个rollback的话那么它是不是就代表着我们这个事物肯定就是失败的对不对事物是一个失败的那么我们的消费者是不是一定就拿不到这个消息啊那我们再来测一下啊那么我们再来把它改一下再改成我们第三个啊这个spin事物的消息然后呢走看他能不能拿到那么可以看到我们的生产者发送已经是OK了
+[14:03] 但是我们消费者有没有拿到我们第三个消息呢简而是没有拿到的那就说明我们这个事物它是不是已经生效了对吧好嘞那么接下来我们再来测试一下它的一个回查的一个机制那么回查怎么玩呢是不是我们需要在我们这个list中去返回这个状态啊是什么状态呢就是我们的一个叫做unknown未知的这样的一个状态那么未知这个状态那么服务端是不是就会发起一个回查
+[14:31] 那么但是呢我们这个map中注意啊我们这个map中所存储的它是一个commit的一个状态那么也就是说它在回查的时候一定会去执行我们这个代码拿到的这个commit那么事务是不是也会提交也就是消费者我们肯定就会拿到消息了对不对所以呢我们在这个位置再来测一下那么把它改成第四个我们的spin一个事务的消息那我们再去执行我们的这个测试用力那么等待它的一个操作
+[14:58] 那么我们可以看到生产者现在是不是已经就发送成功了那我们来看一下这个消费者会怎么样那么我们的消费者这一端还是没有拿到消息那么回查这个动作也没有去执行为什么是这样呢其实原因是这样的原因是我们刚刚去做的这个测试用力那么他执行结束之后那我们整个进程是不是就已经结束了那么结束了他就不可能再去回查到
+[15:34] 我们的刚刚那个逻辑了那么应该是这么去玩一下当我去发送完这个消息之后那么我这在这个做一个sleep导致我这个线程不让他停止对吧那我去测一下那么我们sleep然后呢给他去做一个trycat处理ok好那么我们再来测试一下看他会怎么样那么这次我们就改成第五个
+[16:02] 第五个这个消息吧然后呢我们测试走看一下对吗应该是这个消息二走那么让他去做一个现成的一个等待对吧等待我们整个进程就不会结束那我们就看一下他会怎么样会不会有个回查这个动作在里面好了那么我们这个测试结果呢就出来了那么他的一个执行过程呢我们来看一下
+[16:29] 那么在我们刚刚启动的时候呢他呢也做了一次回查那么这个呢是我们上一次的那个消息那么在我们消费的这一端呢他也打印出来了啊也打印出来了其实这个呢因为我们是调用了一套代码所以他也会打印这个没什么太大的问题然后呢下面这个是我们这一次的消息的操作那么我们发动成功了其实我们这一块消费的这一端并没有收到我们的消息那么什么时候收到我们这个消息呢是
+[16:55] 等到我这回查结束之后你可以看到那么这个是我这个事务的ID然后他这个状态呢是commit然后呢才会去提交我们这个提交我们这个消息那么我们的消费者是不是才能够去拿到我们第五条这个消息啊那么所以通过这个测试呢会发现我们这个使用Spring去整合RockMQ去使用这个事务的消息
+[17:17] 功能跟我们使用这个原生的API的事物这个消息是不是一模一样OK但是呢他这个操作其实变得也更加的简单一些了啊更加简单了那么OK这个呢其实就是我们去讲的啊给大家去演示的那个通过Spring或者Spring Boot来整合RockedMQ的一个事物消息的一个演示好那么关于这个事物的消息那我们就先讲到这
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在 Spring Boot 项目中使用 RocketMQ 实现事务消息，包括定义事务监听器、配置生产者和消费者，以及测试消息发送与事务提交。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示 PDF 文档中“3.8.1. 定义TransactionListenerImpl”章节，介绍事务消息的定义。
+画面 2: 在 IntelliJ IDEA 中，显示 `TransactionListenerImpl.java` 文件，其中 `implements RocketMQLocalTransactionListener`，并展示测试通过的日志。
+画面 3: 在 PDF 文档中，展示 `TransactionListenerImpl` 类中 `executeLocalTransaction` 方法的 `try` 块，包含打印“执行操作1”和“执行操作2”的语句。
+画面 4: 在 IntelliJ IDEA 中，显示 `TransactionListenerImpl.java` 文件，其中 `executeLocalTransaction` 方法的注释和部分代码，包括“执行具体的业务逻辑”和“用户A账户减500元”、“用户B账户加500元”等业务逻辑。
+画面 5: 在 IntelliJ IDEA 中，显示 `TransactionListenerImpl.java` 文件，其中 `executeLocalTransaction` 方法的 `try` 块和 `catch` 块，包含返回 `COMMIT` 或 `ROLLBACK` 的语句。
+画面 6: 在 IntelliJ IDEA 中，显示 `TransactionListenerImpl.java` 文件，其中 `executeLocalTransaction` 方法的注释和部分代码，包括“执行业务逻辑”和“@Override”等。
+画面 7: 在 IntelliJ IDEA 中，显示 `SpringTransactionProducer.java` 文件，其中定义了 `@Autowired private RocketMQTemplate rocketMQTemplate;`，并展示发送消息的 `sendMsg` 方法。
+画面 8: 在 IntelliJ IDEA 中，显示 `SpringConsumer.java` 文件，其中 `@RocketMQMessageListener` 注解配置了 `topic` 和 `consumerGroup`，并展示 `onMessage` 方法。
+画面 9: 在 IntelliJ IDEA 中，显示 `SpringConsumer.java` 文件，其中 `@RocketMQMessageListener` 注解配置了 `topic` 和 `consumerGroup`，并展示 `onMessage` 方法。
+画面 10: 在 IntelliJ IDEA 中，显示 `TestSpringRocketMQ.java` 文件，其中 `sendMsg` 方法发送了“我的第2个SpringRocketMQ消息！”，并展示终端日志显示“收到消息 -> 第1个Spring事务消息”。
+画面 11: 在 IntelliJ IDEA 中，显示 `TestSpringRocketMQ.java` 文件，其中 `sendMsg` 方法发送了“第3个Spring事务消息”，并展示终端日志显示“执行操作1”、“执行操作2”、“发送消息成功”。
+画面 12: 在 IntelliJ IDEA 中，显示 `TestSpringRocketMQ.java` 文件，其中定义了 `testSendMsg` 和 `testSendMsg2` 两个测试方法。
+画面 13: 在 IntelliJ IDEA 中，显示 `TestSpringRocketMQ.java` 文件，其中 `testSendMsg2` 方法的 `catch` 块，包含打印异常栈信息的语句。
+画面 14: 展示 PDF 文档中“3.8.1. 定义TransactionListenerImpl”章节，介绍事务消息的定义。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```java
+package cn.itcast.RocketMQ.spring.transaction;
+import org.apache.RocketMQ.spring.annotation.RocketMQTransactionListener;
+import org.apache.RocketMQ.spring.core.RocketMQLocalTransactionState;
+import org.apache.RocketMQ.spring.support.RocketMQHeaders;
+import org.springframework.messaging.Message;
+import java.util.HashMap;
+@RocketMQTransactionListener(txProducerGroup = "myTransactionGroup")
+public class TransactionListenerImpl implements RocketMQLocalTransactionListener {
+    private static Map<String, RocketMQLocalTransactionState> STATE_MAP = new HashMap<>();
+    @Override
+    public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) {
+```
+
+画面 2:
+```java
+class TransactionListenerImpl implements RocketMQLocalTransactionListener {
+```
+
+画面 3:
+```java
+@Override
+public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) {
+    String transId = (String)message.getHeaders().get(RocketMQHeaders.TRANSACTION_ID);
+    try {
+        System.out.println("执行操作1");
+        Thread.sleep(500);
+        System.out.println("执行操作2");
+        Thread.sleep(800);
+        STATE_MAP.put(transId, RocketMQLocalTransactionState.COMMIT);
+        return RocketMQLocalTransactionState.COMMIT;
+    } catch (Exception e) {
+        e.printStackTrace();
+        STATE_MAP.put(transId, RocketMQLocalTransactionState.ROLLBACK);
+        return RocketMQLocalTransactionState.ROLLBACK;
+    }
+}
+```
+
+画面 4:
+```java
+/**
+ * 执行具体的业务逻辑
+ * @param msg 发送的消息对象
+ * @param arg
+ * @return
+ */
+@Override
+public LocalTransactionState executeLocalTransaction(Message msg, Object arg) {
+    System.out.println("用户A账户减500元。");
+    Thread.sleep(1000);
+    System.out.println("用户B账户加500元。");
+    Thread.sleep(800);
+    STATE_MAP.put(msg.getTransactionId(), LocalTransactionState.COMMIT);
+    return LocalTransactionState.COMMIT;
+}
+```
+
+画面 5:
+```java
+@Override
+public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) {
+    String transId = (String)message.getHeaders().get(RocketMQHeaders.TRANSACTION_ID);
+    try {
+        System.out.println("执行操作1");
+        Thread.sleep(500);
+        System.out.println("执行操作2");
+        Thread.sleep(800);
+        STATE_MAP.put(transId, RocketMQLocalTransactionState.COMMIT);
+        return RocketMQLocalTransactionState.COMMIT;
+    } catch (Exception e) {
+        e.printStackTrace();
+        STATE_MAP.put(transId, RocketMQLocalTransactionState.ROLLBACK);
+        return RocketMQLocalTransactionState.ROLLBACK;
+    }
+}
+```
+
+画面 6:
+```java
+import java.util.Map;
+@RocketMQTransactionListener(txProducerGroup = "myTransactionGroup")
+public class TransactionListenerImpl implements RocketMQLocalTransactionListener {
+    private static Map<String, LocalTransactionState> STATE_MAP = new HashMap<>();
+    /**
+     * 执行业务逻辑
+     * @param message
+     * @param arg
+     * @return
+     */
+    @Override
+    public LocalTransactionState executeLocalTransaction(Message message, Object arg) {
+        try {
+            System.out.println("执行操作1");
+            Thread.sleep(500);
+            System.out.println("执行操作2");
+            Thread.sleep(800);
+            STATE_MAP.put(message.getTransactionId(), LocalTransactionState.COMMIT);
+            return LocalTransactionState.COMMIT;
+        } catch (Exception e) {
+            e.printStackTrace();
+            STATE_MAP.put(message.getTransactionId(), LocalTransactionState.ROLLBACK);
+            return LocalTransactionState.ROLLBACK;
+        }
+    }
+}
+```
+
+画面 7:
+```java
+package cn.itcast.RocketMQ.spring.transaction;
+import ...
+@Component
+public class SpringTransactionProducer {
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
+    /**
+     * 发送消息
+     * @param topic
+     * @param msg
+     */
+    public void sendMsg(String topic, String msg) {
+        Message message = MessageBuilder.withPayload(msg).build();
+        //myTransactionGroup定义
+        this.rocketMQTemplate.sendMessageInTransaction(txProducerGroup: "myTransactionGroup",
+                topic,
+                message,
+                null);
+    }
+}
+```
+
+画面 8:
+```java
+package cn.itcast.RocketMQ.spring.transaction;
+import ...
+@Component
+@RocketMQMessageListener(topic = "my-topic",
+        consumerGroup = "haoke-consumer",
+        selectorExpression = "")
+public class SpringConsumer implements RocketMQListener<String> {
+    @Override
+    public void onMessage(String msg) {
+        System.out.println("接收到消息 -> " + msg);
+    }
+}
+```
+
+画面 9:
+```java
+package cn.itcast.RocketMQ.spring.transaction;
+import ...
+@Component
+@RocketMQMessageListener(topic = "spring-tx-my-topic",
+        consumerGroup = "haoke-consumer",
+        selectorExpression = "")
+public class SpringConsumer implements RocketMQListener<String> {
+    @Override
+    public void onMessage(String msg) {
+        System.out.println("接收到消息 -> " + msg);
+    }
+}
+```
+
+画面 10:
+```java
+// TestSpringRocketMQ.java
+public class TestSpringRocketMQ {
+    @Test
+    public void testSendMsg() {
+        String msg = "我的第2个SpringRocketMQ消息！";
+        this.springProducer.sendMsg(topic: "spring-my-topic", msg);
+        System.out.println("发送成功");
+    }
+}
+```
+
+画面 11:
+```java
+// TestSpringRocketMQ.java
+public class TestSpringRocketMQ {
+    @Test
+    public void testSendMsg2() {
+        this.springTransactionProducer.sendMsg(topic: "spring-tx-my-topic", msg);
+    }
+}
+```
+
+画面 12:
+```java
+// TestSpringRocketMQ.java
+@Test
+public void testSendMsg() {
+    String msg = "我的第2个SpringRocketMQ消息！";
+    this.springProducer.sendMsg(topic: "spring-my-topic", msg);
+    System
+

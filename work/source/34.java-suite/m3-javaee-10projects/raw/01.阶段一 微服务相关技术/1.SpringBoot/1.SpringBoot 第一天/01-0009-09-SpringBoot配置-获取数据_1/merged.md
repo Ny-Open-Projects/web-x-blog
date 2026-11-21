@@ -1,0 +1,270 @@
+# 09-SpringBoot配置-获取数据_1
+
+- 阶段：01.阶段一 微服务相关技术
+- 章节：1.SpringBoot/1.SpringBoot 第一天
+- 源文件：01.阶段一 微服务相关技术\1.SpringBoot\1.SpringBoot 第一天\09-SpringBoot配置-获取数据_1_【海量资源尽在 ubkz.com】.mp4
+- 时长 9分33秒（音频 573s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 介绍完了Yammer的基本语法接下来我们来讲解如何来读取配置文件的内容其实刚才我们也发现在Yammer里边可以配两种不同的内容第一种内容是被我们Spring Boot所自动识别的而第二种内容是我们自定义的需要我们在程序里边去使用的那么在程序里边使用我们就需要把这个配置的内容给它读取出来
+[00:27] 而Spring Boot给我们提供了三种不同读取配置文件内容的方式第一种就是以前的我们使用add value注解的方式第二种我们使用一个environment这么一个环境的这么一个对象注入一个对象通过它的方法就可以读取出来配置的内容而第三种是比较特殊的我们使用一个注解叫做configuration properties
+[00:53] 那么它可以达到一个效果就是使我们的配置文件的内容和我们的对象做一个映射这么一个关系好嘞那么介绍完这三种方式之后接下来我们在程序里边挨个来演示一下刚才呢我们在这个ymr这个配置文件里边啊我们有这么多一些信息那么这些信息呢我们可以在文在这个程序里边把它读取一下我们在这个hello control里边挨个来读取这些配置的信息
+[01:24] 好我们写一个private第一个呢我们看一下我们定义的是name abc对吧好我们在这里边写一个strain内心的name然后呢在上面加一个value的注解value注解然后写一个对应的它的表达式dollar大括号里边就写name注意这个成员变量的名称这个name跟这个配置文件的这个件的名称没有任何的关系
+[01:54] 但是这个配置文件的键的名称要和表达式里边这个值一样才可以获取的到那么获取了之后我们来把这个方法给它复制一份复制一份之后我们给它起个名叫做hello2这个地方也写个2好在这个地方我们就来输出一下不在浏览器返回了输出一下第一个我们就输出name看一下能不能获取到这个name的值这个name的值是abc
+[02:25] 重启一下重启一下之后呢我们来看一下这个端口是8082好8082然后呢我们访问的是Hello2走来看一下控制台的输出你看ABC是不是获取到了还没有任何的问题那么接下来我们就来获取一下对象的值那么对象的值这个地方呢参数引用这一块我们先给它注释掉我们为了方便看我们把它张三给它换过来为了以时区分
+[02:56] 弄完了之后呢接下来我们在这里边把这个string name这个呢给它复制一份复制一份之后呢我们就起个名叫做person.name注意啊你看这个配置是不是person下边有一个name它的写法就是person.name那么age呢就是person.age了好那么这个name呢我们就起名为name2那么同样呢我们在这个地方再来复制一份复制一份之后呢我们给它改个名叫做person.age
+[03:25] 然后这个age呢其实数字我们就用int类型来接收了好弄完了之后我们把这两个都打印一下一个是name2一个是age这个代码写完了之后我们来重启运行看一下效果重启一下如果不出意外的话name2应该是张3age应该是20刷新来看张320是不是都获取到了没问题那么同样呢我们可以来演示一下这个参数的注入好参数注入
+[04:00] 我们把这个张三呢给他干掉然后呢我们把这个dollar name打开那么这个时候呢我们获取的person的name是不是应该跟这个name一样的值都是ABC啊好重启一下刷新刷新了之后你可以看到两个ABC没有问题那么接下来这个对象的属性注入都完事了那么接下来我们就来说一个数组的一个注入方式啊稍微会特殊一点好我们
+[04:34] 下一个复制一个复制一个之后呢数组的我们看一下这个地方是address好它有两个值北京上海我们注入一个就可以了那么这个address呢是一个字符串形式的String类型的address第一个值然后这个键呢就是addressaddress呢它有两个值我们用中国号的方式来取它的脚标那么第一个值呢是脚标为0那么我们同样来打印一下
+[05:04] ADD R1SS Address 1重启一下重启一下之后呢我们一访问就可以看到控制台会打印一个北京好可以看一下北京获取出来没有问题那么最后呢我们再来看一下存量这两个存量那么这两个存量呢一个是Message 1一个是Message 2我们给它复制这么两个复制两个之后呢我们去改一下第一个呢是MSG1MSG1好
+[05:34] 这个地方呢我们就起个变量的名叫MSG1第二个呢我们给它起这个参数位置我们写MSG2变量名我们也叫MSG2好这两个值呢同样我们分别去打印一下MSG1吧好然后第二个呢是MSG2都写完了之后呢我们主要要看这两个的区别这个区别呢刚才其实我们已经说过了
+[06:07] MSG1是单引号的它会原样输出不会识别这个反斜杠N这么一个换行符而双引号MSH2引起的这个双引号的存量它会识别这个转移字符Hello和Word会分两行进行输出重启一下刷一下刷完了之后呢我们来看效果没重启好啊重新再刷一下现在好了好了之后呢你看第一个Hello Word中间这个反斜杠是不是原样输出了
+[06:41] 而第二个MSG2的hello和word是不是在两行而这前面这个空格是因为我们这个值本来就带个空格所以是这么一个情况好嘞第一种方式value的方式我们就介绍完了还是比较简单的但是使用value的方式你会发现我们要获取值还是比较麻烦的要注入这么多属性对吧
+[07:04] 你获取一些比较单个的值用起来比较方便但是呢值一旦多了你在这获取要挨个的注入比较麻烦那么他提供的第二种方式第二种方式呢是要注入一个对象叫做privateenvenvironment环境的这么一个对象而这个对象呢现在有很多个不要捣错包我们用的是supreme framework这个包下边的好env注入这么一个对象
+[07:31] 注入完事之后我们用AutoVal注解给它注入进来在Spring Boot的程序启动的时候就会在Spring的容器里边初始化好这么一个Environment环境的对象我们直接注入拿来用就可以了那么为了演示期间我们在这个地方给它输出一个换行服务好输出完换行服务之后我们直接在这打印一下env点获取它的属性getProperty通过这个方法
+[08:02] 指定这个键的名称就可以来获取对异键对异的属性值了那么这个名称呢跟这个里边写的是一样的我们随便来写这么一个person.name我们再写一个比如说数组的吧address中括20把这个呢也复制一份放进来放进来之后呢我们重启服务来看一下能不能获取到张三看一下这个地方是张三吗
+[08:32] 不是张三的应该是ABC对吧和北京这两个值重新去刷一下刷完了之后呢我们来看换行服下边的这些ABC北京是不是也是可以获取到的Environment这样的方式也是OK的那么它比Value好在哪呢就是说它比Value呢更方便一些就在于这个玩意呢它只需要注入这么一个对象然后呢来获取属性值就可以了
+[09:00] 而value就需要注入这么多看起来比较的零散一些而environment更加的精炼一些当然如果值比较少的话用value是更方便的因为它不用再去调任何的方法只需要这样一注入就可以来使用了那么前边两种的value和environment这个方式我们就介绍完了那么第三个方式我们使用的是这种叫做configuration properties的
+[09:28] 那么这个东西我们在下一个小节再来介绍
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示 Spring Boot 中使用 @Value、Environment 和 @ConfigurationProperties 三种方式读取配置文件内容。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: PPT 页面，标题为“Spring Boot 配置”，子标题“读取配置内容”，列出三种方式：1) @Value，2) Environment，3) @ConfigurationProperties。
+画面 2: IDE 中展示 HelloController.java 代码，其中包含 @RestController 和 @RequestMapping 注解，以及一个返回 "hello Spring Boot 222!" 的 hello 方法。
+画面 3: IDE 中展示 HelloController.java 代码，添加了 @Value("${name}") 注解和 private String name 字段。
+画面 4: IDE 中展示 application.yml 文件，内容为 server: port: 8082 和 name: abc。
+画面 5: IDE 中展示 application.yml 文件，内容更新为 name: zhangsan，person: {name: zhangsan, age: 20}，address: beijing，以及 address2: [beijing, shanghai]。
+画面 6: IDE 中展示 application.yml 文件，内容为 person: {name: zhangsan, age: 20}，address: beijing，address2: [beijing, shanghai]，以及 msg1: 'hello \n world'，msg2: 'hello \n world'。
+画面 7: IDE 中展示 HelloController.java 代码，添加了 @Value("${person.name}") 和 @Value("${person.age}") 注解，并在 hello 方法中打印 name 和 age。
+画面 8: IDE 中展示 HelloController.java 代码，添加了 @Value("${address[0]}") 注解和 private String address 字段，并在 hello 方法中打印 address。
+画面 9: IDE 中展示 HelloController.java 代码，添加了 @Value("${msg2}") 注解和 private String msg2 字段，并在 hello 方法中打印 msg2。
+画面 10: IDE 中展示 application.yml 文件，内容为 person: {name: zhangsan, age: 20}，address: beijing，address2: [beijing, shanghai]，以及 msg1: 'hello \n world'，msg2: 'hello \n world'。
+画面 11: IDE 中展示 HelloController.java 代码，添加了 @Autowired Environment env 字段。
+画面 12: IDE 中展示 HelloController.java 代码，添加了 @Value("${msg2}") 注解和 private String msg2 字段，并在 hello 方法中打印 msg2。
+画面 13: IDE 中展示 HelloController.java 代码，添加了 System.out.println(env.getProperty("address[0]")); 语句，并在 hello 方法中返回 "Hello Spring Boot 222!"。
+画面 14: PPT 页面，标题为“Spring Boot 配置”，子标题“读取配置内容”，列出三种方式：1) @Value，2) Environment，3) @ConfigurationProperties。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```java
+package com.ithema.Spring Boot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @RequestMapping("/hello")
+    public String hello() { return "hello Spring Boot 222!"; }
+}
+```
+
+画面 3:
+```java
+package com.ithema.Spring Boot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @Value("${name}")
+    private String name;
+    @RequestMapping("/hello")
+    public String hello() { return "hello Spring Boot 222!"; }
+}
+```
+
+画面 4:
+```yaml
+server:
+  port: 8082
+name: abc
+```
+
+画面 5:
+```yaml
+server:
+  port: 8082
+name: zhangsan
+person: {name: zhangsan, age: 20}
+address: beijing
+address2: [beijing, shanghai]
+```
+
+画面 6:
+```yaml
+person: {name: zhangsan, age: 20}
+address: beijing
+address2: [beijing, shanghai]
+msg1: 'hello \n world'
+msg2: 'hello \n world'
+```
+
+画面 7:
+```java
+package com.ithema.Spring Boot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @Value("${person.name}")
+    private String name;
+    @Value("${person.age}")
+    private int age;
+    @RequestMapping("/hello")
+    public String hello() {
+        System.out.println(name);
+        System.out.println(age);
+        return "hello Spring Boot 222!";
+    }
+}
+```
+
+画面 8:
+```java
+package com.ithema.Spring Boot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @Value("${address[0]}")
+    private String address;
+    @RequestMapping("/hello")
+    public String hello() {
+        System.out.println(name);
+        System.out.println(age);
+        System.out.println(address);
+        return "hello Spring Boot 222!";
+    }
+}
+```
+
+画面 9:
+```java
+package com.ithema.Spring Boot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @Value("${msg2}")
+    private String msg2;
+    @RequestMapping("/hello")
+    public String hello() {
+        System.out.println(name);
+        System.out.println(age);
+        System.out.println(address);
+        System.out.println(msg2);
+        return "hello Spring Boot 222!";
+    }
+}
+```
+
+画面 10:
+```yaml
+person: {name: zhangsan, age: 20}
+address: beijing
+address2: [beijing, shanghai]
+msg1: 'hello \n world'
+msg2: 'hello \n world'
+```
+
+画面 11:
+```java
+package com.ithema.Spring Boot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @Value("${msg2}")
+    private String msg2;
+    @Autowired
+    private Environment env;
+    @RequestMapping("/hello")
+    public String hello() {
+        System.out.println(name);
+        System.out.println(age);
+        System.out.println(address);
+        System.out.println(msg2);
+        return "hello Spring Boot 222!";
+    }
+}
+```
+
+画面 12:
+```java
+package com.ithema.Spring Boot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @Value("${msg2}")
+    private String msg2;
+    @Autowired
+    private Environment env;
+    @RequestMapping("/hello")
+    public String hello() {
+        System.out.println(name);
+        System.out.println(age);
+        System.out.println(address);
+        System.out.println(msg2);
+        return "hello Spring Boot 222!";
+    }
+}
+```
+
+画面 13:
+```java
+package com.ithema.Spring Boot;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+    @Value("${msg2}")
+    private String msg2;
+    @Autowired
+    private Environment env;
+    @RequestMapping("/hello")
+    public String hello() {
+        System.out.println(name);
+        System.out.println(age);
+        System.out.println(address);
+        System.out.println(msg2);
+        System.out.println(env.getProperty("address[0]"));
+        return "Hello Spring Boot 222!";
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面 1 和 14: PPT 页面，标题为“Spring Boot 配置”，子标题“读取配置内容”，列出三种方式：1) @Value，2) Environment，3) @ConfigurationProperties。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（已按要求完成）
+

@@ -1,0 +1,224 @@
+# 12_爬虫数据排重_排重代码编写
+
+- 阶段：05.阶段五 黑马头条（社交媒体）项目
+- 章节：day10-黑马头条-爬虫数据保存
+- 源文件：05.阶段五 黑马头条（社交媒体）项目\day10-黑马头条-爬虫数据保存\12_爬虫数据排重_排重代码编写【海量资源尽在 666java.com】.mp4
+- 时长 9分52秒（音频 592s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好下面咱们就来去设置当前scandal这个类这个类你看叫做什么db-and-redis-scandal并且它要继承一个redis-scandal这个redis-scandal其实你要注意它是webmatik的一个防重复的一个专门的类它是一个专门的类这里边借助了当前的redis去操作的但是咱们还要去实现咱们的流程接口流程接口
+[00:27] 现在咱们下面就来去创建当前的这个类在创建的在当前的process在这儿去创建一个包叫scandler好这是一个包然后都是去创建某一个类叫什么DBDB and Radius Scandler
+[01:01] 感觉写错了吗没错okdb and redis candler让他去继承谁一团当前的redis是看到了你看这个是谁的包webmagic的包然后下面还有一个叫实现当前哪个process flow把这些方法都实现一下一人报错其实这里边是需要去募写里边的方法
+[01:31] 因为你要去构建你的当前的Jadis怎么办呢这里边是有一个叫做is-cu-public-kit这个其实就是来去判断到底重复不重复这里边还有一个public我们要去设置两个构造这是固定写法一个是一个string的host然后这时候咱们可以调用super
+[02:04] super然后是把这个house就错了没错super然后是把house装进去就可以了这是一个然后再去设置第二个public然后是db按着radiuscandler这边咱们要去设立一个jadis就是jadis的一个这种连接池是吧d-e-t-s-t-o好然后你就可以去再去调用复类就是把当前这个
+[02:40] 这个装进去就可以了好吧行那这样的话咱们就出实话了啊啊说话之后啊咱们在这儿去加一个log4g2吧好吧呃说完之后呢说了啊那需要去设置两个都是在当前这个方法中去验证啊一定哪一个呢第一个呢是用当前redis去验证一次然后呢咱们再用数据库去验证一次所以说呢咱们在这啊嗯在这呢去查询这个URL呢咱们需要去在这去注入一个servicecaller
+[03:10] CaWColorAdditionalUseAdditionalService就它这里边有一个方法是查询当前的URL到底是否存在这个方法大家不知道还没有印象这里边它是有一个方法的这里边还用到了一个东西咱们就是用到了当前的一个用到了当前一个ColorHelp咱们把这个也注入进来CaWAreaHelp就它
+[03:42] 好 注意了之后呢咱们一会儿再去设置啊最重要的方法就是这个方法是吧那下面呢咱们就先干嘛呢先去把这个方法给写一下好吧这边该怎么去写呢你看啊这个request呢其实就是你请求的webmatic的一个request这个呢这个task呢就是一个这种任务是吧行 那下面呢咱们就来去设置但是设置之前呢一般情况下呢这个啊只有映像的时候
+[04:15] 逆向的时候啊逆向排序还会排床那你说逆向需要排床吗逆向不需要什么逆向不需要呢因为逆向啊是通过URL再去查所以说呢这个逆向它呢不能排床OK啊那这个那你怎么去判断到底是正向还是逆向呢所以说呢咱们在这啊用当前的$HELPORT.GETHANDLETYPE然后是传一个REQUEST
+[04:46] 传完之后这里边就能去拿到一个handle type当然咱们最终的是返回一个pool咱们可以在这去设置一个pool然后是istst先默认等于force或者咱们再去操作变量就可以了既然你已经拿到当前handle type了这时候咱们就可以在这去判断如果说color.gethandle type
+[05:19] .forword.name如果说name是.ecos.handleType的话这时候是正向的那正向的话咱们下面就可以进行拍虫了其实拍虫的方式非常简单你直接去调用support.disapplicate然后传的就是request然后第二个就是task好那这样就完了最终它返回的就是一个不二类型这个不二类型
+[05:47] 你直接用接收就可以好这是审核的第一次咱们在这也可以记录一下日志是吧log.infour排从排从开始然后咱们可以在下面去写说ur是谁我可以去设一个下面还有什么的document type应该不是document type应该是咱们的handle typehandle type是谁
+[06:24] 好,设置啊,第一个URL是谁啊那就是request.getURL是吧,那第二个呢就是handlepad,好,这个咱们就继续完成了啊我刚才说了啊那这个呢是用redis去做是吧,这是redis派出啊redis派出下面是不是还要再去做第二个呀哪个呀,就是要去做数据库派出数据库进行派出好,那这个怎么办呢
+[06:59] 嗯我说咱们在这啊我说他等于force就写错了这是ex稍微改改啊好他不等于force的话这时候呢咱们这时候才需要进行数据库排除啊假而我们有一个叫做嗯哪个is有一个isis是吧就他然后你把当前的这种request.get ur传进去这就是请求的一个ur
+[07:34] 那传完之后呢你再重新给当前的这个复值就可以了好这个值呢就是最终的咱们一个排从之后的值啊当然咱们现在啊也可以在这去做一个日志啊做个日志吧log.info然后里边呢咱们就可以说啊url排从结束url是谁呢是一个码号是吧然后是handle type是谁呢好写一个啊
+[08:10] 然后我们也可以去设置这个它到底是不是同步了呢?
+[08:15] 我们也可以设置这个东西好吧第一个呢就是比较简单的叫做request.getURL是吧然后第二个是handleType第三个就是excess是吧OK那这样咱们就算是设置完了当然这里边还有一个东西就是它咱们在这也可以打印句话是吧
+[08:41] 如果说不是正向的话那就是逆向那逆向的话呢咱们可以直接在这去提示就可以了loginfo说啊逆向啊逆向爬取反向吧反向爬取不进行URL的排虫操作排虫这样就可以了好吧行那最终的你就把这个返回来就当前那个excess返回就可以了那这个方法呢
+[09:14] 那这个方法就算是解完了下面还有些方法咱们再去设置一下那这个方法咱们不用管这方法咱们不用管控制就可以了那这个咱们需要去设置一下这个是到哪一步了$NUMER.2是unpoint type然后是.scandle这个是scandle了那这个咱们可以设置个123123因为它大于当前的12就可以好吧那行那这个的话咱们已经设置完了
+[09:42] 当前这个类呢咱们也算是说的完了一会儿呢咱们就来去测试一下看看它能不能走到这好吧
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+在 IntelliJ IDEA 中编写并调试一个名为 DBAndRedisScheduler 的 Java 类，该类继承自 RedisScheduler 并实现 ProcessFlow 接口，用于处理爬虫任务的去重逻辑。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 显示项目结构，选中了 test 目录下的 Maven 配置文件（如 pom.xml），准备进行开发环境的初始化或依赖管理。
+画面 2: 编辑器中显示 DBAndRedisScheduler.java 文件，类定义为 extends RedisScheduler，正在编写构造函数。
+画面 3: 代码中导入了必要的包，包括 CrawlerItem、Request、Task 和 RedisScheduler，并定义了构造函数。
+画面 4: 代码中定义了 isDuplicate 方法，用于判断请求是否重复，并调用父类的 isDuplicate 方法。
+画面 5: 代码中定义了 handle 方法，用于处理流程数据，并定义了 getComponentType 方法。
+画面 6: 代码中定义了私有变量 crawlerHelper，并在构造函数中初始化。
+画面 7: 代码中定义了 isDuplicate 方法，用于判断请求是否重复，并调用 crawlerHelper 的 getHandleType 方法。
+画面 8: 代码中定义了 isDuplicate 方法，判断 handleType 是否为 FORWARD，并调用 super.isDuplicate 方法。
+画面 9: 代码中定义了 isDuplicate 方法，判断 handleType 是否为 FORWARD，并调用 super.isDuplicate 方法。
+画面 10: 代码中定义了 isDuplicate 方法，判断 handleType 是否为 FORWARD，并调用 super.isDuplicate 方法。
+画面 11: 代码中定义了 isDuplicate 方法，判断 handleType 是否为 FORWARD，并调用 crawlerNewsAdditionalService 的 isExistUrl 方法。
+画面 12: 代码中定义了 isDuplicate 方法，判断 handleType 是否为 FORWARD，并调用 crawlerNewsAdditionalService 的 isExistUrl 方法。
+画面 13: 代码中定义了 handle 方法，用于处理流程数据，并定义了 getComponentType 方法。
+画面 14: 代码中定义了 handle 方法，用于处理流程数据，并定义了 getComponentType 方法。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 2:
+```java
+package com.heima.crawler.process.scheduler;
+
+public class DBAndRedisScheduler extends RedisScheduler {
+```
+
+画面 3:
+```java
+import com.heima.model.crawler.entity.CrawlerItem;
+import us.codercraft.weimagic.Request;
+import us.codercraft.weimagic.Task;
+import us.codercraft.weimagic.scheduler.RedisScheduler;
+
+public class DBAndRedisScheduler extends RedisScheduler implements ProcessFlow {
+```
+
+画面 4:
+```java
+public DBAndRedisScheduler(String host) {
+    super(host);
+}
+```
+
+画面 5:
+```java
+@Override
+public boolean isDuplicate(Request request, Task task) {
+    return super.isDuplicate(request, task);
+}
+
+@Override
+public void handle(ProcessFlowData processFlowData) {
+
+}
+
+@Override
+public CrawlerItem.ComponentType getComponentType() {
+    return null;
+}
+```
+
+画面 6:
+```java
+private CrawlerHelper crawlerHelper;
+
+public DBAndRedisScheduler(String host) {
+    super(host);
+}
+```
+
+画面 7:
+```java
+@Override
+public boolean isDuplicate(Request request, Task task) {
+    String handleType = crawlerHelper.getHandleType(request);
+    boolean isExist = false;
+    if (CrawlerItem.HandleType.FORWARD == handleType) {
+        return super.isDuplicate(request, task);
+    }
+    return isExist;
+}
+```
+
+画面 8:
+```java
+@Override
+public boolean isDuplicate(Request request, Task task) {
+    String handleType = crawlerHelper.getHandleType(request);
+    boolean isExist = false;
+    if (CrawlerItem.HandleType.FORWARD == handleType) {
+        return super.isDuplicate(request, task);
+    }
+    return isExist;
+}
+```
+
+画面 9:
+```java
+@Override
+public boolean isDuplicate(Request request, Task task) {
+    String handleType = crawlerHelper.getHandleType(request);
+    boolean isExist = false;
+    if (CrawlerItem.HandleType.FORWARD == handleType) {
+        return super.isDuplicate(request, task);
+    }
+    return isExist;
+}
+```
+
+画面 10:
+```java
+@Override
+public boolean isDuplicate(Request request, Task task) {
+    String handleType = crawlerHelper.getHandleType(request);
+    boolean isExist = false;
+    if (CrawlerItem.HandleType.FORWARD == handleType) {
+        return super.isDuplicate(request, task);
+    }
+    return isExist;
+}
+```
+
+画面 11:
+```java
+@Override
+public boolean isDuplicate(Request request, Task task) {
+    String handleType = crawlerHelper.getHandleType(request);
+    boolean isExist = false;
+    if (CrawlerItem.HandleType.FORWARD == handleType) {
+        return super.isDuplicate(request, task);
+    }
+    return isExist;
+}
+```
+
+画面 12:
+```java
+@Override
+public boolean isDuplicate(Request request, Task task) {
+    String handleType = crawlerHelper.getHandleType(request);
+    boolean isExist = false;
+    if (CrawlerItem.HandleType.FORWARD == handleType) {
+        return super.isDuplicate(request, task);
+    }
+    return isExist;
+}
+```
+
+画面 13:
+```java
+@Override
+public void handle(ProcessFlowData processFlowData) {
+
+}
+
+@Override
+public CrawlerItem.ComponentType getComponentType() {
+    return null;
+}
+
+@Override
+public int getPriority() {
+    return 0;
+}
+```
+
+画面 14:
+```java
+@Override
+public void handle(ProcessFlowData processFlowData) {
+
+}
+
+@Override
+public CrawlerItem.ComponentType getComponentType() {
+    return null;
+}
+
+@Override
+public int getPriority() {
+    return 0;
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+无。
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+无。
+

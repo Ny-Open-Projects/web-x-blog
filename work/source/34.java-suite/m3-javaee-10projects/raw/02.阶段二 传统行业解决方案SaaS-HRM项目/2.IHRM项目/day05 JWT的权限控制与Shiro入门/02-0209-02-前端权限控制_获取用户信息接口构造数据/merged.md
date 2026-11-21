@@ -1,0 +1,286 @@
+# 02-前端权限控制：获取用户信息接口构造数据
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day05 JWT的权限控制与Shiro入门
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day05 JWT的权限控制与Shiro入门\02-前端权限控制：获取用户信息接口构造数据_【海量资源尽在 ubkz.com】.mp4
+- 时长 12分17秒（音频 738s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:02] 好了前端的思路我们都有了之后呢接下来我们就可以围绕到这张图形我们开始去做一些内容的修改首先就是登录那对于登录来说昨天内容已经都写好了那接下来第二个就是根据登录去获取我们的用户信息那昨天我们写这个用户信息这边呢其实还有一点点简单的问题留待我们进行一个改造简单的问题是什么样子是刚才我这边说了一句话就是说我们整个SaaS平台一个
+[00:31] 一个登录的用户呢其实可以大的方向分成这么三类第一个就是SaaS平台管理员好了我们之前也说过还有一个就是我们企业管理员那接着还是才是真正的我们的企业用户那SaaS平台管理员呢他具备叫做所有权限好那接着企业管理员他具备的是企业的所有权限那这边呢还有一个企业用户那企业用户他只具备已经分配
+[01:03] 角色的所有权限所以呢有这么三块那其实我们昨天构造的其实是企业用户向的内容那其实还有比如SaaS平台管理员和企业管理员这边我们还没有做任何的处理所以接下来我们要完成的点就在这儿先把这个基本的内容给它构造出来也就是说我们现在获取用户信息这边根据不同的用户它的一个性质它的一个类别根据它这个去得到或者补全我们这个菜单的按钮
+[01:34] 好了呢在这边呢我们如何去做呢其实很简单我们要做的事情有如下这么几件事首先你当前登录的这个用户他这个用户的类型究竟是什么样的抱歉这个可能我们现在还没有进行处理所以呢我们需要在数据库当中添加一个相关资段去判断一下当前登录的用户他的一个类型OK好了那接下来呢我们就开始着手去处理这一件事情好了在这边
+[02:02] 我们要完成的是我们昨天写好的获取用户信息的这段代码找到我们的user Controller找到里面的profile方法那这个profile方法当中呢我们根据ID根据我们的JWT获取到了用户的这个用户的信息那接着user find by ID
+[02:22] 那user-find-by-id我们构造的是一个用户对象那这个用户对象当中我们在底下需要给他添加一个新的属性比如这个属性呢我们就把它称之为好了level好了一个用户的一个级别那这个用户级别呢比如说呢我可以给他里面判断的是我就写一个死君子头创了那这个死君子头创里面我可以包含比如说susadmin好了这个代表的是sus管理员具备所有权限
+[03:00] 好了那接下来再来一个比如说呢就是CO Admin这个代表的是我们的企业管理员那我需要跟各位简单的说一下这个企业管理员究竟什么时候去分配的那其实企业管理员的分配的是这样的就是我们添加或者创建我们的租户企业添加也就是说呢你不是要添加你不是要申请入住到我们这边去
+[03:27] 入住到我们这边或者租用我们这个系统嘛那这个时候你需要填一个申请那你填申请的时候就会挂载上你这个联系人是谁或者你这个最大的管理人是谁你需要告诉我然后我自动的帮你挂载他的相对最大的这个级别好了那接下来还有一个最简单的那就比他叫做user那user代表的是其实就是我们的普通用户那普通用户我们这个权限的话需要分配角色OK好了那这边呢就比较简单了private死郡类型的我叫做level
+[04:01] OK其实呢我这个level这个字段呢我已经把它准备到我的数据库这边了并且我把数据库的这些相关的人员呢我们已经勾改的好了那这边来看其中SAS的命是我们平台的系统管理员好了还有一个就是企业的管理员user代表的是企业的普通用户好了那这些我们都已经搞定了之后那接下来呢我们就说当用户当我们的前端获取用户资料的时候
+[04:34] 我们就需要对这个方法进行一个简单的改造那在这边呢我已经获取到了用户信息获取用户信息那获取到了用户信息接下来第二件事呢我们需要根据不同的用户级别去获取它的用户权限那好了这边呢我们有这么一个要求就是说呢企业管理员就是我们叫做SaaS平台
+[05:10] 管理员具有员具有所有的权限那好了接着第二个就是企业管理员具有所有的叫做企业权限好了接着第三个第三个就是企业用户只具有当前角色当前角色的权限
+[05:42] 好了那我们就开始去构造当然了我们构造了一个叫做profile result这个profile result里面我们简单再来回顾一下它其实就是根据当前用户拿到角色根据角色拿到权限这个其实是我们的第三种方案没错吧所以我们先把前两种方案给它补充完成出来好了也就是SaaS平台它具有所有的权限那SaaS平台用户我们需要进行区分好在这边呢进行一个简单的判断user.getLevel
+[06:11] 如果user.getlevel它呢和我们这边呢叫做susadmin.ecos如果他们是比对的一模一样的好了那接下来else if这if去哪了啊那接下来就是seawordminseawordmin.ecos好了我们这边user.getlevel好了那接下来elseok好了那这个呢就是我们的第二个
+[06:56] 好了这个就是我们的第一个好了这个就是我们的第三个我们现在已经完成了第三个方法的一个构建档了我把这个代码呢简单的做一个修改Ctrl C拿过来Ctrl V好了这边呢开始出示值等于那OK那这个我们应该怎么去做呢其实也不难也比较简单那其实就是查询呗那针对这种查询呢这个时候我们可以借助我们叫做
+[07:31] 权限Service所以autovill进来private permission servicepermission Service好了permissionservice那针对这个permission Service呢我们之前呢写过一个方法它里面接收一个map的一个集合难道map集合它就会针对不同的情况开始进行查询了我们可以一起来看一下点叫做find all
+[07:56] 那翻到的时候呢其中接收一个map它里面开始判断如果PID不传就没有PID如果这个invisible不传就没有如果这边你传的gap如果不传是不是也没有所以对于我们这个要求来说就比较简单了SAL平台它查询所有所以我直接传过一个mapmap什么值都没有是不是就可以好了这是第一个那第二个如果当前的这个用户是一个企业管理员
+[08:23] 那企业管理员我们这个invisible是不是给他传递我们之前说过的0跟1是不是传递一个1只查询当前企业可见的内容是不是也可以啊OK好了那这些我们都说过了之后那剩下的内容就比较简单了比较简单了好在这边呢我构造一个map集合出来map等于new一个hcmap好了那接下来抱歉这个代码写到中间才对好了那这边呢我们就可以
+[08:56] Promission Service打点叫做Find All把Map传递下去得到一个我们的List集合List当然了这个List集合是Promission好那接下来呢同样的底下这段代码拿过来好了当然了我这个代码写的不太简洁啊我可以把这个代码的顺序做一个简单的修改写的相对来说简洁一些如果user.ecos就是写的稍微简洁一点这个代码写起来太不太友好了
+[09:31] 判断一个顺序else那在else里面呢构造map集合好了接着拿到这么一个列表好了接着呢里面开始进行判断ifsusmint.eco那这个时候list就等于好了这个也不需要了我们只需要判co的min如果co的min等于的话那我这边map集合就等于map.put放一值
+[10:06] 我们叫做invisible我们一起来看一下这个单词哦invisible方言值呢把它设置为1好了那接下来剩下的事情我就可以借助我们Service进行查询好了Service进行查询构造例子集合哎这样写就看起来好多了就看起来好多了OK那接下来呢我们查询出了例子集合
+[10:34] 也有user数据我们是不是同样也有构造这个profile result呀那构造profile result我这回习惯其实还是以构造方法的形式来做所以我这边呢再去写一个构造方法好了再去写一个构造方法那这个构造方法呢我现在传递的就只有两个参数一个是user好了一个是我们的listpermission list集合permission好了listok好了那这个我们开始就把它快速的构造出来这都是一样
+[11:07] 获取那接下来这边就可以去循环我们的粒子集合当了你循环粒子集合的时候也需要把这三个set拿过来因为里面包含了按钮的信息全线点的信息API的信息等等有很多所以呢把这些都拿过来都拿过来拿过来之后我们开始进行构造那我们开始进行构造那么构造的点呢其实比较简单跟底下这个一样啊
+[11:39] Ctrl C只不过少了角色内层我们直接查全线就可以了OK那全部都构造好了放到Map集合当中好了那这样一来我这边在获取用户信息的时候就更加简洁了Result等于New一个ProfileResult那我们里面传递这回两个参数的第一个是User好了第二例子集合
+[12:10] 好了那这样一来呢就已经构造好了result并且呢把我们这个数据也给它返回出来了OK
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+实现基于 Shiro 的用户权限控制，通过修改 UserController 中的 profile 方法，根据用户角色（saasAdmin、coAdmin、企业用户）动态返回不同的权限信息。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1: 展示课程目录结构，当前章节为“1.2 服务端代码实现”，内容是修改 FrameController 的 profile 方法以添加权限信息。
+画面 2: 在 IntelliJ IDEA 中打开 UserController.java，展示 profile 方法的初始代码，包括获取 Authorization 头、解析 JWT、根据用户 ID 查询用户信息。
+画面 3: 代码编辑器中，对 profile 方法进行修改，添加了根据用户级别判断权限的逻辑。
+画面 4: 在代码中添加了对用户级别（saasAdmin、coAdmin、企业用户）的判断逻辑，使用 if-else 结构。
+画面 5: 展示了代码中对用户级别判断的完整逻辑，包括对不同角色返回不同权限的处理。
+画面 6: 切换到 PermissionController.java，展示 assignRoles 方法，用于分配角色。
+画面 7: 在 UserController.java 中，对 profile 方法的权限判断逻辑进行修改，使用 permissionService.find 方法。
+画面 8: 展示了 PermissionService 类的代码，包含 find 方法的实现。
+画面 9: 在 UserController.java 中，对 profile 方法的权限判断逻辑进行修改，使用 permissionService.find 方法。
+画面 10: 在 UserController.java 中，对 profile 方法的权限判断逻辑进行修改，使用 permissionService.find 方法。
+画面 11: 切换到 ProfileResult.java，展示 ProfileResult 类的构造方法，用于封装用户权限信息。
+画面 12: 展示 ProfileResult 类的构造方法，用于封装用户权限信息。
+画面 13: 在 UserController.java 中，对 profile 方法的权限判断逻辑进行修改，使用 permissionService.find 方法。
+画面 14: 在 UserController.java 中，对 profile 方法的权限判断逻辑进行修改，使用 permissionService.find 方法。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面 1:
+```
+1.2 服务端代码实现
+对系统微服务的FrameController的profile方法（获取用户信息接口）进行修改，添加权限信息
+```
+
+画面 2:
+```java
+@RequestMapping(value = "/profile", method = RequestMethod.POST)
+public Result profile(HttpServletRequest request) throws Exception {
+    //获取个人信息
+    String authorization = request.getHeader("Authorization");
+    if(StringUtils.isEmpty(authorization)) {
+        throw new CommonException(ResultCode.UNAUTHENTICATED);
+    }
+    //2.当携带Bearer令牌
+    String token = authorization.replace("Bearer ", "");
+    //3.解析token
+    Claims claims = jwtUtils.parseJwt(token);
+    String userid = claims.getId();
+    User user = userService.findById(userid);
+    ProfileResult result = new ProfileResult(user);
+    return new Result(ResultCode.SUCCESS,result);
+}
+```
+
+画面 3:
+```java
+//从请求头中获取token数据
+// 1.获取请求头信息，名称-Authorization
+// 2.携带Bearer令牌
+// 3.解析token
+// 4.获取claims
+String authorization = request.getHeader("Authorization");
+if(StringUtils.isEmpty(authorization)) {
+    throw new CommonException(ResultCode.UNAUTHENTICATED);
+}
+//2.当携带Bearer令牌
+String token = authorization.replace("Bearer ", "");
+//3.解析token
+Claims claims = jwtUtils.parseJwt(token);
+String userid = claims.getId();
+User user = userService.findById(userid);
+ProfileResult result = new ProfileResult(user);
+return new Result(ResultCode.SUCCESS,result);
+```
+
+画面 4:
+```java
+if("saasAdmin".equals(user.getLevel())) {
+    //1.saas平台管理员具有所有权限
+} else if("coAdmin".equals(user.getLevel())) {
+    //2.企业管理员具有所有企业权限
+} else {
+    //3.企业用户具有当前角色的权限
+}
+```
+
+画面 5:
+```java
+if("saasAdmin".equals(user.getLevel())) {
+    //1.saas平台管理员具有所有权限
+} else if("coAdmin".equals(user.getLevel())) {
+    //2.企业管理员具有所有企业权限
+} else {
+    //3.企业用户具有当前角色的权限
+}
+```
+
+画面 6:
+```java
+package com.ihrm.system.Controller;
+
+import com.ihrm.common.constant.PermissionConstants;
+import com.ihrm.common.domain.Permission;
+import com.ihrm.system.dao.PermissionDao;
+import com.ihrm.system.Service.PermissionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * 权限控制器
+ */
+@RestController
+@RequestMapping("/permission")
+public class PermissionController {
+
+    @Autowired
+    private JwtUtils jwtUtils;
+
+    @RequestMapping(value = "/user/assignRoles", method = RequestMethod.PUT)
+    public Result assignRoles(@RequestBody Map<String, Object> map) {
+        String userId = (String) map.get("id");
+        //获取角色的id列表
+        List<String> roleIds = (List<String>) map.get("roleIds");
+        //根据用户id和角色id，更新用户角色
+        permissionService.assignRoles(userId, roleIds);
+        return new Result(ResultCode.SUCCESS);
+    }
+}
+```
+
+画面 7:
+```java
+if("saasAdmin".equals(user.getLevel())) {
+    //1.saas平台管理员具有所有权限
+} else if("coAdmin".equals(user.getLevel())) {
+    //2.企业管理员具有所有企业权限
+} else {
+    //3.企业用户具有当前角色的权限
+}
+```
+
+画面 8:
+```java
+//1.获取用户信息
+String userid = claims.getId();
+User user = userService.findById(userid);
+ProfileResult result = null;
+if("saasAdmin".equals(user.getLevel())) {
+    //1.saas平台管理员具有所有权限
+    Map map = new HashMap();
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+} else if("coAdmin".equals(user.getLevel())) {
+    //2.企业管理员具有所有企业权限
+    Map map = new HashMap();
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+} else {
+    //3.企业用户具有当前角色的权限
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+}
+return new Result(ResultCode.SUCCESS,result);
+```
+
+画面 9:
+```java
+String userid = claims.getId();
+User user = userService.findById(userid);
+ProfileResult result = null;
+if("saasAdmin".equals(user.getLevel())) {
+    //1.saas平台管理员具有所有权限
+    Map map = new HashMap();
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+} else if("coAdmin".equals(user.getLevel())) {
+    //2.企业管理员具有所有企业权限
+    Map map = new HashMap();
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+} else {
+    //3.企业用户具有当前角色的权限
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+}
+return new Result(ResultCode.SUCCESS,result);
+```
+
+画面 10:
+```java
+String userid = claims.getId();
+User user = userService.findById(userid);
+ProfileResult result = null;
+if("saasAdmin".equals(user.getLevel())) {
+    //1.saas平台管理员具有所有权限
+    Map map = new HashMap();
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+} else if("coAdmin".equals(user.getLevel())) {
+    //2.企业管理员具有所有企业权限
+    Map map = new HashMap();
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+} else {
+    //3.企业用户具有当前角色的权限
+    List<Permission> list = permissionService.findAll(map);
+    result = new ProfileResult(user, list);
+}
+return new Result(ResultCode.SUCCESS,result);
+```
+
+画面 11:
+```java
+import xxx
+
+@Getter
+@Setter
+public class ProfileResult {
+    private String mobile;
+    private String username;
+    private String company;
+    private Map<String,Object> roles = new HashMap<>();
+    //封装用户
+    public ProfileResult(User user) {
+        this.mobile = user.getMobile();
+        this.username = user.getUsername();
+        this.company = user.getCompany();
+        Set<String> menus = new HashSet<>();
+        Set<String> points = new HashSet<>();
+        Set<String> spis = new HashSet<>();
+        for (Role role : roles) {
+            Set<Permission> perms = role.getPermissions();
+            for (Permission perm : perms) {
+                //封装权限信息
+                menus.add(perm.getMenu());
+                points.add(perm.getPoint());
+                spis.add(perm.getSpis());
+            }
+        }
+    }
+}
+```
+
+画面 12:
+```java
+public ProfileResult(User user, List<Permission> list) {
+    this.mobile = user.getMobile();
+    this.username = user.getUsername();
+    this.company = user.getCompany();
+    Set<String> menus = new HashSet<>();
+    Set<String> points = new HashSet<>();
+    Set<String> spis = new HashSet<>();
+    for (Permission permission : list) {
+        menus.add(permission.get
+

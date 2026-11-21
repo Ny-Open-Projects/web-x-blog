@@ -1,0 +1,212 @@
+# day08-12-交易中心保存标的-业务层2
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：03_万信金融-发标/3-7 交易中心保存标的信息
+- 源文件：10.阶段十 万信金融项目\03_万信金融-发标\3-7 交易中心保存标的信息\day08-12-交易中心保存标的-业务层2_【海量资源尽在 666java.com】.mp4
+- 时长 14分51秒（音频 891s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好咱们刚才做了一个准备工作对吧就是怎么着啊对就是在交易中心啊通过分印代理去远程访问谁啊用户中心目的是为了获取当前登录用户的一些信息因为这些信息在一会儿保存标底的时候要使用啊所以这是一个准备工作我们做啊做完之后呢咱接下来就要回到这个地方对回到要仓啊我们要重写这个方法来实现
+[00:30] 保存标题信息的这个功能那咱就先把刚才那个代理先注进来呗反正一会就要用对吧他叫看CMAPIR进去吧先注意一下出现之后呢咱上来就先导到当前动用户呗那就调用他的方法叫get convert什么consumer
+[00:59] 大家注意了这个方案一定要用它是不是就发起远程请求到什么地方到用户中心那边我们就得到当前登录用户那他返回来应该是一个大家看是rest response里边有个范型consumer DTO是吧让我们接收一下rest i rest response里边有个范型consumer DTO对我们接收一下那么这个对象里边存的就有什么
+[01:37] 对当前的登用户至于如何从里边取数据呢有比较简单一会用到的时候再说这是这块那接下来咱们说了咱是不是要保存这个什么呀对保存标底信息那咋保存呢那最终其实就是走一下思路方法对不对但是呢我们在保存的时候我们要注意注意一个问题就是刚才大家看到了其实这个实体类里边那个属性多吗这边属性是不是非常非常多对不对
+[02:06] 那我们目前这个DTO里边啊DTO对象里边他都有几个属性有值呢是不是我们既然做保存我们基本上每个属性是不是都得给值对不对那我们现在看看project DTO里边他都有哪个属性有值怎么看呢我们看我看讲义啊看哪个地方看一开始讲发标的时候大家看这个界面这是不是就是前端这个借款人发标的时候填的那个申请信息对不对你看这里边就需要设置几个值啊
+[02:36] 一个是借款金啊你借多少钱吧一个是你借多少时间啊一个是你的借款什么样用途几个值啊三个值就三个值那也就是说前端传过来的数据我们最终是封装到DTO对象里边而这个DTO里边只有几个属性用途啊对最多三个属性用途就刚才你看到三个但是我们刚才也看了这个呃他里边的属性多吗非常非常多那我们现在要保存的话那里边好多属性的值都还没有
+[03:04] 所以我们现在要做的事情就是先给他里边的属性该给值的都要干什么呀给一下值给完值之后我们再说去保存它那我们接下来就要看一下这个DTO对象里边都有哪些属性的值需要给那就比较多了啊逐渐不用管吧那你看接下来这俩一个是发标人的ID一个是什么呀用户编码这俩信息你得给吧我得知道是谁发的标吗是不是这两个信息从哪去这两个信息其实就是从这里边去当前动用户里边去
+[03:34] 所以我们接下来要接着往这个dt对象里边还是要接着给属性复制点set我们刚才叫consumer id是吧这个id其实就是从这里边取的怎么取rest response有个get什么get谁get result不就是那个结果就是当前登录用户然后我们再get谁get id是不是这就是当前登录用户的id
+[04:06] 然后还有那个什么user numberproject detail.set什么对useruser number这也是从这里边取的get result.get什么user number对这就是从当前登录用户里边取的一些数据那还没完呢这里边咱再看看还有什么project number标题的名字描述类型对吧
+[04:33] 还有各种利率对还款方式状态时间等等等等非常非常多啊这里边呢呃有些设置都非常简单我就不再挨个给大家敲了我们节省点时间咱找一找讲义里边的这个代码你看刚才我是不是把这些都已经代码敲过了对吧接下来就是生成标的的一个什么呀bm 标的的什么呀状态等等的我们把这些呢都沾过来咱一起看一下
+[05:09] 还有就是这个标的的可用状态还是那个什么同步未同步是不是包括下面这一堆包括这个创建时间缓缓方式标的类型等等等等咱们站过来之后呢一起看一下格式上稍微整理一下咱一起看一下这块代码都设置了哪些属性的值首先这设置了一个标的的一个什么样编码project number这个你可以去表里面看看project number就这个
+[05:48] 那这个值呢是怎么生成的还是用咱以前的这个专门生成这个编码的一个工具类叫code number youtube不知道你有没有印象啊咱前面应该是在注册登录的时候啊应该是用过这个东西这里边代码你可以点进去看一下啊这个get number它就是用来生成这个什么呀生成那个钱坠的啊它都有一个钱坠研究uid呢不重复然后生成什么样的钱坠呢这里边需要用到一个专门生成钱坠的一个类你看这
+[06:18] 叫code prefix code这里边咱点进去看一下这应该是一个枚举类对不对你看咱前面应该是用过这个嘛Udenumber那个用过这个钱的现在应用的是这个啊标底号的钱我这是这样的然后标底的状态啊标底的状态的话咱这边设计了几个状态咱看一看啊这个状态呢咱点进去你就知道什么目击中你还有什么呀以满标还要缓缓中以结标对吧流标等等等等
+[06:48] 大概什么意思呢就是我们新发的标它的默认状态就是目击中目击中就是等着别人给你投钱了借给你钱了这叫目击中已满标就是这个比如你借了五万块钱已经借够数五万已经这个已经被投资人投满了对不对就是满标还款中呢就是已经这个交易已经达成了你钱也拿到手了你后边就该干什么还款截标回头再说吧咱现在还不设计的那咱目前用的就是这个什么呀
+[07:16] 对collect就是募集入啊然后还有一个标底的可能状态这还是那个同步未同步的啊我们这默认还是什么呀未同步那将来审核通过之后我们还要改这个状态改成一同步吗标底的创业时间就当前时间不再说还款方式啊还款方式这呢也好几种我们看一下还款方式有什么先期后边等了本息等了本金这个大家要是贷款或者你买过房子贷款的话这些东西大家都应该清楚我们这就先随便给一个吧等了本息
+[07:48] 先给一个因为将来计算利息的时候可能会涉及到这些东西还有一个标的类型咱这就是写死了就是什么咱这是新标对不对你有新标新发布的一个标至于他有没有别的类型回头用到时候再说这是你看咱一下子又补充了什么一堆属性的值是不是接下来是不是就可以进行save了接下来大家说能不能进行save加你还不能进行save为什么你看你调一下save方案你看看
+[08:18] 你看四个方法要的是什么类型的数据project是不是跟那个表对应的实体类对吧而咱手头上这是什么类型的project DTO那怎么办这个大家应该想到咱以前碰到这种情况我们需要把DTO是不是转换成这个普通的实体类这个代码咱以前写过我就不再写了在这我们一般都是单独抽一个方法来做这个事这个代码有印象吗这不是传进来这个DTO对象吗进来之后我们单独拧一个project
+[08:52] 代码有印象吧就是把DTO对象里边所有属性值复制给谁project然后把它返回这不就转化完了吗所以我们这需要做这么一个转换然后才能进行保存那就是直接调用对吧convertto projectDTOto entity然后把谁projectDTO给它扔进来然后我们就得到了一个什么对象对project对象那咱接下来就p1
+[09:21] 声明一个呗是不是这个project对象呢我们就拿手拿拿手之后我们进来是不是就可以进行保存了可以我们接下来就可以进行保存了save你看是不是要了project对象了那我这就把它扔进来就OK这其实就可以保存但是呢这个保存是能保存但是呢其实project的这个实体在里边还有一些属性值我们还没给还有这边反正
+[09:52] 这个属性就是有点多你看这些咱刚才是都给过了还有什么标的的名字我记得还没给内没有给还有什么标的的名字描述给了没有描述是不是也没给特别是下面这些东西都没给这个利率因为你发表的时候涉及到利率你给的利率平台的佣金对吧等等这些应该都还没给值那为啥不给值因为这些值我们准备给它配置到Apollo上
+[10:22] 我想要配到Apollo上的因为这些利率啊利率他有可能会经常会变包括平台的佣金啊利差这些信息他经常会变他比如这段时间搞活动对吧我这个平台收取的佣金可能就会低一些甚至为零我不收佣金为了刺激大家都来我这个平台上进行交易嘛对不对那大家有可能的话有的时候我不搞活动哎这个值就可能会发生变化所以说呢
+[10:48] 基于这点考虑呢我们这里边有些这个属性的值啊我们准备是要把它配置到什么呀对Apollo上然后呢我们再从Apollo上把值给取出来然后呢再存到这个什么地方对再存到这个对象里面然后最终就可以进行什么呀对最终就可以进行save那都有哪些值我们需要配到Apollo上呢这呢我提前给大家准备了一个东西大家看一个文本文件需要配的东西直接就在这里边放着
+[11:19] 就这块东西都是啥我接下来要给大家解释一下这块你要注意听啊因为这涉及到金融对吧上面或者跟硕学有关的一些东西你得注意听呃第一个这个配置项叫最小投资金额这个比较简单就是你比如说别人借五万块钱哎你是投资人你要投钱投这个标那最少你一次得投一百块钱吧对不对你说我一次借给他一一块钱就是这这有点太说不过去人家不差那一块钱是不是
+[11:49] 我们规定一下最少你得投100块钱然后呢年化利率借款人的年化利率这个呢大家应该都知道吧就是你借钱的时候一定要要付利息吧不付利息人家投资人挣啥钱啊是不是说这是那个利息然后接下来有两个佣金这两个佣金大家注意佣金是谁收的钱呢是平台P2P平台收的钱有的呃学员会问你P2P平台还会收钱吗那你想P2P平台他不收钱他靠啥来活啊是不是
+[12:21] P2P平台我给你提供信息了嘛对不对我给你提供这个项目了嘛我这个P2P平台我这个公司养了这么多人呢我们怎么活呀对吧我们从哪挣钱他挣的就是这个什么用金他可以问借款人要用金也可以问投资人要用金其实说白了就是付费当然呢他可以根据这个业务发展的情况他可以免用金也可以这个降低用金这个反正这个值是可以变但是呢的确存在这个用金
+[12:49] 这个流标时间咱暂时还设计不到你先不用管啊不用管那就这块配置我们需要给他放到什么呀对Apollo上那咱接下来就打开Apollo吧咱们就要把这些配置给他加上去咱说应该配到交易中心吧是不是这也只是我们将来在其他地方也会用到我们就配到application这个名称空间里边文本嗯然后咱们就control c
+[13:27] 咱就粘到这个最下边了啊上到这儿这些注释咱就不要了啊我们点击提交然后还要点击什么呀对发布点击发布啊这个配置就上到阿卜罗上了好大家看目前我们这个代码写到什么程度了啊就是说我们嗯先是通过这个非信代理啊得到了当前登录用户的信息啊主要是要他的id和这个什么用户编号然后分别都存到这个dto对象里边
+[14:18] 然后呢我们又往DTO对象里边存了什么呀对这个标底的编码呀标底的状态呀可用状态呀创建的时间还款方式标的类型等等等等然后我们把该给的值都给过之后呢我们又把DTO对象转成了谁呀project对象但是接下来我们发现project的里边还有一些属性的值需要复制是不是有些值呢我们刚才是不是配到阿卜罗上那么咱一会儿一会儿就要从阿卜罗上取这些值然后接着给这个对象
+[14:47] 的属性干什么复制
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲如何在交易中心服务中通过 Feign 调用消费者服务，实现借款项目创建功能，并涉及数据库分库分表配置。
+
+2) 按时间顺序列出每张画面的要点：
+画面1：在交易中心服务中创建 Feign 远程调用消费者服务的接口定义。
+画面2：在 Service 包中新建 ProjectServiceImpl 类实现 createProject 方法，调用 ConsumerApiAgent。
+画面3：展示 P2P 平台借款项目申请页面，用于演示业务场景。
+画面4：在 ProjectServiceImpl 中调用 consumerApiAgent.getCurrConsumer() 获取借款人信息。
+画面5：展示 ProjectDTO 类定义，包含借款人标识、项目编号、名称、描述等字段。
+画面6：展示 ProjectDTO 类中 status、isAssignment、requestNo、remainingAmount、risk 等字段定义。
+画面7：展示项目管理后台的多个窗口，包括数据库、代码编辑器和文件资源管理器。
+画面8：展示 ProjectCode.java 中定义的项目状态常量，包括 COLLECTING、FULLY、REPAYING、FINISH。
+画面9：展示 TransactionController 中的 @Api 注解和 createProject 方法，用于调用 ProjectService。
+画面10：展示 Project 实体类，包含 ID、consumerId、userNo 等字段。
+画面11：展示 Project 实体类中 annualRate、borrowerAnnualRate、commissionAnnualRate、repaymentWay 等字段。
+画面12：展示 Apollo 配置中心的空白页面。
+画面13：展示 Apollo 配置中心 application 的 properties 配置，包含数据库连接、分库分表策略等。
+画面14：在 ProjectServiceImpl 中设置项目状态、创建时间、还款方式等属性，并调用 save 方法保存。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面1：
+```java
+@ApiOperation("获取登录用户信息")
+@GetMapping("/i/currConsumer")
+public RestResponse<ConsumerDTO> getCurrConsumer() {
+    ConsumerDTO consumerDTO = consumerService
+            .getMobileSecurityUtil().getMobile();
+    return RestResponse.success(consumerDTO);
+}
+```
+```java
+// C服务代理
+@FeignClient(value = "consumer-Service")
+public interface ConsumerApiAgent {
+    @GetMapping("/i/currConsumer")
+    public RestResponse<ConsumerDTO> getCurrConsumer();
+}
+```
+
+画面2：
+```java
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+@Service
+public class ProjectServiceImpl extends ServiceImpl<ProjectMapper, Project> implements ProjectService {
+    @Autowired
+    private ConsumerApiAgent consumerApiAgent;
+    @Override
+    public ProjectDTO createProject(ProjectDTO project) {
+        RestResponse<ConsumerDTO> consumerResponse = consumerApiAgent.getCurrConsumer();
+        // ...
+    }
+}
+```
+
+画面4：
+```java
+RestResponse<ConsumerDTO> consumerResponse = consumerApiAgent.getCurrConsumer();
+projectDTO.setConsumerId(consumerResponse.getData().getConsumerId());
+projectDTO.setUserName(consumerResponse.getData().getUserName());
+projectDTO.setMobile(consumerResponse.getData().getMobile());
+projectDTO.setProjectNo(projectNo);
+projectDTO.setName(name);
+projectDTO.setDesc(desc);
+```
+
+画面5：
+```java
+private String projectNo;
+private String name;
+private String desc;
+```
+
+画面6：
+```java
+private Integer status;
+private Integer isAssignment;
+private String requestNo;
+private BigDecimal remainingAmount;
+private String risk = "B";
+```
+
+画面8：
+```java
+COLLECTING("募集期"),
+FULLY("已满标"),
+REPAYING("还款中"),
+FINISH("已结标");
+```
+
+画面9：
+```java
+@Api(value = "交易中心服务", tags = "transaction")
+@RestController
+@RequestMapping("/transaction")
+public class TransactionController {
+    @Autowired
+    private ProjectService projectService;
+    @PostMapping("/createProject")
+    public RestResponse<ProjectDTO> createProject(@RequestBody ProjectDTO projectDTO) {
+        return projectService.createProject(projectDTO);
+    }
+}
+```
+
+画面10：
+```java
+@TableId("ID")
+private Long id;
+@TableField("CONSUMER_ID")
+private Long consumerId;
+@TableField("USER_NO")
+private String userNo;
+```
+
+画面11：
+```java
+@TableField("ANNUAL_RATE")
+private BigDecimal annualRate;
+@TableField("BORROWER_ANNUAL_RATE")
+private BigDecimal borrowerAnnualRate;
+@TableField("COMMISSION_ANNUAL_RATE")
+private BigDecimal commissionAnnualRate;
+@TableField("REPAYMENT_WAY")
+private String repaymentWay;
+```
+
+画面13：
+```properties
+spring.shardingsphere.datasource.names=ds0,ds1
+spring.shardingsphere.datasource.ds0.jdbc-url=jdbc:mysql://localhost:3306/p2p_transaction?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&maxAllowedPacket=100M
+spring.shardingsphere.datasource.ds0.username=root
+spring.shardingsphere.datasource.ds0.password=123
+spring.shardingsphere.datasource.ds1.jdbc-url=jdbc:mysql://localhost:3306/p2p_transaction?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&maxAllowedPacket=100M
+spring.shardingsphere.datasource.ds1.username=root
+spring.shardingsphere.datasource.ds1.password=123
+spring.shardingsphere.sharding.tables.project.actual-data-nodes=ds$->{0..1}.project_$->{0..1}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID % 2}
+spring.shardingsphere.sharding.tables.tender.actual-data-nodes=ds$->{0..1}.tender_$->{0..1}
+spring.shardingsphere.sharding.tables.tender.table-strategy.inline.algorithm-expression=tender_$->{ID % 2}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID % 2}
+spring.shardingsphere.sharding.tables.tender.table-strategy.inline.algorithm-expression=tender_$->{ID % 2}
+spring.shardingsphere.sharding.tables.project.actual-data-nodes=ds$->{0..1}.project_$->{0..1}
+spring.shardingsphere.sharding.tables.tender.actual-data-nodes=ds$->{0..1}.tender_$->{0..1}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID % 2}
+spring.shardingsphere.sharding.tables.tender.table-strategy.inline.algorithm-expression=tender_$->{ID % 2}
+spring.shardingsphere.sharding.tables.project.actual-data-nodes=ds$->{0..1}.project_$->{0..1}
+spring.shardingsphere.sharding.tables.tender.actual-data-nodes=ds$->{0..1}.tender_$->{0..1}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID % 2}
+spring.shardingsphere.sharding.tables.tender.table-strategy.inline.algorithm-expression=tender_$->{ID % 2}
+spring.shardingsphere.sharding.tables.project.actual-data-nodes=ds$->{0..1}.project_$->{0..1}
+spring.shardingsphere.sharding.tables.tender.actual-data-nodes=ds$->{0..1}.tender_$->{0..1}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID % 2}
+spring.shardingsphere.sharding.tables.tender.table-strategy.inline.algorithm-expression=tender_$->{ID % 2}
+spring.shardingsphere.sharding.tables.project.actual-data-nodes=ds$->{0..1}.project_$->{0..1}
+spring.shardingsphere.sharding.tables.tender.actual-data-nodes=ds$->{0..1}.tender_$->{0..1}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID % 2}
+spring.shardingsphere.sharding.tables.tender.table-strategy.inline.algorithm-expression=tender_$->{ID % 2}
+spring.shardingsphere.sharding.tables.project.actual-data-nodes=ds$->{0..1}.project_$->{0..1}
+spring.shardingsphere.sharding.tables.tender.actual-data-nodes=ds$->{0..1}.tender_$->{0..1}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID % 2}
+spring.shardingsphere.sharding.tables.tender.table-strategy.inline.algorithm-expression=tender_$->{ID % 2}
+spring.shardingsphere.sharding.tables.project.actual-data-nodes=ds$->{0..1}.project_$->{0..1}
+spring.shardingsphere.sharding.tables.tender.actual-data-nodes=ds$->{0..1}.tender_$->{0..1}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID % 2}
+spring.shardingsphere.sharding.tables.tender.table-strategy.inline.algorithm-expression=tender_$->{ID % 2}
+spring.shardingsphere.sharding.tables.project.actual-data-nodes=ds$->{0..1}.project_$->{0..1}
+spring.shardingsphere.sharding.tables.tender.actual-data-nodes=ds$->{0..1}.tender_$->{0..1}
+spring.shardingsphere.sharding.tables.project.table-strategy.inline.algorithm-expression=project_$->{ID %
+

@@ -1,0 +1,176 @@
+# 11-代码生成器的实现：核心处理类Generator的实现-中
+
+- 阶段：02.阶段二 传统行业解决方案SaaS-HRM项目
+- 章节：2.IHRM项目/day13-代码生成器实现
+- 源文件：02.阶段二 传统行业解决方案SaaS-HRM项目\2.IHRM项目\day13-代码生成器实现\11-代码生成器的实现：核心处理类Generator的实现-中_【海量资源尽在 ubkz.com】.mp4
+- 时长 7分38秒（音频 458s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:03] 我们已经把文件路径的以及要输出的文件的名称全部给它都替换好了接下来我们关注的就是模板的处理模板处理首先要把模板给它读取出来读取模板很简单通过conf一个对象conf一个打点叫做getTablet里面传递的是不是某一个模板它的名称没错吧这个名称一定要注意用的是相对路径
+[00:32] 那相对路径是不是就相对于我们传递的E冒号模板的路径那是不是就是这边这一大串啊没错吧所以对于我们而言得到的是timelit fail主要目的就是要得到相对路径好了这边get timelit把这个timelit fail name传递起来OK那好了模板已经有了之后那这边呢其实可以做一个字符集的一个处理timelit打点叫做set
+[01:02] output encoding utf-8其实这边是指定生成文件的文件的我们的字符级编码OK那好了这一步咱们也已经搞定了接下来的事情呢就比较简单了咱们要去创建文件那创建文件的时候首先outfill path指的是文件它的一个位置
+[01:33] 和他的文件的名称所以我们这边创建文件也比较简单可以通过fillutil注意这个fillutil是我们直接写好的就是make第二好了make第二就是说呢我接着要去创建一个文件了那这个文件要创建到什么地方outpass这个是我们生成文件的路径那你这个文件名叫什么outfillpass能记住吧好了当然了这个outfillpass呢写的
+[02:07] 太爆听了就out of field name吧就你这个文件的叫什么名称OK那这样一来能够得到咱们创建好的这么一个文件当然这个make dir里面的代码呢也不难也不难就是根据两个路径去创建一个文件判断一下它是否存在如果不存在则创建这个代码呢比较简单OK那好了文件呢已经创建好了那接下来呢我们就开始关注的是模板处理的这么一个方法
+[02:38] 那模板处理那我们如何去做其实这一步呢咱们之前都写过也比较简单只不过呢这一回我不是用的是把它输入到控制台上了我真正的要搞一个文件输出那文件输出是不是拗一个FuelWriter那接着你自己的一个文件在哪是不是给它传递过来即可所以在我们这边进行模板生成的时候我首先搞一个FuelWriter比如说呢就叫做FW
+[03:09] 等于new一个fill writer那new fill writernew fill writer的时候可以借助可以借助它的构造方法把我们这个文件拿过来那fill writer我已经准备好了那当前文件当中什么内容都没有什么内容因为它只是创建了一个空的文件那要把所有的数据写入到这个文件当中如何去写是不是可以借助time liter它的方法打点parses
+[03:40] 那接着把我们的数据模型传递过来接着把我们的FillWriter传递过来那这样一来它会把数据模型里面的数据替换到模板当中并且以流的形式输入到FillWriter也就是我们这个Fill1文件当中并且给我创建出来好了那这些我们都创造好了之后我们可以FW打点Close千万别忘了进行关闭
+[04:07] OK那这样一来我这个方法其实也已经全部都写好了那这个方法都写好了之后呢我们可以做一个简单的测试看一下这个方法究竟是不是存在问题好了你有一个genarator有一个genarator里面需要传递两个参数第一个模板的路径第二个是我们要输出代码的路径那比如说呢我就把它放到13资源这个测试当中
+[04:40] 上面是我们的模板路径好了这个就是我们生成代码的路径我主要是为了测试一下刚才我们写的这个类有没有问题模板路径里面比如说我可以给它来一个小的文件比如说就把它放到就把它放到PUGO这个保险好了里面我可以给它随便写一个我们的模板当然这个模板你叫什么以什么为后缀结尾都没问题比如说我就叫它user
+[05:18] 点Java当然了我这边不涉及到太多的模板制作的过程好了在user.java里面我只去写一句话user nameOK那这样一来我们的模板路径已经告诉他了就在这Ctrl C拷过来StreamTemplatePath等于OK再来一个StreamAlt pass等于好了这个Alt pass也就是我们生成文件的路径我就到这Ctrl C拿过来
+[06:00] OK那这样一来核心类有了借助它的方法打点Scan and Generator是我们的这个方法Scan and Generator扫描路径下的所有当然了你扫描的过程当中是不是应该把你自己定义的一些数据modelData model数据模型给我传递过来所以这边我需要构造一个数据模型DL等于New一个HashiMap为了做一个测试看一下效果
+[06:32] 那我们这回数据模型里面是不是只需要给它构造出一个user name咱们来看一下效果就可以了打点put所以这边传递一个user name比如说就叫张三了OK把data model传递过来那好了我们接下来执行一下这个问方法看一下是否会在生成代码路径这边把我们的代码给我生成出来走好了这边已经执行了回过头来各位来看目录有user java没问题
+[07:06] 那接着关注一下里面张三是不是把值也给我填充过来了所以在这边我们已经完成了可以根据某一个文件可以根据某一个模板路径下的所有模板以及数据模型生成我们相应的文件OK那这个我们写好了之后我们接下来要做的事情是不是把入口和这个类给它结合到一起完成整个代码生成器的一个制作是不是就可以了OK
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何使用 FreeMarker 模板引擎在 Java 中动态生成文件，包括配置模板路径、数据模型、输出路径、设置字符编码、创建输出目录、写入文件并关闭流等步骤。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面 1：
+- 在 IntelliJ IDEA 中查看 Generator.java 文件。
+- 代码片段：`String templateFileName = file.getAbsolutePath().replace(this.templatePath, replacement = "");`
+- 代码片段：`String outFilePath = processTemplateString(templateFileName, dataModel);`
+- 代码片段：`Template template = cfg.getTemplate(templateFileName);`
+- 代码片段：`template.setOutputEncoding("utf-8");`
+- 代码片段：`FileUtils.mkdir(outPath);`
+
+画面 2：
+- 展示 Template 类的 API 方法列表，用于设置模板引擎配置。
+- 代码片段：`void setArithmeticEngine(ArithmeticEngine arithmeticEngine)`
+- 代码片段：`void setAutoFlush(boolean autoFlush)`
+- 代码片段：`void setBooleanFormat(String booleanFormat)`
+- 代码片段：`void setClassicCompatible(boolean classicCompatibility)`
+- 代码片段：`void setClassicCompatibleAsInt(int classicCompatibility)`
+- 代码片段：`void setCustomAttribute(String name, Object value)`
+- 代码片段：`void setDateFormat(String dateFormat, Object value)`
+- 代码片段：`void setDateTimeFormat(String dateTimeFormat)`
+- 代码片段：`void setLocale(Locale locale)`
+- 代码片段：`void setNumberFormat(String numberFormat)`
+- 代码片段：`void setObjectWrapper(ObjectWrapper objectWrapper)`
+- 代码片段：`void setOutputEncoding(String outputEncoding)`
+- 代码片段：`void setSetting(String name, String value)`
+- 代码片段：`void setSettings(Properties props)`
+- 代码片段：`void setStrictMode(boolean strict)`
+
+画面 3：
+- 展示 FileUtils 类的 API 方法列表，用于文件操作。
+- 代码片段：`String outPath`
+- 代码片段：`OutputStreamWriter (java.io)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org.apache.commons.io.output)`
+- 代码片段：`OutputStream (org
+

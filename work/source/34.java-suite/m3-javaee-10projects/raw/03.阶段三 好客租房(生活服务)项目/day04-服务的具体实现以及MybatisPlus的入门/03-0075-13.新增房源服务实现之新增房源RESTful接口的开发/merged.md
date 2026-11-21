@@ -1,0 +1,207 @@
+# 13.新增房源服务实现之新增房源RESTful接口的开发
+
+- 阶段：03.阶段三 好客租房(生活服务)项目
+- 章节：day04-服务的具体实现以及MybatisPlus的入门
+- 源文件：03.阶段三 好客租房(生活服务)项目\day04-服务的具体实现以及MybatisPlus的入门\13.新增房源服务实现之新增房源RESTful接口的开发【海量资源尽在 ubkz.com】.mp4
+- 时长 10分26秒（音频 626s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:00] 好那么接下来呢我们来实现这个RESTful借口那么有了这个RESTful借口之后啊那么我们是不是就可以和前端做整合了对吧而我们这个RESTful借口呢它所在的工程呢是API server这个工程那么其实就这个工程下面啊在我们这个副工程下面是不是有两个工程啊一个是double服务一个是API的server哎OK那我们现在在这个里面要做一个实现那么我们要知道的是
+[00:28] 在我们的 API Server它的一个角色在Double中它的角色是不是就是一个叫服务的一个消费方或者消费者它其实是要依赖于这个工程对不对OK那么确切一些说是不是要依赖于的是这个houseResource下面Double interface就我们刚刚所提到的这个中的什么的interface这个工程所以要依赖它好那么我们就把依赖就拷贝到什么呢这个工程里面去
+[00:57] 工程里面来那么拷贝到这好那么我们后面需要什么再去拷贝什么哎这个有点问题浩克点manager啊好这个包和我讲义中的有点不太一样嗯哦还是这个回车的问题啊把这个回车问题来看一下好这样是不是就double啊还是少一个横杠好那这样就好了啊这样就ok了好那么这样的话依赖呢就搞定了对吧依赖就搞定了
+[01:33] 然后我们就在这个里面可以做具体的开发了那么在我们rest4开发的时候我们使用的是sprintvc对吧那么当然了还是基于sprintboot的所以我们一点就来写那么我们就先需要去创建一个Service把这个Service创建出来那么在java包下面创建一个Service包然后我们把这个类拷过来要注意的是
+[02:00] 这个类的实现它是需要去调用double的服务的对吧好那么我们来看一下那么在这个里面它的一个实现是这样的那么我们同样的也要把它先标记为是一个Service注意这个Service可不是double的Service而是谁呢spin的Service想一想为什么呢因为你这个是服务的消费方对吧那不可能再去暴露这个double的服务了对吧
+[02:31] 所以不可能使用double的Service注解那么上面我们使用的是reference这个是double的一个注解是不是去我们通过注册中心去发现这个服务然后注册去注进来然后我们去做一个使用OK好那么我们做一个sale的一个操作这个sale的操作我们就会调用这个里面的API调用它里面API里面的resource Service
+[02:59] 然后呢这个save这个方法做一个保存那么它里面呢是不是又会去调用我们服务端的这个里面的具体的实现OK它是这样的一个逻辑啊好那么我们这个Service就有了那么接下来我们来编写这个Controller那么Controller呢我们先把这个包呢给它去创建好那么在这个下面创建一个这个packet的这个包然后呢这个Controller这个包然后呢我们把这Controller这个layer我们也拷贝过来
+[03:29] 那这样啊那还得这么靠然后呢我们先把这个创建一个class然后呢来拷贝里面内容那么我们首先呢给他去添加两个注解一个是Controller一个叫request mapping这两个注解我相信大家应该是非常的熟悉了好然后呢我们来把下面内容拷贝一下他拷贝拷贝到这然后呢这个方法中的具体实现拷过来
+[04:01] 然后呢我们下面呢还有一个实现这个方法其实我们就实现的是什么呢是一个测试啊就是我们来通过get请求去测试一下它看到底能不能够去访问通啊是这样的一个意思那我们来看一下在这个里面呢我们写了一个Controller这个Controller呢它指定一个request mapping就是house下面的resource然后呢新增房源C5然后呢下面有一个get
+[04:29] 而新生房源我们需要它通过POST请求所以定义了一个POST mapping然后它的响应是一个Response Body是一个我们的一个非页面的这样的一个响应然后要注意的是在这个位置的我们使用的是Request Body那么它是需要接收的是一个接程的数据然后将一个接程数据需要反序列化得到一个对象需要这样的一个操作OK好那么
+[04:56] 下面这个做一个测试了好那么这个control就搞定了非常简单的一个control了然后下面我们来编写一个启动类那么这个启动类就是来启动我们的Spring Boot这样的一个启动类那么就在API这个下面好那么我们把这个代码还是格式化一下然后回车一下然后看一下它里面的一个实现那么在这个里面的实现也就也是一个标准的一个标准的我们的一个实现对吧
+[05:26] 那么这个叫double的API的这样的一个实现好那么这个就搞定那么下面依然还是编写sprintboot的这个配置文件来在这个里面我们去编写一个sprintboot的这样的一个配置文件然后把下面这个内容我们也拷过来那么在这个里面我们可以看到这个是sprintboot的应用的一个名称这个没什么疑问对吧然后这个是专口18080要注意前面有个1是18080
+[06:00] 然后呢上面呢这个是个日志的一个级别我把它注掉了就是说如果我们在做调试的时候需要去查看它的详细的日志的话需要把它可以把它这个这个打开啊然后呢下面是我们的一个应用那么我们这个应用的它的角色呢是consumer就是一个消费的消费者然后呢下面是指定一个注册中心需要通过这个注册中心呢去发现我们的服务哎OK好那么这样的话呢我们基本配置呢就搞定了
+[06:28] 下面我们是不是就可以启动我们这个服务了好那么我把这个服务启动起来然后让走等待它那个启动那么启动起来之后我们就可以去尝试的去访问一下看它是否能够访问成功好那么我们等待它的一个启动那么启动之后我们就需要通过这个18080端口来访问它内置的一个Tomcat对不对好那么我们来等待一下它的一个启动那么现在
+[06:57] 是不是已经就启动好了还没有那么稍微等待一下好那么到这里就启动好了那么18080那么我们是不是可以这么来先做一个测试就是在这我们通过1270.0.1下面的1808080然后我们去source直接去访问一下你看一下在这Controller下面是不是我们定义了一个这个叫get mapping对吧
+[07:30] 然后我们就通过get请求请求他走那么可以看到是不OK那就说明我们代码写的是不是没有问题好那么下面我们来看一下新增房源的接口到底能不能够访问通那么这个时候怎么测由于它是一个post请求对不对那么应该怎么去测我们借助于一个工具就是我们的这个工具就是restclient工具来做一个测试做一个测试那么这个是
+[07:59] 这个测试看有没有问题127.0.0.18080houseresource下面pose请求但是要注意的这个数据有问题这个数据大家要去拿一下我们的这个讲义中有一站的一个数据把这个数据拷过来那么拷到这那么来看一下这个就是我们的一个具体的一个这个数据那么这个拷过来数据也是有点问题的由于这个pdf这个文档的一个原因
+[08:29] 那么我们这样把它呢拷过来之后的做一下这个处理啊那么还是回车的问题啊到这没有问题然后呢这个回车上去没有问题这个回车到这OK大家可以把这个呃注意这个回车这个问题的啊啊这个没有回车啊这个好到这这个看一下啊啊这就没有回车了好那么咱们把这个呢拷过来这是我们的一个请求的一个数据啊请求这个数据
+[09:03] 好那么要注意的是请求要改成这个blackjack的json为什么改成他呢前面我们说过在这个位置是我们要求是提交的是一个json数据然后通过一个json反序的话得到一个这个对象所以说我们需要去做这样的一个操作然后我们点击这个send发送走来看一下201是不是成功了那么这个数据中是不是有一个它的标题叫东方的一个曼哈顿三室两厅这样的一个
+[09:33] 房源的一个数据那么我们就进入我们的数据库来看一下有没有这样的数据保存到我们的数据库呢发现是不是有一条数据是不是已经就写入到我们的数据库了那就说明是不是我们已经成功的去访问了我们的resc4接口已经访问了我们的double的服务对不对那么我们来看一下最开始我们所讲的这个后台我们这个服务那么我们那个请求是不是就是先进入了一个他
+[10:01] 然后他呢是不是调用的房源是不是这个服务这个服务呢又是去访问的数据库那么整条路是不是就已经跑通了哎呀OK那么跑通之后那么后面我们是不是就可以去整合是不是我们那个前端是不是去做一个开发了哎呀OK好那么这个就关于我们新增房源那个RESTful接口的一个开发好那么关于这个接口的开发就讲到这里
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲一个基于 Spring Boot 和 Dubbo 的房屋资源管理系统的后端开发流程，包括项目结构、依赖配置、服务层与控制层代码编写及数据库表结构设计。
+
+2) 按时间顺序列出每张画面的要点：
+画面1: 显示 IntelliJ IDEA 中项目结构，选中模块 "itcast-haoke-manage-api-server"。
+画面2: 显示 pom.xml 文件内容，其中包含 Spring Boot Web 依赖和 Dubbo 服务依赖。
+画面3: 在项目结构中选中 "resources" 目录。
+画面4: 显示 HouseResourcesService.java 服务层代码，包含 @Reference 注解和 save 方法。
+画面5: 在项目结构中选中 "Controller" 包。
+画面6: 显示 HouseResourcesController.java 控制器代码，包含 @PostMapping 和 try-catch 块。
+画面7: 显示 HouseResourcesController.java 控制器代码，包含 @Autowired 注解和 save 方法。
+画面8: 显示 application.properties 文件为空。
+画面9: 显示 DubboApiApplication.java 启动类代码，包含 @SpringBootApplication 注解。
+画面10: 浏览器显示 Google 主页，地址栏中显示 "127.0.0.1:3000"。
+画面11: 显示 HouseResourcesController.java 控制器代码，包含 @GetMapping 和 get 方法。
+画面12: 显示 EditPlus 编辑器中的 SQL 语句，包含创建 tb_estate 和 tb_house_resources 表的语句。
+画面13: 显示 PDF 文档中测试数据，包含房屋资源的 URL 和 JSON 数据。
+画面14: 显示 PDF 文档中 5.3 节内容，包含 HouseResourcesController 的代码。
+
+3) 代码、配置、命令、目录结构、SQL、XML/YAML 配置（原样抄录）：
+画面2:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>itcast-haoke-manage</artifactId>
+        <groupId>cn.itcast.haoke.manage</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>itcast-haoke-manage-api-server</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.itcast.haoke.manage</groupId>
+            <artifactId>itcast-haoke-manage-dubbo-server-house-resources-dubbo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>
+```
+
+画面4:
+```java
+package cn.itcast.haoke.dubbo.api.Service;
+import cn.itcast.haoke.dubbo.server.api.ApiHouseResourcesService;
+import cn.itcast.haoke.dubbo.server.pojo.HouseResources;
+import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.stereotype.Service;
+
+@Service
+public class HouseResourcesService {
+    @Reference(version = "1.0.0")
+    private ApiHouseResourcesService apiHouseResourcesService;
+
+    public boolean save(HouseResources houseResources) {
+        int result = this.apiHouseResourcesService.saveHouseResources(houseResources);
+        return result == 1;
+    }
+}
+```
+
+画面6:
+```java
+package cn.itcast.haoke.dubbo.api.Controller;
+import cn.itcast.haoke.dubbo.api.Service.HouseResourcesService;
+import cn.itcast.haoke.dubbo.server.pojo.HouseResources;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@Controller
+@RequestMapping("house/resources")
+public class HouseResourcesController {
+    @Autowired
+    private HouseResourcesService houseResourcesService;
+
+    @PostMapping
+    public ResponseEntity<Void> save(@RequestBody HouseResources houseResources) {
+        try {
+            boolean bool = this.houseResourcesService.save(houseResources);
+            if (bool) {
+                return ResponseEntity.status(HttpStatus.CREATED).build();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+```
+
+画面12:
+```sql
+CREATE TABLE `tb_estate` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL COMMENT '楼盘名称',
+  `province` varchar(10) DEFAULT NULL COMMENT '所在省',
+  `city` varchar(10) DEFAULT NULL COMMENT '所在市',
+  `area` varchar(10) DEFAULT NULL COMMENT '具体地址',
+  `year` varchar(10) DEFAULT NULL COMMENT '建筑年代',
+  `type` varchar(10) DEFAULT NULL COMMENT '物业类型',
+  `property_cost` varchar(10) DEFAULT NULL COMMENT '物业费',
+  `developers` varchar(20) DEFAULT NULL COMMENT '开发商',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=utf8 COMMENT='楼盘表';
+
+-- 初始化数据
+INSERT INTO `tb_estate` (`id`, `name`, `province`, `city`, `area`, `year`, `type`, `property_cost`, `developers`, `created`, `updated`) VALUES
+(1, '东方曼哈顿', '北京', '北京', '朝阳区', '2010', '住宅', '3.5', '东方地产', '2010-01-01 00:00:00', '2010-01-01 00:00:00'),
+(2, '东方曼哈顿', '北京', '北京', '朝阳区', '2010', '住宅', '3.5', '东方地产', '2010-01-01 00:00:00', '2010-01-01 00:00:00');
+
+CREATE TABLE `tb_house_resources` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL COMMENT '房源标题',
+  `estate_id` bigint(20) DEFAULT NULL COMMENT '楼盘ID',
+  `building_num` varchar(5) DEFAULT NULL COMMENT '楼号（栋）',
+  `building_unit` varchar(5) DEFAULT NULL COMMENT '单元号',
+  `building_floor_num` varchar(5) DEFAULT NULL COMMENT '楼层',
+  `front` int(10) DEFAULT NULL COMMENT '租金',
+  `rent_method` varchar(10) DEFAULT NULL COMMENT '租凭方式，1-整租，2-合租',
+  `covered_area` varchar(10) DEFAULT NULL COMMENT '面积',
+  `use_area` varchar(10) DEFAULT NULL COMMENT '使用面积',
+  `orientation` varchar(10) DEFAULT NULL COMMENT '朝向',
+  `facilities` varchar(10) DEFAULT NULL COMMENT '设施',
+  `rent` int(10) DEFAULT NULL COMMENT '租金',
+  `property_cost` varchar(10) DEFAULT NULL COMMENT '物业费',
+  `floor` varchar(10) DEFAULT NULL COMMENT '楼层',
+  `housetype` varchar(10) DEFAULT NULL COMMENT '房屋类型',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=utf8 COMMENT='房源表';
+```
+
+4) PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据：
+画面13:
+标题：测试数据
+数据：
+url: http://127.0.0.1:18080/house/resources
+数据：
+{
+  "title": "东方曼哈顿 3室2厅 16000",
+  "buildingNum": "2",
+  "buildingUnit": "1",
+  "rent": "111",
+  "paymentMethod": "1",
+  "coveredArea": "2",
+  "useArea": "2",
+  "orientation": "南",
+  "facilities": "1,2,3,8,9",
+  "houseDesc": "这个楼盘人很懒，没有核心卖点",
+  "rent": "1111111111",
+  "img": "http://127.0.0.1:18080/house/resources/1.jpg",
+  "propertyCost": "11",
+  "floor": "1/2",
+  "housetype": "1",
+  "estateId": "1005"
+}
+
+5) 无
+

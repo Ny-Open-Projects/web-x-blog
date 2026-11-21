@@ -1,0 +1,229 @@
+# day14-16-用户还款-第四阶段-功能实现2
+
+- 阶段：10.阶段十 万信金融项目
+- 章节：05_万信金融-用户还款/5-2 用户还款功能实现
+- 源文件：10.阶段十 万信金融项目\05_万信金融-用户还款\5-2 用户还款功能实现\day14-16-用户还款-第四阶段-功能实现2_【海量资源尽在 666java.com】.mp4
+- 时长 9分26秒（音频 566s）
+- 内容：声音线（教师逐段转写）+ 画面线（屏幕/PPT/代码）；已做同音技术术语纠错（Maven/JDK/Spring Boot 等）与品牌词清理
+
+## 一、声音线（教师讲解，[mm:ss] 为出现时刻）
+
+[00:01] 刚才呢我们把存款代理服务这边从2.2对吧一直到2.9整个这一块的代码呢全部开放完毕了那咱接下来的话是不是应该把2.3搞定了2.3是不是就是还款服务这边要通过FAME对吧然后往存款代理服务这边发请求是不是访问到这的那个control热嘛对不对这个代码咱刚才刚写过所以咱接下来要做一个准备工作啊就是把这个FAME代理给它定义出来对不对在哪定义啊
+[00:30] 那肯定是在什么还款服务这边因为是他发请求嘛那所以说接下来咱就要去这个谁呀得换地方了对不对该去这个什么repayment这边我们要找到这个R进的在这里边我们需要再次定义一个什么呀对非应代理咱接下来先看看讲一这儿方法呢还是叫confirm repayment
+[01:00] 这个代理呢就是用来向存款代理服务干什么呀发请求呢这是这个请求地址那这里边提醒大家注意啊你在写这个代码的时候呢一定要注意这一层这个路径你可不要忘了啊因为这个路径咱是不是照着刚才咱那个什么呀存款代理服务那边的Controller是不是照着这写的对不对那么有的同学咔拿过来之后呢就把这层给干什么呀忘掉了啊所以这是微服的那个基本访问路径嘛
+[01:37] 需要需要这个给一个完整的一个路径啊这个千万不要忘这是我们定义了一个非硬代理那么将来的话我们通过调这个方法就可以搞定哪一步的这个功能啊是吧2.3啊是不是啊这个非硬代理大家比较熟悉就搞定23啊就这个请求发出去那这个非硬代理咱定义完之后接下来咱要考虑的一件事就是2.3这个业务怎么触发是不是
+[02:06] 2.3这个业务怎么出发是我们人工的去调一下刚才那个方案去然后发起请求吗不是啊不是的这个我们说了这这个第三阶段和第四阶段这个地方是不是涉及到分布式事务的问题那我们是不是准备用ROCKET MQ可靠消息实现最终一致性对吧所以说呢这儿啊大家注意在2.3之前呢这儿我们应该是要接收消息接收消息呢在这个消息里边呢我们是不是要怎么着呢注意听啊
+[02:35] 我这呢是接收消息的时候在消息里边我要调用一个方法在这个方法里边呢我就干什么呀对我要通过飞影去发起信条明白什么意思吧这是这块代码我们要是写完之后咱这个流程就全部打通了我再给大家强调一遍啊正常的流程是这个样子黄焕服务这边要作为消息的接收方跳接收消息接收到消息之后呢他要调用一个方法
+[03:05] 然后呢我准备在这个方法里边呢去通过那个什么非应代理发起这个请求所以接下来的话我们把这个方法给他定义出来然后在这个方案里边呢去调用非应代理发起这个什么呀请求啊我们定义一个方法呃这个方法的话我们就应该是在repayment这边对吧在他的右层我们定义这么一个方法啊在这个方案里边的话我们就就去干什么呀对
+[03:35] 通过这个分代去发起这个请求那所以说呢咱接下来的话就是在哪repayment那边我们找到他的业务层在这对不对那我们需要在这呢再定义一个接口那么这个方法的名字的话我们要跟讲义保持一致吧叫什么invo和调用的意思嘛对吧conform repayment
+[04:08] 好然后我们看一下这个参照参照是吧还是那个repayment什么呀request不是这儿啊在这儿啊一个是repayment request一个是这个什么呀还款计划好我们拿过来然后呢我们把这个注释呢也给他加上这儿呢大家注意我刚才说了这个方法它的作用是干嘛的呀对在这个方法里边呢我要远程调用这个什么呀就是往哪边发请求往存款代理服那边发请求通过
+[04:39] 飞刚才这个飞行代理咱是不是已经定义好了是不是那接口里边这个方法咱定义好之后咱接下来你看实现类是不是已经报错了咱把这个方法给它生成把里边的功能呢给它实现好我们看一下啊我们把这个方法生成到这了啊那这里边是不是通过刚才的这个飞行代理啊发这个这个请求就行啊这个飞行代理呢我们前面应该是注入过了啊
+[05:05] 那我在这的话是不是就要进行调用了应该是deposit origin的一片二进的对吧刚才咱定义的方法是不是叫叫confirm什么呀repayment你看他是不是要一个对象一个参数叫repayment request那不就是在这吗对不对就在这你看我们这样子是不是就往哪边发请求来往存款代理服那边发请求这好那样一直行那你看是不是相当于就是2.3这一步吗对不对
+[05:35] 那个请求就发到存款代理服务这个卡车上吧然后就开始往后这个推进这个业务的执行了啊那他执行完之后我们知道他是不是返回的有结果呀是不是这个结果呢我们得接收一下这个结果你应该去你要是忘记的话啊你应该去这个什么呀卡车那里边找一找结果是不是就是这个结果我们在在哪在这儿啊要进行接收对不对哎我们就叫
+[06:09] 叫啥名啊Repayment Response这步其实就完成了这个这个请求那我们拿到结果之后我们得判断呀对吧我哪知道这个这个什么呀这个业务处理成功了没有就是2.2到什么2.8对不对这里边有没有出问题那所以说我要从这个结果里边取数据来进行判断不还是那个什么呀五个零吗是不是
+[06:43] 还是那五个零啊咱们接下来做判断我要从repayment这个什么response里边来取取谁呀对取这个get raise out我要拿着它跟谁比呢跟那五个零五个零呃我里是咋写的呀从哪去的呀对deposit return code点这时候大家看到是不是这五个零表示成功的吗
+[07:11] 然后呢我们需要再调用他的get code的话达到这个五个零这个字块然后我们进行判断相当的它是不是就表示成功了那我们这要判断这个不相当的情况不相等是不是表示这个业务处理失败了那我这跟之前的套路一样要干什么呀对抛一个咱那个什么呀那个异常businessbusiness这里边的话咱找一找咱这个之前有没有
+[07:42] 这个设置这个还款失败的这个这个异常信息我写一下试试吧咱之前应该是都是从这个什么呀啊trntranscation我记得咱封装好了有一个transaction error code吧哦对这里边他没有因为这是交易中心那边的他这边要是有的话应该叫repayment error code对吧repayment1
+[08:13] 应该是没有封装啊没有封装的话这样你下去的话你想抛出这个咱自定义这个异常的话你需要定义那个那个错误码咱这没有定义没有定义的话那我这就直接用这个最终的效果都是一样的啊用这个run time exception这里边就写个还款失败这是我们把这个什么呀这个触发什么呀触发这个呃发起远程请求的这个方法
+[08:49] 这块代码给写好这个写好之后接下来我们就可以干啥了呀大家看一下啊我们刚才分析了嘛就是黄款服务这边是不是应该要先接收消息接收消息之后呢它是不是要调用一个方法这个方法是不是咱刚才写的那个方法对不对在这个方法里边是不是通过飞印发起了什么呀请求对所以咱相当于是把这块代码给搞定了那一会儿的话咱是不是应该是编写这个什么代码
+[09:17] 对监听器是不是来接收消息然后呢他去调用咱刚才写的方法然后整个这个流程是不是就打通了
+
+## 二、画面线（屏幕 / PPT / 代码，VLM 抽帧抄录）
+
+1) 这一组画面整体在讲什么（一句话）：
+演示如何在还款服务中通过 Feign 客户端调用存管代理服务确认还款，并处理相应的业务逻辑和异常。
+
+2) 按时间顺序列出每张画面的要点，标注它对应的画面序号：
+画面1：展示 `DepositoryAgentController` 中的 `confirmRepayment` 方法，用于接收还款请求并调用 `depositoryRecordService`。
+画面2：展示 `DepositoryAgentApiAgent` 接口，定义了 `/user-auto-pre-transaction` 和 `/confirm-repayment` 两个 Feign 接口。
+画面3：再次展示 `DepositoryAgentApiAgent` 接口，强调 `/confirm-repayment` 接口用于确认还款。
+画面4：PPT 页面，说明在 `RepaymentService` 接口中新增 `invokeConfirmRepayment` 方法，用于接收消息后调用。
+画面5：展示 `DepositoryAgentApiAgent` 接口，再次强调 `/confirm-repayment` 接口。
+画面6：PPT 页面，说明在 `DepositoryAgentApiAgent` 接口中新增 `confirmRepayment` 方法，用于向存管代理服务发请求。
+画面7：展示 `RepaymentServiceImpl` 中的 `executeRepayment` 方法，包含计算还款金额、生成还款计划等逻辑。
+画面8：展示 `RepaymentServiceImpl` 中的 `invokeConfirmRepayment` 方法，调用 `depositoryAgentApiAgent.confirmRepayment`。
+画面9：再次展示 `DepositoryAgentController` 中的 `confirmRepayment` 方法。
+画面10：展示 `RepaymentServiceImpl` 中的 `invokeConfirmRepayment` 方法，准备调用 `depositoryAgentApiAgent.confirmRepayment`。
+画面11：展示 `RepaymentServiceImpl` 中的 `invokeConfirmRepayment` 方法，调用 `depositoryAgentApiAgent.confirmRepayment`。
+画面12：展示 `RepaymentServiceImpl` 中的 `invokeConfirmRepayment` 方法，准备抛出异常。
+画面13：展示 `RepaymentServiceImpl` 中的 `invokeConfirmRepayment` 方法，抛出 `BusinessException` 异常。
+画面14：流程图，展示用户还款成功后的处理流程，包括发送确认还款信息、确认还款处理、生成交易明细、更新交易记录等步骤。
+
+3) 画面里出现的**代码、配置、命令、目录结构、SQL、XML/YAML 配置**请原样抄录（逐字，保留缩进与符号）：
+画面1：
+```java
+@Override
+@ApiOperation(value = "确认还款")
+@ApiImplicitParam(name = "repaymentRequest", value = "还款信息",
+required = true, dataType = "RepaymentRequest", paramType = "body")
+@PostMapping("/confirm-repayment")
+public RestResponse<String> confirmRepayment(@RequestBody RepaymentRequest repaymentRequest) {
+    return getRestResponse(depositoryRecordService.confirmRepayment(repaymentRequest));
+}
+```
+
+画面2：
+```java
+package cn.itcast.wanxing2p.repayment.agent;
+
+import cn.itcast.wanxing2p.api.depository.model.UserAutoPreTransactionRequest;
+import cn.itcast.wanxing2p.common.domain.RestResponse;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+@FeignClient(value = "depository-agent-Service")
+public interface DepositoryAgentApiAgent {
+
+    @PostMapping("/depository-agent/user-auto-pre-transaction")
+    RestResponse<String> userAutoPreTransaction(@RequestBody UserAutoPreTransactionRequest userAutoPreTransactionRequest);
+
+    @PostMapping("/depository-agent/confirm-repayment")
+    RestResponse<String> confirmRepayment(@RequestBody RepaymentRequest repaymentRequest);
+}
+```
+
+画面4：
+```java
+/**
+ * 远程调用确认还款接口
+ * @param repaymentPlan
+ * @param repaymentRequest
+ */
+void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest);
+```
+
+画面6：
+```java
+/**
+ * 远程调用确认还款接口
+ * @param repaymentPlan
+ * @param repaymentRequest
+ */
+void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest);
+
+// 3. 定义Feign代理
+// 在DepositoryAgentApiAgent接口中新增confirmRepayment方法，用于向存管代理服务发请求
+@PostMapping("/depository-agent/confirm-repayment")
+RestResponse<String> confirmRepayment(@RequestBody RepaymentRequest repaymentRequest);
+
+// 4. 在RepaymentServiceImpl中实现invokeConfirmRepayment方法：
+@Override
+public void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest) {
+    RestResponse<String> repaymentResponse = 
+        depositoryAgentApiAgent.confirmRepayment(repaymentRequest);
+}
+```
+
+画面7：
+```java
+// 1.2 获取项目信息
+List<CenderDTO> tenders = projectDTO.getTenders();
+
+// 1.3 计算应还的总天数
+Double ceil = Math.ceil(projectDTO.getPeriod() / 30.0);
+Integer month = ceil.intValue();
+
+// 1.4 还款方式，只支持等额本息
+String repaymentWay = projectDTO.getRepaymentWay();
+
+// 1.5 生成还款计划
+if (repaymentWay.equals(RepaymentWayCode.FIXED_REPAYMENT.getCode())) {
+    EqualInterestRepayment fixedRepayment = RepaymentUtil.fixedRepayment(projectDTO, projectDTO.getTenders());
+    List<RepaymentPlan> planList = saveRepaymentPlan(projectDTO, fixedRepayment);
+    // 1.6 生成还款明细
+    for (CenderDTO tender : projectDTO.getTenders()) {
+        EqualInterestRepayment receipt = RepaymentUtil.fixedRepayment(tenderDTO, tender.getTenderAmount(), tender.getTenderPeriod());
+    }
+}
+```
+
+画面8：
+```java
+@Override
+public void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest) {
+    depositoryAgentApiAgent.confirmRepayment(repaymentRequest);
+}
+```
+
+画面10：
+```java
+// 检查存管代理服务处理请求失败
+if (repaymentResponse == null) {
+    throw new BusinessException("存管代理服务处理请求失败");
+}
+```
+
+画面11：
+```java
+@Override
+public void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest) {
+    RestResponse<String> repaymentResponse = depositoryAgentApiAgent.confirmRepayment(repaymentRequest);
+    if (repaymentResponse.getResult().equals(DepositoryReturnCode.RETURN_CODE_00000.getCode())) {
+        // 处理成功
+    }
+}
+```
+
+画面12：
+```java
+// 检查存管代理服务处理请求失败
+if (repaymentResponse == null) {
+    throw new BusinessException("存管代理服务处理请求失败");
+}
+```
+
+画面13：
+```java
+@Override
+public void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest) {
+    RestResponse<String> repaymentResponse = depositoryAgentApiAgent.confirmRepayment(repaymentRequest);
+    if (!repaymentResponse.getResult().equals(DepositoryReturnCode.RETURN_CODE_00000.getCode())) {
+        throw new BusinessException("交易失败");
+    }
+}
+```
+
+4) 出现的 PPT 标题、架构图/流程图的结构（谁指向谁）、表格数据也要写清楚：
+画面4：
+标题：1. 接口描述
+内容：
+1) 请求存管代理服务进行确认还款
+2) 根据返回结果处理后续流程
+2. 接口定义
+在RepaymentService接口中，新增invokeConfirmRepayment方法，接到消息后需要调用该方法：
+
+画面6：
+标题：3. 定义Feign代理
+内容：
+在DepositoryAgentApiAgent接口中新增confirmRepayment方法，用于向存管代理服务发请求
+@PostMapping("/depository-agent/confirm-repayment")
+RestResponse<String> confirmRepayment(@RequestBody RepaymentRequest repaymentRequest);
+
+4. 在RepaymentServiceImpl中实现invokeConfirmRepayment方法：
+@Override
+public void invokeConfirmRepayment(RepaymentPlan repaymentPlan, RepaymentRequest repaymentRequest) {
+    RestResponse<String> repaymentResponse = 
+        depositoryAgentApiAgent.confirmRepayment(repaymentRequest);
+}
+
+画面14：
+流程图标题：用户还款成功流程图
+流程：
+1.10 还款成功
+1.1 发送确认还款信息
+1.2 确认还款处理
+1.3 更新还款明细，状态为“已还款”
+1.4 更新还款计划，状态为“已还款”
+1.5 更新交易记录，状态为“已还款”
+2.1 通过交易明细生成签名及票据
+2.2 通过交易明细生成交易记录
+2.3 更新交易记录，状态为“未同步”
+2.4 还款成功（直接抵扣）
+2.5 更新交易记录，状态为“已还款”
+2.6 更新还款明细，状态为“已还款”
+2.7 更新交易记录，状态为“已还款”
+
+5) 不要评价画面美观，不要输出与课程无关的内容。
+（无）
+
