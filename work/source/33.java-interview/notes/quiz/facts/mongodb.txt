@@ -1,0 +1,91 @@
+# MongoDB 知识点事实矩阵（MG-xxx）
+# 格式: id|domain|topic|dim|term|fact|why|miscon1|miscon2|miscon3|usage|version
+
+MG-001|MongoDB|文档模型|基础|BSON|MongoDB 数据单位是 BSON 文档（二进制 JSON）单文档上限 16MB|BSON 支持嵌套文档与数组字段，无固定 schema，字段按需存在，与关系模型的行最大差异|BSON 就是 JSON 没有区别|单文档无上限|文档必须有相同字段|建模思维的转换起点|官方文档
+MG-002|MongoDB|文档模型|概念|集合|集合（collection）对应关系模型的表但无固定 schema|同一集合文档结构可以不同，schema 由应用层保证（或 JSON Schema 校验），灵活但也要求自律|集合强制 schema|集合必须先建才能插数据|无 schema 意味着不需要设计|建模评审仍必须做|官方文档
+MG-003|MongoDB|文档模型|主键|ObjectId|默认主键 ObjectId=4 字节秒级时间戳+5 字节进程级随机+3 字节递增计数|时间戳前缀使 ObjectId 天然趋势递增，写入分布式友好（类似雪花效果），官方文档核对零差异|ObjectId 是完全随机的|3 字节计数是全局递增（是进程内递增）|ObjectId 不含时间信息|_id 设计与写入性能|官方文档核对
+MG-004|MongoDB|建模|嵌入|嵌入|建模第一问：数据整体读用嵌入（1:少量），分开更新用引用（1:多）|嵌入免 JOIN 单文档原子读，引用避免文档无限膨胀（16MB），两者按读写模式选择|全部嵌入最简单|全部引用最规范|16MB 很少会撞到（评价/日志类很容易）|商品详情嵌 SKU、评价拆集合的混合策略|实战方法论
+MG-005|MongoDB|事务|原子|单文档原子|单文档读写天然原子（副本集内始终原子）|嵌套文档整读整写免事务，能用单文档原子解决就不开多文档事务（官方原则）|单文档操作也可能部分成功|多文档事务与单文档等价|单文档原子只对简单字段成立|建模利用原子性的设计技巧|官方文档
+MG-006|MongoDB|事务|多文档|4.0/4.2|多文档事务 4.0 支持副本集、4.2 支持分片集群|走 session 默认 60 秒超时，代价高（锁与快照开销），官方建议模型设计优先（嵌入）减少事务需求|MongoDB 没有事务|事务从 3.0 就有|分片事务与副本集事务同时引入|事务能力版本线|官方文档
+MG-007|MongoDB|事务|限制|60 秒|多文档事务默认 60 秒自动中止（transactionLifetimeLimitSeconds）|防止长事务拖垮 oplog 与锁，长流程拆事务边界，超时异常需业务重试策略|事务无时间限制|超时自动重试完成|60 秒是硬上限不可配（可配但生产慎调大）|事务超时处理|官方文档
+MG-008|MongoDB|副本集|写关注|w:1|写关注 w:1 主确认即返回可能丢写，w:majority 多数派确认不丢|w:1 快（不等从库）、majority 慢但多数派持久，是性能与持久性的旋钮，j:true 额外等 journal 落盘|w:1 不丢数据|majority 写最快|写关注与回滚无关|写丢失场景的配置解|官方文档
+MG-009|MongoDB|副本集|读关注|read concern|读关注 local 读本机最新（可能被回滚）、majority 读已确认数据、linearizable 线性一致|local 快但读到未多数派确认写，majority 一致，linearizable 最强最慢需配 w:majority|local 与 majority 相同|linearizable 是默认值|read concern 影响写入|读一致性与延迟权衡|官方文档
+MG-010|MongoDB|副本集|复制|oplog|副本集复制靠 oplog（固定容量循环覆盖的操作日志）从库拉取回放|oplog 是 capped collection，从库异步回放，回放完成度决定读一致性，oplog 窗口是从库落后容忍上限|oplog 是无限增长日志|复制是同步的|oplog 记录文档级 diff（statement 级）|副本集复制原理骨架|官方文档
+MG-011|MongoDB|副本集|规模|50/7|副本集最多 50 成员其中 7 个可投票|投票成员多数派选举（类 Raft：term/多数派/日志新度优先），非投票成员可作数据节点，官方文档核对零差异|副本集成员数无上限|所有成员都可投票|选举是抢占式不需要多数派|副本集容量规划|官方文档核对
+MG-012|MongoDB|副本集|选举|选举|主库挂触发选举：多数派投票、term 递增、日志新度优先，通常数秒完成|日志新度（oplog 位置最靠前）保证新主数据最新，priority 影响优先级，选举期间无法写|选举选举数据最新的从库（是日志最靠前者）|term 不重要|选举期间可以读（secondary 读也受影响需客户端处理）|故障转移机制|官方文档
+MG-013|MongoDB|副本集|回滚|rollback|主挂时未被多数派确认的写在切主后被回滚（写进 rollback 目录）|异步复制固有风险，人工可从 rollback 文件恢复，工程防御是 w:majority 让写确认前不返回|回滚自动合并进新主|回滚的数据永久丢失无法恢复|回滚只在网络分区发生|数据丢失风险评估|官方文档
+MG-014|MongoDB|副本集|运维|oplog 窗口|oplog 窗口监控必配：从库落后超过窗口就得全量重同步|oplog 循环覆盖，落后从库找不到同步起点，全量重同步代价大（数据量线性），窗口=oplog 容量/平均写入速率|oplog 满了自动扩容|从库落后自动追平|重同步是增量的|运维监控必配项|实战共识
+MG-015|MongoDB|副本集|仲裁|arbiter|arbiter（仲裁节点）只投票不存数据省资源但削弱多数派持久性|3 成员=2 数据+1 仲裁时，数据节点挂一个另一个成单点（仲裁无数据），生产慎用，官方文档有明确警告|arbiter 存部分数据|arbiter 提高数据安全性|3 个 arbiter 最稳|小规模副本集设计权衡|官方文档
+MG-016|MongoDB|索引|原则|ESR|复合索引设计 ESR 原则：Equality 等值→Sort 排序→Range 范围|等值列保证排序连续性，范围列放最后，官方设计原则（与 MySQL 联合索引原则同构）|R 应该放最前|S 在 E 前|ESR 只适用聚合查询|索引设计口诀|官方文档
+MG-017|MongoDB|索引|$in|边界|$in 是多组等值官方按 E 处理（组内排序仍有效）|{status:{$in:[A,B]}} 对排序列仍有连续性，按 ESR 设计索引时 $in 归入等值位|$in 属于范围查询放 R 位|$in 使索引失效|$in 顺序决定结果序|ESR 细节题|官方文档
+MG-018|MongoDB|索引|覆盖|覆盖查询|projection 排除 _id 且所有返回字段在索引中则覆盖查询免回表|explain 看 FETCH 阶段消失（PROJECTION_COVERED），与 MySQL 覆盖索引同构|覆盖查询自动发生|_id 不排除也能覆盖|覆盖查询更快是因为内存大|查询优化技巧|官方文档
+MG-019|MongoDB|索引|TTL|TTL|TTL 索引（expireAfterSeconds）后台约 60 秒一轮删除过期文档|删除有延迟（非精确到秒），适合日志/会话类清理，官方文档核对（60 秒巡检周期），删除操作本身有性能开销|TTL 精确到秒删除|TTL 删除是免费的|TTL 可用于所有场景|过期数据清理方案|官方文档核对
+MG-020|MongoDB|索引|partial|partial|partial 索引只索引满足条件的文档（如只索引 status=active）|省空间与写放大，查询条件必须匹配过滤表达式才能用上该索引，部分条件高频的集合优化|partial 索引所有查询都能用|partial 是稀疏索引的别名|partial 不省空间|索引空间优化|官方文档
+MG-021|MongoDB|索引|sparse|sparse|sparse 索引跳过不含该字段的文档|与 partial 的区别：按字段存在性过滤（partial 按任意表达式），组合查询行为注意（不含字段文档查不到）|sparse 与 partial 相同|sparse 索引所有文档|sparse 会自动填充字段|字段稀疏集合优化|官方文档
+MG-022|MongoDB|索引|多键|multikey|数组字段自动建多键索引（每个数组元素一个索引项）|数组查询走索引，多键索引与 $in 组合时索引项爆炸（写放大），单文档多键索引有限制（一个数组字段）|数组不能建索引|多键索引是集合级|多键索引性能优于普通索引|标签/类目数组查询|官方文档
+MG-023|MongoDB|索引|通配符|通配符|通配符索引（4.2+）对 schema 多变字段（子文档所有路径）建索引|{$**":1} 覆盖未知字段查询，代价是写放大与空间，schema 不可预估场景适用|通配符索引性能更好|通配符索引免费|4.0 就有通配符索引|异构属性查询|官方文档
+MG-024|MongoDB|索引|特殊|文本地理|特殊索引：text（全文检索）、2dsphere（地理）、hashed（分片散列）|text 适合简单全文（复杂搜索用 ES），2dsphere 支持球面地理查询，hashed 用于 hashed 分片|text 索引可替代 ES|2dsphere 是平面坐标|hashed 索引用于排序|索引类型全景|官方文档
+MG-025|MongoDB|explain|解读|COLLSCAN|explain 关键计划：COLLSCAN 全集合扫（红灯）、IXSCAN 索引扫、FETCH 回表|与 MySQL explain 思路同构，totalDocsExamined 与 nReturned 比值是效率指标，1:1 为理想|COLLSCAN 表示用集合扫描优化|IXSCAN 一定快|FETCH 就是磁盘读|查询调优入口|官方文档
+MG-026|MongoDB|分片|架构|三层|分片三层架构：mongos（路由）→config 副本集（元数据）→shard（每个是副本集）|mongos 无状态可扩容，config 存 chunk 分布元数据，shard 是普通副本集参与分片，各层独立伸缩|config 是单节点|shard 是单机|mongos 存数据|分片集群拓扑|官方文档
+MG-027|MongoDB|分片|分片键|三原则|分片键三原则：高基数、查询必带、写分布均匀|单调递增值（ObjectId 全打到最后分片）用 hashed 分片解，查询不带分片键全分片广播，官方文档核对（选型同 MySQL 分片键原则）|分片键随意选不影响性能|单调递增键最优|查询不带分片键自动路由|分片键是 MongoDB 最重大的一次性决策|官方文档核对
+MG-028|MongoDB|分片|类型|range vs hashed|range 分片（范围查询友好）vs hashed 分片（写均匀、范围查询废）|range 支持范围扫描但单调写倾斜，hashed 写分散但点查与范围查询代价不同，按读写模式选|hashed 支持范围查询|range 写永远均匀|两者性能相同|分片策略选型|官方文档
+MG-029|MongoDB|分片|路由|广播|mongos 对不带分片键的查询广播全分片再聚合|广播是 O(分片数) 放大，QPS 高时全集群被拖累，查询必带分片键是性能第一原则|广播自动优化不影响性能|广播只在配置错误时发生|mongos 会缓存查询结果|分片集群性能红线|官方文档
+MG-030|MongoDB|分片|演进|reshard|分片键选错的补救：4.4 refineCollectionShardKey 追加后缀字段、5.0 reshardCollection 在线重分片|重分片代价大（全量数据重写），所以分片键决策前置评审，4.2 前只能在导出重导入|分片键随时可改|refine 与 reshard 是同一功能|5.0 前也能在线改分片键|分片键演进知识|官方文档
+MG-031|MongoDB|分片|chunk|balancer|chunk 是数据切分单位，balancer 自动在分片间迁移 chunk 均衡|chunk 默认上限可调（split 阈值），balancer 有时间窗口配置（业务低峰迁移），4.4+ 平衡策略更细|chunk 固定 64MB 不可变|balancer 实时迁移影响性能（可配窗口）|jumbo chunk 自动拆分|分片运维知识|官方文档
+MG-032|MongoDB|分片|问题|jumbo chunk|jumbo chunk：同一分片键值海量子文档导致超阈值不可分割|需手动拆分（细化分片键）或调整，是分片键基数不足的后果，预防靠高基数分片键|jumbo chunk 自动处理|jumbo chunk 影响读不影响写|出现后只能删数据|分片键设计失误的补救|实战共识
+MG-033|MongoDB|存储引擎|WiredTiger|文档级并发|WiredTiger（3.2+ 默认）提供文档级并发控制与 MVCC|写不同文档不互斥（3.0 前 MMAPv1 库级锁），写冲突重试，是 MongoDB 并发能力跃升的根基|MongoDB 是库级锁|WiredTiger 是 4.0 引入|文档级锁等于无锁|存储引擎演进知识|官方文档
+MG-034|MongoDB|存储引擎|压缩|压缩|WiredTiger 支持块压缩（snappy 默认/zlib/zstd）与前缀压缩（索引）|磁盘占用显著降低（压缩比 2-5 倍），CPU 换空间，按数据特征选择压缩算法|压缩默认关闭|压缩不影响查询性能|zstd 是默认算法|容量成本优化|官方文档
+MG-035|MongoDB|存储引擎|checkpoint|checkpoint|WiredTiger 定期 checkpoint（默认 60 秒）落盘一致状态|journal（WAL）保证 checkpoint 间崩溃恢复，恢复时长与 journal 量相关，60 秒检查点+journal 是恢复模型|checkpoint 每 10 秒|journal 可关闭（生产不可关）|checkpoint 期间停写|崩溃恢复机制|官方文档
+MG-036|MongoDB|聚合|管道|聚合|聚合管道（aggregation pipeline）$match→$group→$sort→$project 等阶段流水处理|$match 前置走索引（效率关键），$group 内存默认 100MB 限制（allowDiskUse），与 SQL GROUP BY 同构|聚合必须在应用层做|$match 顺序无关|$group 无内存限制|报表统计类查询实现|官方文档
+MG-037|MongoDB|聚合|性能|$lookup|$lookup（关联查询）是性能黑洞能冗余就冗余|跨集合关联相当于 SQL JOIN 但无索引优化时全扫，建模时冗余热点字段（如类目名进商品文档）避免 lookup|lookup 性能与 join 相同|lookup 自动建索引|冗余数据不需要同步|建模与查询的权衡|实战共识
+MG-038|MongoDB|聚合|限制|allowDiskUse|聚合 $sort/$group 超内存默认报错需 allowDiskUse=true 落盘|100MB 限制防止拖垮节点，落盘性能下降明显，优先优化管道（前置 match/拆分阶段）|allowDiskUse 默认开启|超内存自动降级不报错|落盘对性能无影响|聚合错误排查|官方文档
+MG-039|MongoDB|聚合|$facet|$facet|$facet 单次管道内分多路输出（同请求多聚合）|一次请求返回多个维度结果（列表+总数+分面统计），内存注意（每路独立），搜索页聚合场景|$facet 自动并行|$facet 是事务的一部分|$facet 结果自动排序|搜索页优化技巧|官方文档
+MG-040|MongoDB|大文档|GridFS|GridFS|超 16MB 大文件用 GridFS 或对象存储存 URL|GridFS 分块存集合（chunks 255KB/块），代价是查询与管理复杂，现代方案倾向对象存储（OSS/S3）+文档存 URL|GridFS 是唯一方案|GridFS 自动压缩|16MB 限制包含索引|大文件架构选型|官方文档
+MG-041|MongoDB|选型|场景|适配|MongoDB 四类适配：schema 多变、嵌套整体读、海量写入水平扩展、快速迭代|商品异构属性、内容详情、行为日志是典型场景，强事务多表关联资金账务仍留 MySQL|MongoDB 全面替代 MySQL|MongoDB 不支持事务所以不适合任何场景|选型只看数据量|NoSQL 选型判断题|实战共识
+MG-042|MongoDB|架构|混合|混合架构|主流混合架构：核心账务 MySQL+商品/内容/行为 MongoDB+搜索 ES，以 binlog/CDC 同步|按数据特征分工而非全替换，同步层（CDC）是最脆弱最值得投入的环节，对账兜底|混合架构是过渡态最终会统一|MongoDB 与 MySQL 必须二选一|同步层是可选组件|大厂落地架构|实战方法论
+MG-043|MongoDB|同步|CDC|幂等|CDC 同步 MongoDB 侧要点：幂等写（upsert by _id）+乱序容忍（按版本号丢旧写）|消息重复与乱序是常态，upsert 保证幂等，updated_at 比较丢弃旧版本，Flink CDC 是推荐实现|CDC 同步保证有序可靠不需要幂等|upsert 会插入重复文档|乱序自动丢弃|同步层正确性设计|实战共识
+MG-044|MongoDB|迁移|四步|双写|MySQL 迁 MongoDB 四步法：建模转换→存量迁移→增量双写（CDC+对账）→切读切写|建模错误返工成本极高（文档结构改动=全量重写），建模评审前置做两次，与 MySQL 分库分表迁移四步法同构|直接导出导入即可|双写以 MongoDB 为准|迁移不需要验证|数据迁移方法论|实战方法论
+MG-045|MongoDB|建模|评审|评审|建模评审清单：读写模式、增长规模、16MB 边界、索引需求、事务需求|关系模型思维残留（全引用）与过度嵌入（无限膨胀）是两大反模式，评审在迁移前完成|建模可以后期随意调整|schema-free 不需要评审|评审只看字段类型|建模质量门|实战方法论
+MG-046|MongoDB|Java|集成|MongoTemplate|Spring Data MongoDB：MongoRepository 简单 CRUD，复杂聚合用 MongoTemplate|Repository 方法名解析有限（聚合/动态投影不够用），MongoTemplate 显式可控，团队规范通常两者并存|MongoRepository 能做所有事|MongoTemplate 是过时 API|两者必须二选一|Java 集成规范|Spring Data 文档
+MG-047|MongoDB|Java|连接池|pool|MongoDB Java 驱动连接池：maxConnectionPoolSize 默认 100 与服务实例数联动|连接池与驱动内部线程模型（每个连接独立），高并发突发看 pool 指标（连接等待时间），与服务副本数×线程数估算|maxConnectionPoolSize 无默认值|连接池越大越好|连接池与性能无关|驱动调优|官方文档
+MG-048|MongoDB|Java|事务|@Transactional|副本集下 Spring @Transactional 即可用（驱动自动 session 管理）|分片事务 4.2+，事务内读用 session 关联的 read concern，测试环境单机版不支持事务（需副本集模式）|单机 MongoDB 支持事务|事务需要手动创建 session|@Transactional 不支持 MongoDB|Spring 集成事务|Spring Data 文档
+MG-049|MongoDB|索引|底层|B 树|MongoDB 索引底层 B 树（与 MySQL B+ 树不同：非叶节点也存数据指针）|WiredTiger B 树叶子与非叶都含键，范围扫描仍高效，与 MySQL B+ 树差异是常见考点|MongoDB 用 B+ 树|索引结构与 MySQL 完全相同|B 树不支持范围查询|存储结构对比题|官方文档
+MG-050|MongoDB|索引|代价|写放大|索引越多写放大越大：每次写更新所有相关索引|与 MySQL 相同的权衡，集合索引数量控制（高频查询建索引，长尾查询接受扫描）|索引越多查询越快无代价|写放大只影响磁盘|索引可以事后无限加|索引治理原则|实战共识
+MG-051|MongoDB|写入|批量|bulkWrite|批量写入 bulkWrite（ordered/unordered）与 insertMany|unordered 并行执行更快（失败集合适用），ordered 顺序执行遇错停止，大批量导入必用|bulkWrite 自动并行|ordered 更快|批量写入无事务性|数据导入性能|官方文档
+MG-052|MongoDB|集合|Capped|Capped|Capped collection 固定大小循环覆盖（日志/最新消息场景）|写入顺序保留自动淘汰旧文档，无索引开销（除 _id），oplog 就是 capped 的实现，size 满后新写覆盖旧数据|Capped 自动扩容|Capped 支持任意更新|Capped 是 4.2 新特性|固定容量日志场景|官方文档
+MG-053|MongoDB|变更|Change Stream|Change Stream|Change Stream（3.6+）订阅数据变更事件（基于 oplog）|应用级 CDC：微服务间同步、实时索引（ES）、审计，比轮询高效比直接读 oplog 安全（官方 API）|Change Stream 是轮询实现|Change Stream 丢事件（断点 resumeToken 续传）|需要 trigger 组件才能用|实时同步方案|官方文档
+MG-054|MongoDB|副本集|配置|优先级|副本集成员配置：priority（选举权重）、hidden（不可读）、delayed（延迟从库）|priority 0 节点不主动竞选，hidden 从库专供备份/分析，delayed 从库（延迟 N 秒）防误操作恢复，官方文档核对|所有从库地位相同|hidden 是隐藏的从库不存数据|delayed 从库实时同步|副本集高级配置|官方文档核对
+MG-055|MongoDB|副本集|读偏好|read preference|读偏好：primary（默认）/primaryPreferred/secondary/secondaryPreferred/nearest|secondary 分摊读压力但读旧数据（复制延迟），nearest 就近读（跨机房），与 write concern 组合构成一致性与延迟矩阵|读偏好影响写入|secondary 读保证最新|nearest 是最快一定优先|读写分离策略|官方文档
+MG-056|MongoDB|副本集|一致性|causal|因果一致性会话（causal consistency，3.6+）保证读己之写|会话内操作按因果序（写后读自己写的内容），跨副本集切换读节点不丢写，配合 majority 读关注是分布式会话方案|因果一致性是默认行为|它解决了所有一致性问题|与 read concern 无关|会话级一致性方案|官方文档
+MG-057|MongoDB|驱动|重试|retryable writes|可重试写（retryable writes，3.6+ 默认开启）网络闪断自动重试|驱动记录写操作（含 _id）重试一次，防网络抖动报错，但重试+失败组合仍需业务幂等（重试可能部分成功后报错）|retryable writes 保证写一定成功|重试无限次|默认关闭|驱动层容错机制|官方文档
+MG-058|MongoDB|索引|分片|unique|分片集合的唯一索引必须以分片键为前缀|跨分片全局唯一性由分片键保证路由唯一，其他唯一键无法全局强制（各分片独立校验），唯一性设计在分片前考虑|分片集合任意字段可唯一索引|唯一索引自动全局生效|_id 索引与分片无关|分片唯一性约束|官方文档
+MG-059|MongoDB|建模|拆分|16MB|16MB 边界应对：评论/日志独立集合、大字段拆 GridFS 或外置 URL|无限嵌入会撞 16MB 且文档变大拖慢读写，按增长模型拆分（1:多独立增长），设计期评估而非撞墙后迁移|16MB 是软限制不会真撞|拆分总是需要 JOIN 回来|大字段必须拆分|建模边界设计|实战共识
+MG-060|MongoDB|建模|演进|schema_version|文档加 schema_version 字段支持多版本共存灰度迁移|新结构新版本写入，旧版本懒迁移（读时转换+回写），避免停机全量改写，与接口版本演进同理|schema 改动需全量刷数据|schema_version 无必要|多版本共存不可能|大集合 schema 演进技巧|实战方法论
+MG-061|MongoDB|查询|投影|projection|projection 只取需要的字段减少网络与反序列化开销|配合覆盖索引免 FETCH，大文档（嵌套深）查询必须投影，与 SQL select 列同理|projection 影响索引选择不大（影响覆盖判定）|projection 会加载全文档再过滤|默认返回全部字段是合理默认|查询性能基础优化|官方文档
+MG-062|MongoDB|运维|profiler|profiler|profiler（慢查询记录）slowms 默认 100ms 写入 system.profile|三级级别（0 关/1 慢/2 全量，2 代价大临时用），与 explain 组合定位慢查询，生产常开级别 1|profiler 默认全量记录|profiler 不影响性能（级别 2 有明显开销）|slowms 是秒为单位|慢查询监控|官方文档
+MG-063|MongoDB|运维|监控|指标|MongoDB 监控核心：opcounters（读写 QPS）、复制延迟、连接数、cache 使用、队列|ops/replication/wiredTiger cache 分节，队列（currentQueue）持续非零=瓶颈信号，Prometheus exporter 标准化|监控只需看 CPU|复制延迟无法监控|队列是错误统计|运维基线|实战共识
+MG-064|MongoDB|运维|备份|备份|备份方案：mongodump（逻辑慢）vs 文件快照（fsyncLock+快照快）|大集群用快照（云盘/存储层）+oplog 增量，mongodump 适合小库与单集合导出，恢复演练制度化|mongodump 是大集群首选|备份不影响写入（fsyncLock 会阻塞写）|备份不需要演练|备份体系|实战共识
+MG-065|MongoDB|运维|连接|风暴|连接风暴：短连接突发（mongos 连接建立开销）与池化防御|mongos 连接握手开销大（SCRAM 认证），应用侧池化+长连接，突发流量预热连接池，maxIncomingConnections 服务端上限|MongoDB 连接建立零开销|短连接更好|服务端连接数无限制|连接治理|实战共识
+MG-066|MongoDB|分片|选型|顺序|扩展路线：先副本集（读扩展/高可用）→垂直扩容到极限→才分片（写/容量水平扩展）|分片引入复杂度（分片键/广播/jumbo），过早分片是常见失误，官方路线也是先副本集|分片是第一步|分片能解决所有性能问题|副本集与分片互斥|容量规划路线|实战方法论
+MG-067|MongoDB|运维|balancer|窗口|balancer 迁移窗口配置（业务低峰迁移 chunk）|迁移消耗 IO 与网络（文档逐个搬），高峰迁移引发抖动，balanceWindow 限制时段，迁移速率限流|balancer 不影响业务|迁移是瞬时的|balancer 必须一直开着不能配窗口|分片运维细节|官方文档
+MG-068|MongoDB|运维|容量|估算|容量估算：文档数×平均大小×（1+索引开销）×副本数，压缩后（WT）×0.3-0.5|索引开销 20-50%（按索引数），WiredTiger 压缩 2-5 倍，预估分片时间点（单副本集容量上限），与 Redis 容量估算同方法论|容量=文档数×大小直接算|压缩不影响容量估算|索引不占空间|容量规划方法|实战方法论
+MG-069|MongoDB|Java|ODM|ODM 坑|ODM（Spring Data/Mongoose）掩盖文档模型本质，P10 应能脱离 ODM 直谈文档设计|ODM 的 @Document/@Field 映射隐藏 BSON 结构，复杂聚合仍要原生管道，建模评审用原生文档视角|ODM 是必需的|ODM 自动优化查询|脱离 ODM 无法开发|技术深度分水岭|实战共识
+MG-070|MongoDB|面试|主线|复习|MongoDB 复习主线：文档模型与建模→索引 ESR→副本集（oplog/选举/回滚/关注）→分片（键/reshard）→混合架构|P5-P6 考建模与索引，P7-P8 考副本集与分片机制，P9-P10 考混合架构与迁移，与 MySQL 知识同构可迁移|分片最重要|建模不重要|与 MySQL 无关|复习时间分配|复习方法论
+MG-071|MongoDB|副本集|reconfig|重配置|副本集在线 reconfig（rs.reconfig）增删成员与调整配置|多数派可用时才能 reconfig，新增节点先全量同步（initial sync），调整 priority/hidden/delayed 都走 reconfig|增删成员需停机|reconfig 会导致数据丢失|新节点增量同步|集群生命周期管理|官方文档
+MG-072|MongoDB|副本集|同步|initial sync|新成员 initial sync（全量同步）：选源→拷贝集合→建索引→追 oplog|拷贝期间源负载高（选低峰），索引重建耗时（集合大时小时级），完成后进入 oplog 增量追平|新成员自动增量同步|initial sync 很快|不建索引直接服务|扩容操作细节|官方文档
+MG-073|MongoDB|分片|预分|预分裂|大集合上线分片前预分裂（pre-split）与预建 zone|避免初始全写入单分片再迁移（搬全量数据），按分片键范围预分配 chunk 到各分片，新集合分片的标准动作|分片后自动均衡无需预分|预分裂影响查询|zone 是分片键哈希|分片上线最佳实践|实战方法论
+MG-074|MongoDB|写入|语义|insert 语义|insert 重复 _id 报错（E11000）、upsert 存在更新不存在插入、update 语义细分|upsert 是 CDC 幂等写基础（by _id），update one/many 区分（漏 many 是事故源），bulkWrite 组合原子批|upsert 会插入两条|update 默认更新所有文档（默认 one）|_id 重复自动覆盖|写入 API 语义|官方文档
+MG-075|MongoDB|查询|限制|限制|查询限制：单文档 16MB、$in 列表大时性能差、分片查询必带分片键|超大 $in 拆批（与 MySQL 相同套路），不带分片键广播（红线），聚合内存限制（allowDiskUse）|MongoDB 查询无限制|$in 越大越好|广播查询性能无损|应用层查询规范|实战共识
+MG-076|MongoDB|运维|故障|场景|故障场景预案：主库挂（自动选举）、从库延迟（摘读流量）、config 挂（分片元数据不可用）、mongos 挂（路由层扩容）|每层故障有不同影响面与恢复动作（选举秒级/重同步小时级），预案按层文档化|任何节点挂集群都不可用|config 挂不影响现有服务（元数据只读操作受影响）|mongos 是单点|高可用预案|实战方法论
+MG-077|MongoDB|运维|安全|基线|安全基线：SCRAM 认证（默认开启要求配置）、网络隔离、角色最小化（readWrite 按库）、审计|未授权访问同样是事故源（与 Redis 同教训），x.509/LDAP 企业级认证可选，生产禁 eval 等危险命令|MongoDB 默认无认证也能上线|认证影响性能必须关|权限只有 root|安全基线|实战共识
+MG-078|MongoDB|运维|版本|升级|版本升级路径：4.x→5.0（reshard/时序集合）→6.0→7.0（查询引擎优化）|升级评估 feature compatibility version（先降级兼容设置），从库先升再切主灰度，驱动与 ODM 同步升级|版本可直接跳级|升级无兼容风险|featureCompatibility 无用|版本治理|官方文档
+MG-079|MongoDB|查询|数组|$elemMatch|$elemMatch 要求数组元素的多个条件同时满足于同一元素|{scores:{$gte:80,$lte:90}} 是字段级条件（可匹配不同元素），$elemMatch 才是元素级组合条件，数组查询的经典语义陷阱|$gte 与 $lte 组合天然作用于同一元素|elemMatch 与普通条件等价|elemMatch 只能用于数字数组|成绩区间/标签组合查询|官方文档
+MG-080|MongoDB|建模|校验|$jsonSchema|$jsonSchema 集合校验器（validationLevel/validationAction 可配）约束文档结构|无 schema 不等于无约束：validator 在插入/更新时校验（可选 warn 只告警或 error 拒绝），渐进收紧用 validationLevel moderate|集合校验默认严格拒绝所有写入|jsonSchema 校验影响已存在文档|无 schema 就无法校验|团队规范落地的服务端保障|官方文档
+MG-081|MongoDB|建模|时序|时序集合|时序集合（time series，5.0+）专为指标/日志优化（自动分桶列式存储）|meta 字段（设备 ID 等）分组分桶，自动过期（expireAfterSeconds），压缩率与查询效率优于手工分集合，是 5.0 后时序场景首选|时序集合是普通集合加索引|5.0 之前有原生时序集合|时序集合不支持任何索引|监控指标/设备数据落地|官方文档
+MG-082|MongoDB|查询|视图|视图|视图（view）基于聚合管道定义只读虚拟集合|固化常用查询管道免重复书写，权限隔离（只授予视图不授予基础集合），代价是查询性能取决于管道本身|视图物化存储数据|视图可写|视图与聚合无关|报表查询与权限隔离|官方文档
+MG-083|MongoDB|调优|explain|executionStats|explain executionStats 三层：queryPlanner（计划）→executionStats（实际执行）→allPlansExecution（计划对比）|executionStats 给出 totalKeysExamined/totalDocsExamined/nReturned 三比值与执行时间，是判断索引效率的硬数据，普通 explain 只做预估|explain 默认执行查询|nReturned 等于 docsExamined 是正常（1:1 才理想）|explain 无性能开销|慢查询定位标准动作|官方文档
+MG-084|MongoDB|索引|$regex|$regex|正则查询前缀锚定（/^abc/）可走索引，中间匹配（/abc/）全扫|B 树按前缀有序，锚定前缀才能定位范围，大小写敏感选项（i）使前缀优化失效，与 MySQL like 前缀同构|/abc/ 也能走索引|i 选项不影响索引使用|正则查询总是全扫|名称/编码类查询优化|官方文档
+MG-085|MongoDB|驱动|重试|retryable reads|可重试读（retryReads，3.6+ 默认开启）网络抖动自动重试读操作|读操作天然幂等可安全重试，与 retryable writes 组成驱动层容错，网络闪断不再报错（代价是掩盖网络问题需监控）|retryReads 默认关闭|重试读可能读到脏数据|读重试需要业务幂等（读天然幂等无需）|驱动容错配置|官方文档
+MG-086|MongoDB|写入|语义|replaceOne|replaceOne 整文档替换（丢失未提供字段）与 updateOne $set 局部更新是两种语义|replaceOne 用于全量覆写（文档由调用方完整构造），updateOne+$set 局部修改并发安全更好，误用 replaceOne 是字段丢失事故源|replaceOne 与 updateOne 等价|replaceOne 保留未提供字段|updateOne 不能加 upsert（可加 upsert:true）|写入 API 选型与事故预防|实战共识
+MG-087|MongoDB|备份|一致性|--oplog|mongodump 加 --oplog 捕获备份期间变更，恢复时重放保证一致性快照|备份耗时段内新写入若不捕获，恢复后数据不一致（引用关系断裂），--oplog 让 dump 与恢复点一致，大库备份标配|mongodump 天然一致（备份耗时有写入就不一致）|--oplog 是可选可不加|恢复不需要重放 oplog|备份一致性方法论|实战共识
+MG-088|MongoDB|Java|连接|URI|连接 URI 携带 replicaSet 参数（副本集自动发现与故障切换的前提）|指定 replicaSet 后驱动自动发现全部成员并在主挂时切换，不指定则只连单个节点（主挂不切换），高可用配置第一参数|不指定 replicaSet 也能自动切换|URI 只能配地址|参数是可选装饰|Java 连接串审查项|官方文档

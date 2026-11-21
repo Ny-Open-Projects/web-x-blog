@@ -1,0 +1,113 @@
+# Redis 知识点事实矩阵（RD-xxx）
+# 格式: id|domain|topic|dim|term|fact|why|miscon1|miscon2|miscon3|usage|version
+
+RD-001|Redis|数据类型|基础|五种类型|Redis 五种基础类型：String、List、Hash、Set、ZSet|每种类型底层可切换多种编码（小数据省内存），面试先答类型再讲编码，顺带提 4 种扩展（bitmap/HyperLogLog/GEO/Stream）|Redis 只有 5 种类型没有扩展类型|类型就是编码一一对应|List 底层一直是双向链表|回答类型题的框架式开场|通用
+RD-002|Redis|String|编码|SDS|String 底层是 SDS（简单动态字符串）支持二进制安全与 O(1) 长度|SDS 记录长度字段与预分配空间，免 strlen 与缓冲区溢出，可存图片等二进制数据|SDS 就是以 \0 结尾的 C 字符串|SDS 不支持二进制|长度获取 O(n)|缓存序列化对象/计数器场景|SDS 实现
+RD-003|Redis|String|限制|512MB|单个 String 值上限 512MB|大值属于反模式（大 key），序列化大对象应拆分或外置，512MB 是协议层限制|String 无大小限制|上限是 1MB|超限自动分片|大 key 治理的边界知识|官方文档
+RD-004|Redis|List|编码|quicklist|List 底层是 quicklist（双向链表串起的紧凑节点），7.0 起节点从 ziplist 换成 listpack|兼顾链表的插入效率与紧凑结构的内存效率，7.0 用 listpack 消除 ziplist 的级联更新问题|List 是纯双向链表|quicklist 节点是跳表|7.0 没有变化|消息队列/最新列表场景|Redis 7.0
+RD-005|Redis|Hash|编码|listpack|Hash 小数据用 listpack（7.0 前是 ziplist）大数据转 hashtable|小 hash 紧凑存储省内存（无指针开销），超过阈值（64 字节/128 项默认）转标准 hashtable|Hash 一直是 hashtable|listpack 转 hashtable 后可逆|阈值不可配置|对象缓存的内存优化原理|Redis 7.0
+RD-006|Redis|ZSet|编码|skiplist|ZSet 底层是 skiplist（按分数有序）+ dict（member 到 score 的映射）双结构|跳表支持范围查询与有序遍历 O(logN)，dict 支持按 member 查 score O(1)，空间换双向高效|ZSet 只用跳表一种结构|ZSet 用红黑树|dict 与 skiplist 各存一份是浪费设计缺陷|排行榜/延迟队列场景|源码实现
+RD-007|Redis|ZSet|原理|跳表|跳表通过多层索引链表实现 O(logN) 查找层高随机生成（幂次定律）|每层节点概率性上浮形成多级索引，插入删除只改指针免旋转，比红黑树实现简单且范围查询友好|跳表层高固定|跳表查找 O(1)|跳表需要像红黑树一样旋转|高频追问"为什么用跳表不用红黑树"（范围查询+实现简单）|算法原理
+RD-008|Redis|Set|编码|intset|Set 全整数且数量少时用 intset（紧凑整数数组）编码|整数数组二分查找省内存，加入字符串元素自动转 hashtable，编码自动升级不可逆|intset 可存字符串|intset 有序但查找 O(n)|编码转换会丢数据|纯数字集合（用户 ID 集合）的内存优化|源码实现
+RD-009|Redis|扩展类型|布隆|布隆过滤器|布隆过滤器以低空间判断"元素一定不存在"（可能误判存在）|位数组+多哈希函数，用于缓存穿透前置过滤，官方 module（RedisBloom）或 Lua/位图模拟|布隆过滤器判断存在的一定存在|布隆过滤器支持删除（标准版不支持，Counting 版支持）|误判率可以降到 0|缓存穿透方案组件|RedisBloom
+RD-010|Redis|扩展类型|统计|HyperLogLog|HyperLogLog 以 12KB 固定内存估算亿级基数误差 0.81%|概率算法（伯努利+调和平均），PFADD/PFCOUNT/PFMERGE，官方文档核对零差异（0.81% 与 12KB）|HyperLogLog 精确计数|12KB 是每个元素的开销|误差 1% 以上|UV 统计标准方案|官方文档核对
+RD-011|Redis|扩展类型|Stream|Stream|Redis Stream（5.0）是带消费组的持久化消息流（类 Kafka）|XADD/XREADGROUP/XACK，支持消费组与 pending 列表，弥补 Pub/Sub 不持久不确认的缺陷，小规模消息场景可用|Stream 替代 Kafka 无限制（有内存与持久化代价）|Stream 消息不确认也会删除（在 pending 里保留）|Stream 是 4.0 特性|轻量消息队列选型|Redis 5.0
+RD-012|Redis|扩展类型|GEO|GEO|GEO 用 ZSet 编码（GeoHash 打进 score）实现地理位置搜索|GEOADD/GEOSEARCH（6.2 命令化），附近的人/门店搜索场景，底层是 52 位 GeoHash 编码|GEO 是独立存储引擎|GeoHash 是字符串前缀匹配|GEO 支持多边形查询|LBS 功能实现|Redis 6.2
+RD-013|Redis|线程模型|单线程|命令执行|Redis 命令执行是单线程的（6.0 起网络 IO 与协议解析可多线程）|单线程免锁免上下文切换，瓶颈在网络而非 CPU，6.0 多线程只处理读写 socket 不执行命令|Redis 6.0 全面多线程|多线程模式下命令并行执行|Redis 单线程指整个进程单线程（后台线程有多个：fsync/close 等）|回答单线程模型必须分 6.0 前后|Redis 6.0
+RD-014|Redis|线程模型|性能|为什么快|Redis 快的原因：内存操作+单线程无锁竞争+IO 多路复用+高效数据结构|四个因素缺一不可，面试按此框架展开（内存、无锁、epoll、编码优化）|Redis 快是因为多线程|快主要靠缓存不命中也无所谓|C 语言写的就是快（语言不是主因）|性能原理八股主线|通用
+RD-015|Redis|线程模型|IO|epoll|Redis 用 IO 多路复用（Linux epoll）单线程处理海量连接|事件驱动框架 ae，连接就绪才处理，避免每连接一线程，是单线程高并发的根基|Redis 用 BIO 每连接一线程|epoll 是 Redis 特有（是 OS 能力）|select/poll 与 epoll 无区别|网络模型原理题|通用
+RD-016|Redis|线程模型|6.0|IO 线程|Redis 6.0 多线程默认关闭需 io-threads 配置开启|开启后读请求解析与写回复并行化，命令执行仍单线程保证原子性，大流量实例收益明显|6.0 开启后吞吐降低|io-threads 默认开启|多线程后不需要持久化|大流量实例网络瓶颈优化|Redis 6.0
+RD-017|Redis|运维|bigkey|bigkey|bigkey（大 key）危害：阻塞主线程、网络拥塞、删除卡顿、倾斜|排查 redis-cli --bigkeys 与 MEMORY USAGE，治理拆分（hash 分桶）与异步删除（UNLINK）|bigkey 只是占内存无性能影响|大 key 删除自动安全|bigkey 只在 cluster 有影响|生产隐患排查项|实战共识
+RD-018|Redis|运维|hotkey|hotkey|hotkey（热 key）危害：单分片 QPS 极限被打满（单线程）|排查 redis-cli --hotkeys/监控，治理：本地缓存二级化、key 打散（加随机后缀）、读写分离|hotkey 通过加从库彻底解决|热 key 检测无需工具|热 key 是内存问题|秒杀/热点资讯场景|实战共识
+RD-019|Redis|运维|阻塞|KEYS|KEYS * 生产禁用：全库遍历阻塞主线程|O(N) 阻塞命令族（KEYS/HGETALL 大集合/SMEMBERS），替代方案 SCAN 渐进式遍历|KEYS * 在小库可以随便用|KEYS 是 O(1)|阻塞只发生在数据量大时（小也会瞬时占住主线程）|代码 review 静态扫描项|实战共识
+RD-020|Redis|运维|遍历|SCAN|SCAN 用游标渐进遍历不阻塞，但可能返回重复元素且不保证一致快照|游标记录遍历位置，rehash 期间反向二进制迭代器保证不漏（可能重），业务侧去重|SCAN 保证精确一致|SCAN 一定不会重复|SCAN 是并行多线程遍历|全库扫描的标准姿势|官方文档
+RD-021|Redis|过期|删除|惰性删除|过期 key 删除策略：惰性（访问时检查）+定期（每 100ms 抽样清理）|全量定时删除开销大，惰性漏删靠定期补偿，redis 的周期任务 hz 参数控制|过期 key 会立即自动删除|定期删除全量扫描|惰性删除会永久泄漏内存（定期补偿兜底）|过期机制原理题|官方文档
+RD-022|Redis|内存|淘汰|noeviction|内存淘汰 8 种策略默认 noeviction（写报错）|volatile 系列（有过期时间）与 allkeys 系列（全库）×lru/lfu/random + noeviction/ttl，缓存场景应设 allkeys-lru|默认会自动淘汰冷数据|淘汰策略默认 allkeys-lru|noeviction 表示删除所有数据|缓存实例必配淘汰策略|官方文档
+RD-023|Redis|内存|淘汰|近似 LRU|Redis 的 LRU 是近似实现（随机采样 maxmemory-samples）|精确 LRU 需要全局链表开销大，Redis 在每个对象记录 lru 时间戳采样淘汰，效果接近精确 LRU|Redis 用精确 LRU 链表|采样不会淘汰到真正的冷数据|近似 LRU 是 4.0 才有|淘汰机制深度题|官方文档
+RD-024|Redis|内存|淘汰|LFU|LFU（4.0+）按访问频率淘汰用 Morris 计数器+衰减|计数对数增长省 4bit 存储，lru-decay-time 定期衰减防历史热点永驻，适合访问频率差异大的场景|LFU 精确统计频次|LFU 不会淘汰新 key|LFU 是 Redis 原生就有（4.0 引入）|热点稳定型缓存选 lfu|Redis 4.0
+RD-025|Redis|内存|碎片|碎片率|mem_fragmentation_ratio>1.5 提示碎片过多 <1 说明用了 swap（严重）|碎片来自频繁增删与分配器行为，治理 activedefrag（4.0+ 主动碎片整理）或重启，<1 是物理内存不足换页的危险信号|碎片率越低越好可以小于 1|activedefrag 默认开启|碎片只影响内存不影响性能|内存监控告警标准|官方文档核对
+RD-026|Redis|事务|MULTI|不回滚|Redis 事务 MULTI/EXEC 队列化执行不支持回滚|命令入队时语法错误整个事务不执行，运行时错误（如对 string 执行 LPUSH）不回滚继续执行后续命令，官方认为回滚无必要（编程错误场景）|Redis 事务支持回滚|运行时错误会中止事务|事务有隔离无原子（有原子：命令串行执行不穿插）|与 Lua 对比题|官方文档
+RD-027|Redis|事务|Lua|原子性|Lua 脚本执行期间原子（单线程不被打断）|整段脚本作为一个命令执行，适合"检查+操作"复合逻辑（分布式锁释放、库存扣减），脚本过长阻塞主线程|Lua 脚本可以并行执行|Lua 脚本出错会自动回滚已执行部分|Lua 与事务等价无优势|复合操作原子化标准方案|官方文档
+RD-028|Redis|事务|对比|pipeline|pipeline 是批量发送减 RTT 不保证原子，事务/Lua 保证原子|pipeline 一次发 N 条命令收 N 个结果省网络往返，大量写入场景吞吐倍增，事务额外保证串行|pipeline 与事务等价|pipeline 原子执行|Lua 不能批量|批量操作选型三件套|实战共识
+RD-029|Redis|复制|全量|全量复制|主从首次同步走全量复制：主 bgsave RDB 发送+期间增量缓冲|从库清空旧数据载入 RDB，复制缓冲区补发期间写命令，大实例全量复制是分钟级风险窗口|全量复制不影响主库|RDB 传输不占带宽|从库保留旧数据混合|主从搭建与抖动知识|官方文档
+RD-030|Redis|复制|增量|repl_backlog|增量复制靠 repl_backlog 环形缓冲区（replication backlog）|从库断线重连时 offset 还在 backlog 内则增量补发，backlog 太小（默认 1MB）会被覆盖触发全量，调大 backlog 是主从抖动的第一优化|断线重连总是全量|backlog 默认足够大|backlog 在从库|主从网络抖动治理|官方文档
+RD-031|Redis|哨兵|机制|Sentinel|Sentinel（哨兵）提供监控+通知+自动故障转移，生产至少 3 节点且奇数|主观下线（单个哨兵判断）→客观下线（quorum 多数同意）→选举哨兵 leader（Raft 风格）→从库择优提升，2 节点无法形成多数派|哨兵 2 个节点就够|哨兵替代主从复制|客观下线由主库自己判断|高可用架构标准组件|官方文档
+RD-032|Redis|哨兵|脑裂|脑裂|哨兵脑裂：旧主仍在接受写、新主已选出，造成数据丢失|网络分区时旧主降级前持续写，恢复后被清空同步新主；防御 min-replicas-to-write=1+min-replicas-max-lag 限制孤主写入|哨兵架构不会脑裂|脑裂只丢读不丢写|min-replicas 参数默认已开启|分区场景数据丢失防御|实战共识
+RD-033|Redis|Cluster|槽位|16384|Cluster 按 16384 个 slot 分片 key（CRC16(key) mod 16384）|槽位是路由与迁移单位，节点负责槽区间，客户端重定向 MOVED/ASK，16384 是权衡（gossip 心跳包大小）|slot 数量可配置（写死 16384）|CRC16 是为了负载均衡唯一目的（主要是一致性与分布）|slot 与 key 一对一（一个 key 一个 slot 但 key 可 hash tag 多 key）|Cluster 基础八股|官方文档
+RD-034|Redis|Cluster|设计|为什么 16384|Cluster 用 16384 而非 65536 槽：gossip 心跳携带槽位图 16384×2bit=2KB 更省|心跳消息里槽位图按位压缩，65536 要 8KB，集群规模大时心跳开销显著，作者 antirez 的权衡结论|16384 是随机选择|槽数决定集群节点上限|65536 也可以性能更好|高频追问设计权衡|作者博客
+RD-035|Redis|Cluster|限制|hash tag|Cluster 下 mget/mset/事务/Lua 多 key 必须同 slot，hash tag {} 强制同槽|key 含 {} 内相同串则按串计算槽（user:{1001}:a 与 user:{1001}:b 同槽），跨槽命令报 CROSSSLOT 错误|Cluster 完全支持 mget（自动聚合，客户端可聚合但底层仍拆分）|hash tag 会影响数据均匀|Lua 在 Cluster 不可用（同槽 Lua 可用）|业务 key 设计规范|官方文档
+RD-036|Redis|Cluster|高可用|故障转移|Cluster 每个主节点带从节点，故障时从节点多数派选举自动升主|类 Raft 从库选举（新主为复制 offset 最靠前者），无需独立哨兵进程，半数以上主节点可用才能选举（cluster-require-full-coverage）|Cluster 需要另配哨兵|从库选举不需要多数派|一个从库故障导致集群不可用|Cluster 高可用模型|官方文档
+RD-037|Redis|持久化|AOF|everysec|AOF 刷盘三策略：always/everysec（默认）/no|everysec 每秒 fsync 最多丢 1 秒数据（平衡点），always 最安全最慢，no 交给 OS，官方文档核对（默认 everysec）|AOF 默认 always|everysec 不会丢数据|no 策略最安全|持久化参数标准|官方文档核对
+RD-038|Redis|持久化|AOF|重写|AOF 重写（bgrewriteaof）按当前数据状态生成最小指令集压缩文件|重写用 fork 子进程读当前数据写新 AOF，期间写命令进 aof_rewrite_buf 追加，文件膨胀与恢复变慢的解法|重写是合并旧命令|重写期间主线程全程阻塞|重写后丢失期间写命令|AOF 体积治理|官方文档
+RD-039|Redis|持久化|RDB|bgsave|RDB 快照 save（阻塞）/bgsave（fork 子进程）|fork 利用写时复制（COW）主线程继续服务，期间写操作复制页导致内存可能翻倍，大实例 fork 是秒级停顿源|bgsave 期间写入丢失|fork 是零成本操作|RDB 恢复比 AOF 慢|持久化停顿排查知识|官方文档
+RD-040|Redis|持久化|选型|RDB vs AOF|RDB 恢复快体积小（可能丢分钟级），AOF 丢数据少（最多 1 秒）体积大恢复慢|4.0 起混合持久化（aof-use-rdb-preamble）：重写时 RDB 头+增量 AOF 尾，兼得两者，是生产默认推荐|混合持久化是 RDB 独有|AOF 一定优于 RDB|混合持久化 2.0 就有|持久化选型标准答案|Redis 4.0
+RD-041|Redis|缓存|穿透|穿透|缓存穿透：查询不存在的数据每次打到库|方案：布隆过滤器前置拦截、缓存空值（短 TTL）、接口参数校验，恶意穿透要网关限流|缓存穿透可以靠加长 TTL 解决|穿透与雪崩是一回事|缓存空值是反模式|缓存三大问题之一|实战共识
+RD-042|Redis|缓存|击穿|击穿|缓存击穿：单个热 key 过期瞬间大量请求压库|方案：互斥锁重建（setnx 只让一个请求查库）、逻辑过期（不设 TTL 由后台刷新）、永不过期+主动更新|击穿与穿透同因同治|逻辑过期不存在数据不一致|互斥锁会造成死锁（要加 TTL）|热点数据缓存策略|实战共识
+RD-043|Redis|缓存|雪崩|雪崩|缓存雪崩：大量 key 同时过期或 Redis 宕机，流量全打到库|方案：TTL 加随机抖动、多级缓存（本地+Redis）、集群高可用、限流降级兜底|雪崩只发生在 Redis 宕机时|TTL 一致便于管理|雪崩无解只能听天由命|缓存三大问题之三|实战共识
+RD-044|Redis|缓存|一致性|Cache Aside|标准缓存模式 Cache Aside：读 miss 查库回填，写时先更新库再删除缓存|先删缓存后更库（并发读回填旧值概率高）与先更缓存（并发写乱序）都有问题，先库后删是最优实践（Martin Kleppmann 分析）|写时应该先更新缓存|先删缓存是标准做法|缓存与库总能强一致（分布式下只能最终一致）|缓存一致性八股主线|实战共识
+RD-045|Redis|缓存|一致性|双删|延迟双删：写前删一次、写库后延迟几百毫秒再删一次|补偿"读请求在写前读到旧缓存回填"的窗口，延迟时间难定是弱点，配合 binlog 订阅删除更可靠|延迟双删保证强一致|双删时间越长越好|双删是终极方案|缓存一致性增强手段|实战共识
+RD-046|Redis|缓存|一致性|binlog 订阅|强一致诉求的终极方案：Canal/Flink CDC 订阅 binlog 删除缓存+TTL 兜底|业务代码只写库，缓存失效由 CDC 异步驱动（解耦+防漏删），TTL 是最后防线，本项目总结的一致性框架|业务代码里写缓存删除最可靠|CDC 删除不需要 TTL|binlog 订阅是同步的|大型系统缓存一致性架构|实战方法论
+RD-047|Redis|分布式锁|基础|SET NX EX|分布式锁标准写法：SET key uniqueValue NX EX seconds 一条命令加锁|NX 保证互斥、EX 防死锁、value 存唯一标识（UUID）供安全释放，释放用 Lua 校验 value 后 DEL（防止删别人的锁）|SETNX 加锁后 EXPIRE 分两步|释放锁直接 DEL 即可|锁的 value 随便存|手写分布式锁的标准答案|实战共识
+RD-048|Redis|分布式锁|续期|watchdog|锁过期但业务未完成：Redisson watchdog 自动续期（默认 30 秒锁每 10 秒续）|业务时长不可预估时靠看门狗续命，Redisson unlock 后停止续期；手写版需要后台线程续期，忘记解锁的兜底是 EX|watchdog 是自动机制无需配置|watchdog 保证业务永不超时|续期由客户端线程直接续（Redisson 有专门定时任务）|Redisson 分布式锁机制|Redisson 文档
+RD-049|Redis|分布式锁|Redisson|可重入|Redisson 可重入锁用 hash 结构（field=线程标识 value=重入次数）|加锁 hash increment、解锁 decrement 到 0 删除，Lua 保证判断与操作原子，比 SETNX 版本功能完整（可重入/公平/读写锁）|Redisson 锁不可重入|可重入计数存在 string 里|Redisson 锁是纯 Java 内存锁|生产分布式锁首选 Redisson|Redisson 文档
+RD-050|Redis|分布式锁|争议|RedLock|RedLock（多节点多数派锁）有学术争议（Martin Kleppmann 质疑其安全性）|争议点：时钟跳变与 GC 停顿下锁的正确性，结论：Redis 锁适合"效率"（防重复执行）不适合"正确性"（强互斥），强互斥用 ZooKeeper/etcd 或 fencing token|RedLock 完全安全（有争议）|Redis 锁永远可靠|争议已经解决（未解决，仍是设计权衡）|锁选型的高级考点|学术争议
+RD-051|Redis|分布式锁|主从|锁丢失|主从架构下主库加锁未同步即宕机，从库升主后锁丢失|解决：RedLock 多实例独立加锁过半成功才持锁，或业务 fencing token（令牌单调递增校验），单实例锁+主从异步复制天然有此窗口|主从复制不影响锁|锁丢失概率为零|从库同步完成才返回（Redis 主库不等从库）|锁失效排查知识|实战共识
+RD-052|Redis|缓存|TTL|设计|TTL 设计：基础随机抖动防雪崩+按数据时效分层（热点 5 分钟/常规 30 分钟）|TTL 是缓存一致性与雪崩的最后防线，业务可容忍窗口决定 TTL 下限，随机抖动打散过期时间|TTL 越长越好（省回源）|TTL 一致便于统一管理|TTL 到期缓存自动强一致|缓存策略设计|实战方法论
+RD-053|Redis|队列|List|BRPOP|轻量队列：LPUSH+BRPOP（阻塞弹出）|简单异步任务场景可用，缺点：无 ACK（取出即丢）、无重试、无持久化保障，要求高的场景用 Stream 或专业 MQ|List 队列支持 ACK|BRPOP 不阻塞|List 队列可以替代 Kafka|消息队列选型降级方案|实战共识
+RD-054|Redis|队列|ZSet|延迟队列|ZSet 延迟队列：score 存执行时间戳，轮询 zrangebyscore 取到期任务|本项目实现并实测的方案，优点：有序+分数范围查询天然适配，缺点：轮询间隔与并发取任务竞争（Lua/分布式锁保证）|ZSet 延迟队列实时触发（是轮询）|ZSet 不适合延迟队列|score 存的是序号|订单超时等延迟任务实现|本项目实测
+RD-055|Redis|集合|运算|SINTER|Set 交集并集差集（SINTER/SUNION/SDIFF）支撑共同好友/推荐标签|10 万级以下集合运算可用，大集合运算阻塞主线程（O(N)），大集合运算改业务侧或 ES|Set 运算无性能风险|差集是交集的补集无独立用途|SDIFF 结果包含对方独有元素|社交关系功能实现|实战共识
+RD-056|Redis|Bitmap|统计|bitmap|bitmap 用 1 位表示一个状态：签到/活跃/布尔集合，1 亿用户活跃约 12MB|SETBIT/BITCOUNT/BITOP，位偏移即用户 ID，月度签到卡（31 bit）与连续签到计算（BITPOS）标准方案|bitmap 每个用户固定 1 字节|BITCOUNT 是 O(N) 无优化（有 popcount 优化）|bitmap 不能求交集|海量布尔统计方案|实战共识
+RD-057|Redis|分布式|限流|INCR|分布式限流：INCR+EXPIRE 固定窗口，或 ZSet 滑动窗口，或 Lua 令牌桶|固定窗口有临界双倍问题，滑动窗口（本项目实测过滑动窗口语义：窗口内时间戳计数）更平滑，集群限流 Redis 是天然中心|INCR+EXPIRE 分两步没有竞态（有）|滑动窗口 Redis 无法实现|限流粒度只能到全局（可按 user/key 维度）|接口防刷/配额控制|本项目实测
+RD-058|Redis|场景|秒杀|预扣|秒杀库存方案：Redis 预扣（Lua 原子判断+扣减）+MQ 异步下单+DB 最终扣减兜底|Redis 单线程扛住瞬时扣减流量，MQ 削峰进入下单流程，DB 用乐观锁兜底防超卖，本项目总结的三段式|秒杀直接打 DB 加锁即可|Redis 预扣后一定成单（MQ 失败需回补）|预扣与 DB 无一致性要求|大促库存架构|实战方法论
+RD-059|Redis|对比|Memcached|对比|Redis vs Memcached：数据结构丰富/持久化/高可用/Cluster vs 简单纯缓存|Memcached 多线程无持久化纯 KV，Redis 单线程功能全，新项目无特殊理由默认 Redis|Memcached 性能全面碾压 Redis|Memcached 支持持久化|两者数据类型相同|缓存选型对比题|实战共识
+RD-060|Redis|运维|监控|指标|Redis 监控核心指标：内存使用/命中率/慢查询/连接数/主从延迟/持久化状态|INFO 命令分节输出（memory/stats/replication），命中率低于 90% 查 key 设计，used_memory 与 used_memory_rss 差值即碎片|监控只需看内存|命中率不重要|INFO 输出是二进制不可读|运维基线|实战共识
+RD-061|Redis|运维|慢查询|slowlog|慢查询日志 slowlog-log-slower-than（默认 10ms）与 slowlog-max-len|记录的是命令执行时长（不含网络），只存最近 N 条内存队列，大集合命令与 KEYS 是常客|慢查询记录网络耗时|慢查询会持久化到磁盘|默认阈值 1 秒|性能排查入口|官方文档
+RD-062|Redis|客户端|Lettuce|线程安全|Java 客户端选型：Lettuce（Netty 线程安全单连接多路复用）vs Jedis（每连接不线程安全需池）|Boot 2.0 起默认 Lettuce，连接复用省资源，Jedis 简单直观高并发下连接池压力大，两者都支持 Cluster/Sentinel|Lettuce 需要连接池否则不安全（单连接多路复用是线程安全的）|Jedis 线程安全|两者 API 完全相同|客户端选型题|实战共识
+RD-063|Redis|客户端|序列化|序列化|Spring Data Redis 需显式配置序列化器（默认 JDK 序列化可读性差）|常用 StringRedisSerializer（key）+Jackson2JsonRedisSerializer/GenericJackson2JsonRedisSerializer（value），JDK 序列化的坑：类版本变更反序列化失败|默认序列化是 JSON|序列化器无需配置|GenericJackson2 带类型信息无副作用（@class 字段安全与体积问题）|Spring 集成配置标准|实战共识
+RD-064|Redis|运维|删除|UNLINK|大 key 删除用 UNLINK（4.0 lazy-free 异步回收）|UNLINK 从键空间摘除后由后台线程释放内存，DEL 同步释放大对象阻塞主线程，lazyfree-lazy-expire 让过期也异步|UNLINK 与 DEL 等价无区别|异步删除可能丢数据|lazy-free 默认全开|大 key 治理配套命令|Redis 4.0
+RD-065|Redis|内存|管理|内存上限|maxmemory 设置与 used_memory_rss 的差值监控防 OOM|容器部署 Redis 必须设 maxmemory 且低于容器 limit（留 fork COW 与复制缓冲余量），超限触发淘汰或拒绝写|maxmemory 默认合理|fork 不需要内存余量|超限自动清理无感|容器化部署规范|实战共识
+RD-066|Redis|运维|预热|预热|缓存预热：大促前主动加载热点数据（脚本/服务启动时），避免冷启动穿透|冷启动+突发流量=穿透雪崩，预热数据来源：历史热点统计+运营配置，预热脚本幂等可重跑|预热是可选优化无风险|预热会覆盖线上缓存（幂等设计无碍）|预热只需预热一次|大促备战 checklist|实战方法论
+RD-067|Redis|设计|key|规范|key 设计规范：业务前缀:模块:id 分层+避免超长+禁止特殊字符|可读可管理（SCAN 按前缀统计/批量清理），超长 key 浪费内存且网络放大，统一命名便于治理|key 命名随意不影响功能|key 越短越好不管可读性|key 可以包含换行等任意字符|工程规范第一条|实战共识
+RD-068|Redis|运维|倾斜|数据倾斜|Cluster 数据/流量倾斜：bigkey 落单节点、hash tag 聚集、热点 key|排查 cluster node 各节点内存与 QPS 对比，治理：拆 key、打散 hash tag、本地缓存|倾斜自动均衡（Cluster 不自动迁移流量）|倾斜只影响内存|从库可分摊写流量|Cluster 运维知识|实战共识
+RD-069|Redis|运维|备份|备份|RDB 文件即备份产物（定期异地保存），AOF 用于更细恢复点|备份策略：每日 bgsave 产物上传对象存储+跨机房副本，恢复演练定期做，Redis 数据多为缓存可容忍重建（持久化数据另议）|Redis 不需要备份（缓存数据也要重建成本评估）|AOF 文件可以直接 scp 当备份|恢复不需要演练|备份体系|实战方法论
+RD-070|Redis|Cluster|伸缩|迁移|Cluster 扩缩容：迁移 slot（redis-cli --cluster reshard）在线进行|slot 迁移期间 ASK 重定向保证可用，大数据量 slot 迁移有延迟抖动，扩容规划提前做|扩容必须停机|迁移期间写入丢失|slot 迁移是瞬时的|集群生命周期管理|官方文档
+RD-071|Redis|复制|级联|级联复制|从库可以再挂从库（级联复制）分摊主库同步压力|一主多从主库 fork 与网络开销大，级联树形复制分摊，代价是末端延迟叠加|从库不能再挂从库|级联复制降低一致性|级联是 Cluster 特性|大规模主从架构|官方文档
+RD-072|Redis|复制|读写分离|readonly|从库默认拒绝写（replica-read-only yes），读流量由客户端路由|从库复制是异步的有延迟，读旧数据风险业务评估，强一致读必须走主库（主库读也要评估）|从库可以写|从库读永远最新|读写分离保证强一致|架构实施要点|官方文档
+RD-073|Redis|Cluster|通信|gossip|Cluster 节点间 gossip 协议交换状态（PING/PONG/MEET）|去中心化元数据传播（100ms 级收敛），节点数增加心跳开销增长，这就是 16384 槽位图的由来背景|Cluster 有中心节点管理元数据|gossip 实时一致|通信协议是主从复制协议|集群原理深入|官方文档
+RD-074|Redis|数据结构|选型|为什么不用 B+树|Redis 不用 B+ 树：内存场景 hash/skiplist/listpack 更快且快照友好|B+ 树为磁盘优化（减少 IO 深页缓存），内存访问 hash O(1) 已够，持久化用整体快照而非 B+ 树原地更新|内存里 B+ 树最快|Redis 用了 B+ 树做索引|不用 B+ 树是因为实现复杂|存储引擎选型思维题|架构思维
+RD-075|Redis|ZSet|复杂度|复杂度|ZSet 复杂度：ZADD O(logN)、ZRANGE O(logN+M)、ZRANK O(logN)|skiplist 多层索引保证对数复杂度，range 带 M 个结果线性返回，大 ZSet（百万级）操作仍毫秒级|ZRANGE 是 O(1)|排行榜数据量大时 ZSet 不够用|ZRANK 需要全表扫描|数据结构复杂度题|官方文档
+RD-076|Redis|运维|故障|OOM|Redis 写入报 OOM command not allowed：内存到 maxmemory 且策略是 noeviction|先看淘汰策略是否误配 noeviction，再查大 key/碎片/持久化缓冲，扩容（加内存/分片）与治理并行|报错说明 Redis 坏了|删数据是唯一解|该错误只影响读|线上故障应急|实战共识
+RD-077|Redis|运维|故障|主从延迟|Redis 主从延迟排查：从库 master_repl_offset 与主库差值、网络、从库负载|延迟大的从库应摘除读流量，replica-lag-flush... 告警阈值按业务容忍设，延迟期间读写分离读到旧数据|Redis 主从同步是同步的（异步）|从库延迟不影响读正确性业务无感|延迟只发生在全量复制时|读写分离风险|实战共识
+RD-078|Redis|运维|升级|版本升级|Redis 升级路径：4.0（lazy-free/LFU）→5.0（Stream）→6.0（多线程/ACL）→7.0（listpack/Functions）|升级前评估命令兼容与持久化格式（7.0 可读 6.0 RDB 反之不行），灰度从库先升级再切换|版本可以任意混搭|升级无需兼容性评估|RDB 格式完全向后兼容（老版本读不了新格式）|版本治理|实战方法论
+RD-079|Redis|安全|ACL|ACL|Redis 6.0 ACL 用户级权限（按命令/key 前缀授权）|替代旧版 requirepass 全局密码，多应用共享实例可分权，生产还需 bind 内网+rename 危险命令（FLUSHALL）|ACL 是 7.0 特性|Redis 默认无密码安全|rename 命令是安全最佳实践（配合 ACL 更好）|安全基线|Redis 6.0
+RD-080|Redis|安全|暴露|未授权|Redis 未授权访问是经典安全事故源（bind 0.0.0.0+无密码）|攻击面：写 crontab/SSH key 控制机器，防御：内网 bind+ACL+禁用危险命令+网络隔离，安全扫描必查项|内网部署就安全|密码复杂度是唯一防线|攻击只影响 Redis 数据|安全审计知识点|实战共识
+RD-081|Redis|客户端|连接池|连接池|客户端连接池参数：maxTotal/maxIdle/minIdle/maxWait，池满阻塞与获取超时监控|连接数估算：maxTotal ≈ 单机 QPS×平均耗时（秒），池太小排队池太大压 Redis，Jedis 依赖池 Lettuce 默认单连接|连接池越大越好|池参数无需监控|maxIdle 与 maxTotal 相同是最佳实践|客户端调优|实战共识
+RD-082|Redis|场景|排行榜|实现|排行榜实现：ZSet ZINCRBY 累分+ZREVRANGE 取榜+ZRANK 查排名|分数相同按 member 字典序（可拼时间戳保证先到先得），分页 ZREVRANGE start stop，百万级成员性能仍可用|ZSet 排行榜会超内存上限无法用|并列名次自动处理（需业务补齐）|ZRANK 是 O(1)|榜单类功能标准方案|实战共识
+RD-083|Redis|场景|分布式 Session|session|分布式会话：Spring Session Data Redis 集中存 session|水平扩容免粘性路由，session 过期靠 Redis TTL，敏感信息加密，与 JWT 方案对比（可撤销性）|分布式 session 需要粘性路由|Spring Session 自动序列化安全无配置|session 在本地+Redis 双写|会话方案选型|实战共识
+RD-084|Redis|场景|计数|INCR|计数器场景：INCR 原子自增（文章阅读量/库存预占/接口调用统计）|INCR 原子且 O(1)，计数语义与过期组合（INCR+EXPIRE 限流），需要持久化的计数定期落库|INCR 有并发问题|计数必须每次写库|INCR 返回值是 void|高频原子操作|实战共识
+RD-085|Redis|运维|持久化|停写|持久化异常处理：AOF 重写失败/磁盘满时 Redis 可能停止写入|磁盘监控+持久化状态告警（rdb_last_bgsave_status），appendfsync 出错策略 appendfsync-on-rewrite 折中，磁盘是 Redis 的隐形依赖|磁盘满不影响 Redis|持久化失败自动恢复|持久化状态不需要监控|故障预防知识|实战共识
+RD-086|Redis|运维|容量|估算|容量估算：内存=Σ(key 长度+value 编码开销+元数据)×副本数+ fragmentation 余量|粗估公式：业务对象序列化后×1.5（元数据与碎片），设计阶段估算防线上缩容，jemalloc 分配器放大系数需考虑|容量=数据量直接相加|Redis 内存开销很小可忽略|副本不占内存|容量规划方法|实战方法论
+RD-087|Redis|运维|压测|基准|压测基准：redis-benchmark（QPS 单机 10 万级），瓶颈在网络与单线程命令复杂度|官方工具测基线，生产实例看实际 QPS 与 CPU（单线程模型下 CPU 100%=单分片极限），扩容靠分片不是加配置|Redis 单机百万 QPS|压测不需要做|CPU 高就加从库|容量与极限知识|实战方法论
+RD-088|Redis|运维|降级|降级|Redis 故障降级预案：本地缓存兜底+限流回源+关键功能熔断，预案需演练|Redis 全挂时业务策略：读走本地缓存（脏数据可容忍）/直接查库（评估库承受力）/功能降级（关非核心），预案文档化+季度演练|Redis 挂了业务必然不可用|降级自动完成无需预案|回源查库永远安全（库可能被打挂）|高可用预案|实战方法论
+RD-089|Redis|运维|多实例|隔离|多业务共享 Redis 集群的隔离：按业务分实例/分 slot 段+配额限制|共享实例互相影响（某业务 bigkey/热 key 拖垮全实例），大业务独立实例，中小业务共享但监控分业务 QPS（ACL+监控打标）|共享集群自动隔离|隔离只靠 key 前缀（不足以限资源）|多实例成本高必须共享|平台化治理|实战方法论
+RD-090|Redis|运维|治理|清单|Redis 上线检查单：maxmemory+淘汰策略、持久化配置、ACL、慢日志阈值、监控接入、备份任务、key 规范|每项默认值不适合生产需显式配置，变更走评审，本项目总结的上线基线|默认配置生产可用|检查单一次配置终身有效|治理与开发无关|运维标准化|实战方法论
+RD-091|Redis|数据类型|String|编码|String 编码自动选择：int（纯整数）→embstr（≤44 字节一次性分配）→raw|embstr 将 SDS 与 redisObject 一次分配（缓存友好）但不可修改（修改转 raw），44 字节是分配器 jemalloc 单元决定|String 编码手动指定|embstr 可原地修改|44 是随机值|编码细节深入题|源码实现
+RD-092|Redis|运维|性能|耗时分布|性能分析三板斧：慢日志（命令级）、LATENCY（事件级）、MONITOR（命令流，慎用）|慢日志看单条命令耗时，LATENCY 看停顿事件（fork/过期风暴），MONITOR 生产禁用（全量命令流放大流量）|MONITOR 可以随便开|慢日志含网络时间|LATENCY 是客户端概念|性能诊断工具链|实战共识
+RD-093|Redis|运维|故障|热修复|线上热修复手段：CONFIG SET 动态调参、CLIENT KILL 踢连接、DEBUG SLEEP 禁用|CONFIG SET 改淘汰策略/超时不用重启，变更后 CONFIG REWRITE 落盘，危险命令 ACL 治理|CONFIG SET 需重启生效|热修不需要记录|所有命令都可热改|应急工具箱|实战共识
+RD-094|Redis|架构|选型|主从 vs Cluster|架构选型：单机+哨兵（数据量小）/Cluster（分片需求）/多级（本地+Redis）|数据量 <25GB 且无分片需求用主从+哨兵（简单可靠），超限或需要水平扩展才上 Cluster，避免过早分片|Cluster 永远优于主从|本地缓存与 Redis 二选一|选型只看内存容量|架构选型方法论|实战方法论
+RD-095|Redis|架构|多级|本地缓存|多级缓存架构：Caffeine（本地，微秒）+Redis（集中，毫秒）+DB|本地缓存扛热 key 与 Redis 故障（降级层），一致性问题靠短 TTL（秒级）+变更广播（Pub/Sub 失效本地），读路径优先本地|本地缓存与 Redis 一致性必须强一致|本地缓存越大越好（堆内内存与 GC 压力）|多级缓存是过度设计|高性能读架构|实战方法论
+RD-096|Redis|缓存|命中率|命中率|缓存命中率 = hits/(hits+misses)，低于 90% 优先查 key 设计与 TTL|低命中根因：TTL 过短、key 设计不当、数据冷热不均，命中率是缓存有效性的第一指标，分业务统计（按前缀）|命中率 60% 也够用|命中率越高越好应设 99%（业务收益递减）|命中率无法统计|缓存效果评估|实战方法论
+RD-097|Redis|场景|幂等|幂等|接口幂等辅助：Redis SET NX 请求 ID（token 机制）前置防重|防重提交：提交前领 token（SET NX），提交时校验删除（Lua 原子），与 DB 唯一键双层兜底，TTL 控制防重窗口|Redis 幂等是唯一防线|token 机制不需要原子校验|幂等窗口越长越好（按业务定）|防重提交方案|实战共识
+RD-098|Redis|运维|排查|模板|Redis 故障排查模板：现象（慢/错/挂）→INFO 与慢日志→定位（大 key/热 key/网络/持久化）→治理→复盘|每类故障有固定排查路径（大 key: --bigkeys，热 key: --hotkeys，延迟： LATENCY），形成 SOP 而非临场发挥|排查从重启开始|每次故障原因都不同无规律|排查不需要数据支撑|P10 故障处理框架|实战方法论
+RD-099|Redis|面试|主线|复习|Redis 复习主线：数据结构与编码→持久化→主从/哨兵/Cluster→缓存三大问题→分布式锁→场景设计|按面试频率排序，缓存一致性与分布式锁是 P7 分水岭，Cluster 细节是 P8+ 深度，场景设计（秒杀/排行榜/延迟队列）是 P9-P10 综合题|Cluster 最重要|数据结构可以跳过|场景题不重要|复习时间分配|复习方法论
+RD-100|Redis|运维|演练|故障演练|故障演练：主动杀 Redis 主库验证哨兵切换时长、业务降级有效性（混沌工程）|演练暴露预案缺陷（降级没生效/客户端重连风暴），ChaosBlade/脚本模拟，演练报告归档，季度常态化|演练影响业务不做|切换演练只做一次|演练是 DBA 的事与业务无关|稳定性体系|实战方法论
+RD-101|Redis|生态|模块|Module|Redis Module 生态：RedisJSON/RediSearch/RedisBloom/RedisTimeSeries，Redis 8.0 起官方版内置集成|模块以扩展命令补足原生能力（JSON 文档/全文检索/布隆/时序），Redis 8 把官方模块并入开源版免单独部署，选型前先确认版本能力边界|模块需要商业授权（官方模块开源版 8.0 已内置）|Redis 7 也能用内置模块（需单独装）|模块影响持久化兼容性|Redis 能力边界评估|Redis 8.0
+RD-102|Redis|生态|RedisJSON|RedisJSON|RedisJSON 提供文档级 JSON 存取（JSON.SET/JSON.GET 路径语法）|支持 JSONPath 局部更新与原子操作，对比 String 存 JSON：免全量序列化（局部读写字段），与 MongoDB 文档思想对齐但更轻|RedisJSON 就是 String 存 JSON|局部更新需自己读改写|JSON.GET 无路径过滤|对象局部字段高频更新场景|Redis 8.0
+RD-103|Redis|生态|RediSearch|RediSearch|RediSearch 提供二级索引与全文检索（FT.CREATE/FT.SEARCH）|字段索引+分词+聚合，补足"按非 key 字段查 Redis 数据"的短板，轻量搜索场景替代 ES（重场景仍 ES），Redis 8 内置|RediSearch 自动为所有字段建索引|它是 KEYS 的替代|全文检索必须外置 ES|轻量搜索需求评估|Redis 8.0
+RD-104|Redis|运维|工具|RedisInsight|RedisInsight 是官方免费可视化管理工具（键浏览/慢查询分析/集群拓扑）|比 redis-cli 直观（大 key 分析/内存分布/CLI 自动补全），生产排查辅助，与 redis-cli 组合使用|RedisInsight 是收费工具|它可以直接修改生产数据|只能连本地|运维效率工具|实战共识
+RD-105|Redis|Cluster|可用性|full-coverage|cluster-require-full-coverage 默认 yes：任一槽无主节点则整个集群拒绝服务|保证数据完整性（缺失槽区间不可用），设 no 则缺失部分仍服务其余槽（可用性优先），按业务对"部分可用"的容忍度选择|该参数默认 no|设 no 后数据不丢（缺失槽写入被拒）|参数影响主从复制|Cluster 可用性权衡|官方文档
+RD-106|Redis|哨兵|扩展|通知脚本|哨兵故障事件可触发通知脚本（sentinel notification-script）与客户端重配脚本|事件（+sdown/-sdown/+switch-master）推送运维（邮件/webhook），重配脚本在切主后通知 LB/代理更新路由，是哨兵体系的运维扩展点|哨兵只改配置不通知任何人|通知脚本必须存在才能切换|脚本同步阻塞切换流程|哨兵运维集成|官方文档
+RD-107|Redis|复制|原理|Replication ID|主从复制以 Replication ID + offset 定位复制进度（PSYNC 基础）|每个主库有唯一 replication id，从库携带 id+offset 请求增量，id 匹配且 offset 在 backlog 内则部分重同步，id 变了（切主/重启）触发全量|复制进度只靠 offset|id 是随机的无语义|部分重同步与 id 无关|复制协议深入|官方文档
+RD-108|Redis|运维|内存|memory doctor|MEMORY DOCTOR 输出内存健康诊断结论（碎片/峰值/分配器问题）|与 MEMORY STATS/USAGE 组成内存诊断族：doctor 给结论性建议（碎片高/peer 分配问题），大 key 定位用 USAGE 逐 key 采样，免费自带工具链|MEMORY DOCTOR 自动修复内存|该命令无性能影响（大 key USAGE 采样有开销）|内存诊断只能靠外部工具|内存问题排查入口|官方文档
+RD-109|Redis|消息|选型|Pub/Sub vs Stream|Pub/Sub（不持久/无确认/在线才能收）vs Stream（持久/消费组/ACK/pending 重试）|Pub/Sub 适合"在线广播"（配置失效通知），Stream 适合"可靠消息"（任务投递），选错是丢消息事故源，与 MQ 能力对齐理解（RD-053/011 联动）|Pub/Sub 会补发离线消息|两者持久化相同|Stream 消息自动确认|消息能力选型线|官方文档
+RD-110|Redis|Lua|复制|脚本复制|Lua 脚本复制默认复制"脚本的执行效果"（7.0 起改为复制写命令效果，effect replication）|Redis 7 前复制脚本本身（从库需载入相同脚本），7.0 起 effects 复制（从库执行等效写命令，免脚本传播问题），涉及脚本复制的版本兼容知识|脚本复制的是脚本文本（7.0 前是）|从库执行脚本与主库结果可能不同（7.0 前的已知问题）|Lua 脚本不复制|脚本版本升级知识|Redis 7.0

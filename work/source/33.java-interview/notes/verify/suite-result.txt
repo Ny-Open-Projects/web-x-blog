@@ -1,0 +1,37 @@
+PASS  IntegerCache127  [valueOf(127) 同一对象]
+PASS  IntegerCache128  [valueOf(128) 新对象]
+PASS  LongCache127
+PASS  LongCache128
+PASS  StringHashCode31  ["abc"→96354]
+PASS  CompactStrings  [JDK9+ String.value 为 byte[]]
+PASS  InternReturnsSelf  [JDK7+ intern 保留堆引用]
+INFO  InternJavaGotcha  ["ja"+"va" intern != 自身（java 已预入池）=false]
+PASS  ArrayListGrowth  [首插10, 第11个→15(1.5x), 第16个→22]
+PASS  HashMapInitCap16AndDouble  [首插后表长16；第13个插入触发翻倍→32]
+PASS  HashMapTreeifyAt8Cap64  [9个同桶键后 bin 为 TreeNode]
+PASS  HashMapHashSpread  [hash = h ^ (h>>>16)]
+PASS  CHMNullRejected  [key/value null 均抛 NPE]
+PASS  CHMConcurrentPuts  [8线程×1000 → size=8000]
+PASS  HashMapFailFast  [迭代中 put → ConcurrentModificationException]
+PASS  ThreadLocalWeakRefCollected  [ThreadLocalMap 的 key 是弱引用：外部引用消失后 GC 即回收]
+PASS  LinkedHashMapLRU  [访问 a 后最老的是 b（将被淘汰）]
+PASS  VolatileVisibility  [volatile 写后 2s 内等待线程退出]
+INFO  NonVolatileLoopObserved  [如预期挂起（无 happens-before，写不可见）]
+PASS  ThreadPoolOrder  [poolSize=4 queue=2 第9个拒绝=true（先核心→队列→非核心→拒绝）]
+PASS  SubmitExceptionInFuture  [submit 的异常存进 Future，get 时以 ExecutionException 抛出]
+PASS  ExecuteUncaughtHandler  [execute 的异常进入 UncaughtExceptionHandler]
+PASS  AtomicLongCAS  [8×2500 并发 CAS → 20000]
+PASS  SemaphoreQuota  [2 许可：第3次失败，release 后成功]
+PASS  CountDownLatch
+PASS  CyclicBarrierReusable  [3方×2轮 全部通过栅栏（可重用）]
+PASS  ThreadStates  [holder=TIMED_WAITING seeker=BLOCKED]
+PASS  VirtualThread10k  [1 万虚拟线程全部执行完成]
+PASS  VirtualThreadFactory  [Thread.ofVirtual() 可用]
+PASS  GcLogUnifiedFormat  [JDK9+ 日志含 GC(序号) Pause Young（与第3/15册描述一致）]
+PASS  HeapOOMMessage  [堆 OOM 报 Java heap space]
+PASS  ContainerJvmFlags  [MaxRAMPercentage/ExitOnOutOfMemoryError 被识别；错误参数被拒（对照项）]
+PASS  StampedLockOptimisticRead  [乐观读 stamp 校验通过（无锁读）]
+PASS  ReentrantLockReentrant  [同线程重入 holdCount=2]
+
+======== SUMMARY ========
+PASS=32  FAIL=0  INFO=2

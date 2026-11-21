@@ -1,0 +1,60 @@
+---
+title: "[话术JV-110] 排查·ThreadMXBean（编程）· 7 问"
+date: 2026-11-18
+categories: [Java面试, JVM]
+tags: [Java面试, 话术卡, 33]
+type: 话术卡
+disableNunjucks: true
+---
+
+## 排查 · ThreadMXBean（编程）—— 7 类问法与标准话术
+
+**Qjvm-764（概念考察·P1-P3）**
+【面试官】请谈谈你对「排查」中「ThreadMXBean」的理解。
+【标准回答话术】ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计。背后的原理是：无需外部工具在应用内自检（健康检查集成死锁探测），getThreadCpuTime 区分忙与闲（比 wall time 准），是自研监控平台的编程接口。
+【评分点】① 准确说出核心机制（ThreadMXBean）；② 能带出原理层而非背结论。 ③ 版本锚点：JDK 文档
+
+---
+
+**Qjvm-765（误用纠错·P4-P7）**
+【面试官】我在别的团队见过这样的说法：「ThreadMXBean 只能读不能监控」。你觉得对吗？
+【标准回答话术】这个说法不正确。准确的表述是：ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计。原因是：无需外部工具在应用内自检（健康检查集成死锁探测），getThreadCpuTime 区分忙与闲（比 wall time 准），是自研监控平台的编程接口。
+【评分点】① 快速识别误区不顺着说；② 给出正确的版本锚定表述（JDK 文档）。
+
+---
+
+**Qjvm-766（原理深挖·P5-P7）**
+【面试官】「ThreadMXBean」为什么会这样设计？背后的机制是什么？
+【标准回答话术】机制层面：无需外部工具在应用内自检（健康检查集成死锁探测），getThreadCpuTime 区分忙与闲（比 wall time 准），是自研监控平台的编程接口。落到结论：ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计。
+【评分点】① 讲出编程层面的机制；② 结论与机制对应不脱节。
+
+---
+
+**Qjvm-767（工程落地·P7-P9）**
+【面试官】在你带过的项目里，「ThreadMXBean」你是怎么用的？踩过什么坑？
+【标准回答话术】使用要点：自研健康检查的 API 基础。事实依据：ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计常见误区要规避：ThreadMXBean 只能读不能监控。
+【评分点】① 给出可落地的要点而非概念；② 主动暴露一个真实踩坑并给出规避方案。
+
+---
+
+**Qjvm-768（结论依据·P8-P10）**
+【面试官】关于「ThreadMXBean」，你的结论依据什么出处？回答时怎么限定而不说绝对？
+【标准回答话术】来源锚点：JDK 文档。事实与结论：ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计。表述时带出处限定（如「以当前版本源码为准」）而非绝对化断言。
+【评分点】① 结论可溯源（说出依据类别）；② 表述带限定词不绝对化。
+
+---
+
+**Qjvm-769（边界追问·P6-P9）**
+【面试官】「ThreadMXBean」有没有不适用或需要特别小心的边界场景？
+【标准回答话术】边界提示：认为「ThreadMXBean 只能读不能监控」是常见误区。正确的边界：ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计。使用要点：自研健康检查的 API 基础。
+【评分点】① 能说出适用边界而非万金油式回答；② 主动给出规避方式。
+
+---
+
+**Qjvm-770（追问链·P5-P8）**
+【面试官】追问：如果有人按「findDeadlockedThreads 只查 monitor 死锁（也查 JUC 属主环）」来实施，会发生什么？
+【标准回答话术】该说法不成立，正确机制：ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计。原理：无需外部工具在应用内自检（健康检查集成死锁探测），getThreadCpuTime 区分忙与闲（比 wall time 准），是自研监控平台的编程接口。
+【评分点】① 能推演错误实施的具体后果；② 用机制解释而非背诵结论。
+
+
+---

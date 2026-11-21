@@ -1,0 +1,113 @@
+# JVM 知识点事实矩阵（JV-xxx）
+# 格式: id|domain|topic|dim|term|fact|why|miscon1|miscon2|miscon3|usage|version
+
+JV-001|JVM|运行时数据区|结构|程序计数器|程序计数器是线程私有的当前字节码执行行号指示器且是唯一不会 OOM 也没有 GC 的区域|线程切换后需恢复到正确执行位置，native 方法该值为 undefined|程序计数器也会 OOM|程序计数器记录 native 方法行号|它随方法调用而创建销毁不随线程|背区域划分题的标准起点|JVM 规范
+JV-002|JVM|运行时数据区|异常|StackOverflowError|线程栈默认 1MB 左右（-Xss 可调）递归过深抛 StackOverflowError|每方法调用压一帧，栈容量固定，无边界递归或深递归触发|StackOverflowError 是堆溢出的一种|栈抛的是 OutOfMemoryError|加大栈内存能解决无限递归|-Xss256k 可压测栈深，线上先查递归出口|HotSpot 默认
+JV-003|JVM|运行时数据区|结构|堆|堆是线程共享的对象实例分配区域 GC 主战场|几乎所有的对象实例与数组都在堆上分配，是 GC 与调优的核心对象|所有对象都必须在堆上分配|堆是线程私有的|栈上分配会替代堆分配成为主流|谈调优先定位堆|-Xmx -Xms
+JV-004|JVM|运行时数据区|版本|元空间|JDK8 起永久代被移除类元数据存入本地内存的元空间|永久代大小受 -XX:MaxPermSize 限制且易 OOM，元空间用本地内存上限受机器内存约束|JDK8 之后仍有永久代|元空间在堆内分配|字符串常量池在元空间里|类加载爆炸型 OOM 先查元空间|JEP 122
+JV-005|JVM|运行时数据区|位置|字符串常量池|字符串常量池在 JDK7 已从永久代移到堆中|intern 的字符串要与堆对象争用空间，留在永久代会加剧永久代 OOM，所以前移|字符串常量池在元空间|JDK7 之后字符串常量池也没动过位置|常量池的对象不参与 GC|解释 String.intern 行为差异必提此版本线|JDK7 变更
+JV-006|JVM|对象分配|TLAB|TLAB|TLAB 是 Eden 内按线程划分的私有分配缓冲区|分配只需移动指针（碰撞指针）无需同步，是快速分配路径，分配失败才退回 Eden 公共区 CAS|TLAB 让对象分配在栈上进行|TLAB 需要加锁分配|TLAB 在老年代内|-XX:+UseTLAB 默认开启|HotSpot 实现
+JV-007|JVM|对象分配|路径|Eden|绝大多数对象优先在 Eden 区分配|新生代采用复制算法设计，Eden 满触发 Minor GC 清理朝生夕死的对象|对象直接在老年代分配|Eden 区对象需加锁分配|大多数对象进入老年代|理解对象生命周期从 Eden 开始|分代假设
+JV-008|JVM|对象分配|大对象|Humongous|G1 中对象大于等于 Region 一半时直接进入 Humongous 区域|巨型对象在新生代反复复制代价极高，G1 连续 Region 存放并视为老年代一部分，是 G1 特有概念|大对象在任何收集器都进老年代|Humongous 对象会在 Minor GC 中被复制|Humongous 是普通老年代对象的一种|巨型缓存数组导致 G1 频繁 Mixed GC 时查 Humongous|G1 实现
+JV-009|JVM|分代|晋升|年龄|对象每熬过一次 Minor GC 年龄加一达到阈值晋升老年代|默认阈值 15（-XX:MaxTenuringThreshold），对象头 Mark Word 用 4 位存年龄，所以上限 15|晋升阈值可以是 32|对象直接在老年代创建是常态|年龄达到阈值后对象立即被回收|排查过早晋升与常驻缓存放新生代的反例|HotSpot
+JV-010|JVM|分代|晋升|动态年龄|动态年龄判定：同龄对象总大小超过 Survivor 一半时该年龄以上整体提前晋升|Survivor 空间有限，等 15 次Minor GC 可能撑不下去，JVM 按总和提前放行，这是"新对象很快进老年代"的常见原因|晋升只看固定阈值 15|动态年龄判定不存在|只有大对象会提前晋升|日志显示新生代涨快老年代暴涨时查动态晋升|HotSpot 实现
+JV-011|JVM|GC|触发|Minor GC|Minor GC 由 Eden 区空间不足触发与老年代无关|新生代 Eden 满即触发，回收整个新生代（Eden+两个 Survivor），采用复制算法把存活对象在 Survivor 间拷贝|Minor GC 由老年代满触发|Minor GC 只回收 Eden 不回收 Survivor|Minor GC 是 Full GC 的一种|频繁 Minor GC 查分配速率|分代收集
+JV-012|JVM|GC|触发|Full GC|Full GC 触发场景：老年代空间不足、元空间不足、System.gc、晋升失败等|Full GC 涉及整堆 stop-the-world（G1/ZGC 的 Full GC 也是 STW），是延迟毛刺的主要来源|Full GC 只回收老年代|G1 的 Full GC 是并发的|频繁 Full GC 是正常现象|Full GC 频率是 JVM 健康第一指标|JVM 实践
+JV-013|JVM|GC|判定|可达性分析|存活判定用 GC Roots 可达性分析而非引用计数|引用计数无法解决循环引用（A 引 B、B 引 A 都不再使用），Java 用的就是可达性分析|Java 用引用计数判活|循环引用的对象会被可达性分析回收掉|可达性分析必须全程 STW（实际是并发标记）|回答"Java 如何判定对象死亡"的标准答案|理论共识
+JV-014|JVM|GC|判定|GC Roots|GC Roots 包括虚拟机栈局部变量表、静态变量、常量引用、JNI 引用与活跃线程等|从这些根出发沿引用链遍历，不可达即死亡，理解泄漏必须能定位根|GC Roots 只有静态变量|栈上变量不是 GC Roots|本地变量表引用的对象会被误回收|内存泄漏排查先找根到泄漏对象的路径|JVM 规范
+JV-015|JVM|引用|四种|弱引用|四种引用强度：强、软、弱、虚|软引用内存不足才回收（缓存）、弱引用下次 GC 必回收（ThreadLocalMap 的 key）、虚引用用于跟踪回收（DirectByteBuffer 清理）|弱引用与软引用语义相同|虚引用会阻止对象被回收|强引用可以被 GC 打破|缓存用软引用/弱引用要慎重（可能拖垮 GC）|JDK 文档
+JV-016|JVM|回收|finalization|finalize|finalize 机制不可靠已被标记废弃，替代方案是 Cleaner 与 try-with-resources|finalize 执行时机不确定且可能复活对象拖垮 GC，JDK9 弃用、JDK18 deprecated for removal|finalize 保证会被调用|finalize 是推荐的资源清理方式|finalize 在对象回收前同步执行|资源清理一律显式关闭或 Cleaner|JEP 421
+JV-017|JVM|算法|复制|复制算法|新生代用复制算法老年代用标记-整理（或标记-清除）|新生代对象朝生夕死存活率低复制划算（浪费部分空间换速度），老年代存活率高适合标记后整理压缩|复制算法用于老年代效率更高|标记-清除算法不产生内存碎片|所有代都用复制算法|解释为什么分代（算法适配对象生命周期）|分代假设
+JV-018|JVM|算法|假设|弱分代假说|分代收集的理论基础是弱分代假说：绝大多数对象朝生夕死|实证数据支持，于是把对象按年龄分区分别用最合适的算法，不分代收集器（ZGC）不依赖该假设|所有收集器都必须分代|分代假设对所有应用都严格成立|老年代对象平均寿命更短|GC 理论题的根基|理论共识
+JV-019|JVM|分代|跨代|写屏障|跨代引用通过记忆集与写屏障维护避免老年代全表扫描|Minor GC 只扫新生代，但老年代可能引用新生代对象，写屏障在引用赋值时记录（卡表/RSet），空间换时间|Minor GC 会扫描整个老年代找引用|写屏障与内存屏障完全相同|记忆集在对象级别记录最省内存|理解 G1 RSet 与卡表的关系|HotSpot
+JV-020|JVM|收集器|版本|CMS|CMS 以最短停顿为目标采用标记-清除并已在 JDK9 被移除|并发标记与并发清除减少 STW，但标记-清除产生碎片且并发失败会退化 Serial Full GC，G1 全面接棒|CMS 是 JDK9 的默认收集器|CMS 用标记-整理无碎片|JDK21 还能使用 CMS|老项目升级先替换 CMS 配置|JEP 291
+JV-021|JVM|收集器|G1|Region|G1 把堆划分为多个等大 Region 逻辑分代停顿可预测|Region 大小 1-32MB（2 的幂自动选），Eden/Survivor/Old 是 Region 的角色标记而非物理连续区域，按停顿目标优先回收价值高的 Region（垃圾优先）|G1 的分代是物理连续的内存块|Region 大小固定 32MB|G1 只能整堆回收|回答"G1 为什么叫 Garbage First"的标准点|G1 论文
+JV-022|JVM|收集器|G1|RSet|G1 用 RSet（记忆集）记录其他 Region 指向本 Region 的引用|每个 Region 维护自己的 RSet，回收时无需扫描全堆找引用者，空间换停顿，RSet 维护成本是 G1 主要开销之一|RSet 记录的是本 Region 指向别人的引用|RSet 免费无维护成本|RSet 让 G1 回收需要全堆扫描|G1 吞吐低于 Parallel 的主要原因之一|G1 论文
+JV-023|JVM|收集器|G1|SATB|G1 用 SATB（原始快照）解决并发标记时对象消失问题|标记开始时拍逻辑快照，并发期被删引用的对象按快照保留（可能产生浮动垃圾），CMS 用增量更新只记录新引用|G1 与 CMS 用同一种并发标记方案|SATB 不会产生浮动垃圾|SATB 在标记结束后重新扫描全部根|对比 G1 与 CMS 的并发标记差异|理论共识
+JV-024|JVM|收集器|G1|Mixed GC|G1 的常规回收是 Mixed GC：新生代加上部分老年代 Region|按停顿预测模型选择回收收益最高的 Region 集合，不必然整堆回收，这是 G1 停顿可控的关键|G1 只做 Full GC|Mixed GC 必须回收全部老年代|Mixed GC 是并发的全程无停顿|调 G1 必懂 Mixed GC 与停顿目标的关系|G1 论文
+JV-025|JVM|收集器|G1|停顿目标|G1 默认最大停顿目标 200ms（-XX:MaxGCPauseMillis）|G1 以此选择 Region 回收集合，设得过小（如 20ms）会导致每轮回收极少、堆积满后退化 Full GC|停顿目标越小越好|默认停顿目标是 10ms|该参数对 Parallel 也生效|G1 调优第一参数，设 100-200 之间|G1 文档
+JV-026|JVM|收集器|G1|Full GC|G1 的 Full GC 在 JDK10 起为多线程并行（JEP 307）|JDK8 的 G1 Full GC 是单线程 Serial，退化时停顿巨大，JDK10 改并行大幅缩短，升级 JDK 版本对 G1 退化场景收益明显|G1 的 Full GC 一直是并行的|G1 Full GC 也是并发的无停顿|G1 永远不会退化到 Full GC|升级 JDK 修复 G1 退化停顿|JEP 307
+JV-027|JVM|收集器|ZGC|着色指针|ZGC 用着色指针与读屏障实现停顿亚毫秒级（<1ms）|把 GC 元信息存进指针位，访问对象时读屏障自愈引用，标记/转移/重定位几乎全程并发，与堆大小基本无关|ZGC 停顿随堆变大线性增长|ZGC 用 SATB+写屏障|ZGC 是吞吐优先收集器|大堆低延迟场景（网关、交易核心）|JEP 333
+JV-028|JVM|收集器|ZGC|版本线|ZGC 在 JDK11 实验性、JDK15 生产可用、JDK21 引入分代 ZGC|分代 ZGC 让 ZGC 也利用弱分代假说，吞吐显著提升，JDK21 起是默认推荐开启项|ZGC 从 JDK8 就可用|分代 ZGC 在 JDK15 引入|ZGC 至今仍是实验特性|JDK21+ 低延迟选 ZGC 用 generational 模式|JEP 439
+JV-029|JVM|收集器|默认|默认收集器|JDK8 默认 Parallel GC，JDK9 起默认 G1|JEP 248 改默认收集器为 G1，所以升级 JDK9+ 无需显式配置就有 G1|JDK9+ 默认仍是 Parallel|JDK8 默认就是 G1|默认收集器与平台无关|升级前确认默认 GC 变化防止回退|JEP 248
+JV-030|JVM|收集器|选型|吞吐|吞吐优先选 Parallel，延迟优先选 ZGC/G1|Parallel 吞吐最高但停顿秒级，G1 停顿可控 100ms 级，ZGC 亚毫秒但吞吐让步 5-15%，没有全能收集器|ZGC 在所有指标上全面优于 G1|G1 一定是默认最优选择|吞吐与延迟可以同时最优|按 SLO 选收集器（P99 延迟目标）|选型方法论
+JV-031|JVM|GC 日志|格式|GC(n)|JDK9+ 统一日志格式如 GC(12) Pause Young (Normal) 1024M->256M|JDK8 的 PrintGCDetails 格式完全不同，统一日志用 -Xlog:gc* 输出，看日志先认版本（本项目 JDK 21 实测格式一致）|JDK9 之后日志格式与 JDK8 相同|GC(n) 中的 n 是堆序号|-Xlog:gc* 在 JDK8 可用|现场排查先确认 JDK 版本再读日志|JEP 158 实测
+JV-032|JVM|GC 日志|工具|-Xlog:gc*|JDK9+ 开启 GC 日志用 -Xlog:gc* 替代 JDK8 的多个 PrintGC 参数|统一日志框架可输出到文件带时间戳/级别/标签旋转，旧参数 PrintGCDetails 在 JDK9+ 已被映射并废弃提示|PrintGCDetails 在 JDK21 依然推荐|GC 日志默认自动开启|日志只能输出到控制台|生产标配：-Xlog:gc*:file=gc.log:time,uptime|JEP 158
+JV-033|JVM|JIT|分层|C1|HotSpot 分层编译：C1 快速编译 C2 深度优化分 5 层|解释执行积累计数到阈值先 C1（带性能探针）再 C2 完全优化，兼顾启动速度与峰值性能，JVM 默认开启分层编译|C1 就是解释器|只有一层编译不存在分层|分层编译牺牲峰值性能换启动|谈 JIT 必说分层与探针|HotSpot 文档
+JV-034|JVM|JIT|热点|回边计数|热点检测靠方法调用计数器与回边计数器超阈值触发编译|方法调用次数、循环回跳次数累加，达到阈值（-XX:CompileThreshold 相关）触发 OSR（栈上替换）让长循环中途换编译版|热点检测只在方法结束时进行|OSR 是对象序列化替换|计数器精确记录全局调用次数|解释"跑一会儿变快"的原因|HotSpot
+JV-035|JVM|JIT|逃逸分析|逃逸分析|JIT 逃逸分析可做标量替换让对象分配彻底消失|对象不逃逸出方法/线程时拆成标量放在栈上或寄存器，本项目实测：仅局部引用的对象循环分配 GC 次数为零，逃逸写 static 字段后立即触发 GC|Java 对象总在堆上分配|逃逸分析把对象放到堆的更快区域|标量替换就是把对象搬到栈上字面复制|验证方法：分配循环+static 逃逸字段对比 GC 次数|HotSpot 实测
+JV-036|JVM|JIT|优化|内联|方法内联是 JIT 最重要的优化且是其他优化的前提|把被调方法体展开进调用方消除调用开销并扩大优化视野，热点小方法自动内联，方法过大不内联|内联由程序员显式指定|内联是 JVM 反射实现的|内联与性能无关|热点路径方法保持小而简单利于内联|HotSpot
+JV-037|JVM|JIT|逆优化|deoptimize|优化假设被打破时 JIT 逆优化回退解释执行|基于类层次分析的单态内联遇到新实现类、基于分支预测的消除遇到新分支时触发逆优化，性能毛刺来源之一|逆优化是程序出错的表现|逆优化后代码永久变慢|逆优化只发生在堆溢出时|延迟毛刺排查项之一|HotSpot
+JV-038|JVM|类加载|过程|初始化|类加载过程：加载、验证、准备、解析、初始化五个阶段|准备阶段给静态变量分配并赋零值，初始化阶段执行 clinit（静态赋值与静态块），解析可延迟（懒解析）|准备阶段就执行静态赋值语句|解析必然在初始化之前完成|验证阶段可跳过提升加载速度（其实 AppCDS 之类可做）|类加载八股的骨干框架|JVM 规范 5.x
+JV-039|JVM|类加载|初始化|主动引用|主动引用才触发类初始化：new、读写非编译期常量静态字段、反射调用、子类初始化触发父类等|访问 static final 编译期常量（入常量池）不触发初始化，通过数组定义引用类也不触发|访问任何 static 字段都触发初始化|读取 static final 常量也会触发初始化|父类初始化需要子类先完成|解释"常量不触发初始化"的经典案例|JLS 12.4.1
+JV-040|JVM|类加载|接口|default 方法|带 default 方法的接口会在实现类初始化时被初始化|JLS 12.4.1 规定（Java8 引入 default 后修订），纯抽象接口不被实现类初始化触发（本项目实测验证）|接口永远不被初始化|所有接口都随实现类初始化|接口初始化早于实现类|判断接口静态块执行时机的依据|JLS 12.4.1 实测
+JV-041|JVM|类加载|双亲委派|委派|类加载默认双亲委派：App 先委派 Platform 再委派 Bootstrap|保证核心类一致与安全（自定义 java.lang.String 不会替换核心类），父加载器找不到才自己加载|双亲委派是子加载器先自己加载|Bootstrap 加载用户类路径的类|双亲委派由反射实现|安全与一致性的经典机制|JVM 规范
+JV-042|JVM|类加载|双亲委派|打破|SPI、Tomcat webapp、OSGi 等场景打破双亲委派|SPI 核心接口由 Bootstrap 加载但实现类在 classpath，用线程上下文类加载器反向委派；Tomcat 每 webapp 独立加载器实现应用隔离|打破双亲委派是不安全行为被禁止|线程上下文类加载器与双亲委派无关|Tomcat 遵循严格双亲委派|回答"双亲委派可以被打破吗"必举例|实战共识
+JV-043|JVM|类加载|API|Class.forName|Class.forName 触发初始化而 ClassLoader.loadClass 不触发|forName(name) 默认 initialize=true 执行静态块，loadClass 只加载不初始化（延迟到首次使用），驱动注册等场景用 forName 的历史原因|两者完全等价|loadClass 也会执行静态块|forName 不执行静态块|面试高频对比题|JDK 文档
+JV-044|JVM|OOM|分类|Java heap space|常见 OOM：Java heap space、GC overhead limit、Metaspace、unable to create native thread、Direct buffer memory|不同区域 OOM 根因与解法不同：堆 OOM 查泄漏或堆小、元空间查动态类生成、native thread 查线程数与系统限制|OOM 都是堆空间不足|Metaspace OOM 不可能发生|所有 OOM 解法都是加大内存|OOM 分诊是排查第一步|实战共识
+JV-045|JVM|OOM|dump|HeapDumpOnOutOfMemoryError|生产标配 -XX:+HeapDumpOnOutOfMemoryError 事发自动 dump|OOM 瞬间的对象分布是破案关键，事后 dump 无法重现现场，配合 HeapDumpPath 指定位置与 OOM 后重启策略|dump 会自动上传到监控平台|该参数默认开启|OOM 后 dump 会导致进程挂起一段时间但不影响业务|必须上线前就配好不能事后补|实战共识
+JV-046|JVM|OOM|分析|MAT|MAT 用支配树与泄漏报告定位大内存对象|Leak Suspects 自动给嫌疑人，支配树看"谁抓住对象不放"，配合 GC Roots 路径定位泄漏源头|MAT 会自动修复内存泄漏|MAT 只能看字符串与数字|dump 文件大小等于堆大小的一半|dump 分析（MAT/JProfiler）是 OOM 定案工具|实战共识
+JV-047|JVM|参数|堆|-Xms|-Xms 与 -Xmx 设为相同值避免堆动态伸缩抖动|堆动态扩容触发 Full GC 或影响延迟稳定性，服务器固定负载场景等值是标配，容器环境用 MaxRAMPercentage 更优|堆越小性能越好|-Xms 必须小于 -Xmx|堆自动扩容没有成本|G1 等低延迟场景尤其要等值|实战共识
+JV-048|JVM|参数|容器|MaxRAMPercentage|容器内用 -XX:MaxRAMPercentage=70 之类按比例设堆而非绝对值|JDK8u191+/JDK10 默认感知 cgroup 限制（UseContainerSupport），按 Pod 内存比例留出堆外与元空间余量，写死 -Xmx 换节点规格就错|容器内 JVM 默认使用宿主机全部内存|MaxRAMPercentage 默认值是 100|JDK8 任何版本都能感知容器|K8s 部署 JVM 标配参数|JDK10 与 8u191 引入容器感知
+JV-049|JVM|参数|显式 GC|DisableExplicitGC|System.gc 只是建议，生产常用 -XX:+DisableExplicitGC 禁用|NIO 堆外内存依赖 System.gc 触发 DirectByteBuffer 回收时被禁用会堆外泄漏，正确做法是 -XX:+ExplicitGCInvokesConcurrent 而非禁用|System.gc 会立即执行 Full GC|禁用 System.gc 没有任何副作用|DirectByteBuffer 与 System.gc 无关|禁用显式 GC 必须评估堆外内存回收链路|实战教训
+JV-050|JVM|堆外|DirectMemory|DirectByteBuffer|NIO 的 DirectByteBuffer 数据在堆外受 -XX:MaxDirectMemorySize 限制|避免堆内到堆外拷贝提升 IO 性能，回收靠 Cleaner 虚引用加 System.gc 提示，泄漏表现为堆正常但 RSS 持续增长|DirectByteBuffer 数据存在堆内|堆外内存受 -Xmx 限制|堆外内存无泄漏风险|Netty 大量使用堆外，必须监控 RSS 与 PooledByteBufAllocator 指标|实战共识
+JV-051|JVM|排查|CPU|top+Hp|CPU 100% 排查流程：top 找进程、top -Hp 找线程、printf '%x' 转十六进制、jstack 按线程号定位|把 nid=0x十六进制 与线程栈对上，常见根因：死循环、正则回溯、GC 线程疯狂运转、JIT 编译|该流程只在 Windows 有效|jstack 里线程号是十进制直接匹配|CPU 高一定是业务代码问题|生产 CPU 故障标准动作|实战共识
+JV-052|JVM|排查|工具|jcmd|jcmd 是 JDK7+ 推荐的诊断全家桶（替代 jmap/jstack 的大部分功能）|jcmd PID GC.heap_dump、Thread.print、VM.flags、GC.class_histogram 等子命令覆盖诊断需求，同一进程多工具并发可能冲突|jcmd 只能查看 GC 日志|jcmd 与 jmap 不能同时用于同一进程（其实加 -F 强制时会）|jcmd 是 JDK8 之前的老工具|现场诊断优先 jcmd|JDK 文档
+JV-053|JVM|排查|JFR|JFR|JDK11 起 JFR（Flight Recorder）免费且持续低开销采集|记录 GC、锁、IO、分配等事件，jcmd JFR.start 采集后 JMC 分析，是比日志更深一层的证据链|JFR 是商业收费特性|JFR 开销在 30% 以上|JFR 只能记录启动阶段|生产长期开启 JFR（开销 <1%）|JEP 328
+JV-054|JVM|对象内存|布局|对象头|对象头 12 字节（Mark Word 8 + Klass Pointer 4，压缩指针开启时）加实例数据再 8 字节对齐|new Object() 实际占 16 字节，理解对象头是计算内存占用与分析压缩指针的基础|new Object() 占 0 字节|对象头固定 16 字节|Klass Pointer 永远 8 字节|内存占用估算题的基础|HotSpot 压缩指针
+JV-055|JVM|对象内存|压缩|Oops|压缩指针让引用 4 字节堆上限约 32GB 超过后失效|JVM 用 4 字节偏移表示 64 位引用，堆超过压缩上限（默认 32G 附近）对象引用膨胀为 8 字节，32G 边界陷阱是容量规划常识|压缩指针上限是 64GB|超 32G 堆会直接无法启动|压缩指针与堆大小无关|堆扩到 40G 时注意引用膨胀反而更耗内存|HotSpot
+JV-056|JVM|String|布局|Compact Strings|JDK9 起 String 内部从 char[] 改为 byte[]（Compact Strings）|纯 Latin-1 字符串内存减半，含中文等多字节字符时退回 UTF-16 存储，是 JDK9 升级的隐形收益之一（本项目有实测断言）|JDK9 的 String 变慢了|Compact Strings 对中文也减半|String 仍是 char[]|估算字符串内存必须分 JDK8/9+|JEP 254 实测
+JV-057|JVM|GC|三色|三色标记|并发标记用三色抽象：白未访问、灰已访问未扫完、黑已扫完|漏标发生条件：黑对象新增指向白对象的引用且灰到白的引用全部断开，SATB 与增量更新分别破坏其一|三色标记要求全程 STW|黑色对象可能变灰|三色标记与并发标记无关|理解 G1/CMS 并发标记正确性的模型|理论共识
+JV-058|JVM|GC|三色|增量更新|CMS 用增量更新只记录黑到白的新增引用|重新标记阶段 STW 重扫这些新增引用，浮动垃圾少于 SATB 但重新标记停顿更长，与 G1 的 SATB 形成对比|CMS 与 G1 用同一种方案|增量更新产生大量浮动垃圾|增量更新不需要重新标记阶段|对比两类并发收集器的选型依据|理论共识
+JV-059|JVM|GC|浮动垃圾|浮动垃圾|SATB 期间被删除引用的对象本轮不回收称为浮动垃圾|按标记开始时的快照保留，下一轮 GC 回收，代价换取更短的重新标记停顿，是 G1 选择 SATB 的权衡|浮动垃圾会导致对象永久泄漏|SATB 没有浮动垃圾问题|浮动垃圾意味着标记错误|解释 G1 重新标记快的原因|理论共识
+JV-060|JVM|内存|泄漏|静态集合|静态集合持有对象是头号内存泄漏源|static Map/List 生命周期等于 ClassLoader，放进去的对象永不回收，本地缓存必须有上限（LRU/Caffeine）与淘汰策略|静态集合的对象 GC 会自动清理|静态集合泄漏只发生在多线程|用 WeakHashMap 就绝对安全|Code review 专项：static 集合是否封顶|实战共识
+JV-061|JVM|内存|泄漏|监听器|监听器/回调注册后未注销、连接未关闭是常见泄漏|事件总线、JMX 通知、数据库连接池外借连接，对象图上移形成隐性 GC Roots，需要 finally/try-with-resources 闭环|监听器会被 JVM 自动回收|泄漏只发生在堆满之后|try-with-resources 与内存泄漏无关|泄漏排查从对象引用链上溯|实战共识
+JV-062|JVM|内存|泄漏|元空间|元空间泄漏源：动态生成类未卸载（CGLib 代理、Groovy 脚本、反射 inflation）|每个生成的 Class 都进元空间，类卸载需要其 ClassLoader 卸载，反复生成新类（如每次 new 代理）撑爆元空间|元空间不会泄漏|CGLib 代理类会被自动回收|类卸载与 ClassLoader 无关|动态代理必须缓存代理类|实战共识
+JV-063|JVM|GC|指标|晋升速率|GC 分析核心指标：分配速率、晋升速率、回收后堆占用趋势|分配速率高→Minor GC 频繁；晋升速率高→老年代增长快→Full GC；回收后老年代持续走高=泄漏或缓存过大，趋势比单次数字重要|Minor GC 频繁一定是坏事|老年代占用上升就是泄漏|GC 次数是唯一重要指标|容量规划与告警都基于趋势|实战方法论
+JV-064|JVM|排查|jstat|jstat|jstat -gcutil PID 1000 每秒输出各代使用率与 GC 次数时间|现场快速看 GC 健康度（无需日志配置），E/O/M 列趋势一目了然，是线上第一手证据|jstat 需要重启 JVM 才生效|jstat 会影响业务性能|jstat 只能看堆内存|线上快速 GC 体检|JDK 工具
+JV-065|JVM|调优|方法论|不可能三角|GC 调优的吞吐、延迟、内存占用三者不可兼得|Parallel 吞吐高停顿长，ZGC 延迟低吞吐让步内存开销大，调优是按业务 SLO 排序做取舍，没有免费午餐|存在三指标同时最优的收集器|调优目标永远是延迟最小化|内存占用与 GC 无关|先定 SLO 再选收集器再调参数|选型方法论
+JV-066|JVM|调优|顺序|先量后调|调优顺序：先测量（日志/JFR）定位瓶颈再动参数，禁止盲调|参数间相互作用复杂，无数据支撑的调参常把问题转移而非解决，每个参数改动都要 A/B 验证|调优从套用网上的参数模板开始|-Xmx 越大越好|参数调优不需要基线数据|调优报告必须附前后对比数据|实战方法论
+JV-067|JVM|参数|Survivor|SurvivorRatio|SurvivorRatio=8 表示 Eden 占新生代 8/10 两个 Survivor 各 1/10|Survivor 过小加剧动态年龄提前晋升，对象中期存活率高时应加大 Survivor 或新生代|SurvivorRatio=8 表示 Survivor 占 8 成|两个 Survivor 大小可以不同|该参数对 ZGC 生效（ZGC 无分代 JDK21 前无意义，分代 ZGC 有）|调新生代布局的标准参数|HotSpot
+JV-068|JVM|参数|老年代|NewRatio|NewRatio 默认 2 表示老年代:新生代 = 2:1|新生代过小 Minor GC 频繁且晋升压力增大，过大则 Minor GC 单次停顿变长，权衡取值|NewRatio=2 表示新生代是老年代两倍|新生代与老年代比例是 1:1|该参数对 G1 生效（G1 逻辑分代自动调整，不适用）|全量理解分代比例参数族|HotSpot
+JV-069|JVM|排查|堆外|RSS|堆外内存泄漏排查看进程 RSS 与堆内存差值|RSS 持续增长但堆与元空间平稳，怀疑 DirectByteBuffer/Netty/JNI/线程栈/Code Cache，用 NMT（NativeMemoryTracking）分项定位|RSS 等于堆大小|堆外内存无法监控|NMT 是 JDK 外部工具|-XX:NativeMemoryTracking=summary + jcmd VM.native_memory|实战共识
+JV-070|JVM|排查|NMT|NMT|NMT 开启后 jcmd VM.native_memory summary 分项展示内存去向|分类包括 Java Heap、Class、Thread、Code、GC、Internal、Other，把"消失的内存"按项对号，开销约 5%（detail 模式更高）|NMT 默认开启|NMT 能精确到对象级别|NMT 是分析工具不影响性能|堆外内存问题第一步|JDK 文档
+JV-071|JVM|线程|栈内存|线程栈|每个线程栈预留约 1MB（-Xss），万级线程仅栈就预留 GB 级|unable to create native thread OOM 常见根因：线程数超系统限制（ulimit）或内存不足，虚拟线程（JDK21）把栈移到堆上解决该问题|线程栈占用的内存会立即提交|线程数上限只由 -Xss 决定|减小 -Xss 没有风险|高并发线程模型向虚拟线程演进的理由|实战共识
+JV-072|JVM|Code Cache|JIT 缓存|Code Cache|JIT 编译产物存于 Code Cache，默认上限与保留区随版本变化|大量动态代码（脚本引擎、JSP）可撑满 Code Cache 导致不再编译性能下降，-XX:ReservedCodeCacheSize 可调，分层编译下非方法区可被清理|Code Cache 在堆内|Code Cache 满会 OOM 堆内存|Code Cache 自动无限扩容|长跑服务性能逐步下降排查项|HotSpot
+JV-073|JVM|GC|代际|角色|G1 中 Eden/Survivor/Old 只是 Region 的动态角色标记|Region 类型随 GC 动态转换（Eden 用完变空闲再变 Old），物理上不连续，与 Parallel 收集器的物理连续分代本质不同|G1 的 Eden 是固定连续区域|Region 角色固定不变|G1 无分代概念|G1 与传统分代的核心区别|G1 论文
+JV-074|JVM|GC|并发失败|to-space|G1 出现 to-space exhausted 表示晋升时 Survivor/Old Region 不足|并发标记期间老年代同时被消耗，晋升失败触发 Full GC，解法：预留空间（-XX:G1ReservePercent 默认 10）、提前并发标记（InitiatingHeapOccupancyPercent）|to-space exhausted 只影响性能无实际危害|G1ReservePercent 默认是 50|晋升失败不会触发 Full GC|G1 运维告警关键字|G1 调优
+JV-075|JVM|GC| IHOP|启动阈值|G1 并发标记启动阈值 IHOP 默认堆的 45%（自适应模式下动态调整）|老年代占比达到阈值启动并发标记，设太低标记频繁吞吐降，太高来不及标记就晋升失败，JDK9+ 自适应计算|IHOP 默认是 80%|IHOP 固定不可变|IHOP 只对 ZGC 有意义|G1 调优第二参数|G1 文档
+JV-076|JVM|GC|引用处理|虚引用|虚引用对象的回收靠 Reference Handler 线程处理队列|DirectByteBuffer 依赖虚引用触发 Cleaner 释放堆外内存，Reference 处理慢或 System.gc 被禁会堆积引用拖垮性能|虚引用 get() 能拿到对象|虚引用不影响对象回收流程|Reference Queue 由应用线程处理|堆外内存释放链路知识|HotSpot
+JV-077|JVM|GC|卡表|卡表|分代收集的卡表以 512 字节为粒度记录跨代引用|老年代被写屏障按卡片标记，Minor GC 扫描脏卡而非全老年代，G1 的 RSet 是基于卡表的更细粒度记忆集|卡表按对象粒度记录|卡表是 G1 独有的|写屏障与卡表无关|跨代引用解决方案|HotSpot
+JV-078|JVM|类加载|隔离|ClassLoader|不同 ClassLoader 加载的同名类是不同的类（隔离）|instanceof 会失败、静态变量不共享，Tomcat 应用隔离、热部署框架（Arthas redefine）都依赖此语义|同名类加载后全局唯一|不同 ClassLoader 的类可以互相赋值|类隔离与安全无关|理解 Arthas 与热部署的原理|JVM 规范
+JV-079|JVM|工具|arthas|thread -b|Arthas thread -b 一条命令找出阻塞其他线程最多的线程|线上免重启 attach，thread 查看栈、watch 观测入参返回值、trace 统计方法耗时链路，是本项目沙盒实测过的工具链|Arthas 必须重启应用才能 attach|thread -b 只能看死锁|Arthas 是离线分析工具|线上诊断神器入门命令|Arthas 文档
+JV-080|JVM|工具|arthas|watch|Arthas watch 可观测方法入参、返回值与异常无需改代码|watch 全限定类名 方法名 '{params,returnObj,throwExp}' -x 2，配合条件表达式精准观测，生产排查定位线上问题利器|watch 会修改字节码导致性能大降（动态增强有轻微开销）|watch 只能看返回值|watch 需要预先埋点|线上偶现问题抓现场|Arthas 文档
+JV-081|JVM|GC|分配|分配速率|分配速率过高时优化方向是减少临时对象而非加大堆|加大堆只是推迟 Minor GC，优化对象复用、减小对象、缩短生命周期才是治本，监控分配速率（JFR ObjectAllocationSample）|分配速率高加大堆即可|Minor GC 是免费的没有代价|临时对象对性能无影响|GC 优化的正确姿势|实战方法论
+JV-082|JVM|GC|大对象|排查|G1 日志中 Humongous regions 关键字提示巨型对象分配频繁|巨型缓存数组、大集合拷贝、一次性读大文件进堆是常见根因，解法：拆分、走堆外、控制缓存上限，Humongous 对象会加剧并发标记与碎片|大对象分配是免费的|Humongous 对象随 Minor GC 自动清理|大对象只影响内存不影响延迟|G1 告警第二关键字|G1 实战
+JV-083|JVM|版本|迁移|升级收益|JDK8 升 JDK17/21 的运行时收益：G1 大幅增强、ZGC 分代、Compact Strings、虚拟线程|多数应用不改代码升级即获 10-30% 吞吐或延迟改善，主要阻力是依赖兼容（反射限制 JEP 396/403 可加 --add-opens 过渡）|升级 JDK 只是语法升级没有运行时收益|JDK17 强封装导致老框架必挂无解|升级必须重写代码|升级路线图：8→17→21|JEP 汇总
+JV-084|JVM|类加载|卸载|条件|类卸载三条件：该类所有实例已回收、ClassLoader 已回收、Class 对象无引用|三者缺一不可，所以自定义 ClassLoader 泄漏导致其加载的全部类无法卸载（元空间泄漏放大器）|类不用了就会被卸载|Class 对象可以单独被卸载|卸载由 GC 主动定时执行|动态类生成框架必须管好 ClassLoader 生命周期|JVM 规范
+JV-085|JVM|GC|日志|解读|一次 GC 日志四要素：触发原因、回收前后各代占用、停顿时长、GC 线程数|触发原因（Allocation Failure/G1 Humongous Allocation/System.gc）直接指明优化方向，Pause 时间是 SLO 对账依据|日志看不出触发原因|回收前后数字是 MB 单位的哈希值|停顿时间不需要关注|日志分析模板化|实战方法论
+JV-086|JVM|OOM|类型|GC overhead|GC overhead limit exceeded：JVM 花超 98% 时间做 GC 但回收不足 2% 堆|本质是堆接近死满，参数 -XX:-UseGCOverheadLimit 只是关闭该报错不解决问题，根因仍是泄漏或堆不足|该错误关闭后问题消失|它是独立于堆满的另一种故障|它只在 ZGC 下出现|OOM 分诊知识|HotSpot
+JV-087|JVM|OOM|类型|native thread|unable to create native thread 根因：线程数撞系统限制或内存不足创建栈失败|排查：线程总数（jcmd Thread.print 统计）、ulimit -u、可用内存；解法：虚拟线程改造或线程池治理|该 OOM 是堆内存不足|加大 -Xmx 可以解决|线程数无上限|高并发服务必知故障|实战共识
+JV-088|JVM|启动|优化|AppCDS|AppCDS 把类加载产物缓存为文件加速启动|-XX:SharedArchiveFile 预生成存档，微服务与 Serverless 冷启动场景收益明显（启动时间可降 30-50%），JDK10 起 AppCDS 开源|AppCDS 是商业特性|AppCDS 缓存堆内对象|AppCDS 对启动时间无影响|Serverless/弹性扩容场景|JEP 310
+JV-089|JVM|启动|优化|分层|启动速度优化组合：分层编译、AppCDS、减小堆、延迟初始化|C1 快速编译减少解释执行，Spring 的 lazy-init 减少启动期 Bean 创建，GraalVM native image 是极致方案（启动毫秒级但有兼容限制）|启动速度只能靠加大内存优化|分层编译会拖慢启动|GraalVM native image 与 Java 完全兼容|微服务与 FaaS 启动优化清单|实战方法论
+JV-090|JVM|GraalVM|Native|native image|GraalVM native image AOT 编译为本地可执行文件启动毫秒级内存极低|封闭世界假设：反射、动态代理需配置可达性元数据，兼容成本是与 JVM 方案的核心差异，云原生 Serverless 场景价值大|native image 完全兼容所有 Java 特性|native image 运行时还有 JIT|native image 启动与 JVM 一样慢|GraalVM 是 AOT 不是更快的 JVM|GraalVM 文档
+JV-091|JVM|GC|并发|GC 线程|GC 线程数由 -XX:ConcGCThreads 与 ParallelGCThreads 控制|ParallelGCThreads 是 STW 阶段并行线程数（默认约 CPU 核数），ConcGCThreads 是并发阶段线程数（默认按比例），容器 CPU 限额影响默认值|GC 线程越多吞吐越高无上限|GC 与业务线程永不并行|GC 线程数无法配置|容器化 JVM 调参注意 CPU 限额影响默认值|HotSpot
+JV-092|JVM|GC|停顿|构成|GC 停顿=STW 阶段总和（初始标记、复制/清理等），并发阶段不贡献停顿|G1 的 Initial Mark 随 Minor GC 发生、Remark 与 Cleanup 是主要 STW，ZGC 仅极短 STW，分析停顿构成才能对症|GC 停顿=标记+清除全程|并发阶段也算停顿|ZGC 完全无停顿|延迟优化先拆停顿构成|实战方法论
+JV-093|JVM|内存|安全|逃逸|方法内创建并只在本方法使用的对象理论上可栈上分配（经标量替换实现）|HotSpot 不做真正的栈上分配而是把对象拆成标量进寄存器/栈，效果等同（分配消失），前提是不逃逸|HotSpot 把对象直接放栈上|逃逸分析是运行时每帧分析|局部对象一定分配在堆上|对"对象是否总在堆上"的精确回答|HotSpot
+JV-094|JVM|GC|标记|Remark|G1 的 Remark（重新标记）阶段需要 STW 且耗时与写屏障脏队列长度相关|SATB 模式下 Remark 主要处理标记期遗留缓冲，通常几十毫秒，若日志显示 Remark 很长查应用是否大量改引用（如大集合并发修改）|Remark 是并发的|Remark 耗时与应用写行为无关|Remark 在标记开始阶段|G1 停顿细项分析|G1 实战
+JV-095|JVM|参数|安全|参数审查|生产 JVM 参数审查清单：堆、GC 收集器、dump、日志、元空间、堆外上限、JFR|每项都有默认值但默认值未必适配业务，参数变更要走评审与灰度，本项目总结为 JVM 上线检查单|默认参数在生产足够|-Xss 与堆共享内存|JFR 必须关闭以省性能|上线前 checklist 化|实战方法论
+JV-096|JVM|GC|清理|引用处理|处理 Reference（软/弱/虚）本身在 GC 的 STW 或并发阶段执行|大量 Reference 对象（如海量 WeakReference 缓存）会拉长引用处理阶段，软引用缓存泛滥是老年代暴涨经典案例|引用处理免费|软引用是推荐的通用缓存方案|Reference 数量与 GC 无关|软引用缓存的反面教材|HotSpot
+JV-097|JVM|内存|结构|总体|JVM 进程内存 = 堆 + 元空间 + 线程栈合计 + Code Cache + GC 开销 + Direct Memory|容器里按此总账设 limit（如堆 70% 留 30% 给其余），只算堆会撞 cgroup OOMKill，这是容器 OOMKill 的第一根因|容器 OOMKill 时堆一定也满了|JVM 进程内存约等于堆大小|元空间占堆内存|容器内存规划公式|实战共识
+JV-098|JVM|GC|排查|模板|GC 问题排查模板：先看趋势（jstat/日志）→ 定位代与阶段 → 找触发原因 → 看对象（dump/JFR）→ 改参数或代码 → A/B 验证|每步有对应工具与关键字，形成可复用的方法论而非背零散参数，是 P10 层面的回答框架|排查从换收集器开始|dump 分析是第一步|排查不需要基线数据|回答"线上 GC 问题怎么排查"的框架|实战方法论
+JV-099|JVM|并发|内存|JMM 与 JVM|JMM 是内存可见性规范 JVM 实现负责落地（内存屏障/缓存一致性）|JMM 定义 happens-before 等抽象语义，HotSpot 用 CPU 指令（lock 前缀、mfence）与缓存一致性协议实现，两者层次不同不可混谈|JMM 就是 JVM 内存结构|内存屏障是 JMM 定义的指令|JMM 与硬件无关|区分规范与实现的答题层次|JSR-133
+JV-100|JVM|运维|基线|基线|每次 JVM 变更（参数/JDK 版本）前先建性能基线：GC 频率、停顿 P99、分配速率、启动时间|变更后对比基线判断收益或回退，无基线的调优等于赌博，基线数据用同一压测脚本与流量模型采集|基线只在重大升级时需要|调参经验可以替代基线|基线采集不需要控制变量|变更管理流程嵌入基线环节|实战方法论
+JV-101|JVM|收集器|G1|停顿模型|G1 的可预测停顿模型：按"回收价值/停顿成本"排序选 Region 组成回收集合|每个 Region 记录回收收益（垃圾比例）与预估时间，按 MaxGCPauseMillis 目标装填本轮回收集合，这是 Garbage First（垃圾优先）名字的由来|G1 按内存地址顺序回收|回收集合固定不变|停顿模型保证绝对不超时（是尽力目标非硬保证）|G1 原理核心考点|G1 论文
+JV-102|JVM|JIT|分层|性能探针|C1 编译的代码带性能探针，采集分支/类型分布指导 C2 深度优化|C1 快速出产物并收集 profile（虚方法实际实现/分支频率），C2 基于真实分布做激进优化（单态内联/分支消除），这是分层编译收益的机制来源|C2 重新采集 profile|探针免费无开销|C1 只为提速不做采集|JIT 原理深水区|HotSpot 文档
+JV-103|JVM|运行时数据区|Metaspace|压缩类空间|Metaspace 内划出 compressed class space（默认 1GB 上限）存放压缩指针所需的类元数据|Klass Pointer 4 字节需要类地址在 32 位空间内，UseCompressedClassPointers 开启时 klass 部分单独存放，-XX:CompressedClassSpaceSize 可调|压缩类空间在堆内|上限不可调|Metaspace 全部在压缩类空间|Metaspace OOM 分诊（超 CompressedClassSpace 与超 MaxMetaspaceSize 不同）|HotSpot 文档
+JV-104|JVM|引用|降级|softly-reachable|软引用对象在内存不足时才降级回收，且 JVM 会根据历史 GC 频率动态调整保留时长（-XX:SoftRefLRUPolicyMSPerMB）|软引用缓存"快满才回收"的行为由该策略控制（默认 1000ms/MB 空闲堆），堆越大软引用缓存存活越久，软引用缓存泛滥的机制解释|软引用在每次 GC 必回收|保留时长固定不变|策略参数无实际影响|软引用缓存调优|HotSpot 文档
+JV-105|JVM|工具|容器|UsePerfData|jps/jstat 依赖 hsperfdata 共享内存文件，精简镜像若关闭 UsePerfData 会失效需显式开启|-XX:+UsePerfData 默认开启，部分 distroless 镜像为省开销关闭导致 jstat 连接失败，容器内诊断工具失效的第一排查项|容器中 jstat 天然失效|UsePerfData 默认关闭|perf 文件在磁盘上持续写入（是内存映射共享文件）|容器化 JVM 工具链知识|实战共识
+JV-106|JVM|排查|JFR|事件|JFR 关键事件：ObjectAllocationSample（分配采样）、JVMInformation、GCPhasePause、JavaMonitorEnter（锁等待）|分配采样（JDK16+）以极低开销定位大对象分配来源（替代堆外 profiling），锁事件定位竞争热点，事件驱动分析比日志更精准|JFR 只记录 GC 事件|分配采样是全量记录|事件无法自定义（支持自定义事件）|JFR 分析入门事件表|JDK16+
+JV-107|JVM|排查|方法论|存活对象|GC 后堆占用仍高≠泄漏：区分"泄漏"（回收不掉）与"缓存过大"（有意常驻）|dump 看存活对象归属：业务缓存（有上限逻辑）是设计问题，无引用路径释放的才是泄漏，MAT 支配树+GC Roots 路径是判别工具|堆占用高就是泄漏|Full GC 后占用回落即无问题|缓存与泄漏无法区分|OOM 定性分析第一步|实战方法论
+JV-108|JVM|收集器|ZGC|自愈|ZGC 用读屏障"自愈"引用：访问对象时发现指针过期标记则立即修正映射|着色指针 + load barrier，应用线程访问时完成引用修正（并发转移期间对象搬迁无感知），这是 ZGC 停顿亚毫秒的机制核心，代价是每次访问带屏障开销|ZGC 修改应用字节码自愈（读屏障是运行时机制）|自愈由 GC 线程完成（应用线程自己完成）|无自愈能力|ZGC 原理核心考点|JEP 377
+JV-109|JVM|锁|降级|monitor 降级|HotSpot 自 JDK15 起支持空闲 monitor 降级（deflation）膨胀不再是永久性的|周期任务检测无竞争空闲 monitor 降级回无锁，JDK18+ 批量降级增强，"锁一旦膨胀永久不降"的说法已过时（JC-014 误认知的依据）|monitor 降级不存在（JDK15+ 已支持）|降级需要重启|所有 monitor 每轮都被降级|锁升级描述必须带版本限定|JDK15+
+JV-110|JVM|排查|编程|ThreadMXBean|ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计|无需外部工具在应用内自检（健康检查集成死锁探测），getThreadCpuTime 区分忙与闲（比 wall time 准），是自研监控平台的编程接口|ThreadMXBean 只能读不能监控|findDeadlockedThreads 只查 monitor 死锁（也查 JUC 属主环）|CPU 时间与墙钟时间相同|自研健康检查的 API 基础|JDK 文档

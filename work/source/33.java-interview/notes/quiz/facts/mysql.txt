@@ -1,0 +1,113 @@
+# MySQL 知识点事实矩阵（MY-xxx）
+# 格式: id|domain|topic|dim|term|fact|why|miscon1|miscon2|miscon3|usage|version
+
+MY-001|MySQL|索引|结构|B+ 树|InnoDB 索引是 B+ 树：非叶子节点只存键叶子节点存数据且叶子双向链表相连|非叶子不存数据使单节点容纳更多键降低树高，链表支撑范围扫描，这是 B+ 树取代 B 树/二叉树的原因|InnoDB 用 B 树存储|B+ 树叶子单向链表|B+ 树支持哈希查找|索引结构八股的基准点|InnoDB 文档
+MY-002|MySQL|索引|估算|三层|千万级数据 B+ 树约 3 层（16KB 页 × 每节点约 1200 键估算）|非叶节点 16KB 可放约 1200 个键指针，两层约 144 万键，三层覆盖十几亿行，单次查询 3-4 次 IO|千万级表 B+ 树有 10 层|B+ 树高度与数据量线性增长|树高 3 层意味着 3 次磁盘 IO（根页常驻内存实际更少）|容量估算题的标准推导|B+ 树估算
+MY-003|MySQL|索引|聚簇|聚簇索引|InnoDB 是索引组织表：主键索引的叶子直接挂行数据（聚簇索引）|数据按主键有序存放，表即主键索引本身，二级索引叶子存主键值而非行地址|二级索引叶子存行地址|InnoDB 是堆表|数据与主键索引分开存储|理解"为什么主键要自增"的前提|InnoDB 文档
+MY-004|MySQL|索引|回表|回表|二级索引查询需拿主键回聚簇索引再取整行称为回表|二级索引只存 (索引列, 主键)，需要的列不在索引里就回表，回表次数是优化关键|二级索引包含全部行数据|回表只发生在非聚簇引擎|回表成本可以忽略|优化 select * 的第一步是减少回表|实战共识
+MY-005|MySQL|索引|覆盖|覆盖索引|查询所需列全部在索引中则免回表称为覆盖索引|explain Extra 出现 Using index 即覆盖，count 查询、联合索引带排序列是经典覆盖场景|覆盖索引是一种索引类型|覆盖索引免回表是错误的说法|Using index 表示用了主键|高频查询设计成覆盖索引|explain 解读
+MY-006|MySQL|索引|联合|最左前缀|联合索引 (a,b,c) 只有从 a 开始的连续前缀才能走索引|B+ 树先按 a 排序再按 b，跳过 a 无法定位，where b=1 单独查询不走该索引|联合索引任意列都能单独走索引|顺序无关紧要|(a,c) 查询能用到 a 与 c 两列|建联合索引先定首列|最左前缀原则
+MY-007|MySQL|索引|设计|顺序|联合索引列顺序：等值条件列在前、排序列随后、范围列最后|等值确定后排序才连续（免 filesort），范围列之后的列不再有序，与 MongoDB ESR 同构|范围列应该放最前|排序列必须在等值列之前|顺序不影响性能|复合索引设计口诀|实战方法论
+MY-008|MySQL|索引|下推|ICP|索引下推（ICP，5.6+）把 where 条件下推到存储引擎层先过滤再回表|联合索引非前缀列的条件在引擎层用索引值过滤，减少回表次数，explain Extra 出现 Using index condition|ICP 会减少索引扫描|ICP 在 Server 层过滤|ICP 只对主键查询生效|5.6+ 默认开启知道其原理即可|MySQL 5.6
+MY-009|MySQL|索引|前缀|前缀索引|长字符串列建前缀索引（如 email 取前 10 字符）省空间|前缀索引无法覆盖查询（叶子只有前缀）且需保证区分度（count(distinct left(col,n)) 评估），URL 长字段优化常用|前缀索引支持覆盖查询|前缀长度越长一定越好|前缀索引可以用于 order by|长字符串列优化标准手法|实战共识
+MY-010|MySQL|索引|评估|区分度|索引价值看区分度：count(distinct col)/count(*) 越接近 1 越好|性别等低区分度列单独建索引收益差，优化器对低区分度可能直接全表扫|低区分度列不能建索引|区分度只对联合索引有意义|区分度是索引长度的指标|建索引前的评估动作|实战方法论
+MY-011|MySQL|索引|失效|函数|索引列上使用函数或运算会失效（8.0 函数索引除外）|B+ 树按原始值有序，函数变换后无法利用排序，改写为对常量做运算或建函数索引（8.0.13+）|加函数也能走索引|隐式类型转换不算函数运算|8.0 前就有函数索引|where date(created_at)=... 改范围查询|实战共识
+MY-012|MySQL|索引|失效|隐式转换|字符串列与数字比较发生隐式转换使索引失效|MySQL 把字符串转数字比较（相当于对列套 cast 函数），手机号 varchar 列 where phone=13800138000 失效，参数必须传字符串|数字与字符串比较永远走索引|隐式转换发生在常量一侧|datetime 与字符串比较也失效（其实 datetime 支持字符串比较）|接口传参类型 review 必查|实战共识
+MY-013|MySQL|索引|失效|通配符|前导通配符 like '%xx' 无法走 B+ 树（后缀 like 'xx%' 可以）|B+ 树按前缀有序，% 开头破坏前缀定位，全文搜索需求交给 ES|like '%x%' 能走索引|通配符在尾部也失效|like 失效是语法错误|搜索类需求选型 ES 而非 like|实战共识
+MY-014|MySQL|索引|失效|or|or 两边有一侧无索引则整体走全表扫描（union 可绕开）|or 语义要求两侧结果并集，一侧全扫则另一侧索引无意义，改写 union all 各走各的索引|or 有索引一侧会走索引|or 与 in 等价（in 单列枚举可走索引）|or 优化只能靠改写 SQL|SQL 改写手法之一|实战共识
+MY-015|MySQL|索引|change buffer|change buffer|唯一索引不能使用 change buffer 而普通二级索引可以|change buffer 把非唯一二级索引的写缓存起来合并减少随机读页，唯一索引必须立即判重无法缓存，写多读少场景普通索引更优|唯一索引写入更快|change buffer 对所有索引生效|change buffer 缓存的是数据页|写密集场景索引选型考量|InnoDB 文档
+MY-016|MySQL|主键|设计|自增主键|InnoDB 主键推荐自增或趋势递增值（UUID 随机导致页分裂）|随机主键使插入落点分散引发页分裂与碎片、buffer pool 命中率下降，雪花 ID 趋势递增兼得分布式唯一与写入友好|UUID 与自增主键无性能差异|页分裂只发生在删除时|主键选择不影响二级索引|建表规范第一条|实战共识
+MY-017|MySQL|存储|页|页分裂|InnoDB 以 16KB 页为管理单位插入满页时分裂（数据有序时顺序写入免分裂）|自增插入永远追加到最右页免分裂，随机插入命中率低且分裂频繁，碎片需要 OPTIMIZE TABLE 重建|页分裂只影响内存|InnoDB 页大小 32KB|分裂不会产生碎片|理解 B+ 树写入放大|InnoDB 文档
+MY-018|MySQL|explain|type|type|explain type 等级：const>eq_ref>ref>range>index>ALL|const 主键/唯一等值、eq_ref join 主键、ref 普通索引等值、range 范围、index 全索引扫、ALL 全表扫，线上要求至少 range|ALL 比index 快|type 是扫描行数指标|const 表示常量查询不扫索引|explain 解读第一指标|MySQL 文档
+MY-019|MySQL|explain|Extra|Extra|关键 Extra：Using index（覆盖）、Using index condition（ICP）、Using filesort（额外排序）、Using temporary（临时表）|filesort 与 temporary 是性能红灯：order by 未走索引、group by/distinct 建 tmp，优化方向是补索引或改写|Using index 表示回表|Using filesort 是文件排序一定落盘|Extra 只显示 type 信息|explain 解读第二指标|MySQL 文档
+MY-020|MySQL|explain|analyze|explain analyze|explain analyze（8.0.18+）真实执行并报告每算子实际耗时与行数|普通 explain 是优化器预估可能骗人，analyze 给出实际执行计划与耗时分布，是 SQL 优化利器|explain analyze 只做预估不执行|它比普通 explain 更快|8.0 之前就有该功能|疑难 SQL 优化第一步|MySQL 8.0.18
+MY-021|MySQL|SQL|count|count(*)|count(*) 与 count(1) 等价且官方推荐，count(col) 会跳过 null|count(*) 由优化器专门优化（任选最小索引数行），count(col) 需逐行判空，count(distinct col) 去重且忽略 null|count(1) 比 count(*) 快|count(col) 与 count(*) 结果一定相同|count(*) 必须扫全表|统计行数规范写 count(*)|官方文档核对
+MY-022|MySQL|SQL|分页|深分页|深分页 limit 100000,10 需扫描前 100010 行再丢弃|优化：游标方式 where id>last_id limit 10（连续翻页）或延迟关联（先查 id 再回表），ES 与业务层配合规避深翻页|MySQL 深分页自动优化|offset 越大越快|加索引就能解决深分页|游标分页是标准解|实战共识
+MY-023|MySQL|SQL|join|NLJ|join 实现：Nested-Loop Join 逐行驱动被驱动表（有索引走 Index NLJ）|驱动表每行到被驱动表查一次（走索引则很快），无可用索引时 Block NLJ 用 join buffer 缓存驱动表批量匹配，8.0.18 起无索引等值 join 可用 Hash Join|join 一定是笛卡尔积|BNL 比 NLJ 更快|8.0 没有 hash join|join 性能分析基础|MySQL 8.0.18
+MY-024|MySQL|SQL|join|小表驱动|join 优化核心是小表驱动大表|驱动表行数决定外层循环次数，straight_join 强制指定驱动顺序，"小表"指过滤后行数少而非物理小|大表做驱动表更快|小表指物理文件小|join 顺序由 SQL 书写决定|join 慢查询的第一分析点|实战共识
+MY-025|MySQL|SQL|join|in vs exists|in 与 exists 的选择本质是谁做驱动表：in 外表驱动适合外表小，exists 子表驱动适合外表大|8.0 优化器会自动改写半连接（semi-join），两写法性能差异缩小，重点还是索引是否可用|in 永远比 exists 快|exists 永远比 in 快|优化器不会改写子查询|子查询优化知识|实战共识
+MY-026|MySQL|SQL|优化|select *|select * 的危害：无法覆盖索引、传输无效列、buffer pool 污染|按需 select 列表配合覆盖索引，宽表大字段（TEXT/BLOB）必须拆分按需读|select * 有查询缓存优化抵消|select * 对性能无影响|只影响网络传输|SQL 规范第一条|实战共识
+MY-027|MySQL|事务|ACID|实现|ACID 实现：redo log 保持久性、undo log 保原子性（回滚）、锁+MVCC 保隔离性、三者共同保一致性|一致性是目的其他三者是手段，这个映射是事务八股的骨架|redo 保证原子性|undo 保证持久性|隔离性由 redo 实现|回答 ACID 如何实现的标准框架|InnoDB 文档
+MY-028|MySQL|日志|redo|redo log|redo log 是 InnoDB 层物理日志 WAL 顺序循环写保证崩溃恢复|先写日志后刷数据页（WAL），随机写变顺序写提升性能，空间固定循环复用，8.0.30 起由 innodb_redo_log_capacity 统一控制|redo log 记录逻辑 SQL|redo 在 Server 层|redo log 无限增长|WAL 是 InnoDB 性能的基石|MySQL 8.0.30
+MY-029|MySQL|日志|redo|刷盘|innodb_flush_log_at_trx_commit=1 每次事务提交刷盘（默认，最安全）|0 每秒刷（宕机丢 1 秒）、2 写 OS 缓存每秒落盘（OS 崩溃丢 1 秒）、1 完全持久（性能最低），金融场景必须 1|默认值是 2|设 0 不影响数据安全|该参数只影响性能|性能与持久性权衡旋钮|InnoDB 文档
+MY-030|MySQL|日志|binlog|格式|binlog 是 Server 层逻辑日志默认 ROW 格式（8.0 默认 ROW，官方文档核对零差异）|ROW 记录行级变更（主从最安全）、STATEMENT 记 SQL（体积小但 now()/uuid() 不安全）、MIXED 自动切换|8.0 默认 STATEMENT|ROW 格式无法用于恢复|MIXED 是 8.0 默认|binlog 格式选型|MySQL 8.0 官方文档
+MY-031|MySQL|日志|binlog|刷盘|sync_binlog=1 每次提交刷 binlog（默认，与 redo 1 组成双 1）|双 1 配置保证事务提交不丢，性能敏感可用 100/1000 组提交（主库宕机可能丢 binlog），从库可放宽|sync_binlog 默认是 0|设 0 最安全|双 1 是可选项|双 1 是金融标配|MySQL 文档
+MY-032|MySQL|事务|两阶段|两阶段提交|binlog 与 redo 之间用两阶段提交：redo prepare→写 binlog→redo commit|保证 redo 与 binlog 逻辑一致（崩溃恢复时 binlog 完整则提交否则回滚），否则主从数据不一致（本项目反复核对的机制）|redo 与 binlog 独立提交无协调|两阶段提交指分布式事务|先写 binlog 再写 redo|崩溃恢复一致性根基|InnoDB 文档
+MY-033|MySQL|事务|崩溃恢复|恢复规则|崩溃恢复规则：redo 已 commit 直接恢复；redo prepare 且 binlog 完整则提交；否则回滚|以 binlog 为准绳（binlog 已被从库复制就必须提交），这就是两阶段提交的意义|恢复以 redo 为准|binlog 缺失也会提交|恢复跳过 prepare 状态|高可用恢复机制原理|InnoDB 文档
+MY-034|MySQL|事务|组提交|组提交|组提交（group commit）把多个事务的刷盘合并成一次 IO|双 1 下每事务两次 fsync 太贵，binlog 组提交（三个阶段 flush/sync/commit）让并发事务共享一次 fsync，高并发写性能的关键|组提交关闭双 1 才能用|组提交降低隔离级别|每事务独立 fsync 是默认行为|高并发写入优化机制|InnoDB 文档
+MY-035|MySQL|事务|MVCC|版本链|MVCC 靠 undo log 版本链：每行隐藏字段 trx_id 与 roll_pointer 指向历史版本|读旧版本不加锁实现读写并行，回滚时沿版本链还原，undo log 在无活跃事务引用后由 purge 线程清理|MVCC 靠锁实现读旧版本|版本链存在 redo log 里|undo log 提交后立即删除|MVCC 原理的骨架|InnoDB 文档
+MY-036|MySQL|事务|MVCC|ReadView|ReadView 包含活跃事务列表 m_ids、低水位 min_trx_id、高水位 max_trx_id 与 creator_trx_id|可见性判断：trx_id<min 可见；>=max 不可见；中间再看是否在 m_ids（未提交的不可见），不可见则沿版本链向前找|ReadView 记录所有历史版本|max_trx_id 是最大事务 ID 本身（是"下一个将分配的 ID"）|creator_trx_id 表示只读事务|MVCC 可见性规则题的标准推导|InnoDB 文档
+MY-037|MySQL|事务|隔离|RC vs RR|RC（读已提交）每条语句生成新 ReadView，RR（可重复读）事务内首次查询生成并复用|这就是 RC 能读到别人新提交、RR 全程快照一致的机制差异，参数 transaction_isolation 控制|RC 与 RR 用同一份 ReadView|RR 每语句刷新 ReadView|RR 是 SQL 标准默认（InnoDB 默认 RR 是 MySQL 实现选择）|隔离级别差异的根本解释|InnoDB 文档
+MY-038|MySQL|事务|隔离|默认级别|InnoDB 默认隔离级别 REPEATABLE-READ|SQL 标准要求 RR 下有幻读，InnoDB 在 RR 下用 MVCC（快照读）+间隙锁（当前读）基本消除幻读，这也是 MySQL 默认 RR 的底气|InnoDB 默认 READ COMMITTED|RR 下幻读完全不可能发生|默认级别由 SQL 标准强制|隔离级别八股基准点|MySQL 文档
+MY-039|MySQL|事务|读|快照读|普通 select 是快照读（MVCC 无锁），select ... for update/lock in share mode 与 update/delete 是当前读|当前读必须读最新已提交版本并加锁，快照读读 ReadView 视图版本，两者并存是幻读讨论的基础|select 默认是当前读|当前读不加锁|for update 是快照读|区分两类读是理解幻读的前提|InnoDB 文档
+MY-040|MySQL|事务|幻读|解决|RR 下幻读：快照读靠 MVCC 避免、当前读靠间隙锁（Next-Key）阻止插入|混用快照读与当前读仍可能看到"幻影行"（先快照读后当前读），彻底避免要么全用当前读要么锁读一致|RR 下完全没有幻读|间隙锁只锁已有行|MVCC 能阻止插入|RR 幻读的精确边界|实战共识
+MY-041|MySQL|锁|分类|Next-Key|InnoDB 行锁三种：Record Lock 锁记录、Gap Lock 锁间隙、Next-Key=Record+Gap|RR 下可重复读与防幻读靠 Next-Key（左开右闭区间），RC 下禁用 Gap Lock 只锁记录（并发更好）|Next-Key 是右开左闭|RC 下有间隙锁|Gap Lock 锁住具体行|加锁分析的基本单位|InnoDB 文档
+MY-042|MySQL|锁|意向|意向锁|表级意向锁（IS/IX）表明事务将持行锁，用于快速判断表锁冲突|加行锁前先加意向表锁，DDL（MDL 排他）与 LOCK TABLES 通过意向锁快速检测，不阻塞行级操作|意向锁会阻塞行锁|意向锁是行级锁|没有意向锁表锁检查更高效|锁体系分层知识|InnoDB 文档
+MY-043|MySQL|锁|MDL|元数据锁|MDL 元数据锁保护表结构：查询持 MDL 读锁 DDL 需 MDL 写锁|长事务/慢查询持 MDL 读锁时 DDL 阻塞，且后续所有查询排在 DDL 之后（表完全不可用），online DDL 与运维操作必须避开高峰|MDL 是行级锁|DDL 不会被查询阻塞|MDL 读锁之间互斥|DDL 卡死全表的经典机制|实战共识
+MY-044|MySQL|DDL|在线|online DDL|online DDL：INPLACE 算法大部分操作不锁表（加列 8.0 支持 INSTANT 秒级）|INSTANT 只改元数据（8.0.12+），INPLACE 重建表仍需时间且 MDL 短锁，COPY 全量拷贝最慢，DDL 前查支持算法|加列必须重建全表|online DDL 完全不锁表|INSTANT 是 5.7 功能|大表 DDL 先查算法支持表|MySQL 8.0.12
+MY-045|MySQL|DDL|大表|gh-ost|大表 DDL 变更用 gh-ost/pt-online-schema-change：影子表+增量同步+原子改名|直接 DDL 主从延迟与 MDL 风险大，工具建影子表拷数据、捕获增量（binlog/触发器）、锁表窗口极短，是行业标准做法|大表 DDL 用 ALTER 直接执行即可|gh-ost 使用触发器同步（其卖点恰是免触发器）|影子表方案会长时间锁表|生产 DDL 变更流程|gh-ost 文档
+MY-046|MySQL|锁|死锁|检测|InnoDB 自动检测死锁（innodb_deadlock_detect 默认 ON）回滚代价小的事务|SHOW ENGINE INNODB STATUS 看 LATEST DETECTED DEADLOCK，热点行更新高并发时死锁检测本身耗 CPU（关掉+排队是优化方案）|死锁需要人工发现|死锁检测默认关闭|发生死锁两个事务都回滚|死锁问题排查入口|InnoDB 文档
+MY-047|MySQL|锁|等待|超时|锁等待超时 innodb_lock_wait_timeout 默认 50 秒后报错|与死锁不同：等待方不知道对方何时释放，超时是兜底，业务上应缩短事务与快速提交减少锁等待|默认超时 5 秒|超时后自动重试|锁等待会自动解锁对方事务|长事务导致锁堆积的机制|InnoDB 文档
+MY-048|MySQL|锁|隐患|全表锁|update where 条件未走索引时逐行加锁接近锁全表|server 层按扫描路径加锁，全表扫描则所有行（含间隙）加 Next-Key，索引设计不当的 update 是生产事故源|update 只锁匹配的行|锁全表是表锁机制|未走索引的 update 与走索引一样安全|update 语句必须先验证走索引|实战教训
+MY-049|MySQL|复制|流程|主从复制|主从复制流程：主库 dump 线程发 binlog→从库 IO 线程写 relay log→SQL 线程重放|异步复制默认主库不等从库，从库延迟时读到旧数据，GTID（8.0 默认支持）标识事务位置断点续传|复制是主库拉取 binlog|relay log 存在主库|SQL 线程在主库执行|复制拓扑与故障恢复基础|MySQL 文档
+MY-050|MySQL|复制|安全|半同步|半同步复制：主库等至少一个从库收到 binlog（ACK）才返回客户端|降低宕机丢事务风险，异步复制主库宕机可能丢最新事务，semi-sync 超时降级异步（rpl_semi_sync_master_timeout），8.0.26+ 半同步内置为 lossless 复制选项|半同步等从库执行完 SQL|半同步默认开启|半同步零数据丢失保证（after_sync 降低但极端仍可能丢）|金融场景复制选型|MySQL 文档
+MY-051|MySQL|复制|延迟|主从延迟|主从延迟根因：从库单线程重放赶不上主库并发写、大事务、从库机器弱|解法：并行复制（8.0 writeset/LOGICAL_CLOCK）、拆大事务、从库升级，延迟监控 Seconds_Behind_Master 与 pt-heartbeat|从库多线程后延迟消失|大事务对延迟无影响|Seconds_Behind_Master 精确可靠（并行复制下有偏差，pt-heartbeat 更准）|读写分离架构的核心风险|实战共识
+MY-052|MySQL|架构|过期读|方案|读写分离的过期读方案：强制走主库（关键业务）、等待位点（Sleep/GTID 等待）、中间件路由（按时间窗口）|完美方案是等从库重放到主库当前位点再读（GTID wait），业务上关键读走主库是简单可靠的选择|读写分离后不会读到旧数据|等待位点无意义|过期读无解只能全主库|架构设计权衡|实战方法论
+MY-053|MySQL|高可用|切换|MHA|主从切换工具：MHA/Orchestrator 自动选主与补偿（从库 relay log 补齐差异）|切换流程：确认主库真死→选数据最新的从库→其他从库追平→提升新主→虚 IP/中间件切换，半同步+GTID 让切换丢数据窗口趋近于零|切换完全不丢数据|relay log 在主库|切换只需重启主库|高可用体系核心动作|实战共识
+MY-054|MySQL|高可用|集群|MGR|MGR（组复制）基于 Paxos 多数派写提供强一致高可用|8.0 引入 MySQL InnoDB Cluster（MGR+Router+Shell），多数派确认防脑裂，代价是写性能与运维复杂度，国内主用主从+MHA/Orchestrator|MGR 是 MySQL 默认架构|MGR 无多数派要求|MGR 与主从性能相同|高可用方案对比题|MySQL 8.0
+MY-055|MySQL|分库分表|触发|2000 万|单表规模经验值：B+ 树 3 层可撑 2000 万行上下（与行宽相关）超阈值考虑分表|超过后树高变 4 层 IO 增加与缓存命中率下降，但非硬性红线：行少列窄可到亿级，决策看查询性能与容量规划|单表必须严格低于 2000 万|分表后单表可以无限大|该经验值与行宽无关|容量规划的经验锚点|实战共识
+MY-056|MySQL|分库分表|方式|拆分|垂直拆分（按业务/按冷热列）与水平拆分（按行分片）|垂直：订单库存分库解耦；水平：单表数据量过大按分片键散列/区间，先垂直后水平是通用路径|水平拆分是第一步|垂直拆分解决数据量问题|两者只能选一|拆分路线图|实战方法论
+MY-057|MySQL|分库分表|分片键|基因法|分片键选择与基因法：订单号嵌入用户 ID 基因，使订单表与用户表同路由|同一用户数据落同一分片免跨片 join，订单查询按订单号（带基因）与按用户（同基因）都单分片命中，是电商通用手法|分片键随意选不影响查询|基因法指 DNA 数据库（是"主键嵌入路由基因"的哈希技巧）|跨片 join 总能靠中间件解决|分库分表设计核心考点|实战方法论
+MY-058|MySQL|分库分表|查询|异构索引|跨分片查询方案：异构索引（ES/ClickHouse）、二次分片（按维度再拆）、聚合层汇总|按用户分片后"按商家查订单"跨片，把订单冗余同步到 ES 或按商家维度再建表（异步对账保证一致）|分片后所有查询自动路由|跨片查询靠广播聚合是首选（慢且拖垮全片）|冗余方案不需要数据校验|拆分后查询架构设计|实战方法论
+MY-059|MySQL|分库分表|ID|雪花|分布式 ID：雪花算法（64 位时间戳+机器+序列）时钟回拨问题与号段模式（DB 批量取号）|雪花本地生成高性能但依赖时钟（回拨需等待或备位），号段模式 DB 一次取一段内存分发（美团 Leaf 两种都实现）|雪花 ID 全球唯一靠数据库|时钟回拨自动解决无风险|号段模式每次写库取号|分布式 ID 是分库分表标配|实战共识
+MY-060|MySQL|分库分表|扩容|翻倍|扩容方案：翻倍扩容（成倍迁移路由简单）或一致性哈希（数据迁移少）|翻倍扩容按位翻番，旧分片数据一半迁新片，停写窗口小；一致性哈希只迁移 1/n 数据但节点波动影响大|扩容必须全量重分布|扩容期间不能有写入|翻倍扩容迁移成本最高|分片架构生命周期管理|实战方法论
+MY-061|MySQL|分库分表|中间件|ShardingSphere|分库分表中间件：ShardingSphere-JDBC（客户端）与 Proxy（代理层）|JDBC 版无中间层低延迟但接入每应用，Proxy 独立部署语言无关但多一跳，ShardingSphere 是 Apache 顶级项目国内主流|Proxy 版性能一定更好|中间件能解决跨片事务|客户端版需要改 SQL|选型按运维能力与延迟敏感度|ShardingSphere 文档
+MY-062|MySQL|分库分表|兜底|对账|分库分表迁移与运行必须有对账兜底：全量校验+增量校验+修复流程|迁移双写期间数据一致靠对账闭环（checksum 比对），运行期跨片冗余数据定期校验，没有对账的分布式数据架构不完整|迁移后无需校验（工具保证）|对账只做一次|对账影响线上读写必须停机|数据一致性的最后防线|实战方法论
+MY-063|MySQL|备份|工具|xtrabackup|物理备份 xtrabackup（热备 InnoDB 文件级）优于 mysqldump（逻辑 SQL 重放慢）|xtrabackup 拷贝数据文件+备份期间增量日志，TB 级库恢复按小时计，mysqldump 适合小库与跨版本迁移|mysqldump 是生产备份首选|xtrabackup 只能冷备|物理备份跨平台无损|备份方案选型|Percona 文档
+MY-064|MySQL|备份|恢复|binlog|恢复公式：最近全量备份+重放 binlog 至故障点（防-备-救框架）|备份策略决定恢复能力（RPO），binlog 完整性（sync_binlog=1 与保留时长）决定能恢复到哪一刻，定期演练恢复流程是唯一验证手段|备份文件足够恢复|binlog 不需要保留（恢复只靠备份）|恢复演练可以省略|防备救三层体系|实战方法论
+MY-065|MySQL|存储|doublewrite|双写缓冲|doublewrite buffer 防止"部分页写失效"（页 16KB 而磁盘 IO 原子单位更小）|写数据页先写 doublewrite 再落盘，崩溃时用它恢复完整页，是 InnoDB 数据可靠性的隐性防线|doublewrite 是可选优化|部分页写由 redo 直接解决|doublewrite 在内存无 IO 代价|可靠性机制八股|InnoDB 文档
+MY-066|MySQL|连接|池|HikariCP|HikariCP 是 Spring Boot 2.0+ 默认连接池（字节码优化+FastList+无锁设计最快）|关键参数：maximumPoolSize（经验公式 core×2+磁盘数，连接不是越大越好）、connectionTimeout、maxLifetime（小于 MySQL wait_timeout）|连接池越大性能越好|HikariCP 是 Boot 1.x 默认|maxLifetime 可以大于 MySQL wait_timeout|连接池调优标准参数组|HikariCP 文档
+MY-067|MySQL|连接|管理|长连接|MySQL 连接管理：长连接复用但需定期重连防内存涨（执行时临时对象），短连接建立成本高|连接内存随执行增长不释放（MySQL 8.0 前尤其），定期断开或 mysql_reset_connection 复位，wait_timeout 控制空闲回收|短连接性能更好|长连接无内存问题|wait_timeout 只管事务内空闲|连接泄漏与内存涨排查知识|实战共识
+MY-068|MySQL|参数|buffer pool|buffer pool|innodb_buffer_pool_size 是最关键参数：专用数据库服务器设物理内存 50%-75%|缓存数据页与索引页，命中率（InnoDB buffer pool hit rate）99%+ 为健康，改大小需重启（8.0 支持在线动态调整）|buffer pool 越大越好可以占 95%|8.0 不能在线调整|命中率与业务无关|MySQL 调参第一项|InnoDB 文档
+MY-069|MySQL|参数|刷脏|io capacity|innodb_io_capacity 告诉 InnoDB 磁盘能力（SSD 建议 2000+）|刷脏速率匹配磁盘吞吐，设置过低脏页堆积触发"连击"刷脏引发性能抖动（ wal 快满时激进刷盘）|该参数与磁盘无关|设置越高越好|刷脏只发生在空闲时|性能抖动排查知识点|InnoDB 文档
+MY-070|MySQL|SQL|慢查询|慢日志|慢查询日志 long_query_time（默认 10 秒生产建议 1 秒或更低）+pt-query-digest 分析|按总耗时/次数/锁时间排序定位 TopSQL，慢日志是 SQL 优化的入口数据，配合 performance_schema 深挖|慢日志默认开启|long_query_time 默认 1 秒|慢日志只记录 select|SQL 优化的第一步|实战共识
+MY-071|MySQL|SQL|优化|流程|SQL 优化流程：慢日志定位→explain（analyze）分析→索引优化或 SQL 改写→回归验证|先看 type/rows/Extra 三要素，改索引最常见，改写（join 顺序、子查询转 join）其次，最后才是参数与架构|优化先从改参数开始|explain 结果一定准确|优化不需要验证|方法论回答框架|实战方法论
+MY-072|MySQL|类型|时间|datetime|时间类型选型：datetime（8 字节与时区无关）vs timestamp（4 字节 2038 上限随时区转换）|timestamp 优势省空间与自动时区转换，跨时区系统用 UTC+timestamp 或统一 datetime+应用层时区，bigint 存毫秒是互联网常见做法|timestamp 没有 2038 问题|datetime 能存时区信息|timestamp 精度只有秒（8.0.19+ 支持到微秒）|建表规范的知识点|实战共识
+MY-073|MySQL|字符集|utf8mb4|utf8mb4|MySQL 的 utf8 是不完整实现（最多 3 字节），存 emoji 必须 utf8mb4|utf8mb4 是真 UTF-8（4 字节），建表默认 utf8mb4+utf8mb4_0900_ai_ci（8.0 默认排序规则），老库迁移要评估索引长度变化|MySQL utf8 就是标准 UTF-8|utf8mb4 存中文占 4 字节|排序规则不影响索引长度（utf8mb4 下联合索引长度易超限）|建表规范第一条|实战共识
+MY-074|MySQL|类型|null|null|列默认尽量 NOT NULL：null 影响索引统计、count(col) 忽略 null、is null 判断易错|null 参与比较结果为 unknown、聚合跳过 null、可空列索引需要额外标记，默认 NOT NULL+默认值是规范，但 is null 查询可以走索引|null 不能走索引|NOT NULL 会提升插入性能一个量级|null 不占存储空间|建表规范的原理依据|实战共识
+MY-075|MySQL|SQL|in|列表|in 大列表问题：几千个 id 的 in 查询解析与优化器成本上升|拆批（每批 500-1000）、临时表 join、或业务上用缓存，MyBatis foreach 大列表是线上故障常见根因|in 列表无大小限制|in 比 join 慢是绝对的|拆批对性能无影响|ORM 层的隐性坑|实战共识
+MY-076|MySQL|SQL|排序|order by|order by 走索引免排序（联合索引含排序列），否则 filesort（sort_buffer 内存不足落盘临时文件）|filesort 单行太大或行数多时用"分批+归并"，max_length_for_sort_data 控制单路/双路策略，覆盖索引免回表是 order by 优化核心|filesort 一定落盘|order by 必须加索引列|sort_buffer 大小决定内存排序上限（有影响但不是全部）|排序慢查询分析|实战共识
+MY-077|MySQL|SQL|分组|group by|group by 无索引时走临时表+排序（8.0 默认不排序了），group by 结果需要 order by 显式声明|8.0 起 group by 不再隐式排序（5.7 隐式按分组列排序），依赖旧行为的 SQL 升级后出 Bug|group by 结果总是有序|8.0 group by 隐式排序|临时表与排序不能同时出现|版本升级兼容性知识点|MySQL 8.0
+MY-078|MySQL|SQL|锁|乐观锁|乐观锁更新：update ... set version=version+1 where id=? and version=? 判断影响行数|无锁化高并发更新标准手法（库存扣减、状态机流转），失败重试或业务提示，与 select for update 悲观锁对比选型|乐观锁需要数据库锁支持|乐观锁失败自动重试|影响行数为 1 表示成功|高并发更新模式|实战共识
+MY-079|MySQL|SQL|锁|悲观锁|悲观锁 select ... for update 在事务内锁住选中行直到提交|热点行强一致更新（账户余额）、与乐观锁按冲突率选择，for update 必须走索引否则锁范围放大|for update 不需要事务|它锁到语句执行结束|for update 是表锁|支付类场景锁选型|实战共识
+MY-080|MySQL|分布式|事务|最终一致|跨库事务主流方案：最终一致性（本地消息表/事务消息）优于强一致（XA/TCC 成本高）|本地消息表：业务与消息同库事务，异步投递+重试+对账，Seata AT 模式（undo_log 自动补偿）适合低冲突场景|跨库事务首选 XA|本地消息表需要消息队列强一致|最终一致可能永久不一致（靠对账兜底）|分布式事务选型主线|实战方法论
+MY-081|MySQL|运维|大表|清理|大表数据清理：分批 delete（每批几千行+sleep）避免长事务与主从延迟，归档走 PT-archiver|一次性删百万行产生大事务（undo 膨胀、复制延迟、锁堆积），按主键分批+间隔是标准做法，drop/truncate 直接重置|一次 delete 百万行没问题|分批删除不需要主键顺序|归档与清理是一回事|大表运维实操|实战共识
+MY-082|MySQL|运维|容量|降级|容量预警指标：磁盘空间（binlog+数据）、连接数使用率、buffer pool 命中率、QPS 趋势|容量规划按增长趋势提前扩容，磁盘满会写挂（先 binlog 满），监控四项指标设阈值告警|磁盘满 MySQL 自动清理|连接数不用监控|QPS 趋势无预警价值|运维监控基线|实战方法论
+MY-083|MySQL|架构|分层|Server 层|MySQL 架构分层：Server 层（连接器/分析器/优化器/执行器）+ 存储引擎层（InnoDB）|连接器管连接与权限、分析器词法语法、优化器选索引与 join 顺序、执行器调引擎接口，缓存（query cache）8.0 已移除|query cache 在 8.0 默认开启|存储引擎负责 SQL 解析|权限校验只在连接时做（每查询也校验）|架构总图题|MySQL 8.0
+MY-084|MySQL|架构|缓存|query cache|query cache 在 MySQL 8.0 被移除（命中失效代价大于收益）|任何表更新使相关缓存全部失效，高更新场景得不偿失，8.0 删除该功能改由应用层 Redis 承担缓存职责|8.0 还有 query cache|query cache 提升写性能|移除是因为性能 bug|版本演进知识点|MySQL 8.0
+MY-085|MySQL|InnoDB|架构|内存结构|InnoDB 内存结构：buffer pool（数据页）、change buffer（二级索引写）、log buffer、AHI（自适应哈希）|buffer pool 按 LRU 变体（young/old 区防全表扫描污染）管理，预读与老生代窗口参数（innodb_old_blocks_time）调优|buffer pool 用标准 LRU|change buffer 缓存数据页|AHI 默认关闭|内存管理深入知识|InnoDB 文档
+MY-086|MySQL|InnoDB|LRU|防污染|InnoDB LRU 改进：新页先进 old 区（5/8 处）停留 innodb_old_blocks_time 后才进 young 区|全表扫描的页只污染 old 区不挤掉热点页，这是与教科书 LRU 的关键差异，防止一次性扫描冲垮缓存|InnoDB 用纯 LRU 无改进|全表扫描不影响缓存|old 区在链表头部|缓存污染防御机制|InnoDB 文档
+MY-087|MySQL|事务|changelog|数据字典|MySQL 8.0 数据字典事务化（存 InnoDB 表）不再有 frm 文件|DDL 原子化（原子 DDL），半成品 DDL 不再存在，5.7 的 frm/par 文件消失，迁移与备份工具需适配|8.0 仍有 frm 文件|DDL 仍可能半途而废留下脏结构|数据字典在文件系统|版本迁移知识点|MySQL 8.0
+MY-088|MySQL|运维|监控|健康度|MySQL 健康监控：QPS/TPS、慢查询数、主从延迟、连接数、buffer pool 命中率、锁等待|Prometheus+mysqld_exporter 标准化采集，核心告警：延迟超阈值、连接拒绝、磁盘水位，健康大盘是稳定性基础|监控只需看 CPU|主从延迟无法监控|监控指标采集影响性能可忽略（exporter 开销极小）|数据库运维基线|实战共识
+MY-089|MySQL|实践|读写分离|路由|读写分离实现：应用侧（ShardingSphere-JDBC/组件）或代理层（ProxySQL/MyCat），路由规则按 SQL 类型与业务标记|写后立即读的场景路由主库（复制延迟窗口），给事务内读与关键读打主库标记，默认读走从库分摊压力|读写分离中间件自动处理所有一致性|事务内读可以走从库|代理层一定优于应用层|读写分离架构实施|实战共识
+MY-090|MySQL|实践|抖动|flush|性能周期性抖动常见根因：脏页比例接近阈值触发激进刷盘（连击）|innodb_max_dirty_pages_pct 触控刷脏、redo 快满强制 checkpoint，抖动时刻看脏页比例与 checkpoint age，容量规划 SSD 减轻|抖动一定是 CPU 不足|刷脏只在凌晨执行|抖动与 buffer pool 无关|线上性能抖动诊断|实战共识
+MY-091|MySQL|事务|长事务|危害|长事务危害：undo 膨胀（MVCC 版本链堆积）、锁持有久、MDL 阻塞 DDL、主从延迟|监控 information_schema.innodb_trx 长事务告警，业务拆事务边界（事务内无 RPC/MQ），statement timeout 限制|长事务只影响性能不丢数据|undo log 自动清理与事务长短无关|长事务提交后才算结束（提交即释放 undo 引用）|事务治理核心|实战共识
+MY-092|MySQL|运维|压测|基线|数据库压测基线：sysbench 按模型压出单机极限（TPS/QPS/延迟 P99），容量规划与降级阈值依据|线上流量不超基线的 60-70% 留冗余，压测报告随架构变更更新，全链路压测（染色+影子库）验证真实流量|压测一次即可永久使用|sysbench 结果等于业务 TPS|压测不影响线上|容量与稳定性依据|实战方法论
+MY-093|MySQL|备份|策略|RPO|备份策略设计：全量频率×binlog 保留=RPO（可接受丢失窗口），恢复时间=RTO|金融 RPO=0（半同步+异地容灾）、一般业务 RPO=分钟级（每日全量+binlog），备份异地存储（防机房故障）与恢复演练制度化|备份在本地就安全|备份频率越高越好不需要演练|RPO 由 binlog 决定与备份无关|容灾体系设计|实战方法论
+MY-094|MySQL|高可用|容灾|两地三中心|容灾架构：同城双机房（半同步）+异地灾备（异步复制），两地三中心是金融标配|同城故障 RTO 分钟级，异地机房灾难靠异步复制（RPO 分钟级）+定期演练切换，单元化（异地多活）是更高级形态|异地复制能保证 RPO=0|容灾演练不需要做|两地三中心成本与单机房相同|容灾架构演进|实战方法论
+MY-095|MySQL|SQL|安全|SQL 注入|SQL 注入防御：预编译（PreparedStatement 占位符）而非拼接，ORM 参数绑定天然防注入|预编译把 SQL 结构与数据分离，注入字符成为纯数据，动态拼接（order by/表名白名单校验）是残余风险点|拼接参数自动防注入|ORM 完全免疫注入|注入只影响查询|安全编码底线|实战共识
+MY-096|MySQL|SQL|权限|最小权限|账号权限最小化：业务账号只授 DML（无 DDL/无 drop），只读账号专供报表，root 隔离运维|权限泄漏与误操作是数据事故主源，grant 按 IP 限定来源，审计日志（audit plugin）记录敏感操作|业务账号需要全部权限|权限只按库不按表（可按表粒度）|授权后立即生效需重启|数据库安全基线|实战共识
+MY-097|MySQL|版本|升级|8.0|MySQL 8.0 升级收益：窗口函数、CTE、原子 DDL、instant 加列、hash join、默认 utf8mb4|窗口函数与 CTE 简化复杂 SQL（排名/同比），升级注意：group by 隐式排序移除、默认认证插件 caching_sha2_password（老驱动兼容）|8.0 只是性能升级无新语法|升级无兼容性问题|窗口函数 5.7 已有|升级评估清单|MySQL 8.0
+MY-098|MySQL|SQL|窗口|窗口函数|窗口函数 over(partition by ... order by ...) 做分组内排名/累计/同比不减少行数|与 group by 的区别（不聚合行数），row_number/rank/dense_rank 排名差异（并列处理），lag/lead 取前后行|窗口函数会合并行|rank 与 row_number 完全相同|窗口函数不能用于 where（窗口在 where 之后执行，需要套子查询）|复杂报表 SQL 标配|MySQL 8.0
+MY-099|MySQL|SQL|CTE|CTE|CTE（with 子句）与递归 CTE 处理树形/图遍历查询|递归 CTE（with recursive）查组织架构/评论树替代应用层递归，深度控制防死循环，是 8.0 复杂查询利器|递归 CTE 无法终止|CTE 是临时表别名（是命名查询可递归）|树查询只能应用层实现|层级数据查询方案|MySQL 8.0
+MY-100|MySQL|实践|幂等|唯一键|幂等落地：业务唯一键（订单号）+插入冲突处理（on duplicate/捕获重复异常）|唯一键是幂等最后防线（消息重投、请求重试），配合 upsert 或 insert ignore 语义明确，业务键设计决定幂等粒度|幂等靠代码 if 判断（并发下有窗口）|唯一键冲突异常无需处理|upsert 会删除旧数据|支付/消息消费幂等标准实现|实战共识
+MY-101|MySQL|实践|热点|热点行|热点行更新优化：内存队列合并（单线程串行扣减）、库存分段（拆多行）、Redis 预扣|秒杀热点行死锁检测与锁竞争是瓶颈，分段库存把 1 行拆 N 行随机路由，Redis 预扣减 DB 兜底，是电商库存三段式方案|热点行靠加大 innodb 线程解决|串行化更新是反模式|库存扣减不需要一致性|秒杀架构核心难点|实战方法论
+MY-102|MySQL|实践|对账|兜底|资金/库存类数据必须有对账体系：准实时对账（消息比对）+日终对账（T+1 全量）+差错处理流程|对账是最终一致性的最后一环，发现差异进入差错池人工/自动修复，无对账的分布式账务不可上线|对账只在故障后做|实时对账能替代日终对账|对账系统不影响业务流程|资金安全底线|实战方法论
+MY-103|MySQL|运维|故障|应急预案|DB 故障应急预案：降级（写降级/限流）、切换（主从切换自动化）、恢复（备份+binlog），预案需演练|预案文档化+季度演练（混沌工程），故障时按 runbook 执行而非临场发挥，MTTR 指标考核|应急预案写好即可无需演练|降级会丢数据|切换主从无需演练验证|稳定性体系建设|实战方法论
+MY-104|MySQL|实践|慢 SQL|治理|慢 SQL 治理体系：上线前 SQL 审核（RDM/Inception 类工具）+线上慢日志监控+TopSQL 优化闭环|事前拦截（索引缺失/全表扫描 SQL 拒绝发布）优于事后救火，DBA 平台自动化审核+治理看板|慢 SQL 靠 DBA 事后处理|SQL 审核工具没必要|治理与开发流程无关|数据库质量体系|实战方法论
+MY-105|MySQL|实践|变更|规范|DDL/DML 变更规范：变更走工单+备份先行+低峰执行+大表用 gh-ost+变更后验证|手工直连生产库是事故之源（删库跑路案例），所有变更平台化留痕，变更窗口与回滚方案前置|变更可以直接改生产（有测试环境验证过）|备份只在升级时做|变更不需要验证步骤|生产变更纪律|实战方法论
+MY-106|MySQL|实践|报表|分离|OLTP 与 OLAP 分离：报表/分析走从库或数仓（ClickHouse），主库只服务交易|大查询拖垮主库（buffer pool 污染+CPU），数据通过 binlog→CDC（Flink/Canal）入数仓，实时与离线分层|报表查询放主库没问题|OLAP 必须用 MySQL 主库|CDC 同步是实时的（有秒级延迟需容忍）|架构分层设计|实战方法论
+MY-107|MySQL|实践|归档|冷热|冷热分离：热数据（近 N 月）在线库，冷数据归档库（压缩表/对象存储），查询路由按时间|在线库保持小容量（索引高效），归档按 partition drop 秒级清理，归档库查询走专门服务|归档数据必须保留在原表|冷热分离影响业务查询|归档只能定时全量导出|大表生命周期管理|实战方法论
+MY-108|MySQL|实践|限流|DB 保护|数据库保护三板斧：应用层限流（保护连接池）、连接池上限（HikariCP maximumPoolSize）、DB 层 max_connections|雪崩链路：慢 SQL→连接耗尽→全部服务超时，限流+熔断（快速失败）+慢 SQL 治理三管齐下|连接数越大吞吐越高|max_connections 设 1 万即可|连接池与 DB 限流是重复配置|高可用防护体系|实战方法论
+MY-109|MySQL|面试|主线|复习|MySQL 复习主线：索引（B+树/最左/失效）→事务（redo/undo/MVCC/两阶段）→锁（Next-Key/MDL）→复制→分库分表|按面试频率排序，事务与索引占一半分值，分库分表是 P7+ 分水岭，背框架再填细节|主从复制最重要|锁占比最大|分库分表可以不复习|复习时间分配|复习方法论
+MY-110|MySQL|实践|参数|上线|MySQL 上线参数检查单：双 1、字符集 utf8mb4、innodb_buffer_pool、慢日志开启、备份任务、监控接入|每次建库按检查单执行防漏配，参数变更走评审，线上实例标准化（镜像/配置模板）|默认参数生产可用|检查单只在第一次建库用|参数不需要评审|运维标准化|实战方法论

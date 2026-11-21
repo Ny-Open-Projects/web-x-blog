@@ -1,0 +1,719 @@
+# Java AI 框架知识点事实矩阵（JA-xxx）—— Spring AI 1.0 GA / LangChain4j 1.0 / MCP Java SDK
+# 格式: id|domain|topic|dim|term|fact|why|miscon1|miscon2|miscon3|usage|version
+# 准确性纪律：只写确证存在的类/方法/属性；不确定的属性名一律不落字段；措辞带版本限定
+
+JA-001|Java AI|Spring AI|ChatClient|ChatClient|Spring AI 的核心高层 API 是 ChatClient：ChatClient.create(chatModel) 构建，.prompt().user(...).call().content() 返回字符串|ChatClient 是流式链式门面，屏蔽底层 ChatModel 差异，业务代码面向它编程则换模型不改代码|ChatClient 由 new 直接构造|ChatClient 直接返回 ChatResponse 对象|call 与 stream 是同一个方法的不同参数|业务层统一入口，模型层可替换|Spring AI 1.0 GA
+JA-002|Java AI|Spring AI|流式|stream|ChatClient 流式调用 .stream().content() 返回 Flux<String>（Reactor 类型）|流式走 SSE 推给前端需 WebFlux 或 SseEmitter 桥接，返回类型是 Reactor Flux 是响应式栈的标志|stream 返回 List<String>|stream 阻塞到全部生成完|Flux 是 Spring AI 自研类型|WebFlux 技术栈对接 SSE|Spring AI 1.0 GA
+JA-003|Java AI|Spring AI|结构化|entity|ChatClient 结构化输出：.call().entity(MyDto.class) 直接得到 Java 对象|框架把目标类型转成 JSON Schema 注入提示词，返回 JSON 后反序列化，业务免手写解析|entity 返回 JSON 字符串|entity 只支持 String 类型|结构化输出不需要提示词工程（框架内部做了约定注入）|下游强类型消费（报表/工单结构）|Spring AI 1.0 GA
+JA-004|Java AI|Spring AI|提示词|system|ChatClient 用 .system(...) 设系统提示、.user(...) 设用户消息，链式可多次调用|系统提示承载角色与规则、用户消息承载当次输入，分离设置是 prompt 工程在框架层的落点|system 与 user 必须合并成一个字符串|只能设置一次 user|system 在 call 时才被读取|角色定义与输出规则放 system|Spring AI 1.0 GA
+JA-005|Java AI|Spring AI|Advisor|advisor|Spring AI 的 advisor 机制：.advisors(...) 挂载拦截链，请求在调用模型前后经过 advisor|RAG 检索、对话记忆、日志审计都以 advisor 实现，业务代码组合 advisor 即可叠加能力，是 Spring AI 的扩展主轴|advisor 只能有一个|advisor 在模型调用后失效|advisor 是过滤器别名|RAG/记忆/审计组合装配|Spring AI 1.0 GA
+JA-006|Java AI|Spring AI|RAG|QuestionAnswerAdvisor|QuestionAnswerAdvisor 是向量库 RAG 开箱 advisor：检索相关文档并注入提示词|挂载后每次提问自动走"向量化→相似检索→上下文注入"，业务一行 advisor 即得 RAG 能力|RAG 必须手写检索代码|QuestionAnswerAdvisor 不需要 VectorStore|advisor 只注入固定文档|RAG 管道快速落地|Spring AI 1.0 GA
+JA-007|Java AI|Spring AI|记忆|MessageChatMemoryAdvisor|MessageChatMemoryAdvisor 把 ChatMemory 中的历史注入对话|记忆与 advisor 解耦：换记忆实现只换 ChatMemory bean，注入逻辑不变，多会话按 conversationId 隔离|记忆必须在 prompt 里手动拼接|MessageChatMemoryAdvisor 与 ChatMemory 无关|conversationId 是可选项（多会话必须传）|多轮对话记忆装配|Spring AI 1.0 GA
+JA-008|Java AI|Spring AI|记忆|MessageWindowChatMemory|ChatMemory 默认实现 MessageWindowChatMemory 按窗口保留最近 N 条消息|窗口截断防 token 爆炸，持久化经 ChatMemoryRepository（内存或 JDBC 实现）|ChatMemory 无限保留全部历史|MessageWindowChatMemory 是持久化数据库|窗口参数不可调|多轮上下文成本控制|Spring AI 1.0 GA
+JA-009|Java AI|Spring AI|工具|@Tool|Spring AI 用 @Tool 注解声明工具方法，框架自动包装为 ToolCallback|模型通过 function calling 输出工具调用，框架执行方法并回填结果，业务只写普通 Java 方法|工具方法必须实现特定接口|@Tool 方法不能有参数|工具执行在模型侧进行|让模型操作业务能力（查订单/发通知）|Spring AI 1.0 GA
+JA-010|Java AI|Spring AI|工具|ToolCallback|ToolCallback 是 Spring AI 工具的底层抽象，@Tool 方法由框架包装成回调|链路：模型输出调用意图→ToolCallingManager 执行回调→结果回填下一轮请求，理解链路才能调试工具不触发问题|ToolCallback 由业务手动执行|工具结果直接返回用户不回模型|一个应用只能注册一个工具|工具链路排障知识|Spring AI 1.0 GA
+JA-011|Java AI|Spring AI|向量|EmbeddingModel|EmbeddingModel.embed("文本") 返回 float[] 向量，支持批量 embed(List)|嵌入模型抽象屏蔽厂商差异（OpenAI/Ollama 等），向量喂给 VectorStore 做检索|embed 返回 String|嵌入不需要网络调用|float[] 与 List<Double> 等价混用|RAG 管道第一步|Spring AI 1.0 GA
+JA-012|Java AI|Spring AI|向量|VectorStore|VectorStore 接口两个核心动作：add(List<Document>) 写入与 similaritySearch(SearchRequest) 检索|检索参数在 SearchRequest 上（query/topK/similarityThreshold），接口统一所以换向量库不改业务代码|VectorStore 自带嵌入能力无需 EmbeddingModel|similaritySearch 返回完整文档集合不带相似度|add 接收字符串|RAG 存取标准动作|Spring AI 1.0 GA
+JA-013|Java AI|Spring AI|向量|SimpleVectorStore|SimpleVectorStore 是 Spring AI 内置的内存向量库实现|零依赖快速起 RAG（开发/测试），生产换 pgvector/Milvus/Chroma 等 starter 实现，接口不变|SimpleVectorStore 可持久化生产使用|内置向量库性能接近专用库|换向量库要改业务代码|开发环境 RAG 快速验证|Spring AI 1.0 GA
+JA-014|Java AI|Spring AI|ETL|DocumentReader|Spring AI 的 ETL 管道：DocumentReader 读→DocumentTransformer 切→DocumentWriter 存|TokenTextSplitter 把长文档切分为带元数据的 Document 列表，TikaDocumentReader 支持解析 PDF/Word 等格式|ETL 三步可以乱序|DocumentTransformer 负责写入向量库|Tika 是内置无需依赖|知识入库管道|Spring AI 1.0 GA
+JA-015|Java AI|Spring AI|配置|api-key|OpenAI 模型接入配置属性以 spring.ai.openai 前缀：api-key 配密钥，chat.options.model 配默认模型|自动装配依据这些属性构建 ChatModel bean，密钥必须走环境变量或配置中心不入库|密钥直接写在 application.yml 提交仓库|属性前缀是 spring-ai（点号无）|配置只在启动时读取且不能换模型|OpenAI 接入标准配置|Spring AI 1.0 GA
+JA-016|Java AI|Spring AI|选项|ChatOptions|运行时覆盖模型参数：.options(OpenAiChatOptions.builder().temperature(0.2).model(...).build())|默认选项来自配置文件，每次调用可用 options 局部覆盖（温度/模型/maxTokens），精细控制不同业务的生成行为|options 会修改全局默认配置|temperature 只能配置文件设|每次调用无法换模型|分级路由与参数微调|Spring AI 1.0 GA
+JA-017|Java AI|Spring AI|本地模型|Ollama|Spring AI 经 spring-ai-ollama starter 接本地 Ollama，配置 spring.ai.ollama.base-url 指向本地服务|本地模型（隐私/成本）与云端 API 同一编程模型（ChatClient 不变），换 provider 只是换依赖与配置|Ollama 需要改业务代码适配|Ollama 只支持推理不支持嵌入|base-url 默认指向云端|私有化部署接入|Spring AI 1.0 GA
+JA-018|Java AI|Spring AI|模板|PromptTemplate|PromptTemplate 用 {占位符} 语法定义模板，add 渲染变量后生成 Prompt 对象|模板与代码分离（资源文件管理），渲染由 StringTemplate 引擎完成，占位符缺失渲染期报错|PromptTemplate 用 ${} 语法|模板只能写在代码里|渲染缺失占位符静默跳过|提示词资产管理|Spring AI 1.0 GA
+JA-019|Java AI|Spring AI|可观测|Observation|Spring AI 集成 Micrometer Observation：ChatModel/ChatClient 调用产生 trace 与 metrics|每次 LLM 调用有观测数据（耗时/token），与业务 trace 同链路串联，生产排障与成本归集的基础|LLM 调用无法被追踪|Observation 默认关闭且不能开|metrics 不含 token 数|LLM 调用监控落地|Spring AI 1.0 GA
+JA-020|Java AI|Spring AI|可靠性|retry|Spring AI 内置重试：spring.ai.retry 前缀配置最大尝试与退避策略|模型服务限流与瞬时故障常见，框架层指数退避兜底，重试耗尽异常上抛由业务降级处理|Spring AI 不做任何重试|重试无限次直到成功|重试不需要幂等（对话调用天然幂等可重试）|生产可靠性配置|Spring AI 1.0 GA
+JA-021|Java AI|MCP|客户端|McpSyncClient|Spring AI 的 MCP 客户端：starter 引入后自动装配 McpSyncClient，可 listTools 发现工具|客户端连接 MCP server 后工具自动进入生态（可被 ChatClient 调用），发现与调用是两个显式动作|McpSyncClient 需要手动 new|listTools 直接执行工具|客户端与服务端同进程|接入外部工具生态|Spring AI 1.0 GA
+JA-022|Java AI|MCP|服务端|mcp-server|Spring AI 的 MCP 服务端 starter：spring-ai-starter-mcp-server（stdio）与 webmvc/webflux（SSE）变体|把本应用的 @Tool 能力暴露为 MCP 服务给其他 Agent 复用，transport 决定通信方式（本地子进程 vs 远程 HTTP）|MCP server starter 只能走 stdio|暴露后其他进程无法调用|服务端与客户端是同一个 starter|MCP 服务提供方搭建|Spring AI 1.0 GA
+JA-023|Java AI|MCP|SDK|io.modelcontextprotocol|MCP Java SDK 的 Maven 坐标是 io.modelcontextprotocol.sdk:mcp，Spring AI 的 MCP starter 是其封装|理解层次：SDK 提供 McpServer/McpClient 核心，Spring AI starter 负责自动装配，SDK 可脱离 Spring 使用|MCP Java SDK 是 Spring 自研私有协议|SDK 不能脱离 Spring 使用|坐标是 org.springframework.ai:mcp-core|非 Spring 应用接 MCP|MCP Java SDK
+JA-024|Java AI|MCP|协议|JSON-RPC|MCP 协议构建在 JSON-RPC 2.0 之上（initialize/tools/list/tools/call 等方法）|协议层标准化让任何语言的客户端服务端互通，Java SDK 只是协议的一种实现|MCP 是 Java 专有协议|MCP 用 REST 通信|协议方法名可以随意自定义|协议本质理解|MCP 规范
+JA-025|Java AI|MCP|传输|stdio|MCP 传输层决定通信方式：stdio 常用于本地子进程，SSE/HTTP 用于远程服务|Claude Desktop 等客户端以 stdio 子进程方式拉起本地 MCP server，远程共享则用 SSE transport，选型按部署形态|MCP 只有一种传输方式|stdio 用于远程调用|transport 是可选项|本地 vs 远程服务部署|MCP 规范
+JA-026|Java AI|MCP|工具|tools/call|MCP 工具调用链路：client.listTools() 发现工具描述，client.callTool(...) 执行并取结果|工具描述含名称/说明/inputSchema（JSON Schema），schema 描述决定模型能否正确填参|callTool 会自动发现工具|工具描述不影响模型填参|schema 是可选装饰|MCP 工具排障|MCP Java SDK
+JA-027|Java AI|LangChain4j|模型|ChatLanguageModel|LangChain4j 的模型抽象是 ChatLanguageModel 接口，1.0 统一 chat 方法入口|各 provider（OpenAI/Ollama/Azure 等）提供实现，业务面向接口编程换 provider 不换代码|ChatLanguageModel 只支持 OpenAI|接口方法是 generate（1.0 已统一为 chat）|每个 provider 的调用方式完全不同|模型抽象层理解|LangChain4j 1.0
+JA-028|Java AI|LangChain4j|构建|builder|LangChain4j 模型用 builder 构建：OpenAiChatModel.builder().apiKey(...).modelName(...).build()|无 Spring 自动装配时手动构建（纯 Java 应用），参数在 builder 上显式可见|LC4j 模型只能通过 Spring 注入|builder 无 apiKey 参数|构建后模型不可复用|纯 Java 应用接入|LangChain4j 1.0
+JA-029|Java AI|LangChain4j|AiServices|AiServices|LangChain4j 声明式 AI 服务：AiServices.builder(接口.class).chatLanguageModel(model).build() 生成动态代理|接口方法即 AI 调用（注解定义提示词），返回类型决定结构化输出行为，是 LC4j 的招牌设计|AiServices 需要继承抽象类|生成的代理不能返回 POJO|与动态代理无关|声明式 AI 服务落地|LangChain4j 1.0
+JA-030|Java AI|LangChain4j|注解|@UserMessage|@SystemMessage 与 @UserMessage 注解在接口方法上定义提示词模板，参数经占位符注入|模板与 Java 代码同文件管理，{{it}} 注入单参数，多参数按名绑定|注解只能标在类上|占位符语法是 {0} 下标式|提示词无法复用资源文件|声明式提示词管理|LangChain4j 1.0
+JA-031|Java AI|LangChain4j|工具|@Tool|LangChain4j 的 @Tool 注解声明工具方法，AiServices.tools(obj) 挂载后模型可调用|框架把方法反射为 ToolSpecification（名称/描述/schema）传给模型，模型回填参数后本地执行|LC4j 工具要手动拼 JSON|@Tool 方法不能重载|工具在模型服务端执行|Agent 工具接入（与 Spring AI 的 @Tool 同思想）|LangChain4j 1.0
+JA-032|Java AI|LangChain4j|RAG|ContentRetriever|LangChain4j 的 RAG 接口是 ContentRetriever，EmbeddingStoreContentRetriever 为向量检索实现|AiServices.contentRetriever(...) 挂载后提问自动检索注入，换检索源只换实现类|RAG 必须手写检索与拼接|ContentRetriever 是文档加载器|挂载后不再使用模型|RAG 管道装配|LangChain4j 1.0
+JA-033|Java AI|LangChain4j|向量|EmbeddingStore|LangChain4j 的向量抽象是 EmbeddingStore<TextSegment>，内置 InMemoryEmbeddingStore 等实现|pgvector/Milvus/Chroma 等以独立模块提供，接口统一换库不改代码，与 Spring AI 的 VectorStore 同思想|EmbeddingStore 存原始文档字符串|内置实现可承载生产|换库需要重写业务|向量库选型自由度|LangChain4j 1.0
+JA-034|Java AI|LangChain4j|切分|DocumentSplitters|LangChain4j 的文档切分：DocumentSplitters.recursive(段大小, 重叠) 把 Document 拆成 TextSegment|递归切分按段落优先保持语义边界，TextSegment 携带元数据进向量库，是 RAG 质量的第一决定因素|切分器只支持固定长度|切分与向量库无关（切分决定检索质量）|TextSegment 无元数据|知识库切分策略|LangChain4j 1.0
+JA-035|Java AI|LangChain4j|记忆|ChatMemory|LangChain4j 的记忆：MessageWindowChatMemory 窗口记忆，AiServices.chatMemoryProvider(id→memory) 支持多会话|多用户场景按 memoryId 隔离各自窗口，持久化由 ChatMemoryStore 接口实现（内存/数据库）|记忆自动全局共享|多会话不需要 memoryId|窗口截断会丢系统提示|多会话记忆装配|LangChain4j 1.0
+JA-036|Java AI|LangChain4j|流式|TokenStream|LangChain4j 流式：StreamingChatLanguageModel 或 AiServices 返回 TokenStream（onPartialResponse 逐段回调）|流式回调与 Reactor 无关（LC4j 自定义回调风格），SSE 输出需桥接，消费完 onCompleteResponse 收尾|TokenStream 返回完整字符串|流式必须用 WebFlux|回调是 Reactor Flux|流式交互实现|LangChain4j 1.0
+JA-037|Java AI|LangChain4j|护栏|Guardrail|LangChain4j 1.0 提供 InputGuardrail 与 OutputGuardrail 对输入输出做校验拦截|护栏在模型调用前后执行（可改写/拒绝），合规与安全需求以声明式挂载，与 Spring AI 的 advisor 异曲同工|LC4j 没有护栏能力|护栏在模型服务端执行|护栏只能拒绝不能改写|输入输出合规落地|LangChain4j 1.0
+JA-038|Java AI|LangChain4j|Spring|starter|LangChain4j 提供 Spring Boot starter（如 langchain4j-open-ai-spring-boot-starter）自动装配 ChatLanguageModel bean|Spring 项目里与 Spring AI 类似的体验（配置属性+自动装配），选择框架看生态契合而非能力缺失|LC4j 无法在 Spring 中使用|starter 会引入 Spring AI|自动装配需手动 new bean|Spring 集成路线|LangChain4j 1.0
+JA-039|Java AI|选型|对比|Spring AI vs LC4j|框架选型核心差异：Spring AI 深度集成 Spring 生态（advisor/observation/自动配置），LangChain4j 胜在 provider 广度与轻量|团队能力与现有栈决定：Spring 项目优先 Spring AI，非 Spring 或需多 provider 快换可 LC4j，两者思想同构（模型抽象+RAG 组件+工具）|两者 API 完全相同|只能二选一不能共存|选型只看 GitHub star 数|框架选型论证|2025
+JA-040|Java AI|选型|MCP 共存|langchain4j-mcp|两个框架都能接 MCP：Spring AI 有 mcp starter，LangChain4j 有 langchain4j-mcp 模块（McpToolProvider）|MCP 是传输与生态协议层（AI-018），框架只是客户端实现方，工具生态跨框架复用|MCP 只支持一个框架|两框架接 MCP 要重写工具|McpToolProvider 是 Spring AI 的类|MCP 生态复用|LangChain4j 1.0
+JA-041|Java AI|工程|测试|mock|LLM 应用可测性：ChatModel 是接口，单测注入 mock 实现（固定返回）隔离真实模型|AI 应用测试原则：业务逻辑用 mock 模型测（快且确定），模型质量用评估集测（AI-034），两者分开|LLM 应用无法测试|单测必须连真实模型|mock 模型返回值不可控|测试策略设计|实战共识
+JA-042|Java AI|工程|线程|线程安全|Spring AI 的 ChatClient 与 LangChain4j 的模型实例线程安全（无状态）可单例复用|构建成本高（HTTP 客户端池），单例复用是标准实践，per-call 状态（消息/options）在调用参数上传递|ChatClient 必须每次新建|模型实例不能并发调用|线程安全需要业务加锁|客户端生命周期管理|实战共识
+JA-043|Java AI|工程|安全|密钥管理|API key 管理：环境变量或配置中心注入，严禁提交仓库与打进镜像|key 泄漏即计费风险与数据风险，Spring 的属性覆盖机制天然支持环境变量注入，与配置外部化知识（SP-087）联动|key 放代码注释里最方便|镜像里内置 key 无风险|key 可以明文进日志|安全基线|实战共识
+JA-044|Java AI|工程|日志|脱敏|LLM 应用日志纪律：prompt 与输出不得全量落日志（含用户隐私与业务数据）|日志里的 prompt 即数据出域（合规 AI-040），脱敏或采样记录，异常排障用 traceId 关联而非全文|prompt 全量落日志便于排查|日志无合规要求|脱敏会破坏排障能力|合规与排障平衡|实战共识
+JA-045|Java AI|工程|成本|token|Java 侧 token 预算控制：请求前估算（prompt 长度）、响应侧 maxTokens 截断、按调用聚合成本|框架层拿到 usage 数据（观测/响应元数据），预算超限走降级模型或拒绝，与 AI-026 四招联动|token 无法在代码侧统计|maxTokens 是字符数|成本只看调用量|成本工程 Java 落地|实战共识
+JA-046|Java AI|工程|超时|超时|LLM 调用超时设置：连接超时短、读超时按生成时长放大（流式另算），重试与超时组合防雪崩|生成 10-60s 的长响应与普通 RPC 超时假设冲突，与 AI-030/DF-028 超时预算联动，流式首字快但总时长长|超时用默认 30 秒够用|超时后模型停止生成（需取消机制）|读超时设 2 秒即可|客户端参数审查项|实战共识
+JA-047|Java AI|Spring AI|多模型|model 声明|Spring AI 支持多 provider 共存：spring.ai.model.chat 指定生效的 chat provider（openai/ollama 等）|classpath 上多个 starter 并存时由该属性决定装配哪个，避免隐式冲突，多 provider 项目必知|多个 starter 自动全装配|该属性不存在|model 属性只管 embedding|多模型项目配置|Spring AI 1.0 GA
+JA-048|Java AI|Spring AI|类型|ChatResponse|Spring AI 底层类型链：Prompt（请求）→ ChatModel.call → ChatResponse（含 Generation 列表）|ChatClient 是门面，底层 call 返回 ChatResponse 可取 token usage 与 finishReason，需要细粒度信息时下沉到底层 API|ChatClient 是唯一入口无底层|ChatResponse 不含 token 数据|Generation 就是字符串|底层类型理解与下沉场景|Spring AI 1.0 GA
+JA-049|Java AI|Spring AI|版本|迁移|Spring AI 版本迁移注意：function calling 命名在 1.0 统一为 tools（ToolCallback）|旧教程/代码的 .functions(...) 写法在 1.0 迁移为 .tools(...)，迁移先查废弃 API 再升版本，与 SP-106 迁移方法联动|functions 与 tools 写法等价共存|迁移只是改版本号|命名从未变化|1.0 迁移清单|Spring AI 1.0 GA
+JA-050|Java AI|LangChain4j|结构化|POJO 返回|LangChain4j 的 AiServices 接口方法可直接声明 POJO 返回类型，框架自动做结构化输出|接口即契约：返回 String/POJO/TokenStream 由签名决定，结构化输出框架内部处理，与 Spring AI 的 entity() 同思想|POJO 返回需要手动 JSON 解析|只支持 String 返回|结构化输出是付费功能|声明式结构化|LangChain4j 1.0
+JA-051|Java AI|RAG|管道|组装|Java 侧 RAG 管道组装顺序：Reader 读→Splitter 切→EmbeddingModel 向量化→VectorStore 写入→检索时 QuestionAnswerAdvisor/ContentRetriever 注入|离线入库与在线检索两段式，两框架组件一一对应（思想同构），管道每步可替换实现|RAG 管道必须离线在线一体|向量化在检索时才做|切分在检索时进行|RAG 架构答题框架|实战共识
+JA-052|Java AI|RAG|检索|topK|检索参数治理：topK 与相似度阈值决定注入上下文的量，量大→token 贵且噪声多，量小→漏答案|Java 侧在 SearchRequest/retriever 配置，按业务调参并进评估集回归（AI-082 指标），是 RAG 调优第一旋钮|topK 越大越好|阈值不需要调|参数一次性设定永久有效|RAG 调参方法论|实战共识
+JA-053|Java AI|Agent|衔接|Agent 三件|Java 框架的 Agent 基础件：模型调用（ChatClient/ChatLanguageModel）+ 工具（@Tool）+ 循环（框架自动执行工具直到完成）|Spring AI 与 LC4j 都内置工具执行循环，简单 Agent 框架直接写，复杂规划/多 Agent 用 LangGraph 类编排（AI-015 联动）|Java 框架不能做 Agent|Agent 循环由业务手写|工具执行后流程终止|Java Agent 起步认知|2025
+JA-054|Java AI|Agent|MCP 工具|McpToolProvider|LangChain4j 的 McpToolProvider 把 MCP server 的工具包装为框架工具挂给 AiServices|MCP 工具与本地 @Tool 工具混用（同一 Agent 双来源），生态工具免重写接入，与 JA-040 联动|MCP 工具必须转成本地方法|McpToolProvider 是 Spring AI 类|MCP 工具与本地工具互斥|MCP 工具接入 LC4j|LangChain4j 1.0
+JA-055|Java AI|工程|降级|模型降级|Java 侧模型降级链：主模型失败（超时/限流）→备模型→兜底话术，配置中心切换与预案（AI-053 联动）|供应商故障是常态，代码按"模型抽象+多实现"设计天然支持降级，与熔断知识（DF-022）同构|降级只有报错一种结果|降级不需要预案|主模型永远可用|可用性工程|实战共识
+JA-056|Java AI|工程|幂等|调用幂等|LLM 调用的重试与幂等：生成类请求重试安全（无副作用），工具执行类请求重试需幂等（防重复下单/发通知）|工具在重试中可能被二次执行，工具实现须幂等（与 MQ-022/DF-019 幂等三段式同构），这是 Java 工程师最容易踩的 AI 坑|重试总是安全的|工具调用不需要幂等|模型重试会重复扣费（生成类重试只多计费不改状态）|工具可靠性红线|实战共识
+JA-057|Java AI|工程|观测|成本归集|成本归集实现：观测数据带业务标签（tenant/user），按标签聚合 token 与费用出账单|多业务共享 LLM 网关时按标签分摊成本（AI-051），Micrometer tag 是 Spring AI 观测的落点，财务口径与监控口径一致|成本无法按业务拆分|归集靠事后日志手工统计|标签只有模型名|平台化成本治理|实战共识
+JA-058|Java AI|测试|评估|评估集|评估集的工程化：50-200 条业务真实问题+期望要点，每次 prompt/模型变更跑回归（CI 集成），阈值门禁（AI-077 联动）|评估集是 AI 应用的"单元测试"，Java 工程师把它纳入构建管线（评估不过不发布），与回归门禁纪律同构|评估靠人工抽检就够|评估集一次构建永久用|门禁拖慢迭代（防隐性退化）|质量工程落地|实战共识
+JA-059|Java AI|工程|并发|限流|Java 侧 LLM 并发治理：供应商 RPM/TPM 配额下的应用限流（信号量/Redis 计数）+排队，超配额 429 退避重试|供应商限流是硬约束（AI-065），应用侧主动限流防雪崩，与分布式限流知识（DF-024）同构|供应商无限流|429 直接失败不重试|并发越大越好|配额治理|实战共识
+JA-060|Java AI|版本|锚点|版本线|版本锚点总表：Spring AI 1.0 GA（2025-05）、LangChain4j 1.0 GA（2025）、MCP Java SDK（2024 起，Spring AI 1.0 依赖其 0.10+ 线）|回答任何框架 API 问题先报版本（禁绝对化），本域所有结论锚定 1.0 GA 语义，旧版本教程差异先查迁移说明|Spring AI 1.0 在 2024 年 GA|LangChain4j 没有 1.0|MCP 是 Spring 私有规范|版本锚点纪律|2025
+JA-061|Java AI|Spring AI|提示词|参数模板|ChatClient 用户消息支持参数模板：.user(u -> u.text("查 {city} 天气").param("city", "杭州"))|模板与参数分离避免字符串拼接注入风险，参数渲染由框架完成，与 PromptTemplate 同思想|参数拼接必须手写字符串|param 只支持数字|模板渲染静默吞掉缺参|动态提示词安全组装|Spring AI 1.0 GA
+JA-062|Java AI|Spring AI|RAG|advisor 构建|QuestionAnswerAdvisor.builder(vectorStore).searchRequest(SearchRequest.builder().topK(5).build()).build() 精细配置检索|builder 暴露检索参数（topK/阈值/过滤），RAG 行为在装配期声明而非硬编码|QuestionAnswerAdvisor 只能默认构造|topK 在调用时随机|RAG 参数不可配置|RAG 装配精调|Spring AI 1.0 GA
+JA-063|Java AI|Spring AI|向量|filterExpression|SearchRequest.filterExpression 支持元数据过滤（如 type == 'news'）缩小检索范围|向量库层过滤（先过滤后近邻）比检索后业务过滤高效，元数据随 Document 入库即过滤字段|过滤只能在业务代码做|filterExpression 是 SQL 语句|元数据过滤不影响性能|多租户类目检索隔离|Spring AI 1.0 GA
+JA-064|Java AI|Spring AI|Advisor|参数传递|advisor 运行时参数经 .advisors(a -> a.param(...)) 传递，记忆会话 id 即经 ChatMemory.CONVERSATION_ID 参数传入|同一 ChatClient 服务多用户，会话标识按调用传入而非构建时绑定，多租户隔离的标准姿势|ChatClient 构建时绑定用户|advisor 参数不能动态传|conversationId 写死在代码|多会话隔离装配|Spring AI 1.0 GA
+JA-065|Java AI|Spring AI|元数据|Usage|ChatResponse.getMetadata().getUsage() 取 token 用量（promptTokens/generationTokens/totalTokens）|成本归集与预算控制的数据源（AI-045 联动），响应元数据自带无需额外计费接口|token 用量无法获取|Usage 只有总 token|用量单位是字符数|成本工程数据源|Spring AI 1.0 GA
+JA-066|Java AI|Spring AI|依赖|starter 命名|Spring AI 1.0 起 model starter 统一命名 spring-ai-starter-model-{provider}（如 spring-ai-starter-model-openai）|1.0 规范了 starter 命名（旧版 spring-ai-openai-spring-boot-starter 已迁移），升级按新名替换依赖|旧 starter 名在 1.0 继续有效|starter 名与 0.8 相同|一个项目只能一个 model starter|1.0 依赖迁移|Spring AI 1.0 GA
+JA-067|Java AI|Spring AI|记忆|Jdbc 仓储|ChatMemory 持久化用 JdbcChatMemoryRepository（chat-memory-repository-jdbc starter）|记忆跨实例共享与重启保留需仓储化，JDBC 实现配表结构自动管理，其他存储可自行实现仓储接口|记忆只能存内存|JDBC 仓储需要手工维护所有表|持久化改变记忆窗口语义|多实例会话记忆|Spring AI 1.0 GA
+JA-068|Java AI|Spring AI|切分|TokenTextSplitter|TokenTextSplitter 按 token 粒度切分文档（chunk 大小与重叠可配）|按 token 切分与模型上下文计量对齐（比字符切分准确），切分参数决定检索粒度|TokenTextSplitter 按字符切|切分参数不可调|切分无需考虑重叠|RAG 入库切分|Spring AI 1.0 GA
+JA-069|Java AI|Spring AI|工具|ToolContext|@Tool 方法可注入 ToolContext 参数携带调用上下文（如用户身份），上下文不进模型 schema|业务上下文随工具执行传递，模型只看到工具的业务参数，安全与审计的隔离层|ToolContext 会暴露给模型|上下文必须写进提示词|工具方法不能有第二参数|工具侧租户隔离|Spring AI 1.0 GA
+JA-070|Java AI|Spring AI|装配|ChatClient.Builder|Spring Boot 自动装配 ChatClient.Builder bean，注入后 .build() 得到 ChatClient|builder 由自动配置预置默认模型与选项，业务注入 builder 即可定制装配，免手写 create(model)|ChatClient.Builder 不存在|必须手动 create|builder 与 ChatClient 是一回事|Spring 环境标准装配|Spring AI 1.0 GA
+JA-071|Java AI|Spring AI|工具|returnDirect|@Tool(returnDirect=true) 让工具结果直接返回用户不再回模型|适合最终答案型工具（查询类直接出结果），省一轮模型调用降低延迟与成本|returnDirect 是默认行为|直接返回会绕过模型格式化|所有工具都该 returnDirect|低延迟查询工具优化|Spring AI 1.0 GA
+JA-072|Java AI|Spring AI|选项|ChatOptions 接口|ChatOptions 是通用选项接口（temperature/topP/maxTokens 等），各 provider 提供自己的 options 子类|业务代码面向 ChatOptions 编程，换 provider 不改选项传递结构，OpenAiChatOptions 只是其中实现|ChatOptions 是 OpenAI 专属|选项字段各 provider 语义完全不同|通用接口不能传|跨 provider 选项抽象|Spring AI 1.0 GA
+JA-073|Java AI|Spring AI|流式|工具循环|stream 模式同样支持工具调用循环（流式输出中穿插工具执行）|流式与工具能力正交，流式期间工具结果回填后继续生成，前端体验与能力兼得|stream 模式不支持工具|工具结果只有流结束后才处理|流式调用必须关闭工具|流式 Agent 场景|Spring AI 1.0 GA
+JA-074|Java AI|Spring AI|向量|vector store starter|向量库以 starter 集成（如 spring-ai-starter-vector-store-pgvector），自动装配对应 VectorStore bean|换向量库换 starter 依赖与连接配置即可，业务面向 VectorStore 接口|向量库需要手写连接代码|starter 只支持一种库|装配后不能有多个 VectorStore|生产向量库接入|Spring AI 1.0 GA
+JA-075|Java AI|Spring AI|配置|embedding 声明|embedding provider 用 spring.ai.model.embedding 属性独立声明（与 chat 分开）|chat 与 embedding 可用不同 provider（chat 用云端、embedding 用本地），按属性独立路由|chat 与 embedding 必须同 provider|embedding 无 provider 选择|属性只控制 chat|混合部署配置|Spring AI 1.0 GA
+JA-076|Java AI|Spring AI|消息|Message 类型|底层消息抽象：UserMessage/AssistantMessage/SystemMessage 三类聚合为 Prompt|ChatClient 门面之下消息有角色类型区分，需要精细控制消息序列时下沉到 Message 层构造 Prompt|所有消息是同一种类型|AssistantMessage 不能人工构造|消息类型只在日志区分|精细 prompt 组装|Spring AI 1.0 GA
+JA-077|Java AI|Spring AI|元数据|finishReason|响应元数据含 finishReason（STOP 正常结束/LENGTH 触达 maxTokens/工具调用待续等）|finishReason 驱动业务分支：LENGTH 需截断提示或续写，工具调用需等待下一轮，比只看文本更稳|finishReason 不重要|LENGTH 表示出错|只有 OpenAI 有该字段|生成边界处理|Spring AI 1.0 GA
+JA-078|Java AI|Spring AI|模板|资源加载|PromptTemplate 可从 classpath 资源文件构建，提示词与代码分离管理|提示词资产化（版本管理/评审/灰度），与 AI-064 版本管理联动，改提示词可不发版|PromptTemplate 只能代码内字符串|资源加载不被支持|模板修改必须重新编译|提示词资产管理|Spring AI 1.0 GA
+JA-079|Java AI|LangChain4j|模型|ChatRequest|LangChain4j 显式对象调用：model.chat(ChatRequest) 返回 ChatResponse，metadata 含 tokenUsage 与 finishReason|需要 token 统计与结束原因时用显式对象而非便捷字符串重载，与 Spring AI 的 Usage 对等|chat 只接受 String|ChatResponse 无元数据|tokenUsage 是估算值|细粒度调用控制|LangChain4j 1.0
+JA-080|Java AI|LangChain4j|检索|retriever 构建|EmbeddingStoreContentRetriever.builder().embeddingStore(...).embeddingModel(...).maxResults(k).minScore(t).build()|检索参数 builder 声明（数量/分数下限），与 Spring AI 的 SearchRequest 同思想，面向接口可替换|检索参数不可配置|maxResults 无上限|构建必须静态|RAG 检索精调|LangChain4j 1.0
+JA-081|Java AI|LangChain4j|高级 RAG|RetrievalAugmentor|LangChain4j 的高级 RAG 接口 RetrievalAugmentor：DefaultRetrievalAugmentor 组合查询改写/路由/聚合|简单 ContentRetriever 之上提供查询压缩、多路检索等编排（AI-045 自适应 RAG 思想），AiServices.retrievalAugmentor 挂载|LC4j 只有简单检索|RetrievalAugmentor 是文档读取器|高级 RAG 不能组合|RAG 架构进阶|LangChain4j 1.0
+JA-082|Java AI|LangChain4j|查询改写|QueryTransformer|QueryTransformer 把对话历史压缩成独立检索查询（如 CompactingQueryTransformer）|对话式提问直接检索效果差（指代不明），改写为自包含查询提升召回，是高级 RAG 的第一环|检索查询必须原样使用|QueryTransformer 是日志组件|改写会破坏语义|多轮 RAG 召回优化|LangChain4j 1.0
+JA-083|Java AI|LangChain4j|装配|retrievalAugmentor|AiServices.retrievalAugmentor(...) 挂载高级 RAG（与 contentRetriever 二选一，augmentor 内部可含 retriever）|简单场景用 contentRetriever，需要查询改写/多路检索升级为 augmentor，渐进式增强不改业务接口|两者必须同时挂|挂载后每次调用才编译|augmentor 替代模型|RAG 装配升级路径|LangChain4j 1.0
+JA-084|Java AI|LangChain4j|可靠性|timeout|LangChain4j 模型 builder 可配 .timeout(Duration) 与 .maxRetries(n) 控制超时与重试|构建期声明可靠性参数（AI-046 超时知识联动），重试幂等前提（JA-056）依旧成立|LC4j 无超时参数|重试默认无限|timeout 单位是毫秒整数|客户端可靠性参数|LangChain4j 1.0
+JA-085|Java AI|LangChain4j|Spring|属性前缀|langchain4j-open-ai-spring-boot-starter 的配置属性前缀 langchain4j.open-ai.chat-model（api-key/model-name/temperature）|Spring 集成下属性与 builder 参数一一对应，自动装配 ChatLanguageModel bean 直接注入使用|属性前缀是 spring.ai.open-ai|无法配 temperature|属性只支持 api-key|Spring 配置管理|LangChain4j 1.0
+JA-086|Java AI|LangChain4j|结构化|返回签名|LC4j 接口方法返回签名决定结构化行为：String/POJO/enum/List 均支持|按返回类型自动做结构化（枚举约束/JSON 反序列化），接口即契约，与 JA-050 联动|只支持 String 返回|POJO 返回需要注册转换器|结构化输出要额外付费|声明式结构化|LangChain4j 1.0
+JA-087|Java AI|LangChain4j|能力|接口族|LangChain4j 的模型接口族不止文本：ImageModel（文生图）与 ModerationModel（内容审核）同级存在|统一抽象覆盖多模态与安全能力，与 AI-041 多模态知识联动，按接口注入对应模型|LC4j 只有文本模型|图像生成必须外接 SDK|审核能力不存在|多能力接入|LangChain4j 1.0
+JA-088|Java AI|LangChain4j|消息|AiMessage|LC4j 消息抽象：UserMessage/AiMessage/SystemMessage，AiMessage 可携带 toolExecutionRequests|工具调用轮次中 AiMessage 携带调用意图，历史回放时保留该结构才能正确续轮，与 JA-010 链路对齐|AiMessage 只是文本容器|工具意图存独立日志|消息类型可混用|工具轮次与历史回放|LangChain4j 1.0
+JA-089|Java AI|LangChain4j|工具|ToolExecutor|LC4j 的工具执行可经 ToolExecutor 接口自定义（默认反射调用 @Tool 方法）|需要异步执行/权限校验/审计时替换默认执行器，工具链路可插拔，与 JA-031 联动|工具执行器固定不可换|自定义执行器绕过框架|ToolExecutor 是模型端接口|工具链路定制|LangChain4j 1.0
+JA-090|Java AI|LangChain4j|记忆|ChatMemoryStore|LC4j 记忆持久化实现 ChatMemoryStore 接口（getMessages/updateMessages/deleteMessages）|自选存储（Redis/DB）实现三方法即可持久化记忆，与 Spring AI 的 repository 同思想|记忆只能内存|持久化接口不存在|接口方法只有 get|记忆持久化定制|LangChain4j 1.0
+JA-091|Java AI|MCP|客户端|initialize|MCP 客户端使用前必须 initialize（协议握手：版本与能力协商），Java SDK 的 McpSyncClient 显式调用|握手失败即后续不可用，initialize 是协议强制步骤不是可选配置，排障先查握手|客户端开箱即用无需握手|initialize 可跳过|握手只发生在服务端|MCP 连接排障|MCP 规范
+JA-092|Java AI|MCP|能力|capabilities|MCP initialize 阶段双方声明 capabilities（支持的工具/资源/采样能力）|能力协商决定后续可用方法集，客户端不应调用对方未声明的能力，协议稳健性来源|capabilities 是装饰信息|不声明也能调用全部能力|能力协商单方完成|协议机制理解|MCP 规范
+JA-093|Java AI|MCP|结果|content|MCP 工具结果以 content 列表返回（文本/图片/资源引用等内容块）|结果是多模态内容块而非纯字符串，客户端按类型处理，模型消费时转文本上下文|工具结果永远是纯文本|content 类型不可扩展|图片结果无法返回|MCP 结果处理|MCP 规范
+JA-094|Java AI|MCP|通知|list_changed|MCP 服务端工具清单变更时发送通知（tools/list_changed），客户端重新 listTools|工具热更新协议化（新增工具无需重启客户端），客户端要处理通知刷新缓存，动态工具生态基础|工具清单固定不可变|变更必须重启服务|客户端自动感知无需处理|动态工具治理|MCP 规范
+JA-095|Java AI|MCP|生命周期|子进程|stdio 型 MCP server 由宿主客户端以子进程拉起（stdin/stdout 通信，生命周期随客户端）|本地工具 server 随客户端启停（IDE/桌面端管理），server 崩溃即工具不可用，重连策略归客户端|stdio server 独立常驻|生命周期由 server 自己管理|崩溃自动重拉无需处理|本地 server 运维|MCP 规范
+JA-096|Java AI|工程|网关|base-url|两框架都支持自定义 base-url 指向 OpenAI 兼容网关（Higress/OneAPI/LiteLLM 类），业务不改代码换供应商|网关统一鉴权/限流/计费/路由（AI-028 联动），Java 应用只认 OpenAI 协议，供应商策略收敛到网关层|base-url 只能官方地址|网关会破坏框架功能|切换供应商必须改代码|供应商治理架构|实战共识
+JA-097|Java AI|工程|租户|防串号|多租户上下文传递纪律：advisor 参数/ToolContext/MDC 三层都按会话与用户键隔离，测试覆盖并发两用户互不串|AI 上下文串号是高危事故（泄露他人数据），与 AI-085 并发隔离知识联动，review 专项检查项|上下文框架自动隔离|串号只影响日志|并发下无需测试串号|租户隔离红线|实战共识
+JA-098|Java AI|工程|背压|取消|流式输出要处理客户端断开：取消订阅（dispose/takeUntilOther）让后端停止生成，省 token 与资源|用户关页面模型仍在生成白烧钱（AI-087 联动），响应式栈取消信号贯穿到流式请求|断开后模型自动停止|取消无法实现|断开只影响前端显示|成本与体验平衡|实战共识
+JA-099|Java AI|工程|结构化|失败处理|结构化输出失败路径：模型输出不合规 JSON 时反序列化异常，需重试（带错误反馈）或降级（放宽约束/兜底值）|entity 转换不是百分百成功，失败重试喂回解析错误可修复多数，与 AI-070 结构化双保险联动|结构化输出总是成功|失败只能报错结束|重试会拿到相同错误|可靠性细节|实战共识
+JA-100|Java AI|工程|嵌入|批大小|嵌入批量调用的批大小权衡：单批过大易触供应商限制，分批控制并行度，失败批重试幂等（嵌入天然幂等）|批量入库（万级文档）的吞吐工程，与 MY-051 拆批思想同构，批大小按供应商限制定|嵌入批量无大小限制|批越大越好|批量调用不需要重试|入库吞吐工程|实战共识
+JA-101|Java AI|向量|维度|一致性|向量库维度必须与嵌入模型输出维度一致：换嵌入模型等于全量重嵌入加重建索引|维度不匹配写入与检索直接失败，换模型成本是全量重算（AI-067 时效联动），选型期锁定嵌入模型|换嵌入模型无成本|维度可以混用|向量库自动适配维度|向量库容量规划|实战共识
+JA-102|Java AI|RAG|重排|rerank|检索与重排分离：向量召回 topK 较大（如 20）再由重排模型精排出少量（如 3）注入上下文|重排模型（交叉编码）精度高但慢，只处理少量候选；Java 侧 LC4j 有 ScoringModel 抽象，Spring AI 可经服务 API 接入|重排是必选步骤|rerank 模型处理全库|topK 直接给模型最优|RAG 质量进阶|实战共识
+JA-103|Java AI|工程|记忆|预算|会话记忆的 token 预算：窗口按条数截断是粗粒度，长消息场景需按 token 估算动态裁剪|MessageWindowChatMemory 只看条数不看长度，单条超长消息仍可挤爆窗口预算，精细预算需自定义裁剪|窗口按条数即按 token|长消息不影响窗口|记忆预算无需管理|记忆成本治理|实战共识
+JA-104|Java AI|工程|异常|分层|LLM 异常分层处理：限流（退避重试）、认证（不可重试直接告警）、内容过滤（换措辞或降级）、上下文超限（裁剪重试）|不同异常的恢复动作完全不同，统一 catch 会把不可重试错误打成死循环，与 AI-066 SDK 细节联动|所有异常都应重试|认证错误重试能恢复|内容过滤错误无解|异常处理矩阵|实战共识
+JA-105|Java AI|依赖|BOM|spring-ai-bom|Spring AI 用 spring-ai-bom 统一各模块版本（Maven dependencyManagement 导入）|多 starter 项目版本对齐防冲突（SP-107 依赖治理联动），升级只改 BOM 版本号|各 starter 版本独立管理|BOM 不支持 Maven|版本不对齐也能用|依赖治理|Spring AI 1.0 GA
+JA-106|Java AI|依赖|BOM|langchain4j-bom|LangChain4j 同样提供 langchain4j-bom 统一模块版本|LC4j 模块众多（provider/store/工具），BOM 对齐防依赖冲突，与 JVM 依赖知识联动|LC4j 无 BOM|模块版本可以随意混搭|BOM 是可选装饰|依赖治理|LangChain4j 1.0
+JA-107|Java AI|工程|生命周期|单例|ChatClient 与模型实例构建一次单例复用（构建含 HTTP 客户端池创建），Spring 下由容器管理生命周期|反复构建浪费连接池且可能泄漏，Spring AI 自动装配的 builder 与 bean 天然单例，与 JA-042 联动|每次请求都应新建实例|实例不能复用|单例会引起并发问题|生命周期规范|实战共识
+JA-108|Java AI|工程|工具|描述质量|工具 description 写清何时用/何时不用/参数含义，描述质量直接决定模型调用准确率|模型靠描述选工具填参数（AI-058 联动），描述含糊导致误调用或不调用，上线前自查描述可读性|描述随便写不影响调用|模型会读代码推断|描述越长越好|工具工程规范|实战共识
+JA-109|Java AI|Spring AI|多模态|media|Spring AI 多模态输入：user 消息可附 Media（图片等），模型侧需多模态能力支持|Java 侧组装多模态消息（AI-041 联动），图像按分辨率折算 token（AI-080 计费联动），文本与图像同请求发送|多模态只能发文本|图片必须先 OCR 成文字|media 参数不存在|图文理解接入|Spring AI 1.0 GA
+JA-110|Java AI|工程|截断|LENGTH|finishReason 为 LENGTH（触达 maxTokens）的业务处理：续写（带已有内容再生成）或截断提示或调大 maxTokens 重试|长文生成被截断是常态，无处理则输出不完整用户可感知，与 JA-077 元数据知识联动|LENGTH 会自动续写|截断无需处理|LENGTH 是错误状态|生成完整性保障|实战共识
+JA-121|Java AI|Spring AI|Advisor|顺序|Spring AI 的 advisor 链按 getOrder 返回值排序执行（数字小先进入后退出）|多个 advisor（记忆+RAG+审计）叠加时顺序影响结果（RAG 注入内容是否进记忆），排序与 AOP/拦截器思想同构|advisor 执行顺序随机|顺序不影响结果|order 数字大先执行|多 advisor 装配排序|Spring AI 1.0 GA
+JA-122|Java AI|Spring AI|类型|Prompt 构成|Spring AI 的 Prompt 对象由消息列表与可选 ChatOptions 组成|门面之下一切调用最终收敛为 Prompt 传给 ChatModel，理解构成才能做精细组装|Prompt 只有字符串|options 是 Prompt 的一部分但可省略|消息与选项互斥|底层组装理解|Spring AI 1.0 GA
+JA-123|Java AI|Spring AI|配置|默认模型|spring.ai.openai.chat.options.model 默认值为 gpt-4o-mini（1.0 GA 时点）|默认模型随版本演进可能变化，生产显式声明模型名不依赖默认值，与版本锚定纪律一致|默认模型永远不变|默认是 gpt-4|显式声明模型名是多余动作|生产配置规范|Spring AI 1.0 GA
+JA-124|Java AI|Spring AI|配置|参数透传|spring.ai.openai.chat.options 前缀可透传供应商支持的任意参数|配置与代码 options 双通道：配置给全局默认、代码做运行时覆盖，两层叠加|配置层参数代码层无法覆盖|只支持有限白名单参数|透传参数不生效于 stream|全局参数管理|Spring AI 1.0 GA
+JA-125|Java AI|Spring AI|流式|订阅|Flux 是冷流：不订阅不执行，ChatClient.stream 返回后必须有人订阅才发起模型调用|响应式基本语义，误把 Flux 当 Future 用会导致"没有调用发生"的假象，与 SP/WebFlux 知识联动|拿到 Flux 即已发起请求|不订阅也有结果缓存|订阅与否无区别|响应式基础纪律|Spring AI 1.0 GA
+JA-126|Java AI|Spring AI|RAG|模板自定义|QuestionAnswerAdvisor 的注入提示模板可自定义（user 消息模板带参数）|默认模板不满足业务时换模板（引用来源格式/注入位置），RAG 输出形态可控|注入模板不可自定义|自定义模板不需要占位符|模板只支持英文|RAG 输出格式定制|Spring AI 1.0 GA
+JA-127|Java AI|Spring AI|向量|删除|VectorStore 支持删除：按文档 id 列表删除与按过滤表达式删除|知识库更新需要删旧（配合重新入库），只加不删会让过期内容持续污染检索|向量库只能加不能删|删除是异步批量定时|删除不影响检索结果|知识库生命周期|Spring AI 1.0 GA
+JA-128|Java AI|Spring AI|文档|Document|Spring AI 的 Document 聚合 id/text/metadata 三元组，入库与检索的基本单位|元数据承载来源/权限/类目（AI-061 联动），检索过滤与溯源都靠它|Document 只有正文|metadata 是可选装饰|id 自动生成无法指定|RAG 数据结构|Spring AI 1.0 GA
+JA-129|Java AI|Spring AI|Reader|Markdown|spring-ai-markdown-document-reader 提供 Markdown 文档解析|知识库常用 Markdown（内网 wiki），解析保留标题结构利于切分语义，Tika 覆盖其余格式|Markdown 需手写解析|所有格式只能用 Tika|文档读取器只有一种|RAG 入库格式覆盖|Spring AI 1.0 GA
+JA-130|Java AI|Spring AI|多模型|Qualifier|classpath 有多个 ChatModel bean 时按 bean 名/@Qualifier 指定注入|多 provider 共存场景（主备/分级），builder 显式指定模型 bean，与 JA-047 属性声明配合|多模型 bean 自动随机注入|Qualifier 是可选装饰|多 bean 会导致启动失败必然|主备模型装配|Spring AI 1.0 GA
+JA-131|Java AI|Spring AI|重试|默认次数|spring.ai.retry.max-attempts 默认值为 10（指数退避）|框架默认重试较激进（容忍供应商抖动），成本敏感或非幂等场景需评估调整（JA-056 幂等前提）|默认不重试|默认重试 3 次|调整重试需要重启（配置类启动期读取）|重试参数治理|Spring AI 1.0 GA
+JA-132|Java AI|Spring AI|工具|终止条件|Spring AI 工具调用循环在模型不再请求工具时自然终止（finishReason 非 tool_call）|循环边界由模型决定，恶意/异常场景需业务侧上限保护，Agent 终止控制是工程必备|循环永不终止|工具结果决定终止|终止需手动抛异常|Agent 边界控制|Spring AI 1.0 GA
+JA-133|Java AI|Spring AI|消息|会话重组|完整对话重组：把历史 Message 列表加当前 UserMessage 一次传入 ChatModel.call|绕过记忆 advisor 手动组装消息序列（迁移/批处理场景），与记忆机制等价但显式可控|历史必须经记忆 advisor 注入|手动组装会被框架拒绝|一次只能传一条消息|批处理/迁移场景|Spring AI 1.0 GA
+JA-134|Java AI|LangChain4j|装配|AiServices 本质|AiServices 本质是动态代理工厂：接口调用被拦截转为 LLM 请求+工具循环|理解代理本质才能定制（拦截/包装/测试桩），与 AOP 动态代理知识（SP-037）同构|AiServices 用了字节码生成库|代理只能返回字符串|拦截过程不可观测|框架机制理解|LangChain4j 1.0
+JA-135|Java AI|LangChain4j|会话|@MemoryId|LC4j 用 @MemoryId 注解标记接口方法的会话标识参数，实现多用户记忆隔离|多用户并发场景每个 memoryId 独立窗口（JA-035），与 ToolContext 防串号（JA-097）同属租户红线|memoryId 可选不加|所有用户共享一个记忆|注解加在类上|多用户隔离|LangChain4j 1.0
+JA-136|Java AI|LangChain4j|模块|core 分工|LangChain4j 构件分工：langchain4j-core 是抽象层，langchain4j 主构件含 AiServices 等实现|依赖治理需分清（只换 provider 引 provider 模块即可），与 BOM 知识（JA-106）联动|core 与主构件是同一个|只引 core 就有 AiServices|模块划分不存在|依赖治理|LangChain4j 1.0
+JA-137|Java AI|LangChain4j|流式|start|TokenStream 构建 Lambda 链后必须 start() 才开始消费|与 Flux 订阅语义同源（JA-125），回调链（onPartialResponse/onCompleteResponse/onError）注册后显式启动|链式注册即自动开始|start 可省略|TokenStream 是同步阻塞|流式启动纪律|LangChain4j 1.0
+JA-138|Java AI|LangChain4j|迁移|generate→chat|LangChain4j 1.0 迁移：ChatLanguageModel 的 generate 系列方法统一为 chat 系列|旧教程代码 generate 需迁移（编译期可见），与 Spring AI functions→tools 迁移（JA-049）同为 1.0 主题|generate 与 chat 完全等价共存|迁移无编译提示|1.0 保留了 generate|1.0 迁移清单|LangChain4j 1.0
+JA-139|Java AI|LangChain4j|参数|ChatRequestParameters|1.0 的请求参数抽象 ChatRequestParameters 覆盖模型选择/温度/maxTokens 等|per-request 参数与模型 builder 默认参数分层覆盖，与 Spring AI 的 options 覆盖对等|参数只能在 builder 配|per-request 无法覆盖|参数与模型绑定不可分离|运行时参数覆盖|LangChain4j 1.0
+JA-140|Java AI|LangChain4j|HTTP|可插拔|LC4j 的 HTTP 客户端层可插拔（JDK HttpClient/OkHttp 等实现模块）|企业网络环境（代理/证书/连接池）按需选 HTTP 层，与网关 base-url（JA-096）配套|HTTP 客户端固定不可换|必须用 OkHttp|网络层不可配置|企业网络适配|LangChain4j 1.0
+JA-141|Java AI|MCP|异步|McpAsyncServer|MCP Java SDK 提供同步与异步两套 API：McpAsyncServer/McpAsyncClient（CompletableFuture 风格）|同步版易用阻塞线程池，异步版高吞吐低占用，按并发规模选型，与并发工程知识联动|SDK 只有同步 API|异步版返回阻塞结果|两套 API 不能共存|并发模型选型|MCP Java SDK
+JA-142|Java AI|MCP|错误|错误码|MCP 基于 JSON-RPC 的错误码体系返回失败（方法不存在/参数错误/工具执行失败）|错误处理按码分派（区别业务失败与协议失败），客户端把工具失败回喂模型重试|MCP 错误没有结构|所有失败都是异常抛出|错误码可自定义语义|MCP 错误处理|MCP 规范
+JA-143|Java AI|MCP|能力族|三原语|MCP 三类核心能力原语：tools（可执行）、resources（可读取）、prompts（可复用提示模板）|工具之外的资源读取与提示模板复用同样是协议能力，只知 tools 是常见认知盲区|MCP 只有 tools 一种能力|resources 是数据库连接|prompts 是系统日志|协议能力全景|MCP 规范
+JA-144|Java AI|MCP|反向|sampling|MCP 支持 server 反向请求 client 的 LLM 采样（sampling 能力）：server 无模型也能完成 AI 步骤|反向能力让工具 server 复用宿主模型的配额与上下文，安全边界由宿主审批，是 Agent 架构的高级特性|server 必须自带模型|sampling 是单向的客户端请求|反向能力不存在|Agent 架构进阶|MCP 规范
+JA-145|Java AI|MCP|安全|roots|MCP 客户端可声明 roots（文件系统等作用域边界）约束 server 可访问范围|最小权限原则在协议层落地（AI-076 沙箱思想联动），server 越界访问被协议约束|roots 是可选装饰|server 可以访问任意路径|边界由 server 自己声明|最小权限落地|MCP 规范
+JA-146|Java AI|MCP|传输|Streamable HTTP|MCP 2025 规范引入 Streamable HTTP 传输（演进替代旧 SSE 双通道方案）|单端点流式 HTTP 简化部署与鉴权，新项目按新传输选型，旧 SSE 仍在过渡支持|Streamable HTTP 不存在|必须用 SSE|传输与鉴权无关|传输选型|MCP 2025 规范
+JA-147|Java AI|MCP|会话|session|MCP 的 HTTP 传输带会话管理（会话 id 维持多轮通信状态）|有状态会话支持断线重连与上下文保持，负载均衡需会话亲和或无状态化设计，与网关知识联动|MCP 全部无状态|会话 id 是随机装饰|负载均衡无影响|MCP 部署要点|MCP 2025 规范
+JA-148|Java AI|MCP|鉴权|OAuth|MCP 2025 规范为 HTTP 传输引入 OAuth 鉴权框架（客户端授权访问远程 server）|远程 server 的访问控制协议化（不再靠网络隔离），企业接入必备认知，与 SP-088 安全链知识互补|远程 server 无需鉴权|鉴权只在网络层做|OAuth 与 MCP 无关|远程安全接入|MCP 2025 规范
+JA-149|Java AI|工程|指标|三类|LLM 调用指标按 chat/embedding/tool 三类分开统计（延迟/token/失败率）|三类调用成本与延迟特征完全不同（embedding 快而便宜、tool 含业务逻辑），混在一起掩盖瓶颈，与观测知识（JA-019）联动|指标只需一个总数|三类调用无差异|指标不区分调用类型|监控体系设计|实战共识
+JA-150|Java AI|工程|灰度|A/B|prompt/模型灰度：按用户/流量分组对比效果指标（采纳率/失败率），评估集回归先行（AI-063 联动）|线上 A/B 是 prompt 变更的最终验证，离线评估过了仍需小流量观察，与发布灰度（DF-050）同构|prompt 改动无需灰度|A/B 只看成本|灰度不需要对照组|变更流程设计|实战共识
+JA-151|Java AI|工程|缓存|语义缓存层|语义缓存以拦截层实现（advisor/自定义 retriever 前置）：命中相似问题直接返回，未命中走模型|Java 侧语义缓存挂载点在框架拦截链（Spring AI advisor/LC4j 自定义层），与 AI-050 联动，阈值权衡误答风险|语义缓存必须独立服务|拦截层无法实现缓存|命中后仍需调模型|缓存架构落地|实战共识
+JA-152|Java AI|工程|安全|工具白名单|工具白名单按环境区分：生产只暴露只读工具，写操作工具仅在显式开启时可用|最小权限落地（AI-068 联动），误配写工具是事故源，配置中心开关+审计|所有环境工具一致|白名单是可选装饰|写工具优先上线|生产安全基线|实战共识
+JA-153|Java AI|工程|配置|环境隔离|模型配置环境隔离：dev 用本地 Ollama、prod 用云模型，profile 切换零代码改动|成本与隐私分级（AI-055/056 联动），Spring profile 与属性覆盖是载体（SP-030），与 DF/云原生联动|所有环境用同一配置|dev 也必须用云模型|环境切换需要改代码|环境策略|实战共识
+JA-154|Java AI|工程|熔断|LLM 依赖|LLM 作为"下游依赖"纳入熔断：错误率/慢调用率超阈跳闸，降级到备模型或模板回复|把 AI 当新型 RPC 治理（AI-060 方法论），resilience4j/Sentinel 环绕 ChatClient 调用点，与 DF-022 熔断知识同构|LLM 调用不需要熔断|熔断会阻止 AI 功能|降级只有报错|雪崩防护迁移|实战共识
+JA-155|Java AI|工程|缓存|键设计|响应缓存键设计：模型标识+消息序列 hash+options hash，任一变化键不同|缓存正确性靠键完整（模型/参数变更返回不同结果），与缓存 key 规范（RD-067）联动|键只含用户问题|options 不参与键|键冲突无影响|缓存正确性|实战共识
+JA-156|Java AI|工程|评估|注入样本|评估集必须包含提示词注入与越狱样本（安全回归与功能回归同权重）|安全回归防"改 prompt 破坏防线"（AI-024/025 联动），注入样本命中即门禁失败，与 AI-077 门禁联动|评估只测功能不测安全|注入样本不需要更新|安全与功能分开测|安全回归纪律|实战共识
+JA-157|Java AI|RAG|元数据|设计|RAG 元数据设计：source（来源）/chunk 序号/权限标签/更新时间四件随段入库|溯源引用（AI-011）、权限过滤（AI-061）、增量更新（AI-067）全靠元数据，入库时设计优于事后补|元数据可有可无|只有正文入库|元数据在检索后无关|RAG 数据设计|实战共识
+JA-158|Java AI|RAG|增量|hash|增量入库按文档内容 hash 判断：hash 未变的文档跳过重嵌入，变更才重建|全量重嵌入成本高（AI-060 成本联动），hash 增量是入库管道标配，删除的文档需同步清理向量|每次全量重嵌入|增量会漏更新|hash 与内容无关|入库管道效率|实战共识
+JA-159|Java AI|向量|并存|多库|多向量库 bean 可并存（不同业务各自 VectorStore，按 @Qualifier 注入）|企业内不同数据域隔离（权限/SLA/库选型不同），接口统一所以并存无成本，与 MY/多库知识联动|全局只能一个向量库|并存导致检索冲突|隔离必须分实例|多业务向量治理|实战共识
+JA-160|Java AI|工程|清理|记忆清理|对话记忆清理策略：会话 TTL 过期清理或定期裁剪，防 ChatMemory 无限增长|长期运行服务记忆集合膨胀（内存/JDBC 膨胀），与会话治理（MY-081 批清理思想）联动|记忆自动过期|增长无上限也没关系|清理影响在线会话（TTL 设计避开活跃会话）|存储治理|实战共识
+JA-161|Java AI|工程|温度|规范|温度选择规范：结构化输出/代码/事实问答低温（0-0.3），创作与头脑风暴高温（0.7-1.0）|温度影响 JSON 合法率与幻觉率（AI-003 联动），配置分层：默认低温、创作类按调用覆盖（JA-016）|温度统一设 1|温度不影响 JSON|高温更稳定|生成参数规范|实战共识
+JA-162|Java AI|工程|成本|maxTokens|maxTokens 设业务合理值：防失控长文（成本）与 LENGTH 截断（JA-110）之间的平衡|无上限 maxTokens 是成本事故源，过小则频繁 LENGTH，按任务类型分档配置|maxTokens 不设也安全|越大越好|与 finishReason 无关|成本与完整性平衡|实战共识
+JA-163|Java AI|工程|提示词|瘦身度量|提示词瘦身的度量闭环：离线评估对比瘦身前后质量（不降质才上线），再观测 token 节省|先度量后上线（AI-077 门禁纪律），瘦身收益（AI-062）必须有对比数据支撑|瘦身只看 token 省|质量影响可以忽略|瘦身后不需要验证|优化闭环|实战共识
+JA-164|Java AI|工程|共存|双框架|Spring AI 与 LangChain4j 同用 Spring 时的共存注意：bean 名冲突与依赖版本对齐，按模块隔离引用|混用有真实动机（各取所长），风险是 starter 自动装配互相干扰，团队规范建议单框架优先（AI-039）|两框架 bean 自动兼容|共存无任何冲突|依赖版本无关|共存风险治理|实战共识
+JA-165|Java AI|工程|排障|指纹|prompt 指纹排障：全量 prompt 不落日志，但记录 prompt hash 与长度，问题复现时按指纹比对|合规（JA-044）与排障的平衡手法，指纹定位"同一请求是否变化"，与可观测三支柱联动|prompt 必须全量落日志|指纹无排查价值|两者不可兼得|合规排障平衡|实战共识
+JA-166|Java AI|工程|超时|分级|超时分级：embedding 短（秒级）、chat 长（几十秒）、含工具调用的 agent 轮更长，整体纳入超时预算链|三类调用的时长分布不同（AI-030 联动），统一超时要么误杀要么虚耗，与 DF-028 预算传递同构|超时全局统一即可|embedding 超时最长|分级超时是过度设计|超时体系设计|实战共识
+JA-167|Java AI|工程|连接|池化|底层 HTTP 连接池随并发调优：LLM 长连接占用与普通 RPC 不同，池参数与并发模型匹配|LLM 响应慢导致连接占用时间长（DF-090 Little 定律联动），池小排队池大占资源，压测定参|连接池默认最优|池越大越好|LLM 连接短不需要池|底层网络调优|实战共识
+JA-168|Java AI|工程|停机|优雅|优雅停机覆盖进行中的 LLM 调用：随上下文取消（订阅 dispose/请求取消），等待策略与 SP-098 联动|硬杀导致用户侧输出截断与 token 白烧，发布期调用取消链路要验证，与混沌演练（DF-076）联动|停机不影响进行中调用|取消信号自动传播无需验证|优雅停机与 AI 无关|停机完整性|实战共识
+JA-169|Java AI|Spring AI|集成|流式桥接|Spring MVC 栈桥接 Flux 流式：SseEmitter 订阅 Flux 逐段转发，客户端断开触发取消|非 WebFlux 项目也能做流式（桥接层），桥接要处理背压与取消，与 JA-098 联动|MVC 项目无法流式|桥接不需要处理断开|SseEmitter 自动取消订阅|MVC 流式实现|实战共识
+JA-170|Java AI|LangChain4j|集成|观察|LC4j 的观测：模型构建可挂 listener（请求/响应事件回调）记录耗时与 token|LC4j 侧观测靠 listener/日志（对比 Spring AI 的 Micrometer Observation），自建埋点接入统一大盘|LC4j 自带 Micrometer 集成|观测无法实现|listener 是付费功能|LC4j 观测方案|LangChain4j 1.0
+JA-171|Java AI|Spring AI|工具|校验|工具参数校验：模型回填的参数在执行前做应用层校验（类型/范围/权限）|模型填参可能错（幻觉参数），校验失败把错误信息回喂模型自修复（AI-043 联动），防线在应用层|模型参数永远正确|校验失败直接终止会话|校验是可选装饰|工具健壮性|实战共识
+JA-172|Java AI|LangChain4j|工具|校验|LC4j 工具同样需要应用层参数校验：ToolExecutionRequest 的 arguments 反序列化后先验后执行|两框架同构知识（JA-171），错误反馈机制让 Agent 自我修复，校验逻辑写进工具入口|LC4j 自动校验参数|校验与框架冲突|不做校验更稳定|工具健壮性|LangChain4j 1.0
+JA-173|Java AI|工程|结构化|schema|结构化输出的 schema 注入方式：提示词内嵌 JSON Schema（框架自动生成）约束输出格式|entity/POJO 返回背后是 schema 注入而非"魔法"，理解机制才能排查转换失败（JA-099 联动）|schema 由数据库生成|注入是可选开关|框架不生成 schema|结构化机制理解|实战共识
+JA-174|Java AI|工程|评估|分层阈值|评估门禁分层阈值：核心指标（忠实度/准确率）硬门禁，体验指标（长度/风格）软告警|一刀切阈值要么门禁太松要么天天阻断（AI-077 联动），按指标业务权重分层，与 SLO 分级思想（DF-056）同构|所有指标同权重阻断|软指标也必须硬门禁|分层阈值无意义|门禁设计|实战共识
+JA-175|Java AI|工程|依赖|版本锁定|AI 框架版本锁定纪律：Spring AI/LC4j 迭代快，BOM 锁定+升级走评估集回归（JA-058）|小版本可能改变默认行为（提示词模板/默认模型），盲升级等于线上实验，与版本治理（RD-078）同构|框架升级无风险|可以频繁追最新版|版本锁定是过时做法|升级纪律|实战共识
+JA-176|Java AI|MCP|工具|schema 生成|MCP Java SDK 从 POJO/方法签名自动生成 inputSchema（JSON Schema）|手写 schema 易错，SDK 反射生成保证与实现同步，描述字段仍需人工写清（JA-108）|schema 必须手写|自动生成的 schema 无描述|生成与实现会脱节|MCP 工具注册|官方文档核对
+JA-177|Java AI|LangChain4j|工具|多对象|AiServices.tools(...) 可挂多个工具对象（按类分组组织工具族）|工具量大时按业务域拆类（订单工具/库存工具），框架聚合注册，与舱壁隔离思想（DF-027）呼应|只能挂一个工具对象|多对象会互相覆盖|工具必须单类|工具组织规范|LangChain4j 1.0
+JA-178|Java AI|Spring AI|工具|手动规格|Spring AI 支持手动构建 ToolCallback（不经 @Tool 注解），动态注册运行时工具|动态工具场景（插件化/配置驱动工具），规格在运行时组装，与 MCP 动态工具（JA-094）联动|工具只能注解静态声明|动态注册不被支持|手动规格是旧 API|动态工具场景|Spring AI 1.0 GA
+JA-179|Java AI|工程|复盘|错题回流|AI 应用错题回流机制：线上失败/差评样本进入评估集（脱敏后），评估集持续长大|评估集是活资产（AI-012），回流让门禁覆盖真实失败模式，与 MQ 复盘思想（MQ-075）同构|评估集静态不更新|线上样本直接入库不脱敏|回流与门禁无关|质量飞轮|实战共识
+JA-180|Java AI|工程|主线|答题|Java AI 工程答题主线：先框架选型（JA-039）→ 管道组装（JA-051）→ 可靠性（降级/幂等/超时）→ 可观测与成本 → 评估门禁 → 安全合规|P10 视角把前面所有事实串成完整回答链，每环节带版本锚点与限定词，与 AI-060 方法论互为表里|答题背 API 即可|主线不需要风险分析|没有版本锚点也行|本域综合答题框架|实战方法论
+JA-181|Java AI|Spring AI|builder|默认值|ChatClient.Builder 支持预设默认值：defaultSystem/defaultUser/defaultOptions/defaultAdvisors|公共提示与参数在构建期固定，调用期只传差异部分，是模板分层（全局/会话/请求）的落点|默认值与调用值不能共存|defaultSystem 会覆盖每次 system|预设只对 stream 生效|提示词分层装配|Spring AI 1.0 GA
+JA-182|Java AI|Spring AI|音频|audio|OpenAI starter 内含音频模型能力（语音转写与 TTS，OpenAiAudioModel 族）|多模态不止图像：语音输入转写后进对话、TTS 合成输出，与 AI-041 多模态管线联动|音频能力不在 OpenAI starter|转写必须外接服务|TTS 输出无法流式|语音交互接入|Spring AI 1.0 GA
+JA-183|Java AI|Spring AI|嵌入|本地化|spring-ai-transformers 提供本地嵌入（ONNX 模型，免 API 调用）|本地嵌入零成本零出域（AI-055 隐私联动），质量弱于云端旗舰嵌入模型，按场景分级选型|本地嵌入不存在|本地嵌入质量必然更差|必须联网才能嵌入|私有化嵌入方案|Spring AI 1.0 GA
+JA-184|Java AI|Spring AI|Advisor|注入顺序|QuestionAnswerAdvisor 应排在记忆 advisor 之前或之后取决于"检索内容是否要进历史"|顺序错误导致检索内容污染记忆或记忆重复注入（JA-121 排序语义），装配时要推演数据流|顺序随意不影响|记忆 advisor 永远最前|RAG 内容默认会进记忆|advisor 装配推演|实战共识
+JA-185|Java AI|Spring AI|MCP|客户端属性|MCP 客户端经 spring.ai.mcp.client 属性配置（enabled/连接清单等）|多 MCP server 连接声明式管理，enabled 开关控制整组连接，配置中心可管理|MCP 客户端只能代码配置|enabled 是可选装饰|多 server 不能并存|MCP 客户端装配|Spring AI 1.0 GA
+JA-186|Java AI|Spring AI|MCP|桥接|MCP 工具经 ToolCallbackProvider 桥接进 ChatClient.tools(...)（SyncMcpToolCallbackProvider 包装 McpSyncClient）|桥接后 MCP 工具与本地 @Tool 工具同池调用，Agent 双工具来源（JA-054 对应 LC4j 侧）|MCP 工具需要重写成 @Tool|桥接层不存在|两来源互斥|MCP 工具进 Agent|Spring AI 1.0 GA
+JA-187|Java AI|LangChain4j|检索|过滤|EmbeddingStoreContentRetriever 支持 .filter(...) 元数据过滤（与 LC4j Filter 表达式）|检索层过滤与 Spring AI filterExpression 同思想（JA-063），权限/类目隔离落地|RAG 不支持过滤|过滤在生成层做|过滤器是字符串拼接|检索过滤对等实现|LangChain4j 1.0
+JA-188|Java AI|LangChain4j|元数据|Metadata|LC4j 的 TextSegment 携带 Metadata 对象（put/get 键值），随向量入库|与 Spring AI Document.metadata 对等（JA-128），溯源/权限/增量全靠它|TextSegment 无元数据|Metadata 不参与存储|元数据类型任意不受限|RAG 数据结构对等|LangChain4j 1.0
+JA-189|Java AI|LangChain4j|切分|token 粒度|DocumentSplitters.recursive(size, overlap, tokenizer) 支持 token 粒度切分（配 Tokenizer）|与 Spring AI TokenTextSplitter 对等（JA-068），token 切分对齐上下文计量，中英混排按 tokenizer 差异处理|切分只有字符粒度|重叠必须为零|tokenizer 是可选装饰|RAG 切分对等|LangChain4j 1.0
+JA-190|Java AI|LangChain4j|解析|文档解析器|LC4j 文档解析以独立模块提供（如 langchain4j-document-parser-apache-pdf）|解析器模块化按需引入（PDF/poi/tika），与 Spring AI 的 reader 族对等（JA-129），按格式选解析器|解析内置无需模块|只有 PDF 一种解析器|解析与切分是一步|RAG 入库组件|LangChain4j 1.0
+JA-191|Java AI|LangChain4j|MCP|McpToolProvider|LC4j 的 McpToolProvider.builder().mcpClients(...) 把 MCP 工具包装为 Provider 挂给 AiServices|与 JA-054 联动，MCP 工具与 @Tool 工具同池，双框架均把 MCP 当一等公民|MCP 工具要先翻译成注解|McpToolProvider 不存在|只能挂一个 MCP 客户端|MCP 工具接入 LC4j|LangChain4j 1.0
+JA-192|Java AI|LangChain4j|Spring|双模型键|LC4j starter 同时支持 chat-model 与 streaming-chat-model 两组属性（同步与流式分别装配）|同步与流式可用不同 provider/模型（流式用轻量模型），两个 bean 并存注入|同步流式只能同模型|streaming 属性不存在|两 bean 会冲突|分层模型装配|LangChain4j 1.0
+JA-193|Java AI|LangChain4j|护栏|注解挂载|LC4j 护栏经 @InputGuardrails/@OutputGuardrails 注解声明在 AiServices 接口方法上|护栏与声明式服务同风格（JA-037 接口实现），方法级粒度挂载，合规规则就近维护|护栏只能全局配置|注解挂载不存在|护栏与 AiServices 无关|声明式护栏|LangChain4j 1.0
+JA-194|Java AI|MCP|资源|URI|MCP resources 以 URI 标识（文件/数据库行/自定义 scheme），readResource 读取内容|资源与工具分离：工具是动作、资源是可读数据，URI 命名空间由 server 设计|资源与工具是同一回事|URI 可随意重复|资源只能读文件|MCP 资源设计|MCP 规范
+JA-195|Java AI|MCP|模板|prompts|MCP prompts 原语提供服务端预置提示模板（带参数）供客户端取用|把"优质提示词"生态化复用（客户端无需内置），与 resources/tools 并列（JA-143 三原语）|prompts 是客户端历史记录|模板不能带参数|该原语很少实现|提示词生态复用|MCP 规范
+JA-196|Java AI|MCP|分页|cursor|MCP 列表类操作支持游标分页（tools/list 等，cursor 翻页）|大工具/资源清单一次性返回浪费，游标分页协议化，客户端要处理翻页|列表操作必须一次全量|游标是自定义字符串随意|分页只在资源存在|列表协议细节|MCP 规范
+JA-197|Java AI|MCP|日志|log|MCP 带 logging 能力（server 按级别推送日志消息给 client）|server 侧运行日志协议化输出（client 面板可见），排查 MCP 工具问题时开日志能力|server 日志只能写本地文件|MCP 无日志能力|日志级别不可控|MCP 排障|MCP 规范
+JA-198|Java AI|工程|合规|记忆数据|会话记忆含个人信息时的合规处理：加密存储、按用户删除权（GDPR/个保法删除请求同步删记忆）|记忆是持久化用户数据（个人保护法适用），删除权要覆盖记忆存储，与 JA-090 仓储实现联动|记忆是临时数据无合规要求|删除请求只删业务库|加密影响功能|合规工程|实战共识
+JA-199|Java AI|工程|成本|告警|成本告警：日预算阈值告警（token 费用按域/租户聚合）+超预算自动降级到小模型|预算失控要有自动刹车（AI-026 成本四招的治理化），与 MY-082 容量告警思想同构|成本只看月账单|告警后人工处理即可|降级与预算无关|成本治理自动化|实战共识
+JA-200|Java AI|工程|缓存|三层|生成结果缓存三层叠加：供应商 prompt cache（前缀）→ 集中语义缓存 → 本地精确缓存|三层各有粒度与成本（供应商省输入、语义缓存省整次、精确缓存秒回），顺序：精确→语义→模型|三层互相替代|顺序不影响效果|本地缓存无意义|缓存架构分层|实战共识
+JA-201|Java AI|工程|评估|数据血缘|评估集条目带血缘：来源（线上回流/人工构造）、创建版本、覆盖意图|血缘让评估集可审计可进化（AI-179 回流联动），污染排查（AI-088）靠血缘追溯|评估集条目无需元数据|血缘是测试数据要求太高|只有数量重要|评估资产管理|实战共识
+JA-202|Java AI|工程|RAG|引用格式|RAG 输出要求带引用标记（来源编号/文档名），后处理校验引用真实存在|无引用的 RAG 答案无法溯源（AI-011），输出后处理校验防"编造引用"，faithfulness 评估的落地|引用由模型自觉给出|编造引用无法检测|引用格式无关紧要|可信回答工程|实战共识
+JA-203|Java AI|工程|测试|mock 策略|测试环境模型策略：单测 mock 接口、集成测试用本地小模型（Ollama）跑通链路、生产评估走评估集|三层测试金字塔在 AI 应用落地（JA-041 细化），成本与确定性逐层权衡|所有测试连生产模型|集成测试不需要模型|本地小模型无价值|测试金字塔落地|实战共识
+JA-204|Java AI|工程|CI|评估成本|CI 中评估的成本控制：全量评估集按变更影响抽样跑（prompt 变更跑相关域子集）|评估集越大 CI 越贵越慢（AI-058），抽样+变更映射是平衡，发布前可全量补跑|CI 必须全量评估|评估不进 CI|抽样会漏问题（按影响面映射可控）|CI 效率设计|实战共识
+JA-205|Java AI|工程|发布|特性开关|AI 功能用特性开关灰度（按用户百分比开关 AI 特性），异常秒级关闭|AI 功能质量波动大（幻觉/供应商故障），开关是最后防线（AI-053 降级链末端），与发布体系联动|AI 功能上线即全量|开关是可选装饰|异常时只能回滚版本|发布安全阀|实战共识
+JA-206|Java AI|工程|限流|三级|配额三级分层：用户级（防刷）→业务级（公平）→全局级（供应商上限），逐级收紧|与 DF-088 纵深限流同构，AI 特有的"token 即成本"让用户级限流更必要，与 JA-059 联动|限流只在全局一层|用户级限流是过度设计|三级互斥|限流体系设计|实战共识
+JA-207|Java AI|工程|后处理|管线|模型输出后处理管线：清洗（去Markdown 冗余）→格式化→敏感词扫描→引用校验，链式处理|输出不是终点（AI-202 引用校验/护栏衔接），管线化让后处理可组合可测试|模型输出直接可用无需处理|后处理是字符串替换|管线不可组合|输出工程|实战共识
+JA-208|Java AI|工程|测试|记忆隔离|记忆隔离测试用例：并发两 memoryId 交替写入，断言互不污染|防串号（JA-097/135）的专项测试，竞态窗口在并发写入时暴露，与并发测试知识联动|隔离靠框架保证无需测试|串号只发生在单线程|测试用例写不出来|租户隔离验证|实战共识
+JA-209|Java AI|工程|模板|单测|prompt 模板单测：占位符渲染断言（缺参报错/特殊字符转义/长度边界）|模板是"代码"（AI-025 变更纪律），渲染失败要 fail-fast，与模板资源化（JA-078）配套|模板不需要单测|渲染失败静默跳过可接受|单测只测业务逻辑|模板质量门|实战共识
+JA-210|Java AI|工程|演练|供应商切换|供应商切换演练：网关切流到备供应商验证（协议兼容/参数语义/限流阈值）|降级链（JA-055）只有演练过才可信（DF-076 混沌思想），差异清单在演练中产出|切换即用无需演练|备供应商完全兼容|演练影响生产不做|降级可信度|实战共识
+JA-211|Java AI|工程|升级|checklist|框架升级 checklist：starter 名变更（JA-066）/废弃 API 扫描/评估集全量回归/灰度验证四步|Spring AI 0.8→1.0 与 LC4j 0.x→1.0 都有破坏性变更，checklist 化防漏（JA-049/138 联动）|升级只改版本号|破坏性变更不存在|灰度验证可选|升级流程标准化|实战共识
+JA-212|Java AI|工程|Agent|测试|Agent 循环测试：工具 mock 注入（按测试剧本返回固定序列），断言调用轨迹与终止条件|Agent 是多步循环（AI-059 评估），mock 工具让轨迹确定可断言，与 ExamSolutions 手写思维联动|Agent 无法测试|测试必须真调工具|只测最终答案即可|Agent 质量保障|实战共识
+JA-213|Java AI|工程|评估|显著性|A/B 效果对比注意统计显著性：样本量不足时采纳率差异可能是噪声|小流量灰度的决策陷阱（AI-063），给最小样本量指引，与实验设计常识联动|差异明显就下结论|样本量无关紧要|显著性是企业级过度设计|实验纪律|实战共识
+JA-214|Java AI|RAG|权限|同步|知识库权限变更同步：权限标签变更后增量更新向量元数据（否则越权检索残留）|AI-061 检索权限的运维面：变更→同步→验证闭环，滞后窗口要监控|权限变更自动实时同步|向量库权限与业务权限无关|同步不需要验证|权限一致性|实战共识
+JA-215|Java AI|RAG|冷启动|预热|检索冷启动预热：服务启动后用高频查询预热向量库连接与缓存|首波流量检索延迟毛刺（连接建立/缓存冷），与缓存预热（RD-066）同构|冷启动无影响|预热是可选装饰|预热一次永久有效|延迟稳定性|实战共识
+JA-216|Java AI|RAG|多语言|切分|中英混排文档切分：token 粒度切分天然兼容（tokenizer 按语言计量），字符切分对中文粒度失真|中英混合知识库的切分陷阱（JA-068/189 联动），选 token 切分器+合适 tokenizer|字符切分对中英文一样|中文必须按字切|多语言需要分开建库|多语言知识库|实战共识
+JA-217|Java AI|工程|模板|i18n|多语言 prompt 模板管理：按语言域维护模板文件，渲染时按用户语言选择|面向多区域用户的产品（模板资产化 JA-078 扩展），语言维度与版本维度正交|prompt 只需中文版|多语言靠模型自己翻译|i18n 是可选装饰|国际化工程|实战共识
+JA-218|Java AI|工程|幂等|工具清单|写操作工具幂等实现清单：唯一请求 ID（客户端传入或派生）+去重存储+重复请求返回首次结果|工具重试防重复执行（JA-056 红线的落地清单），与 DF-019 幂等三段式/DF-104 Idempotency-Key 同构|写工具天然幂等|去重存储不需要|重复执行无后果|工具幂等落地|实战共识
+JA-219|Java AI|工程|审计|轨迹|Agent 执行轨迹审计落库：每轮（模型调用/工具调用/参数/结果摘要）持久化，复盘与合规双用|轨迹是 Agent 的"日志"（AI-042 观测数据落库化），审计要求可回放，与 MQ 轨迹（MQ-093）同构|轨迹只在内存|审计不需要轨迹|轨迹记录影响功能（异步落库开销小）|Agent 可审计性|实战共识
+JA-220|Java AI|Spring AI|结构化|枚举|entity 支持枚举返回（输出约束到枚举值集），分类任务直接映射 Java 枚举|分类/意图识别的零解析方案（JA-003 特例），枚举约束比自由文本稳定|枚举返回不支持|枚举值模型自行发挥|分类必须 if-else 解析|分类任务落地|Spring AI 1.0 GA
+JA-221|Java AI|Spring AI|流式|聚合|流式聚合需求：Flux<String> 拼接完整回复做后处理（聚合完再落库/校验）|流式给用户、聚合给系统（校验/存档/审计）双消费，与 JA-207 后处理管线衔接|流式与聚合互斥|聚合要重新调用模型|拼接不是流式用法|流式消费双轨|实战共识
+JA-222|Java AI|LangChain4j|聚合|TokenStream 聚合|TokenStream 同样可聚合：onCompleteResponse 回调拿完整响应做校验/落库|与 JA-221 对等（框架差异在回调 vs Flux），设计模式一致：流给体验、聚合给工程|TokenStream 无法聚合|聚合需重新生成|回调拿不到完整内容|流式聚合对等|LangChain4j 1.0
+JA-223|Java AI|工程|对话|上下文窗口|上下文窗口预算分配：系统提示+记忆+检索内容+当前问题四段各有预算，检索内容是大头|RAG 场景 token 预算工程（AI-075 管理细化），窗口超限的优先级裁剪顺序要预设|窗口只装当前问题|预算不需要分配|超限自动处理无忧|上下文工程|实战共识
+JA-224|Java AI|工程|RAG|注入上限|检索内容注入上限：超预算时按相似度截断（保 top 片段），牺牲覆盖保可用|与 JA-223 衔接的兜底策略，与 MY-078 超限处理思想同构|注入越多越好|超限自动无感处理|截断是异常状态|预算兜底|实战共识
+JA-225|Java AI|工程|prompt|注入边界|提示词注入防御实现：外部内容用明确边界标签包裹+system 声明"标签内是数据"（AI-024 的框架层落地）|RAG 文档/工具结果都是注入载体，边界标签是最小实现，护栏（JA-193）是第二层|框架自动防注入|边界标签无用|防线只有一层|注入防御落地|实战共识
+JA-226|Java AI|工程|结构化|校验|entity 返回对象进业务前的二次校验：JSR-303 注解校验字段约束（schema 之外的业务规则）|schema 保证形状、业务规则（日期范围/枚举语义）仍需校验层，与 SP-068 校验知识联动|schema 即全部校验|二次校验是重复劳动|校验失败静默跳过|结构化防线|实战共识
+JA-227|Java AI|LangChain4j|结构化|JSON 模式|LC4j 对 OpenAI 官方 JSON 模式/结构化输出的支持（response format 配置级）|提示词注入 schema 之外，供应商原生结构化输出更稳（支持时优先），与 JA-173 机制互补|LC4j 不支持原生 JSON 模式|两种方式等价无差异|原生模式更慢|结构化方式选型|LangChain4j 1.0
+JA-228|Java AI|Spring AI|结构化|宽松解析|Spring AI 结构化输出的宽松解析：代码块包裹的 JSON 也能提取（模型爱包 ```json）|模型输出习惯带 Markdown 代码围栏，框架层做提取兜底，但极端格式仍需业务兜底（JA-099）|代码围栏会导致解析失败|宽松解析处理一切|不需要业务兜底|解析鲁棒性|Spring AI 1.0 GA
+JA-229|Java AI|工程|运维|版本对齐|框架版本与模型能力对齐：新模型新参数（如 reasoning/结构化模式）需要框架版本支持|供应商新能力滞后于 API 发布（框架适配周期），升级框架才能用新参数，与 JA-175 锁版纪律平衡|框架与模型能力无关|新参数随时可用|锁版与新能力无冲突|版本-能力矩阵|实战共识
+JA-230|Java AI|工程|部署|资源|LLM 应用自身资源需求：流式并发下 Netty/Servlet 线程占用、SSE 长连接数，容量规划与普通接口不同|长连接+慢响应的并发模型（DF-090 并发=QPS×RT），RT 长导致并发数放大，容量按并发而非 QPS|按 QPS 规划容量|SSE 连接不占资源|与普通接口容量一样|容量规划修正|实战共识
+JA-231|Java AI|工程|观测|采样|prompt 日志采样记录：全量太大不合规（JA-044），按错误/慢调用采样全量，成功样本记指纹|采样策略与追踪采样（DF-055）同构，错误样本是排障金矿，成功样本压缩为指纹|日志要么全量要么不记|采样策略无法实现|错误样本价值低|观测成本平衡|实战共识
+JA-232|Java AI|工程|多模型|路由实现|分级路由的 Java 实现：路由器读任务特征（长度/类型/用户档位）→ 选模型 → options.model 覆盖（JA-016），规则可配置|AI-086 的落地代码形态，路由规则配置中心化（JA-153/DF-048），灰度可按模型维度|路由必须 AI 决策|代码写死路由规则|路由与 options 无关|路由落地代码|实战共识
+JA-233|Java AI|工程|评估|在线指标|在线质量指标采集：用户点踩/采纳/修改率回流（AI-034），埋点在产品层而非框架层|框架只管调用，业务信号由产品埋点（前端交互数据），离线评估与在线信号互补形成闭环|框架自动采集采纳率|在线指标不需要埋点|离线评估可替代在线|质量信号采集|实战共识
+JA-234|Java AI|工程|回滚|双发|模型/prompt 双发（shadow）：新版本影子流量跑（不返回用户），对比效果后再放量|比 A/B 更保守的验证（用户无感），影子结果进评估管线，与全链路灰度（DF-051）同构|双发会重复计费无价值（影子成本可控是设计项）|影子流量直接返回用户|双发与灰度等价|低风险验证|实战共识
+JA-235|Java AI|工程|安全|越权工具|工具越权防线：工具执行前按当前用户权限校验（ToolContext 用户 → RBAC 判断），防"借 AI 之手越权"|AI-068 沙箱+JA-069 ToolContext 的组合落地，提示词注入可能诱导调高危工具（AI-024），权限校验是硬防线|模型会遵守权限|工具执行不需要权限校验|防线只在提示词|工具安全红线|实战共识
+JA-236|Java AI|工程|观测|水位|LLM 网关水位观测：各模型 QPS/token/错误率/排队深度，按模型维度出大盘（AI-052 细化）|多模型路由（JA-232）的观测配套，容量与成本按模型维度归因，与监控知识联动|网关无需按模型分|水位只看总量|大盘与成本无关|网关运维|实战共识
+JA-237|Java AI|工程|数据|训练边界|企业数据与供应商训练边界：API 数据默认不用于训练（供应商条款），仍需合同与脱敏双保险|AI-040 合规的条款面，技术措施（脱敏/网关）+合同措施并行，与安全审计联动|API 数据一定被训练|条款足够无需技术措施|脱敏与条款二选一|合规双保险|实战共识
+JA-238|Java AI|工程|架构|分层|AI 应用分层架构：接入层（网关）→编排层（框架/Agent）→能力层（模型/RAG/工具）→数据层（记忆/向量/评估）|把前面所有事实组织成架构图（P10 答题形态），层间契约清晰可替换，与 DF-081 分层思想同构|AI 应用不需要分层|层间随意调用|分层是过度设计|架构答题框架|实战方法论
+JA-239|Java AI|工程|复盘|失败模式|Java AI 应用四大失败模式盘点：幻觉（工程约束）、超时限流（可靠性）、成本失控（治理）、上下文串号（安全）——各有专属防线|把 AI-043/053/026/097 组织成失败模式矩阵，review 与演练按矩阵覆盖，与 MY-103 应急预案同构|失败只有幻觉一种|失败靠小心避免|防线与失败模式无关|风险盘点框架|实战方法论
+JA-240|Java AI|工程|主线|迁移|框架选型与迁移主线收束：锚版本（JA-060）→查迁移说明（JA-049/138）→checklist（JA-211）→灰度（JA-205）→错题回流（JA-179）|把本域所有迁移类知识串成 SOP，P10 回答"怎么安全升级 AI 框架"的完整框架|迁移不需要 SOP|直接改版本号上线|迁移与评估无关|迁移答题框架|实战方法论
+JA-241|Java AI|RAG|混合检索|实现|混合检索的 Java 落地形态：向量库语义召回 + ES 关键词召回双路，应用层 RRF（倒数排名融合）合并排序|向量召回弱在专有名词（AI-008），关键词路补齐，RRF 免调融合权重，是生产 RAG 标配（AI-032/062 之上）|混合检索必须同一库实现|RRF 需要训练权重|双路检索是过度设计|混合检索架构|实战共识
+JA-242|Java AI|RAG|切分|parent-child|parent-child 切分：检索用小块（child 精度高）注入用大块（parent 上下文全），child 元数据记 parent id|小块召回准但上下文碎，映射回父块注入兼得两者，Java 侧自实现（切分时建映射）|child 就是注入单元|parent-child 是框架内置自动|大块直接检索更好|切分策略进阶|实战共识
+JA-243|Java AI|RAG|路由|查询路由|多知识库场景查询路由：按意图把查询分发给不同向量库（规则或小模型决策），LC4j 的 QueryRouter 抽象支撑|单一库检索范围错配（技术库 vs 商务库），路由是高级 RAG（JA-081）的编排件|所有查询进同一个库|路由必须用大模型|路由不可配置|多库检索编排|实战共识
+JA-244|Java AI|RAG|聚合|多路聚合|多路召回结果聚合：去重（同源片段）、按来源加权、截断组合，LC4j 的 ContentAggregator 抽象支撑|多 retriever（向量+关键词+多库）结果需统一归并才能注入，聚合策略决定最终上下文质量|聚合就是简单 concat|去重不需要|聚合在模型侧自动完成|多路召回编排|实战共识
+JA-245|Java AI|RAG|评估|golden set|检索评估集（golden set）：问题→期望片段映射，逐域统计 Recall@K，检索改动前先跑|检索是无标注优化（AI-082 落地形态），golden set 是检索回归的标尺，缺失则调参靠猜|检索调参不需要评估|golden set 自动生成|只评生成不评检索|检索回归标尺|实战共识
+JA-246|Java AI|RAG|切分|overlap 权衡|chunk overlap 的权衡：跨边界语义保留（正）vs 内容重复稀释（负），重叠通常取 chunk 的 10-20%|重叠过大让相似检索返回重复内容挤占 topK（JA-052 联动），重叠为零则切断关键句|overlap 越大越好|重叠没有代价|overlap 必须 50%|切分参数权衡|实战共识
+JA-247|Java AI|RAG|切分|语义分块|语义分块：按语义边界（句向量相似度断点）切分而非固定长度，质量更好成本更高|固定长度切断语义（JA-068 的局限），语义断点切分提升检索精度，嵌入成本换质量按域选|语义分块不存在|语义分块总是更优|语义分块零成本|切分策略选型|实战共识
+JA-248|Java AI|RAG|排序|时间衰减|检索分数时间衰减：时效性内容（新闻/公告）按文档时间衰减分数，旧闻不再霸榜|纯相似度不考虑时效（AI-060 知识更新联动），衰减因子按域配置，与 MY-081 归档思想呼应|相似度是唯一排序|时间衰减破坏相关性|所有内容都该衰减|时效性检索|实战共识
+JA-249|Java AI|RAG|隔离|选型|多租户向量隔离选型：海量租户用 filter 隔离（单库），高 SLA 租户独立库，按规模与隔离强度分级|JA-159 并存能力的选型决策面：过滤便宜但共享容量，独立库强隔离高成本|所有租户都独立库|过滤隔离强度足够所有场景|隔离只有一种形态|租户隔离选型|实战共识
+JA-250|Java AI|RAG|相似度|归一化|嵌入向量归一化与距离度量：cosine 相似度要求向量归一化，未归一化时点积与 cosine 不等价|度量选错检索排序就错（静默质量事故），入库与检索用同一度量口径，嵌入模型文档确认|度量随意选无影响|点积永远等于 cosine|归一化是可选装饰|相似度口径|实战共识
+JA-251|Java AI|RAG|降级|兜底|检索链路降级：向量库故障时降级到 ES 关键词检索或无 RAG 直答模式（标记降级降低预期）|RAG 是强依赖（JA-154 熔断的特化），降级模式让服务不断，质量损失向用户透明化|向量库挂了就全停|降级模式不需要标记|关键词检索能完全替代|RAG 高可用|实战共识
+JA-252|Java AI|RAG|引用|粒度|引用粒度选择：chunk 级引用（精确到段）vs 文档级引用（粗但稳），产品形态决定|chunk 引用精确但碎（AI-202），文档引用稳定但难定位，问答产品 chunk 级、合规归档文档级|引用只有一种粒度|粒度越细越好|粒度与产品无关|引用设计|实战共识
+JA-253|Java AI|RAG|图谱|GraphRAG 现实|GraphRAG（AI-044）的 Java 现实：无开箱框架组件，需图库（Neo4j）+实体抽取管道自建，按 ROI 决策|多跳关系问题少的企业场景不值得建图（成本高），诚实评估而非追新，与选型 ROI 思维（AI-027）联动|GraphRAG 有 Java 开箱组件|所有场景都该上图|建图成本为零|进阶 RAG 决策|实战共识
+JA-254|Java AI|Agent|边界|循环归属|Java 框架的 Agent 边界：框架管"模型↔工具"执行循环（JA-053），任务规划/多 Agent 编排/长状态需自建|判断标准：单工具循环内框架够用，跨任务状态与多 Agent 协作进入自建区（LangGraph 类编排），诚实划界|框架能做全部 Agent|循环都要手写|框架循环与自建无区别|Agent 架构划界|实战共识
+JA-255|Java AI|Agent|状态|状态机|Agent 任务显式状态机：PLANNING→EXECUTING→VERIFYING→DONE/FAILED，状态落库支撑恢复与审计|隐式状态（只存在循环变量）无法 checkpoint（AI-021 落地），状态机是长任务 Agent 的骨架|Agent 不需要状态机|状态只在内存|状态机与恢复无关|长任务骨架|实战共识
+JA-256|Java AI|Agent|工具|结果摘要|工具结果回喂前裁剪：大结果（长 JSON/日志）先摘要/字段筛选再进上下文（AI-084 的 Java 落地）|工具结果直塞撑爆窗口且稀释关键信息，摘要器在工具与消息之间，裁剪策略按工具类型配置|工具结果原样回喂最优|裁剪会破坏任务|裁剪不需要策略|上下文工程|实战共识
+JA-257|Java AI|Agent|恢复|断点|Agent 失败重试边界：步骤级重试（单工具失败）优先，任务级重试从 checkpoint 续跑，全量重跑是最后手段|AI-021 checkpoint 的重试策略细化，幂等工具（JA-218）是步骤重试前提，重试粒度决定成本|失败就全量重跑|步骤重试不需要幂等|重试粒度无差别|失败恢复设计|实战共识
+JA-258|Java AI|Agent|协作|介质|多 Agent 通信介质选型：进程内队列（同应用）→MQ（跨服务/解耦）→共享状态库（长任务），按耦合度选|AI-049 多 Agent 架构的落地介质，MQ 介质天然获得重试与轨迹（MQ-001 联动），进程内最简|多 Agent 只能内存通信|通信介质随意选|MQ 不适合 Agent|多 Agent 落地|实战共识
+JA-259|Java AI|Agent|人审|节点|人审节点落地：Agent 状态机插入 WAITING_APPROVAL 状态，审批 UI + 超时策略（超时自动拒绝或升级）|AI-068 审批的工程化，高危操作（AI-235 越权防线之外的第二道）挂审批，超时策略防任务悬挂|审批节点可有可无|超时自动批准|审批不落轨迹|人机协作落地|实战共识
+JA-260|Java AI|Agent|并发|并行工具|独立工具并行执行提吞吐：按依赖图判断可并行（读库存+查物流无依赖），有依赖串行|串行执行是默认实现，并行化要判断数据依赖（竞态/上下文合并），与并发工程知识联动|工具只能串行|并行导致结果错乱|所有工具都该并行|Agent 吞吐优化|实战共识
+JA-261|Java AI|Agent|清理|生命周期|Agent 任务终态清理：中间状态/临时文件/记忆挂载在任务 DONE/FAILED 后清理，防长尾泄漏|长运行 Agent 的资源纪律（JA-160 记忆清理的任务级版本），清理失败进补偿任务|任务结束自动清理|泄漏无后果|清理与终态无关|资源生命周期|实战共识
+JA-262|Java AI|工程|流式|安全扫描|流式输出的安全扫描：敏感词/合规扫描逐段进行（不等全文），命中即截断流|合规要覆盖流式（JA-207 管线的流式版），逐段扫描有误判窗口（上下文被切）需窗口缓冲|流式内容免检|等全文再扫描（体验与合规失衡）|扫描不影响流|流式合规|实战共识
+JA-263|Java AI|工程|token|本地计数|Java 侧本地 token 计数：jtokkit 是 tiktoken 的 Java 实现（BPE 编码本地计算）|预算估算（AI-062/103）需要本地计数（调 API 计数太贵），jtokkit 是 Java 生态事实标准|Java 没有 token 计数库|计数必须调 API|本地计数与供应商一致无偏差（近似值用于预算足够）|token 工程工具|实战共识
+JA-264|Java AI|工程|成本|价格配置|模型价格表配置化：价格/汇率入配置中心（供应商调价即改配置），成本计算公式引用配置|价格硬编码是成本事故源（调价不感知），与配置治理（DF-106）联动|价格写死在代码|价格不会变化|成本计算不需要配置|成本工程基础|实战共识
+JA-265|Java AI|工程|对账|账单|本地用量与供应商账单对账：差异来源（缓存折扣/失败调用计费/计量口径），月度对账闭环|Usage 统计（JA-065）与账单必有偏差，对账发现泄漏（未计量调用/配额滥用），与 MY-102 对账思想同构|本地统计等于账单|对账是可选动作|差异一定是 bug|成本可信度|实战共识
+JA-266|Java AI|工程|配额|key 池|供应商多 key 池轮转：多账号分摊配额（RPM/TPM 独立计），轮转+熔断（坏 key 摘除）|单 key 配额是吞吐天花板（AI-065 的扩展），合规前提是供应商条款允许多账号，与限流知识联动|多 key 违规不能用|key 池无运维成本|坏 key 自动恢复|配额扩展手段|实战共识
+JA-267|Java AI|工程|合规|数据驻留|数据驻留合规：按用户区域路由端点（EU 用户走 EU 端点），网关层实现区域路由|数据跨境法规（GDPR 等）硬约束（AI-040 延伸），区域端点+路由规则，与 JA-096 网关联动|数据驻留无关紧要|供应商自动处理驻留|区域路由在应用层写死|跨境合规|实战共识
+JA-268|Java AI|工程|网络|出网|企业出网适配：代理/证书/内网网关三层（HTTP client 层配置），框架可插拔 HTTP 层（JA-140）承接|企业内网环境是现实约束，网络层问题伪装成"模型不可用"，排障分层（网络→网关→供应商）|出网配置与应用无关|代理导致模型不可用就是供应商问题|网络层无法配置|企业网络排障|实战共识
+JA-269|Java AI|工程|压缩|prompt 压缩|prompt 压缩技术：选择性删词压缩器（LLMLingua 思路）在保语义下降 token，Java 侧以预处理器接入|长上下文成本压缩（AI-075/103 联动），压缩有语义损失风险需评估回归（AI-077），按收益启用|prompt 压缩不存在|压缩无损无风险|压缩只能删句|token 压缩手段|实战共识
+JA-270|Java AI|工程|摘要|map-reduce|超长文本摘要链：分段摘要（map）→归并摘要（reduce），突破单次窗口限制|单次窗口装不下的长文档（JA-223 预算超限的解法），链式摘要质量衰减需评估，与分治思想同构|超窗口只能截断|map-reduce 会丢关键信息|摘要必须一次完成|长文本处理|实战共识
+JA-271|Java AI|工程|实验|单元隔离|A/B 实验单元按用户 hash 分桶（同用户始终同版本），避免同一用户见到两版本|实验单元错配（按请求）导致体验混乱与数据污染（AI-063），与灰度（DF-050）联动|实验单元按请求即可|同一用户见两版本无影响|分桶是可选装饰|实验设计|实战共识
+JA-272|Java AI|工程|评估|LLM 判分|评估自动判分：LLM-as-judge 按评分细则打分，judge 模型与被测模型分开（防偏袒），抽样人工校准|AI-069 的工程化：人工全评不可行，judge 是杠杆，judge 自身的偏差要校准（换 judge 跑分对比）|自动判分不需要校准|judge 用同一个模型最公平|判分完全客观|评估自动化|实战共识
+JA-273|Java AI|工程|监控|拨测|供应商 SLA 拨测：独立探针定时调模型 API（最小请求），监控可用性/延迟基线，与内部监控分离|外部视角可用性（JA-055 降级决策的数据源），内部调用正常不代表供应商健康，与拨测监控思想联动|供应商健康靠用户反馈|拨测浪费 token（极小成本）|内外监控是一回事|供应商可观测|实战共识
+JA-274|Java AI|工程|安全|输出链接|模型输出链接防护：生成 URL 经白名单校验（防幻觉域名/钓鱼链接直达用户）|幻觉 URL 是真实攻击面（AI-043 幻觉的 Web 维度），白名单+域名校验在输出管线（JA-207）落地|模型输出链接可信|链接校验是可选装饰|幻觉只影响文本|输出安全|实战共识
+JA-275|Java AI|工程|工具|超时|工具执行超时独立配置：单个工具超时（业务工具可能调慢下游）独立于 LLM 调用超时|工具链路含业务下游（DB/RPC），工具超时是熔断粒度的一部分（JA-154 联动），超限返回错误反馈给模型|工具超时与模型相同|工具不会超时|超时后模型自动等待|工具可靠性|实战共识
+JA-276|Java AI|Agent|边界|步数上限|Agent 最大步数上限配置（max iterations）：防死循环烧钱（AI-043 失败模式），到限强制收尾（汇总当前结果）|循环失控的硬保险（AI-016），上限按任务类型分档，到限的行为要设计（优雅收尾而非报错）|循环不会失控|到限抛异常即可|上限越大越好|Agent 熔断线|实战共识
+JA-277|Java AI|工程|网关|标签透传|计费标签透传：应用把业务标签（tenant/feature）经 header 传给网关，网关归集出账（AI-057 的网关侧落地）|归集口径一致（应用/网关/账单三层同标签），标签设计决定成本分析维度，与配置治理联动|标签只在应用内用|网关不透传标签|归集只能事后分析|计费链路|实战共识
+JA-278|Java AI|工程|调试|playground|本地调试页（playground）：开发环境直连模型的对话调试工具（框架 devtools 或手写页），试 prompt 免发版|prompt 迭代效率工具（AI-064 变更纪律的配套），生产隔离（只在 dev profile 开启），与测试策略联动|调试只能发版验证|playground 可开放生产|调试工具与框架无关|开发效率工具|实战共识
+JA-279|Java AI|工程|降级|熔断预算|熔断+预算双保险：熔断防雪崩（DF-022），预算熔断防成本失控（日预算超限强制降级），两套独立|失败熔断与成本熔断是不同维度（JA-199 告警的自动化），都触发时成本熔断优先|熔断只指失败率|成本与熔断无关|一套熔断够用|双维度熔断|实战共识
+JA-280|Java AI|工程|知识|权限变更|知识库权限变更同步机制：权限标签变更事件→向量元数据批量更新→抽查验证，滞后窗口监控|AI-214 的机制化：事件驱动（MQ）而非定时全量，与 CDC 思想（RD-046）同构|权限同步定时全量即可|变更事件不可靠|滞后无需监控|权限同步工程|实战共识
+JA-281|Java AI|工程|多语言|混合检索|多语言知识库检索：跨语言查询（中文问英文文档）需跨语言嵌入模型或查询翻译预处理|嵌入模型跨语言能力差异大（AI-076 模型评测联动），翻译预处理（查询先翻成文档语言）是备选|嵌入模型天然跨语言|多语言检索只能分开库|翻译预处理必然引入错误|多语言检索策略|实战共识
+JA-282|Java AI|工程|测试|契约|AI 组件契约测试：mock 模型验证业务逻辑（JA-041），契约测试验证"调用参数符合预期"（温度/模型/消息结构）|比 mock 更进一步：断言发出去的请求形态（回归保护 prompt/options 变更），与消费者契约测试思想同构|测试只看返回值|调用参数无需断言|契约测试是可选装饰|AI 测试深化|实战共识
+JA-283|Java AI|工程|结构化|流式结构化|流式结构化输出：逐段 JSON 无法解析，需流式 JSON 解析器（增量解析）或聚合后解析（JA-221 权衡）|流式+结构化叠加的场景（实时表格填充），增量解析复杂度高，多数场景聚合后解析足够|流式与结构化自然兼容|必须逐段解析|聚合解析丢失流式优势|流式结构化权衡|实战共识
+JA-284|Java AI|工程|依赖|隔离|AI 依赖隔离：框架依赖圈进独立模块（adapter 层），业务不直接 import 框架类|框架快速迭代（JA-175），adapter 层让换框架只改一个模块（防腐层 DDD 思想，SP-083/DDF-083 联动）|业务直接用框架类最方便|隔离是过度设计|换框架不会发生|防腐层落地|实战共识
+JA-285|Java AI|工程|评审|清单|AI 功能 code review 清单：密钥不入库（JA-043）/防串号（JA-097）/工具幂等（JA-218）/注入边界（JA-225）/输出扫描（JA-262）五项必查|把前面红线收敛成 review checklist，人工 review 前先跑静态检查，与 MY-104 SQL 审核思想同构|review 与普通代码一样|清单是形式主义|红线靠自觉|质量门|实战共识
+JA-286|Java AI|工程|灾备|演练|AI 依赖灾备演练矩阵：供应商宕机（切网关）、限流（降级）、上下文超限（裁剪）、成本失控（熔断）四场景季度演练|失败模式矩阵（JA-239）的演练化，每场景验证降级链与告警，与 DF-076 混沌工程联动|演练只覆盖宕机|AI 依赖不需要演练|演练一次永久有效|韧性验证|实战共识
+JA-287|Java AI|LangChain4j|工具|规格|LC4j 手动构建 ToolSpecification（不经注解）：名称/描述/JSON Schema 参数动态组装|与 Spring AI 手动规格（JA-178）对等，动态工具场景双框架同解，注解是静态场景捷径|LC4j 工具只能注解|手动规格无 schema|动态注册不存在|动态工具对等|LangChain4j 1.0
+JA-288|Java AI|Spring AI|记忆|按条清理|Spring AI ChatMemory 支持按会话清理（清空指定 conversationId 的历史）|用户删除会话/合规删除（JA-198）的 API 面，与仓储（JA-067）配合，清理动作要进审计|记忆无法定向清理|清理影响其他会话|清理不需要审计|会话生命周期|Spring AI 1.0 GA
+JA-289|Java AI|工程|指标|质量维度|质量指标在线化三件：回答引用率（有据比例）、用户纠错率、转人工率，趋势看板按域分桶|AI-233 在线指标的落地清单，三者联合定位质量域（引用率低=RAG 问题），与可观测体系联动|质量指标只有人工评|三个指标无关联|看板不需要分域|在线质量监控|实战共识
+JA-290|Java AI|工程|成本|分摊|成本分摊到产品功能：按调用链路打业务标签（AI-057 细化），功能级 ROI 评估（AI-027）才有数据|成本只到"模型级"无法决策（哪个功能该优化），功能标签与网关标签（JA-277）贯通|成本到模型级足够|功能标签无法采集|分摊不影响决策|成本分析维度|实战共识
+JA-291|Java AI|工程|选型|对比表|框架能力对比表维护：Spring AI/LC4j 的能力矩阵（模型/结构化/RAG/工具/MCP/观测/护栏）随版本更新|选型论证（JA-039）要有活文档支撑（版本演进 JA-229），对比表是团队资产，与决策文档文化联动|对比表一次制作永久用|选型只看 star|能力矩阵主观无意义|选型资产管理|实战共识
+JA-292|Java AI|工程|演练|成本失控|成本失控演练：模拟价格上调/循环调用（JA-276 防线失效），验证预算熔断（JA-279）与告警链路|成本维度也要演练（不止可用性），与混沌工程覆盖面扩展（DF-076），演练产出调参|成本演练无必要|熔断参数拍脑袋定|演练只测功能|成本韧性|实战共识
+JA-293|Java AI|RAG|评估|端到端|RAG 评估分层：检索层（Recall@K）与生成层（faithfulness/相关性）分开评（AI-012），归因才清晰|检索差修检索、生成差修 prompt（JA-051 两段式对应的评估拆分），混评无法归因|RAG 只评最终答案|分层评估是过度设计|归因靠猜测|评估归因|实战共识
+JA-294|Java AI|工程|上线|五步|AI 功能上线五步：评估集门禁（AI-058）→影子双发（JA-234）→小流量灰度（JA-205）→看板监控（JA-289）→错题回流（JA-179）|把发布链路串成 SOP，每步有工具支撑，与完整发布体系（DF-050/051）同构|上线直接全量|五步是形式主义|只做评估就够|发布 SOP|实战方法论
+JA-295|Java AI|工程|接口|防腐|AI 能力接口设计：业务层只见"complete/query/extract"领域接口，框架类型不出 adapter（JA-284 的接口面）|防腐层的接口面设计决定换框架成本，接口按业务语义而非框架语义命名，与 DDD 接口设计联动|接口直接暴露 ChatClient|防腐层接口照抄框架|命名按框架概念|防腐接口设计|实战共识
+JA-296|Java AI|工程|观测|trace 深度|LLM 调用 trace 深度：一次用户请求的 span 树=网关→框架→供应商→工具子调用，全链路串联（AI-042 落地）|trace 树还原"慢在哪层"（DF-053），工具内嵌 RPC 也要子 span，与分布式追踪知识同构|LLM 调用无 span 树|只记顶层一个 span|工具调用独立无关联|trace 树设计|实战共识
+JA-297|Java AI|工程|容量|并发模型|LLM 应用的并发模型选择：WebFlux 全链路响应式 vs MVC+SseEmitter 桥接，按团队技术栈与生态选|两种模式都能做流式（JA-169），响应式吞吐优但调试成本高（SP-082），虚拟线程（SP-083）是第三选项|必须全链路响应式|MVC 做不了流式|三种模式性能相同|并发架构选型|实战共识
+JA-298|Java AI|工程|结构化|嵌套|嵌套结构结构化输出：深嵌套 POJO（含列表与对象）成功率低于平铺结构，schema 设计偏好浅层|模型对深嵌套/长列表的 JSON 生成错误率高（JA-099 失败来源），schema 设计影响成功率（平铺/拆字段），与建模思想联动|嵌套深度无影响|schema 由模型决定|失败靠重试解决|结构化设计纪律|实战共识
+JA-299|Java AI|工程|安全|红队|AI 功能红队清单：注入（JA-225）、越狱（AI-025）、越权工具（JA-235）、数据外泄（prompt 中带敏感数据外发）、成本攻击（恶意刷 token）|把 AI-054 安全域落成可执行红队清单，上线前跑+变更后回归，与安全审计（RD-096）同构|安全靠供应商保证|红队是安全团队专属|五类风险无法枚举|安全验证框架|实战共识
+JA-300|Java AI|工程|文档|README|AI 功能交付文档：架构图（JA-238 分层）、评估集入口、降级链、成本口径、runbook（故障预案）五件套|AI 功能的交付完整性（不止代码），运维可接手（预案可执行），与交付文档纪律联动|AI 功能不需要专项文档|文档与代码同步可选|五件套是形式主义|交付完整性|实战方法论
+JA-301|Java AI|选型|范式|命令式 vs 声明式|两框架编程范式差异：Spring AI ChatClient 是命令式链（逐步组装请求），LangChain4j AiServices 是声明式接口（注解定义契约）|范式影响代码组织：命令式灵活（动态组装）、声明式简洁（接口即文档），团队风格决定偏好，与 SP-083 联动|两种范式可以互相替代无差异|声明式不能动态组装|范式与可测试性无关|范式对比深水区|实战共识
+JA-302|Java AI|选型|RAG 装配面|RAG 装配差异|Spring AI 的 RAG 装配面是 advisor 链，LangChain4j 是 contentRetriever/retrievalAugmentor 参数|两种装配面语义对等（JA-051），Spring AI 的 advisor 更通用（RAG 只是用途之一），LC4j 的更专用清晰|RAG 装配两框架完全相同|advisor 不能做 RAG|专用装配面是劣势|RAG 装配对比|实战共识
+JA-303|Java AI|选型|记忆|记忆差异|记忆装配差异：Spring AI 用 ChatMemory bean + MemoryAdvisor，LC4j 用 ChatMemoryProvider + @MemoryId 参数|Spring AI 的会话标识经 advisor 参数传（JA-064），LC4j 经方法参数传（JA-135），心智模型不同但能力对等|记忆机制两框架相同|LC4j 记忆不能持久化|Spring AI 记忆不支持多会话|记忆对比|实战共识
+JA-304|Java AI|选型|观测|观测差异|观测实现差异：Spring AI 深度集成 Micrometer Observation（自动 trace），LC4j 靠 listener 回调自建|Spring 栈下 Spring AI 观测零配置，LC4j 要自接埋点（JA-170），观测成本是选型权重之一|两框架观测完全相同|LC4j 观测无法实现|观测与选型无关|观测对比|实战共识
+JA-305|Java AI|选型|流式|类型差异|流式返回类型差异：Spring AI 返回 Reactor Flux，LC4j 返回自定义 TokenStream 回调|Flux 可组合（背压/操作符），TokenStream 简单直接，WebFlux 栈偏好前者，与 JA-297 并发模型联动|两种类型等价可互换|TokenStream 也是 Flux|类型差异不影响集成|流式对比|实战共识
+JA-306|Java AI|选型|节奏|版本节奏|版本节奏差异：LangChain4j 独立项目迭代快（追新模型），Spring AI 跟随 Spring 生态节奏更稳|追新（新模型参数早支持）与稳定（生产节奏）的权衡（JA-229 联动），企业多偏稳，追新团队选 LC4j|两框架发布节奏相同|迭代快的一定更好|节奏与选型无关|版本节奏对比|实战共识
+JA-307|Java AI|MCP|生产|进程隔离|MCP server 子进程的资源与安全隔离：容器化运行（限额 CPU/内存/文件系统只读）|子进程默认继承宿主权限（AI-076 沙箱思想），容器隔离防恶意/失控 server 影响宿主|子进程隔离不必要|容器化影响功能|隔离只对远程 server|本地 server 安全|MCP 生产化
+JA-308|Java AI|MCP|生产|版本兼容|MCP server 升级的兼容性管理：inputSchema 变更=破坏性变更（客户端填参逻辑失效），schema 只增不改|工具契约演进纪律（与 API 版本管理同构），schema 变更走新版本工具而非原地改|schema 可随意修改|兼容性由客户端保证|版本管理不适用于 MCP 工具|工具契约演进|MCP 生产化
+JA-309|Java AI|MCP|生产|重连|MCP 客户端重连策略：断线重连退避+initialize 重新握手+工具清单重新发现|重连不是简单重试（会话与发现都要重来），客户端 SDK 行为确认+业务侧监控重连次数|断线自动恢复无需处理|重连只重试一次|重连不影响工具清单|MCP 可靠性|MCP 生产化
+JA-310|Java AI|MCP|生产|多租户|MCP server 多租户隔离：工具执行按调用方身份过滤（鉴权上下文进 server）|共享 server 多业务接入时防越权（JA-235 同思想），身份经传输层传递（HTTP header/stdio 环境变量）|MCP server 天然多租户|身份识别可选|隔离靠客户端自觉|MCP 租户隔离|MCP 生产化
+JA-311|Java AI|MCP|生产|灰度|MCP 工具灰度：新工具版本先对部分客户端开放（server 端路由），或新增工具名 v2 并存|工具变更协议化灰度（JA-308 契约演进配套），新旧并存回退容易，与发布灰度（DF-050）同构|MCP 工具无法灰度|灰度直接全量换|并存导致混乱|MCP 发布纪律|MCP 生产化
+JA-312|Java AI|MCP|生产|审计|MCP 调用审计：server 记录调用方/工具/参数/结果摘要/耗时，合规与计费双用|与 AI-042 观测、JA-219 轨迹同思想，审计是 MCP 平台化前提（谁在用我的工具）|审计是可选装饰|审计影响调用性能（异步落库开销小）|审计只有错误才记录|MCP 平台化|MCP 生产化
+JA-313|Java AI|MCP|生产|超时|MCP 工具超时分层：连接超时/工具执行超时/整体会话超时三层配置|工具含业务下游（JA-275 工具超时知识），MCP 层再加一层网络超时，三层独立调参|超时只有一层|工具执行超时不可配|整体会话无超时|MCP 超时体系|MCP 生产化
+JA-314|Java AI|MCP|生产|监控|MCP server 监控：工具级 QPS/延迟/错误率/参数校验失败率，工具维度大盘|工具是"远程函数"（JA-026），监控粒度到工具才能定位坏工具，与 DF-092 指标体系联动|监控只看进程存活|工具级监控无意义|错误率是唯一指标|MCP 可观测|MCP 生产化
+JA-315|Java AI|MCP|生产|测试|MCP server 测试：schema 契约测试（inputSchema 与实现签名一致）+mock 客户端回归|工具契约（JA-308）的自动化验证，SDK 从 POJO 生成 schema（JA-176）后契约漂移要测|MCP server 无法测试|测试只测工具逻辑|schema 漂移无害|MCP 质量门|MCP 生产化
+JA-316|Java AI|MCP|定位|与网关关系|MCP 与 API 网关的关系：MCP 是工具协议不是流量网关，企业内两者共存（网管南北向流量、MCP 管 Agent 工具接入）|定位混淆会导致重复建设，MCP 解决"AI 工具生态接入"，网关解决"HTTP 流量治理"|MCP 替代 API 网关|两者是竞争关系|工具接入走普通网关即可|架构定位澄清|实战共识
+JA-317|Java AI|中间件|网关|职责|LLM 网关六大职责：协议转换、鉴权、限流配额、路由降级、计费归集、缓存（AI-028 的展开）|每职责有实现件（JA-277 标签/JA-096 base-url），网关是 AI 中间件的核心节点，与 DF-037 API 网关职责对照|网关只做转发|职责可以随意裁剪|网关是必需品（小团队可直连）|网关架构全景|实战共识
+JA-318|Java AI|中间件|网关|兼容层|网关的 OpenAI 协议兼容层：统一对外 OpenAI 协议，对内翻译各家协议（Anthropic/通义等）|应用只学一套协议（JA-096），协议转换在网关（含消息结构与流式格式差异），是网关存在的第一理由|各供应商协议完全相同|兼容层无转换成本|应用直连更简单|协议适配|实战共识
+JA-319|Java AI|中间件|网关|插件|网关插件链：敏感词过滤/注入检测/审计/配额校验按序执行（类似 Servlet 过滤器链）|横切能力下沉网关（应用免重复实现），插件顺序影响行为（先审计后过滤），与 JA-225 注入防线呼应|网关不可扩展插件|插件顺序无关|横切能力放应用层|网关扩展模型|实战共识
+JA-320|Java AI|中间件|网关|配额|网关多租户配额：按租户/业务/模型三维配额（token/请求数），超限 429+升级路径|JA-206 三级限流的网关侧实现，配额数据结构（令牌桶按租户分桶），与 Redis 限流（RD-057）联动|配额只有全局一种|超限直接丢弃无升级|三维互斥|配额模型|实战共识
+JA-321|Java AI|中间件|网关|降级路由|网关降级路由：主模型错误率超阈自动切备模型（路由表+健康检查驱动）|JA-055 降级链的网关侧自动化，切流决策基于拨测（JA-273）与实时错误率，与 DF-053 主从切换思想同构|降级只能人工切|自动切流不会误切|路由表是静态的|自动降级实现|实战共识
+JA-322|Java AI|中间件|网关|审计|网关审计日志：完整请求响应（脱敏后）落审计存储（可回放），与 MDC trace 关联|排障/合规/对账三用的数据源（JA-165 指纹的网关侧补充），存储成本按采样平衡|审计只记失败请求|审计日志不需要脱敏|审计与 trace 无关|审计落地方案|实战共识
+JA-323|Java AI|中间件|网关|选型|网关选型：开源（LiteLLM/Higress AI 插件）vs 自建，按定制深度与团队运维能力|LiteLLM 快速起步（协议转换成熟），深度定制（配额模型/审计格式）自建，与 MQ-088 平台化判断同构|必须自建网关|开源网关无生产案例|选型与团队无关|网关选型框架|实战共识
+JA-324|Java AI|中间件|网关|性能|网关额外一跳的延迟代价：流式场景网关转发增加毫秒级，配额校验本地缓存降低检查成本|网关不是免费（多一跳网络+处理），收益（治理）与代价（延迟/可用性）权衡，与 DF-047 负载均衡位置思想同构|网关零延迟|延迟代价大于收益（治理收益通常更大）|性能与治理无关|网关成本认知|实战共识
+JA-325|Java AI|中间件|网关|HA|网关高可用：无状态多实例+负载均衡，配额状态外置（Redis），网关挂了应用可配置直连兜底|网关是单点风险（JA-037 网关可用性知识），兜底直连是逃生通道（演练验证），与多级降级（DF-074）联动|网关天然高可用|配额状态在网关内存|挂了业务自动切直连（需配置与演练）|网关可用性|实战共识
+JA-326|Java AI|中间件|语义缓存|部署|语义缓存独立部署（服务化）优于嵌应用内：多应用共享缓存命中、独立演化|嵌入应用内缓存只服务自己（AI-050），服务化语义缓存是平台件（与网关并列），与多级缓存（JA-200）联动|语义缓存必须嵌应用|服务化增加复杂度无收益|共享命中是伪需求|语义缓存架构|实战共识
+JA-327|Java AI|Spring AI|装配|原理|Spring AI 自动装配原理：starter 经条件注解（@ConditionalOnClass/@ConditionalOnProperty）装配 ChatModel 与 Builder|与 SP-031 条件装配同机制（spring.ai.model 属性选择 provider，JA-047），理解装配链才能排查"bean 不存在"问题|自动装配是魔法无机制|条件注解不适用 AI starter|装配与 Spring 无关|装配原理|Spring AI 1.0 GA
+JA-328|Java AI|Spring AI|模块|构成|Spring AI 模块构成：spring-ai-core（抽象）+ 各 model starter + vector-store starter + mcp starter 族|与 LC4j core/主构件分工（JA-136）同构，core 抽象稳定、适配器独立演进，依赖图清晰|Spring AI 是单体 jar|模块间无层次|core 含全部实现|依赖图理解|Spring AI 1.0 GA
+JA-329|Java AI|Spring AI|会话|id 来源|conversationId 来源三选：前端显式传（会话模型）→后端解析（用户+会话）→默认值（无状态单轮）|会话标识决定记忆隔离粒度（JA-064），来源不清是串号（JA-097）的根源，接口设计先定 id 语义|conversationId 框架自动生成|来源不需要设计|默认值适合多用户|会话标识设计|实战共识
+JA-330|Java AI|Spring AI|RAG|内部流程|QuestionAnswerAdvisor 内部流程：拦截请求→用用户问题查向量库→把片段组装进提示模板→放行调用|理解内部流程才能扩展（自定义模板 JA-126/改检索策略），advisor 是"前置检索+提示组装"的组合|advisor 内部是黑盒|检索发生在模型调用后|流程不可扩展|advisor 机制理解|Spring AI 1.0 GA
+JA-331|Java AI|Spring AI|Advisor|异常|advisor 链异常传播：前置异常阻断调用（降级 advisor 实现），异常沿链上抛给调用方|advisor 是拦截器语义（SP-066 对比），异常处理在链路层统一（兜底 advisor 吞异常给降级），与熔断（JA-154）组合|advisor 异常被框架吞掉|异常传播会破坏链|异常处理只能在业务层|链路异常设计|Spring AI 1.0 GA
+JA-332|Java AI|LangChain4j|异常|接口层|LC4j AiServices 接口方法异常：底层异常包装后经方法抛出，业务按异常类型分派（JA-104 矩阵）|声明式风格的异常处理面（接口 throws/运行时异常），与代理机制（JA-134）联动，统一异常映射层建议|接口方法不会抛异常|所有异常一个类型|异常映射没必要|声明式异常设计|LangChain4j 1.0
+JA-333|Java AI|LangChain4j|重试|内置|LC4j OpenAI 实现内置默认重试（maxRetries 默认值非 0）+ builder 可调，与 Spring AI 重试配置对等|框架层重试是双刃（JA-056 幂等前提），两框架行为对齐确认后再定业务策略|LC4j 不内置重试|默认重试与 Spring AI 不同语义（需各自确认文档）|重试参数与 SDK 无关|重试对齐确认|LangChain4j 1.0
+JA-334|Java AI|工程|线程|隔离池|LLM 调用线程池独立隔离（不与业务 RPC 共享池）：LLM 慢响应占满共享池拖垮全服务|舱壁隔离（DF-027/SP-103）在 AI 依赖上的落地，WebFlux 则用事件循环（不阻塞），与超时分级（JA-166）配套|LLM 调用用公共线程池即可|隔离池降低吞吐|WebFlux 也需要独立池|线程池架构|实战共识
+JA-335|Java AI|工程|灰度|prompt 联动|prompt 版本与灰度联动：灰度桶绑定 prompt 版本（桶内稳定），版本切换按桶推进|prompt 灰度不是简单百分比（同桶内版本漂移会污染实验数据），与实验单元隔离（JA-271）联动|prompt 版本全量同步切换|桶与版本无关|漂移不影响数据|灰度-版本矩阵|实战共识
+JA-336|Java AI|工程|评测|影子评测|新模型影子评测：批量跑评估集对比主模型（质量/延迟/成本三维度），数据支撑切换决策（JA-035 模型评测落地）|换模型不是"试几条"，评估集全量+维度对比出报告（AI-035），决策有据|换模型试几条就行|只看质量不看成本|评测与切换无关|模型切换决策|实战共识
+JA-337|Java AI|工程|谈判|数据支撑|供应商谈判的数据点：用量趋势/增长预测/可替代性（备供应商占比）来自网关数据（JA-336 之外的商务面）|用量数据是议价筹码（AI-057 归集的商务价值），可替代性降低锁定风险，与 DF 平台化思想联动|谈判不需要数据|用量数据只有财务价值|单一供应商无风险|商务工程|实战共识
+JA-338|Java AI|工程|优化|三支柱复盘|成本优化三支柱按数据复盘：缓存命中率（JA-200）、路由节省（JA-232）、压缩收益（JA-269），各自有度量再决策投入|优化不拍脑袋（JA-163 度量闭环的推广），三支柱各配指标，收益递减时停止投入|优化凭经验决策|三支柱互相替代|复盘不重要|优化决策框架|实战共识
+JA-339|Java AI|工程|限流|会话级|对话型应用按会话限流（单会话轮次/频率限制），与用户级/全局级互补|对话是长交互（单用户多轮），会话级防单对话刷爆，与 JA-206 三级限流的第四维|限流三级已足够|会话级限流多余|轮次不需要限制|对话型限流|实战共识
+JA-340|Java AI|工程|归档|长会话|超长会话治理：会话超阈值把早期历史摘要归档（压缩窗口），活跃窗口保持轻|长对话 token 膨胀（JA-223 预算），摘要归档比硬截断保留语义（AI-045），与会话产品逻辑联动|超长会话直接截断|摘要归档会丢上下文|无上限保留最好|长会话策略|实战共识
+JA-341|Java AI|工程|反馈|SLA|用户反馈闭环 SLA：点踩/纠错 24 小时内分派处理，处理结果回流评估集（JA-179 飞轮）|反馈不闭环等于没有反馈（AI-233 采集后的处理面），SLA 化让飞轮转起来，与运维工单思想联动|反馈收集后无需处理|SLA 是过度设计|处理结果不入库|反馈运营|实战共识
+JA-342|Java AI|工程|能力|技能矩阵|团队 AI 工程技能矩阵：prompt 工程/评估体系/成本治理/安全合规/Agent 架构五域，按角色定掌握度|AI 工程不是一个人的活（AI-060 Java 定位），矩阵指导招聘与培养，与团队建设思想联动|一个人全能搞定|技能矩阵是形式主义|只有算法岗需要 AI 技能|团队建设|实战共识
+JA-343|Java AI|工程|文档|组件标准|AI 组件文档标准：用途/输入输出/依赖模型/成本量级/评估入口/降级路径六段（JA-300 五件套的组件级）|组件可复用性靠文档（新业务接入三小时上手），与组件化治理联动|代码即文档|六段文档负担重|文档与演进脱节（纳入变更纪律解决）|组件文档化|实战共识
+JA-344|Java AI|Spring AI|流式|错误传播|流式错误传播：Flux onError 信号把中途异常推给订阅方（连接断开后的生成失败），错误恢复策略在订阅侧|流式的错误比同步隐蔽（前端已收到部分内容），部分内容+错误的 UI 处理，与 JA-073 流式工具联动|流式没有错误|错误发生在开头|前端不需要处理中途错误|流式异常设计|实战共识
+JA-345|Java AI|LangChain4j|流式|桥接|TokenStream 桥接 SSE：onPartialResponse 回调写 SseEmitter，onError/onComplete 清理资源|LC4j 在 MVC 栈的流式方案（JA-169 对等），资源清理（emitter.complete）防泄漏，与 SP-069 生命周期联动|TokenStream 自带 SSE|桥接无需资源清理|回调线程是主线程|LC4j 流式实现|LangChain4j 1.0
+JA-346|Java AI|工程|配置|校验|AI 配置启动校验：密钥非空/模型名合法/超时关系合理（读超时>连接超时），fail-fast 在启动期|配置错误运行期才暴露是事故（AI-046），启动期校验（ConfigurationProperties 校验）把问题前移，与 MY 参数审查联动|配置错误运行时自然暴露|校验是可选装饰|启动失败比运行失败更糟|配置质量门|实战共识
+JA-347|Java AI|工程|数据|评估漂移|评估集漂移监控：评估分数随时间缓慢变化（模型更新/数据漂移），基线定期重校|评估基线不是永久（AI-058），供应商更新模型（JA-229）导致分数漂移，重校准防误判回归|评估分数稳定不变|漂移是评估错误|重校准没有必要|评估运维|实战共识
+JA-348|Java AI|工程|结构化|成本|结构化输出的 token 成本：schema 注入增加输入 token（大 schema 显著），schema 精简也是成本优化|JA-062 瘦身的 schema 版：嵌套描述/示例可精简，与输出稳定性权衡（JA-298）|schema 注入免费|schema 越详细越好|成本与 schema 无关|结构化成本|实战共识
+JA-349|Java AI|工程|安全|脱敏层|脱敏在两处：入库脱敏（知识库源数据）与出站脱敏（prompt 组装时替换 PII 为占位符）|双向防线（AI-040），入站防知识库泄露、出站防用户数据出域，占位符可回填还原（业务需要时）|脱敏只在一处|占位符无法还原|脱敏影响模型质量必须放弃|脱敏架构|实战共识
+JA-350|Java AI|工程|测试|快照|模型调用快照测试：记录真实请求-响应对做回放测试（离线回归不改 prompt 验证解析/后处理逻辑）|后处理管线（JA-207）的回归手段（真实分布样本），与契约测试（JA-282）互补，快照数据脱敏（JA-349）|快照测试无法实现|回放等于真实调用|快照不需要更新|离线回归手段|实战共识
+JA-351|Java AI|Spring AI|向量|批量|VectorStore.add 批量写入的事务性考量：大批量分批写+失败批重试（幂等，upsert 语义按 id）|与 JA-100 嵌入批量配套，向量库批量写入失败恢复（部分成功场景），与 MY-081 批处理思想同构|批量写入全成功或全失败|失败重试会重复|写入不需要幂等|入库可靠性|实战共识
+JA-352|Java AI|LangChain4j|向量|批量|LC4j embeddingStore.addAll 批量写入（配 embedAll 批量嵌入），与 Spring AI add 对等|两框架批量入库 API 对等（JA-351），生产入库管道实现任选，分批与幂等策略相同|LC4j 无批量接口|批量必须逐条|对等实现有差异|批量入库对等|LangChain4j 1.0
+JA-353|Java AI|工程|选型|向量库|Java 生态向量库选型维度：数据规模/过滤需求/运维能力/云自管偏好，pgvector（复用 PG）是中小规模默认答案|与 AI-010/ES 对比，Java 团队偏好 pgvector（运维复用），亿级换 Milvus，与 JA-013 升级路径联动|选型只看性能榜单|必须上专用向量库|pgvector 不能生产|向量库选型框架|实战共识
+JA-354|Java AI|工程|验收|SLO|AI 功能 SLO 定义：回答准确率（评估集代理）、P99 延迟、可用性、成本上限四维 SLO|把 AI 功能当服务治理（DF-056），四维分别有数据源（评估/监控/账单），缺维则治理盲区|AI 功能不需要 SLO|准确率无法定义 SLO|只有延迟重要|SLO 设计|实战共识
+JA-355|Java AI|工程|复盘|模板|AI 故障复盘模板：现象→影响面（用户/成本）→根因（模型/配置/依赖/数据）→防线（哪层失效）→行动项|与 MY-103/DF 复盘模板同构，AI 特有维度（模型行为/成本/数据质量），复盘产出进评估集（JA-179）|AI 故障无法复盘|根因总是模型问题|复盘与防线无关|复盘框架|实战方法论
+JA-356|Java AI|工程|排障|分流|AI 故障分流树：无响应（网络/供应商）→慢（模型/工具/池）→错误内容（prompt/数据/模型）→成本异常（循环/滥用），四象限先分流|排障先分类（DF-098 框架的 AI 版），每象限有专属工具链（拨测/trace/评估/账单），与 RD-098 模板思想同构|排障直接看代码|分流是浪费时间|四象限互斥|排障分流框架|实战方法论
+JA-357|Java AI|Spring AI|工具|循环观测|工具循环的观测埋点：每轮（第 N 轮/调用了什么/耗时）打点，循环异常（步数超阈/重复调用）告警|Agent 轨迹（JA-219）的轻量版（观测事件而非落库），与步数上限（JA-276）联动，循环分析定位 Agent 卡点|循环内部不可观测|埋点影响性能显著|重复调用是正常|循环可观测|实战共识
+JA-358|Java AI|LangChain4j|工具|循环观测|LC4j 工具循环观测：listener/回调记录每轮工具调用，与 JA-357 对等|两框架循环观测能力对齐（选型不因观测劣势放弃任一），自建埋点模式相同|LC4j 循环自观测|与 Spring AI 机制不同|观测只能落日志|循环观测对等|实战共识
+JA-359|Java AI|工程|评估|线上影子|线上影子评估：真实流量抽样（脱敏）跑新旧双管线对比（JA-234 的持续化），输出每日对比报告|影子评测（JA-336）的持续运营版，变更前后的质量曲线可视化，与 A/B（JA-271）互补（无用户感知）|影子评估是一次性的|持续对比无价值|影子成本不可控（按抽样率控制）|持续评估机制|实战共识
+JA-360|Java AI|工程|收束|知识地图|Java AI 工程知识地图收束：框架双栈（Spring AI/LC4j）→MCP 协议→RAG 管道→Agent 骨架→中间件（网关/缓存/配额）→治理（评估/成本/安全/观测）|300 条事实的组织框架，复习按地图走而非线性（JA-180 答题主线的展开），与 MY-109 复习主线同构|知识是碎片无需地图|地图只适合入门|治理与框架无关|本域知识地图|实战方法论
+JA-361|Java AI|RAG 评测|Recall|统计实现|Recall@K 统计实现：对 golden set 批量跑检索，断言期望片段是否出现在 topK（命中率聚合）|把 AI-082 指标落到代码：批量跑+逐条判定+分域聚合，是检索回归的执行件|Recall 由模型自评|K 固定为 1|实现不需要 golden set|检索评测落地|实战共识
+JA-362|Java AI|RAG 评测|MRR|MRR 计算|MRR（平均倒数排名）：期望片段首次命中排名的倒数的均值，衡量"排得靠不靠前"|与 Recall@K 互补（JA-361），重排优化（JA-102）的验证指标，实现为命中位置的倒数累加|MRR 等于准确率|MRR 只看是否命中|MRR 与排序无关|检索评测指标族|实战共识
+JA-363|Java AI|RAG 评测|忠实度|判分|忠实度自动判分：LLM judge 比对答案与检索片段（答案的断言是否被片段支持），输出支持/不支持/部分|JA-272 判分机制在 RAG 的特化，幻觉的自动化度量（人工全评不可行），judge 提示词定义"支持"标准|忠实度无法自动评|judge 与答案模型必须相同|判分结果无需校准|RAG 生成评测|实战共识
+JA-364|Java AI|RAG 评测|噪声|标注一致性|golden set 标注一致性问题：多人标注同一查询期望片段不一致（Kappa 系数度量），需仲裁机制|评估标尺本身有噪声（JA-245 的质量面），一致性差的条目仲裁或剔除，标尺可信度先于指标|标注天然完全一致|不一致的条目保留无影响|单人标注没有噪声|评估数据质量|实战共识
+JA-365|Java AI|RAG 评测|badcase|归类|检索 bad case 四类归类：漏召回（该有没有）/排序差（有但靠后）/切分碎（片段不完整）/过时（旧版本命中）|JA-355 复盘在检索的细化，四类对应四种修法（补文档/调重排/调切分/清旧数据），混修会错配|bad case 都是模型问题|四类无法区分|归类后无需分别修|检索优化分流|实战共识
+JA-366|Java AI|RAG 评测|分层|题型|评估集按题型分层：简单事实/多跳推理/时效性/拒答类（知识库没有应说不知道）|分层让指标有语义（JA-293 分层归因），拒答类是幻觉防线专项（AI-044），分层统计定位弱项|评估集只有一种题型|拒答类无价值|分层让样本稀释|评估集设计|实战共识
+JA-367|Java AI|RAG 评测|拒答|能力|拒答能力评估与调优：检索不到时应答"知识库未覆盖"，调优手段（相似度阈值/拒答提示/兜底话术）|宁可不答不能编造（AI-044 幻觉防线），阈值过高漏答过低幻觉，拒答率是独立监控指标|RAG 必须有问必答|拒答率越低越好|拒答不需要评估|拒答调优|实战共识
+JA-368|Java AI|Agent|编排|模式选型|Agent 编排模式选型：固定工作流（确定性高）vs 单 Agent+工具（灵活）vs 多 Agent（复杂任务），按任务确定性需求排序|AI-049 的决策细化：能工作流不 Agent（可控可测），Agent 是灵活性代价换来的，与 MY-105 变更纪律呼应|多 Agent 一定优于工作流|工作流过时了|三者随意选|编排选型框架|实战共识
+JA-369|Java AI|Agent|编排|LangGraph4j|Java 生态有 LangGraph4j（LangGraph 的社区移植）：图状态机编排 Agent（节点/边/条件路由）|JA-049 框架清单的补充：复杂 Agent 编排有 Java 图编排可用（社区项目，成熟度自评估），与自研状态机（JA-255）权衡|Java 没有 Agent 编排库|LangGraph4j 是官方库|图编排不需要状态机|编排工具选型|2025
+JA-370|Java AI|Agent|编排|状态持久化|编排状态持久化选型：自研落库（JA-255）vs 工作流引擎（Temporal/Camunda），长任务高可靠用引擎|工作流引擎送重试/超时/补偿/可视化，代价是引入重件，任务时长与可靠性需求决定（AI-021 权衡）|引擎一定优于自研|自研足够所有场景|两者互斥（组合使用也常见）|编排基建选型|实战共识
+JA-371|Java AI|Agent|记忆|分层落地|Agent 记忆三分层落地：短期=消息窗口（JA-008）、任务=状态机字段（JA-255）、长期=向量库检索（用户偏好/历史结论）|AI-020 的 Java 组件映射，三层的读写时机与清理策略（JA-261）不同，设计期明确归属|三层记忆混在一个窗口|长期记忆是聊天记录|分层无必要|记忆架构|实战共识
+JA-372|Java AI|Agent|工具|动态发现|动态工具发现：Agent 启动/任务开始时经 MCP listTools 发现可用工具集（工具清单随生态变化）|JA-094 通知与 Agent 的结合：工具集不是编译期固定，运行期注入扩展能力，安全边界靠白名单（JA-152）|Agent 工具编译期固定|动态发现天然安全|发现不需要校验|动态 Agent 能力|实战共识
+JA-373|Java AI|Agent|多 Agent|子 Agent 隔离|子 Agent 隔离三件：独立上下文（不继承父历史）、独立预算（token 上限）、独立工具白名单|子 Agent 失控不传染父任务（舱壁思想 DF-027），结果以结构化摘要回传父级（JA-256 裁剪）|子 Agent 继承全部上下文|隔离只靠提示词|预算共享无限制|多 Agent 安全边界|实战共识
+JA-374|Java AI|Agent|输出|结构化报告|Agent 任务输出结构化：最终产出按 schema（结论/依据/步骤/成本）交付，供程序消费|Agent 输出不是聊天文本而是工作产物（结构化 JA-003 思想），schema 化后可测可审可归档|Agent 输出纯文本即可|结构化限制发挥|输出无需 schema|Agent 交付设计|实战共识
+JA-375|Java AI|Agent|评测|轨迹指标|Agent 轨迹评测指标：任务成功率、步数效率（最少步完成）、工具选择正确率、预算内完成率|AI-059 的指标清单化，轨迹可回放（JA-219）所以可自动评，与单元测试断言思想同构|Agent 只看最终对错|轨迹指标无意义|评测必须人工|Agent 评测体系|实战共识
+JA-376|Java AI|中台|定位|平台能力|AI 中台四大平台能力：统一模型接入（网关）、评估服务（评测集+判分）、成本治理（配额/归集/告警）、安全合规（护栏/审计/脱敏）|把 JA-317 网关扩展为中台全景，多业务复用一套治理（DF-088 平台化），P10 视角的组织级架构|中台就是网关|四能力各自建没协同|中台是伪需求|中台架构定义|实战方法论
+JA-377|Java AI|中台|演进|三阶段|AI 平台化三阶段：直连供应商（业务各自为战）→统一网关（流量收敛）→AI 中台（治理闭环）|演进驱动：业务数增多倒逼收敛（SP-100 演进思想），跳级直上中台是常见失败（无流量数据支撑设计）|可以直接上中台|三阶段无先后逻辑|收敛是成本浪费|平台演进路线|实战方法论
+JA-378|Java AI|中台|配额|治理流程|配额分配治理流程：业务申请（用途/预估用量）→评审（优先级）→分配→季度复盘调整|配额是稀缺资源（供应商上限 JA-065），治理流程防"先到先得"，与容量治理（MY-092）同构|配额先到先得|治理流程拖慢业务|分配后不调整|配额运营|实战共识
+JA-379|Java AI|中台|治理|模型白名单|模型白名单治理：业务可用模型清单（按数据密级/场景审批），新模型接入走评审|防"随便换模型"（数据流向失控 AI-040），白名单与数据分级（JA-267 驻留）联动，平台侧执行|业务可随意选模型|白名单阻碍创新（评审制平衡）|清单静态不变|模型准入治理|实战共识
+JA-380|Java AI|中台|治理|数据分级|数据分级接入矩阵：不同密级数据（公开/内部/敏感）可用的模型与部署形态（云端/私有化）不同|密级×部署形态矩阵是合规落地（AI-040/270），敏感数据强制私有化模型（Ollama/transformers JA-017/183）|数据分级与模型选择无关|敏感数据可上云|矩阵是合规部门的事|分级接入矩阵|实战共识
+JA-381|Java AI|中台|运维|供应商健康|供应商健康看板：拨测（JA-273）聚合的多供应商可用性/延迟/限流状态，路由决策数据源|JA-321 自动降级的决策看板，健康度变化触发路由权重调整，与多活路由（DF-058）思想同构|供应商状态无需监控|看板只有内部数据|健康度不影响路由|供应商运维|实战共识
+JA-382|Java AI|中台|事故|分级|AI 故障分级定义：P0 全不可用（网关挂）、P1 主模型不可用（降级生效）、P2 质量降级（评估分下滑）、P3 成本异常|分级决定响应节奏（与 MY-082 告警分级同构），P2/P3 是 AI 特有级别（传统故障学没有），定义后演练（JA-286）|AI 故障只有一种|分级与响应无关|P2 不算故障|事故分级体系|实战共识
+JA-383|Java AI|中台|合规|留痕|合规留痕年限：prompt/输出/工具调用记录按合规要求保留 N 年（审计可回放），到期清理|JA-198 保留策略的年限面，存储成本与合规要求平衡（冷存储归档），与备份保留（RD-094 RPO）思想同构|日志保留越久越好|保留年限随意定|到期数据不清理|合规存储治理|实战共识
+JA-384|Java AI|中台|ROI|论证|AI 中台 ROI 论证：接入业务数×节省的重复建设（每业务自建网关/评估的成本）vs 平台研发运维成本|中台立项与存续的账（JA-082 组织协同），接入不足是中台死亡主因，与中台争议（SP-082 康威）联动|中台必然划算|ROI 不需要论证|平台成本可以忽略|组织级决策|实战方法论
+JA-385|Java AI|Spring AI|场景|批处理|Spring AI 在非 Web 场景同样可用：CLI 批处理/定时任务直接用 ChatClient（无 Web 依赖）|框架不绑定 Web（核心是模型调用库），批量知识入库/离线评估（JA-058）都是非 Web 用例|Spring AI 必须在 Web 项目|批处理要走 HTTP 自建|非 Web 场景需特殊配置|非 Web 用例|Spring AI 1.0 GA
+JA-386|Java AI|Spring AI|图像|生成|Spring AI 支持 ImageModel 接口（OpenAiImageModel 文生图），与 ChatModel 同级抽象|文本生成图像的框架级支持（AI-087 对应 LC4j），营销素材/配图场景，与多模态输入（JA-109）互补|Spring AI 只能文本对话|ImageModel 不存在|文生图必须外接|图像生成接入|Spring AI 1.0 GA
+JA-387|Java AI|Spring AI|多模态|output|多模态输出与输入对称：chat 模型的多模态输出能力（图像理解返回结构化描述）经同框架消费|输入输出能力对齐认知（JA-109 输入），输出结构化（JA-003 entity）组合出"看图填表"类应用|多模态只有输入|输出无法结构化|看图填表是伪场景|多模态组合应用|实战共识
+JA-388|Java AI|Spring AI|Ollama|流式|Ollama provider 支持流式与工具调用（本地模型同样走 ChatClient 全能力）|本地模型不降级（JA-017 修正面），开发环境全功能调试（JA-203 本地测试），与云端能力对齐|Ollama 不支持流式|本地模型不能调用工具|本地只适合玩具|本地能力对齐|Spring AI 1.0 GA
+JA-389|Java AI|LangChain4j|流式|usage|流式调用的 token 用量聚合：分片各自带 usage 或完成回调聚合（LC4j onCompleteResponse 元数据）|流式的成本归集（JA-065 同步版的流式版），聚合点在完成回调，与 JA-222 聚合知识联动|流式无法统计 token|usage 只有同步有|聚合在客户端拼|流式成本归集|LangChain4j 1.0
+JA-390|Java AI|工程|降级|竞速|多模型并发竞速：同一请求并发发多供应商，取最快成功响应（anyOf），延迟敏感场景用（成本×2-3 代价）|竞速是延迟优化的极端手段（DF 副本读思想），成本翻倍所以只用于高价值低频请求，与 anyOf 语义（AI-075）联动|竞速是默认策略|竞速无成本代价|所有请求都竞速|延迟优化手段|实战共识
+JA-391|Java AI|工程|下线|模型迁移|供应商模型下线预案：供应商 deprecated 公告→迁移窗口→评估集回归→切流，纳入版本治理日历|模型下线是必然事件（JA-229 供应商演进），无预案则被迫紧急迁移（质量风险），与 RD-078 升级演练联动|模型永不下线|下线公告=立即迁移|迁移无需评估|下线应急|实战共识
+JA-392|Java AI|工程|回归|静默更新|供应商静默更新检测：同一评估集每日跑，分数漂移超阈告警（供应商换了底层模型）|JA-347 漂移监控的主动面：供应商更新不一定公告，评估集是"行为回归测试"，与混沌/拨测互补|供应商更新都公告|静默更新无影响|每日评估成本太高（抽样可平）|行为回归监控|实战共识
+JA-393|Java AI|工程|安全|蜜罐|提示注入蜜罐：评估集内嵌注入样本，线上命中（模型被诱导执行了蜜罐指令）即告警|注入防御的线上验证（JA-225 防线的运行时检测），蜜罐是主动式安全（与红队 JA-299 互补）|注入防御离线测就够|蜜罐是攻击行为（防御性蜜罐是标准安全实践）|命中无法检测|注入运行时检测|实战共识
+JA-394|Java AI|工程|网络|出口|LLM 出口流量隔离：独立出口 IP/网段（代理层），审计与防火墙策略针对 AI 出口单独设|AI-268 出网适配的安全面：出口隔离让审计（JA-312）与封禁策略独立，与网络分区思想联动|LLM 流量无需隔离|隔离增加延迟不可接受|审计在应用层足够|网络层安全|实战共识
+JA-395|Java AI|工程|灰度|分群|灰度分群策略：按用户属性分群（新用户先灰/付费用户后灰），风险与价值反向排序|灰度不只按比例（JA-205），分群让高风险变更先打低价值流量，与发布策略细化联动|灰度只按随机比例|分群是歧视|分群无数据支撑|灰度精细化|实战共识
+JA-396|Java AI|工程|认知|知识截止|模型知识截止日期标注：产品层标注"模型知识截止 X 日期"，管理用户预期（时效问题走检索）|知识截止是模型固有属性（JA-248 时效检索互补），透明标注降低投诉（预期管理），与 AI 伦理实践联动|模型知识实时更新|标注截止日期是技术细节|预期管理不需要|预期管理|实战共识
+JA-397|Java AI|工程|接口|输入限制|输入长度限制在接口层前置：超长输入直接 4xx（附长度上限说明），不进模型（省 token 防异常）|防线前移（MY-108 保护思想），模型侧超限报错晚且贵，前端+接口双重校验，与输入校验（SP-068）联动|超长输入交给模型处理|接口层限制多余|前置校验与模型上限重复|输入防线|实战共识
+JA-398|Java AI|工程|会话|超时|会话超时设计：无活动会话过期（记忆窗口清空/资源回收），会话 id 失效后重新初始化|长会话占用记忆资源（JA-160/260 清理族），过期策略与会话产品定义联动，与租约（DF-013）思想同构|会话永不过期|过期只清显存|超时设计无关紧要|会话生命周期|实战共识
+JA-399|Java AI|工程|降级|文案|降级文案设计：AI 功能降级时的用户文案（"智能助手暂时不可用，已转人工/稍后重试"），降级体验也是体验|JA-053 降级链的用户面，文案分场景（暂时/永久/转人工），与降级预案（DF-026）联动|降级就是报错页|文案不重要|降级体验与主功能无关|降级体验设计|实战共识
+JA-400|Java AI|工程|压测|方法|AI 链路压测方法：mock 模型压测应用层（连接池/线程池/流式并发），真实模型小流量压测（成本控制），两层压测|供应商不能承受全量压测（JA-059 配额），mock 压应用、真实压小流量，与 MY-092 压测基线联动|压测直接打真实模型|mock 压测无价值|两层压测是过度设计|压测方法论|实战共识
+JA-401|Java AI|工程|成本|模拟器|成本模拟器：上线前按预估流量×prompt 模板×价格表（JA-264）估算月成本，超预算先优化再上线|成本前置（AI-027 ROI 的执行件），模拟器与压测/评估并列为上线三件套（JA-294 五步补充）|成本上线后才知道|模拟器是过度设计|估算与实际无关（校准后误差可控）|成本前置|实战共识
+JA-402|Java AI|工程|版本|语义化|AI 功能发布语义化版本：prompt+配置+模型绑定打版本号（vX.Y.Z），回滚=切回版本号|AI 变更的版本化管理（AI-064 的工程化），版本包含"prompt+模型+检索配置"三位一体，与语义化版本规范联动|只有代码有版本|prompt 不需要版本号|三位一体版本是过度设计|版本体系|实战共识
+JA-403|Java AI|工程|权衡|帕累托|质量-成本帕累托曲线：按配置组合（模型×温度×topK）绘制质量-成本散点，选帕累托最优点上线|调参不是单变量优化（JA-052/161），组合空间可视化后选平衡点，与容量权衡思想联动|质量与成本无关|最贵配置必然最优|曲线无法绘制（评估集可测）|调参决策工具|实战共识
+JA-404|Java AI|工程|反馈|标签|反馈标签体系：点踩原因枚举（事实错误/答非所问/格式差/太慢/其他），结构化回流定位|无标签的点踩无法归因（JA-341 闭环的输入质量），标签驱动分类统计（JA-289 看板），与工单分类联动|点踩只有一个按钮|标签体系是过度设计|标签用户不会选|反馈结构化|实战共识
+JA-405|Java AI|工程|治理|模型卡|内部模型卡：每个接入模型的档案（能力边界/已评测场景/合规状态/负责人/下线计划）|模型卡是治理资产（JA-379 白名单的条目详情），接入评审的产物，与架构决策记录思想联动|模型卡是外部概念|内部不需要档案|卡片与白名单重复|模型治理资产|实战共识
+JA-406|Java AI|工程|压测|链路|AI 链路全链压测注意：mock 模型下压测验证的是应用架构（JA-400），真实瓶颈可能在供应商配额（mock 测不出）|压测结论的适用边界声明（JA-354 容量修正），两层压测各回答一个问题，与压测方法论联动|压测结果直接外推生产|mock 与真实结果一致|供应商瓶颈不用考虑|压测结论边界|实战共识
+JA-407|Java AI|工程|发布|回归包|发布回归包：评估集+契约测试+快照回放三件打包随版本跑（JA-211 checklist 的执行件）|回归自动化让 checklist 可执行（AI-077 门禁），回归包与代码版本同 tag，与 CI 纪律联动|回归靠手工跑|回归包是可选装饰|三件套互相替代|发布自动化|实战共识
+JA-408|Java AI|工程|组织|协作|AI 工程协作面：业务（需求/反馈）×工程（实现/可靠性）×算法（模型/评估）×安全（合规/红队）四方协作界面|JA-342 技能矩阵的组织面，界面清晰防"都管都不管"，与康威定律（DF-084）联动|AI 工程一个人搞定|协作界面无需定义|四方只有工程算法|组织协作设计|实战共识
+JA-409|Java AI|工程|数据|标签|训练边界的数据面：明确哪些数据可进供应商（分级矩阵 JA-380），哪些必须私有化模型处理，数据流向图定期审计|数据流向可视化（AI-040 的工程化），流向图是安全审计的底图（JA-394 出口隔离配套），与数据治理联动|数据流向不需要图|分级矩阵覆盖全部场景|审计是年度形式|数据流向治理|实战共识
+JA-410|Java AI|工程|选型|嵌入|嵌入模型选型维度：多语言能力/维度（存储成本）/MTEB 榜单参考/私有化支持/价格，与 chat 模型独立选|嵌入模型与 chat 模型选型解耦（JA-075 分离配置），维度决定存储成本（JA-101），榜单参考不信榜单（AI-035）|嵌入与 chat 绑定选择|维度越高越好|嵌入选型不重要|嵌入选型框架|实战共识
+JA-411|Java AI|工程|演进|能力沉淀|AI 组件能力沉淀路径：单点功能→组件化（JA-343 文档）→平台能力（JA-376）→产品化（自助接入）|JA-377 三阶段在组件维度的细化，沉淀有文档与评估兜底（JA-343/058），与平台化思想联动|能力沉淀靠自觉|组件化是过度设计|路径与组织无关|能力演进|实战方法论
+JA-412|Java AI|工程|面试|答题|Java AI 面试答题的三层结构：业务场景（ROI/为什么做）→架构与管道（选型/组件）→工程治理（可靠性/成本/安全）|JA-060/298 答题主线在面试场景的组装，三层递进覆盖 P7 到 P10 提问面，与分层答题方法论联动|答题只讲技术|场景与治理是废话|三层结构固定顺序（按追问动态展开）|本域面试框架|实战方法论
+JA-413|Java AI|工程|风险|清单|Java AI 项目风险清单：供应商锁定、成本失控、质量回归、数据合规、团队能力断层、框架 immature——每项有缓解手段|JA-239 失败模式的立项面（立项评审用），风险与缓解成对出现，与架构评审（DF-099）联动|AI 项目无特殊风险|风险清单是形式|缓解手段不存在|立项评审框架|实战方法论
+JA-414|Java AI|工程|指标|北极星|AI 功能北极星指标选择：按功能类型定（客服=自助解决率、Copilot=采纳率、检索=命中率），单一北极星防指标打架|JA-289 三件套的收敛版，北极星统一团队方向，与 SLO 少而关键（DF-056）原则同构|指标越多越好|北极星可以多个|按团队偏好定|指标治理|实战共识
+JA-415|Java AI|工程|测试|回归边界|回归测试边界：prompt/模型/检索配置/框架版本任一变更都触发回归（四位一体版本 JA-402），变更矩阵定义触发规则|回归触发的完整性（漏一项就有隐性回归），变更矩阵防"以为没影响"，与变更管理联动|只有代码变更触发回归|prompt 变更不用回归|矩阵是形式主义|回归触发设计|实战共识
+JA-416|Java AI|工程|运维|值班|AI 值班 runbook：常见故障（供应商限流/质量下滑/成本激增）的处置步骤+升级路径+决策数据源链接|runbook 让值班可执行（MY-103 预案的运行态），AI 故障的处置与传统不同（降级/切流/关功能），与故障管理联动|值班凭经验处理|runbook 写完就过时（纳入复盘更新）|AI 故障不需要值班|运维手册|实战共识
+JA-417|Java AI|工程|成本|单位经济|单位经济模型：单次交互成本（token）×转化价值（自助解决省人工/采纳节省时间），单位经济>1 才可持续|AI-027 ROI 的微观版，功能级成本分摊（JA-290）+价值估算（JA-037），持续监控单位经济趋势|单位经济无法计算|成本比价值重要|可持续性不重要|经济可持续性|实战共识
+JA-418|Java AI|工程|安全|数据最小化|数据最小化原则在 AI 的落地：prompt 只带完成任务必需的数据（不塞全量上下文），检索按需注入|最小化是隐私保护第一原则（AI-049/061 的 prompt 面），塞全量数据是"方便"驱动的反模式，与最小权限（DF）联动|prompt 数据越多越好|最小化影响质量（按需检索平衡）|原则只适用数据库|数据最小化|实战共识
+JA-419|Java AI|工程|架构|演进|AI 应用架构演进：MVP（直连+硬编码 prompt）→组件化（框架+RAG）→平台化（网关+中台）→智能化（Agent+自动化评估）|JA-377 演进在应用层的版本，每阶段有触发信号（业务量/质量要求），与演进式架构（DF-084）联动|架构一步到位|演进无触发信号|智能化是终点|架构演进路线|实战方法论
+JA-420|Java AI|工程|收束|域地图|Java AI 域知识地图收束：框架双栈→协议（MCP）→管道（RAG/ETL）→Agent→中间件（网关/缓存/配额）→治理（评估/成本/安全/组织），420 条事实的组织骨架|与 JA-360 知识地图呼应（半程收束），后续批次填充剩余分支，复习按地图检索矩阵行|知识地图是入门工具|地图覆盖不了全部|治理不是知识的一部分|本域半程收束|实战方法论
+JA-421|Java AI|流式|渲染|增量渲染|流式 UI 的 Markdown 增量渲染：半截 Markdown（未闭合代码块/表格）的渲染策略（缓冲到块边界再渲染）|逐 token 直染会出现闪烁与格式错乱，按块边界渲染是体验工程，与前端协作的接口约定|流式渲染逐字直出最优|渲染是前端的事与后端无关|缓冲会增加首字延迟（权衡可配）|流式体验工程|实战共识
+JA-422|Java AI|流式|续传|断点|流式中断恢复：SSE Last-Event-ID 语义在 AI 流的应用（重连后从断点续传或整段重生成）|长文本流断网率高，续传省重生成成本（JA-098 取消的对称面），幂等生成（低温+种子）是续传前提|断流只能整段重来|续传是前端职责|幂等生成不必要|流式可靠性|实战共识
+JA-423|Java AI|流式|延迟|首字|首字延迟（TTFT）优化组合：流式+精简 system（缓存前缀稳定）+供应商 prompt cache 命中+就近区域|TTFT 是流式体验核心指标（AI-052），四招叠加把秒级压到数百毫秒，与 JA-297 并发模型联动|TTFT 无法优化|首字延迟与 prompt 无关|优化只靠换模型|流式延迟工程|实战共识
+JA-424|Java AI|流式|监控|速率|生成速率监控（tok/s）：供应商限速与用户体感双重指标，速率骤降=供应商容量异常|生成速率是"流式健康度"（JA-273 拨测的细粒度面），与延迟分位互补，速率抖动告警|速率不需要监控|速率与供应商无关|监控只有延迟|流式可观测|实战共识
+JA-425|Java AI|流式|合并|多路|多路流合并场景：主回答流+工具执行进度流并行推给前端（分通道渲染）|Agent 流式（JA-073 工具循环）的前端呈现：回答与"正在做什么"并行，通道化协议（事件类型字段）|流只能单路|工具进度不可见|合并增加协议复杂度无收益|Agent 流式体验|实战共识
+JA-426|Java AI|流式|选型|SSE vs WS|SSE 与 WebSocket 选型：单向流式 SSE 足够（简单/自动重连/HTTP 生态），双向交互（打断/追问）才需 WS|多数 AI 流式是单向（模型→用户），WS 的双向能力常被高估，SSE 运维简单（JA-087 断线处理），按交互方向选|必须用 WebSocket|两者无差别|SSE 不能双向交互（追问走新请求即可）|传输协议选型|实战共识
+JA-427|Java AI|多模态|分层|任务|图像理解任务分层：OCR（文字提取）/VQA（视觉问答）/图表理解（数据还原）三类难度与模型能力不同|分层选模型与方案（JA-109/387），OCR 用专用模型更稳、图表理解需强视觉模型，混用导致质量错配|图像理解是一种能力|OCR 用大模型最优|分层是过度设计|多模态任务分析|实战共识
+JA-428|Java AI|多模态|图表|还原|图表理解（chart-to-table）：视觉模型读图表还原数据表，数字精度是主要风险（视觉幻觉）|AI-044 幻觉在视觉域的表现，关键数字要二次校验（OCR 交叉/业务规则），产出标注置信度|视觉模型读图数字准确|无需交叉校验|图表理解不可用于生产|视觉幻觉防线|实战共识
+JA-429|Java AI|多模态|RAG|图文|多模态 RAG：图文混合知识库（图片用视觉嵌入模型如 CLIP 类向量化），检索跨模态|纯文本 RAG 之外的扩展（AI-041 生态），图片描述+视觉向量双路，Java 侧嵌入模型需支持图像|多模态 RAG 就是 OCR 全文|图片无法向量化|跨模态检索不存在|多模态知识库|实战共识
+JA-430|Java AI|多模态|预处理|降本|图像预处理降本：分辨率压缩到模型有效分辨率、裁剪无关区域，token 成本线性下降|AI-080 计费按分辨率的工程对策，预处理管线（压缩/裁剪/格式转换）在发送前执行|原图直接发最优|预处理影响理解质量（适度压缩无碍）|成本无法下降|多模态成本工程|实战共识
+JA-431|Java AI|多模态|PDF|解析|扫描件 PDF 解析两路线：传统 OCR 管线（识别+版面）vs 视觉模型直读（端到端），精度与成本权衡|企业文档大量扫描件（JA-190 解析器局限），视觉直读简单但贵、OCR 便宜但管线复杂，按量选|扫描件无法数字化|OCR 已被视觉模型淘汰|两路线不能混用|文档数字化选型|实战共识
+JA-432|Java AI|多模态|语音|管线|语音管线：ASR 转写→LLM 处理→TTS 合成，三段各自选型（转写准/处理强/合成自然）|JA-182 音频能力的工程化组装，分段管线比端到端语音模型可控，转写标点与分段影响下游|端到端语音模型最优|三段管线已过时|转写质量不影响下游|语音 Agent 组装|实战共识
+JA-433|Java AI|多模态|桌面|GUI Agent|GUI Agent（桌面/浏览器操作型 Agent）：视觉模型看屏+操作指令循环，2025 兴起方向（AI-071 趋势）|Agent 从 API 工具扩展到 GUI 操作（无 API 的老系统自动化），Java 侧经 MCP/Playwright 类桥接，安全边界（操作审计）极重要|GUI Agent 已成熟量产|老系统自动化无价值|视觉操作不需要审计|Agent 前沿方向|2025
+JA-434|Java AI|场景|客服|架构|智能客服 Java 架构深化：意图路由→RAG 答复→情绪识别升级人工→会话摘要转接，四级漏斗|AI-037 的架构细化：情绪/升级漏斗控制转人工率（北极星），会话摘要让人工接手有上下文，与 JA-289 指标联动|客服直接 LLM 回复|情绪识别可选|转接无需上下文|客服漏斗设计|实战共识
+JA-435|Java AI|场景|代码|助手|代码助手场景架构差异：补全要求毫秒级（小模型+本地缓存+前缀匹配），对话式助手秒级可接受|场景决定延迟预算（AI-030），补全与对话是两种延迟档位的产品（JA-423 TTFT），混用导致体验失败|代码补全与大模型对话同架构|补全不需要本地缓存|延迟要求相同|场景延迟档位|实战共识
+JA-436|Java AI|场景|文档|问答 vs 搜索|文档问答与搜索增强差异：问答（生成式合成答案+引用）vs 搜索（返回文档列表），两者互补而非替代|产品形态决定技术（AI-038 语义搜索 vs RAG），搜索给"找"，问答给"答"，用户意图识别分流|两者是竞争关系|问答替代搜索|形态不影响技术|产品形态选型|实战共识
+JA-437|Java AI|场景|营销|批处理|营销文案批处理管线：批量生成（batch API 降本 AI-026）→质量筛选（判分）→人工审核队列→发布，人机协作流程|批处理场景是成本敏感（AI-065 并发治理），人审是质量兜底（AI-068），全自动化营销文案不可控|营销文案全自动无需人审|批处理不影响成本|管线只能在线生成|内容生产管线|实战共识
+JA-438|Java AI|场景|数据|NL2SQL 防线|NL2SQL 安全防线：LLM 生成 SQL→静态校验器（只读白名单表/禁 DML/语法树审查）→执行限流→结果脱敏|AI-072 的风险工程化：四道防线让"自然语言查数"可上生产，校验器是核心（SQL 解析树），与 MY-096 权限联动|LLM 生成的 SQL 直接执行|只靠提示词约束|NL2SQL 无法上生产|NL2SQL 落地|实战共识
+JA-439|Java AI|场景|审核|内容审核|内容审核管线：机审（模型+规则）→置信度分级→低置信度人审→复审闭环，准确率与审核量权衡|审核场景的特征（高吞吐+误判代价不对称），分级审核优化人力（JA-437 思想），与风控知识联动|内容审核全自动|人审队列无优先级|置信度不需要分级|审核管线设计|实战共识
+JA-440|Java AI|场景|知识库|冷启动|知识库冷启动策略：从客服工单/历史邮件沉淀语料→清洗→入库，先小后大滚动扩|企业"没文档"的现实（AI-039 语料治理），冷启动从存量数据挖矿，与数据治理联动|冷启动只能人工写文档|存量数据无价值|先大后小|知识库建设路径|实战共识
+JA-441|Java AI|场景|内部|工单 Agent|内部工具 Agent 案例：工单自动分类/转派/回复草稿（工具=工单系统 API），ROI 清晰易落地|Agent 落地从"内部高 ROI 场景"起步（AI-037/027），外部用户场景风险高后上，与 AI-073 落地路径联动|Agent 先上外部场景|内部场景 ROI 低|工单场景太简单|Agent 落地路径|实战共识
+JA-442|Java AI|质量|优化|自动搜索|prompt 自动优化（DSPy 思路）：程序化搜索 prompt 变体（改写/示例增删）按评估集自动择优|Java 无成熟组件（诚实认知），自实现变体搜索+评估驱动（AI-058），人工 prompt 工程的自动化方向|prompt 优化只能人工|DSPy 有 Java 版|自动优化不靠谱|prompt 工程自动化|实战共识
+JA-443|Java AI|质量|示例|动态选择|动态 few-shot：按查询相似度从示例库检索最相关的 2-3 个示例注入（示例库向量检索）|固定示例对新任务泛化差（AI-023 few-shot 策略），动态选择提升适配，示例库质量决定上限|few-shot 固定写死|动态选择无收益|示例越多越好|上下文学习优化|实战共识
+JA-444|Java AI|质量|推理|CoT 开关|思维链（CoT）提示按任务开关：推理/数学类开（质量提升），简单分类/抽取关（省 token 防过度思考）|CoT 是质量-成本权衡项（AI-055 推理模型思想在提示层的对应），配置化开关（JA-016 options 思想）|CoT 永远开启更好|CoT 不影响成本|开关是伪命题|推理提示策略|实战共识
+JA-445|Java AI|质量|风格|一致性|输出风格一致性：few-shot 固定风格锚定+输出格式模板+后处理归一，多轮会话风格漂移防治|风格漂移是产品体验问题（用户感知不一致），与 JA-421 渲染、JA-207 后处理联动|风格由模型保证|一致性无法工程化|漂移不存在|风格工程|实战共识
+JA-446|Java AI|质量|集成|投票|自一致性投票：同一请求多次采样（高温）多数投票定答案，质量提升成本×N|推理类任务的可靠性手段（JA-444 CoT 组合），成本敏感场景按需启用，与 AI-055 推理模型替代权衡|采样一次足够|投票提升所有任务|成本无关|采样策略|实战共识
+JA-447|Java AI|质量|集成|多模型|多模型投票集成：多供应商同题生成，判分器选优或合并，供应商多样性防单点|比自一致性更贵但更多样（JA-446 扩展），关键决策类任务用（成本容忍），与降级链（JA-055）区分（主动质量 vs 被动容错）|多模型投票与降级相同|集成提升一切任务|成本可忽略|集成策略|实战共识
+JA-448|Java AI|质量|排查|ICL 失败|上下文学习失败排查：示例格式与真实输入不一致/示例自相矛盾/示例超窗被截断，三类根因|few-shot 失效不是玄学（JA-443），排查清单化，示例与真实分布对齐是核心|ICL 失败无法排查|失败都是模型问题|示例格式无关|上下文学习排障|实战共识
+JA-449|Java AI|安全|指令|层级|指令层级与注入面：system > user 的优先级是模型约定，注入攻击就是把恶意指令伪装成 system 级内容|理解优先级才能设计防线（JA-225 边界标签的原理），外部内容永远在 user/data 层|user 可以覆盖 system|层级是框架概念|注入与层级无关|指令安全模型|实战共识
+JA-450|Java AI|质量|实验|多变量|prompt 多变量实验设计：一次只动一个变量（模型/示例/格式），全变无法归因（JA-363 归因纪律）|变量矩阵实验（控制变量法），与 A/B 分层（JA-271）联动，实验笔记记录（版本化 AI-064）|一次改多个更快|变量无关性假设成立|实验无需笔记|实验方法论|实战共识
+JA-451|Java AI|质量|判分|细则|judge 评分细则设计：维度拆分（事实性/完整性/语言）+每档锚定描述+少样本判例，细则即 prompt|judge 质量=细则质量（JA-363 深化），细则迭代与业务 prompt 同纪律，判分漂移监控（JA-347）|judge 直接打 1-10 分最准|细则不重要|判例是可选装饰|判分工程|实战共识
+JA-452|Java AI|工程|数据|飞轮|数据飞轮：用户修正（改写后的答案）入 few-shot 库（JA-443）与评估集（JA-179）双通道，产品越用越准|数据飞轮是 AI 产品的护城河（AI-057 数据面），修正数据质量高于标注（真实意图），与隐私脱敏（JA-198）联动|飞轮自动运转无需设计|修正数据无价值|飞轮与评估无关|数据飞轮|实战共识
+JA-453|Java AI|工程|安全|参数|用户可控参数白名单：模型/温度/topK 等接口参数白名单校验（防用户传 0 温度绕约束/巨 maxTokens）|接口层参数校验（AI-070 输入防线延伸），参数即成本与行为杠杆，与三级限流（JA-206）联动|参数透传用户无风险|白名单限制功能|校验是可选装饰|参数安全|实战共识
+JA-454|Java AI|工程|部署|多区域|多区域部署延迟优化：模型区域就近（JA-267 驻留的延迟面），跨区调用延迟放大 RTT，路由按区域+延迟双维|与 DF-096 跨机房延迟知识同构，驻留合规（JA-267）与延迟优化统一在路由层解决|区域只影响合规|延迟与区域无关|多区域是过度设计|全球部署|实战共识
+JA-455|Java AI|工程|配置|漂移|配置漂移检测：生产配置 vs 基线（Git 版本）定期 diff，未审批变更告警|配置即代码（JA-402 版本化）的漂移面，人工改线上配置是事故源，与 MY-105 变更规范联动|配置漂移不存在|diff 是人工做|漂移无风险|配置治理|实战共识
+JA-456|Java AI|工程|缓存|TTL|模型输出缓存 TTL 与知识时效对齐：时效内容 TTL 短（与知识库更新同步），稳定知识长 TTL|缓存键（JA-155）+TTL 双维设计，TTL 与知识更新周期错配=脏答案，与缓存一致性（RD-046）联动|TTL 统一设置|与知识时效无关|TTL 越长越好|缓存策略|实战共识
+JA-457|Java AI|工程|评测|季度|供应商对比评测季度化：候选新模型季度横评（评估集+价格+政策），趋势报告进选型（JA-391 下线预案联动）|模型市场动态（AI-071 趋势），季度机制平衡追新与稳定（JA-306），评测资产复用|评测一次永久|季度太频繁|对比只看价格|供应商评测机制|实战共识
+JA-458|Java AI|安全|输出|注入痕迹|输出侧注入检测：检查输出中是否出现指令执行痕迹（被诱导调用工具/泄露 system 内容）|注入的输出侧防线（JA-393 蜜罐互补），system 泄露检测（前缀匹配）与异常工具调用告警|注入只影响输入|输出无需检测|泄露检测是多余的|输出侧安全|实战共识
+JA-459|Java AI|工程|团队|规范|AI 生成代码入库规范：AI 代码同样过 review+测试+扫描（JA-036），标注 AI 生成比例（可追溯），依赖幻觉 API 检查|AI-036 的团队规范落地，"AI 代码免 review"是事故模式，幻觉 API 静态扫描（不存在的包名）专项|AI 代码质量高于人工|规范只约束人写代码|标注比例无意义|研发规范|实战共识
+JA-460|Java AI|工程|架构|演进|网关到路由智能化的演进：静态路由表→规则路由（JA-232）→智能路由（按历史表现学习），演进有数据支撑|JA-321 降级路由的智能化方向，路由决策从配置到学习（保守演进），与平台演进（JA-377）同构|路由智能化一步到位|学习路由风险低|演进无必要|路由演进|实战共识
+JA-461|Java AI|工程|成本|预算|预算分维设置：按业务/模型/环境三维预算（JA-199 细化），超维告警独立（哪个业务在烧钱一目了然）|预算粒度决定定位速度（JA-290 分摊配套），三维矩阵告警，与 SLO 分维（DF-056）联动|预算只有总额|三维过细|超预算再查|预算体系|实战共识
+JA-462|Java AI|工程|观测|成本面|成本观测四指标：单次成本分布（P50/P99）、缓存命中率、模型混合占比、单位任务成本|成本观测与性能观测并列（JA-091/354 SLO 四维的成本维），看板化（JA-236），趋势比绝对值重要|成本只看月总额|单次成本无意义|观测与成本无关|成本观测体系|实战共识
+JA-463|Java AI|工程|质量|一致|跨会话一致性监控：同一问题不同会话答案一致性抽样（品牌/合规场景核心指标）|温度与模型更新导致答案漂移（JA-445/392），一致性是合规场景硬指标（金融/医疗），抽样比对自动化|一致性无法量化|只有准确率重要|漂移只影响体验|一致性工程|实战共识
+JA-464|Java AI|工程|运维|拨测|评估集轻量拨测：每日从评估集抽样 N 条跑线上管线（端到端含 RAG），比供应商拨测（JA-273）更贴近真实|端到端拨测（检索+生成全链路），定位"哪层劣化"（JA-293 分层互补），抽样本控制成本（JA-204）|拨测只测供应商|端到端拨测无价值|每日成本过高（抽样可控）|端到端健康|实战共识
+JA-465|Java AI|工程|安全|红队|红队执行节奏：上线前全量→季度回归→重大变更触发，红队发现进评估集（JA-179）与防线补丁|AI-299 清单的执行节奏，安全回归与功能回归同门禁（JA-156），与安全运营周期联动|红队做一次永久|红队只上线前做|发现不回流|红队运营|实战共识
+JA-466|Java AI|工程|知识|截止|知识截止与检索策略联动：模型知识截止后的事件强制走检索（路由规则），截止前的可直答省成本|JA-396 标注的技术面：按事件时间路由（检索 or 直答），成本与准确性双优化，与时间衰减（JA-248）联动|全部走检索最稳|截止日期无关路由|直答更准|截止路由策略|实战共识
+JA-467|Java AI|工程|接口|幂等|AI 接口幂等键设计：客户端传 Idempotency-Key（DF-104），服务端缓存响应供重放（计费不重复）|生成类接口幂等（JA-056 延伸到对外 API），重放返回同答案（成本保护），与 REST 设计规范联动|AI 接口天然幂等|幂等键是可选装饰|重放要重新计费|对外 API 设计|实战共识
+JA-468|Java AI|工程|观测|工具面板|工具调用面板：每工具的调用率/成功率/参数错误率/平均耗时，工具健康度画像（JA-314 的 Agent 侧）|工具是 Agent 的"依赖服务"（JA-014 监控对等），面板定位坏工具（JA-365 badcase 思想），与 JA-357 循环观测联动|工具不需要独立面板|调用率是唯一指标|画像与工具无关|工具可观测|实战共识
+JA-469|Java AI|工程|成本|帕累托|成本-质量优化的帕累托迭代：每季度重绘（模型价格/能力变化），曲线移动带来新优化点（JA-403 的持续化）|优化不是一次性（供应商调价/新模型），季度复盘（JA-457）联动，存量配置重新评估|优化一次永久|曲线静态|迭代无收益|优化持续化|实战共识
+JA-470|Java AI|工程|架构|网关边界|网关边界职责收缩：业务语义（prompt 模板/评估集）不上网关（网关只管流量语义），边界混则平台僵化|JA-317 六职责的边界纪律（什么不该做），中台各层职责清晰（JA-376），与单一职责原则联动|网关管所有 AI 事|边界不重要|业务语义上网关灵活|平台边界纪律|实战共识
+JA-471|Java AI|工程|评测|运营|评测集运营节奏：月度新增（线上回流 JA-179）+季度清理（过时条目下线）+半年度全量基线重校（JA-347）|评估集是活资产（AI-012）的运营日历，增长/清理/重校三动作，与数据治理周期联动|评估集只增不减|运营无日历|重校与基线无关|评估资产运营|实战共识
+JA-472|Java AI|工程|降级|演练|降级链演练矩阵：主→备模型切换/语义缓存降级/关 AI 功能三级，每级验证用户文案（JA-399）与监控告警|JA-286 演练在降级链的细化，每级独立演练（组合演练加压），与预案分级（JA-382）联动|降级链演练一次|三级演练无必要|用户文案与演练无关|降级验证|实战共识
+JA-473|Java AI|工程|知识|沉淀|企业 prompt 资产库：领域 prompt 模板库（分类管理/版本/评估数据/负责人），跨业务复用|prompt 从"散落代码"到"资产库"（AI-064 企业版），复用降低重复建设（JA-384 中台价值），与知识管理联动|prompt 资产库无必要|复用场景不存在|管理成本大于收益|prompt 资产化|实战共识
+JA-474|Java AI|工程|测试|注入|注入防御的单元测试：边界标签包裹样本/角色扮演诱导样本/工具诱导样本三类，断言防线拦截|JA-156 安全回归的具体用例族，每类防线有对应测试样本，与测试金字塔（JA-203）联动|注入测试样本随机构造|三类覆盖不全没关系|单测测不出注入|注入测试用例族|实战共识
+JA-475|Java AI|工程|数据|质量|RAG 语料质量检查器：重复段落/占位文本/乱码/超长行自动扫描（入库前质量门）|垃圾进垃圾出（AI-039）的自动化门禁，入库前扫描比检索后排查便宜，与 MY-104 审核思想同构|语料不需要质检|质检影响入库速度|人工抽查足够|语料质量门|实战共识
+JA-476|Java AI|工程|架构|多级|RAG 多级检索架构：本地缓存（高频 query）→语义缓存（JA-151）→检索（向量+关键词）→重排（JA-102），每级有指标|把 RAG 读路径组织成多级架构（缓存两级+检索两路+重排），各级命中率和质量指标独立观测|RAG 就是单级检索|多级是过度设计|各级无需指标|RAG 读架构|实战共识
+JA-477|Java AI|工程|评估|人工|人工评估的组织：标注指南+双人标注+仲裁（JA-364），标注任务按批分发+质量抽检|golden set 标注是项目管理（JA-245 执行面），标注质量决定标尺（JA-364 联动），与标注平台知识联动|标注一个人做即可|指南与仲裁是形式|抽检没必要|标注项目管理|实战共识
+JA-478|Java AI|工程|合规|输出|输出内容的责任链：AI 输出进入合同/医疗/法律场景的强人工确认（JA-259 人审的强场景），免责声明与合规审查|JA-054 合规的场景分级：高风险域输出仅作草稿（人工签发），产品 UI 显式声明，与行业监管联动|AI 输出可直接用于合同|免责声明足够|责任链是过度设计|高风险域合规|实战共识
+JA-479|Java AI|工程|演进|代理化|Agent 化演进判断：任务结构稳定的工作流保持，开放式任务逐步 Agent 化（JA-368 选型的动态版），每季度评估|JA-419 演进的 Agent 维度：不是所有流程都要 Agent 化（AI-049），按"开放度×错误代价"评估，与稳健演进联动|全部流程 Agent 化|Agent 化无需评估|判断是一次性的|Agent 化路线|实战共识
+JA-480|Java AI|工程|收束|八批|java-ai 域第八批收束：本批补齐流式/多模态/行业场景/质量工程四分支，域地图（JA-360/420）主干完成度评估|收束检查（哪些分支薄了下批补），与知识地图方法论（JA-360）联动，批次推进的自我管理|批次推进不需要收束|分支均衡无所谓|收束是形式主义|批次管理|实战方法论
+JA-481|Java AI|质量|金字塔|映射|AI 测试金字塔完整映射：单测（mock 模型，占 70%）→集成（本地小模型跑链路，20%）→评估集（质量回归，快）→线上影子（持续），层间比例与普通应用金字塔一致|JA-203 的比例细化，底层快而多、顶层真而少，每层回答不同问题（逻辑对/链路通/质量好/真实好）|AI 测试只有评估一层|比例与普通应用不同|顶层最重要其他可省|测试体系全景|实战共识
+JA-482|Java AI|质量|变异|变异测试|prompt 变异测试：故意改坏 prompt（删约束/改格式）验证评估集能抓到退化|评估集有效性检验（抓不住退化的评估集是摆设），变异命中率是评估集质量指标，与变异测试思想同构|评估集天然有效|变异测试不适用 prompt|检验评估集是浪费|评估集质量检验|实战共识
+JA-483|Java AI|质量|阈值|权衡|评估判分阈值权衡：阈值严（假阳性多阻塞发布）vs 松（假阴性多放走退化），按发布风险分级阈值|JA-414 分层阈值的统计面，核心功能严、实验功能松，假阳/假阴代价不对称分析|阈值只有一种设置|越严越好|阈值与风险无关|阈值设计|实战共识
+JA-484|Java AI|质量|报告|雷达图|多维评估雷达图报告：质量/安全/成本/延迟/稳定性五维，版本对比可视化|单一分数掩盖短板（JA-414 多维的呈现面），雷达图让 trade-off 一眼可见，报告进发布评审|评估报告只有一个总分|雷达图是装饰|报告不进评审|评估呈现|实战共识
+JA-485|Java AI|质量|triage|分流|回归失败 triage 流程：先查评估集（条目是否过时/标注错）再查模型（供应商更新）最后查代码，三段排查|回归失败不等于真退化（JA-347 漂移/JA-364 标注噪声），triage 防"误回滚"，与故障分流（JA-356）同构|回归失败立即回滚|评估集永远正确|triage 是浪费时间|回归治理|实战共识
+JA-486|Java AI|质量|效应|新奇|新奇效应（novelty effect）：新功能/新模型初期指标虚高（用户新鲜感），需观察衰减后曲线再下结论|A/B 早期数据不可信（JA-271 的时间维度），观察 1-2 周衰减曲线，与实验纪律联动|初期数据可靠|新奇效应不存在|结论可以当天出|实验时间窗|实战共识
+JA-487|Java AI|质量|基线|慢退化|长期质量基线：季度对比防"慢退化"（每版本小退化累积成大滑坡）|单次回归抓瞬时退化（JA-392），跨版本累积趋势靠基线对比，趋势告警比阈值告警灵敏|慢退化不存在|只看单次回归|基线对比是过度设计|趋势监控|实战共识
+JA-488|Java AI|质量|分群|期望|用户分群质量差异：新用户要引导性回答、专家用户要精确答案，分群评估防"平均数陷阱"|统一评估掩盖群体体验差（JA-289 分域的深化），分群看板（JA-395 灰度分群配套），与用户研究联动|平均分代表一切|分群评估是过度设计|用户期望相同|分群质量分析|实战共识
+JA-489|Java AI|质量|权衡|质量换延迟|质量-延迟联合优化：低端场景降模型/减 topK 换延迟（体验敏感路径），高端场景反之|JA-403 帕累托的场景化：不同路径不同配置（客服寒暄 vs 技术问答），路径级配置矩阵|全场景统一配置|质量优先永远正确|延迟与质量无关|路径级优化|实战共识
+JA-490|Java AI|数据|版本|快照|知识库版本快照与 diff：入库批次打版本，检索问题可回放"当时知识状态"复现|RAG 问题的复现需要知识库状态（JA-355 复盘联动），快照让 bug 可重现，与 DB 备份思想同构|知识库无版本概念|快照成本高不可行（增量快照可控）|复现不需要状态|知识库可复现性|实战共识
+JA-491|Java AI|数据|去重|MinHash|语料近似去重：MinHash/LSH 检测近似重复文档（转载/多版本），重复语料扭曲检索分布|重复内容霸占检索结果（MY 语料治理的 AI 版），入库前去重是质量门（JA-475）的深水项，与海量查重（AL-038）思想同构|语料重复无影响|精确匹配即可去重|去重在检索后做|语料去重工程|实战共识
+JA-492|Java AI|数据|冲突|优先级|多源语料冲突处理：同主题多文档答案不一致（制度新旧版），来源优先级策略（官方>内训>笔记）+新版本标记|冲突语料让检索命中矛盾答案（JA-490 的深水项），优先级与时效双维排序，与主数据治理联动|语料天然一致|冲突靠模型自己判断|优先级无法配置|多源一致性|实战共识
+JA-493|Java AI|数据|可信|分级|知识可信度分级：权威源（制度原文）加权、社区内容降权，检索分数乘可信度系数|语料质量差异（JA-492 的度量面），分级系数进检索排序，可信度标注随元数据入库（JA-157）|所有语料等可信|可信度是主观评价（按来源类型客观分级）|系数不影响排序|可信度工程|实战共识
+JA-494|Java AI|数据|时效|标签|知识时效标签强制：入库时标记更新频率（日更/月更/静态），驱动检索衰减（JA-248）与缓存 TTL（JA-456）|时效策略的数据基础，无标签则衰减/TTL 无法差异化，入库表单强制字段|时效标签可选|所有知识同频更新|标签不影响策略|时效数据治理|实战共识
+JA-495|Java AI|数据|挖掘|golden|检索日志挖 golden set：真实查询+用户点击的正确文档为候选（自动），人工确认后入评估集|评估集持续扩产的自动化管道（JA-179 的检索版），点击即隐式反馈（JA-233），人工确认防噪声|golden set 纯人工构造|点击数据无价值|自动候选不需要确认|评估集扩产管道|实战共识
+JA-496|Java AI|数据|聚类|意图|用户查询聚类：发现意图分布与新需求（高频无覆盖查询=知识缺口）|查询聚类暴露知识库盲区（JA-440 冷启动的持续面），缺口驱动语料补齐优先级，与数据挖掘知识联动|查询分析无价值|知识缺口靠猜|聚类需要标注（无监督聚类可行）|意图挖掘|实战共识
+JA-497|Java AI|数据|脱敏|流水线|语料脱敏流水线：PII 识别（正则+NER）→替换占位符→抽检，入库前执行（JA-349 双向脱敏的入库侧）|脱敏自动化（人工不可能扫万级文档），占位符保留语义（"张三"→"用户A"），与合规留痕（JA-383）联动|脱敏人工做|流水线影响语义（占位符设计保留）|脱敏只在出站|入库脱敏自动化|实战共识
+JA-498|Java AI|数据|评估|库 A/B|知识库 A/B：新旧库（不同切分/模型/清洗策略）并行建索引，同 query 集对比检索质量后再切流|知识库变更的验证手段（MY-105 变更规范的 AI 版），影子索引（JA-501 相关）+golden set 判定|知识库直接替换|A/B 无法实现|对比不需要 query 集|知识库变更验证|实战共识
+JA-499|Java AI|数据|换代|影子索引|嵌入模型换代影子索引：新模型并行建全量索引（旧索引在线服务），评估对比后一次性切流|换嵌入模型=全量重嵌入（JA-101），影子索引让切换零停机可回退，存储成本双份是代价|换模型停机重建|影子索引浪费|切换无回退|嵌入换代工程|实战共识
+JA-500|Java AI|Agent|权限|动态授权|Agent 工具权限动态演进：运行期按任务上下文动态授权（本任务只开查权限），任务结束收回|JA-152 白名单的动态化（最小权限动态版），与租约（DF-013）思想同构，授权记录进轨迹（JA-219）|权限静态配置足够|动态授权不可实现|授权与轨迹无关|动态最小权限|实战共识
+JA-501|Java AI|Agent|监控|卡死|长任务 Agent 心跳监控：步间超时检测（相邻步骤间隔超阈=卡死），告警+自动终止+checkpoint 续跑|Agent 卡死的检测面（JA-276 步数上限的补充：上限是次数、心跳是时间），与调度器健康检查联动|Agent 不会卡死|卡死靠人工发现|检测成本高（心跳轻量）|Agent 健康监控|实战共识
+JA-502|Java AI|Agent|验证|verifier|结果验证器：独立 verifier（规则校验+LLM 交叉验证）检查 Agent 产出，不通过回炉|自我验证（AI-043 失败模式防线）的独立化：生产者与验证者分离（防自欺），验证器可以是规则或另一个模型|Agent 自检足够|verifier 是过度设计|验证与生成同模型最好|结果验证架构|实战共识
+JA-503|Java AI|Agent|并发|冲突|多 Agent 并发写冲突：两个 Agent 修改同一资源（库存/工单），锁或幂等或资源级串行化|多 Agent 并发的正确性（JA-258 并行工具的资源面），与 DB 并发控制思想同构（乐观锁 JA-078 联动）|多 Agent 不会写冲突|冲突靠提示词避免|锁影响性能不用|并发正确性|实战共识
+JA-504|Java AI|Agent|记忆|写回|长期记忆写回策略：显式重要信号（用户偏好陈述）写入 vs 全量对话入向量（噪音大），写回判据要设计|什么值得记（AI-020 的策略面），记忆污染（错误信息入长期库）比缺失更糟，写回可人工审计|全部对话入长期记忆|记忆写回无策略|污染无所谓|记忆写回治理|实战共识
+JA-505|Java AI|Agent|失败|补偿|Agent 失败补偿：已执行不可逆工具的逆操作补偿（撤销通知/回滚库存预留），补偿链与 SAGA（DF-063）同构|Agent 是分布式执行的特例（每工具是一笔"事务"），补偿设计让失败可恢复，幂等优先补偿兜底（JA-257）|Agent 失败无需补偿|补偿自动完美执行（补偿本身可能失败，需重试+人工兜底）|SAGA 与 Agent 无关|失败恢复架构|实战共识
+JA-506|Java AI|Agent|可解释|追溯|Agent 可解释性：轨迹（JA-219）+每步推理文本（模型思考过程）+工具证据（结果快照）构成解释链|用户/审计问"为什么这么做"的回答材料，解释链与轨迹分离（轨迹给系统、解释给人类），与可解释 AI 实践联动|可解释性不可实现|只有轨迹就够|推理文本不可获得|解释链设计|实战共识
+JA-507|Java AI|模型|结构化|失败分类|结构化输出失败三分类：截断（LENGTH 咬掉 JSON 尾）/格式漂移（字段名错/多 Markdown 包裹）/幻觉字段（编造枚举值），各对应不同修法|JA-099 的分类细化：截断调 maxTokens、格式靠宽松解析、幻觉靠 schema 约束+重试，混修错配|失败原因无法分类|统一重试解决一切|分类是过度设计|结构化排障|实战共识
+JA-508|Java AI|模型|选型|ICL vs 微调|ICL 与微调的选型更新：新旗舰模型 ICL 能力增强，微调需求集中在风格/格式/小模型降本（AI-013 矩阵的更新版）|选型矩阵随模型代际演进（JA-056 版本锚定），旧答案"复杂任务必微调"已过时，评估集决策（JA-013）|微调需求在增长|ICL 永远够用|选型矩阵静态不变|选型矩阵更新|实战共识
+JA-509|Java AI|模型|权衡|长上下文|长上下文模型与 RAG 的权衡更新：长窗模型可塞全文档，但成本/延迟/lost-in-middle 使 RAG 仍是主选（经济性）|JA-002 的深化：窗口大≠该全塞（成本与中间遗忘 JA-495 无关），混合策略（长窗+检索）是趋势，按 token 经济性决策|长窗模型消灭 RAG|RAG 永远优于长窗|两者不能结合|长窗与 RAG 权衡|实战共识
+JA-510|Java AI|模型|现象|中间遗忘|lost in the middle：长上下文中部内容检索利用效率低，关键信息前置/后置布局是缓解|JA-002 提及的机制面：注入布局工程（关键片段放两端），与 JA-223 预算分配联动，评估验证布局效果|窗口内位置无影响|中间遗忘是谣言|布局工程无收益|上下文布局|实战共识
+JA-511|Java AI|模型|调参|采样|temperature 与 top_p 组合调参：两者都调会叠加随机性，调优时单变量原则（先 temperature 后 top_p）|JA-161 的组合面，采样参数族（top_k/top_p/temperature）语义区分，与多变量实验纪律（JA-450）联动|三参数随意组合调|top_p 比 temperature 重要|组合调参更快|采样参数方法论|实战共识
+JA-512|Java AI|模型|多语言|prompt|prompt 语言与性能：英文 prompt 在多数模型更稳（训练分布），中文 prompt 经测试决定（模型中文能力演进快）|"英文 prompt 更稳"是经验规律而非铁律（JA-216 token 联动），用评估集 A/B 实测决定，与 AI-217 i18n 联动|prompt 必须英文|中文 prompt 一样好|无需实测|prompt 语言策略|实战共识
+JA-513|Java AI|工程|沟通|非确定|非确定性的业务沟通：同问题不同答案要向业务方解释（采样随机性），固定种子/低温可复现用于演示|非确定性是 AI 特性不是缺陷（JA-003/011），业务预期管理（AI-396 同思想），演示环境用确定性配置|同问同答是基本要求|随机性可以隐藏|沟通不重要|预期管理|实战共识
+JA-514|Java AI|工程|容量|预测|AI 用量容量预测：用量增长外推（业务增长系数×AI 渗透率），提前扩配额/供应商合同（JA-337 联动）|容量规划在 AI 依赖的版本（MY-092 基线外推），配额与成本都要前瞻（供应商合同周期长），与容量知识联动|容量到时再扩|预测不必要|配额随时可加|容量前瞻|实战共识
+JA-515|Java AI|工程|合同|SLA|供应商合同 SLA 条款要点：可用性承诺/赔偿（credit）/限流保障（专属配额）/数据条款（训练边界 JA-237），合同是可靠性最后防线|技术手段之外的商务兜底（JA-337 谈判的条款面），SLA 不达触发赔偿，与合同治理联动|供应商无 SLA 条款|SLA 靠技术保证即可|条款与工程无关|商务可靠性|实战共识
+JA-516|Java AI|工程|合同|主备|多供应商合同策略：主供应商量大价优+备供应商小量保底（可快速放量条款），商务结构匹配技术降级链|JA-055 降级链的商务面：备供应商有合同与预热流量才真可切（JA-210 演练联动），与容灾商务结构（MY-094）同构|备供应商随时可加|合同与技术无关|单供应商足够|商务容灾|实战共识
+JA-517|Java AI|工程|监控|changelog|供应商 API changelog 订阅与巡检：文档变更/deprecation 公告纳入信息流（JA-391 下线预案的输入）|供应商接口演进监控（AI-066 SDK 联动），静默变更（JA-392）的文档面补充，与变更情报机制联动|供应商变更会通知到位|changelog 不重要|巡检文档是浪费|变更情报|实战共识
+JA-518|Java AI|工程|团队|分享|AI 工程内部分享节奏：双周案例分享（踩坑/优化），案例沉淀进知识库（JA-343 文档联动）|团队学习飞轮（JA-342 技能矩阵的成长面），踩坑案例是最好的教材，与复盘文化（MQ-075）联动|分享是形式主义|案例无需沉淀|节奏不重要|团队学习机制|实战共识
+JA-519|Java AI|工程|SLA|分级|AI 组件 SLA 分级：核心对话（99.9%）/辅助生成（99%）/离线批处理（尽力），分级配资源与监控密度|统一 SLA 浪费资源（JA-354 四维 SLO 的组件级），分级与舱壁（JA-103/线程池 JA-334）联动|所有组件同 SLA|分级是复杂化|SLA 与资源无关|SLA 分级|实战共识
+JA-520|Java AI|工程|安全|日志|安全日志专项：注入尝试/越权工具调用/异常 token 消耗三类安全事件独立日志与告警|JA-458 输出检测+JA-393 蜜罐的日志面，安全事件与普通错误分库（不被淹没），与 SIEM 思想联动|安全事件混在普通日志|三类事件无价值|告警与安全无关|安全可观测|实战共识
+JA-521|Java AI|工程|数据|流式|数据管道流式化：知识库更新（CDC 事件）→清洗→嵌入→入库的流式管道（Flink 类），替代定时全量|JA-280 权限同步的扩展：知识更新全链路流式化（延迟分钟级），与 Flink CDC（MY-106）联动|定时全量够用|流式化是过度设计|管道无法流式|知识管道架构|实战共识
+JA-522|Java AI|工程|选型|再评估|框架选型的年度再评估：能力矩阵（JA-391 对比表）年度刷新+社区健康度（发版/issue 响应），防锁定|选型不是终身（JA-039 动态化），框架演进方向变化（如合并/停滞）触发再评估，与供应商治理联动|选型一次终身|年度评估是浪费|社区健康不重要|选型再评估|实战共识
+JA-523|Java AI|工程|开发|脚手架|AI 功能脚手架：模板工程（ChatClient 装配/评估集骨架/降级配置/观测埋点四件预置），新功能半天起步|标准化的开发效率（JA-343 组件文档的代码面），脚手架固化最佳实践（JA-285 清单内置），与脚手架工程实践联动|脚手架是过度设计|每个功能从零搭|模板固化过时实践|开发效率工程|实战共识
+JA-524|Java AI|工程|评审|架构|AI 功能架构评审要点：依赖面（模型/数据/工具清单）、失败模式（JA-239 矩阵）、成本预估（JA-401）、合规边界（JA-380）四块|立项评审（JA-413 风险清单）的技术面，评审通过才允许开发，与架构评审纪律（DF-099）联动|AI 功能不用架构评审|四块是形式|评审与开发同步|评审设计|实战共识
+JA-525|Java AI|工程|治理|准入|AI 功能生产准入检查单：评估门禁通过/降级链演练/成本模拟/合规审查/监控接入五项，缺一不发布|JA-294 五步的准入 gate 化，检查单驱动（MY-110 参数检查单思想），准入是硬门槛|检查单是形式主义|五项可并行豁免|准入看团队自觉|准入门槛|实战共识
+JA-526|Java AI|工程|观测|告警|告警分级与路由：P0（全不可用）电话、P1（降级生效）IM 即时、P2（质量下滑）日报、P3（成本）周报|JA-382 事故分级的告警路由面，分级匹配响应节奏（DF-074），告警风暴防（聚合/静默 DF-072）|告警全部即时推送|分级是形式主义|告警不需要路由|告警体系|实战共识
+JA-527|Java AI|工程|优化|案例|成本优化案例库：缓存命中提升（JA-200 前后数据）、路由降级节省、压缩收益、批处理折扣，案例化沉淀复用|JA-338 三支柱的案例化，数据佐证的案例才能复用（防经验主义），与知识沉淀（JA-518）联动|优化案例无复用价值|案例不挂数据|沉淀不重要|优化知识库|实战共识
+JA-528|Java AI|工程|测试|成本|成本回归测试：发布前用代表性流量跑成本模拟（JA-401），成本变化>阈值需评审（新 prompt 变长等）|成本进回归门禁（与质量门禁并列 JA-407），成本回归防"隐形涨价"，与预算治理（JA-461）联动|只回归质量不回归成本|成本回归不必要|阈值无法定|成本门禁|实战共识
+JA-529|Java AI|工程|演进|复盘|技术演进半年度复盘：新特性（框架/模型/协议）评估清单，决策"采用/观望/忽略"进雷达|技术雷达机制（ThoughtWorks 思想）的 AI 域落地，防追新也防错过（JA-306 节奏），与 JA-522 再评估联动|追新或保守二选一|复盘无产出|雷达是形式主义|技术雷达|实战共识
+JA-530|Java AI|工程|评审|双轨|prompt 变更双轨评审：技术评审（工程正确性）+内容评审（业务语义/合规），两轨会签|prompt 是"代码+文案"双重属性（JA-025 变更纪律深化），单轨评审漏一半，与变更管理联动|prompt 技术评审足够|内容评审是业务的事（业务必须参与）|双轨拖慢迭代|prompt 评审设计|实战共识
+JA-531|Java AI|工程|数据|回流|负样本回流策略：差评样本入库评估集时打标（可修复/模型局限/超范围），超范围样本导流产品决策|JA-179 回流的分类面：不是所有差评都是技术问题，"超范围"（AI 功能边界外）转产品路线，与 MY-107 归档思想联动|差评全部进评估集|分类打标无意义|超范围样本丢弃|负样本治理|实战共识
+JA-532|Java AI|工程|知识|运营|知识库运营节奏：月度知识缺口报告（JA-496 聚类）→补齐排期→入库→效果验证闭环，知识库是运营出来的|知识库不是建完就完（JA-440 冷启动后的持续面），运营节奏让库"活着"，与内容运营联动|知识库建完即完|缺口报告无价值|闭环不需要验证|知识库运营|实战共识
+JA-533|Java AI|工程|能力|抽象|多供应商抽象层设计：统一接口（chat/embed/rerank）+能力探测（供应商支持的参数动态降级）|JA-284 防腐层的深化：能力差异优雅降级（不支持结构化时退提示词注入），能力探测缓存，与适配器模式联动|所有供应商能力相同|能力探测不必要|降级会破坏功能|抽象层设计|实战共识
+JA-534|Java AI|工程|安全|测试|工具诱导专项测试：诱导 Agent 调用高危工具（删除/转账）的对抗样本，验证权限防线（JA-235）|JA-474 注入测试的 Agent 特化：工具诱导是最危险的注入（真实副作用），防线测试是安全验收项|工具诱导无法测试|权限校验已足够|测试样本随机构造|工具安全测试|实战共识
+JA-535|Java AI|工程|运维|容量|SSE 长连接容量模型：连接数=并发用户×会话时长系数，网关/负载均衡的连接上限是瓶颈（非 QPS）|JA-230 容量修正的连接面：SSE 占用连接句柄（LB 连接数上限），容量按连接规划，与长连接运维联动|容量按 QPS 规划|连接不占句柄|LB 无连接上限问题|长连接容量|实战共识
+JA-536|Java AI|工程|数据|留存|会话数据留存策略：原始对话（合规留存 N 年 JA-383）与分析聚合（长期指标）分层存储，热数据在线冷数据归档|留存分层（MY-107 冷热分离思想），合规留存与成本平衡，与归档管道联动|会话数据全量在线|留存与合规无关|分层存储是过度设计|留存分层|实战共识
+JA-537|Java AI|工程|质量|护栏|护栏分级执行：硬护栏（合规红线，阻断）与软护栏（风格建议，标注不阻断），分级避免护栏过度|JA-019/193 护栏的分级面，全部硬护栏会误伤（风格问题不该阻断），分级配置化|护栏全部阻断|分级是形式主义|软护栏无价值|护栏分级|实战共识
+JA-538|Java AI|工程|演进|监控升级|监控从指标到洞察的演进：指标告警（阈值）→异常检测（基线漂移自动发现）→根因建议（关联分析），AI 辅助 AI 运维|监控体系成熟度演进（DF-088 观测联动），AI 系统自身的监控用 AI 增强（自举），演进按成熟度分步|监控只有阈值告警|异常检测是噱头|根因分析不可能|监控演进|实战共识
+JA-539|Java AI|工程|测试|预算|测试环境模型预算：测试环境也计费（评估/集成测试调用真实供应商），测试预算与生产隔离统计|测试成本是隐性成本（JA-204 评估成本延伸），测试配额独立（防止测试挤占生产配额 JA-059），与成本分摊（JA-290）联动|测试环境不产生成本|测试与生产共享配额|预算只管生产|测试成本治理|实战共识
+JA-540|Java AI|工程|收束|质量域|质量工程分支收束：测试金字塔（JA-481）→评估体系（JA-245/361/483）→数据质量（JA-490/497）→治理门禁（JA-525/528）→运营节奏（JA-471/531），质量域地图完成|第九批收束检查：质量域从"测试"扩展到"质量工程"全景，与 MY-104 治理体系同构，下批转知识库/多模态深水区收尾|质量就是测试|收束是形式主义|域地图与质量无关|质量域地图|实战方法论
+JA-541|Java AI|多模态|计费|分块|图像 token 计费的分块模式：按分辨率切成 tile 计费（大图分块多 token 多），控制尺寸即控制成本|AI-080 分辨率降本的计费机制面，理解分块才能精确预算（不同供应商分块规则不同，读文档）|图像按张固定计费|分块规则全行业统一|成本无法预估|多模态计费机制|实战共识
+JA-542|Java AI|多模态|prompt|视觉指令|视觉 prompt 结构：图像+文本指令的组合设计（"先描述图表类型再提取数据"分步指令）|视觉任务与文本任务一样需要 prompt 工程（JA-109 只解决了输入通道），分步指令提升图表/文档理解精度|图像不需要 prompt 工程|一步到位指令最优|视觉 prompt 无版本管理|视觉提示工程|实战共识
+JA-543|Java AI|多模态|输入|多图|多图对比理解：单请求多图输入（对比两版本文档/两图找差异），图像顺序与编号引用|多图任务（比对/关联）与单图任务 prompt 结构不同，图像编号引用（图 1/图 2）让模型可指代|多图输入不支持|多图顺序无关|对比任务与单图同 prompt|多图任务设计|实战共识
+JA-544|Java AI|多模态|视频|采样|视频理解采样帧策略：均匀采样 vs 场景切换检测采样（关键帧），帧数决定 token 成本|视频直接全部帧不可行（token 爆炸），关键帧采样保信息降成本，与 JA-432 语音管线同构的预处理思想|视频逐帧全部送模型|采样策略无影响|视频理解免采样|视频理解工程|实战共识
+JA-545|Java AI|多模态|文档|版面|文档智能版面分析：还原标题/表格/段落结构（不只是文本提取），结构化输出给下游|RAG 语料质量（JA-475）的上游：版面结构丢失=切分错乱，版面分析模型或 OCR+版面还原管线|文本提取就够了|版面结构无关紧要|结构化还原是可选装饰|文档智能管线|实战共识
+JA-546|Java AI|多模态|OCR|后处理|OCR 后处理：校对（置信度低的字复核）/结构化（表格还原）/纠错（领域词典），OCR 原始输出不可直接用|JA-431 OCR 路线的质量面：原始 OCR 错字率直接污染 RAG 语料，后处理是精度保障|OCR 输出即用|后处理无必要|置信度无用|OCR 质量链|实战共识
+JA-547|Java AI|多模态|检索|视觉检索|视觉检索前沿：视觉嵌入模型直接对图片/版面做检索（ColPali 类思路），跳过 OCR 文本化|文档检索从"OCR→文本向量"演进到"页面图像→视觉向量"，对表格/图版文档精度更好，2025 前沿方向|视觉检索不存在|OCR 路线永远最优|视觉检索无生产案例（评估后再引入）|检索前沿|2025
+JA-548|Java AI|多模态|评测|图像问答|多模态评估集：图像问答对（图+问题+期望要点），与文本评估集分库管理|评估体系覆盖多模态（JA-361 的多模态版），视觉判分用文本 judge（回答比对），图像评测集建设先行于上线|多模态不需要评估|文本评估集通用|判分要视觉模型|多模态评测|实战共识
+JA-549|Java AI|多模态|安全|入站|图像入站安全：NSFW/敏感图检测（入站过滤）与图像内嵌注入检测（图片中的指令文本）|多模态的输入安全面（JA-262 文本扫描的图像版），图像内嵌文字是指令注入新载体（JA-225 扩展）|图像无需安全过滤|内嵌注入不存在|过滤只对文本|多模态安全|实战共识
+JA-550|Java AI|多模态|应用|Alt 文本|图片 Alt 文本自动化：视觉模型批量生成图片描述（无障碍/SEO/检索元数据），批处理管线|JA-437 批处理管线的多模态用例，产出直接喂多模态 RAG（JA-429），成本低收益高|Alt 文本无价值|自动化描述不准确|手写是唯一方案|多模态批处理用例|实战共识
+JA-551|Java AI|行业|金融|合规|金融场景 AI 特化：监管要求输出留痕可审计（JA-383）、免责声明强制、投资建议类强人工签发（JA-478 责任链）、模型与数据境内（JA-267）|行业监管叠加通用治理：金融是合规最重行业（AI-054 强监管场景），架构上留痕/签发/境内三件套先行|金融直接用通用方案|合规是事后补|监管不影响架构|金融合规架构|实战共识
+JA-552|Java AI|行业|医疗|术语|医疗场景 AI 特化：医学术语库 RAG（标准术语映射）、诊断建议强人审、隐私最高级（患者数据私有化部署）|医疗行业三层叠加：术语精度（JA-493 可信分级）、人审（JA-478）、数据驻留（JA-267），私有化模型（JA-017/183）是前置|医疗可以直接用云模型|术语问题靠模型自己|人审可以省略|医疗合规架构|实战共识
+JA-553|Java AI|行业|电商|导购|电商导购多模态：商品图理解（拍图识商品）+商品库检索+比价/推荐，视觉+检索+对话三栈组合|JA-072 电商组合的深化：拍图搜商品是视觉检索（JA-547）+商品结构化库的经典组合，转化率是北极星（AI-414）|导购纯文本即可|拍图识商品无法落地|三栈组合是过度设计|电商导购架构|实战共识
+JA-554|Java AI|行业|教育|引导|教育场景苏格拉底式：prompt 约束模型引导思考而非直接给答案（分步提示/反问），教学目标决定交互设计|"直接给答案"损害学习目标（场景特殊性），prompt 约束+输出校验（不得含完整答案），与 prompt 工程（AI-023）联动|教育场景直接给答案效率高|引导模式无法约束|场景不影响 prompt|教育场景设计|实战共识
+JA-555|Java AI|行业|法务|比对|法务条款比对：合同版本差异 RAG（条款级切分+语义比对+差异报告），条款级引用（JA-252 粒度）落地|法务场景特点：条款级精确引用不可编造（JA-202 强校验），差异报告人工签发（JA-478），术语库（JA-552 同思想）|法务比对直接给结论|条款引用可编造|场景与 RAG 粒度无关|法务场景设计|实战共识
+JA-556|Java AI|行业|制造|手册|制造设备手册问答：多语言手册（设备进口国语言）+图纸多模态（JA-429）+一线工人低门槛交互（语音 JA-432）|制造业组合：多语言检索（JA-281）+图纸视觉（JA-547）+语音交互三栈，现场设备即时问答降停机|制造业手册直接文本化|图纸不需要理解|一线交互要打字|制造场景组合|实战共识
+JA-557|Java AI|行业|公共|私有化|公共部门/国企场景：数据不出域硬约束（JA-267 最高级）→全私有化栈（私有模型+私有嵌入+私有向量库），能力取私有化最优|JA-380 分级矩阵的最高密级档：全私有化的能力上限评估先于承诺，与国产模型生态评估联动|公共部门可上云|私有化能力与云持平|密级约束可协商|全私有化架构|实战共识
+JA-558|Java AI|行业|游戏|NPC|游戏 NPC 对话：角色人设 prompt+记忆（与玩家关系）+内容安全（防违规对话），体验与安全双约束|游戏 NPC 是 prompt 人设工程（AI-023）的极致场景，长期记忆（与该玩家历史）与内容过滤（JA-262）并重|NPC 直接接大模型即可|人设不重要|游戏无内容安全要求|游戏 NPC 设计|实战共识
+JA-559|Java AI|行业|人力|偏差|简历筛选 AI 的公平性风险：模型偏见（性别/年龄歧视）与合规（就业公平法），评估集需含公平性样本|AI 偏见的行业特化（AI-054 安全域），公平性评估（分群指标 JA-488 按受保护属性），人审兜底强制|模型无偏见|公平性无法评估|筛选拒绝不需要人审|公平性工程|实战共识
+JA-560|Java AI|行业|策略|底座|跨行业策略：统一底座（网关/评估/治理 JA-376）+行业层（合规/术语/场景 prompt），新行业接入只做行业层|多行业企业的架构策略（集团型业务），底座复用行业层差异化，与中台分层（JA-376/238）联动|每个行业从零建|底座与行业耦合|行业层可以省略|多行业架构|实战共识
+JA-561|Java AI|工程|网络|HTTP2|HTTP/2 对流式的影响：多路复用避免队头阻塞（H1 同连接串行响应），LLM 客户端建议启用 H2|流式并发场景（JA-425 多路流）的传输层基础，H1 下并发流会阻塞，客户端/网关协商 H2|HTTP 版本无影响|H1 与 H2 流式一致|强制 H1 更稳|传输层优化|实战共识
+JA-562|Java AI|工程|网络|keep-alive|连接复用与 keep-alive：LLM 长响应下连接复用策略（TLS 握手成本摊薄），池化配置（JA-467 前置知识）|TLS 握手是延迟大头（首次请求），连接池 keep-alive 复用 TLS 会话，与连接池调优（JA-167）联动|每请求新建连接无妨|keep-alive 与 LLM 无关|TLS 握手成本可忽略|连接管理|实战共识
+JA-563|Java AI|工程|网络|压缩|GZIP 对 SSE 的破坏：压缩缓冲会攒批破坏流式实时性（Content-Encoding 与分块冲突），流式链路禁缓冲压缩|流式实时性的网络层陷阱（JA-423 TTFT 优化的反面），代理/网关的压缩配置要豁免流式路由|压缩对流式无影响|压缩总是好的|网关配置与流式无关|流式网络陷阱|实战共识
+JA-564|Java AI|工程|网络|预热|连接与 DNS 预热：启动时/定时预热连接池与 DNS 缓存（JA-215 检索预热的网络层），突发流量前主动预热|冷启动延迟的传输层面（与缓存预热 RD-066 同族），大促/活动前预热脚本，与容量保障联动|连接自动预热|预热无必要|DNS 不会成为瓶颈|预热工程|实战共识
+JA-565|Java AI|工程|依赖|SDK 锁定|供应商 SDK 版本锁定：SDK breaking change（响应类重构）与框架绑定关系，SDK 升级走回归（JA-211）|AI-066 SDK 细节的版本面：SDK 与框架版本矩阵对齐（JA-105 BOM 联动），锁定+评估后升级|SDK 随便升级|SDK 与框架无关|breaking change 不存在|SDK 治理|实战共识
+JA-566|Java AI|工程|并发|虚拟线程|虚拟线程与 LLM 流式的组合（SP-083）：MVC+虚拟线程处理 SSE 长连接（阻塞式编程模型处理长 IO）|JA-297 三选一的第四姿势：虚拟线程让阻塞代码获得响应式吞吐（JDK21），回调地狱消除，与并发模型知识联动|虚拟线程与流式无关|必须 WebFlux|虚拟线程不成熟|并发模型新选项|JDK21+
+JA-567|Java AI|协议|A2A|Agent 互操作|A2A 协议（Agent-to-Agent，2025 业界提出）：跨厂商 Agent 互操作（Agent 卡片声明能力/任务协商）|MCP 管"Agent↔工具"，A2A 管"Agent↔Agent"（互补不竞争），Java 生态跟进观察，与 MCP 知识（JA-024）对照|A2A 与 MCP 是竞争关系|Agent 互操作已解决|A2A 不存在|协议全景|2025
+JA-568|Java AI|安全|身份|Agent 身份|Agent 作为一等调用者的身份与授权：Agent 调工具/系统经 OAuth client 身份（非共享超级账号）|JA-235 越权防线的身份面：Agent 有独立身份才能审计与限权（A2A/MCP 生态的身份基座），与零信任思想联动|Agent 用共享账号即可|身份与审计无关|授权是可选项|Agent 身份体系|实战共识
+JA-569|Java AI|工程|缓存|schema 键|结构化输出缓存与 schema 联动：schema 变更=缓存键变化（旧缓存结果形状不匹配），缓存键纳入 schema hash|JA-155 缓存键的结构化补充：schema 是输出"契约"（JA-308 同思想），契约变更即缓存失效|缓存键与 schema 无关|schema 稳定不变|旧缓存可复用|缓存正确性|实战共识
+JA-570|Java AI|工程|评估|一致性|评估环境生产一致性：评估跑的模型版本/温度/检索配置必须与生产对齐（否则评估失真）|评估失真来源（JA-570 前置）：环境差异让"评估通过"不代表"生产好"，配置对齐是评估可信前提（JA-282 契约测试联动）|评估环境随便配|一致性无法保证|失真是可接受的|评估可信度|实战共识
+JA-571|Java AI|工程|成本|分摊模式|成本分摊两模式：showback（展示不收费，初期）→chargeback（真分摊计费，成熟期），按组织成熟度演进|JA-290 分摊的运营模式面：showback 培养成本意识、chargeback 强约束，与平台运营（JA-377）联动|直接 chargeback|分摊模式一成不变|模式与成熟度无关|成本运营演进|实战共识
+JA-572|Java AI|工程|质量|归因|质量归因实验：同 query 换模型重跑（区分模型问题）或换检索重跑（区分数据问题），控制变量定位根因|JA-365 badcase 归因的实验面：换变量重跑是归因的硬手段（非猜测），与实验纪律（JA-450）联动|归因靠经验猜|控制变量实验无必要|根因无法确定|质量归因实验|实战共识
+JA-573|Java AI|工程|灰度|通知|灰度期用户通知：灰度用户可见"体验新版功能"标识（反馈通道绑定版本），反馈可归因到版本|反馈归因（JA-451/404）的前提：无版本标识的反馈无法分桶，通知与反馈通道设计联动|灰度静默进行|用户通知无必要|反馈无需版本关联|灰度-反馈闭环|实战共识
+JA-574|Java AI|工程|限流|公平|多租户公平调度：token server 公平队列（防大租户饿死小租户），加权公平而非先到先得|JA-320 配额的公平面：共享配额下的公平调度（加权轮询），与调度算法知识联动|先到先得公平|公平调度无必要|大租户优先合理|公平调度|实战共识
+JA-575|Java AI|工程|运维|检索|会话记录检索：客服回溯（按用户/时间/主题搜历史对话），对话数据的检索基建（对话入 ES）|对话数据二次利用（JA-532 运营/审计 JA-383），检索基建让"发生过什么"可查，与 ES 知识（JA-241）联动|会话记录无法检索|检索会话是伪需求|只需要按 id 查|对话检索基建|实战共识
+JA-576|Java AI|工程|反馈|可编辑|输出可编辑性设计：用户可编辑 AI 输出后保存，编辑 diff 是最高质量反馈（用户想要什么一目了然）|JA-452 数据飞轮的富反馈面：编辑 diff 比点踩信息量大，编辑后版本可入 few-shot（JA-443），与产品交互设计联动|输出不可编辑|编辑数据无价值|反馈只有点赞踩|富反馈设计|实战共识
+JA-577|Java AI|工程|模板|元数据|prompt 版本元数据：作者/评审人/生效时间/评估分数/适用场景，模板即资产（JA-473 资产库的条目结构）|资产库条目的元数据面（可检索可审计），元数据缺失则资产库退化为片段堆，与知识管理联动|prompt 无需元数据|元数据是可选装饰|只有正文重要|模板元数据|实战共识
+JA-578|Java AI|工程|嵌入|缓存|嵌入结果缓存：同文本重复嵌入跳过（内容 hash 作键），增量入库（JA-158）与重复文档（JA-491）场景省成本|嵌入是幂等纯函数（同输入同输出），缓存天然正确，命中率在增量更新场景显著|嵌入每次都要算|缓存嵌入有正确性问题|缓存无收益|嵌入缓存|实战共识
+JA-579|Java AI|RAG|个性化|画像|检索个性化：用户画像（部门/历史兴趣）加权检索排序（同 query 不同人结果不同），隐私边界注意|通用 RAG 的个性化扩展（相关性×用户系数 JA-493），画像数据合规（JA-198），冷启动用户回退通用排序|检索与用户无关|个性化必引入偏差|画像数据随便用|个性化检索|实战共识
+JA-580|Java AI|安全|多模态|注入|多模态注入攻击面：图片内嵌文字指令（JA-549）、图片元数据、多图组合注入，视觉输入是注入新载体|多模态安全深化：视觉通道的注入检测（OCR 出图片文字过注入检测），与文本防线（JA-225）同等强度|图片是安全的输入|视觉通道无需防线|注入只在文本|多模态注入|实战共识
+JA-581|Java AI|工程|审计|流式|流式输出的逐段审计：流式段落（JA-262 扫描过的）逐段留痕（审计完整性），聚合留痕与逐段留痕的选择|JA-383 留痕的流式面：逐段留痕成本高（量大），聚合留痕+抽样逐段，与留痕年限策略联动|流式无需留痕|逐段留痕必须全量|留痕只有聚合一种|流式留痕|实战共识
+JA-582|Java AI|工程|健康|端点|健康检查端点分层：应用自身健康（/health）与供应商健康（拨测 JA-273）分开暴露，K8s 探针只看自身|探针设计纪律：供应商抖动不应导致 Pod 重启（探针挂供应商会雪崩重启），与 K8s 探针知识（DF-097）联动|健康检查合并供应商|探针随便配|分层无必要|健康检查设计|实战共识
+JA-583|Java AI|工程|演练|自动化|降级演练自动化：定期自动切流到备供应商（演练窗口），验证+自动切回，人工演练的自动化演进|JA-210 演练的自动化面（混沌工程自动化 DF-076），自动化频率保证降级链"随时可用"，与故障注入平台联动|演练必须人工|自动化演练危险（可控窗口+自动回切）|频率低即可|演练自动化|实战共识
+JA-584|Java AI|工程|配额|突发|突发配额申请流程：大促/活动临时提额（供应商工单提前 N 天），容量保障（MY-092）的供应商面|配额弹性的商务流程（JA-516 合同条款覆盖），临时提额有审批周期，与容量日历联动|配额随时可提|突发提额无需流程|大促不涉及 AI 配额|配额弹性流程|实战共识
+JA-585|Java AI|工程|文档|同步|多语言知识库同步：多语言版本文档的内容同步机制（原文变更→各语言版本待更新清单）|JA-281/217 的运营面：语言版本漂移（不同步）导致检索答案不一致（JA-463），同步机制是知识运营的一部分|多语言版本自动同步|漂移无影响|同步靠人工记忆|多语言知识治理|实战共识
+JA-586|Java AI|评测|偏差|位置|评测的位置偏差控制：few-shot 示例顺序/golden 集排列随机化（位置影响判分与生成）|评估严谨性细节（JA-364 同族）：位置偏差让评测分数不稳定，随机化+多次评测取均值|位置无影响|固定顺序更稳定|偏差无需控制|评测严谨性|实战共识
+JA-587|Java AI|工程|教育|边界|用户教育页：AI 能力边界说明（会出错/知识截止/不适合的场景），降低误用与投诉（JA-396 深化）|预期管理的产品化：边界页+场景示例+反馈入口，与产品合规（JA-554）联动|用户自然理解边界|教育页是装饰|投诉与预期无关|用户预期产品化|实战共识
+JA-588|Java AI|工程|团队|面试|AI 工程师面试考察：不止刷题——评估体系设计（给场景设计评估）、成本权衡（方案题）、失败模式（复盘题），工程判断力优先|JA-342 技能矩阵的招聘面：AI 工程的面试形态与传统 Java 面试差异（本库 AI-060 呼应），招聘定义团队上限|AI 岗面试只考算法|工程判断力无法面试|与传统面试相同|招聘考察设计|实战共识
+JA-589|Java AI|工程|安全|协作|与安全团队协作界面：AI 安全事件上报（JA-520）→安全团队响应，AI 特有风险的知识转移（注入/越权/数据外泄）|安全协作的组织面（JA-408 四方协作的安全支线），安全团队需要 AI 知识输入（红队 JA-465），与安全运营联动|AI 安全工程自己扛|协作界面无需定义|安全团队懂 AI（需要知识转移）|安全组织协作|实战共识
+JA-590|Java AI|工程|应急|切换|供应商事故紧急切换流程：事故确认（JA-273 拨测）→切流决策（自动+人工确认）→验证（评估抽样）→复盘|JA-321 自动降级的人工确认层：自动切流误切的回退预案，紧急流程演练（JA-583），与故障响应联动|紧急切换全自动|人工确认多余|事故切换无需演练|应急响应|实战共识
+JA-591|Java AI|工程|兼容|响应|供应商响应格式变化兼容层：供应商改响应结构（字段增删）时框架适配（adapter 层吸收，业务无感）|JA-284 防腐层的价值验证场景：响应格式变化的适配只改 adapter，回归包（JA-407）验证兼容|供应商响应永远稳定|兼容层是过度设计|格式变化直接改业务|防腐层价值|实战共识
+JA-592|Java AI|工程|质量|基线|质量基线的版本绑定：每个发布版本的评估分数存档（版本-分数历史），回滚决策有据可查|JA-487 基线的存档面：分数历史是"质量账本"，回滚对比（新旧版本分数），与版本管理（JA-402）联动|分数无需存档|基线是当前值|回滚凭感觉|质量账本|实战共识
+JA-593|Java AI|工程|测试|影子库|影子检索库（JA-498/499）的运营：影子库定期与主库 diff（索引质量漂移检测），影子不是一次性|影子基建的持续运营面：影子库长期存在（新策略持续影子验证），diff 报告驱动切换决策|影子库用完即弃|影子与主库一致无需 diff|运营影子成本高无收益|影子运营|实战共识
+JA-594|Java AI|工程|指标|人均|AI 效能人均指标：团队人均维护 AI 功能数/人均处理评估条目，效能度量防"人力无限投入"|AI 工程的效能度量（JA-342 团队面），人均指标识别瓶颈（自动化不足），与效能工程联动|AI 工程不需要效能度量|人均指标无意义|投入人力无上限|效能治理|实战共识
+JA-595|Java AI|工程|成本|单位|单位成本的规模效应：缓存命中率高/批处理占比高→单位成本下降曲线，规模化后经济性改善|JA-417 单位经济的动态面：规模效应让"初期贵后期便宜"，投入决策看曲线斜率，与规模经济联动|单位成本恒定|规模无经济性|初期亏损即放弃|规模效应|实战共识
+JA-596|Java AI|工程|数据|治理|RAG 数据治理组织：知识 Owner 制（每个知识域有负责人对质量负责）+运营（JA-532）+质量门（JA-475），责任到人|知识库质量的组织保障（JA-492/493 的责任面），无 Owner 的知识域是质量黑洞，与数据治理组织联动|知识库无 Owner 概念|质量是平台的责任（Owner 才是第一责任）|责任与质量无关|知识治理组织|实战共识
+JA-597|Java AI|工程|评测|跨域|跨域评估看板：多业务线评估分数横向对比（透明化各域质量），促进内部竞争与最佳实践流动|JA-291 对比表的运营面：跨域对比驱动质量文化（落后域有压力），与中台运营（JA-376）联动|各域质量独立不对比|对比引发不当竞争|看板无价值|跨域质量文化|实战共识
+JA-598|Java AI|工程|体验|流式|流式与非流式的场景分配：聊天类流式（体验）、内部批处理非流式（简单），API 设计按场景暴露两种模式|JA-426 传输选型的产品面：同一能力两种暴露（API 设计），流式接口的客户端复杂度要评估|所有接口都流式|场景无关全流式|非流式是过时设计|接口模式设计|实战共识
+JA-599|Java AI|工程|验收|清单|AI 项目验收清单：功能验收（评估分达 SLO JA-354）+工程验收（JA-525 五项）+文档验收（JA-343 六段）+运营移交（值班/运营日历）|项目交付的完整验收框架（交付≠上线），验收清单防"开发完就散"，与项目治理联动|AI 项目验收看演示|清单是形式主义|运营移交不需要|验收框架|实战共识
+JA-600|Java AI|工程|收束|十批|java-ai 十批收束：600 条覆盖框架双栈/MCP/RAG/Agent/多模态/行业/治理/质量八分支，域知识骨架完成，剩余批次填分支深度与案例|十批次推进的自评估（JA-480 方法论的执行），剩余 115 条的分配计划（薄弱分支加权），与批次管理联动|批次推进无收束|分支深度均匀即可|收束无价值|批次管理|实战方法论
+JA-601|Java AI|行业|物流|单据|物流单据 AI 管线：运单 OCR（JA-431）+结构化抽取+异常件识别（地址缺失/破损描述），单据是物流的数据入口|物流场景特征：单据量大格式杂（手写/打印混合），OCR 后处理链（JA-546）+异常规则双轨，抽取出结构化数据进 TMS|运单处理纯人工|OCR 一次成型|异常识别纯规则|物流场景管线|实战共识
+JA-602|Java AI|行业|传媒|编辑|传媒内容生成工作流：AI 初稿→编辑修改（可编辑反馈 JA-576）→审核（JA-437）→发布，AI 是"初稿机器"而非发布者|传媒场景核心矛盾：时效与质量，AI 初稿把编辑从空白页解放（人审位置 JA-478），产出口径与风格一致性（JA-445）用 few-shot 锚定|传媒内容全自动发布|AI 直接替代编辑|风格无需锚定|内容生产工作流|实战共识
+JA-603|Java AI|行业|保险|理赔|保险理赔材料审核：单据 OCR+条款 RAG（保单条款比对）+欺诈信号识别，分级人审（JA-439）|理赔场景三栈组合：单据理解（多模态）+条款检索（RAG）+审核分级，误赔/错赔代价高→人审强介入（JA-478 责任链）|理赔全自动通过|条款比对靠人工|欺诈识别不需要|保险场景管线|实战共识
+JA-604|Java AI|行业|财务|审核|财务报销/发票审核：发票 OCR 结构化+报销制度 RAG 校验+异常 flagged，财务人力释放到异常处理|财务场景的确定性需求（金额/税号必须准，幻觉零容忍），规则+AI 双轨（AI-078 校验器思想），结构化输出低温（JA-161）|发票识别交给大模型直接输出|制度校验靠人|金额可以容忍幻觉|财务审核设计|实战共识
+JA-605|Java AI|工程|流程|工件|AI 功能六阶段工件清单：需求（ROI JA-027）/设计（架构评审 JA-524）/开发（脚手架 JA-523）/评估（门禁 JA-525）/上线（灰度 JA-294）/运营（runbook JA-416），每阶段有产出物|流程工件化让"走过场"变"留痕迹"，工件模板沉淀复用，与项目管理规范联动|流程无需工件|工件是形式主义|各阶段可跳过|流程工程化|实战共识
+JA-606|Java AI|Spring AI|异常|分类|Spring AI 重试异常分类：TransientAiException（可重试：限流/瞬时故障）与 NonTransientAiException（不可重试：认证/参数/内容策略）|JA-104 异常分层的框架实现面：SDK 已分类，业务按类型分派（不可重试直接告警），框架异常类名要记准|两类异常不区分|全部重试|分类由业务自己判断|框架异常体系|Spring AI 1.0 GA
+JA-607|Java AI|Spring AI|选项|层级|Spring AI 选项三层合并：全局配置（spring.ai.openai.chat.options）→ChatClient 默认（defaultOptions）→调用级（.options），后者覆盖前者|三层覆盖链是参数治理的核心模型（JA-016/336），理解合并顺序才能解释"配置不生效"问题|三层互不覆盖|调用级被全局覆盖|合并顺序随意|选项合并模型|Spring AI 1.0 GA
+JA-608|Java AI|LangChain4j|广度|provider 数|LC4j 的 provider 广度：数十个 provider 模块（OpenAI/Ollama/Anthropic/通义/百川等各有 ChatLanguageModel 实现）|provider 广度是 LC4j 核心卖点（JA-039 对比面），评估 provider 覆盖先查模块清单，新 provider 社区跟进快|LC4j 只有 OpenAI|provider 数量无关紧要|广度与维护质量冲突（有抽象层对冲）|框架广度认知|LangChain4j 1.0
+JA-609|Java AI|工程|指标|GenAI|OTel GenAI 语义约定在框架的落地：观测属性名对齐 gen_ai.* 前缀（模型/token/温度标准属性）|JA-083 GenAI 约定的框架面：Spring AI 观测已按约定命名，跨框架指标可聚合（JA-304 差异的对冲），与 OTel 标准（DF-054）联动|框架观测属性各自为政|gen_ai 前缀是杜撰|约定无落地价值|观测标准化|实战共识
+JA-610|Java AI|提示词|结构|前置指令|输出前置指令技巧："始终以 JSON 开头"类强约束放 prompt 首尾双位置（首尾锚定），提升格式遵循率|模型对首尾内容注意力高（JA-510 中间遗忘），格式锚定双保险（JA-228 宽松解析的前置配合）|格式指令放哪都一样|只需开头锚定|双锚定是过度设计|格式遵循技巧|实战共识
+JA-611|Java AI|提示词|负面|负面示例|prompt 中使用负面示例（"不要输出 X"）效果弱于正面示例（"输出 Y 格式"），负面清单作辅助|模型对"不要"指令遵循弱（训练分布偏正面示例），正面示例优先、负面补充，与 few-shot（JA-443）联动|负面示例最有效|负面与正面等效|负面示例无用|提示词技巧|实战共识
+JA-612|Java AI|提示词|结构|分隔符|prompt 分隔符规范：XML 标签/Markdown 标题/三引号分区（指令/上下文/示例/输入各就各位）|分隔符让模型解析输入结构（JA-225 边界标签的泛化），结构化输入降低注入面与混淆，与格式规范联动|分隔符是装饰|所有内容平铺即可|三种分隔符不能混用|提示词结构规范|实战共识
+JA-613|Java AI|工程|校验|生成器|从 schema 生成 JSR-303 校验器：结构化输出的 schema 与 Java 校验注解同步生成（schema 变更→校验同步）|JA-226 二次校验的自动化：手工维护校验与 schema 脱节，代码生成保证一致，与代码生成工程联动|校验手动维护即可|生成器不必要|schema 与校验天然一致|校验同步自动化|实战共识
+JA-614|Java AI|工程|人设|一致|客服人设一致性：人设 prompt（语气/边界/禁语）+少样本对话锚定+输出扫描（禁语检测），人设漂移检测|角色扮演一致性（JA-558 NPC 同思想在客服域），人设是产品资产（JA-473 库管理），漂移进评估集（JA-179）|人设写在提示词就稳|漂移不存在|人设不需要资产化|人设工程|实战共识
+JA-615|Java AI|RAG|扩展|查询扩展|查询扩展：同义词/上位词扩展（"发货"扩展到"物流/配送"），扩展词表或模型改写，提升召回|单查询召回盲区（术语差异 JA-496），扩展换召回广度，代价是噪声，与混合检索（JA-241）互补|查询原样检索最优|扩展必引入噪声所以不用|扩展词表无法维护|召回扩展技巧|实战共识
+JA-616|Java AI|RAG|进阶|HyDE|HyDE（假设文档嵌入）：让模型先生成假设答案，用假设答案的向量去检索（答案与文档同分布）|查询与文档向量分布错位的解法（问题短答案长），假设文档桥接分布差，代价是每次检索多一次模型调用|HyDE 是检索领域的杜撰词|直接检索总是更好|HyDE 无成本|检索进阶技巧|实战共识
+JA-617|Java AI|RAG|进阶|多跳|多跳检索：复杂问题拆解为多轮检索（检索→中间推理→再检索），迭代直到信息足够|单轮检索解决不了多跳问题（AI-044 GraphRAG 的轻量替代），迭代检索用 Agent 循环（JA-053）承载，成本与精度权衡|单轮检索够用|多跳检索无法实现|迭代无上限|多跳检索设计|实战共识
+JA-618|Java AI|RAG|输出|置信度|检索置信度输出：检索结果带相似度分数，低于阈值的查询走拒答（JA-367），分数进响应供前端展示"依据强度"|置信度透明化让用户判断可信度（AI-011 引用的延伸），分数也是路由依据（JA-466）|检索结果不带分数|分数对用户无意义|阈值只有检索用|置信度透明化|实战共识
+JA-619|Java AI|RAG|注入|排序|注入内容排序：检索片段按重要性重排（最相关放首尾，JA-510 布局工程），而非按检索分数顺序|分数序≠注意力序（中间遗忘），布局策略是免费的精度提升，与上下文预算（JA-223）联动|按分数顺序注入最优|排序无影响|首尾布局无依据|注入布局优化|实战共识
+JA-620|Java AI|RAG|存储|元数据索引|元数据过滤的索引：向量库对高频过滤字段建元数据索引（否则过滤退化为全扫后过滤）|JA-063/187 过滤的性能面：无索引过滤在大库上延迟爆炸，过滤字段设计与检索模式联动|过滤自动有索引|元数据索引不必要|过滤性能与索引无关|过滤性能工程|实战共识
+JA-621|Java AI|RAG|运维|备份|向量库备份与恢复：定期快照（含元数据与索引配置），恢复演练（JA-286）覆盖向量库|向量库是核心数据资产（JA-101 重建成本高），快照+演练让故障可恢复，与备份体系（RD-094）联动|向量库不用备份|重建快照即可（全量重嵌入按成本评估）|恢复不需要演练|向量库灾备|实战共识
+JA-622|Java AI|Agent|工具|日志脱敏|工具调用日志脱敏：工具参数/结果含敏感数据（客户信息）时脱敏落日志（JA-044 的工具面）|工具日志是敏感数据重灾区（参数含身份证/账号），脱敏规则按工具声明，与审计（JA-312）平衡|工具日志全量即可|脱敏只对 prompt|工具日志与隐私无关|工具日志治理|实战共识
+JA-623|Java AI|Agent|模板|任务模板|Agent 任务模板库：常见任务（工单处理/报告生成）的 prompt+工具组合模板化，新任务从模板派生|Agent 任务工程化复用（JA-623 与 prompt 资产库 JA-473 同构），模板带评估基线，派生后回归|Agent 任务每次手写|模板限制灵活性|模板无评估基线|任务工程化|实战共识
+JA-624|Java AI|Agent|拆分|验证|LLM 子任务拆分的质量验证：拆分结果（子任务列表）经规则/小模型校验（覆盖率/依赖闭环），防拆丢需求|拆解质量决定 Agent 上限（AI-057），拆分本身要用评估（拆分评估集），验证不通过重拆或人工|拆分结果直接信任|拆分不需要验证|规则无法验证拆分|拆解质量门|实战共识
+JA-625|Java AI|工程|平台|SLA|平台 SLA 承诺给业务：中台向业务承诺（网关可用性/评估服务时效/工单响应），SLA 是平台与业务契约|JA-384 平台运营的契约面：无 SLA 的平台服务不可信（业务自建回潮），与 DF-056 SLO 联动|平台无需 SLA|SLA 与平台无关|承诺随意定|平台契约|实战共识
+JA-626|Java AI|工程|成本|模式|成本分摊模式细节：按 token 量计费（简单）vs 按功能订阅（业务友好）vs 混合（底保底+用量），模式与业务沟通成本相关|JA-571 showback/chargeback 的模式细化，计费模式影响业务使用行为（计费重则少用），与产品化思路联动|成本分摊只有一种模式|计费模式不影响使用|模式与成熟度无关|计费模式设计|实战共识
+JA-627|Java AI|治理|产权|版权|生成内容版权归属：企业生成内容的使用权条款（供应商条款审读）+生成物版权风险（相似性审查），法务前置|生成内容知识产权是合规盲区（AI-040 的产权面），供应商条款差异大（商用授权），与 JA-554 行业合规联动|生成内容版权自动归企业|条款不用审读|版权风险不存在|生成物产权|实战共识
+JA-628|Java AI|治理|政策|使用规范|企业 AI 使用政策：允许场景/禁止场景（客户数据入 prompt 禁止）/工具审批流程/违规后果，全员宣导|员工使用 AI 的政策面（影子 AI 使用是企业风险），政策+技术管控（网关阻断未审批渠道），与安全政策联动|员工使用无需政策|政策写完即可（宣导与审计配套）|影子 AI 无风险|使用政策治理|实战共识
+JA-629|Java AI|治理|培训|计划|员工 AI 培训计划：分层（工程师/业务/管理）培训（能力边界/prompt 技巧/安全红线），培训进入职必修|JA-342 技能矩阵的培训面：能力断层用培训补（JA-342 呼应），红线培训是合规要求（JA-628），与 HR 联动|员工自学即可|培训是形式主义|分层培训没必要|培训体系|实战共识
+JA-630|Java AI|治理|审计|响应|监管审计响应准备：AI 系统的数据流向图（JA-409）/留痕体系（JA-383）/模型卡（JA-405）随时可调取，问询响应预案|监管问询的备战（JA-551 强监管行业必答题），资产齐备则响应快，与合规演练联动|监管问询不会发生|响应时再准备|资产分散无碍|审计备战|实战共识
+JA-631|Java AI|案例|缓存|复盘|案例复盘：缓存命中率从 5% 到 45% 的路径——前缀稳定化（system 抽公共部分）→语义缓存上线（JA-151）→阈值调优，月成本降 30%|复盘案例的叙事模板：问题→动作（按收益排序）→数据→教训（前缀纪律早期没做），案例进案例库（JA-527）|缓存优化无路径可循|一步到位|教训无价值|缓存优化案例|实战共识
+JA-632|Java AI|案例|质量|救火|案例复盘：RAG 质量突降救火——供应商静默更新嵌入模型导致召回崩（JA-392 抓住），影子索引回滚（JA-499），教训=嵌入模型版本锁定+每日拨测|RAG 突降的经典根因（嵌入模型换代），回滚靠影子索引基建（平时建设），教训固化为检查单|嵌入模型不会变|突降只能忍|复盘无产出|RAG 救火案例|实战共识
+JA-633|Java AI|案例|成本|失控|案例复盘：成本一夜 3 倍——新功能死循环调用（JA-276 步数上限缺失），预算熔断（JA-279）止损，教训=Agent 上线强制步数上限+成本回归（JA-528）|成本失控的典型根因（循环无界），止损靠熔断（平时配置），教训进准入检查单（JA-525）|成本失控是 rare 事件|步数上限可选|复盘无法止损|成本失控案例|实战共识
+JA-634|Java AI|案例|安全|串号|案例复盘：上下文串号事故——并发会话共享 ChatMemory 实例（JA-097 防线缺失），用户 A 看到用户 B 数据，教训=隔离测试用例（JA-208）+review 清单（JA-285）|串号是最严重事故类型（数据泄露），根因是并发设计错误（非 AI 特有），修复+测试+流程三件套|串号不会发生|事故后只修代码|流程改进无必要|串号事故案例|实战共识
+JA-635|Java AI|案例|演练|供应商|案例复盘：供应商区域故障演练——拨测告警（JA-273）30 秒发现→自动切流（JA-321）→抽样评估（JA-582 验证）→切回，全程无人工|成功演练的要素：监控/自动/验证三链路（每环节平时建设），演练报告进预案更新，与混沌工程（DF-076）联动|供应商故障必人工处理|自动切流不安全|演练无产出|供应商演练案例|实战共识
+JA-636|Java AI|案例|升级|框架|案例复盘：Spring AI 1.0 升级——starter 重命名（JA-066）/functions→tools（JA-049）/默认模型变化，回归包（JA-407）全绿后灰度|框架升级案例的要点：checklist（JA-211）+回归包执行（自动化），升级收益（新能力）与风险（默认行为变化）平衡|框架升级无案例可学|直接升级即可|回归包是可选|框架升级案例|实战共识
+JA-637|Java AI|工程|容量|水位|LLM 配额水位管理：RPM/TPM 使用率水位线（70% 告警 85% 行动），水位数据来自网关（JA-336）|配额水位是容量管理（MY-082 的 AI 面），水位线驱动的动作（扩配额/分流），与容量预测（JA-514）联动|配额用到满才处理|水位管理不必要|水位数据无法获取|配额水位|实战共识
+JA-638|Java AI|工程|观测|关联|AI 指标与业务指标关联分析：成本/质量指标与业务转化率关联（回答质量提升→转化变化），AI 投入的业务回报验证|JA-417 单位经济的关联面：技术指标与业务指标打通（大盘关联），ROI 动态验证，与数据分析联动|技术指标与业务无关|关联分析无价值|ROI 一次性算|指标关联分析|实战共识
+JA-639|Java AI|工程|架构|事件驱动|AI 能力事件化：模型调用结果发布事件（供下游消费——审计/缓存/评估采样），事件驱动解耦横切关注|同步调用与事件发布的双轨（审计/缓存走事件异步），与事件驱动架构（JA-045 Spring 事件/MQ-001）联动|AI 调用只能同步消费|事件化是过度设计|横切关注在调用点硬编码|事件驱动架构|实战共识
+JA-640|Java AI|工程|质量|温度|温度与幻觉率的关系：低温降低幻觉率（确定性采样），事实型任务低温是幻觉防线之一（JA-161 的质量面）|幻觉的参数面缓解：低温+RAG+拒答（JA-367）组合拳，温度是第一道（成本最低），与幻觉治理知识联动|温度与幻觉无关|高温更准确|幻觉只靠 RAG 解决|温度与质量|实战共识
+JA-641|Java AI|工程|架构|API|对外 AI API 设计要点：流式开关/幂等键（JA-467）/超时声明/配额头（剩余量）/错误码规范，API 即产品|对外 AI API 与内部调用差异（契约/配额/SLA 显式化），与 REST 设计规范联动，网关强制（JA-317）|AI API 随便设计|对外与内部一样|契约不需要声明|API 产品化|实战共识
+JA-642|Java AI|工程|测试|soak|长稳测试（soak test）：AI 链路 24-72 小时持续跑（低流量），抓内存泄漏/连接泄漏/句柄泄漏|长稳问题短测抓不到（SSE 长连接/JA-535 连接面），泄漏在小时级才显现，与 soak 测试实践联动|功能测试覆盖一切|长稳测试不必要|泄漏不存在于 Java（连接池泄漏真实存在）|长稳测试|实战共识
+JA-643|Java AI|工程|配置|分层|AI 配置分层架构：供应商配置（key/base-url）/行为配置（温度/模型）/业务配置（prompt 版本/路由规则）三层分文件分权限|配置分层与权限分离（供应商密钥只有平台可改），变更频率不同层不同（密钥低频 prompt 高频），与配置治理（DF-106）联动|配置一个文件全放|分层是过度设计|权限与配置无关|配置架构|实战共识
+JA-644|Java AI|工程|指标|归因|延迟归因四象限：网关延迟/供应商延迟/业务逻辑延迟/前端渲染延迟，trace 树（JA-596）拆解各占|JA-592 的延迟版：分位数据按四象限拆解，优化目标明确（最大项优先），与性能优化方法论联动|延迟归因靠猜|四象限无法拆解|只优化模型延迟|延迟归因|实战共识
+JA-645|Java AI|工程|安全|数据|prompt 数据分级处理：不同密级 prompt（含用户数据 vs 公开）走不同模型与日志策略（JA-380 矩阵的运行时面）|密级在运行时的执行（不是纸面制度）：密级标签随请求流转，路由与日志策略按标签分派，与数据分级（JA-380）联动|prompt 密级无运行时面|全部同策略处理|标签无法流转|密级运行时|实战共识
+JA-646|Java AI|工程|架构|网关内聚|网关内部模块：协议层/策略层（限流/鉴权）/路由层/供应商适配层，四层内聚各可独立测试|JA-317 六职责的模块化落地，层内高内聚层间低耦合，与分层架构（DF-081）联动|网关单体一把梭|四层划分是过度设计|模块不可独立测试|网关内部架构|实战共识
+JA-647|Java AI|工程|观测|维度|观测维度全景：租户/业务/模型/区域/环境五维标签体系（所有指标带五维），多维切片分析|标签体系是观测的地基（JA-277/091 的统一），五维切片回答"谁在用/用什么/哪里慢"，与标签设计规范联动|观测只有时间维度|五维过多|标签体系无需设计|观测维度体系|实战共识
+JA-648|Java AI|工程|演进|自动化|运维自动化演进：手动处理→runbook 脚本化→自动处置（限流/切流自动执行），人工只审批异常|JA-583 演练自动化的推广（运维成熟度阶梯），自动化范围逐步扩大（审批保留在关键动作），与 AIOps 思想联动|运维永远手动|自动化一步到位|审批是多余|运维成熟度|实战共识
+JA-649|Java AI|工程|架构|多活|AI 服务多活架构：网关多活（无状态易多活）+语义缓存多活（数据同步）+配额全局协调（分布式计数），供应商本身多区|AI 层多活比 DB 多活简单（无强一致状态），配额全局协调是唯一难点（Redis 集群 JA-033），与异地多活（DF-058）联动|AI 服务不需要多活|多活与单活无区别|配额协调不是难点|AI 多活架构|实战共识
+JA-650|Java AI|工程|质量|防回归|防回归的"三道闸"：提交时单测（快）→发布时评估集（准）→上线后影子（真），三道闸各防一类回归|JA-407/407 分层闸门的组织化，三道闸漏一道就有回归漏网，与质量左移思想联动|一道闸足够|三道闸是重复劳动|闸门与质量无关|质量闸门体系|实战共识
+JA-651|Java AI|工程|面试|场景题|AI 场景题答题模板：澄清（场景/约束）→方案骨架（JA-238 分层）→关键技术点（RAG/工具/降级）→风险与治理（JA-413）→演进（JA-419），五步骨架|场景题（P10 必考）的结构化回答（DF-099 答题框架的 AI 版），每步带本域事实锚点，与答题方法论联动|场景题自由发挥|模板限制思路|澄清步骤可省|场景题框架|实战方法论
+JA-652|Java AI|工程|面试|追问|AI 追问应对地图：成本怎么降（四招）→质量怎么保（评估）→安全怎么做（五层）→失败怎么办（降级）→规模怎么扩（多活），高频追问五连|JA-651 场景骨架的追问预判（每个骨架点对应一组追问），追问地图让答题有纵深，与 MY 复习主线同构|追问无法预判|只答表面即可|地图背不下来|追问应对框架|实战方法论
+JA-653|Java AI|工程|评估|成本|评估本身的成本控制：评估集抽样分层（核心全量/长尾抽样）、judge 批处理、结果缓存，评估成本的工程化|评估不是免费（JA-539 测试预算），成本控制让评估可持续跑（CI 日跑），与评估运营（JA-471）联动|评估成本忽略不计|全量日跑最准（成本不可持续）|成本控制牺牲质量|评估成本工程|实战共识
+JA-654|Java AI|工程|工具|内部|内部 AI 工具平台：业务自助创建 AI 功能（模板+配置化），平台审核发布，长尾需求自助化|中台产品化终点（JA-384 平台价值兑现）：自助化释放平台人力，模板（JA-623）是自助的载体，与低代码思想联动|内部工具平台无必要|自助化质量不可控|平台人力无限|自助化平台|实战共识
+JA-655|Java AI|工程|数据|标注|标注外包与内包选择：敏感数据内包（合规）、通用数据外包（成本），标注平台与质检流程（JA-477）|标注的组织与成本决策（JA-477 的资源面），敏感边界清晰（JA-380 矩阵），与外包管理联动|标注全部外包|选择与合规无关|质检流程可省|标注资源策略|实战共识
+JA-656|Java AI|工程|演进|模型层|模型层能力自建的演进判断：调 API→网关→自部署开源模型→自训练，每步的成本/能力/团队门槛跃迁|JA-060 Java 定位的深度面：自建模型层的门槛评估（数据/算力/人才），多数企业停在网关+微调，与 AI-078 定位联动|自训练是必经之路|演进无门槛差异|一直调 API 最好|模型层演进|实战共识
+JA-657|Java AI|工程|风险|合规|跨境数据合规细节：模型调用数据的出境评估（数据含用户数据出境合规）、网关区域路由（JA-267）落地证据|数据出境是法务硬要求（JA-551 行业叠加），技术证据（路由日志）支撑合规声明，与合规审计（JA-630）联动|出境合规与工程无关|路由即合规（还需证据链）|评估一次性|跨境合规细节|实战共识
+JA-658|Java AI|工程|知识|边界|AI 知识地图的边界意识：框架/协议/管道快速演进（本域事实半年半衰期风险），复习锚定"原理与模式"而非"API 细节"（API 以官方文档为准）|知识半衰期的诚实认知（JA-060 版本锚定的原因），记忆策略：模式入脑、API 查文档，与学习方法论联动|所有知识同等记忆|API 细节要背|半衰期不影响学习|知识保鲜策略|实战方法论
+JA-659|Java AI|工程|主线|收束|java-ai 域答题主线收束：选型→管道→可靠性→成本→安全→评估→组织，七环覆盖本域全部事实（JA-180/360/420 地图的组织化）|七环主线是面试与实战的检索结构（每环挂矩阵行），与 JA-651 场景模板衔接，与知识地图收束（JA-600）联动|主线只有技术环|七环无逻辑顺序|收束无价值|域主线定稿|实战方法论
+JA-660|Java AI|工程|交接|下一域|java-ai 收尾与 agent-dev 衔接：本域管"框架与工程"，agent-dev 域管"Agent 设计模式/编排/评测/安全"（分工：JA-254 边界的展开），两域矩阵互引|域间分工清晰防重复（JA-054 划界的组织化），互引标注（跨域链接），与知识库设计联动|两域内容重复没关系|agent-dev 是 java-ai 子集|无需分工|域间衔接|实战方法论
+JA-661|Java AI|质量|自愈|prompt 自愈|prompt 自愈机制：评估发现的失败样本自动归因（缺失约束/格式漂移），生成候选改写重测，改优后人工确认上线|prompt 迭代的手动瓶颈（JA-442 自动搜索的进阶），自愈是"评估驱动改进"的自动化，人工确认保留兜底|prompt 自愈全自动上线|自愈不可能实现|自愈与评估无关|prompt 自愈设计|实战共识
+JA-662|Java AI|工程|交互|压缩与缓存|prompt 压缩与供应商缓存命中的冲突：压缩改变前缀破坏缓存命中，两者收益互斥需权衡|JA-269 压缩与 JA-279 prompt cache 的交互冲突：压缩省 token 但丢缓存折扣，按量测数据决策（压缩后净成本）|压缩与缓存可兼得|冲突不存在|永远选压缩|两者权衡|实战共识
+JA-663|Java AI|多模态|预算|统一|多模态与文本 token 预算统一管理：图像 token 折算后与文本同池预算（一个请求的总预算视图）|JA-223 预算分配的多模态版：图像占预算大（JA-541 分块），统一视图才能做取舍（减图 or 减文本）|图像与文本预算分开管|统一预算无必要|图像不计入预算|统一预算管理|实战共识
+JA-664|Java AI|评测|对比|成对评测|成对评测（pairwise）：同 query 两版本回答让 judge 选优，比独立打分更稳（判别比打分容易）|LLM judge 的两种范式：绝对打分（JA-651 细则）vs 相对比较（更可靠），成对结果换算胜率（Elo 类），评估严谨性进阶|成对评测不存在|独立打分更准|成对无法量化|成对评测设计|实战共识
+JA-665|Java AI|评测|工程|评估即代码|评估即代码：评估集/判分 prompt/阈值全部进仓库版本管理，评估 CI 化（与代码同 PR 流程）|JA-058/407 的工程化收束：评估资产与代码资产同纪律（评审/变更/回滚），"评估是脚本"到"评估是资产"的跃迁|评估脚本放本地即可|评估与代码流程无关|评估即代码是过度设计|评估工程化|实战共识
+JA-666|Java AI|RAG|个性化|气泡|检索气泡（filter bubble）风险：个性化检索（JA-579）让用户只见偏好内容，信息窄化（产品伦理问题）|个性化的负外部性：加多样性约束（强制注入非偏好域内容），与推荐系统气泡同构，产品价值观问题|个性化无副作用|气泡风险不存在|多样性约束是伪需求|个性化伦理|实战共识
+JA-667|Java AI|RAG|延迟|预算|检索延迟预算：向量库 P99 必须显著小于整体 RT 预算（检索是 RT 的子项），超预算的检索降级（topK 减半）|JA-166 分级超时的组件化：检索有自己的预算与降级动作，与 DF-028 预算传递联动|检索延迟不用管|检索 P99 无预算|降级只对模型|检索预算|实战共识
+JA-668|Java AI|RAG|治理|TTL 归档|知识内容生命周期自动治理：时效标签（JA-494）驱动 TTL 归档（过期内容转归档库不出检索）|过期知识自动退出检索（JA-248 衰减的硬治理版），归档可查（合规）不参与检索，与 MY-107 冷热分离联动|过期知识自动消失|TTL 归档不需要|归档内容仍参与检索|知识生命周期自动化|实战共识
+JA-669|Java AI|RAG|隔离|保护|多租户检索资源保护：大租户重查询降级（topK 动态缩减）保护小租户延迟，租户级检索限流|共享向量库（JA-249）的公平性：大租户查询放大（宽 topK）拖垮全库，租户级配额（JA-206 思想延伸到检索）|向量库查询天然公平|大租户不影响他人|检索限流无必要|检索公平性|实战共识
+JA-670|Java AI|RAG|评测|对抗|golden set 对抗增强：加入对抗性查询（同义改写/错别字/口语化/多语言混杂），检索在"脏查询"下的鲁棒性评测|干净查询评测掩盖真实分布（用户查询是脏的 JA-496），对抗样本让评估贴近线上，与注入评估（JA-156）同思想|干净查询评测足够|脏查询评测无价值|对抗样本只测安全|检索鲁棒性评测|实战共识
+JA-671|Java AI|Agent|工具|评审清单|Agent 工具评审四查：描述质量（JA-108）/幂等性（JA-218）/超时设置（JA-275）/权限边界（JA-235），新工具上线四项全过|工具上线的质量门（工具是 Agent 的"API"），四查清单化（与 MY-110 检查单同构），清单进 review 模板|工具上线即用不评审|四查是形式主义|清单与工具无关|工具质量门|实战共识
+JA-672|Java AI|Agent|能力|主动放弃|Agent 的"不作为"能力：允许模型决定不调用工具（直接回答或说明无法完成），强制调用会逼出错误工具使用|工具不是越多调用越好（误用工具比不用更糟），放弃能力是成熟 Agent 标志（判断是否需要工具），与幻觉工具调用防线联动|Agent 必须每步调工具|不作为是失败|放弃能力无法实现|Agent 决策成熟度|实战共识
+JA-673|Java AI|Agent|记忆|读取重排|长期记忆读取也要重排：向量召回的记忆条目经相关性重排（与 RAG 重排 JA-102 同构），记忆检索质量决定"人设连贯"|长期记忆是二次 RAG（记忆库=特殊知识库），召回排序差则 Agent"健忘/记错"，重排同样适用|记忆召回按原样使用|记忆检索不需要重排|记忆质量无关紧要|记忆检索质量|实战共识
+JA-674|Java AI|Agent|观测|跨 Agent|跨 Agent trace 延续：父 Agent 调子 Agent 的 trace 串联（子 Agent span 挂父 span），多 Agent 全链路可追|多 Agent 观测（JA-258/373）：trace 树跨 Agent 边界延续（DF-053 分布式追踪思想），观测断裂=多 Agent 黑盒|各 Agent trace 独立无法串|跨 Agent 追踪不存在|串联成本高无价值|多 Agent 可观测|实战共识
+JA-675|Java AI|Agent|预算|资源池|Agent token 预算池按任务隔离：每任务独立预算池（超限熔断），任务间互不挤占|JA-276 步数上限的资源版：步数防循环、预算池防成本，双重防线，预算池与租户预算（JA-461）联动|任务共享全局预算|预算池无必要|池隔离影响效率|任务级预算|实战共识
+JA-676|Java AI|Agent|输出|证据链|Agent 输出附证据链：结论+支撑证据（工具结果片段/引用），结论与证据可点对核对|Agent 输出的可信度设计（AI-011 引用思想的 Agent 版），无证据的结论标注低可信，与审计（JA-219）联动|Agent 输出不需要证据|证据链无法自动生成|结论与证据分离输出|可信输出设计|实战共识
+JA-677|Java AI|Agent|体验|进度|长任务阶段汇报：Agent 每完成阶段发进度事件（已完成/进行中/预计剩余），用户可中途干预|长任务的可感知性（JA-425 多路流的应用），进度事件协议化（阶段/百分比/摘要），无进度=用户流失|长任务黑盒即可|进度事件无价值|汇报增加成本|进度感知设计|实战共识
+JA-678|Java AI|Agent|失败|分类|Agent 失败三分类：工具失败（外部依赖）→重试/换工具；规划失败（步骤错）→重规划；验证失败（结果不对）→回炉，分类驱动恢复策略|JA-505 补偿的精细化前置：不同失败恢复动作不同（与 MY-082 分级同思想），失败分类先于恢复设计|Agent 失败统一重试|三分类是过度设计|失败原因无法判别|失败分类学|实战共识
+JA-679|Java AI|Agent|人审|提权|Agent 权限提升请求流程：任务需要超出当前授权的工具时，Agent 发起提权请求（人工批准后临时授权）|JA-679/259 人审的权限面：不是预先给全权限而是按需申请（最小权限动态版 JA-500），请求留痕审计|Agent 预配全权限|提权流程不存在|临时授权无风险|按需授权|实战共识
+JA-680|Java AI|Agent|评测|套件|Agent 评测回归套件组织：按任务类型分套件（工单套件/报告套件），工具 mock 剧本随套件，回归按变更影响跑对应套件|Agent 评测的组织（JA-212/680 深化）：套件化让回归可选择性执行（CI 成本控制），与回归包（JA-407）联动|Agent 评测一个套件全跑|套件划分无意义|mock 剧本无价值|评测套件化|实战共识
+JA-681|Java AI|网关|适配|请求重写|网关请求重写：供应商特有参数适配（同一语义参数名不同），应用免感知供应商差异|JA-318 兼容层的参数面：协议兼容不止消息结构还有参数映射，重写规则配置化|参数名全行业统一|重写不需要配置|应用自己适配参数|参数适配|实战共识
+JA-682|Java AI|网关|健康|探测|网关对上游的失败率探测：按供应商维度滑动窗口错误率，超阈标记不健康（路由降权的输入）|JA-321 降级路由的探测数据面：健康标记是路由决策的实时输入，与拨测（JA-273）互补（被动+主动）|路由不依赖健康探测|探测与路由无关|失败率无法按供应商统计|健康探测|实战共识
+JA-683|Java AI|网关|发布|自身灰度|网关自身升级灰度：网关实例分批升级（新旧并存），配置兼容性先行，回滚容易|网关是关键路径（JA-325 HA），自身升级也要灰度（升级引发故障=全站 AI 不可用），与发布纪律联动|网关升级直接全量|灰度与网关无关|配置兼容可事后修|网关发布纪律|实战共识
+JA-684|Java AI|网关|配置|即代码|网关配置即代码：路由/配额/降级规则进 Git 版本管理，变更走 PR 评审+自动生效|网关配置治理（JA-652 配置漂移的根治）：配置与代码同纪律，回滚=回 PR，与 IaC 思想联动|网关配置后台手改|即代码是过度设计|配置不需要评审|网关配置工程|实战共识
+JA-685|Java AI|网关|协议|多协议|网关多协议并存：OpenAI 协议（主流）+Anthropic 协议+MCP 协议三协议对外暴露，按客户端选择|JA-318 兼容层的多协议面：不同客户端说不同协议（网关统一翻译），协议矩阵是网关能力表|网关只有 OpenAI 协议|多协议无必要|协议间不能互通|协议矩阵|实战共识
+JA-686|Java AI|网关|路由|成本|成本感知路由：同一能力等级路由到单价更低的供应商（价格表驱动 JA-264），质量基线约束下省成本|JA-232 分级路由的细化：同档多供应商按价选（质量约束），路由引擎读价格配置动态决策|路由只看质量|成本路由损质量|价格与路由无关|成本路由|实战共识
+JA-687|Java AI|网关|缓存|租户隔离|网关级缓存的租户隔离：缓存键含租户维度（防跨租户命中泄露数据）|JA-155 缓存键的多租户补充：语义缓存（JA-151）的键必须含租户（相似问题不同租户答案可能不同且隐私隔离），与 RD-067 key 规范联动|缓存键无需租户|跨租户命中无风险|租户维度可选|缓存租户隔离|实战共识
+JA-688|Java AI|网关|审计|标准化|网关审计事件标准化输出：结构化审计事件（ who/when/what/cost/result）对接 SIEM/审计平台|JA-322 审计的标准化面：事件 schema 固定（下游免解析适配），与安全日志（JA-520）联动|审计日志自由格式|标准化无必要|审计只给自己看|审计标准化|实战共识
+JA-689|Java AI|缓存|语义|误答监控|语义缓存误答监控：抽样命中缓存的回复与重新生成对比（一致性抽检），误答率超阈收紧阈值|语义缓存的风险面（JA-050 相似≠等价）：误答率是核心健康指标，抽检自动化（JA-264 成本可控）|语义缓存命中即正确|误答无法检测|阈值一次设定永久|语义缓存质量|实战共识
+JA-690|Java AI|缓存|失效|传播|语义缓存失效传播：知识库更新（JA-668）时清受影响域的语义缓存（旧答案残留=脏），按域标签清|缓存与知识一致性（JA-456 的语义缓存版）：全清简单但昂贵，按域标签精准清，与失效传播思想联动|语义缓存永不过期|全清是唯一方案|精准清不可实现|失效传播|实战共识
+JA-691|Java AI|缓存|成本|嵌入|语义缓存自身的嵌入成本：查询向量化是缓存检查的前置成本（高频查询向量化开销可观），嵌入结果缓存（JA-578）配套|语义缓存不是零成本（JA-578 嵌入缓存的联动面），净收益=省的调用-嵌入成本，与成本核算（JA-290）联动|语义缓存零成本|嵌入成本可忽略|净收益不用算|缓存净收益|实战共识
+JA-692|Java AI|缓存|阈值|分级|语义缓存阈值分级：高阈值（严格相似，用于敏感场景）与低阈值（宽松，用于闲聊）按场景分池|JA-050 阈值权衡的场景化：一个阈值服务所有场景必然错配，分级池配置，与场景分级（JA-319）联动|全局单一阈值最优|分级是过度设计|场景与阈值无关|阈值分级|实战共识
+JA-693|Java AI|嵌入|服务化|横向|嵌入服务化：embed 独立服务横向扩展（嵌入是 CPU/GPU 密集计算，与 chat 分离部署）|嵌入与 chat 的部署分离（JA-075 配置分离的部署面），批量入库（JA-100）打满嵌入服务不影响 chat，与舱壁（DF-027）联动|嵌入与 chat 同服务|嵌入无法横向扩展|分离部署是过度设计|嵌入部署架构|实战共识
+JA-694|Java AI|向量|运维|容量|向量库容量监控：内存使用/分片均衡/查询延迟 P99 三指标，容量预警（JA-086 内存估算联动）|向量库是核心依赖（JA-621 备份对象），容量与健康监控（JA-694 与 MY-082 同思想），预警先于故障|向量库无需监控|内存是唯一指标|预警与容量无关|向量库运维|实战共识
+JA-695|Java AI|向量|扩展|读写分离|向量库读写分离：写入（入库管道）与查询（在线检索）分离部署，批量入库不打垮在线检索|JA-100 批量入库的资源隔离（舱壁思想的存储版），pgvector 读副本/Milvus 分组，与读写分离知识联动|向量库单实例读写|读写分离不必要|批量入库不影响检索|读写分离|实战共识
+JA-696|Java AI|向量|分片|租户|向量库按租户分片：大租户独立 collection/分片，小租户共享，与 JA-249 隔离选型的分片实现面|分片是隔离的存储实现（JA-249 选型的落地），collection 级隔离（pgvector schema/Milvus collection），与分片治理联动|所有租户同 collection|分片无法实现|隔离与存储无关|租户分片实现|实战共识
+JA-697|Java AI|RAG|答案|版本|RAG 答案附知识版本：回答标注"基于知识库 vX（更新时间）"，答案可追溯知识状态|JA-490 快照的用户面：答案与知识版本绑定（可解释"为什么这么答"），审计与争议处理有据|答案无需标注版本|版本对用户无意义|追溯不需要绑定|答案可追溯|实战共识
+JA-698|Java AI|RAG|评估|批量|RAG 离线批量问答：评估流水线（golden set 批量跑全链路）与数据修复后全量回归（JA-361 的流水线化）|评估从手工单条到批量流水线（并行跑+结果聚合+分域报告），数据修复（JA-492）后的回归自动化，与 CI 集成（JA-665）联动|评估逐条手工跑|批量流水线不必要|回归不需要自动化|评估流水线|实战共识
+JA-699|Java AI|RAG|重排|预算|rerank 调用预算：重排模型的调用量（每次检索 topN 候选）单独计量与配额，rerank 是隐藏成本项|JA-102 重排的成本面：重排模型按候选数计费，高频检索场景成本可观，预算与配额管理（JA-461）联动|重排免费|成本只算生成模型|预算只管 chat|重排成本|实战共识
+JA-700|Java AI|RAG|组合|检索+工具|RAG 与工具混合回答：检索拿"文档知识"+工具拿"实时数据"（库存/价格）联合生成，路由决定用哪个或都用|RAG（静态知识）与工具（动态数据）的分工（JA-700 组合范式），Agent 框架天然支持（JA-053），按问题类型路由|RAG 与工具互斥|全走工具最准|路由不需要|RAG+工具组合|实战共识
+JA-701|Java AI|评测|漂移|归因|评估漂移三维归因：分数变化拆解为模型漂移（供应商更新）/数据漂移（语料变化）/配置漂移（prompt 改动）三个控制变量实验|JA-347/392 漂移的归因方法：控制变量重跑（JA-572 方法论），三维归因定位真因，与实验纪律联动|漂移归因靠猜|三维无法拆解|实验成本高（抽样可控）|漂移归因|实战共识
+JA-702|Java AI|评测|采样|分层|评估抽样策略随错误率自适应：错误率高时全量细查，错误率低时抽样维护，资源按风险分配|JA-204 抽样的自适应版：固定比例不经济（稳定期浪费/风险期不足），自适应比例，与风险驱动思想联动|固定比例抽样最优|自适应无法实现|抽样与风险无关|自适应抽样|实战共识
+JA-703|Java AI|评测|AB|成本维|A/B 实验的成本维度：两版本 token 成本对比进实验报告（质量赢了但成本翻倍要权衡）|实验不只看质量（JA-271 的成本维），成本差异是决策维度（JA-403 帕累托），与预算治理（JA-461）联动|A/B 只看质量|成本与实验无关|报告不需要成本|实验成本维度|实战共识
+JA-704|Java AI|评测|指标|采纳|采纳率与满意度的差异：采纳（直接用）≠满意（体验好但没用上），两指标背离时分别归因|JA-289 指标的语义辨析：采纳是行为、满意是态度，背离说明"好但不适用"或"有用但难用"，指标语义辨析能力|两指标等价|背离无意义|只看采纳即可|指标语义|实战共识
+JA-705|Java AI|工程|观测|膨胀|prompt 长度膨胀监控：prompt 平均长度趋势（需求堆积让 prompt 越来越长），长度警戒线与瘦身触发|JA-062 瘦身的触发机制：长度趋势是"prompt 腐化"信号（每加一条规则），定期瘦身（JA-163 度量闭环），与腐化治理联动|prompt 只加不减是常态|长度无需监控|膨胀无风险|prompt 腐化治理|实战共识
+JA-706|Java AI|工程|团队|走查|每周质量走查会：抽样本周 badcase 集体评审（根因+修法+评估集回流），质量文化制度化|JA-518 分享的专项化：badcase 走查让全员对齐质量标准（JA-179 回流的会议化），与质量文化联动|走查会是形式主义|badcase 个人处理即可|会议无产出|质量文化机制|实战共识
+JA-707|Java AI|数据|契约|供给|知识库供给方 SLA：业务方承诺语料质量/更新时效/格式规范（数据契约），违反契约的语料拒绝入库|JA-707 数据契约：上游对下游的数据质量承诺（DF 数据契约思想），质量门（JA-475）+契约双保险|语料来者不拒|契约是形式主义|上游无责任|数据契约|实战共识
+JA-708|Java AI|RAG|健康|零结果|检索零结果率监控：查询无任何命中的比例（超阈告警），零结果=知识缺口或检索故障|检索健康度核心指标（JA-496 缺口发现的运行时版），零结果突增=知识库故障或新需求，与告警体系联动|零结果是正常现象|零结果率无监控价值|告警与检索无关|零结果监控|实战共识
+JA-709|Java AI|RAG|归因|零结果|零结果率根因四分：分词差异/术语缺口（知识真没有）/权限过滤（被权限挡了）/检索故障，四分归因决定行动|JA-708 的归因面：四类根因四种行动（扩词表/补语料/查权限/修检索），与 badcase 归因（JA-365）同构|零结果都是知识不够|四分无法实现|行动只有补语料|零结果归因|实战共识
+JA-710|Java AI|RAG|产品|改写透明|查询改写透明化：改写后的查询展示给用户（"已将您的查询理解为..."），用户可纠正（纠正=高质量反馈 JA-576）|JA-082 查询改写的产品面：透明化建立信任+获取纠偏信号，纠正是用户参与检索质量的建设，与可编辑反馈（JA-576）同构|改写对用户隐藏|透明化降低体验|纠正无价值|改写透明化|实战共识
+JA-711|Java AI|RAG|评测|多轮|多轮 RAG 指代消解评测：评估集含多轮对话（"它怎么退款"指代前文订单），评测改写+检索的端到端正确率|多轮 RAG 的专项评测（JA-082 QueryTransformer 的验证），单轮评测掩盖多轮短板，评测集覆盖对话形态|单轮评测代表一切|指代消解无需评测|多轮场景不存在|多轮评测|实战共识
+JA-712|Java AI|RAG|评测|多语言|多语言检索评测集：跨语言查询（中文问英文文档）与多语言文档的检索评测，验证跨语言召回（JA-281）|多语言检索的评测覆盖（JA-216/281 联动），跨语言能力实测而非宣传，评测集按语言对组织|跨语言检索天然可用|多语言评测不必要|只测中文即可|多语言评测|实战共识
+JA-713|Java AI|RAG|评测|证据|长文档 QA 证据抽取评测：期望答案+期望证据片段（evidence），评测"答案对+证据对"双命中|证据级评测（比答案级更严，JA-361 golden 的细粒度版），防"答案对但证据错"的侥幸正确，与 faithfulness（JA-363）互补|答案对了就行|证据评测不必要|双命中无法实现|证据级评测|实战共识
+JA-714|Java AI|RAG|知识|案例库|RAG 案例库沉淀：检索优化案例（改切分/换模型/调路由的前后对比）入库可查，优化经验复用|优化经验资产化（JA-527 案例库的 RAG 专版），新场景优化先查案例库，与知识管理联动|优化经验不沉淀|案例库无复用价值|经验靠口口相传|RAG 案例资产|实战共识
+JA-715|Java AI|工程|收官|域定稿|java-ai 域 715 条收官：域地图定稿（框架双栈/MCP/RAG/Agent 基础/多模态/行业/治理/质量八分支），交接 agent-dev 域（Agent 设计模式/编排/评测/安全专域，JA-660 分工）|域完成的定义：地图分支全覆盖+面试破 5000（JA-659 主线挂满矩阵行），收官清单核对后进入下一域，与批次管理（JA-600/480）联动|域无"完成"概念|收官不需要清单|地图分支可有缺口|域收官管理|实战方法论
+JA-716|Java AI|工程|架构|Saga 借鉴|Agent 多步任务的 Saga 借鉴：每步可回滚设计（工具操作前记录可逆状态），失败沿补偿链逆放|Agent 步骤与 Saga 事务同构（JA-505 补偿的架构化），可逆设计让失败恢复优雅，与分布式事务知识联动|Agent 步骤不可逆是必然|Saga 与 Agent 无关|回滚不需要设计|可逆架构|实战共识
+JA-717|Java AI|工程|观测|成本偏差|成本观测的偏差检测：单次成本突增（prompt 膨胀/模型变更）自动告警，成本异常当故障处理|JA-462 成本观测的告警面：成本异常是故障（JA-633 案例），偏差检测自动化（基线对比），与告警体系（JA-526）联动|成本异常不用告警|偏差无法自动检测|成本是财务的事|成本偏差告警|实战共识
+JA-718|Java AI|工程|质量|探针|线上质量探针多样化：真实流量抽样自动评（faithfulness/引用率），与固定评估集互补（线上分布 vs 离线分布差异）|固定评估集的盲区（分布漂移 JA-496），线上探针抓"评估集外"的质量问题，与端到端拨测（JA-464）联动|线上质量无法自动评|固定评估集足够|探针成本过高（抽样控制）|线上质量探针|实战共识
+JA-719|Java AI|工程|数据|双向|知识库与业务库双向一致性：知识库内容源自业务库（同步），业务状态变更（下架商品）同步失效知识（JA-690 缓存传播）|知识与业务的一致性（内容过期=业务状态过期），双向同步（业务→知识、知识→缓存），与数据一致性思想联动|知识库与业务库独立无关联|单向同步足够|失效传播不需要|双向一致性|实战共识
+JA-720|Java AI|工程|测试|对抗|对抗评测自动化：红队样本（JA-465）自动批量跑防线（注入/越狱/越权），防线回归自动化|JA-654 红队节奏的自动化：每次防线变更自动跑对抗样本，安全回归与功能回归同级（JA-156），与安全自动化联动|对抗测试全人工|自动化对抗不存在|安全回归手动跑|对抗自动化|实战共识
+JA-721|Java AI|工程|治理|清单|AI 依赖清单管理：所有 LLM/嵌入/重排依赖登记（供应商/模型/版本/用途/负责人），依赖盲区清零|AI 依赖像 microservice 依赖一样治理（JA-409 数据流向的依赖面），清单驱动升级与应急（JA-391），与依赖治理联动|AI 依赖无需登记|清单与应急无关|依赖是黑盒|依赖清单治理|实战共识
+JA-722|Java AI|工程|设计|路由表|能力路由表设计：问题类型→所需能力（检索/工具/推理强度）→对应模型配置，路由表可测试可评估|JA-232 路由的工程化：路由表是"决策资产"（可评估可回归），路由错误进评估集，与路由智能化（JA-460）联动|路由逻辑硬编码|路由表无法测试|路由与评估无关|路由表资产|实战共识
+JA-723|Java AI|工程|架构|插件|AI 能力插件化：RAG/工具/护栏/缓存做成可插拔模块（接口+注册机制），按业务组装|JA-135 分层架构的插件化：能力模块按需组合（简单业务关 RAG），插件接口稳定，与微内核思想联动|能力全部硬编码|插件化是过度设计|接口无法稳定|能力插件化|实战共识
+JA-724|Java AI|工程|治理|评审|AI 架构季度评审：依赖清单/成本曲线/质量趋势/组织能力四维季度评审，架构健康度体检|架构不是一次性设计（JA-419 演进的体检机制），季度评审产出演进决策，与技术评审（JA-524）联动|架构评审一次终身|季度评审是形式主义|健康度无法量化|架构体检|实战共识
+JA-725|Java AI|工程|面试|终题|Java AI 终极面试题应对："从零设计一个企业 AI 平台"——按 JA-376 中台四能力+JA-238 分层+JA-377 演进三阶段组织答案，带 JA-413 风险清单|终极综合题的答案骨架（全部域事实的组织化），P10 终局题（考察体系化），与场景题模板（JA-651）联动|终极题自由发挥|骨架限制深度|风险清单可省|终局题框架|实战方法论

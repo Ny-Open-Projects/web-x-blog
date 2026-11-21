@@ -1,0 +1,59 @@
+---
+title: "[话术JC-029] 线程池·newFixedThreadPool（误用）· 7 问"
+date: 2026-11-18
+categories: [Java面试, Java并发]
+tags: [Java面试, 话术卡, 33]
+type: 话术卡
+disableNunjucks: true
+---
+
+## 线程池 · newFixedThreadPool（误用）—— 7 类问法与标准话术
+
+**Qconcurrency-197（概念考察·P6-P8）**
+【面试官】请谈谈你对「线程池」中「newFixedThreadPool」的理解。
+【标准回答话术】Executors.newFixedThreadPool 使用无界 LinkedBlockingQueue 可能堆积任务导致 OOM。背后的原理是：队列容量是 Integer.MAX_VALUE，下游变慢时任务无限堆积，阿里手册明确禁止使用 Executors 创建线程池。
+【评分点】① 准确说出核心机制（newFixedThreadPool）；② 能带出原理层而非背结论。 ③ 版本锚点：阿里手册
+
+---
+
+**Qconcurrency-198（误用纠错·P4-P7）**
+【面试官】我在别的团队见过这样的说法：「newFixedThreadPool 会自动拒绝多余任务」。你觉得对吗？
+【标准回答话术】这个说法不正确。准确的表述是：Executors.newFixedThreadPool 使用无界 LinkedBlockingQueue 可能堆积任务导致 OOM。原因是：队列容量是 Integer.MAX_VALUE，下游变慢时任务无限堆积，阿里手册明确禁止使用 Executors 创建线程池。
+【评分点】① 快速识别误区不顺着说；② 给出正确的版本锚定表述（阿里手册）。
+
+---
+
+**Qconcurrency-199（原理深挖·P5-P7）**
+【面试官】「newFixedThreadPool」为什么会这样设计？背后的机制是什么？
+【标准回答话术】机制层面：队列容量是 Integer.MAX_VALUE，下游变慢时任务无限堆积，阿里手册明确禁止使用 Executors 创建线程池。落到结论：Executors.newFixedThreadPool 使用无界 LinkedBlockingQueue 可能堆积任务导致 OOM。
+【评分点】① 讲出误用层面的机制；② 结论与机制对应不脱节。
+
+---
+
+**Qconcurrency-200（工程落地·P7-P9）**
+【面试官】在你带过的项目里，「newFixedThreadPool」你是怎么用的？踩过什么坑？
+【标准回答话术】使用要点：生产用 new ThreadPoolExecutor 加有界队列。事实依据：Executors.newFixedThreadPool 使用无界 LinkedBlockingQueue 可能堆积任务导致 OOM常见误区要规避：newFixedThreadPool 会自动拒绝多余任务。
+【评分点】① 给出可落地的要点而非概念；② 主动暴露一个真实踩坑并给出规避方案。
+
+---
+
+**Qconcurrency-201（结论依据·P8-P10）**
+【面试官】关于「newFixedThreadPool」，你的结论依据什么出处？回答时怎么限定而不说绝对？
+【标准回答话术】来源锚点：阿里手册。事实与结论：Executors.newFixedThreadPool 使用无界 LinkedBlockingQueue 可能堆积任务导致 OOM。表述时带出处限定（如「以当前版本源码为准」）而非绝对化断言。
+【评分点】① 结论可溯源（说出依据类别）；② 表述带限定词不绝对化。
+
+---
+
+**Qconcurrency-202（边界追问·P6-P9）**
+【面试官】「newFixedThreadPool」有没有不适用或需要特别小心的边界场景？
+【标准回答话术】边界提示：认为「newFixedThreadPool 会自动拒绝多余任务」是常见误区。正确的边界：Executors.newFixedThreadPool 使用无界 LinkedBlockingQueue 可能堆积任务导致 OOM。使用要点：生产用 new ThreadPoolExecutor 加有界队列。
+【评分点】① 能说出适用边界而非万金油式回答；② 主动给出规避方式。
+
+---
+
+**Qconcurrency-203（追问链·P5-P8）**
+【面试官】追问：如果有人按「队列满了会扩容线程」来实施，会发生什么？
+【标准回答话术】该说法不成立，正确机制：Executors.newFixedThreadPool 使用无界 LinkedBlockingQueue 可能堆积任务导致 OOM。原理：队列容量是 Integer.MAX_VALUE，下游变慢时任务无限堆积，阿里手册明确禁止使用 Executors 创建线程池。
+【评分点】① 能推演错误实施的具体后果；② 用机制解释而非背诵结论。
+
+---

@@ -1,0 +1,28092 @@
+# 闪卡全量版（2550 张 · 11 域）
+
+> 背法：遮住背面看正面自问 → 展开对照。正面格式「topic · term（维度）」，背面四件套：事实/原理/用法/锚点。
+
+
+## Java 基础（110 张）
+
+### String · 不可变（语法语义）
+
+<details><summary>看背面</summary>
+
+String 是不可变类：内部 value 数组为 final 且不提供修改方法。
+原理：不可变保证常量池安全共享、hashCode 可缓存、天然线程安全。
+用法：防御式编程：对外暴露的字段如果是 String 可免防御性拷贝。
+锚点：JDK9+ 底层从 char[] 改为 byte[]+coder（Compact Strings）。
+
+</details>
+
+### String · hashCode缓存（内存）
+
+<details><summary>看背面</summary>
+
+String 的 hashCode 在首次计算后缓存到内部 hash 字段，后续调用直接返回缓存值。
+原理：String 不可变所以 hash 不会变化，缓存是安全的；作为 HashMap key 时避免重复计算。
+用法：把不变对象作 HashMap key 的核心收益之一。
+锚点：JDK 8+ String 源码
+
+</details>
+
+### String · 字符串常量池（内存）
+
+<details><summary>看背面</summary>
+
+字符串常量池从 JDK7 起位于堆中，JDK6 及之前位于永久代。
+原理：常量池入堆后可被 GC 回收，缓解永久代 OOM 问题。
+用法：new String("x") 时字面量 x 入池、堆上另有副本对象。
+锚点：JDK 7（常量池移入堆）
+
+</details>
+
+### String · intern（内存）
+
+<details><summary>看背面</summary>
+
+JDK7+ 的 intern() 对堆中已存在的等值字符串返回其自身引用（不再拷贝到池）。
+原理：JDK6 intern 是拷贝进永久代所以返回值不同，JDK7 改为池中保存堆引用。
+用法：海量重复字符串场景 intern 可显著省内存（需评估 GC 压力）。
+锚点：JDK7+
+
+</details>
+
+### String · CompactStrings（版本）
+
+<details><summary>看背面</summary>
+
+JDK9 引入 Compact Strings：String 底层从 char[] 改为 byte[] 加 coder 编码标记。
+原理：纯拉丁字符存储只需 1 字节每字符，内存占用约省一半。
+用法：纯 ASCII 内容大量存储时升级 JDK9+ 有可观内存收益。
+锚点：JDK9+
+
+</details>
+
+### String · hashCode算法（语法语义）
+
+<details><summary>看背面</summary>
+
+String 的 hashCode 算法为 s[0]*31^(n-1)+...+s[n-1]，乘数是 31。
+原理：31 是奇素数且 31*i 可优化为 (i<<5)-i 位运算；散列分布经大量字符串验证。
+用法：面试可现场推 "abc"=97*31*31+98*31+99=96354。
+锚点：JDK 8+ 源码（31 乘子）
+
+</details>
+
+### String · 字符串比较（误用）
+
+<details><summary>看背面</summary>
+
+比较 String 内容必须用 equals，== 只比较引用地址。
+原理：== 在两个相同字面量（同入常量池）时碰巧为 true，造成"有时对有时错"的隐蔽 bug。
+用法：方法入参接收外部字符串时一律 equals 且常量在前。
+锚点：阿里手册强制条款
+
+</details>
+
+### String · 循环拼接（性能）
+
+<details><summary>看背面</summary>
+
+循环体内拼接字符串必须手动使用 StringBuilder（在循环外创建）。
+原理：循环内即使编译器改写，每轮也会新建 Builder 对象，产生大量临时对象与 GC 压力。
+用法：JDK9+ 单行拼接走 StringConcatFactory，循环仍需手动 Builder。
+锚点：JDK9+
+
+</details>
+
+### String · 字符串拼接底层（版本）
+
+<details><summary>看背面</summary>
+
+JDK9+ 的字符串拼接由 javac 编译为 invokedynamic 调用 StringConcatFactory，运行时按拼接形态选择最优策略。
+原理：相比 JDK8 固定生成 StringBuilder 链，策略化实现可预估长度、避免多余拷贝，基准更快。
+用法：单行拼接不必手写 StringBuilder 的底层依据。
+锚点：JDK9+
+
+</details>
+
+### String · new String（误用）
+
+<details><summary>看背面</summary>
+
+new String("abc") 在字面量已入池时额外创建 1 个堆对象，未入池时创建 2 个。
+原理：字面量入池 + new 强制堆上新建副本，两者独立。
+用法：代码里出现 new String(字面量) 基本都是误用，review 直接标记。
+锚点：Java 语言通用语义
+
+</details>
+
+### String · 线程安全（线程）
+
+<details><summary>看背面</summary>
+
+String 天然线程安全：不可变对象无并发修改风险。
+原理：不可变对象发布后任何线程都无法修改其状态。
+用法：不可变对象是多线程共享数据的默认选择。
+锚点：JLS 17.5（不可变）
+
+</details>
+
+### StringBuilder · 线程安全（语法语义）
+
+<details><summary>看背面</summary>
+
+StringBuilder 非线程安全，StringBuffer 的主要方法加了 synchronized。
+原理：StringBuffer 牺牲锁开销换取安全，单线程场景 StringBuilder 更快。
+用法：方法局部变量拼串用 StringBuilder；极少出现需要共享可变拼串的场景。
+锚点：StringBuilder javadoc（非同步）
+
+</details>
+
+### 包装类 · 缓存范围（语法语义）
+
+<details><summary>看背面</summary>
+
+Integer/Long/Short/Byte 的缓存范围是 -128~127，Character 是 0~127，Boolean 缓存 true/false。
+原理：缓存由 valueOf 触发，超出范围的值每次都新建对象。
+用法：包装类比较一律用 equals，避开缓存边界陷阱。
+锚点：缓存上限可用 -XX:AutoBoxCacheMax 调整（仅 Integer）。
+
+</details>
+
+### 包装类 · 拆箱NPE（误用）
+
+<details><summary>看背面</summary>
+
+对值为 null 的包装类做自动拆箱会抛 NullPointerException。
+原理：拆箱编译为 xxxValue() 调用，null 调用即 NPE；三目运算符两侧类型不一致时也会触发隐式拆箱。
+用法：三目运算 boolean ? intVal : intWrapper 是真实 NPE 事故源。
+锚点：阿里手册强制：POJO 属性统一用包装类。
+
+</details>
+
+### 包装类 · Long比较（误用）
+
+<details><summary>看背面</summary>
+
+Long 类型用 == 比较，超出缓存范围（-128~127）时即使值相等也返回 false。
+原理：== 比较引用，超缓存范围的 Long 是不同对象。
+用法：电商订单号等大数值 Long 比较必须用 equals——经典线上事故源。
+锚点：JLS 5.1.7（缓存 -128~127）
+
+</details>
+
+### equals体系 · 五大契约（语法语义）
+
+<details><summary>看背面</summary>
+
+重写 equals 必须满足自反、对称、传递、一致、非空（对 null 返回 false）五条。
+原理：违反任何一条都会导致该对象在集合中的行为异常。
+用法：《Effective Java》Item 10 是权威参考。
+锚点：Effective Java Item 10
+
+</details>
+
+### equals体系 · hashCode契约（误用）
+
+<details><summary>看背面</summary>
+
+重写 equals 不重写 hashCode 会导致该对象在 HashMap/HashSet 中"找不到"。
+原理：HashMap 先用 hash 定桶再用 equals 精确匹配，缺 hashCode 的对象默认用对象地址。
+用法：阿里手册：重写 equals 必须重写 hashCode。
+锚点：Object.hashCode javadoc
+
+</details>
+
+### equals体系 · 31乘子（语法语义）
+
+<details><summary>看背面</summary>
+
+hashCode 计算选用 31 作乘数：奇素数散列分布好，且 31*i 可被 JVM 优化为 (i<<5)-i。
+原理：31 经过大量字符串实验验证，分布均匀性和计算成本平衡最佳。
+用法："abc".hashCode()=96354 可现场推导（已实测）。
+锚点：JDK 源码惯例
+
+</details>
+
+### equals体系 · 可变key（误用）
+
+<details><summary>看背面</summary>
+
+把可变字段参与 hashCode 计算的对象放入 HashMap 后修改字段，会导致 key"丢失"（get 返回 null 且无法 remove）。
+原理：hash 已按旧字段计算定桶，字段变化后再 get 用新 hash 定位到不同的桶。
+用法：value 泄漏 + 业务读不到数据，是真实事故类型。
+锚点：HashMap 源码语义
+
+</details>
+
+### equals体系 · instanceof陷阱（语法语义）
+
+<details><summary>看背面</summary>
+
+equals 中使用 instanceof 会破坏传递性：子类与父类互比可能不对称。
+原理：《Effective Java》推荐 getClass 精确比较或把类设计为 final。
+用法：P10 层会追问 getClass 与 instanceof 的取舍条件。
+锚点：JLS 15.20.2
+
+</details>
+
+### ArrayList · 懒初始化（内存）
+
+<details><summary>看背面</summary>
+
+new ArrayList() 不分配数组，首次 add 时才分配容量 10 的数组。
+原理：节省空集合的内存占用。
+用法：本机反射验证：首插后 elementData.length==10。
+锚点：JDK 8+ 源码
+
+</details>
+
+### ArrayList · 1.5倍扩容（性能）
+
+<details><summary>看背面</summary>
+
+ArrayList 扩容为新容量的 1.5 倍（oldCapacity + oldCapacity >> 1）：10→15→22。
+原理：1.5 倍平衡扩容次数与内存浪费；2 倍浪费内存，1.1 倍扩容太频繁。
+用法：预估容量可用 new ArrayList<>(n) 避免多次扩容。
+锚点：JDK 8+ 源码（本项目实测）
+
+</details>
+
+### ArrayList · 随机访问（性能）
+
+<details><summary>看背面</summary>
+
+ArrayList get(i) 是 O(1)（数组直接寻址），LinkedList get(i) 是 O(n)。
+原理：数组支持随机访问，链表必须从头或尾遍历。
+用法：随机读为主的场景选 ArrayList 的依据。
+锚点：List javadoc
+
+</details>
+
+### ArrayList · 中间插入（性能）
+
+<details><summary>看背面</summary>
+
+ArrayList 中间插入/删除是 O(n)（后续元素整体移动），尾部追加均摊 O(1)。
+原理：System.arraycopy 移动后续元素的成本随规模线性增长。
+用法：频繁中间插入的场景考虑 LinkedList 或改数据结构。
+锚点：List javadoc
+
+</details>
+
+### ArrayList · subList视图（误用）
+
+<details><summary>看背面</summary>
+
+List.subList(from,to) 返回的是原列表的视图，修改原列表结构会使其失效。
+原理：视图直接操作底层数组，非拷贝——修改 subList 会同步影响原列表。
+用法：返回 subList 给调用方存在"泄露内部表示"的封装风险。
+锚点：List javadoc（视图语义）
+
+</details>
+
+### ArrayList · Arrays.asList（误用）
+
+<details><summary>看背面</summary>
+
+Arrays.asList 返回定长列表，add/remove 会抛 UnsupportedOperationException。
+原理：其内部是同类型数组包装，不支持结构修改。
+用法：返回值如果要可变需 new ArrayList<>(Arrays.asList(...)) 包装。
+锚点：JDK 文档（定长列表）
+
+</details>
+
+### ArrayList · 线程安全（线程）
+
+<details><summary>看背面</summary>
+
+ArrayList 非线程安全：并发结构修改会抛 ConcurrentModificationException 或数据丢失。
+原理：多线程共享时用 CopyOnWriteArrayList 或 Collections.synchronizedList。
+用法：Vector 全方法 synchronized 性能差，现代代码不再使用。
+锚点：fail-fast 已实测：迭代中 put 抛 CME。
+
+</details>
+
+### ArrayList · removeIf（语法语义）
+
+<details><summary>看背面</summary>
+
+JDK8+ 用 removeIf(lambda) 安全地按条件删除元素，内部处理了移位与 modCount。
+原理：手写循环删除会因索引移动漏删元素。
+用法：漏删是"遍历中删除"的最高频 bug——验证过 index 前移导致跳元素。
+锚点：JDK 8
+
+</details>
+
+### HashMap · 默认容量（语法语义）
+
+<details><summary>看背面</summary>
+
+new HashMap<>() 首次 put 时分配容量 16 的表（threshold=12）。
+原理：16 是 2 的幂，支撑 (n-1)&hash 定位；0.75 负载下 12 个即扩容。
+用法：本机反射验证：首插后 table.length==16。
+锚点：JDK 8+ 源码
+
+</details>
+
+### HashMap · 扩容翻倍（语法语义）
+
+<details><summary>看背面</summary>
+
+HashMap 元素数超过 threshold（容量×0.75）时扩容为原来的 2 倍并重排元素。
+原理：2 倍保证容量始终是 2 的幂，位运算定位继续有效。
+用法：JDK8 优化：hash&oldCap 判断原位或 i+oldCap，不重算 hash。
+锚点：JDK 8+ 源码
+
+</details>
+
+### HashMap · 扰动函数（语法语义）
+
+<details><summary>看背面</summary>
+
+HashMap 用 (h = key.hashCode()) ^ (h >>> 16) 做扰动，让高位参与低位运算。
+原理：容量小时只有低位参与 (n-1)&hash，不扰动高位差异会丢失。
+用法：面试可写扰动公式：hash = h ^ (h >>> 16)。
+锚点：JDK 8+ 源码
+
+</details>
+
+### HashMap · 树化精确触发（语法语义）
+
+<details><summary>看背面</summary>
+
+树化在 bin 已有 8 个节点时的下一次插入（第 9 个）触发，且表长度 ≥64 才真正树化，否则先扩容。
+原理：binCount 计遍历过的非头节点数，≥7 即 bin 已有 8 个；容量<64 树化会退化为扩容。
+用法：本机实测：64 容量表插 8 个同桶键仍是 Node，第 9 个转 TreeNode。
+锚点：JDK 8+ 源码（本项目实测）
+
+</details>
+
+### HashMap · 退化阈值（语法语义）
+
+<details><summary>看背面</summary>
+
+红黑树节点数减到 6（UNTREEIFY_THRESHOLD）时退化回链表。
+原理：留 2 的缓冲（8 与 6 之间）防止在阈值附近插入删除导致树↔链表来回抖动。
+用法：resize 迁移时树会被拆分，数量≤6 转回链表。
+锚点：JDK 8+ 源码
+
+</details>
+
+### HashMap · JDK7头插（版本）
+
+<details><summary>看背面</summary>
+
+JDK7 的 HashMap 扩容迁移用头插法，并发扩容会形成环形链表导致 CPU 100%。
+原理：两线程同时迁移时指针交换顺序错乱成环；JDK8 改为尾插并保持顺序。
+用法："HashMap 并发死循环 CPU 100%"是真实生产事故类型。
+锚点：JDK 7→8 版本史
+
+</details>
+
+### HashMap · null键（语法语义）
+
+<details><summary>看背面</summary>
+
+HashMap 允许最多一个 null 键（放在 table[0] 桶），null 值不限。
+原理：hash(null) 返回 0，直接落在 0 号桶。
+用法：对比：Hashtable 与 CHM 都拒绝 null 键。
+锚点：JDK 8+ 源码
+
+</details>
+
+### HashMap · fail-fast（误用）
+
+<details><summary>看背面</summary>
+
+迭代 HashMap 期间结构性修改（put/remove）会抛 ConcurrentModificationException。
+原理：modCount 与 expectedModCount 比对触发 fail-fast，是"尽早失败"设计。
+用法：单线程迭代中修改同样抛 CME（本机实测）。
+锚点：Iterator javadoc（fail-fast 语义）
+
+</details>
+
+### HashMap · LinkedHashMap（语法语义）
+
+<details><summary>看背面</summary>
+
+LinkedHashMap 继承 HashMap 并用双向链表维护顺序：插入序或访问序（accessOrder=true 即 LRU）。
+原理：节点自带 prev/next 链，afterNodeAccess/afterNodeInsertion 是 HashMap 预留钩子。
+用法：accessOrder=true + removeEldestEntry 即 LRU 缓存。
+锚点：JDK 8+ 源码
+
+</details>
+
+### CHM · JDK8并发方案（语法语义）
+
+<details><summary>看背面</summary>
+
+JDK8 的 ConcurrentHashMap 用 CAS + synchronized 锁单个桶头节点实现线程安全。
+原理：锁粒度细到桶级，冲突概率低时 synchronized（锁升级后）开销小且免额外内存。
+用法：JDK7 是 Segment 分段锁（默认 16 段），JDK8 彻底重构。
+锚点：JDK 8 源码
+
+</details>
+
+### CHM · null拒绝（误用）
+
+<details><summary>看背面</summary>
+
+ConcurrentHashMap 的 key 和 value 都不允许 null（put null 会抛 NPE）。
+原理：并发环境下 get 返回 null 存在"不存在"与"值为 null"的二义性。
+用法：二义性论证是二面高频考点。
+锚点：CHM javadoc
+
+</details>
+
+### CHM · size计数（语法语义）
+
+<details><summary>看背面</summary>
+
+CHM 的 size 通过 baseCount + CounterCell[] 分段计数，返回的是近似值。
+原理：计数分散避免单点 CAS 热点（LongAdder 同源思想）。
+用法：强一致 size 需求要自行加锁或换数据结构。
+锚点：JDK 8 源码
+
+</details>
+
+### CHM · 弱一致迭代（线程）
+
+<details><summary>看背面</summary>
+
+CHM 的迭代器是弱一致的：不抛 CME，但可能读到过期数据，且不保证反映迭代期间的修改。
+原理：弱一致换取无锁读；fail-fast 是 HashMap 的行为，CHM 不是。
+用法：弱一致 vs fail-fast 的区别是并发容器面试必答。
+锚点：CHM javadoc
+
+</details>
+
+### CHM · JDK7分段锁（版本）
+
+<details><summary>看背面</summary>
+
+JDK7 的 CHM 用 Segment 分段锁（默认 16 段，段继承 ReentrantLock），并发度等于段数。
+原理：分段把锁竞争分散，但并发度上限固定、hash 到同段的操作仍串行。
+用法："JDK7→8 重构原因"是并发面试的分水岭题。
+锚点：JDK 7→8 版本史
+
+</details>
+
+### TreeMap · 红黑树（语法语义）
+
+<details><summary>看背面</summary>
+
+TreeMap 底层是红黑树，按 key 排序（自然序或 Comparator），基本操作 O(log n)。
+原理：红黑树通过旋转与染色维持近似平衡。
+用法：需要按 key 范围查询/有序遍历时选 TreeMap。
+锚点：TreeMap 源码
+
+</details>
+
+### TreeMap · 与HashMap选型（语法语义）
+
+<details><summary>看背面</summary>
+
+TreeMap 换来有序性但牺牲 O(1) 访问与无序性约束（key 必须可比较）。
+原理：HashMap O(1) 但无序；按需求选型是集合面试的核心判断。
+用法：范围查询 headMap/tailMap/subMap 是 TreeMap 独有能力。
+锚点：集合选型通用
+
+</details>
+
+### ConcurrentSkipListMap · 跳表（语法语义）
+
+<details><summary>看背面</summary>
+
+ConcurrentSkipListMap 用跳表（多级索引链表）实现有序 + 高并发，基本操作 O(log n)。
+原理：跳表无需旋转即可维持平衡，天然适合无锁化并发读。
+用法：有序 + 高并发（如排行榜）场景用它替代 TreeMap+Synchronized。
+锚点：JDK 6+ ConcurrentSkipListMap
+
+</details>
+
+### 泛型 · 类型擦除（语法语义）
+
+<details><summary>看背面</summary>
+
+Java 泛型是编译期检查、运行时擦除：List<String> 与 List<Integer> 运行时是同一个类。
+原理：向后兼容 JDK5 之前的字节码；泛型信息仅保留在 Signature 属性供反射读取。
+用法：反射 getGenericType() 可读取声明处的泛型参数。
+锚点：JLS 4.6（擦除）
+
+</details>
+
+### 泛型 · 限制（语法语义）
+
+<details><summary>看背面</summary>
+
+类型擦除导致：不能 new T()、不能 new T[]、不能 instanceof T、静态成员不能用类的泛型参数。
+原理：运行时没有 T 的类型信息，静态成员属于类不属于实例。
+用法：绕行方案：传 Class<T> 用反射构造、或用数组列表。
+锚点：JLS 4.x
+
+</details>
+
+### 泛型 · PECS（语法语义）
+
+<details><summary>看背面</summary>
+
+通配符原则 PECS：Producer Extends（只读用 ? extends）、Consumer Super（只写用 ? super）。
+原理：extends 通配的列表不能 add（除 null），super 通配的列表读取需强转——编译器按读写角色约束。
+用法：JDK 源码 Collections.copy 就是 PECS 的标准示范（src extends, dest super）。
+锚点：Effective Java Item 31
+
+</details>
+
+### 泛型 · 重载冲突（误用）
+
+<details><summary>看背面</summary>
+
+擦除后签名相同的两个泛型重载方法无法编译，如 f(List<String>) 与 f(List<Integer>)。
+原理：擦除后两者参数类型都是 List，字节码签名相同。
+用法：javac 报"具有相同擦除签名"错误。
+锚点：JLS 15.12
+
+</details>
+
+### 异常 · Checked与Runtime（语法语义）
+
+<details><summary>看背面</summary>
+
+Checked 异常编译期强制处理，RuntimeException 及其子类不强制。
+原理：Checked 的初衷是强制调用方处理可恢复错误，但工程实践暴露了大量吞异常问题。
+用法：自定义业务异常统一继承 RuntimeException 是主流实践。
+锚点：JLS 11.2
+
+</details>
+
+### 异常 · 吞异常（误用）
+
+<details><summary>看背面</summary>
+
+捕获异常后既不处理也不抛出（空 catch 或仅 printStackTrace）是高危反模式：故障被静默掩盖。
+原理：异常包含故障现场，吞掉等于销毁证据链。
+用法：空 catch 在静态检查中应标记为阻断级问题。
+锚点：代码规范通用条款
+
+</details>
+
+### 异常 · finally执行（语法语义）
+
+<details><summary>看背面</summary>
+
+finally 块在 try/catch 之后必然执行（除非 JVM 退出或线程死亡），且其中的 return 会覆盖 try/catch 的返回值与异常。
+原理：编译器把 finally 代码内联到所有出口路径。
+用法：阿里手册：禁止在 finally 中使用 return。
+锚点：JLS 14.20
+
+</details>
+
+### 异常 · try-with-resources（语法语义）
+
+<details><summary>看背面</summary>
+
+实现 AutoCloseable 的资源必须用 try-with-resources：编译器按声明逆序自动 close 并保留抑制异常。
+原理：手动 close 可能因提前 return/异常被跳过；抑制异常（addSuppressed）保留关闭失败的次要异常。
+用法：自定义资源类实现 AutoCloseable 即可享受语法糖。
+锚点：JDK 7+（JLS 14.20.3）
+
+</details>
+
+### 异常 · 多重catch（语法语义）
+
+<details><summary>看背面</summary>
+
+JDK7+ 支持多类型 catch（catch (A
+原理：B e)），但同族类型必须子类在前否则编译错误。
+用法：多类型 catch 是语法糖，反编译后是多个 catch 块。
+锚点：JDK 7+（JLS 14.20）
+
+</details>
+
+### final · 三用途（语法语义）
+
+<details><summary>看背面</summary>
+
+final 修饰类不可继承、修饰方法不可重写、修饰变量不可重新赋值（引用类型指引用不可变，对象内容可变）。
+原理：final 是约束不是深拷贝：final List 的元素仍可 add。
+用法：final 字段有更强的内存语义（构造器安全发布）。
+锚点：JLS 4.12.4
+
+</details>
+
+### final · 安全发布（内存）
+
+<details><summary>看背面</summary>
+
+final 字段写具有"构造器完成即对其他线程可见"的内存语义（无需 synchronized）。
+原理：JMM 为 final 专门定义了读写内存屏障规则（JSR-133）。
+用法：不可变对象+final 是线程安全设计的基石。
+锚点：JLS 17.5
+
+</details>
+
+### static · 类加载初始化（语法语义）
+
+<details><summary>看背面</summary>
+
+static 字段在类初始化（<clinit>）时按代码顺序赋值，仅执行一次且线程安全（JVM 保证）。
+原理：<clinit> 由 JVM 加锁保证单线程执行。
+用法：单例的 Holder 模式正是利用 <clinit> 的 JVM 线程安全。
+锚点：JLS 12.4
+
+</details>
+
+### static · 静态可变状态（误用）
+
+<details><summary>看背面</summary>
+
+static 可变字段是全局共享状态，多线程并发访问必须自行同步，且影响测试隔离。
+原理：静态生命周期 = 类加载器生命周期，泄漏风险大。
+用法：阿里手册限制滥用 static 可变变量；静态常量（final）不受限。
+锚点：并发设计通用
+
+</details>
+
+### 接口 · default方法（语法语义）
+
+<details><summary>看背面</summary>
+
+JDK8 起接口可以有 default 方法（有实现体）；实现类初始化时会连带初始化"含 default 方法的"接口。
+原理：JLS 12.4.1 规定：类初始化时，声明了 default 方法的父接口会被初始化。
+用法：本机实测：new Impl() 打印了含 default 的接口 I 的初始化，不含 default 的 I2 未初始化。
+锚点：JDK8+
+
+</details>
+
+### 接口 · 字段与初始化（语法语义）
+
+<details><summary>看背面</summary>
+
+接口的字段隐式为 public static final，且接口不允许静态初始化块。
+原理：接口无法用 <clinit> 控制，字段初始化靠常量表达式或引用其他类的初始化逻辑。
+用法：需要复杂初始化逻辑的常量应放到辅助类。
+锚点：JLS 12.4.1
+
+</details>
+
+### 内部类 · 内部类引用（语法语义）
+
+<details><summary>看背面</summary>
+
+非静态内部类对象隐式持有外部类实例引用（Outer.this），可能导致外部类无法被 GC。
+原理：静态嵌套类（static nested class）不持有外部引用。
+用法：Handler 泄漏（Android）与回调泄漏（Java）都是此机制的产物。
+锚点：JLS 8.1.3
+
+</details>
+
+### 内部类 · 静态嵌套类（语法语义）
+
+<details><summary>看背面</summary>
+
+static 嵌套类不持有外部实例引用，可独立实例化；语义上更接近"把类组织进外部类的命名空间"。
+原理：不需要访问外部实例就应声明为 static——Effective Java 相关条目。
+用法：集合内的 Builder/Node 类几乎都是 static 嵌套类（如 HashMap.Node）。
+锚点：JLS 8.1
+
+</details>
+
+### 语言杂项 · 浮点比较（语法语义）
+
+<details><summary>看背面</summary>
+
+浮点数（float/double）不能直接用 == 比较相等，应使用误差范围或 BigDecimal。
+原理：IEEE754 二进制无法精确表示 0.1 等十进制小数。
+用法：资金计算用 BigDecimal 或长整型分单位；String 构造 BigDecimal 必用（double 构造有精度坑）。
+锚点：JLS 4.2.3
+
+</details>
+
+### 语言杂项 · switch类型（误用）
+
+<details><summary>看背面</summary>
+
+switch 原生支持 byte/short/char/int 及其包装类、枚举（JDK7+）与 String（JDK7+），不支持 long/float/double/boolean。
+原理：switch 底层基于 tableswitch/lookupswitch 整数跳转指令。
+用法：JDK14+ 的 switch 表达式（箭头语法）是新的考察点。
+锚点：JDK 7（String 支持）
+
+</details>
+
+### 语言杂项 · char运算（语法语义）
+
+<details><summary>看背面</summary>
+
+char 本质是 16 位无符号 UTF-16 代码单元，可参与整数运算（如 'a'+1 得 'b'）。
+原理：char 的算术结果自动提升为 int，赋回 char 需强转。
+用法：增补平面字符（如 emoji）需要代理对（两个 char），length() 会返回 2。
+锚点：JLS 4.2.1
+
+</details>
+
+### 语言杂项 · 整数溢出（语法语义）
+
+<details><summary>看背面</summary>
+
+int 溢出不抛异常而是静默回绕（wrap around），必须用 Math.addExact 或 Math.multiplyExact 显式检测。
+原理：二进制补码运算天然回绕，硬件层面不报错。
+用法：Math.addExact 溢出抛 ArithmeticException——金融计算必用。
+锚点：JLS 4.2.2
+
+</details>
+
+### 语言杂项 · 自动模块化（版本）
+
+<details><summary>看背面</summary>
+
+JDK9 引入模块系统（JPMS）：module-info.java 声明依赖与导出，JDK 内部 API（如 sun.misc.Unsafe 部分）被强封装。
+原理：强封装破坏了直接依赖 JDK 内部 API 的老代码——升级 JDK 的最大阻力源。
+用法：升级 JDK 的两大障碍：内部 API 封装与废弃 API 清理。
+锚点：JDK9+
+
+</details>
+
+### 语言杂项 · record类（版本）
+
+<details><summary>看背面</summary>
+
+JDK16 转正 record 类：不可变数据载体，自动生成构造器/访问器/equals/hashCode/toString。
+原理：record 明确表达"这是纯数据"，字段 final、不能继承其他类（可实现接口）。
+用法：DTO/值对象/配置项是 record 的标准使用场景。
+锚点：JDK16+
+
+</details>
+
+### 语言杂项 · sealed类（版本）
+
+<details><summary>看背面</summary>
+
+JDK17 转正 sealed 类：用 permits 显式限定继承层级，配合 switch 模式匹配做穷尽检查。
+原理：编译器检查 switch 是否覆盖所有允许的子类型，漏分支直接编译错。
+用法：状态机/权限模型/AST 节点设计是典型场景。
+锚点：JDK17+
+
+</details>
+
+### Object · clone陷阱（语法语义）
+
+<details><summary>看背面</summary>
+
+Object.clone 是浅拷贝（引用字段复制引用），深拷贝需重写 clone 递归复制或改用拷贝构造器/序列化。
+原理：Cloneable 是空标记接口且 clone 语义脆弱，Effective Java 建议用拷贝构造器替代。
+用法：防御性拷贝优先用拷贝构造器，避免暴露可变内部状态。
+锚点：Object.clone javadoc / Effective Java
+
+</details>
+
+### Object · finalize废弃（语法语义）
+
+<details><summary>看背面</summary>
+
+finalize 在 JDK9 标记废弃、JDK18 进一步降级，资源清理应使用 try-with-resources 或 Cleaner。
+原理：finalize 执行时机不定、可能永不执行、且影响 GC 性能。
+用法：Cleaner 也是"尽力而为"，显式关闭（AutoCloseable）才是正解。
+锚点：JDK9+/JDK18+
+
+</details>
+
+### Object · wait与notify（语法语义）
+
+<details><summary>看背面</summary>
+
+wait/notify/notifyAll 是 Object 的 final 方法，必须在 synchronized 块内调用，否则抛 IllegalMonitorStateException。
+原理：wait 释放锁进入等待集，notify/notifyAll 唤醒等待线程重新竞争锁。
+用法：notify 在锁释放前不生效（锁释放后等待线程才真正被唤醒）。
+锚点：JLS 17.2
+
+</details>
+
+### Object · 虚假唤醒（误用）
+
+<details><summary>看背面</summary>
+
+等待条件必须用 while 循环判断而非 if：被唤醒后条件可能已被其他线程改变。
+原理：notifyAll 会唤醒所有等待线程，先到者可能改变条件。
+用法："手写生产者消费者"笔试题的核心考点就是 while+notifyAll。
+锚点：JLS 17.2.3
+
+</details>
+
+### 语言杂项 · 字符串switch（语法语义）
+
+<details><summary>看背面</summary>
+
+switch 对 String 从 JDK7 起支持，底层编译为 hashCode 分两次跳转（先 hash 后 equals 防冲突）。
+原理：String 的 switch 不是语法糖直接变 if-else，而是 hash 跳转+equals 校验。
+用法：hashCode 相同的字符串会走 equals 校验分支。
+锚点：JDK7+
+
+</details>
+
+### 语言杂项 · 可变静态日期（误用）
+
+<details><summary>看背面</summary>
+
+SimpleDateFormat 非线程安全（内部 Calendar 共享），多线程共享实例会产生数据错乱。
+原理：官方建议每次创建新实例或用 ThreadLocal 包装。
+用法：DateTimeFormatter（JDK8+）不可变且线程安全，直接替代。
+锚点：JDK8+
+
+</details>
+
+### 语言杂项 · 随机数（误用）
+
+<details><summary>看背面</summary>
+
+Random 实例被多线程共享时 CAS 竞争导致性能下降，并发场景用 ThreadLocalRandom.current()。
+原理：ThreadLocalRandom 为每个线程维护独立种子。
+用法：Random 用相同种子则序列可复现——测试可复现性的技巧。
+锚点：JDK 7+（ThreadLocalRandom 推荐）
+
+</details>
+
+### 语言杂项 · 字符串长度（性能）
+
+<details><summary>看背面</summary>
+
+String.length() 返回的是 UTF-16 代码单元数而非字符数：增补字符（如 emoji）占 2 个代码单元。
+原理：JDK9 前 String 底层是 char[]（UTF-16），JDK9+ byte[]+coder 逻辑上仍是 UTF-16 语义。
+用法：涉及 emoji/生僻字的文本处理必须用码点 API（codePointAt 等）。
+锚点：JDK 9+（Compact Strings JEP 254）
+
+</details>
+
+### 语言杂项 · 整数缓存（语法语义）
+
+<details><summary>看背面</summary>
+
+Integer/Long/Short/Byte 缓存 -128~127 由 valueOf 触发，new Integer(127) 永远是新对象。
+原理：缓存实现于 IntegerCache 静态初始化块。
+用法：JDK9 起 new Integer 构造器已废弃，统一用 valueOf。
+锚点：JDK9+
+
+</details>
+
+### 语言杂项 · 自动装箱性能（误用）
+
+<details><summary>看背面</summary>
+
+循环中的包装类累加（Long sum = 0L; sum += i）每轮触发拆箱+装箱，性能差数倍。
+原理：装箱创建新对象（超缓存范围），产生大量临时对象。
+用法：算法题累加统一用基本类型。
+锚点：Effective Java 经典测量：装箱拖慢约数倍
+
+</details>
+
+### 集合通用 · Collection根接口（语法语义）
+
+<details><summary>看背面</summary>
+
+Collection 根接口下 List/Set/Queue 三大分支；Map 不是 Collection 的子接口。
+原理：Map 是独立的键值对抽象，与 Collection 并列。
+用法：Collections 是工具类，Collection 是接口——两者常被混淆。
+锚点：JDK 集合框架文档
+
+</details>
+
+### 集合通用 · 迭代中删除（误用）
+
+<details><summary>看背面</summary>
+
+遍历集合删除元素的安全方式：Iterator.remove()、removeIf、或 CopyOnWriteArrayList（快照迭代）。
+原理：裸 for+remove 因索引移动漏删；增强 for 中 remove 抛 CME。
+用法："漏删"是本机可复现的经典 bug：索引前移跳过下一元素。
+锚点：Iterator.remove javadoc
+
+</details>
+
+### 集合通用 · 时间复杂度表（性能）
+
+<details><summary>看背面</summary>
+
+核心复杂度速记：ArrayList get O(1)/中间插 O(n)；HashMap get/put 均摊 O(1)；TreeMap O(log n)；LinkedList 头尾操作 O(1)/定位 O(n)。
+原理：复杂度是集合选型的第一判据。
+用法：HashMap 树化后最坏 O(log n)（JDK8+）。
+锚点：各容器 javadoc
+
+</details>
+
+### 集合通用 · 不可变集合（语法语义）
+
+<details><summary>看背面</summary>
+
+JDK9+ 的 List.of/Set.of/Map.of 创建不可变集合：add/remove 抛 UnsupportedOperationException，不允许 null 元素。
+原理：不可变集合是防御性编程与安全发布的标准做法。
+用法：跨方法边界返回不可变集合可防调用方误改。
+锚点：JDK9+
+
+</details>
+
+### 集合通用 · 泛型数组（误用）
+
+<details><summary>看背面</summary>
+
+不能直接创建泛型数组（new T[] 编译错误），因为数组是协变且运行时携带精确类型，与擦除冲突。
+原理：堆污染（heap pollution）风险：数组协变+泛型不变的设计冲突。
+用法：@SafeVarargs 标注是可变参数+泛型的官方豁免方式。
+锚点：JLS 15.10
+
+</details>
+
+### 包装类 · Character缓存（语法语义）
+
+<details><summary>看背面</summary>
+
+Character 缓存范围是 0~127（与 Integer 的 -128~127 不同），valueOf 在此范围返回缓存实例。
+原理：Character 无负值语义，缓存从 0 开始。
+用法：ASCII 128~255 的 Character 不在缓存内。
+锚点：JLS 5.1.7（0~127）
+
+</details>
+
+### 包装类 · Boolean与Byte（语法语义）
+
+<details><summary>看背面</summary>
+
+Boolean 缓存仅 true/false 两个实例；Byte 因范围小（-128~127）全部缓存。
+原理：小范围类型的所有值都值得缓存。
+用法：Boolean.valueOf 返回包装类，parseBoolean 返回基本类型。
+锚点：JLS 5.1.7
+
+</details>
+
+### String · equals方向（误用）
+
+<details><summary>看背面</summary>
+
+常量在前调用 equals（"CONST".equals(variable)）可避免 variable 为 null 时抛 NPE。
+原理：null.equals 抛 NPE，常量.equals(null) 返回 false。
+用法：JDK7+ 的 java.util.Objects.equals(a,b) 是 null 安全的标准替代。
+锚点：JDK7+
+
+</details>
+
+### String · split陷阱（误用）
+
+<details><summary>看背面</summary>
+
+String.split 的参数是正则表达式，且默认省略尾部空串——特殊字符（点号与星号）必须转义。
+原理：正则语义导致 "." 会匹配任意字符；limit 参数传负数保留尾部空串。
+用法：常见事故：按 "." 分割 IP 地址得到空数组。
+锚点：Java 正则语义
+
+</details>
+
+### String · substring（性能）
+
+<details><summary>看背面</summary>
+
+JDK7u6 前 substring 共享原字符数组导致内存泄漏风险，之后改为拷贝实现。
+原理：旧实现 offset+count 指向原数组，大字符串截取小片段会"钉住"整个大数组。
+用法：P10 面试常以"substring 与内存泄漏"考察对实现的版本敏感度。
+锚点：JDK7u6
+
+</details>
+
+### String · replace与replaceAll（误用）
+
+<details><summary>看背面</summary>
+
+replace 接收字面量（char/CharSequence），replaceAll 接收正则表达式——replaceAll(".") 会替换所有字符。
+原理：replaceAll 是正则语义，点号匹配任意字符。
+用法：分割 IP 前缀等场景 replaceAll("\\.","-") 需双反斜杠转义。
+锚点：String javadoc
+
+</details>
+
+### 泛型 · 泛型方法（语法语义）
+
+<details><summary>看背面</summary>
+
+泛型方法的类型参数声明在返回类型之前（<T> T f(...)），由编译器按实参推断。
+原理：推断规则在 JDK8 改进（目标类型推断）。
+用法：静态泛型方法不能使用类的泛型参数——作用域不同。
+锚点：JLS 8.4.4
+
+</details>
+
+### 泛型 · 上限限定（语法语义）
+
+<details><summary>看背面</summary>
+
+<T extends Comparable<T>> 限定类型参数必须实现 Comparable——多重限定用 & 连接（T extends A & B）。
+原理：限定后可调用边界类型的方法；多重限定中最多一个类，其余为接口。
+用法：排序工具 sort(List<T extends Comparable>) 是标准例子。
+锚点：JLS 4.5.1
+
+</details>
+
+### 异常 · 异常链（误用）
+
+<details><summary>看背面</summary>
+
+构造新异常必须传入 cause（new Exception(msg, e)）保留根因链，否则堆栈断链无法溯源。
+原理：initCause 可事后补充；printStackTrace 会输出 Caused by 链。
+用法：日志规范：每个 catch 至少保留 cause 或堆栈。
+锚点：JDK 1.4+（initCause）
+
+</details>
+
+### 异常 · 异常性能（误用）
+
+<details><summary>看背面</summary>
+
+异常构造会填充堆栈（fillInStackTrace），高频路径用异常做流程控制有显著性能代价。
+原理：JVM 需要捕获当前线程栈快照。
+用法：性能敏感路径用返回值/Optional 表达"未找到"，异常留给真正的异常。
+锚点：JIT 通用
+
+</details>
+
+### 集合通用 · Iterator契约（语法语义）
+
+<details><summary>看背面</summary>
+
+Iterator 的 remove() 是唯一安全的迭代中删除方式，且每次 next 后最多调用一次 remove。
+原理：连续 remove 两次抛 IllegalStateException。
+用法："为什么设计 next 后才能 remove"是理解迭代器状态的切入点。
+锚点：Iterator javadoc
+
+</details>
+
+### 集合通用 · Deque双端（语法语义）
+
+<details><summary>看背面</summary>
+
+Deque 接口（ArrayDeque/LinkedList）同时支持栈（push/pop）与队列（offer/poll）两种语义，官方推荐替代 Stack 类。
+原理：Stack 继承 Vector 是设计失误（全方法 synchronized + 允许随机访问违反栈语义）。
+用法：ArrayDeque 底层是循环数组，无容量限制自动扩容。
+锚点：JDK 6+
+
+</details>
+
+### 集合通用 · ArrayDeque（性能）
+
+<details><summary>看背面</summary>
+
+ArrayDeque 作为队列/栈的性能全面优于 LinkedList（无节点创建开销、内存连续）。
+原理：JDK 官方文档明确建议优先使用 ArrayDeque。
+用法：Deque 不允许 null（队列语义需要 null 哨兵判断 poll 失败）。
+锚点：JDK 官方推荐（替代 Stack）
+
+</details>
+
+### 语言杂项 · 文本块（版本）
+
+<details><summary>看背面</summary>
+
+JDK15 转正文本块（""" 三引号）：保留预期缩进、无需转义换行与引号。
+原理：编译器处理附带缩进（incidental indentation）按最少缩进剥离。
+用法：JSON/SQL/HTML 内嵌场景可读性大幅提升。
+锚点：JDK15+
+
+</details>
+
+### 语言杂项 · var与模式匹配（版本）
+
+<details><summary>看背面</summary>
+
+JDK10 var 局部变量类型推断（仅局部变量，不能用于字段/参数/返回值）；JDK21 switch 模式匹配转正。
+原理：var 保留静态类型（编译期确定），不是动态类型。
+用法：var 适用于右侧类型明显的局部声明；字段/公共 API 不建议。
+锚点：JDK10/JDK21
+
+</details>
+
+### String · UTF16与码点（语法语义）
+
+<details><summary>看背面</summary>
+
+Java 用 UTF-16 编码字符串：BMP 内字符 1 个 char，增补字符（如 emoji）占 2 个 char（代理对）。
+原理：length()/charAt 以代码单元为单位；码点操作用 codePointAt/codePointCount。
+用法：涉及 emoji 的截断必须按码点边界，否则产生非法字符。
+锚点：JDK 9+（Compact Strings）
+
+</details>
+
+### HashMap · 树化收益（性能）
+
+<details><summary>看背面</summary>
+
+树化把最坏查询从 O(n) 降到 O(log n)，防御 hash 碰撞攻击（恶意构造同 hash key）。
+原理：Tomcat 曾因 hash 碰撞 DoS 加固——树化是安全加固不只是性能优化。
+用法：正常负载下树化几乎不触发（泊松分布保证）。
+锚点：JDK 8+ 源码
+
+</details>
+
+### HashMap · 遍历方式（误用）
+
+<details><summary>看背面</summary>
+
+entrySet 遍历（含 key/value）性能优于先 keySet 再 get（后者每 key 额外一次 hash 定位）。
+原理：keySet().get(k) 重复走一遍 hash 定位。
+用法：JDK8 的 forEach 与 Stream 同样基于 entrySet 视图。
+锚点：JDK 8+（entrySet 推荐）
+
+</details>
+
+### 包装类 · valueOf契约（语法语义）
+
+<details><summary>看背面</summary>
+
+Integer.valueOf(int) 对缓存范围返回缓存实例，new Integer(int) 总是新建对象（JDK9 起构造器废弃）。
+原理：官方文档明确推荐 valueOf 优先。
+用法：JDK9+ @Deprecated(since=9, forRemoval=true)。
+锚点：JDK9+
+
+</details>
+
+### String · 常量折叠（误用）
+
+<details><summary>看背面</summary>
+
+两个编译期常量拼接（final String a="x"; String s=a+"y";）在编译期直接折叠为常量；含变量的拼接只能运行期计算。
+原理：常量折叠是编译器优化，变量拼接无法折叠。
+用法：可验证：折叠后的 s == "xy" 为 true（同池引用）。
+锚点：JLS 15.28
+
+</details>
+
+### String · 安全共享（线程）
+
+<details><summary>看背面</summary>
+
+String 作为字段在多线程间共享无需同步：不可变对象天然线程安全且可安全发布。
+原理：final 字段 + 不可变语义获得 JMM 安全发布保证。
+用法：不可变对象是并发设计的默认选择（JCiP 原则）。
+锚点：JLS 17.5（不可变）
+
+</details>
+
+### CHM · computeIfAbsent（语法语义）
+
+<details><summary>看背面</summary>
+
+computeIfAbsent(key, k->新值) 原子地"不存在则计算并放入"，是并发缓存的标准实现。
+原理：check-then-act 两步在并发下有竞态窗口。
+用法：映射函数返回 null 则不建立映射；函数内再操作同 map 有递归更新风险（JDK9 文档明确）。
+锚点：JDK 8+
+
+</details>
+
+### HashMap · initialCapacity（语法语义）
+
+<details><summary>看背面</summary>
+
+new HashMap<>(initialCapacity) 的实际容量是 tableSizeFor(initialCapacity)（向上取 2 的幂），且首次 put 才分配。
+原理：预期存 n 个元素应设 initialCapacity = n/0.75 + 1 避免扩容。
+用法：本机实测：new HashMap<>(100) 首插后 table.length=128。
+锚点：JDK 文档
+
+</details>
+
+### 包装类 · parse与valueOf（误用）
+
+<details><summary>看背面</summary>
+
+Integer.parseInt 返回基本类型 int，Integer.valueOf 返回包装类 Integer——按需求选择。
+原理：parse 无装箱开销；valueOf 有缓存。
+用法：高频解析场景 parseInt 更优（无装箱）。
+锚点：各包装类 javadoc
+
+</details>
+
+### 异常 · 异常分类速查（语法语义）
+
+<details><summary>看背面</summary>
+
+高频运行时异常速查：NPE（null 解引用）、ArrayIndexOutOfBounds（越界）、ClassCast（强转）、NumberFormat（字符串转数字失败）、ArithmeticException（整数除零）、IllegalState（状态不符）、IllegalArgument（参数不符）。
+原理：整数除零抛异常而浮点除零得 Infinity/NaN——IEEE754 规范行为。
+用法：NumberFormat 的 message 通常包含导致失败的字符串——排查入口。
+锚点：JDK 文档
+
+</details>
+
+### String · 字符串去重（内存）
+
+<details><summary>看背面</summary>
+
+JDK8u20+ 提供 -XX:+UseStringDeduplication（G1 专属）：后台去重相同内容的 String 底层数组。
+原理：适用于大量重复长字符串（如缓存 JSON）场景。
+用法：开启前需评估 CPU 开销与实际重复率。
+锚点：JDK8u20+ / G1
+
+</details>
+
+
+## 并发（110 张）
+
+### volatile · volatile（内存语义）
+
+<details><summary>看背面</summary>
+
+volatile 保证可见性与有序性，但不保证原子性
+原理：JMM 对 volatile 写强制刷新到主存、读强制从主存加载，并通过内存屏障禁止特定重排；但 i++ 这类复合操作仍是读-改-写三步
+用法：状态标志位、一写多读的配置开关
+锚点：JLS 17.4
+
+</details>
+
+### volatile · i++（原子性）
+
+<details><summary>看背面</summary>
+
+i++ 即使变量声明为 volatile 也不是线程安全的
+原理：i++ 是读取、加一、写回三个操作，两个线程交错执行会丢失更新，实测丢失可达数万次
+用法：计数场景改用 AtomicLong 或加锁
+锚点：JLS 17.7
+
+</details>
+
+### volatile · 内存屏障（内存语义）
+
+<details><summary>看背面</summary>
+
+volatile 的有序性靠编译器在读写前后插入内存屏障实现
+原理：volatile 写之后插入 StoreLoad 屏障（最重的屏障），读之后插入 LoadLoad 与 LoadSrc 屏障，阻止跨屏障重排
+用法：理解 JMM 时用屏障模型推演可见性
+锚点：JSR-133
+
+</details>
+
+### JMM · happens-before（happens-before）
+
+<details><summary>看背面</summary>
+
+happens-before 是判断两个操作是否可见的核心规则而非时间先后
+原理：A happens-before B 意味着 A 的结果对 B 可见；程序顺序规则、锁的解锁加锁、volatile 写读、线程 start 与 join 都天然构成 happens-before
+用法：并发正确性论证一律用 happens-before 推导
+锚点：JLS 17.4.5
+
+</details>
+
+### JMM · 传递性（happens-before）
+
+<details><summary>看背面</summary>
+
+happens-before 具有传递性可串起长链推理
+原理：volatile 写 hb 后续读、写 hb 前面的程序顺序操作，链式推导可证明跨线程可见性，这是判断数据竞争的根本工具
+用法：复杂可见性 bug 复盘时按链推导
+锚点：JLS 17.4.5
+
+</details>
+
+### synchronized · monitor（锁机制）
+
+<details><summary>看背面</summary>
+
+synchronized 基于对象头的 monitor 机制实现互斥与可见性
+原理：字节码层面是 monitorenter 与 monitorexit 指令，进入时 invalidate 缓存、退出时 flush 写，语义与 volatile 写读对应
+用法：互斥与可见性需求同时存在时首选 synchronized
+锚点：JLS 17.x
+
+</details>
+
+### synchronized · 可重入（可重入）
+
+<details><summary>看背面</summary>
+
+synchronized 是可重入锁同一线程可重复获取同一把锁
+原理：monitor 内部维护持有线程与重入计数，嵌套同步块不会自死锁
+用法：同步方法间相互调用无需担心自锁
+锚点：HotSpot 实现细节
+
+</details>
+
+### synchronized · Class 对象（锁机制）
+
+<details><summary>看背面</summary>
+
+static synchronized 方法锁的是 Class 对象与实例锁互不冲突
+原理：类的所有实例共享同一把 Class 锁，静态与实例同步方法可并发执行
+用法：保护静态状态用 Class 锁或专用锁对象
+锚点：JLS 8.4.3.6
+
+</details>
+
+### wait/notify · IllegalMonitorStateException（协作机制）
+
+<details><summary>看背面</summary>
+
+wait 与 notify 必须在持有对象 monitor 时调用否则抛 IllegalMonitorStateException
+原理：wait 的语义是释放锁并挂起，不持锁调用则语义不成立，JVM 直接抛异常
+用法：永远在 synchronized(obj) 内配对使用 wait 与 notify
+锚点：JLS 17.2
+
+</details>
+
+### wait/notify · 释放锁（锁行为）
+
+<details><summary>看背面</summary>
+
+wait 会释放当前持有的 monitor 而 Thread.sleep 不会释放任何锁
+原理：sleep 只是定时暂停，锁所有权不变，持锁 sleep 会拖死其他线程
+用法：需要短暂暂停且持有锁时绝不使用 sleep
+锚点：JLS 17.2
+
+</details>
+
+### wait/notify · 虚假唤醒（误用）
+
+<details><summary>看背面</summary>
+
+等待条件必须用 while 循环判断而不能用 if 以防虚假唤醒
+原理：OS 或 notifyAll 唤醒后条件可能已被其他线程消费，while 在唤醒后重新检查条件，JLS 明确允许虚假唤醒存在
+用法：所有条件等待统一写 while(条件不满足) wait
+锚点：JLS 17.2.3
+
+</details>
+
+### wait/notify · notifyAll（协作机制）
+
+<details><summary>看背面</summary>
+
+notify 只随机唤醒一个等待线程无法指定目标
+原理：多个线程等待不同条件时可能唤醒错误的线程导致所有线程永久等待，多条件场景必须 notifyAll
+用法：多条件共用一个锁对象时用 notifyAll 或拆分锁
+锚点：实战经验
+
+</details>
+
+### synchronized · 偏向锁（锁升级）
+
+<details><summary>看背面</summary>
+
+偏向锁已在 JDK15 标记废弃并于 JDK21 彻底移除
+原理：现代应用中撤销偏向锁的昂的操作超过收益，JDK21 中 -XX:+UseBiasedLocking 直接报 Unrecognized VM option（本机 JDK 21.0.2 实测）
+用法：描述锁升级时按当前 JDK 说无锁到轻量级到重量级
+锚点：JEP 369 与 JDK21
+
+</details>
+
+### synchronized · 轻量级锁（锁升级）
+
+<details><summary>看背面</summary>
+
+无竞争时 synchronized 通过 CAS 获取轻量级锁避免重量级开销
+原理：轻量级锁在栈帧建立 Lock Record 并 CAS 替换对象头 Mark Word，失败则膨胀为重量级（OS mutex，涉及用户态内核态切换）
+用法：低竞争短临界区用 synchronized 性能很好
+锚点：HotSpot 内部机制
+
+</details>
+
+### 单例模式 · 双重检查锁（安全发布）
+
+<details><summary>看背面</summary>
+
+双重检查锁单例的实例字段必须声明为 volatile
+原理：new 对象包含分配、构造、赋引用三步可能被重排，其他线程可能拿到未初始化完成的引用，volatile 禁止该重排
+用法：懒加载单例标准写法：volatile + 双重检查
+锚点：JSR-133 案例
+
+</details>
+
+### 单例模式 · 静态内部类（安全发布）
+
+<details><summary>看背面</summary>
+
+静态内部类 Holder 单例利用类初始化锁天然线程安全且懒加载
+原理：JVM 保证类初始化由锁保护且只执行一次，首次访问 Holder 类时才触发初始化
+用法：推荐的无锁懒加载单例写法
+锚点：JLS 12.4
+
+</details>
+
+### 线程基础 · BLOCKED（线程状态）
+
+<details><summary>看背面</summary>
+
+Java 线程有 6 种状态 BLOCKED 与 WAITING 语义不同
+原理：BLOCKED 是等 monitor 锁，WAITING 是等 notify、join 或 LockSupport.park，TIMED_WAITING 是限时版
+用法：dump 分析时区分 BLOCKED 与 WAITING 定位问题
+锚点：Thread.State
+
+</details>
+
+### 线程基础 · interrupt（中断）
+
+<details><summary>看背面</summary>
+
+对运行中的线程调用 interrupt 只是设置中断标志不会真正停止
+原理：Java 的协作式中断：线程需要自行检查 isInterrupted 或在阻塞点抛 InterruptedException 响应
+用法：任务循环内定期检查 Thread.currentThread().isInterrupted()
+锚点：Thread.interrupt javadoc
+
+</details>
+
+### 线程基础 · InterruptedException（中断）
+
+<details><summary>看背面</summary>
+
+捕获 InterruptedException 后必须恢复中断标志或继续向上抛
+原理：异常被吞掉后中断信号丢失，上层无法再感知停止请求，这是阿里手册明确条款（恢复用 Thread.currentThread().interrupt()）
+用法：吞异常必须注释说明理由并恢复标志位
+锚点：C1.5 手册
+
+</details>
+
+### 线程基础 · interrupted（中断）
+
+<details><summary>看背面</summary>
+
+静态 Thread.interrupted 会清除中断标志而实例方法 isInterrupted 不会
+原理：interrupted 设计给线程自查并消费信号，误用会丢失他人设置的中断状态
+用法：自查循环里用 interrupted 消费信号
+锚点：Thread 源码
+
+</details>
+
+### 线程基础 · join（协作）
+
+<details><summary>看背面</summary>
+
+线程 A 调用 B.join() 会等待 B 终止且建立 happens-before
+原理：join 内部是 B.isAlive() 的 wait 循环，B 终止时 notify，A 恢复后能看到 B 的全部结果
+用法：主线程收集并行结果用 join 或 Future
+锚点：JLS 17.2.3
+
+</details>
+
+### 线程基础 · 守护线程（线程属性）
+
+<details><summary>看背面</summary>
+
+JVM 退出只看是否还有非守护线程
+原理：main 线程结束后若只剩守护线程（如 GC 线程），JVM 直接退出且守护线程被硬杀不做清理
+用法：后台监控、心跳类任务设为 daemon 并接受被硬杀
+锚点：Thread.setDaemon javadoc
+
+</details>
+
+### ThreadLocal · ThreadLocalMap（内存语义）
+
+<details><summary>看背面</summary>
+
+每个 Thread 内部持有 ThreadLocalMap 以 ThreadLocal 为 key
+原理：数据实际存在线程对象里，多个线程访问同一个 ThreadLocal 变量读到的是各自的副本，天然隔离
+用法：上下文传递（登录用户、traceId）首选 ThreadLocal
+锚点：JDK 源码 Thread
+
+</details>
+
+### ThreadLocal · 弱引用（内存语义）
+
+<details><summary>看背面</summary>
+
+ThreadLocalMap 的 key 是弱引用 value 是强引用
+原理：ThreadLocal 外部引用消失后 key 会被 GC 回裂为 null，但 value 仍被线程强引用无法回收，线程池场景线程长存导致泄漏，必须 finally remove
+用法：线程池中用完必须 remove() 写进代码规范
+锚点：JDK 源码
+
+</details>
+
+### ThreadLocal · InheritableThreadLocal（误用）
+
+<details><summary>看背面</summary>
+
+InheritableThreadLocal 只在子线程创建时拷贝一次在线程池场景失效
+原理：线程池线程是复用的不会重新创建，后续任务拿到的是首次创建时的快照，需用阿里开源的 TransmittableThreadLocal 配 TTL 包装线程池
+用法：跨线程池传递上下文用 TransmittableThreadLocal
+锚点：开源 TTL
+
+</details>
+
+### ThreadLocal · 0x61c88647（实现细节）
+
+<details><summary>看背面</summary>
+
+ThreadLocalMap 的哈希增量是魔数 0x61c88647（斐波那契散列）
+原理：相邻 ThreadLocal 的 hash 以黄金分割数递增，2 的幂容量下能均匀散列减少冲突
+用法：面试谈 ThreadLocal 冲突优化时引用此数
+锚点：JDK 源码
+
+</details>
+
+### 线程池 · ThreadPoolExecutor（参数）
+
+<details><summary>看背面</summary>
+
+线程池标准构造有 7 个参数：corePoolSize、maximumPoolSize、keepAliveTime、unit、workQueue、threadFactory、handler
+原理：这是任务调度策略的全部输入，任何 Executors 快捷方法都是对它的包装且各有陷阱
+用法：生产环境一律手动 new ThreadPoolExecutor
+锚点：JDK 文档
+
+</details>
+
+### 线程池 · 入队（调度顺序）
+
+<details><summary>看背面</summary>
+
+任务提交顺序是：核心线程未满则创建核心线程，满了先入队，队列满了才扩到最大线程，再满才拒绝
+原理：注意是先入队后扩容而非先扩容，实测提交阻塞任务验证：4 核心队列容量 2 最大 8 时第 3、4 个任务入队第 5 个才创建非核心线程
+用法：容量规划必须同时算队列与最大线程
+锚点：ThreadPoolExecutor javadoc 实测
+
+</details>
+
+### 线程池 · newFixedThreadPool（误用）
+
+<details><summary>看背面</summary>
+
+Executors.newFixedThreadPool 使用无界 LinkedBlockingQueue 可能堆积任务导致 OOM
+原理：队列容量是 Integer.MAX_VALUE，下游变慢时任务无限堆积，阿里手册明确禁止使用 Executors 创建线程池
+用法：生产用 new ThreadPoolExecutor 加有界队列
+锚点：阿里手册
+
+</details>
+
+### 线程池 · newCachedThreadPool（误用）
+
+<details><summary>看背面</summary>
+
+Executors.newCachedThreadPool 最大线程数是 Integer.MAX_VALUE 可无限创建线程
+原理：SynchronousQueue 无容量不排队，来一个任务必建一个新线程，高并发瞬间创建数万线程耗尽内存与线程句柄
+用法：突发可容忍时可用但要压测线程峰值
+锚点：阿里手册
+
+</details>
+
+### 线程池 · AbortPolicy（拒绝策略）
+
+<details><summary>看背面</summary>
+
+ThreadPoolExecutor 默认拒绝策略是 AbortPolicy 即抛 RejectedExecutionException
+原理：四种策略：Abort 抛异常、CallerRuns 由提交线程执行、Discard 静默丢弃、DiscardOldest 丢队首再提交，默认抛异常逼迫调用方处理
+用法：重要任务用 CallerRuns 降速反压
+锚点：JDK 源码
+
+</details>
+
+### 线程池 · CallerRunsPolicy（拒绝策略）
+
+<details><summary>看背面</summary>
+
+CallerRunsPolicy 让提交任务的线程自己执行以实现反压
+原理：执行期间提交线程被占用，上游生产速度被迫降速，是简洁的背压手段但会阻塞调用方
+用法：非核心链路可接受，支付链路慎用
+锚点：实战经验
+
+</details>
+
+### 线程池 · allowCoreThreadTimeOut（参数）
+
+<details><summary>看背面</summary>
+
+allowCoreThreadTimeOut(true) 可让核心线程在空闲超过 keepAliveTime 后被回收
+原理：默认核心线程不回收常驻内存，流量低谷期可用该参数释放资源，回收后新任务重新建线程
+用法：突发流量型服务低谷缩容
+锚点：JDK 文档
+
+</details>
+
+### 线程池 · 线程数公式（调优）
+
+<details><summary>看背面</summary>
+
+线程数经验公式：CPU 密集型约 N+1，IO 密集型约 N×(1+等待时间/计算时间)
+原理：CPU 密集多一个线程用于缺页等暂停；IO 密集等待期间可切换线程提高吞吐，实际以压测为准
+用法：按业务类型给初值再压测微调
+锚点：Java Concurrency in Practice
+
+</details>
+
+### 线程池 · submit（误用）
+
+<details><summary>看背面</summary>
+
+submit 提交的任务抛出的异常被 Future 吞掉不打印
+原理：execute 直接走线程的 uncaughtExceptionHandler，submit 把异常包进 Future 只有 get 时才拿到，漏 get 则异常静默
+用法：有 get 才用 submit，否则 execute 加 UEH 打日志
+锚点：JDK 源码实测
+
+</details>
+
+### 线程池 · shutdown（生命周期）
+
+<details><summary>看背面</summary>
+
+shutdown 后已提交任务继续执行完而 shutdownNow 尝试中断并返回未执行任务
+原理：shutdown 拒绝新任务但处理完队列，shutdownNow 遍历中断工作线程，两者都不等任务真正结束，需配合 awaitTermination
+用法：优雅停机顺序：shutdown、awaitTermination、shutdownNow 兜底
+锚点：JDK 文档
+
+</details>
+
+### 线程池 · 动态调参（运维）
+
+<details><summary>看背面</summary>
+
+线程池参数可运行时动态调整（setCorePoolSize 与 setMaximumPoolSize）
+原理：ThreadPoolExecutor 内部用 volatile 存参数并支持运行时修改，美团据此实现动态线程池应对大促
+用法：配置中心推送阈值动态伸缩
+锚点：美团技术博客
+
+</details>
+
+### 线程池 · 监控（运维）
+
+<details><summary>看背面</summary>
+
+线程池监控看活跃线程数、队列长度与拒绝次数三个核心指标
+原理：getActiveCount、getQueue().size()、拒绝策略计数（需自行埋点）构成健康度画像，队列增长斜率是过载前兆
+用法：接入监控大盘告警队列积压
+锚点：实战经验
+
+</details>
+
+### 线程池 · ThreadFactory（误用）
+
+<details><summary>看背面</summary>
+
+线程池必须通过 ThreadFactory 给线程命名
+原理：默认线程名 pool-1-thread-N 无法定位问题，命名规则建议业务-pool-序号，dump 分析时一眼归因
+用法：所有线程池统一命名规范
+锚点：阿里手册
+
+</details>
+
+### 阻塞队列 · LinkedBlockingQueue（实现）
+
+<details><summary>看背面</summary>
+
+LinkedBlockingQueue 不传容量参数时容量为 Integer.MAX_VALUE
+原理：两把锁分离读写提高并发但默认容量形同无界，用在 newFixedThreadPool 就是 OOM 根源
+用法：当业务队列必须显式传容量
+锚点：JDK 源码
+
+</details>
+
+### 阻塞队列 · ArrayBlockingQueue（实现）
+
+<details><summary>看背面</summary>
+
+ArrayBlockingQueue 是单锁有界数组队列
+原理：读写共用一把锁，容量构造时固定，支持公平模式，与 Linked 双锁版本并发度不同
+用法：有界队列首选之一，容量固定场景
+锚点：JDK 源码
+
+</details>
+
+### 阻塞队列 · SynchronousQueue（实现）
+
+<details><summary>看背面</summary>
+
+SynchronousQueue 没有容量每个 put 必须等 take 直接交接
+原理：不存储元素，newCachedThreadPool 用它实现来一个任务建一个线程的设计
+用法：线程池需要快速扩张时选用
+锚点：JDK 文档
+
+</details>
+
+### 阻塞队列 · DelayQueue（实现）
+
+<details><summary>看背面</summary>
+
+DelayQueue 按到期时间出队元素必须实现 Delayed 接口
+原理：内部优先堆按剩余延迟排序，take 阻塞到队首到期，用于订单超时关单等延迟任务（小规模方案，大规模用时间轮或 RocketMQ 延迟消息）
+用法：订单超时关闭的小规模实现
+锚点：JDK 文档
+
+</details>
+
+### CAS · cmpxchg（原子性）
+
+<details><summary>看背面</summary>
+
+CAS 依赖 CPU 的原子比较交换指令（x86 上 cmpxchg 配 lock 前缀）
+原理：Java 通过 Unsafe 调用硬件原子指令，失败则自旋重试，全程无锁，JDK9 后推荐 VarHandle
+用法：谈无锁编程先落到硬件原子指令
+锚点：x86 手册
+
+</details>
+
+### CAS · ABA（误用）
+
+<details><summary>看背面</summary>
+
+CAS 存在 ABA 问题：值从 A 改回 A 时 CAS 无法察觉
+原理：解决方式是加版本号，AtomicStampedReference 维护引用加 stamp 二元组，数据库乐观锁 version 字段同理
+用法：链表类无锁结构必须防 ABA
+锚点：学术与实战共识
+
+</details>
+
+### 原子类 · LongAdder（性能）
+
+<details><summary>看背面</summary>
+
+高竞争计数用 LongAdder 而非 AtomicLong
+原理：AtomicLong 所有线程 CAS 同一个值自旋严重，LongAdder 分散到 Cell 数组各自累加，sum 时汇总，竞争下吞吐可高一个数量级
+用法：纯计数（QPS 统计）用 LongAdder
+锚点：JDK 文档
+
+</details>
+
+### 原子类 · VarHandle（语义）
+
+<details><summary>看背面</summary>
+
+JDK9 引入 VarHandle 替代 Unsafe 提供安全的字段级原子操作
+原理：提供 getAndSet、compareAndSet、getAndAddRelease 等带内存语义的方法，且模块系统下不依赖内部 API
+用法：新代码用 VarHandle 与 MethodHandles
+锚点：JEP 193
+
+</details>
+
+### AQS · state（实现）
+
+<details><summary>看背面</summary>
+
+AQS 核心是一个 volatile int state 加 CLH 变体等待队列
+原理：获取失败的线程封装成 Node 入队 park，释放时唤醒队首后继；state 语义由子类定义（重入次数、许可数、闩计数）
+用法：实现自定义同步器直接复用 AQS
+锚点：JDK 源码
+
+</details>
+
+### AQS · JDK15（版本）
+
+<details><summary>看背面</summary>
+
+AQS 在 JDK15 完成内部重构对外语义不变
+原理：新实现简化等待节点状态机与唤醒路径，性能与可维护性提升，网络流传的旧版源码逐行讲解已过时
+用法：讲源码前先确认 JDK 版本
+锚点：JDK 15 release notes
+
+</details>
+
+### 显式锁 · ReentrantLock（公平性）
+
+<details><summary>看背面</summary>
+
+ReentrantLock 默认非公平锁吞吐更高
+原理：非公平允许新请求直接抢锁减少线程切换，公平锁按队列顺序避免饥饿但吞吐低，可构造函数选择
+用法：默认用非公平，公平需求明确才显式选
+锚点：JDK 文档
+
+</details>
+
+### 显式锁 · lockInterruptibly（能力）
+
+<details><summary>看背面</summary>
+
+ReentrantLock 相比 synchronized 增加可中断、超时与公平能力
+原理：lockInterruptibly 等锁时响应中断、tryLock(time) 限时获取、多 Condition 条件队列，synchronized 全都不支持
+用法：需要中断响应与限时获取的场景选 ReentrantLock
+锚点：JDK 文档
+
+</details>
+
+### 显式锁 · ReentrantReadWriteLock（读写锁）
+
+<details><summary>看背面</summary>
+
+ReentrantReadWriteLock 允许读共享写独占且支持写锁降级为读锁
+原理：持有写锁时可再获取读锁后释放写（降级安全），升级（持读再取写）会死锁，适合读多写少的缓存场景
+用法：缓存刷新：写锁改数据降级读锁再校验
+锚点：JDK 文档
+
+</details>
+
+### 显式锁 · StampedLock（乐观读）
+
+<details><summary>看背面</summary>
+
+StampedLock 提供乐观读：读时不加锁事后 validate 校验
+原理：乐观读返回一个 stamp，读完后 validate 判断期间是否有写，失败升级为悲观读锁；吞吐高于读写锁，但不可重入且不支持 Condition
+用法：热点缓存读路径优化
+锚点：JDK 文档
+
+</details>
+
+### 协作工具 · countDown（CountDownLatch）
+
+<details><summary>看背面</summary>
+
+CountDownLatch 计数不可重置用完即弃
+原理：await 等计数到零，countDown 递减，构造时固定 count，重复使用需重建对象或改用 CyclicBarrier
+用法：并行任务汇合点（多服务预加载后继续）
+锚点：JDK 文档
+
+</details>
+
+### 协作工具 · 复用（CyclicBarrier）
+
+<details><summary>看背面</summary>
+
+CyclicBarrier 可重复使用且支持 barrierAction 回调
+原理：计数归零后自动重置进入下一轮，与 CountDownLatch 的单次性形成对比，适合分批同步场景
+用法：多轮分阶段并行计算
+锚点：JDK 文档
+
+</details>
+
+### 协作工具 · 许可（Semaphore）
+
+<details><summary>看背面</summary>
+
+Semaphore 维护许可数用于限流与资源池
+原理：acquire 获取 release 归还，公平模式可选，典型场景：数据库连接池上限、接口并发限流
+用法：接口并发数控制首选
+锚点：JDK 文档
+
+</details>
+
+### 并发容器 · CAS+synchronized（CHM）
+
+<details><summary>看背面</summary>
+
+JDK8 的 ConcurrentHashMap 用 CAS 初始化与首节点插入加 synchronized 锁 bin 头实现分段写
+原理：桶为空时 CAS 直接放节点，非空时 synchronized 锁住该 bin 首节点，锁粒度到桶，并发度等于桶数
+用法：回答 CHM 原理必须分 JDK 版本
+锚点：JDK8 源码
+
+</details>
+
+### 并发容器 · null（CHM）
+
+<details><summary>看背面</summary>
+
+ConcurrentHashMap 不允许 null 键与 null 值
+原理：并发下 get 返回 null 无法区分"键不存在"与"值就是 null"，HashMap 单线程可用 containsKey 二次确认，CHM 不行所以直接禁止
+用法：向 CHM put null 编译不报错运行时 NPE
+锚点：JDK 文档
+
+</details>
+
+### 并发容器 · CounterCell（CHM）
+
+<details><summary>看背面</summary>
+
+CHM 的 size 通过 baseCount 加 CounterCell 数组汇总且是弱一致值
+原理：写路径 CAS baseCount 失败则分散累加到 CounterCell 减少竞争，size 是采样汇总无强一致快照，精确计数要用外部锁或 LongAdder 思路
+用法：需要精确 size 就换数据结构
+锚点：JDK8 源码
+
+</details>
+
+### 并发容器 · 扩容（CHM）
+
+<details><summary>看背面</summary>
+
+CHM 支持多线程协助扩容（helping transfer）
+原理：扩容时其他线程 put 会先帮忙迁移部分桶再完成自己的写，这是 CHM 高并发的关键设计之一，单线程扩容会成瓶颈
+用法：谈 CHM 性能必提协助扩容
+锚点：JDK8 源码
+
+</details>
+
+### 并发容器 · 读无锁（CHM）
+
+<details><summary>看背面</summary>
+
+CHM 的 get 完全不加锁
+原理：Node 的 val 与 next 用 volatile 保证可见，读路径无锁无 CAS 是 CHM 读性能高的根源
+用法：高并发读场景 CHM 优于读写锁包裹的 HashMap
+锚点：JDK8 源码
+
+</details>
+
+### 并发容器 · 树化（CHM）
+
+<details><summary>看背面</summary>
+
+CHM 树化条件与 HashMap 一致：bin 中已有 8 个节点时插入第 9 个触发且表长需不小于 64
+原理：MIN_TREEIFY_CAPACITY=64，表太小时优先扩容而非树化；8 语义是"bin 已有 8 个节点"而非"链长到 8 才树化"
+用法：两处树化语义常考常错，以源码为准
+锚点：JDK8 源码实测
+
+</details>
+
+### 并发容器 · 复合操作（CHM）
+
+<details><summary>看背面</summary>
+
+CHM 的 putIfAbsent 与 computeIfAbsent 是原子复合操作
+原理：先 get 后 put 在并发下有竞态，原子方法一次完成检查与写入，本地缓存加载双重检查首选 computeIfAbsent
+用法：缓存防击穿用 computeIfAbsent
+锚点：JDK 文档
+
+</details>
+
+### 并发容器 · 参数（CHM）
+
+<details><summary>看背面</summary>
+
+CHM 默认初始容量 16 负载因子 0.75 与 HashMap 相同
+原理：可传 initialSize 与 loadFactor 构造参数，预估条数设 initialSize=预期/负载因子避免扩容抖动
+用法：大缓存初始化时给足容量
+锚点：JDK 文档
+
+</details>
+
+### 并发容器 · CopyOnWriteArrayList（COW）
+
+<details><summary>看背面</summary>
+
+CopyOnWriteArrayList 写时复制整份数组读完全无锁
+原理：修改时复制新数组替换引用（volatile 数组），迭代器是快照不支持 remove，适合读极多写极少的小列表（监听器列表）
+用法：监听器注册场景标准选择
+锚点：JDK 源码
+
+</details>
+
+### 并发容器 · ConcurrentLinkedQueue（无锁）
+
+<details><summary>看背面</summary>
+
+ConcurrentLinkedQueue 是 CAS 无锁非阻塞队列
+原理：基于 Michael-Scott 无锁算法，size() 是 O(n) 弱一致遍历，适合无界并发生产消费但不是 BlockingQueue
+用法：高吞吐异步任务传递
+锚点：JDK 源码
+
+</details>
+
+### JMM · 工作内存（模型）
+
+<details><summary>看背面</summary>
+
+JMM 抽象为主内存与线程工作内存每线程有本地副本
+原理：线程操作的是副本，何时刷回主存未定义，需要 volatile、锁或 final 等同步动作建立可见性通道，这是可见性问题的根源
+用法：从模型层面解释可见性 bug
+锚点：JSR-133
+
+</details>
+
+### JMM · as-if-serial（重排）
+
+<details><summary>看背面</summary>
+
+单线程内程序表现为串行语义（as-if-serial）编译器与 CPU 可自由重排
+原理：重排只在不改变单线程结果的前提下进行，多线程下重排导致可见性问题，需要 happens-before 约束
+用法：判断重排问题时先看是否跨线程
+锚点：JLS 17.4
+
+</details>
+
+### JMM · final（安全发布）
+
+<details><summary>看背面</summary>
+
+final 字段在构造器内赋值后无需同步即可被其他线程安全读取
+原理：JMM 对 final 有特殊保证：构造器内写 final 与随后把引用发布给其他线程之间有 happens-before，this 不逸出是前提
+用法：不可变对象（值对象、配置）用 final 构建
+锚点：JLS 17.5
+
+</details>
+
+### 安全发布 · this 逸出（误用）
+
+<details><summary>看背面</summary>
+
+构造器中把 this 交给外部（注册监听器、启动线程）导致未构造完成的对象被并发访问
+原理：发布时 final 字段尚未赋值，其他线程可能读到默认值，修复：构造完成后统一发布或用静态工厂
+用法：监听器注册放构造后或工厂方法内
+锚点：JCiP 4.3
+
+</details>
+
+### 安全发布 · 不可变对象（不可变）
+
+<details><summary>看背面</summary>
+
+不可变对象（所有字段 final 且无可变状态）天然线程安全
+原理：String、包装类等不可变类型可自由共享无需同步，设计线程安全的第一选择是造不可变对象
+用法：共享配置、常量集合用不可变设计
+锚点：JCiP 4.x
+
+</details>
+
+### 线程封闭 · 栈封闭（模式）
+
+<details><summary>看背面</summary>
+
+局部变量天然线程封闭是实现线程安全的最简方式
+原理：变量只存在于栈帧不被共享，无状态 Service 的并发安全正来源于此
+用法：Spring 单例 Service 无状态的并发安全性来源
+锚点：JCiP 3.x
+
+</details>
+
+### 异步 · 回调线程（CompletableFuture）
+
+<details><summary>看背面</summary>
+
+CompletableFuture 未指定线程时回调在完成线程或调用线程执行
+原理：thenApply 不带 Async 由完成线程直接执行，thenApplyAsync(fn) 落到 ForkJoinPool.commonPool，IO 回调务必显式指定自定义线程池
+用法：回调线程归属决定线程上下文是否丢失
+锚点：JDK 文档
+
+</details>
+
+### 异步 · commonPool（CompletableFuture）
+
+<details><summary>看背面</summary>
+
+supplyAsync 默认线程池是 ForkJoinPool.commonPool
+原理：commonPool 并行度为 CPU 核减一且全 JVM 共享，IO 任务占满会拖垮其他并行流任务，生产环境必须传自定义 Executor
+用法：CF 的异步任务统一换自定义池
+锚点：JDK8 文档
+
+</details>
+
+### 异步 · 组合（CompletableFuture）
+
+<details><summary>看背面</summary>
+
+allOf 等全部完成 anyOf 任一完成 join/get 阻塞取结果
+原理：allOf 返回的 CF 需再 join 拿各任务结果，anyOf 用于多源竞速（多缓存源取最快）
+用法：并行聚合（多下游并发调用）标准写法
+锚点：JDK 文档
+
+</details>
+
+### 异步 · 异常（CompletableFuture）
+
+<details><summary>看背面</summary>
+
+CF 的异常不自动传播调用方，链上用 exceptionally 或 handle 恢复
+原理：异常沿依赖链传播使下游跳过，get 时包装成 ExecutionException 抛出；handle 同时处理正常与异常路径
+用法：链式调用末端统一 exceptionally 兜底
+锚点：JDK 文档
+
+</details>
+
+### 虚拟线程 · JDK21（版本）
+
+<details><summary>看背面</summary>
+
+虚拟线程是 JDK21 正式特性由 JVM 调度到少量载体线程
+原理：创建成本极低（栈在堆上）可开百万级，阻塞时让出载体线程由 JVM 换入下一个虚拟线程，面向 IO 密集高并发
+用法：IO 密集微服务高并发吞吐利器
+锚点：JEP 444
+
+</details>
+
+### 虚拟线程 · pinning（误用）
+
+<details><summary>看背面</summary>
+
+JDK21-23 中虚拟线程在 synchronized 块内阻塞会 pin 载体线程
+原理：被 pin 的载体无法释放导致吞吐退化，JDK24 JEP 491 已修复（synchronized 不再 pin）；过渡期热点路径可换 ReentrantLock
+用法：JDK21 服务排查吞吐退化先查 pin
+锚点：JEP 491
+
+</details>
+
+### 虚拟线程 · 池化（误用）
+
+<details><summary>看背面</summary>
+
+虚拟线程不应池化每次任务新建一个
+原理：池化的意义（复用昂贵资源）对虚拟线程不成立，限流应该用 Semaphore 控制并发数而非限制线程数
+用法：newVirtualThreadPerTaskExecutor 直接用
+锚点：JDK 文档
+
+</details>
+
+### 虚拟线程 · Thread.ofVirtual（API）
+
+<details><summary>看背面</summary>
+
+创建虚拟线程的 API 是 Thread.ofVirtual().start() 或 Executors.newVirtualThreadPerTaskExecutor()
+原理：与平台线程同一 Thread 抽象，可加名字便于排查，Spring Boot 3.2 开 spring.threads.virtual.enabled 一键切换
+用法：Tomcat 请求线程与 @Async 池切换虚拟线程
+锚点：Spring Boot 3.2
+
+</details>
+
+### 死锁 · 死锁四条件（排查）
+
+<details><summary>看背面</summary>
+
+死锁四条件：互斥、占有且等待、不可剥夺、循环等待
+原理：破坏任一条件即可预防：按序加锁破坏循环等待、tryLock 超时破坏占有等待，jstack 可直接检出死锁
+用法：转账互转场景必须按账户 ID 排序加锁
+锚点：理论共识
+
+</details>
+
+### 死锁 · jstack（排查）
+
+<details><summary>看背面</summary>
+
+jstack 输出末尾直接报告 Java-level deadlock 及涉及的锁
+原理：JVM 自动检测 monitor 与 JUC 锁的死锁，Arthas thread -b 一条命令定位死锁源头，ThreadMXBean.findDeadlockedThreads 可编程检测
+用法：生产 dump 排查第一入口
+锚点：工具文档
+
+</details>
+
+### 死锁 · 锁对象（误用）
+
+<details><summary>看背面</summary>
+
+synchronized 的锁对象不能是字符串常量、包装类缓存值或可变引用
+原理：字符串常量全局共享可能锁到别人的锁，Integer 缓存 -128~127 不同代码锁同一对象，可变引用被替换后两线程锁不同对象形同虚设
+用法：锁对象专用 final 字段（new Object 或专用锁类）
+锚点：实战教训
+
+</details>
+
+### JIT · 锁消除（优化）
+
+<details><summary>看背面</summary>
+
+JIT 逃逸分析可做锁消除与锁粗化
+原理：对象不逃逸时其上的同步被整体删除（StringBuffer 局部使用场景），循环内反复加锁会被合并为一次，都是无感知的性能优化
+用法：性能分析时知道 JIT 会消除局部同步
+锚点：HotSpot 文档
+
+</details>
+
+### 并发容器 · synchronizedMap（选型）
+
+<details><summary>看背面</summary>
+
+Collections.synchronizedMap 全表一把锁性能远低于 ConcurrentHashMap
+原理：每次读写锁整表，复合操作仍需外部同步，CHM 桶级锁读无锁完胜，遗留代码迁移首选 CHM
+用法：老代码 review 时识别并替换
+锚点：JDK 文档
+
+</details>
+
+### 并发容器 · ConcurrentSkipListMap（选型）
+
+<details><summary>看背面</summary>
+
+需要排序的并发 Map 用 ConcurrentSkipListMap（跳表）
+原理：TreeMap 线程不安全，加锁 TreeMap 退化为全局锁，跳表天然支持无锁读与范围查询，Redis ZSet 同款结构
+用法：并发+有序+范围查询场景
+锚点：JDK 文档
+
+</details>
+
+### 协作 · park（LockSupport）
+
+<details><summary>看背面</summary>
+
+LockSupport.park 与 unpark 是 JUC 阻塞的底层原语
+原理：unpark 可先于 park 调用（许可制，最多持有 1 个许可），不抛 InterruptedException 但响应中断返回，AQS 队列挂起全靠它
+用法：自定义同步器时使用
+锚点：JDK 源码
+
+</details>
+
+### 线程基础 · priority（优先级）
+
+<details><summary>看背面</summary>
+
+线程优先级只是提示不可作为正确性工具
+原理：优先级映射到 OS 线程优先级但 JVM 不保证严格生效，跨平台行为不一致，正确性永远靠同步原语
+用法：不要用优先级做业务调度
+锚点：JCiP
+
+</details>
+
+### 线程基础 · yield（yield）
+
+<details><summary>看背面</summary>
+
+yield 只是提示调度器让出当前 CPU 无任何保证
+原理：可能立即被再次调度，也不保证让给谁，测试中用于模拟竞争但生产代码不依赖其语义
+用法：了解即可不用于业务逻辑
+锚点：JDK 文档
+
+</details>
+
+### 原子类 · AtomicIntegerFieldUpdater（字段更新）
+
+<details><summary>看背面</summary>
+
+AtomicIntegerFieldUpdater 反射式对普通 volatile 字段做原子操作
+原理：字段必须 volatile 且非 static 非 private，避免为每个对象包一层 AtomicReference 的内存开销，大批量对象（如节点）场景省内存
+用法：海量小对象内字段原子更新
+锚点：JDK 文档
+
+</details>
+
+### 线程池 · prestartAllCoreThreads（预热线程）
+
+<details><summary>看背面</summary>
+
+prestartAllCoreThreads 可提前创建所有核心线程避免冷启动抖动
+原理：默认核心线程懒创建（来任务才建），突发流量首请求建线程有延迟，网关类服务可预热
+用法：低延迟网关线程池预热
+锚点：JDK 文档
+
+</details>
+
+### JMM · double（64 位）
+
+<details><summary>看背面</summary>
+
+非 volatile 的 long 与 double 读写可能不是原子的（字撕裂）
+原理：JLS 允许 64 位读写分两半执行，并发下可能读到高 32 位新值加低 32 位旧值，声明 volatile 即可保证原子性
+用法：跨线程共享的 long 计数加 volatile
+锚点：JLS 17.7
+
+</details>
+
+### 异步 · get（Future）
+
+<details><summary>看背面</summary>
+
+Future.get 不传超时参数会无限阻塞
+原理：下游挂死则调用线程永久卡住，必须 get(timeout) 并处理 TimeoutException，或整体改 CF 加 orTimeout（JDK9+）
+用法：所有远程调用 Future 必须带超时
+锚点：JDK 文档
+
+</details>
+
+### 异步 · orTimeout（CompletableFuture）
+
+<details><summary>看背面</summary>
+
+JDK9 引入 orTimeout 与 completeOnTimeout 给 CF 加超时
+原理：超时不取消底层任务只是让 CF 以异常或默认值完成，任务线程仍可能在跑，彻底取消需要 cancel 配合任务自身响应中断
+用法：CF 链统一超时兜底
+锚点：JDK9
+
+</details>
+
+### 协作 · 阶段（Phaser）
+
+<details><summary>看背面</summary>
+
+Phaser 是更灵活的多阶段同步器可替代 CyclicBarrier 与 CountDownLatch
+原理：支持动态注册与注销参与方（一代一批），多阶段栅栏，JDK7 引入，了解层级低于前两者
+用法：动态成员的阶段性并行任务
+锚点：JDK7
+
+</details>
+
+### 并发容器 · 双端（ConcurrentLinkedDeque）
+
+<details><summary>看背面</summary>
+
+ConcurrentLinkedDeque 提供 CAS 无锁双端队列
+原理：工作窃取、栈式 LIFO 并发场景，与 ConcurrentLinkedQueue 同为非阻塞族
+用法：非阻塞双端消费场景
+锚点：JDK 文档
+
+</details>
+
+### 线程池 · 有界（队列选择）
+
+<details><summary>看背面</summary>
+
+生产线程池必须用有界队列加显式拒绝策略
+原理：无界队列让 maximumPoolSize 与拒绝策略形同虚设，过载信号被延迟到 OOM 才暴露，有界队列+拒绝策略构成完整反压
+用法：容量=峰值 QPS×可容忍延迟
+锚点：JCiP 8.x
+
+</details>
+
+### 协作 · Condition（条件队列）
+
+<details><summary>看背面</summary>
+
+Condition 将等待队列从锁对象解耦支持一个锁多个条件队列
+原理：synchronized 只有一套 wait/notify，多条件必须 notifyAll 全员唤醒，ReentrantLock 多个 Condition 精准唤醒对应等待者，有界队列 ArrayBlockingQueue 即 notFull/notEmpty 双条件
+用法：生产者消费者分开唤醒用双 Condition
+锚点：JDK 源码
+
+</details>
+
+### 并发容器 · ArrayDeque（Deque）
+
+<details><summary>看背面</summary>
+
+ArrayDeque 是循环数组双端队列性能优于 Stack 与 LinkedList
+原理：官方明确推荐替代 Stack（Stack 继承 Vector 带锁开销），做队列也优于 LinkedList（缓存友好）
+用法：栈一律 ArrayDeque
+锚点：JDK 文档
+
+</details>
+
+### 误用 · volatile 缺失（双重检查）
+
+<details><summary>看背面</summary>
+
+无 volatile 的 DCL 在重排下可能发布半初始化对象
+原理：new 的引用赋值可能先于构造执行，第二个线程首次判空后直接使用未初始化字段，加 volatile 禁止该重排
+用法：review 单例代码必查 volatile
+锚点：JSR-133
+
+</details>
+
+### 异步 · 传递（线程上下文）
+
+<details><summary>看背面</summary>
+
+异步任务会丢失 ThreadLocal 上下文（traceId、用户态）
+原理：任务在池线程执行，ThreadLocal 停留在提交线程，需要显式捕获传递（阿里 TTL、Micrometer context-propagation）或改造为参数传递
+用法：埋点日志组件必须处理上下文传递
+锚点：实战经验
+
+</details>
+
+### 并发容器 · 迭代器弱一致（Snapshot）
+
+<details><summary>看背面</summary>
+
+并发容器迭代器是弱一致的不抛 ConcurrentModificationException
+原理：CHM/COW 的迭代器反映创建时或创建后的某状态，不保证看到后续修改，COW 是严格快照，CHM 是弱一致
+用法：遍历并发容器时理解弱一致语义即可
+锚点：JDK 文档
+
+</details>
+
+### 线程池 · 舱壁（隔离）
+
+<details><summary>看背面</summary>
+
+不同业务的线程池必须隔离（舱壁模式）避免相互拖垮
+原理：共用线程池时一个慢业务占满队列殃及全服务，按下游/重要性拆池（核心池、非核心池），配合 Hystrix/Sentinel 语义
+用法：核心交易与边缘任务分池
+锚点：舱壁模式
+
+</details>
+
+### 虚拟线程 · carrier（调度）
+
+<details><summary>看背面</summary>
+
+虚拟线程默认调度器是专用 ForkJoinPool（FIFO 模式）并行度默认 CPU 核数
+原理：可用 jdk.virtualThreadScheduler.parallelism 调整，载体线程数少于虚拟线程数百万级，阻塞 IO 时载体立即被复用
+用法：调优虚拟线程吞吐先调载体数
+锚点：JDK21 文档
+
+</details>
+
+### 虚拟线程 · Semaphore（限流）
+
+<details><summary>看背面</summary>
+
+虚拟线程并发限流标准做法是 Semaphore
+原理：虚拟线程可无限创建，下游（数据库连接池）承受不了无限并发，acquire 许可形成背压，连接池本身就是天然限流器
+用法：虚拟线程 + Semaphore 是官方推荐组合
+锚点：JDK 文档
+
+</details>
+
+### 原子类 · 自旋（getAndIncrement）
+
+<details><summary>看背面</summary>
+
+AtomicLong.getAndIncrement 失败后自旋重试（do-while CAS）
+原理：高竞争下大量自旋浪费 CPU，这是 LongAdder 分段设计的动机，自旋次数可用性能工具观察
+用法：理解无锁与阻塞的本质区别
+锚点：JDK 源码
+
+</details>
+
+### AQS · 共享（共享模式）
+
+<details><summary>看背面</summary>
+
+AQS 支持独占与共享两种获取模式
+原理：独占（ReentrantLock）一次一个线程，共享（Semaphore、CountDownLatch、读锁）可多个线程同时通过，tryAcquireShared 返回剩余量决定传播
+用法：区分读写锁与 CountDownLatch 的 AQS 用法
+锚点：JDK 源码
+
+</details>
+
+### 并发容器 · foreach（ConcurrentHashMap）
+
+<details><summary>看背面</summary>
+
+CHM 支持并行 forEach 与 search 等 bulk 操作（JDK8+）
+原理：forEach(parallelismThreshold, action) 超过阈值的条目并行处理，search/findAny 语义，大数据量遍历可用
+用法：离线统计任务用并行遍历
+锚点：JDK8 文档
+
+</details>
+
+### 死锁 · 锁排序（预防）
+
+<details><summary>看背面</summary>
+
+预防死锁最实用手段是全局一致的锁获取顺序
+原理：按业务键排序（账户 ID 从小到大）转账互转不再死锁，tryLock 超时回退是补充手段，这两招覆盖绝大多数死锁
+用法：转账、库存扣减等双资源场景
+锚点：JCiP 10.x
+
+</details>
+
+### 并发容器 · 实现（CopyOnWriteArraySet）
+
+<details><summary>看背面</summary>
+
+CopyOnWriteArraySet 内部是 CopyOnWriteArrayList 加 contains 去重
+原理：contains 是 O(n) 线性扫描，元素多时写与查询都慢，只适合极小且读极多的监听器集合
+用法：监听器、观察者集合
+锚点：JDK 源码
+
+</details>
+
+
+## JVM（110 张）
+
+### 运行时数据区 · 程序计数器（结构）
+
+<details><summary>看背面</summary>
+
+程序计数器是线程私有的当前字节码执行行号指示器且是唯一不会 OOM 也没有 GC 的区域
+原理：线程切换后需恢复到正确执行位置，native 方法该值为 undefined
+用法：背区域划分题的标准起点
+锚点：JVM 规范
+
+</details>
+
+### 运行时数据区 · StackOverflowError（异常）
+
+<details><summary>看背面</summary>
+
+线程栈默认 1MB 左右（-Xss 可调）递归过深抛 StackOverflowError
+原理：每方法调用压一帧，栈容量固定，无边界递归或深递归触发
+用法：-Xss256k 可压测栈深，线上先查递归出口
+锚点：HotSpot 默认
+
+</details>
+
+### 运行时数据区 · 堆（结构）
+
+<details><summary>看背面</summary>
+
+堆是线程共享的对象实例分配区域 GC 主战场
+原理：几乎所有的对象实例与数组都在堆上分配，是 GC 与调优的核心对象
+用法：谈调优先定位堆
+锚点：-Xmx -Xms
+
+</details>
+
+### 运行时数据区 · 元空间（版本）
+
+<details><summary>看背面</summary>
+
+JDK8 起永久代被移除类元数据存入本地内存的元空间
+原理：永久代大小受 -XX:MaxPermSize 限制且易 OOM，元空间用本地内存上限受机器内存约束
+用法：类加载爆炸型 OOM 先查元空间
+锚点：JEP 122
+
+</details>
+
+### 运行时数据区 · 字符串常量池（位置）
+
+<details><summary>看背面</summary>
+
+字符串常量池在 JDK7 已从永久代移到堆中
+原理：intern 的字符串要与堆对象争用空间，留在永久代会加剧永久代 OOM，所以前移
+用法：解释 String.intern 行为差异必提此版本线
+锚点：JDK7 变更
+
+</details>
+
+### 对象分配 · TLAB（TLAB）
+
+<details><summary>看背面</summary>
+
+TLAB 是 Eden 内按线程划分的私有分配缓冲区
+原理：分配只需移动指针（碰撞指针）无需同步，是快速分配路径，分配失败才退回 Eden 公共区 CAS
+用法：-XX:+UseTLAB 默认开启
+锚点：HotSpot 实现
+
+</details>
+
+### 对象分配 · Eden（路径）
+
+<details><summary>看背面</summary>
+
+绝大多数对象优先在 Eden 区分配
+原理：新生代采用复制算法设计，Eden 满触发 Minor GC 清理朝生夕死的对象
+用法：理解对象生命周期从 Eden 开始
+锚点：分代假设
+
+</details>
+
+### 对象分配 · Humongous（大对象）
+
+<details><summary>看背面</summary>
+
+G1 中对象大于等于 Region 一半时直接进入 Humongous 区域
+原理：巨型对象在新生代反复复制代价极高，G1 连续 Region 存放并视为老年代一部分，是 G1 特有概念
+用法：巨型缓存数组导致 G1 频繁 Mixed GC 时查 Humongous
+锚点：G1 实现
+
+</details>
+
+### 分代 · 年龄（晋升）
+
+<details><summary>看背面</summary>
+
+对象每熬过一次 Minor GC 年龄加一达到阈值晋升老年代
+原理：默认阈值 15（-XX:MaxTenuringThreshold），对象头 Mark Word 用 4 位存年龄，所以上限 15
+用法：排查过早晋升与常驻缓存放新生代的反例
+锚点：HotSpot
+
+</details>
+
+### 分代 · 动态年龄（晋升）
+
+<details><summary>看背面</summary>
+
+动态年龄判定：同龄对象总大小超过 Survivor 一半时该年龄以上整体提前晋升
+原理：Survivor 空间有限，等 15 次Minor GC 可能撑不下去，JVM 按总和提前放行，这是"新对象很快进老年代"的常见原因
+用法：日志显示新生代涨快老年代暴涨时查动态晋升
+锚点：HotSpot 实现
+
+</details>
+
+### GC · Minor GC（触发）
+
+<details><summary>看背面</summary>
+
+Minor GC 由 Eden 区空间不足触发与老年代无关
+原理：新生代 Eden 满即触发，回收整个新生代（Eden+两个 Survivor），采用复制算法把存活对象在 Survivor 间拷贝
+用法：频繁 Minor GC 查分配速率
+锚点：分代收集
+
+</details>
+
+### GC · Full GC（触发）
+
+<details><summary>看背面</summary>
+
+Full GC 触发场景：老年代空间不足、元空间不足、System.gc、晋升失败等
+原理：Full GC 涉及整堆 stop-the-world（G1/ZGC 的 Full GC 也是 STW），是延迟毛刺的主要来源
+用法：Full GC 频率是 JVM 健康第一指标
+锚点：JVM 实践
+
+</details>
+
+### GC · 可达性分析（判定）
+
+<details><summary>看背面</summary>
+
+存活判定用 GC Roots 可达性分析而非引用计数
+原理：引用计数无法解决循环引用（A 引 B、B 引 A 都不再使用），Java 用的就是可达性分析
+用法：回答"Java 如何判定对象死亡"的标准答案
+锚点：理论共识
+
+</details>
+
+### GC · GC Roots（判定）
+
+<details><summary>看背面</summary>
+
+GC Roots 包括虚拟机栈局部变量表、静态变量、常量引用、JNI 引用与活跃线程等
+原理：从这些根出发沿引用链遍历，不可达即死亡，理解泄漏必须能定位根
+用法：内存泄漏排查先找根到泄漏对象的路径
+锚点：JVM 规范
+
+</details>
+
+### 引用 · 弱引用（四种）
+
+<details><summary>看背面</summary>
+
+四种引用强度：强、软、弱、虚
+原理：软引用内存不足才回收（缓存）、弱引用下次 GC 必回收（ThreadLocalMap 的 key）、虚引用用于跟踪回收（DirectByteBuffer 清理）
+用法：缓存用软引用/弱引用要慎重（可能拖垮 GC）
+锚点：JDK 文档
+
+</details>
+
+### 回收 · finalize（finalization）
+
+<details><summary>看背面</summary>
+
+finalize 机制不可靠已被标记废弃，替代方案是 Cleaner 与 try-with-resources
+原理：finalize 执行时机不确定且可能复活对象拖垮 GC，JDK9 弃用、JDK18 deprecated for removal
+用法：资源清理一律显式关闭或 Cleaner
+锚点：JEP 421
+
+</details>
+
+### 算法 · 复制算法（复制）
+
+<details><summary>看背面</summary>
+
+新生代用复制算法老年代用标记-整理（或标记-清除）
+原理：新生代对象朝生夕死存活率低复制划算（浪费部分空间换速度），老年代存活率高适合标记后整理压缩
+用法：解释为什么分代（算法适配对象生命周期）
+锚点：分代假设
+
+</details>
+
+### 算法 · 弱分代假说（假设）
+
+<details><summary>看背面</summary>
+
+分代收集的理论基础是弱分代假说：绝大多数对象朝生夕死
+原理：实证数据支持，于是把对象按年龄分区分别用最合适的算法，不分代收集器（ZGC）不依赖该假设
+用法：GC 理论题的根基
+锚点：理论共识
+
+</details>
+
+### 分代 · 写屏障（跨代）
+
+<details><summary>看背面</summary>
+
+跨代引用通过记忆集与写屏障维护避免老年代全表扫描
+原理：Minor GC 只扫新生代，但老年代可能引用新生代对象，写屏障在引用赋值时记录（卡表/RSet），空间换时间
+用法：理解 G1 RSet 与卡表的关系
+锚点：HotSpot
+
+</details>
+
+### 收集器 · CMS（版本）
+
+<details><summary>看背面</summary>
+
+CMS 以最短停顿为目标采用标记-清除并已在 JDK9 被移除
+原理：并发标记与并发清除减少 STW，但标记-清除产生碎片且并发失败会退化 Serial Full GC，G1 全面接棒
+用法：老项目升级先替换 CMS 配置
+锚点：JEP 291
+
+</details>
+
+### 收集器 · Region（G1）
+
+<details><summary>看背面</summary>
+
+G1 把堆划分为多个等大 Region 逻辑分代停顿可预测
+原理：Region 大小 1-32MB（2 的幂自动选），Eden/Survivor/Old 是 Region 的角色标记而非物理连续区域，按停顿目标优先回收价值高的 Region（垃圾优先）
+用法：回答"G1 为什么叫 Garbage First"的标准点
+锚点：G1 论文
+
+</details>
+
+### 收集器 · RSet（G1）
+
+<details><summary>看背面</summary>
+
+G1 用 RSet（记忆集）记录其他 Region 指向本 Region 的引用
+原理：每个 Region 维护自己的 RSet，回收时无需扫描全堆找引用者，空间换停顿，RSet 维护成本是 G1 主要开销之一
+用法：G1 吞吐低于 Parallel 的主要原因之一
+锚点：G1 论文
+
+</details>
+
+### 收集器 · SATB（G1）
+
+<details><summary>看背面</summary>
+
+G1 用 SATB（原始快照）解决并发标记时对象消失问题
+原理：标记开始时拍逻辑快照，并发期被删引用的对象按快照保留（可能产生浮动垃圾），CMS 用增量更新只记录新引用
+用法：对比 G1 与 CMS 的并发标记差异
+锚点：理论共识
+
+</details>
+
+### 收集器 · Mixed GC（G1）
+
+<details><summary>看背面</summary>
+
+G1 的常规回收是 Mixed GC：新生代加上部分老年代 Region
+原理：按停顿预测模型选择回收收益最高的 Region 集合，不必然整堆回收，这是 G1 停顿可控的关键
+用法：调 G1 必懂 Mixed GC 与停顿目标的关系
+锚点：G1 论文
+
+</details>
+
+### 收集器 · 停顿目标（G1）
+
+<details><summary>看背面</summary>
+
+G1 默认最大停顿目标 200ms（-XX:MaxGCPauseMillis）
+原理：G1 以此选择 Region 回收集合，设得过小（如 20ms）会导致每轮回收极少、堆积满后退化 Full GC
+用法：G1 调优第一参数，设 100-200 之间
+锚点：G1 文档
+
+</details>
+
+### 收集器 · Full GC（G1）
+
+<details><summary>看背面</summary>
+
+G1 的 Full GC 在 JDK10 起为多线程并行（JEP 307）
+原理：JDK8 的 G1 Full GC 是单线程 Serial，退化时停顿巨大，JDK10 改并行大幅缩短，升级 JDK 版本对 G1 退化场景收益明显
+用法：升级 JDK 修复 G1 退化停顿
+锚点：JEP 307
+
+</details>
+
+### 收集器 · 着色指针（ZGC）
+
+<details><summary>看背面</summary>
+
+ZGC 用着色指针与读屏障实现停顿亚毫秒级（<1ms）
+原理：把 GC 元信息存进指针位，访问对象时读屏障自愈引用，标记/转移/重定位几乎全程并发，与堆大小基本无关
+用法：大堆低延迟场景（网关、交易核心）
+锚点：JEP 333
+
+</details>
+
+### 收集器 · 版本线（ZGC）
+
+<details><summary>看背面</summary>
+
+ZGC 在 JDK11 实验性、JDK15 生产可用、JDK21 引入分代 ZGC
+原理：分代 ZGC 让 ZGC 也利用弱分代假说，吞吐显著提升，JDK21 起是默认推荐开启项
+用法：JDK21+ 低延迟选 ZGC 用 generational 模式
+锚点：JEP 439
+
+</details>
+
+### 收集器 · 默认收集器（默认）
+
+<details><summary>看背面</summary>
+
+JDK8 默认 Parallel GC，JDK9 起默认 G1
+原理：JEP 248 改默认收集器为 G1，所以升级 JDK9+ 无需显式配置就有 G1
+用法：升级前确认默认 GC 变化防止回退
+锚点：JEP 248
+
+</details>
+
+### 收集器 · 吞吐（选型）
+
+<details><summary>看背面</summary>
+
+吞吐优先选 Parallel，延迟优先选 ZGC/G1
+原理：Parallel 吞吐最高但停顿秒级，G1 停顿可控 100ms 级，ZGC 亚毫秒但吞吐让步 5-15%，没有全能收集器
+用法：按 SLO 选收集器（P99 延迟目标）
+锚点：选型方法论
+
+</details>
+
+### GC 日志 · GC(n)（格式）
+
+<details><summary>看背面</summary>
+
+JDK9+ 统一日志格式如 GC(12) Pause Young (Normal) 1024M->256M
+原理：JDK8 的 PrintGCDetails 格式完全不同，统一日志用 -Xlog:gc* 输出，看日志先认版本（本项目 JDK 21 实测格式一致）
+用法：现场排查先确认 JDK 版本再读日志
+锚点：JEP 158 实测
+
+</details>
+
+### GC 日志 · -Xlog:gc*（工具）
+
+<details><summary>看背面</summary>
+
+JDK9+ 开启 GC 日志用 -Xlog:gc* 替代 JDK8 的多个 PrintGC 参数
+原理：统一日志框架可输出到文件带时间戳/级别/标签旋转，旧参数 PrintGCDetails 在 JDK9+ 已被映射并废弃提示
+用法：生产标配：-Xlog:gc*:file=gc.log:time,uptime
+锚点：JEP 158
+
+</details>
+
+### JIT · C1（分层）
+
+<details><summary>看背面</summary>
+
+HotSpot 分层编译：C1 快速编译 C2 深度优化分 5 层
+原理：解释执行积累计数到阈值先 C1（带性能探针）再 C2 完全优化，兼顾启动速度与峰值性能，JVM 默认开启分层编译
+用法：谈 JIT 必说分层与探针
+锚点：HotSpot 文档
+
+</details>
+
+### JIT · 回边计数（热点）
+
+<details><summary>看背面</summary>
+
+热点检测靠方法调用计数器与回边计数器超阈值触发编译
+原理：方法调用次数、循环回跳次数累加，达到阈值（-XX:CompileThreshold 相关）触发 OSR（栈上替换）让长循环中途换编译版
+用法：解释"跑一会儿变快"的原因
+锚点：HotSpot
+
+</details>
+
+### JIT · 逃逸分析（逃逸分析）
+
+<details><summary>看背面</summary>
+
+JIT 逃逸分析可做标量替换让对象分配彻底消失
+原理：对象不逃逸出方法/线程时拆成标量放在栈上或寄存器，本项目实测：仅局部引用的对象循环分配 GC 次数为零，逃逸写 static 字段后立即触发 GC
+用法：验证方法：分配循环+static 逃逸字段对比 GC 次数
+锚点：HotSpot 实测
+
+</details>
+
+### JIT · 内联（优化）
+
+<details><summary>看背面</summary>
+
+方法内联是 JIT 最重要的优化且是其他优化的前提
+原理：把被调方法体展开进调用方消除调用开销并扩大优化视野，热点小方法自动内联，方法过大不内联
+用法：热点路径方法保持小而简单利于内联
+锚点：HotSpot
+
+</details>
+
+### JIT · deoptimize（逆优化）
+
+<details><summary>看背面</summary>
+
+优化假设被打破时 JIT 逆优化回退解释执行
+原理：基于类层次分析的单态内联遇到新实现类、基于分支预测的消除遇到新分支时触发逆优化，性能毛刺来源之一
+用法：延迟毛刺排查项之一
+锚点：HotSpot
+
+</details>
+
+### 类加载 · 初始化（过程）
+
+<details><summary>看背面</summary>
+
+类加载过程：加载、验证、准备、解析、初始化五个阶段
+原理：准备阶段给静态变量分配并赋零值，初始化阶段执行 clinit（静态赋值与静态块），解析可延迟（懒解析）
+用法：类加载八股的骨干框架
+锚点：JVM 规范 5.x
+
+</details>
+
+### 类加载 · 主动引用（初始化）
+
+<details><summary>看背面</summary>
+
+主动引用才触发类初始化：new、读写非编译期常量静态字段、反射调用、子类初始化触发父类等
+原理：访问 static final 编译期常量（入常量池）不触发初始化，通过数组定义引用类也不触发
+用法：解释"常量不触发初始化"的经典案例
+锚点：JLS 12.4.1
+
+</details>
+
+### 类加载 · default 方法（接口）
+
+<details><summary>看背面</summary>
+
+带 default 方法的接口会在实现类初始化时被初始化
+原理：JLS 12.4.1 规定（Java8 引入 default 后修订），纯抽象接口不被实现类初始化触发（本项目实测验证）
+用法：判断接口静态块执行时机的依据
+锚点：JLS 12.4.1 实测
+
+</details>
+
+### 类加载 · 委派（双亲委派）
+
+<details><summary>看背面</summary>
+
+类加载默认双亲委派：App 先委派 Platform 再委派 Bootstrap
+原理：保证核心类一致与安全（自定义 java.lang.String 不会替换核心类），父加载器找不到才自己加载
+用法：安全与一致性的经典机制
+锚点：JVM 规范
+
+</details>
+
+### 类加载 · 打破（双亲委派）
+
+<details><summary>看背面</summary>
+
+SPI、Tomcat webapp、OSGi 等场景打破双亲委派
+原理：SPI 核心接口由 Bootstrap 加载但实现类在 classpath，用线程上下文类加载器反向委派；Tomcat 每 webapp 独立加载器实现应用隔离
+用法：回答"双亲委派可以被打破吗"必举例
+锚点：实战共识
+
+</details>
+
+### 类加载 · Class.forName（API）
+
+<details><summary>看背面</summary>
+
+Class.forName 触发初始化而 ClassLoader.loadClass 不触发
+原理：forName(name) 默认 initialize=true 执行静态块，loadClass 只加载不初始化（延迟到首次使用），驱动注册等场景用 forName 的历史原因
+用法：面试高频对比题
+锚点：JDK 文档
+
+</details>
+
+### OOM · Java heap space（分类）
+
+<details><summary>看背面</summary>
+
+常见 OOM：Java heap space、GC overhead limit、Metaspace、unable to create native thread、Direct buffer memory
+原理：不同区域 OOM 根因与解法不同：堆 OOM 查泄漏或堆小、元空间查动态类生成、native thread 查线程数与系统限制
+用法：OOM 分诊是排查第一步
+锚点：实战共识
+
+</details>
+
+### OOM · HeapDumpOnOutOfMemoryError（dump）
+
+<details><summary>看背面</summary>
+
+生产标配 -XX:+HeapDumpOnOutOfMemoryError 事发自动 dump
+原理：OOM 瞬间的对象分布是破案关键，事后 dump 无法重现现场，配合 HeapDumpPath 指定位置与 OOM 后重启策略
+用法：必须上线前就配好不能事后补
+锚点：实战共识
+
+</details>
+
+### OOM · MAT（分析）
+
+<details><summary>看背面</summary>
+
+MAT 用支配树与泄漏报告定位大内存对象
+原理：Leak Suspects 自动给嫌疑人，支配树看"谁抓住对象不放"，配合 GC Roots 路径定位泄漏源头
+用法：dump 分析（MAT/JProfiler）是 OOM 定案工具
+锚点：实战共识
+
+</details>
+
+### 参数 · -Xms（堆）
+
+<details><summary>看背面</summary>
+
+-Xms 与 -Xmx 设为相同值避免堆动态伸缩抖动
+原理：堆动态扩容触发 Full GC 或影响延迟稳定性，服务器固定负载场景等值是标配，容器环境用 MaxRAMPercentage 更优
+用法：G1 等低延迟场景尤其要等值
+锚点：实战共识
+
+</details>
+
+### 参数 · MaxRAMPercentage（容器）
+
+<details><summary>看背面</summary>
+
+容器内用 -XX:MaxRAMPercentage=70 之类按比例设堆而非绝对值
+原理：JDK8u191+/JDK10 默认感知 cgroup 限制（UseContainerSupport），按 Pod 内存比例留出堆外与元空间余量，写死 -Xmx 换节点规格就错
+用法：K8s 部署 JVM 标配参数
+锚点：JDK10 与 8u191 引入容器感知
+
+</details>
+
+### 参数 · DisableExplicitGC（显式 GC）
+
+<details><summary>看背面</summary>
+
+System.gc 只是建议，生产常用 -XX:+DisableExplicitGC 禁用
+原理：NIO 堆外内存依赖 System.gc 触发 DirectByteBuffer 回收时被禁用会堆外泄漏，正确做法是 -XX:+ExplicitGCInvokesConcurrent 而非禁用
+用法：禁用显式 GC 必须评估堆外内存回收链路
+锚点：实战教训
+
+</details>
+
+### 堆外 · DirectByteBuffer（DirectMemory）
+
+<details><summary>看背面</summary>
+
+NIO 的 DirectByteBuffer 数据在堆外受 -XX:MaxDirectMemorySize 限制
+原理：避免堆内到堆外拷贝提升 IO 性能，回收靠 Cleaner 虚引用加 System.gc 提示，泄漏表现为堆正常但 RSS 持续增长
+用法：Netty 大量使用堆外，必须监控 RSS 与 PooledByteBufAllocator 指标
+锚点：实战共识
+
+</details>
+
+### 排查 · top+Hp（CPU）
+
+<details><summary>看背面</summary>
+
+CPU 100% 排查流程：top 找进程、top -Hp 找线程、printf '%x' 转十六进制、jstack 按线程号定位
+原理：把 nid=0x十六进制 与线程栈对上，常见根因：死循环、正则回溯、GC 线程疯狂运转、JIT 编译
+用法：生产 CPU 故障标准动作
+锚点：实战共识
+
+</details>
+
+### 排查 · jcmd（工具）
+
+<details><summary>看背面</summary>
+
+jcmd 是 JDK7+ 推荐的诊断全家桶（替代 jmap/jstack 的大部分功能）
+原理：jcmd PID GC.heap_dump、Thread.print、VM.flags、GC.class_histogram 等子命令覆盖诊断需求，同一进程多工具并发可能冲突
+用法：现场诊断优先 jcmd
+锚点：JDK 文档
+
+</details>
+
+### 排查 · JFR（JFR）
+
+<details><summary>看背面</summary>
+
+JDK11 起 JFR（Flight Recorder）免费且持续低开销采集
+原理：记录 GC、锁、IO、分配等事件，jcmd JFR.start 采集后 JMC 分析，是比日志更深一层的证据链
+用法：生产长期开启 JFR（开销 <1%）
+锚点：JEP 328
+
+</details>
+
+### 对象内存 · 对象头（布局）
+
+<details><summary>看背面</summary>
+
+对象头 12 字节（Mark Word 8 + Klass Pointer 4，压缩指针开启时）加实例数据再 8 字节对齐
+原理：new Object() 实际占 16 字节，理解对象头是计算内存占用与分析压缩指针的基础
+用法：内存占用估算题的基础
+锚点：HotSpot 压缩指针
+
+</details>
+
+### 对象内存 · Oops（压缩）
+
+<details><summary>看背面</summary>
+
+压缩指针让引用 4 字节堆上限约 32GB 超过后失效
+原理：JVM 用 4 字节偏移表示 64 位引用，堆超过压缩上限（默认 32G 附近）对象引用膨胀为 8 字节，32G 边界陷阱是容量规划常识
+用法：堆扩到 40G 时注意引用膨胀反而更耗内存
+锚点：HotSpot
+
+</details>
+
+### String · Compact Strings（布局）
+
+<details><summary>看背面</summary>
+
+JDK9 起 String 内部从 char[] 改为 byte[]（Compact Strings）
+原理：纯 Latin-1 字符串内存减半，含中文等多字节字符时退回 UTF-16 存储，是 JDK9 升级的隐形收益之一（本项目有实测断言）
+用法：估算字符串内存必须分 JDK8/9+
+锚点：JEP 254 实测
+
+</details>
+
+### GC · 三色标记（三色）
+
+<details><summary>看背面</summary>
+
+并发标记用三色抽象：白未访问、灰已访问未扫完、黑已扫完
+原理：漏标发生条件：黑对象新增指向白对象的引用且灰到白的引用全部断开，SATB 与增量更新分别破坏其一
+用法：理解 G1/CMS 并发标记正确性的模型
+锚点：理论共识
+
+</details>
+
+### GC · 增量更新（三色）
+
+<details><summary>看背面</summary>
+
+CMS 用增量更新只记录黑到白的新增引用
+原理：重新标记阶段 STW 重扫这些新增引用，浮动垃圾少于 SATB 但重新标记停顿更长，与 G1 的 SATB 形成对比
+用法：对比两类并发收集器的选型依据
+锚点：理论共识
+
+</details>
+
+### GC · 浮动垃圾（浮动垃圾）
+
+<details><summary>看背面</summary>
+
+SATB 期间被删除引用的对象本轮不回收称为浮动垃圾
+原理：按标记开始时的快照保留，下一轮 GC 回收，代价换取更短的重新标记停顿，是 G1 选择 SATB 的权衡
+用法：解释 G1 重新标记快的原因
+锚点：理论共识
+
+</details>
+
+### 内存 · 静态集合（泄漏）
+
+<details><summary>看背面</summary>
+
+静态集合持有对象是头号内存泄漏源
+原理：static Map/List 生命周期等于 ClassLoader，放进去的对象永不回收，本地缓存必须有上限（LRU/Caffeine）与淘汰策略
+用法：Code review 专项：static 集合是否封顶
+锚点：实战共识
+
+</details>
+
+### 内存 · 监听器（泄漏）
+
+<details><summary>看背面</summary>
+
+监听器/回调注册后未注销、连接未关闭是常见泄漏
+原理：事件总线、JMX 通知、数据库连接池外借连接，对象图上移形成隐性 GC Roots，需要 finally/try-with-resources 闭环
+用法：泄漏排查从对象引用链上溯
+锚点：实战共识
+
+</details>
+
+### 内存 · 元空间（泄漏）
+
+<details><summary>看背面</summary>
+
+元空间泄漏源：动态生成类未卸载（CGLib 代理、Groovy 脚本、反射 inflation）
+原理：每个生成的 Class 都进元空间，类卸载需要其 ClassLoader 卸载，反复生成新类（如每次 new 代理）撑爆元空间
+用法：动态代理必须缓存代理类
+锚点：实战共识
+
+</details>
+
+### GC · 晋升速率（指标）
+
+<details><summary>看背面</summary>
+
+GC 分析核心指标：分配速率、晋升速率、回收后堆占用趋势
+原理：分配速率高→Minor GC 频繁；晋升速率高→老年代增长快→Full GC；回收后老年代持续走高=泄漏或缓存过大，趋势比单次数字重要
+用法：容量规划与告警都基于趋势
+锚点：实战方法论
+
+</details>
+
+### 排查 · jstat（jstat）
+
+<details><summary>看背面</summary>
+
+jstat -gcutil PID 1000 每秒输出各代使用率与 GC 次数时间
+原理：现场快速看 GC 健康度（无需日志配置），E/O/M 列趋势一目了然，是线上第一手证据
+用法：线上快速 GC 体检
+锚点：JDK 工具
+
+</details>
+
+### 调优 · 不可能三角（方法论）
+
+<details><summary>看背面</summary>
+
+GC 调优的吞吐、延迟、内存占用三者不可兼得
+原理：Parallel 吞吐高停顿长，ZGC 延迟低吞吐让步内存开销大，调优是按业务 SLO 排序做取舍，没有免费午餐
+用法：先定 SLO 再选收集器再调参数
+锚点：选型方法论
+
+</details>
+
+### 调优 · 先量后调（顺序）
+
+<details><summary>看背面</summary>
+
+调优顺序：先测量（日志/JFR）定位瓶颈再动参数，禁止盲调
+原理：参数间相互作用复杂，无数据支撑的调参常把问题转移而非解决，每个参数改动都要 A/B 验证
+用法：调优报告必须附前后对比数据
+锚点：实战方法论
+
+</details>
+
+### 参数 · SurvivorRatio（Survivor）
+
+<details><summary>看背面</summary>
+
+SurvivorRatio=8 表示 Eden 占新生代 8/10 两个 Survivor 各 1/10
+原理：Survivor 过小加剧动态年龄提前晋升，对象中期存活率高时应加大 Survivor 或新生代
+用法：调新生代布局的标准参数
+锚点：HotSpot
+
+</details>
+
+### 参数 · NewRatio（老年代）
+
+<details><summary>看背面</summary>
+
+NewRatio 默认 2 表示老年代:新生代 = 2:1
+原理：新生代过小 Minor GC 频繁且晋升压力增大，过大则 Minor GC 单次停顿变长，权衡取值
+用法：全量理解分代比例参数族
+锚点：HotSpot
+
+</details>
+
+### 排查 · RSS（堆外）
+
+<details><summary>看背面</summary>
+
+堆外内存泄漏排查看进程 RSS 与堆内存差值
+原理：RSS 持续增长但堆与元空间平稳，怀疑 DirectByteBuffer/Netty/JNI/线程栈/Code Cache，用 NMT（NativeMemoryTracking）分项定位
+用法：-XX:NativeMemoryTracking=summary + jcmd VM.native_memory
+锚点：实战共识
+
+</details>
+
+### 排查 · NMT（NMT）
+
+<details><summary>看背面</summary>
+
+NMT 开启后 jcmd VM.native_memory summary 分项展示内存去向
+原理：分类包括 Java Heap、Class、Thread、Code、GC、Internal、Other，把"消失的内存"按项对号，开销约 5%（detail 模式更高）
+用法：堆外内存问题第一步
+锚点：JDK 文档
+
+</details>
+
+### 线程 · 线程栈（栈内存）
+
+<details><summary>看背面</summary>
+
+每个线程栈预留约 1MB（-Xss），万级线程仅栈就预留 GB 级
+原理：unable to create native thread OOM 常见根因：线程数超系统限制（ulimit）或内存不足，虚拟线程（JDK21）把栈移到堆上解决该问题
+用法：高并发线程模型向虚拟线程演进的理由
+锚点：实战共识
+
+</details>
+
+### Code Cache · Code Cache（JIT 缓存）
+
+<details><summary>看背面</summary>
+
+JIT 编译产物存于 Code Cache，默认上限与保留区随版本变化
+原理：大量动态代码（脚本引擎、JSP）可撑满 Code Cache 导致不再编译性能下降，-XX:ReservedCodeCacheSize 可调，分层编译下非方法区可被清理
+用法：长跑服务性能逐步下降排查项
+锚点：HotSpot
+
+</details>
+
+### GC · 角色（代际）
+
+<details><summary>看背面</summary>
+
+G1 中 Eden/Survivor/Old 只是 Region 的动态角色标记
+原理：Region 类型随 GC 动态转换（Eden 用完变空闲再变 Old），物理上不连续，与 Parallel 收集器的物理连续分代本质不同
+用法：G1 与传统分代的核心区别
+锚点：G1 论文
+
+</details>
+
+### GC · to-space（并发失败）
+
+<details><summary>看背面</summary>
+
+G1 出现 to-space exhausted 表示晋升时 Survivor/Old Region 不足
+原理：并发标记期间老年代同时被消耗，晋升失败触发 Full GC，解法：预留空间（-XX:G1ReservePercent 默认 10）、提前并发标记（InitiatingHeapOccupancyPercent）
+用法：G1 运维告警关键字
+锚点：G1 调优
+
+</details>
+
+### GC · 启动阈值（IHOP）
+
+<details><summary>看背面</summary>
+
+G1 并发标记启动阈值 IHOP 默认堆的 45%（自适应模式下动态调整）
+原理：老年代占比达到阈值启动并发标记，设太低标记频繁吞吐降，太高来不及标记就晋升失败，JDK9+ 自适应计算
+用法：G1 调优第二参数
+锚点：G1 文档
+
+</details>
+
+### GC · 虚引用（引用处理）
+
+<details><summary>看背面</summary>
+
+虚引用对象的回收靠 Reference Handler 线程处理队列
+原理：DirectByteBuffer 依赖虚引用触发 Cleaner 释放堆外内存，Reference 处理慢或 System.gc 被禁会堆积引用拖垮性能
+用法：堆外内存释放链路知识
+锚点：HotSpot
+
+</details>
+
+### GC · 卡表（卡表）
+
+<details><summary>看背面</summary>
+
+分代收集的卡表以 512 字节为粒度记录跨代引用
+原理：老年代被写屏障按卡片标记，Minor GC 扫描脏卡而非全老年代，G1 的 RSet 是基于卡表的更细粒度记忆集
+用法：跨代引用解决方案
+锚点：HotSpot
+
+</details>
+
+### 类加载 · ClassLoader（隔离）
+
+<details><summary>看背面</summary>
+
+不同 ClassLoader 加载的同名类是不同的类（隔离）
+原理：instanceof 会失败、静态变量不共享，Tomcat 应用隔离、热部署框架（Arthas redefine）都依赖此语义
+用法：理解 Arthas 与热部署的原理
+锚点：JVM 规范
+
+</details>
+
+### 工具 · thread -b（arthas）
+
+<details><summary>看背面</summary>
+
+Arthas thread -b 一条命令找出阻塞其他线程最多的线程
+原理：线上免重启 attach，thread 查看栈、watch 观测入参返回值、trace 统计方法耗时链路，是本项目沙盒实测过的工具链
+用法：线上诊断神器入门命令
+锚点：Arthas 文档
+
+</details>
+
+### 工具 · watch（arthas）
+
+<details><summary>看背面</summary>
+
+Arthas watch 可观测方法入参、返回值与异常无需改代码
+原理：watch 全限定类名 方法名 '{params,returnObj,throwExp}' -x 2，配合条件表达式精准观测，生产排查定位线上问题利器
+用法：线上偶现问题抓现场
+锚点：Arthas 文档
+
+</details>
+
+### GC · 分配速率（分配）
+
+<details><summary>看背面</summary>
+
+分配速率过高时优化方向是减少临时对象而非加大堆
+原理：加大堆只是推迟 Minor GC，优化对象复用、减小对象、缩短生命周期才是治本，监控分配速率（JFR ObjectAllocationSample）
+用法：GC 优化的正确姿势
+锚点：实战方法论
+
+</details>
+
+### GC · 排查（大对象）
+
+<details><summary>看背面</summary>
+
+G1 日志中 Humongous regions 关键字提示巨型对象分配频繁
+原理：巨型缓存数组、大集合拷贝、一次性读大文件进堆是常见根因，解法：拆分、走堆外、控制缓存上限，Humongous 对象会加剧并发标记与碎片
+用法：G1 告警第二关键字
+锚点：G1 实战
+
+</details>
+
+### 版本 · 升级收益（迁移）
+
+<details><summary>看背面</summary>
+
+JDK8 升 JDK17/21 的运行时收益：G1 大幅增强、ZGC 分代、Compact Strings、虚拟线程
+原理：多数应用不改代码升级即获 10-30% 吞吐或延迟改善，主要阻力是依赖兼容（反射限制 JEP 396/403 可加 --add-opens 过渡）
+用法：升级路线图：8→17→21
+锚点：JEP 汇总
+
+</details>
+
+### 类加载 · 条件（卸载）
+
+<details><summary>看背面</summary>
+
+类卸载三条件：该类所有实例已回收、ClassLoader 已回收、Class 对象无引用
+原理：三者缺一不可，所以自定义 ClassLoader 泄漏导致其加载的全部类无法卸载（元空间泄漏放大器）
+用法：动态类生成框架必须管好 ClassLoader 生命周期
+锚点：JVM 规范
+
+</details>
+
+### GC · 解读（日志）
+
+<details><summary>看背面</summary>
+
+一次 GC 日志四要素：触发原因、回收前后各代占用、停顿时长、GC 线程数
+原理：触发原因（Allocation Failure/G1 Humongous Allocation/System.gc）直接指明优化方向，Pause 时间是 SLO 对账依据
+用法：日志分析模板化
+锚点：实战方法论
+
+</details>
+
+### OOM · GC overhead（类型）
+
+<details><summary>看背面</summary>
+
+GC overhead limit exceeded：JVM 花超 98% 时间做 GC 但回收不足 2% 堆
+原理：本质是堆接近死满，参数 -XX:-UseGCOverheadLimit 只是关闭该报错不解决问题，根因仍是泄漏或堆不足
+用法：OOM 分诊知识
+锚点：HotSpot
+
+</details>
+
+### OOM · native thread（类型）
+
+<details><summary>看背面</summary>
+
+unable to create native thread 根因：线程数撞系统限制或内存不足创建栈失败
+原理：排查：线程总数（jcmd Thread.print 统计）、ulimit -u、可用内存；解法：虚拟线程改造或线程池治理
+用法：高并发服务必知故障
+锚点：实战共识
+
+</details>
+
+### 启动 · AppCDS（优化）
+
+<details><summary>看背面</summary>
+
+AppCDS 把类加载产物缓存为文件加速启动
+原理：-XX:SharedArchiveFile 预生成存档，微服务与 Serverless 冷启动场景收益明显（启动时间可降 30-50%），JDK10 起 AppCDS 开源
+用法：Serverless/弹性扩容场景
+锚点：JEP 310
+
+</details>
+
+### 启动 · 分层（优化）
+
+<details><summary>看背面</summary>
+
+启动速度优化组合：分层编译、AppCDS、减小堆、延迟初始化
+原理：C1 快速编译减少解释执行，Spring 的 lazy-init 减少启动期 Bean 创建，GraalVM native image 是极致方案（启动毫秒级但有兼容限制）
+用法：微服务与 FaaS 启动优化清单
+锚点：实战方法论
+
+</details>
+
+### GraalVM · native image（Native）
+
+<details><summary>看背面</summary>
+
+GraalVM native image AOT 编译为本地可执行文件启动毫秒级内存极低
+原理：封闭世界假设：反射、动态代理需配置可达性元数据，兼容成本是与 JVM 方案的核心差异，云原生 Serverless 场景价值大
+用法：GraalVM 是 AOT 不是更快的 JVM
+锚点：GraalVM 文档
+
+</details>
+
+### GC · GC 线程（并发）
+
+<details><summary>看背面</summary>
+
+GC 线程数由 -XX:ConcGCThreads 与 ParallelGCThreads 控制
+原理：ParallelGCThreads 是 STW 阶段并行线程数（默认约 CPU 核数），ConcGCThreads 是并发阶段线程数（默认按比例），容器 CPU 限额影响默认值
+用法：容器化 JVM 调参注意 CPU 限额影响默认值
+锚点：HotSpot
+
+</details>
+
+### GC · 构成（停顿）
+
+<details><summary>看背面</summary>
+
+GC 停顿=STW 阶段总和（初始标记、复制/清理等），并发阶段不贡献停顿
+原理：G1 的 Initial Mark 随 Minor GC 发生、Remark 与 Cleanup 是主要 STW，ZGC 仅极短 STW，分析停顿构成才能对症
+用法：延迟优化先拆停顿构成
+锚点：实战方法论
+
+</details>
+
+### 内存 · 逃逸（安全）
+
+<details><summary>看背面</summary>
+
+方法内创建并只在本方法使用的对象理论上可栈上分配（经标量替换实现）
+原理：HotSpot 不做真正的栈上分配而是把对象拆成标量进寄存器/栈，效果等同（分配消失），前提是不逃逸
+用法：对"对象是否总在堆上"的精确回答
+锚点：HotSpot
+
+</details>
+
+### GC · Remark（标记）
+
+<details><summary>看背面</summary>
+
+G1 的 Remark（重新标记）阶段需要 STW 且耗时与写屏障脏队列长度相关
+原理：SATB 模式下 Remark 主要处理标记期遗留缓冲，通常几十毫秒，若日志显示 Remark 很长查应用是否大量改引用（如大集合并发修改）
+用法：G1 停顿细项分析
+锚点：G1 实战
+
+</details>
+
+### 参数 · 参数审查（安全）
+
+<details><summary>看背面</summary>
+
+生产 JVM 参数审查清单：堆、GC 收集器、dump、日志、元空间、堆外上限、JFR
+原理：每项都有默认值但默认值未必适配业务，参数变更要走评审与灰度，本项目总结为 JVM 上线检查单
+用法：上线前 checklist 化
+锚点：实战方法论
+
+</details>
+
+### GC · 引用处理（清理）
+
+<details><summary>看背面</summary>
+
+处理 Reference（软/弱/虚）本身在 GC 的 STW 或并发阶段执行
+原理：大量 Reference 对象（如海量 WeakReference 缓存）会拉长引用处理阶段，软引用缓存泛滥是老年代暴涨经典案例
+用法：软引用缓存的反面教材
+锚点：HotSpot
+
+</details>
+
+### 内存 · 总体（结构）
+
+<details><summary>看背面</summary>
+
+JVM 进程内存 = 堆 + 元空间 + 线程栈合计 + Code Cache + GC 开销 + Direct Memory
+原理：容器里按此总账设 limit（如堆 70% 留 30% 给其余），只算堆会撞 cgroup OOMKill，这是容器 OOMKill 的第一根因
+用法：容器内存规划公式
+锚点：实战共识
+
+</details>
+
+### GC · 模板（排查）
+
+<details><summary>看背面</summary>
+
+GC 问题排查模板：先看趋势（jstat/日志）→ 定位代与阶段 → 找触发原因 → 看对象（dump/JFR）→ 改参数或代码 → A/B 验证
+原理：每步有对应工具与关键字，形成可复用的方法论而非背零散参数，是 P10 层面的回答框架
+用法：回答"线上 GC 问题怎么排查"的框架
+锚点：实战方法论
+
+</details>
+
+### 并发 · JMM 与 JVM（内存）
+
+<details><summary>看背面</summary>
+
+JMM 是内存可见性规范 JVM 实现负责落地（内存屏障/缓存一致性）
+原理：JMM 定义 happens-before 等抽象语义，HotSpot 用 CPU 指令（lock 前缀、mfence）与缓存一致性协议实现，两者层次不同不可混谈
+用法：区分规范与实现的答题层次
+锚点：JSR-133
+
+</details>
+
+### 运维 · 基线（基线）
+
+<details><summary>看背面</summary>
+
+每次 JVM 变更（参数/JDK 版本）前先建性能基线：GC 频率、停顿 P99、分配速率、启动时间
+原理：变更后对比基线判断收益或回退，无基线的调优等于赌博，基线数据用同一压测脚本与流量模型采集
+用法：变更管理流程嵌入基线环节
+锚点：实战方法论
+
+</details>
+
+### 收集器 · 停顿模型（G1）
+
+<details><summary>看背面</summary>
+
+G1 的可预测停顿模型：按"回收价值/停顿成本"排序选 Region 组成回收集合
+原理：每个 Region 记录回收收益（垃圾比例）与预估时间，按 MaxGCPauseMillis 目标装填本轮回收集合，这是 Garbage First（垃圾优先）名字的由来
+用法：G1 原理核心考点
+锚点：G1 论文
+
+</details>
+
+### JIT · 性能探针（分层）
+
+<details><summary>看背面</summary>
+
+C1 编译的代码带性能探针，采集分支/类型分布指导 C2 深度优化
+原理：C1 快速出产物并收集 profile（虚方法实际实现/分支频率），C2 基于真实分布做激进优化（单态内联/分支消除），这是分层编译收益的机制来源
+用法：JIT 原理深水区
+锚点：HotSpot 文档
+
+</details>
+
+### 运行时数据区 · 压缩类空间（Metaspace）
+
+<details><summary>看背面</summary>
+
+Metaspace 内划出 compressed class space（默认 1GB 上限）存放压缩指针所需的类元数据
+原理：Klass Pointer 4 字节需要类地址在 32 位空间内，UseCompressedClassPointers 开启时 klass 部分单独存放，-XX:CompressedClassSpaceSize 可调
+用法：Metaspace OOM 分诊（超 CompressedClassSpace 与超 MaxMetaspaceSize 不同）
+锚点：HotSpot 文档
+
+</details>
+
+### 引用 · softly-reachable（降级）
+
+<details><summary>看背面</summary>
+
+软引用对象在内存不足时才降级回收，且 JVM 会根据历史 GC 频率动态调整保留时长（-XX:SoftRefLRUPolicyMSPerMB）
+原理：软引用缓存"快满才回收"的行为由该策略控制（默认 1000ms/MB 空闲堆），堆越大软引用缓存存活越久，软引用缓存泛滥的机制解释
+用法：软引用缓存调优
+锚点：HotSpot 文档
+
+</details>
+
+### 工具 · UsePerfData（容器）
+
+<details><summary>看背面</summary>
+
+jps/jstat 依赖 hsperfdata 共享内存文件，精简镜像若关闭 UsePerfData 会失效需显式开启
+原理：-XX:+UsePerfData 默认开启，部分 distroless 镜像为省开销关闭导致 jstat 连接失败，容器内诊断工具失效的第一排查项
+用法：容器化 JVM 工具链知识
+锚点：实战共识
+
+</details>
+
+### 排查 · 事件（JFR）
+
+<details><summary>看背面</summary>
+
+JFR 关键事件：ObjectAllocationSample（分配采样）、JVMInformation、GCPhasePause、JavaMonitorEnter（锁等待）
+原理：分配采样（JDK16+）以极低开销定位大对象分配来源（替代堆外 profiling），锁事件定位竞争热点，事件驱动分析比日志更精准
+用法：JFR 分析入门事件表
+锚点：JDK16+
+
+</details>
+
+### 排查 · 存活对象（方法论）
+
+<details><summary>看背面</summary>
+
+GC 后堆占用仍高≠泄漏：区分"泄漏"（回收不掉）与"缓存过大"（有意常驻）
+原理：dump 看存活对象归属：业务缓存（有上限逻辑）是设计问题，无引用路径释放的才是泄漏，MAT 支配树+GC Roots 路径是判别工具
+用法：OOM 定性分析第一步
+锚点：实战方法论
+
+</details>
+
+### 收集器 · 自愈（ZGC）
+
+<details><summary>看背面</summary>
+
+ZGC 用读屏障"自愈"引用：访问对象时发现指针过期标记则立即修正映射
+原理：着色指针 + load barrier，应用线程访问时完成引用修正（并发转移期间对象搬迁无感知），这是 ZGC 停顿亚毫秒的机制核心，代价是每次访问带屏障开销
+用法：ZGC 原理核心考点
+锚点：JEP 377
+
+</details>
+
+### 锁 · monitor 降级（降级）
+
+<details><summary>看背面</summary>
+
+HotSpot 自 JDK15 起支持空闲 monitor 降级（deflation）膨胀不再是永久性的
+原理：周期任务检测无竞争空闲 monitor 降级回无锁，JDK18+ 批量降级增强，"锁一旦膨胀永久不降"的说法已过时（JC-014 误认知的依据）
+用法：锁升级描述必须带版本限定
+锚点：JDK15+
+
+</details>
+
+### 排查 · ThreadMXBean（编程）
+
+<details><summary>看背面</summary>
+
+ThreadMXBean 提供编程式诊断：findDeadlockedThreads/线程 CPU 时间/锁持有统计
+原理：无需外部工具在应用内自检（健康检查集成死锁探测），getThreadCpuTime 区分忙与闲（比 wall time 准），是自研监控平台的编程接口
+用法：自研健康检查的 API 基础
+锚点：JDK 文档
+
+</details>
+
+
+## Spring（110 张）
+
+### IoC · singleton（作用域）
+
+<details><summary>看背面</summary>
+
+Spring Bean 默认作用域是 singleton 单例容器内唯一
+原理：单例减少对象创建开销，Spring 单例是容器级唯一而非 JVM 级唯一（多个容器各有一份）
+用法：回答作用域题先说默认值
+锚点：Spring 文档
+
+</details>
+
+### Bean 生命周期 · 属性填充（流程）
+
+<details><summary>看背面</summary>
+
+Bean 生命周期主线：实例化、属性填充、Aware 回调、BeanPostProcessor 前后处理、初始化、使用、销毁
+原理：实例化（构造）与初始化（init 回调）是两个阶段，属性填充在两者之间，记住主线再展开细节
+用法：背生命周期按七步主线
+锚点：Spring 源码 doCreateBean
+
+</details>
+
+### Bean 生命周期 · BeanPostProcessor（扩展点）
+
+<details><summary>看背面</summary>
+
+BeanPostProcessor 在初始化前后对每个 Bean 加工
+原理：postProcessBeforeInitialization 在 init 回调前、After 在之后，AOP 代理、@Autowired 填充、@PostConstruct 全靠它实现
+用法：Spring 扩展机制核心，插件体系的基石
+锚点：Spring 源码
+
+</details>
+
+### AOP · wrapIfNecessary（时机）
+
+<details><summary>看背面</summary>
+
+AOP 代理在 BeanPostProcessor 的 postProcessAfterInitialization 中创建
+原理：AbstractAutoProxyCreator.wrapIfNecessary 在 After 阶段判断切点匹配生成代理（本项目源码级核对结论），代理创建晚于 init 回调
+用法：回答"AOP 代理何时创建"的精确版本
+锚点：AbstractAutoProxyCreator
+
+</details>
+
+### Bean 生命周期 · afterPropertiesSet（顺序）
+
+<details><summary>看背面</summary>
+
+初始化回调顺序：@PostConstruct、InitializingBean.afterPropertiesSet、init-method
+原理：注解最早（由 BPP 调用）、接口次之、XML/bean 方法最后，三者可同时存在按序执行
+用法：初始化逻辑拆层时按此顺序安排
+锚点：Spring 文档
+
+</details>
+
+### Bean 生命周期 · @PostConstruct（注解）
+
+<details><summary>看背面</summary>
+
+@PostConstruct 方法由 CommonAnnotationBeanPostProcessor 在初始化阶段调用
+原理：JSR-250 注解，Spring 用 BPP 桥接实现，依赖注入完成后才执行
+用法：初始化钩子首选注解方式
+锚点：JSR-250
+
+</details>
+
+### 循环依赖 · singletonObjects（三级缓存）
+
+<details><summary>看背面</summary>
+
+三级缓存：singletonObjects 一级成品、earlySingletonObjects 二级早期引用、singletonFactories 三级工厂
+原理：一级放完整 Bean，二级放提前曝光的引用（拿到后升级放入二级并删三级），三级放能生成早期引用的 ObjectFactory
+用法：背三级缓存必背各级名称与职责
+锚点：Spring 源码
+
+</details>
+
+### 循环依赖 · getEarlyBeanReference（原理）
+
+<details><summary>看背面</summary>
+
+三级缓存存在的意义是让 AOP 场景能提前拿到代理引用
+原理：如果只有二级缓存，AOP 代理只能等初始化后创建，循环依赖时另一方拿到的是原始对象导致不一致；三级工厂通过 getEarlyBeanReference 提前生成代理
+用法：解释"为什么是三级不是二级"的标准答案
+锚点：Spring 源码
+
+</details>
+
+### 循环依赖 · 构造器注入（限制）
+
+<details><summary>看背面</summary>
+
+构造器注入的循环依赖 Spring 无法解决
+原理：实例化前就需要依赖方，提前曝光机制尚未生效（对象还没 new 出来），Spring Boot 2.6 起默认禁止一切循环依赖并要求重构
+用法：用 @Lazy 或重构消除依赖链
+锚点：Boot 2.6 release note
+
+</details>
+
+### 循环依赖 · prototype（限制）
+
+<details><summary>看背面</summary>
+
+prototype 作用域的循环依赖无法解决
+原理：prototype 每次获取都新建，没有缓存可提前曝光，Spring 启动或首次获取时报 BeanCurrentlyInCreationException
+用法：有状态对象用 prototype 时避免环
+锚点：Spring 文档
+
+</details>
+
+### 循环依赖 · allow-circular-references（Boot 2.6）
+
+<details><summary>看背面</summary>
+
+Spring Boot 2.6 起默认禁止循环依赖需显式 allow-circular-references=true 开启
+原理：官方认为循环依赖是设计坏味道，禁止它把问题暴露在启动期而不是运行期
+用法：升级 Boot 2.6 前先解环再加开关
+锚点：Boot 2.6
+
+</details>
+
+### IoC · request（作用域）
+
+<details><summary>看背面</summary>
+
+Web 作用域 request/session/application 依赖 Web 环境且注入 singleton 时需代理
+原理：singleton Bean 引用 request 作用域 Bean 时 Spring 生成 ScopedProxyFactoryBean 代理转发到当前请求
+用法：每请求状态对象的标准做法
+锚点：Spring 文档
+
+</details>
+
+### IoC · prototype 注入（误用）
+
+<details><summary>看背面</summary>
+
+singleton 中注入 prototype Bean 只注入一次失去多例语义
+原理：注入发生在 singleton 初始化时只执行一次，之后每次请求 singleton 用的都是同一份 prototype 实例，需 ObjectProvider 延迟获取
+用法：每次需要新实例用 ObjectProvider.getBean
+锚点：经典陷阱
+
+</details>
+
+### IoC · ObjectProvider（API）
+
+<details><summary>看背面</summary>
+
+ObjectProvider 提供延迟与可选的依赖获取
+原理：getIfAvailable、getIfUnique、getObject，解决"依赖可能不存在"与"每次要新实例"两类问题
+用法：框架开发与可选依赖场景
+锚点：Spring 文档
+
+</details>
+
+### IoC · getObject（FactoryBean）
+
+<details><summary>看背面</summary>
+
+FactoryBean 是生产 Bean 的工厂，getBean(名) 拿到 getObject 的产物
+原理：取 FactoryBean 本身要在名字前加 &（getBean("&xxx")），MyBatis Mapper、Spring AOP 代理、Feign 客户端都由 FactoryBean 产出
+用法：MyBatis MapperProxy 的注册原理
+锚点：Spring 文档
+
+</details>
+
+### IoC · @Lazy（懒加载）
+
+<details><summary>看背面</summary>
+
+@Lazy 延迟到首次使用时才初始化 Bean
+原理：启动提速与打破循环依赖（注入代理占位），@Lazy 加在循环依赖字段上用代理打破死锁
+用法：启动慢与循环依赖的两个用途
+锚点：Spring 文档
+
+</details>
+
+### 容器 · ApplicationContext（对比）
+
+<details><summary>看背面</summary>
+
+ApplicationContext 是 BeanFactory 的超集增强版
+原理：BeanFactory 基础容器懒加载，ApplicationContext 增加事件、国际化、资源加载、注解支持且默认预初始化 singleton
+用法：回答容器体系对比题
+锚点：Spring 文档
+
+</details>
+
+### 容器 · refresh（启动）
+
+<details><summary>看背面</summary>
+
+容器启动核心是 AbstractApplicationContext.refresh 的 12 步模板
+原理：步骤包括 BeanFactory 准备、BPP 注册与执行、国际化、事件广播器、onRefresh（内嵌容器启动）、finishBeanFactoryInitialization（预实例化）
+用法：Spring Boot 启动慢分析从 refresh 分步计时入手
+锚点：Spring 源码
+
+</details>
+
+### 扩展点 · BeanFactoryPostProcessor（BFPP）
+
+<details><summary>看背面</summary>
+
+BeanFactoryPostProcessor 在 Bean 实例化前修改 BeanDefinition
+原理：作用于"配方"阶段（改定义），与 BeanPostProcessor（改实例）区分，属性占位符解析（PropertySourcesPlaceholderConfigurer）就是 BFPP
+用法：配置占位符、动态注册 BeanDefinition 的入口
+锚点：Spring 源码
+
+</details>
+
+### 扩展点 · BeanDefinitionRegistryPostProcessor（BDRPP）
+
+<details><summary>看背面</summary>
+
+BeanDefinitionRegistryPostProcessor 在普通 BFPP 之前执行可动态注册 BeanDefinition
+原理：MyBatis @MapperScan 动态注册 Mapper BeanDefinition 就是该扩展点（MapperScannerRegistrar→BDRPP），比静态 @Bean 更早介入
+用法：动态注册 Bean 的标准扩展点
+锚点：Spring 源码
+
+</details>
+
+### 扩展点 · Aware 接口（Aware）
+
+<details><summary>看背面</summary>
+
+Aware 回调顺序：BeanNameAware、BeanFactoryAware 在初始化前，ApplicationContextAware 由 ApplicationContextAwareProcessor 处理
+原理：Aware 是容器向 Bean 注入基础设施引用的通道，不同 Aware 由不同组件调用时机略异
+用法：需要容器能力时实现对应 Aware
+锚点：Spring 源码
+
+</details>
+
+### Bean 生命周期 · @PreDestroy（销毁）
+
+<details><summary>看背面</summary>
+
+销毁回调顺序：@PreDestroy、DisposableBean.destroy、destroy-method
+原理：与初始化三回调镜像对称，容器关闭（context.close 或 Boot 优雅停机）时执行
+用法：释放连接与线程池的正确位置
+锚点：Spring 文档
+
+</details>
+
+### IoC · 构造器注入（注入）
+
+<details><summary>看背面</summary>
+
+构造器注入是官方推荐的注入方式
+原理：依赖不可变（final 字段）、完整初始化、便于测试，阿里手册也明确推荐构造器注入
+用法：新代码一律构造器注入
+锚点：官方文档
+
+</details>
+
+### IoC · @Autowired（注入）
+
+<details><summary>看背面</summary>
+
+@Autowired 按 byType 注入多个候选时需 @Primary 或 @Qualifier 消歧
+原理：按类型找到多个候选先看 @Primary 再按字段名匹配，都不确定抛 NoUniqueBeanDefinitionException
+用法：多实现接口注入的标准解法
+锚点：Spring 文档
+
+</details>
+
+### IoC · @Resource（注入）
+
+<details><summary>看背面</summary>
+
+@Resource 是 JSR-250 标准默认按名称注入
+原理：先按名字找找不到再按类型，由 CommonAnnotationBeanPostProcessor 处理，与 @Autowired（Spring 自家 byType）语义不同
+用法：JDK17+ 移除 javax.annotation 后 Boot 3 需显式依赖 jakarta.annotation
+锚点：JSR-250
+
+</details>
+
+### IoC · 集合注入（注入）
+
+<details><summary>看背面</summary>
+
+注入 List/Map 类型会收集容器内所有匹配类型的 Bean
+原理：策略模式的 Spring 实现：注入 List<Handler> 或 Map<String,Handler>（key 为 Bean 名），配合 @Order 排序
+用法：策略模式落地标准写法
+锚点：Spring 文档
+
+</details>
+
+### IoC · @Value（配置）
+
+<details><summary>看背面</summary>
+
+@Value 支持 ${} 占位符与 #{} SpEL 表达式
+原理：${db.url} 从 Environment 取值，#{systemProperties['x']} 是 SpEL，二者可嵌套，占位符找不到启动即报错（可给默认值 ${a:default}）
+用法：配置注入推荐 @ConfigurationProperties 优先
+锚点：Spring 文档
+
+</details>
+
+### Boot · @ConfigurationProperties（配置绑定）
+
+<details><summary>看背面</summary>
+
+@ConfigurationProperties 批量绑定前缀下的属性并支持校验与元数据
+原理：relaxed binding 支持 kebab-case 与驼峰互转，配合 @Validated 做 JSR-303 校验，IDE 有元数据提示，优于散落的 @Value
+用法：配置项超过 3 个就建绑定类
+锚点：Boot 文档
+
+</details>
+
+### Boot · 优先级（配置）
+
+<details><summary>看背面</summary>
+
+配置优先级：命令行参数 > 环境变量 > application-{profile} > application
+原理：SpringApplication.setAddCommandLineProperties 默认开，K8s 部署靠环境变量覆盖文件配置
+用法：容器化配置注入的依据
+锚点：Boot 文档
+
+</details>
+
+### Boot · @Profile（环境）
+
+<details><summary>看背面</summary>
+
+@Profile 按激活的 profile 决定 Bean 是否装配
+原理：@SpringBootTest 可设 profile，dev/test/prod 隔离数据源与中间件地址，spring.profiles.active 指定
+用法：环境隔离标准方案
+锚点：Boot 文档
+
+</details>
+
+### Boot · @Conditional（条件装配）
+
+<details><summary>看背面</summary>
+
+@Conditional 族按条件决定 Bean 是否注册（OnClass/OnMissingBean/OnProperty 等）
+原理：Spring Boot 自动配置的全部开关逻辑基于条件装配，@ConditionalOnMissingBean 让用户定义优先于默认配置
+用法：自定义 starter 的核心机制
+锚点：Boot 文档
+
+</details>
+
+### 自动配置 · AutoConfiguration.imports（机制）
+
+<details><summary>看背面</summary>
+
+Boot 2.7+ 自动配置清单从 META-INF/spring.factories 迁移到 spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports
+原理：Boot 3.0 彻底移除旧机制，自定义 starter 必须用新文件，老 starter 升级 Boot 3 前必须迁移
+用法：Boot 3 迁移必查项
+锚点：Boot 2.7/3.0
+
+</details>
+
+### Boot · @SpringBootApplication（启动）
+
+<details><summary>看背面</summary>
+
+@SpringBootApplication 是 @Configuration+@EnableAutoConfiguration+@ComponentScan 组合
+原理：默认扫描主类所在包及子包，排包错位导致 Bean 扫不到是常见启动失败根因
+用法：主类放包根（com.example.app 的顶层）
+锚点：Boot 文档
+
+</details>
+
+### 自定义 starter · starter（步骤）
+
+<details><summary>看背面</summary>
+
+自定义 starter：写自动配置类+条件注解+配置绑定+注册到 AutoConfiguration.imports
+原理：命名规范官方 x-spring-boot-starter 自家 spring-boot-starter-x，提供 spring-configuration-metadata.json 让 IDE 补全
+用法：公共组件 SDK 化标准方案
+锚点：Boot 文档
+
+</details>
+
+### 配置类 · lite mode（proxyBeanMethods）
+
+<details><summary>看背面</summary>
+
+@Configuration(proxyBeanMethods=false) 为 lite 模式 @Bean 方法互调不再走代理
+原理：full 模式 CGLIB 拦截 @Bean 调用保证容器内单例，lite 模式直接执行方法体每次 new，启动更快内存更小（Boot 内部大量 lite）
+用法：性能敏感的启动优化点
+锚点：Boot 文档
+
+</details>
+
+### 配置类 · @Bean 互调（陷阱）
+
+<details><summary>看背面</summary>
+
+full 模式下 @Configuration 类内 @Bean 方法互调被 CGLIB 拦截返回同一单例
+原理：配置类被 CGLIB 子类化拦截方法调用，保证语义等价于容器查找，这就是 proxyBeanMethods 区分 full/lite 的原因
+用法：理解配置类原理的经典题
+锚点：Spring 源码
+
+</details>
+
+### AOP · JDK vs CGLIB（代理）
+
+<details><summary>看背面</summary>
+
+JDK 动态代理要求目标实现接口，CGLIB 生成子类代理无接口要求
+原理：JDK 代理实现 Proxy+InvocationHandler，CGLIB 用 ASM 生成子类覆写方法，final 类与 final/private 方法无法被 CGLIB 增强且 final 方法不进入代理
+用法：回答 AOP 代理选型
+锚点：Spring 文档
+
+</details>
+
+### AOP · proxy-target-class（默认）
+
+<details><summary>看背面</summary>
+
+Spring Boot 2.0 起 AOP 默认强制 CGLIB（proxy-target-class=true）
+原理：统一代理避免"有接口用 JDK 无接口用 CGLIB"的类型不一致问题，注入时按具体类型而非接口
+用法：Boot 2 迁移说明
+锚点：Boot 2.0
+
+</details>
+
+### AOP · 顺序（通知）
+
+<details><summary>看背面</summary>
+
+同一切面内通知顺序：Around 前段、Before、目标方法、Around 后段、After、AfterReturning/AfterThrowing
+原理：Spring 5.2.7 之前 @After 与 @AfterReturning 顺序在不同版本不稳定，5.2.7 统一为上述顺序（面试背当前版本语义）
+用法：AOP 日志/审计切面正确性依赖此序
+锚点：Spring 5.2.7
+
+</details>
+
+### AOP · @Order（排序）
+
+<details><summary>看背面</summary>
+
+多个切面的执行顺序由 @Order 值决定数字越小优先级越高
+原理：事务切面 Order 默认 Ordered.LOWEST_PRECEDENCE，自定义切面想包在事务外需要更小值（先进入后退出）
+用法：切面叠加时的执行矩阵
+锚点：Spring 文档
+
+</details>
+
+### AOP · 自调用（失效）
+
+<details><summary>看背面</summary>
+
+同类内 this 调用注解方法 AOP 失效（事务/异步/缓存）
+原理：this 指向原始对象而非代理，绕过代理拦截，解法：注入自身代理、AopContext.currentProxy（需 exposeProxy）、拆类
+用法：事务/异步注解失效第一原因
+锚点：实战共识
+
+</details>
+
+### AOP · final 方法（失效）
+
+<details><summary>看背面</summary>
+
+CGLIB 无法覆写 final 与 private 方法这些方法上的切面失效
+原理：代理通过子类覆写实现增强，final/private 方法不可覆写导致绕过代理
+用法：注解方法避免 private/final/static
+锚点：CGLIB 限制
+
+</details>
+
+### AOP · execution（表达式）
+
+<details><summary>看背面</summary>
+
+execution 表达式：修饰符 返回类型 包.类.方法(参数) throws
+原理：execution(* com.a.b.service..*.save*(..)) 匹配 service 包下 save 开头方法，.. 是包通配与参数通配
+用法：写切点前先明确匹配范围
+锚点：AspectJ 语法
+
+</details>
+
+### AOP · LTW（织入）
+
+<details><summary>看背面</summary>
+
+AspectJ 支持编译期与类加载期织入（LTW）能力强于 Spring AOP
+原理：可增强 private/final/构造器/字段，需要 -javaagent 加载织入器，全链路监控 agent 就是 LTW 实现
+用法：需要跨方法深度增强时用 AspectJ
+锚点：AspectJ 文档
+
+</details>
+
+### AOP · exposeProxy（实践）
+
+<details><summary>看背面</summary>
+
+AopContext.currentProxy 需要开启 exposeProxy=true 才能用
+原理：代理内部保存当前代理引用暴露到 ThreadLocal，自调用场景通过它再走一遍代理，代码侵入大，首选拆类或注入自身
+用法：理解自调用问题的备选解
+锚点：Spring 文档
+
+</details>
+
+### 事务 · TransactionInterceptor（原理）
+
+<details><summary>看背面</summary>
+
+@Transactional 基于 AOP 代理由 TransactionInterceptor 实现
+原理：开启事务（getConnection setAutoCommit false）、执行业务、按异常类型决定提交回滚，事务属性由 TransactionAttributeSource 解析
+用法：事务原理是 AOP 应用的最佳案例
+锚点：Spring 源码
+
+</details>
+
+### 事务 · 自调用（失效）
+
+<details><summary>看背面</summary>
+
+@Transactional 自调用失效是最高频事务坑
+原理：同类 this 调用不走代理事务拦截器不介入，与 AOP 失效同源，表现：内层注解方法无事务
+用法：事务失效八股的第一条
+锚点：实战共识
+
+</details>
+
+### 事务 · public（失效）
+
+<details><summary>看背面</summary>
+
+Spring 6.0 之前 @Transactional 只对 public 方法生效
+原理：事务 AOP 只拦截 public 方法（Spring 6.0 起支持 protected/package-private），非 public 上的注解静默失效
+用法：升级 Spring 6 才有非 public 事务支持
+锚点：Spring 6.0 release note
+
+</details>
+
+### 事务 · rollbackFor（回滚）
+
+<details><summary>看背面</summary>
+
+@Transactional 默认只回滚 RuntimeException 与 Error
+原理：受检异常（如 IOException）默认提交，需要 rollbackFor=Exception.class 显式声明，这是手册明确条款
+用法：事务注解一律显式 rollbackFor
+锚点：阿里手册
+
+</details>
+
+### 事务 · catch（失效）
+
+<details><summary>看背面</summary>
+
+事务方法内异常被 try-catch 吞掉后事务照常提交
+原理：拦截器感知不到被吞的异常，回滚决策失效，需要 catch 后 throw 或用 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly()
+用法：代码 review 必查事务内 catch
+锚点：实战共识
+
+</details>
+
+### 事务 · REQUIRED（传播）
+
+<details><summary>看背面</summary>
+
+REQUIRED 是默认传播行为：有事务加入无事务新建
+原理：7 种传播行为的核心，大多数业务场景用它，理解其余 6 种都从它出发
+用法：传播行为题的基准点
+锚点：Spring 文档
+
+</details>
+
+### 事务 · REQUIRES_NEW（传播）
+
+<details><summary>看背面</summary>
+
+REQUIRES_NEW 挂起当前事务开独立新事务互不影响
+原理：内层回滚外层可 catch 继续提交（日志表场景），外层回滚不影响已提交的内层，代价是连接占用翻倍与死锁风险升高
+用法：操作日志/审计与主业务解耦
+锚点：Spring 文档
+
+</details>
+
+### 事务 · NESTED（传播）
+
+<details><summary>看背面</summary>
+
+NESTED 在当前事务内建立保存点（savepoint）可部分回滚
+原理：内层回滚只回滚到保存点外层继续，外层回滚内层必回滚，与 REQUIRES_NEW 的本质区别是同一物理事务
+用法：嵌套业务步骤部分失败继续执行
+锚点：Spring 文档
+
+</details>
+
+### 事务 · 其他（传播）
+
+<details><summary>看背面</summary>
+
+MANDATORY 强制要求已有事务、NEVER 禁止事务、SUPPORTS 有则用无则非事务、NOT_SUPPORTED 挂起以非事务执行
+原理：四种边界型传播用于约束调用契约（如查询方法 MANDATORY 保证必须被事务包裹）
+用法：契约型方法设计
+锚点：Spring 文档
+
+</details>
+
+### 事务 · timeout（属性）
+
+<details><summary>看背面</summary>
+
+@Transactional(timeout=5) 限定事务从开始到提交的最长时间
+原理：超时回滚防止长事务拖垮连接池，超时检查在实际 SQL 执行时触发，MySQL 端还有 innodb_lock_wait_timeout 控制锁等待
+用法：防大事务的标准配置
+锚点：Spring 文档
+
+</details>
+
+### 事务 · readOnly（属性）
+
+<details><summary>看背面</summary>
+
+readOnly=true 是只读优化提示非强制约束
+原理：驱动与框架可据此优化（跳过脏检查、路由到从库），readOnly 事务中写操作在 MySQL 下报错取决于具体配置
+用法：查询类事务标注 readOnly
+锚点：Spring 文档
+
+</details>
+
+### 事务 · 治理（大事务）
+
+<details><summary>看背面</summary>
+
+大事务治理：拆分事务边界、事务内禁远程调用与 MQ 发送、编程式 TransactionTemplate 控制范围
+原理：大事务持有连接与行锁时间长，拖垮连接池与并发度，把 RPC/MQ 移到事务外（事务提交后发消息）
+用法：review 大事务的标准检查单
+锚点：实战方法论
+
+</details>
+
+### 事务 · @TransactionalEventListener（事件）
+
+<details><summary>看背面</summary>
+
+@TransactionalEventListener 默认在 AFTER_COMMIT 阶段执行（本项目已核对文档）
+原理：默认 phase=AFTER_COMMIT 保证"事务成功后才发后续动作"，failingExecution 表示事务回滚时的行为，BEFORE_COMMIT/AFTER_ROLLBACK/ AFTER_COMPLETION 可选
+用法：提交后发 MQ/清缓存的标准姿势
+锚点：Spring 文档核对
+
+</details>
+
+### 事务 · 坑（事件）
+
+<details><summary>看背面</summary>
+
+AFTER_COMMIT 监听器里再写数据库不会自动开新事务
+原理：此时事务资源已提交完成，写操作可能以 autoCommit 游离执行，需要 @Transactional(propagation=REQUIRES_NEW) 显式开新事务
+用法：提交后补偿写库必须显式开新事务
+锚点：实战教训
+
+</details>
+
+### 事件 · ApplicationEvent（机制）
+
+<details><summary>看背面</summary>
+
+Spring 事件机制：ApplicationEventPublisher 发布、@EventListener 监听默认同步执行
+原理：监听器在发布线程内执行（同调用方法一样），异常会传播回发布者，解耦发布方与消费方
+用法：进程内解耦（业务完成后的扩展动作）
+锚点：Spring 文档
+
+</details>
+
+### 事件 · @Async+@EventListener（异步）
+
+<details><summary>看背面</summary>
+
+事件异步化：监听器加 @Async 且启用 @EnableAsync
+原理：发布线程立即返回监听在线程池执行，异步监听异常由 AsyncUncaughtExceptionHandler 处理
+用法：发布方不被下游拖慢
+锚点：Spring 文档
+
+</details>
+
+### 异步 · 线程池（@Async）
+
+<details><summary>看背面</summary>
+
+@Async 默认线程池的版本演进：Boot 2.1+ 自动配置 applicationTaskExecutor（core 8 队列无界 OOM 风险），Boot 3.2 开虚拟线程后是 SimpleAsyncTaskExecutor
+原理：纯 Spring 无 Boot 时回退 SimpleAsyncTaskExecutor（每任务新线程），@Async 必须显式配线程池防 OOM 与线程爆炸（本项目核对的版本结论）
+用法：@Async 上线前必配自定义 Executor
+锚点：Boot 版本核对
+
+</details>
+
+### 异步 · 失效（@Async）
+
+<details><summary>看背面</summary>
+
+@Async 失效场景：同类自调用、未加 @EnableAsync、方法非 public
+原理：与事务失效同源（代理绕过），@Async 异常对 void 方法进入 AsyncUncaughtExceptionHandler，返回 Future 则留在 Future 里
+用法：异步任务失效排查三板斧
+锚点：实战共识
+
+</details>
+
+### Boot · DispatcherServlet（web）
+
+<details><summary>看背面</summary>
+
+请求处理主线：DispatcherServlet 收到请求→HandlerMapping 找处理器→HandlerAdapter 执行→ViewResolver/HttpMessageConverter→响应
+原理：所有请求入口统一是 DispatcherServlet（前端控制器模式），理解流程后拦截器/异常/参数解析各就各位
+用法：Spring MVC 八股主线
+锚点：Spring MVC 文档
+
+</details>
+
+### Boot · HttpMessageConverter（web）
+
+<details><summary>看背面</summary>
+
+@RequestBody/@ResponseBody 由 HttpMessageConverter 完成 JSON 与对象转换
+原理：默认 Jackson，配置 ObjectMapper 定制（时间格式、null 处理、Long 转字符串防前端精度丢失）
+用法：统一响应与序列化定制
+锚点：Spring MVC 文档
+
+</details>
+
+### Boot · 拦截器（web）
+
+<details><summary>看背面</summary>
+
+HandlerInterceptor 在 Controller 前后执行（preHandle/postHandle/afterCompletion），Bean 由 Spring 容器管理
+原理：Filter 是 Servlet 规范在 DispatcherServlet 之前，拦截器能拿 Handler 信息与容器 Bean，afterCompletion 在视图渲染后必执行（适合清理）
+用法：登录态/幂等/审计用拦截器，编码/全链路 header 用 Filter
+锚点：Spring MVC 文档
+
+</details>
+
+### Boot · 异常（web）
+
+<details><summary>看背面</summary>
+
+@RestControllerAdvice+@ExceptionHandler 全局异常映射
+原理：统一异常响应体（code/message/traceId），按异常类型精确匹配优先级高于父类，兜底 Exception.class 兜住未预期异常
+用法：异常体系的统一出口
+锚点：Spring MVC 文档
+
+</details>
+
+### Boot · 校验（web）
+
+<details><summary>看背面</summary>
+
+@Validated/@Valid 触发 JSR-303 校验（Hibernate Validator 实现）
+原理：@Valid 支持嵌套级联校验，@Validated 支持分组与类上标注触发方法级校验，校验失败抛 MethodArgumentNotValidException 进全局异常处理
+用法：DTO 校验注解+全局异常三件套
+锚点：JSR-380
+
+</details>
+
+### Boot · RestClient（web）
+
+<details><summary>看背面</summary>
+
+Spring Boot 3.2 引入 RestClient 同步 API 风格化 HTTP 客户端
+原理：RestTemplate 处于维护模式，RestClient 流式 API（get().uri().retrieve().body()），WebClient 仍是响应式场景首选
+用法：新项目 HTTP 客户端选型
+锚点：Boot 3.2
+
+</details>
+
+### Boot · Actuator（运维）
+
+<details><summary>看背面</summary>
+
+Actuator 提供 /actuator/health、metrics、env 等运维端点
+原理：生产暴露 health+info+prometheus 其余关闭（management.endpoints.web.exposure.include），health 可聚合 DB/Redis/MQ 健康度供 K8s 探针
+用法：K8s liveness/readiness 探针数据源
+锚点：Boot 文档
+
+</details>
+
+### Boot · nested jar（可执行 jar）
+
+<details><summary>看背面</summary>
+
+Spring Boot 可执行 jar 用嵌套 jar 结构由 LaunchedURLClassLoader 加载
+原理：依赖打进 BOOT-INF/lib 内部 jar，启动类 JarLauncher 引导，解法解决了"fat jar 在容器内 classpath 问题"，代价是类加载稍慢
+用法：理解 fat jar 加载原理
+锚点：Boot 文档
+
+</details>
+
+### Boot · 切片（测试）
+
+<details><summary>看背面</summary>
+
+@SpringBootTest 全上下文 vs @DataJpaTest/@WebMvcTest 切片测试
+原理：切片只装配相关组件启动快，MockMvc 测 Controller，@MockBean 替换容器 Bean，集成测试慢时优先切片
+用法：测试金字塔分层落地
+锚点：Boot 测试文档
+
+</details>
+
+### Boot · 3.x（版本）
+
+<details><summary>看背面</summary>
+
+Spring Boot 3.x 要求 JDK17+ 且 javax.* 迁移到 jakarta.*
+原理：Servlet 规范jakarta EE 9+ 命名空间迁移，第三方依赖（如老 MyBatis 老版本）不兼容 jakarta 时升级受阻，需升依赖版本
+用法：Boot 3 升级评估清单
+锚点：Boot 3.0
+
+</details>
+
+### Boot · 容器（web）
+
+<details><summary>看背面</summary>
+
+内嵌容器默认 Tomcat 可切 Undertow/Jetty
+原理：Undertow 高并发下吞吐与内存表现更优（案例），切换依赖 spring-boot-starter-undertow 并排除默认 starter
+用法：高并发网关型服务的容器选型
+锚点：Boot 文档
+
+</details>
+
+### Boot · 优化（启动）
+
+<details><summary>看背面</summary>
+
+启动优化：@Lazy 延迟、排除不需要的自动配置、AppCDS、虚拟线程（3.2）、关闭不必要日志
+原理：大应用冷启动秒级→可测，K8s 弹性扩容场景启动时间直接影响就绪探针延迟
+用法：启动 profiling（Boot 3 的 ApplicationStartup）定位
+锚点：实战方法论
+
+</details>
+
+### MyBatis · @MapperScan（集成）
+
+<details><summary>看背面</summary>
+
+@MapperScan 通过 MapperScannerRegistrar 动态注册每个 Mapper 的 MapperFactoryBean
+原理：每个接口变成 FactoryBean 产出的代理对象（MapperProxy），这就是"接口没有实现类却能注入"的原理
+用法：框架集成扩展点实战案例
+锚点：MyBatis-Spring
+
+</details>
+
+### MyBatis · 一级缓存（缓存）
+
+<details><summary>看背面</summary>
+
+MyBatis 一级缓存 SqlSession 级：非事务时每个 Mapper 方法独立 SqlSession（缓存基本无效），同一事务内共享 SqlSession（缓存生效）
+原理：MyBatis-Spring 的 SqlSessionTemplate 精确语义（本项目核对源码的结论），事务内同一 SqlSession 复用所以一级缓存命中
+用法：一级缓存的边界条件比"作用域是 session"更重要
+锚点：MyBatis-Spring 源码核对
+
+</details>
+
+### MyBatis · 二级缓存（缓存）
+
+<details><summary>看背面</summary>
+
+MyBatis 二级缓存 namespace 级多 SqlSession 共享但生产慎用
+原理：跨 namespace 不可见（关联查询更新不失效）、序列化开销、集群下各节点独立（除非第三方实现），生产多用 Redis 缓存替代
+用法：缓存注解失效排查时知道二级缓存边界
+锚点：MyBatis 文档
+
+</details>
+
+### 缓存 · @Cacheable（抽象）
+
+<details><summary>看背面</summary>
+
+Spring Cache 抽象：@Cacheable/@CachePut/@CacheEvict/@Caching 组合
+原理：基于 AOP 代理，缓存管理器可切 Redis/Caffeine，@Cacheable 先查缓存 miss 才执行方法，@CachePut 总是执行（写穿）
+用法：声明式缓存落地
+锚点：Spring 文档
+
+</details>
+
+### 缓存 · null（陷阱）
+
+<details><summary>看背面</summary>
+
+@Cacheable 默认不缓存 null 返回值（可配 allowNullValues）
+原理：穿透防护要么允许 null 加短 TTL，要么代码层缓存空对象，配合缓存穿透治理
+用法：缓存穿透方案选型
+锚点：Spring 文档
+
+</details>
+
+### 缓存 · 自调用（陷阱）
+
+<details><summary>看背面</summary>
+
+缓存注解同样受自调用失效影响
+原理：与事务/AOP 同源，同类方法互调不走代理缓存不生效
+用法：缓存失效排查第三板斧
+锚点：实战共识
+
+</details>
+
+### WebFlux · 响应式（对比）
+
+<details><summary>看背面</summary>
+
+WebFlux 是响应式非阻塞栈（Reactor）吞吐高于阻塞栈但心智与调试成本高
+原理：少量线程处理大量连接（Netty），回溯调试难、生态（JDBC 阻塞）受限，R2DBC 弥补数据库层，选型看团队与场景
+用法：IO 密集高并发网关场景
+锚点：Spring WebFlux 文档
+
+</details>
+
+### Boot · 3.2（虚拟线程）
+
+<details><summary>看背面</summary>
+
+Spring Boot 3.2 开 spring.threads.virtual.enabled=true 让 Tomcat/@Async 走虚拟线程
+原理：IO 密集服务吞吐显著提升（阻塞时让出载体线程），synchronized pin 载体的问题在 JDK24 修复，代码零改动升级
+用法：IO 密集服务低成本扩容
+锚点：Boot 3.2
+
+</details>
+
+### 测试 · @Transactional 回滚（事务）
+
+<details><summary>看背面</summary>
+
+测试类 @Transactional 默认每测试方法后回滚不污染库
+原理：由测试框架管理（非生产代理语义），需要真实提交的集成步骤用 @Commit 或编程式事务
+用法：集成测试的标准姿势
+锚点：Spring Test 文档
+
+</details>
+
+### 容器 · ContextRefreshedEvent（扩展）
+
+<details><summary>看背面</summary>
+
+ContextRefreshedEvent 在容器刷新完成后发布适合做启动后初始化
+原理：此时所有 Bean 就绪（含非懒加载），对比 @PostConstruct（自身就绪）与 ApplicationRunner（Boot 专属）的时机差异
+用法：全量就绪后的预热/校验任务
+锚点：Spring 文档
+
+</details>
+
+### 容器 · Import（扩展）
+
+<details><summary>看背面</summary>
+
+@Import 三种用法：普通类、ImportSelector、ImportBeanDefinitionRegistrar
+原理：Selector 按条件批量导入（@EnableAutoConfiguration 原理），Registrar 完全自定义注册（@MapperScan 原理），是框架级扩展的入口
+用法：读框架源码的钥匙
+锚点：Spring 文档
+
+</details>
+
+### Boot · 外部化（配置）
+
+<details><summary>看背面</summary>
+
+配置外部化顺序：命令行 > SPRING_APPLICATION_JSON > 环境变量 > 配置文件
+原理：12 因子应用原则，同一镜像跨环境部署只换环境变量，K8s ConfigMap/Secret 注入环境变量
+用法：云原生部署基本功
+锚点：Boot 文档
+
+</details>
+
+### 安全 · 过滤器链（Spring Security）
+
+<details><summary>看背面</summary>
+
+Spring Security 基于 Servlet Filter 链（FilterChainProxy 代理一串安全过滤器）
+原理：认证（AuthenticationManager）、授权（AuthorizationManager）、CSRF、会话管理各是一环，与业务拦截器（HandlerInterceptor）职责分层
+用法：认证授权体系的主干
+锚点：Spring Security 文档
+
+</details>
+
+### 安全 · JWT（认证）
+
+<details><summary>看背面</summary>
+
+JWT 无状态认证：签发→携带→过滤链校验签名
+原理：服务端不存会话水平扩展友好，缺点：无法主动失效（需黑名单）、payload 明文（不放敏感信息、HS256/RSA 签名）
+用法：分布式会话方案对比
+锚点：实战共识
+
+</details>
+
+### 安全 · Session vs JWT（认证）
+
+<details><summary>看背面</summary>
+
+分布式会话两路线：Spring Session 集中存 Redis 或 JWT 自包含
+原理：集中式可随时踢人（运维可控），JWT 免中心存储但撤销难，混合方案：短 JWT+refresh token
+用法：按业务需求选型（可撤销性）
+锚点：实战共识
+
+</details>
+
+### Boot · metrics（监控）
+
+<details><summary>看背面</summary>
+
+Micrometer 是 Boot 的指标门面对接 Prometheus/Grafana
+原理：自动暴露 JVM（内存/GC/线程）、HTTP（QPS/P99）、连接池指标，自定义 @Timed/MeterRegistry 埋业务指标
+用法：可观测性三支柱之一（metrics）
+锚点：Boot 文档
+
+</details>
+
+### 可观测 · traceId（tracing）
+
+<details><summary>看背面</summary>
+
+全链路追踪：Micrometer Tracing/OpenTelemetry 生成 traceId 跨服务传递
+原理：通过 HTTP header（W3C traceparent）与 MQ 属性传递，日志 MDC 打 traceId 串起单请求全部日志
+用法：可观测性第二支柱（tracing）
+锚点：实战共识
+
+</details>
+
+### 事务 · 不跨库（多数据源）
+
+<details><summary>看背面</summary>
+
+@Transactional 不支持跨数据源（本地事务仅单连接）
+原理：多库写需要 JTA（Atomikos）/Seata/最终一致性，最实用是业务侧拆分（各自事务+补偿）
+用法：多库写一致性选型
+锚点：实战共识
+
+</details>
+
+### 事务 · TransactionSynchronization（连接）
+
+<details><summary>看背面</summary>
+
+TransactionSynchronizationManager 注册事务同步回调（提交前/后/回滚后）
+原理：编程式钩子：afterCommit 发 MQ、afterCompletion 清资源，与 @TransactionalEventListener 等价但更底层灵活
+用法：精确控制事务生命周期
+锚点：Spring 源码
+
+</details>
+
+### Bean · allow-bean-definition-overriding（覆盖）
+
+<details><summary>看背面</summary>
+
+Boot 2.1 起默认禁止 Bean 覆盖（重名即启动失败）
+原理：覆盖引发的隐性 Bug 难排查，显式开启（spring.main.allow-bean-definition-overriding=true）才允许，团队规范建议重名直接报错
+用法：升级 Boot 2.1 常见启动报错
+锚点：Boot 2.1
+
+</details>
+
+### IoC · @Order 注入（顺序）
+
+<details><summary>看背面</summary>
+
+@Order 控制 Bean 初始化顺序与集合注入顺序（数字小先）
+原理：依赖关系应靠 @DependsOn 或显式注入表达而非顺序猜测，@Order 是提示不是保证
+用法：顺序敏感场景用 @DependsOn 显式声明
+锚点：Spring 文档
+
+</details>
+
+### IoC · @DependsOn（顺序）
+
+<details><summary>看背面</summary>
+
+@DependsOn 显式声明初始化依赖顺序
+原理：初始化缓存 Bean 与使用 Bean 的关系、静态资源准备，比 @Order 强（保证创建完成顺序）
+用法：显式依赖的标准工具
+锚点：Spring 文档
+
+</details>
+
+### 容器 · 优雅停机（关闭）
+
+<details><summary>看背面</summary>
+
+Boot 2.3+ 优雅停机：server.shutdown=graceful 等待请求完成再关容器
+原理：K8s 删除 Pod 时先 SIGTERM，停机期 Tomcat 停接新请求等存量完成（超时 spring.lifecycle.timeout-per-shutdown-phase），配合 preStop sleep
+用法：发布零中断的基础配置
+锚点：Boot 2.3
+
+</details>
+
+### Boot · 压测参数（运维）
+
+<details><summary>看背面</summary>
+
+Web 容器关键参数：Tomcat maxThreads(默认 200)/acceptCount/maxConnections 按压测定
+原理：默认 200 线程 + 8192 accept 队列未必适配业务，慢接口占满线程池是雪崩起点，配合超时与舱壁隔离
+用法：容量规划与雪崩防护
+锚点：Boot 文档
+
+</details>
+
+### 演进 · XML→注解→Boot（历史）
+
+<details><summary>看背面</summary>
+
+Spring 演进：XML 配置→注解+JavaConfig→Spring Boot 自动配置→云原生
+原理：每个阶段解决上一阶段的配置复杂度，理解演进脉络才能回答"为什么 Spring Boot 能流行"
+用法：体系化回答 Spring 是什么
+锚点：历史共识
+
+</details>
+
+### AOP · 幂等（场景）
+
+<details><summary>看背面</summary>
+
+幂等注解切面：@Idempotent + Redis setnx + 拦截器/AOP
+原理：请求携带唯一键（token/参数 hash），切面前置检查已处理则拒绝，TTL 覆盖业务最长处理时间
+用法：防重提交的通用架构
+锚点：实战共识
+
+</details>
+
+### AOP · 限流（场景）
+
+<details><summary>看背面</summary>
+
+限流切面：Sentinel/@RateLimiter 注解 + 切面读取阈值
+原理：接口级限流注解化，底层令牌桶/滑动窗口，超限快速失败或降级，与网关层限流分层（网关粗粒度、应用细粒度）
+用法：接口 QPS 治理
+锚点：实战共识
+
+</details>
+
+### Boot · logback（日志）
+
+<details><summary>看背面</summary>
+
+Boot 默认 logback 按 spring.profile 加载 logback-spring.xml
+原理：生产配置滚动策略（按天+大小）、异步 Appender（AsyncAppender 防日志 IO 拖慢业务）、traceId 进 pattern
+用法：日志规范落地
+锚点：Boot 文档
+
+</details>
+
+### Boot · 异步（日志）
+
+<details><summary>看背面</summary>
+
+日志异步化用 AsyncAppender 或 Log4j2 async logger（Disruptor）
+原理：同步日志在高并发下成为 IO 瓶颈（RT 上升），Log4j2 异步 logger 性能最优，丢弃策略按业务容忍度配置
+用法：高并发服务日志基线配置
+锚点：实战共识
+
+</details>
+
+### IoC · 综合（面试）
+
+<details><summary>看背面</summary>
+
+Spring 高频面试主线：Bean 生命周期→三级缓存→AOP 代理时机→事务传播→自动配置
+原理：这条链覆盖 80% Spring 面试题，每环都有源码级细节（本项目已逐环核对源码与文档）
+用法：复习主线图
+锚点：复习方法论
+
+</details>
+
+### Boot · 路线（升级）
+
+<details><summary>看背面</summary>
+
+升级路线：Boot 1.5（EOL）→2.7（过渡）→3.x（JDK17/jakarta），依赖版本同步升级
+原理：2.x 尾版 2.7 是迁移缓冲，先升 2.7 修废弃 API 再跨 3.0，spring-boot-properties-migrator 自动提示配置变更
+用法：老系统升级路线图
+锚点：Boot 官方迁移指南
+
+</details>
+
+### IoC · jar 冲突（坑）
+
+<details><summary>看背面</summary>
+
+依赖冲突是 Boot 项目第一大故障源（mvn dependency:tree 排查）
+原理：同一库多版本导致 NoSuchMethodError/ClassNotFoundException，用 dependencyManagement 统一版本、BOM 管理第三方（如 spring-cloud-bom）
+用法：依赖治理是 Boot 工程师基本功
+锚点：实战共识
+
+</details>
+
+### 测试 · 测试环境隔离（契约）
+
+<details><summary>看背面</summary>
+
+测试配置隔离：test profile 独立数据源（H2/Testcontainers）与 Mock 外部依赖
+原理：Testcontainers 起真实 MySQL/Redis 容器比 H2 更真实（方言差异），CI 与本地一致
+用法：集成测试环境标准
+锚点：实战共识
+
+</details>
+
+### IoC · ApplicationContext（API）
+
+<details><summary>看背面</summary>
+
+获取容器内 Bean 的正道是注入而非 ApplicationContextAware 手动 getBean
+原理：手动 getBean 隐藏依赖关系与静态耦合（ServiceLocator 反模式），例外：工具类/无法注入的场景
+用法：代码 review 识别 ServiceLocator
+锚点：Spring 官方建议
+
+</details>
+
+### 综合 · 优先级（复习）
+
+<details><summary>看背面</summary>
+
+Spring 复习优先级：事务失效与传播 > Bean 生命周期与三级缓存 > AOP 原理 > Boot 自动配置 > MVC 流程
+原理：按面试命中率排序（P7 岗位 JD 高频），每块都配手写复述（不看书讲清楚）再进下一块
+用法：复习时间分配依据
+锚点：复习方法论
+
+</details>
+
+
+## MySQL（110 张）
+
+### 索引 · B+ 树（结构）
+
+<details><summary>看背面</summary>
+
+InnoDB 索引是 B+ 树：非叶子节点只存键叶子节点存数据且叶子双向链表相连
+原理：非叶子不存数据使单节点容纳更多键降低树高，链表支撑范围扫描，这是 B+ 树取代 B 树/二叉树的原因
+用法：索引结构八股的基准点
+锚点：InnoDB 文档
+
+</details>
+
+### 索引 · 三层（估算）
+
+<details><summary>看背面</summary>
+
+千万级数据 B+ 树约 3 层（16KB 页 × 每节点约 1200 键估算）
+原理：非叶节点 16KB 可放约 1200 个键指针，两层约 144 万键，三层覆盖十几亿行，单次查询 3-4 次 IO
+用法：容量估算题的标准推导
+锚点：B+ 树估算
+
+</details>
+
+### 索引 · 聚簇索引（聚簇）
+
+<details><summary>看背面</summary>
+
+InnoDB 是索引组织表：主键索引的叶子直接挂行数据（聚簇索引）
+原理：数据按主键有序存放，表即主键索引本身，二级索引叶子存主键值而非行地址
+用法：理解"为什么主键要自增"的前提
+锚点：InnoDB 文档
+
+</details>
+
+### 索引 · 回表（回表）
+
+<details><summary>看背面</summary>
+
+二级索引查询需拿主键回聚簇索引再取整行称为回表
+原理：二级索引只存 (索引列, 主键)，需要的列不在索引里就回表，回表次数是优化关键
+用法：优化 select * 的第一步是减少回表
+锚点：实战共识
+
+</details>
+
+### 索引 · 覆盖索引（覆盖）
+
+<details><summary>看背面</summary>
+
+查询所需列全部在索引中则免回表称为覆盖索引
+原理：explain Extra 出现 Using index 即覆盖，count 查询、联合索引带排序列是经典覆盖场景
+用法：高频查询设计成覆盖索引
+锚点：explain 解读
+
+</details>
+
+### 索引 · 最左前缀（联合）
+
+<details><summary>看背面</summary>
+
+联合索引 (a,b,c) 只有从 a 开始的连续前缀才能走索引
+原理：B+ 树先按 a 排序再按 b，跳过 a 无法定位，where b=1 单独查询不走该索引
+用法：建联合索引先定首列
+锚点：最左前缀原则
+
+</details>
+
+### 索引 · 顺序（设计）
+
+<details><summary>看背面</summary>
+
+联合索引列顺序：等值条件列在前、排序列随后、范围列最后
+原理：等值确定后排序才连续（免 filesort），范围列之后的列不再有序，与 MongoDB ESR 同构
+用法：复合索引设计口诀
+锚点：实战方法论
+
+</details>
+
+### 索引 · ICP（下推）
+
+<details><summary>看背面</summary>
+
+索引下推（ICP，5.6+）把 where 条件下推到存储引擎层先过滤再回表
+原理：联合索引非前缀列的条件在引擎层用索引值过滤，减少回表次数，explain Extra 出现 Using index condition
+用法：5.6+ 默认开启知道其原理即可
+锚点：MySQL 5.6
+
+</details>
+
+### 索引 · 前缀索引（前缀）
+
+<details><summary>看背面</summary>
+
+长字符串列建前缀索引（如 email 取前 10 字符）省空间
+原理：前缀索引无法覆盖查询（叶子只有前缀）且需保证区分度（count(distinct left(col,n)) 评估），URL 长字段优化常用
+用法：长字符串列优化标准手法
+锚点：实战共识
+
+</details>
+
+### 索引 · 区分度（评估）
+
+<details><summary>看背面</summary>
+
+索引价值看区分度：count(distinct col)/count(*) 越接近 1 越好
+原理：性别等低区分度列单独建索引收益差，优化器对低区分度可能直接全表扫
+用法：建索引前的评估动作
+锚点：实战方法论
+
+</details>
+
+### 索引 · 函数（失效）
+
+<details><summary>看背面</summary>
+
+索引列上使用函数或运算会失效（8.0 函数索引除外）
+原理：B+ 树按原始值有序，函数变换后无法利用排序，改写为对常量做运算或建函数索引（8.0.13+）
+用法：where date(created_at)=... 改范围查询
+锚点：实战共识
+
+</details>
+
+### 索引 · 隐式转换（失效）
+
+<details><summary>看背面</summary>
+
+字符串列与数字比较发生隐式转换使索引失效
+原理：MySQL 把字符串转数字比较（相当于对列套 cast 函数），手机号 varchar 列 where phone=13800138000 失效，参数必须传字符串
+用法：接口传参类型 review 必查
+锚点：实战共识
+
+</details>
+
+### 索引 · 通配符（失效）
+
+<details><summary>看背面</summary>
+
+前导通配符 like '%xx' 无法走 B+ 树（后缀 like 'xx%' 可以）
+原理：B+ 树按前缀有序，% 开头破坏前缀定位，全文搜索需求交给 ES
+用法：搜索类需求选型 ES 而非 like
+锚点：实战共识
+
+</details>
+
+### 索引 · or（失效）
+
+<details><summary>看背面</summary>
+
+or 两边有一侧无索引则整体走全表扫描（union 可绕开）
+原理：or 语义要求两侧结果并集，一侧全扫则另一侧索引无意义，改写 union all 各走各的索引
+用法：SQL 改写手法之一
+锚点：实战共识
+
+</details>
+
+### 索引 · change buffer（change buffer）
+
+<details><summary>看背面</summary>
+
+唯一索引不能使用 change buffer 而普通二级索引可以
+原理：change buffer 把非唯一二级索引的写缓存起来合并减少随机读页，唯一索引必须立即判重无法缓存，写多读少场景普通索引更优
+用法：写密集场景索引选型考量
+锚点：InnoDB 文档
+
+</details>
+
+### 主键 · 自增主键（设计）
+
+<details><summary>看背面</summary>
+
+InnoDB 主键推荐自增或趋势递增值（UUID 随机导致页分裂）
+原理：随机主键使插入落点分散引发页分裂与碎片、buffer pool 命中率下降，雪花 ID 趋势递增兼得分布式唯一与写入友好
+用法：建表规范第一条
+锚点：实战共识
+
+</details>
+
+### 存储 · 页分裂（页）
+
+<details><summary>看背面</summary>
+
+InnoDB 以 16KB 页为管理单位插入满页时分裂（数据有序时顺序写入免分裂）
+原理：自增插入永远追加到最右页免分裂，随机插入命中率低且分裂频繁，碎片需要 OPTIMIZE TABLE 重建
+用法：理解 B+ 树写入放大
+锚点：InnoDB 文档
+
+</details>
+
+### explain · type（type）
+
+<details><summary>看背面</summary>
+
+explain type 等级：const>eq_ref>ref>range>index>ALL
+原理：const 主键/唯一等值、eq_ref join 主键、ref 普通索引等值、range 范围、index 全索引扫、ALL 全表扫，线上要求至少 range
+用法：explain 解读第一指标
+锚点：MySQL 文档
+
+</details>
+
+### explain · Extra（Extra）
+
+<details><summary>看背面</summary>
+
+关键 Extra：Using index（覆盖）、Using index condition（ICP）、Using filesort（额外排序）、Using temporary（临时表）
+原理：filesort 与 temporary 是性能红灯：order by 未走索引、group by/distinct 建 tmp，优化方向是补索引或改写
+用法：explain 解读第二指标
+锚点：MySQL 文档
+
+</details>
+
+### explain · explain analyze（analyze）
+
+<details><summary>看背面</summary>
+
+explain analyze（8.0.18+）真实执行并报告每算子实际耗时与行数
+原理：普通 explain 是优化器预估可能骗人，analyze 给出实际执行计划与耗时分布，是 SQL 优化利器
+用法：疑难 SQL 优化第一步
+锚点：MySQL 8.0.18
+
+</details>
+
+### SQL · count(*)（count）
+
+<details><summary>看背面</summary>
+
+count(*) 与 count(1) 等价且官方推荐，count(col) 会跳过 null
+原理：count(*) 由优化器专门优化（任选最小索引数行），count(col) 需逐行判空，count(distinct col) 去重且忽略 null
+用法：统计行数规范写 count(*)
+锚点：官方文档核对
+
+</details>
+
+### SQL · 深分页（分页）
+
+<details><summary>看背面</summary>
+
+深分页 limit 100000,10 需扫描前 100010 行再丢弃
+原理：优化：游标方式 where id>last_id limit 10（连续翻页）或延迟关联（先查 id 再回表），ES 与业务层配合规避深翻页
+用法：游标分页是标准解
+锚点：实战共识
+
+</details>
+
+### SQL · NLJ（join）
+
+<details><summary>看背面</summary>
+
+join 实现：Nested-Loop Join 逐行驱动被驱动表（有索引走 Index NLJ）
+原理：驱动表每行到被驱动表查一次（走索引则很快），无可用索引时 Block NLJ 用 join buffer 缓存驱动表批量匹配，8.0.18 起无索引等值 join 可用 Hash Join
+用法：join 性能分析基础
+锚点：MySQL 8.0.18
+
+</details>
+
+### SQL · 小表驱动（join）
+
+<details><summary>看背面</summary>
+
+join 优化核心是小表驱动大表
+原理：驱动表行数决定外层循环次数，straight_join 强制指定驱动顺序，"小表"指过滤后行数少而非物理小
+用法：join 慢查询的第一分析点
+锚点：实战共识
+
+</details>
+
+### SQL · in vs exists（join）
+
+<details><summary>看背面</summary>
+
+in 与 exists 的选择本质是谁做驱动表：in 外表驱动适合外表小，exists 子表驱动适合外表大
+原理：8.0 优化器会自动改写半连接（semi-join），两写法性能差异缩小，重点还是索引是否可用
+用法：子查询优化知识
+锚点：实战共识
+
+</details>
+
+### SQL · select *（优化）
+
+<details><summary>看背面</summary>
+
+select * 的危害：无法覆盖索引、传输无效列、buffer pool 污染
+原理：按需 select 列表配合覆盖索引，宽表大字段（TEXT/BLOB）必须拆分按需读
+用法：SQL 规范第一条
+锚点：实战共识
+
+</details>
+
+### 事务 · 实现（ACID）
+
+<details><summary>看背面</summary>
+
+ACID 实现：redo log 保持久性、undo log 保原子性（回滚）、锁+MVCC 保隔离性、三者共同保一致性
+原理：一致性是目的其他三者是手段，这个映射是事务八股的骨架
+用法：回答 ACID 如何实现的标准框架
+锚点：InnoDB 文档
+
+</details>
+
+### 日志 · redo log（redo）
+
+<details><summary>看背面</summary>
+
+redo log 是 InnoDB 层物理日志 WAL 顺序循环写保证崩溃恢复
+原理：先写日志后刷数据页（WAL），随机写变顺序写提升性能，空间固定循环复用，8.0.30 起由 innodb_redo_log_capacity 统一控制
+用法：WAL 是 InnoDB 性能的基石
+锚点：MySQL 8.0.30
+
+</details>
+
+### 日志 · 刷盘（redo）
+
+<details><summary>看背面</summary>
+
+innodb_flush_log_at_trx_commit=1 每次事务提交刷盘（默认，最安全）
+原理：0 每秒刷（宕机丢 1 秒）、2 写 OS 缓存每秒落盘（OS 崩溃丢 1 秒）、1 完全持久（性能最低），金融场景必须 1
+用法：性能与持久性权衡旋钮
+锚点：InnoDB 文档
+
+</details>
+
+### 日志 · 格式（binlog）
+
+<details><summary>看背面</summary>
+
+binlog 是 Server 层逻辑日志默认 ROW 格式（8.0 默认 ROW，官方文档核对零差异）
+原理：ROW 记录行级变更（主从最安全）、STATEMENT 记 SQL（体积小但 now()/uuid() 不安全）、MIXED 自动切换
+用法：binlog 格式选型
+锚点：MySQL 8.0 官方文档
+
+</details>
+
+### 日志 · 刷盘（binlog）
+
+<details><summary>看背面</summary>
+
+sync_binlog=1 每次提交刷 binlog（默认，与 redo 1 组成双 1）
+原理：双 1 配置保证事务提交不丢，性能敏感可用 100/1000 组提交（主库宕机可能丢 binlog），从库可放宽
+用法：双 1 是金融标配
+锚点：MySQL 文档
+
+</details>
+
+### 事务 · 两阶段提交（两阶段）
+
+<details><summary>看背面</summary>
+
+binlog 与 redo 之间用两阶段提交：redo prepare→写 binlog→redo commit
+原理：保证 redo 与 binlog 逻辑一致（崩溃恢复时 binlog 完整则提交否则回滚），否则主从数据不一致（本项目反复核对的机制）
+用法：崩溃恢复一致性根基
+锚点：InnoDB 文档
+
+</details>
+
+### 事务 · 恢复规则（崩溃恢复）
+
+<details><summary>看背面</summary>
+
+崩溃恢复规则：redo 已 commit 直接恢复；redo prepare 且 binlog 完整则提交；否则回滚
+原理：以 binlog 为准绳（binlog 已被从库复制就必须提交），这就是两阶段提交的意义
+用法：高可用恢复机制原理
+锚点：InnoDB 文档
+
+</details>
+
+### 事务 · 组提交（组提交）
+
+<details><summary>看背面</summary>
+
+组提交（group commit）把多个事务的刷盘合并成一次 IO
+原理：双 1 下每事务两次 fsync 太贵，binlog 组提交（三个阶段 flush/sync/commit）让并发事务共享一次 fsync，高并发写性能的关键
+用法：高并发写入优化机制
+锚点：InnoDB 文档
+
+</details>
+
+### 事务 · 版本链（MVCC）
+
+<details><summary>看背面</summary>
+
+MVCC 靠 undo log 版本链：每行隐藏字段 trx_id 与 roll_pointer 指向历史版本
+原理：读旧版本不加锁实现读写并行，回滚时沿版本链还原，undo log 在无活跃事务引用后由 purge 线程清理
+用法：MVCC 原理的骨架
+锚点：InnoDB 文档
+
+</details>
+
+### 事务 · ReadView（MVCC）
+
+<details><summary>看背面</summary>
+
+ReadView 包含活跃事务列表 m_ids、低水位 min_trx_id、高水位 max_trx_id 与 creator_trx_id
+原理：可见性判断：trx_id<min 可见；>=max 不可见；中间再看是否在 m_ids（未提交的不可见），不可见则沿版本链向前找
+用法：MVCC 可见性规则题的标准推导
+锚点：InnoDB 文档
+
+</details>
+
+### 事务 · RC vs RR（隔离）
+
+<details><summary>看背面</summary>
+
+RC（读已提交）每条语句生成新 ReadView，RR（可重复读）事务内首次查询生成并复用
+原理：这就是 RC 能读到别人新提交、RR 全程快照一致的机制差异，参数 transaction_isolation 控制
+用法：隔离级别差异的根本解释
+锚点：InnoDB 文档
+
+</details>
+
+### 事务 · 默认级别（隔离）
+
+<details><summary>看背面</summary>
+
+InnoDB 默认隔离级别 REPEATABLE-READ
+原理：SQL 标准要求 RR 下有幻读，InnoDB 在 RR 下用 MVCC（快照读）+间隙锁（当前读）基本消除幻读，这也是 MySQL 默认 RR 的底气
+用法：隔离级别八股基准点
+锚点：MySQL 文档
+
+</details>
+
+### 事务 · 快照读（读）
+
+<details><summary>看背面</summary>
+
+普通 select 是快照读（MVCC 无锁），select ... for update/lock in share mode 与 update/delete 是当前读
+原理：当前读必须读最新已提交版本并加锁，快照读读 ReadView 视图版本，两者并存是幻读讨论的基础
+用法：区分两类读是理解幻读的前提
+锚点：InnoDB 文档
+
+</details>
+
+### 事务 · 解决（幻读）
+
+<details><summary>看背面</summary>
+
+RR 下幻读：快照读靠 MVCC 避免、当前读靠间隙锁（Next-Key）阻止插入
+原理：混用快照读与当前读仍可能看到"幻影行"（先快照读后当前读），彻底避免要么全用当前读要么锁读一致
+用法：RR 幻读的精确边界
+锚点：实战共识
+
+</details>
+
+### 锁 · Next-Key（分类）
+
+<details><summary>看背面</summary>
+
+InnoDB 行锁三种：Record Lock 锁记录、Gap Lock 锁间隙、Next-Key=Record+Gap
+原理：RR 下可重复读与防幻读靠 Next-Key（左开右闭区间），RC 下禁用 Gap Lock 只锁记录（并发更好）
+用法：加锁分析的基本单位
+锚点：InnoDB 文档
+
+</details>
+
+### 锁 · 意向锁（意向）
+
+<details><summary>看背面</summary>
+
+表级意向锁（IS/IX）表明事务将持行锁，用于快速判断表锁冲突
+原理：加行锁前先加意向表锁，DDL（MDL 排他）与 LOCK TABLES 通过意向锁快速检测，不阻塞行级操作
+用法：锁体系分层知识
+锚点：InnoDB 文档
+
+</details>
+
+### 锁 · 元数据锁（MDL）
+
+<details><summary>看背面</summary>
+
+MDL 元数据锁保护表结构：查询持 MDL 读锁 DDL 需 MDL 写锁
+原理：长事务/慢查询持 MDL 读锁时 DDL 阻塞，且后续所有查询排在 DDL 之后（表完全不可用），online DDL 与运维操作必须避开高峰
+用法：DDL 卡死全表的经典机制
+锚点：实战共识
+
+</details>
+
+### DDL · online DDL（在线）
+
+<details><summary>看背面</summary>
+
+online DDL：INPLACE 算法大部分操作不锁表（加列 8.0 支持 INSTANT 秒级）
+原理：INSTANT 只改元数据（8.0.12+），INPLACE 重建表仍需时间且 MDL 短锁，COPY 全量拷贝最慢，DDL 前查支持算法
+用法：大表 DDL 先查算法支持表
+锚点：MySQL 8.0.12
+
+</details>
+
+### DDL · gh-ost（大表）
+
+<details><summary>看背面</summary>
+
+大表 DDL 变更用 gh-ost/pt-online-schema-change：影子表+增量同步+原子改名
+原理：直接 DDL 主从延迟与 MDL 风险大，工具建影子表拷数据、捕获增量（binlog/触发器）、锁表窗口极短，是行业标准做法
+用法：生产 DDL 变更流程
+锚点：gh-ost 文档
+
+</details>
+
+### 锁 · 检测（死锁）
+
+<details><summary>看背面</summary>
+
+InnoDB 自动检测死锁（innodb_deadlock_detect 默认 ON）回滚代价小的事务
+原理：SHOW ENGINE INNODB STATUS 看 LATEST DETECTED DEADLOCK，热点行更新高并发时死锁检测本身耗 CPU（关掉+排队是优化方案）
+用法：死锁问题排查入口
+锚点：InnoDB 文档
+
+</details>
+
+### 锁 · 超时（等待）
+
+<details><summary>看背面</summary>
+
+锁等待超时 innodb_lock_wait_timeout 默认 50 秒后报错
+原理：与死锁不同：等待方不知道对方何时释放，超时是兜底，业务上应缩短事务与快速提交减少锁等待
+用法：长事务导致锁堆积的机制
+锚点：InnoDB 文档
+
+</details>
+
+### 锁 · 全表锁（隐患）
+
+<details><summary>看背面</summary>
+
+update where 条件未走索引时逐行加锁接近锁全表
+原理：server 层按扫描路径加锁，全表扫描则所有行（含间隙）加 Next-Key，索引设计不当的 update 是生产事故源
+用法：update 语句必须先验证走索引
+锚点：实战教训
+
+</details>
+
+### 复制 · 主从复制（流程）
+
+<details><summary>看背面</summary>
+
+主从复制流程：主库 dump 线程发 binlog→从库 IO 线程写 relay log→SQL 线程重放
+原理：异步复制默认主库不等从库，从库延迟时读到旧数据，GTID（8.0 默认支持）标识事务位置断点续传
+用法：复制拓扑与故障恢复基础
+锚点：MySQL 文档
+
+</details>
+
+### 复制 · 半同步（安全）
+
+<details><summary>看背面</summary>
+
+半同步复制：主库等至少一个从库收到 binlog（ACK）才返回客户端
+原理：降低宕机丢事务风险，异步复制主库宕机可能丢最新事务，semi-sync 超时降级异步（rpl_semi_sync_master_timeout），8.0.26+ 半同步内置为 lossless 复制选项
+用法：金融场景复制选型
+锚点：MySQL 文档
+
+</details>
+
+### 复制 · 主从延迟（延迟）
+
+<details><summary>看背面</summary>
+
+主从延迟根因：从库单线程重放赶不上主库并发写、大事务、从库机器弱
+原理：解法：并行复制（8.0 writeset/LOGICAL_CLOCK）、拆大事务、从库升级，延迟监控 Seconds_Behind_Master 与 pt-heartbeat
+用法：读写分离架构的核心风险
+锚点：实战共识
+
+</details>
+
+### 架构 · 方案（过期读）
+
+<details><summary>看背面</summary>
+
+读写分离的过期读方案：强制走主库（关键业务）、等待位点（Sleep/GTID 等待）、中间件路由（按时间窗口）
+原理：完美方案是等从库重放到主库当前位点再读（GTID wait），业务上关键读走主库是简单可靠的选择
+用法：架构设计权衡
+锚点：实战方法论
+
+</details>
+
+### 高可用 · MHA（切换）
+
+<details><summary>看背面</summary>
+
+主从切换工具：MHA/Orchestrator 自动选主与补偿（从库 relay log 补齐差异）
+原理：切换流程：确认主库真死→选数据最新的从库→其他从库追平→提升新主→虚 IP/中间件切换，半同步+GTID 让切换丢数据窗口趋近于零
+用法：高可用体系核心动作
+锚点：实战共识
+
+</details>
+
+### 高可用 · MGR（集群）
+
+<details><summary>看背面</summary>
+
+MGR（组复制）基于 Paxos 多数派写提供强一致高可用
+原理：8.0 引入 MySQL InnoDB Cluster（MGR+Router+Shell），多数派确认防脑裂，代价是写性能与运维复杂度，国内主用主从+MHA/Orchestrator
+用法：高可用方案对比题
+锚点：MySQL 8.0
+
+</details>
+
+### 分库分表 · 2000 万（触发）
+
+<details><summary>看背面</summary>
+
+单表规模经验值：B+ 树 3 层可撑 2000 万行上下（与行宽相关）超阈值考虑分表
+原理：超过后树高变 4 层 IO 增加与缓存命中率下降，但非硬性红线：行少列窄可到亿级，决策看查询性能与容量规划
+用法：容量规划的经验锚点
+锚点：实战共识
+
+</details>
+
+### 分库分表 · 拆分（方式）
+
+<details><summary>看背面</summary>
+
+垂直拆分（按业务/按冷热列）与水平拆分（按行分片）
+原理：垂直：订单库存分库解耦；水平：单表数据量过大按分片键散列/区间，先垂直后水平是通用路径
+用法：拆分路线图
+锚点：实战方法论
+
+</details>
+
+### 分库分表 · 基因法（分片键）
+
+<details><summary>看背面</summary>
+
+分片键选择与基因法：订单号嵌入用户 ID 基因，使订单表与用户表同路由
+原理：同一用户数据落同一分片免跨片 join，订单查询按订单号（带基因）与按用户（同基因）都单分片命中，是电商通用手法
+用法：分库分表设计核心考点
+锚点：实战方法论
+
+</details>
+
+### 分库分表 · 异构索引（查询）
+
+<details><summary>看背面</summary>
+
+跨分片查询方案：异构索引（ES/ClickHouse）、二次分片（按维度再拆）、聚合层汇总
+原理：按用户分片后"按商家查订单"跨片，把订单冗余同步到 ES 或按商家维度再建表（异步对账保证一致）
+用法：拆分后查询架构设计
+锚点：实战方法论
+
+</details>
+
+### 分库分表 · 雪花（ID）
+
+<details><summary>看背面</summary>
+
+分布式 ID：雪花算法（64 位时间戳+机器+序列）时钟回拨问题与号段模式（DB 批量取号）
+原理：雪花本地生成高性能但依赖时钟（回拨需等待或备位），号段模式 DB 一次取一段内存分发（美团 Leaf 两种都实现）
+用法：分布式 ID 是分库分表标配
+锚点：实战共识
+
+</details>
+
+### 分库分表 · 翻倍（扩容）
+
+<details><summary>看背面</summary>
+
+扩容方案：翻倍扩容（成倍迁移路由简单）或一致性哈希（数据迁移少）
+原理：翻倍扩容按位翻番，旧分片数据一半迁新片，停写窗口小；一致性哈希只迁移 1/n 数据但节点波动影响大
+用法：分片架构生命周期管理
+锚点：实战方法论
+
+</details>
+
+### 分库分表 · ShardingSphere（中间件）
+
+<details><summary>看背面</summary>
+
+分库分表中间件：ShardingSphere-JDBC（客户端）与 Proxy（代理层）
+原理：JDBC 版无中间层低延迟但接入每应用，Proxy 独立部署语言无关但多一跳，ShardingSphere 是 Apache 顶级项目国内主流
+用法：选型按运维能力与延迟敏感度
+锚点：ShardingSphere 文档
+
+</details>
+
+### 分库分表 · 对账（兜底）
+
+<details><summary>看背面</summary>
+
+分库分表迁移与运行必须有对账兜底：全量校验+增量校验+修复流程
+原理：迁移双写期间数据一致靠对账闭环（checksum 比对），运行期跨片冗余数据定期校验，没有对账的分布式数据架构不完整
+用法：数据一致性的最后防线
+锚点：实战方法论
+
+</details>
+
+### 备份 · xtrabackup（工具）
+
+<details><summary>看背面</summary>
+
+物理备份 xtrabackup（热备 InnoDB 文件级）优于 mysqldump（逻辑 SQL 重放慢）
+原理：xtrabackup 拷贝数据文件+备份期间增量日志，TB 级库恢复按小时计，mysqldump 适合小库与跨版本迁移
+用法：备份方案选型
+锚点：Percona 文档
+
+</details>
+
+### 备份 · binlog（恢复）
+
+<details><summary>看背面</summary>
+
+恢复公式：最近全量备份+重放 binlog 至故障点（防-备-救框架）
+原理：备份策略决定恢复能力（RPO），binlog 完整性（sync_binlog=1 与保留时长）决定能恢复到哪一刻，定期演练恢复流程是唯一验证手段
+用法：防备救三层体系
+锚点：实战方法论
+
+</details>
+
+### 存储 · 双写缓冲（doublewrite）
+
+<details><summary>看背面</summary>
+
+doublewrite buffer 防止"部分页写失效"（页 16KB 而磁盘 IO 原子单位更小）
+原理：写数据页先写 doublewrite 再落盘，崩溃时用它恢复完整页，是 InnoDB 数据可靠性的隐性防线
+用法：可靠性机制八股
+锚点：InnoDB 文档
+
+</details>
+
+### 连接 · HikariCP（池）
+
+<details><summary>看背面</summary>
+
+HikariCP 是 Spring Boot 2.0+ 默认连接池（字节码优化+FastList+无锁设计最快）
+原理：关键参数：maximumPoolSize（经验公式 core×2+磁盘数，连接不是越大越好）、connectionTimeout、maxLifetime（小于 MySQL wait_timeout）
+用法：连接池调优标准参数组
+锚点：HikariCP 文档
+
+</details>
+
+### 连接 · 长连接（管理）
+
+<details><summary>看背面</summary>
+
+MySQL 连接管理：长连接复用但需定期重连防内存涨（执行时临时对象），短连接建立成本高
+原理：连接内存随执行增长不释放（MySQL 8.0 前尤其），定期断开或 mysql_reset_connection 复位，wait_timeout 控制空闲回收
+用法：连接泄漏与内存涨排查知识
+锚点：实战共识
+
+</details>
+
+### 参数 · buffer pool（buffer pool）
+
+<details><summary>看背面</summary>
+
+innodb_buffer_pool_size 是最关键参数：专用数据库服务器设物理内存 50%-75%
+原理：缓存数据页与索引页，命中率（InnoDB buffer pool hit rate）99%+ 为健康，改大小需重启（8.0 支持在线动态调整）
+用法：MySQL 调参第一项
+锚点：InnoDB 文档
+
+</details>
+
+### 参数 · io capacity（刷脏）
+
+<details><summary>看背面</summary>
+
+innodb_io_capacity 告诉 InnoDB 磁盘能力（SSD 建议 2000+）
+原理：刷脏速率匹配磁盘吞吐，设置过低脏页堆积触发"连击"刷脏引发性能抖动（ wal 快满时激进刷盘）
+用法：性能抖动排查知识点
+锚点：InnoDB 文档
+
+</details>
+
+### SQL · 慢日志（慢查询）
+
+<details><summary>看背面</summary>
+
+慢查询日志 long_query_time（默认 10 秒生产建议 1 秒或更低）+pt-query-digest 分析
+原理：按总耗时/次数/锁时间排序定位 TopSQL，慢日志是 SQL 优化的入口数据，配合 performance_schema 深挖
+用法：SQL 优化的第一步
+锚点：实战共识
+
+</details>
+
+### SQL · 流程（优化）
+
+<details><summary>看背面</summary>
+
+SQL 优化流程：慢日志定位→explain（analyze）分析→索引优化或 SQL 改写→回归验证
+原理：先看 type/rows/Extra 三要素，改索引最常见，改写（join 顺序、子查询转 join）其次，最后才是参数与架构
+用法：方法论回答框架
+锚点：实战方法论
+
+</details>
+
+### 类型 · datetime（时间）
+
+<details><summary>看背面</summary>
+
+时间类型选型：datetime（8 字节与时区无关）vs timestamp（4 字节 2038 上限随时区转换）
+原理：timestamp 优势省空间与自动时区转换，跨时区系统用 UTC+timestamp 或统一 datetime+应用层时区，bigint 存毫秒是互联网常见做法
+用法：建表规范的知识点
+锚点：实战共识
+
+</details>
+
+### 字符集 · utf8mb4（utf8mb4）
+
+<details><summary>看背面</summary>
+
+MySQL 的 utf8 是不完整实现（最多 3 字节），存 emoji 必须 utf8mb4
+原理：utf8mb4 是真 UTF-8（4 字节），建表默认 utf8mb4+utf8mb4_0900_ai_ci（8.0 默认排序规则），老库迁移要评估索引长度变化
+用法：建表规范第一条
+锚点：实战共识
+
+</details>
+
+### 类型 · null（null）
+
+<details><summary>看背面</summary>
+
+列默认尽量 NOT NULL：null 影响索引统计、count(col) 忽略 null、is null 判断易错
+原理：null 参与比较结果为 unknown、聚合跳过 null、可空列索引需要额外标记，默认 NOT NULL+默认值是规范，但 is null 查询可以走索引
+用法：建表规范的原理依据
+锚点：实战共识
+
+</details>
+
+### SQL · 列表（in）
+
+<details><summary>看背面</summary>
+
+in 大列表问题：几千个 id 的 in 查询解析与优化器成本上升
+原理：拆批（每批 500-1000）、临时表 join、或业务上用缓存，MyBatis foreach 大列表是线上故障常见根因
+用法：ORM 层的隐性坑
+锚点：实战共识
+
+</details>
+
+### SQL · order by（排序）
+
+<details><summary>看背面</summary>
+
+order by 走索引免排序（联合索引含排序列），否则 filesort（sort_buffer 内存不足落盘临时文件）
+原理：filesort 单行太大或行数多时用"分批+归并"，max_length_for_sort_data 控制单路/双路策略，覆盖索引免回表是 order by 优化核心
+用法：排序慢查询分析
+锚点：实战共识
+
+</details>
+
+### SQL · group by（分组）
+
+<details><summary>看背面</summary>
+
+group by 无索引时走临时表+排序（8.0 默认不排序了），group by 结果需要 order by 显式声明
+原理：8.0 起 group by 不再隐式排序（5.7 隐式按分组列排序），依赖旧行为的 SQL 升级后出 Bug
+用法：版本升级兼容性知识点
+锚点：MySQL 8.0
+
+</details>
+
+### SQL · 乐观锁（锁）
+
+<details><summary>看背面</summary>
+
+乐观锁更新：update ... set version=version+1 where id=? and version=? 判断影响行数
+原理：无锁化高并发更新标准手法（库存扣减、状态机流转），失败重试或业务提示，与 select for update 悲观锁对比选型
+用法：高并发更新模式
+锚点：实战共识
+
+</details>
+
+### SQL · 悲观锁（锁）
+
+<details><summary>看背面</summary>
+
+悲观锁 select ... for update 在事务内锁住选中行直到提交
+原理：热点行强一致更新（账户余额）、与乐观锁按冲突率选择，for update 必须走索引否则锁范围放大
+用法：支付类场景锁选型
+锚点：实战共识
+
+</details>
+
+### 分布式 · 最终一致（事务）
+
+<details><summary>看背面</summary>
+
+跨库事务主流方案：最终一致性（本地消息表/事务消息）优于强一致（XA/TCC 成本高）
+原理：本地消息表：业务与消息同库事务，异步投递+重试+对账，Seata AT 模式（undo_log 自动补偿）适合低冲突场景
+用法：分布式事务选型主线
+锚点：实战方法论
+
+</details>
+
+### 运维 · 清理（大表）
+
+<details><summary>看背面</summary>
+
+大表数据清理：分批 delete（每批几千行+sleep）避免长事务与主从延迟，归档走 PT-archiver
+原理：一次性删百万行产生大事务（undo 膨胀、复制延迟、锁堆积），按主键分批+间隔是标准做法，drop/truncate 直接重置
+用法：大表运维实操
+锚点：实战共识
+
+</details>
+
+### 运维 · 降级（容量）
+
+<details><summary>看背面</summary>
+
+容量预警指标：磁盘空间（binlog+数据）、连接数使用率、buffer pool 命中率、QPS 趋势
+原理：容量规划按增长趋势提前扩容，磁盘满会写挂（先 binlog 满），监控四项指标设阈值告警
+用法：运维监控基线
+锚点：实战方法论
+
+</details>
+
+### 架构 · Server 层（分层）
+
+<details><summary>看背面</summary>
+
+MySQL 架构分层：Server 层（连接器/分析器/优化器/执行器）+ 存储引擎层（InnoDB）
+原理：连接器管连接与权限、分析器词法语法、优化器选索引与 join 顺序、执行器调引擎接口，缓存（query cache）8.0 已移除
+用法：架构总图题
+锚点：MySQL 8.0
+
+</details>
+
+### 架构 · query cache（缓存）
+
+<details><summary>看背面</summary>
+
+query cache 在 MySQL 8.0 被移除（命中失效代价大于收益）
+原理：任何表更新使相关缓存全部失效，高更新场景得不偿失，8.0 删除该功能改由应用层 Redis 承担缓存职责
+用法：版本演进知识点
+锚点：MySQL 8.0
+
+</details>
+
+### InnoDB · 内存结构（架构）
+
+<details><summary>看背面</summary>
+
+InnoDB 内存结构：buffer pool（数据页）、change buffer（二级索引写）、log buffer、AHI（自适应哈希）
+原理：buffer pool 按 LRU 变体（young/old 区防全表扫描污染）管理，预读与老生代窗口参数（innodb_old_blocks_time）调优
+用法：内存管理深入知识
+锚点：InnoDB 文档
+
+</details>
+
+### InnoDB · 防污染（LRU）
+
+<details><summary>看背面</summary>
+
+InnoDB LRU 改进：新页先进 old 区（5/8 处）停留 innodb_old_blocks_time 后才进 young 区
+原理：全表扫描的页只污染 old 区不挤掉热点页，这是与教科书 LRU 的关键差异，防止一次性扫描冲垮缓存
+用法：缓存污染防御机制
+锚点：InnoDB 文档
+
+</details>
+
+### 事务 · 数据字典（changelog）
+
+<details><summary>看背面</summary>
+
+MySQL 8.0 数据字典事务化（存 InnoDB 表）不再有 frm 文件
+原理：DDL 原子化（原子 DDL），半成品 DDL 不再存在，5.7 的 frm/par 文件消失，迁移与备份工具需适配
+用法：版本迁移知识点
+锚点：MySQL 8.0
+
+</details>
+
+### 运维 · 健康度（监控）
+
+<details><summary>看背面</summary>
+
+MySQL 健康监控：QPS/TPS、慢查询数、主从延迟、连接数、buffer pool 命中率、锁等待
+原理：Prometheus+mysqld_exporter 标准化采集，核心告警：延迟超阈值、连接拒绝、磁盘水位，健康大盘是稳定性基础
+用法：数据库运维基线
+锚点：实战共识
+
+</details>
+
+### 实践 · 路由（读写分离）
+
+<details><summary>看背面</summary>
+
+读写分离实现：应用侧（ShardingSphere-JDBC/组件）或代理层（ProxySQL/MyCat），路由规则按 SQL 类型与业务标记
+原理：写后立即读的场景路由主库（复制延迟窗口），给事务内读与关键读打主库标记，默认读走从库分摊压力
+用法：读写分离架构实施
+锚点：实战共识
+
+</details>
+
+### 实践 · flush（抖动）
+
+<details><summary>看背面</summary>
+
+性能周期性抖动常见根因：脏页比例接近阈值触发激进刷盘（连击）
+原理：innodb_max_dirty_pages_pct 触控刷脏、redo 快满强制 checkpoint，抖动时刻看脏页比例与 checkpoint age，容量规划 SSD 减轻
+用法：线上性能抖动诊断
+锚点：实战共识
+
+</details>
+
+### 事务 · 危害（长事务）
+
+<details><summary>看背面</summary>
+
+长事务危害：undo 膨胀（MVCC 版本链堆积）、锁持有久、MDL 阻塞 DDL、主从延迟
+原理：监控 information_schema.innodb_trx 长事务告警，业务拆事务边界（事务内无 RPC/MQ），statement timeout 限制
+用法：事务治理核心
+锚点：实战共识
+
+</details>
+
+### 运维 · 基线（压测）
+
+<details><summary>看背面</summary>
+
+数据库压测基线：sysbench 按模型压出单机极限（TPS/QPS/延迟 P99），容量规划与降级阈值依据
+原理：线上流量不超基线的 60-70% 留冗余，压测报告随架构变更更新，全链路压测（染色+影子库）验证真实流量
+用法：容量与稳定性依据
+锚点：实战方法论
+
+</details>
+
+### 备份 · RPO（策略）
+
+<details><summary>看背面</summary>
+
+备份策略设计：全量频率×binlog 保留=RPO（可接受丢失窗口），恢复时间=RTO
+原理：金融 RPO=0（半同步+异地容灾）、一般业务 RPO=分钟级（每日全量+binlog），备份异地存储（防机房故障）与恢复演练制度化
+用法：容灾体系设计
+锚点：实战方法论
+
+</details>
+
+### 高可用 · 两地三中心（容灾）
+
+<details><summary>看背面</summary>
+
+容灾架构：同城双机房（半同步）+异地灾备（异步复制），两地三中心是金融标配
+原理：同城故障 RTO 分钟级，异地机房灾难靠异步复制（RPO 分钟级）+定期演练切换，单元化（异地多活）是更高级形态
+用法：容灾架构演进
+锚点：实战方法论
+
+</details>
+
+### SQL · SQL 注入（安全）
+
+<details><summary>看背面</summary>
+
+SQL 注入防御：预编译（PreparedStatement 占位符）而非拼接，ORM 参数绑定天然防注入
+原理：预编译把 SQL 结构与数据分离，注入字符成为纯数据，动态拼接（order by/表名白名单校验）是残余风险点
+用法：安全编码底线
+锚点：实战共识
+
+</details>
+
+### SQL · 最小权限（权限）
+
+<details><summary>看背面</summary>
+
+账号权限最小化：业务账号只授 DML（无 DDL/无 drop），只读账号专供报表，root 隔离运维
+原理：权限泄漏与误操作是数据事故主源，grant 按 IP 限定来源，审计日志（audit plugin）记录敏感操作
+用法：数据库安全基线
+锚点：实战共识
+
+</details>
+
+### 版本 · 8.0（升级）
+
+<details><summary>看背面</summary>
+
+MySQL 8.0 升级收益：窗口函数、CTE、原子 DDL、instant 加列、hash join、默认 utf8mb4
+原理：窗口函数与 CTE 简化复杂 SQL（排名/同比），升级注意：group by 隐式排序移除、默认认证插件 caching_sha2_password（老驱动兼容）
+用法：升级评估清单
+锚点：MySQL 8.0
+
+</details>
+
+### SQL · 窗口函数（窗口）
+
+<details><summary>看背面</summary>
+
+窗口函数 over(partition by ... order by ...) 做分组内排名/累计/同比不减少行数
+原理：与 group by 的区别（不聚合行数），row_number/rank/dense_rank 排名差异（并列处理），lag/lead 取前后行
+用法：复杂报表 SQL 标配
+锚点：MySQL 8.0
+
+</details>
+
+### SQL · CTE（CTE）
+
+<details><summary>看背面</summary>
+
+CTE（with 子句）与递归 CTE 处理树形/图遍历查询
+原理：递归 CTE（with recursive）查组织架构/评论树替代应用层递归，深度控制防死循环，是 8.0 复杂查询利器
+用法：层级数据查询方案
+锚点：MySQL 8.0
+
+</details>
+
+### 实践 · 唯一键（幂等）
+
+<details><summary>看背面</summary>
+
+幂等落地：业务唯一键（订单号）+插入冲突处理（on duplicate/捕获重复异常）
+原理：唯一键是幂等最后防线（消息重投、请求重试），配合 upsert 或 insert ignore 语义明确，业务键设计决定幂等粒度
+用法：支付/消息消费幂等标准实现
+锚点：实战共识
+
+</details>
+
+### 实践 · 热点行（热点）
+
+<details><summary>看背面</summary>
+
+热点行更新优化：内存队列合并（单线程串行扣减）、库存分段（拆多行）、Redis 预扣
+原理：秒杀热点行死锁检测与锁竞争是瓶颈，分段库存把 1 行拆 N 行随机路由，Redis 预扣减 DB 兜底，是电商库存三段式方案
+用法：秒杀架构核心难点
+锚点：实战方法论
+
+</details>
+
+### 实践 · 兜底（对账）
+
+<details><summary>看背面</summary>
+
+资金/库存类数据必须有对账体系：准实时对账（消息比对）+日终对账（T+1 全量）+差错处理流程
+原理：对账是最终一致性的最后一环，发现差异进入差错池人工/自动修复，无对账的分布式账务不可上线
+用法：资金安全底线
+锚点：实战方法论
+
+</details>
+
+### 运维 · 应急预案（故障）
+
+<details><summary>看背面</summary>
+
+DB 故障应急预案：降级（写降级/限流）、切换（主从切换自动化）、恢复（备份+binlog），预案需演练
+原理：预案文档化+季度演练（混沌工程），故障时按 runbook 执行而非临场发挥，MTTR 指标考核
+用法：稳定性体系建设
+锚点：实战方法论
+
+</details>
+
+### 实践 · 治理（慢 SQL）
+
+<details><summary>看背面</summary>
+
+慢 SQL 治理体系：上线前 SQL 审核（RDM/Inception 类工具）+线上慢日志监控+TopSQL 优化闭环
+原理：事前拦截（索引缺失/全表扫描 SQL 拒绝发布）优于事后救火，DBA 平台自动化审核+治理看板
+用法：数据库质量体系
+锚点：实战方法论
+
+</details>
+
+### 实践 · 规范（变更）
+
+<details><summary>看背面</summary>
+
+DDL/DML 变更规范：变更走工单+备份先行+低峰执行+大表用 gh-ost+变更后验证
+原理：手工直连生产库是事故之源（删库跑路案例），所有变更平台化留痕，变更窗口与回滚方案前置
+用法：生产变更纪律
+锚点：实战方法论
+
+</details>
+
+### 实践 · 分离（报表）
+
+<details><summary>看背面</summary>
+
+OLTP 与 OLAP 分离：报表/分析走从库或数仓（ClickHouse），主库只服务交易
+原理：大查询拖垮主库（buffer pool 污染+CPU），数据通过 binlog→CDC（Flink/Canal）入数仓，实时与离线分层
+用法：架构分层设计
+锚点：实战方法论
+
+</details>
+
+### 实践 · 冷热（归档）
+
+<details><summary>看背面</summary>
+
+冷热分离：热数据（近 N 月）在线库，冷数据归档库（压缩表/对象存储），查询路由按时间
+原理：在线库保持小容量（索引高效），归档按 partition drop 秒级清理，归档库查询走专门服务
+用法：大表生命周期管理
+锚点：实战方法论
+
+</details>
+
+### 实践 · DB 保护（限流）
+
+<details><summary>看背面</summary>
+
+数据库保护三板斧：应用层限流（保护连接池）、连接池上限（HikariCP maximumPoolSize）、DB 层 max_connections
+原理：雪崩链路：慢 SQL→连接耗尽→全部服务超时，限流+熔断（快速失败）+慢 SQL 治理三管齐下
+用法：高可用防护体系
+锚点：实战方法论
+
+</details>
+
+### 面试 · 复习（主线）
+
+<details><summary>看背面</summary>
+
+MySQL 复习主线：索引（B+树/最左/失效）→事务（redo/undo/MVCC/两阶段）→锁（Next-Key/MDL）→复制→分库分表
+原理：按面试频率排序，事务与索引占一半分值，分库分表是 P7+ 分水岭，背框架再填细节
+用法：复习时间分配
+锚点：复习方法论
+
+</details>
+
+### 实践 · 上线（参数）
+
+<details><summary>看背面</summary>
+
+MySQL 上线参数检查单：双 1、字符集 utf8mb4、innodb_buffer_pool、慢日志开启、备份任务、监控接入
+原理：每次建库按检查单执行防漏配，参数变更走评审，线上实例标准化（镜像/配置模板）
+用法：运维标准化
+锚点：实战方法论
+
+</details>
+
+
+## Redis（110 张）
+
+### 数据类型 · 五种类型（基础）
+
+<details><summary>看背面</summary>
+
+Redis 五种基础类型：String、List、Hash、Set、ZSet
+原理：每种类型底层可切换多种编码（小数据省内存），面试先答类型再讲编码，顺带提 4 种扩展（bitmap/HyperLogLog/GEO/Stream）
+用法：回答类型题的框架式开场
+锚点：通用
+
+</details>
+
+### String · SDS（编码）
+
+<details><summary>看背面</summary>
+
+String 底层是 SDS（简单动态字符串）支持二进制安全与 O(1) 长度
+原理：SDS 记录长度字段与预分配空间，免 strlen 与缓冲区溢出，可存图片等二进制数据
+用法：缓存序列化对象/计数器场景
+锚点：SDS 实现
+
+</details>
+
+### String · 512MB（限制）
+
+<details><summary>看背面</summary>
+
+单个 String 值上限 512MB
+原理：大值属于反模式（大 key），序列化大对象应拆分或外置，512MB 是协议层限制
+用法：大 key 治理的边界知识
+锚点：官方文档
+
+</details>
+
+### List · quicklist（编码）
+
+<details><summary>看背面</summary>
+
+List 底层是 quicklist（双向链表串起的紧凑节点），7.0 起节点从 ziplist 换成 listpack
+原理：兼顾链表的插入效率与紧凑结构的内存效率，7.0 用 listpack 消除 ziplist 的级联更新问题
+用法：消息队列/最新列表场景
+锚点：Redis 7.0
+
+</details>
+
+### Hash · listpack（编码）
+
+<details><summary>看背面</summary>
+
+Hash 小数据用 listpack（7.0 前是 ziplist）大数据转 hashtable
+原理：小 hash 紧凑存储省内存（无指针开销），超过阈值（64 字节/128 项默认）转标准 hashtable
+用法：对象缓存的内存优化原理
+锚点：Redis 7.0
+
+</details>
+
+### ZSet · skiplist（编码）
+
+<details><summary>看背面</summary>
+
+ZSet 底层是 skiplist（按分数有序）+ dict（member 到 score 的映射）双结构
+原理：跳表支持范围查询与有序遍历 O(logN)，dict 支持按 member 查 score O(1)，空间换双向高效
+用法：排行榜/延迟队列场景
+锚点：源码实现
+
+</details>
+
+### ZSet · 跳表（原理）
+
+<details><summary>看背面</summary>
+
+跳表通过多层索引链表实现 O(logN) 查找层高随机生成（幂次定律）
+原理：每层节点概率性上浮形成多级索引，插入删除只改指针免旋转，比红黑树实现简单且范围查询友好
+用法：高频追问"为什么用跳表不用红黑树"（范围查询+实现简单）
+锚点：算法原理
+
+</details>
+
+### Set · intset（编码）
+
+<details><summary>看背面</summary>
+
+Set 全整数且数量少时用 intset（紧凑整数数组）编码
+原理：整数数组二分查找省内存，加入字符串元素自动转 hashtable，编码自动升级不可逆
+用法：纯数字集合（用户 ID 集合）的内存优化
+锚点：源码实现
+
+</details>
+
+### 扩展类型 · 布隆过滤器（布隆）
+
+<details><summary>看背面</summary>
+
+布隆过滤器以低空间判断"元素一定不存在"（可能误判存在）
+原理：位数组+多哈希函数，用于缓存穿透前置过滤，官方 module（RedisBloom）或 Lua/位图模拟
+用法：缓存穿透方案组件
+锚点：RedisBloom
+
+</details>
+
+### 扩展类型 · HyperLogLog（统计）
+
+<details><summary>看背面</summary>
+
+HyperLogLog 以 12KB 固定内存估算亿级基数误差 0.81%
+原理：概率算法（伯努利+调和平均），PFADD/PFCOUNT/PFMERGE，官方文档核对零差异（0.81% 与 12KB）
+用法：UV 统计标准方案
+锚点：官方文档核对
+
+</details>
+
+### 扩展类型 · Stream（Stream）
+
+<details><summary>看背面</summary>
+
+Redis Stream（5.0）是带消费组的持久化消息流（类 Kafka）
+原理：XADD/XREADGROUP/XACK，支持消费组与 pending 列表，弥补 Pub/Sub 不持久不确认的缺陷，小规模消息场景可用
+用法：轻量消息队列选型
+锚点：Redis 5.0
+
+</details>
+
+### 扩展类型 · GEO（GEO）
+
+<details><summary>看背面</summary>
+
+GEO 用 ZSet 编码（GeoHash 打进 score）实现地理位置搜索
+原理：GEOADD/GEOSEARCH（6.2 命令化），附近的人/门店搜索场景，底层是 52 位 GeoHash 编码
+用法：LBS 功能实现
+锚点：Redis 6.2
+
+</details>
+
+### 线程模型 · 命令执行（单线程）
+
+<details><summary>看背面</summary>
+
+Redis 命令执行是单线程的（6.0 起网络 IO 与协议解析可多线程）
+原理：单线程免锁免上下文切换，瓶颈在网络而非 CPU，6.0 多线程只处理读写 socket 不执行命令
+用法：回答单线程模型必须分 6.0 前后
+锚点：Redis 6.0
+
+</details>
+
+### 线程模型 · 为什么快（性能）
+
+<details><summary>看背面</summary>
+
+Redis 快的原因：内存操作+单线程无锁竞争+IO 多路复用+高效数据结构
+原理：四个因素缺一不可，面试按此框架展开（内存、无锁、epoll、编码优化）
+用法：性能原理八股主线
+锚点：通用
+
+</details>
+
+### 线程模型 · epoll（IO）
+
+<details><summary>看背面</summary>
+
+Redis 用 IO 多路复用（Linux epoll）单线程处理海量连接
+原理：事件驱动框架 ae，连接就绪才处理，避免每连接一线程，是单线程高并发的根基
+用法：网络模型原理题
+锚点：通用
+
+</details>
+
+### 线程模型 · IO 线程（6.0）
+
+<details><summary>看背面</summary>
+
+Redis 6.0 多线程默认关闭需 io-threads 配置开启
+原理：开启后读请求解析与写回复并行化，命令执行仍单线程保证原子性，大流量实例收益明显
+用法：大流量实例网络瓶颈优化
+锚点：Redis 6.0
+
+</details>
+
+### 运维 · bigkey（bigkey）
+
+<details><summary>看背面</summary>
+
+bigkey（大 key）危害：阻塞主线程、网络拥塞、删除卡顿、倾斜
+原理：排查 redis-cli --bigkeys 与 MEMORY USAGE，治理拆分（hash 分桶）与异步删除（UNLINK）
+用法：生产隐患排查项
+锚点：实战共识
+
+</details>
+
+### 运维 · hotkey（hotkey）
+
+<details><summary>看背面</summary>
+
+hotkey（热 key）危害：单分片 QPS 极限被打满（单线程）
+原理：排查 redis-cli --hotkeys/监控，治理：本地缓存二级化、key 打散（加随机后缀）、读写分离
+用法：秒杀/热点资讯场景
+锚点：实战共识
+
+</details>
+
+### 运维 · KEYS（阻塞）
+
+<details><summary>看背面</summary>
+
+KEYS * 生产禁用：全库遍历阻塞主线程
+原理：O(N) 阻塞命令族（KEYS/HGETALL 大集合/SMEMBERS），替代方案 SCAN 渐进式遍历
+用法：代码 review 静态扫描项
+锚点：实战共识
+
+</details>
+
+### 运维 · SCAN（遍历）
+
+<details><summary>看背面</summary>
+
+SCAN 用游标渐进遍历不阻塞，但可能返回重复元素且不保证一致快照
+原理：游标记录遍历位置，rehash 期间反向二进制迭代器保证不漏（可能重），业务侧去重
+用法：全库扫描的标准姿势
+锚点：官方文档
+
+</details>
+
+### 过期 · 惰性删除（删除）
+
+<details><summary>看背面</summary>
+
+过期 key 删除策略：惰性（访问时检查）+定期（每 100ms 抽样清理）
+原理：全量定时删除开销大，惰性漏删靠定期补偿，redis 的周期任务 hz 参数控制
+用法：过期机制原理题
+锚点：官方文档
+
+</details>
+
+### 内存 · noeviction（淘汰）
+
+<details><summary>看背面</summary>
+
+内存淘汰 8 种策略默认 noeviction（写报错）
+原理：volatile 系列（有过期时间）与 allkeys 系列（全库）×lru/lfu/random + noeviction/ttl，缓存场景应设 allkeys-lru
+用法：缓存实例必配淘汰策略
+锚点：官方文档
+
+</details>
+
+### 内存 · 近似 LRU（淘汰）
+
+<details><summary>看背面</summary>
+
+Redis 的 LRU 是近似实现（随机采样 maxmemory-samples）
+原理：精确 LRU 需要全局链表开销大，Redis 在每个对象记录 lru 时间戳采样淘汰，效果接近精确 LRU
+用法：淘汰机制深度题
+锚点：官方文档
+
+</details>
+
+### 内存 · LFU（淘汰）
+
+<details><summary>看背面</summary>
+
+LFU（4.0+）按访问频率淘汰用 Morris 计数器+衰减
+原理：计数对数增长省 4bit 存储，lru-decay-time 定期衰减防历史热点永驻，适合访问频率差异大的场景
+用法：热点稳定型缓存选 lfu
+锚点：Redis 4.0
+
+</details>
+
+### 内存 · 碎片率（碎片）
+
+<details><summary>看背面</summary>
+
+mem_fragmentation_ratio>1.5 提示碎片过多 <1 说明用了 swap（严重）
+原理：碎片来自频繁增删与分配器行为，治理 activedefrag（4.0+ 主动碎片整理）或重启，<1 是物理内存不足换页的危险信号
+用法：内存监控告警标准
+锚点：官方文档核对
+
+</details>
+
+### 事务 · 不回滚（MULTI）
+
+<details><summary>看背面</summary>
+
+Redis 事务 MULTI/EXEC 队列化执行不支持回滚
+原理：命令入队时语法错误整个事务不执行，运行时错误（如对 string 执行 LPUSH）不回滚继续执行后续命令，官方认为回滚无必要（编程错误场景）
+用法：与 Lua 对比题
+锚点：官方文档
+
+</details>
+
+### 事务 · 原子性（Lua）
+
+<details><summary>看背面</summary>
+
+Lua 脚本执行期间原子（单线程不被打断）
+原理：整段脚本作为一个命令执行，适合"检查+操作"复合逻辑（分布式锁释放、库存扣减），脚本过长阻塞主线程
+用法：复合操作原子化标准方案
+锚点：官方文档
+
+</details>
+
+### 事务 · pipeline（对比）
+
+<details><summary>看背面</summary>
+
+pipeline 是批量发送减 RTT 不保证原子，事务/Lua 保证原子
+原理：pipeline 一次发 N 条命令收 N 个结果省网络往返，大量写入场景吞吐倍增，事务额外保证串行
+用法：批量操作选型三件套
+锚点：实战共识
+
+</details>
+
+### 复制 · 全量复制（全量）
+
+<details><summary>看背面</summary>
+
+主从首次同步走全量复制：主 bgsave RDB 发送+期间增量缓冲
+原理：从库清空旧数据载入 RDB，复制缓冲区补发期间写命令，大实例全量复制是分钟级风险窗口
+用法：主从搭建与抖动知识
+锚点：官方文档
+
+</details>
+
+### 复制 · repl_backlog（增量）
+
+<details><summary>看背面</summary>
+
+增量复制靠 repl_backlog 环形缓冲区（replication backlog）
+原理：从库断线重连时 offset 还在 backlog 内则增量补发，backlog 太小（默认 1MB）会被覆盖触发全量，调大 backlog 是主从抖动的第一优化
+用法：主从网络抖动治理
+锚点：官方文档
+
+</details>
+
+### 哨兵 · Sentinel（机制）
+
+<details><summary>看背面</summary>
+
+Sentinel（哨兵）提供监控+通知+自动故障转移，生产至少 3 节点且奇数
+原理：主观下线（单个哨兵判断）→客观下线（quorum 多数同意）→选举哨兵 leader（Raft 风格）→从库择优提升，2 节点无法形成多数派
+用法：高可用架构标准组件
+锚点：官方文档
+
+</details>
+
+### 哨兵 · 脑裂（脑裂）
+
+<details><summary>看背面</summary>
+
+哨兵脑裂：旧主仍在接受写、新主已选出，造成数据丢失
+原理：网络分区时旧主降级前持续写，恢复后被清空同步新主；防御 min-replicas-to-write=1+min-replicas-max-lag 限制孤主写入
+用法：分区场景数据丢失防御
+锚点：实战共识
+
+</details>
+
+### Cluster · 16384（槽位）
+
+<details><summary>看背面</summary>
+
+Cluster 按 16384 个 slot 分片 key（CRC16(key) mod 16384）
+原理：槽位是路由与迁移单位，节点负责槽区间，客户端重定向 MOVED/ASK，16384 是权衡（gossip 心跳包大小）
+用法：Cluster 基础八股
+锚点：官方文档
+
+</details>
+
+### Cluster · 为什么 16384（设计）
+
+<details><summary>看背面</summary>
+
+Cluster 用 16384 而非 65536 槽：gossip 心跳携带槽位图 16384×2bit=2KB 更省
+原理：心跳消息里槽位图按位压缩，65536 要 8KB，集群规模大时心跳开销显著，作者 antirez 的权衡结论
+用法：高频追问设计权衡
+锚点：作者博客
+
+</details>
+
+### Cluster · hash tag（限制）
+
+<details><summary>看背面</summary>
+
+Cluster 下 mget/mset/事务/Lua 多 key 必须同 slot，hash tag {} 强制同槽
+原理：key 含 {} 内相同串则按串计算槽（user:{1001}:a 与 user:{1001}:b 同槽），跨槽命令报 CROSSSLOT 错误
+用法：业务 key 设计规范
+锚点：官方文档
+
+</details>
+
+### Cluster · 故障转移（高可用）
+
+<details><summary>看背面</summary>
+
+Cluster 每个主节点带从节点，故障时从节点多数派选举自动升主
+原理：类 Raft 从库选举（新主为复制 offset 最靠前者），无需独立哨兵进程，半数以上主节点可用才能选举（cluster-require-full-coverage）
+用法：Cluster 高可用模型
+锚点：官方文档
+
+</details>
+
+### 持久化 · everysec（AOF）
+
+<details><summary>看背面</summary>
+
+AOF 刷盘三策略：always/everysec（默认）/no
+原理：everysec 每秒 fsync 最多丢 1 秒数据（平衡点），always 最安全最慢，no 交给 OS，官方文档核对（默认 everysec）
+用法：持久化参数标准
+锚点：官方文档核对
+
+</details>
+
+### 持久化 · 重写（AOF）
+
+<details><summary>看背面</summary>
+
+AOF 重写（bgrewriteaof）按当前数据状态生成最小指令集压缩文件
+原理：重写用 fork 子进程读当前数据写新 AOF，期间写命令进 aof_rewrite_buf 追加，文件膨胀与恢复变慢的解法
+用法：AOF 体积治理
+锚点：官方文档
+
+</details>
+
+### 持久化 · bgsave（RDB）
+
+<details><summary>看背面</summary>
+
+RDB 快照 save（阻塞）/bgsave（fork 子进程）
+原理：fork 利用写时复制（COW）主线程继续服务，期间写操作复制页导致内存可能翻倍，大实例 fork 是秒级停顿源
+用法：持久化停顿排查知识
+锚点：官方文档
+
+</details>
+
+### 持久化 · RDB vs AOF（选型）
+
+<details><summary>看背面</summary>
+
+RDB 恢复快体积小（可能丢分钟级），AOF 丢数据少（最多 1 秒）体积大恢复慢
+原理：4.0 起混合持久化（aof-use-rdb-preamble）：重写时 RDB 头+增量 AOF 尾，兼得两者，是生产默认推荐
+用法：持久化选型标准答案
+锚点：Redis 4.0
+
+</details>
+
+### 缓存 · 穿透（穿透）
+
+<details><summary>看背面</summary>
+
+缓存穿透：查询不存在的数据每次打到库
+原理：方案：布隆过滤器前置拦截、缓存空值（短 TTL）、接口参数校验，恶意穿透要网关限流
+用法：缓存三大问题之一
+锚点：实战共识
+
+</details>
+
+### 缓存 · 击穿（击穿）
+
+<details><summary>看背面</summary>
+
+缓存击穿：单个热 key 过期瞬间大量请求压库
+原理：方案：互斥锁重建（setnx 只让一个请求查库）、逻辑过期（不设 TTL 由后台刷新）、永不过期+主动更新
+用法：热点数据缓存策略
+锚点：实战共识
+
+</details>
+
+### 缓存 · 雪崩（雪崩）
+
+<details><summary>看背面</summary>
+
+缓存雪崩：大量 key 同时过期或 Redis 宕机，流量全打到库
+原理：方案：TTL 加随机抖动、多级缓存（本地+Redis）、集群高可用、限流降级兜底
+用法：缓存三大问题之三
+锚点：实战共识
+
+</details>
+
+### 缓存 · Cache Aside（一致性）
+
+<details><summary>看背面</summary>
+
+标准缓存模式 Cache Aside：读 miss 查库回填，写时先更新库再删除缓存
+原理：先删缓存后更库（并发读回填旧值概率高）与先更缓存（并发写乱序）都有问题，先库后删是最优实践（Martin Kleppmann 分析）
+用法：缓存一致性八股主线
+锚点：实战共识
+
+</details>
+
+### 缓存 · 双删（一致性）
+
+<details><summary>看背面</summary>
+
+延迟双删：写前删一次、写库后延迟几百毫秒再删一次
+原理：补偿"读请求在写前读到旧缓存回填"的窗口，延迟时间难定是弱点，配合 binlog 订阅删除更可靠
+用法：缓存一致性增强手段
+锚点：实战共识
+
+</details>
+
+### 缓存 · binlog 订阅（一致性）
+
+<details><summary>看背面</summary>
+
+强一致诉求的终极方案：Canal/Flink CDC 订阅 binlog 删除缓存+TTL 兜底
+原理：业务代码只写库，缓存失效由 CDC 异步驱动（解耦+防漏删），TTL 是最后防线，本项目总结的一致性框架
+用法：大型系统缓存一致性架构
+锚点：实战方法论
+
+</details>
+
+### 分布式锁 · SET NX EX（基础）
+
+<details><summary>看背面</summary>
+
+分布式锁标准写法：SET key uniqueValue NX EX seconds 一条命令加锁
+原理：NX 保证互斥、EX 防死锁、value 存唯一标识（UUID）供安全释放，释放用 Lua 校验 value 后 DEL（防止删别人的锁）
+用法：手写分布式锁的标准答案
+锚点：实战共识
+
+</details>
+
+### 分布式锁 · watchdog（续期）
+
+<details><summary>看背面</summary>
+
+锁过期但业务未完成：Redisson watchdog 自动续期（默认 30 秒锁每 10 秒续）
+原理：业务时长不可预估时靠看门狗续命，Redisson unlock 后停止续期；手写版需要后台线程续期，忘记解锁的兜底是 EX
+用法：Redisson 分布式锁机制
+锚点：Redisson 文档
+
+</details>
+
+### 分布式锁 · 可重入（Redisson）
+
+<details><summary>看背面</summary>
+
+Redisson 可重入锁用 hash 结构（field=线程标识 value=重入次数）
+原理：加锁 hash increment、解锁 decrement 到 0 删除，Lua 保证判断与操作原子，比 SETNX 版本功能完整（可重入/公平/读写锁）
+用法：生产分布式锁首选 Redisson
+锚点：Redisson 文档
+
+</details>
+
+### 分布式锁 · RedLock（争议）
+
+<details><summary>看背面</summary>
+
+RedLock（多节点多数派锁）有学术争议（Martin Kleppmann 质疑其安全性）
+原理：争议点：时钟跳变与 GC 停顿下锁的正确性，结论：Redis 锁适合"效率"（防重复执行）不适合"正确性"（强互斥），强互斥用 ZooKeeper/etcd 或 fencing token
+用法：锁选型的高级考点
+锚点：学术争议
+
+</details>
+
+### 分布式锁 · 锁丢失（主从）
+
+<details><summary>看背面</summary>
+
+主从架构下主库加锁未同步即宕机，从库升主后锁丢失
+原理：解决：RedLock 多实例独立加锁过半成功才持锁，或业务 fencing token（令牌单调递增校验），单实例锁+主从异步复制天然有此窗口
+用法：锁失效排查知识
+锚点：实战共识
+
+</details>
+
+### 缓存 · 设计（TTL）
+
+<details><summary>看背面</summary>
+
+TTL 设计：基础随机抖动防雪崩+按数据时效分层（热点 5 分钟/常规 30 分钟）
+原理：TTL 是缓存一致性与雪崩的最后防线，业务可容忍窗口决定 TTL 下限，随机抖动打散过期时间
+用法：缓存策略设计
+锚点：实战方法论
+
+</details>
+
+### 队列 · BRPOP（List）
+
+<details><summary>看背面</summary>
+
+轻量队列：LPUSH+BRPOP（阻塞弹出）
+原理：简单异步任务场景可用，缺点：无 ACK（取出即丢）、无重试、无持久化保障，要求高的场景用 Stream 或专业 MQ
+用法：消息队列选型降级方案
+锚点：实战共识
+
+</details>
+
+### 队列 · 延迟队列（ZSet）
+
+<details><summary>看背面</summary>
+
+ZSet 延迟队列：score 存执行时间戳，轮询 zrangebyscore 取到期任务
+原理：本项目实现并实测的方案，优点：有序+分数范围查询天然适配，缺点：轮询间隔与并发取任务竞争（Lua/分布式锁保证）
+用法：订单超时等延迟任务实现
+锚点：本项目实测
+
+</details>
+
+### 集合 · SINTER（运算）
+
+<details><summary>看背面</summary>
+
+Set 交集并集差集（SINTER/SUNION/SDIFF）支撑共同好友/推荐标签
+原理：10 万级以下集合运算可用，大集合运算阻塞主线程（O(N)），大集合运算改业务侧或 ES
+用法：社交关系功能实现
+锚点：实战共识
+
+</details>
+
+### Bitmap · bitmap（统计）
+
+<details><summary>看背面</summary>
+
+bitmap 用 1 位表示一个状态：签到/活跃/布尔集合，1 亿用户活跃约 12MB
+原理：SETBIT/BITCOUNT/BITOP，位偏移即用户 ID，月度签到卡（31 bit）与连续签到计算（BITPOS）标准方案
+用法：海量布尔统计方案
+锚点：实战共识
+
+</details>
+
+### 分布式 · INCR（限流）
+
+<details><summary>看背面</summary>
+
+分布式限流：INCR+EXPIRE 固定窗口，或 ZSet 滑动窗口，或 Lua 令牌桶
+原理：固定窗口有临界双倍问题，滑动窗口（本项目实测过滑动窗口语义：窗口内时间戳计数）更平滑，集群限流 Redis 是天然中心
+用法：接口防刷/配额控制
+锚点：本项目实测
+
+</details>
+
+### 场景 · 预扣（秒杀）
+
+<details><summary>看背面</summary>
+
+秒杀库存方案：Redis 预扣（Lua 原子判断+扣减）+MQ 异步下单+DB 最终扣减兜底
+原理：Redis 单线程扛住瞬时扣减流量，MQ 削峰进入下单流程，DB 用乐观锁兜底防超卖，本项目总结的三段式
+用法：大促库存架构
+锚点：实战方法论
+
+</details>
+
+### 对比 · 对比（Memcached）
+
+<details><summary>看背面</summary>
+
+Redis vs Memcached：数据结构丰富/持久化/高可用/Cluster vs 简单纯缓存
+原理：Memcached 多线程无持久化纯 KV，Redis 单线程功能全，新项目无特殊理由默认 Redis
+用法：缓存选型对比题
+锚点：实战共识
+
+</details>
+
+### 运维 · 指标（监控）
+
+<details><summary>看背面</summary>
+
+Redis 监控核心指标：内存使用/命中率/慢查询/连接数/主从延迟/持久化状态
+原理：INFO 命令分节输出（memory/stats/replication），命中率低于 90% 查 key 设计，used_memory 与 used_memory_rss 差值即碎片
+用法：运维基线
+锚点：实战共识
+
+</details>
+
+### 运维 · slowlog（慢查询）
+
+<details><summary>看背面</summary>
+
+慢查询日志 slowlog-log-slower-than（默认 10ms）与 slowlog-max-len
+原理：记录的是命令执行时长（不含网络），只存最近 N 条内存队列，大集合命令与 KEYS 是常客
+用法：性能排查入口
+锚点：官方文档
+
+</details>
+
+### 客户端 · 线程安全（Lettuce）
+
+<details><summary>看背面</summary>
+
+Java 客户端选型：Lettuce（Netty 线程安全单连接多路复用）vs Jedis（每连接不线程安全需池）
+原理：Boot 2.0 起默认 Lettuce，连接复用省资源，Jedis 简单直观高并发下连接池压力大，两者都支持 Cluster/Sentinel
+用法：客户端选型题
+锚点：实战共识
+
+</details>
+
+### 客户端 · 序列化（序列化）
+
+<details><summary>看背面</summary>
+
+Spring Data Redis 需显式配置序列化器（默认 JDK 序列化可读性差）
+原理：常用 StringRedisSerializer（key）+Jackson2JsonRedisSerializer/GenericJackson2JsonRedisSerializer（value），JDK 序列化的坑：类版本变更反序列化失败
+用法：Spring 集成配置标准
+锚点：实战共识
+
+</details>
+
+### 运维 · UNLINK（删除）
+
+<details><summary>看背面</summary>
+
+大 key 删除用 UNLINK（4.0 lazy-free 异步回收）
+原理：UNLINK 从键空间摘除后由后台线程释放内存，DEL 同步释放大对象阻塞主线程，lazyfree-lazy-expire 让过期也异步
+用法：大 key 治理配套命令
+锚点：Redis 4.0
+
+</details>
+
+### 内存 · 内存上限（管理）
+
+<details><summary>看背面</summary>
+
+maxmemory 设置与 used_memory_rss 的差值监控防 OOM
+原理：容器部署 Redis 必须设 maxmemory 且低于容器 limit（留 fork COW 与复制缓冲余量），超限触发淘汰或拒绝写
+用法：容器化部署规范
+锚点：实战共识
+
+</details>
+
+### 运维 · 预热（预热）
+
+<details><summary>看背面</summary>
+
+缓存预热：大促前主动加载热点数据（脚本/服务启动时），避免冷启动穿透
+原理：冷启动+突发流量=穿透雪崩，预热数据来源：历史热点统计+运营配置，预热脚本幂等可重跑
+用法：大促备战 checklist
+锚点：实战方法论
+
+</details>
+
+### 设计 · 规范（key）
+
+<details><summary>看背面</summary>
+
+key 设计规范：业务前缀:模块:id 分层+避免超长+禁止特殊字符
+原理：可读可管理（SCAN 按前缀统计/批量清理），超长 key 浪费内存且网络放大，统一命名便于治理
+用法：工程规范第一条
+锚点：实战共识
+
+</details>
+
+### 运维 · 数据倾斜（倾斜）
+
+<details><summary>看背面</summary>
+
+Cluster 数据/流量倾斜：bigkey 落单节点、hash tag 聚集、热点 key
+原理：排查 cluster node 各节点内存与 QPS 对比，治理：拆 key、打散 hash tag、本地缓存
+用法：Cluster 运维知识
+锚点：实战共识
+
+</details>
+
+### 运维 · 备份（备份）
+
+<details><summary>看背面</summary>
+
+RDB 文件即备份产物（定期异地保存），AOF 用于更细恢复点
+原理：备份策略：每日 bgsave 产物上传对象存储+跨机房副本，恢复演练定期做，Redis 数据多为缓存可容忍重建（持久化数据另议）
+用法：备份体系
+锚点：实战方法论
+
+</details>
+
+### Cluster · 迁移（伸缩）
+
+<details><summary>看背面</summary>
+
+Cluster 扩缩容：迁移 slot（redis-cli --cluster reshard）在线进行
+原理：slot 迁移期间 ASK 重定向保证可用，大数据量 slot 迁移有延迟抖动，扩容规划提前做
+用法：集群生命周期管理
+锚点：官方文档
+
+</details>
+
+### 复制 · 级联复制（级联）
+
+<details><summary>看背面</summary>
+
+从库可以再挂从库（级联复制）分摊主库同步压力
+原理：一主多从主库 fork 与网络开销大，级联树形复制分摊，代价是末端延迟叠加
+用法：大规模主从架构
+锚点：官方文档
+
+</details>
+
+### 复制 · readonly（读写分离）
+
+<details><summary>看背面</summary>
+
+从库默认拒绝写（replica-read-only yes），读流量由客户端路由
+原理：从库复制是异步的有延迟，读旧数据风险业务评估，强一致读必须走主库（主库读也要评估）
+用法：架构实施要点
+锚点：官方文档
+
+</details>
+
+### Cluster · gossip（通信）
+
+<details><summary>看背面</summary>
+
+Cluster 节点间 gossip 协议交换状态（PING/PONG/MEET）
+原理：去中心化元数据传播（100ms 级收敛），节点数增加心跳开销增长，这就是 16384 槽位图的由来背景
+用法：集群原理深入
+锚点：官方文档
+
+</details>
+
+### 数据结构 · 为什么不用 B+树（选型）
+
+<details><summary>看背面</summary>
+
+Redis 不用 B+ 树：内存场景 hash/skiplist/listpack 更快且快照友好
+原理：B+ 树为磁盘优化（减少 IO 深页缓存），内存访问 hash O(1) 已够，持久化用整体快照而非 B+ 树原地更新
+用法：存储引擎选型思维题
+锚点：架构思维
+
+</details>
+
+### ZSet · 复杂度（复杂度）
+
+<details><summary>看背面</summary>
+
+ZSet 复杂度：ZADD O(logN)、ZRANGE O(logN+M)、ZRANK O(logN)
+原理：skiplist 多层索引保证对数复杂度，range 带 M 个结果线性返回，大 ZSet（百万级）操作仍毫秒级
+用法：数据结构复杂度题
+锚点：官方文档
+
+</details>
+
+### 运维 · OOM（故障）
+
+<details><summary>看背面</summary>
+
+Redis 写入报 OOM command not allowed：内存到 maxmemory 且策略是 noeviction
+原理：先看淘汰策略是否误配 noeviction，再查大 key/碎片/持久化缓冲，扩容（加内存/分片）与治理并行
+用法：线上故障应急
+锚点：实战共识
+
+</details>
+
+### 运维 · 主从延迟（故障）
+
+<details><summary>看背面</summary>
+
+Redis 主从延迟排查：从库 master_repl_offset 与主库差值、网络、从库负载
+原理：延迟大的从库应摘除读流量，replica-lag-flush... 告警阈值按业务容忍设，延迟期间读写分离读到旧数据
+用法：读写分离风险
+锚点：实战共识
+
+</details>
+
+### 运维 · 版本升级（升级）
+
+<details><summary>看背面</summary>
+
+Redis 升级路径：4.0（lazy-free/LFU）→5.0（Stream）→6.0（多线程/ACL）→7.0（listpack/Functions）
+原理：升级前评估命令兼容与持久化格式（7.0 可读 6.0 RDB 反之不行），灰度从库先升级再切换
+用法：版本治理
+锚点：实战方法论
+
+</details>
+
+### 安全 · ACL（ACL）
+
+<details><summary>看背面</summary>
+
+Redis 6.0 ACL 用户级权限（按命令/key 前缀授权）
+原理：替代旧版 requirepass 全局密码，多应用共享实例可分权，生产还需 bind 内网+rename 危险命令（FLUSHALL）
+用法：安全基线
+锚点：Redis 6.0
+
+</details>
+
+### 安全 · 未授权（暴露）
+
+<details><summary>看背面</summary>
+
+Redis 未授权访问是经典安全事故源（bind 0.0.0.0+无密码）
+原理：攻击面：写 crontab/SSH key 控制机器，防御：内网 bind+ACL+禁用危险命令+网络隔离，安全扫描必查项
+用法：安全审计知识点
+锚点：实战共识
+
+</details>
+
+### 客户端 · 连接池（连接池）
+
+<details><summary>看背面</summary>
+
+客户端连接池参数：maxTotal/maxIdle/minIdle/maxWait，池满阻塞与获取超时监控
+原理：连接数估算：maxTotal ≈ 单机 QPS×平均耗时（秒），池太小排队池太大压 Redis，Jedis 依赖池 Lettuce 默认单连接
+用法：客户端调优
+锚点：实战共识
+
+</details>
+
+### 场景 · 实现（排行榜）
+
+<details><summary>看背面</summary>
+
+排行榜实现：ZSet ZINCRBY 累分+ZREVRANGE 取榜+ZRANK 查排名
+原理：分数相同按 member 字典序（可拼时间戳保证先到先得），分页 ZREVRANGE start stop，百万级成员性能仍可用
+用法：榜单类功能标准方案
+锚点：实战共识
+
+</details>
+
+### 场景 · session（分布式 Session）
+
+<details><summary>看背面</summary>
+
+分布式会话：Spring Session Data Redis 集中存 session
+原理：水平扩容免粘性路由，session 过期靠 Redis TTL，敏感信息加密，与 JWT 方案对比（可撤销性）
+用法：会话方案选型
+锚点：实战共识
+
+</details>
+
+### 场景 · INCR（计数）
+
+<details><summary>看背面</summary>
+
+计数器场景：INCR 原子自增（文章阅读量/库存预占/接口调用统计）
+原理：INCR 原子且 O(1)，计数语义与过期组合（INCR+EXPIRE 限流），需要持久化的计数定期落库
+用法：高频原子操作
+锚点：实战共识
+
+</details>
+
+### 运维 · 停写（持久化）
+
+<details><summary>看背面</summary>
+
+持久化异常处理：AOF 重写失败/磁盘满时 Redis 可能停止写入
+原理：磁盘监控+持久化状态告警（rdb_last_bgsave_status），appendfsync 出错策略 appendfsync-on-rewrite 折中，磁盘是 Redis 的隐形依赖
+用法：故障预防知识
+锚点：实战共识
+
+</details>
+
+### 运维 · 估算（容量）
+
+<details><summary>看背面</summary>
+
+容量估算：内存=Σ(key 长度+value 编码开销+元数据)×副本数+ fragmentation 余量
+原理：粗估公式：业务对象序列化后×1.5（元数据与碎片），设计阶段估算防线上缩容，jemalloc 分配器放大系数需考虑
+用法：容量规划方法
+锚点：实战方法论
+
+</details>
+
+### 运维 · 基准（压测）
+
+<details><summary>看背面</summary>
+
+压测基准：redis-benchmark（QPS 单机 10 万级），瓶颈在网络与单线程命令复杂度
+原理：官方工具测基线，生产实例看实际 QPS 与 CPU（单线程模型下 CPU 100%=单分片极限），扩容靠分片不是加配置
+用法：容量与极限知识
+锚点：实战方法论
+
+</details>
+
+### 运维 · 降级（降级）
+
+<details><summary>看背面</summary>
+
+Redis 故障降级预案：本地缓存兜底+限流回源+关键功能熔断，预案需演练
+原理：Redis 全挂时业务策略：读走本地缓存（脏数据可容忍）/直接查库（评估库承受力）/功能降级（关非核心），预案文档化+季度演练
+用法：高可用预案
+锚点：实战方法论
+
+</details>
+
+### 运维 · 隔离（多实例）
+
+<details><summary>看背面</summary>
+
+多业务共享 Redis 集群的隔离：按业务分实例/分 slot 段+配额限制
+原理：共享实例互相影响（某业务 bigkey/热 key 拖垮全实例），大业务独立实例，中小业务共享但监控分业务 QPS（ACL+监控打标）
+用法：平台化治理
+锚点：实战方法论
+
+</details>
+
+### 运维 · 清单（治理）
+
+<details><summary>看背面</summary>
+
+Redis 上线检查单：maxmemory+淘汰策略、持久化配置、ACL、慢日志阈值、监控接入、备份任务、key 规范
+原理：每项默认值不适合生产需显式配置，变更走评审，本项目总结的上线基线
+用法：运维标准化
+锚点：实战方法论
+
+</details>
+
+### 数据类型 · 编码（String）
+
+<details><summary>看背面</summary>
+
+String 编码自动选择：int（纯整数）→embstr（≤44 字节一次性分配）→raw
+原理：embstr 将 SDS 与 redisObject 一次分配（缓存友好）但不可修改（修改转 raw），44 字节是分配器 jemalloc 单元决定
+用法：编码细节深入题
+锚点：源码实现
+
+</details>
+
+### 运维 · 耗时分布（性能）
+
+<details><summary>看背面</summary>
+
+性能分析三板斧：慢日志（命令级）、LATENCY（事件级）、MONITOR（命令流，慎用）
+原理：慢日志看单条命令耗时，LATENCY 看停顿事件（fork/过期风暴），MONITOR 生产禁用（全量命令流放大流量）
+用法：性能诊断工具链
+锚点：实战共识
+
+</details>
+
+### 运维 · 热修复（故障）
+
+<details><summary>看背面</summary>
+
+线上热修复手段：CONFIG SET 动态调参、CLIENT KILL 踢连接、DEBUG SLEEP 禁用
+原理：CONFIG SET 改淘汰策略/超时不用重启，变更后 CONFIG REWRITE 落盘，危险命令 ACL 治理
+用法：应急工具箱
+锚点：实战共识
+
+</details>
+
+### 架构 · 主从 vs Cluster（选型）
+
+<details><summary>看背面</summary>
+
+架构选型：单机+哨兵（数据量小）/Cluster（分片需求）/多级（本地+Redis）
+原理：数据量 <25GB 且无分片需求用主从+哨兵（简单可靠），超限或需要水平扩展才上 Cluster，避免过早分片
+用法：架构选型方法论
+锚点：实战方法论
+
+</details>
+
+### 架构 · 本地缓存（多级）
+
+<details><summary>看背面</summary>
+
+多级缓存架构：Caffeine（本地，微秒）+Redis（集中，毫秒）+DB
+原理：本地缓存扛热 key 与 Redis 故障（降级层），一致性问题靠短 TTL（秒级）+变更广播（Pub/Sub 失效本地），读路径优先本地
+用法：高性能读架构
+锚点：实战方法论
+
+</details>
+
+### 缓存 · 命中率（命中率）
+
+<details><summary>看背面</summary>
+
+缓存命中率 = hits/(hits+misses)，低于 90% 优先查 key 设计与 TTL
+原理：低命中根因：TTL 过短、key 设计不当、数据冷热不均，命中率是缓存有效性的第一指标，分业务统计（按前缀）
+用法：缓存效果评估
+锚点：实战方法论
+
+</details>
+
+### 场景 · 幂等（幂等）
+
+<details><summary>看背面</summary>
+
+接口幂等辅助：Redis SET NX 请求 ID（token 机制）前置防重
+原理：防重提交：提交前领 token（SET NX），提交时校验删除（Lua 原子），与 DB 唯一键双层兜底，TTL 控制防重窗口
+用法：防重提交方案
+锚点：实战共识
+
+</details>
+
+### 运维 · 模板（排查）
+
+<details><summary>看背面</summary>
+
+Redis 故障排查模板：现象（慢/错/挂）→INFO 与慢日志→定位（大 key/热 key/网络/持久化）→治理→复盘
+原理：每类故障有固定排查路径（大 key: --bigkeys，热 key: --hotkeys，延迟： LATENCY），形成 SOP 而非临场发挥
+用法：P10 故障处理框架
+锚点：实战方法论
+
+</details>
+
+### 面试 · 复习（主线）
+
+<details><summary>看背面</summary>
+
+Redis 复习主线：数据结构与编码→持久化→主从/哨兵/Cluster→缓存三大问题→分布式锁→场景设计
+原理：按面试频率排序，缓存一致性与分布式锁是 P7 分水岭，Cluster 细节是 P8+ 深度，场景设计（秒杀/排行榜/延迟队列）是 P9-P10 综合题
+用法：复习时间分配
+锚点：复习方法论
+
+</details>
+
+### 运维 · 故障演练（演练）
+
+<details><summary>看背面</summary>
+
+故障演练：主动杀 Redis 主库验证哨兵切换时长、业务降级有效性（混沌工程）
+原理：演练暴露预案缺陷（降级没生效/客户端重连风暴），ChaosBlade/脚本模拟，演练报告归档，季度常态化
+用法：稳定性体系
+锚点：实战方法论
+
+</details>
+
+### 生态 · Module（模块）
+
+<details><summary>看背面</summary>
+
+Redis Module 生态：RedisJSON/RediSearch/RedisBloom/RedisTimeSeries，Redis 8.0 起官方版内置集成
+原理：模块以扩展命令补足原生能力（JSON 文档/全文检索/布隆/时序），Redis 8 把官方模块并入开源版免单独部署，选型前先确认版本能力边界
+用法：Redis 能力边界评估
+锚点：Redis 8.0
+
+</details>
+
+### 生态 · RedisJSON（RedisJSON）
+
+<details><summary>看背面</summary>
+
+RedisJSON 提供文档级 JSON 存取（JSON.SET/JSON.GET 路径语法）
+原理：支持 JSONPath 局部更新与原子操作，对比 String 存 JSON：免全量序列化（局部读写字段），与 MongoDB 文档思想对齐但更轻
+用法：对象局部字段高频更新场景
+锚点：Redis 8.0
+
+</details>
+
+### 生态 · RediSearch（RediSearch）
+
+<details><summary>看背面</summary>
+
+RediSearch 提供二级索引与全文检索（FT.CREATE/FT.SEARCH）
+原理：字段索引+分词+聚合，补足"按非 key 字段查 Redis 数据"的短板，轻量搜索场景替代 ES（重场景仍 ES），Redis 8 内置
+用法：轻量搜索需求评估
+锚点：Redis 8.0
+
+</details>
+
+### 运维 · RedisInsight（工具）
+
+<details><summary>看背面</summary>
+
+RedisInsight 是官方免费可视化管理工具（键浏览/慢查询分析/集群拓扑）
+原理：比 redis-cli 直观（大 key 分析/内存分布/CLI 自动补全），生产排查辅助，与 redis-cli 组合使用
+用法：运维效率工具
+锚点：实战共识
+
+</details>
+
+### Cluster · full-coverage（可用性）
+
+<details><summary>看背面</summary>
+
+cluster-require-full-coverage 默认 yes：任一槽无主节点则整个集群拒绝服务
+原理：保证数据完整性（缺失槽区间不可用），设 no 则缺失部分仍服务其余槽（可用性优先），按业务对"部分可用"的容忍度选择
+用法：Cluster 可用性权衡
+锚点：官方文档
+
+</details>
+
+### 哨兵 · 通知脚本（扩展）
+
+<details><summary>看背面</summary>
+
+哨兵故障事件可触发通知脚本（sentinel notification-script）与客户端重配脚本
+原理：事件（+sdown/-sdown/+switch-master）推送运维（邮件/webhook），重配脚本在切主后通知 LB/代理更新路由，是哨兵体系的运维扩展点
+用法：哨兵运维集成
+锚点：官方文档
+
+</details>
+
+### 复制 · Replication ID（原理）
+
+<details><summary>看背面</summary>
+
+主从复制以 Replication ID + offset 定位复制进度（PSYNC 基础）
+原理：每个主库有唯一 replication id，从库携带 id+offset 请求增量，id 匹配且 offset 在 backlog 内则部分重同步，id 变了（切主/重启）触发全量
+用法：复制协议深入
+锚点：官方文档
+
+</details>
+
+### 运维 · memory doctor（内存）
+
+<details><summary>看背面</summary>
+
+MEMORY DOCTOR 输出内存健康诊断结论（碎片/峰值/分配器问题）
+原理：与 MEMORY STATS/USAGE 组成内存诊断族：doctor 给结论性建议（碎片高/peer 分配问题），大 key 定位用 USAGE 逐 key 采样，免费自带工具链
+用法：内存问题排查入口
+锚点：官方文档
+
+</details>
+
+### 消息 · Pub/Sub vs Stream（选型）
+
+<details><summary>看背面</summary>
+
+Pub/Sub（不持久/无确认/在线才能收）vs Stream（持久/消费组/ACK/pending 重试）
+原理：Pub/Sub 适合"在线广播"（配置失效通知），Stream 适合"可靠消息"（任务投递），选错是丢消息事故源，与 MQ 能力对齐理解（RD-053/011 联动）
+用法：消息能力选型线
+锚点：官方文档
+
+</details>
+
+### Lua · 脚本复制（复制）
+
+<details><summary>看背面</summary>
+
+Lua 脚本复制默认复制"脚本的执行效果"（7.0 起改为复制写命令效果，effect replication）
+原理：Redis 7 前复制脚本本身（从库需载入相同脚本），7.0 起 effects 复制（从库执行等效写命令，免脚本传播问题），涉及脚本复制的版本兼容知识
+用法：脚本版本升级知识
+锚点：Redis 7.0
+
+</details>
+
+
+## MongoDB（88 张）
+
+### 文档模型 · BSON（基础）
+
+<details><summary>看背面</summary>
+
+MongoDB 数据单位是 BSON 文档（二进制 JSON）单文档上限 16MB
+原理：BSON 支持嵌套文档与数组字段，无固定 schema，字段按需存在，与关系模型的行最大差异
+用法：建模思维的转换起点
+锚点：官方文档
+
+</details>
+
+### 文档模型 · 集合（概念）
+
+<details><summary>看背面</summary>
+
+集合（collection）对应关系模型的表但无固定 schema
+原理：同一集合文档结构可以不同，schema 由应用层保证（或 JSON Schema 校验），灵活但也要求自律
+用法：建模评审仍必须做
+锚点：官方文档
+
+</details>
+
+### 文档模型 · ObjectId（主键）
+
+<details><summary>看背面</summary>
+
+默认主键 ObjectId=4 字节秒级时间戳+5 字节进程级随机+3 字节递增计数
+原理：时间戳前缀使 ObjectId 天然趋势递增，写入分布式友好（类似雪花效果），官方文档核对零差异
+用法：_id 设计与写入性能
+锚点：官方文档核对
+
+</details>
+
+### 建模 · 嵌入（嵌入）
+
+<details><summary>看背面</summary>
+
+建模第一问：数据整体读用嵌入（1:少量），分开更新用引用（1:多）
+原理：嵌入免 JOIN 单文档原子读，引用避免文档无限膨胀（16MB），两者按读写模式选择
+用法：商品详情嵌 SKU、评价拆集合的混合策略
+锚点：实战方法论
+
+</details>
+
+### 事务 · 单文档原子（原子）
+
+<details><summary>看背面</summary>
+
+单文档读写天然原子（副本集内始终原子）
+原理：嵌套文档整读整写免事务，能用单文档原子解决就不开多文档事务（官方原则）
+用法：建模利用原子性的设计技巧
+锚点：官方文档
+
+</details>
+
+### 事务 · 4.0/4.2（多文档）
+
+<details><summary>看背面</summary>
+
+多文档事务 4.0 支持副本集、4.2 支持分片集群
+原理：走 session 默认 60 秒超时，代价高（锁与快照开销），官方建议模型设计优先（嵌入）减少事务需求
+用法：事务能力版本线
+锚点：官方文档
+
+</details>
+
+### 事务 · 60 秒（限制）
+
+<details><summary>看背面</summary>
+
+多文档事务默认 60 秒自动中止（transactionLifetimeLimitSeconds）
+原理：防止长事务拖垮 oplog 与锁，长流程拆事务边界，超时异常需业务重试策略
+用法：事务超时处理
+锚点：官方文档
+
+</details>
+
+### 副本集 · w:1（写关注）
+
+<details><summary>看背面</summary>
+
+写关注 w:1 主确认即返回可能丢写，w:majority 多数派确认不丢
+原理：w:1 快（不等从库）、majority 慢但多数派持久，是性能与持久性的旋钮，j:true 额外等 journal 落盘
+用法：写丢失场景的配置解
+锚点：官方文档
+
+</details>
+
+### 副本集 · read concern（读关注）
+
+<details><summary>看背面</summary>
+
+读关注 local 读本机最新（可能被回滚）、majority 读已确认数据、linearizable 线性一致
+原理：local 快但读到未多数派确认写，majority 一致，linearizable 最强最慢需配 w:majority
+用法：读一致性与延迟权衡
+锚点：官方文档
+
+</details>
+
+### 副本集 · oplog（复制）
+
+<details><summary>看背面</summary>
+
+副本集复制靠 oplog（固定容量循环覆盖的操作日志）从库拉取回放
+原理：oplog 是 capped collection，从库异步回放，回放完成度决定读一致性，oplog 窗口是从库落后容忍上限
+用法：副本集复制原理骨架
+锚点：官方文档
+
+</details>
+
+### 副本集 · 50/7（规模）
+
+<details><summary>看背面</summary>
+
+副本集最多 50 成员其中 7 个可投票
+原理：投票成员多数派选举（类 Raft：term/多数派/日志新度优先），非投票成员可作数据节点，官方文档核对零差异
+用法：副本集容量规划
+锚点：官方文档核对
+
+</details>
+
+### 副本集 · 选举（选举）
+
+<details><summary>看背面</summary>
+
+主库挂触发选举：多数派投票、term 递增、日志新度优先，通常数秒完成
+原理：日志新度（oplog 位置最靠前）保证新主数据最新，priority 影响优先级，选举期间无法写
+用法：故障转移机制
+锚点：官方文档
+
+</details>
+
+### 副本集 · rollback（回滚）
+
+<details><summary>看背面</summary>
+
+主挂时未被多数派确认的写在切主后被回滚（写进 rollback 目录）
+原理：异步复制固有风险，人工可从 rollback 文件恢复，工程防御是 w:majority 让写确认前不返回
+用法：数据丢失风险评估
+锚点：官方文档
+
+</details>
+
+### 副本集 · oplog 窗口（运维）
+
+<details><summary>看背面</summary>
+
+oplog 窗口监控必配：从库落后超过窗口就得全量重同步
+原理：oplog 循环覆盖，落后从库找不到同步起点，全量重同步代价大（数据量线性），窗口=oplog 容量/平均写入速率
+用法：运维监控必配项
+锚点：实战共识
+
+</details>
+
+### 副本集 · arbiter（仲裁）
+
+<details><summary>看背面</summary>
+
+arbiter（仲裁节点）只投票不存数据省资源但削弱多数派持久性
+原理：3 成员=2 数据+1 仲裁时，数据节点挂一个另一个成单点（仲裁无数据），生产慎用，官方文档有明确警告
+用法：小规模副本集设计权衡
+锚点：官方文档
+
+</details>
+
+### 索引 · ESR（原则）
+
+<details><summary>看背面</summary>
+
+复合索引设计 ESR 原则：Equality 等值→Sort 排序→Range 范围
+原理：等值列保证排序连续性，范围列放最后，官方设计原则（与 MySQL 联合索引原则同构）
+用法：索引设计口诀
+锚点：官方文档
+
+</details>
+
+### 索引 · 边界（$in）
+
+<details><summary>看背面</summary>
+
+$in 是多组等值官方按 E 处理（组内排序仍有效）
+原理：{status:{$in:[A,B]}} 对排序列仍有连续性，按 ESR 设计索引时 $in 归入等值位
+用法：ESR 细节题
+锚点：官方文档
+
+</details>
+
+### 索引 · 覆盖查询（覆盖）
+
+<details><summary>看背面</summary>
+
+projection 排除 _id 且所有返回字段在索引中则覆盖查询免回表
+原理：explain 看 FETCH 阶段消失（PROJECTION_COVERED），与 MySQL 覆盖索引同构
+用法：查询优化技巧
+锚点：官方文档
+
+</details>
+
+### 索引 · TTL（TTL）
+
+<details><summary>看背面</summary>
+
+TTL 索引（expireAfterSeconds）后台约 60 秒一轮删除过期文档
+原理：删除有延迟（非精确到秒），适合日志/会话类清理，官方文档核对（60 秒巡检周期），删除操作本身有性能开销
+用法：过期数据清理方案
+锚点：官方文档核对
+
+</details>
+
+### 索引 · partial（partial）
+
+<details><summary>看背面</summary>
+
+partial 索引只索引满足条件的文档（如只索引 status=active）
+原理：省空间与写放大，查询条件必须匹配过滤表达式才能用上该索引，部分条件高频的集合优化
+用法：索引空间优化
+锚点：官方文档
+
+</details>
+
+### 索引 · sparse（sparse）
+
+<details><summary>看背面</summary>
+
+sparse 索引跳过不含该字段的文档
+原理：与 partial 的区别：按字段存在性过滤（partial 按任意表达式），组合查询行为注意（不含字段文档查不到）
+用法：字段稀疏集合优化
+锚点：官方文档
+
+</details>
+
+### 索引 · multikey（多键）
+
+<details><summary>看背面</summary>
+
+数组字段自动建多键索引（每个数组元素一个索引项）
+原理：数组查询走索引，多键索引与 $in 组合时索引项爆炸（写放大），单文档多键索引有限制（一个数组字段）
+用法：标签/类目数组查询
+锚点：官方文档
+
+</details>
+
+### 索引 · 通配符（通配符）
+
+<details><summary>看背面</summary>
+
+通配符索引（4.2+）对 schema 多变字段（子文档所有路径）建索引
+原理：{$**":1} 覆盖未知字段查询，代价是写放大与空间，schema 不可预估场景适用
+用法：异构属性查询
+锚点：官方文档
+
+</details>
+
+### 索引 · 文本地理（特殊）
+
+<details><summary>看背面</summary>
+
+特殊索引：text（全文检索）、2dsphere（地理）、hashed（分片散列）
+原理：text 适合简单全文（复杂搜索用 ES），2dsphere 支持球面地理查询，hashed 用于 hashed 分片
+用法：索引类型全景
+锚点：官方文档
+
+</details>
+
+### explain · COLLSCAN（解读）
+
+<details><summary>看背面</summary>
+
+explain 关键计划：COLLSCAN 全集合扫（红灯）、IXSCAN 索引扫、FETCH 回表
+原理：与 MySQL explain 思路同构，totalDocsExamined 与 nReturned 比值是效率指标，1:1 为理想
+用法：查询调优入口
+锚点：官方文档
+
+</details>
+
+### 分片 · 三层（架构）
+
+<details><summary>看背面</summary>
+
+分片三层架构：mongos（路由）→config 副本集（元数据）→shard（每个是副本集）
+原理：mongos 无状态可扩容，config 存 chunk 分布元数据，shard 是普通副本集参与分片，各层独立伸缩
+用法：分片集群拓扑
+锚点：官方文档
+
+</details>
+
+### 分片 · 三原则（分片键）
+
+<details><summary>看背面</summary>
+
+分片键三原则：高基数、查询必带、写分布均匀
+原理：单调递增值（ObjectId 全打到最后分片）用 hashed 分片解，查询不带分片键全分片广播，官方文档核对（选型同 MySQL 分片键原则）
+用法：分片键是 MongoDB 最重大的一次性决策
+锚点：官方文档核对
+
+</details>
+
+### 分片 · range vs hashed（类型）
+
+<details><summary>看背面</summary>
+
+range 分片（范围查询友好）vs hashed 分片（写均匀、范围查询废）
+原理：range 支持范围扫描但单调写倾斜，hashed 写分散但点查与范围查询代价不同，按读写模式选
+用法：分片策略选型
+锚点：官方文档
+
+</details>
+
+### 分片 · 广播（路由）
+
+<details><summary>看背面</summary>
+
+mongos 对不带分片键的查询广播全分片再聚合
+原理：广播是 O(分片数) 放大，QPS 高时全集群被拖累，查询必带分片键是性能第一原则
+用法：分片集群性能红线
+锚点：官方文档
+
+</details>
+
+### 分片 · reshard（演进）
+
+<details><summary>看背面</summary>
+
+分片键选错的补救：4.4 refineCollectionShardKey 追加后缀字段、5.0 reshardCollection 在线重分片
+原理：重分片代价大（全量数据重写），所以分片键决策前置评审，4.2 前只能在导出重导入
+用法：分片键演进知识
+锚点：官方文档
+
+</details>
+
+### 分片 · balancer（chunk）
+
+<details><summary>看背面</summary>
+
+chunk 是数据切分单位，balancer 自动在分片间迁移 chunk 均衡
+原理：chunk 默认上限可调（split 阈值），balancer 有时间窗口配置（业务低峰迁移），4.4+ 平衡策略更细
+用法：分片运维知识
+锚点：官方文档
+
+</details>
+
+### 分片 · jumbo chunk（问题）
+
+<details><summary>看背面</summary>
+
+jumbo chunk：同一分片键值海量子文档导致超阈值不可分割
+原理：需手动拆分（细化分片键）或调整，是分片键基数不足的后果，预防靠高基数分片键
+用法：分片键设计失误的补救
+锚点：实战共识
+
+</details>
+
+### 存储引擎 · 文档级并发（WiredTiger）
+
+<details><summary>看背面</summary>
+
+WiredTiger（3.2+ 默认）提供文档级并发控制与 MVCC
+原理：写不同文档不互斥（3.0 前 MMAPv1 库级锁），写冲突重试，是 MongoDB 并发能力跃升的根基
+用法：存储引擎演进知识
+锚点：官方文档
+
+</details>
+
+### 存储引擎 · 压缩（压缩）
+
+<details><summary>看背面</summary>
+
+WiredTiger 支持块压缩（snappy 默认/zlib/zstd）与前缀压缩（索引）
+原理：磁盘占用显著降低（压缩比 2-5 倍），CPU 换空间，按数据特征选择压缩算法
+用法：容量成本优化
+锚点：官方文档
+
+</details>
+
+### 存储引擎 · checkpoint（checkpoint）
+
+<details><summary>看背面</summary>
+
+WiredTiger 定期 checkpoint（默认 60 秒）落盘一致状态
+原理：journal（WAL）保证 checkpoint 间崩溃恢复，恢复时长与 journal 量相关，60 秒检查点+journal 是恢复模型
+用法：崩溃恢复机制
+锚点：官方文档
+
+</details>
+
+### 聚合 · 聚合（管道）
+
+<details><summary>看背面</summary>
+
+聚合管道（aggregation pipeline）$match→$group→$sort→$project 等阶段流水处理
+原理：$match 前置走索引（效率关键），$group 内存默认 100MB 限制（allowDiskUse），与 SQL GROUP BY 同构
+用法：报表统计类查询实现
+锚点：官方文档
+
+</details>
+
+### 聚合 · $lookup（性能）
+
+<details><summary>看背面</summary>
+
+$lookup（关联查询）是性能黑洞能冗余就冗余
+原理：跨集合关联相当于 SQL JOIN 但无索引优化时全扫，建模时冗余热点字段（如类目名进商品文档）避免 lookup
+用法：建模与查询的权衡
+锚点：实战共识
+
+</details>
+
+### 聚合 · allowDiskUse（限制）
+
+<details><summary>看背面</summary>
+
+聚合 $sort/$group 超内存默认报错需 allowDiskUse=true 落盘
+原理：100MB 限制防止拖垮节点，落盘性能下降明显，优先优化管道（前置 match/拆分阶段）
+用法：聚合错误排查
+锚点：官方文档
+
+</details>
+
+### 聚合 · $facet（$facet）
+
+<details><summary>看背面</summary>
+
+$facet 单次管道内分多路输出（同请求多聚合）
+原理：一次请求返回多个维度结果（列表+总数+分面统计），内存注意（每路独立），搜索页聚合场景
+用法：搜索页优化技巧
+锚点：官方文档
+
+</details>
+
+### 大文档 · GridFS（GridFS）
+
+<details><summary>看背面</summary>
+
+超 16MB 大文件用 GridFS 或对象存储存 URL
+原理：GridFS 分块存集合（chunks 255KB/块），代价是查询与管理复杂，现代方案倾向对象存储（OSS/S3）+文档存 URL
+用法：大文件架构选型
+锚点：官方文档
+
+</details>
+
+### 选型 · 适配（场景）
+
+<details><summary>看背面</summary>
+
+MongoDB 四类适配：schema 多变、嵌套整体读、海量写入水平扩展、快速迭代
+原理：商品异构属性、内容详情、行为日志是典型场景，强事务多表关联资金账务仍留 MySQL
+用法：NoSQL 选型判断题
+锚点：实战共识
+
+</details>
+
+### 架构 · 混合架构（混合）
+
+<details><summary>看背面</summary>
+
+主流混合架构：核心账务 MySQL+商品/内容/行为 MongoDB+搜索 ES，以 binlog/CDC 同步
+原理：按数据特征分工而非全替换，同步层（CDC）是最脆弱最值得投入的环节，对账兜底
+用法：大厂落地架构
+锚点：实战方法论
+
+</details>
+
+### 同步 · 幂等（CDC）
+
+<details><summary>看背面</summary>
+
+CDC 同步 MongoDB 侧要点：幂等写（upsert by _id）+乱序容忍（按版本号丢旧写）
+原理：消息重复与乱序是常态，upsert 保证幂等，updated_at 比较丢弃旧版本，Flink CDC 是推荐实现
+用法：同步层正确性设计
+锚点：实战共识
+
+</details>
+
+### 迁移 · 双写（四步）
+
+<details><summary>看背面</summary>
+
+MySQL 迁 MongoDB 四步法：建模转换→存量迁移→增量双写（CDC+对账）→切读切写
+原理：建模错误返工成本极高（文档结构改动=全量重写），建模评审前置做两次，与 MySQL 分库分表迁移四步法同构
+用法：数据迁移方法论
+锚点：实战方法论
+
+</details>
+
+### 建模 · 评审（评审）
+
+<details><summary>看背面</summary>
+
+建模评审清单：读写模式、增长规模、16MB 边界、索引需求、事务需求
+原理：关系模型思维残留（全引用）与过度嵌入（无限膨胀）是两大反模式，评审在迁移前完成
+用法：建模质量门
+锚点：实战方法论
+
+</details>
+
+### Java · MongoTemplate（集成）
+
+<details><summary>看背面</summary>
+
+Spring Data MongoDB：MongoRepository 简单 CRUD，复杂聚合用 MongoTemplate
+原理：Repository 方法名解析有限（聚合/动态投影不够用），MongoTemplate 显式可控，团队规范通常两者并存
+用法：Java 集成规范
+锚点：Spring Data 文档
+
+</details>
+
+### Java · pool（连接池）
+
+<details><summary>看背面</summary>
+
+MongoDB Java 驱动连接池：maxConnectionPoolSize 默认 100 与服务实例数联动
+原理：连接池与驱动内部线程模型（每个连接独立），高并发突发看 pool 指标（连接等待时间），与服务副本数×线程数估算
+用法：驱动调优
+锚点：官方文档
+
+</details>
+
+### Java · @Transactional（事务）
+
+<details><summary>看背面</summary>
+
+副本集下 Spring @Transactional 即可用（驱动自动 session 管理）
+原理：分片事务 4.2+，事务内读用 session 关联的 read concern，测试环境单机版不支持事务（需副本集模式）
+用法：Spring 集成事务
+锚点：Spring Data 文档
+
+</details>
+
+### 索引 · B 树（底层）
+
+<details><summary>看背面</summary>
+
+MongoDB 索引底层 B 树（与 MySQL B+ 树不同：非叶节点也存数据指针）
+原理：WiredTiger B 树叶子与非叶都含键，范围扫描仍高效，与 MySQL B+ 树差异是常见考点
+用法：存储结构对比题
+锚点：官方文档
+
+</details>
+
+### 索引 · 写放大（代价）
+
+<details><summary>看背面</summary>
+
+索引越多写放大越大：每次写更新所有相关索引
+原理：与 MySQL 相同的权衡，集合索引数量控制（高频查询建索引，长尾查询接受扫描）
+用法：索引治理原则
+锚点：实战共识
+
+</details>
+
+### 写入 · bulkWrite（批量）
+
+<details><summary>看背面</summary>
+
+批量写入 bulkWrite（ordered/unordered）与 insertMany
+原理：unordered 并行执行更快（失败集合适用），ordered 顺序执行遇错停止，大批量导入必用
+用法：数据导入性能
+锚点：官方文档
+
+</details>
+
+### 集合 · Capped（Capped）
+
+<details><summary>看背面</summary>
+
+Capped collection 固定大小循环覆盖（日志/最新消息场景）
+原理：写入顺序保留自动淘汰旧文档，无索引开销（除 _id），oplog 就是 capped 的实现，size 满后新写覆盖旧数据
+用法：固定容量日志场景
+锚点：官方文档
+
+</details>
+
+### 变更 · Change Stream（Change Stream）
+
+<details><summary>看背面</summary>
+
+Change Stream（3.6+）订阅数据变更事件（基于 oplog）
+原理：应用级 CDC：微服务间同步、实时索引（ES）、审计，比轮询高效比直接读 oplog 安全（官方 API）
+用法：实时同步方案
+锚点：官方文档
+
+</details>
+
+### 副本集 · 优先级（配置）
+
+<details><summary>看背面</summary>
+
+副本集成员配置：priority（选举权重）、hidden（不可读）、delayed（延迟从库）
+原理：priority 0 节点不主动竞选，hidden 从库专供备份/分析，delayed 从库（延迟 N 秒）防误操作恢复，官方文档核对
+用法：副本集高级配置
+锚点：官方文档核对
+
+</details>
+
+### 副本集 · read preference（读偏好）
+
+<details><summary>看背面</summary>
+
+读偏好：primary（默认）/primaryPreferred/secondary/secondaryPreferred/nearest
+原理：secondary 分摊读压力但读旧数据（复制延迟），nearest 就近读（跨机房），与 write concern 组合构成一致性与延迟矩阵
+用法：读写分离策略
+锚点：官方文档
+
+</details>
+
+### 副本集 · causal（一致性）
+
+<details><summary>看背面</summary>
+
+因果一致性会话（causal consistency，3.6+）保证读己之写
+原理：会话内操作按因果序（写后读自己写的内容），跨副本集切换读节点不丢写，配合 majority 读关注是分布式会话方案
+用法：会话级一致性方案
+锚点：官方文档
+
+</details>
+
+### 驱动 · retryable writes（重试）
+
+<details><summary>看背面</summary>
+
+可重试写（retryable writes，3.6+ 默认开启）网络闪断自动重试
+原理：驱动记录写操作（含 _id）重试一次，防网络抖动报错，但重试+失败组合仍需业务幂等（重试可能部分成功后报错）
+用法：驱动层容错机制
+锚点：官方文档
+
+</details>
+
+### 索引 · unique（分片）
+
+<details><summary>看背面</summary>
+
+分片集合的唯一索引必须以分片键为前缀
+原理：跨分片全局唯一性由分片键保证路由唯一，其他唯一键无法全局强制（各分片独立校验），唯一性设计在分片前考虑
+用法：分片唯一性约束
+锚点：官方文档
+
+</details>
+
+### 建模 · 16MB（拆分）
+
+<details><summary>看背面</summary>
+
+16MB 边界应对：评论/日志独立集合、大字段拆 GridFS 或外置 URL
+原理：无限嵌入会撞 16MB 且文档变大拖慢读写，按增长模型拆分（1:多独立增长），设计期评估而非撞墙后迁移
+用法：建模边界设计
+锚点：实战共识
+
+</details>
+
+### 建模 · schema_version（演进）
+
+<details><summary>看背面</summary>
+
+文档加 schema_version 字段支持多版本共存灰度迁移
+原理：新结构新版本写入，旧版本懒迁移（读时转换+回写），避免停机全量改写，与接口版本演进同理
+用法：大集合 schema 演进技巧
+锚点：实战方法论
+
+</details>
+
+### 查询 · projection（投影）
+
+<details><summary>看背面</summary>
+
+projection 只取需要的字段减少网络与反序列化开销
+原理：配合覆盖索引免 FETCH，大文档（嵌套深）查询必须投影，与 SQL select 列同理
+用法：查询性能基础优化
+锚点：官方文档
+
+</details>
+
+### 运维 · profiler（profiler）
+
+<details><summary>看背面</summary>
+
+profiler（慢查询记录）slowms 默认 100ms 写入 system.profile
+原理：三级级别（0 关/1 慢/2 全量，2 代价大临时用），与 explain 组合定位慢查询，生产常开级别 1
+用法：慢查询监控
+锚点：官方文档
+
+</details>
+
+### 运维 · 指标（监控）
+
+<details><summary>看背面</summary>
+
+MongoDB 监控核心：opcounters（读写 QPS）、复制延迟、连接数、cache 使用、队列
+原理：ops/replication/wiredTiger cache 分节，队列（currentQueue）持续非零=瓶颈信号，Prometheus exporter 标准化
+用法：运维基线
+锚点：实战共识
+
+</details>
+
+### 运维 · 备份（备份）
+
+<details><summary>看背面</summary>
+
+备份方案：mongodump（逻辑慢）vs 文件快照（fsyncLock+快照快）
+原理：大集群用快照（云盘/存储层）+oplog 增量，mongodump 适合小库与单集合导出，恢复演练制度化
+用法：备份体系
+锚点：实战共识
+
+</details>
+
+### 运维 · 风暴（连接）
+
+<details><summary>看背面</summary>
+
+连接风暴：短连接突发（mongos 连接建立开销）与池化防御
+原理：mongos 连接握手开销大（SCRAM 认证），应用侧池化+长连接，突发流量预热连接池，maxIncomingConnections 服务端上限
+用法：连接治理
+锚点：实战共识
+
+</details>
+
+### 分片 · 顺序（选型）
+
+<details><summary>看背面</summary>
+
+扩展路线：先副本集（读扩展/高可用）→垂直扩容到极限→才分片（写/容量水平扩展）
+原理：分片引入复杂度（分片键/广播/jumbo），过早分片是常见失误，官方路线也是先副本集
+用法：容量规划路线
+锚点：实战方法论
+
+</details>
+
+### 运维 · 窗口（balancer）
+
+<details><summary>看背面</summary>
+
+balancer 迁移窗口配置（业务低峰迁移 chunk）
+原理：迁移消耗 IO 与网络（文档逐个搬），高峰迁移引发抖动，balanceWindow 限制时段，迁移速率限流
+用法：分片运维细节
+锚点：官方文档
+
+</details>
+
+### 运维 · 估算（容量）
+
+<details><summary>看背面</summary>
+
+容量估算：文档数×平均大小×（1+索引开销）×副本数，压缩后（WT）×0.3-0.5
+原理：索引开销 20-50%（按索引数），WiredTiger 压缩 2-5 倍，预估分片时间点（单副本集容量上限），与 Redis 容量估算同方法论
+用法：容量规划方法
+锚点：实战方法论
+
+</details>
+
+### Java · ODM 坑（ODM）
+
+<details><summary>看背面</summary>
+
+ODM（Spring Data/Mongoose）掩盖文档模型本质，P10 应能脱离 ODM 直谈文档设计
+原理：ODM 的 @Document/@Field 映射隐藏 BSON 结构，复杂聚合仍要原生管道，建模评审用原生文档视角
+用法：技术深度分水岭
+锚点：实战共识
+
+</details>
+
+### 面试 · 复习（主线）
+
+<details><summary>看背面</summary>
+
+MongoDB 复习主线：文档模型与建模→索引 ESR→副本集（oplog/选举/回滚/关注）→分片（键/reshard）→混合架构
+原理：P5-P6 考建模与索引，P7-P8 考副本集与分片机制，P9-P10 考混合架构与迁移，与 MySQL 知识同构可迁移
+用法：复习时间分配
+锚点：复习方法论
+
+</details>
+
+### 副本集 · 重配置（reconfig）
+
+<details><summary>看背面</summary>
+
+副本集在线 reconfig（rs.reconfig）增删成员与调整配置
+原理：多数派可用时才能 reconfig，新增节点先全量同步（initial sync），调整 priority/hidden/delayed 都走 reconfig
+用法：集群生命周期管理
+锚点：官方文档
+
+</details>
+
+### 副本集 · initial sync（同步）
+
+<details><summary>看背面</summary>
+
+新成员 initial sync（全量同步）：选源→拷贝集合→建索引→追 oplog
+原理：拷贝期间源负载高（选低峰），索引重建耗时（集合大时小时级），完成后进入 oplog 增量追平
+用法：扩容操作细节
+锚点：官方文档
+
+</details>
+
+### 分片 · 预分裂（预分）
+
+<details><summary>看背面</summary>
+
+大集合上线分片前预分裂（pre-split）与预建 zone
+原理：避免初始全写入单分片再迁移（搬全量数据），按分片键范围预分配 chunk 到各分片，新集合分片的标准动作
+用法：分片上线最佳实践
+锚点：实战方法论
+
+</details>
+
+### 写入 · insert 语义（语义）
+
+<details><summary>看背面</summary>
+
+insert 重复 _id 报错（E11000）、upsert 存在更新不存在插入、update 语义细分
+原理：upsert 是 CDC 幂等写基础（by _id），update one/many 区分（漏 many 是事故源），bulkWrite 组合原子批
+用法：写入 API 语义
+锚点：官方文档
+
+</details>
+
+### 查询 · 限制（限制）
+
+<details><summary>看背面</summary>
+
+查询限制：单文档 16MB、$in 列表大时性能差、分片查询必带分片键
+原理：超大 $in 拆批（与 MySQL 相同套路），不带分片键广播（红线），聚合内存限制（allowDiskUse）
+用法：应用层查询规范
+锚点：实战共识
+
+</details>
+
+### 运维 · 场景（故障）
+
+<details><summary>看背面</summary>
+
+故障场景预案：主库挂（自动选举）、从库延迟（摘读流量）、config 挂（分片元数据不可用）、mongos 挂（路由层扩容）
+原理：每层故障有不同影响面与恢复动作（选举秒级/重同步小时级），预案按层文档化
+用法：高可用预案
+锚点：实战方法论
+
+</details>
+
+### 运维 · 基线（安全）
+
+<details><summary>看背面</summary>
+
+安全基线：SCRAM 认证（默认开启要求配置）、网络隔离、角色最小化（readWrite 按库）、审计
+原理：未授权访问同样是事故源（与 Redis 同教训），x.509/LDAP 企业级认证可选，生产禁 eval 等危险命令
+用法：安全基线
+锚点：实战共识
+
+</details>
+
+### 运维 · 升级（版本）
+
+<details><summary>看背面</summary>
+
+版本升级路径：4.x→5.0（reshard/时序集合）→6.0→7.0（查询引擎优化）
+原理：升级评估 feature compatibility version（先降级兼容设置），从库先升再切主灰度，驱动与 ODM 同步升级
+用法：版本治理
+锚点：官方文档
+
+</details>
+
+### 查询 · $elemMatch（数组）
+
+<details><summary>看背面</summary>
+
+$elemMatch 要求数组元素的多个条件同时满足于同一元素
+原理：{scores:{$gte:80,$lte:90}} 是字段级条件（可匹配不同元素），$elemMatch 才是元素级组合条件，数组查询的经典语义陷阱
+用法：成绩区间/标签组合查询
+锚点：官方文档
+
+</details>
+
+### 建模 · $jsonSchema（校验）
+
+<details><summary>看背面</summary>
+
+$jsonSchema 集合校验器（validationLevel/validationAction 可配）约束文档结构
+原理：无 schema 不等于无约束：validator 在插入/更新时校验（可选 warn 只告警或 error 拒绝），渐进收紧用 validationLevel moderate
+用法：团队规范落地的服务端保障
+锚点：官方文档
+
+</details>
+
+### 建模 · 时序集合（时序）
+
+<details><summary>看背面</summary>
+
+时序集合（time series，5.0+）专为指标/日志优化（自动分桶列式存储）
+原理：meta 字段（设备 ID 等）分组分桶，自动过期（expireAfterSeconds），压缩率与查询效率优于手工分集合，是 5.0 后时序场景首选
+用法：监控指标/设备数据落地
+锚点：官方文档
+
+</details>
+
+### 查询 · 视图（视图）
+
+<details><summary>看背面</summary>
+
+视图（view）基于聚合管道定义只读虚拟集合
+原理：固化常用查询管道免重复书写，权限隔离（只授予视图不授予基础集合），代价是查询性能取决于管道本身
+用法：报表查询与权限隔离
+锚点：官方文档
+
+</details>
+
+### 调优 · executionStats（explain）
+
+<details><summary>看背面</summary>
+
+explain executionStats 三层：queryPlanner（计划）→executionStats（实际执行）→allPlansExecution（计划对比）
+原理：executionStats 给出 totalKeysExamined/totalDocsExamined/nReturned 三比值与执行时间，是判断索引效率的硬数据，普通 explain 只做预估
+用法：慢查询定位标准动作
+锚点：官方文档
+
+</details>
+
+### 索引 · $regex（$regex）
+
+<details><summary>看背面</summary>
+
+正则查询前缀锚定（/^abc/）可走索引，中间匹配（/abc/）全扫
+原理：B 树按前缀有序，锚定前缀才能定位范围，大小写敏感选项（i）使前缀优化失效，与 MySQL like 前缀同构
+用法：名称/编码类查询优化
+锚点：官方文档
+
+</details>
+
+### 驱动 · retryable reads（重试）
+
+<details><summary>看背面</summary>
+
+可重试读（retryReads，3.6+ 默认开启）网络抖动自动重试读操作
+原理：读操作天然幂等可安全重试，与 retryable writes 组成驱动层容错，网络闪断不再报错（代价是掩盖网络问题需监控）
+用法：驱动容错配置
+锚点：官方文档
+
+</details>
+
+### 写入 · replaceOne（语义）
+
+<details><summary>看背面</summary>
+
+replaceOne 整文档替换（丢失未提供字段）与 updateOne $set 局部更新是两种语义
+原理：replaceOne 用于全量覆写（文档由调用方完整构造），updateOne+$set 局部修改并发安全更好，误用 replaceOne 是字段丢失事故源
+用法：写入 API 选型与事故预防
+锚点：实战共识
+
+</details>
+
+### 备份 · --oplog（一致性）
+
+<details><summary>看背面</summary>
+
+mongodump 加 --oplog 捕获备份期间变更，恢复时重放保证一致性快照
+原理：备份耗时段内新写入若不捕获，恢复后数据不一致（引用关系断裂），--oplog 让 dump 与恢复点一致，大库备份标配
+用法：备份一致性方法论
+锚点：实战共识
+
+</details>
+
+### Java · URI（连接）
+
+<details><summary>看背面</summary>
+
+连接 URI 携带 replicaSet 参数（副本集自动发现与故障切换的前提）
+原理：指定 replicaSet 后驱动自动发现全部成员并在主挂时切换，不指定则只连单个节点（主挂不切换），高可用配置第一参数
+用法：Java 连接串审查项
+锚点：官方文档
+
+</details>
+
+
+## MQ（100 张）
+
+### 基础 · 解耦（用途）
+
+<details><summary>看背面</summary>
+
+MQ 三大用途：解耦（上下游无直接依赖）、异步（主流程不等旁路）、削峰（瞬时流量排队）
+原理：每用途都有代价：异步带来延迟可见性、削峰带来积压与一致性窗口，面试先答三用途再讲代价
+用法：MQ 引入动机的标准回答
+锚点：实战共识
+
+</details>
+
+### 基础 · Kafka（选型）
+
+<details><summary>看背面</summary>
+
+主流选型：Kafka（日志流/大数据吞吐）、RocketMQ（业务消息/事务/延迟）、RabbitMQ（企业路由复杂场景）
+原理：吞吐排序 Kafka≈RocketMQ>RabbitMQ，功能差异：事务消息与延迟消息 RocketMQ 原生，路由灵活度 RabbitMQ 最强
+用法：消息中间件选型框架
+锚点：实战共识
+
+</details>
+
+### 架构 · partition（分区）
+
+<details><summary>看背面</summary>
+
+Kafka 主题分多个 partition（并行单元）分区内有序
+原理：分区是并行度与顺序性的单位，生产按 key 哈希路由保证同 key 同分区，扩分区会破坏 key 路由（同 key 可能换分区）
+用法：分区设计的顺序性代价
+锚点：官方文档
+
+</details>
+
+### 消费 · 消费组（消费组）
+
+<details><summary>看背面</summary>
+
+消费组（consumer group）内消费者分摊分区，同组每分区最多一个消费者
+原理：消费组横向扩展吞吐，消费者数超过分区数则多余消费者空闲，跨组广播（每组一份）
+用法：消费模型基础
+锚点：官方文档
+
+</details>
+
+### 消费 · rebalance（再平衡）
+
+<details><summary>看背面</summary>
+
+rebalance（再平衡）触发：组内成员增减、订阅变化、消费者超时（max.poll.interval.ms 超时）
+原理：rebalance 期间整组停止消费（STW 式），长业务处理超时被踢出引发循环 rebalance，是经典生产事故
+用法：消费稳定性核心机制
+锚点：官方文档
+
+</details>
+
+### 复制 · ISR（ISR）
+
+<details><summary>看背面</summary>
+
+ISR（in-sync replicas）是与 leader 保持同步的副本集合
+原理：acks=all 时消息需 ISR 全部确认才算写入，落后超过 replica.lag.time.max.ms 的副本被移出 ISR，HW 由 ISR 决定
+用法：副本机制核心概念
+锚点：官方文档
+
+</details>
+
+### 生产 · acks（确认）
+
+<details><summary>看背面</summary>
+
+生产者 acks 三档：0（不等）、1（leader 确认）、all（ISR 全确认）
+原理：acks=1 leader 挂且未复制则丢，acks=all+min.insync.replicas=2 才是生产标准（broker 端配合）
+用法：不丢消息配置链第一环
+锚点：官方文档
+
+</details>
+
+### 生产 · min.insync.replicas（min.insync）
+
+<details><summary>看背面</summary>
+
+min.insync.replicas=2 要求 ISR 至少 2 个否则写入报错
+原理：与 acks=all 配合：ISR 缩到 1 时拒绝写（宁可不可用不丢数据），是"不丢消息"的 broker 端保证
+用法：不丢消息配置链第二环
+锚点：官方文档
+
+</details>
+
+### 复制 · HW（HW）
+
+<details><summary>看背面</summary>
+
+HW（high watermark）是消费者可见的最高位移，LEO 是日志末端
+原理：消费者只能读到 HW 之前的消息（ISR 确认的），LEO-HW 差值即未同步消息，防读到可能被截断的数据
+用法：复制一致性的关键概念
+锚点：官方文档
+
+</details>
+
+### 顺序 · 分区内（保证）
+
+<details><summary>看背面</summary>
+
+Kafka 只保证分区内有序，全局有序需单分区（牺牲吞吐）
+原理：需要顺序的消息按业务键路由到同一分区（订单 ID），全局有序方案：单分区+单消费者（吞吐瓶颈）或业务侧缓冲重排
+用法：顺序消息方案权衡
+锚点：官方文档
+
+</details>
+
+### 幂等 · enable.idempotence（生产者）
+
+<details><summary>看背面</summary>
+
+生产者幂等：enable.idempotence=true 用 PID+序列号防 broker 端重复
+原理：broker 按生产者 ID+分区+序号去重（只防单会话重试），跨会话/跨实例仍需业务幂等，3.0 起默认开启
+用法：不丢不重的生产端配置
+锚点：Kafka 3.0
+
+</details>
+
+### 事务 · 事务消息（事务）
+
+<details><summary>看背面</summary>
+
+Kafka 事务（transactional.id）支持跨分区原子写（读-处理-写模式）
+原理：两阶段提交+事务协调器，配合 consume-transform-produce 实现流处理 exactly-once，与 RocketMQ 事务消息（半消息+回查）机制不同
+用法：两种事务消息机制辨析
+锚点：Kafka 0.11
+
+</details>
+
+### exactly · 边界（语义）
+
+<details><summary>看背面</summary>
+
+Kafka exactly-once 仅限 Kafka 流内部（读-写闭环），端到端需业务幂等
+原理：消费到外部系统（写 DB）不在此保证内，落地口径：Kafka 内 exactly-once+业务侧幂等（去重表），P10 级别的语义边界认知
+用法：语义边界的精确回答
+锚点：实战共识
+
+</details>
+
+### 存储 · segment（段）
+
+<details><summary>看背面</summary>
+
+Kafka 日志按 segment 文件切分+稀疏索引（offset 索引）
+原理：顺序写文件+追加模式（磁盘顺序写接近内存速度），索引稀疏内存映射，按 offset/时间戳二分定位
+用法：存储设计原理
+锚点：官方文档
+
+</details>
+
+### 性能 · sendfile（零拷贝）
+
+<details><summary>看背面</summary>
+
+Kafka 用零拷贝（sendfile）从页缓存直达网卡免用户态拷贝
+原理：消费路径数据不进用户态（2 次拷贝→0 次），配合页缓存命中率，是 Kafka 吞吐高的关键之一
+用法：性能原理八股
+锚点：Linux 机制
+
+</details>
+
+### 性能 · 页缓存（页缓存）
+
+<details><summary>看背面</summary>
+
+Kafka 依赖 OS 页缓存而非 JVM 堆缓存消息
+原理：消息文件 mmap/顺序读写经页缓存，JVM 堆小 GC 轻（Kafka 堆通常 6GB 内），重启后页缓存仍有效
+用法：JVM 调参与存储联动知识
+锚点：官方文档
+
+</details>
+
+### 架构 · KRaft（KRaft）
+
+<details><summary>看背面</summary>
+
+KRaft 模式用内置 Raft 取代 ZooKeeper（3.x 引入，4.0 彻底移除 ZK 支持）
+原理：元数据进内部主题（__cluster_metadata）由 controller quorum 管理，简化部署与扩容，官方文档核对（本项目已核对版本线）
+用法：架构演进版本线
+锚点：Kafka 3.x/4.0 核对
+
+</details>
+
+### 运维 · retention（保留）
+
+<details><summary>看背面</summary>
+
+消息保留策略：按时间（默认 7 天）与按大小，压缩主题（compact）按 key 保留最新
+原理：retention 只影响磁盘不丢已消费（消费位移独立），compact 适合状态快照主题，磁盘规划=吞吐×保留期
+用法：磁盘与保留策略
+锚点：官方文档
+
+</details>
+
+### 消费 · __consumer_offsets（位移）
+
+<details><summary>看背面</summary>
+
+消费位移存内部主题 __consumer_offsets（50 分区）
+原理：消费组提交 offset（自动/手动），rebalance 后按提交位移继续，位移重复提交幂等，位移丢失导致重复消费
+用法：消费语义基础
+锚点：官方文档
+
+</details>
+
+### 消费 · 手动提交（提交）
+
+<details><summary>看背面</summary>
+
+手动提交语义选择：先处理再提交（at-least-once 可能重复）、先提交再处理（可能丢失）
+原理：自动提交（默认 5 秒）在 poll 间提交有丢失窗口（处理中崩溃），业务选 at-least-once+幂等是标准组合
+用法：消费端语义权衡
+锚点：官方文档
+
+</details>
+
+### 语义 · 三环节（不丢）
+
+<details><summary>看背面</summary>
+
+消息不丢三环节：生产确认（acks+重试）、broker 持久化（副本+刷盘）、消费确认（处理后提交位移）
+原理：任一环节配置错都可能丢，完整链条：acks=all+min.insync=2+disable 自动提交+处理后再提交+业务幂等
+用法：不丢消息 checklist
+锚点：实战方法论
+
+</details>
+
+### 语义 · 消费幂等（幂等）
+
+<details><summary>看背面</summary>
+
+消费幂等是架构必然：at-least-once 下重复不可避免
+原理：幂等手段：业务唯一键去重表（DB 唯一索引）、Redis setnx 短期去重、状态机校验（只在特定状态处理），与投递语义组合是最终方案
+用法：消费幂等三段式方案
+锚点：实战共识
+
+</details>
+
+### 语义 · 乱序（乱序）
+
+<details><summary>看背面</summary>
+
+乱序处理：按 key 分区路由保序+消费端单线程/串行队列
+原理：跨分区无法保序，消费端并发处理同 key 需按 key 分发到串行队列（内存排队），P10 级别能说出"保序的完整链路"（生产路由+分区+消费串行）
+用法：顺序链路设计
+锚点：实战方法论
+
+</details>
+
+### 架构 · 无状态（NameServer）
+
+<details><summary>看背面</summary>
+
+RocketMQ 架构：NameServer（无状态注册中心）+Broker（主从）+Producer/Consumer
+原理：NameServer 无状态互不通信（与 Kafka ZK/KRaft 不同），Broker 上报路由，客户端拉取，简单可靠
+用法：架构对比知识
+锚点：RocketMQ 文档
+
+</details>
+
+### 事务 · 半消息（半消息）
+
+<details><summary>看背面</summary>
+
+RocketMQ 事务消息：发送半消息→执行本地事务→提交/回滚→未决消息回查
+原理：broker 存半消息对消费者不可见，本地事务失败回滚半消息，超时未决触发回查（业务实现回查接口查事务状态），本项目核对的重试机制
+用法：事务消息标准流程
+锚点：RocketMQ 文档核对
+
+</details>
+
+### 事务 · 幂等（回查）
+
+<details><summary>看背面</summary>
+
+事务消息回查必须幂等且能查到本地事务最终状态
+原理：回查可能多次发生（网络/重启），回查实现查事务记录表（与业务同库事务写入），查不到默认回滚（防悬挂）
+用法：事务消息实现细节
+锚点：实战共识
+
+</details>
+
+### 延迟 · 18 级（延迟）
+
+<details><summary>看背面</summary>
+
+RocketMQ 延迟消息 4.x 固定 18 个延迟级别（1s~2h），5.0 支持任意时间
+原理：延迟消息实现：broker 定时轮询 SCHEDULE_TOPIC，到时投递真实主题，订单超时关单/重试退避标准方案
+用法：延迟消息版本线
+锚点：RocketMQ 5.0 核对
+
+</details>
+
+### 重试 · 重试（16 次）
+
+<details><summary>看背面</summary>
+
+RocketMQ 消费失败重试 16 次（间隔递增）后进死信队列
+原理：重试队列 %RETRY% 主题，间隔按延迟级别递增（10s~2h 总约 2 小时），本项目核对的次数（16 次），之后 DLQ 人工/补偿处理
+用法：消费失败治理
+锚点：RocketMQ 文档核对
+
+</details>
+
+### 死信 · 死信队列（DLQ）
+
+<details><summary>看背面</summary>
+
+死信队列（DLQ）收纳重试耗尽的消息，人工介入或定时补偿任务消费
+原理：DLQ 消息需要监控告警（堆积=系统性失败），处理流程：告警→人工分析→修复后重投（重投也要幂等）
+用法：异常消息闭环
+锚点：实战共识
+
+</details>
+
+### 堆积 · 积压（SOP）
+
+<details><summary>看背面</summary>
+
+消息积压 SOP：定位原因（下游慢/消费者挂）→紧急扩容消费者→不行走"临时队列+批量转发"跳过重放
+原理：消费者扩容上限=分区数（Kafka），扩不动时建临时 topic 10 倍分区、旧消费者批量转发快速清积压，本项目总结的 SOP
+用法：积压故障处理框架
+锚点：实战方法论
+
+</details>
+
+### 堆积 · 分区数（上限）
+
+<details><summary>看背面</summary>
+
+Kafka 消费并行度上限等于分区数
+原理：10 分区最多 10 个有效消费者，规划分区数=峰值吞吐/单消费者能力（预留 2 倍），后期加分区影响 key 路由
+用法：容量规划公式
+锚点：实战方法论
+
+</details>
+
+### 消费 · push vs pull（模式）
+
+<details><summary>看背面</summary>
+
+Kafka/RocketMQ 是 pull（客户端拉取长轮询），RabbitMQ 是 push（服务端推送）
+原理：pull 语义消费者自主控速（防压垮），push 容易压垮慢消费者（prefetch 限流补救），长轮询（long polling）兼顾延迟与效率
+用法：消费模式原理
+锚点：实战共识
+
+</details>
+
+### 消费 · 集群广播（模式）
+
+<details><summary>看背面</summary>
+
+RocketMQ 消费模式：集群消费（分摊）与广播消费（每实例一份）
+原理：广播模式每消费者独立消费全量（如本地缓存刷新），位移不提交（重启重放），广播消息消费失败不重试
+用法：消费模式选型
+锚点：官方文档
+
+</details>
+
+### 顺序 · 锁队列（顺序消费）
+
+<details><summary>看背面</summary>
+
+RocketMQ 顺序消费：MessageListenerOrderly+broker 队列锁，单队列单线程
+原理：生产按 shardKey 路由到同一 queue，消费端锁队列保证单线程消费该队列，全局顺序仍需单队列（性能极低）
+用法：顺序消息实现机制
+锚点：官方文档
+
+</details>
+
+### 架构 · exchange（交换机）
+
+<details><summary>看背面</summary>
+
+RabbitMQ 架构：producer→exchange（交换机路由）→queue→consumer
+原理：消息先到交换机按 binding 规则路由到队列，无匹配队列则丢弃（mandatory 标记退回），与 Kafka/RocketMQ 的 topic 直投不同
+用法：架构模型差异
+锚点：官方文档
+
+</details>
+
+### 交换机 · 类型（四种）
+
+<details><summary>看背面</summary>
+
+四种 exchange：direct（精确路由）、topic（通配符）、fanout（广播）、headers（属性匹配）
+原理：topic 用 *.# 通配符（a.*.b/a.#），fanout 广播到所有绑定队列，企业级路由灵活性最高
+用法：RabbitMQ 路由模型
+锚点：官方文档
+
+</details>
+
+### 可靠 · publisher confirm（confirm）
+
+<details><summary>看背面</summary>
+
+RabbitMQ 可靠投递：publisher confirm（broker 确认）+mandatory（路由失败退回）+持久化
+原理：confirm 异步回调确认到达 broker，配合本地消息表/事务消息实现不丢投递，消费端 manual ack
+用法：投递可靠性配置
+锚点：官方文档
+
+</details>
+
+### 集群 · quorum queue（quorum）
+
+<details><summary>看背面</summary>
+
+RabbitMQ 集群：经典镜像队列（已过时推荐）→quorum queue（Raft，3.8+）
+原理：quorum 队列基于 Raft 多数派写，比镜像队列强一致且无脑裂，官方推荐替代，延迟略高
+用法：RabbitMQ 高可用演进
+锚点：官方文档
+
+</details>
+
+### 对比 · 维度（选型）
+
+<details><summary>看背面</summary>
+
+选型维度矩阵：吞吐、延迟、功能（事务/延迟/死信）、运维复杂度、生态、顺序支持
+原理：Kafka：日志流与大数据管道首选；RocketMQ：电商业务消息（事务/延迟/堆积治理）；RabbitMQ：路由复杂+低吞吐场景，P10 要给"组合使用"方案（日志 Kafka+业务 RocketMQ）
+用法：中间件组合架构思维
+锚点：实战方法论
+
+</details>
+
+### 监控 · 堆积（指标）
+
+<details><summary>看背面</summary>
+
+MQ 监控核心：堆积量（backlog）、消费延迟（lag 时间）、生产/消费速率、rebalance 频次
+原理：堆积告警阈值按下游处理能力（积压时间而非条数更有意义），rebalance 频发查 max.poll.interval 与 GC，Burrow/Kafka exporter 工具链
+用法：运维监控体系
+锚点：实战共识
+
+</details>
+
+### 运维 · 重放（回溯）
+
+<details><summary>看背面</summary>
+
+消息回溯（重放）：重置 offset 到历史位置重新消费（修复数据/补数）
+原理：前提：消息仍在保留期内（retention），重放必须幂等（重复消费），按时间/位移/时间戳重置，修复类运维利器
+用法：数据修复方案
+锚点：实战共识
+
+</details>
+
+### 运维 · 污染（治理）
+
+<details><summary>看背面</summary>
+
+MQ 治理反模式：用 MQ 当数据库（长保留+大消息）、无序滥用、topic 无人认领、消息里塞大 payload
+原理：治理规范：消息体小（<100KB，大对象存引用）、topic 按域命名与生命周期管理、消费组台账，中间件平台化治理
+用法：平台化治理规范
+锚点：实战方法论
+
+</details>
+
+### 场景 · 下游保护（削峰）
+
+<details><summary>看背面</summary>
+
+削峰设计：MQ 削掉瞬时峰值，下游按自身能力匀速消费（限流保护）
+原理：下游消费速率=安全水位（DB 写入能力），突发流量先进 MQ（容量评估：峰值×持续时间），积压告警+降级预案配套
+用法：秒杀/大促流量架构
+锚点：实战方法论
+
+</details>
+
+### 场景 · 链路（异步）
+
+<details><summary>看背面</summary>
+
+异步化改造：识别主链路与旁路（积分/通知/日志），旁路走 MQ 主链路 RT 下降
+原理：下单主链路：扣减库存+创建订单（同步事务），积分/优惠券/通知异步化（MQ），RT 从串行求和变主链路时长
+用法：性能优化方法论
+锚点：实战方法论
+
+</details>
+
+### 一致性 · 实现（本地消息表）
+
+<details><summary>看背面</summary>
+
+本地消息表：业务与消息记录同库事务，异步任务扫描投递+重试+对账
+原理：不依赖 MQ 事务消息（跨 MQ 兼容），消息表状态机（待发送/已发送/失败），与 RocketMQ 半消息对比：多一张表少一次回查实现
+用法：分布式事务方案落地
+锚点：实战共识
+
+</details>
+
+### 一致性 · 对比（事务消息）
+
+<details><summary>看背面</summary>
+
+事务消息 vs 本地消息表：半消息方案免建表但绑定 RocketMQ，本地消息表通用但多一跳
+原理：P10 答题框架：先说目标（业务与消息原子），再对比两方案实现与代价，最后给选型建议（已用 RocketMQ 选事务消息）
+用法：方案对比题
+锚点：实战方法论
+
+</details>
+
+### 一致性 · 先库后发（顺序）
+
+<details><summary>看背面</summary>
+
+业务写库与发消息的顺序：本地事务内写库+消息表，事务提交后投递（保证不丢不库不一致）
+原理：直接事务内发 MQ（网络失败回滚不一致）与先发后写（库写失败消息已出）都有洞，事务后投递+失败重试闭环
+用法：一致性实现细节
+锚点：实战共识
+
+</details>
+
+### 生产 · retries（重试）
+
+<details><summary>看背面</summary>
+
+生产者重试：retries 大值+enable.idempotence=true 组合防重试乱序
+原理：幂等开启后重试在单分区有序（序列号），未开启幂等时 max.in.flight>1 重试可能乱序，超时与重试策略按业务延迟容忍
+用法：生产端可靠性
+锚点：官方文档
+
+</details>
+
+### 消费 · 语义（poll）
+
+<details><summary>看背面</summary>
+
+poll 循环语义：max.poll.records 批量拉取，两次 poll 间隔超过 max.poll.interval 被踢出组
+原理：每批处理耗时×批数 < max.poll.interval（默认 5 分钟），慢处理拆批或调参数，被踢引发 rebalance 风暴
+用法：消费端调参核心
+锚点：官方文档
+
+</details>
+
+### 场景 · 对比（延迟队列）
+
+<details><summary>看背面</summary>
+
+延迟队列方案对比：RocketMQ 延迟消息、Redis ZSet 轮询、时间轮、DB 扫描
+原理：精度/规模/可靠性排序：RocketMQ（可靠大规模）>时间轮（内存高精度）>Redis ZSet（轻量）>DB 扫描（简单低效），本项目 Redis ZSet 实测过（轮询语义）
+用法：延迟场景方案选型
+锚点：实战方法论
+
+</details>
+
+### 场景 · 原理（时间轮）
+
+<details><summary>看背面</summary>
+
+时间轮（HashedWheelTimer）：环形数组按槽+指针推进，O(1) 插入与到期
+原理：Netty/Kafka 内部用（Kafka 延迟操作 purgatory），多层时间轮扩展时间跨度，对比优先队列（O(logN)）适合海量定时
+用法：定时调度原理
+锚点：算法原理
+
+</details>
+
+### 场景 · 全局（顺序）
+
+<details><summary>看背面</summary>
+
+全局顺序消息代价：单分区+单消费者+故障时阻塞，业务上用"局部顺序"替代
+原理：严格全局顺序吞吐极低且故障敏感性高，绝大多数业务只需同实体有序（订单内/用户内），P10 要给"降级顺序"的设计论证
+用法：顺序需求的设计权衡
+锚点：实战方法论
+
+</details>
+
+### 运维 · 设计（分区）
+
+<details><summary>看背面</summary>
+
+分区数设计：吞吐（峰值/单分区能力）+顺序需求+扩容成本综合
+原理：分区过多（上千/主题）rebalance 慢、controller 压力大、文件句柄多，经验值单主题 10-100 分区起步，预留未来 2-4 倍
+用法：容量规划
+锚点：实战共识
+
+</details>
+
+### 运维 · 角色（controller）
+
+<details><summary>看背面</summary>
+
+controller 是 Kafka 集群的大脑（选主、分区 leader 分配、故障检测）
+原理：KRaft 前 controller 依赖 ZK 选举，KRaft 后 controller quorum 内置 Raft，controller 故障切换秒级，大规模集群 controller 是瓶颈点
+用法：内部机制知识
+锚点：Kafka 3.x
+
+</details>
+
+### 运维 · 基线（压测）
+
+<details><summary>看背面</summary>
+
+MQ 压测基线：生产 TPS、端到端延迟 P99、消费 TPS、积压恢复速度
+原理：工具：Kafka 自带 perf / rocketmq-benchmark，按业务模型（消息大小/分区数/副本数）压，线上流量 <60% 基线预留
+用法：容量与稳定性依据
+锚点：实战方法论
+
+</details>
+
+### 运维 · 跨机房（容灾）
+
+<details><summary>看背面</summary>
+
+MQ 容灾：副本跨机架/机房分布（机架感知）+跨集群同步（MirrorMaker2）
+原理：机架感知防单机架故障，MirrorMaker2 双向同步做异地容灾（offset 映射与回切），同城双活架构一环
+用法：容灾体系
+锚点：实战方法论
+
+</details>
+
+### 运维 · 迁移（升级）
+
+<details><summary>看背面</summary>
+
+MQ 版本与集群迁移：双写过渡（新旧集群并行）→切读→切写→下线旧集群
+原理：客户端配置中心化（一键切换），双写期幂等（重复投递），与 MySQL 迁移双写四步法同构
+用法：平台迁移方法论
+锚点：实战方法论
+
+</details>
+
+### 安全 · ACL（权限）
+
+<details><summary>看背面</summary>
+
+MQ 安全：SASL 认证+ACL 授权（按 topic/消费组）+传输加密（TLS）
+原理：生产集群多业务共享时按 topic 授权（读写分离），防止误消费/误生产，Kafka SASL/SCRAM 与 ACL 配置
+用法：安全基线
+锚点：官方文档
+
+</details>
+
+### 设计 · 规范（消息体）
+
+<details><summary>看背面</summary>
+
+消息体设计：最小化（ID+事件类型+时间戳+必要上下文）、可追溯（traceId/消息 ID）、可扩展（版本字段）
+原理：消息体塞全量业务数据（大且耦合 schema），消费方需要就回查源库（事件通知模式），版本字段兼容消费方升级
+用法：消息契约设计
+锚点：实战方法论
+
+</details>
+
+### 设计 · 设计（幂等表）
+
+<details><summary>看背面</summary>
+
+幂等去重表设计：唯一索引（消息 ID/业务键）+状态字段+插入冲突即已处理
+原理：消费前先 insert 幂等表（冲突则跳过），与业务处理同事务（原子），表按月归档防膨胀，是 at-least-once 的标准搭档
+用法：幂等消费实现细节
+锚点：实战共识
+
+</details>
+
+### 场景 · 最大努力（通知）
+
+<details><summary>看背面</summary>
+
+最大努力通知：重试 N 次（退避）+通知对账（对方主动查）兜底
+原理：支付结果通知场景：MQ 重试+对方提供查询接口双保险，与可靠消息（本地消息表）的区别：不保证到达只保证尽力
+用法：通知类场景模式
+锚点：实战共识
+
+</details>
+
+### 运维 · 估算（容量）
+
+<details><summary>看背面</summary>
+
+MQ 容量估算：磁盘=生产速率×保留期，网络=生产+复制流量，分区 leader 分布均衡
+原理：磁盘是第一约束（7 天保留×峰值速率），网络考虑副本复制放大（acks=all 双副本×2），与 Redis/MongoDB 容量估算同方法论
+用法：容量规划方法
+锚点：实战方法论
+
+</details>
+
+### 运维 · 场景（故障）
+
+<details><summary>看背面</summary>
+
+MQ 故障场景预案：broker 宕机（副本切换）、集群不可用（本地消息表兜底缓存生产）、消费停滞（SOP 扩容）
+原理：生产侧兜底：MQ 不可用时业务降级（本地消息表暂存/直接落库），预案演练（混沌：杀 broker 验证 ISR 切换）
+用法：高可用预案
+锚点：实战方法论
+
+</details>
+
+### 运维 · 预防（积压）
+
+<details><summary>看背面</summary>
+
+积压预防：消费速率监控（趋势告警）、下游限流自适应、堆积演练（验证 SOP 可执行）
+原理：积压是结果不是原因（下游慢才是），治理视角从"清积压"转向"防积压"（容量规划+依赖治理），P10 视角
+用法：治理思维
+锚点：实战方法论
+
+</details>
+
+### 运维 · 调优（GC）
+
+<details><summary>看背面</summary>
+
+Kafka broker JVM 调优：堆 6GB 内（靠页缓存不靠堆）、G1/ZGC、避免大对象
+原理：Kafka 内存策略：页缓存为主 JVM 堆小（6G），频繁 Full GC 触发 ISR 抖动（心跳超时），版本升级（4.0 起官方推荐 ZGC）
+用法：JVM 与 MQ 联动知识
+锚点：实战共识
+
+</details>
+
+### 运维 · 压缩（压缩）
+
+<details><summary>看背面</summary>
+
+消息压缩（lz4/zstd/gzip）网络与磁盘双降，生产端压缩 broker 原样存
+原理：zstd 压缩比与速度均衡（Kafka 2.1+），批量大消息压缩收益大（批量本身就是压缩前提），消费端解压 CPU 代价
+用法：性能优化配置
+锚点：实战共识
+
+</details>
+
+### 场景 · 全链路（trace）
+
+<details><summary>看背面</summary>
+
+消息全链路追踪：消息 ID+traceId 贯穿生产→broker→消费→业务，与日志/Metrics 关联
+原理：可观测性三支柱在 MQ 场景落地：tracing（跨 MQ 传播 header）、metrics（堆积/延迟）、logs（消费日志带消息 ID），排查"消息去哪了"
+用法：可观测性落地
+锚点：实战共识
+
+</details>
+
+### 场景 · 消息灰度（灰度）
+
+<details><summary>看背面</summary>
+
+消息灰度：按灰度标记路由到灰度 topic/消费组（染色），新消费逻辑灰度验证
+原理：全链路灰度在 MQ 层的落地：生产染色（header 标记）→路由隔离→消费隔离，与 HTTP 灰度同构，是 P10 全链路压测知识的一部分
+用法：全链路灰度方案
+锚点：实战方法论
+
+</details>
+
+### 运维 · 消费限流（限流）
+
+<details><summary>看背面</summary>
+
+消费端限流：RabbitMQ prefetch（未确认数上限）、Kafka 调 max.poll.records+处理速率
+原理：下游 DB 慢时消费限流自保（防堆积转 OOM），prefetch=1 逐条处理 vs 批量权衡，限流与积压告警联动
+用法：消费保护机制
+锚点：官方文档
+
+</details>
+
+### 运维 · 策略（清理）
+
+<details><summary>看背面</summary>
+
+topic 生命周期治理：命名规范（域-事件）、按域评估保留期、废弃 topic 下线流程
+原理：失控的 topic 数量（几百个无人认领）是治理烂账，台账+命名规范+季度清理，删除前确认消费组（联动影响）
+用法：平台化治理
+锚点：实战方法论
+
+</details>
+
+### 高可用 · Dledger（Dledger）
+
+<details><summary>看背面</summary>
+
+RocketMQ 高可用演进：主从（2M-2S）→Dledger（Raft 自动切换，4.5+）
+原理：Dledger 基于 Raft 自动选主（免人工切主），与 Kafka ISR 机制对比：Raft 多数派写 vs ISR+acks，5.x  continua 迭代
+用法：高可用架构演进
+锚点：RocketMQ 4.5
+
+</details>
+
+### 运维 · 告警（监控）
+
+<details><summary>看背面</summary>
+
+告警体系：堆积（时间维度）、延迟 P99、死信新增、消费失败率、broker 磁盘与 ISR 收缩
+原理：每指标有阈值与升级路径（堆积 1h→值班/4h→升级），告警风暴防（聚合与静默），与全链路告警联动
+用法：监控告警落地
+锚点：实战方法论
+
+</details>
+
+### 设计 · 消息驱动（状态机）
+
+<details><summary>看背面</summary>
+
+消息驱动状态机：订单状态流转由事件驱动（已支付→发货→完成），消息语义=状态变更事件
+原理：事件溯源思想：消息即事实（event sourcing），消费方按事件更新本地状态机，非法状态迁移拒绝（幂等+状态校验双保险）
+用法：业务建模方法
+锚点：实战方法论
+
+</details>
+
+### 设计 · 规范（领域事件）
+
+<details><summary>看背面</summary>
+
+领域事件规范：事件命名（过去时 OrderPaid）、payload 最小化、事件版本化、消费方契约测试
+原理：DDD 事件驱动集成：上下文间用事件通信（防腐层转换），契约变更走版本（v1/v2 并存），P10 架构评审维度
+用法：架构设计规范
+锚点：实战方法论
+
+</details>
+
+### 运维 · 方法论（复盘）
+
+<details><summary>看背面</summary>
+
+MQ 故障复盘模板：时间线（发现/定位/恢复）、根因（配置/容量/代码）、行动项（监控/预案/治理）
+原理：堆积、丢失、乱序三类故障各有典型根因模式，复盘产出 SOP 更新与监控补点，与全系统故障复盘框架一致
+用法：稳定性方法论
+锚点：实战方法论
+
+</details>
+
+### 运维 · leader 偏斜（均衡）
+
+<details><summary>看背面</summary>
+
+Kafka leader 偏斜：分区 leader 集中在少数 broker（流量不均）
+原理：auto.leader.rebalance.enable 默认开，手动 Preferred leader election 修正，broker 负载监控（入流量分布），扩容后偏斜常见
+用法：集群运维细节
+锚点：实战共识
+
+</details>
+
+### 运维 · 客户端（OOM）
+
+<details><summary>看背面</summary>
+
+Kafka 客户端 OOM：max.poll.records 过大+消息大（批量内存），或消费者积压内存缓冲膨胀
+原理：控制批大小与消息体、消费者内存监控，fetch.max.bytes 限制单次拉取，客户端也是要调优的 JVM
+用法：客户端稳定性
+锚点：实战共识
+
+</details>
+
+### 运维 · 混沌（演练）
+
+<details><summary>看背面</summary>
+
+MQ 混沌演练：杀 broker（验证切换与生产重试）、断网分区（验证幂等）、塞大消息（验证防御）
+原理：每场景验证：监控告警触发、降级生效、SOP 可执行，演练报告与预案更新闭环，季度常态化
+用法：稳定性体系
+锚点：实战方法论
+
+</details>
+
+### 面试 · 复习（主线）
+
+<details><summary>看背面</summary>
+
+MQ 复习主线：语义（不丢/不重/有序）→Kafka 机制（ISR/ack/rebalance）→RocketMQ 特色（事务/延迟）→堆积 SOP→方案对比（事务消息/延迟队列/选型）
+原理：语义与不丢链条是 P7 基本盘，机制细节是 P8，方案对比与容量治理是 P9-P10 综合题，与缓存/DB 一致性知识联动
+用法：复习时间分配
+锚点：复习方法论
+
+</details>
+
+### 场景 · 组合（电商）
+
+<details><summary>看背面</summary>
+
+电商消息架构组合：交易用 RocketMQ（事务/延迟/顺序），日志与行为流用 Kafka（吞吐），通知用最大努力通知
+原理：按消息特征分平台（业务事件/数据流/通知），统一接入层屏蔽差异（消息网关），是大型电商的 MQ 拓扑
+用法：P10 架构组合题
+锚点：实战方法论
+
+</details>
+
+### 语义 · 根因（重复）
+
+<details><summary>看背面</summary>
+
+重复消费根因：消费后位移未提交（rebalance/重启）、生产重试（broker 已收）、回放（人工重置）
+原理：重复是常态设计消费幂等而非消除重复，按根因分类监控（提交丢失率），幂等方案按业务分级（状态机/唯一键/Redis）
+用法：语义根因分析
+锚点：实战共识
+
+</details>
+
+### 语义 · 根因（丢失）
+
+<details><summary>看背面</summary>
+
+消息丢失根因：生产 acks 不当、broker 副本不足刷盘问题、消费先提交后处理、保留期误删
+原理：丢失排查链条：确认哪环节（监控+日志对账），按环节修配置（acks/副本/提交顺序），对账工具（生产条数 vs 消费条数）
+用法：丢失根因闭环
+锚点：实战共识
+
+</details>
+
+### 运维 · 工具（对账）
+
+<details><summary>看背面</summary>
+
+消息对账工具：生产/消费计数对比（时间窗）、抽样内容比对、死信率看板
+原理：对账是"不丢不重"的最终验证（配置不可信只有对账可信），准实时（5 分钟窗）+日终全量，异常进入修复流程
+用法：可靠性验证
+锚点：实战方法论
+
+</details>
+
+### 场景 · 一致性（库存）
+
+<details><summary>看背面</summary>
+
+库存扣减与消息：先 Redis 预扣（Lua）→MQ 异步下单→DB 最终扣减，对账兜底回补
+原理：超卖防御三层：Redis 原子预扣（挡流量）、DB 乐观锁兜底、对账修复不一致，MQ 在中间削峰与解耦下单流程，本项目秒杀架构总结
+用法：秒杀一致性闭环
+锚点：实战方法论
+
+</details>
+
+### 场景 · 超时（订单）
+
+<details><summary>看背面</summary>
+
+订单超时关单方案对比：RocketMQ 延迟消息（推荐）、Redis ZSet 轮询、DB 扫描、时间轮
+原理：延迟消息精确可靠（broker 持久化），ZSet 轻量但轮询有延迟，DB 扫描简单但压力线性，关单幂等（状态机校验已支付不关）
+用法：延迟场景落地
+锚点：实战方法论
+
+</details>
+
+### 场景 · 异步（积分）
+
+<details><summary>看背面</summary>
+
+积分发放异步链路：交易事件 MQ→积分服务消费（幂等+重试+死信）→失败补偿任务
+原理：旁路业务失败不影响主链路（MQ 隔离），重试耗尽进死信人工/自动补偿，对账（交易流水 vs 积分流水），旁路可靠性框架
+用法：旁路可靠性设计
+锚点：实战共识
+
+</details>
+
+### 运维 · 操作（审计）
+
+<details><summary>看背面</summary>
+
+MQ 操作审计：topic 创建/删除、ACL 变更、配置变更全留痕（平台化操作）
+原理：误删 topic（消费组全部失联）是重大事故源，平台化操作+审批流+操作回放，与 DB 变更规范同构
+用法：生产纪律
+锚点：实战方法论
+
+</details>
+
+### 运维 · 方向（平台化）
+
+<details><summary>看背面</summary>
+
+MQ 平台化：自助申请（topic/消费组）、监控看板（按业务）、容量自动均衡、SLA 分级
+原理：开发者不碰集群（平台屏蔽），按 SLA 分级资源（核心交易/普通业务），是大型组织 MQ 治理终态，与 DB/缓存平台化同构
+用法：组织与架构协同
+锚点：实战方法论
+
+</details>
+
+### 运维 · 优化（成本）
+
+<details><summary>看背面</summary>
+
+MQ 成本优化：压缩省磁盘网络、保留期按需缩短、冷数据分层（分级存储 Kafka tiered storage）
+原理：Kafka tiered storage（3.6+）热数据本地冷数据对象存储，磁盘成本大降，保留期治理（日志类 1 天），与缓存/DB 成本优化同方法论
+用法：成本治理
+锚点：Kafka 3.6
+
+</details>
+
+### 面试 · 答题（主线）
+
+<details><summary>看背面</summary>
+
+MQ 综合答题框架：先说选型（特征匹配）→可靠性与顺序设计→故障治理（堆积/丢失 SOP）→容量与成本→平台化演进
+原理：P10 回答从"会用"升级到"治理与演进"（SLA/成本/组织协同），每层有数据支撑（压测基线/监控大盘），禁绝对化（"保证不丢"要带条件）
+用法：答题方法论
+锚点：实战方法论
+
+</details>
+
+### 运维 · reset-offsets（位移）
+
+<details><summary>看背面</summary>
+
+kafka-consumer-groups --reset-offsets 支持按时间/位移/最早最晚重置消费组位移
+原理：重置前消费组需停（活跃组拒绝重置），按 --to-datetime 修复数据（补数）标准动作，重放消费必须幂等（MQ-022 联动）
+用法：补数/修复标准流程
+锚点：官方文档
+
+</details>
+
+### 高可用 · unclean election（选主）
+
+<details><summary>看背面</summary>
+
+unclean.leader.election.enable=false（默认）禁止非 ISR 副本当 leader 宁可分区不可用
+原理：非干净选主会丢 ISR 未同步的消息（可用性换一致性），关闭是"不丢消息"链（MQ-021）的 broker 端一环，开启是日志类可容忍场景的权衡
+用法：一致性与可用性权衡题
+锚点：官方文档
+
+</details>
+
+### 运维 · 消息轨迹（轨迹）
+
+<details><summary>看背面</summary>
+
+RocketMQ 消息轨迹（trace）记录消息从生产到消费全链路（生产耗时/消费耗时/状态）
+原理：开启 traceConsume/traceTopic 后自动记录轨迹便于定位"消息去哪了"，轨迹主题额外占用存储（采样或独立集群），与 traceId 体系互补
+用法：排查消息丢失辅助手段
+锚点：RocketMQ 文档
+
+</details>
+
+### 运维 · quota（限速）
+
+<details><summary>看背面</summary>
+
+Kafka client quota 按 clientId/user 限速（生产/消费带宽与请求时间占比）
+原理：防单业务打满 broker 网卡（多租户隔离），配额动态生效（kafka-configs 命令），超限被节流而非拒绝，与网关限流分层
+用法：多租户 MQ 治理
+锚点：官方文档
+
+</details>
+
+### 设计 · 全局唯一（消息 ID）
+
+<details><summary>看背面</summary>
+
+消息 ID 全局唯一且进日志（消息体+业务键），生产端记录"发送 ID 清单"支撑对账
+原理：ID 用于幂等去重、轨迹串联与对账比对（生产条数 vs 消费条数），ID 生成用雪花或 MQ 自带 messageId（RocketMQ 自带唯一），不生成则丢失排查无从下手
+用法：可观测性设计规范
+锚点：实战共识
+
+</details>
+
+### 存储 · 日志压实（compact）
+
+<details><summary>看背面</summary>
+
+log.cleanup.policy=compact 按 key 保留每个 key 最新值（状态快照主题）
+原理：适合"最新状态"数据（K/V：配置表/状态表/数据库变更 CDC 主题），与 delete 策略共存（compact+delete），消费方总是拿到每个 key 最新状态
+用法：CDC/状态同步主题设计
+锚点：官方文档
+
+</details>
+
+### 架构 · GroupCoordinator（协调）
+
+<details><summary>看背面</summary>
+
+每个消费组由一个 broker 担任 GroupCoordinator 管理成员与位移提交
+原理：coordinator 按组名哈希分配到 broker，心跳/加入组/位移提交都经它，coordinator 宕机组重新加入（短暂暂停），大规模消费组时 coordinator 是均衡关注点
+用法：消费组内部机制
+锚点：官方文档
+
+</details>
+
+### 场景 · 订单场景（组合）
+
+<details><summary>看背面</summary>
+
+订单场景组合：事务消息保证"订单+消息"原子，延迟消息做超时关单，顺序消息保单内状态流
+原理：三种消息能力在同一业务协同（支付成功事务消息→积分；下单 30 分钟延迟→关单；单内操作按 orderId 顺序），是 RocketMQ 功能组合的典型架构题
+用法：订单架构综合设计题
+锚点：实战方法论
+
+</details>
+
+### 语义 · 组合方案（矩阵）
+
+<details><summary>看背面</summary>
+
+顺序与幂等的组合矩阵：不要求顺序→幂等即可；同实体有序→分区键+幂等；强顺序→单分区+单消费者+幂等
+原理：每档性能递减，业务先证"是否真需要强顺序"（多数只需同实体），幂等是所有档位的公共底线，选型矩阵化回答是 P10 风格
+用法：顺序需求决策树
+锚点：实战方法论
+
+</details>
+
+### 运维 · 大促预案（应急）
+
+<details><summary>看背面</summary>
+
+大促 MQ 应急：生产端限流（开关降级非核心消息）、消费端扩容 SOP、堆积白名单（可丢弃消息类型预案）
+原理：预案分级：核心交易消息必须可达（本地消息表兜底）、统计类消息可丢弃降级，预案演练验证（杀 broker/模拟堆积），与降级预案（DF-026）联动
+用法：大促备战清单
+锚点：实战方法论
+
+</details>
+
+
+## 分布式（110 张）
+
+### 理论 · CAP（CAP）
+
+<details><summary>看背面</summary>
+
+CAP 三选二是分区发生时的选择：CP 保一致牺牲可用、AP 保可用容忍暂时不一致
+原理：网络分区（P）在分布式系统必然发生无法取舍，实际是在 C 与 A 之间权衡（如注册中心选型）
+用法：架构选型第一理论
+锚点：理论共识
+
+</details>
+
+### 理论 · ZooKeeper（CP）
+
+<details><summary>看背面</summary>
+
+CP 场景代表：ZooKeeper/etcd（协调类：锁、配置、选主）
+原理：协调服务要求强一致（锁不能双持），牺牲分区时的可用性（少数派不可用）
+用法：协调组件选型依据
+锚点：理论共识
+
+</details>
+
+### 理论 · 注册中心（AP）
+
+<details><summary>看背面</summary>
+
+AP 场景代表：服务注册中心（Eureka/Nacos AP 模式）
+原理：注册中心短暂不一致可容忍（客户端缓存+重试兜底），可用性优先保证服务调用不断
+用法：服务发现选型论证
+锚点：理论共识
+
+</details>
+
+### 理论 · BASE（BASE）
+
+<details><summary>看背面</summary>
+
+BASE 理论：基本可用（Basically）、软状态（Soft）、最终一致（Eventually）
+原理：AP 路线的工程化表述：接受中间状态最终收敛，互联网大规模系统的主流选择（与 ACID 对比）
+用法：最终一致性方案的理论基础
+锚点：理论共识
+
+</details>
+
+### 一致性 · 2PC（2PC）
+
+<details><summary>看背面</summary>
+
+2PC（两阶段提交）：投票（prepare）+执行（commit），协调者单点且阻塞
+原理：prepare 后参与者锁定资源等待协调者指令，协调者宕机参与者阻塞（3PC 加超时缓解但仍有问题），XA 是数据库层实现
+用法：强一致事务的成本认知
+锚点：理论共识
+
+</details>
+
+### 一致性 · 3PC（3PC）
+
+<details><summary>看背面</summary>
+
+3PC 增加超时与 preCommit 阶段缓解阻塞但未解决数据不一致
+原理：超时让参与者自行中止（不再永久阻塞），但协调者与参与者超时决策不同步仍可能不一致，工程上少用（选 Paxos/Raft 或 2PC 变体）
+用法：协议演进知识
+锚点：理论共识
+
+</details>
+
+### 一致性 · Paxos（Paxos）
+
+<details><summary>看背面</summary>
+
+Paxos 是分布式一致性的理论基石（多数派+提案编号）
+原理：Basic Paxos 单值共识，Multi-Paxos 多值（日志），工程实现少（难懂难实现），Raft 是其工程化替代
+用法：理论深度题
+锚点：理论共识
+
+</details>
+
+### 一致性 · Raft（Raft）
+
+<details><summary>看背面</summary>
+
+Raft 把共识拆解为 leader 选举、日志复制、安全性三个子问题易理解易实现
+原理：leader 全权管理日志复制（follower 被动接收），term 单调递增保证时序，工业界主流（etcd/TiKV/Dledger），本项目 AQS/Redis/MySQL 知识多处关联
+用法：共识协议的工程标准答案
+锚点：Raft 论文
+
+</details>
+
+### 一致性 · 选举（Raft）
+
+<details><summary>看背面</summary>
+
+Raft 选举：随机选举超时（150-300ms）避免瓜分选票，多数派投票任期生效
+原理：随机超时打散候选人发起时机，收到多数派投票成为 leader，term 小的投票作废
+用法：Raft 机制细节
+锚点：Raft 论文
+
+</details>
+
+### 一致性 · 日志复制（Raft）
+
+<details><summary>看背面</summary>
+
+Raft 日志复制：leader 接收写→追加本地→并行发给 followers→多数派确认才提交
+原理：客户端写只经 leader（follower 写请求重定向），提交后 apply 到状态机，日志一致性靠 term+index 匹配检查
+用法：Raft 写路径
+锚点：Raft 论文
+
+</details>
+
+### 一致性 · 成员变更（Raft）
+
+<details><summary>看背面</summary>
+
+Raft 成员变更用单步变更（one-server change）避免脑裂
+原理：一次只增删一个成员（新旧多数派必相交），联合共识（joint consensus）是复杂方案，工程实现（etcd）用单步变更
+用法：集群运维与协议细节
+锚点：Raft 论文
+
+</details>
+
+### 一致性 · 脑裂（脑裂）
+
+<details><summary>看背面</summary>
+
+脑裂（网络分区两主）靠多数派机制防御：少数派分区无法成为有效 leader
+原理：Raft/ZK 中获多数派才有效，旧 leader 降级靠 term 检查（高 term 拒绝低 term 写），fencing token 是应用层防御
+用法：分区故障防御
+锚点：实战共识
+
+</details>
+
+### 一致性 · lease（租约）
+
+<details><summary>看背面</summary>
+
+租约（lease）：授予带时限的权力（如 master 身份、缓存有效期）
+原理：租约内假设时钟偏差可控，超时需重新获取，是"时间换一致性"的工程技巧，时钟回拨/快进是租约的隐患
+用法：master 选举与缓存有效期设计
+锚点：实战共识
+
+</details>
+
+### 一致性 · Quorum（NWR）
+
+<details><summary>看背面</summary>
+
+NWR：N 副本写 W 份读 R 份，W+R>N 保证读写不交错
+原理：Dynamo 风格：W=N R=1 强一致写、W=1 R=1 高性能可容忍不一致（读修复），可调旋钮
+用法：多副本可调一致性设计
+锚点：Dynamo 论文
+
+</details>
+
+### 数据 · 虚拟节点（一致性哈希）
+
+<details><summary>看背面</summary>
+
+一致性哈希环+虚拟节点（物理节点映射 100-200 个虚拟点）平衡负载
+原理：普通哈希节点增删导致全量重映射（模数变化），一致性哈希只迁移相邻区间（1/n），虚拟节点解决节点少时的数据倾斜
+用法：分片路由基础算法
+锚点：实战共识
+
+</details>
+
+### 数据 · 时钟偏差（时钟）
+
+<details><summary>看背面</summary>
+
+跨机时钟不可信（NTP 偏差毫秒级+跳变），分布式排序不能依赖本地时钟
+原理：NTP 校准是渐进的且可能跳变（闰秒/校正），单机序列号方案（雪花）撞时钟回拨，全局有序需 TSO/HLC
+用法：时钟问题的架构认知
+锚点：实战共识
+
+</details>
+
+### 数据 · TSO（时钟）
+
+<details><summary>看背面</summary>
+
+TSO（中心授时服务）：集中节点发放全局时间戳（TiDB PD）
+原理：简单可靠保证全局有序，瓶颈在授时节点（批量授时缓解）与单点（多副本），Spanner 用 TrueTime（GPS+原子钟）去中心授时
+用法：全局有序时间戳两路线
+锚点：实战共识
+
+</details>
+
+### 数据 · HLC（时钟）
+
+<details><summary>看背面</summary>
+
+HLC（混合逻辑时钟）：物理时间+逻辑计数器，因果有序且接近物理时间
+原理：本地无中心授时也能因果排序（比较物理部分再逻辑部分），CockroachDB/Yugabyte 采用，是对 TSO 单点的改良
+用法：时钟方案对比
+锚点：实战共识
+
+</details>
+
+### 可靠性 · 设计（幂等）
+
+<details><summary>看背面</summary>
+
+幂等设计三段式：唯一标识（token/业务键）+存储判重（DB 唯一索引/Redis）+状态机校验
+原理：接口层 token 防重、服务层唯一键兜底、业务层状态机（已完成订单不可重复处理），三层组合覆盖并发与重复所有窗口
+用法：可靠性的地基
+锚点：实战共识
+
+</details>
+
+### 可靠性 · 风暴（重试）
+
+<details><summary>看背面</summary>
+
+重试风暴：下游故障时全上游无限重试放大流量（指数级）
+原理：防御：指数退避+jitter（随机抖动打散）、重试预算（上限）、熔断（停止重试），重试要有幂等前提
+用法：故障放大链条认知
+锚点：实战共识
+
+</details>
+
+### 可靠性 · jitter（退避）
+
+<details><summary>看背面</summary>
+
+指数退避+jitter：delay=base×2^n 加随机抖动，避免重试同步扎堆
+原理：无抖动的退避让所有客户端同一时刻重试（thundering herd），AWS SDK 默认 full jitter，jitter 是退避算法的标配
+用法：重试策略实现细节
+锚点：AWS 架构博客
+
+</details>
+
+### 可靠性 · 三态（熔断）
+
+<details><summary>看背面</summary>
+
+熔断器三态：closed（正常）→open（错误率超阈跳闸）→half-open（试探恢复）
+原理：open 期间快速失败不调下游（保护下游与自身），half-open 放少量请求探测，失败再回 open，Sentinel/Resilience4j 实现
+用法：雪崩防护核心机制
+锚点：实战共识
+
+</details>
+
+### 可靠性 · Sentinel（对比）
+
+<details><summary>看背面</summary>
+
+Sentinel vs Hystrix：Sentinel（阿里，流控规则丰富+控制台+滑动窗口实时统计，Hystrix 已停更）
+原理：Sentinel 支持 QPS/线程数/关联/链路限流与热点参数限流，Hystrix 线程池隔离重（开销大）已进维护模式，国内新项目默认 Sentinel
+用法：组件选型
+锚点：实战共识
+
+</details>
+
+### 可靠性 · 四算法（限流）
+
+<details><summary>看背面</summary>
+
+限流四算法：固定窗口（简单有临界问题）、滑动窗口（平滑）、漏桶（恒定速率）、令牌桶（允许突发）
+原理：固定窗口临界双倍流量（窗口交界），滑动窗口细分小窗口统计，漏桶整形恒速、令牌桶蓄水允许突发，网关层与接口层常配
+用法：限流算法八股
+锚点：实战共识
+
+</details>
+
+### 可靠性 · 集群（限流）
+
+<details><summary>看背面</summary>
+
+集群限流：中心化（Redis 计数/token server）vs 单机限流叠加
+原理：单机限流各实例独立（总量=阈值×实例数漂移），集群限流用 Redis+Lua 或 Sentinel token server（集中发令牌），精确但中心有瓶颈
+用法：限流精度架构
+锚点：实战共识
+
+</details>
+
+### 可靠性 · 预案（降级）
+
+<details><summary>看背面</summary>
+
+降级预案分级：非核心功能开关（推荐/评论）、读降级（缓存/默认值）、写降级（削峰排队），预案平台一键执行
+原理：预案是容量不足时的主动选择（而非被动崩溃），预案需演练验证（开关真实生效），大促预案清单化
+用法：稳定性工程体系
+锚点：实战方法论
+
+</details>
+
+### 可靠性 · 舱壁（隔离）
+
+<details><summary>看背面</summary>
+
+隔离（舱壁模式）：线程池/连接池/信号量按业务隔离防级联拖垮
+原理：一个慢下游只耗尽自己的资源池（线程池/连接池），不传染其他业务，Sentinel 并发隔离/线程池隔离实现，与全局限流互补
+用法：雪崩传播阻断
+锚点：实战共识
+
+</details>
+
+### 可靠性 · 预算（超时）
+
+<details><summary>看背面</summary>
+
+超时预算沿调用链传递：入口 3s→各层分配（DB 500ms/RPC 800ms），总预算不超
+原理：内层超时大于外层剩余时间则外层白等（浪费资源），grpc/context deadline 传播标准做法，超时配置要全链路对齐评审
+用法：超时治理体系
+锚点：实战共识
+
+</details>
+
+### 服务发现 · 注册中心（机制）
+
+<details><summary>看背面</summary>
+
+服务发现：提供者注册→消费者订阅（推送/拉取）→本地缓存+心跳保活
+原理：注册中心故障时客户端本地缓存兜底（降级仍可调用已知实例），心跳剔除假活实例，推拉结合（首次拉取+变更推送）
+用法：服务发现全链路机制
+锚点：实战共识
+
+</details>
+
+### 服务发现 · 双模式（Nacos）
+
+<details><summary>看背面</summary>
+
+Nacos 支持 AP（临时实例，Distro 协议）与 CP（持久实例，Raft）双模式
+原理：临时实例（心跳续期，服务发现场景 AP）与持久实例（配置/数据库类 CP），按实例类型自动切换，是 Nacos 的设计亮点
+用法：注册中心选型细节
+锚点：Nacos 文档
+
+</details>
+
+### 协调 · watch（etcd）
+
+<details><summary>看背面</summary>
+
+etcd：Raft 强一致 KV+watch 机制（变更推送）
+原理：K8s 的基石（所有组件存 etcd），watch 基于 revision 增量推送，mvcc 多版本支持历史读，与 ZK 对比：更轻更云原生
+用法：云原生协调服务
+锚点：实战共识
+
+</details>
+
+### 协调 · 模型（ZooKeeper）
+
+<details><summary>看背面</summary>
+
+ZooKeeper：znode 树+watch（一次性触发）+临时节点+顺序节点
+原理：watch 一次性（再注册），临时节点会话断开自动删除（服务发现/锁基础），顺序节点单调递增（公平锁/选主）
+用法：ZK 核心机制
+锚点：实战共识
+
+</details>
+
+### 协调 · 羊群效应（ZK）
+
+<details><summary>看背面</summary>
+
+ZK 分布式锁：临时顺序节点+只 watch 前一个节点（防羊群效应）
+原理：全部 watch 同一锁节点则释放时唤醒所有等待者（羊群），顺序节点让每个客户端只关注自己前驱，公平且唤醒精准
+用法：ZK 锁实现细节
+锚点：实战共识
+
+</details>
+
+### 协调 · CP 代价（ZK）
+
+<details><summary>看背面</summary>
+
+ZK 的 CP 代价：半数以上节点不可用则集群不可用（不服务读）
+原理：ZK 保证一致性（少数派不提供读写），leader 选举期间不可用（秒级），与 AP 注册中心的可用性差异是选型核心
+用法：协调服务可用性权衡
+锚点：实战共识
+
+</details>
+
+### 锁 · 三选一（对比）
+
+<details><summary>看背面</summary>
+
+分布式锁对比：Redis（AP 高性能可能丢锁）、ZK/etcd（CP 可靠但慢）、DB（唯一行锁简单）
+原理：按业务分级：防重执行用 Redis（效率锁），强互斥（资金）用 ZK/etcd 或 DB 乐观锁（正确性锁），P10 观点：Redis 锁的正确性争议决定了它只适合效率场景
+用法：锁选型论证框架
+锚点：实战方法论
+
+</details>
+
+### 锁 · fencing token（fencing）
+
+<details><summary>看背面</summary>
+
+fencing token：锁服务发放单调递增令牌，下游校验拒绝旧令牌写入
+原理：GC 停顿/时钟偏差下持锁者可能"复活"过期写入，令牌单调递增让下游识别过期持有者（Martin Kleppmann 方案），彻底解决需下游支持
+用法：锁正确性的终极方案
+锚点：学术共识
+
+</details>
+
+### 网关 · 网关（职责）
+
+<details><summary>看背面</summary>
+
+API 网关职责：路由、鉴权、限流、灰度、协议转换、可观测统一入口
+原理：南北向流量统一治理（改配置不改业务），性能要求高（Netty 异步/WebFlux），Spring Cloud Gateway/Zuul/APISIX 对比
+用法：流量入口架构
+锚点：实战共识
+
+</details>
+
+### 网关 · 异步（性能）
+
+<details><summary>看背面</summary>
+
+网关性能关键：全链路异步非阻塞（Netty 事件驱动），线程模型不阻塞 IO
+原理：同步网关（Servlet 阻塞）线程数=并发数撑不住长连接与慢下游，异步网关少量线程处理海量连接，与 WebFlux 同理
+用法：网关选型性能维度
+锚点：实战共识
+
+</details>
+
+### 网关 · 路由（灰度）
+
+<details><summary>看背面</summary>
+
+动态路由：路由规则存配置中心实时下发（不重启生效），按 header/权重路由
+原理：灰度发布的基础设施：金丝雀（少量流量到新版本）、按用户/地域路由，规则热更新是网关标配
+用法：发布体系支撑
+锚点：实战共识
+
+</details>
+
+### RPC · 调用链（原理）
+
+<details><summary>看背面</summary>
+
+RPC 原理：动态代理拦截调用→序列化→网络传输→服务端反序列化→反射调用→原路返回
+原理：与本地调用的差异全在这条链（网络不可靠/超时/序列化），理解链路才能定位"RPC 无故失败"，Dubbo/Feign/gRPC 都是此模型
+用法：RPC 基础八股
+锚点：实战共识
+
+</details>
+
+### RPC · 架构（Dubbo）
+
+<details><summary>看背面</summary>
+
+Dubbo 架构：注册中心+Provider/Consumer+Monitor，动态代理+SPI 扩展
+原理：分层设计（协议层/交换层/传输层），SPI 微内核插件化（扩展点全开放），3.x 转向应用级服务发现（兼容云原生）
+用法：Dubbo 架构演进
+锚点：Dubbo 3.x
+
+</details>
+
+### RPC · SPI（Dubbo）
+
+<details><summary>看背面</summary>
+
+Dubbo SPI 增强：按 key 加载（@SPI/@Adaptive）、IOC 与 AOP 注入扩展、自适应扩展类
+原理：Java 原生 SPI 全量加载低效，Dubbo 按 name 惰性加载+运行时自适应（URL 参数选实现），微内核架构的教科书实现
+用法：框架设计能力题
+锚点：Dubbo 源码
+
+</details>
+
+### RPC · protobuf（gRPC）
+
+<details><summary>看背面</summary>
+
+gRPC：HTTP/2 多路复用+protobuf 二进制序列化（跨语言 IDL）
+原理：HTTP/2 流复用单连接并发多请求，protobuf 体积小解析快（IDL 生成强类型代码），云原生与跨语言场景主流
+用法：跨语言 RPC 选型
+锚点：实战共识
+
+</details>
+
+### RPC · 选型（序列化）
+
+<details><summary>看背面</summary>
+
+序列化选型：JSON（可读通用慢）、Protobuf（紧凑跨语言）、Hessian（Java 生态）、Kryo（快但不跨语言）
+原理：考量维度：体积/速度/兼容性（字段增删）/跨语言/安全性（反序列化漏洞），Java 内部 Hessian/Kryo，对外 API JSON，跨服务 Protobuf
+用法：序列化安全与性能
+锚点：实战共识
+
+</details>
+
+### RPC · 对比（HTTP）
+
+<details><summary>看背面</summary>
+
+HTTP 与 RPC 对比：HTTP 通用（跨语言零成本）语义弱，RPC 定制化（长连接/压缩/治理）性能好
+原理：外部开放 API 用 HTTP/REST，内部微服务 RPC（治理：超时/重试/负载均衡内建），REST 演进（HATEOAS）国内少用
+用法：通信选型论证
+锚点：实战共识
+
+</details>
+
+### 负载均衡 · 算法（算法）
+
+<details><summary>看背面</summary>
+
+负载均衡算法：轮询/加权轮询/随机/最少活跃调用/一致性哈希/响应时间加权
+原理：最少活跃（Dubbo 默认）让慢节点少接流量（自适应），一致性哈希保会话亲和，权重适配机器异构
+用法：负载均衡策略题
+锚点：实战共识
+
+</details>
+
+### 负载均衡 · 客户端（位置）
+
+<details><summary>看背面</summary>
+
+客户端负载均衡（进程内：Dubbo/Ribbon 拉列表自选）vs 服务端（LVS/Nginx/网关）
+原理：客户端少一跳延迟且可业务感知（最少活跃），服务端集中治理（与业务解耦），Service Mesh 把 LB 移到 sidecar
+用法：LB 架构位置选型
+锚点：实战共识
+
+</details>
+
+### 治理 · 下发（配置）
+
+<details><summary>看背面</summary>
+
+服务治理配置（超时/重试/熔断）经配置中心下发动态生效
+原理：规则变更免发版（生产事故应急第一手段：改超时/摘流量），配置中心是治理的载体，配置灰度与回滚同样重要
+用法：治理平台化
+锚点：实战共识
+
+</details>
+
+### 配置中心 · 长轮询（机制）
+
+<details><summary>看背面</summary>
+
+配置中心推送机制：长轮询（Nacos 默认，30s 挂起）vs 长连接（gRPC/Watch）
+原理：长轮询兼容性好实现简单（HTTP），长连接实时性最强（变更毫秒级推送），配置变更监听是热更新的基础
+用法：配置热更新机制
+锚点：实战共识
+
+</details>
+
+### 发布 · 金丝雀（灰度）
+
+<details><summary>看背面</summary>
+
+灰度发布（金丝雀）：小流量验证→逐步放量→全量，回滚成本低
+原理：放量阶梯（1%→10%→50%→100%）与观察指标（错误率/RT）联动，网关路由+注册中心元数据实现，与蓝绿发布对比（两套环境瞬时切换成本高）
+用法：发布方法论
+锚点：实战共识
+
+</details>
+
+### 发布 · 全链路灰度（染色）
+
+<details><summary>看背面</summary>
+
+全链路灰度：流量染色（header/用户标记）贯穿网关→RPC→MQ→DB（影子表）
+原理：单服务灰度不够（跨服务组合验证），染色标识在每跳传递（HTTP header/RPC attachment/MQ 属性），数据层影子表隔离，大厂发布标配
+用法：全链路发布体系
+锚点：实战方法论
+
+</details>
+
+### 压测 · 影子库（全链路）
+
+<details><summary>看背面</summary>
+
+全链路压测：流量染色+影子库/影子表（压测数据隔离）+旁路验证（DB 写隔离）
+原理：压测数据写真实库会污染生产，影子表（同库不同表）或影子库（独立实例）承接压测写，读流量正常回源，大促前容量验证必备
+用法：容量验证体系
+锚点：实战方法论
+
+</details>
+
+### 可观测 · trace（追踪）
+
+<details><summary>看背面</summary>
+
+分布式追踪：traceId 贯穿全链路，span 记录每跳（服务/耗时/状态），context 跨进程传播
+原理：span 树还原调用拓扑，异步/MQ 传播需显式处理（header/attachment），traceId 进日志（MDC）串联，排查"哪个服务慢了"的钥匙
+用法：可观测性支柱一
+锚点：实战共识
+
+</details>
+
+### 可观测 · OpenTelemetry（标准）
+
+<details><summary>看背面</summary>
+
+OpenTelemetry（OTel）：统一 traces/metrics/logs 三支柱 API+SDK+Collector
+原理：厂商中立标准（对接 Jaeger/Prometheus 等），自动埋点（agent）+手动埋点互补，替代各厂商私有 SDK，云原生观测标准
+用法：观测体系标准化
+锚点：OTel 规范
+
+</details>
+
+### 可观测 · 采样（采样）
+
+<details><summary>看背面</summary>
+
+追踪采样策略：头部采样（入口决定，成本低丢信息）vs 尾部采样（收集后按特征保留异常 trace）
+原理：全量采集成本高（存储/网络），头部按比例（1%），尾部保留全异常（错误/慢 trace）但需缓冲，生产常用头部+错误强制保留
+用法：观测成本工程
+锚点：实战共识
+
+</details>
+
+### SRE · 错误预算（SLO）
+
+<details><summary>看背面</summary>
+
+SLA/SLO/SLI：SLI 指标（延迟 P99/错误率）→SLO 目标（99.9%）→SLA 对外承诺+赔偿，错误预算=1-SLO
+原理：错误预算是"允许失败额度"：用完冻结发布保稳定（Google SRE 实践），SLO 要少而关键（3-5 个），对外 SLA 承载商业承诺
+用法：稳定性目标管理
+锚点：Google SRE
+
+</details>
+
+### SRE · MTTR（指标）
+
+<details><summary>看背面</summary>
+
+MTBF（平均故障间隔）/MTTR（平均恢复时间）构成可用性方程：可用性∝MTBF/(MTBF+MTTR)
+原理：提升可用性两路：减少故障（MTBF↑）与快速恢复（MTTR↓），现代实践重 MTTR（故障不可避免，1 分钟恢复优于 1 月无故障+1 小时恢复）
+用法：稳定性方法论
+锚点：Google SRE
+
+</details>
+
+### 容灾 · 同城双活（多活）
+
+<details><summary>看背面</summary>
+
+容灾演进：同城双机房（低延迟同步）→同城双活→异地多活（单元化）
+原理：同城双活 RTO 分钟级（专线延迟低），异地多活抗城市级故障（单元化分用户路由），成本随级别指数增长（按业务价值选级）
+用法：容灾架构分级
+锚点：实战方法论
+
+</details>
+
+### 容灾 · LDC（单元化）
+
+<details><summary>看背面</summary>
+
+单元化（set 化/LDC）：按用户分片（ID 尾号/基因）把"流量+数据"封闭在单元内
+原理：单元内闭环（调用/存储本地完成）异地多单元对等部署，故障时切流（单元级切换），蚂蚁 LDC 是代表实现，数据层按分片键单元化
+用法：异地多活的核心技术
+锚点：实战方法论
+
+</details>
+
+### 容灾 · 冲突（同步）
+
+<details><summary>看背面</summary>
+
+跨单元数据同步：单元内写本单元数据+全局数据异步复制（双向同步+冲突检测）
+原理：用户数据按分片路由无冲突，全局数据（商品/配置）单向广播，少数跨单元写走中心化服务，同步延迟造成短暂不一致（业务容忍）
+用法：单元化数据层设计
+锚点：实战方法论
+
+</details>
+
+### 事务 · XA（XA）
+
+<details><summary>看背面</summary>
+
+XA（2PC 的数据库实现）：事务管理器协调多库 prepare/commit
+原理：强一致但同步阻塞+单点协调者，性能差（锁持有跨库），国内互联网主流放弃 XA 选柔性事务（最终一致）
+用法：强一致事务的认知
+锚点：实战共识
+
+</details>
+
+### 事务 · 三坑（TCC）
+
+<details><summary>看背面</summary>
+
+TCC（Try-Confirm-Cancel）业务层两阶段：预留资源→确认→取消，三大坑：空回滚、悬挂、幂等
+原理：Try 未执行 Cancel 先到（空回滚，需记录事务状态）、Cancel 后 Try 才到（悬挂，Try 检查事务状态拒绝）、重复调用（幂等），本项目核对的 TCC 三坑框架
+用法：分布式事务落地难点
+锚点：实战共识核对
+
+</details>
+
+### 事务 · SAGA（SAGA）
+
+<details><summary>看背面</summary>
+
+SAGA：长事务拆为本地事务序列+每步补偿（逆操作）
+原理：无预留无隔离（中间状态可见），适合长流程（跨域订票），编排式（中心协调）与协同式（事件链）两种，补偿必须幂等且处理"补偿失败"
+用法：长流程事务模式
+锚点：理论共识
+
+</details>
+
+### 事务 · undo_log（AT）
+
+<details><summary>看背面</summary>
+
+Seata AT 模式：自动生成 undo_log（前后镜像）实现二阶段回滚
+原理：业务无侵入（自动代理 SQL），一阶段本地提交+undo_log 落库，二阶段异步删除（成功）或镜像回滚（失败），全局锁防脏写
+用法：低冲突场景的自动补偿
+锚点：Seata 文档
+
+</details>
+
+### 事务 · 优先级（选型）
+
+<details><summary>看背面</summary>
+
+分布式事务选型优先级：能不用就不用（业务重设计）→最终一致（消息/本地消息表）→TCC/SAGA（资金强需求）→XA（强一致小范围）
+原理：事务是成本极高的复杂性来源，P10 视角：先质疑"真的需要分布式事务吗"（多数场景最终一致+对账足够），再按一致性需求选型
+用法：事务选型决策树
+锚点：实战方法论
+
+</details>
+
+### 事务 · 消息 vs TCC（对比）
+
+<details><summary>看背面</summary>
+
+事务消息（最终一致）vs TCC（准强一致）：消息有延迟窗口但吞吐高，TCC 隔离性好但业务改造大
+原理：资金扣减（不可逆）倾向 TCC/AT，积分/通知等可逆场景用事务消息，P10 按业务可逆性与延迟容忍度选
+用法：事务模式对比题
+锚点：实战共识
+
+</details>
+
+### ID · 时钟回拨（雪花）
+
+<details><summary>看背面</summary>
+
+雪花 ID：64 位（1 符号+41 时间戳+10 机器+12 序列）毫秒级趋势递增，时钟回拨需处理
+原理：41 位时间戳约 69 年，序列号毫秒内 4096 个，时钟回拨：等待/备机位/扩展位策略（美团 Leaf-snowflake 检测+等待），分布式唯一 ID 基础方案
+用法：ID 方案第一课
+锚点：实战共识
+
+</details>
+
+### ID · 号段（号段）
+
+<details><summary>看背面</summary>
+
+号段模式：DB 批量取号段（如 1-1000）内存分发，双 buffer 预取消抖动
+原理：号段表（biz_tag+max_id+step）乐观锁更新，取号高峰 DB 压力被号段长度摊薄，双 buffer 在用到 10% 时预取下段，美团 Leaf 实现
+用法：ID 方案第二课
+锚点：美团 Leaf
+
+</details>
+
+### ID · 对比（选型）
+
+<details><summary>看背面</summary>
+
+ID 选型：雪花（无依赖高性能，时钟依赖）、号段（DB 依赖，连续可读）、UUID（无序索引差）、业务语义 ID（订单号可读）
+原理：按需求：纯性能雪花、可读性业务 ID（日期+机器+序列）、DB 唯一约束场景自增，分库分表场景禁自增（冲突），与分片键设计联动
+用法：ID 方案对比题
+锚点：实战共识
+
+</details>
+
+### 会话 · 集中式（Session）
+
+<details><summary>看背面</summary>
+
+分布式会话：集中存储（Redis：Spring Session）或无状态（JWT），按可撤销性需求选
+原理：Redis session 可随时踢人（运维友好），JWT 自包含但撤销难（黑名单/短过期+refresh），与单机 session 对比：粘性路由是过渡方案
+用法：会话架构选型
+锚点：实战共识
+
+</details>
+
+### 调度 · 分片（xxl-job）
+
+<details><summary>看背面</summary>
+
+分布式任务调度：xxl-job（中心调度+执行器，分片广播/故障转移）/Quartz 集群（DB 锁）/Elastic-Job
+原理：分片广播把任务按分片参数分发多执行器并行（大数据量处理），故障转移自动换节点，quartz 集群是 DB 锁串行（无分片）
+用法：任务调度选型
+锚点：实战共识
+
+</details>
+
+### 调度 · 调度幂等（幂等）
+
+<details><summary>看背面</summary>
+
+定时任务幂等与防重入：分布式锁（多实例部署只跑一份）+状态检查（任务表状态机）
+原理：多实例部署任务重复执行（每实例调度），xxl-job 路由策略解决（单播），自研任务用分布式锁+完成状态，任务失败重试也需幂等
+用法：任务可靠性
+锚点：实战共识
+
+</details>
+
+### 稳定性 · 级联（雪崩）
+
+<details><summary>看背面</summary>
+
+服务雪崩：慢调用占满线程池→上游超时重试→流量放大→级联拖垮全链路
+原理：传播机制：A 慢→B 等 A 耗尽线程→C 等 B……重试放大流量（3 层×3 重试=27 倍），预防四板斧：超时/熔断/限流/隔离
+用法：故障传播模型
+锚点：实战共识
+
+</details>
+
+### 稳定性 · 四板斧（防护）
+
+<details><summary>看背面</summary>
+
+雪崩防护四板斧：超时（快速失败释放线程）、熔断（断开故障下游）、限流（入口保护）、隔离（舱壁限制爆炸半径）
+原理：四者组合成纵深防御，缺一都有放大路径，配置随全链路对齐评审（超时预算），演练验证每层生效
+用法：稳定性工程框架
+锚点：实战方法论
+
+</details>
+
+### 稳定性 · 平台（预案）
+
+<details><summary>看背面</summary>
+
+预案平台化：预案清单（开关/限流/降级/扩容）、触发条件、执行人、演练记录
+原理：预案从文档变成可执行系统（一键执行+效果可视），大促预案包（按风险场景打包），故障时按 runbook 执行而非临场发挥
+用法：稳定性平台工程
+锚点：实战方法论
+
+</details>
+
+### 稳定性 · 演练（混沌）
+
+<details><summary>看背面</summary>
+
+混沌工程：主动注入故障（杀实例/断网/满磁盘）验证系统韧性
+原理：假设验证式（"Redis 挂了业务应该降级"→注入验证），生产环境渐进（灰度环境→低峰生产），ChaosBlade/Chaos Mesh 工具，季度常态化
+用法：韧性验证体系
+锚点：实战方法论
+
+</details>
+
+### 容量 · 基线（规划）
+
+<details><summary>看背面</summary>
+
+容量规划：压测基线（单机极限）×目标流量→机器数=流量/基线×冗余系数（1.5-2）
+原理：冗余吸收流量波动与故障切换（N+1 或 N+2），水位红线（CPU 60%/连接 70%）触发扩容，大促按峰值×增长系数规划
+用法：容量工程方法
+锚点：实战方法论
+
+</details>
+
+### 容量 · HPA（弹性）
+
+<details><summary>看背面</summary>
+
+弹性伸缩：K8s HPA 按 CPU/内存/自定义指标自动扩缩容，缩容保护（防抖动）
+原理：突发流量自动扩（分钟级），缩容防抖（ stabilization window）避免振荡，冷启动慢的服务配预热池（提前扩），与预案互补
+用法：弹性架构
+锚点：实战共识
+
+</details>
+
+### 容量 · 二八（热点）
+
+<details><summary>看背面</summary>
+
+热点问题：二八定律（20% 数据承担 80% 流量），热点识别→本地缓存→打散→单独扩容
+原理：热点商品/明星用户打爆单分片（Redis hot key/DB 热点行），识别（监控 top 请求 key），治理：本地缓存+key 打散（随机后缀分片）+单元隔离
+用法：热点架构治理
+锚点：实战方法论
+
+</details>
+
+### 容量 · 热点行（DB 热点）
+
+<details><summary>看背面</summary>
+
+DB 热点行：单行更新（秒杀库存/计数器）行锁串行是瓶颈
+原理：治理：内存队列合并更新（单线程串行扣减）、热点拆分（1 行拆 N 行随机路由）、Redis 预扣（前置流量），与秒杀库存方案同构
+用法：DB 热点治理
+锚点：实战方法论
+
+</details>
+
+### 架构 · 接入层（分层）
+
+<details><summary>看背面</summary>
+
+系统分层：接入层（网关/CDN）→业务层（微服务）→数据层（DB/缓存/搜索），每层独立扩展
+原理：分层解耦扩展维度（接入层水平扩、数据层分片扩），调用链清晰（可观测/故障定位），跨层直连是反模式
+用法：系统架构框架
+锚点：实战共识
+
+</details>
+
+### 架构 · 复用（中台）
+
+<details><summary>看背面</summary>
+
+中台/共享服务：把跨业务复用能力沉淀（用户/商品/订单中台），争议：组织架构决定架构（康威定律）
+原理：中台价值=复用带来的效率，反面：过度抽象僵化（业务个性难满足），P10 观点：能力复用按 ROI 决策而非运动式，微内核+可插拔比大中台灵活
+用法：组织与架构
+锚点：实战方法论
+
+</details>
+
+### 架构 · 限界上下文（DDD）
+
+<details><summary>看背面</summary>
+
+DDD：限界上下文（服务边界）+聚合（事务边界）+防腐层（隔离外部模型）
+原理：微服务拆分的理论依据：按限界上下文拆（而非按技术层），聚合内强一致跨聚合最终一致，防腐层隔离遗留/外部系统模型污染
+用法：领域驱动设计核心
+锚点：实战共识
+
+</details>
+
+### 架构 · 原则（拆分）
+
+<details><summary>看背面</summary>
+
+微服务拆分原则：按业务能力（限界上下文）、团队规模（康威）、数据自治（每服务私有数据）、演进式（先粗后细）
+原理：拆分错误信号：跨服务频繁事务/调用链过长/数据强耦合，拆分粒度按团队认知负荷（two-pizza team），过细=分布式单体
+用法：微服务方法论
+锚点：实战共识
+
+</details>
+
+### 架构 · 反模式（粒度）
+
+<details><summary>看背面</summary>
+
+分布式单体反模式：服务拆了但同步调用链长、共享 DB、事务跨服务，比单体更糟
+原理：判断标准：一个需求改 N 个服务/发版连锁/性能劣化，治理：异步事件替代同步链、数据自治、按上下文重新归组
+用法：架构演进教训
+锚点：实战共识
+
+</details>
+
+### 架构 · 同步异步（通信）
+
+<details><summary>看背面</summary>
+
+服务间通信：同步（RPC，强实时）vs 异步（事件/MQ，解耦削峰），主链路同步旁路异步
+原理：异步化降低耦合与 RT（上游不等下游），但引入最终一致与排查复杂度，P10 决策：强一致需求同步、可逆旁路异步、读写分离（CQRS）
+用法：通信模式设计
+锚点：实战共识
+
+</details>
+
+### 架构 · 聚合（BFF）
+
+<details><summary>看背面</summary>
+
+BFF（Backend for Frontend）：面向端的聚合层（App/Web/小程序各自 BFF），聚合多服务裁剪字段
+原理：端差异化需求（字段/流程不同）不应让后端服务膨胀，BFF 集中聚合（Node/Java），代价：多一层维护（治理：代码生成/低代码）
+用法：端到端架构
+锚点：实战共识
+
+</details>
+
+### 网关 · 层次（限流）
+
+<details><summary>看背面</summary>
+
+限流层次：CDN/运营商→网关（全局限流）→服务（接口级）→DB（连接池上限），层次越深越靠近资源
+原理：每层保护不同对象（网关保护集群、服务保护下游、DB 保护自身），全局限流（集群精确）与单机限流（本地快速）叠加，与 Redis 限流知识联动
+用法：纵深限流体系
+锚点：实战共识
+
+</details>
+
+### 排查 · 方法（链路）
+
+<details><summary>看背面</summary>
+
+分布式排查方法：traceId 全链路定位（慢在哪跳）→该跳日志+metrics（错误/容量）→瓶颈定位（CPU/IO/锁/依赖）
+原理：与单体排查差异：跨服务边界（trace 必须连续）、共享资源（缓存/DB/MQ 竞争）、不确定性（超时/重试），工具链：trace+metrics+logs 三支柱
+用法：P10 故障排查框架
+锚点：实战方法论
+
+</details>
+
+### 性能 · 并发数（指标）
+
+<details><summary>看背面</summary>
+
+性能三指标关系：并发数=QPS×RT（Little's Law）
+原理：QPS 1000、RT 200ms → 并发 200（线程数/连接数规划依据），RT 上升时并发数暴涨（雪崩机制），容量规划与线程池参数的计算基础
+用法：容量计算公式
+锚点：理论共识
+
+</details>
+
+### 性能 · 阿姆达尔（扩展）
+
+<details><summary>看背面</summary>
+
+阿姆达尔定律：加速比受串行部分限制（串行 10% 则最高 10 倍加速）
+原理：水平扩展的极限：全局锁/单点（DB 单库/中心授时）是串行部分，架构优化方向是削减串行段（分片/去中心），扩展性设计的理论指导
+用法：扩展性理论
+锚点：理论共识
+
+</details>
+
+### 性能 · 水平（扩展）
+
+<details><summary>看背面</summary>
+
+垂直扩展（更强机器，有上限）vs 水平扩展（更多机器，架构要求无状态/可分片）
+原理：水平扩展的前提：无状态服务+可分片数据（分片键），有状态组件（会话/任务）先改造，云原生时代默认水平（K8s 弹性）
+用法：扩展策略
+锚点：实战共识
+
+</details>
+
+### 架构 · 设计（无状态）
+
+<details><summary>看背面</summary>
+
+无状态设计：会话外置（Redis）、文件外置（对象存储）、定时任务用调度中心（单实例路由）
+原理：无状态才能任意扩缩容与故障切换（K8s 基本假设），残留状态（本地缓存不一致）是扩容后诡异 bug 源，审查清单：内存/磁盘/线程变量
+用法：云原生基础
+锚点：实战共识
+
+</details>
+
+### 架构 · 会话粘性（粘性）
+
+<details><summary>看背面</summary>
+
+会话粘性（sticky session）：负载均衡按会话固定路由到同实例（不扩容降级的临时方案）
+原理：粘性路由破坏均匀（热点会话）与容错（实例挂会话丢），正解是会话外置，迁移期可用粘性过渡（网关 cookie 路由）
+用法：过渡方案认知
+锚点：实战共识
+
+</details>
+
+### 缓存 · 一致性（多级）
+
+<details><summary>看背面</summary>
+
+多级缓存一致性：变更广播失效（Pub/Sub 通知本地失效）+短 TTL（秒级兜底）+版本号校验
+原理：本地缓存无法强一致（跨节点），方案：失效广播（准实时）+TTL 兜底（广播丢失）+读时版本比对（关键数据），与 Redis 一致性知识联动
+用法：多级缓存架构
+锚点：实战共识
+
+</details>
+
+### 网络 · 跨机房（延迟）
+
+<details><summary>看背面</summary>
+
+跨机房延迟物理规律：同城 1-2ms、跨城 30-50ms、跨国 200ms+，架构按延迟分层设计
+原理：同步调用跨城（RT 恶化）应异步化/本地闭环，DB 主从跨城复制延迟大（读己之写需路由），单元化的动机之一（避免跨城同步调用）
+用法：物理约束架构
+锚点：实战共识
+
+</details>
+
+### 云原生 · service（K8s）
+
+<details><summary>看背面</summary>
+
+K8s：Pod（实例）+Service（稳定虚拟 IP+负载均衡）+Deployment（副本管理）+ConfigMap/Secret（配置）
+原理：服务发现内建（Service DNS），滚动发布/自愈（探针）声明式，Java 应用适配：优雅停机（preStop）、探针配置（liveness 不做重检查）
+用法：云原生运行时
+锚点：实战共识
+
+</details>
+
+### 云原生 · sidecar（Mesh）
+
+<details><summary>看背面</summary>
+
+Service Mesh（Istio）：把治理（路由/限流/熔断）下沉 sidecar，业务无侵入
+原理：sidecar 代理每跳流量（延迟+资源开销），收益：治理与语言解耦（多语言团队）、统一管控面，权衡：复杂度大增（排障跨进程），按团队规模决策
+用法：治理下沉架构
+锚点：实战共识
+
+</details>
+
+### 面试 · 答题（框架）
+
+<details><summary>看背面</summary>
+
+P10 架构答题框架：目标定义（SLA/约束）→方案空间（2-3 个候选+trade-off）→选型论证（数据/经验支撑）→风险与预案→演进路径
+原理：禁绝对化（"保证不丢"带条件），结论先行+证据锚点，主动暴露权衡（没有完美方案），与前面各域答题方法论一致
+用法：P10 答题方法论
+锚点：实战方法论
+
+</details>
+
+### 面试 · 复习（主线）
+
+<details><summary>看背面</summary>
+
+分布式复习主线：CAP/BASE→共识（Raft）→事务（TCC/SAGA/消息）→锁与 ID→治理（限流熔断灰度）→稳定性（SLO/预案/混沌）→架构（拆分/单元化）
+原理：P7 考基础与组件，P8 考机制与治理，P9-P10 考架构权衡与演进，与 MySQL/Redis/MQ 各域知识联动成体系
+用法：复习时间分配
+锚点：复习方法论
+
+</details>
+
+### 数据 · 对比（分片）
+
+<details><summary>看背面</summary>
+
+一致性哈希（虚拟节点环）与槽位分片（固定槽映射）是两大分片流派
+原理：一致性哈希节点增删迁移少但元数据在客户端（Cassandra/Dynamo），槽位分片路由表集中可控易迁移（Redis Cluster 16384 槽），按"迁移灵活性 vs 元数据复杂度"权衡
+用法：分片架构选型深水区
+锚点：实战共识
+
+</details>
+
+### 稳定性 · MTTD（度量）
+
+<details><summary>看背面</summary>
+
+故障度量四件套：MTTD（发现时长）/MTTA（响应时长）/MTTR（恢复时长）/MTBF（间隔）
+原理：MTTD 靠监控覆盖（未发现的故障最贵），MTTA 靠 oncall 机制，MTTR 靠预案与自动化，只看 MTTR 会掩盖发现慢的问题
+用法：故障复盘的量化框架
+锚点：Google SRE
+
+</details>
+
+### 可靠性 · 算法选型（限流）
+
+<details><summary>看背面</summary>
+
+分布式限流算法选型：中心计数（Redis Lua 固定/滑窗）、中心令牌桶（token server）、本地估算（同步衰减）
+原理：中心精确但网络往返与单点，本地无依赖但实例间漂移，组合"中心粗粒度+本地细粒度"兼顾精度与延迟，与 RD-057/DF-024 联动
+用法：限流架构设计题
+锚点：实战方法论
+
+</details>
+
+### 可靠性 · Idempotency-Key（接口）
+
+<details><summary>看背面</summary>
+
+HTTP 幂等标准实践：客户端生成 Idempotency-Key 头，服务端存储首响应供重放返回
+原理：Stripe 式设计：首次处理并缓存响应，同 key 重放返回缓存结果（不重复执行），key 过期回收，支付/订单类 API 的行业标准
+用法：对外 API 设计规范
+锚点：Stripe API 设计
+
+</details>
+
+### 可观测 · 动态采样（采样）
+
+<details><summary>看背面</summary>
+
+追踪采样率动态调整：常态低采样（1%），故障/灰度期间临时调高（配置中心下发）
+原理：常态全量采集成本高，故障时需要全量证据，采样率做成运行时配置（网关层生效），与 DF-055 头部/尾部采样互补
+用法：观测成本治理
+锚点：实战共识
+
+</details>
+
+### 治理 · 审计回滚（配置）
+
+<details><summary>看背面</summary>
+
+配置变更三纪律：全量审计（谁改的什么）、灰度生效（先单实例）、一键回滚（保存历史版本）
+原理：配置错误等于代码错误（影响线上行为），Nacos/Apollo 均支持历史与回滚，变更窗口与评审与 DB 变更规范（MY-105）同构
+用法：配置治理规范
+锚点：实战方法论
+
+</details>
+
+### 容灾 · GSLB（入口）
+
+<details><summary>看背面</summary>
+
+多机房入口：DNS/GSLB 按机房健康与策略分流，机房级故障切流分钟级
+原理：GSLB（全局负载均衡）按健康检查与权重把用户导向可用机房，配合单元化路由（DF-059），DNS TTL 决定切流速度（短 TTL 有解析压力）
+用法：多活入口层设计
+锚点：实战共识
+
+</details>
+
+### 数据 · 校验（迁移）
+
+<details><summary>看背面</summary>
+
+数据迁移校验工具化：分块 checksum（按主键区间）+抽样内容比对+差异修复闭环
+原理：全量比对成本高（读两遍库），分块 checksum 增量校验（如 pt-table-checksum 思路），差异进入修复队列二次确认，迁移可信度靠工具链不靠人肉
+用法：迁移质量门（与 MY-062 联动）
+锚点：实战方法论
+
+</details>
+
+### 锁 · 续期（时钟）
+
+<details><summary>看背面</summary>
+
+分布式锁续期的时钟陷阱：看门狗依赖客户端时钟，时钟快进导致锁提前"过期仍续着"
+原理：续期间隔按本地时钟计算，NTP 跳变下锁的实际持有时间与预期不符，缓解：续期响应校验（Redisson 校验令牌）+关键业务 fencing token（DF-036），与租约（DF-013）同源
+用法：锁正确性深水区
+锚点：实战共识
+
+</details>
+
+### 稳定性 · 变更（度量）
+
+<details><summary>看背面</summary>
+
+稳定性度量进阶：变更成功率、故障复盘闭环率、预案演练覆盖率、告警有效率
+原理：故障率治理的源头是变更（多数故障由变更引入），度量"变更引发故障占比"驱动流程改进，复盘行动项闭环率防"复盘走形式"（MQ-075 联动）
+用法：稳定性体系建设
+锚点：实战方法论
+
+</details>
+
+
+## AI/Agent（88 张）
+
+### LLM · token（基础）
+
+<details><summary>看背面</summary>
+
+LLM 按 token 处理文本：中文约 1 字≈1-2 token，英文 1 词≈1.3 token，计费与上下文都按 token
+原理：上下文窗口与费用都以 token 计，Prompt 长度预算与成本估算的基础单位，压缩提示（精简指令）直接省成本
+用法：成本与窗口预算的基础
+锚点：通用
+
+</details>
+
+### LLM · 上下文窗口（基础）
+
+<details><summary>看背面</summary>
+
+上下文窗口（context window）是模型单次能处理的 token 上限（主流 128K-1M）
+原理：超窗口内容需裁剪/摘要/检索注入，长对话要做历史压缩，窗口虽大但"中间内容遗忘"（lost in the middle）仍需关键信息前置或后置
+用法：RAG 与长对话设计的前提
+锚点：通用
+
+</details>
+
+### LLM · temperature（参数）
+
+<details><summary>看背面</summary>
+
+temperature 控制随机性：0 近似确定性输出，越高越发散
+原理：事实问答/代码生成用低温（0-0.3），创意写作高温（0.7-1.0），同一问题不同 temperature 结果不同（可复现性依赖低温+种子）
+用法：输出稳定性调参
+锚点：通用
+
+</details>
+
+### LLM · 幻觉（现象）
+
+<details><summary>看背面</summary>
+
+幻觉：模型编造不存在的事实（引用/数据/API），源于概率生成而非知识库检索
+原理：缓解：RAG（给真实资料）、引用溯源（要求标注来源）、低温、评估集回归，幻觉无法根除只能工程约束，Java 开发者最相关的场景是"AI 生成的 API 不存在"
+用法：可靠生成的工程约束
+锚点：实战共识
+
+</details>
+
+### RAG · 流程（原理）
+
+<details><summary>看背面</summary>
+
+RAG 标准流程：文档切分→向量化（embedding）→存储向量库→查询时检索 topK→注入 prompt 生成
+原理：用检索的真实资料约束生成（抗幻觉），与微调对比：知识可更新（改文档即可）成本低，是企业知识问答的主流架构
+用法：知识库问答架构主线
+锚点：实战共识
+
+</details>
+
+### RAG · chunk（切分）
+
+<details><summary>看背面</summary>
+
+切分（chunking）：按语义段落切 300-800 token，带 10-20% 重叠防断义
+原理：切太碎丢上下文、太大稀释检索精度，按标题/语义边界切优于固定长度，元数据（来源/标题）随 chunk 存储便于溯源
+用法：RAG 质量的第一决定因素
+锚点：实战共识
+
+</details>
+
+### RAG · embedding（嵌入）
+
+<details><summary>看背面</summary>
+
+embedding 把文本映射为高维向量（语义相近距离近），检索用向量相似度（cosine）
+原理：嵌入模型决定检索质量（bge/text-embedding 系列），跨模型向量不兼容（换模型需全量重嵌入），维度常用 768-1536
+用法：向量检索原理
+锚点：实战共识
+
+</details>
+
+### RAG · 混合检索（检索）
+
+<details><summary>看背面</summary>
+
+混合检索：向量（语义）+关键词（BM25 精确）双路召回后融合（RRF）
+原理：向量对专有名词/编号召回弱（精确匹配是关键词强项），混合+重排是生产 RAG 标配，纯向量是常见质量短板
+用法：检索质量优化
+锚点：实战共识
+
+</details>
+
+### RAG · rerank（重排）
+
+<details><summary>看背面</summary>
+
+重排（rerank）：用交叉编码模型对召回的 top 20-50 精排取 top 3-5
+原理：召回模型（双塔）快但粗，重排模型（交叉编码）准但慢（只处理少量候选），两段式兼顾质量与延迟，RAG 效果提升明显的一环
+用法：检索精排
+锚点：实战共识
+
+</details>
+
+### RAG · 选型（向量库）
+
+<details><summary>看背面</summary>
+
+向量库选型：Milvus（大规模）/pgvector（复用 PG 轻量）/ES（混合检索一体）/Redis（轻量缓存级）
+原理：按规模与运维成本：百万级 pgvector/ES 起步够用，亿级 Milvus，Redis 向量适合小规模低延迟，与已有技术栈复用优先
+用法：向量库选型
+锚点：实战共识
+
+</details>
+
+### RAG · 引用（溯源）
+
+<details><summary>看背面</summary>
+
+企业级 RAG 必须引用溯源：生成答案标注来源（文档+段落），评估与信任的基础
+原理：防幻觉的用户感知手段（可点击验证），评估时对照来源判定忠实度（faithfulness），无溯源的 RAG 在企业场景不可上线
+用法：企业级 RAG 上线门槛
+锚点：实战共识
+
+</details>
+
+### RAG · 评估（评估）
+
+<details><summary>看背面</summary>
+
+RAG 评估维度：检索质量（召回率/MRR）+生成质量（忠实度/相关性），工具 RAGAS/自建评估集
+原理：没评估的 RAG 无法迭代（改切分/模型无依据），评估集 50-200 条业务真实问题人工标注，回归跑分防退化
+用法：质量工程闭环
+锚点：实战方法论
+
+</details>
+
+### 微调 · RAG vs 微调（对比）
+
+<details><summary>看背面</summary>
+
+RAG vs 微调决策矩阵：知识频繁更新/需溯源→RAG；风格/格式/领域语言内化→微调；常组合（微调调风格+RAG 供知识）
+原理：微调改"行为"不改"知识"（新知识微调易过拟合且更新贵），RAG 改知识不改行为，本项目总结的决策矩阵
+用法：模型能力选型判断
+锚点：实战方法论
+
+</details>
+
+### 微调 · 数据（成本）
+
+<details><summary>看背面</summary>
+
+微调成本主在数据：高质量标注千级样本起步，脏数据微调出脏模型
+原理：数据质量>数量（清洗/去重/格式一致），LoRA 等 PEFT 方法降低训练成本，评估集与训练集严格分离，先 Prompt 优化再考虑微调
+用法：微调实施门槛
+锚点：实战共识
+
+</details>
+
+### Agent · 六模块（架构）
+
+<details><summary>看背面</summary>
+
+Agent 架构六模块：规划（任务拆解）、记忆（短期上下文+长期向量库）、工具（function calling）、执行循环、护栏（安全边界）、可观测（追踪评估）
+原理：Agent=LLM+工具+循环（观察-思考-行动），规划与记忆决定复杂任务能力，护栏与可观测决定能否生产化，本项目总结的架构框架
+用法：Agent 系统设计主线
+锚点：实战方法论
+
+</details>
+
+### Agent · ReAct（循环）
+
+<details><summary>看背面</summary>
+
+ReAct 循环：Reason（推理）→Act（调工具）→Observation（观察结果）循环直到任务完成
+原理：工具结果反馈给模型迭代决策，循环上限（max iterations）防死循环，每轮都消耗 token（成本随步数线性），与单轮问答的本质区别
+用法：Agent 执行模型
+锚点：实战共识
+
+</details>
+
+### Agent · function calling（工具）
+
+<details><summary>看背面</summary>
+
+function calling：模型输出结构化工具调用（函数名+JSON 参数）而非自然语言，执行后回填结果
+原理：工具定义（name/description/参数 schema）质量决定调用准确率，参数校验在应用层（模型可能给错），工具描述写清"什么时候用/不用"
+用法：Agent 工具层标准机制
+锚点：实战共识
+
+</details>
+
+### Agent · MCP（MCP）
+
+<details><summary>看背面</summary>
+
+MCP（Model Context Protocol）：工具/资源/提示三能力的开放协议（Anthropic 发起），标准化 Agent 与工具生态接入
+原理：解决 M×N 集成问题（每个 Agent 每个工具单独写），MCP server 一次实现多客户端复用（IDE/CLI/Agent 框架），Java 生态 Spring AI/MCP SDK 支持
+用法：Agent 工具生态标准化
+锚点：2024-2025
+
+</details>
+
+### Agent · 护栏（护栏）
+
+<details><summary>看背面</summary>
+
+Agent 护栏：输入护栏（注入检测/主题限制）、执行护栏（工具白名单/参数范围/预算上限）、输出护栏（敏感信息/Prompt 二次校验）
+原理：Agent 能执行真实操作（API/DB/支付）必须设边界，预算护栏（token/步数/金额上限）防失控循环，护栏失败快速拒绝并审计
+用法：生产化 Agent 的安全底线
+锚点：实战共识
+
+</details>
+
+### Agent · 分层（记忆）
+
+<details><summary>看背面</summary>
+
+Agent 记忆分层：短期=上下文窗口内对话、工作记忆=任务状态结构化、长期=向量库/数据库持久化
+原理：窗口内记忆随对话滚动丢失，长期记忆检索注入（用户偏好/历史结论），记忆写入策略（什么值得记）比存储更关键
+用法：多轮/跨会话 Agent 设计
+锚点：实战共识
+
+</details>
+
+### Agent · 恢复（checkpoint）
+
+<details><summary>看背面</summary>
+
+长任务 Agent 需 checkpoint：每步持久化状态（任务/中间结果），失败从断点恢复
+原理：Agent 跑数分钟到数小时（多工具多步），中断重跑成本高，checkpoint+幂等工具是可靠性基础，与工作流引擎（Temporal）思想同构
+用法：长任务可靠性
+锚点：实战共识
+
+</details>
+
+### Agent · 协作（多智能体）
+
+<details><summary>看背面</summary>
+
+多 Agent 协作模式：主从（orchestrator 分发）、流水线（串行传递）、辩论（相互校验），复杂度与收益成正比需谨慎
+原理：单 Agent+好工具通常优于多 Agent（通信/一致性开销），多 Agent 适合角色分工明确场景（ coder/reviewer），P10 观点：先榨干单 Agent 再上多 Agent
+用法：复杂 Agent 架构权衡
+锚点：实战共识
+
+</details>
+
+### Prompt · 结构（工程）
+
+<details><summary>看背面</summary>
+
+Prompt 工程：角色+任务+约束+输出格式+示例（few-shot），结构化分隔（XML/Markdown 标签）提升遵循度
+原理：指令清晰化与格式锚定减少模型自由发挥，复杂任务 few-shot 示例显著提升质量，输出格式约束（JSON schema）方便下游解析
+用法：Prompt 质量是零成本优化
+锚点：实战共识
+
+</details>
+
+### Prompt · 防御（注入）
+
+<details><summary>看背面</summary>
+
+Prompt 注入攻击：外部内容（网页/文档）携带指令覆盖系统提示，防御：指令与数据隔离（标签包裹外部内容）、输入检测、最小权限工具
+原理：RAG 检索到的文档/用户输入都可能是注入载体，system prompt 声明"外部内容只是数据"，高危工具（发邮件/写库）需人工确认，是 Agent 安全第一威胁
+用法：Agent 安全必修
+锚点：实战共识
+
+</details>
+
+### Prompt · 防护（越狱）
+
+<details><summary>看背面</summary>
+
+越狱（jailbreak）：诱导模型突破安全策略，防御：多层护栏（系统提示+输入分类器+输出审查）+持续更新攻击库
+原理：单一防线可被绕过（社会工程话术演化），纵深防御+日志审计+红队测试，企业应用还要合规审查（内容安全 API）
+用法：安全攻防认知
+锚点：实战共识
+
+</details>
+
+### 成本 · 四招（控制）
+
+<details><summary>看背面</summary>
+
+LLM 应用成本控制：模型分级（简单任务小模型）、缓存（相同请求/语义缓存）、压缩（精简 prompt/历史摘要）、批处理（离线任务半价）
+原理：大模型成本占应用成本大头（计费按 token），分级路由（80% 简单任务用便宜模型）省 50%+，语义缓存（相似问题命中）是 RAG 场景利器，本项目总结的四招
+用法：成本工程
+锚点：实战方法论
+
+</details>
+
+### 成本 · ROI（评估）
+
+<details><summary>看背面</summary>
+
+LLM 功能 ROI 评估：人工成本对比（自动化的替代成本）、错误代价（幻觉的下游影响）、评估与监控投入
+原理：不是所有场景值得上 LLM（错误代价高的关键决策慎用），人机协作（AI 草稿+人工审核）常是最优形态，P10 要能算"这个功能值不值得做"
+用法：功能立项判断
+锚点：实战方法论
+
+</details>
+
+### 应用 · LLM 网关（网关）
+
+<details><summary>看背面</summary>
+
+LLM 网关：统一多模型接入（切换/降级）、限流计费、缓存、审计日志，类似 API 网关的 LLM 版
+原理：模型可替换性（供应商切换/新模型灰度）与应用解耦，计费归集到业务方，敏感内容审计在网关层，开源实现（LiteLLM/Higress AI）
+用法：LLM 应用基础设施
+锚点：实战共识
+
+</details>
+
+### 应用 · SSE（流式）
+
+<details><summary>看背面</summary>
+
+流式输出（SSE）改善体验：token 逐段推送首字延迟从秒级到毫秒级
+原理：用户感知延迟由首字时间（TTFT）决定，SSE 是标准协议（Response stream），前端逐段渲染，Java 实现（WebFlux/SSE emitter）与超时管理
+用法：交互体验基础
+锚点：实战共识
+
+</details>
+
+### 应用 · 处理（超时）
+
+<details><summary>看背面</summary>
+
+LLM 调用超时与降级：生成长（10-60s）超时设长于同步接口，降级预案（备用模型/兜底话术/异步化）
+原理：长生成与网关默认超时冲突（30s 常见），方案：流式（连接保活）、异步任务（提交后轮询）、降级模型，与分布式超时预算知识联动
+用法：应用层可靠性
+锚点：实战共识
+
+</details>
+
+### Java · Spring AI（集成）
+
+<details><summary>看背面</summary>
+
+Spring AI：统一 LLM/向量库/工具调用抽象（ChatClient/EmbeddingModel），Java 生态的 AI 应用框架
+原理：屏蔽厂商差异（OpenAI/Ollama/通义），RAG 抽象（DocumentLoader/Splitter/VectorStore），与 LangChain4j 对比：Spring 集成更深，1.0 已 GA
+用法：Java 开发者主框架
+锚点：Spring AI 1.0
+
+</details>
+
+### Java · LangChain4j（集成）
+
+<details><summary>看背面</summary>
+
+LangChain4j：Java 版 LangChain（AiServices 声明式、RAG 组件、多模型支持）
+原理：声明式接口（注解定义 AI 服务）降低样板代码，RAG 管道组件齐全，与 Spring AI 并存按团队偏好选，都支持 function calling
+用法：框架选型
+锚点：实战共识
+
+</details>
+
+### Java · 本地模型（集成）
+
+<details><summary>看背面</summary>
+
+本地部署模型：Ollama（易用）/vLLM（高吞吐生产），Java 通过 OpenAI 兼容接口接入
+原理：数据不出域（隐私/合规）场景本地部署，Ollama 开发体验好（一行拉模型），vLLM 生产吞吐高（PagedAttention），硬件要求（显存）是门槛
+用法：部署选型
+锚点：实战共识
+
+</details>
+
+### 评估 · 评估（体系）
+
+<details><summary>看背面</summary>
+
+LLM 应用评估体系：离线评估集（回归）、在线指标（采纳率/编辑距离）、人工抽检分层
+原理：离线评估集防迭代退化（改 prompt/换模型跑分），在线看真实用户行为（采纳/修改/放弃），三层结合才是质量闭环，与 RAG 评估（AI-012）联动
+用法：质量工程体系
+锚点：实战方法论
+
+</details>
+
+### 评估 · 模型评测（LLM）
+
+<details><summary>看背面</summary>
+
+模型评测维度：通用能力（benchmark）与业务适配（自有评估集），选模型看业务任务表现而非榜单
+原理：榜单（MMLU 等）与业务表现相关性有限，用自己业务数据做小评估集（100 条）横向对比，性价比（能力/价格/延迟）三维权衡
+用法：模型选型方法
+锚点：实战共识
+
+</details>
+
+### 应用 · 辅助（代码生成）
+
+<details><summary>看背面</summary>
+
+AI 代码生成落地：单元测试生成（高采纳率）、样板代码、代码评审辅助；核心逻辑人工把控
+原理：代码生成在"有明确规范"的领域效果最好（测试/CRUD），采纳率是核心指标（而非生成量），安全与质量门禁（生成代码也要过 review 与扫描），与 Java 手写代码能力互补
+用法：研发效能工程
+锚点：实战共识
+
+</details>
+
+### 应用 · 场景（客服）
+
+<details><summary>看背面</summary>
+
+智能客服架构：意图识别（路由）→RAG 知识库回答→兜底转人工，满意度与转人工率是核心指标
+原理：纯 LLM 客服幻觉风险高（承诺错口径），知识库约束+话术模板+人工兜底三层，会话记录回流评估集（持续迭代），传统客服 NLU 与 LLM 融合
+用法：LLM 落地典型场景
+锚点：实战共识
+
+</details>
+
+### 应用 · 语义（搜索）
+
+<details><summary>看背面</summary>
+
+语义搜索：embedding 召回+关键词混合，解决"意思对但词不同"的召回
+原理：传统搜索（分词+BM25）对同义改写弱，向量补语义召回，两者融合（RRF）+重排是现代搜索标配，与 RAG 检索（AI-008）同构
+用法：搜索升级路径
+锚点：实战共识
+
+</details>
+
+### 数据 · 语料（治理）
+
+<details><summary>看背面</summary>
+
+RAG 语料治理：文档规范化（格式清洗/去重）、更新管道（版本/失效）、权限过滤（检索时按用户权限）
+原理：垃圾进垃圾出：语料质量决定 RAG 上限，过期文档未失效（错误答案），权限未过滤（越权检索敏感数据）是两大事故源
+用法：RAG 数据工程
+锚点：实战共识
+
+</details>
+
+### 数据 · 合规（隐私）
+
+<details><summary>看背面</summary>
+
+LLM 数据合规：训练数据版权、用户数据脱敏（PII 不入 prompt）、输出合规审查
+原理：调用外部 API 时用户数据出域（隐私风险，脱敏/本地模型），生成内容合规（金融建议/医疗建议免责声明），企业落地的法务前置
+用法：合规工程
+锚点：实战共识
+
+</details>
+
+### 多模态 · 多模态（基础）
+
+<details><summary>看背面</summary>
+
+多模态模型：图文理解（VLM）、语音（ASR/TTS）、视频，Java 应用常见：OCR 提取+VLM 理解+TTS 输出
+原理：多模态扩展应用边界（票据识别/视觉质检），token 成本更高（图像按分辨率计费），Pipeline 组合（ASR→LLM→TTS）做语音助手
+用法：能力扩展
+锚点：通用
+
+</details>
+
+### Agent · 追踪（观测）
+
+<details><summary>看背面</summary>
+
+Agent 可观测：每次 LLM 调用（prompt/token/耗时/成本）+工具调用（入参/结果）全量追踪
+原理：Agent 步数多且不确定（循环），无追踪则无法定位"为什么答错"（检索差/工具错/模型错），token 与成本按调用聚合，Langfuse/OpenTelemetry GenAI 语义约定
+用法：Agent 工程化标配
+锚点：实战共识
+
+</details>
+
+### Agent · 模式（失败）
+
+<details><summary>看背面</summary>
+
+Agent 失败模式：工具错误（参数错/权限无）、死循环（反复重试同工具）、上下文溢出（历史过长）、幻觉结论（工具没返回却编造）
+原理：按模式设防：参数校验+错误反馈给模型、循环上限+重复检测、历史压缩、结论必须引用工具结果（faithfulness 校验），与护栏（AI-019）配套
+用法：失败模式工程
+锚点：实战共识
+
+</details>
+
+### RAG · GraphRAG（进阶）
+
+<details><summary>看背面</summary>
+
+GraphRAG：抽取实体关系建知识图谱，检索时图遍历（多跳关系），补向量检索的"关系型问题"短板
+原理："A 公司 CEO 的竞争对手"类多跳问题向量召回弱，图结构显式建模关系，成本高（图谱构建）按需用，与混合检索互补
+用法：RAG 进阶选型
+锚点：实战共识
+
+</details>
+
+### RAG · 自适应（进阶）
+
+<details><summary>看背面</summary>
+
+自适应 RAG：按问题复杂度路由（简单问题直答/复杂问题多轮检索），检索质量自评（不够则改写重查）
+原理：一刀切 RAG 浪费成本（简单问题也检索）且质量不稳（复杂问题单轮不够），self-RAG/CRAG 思路，评估驱动路由，与 Agent 规划模块联动
+用法：RAG 架构演进
+锚点：实战共识
+
+</details>
+
+### LLM · LoRA（微调）
+
+<details><summary>看背面</summary>
+
+LoRA（低秩适配）：冻结原模型只训练小矩阵（参数量 <1%），单卡可微调，效果接近全参
+原理：大幅降低微调门槛（显存/数据/时间），适配器可插拔（多任务多 adapter），与量化（QLoRA）组合进一步降本，是企业微调的主流方法
+用法：微调技术选型
+锚点：实战共识
+
+</details>
+
+### LLM · 量化（部署）
+
+<details><summary>看背面</summary>
+
+量化（INT8/INT4）：降低模型精度换推理速度与显存（4bit 约 1/4 显存），精度损失可控
+原理：边缘/本地部署的基础技术（消费级显卡跑 7B-14B），GPTQ/AWQ/GGUF 格式，量化后需评估精度回归，与 LoRA 组合（QLoRA）
+用法：部署优化
+锚点：实战共识
+
+</details>
+
+### LLM · vLLM（推理）
+
+<details><summary>看背面</summary>
+
+vLLM：PagedAttention 显存分页管理，吞吐比原生高数倍，生产推理主流引擎
+原理：KV cache 显存碎片是吞吐瓶颈（分页解决），连续批处理（continuous batching）动态插单，OpenAI 兼容接口（Java 无缝接入），与 Ollama（开发）分工
+用法：推理引擎选型
+锚点：实战共识
+
+</details>
+
+### Agent · 对比（框架）
+
+<details><summary>看背面</summary>
+
+Agent 框架对比：LangGraph（图编排/状态机）、Spring AI（Java 生态）、Dify/LangFlow（低代码可视化）、自研（可控性最高）
+原理：编排复杂度决定选择：简单工具调用用 SDK 直接写，状态机式多步用 LangGraph，业务人员参与用 Dify，核心生产系统自研+SDK 组合，P10 观点：框架是脚手架不是壁垒
+用法：框架选型论证
+锚点：实战共识
+
+</details>
+
+### 应用 · 语义缓存（缓存）
+
+<details><summary>看背面</summary>
+
+语义缓存：问题 embedding 相似度匹配历史问答（相似度高直接返回），降低重复问题成本
+原理：客服/RAG 场景重复率高（30-60%），语义缓存命中率决定成本节省（阈值权衡误答风险），失效策略（知识库更新时清缓存），与 Redis 缓存知识同构
+用法：成本与延迟优化
+锚点：实战共识
+
+</details>
+
+### 应用 · 审计（审计）
+
+<details><summary>看背面</summary>
+
+LLM 应用审计：所有 prompt/输出留痕（脱敏后）、成本归集、异常检测（敏感内容/异常消耗）
+原理：审计是合规与追责基础（谁问了什么花了多少），异常消耗检测（恶意刷 token），与网关（AI-028）配合实现，留存策略按合规要求
+用法：企业级上线要求
+锚点：实战共识
+
+</details>
+
+### 运维 · 指标（监控）
+
+<details><summary>看背面</summary>
+
+LLM 应用监控：TTFT（首字延迟）、生成速率、错误率、token 消耗、工具成功率、幻觉抽检率
+原理：与传统服务监控的差异：延迟分布长尾（生成时间）、成本是核心指标、质量指标（采纳率）在线收集，与 SLO 知识联动（AI 类 SLO 含质量）
+用法：监控体系
+锚点：实战共识
+
+</details>
+
+### 运维 · 链路（降级）
+
+<details><summary>看背面</summary>
+
+LLM 降级链路：主模型→备用模型（不同供应商）→兜底模板回复→功能降级（关闭 AI 功能回传统逻辑）
+原理：供应商故障（限流/宕机）常见（容量弹性差），跨供应商降级（网关路由）+功能开关（预案），与分布式降级预案（DF-026）同构
+用法：可用性工程
+锚点：实战共识
+
+</details>
+
+### 运维 · 内容（安全）
+
+<details><summary>看背面</summary>
+
+内容安全：输入侧（敏感词/注入检测）+输出侧（合规审查/免责声明），金融医疗等垂直域强监管
+原理：生成内容责任归属企业（模型说错话企业背锅），垂直域加规则层（话术边界），红队测试（越狱/诱导）常态化，与 AI-025 联动
+用法：安全合规工程
+锚点：实战共识
+
+</details>
+
+### 趋势 · 推理模型（推理）
+
+<details><summary>看背面</summary>
+
+推理模型（o1/R1 类）：生成前先"思考"（长 CoT），数学/代码/复杂推理显著提升，成本与延迟更高
+原理：test-time compute 换质量（多想少错），适合难题不适合简单任务（浪费），输出思考过程可观测，按任务难度路由（与模型分级联动）
+用法：模型能力演进
+锚点：2024-2025
+
+</details>
+
+### 趋势 · 端侧（小模型）
+
+<details><summary>看背面</summary>
+
+小模型趋势：7B 级模型能力逼近两年前的旗舰，端侧/本地部署（隐私+成本）场景爆发
+原理：量化+蒸馏技术成熟，小模型+RAG 常胜大模型裸跑，分级路由的基础（简单任务小模型），与 AI-055 推理模型两端并存
+用法：能力/成本权衡
+锚点：2024-2025
+
+</details>
+
+### Agent · 拆解（规划）
+
+<details><summary>看背面</summary>
+
+任务规划：复杂任务拆解（计划-执行-验证），计划先行（先产出步骤再逐步执行）降低跑偏
+原理：直接执行长任务容易目标漂移（逐步偏移原始目标），plan-and-execute 模式先定计划（可人工审核）再执行，每步对照计划校验，与 ReAct 循环（AI-016）互补
+用法：复杂任务可靠性
+锚点：实战共识
+
+</details>
+
+### Agent · 设计（工具）
+
+<details><summary>看背面</summary>
+
+工具设计原则：原子性（一个工具一件事）、描述完备（用途/参数/边界/错误码）、幂等（重试安全）、错误信息可读（模型能自我修复）
+原理：工具是 Agent 的"手"，工具质量决定 Agent 上限，错误信息返回给模型（可读）让它修正参数重试，与 RPC 接口设计原则同构
+用法：工具工程化
+锚点：实战共识
+
+</details>
+
+### Agent · 评估（测试）
+
+<details><summary>看背面</summary>
+
+Agent 评估：任务成功率（端到端）、步数/成本效率、工具调用准确率、边界场景（工具失败/恶意输入）
+原理：Agent 评估比单轮问答复杂（多步轨迹），轨迹回放（记录 trace 评估每步决策），离线模拟环境（mock 工具）+线上灰度，与 AI-034 评估体系联动
+用法：Agent 质量工程
+锚点：实战共识
+
+</details>
+
+### 面试 · 答题（主线）
+
+<details><summary>看背面</summary>
+
+AI 答题主线（Java 背景 P10）：业务场景切入（ROI）→架构（RAG/Agent 选型）→工程化（成本/评估/护栏/观测）→风险（幻觉/安全/合规）→演进（分级路由/自适应）
+原理：Java 工程师讲 AI 的差异化：不讲训练讲工程落地（把 AI 当"新型下游依赖"治理：超时/降级/幂等/对账思维迁移），这是与算法岗的边界也是优势
+用法：P10 AI 答题方法论
+锚点：实战方法论
+
+</details>
+
+### RAG · 检索权限（权限）
+
+<details><summary>看背面</summary>
+
+RAG 检索权限：按用户权限过滤文档（向量库 metadata filter），越权检索是企业事故
+原理：向量检索默认全库（无权限概念），metadata（部门/密级）过滤必须在检索层（而非生成后），权限变更同步向量库（失效敏感 chunk），与数据安全知识联动
+用法：企业 RAG 安全红线
+锚点：实战共识
+
+</details>
+
+### 成本 · 优化（token）
+
+<details><summary>看背面</summary>
+
+token 成本优化细节：system prompt 精简（长指令压缩为要点）、历史摘要（滚动压缩）、few-shot 精选（2-3 个高质量）、结构化输出（JSON 短于自然语言）
+原理：每 token 都是钱（输入输出同价），prompt 瘦身是零风险优化（先离线评估不降质），缓存 system prompt（供应商 prompt caching 折扣），与 AI-026 四招配合
+用法：token 工程细节
+锚点：实战共识
+
+</details>
+
+### 应用 · 实验（A/B）
+
+<details><summary>看背面</summary>
+
+LLM 功能 A/B 实验：prompt 版本/模型版本灰度对比（采纳率/成本/质量指标），评估集回归+线上灰度双保险
+原理：prompt 与模型都是"代码"（变更要实验），线上灰度小流量对比（统计显著性），回滚预案（评估集退化即回滚），与发布灰度知识（DF-050）同构
+用法：迭代工程
+锚点：实战共识
+
+</details>
+
+### 应用 · 版本（回滚）
+
+<details><summary>看背面</summary>
+
+LLM 应用版本管理：prompt 纳入版本控制（git）、模型版本锁定、评估报告随版本归档
+原理：prompt 是生产资产（改错引发事故），版本化+变更评审+灰度（与代码同纪律），模型升级是大变更（评估集全量回归），变更管理纪律与 DB 变更（MY-105）同构
+用法：变更纪律
+锚点：实战共识
+
+</details>
+
+### Java · 并发调用（并发）
+
+<details><summary>看背面</summary>
+
+LLM 并发调用治理：限流（供应商 RPM/TPM 配额）、批量接口（batch API 半价）、并发池隔离（不同业务独立配额）
+原理：供应商按 token/请求限流（429），应用侧限流+排队（防雪崩）、批处理（离线任务），与 Redis 限流/MQ 削峰知识同构
+用法：配额治理
+锚点：实战共识
+
+</details>
+
+### Java · SDK（集成）
+
+<details><summary>看背面</summary>
+
+Java SDK 层细节：超时（连接/读分开）、重试（429 退避）、流式（SSE 客户端）、连接池、代理配置
+原理：LLM SDK 是特殊"HTTP 客户端"（长响应/流式/限流语义），超时长于生成时间、429 与 5xx 区别重试、SSE 断线处理，与 HTTP 客户端工程知识联动
+用法：客户端工程细节
+锚点：实战共识
+
+</details>
+
+### RAG · 时效（更新）
+
+<details><summary>看背面</summary>
+
+RAG 知识时效：文档更新管道（CDC/定期同步）→重嵌入→向量库更新→缓存失效
+原理：知识库是"活数据"（过期答案比没有答案更糟），更新延迟监控（源变更到检索生效），全量重嵌入成本（增量策略：按文档 hash 变更），与缓存一致性（RD-046）同构
+用法：知识库运维
+锚点：实战共识
+
+</details>
+
+### Agent · 人工（审批）
+
+<details><summary>看背面</summary>
+
+Human-in-the-loop：高危操作（支付/删除/对外发送）人工审批（Agent 暂停→审批→继续），与 checkpoint（AI-021）配合
+原理：Agent 全自主在真实业务有风险（错误操作不可逆），审批节点（按操作风险分级）+审批 UI+超时策略，是 Agent 生产化的关键机制（全自动是目标渐进式授权）
+用法：风险控制机制
+锚点：实战共识
+
+</details>
+
+### 评估 · 检测（幻觉）
+
+<details><summary>看背面</summary>
+
+幻觉检测：答案与检索来源比对（faithfulness：生成是否被资料支持）、无来源任务用事实核查 API/规则
+原理：RAG 场景自动检测（NLI 模型比对答案与 chunk），无来源（闲聊/创作）靠约束与免责，抽样人工复核校准自动检测，与 AI-011 溯源配合
+用法：质量保障手段
+锚点：实战共识
+
+</details>
+
+### 应用 · 输出（结构化）
+
+<details><summary>看背面</summary>
+
+结构化输出：JSON schema 约束（response_format/grammar 约束解码），下游解析稳定
+原理：自然语言输出解析脆弱（格式漂移），schema 约束（供应商支持）+解析容错（重试/修复）双保险，与 function calling 的参数 schema 同机制
+用法：工程可靠性
+锚点：实战共识
+
+</details>
+
+### 趋势 · 2025（Agent）
+
+<details><summary>看背面</summary>
+
+2025 趋势：Agent 从 demo 到生产（企业级护栏/审批/观测成熟）、MCP 生态标准化、推理模型普及、多模态 Agent（GUI 操作）
+原理：企业落地主线：可控性（护栏/审计）优先于能力上限，工具生态标准化（MCP）降低集成成本，Java 工程师机会：工程化与治理层（而非模型层）
+用法：技术演进判断
+锚点：2025
+
+</details>
+
+### 应用 · 组合（电商）
+
+<details><summary>看背面</summary>
+
+电商 AI 组合应用：导购（RAG+多模态搜图）、客服（知识库+转人工）、营销文案（批处理+人工审核）、运营分析（NL2SQL）
+原理：按场景 ROI 分层：客服/导购（高频可量化）先行，NL2SQL 降数据分析门槛（权限+审计配套），与 AI-037 客服架构联动，大厂已量产的组合
+用法：组合落地案例
+锚点：实战共识
+
+</details>
+
+### 应用 · 落地（企业）
+
+<details><summary>看背面</summary>
+
+企业 LLM 落地路径：试点（低风险场景）→评估体系建设→护栏与合规→灰度放量→平台化（网关/审计/成本归集）
+原理：跳步常见症状：无评估上线（质量失控）、无护栏上线（安全事故）、无成本归集（预算爆炸），路径与分布式治理（DF-090）同构，P10 能给落地路线图
+用法：落地方法论
+锚点：实战共识
+
+</details>
+
+### 应用 · 深度（面试）
+
+<details><summary>看背面</summary>
+
+AI 面试深水区问题：幻觉怎么治理（工程手段）、成本怎么控（分级/缓存/压缩）、Agent 怎么生产化（护栏/审批/观测）、RAG 怎么评估（离线+在线）
+原理：这些问题的回答框架都指向"工程治理"而非"模型调参"，Java P10 的差异化答题（把分布式可靠性经验迁移到 AI），禁绝对化（"RAG 消除幻觉"是错误表述）
+用法：面试方法论
+锚点：实战方法论
+
+</details>
+
+### LLM · 管理（上下文）
+
+<details><summary>看背面</summary>
+
+长上下文管理：历史滚动摘要（超 N 轮压缩）、关键信息锚定（置顶/重复）、RAG 注入分离（检索结果单独区段）
+原理：窗口内内容位置影响权重（开头结尾强），对话越卷越长成本与质量双降，摘要由 LLM 自己做（异步）+结构化状态（任务卡），与 AI-002 联动
+用法：多轮对话工程
+锚点：实战共识
+
+</details>
+
+### Agent · 沙箱（安全）
+
+<details><summary>看背面</summary>
+
+Agent 工具执行沙箱：代码执行用隔离容器（无网络/限时/资源限额）、SQL 用只读账号+行数限制、Shell 白名单命令
+原理：Agent 生成的代码/命令不可信（与用户输入同级），执行环境最小权限（与 SQL 注入防御 MY-095 同思路），沙箱逃逸测试纳入安全评审
+用法：执行安全
+锚点：实战共识
+
+</details>
+
+### 评估 · 回归（回归）
+
+<details><summary>看背面</summary>
+
+回归测试自动化：每次 prompt/模型/检索变更跑评估集（CI 集成），指标阈值门禁（低于基线阻断发布）
+原理：LLM 应用"配置即代码"（prompt 变更频繁），无回归门禁则迭代=赌博（隐性退化），评估集进 CI（与单元测试同级），与 AI-034/063 联动
+用法：质量门禁工程
+锚点：实战共识
+
+</details>
+
+### Java · 能力（定位）
+
+<details><summary>看背面</summary>
+
+Java 工程师 AI 能力定位：应用层（RAG/Agent 工程）、治理层（成本/评估/安全）、平台层（网关/观测），不必深入模型层（训练/算法）
+原理：工程能力迁移是路径（分布式系统的超时/降级/幂等/对账/灰度全部适用于 AI 依赖），与算法岗差异化协作（算法提供模型，工程提供落地），P10 面试的价值主张
+用法：职业发展判断
+锚点：实战共识
+
+</details>
+
+### 成本 · prompt caching（缓存）
+
+<details><summary>看背面</summary>
+
+供应商 prompt caching：相同前缀（system prompt/few-shot）命中缓存按折扣计费
+原理：system prompt 与 few-shot 每次请求重复且最长，前缀缓存命中可省 50-90% 输入费用，要求前缀稳定（动态内容放后缀）
+用法：成本优化（AI-026 四招之一）
+锚点：2024-2025
+
+</details>
+
+### 成本 · 图像计费（多模态）
+
+<details><summary>看背面</summary>
+
+多模态图像按分辨率折算 token（一张图数百到数千 token）
+原理：图像 token 远高于同信息量文本（描述性文本更省），缩图降分辨率直接降成本，批处理图片任务先评估 token 预算
+用法：图像批量任务成本估算
+锚点：通用
+
+</details>
+
+### 微调 · 蒸馏（蒸馏）
+
+<details><summary>看背面</summary>
+
+蒸馏：用大模型生成/标注数据训练小模型，能力近似成本大降
+原理：大模型当教师（生成问答对/标注）小模型当学生，部署成本低延迟低，是"能力下放"的主流路径（与量化/LoRA 组合）
+用法：分级路由的供给侧技术
+锚点：实战共识
+
+</details>
+
+### 评估 · MRR（检索）
+
+<details><summary>看背面</summary>
+
+检索评估指标：Recall@K（答案在 top K 的比例）与 MRR（排名倒数均值）
+原理：Recall@K 保障"找没找到"，MRR 衡量"排得靠不靠前"，RAG 场景 Recall@5 是门槛指标，与生成评估分层（先检索后生成）
+用法：RAG 检索质量量化（AI-012 落地）
+锚点：实战共识
+
+</details>
+
+### Agent · GenAI 约定（观测）
+
+<details><summary>看背面</summary>
+
+OpenTelemetry GenAI 语义约定：统一 LLM 调用的 trace 属性（模型/token/温度）
+原理：跨框架可对比（LangChain/Spring AI 一套仪表盘），属性含 model/input tokens/cost，与通用 trace 融合（Agent 步骤与 HTTP 调用同链路），是观测标准化方向
+用法：Agent 观测落地（AI-042 实现）
+锚点：2024-2025
+
+</details>
+
+### Agent · 工具结果（上下文）
+
+<details><summary>看背面</summary>
+
+工具结果必须截断/摘要后再入上下文（防单次工具调用撑爆窗口）
+原理：大 JSON/长日志工具结果一次性进上下文挤掉任务关键信息且费用陡增，策略：截断+字段筛选+摘要（LLM 二次加工），是 Agent 工程常见事故点
+用法：Agent 稳定性工程
+锚点：实战共识
+
+</details>
+
+### Java · 会话隔离（并发）
+
+<details><summary>看背面</summary>
+
+多用户并发会话隔离：上下文（历史/记忆）按 session key 隔离，禁止共享可变状态
+原理：串用他人上下文是严重事故（隐私+错误回答），实现：会话存储按 sessionId 分区+并发集合，Java 侧用 ThreadLocal 传 session 上下文（与线程池场景 TTL 知识联动）
+用法：多用户应用的安全底线
+锚点：实战共识
+
+</details>
+
+### 成本 · 分级路由（路由）
+
+<details><summary>看背面</summary>
+
+模型分级路由：按任务复杂度/用户分层路由到不同档位模型
+原理：简单任务（改写/分类）小模型、复杂任务（推理/创作）大模型，路由规则可由小模型判断或规则引擎，成本可降 50%+ 质量关键路径不降，与 AI-055/056 联动
+用法：LLM 网关核心能力
+锚点：实战方法论
+
+</details>
+
+### Java · 断线（流式）
+
+<details><summary>看背面</summary>
+
+SSE 流式断线处理：客户端断开停止生成（节约成本）与重连续传（Last-Event-ID）
+原理：用户关闭页面应取消生成（省 token），意外断线用 Last-Event-ID 续传（SSE 标准），Java 侧 SseEmitter 完成/超时/错误回调清理资源
+用法：交互体验与成本平衡
+锚点：实战共识
+
+</details>
+
+### 评估 · 污染（污染）
+
+<details><summary>看背面</summary>
+
+评估集污染：训练/prompt 优化时用到了评估集问题导致分数虚高
+原理：评估集必须与开发隔离（评估问题不进任何 prompt 示例），污染的分数不可信，定期换血评估集（保留盲测集），与单元测试测试数据治理同理
+用法：质量工程纪律
+锚点：实战共识
+
+</details>
+
+
+## 算法（70 张）
+
+### 复杂度 · 大 O（分析）
+
+<details><summary>看背面</summary>
+
+大 O 表示增长趋势：O(1)<O(logN)<O(N)<O(NlogN)<O(N²)<O(2^N)
+原理：只保留最高阶项与常数忽略，O(NlogN) 与 O(N) 在 N 小时差距不明显（常数项主导），面试先给复杂度再给推导
+用法：复杂度分析八股起点
+锚点：理论共识
+
+</details>
+
+### 复杂度 · 空间复杂度（空间）
+
+<details><summary>看背面</summary>
+
+空间复杂度算辅助空间：递归深度（栈）、显式数据结构，尾递归 Java 不优化
+原理：Java JIT 不做尾递归优化（栈溢出风险），递归改迭代是深度大时的常规改造，与 JVM 栈（JV-002）联动
+用法：工程与算法结合点
+锚点：理论共识
+
+</details>
+
+### 数组 · 双指针（技巧）
+
+<details><summary>看背面</summary>
+
+双指针：对撞（有序数组两数之和 O(N)）、快慢（环形链表判环）、同向（去重）
+原理：有序性是对撞指针的前提（单调性剪枝），快慢指针判环用速度差，空间 O(1)，与二分互补
+用法：手写算法高频套路
+锚点：理论共识
+
+</details>
+
+### 数组 · 滑动窗口（技巧）
+
+<details><summary>看背面</summary>
+
+滑动窗口：同向双指针维护窗口性质，O(N) 解决子串/子数组问题（最长无重复子串）
+原理：右指针扩张左指针收缩各走一遍 O(N)，窗口内状态用哈希/计数维护，与限流滑动窗口（RD-057）同名不同物
+用法：子串子数组类题的通用解法
+锚点：理论共识
+
+</details>
+
+### 数组 · 前缀和（技巧）
+
+<details><summary>看背面</summary>
+
+前缀和：预处理 prefix[i]=Σ(0..i-1)，区间和 O(1) 查询
+原理：建表 O(N) 换查询 O(1)，二维前缀和扩展（子矩阵和），差分数组是其逆操作（区间批量加），高频统计类题套路
+用法：区间统计题基础
+锚点：理论共识
+
+</details>
+
+### 二分 · 二分（模板）
+
+<details><summary>看背面</summary>
+
+二分查找：有序+边界处理（左闭右闭/左闭右开两模板选一坚持）
+原理：死循环根源：边界收缩条件错误（mid±1 缺失），mid=(left+right)>>>1 防 int 溢出（Java 特有考点），与旋转数组/求边界变形
+用法：手写二分零错误率训练
+锚点：理论共识
+
+</details>
+
+### 二分 · 旋转数组（变形）
+
+<details><summary>看背面</summary>
+
+旋转数组找最小值/搜索：先判断哪半有序（nums[mid] 与端点比较）再收缩
+原理：旋转数组局部有序（一半有序一半含断点），与 mid 比较端点判断有序半区，处理重复元素时边界退化 O(N)
+用法：二分变形高频题
+锚点：理论共识
+
+</details>
+
+### 链表 · 反转（技巧）
+
+<details><summary>看背面</summary>
+
+链表反转：迭代三指针（prev/cur/next）O(N) O(1)，递归版 O(N) 栈空间
+原理：迭代逐节点改 next 指向，递归到尾再回改，K 组反转是组合题，手写必须零 bug（笔试常考）
+用法：链表题基本功
+锚点：理论共识
+
+</details>
+
+### 链表 · 判环（技巧）
+
+<details><summary>看背面</summary>
+
+环形链表判环：快慢指针（Floyd），找环入口用相遇后一指针回头同步走
+原理：数学推导：快 2 步慢 1 步必相遇，入口计算 a=c+(n-1)圈+c，与 AQS CLH 队列/对象引用链（GC）概念关联
+用法：链表高频题
+锚点：理论共识
+
+</details>
+
+### 链表 · 归并合并（合并）
+
+<details><summary>看背面</summary>
+
+合并两个有序链表：哑结点（dummy）统一头处理，O(N+M)
+原理：哑结点消除头节点特判（空链表场景），递归版简洁但栈深，K 链表合并用小顶堆 O(N logK)
+用法：LRU/归并排序基础
+锚点：理论共识
+
+</details>
+
+### 排序 · 复杂度（对比）
+
+<details><summary>看背面</summary>
+
+排序复杂度表：快排 O(NlogN)平均 O(N²)最坏、归并稳定 O(NlogN)、堆排 O(NlogN) O(1)空间、冒泡/插入 O(N²) 稳定
+原理：快排最坏（有序数组+固定 pivot）随机化 pivot 规避，归并空间 O(N)，稳定排序适用场景（多关键字排序），面试常考对比表
+用法：排序八股核心表
+锚点：理论共识
+
+</details>
+
+### 排序 · 分区（快排）
+
+<details><summary>看背面</summary>
+
+快排核心 partition：选 pivot 分区（小于/大于），随机 pivot 或三数取中防最坏
+原理：单边/双边扫描两种写法，三路分区（<=>三段）处理大量重复元素（荷兰国旗问题），递归深度 O(logN)
+用法：手写快排的考点
+锚点：理论共识
+
+</details>
+
+### 排序 · 分治（归并）
+
+<details><summary>看背面</summary>
+
+归并排序：分治+合并有序段，稳定 O(NlogN)，空间 O(N)，外排序基础
+原理：链表排序首选归并（无需随机访问），磁盘外排序（大数据 topK/去重）是其工程应用，与海量数据题联动
+用法：分治思想代表
+锚点：理论共识
+
+</details>
+
+### 堆 · 堆（结构）
+
+<details><summary>看背面</summary>
+
+堆：完全二叉树数组存储（i 子节点 2i+1/2i+2），插入/删除 O(logN) 查顶 O(1)
+原理：Java PriorityQueue 默认小顶堆，大顶堆用 Collections.reverseOrder()，建堆 O(N)（自底向上下沉）比逐个插入 O(NlogN) 优
+用法：TopK/优先级调度基础
+锚点：理论共识
+
+</details>
+
+### 堆 · TopK（TopK）
+
+<details><summary>看背面</summary>
+
+TopK：海量数据取最大 K 个用小顶堆（O(N logK) 空间 O(K)），K 小于 N/2 时堆优于全排序
+原理：堆只维护 K 个候选（内存友好），更大规模用分桶+外排（海量题），与 Kafka 消费（堆调度）/Redis ZSet 排行榜知识联动
+用法：海量数据题标配
+锚点：理论共识
+
+</details>
+
+### 哈希 · 哈希表（设计）
+
+<details><summary>看背面</summary>
+
+哈希表：O(1) 均摊查找，冲突解决链地址（Java）/开放寻址，扩容 rehash O(N) 摊还 O(1)
+原理：哈希函数质量决定分布，负载因子触发扩容（Java 0.75），与 HashMap（JB 体系）/Redis dict 知识联动，恶意哈希碰撞是 DoS 向量
+用法：数据结构基础
+锚点：理论共识
+
+</details>
+
+### 哈希 · 两数之和（应用）
+
+<details><summary>看背面</summary>
+
+两数之和：哈希表一次遍历 O(N)（存已见值→查补数），暴力 O(N²)
+原理：空间换时间经典（哈希存已遍历），与 JB-007 equals/hashCode 知识联动（自定义 key 需正确 hashCode），双指针变体（有序数组）
+用法：哈希应用入门题
+锚点：理论共识
+
+</details>
+
+### 树 · 遍历（遍历）
+
+<details><summary>看背面</summary>
+
+二叉树遍历：前中后序（递归/迭代栈）+层序（队列 BFS），中序遍历 BST 得有序序列
+原理：迭代版用显式栈（与 JVM 栈联动），Morris 遍历 O(1) 空间（利用线索），层序按层处理（右视图/之字形变形），手写必须熟练
+用法：树题基本功
+锚点：理论共识
+
+</details>
+
+### 树 · BST（BST）
+
+<details><summary>看背面</summary>
+
+BST：左<根<右，查找/插入/删除 O(logN) 均衡时，退化链表 O(N)
+原理：删除节点三情况（叶子/单子/双子用后继替换），中序有序性质是验证/第 K 小题的钥匙，与红黑树（自平衡进化）知识联动
+用法：树结构基础
+锚点：理论共识
+
+</details>
+
+### 树 · 红黑树（红黑）
+
+<details><summary>看背面</summary>
+
+红黑树：近似平衡 BST（红黑性质），插入/删除/查找 O(logN)，旋转维护平衡
+原理：相比 AVL：平衡宽松（旋转少）适合频繁增删，Java TreeMap/HashMap 树化（JB 体系）与 Linux CFS 应用，B+ 树是磁盘场景进化
+用法：高级树结构八股
+锚点：理论共识
+
+</details>
+
+### 树 · B+树（B+）
+
+<details><summary>看背面</summary>
+
+B+ 树：多路平衡树叶子链表，树高低（磁盘 IO 少），是 MySQL/文件系统存储结构，与内存场景红黑树分工
+原理：磁盘按块读（页 16KB）多路宽度大树矮，叶子链表范围扫描，与 MY-001 联动，内存索引（红黑/跳表）与磁盘索引（B+）的分工逻辑
+用法：存储引擎理论基础
+锚点：理论共识
+
+</details>
+
+### 树 · 跳表（跳表）
+
+<details><summary>看背面</summary>
+
+跳表：多层索引链表 O(logN)，Redis ZSet 采用，实现简单范围查询友好（与 AL-007 跳表细节联动）
+原理：概率性平衡（免旋转），空间换时间（多层指针），与红黑树对比：实现简单/范围查询/并发友好（无锁化更容易），RD-007 联动
+用法：Redis 源码关联
+锚点：理论共识
+
+</details>
+
+### 图 · BFS/DFS（遍历）
+
+<details><summary>看背面</summary>
+
+图遍历：BFS（队列，最短路径无权图/层序）vs DFS（栈/递归，连通性/拓扑）
+原理：BFS 按层扩散先到即最短，DFS 深入（回溯剪枝），复杂度 O(V+E)，互转问题（岛屿数量两解）
+用法：图论入门双基础
+锚点：理论共识
+
+</details>
+
+### 图 · 拓扑排序（拓扑）
+
+<details><summary>看背面</summary>
+
+拓扑排序：DAG 顶点线性序（依赖调度），Kahn 算法（入度表+BFS）或 DFS 后序逆序
+原理：入度归零入队（BFS 版好写），存在环则顶点数<N（检测依赖循环），任务调度/构建顺序/课程表应用
+用法：依赖调度类题
+锚点：理论共识
+
+</details>
+
+### 图 · Dijkstra（最短路）
+
+<details><summary>看背面</summary>
+
+Dijkstra：单源最短路（非负权），优先队列 O((V+E)logV)
+原理：贪心每次取最近未定节点，负权失效（Bellman-Ford 处理），网络路由/地图导航基础，与负载均衡（响应时间加权）概念关联
+用法：图算法进阶
+锚点：理论共识
+
+</details>
+
+### DP · DP（入门）
+
+<details><summary>看背面</summary>
+
+动态规划：状态定义+转移方程+初始化+遍历顺序四要素，重叠子问题+最优子结构两前提
+原理：自顶向下（记忆化递归）与自底向上（填表）等价，空间优化（滚动数组）常见，背包/LCS/编辑距离三经典，与回溯对比（DP 记子问题）
+用法：DP 方法论
+锚点：理论共识
+
+</details>
+
+### DP · 背包（经典）
+
+<details><summary>看背面</summary>
+
+背包问题：0-1 背包（每件一件，倒序遍历容量）vs 完全背包（无限件，正序遍历）
+原理：遍历顺序决定语义（倒序防重复选），空间优化一维 O(V)，变形（分割等和子集/零钱兑换），笔试 DP 最高频族
+用法：DP 高频题型
+锚点：理论共识
+
+</details>
+
+### DP · LCS（经典）
+
+<details><summary>看背面</summary>
+
+最长公共子序列（LCS）：dp[i][j] 依赖左/上/左上，编辑距离是其变形（增删改代价）
+原理：字符串相似度/版本 diff 的算法基础，空间优化两行滚动，输出具体序列需回溯路径，与 Git diff 思想关联
+用法：字符串 DP 经典
+锚点：理论共识
+
+</details>
+
+### 贪心 · 贪心（思想）
+
+<details><summary>看背面</summary>
+
+贪心：局部最优推出全局最优（需证明交换不劣化），区间调度/跳跃游戏/分发饼干
+原理：贪心正确性难证明（反例思维），与 DP 对比：贪心快但不保正确（无后效性才可用），活动选择按结束时间排序是经典
+用法：策略类题辨析
+锚点：理论共识
+
+</details>
+
+### 回溯 · 回溯（框架）
+
+<details><summary>看背面</summary>
+
+回溯：选择→递归→撤销（三段模板），组合/排列/子集三模板，剪枝优化
+原理：排列用 used 数组、组合用 startIndex 防重复、去重排序+跳过同层相同，复杂度指数级（剪枝是关键），与全排列/N 皇后
+用法：搜索类题模板
+锚点：理论共识
+
+</details>
+
+### Trie · Trie（结构）
+
+<details><summary>看背面</summary>
+
+Trie（前缀树）：公共前缀共享节点，插入/查询 O(L)，前缀搜索独有能力
+原理：自动补全/敏感词过滤/单词搜索应用，敏感词 DFA 匹配（文本流单遍扫描），空间换时间（子节点哈希），与敏感词过滤工程联动
+用法：字符串结构
+锚点：理论共识
+
+</details>
+
+### 设计 · LRU（LRU）
+
+<details><summary>看背面</summary>
+
+LRU 实现：哈希表+双向链表 O(1) get/put（本项目手写并实测）
+原理：哈希定位节点+链表维护顺序（头最新尾最旧），Java 可用 LinkedHashMap(accessOrder=true) 快速版，容量淘汰与 Redis 近似 LRU（RD-023）对比
+用法：手写题第一名（本项目 ExamSolutions 实测）
+锚点：本项目实测
+
+</details>
+
+### 设计 · LFU（LFU）
+
+<details><summary>看背面</summary>
+
+LFU：频次桶+双向链表（同频按时间），O(1) get/put，比 LRU 多频次维度
+原理：频次桶数组+桶内 LRU 链，淘汰最小频次最久未用，与 Redis LFU（RD-024）概念联动，实现复杂度高于 LRU
+用法：手写进阶题
+锚点：理论共识
+
+</details>
+
+### 设计 · 实现（限流）
+
+<details><summary>看背面</summary>
+
+滑动窗口限流器实现：时间戳队列/环形桶计数（本项目手写并实测，窗口语义验证过）
+原理：本项目 ExamSolutions 实测：队列存时间戳 eviction 老旧+计数窗口内，精度与内存权衡，与 RD-057/MQ 限流联动
+用法：手写工程算法（本项目实测）
+锚点：本项目实测
+
+</details>
+
+### 并发 · 生产者消费者（手写）
+
+<details><summary>看背面</summary>
+
+生产者消费者手写：synchronized+wait/notify（while 防虚假唤醒）或 ReentrantLock 双 Condition 或 BlockingQueue 三版本（本项目实测）
+原理：wait 用 while（JB/并发知识联动），双 Condition 精准唤醒（SP-098 联动），BlockingQueue 版最简，考察并发基础综合
+用法：并发手写第一名（本项目实测）
+锚点：本项目实测
+
+</details>
+
+### 并发 · 交替打印（手写）
+
+<details><summary>看背面</summary>
+
+两线程交替打印（1-100）：volatile 标志位自旋、wait/notify 交替、Semaphore/Lock Condition 四版本（本项目实测）
+原理：状态翻转+自旋或阻塞等待，volatile 自旋版简单费 CPU，Condition 版精准，考察可见性与协作（与 JC 体系联动）
+用法：并发手写高频（本项目实测）
+锚点：本项目实测
+
+</details>
+
+### 并发 · 单例（手写）
+
+<details><summary>看背面</summary>
+
+手写线程安全单例：DCL（volatile）、静态内部类、枚举三版本（与 SP-015/016/JC-015 联动）
+原理：笔试要求写出 volatile 位置与原因（重排防线），静态内部类最简（类初始化锁），枚举防反射反序列化，是"手写+讲原理"双考题
+用法：手写基础题
+锚点：本项目实测
+
+</details>
+
+### 海量 · 外排（topK）
+
+<details><summary>看背面</summary>
+
+海量数据 topK：内存放不下→哈希分桶（按 hash 模）→每桶 topK（堆）→归并全局 topK
+原理：分桶把大问题切小（单机内存可容），桶间无重叠保证正确，多机扩展（MapReduce 思想），与 AL-015 堆版本衔接
+用法：海量数据题框架
+锚点：理论共识
+
+</details>
+
+### 海量 · 位图（判重）
+
+<details><summary>看背面</summary>
+
+海量判重：bitmap（int 位图 40 亿整数 512MB）、布隆过滤器（允许误判更省）
+原理：1 个 int 1 bit（32 倍压缩），布隆误判率可控（位数组+多哈希），Redis bitmap/RD-009 联动，与缓存穿透方案联动
+用法：海量题基础工具
+锚点：理论共识
+
+</details>
+
+### 海量 · 词频（统计）
+
+<details><summary>看背面</summary>
+
+海量词频统计：分桶→桶内哈希计数→桶内 topK（堆）→归并，与 MapReduce 思想同构
+原理：MR 的 map（分桶）reduce（聚合）两阶段，单机版与分布式版（MR/Spark）同构，P10 能讲"单机到分布式的演进逻辑"
+用法：海量题经典
+锚点：理论共识
+
+</details>
+
+### 技巧 · 异或（前缀）
+
+<details><summary>看背面</summary>
+
+异或性质：a^a=0 a^0=a，找单数（其余成对）/交换两数/校验，O(N) O(1)
+原理：出现一次的数（异或全数组），丢失数字（异或 1..N），位运算其他技巧（n&(n-1) 消最低位 1 判 2 幂）
+用法：位运算技巧
+锚点：理论共识
+
+</details>
+
+### 技巧 · 原地（双指针）
+
+<details><summary>看背面</summary>
+
+原地操作：数组去重（同向指针）、移动零（交换）、颜色分类（三指针荷兰国旗）
+原理：O(1) 空间约束下的数组操作，快慢指针写覆盖（读写下标分离），与 AL-012 三路分区同思想
+用法：数组手写高频
+锚点：理论共识
+
+</details>
+
+### 技巧 · 翻转（字符串）
+
+<details><summary>看背面</summary>
+
+字符串技巧：整体翻转+局部翻转（旋转单词）、双指针原地（Java String 不可变用 char[]）、KMP/暴力匹配
+原理：Java String 不可变性（JB-001 联动）必须转 char[] 操作，旋转问题（三次翻转）套路，字符串题注意 Unicode（Java char 是 UTF-16 码元）
+用法：字符串手写基础
+锚点：理论共识
+
+</details>
+
+### 技巧 · 栈深（递归）
+
+<details><summary>看背面</summary>
+
+递归栈深控制：树深 1e5 级别改迭代（显式栈），Java 默认栈 512K-1M（JV-002 联动）
+原理：笔试/LeetCode 数据规模陷阱（链表长/树深爆栈），尾递归 Java 不优化（AL-002），迭代改写（Morris/显式栈）是工程素养
+用法：工程与算法交叉点
+锚点：理论共识
+
+</details>
+
+### 面试 · 框架（答题）
+
+<details><summary>看背面</summary>
+
+算法面试答题框架： clarify（确认输入规模/边界）→思路（先暴力后优化，说复杂度）→编码（边界检查/命名清晰）→测试（用例覆盖边界）
+原理：沟通比刷题量重要（面试官观察思考过程），先说复杂度再写代码（方向确认防白写），手写代码自测（空/单元素/极值）习惯，P10 算法考工程思维
+用法：面试方法论
+锚点：实战方法论
+
+</details>
+
+### 面试 · 清单（手写）
+
+<details><summary>看背面</summary>
+
+Java 面试手写高频清单：LRU、生产者消费者、交替打印、快排/归并、二分、链表反转、单例、限流器、死锁示例、线程池（本项目 ExamSolutions 六件套覆盖核心）
+原理：按"并发手写 3 件+数据结构 3 件+工程算法 2 件"准备，每件能"写+讲复杂度+讲扩展"，本项目全部实测过输出正确
+用法：手写准备路线（本项目验证）
+锚点：本项目方法论
+
+</details>
+
+### 技巧 · 设计哈希（哈希）
+
+<details><summary>看背面</summary>
+
+手写哈希表：数组+链表节点、负载因子扩容（2 倍 rehash）、 hashCode/equals 契约，与 HashMap 源码（JB 体系）对照
+原理：手写版验证对 HashMap 的理解（扰动函数/树化可讲思想），equals 相等则 hashCode 必须相等（否则哈希表行为错误），与 JB-007 联动
+用法：底层实现手写
+锚点：理论共识
+
+</details>
+
+### 树 · 非递归（手写）
+
+<details><summary>看背面</summary>
+
+二叉树非递归遍历手写：中序（栈+左链压栈）、前序（根右左入栈）、后序（双栈/前序反转技巧）
+原理：后序最难（需判断右子树完成），双栈技巧（前序变体反转），与 AL-018 递归版互补，考察栈的理解
+用法：树手写进阶
+锚点：理论共识
+
+</details>
+
+### 图 · 岛屿（手写）
+
+<details><summary>看背面</summary>
+
+岛屿数量（DFS/BFS 沉岛）：网格图遍历（上下左右），访问标记（原地改 2 或 visited）
+原理：网格图是图论的二维形态（笔试高频），沉岛（访问过改 0）免 visited 数组，BFS 版防栈深（大网格），与 AL-023 联动
+用法：图手写入门
+锚点：理论共识
+
+</details>
+
+### DP · 爬楼梯（手写）
+
+<details><summary>看背面</summary>
+
+爬楼梯/斐波那契：递推 dp[i]=dp[i-1]+dp[i-2]，空间优化两变量，变体（最小花费/青蛙跳）
+原理：DP 入门标准题（讲清状态与转移），矩阵快速幂 O(logN) 变体（超大 N），考察"能否从暴力优化到 DP"的演进讲述
+用法：DP 手写入门
+锚点：理论共识
+
+</details>
+
+### 工程 · 规范（代码）
+
+<details><summary>看背面</summary>
+
+笔试代码规范：变量语义命名（不用 a/b/i2）、边界检查先行、方法拆分（≤30 行）、复杂度注释
+原理：与 REVIEW-STANDARD.md 语言标准联动（C4.1 禁 s2 命名），笔试代码也是"作品"（面试官看风格），防御性编程（null/空/越界）显式处理
+用法：笔试工程素养
+锚点：本项目方法论
+
+</details>
+
+### 工程 · 实测（复杂度）
+
+<details><summary>看背面</summary>
+
+复杂度理论联系实测：O(N²) 双循环在 N=1e5 时分钟级（不可上线），O(N) 数据结构选型依据
+原理：与 JVM/JC 性能知识联动（数组遍历缓存友好），List.contains O(N) 套循环=O(N²)（代码 review 高频），复杂度是工程决策输入
+用法：工程意识
+锚点：实战共识
+
+</details>
+
+### 设计 · 实现（布隆）
+
+<details><summary>看背面</summary>
+
+手写布隆过滤器：位数组+k 个哈希函数（double hashing），误判率公式推导，与 RD-009 联动
+原理：add 置位、contains 全位检查（1 可能误判 0 必不存在），误判率 p=(1-e^(kn/m))^k，Redis/RedisBloom 实现，与缓存穿透方案联动
+用法：设计题高频
+锚点：理论共识
+
+</details>
+
+### 设计 · 实现（一致性）
+
+<details><summary>看背面</summary>
+
+手写一致性哈希：TreeMap（ceilingEntry 找环上节点）+虚拟节点，与 DF-015 联动
+原理：TreeMap 顺时针查找（ceiling 环形处理 wrap 到 first），虚拟节点 hash 计算（node#vn 序号），增删节点迁移量验证（1/n），Java 实现的细节考点
+用法：分布式算法手写
+锚点：理论共识
+
+</details>
+
+### 技巧 · 合并（区间）
+
+<details><summary>看背面</summary>
+
+区间合并：按起点排序+遍历合并（重叠判定），会议室（排序+堆/扫描线）变形
+原理：排序后线性扫描（重叠：cur.start<=prev.end），会议室 II 用堆（进行中会议数），区间类题统一套路（先排序）
+用法：区间类题模板
+锚点：理论共识
+
+</details>
+
+### 技巧 · 应用（栈）
+
+<details><summary>看背面</summary>
+
+栈应用：括号匹配、表达式求值（双栈：数字栈+运算符栈）、最小栈（辅助栈）、单调栈（下一个更大元素）
+原理：单调栈：维护单调性求两侧极值（柱状图/温度），表达式求值优先级处理，与 JVM 栈帧概念区分（数据结构与运行时栈）
+用法：栈类题族
+锚点：理论共识
+
+</details>
+
+### 技巧 · 位图题（二进制）
+
+<details><summary>看背面</summary>
+
+位运算题：只出现一次的数字 III（分组异或）、缺失数字、2 的幂判断（n&(n-1)==0）、汉明重量（popcount）
+原理：分组异或：x^y 分离（按最低不同位分组），JDK Integer.bitCount 实现思想（分治合并），与 AL-041 联动
+用法：位运算进阶
+锚点：理论共识
+
+</details>
+
+### 面试 · 习惯（白板）
+
+<details><summary>看背面</summary>
+
+白板/手写习惯：先写函数签名与注释（意图）、自顶向下（主逻辑先框架）、变量命名完整、写完口跑一遍测试用例
+原理：手写无编译器（语法错误成本高），口跑（dry run）能抓边界 bug（面试官看重自测意识），字迹与缩进影响可读性
+用法：手写方法论
+锚点：实战方法论
+
+</details>
+
+### 面试 · 路径（准备）
+
+<details><summary>看背面</summary>
+
+算法准备路径：手写清单（AL-046）→高频题族（滑窗/二分/DP 手写 30 题）→复盘错题（模板内化），P10 不追求题量追求"每题能讲清为什么"
+原理：题海不如模板（每族掌握 3-5 题会变形），错题本记录"错在哪一步"（边界/状态定义），与复习方法论（时间分配）一致
+用法：备考方法论
+锚点：实战方法论
+
+</details>
+
+### 面试 · 复习（主线）
+
+<details><summary>看背面</summary>
+
+算法复习主线：复杂度→数组双指针/滑窗→链表→二分→排序→堆/TopK→树/图→DP 三经典→手写并发与设计题
+原理：按笔试出场频率排序（滑窗/二分/TopK/DP 最高频），手写题（LRU/生产者消费者）是 Java 岗特色（与纯算法岗差异），与 AL-046 清单联动
+用法：复习时间分配
+锚点：实战方法论
+
+</details>
+
+### 二分 · 二分答案（变形）
+
+<details><summary>看背面</summary>
+
+二分答案：在答案区间上二分并验证可行性（最大化最小值/最小化最大值）
+原理：将"求最优值"转化为"判定可行"再二分边界，check 函数 O(N)，总复杂度 O(N logV)
+用法：资源分配/运输计划类题模板
+锚点：理论共识
+
+</details>
+
+### 链表 · 快慢指针找中点（技巧）
+
+<details><summary>看背面</summary>
+
+快慢指针找链表中点：快指针每次 2 步慢指针 1 步，快到尾时慢在中点
+原理：一次遍历 O(N) O(1)，归并排序链表的前置步骤，偶数长度时慢指针指向前一个中点
+用法：链表归并排序的子过程
+锚点：理论共识
+
+</details>
+
+### 矩阵 · 旋转（技巧）
+
+<details><summary>看背面</summary>
+
+矩阵旋转 90 度：先转置再每行左右翻转，原地 O(1) 额外空间
+原理：转置沿主对角线交换再水平镜像等效顺时针旋转 90 度，两步各 O(N²) 免新矩阵
+用法：图像处理类手写题
+锚点：理论共识
+
+</details>
+
+### 技巧 · 摩尔投票（摩尔投票）
+
+<details><summary>看背面</summary>
+
+摩尔投票求多数元素：候选人+计数抵消，出现超半数元素必胜出
+原理：成对不同元素两两抵消，超半数元素在抵消后仍有剩余，O(N) O(1) 超过计数哈希方案
+用法：流式多数元素统计的理论基础
+锚点：理论共识
+
+</details>
+
+### 双指针 · 接雨水（经典）
+
+<details><summary>看背面</summary>
+
+接雨水：双指针从两端收缩，按较矮一侧结算水位，O(N) O(1)
+原理：每格水位由两侧最大高度较小值决定，双指针维护左右最大值，矮侧的最大值即该侧瓶颈可安全结算
+用法：经典双指针应用题
+锚点：理论共识
+
+</details>
+
+### 字符串 · 排列判定（技巧）
+
+<details><summary>看背面</summary>
+
+判定字符串排列（s2 含 s1 排列）：滑动窗口+字符计数数组比对
+原理：窗口长度固定为 s1 长度，进窗增计数出窗减计数，比较计数数组（26 长度）差异，O(N)
+用法：与 AL-004 滑窗套路联动
+锚点：理论共识
+
+</details>
+
+### 分治 · 逆序对（经典）
+
+<details><summary>看背面</summary>
+
+归并排序求逆序对：合并阶段统计跨段逆序（左段元素大于右段元素时计数），O(N logN)
+原理：归并时左右段各自有序，右段元素小于左段当前元素则左段剩余全部构成逆序，暴力 O(N²) 超时
+用法：分治统计类经典（剑指 Offer 原题族）
+锚点：理论共识
+
+</details>
+
+### 设计 · 环形队列（手写）
+
+<details><summary>看背面</summary>
+
+手写环形队列：数组+头尾指针+取模入队出队，判满用 (tail+1)%cap==head 或 size 计数
+原理：牺牲一个槽位或维护 size 区分满与空，ArrayDeque 内部即循环数组思想，与 ArrayDeque（循环数组实现）联动
+用法：手写数据结构高频（生产者消费者载体）
+锚点：理论共识
+
+</details>
+
+### 字符串 · 大数加法（手写）
+
+<details><summary>看背面</summary>
+
+大数加法：字符串模拟竖式加法（低位对齐逐位加进位），O(max(M,N))
+原理：Long 上限约 9.2×10^18 超出即溢出，字符串模拟不受位数限制，Java 可用 BigInteger（笔试要求手写模拟）
+用法：与整数溢出知识（JB-066）联动
+锚点：理论共识
+
+</details>
+
+### 技巧 · 洗牌算法（洗牌）
+
+<details><summary>看背面</summary>
+
+Fisher-Yates 洗牌：从后往前每个位置与前面随机位置交换，均匀 O(N)
+原理：从后往前保证每个排列等概率（1/n!），从前往后交换是有偏洗牌（经典错误），Collections.shuffle 即此实现
+用法：随机抽样/A-B 测试分流的理论基础
+锚点：理论共识
+
+</details>
+
+
+## Java AI 框架（715 张）
+
+### Spring AI · ChatClient（ChatClient）
+
+<details><summary>看背面</summary>
+
+Spring AI 的核心高层 API 是 ChatClient：ChatClient.create(chatModel) 构建，.prompt().user(...).call().content() 返回字符串
+原理：ChatClient 是流式链式门面，屏蔽底层 ChatModel 差异，业务代码面向它编程则换模型不改代码
+用法：业务层统一入口，模型层可替换
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · stream（流式）
+
+<details><summary>看背面</summary>
+
+ChatClient 流式调用 .stream().content() 返回 Flux<String>（Reactor 类型）
+原理：流式走 SSE 推给前端需 WebFlux 或 SseEmitter 桥接，返回类型是 Reactor Flux 是响应式栈的标志
+用法：WebFlux 技术栈对接 SSE
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · entity（结构化）
+
+<details><summary>看背面</summary>
+
+ChatClient 结构化输出：.call().entity(MyDto.class) 直接得到 Java 对象
+原理：框架把目标类型转成 JSON Schema 注入提示词，返回 JSON 后反序列化，业务免手写解析
+用法：下游强类型消费（报表/工单结构）
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · system（提示词）
+
+<details><summary>看背面</summary>
+
+ChatClient 用 .system(...) 设系统提示、.user(...) 设用户消息，链式可多次调用
+原理：系统提示承载角色与规则、用户消息承载当次输入，分离设置是 prompt 工程在框架层的落点
+用法：角色定义与输出规则放 system
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · advisor（Advisor）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 advisor 机制：.advisors(...) 挂载拦截链，请求在调用模型前后经过 advisor
+原理：RAG 检索、对话记忆、日志审计都以 advisor 实现，业务代码组合 advisor 即可叠加能力，是 Spring AI 的扩展主轴
+用法：RAG/记忆/审计组合装配
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · QuestionAnswerAdvisor（RAG）
+
+<details><summary>看背面</summary>
+
+QuestionAnswerAdvisor 是向量库 RAG 开箱 advisor：检索相关文档并注入提示词
+原理：挂载后每次提问自动走"向量化→相似检索→上下文注入"，业务一行 advisor 即得 RAG 能力
+用法：RAG 管道快速落地
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · MessageChatMemoryAdvisor（记忆）
+
+<details><summary>看背面</summary>
+
+MessageChatMemoryAdvisor 把 ChatMemory 中的历史注入对话
+原理：记忆与 advisor 解耦：换记忆实现只换 ChatMemory bean，注入逻辑不变，多会话按 conversationId 隔离
+用法：多轮对话记忆装配
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · MessageWindowChatMemory（记忆）
+
+<details><summary>看背面</summary>
+
+ChatMemory 默认实现 MessageWindowChatMemory 按窗口保留最近 N 条消息
+原理：窗口截断防 token 爆炸，持久化经 ChatMemoryRepository（内存或 JDBC 实现）
+用法：多轮上下文成本控制
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · @Tool（工具）
+
+<details><summary>看背面</summary>
+
+Spring AI 用 @Tool 注解声明工具方法，框架自动包装为 ToolCallback
+原理：模型通过 function calling 输出工具调用，框架执行方法并回填结果，业务只写普通 Java 方法
+用法：让模型操作业务能力（查订单/发通知）
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · ToolCallback（工具）
+
+<details><summary>看背面</summary>
+
+ToolCallback 是 Spring AI 工具的底层抽象，@Tool 方法由框架包装成回调
+原理：链路：模型输出调用意图→ToolCallingManager 执行回调→结果回填下一轮请求，理解链路才能调试工具不触发问题
+用法：工具链路排障知识
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · EmbeddingModel（向量）
+
+<details><summary>看背面</summary>
+
+EmbeddingModel.embed("文本") 返回 float[] 向量，支持批量 embed(List)
+原理：嵌入模型抽象屏蔽厂商差异（OpenAI/Ollama 等），向量喂给 VectorStore 做检索
+用法：RAG 管道第一步
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · VectorStore（向量）
+
+<details><summary>看背面</summary>
+
+VectorStore 接口两个核心动作：add(List<Document>) 写入与 similaritySearch(SearchRequest) 检索
+原理：检索参数在 SearchRequest 上（query/topK/similarityThreshold），接口统一所以换向量库不改业务代码
+用法：RAG 存取标准动作
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · SimpleVectorStore（向量）
+
+<details><summary>看背面</summary>
+
+SimpleVectorStore 是 Spring AI 内置的内存向量库实现
+原理：零依赖快速起 RAG（开发/测试），生产换 pgvector/Milvus/Chroma 等 starter 实现，接口不变
+用法：开发环境 RAG 快速验证
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · DocumentReader（ETL）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 ETL 管道：DocumentReader 读→DocumentTransformer 切→DocumentWriter 存
+原理：TokenTextSplitter 把长文档切分为带元数据的 Document 列表，TikaDocumentReader 支持解析 PDF/Word 等格式
+用法：知识入库管道
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · api-key（配置）
+
+<details><summary>看背面</summary>
+
+OpenAI 模型接入配置属性以 spring.ai.openai 前缀：api-key 配密钥，chat.options.model 配默认模型
+原理：自动装配依据这些属性构建 ChatModel bean，密钥必须走环境变量或配置中心不入库
+用法：OpenAI 接入标准配置
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · ChatOptions（选项）
+
+<details><summary>看背面</summary>
+
+运行时覆盖模型参数：.options(OpenAiChatOptions.builder().temperature(0.2).model(...).build())
+原理：默认选项来自配置文件，每次调用可用 options 局部覆盖（温度/模型/maxTokens），精细控制不同业务的生成行为
+用法：分级路由与参数微调
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Ollama（本地模型）
+
+<details><summary>看背面</summary>
+
+Spring AI 经 spring-ai-ollama starter 接本地 Ollama，配置 spring.ai.ollama.base-url 指向本地服务
+原理：本地模型（隐私/成本）与云端 API 同一编程模型（ChatClient 不变），换 provider 只是换依赖与配置
+用法：私有化部署接入
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · PromptTemplate（模板）
+
+<details><summary>看背面</summary>
+
+PromptTemplate 用 {占位符} 语法定义模板，add 渲染变量后生成 Prompt 对象
+原理：模板与代码分离（资源文件管理），渲染由 StringTemplate 引擎完成，占位符缺失渲染期报错
+用法：提示词资产管理
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Observation（可观测）
+
+<details><summary>看背面</summary>
+
+Spring AI 集成 Micrometer Observation：ChatModel/ChatClient 调用产生 trace 与 metrics
+原理：每次 LLM 调用有观测数据（耗时/token），与业务 trace 同链路串联，生产排障与成本归集的基础
+用法：LLM 调用监控落地
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · retry（可靠性）
+
+<details><summary>看背面</summary>
+
+Spring AI 内置重试：spring.ai.retry 前缀配置最大尝试与退避策略
+原理：模型服务限流与瞬时故障常见，框架层指数退避兜底，重试耗尽异常上抛由业务降级处理
+用法：生产可靠性配置
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### MCP · McpSyncClient（客户端）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 MCP 客户端：starter 引入后自动装配 McpSyncClient，可 listTools 发现工具
+原理：客户端连接 MCP server 后工具自动进入生态（可被 ChatClient 调用），发现与调用是两个显式动作
+用法：接入外部工具生态
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### MCP · mcp-server（服务端）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 MCP 服务端 starter：spring-ai-starter-mcp-server（stdio）与 webmvc/webflux（SSE）变体
+原理：把本应用的 @Tool 能力暴露为 MCP 服务给其他 Agent 复用，transport 决定通信方式（本地子进程 vs 远程 HTTP）
+用法：MCP 服务提供方搭建
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### MCP · io.modelcontextprotocol（SDK）
+
+<details><summary>看背面</summary>
+
+MCP Java SDK 的 Maven 坐标是 io.modelcontextprotocol.sdk:mcp，Spring AI 的 MCP starter 是其封装
+原理：理解层次：SDK 提供 McpServer/McpClient 核心，Spring AI starter 负责自动装配，SDK 可脱离 Spring 使用
+用法：非 Spring 应用接 MCP
+锚点：MCP Java SDK
+
+</details>
+
+### MCP · JSON-RPC（协议）
+
+<details><summary>看背面</summary>
+
+MCP 协议构建在 JSON-RPC 2.0 之上（initialize/tools/list/tools/call 等方法）
+原理：协议层标准化让任何语言的客户端服务端互通，Java SDK 只是协议的一种实现
+用法：协议本质理解
+锚点：MCP 规范
+
+</details>
+
+### MCP · stdio（传输）
+
+<details><summary>看背面</summary>
+
+MCP 传输层决定通信方式：stdio 常用于本地子进程，SSE/HTTP 用于远程服务
+原理：Claude Desktop 等客户端以 stdio 子进程方式拉起本地 MCP server，远程共享则用 SSE transport，选型按部署形态
+用法：本地 vs 远程服务部署
+锚点：MCP 规范
+
+</details>
+
+### MCP · tools/call（工具）
+
+<details><summary>看背面</summary>
+
+MCP 工具调用链路：client.listTools() 发现工具描述，client.callTool(...) 执行并取结果
+原理：工具描述含名称/说明/inputSchema（JSON Schema），schema 描述决定模型能否正确填参
+用法：MCP 工具排障
+锚点：MCP Java SDK
+
+</details>
+
+### LangChain4j · ChatLanguageModel（模型）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的模型抽象是 ChatLanguageModel 接口，1.0 统一 chat 方法入口
+原理：各 provider（OpenAI/Ollama/Azure 等）提供实现，业务面向接口编程换 provider 不换代码
+用法：模型抽象层理解
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · builder（构建）
+
+<details><summary>看背面</summary>
+
+LangChain4j 模型用 builder 构建：OpenAiChatModel.builder().apiKey(...).modelName(...).build()
+原理：无 Spring 自动装配时手动构建（纯 Java 应用），参数在 builder 上显式可见
+用法：纯 Java 应用接入
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · AiServices（AiServices）
+
+<details><summary>看背面</summary>
+
+LangChain4j 声明式 AI 服务：AiServices.builder(接口.class).chatLanguageModel(model).build() 生成动态代理
+原理：接口方法即 AI 调用（注解定义提示词），返回类型决定结构化输出行为，是 LC4j 的招牌设计
+用法：声明式 AI 服务落地
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · @UserMessage（注解）
+
+<details><summary>看背面</summary>
+
+@SystemMessage 与 @UserMessage 注解在接口方法上定义提示词模板，参数经占位符注入
+原理：模板与 Java 代码同文件管理，{{it}} 注入单参数，多参数按名绑定
+用法：声明式提示词管理
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · @Tool（工具）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的 @Tool 注解声明工具方法，AiServices.tools(obj) 挂载后模型可调用
+原理：框架把方法反射为 ToolSpecification（名称/描述/schema）传给模型，模型回填参数后本地执行
+用法：Agent 工具接入（与 Spring AI 的 @Tool 同思想）
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · ContentRetriever（RAG）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的 RAG 接口是 ContentRetriever，EmbeddingStoreContentRetriever 为向量检索实现
+原理：AiServices.contentRetriever(...) 挂载后提问自动检索注入，换检索源只换实现类
+用法：RAG 管道装配
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · EmbeddingStore（向量）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的向量抽象是 EmbeddingStore<TextSegment>，内置 InMemoryEmbeddingStore 等实现
+原理：pgvector/Milvus/Chroma 等以独立模块提供，接口统一换库不改代码，与 Spring AI 的 VectorStore 同思想
+用法：向量库选型自由度
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · DocumentSplitters（切分）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的文档切分：DocumentSplitters.recursive(段大小, 重叠) 把 Document 拆成 TextSegment
+原理：递归切分按段落优先保持语义边界，TextSegment 携带元数据进向量库，是 RAG 质量的第一决定因素
+用法：知识库切分策略
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · ChatMemory（记忆）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的记忆：MessageWindowChatMemory 窗口记忆，AiServices.chatMemoryProvider(id→memory) 支持多会话
+原理：多用户场景按 memoryId 隔离各自窗口，持久化由 ChatMemoryStore 接口实现（内存/数据库）
+用法：多会话记忆装配
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · TokenStream（流式）
+
+<details><summary>看背面</summary>
+
+LangChain4j 流式：StreamingChatLanguageModel 或 AiServices 返回 TokenStream（onPartialResponse 逐段回调）
+原理：流式回调与 Reactor 无关（LC4j 自定义回调风格），SSE 输出需桥接，消费完 onCompleteResponse 收尾
+用法：流式交互实现
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · Guardrail（护栏）
+
+<details><summary>看背面</summary>
+
+LangChain4j 1.0 提供 InputGuardrail 与 OutputGuardrail 对输入输出做校验拦截
+原理：护栏在模型调用前后执行（可改写/拒绝），合规与安全需求以声明式挂载，与 Spring AI 的 advisor 异曲同工
+用法：输入输出合规落地
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · starter（Spring）
+
+<details><summary>看背面</summary>
+
+LangChain4j 提供 Spring Boot starter（如 langchain4j-open-ai-spring-boot-starter）自动装配 ChatLanguageModel bean
+原理：Spring 项目里与 Spring AI 类似的体验（配置属性+自动装配），选择框架看生态契合而非能力缺失
+用法：Spring 集成路线
+锚点：LangChain4j 1.0
+
+</details>
+
+### 选型 · Spring AI vs LC4j（对比）
+
+<details><summary>看背面</summary>
+
+框架选型核心差异：Spring AI 深度集成 Spring 生态（advisor/observation/自动配置），LangChain4j 胜在 provider 广度与轻量
+原理：团队能力与现有栈决定：Spring 项目优先 Spring AI，非 Spring 或需多 provider 快换可 LC4j，两者思想同构（模型抽象+RAG 组件+工具）
+用法：框架选型论证
+锚点：2025
+
+</details>
+
+### 选型 · langchain4j-mcp（MCP 共存）
+
+<details><summary>看背面</summary>
+
+两个框架都能接 MCP：Spring AI 有 mcp starter，LangChain4j 有 langchain4j-mcp 模块（McpToolProvider）
+原理：MCP 是传输与生态协议层（AI-018），框架只是客户端实现方，工具生态跨框架复用
+用法：MCP 生态复用
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · mock（测试）
+
+<details><summary>看背面</summary>
+
+LLM 应用可测性：ChatModel 是接口，单测注入 mock 实现（固定返回）隔离真实模型
+原理：AI 应用测试原则：业务逻辑用 mock 模型测（快且确定），模型质量用评估集测（AI-034），两者分开
+用法：测试策略设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 线程安全（线程）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 ChatClient 与 LangChain4j 的模型实例线程安全（无状态）可单例复用
+原理：构建成本高（HTTP 客户端池），单例复用是标准实践，per-call 状态（消息/options）在调用参数上传递
+用法：客户端生命周期管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 密钥管理（安全）
+
+<details><summary>看背面</summary>
+
+API key 管理：环境变量或配置中心注入，严禁提交仓库与打进镜像
+原理：key 泄漏即计费风险与数据风险，Spring 的属性覆盖机制天然支持环境变量注入，与配置外部化知识（SP-087）联动
+用法：安全基线
+锚点：实战共识
+
+</details>
+
+### 工程 · 脱敏（日志）
+
+<details><summary>看背面</summary>
+
+LLM 应用日志纪律：prompt 与输出不得全量落日志（含用户隐私与业务数据）
+原理：日志里的 prompt 即数据出域（合规 AI-040），脱敏或采样记录，异常排障用 traceId 关联而非全文
+用法：合规与排障平衡
+锚点：实战共识
+
+</details>
+
+### 工程 · token（成本）
+
+<details><summary>看背面</summary>
+
+Java 侧 token 预算控制：请求前估算（prompt 长度）、响应侧 maxTokens 截断、按调用聚合成本
+原理：框架层拿到 usage 数据（观测/响应元数据），预算超限走降级模型或拒绝，与 AI-026 四招联动
+用法：成本工程 Java 落地
+锚点：实战共识
+
+</details>
+
+### 工程 · 超时（超时）
+
+<details><summary>看背面</summary>
+
+LLM 调用超时设置：连接超时短、读超时按生成时长放大（流式另算），重试与超时组合防雪崩
+原理：生成 10-60s 的长响应与普通 RPC 超时假设冲突，与 AI-030/DF-028 超时预算联动，流式首字快但总时长长
+用法：客户端参数审查项
+锚点：实战共识
+
+</details>
+
+### Spring AI · model 声明（多模型）
+
+<details><summary>看背面</summary>
+
+Spring AI 支持多 provider 共存：spring.ai.model.chat 指定生效的 chat provider（openai/ollama 等）
+原理：classpath 上多个 starter 并存时由该属性决定装配哪个，避免隐式冲突，多 provider 项目必知
+用法：多模型项目配置
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · ChatResponse（类型）
+
+<details><summary>看背面</summary>
+
+Spring AI 底层类型链：Prompt（请求）→ ChatModel.call → ChatResponse（含 Generation 列表）
+原理：ChatClient 是门面，底层 call 返回 ChatResponse 可取 token usage 与 finishReason，需要细粒度信息时下沉到底层 API
+用法：底层类型理解与下沉场景
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 迁移（版本）
+
+<details><summary>看背面</summary>
+
+Spring AI 版本迁移注意：function calling 命名在 1.0 统一为 tools（ToolCallback）
+原理：旧教程/代码的 .functions(...) 写法在 1.0 迁移为 .tools(...)，迁移先查废弃 API 再升版本，与 SP-106 迁移方法联动
+用法：1.0 迁移清单
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### LangChain4j · POJO 返回（结构化）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的 AiServices 接口方法可直接声明 POJO 返回类型，框架自动做结构化输出
+原理：接口即契约：返回 String/POJO/TokenStream 由签名决定，结构化输出框架内部处理，与 Spring AI 的 entity() 同思想
+用法：声明式结构化
+锚点：LangChain4j 1.0
+
+</details>
+
+### RAG · 组装（管道）
+
+<details><summary>看背面</summary>
+
+Java 侧 RAG 管道组装顺序：Reader 读→Splitter 切→EmbeddingModel 向量化→VectorStore 写入→检索时 QuestionAnswerAdvisor/ContentRetriever 注入
+原理：离线入库与在线检索两段式，两框架组件一一对应（思想同构），管道每步可替换实现
+用法：RAG 架构答题框架
+锚点：实战共识
+
+</details>
+
+### RAG · topK（检索）
+
+<details><summary>看背面</summary>
+
+检索参数治理：topK 与相似度阈值决定注入上下文的量，量大→token 贵且噪声多，量小→漏答案
+原理：Java 侧在 SearchRequest/retriever 配置，按业务调参并进评估集回归（AI-082 指标），是 RAG 调优第一旋钮
+用法：RAG 调参方法论
+锚点：实战共识
+
+</details>
+
+### Agent · Agent 三件（衔接）
+
+<details><summary>看背面</summary>
+
+Java 框架的 Agent 基础件：模型调用（ChatClient/ChatLanguageModel）+ 工具（@Tool）+ 循环（框架自动执行工具直到完成）
+原理：Spring AI 与 LC4j 都内置工具执行循环，简单 Agent 框架直接写，复杂规划/多 Agent 用 LangGraph 类编排（AI-015 联动）
+用法：Java Agent 起步认知
+锚点：2025
+
+</details>
+
+### Agent · McpToolProvider（MCP 工具）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的 McpToolProvider 把 MCP server 的工具包装为框架工具挂给 AiServices
+原理：MCP 工具与本地 @Tool 工具混用（同一 Agent 双来源），生态工具免重写接入，与 JA-040 联动
+用法：MCP 工具接入 LC4j
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · 模型降级（降级）
+
+<details><summary>看背面</summary>
+
+Java 侧模型降级链：主模型失败（超时/限流）→备模型→兜底话术，配置中心切换与预案（AI-053 联动）
+原理：供应商故障是常态，代码按"模型抽象+多实现"设计天然支持降级，与熔断知识（DF-022）同构
+用法：可用性工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 调用幂等（幂等）
+
+<details><summary>看背面</summary>
+
+LLM 调用的重试与幂等：生成类请求重试安全（无副作用），工具执行类请求重试需幂等（防重复下单/发通知）
+原理：工具在重试中可能被二次执行，工具实现须幂等（与 MQ-022/DF-019 幂等三段式同构），这是 Java 工程师最容易踩的 AI 坑
+用法：工具可靠性红线
+锚点：实战共识
+
+</details>
+
+### 工程 · 成本归集（观测）
+
+<details><summary>看背面</summary>
+
+成本归集实现：观测数据带业务标签（tenant/user），按标签聚合 token 与费用出账单
+原理：多业务共享 LLM 网关时按标签分摊成本（AI-051），Micrometer tag 是 Spring AI 观测的落点，财务口径与监控口径一致
+用法：平台化成本治理
+锚点：实战共识
+
+</details>
+
+### 测试 · 评估集（评估）
+
+<details><summary>看背面</summary>
+
+评估集的工程化：50-200 条业务真实问题+期望要点，每次 prompt/模型变更跑回归（CI 集成），阈值门禁（AI-077 联动）
+原理：评估集是 AI 应用的"单元测试"，Java 工程师把它纳入构建管线（评估不过不发布），与回归门禁纪律同构
+用法：质量工程落地
+锚点：实战共识
+
+</details>
+
+### 工程 · 限流（并发）
+
+<details><summary>看背面</summary>
+
+Java 侧 LLM 并发治理：供应商 RPM/TPM 配额下的应用限流（信号量/Redis 计数）+排队，超配额 429 退避重试
+原理：供应商限流是硬约束（AI-065），应用侧主动限流防雪崩，与分布式限流知识（DF-024）同构
+用法：配额治理
+锚点：实战共识
+
+</details>
+
+### 版本 · 版本线（锚点）
+
+<details><summary>看背面</summary>
+
+版本锚点总表：Spring AI 1.0 GA（2025-05）、LangChain4j 1.0 GA（2025）、MCP Java SDK（2024 起，Spring AI 1.0 依赖其 0.10+ 线）
+原理：回答任何框架 API 问题先报版本（禁绝对化），本域所有结论锚定 1.0 GA 语义，旧版本教程差异先查迁移说明
+用法：版本锚点纪律
+锚点：2025
+
+</details>
+
+### Spring AI · 参数模板（提示词）
+
+<details><summary>看背面</summary>
+
+ChatClient 用户消息支持参数模板：.user(u -> u.text("查 {city} 天气").param("city", "杭州"))
+原理：模板与参数分离避免字符串拼接注入风险，参数渲染由框架完成，与 PromptTemplate 同思想
+用法：动态提示词安全组装
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · advisor 构建（RAG）
+
+<details><summary>看背面</summary>
+
+QuestionAnswerAdvisor.builder(vectorStore).searchRequest(SearchRequest.builder().topK(5).build()).build() 精细配置检索
+原理：builder 暴露检索参数（topK/阈值/过滤），RAG 行为在装配期声明而非硬编码
+用法：RAG 装配精调
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · filterExpression（向量）
+
+<details><summary>看背面</summary>
+
+SearchRequest.filterExpression 支持元数据过滤（如 type == 'news'）缩小检索范围
+原理：向量库层过滤（先过滤后近邻）比检索后业务过滤高效，元数据随 Document 入库即过滤字段
+用法：多租户类目检索隔离
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 参数传递（Advisor）
+
+<details><summary>看背面</summary>
+
+advisor 运行时参数经 .advisors(a -> a.param(...)) 传递，记忆会话 id 即经 ChatMemory.CONVERSATION_ID 参数传入
+原理：同一 ChatClient 服务多用户，会话标识按调用传入而非构建时绑定，多租户隔离的标准姿势
+用法：多会话隔离装配
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Usage（元数据）
+
+<details><summary>看背面</summary>
+
+ChatResponse.getMetadata().getUsage() 取 token 用量（promptTokens/generationTokens/totalTokens）
+原理：成本归集与预算控制的数据源（AI-045 联动），响应元数据自带无需额外计费接口
+用法：成本工程数据源
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · starter 命名（依赖）
+
+<details><summary>看背面</summary>
+
+Spring AI 1.0 起 model starter 统一命名 spring-ai-starter-model-{provider}（如 spring-ai-starter-model-openai）
+原理：1.0 规范了 starter 命名（旧版 spring-ai-openai-spring-boot-starter 已迁移），升级按新名替换依赖
+用法：1.0 依赖迁移
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Jdbc 仓储（记忆）
+
+<details><summary>看背面</summary>
+
+ChatMemory 持久化用 JdbcChatMemoryRepository（chat-memory-repository-jdbc starter）
+原理：记忆跨实例共享与重启保留需仓储化，JDBC 实现配表结构自动管理，其他存储可自行实现仓储接口
+用法：多实例会话记忆
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · TokenTextSplitter（切分）
+
+<details><summary>看背面</summary>
+
+TokenTextSplitter 按 token 粒度切分文档（chunk 大小与重叠可配）
+原理：按 token 切分与模型上下文计量对齐（比字符切分准确），切分参数决定检索粒度
+用法：RAG 入库切分
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · ToolContext（工具）
+
+<details><summary>看背面</summary>
+
+@Tool 方法可注入 ToolContext 参数携带调用上下文（如用户身份），上下文不进模型 schema
+原理：业务上下文随工具执行传递，模型只看到工具的业务参数，安全与审计的隔离层
+用法：工具侧租户隔离
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · ChatClient.Builder（装配）
+
+<details><summary>看背面</summary>
+
+Spring Boot 自动装配 ChatClient.Builder bean，注入后 .build() 得到 ChatClient
+原理：builder 由自动配置预置默认模型与选项，业务注入 builder 即可定制装配，免手写 create(model)
+用法：Spring 环境标准装配
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · returnDirect（工具）
+
+<details><summary>看背面</summary>
+
+@Tool(returnDirect=true) 让工具结果直接返回用户不再回模型
+原理：适合最终答案型工具（查询类直接出结果），省一轮模型调用降低延迟与成本
+用法：低延迟查询工具优化
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · ChatOptions 接口（选项）
+
+<details><summary>看背面</summary>
+
+ChatOptions 是通用选项接口（temperature/topP/maxTokens 等），各 provider 提供自己的 options 子类
+原理：业务代码面向 ChatOptions 编程，换 provider 不改选项传递结构，OpenAiChatOptions 只是其中实现
+用法：跨 provider 选项抽象
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 工具循环（流式）
+
+<details><summary>看背面</summary>
+
+stream 模式同样支持工具调用循环（流式输出中穿插工具执行）
+原理：流式与工具能力正交，流式期间工具结果回填后继续生成，前端体验与能力兼得
+用法：流式 Agent 场景
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · vector store starter（向量）
+
+<details><summary>看背面</summary>
+
+向量库以 starter 集成（如 spring-ai-starter-vector-store-pgvector），自动装配对应 VectorStore bean
+原理：换向量库换 starter 依赖与连接配置即可，业务面向 VectorStore 接口
+用法：生产向量库接入
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · embedding 声明（配置）
+
+<details><summary>看背面</summary>
+
+embedding provider 用 spring.ai.model.embedding 属性独立声明（与 chat 分开）
+原理：chat 与 embedding 可用不同 provider（chat 用云端、embedding 用本地），按属性独立路由
+用法：混合部署配置
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Message 类型（消息）
+
+<details><summary>看背面</summary>
+
+底层消息抽象：UserMessage/AssistantMessage/SystemMessage 三类聚合为 Prompt
+原理：ChatClient 门面之下消息有角色类型区分，需要精细控制消息序列时下沉到 Message 层构造 Prompt
+用法：精细 prompt 组装
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · finishReason（元数据）
+
+<details><summary>看背面</summary>
+
+响应元数据含 finishReason（STOP 正常结束/LENGTH 触达 maxTokens/工具调用待续等）
+原理：finishReason 驱动业务分支：LENGTH 需截断提示或续写，工具调用需等待下一轮，比只看文本更稳
+用法：生成边界处理
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 资源加载（模板）
+
+<details><summary>看背面</summary>
+
+PromptTemplate 可从 classpath 资源文件构建，提示词与代码分离管理
+原理：提示词资产化（版本管理/评审/灰度），与 AI-064 版本管理联动，改提示词可不发版
+用法：提示词资产管理
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### LangChain4j · ChatRequest（模型）
+
+<details><summary>看背面</summary>
+
+LangChain4j 显式对象调用：model.chat(ChatRequest) 返回 ChatResponse，metadata 含 tokenUsage 与 finishReason
+原理：需要 token 统计与结束原因时用显式对象而非便捷字符串重载，与 Spring AI 的 Usage 对等
+用法：细粒度调用控制
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · retriever 构建（检索）
+
+<details><summary>看背面</summary>
+
+EmbeddingStoreContentRetriever.builder().embeddingStore(...).embeddingModel(...).maxResults(k).minScore(t).build()
+原理：检索参数 builder 声明（数量/分数下限），与 Spring AI 的 SearchRequest 同思想，面向接口可替换
+用法：RAG 检索精调
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · RetrievalAugmentor（高级 RAG）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的高级 RAG 接口 RetrievalAugmentor：DefaultRetrievalAugmentor 组合查询改写/路由/聚合
+原理：简单 ContentRetriever 之上提供查询压缩、多路检索等编排（AI-045 自适应 RAG 思想），AiServices.retrievalAugmentor 挂载
+用法：RAG 架构进阶
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · QueryTransformer（查询改写）
+
+<details><summary>看背面</summary>
+
+QueryTransformer 把对话历史压缩成独立检索查询（如 CompactingQueryTransformer）
+原理：对话式提问直接检索效果差（指代不明），改写为自包含查询提升召回，是高级 RAG 的第一环
+用法：多轮 RAG 召回优化
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · retrievalAugmentor（装配）
+
+<details><summary>看背面</summary>
+
+AiServices.retrievalAugmentor(...) 挂载高级 RAG（与 contentRetriever 二选一，augmentor 内部可含 retriever）
+原理：简单场景用 contentRetriever，需要查询改写/多路检索升级为 augmentor，渐进式增强不改业务接口
+用法：RAG 装配升级路径
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · timeout（可靠性）
+
+<details><summary>看背面</summary>
+
+LangChain4j 模型 builder 可配 .timeout(Duration) 与 .maxRetries(n) 控制超时与重试
+原理：构建期声明可靠性参数（AI-046 超时知识联动），重试幂等前提（JA-056）依旧成立
+用法：客户端可靠性参数
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · 属性前缀（Spring）
+
+<details><summary>看背面</summary>
+
+langchain4j-open-ai-spring-boot-starter 的配置属性前缀 langchain4j.open-ai.chat-model（api-key/model-name/temperature）
+原理：Spring 集成下属性与 builder 参数一一对应，自动装配 ChatLanguageModel bean 直接注入使用
+用法：Spring 配置管理
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · 返回签名（结构化）
+
+<details><summary>看背面</summary>
+
+LC4j 接口方法返回签名决定结构化行为：String/POJO/enum/List 均支持
+原理：按返回类型自动做结构化（枚举约束/JSON 反序列化），接口即契约，与 JA-050 联动
+用法：声明式结构化
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · 接口族（能力）
+
+<details><summary>看背面</summary>
+
+LangChain4j 的模型接口族不止文本：ImageModel（文生图）与 ModerationModel（内容审核）同级存在
+原理：统一抽象覆盖多模态与安全能力，与 AI-041 多模态知识联动，按接口注入对应模型
+用法：多能力接入
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · AiMessage（消息）
+
+<details><summary>看背面</summary>
+
+LC4j 消息抽象：UserMessage/AiMessage/SystemMessage，AiMessage 可携带 toolExecutionRequests
+原理：工具调用轮次中 AiMessage 携带调用意图，历史回放时保留该结构才能正确续轮，与 JA-010 链路对齐
+用法：工具轮次与历史回放
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · ToolExecutor（工具）
+
+<details><summary>看背面</summary>
+
+LC4j 的工具执行可经 ToolExecutor 接口自定义（默认反射调用 @Tool 方法）
+原理：需要异步执行/权限校验/审计时替换默认执行器，工具链路可插拔，与 JA-031 联动
+用法：工具链路定制
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · ChatMemoryStore（记忆）
+
+<details><summary>看背面</summary>
+
+LC4j 记忆持久化实现 ChatMemoryStore 接口（getMessages/updateMessages/deleteMessages）
+原理：自选存储（Redis/DB）实现三方法即可持久化记忆，与 Spring AI 的 repository 同思想
+用法：记忆持久化定制
+锚点：LangChain4j 1.0
+
+</details>
+
+### MCP · initialize（客户端）
+
+<details><summary>看背面</summary>
+
+MCP 客户端使用前必须 initialize（协议握手：版本与能力协商），Java SDK 的 McpSyncClient 显式调用
+原理：握手失败即后续不可用，initialize 是协议强制步骤不是可选配置，排障先查握手
+用法：MCP 连接排障
+锚点：MCP 规范
+
+</details>
+
+### MCP · capabilities（能力）
+
+<details><summary>看背面</summary>
+
+MCP initialize 阶段双方声明 capabilities（支持的工具/资源/采样能力）
+原理：能力协商决定后续可用方法集，客户端不应调用对方未声明的能力，协议稳健性来源
+用法：协议机制理解
+锚点：MCP 规范
+
+</details>
+
+### MCP · content（结果）
+
+<details><summary>看背面</summary>
+
+MCP 工具结果以 content 列表返回（文本/图片/资源引用等内容块）
+原理：结果是多模态内容块而非纯字符串，客户端按类型处理，模型消费时转文本上下文
+用法：MCP 结果处理
+锚点：MCP 规范
+
+</details>
+
+### MCP · list_changed（通知）
+
+<details><summary>看背面</summary>
+
+MCP 服务端工具清单变更时发送通知（tools/list_changed），客户端重新 listTools
+原理：工具热更新协议化（新增工具无需重启客户端），客户端要处理通知刷新缓存，动态工具生态基础
+用法：动态工具治理
+锚点：MCP 规范
+
+</details>
+
+### MCP · 子进程（生命周期）
+
+<details><summary>看背面</summary>
+
+stdio 型 MCP server 由宿主客户端以子进程拉起（stdin/stdout 通信，生命周期随客户端）
+原理：本地工具 server 随客户端启停（IDE/桌面端管理），server 崩溃即工具不可用，重连策略归客户端
+用法：本地 server 运维
+锚点：MCP 规范
+
+</details>
+
+### 工程 · base-url（网关）
+
+<details><summary>看背面</summary>
+
+两框架都支持自定义 base-url 指向 OpenAI 兼容网关（Higress/OneAPI/LiteLLM 类），业务不改代码换供应商
+原理：网关统一鉴权/限流/计费/路由（AI-028 联动），Java 应用只认 OpenAI 协议，供应商策略收敛到网关层
+用法：供应商治理架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 防串号（租户）
+
+<details><summary>看背面</summary>
+
+多租户上下文传递纪律：advisor 参数/ToolContext/MDC 三层都按会话与用户键隔离，测试覆盖并发两用户互不串
+原理：AI 上下文串号是高危事故（泄露他人数据），与 AI-085 并发隔离知识联动，review 专项检查项
+用法：租户隔离红线
+锚点：实战共识
+
+</details>
+
+### 工程 · 取消（背压）
+
+<details><summary>看背面</summary>
+
+流式输出要处理客户端断开：取消订阅（dispose/takeUntilOther）让后端停止生成，省 token 与资源
+原理：用户关页面模型仍在生成白烧钱（AI-087 联动），响应式栈取消信号贯穿到流式请求
+用法：成本与体验平衡
+锚点：实战共识
+
+</details>
+
+### 工程 · 失败处理（结构化）
+
+<details><summary>看背面</summary>
+
+结构化输出失败路径：模型输出不合规 JSON 时反序列化异常，需重试（带错误反馈）或降级（放宽约束/兜底值）
+原理：entity 转换不是百分百成功，失败重试喂回解析错误可修复多数，与 AI-070 结构化双保险联动
+用法：可靠性细节
+锚点：实战共识
+
+</details>
+
+### 工程 · 批大小（嵌入）
+
+<details><summary>看背面</summary>
+
+嵌入批量调用的批大小权衡：单批过大易触供应商限制，分批控制并行度，失败批重试幂等（嵌入天然幂等）
+原理：批量入库（万级文档）的吞吐工程，与 MY-051 拆批思想同构，批大小按供应商限制定
+用法：入库吞吐工程
+锚点：实战共识
+
+</details>
+
+### 向量 · 一致性（维度）
+
+<details><summary>看背面</summary>
+
+向量库维度必须与嵌入模型输出维度一致：换嵌入模型等于全量重嵌入加重建索引
+原理：维度不匹配写入与检索直接失败，换模型成本是全量重算（AI-067 时效联动），选型期锁定嵌入模型
+用法：向量库容量规划
+锚点：实战共识
+
+</details>
+
+### RAG · rerank（重排）
+
+<details><summary>看背面</summary>
+
+检索与重排分离：向量召回 topK 较大（如 20）再由重排模型精排出少量（如 3）注入上下文
+原理：重排模型（交叉编码）精度高但慢，只处理少量候选；Java 侧 LC4j 有 ScoringModel 抽象，Spring AI 可经服务 API 接入
+用法：RAG 质量进阶
+锚点：实战共识
+
+</details>
+
+### 工程 · 预算（记忆）
+
+<details><summary>看背面</summary>
+
+会话记忆的 token 预算：窗口按条数截断是粗粒度，长消息场景需按 token 估算动态裁剪
+原理：MessageWindowChatMemory 只看条数不看长度，单条超长消息仍可挤爆窗口预算，精细预算需自定义裁剪
+用法：记忆成本治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 分层（异常）
+
+<details><summary>看背面</summary>
+
+LLM 异常分层处理：限流（退避重试）、认证（不可重试直接告警）、内容过滤（换措辞或降级）、上下文超限（裁剪重试）
+原理：不同异常的恢复动作完全不同，统一 catch 会把不可重试错误打成死循环，与 AI-066 SDK 细节联动
+用法：异常处理矩阵
+锚点：实战共识
+
+</details>
+
+### 依赖 · spring-ai-bom（BOM）
+
+<details><summary>看背面</summary>
+
+Spring AI 用 spring-ai-bom 统一各模块版本（Maven dependencyManagement 导入）
+原理：多 starter 项目版本对齐防冲突（SP-107 依赖治理联动），升级只改 BOM 版本号
+用法：依赖治理
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### 依赖 · langchain4j-bom（BOM）
+
+<details><summary>看背面</summary>
+
+LangChain4j 同样提供 langchain4j-bom 统一模块版本
+原理：LC4j 模块众多（provider/store/工具），BOM 对齐防依赖冲突，与 JVM 依赖知识联动
+用法：依赖治理
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · 单例（生命周期）
+
+<details><summary>看背面</summary>
+
+ChatClient 与模型实例构建一次单例复用（构建含 HTTP 客户端池创建），Spring 下由容器管理生命周期
+原理：反复构建浪费连接池且可能泄漏，Spring AI 自动装配的 builder 与 bean 天然单例，与 JA-042 联动
+用法：生命周期规范
+锚点：实战共识
+
+</details>
+
+### 工程 · 描述质量（工具）
+
+<details><summary>看背面</summary>
+
+工具 description 写清何时用/何时不用/参数含义，描述质量直接决定模型调用准确率
+原理：模型靠描述选工具填参数（AI-058 联动），描述含糊导致误调用或不调用，上线前自查描述可读性
+用法：工具工程规范
+锚点：实战共识
+
+</details>
+
+### Spring AI · media（多模态）
+
+<details><summary>看背面</summary>
+
+Spring AI 多模态输入：user 消息可附 Media（图片等），模型侧需多模态能力支持
+原理：Java 侧组装多模态消息（AI-041 联动），图像按分辨率折算 token（AI-080 计费联动），文本与图像同请求发送
+用法：图文理解接入
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### 工程 · LENGTH（截断）
+
+<details><summary>看背面</summary>
+
+finishReason 为 LENGTH（触达 maxTokens）的业务处理：续写（带已有内容再生成）或截断提示或调大 maxTokens 重试
+原理：长文生成被截断是常态，无处理则输出不完整用户可感知，与 JA-077 元数据知识联动
+用法：生成完整性保障
+锚点：实战共识
+
+</details>
+
+### Spring AI · 顺序（Advisor）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 advisor 链按 getOrder 返回值排序执行（数字小先进入后退出）
+原理：多个 advisor（记忆+RAG+审计）叠加时顺序影响结果（RAG 注入内容是否进记忆），排序与 AOP/拦截器思想同构
+用法：多 advisor 装配排序
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Prompt 构成（类型）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 Prompt 对象由消息列表与可选 ChatOptions 组成
+原理：门面之下一切调用最终收敛为 Prompt 传给 ChatModel，理解构成才能做精细组装
+用法：底层组装理解
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 默认模型（配置）
+
+<details><summary>看背面</summary>
+
+spring.ai.openai.chat.options.model 默认值为 gpt-4o-mini（1.0 GA 时点）
+原理：默认模型随版本演进可能变化，生产显式声明模型名不依赖默认值，与版本锚定纪律一致
+用法：生产配置规范
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 参数透传（配置）
+
+<details><summary>看背面</summary>
+
+spring.ai.openai.chat.options 前缀可透传供应商支持的任意参数
+原理：配置与代码 options 双通道：配置给全局默认、代码做运行时覆盖，两层叠加
+用法：全局参数管理
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 订阅（流式）
+
+<details><summary>看背面</summary>
+
+Flux 是冷流：不订阅不执行，ChatClient.stream 返回后必须有人订阅才发起模型调用
+原理：响应式基本语义，误把 Flux 当 Future 用会导致"没有调用发生"的假象，与 SP/WebFlux 知识联动
+用法：响应式基础纪律
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 模板自定义（RAG）
+
+<details><summary>看背面</summary>
+
+QuestionAnswerAdvisor 的注入提示模板可自定义（user 消息模板带参数）
+原理：默认模板不满足业务时换模板（引用来源格式/注入位置），RAG 输出形态可控
+用法：RAG 输出格式定制
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 删除（向量）
+
+<details><summary>看背面</summary>
+
+VectorStore 支持删除：按文档 id 列表删除与按过滤表达式删除
+原理：知识库更新需要删旧（配合重新入库），只加不删会让过期内容持续污染检索
+用法：知识库生命周期
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Document（文档）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 Document 聚合 id/text/metadata 三元组，入库与检索的基本单位
+原理：元数据承载来源/权限/类目（AI-061 联动），检索过滤与溯源都靠它
+用法：RAG 数据结构
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Markdown（Reader）
+
+<details><summary>看背面</summary>
+
+spring-ai-markdown-document-reader 提供 Markdown 文档解析
+原理：知识库常用 Markdown（内网 wiki），解析保留标题结构利于切分语义，Tika 覆盖其余格式
+用法：RAG 入库格式覆盖
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · Qualifier（多模型）
+
+<details><summary>看背面</summary>
+
+classpath 有多个 ChatModel bean 时按 bean 名/@Qualifier 指定注入
+原理：多 provider 共存场景（主备/分级），builder 显式指定模型 bean，与 JA-047 属性声明配合
+用法：主备模型装配
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 默认次数（重试）
+
+<details><summary>看背面</summary>
+
+spring.ai.retry.max-attempts 默认值为 10（指数退避）
+原理：框架默认重试较激进（容忍供应商抖动），成本敏感或非幂等场景需评估调整（JA-056 幂等前提）
+用法：重试参数治理
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 终止条件（工具）
+
+<details><summary>看背面</summary>
+
+Spring AI 工具调用循环在模型不再请求工具时自然终止（finishReason 非 tool_call）
+原理：循环边界由模型决定，恶意/异常场景需业务侧上限保护，Agent 终止控制是工程必备
+用法：Agent 边界控制
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 会话重组（消息）
+
+<details><summary>看背面</summary>
+
+完整对话重组：把历史 Message 列表加当前 UserMessage 一次传入 ChatModel.call
+原理：绕过记忆 advisor 手动组装消息序列（迁移/批处理场景），与记忆机制等价但显式可控
+用法：批处理/迁移场景
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### LangChain4j · AiServices 本质（装配）
+
+<details><summary>看背面</summary>
+
+AiServices 本质是动态代理工厂：接口调用被拦截转为 LLM 请求+工具循环
+原理：理解代理本质才能定制（拦截/包装/测试桩），与 AOP 动态代理知识（SP-037）同构
+用法：框架机制理解
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · @MemoryId（会话）
+
+<details><summary>看背面</summary>
+
+LC4j 用 @MemoryId 注解标记接口方法的会话标识参数，实现多用户记忆隔离
+原理：多用户并发场景每个 memoryId 独立窗口（JA-035），与 ToolContext 防串号（JA-097）同属租户红线
+用法：多用户隔离
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · core 分工（模块）
+
+<details><summary>看背面</summary>
+
+LangChain4j 构件分工：langchain4j-core 是抽象层，langchain4j 主构件含 AiServices 等实现
+原理：依赖治理需分清（只换 provider 引 provider 模块即可），与 BOM 知识（JA-106）联动
+用法：依赖治理
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · start（流式）
+
+<details><summary>看背面</summary>
+
+TokenStream 构建 Lambda 链后必须 start() 才开始消费
+原理：与 Flux 订阅语义同源（JA-125），回调链（onPartialResponse/onCompleteResponse/onError）注册后显式启动
+用法：流式启动纪律
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · generate→chat（迁移）
+
+<details><summary>看背面</summary>
+
+LangChain4j 1.0 迁移：ChatLanguageModel 的 generate 系列方法统一为 chat 系列
+原理：旧教程代码 generate 需迁移（编译期可见），与 Spring AI functions→tools 迁移（JA-049）同为 1.0 主题
+用法：1.0 迁移清单
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · ChatRequestParameters（参数）
+
+<details><summary>看背面</summary>
+
+1.0 的请求参数抽象 ChatRequestParameters 覆盖模型选择/温度/maxTokens 等
+原理：per-request 参数与模型 builder 默认参数分层覆盖，与 Spring AI 的 options 覆盖对等
+用法：运行时参数覆盖
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · 可插拔（HTTP）
+
+<details><summary>看背面</summary>
+
+LC4j 的 HTTP 客户端层可插拔（JDK HttpClient/OkHttp 等实现模块）
+原理：企业网络环境（代理/证书/连接池）按需选 HTTP 层，与网关 base-url（JA-096）配套
+用法：企业网络适配
+锚点：LangChain4j 1.0
+
+</details>
+
+### MCP · McpAsyncServer（异步）
+
+<details><summary>看背面</summary>
+
+MCP Java SDK 提供同步与异步两套 API：McpAsyncServer/McpAsyncClient（CompletableFuture 风格）
+原理：同步版易用阻塞线程池，异步版高吞吐低占用，按并发规模选型，与并发工程知识联动
+用法：并发模型选型
+锚点：MCP Java SDK
+
+</details>
+
+### MCP · 错误码（错误）
+
+<details><summary>看背面</summary>
+
+MCP 基于 JSON-RPC 的错误码体系返回失败（方法不存在/参数错误/工具执行失败）
+原理：错误处理按码分派（区别业务失败与协议失败），客户端把工具失败回喂模型重试
+用法：MCP 错误处理
+锚点：MCP 规范
+
+</details>
+
+### MCP · 三原语（能力族）
+
+<details><summary>看背面</summary>
+
+MCP 三类核心能力原语：tools（可执行）、resources（可读取）、prompts（可复用提示模板）
+原理：工具之外的资源读取与提示模板复用同样是协议能力，只知 tools 是常见认知盲区
+用法：协议能力全景
+锚点：MCP 规范
+
+</details>
+
+### MCP · sampling（反向）
+
+<details><summary>看背面</summary>
+
+MCP 支持 server 反向请求 client 的 LLM 采样（sampling 能力）：server 无模型也能完成 AI 步骤
+原理：反向能力让工具 server 复用宿主模型的配额与上下文，安全边界由宿主审批，是 Agent 架构的高级特性
+用法：Agent 架构进阶
+锚点：MCP 规范
+
+</details>
+
+### MCP · roots（安全）
+
+<details><summary>看背面</summary>
+
+MCP 客户端可声明 roots（文件系统等作用域边界）约束 server 可访问范围
+原理：最小权限原则在协议层落地（AI-076 沙箱思想联动），server 越界访问被协议约束
+用法：最小权限落地
+锚点：MCP 规范
+
+</details>
+
+### MCP · Streamable HTTP（传输）
+
+<details><summary>看背面</summary>
+
+MCP 2025 规范引入 Streamable HTTP 传输（演进替代旧 SSE 双通道方案）
+原理：单端点流式 HTTP 简化部署与鉴权，新项目按新传输选型，旧 SSE 仍在过渡支持
+用法：传输选型
+锚点：MCP 2025 规范
+
+</details>
+
+### MCP · session（会话）
+
+<details><summary>看背面</summary>
+
+MCP 的 HTTP 传输带会话管理（会话 id 维持多轮通信状态）
+原理：有状态会话支持断线重连与上下文保持，负载均衡需会话亲和或无状态化设计，与网关知识联动
+用法：MCP 部署要点
+锚点：MCP 2025 规范
+
+</details>
+
+### MCP · OAuth（鉴权）
+
+<details><summary>看背面</summary>
+
+MCP 2025 规范为 HTTP 传输引入 OAuth 鉴权框架（客户端授权访问远程 server）
+原理：远程 server 的访问控制协议化（不再靠网络隔离），企业接入必备认知，与 SP-088 安全链知识互补
+用法：远程安全接入
+锚点：MCP 2025 规范
+
+</details>
+
+### 工程 · 三类（指标）
+
+<details><summary>看背面</summary>
+
+LLM 调用指标按 chat/embedding/tool 三类分开统计（延迟/token/失败率）
+原理：三类调用成本与延迟特征完全不同（embedding 快而便宜、tool 含业务逻辑），混在一起掩盖瓶颈，与观测知识（JA-019）联动
+用法：监控体系设计
+锚点：实战共识
+
+</details>
+
+### 工程 · A/B（灰度）
+
+<details><summary>看背面</summary>
+
+prompt/模型灰度：按用户/流量分组对比效果指标（采纳率/失败率），评估集回归先行（AI-063 联动）
+原理：线上 A/B 是 prompt 变更的最终验证，离线评估过了仍需小流量观察，与发布灰度（DF-050）同构
+用法：变更流程设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 语义缓存层（缓存）
+
+<details><summary>看背面</summary>
+
+语义缓存以拦截层实现（advisor/自定义 retriever 前置）：命中相似问题直接返回，未命中走模型
+原理：Java 侧语义缓存挂载点在框架拦截链（Spring AI advisor/LC4j 自定义层），与 AI-050 联动，阈值权衡误答风险
+用法：缓存架构落地
+锚点：实战共识
+
+</details>
+
+### 工程 · 工具白名单（安全）
+
+<details><summary>看背面</summary>
+
+工具白名单按环境区分：生产只暴露只读工具，写操作工具仅在显式开启时可用
+原理：最小权限落地（AI-068 联动），误配写工具是事故源，配置中心开关+审计
+用法：生产安全基线
+锚点：实战共识
+
+</details>
+
+### 工程 · 环境隔离（配置）
+
+<details><summary>看背面</summary>
+
+模型配置环境隔离：dev 用本地 Ollama、prod 用云模型，profile 切换零代码改动
+原理：成本与隐私分级（AI-055/056 联动），Spring profile 与属性覆盖是载体（SP-030），与 DF/云原生联动
+用法：环境策略
+锚点：实战共识
+
+</details>
+
+### 工程 · LLM 依赖（熔断）
+
+<details><summary>看背面</summary>
+
+LLM 作为"下游依赖"纳入熔断：错误率/慢调用率超阈跳闸，降级到备模型或模板回复
+原理：把 AI 当新型 RPC 治理（AI-060 方法论），resilience4j/Sentinel 环绕 ChatClient 调用点，与 DF-022 熔断知识同构
+用法：雪崩防护迁移
+锚点：实战共识
+
+</details>
+
+### 工程 · 键设计（缓存）
+
+<details><summary>看背面</summary>
+
+响应缓存键设计：模型标识+消息序列 hash+options hash，任一变化键不同
+原理：缓存正确性靠键完整（模型/参数变更返回不同结果），与缓存 key 规范（RD-067）联动
+用法：缓存正确性
+锚点：实战共识
+
+</details>
+
+### 工程 · 注入样本（评估）
+
+<details><summary>看背面</summary>
+
+评估集必须包含提示词注入与越狱样本（安全回归与功能回归同权重）
+原理：安全回归防"改 prompt 破坏防线"（AI-024/025 联动），注入样本命中即门禁失败，与 AI-077 门禁联动
+用法：安全回归纪律
+锚点：实战共识
+
+</details>
+
+### RAG · 设计（元数据）
+
+<details><summary>看背面</summary>
+
+RAG 元数据设计：source（来源）/chunk 序号/权限标签/更新时间四件随段入库
+原理：溯源引用（AI-011）、权限过滤（AI-061）、增量更新（AI-067）全靠元数据，入库时设计优于事后补
+用法：RAG 数据设计
+锚点：实战共识
+
+</details>
+
+### RAG · hash（增量）
+
+<details><summary>看背面</summary>
+
+增量入库按文档内容 hash 判断：hash 未变的文档跳过重嵌入，变更才重建
+原理：全量重嵌入成本高（AI-060 成本联动），hash 增量是入库管道标配，删除的文档需同步清理向量
+用法：入库管道效率
+锚点：实战共识
+
+</details>
+
+### 向量 · 多库（并存）
+
+<details><summary>看背面</summary>
+
+多向量库 bean 可并存（不同业务各自 VectorStore，按 @Qualifier 注入）
+原理：企业内不同数据域隔离（权限/SLA/库选型不同），接口统一所以并存无成本，与 MY/多库知识联动
+用法：多业务向量治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 记忆清理（清理）
+
+<details><summary>看背面</summary>
+
+对话记忆清理策略：会话 TTL 过期清理或定期裁剪，防 ChatMemory 无限增长
+原理：长期运行服务记忆集合膨胀（内存/JDBC 膨胀），与会话治理（MY-081 批清理思想）联动
+用法：存储治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 规范（温度）
+
+<details><summary>看背面</summary>
+
+温度选择规范：结构化输出/代码/事实问答低温（0-0.3），创作与头脑风暴高温（0.7-1.0）
+原理：温度影响 JSON 合法率与幻觉率（AI-003 联动），配置分层：默认低温、创作类按调用覆盖（JA-016）
+用法：生成参数规范
+锚点：实战共识
+
+</details>
+
+### 工程 · maxTokens（成本）
+
+<details><summary>看背面</summary>
+
+maxTokens 设业务合理值：防失控长文（成本）与 LENGTH 截断（JA-110）之间的平衡
+原理：无上限 maxTokens 是成本事故源，过小则频繁 LENGTH，按任务类型分档配置
+用法：成本与完整性平衡
+锚点：实战共识
+
+</details>
+
+### 工程 · 瘦身度量（提示词）
+
+<details><summary>看背面</summary>
+
+提示词瘦身的度量闭环：离线评估对比瘦身前后质量（不降质才上线），再观测 token 节省
+原理：先度量后上线（AI-077 门禁纪律），瘦身收益（AI-062）必须有对比数据支撑
+用法：优化闭环
+锚点：实战共识
+
+</details>
+
+### 工程 · 双框架（共存）
+
+<details><summary>看背面</summary>
+
+Spring AI 与 LangChain4j 同用 Spring 时的共存注意：bean 名冲突与依赖版本对齐，按模块隔离引用
+原理：混用有真实动机（各取所长），风险是 starter 自动装配互相干扰，团队规范建议单框架优先（AI-039）
+用法：共存风险治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 指纹（排障）
+
+<details><summary>看背面</summary>
+
+prompt 指纹排障：全量 prompt 不落日志，但记录 prompt hash 与长度，问题复现时按指纹比对
+原理：合规（JA-044）与排障的平衡手法，指纹定位"同一请求是否变化"，与可观测三支柱联动
+用法：合规排障平衡
+锚点：实战共识
+
+</details>
+
+### 工程 · 分级（超时）
+
+<details><summary>看背面</summary>
+
+超时分级：embedding 短（秒级）、chat 长（几十秒）、含工具调用的 agent 轮更长，整体纳入超时预算链
+原理：三类调用的时长分布不同（AI-030 联动），统一超时要么误杀要么虚耗，与 DF-028 预算传递同构
+用法：超时体系设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 池化（连接）
+
+<details><summary>看背面</summary>
+
+底层 HTTP 连接池随并发调优：LLM 长连接占用与普通 RPC 不同，池参数与并发模型匹配
+原理：LLM 响应慢导致连接占用时间长（DF-090 Little 定律联动），池小排队池大占资源，压测定参
+用法：底层网络调优
+锚点：实战共识
+
+</details>
+
+### 工程 · 优雅（停机）
+
+<details><summary>看背面</summary>
+
+优雅停机覆盖进行中的 LLM 调用：随上下文取消（订阅 dispose/请求取消），等待策略与 SP-098 联动
+原理：硬杀导致用户侧输出截断与 token 白烧，发布期调用取消链路要验证，与混沌演练（DF-076）联动
+用法：停机完整性
+锚点：实战共识
+
+</details>
+
+### Spring AI · 流式桥接（集成）
+
+<details><summary>看背面</summary>
+
+Spring MVC 栈桥接 Flux 流式：SseEmitter 订阅 Flux 逐段转发，客户端断开触发取消
+原理：非 WebFlux 项目也能做流式（桥接层），桥接要处理背压与取消，与 JA-098 联动
+用法：MVC 流式实现
+锚点：实战共识
+
+</details>
+
+### LangChain4j · 观察（集成）
+
+<details><summary>看背面</summary>
+
+LC4j 的观测：模型构建可挂 listener（请求/响应事件回调）记录耗时与 token
+原理：LC4j 侧观测靠 listener/日志（对比 Spring AI 的 Micrometer Observation），自建埋点接入统一大盘
+用法：LC4j 观测方案
+锚点：LangChain4j 1.0
+
+</details>
+
+### Spring AI · 校验（工具）
+
+<details><summary>看背面</summary>
+
+工具参数校验：模型回填的参数在执行前做应用层校验（类型/范围/权限）
+原理：模型填参可能错（幻觉参数），校验失败把错误信息回喂模型自修复（AI-043 联动），防线在应用层
+用法：工具健壮性
+锚点：实战共识
+
+</details>
+
+### LangChain4j · 校验（工具）
+
+<details><summary>看背面</summary>
+
+LC4j 工具同样需要应用层参数校验：ToolExecutionRequest 的 arguments 反序列化后先验后执行
+原理：两框架同构知识（JA-171），错误反馈机制让 Agent 自我修复，校验逻辑写进工具入口
+用法：工具健壮性
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · schema（结构化）
+
+<details><summary>看背面</summary>
+
+结构化输出的 schema 注入方式：提示词内嵌 JSON Schema（框架自动生成）约束输出格式
+原理：entity/POJO 返回背后是 schema 注入而非"魔法"，理解机制才能排查转换失败（JA-099 联动）
+用法：结构化机制理解
+锚点：实战共识
+
+</details>
+
+### 工程 · 分层阈值（评估）
+
+<details><summary>看背面</summary>
+
+评估门禁分层阈值：核心指标（忠实度/准确率）硬门禁，体验指标（长度/风格）软告警
+原理：一刀切阈值要么门禁太松要么天天阻断（AI-077 联动），按指标业务权重分层，与 SLO 分级思想（DF-056）同构
+用法：门禁设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 版本锁定（依赖）
+
+<details><summary>看背面</summary>
+
+AI 框架版本锁定纪律：Spring AI/LC4j 迭代快，BOM 锁定+升级走评估集回归（JA-058）
+原理：小版本可能改变默认行为（提示词模板/默认模型），盲升级等于线上实验，与版本治理（RD-078）同构
+用法：升级纪律
+锚点：实战共识
+
+</details>
+
+### MCP · schema 生成（工具）
+
+<details><summary>看背面</summary>
+
+MCP Java SDK 从 POJO/方法签名自动生成 inputSchema（JSON Schema）
+原理：手写 schema 易错，SDK 反射生成保证与实现同步，描述字段仍需人工写清（JA-108）
+用法：MCP 工具注册
+锚点：官方文档核对
+
+</details>
+
+### LangChain4j · 多对象（工具）
+
+<details><summary>看背面</summary>
+
+AiServices.tools(...) 可挂多个工具对象（按类分组组织工具族）
+原理：工具量大时按业务域拆类（订单工具/库存工具），框架聚合注册，与舱壁隔离思想（DF-027）呼应
+用法：工具组织规范
+锚点：LangChain4j 1.0
+
+</details>
+
+### Spring AI · 手动规格（工具）
+
+<details><summary>看背面</summary>
+
+Spring AI 支持手动构建 ToolCallback（不经 @Tool 注解），动态注册运行时工具
+原理：动态工具场景（插件化/配置驱动工具），规格在运行时组装，与 MCP 动态工具（JA-094）联动
+用法：动态工具场景
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### 工程 · 错题回流（复盘）
+
+<details><summary>看背面</summary>
+
+AI 应用错题回流机制：线上失败/差评样本进入评估集（脱敏后），评估集持续长大
+原理：评估集是活资产（AI-012），回流让门禁覆盖真实失败模式，与 MQ 复盘思想（MQ-075）同构
+用法：质量飞轮
+锚点：实战共识
+
+</details>
+
+### 工程 · 答题（主线）
+
+<details><summary>看背面</summary>
+
+Java AI 工程答题主线：先框架选型（JA-039）→ 管道组装（JA-051）→ 可靠性（降级/幂等/超时）→ 可观测与成本 → 评估门禁 → 安全合规
+原理：P10 视角把前面所有事实串成完整回答链，每环节带版本锚点与限定词，与 AI-060 方法论互为表里
+用法：本域综合答题框架
+锚点：实战方法论
+
+</details>
+
+### Spring AI · 默认值（builder）
+
+<details><summary>看背面</summary>
+
+ChatClient.Builder 支持预设默认值：defaultSystem/defaultUser/defaultOptions/defaultAdvisors
+原理：公共提示与参数在构建期固定，调用期只传差异部分，是模板分层（全局/会话/请求）的落点
+用法：提示词分层装配
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · audio（音频）
+
+<details><summary>看背面</summary>
+
+OpenAI starter 内含音频模型能力（语音转写与 TTS，OpenAiAudioModel 族）
+原理：多模态不止图像：语音输入转写后进对话、TTS 合成输出，与 AI-041 多模态管线联动
+用法：语音交互接入
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 本地化（嵌入）
+
+<details><summary>看背面</summary>
+
+spring-ai-transformers 提供本地嵌入（ONNX 模型，免 API 调用）
+原理：本地嵌入零成本零出域（AI-055 隐私联动），质量弱于云端旗舰嵌入模型，按场景分级选型
+用法：私有化嵌入方案
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 注入顺序（Advisor）
+
+<details><summary>看背面</summary>
+
+QuestionAnswerAdvisor 应排在记忆 advisor 之前或之后取决于"检索内容是否要进历史"
+原理：顺序错误导致检索内容污染记忆或记忆重复注入（JA-121 排序语义），装配时要推演数据流
+用法：advisor 装配推演
+锚点：实战共识
+
+</details>
+
+### Spring AI · 客户端属性（MCP）
+
+<details><summary>看背面</summary>
+
+MCP 客户端经 spring.ai.mcp.client 属性配置（enabled/连接清单等）
+原理：多 MCP server 连接声明式管理，enabled 开关控制整组连接，配置中心可管理
+用法：MCP 客户端装配
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 桥接（MCP）
+
+<details><summary>看背面</summary>
+
+MCP 工具经 ToolCallbackProvider 桥接进 ChatClient.tools(...)（SyncMcpToolCallbackProvider 包装 McpSyncClient）
+原理：桥接后 MCP 工具与本地 @Tool 工具同池调用，Agent 双工具来源（JA-054 对应 LC4j 侧）
+用法：MCP 工具进 Agent
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### LangChain4j · 过滤（检索）
+
+<details><summary>看背面</summary>
+
+EmbeddingStoreContentRetriever 支持 .filter(...) 元数据过滤（与 LC4j Filter 表达式）
+原理：检索层过滤与 Spring AI filterExpression 同思想（JA-063），权限/类目隔离落地
+用法：检索过滤对等实现
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · Metadata（元数据）
+
+<details><summary>看背面</summary>
+
+LC4j 的 TextSegment 携带 Metadata 对象（put/get 键值），随向量入库
+原理：与 Spring AI Document.metadata 对等（JA-128），溯源/权限/增量全靠它
+用法：RAG 数据结构对等
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · token 粒度（切分）
+
+<details><summary>看背面</summary>
+
+DocumentSplitters.recursive(size, overlap, tokenizer) 支持 token 粒度切分（配 Tokenizer）
+原理：与 Spring AI TokenTextSplitter 对等（JA-068），token 切分对齐上下文计量，中英混排按 tokenizer 差异处理
+用法：RAG 切分对等
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · 文档解析器（解析）
+
+<details><summary>看背面</summary>
+
+LC4j 文档解析以独立模块提供（如 langchain4j-document-parser-apache-pdf）
+原理：解析器模块化按需引入（PDF/poi/tika），与 Spring AI 的 reader 族对等（JA-129），按格式选解析器
+用法：RAG 入库组件
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · McpToolProvider（MCP）
+
+<details><summary>看背面</summary>
+
+LC4j 的 McpToolProvider.builder().mcpClients(...) 把 MCP 工具包装为 Provider 挂给 AiServices
+原理：与 JA-054 联动，MCP 工具与 @Tool 工具同池，双框架均把 MCP 当一等公民
+用法：MCP 工具接入 LC4j
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · 双模型键（Spring）
+
+<details><summary>看背面</summary>
+
+LC4j starter 同时支持 chat-model 与 streaming-chat-model 两组属性（同步与流式分别装配）
+原理：同步与流式可用不同 provider/模型（流式用轻量模型），两个 bean 并存注入
+用法：分层模型装配
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · 注解挂载（护栏）
+
+<details><summary>看背面</summary>
+
+LC4j 护栏经 @InputGuardrails/@OutputGuardrails 注解声明在 AiServices 接口方法上
+原理：护栏与声明式服务同风格（JA-037 接口实现），方法级粒度挂载，合规规则就近维护
+用法：声明式护栏
+锚点：LangChain4j 1.0
+
+</details>
+
+### MCP · URI（资源）
+
+<details><summary>看背面</summary>
+
+MCP resources 以 URI 标识（文件/数据库行/自定义 scheme），readResource 读取内容
+原理：资源与工具分离：工具是动作、资源是可读数据，URI 命名空间由 server 设计
+用法：MCP 资源设计
+锚点：MCP 规范
+
+</details>
+
+### MCP · prompts（模板）
+
+<details><summary>看背面</summary>
+
+MCP prompts 原语提供服务端预置提示模板（带参数）供客户端取用
+原理：把"优质提示词"生态化复用（客户端无需内置），与 resources/tools 并列（JA-143 三原语）
+用法：提示词生态复用
+锚点：MCP 规范
+
+</details>
+
+### MCP · cursor（分页）
+
+<details><summary>看背面</summary>
+
+MCP 列表类操作支持游标分页（tools/list 等，cursor 翻页）
+原理：大工具/资源清单一次性返回浪费，游标分页协议化，客户端要处理翻页
+用法：列表协议细节
+锚点：MCP 规范
+
+</details>
+
+### MCP · log（日志）
+
+<details><summary>看背面</summary>
+
+MCP 带 logging 能力（server 按级别推送日志消息给 client）
+原理：server 侧运行日志协议化输出（client 面板可见），排查 MCP 工具问题时开日志能力
+用法：MCP 排障
+锚点：MCP 规范
+
+</details>
+
+### 工程 · 记忆数据（合规）
+
+<details><summary>看背面</summary>
+
+会话记忆含个人信息时的合规处理：加密存储、按用户删除权（GDPR/个保法删除请求同步删记忆）
+原理：记忆是持久化用户数据（个人保护法适用），删除权要覆盖记忆存储，与 JA-090 仓储实现联动
+用法：合规工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 告警（成本）
+
+<details><summary>看背面</summary>
+
+成本告警：日预算阈值告警（token 费用按域/租户聚合）+超预算自动降级到小模型
+原理：预算失控要有自动刹车（AI-026 成本四招的治理化），与 MY-082 容量告警思想同构
+用法：成本治理自动化
+锚点：实战共识
+
+</details>
+
+### 工程 · 三层（缓存）
+
+<details><summary>看背面</summary>
+
+生成结果缓存三层叠加：供应商 prompt cache（前缀）→ 集中语义缓存 → 本地精确缓存
+原理：三层各有粒度与成本（供应商省输入、语义缓存省整次、精确缓存秒回），顺序：精确→语义→模型
+用法：缓存架构分层
+锚点：实战共识
+
+</details>
+
+### 工程 · 数据血缘（评估）
+
+<details><summary>看背面</summary>
+
+评估集条目带血缘：来源（线上回流/人工构造）、创建版本、覆盖意图
+原理：血缘让评估集可审计可进化（AI-179 回流联动），污染排查（AI-088）靠血缘追溯
+用法：评估资产管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 引用格式（RAG）
+
+<details><summary>看背面</summary>
+
+RAG 输出要求带引用标记（来源编号/文档名），后处理校验引用真实存在
+原理：无引用的 RAG 答案无法溯源（AI-011），输出后处理校验防"编造引用"，faithfulness 评估的落地
+用法：可信回答工程
+锚点：实战共识
+
+</details>
+
+### 工程 · mock 策略（测试）
+
+<details><summary>看背面</summary>
+
+测试环境模型策略：单测 mock 接口、集成测试用本地小模型（Ollama）跑通链路、生产评估走评估集
+原理：三层测试金字塔在 AI 应用落地（JA-041 细化），成本与确定性逐层权衡
+用法：测试金字塔落地
+锚点：实战共识
+
+</details>
+
+### 工程 · 评估成本（CI）
+
+<details><summary>看背面</summary>
+
+CI 中评估的成本控制：全量评估集按变更影响抽样跑（prompt 变更跑相关域子集）
+原理：评估集越大 CI 越贵越慢（AI-058），抽样+变更映射是平衡，发布前可全量补跑
+用法：CI 效率设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 特性开关（发布）
+
+<details><summary>看背面</summary>
+
+AI 功能用特性开关灰度（按用户百分比开关 AI 特性），异常秒级关闭
+原理：AI 功能质量波动大（幻觉/供应商故障），开关是最后防线（AI-053 降级链末端），与发布体系联动
+用法：发布安全阀
+锚点：实战共识
+
+</details>
+
+### 工程 · 三级（限流）
+
+<details><summary>看背面</summary>
+
+配额三级分层：用户级（防刷）→业务级（公平）→全局级（供应商上限），逐级收紧
+原理：与 DF-088 纵深限流同构，AI 特有的"token 即成本"让用户级限流更必要，与 JA-059 联动
+用法：限流体系设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 管线（后处理）
+
+<details><summary>看背面</summary>
+
+模型输出后处理管线：清洗（去Markdown 冗余）→格式化→敏感词扫描→引用校验，链式处理
+原理：输出不是终点（AI-202 引用校验/护栏衔接），管线化让后处理可组合可测试
+用法：输出工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 记忆隔离（测试）
+
+<details><summary>看背面</summary>
+
+记忆隔离测试用例：并发两 memoryId 交替写入，断言互不污染
+原理：防串号（JA-097/135）的专项测试，竞态窗口在并发写入时暴露，与并发测试知识联动
+用法：租户隔离验证
+锚点：实战共识
+
+</details>
+
+### 工程 · 单测（模板）
+
+<details><summary>看背面</summary>
+
+prompt 模板单测：占位符渲染断言（缺参报错/特殊字符转义/长度边界）
+原理：模板是"代码"（AI-025 变更纪律），渲染失败要 fail-fast，与模板资源化（JA-078）配套
+用法：模板质量门
+锚点：实战共识
+
+</details>
+
+### 工程 · 供应商切换（演练）
+
+<details><summary>看背面</summary>
+
+供应商切换演练：网关切流到备供应商验证（协议兼容/参数语义/限流阈值）
+原理：降级链（JA-055）只有演练过才可信（DF-076 混沌思想），差异清单在演练中产出
+用法：降级可信度
+锚点：实战共识
+
+</details>
+
+### 工程 · checklist（升级）
+
+<details><summary>看背面</summary>
+
+框架升级 checklist：starter 名变更（JA-066）/废弃 API 扫描/评估集全量回归/灰度验证四步
+原理：Spring AI 0.8→1.0 与 LC4j 0.x→1.0 都有破坏性变更，checklist 化防漏（JA-049/138 联动）
+用法：升级流程标准化
+锚点：实战共识
+
+</details>
+
+### 工程 · 测试（Agent）
+
+<details><summary>看背面</summary>
+
+Agent 循环测试：工具 mock 注入（按测试剧本返回固定序列），断言调用轨迹与终止条件
+原理：Agent 是多步循环（AI-059 评估），mock 工具让轨迹确定可断言，与 ExamSolutions 手写思维联动
+用法：Agent 质量保障
+锚点：实战共识
+
+</details>
+
+### 工程 · 显著性（评估）
+
+<details><summary>看背面</summary>
+
+A/B 效果对比注意统计显著性：样本量不足时采纳率差异可能是噪声
+原理：小流量灰度的决策陷阱（AI-063），给最小样本量指引，与实验设计常识联动
+用法：实验纪律
+锚点：实战共识
+
+</details>
+
+### RAG · 同步（权限）
+
+<details><summary>看背面</summary>
+
+知识库权限变更同步：权限标签变更后增量更新向量元数据（否则越权检索残留）
+原理：AI-061 检索权限的运维面：变更→同步→验证闭环，滞后窗口要监控
+用法：权限一致性
+锚点：实战共识
+
+</details>
+
+### RAG · 预热（冷启动）
+
+<details><summary>看背面</summary>
+
+检索冷启动预热：服务启动后用高频查询预热向量库连接与缓存
+原理：首波流量检索延迟毛刺（连接建立/缓存冷），与缓存预热（RD-066）同构
+用法：延迟稳定性
+锚点：实战共识
+
+</details>
+
+### RAG · 切分（多语言）
+
+<details><summary>看背面</summary>
+
+中英混排文档切分：token 粒度切分天然兼容（tokenizer 按语言计量），字符切分对中文粒度失真
+原理：中英混合知识库的切分陷阱（JA-068/189 联动），选 token 切分器+合适 tokenizer
+用法：多语言知识库
+锚点：实战共识
+
+</details>
+
+### 工程 · i18n（模板）
+
+<details><summary>看背面</summary>
+
+多语言 prompt 模板管理：按语言域维护模板文件，渲染时按用户语言选择
+原理：面向多区域用户的产品（模板资产化 JA-078 扩展），语言维度与版本维度正交
+用法：国际化工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 工具清单（幂等）
+
+<details><summary>看背面</summary>
+
+写操作工具幂等实现清单：唯一请求 ID（客户端传入或派生）+去重存储+重复请求返回首次结果
+原理：工具重试防重复执行（JA-056 红线的落地清单），与 DF-019 幂等三段式/DF-104 Idempotency-Key 同构
+用法：工具幂等落地
+锚点：实战共识
+
+</details>
+
+### 工程 · 轨迹（审计）
+
+<details><summary>看背面</summary>
+
+Agent 执行轨迹审计落库：每轮（模型调用/工具调用/参数/结果摘要）持久化，复盘与合规双用
+原理：轨迹是 Agent 的"日志"（AI-042 观测数据落库化），审计要求可回放，与 MQ 轨迹（MQ-093）同构
+用法：Agent 可审计性
+锚点：实战共识
+
+</details>
+
+### Spring AI · 枚举（结构化）
+
+<details><summary>看背面</summary>
+
+entity 支持枚举返回（输出约束到枚举值集），分类任务直接映射 Java 枚举
+原理：分类/意图识别的零解析方案（JA-003 特例），枚举约束比自由文本稳定
+用法：分类任务落地
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 聚合（流式）
+
+<details><summary>看背面</summary>
+
+流式聚合需求：Flux<String> 拼接完整回复做后处理（聚合完再落库/校验）
+原理：流式给用户、聚合给系统（校验/存档/审计）双消费，与 JA-207 后处理管线衔接
+用法：流式消费双轨
+锚点：实战共识
+
+</details>
+
+### LangChain4j · TokenStream 聚合（聚合）
+
+<details><summary>看背面</summary>
+
+TokenStream 同样可聚合：onCompleteResponse 回调拿完整响应做校验/落库
+原理：与 JA-221 对等（框架差异在回调 vs Flux），设计模式一致：流给体验、聚合给工程
+用法：流式聚合对等
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · 上下文窗口（对话）
+
+<details><summary>看背面</summary>
+
+上下文窗口预算分配：系统提示+记忆+检索内容+当前问题四段各有预算，检索内容是大头
+原理：RAG 场景 token 预算工程（AI-075 管理细化），窗口超限的优先级裁剪顺序要预设
+用法：上下文工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 注入上限（RAG）
+
+<details><summary>看背面</summary>
+
+检索内容注入上限：超预算时按相似度截断（保 top 片段），牺牲覆盖保可用
+原理：与 JA-223 衔接的兜底策略，与 MY-078 超限处理思想同构
+用法：预算兜底
+锚点：实战共识
+
+</details>
+
+### 工程 · 注入边界（prompt）
+
+<details><summary>看背面</summary>
+
+提示词注入防御实现：外部内容用明确边界标签包裹+system 声明"标签内是数据"（AI-024 的框架层落地）
+原理：RAG 文档/工具结果都是注入载体，边界标签是最小实现，护栏（JA-193）是第二层
+用法：注入防御落地
+锚点：实战共识
+
+</details>
+
+### 工程 · 校验（结构化）
+
+<details><summary>看背面</summary>
+
+entity 返回对象进业务前的二次校验：JSR-303 注解校验字段约束（schema 之外的业务规则）
+原理：schema 保证形状、业务规则（日期范围/枚举语义）仍需校验层，与 SP-068 校验知识联动
+用法：结构化防线
+锚点：实战共识
+
+</details>
+
+### LangChain4j · JSON 模式（结构化）
+
+<details><summary>看背面</summary>
+
+LC4j 对 OpenAI 官方 JSON 模式/结构化输出的支持（response format 配置级）
+原理：提示词注入 schema 之外，供应商原生结构化输出更稳（支持时优先），与 JA-173 机制互补
+用法：结构化方式选型
+锚点：LangChain4j 1.0
+
+</details>
+
+### Spring AI · 宽松解析（结构化）
+
+<details><summary>看背面</summary>
+
+Spring AI 结构化输出的宽松解析：代码块包裹的 JSON 也能提取（模型爱包 ```json）
+原理：模型输出习惯带 Markdown 代码围栏，框架层做提取兜底，但极端格式仍需业务兜底（JA-099）
+用法：解析鲁棒性
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### 工程 · 版本对齐（运维）
+
+<details><summary>看背面</summary>
+
+框架版本与模型能力对齐：新模型新参数（如 reasoning/结构化模式）需要框架版本支持
+原理：供应商新能力滞后于 API 发布（框架适配周期），升级框架才能用新参数，与 JA-175 锁版纪律平衡
+用法：版本-能力矩阵
+锚点：实战共识
+
+</details>
+
+### 工程 · 资源（部署）
+
+<details><summary>看背面</summary>
+
+LLM 应用自身资源需求：流式并发下 Netty/Servlet 线程占用、SSE 长连接数，容量规划与普通接口不同
+原理：长连接+慢响应的并发模型（DF-090 并发=QPS×RT），RT 长导致并发数放大，容量按并发而非 QPS
+用法：容量规划修正
+锚点：实战共识
+
+</details>
+
+### 工程 · 采样（观测）
+
+<details><summary>看背面</summary>
+
+prompt 日志采样记录：全量太大不合规（JA-044），按错误/慢调用采样全量，成功样本记指纹
+原理：采样策略与追踪采样（DF-055）同构，错误样本是排障金矿，成功样本压缩为指纹
+用法：观测成本平衡
+锚点：实战共识
+
+</details>
+
+### 工程 · 路由实现（多模型）
+
+<details><summary>看背面</summary>
+
+分级路由的 Java 实现：路由器读任务特征（长度/类型/用户档位）→ 选模型 → options.model 覆盖（JA-016），规则可配置
+原理：AI-086 的落地代码形态，路由规则配置中心化（JA-153/DF-048），灰度可按模型维度
+用法：路由落地代码
+锚点：实战共识
+
+</details>
+
+### 工程 · 在线指标（评估）
+
+<details><summary>看背面</summary>
+
+在线质量指标采集：用户点踩/采纳/修改率回流（AI-034），埋点在产品层而非框架层
+原理：框架只管调用，业务信号由产品埋点（前端交互数据），离线评估与在线信号互补形成闭环
+用法：质量信号采集
+锚点：实战共识
+
+</details>
+
+### 工程 · 双发（回滚）
+
+<details><summary>看背面</summary>
+
+模型/prompt 双发（shadow）：新版本影子流量跑（不返回用户），对比效果后再放量
+原理：比 A/B 更保守的验证（用户无感），影子结果进评估管线，与全链路灰度（DF-051）同构
+用法：低风险验证
+锚点：实战共识
+
+</details>
+
+### 工程 · 越权工具（安全）
+
+<details><summary>看背面</summary>
+
+工具越权防线：工具执行前按当前用户权限校验（ToolContext 用户 → RBAC 判断），防"借 AI 之手越权"
+原理：AI-068 沙箱+JA-069 ToolContext 的组合落地，提示词注入可能诱导调高危工具（AI-024），权限校验是硬防线
+用法：工具安全红线
+锚点：实战共识
+
+</details>
+
+### 工程 · 水位（观测）
+
+<details><summary>看背面</summary>
+
+LLM 网关水位观测：各模型 QPS/token/错误率/排队深度，按模型维度出大盘（AI-052 细化）
+原理：多模型路由（JA-232）的观测配套，容量与成本按模型维度归因，与监控知识联动
+用法：网关运维
+锚点：实战共识
+
+</details>
+
+### 工程 · 训练边界（数据）
+
+<details><summary>看背面</summary>
+
+企业数据与供应商训练边界：API 数据默认不用于训练（供应商条款），仍需合同与脱敏双保险
+原理：AI-040 合规的条款面，技术措施（脱敏/网关）+合同措施并行，与安全审计联动
+用法：合规双保险
+锚点：实战共识
+
+</details>
+
+### 工程 · 分层（架构）
+
+<details><summary>看背面</summary>
+
+AI 应用分层架构：接入层（网关）→编排层（框架/Agent）→能力层（模型/RAG/工具）→数据层（记忆/向量/评估）
+原理：把前面所有事实组织成架构图（P10 答题形态），层间契约清晰可替换，与 DF-081 分层思想同构
+用法：架构答题框架
+锚点：实战方法论
+
+</details>
+
+### 工程 · 失败模式（复盘）
+
+<details><summary>看背面</summary>
+
+Java AI 应用四大失败模式盘点：幻觉（工程约束）、超时限流（可靠性）、成本失控（治理）、上下文串号（安全）——各有专属防线
+原理：把 AI-043/053/026/097 组织成失败模式矩阵，review 与演练按矩阵覆盖，与 MY-103 应急预案同构
+用法：风险盘点框架
+锚点：实战方法论
+
+</details>
+
+### 工程 · 迁移（主线）
+
+<details><summary>看背面</summary>
+
+框架选型与迁移主线收束：锚版本（JA-060）→查迁移说明（JA-049/138）→checklist（JA-211）→灰度（JA-205）→错题回流（JA-179）
+原理：把本域所有迁移类知识串成 SOP，P10 回答"怎么安全升级 AI 框架"的完整框架
+用法：迁移答题框架
+锚点：实战方法论
+
+</details>
+
+### RAG · 实现（混合检索）
+
+<details><summary>看背面</summary>
+
+混合检索的 Java 落地形态：向量库语义召回 + ES 关键词召回双路，应用层 RRF（倒数排名融合）合并排序
+原理：向量召回弱在专有名词（AI-008），关键词路补齐，RRF 免调融合权重，是生产 RAG 标配（AI-032/062 之上）
+用法：混合检索架构
+锚点：实战共识
+
+</details>
+
+### RAG · parent-child（切分）
+
+<details><summary>看背面</summary>
+
+parent-child 切分：检索用小块（child 精度高）注入用大块（parent 上下文全），child 元数据记 parent id
+原理：小块召回准但上下文碎，映射回父块注入兼得两者，Java 侧自实现（切分时建映射）
+用法：切分策略进阶
+锚点：实战共识
+
+</details>
+
+### RAG · 查询路由（路由）
+
+<details><summary>看背面</summary>
+
+多知识库场景查询路由：按意图把查询分发给不同向量库（规则或小模型决策），LC4j 的 QueryRouter 抽象支撑
+原理：单一库检索范围错配（技术库 vs 商务库），路由是高级 RAG（JA-081）的编排件
+用法：多库检索编排
+锚点：实战共识
+
+</details>
+
+### RAG · 多路聚合（聚合）
+
+<details><summary>看背面</summary>
+
+多路召回结果聚合：去重（同源片段）、按来源加权、截断组合，LC4j 的 ContentAggregator 抽象支撑
+原理：多 retriever（向量+关键词+多库）结果需统一归并才能注入，聚合策略决定最终上下文质量
+用法：多路召回编排
+锚点：实战共识
+
+</details>
+
+### RAG · golden set（评估）
+
+<details><summary>看背面</summary>
+
+检索评估集（golden set）：问题→期望片段映射，逐域统计 Recall@K，检索改动前先跑
+原理：检索是无标注优化（AI-082 落地形态），golden set 是检索回归的标尺，缺失则调参靠猜
+用法：检索回归标尺
+锚点：实战共识
+
+</details>
+
+### RAG · overlap 权衡（切分）
+
+<details><summary>看背面</summary>
+
+chunk overlap 的权衡：跨边界语义保留（正）vs 内容重复稀释（负），重叠通常取 chunk 的 10-20%
+原理：重叠过大让相似检索返回重复内容挤占 topK（JA-052 联动），重叠为零则切断关键句
+用法：切分参数权衡
+锚点：实战共识
+
+</details>
+
+### RAG · 语义分块（切分）
+
+<details><summary>看背面</summary>
+
+语义分块：按语义边界（句向量相似度断点）切分而非固定长度，质量更好成本更高
+原理：固定长度切断语义（JA-068 的局限），语义断点切分提升检索精度，嵌入成本换质量按域选
+用法：切分策略选型
+锚点：实战共识
+
+</details>
+
+### RAG · 时间衰减（排序）
+
+<details><summary>看背面</summary>
+
+检索分数时间衰减：时效性内容（新闻/公告）按文档时间衰减分数，旧闻不再霸榜
+原理：纯相似度不考虑时效（AI-060 知识更新联动），衰减因子按域配置，与 MY-081 归档思想呼应
+用法：时效性检索
+锚点：实战共识
+
+</details>
+
+### RAG · 选型（隔离）
+
+<details><summary>看背面</summary>
+
+多租户向量隔离选型：海量租户用 filter 隔离（单库），高 SLA 租户独立库，按规模与隔离强度分级
+原理：JA-159 并存能力的选型决策面：过滤便宜但共享容量，独立库强隔离高成本
+用法：租户隔离选型
+锚点：实战共识
+
+</details>
+
+### RAG · 归一化（相似度）
+
+<details><summary>看背面</summary>
+
+嵌入向量归一化与距离度量：cosine 相似度要求向量归一化，未归一化时点积与 cosine 不等价
+原理：度量选错检索排序就错（静默质量事故），入库与检索用同一度量口径，嵌入模型文档确认
+用法：相似度口径
+锚点：实战共识
+
+</details>
+
+### RAG · 兜底（降级）
+
+<details><summary>看背面</summary>
+
+检索链路降级：向量库故障时降级到 ES 关键词检索或无 RAG 直答模式（标记降级降低预期）
+原理：RAG 是强依赖（JA-154 熔断的特化），降级模式让服务不断，质量损失向用户透明化
+用法：RAG 高可用
+锚点：实战共识
+
+</details>
+
+### RAG · 粒度（引用）
+
+<details><summary>看背面</summary>
+
+引用粒度选择：chunk 级引用（精确到段）vs 文档级引用（粗但稳），产品形态决定
+原理：chunk 引用精确但碎（AI-202），文档引用稳定但难定位，问答产品 chunk 级、合规归档文档级
+用法：引用设计
+锚点：实战共识
+
+</details>
+
+### RAG · GraphRAG 现实（图谱）
+
+<details><summary>看背面</summary>
+
+GraphRAG（AI-044）的 Java 现实：无开箱框架组件，需图库（Neo4j）+实体抽取管道自建，按 ROI 决策
+原理：多跳关系问题少的企业场景不值得建图（成本高），诚实评估而非追新，与选型 ROI 思维（AI-027）联动
+用法：进阶 RAG 决策
+锚点：实战共识
+
+</details>
+
+### Agent · 循环归属（边界）
+
+<details><summary>看背面</summary>
+
+Java 框架的 Agent 边界：框架管"模型↔工具"执行循环（JA-053），任务规划/多 Agent 编排/长状态需自建
+原理：判断标准：单工具循环内框架够用，跨任务状态与多 Agent 协作进入自建区（LangGraph 类编排），诚实划界
+用法：Agent 架构划界
+锚点：实战共识
+
+</details>
+
+### Agent · 状态机（状态）
+
+<details><summary>看背面</summary>
+
+Agent 任务显式状态机：PLANNING→EXECUTING→VERIFYING→DONE/FAILED，状态落库支撑恢复与审计
+原理：隐式状态（只存在循环变量）无法 checkpoint（AI-021 落地），状态机是长任务 Agent 的骨架
+用法：长任务骨架
+锚点：实战共识
+
+</details>
+
+### Agent · 结果摘要（工具）
+
+<details><summary>看背面</summary>
+
+工具结果回喂前裁剪：大结果（长 JSON/日志）先摘要/字段筛选再进上下文（AI-084 的 Java 落地）
+原理：工具结果直塞撑爆窗口且稀释关键信息，摘要器在工具与消息之间，裁剪策略按工具类型配置
+用法：上下文工程
+锚点：实战共识
+
+</details>
+
+### Agent · 断点（恢复）
+
+<details><summary>看背面</summary>
+
+Agent 失败重试边界：步骤级重试（单工具失败）优先，任务级重试从 checkpoint 续跑，全量重跑是最后手段
+原理：AI-021 checkpoint 的重试策略细化，幂等工具（JA-218）是步骤重试前提，重试粒度决定成本
+用法：失败恢复设计
+锚点：实战共识
+
+</details>
+
+### Agent · 介质（协作）
+
+<details><summary>看背面</summary>
+
+多 Agent 通信介质选型：进程内队列（同应用）→MQ（跨服务/解耦）→共享状态库（长任务），按耦合度选
+原理：AI-049 多 Agent 架构的落地介质，MQ 介质天然获得重试与轨迹（MQ-001 联动），进程内最简
+用法：多 Agent 落地
+锚点：实战共识
+
+</details>
+
+### Agent · 节点（人审）
+
+<details><summary>看背面</summary>
+
+人审节点落地：Agent 状态机插入 WAITING_APPROVAL 状态，审批 UI + 超时策略（超时自动拒绝或升级）
+原理：AI-068 审批的工程化，高危操作（AI-235 越权防线之外的第二道）挂审批，超时策略防任务悬挂
+用法：人机协作落地
+锚点：实战共识
+
+</details>
+
+### Agent · 并行工具（并发）
+
+<details><summary>看背面</summary>
+
+独立工具并行执行提吞吐：按依赖图判断可并行（读库存+查物流无依赖），有依赖串行
+原理：串行执行是默认实现，并行化要判断数据依赖（竞态/上下文合并），与并发工程知识联动
+用法：Agent 吞吐优化
+锚点：实战共识
+
+</details>
+
+### Agent · 生命周期（清理）
+
+<details><summary>看背面</summary>
+
+Agent 任务终态清理：中间状态/临时文件/记忆挂载在任务 DONE/FAILED 后清理，防长尾泄漏
+原理：长运行 Agent 的资源纪律（JA-160 记忆清理的任务级版本），清理失败进补偿任务
+用法：资源生命周期
+锚点：实战共识
+
+</details>
+
+### 工程 · 安全扫描（流式）
+
+<details><summary>看背面</summary>
+
+流式输出的安全扫描：敏感词/合规扫描逐段进行（不等全文），命中即截断流
+原理：合规要覆盖流式（JA-207 管线的流式版），逐段扫描有误判窗口（上下文被切）需窗口缓冲
+用法：流式合规
+锚点：实战共识
+
+</details>
+
+### 工程 · 本地计数（token）
+
+<details><summary>看背面</summary>
+
+Java 侧本地 token 计数：jtokkit 是 tiktoken 的 Java 实现（BPE 编码本地计算）
+原理：预算估算（AI-062/103）需要本地计数（调 API 计数太贵），jtokkit 是 Java 生态事实标准
+用法：token 工程工具
+锚点：实战共识
+
+</details>
+
+### 工程 · 价格配置（成本）
+
+<details><summary>看背面</summary>
+
+模型价格表配置化：价格/汇率入配置中心（供应商调价即改配置），成本计算公式引用配置
+原理：价格硬编码是成本事故源（调价不感知），与配置治理（DF-106）联动
+用法：成本工程基础
+锚点：实战共识
+
+</details>
+
+### 工程 · 账单（对账）
+
+<details><summary>看背面</summary>
+
+本地用量与供应商账单对账：差异来源（缓存折扣/失败调用计费/计量口径），月度对账闭环
+原理：Usage 统计（JA-065）与账单必有偏差，对账发现泄漏（未计量调用/配额滥用），与 MY-102 对账思想同构
+用法：成本可信度
+锚点：实战共识
+
+</details>
+
+### 工程 · key 池（配额）
+
+<details><summary>看背面</summary>
+
+供应商多 key 池轮转：多账号分摊配额（RPM/TPM 独立计），轮转+熔断（坏 key 摘除）
+原理：单 key 配额是吞吐天花板（AI-065 的扩展），合规前提是供应商条款允许多账号，与限流知识联动
+用法：配额扩展手段
+锚点：实战共识
+
+</details>
+
+### 工程 · 数据驻留（合规）
+
+<details><summary>看背面</summary>
+
+数据驻留合规：按用户区域路由端点（EU 用户走 EU 端点），网关层实现区域路由
+原理：数据跨境法规（GDPR 等）硬约束（AI-040 延伸），区域端点+路由规则，与 JA-096 网关联动
+用法：跨境合规
+锚点：实战共识
+
+</details>
+
+### 工程 · 出网（网络）
+
+<details><summary>看背面</summary>
+
+企业出网适配：代理/证书/内网网关三层（HTTP client 层配置），框架可插拔 HTTP 层（JA-140）承接
+原理：企业内网环境是现实约束，网络层问题伪装成"模型不可用"，排障分层（网络→网关→供应商）
+用法：企业网络排障
+锚点：实战共识
+
+</details>
+
+### 工程 · prompt 压缩（压缩）
+
+<details><summary>看背面</summary>
+
+prompt 压缩技术：选择性删词压缩器（LLMLingua 思路）在保语义下降 token，Java 侧以预处理器接入
+原理：长上下文成本压缩（AI-075/103 联动），压缩有语义损失风险需评估回归（AI-077），按收益启用
+用法：token 压缩手段
+锚点：实战共识
+
+</details>
+
+### 工程 · map-reduce（摘要）
+
+<details><summary>看背面</summary>
+
+超长文本摘要链：分段摘要（map）→归并摘要（reduce），突破单次窗口限制
+原理：单次窗口装不下的长文档（JA-223 预算超限的解法），链式摘要质量衰减需评估，与分治思想同构
+用法：长文本处理
+锚点：实战共识
+
+</details>
+
+### 工程 · 单元隔离（实验）
+
+<details><summary>看背面</summary>
+
+A/B 实验单元按用户 hash 分桶（同用户始终同版本），避免同一用户见到两版本
+原理：实验单元错配（按请求）导致体验混乱与数据污染（AI-063），与灰度（DF-050）联动
+用法：实验设计
+锚点：实战共识
+
+</details>
+
+### 工程 · LLM 判分（评估）
+
+<details><summary>看背面</summary>
+
+评估自动判分：LLM-as-judge 按评分细则打分，judge 模型与被测模型分开（防偏袒），抽样人工校准
+原理：AI-069 的工程化：人工全评不可行，judge 是杠杆，judge 自身的偏差要校准（换 judge 跑分对比）
+用法：评估自动化
+锚点：实战共识
+
+</details>
+
+### 工程 · 拨测（监控）
+
+<details><summary>看背面</summary>
+
+供应商 SLA 拨测：独立探针定时调模型 API（最小请求），监控可用性/延迟基线，与内部监控分离
+原理：外部视角可用性（JA-055 降级决策的数据源），内部调用正常不代表供应商健康，与拨测监控思想联动
+用法：供应商可观测
+锚点：实战共识
+
+</details>
+
+### 工程 · 输出链接（安全）
+
+<details><summary>看背面</summary>
+
+模型输出链接防护：生成 URL 经白名单校验（防幻觉域名/钓鱼链接直达用户）
+原理：幻觉 URL 是真实攻击面（AI-043 幻觉的 Web 维度），白名单+域名校验在输出管线（JA-207）落地
+用法：输出安全
+锚点：实战共识
+
+</details>
+
+### 工程 · 超时（工具）
+
+<details><summary>看背面</summary>
+
+工具执行超时独立配置：单个工具超时（业务工具可能调慢下游）独立于 LLM 调用超时
+原理：工具链路含业务下游（DB/RPC），工具超时是熔断粒度的一部分（JA-154 联动），超限返回错误反馈给模型
+用法：工具可靠性
+锚点：实战共识
+
+</details>
+
+### Agent · 步数上限（边界）
+
+<details><summary>看背面</summary>
+
+Agent 最大步数上限配置（max iterations）：防死循环烧钱（AI-043 失败模式），到限强制收尾（汇总当前结果）
+原理：循环失控的硬保险（AI-016），上限按任务类型分档，到限的行为要设计（优雅收尾而非报错）
+用法：Agent 熔断线
+锚点：实战共识
+
+</details>
+
+### 工程 · 标签透传（网关）
+
+<details><summary>看背面</summary>
+
+计费标签透传：应用把业务标签（tenant/feature）经 header 传给网关，网关归集出账（AI-057 的网关侧落地）
+原理：归集口径一致（应用/网关/账单三层同标签），标签设计决定成本分析维度，与配置治理联动
+用法：计费链路
+锚点：实战共识
+
+</details>
+
+### 工程 · playground（调试）
+
+<details><summary>看背面</summary>
+
+本地调试页（playground）：开发环境直连模型的对话调试工具（框架 devtools 或手写页），试 prompt 免发版
+原理：prompt 迭代效率工具（AI-064 变更纪律的配套），生产隔离（只在 dev profile 开启），与测试策略联动
+用法：开发效率工具
+锚点：实战共识
+
+</details>
+
+### 工程 · 熔断预算（降级）
+
+<details><summary>看背面</summary>
+
+熔断+预算双保险：熔断防雪崩（DF-022），预算熔断防成本失控（日预算超限强制降级），两套独立
+原理：失败熔断与成本熔断是不同维度（JA-199 告警的自动化），都触发时成本熔断优先
+用法：双维度熔断
+锚点：实战共识
+
+</details>
+
+### 工程 · 权限变更（知识）
+
+<details><summary>看背面</summary>
+
+知识库权限变更同步机制：权限标签变更事件→向量元数据批量更新→抽查验证，滞后窗口监控
+原理：AI-214 的机制化：事件驱动（MQ）而非定时全量，与 CDC 思想（RD-046）同构
+用法：权限同步工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 混合检索（多语言）
+
+<details><summary>看背面</summary>
+
+多语言知识库检索：跨语言查询（中文问英文文档）需跨语言嵌入模型或查询翻译预处理
+原理：嵌入模型跨语言能力差异大（AI-076 模型评测联动），翻译预处理（查询先翻成文档语言）是备选
+用法：多语言检索策略
+锚点：实战共识
+
+</details>
+
+### 工程 · 契约（测试）
+
+<details><summary>看背面</summary>
+
+AI 组件契约测试：mock 模型验证业务逻辑（JA-041），契约测试验证"调用参数符合预期"（温度/模型/消息结构）
+原理：比 mock 更进一步：断言发出去的请求形态（回归保护 prompt/options 变更），与消费者契约测试思想同构
+用法：AI 测试深化
+锚点：实战共识
+
+</details>
+
+### 工程 · 流式结构化（结构化）
+
+<details><summary>看背面</summary>
+
+流式结构化输出：逐段 JSON 无法解析，需流式 JSON 解析器（增量解析）或聚合后解析（JA-221 权衡）
+原理：流式+结构化叠加的场景（实时表格填充），增量解析复杂度高，多数场景聚合后解析足够
+用法：流式结构化权衡
+锚点：实战共识
+
+</details>
+
+### 工程 · 隔离（依赖）
+
+<details><summary>看背面</summary>
+
+AI 依赖隔离：框架依赖圈进独立模块（adapter 层），业务不直接 import 框架类
+原理：框架快速迭代（JA-175），adapter 层让换框架只改一个模块（防腐层 DDD 思想，SP-083/DDF-083 联动）
+用法：防腐层落地
+锚点：实战共识
+
+</details>
+
+### 工程 · 清单（评审）
+
+<details><summary>看背面</summary>
+
+AI 功能 code review 清单：密钥不入库（JA-043）/防串号（JA-097）/工具幂等（JA-218）/注入边界（JA-225）/输出扫描（JA-262）五项必查
+原理：把前面红线收敛成 review checklist，人工 review 前先跑静态检查，与 MY-104 SQL 审核思想同构
+用法：质量门
+锚点：实战共识
+
+</details>
+
+### 工程 · 演练（灾备）
+
+<details><summary>看背面</summary>
+
+AI 依赖灾备演练矩阵：供应商宕机（切网关）、限流（降级）、上下文超限（裁剪）、成本失控（熔断）四场景季度演练
+原理：失败模式矩阵（JA-239）的演练化，每场景验证降级链与告警，与 DF-076 混沌工程联动
+用法：韧性验证
+锚点：实战共识
+
+</details>
+
+### LangChain4j · 规格（工具）
+
+<details><summary>看背面</summary>
+
+LC4j 手动构建 ToolSpecification（不经注解）：名称/描述/JSON Schema 参数动态组装
+原理：与 Spring AI 手动规格（JA-178）对等，动态工具场景双框架同解，注解是静态场景捷径
+用法：动态工具对等
+锚点：LangChain4j 1.0
+
+</details>
+
+### Spring AI · 按条清理（记忆）
+
+<details><summary>看背面</summary>
+
+Spring AI ChatMemory 支持按会话清理（清空指定 conversationId 的历史）
+原理：用户删除会话/合规删除（JA-198）的 API 面，与仓储（JA-067）配合，清理动作要进审计
+用法：会话生命周期
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### 工程 · 质量维度（指标）
+
+<details><summary>看背面</summary>
+
+质量指标在线化三件：回答引用率（有据比例）、用户纠错率、转人工率，趋势看板按域分桶
+原理：AI-233 在线指标的落地清单，三者联合定位质量域（引用率低=RAG 问题），与可观测体系联动
+用法：在线质量监控
+锚点：实战共识
+
+</details>
+
+### 工程 · 分摊（成本）
+
+<details><summary>看背面</summary>
+
+成本分摊到产品功能：按调用链路打业务标签（AI-057 细化），功能级 ROI 评估（AI-027）才有数据
+原理：成本只到"模型级"无法决策（哪个功能该优化），功能标签与网关标签（JA-277）贯通
+用法：成本分析维度
+锚点：实战共识
+
+</details>
+
+### 工程 · 对比表（选型）
+
+<details><summary>看背面</summary>
+
+框架能力对比表维护：Spring AI/LC4j 的能力矩阵（模型/结构化/RAG/工具/MCP/观测/护栏）随版本更新
+原理：选型论证（JA-039）要有活文档支撑（版本演进 JA-229），对比表是团队资产，与决策文档文化联动
+用法：选型资产管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 成本失控（演练）
+
+<details><summary>看背面</summary>
+
+成本失控演练：模拟价格上调/循环调用（JA-276 防线失效），验证预算熔断（JA-279）与告警链路
+原理：成本维度也要演练（不止可用性），与混沌工程覆盖面扩展（DF-076），演练产出调参
+用法：成本韧性
+锚点：实战共识
+
+</details>
+
+### RAG · 端到端（评估）
+
+<details><summary>看背面</summary>
+
+RAG 评估分层：检索层（Recall@K）与生成层（faithfulness/相关性）分开评（AI-012），归因才清晰
+原理：检索差修检索、生成差修 prompt（JA-051 两段式对应的评估拆分），混评无法归因
+用法：评估归因
+锚点：实战共识
+
+</details>
+
+### 工程 · 五步（上线）
+
+<details><summary>看背面</summary>
+
+AI 功能上线五步：评估集门禁（AI-058）→影子双发（JA-234）→小流量灰度（JA-205）→看板监控（JA-289）→错题回流（JA-179）
+原理：把发布链路串成 SOP，每步有工具支撑，与完整发布体系（DF-050/051）同构
+用法：发布 SOP
+锚点：实战方法论
+
+</details>
+
+### 工程 · 防腐（接口）
+
+<details><summary>看背面</summary>
+
+AI 能力接口设计：业务层只见"complete/query/extract"领域接口，框架类型不出 adapter（JA-284 的接口面）
+原理：防腐层的接口面设计决定换框架成本，接口按业务语义而非框架语义命名，与 DDD 接口设计联动
+用法：防腐接口设计
+锚点：实战共识
+
+</details>
+
+### 工程 · trace 深度（观测）
+
+<details><summary>看背面</summary>
+
+LLM 调用 trace 深度：一次用户请求的 span 树=网关→框架→供应商→工具子调用，全链路串联（AI-042 落地）
+原理：trace 树还原"慢在哪层"（DF-053），工具内嵌 RPC 也要子 span，与分布式追踪知识同构
+用法：trace 树设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 并发模型（容量）
+
+<details><summary>看背面</summary>
+
+LLM 应用的并发模型选择：WebFlux 全链路响应式 vs MVC+SseEmitter 桥接，按团队技术栈与生态选
+原理：两种模式都能做流式（JA-169），响应式吞吐优但调试成本高（SP-082），虚拟线程（SP-083）是第三选项
+用法：并发架构选型
+锚点：实战共识
+
+</details>
+
+### 工程 · 嵌套（结构化）
+
+<details><summary>看背面</summary>
+
+嵌套结构结构化输出：深嵌套 POJO（含列表与对象）成功率低于平铺结构，schema 设计偏好浅层
+原理：模型对深嵌套/长列表的 JSON 生成错误率高（JA-099 失败来源），schema 设计影响成功率（平铺/拆字段），与建模思想联动
+用法：结构化设计纪律
+锚点：实战共识
+
+</details>
+
+### 工程 · 红队（安全）
+
+<details><summary>看背面</summary>
+
+AI 功能红队清单：注入（JA-225）、越狱（AI-025）、越权工具（JA-235）、数据外泄（prompt 中带敏感数据外发）、成本攻击（恶意刷 token）
+原理：把 AI-054 安全域落成可执行红队清单，上线前跑+变更后回归，与安全审计（RD-096）同构
+用法：安全验证框架
+锚点：实战共识
+
+</details>
+
+### 工程 · README（文档）
+
+<details><summary>看背面</summary>
+
+AI 功能交付文档：架构图（JA-238 分层）、评估集入口、降级链、成本口径、runbook（故障预案）五件套
+原理：AI 功能的交付完整性（不止代码），运维可接手（预案可执行），与交付文档纪律联动
+用法：交付完整性
+锚点：实战方法论
+
+</details>
+
+### 选型 · 命令式 vs 声明式（范式）
+
+<details><summary>看背面</summary>
+
+两框架编程范式差异：Spring AI ChatClient 是命令式链（逐步组装请求），LangChain4j AiServices 是声明式接口（注解定义契约）
+原理：范式影响代码组织：命令式灵活（动态组装）、声明式简洁（接口即文档），团队风格决定偏好，与 SP-083 联动
+用法：范式对比深水区
+锚点：实战共识
+
+</details>
+
+### 选型 · RAG 装配差异（RAG 装配面）
+
+<details><summary>看背面</summary>
+
+Spring AI 的 RAG 装配面是 advisor 链，LangChain4j 是 contentRetriever/retrievalAugmentor 参数
+原理：两种装配面语义对等（JA-051），Spring AI 的 advisor 更通用（RAG 只是用途之一），LC4j 的更专用清晰
+用法：RAG 装配对比
+锚点：实战共识
+
+</details>
+
+### 选型 · 记忆差异（记忆）
+
+<details><summary>看背面</summary>
+
+记忆装配差异：Spring AI 用 ChatMemory bean + MemoryAdvisor，LC4j 用 ChatMemoryProvider + @MemoryId 参数
+原理：Spring AI 的会话标识经 advisor 参数传（JA-064），LC4j 经方法参数传（JA-135），心智模型不同但能力对等
+用法：记忆对比
+锚点：实战共识
+
+</details>
+
+### 选型 · 观测差异（观测）
+
+<details><summary>看背面</summary>
+
+观测实现差异：Spring AI 深度集成 Micrometer Observation（自动 trace），LC4j 靠 listener 回调自建
+原理：Spring 栈下 Spring AI 观测零配置，LC4j 要自接埋点（JA-170），观测成本是选型权重之一
+用法：观测对比
+锚点：实战共识
+
+</details>
+
+### 选型 · 类型差异（流式）
+
+<details><summary>看背面</summary>
+
+流式返回类型差异：Spring AI 返回 Reactor Flux，LC4j 返回自定义 TokenStream 回调
+原理：Flux 可组合（背压/操作符），TokenStream 简单直接，WebFlux 栈偏好前者，与 JA-297 并发模型联动
+用法：流式对比
+锚点：实战共识
+
+</details>
+
+### 选型 · 版本节奏（节奏）
+
+<details><summary>看背面</summary>
+
+版本节奏差异：LangChain4j 独立项目迭代快（追新模型），Spring AI 跟随 Spring 生态节奏更稳
+原理：追新（新模型参数早支持）与稳定（生产节奏）的权衡（JA-229 联动），企业多偏稳，追新团队选 LC4j
+用法：版本节奏对比
+锚点：实战共识
+
+</details>
+
+### MCP · 进程隔离（生产）
+
+<details><summary>看背面</summary>
+
+MCP server 子进程的资源与安全隔离：容器化运行（限额 CPU/内存/文件系统只读）
+原理：子进程默认继承宿主权限（AI-076 沙箱思想），容器隔离防恶意/失控 server 影响宿主
+用法：本地 server 安全
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 版本兼容（生产）
+
+<details><summary>看背面</summary>
+
+MCP server 升级的兼容性管理：inputSchema 变更=破坏性变更（客户端填参逻辑失效），schema 只增不改
+原理：工具契约演进纪律（与 API 版本管理同构），schema 变更走新版本工具而非原地改
+用法：工具契约演进
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 重连（生产）
+
+<details><summary>看背面</summary>
+
+MCP 客户端重连策略：断线重连退避+initialize 重新握手+工具清单重新发现
+原理：重连不是简单重试（会话与发现都要重来），客户端 SDK 行为确认+业务侧监控重连次数
+用法：MCP 可靠性
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 多租户（生产）
+
+<details><summary>看背面</summary>
+
+MCP server 多租户隔离：工具执行按调用方身份过滤（鉴权上下文进 server）
+原理：共享 server 多业务接入时防越权（JA-235 同思想），身份经传输层传递（HTTP header/stdio 环境变量）
+用法：MCP 租户隔离
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 灰度（生产）
+
+<details><summary>看背面</summary>
+
+MCP 工具灰度：新工具版本先对部分客户端开放（server 端路由），或新增工具名 v2 并存
+原理：工具变更协议化灰度（JA-308 契约演进配套），新旧并存回退容易，与发布灰度（DF-050）同构
+用法：MCP 发布纪律
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 审计（生产）
+
+<details><summary>看背面</summary>
+
+MCP 调用审计：server 记录调用方/工具/参数/结果摘要/耗时，合规与计费双用
+原理：与 AI-042 观测、JA-219 轨迹同思想，审计是 MCP 平台化前提（谁在用我的工具）
+用法：MCP 平台化
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 超时（生产）
+
+<details><summary>看背面</summary>
+
+MCP 工具超时分层：连接超时/工具执行超时/整体会话超时三层配置
+原理：工具含业务下游（JA-275 工具超时知识），MCP 层再加一层网络超时，三层独立调参
+用法：MCP 超时体系
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 监控（生产）
+
+<details><summary>看背面</summary>
+
+MCP server 监控：工具级 QPS/延迟/错误率/参数校验失败率，工具维度大盘
+原理：工具是"远程函数"（JA-026），监控粒度到工具才能定位坏工具，与 DF-092 指标体系联动
+用法：MCP 可观测
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 测试（生产）
+
+<details><summary>看背面</summary>
+
+MCP server 测试：schema 契约测试（inputSchema 与实现签名一致）+mock 客户端回归
+原理：工具契约（JA-308）的自动化验证，SDK 从 POJO 生成 schema（JA-176）后契约漂移要测
+用法：MCP 质量门
+锚点：MCP 生产化
+
+</details>
+
+### MCP · 与网关关系（定位）
+
+<details><summary>看背面</summary>
+
+MCP 与 API 网关的关系：MCP 是工具协议不是流量网关，企业内两者共存（网管南北向流量、MCP 管 Agent 工具接入）
+原理：定位混淆会导致重复建设，MCP 解决"AI 工具生态接入"，网关解决"HTTP 流量治理"
+用法：架构定位澄清
+锚点：实战共识
+
+</details>
+
+### 中间件 · 职责（网关）
+
+<details><summary>看背面</summary>
+
+LLM 网关六大职责：协议转换、鉴权、限流配额、路由降级、计费归集、缓存（AI-028 的展开）
+原理：每职责有实现件（JA-277 标签/JA-096 base-url），网关是 AI 中间件的核心节点，与 DF-037 API 网关职责对照
+用法：网关架构全景
+锚点：实战共识
+
+</details>
+
+### 中间件 · 兼容层（网关）
+
+<details><summary>看背面</summary>
+
+网关的 OpenAI 协议兼容层：统一对外 OpenAI 协议，对内翻译各家协议（Anthropic/通义等）
+原理：应用只学一套协议（JA-096），协议转换在网关（含消息结构与流式格式差异），是网关存在的第一理由
+用法：协议适配
+锚点：实战共识
+
+</details>
+
+### 中间件 · 插件（网关）
+
+<details><summary>看背面</summary>
+
+网关插件链：敏感词过滤/注入检测/审计/配额校验按序执行（类似 Servlet 过滤器链）
+原理：横切能力下沉网关（应用免重复实现），插件顺序影响行为（先审计后过滤），与 JA-225 注入防线呼应
+用法：网关扩展模型
+锚点：实战共识
+
+</details>
+
+### 中间件 · 配额（网关）
+
+<details><summary>看背面</summary>
+
+网关多租户配额：按租户/业务/模型三维配额（token/请求数），超限 429+升级路径
+原理：JA-206 三级限流的网关侧实现，配额数据结构（令牌桶按租户分桶），与 Redis 限流（RD-057）联动
+用法：配额模型
+锚点：实战共识
+
+</details>
+
+### 中间件 · 降级路由（网关）
+
+<details><summary>看背面</summary>
+
+网关降级路由：主模型错误率超阈自动切备模型（路由表+健康检查驱动）
+原理：JA-055 降级链的网关侧自动化，切流决策基于拨测（JA-273）与实时错误率，与 DF-053 主从切换思想同构
+用法：自动降级实现
+锚点：实战共识
+
+</details>
+
+### 中间件 · 审计（网关）
+
+<details><summary>看背面</summary>
+
+网关审计日志：完整请求响应（脱敏后）落审计存储（可回放），与 MDC trace 关联
+原理：排障/合规/对账三用的数据源（JA-165 指纹的网关侧补充），存储成本按采样平衡
+用法：审计落地方案
+锚点：实战共识
+
+</details>
+
+### 中间件 · 选型（网关）
+
+<details><summary>看背面</summary>
+
+网关选型：开源（LiteLLM/Higress AI 插件）vs 自建，按定制深度与团队运维能力
+原理：LiteLLM 快速起步（协议转换成熟），深度定制（配额模型/审计格式）自建，与 MQ-088 平台化判断同构
+用法：网关选型框架
+锚点：实战共识
+
+</details>
+
+### 中间件 · 性能（网关）
+
+<details><summary>看背面</summary>
+
+网关额外一跳的延迟代价：流式场景网关转发增加毫秒级，配额校验本地缓存降低检查成本
+原理：网关不是免费（多一跳网络+处理），收益（治理）与代价（延迟/可用性）权衡，与 DF-047 负载均衡位置思想同构
+用法：网关成本认知
+锚点：实战共识
+
+</details>
+
+### 中间件 · HA（网关）
+
+<details><summary>看背面</summary>
+
+网关高可用：无状态多实例+负载均衡，配额状态外置（Redis），网关挂了应用可配置直连兜底
+原理：网关是单点风险（JA-037 网关可用性知识），兜底直连是逃生通道（演练验证），与多级降级（DF-074）联动
+用法：网关可用性
+锚点：实战共识
+
+</details>
+
+### 中间件 · 部署（语义缓存）
+
+<details><summary>看背面</summary>
+
+语义缓存独立部署（服务化）优于嵌应用内：多应用共享缓存命中、独立演化
+原理：嵌入应用内缓存只服务自己（AI-050），服务化语义缓存是平台件（与网关并列），与多级缓存（JA-200）联动
+用法：语义缓存架构
+锚点：实战共识
+
+</details>
+
+### Spring AI · 原理（装配）
+
+<details><summary>看背面</summary>
+
+Spring AI 自动装配原理：starter 经条件注解（@ConditionalOnClass/@ConditionalOnProperty）装配 ChatModel 与 Builder
+原理：与 SP-031 条件装配同机制（spring.ai.model 属性选择 provider，JA-047），理解装配链才能排查"bean 不存在"问题
+用法：装配原理
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 构成（模块）
+
+<details><summary>看背面</summary>
+
+Spring AI 模块构成：spring-ai-core（抽象）+ 各 model starter + vector-store starter + mcp starter 族
+原理：与 LC4j core/主构件分工（JA-136）同构，core 抽象稳定、适配器独立演进，依赖图清晰
+用法：依赖图理解
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · id 来源（会话）
+
+<details><summary>看背面</summary>
+
+conversationId 来源三选：前端显式传（会话模型）→后端解析（用户+会话）→默认值（无状态单轮）
+原理：会话标识决定记忆隔离粒度（JA-064），来源不清是串号（JA-097）的根源，接口设计先定 id 语义
+用法：会话标识设计
+锚点：实战共识
+
+</details>
+
+### Spring AI · 内部流程（RAG）
+
+<details><summary>看背面</summary>
+
+QuestionAnswerAdvisor 内部流程：拦截请求→用用户问题查向量库→把片段组装进提示模板→放行调用
+原理：理解内部流程才能扩展（自定义模板 JA-126/改检索策略），advisor 是"前置检索+提示组装"的组合
+用法：advisor 机制理解
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 异常（Advisor）
+
+<details><summary>看背面</summary>
+
+advisor 链异常传播：前置异常阻断调用（降级 advisor 实现），异常沿链上抛给调用方
+原理：advisor 是拦截器语义（SP-066 对比），异常处理在链路层统一（兜底 advisor 吞异常给降级），与熔断（JA-154）组合
+用法：链路异常设计
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### LangChain4j · 接口层（异常）
+
+<details><summary>看背面</summary>
+
+LC4j AiServices 接口方法异常：底层异常包装后经方法抛出，业务按异常类型分派（JA-104 矩阵）
+原理：声明式风格的异常处理面（接口 throws/运行时异常），与代理机制（JA-134）联动，统一异常映射层建议
+用法：声明式异常设计
+锚点：LangChain4j 1.0
+
+</details>
+
+### LangChain4j · 内置（重试）
+
+<details><summary>看背面</summary>
+
+LC4j OpenAI 实现内置默认重试（maxRetries 默认值非 0）+ builder 可调，与 Spring AI 重试配置对等
+原理：框架层重试是双刃（JA-056 幂等前提），两框架行为对齐确认后再定业务策略
+用法：重试对齐确认
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · 隔离池（线程）
+
+<details><summary>看背面</summary>
+
+LLM 调用线程池独立隔离（不与业务 RPC 共享池）：LLM 慢响应占满共享池拖垮全服务
+原理：舱壁隔离（DF-027/SP-103）在 AI 依赖上的落地，WebFlux 则用事件循环（不阻塞），与超时分级（JA-166）配套
+用法：线程池架构
+锚点：实战共识
+
+</details>
+
+### 工程 · prompt 联动（灰度）
+
+<details><summary>看背面</summary>
+
+prompt 版本与灰度联动：灰度桶绑定 prompt 版本（桶内稳定），版本切换按桶推进
+原理：prompt 灰度不是简单百分比（同桶内版本漂移会污染实验数据），与实验单元隔离（JA-271）联动
+用法：灰度-版本矩阵
+锚点：实战共识
+
+</details>
+
+### 工程 · 影子评测（评测）
+
+<details><summary>看背面</summary>
+
+新模型影子评测：批量跑评估集对比主模型（质量/延迟/成本三维度），数据支撑切换决策（JA-035 模型评测落地）
+原理：换模型不是"试几条"，评估集全量+维度对比出报告（AI-035），决策有据
+用法：模型切换决策
+锚点：实战共识
+
+</details>
+
+### 工程 · 数据支撑（谈判）
+
+<details><summary>看背面</summary>
+
+供应商谈判的数据点：用量趋势/增长预测/可替代性（备供应商占比）来自网关数据（JA-336 之外的商务面）
+原理：用量数据是议价筹码（AI-057 归集的商务价值），可替代性降低锁定风险，与 DF 平台化思想联动
+用法：商务工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 三支柱复盘（优化）
+
+<details><summary>看背面</summary>
+
+成本优化三支柱按数据复盘：缓存命中率（JA-200）、路由节省（JA-232）、压缩收益（JA-269），各自有度量再决策投入
+原理：优化不拍脑袋（JA-163 度量闭环的推广），三支柱各配指标，收益递减时停止投入
+用法：优化决策框架
+锚点：实战共识
+
+</details>
+
+### 工程 · 会话级（限流）
+
+<details><summary>看背面</summary>
+
+对话型应用按会话限流（单会话轮次/频率限制），与用户级/全局级互补
+原理：对话是长交互（单用户多轮），会话级防单对话刷爆，与 JA-206 三级限流的第四维
+用法：对话型限流
+锚点：实战共识
+
+</details>
+
+### 工程 · 长会话（归档）
+
+<details><summary>看背面</summary>
+
+超长会话治理：会话超阈值把早期历史摘要归档（压缩窗口），活跃窗口保持轻
+原理：长对话 token 膨胀（JA-223 预算），摘要归档比硬截断保留语义（AI-045），与会话产品逻辑联动
+用法：长会话策略
+锚点：实战共识
+
+</details>
+
+### 工程 · SLA（反馈）
+
+<details><summary>看背面</summary>
+
+用户反馈闭环 SLA：点踩/纠错 24 小时内分派处理，处理结果回流评估集（JA-179 飞轮）
+原理：反馈不闭环等于没有反馈（AI-233 采集后的处理面），SLA 化让飞轮转起来，与运维工单思想联动
+用法：反馈运营
+锚点：实战共识
+
+</details>
+
+### 工程 · 技能矩阵（能力）
+
+<details><summary>看背面</summary>
+
+团队 AI 工程技能矩阵：prompt 工程/评估体系/成本治理/安全合规/Agent 架构五域，按角色定掌握度
+原理：AI 工程不是一个人的活（AI-060 Java 定位），矩阵指导招聘与培养，与团队建设思想联动
+用法：团队建设
+锚点：实战共识
+
+</details>
+
+### 工程 · 组件标准（文档）
+
+<details><summary>看背面</summary>
+
+AI 组件文档标准：用途/输入输出/依赖模型/成本量级/评估入口/降级路径六段（JA-300 五件套的组件级）
+原理：组件可复用性靠文档（新业务接入三小时上手），与组件化治理联动
+用法：组件文档化
+锚点：实战共识
+
+</details>
+
+### Spring AI · 错误传播（流式）
+
+<details><summary>看背面</summary>
+
+流式错误传播：Flux onError 信号把中途异常推给订阅方（连接断开后的生成失败），错误恢复策略在订阅侧
+原理：流式的错误比同步隐蔽（前端已收到部分内容），部分内容+错误的 UI 处理，与 JA-073 流式工具联动
+用法：流式异常设计
+锚点：实战共识
+
+</details>
+
+### LangChain4j · 桥接（流式）
+
+<details><summary>看背面</summary>
+
+TokenStream 桥接 SSE：onPartialResponse 回调写 SseEmitter，onError/onComplete 清理资源
+原理：LC4j 在 MVC 栈的流式方案（JA-169 对等），资源清理（emitter.complete）防泄漏，与 SP-069 生命周期联动
+用法：LC4j 流式实现
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · 校验（配置）
+
+<details><summary>看背面</summary>
+
+AI 配置启动校验：密钥非空/模型名合法/超时关系合理（读超时>连接超时），fail-fast 在启动期
+原理：配置错误运行期才暴露是事故（AI-046），启动期校验（ConfigurationProperties 校验）把问题前移，与 MY 参数审查联动
+用法：配置质量门
+锚点：实战共识
+
+</details>
+
+### 工程 · 评估漂移（数据）
+
+<details><summary>看背面</summary>
+
+评估集漂移监控：评估分数随时间缓慢变化（模型更新/数据漂移），基线定期重校
+原理：评估基线不是永久（AI-058），供应商更新模型（JA-229）导致分数漂移，重校准防误判回归
+用法：评估运维
+锚点：实战共识
+
+</details>
+
+### 工程 · 成本（结构化）
+
+<details><summary>看背面</summary>
+
+结构化输出的 token 成本：schema 注入增加输入 token（大 schema 显著），schema 精简也是成本优化
+原理：JA-062 瘦身的 schema 版：嵌套描述/示例可精简，与输出稳定性权衡（JA-298）
+用法：结构化成本
+锚点：实战共识
+
+</details>
+
+### 工程 · 脱敏层（安全）
+
+<details><summary>看背面</summary>
+
+脱敏在两处：入库脱敏（知识库源数据）与出站脱敏（prompt 组装时替换 PII 为占位符）
+原理：双向防线（AI-040），入站防知识库泄露、出站防用户数据出域，占位符可回填还原（业务需要时）
+用法：脱敏架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 快照（测试）
+
+<details><summary>看背面</summary>
+
+模型调用快照测试：记录真实请求-响应对做回放测试（离线回归不改 prompt 验证解析/后处理逻辑）
+原理：后处理管线（JA-207）的回归手段（真实分布样本），与契约测试（JA-282）互补，快照数据脱敏（JA-349）
+用法：离线回归手段
+锚点：实战共识
+
+</details>
+
+### Spring AI · 批量（向量）
+
+<details><summary>看背面</summary>
+
+VectorStore.add 批量写入的事务性考量：大批量分批写+失败批重试（幂等，upsert 语义按 id）
+原理：与 JA-100 嵌入批量配套，向量库批量写入失败恢复（部分成功场景），与 MY-081 批处理思想同构
+用法：入库可靠性
+锚点：实战共识
+
+</details>
+
+### LangChain4j · 批量（向量）
+
+<details><summary>看背面</summary>
+
+LC4j embeddingStore.addAll 批量写入（配 embedAll 批量嵌入），与 Spring AI add 对等
+原理：两框架批量入库 API 对等（JA-351），生产入库管道实现任选，分批与幂等策略相同
+用法：批量入库对等
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · 向量库（选型）
+
+<details><summary>看背面</summary>
+
+Java 生态向量库选型维度：数据规模/过滤需求/运维能力/云自管偏好，pgvector（复用 PG）是中小规模默认答案
+原理：与 AI-010/ES 对比，Java 团队偏好 pgvector（运维复用），亿级换 Milvus，与 JA-013 升级路径联动
+用法：向量库选型框架
+锚点：实战共识
+
+</details>
+
+### 工程 · SLO（验收）
+
+<details><summary>看背面</summary>
+
+AI 功能 SLO 定义：回答准确率（评估集代理）、P99 延迟、可用性、成本上限四维 SLO
+原理：把 AI 功能当服务治理（DF-056），四维分别有数据源（评估/监控/账单），缺维则治理盲区
+用法：SLO 设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 模板（复盘）
+
+<details><summary>看背面</summary>
+
+AI 故障复盘模板：现象→影响面（用户/成本）→根因（模型/配置/依赖/数据）→防线（哪层失效）→行动项
+原理：与 MY-103/DF 复盘模板同构，AI 特有维度（模型行为/成本/数据质量），复盘产出进评估集（JA-179）
+用法：复盘框架
+锚点：实战方法论
+
+</details>
+
+### 工程 · 分流（排障）
+
+<details><summary>看背面</summary>
+
+AI 故障分流树：无响应（网络/供应商）→慢（模型/工具/池）→错误内容（prompt/数据/模型）→成本异常（循环/滥用），四象限先分流
+原理：排障先分类（DF-098 框架的 AI 版），每象限有专属工具链（拨测/trace/评估/账单），与 RD-098 模板思想同构
+用法：排障分流框架
+锚点：实战方法论
+
+</details>
+
+### Spring AI · 循环观测（工具）
+
+<details><summary>看背面</summary>
+
+工具循环的观测埋点：每轮（第 N 轮/调用了什么/耗时）打点，循环异常（步数超阈/重复调用）告警
+原理：Agent 轨迹（JA-219）的轻量版（观测事件而非落库），与步数上限（JA-276）联动，循环分析定位 Agent 卡点
+用法：循环可观测
+锚点：实战共识
+
+</details>
+
+### LangChain4j · 循环观测（工具）
+
+<details><summary>看背面</summary>
+
+LC4j 工具循环观测：listener/回调记录每轮工具调用，与 JA-357 对等
+原理：两框架循环观测能力对齐（选型不因观测劣势放弃任一），自建埋点模式相同
+用法：循环观测对等
+锚点：实战共识
+
+</details>
+
+### 工程 · 线上影子（评估）
+
+<details><summary>看背面</summary>
+
+线上影子评估：真实流量抽样（脱敏）跑新旧双管线对比（JA-234 的持续化），输出每日对比报告
+原理：影子评测（JA-336）的持续运营版，变更前后的质量曲线可视化，与 A/B（JA-271）互补（无用户感知）
+用法：持续评估机制
+锚点：实战共识
+
+</details>
+
+### 工程 · 知识地图（收束）
+
+<details><summary>看背面</summary>
+
+Java AI 工程知识地图收束：框架双栈（Spring AI/LC4j）→MCP 协议→RAG 管道→Agent 骨架→中间件（网关/缓存/配额）→治理（评估/成本/安全/观测）
+原理：300 条事实的组织框架，复习按地图走而非线性（JA-180 答题主线的展开），与 MY-109 复习主线同构
+用法：本域知识地图
+锚点：实战方法论
+
+</details>
+
+### RAG 评测 · 统计实现（Recall）
+
+<details><summary>看背面</summary>
+
+Recall@K 统计实现：对 golden set 批量跑检索，断言期望片段是否出现在 topK（命中率聚合）
+原理：把 AI-082 指标落到代码：批量跑+逐条判定+分域聚合，是检索回归的执行件
+用法：检索评测落地
+锚点：实战共识
+
+</details>
+
+### RAG 评测 · MRR 计算（MRR）
+
+<details><summary>看背面</summary>
+
+MRR（平均倒数排名）：期望片段首次命中排名的倒数的均值，衡量"排得靠不靠前"
+原理：与 Recall@K 互补（JA-361），重排优化（JA-102）的验证指标，实现为命中位置的倒数累加
+用法：检索评测指标族
+锚点：实战共识
+
+</details>
+
+### RAG 评测 · 判分（忠实度）
+
+<details><summary>看背面</summary>
+
+忠实度自动判分：LLM judge 比对答案与检索片段（答案的断言是否被片段支持），输出支持/不支持/部分
+原理：JA-272 判分机制在 RAG 的特化，幻觉的自动化度量（人工全评不可行），judge 提示词定义"支持"标准
+用法：RAG 生成评测
+锚点：实战共识
+
+</details>
+
+### RAG 评测 · 标注一致性（噪声）
+
+<details><summary>看背面</summary>
+
+golden set 标注一致性问题：多人标注同一查询期望片段不一致（Kappa 系数度量），需仲裁机制
+原理：评估标尺本身有噪声（JA-245 的质量面），一致性差的条目仲裁或剔除，标尺可信度先于指标
+用法：评估数据质量
+锚点：实战共识
+
+</details>
+
+### RAG 评测 · 归类（badcase）
+
+<details><summary>看背面</summary>
+
+检索 bad case 四类归类：漏召回（该有没有）/排序差（有但靠后）/切分碎（片段不完整）/过时（旧版本命中）
+原理：JA-355 复盘在检索的细化，四类对应四种修法（补文档/调重排/调切分/清旧数据），混修会错配
+用法：检索优化分流
+锚点：实战共识
+
+</details>
+
+### RAG 评测 · 题型（分层）
+
+<details><summary>看背面</summary>
+
+评估集按题型分层：简单事实/多跳推理/时效性/拒答类（知识库没有应说不知道）
+原理：分层让指标有语义（JA-293 分层归因），拒答类是幻觉防线专项（AI-044），分层统计定位弱项
+用法：评估集设计
+锚点：实战共识
+
+</details>
+
+### RAG 评测 · 能力（拒答）
+
+<details><summary>看背面</summary>
+
+拒答能力评估与调优：检索不到时应答"知识库未覆盖"，调优手段（相似度阈值/拒答提示/兜底话术）
+原理：宁可不答不能编造（AI-044 幻觉防线），阈值过高漏答过低幻觉，拒答率是独立监控指标
+用法：拒答调优
+锚点：实战共识
+
+</details>
+
+### Agent · 模式选型（编排）
+
+<details><summary>看背面</summary>
+
+Agent 编排模式选型：固定工作流（确定性高）vs 单 Agent+工具（灵活）vs 多 Agent（复杂任务），按任务确定性需求排序
+原理：AI-049 的决策细化：能工作流不 Agent（可控可测），Agent 是灵活性代价换来的，与 MY-105 变更纪律呼应
+用法：编排选型框架
+锚点：实战共识
+
+</details>
+
+### Agent · LangGraph4j（编排）
+
+<details><summary>看背面</summary>
+
+Java 生态有 LangGraph4j（LangGraph 的社区移植）：图状态机编排 Agent（节点/边/条件路由）
+原理：JA-049 框架清单的补充：复杂 Agent 编排有 Java 图编排可用（社区项目，成熟度自评估），与自研状态机（JA-255）权衡
+用法：编排工具选型
+锚点：2025
+
+</details>
+
+### Agent · 状态持久化（编排）
+
+<details><summary>看背面</summary>
+
+编排状态持久化选型：自研落库（JA-255）vs 工作流引擎（Temporal/Camunda），长任务高可靠用引擎
+原理：工作流引擎送重试/超时/补偿/可视化，代价是引入重件，任务时长与可靠性需求决定（AI-021 权衡）
+用法：编排基建选型
+锚点：实战共识
+
+</details>
+
+### Agent · 分层落地（记忆）
+
+<details><summary>看背面</summary>
+
+Agent 记忆三分层落地：短期=消息窗口（JA-008）、任务=状态机字段（JA-255）、长期=向量库检索（用户偏好/历史结论）
+原理：AI-020 的 Java 组件映射，三层的读写时机与清理策略（JA-261）不同，设计期明确归属
+用法：记忆架构
+锚点：实战共识
+
+</details>
+
+### Agent · 动态发现（工具）
+
+<details><summary>看背面</summary>
+
+动态工具发现：Agent 启动/任务开始时经 MCP listTools 发现可用工具集（工具清单随生态变化）
+原理：JA-094 通知与 Agent 的结合：工具集不是编译期固定，运行期注入扩展能力，安全边界靠白名单（JA-152）
+用法：动态 Agent 能力
+锚点：实战共识
+
+</details>
+
+### Agent · 子 Agent 隔离（多 Agent）
+
+<details><summary>看背面</summary>
+
+子 Agent 隔离三件：独立上下文（不继承父历史）、独立预算（token 上限）、独立工具白名单
+原理：子 Agent 失控不传染父任务（舱壁思想 DF-027），结果以结构化摘要回传父级（JA-256 裁剪）
+用法：多 Agent 安全边界
+锚点：实战共识
+
+</details>
+
+### Agent · 结构化报告（输出）
+
+<details><summary>看背面</summary>
+
+Agent 任务输出结构化：最终产出按 schema（结论/依据/步骤/成本）交付，供程序消费
+原理：Agent 输出不是聊天文本而是工作产物（结构化 JA-003 思想），schema 化后可测可审可归档
+用法：Agent 交付设计
+锚点：实战共识
+
+</details>
+
+### Agent · 轨迹指标（评测）
+
+<details><summary>看背面</summary>
+
+Agent 轨迹评测指标：任务成功率、步数效率（最少步完成）、工具选择正确率、预算内完成率
+原理：AI-059 的指标清单化，轨迹可回放（JA-219）所以可自动评，与单元测试断言思想同构
+用法：Agent 评测体系
+锚点：实战共识
+
+</details>
+
+### 中台 · 平台能力（定位）
+
+<details><summary>看背面</summary>
+
+AI 中台四大平台能力：统一模型接入（网关）、评估服务（评测集+判分）、成本治理（配额/归集/告警）、安全合规（护栏/审计/脱敏）
+原理：把 JA-317 网关扩展为中台全景，多业务复用一套治理（DF-088 平台化），P10 视角的组织级架构
+用法：中台架构定义
+锚点：实战方法论
+
+</details>
+
+### 中台 · 三阶段（演进）
+
+<details><summary>看背面</summary>
+
+AI 平台化三阶段：直连供应商（业务各自为战）→统一网关（流量收敛）→AI 中台（治理闭环）
+原理：演进驱动：业务数增多倒逼收敛（SP-100 演进思想），跳级直上中台是常见失败（无流量数据支撑设计）
+用法：平台演进路线
+锚点：实战方法论
+
+</details>
+
+### 中台 · 治理流程（配额）
+
+<details><summary>看背面</summary>
+
+配额分配治理流程：业务申请（用途/预估用量）→评审（优先级）→分配→季度复盘调整
+原理：配额是稀缺资源（供应商上限 JA-065），治理流程防"先到先得"，与容量治理（MY-092）同构
+用法：配额运营
+锚点：实战共识
+
+</details>
+
+### 中台 · 模型白名单（治理）
+
+<details><summary>看背面</summary>
+
+模型白名单治理：业务可用模型清单（按数据密级/场景审批），新模型接入走评审
+原理：防"随便换模型"（数据流向失控 AI-040），白名单与数据分级（JA-267 驻留）联动，平台侧执行
+用法：模型准入治理
+锚点：实战共识
+
+</details>
+
+### 中台 · 数据分级（治理）
+
+<details><summary>看背面</summary>
+
+数据分级接入矩阵：不同密级数据（公开/内部/敏感）可用的模型与部署形态（云端/私有化）不同
+原理：密级×部署形态矩阵是合规落地（AI-040/270），敏感数据强制私有化模型（Ollama/transformers JA-017/183）
+用法：分级接入矩阵
+锚点：实战共识
+
+</details>
+
+### 中台 · 供应商健康（运维）
+
+<details><summary>看背面</summary>
+
+供应商健康看板：拨测（JA-273）聚合的多供应商可用性/延迟/限流状态，路由决策数据源
+原理：JA-321 自动降级的决策看板，健康度变化触发路由权重调整，与多活路由（DF-058）思想同构
+用法：供应商运维
+锚点：实战共识
+
+</details>
+
+### 中台 · 分级（事故）
+
+<details><summary>看背面</summary>
+
+AI 故障分级定义：P0 全不可用（网关挂）、P1 主模型不可用（降级生效）、P2 质量降级（评估分下滑）、P3 成本异常
+原理：分级决定响应节奏（与 MY-082 告警分级同构），P2/P3 是 AI 特有级别（传统故障学没有），定义后演练（JA-286）
+用法：事故分级体系
+锚点：实战共识
+
+</details>
+
+### 中台 · 留痕（合规）
+
+<details><summary>看背面</summary>
+
+合规留痕年限：prompt/输出/工具调用记录按合规要求保留 N 年（审计可回放），到期清理
+原理：JA-198 保留策略的年限面，存储成本与合规要求平衡（冷存储归档），与备份保留（RD-094 RPO）思想同构
+用法：合规存储治理
+锚点：实战共识
+
+</details>
+
+### 中台 · 论证（ROI）
+
+<details><summary>看背面</summary>
+
+AI 中台 ROI 论证：接入业务数×节省的重复建设（每业务自建网关/评估的成本）vs 平台研发运维成本
+原理：中台立项与存续的账（JA-082 组织协同），接入不足是中台死亡主因，与中台争议（SP-082 康威）联动
+用法：组织级决策
+锚点：实战方法论
+
+</details>
+
+### Spring AI · 批处理（场景）
+
+<details><summary>看背面</summary>
+
+Spring AI 在非 Web 场景同样可用：CLI 批处理/定时任务直接用 ChatClient（无 Web 依赖）
+原理：框架不绑定 Web（核心是模型调用库），批量知识入库/离线评估（JA-058）都是非 Web 用例
+用法：非 Web 用例
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 生成（图像）
+
+<details><summary>看背面</summary>
+
+Spring AI 支持 ImageModel 接口（OpenAiImageModel 文生图），与 ChatModel 同级抽象
+原理：文本生成图像的框架级支持（AI-087 对应 LC4j），营销素材/配图场景，与多模态输入（JA-109）互补
+用法：图像生成接入
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · output（多模态）
+
+<details><summary>看背面</summary>
+
+多模态输出与输入对称：chat 模型的多模态输出能力（图像理解返回结构化描述）经同框架消费
+原理：输入输出能力对齐认知（JA-109 输入），输出结构化（JA-003 entity）组合出"看图填表"类应用
+用法：多模态组合应用
+锚点：实战共识
+
+</details>
+
+### Spring AI · 流式（Ollama）
+
+<details><summary>看背面</summary>
+
+Ollama provider 支持流式与工具调用（本地模型同样走 ChatClient 全能力）
+原理：本地模型不降级（JA-017 修正面），开发环境全功能调试（JA-203 本地测试），与云端能力对齐
+用法：本地能力对齐
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### LangChain4j · usage（流式）
+
+<details><summary>看背面</summary>
+
+流式调用的 token 用量聚合：分片各自带 usage 或完成回调聚合（LC4j onCompleteResponse 元数据）
+原理：流式的成本归集（JA-065 同步版的流式版），聚合点在完成回调，与 JA-222 聚合知识联动
+用法：流式成本归集
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · 竞速（降级）
+
+<details><summary>看背面</summary>
+
+多模型并发竞速：同一请求并发发多供应商，取最快成功响应（anyOf），延迟敏感场景用（成本×2-3 代价）
+原理：竞速是延迟优化的极端手段（DF 副本读思想），成本翻倍所以只用于高价值低频请求，与 anyOf 语义（AI-075）联动
+用法：延迟优化手段
+锚点：实战共识
+
+</details>
+
+### 工程 · 模型迁移（下线）
+
+<details><summary>看背面</summary>
+
+供应商模型下线预案：供应商 deprecated 公告→迁移窗口→评估集回归→切流，纳入版本治理日历
+原理：模型下线是必然事件（JA-229 供应商演进），无预案则被迫紧急迁移（质量风险），与 RD-078 升级演练联动
+用法：下线应急
+锚点：实战共识
+
+</details>
+
+### 工程 · 静默更新（回归）
+
+<details><summary>看背面</summary>
+
+供应商静默更新检测：同一评估集每日跑，分数漂移超阈告警（供应商换了底层模型）
+原理：JA-347 漂移监控的主动面：供应商更新不一定公告，评估集是"行为回归测试"，与混沌/拨测互补
+用法：行为回归监控
+锚点：实战共识
+
+</details>
+
+### 工程 · 蜜罐（安全）
+
+<details><summary>看背面</summary>
+
+提示注入蜜罐：评估集内嵌注入样本，线上命中（模型被诱导执行了蜜罐指令）即告警
+原理：注入防御的线上验证（JA-225 防线的运行时检测），蜜罐是主动式安全（与红队 JA-299 互补）
+用法：注入运行时检测
+锚点：实战共识
+
+</details>
+
+### 工程 · 出口（网络）
+
+<details><summary>看背面</summary>
+
+LLM 出口流量隔离：独立出口 IP/网段（代理层），审计与防火墙策略针对 AI 出口单独设
+原理：AI-268 出网适配的安全面：出口隔离让审计（JA-312）与封禁策略独立，与网络分区思想联动
+用法：网络层安全
+锚点：实战共识
+
+</details>
+
+### 工程 · 分群（灰度）
+
+<details><summary>看背面</summary>
+
+灰度分群策略：按用户属性分群（新用户先灰/付费用户后灰），风险与价值反向排序
+原理：灰度不只按比例（JA-205），分群让高风险变更先打低价值流量，与发布策略细化联动
+用法：灰度精细化
+锚点：实战共识
+
+</details>
+
+### 工程 · 知识截止（认知）
+
+<details><summary>看背面</summary>
+
+模型知识截止日期标注：产品层标注"模型知识截止 X 日期"，管理用户预期（时效问题走检索）
+原理：知识截止是模型固有属性（JA-248 时效检索互补），透明标注降低投诉（预期管理），与 AI 伦理实践联动
+用法：预期管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 输入限制（接口）
+
+<details><summary>看背面</summary>
+
+输入长度限制在接口层前置：超长输入直接 4xx（附长度上限说明），不进模型（省 token 防异常）
+原理：防线前移（MY-108 保护思想），模型侧超限报错晚且贵，前端+接口双重校验，与输入校验（SP-068）联动
+用法：输入防线
+锚点：实战共识
+
+</details>
+
+### 工程 · 超时（会话）
+
+<details><summary>看背面</summary>
+
+会话超时设计：无活动会话过期（记忆窗口清空/资源回收），会话 id 失效后重新初始化
+原理：长会话占用记忆资源（JA-160/260 清理族），过期策略与会话产品定义联动，与租约（DF-013）思想同构
+用法：会话生命周期
+锚点：实战共识
+
+</details>
+
+### 工程 · 文案（降级）
+
+<details><summary>看背面</summary>
+
+降级文案设计：AI 功能降级时的用户文案（"智能助手暂时不可用，已转人工/稍后重试"），降级体验也是体验
+原理：JA-053 降级链的用户面，文案分场景（暂时/永久/转人工），与降级预案（DF-026）联动
+用法：降级体验设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 方法（压测）
+
+<details><summary>看背面</summary>
+
+AI 链路压测方法：mock 模型压测应用层（连接池/线程池/流式并发），真实模型小流量压测（成本控制），两层压测
+原理：供应商不能承受全量压测（JA-059 配额），mock 压应用、真实压小流量，与 MY-092 压测基线联动
+用法：压测方法论
+锚点：实战共识
+
+</details>
+
+### 工程 · 模拟器（成本）
+
+<details><summary>看背面</summary>
+
+成本模拟器：上线前按预估流量×prompt 模板×价格表（JA-264）估算月成本，超预算先优化再上线
+原理：成本前置（AI-027 ROI 的执行件），模拟器与压测/评估并列为上线三件套（JA-294 五步补充）
+用法：成本前置
+锚点：实战共识
+
+</details>
+
+### 工程 · 语义化（版本）
+
+<details><summary>看背面</summary>
+
+AI 功能发布语义化版本：prompt+配置+模型绑定打版本号（vX.Y.Z），回滚=切回版本号
+原理：AI 变更的版本化管理（AI-064 的工程化），版本包含"prompt+模型+检索配置"三位一体，与语义化版本规范联动
+用法：版本体系
+锚点：实战共识
+
+</details>
+
+### 工程 · 帕累托（权衡）
+
+<details><summary>看背面</summary>
+
+质量-成本帕累托曲线：按配置组合（模型×温度×topK）绘制质量-成本散点，选帕累托最优点上线
+原理：调参不是单变量优化（JA-052/161），组合空间可视化后选平衡点，与容量权衡思想联动
+用法：调参决策工具
+锚点：实战共识
+
+</details>
+
+### 工程 · 标签（反馈）
+
+<details><summary>看背面</summary>
+
+反馈标签体系：点踩原因枚举（事实错误/答非所问/格式差/太慢/其他），结构化回流定位
+原理：无标签的点踩无法归因（JA-341 闭环的输入质量），标签驱动分类统计（JA-289 看板），与工单分类联动
+用法：反馈结构化
+锚点：实战共识
+
+</details>
+
+### 工程 · 模型卡（治理）
+
+<details><summary>看背面</summary>
+
+内部模型卡：每个接入模型的档案（能力边界/已评测场景/合规状态/负责人/下线计划）
+原理：模型卡是治理资产（JA-379 白名单的条目详情），接入评审的产物，与架构决策记录思想联动
+用法：模型治理资产
+锚点：实战共识
+
+</details>
+
+### 工程 · 链路（压测）
+
+<details><summary>看背面</summary>
+
+AI 链路全链压测注意：mock 模型下压测验证的是应用架构（JA-400），真实瓶颈可能在供应商配额（mock 测不出）
+原理：压测结论的适用边界声明（JA-354 容量修正），两层压测各回答一个问题，与压测方法论联动
+用法：压测结论边界
+锚点：实战共识
+
+</details>
+
+### 工程 · 回归包（发布）
+
+<details><summary>看背面</summary>
+
+发布回归包：评估集+契约测试+快照回放三件打包随版本跑（JA-211 checklist 的执行件）
+原理：回归自动化让 checklist 可执行（AI-077 门禁），回归包与代码版本同 tag，与 CI 纪律联动
+用法：发布自动化
+锚点：实战共识
+
+</details>
+
+### 工程 · 协作（组织）
+
+<details><summary>看背面</summary>
+
+AI 工程协作面：业务（需求/反馈）×工程（实现/可靠性）×算法（模型/评估）×安全（合规/红队）四方协作界面
+原理：JA-342 技能矩阵的组织面，界面清晰防"都管都不管"，与康威定律（DF-084）联动
+用法：组织协作设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 标签（数据）
+
+<details><summary>看背面</summary>
+
+训练边界的数据面：明确哪些数据可进供应商（分级矩阵 JA-380），哪些必须私有化模型处理，数据流向图定期审计
+原理：数据流向可视化（AI-040 的工程化），流向图是安全审计的底图（JA-394 出口隔离配套），与数据治理联动
+用法：数据流向治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 嵌入（选型）
+
+<details><summary>看背面</summary>
+
+嵌入模型选型维度：多语言能力/维度（存储成本）/MTEB 榜单参考/私有化支持/价格，与 chat 模型独立选
+原理：嵌入模型与 chat 模型选型解耦（JA-075 分离配置），维度决定存储成本（JA-101），榜单参考不信榜单（AI-035）
+用法：嵌入选型框架
+锚点：实战共识
+
+</details>
+
+### 工程 · 能力沉淀（演进）
+
+<details><summary>看背面</summary>
+
+AI 组件能力沉淀路径：单点功能→组件化（JA-343 文档）→平台能力（JA-376）→产品化（自助接入）
+原理：JA-377 三阶段在组件维度的细化，沉淀有文档与评估兜底（JA-343/058），与平台化思想联动
+用法：能力演进
+锚点：实战方法论
+
+</details>
+
+### 工程 · 答题（面试）
+
+<details><summary>看背面</summary>
+
+Java AI 面试答题的三层结构：业务场景（ROI/为什么做）→架构与管道（选型/组件）→工程治理（可靠性/成本/安全）
+原理：JA-060/298 答题主线在面试场景的组装，三层递进覆盖 P7 到 P10 提问面，与分层答题方法论联动
+用法：本域面试框架
+锚点：实战方法论
+
+</details>
+
+### 工程 · 清单（风险）
+
+<details><summary>看背面</summary>
+
+Java AI 项目风险清单：供应商锁定、成本失控、质量回归、数据合规、团队能力断层、框架 immature——每项有缓解手段
+原理：JA-239 失败模式的立项面（立项评审用），风险与缓解成对出现，与架构评审（DF-099）联动
+用法：立项评审框架
+锚点：实战方法论
+
+</details>
+
+### 工程 · 北极星（指标）
+
+<details><summary>看背面</summary>
+
+AI 功能北极星指标选择：按功能类型定（客服=自助解决率、Copilot=采纳率、检索=命中率），单一北极星防指标打架
+原理：JA-289 三件套的收敛版，北极星统一团队方向，与 SLO 少而关键（DF-056）原则同构
+用法：指标治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 回归边界（测试）
+
+<details><summary>看背面</summary>
+
+回归测试边界：prompt/模型/检索配置/框架版本任一变更都触发回归（四位一体版本 JA-402），变更矩阵定义触发规则
+原理：回归触发的完整性（漏一项就有隐性回归），变更矩阵防"以为没影响"，与变更管理联动
+用法：回归触发设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 值班（运维）
+
+<details><summary>看背面</summary>
+
+AI 值班 runbook：常见故障（供应商限流/质量下滑/成本激增）的处置步骤+升级路径+决策数据源链接
+原理：runbook 让值班可执行（MY-103 预案的运行态），AI 故障的处置与传统不同（降级/切流/关功能），与故障管理联动
+用法：运维手册
+锚点：实战共识
+
+</details>
+
+### 工程 · 单位经济（成本）
+
+<details><summary>看背面</summary>
+
+单位经济模型：单次交互成本（token）×转化价值（自助解决省人工/采纳节省时间），单位经济>1 才可持续
+原理：AI-027 ROI 的微观版，功能级成本分摊（JA-290）+价值估算（JA-037），持续监控单位经济趋势
+用法：经济可持续性
+锚点：实战共识
+
+</details>
+
+### 工程 · 数据最小化（安全）
+
+<details><summary>看背面</summary>
+
+数据最小化原则在 AI 的落地：prompt 只带完成任务必需的数据（不塞全量上下文），检索按需注入
+原理：最小化是隐私保护第一原则（AI-049/061 的 prompt 面），塞全量数据是"方便"驱动的反模式，与最小权限（DF）联动
+用法：数据最小化
+锚点：实战共识
+
+</details>
+
+### 工程 · 演进（架构）
+
+<details><summary>看背面</summary>
+
+AI 应用架构演进：MVP（直连+硬编码 prompt）→组件化（框架+RAG）→平台化（网关+中台）→智能化（Agent+自动化评估）
+原理：JA-377 演进在应用层的版本，每阶段有触发信号（业务量/质量要求），与演进式架构（DF-084）联动
+用法：架构演进路线
+锚点：实战方法论
+
+</details>
+
+### 工程 · 域地图（收束）
+
+<details><summary>看背面</summary>
+
+Java AI 域知识地图收束：框架双栈→协议（MCP）→管道（RAG/ETL）→Agent→中间件（网关/缓存/配额）→治理（评估/成本/安全/组织），420 条事实的组织骨架
+原理：与 JA-360 知识地图呼应（半程收束），后续批次填充剩余分支，复习按地图检索矩阵行
+用法：本域半程收束
+锚点：实战方法论
+
+</details>
+
+### 流式 · 增量渲染（渲染）
+
+<details><summary>看背面</summary>
+
+流式 UI 的 Markdown 增量渲染：半截 Markdown（未闭合代码块/表格）的渲染策略（缓冲到块边界再渲染）
+原理：逐 token 直染会出现闪烁与格式错乱，按块边界渲染是体验工程，与前端协作的接口约定
+用法：流式体验工程
+锚点：实战共识
+
+</details>
+
+### 流式 · 断点（续传）
+
+<details><summary>看背面</summary>
+
+流式中断恢复：SSE Last-Event-ID 语义在 AI 流的应用（重连后从断点续传或整段重生成）
+原理：长文本流断网率高，续传省重生成成本（JA-098 取消的对称面），幂等生成（低温+种子）是续传前提
+用法：流式可靠性
+锚点：实战共识
+
+</details>
+
+### 流式 · 首字（延迟）
+
+<details><summary>看背面</summary>
+
+首字延迟（TTFT）优化组合：流式+精简 system（缓存前缀稳定）+供应商 prompt cache 命中+就近区域
+原理：TTFT 是流式体验核心指标（AI-052），四招叠加把秒级压到数百毫秒，与 JA-297 并发模型联动
+用法：流式延迟工程
+锚点：实战共识
+
+</details>
+
+### 流式 · 速率（监控）
+
+<details><summary>看背面</summary>
+
+生成速率监控（tok/s）：供应商限速与用户体感双重指标，速率骤降=供应商容量异常
+原理：生成速率是"流式健康度"（JA-273 拨测的细粒度面），与延迟分位互补，速率抖动告警
+用法：流式可观测
+锚点：实战共识
+
+</details>
+
+### 流式 · 多路（合并）
+
+<details><summary>看背面</summary>
+
+多路流合并场景：主回答流+工具执行进度流并行推给前端（分通道渲染）
+原理：Agent 流式（JA-073 工具循环）的前端呈现：回答与"正在做什么"并行，通道化协议（事件类型字段）
+用法：Agent 流式体验
+锚点：实战共识
+
+</details>
+
+### 流式 · SSE vs WS（选型）
+
+<details><summary>看背面</summary>
+
+SSE 与 WebSocket 选型：单向流式 SSE 足够（简单/自动重连/HTTP 生态），双向交互（打断/追问）才需 WS
+原理：多数 AI 流式是单向（模型→用户），WS 的双向能力常被高估，SSE 运维简单（JA-087 断线处理），按交互方向选
+用法：传输协议选型
+锚点：实战共识
+
+</details>
+
+### 多模态 · 任务（分层）
+
+<details><summary>看背面</summary>
+
+图像理解任务分层：OCR（文字提取）/VQA（视觉问答）/图表理解（数据还原）三类难度与模型能力不同
+原理：分层选模型与方案（JA-109/387），OCR 用专用模型更稳、图表理解需强视觉模型，混用导致质量错配
+用法：多模态任务分析
+锚点：实战共识
+
+</details>
+
+### 多模态 · 还原（图表）
+
+<details><summary>看背面</summary>
+
+图表理解（chart-to-table）：视觉模型读图表还原数据表，数字精度是主要风险（视觉幻觉）
+原理：AI-044 幻觉在视觉域的表现，关键数字要二次校验（OCR 交叉/业务规则），产出标注置信度
+用法：视觉幻觉防线
+锚点：实战共识
+
+</details>
+
+### 多模态 · 图文（RAG）
+
+<details><summary>看背面</summary>
+
+多模态 RAG：图文混合知识库（图片用视觉嵌入模型如 CLIP 类向量化），检索跨模态
+原理：纯文本 RAG 之外的扩展（AI-041 生态），图片描述+视觉向量双路，Java 侧嵌入模型需支持图像
+用法：多模态知识库
+锚点：实战共识
+
+</details>
+
+### 多模态 · 降本（预处理）
+
+<details><summary>看背面</summary>
+
+图像预处理降本：分辨率压缩到模型有效分辨率、裁剪无关区域，token 成本线性下降
+原理：AI-080 计费按分辨率的工程对策，预处理管线（压缩/裁剪/格式转换）在发送前执行
+用法：多模态成本工程
+锚点：实战共识
+
+</details>
+
+### 多模态 · 解析（PDF）
+
+<details><summary>看背面</summary>
+
+扫描件 PDF 解析两路线：传统 OCR 管线（识别+版面）vs 视觉模型直读（端到端），精度与成本权衡
+原理：企业文档大量扫描件（JA-190 解析器局限），视觉直读简单但贵、OCR 便宜但管线复杂，按量选
+用法：文档数字化选型
+锚点：实战共识
+
+</details>
+
+### 多模态 · 管线（语音）
+
+<details><summary>看背面</summary>
+
+语音管线：ASR 转写→LLM 处理→TTS 合成，三段各自选型（转写准/处理强/合成自然）
+原理：JA-182 音频能力的工程化组装，分段管线比端到端语音模型可控，转写标点与分段影响下游
+用法：语音 Agent 组装
+锚点：实战共识
+
+</details>
+
+### 多模态 · GUI Agent（桌面）
+
+<details><summary>看背面</summary>
+
+GUI Agent（桌面/浏览器操作型 Agent）：视觉模型看屏+操作指令循环，2025 兴起方向（AI-071 趋势）
+原理：Agent 从 API 工具扩展到 GUI 操作（无 API 的老系统自动化），Java 侧经 MCP/Playwright 类桥接，安全边界（操作审计）极重要
+用法：Agent 前沿方向
+锚点：2025
+
+</details>
+
+### 场景 · 架构（客服）
+
+<details><summary>看背面</summary>
+
+智能客服 Java 架构深化：意图路由→RAG 答复→情绪识别升级人工→会话摘要转接，四级漏斗
+原理：AI-037 的架构细化：情绪/升级漏斗控制转人工率（北极星），会话摘要让人工接手有上下文，与 JA-289 指标联动
+用法：客服漏斗设计
+锚点：实战共识
+
+</details>
+
+### 场景 · 助手（代码）
+
+<details><summary>看背面</summary>
+
+代码助手场景架构差异：补全要求毫秒级（小模型+本地缓存+前缀匹配），对话式助手秒级可接受
+原理：场景决定延迟预算（AI-030），补全与对话是两种延迟档位的产品（JA-423 TTFT），混用导致体验失败
+用法：场景延迟档位
+锚点：实战共识
+
+</details>
+
+### 场景 · 问答 vs 搜索（文档）
+
+<details><summary>看背面</summary>
+
+文档问答与搜索增强差异：问答（生成式合成答案+引用）vs 搜索（返回文档列表），两者互补而非替代
+原理：产品形态决定技术（AI-038 语义搜索 vs RAG），搜索给"找"，问答给"答"，用户意图识别分流
+用法：产品形态选型
+锚点：实战共识
+
+</details>
+
+### 场景 · 批处理（营销）
+
+<details><summary>看背面</summary>
+
+营销文案批处理管线：批量生成（batch API 降本 AI-026）→质量筛选（判分）→人工审核队列→发布，人机协作流程
+原理：批处理场景是成本敏感（AI-065 并发治理），人审是质量兜底（AI-068），全自动化营销文案不可控
+用法：内容生产管线
+锚点：实战共识
+
+</details>
+
+### 场景 · NL2SQL 防线（数据）
+
+<details><summary>看背面</summary>
+
+NL2SQL 安全防线：LLM 生成 SQL→静态校验器（只读白名单表/禁 DML/语法树审查）→执行限流→结果脱敏
+原理：AI-072 的风险工程化：四道防线让"自然语言查数"可上生产，校验器是核心（SQL 解析树），与 MY-096 权限联动
+用法：NL2SQL 落地
+锚点：实战共识
+
+</details>
+
+### 场景 · 内容审核（审核）
+
+<details><summary>看背面</summary>
+
+内容审核管线：机审（模型+规则）→置信度分级→低置信度人审→复审闭环，准确率与审核量权衡
+原理：审核场景的特征（高吞吐+误判代价不对称），分级审核优化人力（JA-437 思想），与风控知识联动
+用法：审核管线设计
+锚点：实战共识
+
+</details>
+
+### 场景 · 冷启动（知识库）
+
+<details><summary>看背面</summary>
+
+知识库冷启动策略：从客服工单/历史邮件沉淀语料→清洗→入库，先小后大滚动扩
+原理：企业"没文档"的现实（AI-039 语料治理），冷启动从存量数据挖矿，与数据治理联动
+用法：知识库建设路径
+锚点：实战共识
+
+</details>
+
+### 场景 · 工单 Agent（内部）
+
+<details><summary>看背面</summary>
+
+内部工具 Agent 案例：工单自动分类/转派/回复草稿（工具=工单系统 API），ROI 清晰易落地
+原理：Agent 落地从"内部高 ROI 场景"起步（AI-037/027），外部用户场景风险高后上，与 AI-073 落地路径联动
+用法：Agent 落地路径
+锚点：实战共识
+
+</details>
+
+### 质量 · 自动搜索（优化）
+
+<details><summary>看背面</summary>
+
+prompt 自动优化（DSPy 思路）：程序化搜索 prompt 变体（改写/示例增删）按评估集自动择优
+原理：Java 无成熟组件（诚实认知），自实现变体搜索+评估驱动（AI-058），人工 prompt 工程的自动化方向
+用法：prompt 工程自动化
+锚点：实战共识
+
+</details>
+
+### 质量 · 动态选择（示例）
+
+<details><summary>看背面</summary>
+
+动态 few-shot：按查询相似度从示例库检索最相关的 2-3 个示例注入（示例库向量检索）
+原理：固定示例对新任务泛化差（AI-023 few-shot 策略），动态选择提升适配，示例库质量决定上限
+用法：上下文学习优化
+锚点：实战共识
+
+</details>
+
+### 质量 · CoT 开关（推理）
+
+<details><summary>看背面</summary>
+
+思维链（CoT）提示按任务开关：推理/数学类开（质量提升），简单分类/抽取关（省 token 防过度思考）
+原理：CoT 是质量-成本权衡项（AI-055 推理模型思想在提示层的对应），配置化开关（JA-016 options 思想）
+用法：推理提示策略
+锚点：实战共识
+
+</details>
+
+### 质量 · 一致性（风格）
+
+<details><summary>看背面</summary>
+
+输出风格一致性：few-shot 固定风格锚定+输出格式模板+后处理归一，多轮会话风格漂移防治
+原理：风格漂移是产品体验问题（用户感知不一致），与 JA-421 渲染、JA-207 后处理联动
+用法：风格工程
+锚点：实战共识
+
+</details>
+
+### 质量 · 投票（集成）
+
+<details><summary>看背面</summary>
+
+自一致性投票：同一请求多次采样（高温）多数投票定答案，质量提升成本×N
+原理：推理类任务的可靠性手段（JA-444 CoT 组合），成本敏感场景按需启用，与 AI-055 推理模型替代权衡
+用法：采样策略
+锚点：实战共识
+
+</details>
+
+### 质量 · 多模型（集成）
+
+<details><summary>看背面</summary>
+
+多模型投票集成：多供应商同题生成，判分器选优或合并，供应商多样性防单点
+原理：比自一致性更贵但更多样（JA-446 扩展），关键决策类任务用（成本容忍），与降级链（JA-055）区分（主动质量 vs 被动容错）
+用法：集成策略
+锚点：实战共识
+
+</details>
+
+### 质量 · ICL 失败（排查）
+
+<details><summary>看背面</summary>
+
+上下文学习失败排查：示例格式与真实输入不一致/示例自相矛盾/示例超窗被截断，三类根因
+原理：few-shot 失效不是玄学（JA-443），排查清单化，示例与真实分布对齐是核心
+用法：上下文学习排障
+锚点：实战共识
+
+</details>
+
+### 安全 · 层级（指令）
+
+<details><summary>看背面</summary>
+
+指令层级与注入面：system > user 的优先级是模型约定，注入攻击就是把恶意指令伪装成 system 级内容
+原理：理解优先级才能设计防线（JA-225 边界标签的原理），外部内容永远在 user/data 层
+用法：指令安全模型
+锚点：实战共识
+
+</details>
+
+### 质量 · 多变量（实验）
+
+<details><summary>看背面</summary>
+
+prompt 多变量实验设计：一次只动一个变量（模型/示例/格式），全变无法归因（JA-363 归因纪律）
+原理：变量矩阵实验（控制变量法），与 A/B 分层（JA-271）联动，实验笔记记录（版本化 AI-064）
+用法：实验方法论
+锚点：实战共识
+
+</details>
+
+### 质量 · 细则（判分）
+
+<details><summary>看背面</summary>
+
+judge 评分细则设计：维度拆分（事实性/完整性/语言）+每档锚定描述+少样本判例，细则即 prompt
+原理：judge 质量=细则质量（JA-363 深化），细则迭代与业务 prompt 同纪律，判分漂移监控（JA-347）
+用法：判分工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 飞轮（数据）
+
+<details><summary>看背面</summary>
+
+数据飞轮：用户修正（改写后的答案）入 few-shot 库（JA-443）与评估集（JA-179）双通道，产品越用越准
+原理：数据飞轮是 AI 产品的护城河（AI-057 数据面），修正数据质量高于标注（真实意图），与隐私脱敏（JA-198）联动
+用法：数据飞轮
+锚点：实战共识
+
+</details>
+
+### 工程 · 参数（安全）
+
+<details><summary>看背面</summary>
+
+用户可控参数白名单：模型/温度/topK 等接口参数白名单校验（防用户传 0 温度绕约束/巨 maxTokens）
+原理：接口层参数校验（AI-070 输入防线延伸），参数即成本与行为杠杆，与三级限流（JA-206）联动
+用法：参数安全
+锚点：实战共识
+
+</details>
+
+### 工程 · 多区域（部署）
+
+<details><summary>看背面</summary>
+
+多区域部署延迟优化：模型区域就近（JA-267 驻留的延迟面），跨区调用延迟放大 RTT，路由按区域+延迟双维
+原理：与 DF-096 跨机房延迟知识同构，驻留合规（JA-267）与延迟优化统一在路由层解决
+用法：全球部署
+锚点：实战共识
+
+</details>
+
+### 工程 · 漂移（配置）
+
+<details><summary>看背面</summary>
+
+配置漂移检测：生产配置 vs 基线（Git 版本）定期 diff，未审批变更告警
+原理：配置即代码（JA-402 版本化）的漂移面，人工改线上配置是事故源，与 MY-105 变更规范联动
+用法：配置治理
+锚点：实战共识
+
+</details>
+
+### 工程 · TTL（缓存）
+
+<details><summary>看背面</summary>
+
+模型输出缓存 TTL 与知识时效对齐：时效内容 TTL 短（与知识库更新同步），稳定知识长 TTL
+原理：缓存键（JA-155）+TTL 双维设计，TTL 与知识更新周期错配=脏答案，与缓存一致性（RD-046）联动
+用法：缓存策略
+锚点：实战共识
+
+</details>
+
+### 工程 · 季度（评测）
+
+<details><summary>看背面</summary>
+
+供应商对比评测季度化：候选新模型季度横评（评估集+价格+政策），趋势报告进选型（JA-391 下线预案联动）
+原理：模型市场动态（AI-071 趋势），季度机制平衡追新与稳定（JA-306），评测资产复用
+用法：供应商评测机制
+锚点：实战共识
+
+</details>
+
+### 安全 · 注入痕迹（输出）
+
+<details><summary>看背面</summary>
+
+输出侧注入检测：检查输出中是否出现指令执行痕迹（被诱导调用工具/泄露 system 内容）
+原理：注入的输出侧防线（JA-393 蜜罐互补），system 泄露检测（前缀匹配）与异常工具调用告警
+用法：输出侧安全
+锚点：实战共识
+
+</details>
+
+### 工程 · 规范（团队）
+
+<details><summary>看背面</summary>
+
+AI 生成代码入库规范：AI 代码同样过 review+测试+扫描（JA-036），标注 AI 生成比例（可追溯），依赖幻觉 API 检查
+原理：AI-036 的团队规范落地，"AI 代码免 review"是事故模式，幻觉 API 静态扫描（不存在的包名）专项
+用法：研发规范
+锚点：实战共识
+
+</details>
+
+### 工程 · 演进（架构）
+
+<details><summary>看背面</summary>
+
+网关到路由智能化的演进：静态路由表→规则路由（JA-232）→智能路由（按历史表现学习），演进有数据支撑
+原理：JA-321 降级路由的智能化方向，路由决策从配置到学习（保守演进），与平台演进（JA-377）同构
+用法：路由演进
+锚点：实战共识
+
+</details>
+
+### 工程 · 预算（成本）
+
+<details><summary>看背面</summary>
+
+预算分维设置：按业务/模型/环境三维预算（JA-199 细化），超维告警独立（哪个业务在烧钱一目了然）
+原理：预算粒度决定定位速度（JA-290 分摊配套），三维矩阵告警，与 SLO 分维（DF-056）联动
+用法：预算体系
+锚点：实战共识
+
+</details>
+
+### 工程 · 成本面（观测）
+
+<details><summary>看背面</summary>
+
+成本观测四指标：单次成本分布（P50/P99）、缓存命中率、模型混合占比、单位任务成本
+原理：成本观测与性能观测并列（JA-091/354 SLO 四维的成本维），看板化（JA-236），趋势比绝对值重要
+用法：成本观测体系
+锚点：实战共识
+
+</details>
+
+### 工程 · 一致（质量）
+
+<details><summary>看背面</summary>
+
+跨会话一致性监控：同一问题不同会话答案一致性抽样（品牌/合规场景核心指标）
+原理：温度与模型更新导致答案漂移（JA-445/392），一致性是合规场景硬指标（金融/医疗），抽样比对自动化
+用法：一致性工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 拨测（运维）
+
+<details><summary>看背面</summary>
+
+评估集轻量拨测：每日从评估集抽样 N 条跑线上管线（端到端含 RAG），比供应商拨测（JA-273）更贴近真实
+原理：端到端拨测（检索+生成全链路），定位"哪层劣化"（JA-293 分层互补），抽样本控制成本（JA-204）
+用法：端到端健康
+锚点：实战共识
+
+</details>
+
+### 工程 · 红队（安全）
+
+<details><summary>看背面</summary>
+
+红队执行节奏：上线前全量→季度回归→重大变更触发，红队发现进评估集（JA-179）与防线补丁
+原理：AI-299 清单的执行节奏，安全回归与功能回归同门禁（JA-156），与安全运营周期联动
+用法：红队运营
+锚点：实战共识
+
+</details>
+
+### 工程 · 截止（知识）
+
+<details><summary>看背面</summary>
+
+知识截止与检索策略联动：模型知识截止后的事件强制走检索（路由规则），截止前的可直答省成本
+原理：JA-396 标注的技术面：按事件时间路由（检索 or 直答），成本与准确性双优化，与时间衰减（JA-248）联动
+用法：截止路由策略
+锚点：实战共识
+
+</details>
+
+### 工程 · 幂等（接口）
+
+<details><summary>看背面</summary>
+
+AI 接口幂等键设计：客户端传 Idempotency-Key（DF-104），服务端缓存响应供重放（计费不重复）
+原理：生成类接口幂等（JA-056 延伸到对外 API），重放返回同答案（成本保护），与 REST 设计规范联动
+用法：对外 API 设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 工具面板（观测）
+
+<details><summary>看背面</summary>
+
+工具调用面板：每工具的调用率/成功率/参数错误率/平均耗时，工具健康度画像（JA-314 的 Agent 侧）
+原理：工具是 Agent 的"依赖服务"（JA-014 监控对等），面板定位坏工具（JA-365 badcase 思想），与 JA-357 循环观测联动
+用法：工具可观测
+锚点：实战共识
+
+</details>
+
+### 工程 · 帕累托（成本）
+
+<details><summary>看背面</summary>
+
+成本-质量优化的帕累托迭代：每季度重绘（模型价格/能力变化），曲线移动带来新优化点（JA-403 的持续化）
+原理：优化不是一次性（供应商调价/新模型），季度复盘（JA-457）联动，存量配置重新评估
+用法：优化持续化
+锚点：实战共识
+
+</details>
+
+### 工程 · 网关边界（架构）
+
+<details><summary>看背面</summary>
+
+网关边界职责收缩：业务语义（prompt 模板/评估集）不上网关（网关只管流量语义），边界混则平台僵化
+原理：JA-317 六职责的边界纪律（什么不该做），中台各层职责清晰（JA-376），与单一职责原则联动
+用法：平台边界纪律
+锚点：实战共识
+
+</details>
+
+### 工程 · 运营（评测）
+
+<details><summary>看背面</summary>
+
+评测集运营节奏：月度新增（线上回流 JA-179）+季度清理（过时条目下线）+半年度全量基线重校（JA-347）
+原理：评估集是活资产（AI-012）的运营日历，增长/清理/重校三动作，与数据治理周期联动
+用法：评估资产运营
+锚点：实战共识
+
+</details>
+
+### 工程 · 演练（降级）
+
+<details><summary>看背面</summary>
+
+降级链演练矩阵：主→备模型切换/语义缓存降级/关 AI 功能三级，每级验证用户文案（JA-399）与监控告警
+原理：JA-286 演练在降级链的细化，每级独立演练（组合演练加压），与预案分级（JA-382）联动
+用法：降级验证
+锚点：实战共识
+
+</details>
+
+### 工程 · 沉淀（知识）
+
+<details><summary>看背面</summary>
+
+企业 prompt 资产库：领域 prompt 模板库（分类管理/版本/评估数据/负责人），跨业务复用
+原理：prompt 从"散落代码"到"资产库"（AI-064 企业版），复用降低重复建设（JA-384 中台价值），与知识管理联动
+用法：prompt 资产化
+锚点：实战共识
+
+</details>
+
+### 工程 · 注入（测试）
+
+<details><summary>看背面</summary>
+
+注入防御的单元测试：边界标签包裹样本/角色扮演诱导样本/工具诱导样本三类，断言防线拦截
+原理：JA-156 安全回归的具体用例族，每类防线有对应测试样本，与测试金字塔（JA-203）联动
+用法：注入测试用例族
+锚点：实战共识
+
+</details>
+
+### 工程 · 质量（数据）
+
+<details><summary>看背面</summary>
+
+RAG 语料质量检查器：重复段落/占位文本/乱码/超长行自动扫描（入库前质量门）
+原理：垃圾进垃圾出（AI-039）的自动化门禁，入库前扫描比检索后排查便宜，与 MY-104 审核思想同构
+用法：语料质量门
+锚点：实战共识
+
+</details>
+
+### 工程 · 多级（架构）
+
+<details><summary>看背面</summary>
+
+RAG 多级检索架构：本地缓存（高频 query）→语义缓存（JA-151）→检索（向量+关键词）→重排（JA-102），每级有指标
+原理：把 RAG 读路径组织成多级架构（缓存两级+检索两路+重排），各级命中率和质量指标独立观测
+用法：RAG 读架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 人工（评估）
+
+<details><summary>看背面</summary>
+
+人工评估的组织：标注指南+双人标注+仲裁（JA-364），标注任务按批分发+质量抽检
+原理：golden set 标注是项目管理（JA-245 执行面），标注质量决定标尺（JA-364 联动），与标注平台知识联动
+用法：标注项目管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 输出（合规）
+
+<details><summary>看背面</summary>
+
+输出内容的责任链：AI 输出进入合同/医疗/法律场景的强人工确认（JA-259 人审的强场景），免责声明与合规审查
+原理：JA-054 合规的场景分级：高风险域输出仅作草稿（人工签发），产品 UI 显式声明，与行业监管联动
+用法：高风险域合规
+锚点：实战共识
+
+</details>
+
+### 工程 · 代理化（演进）
+
+<details><summary>看背面</summary>
+
+Agent 化演进判断：任务结构稳定的工作流保持，开放式任务逐步 Agent 化（JA-368 选型的动态版），每季度评估
+原理：JA-419 演进的 Agent 维度：不是所有流程都要 Agent 化（AI-049），按"开放度×错误代价"评估，与稳健演进联动
+用法：Agent 化路线
+锚点：实战共识
+
+</details>
+
+### 工程 · 八批（收束）
+
+<details><summary>看背面</summary>
+
+java-ai 域第八批收束：本批补齐流式/多模态/行业场景/质量工程四分支，域地图（JA-360/420）主干完成度评估
+原理：收束检查（哪些分支薄了下批补），与知识地图方法论（JA-360）联动，批次推进的自我管理
+用法：批次管理
+锚点：实战方法论
+
+</details>
+
+### 质量 · 映射（金字塔）
+
+<details><summary>看背面</summary>
+
+AI 测试金字塔完整映射：单测（mock 模型，占 70%）→集成（本地小模型跑链路，20%）→评估集（质量回归，快）→线上影子（持续），层间比例与普通应用金字塔一致
+原理：JA-203 的比例细化，底层快而多、顶层真而少，每层回答不同问题（逻辑对/链路通/质量好/真实好）
+用法：测试体系全景
+锚点：实战共识
+
+</details>
+
+### 质量 · 变异测试（变异）
+
+<details><summary>看背面</summary>
+
+prompt 变异测试：故意改坏 prompt（删约束/改格式）验证评估集能抓到退化
+原理：评估集有效性检验（抓不住退化的评估集是摆设），变异命中率是评估集质量指标，与变异测试思想同构
+用法：评估集质量检验
+锚点：实战共识
+
+</details>
+
+### 质量 · 权衡（阈值）
+
+<details><summary>看背面</summary>
+
+评估判分阈值权衡：阈值严（假阳性多阻塞发布）vs 松（假阴性多放走退化），按发布风险分级阈值
+原理：JA-414 分层阈值的统计面，核心功能严、实验功能松，假阳/假阴代价不对称分析
+用法：阈值设计
+锚点：实战共识
+
+</details>
+
+### 质量 · 雷达图（报告）
+
+<details><summary>看背面</summary>
+
+多维评估雷达图报告：质量/安全/成本/延迟/稳定性五维，版本对比可视化
+原理：单一分数掩盖短板（JA-414 多维的呈现面），雷达图让 trade-off 一眼可见，报告进发布评审
+用法：评估呈现
+锚点：实战共识
+
+</details>
+
+### 质量 · 分流（triage）
+
+<details><summary>看背面</summary>
+
+回归失败 triage 流程：先查评估集（条目是否过时/标注错）再查模型（供应商更新）最后查代码，三段排查
+原理：回归失败不等于真退化（JA-347 漂移/JA-364 标注噪声），triage 防"误回滚"，与故障分流（JA-356）同构
+用法：回归治理
+锚点：实战共识
+
+</details>
+
+### 质量 · 新奇（效应）
+
+<details><summary>看背面</summary>
+
+新奇效应（novelty effect）：新功能/新模型初期指标虚高（用户新鲜感），需观察衰减后曲线再下结论
+原理：A/B 早期数据不可信（JA-271 的时间维度），观察 1-2 周衰减曲线，与实验纪律联动
+用法：实验时间窗
+锚点：实战共识
+
+</details>
+
+### 质量 · 慢退化（基线）
+
+<details><summary>看背面</summary>
+
+长期质量基线：季度对比防"慢退化"（每版本小退化累积成大滑坡）
+原理：单次回归抓瞬时退化（JA-392），跨版本累积趋势靠基线对比，趋势告警比阈值告警灵敏
+用法：趋势监控
+锚点：实战共识
+
+</details>
+
+### 质量 · 期望（分群）
+
+<details><summary>看背面</summary>
+
+用户分群质量差异：新用户要引导性回答、专家用户要精确答案，分群评估防"平均数陷阱"
+原理：统一评估掩盖群体体验差（JA-289 分域的深化），分群看板（JA-395 灰度分群配套），与用户研究联动
+用法：分群质量分析
+锚点：实战共识
+
+</details>
+
+### 质量 · 质量换延迟（权衡）
+
+<details><summary>看背面</summary>
+
+质量-延迟联合优化：低端场景降模型/减 topK 换延迟（体验敏感路径），高端场景反之
+原理：JA-403 帕累托的场景化：不同路径不同配置（客服寒暄 vs 技术问答），路径级配置矩阵
+用法：路径级优化
+锚点：实战共识
+
+</details>
+
+### 数据 · 快照（版本）
+
+<details><summary>看背面</summary>
+
+知识库版本快照与 diff：入库批次打版本，检索问题可回放"当时知识状态"复现
+原理：RAG 问题的复现需要知识库状态（JA-355 复盘联动），快照让 bug 可重现，与 DB 备份思想同构
+用法：知识库可复现性
+锚点：实战共识
+
+</details>
+
+### 数据 · MinHash（去重）
+
+<details><summary>看背面</summary>
+
+语料近似去重：MinHash/LSH 检测近似重复文档（转载/多版本），重复语料扭曲检索分布
+原理：重复内容霸占检索结果（MY 语料治理的 AI 版），入库前去重是质量门（JA-475）的深水项，与海量查重（AL-038）思想同构
+用法：语料去重工程
+锚点：实战共识
+
+</details>
+
+### 数据 · 优先级（冲突）
+
+<details><summary>看背面</summary>
+
+多源语料冲突处理：同主题多文档答案不一致（制度新旧版），来源优先级策略（官方>内训>笔记）+新版本标记
+原理：冲突语料让检索命中矛盾答案（JA-490 的深水项），优先级与时效双维排序，与主数据治理联动
+用法：多源一致性
+锚点：实战共识
+
+</details>
+
+### 数据 · 分级（可信）
+
+<details><summary>看背面</summary>
+
+知识可信度分级：权威源（制度原文）加权、社区内容降权，检索分数乘可信度系数
+原理：语料质量差异（JA-492 的度量面），分级系数进检索排序，可信度标注随元数据入库（JA-157）
+用法：可信度工程
+锚点：实战共识
+
+</details>
+
+### 数据 · 标签（时效）
+
+<details><summary>看背面</summary>
+
+知识时效标签强制：入库时标记更新频率（日更/月更/静态），驱动检索衰减（JA-248）与缓存 TTL（JA-456）
+原理：时效策略的数据基础，无标签则衰减/TTL 无法差异化，入库表单强制字段
+用法：时效数据治理
+锚点：实战共识
+
+</details>
+
+### 数据 · golden（挖掘）
+
+<details><summary>看背面</summary>
+
+检索日志挖 golden set：真实查询+用户点击的正确文档为候选（自动），人工确认后入评估集
+原理：评估集持续扩产的自动化管道（JA-179 的检索版），点击即隐式反馈（JA-233），人工确认防噪声
+用法：评估集扩产管道
+锚点：实战共识
+
+</details>
+
+### 数据 · 意图（聚类）
+
+<details><summary>看背面</summary>
+
+用户查询聚类：发现意图分布与新需求（高频无覆盖查询=知识缺口）
+原理：查询聚类暴露知识库盲区（JA-440 冷启动的持续面），缺口驱动语料补齐优先级，与数据挖掘知识联动
+用法：意图挖掘
+锚点：实战共识
+
+</details>
+
+### 数据 · 流水线（脱敏）
+
+<details><summary>看背面</summary>
+
+语料脱敏流水线：PII 识别（正则+NER）→替换占位符→抽检，入库前执行（JA-349 双向脱敏的入库侧）
+原理：脱敏自动化（人工不可能扫万级文档），占位符保留语义（"张三"→"用户A"），与合规留痕（JA-383）联动
+用法：入库脱敏自动化
+锚点：实战共识
+
+</details>
+
+### 数据 · 库 A/B（评估）
+
+<details><summary>看背面</summary>
+
+知识库 A/B：新旧库（不同切分/模型/清洗策略）并行建索引，同 query 集对比检索质量后再切流
+原理：知识库变更的验证手段（MY-105 变更规范的 AI 版），影子索引（JA-501 相关）+golden set 判定
+用法：知识库变更验证
+锚点：实战共识
+
+</details>
+
+### 数据 · 影子索引（换代）
+
+<details><summary>看背面</summary>
+
+嵌入模型换代影子索引：新模型并行建全量索引（旧索引在线服务），评估对比后一次性切流
+原理：换嵌入模型=全量重嵌入（JA-101），影子索引让切换零停机可回退，存储成本双份是代价
+用法：嵌入换代工程
+锚点：实战共识
+
+</details>
+
+### Agent · 动态授权（权限）
+
+<details><summary>看背面</summary>
+
+Agent 工具权限动态演进：运行期按任务上下文动态授权（本任务只开查权限），任务结束收回
+原理：JA-152 白名单的动态化（最小权限动态版），与租约（DF-013）思想同构，授权记录进轨迹（JA-219）
+用法：动态最小权限
+锚点：实战共识
+
+</details>
+
+### Agent · 卡死（监控）
+
+<details><summary>看背面</summary>
+
+长任务 Agent 心跳监控：步间超时检测（相邻步骤间隔超阈=卡死），告警+自动终止+checkpoint 续跑
+原理：Agent 卡死的检测面（JA-276 步数上限的补充：上限是次数、心跳是时间），与调度器健康检查联动
+用法：Agent 健康监控
+锚点：实战共识
+
+</details>
+
+### Agent · verifier（验证）
+
+<details><summary>看背面</summary>
+
+结果验证器：独立 verifier（规则校验+LLM 交叉验证）检查 Agent 产出，不通过回炉
+原理：自我验证（AI-043 失败模式防线）的独立化：生产者与验证者分离（防自欺），验证器可以是规则或另一个模型
+用法：结果验证架构
+锚点：实战共识
+
+</details>
+
+### Agent · 冲突（并发）
+
+<details><summary>看背面</summary>
+
+多 Agent 并发写冲突：两个 Agent 修改同一资源（库存/工单），锁或幂等或资源级串行化
+原理：多 Agent 并发的正确性（JA-258 并行工具的资源面），与 DB 并发控制思想同构（乐观锁 JA-078 联动）
+用法：并发正确性
+锚点：实战共识
+
+</details>
+
+### Agent · 写回（记忆）
+
+<details><summary>看背面</summary>
+
+长期记忆写回策略：显式重要信号（用户偏好陈述）写入 vs 全量对话入向量（噪音大），写回判据要设计
+原理：什么值得记（AI-020 的策略面），记忆污染（错误信息入长期库）比缺失更糟，写回可人工审计
+用法：记忆写回治理
+锚点：实战共识
+
+</details>
+
+### Agent · 补偿（失败）
+
+<details><summary>看背面</summary>
+
+Agent 失败补偿：已执行不可逆工具的逆操作补偿（撤销通知/回滚库存预留），补偿链与 SAGA（DF-063）同构
+原理：Agent 是分布式执行的特例（每工具是一笔"事务"），补偿设计让失败可恢复，幂等优先补偿兜底（JA-257）
+用法：失败恢复架构
+锚点：实战共识
+
+</details>
+
+### Agent · 追溯（可解释）
+
+<details><summary>看背面</summary>
+
+Agent 可解释性：轨迹（JA-219）+每步推理文本（模型思考过程）+工具证据（结果快照）构成解释链
+原理：用户/审计问"为什么这么做"的回答材料，解释链与轨迹分离（轨迹给系统、解释给人类），与可解释 AI 实践联动
+用法：解释链设计
+锚点：实战共识
+
+</details>
+
+### 模型 · 失败分类（结构化）
+
+<details><summary>看背面</summary>
+
+结构化输出失败三分类：截断（LENGTH 咬掉 JSON 尾）/格式漂移（字段名错/多 Markdown 包裹）/幻觉字段（编造枚举值），各对应不同修法
+原理：JA-099 的分类细化：截断调 maxTokens、格式靠宽松解析、幻觉靠 schema 约束+重试，混修错配
+用法：结构化排障
+锚点：实战共识
+
+</details>
+
+### 模型 · ICL vs 微调（选型）
+
+<details><summary>看背面</summary>
+
+ICL 与微调的选型更新：新旗舰模型 ICL 能力增强，微调需求集中在风格/格式/小模型降本（AI-013 矩阵的更新版）
+原理：选型矩阵随模型代际演进（JA-056 版本锚定），旧答案"复杂任务必微调"已过时，评估集决策（JA-013）
+用法：选型矩阵更新
+锚点：实战共识
+
+</details>
+
+### 模型 · 长上下文（权衡）
+
+<details><summary>看背面</summary>
+
+长上下文模型与 RAG 的权衡更新：长窗模型可塞全文档，但成本/延迟/lost-in-middle 使 RAG 仍是主选（经济性）
+原理：JA-002 的深化：窗口大≠该全塞（成本与中间遗忘 JA-495 无关），混合策略（长窗+检索）是趋势，按 token 经济性决策
+用法：长窗与 RAG 权衡
+锚点：实战共识
+
+</details>
+
+### 模型 · 中间遗忘（现象）
+
+<details><summary>看背面</summary>
+
+lost in the middle：长上下文中部内容检索利用效率低，关键信息前置/后置布局是缓解
+原理：JA-002 提及的机制面：注入布局工程（关键片段放两端），与 JA-223 预算分配联动，评估验证布局效果
+用法：上下文布局
+锚点：实战共识
+
+</details>
+
+### 模型 · 采样（调参）
+
+<details><summary>看背面</summary>
+
+temperature 与 top_p 组合调参：两者都调会叠加随机性，调优时单变量原则（先 temperature 后 top_p）
+原理：JA-161 的组合面，采样参数族（top_k/top_p/temperature）语义区分，与多变量实验纪律（JA-450）联动
+用法：采样参数方法论
+锚点：实战共识
+
+</details>
+
+### 模型 · prompt（多语言）
+
+<details><summary>看背面</summary>
+
+prompt 语言与性能：英文 prompt 在多数模型更稳（训练分布），中文 prompt 经测试决定（模型中文能力演进快）
+原理："英文 prompt 更稳"是经验规律而非铁律（JA-216 token 联动），用评估集 A/B 实测决定，与 AI-217 i18n 联动
+用法：prompt 语言策略
+锚点：实战共识
+
+</details>
+
+### 工程 · 非确定（沟通）
+
+<details><summary>看背面</summary>
+
+非确定性的业务沟通：同问题不同答案要向业务方解释（采样随机性），固定种子/低温可复现用于演示
+原理：非确定性是 AI 特性不是缺陷（JA-003/011），业务预期管理（AI-396 同思想），演示环境用确定性配置
+用法：预期管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 预测（容量）
+
+<details><summary>看背面</summary>
+
+AI 用量容量预测：用量增长外推（业务增长系数×AI 渗透率），提前扩配额/供应商合同（JA-337 联动）
+原理：容量规划在 AI 依赖的版本（MY-092 基线外推），配额与成本都要前瞻（供应商合同周期长），与容量知识联动
+用法：容量前瞻
+锚点：实战共识
+
+</details>
+
+### 工程 · SLA（合同）
+
+<details><summary>看背面</summary>
+
+供应商合同 SLA 条款要点：可用性承诺/赔偿（credit）/限流保障（专属配额）/数据条款（训练边界 JA-237），合同是可靠性最后防线
+原理：技术手段之外的商务兜底（JA-337 谈判的条款面），SLA 不达触发赔偿，与合同治理联动
+用法：商务可靠性
+锚点：实战共识
+
+</details>
+
+### 工程 · 主备（合同）
+
+<details><summary>看背面</summary>
+
+多供应商合同策略：主供应商量大价优+备供应商小量保底（可快速放量条款），商务结构匹配技术降级链
+原理：JA-055 降级链的商务面：备供应商有合同与预热流量才真可切（JA-210 演练联动），与容灾商务结构（MY-094）同构
+用法：商务容灾
+锚点：实战共识
+
+</details>
+
+### 工程 · changelog（监控）
+
+<details><summary>看背面</summary>
+
+供应商 API changelog 订阅与巡检：文档变更/deprecation 公告纳入信息流（JA-391 下线预案的输入）
+原理：供应商接口演进监控（AI-066 SDK 联动），静默变更（JA-392）的文档面补充，与变更情报机制联动
+用法：变更情报
+锚点：实战共识
+
+</details>
+
+### 工程 · 分享（团队）
+
+<details><summary>看背面</summary>
+
+AI 工程内部分享节奏：双周案例分享（踩坑/优化），案例沉淀进知识库（JA-343 文档联动）
+原理：团队学习飞轮（JA-342 技能矩阵的成长面），踩坑案例是最好的教材，与复盘文化（MQ-075）联动
+用法：团队学习机制
+锚点：实战共识
+
+</details>
+
+### 工程 · 分级（SLA）
+
+<details><summary>看背面</summary>
+
+AI 组件 SLA 分级：核心对话（99.9%）/辅助生成（99%）/离线批处理（尽力），分级配资源与监控密度
+原理：统一 SLA 浪费资源（JA-354 四维 SLO 的组件级），分级与舱壁（JA-103/线程池 JA-334）联动
+用法：SLA 分级
+锚点：实战共识
+
+</details>
+
+### 工程 · 日志（安全）
+
+<details><summary>看背面</summary>
+
+安全日志专项：注入尝试/越权工具调用/异常 token 消耗三类安全事件独立日志与告警
+原理：JA-458 输出检测+JA-393 蜜罐的日志面，安全事件与普通错误分库（不被淹没），与 SIEM 思想联动
+用法：安全可观测
+锚点：实战共识
+
+</details>
+
+### 工程 · 流式（数据）
+
+<details><summary>看背面</summary>
+
+数据管道流式化：知识库更新（CDC 事件）→清洗→嵌入→入库的流式管道（Flink 类），替代定时全量
+原理：JA-280 权限同步的扩展：知识更新全链路流式化（延迟分钟级），与 Flink CDC（MY-106）联动
+用法：知识管道架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 再评估（选型）
+
+<details><summary>看背面</summary>
+
+框架选型的年度再评估：能力矩阵（JA-391 对比表）年度刷新+社区健康度（发版/issue 响应），防锁定
+原理：选型不是终身（JA-039 动态化），框架演进方向变化（如合并/停滞）触发再评估，与供应商治理联动
+用法：选型再评估
+锚点：实战共识
+
+</details>
+
+### 工程 · 脚手架（开发）
+
+<details><summary>看背面</summary>
+
+AI 功能脚手架：模板工程（ChatClient 装配/评估集骨架/降级配置/观测埋点四件预置），新功能半天起步
+原理：标准化的开发效率（JA-343 组件文档的代码面），脚手架固化最佳实践（JA-285 清单内置），与脚手架工程实践联动
+用法：开发效率工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 架构（评审）
+
+<details><summary>看背面</summary>
+
+AI 功能架构评审要点：依赖面（模型/数据/工具清单）、失败模式（JA-239 矩阵）、成本预估（JA-401）、合规边界（JA-380）四块
+原理：立项评审（JA-413 风险清单）的技术面，评审通过才允许开发，与架构评审纪律（DF-099）联动
+用法：评审设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 准入（治理）
+
+<details><summary>看背面</summary>
+
+AI 功能生产准入检查单：评估门禁通过/降级链演练/成本模拟/合规审查/监控接入五项，缺一不发布
+原理：JA-294 五步的准入 gate 化，检查单驱动（MY-110 参数检查单思想），准入是硬门槛
+用法：准入门槛
+锚点：实战共识
+
+</details>
+
+### 工程 · 告警（观测）
+
+<details><summary>看背面</summary>
+
+告警分级与路由：P0（全不可用）电话、P1（降级生效）IM 即时、P2（质量下滑）日报、P3（成本）周报
+原理：JA-382 事故分级的告警路由面，分级匹配响应节奏（DF-074），告警风暴防（聚合/静默 DF-072）
+用法：告警体系
+锚点：实战共识
+
+</details>
+
+### 工程 · 案例（优化）
+
+<details><summary>看背面</summary>
+
+成本优化案例库：缓存命中提升（JA-200 前后数据）、路由降级节省、压缩收益、批处理折扣，案例化沉淀复用
+原理：JA-338 三支柱的案例化，数据佐证的案例才能复用（防经验主义），与知识沉淀（JA-518）联动
+用法：优化知识库
+锚点：实战共识
+
+</details>
+
+### 工程 · 成本（测试）
+
+<details><summary>看背面</summary>
+
+成本回归测试：发布前用代表性流量跑成本模拟（JA-401），成本变化>阈值需评审（新 prompt 变长等）
+原理：成本进回归门禁（与质量门禁并列 JA-407），成本回归防"隐形涨价"，与预算治理（JA-461）联动
+用法：成本门禁
+锚点：实战共识
+
+</details>
+
+### 工程 · 复盘（演进）
+
+<details><summary>看背面</summary>
+
+技术演进半年度复盘：新特性（框架/模型/协议）评估清单，决策"采用/观望/忽略"进雷达
+原理：技术雷达机制（ThoughtWorks 思想）的 AI 域落地，防追新也防错过（JA-306 节奏），与 JA-522 再评估联动
+用法：技术雷达
+锚点：实战共识
+
+</details>
+
+### 工程 · 双轨（评审）
+
+<details><summary>看背面</summary>
+
+prompt 变更双轨评审：技术评审（工程正确性）+内容评审（业务语义/合规），两轨会签
+原理：prompt 是"代码+文案"双重属性（JA-025 变更纪律深化），单轨评审漏一半，与变更管理联动
+用法：prompt 评审设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 回流（数据）
+
+<details><summary>看背面</summary>
+
+负样本回流策略：差评样本入库评估集时打标（可修复/模型局限/超范围），超范围样本导流产品决策
+原理：JA-179 回流的分类面：不是所有差评都是技术问题，"超范围"（AI 功能边界外）转产品路线，与 MY-107 归档思想联动
+用法：负样本治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 运营（知识）
+
+<details><summary>看背面</summary>
+
+知识库运营节奏：月度知识缺口报告（JA-496 聚类）→补齐排期→入库→效果验证闭环，知识库是运营出来的
+原理：知识库不是建完就完（JA-440 冷启动后的持续面），运营节奏让库"活着"，与内容运营联动
+用法：知识库运营
+锚点：实战共识
+
+</details>
+
+### 工程 · 抽象（能力）
+
+<details><summary>看背面</summary>
+
+多供应商抽象层设计：统一接口（chat/embed/rerank）+能力探测（供应商支持的参数动态降级）
+原理：JA-284 防腐层的深化：能力差异优雅降级（不支持结构化时退提示词注入），能力探测缓存，与适配器模式联动
+用法：抽象层设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 测试（安全）
+
+<details><summary>看背面</summary>
+
+工具诱导专项测试：诱导 Agent 调用高危工具（删除/转账）的对抗样本，验证权限防线（JA-235）
+原理：JA-474 注入测试的 Agent 特化：工具诱导是最危险的注入（真实副作用），防线测试是安全验收项
+用法：工具安全测试
+锚点：实战共识
+
+</details>
+
+### 工程 · 容量（运维）
+
+<details><summary>看背面</summary>
+
+SSE 长连接容量模型：连接数=并发用户×会话时长系数，网关/负载均衡的连接上限是瓶颈（非 QPS）
+原理：JA-230 容量修正的连接面：SSE 占用连接句柄（LB 连接数上限），容量按连接规划，与长连接运维联动
+用法：长连接容量
+锚点：实战共识
+
+</details>
+
+### 工程 · 留存（数据）
+
+<details><summary>看背面</summary>
+
+会话数据留存策略：原始对话（合规留存 N 年 JA-383）与分析聚合（长期指标）分层存储，热数据在线冷数据归档
+原理：留存分层（MY-107 冷热分离思想），合规留存与成本平衡，与归档管道联动
+用法：留存分层
+锚点：实战共识
+
+</details>
+
+### 工程 · 护栏（质量）
+
+<details><summary>看背面</summary>
+
+护栏分级执行：硬护栏（合规红线，阻断）与软护栏（风格建议，标注不阻断），分级避免护栏过度
+原理：JA-019/193 护栏的分级面，全部硬护栏会误伤（风格问题不该阻断），分级配置化
+用法：护栏分级
+锚点：实战共识
+
+</details>
+
+### 工程 · 监控升级（演进）
+
+<details><summary>看背面</summary>
+
+监控从指标到洞察的演进：指标告警（阈值）→异常检测（基线漂移自动发现）→根因建议（关联分析），AI 辅助 AI 运维
+原理：监控体系成熟度演进（DF-088 观测联动），AI 系统自身的监控用 AI 增强（自举），演进按成熟度分步
+用法：监控演进
+锚点：实战共识
+
+</details>
+
+### 工程 · 预算（测试）
+
+<details><summary>看背面</summary>
+
+测试环境模型预算：测试环境也计费（评估/集成测试调用真实供应商），测试预算与生产隔离统计
+原理：测试成本是隐性成本（JA-204 评估成本延伸），测试配额独立（防止测试挤占生产配额 JA-059），与成本分摊（JA-290）联动
+用法：测试成本治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 质量域（收束）
+
+<details><summary>看背面</summary>
+
+质量工程分支收束：测试金字塔（JA-481）→评估体系（JA-245/361/483）→数据质量（JA-490/497）→治理门禁（JA-525/528）→运营节奏（JA-471/531），质量域地图完成
+原理：第九批收束检查：质量域从"测试"扩展到"质量工程"全景，与 MY-104 治理体系同构，下批转知识库/多模态深水区收尾
+用法：质量域地图
+锚点：实战方法论
+
+</details>
+
+### 多模态 · 分块（计费）
+
+<details><summary>看背面</summary>
+
+图像 token 计费的分块模式：按分辨率切成 tile 计费（大图分块多 token 多），控制尺寸即控制成本
+原理：AI-080 分辨率降本的计费机制面，理解分块才能精确预算（不同供应商分块规则不同，读文档）
+用法：多模态计费机制
+锚点：实战共识
+
+</details>
+
+### 多模态 · 视觉指令（prompt）
+
+<details><summary>看背面</summary>
+
+视觉 prompt 结构：图像+文本指令的组合设计（"先描述图表类型再提取数据"分步指令）
+原理：视觉任务与文本任务一样需要 prompt 工程（JA-109 只解决了输入通道），分步指令提升图表/文档理解精度
+用法：视觉提示工程
+锚点：实战共识
+
+</details>
+
+### 多模态 · 多图（输入）
+
+<details><summary>看背面</summary>
+
+多图对比理解：单请求多图输入（对比两版本文档/两图找差异），图像顺序与编号引用
+原理：多图任务（比对/关联）与单图任务 prompt 结构不同，图像编号引用（图 1/图 2）让模型可指代
+用法：多图任务设计
+锚点：实战共识
+
+</details>
+
+### 多模态 · 采样（视频）
+
+<details><summary>看背面</summary>
+
+视频理解采样帧策略：均匀采样 vs 场景切换检测采样（关键帧），帧数决定 token 成本
+原理：视频直接全部帧不可行（token 爆炸），关键帧采样保信息降成本，与 JA-432 语音管线同构的预处理思想
+用法：视频理解工程
+锚点：实战共识
+
+</details>
+
+### 多模态 · 版面（文档）
+
+<details><summary>看背面</summary>
+
+文档智能版面分析：还原标题/表格/段落结构（不只是文本提取），结构化输出给下游
+原理：RAG 语料质量（JA-475）的上游：版面结构丢失=切分错乱，版面分析模型或 OCR+版面还原管线
+用法：文档智能管线
+锚点：实战共识
+
+</details>
+
+### 多模态 · 后处理（OCR）
+
+<details><summary>看背面</summary>
+
+OCR 后处理：校对（置信度低的字复核）/结构化（表格还原）/纠错（领域词典），OCR 原始输出不可直接用
+原理：JA-431 OCR 路线的质量面：原始 OCR 错字率直接污染 RAG 语料，后处理是精度保障
+用法：OCR 质量链
+锚点：实战共识
+
+</details>
+
+### 多模态 · 视觉检索（检索）
+
+<details><summary>看背面</summary>
+
+视觉检索前沿：视觉嵌入模型直接对图片/版面做检索（ColPali 类思路），跳过 OCR 文本化
+原理：文档检索从"OCR→文本向量"演进到"页面图像→视觉向量"，对表格/图版文档精度更好，2025 前沿方向
+用法：检索前沿
+锚点：2025
+
+</details>
+
+### 多模态 · 图像问答（评测）
+
+<details><summary>看背面</summary>
+
+多模态评估集：图像问答对（图+问题+期望要点），与文本评估集分库管理
+原理：评估体系覆盖多模态（JA-361 的多模态版），视觉判分用文本 judge（回答比对），图像评测集建设先行于上线
+用法：多模态评测
+锚点：实战共识
+
+</details>
+
+### 多模态 · 入站（安全）
+
+<details><summary>看背面</summary>
+
+图像入站安全：NSFW/敏感图检测（入站过滤）与图像内嵌注入检测（图片中的指令文本）
+原理：多模态的输入安全面（JA-262 文本扫描的图像版），图像内嵌文字是指令注入新载体（JA-225 扩展）
+用法：多模态安全
+锚点：实战共识
+
+</details>
+
+### 多模态 · Alt 文本（应用）
+
+<details><summary>看背面</summary>
+
+图片 Alt 文本自动化：视觉模型批量生成图片描述（无障碍/SEO/检索元数据），批处理管线
+原理：JA-437 批处理管线的多模态用例，产出直接喂多模态 RAG（JA-429），成本低收益高
+用法：多模态批处理用例
+锚点：实战共识
+
+</details>
+
+### 行业 · 合规（金融）
+
+<details><summary>看背面</summary>
+
+金融场景 AI 特化：监管要求输出留痕可审计（JA-383）、免责声明强制、投资建议类强人工签发（JA-478 责任链）、模型与数据境内（JA-267）
+原理：行业监管叠加通用治理：金融是合规最重行业（AI-054 强监管场景），架构上留痕/签发/境内三件套先行
+用法：金融合规架构
+锚点：实战共识
+
+</details>
+
+### 行业 · 术语（医疗）
+
+<details><summary>看背面</summary>
+
+医疗场景 AI 特化：医学术语库 RAG（标准术语映射）、诊断建议强人审、隐私最高级（患者数据私有化部署）
+原理：医疗行业三层叠加：术语精度（JA-493 可信分级）、人审（JA-478）、数据驻留（JA-267），私有化模型（JA-017/183）是前置
+用法：医疗合规架构
+锚点：实战共识
+
+</details>
+
+### 行业 · 导购（电商）
+
+<details><summary>看背面</summary>
+
+电商导购多模态：商品图理解（拍图识商品）+商品库检索+比价/推荐，视觉+检索+对话三栈组合
+原理：JA-072 电商组合的深化：拍图搜商品是视觉检索（JA-547）+商品结构化库的经典组合，转化率是北极星（AI-414）
+用法：电商导购架构
+锚点：实战共识
+
+</details>
+
+### 行业 · 引导（教育）
+
+<details><summary>看背面</summary>
+
+教育场景苏格拉底式：prompt 约束模型引导思考而非直接给答案（分步提示/反问），教学目标决定交互设计
+原理："直接给答案"损害学习目标（场景特殊性），prompt 约束+输出校验（不得含完整答案），与 prompt 工程（AI-023）联动
+用法：教育场景设计
+锚点：实战共识
+
+</details>
+
+### 行业 · 比对（法务）
+
+<details><summary>看背面</summary>
+
+法务条款比对：合同版本差异 RAG（条款级切分+语义比对+差异报告），条款级引用（JA-252 粒度）落地
+原理：法务场景特点：条款级精确引用不可编造（JA-202 强校验），差异报告人工签发（JA-478），术语库（JA-552 同思想）
+用法：法务场景设计
+锚点：实战共识
+
+</details>
+
+### 行业 · 手册（制造）
+
+<details><summary>看背面</summary>
+
+制造设备手册问答：多语言手册（设备进口国语言）+图纸多模态（JA-429）+一线工人低门槛交互（语音 JA-432）
+原理：制造业组合：多语言检索（JA-281）+图纸视觉（JA-547）+语音交互三栈，现场设备即时问答降停机
+用法：制造场景组合
+锚点：实战共识
+
+</details>
+
+### 行业 · 私有化（公共）
+
+<details><summary>看背面</summary>
+
+公共部门/国企场景：数据不出域硬约束（JA-267 最高级）→全私有化栈（私有模型+私有嵌入+私有向量库），能力取私有化最优
+原理：JA-380 分级矩阵的最高密级档：全私有化的能力上限评估先于承诺，与国产模型生态评估联动
+用法：全私有化架构
+锚点：实战共识
+
+</details>
+
+### 行业 · NPC（游戏）
+
+<details><summary>看背面</summary>
+
+游戏 NPC 对话：角色人设 prompt+记忆（与玩家关系）+内容安全（防违规对话），体验与安全双约束
+原理：游戏 NPC 是 prompt 人设工程（AI-023）的极致场景，长期记忆（与该玩家历史）与内容过滤（JA-262）并重
+用法：游戏 NPC 设计
+锚点：实战共识
+
+</details>
+
+### 行业 · 偏差（人力）
+
+<details><summary>看背面</summary>
+
+简历筛选 AI 的公平性风险：模型偏见（性别/年龄歧视）与合规（就业公平法），评估集需含公平性样本
+原理：AI 偏见的行业特化（AI-054 安全域），公平性评估（分群指标 JA-488 按受保护属性），人审兜底强制
+用法：公平性工程
+锚点：实战共识
+
+</details>
+
+### 行业 · 底座（策略）
+
+<details><summary>看背面</summary>
+
+跨行业策略：统一底座（网关/评估/治理 JA-376）+行业层（合规/术语/场景 prompt），新行业接入只做行业层
+原理：多行业企业的架构策略（集团型业务），底座复用行业层差异化，与中台分层（JA-376/238）联动
+用法：多行业架构
+锚点：实战共识
+
+</details>
+
+### 工程 · HTTP2（网络）
+
+<details><summary>看背面</summary>
+
+HTTP/2 对流式的影响：多路复用避免队头阻塞（H1 同连接串行响应），LLM 客户端建议启用 H2
+原理：流式并发场景（JA-425 多路流）的传输层基础，H1 下并发流会阻塞，客户端/网关协商 H2
+用法：传输层优化
+锚点：实战共识
+
+</details>
+
+### 工程 · keep-alive（网络）
+
+<details><summary>看背面</summary>
+
+连接复用与 keep-alive：LLM 长响应下连接复用策略（TLS 握手成本摊薄），池化配置（JA-467 前置知识）
+原理：TLS 握手是延迟大头（首次请求），连接池 keep-alive 复用 TLS 会话，与连接池调优（JA-167）联动
+用法：连接管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 压缩（网络）
+
+<details><summary>看背面</summary>
+
+GZIP 对 SSE 的破坏：压缩缓冲会攒批破坏流式实时性（Content-Encoding 与分块冲突），流式链路禁缓冲压缩
+原理：流式实时性的网络层陷阱（JA-423 TTFT 优化的反面），代理/网关的压缩配置要豁免流式路由
+用法：流式网络陷阱
+锚点：实战共识
+
+</details>
+
+### 工程 · 预热（网络）
+
+<details><summary>看背面</summary>
+
+连接与 DNS 预热：启动时/定时预热连接池与 DNS 缓存（JA-215 检索预热的网络层），突发流量前主动预热
+原理：冷启动延迟的传输层面（与缓存预热 RD-066 同族），大促/活动前预热脚本，与容量保障联动
+用法：预热工程
+锚点：实战共识
+
+</details>
+
+### 工程 · SDK 锁定（依赖）
+
+<details><summary>看背面</summary>
+
+供应商 SDK 版本锁定：SDK breaking change（响应类重构）与框架绑定关系，SDK 升级走回归（JA-211）
+原理：AI-066 SDK 细节的版本面：SDK 与框架版本矩阵对齐（JA-105 BOM 联动），锁定+评估后升级
+用法：SDK 治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 虚拟线程（并发）
+
+<details><summary>看背面</summary>
+
+虚拟线程与 LLM 流式的组合（SP-083）：MVC+虚拟线程处理 SSE 长连接（阻塞式编程模型处理长 IO）
+原理：JA-297 三选一的第四姿势：虚拟线程让阻塞代码获得响应式吞吐（JDK21），回调地狱消除，与并发模型知识联动
+用法：并发模型新选项
+锚点：JDK21+
+
+</details>
+
+### 协议 · Agent 互操作（A2A）
+
+<details><summary>看背面</summary>
+
+A2A 协议（Agent-to-Agent，2025 业界提出）：跨厂商 Agent 互操作（Agent 卡片声明能力/任务协商）
+原理：MCP 管"Agent↔工具"，A2A 管"Agent↔Agent"（互补不竞争），Java 生态跟进观察，与 MCP 知识（JA-024）对照
+用法：协议全景
+锚点：2025
+
+</details>
+
+### 安全 · Agent 身份（身份）
+
+<details><summary>看背面</summary>
+
+Agent 作为一等调用者的身份与授权：Agent 调工具/系统经 OAuth client 身份（非共享超级账号）
+原理：JA-235 越权防线的身份面：Agent 有独立身份才能审计与限权（A2A/MCP 生态的身份基座），与零信任思想联动
+用法：Agent 身份体系
+锚点：实战共识
+
+</details>
+
+### 工程 · schema 键（缓存）
+
+<details><summary>看背面</summary>
+
+结构化输出缓存与 schema 联动：schema 变更=缓存键变化（旧缓存结果形状不匹配），缓存键纳入 schema hash
+原理：JA-155 缓存键的结构化补充：schema 是输出"契约"（JA-308 同思想），契约变更即缓存失效
+用法：缓存正确性
+锚点：实战共识
+
+</details>
+
+### 工程 · 一致性（评估）
+
+<details><summary>看背面</summary>
+
+评估环境生产一致性：评估跑的模型版本/温度/检索配置必须与生产对齐（否则评估失真）
+原理：评估失真来源（JA-570 前置）：环境差异让"评估通过"不代表"生产好"，配置对齐是评估可信前提（JA-282 契约测试联动）
+用法：评估可信度
+锚点：实战共识
+
+</details>
+
+### 工程 · 分摊模式（成本）
+
+<details><summary>看背面</summary>
+
+成本分摊两模式：showback（展示不收费，初期）→chargeback（真分摊计费，成熟期），按组织成熟度演进
+原理：JA-290 分摊的运营模式面：showback 培养成本意识、chargeback 强约束，与平台运营（JA-377）联动
+用法：成本运营演进
+锚点：实战共识
+
+</details>
+
+### 工程 · 归因（质量）
+
+<details><summary>看背面</summary>
+
+质量归因实验：同 query 换模型重跑（区分模型问题）或换检索重跑（区分数据问题），控制变量定位根因
+原理：JA-365 badcase 归因的实验面：换变量重跑是归因的硬手段（非猜测），与实验纪律（JA-450）联动
+用法：质量归因实验
+锚点：实战共识
+
+</details>
+
+### 工程 · 通知（灰度）
+
+<details><summary>看背面</summary>
+
+灰度期用户通知：灰度用户可见"体验新版功能"标识（反馈通道绑定版本），反馈可归因到版本
+原理：反馈归因（JA-451/404）的前提：无版本标识的反馈无法分桶，通知与反馈通道设计联动
+用法：灰度-反馈闭环
+锚点：实战共识
+
+</details>
+
+### 工程 · 公平（限流）
+
+<details><summary>看背面</summary>
+
+多租户公平调度：token server 公平队列（防大租户饿死小租户），加权公平而非先到先得
+原理：JA-320 配额的公平面：共享配额下的公平调度（加权轮询），与调度算法知识联动
+用法：公平调度
+锚点：实战共识
+
+</details>
+
+### 工程 · 检索（运维）
+
+<details><summary>看背面</summary>
+
+会话记录检索：客服回溯（按用户/时间/主题搜历史对话），对话数据的检索基建（对话入 ES）
+原理：对话数据二次利用（JA-532 运营/审计 JA-383），检索基建让"发生过什么"可查，与 ES 知识（JA-241）联动
+用法：对话检索基建
+锚点：实战共识
+
+</details>
+
+### 工程 · 可编辑（反馈）
+
+<details><summary>看背面</summary>
+
+输出可编辑性设计：用户可编辑 AI 输出后保存，编辑 diff 是最高质量反馈（用户想要什么一目了然）
+原理：JA-452 数据飞轮的富反馈面：编辑 diff 比点踩信息量大，编辑后版本可入 few-shot（JA-443），与产品交互设计联动
+用法：富反馈设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 元数据（模板）
+
+<details><summary>看背面</summary>
+
+prompt 版本元数据：作者/评审人/生效时间/评估分数/适用场景，模板即资产（JA-473 资产库的条目结构）
+原理：资产库条目的元数据面（可检索可审计），元数据缺失则资产库退化为片段堆，与知识管理联动
+用法：模板元数据
+锚点：实战共识
+
+</details>
+
+### 工程 · 缓存（嵌入）
+
+<details><summary>看背面</summary>
+
+嵌入结果缓存：同文本重复嵌入跳过（内容 hash 作键），增量入库（JA-158）与重复文档（JA-491）场景省成本
+原理：嵌入是幂等纯函数（同输入同输出），缓存天然正确，命中率在增量更新场景显著
+用法：嵌入缓存
+锚点：实战共识
+
+</details>
+
+### RAG · 画像（个性化）
+
+<details><summary>看背面</summary>
+
+检索个性化：用户画像（部门/历史兴趣）加权检索排序（同 query 不同人结果不同），隐私边界注意
+原理：通用 RAG 的个性化扩展（相关性×用户系数 JA-493），画像数据合规（JA-198），冷启动用户回退通用排序
+用法：个性化检索
+锚点：实战共识
+
+</details>
+
+### 安全 · 注入（多模态）
+
+<details><summary>看背面</summary>
+
+多模态注入攻击面：图片内嵌文字指令（JA-549）、图片元数据、多图组合注入，视觉输入是注入新载体
+原理：多模态安全深化：视觉通道的注入检测（OCR 出图片文字过注入检测），与文本防线（JA-225）同等强度
+用法：多模态注入
+锚点：实战共识
+
+</details>
+
+### 工程 · 流式（审计）
+
+<details><summary>看背面</summary>
+
+流式输出的逐段审计：流式段落（JA-262 扫描过的）逐段留痕（审计完整性），聚合留痕与逐段留痕的选择
+原理：JA-383 留痕的流式面：逐段留痕成本高（量大），聚合留痕+抽样逐段，与留痕年限策略联动
+用法：流式留痕
+锚点：实战共识
+
+</details>
+
+### 工程 · 端点（健康）
+
+<details><summary>看背面</summary>
+
+健康检查端点分层：应用自身健康（/health）与供应商健康（拨测 JA-273）分开暴露，K8s 探针只看自身
+原理：探针设计纪律：供应商抖动不应导致 Pod 重启（探针挂供应商会雪崩重启），与 K8s 探针知识（DF-097）联动
+用法：健康检查设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 自动化（演练）
+
+<details><summary>看背面</summary>
+
+降级演练自动化：定期自动切流到备供应商（演练窗口），验证+自动切回，人工演练的自动化演进
+原理：JA-210 演练的自动化面（混沌工程自动化 DF-076），自动化频率保证降级链"随时可用"，与故障注入平台联动
+用法：演练自动化
+锚点：实战共识
+
+</details>
+
+### 工程 · 突发（配额）
+
+<details><summary>看背面</summary>
+
+突发配额申请流程：大促/活动临时提额（供应商工单提前 N 天），容量保障（MY-092）的供应商面
+原理：配额弹性的商务流程（JA-516 合同条款覆盖），临时提额有审批周期，与容量日历联动
+用法：配额弹性流程
+锚点：实战共识
+
+</details>
+
+### 工程 · 同步（文档）
+
+<details><summary>看背面</summary>
+
+多语言知识库同步：多语言版本文档的内容同步机制（原文变更→各语言版本待更新清单）
+原理：JA-281/217 的运营面：语言版本漂移（不同步）导致检索答案不一致（JA-463），同步机制是知识运营的一部分
+用法：多语言知识治理
+锚点：实战共识
+
+</details>
+
+### 评测 · 位置（偏差）
+
+<details><summary>看背面</summary>
+
+评测的位置偏差控制：few-shot 示例顺序/golden 集排列随机化（位置影响判分与生成）
+原理：评估严谨性细节（JA-364 同族）：位置偏差让评测分数不稳定，随机化+多次评测取均值
+用法：评测严谨性
+锚点：实战共识
+
+</details>
+
+### 工程 · 边界（教育）
+
+<details><summary>看背面</summary>
+
+用户教育页：AI 能力边界说明（会出错/知识截止/不适合的场景），降低误用与投诉（JA-396 深化）
+原理：预期管理的产品化：边界页+场景示例+反馈入口，与产品合规（JA-554）联动
+用法：用户预期产品化
+锚点：实战共识
+
+</details>
+
+### 工程 · 面试（团队）
+
+<details><summary>看背面</summary>
+
+AI 工程师面试考察：不止刷题——评估体系设计（给场景设计评估）、成本权衡（方案题）、失败模式（复盘题），工程判断力优先
+原理：JA-342 技能矩阵的招聘面：AI 工程的面试形态与传统 Java 面试差异（本库 AI-060 呼应），招聘定义团队上限
+用法：招聘考察设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 协作（安全）
+
+<details><summary>看背面</summary>
+
+与安全团队协作界面：AI 安全事件上报（JA-520）→安全团队响应，AI 特有风险的知识转移（注入/越权/数据外泄）
+原理：安全协作的组织面（JA-408 四方协作的安全支线），安全团队需要 AI 知识输入（红队 JA-465），与安全运营联动
+用法：安全组织协作
+锚点：实战共识
+
+</details>
+
+### 工程 · 切换（应急）
+
+<details><summary>看背面</summary>
+
+供应商事故紧急切换流程：事故确认（JA-273 拨测）→切流决策（自动+人工确认）→验证（评估抽样）→复盘
+原理：JA-321 自动降级的人工确认层：自动切流误切的回退预案，紧急流程演练（JA-583），与故障响应联动
+用法：应急响应
+锚点：实战共识
+
+</details>
+
+### 工程 · 响应（兼容）
+
+<details><summary>看背面</summary>
+
+供应商响应格式变化兼容层：供应商改响应结构（字段增删）时框架适配（adapter 层吸收，业务无感）
+原理：JA-284 防腐层的价值验证场景：响应格式变化的适配只改 adapter，回归包（JA-407）验证兼容
+用法：防腐层价值
+锚点：实战共识
+
+</details>
+
+### 工程 · 基线（质量）
+
+<details><summary>看背面</summary>
+
+质量基线的版本绑定：每个发布版本的评估分数存档（版本-分数历史），回滚决策有据可查
+原理：JA-487 基线的存档面：分数历史是"质量账本"，回滚对比（新旧版本分数），与版本管理（JA-402）联动
+用法：质量账本
+锚点：实战共识
+
+</details>
+
+### 工程 · 影子库（测试）
+
+<details><summary>看背面</summary>
+
+影子检索库（JA-498/499）的运营：影子库定期与主库 diff（索引质量漂移检测），影子不是一次性
+原理：影子基建的持续运营面：影子库长期存在（新策略持续影子验证），diff 报告驱动切换决策
+用法：影子运营
+锚点：实战共识
+
+</details>
+
+### 工程 · 人均（指标）
+
+<details><summary>看背面</summary>
+
+AI 效能人均指标：团队人均维护 AI 功能数/人均处理评估条目，效能度量防"人力无限投入"
+原理：AI 工程的效能度量（JA-342 团队面），人均指标识别瓶颈（自动化不足），与效能工程联动
+用法：效能治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 单位（成本）
+
+<details><summary>看背面</summary>
+
+单位成本的规模效应：缓存命中率高/批处理占比高→单位成本下降曲线，规模化后经济性改善
+原理：JA-417 单位经济的动态面：规模效应让"初期贵后期便宜"，投入决策看曲线斜率，与规模经济联动
+用法：规模效应
+锚点：实战共识
+
+</details>
+
+### 工程 · 治理（数据）
+
+<details><summary>看背面</summary>
+
+RAG 数据治理组织：知识 Owner 制（每个知识域有负责人对质量负责）+运营（JA-532）+质量门（JA-475），责任到人
+原理：知识库质量的组织保障（JA-492/493 的责任面），无 Owner 的知识域是质量黑洞，与数据治理组织联动
+用法：知识治理组织
+锚点：实战共识
+
+</details>
+
+### 工程 · 跨域（评测）
+
+<details><summary>看背面</summary>
+
+跨域评估看板：多业务线评估分数横向对比（透明化各域质量），促进内部竞争与最佳实践流动
+原理：JA-291 对比表的运营面：跨域对比驱动质量文化（落后域有压力），与中台运营（JA-376）联动
+用法：跨域质量文化
+锚点：实战共识
+
+</details>
+
+### 工程 · 流式（体验）
+
+<details><summary>看背面</summary>
+
+流式与非流式的场景分配：聊天类流式（体验）、内部批处理非流式（简单），API 设计按场景暴露两种模式
+原理：JA-426 传输选型的产品面：同一能力两种暴露（API 设计），流式接口的客户端复杂度要评估
+用法：接口模式设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 清单（验收）
+
+<details><summary>看背面</summary>
+
+AI 项目验收清单：功能验收（评估分达 SLO JA-354）+工程验收（JA-525 五项）+文档验收（JA-343 六段）+运营移交（值班/运营日历）
+原理：项目交付的完整验收框架（交付≠上线），验收清单防"开发完就散"，与项目治理联动
+用法：验收框架
+锚点：实战共识
+
+</details>
+
+### 工程 · 十批（收束）
+
+<details><summary>看背面</summary>
+
+java-ai 十批收束：600 条覆盖框架双栈/MCP/RAG/Agent/多模态/行业/治理/质量八分支，域知识骨架完成，剩余批次填分支深度与案例
+原理：十批次推进的自评估（JA-480 方法论的执行），剩余 115 条的分配计划（薄弱分支加权），与批次管理联动
+用法：批次管理
+锚点：实战方法论
+
+</details>
+
+### 行业 · 单据（物流）
+
+<details><summary>看背面</summary>
+
+物流单据 AI 管线：运单 OCR（JA-431）+结构化抽取+异常件识别（地址缺失/破损描述），单据是物流的数据入口
+原理：物流场景特征：单据量大格式杂（手写/打印混合），OCR 后处理链（JA-546）+异常规则双轨，抽取出结构化数据进 TMS
+用法：物流场景管线
+锚点：实战共识
+
+</details>
+
+### 行业 · 编辑（传媒）
+
+<details><summary>看背面</summary>
+
+传媒内容生成工作流：AI 初稿→编辑修改（可编辑反馈 JA-576）→审核（JA-437）→发布，AI 是"初稿机器"而非发布者
+原理：传媒场景核心矛盾：时效与质量，AI 初稿把编辑从空白页解放（人审位置 JA-478），产出口径与风格一致性（JA-445）用 few-shot 锚定
+用法：内容生产工作流
+锚点：实战共识
+
+</details>
+
+### 行业 · 理赔（保险）
+
+<details><summary>看背面</summary>
+
+保险理赔材料审核：单据 OCR+条款 RAG（保单条款比对）+欺诈信号识别，分级人审（JA-439）
+原理：理赔场景三栈组合：单据理解（多模态）+条款检索（RAG）+审核分级，误赔/错赔代价高→人审强介入（JA-478 责任链）
+用法：保险场景管线
+锚点：实战共识
+
+</details>
+
+### 行业 · 审核（财务）
+
+<details><summary>看背面</summary>
+
+财务报销/发票审核：发票 OCR 结构化+报销制度 RAG 校验+异常 flagged，财务人力释放到异常处理
+原理：财务场景的确定性需求（金额/税号必须准，幻觉零容忍），规则+AI 双轨（AI-078 校验器思想），结构化输出低温（JA-161）
+用法：财务审核设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 工件（流程）
+
+<details><summary>看背面</summary>
+
+AI 功能六阶段工件清单：需求（ROI JA-027）/设计（架构评审 JA-524）/开发（脚手架 JA-523）/评估（门禁 JA-525）/上线（灰度 JA-294）/运营（runbook JA-416），每阶段有产出物
+原理：流程工件化让"走过场"变"留痕迹"，工件模板沉淀复用，与项目管理规范联动
+用法：流程工程化
+锚点：实战共识
+
+</details>
+
+### Spring AI · 分类（异常）
+
+<details><summary>看背面</summary>
+
+Spring AI 重试异常分类：TransientAiException（可重试：限流/瞬时故障）与 NonTransientAiException（不可重试：认证/参数/内容策略）
+原理：JA-104 异常分层的框架实现面：SDK 已分类，业务按类型分派（不可重试直接告警），框架异常类名要记准
+用法：框架异常体系
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### Spring AI · 层级（选项）
+
+<details><summary>看背面</summary>
+
+Spring AI 选项三层合并：全局配置（spring.ai.openai.chat.options）→ChatClient 默认（defaultOptions）→调用级（.options），后者覆盖前者
+原理：三层覆盖链是参数治理的核心模型（JA-016/336），理解合并顺序才能解释"配置不生效"问题
+用法：选项合并模型
+锚点：Spring AI 1.0 GA
+
+</details>
+
+### LangChain4j · provider 数（广度）
+
+<details><summary>看背面</summary>
+
+LC4j 的 provider 广度：数十个 provider 模块（OpenAI/Ollama/Anthropic/通义/百川等各有 ChatLanguageModel 实现）
+原理：provider 广度是 LC4j 核心卖点（JA-039 对比面），评估 provider 覆盖先查模块清单，新 provider 社区跟进快
+用法：框架广度认知
+锚点：LangChain4j 1.0
+
+</details>
+
+### 工程 · GenAI（指标）
+
+<details><summary>看背面</summary>
+
+OTel GenAI 语义约定在框架的落地：观测属性名对齐 gen_ai.* 前缀（模型/token/温度标准属性）
+原理：JA-083 GenAI 约定的框架面：Spring AI 观测已按约定命名，跨框架指标可聚合（JA-304 差异的对冲），与 OTel 标准（DF-054）联动
+用法：观测标准化
+锚点：实战共识
+
+</details>
+
+### 提示词 · 前置指令（结构）
+
+<details><summary>看背面</summary>
+
+输出前置指令技巧："始终以 JSON 开头"类强约束放 prompt 首尾双位置（首尾锚定），提升格式遵循率
+原理：模型对首尾内容注意力高（JA-510 中间遗忘），格式锚定双保险（JA-228 宽松解析的前置配合）
+用法：格式遵循技巧
+锚点：实战共识
+
+</details>
+
+### 提示词 · 负面示例（负面）
+
+<details><summary>看背面</summary>
+
+prompt 中使用负面示例（"不要输出 X"）效果弱于正面示例（"输出 Y 格式"），负面清单作辅助
+原理：模型对"不要"指令遵循弱（训练分布偏正面示例），正面示例优先、负面补充，与 few-shot（JA-443）联动
+用法：提示词技巧
+锚点：实战共识
+
+</details>
+
+### 提示词 · 分隔符（结构）
+
+<details><summary>看背面</summary>
+
+prompt 分隔符规范：XML 标签/Markdown 标题/三引号分区（指令/上下文/示例/输入各就各位）
+原理：分隔符让模型解析输入结构（JA-225 边界标签的泛化），结构化输入降低注入面与混淆，与格式规范联动
+用法：提示词结构规范
+锚点：实战共识
+
+</details>
+
+### 工程 · 生成器（校验）
+
+<details><summary>看背面</summary>
+
+从 schema 生成 JSR-303 校验器：结构化输出的 schema 与 Java 校验注解同步生成（schema 变更→校验同步）
+原理：JA-226 二次校验的自动化：手工维护校验与 schema 脱节，代码生成保证一致，与代码生成工程联动
+用法：校验同步自动化
+锚点：实战共识
+
+</details>
+
+### 工程 · 一致（人设）
+
+<details><summary>看背面</summary>
+
+客服人设一致性：人设 prompt（语气/边界/禁语）+少样本对话锚定+输出扫描（禁语检测），人设漂移检测
+原理：角色扮演一致性（JA-558 NPC 同思想在客服域），人设是产品资产（JA-473 库管理），漂移进评估集（JA-179）
+用法：人设工程
+锚点：实战共识
+
+</details>
+
+### RAG · 查询扩展（扩展）
+
+<details><summary>看背面</summary>
+
+查询扩展：同义词/上位词扩展（"发货"扩展到"物流/配送"），扩展词表或模型改写，提升召回
+原理：单查询召回盲区（术语差异 JA-496），扩展换召回广度，代价是噪声，与混合检索（JA-241）互补
+用法：召回扩展技巧
+锚点：实战共识
+
+</details>
+
+### RAG · HyDE（进阶）
+
+<details><summary>看背面</summary>
+
+HyDE（假设文档嵌入）：让模型先生成假设答案，用假设答案的向量去检索（答案与文档同分布）
+原理：查询与文档向量分布错位的解法（问题短答案长），假设文档桥接分布差，代价是每次检索多一次模型调用
+用法：检索进阶技巧
+锚点：实战共识
+
+</details>
+
+### RAG · 多跳（进阶）
+
+<details><summary>看背面</summary>
+
+多跳检索：复杂问题拆解为多轮检索（检索→中间推理→再检索），迭代直到信息足够
+原理：单轮检索解决不了多跳问题（AI-044 GraphRAG 的轻量替代），迭代检索用 Agent 循环（JA-053）承载，成本与精度权衡
+用法：多跳检索设计
+锚点：实战共识
+
+</details>
+
+### RAG · 置信度（输出）
+
+<details><summary>看背面</summary>
+
+检索置信度输出：检索结果带相似度分数，低于阈值的查询走拒答（JA-367），分数进响应供前端展示"依据强度"
+原理：置信度透明化让用户判断可信度（AI-011 引用的延伸），分数也是路由依据（JA-466）
+用法：置信度透明化
+锚点：实战共识
+
+</details>
+
+### RAG · 排序（注入）
+
+<details><summary>看背面</summary>
+
+注入内容排序：检索片段按重要性重排（最相关放首尾，JA-510 布局工程），而非按检索分数顺序
+原理：分数序≠注意力序（中间遗忘），布局策略是免费的精度提升，与上下文预算（JA-223）联动
+用法：注入布局优化
+锚点：实战共识
+
+</details>
+
+### RAG · 元数据索引（存储）
+
+<details><summary>看背面</summary>
+
+元数据过滤的索引：向量库对高频过滤字段建元数据索引（否则过滤退化为全扫后过滤）
+原理：JA-063/187 过滤的性能面：无索引过滤在大库上延迟爆炸，过滤字段设计与检索模式联动
+用法：过滤性能工程
+锚点：实战共识
+
+</details>
+
+### RAG · 备份（运维）
+
+<details><summary>看背面</summary>
+
+向量库备份与恢复：定期快照（含元数据与索引配置），恢复演练（JA-286）覆盖向量库
+原理：向量库是核心数据资产（JA-101 重建成本高），快照+演练让故障可恢复，与备份体系（RD-094）联动
+用法：向量库灾备
+锚点：实战共识
+
+</details>
+
+### Agent · 日志脱敏（工具）
+
+<details><summary>看背面</summary>
+
+工具调用日志脱敏：工具参数/结果含敏感数据（客户信息）时脱敏落日志（JA-044 的工具面）
+原理：工具日志是敏感数据重灾区（参数含身份证/账号），脱敏规则按工具声明，与审计（JA-312）平衡
+用法：工具日志治理
+锚点：实战共识
+
+</details>
+
+### Agent · 任务模板（模板）
+
+<details><summary>看背面</summary>
+
+Agent 任务模板库：常见任务（工单处理/报告生成）的 prompt+工具组合模板化，新任务从模板派生
+原理：Agent 任务工程化复用（JA-623 与 prompt 资产库 JA-473 同构），模板带评估基线，派生后回归
+用法：任务工程化
+锚点：实战共识
+
+</details>
+
+### Agent · 验证（拆分）
+
+<details><summary>看背面</summary>
+
+LLM 子任务拆分的质量验证：拆分结果（子任务列表）经规则/小模型校验（覆盖率/依赖闭环），防拆丢需求
+原理：拆解质量决定 Agent 上限（AI-057），拆分本身要用评估（拆分评估集），验证不通过重拆或人工
+用法：拆解质量门
+锚点：实战共识
+
+</details>
+
+### 工程 · SLA（平台）
+
+<details><summary>看背面</summary>
+
+平台 SLA 承诺给业务：中台向业务承诺（网关可用性/评估服务时效/工单响应），SLA 是平台与业务契约
+原理：JA-384 平台运营的契约面：无 SLA 的平台服务不可信（业务自建回潮），与 DF-056 SLO 联动
+用法：平台契约
+锚点：实战共识
+
+</details>
+
+### 工程 · 模式（成本）
+
+<details><summary>看背面</summary>
+
+成本分摊模式细节：按 token 量计费（简单）vs 按功能订阅（业务友好）vs 混合（底保底+用量），模式与业务沟通成本相关
+原理：JA-571 showback/chargeback 的模式细化，计费模式影响业务使用行为（计费重则少用），与产品化思路联动
+用法：计费模式设计
+锚点：实战共识
+
+</details>
+
+### 治理 · 版权（产权）
+
+<details><summary>看背面</summary>
+
+生成内容版权归属：企业生成内容的使用权条款（供应商条款审读）+生成物版权风险（相似性审查），法务前置
+原理：生成内容知识产权是合规盲区（AI-040 的产权面），供应商条款差异大（商用授权），与 JA-554 行业合规联动
+用法：生成物产权
+锚点：实战共识
+
+</details>
+
+### 治理 · 使用规范（政策）
+
+<details><summary>看背面</summary>
+
+企业 AI 使用政策：允许场景/禁止场景（客户数据入 prompt 禁止）/工具审批流程/违规后果，全员宣导
+原理：员工使用 AI 的政策面（影子 AI 使用是企业风险），政策+技术管控（网关阻断未审批渠道），与安全政策联动
+用法：使用政策治理
+锚点：实战共识
+
+</details>
+
+### 治理 · 计划（培训）
+
+<details><summary>看背面</summary>
+
+员工 AI 培训计划：分层（工程师/业务/管理）培训（能力边界/prompt 技巧/安全红线），培训进入职必修
+原理：JA-342 技能矩阵的培训面：能力断层用培训补（JA-342 呼应），红线培训是合规要求（JA-628），与 HR 联动
+用法：培训体系
+锚点：实战共识
+
+</details>
+
+### 治理 · 响应（审计）
+
+<details><summary>看背面</summary>
+
+监管审计响应准备：AI 系统的数据流向图（JA-409）/留痕体系（JA-383）/模型卡（JA-405）随时可调取，问询响应预案
+原理：监管问询的备战（JA-551 强监管行业必答题），资产齐备则响应快，与合规演练联动
+用法：审计备战
+锚点：实战共识
+
+</details>
+
+### 案例 · 复盘（缓存）
+
+<details><summary>看背面</summary>
+
+案例复盘：缓存命中率从 5% 到 45% 的路径——前缀稳定化（system 抽公共部分）→语义缓存上线（JA-151）→阈值调优，月成本降 30%
+原理：复盘案例的叙事模板：问题→动作（按收益排序）→数据→教训（前缀纪律早期没做），案例进案例库（JA-527）
+用法：缓存优化案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 救火（质量）
+
+<details><summary>看背面</summary>
+
+案例复盘：RAG 质量突降救火——供应商静默更新嵌入模型导致召回崩（JA-392 抓住），影子索引回滚（JA-499），教训=嵌入模型版本锁定+每日拨测
+原理：RAG 突降的经典根因（嵌入模型换代），回滚靠影子索引基建（平时建设），教训固化为检查单
+用法：RAG 救火案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 失控（成本）
+
+<details><summary>看背面</summary>
+
+案例复盘：成本一夜 3 倍——新功能死循环调用（JA-276 步数上限缺失），预算熔断（JA-279）止损，教训=Agent 上线强制步数上限+成本回归（JA-528）
+原理：成本失控的典型根因（循环无界），止损靠熔断（平时配置），教训进准入检查单（JA-525）
+用法：成本失控案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 串号（安全）
+
+<details><summary>看背面</summary>
+
+案例复盘：上下文串号事故——并发会话共享 ChatMemory 实例（JA-097 防线缺失），用户 A 看到用户 B 数据，教训=隔离测试用例（JA-208）+review 清单（JA-285）
+原理：串号是最严重事故类型（数据泄露），根因是并发设计错误（非 AI 特有），修复+测试+流程三件套
+用法：串号事故案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 供应商（演练）
+
+<details><summary>看背面</summary>
+
+案例复盘：供应商区域故障演练——拨测告警（JA-273）30 秒发现→自动切流（JA-321）→抽样评估（JA-582 验证）→切回，全程无人工
+原理：成功演练的要素：监控/自动/验证三链路（每环节平时建设），演练报告进预案更新，与混沌工程（DF-076）联动
+用法：供应商演练案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 框架（升级）
+
+<details><summary>看背面</summary>
+
+案例复盘：Spring AI 1.0 升级——starter 重命名（JA-066）/functions→tools（JA-049）/默认模型变化，回归包（JA-407）全绿后灰度
+原理：框架升级案例的要点：checklist（JA-211）+回归包执行（自动化），升级收益（新能力）与风险（默认行为变化）平衡
+用法：框架升级案例
+锚点：实战共识
+
+</details>
+
+### 工程 · 水位（容量）
+
+<details><summary>看背面</summary>
+
+LLM 配额水位管理：RPM/TPM 使用率水位线（70% 告警 85% 行动），水位数据来自网关（JA-336）
+原理：配额水位是容量管理（MY-082 的 AI 面），水位线驱动的动作（扩配额/分流），与容量预测（JA-514）联动
+用法：配额水位
+锚点：实战共识
+
+</details>
+
+### 工程 · 关联（观测）
+
+<details><summary>看背面</summary>
+
+AI 指标与业务指标关联分析：成本/质量指标与业务转化率关联（回答质量提升→转化变化），AI 投入的业务回报验证
+原理：JA-417 单位经济的关联面：技术指标与业务指标打通（大盘关联），ROI 动态验证，与数据分析联动
+用法：指标关联分析
+锚点：实战共识
+
+</details>
+
+### 工程 · 事件驱动（架构）
+
+<details><summary>看背面</summary>
+
+AI 能力事件化：模型调用结果发布事件（供下游消费——审计/缓存/评估采样），事件驱动解耦横切关注
+原理：同步调用与事件发布的双轨（审计/缓存走事件异步），与事件驱动架构（JA-045 Spring 事件/MQ-001）联动
+用法：事件驱动架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 温度（质量）
+
+<details><summary>看背面</summary>
+
+温度与幻觉率的关系：低温降低幻觉率（确定性采样），事实型任务低温是幻觉防线之一（JA-161 的质量面）
+原理：幻觉的参数面缓解：低温+RAG+拒答（JA-367）组合拳，温度是第一道（成本最低），与幻觉治理知识联动
+用法：温度与质量
+锚点：实战共识
+
+</details>
+
+### 工程 · API（架构）
+
+<details><summary>看背面</summary>
+
+对外 AI API 设计要点：流式开关/幂等键（JA-467）/超时声明/配额头（剩余量）/错误码规范，API 即产品
+原理：对外 AI API 与内部调用差异（契约/配额/SLA 显式化），与 REST 设计规范联动，网关强制（JA-317）
+用法：API 产品化
+锚点：实战共识
+
+</details>
+
+### 工程 · soak（测试）
+
+<details><summary>看背面</summary>
+
+长稳测试（soak test）：AI 链路 24-72 小时持续跑（低流量），抓内存泄漏/连接泄漏/句柄泄漏
+原理：长稳问题短测抓不到（SSE 长连接/JA-535 连接面），泄漏在小时级才显现，与 soak 测试实践联动
+用法：长稳测试
+锚点：实战共识
+
+</details>
+
+### 工程 · 分层（配置）
+
+<details><summary>看背面</summary>
+
+AI 配置分层架构：供应商配置（key/base-url）/行为配置（温度/模型）/业务配置（prompt 版本/路由规则）三层分文件分权限
+原理：配置分层与权限分离（供应商密钥只有平台可改），变更频率不同层不同（密钥低频 prompt 高频），与配置治理（DF-106）联动
+用法：配置架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 归因（指标）
+
+<details><summary>看背面</summary>
+
+延迟归因四象限：网关延迟/供应商延迟/业务逻辑延迟/前端渲染延迟，trace 树（JA-596）拆解各占
+原理：JA-592 的延迟版：分位数据按四象限拆解，优化目标明确（最大项优先），与性能优化方法论联动
+用法：延迟归因
+锚点：实战共识
+
+</details>
+
+### 工程 · 数据（安全）
+
+<details><summary>看背面</summary>
+
+prompt 数据分级处理：不同密级 prompt（含用户数据 vs 公开）走不同模型与日志策略（JA-380 矩阵的运行时面）
+原理：密级在运行时的执行（不是纸面制度）：密级标签随请求流转，路由与日志策略按标签分派，与数据分级（JA-380）联动
+用法：密级运行时
+锚点：实战共识
+
+</details>
+
+### 工程 · 网关内聚（架构）
+
+<details><summary>看背面</summary>
+
+网关内部模块：协议层/策略层（限流/鉴权）/路由层/供应商适配层，四层内聚各可独立测试
+原理：JA-317 六职责的模块化落地，层内高内聚层间低耦合，与分层架构（DF-081）联动
+用法：网关内部架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 维度（观测）
+
+<details><summary>看背面</summary>
+
+观测维度全景：租户/业务/模型/区域/环境五维标签体系（所有指标带五维），多维切片分析
+原理：标签体系是观测的地基（JA-277/091 的统一），五维切片回答"谁在用/用什么/哪里慢"，与标签设计规范联动
+用法：观测维度体系
+锚点：实战共识
+
+</details>
+
+### 工程 · 自动化（演进）
+
+<details><summary>看背面</summary>
+
+运维自动化演进：手动处理→runbook 脚本化→自动处置（限流/切流自动执行），人工只审批异常
+原理：JA-583 演练自动化的推广（运维成熟度阶梯），自动化范围逐步扩大（审批保留在关键动作），与 AIOps 思想联动
+用法：运维成熟度
+锚点：实战共识
+
+</details>
+
+### 工程 · 多活（架构）
+
+<details><summary>看背面</summary>
+
+AI 服务多活架构：网关多活（无状态易多活）+语义缓存多活（数据同步）+配额全局协调（分布式计数），供应商本身多区
+原理：AI 层多活比 DB 多活简单（无强一致状态），配额全局协调是唯一难点（Redis 集群 JA-033），与异地多活（DF-058）联动
+用法：AI 多活架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 防回归（质量）
+
+<details><summary>看背面</summary>
+
+防回归的"三道闸"：提交时单测（快）→发布时评估集（准）→上线后影子（真），三道闸各防一类回归
+原理：JA-407/407 分层闸门的组织化，三道闸漏一道就有回归漏网，与质量左移思想联动
+用法：质量闸门体系
+锚点：实战共识
+
+</details>
+
+### 工程 · 场景题（面试）
+
+<details><summary>看背面</summary>
+
+AI 场景题答题模板：澄清（场景/约束）→方案骨架（JA-238 分层）→关键技术点（RAG/工具/降级）→风险与治理（JA-413）→演进（JA-419），五步骨架
+原理：场景题（P10 必考）的结构化回答（DF-099 答题框架的 AI 版），每步带本域事实锚点，与答题方法论联动
+用法：场景题框架
+锚点：实战方法论
+
+</details>
+
+### 工程 · 追问（面试）
+
+<details><summary>看背面</summary>
+
+AI 追问应对地图：成本怎么降（四招）→质量怎么保（评估）→安全怎么做（五层）→失败怎么办（降级）→规模怎么扩（多活），高频追问五连
+原理：JA-651 场景骨架的追问预判（每个骨架点对应一组追问），追问地图让答题有纵深，与 MY 复习主线同构
+用法：追问应对框架
+锚点：实战方法论
+
+</details>
+
+### 工程 · 成本（评估）
+
+<details><summary>看背面</summary>
+
+评估本身的成本控制：评估集抽样分层（核心全量/长尾抽样）、judge 批处理、结果缓存，评估成本的工程化
+原理：评估不是免费（JA-539 测试预算），成本控制让评估可持续跑（CI 日跑），与评估运营（JA-471）联动
+用法：评估成本工程
+锚点：实战共识
+
+</details>
+
+### 工程 · 内部（工具）
+
+<details><summary>看背面</summary>
+
+内部 AI 工具平台：业务自助创建 AI 功能（模板+配置化），平台审核发布，长尾需求自助化
+原理：中台产品化终点（JA-384 平台价值兑现）：自助化释放平台人力，模板（JA-623）是自助的载体，与低代码思想联动
+用法：自助化平台
+锚点：实战共识
+
+</details>
+
+### 工程 · 标注（数据）
+
+<details><summary>看背面</summary>
+
+标注外包与内包选择：敏感数据内包（合规）、通用数据外包（成本），标注平台与质检流程（JA-477）
+原理：标注的组织与成本决策（JA-477 的资源面），敏感边界清晰（JA-380 矩阵），与外包管理联动
+用法：标注资源策略
+锚点：实战共识
+
+</details>
+
+### 工程 · 模型层（演进）
+
+<details><summary>看背面</summary>
+
+模型层能力自建的演进判断：调 API→网关→自部署开源模型→自训练，每步的成本/能力/团队门槛跃迁
+原理：JA-060 Java 定位的深度面：自建模型层的门槛评估（数据/算力/人才），多数企业停在网关+微调，与 AI-078 定位联动
+用法：模型层演进
+锚点：实战共识
+
+</details>
+
+### 工程 · 合规（风险）
+
+<details><summary>看背面</summary>
+
+跨境数据合规细节：模型调用数据的出境评估（数据含用户数据出境合规）、网关区域路由（JA-267）落地证据
+原理：数据出境是法务硬要求（JA-551 行业叠加），技术证据（路由日志）支撑合规声明，与合规审计（JA-630）联动
+用法：跨境合规细节
+锚点：实战共识
+
+</details>
+
+### 工程 · 边界（知识）
+
+<details><summary>看背面</summary>
+
+AI 知识地图的边界意识：框架/协议/管道快速演进（本域事实半年半衰期风险），复习锚定"原理与模式"而非"API 细节"（API 以官方文档为准）
+原理：知识半衰期的诚实认知（JA-060 版本锚定的原因），记忆策略：模式入脑、API 查文档，与学习方法论联动
+用法：知识保鲜策略
+锚点：实战方法论
+
+</details>
+
+### 工程 · 收束（主线）
+
+<details><summary>看背面</summary>
+
+java-ai 域答题主线收束：选型→管道→可靠性→成本→安全→评估→组织，七环覆盖本域全部事实（JA-180/360/420 地图的组织化）
+原理：七环主线是面试与实战的检索结构（每环挂矩阵行），与 JA-651 场景模板衔接，与知识地图收束（JA-600）联动
+用法：域主线定稿
+锚点：实战方法论
+
+</details>
+
+### 工程 · 下一域（交接）
+
+<details><summary>看背面</summary>
+
+java-ai 收尾与 agent-dev 衔接：本域管"框架与工程"，agent-dev 域管"Agent 设计模式/编排/评测/安全"（分工：JA-254 边界的展开），两域矩阵互引
+原理：域间分工清晰防重复（JA-054 划界的组织化），互引标注（跨域链接），与知识库设计联动
+用法：域间衔接
+锚点：实战方法论
+
+</details>
+
+### 质量 · prompt 自愈（自愈）
+
+<details><summary>看背面</summary>
+
+prompt 自愈机制：评估发现的失败样本自动归因（缺失约束/格式漂移），生成候选改写重测，改优后人工确认上线
+原理：prompt 迭代的手动瓶颈（JA-442 自动搜索的进阶），自愈是"评估驱动改进"的自动化，人工确认保留兜底
+用法：prompt 自愈设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 压缩与缓存（交互）
+
+<details><summary>看背面</summary>
+
+prompt 压缩与供应商缓存命中的冲突：压缩改变前缀破坏缓存命中，两者收益互斥需权衡
+原理：JA-269 压缩与 JA-279 prompt cache 的交互冲突：压缩省 token 但丢缓存折扣，按量测数据决策（压缩后净成本）
+用法：两者权衡
+锚点：实战共识
+
+</details>
+
+### 多模态 · 统一（预算）
+
+<details><summary>看背面</summary>
+
+多模态与文本 token 预算统一管理：图像 token 折算后与文本同池预算（一个请求的总预算视图）
+原理：JA-223 预算分配的多模态版：图像占预算大（JA-541 分块），统一视图才能做取舍（减图 or 减文本）
+用法：统一预算管理
+锚点：实战共识
+
+</details>
+
+### 评测 · 成对评测（对比）
+
+<details><summary>看背面</summary>
+
+成对评测（pairwise）：同 query 两版本回答让 judge 选优，比独立打分更稳（判别比打分容易）
+原理：LLM judge 的两种范式：绝对打分（JA-651 细则）vs 相对比较（更可靠），成对结果换算胜率（Elo 类），评估严谨性进阶
+用法：成对评测设计
+锚点：实战共识
+
+</details>
+
+### 评测 · 评估即代码（工程）
+
+<details><summary>看背面</summary>
+
+评估即代码：评估集/判分 prompt/阈值全部进仓库版本管理，评估 CI 化（与代码同 PR 流程）
+原理：JA-058/407 的工程化收束：评估资产与代码资产同纪律（评审/变更/回滚），"评估是脚本"到"评估是资产"的跃迁
+用法：评估工程化
+锚点：实战共识
+
+</details>
+
+### RAG · 气泡（个性化）
+
+<details><summary>看背面</summary>
+
+检索气泡（filter bubble）风险：个性化检索（JA-579）让用户只见偏好内容，信息窄化（产品伦理问题）
+原理：个性化的负外部性：加多样性约束（强制注入非偏好域内容），与推荐系统气泡同构，产品价值观问题
+用法：个性化伦理
+锚点：实战共识
+
+</details>
+
+### RAG · 预算（延迟）
+
+<details><summary>看背面</summary>
+
+检索延迟预算：向量库 P99 必须显著小于整体 RT 预算（检索是 RT 的子项），超预算的检索降级（topK 减半）
+原理：JA-166 分级超时的组件化：检索有自己的预算与降级动作，与 DF-028 预算传递联动
+用法：检索预算
+锚点：实战共识
+
+</details>
+
+### RAG · TTL 归档（治理）
+
+<details><summary>看背面</summary>
+
+知识内容生命周期自动治理：时效标签（JA-494）驱动 TTL 归档（过期内容转归档库不出检索）
+原理：过期知识自动退出检索（JA-248 衰减的硬治理版），归档可查（合规）不参与检索，与 MY-107 冷热分离联动
+用法：知识生命周期自动化
+锚点：实战共识
+
+</details>
+
+### RAG · 保护（隔离）
+
+<details><summary>看背面</summary>
+
+多租户检索资源保护：大租户重查询降级（topK 动态缩减）保护小租户延迟，租户级检索限流
+原理：共享向量库（JA-249）的公平性：大租户查询放大（宽 topK）拖垮全库，租户级配额（JA-206 思想延伸到检索）
+用法：检索公平性
+锚点：实战共识
+
+</details>
+
+### RAG · 对抗（评测）
+
+<details><summary>看背面</summary>
+
+golden set 对抗增强：加入对抗性查询（同义改写/错别字/口语化/多语言混杂），检索在"脏查询"下的鲁棒性评测
+原理：干净查询评测掩盖真实分布（用户查询是脏的 JA-496），对抗样本让评估贴近线上，与注入评估（JA-156）同思想
+用法：检索鲁棒性评测
+锚点：实战共识
+
+</details>
+
+### Agent · 评审清单（工具）
+
+<details><summary>看背面</summary>
+
+Agent 工具评审四查：描述质量（JA-108）/幂等性（JA-218）/超时设置（JA-275）/权限边界（JA-235），新工具上线四项全过
+原理：工具上线的质量门（工具是 Agent 的"API"），四查清单化（与 MY-110 检查单同构），清单进 review 模板
+用法：工具质量门
+锚点：实战共识
+
+</details>
+
+### Agent · 主动放弃（能力）
+
+<details><summary>看背面</summary>
+
+Agent 的"不作为"能力：允许模型决定不调用工具（直接回答或说明无法完成），强制调用会逼出错误工具使用
+原理：工具不是越多调用越好（误用工具比不用更糟），放弃能力是成熟 Agent 标志（判断是否需要工具），与幻觉工具调用防线联动
+用法：Agent 决策成熟度
+锚点：实战共识
+
+</details>
+
+### Agent · 读取重排（记忆）
+
+<details><summary>看背面</summary>
+
+长期记忆读取也要重排：向量召回的记忆条目经相关性重排（与 RAG 重排 JA-102 同构），记忆检索质量决定"人设连贯"
+原理：长期记忆是二次 RAG（记忆库=特殊知识库），召回排序差则 Agent"健忘/记错"，重排同样适用
+用法：记忆检索质量
+锚点：实战共识
+
+</details>
+
+### Agent · 跨 Agent（观测）
+
+<details><summary>看背面</summary>
+
+跨 Agent trace 延续：父 Agent 调子 Agent 的 trace 串联（子 Agent span 挂父 span），多 Agent 全链路可追
+原理：多 Agent 观测（JA-258/373）：trace 树跨 Agent 边界延续（DF-053 分布式追踪思想），观测断裂=多 Agent 黑盒
+用法：多 Agent 可观测
+锚点：实战共识
+
+</details>
+
+### Agent · 资源池（预算）
+
+<details><summary>看背面</summary>
+
+Agent token 预算池按任务隔离：每任务独立预算池（超限熔断），任务间互不挤占
+原理：JA-276 步数上限的资源版：步数防循环、预算池防成本，双重防线，预算池与租户预算（JA-461）联动
+用法：任务级预算
+锚点：实战共识
+
+</details>
+
+### Agent · 证据链（输出）
+
+<details><summary>看背面</summary>
+
+Agent 输出附证据链：结论+支撑证据（工具结果片段/引用），结论与证据可点对核对
+原理：Agent 输出的可信度设计（AI-011 引用思想的 Agent 版），无证据的结论标注低可信，与审计（JA-219）联动
+用法：可信输出设计
+锚点：实战共识
+
+</details>
+
+### Agent · 进度（体验）
+
+<details><summary>看背面</summary>
+
+长任务阶段汇报：Agent 每完成阶段发进度事件（已完成/进行中/预计剩余），用户可中途干预
+原理：长任务的可感知性（JA-425 多路流的应用），进度事件协议化（阶段/百分比/摘要），无进度=用户流失
+用法：进度感知设计
+锚点：实战共识
+
+</details>
+
+### Agent · 分类（失败）
+
+<details><summary>看背面</summary>
+
+Agent 失败三分类：工具失败（外部依赖）→重试/换工具；规划失败（步骤错）→重规划；验证失败（结果不对）→回炉，分类驱动恢复策略
+原理：JA-505 补偿的精细化前置：不同失败恢复动作不同（与 MY-082 分级同思想），失败分类先于恢复设计
+用法：失败分类学
+锚点：实战共识
+
+</details>
+
+### Agent · 提权（人审）
+
+<details><summary>看背面</summary>
+
+Agent 权限提升请求流程：任务需要超出当前授权的工具时，Agent 发起提权请求（人工批准后临时授权）
+原理：JA-679/259 人审的权限面：不是预先给全权限而是按需申请（最小权限动态版 JA-500），请求留痕审计
+用法：按需授权
+锚点：实战共识
+
+</details>
+
+### Agent · 套件（评测）
+
+<details><summary>看背面</summary>
+
+Agent 评测回归套件组织：按任务类型分套件（工单套件/报告套件），工具 mock 剧本随套件，回归按变更影响跑对应套件
+原理：Agent 评测的组织（JA-212/680 深化）：套件化让回归可选择性执行（CI 成本控制），与回归包（JA-407）联动
+用法：评测套件化
+锚点：实战共识
+
+</details>
+
+### 网关 · 请求重写（适配）
+
+<details><summary>看背面</summary>
+
+网关请求重写：供应商特有参数适配（同一语义参数名不同），应用免感知供应商差异
+原理：JA-318 兼容层的参数面：协议兼容不止消息结构还有参数映射，重写规则配置化
+用法：参数适配
+锚点：实战共识
+
+</details>
+
+### 网关 · 探测（健康）
+
+<details><summary>看背面</summary>
+
+网关对上游的失败率探测：按供应商维度滑动窗口错误率，超阈标记不健康（路由降权的输入）
+原理：JA-321 降级路由的探测数据面：健康标记是路由决策的实时输入，与拨测（JA-273）互补（被动+主动）
+用法：健康探测
+锚点：实战共识
+
+</details>
+
+### 网关 · 自身灰度（发布）
+
+<details><summary>看背面</summary>
+
+网关自身升级灰度：网关实例分批升级（新旧并存），配置兼容性先行，回滚容易
+原理：网关是关键路径（JA-325 HA），自身升级也要灰度（升级引发故障=全站 AI 不可用），与发布纪律联动
+用法：网关发布纪律
+锚点：实战共识
+
+</details>
+
+### 网关 · 即代码（配置）
+
+<details><summary>看背面</summary>
+
+网关配置即代码：路由/配额/降级规则进 Git 版本管理，变更走 PR 评审+自动生效
+原理：网关配置治理（JA-652 配置漂移的根治）：配置与代码同纪律，回滚=回 PR，与 IaC 思想联动
+用法：网关配置工程
+锚点：实战共识
+
+</details>
+
+### 网关 · 多协议（协议）
+
+<details><summary>看背面</summary>
+
+网关多协议并存：OpenAI 协议（主流）+Anthropic 协议+MCP 协议三协议对外暴露，按客户端选择
+原理：JA-318 兼容层的多协议面：不同客户端说不同协议（网关统一翻译），协议矩阵是网关能力表
+用法：协议矩阵
+锚点：实战共识
+
+</details>
+
+### 网关 · 成本（路由）
+
+<details><summary>看背面</summary>
+
+成本感知路由：同一能力等级路由到单价更低的供应商（价格表驱动 JA-264），质量基线约束下省成本
+原理：JA-232 分级路由的细化：同档多供应商按价选（质量约束），路由引擎读价格配置动态决策
+用法：成本路由
+锚点：实战共识
+
+</details>
+
+### 网关 · 租户隔离（缓存）
+
+<details><summary>看背面</summary>
+
+网关级缓存的租户隔离：缓存键含租户维度（防跨租户命中泄露数据）
+原理：JA-155 缓存键的多租户补充：语义缓存（JA-151）的键必须含租户（相似问题不同租户答案可能不同且隐私隔离），与 RD-067 key 规范联动
+用法：缓存租户隔离
+锚点：实战共识
+
+</details>
+
+### 网关 · 标准化（审计）
+
+<details><summary>看背面</summary>
+
+网关审计事件标准化输出：结构化审计事件（ who/when/what/cost/result）对接 SIEM/审计平台
+原理：JA-322 审计的标准化面：事件 schema 固定（下游免解析适配），与安全日志（JA-520）联动
+用法：审计标准化
+锚点：实战共识
+
+</details>
+
+### 缓存 · 误答监控（语义）
+
+<details><summary>看背面</summary>
+
+语义缓存误答监控：抽样命中缓存的回复与重新生成对比（一致性抽检），误答率超阈收紧阈值
+原理：语义缓存的风险面（JA-050 相似≠等价）：误答率是核心健康指标，抽检自动化（JA-264 成本可控）
+用法：语义缓存质量
+锚点：实战共识
+
+</details>
+
+### 缓存 · 传播（失效）
+
+<details><summary>看背面</summary>
+
+语义缓存失效传播：知识库更新（JA-668）时清受影响域的语义缓存（旧答案残留=脏），按域标签清
+原理：缓存与知识一致性（JA-456 的语义缓存版）：全清简单但昂贵，按域标签精准清，与失效传播思想联动
+用法：失效传播
+锚点：实战共识
+
+</details>
+
+### 缓存 · 嵌入（成本）
+
+<details><summary>看背面</summary>
+
+语义缓存自身的嵌入成本：查询向量化是缓存检查的前置成本（高频查询向量化开销可观），嵌入结果缓存（JA-578）配套
+原理：语义缓存不是零成本（JA-578 嵌入缓存的联动面），净收益=省的调用-嵌入成本，与成本核算（JA-290）联动
+用法：缓存净收益
+锚点：实战共识
+
+</details>
+
+### 缓存 · 分级（阈值）
+
+<details><summary>看背面</summary>
+
+语义缓存阈值分级：高阈值（严格相似，用于敏感场景）与低阈值（宽松，用于闲聊）按场景分池
+原理：JA-050 阈值权衡的场景化：一个阈值服务所有场景必然错配，分级池配置，与场景分级（JA-319）联动
+用法：阈值分级
+锚点：实战共识
+
+</details>
+
+### 嵌入 · 横向（服务化）
+
+<details><summary>看背面</summary>
+
+嵌入服务化：embed 独立服务横向扩展（嵌入是 CPU/GPU 密集计算，与 chat 分离部署）
+原理：嵌入与 chat 的部署分离（JA-075 配置分离的部署面），批量入库（JA-100）打满嵌入服务不影响 chat，与舱壁（DF-027）联动
+用法：嵌入部署架构
+锚点：实战共识
+
+</details>
+
+### 向量 · 容量（运维）
+
+<details><summary>看背面</summary>
+
+向量库容量监控：内存使用/分片均衡/查询延迟 P99 三指标，容量预警（JA-086 内存估算联动）
+原理：向量库是核心依赖（JA-621 备份对象），容量与健康监控（JA-694 与 MY-082 同思想），预警先于故障
+用法：向量库运维
+锚点：实战共识
+
+</details>
+
+### 向量 · 读写分离（扩展）
+
+<details><summary>看背面</summary>
+
+向量库读写分离：写入（入库管道）与查询（在线检索）分离部署，批量入库不打垮在线检索
+原理：JA-100 批量入库的资源隔离（舱壁思想的存储版），pgvector 读副本/Milvus 分组，与读写分离知识联动
+用法：读写分离
+锚点：实战共识
+
+</details>
+
+### 向量 · 租户（分片）
+
+<details><summary>看背面</summary>
+
+向量库按租户分片：大租户独立 collection/分片，小租户共享，与 JA-249 隔离选型的分片实现面
+原理：分片是隔离的存储实现（JA-249 选型的落地），collection 级隔离（pgvector schema/Milvus collection），与分片治理联动
+用法：租户分片实现
+锚点：实战共识
+
+</details>
+
+### RAG · 版本（答案）
+
+<details><summary>看背面</summary>
+
+RAG 答案附知识版本：回答标注"基于知识库 vX（更新时间）"，答案可追溯知识状态
+原理：JA-490 快照的用户面：答案与知识版本绑定（可解释"为什么这么答"），审计与争议处理有据
+用法：答案可追溯
+锚点：实战共识
+
+</details>
+
+### RAG · 批量（评估）
+
+<details><summary>看背面</summary>
+
+RAG 离线批量问答：评估流水线（golden set 批量跑全链路）与数据修复后全量回归（JA-361 的流水线化）
+原理：评估从手工单条到批量流水线（并行跑+结果聚合+分域报告），数据修复（JA-492）后的回归自动化，与 CI 集成（JA-665）联动
+用法：评估流水线
+锚点：实战共识
+
+</details>
+
+### RAG · 预算（重排）
+
+<details><summary>看背面</summary>
+
+rerank 调用预算：重排模型的调用量（每次检索 topN 候选）单独计量与配额，rerank 是隐藏成本项
+原理：JA-102 重排的成本面：重排模型按候选数计费，高频检索场景成本可观，预算与配额管理（JA-461）联动
+用法：重排成本
+锚点：实战共识
+
+</details>
+
+### RAG · 检索+工具（组合）
+
+<details><summary>看背面</summary>
+
+RAG 与工具混合回答：检索拿"文档知识"+工具拿"实时数据"（库存/价格）联合生成，路由决定用哪个或都用
+原理：RAG（静态知识）与工具（动态数据）的分工（JA-700 组合范式），Agent 框架天然支持（JA-053），按问题类型路由
+用法：RAG+工具组合
+锚点：实战共识
+
+</details>
+
+### 评测 · 归因（漂移）
+
+<details><summary>看背面</summary>
+
+评估漂移三维归因：分数变化拆解为模型漂移（供应商更新）/数据漂移（语料变化）/配置漂移（prompt 改动）三个控制变量实验
+原理：JA-347/392 漂移的归因方法：控制变量重跑（JA-572 方法论），三维归因定位真因，与实验纪律联动
+用法：漂移归因
+锚点：实战共识
+
+</details>
+
+### 评测 · 分层（采样）
+
+<details><summary>看背面</summary>
+
+评估抽样策略随错误率自适应：错误率高时全量细查，错误率低时抽样维护，资源按风险分配
+原理：JA-204 抽样的自适应版：固定比例不经济（稳定期浪费/风险期不足），自适应比例，与风险驱动思想联动
+用法：自适应抽样
+锚点：实战共识
+
+</details>
+
+### 评测 · 成本维（AB）
+
+<details><summary>看背面</summary>
+
+A/B 实验的成本维度：两版本 token 成本对比进实验报告（质量赢了但成本翻倍要权衡）
+原理：实验不只看质量（JA-271 的成本维），成本差异是决策维度（JA-403 帕累托），与预算治理（JA-461）联动
+用法：实验成本维度
+锚点：实战共识
+
+</details>
+
+### 评测 · 采纳（指标）
+
+<details><summary>看背面</summary>
+
+采纳率与满意度的差异：采纳（直接用）≠满意（体验好但没用上），两指标背离时分别归因
+原理：JA-289 指标的语义辨析：采纳是行为、满意是态度，背离说明"好但不适用"或"有用但难用"，指标语义辨析能力
+用法：指标语义
+锚点：实战共识
+
+</details>
+
+### 工程 · 膨胀（观测）
+
+<details><summary>看背面</summary>
+
+prompt 长度膨胀监控：prompt 平均长度趋势（需求堆积让 prompt 越来越长），长度警戒线与瘦身触发
+原理：JA-062 瘦身的触发机制：长度趋势是"prompt 腐化"信号（每加一条规则），定期瘦身（JA-163 度量闭环），与腐化治理联动
+用法：prompt 腐化治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 走查（团队）
+
+<details><summary>看背面</summary>
+
+每周质量走查会：抽样本周 badcase 集体评审（根因+修法+评估集回流），质量文化制度化
+原理：JA-518 分享的专项化：badcase 走查让全员对齐质量标准（JA-179 回流的会议化），与质量文化联动
+用法：质量文化机制
+锚点：实战共识
+
+</details>
+
+### 数据 · 供给（契约）
+
+<details><summary>看背面</summary>
+
+知识库供给方 SLA：业务方承诺语料质量/更新时效/格式规范（数据契约），违反契约的语料拒绝入库
+原理：JA-707 数据契约：上游对下游的数据质量承诺（DF 数据契约思想），质量门（JA-475）+契约双保险
+用法：数据契约
+锚点：实战共识
+
+</details>
+
+### RAG · 零结果（健康）
+
+<details><summary>看背面</summary>
+
+检索零结果率监控：查询无任何命中的比例（超阈告警），零结果=知识缺口或检索故障
+原理：检索健康度核心指标（JA-496 缺口发现的运行时版），零结果突增=知识库故障或新需求，与告警体系联动
+用法：零结果监控
+锚点：实战共识
+
+</details>
+
+### RAG · 零结果（归因）
+
+<details><summary>看背面</summary>
+
+零结果率根因四分：分词差异/术语缺口（知识真没有）/权限过滤（被权限挡了）/检索故障，四分归因决定行动
+原理：JA-708 的归因面：四类根因四种行动（扩词表/补语料/查权限/修检索），与 badcase 归因（JA-365）同构
+用法：零结果归因
+锚点：实战共识
+
+</details>
+
+### RAG · 改写透明（产品）
+
+<details><summary>看背面</summary>
+
+查询改写透明化：改写后的查询展示给用户（"已将您的查询理解为..."），用户可纠正（纠正=高质量反馈 JA-576）
+原理：JA-082 查询改写的产品面：透明化建立信任+获取纠偏信号，纠正是用户参与检索质量的建设，与可编辑反馈（JA-576）同构
+用法：改写透明化
+锚点：实战共识
+
+</details>
+
+### RAG · 多轮（评测）
+
+<details><summary>看背面</summary>
+
+多轮 RAG 指代消解评测：评估集含多轮对话（"它怎么退款"指代前文订单），评测改写+检索的端到端正确率
+原理：多轮 RAG 的专项评测（JA-082 QueryTransformer 的验证），单轮评测掩盖多轮短板，评测集覆盖对话形态
+用法：多轮评测
+锚点：实战共识
+
+</details>
+
+### RAG · 多语言（评测）
+
+<details><summary>看背面</summary>
+
+多语言检索评测集：跨语言查询（中文问英文文档）与多语言文档的检索评测，验证跨语言召回（JA-281）
+原理：多语言检索的评测覆盖（JA-216/281 联动），跨语言能力实测而非宣传，评测集按语言对组织
+用法：多语言评测
+锚点：实战共识
+
+</details>
+
+### RAG · 证据（评测）
+
+<details><summary>看背面</summary>
+
+长文档 QA 证据抽取评测：期望答案+期望证据片段（evidence），评测"答案对+证据对"双命中
+原理：证据级评测（比答案级更严，JA-361 golden 的细粒度版），防"答案对但证据错"的侥幸正确，与 faithfulness（JA-363）互补
+用法：证据级评测
+锚点：实战共识
+
+</details>
+
+### RAG · 案例库（知识）
+
+<details><summary>看背面</summary>
+
+RAG 案例库沉淀：检索优化案例（改切分/换模型/调路由的前后对比）入库可查，优化经验复用
+原理：优化经验资产化（JA-527 案例库的 RAG 专版），新场景优化先查案例库，与知识管理联动
+用法：RAG 案例资产
+锚点：实战共识
+
+</details>
+
+### 工程 · 域定稿（收官）
+
+<details><summary>看背面</summary>
+
+java-ai 域 715 条收官：域地图定稿（框架双栈/MCP/RAG/Agent 基础/多模态/行业/治理/质量八分支），交接 agent-dev 域（Agent 设计模式/编排/评测/安全专域，JA-660 分工）
+原理：域完成的定义：地图分支全覆盖+面试破 5000（JA-659 主线挂满矩阵行），收官清单核对后进入下一域，与批次管理（JA-600/480）联动
+用法：域收官管理
+锚点：实战方法论
+
+</details>
+
+### 工程 · Saga 借鉴（架构）
+
+<details><summary>看背面</summary>
+
+Agent 多步任务的 Saga 借鉴：每步可回滚设计（工具操作前记录可逆状态），失败沿补偿链逆放
+原理：Agent 步骤与 Saga 事务同构（JA-505 补偿的架构化），可逆设计让失败恢复优雅，与分布式事务知识联动
+用法：可逆架构
+锚点：实战共识
+
+</details>
+
+### 工程 · 成本偏差（观测）
+
+<details><summary>看背面</summary>
+
+成本观测的偏差检测：单次成本突增（prompt 膨胀/模型变更）自动告警，成本异常当故障处理
+原理：JA-462 成本观测的告警面：成本异常是故障（JA-633 案例），偏差检测自动化（基线对比），与告警体系（JA-526）联动
+用法：成本偏差告警
+锚点：实战共识
+
+</details>
+
+### 工程 · 探针（质量）
+
+<details><summary>看背面</summary>
+
+线上质量探针多样化：真实流量抽样自动评（faithfulness/引用率），与固定评估集互补（线上分布 vs 离线分布差异）
+原理：固定评估集的盲区（分布漂移 JA-496），线上探针抓"评估集外"的质量问题，与端到端拨测（JA-464）联动
+用法：线上质量探针
+锚点：实战共识
+
+</details>
+
+### 工程 · 双向（数据）
+
+<details><summary>看背面</summary>
+
+知识库与业务库双向一致性：知识库内容源自业务库（同步），业务状态变更（下架商品）同步失效知识（JA-690 缓存传播）
+原理：知识与业务的一致性（内容过期=业务状态过期），双向同步（业务→知识、知识→缓存），与数据一致性思想联动
+用法：双向一致性
+锚点：实战共识
+
+</details>
+
+### 工程 · 对抗（测试）
+
+<details><summary>看背面</summary>
+
+对抗评测自动化：红队样本（JA-465）自动批量跑防线（注入/越狱/越权），防线回归自动化
+原理：JA-654 红队节奏的自动化：每次防线变更自动跑对抗样本，安全回归与功能回归同级（JA-156），与安全自动化联动
+用法：对抗自动化
+锚点：实战共识
+
+</details>
+
+### 工程 · 清单（治理）
+
+<details><summary>看背面</summary>
+
+AI 依赖清单管理：所有 LLM/嵌入/重排依赖登记（供应商/模型/版本/用途/负责人），依赖盲区清零
+原理：AI 依赖像 microservice 依赖一样治理（JA-409 数据流向的依赖面），清单驱动升级与应急（JA-391），与依赖治理联动
+用法：依赖清单治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 路由表（设计）
+
+<details><summary>看背面</summary>
+
+能力路由表设计：问题类型→所需能力（检索/工具/推理强度）→对应模型配置，路由表可测试可评估
+原理：JA-232 路由的工程化：路由表是"决策资产"（可评估可回归），路由错误进评估集，与路由智能化（JA-460）联动
+用法：路由表资产
+锚点：实战共识
+
+</details>
+
+### 工程 · 插件（架构）
+
+<details><summary>看背面</summary>
+
+AI 能力插件化：RAG/工具/护栏/缓存做成可插拔模块（接口+注册机制），按业务组装
+原理：JA-135 分层架构的插件化：能力模块按需组合（简单业务关 RAG），插件接口稳定，与微内核思想联动
+用法：能力插件化
+锚点：实战共识
+
+</details>
+
+### 工程 · 评审（治理）
+
+<details><summary>看背面</summary>
+
+AI 架构季度评审：依赖清单/成本曲线/质量趋势/组织能力四维季度评审，架构健康度体检
+原理：架构不是一次性设计（JA-419 演进的体检机制），季度评审产出演进决策，与技术评审（JA-524）联动
+用法：架构体检
+锚点：实战共识
+
+</details>
+
+### 工程 · 终题（面试）
+
+<details><summary>看背面</summary>
+
+Java AI 终极面试题应对："从零设计一个企业 AI 平台"——按 JA-376 中台四能力+JA-238 分层+JA-377 演进三阶段组织答案，带 JA-413 风险清单
+原理：终极综合题的答案骨架（全部域事实的组织化），P10 终局题（考察体系化），与场景题模板（JA-651）联动
+用法：终局题框架
+锚点：实战方法论
+
+</details>
+
+
+## Agent 开发（719 张）
+
+### 架构 · Agent（定义）
+
+<details><summary>看背面</summary>
+
+Agent 的定义：能感知任务、自主决策（规划/反思）、调用工具行动、迭代直到完成目标的系统，与单轮问答的本质区别是"循环与自主决策"
+原理：单轮问答一问一答结束，Agent 在循环中自主决定下一步（调工具/继续推理/结束），自主性是定义核心
+用法：Agent 定义的答题起点
+锚点：2025 共识
+
+</details>
+
+### 架构 · 组成（四件套）
+
+<details><summary>看背面</summary>
+
+Agent 四件套：LLM 大脑（决策）、工具（行动手脚）、记忆（上下文）、规划（任务分解）
+原理：四件齐备才是完整 Agent，缺工具是纯聊天、缺规划是被动响应，架构设计从四件盘点起步
+用法：四件套盘点法
+锚点：实战共识
+
+</details>
+
+### 模式 · ReAct（ReAct）
+
+<details><summary>看背面</summary>
+
+ReAct 模式：Reason（推理该做什么）→Act（调工具）→Observe（观察结果）循环，是 Agent 最基础的执行模式
+原理：推理与行动交替让模型"边做边想"，观察结果反馈下一轮推理，是最易实现与调试的 Agent 模式
+用法：Agent 执行模式起点
+锚点：2025 共识
+
+</details>
+
+### 循环 · 执行循环（骨架）
+
+<details><summary>看背面</summary>
+
+Agent 执行循环骨架：while（任务未完成 && 步数未超限 && 预算未耗尽）{ 调模型→执行工具→回填结果 }
+原理：三条件缺一不可：完成条件驱动终止、步数上限防死循环、预算防成本失控（JA-276/505 联动），手写 Agent 就是这个骨架
+用法：手写 Agent 的骨架
+锚点：实战共识
+
+</details>
+
+### 循环 · 终止条件（终止）
+
+<details><summary>看背面</summary>
+
+Agent 四类终止条件：任务完成（模型声明完成）、步数上限、预算耗尽、用户取消，终止后要有收尾动作
+原理：只设计"成功终止"不设计"失败终止"是事故源（JA-004 的展开），收尾动作（清理/汇报/落轨迹）是完整性的标志
+用法：终止条件设计
+锚点：实战共识
+
+</details>
+
+### 工具 · 结构化调用（协议）
+
+<details><summary>看背面</summary>
+
+工具调用协议：模型输出结构化调用意图（函数名+JSON 参数），而非自然语言描述让业务解析
+原理：结构化协议让参数解析可靠（JSON schema 约束），自然语言解析歧义大，这是 Agent 可工程化的基础
+用法：工具协议理解
+锚点：2025 共识
+
+</details>
+
+### 工具 · 结果回填（回填）
+
+<details><summary>看背面</summary>
+
+工具结果作为消息回填对话序列（工具角色消息），模型看到结果后继续推理
+原理：回填是循环的信息闭环（AD-003 的 Observe），结果格式化（JSON/摘要）影响下一轮推理质量
+用法：信息闭环机制
+锚点：2025 共识
+
+</details>
+
+### 工具 · 并行调用（并行）
+
+<details><summary>看背面</summary>
+
+一轮可并行调用多个独立工具（模型一次输出多个调用意图），依赖工具仍需串行
+原理：并行提升吞吐（JA-260），模型一次输出多调用是协议支持，依赖判断由模型声明或框架分析
+用法：工具并行设计
+锚点：2025 共识
+
+</details>
+
+### 提示 · 宪法（system）
+
+<details><summary>看背面</summary>
+
+Agent 的 system prompt 是"宪法"：角色/目标/工具使用规则/边界/输出规范全在此定义
+原理：system 优先级最高（AI-449），宪法质量决定 Agent 行为上限，宪法版本化管理（AI-064），宪法是 Agent 工程的第一资产
+用法：宪法设计纪律
+锚点：实战共识
+
+</details>
+
+### 规划 · 任务分解（分解）
+
+<details><summary>看背面</summary>
+
+复杂任务先分解：Agent 先产出子任务清单（计划），再逐项执行，分解质量决定上限
+原理：JA-057 规划先行的落地：分解让大任务可控（每步可验证），分解本身要用 LLM（模型拆解），拆解要验证（JA-624）
+用法：任务分解设计
+锚点：实战共识
+
+</details>
+
+### 规划 · 两种模式（对比）
+
+<details><summary>看背面</summary>
+
+plan-and-execute 与 ReAct 对比：前者先全量规划后执行（确定性强），后者边想边做（灵活），按任务可预测性选
+原理：可预测任务（步骤固定）用 plan-and-execute（可审计），探索性任务用 ReAct，与工作流（JA-368）三分
+用法：规划模式选型
+锚点：实战共识
+
+</details>
+
+### 模式 · reflection（反思）
+
+<details><summary>看背面</summary>
+
+反思模式：Agent 完成后自我批评（检查结果/找漏洞）再改进，质量敏感任务的第二循环
+原理：反思循环提升质量但成本翻倍（多轮 LLM 调用），质量敏感（对外交付物）开启、内部流程关闭，与自一致性（AI-446）权衡
+用法：反思模式设计
+锚点：实战共识
+
+</details>
+
+### 记忆 · 检索注入（长期）
+
+<details><summary>看背面</summary>
+
+长期记忆的读取：按当前任务检索相关历史（向量检索），注入上下文供决策参考
+原理：记忆不是全量塞（JA-673 重排），检索注入让 Agent"记得该记的"，记忆写回策略（JA-504）配套
+用法：长期记忆读取
+锚点：实战共识
+
+</details>
+
+### 上下文 · 消息序列（管理）
+
+<details><summary>看背面</summary>
+
+Agent 的消息序列管理：system+任务+历史轮次（含工具调用与结果）持续增长，窗口管理是 Agent 工程核心
+原理：消息序列是 Agent 的工作记忆（JA-014 观念延伸），窗口溢出=Agent 失忆，裁剪策略（摘要/裁旧）决定长任务能力
+用法：上下文管理核心
+锚点：实战共识
+
+</details>
+
+### 工具 · 质量（描述）
+
+<details><summary>看背面</summary>
+
+工具描述（description）质量决定调用准确率：写清功能/参数含义/何时用/何时不用
+原理：模型靠描述选工具（JA-108 核心），描述含糊的后果是误调用与漏调用，描述评审（JA-671）是工具上线门槛
+用法：工具描述纪律
+锚点：实战共识
+
+</details>
+
+### 工具 · 错误反馈（容错）
+
+<details><summary>看背面</summary>
+
+工具执行失败把错误信息回喂模型（而非终止），模型可修正参数重试
+原理：错误反馈让 Agent 自我修复（AI-043），错误信息要可读（模型能理解），终止式失败处理让 Agent 脆弱
+用法：工具容错设计
+锚点：实战共识
+
+</details>
+
+### 循环 · 双上限（防线）
+
+<details><summary>看背面</summary>
+
+Agent 双上限防线：步数上限（防循环）+token 预算（防成本），双触发任一即强制收尾
+原理：两个维度防两类失控（JA-276/500），强制收尾是优雅输出（非报错），防线参数按任务类型分档
+用法：双防线设计
+锚点：实战共识
+
+</details>
+
+### 架构 · 自主性（权衡）
+
+<details><summary>看背面</summary>
+
+自主性与确定性权衡：自主性高（灵活）但不可控，确定性高（可控可测）但不灵活，按任务错误代价定
+原理：错误代价高的任务（支付/删除）要确定性（工作流/强人审），代价低的（总结/草稿）给自主性，与 JA-368 选型联动
+用法：自主性权衡
+锚点：实战共识
+
+</details>
+
+### 分类 · 谱系（类型）
+
+<details><summary>看背面</summary>
+
+Agent 谱系：工具型（单工具调用助手）→规划型（多步任务）→多 Agent（协作）→自主型（长任务），复杂度与风险递增
+原理：谱系帮助选型（从谱系低端起步验证），跳级到自主型是常见失败，与 AI-049 分类知识联动
+用法：Agent 谱系认知
+锚点：实战共识
+
+</details>
+
+### 架构 · 不该用（反模式）
+
+<details><summary>看背面</summary>
+
+不该用 Agent 的场景：固定流程（工作流更可控）、强一致要求（分布式事务）、毫秒延迟（Agent 多轮慢）
+原理：Agent 不是万能（JA-018 权衡的反面清单），"能不用就不用"是 P10 判断（AI-049），误用 Agent 是架构债
+用法：反模式清单
+锚点：实战共识
+
+</details>
+
+### 架构 · 显式化（状态）
+
+<details><summary>看背面</summary>
+
+Agent 任务状态显式化：任务/阶段/上下文快照落库（JA-255），支持恢复/审计/取消
+原理：状态在代码变量里=不可恢复不可审计，显式化是长任务（JA-370 引擎）与多租户（隔离）的前提
+用法：状态显式化
+锚点：实战共识
+
+</details>
+
+### 上下文 · 工作记忆（定位）
+
+<details><summary>看背面</summary>
+
+上下文窗口是 Agent 的"工作记忆"（RAM），窗口外内容（长期记忆/历史）需要检索召回
+原理：RAM 与磁盘的类比帮助心智模型（JA-013 分层），窗口有限是所有裁剪策略的根源，与长上下文权衡（JA-509）联动
+用法：心智模型
+锚点：实战共识
+
+</details>
+
+### 上下文 · 策略（裁剪）
+
+<details><summary>看背面</summary>
+
+上下文裁剪策略族：工具结果裁剪（JA-256）、历史摘要（JA-340）、旧轮次丢弃、关键信息锚定，策略组合使用
+原理：单一策略不覆盖所有场景（长任务需要组合），裁剪有信息损失风险需评估（JA-509 权衡），裁剪策略可配置
+用法：裁剪策略族
+锚点：实战共识
+
+</details>
+
+### 成本 · 重发（构成）
+
+<details><summary>看背面</summary>
+
+Agent 的 token 成本构成：每轮都重发全量上下文（历史+工具结果），单步成本随轮次线性增长
+原理：理解成本模型才能理解优化方向（裁剪/摘要都是降重发），与成本治理（AI-062）联动
+用法：成本模型理解
+锚点：实战共识
+
+</details>
+
+### 成本 · 累积（陷阱）
+
+<details><summary>看背面</summary>
+
+成本陷阱：长任务上下文累积导致后期单步成本是初期数倍（线性增长叠加），总成本近平方级
+原理：JA-024 的推论：20 步任务后期单步成本可达 5 倍，总成本估算要用累积模型（JA-401 模拟器），裁剪是平方级救命
+用法：成本累积陷阱
+锚点：实战共识
+
+</details>
+
+### 多Agent · 并行（并发）
+
+<details><summary>看背面</summary>
+
+多 Agent 并行执行：独立子任务分发给多个 Agent 同时跑（JA-260 工具并行的 Agent 级），结果聚合
+原理：并行缩短墙钟时间（总时长=最慢子任务），聚合阶段处理结果合并（JA-244 思想），并行前提是子任务独立
+用法：并行执行设计
+锚点：实战共识
+
+</details>
+
+### 多Agent · orchestrator（主从）
+
+<details><summary>看背面</summary>
+
+主从模式（orchestrator-worker）：主 Agent 拆解分发任务，子 Agent 执行并汇报，主 Agent 聚合产出
+原理：最常用的多 Agent 模式（主控清晰/子 Agent 简单），主 Agent 是单点（其决策质量决定全局），与舱壁隔离（JA-373）配套
+用法：主从模式设计
+锚点：实战共识
+
+</details>
+
+### 多Agent · pipeline（流水线）
+
+<details><summary>看背面</summary>
+
+流水线模式：Agent 链式传递（A 的输出是 B 的输入），适合固定阶段任务（草稿→审校→格式化）
+原理：流水线确定性高于自由协作（每环职责明确），阶段间契约（输出 schema）是流水线质量关键，与 SP 流水线思想联动
+用法：流水线模式
+锚点：实战共识
+
+</details>
+
+### 多Agent · 辩论（辩论）
+
+<details><summary>看背面</summary>
+
+辩论模式：多个 Agent 对同一问题独立作答后相互批评（互查漏洞），最终裁决者合并，质量敏感任务提升准确率
+原理：独立视角+交叉批评降低单一模型偏见（与 AI-447 多模型投票同思想），成本×N，用于高风险决策而非日常
+用法：辩论模式
+锚点：实战共识
+
+</details>
+
+### 多Agent · 工作区（共享）
+
+<details><summary>看背面</summary>
+
+共享工作区（scratchpad）模式：多 Agent 读写同一工作区（文档/状态），协作更自然但需并发控制
+原理：工作区是"共享内存"（JA-503 写冲突管控），版本与锁是工作区工程核心，与主从（传递式）对比：共享式耦合更高
+用法：工作区模式
+锚点：实战共识
+
+</details>
+
+### 多Agent · 分工（角色）
+
+<details><summary>看背面</summary>
+
+Agent 角色分工：planner（拆解）/executor（执行）/reviewer（审查）/reporter（汇报），角色=system prompt 差异
+原理：角色化让职责单一（每个 Agent 宪法简单清晰），角色间契约明确，与 SRP 设计思想联动
+用法：角色化设计
+锚点：实战共识
+
+</details>
+
+### 多Agent · 协议（通信）
+
+<details><summary>看背面</summary>
+
+Agent 间通信协议：消息结构（任务/结果/状态）标准化，跨 Agent 通信可追溯（JA-674 观测前提）
+原理：协议化让多 Agent 系统可维护（消息即契约），自然语言通信不可靠（结构化优先），与 MCP/A2A 协议（JA-567）趋势联动
+用法：通信协议设计
+锚点：实战共识
+
+</details>
+
+### 多Agent · 黑板（模式）
+
+<details><summary>看背面</summary>
+
+黑板模式：多 Agent 读写共享问题空间（黑板），任意 Agent 贡献部分解，适合开放问题
+原理：黑板是共享工作区（AD-030）的开放式变体（无预设流程），自由度高但收敛难（需要裁决机制），与主从对比选型
+用法：黑板模式认知
+锚点：实战共识
+
+</details>
+
+### 框架 · 自建（选型）
+
+<details><summary>看背面</summary>
+
+Agent 框架选型：LangGraph 类图编排（复杂状态机）/框架内置循环（简单 Agent）/自研骨架（完全控制），按复杂度与可控性选
+原理：三档选型（JA-049 对比深化），简单场景自研骨架（100 行，JA-049）最可控，框架是脚手架不是壁垒（AI-049），与团队栈联动
+用法：框架选型框架
+锚点：实战共识
+
+</details>
+
+### 编排 · 状态机（图）
+
+<details><summary>看背面</summary>
+
+图状态机编排：任务为节点、转移为边、条件路由（LLM 决策边走向），显式图让流程可审计
+原理：图编排把"自主性"约束在图内（可控可测），与自由 ReAct 对比：图是"有围栏的自主"，与工作流引擎（JA-370）权衡
+用法：图编排理解
+锚点：实战共识
+
+</details>
+
+### 编排 · LangGraph4j（Java）
+
+<details><summary>看背面</summary>
+
+LangGraph4j（JA-369）核心概念：StateGraph 状态图、节点处理器、条件边路由、编译后执行，把 LangGraph 模式带进 Java
+原理：Java 生态的图编排选项（社区项目），与自研骨架权衡（成熟度 vs 控制力），概念与 Python LangGraph 同源可迁移
+用法：Java 图编排认知
+锚点：2025
+
+</details>
+
+### 可靠性 · checkpoint（恢复）
+
+<details><summary>看背面</summary>
+
+Agent checkpoint：每步后持久化状态（消息序列+任务状态），失败从最近 checkpoint 恢复（JA-021/505 落地）
+原理：长任务不 checkpoint=从头再来（成本浪费），checkpoint 频率与粒度权衡（每步 vs 阶段），与状态显式化（AD-021）配套
+用法：checkpoint 设计
+锚点：实战共识
+
+</details>
+
+### 可靠性 · 幂等（前提）
+
+<details><summary>看背面</summary>
+
+checkpoint 恢复的前提是工具幂等：从 checkpoint 重放会重复执行工具，幂等（JA-218）让重放安全
+原理：恢复正确性与工具幂等的强关联（JA-505 补偿的根），非幂等工具（发邮件）需要"执行前登记"模式
+用法：恢复正确性
+锚点：实战共识
+
+</details>
+
+### 测试 · 剧本（mock）
+
+<details><summary>看背面</summary>
+
+Agent 测试用工具 mock 剧本：按测试场景定义工具返回序列（成功/失败/超时），断言轨迹与结果
+原理：JA-212 的实现面：剧本让测试确定可重复，轨迹断言（调用了什么/顺序）比只看结果强，与测试金字塔（JA-481）联动
+用法：剧本化测试
+锚点：实战共识
+
+</details>
+
+### 观测 · 记录（轨迹）
+
+<details><summary>看背面</summary>
+
+Agent 轨迹记录：每步（模型输入输出/工具调用/耗时/token）持久化，轨迹是调试/评测/审计的共同底座
+原理：轨迹三用（JA-219/042/678），轨迹缺失=Agent 黑盒，轨迹格式标准化（JSON 结构）便于工具分析
+用法：轨迹基建
+锚点：实战共识
+
+</details>
+
+### 观测 · 面板（三件）
+
+<details><summary>看背面</summary>
+
+Agent 可观测三件：轨迹浏览器（步级回放）、token 成本面板（步均/任务均）、工具健康面板（JA-468）
+原理：三件构成 Agent 运维最小集（缺一排障盲区），与中台观测（JA-376）集成，观测成本与价值评估
+用法：观测三件套
+锚点：实战共识
+
+</details>
+
+### 安全 · 白名单（边界）
+
+<details><summary>看背面</summary>
+
+Agent 安全边界三件：工具白名单（JA-152）、执行权限校验（JA-235）、工具沙箱（JA-076），三件套缺一不可
+原理：Agent 能执行真实操作（副作用的根源），三件套是"能做什么"的硬约束（提示词防线是软约束），与安全纵深（DF-074）联动
+用法：安全三件套
+锚点：实战共识
+
+</details>
+
+### 评测 · 指标（体系）
+
+<details><summary>看背面</summary>
+
+Agent 评测指标体系：任务成功率（端到端）+轨迹效率（步数/token 成本）+工具正确率+边界行为（拒绝能力）
+原理：JA-375 的完整化：只看成功率会错过低效 Agent（步数爆炸），四维画像定位改进方向，与评测即代码（JA-665）联动
+用法：评测指标体系
+锚点：实战共识
+
+</details>
+
+### 失败 · 清单（模式）
+
+<details><summary>看背面</summary>
+
+Agent 失败模式清单：死循环（步数耗尽）、工具幻觉（调用不存在工具）、参数幻觉、上下文溢出（JA-043）、串号（JA-097）、成本失控（JA-633）
+原理：清单化的价值：防线按失败模式配（AD-017/015/023/097），每类有检测与预防，与失败模式矩阵（JA-239）联动
+用法：失败模式清单
+锚点：实战共识
+
+</details>
+
+### 能力 · 不作为（放弃）
+
+<details><summary>看背面</summary>
+
+Agent 的"放弃/求助"能力：模型可声明无法完成或需要人工，强撑完成任务是幻觉重灾区
+原理：JA-672 的机制化：宪法中定义放弃条件与求助通道，放弃是正确行为（不是失败），与拒答（JA-367）同思想
+用法：放弃能力设计
+锚点：实战共识
+
+</details>
+
+### 交互 · 中间确认（确认）
+
+<details><summary>看背面</summary>
+
+Agent 与用户的中间确认：关键动作（删除/支付）执行前请求用户确认（JA-259 人审的交互面），确认 UX 与超时策略
+原理：自主性与确认的平衡：全自动体验 vs 安全（JA-018），确认点设计（哪些动作要确认）是产品决策，与 AI-068 联动
+用法：确认交互设计
+锚点：实战共识
+
+</details>
+
+### Agent · 结构化（输出）
+
+<details><summary>看背面</summary>
+
+Agent 输出结构化：最终产出按 schema（结论/证据/步骤/置信度），程序可消费（JA-374 细化），输出质量纳入评测
+原理：结构化输出让 Agent 从"演示"变"生产组件"（下游可集成），schema 是 Agent 的输出契约，与评测（JA-375）联动
+用法：输出契约设计
+锚点：实战共识
+
+</details>
+
+### Agent · ROI（场景）
+
+<details><summary>看背面</summary>
+
+Agent 场景 ROI 判断：任务频率×人工成本×自动化可行度，三高场景优先（工单/报告/巡检），与内部工具先行（JA-441）联动
+原理：Agent 立项的决策框架（JA-027 ROI 公式化），频率低或可行性差的任务不值得，与 AI-027 联动
+用法：场景决策框架
+锚点：实战共识
+
+</details>
+
+### 手写 · 百行（骨架）
+
+<details><summary>看背面</summary>
+
+简单 Agent 手写可在百行内完成：循环+模型调用+工具分发+终止判断四块，理解原理后手写是 P9-P10 面试题
+原理：手写证明理解本质（框架只是封装），面试考察"不用框架能否写 Agent"，与手写笔试（本域压轴交付）联动
+用法：手写认知
+锚点：实战共识
+
+</details>
+
+### 手写 · 骨架（代码）
+
+<details><summary>看背面</summary>
+
+手写 Agent 循环代码骨架：初始化消息→循环{调模型拿响应→解析工具调用→执行→结果作 tool 消息回填→判断终止}→返回
+原理：骨架对应生产实现（AD-004），手写版用简化模型调用（接口注入便于测试），与 ExamSolutions 风格一致
+用法：手写骨架要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 注册（工具）
+
+<details><summary>看背面</summary>
+
+手写 Agent 的工具注册：Map<名称, 工具函数>注册表+描述列表（给模型），执行时按名称查表调用
+原理：注册表模式是所有框架的工具管理本质（SP 框架的 ToolCallback 也如此），理解注册表=理解框架
+用法：注册机制理解
+锚点：实战共识
+
+</details>
+
+### 手写 · 设计（schema）
+
+<details><summary>看背面</summary>
+
+工具 schema 设计：参数名语义化/类型明确/必填标注/描述清晰（JA-015），schema 是模型填参的"表单"
+原理："表单"类比帮助 schema 设计（模型按表单填参），schema 差=填参错（JA-015），与 JSON Schema 知识联动
+用法：schema 设计纪律
+锚点：实战共识
+
+</details>
+
+### 手写 · 隔离（执行）
+
+<details><summary>看背面</summary>
+
+工具执行的隔离：超时（单独超时非整体 JA-275）/资源限制/异常捕获（失败转错误消息回喂 JA-016）
+原理：隔离让单工具失败不拖垮 Agent（舱壁 JA-103 工具级），隔离是工具执行包装器的职责
+用法：执行隔离设计
+锚点：实战共识
+
+</details>
+
+### 手写 · 脱敏（日志）
+
+<details><summary>看背面</summary>
+
+Agent 日志脱敏：轨迹（AD-040）含用户数据，落库前按字段脱敏（JA-044/622 的手写面），脱敏规则声明式
+原理：轨迹是敏感数据聚集地（全流程数据都经过），脱敏与可观测（JA-041）平衡，声明式规则让脱敏可管理
+用法：轨迹脱敏
+锚点：实战共识
+
+</details>
+
+### 手写 · 策略（重试）
+
+<details><summary>看背面</summary>
+
+Agent 内重试策略分层：模型调用重试（限流退避 AI-066）与工具重试（幂等前提 JA-038）分开配置
+原理：两类重试语义不同（模型重试无副作用、工具重试有），混配导致重复副作用，与重试知识（DF-020）联动
+用法：重试分层
+锚点：实战共识
+
+</details>
+
+### 架构 · 工作流（集成）
+
+<details><summary>看背面</summary>
+
+Agent 与工作流引擎集成：工作流管确定性步骤、Agent 节点处理智能步骤（混合编排），各取所长
+原理：JA-368 三模式的最优组合：引擎提供持久化/重试/可视化的成熟件，Agent 提供智能，与 LangGraph4j（JA-369）对照
+用法：混合编排
+锚点：实战共识
+
+</details>
+
+### 手写 · 键（幂等）
+
+<details><summary>看背面</summary>
+
+Agent 任务幂等键：任务提交携带幂等键（用户+任务类型+业务 id），重复提交返回同任务（防重复执行副作用）
+原理：任务级幂等（JA-218 的任务面），Agent 的副作用累积（多工具）让幂等更重要，与 Idempotency-Key（DF-104）联动
+用法：任务幂等
+锚点：实战共识
+
+</details>
+
+### 手写 · 锁（并发）
+
+<details><summary>看背面</summary>
+
+Agent 并发安全：同任务并发触发（重复提交/重试并发）需互斥（分布式锁或状态机拒绝），共享工作区（AD-030）需读写锁
+原理：并发是 Agent 生产化必考点（JA-503 写冲突），锁粒度（任务级/工作区级）权衡，与并发工程知识联动
+用法：并发控制
+锚点：实战共识
+
+</details>
+
+### 工程 · 绑定（版本）
+
+<details><summary>看背面</summary>
+
+Agent 版本三元组：宪法（system prompt）+工具集+模型配置绑定打版本，评测基线按版本（AI-064 的 Agent 版）
+原理：Agent 行为由三元组决定（任一变更行为变），版本化让"行为可复现可回滚"，与语义化版本（JA-402）联动
+用法：Agent 版本化
+锚点：实战共识
+
+</details>
+
+### 工程 · 域地图（主线）
+
+<details><summary>看背面</summary>
+
+agent-dev 域知识地图：架构与循环（本批）→上下文与记忆→多 Agent 协作→工具工程→评测与安全→手写笔试（压轴），域主线与 java-ai 域衔接（JA-660 分工）
+原理：地图是后续批次的路标（JA-360 方法论），每批填充一分支，复习按地图检索，与域收官（JA-715）联动
+用法：域地图起点
+锚点：实战方法论
+
+</details>
+
+### 上下文 · 顺序（组装）
+
+<details><summary>看背面</summary>
+
+上下文组装顺序约定：system（宪法）→任务描述→长期记忆→历史轮次→工具结果→当前输入，顺序影响注意力分布
+原理：首尾注意力强（JA-510），宪法置顶、当前输入置尾是布局纪律（JA-619 排序同理），顺序错误导致"忘记宪法"
+用法：组装顺序纪律
+锚点：实战共识
+
+</details>
+
+### 上下文 · 四角色（角色）
+
+<details><summary>看背面</summary>
+
+消息四角色：system（宪法）/user（用户与任务）/assistant（模型输出含工具调用）/tool（工具结果），角色是协议结构
+原理：角色让模型理解对话结构（谁说的/工具结果），角色混用是解析错误根源，与消息抽象（JA-076/088）对等
+用法：消息角色协议
+锚点：实战共识
+
+</details>
+
+### 上下文 · tool_call_id（关联）
+
+<details><summary>看背面</summary>
+
+工具结果消息通过 tool_call_id 与调用请求关联（一次调用对应一条结果），多工具并行时靠 id 匹配
+原理：并行调用（AD-008）的结果必须按 id 回填（错位=结果张冠李戴），id 关联是并行正确性的协议保证
+用法：并行回填协议
+锚点：实战共识
+
+</details>
+
+### 上下文 · 触发时机（裁剪）
+
+<details><summary>看背面</summary>
+
+历史压缩的触发时机：上下文接近窗口阈值（如 80%）触发摘要，而非每次都摘要
+原理：每次摘要浪费 token 且延迟（未到阈值无必要），阈值触发平衡成本与安全，阈值按窗口比例配置
+用法：压缩触发设计
+锚点：实战共识
+
+</details>
+
+### 上下文 · 摘要模型（压缩）
+
+<details><summary>看背面</summary>
+
+历史摘要用小模型执行（摘要任务不需要旗舰模型），成本降一个量级
+原理：摘要质量要求低于主任务模型（摘要是中间产物），小模型摘要+主模型决策的分工，与分级路由（JA-232）同构
+用法：摘要模型选型
+锚点：实战共识
+
+</details>
+
+### 上下文 · 目标置顶（锚定）
+
+<details><summary>看背面</summary>
+
+任务目标在长会话中重复锚定：关键目标 periodically 重申（防上下文膨胀后目标被"稀释"）
+原理：lost in the middle（JA-510）让早期目标被稀释，锚定是目标保持的主动手段，锚定文案要精简（不重复全文）
+用法：目标锚定技巧
+锚点：实战共识
+
+</details>
+
+### 上下文 · 估算（计量）
+
+<details><summary>看背面</summary>
+
+上下文窗口的 token 估算：本地 tokenizer（jtokkit AI-263）估算决定裁剪时机（调用前判定能否装下）
+原理：超窗提交报错浪费一次调用，本地估算前置判定，估算与供应商计数有偏差留余量
+用法：窗口计量
+锚点：实战共识
+
+</details>
+
+### 上下文 · 策略族（超窗）
+
+<details><summary>看背面</summary>
+
+超窗处理策略族：截断（丢最旧）/摘要（压缩历史）/拒绝（提示过复杂拆任务），按任务类型配置
+原理：JA-223 预算的执行族：策略选择影响任务成败（硬截断丢关键信息），拒绝策略让复杂任务显式失败（可拆），策略可配置
+用法：超窗策略族
+锚点：实战共识
+
+</details>
+
+### 上下文 · 字段（裁剪）
+
+<details><summary>看背面</summary>
+
+工具结果的结构化裁剪：JSON 结果按字段白名单筛选（只留模型需要的字段），而非全量回填
+原理：工具返回对象通常远大于模型所需（全量回填浪费 JA-256），字段白名单按工具声明，裁剪后语义完整
+用法：工具结果裁剪
+锚点：实战共识
+
+</details>
+
+### 记忆 · 四类（分类）
+
+<details><summary>看背面</summary>
+
+Agent 记忆四分类：工作记忆（当前上下文）/情景记忆（历史交互事件）/语义记忆（事实与偏好）/程序性记忆（学到的操作模式），分类指导存储选型
+原理：认知科学分类映射工程组件（窗口/事件库/向量库/模板），不同记忆读写模式不同，分类是记忆架构设计的第一步
+用法：记忆分类架构
+锚点：实战共识
+
+</details>
+
+### 记忆 · 用户（画像）
+
+<details><summary>看背面</summary>
+
+用户画像记忆：偏好（语言/详略/领域）持续积累，个性化响应（JA-579），画像更新要用户可见可改
+原理：画像提升体验但也构建用户档案（隐私 JA-198），用户可见可改是合规要求（数据主体权利），画像更新策略保守
+用法：画像记忆治理
+锚点：实战共识
+
+</details>
+
+### 记忆 · 跨会话（边界）
+
+<details><summary>看背面</summary>
+
+跨会话记忆共享的隐私边界：同用户跨会话可共享（画像），跨用户绝对禁止（串号红线 JA-097），共享范围显式设计
+原理：记忆共享范围是隐私红线（JA-097），设计期显式声明（哪些维度跨会话），与隔离测试（JA-208）联动
+用法：记忆共享边界
+锚点：实战共识
+
+</details>
+
+### 记忆 · 阈值（检索）
+
+<details><summary>看背面</summary>
+
+记忆检索的相关性阈值：低于阈值的记忆不注入（弱相关记忆是噪声），阈值影响"性格稳定"
+原理：弱相关记忆注入让回答跑偏（JA-495 阈值思想在记忆），阈值按记忆库规模调，记忆命中也是检索（JA-673 重排配套）
+用法：记忆检索阈值
+锚点：实战共识
+
+</details>
+
+### 记忆 · 矛盾（冲突）
+
+<details><summary>看背面</summary>
+
+记忆冲突处理：新旧记忆矛盾（用户改偏好）时新记忆优先+旧记忆归档，冲突检测靠写入时比对
+原理：记忆不管理冲突导致行为不一致（JA-463），写入时检测（同主题覆盖），用户改偏好是常见触发
+用法：记忆冲突治理
+锚点：实战共识
+
+</details>
+
+### 记忆 · 主体权利（合规）
+
+<details><summary>看背面</summary>
+
+用户对记忆的主体权利：查看自己的记忆/修改/删除（GDPR 数据主体权利），记忆面板是合规功能
+原理：记忆是用户个人数据（JA-198），主体权利是法定要求（非可选），记忆面板让"AI 记得你"可控透明
+用法：记忆主体权利
+锚点：实战共识
+
+</details>
+
+### 工具 · 分类（生态）
+
+<details><summary>看背面</summary>
+
+工具生态五大类：信息获取（搜索/API）、代码执行（沙箱）、文件操作（沙箱路径）、系统操作（写操作高危）、交易（支付类强确认），分类决定安全级别
+原理：工具安全级别按操作类型分级（JA-152 白名单的组织），写操作与交易类需强确认（JA-259），分类是工具治理的第一步
+用法：工具生态分类
+锚点：实战共识
+
+</details>
+
+### 工具 · 代码（沙箱）
+
+<details><summary>看背面</summary>
+
+代码执行工具沙箱：容器隔离（无网络/资源限额/限时），Agent 生成的代码不可信执行（AI-076 落地）
+原理：代码执行是能力最强风险最高的工具（任意代码=任意行为），沙箱三限（网络/资源/时间）缺一不可，逃逸测试纳入验收
+用法：代码沙箱纪律
+锚点：实战共识
+
+</details>
+
+### 工具 · 路径（沙箱）
+
+<details><summary>看背面</summary>
+
+文件操作工具的路径沙箱：白名单根目录+路径校验（防 ../ 逃逸），工作目录外拒绝
+原理：路径穿越（../）是文件工具经典攻击（与 Web 路径穿越同源），白名单根目录+规范化校验，与文件安全知识联动
+用法：文件工具沙箱
+锚点：实战共识
+
+</details>
+
+### 工具 · 出口（网络）
+
+<details><summary>看背面</summary>
+
+网络类工具的出口管控：白名单域名+出口 IP 隔离（JA-394），Agent 网络访问与企业出网策略统一
+原理：网络工具（HTTP 请求）可外泄数据或访问内网（SSRF 风险），白名单+出口隔离双防，与网络安全知识联动
+用法：网络工具管控
+锚点：实战共识
+
+</details>
+
+### 工具 · 强确认（交易）
+
+<details><summary>看背面</summary>
+
+交易类工具（支付/下单/退款）强确认：执行前人工确认（JA-259）+金额上限+幂等键（JA-218），三层防线
+原理：交易类操作的不可逆性要求最高安全级（JA-076 分类顶格），自动化测试环境禁用真实交易
+用法：交易工具防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 组合风险（组合）
+
+<details><summary>看背面</summary>
+
+工具组合风险：两个安全工具组合成危险操作（读内部文档+发外部邮件=数据外泄），组合面分析
+原理：单工具安全评估不够（组合出危险语义，JA-082 组合思维），权限矩阵按组合评估，与最小权限（JA-018）联动
+用法：组合安全分析
+锚点：实战共识
+
+</details>
+
+### 工具 · 可信（三方）
+
+<details><summary>看背面</summary>
+
+第三方工具（MCP 市场）接入的可信度评估：发布者信誉/权限声明/代码审计/权限最小化四步
+原理：第三方工具是供应链风险（与依赖供应链同构 JA-565），接入前评估流程化（与 MY-105 变更评审同构）
+用法：第三方工具治理
+锚点：实战共识
+
+</details>
+
+### Agent · 版本（工具）
+
+<details><summary>看背面</summary>
+
+工具版本升级对 Agent 行为影响：工具语义变化（参数/返回结构）改变 Agent 行为，工具版本纳入 Agent 版本三元组（AD-059）
+原理：工具是 Agent 行为的组成部分（JA-059 三元组），升级工具=潜在行为变更，工具升级走评估回归（JA-680 套件）
+用法：工具版本治理
+锚点：实战共识
+
+</details>
+
+### 工具 · 粒度（审计）
+
+<details><summary>看背面</summary>
+
+工具调用审计粒度：每次调用记录（调用方/工具/参数摘要/结果状态/耗时），按工具维度聚合出画像（JA-468）
+原理：审计粒度到"每次调用"（不是每天汇总），细粒度支撑排障与合规（JA-312 同构），聚合画像定位坏工具
+用法：审计粒度
+锚点：实战共识
+
+</details>
+
+### MCP · 同名（冲突）
+
+<details><summary>看背面</summary>
+
+多 MCP server 接入的工具名冲突：同名工具（两个 server 都有 search）需命名空间消歧（server 前缀）
+原理：多 server 是常态（JA-021 多连接），同名工具让模型选择混乱（歧义），命名空间是接入层职责
+用法：工具命名空间
+锚点：实战共识
+
+</details>
+
+### MCP · 空间（命名）
+
+<details><summary>看背面</summary>
+
+MCP 工具命名空间规范：server 名做前缀（github_create_issue），模型看到唯一名，消歧与溯源（哪个 server 的工具）双收益
+原理：命名空间让工具可溯源（JA-312 审计按 server），规范命名是接入层标准动作，与 AD-085 联动
+用法：命名空间规范
+锚点：实战共识
+
+</details>
+
+### MCP · 声明（权限）
+
+<details><summary>看背面</summary>
+
+MCP server 的权限声明：server 声明所需权限（文件/网络/交易），客户端按声明授权（JA-145 roots 的权限面）
+原理：声明式权限让接入审批有据（JA-082 评估的输入），声明与实际行为一致性要审计（超声明=风险），与最小权限联动
+用法：权限声明治理
+锚点：实战共识
+
+</details>
+
+### MCP · 发现（缓存）
+
+<details><summary>看背面</summary>
+
+MCP 工具发现的缓存策略：listTools 结果缓存（工具清单变更通知刷新 JA-094），免每次发现
+原理：发现调用有延迟（每次连接发现开销），缓存+通知刷新平衡实时与开销，缓存过期兜底 TTL
+用法：发现缓存策略
+锚点：实战共识
+
+</details>
+
+### MCP · MCP vs API（选型）
+
+<details><summary>看背面</summary>
+
+MCP 与直接 API 集成选型：MCP（生态复用/动态发现/标准化）vs 直接 API（定制深/无中间层），工具数量少且固定时直接 API 简单
+原理：选型按工具规模与生态需求（JA-090 对比的 Agent 侧），MCP 的价值在生态与动态性，单工具固定场景直接集成更简
+用法：MCP 选型
+锚点：实战共识
+
+</details>
+
+### 评测 · 设计（任务集）
+
+<details><summary>看背面</summary>
+
+Agent 任务集设计：从真实任务采样（JA-495 挖掘）+边界任务（JA-470 拒绝）+对抗任务（JA-734 工具诱导），三层任务集
+原理：任务集覆盖决定评测有效性（JA-091 深化），真实+边界+对抗三层缺一（边界测放弃能力），与评估分层（JA-366）联动
+用法：任务集三层设计
+锚点：实战共识
+
+</details>
+
+### 评测 · 判定（轨迹）
+
+<details><summary>看背面</summary>
+
+轨迹评测自动判定：规则判定（步数/禁用工具/超预算）+LLM 判定（步骤合理性），规则先行 LLM 补充
+原理：轨迹判定自动化（JA-375 执行件），规则判定确定性强零成本，LLM 判定补"合理性"这种软维度，与判分（JA-651）联动
+用法：轨迹判定设计
+锚点：实战共识
+
+</details>
+
+### 评测 · 回归（门禁）
+
+<details><summary>看背面</summary>
+
+Agent 回归门禁：评测套件（JA-680）分数低于基线阻断发布，与 prompt/工具变更触发（JA-415 矩阵）联动
+原理：Agent 变更（宪法/工具/模型）的回归保护（JA-525 准入延伸），门禁让 Agent 迭代可控，与评估即代码（JA-665）联动
+用法：Agent 门禁
+锚点：实战共识
+
+</details>
+
+### 调试 · 失败重放（重放）
+
+<details><summary>看背面</summary>
+
+Agent 失败重放调试：按轨迹（AD-040）重放失败任务（mock 工具按记录返回），本地复现线上失败
+原理：重放是 Agent 排障核心手段（JA-093 重试的调试面），轨迹完整才能重放（AD-040 依赖），重放环境与生产配置一致
+用法：重放调试
+锚点：实战共识
+
+</details>
+
+### Agent · 基线（评测）
+
+<details><summary>看背面</summary>
+
+Agent 行为基线：每个版本的评测分数存档对比（JA-592 质量账本的 Agent 版），升级/改宪法前后对比
+原理：行为基线让 Agent 演进有据（改宪法=行为变更要对比），基线对比防"改好这坏"，与版本三元组（AD-059）联动
+用法：行为基线
+锚点：实战共识
+
+</details>
+
+### 安全 · 执行器（注入）
+
+<details><summary>看背面</summary>
+
+工具是注入的执行器面：注入攻击诱导 Agent 调工具（JA-734 诱导样本），防线=输出侧检测（JA-458）+权限校验（JA-235）+最小授权（AD-500 思想）
+原理：注入在 Agent 的危害升级（工具执行=真实副作用，JA-394），三层防线缺一，与注入知识（JA-225）联动
+用法：注入执行器面
+锚点：实战共识
+
+</details>
+
+### 安全 · 副作用（半径）
+
+<details><summary>看背面</summary>
+
+Agent 副作用半径评估：上线前评估"Agent 最坏能造成什么"（最大权限组合下的破坏面），按半径设计防线
+原理：副作用半径是安全设计的度量（JA-082 组合风险的量化），半径大→防线强（人审/沙箱），半径评估写进架构评审（JA-524）
+用法：半径评估
+锚点：实战共识
+
+</details>
+
+### 合规 · 要求（审计）
+
+<details><summary>看背面</summary>
+
+Agent 审计合规要求：决策可追溯（谁授权/依据什么/执行了什么）+留存（JA-383 年限）+可解释（JA-506），监管审计三件
+原理：Agent 决策的合规性（自动化决策的监管要求，如金融/就业 JA-559），三件审计让"AI 做了什么"可回答，与审计知识联动
+用法：审计合规三件
+锚点：实战共识
+
+</details>
+
+### 安全 · SSO（身份）
+
+<details><summary>看背面</summary>
+
+Agent 与企业身份系统集成：Agent 以服务身份接入（JA-568），代表用户操作时用用户委托身份（on-behalf-of），两级身份模型
+原理：服务身份与用户委托身份分离（审计与权限都正确），委托身份让"Agent 以用户权限"操作有据，与 SSO/OAuth 知识联动
+用法：身份模型设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 任务级（配额）
+
+<details><summary>看背面</summary>
+
+Agent 任务级配额：单任务 token 预算（AD-500 池）+用户日预算+全局预算三级，超限优雅终止（汇报进度）
+原理：三级配额防失控（JA-461 三维的 Agent 面），超限终止要设计（JA-005 收尾），与成本熔断（JA-279）联动
+用法：任务配额体系
+锚点：实战共识
+
+</details>
+
+### 组织 · 团队（角色）
+
+<details><summary>看背面</summary>
+
+Agent 开发团队角色：Agent 工程师（循环/工具/编排）+评测工程师（任务集/判分）+安全（红线/红队）+领域专家（宪法与验收），四角色协作
+原理：JA-408 协作界面在 Agent 域的细化：领域专家写宪法（业务知识），评测保质量，与团队矩阵（JA-342）联动
+用法：团队角色设计
+锚点：实战共识
+
+</details>
+
+### 平台 · AgentSaaS（即服务）
+
+<details><summary>看背面</summary>
+
+Agent 即服务（内部平台）：任务模板/工具注册/评测/监控自助化，业务团队自助创建 Agent
+原理：JA-654 自助化的 Agent 版：平台化让长尾需求自助（JA-654 平台价值），模板（AD-060）+审核是质量门，与中台（JA-376）联动
+用法：Agent 平台化
+锚点：实战共识
+
+</details>
+
+### 平台 · 市场（模板）
+
+<details><summary>看背面</summary>
+
+Agent 模板市场：经过评测的 Agent 模板（任务/宪法/工具组合）共享复用，模板质量分级
+原理：模板复用的市场机制（JA-623 模板库的平台化），质量分级（评测分数背书），与组件复用治理联动
+用法：模板市场设计
+锚点：实战共识
+
+</details>
+
+### 调试 · 交互（步进）
+
+<details><summary>看背面</summary>
+
+Agent 交互式步进调试：逐步执行（每步暂停查看上下文/决策），可修改后继续（调试器语义）
+原理：Agent 调试的交互式形态（JA-093 重放的交互版），步进让"Agent 为什么这么走"可见，与 IDE 调试器思想同构
+用法：步进调试设计
+锚点：实战共识
+
+</details>
+
+### 测试 · 规划（dry-run）
+
+<details><summary>看背面</summary>
+
+Agent dry-run 模式：只产出计划不执行工具（规划预览），人工审计划后再真实执行（plan-approve-execute）
+原理：dry-run 是人审（JA-259/467）的低成本形态：审计划比审执行便宜，计划质量预判，与两阶段执行联动
+用法：dry-run 模式
+锚点：实战共识
+
+</details>
+
+### 工程 · 能力（开关）
+
+<details><summary>看背面</summary>
+
+Agent 能力运行时开关：单个工具/能力运行时禁用（故障隔离），开关粒度到工具级
+原理：工具级开关是降级的细粒度（JA-053 降级链的工具面），坏工具摘除不影响 Agent 整体，与特性开关（JA-205）联动
+用法：工具级开关
+锚点：实战共识
+
+</details>
+
+### 工程 · 分级（日志）
+
+<details><summary>看背面</summary>
+
+Agent 日志三级：轨迹日志（全量，结构化）、审计日志（合规，不可变存储）、调试日志（采样），三级分存储分权限
+原理：JA-521/198 留存的分级执行：三级用途不同（运维/合规/开发），混在一处是治理灾难，与日志分级知识联动
+用法：日志三级体系
+锚点：实战共识
+
+</details>
+
+### 工程 · 分级（超时）
+
+<details><summary>看背面</summary>
+
+Agent 三级超时：单工具超时（JA-275）/单轮模型超时/任务总超时，三级独立配置且任务总超时兜底
+原理：三级超时的错误处理不同（工具失败回喂/模型重试/任务收尾），混配导致挂死，与超时预算（DF-028）联动
+用法：超时体系设计
+锚点：实战共识
+
+</details>
+
+### 架构 · 削峰（队列）
+
+<details><summary>看背面</summary>
+
+Agent 任务队列削峰：任务异步排队（用户提交即返回任务 id），执行结果通知，长任务异步化
+原理：同步长任务占用连接（JA-535 连接容量），异步队列解耦提交与执行，与 MQ 削峰（MQ-043）联动
+用法：异步任务架构
+锚点：实战共识
+
+</details>
+
+### 人机 · HITL（工作台）
+
+<details><summary>看背面</summary>
+
+Human-in-the-loop 工作台：待审批任务列表/审批操作/审批历史（JA-259 的工具化），工作台让人审可运营
+原理：人审从"聊天里确认"升级到"工作台运营"（可分派/可统计/可 SLA），与审批流程系统思想同构
+用法：人审工作台
+锚点：实战共识
+
+</details>
+
+### 评测 · 影子（在线）
+
+<details><summary>看背面</summary>
+
+Agent 影子运行：新版本 Agent 对真实任务并行跑（影子，不执行副作用），对比轨迹与结果后放量
+原理：JA-234 影子双发在 Agent 的落地：副作用让影子必须有"只规划不执行"模式（AD-104 dry-run 结合），与灰度（JA-205）联动
+用法：影子运行设计
+锚点：实战共识
+
+</details>
+
+### MCP · 开发流程（server）
+
+<details><summary>看背面</summary>
+
+MCP server 开发流程（Java）：定义工具 handler（请求→结果）→注册到 McpServer →选择 transport（stdio/SSE）→打包供宿主拉起
+原理：流程四步与 JA-023 SDK 对应，每步有独立测试点（handler 单测/注册验证/transport 联调），是 MCP 工具开发的标准路径
+用法：开发流程标准
+锚点：实战共识
+
+</details>
+
+### MCP · 签名（handler）
+
+<details><summary>看背面</summary>
+
+MCP 工具 handler 签名：入参为反序列化后的请求对象（按 inputSchema），出参为 CallToolResult（content 列表）
+原理：handler 是"普通 Java 方法"（框架处理协议），出参 content 类型决定客户端消费方式（JA-093），签名清晰是可测试前提
+用法：handler 设计
+锚点：实战共识
+
+</details>
+
+### MCP · 本地直连（调试）
+
+<details><summary>看背面</summary>
+
+stdio MCP server 的本地调试：本地客户端直连子进程（echo 调试工具），免宿主环境干扰
+原理：MCP 开发的调试友好设计（本地可全链路调），调试客户端脚本化（协议级测试 AD-120 前置），stdio 天然本地可调
+用法：MCP 调试方法
+锚点：实战共识
+
+</details>
+
+### MCP · WebFlux（部署）
+
+<details><summary>看背面</summary>
+
+MCP SSE/WebFlux server 部署：标准 Spring Boot 应用部署（多实例+负载均衡），与 stdio 子进程形态运维完全不同
+原理：远程 MCP server 是常驻服务（HA/监控/发布 JA-313/314），stdio 是宿主管理（JA-095），两形态运维面不同要分清
+用法：MCP 部署形态
+锚点：实战共识
+
+</details>
+
+### MCP · 副作用声明（工具）
+
+<details><summary>看背面</summary>
+
+MCP 工具的副作用声明：工具描述中声明只读/可写/幂等性，客户端据此决定确认策略（JA-259 联动）
+原理：副作用声明让客户端"知情调用"（写工具需确认），声明进 description 或元数据，与工具安全分级（AD-076）联动
+用法：副作用声明
+锚点：实战共识
+
+</details>
+
+### MCP · 码设计（错误）
+
+<details><summary>看背面</summary>
+
+MCP 工具错误码设计：业务错误（可重试/不可重试）与协议错误分层，错误 message 写给模型读（可自我修复 JA-016）
+原理：错误码与错误文案双设计（码给程序、message 给模型），模型读得懂才能自修复，与工具容错（AD-016）联动
+用法：错误设计
+锚点：实战共识
+
+</details>
+
+### MCP · 鉴权实现（安全）
+
+<details><summary>看背面</summary>
+
+MCP 远程 server 鉴权实现：OAuth 资源服务器模式（JA-148 规范的落地），token 校验+scope 检查（工具级 scope）
+原理：远程 server 必须鉴权（公网暴露），工具级 scope 让授权精细化（JA-235 思想在 MCP 层），与 Spring Security 资源服务器配置同构
+用法：鉴权实现
+锚点：实战共识
+
+</details>
+
+### MCP · 工具级（限流）
+
+<details><summary>看背面</summary>
+
+MCP 工具级限流：server 对每工具限流（重工具独立阈值），限流响应为结构化错误（模型可理解等待）
+原理：工具资源消耗差异大（JA-018），工具级限流防单工具打垮 server，限流错误回喂模型重试（JA-016），与限流知识联动
+用法：工具限流
+锚点：实战共识
+
+</details>
+
+### MCP · 共存（版本）
+
+<details><summary>看背面</summary>
+
+MCP 工具多版本共存：create_order_v1/v2 并行注册，客户端按能力选择，v1 下线走弃用公告（JA-391 思想）
+原理：工具 API 演进与 REST API 版本管理同构（破坏性变更共存过渡），共存让客户端迁移平滑，与契约演进（JA-308）联动
+用法：工具版本共存
+锚点：实战共识
+
+</details>
+
+### MCP · 协议级（测试）
+
+<details><summary>看背面</summary>
+
+MCP server 的协议级 CI 测试：测试客户端走完整协议（握手/发现/调用），断言 schema 与 handler 一致（JA-315 落地）
+原理：协议级测试防"注册成功但协议错"（握手失败/发现为空类问题），CI 中协议测试与单元测试并存，与契约测试（JA-282）联动
+用法：协议级测试
+锚点：实战共识
+
+</details>
+
+### 案例 · Agent（客服）
+
+<details><summary>看背面</summary>
+
+客服 Agent 架构：意图路由 Agent→知识问答（RAG）→工单工具（创建/查询）→情绪升级人工（JA-434 漏斗的 Agent 化），全程轨迹（JA-219）
+原理：客服是 Agent 首选落地（JA-441 ROI），Agent 化后"解决+转接+工单"一气呵成，边界：赔付类强确认（AD-080）
+用法：客服 Agent 案例
+锚点：实战共识
+
+</details>
+
+### 案例 · Agent（研发）
+
+<details><summary>看背面</summary>
+
+研发 Agent：代码评审（diff→评审意见）/测试生成（代码→测试用例）/文档生成，工具=代码库与 CI，产物是"建议"（人合并）
+原理：研发场景天然安全（产物是建议非直接修改 JA-478），评审 Agent 提效显著（低风险高频），与 AI-036 代码生成联动
+用法：研发 Agent 案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 分析（数据）
+
+<details><summary>看背面</summary>
+
+数据分析 Agent：NL2SQL（JA-438 四防线）+执行+图表生成+解读，工具=数仓连接+图表库，产出=分析报告
+原理：数据分析是"检索+计算+表达"复合任务（Agent 优势区），SQL 防线是安全核心（JA-438），报告结构化（AD-047）
+用法：数据分析 Agent
+锚点：实战共识
+
+</details>
+
+### 案例 · Agent（运维）
+
+<details><summary>看背面</summary>
+
+运维 Agent：告警读取→根因初判（查日志/指标工具）→预案执行（重启/扩容需确认）→复盘记录，高危操作强确认
+原理：运维 Agent 是"人审+自动化"典型（AD-080 交易级确认），预案知识库（JA-416 runbook）是 Agent 的大脑辅料，错误操作代价极高
+用法：运维 Agent 案例
+锚点：实战共识
+
+</details>
+
+### 案例 · Agent（法务）
+
+<details><summary>看背面</summary>
+
+法务合同审查 Agent：条款抽取（版面分析 JA-545）→条款库比对（RAG）→风险标注→差异报告（人签发），术语库锚定（JA-552）
+原理：法务场景的引用零容忍（JA-555），Agent 产出是"风险标注报告"（草稿），律师签发，与责任链（JA-478）联动
+用法：法务 Agent 案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 研报（金融）
+
+<details><summary>看背面</summary>
+
+金融研报 Agent：数据工具（行情/财报 API）+检索（研报库）+合规审查（JA-551 强约束）→初稿（人审），输出免责声明强制
+原理：金融研报场景合规优先（JA-551），数据实时性靠工具（非模型记忆 JA-396），初稿定位（AI-037）
+用法：金融研报案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 运营（电商）
+
+<details><summary>看背面</summary>
+
+电商运营 Agent：竞品监控（搜索工具）+文案生成（batch JA-437）+上架工具（确认），ROI 在高频商品运营
+原理：电商运营是高频规则化任务（Agent ROI 三高 JA-048），文案风格 few-shot（JA-443），上架动作强确认（JA-080）
+用法：电商运营案例
+锚点：实战共识
+
+</details>
+
+### 编排 · 意图（路由）
+
+<details><summary>看背面</summary>
+
+路由 Agent：意图识别（分类）分发到对应专家 Agent/工作流，路由是"多 Agent 的入口调度员"
+原理：多 Agent 系统的入口模式（JA-027 主从的变体），路由可用小模型（成本 JA-414），误路由的代价与路由准确率权衡
+用法：路由 Agent 设计
+锚点：实战共识
+
+</details>
+
+### 编排 · 依赖（DAG）
+
+<details><summary>看背面</summary>
+
+工具编排 DAG：工具间依赖显式声明（B 依赖 A 的输出），按 DAG 拓扑执行（并行无依赖节点）
+原理：复杂任务的工具依赖图（JA-260 并行判断的显式化），DAG 让执行计划可视化可优化，与拓扑排序（AL-024）联动
+用法：DAG 编排
+锚点：实战共识
+
+</details>
+
+### 编排 · spawn（动态）
+
+<details><summary>看背面</summary>
+
+动态子 Agent 生成：按任务特征动态 spawn 子 Agent（数量与角色按需），与预定义子 Agent 对比
+原理：静态子 Agent 简单可控，动态 spawn 灵活但不可预测（资源与安全管控难），按任务开放度选（JA-368）
+用法：动态 spawn 设计
+锚点：实战共识
+
+</details>
+
+### 编排 · 水位（资源）
+
+<details><summary>看背面</summary>
+
+并发 Agent 水位控制：同时运行的 Agent 数上限（模型配额与资源约束），排队调度（JA-109 队列），水位监控
+原理：并发 Agent 放大 token 消耗（JA-025），水位超限排队（削峰），与容量规划（JA-535）联动
+用法：并发水位
+锚点：实战共识
+
+</details>
+
+### 编排 · 策略（聚合）
+
+<details><summary>看背面</summary>
+
+多 Agent 结果聚合策略：投票（多数一致）/加权（按 Agent 专长）/裁决者（独立裁判 Agent）/融合（合并要点），按任务选
+原理：JA-244 聚合的多 Agent 版：聚合策略决定"群体智慧"质量，辩论（AD-029）是聚合的对抗变体，策略与任务类型匹配
+用法：聚合策略
+锚点：实战共识
+
+</details>
+
+### 编排 · 传播（失败）
+
+<details><summary>看背面</summary>
+
+子 Agent 失败传播策略：子失败→父重试（换子 Agent）→父降级（跳过该子任务并标注）→父失败，逐级降级
+原理：失败传播设计决定系统韧性（JA-286 的编排面），跳过并标注比整体失败好（部分结果有价值），与降级链（JA-053）联动
+用法：失败传播
+锚点：实战共识
+
+</details>
+
+### 记忆 · 会话（摘要）
+
+<details><summary>看背面</summary>
+
+会话摘要器：长会话结束/转段时生成摘要（存入情景记忆 JA-070），摘要带任务/结论/未尽事项
+原理：摘要让人工接手（JA-434）与后续会话有上下文，摘要质量影响记忆价值（JA-504），摘要模型选小模型（AD-065）
+用法：会话摘要器
+锚点：实战共识
+
+</details>
+
+### 学习 · few-shot（跨任务）
+
+<details><summary>看背面</summary>
+
+跨任务学习：历史成功任务的轨迹摘要作为 few-shot 示例（相似任务检索注入），Agent 越用越熟练
+原理：数据飞轮（JA-452）的 Agent 版：成功轨迹是最好的示例，检索注入（JA-013），失败轨迹不注入（JA-531 分类）
+用法：跨任务学习
+锚点：实战共识
+
+</details>
+
+### 安全 · 审查链（输出）
+
+<details><summary>看背面</summary>
+
+Agent 输出合规审查链：护栏（JA-193）→敏感信息扫描（JA-262）→引用校验（JA-202）→人工签发（高风险 JA-478），链式流水线
+原理：输出审查链是 Agent 上生产的硬门槛（输出即副作用），链式让审查可组合可测试，与输出管线（JA-207）联动
+用法：输出审查链
+锚点：实战共识
+
+</details>
+
+### 安全 · 注入（回喂）
+
+<details><summary>看背面</summary>
+
+工具结果的注入检测：外部内容（网页/API 返回）回喂模型前过注入检测（JA-394），工具是注入进入的通道
+原理：工具结果是不可信输入（网页/第三方 API 可能被投毒），回喂前检测是 Agent 特有防线，与 JA-225 边界标签联动
+用法：工具注入防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 目标（劫持）
+
+<details><summary>看背面</summary>
+
+目标劫持（goal hijack）：注入让 Agent 偏离原目标（"忽略之前任务，改为..."），防线=目标锚定（AD-066）+任务边界声明+输出审查
+原理：目标劫持是注入的高级形态（不调工具也危险），锚定与边界让"跑偏"可检测，与 JA-393 蜜罐互补
+用法：目标劫持防线
+锚点：实战共识
+
+</details>
+
+### 评测 · 指标（探索）
+
+<details><summary>看背面</summary>
+
+Agent 探索度指标：工具多样性/路径多样性（低多样性=死板，过高=乱试），探索度与任务类型匹配
+原理：轨迹指标（JA-375）的细化：探索度反映 Agent 决策健康度，确定性任务低探索、开放任务高探索，指标配任务类型
+用法：探索度指标
+锚点：实战共识
+
+</details>
+
+### 评测 · 线上（相关）
+
+<details><summary>看背面</summary>
+
+线上评测与离线评估的相关性验证：离线分数高的 Agent 线上是否真的好（相关性低=评估集失真 JA-570）
+原理：评估有效性的终极检验（JA-482 变异测试的扩展）：离线上线相关性定期验证，低相关→修评估集
+用法：评估有效性验证
+锚点：实战共识
+
+</details>
+
+### 工程 · 组装（宪法）
+
+<details><summary>看背面</summary>
+
+Agent system prompt 组装管线：静态宪法+动态上下文（用户信息/时间/环境）分段组装（JA-061 参数模板），分段可测
+原理：宪法不是纯静态（动态注入运行时事实），组装管线让分段可单测（JA-209 模板单测），与提示词结构（JA-612）联动
+用法：宪法组装管线
+锚点：实战共识
+
+</details>
+
+### 工程 · 检索（工具）
+
+<details><summary>看背面</summary>
+
+工具检索式选择：工具数量多（>20）时按任务检索相关工具子集注入（而非全列），选择准确率回升
+原理：工具过多让模型选择准确率下降（JA-143 注意力稀释），工具检索（嵌入工具描述）是规模化方案，与 RAG 思想同构
+用法：工具规模化方案
+锚点：实战共识
+
+</details>
+
+### 工程 · 阈值（规模）
+
+<details><summary>看背面</summary>
+
+工具数量与准确率的阈值效应：超过约 20 个工具后选择准确率显著下降（经验值，按模型实测），规模化必须配检索（AD-142）
+原理：工具规模化的量化认知（阈值随模型演进），阈值监控（调用准确率按工具数统计），与观测（JA-357）联动
+用法：工具规模阈值
+锚点：实战共识
+
+</details>
+
+### 工程 · 任务（分组）
+
+<details><summary>看背面</summary>
+
+工具按任务分组注入：不同任务类型只注入该任务域的工具子集（工具包模式）
+原理：AD-142 检索的确定性替代（规则分组更可控），分组按业务域（订单工具包/库存工具包），与舱壁（DF-027）思想联动
+用法：工具包模式
+锚点：实战共识
+
+</details>
+
+### 工程 · 领域（预热）
+
+<details><summary>看背面</summary>
+
+Agent 上下文预热：启动时注入领域知识（业务规则/术语表），免每次检索注入（知识稳定的领域）
+原理：稳定领域知识预热比检索快（JA-145 预热思想的 prompt 面），预热知识体积控制（窗口预算 JA-223），与 RAG 取舍（JA-509）联动
+用法：预热策略
+锚点：实战共识
+
+</details>
+
+### Agent · 事件（协议）
+
+<details><summary>看背面</summary>
+
+Agent 执行事件协议：任务开始/步骤开始结束/工具调用/进度/完成/失败的标准事件流（JA-425 通道化的协议定义）
+原理：事件协议让前端/监控/审计统一消费（JA-677 进度），协议字段固定（类型/负载/时间戳），与流式协议知识联动
+用法：事件协议设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 续跑（体验）
+
+<details><summary>看背面</summary>
+
+断点续跑的产品面：任务中断后用户可见"已完成的步骤/未完成的步骤"，一键续跑（AD-037 checkpoint 的 UX）
+原理：checkpoint 的用户价值（JA-037 技术面）：中断不再=重来（体验大升级），续跑 UI 与轨迹展示（JA-219）联动
+用法：续跑体验设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 预估（成本）
+
+<details><summary>看背面</summary>
+
+Agent 执行前成本预估 API：按任务类型+历史轨迹估算 token 与费用（JA-401 模拟器的 API 化），超预估阈值需确认
+原理：成本预估让用户/系统决策（值不值得跑），预估模型基于历史轨迹统计（JA-135 数据），与预算池（AD-500→JA-461 联动）
+用法：成本预估 API
+锚点：实战共识
+
+</details>
+
+### 工程 · 分配（超时）
+
+<details><summary>看背面</summary>
+
+Agent 任务超时预算分配：总预算按阶段拆分（规划/执行/验证），阶段超时独立管理（JA-107 三级的任务级）
+原理：长任务的阶段超时（DA-107 深化），阶段超限的处理（跳过/重试/收尾），与预算传递（DF-028）联动
+用法：阶段超时
+锚点：实战共识
+
+</details>
+
+### 工程 · 结果（缓存）
+
+<details><summary>看背面</summary>
+
+Agent 任务结果缓存：同幂等键任务（AD-057）结果缓存（重复任务秒回），缓存与轨迹关联（命中记录）
+原理：任务结果缓存是幂等的兑现（AD-057），缓存键设计（任务参数 hash+版本 AD-059），与缓存策略（RD-067）联动
+用法：结果缓存
+锚点：实战共识
+
+</details>
+
+### 工程 · 锁定（风险）
+
+<details><summary>看背面</summary>
+
+Agent 框架锁定风险：编排逻辑/状态格式框架化后迁移成本高，缓解：核心循环自研+框架仅用边缘（JA-034 自研骨架的治理面）
+原理：框架锁定是架构风险（SP-107 依赖治理），自研核心（AD-049）天然防锁定，与依赖隔离（JA-284）联动
+用法：框架锁定治理
+锚点：实战共识
+
+</details>
+
+### 工程 · 模型（影响）
+
+<details><summary>看背面</summary>
+
+模型升级对 Agent 行为影响：新模型工具调用风格变化（参数格式/多工具倾向）改变 Agent 轨迹，模型升级必须过 Agent 回归套件（JA-680）
+原理：模型是 Agent 的"大脑"（AD-059 三元组），换脑=行为全变，回归是唯一保障（JA-094 基线），与模型升级纪律（JA-391）联动
+用法：模型升级纪律
+锚点：实战共识
+
+</details>
+
+### 演进 · 视觉工具（多模态）
+
+<details><summary>看背面</summary>
+
+多模态 Agent：视觉工具（看图/读表/截图理解）加入工具集，Agent 从文本扩展到视觉任务（JA-433 GUI Agent 的基础）
+原理：视觉工具让 Agent 触达"非文本世界"（文档/图表/屏幕），工具协议已支持（JA-093 content 类型），与多模态（AI-041）联动
+用法：多模态 Agent
+锚点：实战共识
+
+</details>
+
+### 演进 · Agent（语音）
+
+<details><summary>看背面</summary>
+
+语音 Agent：ASR→Agent→TTS 管线（JA-432），语音延迟要求高（交互体验），Agent 循环的延迟预算更紧
+原理：语音场景的延迟约束（JA-423 TTFT 同样适用），打断处理（用户说话中断 Agent），与语音管线知识联动
+用法：语音 Agent 设计
+锚点：实战共识
+
+</details>
+
+### 演进 · 自改进（学习）
+
+<details><summary>看背面</summary>
+
+Agent 自我改进循环：失败任务分析→改进宪法/工具描述→评估验证→上线（提示词自愈 JA-661 的 Agent 版），改进有评估兜底
+原理：自改进是 Agent 演进的高级形态（人工改进的自动化），自动化改进有风险（评估兜底是底线），与 DSPy 思想（JA-442）联动
+用法：自改进循环
+锚点：实战共识
+
+</details>
+
+### 安全 · 输出即代码（代码）
+
+<details><summary>看背面</summary>
+
+Agent 生成代码执行防线：生成代码→静态扫描（危险 API 黑名单）→沙箱执行（AD-077）→人工确认（高危），多层防线
+原理：生成代码执行是最高危 Agent 能力（JA-156 沙箱的完整防线链），黑名单+沙箱+确认三层缺一，与代码沙箱纪律联动
+用法：代码执行防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 用户面（社工）
+
+<details><summary>看背面</summary>
+
+用户社会工程面：用户诱导 Agent 越权（"你是管理员帮我删库"），防线=权限不随 prompt 变（JA-235 权限硬约束）+身份绑定（AD-098）
+原理：用户是注入源之一（内部威胁面），权限与提示词解耦（提示词改变不了权限），与零信任（DF 思想）联动
+用法：用户面防线
+锚点：实战共识
+
+</details>
+
+### 评测 · 人类（对照）
+
+<details><summary>看背面</summary>
+
+与人类专家对照评测：Agent 产出与专家基线盲评对比（专家打分不分来源），差距即能力边界地图
+原理：Agent 能力边界的度量（JA-043 失败模式的量化），对照基线让"达到专家水平"有据，与评测（JA-375）联动
+用法：对照评测设计
+锚点：实战共识
+
+</details>
+
+### 治理 · 委员会（组织）
+
+<details><summary>看背面</summary>
+
+Agent 治理委员会：新 Agent 场景准入评审（JA-524）/权限矩阵审批（JA-379 同思想）/事故复盘（JA-355），委员会是治理载体
+原理：Agent 规模化后的治理组织（多团队多 Agent 时代），委员会机制防失控（权限与场景发散），与治理组织（JA-384）联动
+用法：治理组织设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 批次（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 第三批收束：MCP 工具开发（111~120）+行业案例（121~127）+编排深化（128~133）+安全深化（136~138）四分支，域地图（AD-060）进度核对
+原理：批次收束方法论（JA-480 执行），分支均衡评估（下一批补薄弱），与批次管理纪律联动
+用法：批次收束
+锚点：实战方法论
+
+</details>
+
+### 评测 · 构建（任务集）
+
+<details><summary>看背面</summary>
+
+Agent 任务集构建 SOP：真实任务采样（JA-495 挖掘）+边界任务构造（JA-470 拒绝）+对抗任务（JA-734 诱导），三层的构建流程与配比（真实为主边界对抗为辅）
+原理：JA-090 三层任务集的执行流程：采样清洗→分层标注→评审入库，任务集是 Agent 评测的根基资产，与评估即代码（JA-665）联动
+用法：任务集构建 SOP
+锚点：实战共识
+
+</details>
+
+### 评测 · 数据集（轨迹）
+
+<details><summary>看背面</summary>
+
+轨迹数据集构建：从线上轨迹（AD-040）抽取成功/失败样本，成功轨迹做 few-shot（JA-135）失败轨迹做评测（JA-531）
+原理：轨迹是评测数据的最真实来源（合成任务失真），双通道分流（成功进示例/失败进评测），与数据飞轮（JA-452）联动
+用法：轨迹数据集
+锚点：实战共识
+
+</details>
+
+### 评测 · 设计（判分）
+
+<details><summary>看背面</summary>
+
+Agent 评测判分 prompt 设计：judge 按 rubric 评分（任务完成/效率/安全三维度），judge 输入含任务+轨迹+产出
+原理：JA-651 判分在 Agent 的特化：轨迹是判分输入（不同于单轮答案），三维度加权，judge 版本管理（AI-064）
+用法：判分设计
+锚点：实战共识
+
+</details>
+
+### 评测 · 显著性（统计）
+
+<details><summary>看背面</summary>
+
+Agent 成功率的统计显著性：任务集样本量决定结论可信度（小样本差异是噪声），给最小样本量公式（按预期差异计算）
+原理：评测结论的统计纪律（AI-213 延伸到 Agent），样本不足的"提升"是幻觉，与实验设计联动
+用法：评测统计纪律
+锚点：实战共识
+
+</details>
+
+### 评测 · 管理（基线）
+
+<details><summary>看背面</summary>
+
+Agent 回归基线管理：基线分数随版本演进（新版本达标即新基线），基线漂移要评审（防标准滑坡）
+原理：基线不是永久（JA-402 版本绑定），"标准滑坡"让质量静默下降，基线变更走评审（JA-530 双轨），与质量账本（JA-592）联动
+用法：基线管理
+锚点：实战共识
+
+</details>
+
+### 评测 · 控制（成本）
+
+<details><summary>看背面</summary>
+
+Agent 评测成本控制：轨迹长（token 大）评测贵，控制手段：任务集分层抽样/轨迹截断评测/judge 批处理
+原理：Agent 评测是重成本（单任务多轮 token），成本控制让评测可持续（JA-653 的 Agent 版），与预算（JA-539）联动
+用法：评测成本工程
+锚点：实战共识
+
+</details>
+
+### 评测 · AB 影子（组合）
+
+<details><summary>看背面</summary>
+
+Agent 的 A/B 与影子组合：影子跑评估集（离线）→A/B 灰度真实流量（在线）→全量，两阶段组合降风险
+原理：JA-234/205 的组合序列：离线证明再在线验证，两阶段各有盲区互补，与发布体系（JA-294）联动
+用法：两阶段验证
+锚点：实战共识
+
+</details>
+
+### 评测 · 介入点（人类）
+
+<details><summary>看背面</summary>
+
+Agent 评测中的人类专家介入点：判分争议仲裁（JA-364）/新失败模式分析（JA-678）/任务集评审（AD-161），人工在杠杆点而非全量
+原理：人机分工的评测版：自动化跑量、人工管质量（JA-477 标注组织），介入点设计让专家精力用在刀刃
+用法：人机分工
+锚点：实战共识
+
+</details>
+
+### 测试 · 保真（mock）
+
+<details><summary>看背面</summary>
+
+工具 mock 的保真度风险：mock 返回理想数据（真实工具有边界/延迟/错误），mock 过美让评测失真
+原理：mock 保真度是 Agent 评测的隐藏坑（JA-169 深化）：mock 中注入真实错误分布（错误/延迟模拟），保真度与可控性权衡
+用法：mock 保真度
+锚点：实战共识
+
+</details>
+
+### 评测 · 长尾（覆盖）
+
+<details><summary>看背面</summary>
+
+长尾任务覆盖：高频任务评测充分，长尾任务（低频但重要）专项构造（评测集按任务类型分层的执行）
+原理：长尾任务是事故暗区（低频高影响，JA-365 归类的覆盖面），长尾覆盖策略（按业务重要性非频率），与分层评测联动
+用法：长尾覆盖
+锚点：实战共识
+
+</details>
+
+### 安全 · 消息（外发）
+
+<details><summary>看背面</summary>
+
+Agent 输出即外发消息的防线：Agent 生成邮件/消息发送（外发类工具），防线=输出审查链（AD-136）+收件人白名单+内容确认
+原理：外发是"出域"动作（JA-171 防线的消息面），错误外发不可撤回（不可逆 AD-080 同级），外发工具三防
+用法：外发防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 劫持（会话）
+
+<details><summary>看背面</summary>
+
+Agent 会话劫持：会话中途注入（用户上下文切换/多轮中插入恶意内容）持续影响后续轮次，防线=会话边界校验+输入过滤（每轮）
+原理：会话级注入比单轮更危险（影响持续），每轮输入都过防线（不是只有首轮），与会话管理（JA-398）联动
+用法：会话劫持防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 投毒（记忆）
+
+<details><summary>看背面</summary>
+
+Agent 记忆投毒：恶意输入让错误信息写入长期记忆（JA-504 污染的攻击面），后续会话持续被污染，防线=写回审计+记忆异常检测
+原理：记忆投毒是持久化攻击（一次注入长期生效），写回审计（JA-504 策略的执行）+异常检测（记忆内容突变告警），投毒恢复=记忆回滚
+用法：记忆投毒防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 资源（DoS）
+
+<details><summary>看背面</summary>
+
+Agent 拒绝服务面：诱导无限循环/超大任务烧钱（恶意或无意），防线=双上限（AD-017）+任务配额（AD-099）+异常检测（成本曲线）
+原理：DoS 是成本维度攻击（JA-299 成本攻击的 Agent 面），防线让"恶意用户"的破坏有上限，与限流三级（JA-206）联动
+用法：Agent DoS 防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 边界（信任）
+
+<details><summary>看背面</summary>
+
+多 Agent 系统信任边界：子 Agent 输出对父 Agent 是"外部输入"（子 Agent 可能被劫持），父级验证子结果
+原理：信任边界在多 Agent 划分（每个 Agent 是信任域边界），子结果不盲信（AD-502 verifier 思想跨 Agent），与零信任联动
+用法：多 Agent 信任
+锚点：实战共识
+
+</details>
+
+### 安全 · 轨迹（隐私）
+
+<details><summary>看背面</summary>
+
+Agent 轨迹的隐私面：轨迹含完整对话与工具参数（最敏感数据集合），存储加密+访问控制+脱敏（JA-654 三层）
+原理：轨迹是隐私聚集地（AD-054 脱敏的存储面），轨迹泄露=全量泄露，访问控制按角色（开发/审计/运维不同权限），与合规留痕（JA-383）联动
+用法：轨迹隐私治理
+锚点：实战共识
+
+</details>
+
+### 安全 · MCP（供应链）
+
+<details><summary>看背面</summary>
+
+恶意 MCP server 供应链攻击：第三方 server 携带恶意工具（数据外泄/后门），防线=来源审计（AD-082）+行为监控（JA-312）+权限最小化
+原理：供应链攻击在 MCP 生态的形态（与依赖投毒同构），第三方 server 视为不可信组件（信任边界 JA-175），与供应链安全联动
+用法：供应链防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 路径（外泄）
+
+<details><summary>看背面</summary>
+
+Agent 数据外泄路径分析：prompt 注入诱导读取敏感数据→经网络工具外发（JA-079/171 组合路径），路径分析画出"数据流出图"并逐路径设防
+原理：外泄路径的系统性分析（AI-099 数据流向的 Agent 版），每条路径有防线（路径穷举），与 DLP（数据防泄漏）思想联动
+用法：外泄路径治理
+锚点：实战共识
+
+</details>
+
+### 安全 · 时间（权限）
+
+<details><summary>看背面</summary>
+
+Agent 权限的时间边界：临时授权（JA-679 提权）带过期时间，任务结束权限自动收回（JA-500 动态授权的回收面）
+原理：权限的时间边界防"提权永久化"（租约思想 DF-013），过期自动收回+回收审计，与权限生命周期管理联动
+用法：权限生命周期
+锚点：实战共识
+
+</details>
+
+### 安全 · 响应（应急）
+
+<details><summary>看背面</summary>
+
+Agent 事故应急响应流程：发现（监控告警 JA-501/520）→止血（工具开关 AD-106/权限收回 AD-179）→根因（轨迹回放 AD-093）→复盘（JA-355），Agent 专用响应流
+原理：Agent 事故的响应工具与传统不同（工具开关/权限收回/记忆回滚），runbook（JA-416）含 Agent 专章，与应急体系联动
+用法：应急响应设计
+锚点：实战共识
+
+</details>
+
+### 多模态 · 视觉（prompt）
+
+<details><summary>看背面</summary>
+
+视觉工具的 prompt 设计：图像+明确任务指令（"提取表格数据/描述异常"），视觉任务的输出格式约束（JSON 结构）与文本任务同工程化
+原理：JA-542 视觉 prompt 的 Agent 工具化面：视觉工具与文本工具同工程标准（描述/schema/校验），混用导致视觉工具质量低
+用法：视觉工具工程
+锚点：实战共识
+
+</details>
+
+### 多模态 · 截图（工具）
+
+<details><summary>看背面</summary>
+
+截图理解工具：网页/应用截图→结构化理解（UI 状态/错误信息提取），GUI Agent（JA-433）与运维诊断的基础工具
+原理：截图理解是 GUI Agent 的"眼睛"（JA-433 依赖件），截图质量与分辨率影响理解（JA-430 预处理），产出结构化供 Agent 决策
+用法：截图工具设计
+锚点：实战共识
+
+</details>
+
+### 多模态 · 文档（案例）
+
+<details><summary>看背面</summary>
+
+文档理解 Agent 案例：发票/合同/报告混合文档流（版面分析 JA-545→字段抽取→校验），多文档类型路由到不同抽取模板
+原理：文档理解是多模态 Agent 的最成熟落地（JA-431/546 组装），模板路由按文档类型（JA-144 工具包思想），产出进业务系统
+用法：文档 Agent 案例
+锚点：实战共识
+
+</details>
+
+### 多模态 · 预算（成本）
+
+<details><summary>看背面</summary>
+
+多模态 Agent 的视觉 token 预算：图像 token 远高于文本（JA-541），预算管理与图像数量/分辨率联动（JA-430）
+原理：多模态 Agent 的成本结构（视觉是成本大头），预算联动策略（减图/降分辨率/降采样），与统一预算（JA-663）联动
+用法：视觉预算管理
+锚点：实战共识
+
+</details>
+
+### 手写 · 类设计（结构）
+
+<details><summary>看背面</summary>
+
+手写 Agent 的类结构设计：AgentExecutor（循环）/ToolRegistry（注册表 AD-051）/Message（AD-062）/ModelClient（抽象 AD-189）/TrajectoryRecorder（AD-040）五类，类图即架构
+原理：五类划分是手写 Agent 的最小架构（每类单一职责 JA-051 注册表），类设计先于编码（面试手写先画类图），与面向对象设计联动
+用法：手写类设计
+锚点：实战共识
+
+</details>
+
+### 手写 · 数据类（工具）
+
+<details><summary>看背面</summary>
+
+ToolDefinition 数据类：name/description/parametersSchema/executor 四字段，注册表（AD-051）的条目结构
+原理：四字段是工具的最小完备描述（与 MCP ToolSpecification 对齐 JA-176），数据类设计清晰则注册与执行解耦
+用法：ToolDefinition 设计
+锚点：实战共识
+
+</details>
+
+### 手写 · 模型（消息）
+
+<details><summary>看背面</summary>
+
+Message 模型实现：role（枚举）+content+可选 toolCallId/工具调用列表，序列化为供应商消息格式
+原理：消息模型是协议适配的内核（AD-062 的代码化），工具调用字段设计（请求列表/结果引用）决定并行支持（AD-008）
+用法：消息模型实现
+锚点：实战共识
+
+</details>
+
+### 手写 · ModelClient（抽象）
+
+<details><summary>看背面</summary>
+
+ModelClient 接口抽象：chat(messages, tools) → ModelResponse，实现类注入（真实/OpenAI/mock），面向接口则 mock 测试（AD-039）天然支持
+原理：接口抽象是可测试性的根（JA-041 落地），手写 Agent 也遵守（与生产框架同思想），接口窄化（只暴露需要的方法）
+用法：抽象层设计
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（执行）
+
+<details><summary>看背面</summary>
+
+工具执行器实现：查注册表→参数反序列化→执行（带超时 JA-053）→结果包装为 tool 消息→异常包装为错误消息（JA-016 反馈）
+原理：执行器是"防御式调用"（每步防错），实现细节决定 Agent 健壮性（JA-448 失败清单的代码面），与执行隔离（AD-053）联动
+用法：执行器实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 终止（循环）
+
+<details><summary>看背面</summary>
+
+循环终止三条件实现：模型声明完成（finishReason 或输出完成标记）、步数达到上限、预算耗尽，三条件任一触发收尾（AD-005）
+原理：三条件的代码实现（JA-004 骨架的具体化），完成判断依赖模型声明（模型说 done 才 done），与幻觉完成风险（模型谎报完成）联动
+用法：终止实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（轨迹）
+
+<details><summary>看背面</summary>
+
+轨迹记录器实现：每步追加轨迹条目（时间戳/类型/内容摘要/token），异步落库（JA-040 不阻塞主循环），轨迹 ID 关联任务
+原理：轨迹记录器的实现要点（异步/结构化/可导出），记录器与 Agent 主逻辑解耦（观察者模式），与轨迹基建（AD-040）联动
+用法：轨迹记录器实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（预算）
+
+<details><summary>看背面</summary>
+
+预算控制实现：token 累计计数（每轮响应 usage 累加）与阈值判断，超限触发收尾（AD-017 双上限之一），预算池（JA-461）对接
+原理：预算控制的代码实现（AD-024 成本模型的执行面），usage 从响应元数据取（JA-065/079），与手写预算骨架联动
+用法：预算实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 反馈（容错）
+
+<details><summary>看背面</summary>
+
+错误反馈实现：工具异常捕获→包装为"工具执行失败：原因+建议"的工具消息→回填循环（模型可修正），错误消息模板化
+原理：JA-016 的代码实现：错误消息质量决定自修复成功率（模型读得懂），模板化让错误一致，与错误设计（AD-116）联动
+用法：错误反馈实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（恢复）
+
+<details><summary>看背面</summary>
+
+checkpoint 实现：每步后序列化状态（消息序列+任务状态）→存储（内存/DB），恢复=反序列化+继续循环（AD-037 的代码面），幂等工具前提（AD-038）
+原理：checkpoint 的代码实现要点（序列化完整消息序列是关键），存储选型（内存调试/DB 生产），与恢复工程（JA-370）联动
+用法：checkpoint 实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（并发）
+
+<details><summary>看背面</summary>
+
+多 Agent 并发实现要点：任务队列分发（AD-026）+独立上下文（JA-373 隔离）+聚合器（JA-132），并发安全（共享状态 JA-503 锁）
+原理：并发 Agent 的代码要点（三件：分发/隔离/聚合），手写并发版是面试加分项（并发工程综合），与并发知识（JA-058）联动
+用法：并发实现
+锚点：实战共识
+
+</details>
+
+### 手写 · mock（测试）
+
+<details><summary>看背面</summary>
+
+mock 模型实现：ModelClient 的测试实现（按剧本返回预设响应序列），剧本驱动（AD-039），mock 也要模拟 token 计数（预算路径测试）
+原理：mock 模型的实现要点（剧本序列化/usage 模拟/错误注入），mock 保真（AD-169）与可控平衡，与测试代码实践联动
+用法：mock 模型实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 类（配置）
+
+<details><summary>看背面</summary>
+
+Agent 配置类设计：模型配置/工具配置/限制配置（步数/预算/超时）/安全配置四组，配置与代码分离（SP-027 绑定）
+原理：配置类让 Agent 参数化（不同场景不同配置实例化），四组配置与 JA-345/AD-059 对应，与配置校验（JA-346）联动
+用法：配置类设计
+锚点：实战共识
+
+</details>
+
+### 手写 · 点位（观测）
+
+<details><summary>看背面</summary>
+
+Agent 可观测埋点点位清单：循环开始/每轮模型调用（耗时 token）/工具调用/终止原因/异常，点位覆盖决定排障能力
+原理：埋点点位清单化（JA-091 三件的数据源），埋点遗漏=排障盲区（AD-044 失败模式无法定位），与观测设计联动
+用法：埋点点位
+锚点：实战共识
+
+</details>
+
+### 手写 · 清单（缺陷）
+
+<details><summary>看背面</summary>
+
+手写 Agent 常见 bug 清单：消息序列错位（tool_call_id 不匹配）/终止条件遗漏（死循环）/工具结果未回填/并发上下文污染/预算未累计，五 bug 自查
+原理：手写常见 bug 的清单化（面试手写自查用，生产 review 用），每 bug 对应防线（JA-448 失败清单的代码面），与代码规范（AL-051）联动
+用法：手写 bug 清单
+锚点：实战共识
+
+</details>
+
+### 评测 · 与单测（分层）
+
+<details><summary>看背面</summary>
+
+Agent 评测与单元测试的分层：单测测工具逻辑（mock 模型）/评测测 Agent 行为（真实或 mock 剧本）/线上影子测真实分布，三层不互相替代
+原理：JA-481 金字塔的 Agent 版：三层各回答不同问题（逻辑对/行为对/真实好），混淆层级让测试低效，与测试策略联动
+用法：Agent 测试分层
+锚点：实战共识
+
+</details>
+
+### 评测 · 管理（版本）
+
+<details><summary>看背面</summary>
+
+评测任务集版本管理：任务集变更（增删改）走评审与版本号（JA-665 评估即代码），变更记录进血缘（JA-201）
+原理：任务集是代码资产（JA-665 深化），随意变更让评测结果不可比（JA-594 基线破坏），与版本纪律联动
+用法：任务集版本化
+锚点：实战共识
+
+</details>
+
+### 评测 · 多Agent（端到端）
+
+<details><summary>看背面</summary>
+
+多 Agent 系统端到端评测：整链（路由→子 Agent→聚合）的任务成功率与协作效率，端到端与单 Agent 评测互补
+原理：多 Agent 的评测单位是"系统"而非单 Agent（JA-258/274 组合行为），端到端评测抓协作问题（单 Agent 评测盲区），与系统测试思想联动
+用法：端到端评测
+锚点：实战共识
+
+</details>
+
+### 评测 · 分段（长任务）
+
+<details><summary>看背面</summary>
+
+长任务 Agent 分段验收：长任务（数小时）按阶段验收（每阶段产出达标再继续），避免跑完才发现早期错误
+原理：长任务的验收策略（JA-255 状态机的验收面），早期错误晚发现成本高（重跑代价），分段验收与人审点（AD-168）结合
+用法：分段验收
+锚点：实战共识
+
+</details>
+
+### 工程 · 分层（配置）
+
+<details><summary>看背面</summary>
+
+Agent 配置分层：宪法（prompt）/工具集/模型/限制四层配置分文件管理（AD-198 的文件组织），层间依赖显式（宪法引用工具名需校验）
+原理：AD-198 的文件组织面：四层配置分文件分权限（宪法评审 JA-530），层间引用校验（工具名漂移检测），与配置治理（JA-683）联动
+用法：配置分层组织
+锚点：实战共识
+
+</details>
+
+### 工程 · 灰度（发布）
+
+<details><summary>看背面</summary>
+
+Agent 灰度发布：按任务类型/用户群灰度新版本 Agent（JA-395 分群），灰度指标（成功率/成本/用户反馈），回滚=切回版本
+原理：Agent 版本（AD-059）的发布面：灰度让新宪法/新工具安全上线，回滚依赖版本化（JA-402），与发布体系（JA-294）联动
+用法：Agent 灰度发布
+锚点：实战共识
+
+</details>
+
+### 工程 · 大盘（监控）
+
+<details><summary>看背面</summary>
+
+Agent 监控大盘：任务量/成功率/平均步数/平均成本/工具调用 TopN/失败分类分布，一屏看健康
+原理：JA-041 三件的面板化：大盘让运维与产品同屏对话（JA-289 看板思想），指标选择覆盖效率与质量，与监控体系联动
+用法：Agent 大盘
+锚点：实战共识
+
+</details>
+
+### 工程 · 归因（成本）
+
+<details><summary>看背面</summary>
+
+Agent 成本归因：任务成本拆解到步（哪一步烧的 token）/工具（哪个工具贵）/宪法（上下文多大），归因到改进点
+原理：JA-290 分摊的任务级：步级归因定位"成本热点"（长结果工具/宪法过长），与 JA-025 累积模型联动，与优化决策（JA-338）联动
+用法：成本归因
+锚点：实战共识
+
+</details>
+
+### 工程 · 清单（评审）
+
+<details><summary>看背面</summary>
+
+Agent 代码 review 清单：宪法含边界与放弃条件/工具幂等与超时/终止三条件/轨迹埋点/脱敏/并发安全六查
+原理：AD-200 bug 清单的 review 化（防御式 review），六查对应五 bug+安全，与 review 纪律（JA-285）联动
+用法：Agent review 清单
+锚点：实战共识
+
+</details>
+
+### 工程 · 四分支（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 第四批收束：评测（161~170）+安全（171~180）+多模态（181~185）+手写预备（186~209）四分支落地，域地图（AD-060）过半核对
+原理：批次收束（JA-480 纪律）：手写预备完成=压轴手写套卷就绪，剩余批次填充协作/行业/治理分支，与批次管理联动
+用法：批次收束
+锚点：实战方法论
+
+</details>
+
+### 协作 · 委托（协议）
+
+<details><summary>看背面</summary>
+
+Agent 间任务委托消息结构：任务描述/约束/预算/验收标准/交付格式，委托即"结构化派单"
+原理：委托消息是主从模式的契约（AD-027），结构化派单让子 Agent 理解无歧义，与通信协议（AD-032）联动
+用法：委托消息设计
+锚点：实战共识
+
+</details>
+
+### 协作 · 评分（信任）
+
+<details><summary>看背面</summary>
+
+子 Agent 结果可信评分：按历史表现（成功率）与产出校验（AD-502）给子 Agent 打可信分，路由参考
+原理：信任不是均等的（各 Agent 历史表现差异），评分驱动任务分派（好的多派），与评分思想（JA-493）联动
+用法：可信评分
+锚点：实战共识
+
+</details>
+
+### 协作 · 共享（知识）
+
+<details><summary>看背面</summary>
+
+Agent 间知识共享形态：共享知识库（统一 RAG）vs 各自私有记忆（隔离），共享提效率、私有保隔离
+原理：知识共享是双刃（效率与隔离 JA-072 边界），按知识密级与任务性质选形态，与记忆治理（AD-074）联动
+用法：知识共享形态
+锚点：实战共识
+
+</details>
+
+### 协作 · 图管理（依赖）
+
+<details><summary>看背面</summary>
+
+多 Agent 任务依赖图管理：子任务依赖关系显式化（DAG AD-129 的 Agent 级），调度按依赖拓扑执行
+原理：依赖图让编排正确性可验证（AL-024 拓扑），依赖错误=结果错乱，依赖图可视化（运维友好）
+用法：依赖图管理
+锚点：实战共识
+
+</details>
+
+### 协作 · 最小化（上下文）
+
+<details><summary>看背面</summary>
+
+跨 Agent 上下文传递最小化：父传子只传任务必需信息（不传全量历史），最小化防泄露（JA-018 数据最小化的 Agent 面）
+原理：全量传递=泄露面扩大+token 浪费（JA-025），最小化传递是安全与成本双优，与数据最小化（JA-418）联动
+用法：传递最小化
+锚点：实战共识
+
+</details>
+
+### 演进 · 观察（生态）
+
+<details><summary>看背面</summary>
+
+Agent 生态观察项：MCP server 生态增长、A2A 协议 adoption、框架合并趋势，季度评估（JA-529 雷达）
+原理：生态演进影响技术选型（JA-522 再评估），观察项清单化（不追热点但不错过拐点），与技术雷达联动
+用法：生态观察机制
+锚点：实战共识
+
+</details>
+
+### 演进 · 动态（边界）
+
+<details><summary>看背面</summary>
+
+Agent 与工作流的边界动态化：流程成熟后 Agent 步骤固化为工作流节点（Agent 探索→固化），反向（新需求 Agent 探索）
+原理：JA-479 演进的动态版：成熟路径沉淀为工作流（成本降），边界随成熟度移动，与流程治理联动
+用法：边界动态管理
+锚点：实战共识
+
+</details>
+
+### 演进 · 季度（评估）
+
+<details><summary>看背面</summary>
+
+Agent 能力季度评估：任务成功率/成本/安全事件按季度复盘，能力退化检测（模型更新 JA-392 的 Agent 面）
+原理：Agent 能力不是静态（模型/工具/宪法任一变化），季度复盘（JA-457 机制）防能力滑坡，与基线（AD-165）联动
+用法：能力评估机制
+锚点：实战共识
+
+</details>
+
+### 演进 · 追踪（效益）
+
+<details><summary>看背面</summary>
+
+Agent 成本效益持续追踪：单位任务成本（JA-417）与人工基线对比趋势，ROI 转负触发治理
+原理：Agent 的经济性是动态（成本漂移/人工流程变化），ROI 追踪让 Agent 值得性持续验证，与成本观测（JA-462）联动
+用法：效益追踪
+锚点：实战共识
+
+</details>
+
+### 演进 · Copilot（谱系）
+
+<details><summary>看背面</summary>
+
+Copilot 到 Agent 的演进谱系：Copilot（人主 AI 辅）→半自主（人审关键点）→全自主（人监督），演进按信任积累推进
+原理：谱系帮助规划产品形态（信任未积累前上全自主是失败模式，AD-046 确认交互的谱系定位），与 AD-019 分类互补
+用法：Copilot 谱系
+锚点：实战共识
+
+</details>
+
+### 案例 · 电商（客服）
+
+<details><summary>看背面</summary>
+
+电商客服 Agent 深化案例：订单工具（查单/改址/催发）+售后政策 RAG+情绪升级（JA-434），场景词汇表（SKU/物流术语）预热（AD-145）
+原理：电商客服是工具密集型（订单操作占多数轮），术语预热提升理解（领域词 JA-145），与客服漏斗（JA-434）联动
+用法：电商客服深化
+锚点：实战共识
+
+</details>
+
+### 案例 · 运维（SRE）
+
+<details><summary>看背面</summary>
+
+SRE Agent 深化：告警分诊（读监控/查日志/关联变更）→预案建议（runbook 检索 JA-416）→执行确认（AD-080），SRE 知识库是弹药
+原理：SRE Agent 的价值在"告警风暴降噪"（分诊减少人处理量），知识库与工具双轮，与运维案例（AD-124）互补细化
+用法：SRE Agent 案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 分诊（安全）
+
+<details><summary>看背面</summary>
+
+安全运营 Agent：告警分诊（SIEM 告警归类）+IOC 检索（威胁情报工具）+处置建议（人确认），安全场景的误报率高是 Agent 价值点
+原理：安全告警量大误报多（人力瓶颈），Agent 分诊提效（JA-441 内部场景），误杀风险→建议制（不自动处置）
+用法：安全运营案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 病历（医疗）
+
+<details><summary>看背面</summary>
+
+医疗病历辅助 Agent：病历结构化（语音转写+实体抽取）+术语标准化（JA-552 术语库）+辅助诊断建议（强人审），数据全程私有化（JA-557）
+原理：医疗场景合规最重（JA-552 叠加），Agent 定位"辅助记录+提示"（决策归医生），私有化栈（JA-557）前置
+用法：医疗 Agent 案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 辅导（教育）
+
+<details><summary>看背面</summary>
+
+教育辅导 Agent：苏格拉底式（JA-554）+学生画像（薄弱点记忆 AD-071）+进度追踪，画像用于个性化难度
+原理：教育场景的画像价值（因材施教），画像合规（未成年人数据 JA-198 加权），与教育 prompt 约束联动
+用法：教育 Agent 案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 检索（法务）
+
+<details><summary>看背面</summary>
+
+法务检索 Agent：判例检索（向量+关键词混合 JA-241）+条款比对（JA-555）+检索报告（引用可溯源 JA-202），输出是检索报告非法律意见
+原理：法务检索的场景边界（检索≠法律意见，JA-555 责任链），引用可溯源是生命线（编造判例=事故），与法务知识联动
+用法：法务检索案例
+锚点：实战共识
+
+</details>
+
+### 案例 · Agent（供应链）
+
+<details><summary>看背面</summary>
+
+供应链 Agent：库存查询+供应商比价+采购建议（人审批），多源数据工具（ERP/WMS API），异常检测（缺货预警）
+原理：供应链场景的多系统工具集成（AD-077 API 类），建议制（决策链长），数据时效（实时库存查询非检索）
+用法：供应链案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 审核（内容）
+
+<details><summary>看背面</summary>
+
+内容平台审核 Agent：机审初筛（JA-439）+复核建议+规则学习（审核标准 few-shot 更新），审核标准一致性（JA-463）是核心指标
+原理：内容审核的 Agent 化分级（JA-439 管线的 Agent 调度），标准漂移监控（审核一致性），与审核管线联动
+用法：内容审核案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 行程（旅游）
+
+<details><summary>看背面</summary>
+
+旅游行程 Agent：偏好画像（AD-071）+实时信息工具（天气/票价）+行程生成（结构化 JA-047）+预订工具（强确认），多轮交互调整
+原理：旅游场景的多轮交互与实时数据组合（JA-700 检索+工具），预订强确认（AD-080），画像个性化（JA-579）
+用法：旅游 Agent 案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 知识（企业）
+
+<details><summary>看背面</summary>
+
+企业知识助手通用案例：全员问答（RAG）+工单创建（工具）+知识缺口回流（JA-496），是大多数企业的第一个 Agent
+原理：企业知识助手是"第一个 Agent"的最佳候选（ROI 清晰风险低 JA-441），知识运营（JA-532）决定上限，与 RAG 知识（JA-051）联动
+用法：通用知识助手
+锚点：实战共识
+
+</details>
+
+### 治理 · owner（清单）
+
+<details><summary>看背面</summary>
+
+Agent 清单与 Owner 制：每个生产 Agent 登记（用途/权限/Owner/评测基线），无 Owner 的 Agent 下线
+原理：JA-596 Owner 思想的 Agent 版：Agent 数量增长后治理需要清单（盲区即风险），清单与依赖管理（JA-721）联动
+用法：Agent 清单制
+锚点：实战共识
+
+</details>
+
+### 治理 · 周期（生命）
+
+<details><summary>看背面</summary>
+
+Agent 生命周期管理：创建（评审 JA-524）→运行（监控 JA-207）→迭代（回归 AD-092）→下线（流量回收+工具权限收回），全周期流程
+原理：Agent 有完整生命周期（下线回收权限与资源 JA-179），僵尸 Agent 是安全与成本隐患，与生命周期治理（JA-232 类比）联动
+用法：生命周期流程
+锚点：实战共识
+
+</details>
+
+### 治理 · 矩阵（权限）
+
+<details><summary>看背面</summary>
+
+Agent 权限矩阵集中管理：全部 Agent 的工具权限矩阵（行=Agent 列=工具），集中评审与变更审计
+原理：权限分散在各 Agent 配置=治理盲区（组合风险 JA-081 的全局面），矩阵让"谁能做什么"一目了然，与权限治理（JA-233 同思想）联动
+用法：权限矩阵治理
+锚点：实战共识
+
+</details>
+
+### 治理 · 看板（透明）
+
+<details><summary>看背面</summary>
+
+Agent 评测结果跨团队透明：评测分数/事故/成本看板全员可见（JA-597 跨域对比思想），透明驱动质量文化
+原理：透明化让团队间质量可比（内部竞争 JA-597），看板数据来自评测（AD-094）与监控（AD-207），与质量文化（JA-706）联动
+用法：评测透明化
+锚点：实战共识
+
+</details>
+
+### 治理 · 界定（责任）
+
+<details><summary>看背面</summary>
+
+Agent 事故责任界定框架：Agent 自主决策的事故（宪法缺陷=Owner 责任）vs 用户诱导（输入边界=防线责任）vs 工具故障（依赖方责任），三方界定
+原理：Agent 事故责任是治理难题（自动化决策的责任链），界定框架让复盘有据（JA-355），与合规审计（AD-097）联动
+用法：责任界定框架
+锚点：实战共识
+
+</details>
+
+### 工具 · 文档（规范）
+
+<details><summary>看背面</summary>
+
+工具开发规范文档化：工具模板（描述/schema/幂等声明/测试样例/权限声明五件），规范让工具可维护
+原理：工具是 Agent 的 API（JA-014 API 规范的 Agent 版），五件模板让工具质量一致（JA-671 评审的输入），与开发规范联动
+用法：工具开发规范
+锚点：实战共识
+
+</details>
+
+### 工具 · 套件（测试）
+
+<details><summary>看背面</summary>
+
+工具测试套件标准化：功能测试+边界测试（异常参数）+幂等测试（重复调用）+权限测试（越权拒绝）四套件
+原理：工具测试的标准化族（AD-039 mock 剧本的工具级），四套件覆盖工具生命周期，与测试分层（AD-201）联动
+用法：工具测试套件
+锚点：实战共识
+
+</details>
+
+### 工具 · 预算（性能）
+
+<details><summary>看背面</summary>
+
+工具性能预算：单工具执行 P99 预算（超预算优化或标注慢工具），慢工具拖累 Agent 步进延迟
+原理：工具耗时直接叠加 Agent RT（JA-298 容量的工具面），性能预算让工具开发有性能意识，与性能工程联动
+用法：工具性能预算
+锚点：实战共识
+
+</details>
+
+### 工具 · 下游（依赖）
+
+<details><summary>看背面</summary>
+
+工具的下游依赖治理：工具背后的 DB/RPC/API 是 Agent 的"二级依赖"，下游故障→工具失败→Agent 行为，链路要纳入监控
+原理：工具的依赖链路是隐性故障面（JA-239 失败模式的二级），下游治理（限流/熔断）延伸到工具内，与依赖治理（JA-521）联动
+用法：二级依赖治理
+锚点：实战共识
+
+</details>
+
+### 工具 · 埋点（观测）
+
+<details><summary>看背面</summary>
+
+工具可观测埋点标准：调用次数/耗时分布/错误分类/参数分布（模型填参质量），四埋点让工具可运营
+原理：埋点标准的工具版（JA-199 点位清单的工具面），参数分布观测发现"模型填参质量问题"（JA-015 的运行时面），与观测知识联动
+用法：工具埋点标准
+锚点：实战共识
+
+</details>
+
+### 手写 · 清单（实现）
+
+<details><summary>看背面</summary>
+
+手写 Agent 的 Java 实现清单：Message 类/ToolDefinition 类/ToolRegistry/ModelClient 接口/AgentExecutor 循环/TrajectoryRecorder/预算计数器七件（AD-186 五类的完整化）
+原理：实现清单是手写笔试的"答题骨架"（面试先列清单再填代码），每件独立可讲（面试分点作答），与手写套卷（本域压轴）联动
+用法：手写实现清单
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（解析）
+
+<details><summary>看背面</summary>
+
+工具调用解析器实现：模型输出的工具调用 JSON→参数对象（schema 校验 AD-016），解析失败包装为错误反馈（模型重试）
+原理：解析器是模型与执行器的桥梁（AD-006 协议的代码面），解析失败处理（反馈而非崩溃），与 JSON 处理实践联动
+用法：解析器实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 响应（解析）
+
+<details><summary>看背面</summary>
+
+模型响应解析实现：响应拆解为"文本部分+工具调用列表"（模型可同时输出），文本与工具调用的分离逻辑
+原理：响应双内容（文本+工具调用）的解析是手写易错点（AD-200 bug 清单），分离正确才能正确回填，与消息模型（AD-188）联动
+用法：响应解析实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 序列（构建）
+
+<details><summary>看背面</summary>
+
+多轮消息序列构建器实现：消息追加（user/assistant/tool）+窗口裁剪（AD-068 策略挂载）+序列导出（调模型），构建器封装序列操作
+原理：构建器封装让序列操作不散落（散落是 bug 源 AD-200），裁剪策略作为构建器策略注入，与消息模型（AD-188）联动
+用法：序列构建器
+锚点：实战共识
+
+</details>
+
+### 手写 · 组合（终止）
+
+<details><summary>看背面</summary>
+
+终止条件组合器实现：多条件（完成/步数/预算/取消）的组合判断（任一触发），条件可扩展注册（新终止条件插入）
+原理：终止条件的组合器模式（条件策略化），扩展性让新终止条件（如时间窗）可插入，与策略模式联动
+用法：终止组合器
+锚点：实战共识
+
+</details>
+
+### 手写 · 格式（轨迹）
+
+<details><summary>看背面</summary>
+
+轨迹序列化格式设计：JSON Lines（每步一行）+任务级元数据头，格式决定下游分析便利性
+原理：轨迹格式是观测生态的接口（JA-040 分析工具消费），JSON Lines 流式友好（逐行解析），与轨迹基建联动
+用法：轨迹格式设计
+锚点：实战共识
+
+</details>
+
+### 手写 · 边界（异常）
+
+<details><summary>看背面</summary>
+
+Agent 的异常边界设计：哪些异常往外抛（配置错误/认证失败=启动期 fail-fast），哪些内部消化（工具失败反馈模型），边界清晰
+原理：异常边界的工程决策（启动期 fail-fast 与运行期反馈的分离），边界模糊导致"一半报错一半吞"，与异常处理（MY-087 类比）联动
+用法：异常边界
+锚点：实战共识
+
+</details>
+
+### 手写 · 断言（测试）
+
+<details><summary>看背面</summary>
+
+Agent 单元测试断言清单：终止原因正确/消息序列完整（工具结果都回填）/轨迹步数符合/预算未超/脱敏生效，五断言最小集
+原理：断言清单让 Agent 单测有章法（JA-048 五 bug 的测试面），断言遗漏=回归盲区，与测试断言实践联动
+用法：断言清单
+锚点：实战共识
+
+</details>
+
+### 手写 · 问题（评审）
+
+<details><summary>看背面</summary>
+
+手写 Agent code review 常见问题：终止条件漏预算/工具结果未回填（消息序列断）/脱敏遗漏/并发上下文污染/错误吞掉，五问题高频
+原理：review 高频问题的沉淀（AD-200 bug 清单的评审面），review 时按清单速查，与 review 纪律（AD-209）联动
+用法：review 问题沉淀
+锚点：实战共识
+
+</details>
+
+### 手写 · 差距（生产）
+
+<details><summary>看背面</summary>
+
+从手写到生产的差距清单：多租户/持久化/监控/灰度/安全五件（手写骨架缺的都是生产件），差距清单指导生产化
+原理：手写骨架与生产的差距认知（AD-049 手写的边界），差距清单是"手写→生产"的 roadmap，与生产化实践联动
+用法：生产差距清单
+锚点：实战共识
+
+</details>
+
+### 评测 · 陷阱（判分）
+
+<details><summary>看背面</summary>
+
+自动判分的陷阱：LLM judge 偏好长回答/偏好自己的输出（自评偏差），判分校准（JA-651 抽样人工比对）防偏
+原理：judge 偏差是自动判分的系统性风险（JA-272 校准的具体化），偏差样本修正判分 prompt，与判分工程联动
+用法：judge 偏差治理
+锚点：实战共识
+
+</details>
+
+### 评测 · 保证（多样）
+
+<details><summary>看背面</summary>
+
+任务集多样性保证：任务类型/难度/工具组合三维度多样性统计（多样性不足的评测集有盲区）
+原理：多样性是评测覆盖的量化（JA-253 三维统计），盲区驱动补集（JA-253 挖掘联动），与评测运营（JA-471）联动
+用法：多样性量化
+锚点：实战共识
+
+</details>
+
+### 评测 · 看板（呈现）
+
+<details><summary>看背面</summary>
+
+评测结果看板：分数趋势（版本间）/分维度（成功率/效率/安全）/分任务类型，可视化让评测结果可消费
+原理：JA-484 雷达图的运营化：看板让评测进日常（不只在发布时看），与质量文化（JA-706）联动
+用法：评测看板
+锚点：实战共识
+
+</details>
+
+### 评测 · 迭代（节奏）
+
+<details><summary>看背面</summary>
+
+评测驱动的迭代节奏：改宪法/工具→跑评测→分析→改，小步快跑（每次改动即评测，JA-663 评估即代码的节奏面）
+原理：评测驱动的开发节奏（TDD 的 AI 版：评估先行），小步让归因简单（JA-450 单变量），与迭代纪律联动
+用法：评测驱动节奏
+锚点：实战共识
+
+</details>
+
+### 工程 · 串联（观测）
+
+<details><summary>看背面</summary>
+
+Agent 日志与 trace 串联：轨迹条目带 traceId（JA-096 全链路），轨迹与日志/指标三方可关联（观测三支柱在 Agent 的统一）
+原理：观测统一是排障效率（JA-596 trace 树的 Agent 面），三支柱割裂=排障三头跑，与可观测三支柱（DF-053/091）联动
+用法：观测统一
+锚点：实战共识
+
+</details>
+
+### 工程 · 热更新（配置）
+
+<details><summary>看背面</summary>
+
+Agent 配置热更新：宪法/限制配置热更新（配置中心推送），工具集变更走版本发布（重变更重评审）
+原理：配置热更新的分级（低风险热更、高风险发布 JA-683 分界），热更新的生效语义（新任务用新配置），与配置中心知识（AD-049 联动）
+用法：配置热更新分级
+锚点：实战共识
+
+</details>
+
+### 工程 · 演练（回滚）
+
+<details><summary>看背面</summary>
+
+Agent 版本回滚演练：回滚=切回旧版本三元组（AD-059），演练验证回滚路径（评测基线/工具兼容/记忆兼容）
+原理：回滚可用的验证（记忆格式兼容是回滚暗礁 JA-173），演练发现回滚障碍，与回滚演练（JA-583）联动
+用法：回滚演练
+锚点：实战共识
+
+</details>
+
+### 工程 · 容量（压测）
+
+<details><summary>看背面</summary>
+
+Agent 容量压测：mock 模型压测编排层（并发任务数/队列深度/资源占用），真实模型抽样压测（成本），两层压测（JA-400 的 Agent 版）
+原理：压测定位 Agent 系统瓶颈（编排层 vs 模型层），mock 压并发容量、真实压端到端，与压测方法论联动
+用法：Agent 压测
+锚点：实战共识
+
+</details>
+
+### 工程 · 五批（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 第五批收束：协作演进（211~220）+行业案例（221~230）+治理运营（231~235）+工具工程（236~240）+手写深化（241~250）+评测运维（251~259）六分支，域地图五批进度 260/720
+原理：批次收束与进度核对（JA-480），剩余分支：手写套卷素材/行业补充/治理深化，节奏保持
+用法：五批收束
+锚点：实战方法论
+
+</details>
+
+### 手写 · 完整步骤（循环）
+
+<details><summary>看背面</summary>
+
+AgentExecutor 核心循环完整步骤：构建初始消息→循环{调模型→解析响应（文本/工具调用）→无调用且有完成标记则终止→执行工具→结果回填}→返回最终输出，步骤序列即手写答题的“标准答案骨架”
+原理：完整步骤序列是手写题的评分点（每步一个得分点），与 AD-050 骨架的细化为可执行伪代码，与循环知识（AD-004）联动
+用法：循环步骤序列
+锚点：实战共识
+
+</details>
+
+### 手写 · 维护（序列）
+
+<details><summary>看背面</summary>
+
+循环中消息序列的维护顺序：user 追加→assistant 追加（含工具调用意图）→每工具一条 tool 结果追加→循环，追加顺序错=上下文错乱
+原理：序列维护顺序是手写最易错点（AD-200 bug 清单第一条），assistant 消息与 tool 消息必须成组（AD-063 关联），与序列构建器（AD-244）联动
+用法：序列维护顺序
+锚点：实战共识
+
+</details>
+
+### 手写 · 流程（解析）
+
+<details><summary>看背面</summary>
+
+工具调用意图解析流程：检查响应是否含工具调用→提取名称与参数 JSON→按注册表查找→schema 校验→分发执行，任一步失败的分支处理
+原理：解析流程的五步每步有失败分支（幻觉名/坏 JSON/缺字段/未注册），分支处理是健壮性得分点，与解析器（AD-242）联动
+用法：解析流程分支
+锚点：实战共识
+
+</details>
+
+### 手写 · 幻觉工具（容错）
+
+<details><summary>看背面</summary>
+
+未知工具调用的处理：模型调用了未注册的工具名（幻觉工具），处理=返回“工具不存在”错误消息回喂（模型可纠正），不终止
+原理：幻觉工具是模型常见错误（AD-044 清单），终止式处理让 Agent 脆弱，错误反馈让模型换正确工具，与错误反馈（AD-194）联动
+用法：幻觉工具处理
+锚点：实战共识
+
+</details>
+
+### 手写 · 必填（容错）
+
+<details><summary>看背面</summary>
+
+参数必填校验：schema 的 required 字段缺失时返回“缺少参数 X”错误反馈，不做默认值猜测
+原理：缺失必填参数时猜默认值会执行错误操作（隐错），显式报错让模型补全，与参数校验（JA-171 联动）
+用法：必填校验
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（超时）
+
+<details><summary>看背面</summary>
+
+工具执行超时实现：Future.get(timeout) 或 CompletableFuture.orTimeout，超时取消任务并返回“工具超时”反馈
+原理：Java 超时实现是手写考察点（并发工程），超时后任务取消传播（AD-302 深化），反馈回喂与 JA-016 一致
+用法：超时实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 结果（包装）
+
+<details><summary>看背面</summary>
+
+工具结果的消息包装：执行结果统一包装为工具消息（成功带内容/失败带错误），包装器屏蔽工具差异（返回类型不同统一化）
+原理：包装让循环对工具结果的处理统一（异构工具统一接口），包装器是执行器的一部分（AD-190），与消息模型（AD-188）联动
+用法：结果包装器
+锚点：实战共识
+
+</details>
+
+### 手写 · 识别（终止）
+
+<details><summary>看背面</summary>
+
+完成信号识别：finishReason=stop 且无工具调用意图=任务完成（模型认为做完了），或模型输出显式完成标记
+原理：完成识别的两种信号（元数据+内容标记），误判完成（模型谎报 JA-191）靠验证器（AD-502）兜底，与终止实现（AD-191）联动
+用法：完成识别
+锚点：实战共识
+
+</details>
+
+### 手写 · 提取（输出）
+
+<details><summary>看背面</summary>
+
+最终答案提取：终止后从最后 assistant 消息提取文本（或结构化 entity），提取时剥离工具调用残留
+原理：最终提取是 Agent 的“出口”（输出的契约 AD-047），残留工具调用标记会污染输出，与输出结构化联动
+用法：答案提取
+锚点：实战共识
+
+</details>
+
+### 手写 · 资源（清理）
+
+<details><summary>看背面</summary>
+
+循环外资源清理：HTTP 客户端/线程池/沙箱容器在 Agent 生命周期结束时关闭（finally 或 AutoCloseable），泄漏在长运行服务累积
+原理：清理是手写易遗漏点（AD-200 清单），AutoCloseable+try-with-resources 是 Java 惯用法（MY-053 联动），泄漏在 soak（JA-642）暴露
+用法：资源清理
+锚点：实战共识
+
+</details>
+
+### 手写 · 分发（并发）
+
+<details><summary>看背面</summary>
+
+并发 Agent 的任务分发器实现：任务入队列→工作线程取任务→创建 Agent 实例执行→结果回调，分发器是“Agent 的线程池”
+原理：分发器模式（生产者消费者 AL-035 联动），并发度=工作线程数（配额 JA-100 联动），队列满的拒绝策略（AD-017 类比）
+用法：分发器实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 存储（状态）
+
+<details><summary>看背面</summary>
+
+任务状态存储实现：内存 Map（单机）→DB 表（持久化），字段（taskId/status/startTime/trajectoryRef），状态机流转（AD-021 显式化）
+原理：状态存储是可观测与恢复的地基（AD-021），内存版单机玩具、DB 版生产，与状态机知识联动
+用法：状态存储实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 查询（API）
+
+<details><summary>看背面</summary>
+
+任务查询接口实现：按 taskId 查状态与轨迹（GET /tasks/{id}），查询是无副作用读（幂等天然），轨迹从存储读取
+原理：查询 API 让异步任务（AD-108）可跟踪（用户轮询/推送），接口幂等（JA-467 延伸），与 REST 设计联动
+用法：任务查询 API
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（取消）
+
+<details><summary>看背面</summary>
+
+任务取消实现：设置取消标志（AtomicBoolean）→循环每步检查→终止并收尾，已提交工具调用无法撤回（幂等/补偿 JA-505）
+原理：取消的协作式实现（与线程中断同思想 AD-018 类比），取消后收尾（清理/汇报），与优雅取消（JA-098）联动
+用法：取消实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 并发（预算）
+
+<details><summary>看背面</summary>
+
+预算计数器线程安全：AtomicLong 累加 token（多 Agent 并发共享池），CAS 无锁累加，阈值判断用 getAndUpdate
+原理：并发预算（AD-500 池）的线程安全实现（AtomicLong 是标准答案），普通 long 累加有竞态（JA-058 联动），与原子类知识（JC-046）联动
+用法：预算线程安全
+锚点：实战共识
+
+</details>
+
+### 手写 · 异步（轨迹）
+
+<details><summary>看背面</summary>
+
+轨迹异步写入实现：内存队列（BlockingQueue）+后台消费线程批量落库，主循环只入队（不阻塞），队列满丢弃策略（采样）
+原理：异步写入让轨迹不拖慢主循环（AD-040 异步落地），队列满策略（丢调试保审计 AD-106 分级），与异步日志实践联动
+用法：轨迹异步化
+锚点：实战共识
+
+</details>
+
+### 手写 · 加载（配置）
+
+<details><summary>看背面</summary>
+
+Agent 配置加载实现：配置类（AD-198）从配置文件/环境变量加载→校验（JA-346 fail-fast）→注入 Agent，配置变更热加载（AD-257 分级）
+原理：配置加载的工程实现（Spring 环境用绑定，非 Spring 手动加载），fail-fast 校验（JA-346），与配置分层（AD-205）联动
+用法：配置加载实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 动态（注册）
+
+<details><summary>看背面</summary>
+
+工具运行时动态注册：registry.register(tool) 运行时调用（插件式工具加载），与静态注册（启动期）并存，动态注册要校验（重名/schema）
+原理：动态注册支撑插件化（AD-723 插件思想），校验防坏工具（重名/schema 缺失），与 MCP 动态发现（AD-372→JA-094）联动
+用法：动态注册
+锚点：实战共识
+
+</details>
+
+### 手写 · MCP（发现）
+
+<details><summary>看背面</summary>
+
+MCP 动态工具发现的手写集成：连 server→listTools→转 ToolDefinition 注册（JA-186 桥接的手写面），变更通知刷新（JA-094）
+原理：手写版 MCP 集成验证理解（发现→转换→注册三步），通知刷新（工具热更新），与 MCP 客户端知识（AD-021）联动
+用法：MCP 手写集成
+锚点：实战共识
+
+</details>
+
+### 手写 · Spring（集成）
+
+<details><summary>看背面</summary>
+
+Agent 与 Spring 集成：AgentExecutor/Registry/ModelClient 为 bean（AD-070 Builder 类比），配置绑定（AD-277），生命周期由容器管理（AD-107）
+原理：Spring 集成让 Agent 工程化（依赖注入/生命周期/观测），bean 化后 AOP 观测（JA-019）自动，与 Spring 知识联动
+用法：Spring 集成实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 暴露（API）
+
+<details><summary>看背面</summary>
+
+Agent 的 REST API 暴露：POST /agents/{id}/tasks 提交（幂等键 AD-057）→GET 任务状态（AD-273）→SSE 轨迹流（AD-283），API 即产品（JA-641）
+原理：REST 暴露让 Agent 服务化（AD-102 平台的接口面），三接口是任务 API 最小集，与 API 设计（JA-641）联动
+用法：REST 暴露
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（流式）
+
+<details><summary>看背面</summary>
+
+Agent 流式实现：模型 stream 调用（Flux）+事件转换（token 事件/工具事件）→下游，流式版循环的复杂点（流中工具调用要暂停收集）
+原理：流式 Agent 的手写难点（流与循环交织 JA-073），事件协议（AD-146）承载，流式与工具循环的组合是框架级难点
+用法：流式手写
+锚点：实战共识
+
+</details>
+
+### 手写 · 轨迹（SSE）
+
+<details><summary>看背面</summary>
+
+SSE 轨迹事件推送：轨迹事件（AD-146）经 SseEmitter 推前端（AD-169 桥接），事件过滤（哪些事件推前端 vs 只落库）
+原理：轨迹推送让用户实时看到 Agent 在做什么（JA-677 进度的事件面），过滤策略（敏感步骤不推），与轨迹分级（AD-106）联动
+用法：SSE 轨迹推送
+锚点：实战共识
+
+</details>
+
+### 手写 · 码（错误）
+
+<details><summary>看背面</summary>
+
+Agent 错误码设计：任务级错误码（CONFIG_INVALID/QUOTA_EXCEEDED/TOOL_FAILED/CONTEXT_OVERFLOW/TIMEOUT），码标准化让客户端处理
+原理：错误码标准化是 API 契约（JA-684 网关错误思想），客户端按码处理（重试/提示），与错误分层（JA-104）联动
+用法：错误码设计
+锚点：实战共识
+
+</details>
+
+### 测试 · 工具（断言）
+
+<details><summary>看背面</summary>
+
+Agent 测试断言工具：封装常用断言（assertToolCalled(name,times)/assertTrajectoryLength/assertFinalOutput），断言工具让测试可读
+原理：断言工具化让测试表达业务语义（JA-248 断言清单的代码化），可读断言降低维护成本，与测试工程联动
+用法：断言工具化
+锚点：实战共识
+
+</details>
+
+### 测试 · 格式（剧本）
+
+<details><summary>看背面</summary>
+
+mock 模型剧本格式：JSON 序列（每步 expectedResponse），支持工具调用与文本混合步骤，剧本文件与测试同仓
+原理：剧本格式设计（AD-039 的文件化），格式简单（JSON 行）与表达力（多步骤）平衡，与 mock 实现（AD-197）联动
+用法：剧本格式设计
+锚点：实战共识
+
+</details>
+
+### 评测 · 实现（跑批）
+
+<details><summary>看背面</summary>
+
+评估跑批器实现：批量任务（评测集）顺序或并行执行（JA-100 并发控制）→逐任务收集轨迹与产出→持久化评估结果
+原理：跑批器是评估流水线（JA-698）的执行件，并发度与预算控制（JA-653 成本），结果持久化供聚合（AD-288）
+用法：跑批器实现
+锚点：实战共识
+
+</details>
+
+### 评测 · 统计（聚合）
+
+<details><summary>看背面</summary>
+
+评测结果聚合统计：成功率（按任务类型分）/平均步数/token 总量/失败分类分布，聚合输出评估报告（JA-484 雷达图数据源）
+原理：聚合统计让评测结果可消费（JA-254 看板的数据面），分维度聚合定位弱项（JA-365），与评测报告联动
+用法：聚合统计实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（RAG）
+
+<details><summary>看背面</summary>
+
+Agent 与 RAG 的手写集成：检索实现为工具（retriever 工具注册）或上下文注入（前置检索），两模式的手写要点
+原理：JA-051 RAG 与 Agent 的组合手写面：工具模式（Agent 决定何时检索）与注入模式（每问必检索）取舍，与 RAG 组件知识联动
+用法：RAG 集成手写
+锚点：实战共识
+
+</details>
+
+### 手写 · 接口（记忆）
+
+<details><summary>看背面</summary>
+
+记忆库接口设计：write/read/search 三方法（AD-090 接口的通用化），实现可插拔（内存/向量/DB），记忆接口与工具接口分离
+原理：记忆接口让记忆实现可插拔（JA-090 对等），search 支撑长期记忆检索（AD-013），与记忆分层（AD-070）联动
+用法：记忆接口设计
+锚点：实战共识
+
+</details>
+
+### 多模态 · 工具（手写）
+
+<details><summary>看背面</summary>
+
+图像理解工具手写：输入（图像 URL/base64+问题）→视觉模型调用→结构化结果返回，作为 Agent 工具注册（AD-153 视觉工具的手写面）
+原理：视觉工具的手写与文本工具同构（输入输出 schema 化 JA-109），注册进 Agent 即获得视觉能力，与视觉 prompt（JA-542）联动
+用法：图像工具实现
+锚点：实战共识
+
+</details>
+
+### 多模态 · 图像（消息）
+
+<details><summary>看背面</summary>
+
+消息中的图像表示：图像以 URL/base64 附件挂在 user 消息（Media 结构 JA-109），模型侧需多模态支持
+原理：图像消息的协议表示（JA-109 的消息层），与文本消息混合序列（JA-185 组装），协议不支持时降级（描述文本）
+用法：图像消息表示
+锚点：实战共识
+
+</details>
+
+### 多模态 · 消息（组装）
+
+<details><summary>看背面</summary>
+
+多模态消息组装：文本部分+图像列表组装为多模态消息（JA-292 的构建器），多图与文本交错的多轮组装
+原理：组装器是多模态消息的构建面（JA-292 的实现），组装顺序与引用（图 1/图 2）一致，与多图任务（JA-543）联动
+用法：组装器实现
+锚点：实战共识
+
+</details>
+
+### 多模态 · 视觉（schema）
+
+<details><summary>看背面</summary>
+
+视觉工具 schema：输入 schema 含图像引用与问题字段，输出 schema 按任务（表格/描述/判断），schema 决定视觉工具可组合性
+原理：视觉工具的 schema 设计（AD-052 纪律的视觉面），输出结构化（JA-003 思想）供 Agent 决策，与视觉 prompt（JA-542）联动
+用法：视觉工具 schema
+锚点：实战共识
+
+</details>
+
+### 多模态 · 混合（上下文）
+
+<details><summary>看背面</summary>
+
+图文混合上下文管理：视觉 token 占用（JA-541）与文本预算统一（JA-663），图像结果在多轮中的留存策略（保留摘要弃原图）
+原理：图文混合的窗口管理（图像 token 大，JA-184 预算），多轮后图像摘要化（省 token 保信息），与裁剪策略（AD-023）联动
+用法：图文窗口管理
+锚点：实战共识
+
+</details>
+
+### 多模态 · 评测（测试）
+
+<details><summary>看背面</summary>
+
+多模态 Agent 测试：mock 视觉工具（固定理解结果）+多模态评测集（JA-548），测试覆盖图文混合任务
+原理：多模态测试的 mock 面（视觉工具 mock 与文本 mock 同构），评测集多模态化（JA-548），与测试分层（AD-201）联动
+用法：多模态测试
+锚点：实战共识
+
+</details>
+
+### 多模态 · 成本（观测）
+
+<details><summary>看背面</summary>
+
+视觉成本统计：图像 token 按请求聚合（视觉成本占比观测），视觉预算告警（JA-461 联动）
+原理：视觉成本可观测（JA-462 成本观测的多模态面），占比趋势（视觉滥用发现），与预算告警联动
+用法：视觉成本观测
+锚点：实战共识
+
+</details>
+
+### 多模态 · 输入（校验）
+
+<details><summary>看背面</summary>
+
+图像输入校验：格式/大小/分辨率校验（超限前置拒绝 JA-397），恶意图像（内嵌注入 JA-580）检测
+原理：图像输入校验（AD-397 前置防线的多模态面），校验失败明确错误码（AD-284），与多模态安全（JA-580）联动
+用法：图像输入校验
+锚点：实战共识
+
+</details>
+
+### 多模态 · 结果（裁剪）
+
+<details><summary>看背面</summary>
+
+视觉结果裁剪：视觉模型输出的长描述按任务裁剪（Agent 只需要结构化字段），裁剪进工具包装（AD-267 多模态版）
+原理：视觉结果裁剪（JA-256 裁剪的多模态面），长描述进上下文挤占预算（JA-295），裁剪保结构化字段
+用法：视觉结果裁剪
+锚点：实战共识
+
+</details>
+
+### 多模态 · GUI（安全）
+
+<details><summary>看背面</summary>
+
+GUI Agent 安全边界：屏幕内容可能含敏感信息（截图外发风险）、操作边界（只读 vs 可点击执行），GUI Agent 的操作白名单
+原理：GUI Agent（JA-433）的安全面：截图含屏幕敏感数据（隐私 JA-176 延伸），操作边界白名单（JA-152 系统操作档），与操作审计联动
+用法：GUI Agent 安全
+锚点：实战共识
+
+</details>
+
+### 手写 · 单例（并发）
+
+<details><summary>看背面</summary>
+
+Agent 单例与并发：AgentExecutor 设计为无状态单例（状态在任务实例），并发任务各自持有独立任务状态，单例+任务对象分离
+原理：无状态单例+有状态任务分离是并发正确性的设计（JA-058 并发的架构面），单例共享工具/模型（AD-107 线程安全），与状态显式化（AD-021）联动
+用法：单例设计
+锚点：实战共识
+
+</details>
+
+### 手写 · 传播（超时）
+
+<details><summary>看背面</summary>
+
+工具超时的取消传播：Future.cancel(true) 中断工具内线程（工具内部响应中断），取消传播让超时不留僵尸任务
+原理：取消传播是超时的完整实现（超时不只是放弃等待，还要中断任务），中断响应写进工具实现，与取消（AD-274）联动
+用法：取消传播
+锚点：实战共识
+
+</details>
+
+### 手写 · 重试预算（交互）
+
+<details><summary>看背面</summary>
+
+重试与预算的交互：重试消耗预算（每次重试计 token），预算将尽时降级重试策略（少次数快失败），预算与重试联动
+原理：两防线的交互（JA-017 双上限的细节）：重试是预算消耗大户，预算压力下重试策略收紧，与预算实现（AD-193）联动
+用法：重试预算交互
+锚点：实战共识
+
+</details>
+
+### 手写 · 可重入（设计）
+
+<details><summary>看背面</summary>
+
+Agent 执行可重入：同一任务的重入（续跑）不重复执行已完成的工具步骤（步骤幂等登记），可重入靠步骤级登记
+原理：可重入是恢复的精细版（AD-195 checkpoint 的步骤粒度），步骤登记（已执行清单）让续跑跳过，与幂等（AD-038）联动
+用法：可重入实现
+锚点：实战共识
+
+</details>
+
+### 评测 · 格式（导出）
+
+<details><summary>看背面</summary>
+
+轨迹导出为评测格式：轨迹 JSON Lines（AD-246）转评测条目（任务/轨迹/结果三元组），导出即评测集扩产（JA-162 通道）
+原理：轨迹到评测格式的转换（JA-162 轨迹数据集的工程面），导出管线化（评测集持续扩产），与评测资产（JA-202）联动
+用法：轨迹导出
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（会话）
+
+<details><summary>看背面</summary>
+
+Agent 与会话管理集成：多轮对话的会话上下文（历史轮）与 Agent 任务上下文（工具轮次）分层，会话管理器统一入口
+原理：会话与任务的分层（对话级 vs 任务级，JA-398 生命周期），会话管理器封装两层，与记忆分层（AD-070）联动
+用法：会话集成
+锚点：实战共识
+
+</details>
+
+### 手写 · 优雅（停机）
+
+<details><summary>看背面</summary>
+
+Agent 优雅停机：进行中任务处理（等待完成或暂停 checkpoint），停机前拒绝新任务（AD-108 队列关闭），与 SP-098 优雅停机同构
+原理：停机对长任务的影响（硬杀丢任务，checkpoint 续跑 AD-147），停机流程（关队列→等任务→checkpoint→退出），与优雅停机（SP-098）联动
+用法：优雅停机实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 路由（灰度）
+
+<details><summary>看背面</summary>
+
+Agent 灰度路由实现：按任务特征（用户 hash/任务类型）路由到新旧版本 Agent 实例（JA-206 灰度的路由实现），路由表可配置
+原理：灰度路由的手写实现（路由表+hash 分桶），新旧版本并存（AD-059 版本化前提），与灰度发布（AD-206）联动
+用法：灰度路由实现
+锚点：实战共识
+
+</details>
+
+### 工程 · 实现（埋点）
+
+<details><summary>看背面</summary>
+
+Agent 监控埋点实现：Micrometer 计数器/定时器（任务数/步数/耗时分布）+tag（租户/模型 JA-647），埋点代码与轨迹（AD-040）双轨
+原理：埋点的代码实现（JA-199 点位的 Micrometer 落地），tag 维度设计（JA-647 五维），与 Micrometer 知识联动
+用法：埋点实现
+锚点：实战共识
+
+</details>
+
+### 多模态 · 任务（评测）
+
+<details><summary>看背面</summary>
+
+多模态 Agent 评测任务设计：图文混合任务（看图查库存/读表算数），评测覆盖“视觉理解→工具调用→答案”全链
+原理：多模态评测的任务设计（JA-548 评测集的任务形态），全链评测（视觉理解错误 vs 工具错误归因 JA-293），与评测分层联动
+用法：多模态评测任务
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（工厂）
+
+<details><summary>看背面</summary>
+
+Agent 工厂实现：按配置（AD-198 配置类）创建 Agent 实例（组装 ModelClient/Registry/Executor），工厂让配置到实例的装配集中
+原理：工厂模式集中装配逻辑（装配点单一可测试），不同配置产生不同能力 Agent（AD-060 分场景），与工厂模式联动
+用法：工厂实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 工具（日志）
+
+<details><summary>看背面</summary>
+
+工具调用日志实现：每次工具调用记录（工具名/参数摘要/结果状态/耗时），日志格式结构化（JSON 行 AD-246），与轨迹互补（轨迹给回放、日志给检索）
+原理：工具日志是排障与审计的数据面（AD-084 审计的实现），结构化让日志可查询（ELK 接入），与轨迹分层（AD-106）联动
+用法：工具日志实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 收集（指标）
+
+<details><summary>看背面</summary>
+
+Agent 执行指标收集：步数分布/每步耗时/token 消耗分布的定时器实现（Micrometer Timer/DistributionSummary AD-309）
+原理：分布指标比均值有价值（P99 定位毛刺），指标实现是观测三件（AD-041）的代码面，与 JA-647 维度体系联动
+用法：指标收集实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 计算（窗口）
+
+<details><summary>看背面</summary>
+
+上下文窗口动态计算实现：system+消息序列逐条 token 估算（AD-067 jtokkit）累加，剩余预算=窗口-已用，裁剪决策依据剩余预算
+原理：窗口计算是裁剪的依据实现（AD-068 策略的输入），逐条估算开销可控（缓存 token 数），与窗口管理（AD-014）联动
+用法：窗口计算实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（摘要）
+
+<details><summary>看背面</summary>
+
+历史摘要器实现：触发时取旧消息→小模型摘要（AD-065）→摘要替换原消息序列，摘要 prompt 模板化（保留任务目标/关键结论/未完事项）
+原理：摘要器是窗口治理的执行件（AD-068 策略实现），摘要 prompt 是资产（JA-473 管理），摘要质量评估（压缩后任务继续成功）
+用法：摘要器实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 阈值（触发）
+
+<details><summary>看背面</summary>
+
+摘要触发实现：窗口使用率监控（AD-314 计算）超阈值（如 80%）触发摘要，触发后异步执行（不阻塞当前步）
+原理：触发实现的细节（同步摘要会阻塞当前步增加延迟，异步摘要下一轮生效），阈值权衡（触发太晚超窗），与触发时机（AD-064）联动
+用法：触发实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（裁剪）
+
+<details><summary>看背面</summary>
+
+工具结果白名单裁剪实现：按工具声明的保留字段过滤 JSON（AD-069），裁剪器通用实现（Jackson 树过滤），声明即配置
+原理：裁剪器通用化（每个工具声明保留字段，裁剪器统一执行），Jackson 树模型实现（字段白名单遍历），与工具声明（AD-069）联动
+用法：裁剪器实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 清单（注入）
+
+<details><summary>看背面</summary>
+
+Agent 依赖注入清单：ModelClient/ToolRegistry/TrajectoryRecorder/BudgetCounter/Config 五依赖构造器注入（AD-186 类图的实例化清单），构造器注入便于测试（AD-189 mock）
+原理：依赖注入清单是可测试性的保障（每依赖可 mock），字段注入（@Autowired 字段）不利于测试（SP-023 构造器推荐），与 Spring 集成（AD-280）联动
+用法：注入清单
+锚点：实战共识
+
+</details>
+
+### 测试 · 实现（集成）
+
+<details><summary>看背面</summary>
+
+Agent 集成测试实现：Testcontainers 起 Redis/DB（依赖中间件）+mock 模型（AD-197），验证持久化/队列/并发全链，集成测试环境与生产同构
+原理：集成测试的实现要点（真实中间件+mock 模型 JA-203 分层），Testcontainers 让环境一致（AI-058 风格），与测试分层（AD-201）联动
+用法：集成测试实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 模板（配置）
+
+<details><summary>看背面</summary>
+
+Agent 生产配置模板：模型（key 走环境变量 JA-043）/限制（步数/预算）/工具（清单与权限）/观测（采样率）四段模板，模板即生产的起点配置
+原理：生产配置模板让部署标准化（新 Agent 从模板复制 JA-523 脚手架），模板四段对应 AD-198 四组，与配置模板实践联动
+用法：生产配置模板
+锚点：实战共识
+
+</details>
+
+### 手写 · 切流（灰度）
+
+<details><summary>看背面</summary>
+
+Agent 灰度切流实现：路由层按特征（用户 hash AD-308）选版本实例，切流比例可配置（1%→100%），切流操作留审计
+原理：灰度切流的代码实现（路由表+分桶函数），切流比例动态配置（配置中心 AD-257），与灰度发布（AD-206）联动
+用法：切流实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（限流）
+
+<details><summary>看背面</summary>
+
+Agent 限流实现：提交入口检查配额（用户/租户/全局三级 JA-206），Redis 计数（RD-057）或本地令牌桶，超限返回明确错误码（AD-284）
+原理：限流实现是配额的执行（AD-099 配置的执行面），三级检查顺序（先用户后全局），超限错误码标准化，与限流知识联动
+用法：限流实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 模型切换（降级）
+
+<details><summary>看背面</summary>
+
+Agent 模型降级实现：主模型调用失败（重试耗尽 JA-606）→切备模型（ModelClient 多实现 JA-533 抽象层）→备也失败走兜底模板
+原理：降级链的代码实现（三段：主/备/兜底），切换决策（异常类型 JA-104），与降级链（JA-053）联动
+用法：降级实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（熔断）
+
+<details><summary>看背面</summary>
+
+Agent 熔断集成（resilience4j）：ChatClient 调用点包熔断器（错误率/慢调用率触发），熔断打开快速失败走降级
+原理：熔断的代码集成（JA-154 的实现面），熔断与重试的顺序（先重试后熔断判断），与熔断知识（DF-022）联动
+用法：熔断集成
+锚点：实战共识
+
+</details>
+
+### 手写 · 退避（重试）
+
+<details><summary>看背面</summary>
+
+Agent 重试实现：指数退避+jitter（JA-021 算法），重试只对可重试异常（JA-606 Transient），重试次数进预算（AD-303）
+原理：重试的代码实现（退避算法手写或 resilience4j Retry），可重试判定（异常分类），与重试知识联动
+用法：重试实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（幂等）
+
+<details><summary>看背面</summary>
+
+Agent 幂等实现：幂等键检查（Redis setnx 幂等键 AD-057）→存在返回既有任务→不存在创建执行，幂等窗口（键 TTL）
+原理：幂等的代码实现（setnx 是标准手法 RD-051 联动），幂等窗口权衡（TTL 过长占存储），与幂等三段式（DF-019）联动
+用法：幂等实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（队列）
+
+<details><summary>看背面</summary>
+
+Agent 任务队列实现：BlockingQueue 或 Redis List（跨实例），入队（提交）/出队（工作线程 AD-328）/拒绝策略（队列满），队列深度可配
+原理：任务队列的代码实现（单机 BlockingQueue 与分布式 Redis 版），队列深度与拒绝策略（AD-017 类比），与队列知识（RD-053）联动
+用法：队列实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 工作（线程）
+
+<details><summary>看背面</summary>
+
+Agent 工作线程实现：从队列取任务→执行（AgentExecutor.run）→结果回写→继续取，线程数=并发度（JA-131 水位），优雅停机（AD-307 停止取任务）
+原理：工作线程的实现要点（循环取任务/异常不退出/优雅停机），线程数与配额（AD-322）联动，与线程池实践联动
+用法：工作线程实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 联动（取消）
+
+<details><summary>看背面</summary>
+
+取消与清理联动实现：取消标志（AD-274）触发后，清理资源（沙箱容器/临时文件）+收尾汇报，取消不等于清理遗漏
+原理：取消与清理的联动（取消只停执行、清理回收资源），清理失败进补偿任务（JA-505），与清理知识（AD-261）联动
+用法：取消清理联动
+锚点：实战共识
+
+</details>
+
+### 手写 · 层级（超时）
+
+<details><summary>看背面</summary>
+
+三级超时实现：工具超时（AD-266）/单轮模型超时/任务总超时（定时器触发收尾），三级独立配置（AD-107），总超时兜底
+原理：三级超时的代码实现（每层独立检查），层级关系（总超时兜底），与超时体系（AD-107/166）联动
+用法：三级超时实现
+锚点：实战共识
+
+</details>
+
+### 治理 · 租户（平台）
+
+<details><summary>看背面</summary>
+
+Agent 平台租户管理：租户注册/配额（JA-320 三维）/权限（工具白名单按租户）/计费（JA-326 模式），租户是平台的一等概念
+原理：平台化的租户维度（JA-331 平台管理的 Agent 面），租户隔离（JA-669 检索保护延伸），与多租户架构联动
+用法：租户管理
+锚点：实战共识
+
+</details>
+
+### 治理 · 实现（计费）
+
+<details><summary>看背面</summary>
+
+Agent 计费实现：用量聚合（token 按租户/Agent 聚合 JA-657）→价格表计算（JA-264）→账单输出（周期），计费数据与观测同源
+原理：计费的实现链（观测数据→聚合→价格→账单），计费准确性依赖 usage 采集（JA-065/079），与对账（JA-265）联动
+用法：计费实现
+锚点：实战共识
+
+</details>
+
+### 治理 · 实现（审批）
+
+<details><summary>看背面</summary>
+
+Agent 审批流实现：待审批任务队列（AD-109 工作台）→审批接口（通过/拒绝/修改）→回调 Agent 继续（AD-046 确认的异步实现）
+原理：审批流的代码实现（异步审批：Agent 暂停→审批→恢复），审批超时策略（AD-259 超时），与人审工作台联动
+用法：审批流实现
+锚点：实战共识
+
+</details>
+
+### 治理 · 报告（合规）
+
+<details><summary>看背面</summary>
+
+Agent 合规审计报告生成：从审计日志（AD-312）聚合生成报告（调用统计/权限使用/异常事件），报告周期化（月度）供合规审查
+原理：审计报告的自动化（JA-383 留痕的消费面），人工整理不可持续，报告模板化（合规问询 JA-630 备战），与合规知识联动
+用法：审计报告自动化
+锚点：实战共识
+
+</details>
+
+### 治理 · 实现（保留）
+
+<details><summary>看背面</summary>
+
+数据保留策略实现：轨迹/审计/记忆按保留年限（JA-383）定时清理（归档先行 JA-536），清理任务幂等可重跑
+原理：保留策略的代码实现（定时任务+归档+清理三步），清理顺序（先归档后删），与数据治理联动
+用法：保留策略实现
+锚点：实战共识
+
+</details>
+
+### 运维 · 清单（发布）
+
+<details><summary>看背面</summary>
+
+Agent 发布检查清单：评测门禁通过（AD-092）/宪法评审（JA-530）/工具评审（AD-671）/降级演练（AD-672 类比）/监控接入（AD-207）/回滚方案（AD-258）六项，清单通过才发布
+原理：发布清单是 AD-525 准入的 Agent 特化版：六项覆盖质量/安全/运维，清单化防漏（MY-110 思想），与发布体系联动
+用法：发布清单
+锚点：实战共识
+
+</details>
+
+### 运维 · 规则（告警）
+
+<details><summary>看背面</summary>
+
+Agent 告警规则设计：成功率跌破基线（AD-094）/步数分布异常（JA-139 探索度）/成本速率异常（JA-717）/队列积压（AD-108），四类规则各有阈值
+原理：告警规则的四类设计（每类对应一种故障模式 JA-044），阈值基于基线（AD-165），与告警路由（JA-526）联动
+用法：告警规则设计
+锚点：实战共识
+
+</details>
+
+### 运维 · 故障（演练）
+
+<details><summary>看背面</summary>
+
+Agent 故障演练矩阵：模型不可用（降级）/工具故障（摘除）/配额耗尽（收尾）/记忆污染（回滚）四场景，演练验证 runbook（AD-416）
+原理：演练矩阵的 Agent 特化（JA-286 的 Agent 面）：每场景验证对应防线，演练产出 runbook 更新，与混沌工程联动
+用法：演练矩阵
+锚点：实战共识
+
+</details>
+
+### 运维 · 基线（性能）
+
+<details><summary>看背面</summary>
+
+Agent 性能基线管理：任务 RT P50/P99/步均耗时/工具耗时分布的版本基线，性能回归对比（AD-094 的性能面）
+原理：性能基线与质量基线并列（JA-592 的性能版），性能回归（新版本变慢）与质量回归同样阻断，与性能工程联动
+用法：性能基线
+锚点：实战共识
+
+</details>
+
+### 运维 · 模型（容量）
+
+<details><summary>看背面</summary>
+
+Agent 容量规划模型：并发任务数×任务时长×资源占用（连接/内存/供应商配额），容量模型驱动扩容决策（JA-259 压测输入）
+原理：容量模型的公式化（并发×时长 Little 定律 JA-090），供应商配额是容量组成（JA-514），与容量规划联动
+用法：容量模型
+锚点：实战共识
+
+</details>
+
+### 评测 · 执行（并发）
+
+<details><summary>看背面</summary>
+
+评测任务并发执行：评测跑批（AD-287）的并发度控制（供应商配额内最大化吞吐），并发失败重试（不影响其他任务）
+原理：评测跑批的并发实现（配额内吞吐最大化），并发失败的隔离（单任务失败不停止批），与并发工程联动
+用法：评测并发执行
+锚点：实战共识
+
+</details>
+
+### 评测 · 查询（存储）
+
+<details><summary>看背面</summary>
+
+评测结果存储与查询：结果按版本/时间/任务类型入库，查询支持对比（版本间/任务间），存储是评测运营（JA-471）的基建
+原理：评测结果的存储设计（对比查询是运营需求），入库结构（版本+维度+分数），与评测看板（AD-254）联动
+用法：评测存储
+锚点：实战共识
+
+</details>
+
+### 评测 · 报告（对比）
+
+<details><summary>看背面</summary>
+
+评测版本对比报告：新旧版本按维度对比（成功率/成本/延迟/安全），报告含显著性（AD-164）与结论建议，报告是发布决策输入
+原理：对比报告的自动化（AD-342 存储的对比面），报告结构化（数据+结论），与发布评审（AD-336）联动
+用法：对比报告
+锚点：实战共识
+
+</details>
+
+### 评测 · 实现（抽样）
+
+<details><summary>看背面</summary>
+
+评测抽样策略实现：按任务类型/错误率分层抽样（JA-702 自适应），抽样器实现（分层比例计算+随机采样），抽样可复现（种子固定）
+原理：抽样器的代码实现（分层+随机+种子），复现性让评测可追溯（JA-490 思想），与抽样策略联动
+用法：抽样实现
+锚点：实战共识
+
+</details>
+
+### 评测 · 优先级（队列）
+
+<details><summary>看背面</summary>
+
+评测任务优先级队列：发布前评测优先级高于日常评测，优先队列保证关键评测先跑
+原理：评测队列的优先级实现（发布阻塞在评测，关键先跑），与队列知识（AL-014 堆）联动，与发布流程（AD-336）联动
+用法：优先级队列
+锚点：实战共识
+
+</details>
+
+### 安全 · 输出（签名）
+
+<details><summary>看背面</summary>
+
+Agent 输出签名（防篡改）：对输出内容计算签名（HMAC），下游校验签名防中间篡改（输出作为决策依据的场景）
+原理：输出完整性保护（Agent 输出驱动下游动作时），签名让"输出未被改"可验证，与安全完整性思想联动
+用法：输出签名
+锚点：实战共识
+
+</details>
+
+### 安全 · 不可变（审计）
+
+<details><summary>看背面</summary>
+
+Agent 审计日志不可变存储：append-only（WORM 存储/对象存储版本控制），审计日志不可修改删除（合规要求 JA-097）
+原理：审计日志的可信度来自不可变（可改的审计无法律效力），WORM 存储或对象存储版本化，与合规留存（JA-383）联动
+用法：审计不可变
+锚点：实战共识
+
+</details>
+
+### 安全 · 数据结构（权限）
+
+<details><summary>看背面</summary>
+
+Agent 权限矩阵数据结构：Map<AgentId, Set<ToolId>> 的集中存储（AD-233 矩阵的代码面），权限检查 O(1)，变更走审计（JA-684）
+原理：权限矩阵的代码实现（集中存储+O(1) 检查），变更记录（谁改的权限），与权限治理（AD-233）联动
+用法：权限矩阵实现
+锚点：实战共识
+
+</details>
+
+### 安全 · 实现（确认）
+
+<details><summary>看背面</summary>
+
+敏感操作二次确认实现：Agent 暂停（状态 WAITING_APPROVAL AD-255）→发确认请求→等待人工（AD-333 审批流）→恢复执行，确认状态持久化（重启不丢）
+原理：二次确认的代码实现（状态机暂停+恢复），确认状态持久化（暂停期间重启可恢复 AD-037），与确认交互（AD-046）联动
+用法：二次确认实现
+锚点：实战共识
+
+</details>
+
+### 安全 · 规则（检测）
+
+<details><summary>看背面</summary>
+
+Agent 异常行为规则检测：步数异常（超均值 N 倍）/工具调用序列异常（禁用组合 AD-081）/成本异常（JA-717），规则引擎实时检测
+原理：异常行为检测的规则面（JA-538 演进的规则层），实时检测（步间判断），规则误报调优，与异常检测知识联动
+用法：行为检测实现
+锚点：实战共识
+
+</details>
+
+### 上下文 · 评测（压缩）
+
+<details><summary>看背面</summary>
+
+上下文压缩的质量评测：压缩后任务继续成功率对比（压缩 vs 不压缩），压缩策略变更过评估（JA-661 同纪律）
+原理：压缩有损（JA-023 风险），压缩质量要评测（压缩策略是"prompt 变更"同级），评测驱动压缩调参，与压缩知识（JA-269）联动
+用法：压缩评测
+锚点：实战共识
+
+</details>
+
+### 上下文 · 长结果（分块）
+
+<details><summary>看背面</summary>
+
+长工具结果的上下文分块：结果超长时切块注入（分块间引用），或摘要化（JA-256），按结果类型选
+原理：长结果的两策略（分块保细节/摘要保要点），选择按下游需求（Agent 是否需要细节），与裁剪（AD-069）联动
+用法：长结果策略
+锚点：实战共识
+
+</details>
+
+### 上下文 · 记忆系统（集成）
+
+<details><summary>看背面</summary>
+
+Agent 与外部记忆系统集成（Mem0 类记忆服务）：记忆读写 API 化（AD-290 接口的外部实现），记忆服务独立部署多 Agent 共享
+原理：外部记忆服务的集成模式（AD-090 接口的 SaaS 实现），共享记忆的隐私边界（JA-072），与记忆服务生态联动
+用法：外部记忆集成
+锚点：实战共识
+
+</details>
+
+### 上下文 · 动态（预算）
+
+<details><summary>看背面</summary>
+
+上下文预算动态分配实现：按任务阶段动态调整各段预算（规划阶段多留推理空间/执行阶段多留工具结果）
+原理：JA-223 预算的动态版：静态分配不适配阶段变化，阶段感知的预算调整，与预算工程（JA-223）联动
+用法：动态预算
+锚点：实战共识
+
+</details>
+
+### 上下文 · 队列（优先）
+
+<details><summary>看背面</summary>
+
+上下文条目优先级队列：裁剪时按优先级保留（宪法>当前任务>工具结果>历史），优先级随任务阶段更新
+原理：裁剪的优先级实现（AD-023 策略的代码化），优先级模型（哪些必留），与裁剪策略族联动
+用法：优先级裁剪
+锚点：实战共识
+
+</details>
+
+### 工程 · 七批（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 第七批收束：生产化代码（311~330）+治理（331~335）+运维（336~340）+评测（341~345）+安全（346~350）+上下文（351~355）六分支，域进度 360/720 过半
+原理：批次收束（JA-480）：生产化与治理运维是"手写→生产"差距清单（AD-250）的填空，与批次管理联动
+用法：七批收束
+锚点：实战方法论
+
+</details>
+
+### 工具 · 测试（AB）
+
+<details><summary>看背面</summary>
+
+工具 A/B 测试：同一工具两个实现（新旧）按流量分流，对比成功率/延迟/成本，数据驱动保留哪个
+原理：工具实现的 A/B（与 prompt A/B JA-271 同机制），流量切分与指标对比，与评测驱动（AD-255）联动
+用法：工具 A/B
+锚点：实战共识
+
+</details>
+
+### 工具 · 发布（灰度）
+
+<details><summary>看背面</summary>
+
+工具灰度发布：新版本工具先灰度（部分 Agent 实例），评测回归通过再全量（与 Agent 灰度 AD-206 同机制）
+原理：工具发布的灰度面（工具是 Agent 依赖 JA-083），灰度发现工具问题不扩散，与发布纪律联动
+用法：工具灰度
+锚点：实战共识
+
+</details>
+
+### 工具 · fallback（降级）
+
+<details><summary>看背面</summary>
+
+工具 fallback 实现：主工具失败自动切备工具（同语义工具），fallback 链配置化，降级事件记录
+原理：工具级降级（模型降级 JA-323 的工具版），同语义工具注册为 fallback 链，与降级知识联动
+用法：工具 fallback
+锚点：实战共识
+
+</details>
+
+### 工具 · 指南（迁移）
+
+<details><summary>看背面</summary>
+
+工具版本迁移指南：旧工具→新工具迁移（参数映射/行为差异/客户端迁移），迁移指南是工具版本共存（AD-119）的配套文档
+原理：工具迁移的文档化（共存期的迁移指引），迁移完成度追踪（客户端迁移率），与版本治理联动
+用法：迁移指南
+锚点：实战共识
+
+</details>
+
+### 手写 · 聚合器（流式）
+
+<details><summary>看背面</summary>
+
+Agent 流式事件聚合器实现：token 事件聚合为完整响应+工具事件单独收集，聚合器让流式消费端拿“分通道”结果（AD-282 流式的消费面）
+原理：流式聚合是流式 Agent 的消费端实现（AD-221 双消费），聚合器封装分通道逻辑，与流式知识联动
+用法：聚合器实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 执行器（并行）
+
+<details><summary>看背面</summary>
+
+并行工具执行器实现：独立工具 CompletableFuture 并行（AD-260 依赖图判断后），allOf 等待全部，依赖工具串行
+原理：并行执行器是 JA-260 的代码面（依赖图→并行分组→allOf），并行前提是工具独立声明，与并发知识联动
+用法：并行执行器
+锚点：实战共识
+
+</details>
+
+### 手写 · 包装器（重试）
+
+<details><summary>看背面</summary>
+
+工具重试包装器实现：包装工具执行（可重试异常退避重试 AD-325），重试计数进轨迹（AD-040），重试上限与预算联动（AD-303）
+原理：重试包装器是装饰器模式应用（包装不改工具本身），重试可观测（轨迹计数），与重试实现（AD-325）联动
+用法：重试包装器
+锚点：实战共识
+
+</details>
+
+### 手写 · 结果（验证）
+
+<details><summary>看背面</summary>
+
+工具结果验证器实现：工具结果的后置校验（非空/格式/业务规则），校验失败转错误反馈回喂（AD-016），验证器按工具配置
+原理：结果验证器是防线（AD-502 verifier 的工具级），校验规则声明式（按工具配置），与结果裁剪（AD-317）联动
+用法：验证器实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 管线（输出）
+
+<details><summary>看背面</summary>
+
+Agent 输出后处理管线实现：清洗→格式化→敏感扫描（AD-262）→引用校验（AD-202）链式处理，管线可配置组合
+原理：输出管线的代码实现（JA-207 管线的 Agent 面），管线步骤可插拔（JA-723 插件思想），与输出契约（AD-047）联动
+用法：输出管线实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 校验（引用）
+
+<details><summary>看背面</summary>
+
+引用校验实现：输出中的引用标记（来源 id）与实际检索结果比对（引用存在性），编造引用检出（JA-202 落地）
+原理：引用校验的代码实现（RAG 输出的可信保障 JA-293），编造引用检出进质量指标，与 RAG 输出（JA-202）联动
+用法：引用校验实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 敏感（扫描）
+
+<details><summary>看背面</summary>
+
+敏感信息扫描实现：正则规则（身份证/手机号/密钥模式）+词典扫描输出与 prompt（JA-349 双向），命中处理（阻断/替换/告警分级 AD-537）
+原理：敏感扫描的代码实现（入站与出站两处 JA-349），分级处理（硬阻断 vs 替换），与合规扫描（JA-262）联动
+用法：敏感扫描实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 校验（格式）
+
+<details><summary>看背面</summary>
+
+输出格式校验实现：结构化输出（AD-047 schema）的格式校验（字段/类型/枚举），格式违规重试（带格式错误反馈）
+原理：格式校验的代码实现（JA-298 结构化的防线），重试反馈带具体错误（JA-099），与结构化知识联动
+用法：格式校验实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（路由）
+
+<details><summary>看背面</summary>
+
+多模型路由实现：按任务特征（类型/长度/租户档位）查路由表（AD-722 路由表）选模型，路由决策记录进轨迹（可归因）
+原理：路由的代码实现（JA-232 的手写面），路由决策可观测（归因 JA-208），与分级路由联动
+用法：路由实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 链（降级）
+
+<details><summary>看背面</summary>
+
+fallback 链实现：模型降级链（JA-323）的代码化（链式尝试直到成功），fallback 链配置化（主/备/兜底），降级事件指标
+原理：降级链的代码实现（每级失败进下一级），配置化链（免硬编码），与降级事件（AD-359）联动
+用法：降级链实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（影子）
+
+<details><summary>看背面</summary>
+
+影子执行实现：影子 Agent 用 dry-run（AD-372）跑真实任务副本（不产生副作用），影子结果与主版本对比记录
+原理：影子执行的手写实现（dry-run 复用 JA-372），影子与主版本结果对比（JA-596 报告），与影子运营（JA-593）联动
+用法：影子实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（dry-run）
+
+<details><summary>看背面</summary>
+
+dry-run 模式实现：Agent 配置 dryRun 标志，工具执行阶段跳过真实调用（返回模拟结果），产出计划轨迹供人工审（AD-104 的代码面）
+原理：dry-run 的代码实现（执行器层拦截），模拟结果的生成（按工具声明返回示例），与 dry-run 设计（AD-104）联动
+用法：dry-run 实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 聚合（评测）
+
+<details><summary>看背面</summary>
+
+评测跑批结果聚合实现：逐任务结果聚合为报告（AD-288 的实现细化），聚合维度（任务类型/版本/失败分类），聚合输出进看板（AD-254）
+原理：聚合实现是评测报告的数据面（AD-288 深化），维度聚合支持归因（JA-365），与评测存储（AD-342）联动
+用法：聚合实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 生成（报告）
+
+<details><summary>看背面</summary>
+
+回归对比报告生成实现：两版本评测结果 diff（维度对比+显著性 AD-164），报告模板化输出（结论建议），报告自动化（AD-343 落地）
+原理：对比报告的代码实现（存储 diff+模板渲染），报告结论建议辅助决策（不自动决策），与对比报告（AD-343）联动
+用法：报告生成实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 统计（成本）
+
+<details><summary>看背面</summary>
+
+成本统计实现：按任务/步骤聚合 token×价格（AD-264 价格表），成本数据进看板（JA-462）与账单（AD-332），成本统计与观测同源
+原理：成本统计的代码实现（JA-065 usage 的聚合面），统计口径与账单对齐（JA-265），与成本观测联动
+用法：成本统计实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 统计（步数）
+
+<details><summary>看背面</summary>
+
+步数统计实现：任务步数分布（P50/P99/最大），步数异常检测（JA-350 规则），步数趋势（版本对比 JA-376）
+原理：步数统计的代码实现（效率指标 JA-375 的实现面），分布与趋势两手，与步数上限（AD-017）联动
+用法：步数统计实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 统计（工具）
+
+<details><summary>看背面</summary>
+
+工具调用统计实现：每工具调用次数/成功率/耗时/错误分布，工具画像（JA-468）的数据面，工具维度聚合
+原理：工具统计的代码实现（AD-084 审计的聚合面），画像驱动工具治理（JA-468），与工具观测（AD-240）联动
+用法：工具统计实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 分类（失败）
+
+<details><summary>看背面</summary>
+
+失败分类统计实现：失败按分类（AD-678 三分类）聚合（比例趋势），分类统计驱动防线优先级（哪类失败多修哪类）
+原理：失败分类统计的实现（AD-678 的数据面），分类驱动改进（JA-678 恢复策略），与失败清单（AD-044）联动
+用法：失败分类统计
+锚点：实战共识
+
+</details>
+
+### 手写 · 输出（大盘）
+
+<details><summary>看背面</summary>
+
+Agent 大盘数据输出：聚合指标（AD-207 六项）定时输出到监控系统（Prometheus push/暴露接口），大盘数据与告警规则（AD-337）对接
+原理：大盘数据输出的实现（观测体系的接入面），推送 vs 拉取选型（Prometheus pull 标准），与监控体系联动
+用法：大盘输出
+锚点：实战共识
+
+</details>
+
+### 手写 · 判定（告警）
+
+<details><summary>看背面</summary>
+
+告警判定实现：规则引擎（AD-337 四类规则）对大盘数据判定（超阈值触发），告警去重（同一问题聚合）与静默（演练期），告警路由（JA-526）
+原理：告警判定的代码实现（规则+去重+静默三件），去重防告警风暴（JA-526 联动），与告警知识联动
+用法：告警判定实现
+锚点：实战共识
+
+</details>
+
+### 治理 · 流程（准入）
+
+<details><summary>看背面</summary>
+
+Agent 准入评审流程实现：评审工单（架构评审 AD-524 材料清单）→评审会→结论记录→准入/整改，流程线上化（工单系统）
+原理：准入流程的工程实现（工单化让评审可追溯），评审材料模板化（JA-413 风险清单），与治理组织（AD-159）联动
+用法：准入流程实现
+锚点：实战共识
+
+</details>
+
+### 治理 · 审计（变更）
+
+<details><summary>看背面</summary>
+
+Agent 变更审计：宪法/工具/模型三元组变更（AD-059）全部留痕（变更人/时间/diff），变更审计与发布关联（未审计不可发布）
+原理：变更审计的实现（AD-059 版本化的审计面），未审计阻断发布（JA-525 门禁），与变更管理（JA-682）联动
+用法：变更审计实现
+锚点：实战共识
+
+</details>
+
+### 治理 · 管理（元数据）
+
+<details><summary>看背面</summary>
+
+Agent 版本元数据管理：版本号/宪法 hash/工具集 hash/模型配置/评测基线（AD-059 三元组的元数据化），元数据查询 API
+原理：版本元数据的管理实现（三元组的可查性），hash 绑定让“行为指纹”可验证（配置漂移 JA-455 检测），与版本治理联动
+用法：元数据管理
+锚点：实战共识
+
+</details>
+
+### 治理 · 自动化（依赖）
+
+<details><summary>看背面</summary>
+
+Agent 依赖清单自动化：从配置自动提取依赖（模型/工具/MCP server/数据源），清单自动更新（配置变更即更新 JA-721 自动化）
+原理：依赖清单的自动化（JA-721 手工清单的自动化面），清单驱动应急（供应商故障定位影响面 JA-590），与依赖治理联动
+用法：依赖清单自动化
+锚点：实战共识
+
+</details>
+
+### 治理 · 自动化（合规）
+
+<details><summary>看背面</summary>
+
+合规检查自动化：权限最小化检查（工具权限 vs 声明 JA-087）/数据密级路由校验（JA-645）/留痕完整性（JA-383），三项规则化自动检查
+原理：合规检查的自动化（JA-299 红队的规则部分），规则检查进 CI（JA-665），人工只查规则外的（JA-168 介入点），与合规知识联动
+用法：合规自动化
+锚点：实战共识
+
+</details>
+
+### 治理 · 流程（权限）
+
+<details><summary>看背面</summary>
+
+权限变更流程实现：权限矩阵（AD-348）变更走工单（申请/审批/生效/审计 AD-684），紧急提权走临时授权（AD-179 带过期）
+原理：权限变更的流程实现（变更即审计 AD-382），紧急通道与常规通道并存，与权限治理（AD-233）联动
+用法：权限变更流程
+锚点：实战共识
+
+</details>
+
+### 治理 · 实现（门禁）
+
+<details><summary>看背面</summary>
+
+评测门禁实现：发布流程卡点（评测分<基线阻断 AD-092），门禁绕过走特批（留痕），门禁数据自动拉取（评测系统 API）
+原理：门禁的工程实现（发布系统卡点自动拉取评测结果），特批留痕（绕过可追溯），与门禁设计（JA-702）联动
+用法：门禁实现
+锚点：实战共识
+
+</details>
+
+### 治理 · 自动化（发布）
+
+<details><summary>看背面</summary>
+
+Agent 发布自动化：评测门禁通过→灰度切流（AD-321）→监控观察（AD-207）→自动放量或回滚（指标驱动），发布流水线化
+原理：发布自动化的实现（灰度指标驱动放量/回滚决策），自动决策的护栏（异常自动暂停），与发布自动化实践联动
+用法：发布自动化
+锚点：实战共识
+
+</details>
+
+### 治理 · 自动化（回滚）
+
+<details><summary>看背面</summary>
+
+Agent 回滚自动化：发布指标劣化（成功率/成本）自动触发回滚（切回上一版本 AD-059），回滚自动验证（评测抽样）
+原理：回滚自动化的实现（指标触发切版本），回滚验证（自动抽样评测 JA-392 思想），与回滚演练（AD-258）联动
+用法：回滚自动化
+锚点：实战共识
+
+</details>
+
+### 治理 · 报告（健康）
+
+<details><summary>看背面</summary>
+
+Agent 健康报告：定期（周）聚合健康度（成功率/成本/安全事件/评测趋势），报告分发 owner（AD-231），健康度评分驱动治理优先级
+原理：健康报告的实现（AD-207 大盘的定期报告面），评分驱动治理（JA-594 效能），与治理运营联动
+用法：健康报告
+锚点：实战共识
+
+</details>
+
+### 运维 · 采样（日志）
+
+<details><summary>看背面</summary>
+
+Agent 日志采样策略实现：成功任务采样（如 10%）+失败任务全量+慢任务全量（JA-231 策略的代码实现），采样率配置化
+原理：采样策略的代码实现（JA-231 的落地），采样率配置化（AD-257 热更），与日志成本平衡联动
+用法：采样实现
+锚点：实战共识
+
+</details>
+
+### 运维 · 慢任务（诊断）
+
+<details><summary>看背面</summary>
+
+Agent 慢任务诊断：慢任务（RT 超 P99）的轨迹分析（哪步慢：模型/工具），诊断自动化（轨迹自动分段计时）
+原理：慢任务诊断的自动化（JA-644 延迟归因的实现），轨迹分段计时定位慢步，与性能基线（AD-339）联动
+用法：慢任务诊断
+锚点：实战共识
+
+</details>
+
+### 运维 · 检测（循环）
+
+<details><summary>看背面</summary>
+
+循环检测实现：Agent 轨迹的重复模式检测（相同工具+相同参数连续 N 次=循环），检测到注入终止建议
+原理：循环的运行时检测（AD-017 步数上限的精细版：上限前发现循环），检测算法（滑动窗口比对），循环早停省钱
+用法：循环检测
+锚点：实战共识
+
+</details>
+
+### 运维 · 告警（配额）
+
+<details><summary>看背面</summary>
+
+配额告警实现：配额水位（JA-637 水位）监控与告警（70% 预警 90% 行动），配额告警路由到容量负责人（JA-638）
+原理：配额告警的实现（JA-637 水位管理告警面），分级动作（预警观察/行动扩容），与容量管理联动
+用法：配额告警
+锚点：实战共识
+
+</details>
+
+### 运维 · 实现（演练）
+
+<details><summary>看背面</summary>
+
+供应商切换演练自动化实现：演练脚本（切流→验证→切回 AD-583），演练报告自动生成（切换耗时/成功率/异常），演练常态化调度
+原理：演练自动化的实现（AD-583 的脚本化面），报告自动化（演练价值沉淀），与混沌平台联动
+用法：演练自动化
+锚点：实战共识
+
+</details>
+
+### 运维 · 设计（混沌）
+
+<details><summary>看背面</summary>
+
+Agent 混沌实验设计：实验场景（模型延迟注入/工具失败注入/配额收缩）+稳态假设（降级生效）+爆炸半径控制（灰度实例），实验设计模板
+原理：混沌实验的设计模板（DF-076 的 Agent 面），稳态假设先行（无假设的演练是盲测），与演练矩阵（AD-338）联动
+用法：实验设计模板
+锚点：实战共识
+
+</details>
+
+### 运维 · 监控（水位）
+
+<details><summary>看背面</summary>
+
+Agent 容量水位监控：并发任务/队列深度/供应商配额三维水位（JA-131/637），水位看板与告警（AD-394），水位数据驱动扩缩容
+原理：水位监控的维度设计（三维各监控），扩缩容联动（JA-478 HPA 类比），与容量模型（AD-340）联动
+用法：水位监控
+锚点：实战共识
+
+</details>
+
+### 运维 · 大盘（成本）
+
+<details><summary>看背面</summary>
+
+Agent 成本监控大盘：按租户/Agent/模型三维成本趋势（JA-462 大盘的成本维），异常成本定位（下钻到任务），大盘与预算（AD-461）联动
+原理：成本大盘的维度设计（三维下钻），异常定位路径（大盘→租户→任务→轨迹），与成本观测（JA-462）联动
+用法：成本大盘
+锚点：实战共识
+
+</details>
+
+### 运维 · 趋势（质量）
+
+<details><summary>看背面</summary>
+
+Agent 质量趋势监控：评测分数趋势（JA-487 基线）+线上质量指标（JA-289）双线，趋势拐点告警（静默更新 JA-392 检测）
+原理：质量趋势的双线监控（离线评测+线上指标互补 JA-465），拐点检测（变化点告警），与质量运维联动
+用法：质量趋势监控
+锚点：实战共识
+
+</details>
+
+### 运维 · 闭环（反馈）
+
+<details><summary>看背面</summary>
+
+用户反馈闭环实现：反馈采集（JA-451 标签）→分派处理→处理结果统计→评估集回流（JA-531），闭环 SLA（JA-341）度量
+原理：反馈闭环的工程实现（采集到回流的流程化），SLA 度量（闭环时长），与反馈治理（JA-341）联动
+用法：反馈闭环实现
+锚点：实战共识
+
+</details>
+
+### 手写 · 题单（面试）
+
+<details><summary>看背面</summary>
+
+Agent 手写面试题单（十题）：①基础循环（ReAct 最简版）②错误反馈循环③并行工具④带记忆 Agent⑤预算终止⑥dry-run⑦轨迹记录⑧影子执行⑨多 Agent 主从⑩断点恢复，由易到难
+原理：题单由易到难覆盖核心能力（面试按序抽题），每题对应本域矩阵行（AD-050/261 系列的考题化），与手写笔试套卷联动
+用法：手写题单
+锚点：实战共识
+
+</details>
+
+### 手写 · 标准（评分）
+
+<details><summary>看背面</summary>
+
+手写题评分标准设计：功能正确（40%）/边界处理（20%，错误反馈/终止）/工程质量（20%，结构/命名/脱敏）/并发与安全（20%），四维加权
+原理：评分标准让手写评分有据（AL-051 规范的 Agent 版），边界与安全权重高（Agent 特性），与评分实践联动
+用法：评分标准
+锚点：实战共识
+
+</details>
+
+### 手写 · 三版（变体）
+
+<details><summary>看背面</summary>
+
+手写变体三版：基础版（同步循环）/流式版（事件回调 AD-282）/并行版（多任务 AD-271），变体考察不同并发与流式能力
+原理：变体设计覆盖能力面（同一骨架的三种演化），面试按 JD 选变体（IO 密集选流式版），与并发模型（JA-297）联动
+用法：手写变体设计
+锚点：实战共识
+
+</details>
+
+### 手写 · 讲解（对照）
+
+<details><summary>看背面</summary>
+
+手写与框架代码对照讲解：手写骨架映射到框架概念（循环→AgentExecutor/注册表→ToolCallback），对照讲解证明“知其所以然”
+原理：手写与框架的对照是深度证明（P10 加分项 JA-049 框架认知），会手写才会用框架排障，与框架知识联动
+用法：对照讲解
+锚点：实战共识
+
+</details>
+
+### 手写 · 管理（时间）
+
+<details><summary>看背面</summary>
+
+手写题时间管理：30 分钟分配——设计类图 5 分钟/核心循环 15 分钟/边界处理 5 分钟/测试断言 5 分钟，时间盒驱动取舍
+原理：手写时间管理（AL-051 的 Agent 版），时间盒让答题完整（宁可边界简述不写一半），与面试时间管理联动
+用法：时间盒管理
+锚点：实战共识
+
+</details>
+
+### 手写 · 预判（追问）
+
+<details><summary>看背面</summary>
+
+手写题追问预判：你的终止条件怎么处理模型谎报完成？/工具全部失败怎么办？/上下文超窗怎么办？/并发两个任务会怎样？——每手写点配追问
+原理：追问预判（AD-652 模板的追问面），手写点的追问清单让答题有纵深，与追问应对（JA-652）联动
+用法：追问预判清单
+锚点：实战共识
+
+</details>
+
+### 治理 · 指标（运营）
+
+<details><summary>看背面</summary>
+
+Agent 平台运营指标：接入 Agent 数/活跃 Agent/自助创建率/平台 SLA 达成率，平台运营的北极星（JA-414 思想）
+原理：平台运营指标定义（AD-102 平台的价值度量），自助率是平台化成熟标志（JA-654），与平台治理联动
+用法：平台运营指标
+锚点：实战共识
+
+</details>
+
+### 治理 · 用户（文档）
+
+<details><summary>看背面</summary>
+
+Agent 用户文档标准：能力说明（能做什么/不能做什么 JA-457 边界）/使用示例/成本说明/反馈渠道四段，用户文档降低误用
+原理：用户文档的标准（AD-343 文档的用户版），边界说明管理预期（JA-396），与交付文档（JA-300）联动
+用法：用户文档标准
+锚点：实战共识
+
+</details>
+
+### 治理 · 材料（培训）
+
+<details><summary>看背面</summary>
+
+Agent 培训材料：开发者培训（框架/工具开发/评测）与使用者培训（能力边界/prompt 技巧/反馈渠道）双轨，材料随版本更新
+原理：培训材料的双轨设计（JA-629 分层培训的 Agent 版），材料随版本更新（JA-402 版本联动），与培训体系联动
+用法：培训材料设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 八批（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 第八批收束：手写素材终批（361~380）+治理（381~390）+运维（391~400）+手写面试（401~406）+平台运营（407~409）五分支，域进度 410/720
+原理：批次收束（JA-480）：手写面试体系（题单/评分/变体/对照/时间/追问）完备=手写笔试套卷可编写，剩余批次填充协作/案例/治理，与批次管理联动
+用法：八批收束
+锚点：实战方法论
+
+</details>
+
+### 协作 · 选型矩阵（总结）
+
+<details><summary>看背面</summary>
+
+多 Agent 五模式选型矩阵：主从（任务可拆）/流水线（阶段固定）/辩论（质量敏感）/工作区（共享状态）/自由协作（探索），按任务结构与确定性需求选
+原理：五模式（AD-026~030）的选型收敛，选型矩阵是面试与设计的决策工具（JA-651 场景题骨架），与多 Agent 知识联动
+用法：多模式选型矩阵
+锚点：实战共识
+
+</details>
+
+### 协作 · 跨 Agent（调试）
+
+<details><summary>看背面</summary>
+
+跨 Agent 调试工作流：从父 Agent trace（JA-674）下钻到子 Agent 轨迹，调试界面按调用树展开（分布式调试思想）
+原理：跨 Agent 调试的工程化（JA-674 观测的调试面），调用树 UI 让协作问题可定位，与分布式排障（DF-053）联动
+用法：跨 Agent 调试
+锚点：实战共识
+
+</details>
+
+### 协作 · 独立（版本）
+
+<details><summary>看背面</summary>
+
+多 Agent 独立版本管理：每个 Agent 独立版本三元组（AD-059），组合版本（发布快照）记录整体状态
+原理：独立版本+组合快照（发布时全组合可追溯），组合版本让"整体行为"可复现（JA-402 延伸），与版本治理联动
+用法：组合版本管理
+锚点：实战共识
+
+</details>
+
+### 协作 · 策略（测试）
+
+<details><summary>看背面</summary>
+
+多 Agent 测试策略：单 Agent 测试（各自 mock）+组合测试（真实协作链），两层策略防"单好组合差"
+原理：分层测试（AD-201 的多 Agent 版）：单 Agent 好不代表协作好（组合行为），组合测试覆盖协作协议，与测试金字塔联动
+用法：多 Agent 测试策略
+锚点：实战共识
+
+</details>
+
+### 协作 · 协调（发布）
+
+<details><summary>看背面</summary>
+
+多 Agent 发布协调：子 Agent 版本升级需检查父 Agent 兼容（工具契约/消息协议），协调发布（依赖对齐）
+原理：发布协调防"子升级父不兼容"（JA-415 变更矩阵的多 Agent 面），协调工具（依赖图 AD-214 支撑），与发布管理联动
+用法：发布协调
+锚点：实战共识
+
+</details>
+
+### 协作 · 双层（监控）
+
+<details><summary>看背面</summary>
+
+多 Agent 双层监控：每 Agent 独立大盘（AD-207）+系统级大盘（端到端成功率/协作效率 AD-203），双层定位问题层级
+原理：双层监控定位"哪个 Agent 的问题还是协作的问题"（JA-203 端到端的监控面），与大盘知识联动
+用法：双层监控
+锚点：实战共识
+
+</details>
+
+### 协作 · 归因（成本）
+
+<details><summary>看背面</summary>
+
+多 Agent 成本归因到 Agent：系统成本按 Agent 拆分（每 Agent token 消耗），成本热点 Agent 优先优化（JA-208 的多 Agent 版）
+原理：成本归因到 Agent 粒度（优化决策的依据），拆分靠轨迹（AD-040 记录归属），与成本治理（JA-461）联动
+用法：成本归因
+锚点：实战共识
+
+</details>
+
+### 协作 · 汇总（安全）
+
+<details><summary>看背面</summary>
+
+多 Agent 安全汇总：信任边界（JA-175）+身份（AD-098）+通信加密+审计（AD-097）的汇总检查单，系统级安全评审
+原理：多 Agent 安全的汇总评审（单 Agent 安全的组合面 JA-081），检查单进架构评审（JA-524），与安全治理联动
+用法：多 Agent 安全汇总
+锚点：实战共识
+
+</details>
+
+### 协作 · 分工（组织）
+
+<details><summary>看背面</summary>
+
+多 Agent 的组织分工：每个 Agent 有 Owner 团队（JA-596），跨团队 Agent 协作的接口协议（AD-032）与治理（AD-159）
+原理：组织分工与 Agent 拆分对应（康威定律 JA-084），跨团队协作的界面清晰（协议+治理），与组织协作（JA-408）联动
+用法：组织分工
+锚点：实战共识
+
+</details>
+
+### 协作 · 过度拆分（反模式）
+
+<details><summary>看背面</summary>
+
+多 Agent 反模式：过度拆分（每步一个 Agent，通信开销>收益）与过少拆分（单 Agent 塞全部工具），拆分粒度按任务自然边界
+原理：拆分粒度的反模式（JA-085 分布式单体的 Agent 版），拆分标准：独立职责+独立演化+明确接口，与微服务拆分原则（DF-084）联动
+用法：拆分粒度反模式
+锚点：实战共识
+
+</details>
+
+### 案例 · 全流程（客服）
+
+<details><summary>看背面</summary>
+
+客服 Agent 全流程设计案例：需求（客服成本/满意度）→架构（路由+RAG+工单工具）→评测（任务集）→灰度→运营（JA-421 五步的完整走一遍）
+原理：完整案例示范"从需求到运营"全链（AD-048 ROI 到 JA-294 五步），案例是面试场景题的最佳素材（JA-651），与客服知识（AD-121）联动
+用法：客服全流程案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 全流程（工单）
+
+<details><summary>看背面</summary>
+
+工单 Agent 全流程设计案例：工单分类（意图）→知识库回复→自动处理（工具）→升级人工，验收指标（自动处理率/一次解决率）
+原理：工单 Agent 是内部高频场景（JA-441），验收指标定义（自动处理率是北极星 JA-414），与工单工具（AD-441）联动
+用法：工单全流程案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 全流程（评审）
+
+<details><summary>看背面</summary>
+
+代码评审 Agent 全流程：diff 输入→评审知识库（规范 RAG）→风险分析→评审意见（结构化），人审终审（建议制 JA-122）
+原理：评审 Agent 的完整设计（建议制定位），规范知识库（团队规范入库），与 AI-036 代码生成知识联动
+用法：评审全流程案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 全流程（数据）
+
+<details><summary>看背面</summary>
+
+数据分析 Agent 全流程：需求理解→SQL 生成（JA-438 防线）→执行→图表→解读报告，评测集含 SQL 正确性与解读忠实度
+原理：数据分析全流程案例（JA-123 深化），评测双指标（SQL 对+解读忠实），与评测分层（JA-293）联动
+用法：数据分析全流程
+锚点：实战共识
+
+</details>
+
+### 案例 · 全流程（运维）
+
+<details><summary>看背面</summary>
+
+运维 Agent 全流程：告警接入→分诊（AD-222）→预案执行（确认）→复盘记录→知识回流（runbook 更新），闭环设计
+原理：运维 Agent 的闭环设计（执行→学习闭环 JA-135），预案知识回流让 Agent 越用越强，与运维案例（AD-124/222）联动
+用法：运维闭环案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 复盘（事故）
+
+<details><summary>看背面</summary>
+
+Agent 事故复盘案例：客服 Agent 幻觉承诺赔付（宪法边界缺失）→止血（下线+回滚）→根因（宪法无边界声明）→修复（宪法+拒答）→评估集回流
+原理：真实形态事故复盘案例（边界缺失是最常见根因），复盘五步产出（修复+评估集+宪法更新），与复盘模板（JA-355）联动
+用法：事故复盘案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 优化（成本）
+
+<details><summary>看背面</summary>
+
+Agent 成本优化案例：轨迹分析发现某工具结果超长（JA-256）→白名单裁剪→步数下降→成本降 60%，案例方法论（归因→改→验证）
+原理：成本优化的完整案例（JA-208 归因驱动的示范），数据支撑每步（轨迹证据），与成本案例（JA-631）联动
+用法：成本优化案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 提升（质量）
+
+<details><summary>看背面</summary>
+
+Agent 质量提升案例：轨迹分析发现工具选择错误率高（描述不清 JA-015）→重写描述→评测提升，描述质量是杠杆
+原理：质量提升案例（工具描述是最高杠杆 JA-015），描述改写的评估验证（AD-255 节奏），与工具描述知识联动
+用法：质量提升案例
+锚点：实战共识
+
+</details>
+
+### 治理 · 计费（平台）
+
+<details><summary>看背面</summary>
+
+Agent 平台计费实践：按 token 成本加平台服务费（成本加成）或按任务计费（业务友好），计费透明（账单可查 JA-332）
+原理：平台计费的两模式（JA-626 的平台面），计费透明让业务信任（账单可查），与平台运营（AD-407）联动
+用法：平台计费实践
+锚点：实战共识
+
+</details>
+
+### 治理 · 配额（平台）
+
+<details><summary>看背面</summary>
+
+Agent 平台配额实践：租户配额（JA-320）+Agent 配额（AD-099）双层，配额申请与调整流程（JA-638 治理流程），配额数据透明
+原理：配额的双层实践（平台租户层+Agent 层），流程化申请调整，与配额治理（JA-378）联动
+用法：配额双层实践
+锚点：实战共识
+
+</details>
+
+### 治理 · 规范（协作）
+
+<details><summary>看背面</summary>
+
+多团队 Agent 协作规范：工具共享规范（发布流程 AD-358）/评测共享（JA-597）/事故通报（JA-355），规范让多团队协作有序
+原理：多团队的协作规范（JA-408 组织面的落地件），共享与通报机制防孤岛，与平台治理（AD-102）联动
+用法：协作规范
+锚点：实战共识
+
+</details>
+
+### 治理 · 共享（工具）
+
+<details><summary>看背面</summary>
+
+共享工具治理：共享工具市场（内部）注册/评测/版本/废弃流程，共享工具是平台资产（JA-473 同思想）
+原理：共享工具的治理（工具复用的治理面），市场流程（注册→评测→发布→废弃），与工具规范（AD-236）联动
+用法：共享工具治理
+锚点：实战共识
+
+</details>
+
+### 治理 · 访问（数据）
+
+<details><summary>看背面</summary>
+
+Agent 数据访问治理：Agent 可访问的数据源清单（权限矩阵 AD-348）+数据密级（JA-380）+访问审计（AD-084），数据面治理
+原理：数据访问的三维治理（权限/密级/审计），Agent 数据访问是合规重点（AI-040），与数据治理联动
+用法：数据访问治理
+锚点：实战共识
+
+</details>
+
+### 治理 · 合规（评测）
+
+<details><summary>看背面</summary>
+
+评测数据合规：评测集含真实用户数据时的合规（脱敏 JA-252/授权），评测数据的法律边界与生产数据同要求
+原理：评测数据的合规面（评测≠法外之地），脱敏与授权是评测集合规双件，与隐私知识（JA-198）联动
+用法：评测合规
+锚点：实战共识
+
+</details>
+
+### 治理 · 治理（供应商）
+
+<details><summary>看背面</summary>
+
+Agent 供应商治理：多供应商接入清单（JA-721）/健康监控（JA-381）/合同（JA-515）/退出预案（JA-391）四件，供应商是 Agent 的关键依赖
+原理：供应商治理四件在 Agent 域的落地（Agent 依赖供应商 JA-056），供应商事故=Agent 故障，与供应商知识联动
+用法：供应商治理
+锚点：实战共识
+
+</details>
+
+### 记忆 · 选型（存储）
+
+<details><summary>看背面</summary>
+
+Agent 记忆存储选型：向量库（语义检索）/KV（会话快取）/SQL（结构化画像），三类存储各司其职（JA-290 记忆分类的存储映射）
+原理：记忆类型（AD-070）与存储引擎的映射（不同记忆不同引擎），选型按读写模式，与存储选型知识联动
+用法：记忆存储选型
+锚点：实战共识
+
+</details>
+
+### 记忆 · 同步（一致性）
+
+<details><summary>看背面</summary>
+
+记忆一致性：跨存储记忆同步（画像更新同步向量库），同步策略（事件驱动 JA-521），一致性延迟容忍
+原理：多存储的一致性（跨存储同步的工程面），事件驱动同步（MY-105 CDC 思想），延迟容忍按业务设计
+用法：记忆一致性
+锚点：实战共识
+
+</details>
+
+### 记忆 · 延迟（性能）
+
+<details><summary>看背面</summary>
+
+记忆检索延迟预算：记忆检索在 Agent 循环内（每次决策前），延迟预算独立（如 100ms），超预算降级（少注入）
+原理：记忆检索在关键路径（循环内检索），延迟预算与降级策略（JA-667 同思想），与延迟知识联动
+用法：记忆延迟
+锚点：实战共识
+
+</details>
+
+### 记忆 · 指标（观测）
+
+<details><summary>看背面</summary>
+
+记忆可观测：命中率（检索命中比例）/注入量（token）/更新频率，记忆健康度三指标
+原理：记忆的观测指标（JA-468 的记忆面），命中率低=记忆库空或检索差，与观测知识联动
+用法：记忆观测
+锚点：实战共识
+
+</details>
+
+### 记忆 · 质量（测试）
+
+<details><summary>看背面</summary>
+
+记忆质量测试：写入正确性（写入可读回）/检索相关性（期望记忆命中）/隔离性（用户间不串 JA-208），记忆测试三件
+原理：记忆组件的测试面（与工具测试 AD-237 同构），隔离测试是红线（JA-097），与测试知识联动
+用法：记忆测试
+锚点：实战共识
+
+</details>
+
+### 工具 · AB（描述）
+
+<details><summary>看背面</summary>
+
+工具描述 A/B 测试：同一工具两版描述（详略/结构不同）分流对比调用准确率，描述是"prompt"可实验（JA-441 实验思想在工具面）
+原理：描述可实验化（描述质量可量化 JA-015），A/B 让描述优化有据（JA-163 度量），与实验知识联动
+用法：描述 A/B
+锚点：实战共识
+
+</details>
+
+### 工具 · 演进（参数）
+
+<details><summary>看背面</summary>
+
+工具参数设计演进：参数过多让模型填参错误率上升（与工具数量阈值 AD-143 同构的参数面），参数精简（派生参数工具内计算）
+原理：参数设计的阈值效应（参数多=填错率高），精简策略（工具内计算派生值），与 schema 纪律（AD-052）联动
+用法：参数设计演进
+锚点：实战共识
+
+</details>
+
+### 工具 · 爆炸（组合）
+
+<details><summary>看背面</summary>
+
+工具组合爆炸管理：N 个工具的组合语义爆炸（JA-081 组合风险随 N 平方增长），管理：能力域分组（AD-144）+高危组合白名单
+原理：组合爆炸的管理（组合风险的管理面），分组收敛组合空间，与组合安全（AD-081）联动
+用法：组合爆炸管理
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（重入）
+
+<details><summary>看背面</summary>
+
+工具的可重入实现：重复调用同参数返回同结果（缓存 AD-578）或登记跳过（JA-504 登记模式），可重入让 Agent 重试与恢复安全
+原理：工具可重入的实现模式（缓存/登记两模式），与幂等实现（JA-218/AD-038）联动，与恢复安全联动
+用法：工具重入
+锚点：实战共识
+
+</details>
+
+### 工具 · 模式（幂等）
+
+<details><summary>看背面</summary>
+
+工具幂等实现模式汇总：唯一键（DF-019）/条件更新（MY-078）/去重表（JA-060 版本）/token 预取（RD-097），四模式按场景选
+原理：幂等实现模式的汇总（工具幂等 JA-218 的实现族），按工具操作类型选模式，与幂等知识联动
+用法：幂等模式汇总
+锚点：实战共识
+
+</details>
+
+### 安全 · 加密（输出）
+
+<details><summary>看背面</summary>
+
+Agent 敏感输出加密：输出含敏感数据（用户数据/密钥）时端到端加密（下游解密），输出加密让中间环节不可见
+原理：输出加密的落地（传输加密 TLS 之外的端到端面），中间环节（网关/队列）不可见，与加密知识联动
+用法：输出加密
+锚点：实战共识
+
+</details>
+
+### 安全 · 报告（审计）
+
+<details><summary>看背面</summary>
+
+Agent 访问审计报告：周期生成（谁在什么时候让 Agent 做了什么），审计报告面向合规与管理（AD-334 的 Agent 面）
+原理：访问审计报告的生成面（AD-334 的定期化），审计报告是治理资产（JA-630 备战），与审计知识联动
+用法：访问审计报告
+锚点：实战共识
+
+</details>
+
+### 安全 · 定期审计（权限）
+
+<details><summary>看背面</summary>
+
+Agent 权限定期审计：权限矩阵（AD-348）定期审计（权限最小化校验 JA-018），僵尸权限清理（不再使用的工具权限收回）
+原理：权限定期审计（权限漂移治理 JA-455 的权限版），僵尸权限是攻击面，与权限治理（AD-386）联动
+用法：权限定期审计
+锚点：实战共识
+
+</details>
+
+### 安全 · 文档（基线）
+
+<details><summary>看背面</summary>
+
+Agent 安全基线文档：工具分级（AD-076）/确认策略（AD-046）/审计要求（AD-097）/红线清单（JA-285），基线文档让安全要求可执行
+原理：安全基线的文档化（安全要求的"宪法"），基线进评审（AD-524）与准入（JA-525），与安全治理联动
+用法：安全基线文档
+锚点：实战共识
+
+</details>
+
+### 工程 · 九批（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 第九批收束：协作总结（411~420）+案例深设计（421~425）+复盘案例（426~428）+治理深化（429~435）+记忆工程（436~440）+工具深化（441~445）+安全深化（446~449）七分支，域进度 460/720
+原理：批次收束（JA-480）：案例深设计让"面试讲完整案例"有素材（JA-651），治理深化让平台化有据，剩余批次收尾
+用法：九批收束
+锚点：实战方法论
+
+</details>
+
+### 评测 · 评测（长期记忆）
+
+<details><summary>看背面</summary>
+
+长期记忆评测：记忆写入正确性（写入了能检索到）+记忆影响评测（有记忆 vs 无记忆的回答质量对比），记忆价值的量化
+原理：长期记忆的评测面（记忆是否有用的量化），A/B 对比（有无记忆）证明记忆价值，与记忆观测（AD-439）联动
+用法：记忆评测设计
+锚点：实战共识
+
+</details>
+
+### 评测 · 设计（多轮）
+
+<details><summary>看背面</summary>
+
+多轮对话 Agent 评测设计：多轮任务集（上下文依赖的任务链），评测"跨轮信息保持"与"指代消解"（JA-711 的 Agent 版）
+原理：多轮评测的单轮盲区（跨轮能力），多轮任务集构造（轮次依赖设计），与多轮评测知识联动
+用法：多轮评测设计
+锚点：实战共识
+
+</details>
+
+### 评测 · 领域（覆盖）
+
+<details><summary>看背面</summary>
+
+评测任务的领域覆盖：评测集覆盖全部业务域（盲区=未评测域），领域覆盖矩阵管理（域×题型）
+原理：评测覆盖的管理（JA-253 多样性的领域维），覆盖矩阵防"只测热点域"，与评测运营（JA-471）联动
+用法：领域覆盖管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 热路径（优化）
+
+<details><summary>看背面</summary>
+
+Agent 热路径优化：循环内的热路径（消息构建/工具分发/token 计数）的性能优化（对象复用/缓存），热路径优化让步均延迟下降
+原理：热路径的识别与优化（AD-313 指标定位），优化有基准（AD-339 性能基线），与性能工程联动
+用法：热路径优化
+锚点：实战共识
+
+</details>
+
+### 工程 · 优化（启动）
+
+<details><summary>看背面</summary>
+
+Agent 启动优化：工具注册批量预热/连接池预热（JA-564）/评测集懒加载，启动优化让扩容实例快速就绪（JA-478 就绪探针联动）
+原理：启动优化的工程面（弹性扩容的就绪时间），预热清单化（JA-564 联动），与启动优化知识联动
+用法：启动优化
+锚点：实战共识
+
+</details>
+
+### 工程 · 优化（内存）
+
+<details><summary>看背面</summary>
+
+Agent 内存优化：长会话的消息序列内存膨胀（裁剪及时 AD-023）+工具结果副本（引用复用），内存优化防长任务 OOM
+原理：长任务的内存面（消息序列堆积），及时裁剪（AD-023）是内存治理，与 JVM 内存知识联动
+用法：内存优化
+锚点：实战共识
+
+</details>
+
+### 工程 · 上下文（预取）
+
+<details><summary>看背面</summary>
+
+上下文预取：Agent 决策前预取可能的工具结果/记忆（推测性预取），预取让决策时数据已就绪
+原理：预取是延迟优化（决策等待时间隐藏），推测成本（预取了不用的），按命中率启用
+用法：预取策略
+锚点：实战共识
+
+</details>
+
+### 工程 · 模式（批处理）
+
+<details><summary>看背面</summary>
+
+Agent 批处理模式：批量任务（千级文档处理）的批 Agent 模式（任务分片+并行 Agent+聚合），批处理是成本与吞吐平衡（AI-026 批处理）
+原理：批处理模式的工程（JA-437 的 Agent 版），分片+并行+聚合（JA-026/132），与批处理成本联动
+用法：批处理模式
+锚点：实战共识
+
+</details>
+
+### 工程 · 分支（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 分支完整度核对：架构循环/上下文记忆/多 Agent/工具/MCP/评测/安全/多模态/案例/治理/手写 11 分支全开，剩余批次填充深度（每分支再深 1-2 轮）
+原理：分支完整度核对（JA-420 收束方法），剩余 310 条的分配（深度加权），与知识地图（AD-060）联动
+用法：分支核对
+锚点：实战方法论
+
+</details>
+
+### 协作 · 通信设计（节奏）
+
+<details><summary>看背面</summary>
+
+多 Agent 协作的同步/异步设计：同步（链式等待结果）vs 异步（消息驱动继续），同步简单异步解耦，按任务时效选
+原理：同步与异步的协作节奏（与 MQ-032 push/pull 选型同构），同步链路故障放大（JA-073 级联），异步需处理任务状态（AD-021）
+用法：协作节奏设计
+锚点：实战共识
+
+</details>
+
+### 协作 · 结论（冲突）
+
+<details><summary>看背面</summary>
+
+多 Agent 结论冲突解决：两 Agent 结论矛盾时裁决机制（裁判 Agent/多数投票/规则优先级），冲突是常态要设计
+原理：结论冲突是多 Agent 常态（独立视角必然分歧，AD-029 辩论动机），无裁决机制则输出随机，与聚合策略（AD-132）联动
+用法：冲突解决设计
+锚点：实战共识
+
+</details>
+
+### 协作 · 建立（信任）
+
+<details><summary>看背面</summary>
+
+Agent 间信任的建立机制：历史协作表现（AD-212 评分）+产出校验通过率累积信任分，信任分驱动委托决策
+原理：信任是历史数据不是配置（AD-212 的动态面），信任分衰减（长期不协作降权），与评分知识联动
+用法：信任建立机制
+锚点：实战共识
+
+</details>
+
+### 协作 · 清单（交接）
+
+<details><summary>看背面</summary>
+
+Agent 任务交接清单：交接时传递（已完成步骤/中间产物/未完成事项/注意点），交接完整性决定接手 Agent 的成败
+原理：交接不完整=接手者"失忆重启"（JA-434 会话摘要的 Agent 间版），交接清单模板化，与 checkpoint（AD-037）联动
+用法：交接清单设计
+锚点：实战共识
+
+</details>
+
+### 协作 · 隔离（验证）
+
+<details><summary>看背面</summary>
+
+多 Agent 故障隔离验证：注入单 Agent 故障，验证其余 Agent 与系统整体不受影响（隔离生效验证）
+原理：隔离设计（JA-373）要验证（演练 AD-338 的多 Agent 面），隔离失效=级联故障，与混沌工程联动
+用法：隔离验证
+锚点：实战共识
+
+</details>
+
+### 协作 · 观察（涌现）
+
+<details><summary>看背面</summary>
+
+多 Agent 涌现行为观察：Agent 群体的整体行为（非单个可预测），涌现观察（轨迹聚合分析）发现系统性模式
+原理：多 Agent 系统有涌现（组合行为超单 Agent 设计），涌现观察发现意外模式（好/坏），与轨迹分析（JA-357）联动
+用法：涌现观察
+锚点：实战共识
+
+</details>
+
+### 协作 · 总结（权衡）
+
+<details><summary>看背面</summary>
+
+协作确定性/灵活性权衡总结：结构越强（工作流/主从）确定性越高灵活性越低，开放协作反之，按任务错误代价定（AD-018 的多 Agent 版）
+原理：权衡总结是多 Agent 设计的总纲（JA-368 选型的系统面），错误代价高的环节结构化，与权衡知识联动
+用法：权衡总结
+锚点：实战共识
+
+</details>
+
+### 记忆 · 管理（时效）
+
+<details><summary>看背面</summary>
+
+记忆的时效管理：记忆条目带时效（偏好可长期、事实会过期），过期记忆降权或清除，时效与来源可信度（JA-493）联动
+原理：记忆不管理时效导致"用旧知识答新问题"（JA-248 检索面），时效标签写入时标记（JA-494 思想），与知识治理联动
+用法：记忆时效治理
+锚点：实战共识
+
+</details>
+
+### 记忆 · 去重（合并）
+
+<details><summary>看背面</summary>
+
+相似记忆合并：语义相近的多条记忆合并（去重+合并冲突字段），记忆库膨胀治理（JA-504 的库层面）
+原理：相似记忆堆积让检索混乱（多条矛盾偏好 JA-074 的库面），合并策略（保留最新+合并要点），定期合并任务
+用法：记忆合并治理
+锚点：实战共识
+
+</details>
+
+### 记忆 · 检索（评测）
+
+<details><summary>看背面</summary>
+
+记忆检索质量评测：记忆 golden set（记忆了 X 应召回 X），评测检索命中率与排序，记忆检索与 RAG 检索同评测法
+原理：记忆检索=RAG 检索的特殊域（JA-673 的评测面），golden set 方法复用（JA-361），与检索评测知识联动
+用法：记忆检索评测
+锚点：实战共识
+
+</details>
+
+### 记忆 · 协议（共享）
+
+<details><summary>看背面</summary>
+
+跨 Agent 记忆共享协议：共享记忆的读写权限（谁可写/谁可读/范围），协议让共享可控（JA-072 边界的协议化）
+原理：共享记忆无协议=隐私与污染风险（JA-504），读写权限矩阵（AD-348 思想），与治理（AD-233）联动
+用法：记忆共享协议
+锚点：实战共识
+
+</details>
+
+### 记忆 · 加密（安全）
+
+<details><summary>看背面</summary>
+
+记忆存储加密：记忆含用户个人数据（画像/历史），存储加密（静态加密）+传输加密，加密是合规底线（JA-198 延伸）
+原理：记忆是高敏数据聚集（JA-176 轨迹同级），静态加密（数据库 TDE/字段加密），与加密知识联动
+用法：记忆加密
+锚点：实战共识
+
+</details>
+
+### 记忆 · 备份（灾备）
+
+<details><summary>看背面</summary>
+
+记忆备份与恢复：记忆库纳入备份体系（快照 JA-490），恢复演练（记忆丢失的业务影响评估），记忆是有价值数据资产
+原理：记忆积累是资产（用户画像/学习成果），丢失=Agent"失忆"（体验退化），备份纳入备份体系（RD-094）
+用法：记忆灾备
+锚点：实战共识
+
+</details>
+
+### 记忆 · 换型（迁移）
+
+<details><summary>看背面</summary>
+
+记忆存储换型迁移：向量库换型（JA-499 影子索引思想的记忆版），记忆导出/导入/双写过渡，迁移验证（记忆可检索性）
+原理：记忆迁移的工程面（换存储=全量迁移），影子验证（迁移后检索质量对比），与迁移方法论联动
+用法：记忆迁移
+锚点：实战共识
+
+</details>
+
+### 记忆 · 管理（容量）
+
+<details><summary>看背面</summary>
+
+记忆容量管理：记忆条数/存储量增长监控（JA-694 同思想），容量驱动归档（JA-668）与合并（AD-469），增长预测
+原理：记忆容量的增长治理（膨胀是默认趋势 JA-160），监控+归档+合并三招，与容量管理联动
+用法：记忆容量治理
+锚点：实战共识
+
+</details>
+
+### 工具 · 自动化（文档）
+
+<details><summary>看背面</summary>
+
+工具文档自动化：从代码注解生成工具文档（描述/参数/示例自动汇编），文档与代码同步（JA-015 描述纪律的自动化）
+原理：文档自动化防"文档漂移"（代码改文档没改），生成源是单一真源（代码注解），与文档自动化工具联动
+用法：工具文档自动化
+锚点：实战共识
+
+</details>
+
+### 工具 · mock server（模拟）
+
+<details><summary>看背面</summary>
+
+工具的 mock server：测试环境工具的模拟实现（返回 fixture 数据），Agent 全链测试免真实下游（AD-039 的服务化）
+原理：mock server 让集成测试无真实依赖（JA-203 分层），fixture 数据贴近真实分布（AD-169 保真），与测试基建联动
+用法：mock server
+锚点：实战共识
+
+</details>
+
+### 工具 · 单工具（成本）
+
+<details><summary>看背面</summary>
+
+单工具成本预算：工具调用成本（内部成本=下游资源+外部 API）单工具计量，成本预算进工具评审（AD-671 第五查）
+原理：工具成本差异大（搜索工具贵/本地计算免费），单工具计量让成本归因（JA-208）到工具，与成本知识联动
+用法：工具成本预算
+锚点：实战共识
+
+</details>
+
+### 工具 · 限制（并发）
+
+<details><summary>看背面</summary>
+
+工具并发限制：单工具并发上限（下游承受力），超限排队或拒绝（错误反馈模型），与舱壁（DF-027）联动
+原理：工具并发保护下游（工具内 DB/RPC 的并发承受），超限排队（JA-131 水位），与限流知识联动
+用法：工具并发限制
+锚点：实战共识
+
+</details>
+
+### 工具 · 分类（错误）
+
+<details><summary>看背面</summary>
+
+工具错误分类体系：参数错误（模型可修）/资源错误（重试）/业务拒绝（不可重试）/下游故障（降级），分类驱动处理（AD-116 深化）
+原理：错误分类让处理策略精确（JA-104 分层在工具面），分类标签随错误返回，与错误知识联动
+用法：工具错误分类
+锚点：实战共识
+
+</details>
+
+### 工具 · 检查（健康）
+
+<details><summary>看背面</summary>
+
+工具健康检查：工具级健康探针（下游连通/响应时间），不健康工具摘除（AD-105 开关联动）
+原理：工具健康探针（JA-273 拨测的工具版），摘除联动开关（运行时下线），与健康检查（JA-582）联动
+用法：工具健康检查
+锚点：实战共识
+
+</details>
+
+### 工具 · 中心（注册）
+
+<details><summary>看背面</summary>
+
+工具注册中心：工具的注册/发现/版本/健康集中管理（工具的"注册中心"），与微服务注册中心同思想
+原理：注册中心让工具治理集中（分散配置的治理盲区），与 AD-051 注册表的区别（注册表是运行时、中心是治理），与治理联动
+用法：工具注册中心
+锚点：实战共识
+
+</details>
+
+### 工具 · 协议（发现）
+
+<details><summary>看背面</summary>
+
+工具发现协议标准化：发现接口统一（list/describe），客户端与实现解耦（MCP 生态的标准化思想）
+原理：发现协议统一让工具生态互通（JA-024 协议思想），自定义发现=生态孤岛，与 MCP 发现（AD-088）联动
+用法：发现协议标准化
+锚点：实战共识
+
+</details>
+
+### 工具 · 链路（追踪）
+
+<details><summary>看背面</summary>
+
+工具调用链路追踪：工具调用 span 挂 Agent trace（JA-596），工具内下游调用继续 span（二级链路 AD-239），全链可追
+原理：工具链路追踪的完整面（Agent→工具→下游三级 span），追踪断裂=排障断链，与分布式追踪联动
+用法：工具链路追踪
+锚点：实战共识
+
+</details>
+
+### 工具 · 管理（SLA）
+
+<details><summary>看背面</summary>
+
+工具 SLA 管理：每工具的可用性/延迟承诺（供 Agent 容量与超时设计参考 JA-275），SLA 不达触发工具治理
+原理：工具 SLA 让超时与降级设计有据（JA-275 依据），SLA 数据来自观测（AD-240），与 SLA 管理（DF-056）联动
+用法：工具 SLA
+锚点：实战共识
+
+</details>
+
+### 评测 · 实现（抽样）
+
+<details><summary>看背面</summary>
+
+分层抽样实现细节：分层维度（任务类型×难度）×层内随机（种子固定 AD-344），抽样比例自适应（JA-702），抽样结果可复现
+原理：分层抽样的实现细节（JA-344 的代码化），分层维度与随机种子是两个关键，与抽样知识联动
+用法：分层抽样实现
+锚点：实战共识
+
+</details>
+
+### 评测 · 定时（持续）
+
+<details><summary>看背面</summary>
+
+评测持续运行：定时评测（每日抽样跑 JA-392 静默更新检测+每周全量跑基线），评测调度（AD-345 优先级）
+原理：评测的持续运行机制（一次性评测到持续评测的运营跃迁），定时任务+调度，与评测运营（JA-471）联动
+用法：评测持续运行
+锚点：实战共识
+
+</details>
+
+### 评测 · 历史（趋势）
+
+<details><summary>看背面</summary>
+
+评测历史趋势分析：分数历史（AD-342 存储）的趋势分析（缓慢退化检测 JA-487/趋势拐点 JA-399），趋势是质量的时间维度
+原理：评测趋势的时间维度分析（单次评测无时间视角），趋势驱动预防性治理（JA-487），与质量趋势监控联动
+用法：评测趋势分析
+锚点：实战共识
+
+</details>
+
+### 评测 · 联动（告警）
+
+<details><summary>看背面</summary>
+
+评测告警联动：评测分数跌破阈值触发告警（JA-526 路由），告警附评测报告链接（JA-343），评测告警与运行告警同体系
+原理：评测告警的联动实现（评测系统与告警系统集成），告警即报告（上下文完整），与告警知识联动
+用法：评测告警联动
+锚点：实战共识
+
+</details>
+
+### 评测 · 对比（排行）
+
+<details><summary>看背面</summary>
+
+多 Agent 排行榜：同任务集多 Agent（版本）评测分数排行榜（内部透明 JA-234），排行榜驱动选型与改进
+原理：排行榜机制（内部透明化 JA-234 的执行件），排行榜防"只测自己"（横向可比），与评测看板（AD-254）联动
+用法：Agent 排行榜
+锚点：实战共识
+
+</details>
+
+### 安全 · 检测（越权）
+
+<details><summary>看背面</summary>
+
+Agent 越权运行时检测：工具调用时实时校验（当前授权 vs 调用请求），越权调用阻断+告警（JA-235 防线的运行时执行）
+原理：越权检测的运行时实现（静态授权+动态校验），检测点在执行器（AD-190），与权限治理（AD-386）联动
+用法：越权运行时检测
+锚点：实战共识
+
+</details>
+
+### 安全 · 链（过滤）
+
+<details><summary>看背面</summary>
+
+Agent 输出过滤链设计：过滤链（敏感词/PII/合规规则/链接白名单 JA-274）按序执行，过滤链可配置（按业务场景裁剪）
+原理：过滤链的设计（JA-365 管线的安全专链），链序影响结果（先粗后细），与过滤知识联动
+用法：过滤链设计
+锚点：实战共识
+
+</details>
+
+### 安全 · 规范化（输入）
+
+<details><summary>看背面</summary>
+
+Agent 输入规范化：输入清洗（编码统一/控制字符剔除/超长截断 JA-397），规范化让注入检测更可靠（绕过编码的注入被规范化暴露）
+原理：输入规范化是注入检测的前置（绕过手法常利用编码差异），规范化规则集（编码/空白/字符白名单），与输入校验（SP-068）联动
+用法：输入规范化
+锚点：实战共识
+
+</details>
+
+### 安全 · 验证（隔离）
+
+<details><summary>看背面</summary>
+
+会话隔离验证自动化：隔离测试（JA-208）进 CI（并发两会话注入不同标记，断言互不串），隔离回归每次发布跑
+原理：隔离验证的自动化（JA-208 的 CI 化），隔离是红线（JA-097）所以回归必跑，与 CI 纪律联动
+用法：隔离自动化验证
+锚点：实战共识
+
+</details>
+
+### 安全 · 最小化（权限）
+
+<details><summary>看背面</summary>
+
+权限最小化实践清单：默认无权限（白名单加制 JA-152）/按需提权（AD-679）/定期审计（AD-448）/时间边界（AD-179）/组合评估（AD-081）五件套
+原理：权限最小化的实践清单（最小权限原则的 Agent 落地汇总），五件套进安全基线（AD-449），与权限知识联动
+用法：权限最小化清单
+锚点：实战共识
+
+</details>
+
+### 安全 · 逃逸（沙箱）
+
+<details><summary>看背面</summary>
+
+沙箱逃逸测试：Agent 生成代码尝试逃逸沙箱（文件系统越界/网络访问/资源耗尽）的对抗测试，逃逸测试进沙箱验收（JA-077 三限验证）
+原理：沙箱逃逸测试是沙箱验收的硬标准（无逃逸测试的沙箱不可信），对抗样本库（JA-474 同思想），与沙箱知识联动
+用法：逃逸测试
+锚点：实战共识
+
+</details>
+
+### 安全 · 审计（依赖）
+
+<details><summary>看背面</summary>
+
+工具依赖安全审计：工具自身的依赖（库/下游服务）安全扫描（漏洞 CVE 检查），工具是二级依赖载体（AD-239）
+原理：工具依赖的安全面（工具代码也引入依赖漏洞），CVE 扫描纳入工具 CI（JA-120），与依赖安全（SP-107）联动
+用法：工具依赖审计
+锚点：实战共识
+
+</details>
+
+### 安全 · 管理（密钥）
+
+<details><summary>看背面</summary>
+
+Agent 密钥管理：模型 key/工具 API key 的集中管理（密钥服务/配置中心加密），轮换机制（定期+泄漏应急），密钥不入代码与日志（JA-043）
+原理：密钥管理的集中化（分散配置密钥是泄漏面），轮换演练（泄漏应急 JA-590），与密钥管理知识联动
+用法：密钥管理
+锚点：实战共识
+
+</details>
+
+### 安全 · 报告（合规）
+
+<details><summary>看背面</summary>
+
+Agent 合规报告：数据流向（JA-409）/权限矩阵（AD-348）/审计完整性（AD-347）/事故记录（AD-180）四维合规报告，报告支撑监管响应（JA-630）
+原理：合规报告的四维结构（合规审读的组织化），报告自动化生成（AD-334 延伸），与合规知识联动
+用法：合规报告
+锚点：实战共识
+
+</details>
+
+### 工程 · 十批（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 十批收束：协作深化（461~467）+记忆工程（468~475）+工具治理（476~485）+评测运营（486~490）+安全合规（491~499）五分支，域进度 510/720，剩余：手写套卷（~120 条）+行业案例补充（~90 条）
+原理：十批收束与剩余规划（JA-480 执行）：手写套卷素材已密集（AD-186~210/241~250/261~310），剩余批次填行业与治理，节奏保持
+用法：十批收束
+锚点：实战方法论
+
+</details>
+
+### 手写 · 模板（生产）
+
+<details><summary>看背面</summary>
+
+Agent 生产代码模板：类清单（AD-186）+生产件映射（AD-250 差距清单）+配置模板（AD-320）三合一的“生产起点工程”，新 Agent 从模板 fork
+原理：生产模板让手写骨架一键生产化（差距清单的固化），fork 后按业务改造，与脚手架（AD-523）联动
+用法：生产模板
+锚点：实战共识
+
+</details>
+
+### 手写 · 要点（流式）
+
+<details><summary>看背面</summary>
+
+Agent 流式生产实现要点：Flux 组合（主回答流+事件流合并 AD-425）、背压处理、客户端断开取消（JA-098）、错误分段推送（JA-344），四要点齐备才是生产级
+原理：流式生产四要点（demo 与生产的差距），任一缺失在生产暴露（断开泄漏/错误吞掉），与流式知识（JA-282）联动
+用法：流式生产要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 要点（多租户）
+
+<details><summary>看背面</summary>
+
+Agent 多租户实现要点：租户上下文传递（AD-097）+配额隔离（AD-099）+记忆隔离（AD-072）+检索隔离（JA-669）四层，层层有隔离才可多租户
+原理：多租户四层（任何一层缺失即串号/成本污染），四层联动测试（AD-208 串号测试），与租户架构（AD-331）联动
+用法：多租户四层
+锚点：实战共识
+
+</details>
+
+### 手写 · 实现（沙箱）
+
+<details><summary>看背面</summary>
+
+Agent 工具沙箱实现要点：容器隔离（AD-077 三限）+文件白名单（AD-078）+网络出口（AD-079）+逃逸测试（AD-496）四件，沙箱是“实现的工程”不是“配置的开关”
+原理：沙箱实现四件（JA-076 思想的工程化），容器运行时选择（安全 vs 性能），与沙箱知识联动
+用法：沙箱实现要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（记忆）
+
+<details><summary>看背面</summary>
+
+Agent 记忆服务集成实现要点：接口适配（AD-290 三方法）+隐私分级（AD-540）+检索延迟预算（AD-438）+写回策略（AD-504），集成四件
+原理：记忆集成四件（AD-055 外部记忆的落地面），每件有失败模式（接口失配/延迟超限），与记忆工程（AD-436）联动
+用法：记忆集成要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（评测）
+
+<details><summary>看背面</summary>
+
+Agent 评测集成实现要点：评测触发（CI/定时 AD-487）+跑批器（AD-287）+聚合报告（AD-373）+门禁对接（AD-387），评测集成四件
+原理：评测集成的四件（评测系统的工程化），评测与发布流水线打通（JA-407 回归包），与评测运营（JA-471）联动
+用法：评测集成要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（观测）
+
+<details><summary>看背面</summary>
+
+Agent 观测集成实现要点：埋点点位（AD-199）→Micrometer 实现（AD-309）→轨迹（AD-192）→大盘（AD-207）四层贯通，观测集成让“埋了就能看”
+原理：观测集成四层（埋点无大盘=数据孤岛），层间数据流（埋点→指标→看板），与观测体系（JA-091/296）联动
+用法：观测集成要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（降级）
+
+<details><summary>看背面</summary>
+
+Agent 降级集成实现要点：模型降级链（AD-370）+工具 fallback（AD-359）+功能开关（AD-105）+兜底文案（JA-399）四层贯通，降级集成让“降了就能用”
+原理：降级集成四件（降级链的完整化），每层的触发与恢复（JA-672 演练验证），与降级体系（JA-053）联动
+用法：降级集成要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（灰度）
+
+<details><summary>看背面</summary>
+
+Agent 灰度集成实现要点：版本路由（AD-308）+指标对比（AD-207）+自动放量回滚（AD-388/389）+用户反馈归因（JA-573）四件贯通
+原理：灰度集成四件（灰度发布的完整工程），任一缺失灰度失真（无反馈归因的灰度是盲灰），与灰度体系（AD-206）联动
+用法：灰度集成要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 集成（审计）
+
+<details><summary>看背面</summary>
+
+Agent 审计集成实现要点：轨迹留痕（AD-040）+审计事件（AD-312 标准化）+不可变存储（AD-347）+合规报告（AD-334）四件贯通
+原理：审计集成四件（审计的完整工程），审计事件标准化（JA-688 联动），与审计知识（AD-097）联动
+用法：审计集成要点
+锚点：实战共识
+
+</details>
+
+### 手写 · 变体方法（出题）
+
+<details><summary>看背面</summary>
+
+Agent 手写题的变体设计方法：基础骨架上换约束（加预算/加并发/加记忆/加流式）生成变体（AD-403 的系统化），每变体考察不同维度
+原理：变体设计的系统化（约束矩阵组合出题），变体覆盖能力面（并发/流式/记忆/成本），与出题方法联动
+用法：变体设计方法
+锚点：实战共识
+
+</details>
+
+### 手写 · 扣分（评分）
+
+<details><summary>看背面</summary>
+
+手写常见扣分点：未恢复中断标志（AD-018 约定）/-5、工具结果未回填/-10、无终止条件/-15、预算未实现/-10、上下文未裁剪/-5，扣分点权重表
+原理：扣分点权重表让评分一致（AD-402 标准的细化），权重按严重度（正确性>健壮性>性能），与评分标准联动
+用法：扣分点权重
+锚点：实战共识
+
+</details>
+
+### 手写 · 加分（评分）
+
+<details><summary>看背面</summary>
+
+手写加分点清单：主动放弃能力（AD-045）/错误反馈自修复（AD-016）/轨迹埋点（AD-199）/并发安全（AD-058）/幂等处理（AD-218），加分点体现工程素养
+原理：加分点让优秀候选凸显（基础分之外的区分度），加分点对应生产素养（AD-250 清单），与评分标准联动
+用法：加分点清单
+锚点：实战共识
+
+</details>
+
+### 手写 · 维护（参考）
+
+<details><summary>看背面</summary>
+
+手写参考实现维护：参考代码库（各变体参考实现+测试），参考随框架/模型演进更新（JA-175 版本纪律），参考是评分锚
+原理：参考实现的维护（评分锚的代码化），参考演进（新特性进参考），与参考资产联动
+用法：参考实现维护
+锚点：实战共识
+
+</details>
+
+### 案例 · 投研（金融）
+
+<details><summary>看背面</summary>
+
+金融投研 Agent 完整案例：数据工具（行情/财报）+研报库 RAG（JA-126）+分析推理（CoT JA-444）+合规审查（JA-551）→投研初稿（人审），数据实时性与合规是双核心
+原理：投研案例的完整链（AD-126 深化），实时数据工具（JA-700 检索+工具组合），合规审查链（AD-136），与金融知识联动
+用法：投研案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 导诊（医疗）
+
+<details><summary>看背面</summary>
+
+医疗导诊 Agent 案例：症状收集（多轮问诊）→科室推荐（知识库）→预约工具（挂号系统），定位“导诊”不“诊断”（边界清晰 JA-045），全程留痕
+原理：导诊案例的边界设计（导诊≠诊断的责任链），多轮问诊的上下文管理（AD-014），预约工具强确认（AD-080）
+用法：导诊案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 库存（零售）
+
+<details><summary>看背面</summary>
+
+零售库存 Agent 案例：库存查询（多仓）+补货建议（销量预测工具）+调拨执行（确认），预测工具是“传统 ML+LLM 解释”混合
+原理：零售案例的混合智能（预测用传统 ML、解释用 LLM），工具组合（JA-227 供应链的零售细化），与库存知识联动
+用法：库存案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 内容（媒体）
+
+<details><summary>看背面</summary>
+
+媒体内容 Agent 案例：选题建议（热点工具）→初稿生成（JA-602）→事实核查工具（检索校验）→编辑工作流（JA-602 工作流），事实核查是媒体特有防线
+原理：媒体案例的事实核查（幻觉在媒体=事故），核查工具（检索比对），与内容工作流联动
+用法：媒体案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 服务台（IT）
+
+<details><summary>看背面</summary>
+
+企业 IT 服务台 Agent：密码重置（自助工具）+权限申请（审批流 AD-333）+故障报修（工单），高频 IT 请求自动化（JA-441 ROI 场景）
+原理：IT 服务台案例的高频自助（密码重置占 IT 服务量大头），审批流集成（AD-333），与内部工具案例（JA-441）联动
+用法：IT 服务台案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 招聘（HR）
+
+<details><summary>看背面</summary>
+
+HR 招聘 Agent 案例：简历解析（多模态 JA-545）+岗位匹配（语义检索）+面试题生成，公平性防线（JA-559 偏见评估）强制，人审最终决策
+原理：招聘案例的公平性强制（JA-559 的落地），简历多模态解析（JA-545），匹配可解释（决策依据 JA-506）
+用法：招聘案例
+锚点：实战共识
+
+</details>
+
+### 治理 · 合规（评测）
+
+<details><summary>看背面</summary>
+
+评测数据合规细节：评测集若含真实用户对话需授权范围确认（用途限定），评测用途与采集用途一致性（超用途=违规）
+原理：评测数据的用途限定（JA-434 深化），采集用途与评测用途对齐，与数据合规知识联动
+用法：评测用途合规
+锚点：实战共识
+
+</details>
+
+### 治理 · 归档（输出）
+
+<details><summary>看背面</summary>
+
+Agent 输出归档合规：输出的留存期限（JA-383）/留存范围（全部 vs 采样）/用户删除权覆盖（JA-198 延伸到输出），输出归档三问
+原理：输出归档的三问（留多久/留哪些/能删吗），归档策略合规评审（JA-385），与留存治理（AD-536→JA-536）联动
+用法：输出归档合规
+锚点：实战共识
+
+</details>
+
+### 治理 · 跨部门（共享）
+
+<details><summary>看背面</summary>
+
+Agent 跨部门数据共享治理：共享的数据范围审批/脱敏要求/用途限定/审计（AD-433 的跨部门面），跨部门共享是高风险动作
+原理：跨部门共享的治理（部门边界=信任边界 JA-175），审批+脱敏+审计三件，与数据治理（JA-409）联动
+用法：跨部门治理
+锚点：实战共识
+
+</details>
+
+### 治理 · 协议（第三方）
+
+<details><summary>看背面</summary>
+
+Agent 第三方数据处理协议：供应商数据处理协议（DPA）审读（用途/留存/子处理商），协议条款进供应商评审（JA-515 合同面）
+原理：第三方数据协议（AI-237 条款的合同化），DPA 审读清单化（用途/留存/子处理商三查），与供应商治理（AD-435）联动
+用法：DPA 审读
+锚点：实战共识
+
+</details>
+
+### 治理 · 知情（同意）
+
+<details><summary>看背面</summary>
+
+用户知情同意：用户数据用于 AI 处理的知情同意（收集时声明用途/范围/留存），同意管理平台对接
+原理：知情同意是数据处理的合法基础（JA-198/521 前置），同意管理平台化（同意状态可查可撤），与隐私合规联动
+用法：知情同意管理
+锚点：实战共识
+
+</details>
+
+### 工程 · 配置（漂移）
+
+<details><summary>看背面</summary>
+
+配置漂移检测实现：生产配置 vs Git 基线定期 diff（JA-455 实现），漂移告警+自动回滚（基线为准），漂移是“手工改线上”的检测
+原理：配置漂移检测的代码实现（JA-455 的落地），diff 范围（宪法/工具/模型配置 AD-205），与配置治理联动
+用法：配置漂移检测
+锚点：实战共识
+
+</details>
+
+### 工程 · 依赖（漂移）
+
+<details><summary>看背面</summary>
+
+依赖版本漂移检测：框架/SDK 版本 vs 声明版本（BOM 对齐检查 JA-105），依赖升级未走流程检测（CI 检查 pom 一致性）
+原理：依赖漂移的检测（JA-565 SDK 治理的自动化），CI 检查依赖一致性，与依赖治理联动
+用法：依赖漂移检测
+锚点：实战共识
+
+</details>
+
+### 工程 · 行为（漂移）
+
+<details><summary>看背面</summary>
+
+行为漂移双通道检测：评测分数漂移（JA-392）+线上质量指标漂移（JA-399），双通道交叉定位漂移源（模型/数据/配置 JA-701）
+原理：行为漂移的双通道（JA-392/399 的组合），交叉定位（两通道同时变的=模型变更），与漂移归因联动
+用法：行为漂移检测
+锚点：实战共识
+
+</details>
+
+### 工程 · 成本（漂移）
+
+<details><summary>看背面</summary>
+
+成本漂移检测：单任务成本基线（JA-401 模拟值）vs 实际值对比，成本漂移告警（prompt 膨胀/模型变更/循环 JA-633 根因族）
+原理：成本漂移的检测（JA-717 告警的基线面），根因族预设（膨胀/变更/循环），与成本观测（JA-462）联动
+用法：成本漂移检测
+锚点：实战共识
+
+</details>
+
+### 工程 · 总纲（漂移）
+
+<details><summary>看背面</summary>
+
+漂移治理总纲：四类漂移（配置/依赖/行为/成本）各有检测与响应，漂移治理是“AI 系统的防腐”，总纲进运维手册（AD-416）
+原理：四类漂移的治理总纲（本章漂移知识收束），漂移是 AI 系统特有运维主题（传统系统配置静态），与运维体系联动
+用法：漂移治理总纲
+锚点：实战共识
+
+</details>
+
+### 工具 · 风暴（重试）
+
+<details><summary>看背面</summary>
+
+工具重试风暴防护：工具失败→模型重试→再失败的重试风暴（循环放大），防护：重试次数进预算（AD-303）+错误反馈明确“不可重试”（AD-116）
+原理：重试风暴的工具面（JA-020 重试风暴的 Agent 内部版），预算刹车+可重试判定双防，与重试知识联动
+用法：重试风暴防护
+锚点：实战共识
+
+</details>
+
+### 工具 · 幂等重试（组合）
+
+<details><summary>看背面</summary>
+
+工具幂等与重试的组合实现：重试前提是幂等校验（非幂等工具禁自动重试），组合实现（幂等声明→重试策略绑定）
+原理：幂等与重试的组合（JA-056 的工程化），非幂等工具的人工确认重试，与幂等知识（AD-218）联动
+用法：幂等重试组合
+锚点：实战共识
+
+</details>
+
+### 工具 · 超时熔断（组合）
+
+<details><summary>看背面</summary>
+
+工具超时与熔断组合：连续超时触发熔断（工具级熔断器），熔断期间调用直接失败（快速反馈模型），半开探测恢复
+原理：超时与熔断的组合（JA-154 熔断的工具面），连续超时是熔断信号（非偶发），与熔断知识联动
+用法：超时熔断组合
+锚点：实战共识
+
+</details>
+
+### 工具 · 主备（降级）
+
+<details><summary>看背面</summary>
+
+工具降级与主备切换：主工具失败切备工具（同语义 AD-359），切换决策（错误类型+健康度 JA-481），切换事件进轨迹
+原理：工具主备切换（模型降级 AD-370 的工具版），切换决策依据（错误分类+健康度），与降级知识联动
+用法：工具主备
+锚点：实战共识
+
+</details>
+
+### 工具 · 调用（配额）
+
+<details><summary>看背面</summary>
+
+工具调用配额：单工具调用配额（下游配额对齐 JA-535），配额检查在调用前，配额告警（AD-394 同思想）
+原理：工具调用配额（下游配额的对齐面），配额超限错误反馈模型（JA-016），与配额知识联动
+用法：工具配额
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（增量）
+
+<details><summary>看背面</summary>
+
+记忆增量更新实现：记忆变更事件（偏好改变）触发增量更新（只更新变更条目），增量管道（事件→变更→检索索引更新）
+原理：记忆增量更新（JA-067 知识增量的记忆版），全量重建成本高（记忆量大），增量管道事件驱动，与增量知识（JA-158）联动
+用法：记忆增量实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 排序（检索）
+
+<details><summary>看背面</summary>
+
+记忆检索排序实现：向量召回+重排（时间衰减×相关度×重要性 JA-493），排序实现决定“记得对不对”，与记忆检索评测（AD-470）联动
+原理：记忆排序的实现（JA-673 重排的落地），多因子排序（时间/相关/重要），与 RAG 排序（JA-102）同构
+用法：记忆排序实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 分级（存储）
+
+<details><summary>看背面</summary>
+
+记忆多级存储：热（活跃会话，内存）/温（近期，KV/DB）/冷（归档，对象存储），分级存储按访问频率（JA-536 分层联动）
+原理：记忆多级存储（JA-536 分层的记忆版），访问频率驱动分级，冷记忆归档可检索（JA-668），与存储分层（MY-107）联动
+用法：记忆分级存储
+锚点：实战共识
+
+</details>
+
+### 记忆 · 周期（生命）
+
+<details><summary>看背面</summary>
+
+记忆生命周期自动化：写入→活跃→温存→归档→删除的自动化（JA-535 保留策略的记忆版），生命周期规则配置化
+原理：记忆生命周期的自动化（JA-535 保留策略执行面），规则配置化（按记忆类型不同周期），与数据治理联动
+用法：生命周期自动化
+锚点：实战共识
+
+</details>
+
+### 记忆 · 分级（隐私）
+
+<details><summary>看背面</summary>
+
+记忆隐私分级：记忆条目按敏感度分级（高敏加密 AD-472/常规/公开），分级驱动存储与展示策略，分级在写入时标记
+原理：记忆隐私分级（JA-521 用途限定的记忆面），分级驱动策略（加密/展示/删除），与隐私分级（JA-380）联动
+用法：记忆隐私分级
+锚点：实战共识
+
+</details>
+
+### 评测 · 专项（幻觉）
+
+<details><summary>看背面</summary>
+
+幻觉专项评测：幻觉样本集（易幻觉问题：低频知识/数字/引用）+幻觉检测（JA-363 忠实度）+幻觉率指标，幻觉专项独立于通用评测
+原理：幻觉评测的专项化（幻觉是 Agent 头号失败 JA-044），专项样本+专项指标，与幻觉治理（JA-040/043）联动
+用法：幻觉专项评测
+锚点：实战共识
+
+</details>
+
+### 评测 · 专项（延迟）
+
+<details><summary>看背面</summary>
+
+延迟专项评测：分阶段延迟（首 token/总时长/工具耗时）的专项评测与回归，延迟回归进发布门禁（JA-339 性能基线的评测化）
+原理：延迟评测的专项化（JA-339 性能基线的评测执行），分阶段指标（JA-423 TTFT），与延迟知识联动
+用法：延迟专项评测
+锚点：实战共识
+
+</details>
+
+### 评测 · 专项（成本）
+
+<details><summary>看背面</summary>
+
+成本专项评测：任务成本回归（单任务 token/费用对比基线 JA-528），成本回归进发布门禁（与延迟并列），成本专项的根因（prompt 膨胀/工具循环）
+原理：成本评测的专项化（JA-528 成本门禁的评测执行），根因关联（JA-633 案例），与成本治理联动
+用法：成本专项评测
+锚点：实战共识
+
+</details>
+
+### 评测 · 专项（安全）
+
+<details><summary>看背面</summary>
+
+安全专项评测汇总：注入（JA-474）/越狱（JA-299）/越权工具（AD-534）/数据外泄（JA-178）四专项，安全评测独立于功能评测（JA-156）
+原理：安全专项评测的汇总（安全评测族的总览），四专项独立跑分（安全分数独立呈现），与安全回归（JA-156/465）联动
+用法：安全专项汇总
+锚点：实战共识
+
+</details>
+
+### 评测 · 总览（矩阵）
+
+<details><summary>看背面</summary>
+
+评测多维矩阵总览：功能×安全×性能×成本四维×版本序列，矩阵总览一眼看“哪个维度退化”，与雷达图（JA-484）联动
+原理：评测矩阵的总览（JA-484 的维度全集），矩阵驱动发布决策（JA-343 报告），与评测体系收束联动
+用法：评测矩阵总览
+锚点：实战共识
+
+</details>
+
+### 协作 · AI 主导（人机）
+
+<details><summary>看背面</summary>
+
+人机协作模式一：AI 主导人类监督（Agent 执行+人抽查），适合低风险高频任务（分类/摘要），监督以抽样+指标进行
+原理：三种人机模式的第一种（JA-546 演进谱系的细化），监督面设计（抽什么/看什么），与任务风险分级（JA-018）联动
+用法：AI 主导模式
+锚点：实战共识
+
+</details>
+
+### 协作 · 人主导（人机）
+
+<details><summary>看背面</summary>
+
+人机协作模式二：人主导 AI 辅助（人执行+AI 建议），适合高风险专业任务（医疗/法律 JA-478），AI 产出“草稿+依据”
+原理：第二种模式（草稿与依据是 AI 的产出形态 JA-552），人保留决策权，与责任链（JA-478）联动
+用法：人主导模式
+锚点：实战共识
+
+</details>
+
+### 协作 · 分配（决策）
+
+<details><summary>看背面</summary>
+
+人机任务分配决策树：错误代价（高→人主导）/任务频率（高→AI 主导）/任务结构（固定→工作流），决策树驱动模式选择（JA-546/547 的选择器）
+原理：分配决策树（两种模式的选择器），树是设计工具（JA-651 场景题的分配步骤），与任务分析（AD-048）联动
+用法：分配决策树
+锚点：实战共识
+
+</details>
+
+### 协作 · 回路（反馈）
+
+<details><summary>看背面</summary>
+
+人机协作反馈回路设计：人纠正 AI（JA-576 编辑）→纠正数据回流（JA-452 飞轮）→模型/提示改进→效果验证（JA-255），回路闭环
+原理：反馈回路的完整设计（飞轮的流程化），回路断点检查（回流→改进→验证每环），与数据飞轮联动
+用法：反馈回路设计
+锚点：实战共识
+
+</details>
+
+### 工程 · 十一批（收束）
+
+<details><summary>看背面</summary>
+
+agent-dev 第十一批收束：生产模板（501~510）+手写出题（511~514）+行业案例六（515~520）+合规五（521~525）+漂移治理（526~530）+工具治理（531~535）+记忆治理（536~540）+评测专项（541~545）+人机协作（546~549），域进度 560/720
+原理：十一批收束（JA-480）：合规与漂移两分支从零到完整，手写生产模板齐备，剩余批次：协作/案例/收尾
+用法：十一批收束
+锚点：实战方法论
+
+</details>
+
+### 协作 · 技能（路由）
+
+<details><summary>看背面</summary>
+
+技能路由（skill-based routing）：按任务所需技能（代码/检索/分析）路由到具备该技能的 Agent，技能注册与匹配是路由基础
+原理：JA-128 路由的技能化：路由依据是"能力画像"而非固定规则，技能画像随评测更新（AD-094），与路由知识联动
+用法：技能路由设计
+锚点：实战共识
+
+</details>
+
+### 协作 · 传递（置信）
+
+<details><summary>看背面</summary>
+
+结果置信度传递：子 Agent 输出带置信度（自评/校验分），父 Agent 按置信度决策（低置信触发验证或重试）
+原理：置信度是协作的质量信号（AD-212 评分的结构化），低置信处理策略（验证/重试/降级），与置信输出（JA-618）联动
+用法：置信度传递
+锚点：实战共识
+
+</details>
+
+### 协作 · 共享（预算）
+
+<details><summary>看背面</summary>
+
+多 Agent 共享预算管理：系统总预算池按 Agent 分配子池（AD-500 池的多 Agent 版），子池超限不影响他人（隔离），总池告警
+原理：共享预算的隔离与总控（隔离防挤占、总控防超支），预算分配按任务价值（JA-417），与预算知识联动
+用法：共享预算管理
+锚点：实战共识
+
+</details>
+
+### 协作 · 负载（均衡）
+
+<details><summary>看背面</summary>
+
+Agent 群体负载均衡：任务分发的负载均衡（按 Agent 当前负载/能力匹配），负载不均导致热点 Agent 延迟高
+原理：负载均衡是多 Agent 的容量治理（JA-131 水位的多 Agent 版），均衡策略（最少任务/能力匹配），与负载知识联动
+用法：负载均衡设计
+锚点：实战共识
+
+</details>
+
+### 协作 · 策略总结（失败）
+
+<details><summary>看背面</summary>
+
+跨 Agent 失败传播策略总结：重试（子级）/替换（换子 Agent）/跳过（标注继续）/升级（人工），四策略按任务容错度选
+原理：失败传播策略的汇总（AD-133 的系统化），策略选择矩阵（容错度×阶段），与失败知识联动
+用法：失败策略总结
+锚点：实战共识
+
+</details>
+
+### 协作 · 矩阵（测试）
+
+<details><summary>看背面</summary>
+
+多 Agent 协作测试矩阵：协作场景×失败注入（某 Agent 失败/慢/返回错误）的测试矩阵，矩阵覆盖协作健壮性
+原理：协作测试矩阵（AD-414 组合测试的执行化），失败注入验证降级（AD-133），与混沌（AD-396）联动
+用法：协作测试矩阵
+锚点：实战共识
+
+</details>
+
+### 协作 · 管理（演化）
+
+<details><summary>看背面</summary>
+
+Agent 群体演化管理：新增 Agent（评审 AD-381）/下线 Agent（AD-232）/能力升级（AD-218）的群体级管理，演化影响协作拓扑
+原理：群体演化是系统级管理（新增/下线改变协作拓扑），演化评审（影响面分析），与治理（AD-159）联动
+用法：群体演化管理
+锚点：实战共识
+
+</details>
+
+### 协作 · 规划（容量）
+
+<details><summary>看背面</summary>
+
+多 Agent 系统容量规划：总容量=Σ各 Agent 容量×协作放大系数（协作等待叠加），放大系数实测（JA-259 压测）
+原理：多 Agent 容量的协作放大（串行协作时长叠加），放大系数压测获得，与容量模型（AD-340）联动
+用法：协作容量规划
+锚点：实战共识
+
+</details>
+
+### 协作 · 传递（SLA）
+
+<details><summary>看背面</summary>
+
+跨 Agent SLA 传递：父任务 SLA 分解到子 Agent SLA（预算传递 AD-028 思想），子 SLA 不达触发父级策略
+原理：SLA 分解让端到端 SLA 可控（子不达父兜底），SLA 传递与超时传递（AD-149）同构，与 SLA 管理（AD-485）联动
+用法：SLA 传递
+锚点：实战共识
+
+</details>
+
+### 协作 · 因果（调试）
+
+<details><summary>看背面</summary>
+
+跨 Agent 因果链重建：从轨迹重建"决策因果链"（哪个决策导致哪个结果），因果链是调试多 Agent 的钥匙
+原理：因果链重建（JA-674 观测的调试深化），轨迹含决策上下文（AD-040 记录决策依据），与轨迹知识联动
+用法：因果链重建
+锚点：实战共识
+
+</details>
+
+### 案例 · 供应链（金融）
+
+<details><summary>看背面</summary>
+
+供应链金融 Agent 案例：发票核验（OCR+校验）+贸易背景真实性（多源交叉）+额度计算（风控规则），强合规（JA-551）+人审终审
+原理：供应链金融案例：单据处理（JA-601 物流经验）+风控规则执行，Agent 定位"材料预审"（决策归风控），与金融案例（AD-126）联动
+用法：供应链金融案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 质检（制造）
+
+<details><summary>看背面</summary>
+
+制造业质检 Agent：质检报告（视觉模型 JA-547）+缺陷知识库 RAG+处置建议（人确认），质检历史数据回流（缺陷模式学习）
+原理：制造质检案例（JA-556 制造的质检深化），视觉质检（JA-547 视觉检索同源），历史回流（JA-135 学习），与制造知识联动
+用法：质检案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 运维（能源）
+
+<details><summary>看背面</summary>
+
+能源运维 Agent：设备告警分诊（AD-222 SRE 经验）+检修规程 RAG+工单生成，场站设备多且分散（Agent 化价值大）
+原理：能源运维案例（分散设备的运维规模化），规程 RAG（JA-416 runbook），工单确认（AD-080），与运维案例联动
+用法：能源运维案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 咨询（政务）
+
+<details><summary>看背面</summary>
+
+政务咨询 Agent：政策库 RAG（JA-440）+办事指南生成+材料预审（清单校验），口径严格（政策原文引用 JA-202），敏感数据驻留（JA-557 私有化）
+原理：政务案例的合规组合（政策引用+私有化），咨询口径严格（政策原文），材料预审减少跑腿，与政务知识（JA-557）联动
+用法：政务咨询案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 核保（保险）
+
+<details><summary>看背面</summary>
+
+保险核保 Agent：投保材料抽取（JA-545）+核保规则执行（规则引擎+LLM 解释）+人工复核（复杂件），核保规则是"硬约束"（LLM 解释不决策）
+原理：核保案例的规则+解释分工（规则引擎决策、LLM 解释），强合规（JA-551），人审复杂件，与保险案例（AD-603）联动
+用法：核保案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 投放（广告）
+
+<details><summary>看背面</summary>
+
+广告投放 Agent：创意生成（JA-437 batch）+投放策略建议（数据工具）+效果分析（归因报告），投放执行人确认（预算动作）
+原理：广告案例的创意+分析双能（生成与数据工具组合），预算动作确认（AD-080），效果闭环（JA-219）
+用法：广告案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 效能（研发）
+
+<details><summary>看背面</summary>
+
+研发效能 Agent：需求→技术方案草稿→任务拆解（JA-010）→代码骨架生成（AD-156 防线）→测试生成（AD-122），研发全链辅助
+原理：研发效能 Agent 的全链设计（各环节 Agent 化的集成案例），每环节人审（代码入库规范 AD-459），与研发案例（AD-122）联动
+用法：研发效能案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 质检（客服）
+
+<details><summary>看背面</summary>
+
+客服质检 Agent（AI 质检人工）：人工客服对话全量质检（合规用语/流程遵循），质检标准 few-shot（JA-443），质检结果进客服培训（JA-341 闭环）
+原理：质检 Agent 的反向应用（AI 质检人），全量质检（人检抽样 JA-439 反向），质检闭环（培训联动），与客服知识联动
+用法：客服质检案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 评价（电商）
+
+<details><summary>看背面</summary>
+
+电商评价分析 Agent：评价聚类（JA-496 意图）+情感分析+问题归因（商品/物流/客服），归因驱动运营改进，评价量大（HyperLogLog 式聚合思维 JA-429 不适用——评价是全文本）
+原理：评价分析的规模化（海量文本的批量处理 JA-437），归因驱动商品改进（JA-496 聚类），评价数据是质量信号源
+用法：评价分析案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 监控（舆情）
+
+<details><summary>看背面</summary>
+
+舆情监控 Agent：多源监控（新闻/社交 API 工具）+情感与主题分析+预警（负面扩散），预警分级（JA-382 舆情等级），响应建议（人决策）
+原理：舆情场景的实时性（流式监控 AD-108）与分级预警，响应人决策（公关敏感），与监控案例（AD-223）联动
+用法：舆情案例
+锚点：实战共识
+
+</details>
+
+### 评测 · 分层（报告）
+
+<details><summary>看背面</summary>
+
+评测分层报告：总报告（决策层：是否发布）+分域报告（工程层：哪域弱）+条目报告（执行层：哪些失败），三层报告受众不同
+原理：分层报告的受众设计（决策/工程/执行各取所需），与评测矩阵（AD-545）联动，报告自动化（AD-374）
+用法：分层报告设计
+锚点：实战共识
+
+</details>
+
+### 评测 · 检验（统计）
+
+<details><summary>看背面</summary>
+
+评测的统计检验细节：成功率对比用比例检验（z 检验）、小样本用精确检验，检验方法选择按样本与指标类型
+原理：统计检验的方法选择（JA-164 深化），比例 vs 均值 vs 排名检验不同，与统计知识联动
+用法：统计检验方法
+锚点：实战共识
+
+</details>
+
+### 评测 · 产品（联动）
+
+<details><summary>看背面</summary>
+
+评测与产品指标联动验证：评测分提升应传导到产品指标（采纳率/解决率），不传导=评测失真或指标错位（JA-490 语义辨析）
+原理：评测与产品的传导验证（JA-233 双通道的一致性检查），传导断裂的排查，与在线指标（JA-233）联动
+用法：传导验证
+锚点：实战共识
+
+</details>
+
+### 评测 · 价值（成本）
+
+<details><summary>看背面</summary>
+
+评测成本与价值平衡：评测投入（token+人力）vs 评测价值（拦住的退化价值），ROI 评估决定评测规模
+原理：评测自身的 ROI（JA-653 成本的决策面），价值=拦截的退化×发生概率，与成本治理（JA-653）联动
+用法：评测 ROI
+锚点：实战共识
+
+</details>
+
+### 评测 · 周期（生命）
+
+<details><summary>看背面</summary>
+
+评测集生命周期管理：创建→维护（JA-471）→老化（条目过时下线）→归档，评测集的完整生命周期（JA-202 的周期面）
+原理：评测集的周期管理（资产的全生命周期），老化检测（条目与当前业务脱节），与评测资产（JA-202）联动
+用法：评测集周期
+锚点：实战共识
+
+</details>
+
+### 评测 · 深化（多模态）
+
+<details><summary>看背面</summary>
+
+多模态评测深化：图像理解准确率/图文一致性/视觉幻觉率三维，多模态评测集与文本评测集分开管理（JA-548 深化）
+原理：多模态评测的三维（JA-548 深化），视觉幻觉（JA-428）独立度量，与多模态知识联动
+用法：多模态评测深化
+锚点：实战共识
+
+</details>
+
+### 评测 · 分段（长任务）
+
+<details><summary>看背面</summary>
+
+长任务评测的分段设计：长任务（多阶段）评测按阶段断言（阶段产出正确），分段评测定位"哪阶段失败"（JA-204 的评测化）
+原理：长任务评测的分段（AD-204 分段验收的评测面），阶段断言（JA-677 进度的评测面），与长任务知识联动
+用法：长任务分段评测
+锚点：实战共识
+
+</details>
+
+### 评测 · 保障（复现）
+
+<details><summary>看背面</summary>
+
+评测可复现性保障：固定种子（模型温度 0 或固定种子）/固定工具 mock 剧本/固定检索结果，可复现让回归可信（JA-490 基线对比前提）
+原理：可复现性的工程保障（JA-344 抽样可复现的扩展），三固定（种子/剧本/检索快照），与评测纪律联动
+用法：可复现性保障
+锚点：实战共识
+
+</details>
+
+### 评测 · 环境（隔离）
+
+<details><summary>看背面</summary>
+
+评测环境隔离：评测环境与生产环境隔离（数据/配置/配额 JA-539），评测不影响生产（配额与数据双向隔离）
+原理：评测环境隔离的必要性（JA-539 预算的隔离面），数据隔离（评测用脱敏数据 JA-252），与环境管理联动
+用法：评测环境隔离
+锚点：实战共识
+
+</details>
+
+### 评测 · 治理（数据）
+
+<details><summary>看背面</summary>
+
+评测数据治理：评测集的访问权限（谁可改）/变更审计（JA-202）/血缘（JA-201），评测数据的生产级治理
+原理：评测数据的治理（JA-202 的治理面），访问权限与审计（JA-684 联动），与数据治理联动
+用法：评测数据治理
+锚点：实战共识
+
+</details>
+
+### 安全 · 样本库（注入）
+
+<details><summary>看背面</summary>
+
+提示注入实战样本库：直接注入/间接注入（外部内容）/编码绕过/多语言注入/多模态注入（JA-580）五大类，样本库持续扩充（JA-465 红队节奏）
+原理：注入样本库的系统化（JA-474 三类的扩展），五类覆盖注入攻击面，样本库是安全评测资产（JA-156），与注入知识联动
+用法：注入样本库
+锚点：实战共识
+
+</details>
+
+### 安全 · 对抗（越狱）
+
+<details><summary>看背面</summary>
+
+越狱对抗测试：角色扮演/渐进诱导/编码混淆等越狱手法的自动化测试（JA-025），越狱成功率是安全指标
+原理：越狱测试的自动化（JA-720 对抗自动化的越狱面），越狱率进安全分数（AD-587），与越狱知识联动
+用法：越狱对抗测试
+锚点：实战共识
+
+</details>
+
+### 安全 · 测试（外泄）
+
+<details><summary>看背面</summary>
+
+数据外泄测试：构造诱导场景（让 Agent 读敏感数据+外发），验证外泄路径防线（AD-178）全部拦截
+原理：外泄测试的构造（JA-178 路径的测试化），每条路径有测试用例，与外泄防线联动
+用法：外泄测试
+锚点：实战共识
+
+</details>
+
+### 安全 · 测试（滥用）
+
+<details><summary>看背面</summary>
+
+权限滥用测试：诱导 Agent 调用未授权工具（AD-534 工具诱导），验证权限矩阵（AD-348）拦截全部越权
+原理：权限滥用的测试化（JA-235 防线的测试面），越权用例覆盖全部高危工具，与权限知识联动
+用法：权限滥用测试
+锚点：实战共识
+
+</details>
+
+### 安全 · 测试（供应链）
+
+<details><summary>看背面</summary>
+
+供应链投毒测试：恶意 MCP server 模拟（AD-177 投毒的测试面），验证客户端的来源校验与行为监控（JA-312）拦截
+原理：供应链投毒的测试化（JA-177 防线的测试面），恶意 server 模拟（假工具/外发行为），与供应链防线联动
+用法：供应链测试
+锚点：实战共识
+
+</details>
+
+### 安全 · 自动化（测试）
+
+<details><summary>看背面</summary>
+
+安全测试自动化：安全样本库（AD-581）自动批量跑+结果聚合（安全分数），安全测试进 CI（JA-720 自动化）
+原理：安全测试的自动化（对抗测试的 CI 化），自动化让安全回归可持续（JA-465 节奏），与安全自动化（AD-720）联动
+用法：安全测试自动化
+锚点：实战共识
+
+</details>
+
+### 安全 · 分数（度量）
+
+<details><summary>看背面</summary>
+
+Agent 安全分数：注入拦截率/越狱率/越权拦截率/外泄拦截率的加权安全分，安全分数进发布门禁（JA-525 安全维）
+原理：安全分数的度量设计（安全可量化的汇总），加权按风险（外泄权重最高），与安全门禁（AD-387）联动
+用法：安全分数设计
+锚点：实战共识
+
+</details>
+
+### 安全 · 基线（门禁）
+
+<details><summary>看背面</summary>
+
+安全基线与门禁：安全分数基线（上线时分数）+门禁（低于基线阻断发布），安全回归（JA-720）驱动分数
+原理：安全门禁的实现（JA-387 的安全维），基线管理（AD-165 同思想），与安全分数（AD-587）联动
+用法：安全门禁
+锚点：实战共识
+
+</details>
+
+### 安全 · 应急（事件）
+
+<details><summary>看背面</summary>
+
+Agent 安全事件应急：注入成功/越权执行/数据外泄三类事件的应急流（AD-180 止血→根因→改进），安全事件与功能事件分开管理
+原理：安全事件的应急专流（JA-180 的安全专章），三类事件各有止血动作，与安全运营（AD-520）联动
+用法：安全应急专流
+锚点：实战共识
+
+</details>
+
+### 安全 · 改进（复盘）
+
+<details><summary>看背面</summary>
+
+安全复盘与改进：安全事件复盘（根因→防线缺口）→防线补丁→样本入库（AD-581）→回归（AD-720），安全改进闭环
+原理：安全复盘的改进闭环（JA-355 的安全专章），防线补丁+样本回流双产出，与安全知识联动
+用法：安全改进闭环
+锚点：实战共识
+
+</details>
+
+### 工程 · 注入（故障）
+
+<details><summary>看背面</summary>
+
+Agent 故障注入测试：工具失败/模型限流/上下文超限/配额耗尽四类注入（AD-396 模板的执行），验证 Agent 的容错行为（错误反馈/降级/收尾）
+原理：故障注入的 Agent 特化（JA-591 混沌的 Agent 面），注入验证容错（AD-016 反馈等），与混沌知识联动
+用法：故障注入测试
+锚点：实战共识
+
+</details>
+
+### 工程 · 剖析（性能）
+
+<details><summary>看背面</summary>
+
+Agent 性能剖析：每步耗时剖析（模型调用/工具执行/上下文处理三段 AD-644），剖析定位优化点（热路径 JA-454）
+原理：性能剖析的分段实现（JA-592 三段的代码化），剖析驱动优化（JA-454），与性能知识联动
+用法：性能剖析
+锚点：实战共识
+
+</details>
+
+### 工程 · 剖析（内存）
+
+<details><summary>看背面</summary>
+
+Agent 内存剖析：长任务的消息序列膨胀（JA-457）与工具结果持有（引用未释放）的堆剖析，内存剖析定位泄漏（JA-642 soak 联动）
+原理：内存剖析的 Agent 面（JA-593 的引用与对象），堆 dump 分析（AD-046 MAT 联动），与 JVM 内存知识联动
+用法：内存剖析
+锚点：实战共识
+
+</details>
+
+### 工程 · 剖析（延迟）
+
+<details><summary>看背面</summary>
+
+Agent 延迟剖析：首 token/工具耗时/循环轮次的延迟分布（JA-644 四象限的 Agent 版），延迟剖析定位体验瓶颈（TTFT 优化 JA-423）
+原理：延迟剖析的 Agent 面（JA-594 的轨迹耗时），首 token 与步进延迟分开，与延迟知识联动
+用法：延迟剖析
+锚点：实战共识
+
+</details>
+
+### 工程 · 优化（吞吐）
+
+<details><summary>看背面</summary>
+
+Agent 吞吐优化：并发任务吞吐提升（批次合并/上下文压缩降 token/缓存命中），吞吐优化的度量（JA-259 压测验证）
+原理：吞吐优化的手段（JA-259 压测的优化面），批次/压缩/缓存三招（JA-462 成本联动），与性能优化联动
+用法：吞吐优化
+锚点：实战共识
+
+</details>
+
+### 工程 · 实现（隔离）
+
+<details><summary>看背面</summary>
+
+Agent 资源隔离实现：任务级资源配额（token/并发/沙箱资源），配额实现（信号量/容器限额），隔离防单任务拖垮全局
+原理：资源隔离的实现（AD-500 预算池的资源面），配额实现（信号量并发 JA-320），与隔离知识（AD-503）联动
+用法：资源隔离实现
+锚点：实战共识
+
+</details>
+
+### 工程 · 伸缩（弹性）
+
+<details><summary>看背面</summary>
+
+Agent 弹性伸缩实现：按队列深度/任务延迟伸缩执行器（JA-478 HPA 的 Agent 面），缩容保护（进行中任务完成再缩）
+原理：弹性伸缩的 Agent 面（JA-478 HPA 联动），伸缩指标（队列深度 JA-397），缩容保护（AD-307 停机），与弹性知识联动
+用法：弹性伸缩实现
+锚点：实战共识
+
+</details>
+
+### 工程 · 部署（多区域）
+
+<details><summary>看背面</summary>
+
+Agent 多区域部署：无状态编排层多区域+数据层（记忆/向量）区域化（JA-596 数据驻留），跨区域调用延迟权衡（JA-096）
+原理：多区域部署的 Agent 面（JA-598 的 Agent 层），编排无状态易多活（JA-649），数据驻留约束区域，与多活知识联动
+用法：多区域部署
+锚点：实战共识
+
+</details>
+
+### 工程 · 切换（灾备）
+
+<details><summary>看背面</summary>
+
+Agent 灾备切换：区域故障时 Agent 任务切换（任务重调度到健康区域+记忆可访问性验证），记忆跨区可用是多活前提
+原理：灾备切换的 Agent 面（JA-599 多活的切换面），记忆可访问性是前提（JA-473 备份），与灾备切换（MY-094）联动
+用法：灾备切换
+锚点：实战共识
+
+</details>
+
+### 工程 · 预测（容量）
+
+<details><summary>看背面</summary>
+
+Agent 容量预测：任务量增长预测（业务增长×AI 渗透）→资源预测（token/并发/配额）→扩容计划（JA-514 容量预测的 Agent 面）
+原理：容量预测的 Agent 面（JA-514 的执行），预测驱动配额申请（AD-584）与成本预算（JA-461），与容量知识联动
+用法：容量预测
+锚点：实战共识
+
+</details>
+
+### 治理 · 矩阵（合规）
+
+<details><summary>看背面</summary>
+
+Agent 合规矩阵：数据密级（JA-380）×部署形态（云/私有）×功能（可用场景）三维矩阵，合规矩阵是 Agent 准入的判定表
+原理：合规矩阵的 Agent 面（JA-380 矩阵的 Agent 维），准入判定表化（JA-525 自动化），与合规知识联动
+用法：合规矩阵
+锚点：实战共识
+
+</details>
+
+### 治理 · 登记册（风险）
+
+<details><summary>看背面</summary>
+
+Agent 风险登记册：每个 Agent 的风险项（幻觉/越权/成本/合规）登记与缓解措施跟踪，风险册是治理台账（JA-413 风险清单的运行态）
+原理：风险登记册的运行态（JA-413 的持续管理面），缓解措施有 owner 与期限，与风险治理联动
+用法：风险登记册
+锚点：实战共识
+
+</details>
+
+### 治理 · 委员会（变更）
+
+<details><summary>看背面</summary>
+
+Agent 变更委员会：重大变更（宪法重写/新工具类/新模型）评审会（AD-381 准入的治理会），委员会决议留痕
+原理：变更委员会的治理面（AD-381 的组织化），重大变更界定标准（影响行为的三元组变更 AD-059），与治理组织（AD-159）联动
+用法：变更委员会
+锚点：实战共识
+
+</details>
+
+### 治理 · 多元化（供应）
+
+<details><summary>看背面</summary>
+
+供应商多元化治理：主备供应商（JA-516）的能力/价格/政策季度评估（JA-457），多元化降低锁定（JA-657 反锁定）
+原理：供应商多元化的治理面（JA-516 的持续管理），多元化是成本与风险对冲，与供应商知识联动
+用法：供应商多元化
+锚点：实战共识
+
+</details>
+
+### 治理 · 委员会（成本）
+
+<details><summary>看背面</summary>
+
+成本治理机制：月度成本复盘会（JA-338 三支柱数据）→优化决策→跟踪，成本治理机制化（JA-461 预算的治理面）
+原理：成本治理的机制化（JA-338 复盘的组织面），优化决策跟踪（闭环），与成本知识（JA-462）联动
+用法：成本治理机制
+锚点：实战共识
+
+</details>
+
+### 治理 · 闭环（质量）
+
+<details><summary>看背面</summary>
+
+质量治理闭环：评测发现→修复→验证→基线更新（JA-255 节奏的治理化），质量闭环的 SLA（修复时效）
+原理：质量治理的闭环化（JA-255 的治理面），修复 SLA（JA-341 延伸），与质量文化（JA-706）联动
+用法：质量闭环
+锚点：实战共识
+
+</details>
+
+### 治理 · 闭环（安全）
+
+<details><summary>看背面</summary>
+
+安全治理闭环：红队发现→防线补丁→回归验证→基线更新（AD-590 改进的治理化），安全闭环与功能闭环同级
+原理：安全治理的闭环化（AD-590 的治理面），安全 SLA（JA-465 节奏），与安全知识（JA-544）联动
+用法：安全闭环
+锚点：实战共识
+
+</details>
+
+### 治理 · 闭环（运营）
+
+<details><summary>看背面</summary>
+
+运营治理闭环：用户反馈（JA-400）→产品改进→效果验证→指标更新，运营闭环让 Agent 贴近用户
+原理：运营治理的闭环化（JA-400 的治理面），用户声音进决策（JA-233 指标联动），与运营知识联动
+用法：运营闭环
+锚点：实战共识
+
+</details>
+
+### 治理 · 闭环（数据）
+
+<details><summary>看背面</summary>
+
+数据治理闭环：语料质量（JA-475）→知识缺口（JA-496）→补齐→验证（JA-475），数据治理与知识运营（JA-532）一体
+原理：数据治理的闭环化（JA-532 运营的治理面），数据质量 SLA（AD-707 契约），与数据知识联动
+用法：数据闭环
+锚点：实战共识
+
+</details>
+
+### 治理 · 模型（成熟）
+
+<details><summary>看背面</summary>
+
+Agent 治理成熟度模型：L1 无治理（直连）→L2 基础（清单/权限）→L3 流程（评审/门禁）→L4 平台（自动化治理），成熟度评估驱动治理投入
+原理：成熟度模型的定位（JA-377 演进的治理面），评估当前层级定治理路线，与平台演进（JA-654）联动
+用法：成熟度模型
+锚点：实战方法论
+
+</details>
+
+### 工具 · 实现（沙箱）
+
+<details><summary>看背面</summary>
+
+工具沙箱实现细节：容器运行时（runc/gVisor）/文件系统只读挂载/网络 namespace 隔离/资源 cgroup 限额，实现层四件
+原理：沙箱的实现细节（AD-504 的技术面），容器技术选型（安全 vs 性能），与容器知识联动
+用法：沙箱实现细节
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（权限）
+
+<details><summary>看背面</summary>
+
+工具权限校验实现：调用前查权限矩阵（AD-348）+租户校验（AD-503）+密级校验（JA-645），三校验链实现
+原理：权限校验的三链实现（AD-235 的代码化），校验失败统一错误（AD-284），与权限知识（AD-495）联动
+用法：权限校验实现
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（审计）
+
+<details><summary>看背面</summary>
+
+工具审计实现：调用事件（AD-312 标准化）异步落审计存储（AD-347 不可变），审计查询接口（合规 JA-334 消费）
+原理：审计的代码实现（AD-312/347 的落地），异步+不可变+可查询三件，与审计知识联动
+用法：审计实现
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（限流）
+
+<details><summary>看背面</summary>
+
+工具限流实现：令牌桶（JA-024 算法）按工具配置限流，限流实现（Redis 分布式或本地），限流错误反馈模型
+原理：工具限流的代码实现（AD-118 的落地），分布式 vs 本地限流选型（JA-025 精度），与限流知识联动
+用法：限流实现
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（降级）
+
+<details><summary>看背面</summary>
+
+工具降级实现：fallback 链（AD-359）+熔断（AD-533）+开关（AD-105）三件组合，降级的完整实现
+原理：工具降级的完整实现（AD-359 的组合化），三件协同（熔断触发切 fallback），与降级知识联动
+用法：降级实现
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（监控）
+
+<details><summary>看背面</summary>
+
+工具监控实现：四埋点（AD-240）→Micrometer（AD-309）→大盘（AD-398 工具维），监控实现链
+原理：工具监控的实现链（AD-240 的落地），大盘工具维（JA-468），与观测知识联动
+用法：监控实现
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（测试）
+
+<details><summary>看背面</summary>
+
+工具测试实现：四套件（AD-237）的代码化（功能/边界/幂等/权限），测试工具化（断言工具 AD-285 的工具版）
+原理：工具测试的代码化（AD-237 的落地），断言工具复用（AD-285），与测试知识联动
+用法：工具测试实现
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（文档）
+
+<details><summary>看背面</summary>
+
+工具文档自动化实现：注解→文档生成（JA-476 描述自动化的落地），文档发布与版本绑定（AD-119）
+原理：文档自动化的实现（JA-476 的落地），文档与工具版本绑定，与文档知识联动
+用法：文档自动化实现
+锚点：实战共识
+
+</details>
+
+### 工具 · 实现（版本）
+
+<details><summary>看背面</summary>
+
+工具版本管理实现：工具版本注册（AD-119 共存）+版本元数据（变更记录）+迁移指南（AD-360），版本实现三件
+原理：工具版本的实现（AD-119 的落地），元数据与迁移配套，与版本治理（AD-083）联动
+用法：版本管理实现
+锚点：实战共识
+
+</details>
+
+### 工具 · 周期（生命）
+
+<details><summary>看背面</summary>
+
+工具生命周期实现：注册（AD-278）→运行（监控 AD-616）→灰度（AD-358）→废弃（AD-119 下线），工具全生命周期实现
+原理：工具生命周期的实现（AD-232 生命周期的工具版），废弃流程（客户端迁移后下线），与生命周期知识联动
+用法：生命周期实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（写入）
+
+<details><summary>看背面</summary>
+
+记忆写入路径实现：写入请求→隐私分级（AD-540）→加密（AD-472）→存储（AD-538 分级）→索引更新（JA-158 增量），写入五步
+原理：写入路径的五步（记忆写入的完整链），每步失败处理（AD-194 风格），与记忆写入知识（AD-504）联动
+用法：写入路径实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（读取）
+
+<details><summary>看背面</summary>
+
+记忆读取路径实现：检索请求→权限校验（租户 AD-471）→检索（AD-537 排序）→脱敏（AD-497）→返回，读取五步
+原理：读取路径的五步（记忆读取的完整链），权限与脱敏在读路径（JA-061 权限检索），与读取知识（AD-013）联动
+用法：读取路径实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（检索）
+
+<details><summary>看背面</summary>
+
+记忆检索实现：向量检索（AD-537 排序）+过滤（租户/时效 AD-468）+重排（AD-673），检索三段实现
+原理：记忆检索的三段实现（JA-673 的落地），过滤在检索前（性能 AD-620），与检索知识联动
+用法：检索实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（更新）
+
+<details><summary>看背面</summary>
+
+记忆更新实现：冲突检测（AD-074 新旧比对）→合并策略（AD-469）→增量更新（AD-536），更新三步实现
+原理：更新路径的三步（JA-074 冲突的落地），合并策略配置化（AD-469），与更新知识联动
+用法：更新实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（删除）
+
+<details><summary>看背面</summary>
+
+记忆删除实现：用户删除权（AD-075 主体权利）→级联删除（向量/索引/备份 JA-473）→删除审计（JA-622），删除三步
+原理：删除路径的三步（JA-075 主体权利的落地），级联删除（备份也要删 JA-473），与删除合规联动
+用法：删除实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（加密）
+
+<details><summary>看背面</summary>
+
+记忆加密实现：字段级加密（高敏字段 AD-540）+密钥管理（AD-498）+加密性能权衡（字段级 vs 全量），加密实现三件
+原理：加密的实现（AD-472 的技术面），字段级加密精准（性能与安全平衡），与加密知识联动
+用法：加密实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（备份）
+
+<details><summary>看背面</summary>
+
+记忆备份实现：定时快照（AD-473）+增量备份（变更量）+恢复演练（AD-473 演练面），备份三件实现
+原理：备份的实现（AD-473 的落地），增量备份省成本，与备份知识联动
+用法：备份实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（监控）
+
+<details><summary>看背面</summary>
+
+记忆监控实现：容量（AD-475）/检索延迟（AD-438）/命中率（AD-439）三指标实现，记忆监控三件
+原理：记忆监控的实现（AD-439 的落地），三指标对应三健康面，与记忆观测（AD-439）联动
+用法：监控实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（评测）
+
+<details><summary>看背面</summary>
+
+记忆评测实现：golden set（AD-470）+检索评测（AD-470）+隔离测试（AD-440），记忆评测三件实现
+原理：记忆评测的实现（AD-470 的落地），三件覆盖（检索/隔离/写入），与记忆测试（AD-440）联动
+用法：评测实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（治理）
+
+<details><summary>看背面</summary>
+
+记忆治理实现：主体权利（AD-075）→生命周期（AD-539）→隐私分级（AD-540）→合规报告（AD-499），治理四件实现
+原理：记忆治理的实现（AD-499 的落地），四件治理进治理平台（AD-102），与记忆治理联动
+用法：治理实现
+锚点：实战共识
+
+</details>
+
+### 面试 · 地图（主线）
+
+<details><summary>看背面</summary>
+
+agent-dev 面试主线地图：架构与循环→上下文与记忆→多 Agent→工具与 MCP→评测→安全→平台化→案例，八环主线（AD-060 地图的面试组织化）
+原理：面试主线地图（JA-659 主线的 agent-dev 版），八环每环挂矩阵行，复习与答题共用地图
+用法：面试主线地图
+锚点：实战方法论
+
+</details>
+
+### 面试 · 清单（题库）
+
+<details><summary>看背面</summary>
+
+agent-dev 高频题清单：Agent 是什么/循环怎么写/上下文怎么管/多 Agent 怎么协作/工具怎么设计/评测怎么做/安全怎么防/成本怎么控——八问覆盖八环
+原理：高频题清单（JA-632 高频清单的 agent-dev 版），八问与八环对应，与面试主线（AD-631）联动
+用法：高频题清单
+锚点：实战共识
+
+</details>
+
+### 面试 · 地图（追问）
+
+<details><summary>看背面</summary>
+
+Agent 追问地图：八环每环的追问链（如循环环：终止条件→死循环→预算→上限调整），追问有纵深（JA-652 追问框架）
+原理：追问地图（JA-652 的 agent-dev 版），每环追问链三到五层，与追问应对联动
+用法：追问地图
+锚点：实战共识
+
+</details>
+
+### 面试 · 标准（评分）
+
+<details><summary>看背面</summary>
+
+Agent 面试评分标准：架构能力（P10 系统设计）/工程能力（落地细节）/安全意识（红线）/成本意识（治理）四维，评分四维（AD-402 的面试版）
+原理：面试评分的四维（AD-402 手写评分的面试版），四维覆盖 P10 要求，与评分标准联动
+用法：面试评分标准
+锚点：实战共识
+
+</details>
+
+### 面试 · 清单（红旗）
+
+<details><summary>看背面</summary>
+
+Agent 面试红旗清单：说 Agent 能做一切（无边界 JA-020）/无安全意识（JA-044）/无成本概念（JA-025）/无评测体系（JA-043）——红旗即能力反证
+原理：红旗清单（面试的反向评估），红旗信号识别不合格候选，与评分标准（AD-634）联动
+用法：红旗清单
+锚点：实战共识
+
+</details>
+
+### 工程 · 生产（checklist）
+
+<details><summary>看背面</summary>
+
+Agent 生产 checklist：安全（AD-449 基线）/评测（AD-092 门禁）/观测（AD-041 三件）/成本（AD-099 配额）/文档（AD-408）五段检查单，checklist 驱动上线（JA-525 落地）
+原理：生产 checklist 的五段（JA-525 的 Agent 特化），检查单驱动上线（MY-110 思想），与上线流程（JA-294）联动
+用法：生产 checklist
+锚点：实战共识
+
+</details>
+
+### 工程 · 运维（手册）
+
+<details><summary>看背面</summary>
+
+Agent 运维手册：常见故障（AD-044 清单）×处置步骤+升级路径+决策数据源，运维手册让值班可执行（AD-416 的 Agent 版）
+原理：运维手册的 Agent 面（AD-416 延伸），故障×处置矩阵（JA-416 联动），与运维知识联动
+用法：运维手册
+锚点：实战共识
+
+</details>
+
+### 工程 · 故障（手册）
+
+<details><summary>看背面</summary>
+
+Agent 故障处理手册：按故障分类（AD-044）的处置卡（症状/诊断/处置/预防），故障卡让处置标准化
+原理：故障处理卡的分类化（AD-044 的处置卡），卡结构统一（症状/诊断/处置/预防），与故障知识联动
+用法：故障处理卡
+锚点：实战共识
+
+</details>
+
+### 工程 · 容量（手册）
+
+<details><summary>看背面</summary>
+
+Agent 容量手册：容量模型（AD-340）+水位（AD-397）+扩容流程（AD-597）+预测（AD-600），容量手册让容量管理可执行
+原理：容量手册的四件集成（AD-340/397/597/600 组织化），容量管理手册化（MY-092 联动），与容量知识联动
+用法：容量手册
+锚点：实战共识
+
+</details>
+
+### 工程 · 成本（手册）
+
+<details><summary>看背面</summary>
+
+Agent 成本手册：成本构成（AD-024）+预算（AD-099）+告警（JA-717）+优化（JA-338）+归因（AD-208）五件，成本手册让成本治理可执行
+原理：成本手册的五件集成（成本治理 AD-338 的手册化），五件贯穿成本生命周期，与成本知识联动
+用法：成本手册
+锚点：实战共识
+
+</details>
+
+### 治理 · 合规（手册）
+
+<details><summary>看背面</summary>
+
+Agent 合规手册：合规矩阵（AD-601）+数据分级（JA-380）+审计（AD-097）+政策（JA-628）+监管响应（JA-630）五件，合规手册让合规可执行
+原理：合规手册的五件集成（合规治理的手册化），合规可执行（非纸面），与合规知识（JA-544）联动
+用法：合规手册
+锚点：实战共识
+
+</details>
+
+### 治理 · 安全（手册）
+
+<details><summary>看背面</summary>
+
+Agent 安全手册：安全基线（AD-449）+测试（AD-586）+监控（AD-520）+应急（AD-589）+复盘（AD-590）五件，安全手册让安全可执行
+原理：安全手册的五件集成（安全治理 AD-607 的手册化），五件贯穿安全生命周期，与安全知识（JA-544）联动
+用法：安全手册
+锚点：实战共识
+
+</details>
+
+### 治理 · 评测（手册）
+
+<details><summary>看背面</summary>
+
+Agent 评测手册：任务集管理（AD-202）/评测执行（AD-487）/结果消费（AD-343）/门禁（AD-387）/运营（JA-471）五件，评测手册让评测体系可执行
+原理：评测手册的五件集成（评测体系 AD-091 的手册化），评测可执行（非概念），与评测知识联动
+用法：评测手册
+锚点：实战共识
+
+</details>
+
+### 治理 · 运营（手册）
+
+<details><summary>看背面</summary>
+
+Agent 运营手册：上线（JA-294）/监控（AD-207）/反馈（JA-400）/迭代（AD-255）/下线（AD-232）五件，运营手册让运营可执行
+原理：运营手册的五件集成（运营全生命周期的手册化），运营可执行，与运营知识（JA-400）联动
+用法：运营手册
+锚点：实战共识
+
+</details>
+
+### 治理 · 总集（手册）
+
+<details><summary>看背面</summary>
+
+Agent 治理手册总集：运维/故障/容量/成本/合规/安全/评测/运营八手册合集（AD-637~644 收束），手册总集是治理体系的交付物
+原理：手册总集的定位（八手册的合集与索引），治理体系文档化交付（JA-300 五件套的治理版），与治理成熟度（AD-610）联动
+用法：手册总集
+锚点：实战共识
+
+</details>
+
+### 手写 · 规范（套卷）
+
+<details><summary>看背面</summary>
+
+手写套卷编写规范：题目（场景+约束）/评分（四维 AD-402）/参考实现（AD-514）/时间（AD-405）/追问（AD-406）五件齐备为一道完整手写题
+原理：套卷编写规范（手写题的五件齐备标准），规范让套卷质量一致，与手写体系（AD-401）联动
+用法：套卷规范
+锚点：实战共识
+
+</details>
+
+### 手写 · 来源（套卷）
+
+<details><summary>看背面</summary>
+
+手写套卷题目来源：本域矩阵行（AD 系列的场景题化，JA-651 模板的题目化），矩阵是题目库（手写题与矩阵同源）
+原理：手写题与矩阵同源（题目从矩阵行派生，准确性同源），与矩阵驱动手写（AD-060 联动），与生成体系联动
+用法：套卷题目来源
+锚点：实战共识
+
+</details>
+
+### 手写 · 细则（套卷）
+
+<details><summary>看背面</summary>
+
+手写套卷评分细则：每题按四维（AD-402）细化为可勾选评分点（每个功能点 N 分），细则让评分可执行
+原理：评分细则的可勾选化（AD-402 的执行化），评分点粒度（功能点级），与评分标准联动
+用法：评分细则
+锚点：实战共识
+
+</details>
+
+### 手写 · 时间（套卷）
+
+<details><summary>看背面</summary>
+
+手写套卷时间控制：套卷总时长（如 120 分钟 5 题），每题时间盒（AD-405），套卷时间模拟真实面试节奏
+原理：套卷的时间控制（AD-405 的套卷级），时间盒练习让节奏内化，与面试时间管理联动
+用法：套卷时间控制
+锚点：实战共识
+
+</details>
+
+### 手写 · 交付（套卷）
+
+<details><summary>看背面</summary>
+
+手写套卷交付格式：每题独立文件（题目/评分/参考实现/追问）+套卷总览，交付格式与 docs/24 笔试卷对齐（AL 格式一致性）
+原理：套卷交付格式（与既有笔试卷格式对齐 JA-407），格式一致降低使用成本，与 docs/24 联动
+用法：套卷交付格式
+锚点：实战共识
+
+</details>
+
+### 协作 · SDK（接口）
+
+<details><summary>看背面</summary>
+
+Agent 团队的编程接口（Agent SDK）：任务提交/状态查询/结果获取/取消四 API 的 SDK 化（AD-281 接口的 SDK 封装），SDK 让协作标准化
+原理：SDK 化让 Agent 间协作免协议细节（JA-567 生态的 Java 面），SDK 版本兼容（JA-565），与 API 设计（JA-641）联动
+用法：Agent SDK 设计
+锚点：实战共识
+
+</details>
+
+### 协作 · 优先级（调度）
+
+<details><summary>看背面</summary>
+
+Agent 任务优先级调度：按任务优先级（付费用户/紧急度）调度执行顺序，优先级队列（AD-345 任务级）的调度层
+原理：优先级调度让稀缺资源（配额 JA-535）给高价值任务，抢占策略（高优先抢占低优先）设计，与调度知识联动
+用法：优先级调度
+锚点：实战共识
+
+</details>
+
+### 协作 · 冲突（合并）
+
+<details><summary>看背面</summary>
+
+多 Agent 输出合并冲突：多 Agent 对同一任务产出不同结论的合并（投票/加权/裁决 AD-132），合并冲突的解决策略
+原理：输出合并冲突与记忆冲突（AD-074）同构：裁决策略配置化，合并质量评测（JA-375 轨迹面），与聚合（AD-132）联动
+用法：合并冲突解决
+锚点：实战共识
+
+</details>
+
+### 协作 · 聚合（监控）
+
+<details><summary>看背面</summary>
+
+Agent 群体监控聚合视图：全群体大盘（AD-416 系统层）+可下钻单 Agent（AD-207），聚合视图是群体的驾驶舱
+原理：聚合视图的驾驶舱定位（群体健康的单屏），下钻路径（群体→Agent→任务→轨迹），与监控大盘（AD-207/398）联动
+用法：群体监控聚合
+锚点：实战共识
+
+</details>
+
+### 协作 · 数据（契约）
+
+<details><summary>看背面</summary>
+
+Agent 间数据契约：Agent A 输出 schema 与 Agent B 输入 schema 的契约管理（变更影响分析），契约是协作的接口治理
+原理：数据契约防"上游改了下游崩"（JA-308 契约演进的 Agent 面），契约测试（JA-282）进协作 CI，与契约知识联动
+用法：数据契约管理
+锚点：实战共识
+
+</details>
+
+### 协作 · 测试（混沌）
+
+<details><summary>看背面</summary>
+
+多 Agent 协作混沌测试：注入单 Agent 故障/延迟/错误（AD-396 模板的多 Agent 面），验证群体降级与隔离（AD-465 验证）
+原理：多 Agent 混沌（AD-396 的协作面），注入点（Agent 间消息通道），与混沌知识联动
+用法：多 Agent 混沌
+锚点：实战共识
+
+</details>
+
+### 案例 · 全流程（营销）
+
+<details><summary>看背面</summary>
+
+营销内容 Agent 全流程：热点洞察（工具）→创意生成（batch JA-437）→合规审查（JA-136 链）→效果追踪（闭环 JA-400），创意多样性与品牌一致性权衡
+原理：营销全流程案例（JA-602 传媒的营销细化），品牌一致性锚定（few-shot JA-445），效果追踪闭环，与营销知识联动
+用法：营销全流程案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 合同（法务）
+
+<details><summary>看背面</summary>
+
+合同管理 Agent 全流程：合同起草（模板+条款库 RAG）→条款审查（JA-555）→签署流程（审批 AD-333）→履约跟踪（提醒工具），条款引用零容忍
+原理：合同全流程案例（JA-555 审查的全流程化），模板+条款库双 RAG，履约提醒（JA-054 延迟任务），与法务知识联动
+用法：合同全流程案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 全流程（采购）
+
+<details><summary>看背面</summary>
+
+采购 Agent 全流程：需求理解→供应商询价（工具）→比价分析（JA-227 供应链经验）→采购建议（人确认）→订单跟踪，供应商数据实时性关键
+原理：采购全流程案例（AD-227 供应链的采购深化），实时工具（价格/库存），建议制（决策链长），与供应链案例联动
+用法：采购全流程案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 对账（财务）
+
+<details><summary>看背面</summary>
+
+财务对账 Agent：多源数据拉取（工具）→对账规则执行（JA-102 对账知识）→差异报告→差错处理建议，对账规则的准确性零容忍
+原理：对账案例（JA-102 对账知识的 Agent 化），差异报告（人处理 JA-478），规则准确性（规则引擎为主 LLM 辅助）
+用法：对账案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 排程（制造）
+
+<details><summary>看背面</summary>
+
+生产排程 Agent：订单+产能+物料数据（工具）→排程优化建议（算法+LLM 解释）→异常调整（人确认），优化算法为主 LLM 为辅
+原理：排程案例的算法+LLM 分工（排程算法决策、LLM 解释与交互），与 JA-562 制造联动，混合智能（AD-517）
+用法：排程案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 成功（客服）
+
+<details><summary>看背面</summary>
+
+客户成功 Agent（CS）：客户健康分（使用数据工具）→流失预警→主动触达建议→健康报告，CS 的数据驱动续约
+原理：客户成功案例（数据工具+预警 Agent），健康分计算（数据 JA-452），触达人执行（JA-547 人主导），与 CS 知识联动
+用法：客户成功案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 合规（法务）
+
+<details><summary>看背面</summary>
+
+法务合规审查 Agent：新规监控（政策源监控）→影响分析（业务映射 RAG）→整改建议（人确认），法规变更的合规响应自动化
+原理：合规审查案例（JA-563 新规监控的落地），影响分析（业务映射），合规响应闭环（JA-607），与合规知识联动
+用法：合规审查案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 面试（招聘）
+
+<details><summary>看背面</summary>
+
+招聘面试 Agent：JD 生成→简历初筛（公平性 JA-559）→面试题生成（岗位定制）→面试反馈整理，公平性与人审强制
+原理：招聘面试全流程案例（JA-520 的全流程化），公平性强制（JA-559），面试题个性化（画像），与招聘知识联动
+用法：招聘面试案例
+锚点：实战共识
+
+</details>
+
+### 案例 · 维修（售后）
+
+<details><summary>看背面</summary>
+
+售后维修 Agent：故障描述理解（多模态 JA-545 图片）→维修知识库 RAG→维修方案→备件查询（工具）→工单（AD-441），维修知识是核心资产
+原理：维修案例的多模态+知识库组合（JA-429/556 组合），工单集成（AD-441），维修知识运营（JA-532），与售后知识联动
+用法：维修案例
+锚点：实战共识
+
+</details>
+
+### 评测 · 流水线（CI）
+
+<details><summary>看背面</summary>
+
+Agent 评测 CI 流水线：代码提交触发单测+评测抽样（AD-204）→发布触发全量评测（AD-487）→门禁（AD-387），评测进 CI 全流程
+原理：评测 CI 流水线（JA-665 评估即代码的落地），抽样与全量的触发策略，与评测运营联动
+用法：评测 CI 流水线
+锚点：实战共识
+
+</details>
+
+### 评测 · 框架（AB）
+
+<details><summary>看背面</summary>
+
+Agent 评测的 A/B 框架：版本分流（AD-308）+任务分流+结果对比（AD-374），A/B 框架让版本对比系统化
+原理：A/B 框架的评测面（JA-271 的评测集成），分流与对比的框架化，与实验知识联动
+用法：A/B 框架
+锚点：实战共识
+
+</details>
+
+### 评测 · 自适应（老虎机）
+
+<details><summary>看背面</summary>
+
+多臂老虎机自适应评测：多版本评测流量按表现自适应分配（好的版本更多流量），多臂老虎机算法（UCB/Thompson）的应用
+原理：自适应流量的算法面（JA-702 固定抽样的进阶），流量分配的探索-利用权衡，与算法知识联动
+用法：自适应流量
+锚点：实战共识
+
+</details>
+
+### 评测 · 流程（盲评）
+
+<details><summary>看背面</summary>
+
+人类专家盲评流程：专家不知答案来源（Agent 版本盲化），盲评消除专家偏好（JA-272 校准的流程化），盲评结果聚合（AD-168）
+原理：盲评流程的设计（JA-477 标注组织的盲评面），盲化机制（版本隐藏），与人工评测联动
+用法：盲评流程
+锚点：实战共识
+
+</details>
+
+### 评测 · 评测（注入）
+
+<details><summary>看背面</summary>
+
+失败注入评测：注入工具失败/模型限流/配额耗尽（AD-591），评测 Agent 的容错行为（错误反馈/降级/收尾），容错评测进门禁
+原理：失败注入的评测面（AD-591 的评测化），容错行为可断言（JA-375 轨迹面），与故障注入联动
+用法：失败注入评测
+锚点：实战共识
+
+</details>
+
+### 安全 · 动态（权限）
+
+<details><summary>看背面</summary>
+
+Agent 权限动态调整：运行时按任务风险动态收紧/放宽权限（AD-500 的实现面），风险信号驱动（异常行为 JA-350 触发收紧）
+原理：权限动态调整的实现（AD-500 的落地），风险信号驱动收紧（行为异常），与权限知识联动
+用法：权限动态调整
+锚点：实战共识
+
+</details>
+
+### 安全 · 重放（会话）
+
+<details><summary>看背面</summary>
+
+会话重放攻击：捕获合法会话请求重放（重复执行副作用），防线=会话幂等键（AD-057）+请求时效性（时间戳+nonce）
+原理：重放攻击的 Agent 面（AD-467 幂等的攻击动机），时效+nonce 是标准防重放，与安全知识联动
+用法：重放防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 上下文（污染）
+
+<details><summary>看背面</summary>
+
+上下文污染攻击：多轮会话中逐步注入恶意上下文（每轮一点累积），防线=上下文内容审计（JA-673 的记忆审计面）
+原理：上下文污染是渐进注入（JA-172 会话劫持的深入），审计上下文内容（注入检测每轮 JA-393），与注入知识联动
+用法：上下文污染防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 宪法（泄露）
+
+<details><summary>看背面</summary>
+
+system prompt 泄露防护：诱导模型输出 system prompt（宪法泄露=攻击面全暴露），防线=宪法保密指令+输出过滤（JA-458 宪章模式匹配）
+原理：宪法泄露的防护（宪法是"密钥级"资产），输出中宪法内容检测（前缀匹配），与输出安全（AD-458）联动
+用法：宪法泄露防护
+锚点：实战共识
+
+</details>
+
+### 安全 · 过度（自主）
+
+<details><summary>看背面</summary>
+
+Agent 过度自主风险：自主决策链过长（无人审点）的不可控性，风险=累积错误+不可追溯，防线=关键点人审（AD-046）+步数上限（AD-017）
+原理：过度自主的风险设计（自主性与可控性 JA-018 的深水区），人审点的自动规划（按动作风险分级），与自主性权衡联动
+用法：过度自主防线
+锚点：实战共识
+
+</details>
+
+### 安全 · 传递（依赖）
+
+<details><summary>看背面</summary>
+
+依赖传递风险：工具依赖第三方库的漏洞（AD-497 CVE）→Agent 行为受影响，依赖传递链审计（SBOM 思想）
+原理：依赖传递的 Agent 面（AD-497 的 SBOM 化），工具依赖链可视（依赖清单 JA-721），与供应链安全（AD-177）联动
+用法：依赖传递审计
+锚点：实战共识
+
+</details>
+
+### 安全 · 鲁棒（对抗）
+
+<details><summary>看背面</summary>
+
+Agent 对抗鲁棒性评估：对抗样本（注入/越狱/误导工具）的鲁棒性分数（AD-587），鲁棒性是 Agent 质量的安全维
+原理：对抗鲁棒性的评估（JA-582/583/584 的分数汇总），鲁棒性进评测矩阵（AD-545 安全维），与对抗测试联动
+用法：对抗鲁棒性
+锚点：实战共识
+
+</details>
+
+### 安全 · 自动化（合规）
+
+<details><summary>看背面</summary>
+
+合规自动化检查清单：数据分级（JA-645）/留痕完整（AD-347）/权限最小化（AD-495）/同意管理（AD-525）四项规则化检查，合规检查进 CI
+原理：合规检查的自动化清单（JA-385 的四项落地），规则化检查进 CI（人工只查规则外），与合规知识联动
+用法：合规自动化清单
+锚点：实战共识
+
+</details>
+
+### 工具 · 预算（错误）
+
+<details><summary>看背面</summary>
+
+工具错误预算：工具的错误率预算（SLO 思想 JA-354），错误预算耗尽→工具冻结（修复优先），错误预算让工具质量有硬约束
+原理：错误预算的 SLO 化（DF-056 错误预算的工具面），耗尽冻结（修复优先于新功能），与错误知识联动
+用法：错误预算
+锚点：实战共识
+
+</details>
+
+### 工具 · 规划（容量）
+
+<details><summary>看背面</summary>
+
+工具容量规划：工具下游容量（DB/API 承受力）→工具并发上限→Agent 并发上限（逐层推导），容量链对齐（JA-108 保护链）
+原理：工具容量规划（AD-340 的工具面），下游容量是天花板（JA-535），与容量知识联动
+用法：工具容量规划
+锚点：实战共识
+
+</details>
+
+### 工具 · 标准（观测）
+
+<details><summary>看背面</summary>
+
+工具可观测标准：四埋点（AD-240）+健康（AD-481）+SLA（AD-485）+追踪（AD-484）的标准组合，标准让所有工具观测一致
+原理：工具观测的标准组合（AD-240 的标准化），标准让工具面板统一（JA-468），与观测标准联动
+用法：工具观测标准
+锚点：实战共识
+
+</details>
+
+### 工具 · 评审（安全）
+
+<details><summary>看背面</summary>
+
+工具安全评审清单：副作用声明（AD-115）/权限最小化（AD-495）/沙箱需求（AD-077）/审计（AD-613）/依赖审计（AD-497）五查，安全评审进工具上线
+原理：工具安全评审的五查（AD-671 四查的安全扩展），五查覆盖工具安全面，与安全评审（JA-299）联动
+用法：工具安全评审
+锚点：实战共识
+
+</details>
+
+### 工具 · 优化（成本）
+
+<details><summary>看背面</summary>
+
+工具成本优化：下游 API 成本（外部 API 计费）的优化（缓存/批处理/降级），工具成本的观测（AD-478）驱动优化
+原理：工具成本的优化面（AD-478 的优化决策），缓存与批处理（JA-100/578），与成本知识联动
+用法：工具成本优化
+锚点：实战共识
+
+</details>
+
+### 工具 · 设计（API）
+
+<details><summary>看背面</summary>
+
+工具 API 设计原则：语义清晰（动词+名词）/参数最小化（AD-442）/错误标准化（AD-116）/幂等声明（AD-115），API 设计让工具好用
+原理：工具 API 的设计原则（工具=微服务 API 的设计标准），原则让模型与人都好用，与 API 设计联动
+用法：工具 API 设计
+锚点：实战共识
+
+</details>
+
+### 工具 · 设计（SDK）
+
+<details><summary>看背面</summary>
+
+工具 SDK 设计：工具开发 SDK（基类+注解+测试工具 AD-237），SDK 让工具开发标准化（三件套开箱），与开发者体验联动
+原理：工具 SDK 的设计（JA-684 的开发体验面），SDK 降低工具开发门槛（JA-654 自助化），与开发者体验知识联动
+用法：工具 SDK
+锚点：实战共识
+
+</details>
+
+### 工具 · 架构（插件）
+
+<details><summary>看背面</summary>
+
+工具插件架构：工具作为插件（接口+注册+生命周期 AD-620），插件架构让工具热插拔（AD-278 动态注册），与微内核（JA-723）联动
+原理：工具插件架构（AD-278/723 的组合），热插拔让工具治理灵活（AD-105 开关），与架构知识联动
+用法：工具插件架构
+锚点：实战共识
+
+</details>
+
+### 工具 · 治理（市场）
+
+<details><summary>看背面</summary>
+
+工具市场治理：内部工具市场（AD-432 共享工具）的准入/评测/评分/废弃全治理，市场让工具生态健康
+原理：工具市场的治理（AD-432 的治理面），治理缺失则市场劣化（坏工具泛滥），与市场机制联动
+用法：工具市场治理
+锚点：实战共识
+
+</details>
+
+### 工具 · DX（体验）
+
+<details><summary>看背面</summary>
+
+工具开发者体验（DX）：脚手架（AD-523）/本地调试（AD-113）/文档（AD-476）/测试工具（AD-237）四件 DX，DX 决定工具生态繁荣
+原理：工具 DX 的四件（生态繁荣的开发者体验面），DX 差则工具供给不足，与开发者体验知识联动
+用法：工具 DX
+锚点：实战共识
+
+</details>
+
+### 记忆 · MaaS（服务）
+
+<details><summary>看背面</summary>
+
+记忆即服务（Memory as a Service）：记忆能力服务化（统一 API 多 Agent 共享），服务化让记忆能力复用（AD-101 平台的记忆面）
+原理：记忆服务化（AD-353 外部记忆的平台化），统一 API 让 Agent 免各自实现，与平台化（AD-102）联动
+用法：记忆服务化
+锚点：实战共识
+
+</details>
+
+### 记忆 · 租户（隔离）
+
+<details><summary>看背面</summary>
+
+记忆多租户隔离：租户级记忆命名空间（AD-696 分片的租户面），隔离让多租户记忆安全（JA-503 跨租户红线）
+原理：记忆租户隔离（JA-503 红线的存储实现），命名空间/分库分表选型，与多租户（AD-503）联动
+用法：记忆租户隔离
+锚点：实战共识
+
+</details>
+
+### 记忆 · 模型（权限）
+
+<details><summary>看背面</summary>
+
+记忆权限模型：读/写/删除/管理四级权限（AD-348 的记忆面），权限按角色（用户/Agent/管理员）分配
+原理：记忆权限的四级模型（AD-075 主体权利的实现面），角色分配（用户只管自己的），与权限知识（AD-348）联动
+用法：记忆权限模型
+锚点：实战共识
+
+</details>
+
+### 记忆 · 实现（审计）
+
+<details><summary>看背面</summary>
+
+记忆审计实现：记忆读写全审计（谁读了谁的什么记忆 AD-471 协议的审计面），审计进不可变存储（AD-347）
+原理：记忆审计的实现（AD-471 协议的审计面），审计让记忆操作可追（合规 JA-097），与审计知识联动
+用法：记忆审计实现
+锚点：实战共识
+
+</details>
+
+### 记忆 · 优化（性能）
+
+<details><summary>看背面</summary>
+
+记忆性能优化：检索索引优化（AD-623 向量索引参数）/缓存（AD-578 嵌入缓存）/批量（AD-100），记忆性能三招
+原理：记忆性能的优化三招（AD-438 延迟预算的实现），索引参数调优（HNSW 参数），与性能知识联动
+用法：记忆性能优化
+锚点：实战共识
+
+</details>
+
+### 记忆 · 优化（成本）
+
+<details><summary>看背面</summary>
+
+记忆成本优化：存储成本（分级 AD-538）+嵌入成本（缓存 AD-578）+检索成本（索引调优），记忆成本三招，与成本治理联动
+原理：记忆成本的优化三招（AD-478 工具成本的记忆版），分级与缓存是主力，与成本知识联动
+用法：记忆成本优化
+锚点：实战共识
+
+</details>
+
+### 记忆 · 性（可靠）
+
+<details><summary>看背面</summary>
+
+记忆可靠性：备份（AD-473）+多副本（存储层）+一致性（AD-437），记忆可靠性三件
+原理：记忆可靠性的实现面（AD-473 的扩展），多副本与一致性权衡（JA-014 NWR 联动），与可靠性知识联动
+用法：记忆可靠性
+锚点：实战共识
+
+</details>
+
+### 记忆 · 性（扩展）
+
+<details><summary>看背面</summary>
+
+记忆可扩展性：容量扩展（分片 AD-696→水平扩展）/检索扩展（索引分片）/写入扩展（分批），扩展性三面
+原理：记忆扩展性的实现面（AD-696 的扩展细化），分片策略（按租户/时间），与扩展性知识联动
+用法：记忆扩展性
+锚点：实战共识
+
+</details>
+
+### 记忆 · 标准（接口）
+
+<details><summary>看背面</summary>
+
+记忆标准接口：行业记忆接口趋势（Mem0/LangChain Memory 抽象趋同），标准接口让记忆可插拔（JA-689 服务化的接口面）
+原理：记忆接口的标准化趋势（JA-290/689 的生态面），标准接口让存储可换（AD-474 迁移），与生态知识联动
+用法：记忆接口趋势
+锚点：实战共识
+
+</details>
+
+### 面试 · 模板（设计）
+
+<details><summary>看背面</summary>
+
+Agent 系统设计题模板：需求澄清→能力评估（要不要 Agent）→架构（四件套+编排）→关键细节（上下文/工具/安全）→评测与运维，五步模板（JA-651 的 Agent 专版）
+原理：系统设计题的五步模板（JA-651 的 Agent 特化），每步挂本域事实，与面试地图（AD-631）联动
+用法：设计题模板
+锚点：实战共识
+
+</details>
+
+### 面试 · 评分（设计）
+
+<details><summary>看背面</summary>
+
+Agent 设计题评分维度：架构合理性/关键细节深度/安全与成本意识/权衡表达（JA-634 的设计题版），四维评分
+原理：设计题评分的四维（AD-634 的设计题特化），权衡表达是 P10 标志（DF-099），与评分标准联动
+用法：设计题评分
+锚点：实战共识
+
+</details>
+
+### 面试 · 题目（实战）
+
+<details><summary>看背面</summary>
+
+Agent 实战面试题：给真实场景（客服/研发/数据）设计 Agent 并讲清 trade-off（AD-421~425 案例的面试化），实战题考察落地能力
+原理：实战题的面试化（案例的考题化 AD-421 联动），实战题比概念题区分度高，与案例知识联动
+用法：实战面试题
+锚点：实战共识
+
+</details>
+
+### 面试 · 分享（经验）
+
+<details><summary>看背面</summary>
+
+Agent 面试经验：回答带场景（做过什么）/带数据（评测分/成本）/带权衡（选型理由），经验型回答优于背诵
+原理：经验型回答的优势（JA-401 背景的真实性），场景+数据+权衡三件，与答题方法论（JA-652）联动
+用法：经验回答方法
+锚点：实战共识
+
+</details>
+
+### 面试 · 回答（反模式）
+
+<details><summary>看背面</summary>
+
+Agent 面试反模式回答：无边界（Agent 万能）/无成本意识/无安全考虑/无评测体系/无版本概念——反模式回答即红旗（AD-635 的回答面）
+原理：反模式回答的识别（AD-635 红旗的面试官视角），避免反模式=基本合格，与红旗清单联动
+用法：反模式回答
+锚点：实战共识
+
+</details>
+
+### 面试 · 回答（加分）
+
+<details><summary>看背面</summary>
+
+Agent 面试加分回答：带真实踩坑（AD-016 工具容错案例）/带版本锚定（JA-060）/带 trade-off 表达（JA-403）/带治理视角（AD-610）——P10 加分四件
+原理：加分回答的四件（P10 加分项的 Agent 版），踩坑与锚定是真实性的证明，与 P10 加分（JA-401 联动）联动
+用法：加分回答
+锚点：实战共识
+
+</details>
+
+### 面试 · P7P10（差异）
+
+<details><summary>看背面</summary>
+
+P7 与 P10 的 Agent 面试差异：P7 考会用（框架/工具），P10 考治理（评测/成本/安全/组织），差异决定准备深度
+原理：P7-P10 差异的 Agent 面（AD-634 评分的职级面），P10 的治理与组织视角是分水岭，与职级体系（SP-017）联动
+用法：P7P10 差异
+锚点：实战共识
+
+</details>
+
+### 面试 · 清单（准备）
+
+<details><summary>看背面</summary>
+
+Agent 面试准备清单：主线地图（AD-631）过一遍→高频题（AD-632）能答→案例（AD-421）能讲→手写（AD-401）能写→反模式（AD-702）能避，五步准备
+原理：面试准备的五步清单（JA-705 准备方法的 Agent 版），五步覆盖概念/案例/手写/避坑，与准备方法联动
+用法：准备清单
+锚点：实战共识
+
+</details>
+
+### 手写 · 清单（套卷）
+
+<details><summary>看背面</summary>
+
+手写套卷十题完整清单：①ReAct 循环②错误反馈③并行工具④记忆 Agent⑤预算终止⑥dry-run⑦轨迹⑧影子⑨主从编排⑩断点恢复（AD-401 题单的落地清单），每题挂矩阵行
+原理：十题清单的落地（AD-401 的执行化），每题有参考实现与评分（AD-646 规范），与手写笔试联动
+用法：十题清单
+锚点：实战共识
+
+</details>
+
+### 手写 · 权重（套卷）
+
+<details><summary>看背面</summary>
+
+套卷评分权重：功能正确 40/边界 20/工程 20/并发安全 20（AD-402 权重），十题总分=Σ各题四维得分，权重表让总分可算
+原理：套卷评分权重（AD-402 的套卷面），总分可计算（百分制），与评分细则（AD-648）联动
+用法：套卷权重
+锚点：实战共识
+
+</details>
+
+### 手写 · 追问（套卷）
+
+<details><summary>看背面</summary>
+
+套卷追问清单：每题配 3-5 个追问（AD-406 追问预判的套卷化），追问覆盖原理/边界/扩展，追问让套卷有纵深
+原理：套卷追问清单（AD-406 的套卷面），追问链（AD-633 地图的题目化），与追问知识联动
+用法：套卷追问
+锚点：实战共识
+
+</details>
+
+### 手写 · 时间（套卷）
+
+<details><summary>看背面</summary>
+
+套卷时间分配：十题 120 分钟（基础题 8 分钟/复杂题 20 分钟），时间分配按题目难度（AD-649 的套卷面），时间练习内化节奏
+原理：套卷的时间分配（AD-649 的执行），难度分级的时间盒，与时间管理（AD-405）联动
+用法：套卷时间
+锚点：实战共识
+
+</details>
+
+### 手写 · 错误（套卷）
+
+<details><summary>看背面</summary>
+
+套卷常见错误汇总：跨题错误模式统计（消息序列/终止/脱敏/幂等/并发），错误汇总驱动练习重点
+原理：套卷错误的汇总分析（AD-200 清单的套卷面），错误模式驱动针对性练习（JA-179 回流思想），与错误知识联动
+用法：套卷错误分析
+锚点：实战共识
+
+</details>
+
+### 手写 · 参考（套卷）
+
+<details><summary>看背面</summary>
+
+套卷参考实现：十题的参考代码（AD-514 参考库的套卷化），参考代码可运行（ExamSolutions 风格），参考是评分锚
+原理：参考实现的套卷化（AD-514 的执行），参考代码本机可运行（AD-714 验证），与参考资产联动
+用法：套卷参考
+锚点：实战共识
+
+</details>
+
+### 手写 · 示例（套卷）
+
+<details><summary>看背面</summary>
+
+评分示例：样卷+逐项评分示范（四维打分演示 AD-648），评分示例让自评有锚（JA-402 标准的示范面）
+原理：评分示例的设计（AD-648 的示范化），样卷评分示范（好/中/差三档），与评分体系联动
+用法：评分示例
+锚点：实战共识
+
+</details>
+
+### 手写 · 迭代（套卷）
+
+<details><summary>看背面</summary>
+
+套卷迭代改进：套卷使用反馈（哪题区分度差）→题目改版（JA-179 回流的套卷版），套卷是活资产
+原理：套卷的迭代机制（AD-713 的改进面），区分度分析（题目质量），与评测运营（JA-471）同思想
+用法：套卷迭代
+锚点：实战共识
+
+</details>
+
+### 工程 · 中心（配置）
+
+<details><summary>看背面</summary>
+
+Agent 配置中心集成：宪法/工具配置/路由规则入配置中心（AD-257 热更新载体），配置变更审计（AD-382）
+原理：配置中心的集成（JA-107 配置中心知识的落地），配置与代码分离（12 因子），与配置中心（Nacos/Apollo）联动
+用法：配置中心集成
+锚点：实战共识
+
+</details>
+
+### 工程 · 集成（网格）
+
+<details><summary>看背面</summary>
+
+Agent 与 Service Mesh：Agent 服务间调用经 mesh（mTLS/观测/流量治理 JA-097），mesh 让 Agent 微服务化治理统一
+原理：mesh 集成（DF-098 的 Agent 面），mTLS 与观测的统一收益，与 mesh 权衡（JA-098 复杂度）联动
+用法：mesh 集成
+锚点：实战共识
+
+</details>
+
+### 工程 · 部署（K8s）
+
+<details><summary>看背面</summary>
+
+Agent 的 K8s 部署：Deployment（Agent 服务）+HPA（AD-597 弹性）+ConfigMap（配置 AD-717）+探针（健康 JA-582），K8s 部署四件
+原理：K8s 部署的 Agent 面（DF-097 的 Agent 版），四件的标准部署，与 K8s 知识联动
+用法：K8s 部署
+锚点：实战共识
+
+</details>
+
+### 工程 · 标准（观测）
+
+<details><summary>看背面</summary>
+
+Agent 可观测标准：trace（OTel GenAI 约定 JA-583）/metrics（JA-462）/logs（AD-106 分级）三支柱的标准化，观测标准让 Agent 可运维
+原理：观测标准的标准化（OTel GenAI 的 Agent 落地 JA-083），三支柱统一（JA-256 串联），与观测标准联动
+用法：观测标准
+锚点：实战共识
+
+</details>
+
+### 工程 · 流水线（CI/CD）
+
+<details><summary>看背面</summary>
+
+Agent CI/CD 流水线：代码提交（单测 AD-201）→评测抽样（AD-666）→门禁（AD-387）→灰度发布（AD-388），CI/CD 覆盖代码与配置（JA-402 三元组）
+原理：CI/CD 的 Agent 面（评测/门禁/灰度的流水线集成），三元组变更全走流水线，与 CI/CD 知识联动
+用法：CI/CD 流水线
+锚点：实战共识
+
+</details>
+
+### 工程 · 开发（流程）
+
+<details><summary>看背面</summary>
+
+Agent 开发流程：设计评审（AD-524）→开发（脚手架 AD-523）→评测（AD-091）→准入（JA-525）→发布（AD-388）→运营（AD-644），六步流程
+原理：Agent 开发的六步流程（JA-343 工件清单的流程化），每步有工件（JA-343 联动），与开发流程联动
+用法：开发流程
+锚点：实战共识
+
+</details>
+
+### 工程 · 代码（规范）
+
+<details><summary>看背面</summary>
+
+Agent 代码规范：循环骨架清晰（AD-050）/工具声明规范（AD-236）/轨迹完整（AD-040）/异常边界（AD-247）/脱敏（AD-054）五规范，规范让 Agent 代码质量一致
+原理：代码规范的五件（AD-200/209 的规范面），规范进 CI 检查（静态扫描），与代码规范联动
+用法：代码规范
+锚点：实战共识
+
+</details>
+
+### 工程 · 团队（协作）
+
+<details><summary>看背面</summary>
+
+Agent 团队协作：Agent 工程师/评测/安全/领域专家四角色（AD-100）的协作流程（评审/交接/值班），协作流程让四角色协同
+原理：团队协作的流程面（AD-100 角色的协作机制），协作界面（JA-408）的流程化，与组织协作联动
+用法：团队协作流程
+锚点：实战共识
+
+</details>
+
+### 工程 · 域定稿（收官）
+
+<details><summary>看背面</summary>
+
+agent-dev 域收官：725 条覆盖架构/上下文/多 Agent/工具/MCP/评测/安全/多模态/案例/治理/手写 11 分支，双 5000 达成（面试 720×7=5040/笔试≈6350），交接总交付（与 java-ai 域并列）
+原理：域收官的定义（JA-715 收官的 agent-dev 版）：地图分支全覆盖+双 5000+手册八册（AD-645），收官后进入手写套卷编写与总交付
+用法：域收官管理
+锚点：实战方法论
+
+</details>
