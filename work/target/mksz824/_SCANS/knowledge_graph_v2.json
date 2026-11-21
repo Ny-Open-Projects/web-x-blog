@@ -1,0 +1,803 @@
+{
+ "version": "v2-rebuilt-from-pass3",
+ "rebuilt_at": "2026-11-21",
+ "note": "原 47 节点/120 边图随外接盘目录灭失，依据 PASS3 实测证据重建；ghost 边已删除",
+ "removed_edges": [
+  {
+   "edge": "ch18 -> C_nuxt",
+   "reason": "第18章 30 篇 grep nuxt = 0 命中"
+  },
+  {
+   "edge": "ch19 -> C_cicd",
+   "reason": "第19章 grep 'github actions' = 0 命中"
+  },
+  {
+   "edge": "ch19 -> C_docker",
+   "reason": "仅 5-1 顺带回顾，非教学内容"
+  },
+  {
+   "edge": "ch04 -> C_vue2 / ch05 -> C_vue2",
+   "reason": "素材仅 2 处对比提及，降级为 mentions"
+  }
+ ],
+ "nodes": [
+  {
+   "id": "ch01",
+   "type": "chapter",
+   "label": "第1章 课程简介"
+  },
+  {
+   "id": "ch02",
+   "type": "chapter",
+   "label": "第2章 需求分析与架构设计"
+  },
+  {
+   "id": "ch03",
+   "type": "chapter",
+   "label": "第3章 B端项目需求分析与架构设计"
+  },
+  {
+   "id": "ch04",
+   "type": "chapter",
+   "label": "第4章 前端基础技术回顾（TS/Vue3）"
+  },
+  {
+   "id": "ch05",
+   "type": "chapter",
+   "label": "第5章 项目整体搭建（Vue CLI/Vite/Vuex/Router）"
+  },
+  {
+   "id": "ch06",
+   "type": "chapter",
+   "label": "第6章 编辑器基本布局与业务组件库"
+  },
+  {
+   "id": "ch07",
+   "type": "chapter",
+   "label": "第7章 单元测试与 TDD（Jest）"
+  },
+  {
+   "id": "ch08",
+   "type": "chapter",
+   "label": "第8章 通用上传组件开发"
+  },
+  {
+   "id": "ch09",
+   "type": "chapter",
+   "label": "第9章 组件库打包发布（Rollup）与 CI"
+  },
+  {
+   "id": "ch10",
+   "type": "chapter",
+   "label": "第10章 后端技术选型（Koa2/Egg/MongoDB）"
+  },
+  {
+   "id": "ch11",
+   "type": "chapter",
+   "label": "第11章 MongoDB 与 egg-mongoose"
+  },
+  {
+   "id": "ch12",
+   "type": "chapter",
+   "label": "第12章 用户系统（Cookie/Session）"
+  },
+  {
+   "id": "ch13",
+   "type": "chapter",
+   "label": "第13章 文件上传/流处理/SSR/权限"
+  },
+  {
+   "id": "ch14",
+   "type": "chapter",
+   "label": "第14章 Docker 部署与 GitHub Actions CI/CD"
+  },
+  {
+   "id": "ch15",
+   "type": "chapter",
+   "label": "第15章 低代码核心：裁剪/画布/组合式函数"
+  },
+  {
+   "id": "ch16",
+   "type": "chapter",
+   "label": "第16章 编辑器画布交互"
+  },
+  {
+   "id": "ch17",
+   "type": "chapter",
+   "label": "第17章 前后端整合（Mock/axios/鉴权）"
+  },
+  {
+   "id": "ch18",
+   "type": "chapter",
+   "label": "第18章 B 端功能（html2canvas/二维码/下载）"
+  },
+  {
+   "id": "ch19",
+   "type": "chapter",
+   "label": "第19章 编译部署与性能优化（Webpack/Nginx）"
+  },
+  {
+   "id": "ch20",
+   "type": "chapter",
+   "label": "第20章 Nuxt3 管理系统基础"
+  },
+  {
+   "id": "ch21",
+   "type": "chapter",
+   "label": "第21章 Nuxt3 进阶实战"
+  },
+  {
+   "id": "ch22",
+   "type": "chapter",
+   "label": "第22章 Nuxt3 收尾与部署（PM2/Bun）"
+  },
+  {
+   "id": "C_vue_router",
+   "type": "concept",
+   "label": "Vue Router（嵌套路由/守卫/权限验证）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_vuex",
+   "type": "concept",
+   "label": "Vuex 状态管理（module/action/mutations 测试）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_vite",
+   "type": "concept",
+   "label": "Vite（创建项目/与 Vue CLI 对比）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_webpack",
+   "type": "concept",
+   "label": "Webpack 工程化深入（手写 loader/plugin/分包/懒加载）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_rollup",
+   "type": "concept",
+   "label": "Rollup 与组件库打包（UMD/ESM/Vue 插件/npm link）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_fe_eng",
+   "type": "concept",
+   "label": "前端工程化规范（ESLint/Prettier/Git Flow）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_tdd",
+   "type": "concept",
+   "label": "TDD 与 Jest mock 体系（timers/第三方/异步）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_http_perf",
+   "type": "concept",
+   "label": "Web 性能优化（Nginx/HTTP 缓存/gzip/Brotli/HTTP2）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_envs",
+   "type": "concept",
+   "label": "多环境与环境变量（mode/.env）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_node_proc",
+   "type": "concept",
+   "label": "Node 进程模型（Cluster/Egg 多进程/压测）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_docker_sub",
+   "type": "concept",
+   "label": "Docker 细分（Dockerfile/compose/镜像优化/YAML）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_gha_sub",
+   "type": "concept",
+   "label": "GitHub Actions 细分（Secrets/ACR/自动部署+回滚/release-it）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_server_ops",
+   "type": "concept",
+   "label": "云服务器运维（SSH key 免密/Linux 装机）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_stream_img",
+   "type": "concept",
+   "label": "流与图片处理（Sharp/Stream/busboy/egg-multipart）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_cropperjs",
+   "type": "concept",
+   "label": "CropperJS 图片裁剪",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_publish_lib",
+   "type": "concept",
+   "label": "B 端发布工具库（html2canvas/qrcode/Clipboard/FileSaver）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_composable",
+   "type": "concept",
+   "label": "Vue3 组合式函数复用（usePublishWork/useLoadMore 等）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_mock",
+   "type": "concept",
+   "label": "Mock 联调（JSON Server + JWT mock）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_form_validate",
+   "type": "concept",
+   "label": "表单验证体系（egg-validate/错误码/AForm 源码）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_session",
+   "type": "concept",
+   "label": "Session 体系（Cookie/egg-session/koa-session/bcrypt）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_mongo_adv",
+   "type": "concept",
+   "label": "MongoDB 进阶（索引/$lookup/egg-mongoose 源码/插件抽象）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_nuxt_sub",
+   "type": "concept",
+   "label": "Nuxt3 细分（渲染模式/Nitro/存储层/SEO）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_nuxt_eco",
+   "type": "concept",
+   "label": "Nuxt 生态（Zod/VeeValidate/NuxtUI/Tailwind）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_admin_deploy",
+   "type": "concept",
+   "label": "管理系统部署（Nuxt 构建/PM2/Bun）",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_publish_flow",
+   "type": "concept",
+   "label": "业务闭环：作品发布/展示渠道/H5 渲染链路/自动保存",
+   "origin": "pass3-gap"
+  },
+  {
+   "id": "C_vue2",
+   "type": "concept",
+   "label": "C_vue2",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_nuxt",
+   "type": "concept",
+   "label": "C_nuxt",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_cicd",
+   "type": "concept",
+   "label": "C_cicd",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_docker",
+   "type": "concept",
+   "label": "C_docker",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_test",
+   "type": "concept",
+   "label": "C_test",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_auth",
+   "type": "concept",
+   "label": "C_auth",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_mongo",
+   "type": "concept",
+   "label": "C_mongo",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_ssr",
+   "type": "concept",
+   "label": "C_ssr",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_upload",
+   "type": "concept",
+   "label": "C_upload",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_oss",
+   "type": "concept",
+   "label": "C_oss",
+   "origin": "original-graph"
+  },
+  {
+   "id": "C_editor",
+   "type": "concept",
+   "label": "C_editor",
+   "origin": "original-graph"
+  },
+  {
+   "id": "mod_opsflow-web",
+   "type": "module",
+   "label": "opsflow-opsflow-web",
+   "origin": "original-graph"
+  },
+  {
+   "id": "mod_opsflow-ui",
+   "type": "module",
+   "label": "opsflow-opsflow-ui",
+   "origin": "original-graph"
+  },
+  {
+   "id": "mod_opsflow-server",
+   "type": "module",
+   "label": "opsflow-opsflow-server",
+   "origin": "original-graph"
+  },
+  {
+   "id": "mod_opsflow-admin",
+   "type": "module",
+   "label": "opsflow-opsflow-admin",
+   "origin": "original-graph"
+  },
+  {
+   "id": "mod_mongo-lab",
+   "type": "module",
+   "label": "mongo-lab",
+   "origin": "original-graph"
+  },
+  {
+   "id": "mod_ts-lab",
+   "type": "module",
+   "label": "ts-lab",
+   "origin": "original-graph"
+  },
+  {
+   "id": "mod_vue-starter",
+   "type": "module",
+   "label": "vue-starter",
+   "origin": "original-graph"
+  }
+ ],
+ "edges": [
+  {
+   "from": "ch05",
+   "to": "C_vue_router",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vue Router（嵌套路由/守卫/权限验证）"
+  },
+  {
+   "from": "ch17",
+   "to": "C_vue_router",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vue Router（嵌套路由/守卫/权限验证）"
+  },
+  {
+   "from": "ch05",
+   "to": "C_vuex",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vuex 状态管理（module/action/mutations 测试）"
+  },
+  {
+   "from": "ch06",
+   "to": "C_vuex",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vuex 状态管理（module/action/mutations 测试）"
+  },
+  {
+   "from": "ch16",
+   "to": "C_vuex",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vuex 状态管理（module/action/mutations 测试）"
+  },
+  {
+   "from": "ch17",
+   "to": "C_vuex",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vuex 状态管理（module/action/mutations 测试）"
+  },
+  {
+   "from": "mod_opsflow-web",
+   "to": "C_vuex",
+   "rel": "uses",
+   "evidence": "PASS3 表条目 Vuex 状态管理（module/action/mutations 测试）"
+  },
+  {
+   "from": "ch04",
+   "to": "C_vite",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vite（创建项目/与 Vue CLI 对比）"
+  },
+  {
+   "from": "ch05",
+   "to": "C_vite",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vite（创建项目/与 Vue CLI 对比）"
+  },
+  {
+   "from": "ch19",
+   "to": "C_webpack",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Webpack 工程化深入（手写 loader/plugin/分包/懒加载）"
+  },
+  {
+   "from": "ch09",
+   "to": "C_rollup",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Rollup 与组件库打包（UMD/ESM/Vue 插件/npm link）"
+  },
+  {
+   "from": "mod_opsflow-ui",
+   "to": "C_rollup",
+   "rel": "uses",
+   "evidence": "PASS3 表条目 Rollup 与组件库打包（UMD/ESM/Vue 插件/npm link）"
+  },
+  {
+   "from": "ch04",
+   "to": "C_fe_eng",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 前端工程化规范（ESLint/Prettier/Git Flow）"
+  },
+  {
+   "from": "ch05",
+   "to": "C_fe_eng",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 前端工程化规范（ESLint/Prettier/Git Flow）"
+  },
+  {
+   "from": "ch07",
+   "to": "C_tdd",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 TDD 与 Jest mock 体系（timers/第三方/异步）"
+  },
+  {
+   "from": "ch08",
+   "to": "C_tdd",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 TDD 与 Jest mock 体系（timers/第三方/异步）"
+  },
+  {
+   "from": "ch19",
+   "to": "C_http_perf",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Web 性能优化（Nginx/HTTP 缓存/gzip/Brotli/HTTP2）"
+  },
+  {
+   "from": "ch14",
+   "to": "C_envs",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 多环境与环境变量（mode/.env）"
+  },
+  {
+   "from": "ch19",
+   "to": "C_envs",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 多环境与环境变量（mode/.env）"
+  },
+  {
+   "from": "ch20",
+   "to": "C_envs",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 多环境与环境变量（mode/.env）"
+  },
+  {
+   "from": "ch14",
+   "to": "C_node_proc",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Node 进程模型（Cluster/Egg 多进程/压测）"
+  },
+  {
+   "from": "mod_opsflow-server",
+   "to": "C_node_proc",
+   "rel": "uses",
+   "evidence": "PASS3 表条目 Node 进程模型（Cluster/Egg 多进程/压测）"
+  },
+  {
+   "from": "ch14",
+   "to": "C_docker_sub",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Docker 细分（Dockerfile/compose/镜像优化/YAML）"
+  },
+  {
+   "from": "ch14",
+   "to": "C_gha_sub",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 GitHub Actions 细分（Secrets/ACR/自动部署+回滚/release-it）"
+  },
+  {
+   "from": "ch14",
+   "to": "C_server_ops",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 云服务器运维（SSH key 免密/Linux 装机）"
+  },
+  {
+   "from": "ch13",
+   "to": "C_stream_img",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 流与图片处理（Sharp/Stream/busboy/egg-multipart）"
+  },
+  {
+   "from": "mod_opsflow-server",
+   "to": "C_stream_img",
+   "rel": "uses",
+   "evidence": "PASS3 表条目 流与图片处理（Sharp/Stream/busboy/egg-multipart）"
+  },
+  {
+   "from": "ch15",
+   "to": "C_cropperjs",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 CropperJS 图片裁剪"
+  },
+  {
+   "from": "ch18",
+   "to": "C_publish_lib",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 B 端发布工具库（html2canvas/qrcode/Clipboard/FileSaver）"
+  },
+  {
+   "from": "ch15",
+   "to": "C_composable",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vue3 组合式函数复用（usePublishWork/useLoadMore 等）"
+  },
+  {
+   "from": "ch17",
+   "to": "C_composable",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vue3 组合式函数复用（usePublishWork/useLoadMore 等）"
+  },
+  {
+   "from": "ch18",
+   "to": "C_composable",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Vue3 组合式函数复用（usePublishWork/useLoadMore 等）"
+  },
+  {
+   "from": "ch17",
+   "to": "C_mock",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Mock 联调（JSON Server + JWT mock）"
+  },
+  {
+   "from": "ch12",
+   "to": "C_form_validate",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 表单验证体系（egg-validate/错误码/AForm 源码）"
+  },
+  {
+   "from": "ch17",
+   "to": "C_form_validate",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 表单验证体系（egg-validate/错误码/AForm 源码）"
+  },
+  {
+   "from": "ch12",
+   "to": "C_session",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Session 体系（Cookie/egg-session/koa-session/bcrypt）"
+  },
+  {
+   "from": "ch11",
+   "to": "C_mongo_adv",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 MongoDB 进阶（索引/$lookup/egg-mongoose 源码/插件抽象）"
+  },
+  {
+   "from": "ch20",
+   "to": "C_nuxt_sub",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Nuxt3 细分（渲染模式/Nitro/存储层/SEO）"
+  },
+  {
+   "from": "ch21",
+   "to": "C_nuxt_eco",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 Nuxt 生态（Zod/VeeValidate/NuxtUI/Tailwind）"
+  },
+  {
+   "from": "ch22",
+   "to": "C_admin_deploy",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 管理系统部署（Nuxt 构建/PM2/Bun）"
+  },
+  {
+   "from": "ch13",
+   "to": "C_publish_flow",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 业务闭环：作品发布/展示渠道/H5 渲染链路/自动保存"
+  },
+  {
+   "from": "ch17",
+   "to": "C_publish_flow",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 业务闭环：作品发布/展示渠道/H5 渲染链路/自动保存"
+  },
+  {
+   "from": "ch18",
+   "to": "C_publish_flow",
+   "rel": "covers",
+   "evidence": "PASS3 表条目 业务闭环：作品发布/展示渠道/H5 渲染链路/自动保存"
+  },
+  {
+   "from": "ch01",
+   "to": "C_vue2",
+   "rel": "mentions",
+   "evidence": "1-1 L229 仅对比提及"
+  },
+  {
+   "from": "ch08",
+   "to": "C_vue2",
+   "rel": "mentions",
+   "evidence": "8-15 L11 仅对比提及"
+  },
+  {
+   "from": "ch20",
+   "to": "C_nuxt",
+   "rel": "covers",
+   "evidence": "第20章 Nuxt3 基础"
+  },
+  {
+   "from": "ch21",
+   "to": "C_nuxt",
+   "rel": "covers",
+   "evidence": "第21章 Nuxt3 进阶"
+  },
+  {
+   "from": "ch22",
+   "to": "C_nuxt",
+   "rel": "covers",
+   "evidence": "第22章 Nuxt3 收尾"
+  },
+  {
+   "from": "ch14",
+   "to": "C_cicd",
+   "rel": "covers",
+   "evidence": "第14章 14-30~14-40 GitHub Actions"
+  },
+  {
+   "from": "ch14",
+   "to": "C_docker",
+   "rel": "covers",
+   "evidence": "第14章 14-17~14-29 Docker"
+  },
+  {
+   "from": "ch07",
+   "to": "C_test",
+   "rel": "covers",
+   "evidence": "第7章 Jest 全章"
+  },
+  {
+   "from": "ch12",
+   "to": "C_auth",
+   "rel": "covers",
+   "evidence": "第12章 Cookie/Session"
+  },
+  {
+   "from": "ch11",
+   "to": "C_mongo",
+   "rel": "covers",
+   "evidence": "第11章 MongoDB"
+  },
+  {
+   "from": "ch13",
+   "to": "C_ssr",
+   "rel": "covers",
+   "evidence": "第13章 SSR 实现 H5"
+  },
+  {
+   "from": "ch15",
+   "to": "C_editor",
+   "rel": "covers",
+   "evidence": "第15章 编辑器核心"
+  },
+  {
+   "from": "ch16",
+   "to": "C_editor",
+   "rel": "covers",
+   "evidence": "第16章 画布交互"
+  },
+  {
+   "from": "ch17",
+   "to": "C_editor",
+   "rel": "covers",
+   "evidence": "第17章 整合后端"
+  },
+  {
+   "from": "ch13",
+   "to": "C_upload",
+   "rel": "covers",
+   "evidence": "第13章 上传"
+  },
+  {
+   "from": "ch13",
+   "to": "C_oss",
+   "rel": "covers",
+   "evidence": "第13章 阿里云 OSS"
+  },
+  {
+   "from": "C_publish_flow",
+   "to": "C_ssr",
+   "rel": "chains_to",
+   "evidence": "发布→渲染链路"
+  },
+  {
+   "from": "C_publish_flow",
+   "to": "C_oss",
+   "rel": "chains_to",
+   "evidence": "发布产物上 OSS"
+  },
+  {
+   "from": "C_publish_flow",
+   "to": "C_editor",
+   "rel": "chains_to",
+   "evidence": "编辑→发布闭环"
+  },
+  {
+   "from": "C_ssr",
+   "to": "mod_opsflow-server",
+   "rel": "generates",
+   "evidence": "第13章/13-23~13-27：SSR 产物由 server 生成并上传 OSS"
+  },
+  {
+   "from": "mod_opsflow-admin",
+   "to": "C_upload",
+   "rel": "uses",
+   "evidence": "第22章/22-4~22-7：admin 上传组件传阿里云"
+  },
+  {
+   "from": "mod_opsflow-admin",
+   "to": "C_oss",
+   "rel": "uses",
+   "evidence": "第22章/22-4~22-7"
+  },
+  {
+   "from": "mod_opsflow-admin",
+   "to": "C_admin_deploy",
+   "rel": "deployed_by",
+   "evidence": "第22章/22-13~22-16：PM2/Bun，与 web 部署方式不同"
+  },
+  {
+   "from": "mod_opsflow-admin",
+   "to": "mod_opsflow-server",
+   "rel": "depends_on",
+   "evidence": "第20~21章：admin 注册/登录/表格均打同一后端"
+  },
+  {
+   "from": "mod_opsflow-web",
+   "to": "mod_opsflow-server",
+   "rel": "depends_on",
+   "evidence": "原图已有，v2 保留"
+  }
+ ]
+}
