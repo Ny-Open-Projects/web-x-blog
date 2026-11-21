@@ -1,0 +1,134 @@
+# 页面和数据联调—登录模块开发
+
+> **导语**：登录页是最能体现「前后端联调」完整链路的一个模块：Ant Design 表单收集账号密码，ahooks 的 `useRequest` 触发请求，`axios` 二次封装统一注入 token 并做响应提示，成功后写缓存、跳路由。本文把这条链路拆开讲，顺便说清请求拦截器与响应拦截器各自该干什么。
+
+## 前置知识
+
+建议先读《后端接口开发—用户的登录接口开发》，确保后端 `/user/login` 已能返回 token；再读《项目初始化—创建React项目和初始配置》，具备 React + Ant Design 的前端工程。此外需要了解 `localStorage`、React Router 的路由跳转，以及 REST 中 POST 提交表单数据的约定。
+
+## 正文
+
+### 表单：把提交事件交给 onFinish
+
+登录页是一个典型表单：用户名、密码两个字段，加「登录」和「前往注册」两个入口。用 Ant Design 的 `Form` 组件即可，登录按钮设置 `htmlType="submit"`，点击时触发表单的 `onFinish`：
+
+```tsx
+interface LoginParams {
+  username: string;
+  password: string;
+}
+
+const { run } = useRequest(login, {
+  manual: true,
+  onSuccess(data) {
+    localStorage.setItem('token', data);
+    message.success('登录成功');
+    navigate('/courseManagement');
+  },
+});
+
+<Form onFinish={run}>
+  <Form.Item name="username" rules={[{ required: true, message: '请输入用户名' }]}>
+    <Input />
+  </Form.Item>
+  <Form.Item name="password" rules={[{ required: true, message: '请输入密码' }]}>
+    <Input.Password />
+  </Form.Item>
+  <Button htmlType="submit">登录</Button>
+  <NavLink to="/register">前往注册</NavLink>
+</Form>
+```
+
+`Form.Item` 上的 `rules` 声明必填校验：密码为空时点击登录会直接提示，不会发请求。这里没有用 ahooks 的 `useLocalStorageState`，直接 `localStorage.setItem('token', data)` 更直观；`navigate('/courseManagement')` 负责登录成功后跳到课程管理页。接口类型用 `LoginParams` 约束 `username` 与 `password`，`run` 触发时会自动把表单值填进 `data`。
+
+### 接口层：定义 login 与 makeRequest
+
+在 `api/user.ts` 中定义登录接口，接收表单提交的 `username`、`password`，再调用二次封装的 `makeRequest`：
+
+```ts
+export function login(data: LoginParams) {
+  return makeRequest<string>({
+    url: '/user/login',
+    method: 'post',
+    data,
+  });
+}
+```
+
+`makeRequest` 接收 `url`、`method`、`data` 等配置，并支持泛型约束返回数据类型——登录接口返回的就是 token 字符串。这样页面组件只关心「调 login、拿 data」，不碰底层 axios。
+
+### axios 二次封装：两个拦截器
+
+`axiosRequest` 里先用 `axios.create` 设置基础路径，再挂请求与响应拦截器：
+
+```ts
+import axios from 'axios';
+import { message } from 'antd';
+
+const request = axios.create({ baseURL: 'http://localhost:3000' });
+
+request.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) config.headers.Authorization = token;
+  return config;
+});
+
+request.interceptors.response.use(
+  (response) => {
+    message.success('登录成功');
+    return response.data;
+  },
+  (error) => Promise.reject(error),
+);
+```
+
+- **请求拦截器**：从 `localStorage` 取出 token 塞进请求头，之后访问需要权限的接口才能通过校验。
+- **响应拦截器**：对返回数据做统一处理，例如用 Ant Design 的 `message` 弹窗提示「登录成功」，异常则统一抛出。
+
+把这两层收敛到一处，页面里就不用每个请求都重复写 token 拼接与提示逻辑。本阶段后端工程配置可参考 `代码（已8期）/代码（已8期）/10-2/nest-cli.json`：
+
+```json
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "compilerOptions": { "deleteOutDir": true }
+}
+```
+
+后端依赖以 NestJS 10 + TypeORM + MySQL 为主，见同目录 `package.json`：
+
+```json
+{
+  "dependencies": {
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/typeorm": "^10.0.1",
+    "mysql2": "^3.6.3",
+    "typeorm": "^0.3.17"
+  }
+}
+```
+
+### 联调验证
+
+浏览器里访问 `/login` 前，先清掉上一次遗留的 token，否则会被自动重定向到已登录页面。测试流程：
+
+1. 只填用户名不填密码，点击登录 → 触发必填校验提示；
+2. 点击「前往注册」→ 通过 `NavLink` 跳到注册页；
+3. 数据库里准备一条经 MD5 加密的账号（如 `111` / `111`），登录后确认弹出「登录成功」、跳转到 `/courseManagement`，并在 Application → Local Storage 中看到写入的 token。
+
+注意跳转路径要写对，登录成功应指向课程管理页而不是别的路由。
+
+## 小结
+
+- 登录表单用 Ant Design `Form` 的 `onFinish` 承接提交，`Form.Item` 的 `rules` 做必填校验。
+- `useRequest`（ahooks）以 `manual: true` + `run` 手动触发，`onSuccess` 里写缓存、提示、跳转。
+- `makeRequest` 统一收口 `url` / `method` / `data` 与返回泛型，页面不直接碰 axios。
+- 请求拦截器注入 token，响应拦截器统一提示与抛错，是权限接口能跑通的前提。
+- 联调前先清 token，否则会被登录态重定向干扰。
+
+## 下一步
+
+注册与登录是一对孪生模块，表单结构、缓存写入、跳转逻辑几乎一致。建议接着看《页面和数据联调—注册模块开发》，用同一套封装快速把注册链路补齐；之后建议接着看《页面和数据联调—课程获取和删除模块开发》，把带 token 的权限接口真正用起来。

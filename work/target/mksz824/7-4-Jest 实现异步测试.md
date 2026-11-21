@@ -1,0 +1,21 @@
+# 7-4-Jest 实现异步测试
+
+上节课我们介绍了 Jest 的基本概念，还讲了通用测试框架应提供的几个基本功能，以及断言在 Jest 中 matcher 的基本用法。这节课进入第二个部分：异步支持。这节课我采用带着大家写代码的方式来学，因为它比基本断言稍有难度。
+
+提到异步支持，第一个想到的概念应该是回调，也就是 callback。在 Promise 还没有完全普及的岁月里，我们用得最多的就是 callback，很多 Node.js 的 API 至今还在使用它。先创建一个函数，称为 fetchUser，它接受一个 callback 参数，就叫 cb。函数内部用 setTimeout，在一百毫秒以后调用 cb，并传入一个值，这里定为 hello。然后写一个 case 测 cb 中返回的参数是不是 hello：创建 test callback，内容很自然，调用 fetchUser，回调的参数叫 data，断言 expect(data).toBe('hello')。
+
+跑一下看看测试通过的情况。用 `npm jest --watch` 可以让测试一直执行，有修改就重新跑。现在这个 test 过了，但注意它用了一毫秒就通过了，而我们的真实例子是在一百毫秒以后才执行。把它改错再看，发现改错了它也通过了。原因就是里面的 callback 根本没有执行：fetchUser 这个函数直接执行完之后，这个 case 就算结束了，它根本没有等里面的回调被调用。
+
+所以需要另外的方法：使用 Jest 回调的第一个参数，这个参数可以称为 done。有了 done 之后，就可以在想要结束测试的时候调用它，告诉 Jest 我们的测试用例还没有完成，只有 done 被调用之后，整个用例才算完成。保存后可以看到，现在出现了一个错误：expect 收到的是一二三，received 是 hello，把改错的地方改正过来。测试通过了，并且是在一百零二毫秒时完成，说明我们的一百毫秒真的被执行了。
+
+第二种异步类型当然是我们用得非常多的 Promise。先创建一个函数返回 promise，称为 userPromise，内部直接使用静态方法 `Promise.resolve('hello')`。同样写一个 case，称为 test promise。自然而然想到 userPromise 返回的是个 promise，里面写 then，参数是 data，和前面一样 expect(data).toBe('hello')。
+
+跑一下，发现测试是能完成的，但这样做有问题吗？把断言照样改错，改成 expect 123，可以看到确实弹出了错误：一二三和 hello，但这个 test 还是 pass 掉了。为什么？特别注意，这里要 return 这个 promise。假如不 return，case 会在 promise 执行完之前就跑完，里面的断言也就没有意义了，它肯定通过。加上 return 修正之后，测试会正确地报出错误。把值补全成 hello，现在完美通过了。
+
+当然它还支持大家特别喜欢的 async await 写法。写成 test with async，回调加上 async，内部 `const data = await userPromise()`，然后直接 `expect(data).toBe('hello')`。跑一下，三个用例都通过了。
+
+最后介绍一种 Jest 特有的方法：expect 的另一种写法。expect 调用后会返回一个对象，上面有一系列属性，可以拿到 resolve 或 reject 的值。写成 test with expect，同样注意要加 return：`return expect(userPromise()).resolves.toBe('hello')`，它上面的 resolves 属性就是 resolve 的值。跑一下，这个也通过了。
+
+它还有对应的 rejects 属性。复制一个一模一样的 case，对 expect 加上 rejects，期望它的值是一个 error。跑一下最后是否通过，没问题。现在所有 case 全部通过了。
+
+这节课的代码就写到这里。我们学习了测试异步代码的两大类方法：回调和 Promise。Promise 中又提供了三种测试方法：直接调用 then（注意要 return）、使用 async await，或者使用 expect 上的 resolves 和 rejects 属性写法。到这里，谢谢大家，再见。

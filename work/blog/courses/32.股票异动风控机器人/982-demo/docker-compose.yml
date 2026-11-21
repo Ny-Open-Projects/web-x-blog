@@ -1,0 +1,42 @@
+services:
+  risk-bot:
+    build: .
+    image: risk-bot:1.0.0
+    container_name: stock-risk-bot
+    ports:
+      - "8080:8080"
+    environment:
+      # default=离线mock（不联网、不填Key也能跑）；prod=接真实模型
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-prod}
+      SPRING_AI_OPENAI_API_KEY: ${SPRING_AI_OPENAI_API_KEY:-}
+      SPRING_AI_OPENAI_BASE_URL: ${SPRING_AI_OPENAI_BASE_URL:-https://api.openai.com/v1}
+      SPRING_AI_OPENAI_CHAT_MODEL: ${SPRING_AI_OPENAI_CHAT_MODEL:-gpt-4o}
+      RISK_QUOTE_API_URL: ${RISK_QUOTE_API_URL:-}
+      # actuator Basic Auth 凭证：生产必须覆盖默认值（admin/riskbot-actuator，见 DEPLOY 5.4）
+      ACTUATOR_USER: ${ACTUATOR_USER:-admin}
+      ACTUATOR_PASSWORD: ${ACTUATOR_PASSWORD:-riskbot-actuator}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  # ── 可选：Jaeger 链路追踪后端（opt-in，默认不启动）──────────────────────
+  # 启用：docker compose --profile tracing up -d
+  # 访问：http://localhost:16686
+  #
+  # 说明：本工程默认不引入 OTLP exporter（刻意保持依赖闭包最小、离线构建可复现），
+  #       因此启动 Jaeger 不会自动收到链路。应用侧已就绪的是「链路标识与上下文透传」：
+  #       TraceIdFilter 解析/回写 W3C traceparent，traceId 落 MDC 日志。
+  #       要真正导出 span，按 README「链路追踪」章节补两个依赖 + 一行配置即可。
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    container_name: jaeger
+    profiles: ["tracing"]
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "16686:16686"   # Jaeger UI
+      - "4317:4317"     # OTLP gRPC
+      - "4318:4318"     # OTLP HTTP

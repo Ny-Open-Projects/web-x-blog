@@ -1,0 +1,11 @@
+# 11-16-使用$lookup 完成多集合查询
+
+有了上节课聚合的概念，这节课就能完成一次 query 的多集合查询了，这要归功于聚合中的一个特殊操作符 $lookup。它是 MongoDB 3 版本以后推出的新功能，不在上节课那些常用操作符里。熟悉关系型数据库的话，可以把它想象成 join，一次查到多个表的数据。
+
+场景还是查询球队和它旗下的所有球员，用篮网队举例：Nets 的 players 下面有两条 ObjectID，湖人队没有这种数据。代码里写 teamWithPlayers：await teamCollection.aggregate().toArray()，然后创建 pipeline 数组。第一项自然是用 $match 查篮网队，条件 name 等于 Nets。第二项是 $lookup，它有特定格式，字段千万别写错，逐个说。
+
+第一个字段 from：要连接的 collection 名称。我们要连接的当然是 user collection，所以写 user。第二个字段 localField：当前集合中用于连接的字段名，这里是那个数组 players。第三个字段 foreignField：被连接集合（from 那个集合）的字段名。不难想到我们存的是 ObjectID，它们是从 _id 字段来的，所以 foreignField 写 _id。最后一个参数 as：新字段的名称，可以和 localField 同名，同名会直接覆盖原字段。我们起个新名称 newPlayers。这样 $lookup 就写完了。返回值是数组，只有一项，直接取第 0 项打印。运行 ts-node relation.ts，看到 newPlayers 就说明成功了：从另一个集合拿到了两条数据，哈登和杜兰特，都没问题。同时可以看到 players 数组还在，newPlayers 是新创建的数组，这就是 as 参数的效果。这几个参数请记下来好好复习几遍，是最关键的几个点。
+
+第二个例子反过来复习：通过球员查他的球队信息。写 playerWithTeam，await userCollection.aggregate().toArray()，写 pipelineTwo。第一步先过滤：数据中大部分没有球队，只有几条有，所以先用 $match 做条件查询，用之前用过的 $exists 等于 true，筛出所有有 team 的记录。第二步回到 $lookup：from 是 team（要连接的集合名称）；localField 是当前集合的字段，我们的数据里那个字段就叫 team；foreignField 还是 _id；as 这次就叫 team，看看会不会覆盖原来的记录。pipelineTwo 也是数组，取第一项查看。保存运行，team 变成了一个新的数组并完成聚合：LeBron 那条拿到了 Lakers 的完整信息，两个 $lookup 例子都成功了。
+
+这节课了解了用 $lookup 进行多集合的一次查询，非常方便，以后也是我们的利器。希望大家对它的语法再做分析，难点其实就是这几个属性各代表什么意思，搞清楚后就非常顺手。后面做数据库设计时肯定有多集合的关系，到时候 $lookup 还有大显身手的机会。

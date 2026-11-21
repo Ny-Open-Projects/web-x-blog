@@ -1,0 +1,14 @@
+spring:
+  ai:
+    openai:
+      # prod 必须从环境变量注入真实 Key，禁止落库
+      api-key: ${SPRING_AI_OPENAI_API_KEY}
+      base-url: ${SPRING_AI_OPENAI_BASE_URL:https://api.openai.com/v1}
+      chat:
+        options:
+          model: ${SPRING_AI_OPENAI_CHAT_MODEL:gpt-4o}
+          temperature: 0.2
+
+risk:
+  scan:
+    enabled: true

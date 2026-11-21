@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: test-offline
+
+app:
+  agent:
+    # 测试专用离线 profile：显式声明，避免隐式依赖主 application.yml 的默认值
+    model-mode: offline
+    discovery: in-process
+    max-iters: 10
+
+  risk:
+    failure-rate-threshold: 50
+    wait-duration-in-open-state: 10s
+    sliding-window-size: 10

@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: 981-demo
+  profiles:
+    active: default
+
+app:
+  agent:
+    # offline：离线规则模型（default，不联网不填 Key，可跑通主管→成员全链路）
+    # dashscope：真实模型（prod 模式，读环境变量 DASHSCOPE_API_KEY）
+    model-mode: offline
+    # model-name 仅在非 offline 模式生效（如 dashscope:qwen-plus）；
+    # offline 模式下由 OfflineChatModel 提供规则决策，不读此值
+    model-name: offline-plan
+    # 团队成员的发现方式：in-process（进程内注册表）/ nacos（Nacos 注册中心，课程 11-2/11-3）
+    discovery: in-process
+    nacos-server-addr: 127.0.0.1:8848
+    # 注册到 Nacos 时对外暴露的 IP：容器/多网卡场景必须显式配置，为空回退本机 IP
+    advertise-ip: ${APP_AGENT_ADVERTISE_IP:}
+    # ReAct 循环最大迭代轮数（AgentScope 默认 10；生产按 token 成本收紧）
+    max-iters: 10
+    # LLM Token 成本上限（进程内累计，每次模型调用按 usage 记账；耗尽 → HTTP 400）。
+    # 默认 200000 仅够演示，生产按成本预期调大；离线规则模型也按 ChatUsage 实际数字累计。
+    max-token-budget: 200000
+  risk:
+    # 远程成员调用的熔断配置
+    failure-rate-threshold: 50
+    wait-duration-in-open-state: 10s
+    sliding-window-size: 10
+
+baidu:
+  map:
+    # 百度地图开放平台 AK：生产通过环境变量 BAIDU_MAP_API_KEY 注入，严禁硬编码
+    api-key: ${BAIDU_MAP_API_KEY:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: 981-demo
+
+logging:
+  level:
+    com.travel.agent: INFO
+    io.agentscope: INFO
+  pattern:
+    # 把 traceId/spanId 注入每条日志：一次请求的全链路日志可用 traceId 串起来
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

@@ -1,0 +1,188 @@
+1
+00:00:00,780 --> 00:00:04,360
+大家好，欢迎来到小李课堂，来到课程笔记第七集。
+
+2
+00:00:04,360 --> 00:00:11,250
+好，这一期课程呢，我们来看一下上线之后的前端编辑平台的功能的确认。
+
+3
+00:00:11,250 --> 00:00:17,850
+那这一节课呢，我们首先确认一下编辑页面当中这些组件的功能，看一下能不能走通。
+
+4
+00:00:17,850 --> 00:00:20,580
+OK，我们就来到网页当中。
+
+5
+00:00:20,580 --> 00:00:30,290
+好，同样是访问这里的登录页面，这个是我们上节课已经绑定好域名对应的这个 book 上访问这个域名之后呢。
+
+6
+00:00:30,640 --> 00:00:36,000
+可以成功访问到我们线上的这个 React 项目，来登录一下。
+
+7
+00:00:36,000 --> 00:00:38,850
+登录，OK，成功了。
+
+8
+00:00:38,850 --> 00:00:43,510
+而且呢，它已经从后端的接口当中去读取缓存的数据，这是我们之前发布过的。
+
+9
+00:00:43,510 --> 00:00:47,340
+那这两个组件呢，是我备课的时候发布的，我把它给删除掉。
+
+10
+00:00:47,340 --> 00:00:51,540
+OK，这个功能也是没有问题，删除的功能没有问题。
+
+11
+00:00:51,540 --> 00:00:53,420
+那这里的按键的功能呢？
+
+12
+00:00:53,420 --> 00:00:59,900
+下下下，好，也是没有问题。
+
+13
+00:01:00,220 --> 00:01:02,430
+那拖动的话，哎，也是可以的。
+
+14
+00:01:02,430 --> 00:01:04,030
+拖动排序。
+
+15
+00:01:04,030 --> 00:01:09,060
+那我们给它添加一个新的组件，列表组件，然后里面去编辑一下。
+
+16
+00:01:09,060 --> 00:01:11,290
+比如说，当前是我们的前端学习路线。
+
+17
+00:01:11,290 --> 00:01:24,510
+OK，这里的头像呢，我们点击上传，然后点击图片上传，这里点击一个图片，打开，哎，可以上传成功，而且成功的在这里去进行展示。
+
+18
+00:01:24,510 --> 00:01:29,710
+那么大家要注意，我在备课的时候呢，是由于上传的代码当中啊，这里的。
+
+19
+00:01:30,870 --> 00:01:53,960
+A access key secret, 我把它写成这擦擦擦了，因为这个是阿里云的 OSS 配置这个密钥嘛，所以这个是有啊保密性的，不然的话大家都可以使用我这个阿里云服务器的这个配置了，都会到时候把这个资源上传到我的服务器里面，到时候资源就占满了，所以我就用这个替代。
+
+20
+00:01:53,960 --> 00:02:00,260
+那么大家到时候肯定要把换成你自己真实的这一个 access key secret。
+
+21
+00:02:00,570 --> 00:02:02,120
+好，这边可以上有图片。
+
+22
+00:02:02,120 --> 00:02:06,230
+我们点击这个图片，哎，就可以去进展示了。
+
+23
+00:02:06,230 --> 00:02:27,050
+好，我们点击添加新项，再来一个后端，然后同样的，我们去上传多一个图片，呃，上这个吧，随机一个图片，点击这个图片，哎，设置错了。
+
+24
+00:02:32,680 --> 00:02:34,770
+好，那这样的话就没有什么问题。
+
+25
+00:02:34,770 --> 00:02:42,570
+OK，此时的话，我们这里组件、输入框组件这些都是没有问题的。
+
+26
+00:02:42,570 --> 00:02:47,040
+全局属性这里是可以去更更改的，你加多个一，这也可以响应式的改变。
+
+27
+00:02:47,040 --> 00:02:57,130
+然后存值草稿保存成功了，我们点击刷新，你看还是刚才我们已经编辑好的这几个组件。
+
+28
+00:02:57,130 --> 00:02:59,510
+存值草稿说明没问题，我们点击预览。
+
+29
+00:03:00,560 --> 00:03:04,510
+好，预览的功能也是可以使用。
+
+30
+00:03:04,510 --> 00:03:23,920
+然后我们再来看一下其他的，比如说来一个副本，小D课堂，全选，给它加粗斜线下划线，来是这个颜色，给它来一个序号。
+
+31
+00:03:23,920 --> 00:03:30,290
+好，存至草稿，刷新，OK是没问题。
+
+32
+00:03:31,170 --> 00:03:42,460
+预览，我们点击发布，然后它跳转到了我们的发布的页面，可以看到我们这里发布页面也是没有问题的，对不对？
+
+33
+00:03:42,460 --> 00:03:51,720
+那接下来我用这个微信去进行扫码，扫描右边的二维码，然后可以发现我手机是可以成功打开这一个地址的。
+
+34
+00:03:51,720 --> 00:04:00,800
+那大家如果去看我们当前这个课程的时候，有可能呢我已经把这个服务器呃用于其他的项目去进行使用了，所以大家扫码的时候可能访问不了。
+
+35
+00:04:01,130 --> 00:04:11,640
+但是，呃，我这个这一期视频发布之后，大家如果有紧接着看这一期视频的话呢，可能我的服务器还没有被别的项目给占用，所以就可以取经访问。
+
+36
+00:04:11,640 --> 00:04:16,800
+那到时候大家看的比较晚的话呢，可能就扫扫码的话就访问不了了。
+
+37
+00:04:16,800 --> 00:04:19,340
+OK，这个是我们的发布的页面。
+
+38
+00:04:19,340 --> 00:04:23,180
+如果要提交问卷的话，也是同样可以的。
+
+39
+00:04:23,180 --> 00:04:30,190
+比如当前我们这里来个姓名大招，然后描述是C L D课堂讲师，那点击提交问卷，提交成功了。
+
+40
+00:04:30,190 --> 00:04:31,610
+这个是在我们的什么？
+
+41
+00:04:31,980 --> 00:04:44,180
+发布页面是我们的 React 项目里面的 Release 这个发布路由页面去进行点击提交的发布页面，跟这个这个地址这个是地址是我们的发布页面的，其实是一样的。
+
+42
+00:04:44,180 --> 00:05:01,210
+OK，来我们来到数据库当中检查一下这里的数据，Company Data，这里还在刷新，我们重新打开一下。
+
+43
+00:05:01,990 --> 00:05:28,970
+Component data. You can see that we just added the component, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill, skill,
+
+44
+00:05:29,640 --> 00:05:35,170
+还有问卷组件以及官网的这些，你可以去进行定义自定义自己的官网的这些组件。
+
+45
+00:05:35,170 --> 00:05:36,630
+发布之后都是没问题。
+
+46
+00:05:36,630 --> 00:05:43,420
+使用草稿预览的功能，标题的动态，以及右边的属性的响应式的这些改变都是可以的。
+
+47
+00:05:43,420 --> 00:05:45,610
+好，这节课我们就先讲解到这里。
+

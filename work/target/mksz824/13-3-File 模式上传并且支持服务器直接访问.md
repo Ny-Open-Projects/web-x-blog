@@ -1,0 +1,23 @@
+# 13-3-File 模式上传并且支持服务器直接访问
+
+这节课来完成文件上传。上节课说过，可以通过 multipart 插件获取用户上传的文件，它提供了两种模式：第一种叫 file 模式，第二种叫 stream 模式。这节课先研究第一种，非常直截了当的 file 模式，之后再来看比较复杂但更有优势的 stream 模式。
+
+先明确今天的任务：上传一个文件，返回一个服务器可访问的静态文件地址，提供给上传的用户使用。
+
+第一步开启 file 模式上传，需要修改 config 中的配置，因为 multipart 插件默认是 stream 上传模式。添加 `config.multipart`，把它的 mode 参数设置成 file 即可。
+
+接下来写 controller。我创建了一个 utilities.ts，用来放和实例、集合没有关系的一系列控制器，这里改名为 utilitiesController。第一个方法是 fileLocalUpload，本地上传。第一步把需要的值拿出来，自然是 ctx。如果使用了 file 模式，会拿到一个特殊的属性：`ctx.request.files`，它是一个数组。传单个文件时，数组第一项就是我们选择的文件。到这里虽然只有一行代码，但要特别注意，上传的细节都隐藏在插件内部，我们暂时不用管。先把它打印出来看看具体内容，用 ctx.helper.success 把 file 输出。
+
+我添加了一个 POST 请求对应的路由，对应 fileLocalUpload。测试时注意要选对 body 模式：选择 form-data，然后在这里选择文件类型，出现 select files 对话框，随便选一张图片（比如 babble.png），点击 send。输出了一系列字段，说明上传完毕了。插件内部会解析文件并返回一系列文件信息，其中最有意思的属性是 filepath。可以看到文件上传后保存到了一个特定地址，类似 /var/folders 加时间、日期和随机文件名。插件把上传完毕的文件存放到了系统存放临时文件的文件夹里，这个文件夹每个操作系统都不一样。
+
+我们希望把上传的文件放到应用的特定文件夹下保存，这就要修改配置。在 config.default.ts 中有一个选项 tmpdir，就是存放文件的位置。我们在项目根目录创建一个 uploads 文件夹，所有跟上传文件相关的内容都放这里。选定了目标文件夹，就可以使用之前用过的变量 appInfo。appInfo 里有一个特殊的 baseDir，指的是当前项目的文件夹。需要 path 的 join 方法，把两部分结合起来：join(appInfo.baseDir, 'uploads')，上传文件夹就设置好了。
+
+再上传一次看看文件会不会到对应位置。点击 send，filepath 发生了变化，变成了 OpsFlow 后端项目地址下的 uploads，后面跟着时间戳和随机文件名。去 uploads 目录看，文件确实已经出现了。
+
+上传完毕后，需要在服务器端展示对应的静态文件，也就是生成一个可供用户使用的 URL，这是很常见的需求。egg 内置了一个叫 static 的插件来完成这个任务。线上环境一般建议使用 CDN 来保存静态文件，但很多小公司还是采用服务器端直接提供静态文件的方式。文档快速入门里说了，内置 static 插件默认映射 /public 到 app/public 目录。现在 public 里有一张 babble.png，线上访问 localhost:7001/public 加文件路径，刷新一下可以直接看到这张图片，说明映射成功。
+
+但问题来了：我们的文件夹不是 public，而是 uploads，所以需要自定义。可以修改 static 插件的一系列配置，里面有一个属性叫 dirs，是一个数组，可以配置一系列的路由映射。每个映射的第一个参数是 prefix，指前面的前缀，第二个参数是 dir，指文件夹的地址。我们保留默认的 public：prefix 是 /public，dir 用 join 拼接 appInfo.baseDir 和 app/public。再添加自定义的一项：prefix 配成 /uploads，dir 拼接 appInfo.baseDir 和 uploads。这样两个路径以及两个文件夹下的静态文件都支持了。
+
+最后做一个小修改。刚才上传成功的响应里 filepath 是一个本地路径，现在要在线上访问，需要做替换：把文件夹的本地地址替换成线上的地址。目前是 localhost:7001。回到代码，定义一个 url 变量，对 file.filepath 做 replace，把 app.config.baseDir 替换掉。另外我们还配置过一个 baseUrl，看一下 config.default.ts，默认是 default.url，之前测试时在 local 环境会做覆盖，所以本地开发应该用 http://localhost:7001。对替换结果再做一次 replace，把 app.config.baseUrl 拼进来，最后把 url 输出。
+
+重新上传一遍，希望返回一个可以直接访问的 URL。点击 send，URL 生成了，是 7001/uploads 加一系列图片地址。访问一下，图片成功出现，任务完成。我们成功使用 egg 封装好的 multipart 和 static 插件完成了上传，并且可以展示 URL。

@@ -1,0 +1,28 @@
+{
+ "idx": 18,
+ "rel": "00.预先课 - 低代码大课必备技术/第 1 章  Nestjs 框架课程介绍+适合⼈员+学后⽔平/第 2 集  课程章集目录速览【网盘分享wpfx.org.cn】.md",
+ "title": "课程章集目录速览",
+ "stage": "00.预先课 - 低代码大课必备技术",
+ "materials": {
+  "code": [
+   {
+    "path": "代码（已8期）/代码（已8期）/8-2/lowcode/package.json",
+    "snippet": "{\n  \"name\": \"lowcode\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@types/lodash\": \"^4.14.201\",\n    \"@types/node\": \"18\",\n    \"@types/react\": \"^18.2.37\",\n    \"@types/react-dom\": \"^18.2.15\",\n    \"typescript\": \"^5.2.2\"\n  },\n  \"dependencies\": {\n    \"@ant-design/icons\": \"^5.2.6\",\n    \"antd\": \"^5.11.2\",\n    \"react\": \"^18.2.0\",\n    \"react-dom\": \"^18.2.0\"\n  }\n}\n"
+   },
+   {
+    "path": "代码（已8期）/代码（已8期）/8-2/lowcode/pnpm-lock.yaml",
+    "snippet": "lockfileVersion: '6.0'\n\nsettings:\n  autoInstallPeers: true\n  excludeLinksFromLockfile: false\n\nimporters:\n\n  .:\n    dependencies:\n      '@ant-design/icons':\n        specifier: ^5.2.6\n        version: 5.2.6(react-dom@18.2.0)(react@18.2.0)\n      antd:\n        specifier: ^5.11.2\n        version: 5.11.2(react-dom@18.2.0)(react@18.2.0)\n      react:\n        specifier: ^18.2.0\n        version: 18.2.0\n      react-dom:\n        specifier: ^18.2.0\n        version: 18.2.0(react@18.2.0)\n    devDependencies:\n      '@types/lodash':\n        specifier: ^4.14.201\n        version: 4.14.201\n      '@types/node':\n        specifier: '18'\n        version: 18.18.10\n      '@types/react':\n        specifier: ^18.2.37\n        version: 18.2.37\n      '@types/react-dom':\n        specifier: ^18.2.15\n        version: 18.2.15\n      typescript:\n        specifier: ^5.2.2\n        version: 5.2.2\n\npackages:\n\n  /@ant-design/colors@7.0.0:\n    resolution: {integrity: sha512-iVm/9PfGCbC0dSMBrz7oiEXZaaGH7ceU40OJEfKmyuzR9R5CRimJYPlRiFtMQGQcbNMea/ePcoIebi4ASGYXtg==}\n    dependencies:\n      '@ctrl/tinycolor': 3.6.1\n    dev: false\n\n  /@ant-design/cssinjs@1.17.2(react-dom@18.2.0)(react@18.2.0):\n    resolution: {integrity: sha512-vu7lnfEx4Mf8MPzZxn506Zen3Nt4fRr2uutwvdCuTCN5IiU0lDdQ0tiJ24/rmB8+pefwjluYsbyzbQSbgfJy+A==}\n    peerDependencies:\n      react: '>=16.0.0'\n      react-dom: '>=16.0.0'\n    dependencies:\n      '@babel/runtime': 7.23.2\n      '@emotion/hash': 0.8.0\n      '@emotion/unitless': 0.7.5\n      classnames: 2.3.2\n   "
+   },
+   {
+    "path": "代码（已8期）/代码（已8期）/8-2/lowcode/pnpm-workspace.yaml",
+    "snippet": "packages:\n  - \"packages/*\"\n"
+   }
+  ],
+  "notes": [
+   "笔记+资料-已8期/笔记+资料-已8期/全栈多端低代码平台项目大课.html",
+   "笔记+资料-已8期/笔记+资料-已8期/全栈多端低代码平台项目大课.pdf"
+  ]
+ },
+ "transcript_path": "D:/ai/video2text/output/小滴课堂低代码大课\\audio\\00.预先课 - 低代码大课必备技术\\第 1 章  Nestjs 框架课程介绍+适合⼈员+学后⽔平\\第 2 集  课程章集目录速览【网盘分享wpfx.org.cn】.md",
+ "out_path": "D:/ai/video2text/output/小滴课堂低代码大课\\blog\\00.预先课 - 低代码大课必备技术\\第 1 章  Nestjs 框架课程介绍+适合⼈员+学后⽔平\\第 2 集  课程章集目录速览【网盘分享wpfx.org.cn】.md"
+}

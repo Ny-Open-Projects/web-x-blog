@@ -1,0 +1,10 @@
+target/
+*.class
+*.jar
+!.mvn/wrapper/*.jar
+.idea/
+.vscode/
+*.iml
+.DS_Store
+.agentscope/
+logs/

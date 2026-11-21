@@ -1,0 +1,73 @@
+# 5-17-Vuex 安装和基础使用
+
+上节课介绍了状态管理的概念，这节课来到 Vuex。首先要知道，Vuex 是为 Vue.js 专属的，基于 Vue 的特点量身定制，其他框架暂时无法使用。
+
+## 单向数据流
+
+看一段我们都熟悉的简单 Counter 代码，它有 data、template 和 methods。对应到官方的图里：data 称为 state，template 是你看到的东西，称为 view；改变数据的动作称为 action。
+
+对应关系是：state 中的数据传递给 view，形成界面；view 中有一些可以触发动作的元素（按钮），点击触发 action；action 引发数据的改变，更新 state，完成整个闭环。
+
+但当多个组件共享状态时，这个单向数据流的循环就有可能被破坏，官方提到两个问题，其实上节课也说过：一是应用由组件组成，多个组件共享状态时要从根组件把状态一层层往下传，嵌套很深时非常繁琐，而且兄弟组件之间也无法传递状态，因为它们是并列关系；二是不同 view 都有行为要变更同一个状态，现在父子组件靠事件来变更，需要同步多份数据的拷贝，无缝同步这么多份数据是个巨大的挑战。
+
+最终方案和上节课全局数据的方案不谋而合：以一个全局单例的形式管理数据。
+
+## Store 的特征
+
+Vuex 生成的 store 这个单例，和简单的全局对象有什么区别？Vuex 的特征是：每个 Vuex 应用的核心就是 store，它基本是个容器，包含应用中大部分的状态，记住就是一堆数据。
+
+第一，Vuex 的状态存储是响应式的：view components 从 store 的 state 中读取状态时，若 state 发生变化，对应组件也会比较高效地更新，这就是响应式的对应关系。
+
+第二，改变 store 中状态的唯一途径是显式提交 mutation。提交有两种方式：同步修改（直接点击就改）时，view components 可以直接 commit 一个 mutation，完成这个循环；异步修改（比如请求 API 更新数据）时，需要先 dispatch 一个 action，在异步结束以后再 commit 触发 mutation，完成另一种循环。
+
+这两种过程让我们可以方便地追踪每一个状态的变化。配合 DevTools（之后会安装），能一直监控 mutation 的变化，实现数据可追溯的更新过程。这些形式后面会一一讲解。
+
+## 安装与最简例子
+
+做课时 Vuex 已发布适配 Vue3 的正式版，安装命令：
+
+```bash
+npm install vuex@next --save
+```
+
+安装完毕检查 package.json，版本要在 4 以上。
+
+写过 Vuex 的同学对下面的内容应该很熟，清楚的话可以跳过，这里是给没接触过的同学讲基础知识。首先从 vuex 导出创建 store 的函数 createStore。createStore 接受一个 object 参数，第一个字段是 state，也就是全局状态：
+
+```typescript
+import { createStore } from 'vuex';
+
+const store = createStore({
+  state: {
+    count: 0,
+  },
+});
+
+console.log(store.state.count); // from vuex 0
+```
+
+创建完毕就可以访问了，console.log 一下 store.state.count，启动应用后打出 from vuex 0，拿到了里面的数据。
+
+除了拿数据，还要修改值。修改要提交 mutation。创建 mutation，它是一组键值对：键是事件类型，比如 add；值是一个回调函数，接受一个参数，就是 state：
+
+```typescript
+const store = createStore({
+  state: {
+    count: 0,
+  },
+  mutations: {
+    add(state) {
+      state.count++;
+    },
+  },
+});
+
+store.commit('add');
+console.log(store.state.count); // from vuex 1
+```
+
+拿到 state 就可以修改它了，state.count 加加，是响应式的，想怎么改就怎么改。调用时用 store 的 commit 方法，参数就是 mutation 的事件名 add，名称要相同。commit 一次后，count 值就完成了更新，打出 from vuex 1。
+
+## 小结
+
+这就是 Vuex 的一大部分内容，核心思想就两点：一是支持响应式编程的 store，二是修改 state 要用 mutation，通过 store 的 commit 方法提交对应名称的 mutation 来完成修改。现在 store 还游离在外面，下节课讲解怎样把它和整个应用整合起来。

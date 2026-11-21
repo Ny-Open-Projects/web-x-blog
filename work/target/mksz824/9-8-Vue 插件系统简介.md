@@ -1,0 +1,19 @@
+# 9-8-Vue 插件系统简介
+
+上节课我们创建了业务组件库的简单结构。这节课从另外一头说起：Vue3 的 plugin 插件系统。组件库在一个应用中使用时，常作为全局组件出现。对于我们的业务组件库，最好也提供这样的融入方式。回忆一下，使用 Ant Design Vue 和 Vuex、Vue Router 这样的库时，它们都用了 App Instance 上的一个方法，叫 use。而 use 接受的参数，就是 Vue3 的 plugin 插件。这节课看看这个插件是怎样运作的。
+
+插件是什么？插件其实是一段代码，一般给 Vue 的应用实例（App instance）添加全局的功能。它有一种特殊的格式，只有两种：第一种是一个 object，暴露出一个 install 方法；或者它直接就是一个 function。插件没有严格的限制，一般有以下几种功能：添加全局方法或属性；添加全局资源，比如指令、过滤器、过渡等；通过全局混入来添加一些组件选项；通过 app.config.globalProperties 添加 app 实例的方法。
+
+光看文档的说明可能不太懂，直接写一个插件试试。创建一个名称为 test-plugin.ts 的文件，创建一个对象称之为 plugin。用第二种格式，object 上面必须有一个叫 install 的方法。install 接受第一个参数，就是应用实例，之后就可以在内部用这个应用实例做文章了。这个 app 参数就是 Application instance，它的类型可以从 vue 上面导出，就叫 App 类型。
+
+第一个用法是全局属性。还记得组件实例上的全局属性吧？比如用 Ant Design Vue 导入的 $message，还有默认的 $parent 之类，都属于全局属性。拿到 app，上面有 config 选项，再拿到 globalProperties，这时就可以随便创建了。我们创建一个最简单的 echo，它是一个 function，内部就是 console.log，我们称之为 a plugin。这样就在 globalProperties 上添加了一个属性。
+
+来测试一下。先把插件引入到 main.ts：`import testPlugin from './test-plugin'`，然后用 `app.use(testPlugin)` 把它传进去。之后就能在 app 中的任何组件里使用刚才确定的全局方法。在组件里用 getCurrentInstance 在 setup 中拿到全局实例，添加一个 onMounted。注意拿到的是 component 的 internal instance，所以要用它的 appContext，接上 config，然后是 globalProperties，从上面拿到 echo 进行调用。我这里用的是最开始学基础知识时建的那个 Vue 项目，你也可以拿来做简单测试。刷新页面，a plugin 就这么显示出来了，第一个任务完成。
+
+接下来是主要任务：注册全局组件。这个用 app.component 的方法，很简单。把内置的 HelloWorld 拿过来，路径是 components/HelloWorld.vue，然后在 install 里调用 `app.component('HelloWorld', HelloWorld)`，名称还叫 HelloWorld。注册完毕后，在模板里不用导入就可以直接使用，因为它已经是全局组件了。把它放到模板最上面，Hello World 就出现在了最前面。通过 plugin 我们就注册了一个全局组件。
+
+还可以全局 provide。用 `app.provide('test', 'from plugin')` 提供一个 message。然后在 App.vue 中用 inject 看看是否生效，加一个 console.log(inject('test'))。可以看到 from plugin 这个信息也出现了。
+
+通过这个例子，我们成功注册了三种全局能力：globalProperties 全局属性、全局组件，以及全局 provide。插件系统其实很简单，就是提供一个 function，function 的参数能拿到当前的应用实例，然后可以在应用实例的属性上添加一系列的方法。具体有哪些方法可以参考 Global API 的文档，里面有 component、directive、mixin、globalProperties 等，整个实例可以注入各种类型的属性。对全局组件来说，就是在 plugin 里循环调用 app.component 而已。
+
+了解了这个原理，下节课就可以在业务组件库中创建入口文件了。

@@ -1,0 +1,104 @@
+# 页面和数据联调—课程创建和编辑模块开发
+
+> **导语**：本文在课程表格展示、查询与删除的基础上，补全「课程创建」与「课程编辑」两个核心模块。你会看到父组件 `CourseManager` 如何通过一个弹窗组件同时承载「创建」与「编辑」两种状态，以及前端如何分别调用后端的 POST / PUT 接口完成数据写入，并在成功后再拉取一次列表实现刷新。
+
+## 前置知识
+
+- 已完成课程表格组件的展示与删除逻辑，建议先回顾《页面和数据联调—课程获取和删除模块开发》。
+- 后端已提供课程增删改查接口，服务基于 `代码（已8期）/代码（已8期）/10-2/package.json` 中的 NestJS + TypeORM + MySQL 技术栈搭建。
+- 前端使用 React + Ant Design 的 `Modal`、`Form` 组件，以及 ahooks 的 `useRequest` 发起请求。
+
+## 正文
+
+### 一个弹窗同时承载「创建」与「编辑」
+
+在上一节课的 `CourseManager` 中，页面 `content` 里只有课程表格组件。本节课新增了一个「创建新课程」按钮。点击按钮会打开一个弹窗，弹窗内部通过 `isOpen` 控制显示与隐藏：当 `isOpen` 为 `false` 时直接 `return` 不渲染，为 `true` 时才展示。
+
+这里涉及父组件与子组件的双向协作：
+
+1. **父组件方法 `setOpen` / `setModel`**：控制弹窗的 `model`（即 `isOpen`）显隐。
+2. **父组件方法 `setEditValue`**：创建时把弹窗内所有输入框清空（置为 `empty` 值）；编辑时把当前选中行的数据写入 `editValue`，并作为参数传递给子弹窗的 `defaultValues`，使弹窗回填已有内容。
+
+### 子表格触发父组件打开弹窗并回填数据
+
+在 `CourseTable` 子组件中，每一行都有一个「编辑」按钮，点击时触发父组件传入的 `openModel(record)` 方法，把当前这一条课程记录（`record`，含 `id` 等字段）传递上去。父组件的 `openModel` 再调用 `setEditValue(record)`，将数据塞入 `editValue`，最终传递给创建/编辑弹窗的 `defaultValues` 完成回填。
+
+这正是 React 中「子组件调用父组件方法、父组件把数据传回子组件」的典型数据流。
+
+### 编辑时联动两个接口
+
+当点击「编辑」并修改标题（例如把「全栈多端低代码项目大课」改为「全栈多端低代码项目大课1」）并确认时，打开 Network 面板可以看到同时请求了两个接口：
+
+- 一个 **PUT** 请求，调用修改接口更新课程标题；
+- 一个 **GET** 请求，重新拉取课程列表。
+
+也就是说，修改成功后紧接着调用 `reloadData`，重新获取最新列表数据。删除课程时采用的也是同样思路——执行删除接口后调用 `reloadData` 刷新列表。
+
+### 弹窗内的核心方法梳理
+
+编辑/创建弹窗依赖几个关键方法：
+
+- `setOpen`（`model`）：控制弹窗显隐。
+- `reloadData`：重新请求课程查询接口刷新列表。
+- `setEmptyField`：创建时把输入框全部置空。
+- `closeModel`：关闭弹窗。
+
+### 创建与编辑的分支逻辑
+
+弹窗的 HTML 是一份标准表单，每个表单项对应课程的字段。进入弹窗后用 `useEffect` 监听 `isOpen` 与父组件传入的 `defaultValues` 变化：
+
+- 如果 `defaultValues` 为 `undefined`（父组件没传课程数据），说明是「创建」场景，把输入框全部置空。
+- 如果有值，说明是「编辑」场景，把数据回填到输入框。
+
+点击「确认」按钮时，再根据父组件是否传入 `defaultValues` 走不同分支：
+
+```ts
+// 伪代码示意
+const onConfirm = () => {
+  if (defaultValues) {
+    // 编辑：调用修改接口
+    run(); // 内部 useRequest 执行 PUT
+  } else {
+    // 创建：遍历校验表单
+    for (const key in formValues) {
+      if (!formValues[key]) {
+        message.warning('请填写完整表单');
+        return;
+      }
+    }
+    // 调用创建接口
+  }
+};
+```
+
+- **修改分支**：执行 `useRequest` 的 `run`，成功后重新 `reloadData` 拉取列表，失败则关闭弹窗。
+- **创建分支**：先循环遍历表单值，只要有一个字段为空就提示「请填写完整表单」；全部填写完成后调用创建接口（如 `createCourse`），成功后再 `reloadData`，失败同样关闭弹窗。
+
+两个接口都定义在 `api/course` 中：创建用 **POST**，修改用 **PUT**，路径相同、方法不同，数据通过 `data` 传入。
+
+### TypeScript 中的 `Partial` 与 `CourseWithoutId`
+
+上一节课预留的「无 ID 类型」在这里派上用场：`CourseWithoutId` 表示没有 `id` 字段的课程类型（用于创建，因为 `id` 由后端生成）。
+
+另一个重点是 `Partial<T>` 操作符。`Partial` 能把类型 `T` 里的所有属性都变为可选：
+
+```ts
+// CourseWithoutId 没有 id
+// Partial<CourseWithoutId> 等价于每个属性后面都加一个 "?"
+type UpdateCourseDTO = Partial<CourseWithoutId>;
+```
+
+为什么要这样做？当用户只想修改 `title` 时，其他字段可以不传。`Partial` 就是把每个属性变成可选（`title?`、`cover?` ...），非常契合「部分更新」的编辑场景。
+
+## 小结
+
+1. 课程创建与编辑共用一个弹窗组件，通过 `isOpen` 控制显隐，通过 `defaultValues` 区分创建/编辑。
+2. 子组件 `CourseTable` 通过 `openModel(record)` 回调父组件方法，实现数据回填。
+3. 编辑确认时并发调用 PUT 修改接口 + GET 列表刷新；删除同理依赖 `reloadData`。
+4. 创建前需遍历校验表单完整性，缺失字段则提示「请填写完整表单」。
+5. 后端接口创建用 POST、修改用 PUT，统一维护在 `api/course`。
+6. `Partial<CourseWithoutId>` 实现「部分字段可空」的编辑 DTO，避免强制传全量字段。
+
+## 下一步
+
+课程的增删改查到本节已全部完成，预先课的前端页面与接口联调也告一段落。接下来正式进入低代码平台项目大课，建议接着看《低代码平台项目大课介绍+适合人员+学后水平》。

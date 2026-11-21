@@ -1,0 +1,27 @@
+# 13-5-使用 sharp 生成缩略图并保存
+
+这节课就来使用上节课介绍的 sharp 完成任务。重申一下任务：将一张上传完毕的大图完成缩放，生成宽度为 300px 的缩略图，另存到文件中，并返回对应的 URL。
+
+首先安装 sharp。这里特别注意它有一个前提条件：Node.js 版本必须大于 12.13.0，请大家把本地的 Node.js 版本升级满足需求。安装使用 `npm install sharp`。还有一个注意点：因为依赖上节课说过的 libvips 这个核心，这个包稍微要大一点，会从 GitHub 下载源文件，网络不太通畅的同学可以使用 cnpm 安装，cnpm 里的源文件都经过镜像代理，会快很多。除了 sharp 本体，还要安装它的 TypeScript 类型文件，它没有自带 types，要自行安装。
+
+安装完毕（我这里就不演示了）就来完成任务。来到 controller，第一步把 sharp 引进来。使用 `import * as sharp from 'sharp'` 的形式，因为它没有默认导出。sharp 函数是一个构造函数，返回一个 sharp 实例，接受的第一个参数是图片文件，支持非常丰富的类型，比如 Buffer、数组等等。我们这里是路径，也就是普通的 string 类型。
+
+先把 filepath 拿出来（因为经常要使用），然后生成 sharp 实例，称为 imageSource，等于 sharp(filepath)。有了实例以后，先感受它的第一个方法：我们希望拿到文件的一系列元数据（图片信息），只有宽度大于 300 的时候才做对应的转换，所以会用到 metadata 方法。sharp 的方法都是基于 promise 的，非常方便：`const metadata = await imageSource.metadata()`。用 app.logger.debug 把 metadata 输出一下，看看它是什么样的数据。然后上传原来那张图片，点击 send。上传成功，看输出：有 format 文件类型、width 和 height、channels，还有 background 的一系列信息，图片的信息都返回出来了。
+
+我们需要判断 width 是否大于 300，大于 300 才做转换。加一个注释：检查图片宽度是否大于 300。代码是 if (metadata && metadata.width && metadata.width > 300)。
+
+大于 300 的情况下要生成一张新的图片，也就是需要一个新的路径。之前的路径是 uploads 一系列文件夹，最后是 abc.png。新路径前面不变，最后的文件名发生改变：abc 后面添加一个单词 thumbnail。thumbnail 指的就是缩略图，你在 Windows 或 Mac 文件夹中看见的缩略图都是这个单词。
+
+完成这个转换有很多方式，现在唯一有的就是 filepath 这么长一串内容。我想使用 path 模块中的 parse 方法，它可以把路径转换成几部分：parse(filepath) 可以拿到 name（文件名称）、ext（扩展名）、dir（路径）。打印一下演示：name 就是 abc，ext 是 .png，dir 是前面的一系列路径（不包括 abc）。上传一次看 log，确实如此。
+
+拿到这三部分以后，就可以组合成新的文件路径了。需要 join 方法：thumbnailFilePath = join(dir, `${name}-thumbnail${ext}`)，前面是 dir，后面是新的名称，用模板字符串把 name、thumbnail 和 ext 拼起来。这样就把格式字符串转换成了对应的新路径。
+
+有了路径就可以完成保存了。直接调用 imageSource 上的 resize 方法。看文档：resizing image 有一系列参数，width、height，当两者都被提供时还可以设置 fit，就是之前说的和 CSS background-size 相关的一系列属性，大家可以自己去设置。我们这里完成最简单的缩放，只把 width 改成 300，让高度同比例转换。resize 完毕后可以直接保存为文件，还有一个链式方法 toFile。文档里还可以 toFormat 保存成对应的文件类型等等，我们使用最简单的 toFile，参数是 thumbnailFilePath。经过 await 应该就完成保存了。
+
+最后一步转换对应的 URL，跟之前的做法一样：把本地文件的地址转换成服务器上可访问的 URL。在外侧先创建一个 thumbnailUrl 变量，一开始是空字符串。假如经过处理，在这里重新赋值：thumbnailUrl = thumbnailFilePath.replace(...)，替换逻辑和上面的 url 完全一样，把这段复制过来就好。
+
+现在整个处理就完成了，最后返回结果。这里写一个三元表达式的判断：假如 thumbnailUrl 存在，就返回这个变量；不存在说明图片小于 300px 不用转换，直接返回 url 就可以了。
+
+看起来整个过程已经完毕，最后做个测试看能否成功转换。直接点击 send，除了 url 之外还返回了 thumbnailUrl，对应的地址就是后面多加了文件名。在 web 页面里访问一下，点击回车，返回了缩放以后的图片，宽度是 300px，高度随宽度的比例自动转换。
+
+就这样我们完成了一个简单的缩略图生成功能。当然 sharp 的功能还远不止这些，感兴趣的话可以自己去探索它的 API，可以像图片编辑器一样生成各种有意思的图片。

@@ -1,0 +1,113 @@
+# 页面和数据联调—课程获取和删除模块开发
+
+> **导语**：登录进到课程管理页后，剩下的就是把课程列表真正「接上」后端：表格、分页、缩略图、退出登录、删除确认，以及删除后自动刷新列表。这一集把 CourseManager 拆成 Header / Content / Footer 三层，讲清 ahooks 的 useRequest 如何驱动加载态与数据、Ant Design 的 Table 与 Popconfirm 如何配合 DELETE 接口，以及软删除为什么只是把 del 字段改成 1。
+
+## 前置知识
+
+- 已完成登录模块，token 存在 localStorage 里，可回顾《页面和数据联调—登录模块开发》。
+- 了解 React 组件拆分与 props 传参，见过二次封装的 request 请求工具。
+- 用过 Ant Design 的 Layout / Table 基础组件，可参考《项目初始化—创建React项目和初始配置》。
+
+## 正文
+
+### 先看清最终效果
+
+登录成功进入管理页：头部左边是「课程管理」标题，右边是头像（本集由后端写死），鼠标悬浮弹出下拉菜单「退出登录」——点击后清空 localStorage 里的 token 并跳回登录页。中间是课程表格，列有 ID、标题、价格、评分、分类、缩略图和操作；每页展示 4 条，带分页；每行可删除，编辑留到下一集。
+
+这里先建立一个整体认知：**页面 = 组件组合 + 两个接口**（获取课程列表、删除课程），其余都是展示与交互。
+
+### 页面骨架：Layout / Header / Content / Footer
+
+`CourseManager` 用 Ant Design 的 `Layout` 包裹，分三块：
+
+- `Header`：左侧标题，右侧 `Dropdown` 下拉菜单。菜单的 `items` 是一个数组，定义 `{ label: '退出登录', key: '1' }`，点击回调里执行 `localStorage.removeItem('token')` 再跳转到 `/login`。
+- `Content`：包裹 `CourseTable`，也就是表格 + 分页器那一块。
+- `Footer`：一行项目说明文案。
+
+这些组件（Layout、Dropdown、Table、Space、Popconfirm）不必自己造，Ant Design 官网都有示例，按属性传入即可。
+
+### 数据与加载态：ahooks 的 useRequest
+
+父组件用 ahooks 的 `useRequest` 定义获取课程列表的请求：
+
+```ts
+const { loading, run: load } = useRequest(getCourse, {
+  onSuccess: (res) => setTableData(res),
+});
+```
+
+`useRequest` 直接给出了 `loading` 和触发方法（这里叫 `load`）。拿到数据后讲师还做了一次 `map`，给每条记录补上表格需要的 id，再塞进 `tableData`，具体映射以工程源码为准。父组件把三样东西传给 `CourseTable`：`loading`、`reloadData`（即 `load`，用来重新拉列表）、`data`（`tableData`）。
+
+这个设计的关键在于：**删除成功后要重新触发列表请求**。删掉一条数据后，前端不能只在本地把那行抹掉，而应再请求一次获取接口，让页面和数据库保持一致。
+
+### 表格：columns、render 与分页
+
+`CourseTable` 把 `data`、`loading` 传给 Ant Design 的 `<Table>`，再用 `columns` 定义表头数组：ID、title、price、point、category、costImage，以及操作列。表头用中文 `title` 显示，逻辑处理靠 `key` / `dataIndex`。
+
+两列需要自定义渲染，用 `render` 返回 JSX：
+
+- 缩略图列：`render` 里返回一个 `<img>`，设置好样式即可显示课程图片；
+- 操作列：`render` 返回一个 `<Space>`（间距组件）包住「编辑」「删除」两个 `Button`。
+
+分页更简单，`<Table>` 自带 `pagination` 属性，直接给 `pageSize`：
+
+```tsx
+<Table
+  dataSource={data}
+  loading={loading}
+  columns={columns}
+  pagination={{ pageSize: 4 }}
+/>
+```
+
+把 `4` 改成 `2`，每页就变成两条——改一个属性即可，不用自己写分页逻辑。
+
+### 删除：Popconfirm + 两个接口
+
+删除按钮外套一个 `Popconfirm`，提示「确认删除吗？这个操作不可逆」，用户确认后触发 `onConfirm` 里的 `handleRemove`：
+
+```tsx
+<Popconfirm
+  title="确认删除吗？"
+  description="这个操作不可逆"
+  onConfirm={() => handleRemove(row.id)}
+>
+  <Button>删除</Button>
+</Popconfirm>
+```
+
+`handleRemove` 拿到当前行的 id，调用删除接口：
+
+```ts
+// api/course.ts
+export const delCourse = (id: number) =>
+  request({ url: 'course', method: 'DELETE', data: { id } });
+```
+
+删除接口和获取接口共用同一个 RESTful 路径 `course`，只是把 method 换成 `DELETE`，并把 id 传过去。成功后回调父组件传进来的 `reloadData`，再发一次 GET 拉列表。
+
+打开浏览器 Network 就能验证：点确认删除时**同时发出两个请求**——先是 `DELETE`，紧接着是 `GET`，列表从 4 条变成 3 条。数据库里那条课程并没有被物理删掉，只是把 `del` 字段改成了 `1`，也就是**软删除**，列表查询会自动过滤掉它。
+
+### 类型小技巧：Omit
+
+获取接口那边还顺手演示了一个 TypeScript 工具类型：
+
+```ts
+type ReadCourseWithoutId = Omit<Course, 'id'>;
+```
+
+`Omit` 的第一个参数是基于哪个类型，第二个是要剔除的属性；把 `'id'` 换成 `'title'`，新类型里就没有 title 了。当前还没用上，留到下一集创建、编辑课程时复用——创建时前端不该传 id，正好用这个类型约束。
+
+后端这一侧，课程数据走的是 TypeORM + Mysql：`代码（已8期）/10-2/package.json` 的 dependencies 里能看到 `@nestjs/typeorm`、`typeorm`、`mysql2`，软删除的 `del` 字段就是在这套实体上维护的。
+
+## 小结
+
+- 管理页用 Ant Design 的 Layout 拆成 Header / Content / Footer，Header 的退出登录清空 localStorage 的 token。
+- `useRequest` 统一提供 loading、触发方法与 onSuccess，父组件把 data / loading / reloadData 传给表格。
+- `<Table>` 用 `columns` 定义表头，`render` 渲染缩略图与操作列，`pagination.pageSize` 控制每页条数。
+- 删除用 `Popconfirm` 二次确认，走 `DELETE course`，成功后必须重新触发获取接口刷新列表。
+- 删除是软删除（把 `del` 字段改为 1），`Omit` 用来给创建/编辑场景剔除 id 字段。
+
+## 下一步
+
+建议接着看《页面和数据联调—课程创建和编辑模块开发》——本集特意留了「编辑」按钮和 `Omit` 类型没展开，下一集正好把新建、编辑课程与表单回填补齐。也可以回看《项目初始化—接口参数DTO验证》，理解后端是如何配合这些请求做参数校验的。

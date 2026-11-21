@@ -1,0 +1,66 @@
+# 14-3-Node.js Cluster 模式
+
+上节课讲了生产环境和开发环境的异同，这节课展开讲一下框架和 PM2 在生产环境运行代码时使用的 Cluster 模式。官方为此写过一篇总结文档，感兴趣可以自己去读，本节课是对它的大局层面的简单总结。
+
+## 为什么需要 Cluster
+
+JavaScript 代码运行在单线程上。如果用 Node.js 做 Web Server，就无法享受多核运算的好处。换句话说，一个 Node.js 进程只能运行在一个 CPU 上，其他核就浪费掉了。
+
+## Cluster 是什么
+
+参考 Node.js 关于 cluster 的官方文档：单个 Node.js 实例在单个线程中运行，为了利用多核系统，可以启动一组 Node.js 进程来处理负载。也就是说，使用 cluster 可以在服务器上同时启动多个进程，每个进程跑的是同一份源代码，把一个进程的工作分给多个进程去做。更巧妙的是，这些进程可以同时监听同一个端口，共同完成任务。
+
+## 示例代码
+
+在 learn-mongo 项目里写一个 cluster.ts 来直观演示。首先拿到几个常用模块：
+
+```ts
+import http from 'http';
+import cluster from 'cluster';
+import os from 'os';
+```
+
+之前用 TS 写默认导入时，要写成 `import * as http from 'http'` 这种模式。但这里要写很多默认导入，不想用这种写法，而想用浏览器端熟悉的写法。可以通过一个 tsconfig 选项来改变：`esModuleInterop`，默认为 false，改成 true 之后就可以直接 `import http from 'http'` 了。具体的前因后果可以参照官方文档，这里不展开。
+
+接着看 cluster 上的一个属性 `isPrimary`。进程分两种：负责启动其他进程的叫 master 进程，好比工头，不做具体工作，只负责启动其他进程；`isPrimary` 为 true 时就代表当前是 master 进程，要去启动别的一系列进程来完成工作。
+
+注意 Node.js 16 以上版本这个属性叫 `isPrimary`，更早的版本叫 `isMaster`（官方已标记 deprecated，不再推荐使用，原因是 master 这个称呼不够中性，属性名做了修正）。如果你的 Node.js 在 16 以下，要使用 `isMaster`。
+
+先在 master 分支里验证一下：
+
+```ts
+if (cluster.isPrimary) {
+  console.log(`Master ${process.pid} is running`);
+  const cpuLines = os.cpus().length;
+  console.log(`CPU cores: ${cpuLines}`);
+  for (let i = 0; i < cpuLines; i++) {
+    cluster.fork();
+  }
+  cluster.on('exit', (worker) => {
+    console.log(`worker ${worker.process.pid} died`);
+  });
+}
+```
+
+一个惯用的做法是：worker 进程的数量根据 CPU 核数来定，几核就启动多少个 worker，完美利用多核资源。`os.cpus()` 调用后返回一个数组，取 length 就是核数。被启动的进程叫 worker 进程，顾名思义是干活的工人，接受请求、真正对外提供服务。
+
+每次 fork 一下，对应的脚本就会被重新执行一遍，只不过重新运行时 cluster 处于 worker 状态。剩下的就是 worker 要做的事：
+
+```ts
+} else {
+  http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('hello world');
+  }).listen(8000);
+
+  console.log(`Worker ${process.pid} started`);
+}
+```
+
+worker 之间可以共享任何 CPU 和连接资源，并且可以互相发送消息，这里对应的就是 HTTP 请求处理：返回一个 200，输出 hello world，最后监听 8000 端口。
+
+## 运行验证
+
+用 ts-node 运行 cluster.ts，可以看到 Master 已经在 running，CPU 是四核。稍等片刻，四个 worker 一个个被启动起来。这时访问 localhost:8000，返回了 hello world，说明例子成功了。
+
+这节课介绍了为什么要采用 cluster 模式、cluster 到底是什么，并用示例代码演示了怎样用它启动多个子进程，以及 master 和 worker 两类进程的区别。下节课看 cluster 的 worker 之间怎样通讯，以及它的实际优势。

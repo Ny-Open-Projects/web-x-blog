@@ -1,0 +1,93 @@
+# 后端接口开发—课程的创建接口开发
+
+> **导语**：课程的查询接口做完之后，本节补上「创建课程」接口。它和查询共用同一个资源路径，只是把 HTTP 方法换成 POST；难点不在写 CRUD，而在把三件事串起来：`@Body` 接参、`CreateCourseDto` 做入参校验、JWT 鉴权拦截未登录请求，最后交给 TypeORM 落库。读完你会清楚一个规范的写接口在 Controller、Service、DTO 三层各自该干什么。
+
+## 前置知识
+
+建议先掌握《Nestjs提供Get和Post请求》里的请求方法装饰器、`@Body` 取参方式，以及《如何理解Nestjs的提供者Providers》中 Service 的注入与使用。本节紧接《后端接口开发—课程的查询接口开发》，会复用它的 Controller、Service 与鉴权写法；DTO 的校验规则可参考《Nest的管道验证DTO》。
+
+## 正文
+
+### 同一个资源路径，用 HTTP 方法区分逻辑
+
+课程查询和课程创建访问的是同一个地址（`http://localhost:3000/course` 这一类资源路径），区别只在方法：GET 走查询，POST 走创建。这正是 RESTful 的基本思路——路径表示资源，方法表示对资源做什么动作。落到 NestJS 里，就是在同一个 Controller 里并列挂 `@Get()` 与 `@Post()` 两个方法，而不是为「创建」再新造一个路径。
+
+对低代码平台来说，这种约定尤其重要：后续编辑模块、发布接口、组件资源接口数量很多，如果每个操作都另起路径，路由表会迅速失控。用「资源 + 方法」组织，前端按 Schema 生成请求时也更容易做统一封装。
+
+### 控制器层：接参、校验、再往下传
+
+在 `CourseController` 里新增一个由 `@Post()` 装饰的 `create()` 方法，先用 `@Body()` 接收前端提交的数据，参数类型声明为 `CreateCourseDto`。
+
+这里的关键是顺序：请求体先经过 DTO 校验，校验通过之后，方法体里拿到的才是可信数据，这时再调用 `CourseService.create(dto)`。把「校验」放在 Controller 入口、由管道自动完成，业务代码就不需要再写一堆 `if` 去判断字段有没有传、类型对不对。口播里反复念的 `Cost detail`、`course create dto`，对应的就是这个 `CreateCourseDto`，
+
+`CreateCourseDto` 约束的是创建课程所需的一整组字段：课程标题 `title`、课程封面图、价格 `price`、评分 `point`、分类 `category` 等，这一版都按字符串类型校验。字段的具体名称与类型以工程里的实体/DTO 定义为准，不要凭口播自行补字段。
+
+### 服务层与 TypeORM 落库
+
+`CourseService.create()` 接收 Controller 传来的 DTO，调用 TypeORM 仓储的异步保存方法把数据写入数据库，大致是 `await this.courseRepository.save(...)`，因此方法要声明为 `async`。写法上有两个细节：
+
+- 把 DTO 展开成对象后直接交给 `save`，避免逐个字段手工搬运；DTO 里已经校验过的字段就是这一版要落库的字段集合。
+- 额外补一个**软删除状态字段**。这个字段前端不会传，需要后端自己加上，初始值给 `0`，表示「未删除」。查询接口后续就能靠它过滤掉已删除的课程。用软删除而不是物理 `DELETE`，是后台管理类数据的常见做法，也方便低代码平台里做资源回收与历史追溯。
+
+保存成功后接口返回 `code = 0`，前端据此判断写入成功。用接口调试工具发一次 POST、再刷新 `course` 表，能看到新增一条记录（例如 `id = 2`），就说明整条链路通了。
+
+### 写操作必须挂鉴权
+
+创建属于写操作，不能谁都能调。和查询接口保持一致，在创建接口上补一层 JWT 校验：从请求 `headers` 里取登录时拿到的 token，验证通过才执行 Service；token 缺失或被篡改就直接抛异常，提示「请先登录」。联调时可以故意改坏 headers 里的 token 验证拦截是否生效，这是很实用的一步自测。
+
+把鉴权做成可复用的守卫/装饰器，而不是在每个方法里复制一遍校验代码，后面低代码平台的登录态、RBAC 权限体系都是在这个基础上长出来的。
+
+### 工程结构：pnpm workspace 多包
+
+本项目的后端并不是一个孤立仓库，而是 `lowcode` 这个 pnpm workspace 里的 `server` 子包，与 `client`、`share`、`release` 并列。根目录 `代码（已8期）/代码（已8期）/9-2/lowcode/package.json` 的脚本集中体现了这一点：
+
+```json
+{
+  "name": "lowcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run:client": "pnpm --filter client run dev",
+    "run:server": "pnpm --filter server run start:dev",
+    "run:share": "pnpm --filter share run dev",
+    "run:release": "pnpm --filter release run dev",
+    "build:client": "pnpm --filter client run build",
+    "build:server": "pnpm --filter server run build",
+    "build:release": "pnpm --filter release run build",
+    "build:share": "pnpm --filter share run build",
+    "start:server": "pnpm --filter server run start:prod",
+    "start:release": "pnpm --filter release run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.201",
+    "@types/node": "18",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.11.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
+```
+
+本地联调执行 `pnpm --filter server run start:dev` 即可；`share` 子包用来放前后端共用的类型与常量，创建接口的 DTO 与之保持同一套字段约定，能显著减少前后端对不齐的情况。配套资料里还有 `packages/client/tsconfig.json`、`packages/server/nest-cli.json` 等配置，需要时按相对路径对照。
+
+## 小结
+
+- 创建接口与查询接口共用资源路径，靠 POST / GET 区分，符合 RESTful 约定。
+- Controller 用 `@Post()` + `@Body()` 接参，入参交给 `CreateCourseDto` 校验，通过后才调 Service。
+- Service 用 `async/await` 调 TypeORM 的 `save` 落库，并把 DTO 展开成对象，另补默认值为 `0` 的软删除字段。
+- 写操作要挂 JWT 鉴权，token 不正确时提示「请先登录」，不进入业务逻辑。
+- 项目是 pnpm workspace 多包结构，后端为 `server` 子包，用 `pnpm --filter server ...` 启动与构建。
+
+## 下一步
+
+创建接口补齐后，课程这一组 CRUD 还差修改和删除，建议接着看《后端接口开发—课程的修改接口开发》，它会在本节基础上验证 DTO 校验消息与异常过滤器的配合。若想把入参校验这块吃得更透，可对照《Nest的管道验证DTO》与《项目初始化—接口参数DTO验证》。

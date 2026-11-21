@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.7</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>com.travel.agent</groupId>
+  <artifactId>981-demo</artifactId>
+  <version>1.0.0</version>
+  <name>981-demo</name>
+  <description>多 Agent 自主决策旅游规划（AgentScope Java 2.0.3 + A2A + MCP 风格工具）</description>
+
+  <properties>
+    <java.version>21</java.version>
+    <agentscope.version>2.0.3</agentscope.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!-- Web 层：主管 Agent 暴露与用户交互的接口（课程 13-2） -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- 生产可观测：健康检查 / 指标（课程 13-3 跟踪与 Token 消费分析同源） -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <!-- actuator / prometheus 端点管控：业务 API 匿名放行，观测端点 Basic Auth -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+    <!-- 熔断降级：远程成员调用失败时的兜底（仅用 core API + 手动装配，避免 starter 在 Boot 下的自动配置干扰） -->
+    <dependency>
+      <groupId>io.github.resilience4j</groupId>
+      <artifactId>resilience4j-circuitbreaker</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+    <!-- A2A 通道重试：指数退避限次，兜住瞬时网络抖动 / 远端 5xx（与熔断同一套 core API） -->
+    <dependency>
+      <groupId>io.github.resilience4j</groupId>
+      <artifactId>resilience4j-retry</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+
+    <!-- AgentScope Java 核心：ReActAgent / Toolkit / @Tool / Model / ModelRegistry -->
+    <dependency>
+      <groupId>io.agentscope</groupId>
+      <artifactId>agentscope-core</artifactId>
+      <version>${agentscope.version}</version>
+    </dependency>
+    <!-- 真实模型供应商（生产模式按需启用；default profile 用 offline 规则模型，不调 API） -->
+    <dependency>
+      <groupId>io.agentscope</groupId>
+      <artifactId>agentscope-extensions-model-dashscope</artifactId>
+      <version>${agentscope.version}</version>
+    </dependency>
+    <!-- Nacos 注册中心（生产模式用 Nacos 做 AgentCardResolver；default 用进程内注册表） -->
+    <dependency>
+      <groupId>com.alibaba.nacos</groupId>
+      <artifactId>nacos-client</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

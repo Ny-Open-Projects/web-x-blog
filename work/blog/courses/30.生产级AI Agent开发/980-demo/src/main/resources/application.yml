@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: transfer-demo
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
+  # H2 内存库：默认离线即可跑通「入库」，无需 MySQL（课程用 MyBatis Plus + MySQL，字段/转换层一致）
+  datasource:
+    url: jdbc:h2:mem:transfer;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      # 默认关闭；仅在本地调试时显式开启，避免部署到非 localhost 时暴露整库
+      enabled: ${H2_CONSOLE_ENABLED:false}
+      path: /h2-console
+
+# 离线开关：true 时 ChatModel 用 OfflineChatModel 返回固定 JSON（不联网、不填 Key）
+transfer:
+  offline: ${TRANSFER_OFFLINE:true}
+  llm:
+    # 抽取链路的 token 成本上限（进程内累计）：超限后创建请求直接 400 拒绝
+    max-token-budget: ${TRANSFER_LLM_MAX_TOKEN_BUDGET:200000}
+    retry:
+      # LLM 通道重试：指数退避（首次 500ms，逐次 ×2）+ 最多 3 次
+      max-attempts: ${TRANSFER_LLM_RETRY_MAX_ATTEMPTS:3}
+      wait-ms: ${TRANSFER_LLM_RETRY_WAIT_MS:500}
+    base-url: ${TRANSFER_LLM_BASE_URL:}
+    model: ${TRANSFER_LLM_MODEL:}
+    api-key: ${OPENAI_API_KEY:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+server:
+  port: 8080
+
+logging:
+  pattern:
+    # 把 traceId/spanId 注入每条日志：一次请求的全链路日志可用 traceId 串起来
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
+---
+# —— default profile（离线）专用：排除 OpenAI 自动配置，避免 Spring AI 2.0.1 因缺凭证启动失败 ——
+# prod profile 不加载本段，因此 OpenAI 自动配置照常生效，可接真实模型。
+spring:
+  config:
+    activate:
+      on-profile: default
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioTranscriptionAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiEmbeddingAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiImageAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiModerationAutoConfiguration

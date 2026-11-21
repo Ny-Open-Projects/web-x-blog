@@ -1,0 +1,40 @@
+{
+  "name": "lowcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run:client": "pnpm --filter client run dev",
+    "run:server": "pnpm --filter server run start:dev",
+    "run:share": "pnpm --filter share run dev",
+    "run:release": "pnpm --filter release run dev",
+    "build:client": "pnpm --filter client run build",
+    "build:server": "pnpm --filter server run build",
+    "build:release": "pnpm --filter release run build",
+    "build:share": "pnpm --filter share run build",
+    "start:server": "pnpm --filter server run start:prod",
+    "start:release": "pnpm --filter release run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.201",
+    "@types/node": "18",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.11.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "esbuild"
+    ]
+  }
+}

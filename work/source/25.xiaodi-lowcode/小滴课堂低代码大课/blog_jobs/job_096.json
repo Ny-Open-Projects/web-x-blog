@@ -1,0 +1,35 @@
+{
+ "idx": 96,
+ "rel": "03.第三期【11.1-13.10】/11-6.低代码项目后端接口开发—手机验证码接口【网盘分享wpfx.org.cn】 .md",
+ "title": "低代码项目后端接口开发—手机验证码接口",
+ "stage": "03.第三期【11.1-13.10】",
+ "materials": {
+  "code": [
+   {
+    "path": "代码（已8期）/代码（已8期）/11-6/lowcode/package.json",
+    "snippet": "{\n  \"name\": \"lowcode\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"run:client\": \"pnpm --filter client run dev\",\n    \"run:server\": \"pnpm --filter server run start:dev\",\n    \"run:share\": \"pnpm --filter share run dev\",\n    \"run:release\": \"pnpm --filter release run dev\",\n    \"build:client\": \"pnpm --filter client run build\",\n    \"build:server\": \"pnpm --filter server run build\",\n    \"build:release\": \"pnpm --filter release run build\",\n    \"build:share\": \"pnpm --filter share run build\",\n    \"start:server\": \"pnpm --filter server run start:prod\",\n    \"start:release\": \"pnpm --filter release run start\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@types/lodash\": \"^4.14.201\",\n    \"@types/node\": \"18\",\n    \"@types/react\": \"^18.2.37\",\n    \"@types/react-dom\": \"^18.2.15\",\n    \"typescript\": \"^5.2.2\"\n  },\n  \"dependencies\": {\n    \"@ant-design/icons\": \"^5.2.6\",\n    \"antd\": \"^5.11.2\",\n    \"react\": \"^18.2.0\",\n    \"react-dom\": \"^18.2.0\"\n  }\n}\n"
+   },
+   {
+    "path": "代码（已8期）/代码（已8期）/11-6/lowcode/packages/client/package.json",
+    "snippet": "{\n  \"name\": \"@lowcode/client\",\n  \"private\": true,\n  \"version\": \"0.0.0\",\n  \"type\": \"module\",\n  \"scripts\": {\n    \"dev\": \"vite\",\n    \"build\": \"tsc && vite build\",\n    \"lint\": \"eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0\",\n    \"preview\": \"vite preview\"\n  },\n  \"dependencies\": {\n    \"@lowcode/share\": \"workspace:^\",\n    \"antd\": \"^5.11.2\",\n    \"autoprefixer\": \"^10.4.16\",\n    \"postcss\": \"^8.4.31\",\n    \"tailwindcss\": \"^3.3.5\"\n  },\n  \"devDependencies\": {\n    \"@types/react\": \"^18.2.37\",\n    \"@types/react-dom\": \"^18.2.15\",\n    \"@typescript-eslint/eslint-plugin\": \"^6.10.0\",\n    \"@typescript-eslint/parser\": \"^6.10.0\",\n    \"@vitejs/plugin-react\": \"^4.2.0\",\n    \"eslint\": \"^8.53.0\",\n    \"eslint-plugin-react-hooks\": \"^4.6.0\",\n    \"eslint-plugin-react-refresh\": \"^0.4.4\",\n    \"vite\": \"^5.0.0\"\n  }\n}\n"
+   },
+   {
+    "path": "代码（已8期）/代码（已8期）/11-6/lowcode/packages/client/tsconfig.json",
+    "snippet": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2020\",\n    \"useDefineForClassFields\": true,\n    \"lib\": [\"ES2020\", \"DOM\", \"DOM.Iterable\"],\n    \"module\": \"ESNext\",\n    \"skipLibCheck\": true,\n\n    /* Bundler mode */\n    \"moduleResolution\": \"bundler\",\n    \"allowImportingTsExtensions\": true,\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"noEmit\": true,\n    \"jsx\": \"react-jsx\",\n\n    /* Linting */\n    \"strict\": true,\n    \"noUnusedLocals\": true,\n    \"noUnusedParameters\": true,\n    \"noFallthroughCasesInSwitch\": true\n  },\n  \"include\": [\"src\"],\n  \"references\": [{ \"path\": \"./tsconfig.node.json\" }]\n}\n"
+   }
+  ],
+  "notes": [
+   "代码（已8期）/代码（已8期）/11-6/lowcode/packages/client/tsconfig.node.json",
+   "代码（已8期）/代码（已8期）/11-6/lowcode/packages/server/nest-cli.json",
+   "代码（已8期）/代码（已8期）/11-6/lowcode/packages/server/package.json",
+   "代码（已8期）/代码（已8期）/11-6/lowcode/packages/server/tsconfig.build.json",
+   "代码（已8期）/代码（已8期）/11-6/lowcode/packages/server/tsconfig.json",
+   "代码（已8期）/代码（已8期）/11-6/lowcode/packages/share/package.json",
+   "代码（已8期）/代码（已8期）/11-6/lowcode/packages/share/tsconfig.json",
+   "代码（已8期）/代码（已8期）/11-6/lowcode/pnpm-lock.yaml",
+   "代码（已8期）/代码（已8期）/11-6/lowcode/pnpm-workspace.yaml"
+  ]
+ },
+ "transcript_path": "D:/ai/video2text/output/小滴课堂低代码大课\\audio\\03.第三期【11.1-13.10】\\11-6.低代码项目后端接口开发—手机验证码接口【网盘分享wpfx.org.cn】 .md",
+ "out_path": "D:/ai/video2text/output/小滴课堂低代码大课\\blog\\03.第三期【11.1-13.10】\\11-6.低代码项目后端接口开发—手机验证码接口【网盘分享wpfx.org.cn】 .md"
+}

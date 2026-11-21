@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: 981-demo
+  profiles:
+    active: prod
+
+app:
+  agent:
+    model-mode: dashscope
+    model-name: dashscope:qwen-plus
+    discovery: nacos
+    nacos-server-addr: ${AGENTSCOPE_NACOS_SERVER_ADDR:127.0.0.1:8848}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: 981-demo
+      env: prod
+
+logging:
+  level:
+    com.travel.agent: INFO
+    io.agentscope: INFO

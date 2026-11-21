@@ -1,0 +1,27 @@
+# 13-24-配置 webpack 生成对应的结果
+
+上节课我们分析过整体的解题思路，这节课来完成任务：把一个支持 ES Modules 的入口文件（index.js）和一个基础模板页面（template.html），生成对应的 page.html、一个处理过后浏览器支持的脚本入口 main.js，以及分离出来的 bundle.css。配置会自动在 page.html 中加上这两个文件的引用。
+
+第一步是创建这两个需要被处理的文件。我创建了一个新的文件夹叫 webpack，相关的文件都放在里面。第一个文件是 index.js，把要处理的 CSS 引进来，另外为了测试 JS，故意写了一行没有用的 `console.log`。第二个文件是 template.html，和之前的 page.html 完全一样，拷贝一份过来即可。
+
+接着安装依赖。这里需要几个包：首先是 webpack 主体，除了它还要安装 webpack-cli。webpack-cli 是 webpack 的命令行工具，在新版 webpack 中，命令行运行必须要有它，这一点要特别注意。另外 webpack 默认只能处理 JS 模块文件，处理 CSS 需要对应的 Loader，所以添加 css-loader。css-loader 会默认把 CSS 以脚本的形式写在 JS 中，我们还需要一个把 CSS 单独分离出来的插件，叫 mini-css-extract-plugin。最后还需要一个根据模板生成 HTML 页面的插件，就是 html-webpack-plugin。有了这几个 Loader 和插件就万事俱备了，大家自己安装一下依赖。我安装的都是比较新的版本，webpack 发展非常快，当时的版本已经是 5.64.4。
+
+接下来写配置文件 webpack.config.js。首先把需要的依赖拿过来，require 对应的 path。这里 TypeScript 会报一个错误，因为在 ts 中不能使用 require，要用 import/export。但这个文件夹已经不属于 ts 的范畴了，我们写的是 webpack 配置文件，用的是 js，所以可以在文件最前面加一行注释，让它不要报错。
+
+第一步是拿 path，因为接下来要处理大量跟路径相关的操作。然后把两个插件引过来：一个是把 CSS 单独抽出来的 miniCssExtractPlugin，另一个是 HTML 处理的 htmlWebpackPlugin。接着创建一个变量 buildFileDestination（dst），表示生成的文件应该 build 到哪里去。这里自然是 `path.resolve(__dirname, '../app/public')`，也就是生成到 public 文件夹中。
+
+变量声明完后就可以写配置主体了，也就是 `module.exports`。第一个要设定的是 mode，设定成 production。虽然它默认就是 production，但最好显式声明一下，不声明会报一个 warning。第二个要声明的是 context。context 是一个基础目录，绝对路径，用于解析入口点和 Loader，默认使用当前目录。我们这里也要使用当前目录，但文档推荐在配置中传入一个值，这样配置就独立于当前工作目录，所以我们配置成 `path.resolve(__dirname, '../webpack')`。
+
+两个通用配置完毕后，写具体的配置项。第一个当然是 entry，入口文件就是 index.js。接下来是 output。第一个是输出到哪里，path 自然是我们的 buildFileDestination。然后是 filename，我们希望文件名是 bundle 加上 placeholder。placeholder 有很多种，编译过后会根据你添加的占位符生成对应的名称，比如添加了 [name] 就会替换成入口文件的名称。这里要使用的是大家非常熟悉的 hash，它会根据文件内容生成一个独一无二的哈希值，所以写成 `bundle.[hash].js`。
+
+这里还要配置 publicPath，即输出文件的公共路径。还记得我们的配置吗，config.default.ts 中设定 static 访问的 path 是 public 和 uploads，所以希望访问 public 文件夹才能拿到这些静态文件，这里就配置成 `/public`。现在 output 和 entry 就配置完毕了。
+
+接下来是 module 的处理，也就是 rules。这里的 rules 很简单，只要处理 CSS 文件。test 写一个正则 `/\.css$/`，后面的 `$` 表示匹配到结尾。use 使用两个 loader：最前面使用 MiniCssExtractPlugin.loader，然后是 css-loader。也就是说先用 css-loader 处理，再用插件把 CSS 单独抽取出去，生成一个独立的文件。JS 文件可以自动处理，而且目前我们还没有引用第三方 JS 库，所以 module 里只处理 CSS 就够了。
+
+最后是 plugin，对整体结果做转换。这里需要两个 plugin。第一个是 MiniCssExtractPlugin，参数很简单，filename 指定生成的文件名，我们使用 [name] 加哈希，后缀 .css。另一个是 HtmlWebpackPlugin，两个参数：第一个是生成的 filename，这里自然叫 page.html，也就是最终要拷贝到 views 文件夹的文件；第二个是 template，使用哪个模板文件，这里配置成 `path.resolve(__dirname, './template.html')`。
+
+到这里整个配置文件就写完了，回顾一遍：入口文件是 index.js，里面有 CSS 和 JS 两部分；output 输出到 public 文件夹，文件名是 bundle 加哈希，publicPath 设置为 public，因为 public 和 uploads 下可以访问静态文件，而且我们也是 build 到 public 下面；module 只处理 CSS，用 MiniCssExtractPlugin.loader 和 css-loader 一起处理；最后通过 plugin 把 CSS 单独抽出来，并根据 template.html 生成 page.html。
+
+现在验证配置是否好用。在 package.json 中创建一个新的 npm script，叫 build:template，命令是 `npx webpack --config webpack/webpack.config.js`。先看一下 public 文件夹，里面是我之前测试的内容，先删掉，退回根目录，运行 `npm run build:template`。稍等片刻，构建输出成功。看一下 app/public 中生成的文件，主要是第一个 JS 文件和对应的 CSS 文件。打开 CSS 文件可以看到，OpsFlow 组件库的样式被单独提取了出来。再看生成的 page.html，除了模板文件的内容（被压缩了，但还能看出端倪），JS 和 CSS 都被成功引入，并且带上了我们配置的 publicPath，也就是 /public 前缀。
+
+这样我们就按照原计划生成了对应的结果，任务完成了一半。目前 page.html 还在 public 文件夹下，我们要把它拷贝到 views 文件夹下，因为所有跟页面生成相关的模板都在 views 文件夹里。下节课看看怎样完成这个任务，并最终显示出结果。

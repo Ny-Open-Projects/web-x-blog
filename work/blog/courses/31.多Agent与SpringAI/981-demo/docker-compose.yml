@@ -1,0 +1,51 @@
+services:
+  # ── 可选：Nacos 注册中心（opt-in，default profile 走 in-process，用不到它）──
+  # 启用：docker compose --profile nacos --env SPRING_PROFILES_ACTIVE=prod up -d（需 prod 或显式开 discovery=nacos）
+  nacos:
+    image: nacos/nacos-server:v3.1.0
+    profiles: ["nacos"]
+    container_name: nacos
+    environment:
+      MODE: standalone
+      NACOS_AUTH_ENABLE: "false"
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8848/nacos/v1/console/health/readiness"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  agent-app:
+    build: .
+    container_name: 981-demo
+    environment:
+      # default = 离线演示（不调真实模型、in-process 发现，不起 Nacos）；
+      # prod = 真实模型 + Nacos 发现，需配合 --profile nacos 并覆盖本变量
+      SPRING_PROFILES_ACTIVE: default
+      AGENTSCOPE_NACOS_SERVER_ADDR: nacos:8848
+      # 容器/多网卡场景必填：成员注册到 Nacos 时对外暴露的 IP，为空回退本机 IP
+      # 透传宿主机环境变量，便于 docker compose 部署时显式指定可达 IP（如宿主机局域网 IP）
+      APP_AGENT_ADVERTISE_IP: ${APP_AGENT_ADVERTISE_IP:-}
+    ports:
+      - "8080:8080"
+
+  # ── 可选：Jaeger 链路追踪后端（opt-in，默认不启动）──────────────────────
+  # 启用：docker compose --profile tracing up -d
+  # 访问：http://localhost:16686
+  #
+  # 说明：本工程默认不引入 OTLP exporter（刻意保持依赖闭包最小、离线构建可复现），
+  #       因此启动 Jaeger 不会自动收到链路。应用侧已就绪的是「链路标识与上下文透传」：
+  #       TraceIdFilter 解析/回写 W3C traceparent，traceId 落 MDC 日志。
+  #       要真正导出 span，按 README「链路追踪」章节补两个依赖 + 一行配置即可。
+  jaeger:
+    image: jaegertracing/all-in-one:1.57
+    container_name: jaeger
+    profiles: ["tracing"]
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "16686:16686"   # Jaeger UI
+      - "4317:4317"     # OTLP gRPC
+      - "4318:4318"     # OTLP HTTP

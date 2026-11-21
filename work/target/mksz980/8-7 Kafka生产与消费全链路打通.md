@@ -1,0 +1,117 @@
+# 8-7 Kafka生产与消费全链路打通
+
+## 【学习目标】
+
+- 用 Kafka Tool 从外部视角观察 broker、topic、consumer 与消息位点，建立「可视化排障」习惯。
+- 独立定位并修复「生产者报 500、topic 已创建但投递失败」的序列化类型不匹配问题。
+- 掌握 `@KafkaListener` 消费者三要素（topics、groupId、消息类型），并能读懂 ConsumerCoordinator 的 offset 日志。
+
+## 【正文】
+
+### 一、Kafka Tool：先给链路装上「仪表盘」
+
+排查消息链路问题，最怕的是「代码不知道有没有发出去、Broker 不知道有没有收到」。推荐用 **Kafka Tool**（官网 kafkatool.com）做外部观测：Download 页选择对应操作系统的安装包，普通软件式安装，进入安装目录点击可执行文件即可运行（目录下附有一个 TXT 说明文件）。
+
+主界面提供 broker、topic、consumer 三类视图。首次使用进入添加连接页，填写项很少：
+
+- 集群名：随意起，仅本地标识用；
+- Bootstrap servers：Kafka 服务器地址，本地启动填 `localhost:9092`；
+- 版本：本项目使用 Kafka 3.7。**3.7 起 Kafka 不再依赖 Zookeeper**（KRaft 模式），所以 Zookeeper 一栏留空即可。
+
+点 Test 验证连通，成功后 OK 进入主界面。此时既没有 topic 也没有 consumer，正好用来验证代码能否自动创建 topic、消费者能否自动注册。
+
+### 二、启动验证与 500 错误排查
+
+启动项目前，先把 Controller 里尚未改造完的激活逻辑临时注释掉、直接返回 `R.success()`，这一轮的目标只有一个：**验证消息能否发给 Kafka 并自动创建 topic**。临时简化的 service 实现如下（原稿代码，保留不动）：
+
+```java
+public class ProductSaleServiceImpl implements ProductService {
+    public void sale(ProductSaleParam param) {
+        BbSalesRecord bbSalesRecord = SaleRecordConvert.INSTANCE.paramToModel(param);
+        // 发送消息到 Kafka 主题
+        kafkaTemplate.send("product_sale_topic", bbSalesRecord);
+    }
+}
+```
+
+三个背景条件叠加，保证一次销售必然触发发送：Nacos 里阈值配的是 245，而商品 1 在仓库 1 的库存正好是 245，任何一次销售都会击穿阈值。
+
+重启过程中还可能遇到 `count` 找不到的编译错误，那是早期验证 Nacos 取值用的测试 Controller 残留，它的使命已经完成，直接删除即可。
+
+删掉后项目正常启动。发起一次销售（商品 1、仓库 1、数量 1、日期 2025-11-30），**返回 500**。但数据库侧一切正常：库存 245 变成了 244，销售记录也插入了，说明业务落库成功，错误发生在 Kafka 操作这一步。刷新 Kafka Tool，topic 确实已被自动创建。topic 有了为什么还报错？打段点逐步放行：
+
+1. debug 确认阈值 245 能正常从 Nacos 取到；
+2. 继续往下走，错误信息浮现：**无法把 Integer 类型转换成 String 类型**，即 `Integer` 的 productId 转不成 `String`；
+3. Kafka Tool 里该 topic 的偏移量、结束位点、大小都是 0，再次印证「topic 创建成功，但消息发送失败」。
+
+根因链条完整了：`value-serializer` 配的是 `StringSerializer`（8-5 所配），而发送的内容是 `BbSalesRecord` 对象（其 productId 为 `Integer`），序列化阶段类型不匹配直接抛错。修正方式很直接：**把商品 ID 转成 `String` 再传输**。重启后再次发送，返回 200 success；Kafka Tool 刷新后该 topic 出现 1 条数据，生产者侧正式打通。
+
+上述排查过程本身就是面试素材：500 但业务库已落库，说明失败点在异步的外围操作；先看「topic 是否创建」，再看「消息是否真正写入（size/offset 是否为 0）」，最后靠断点看序列化异常，三步定位，远比盲目翻日志高效。
+
+### 三、消费者编写：@KafkaListener 三要素
+
+新建 `consumer` 包，定义 `AgentConsumerService`。Kafka 消费者需要监听器注解，核心是三个参数：
+
+```java
+@Service
+@KafkaListener(topics = TopicConstant.PRODUCT_SALE_TOPIC, groupId = "group1")
+public class AgentConsumerService {
+    public void agentConsumer(String message) {
+        log.info("receive message: {}", message);
+    }
+}
+```
+
+1. **topics**：消费哪个 topic，可传列表。当前只传一个，直接用常量 `TopicConstant.PRODUCT_SALE_TOPIC`（8-6 定义的常量类）。
+2. **groupId**：消费者组，起名 `group1`。同一个组内多个消费者分摊分区消费，不同组各自独立消费全量，这是 8-9「增加消费者组提速」的理论基础。
+3. **消息类型**：生产者传的是 String 类型的商品 ID，所以方法签名用 `String message` 直接接收，Spring Kafka 按反序列化结果完成类型转换。
+
+第一版消费者只负责打印日志，不掺业务逻辑，先把「能否消费」验证通过，再叠加 Agent 触发，符合小步验证的调试节奏。
+
+### 四、读懂 offset 日志：消费位点的第一次握手
+
+重启项目后观察 topic：只有一个分区（分区 0），end 为 1，size 为 1，status 为 0。消费者容器的日志如下：
+
+```
+2025-11-30 20:04:48,240 [org.springframework.kafka.KafkaListenerEndpointContainer#0-C-1] INFO o.a.k.c.consumer.internals.ConsumerCoordinator - [Consumer clientId=consumer-group-1, groupId=group-1] Found no committed offset for partition product_sale_topic-0
+2025-11-30 20:04:48,245 [org.springframework.kafka.KafkaListenerEndpointContainer#0-C-1] INFO o.a.k.c.consumer.internals.ConsumerCoordinator - [Consumer clientId=consumer-group-1, groupId=group-1] Found no committed offset for partition product_sale_topic-0
+2025-11-30 20:04:48,252 [org.springframework.kafka.KafkaListenerEndpointContainer#0-C-1] INFO o.a.k.c.consumer.internals.ConsumerCoordinator - [Consumer clientId=consumer-group-1, groupId=group-1] Resetting offset for partition product_sale_topic-0 to position FetchPosition(offset=Optional.empty, currentLeader=LeaderAndEpoch(Optional[localhost], id: 1 pack: null), epoch=0)
+2025-11-30 20:04:48,278 [org.springframework.kafka.listener.KafkaMessageListenerContainer - group-1: partitions assigned: [product_sale_topic-0]
+```
+
+这段日志是消费者加入组的标准握手过程，信息量很大：
+
+- **Found no committed offset**：该消费组在此分区上没有已提交的位点，第一次消费，Kafka 不知道从哪里接着读；
+- **Resetting offset**：没有已提交位点时，消费者按 `auto-offset-reset` 策略重置起始位点（`earliest` 从最早读起，`latest` 从最新读起），该策略的取舍在 8-9 专门展开；
+- **partitions assigned: [product_sale_topic-0]**：分区分配完成，该消费者正式领到分区 0。
+
+Kafka Tool 的 consumer 视图此时也已显示注册成功。但刷新观察会发现：那条已存在的消息并没有被立即消费，再发一条新消息，消费者立刻被触发，打印出 `message = 1`，随后偏移量推进到 3，end 也变成 3，消费位点追平生产位点。**投递与消费的整条链路至此打通。**
+
+### 五、全链路总览
+
+```mermaid
+flowchart LR
+    A[POST /sale/sale<br/>销售请求] --> B[ProductSaleService]
+    B --> C[插入销售记录<br/>扣减库存]
+    C --> D{数量 < 阈值?}
+    D -- 否 --> E[直接返回]
+    D -- 是 --> F[KafkaTemplate.send<br/>String 商品ID]
+    F --> G[(Kafka Broker<br/>sale-topic)]
+    G --> H[@KafkaListener<br/>AgentConsumerService]
+    H --> I[log.info 打印消息<br/>后续触发工作流]
+```
+
+回顾这条链路上的三个关键决策：消息体用 String（对齐 `StringSerializer`，规避类型不匹配）、topic 用常量管理（避免魔法值）、消费者只打印不业务（先验证链路再叠逻辑）。下一节将在这条链路上补齐可靠性配置，让「消息不丢失」从事后补救变为事前设计。
+
+## 【易错点 / 面试题】
+
+1. **面试官问：生产者发送成功但消费者收不到，怎么排查？**
+   答：分层定位。先用 Kafka Tool 看 topic 的 size/end，为 0 说明根本没发进来（查生产者序列化、acks、报错日志）；size 正常再看 consumer 视图是否注册成功、groupId 是否与生产者预期一致；最后看消费者日志里有无 `partitions assigned` 与 `Resetting offset`，确认位点重置策略是否符合预期。
+2. **为什么这里消息体要从 POJO 改成 String？**
+   因为 `value-serializer` 是 `StringSerializer`，序列化器与消息类型必须匹配。两个修正方向：改消息体为字符串，或改序列化器为 JSON 序列化器并让消费者对称配置。本课程选择了前者，因为下游只需要商品 ID。
+3. **`topics` 与 `groupId` 分别起什么作用？**
+   topics 决定消费哪些主题（支持多主题监听）；groupId 决定消费者属于哪个消费组，同组内分区被组内消费者分摊，实现横向扩容；换一个 groupId 就等于一条独立的消费链路，会从头消费全量消息。
+
+## 【小结】
+
+本节打通了 Kafka 的生产与消费全链路：外部用 Kafka Tool 观测，内部以 `KafkaTemplate` 投递、`@KafkaListener` 接收，并完整走了一遍「500 报错 → 定位序列化类型不匹配 → 商品 ID 转 String → 投递成功 → offset 追平」的排障全程。消息真正被消费后，下一跳就是触发 Agent 工作流（对应 8-8 的改造）；这套「大模型生成 → 结构化提取 → 转换入库」的 Agent 主链路在工程中的最小实现见 `980-demo/src/main/java/com/carl/ai/transfer/agent/TransferAgent.java` 与 `980-demo/src/main/java/com/carl/ai/transfer/extract/TransferOrderExtractor.java`，落库编排见 `980-demo/src/main/java/com/carl/ai/transfer/service/TransferOrderServiceImpl.java`。

@@ -1,0 +1,25 @@
+{
+ "idx": 55,
+ "rel": "01.第一期【1.1-5.3】/3-4.Nextjs 路由处理 Route Groups + 动态路由【网盘分享wpfx.org.cn】 .md",
+ "title": "Nextjs 路由处理 Route Groups + 动态路由",
+ "stage": "01.第一期【1.1-5.3】",
+ "materials": {
+  "code": [
+   {
+    "path": "代码（已8期）/代码（已8期）/3-4/package.json",
+    "snippet": "{\n  \"name\": \"next-test\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"scripts\": {\n    \"dev\": \"next dev\",\n    \"build\": \"next build\",\n    \"start\": \"next start\",\n    \"lint\": \"next lint\"\n  },\n  \"dependencies\": {\n    \"react\": \"^18\",\n    \"react-dom\": \"^18\",\n    \"next\": \"14.0.1\"\n  },\n  \"devDependencies\": {\n    \"typescript\": \"^5\",\n    \"@types/node\": \"^20\",\n    \"@types/react\": \"^18\",\n    \"@types/react-dom\": \"^18\",\n    \"autoprefixer\": \"^10.0.1\",\n    \"postcss\": \"^8\",\n    \"tailwindcss\": \"^3.3.0\"\n  }\n}\n"
+   },
+   {
+    "path": "代码（已8期）/代码（已8期）/3-4/pnpm-lock.yaml",
+    "snippet": "lockfileVersion: '6.0'\n\nsettings:\n  autoInstallPeers: true\n  excludeLinksFromLockfile: false\n\ndependencies:\n  next:\n    specifier: 14.0.1\n    version: 14.0.1(react-dom@18.0.0)(react@18.0.0)\n  react:\n    specifier: ^18\n    version: 18.0.0\n  react-dom:\n    specifier: ^18\n    version: 18.0.0(react@18.0.0)\n\ndevDependencies:\n  '@types/node':\n    specifier: ^20\n    version: 20.0.0\n  '@types/react':\n    specifier: ^18\n    version: 18.0.0\n  '@types/react-dom':\n    specifier: ^18\n    version: 18.0.0\n  autoprefixer:\n    specifier: ^10.0.1\n    version: 10.0.1(postcss@8.0.0)\n  postcss:\n    specifier: ^8\n    version: 8.0.0\n  tailwindcss:\n    specifier: ^3.3.0\n    version: 3.3.0(postcss@8.0.0)\n  typescript:\n    specifier: ^5\n    version: 5.0.2\n\npackages:\n\n  /@jridgewell/gen-mapping@0.3.3:\n    resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}\n    engines: {node: '>=6.0.0'}\n    dependencies:\n      '@jridgewell/set-array': 1.1.2\n      '@jridgewell/sourcemap-codec': 1.4.15\n      '@jridgewell/trace-mapping': 0.3.20\n    dev: true\n\n  /@jridgewell/resolve-uri@3.1.1:\n    resolution: {integrity: sha512-dSYZh7HhCDtCKm4QakX0xFpsRDqjjtZf/kjI/v3T3Nwt5r8/qz/M19F9ySyOqU94SXBmeG9ttTul+YnR4LOxFA==}\n    engines: {node: '>=6.0.0'}\n    dev: true\n\n  /@jridgewell/set-array@1.1.2:\n    resolution: {integrity: sha512-xnkseuNADM0gt2bs+BvhO0p78Mk762YnZdsuzFV018NoG1Sj1SCQvpSqa7XUaTam5vAGasABV9qXASMKnFMwMw==}\n    engines: {node: '>=6.0.0'}\n    dev: "
+   },
+   {
+    "path": "代码（已8期）/代码（已8期）/3-4/tsconfig.json",
+    "snippet": "{\n  \"compilerOptions\": {\n    \"target\": \"es5\",\n    \"lib\": [\"dom\", \"dom.iterable\", \"esnext\"],\n    \"allowJs\": true,\n    \"skipLibCheck\": true,\n    \"strict\": true,\n    \"noEmit\": true,\n    \"esModuleInterop\": true,\n    \"module\": \"esnext\",\n    \"moduleResolution\": \"bundler\",\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"jsx\": \"preserve\",\n    \"incremental\": true,\n    \"plugins\": [\n      {\n        \"name\": \"next\"\n      }\n    ],\n    \"paths\": {\n      \"@/*\": [\"./src/*\"]\n    }\n  },\n  \"include\": [\"next-env.d.ts\", \"**/*.ts\", \"**/*.tsx\", \".next/types/**/*.ts\"],\n  \"exclude\": [\"node_modules\"]\n}\n"
+   }
+  ],
+  "notes": []
+ },
+ "transcript_path": "D:/ai/video2text/output/小滴课堂低代码大课\\audio\\01.第一期【1.1-5.3】\\3-4.Nextjs 路由处理 Route Groups + 动态路由【网盘分享wpfx.org.cn】 .md",
+ "out_path": "D:/ai/video2text/output/小滴课堂低代码大课\\blog\\01.第一期【1.1-5.3】\\3-4.Nextjs 路由处理 Route Groups + 动态路由【网盘分享wpfx.org.cn】 .md"
+}

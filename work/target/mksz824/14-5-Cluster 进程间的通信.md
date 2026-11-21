@@ -1,0 +1,67 @@
+# 14-5-Cluster 进程间的通信
+
+上节课用实验的方式展示了 cluster 对性能的提升，这节课再深入一点，谈谈进程之间的通信。
+
+使用 cluster 模式时，master 可以创建多个 worker，这些进程一同完成逻辑处理。但每个 master 和它 fork 出来的 worker 都是相对独立的：每个进程有各自不同的用户地址空间，任何一个进程中的全局变量，在另一个进程里都看不到。不过进程之间确实有互相通信的需求，操作系统内核提供了一种特殊的通道，让这些本来隔离的进程可以互相通讯，这种形式称之为 IPC，也就是 Inter Process Communication 的简称。
+
+操作系统提供了一系列方法完成进程间通讯，指至少两个进程或线程间传递数据或者信号的一些技术或方法。针对 worker 和 master 的通讯，内部原理也是通过 IPC，Node.js 把它转换成了我们非常熟悉的基于事件的形式：worker 可以发送一个事件给 master，master 监听到之后做对应的处理。
+
+这节课要完成的任务是记录总共发送过请求的次数。思路是：每次 worker 中发生请求，都以某种形式通知 master；master 中保存一个变量记录请求次数，每次收到 worker 的事件就给变量加一，最后定时输出。
+
+## 发送事件
+
+来到代码中，使用 cluster 和 express 做一个简单的测试。第一步是发送事件，发送动作应该在 express 当中完成，在 res.send 后面添加一行代码，也就是响应的时候发送消息：
+
+```js
+res.send('hi node and docker!');
+process.send({ cmd: 'notify' });
+```
+
+发送消息用的是 process 模块上面的 send 方法，它可以发送任何形式的数据，这里发送一个 JSON，称之为 cmd，值为 notify。send 的文档写得很清楚：如果 Node.js 是由 IPC channel 创建的（集群模式正是如此），它就可以用来 send messages to the parent process，并且 messages will be received as a message event。也就是说，master 上面可以监听到一个 message 事件，通过这种方式就能知道事件已经被发送了。
+
+## master 监听消息
+
+消息发送完毕后，要回到 master 中接收消息，这是一个典型的基于事件模型。第一步创建变量，记录整个 request 的次数：
+
+```js
+let numReqs = 0;
+```
+
+关键问题是希望给每一个 worker 都添加对应的事件监听。cluster 当中有一个特殊的属性叫 workers，通过它可以拿到所有对应的 worker。先运行看看它的结构：
+
+```js
+console.log(cluster.workers);
+```
+
+运行 ts-node cluster-express 后可以看到，它是一个对象类型的数据结构，key 是一、二、三、四，指代现在启动的四个 worker。有了这个对象就可以循环遍历，然后逐个监听：
+
+```js
+// 循环监听 worker 的 message 事件
+for (const id in cluster.workers) {
+  cluster.workers[id].on('message', messageHandler);
+}
+```
+
+message 事件发生时对应的回调称之为 messageHandler，拿到的是发送过来的 message，也就是上面发送的那个数据。回调里判断一下，假如 message 上的 cmd 存在，并且等于我们约定的 notify 字符串，就给计数变量加一：
+
+```js
+function messageHandler(msg) {
+  if (msg.cmd && msg.cmd === 'notify') {
+    numReqs += 1;
+  }
+}
+```
+
+到这里整个通讯模型就写完了。总结一下要点：发送用 process.send 完成，监听用 cluster.workers 这个特殊的数据结构。最后还需要在控制台输出，用 setInterval 每秒输出一次当前的请求次数：
+
+```js
+setInterval(() => {
+  console.log(`numReqs = ${numReqs}`);
+}, 1000);
+```
+
+## 验证
+
+启动之后，控制台一直输出零。访问一次接口，回到控制台看，数字变成了一，说明已经监听到了；再刷新一次，变成二。接着跑一次压测，压测 400 次，跑完之后一起看：numReqs 输出 402，说明整个代码没有问题。假如你观测时间，会发现比之前稍微多一点，因为现在多加了几行代码，需要花费一定时间去处理。
+
+这节课我们了解了 cluster 启动的进程之间不同的通讯方式，关于 cluster 的基础知识就介绍到这里。

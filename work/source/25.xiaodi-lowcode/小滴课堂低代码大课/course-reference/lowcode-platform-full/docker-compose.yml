@@ -1,0 +1,26 @@
+version: '3'
+services:
+  backend:
+    image: ${backend_tag}
+    restart: always
+    ports:
+      - "5001:3000"
+  backend_nginx:
+    image: ${backend_nginx_tag}
+    restart: always
+    ports:
+      - "5000:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # nginx 反代宿主机上的 backend:5001
+  frontend:
+    image: ${frontend_tag}
+    restart: always
+    ports:
+      - "4001:3000"
+  frontend_nginx:
+    image: ${frontend_nginx_tag}
+    restart: always
+    ports:
+      - "4000:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # nginx 反代宿主机上的 release:4001

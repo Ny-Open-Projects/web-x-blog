@@ -1,0 +1,29 @@
+{
+ "idx": 84,
+ "rel": "02.第二期【6.1-10.8】/10-2.TypeORM 框架-轻松掌握链接 Mysql 数据库配置【网盘分享wpfx.org.cn】 .md",
+ "title": "TypeORM 框架-轻松掌握链接 Mysql 数据库配置",
+ "stage": "02.第二期【6.1-10.8】",
+ "materials": {
+  "code": [
+   {
+    "path": "代码（已8期）/代码（已8期）/10-2/nest-cli.json",
+    "snippet": "{\n  \"$schema\": \"https://json.schemastore.org/nest-cli\",\n  \"collection\": \"@nestjs/schematics\",\n  \"sourceRoot\": \"src\",\n  \"compilerOptions\": {\n    \"deleteOutDir\": true\n  }\n}\n"
+   },
+   {
+    "path": "代码（已8期）/代码（已8期）/10-2/package.json",
+    "snippet": "{\n  \"name\": \"server\",\n  \"version\": \"0.0.1\",\n  \"description\": \"\",\n  \"author\": \"\",\n  \"private\": true,\n  \"license\": \"UNLICENSED\",\n  \"scripts\": {\n    \"build\": \"nest build\",\n    \"format\": \"prettier --write \\\"src/**/*.ts\\\" \\\"test/**/*.ts\\\"\",\n    \"start\": \"nest start\",\n    \"start:dev\": \"nest start --watch\",\n    \"start:debug\": \"nest start --debug --watch\",\n    \"start:prod\": \"node dist/main\",\n    \"lint\": \"eslint \\\"{src,apps,libs,test}/**/*.ts\\\" --fix\",\n    \"test\": \"jest\",\n    \"test:watch\": \"jest --watch\",\n    \"test:cov\": \"jest --coverage\",\n    \"test:debug\": \"node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand\",\n    \"test:e2e\": \"jest --config ./test/jest-e2e.json\"\n  },\n  \"dependencies\": {\n    \"@nestjs/common\": \"^10.0.0\",\n    \"@nestjs/core\": \"^10.0.0\",\n    \"@nestjs/platform-express\": \"^10.0.0\",\n    \"@nestjs/typeorm\": \"^10.0.1\",\n    \"mysql2\": \"^3.6.3\",\n    \"reflect-metadata\": \"^0.1.13\",\n    \"rxjs\": \"^7.8.1\",\n    \"typeorm\": \"^0.3.17\"\n  },\n  \"devDependencies\": {\n    \"@nestjs/cli\": \"^10.0.0\",\n    \"@nestjs/schematics\": \"^10.0.0\",\n    \"@nestjs/testing\": \"^10.0.0\",\n    \"@types/express\": \"^4.17.17\",\n    \"@types/jest\": \"^29.5.2\",\n    \"@types/node\": \"^20.3.1\",\n    \"@types/supertest\": \"^2.0.12\",\n    \"@typescript-eslint/eslint-plugin\": \"^6.0.0\",\n    \"@typescript-eslint/parser\": \"^6.0.0\",\n    \"eslint\": \"^8.42.0\",\n    \"eslint-config-prettier\": \"^9.0.0\",\n    \"eslint-plugin-prettier\": \"^5.0.0\",\n    \"jest\": \"^29.5.0\",\n    \"prettier\": \"^3.0.0\",\n    \"source"
+   },
+   {
+    "path": "代码（已8期）/代码（已8期）/10-2/pnpm-lock.yaml",
+    "snippet": "lockfileVersion: '6.0'\n\nsettings:\n  autoInstallPeers: true\n  excludeLinksFromLockfile: false\n\ndependencies:\n  '@nestjs/common':\n    specifier: ^10.0.0\n    version: 10.2.9(reflect-metadata@0.1.13)(rxjs@7.8.1)\n  '@nestjs/core':\n    specifier: ^10.0.0\n    version: 10.2.9(@nestjs/common@10.2.9)(@nestjs/platform-express@10.0.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)\n  '@nestjs/platform-express':\n    specifier: ^10.0.0\n    version: 10.0.0(@nestjs/common@10.2.9)(@nestjs/core@10.2.9)\n  '@nestjs/typeorm':\n    specifier: ^10.0.1\n    version: 10.0.1(@nestjs/common@10.2.9)(@nestjs/core@10.2.9)(reflect-metadata@0.1.13)(rxjs@7.8.1)(typeorm@0.3.17)\n  mysql2:\n    specifier: ^3.6.3\n    version: 3.6.3\n  reflect-metadata:\n    specifier: ^0.1.13\n    version: 0.1.13\n  rxjs:\n    specifier: ^7.8.1\n    version: 7.8.1\n  typeorm:\n    specifier: ^0.3.17\n    version: 0.3.17(mysql2@3.6.3)(ts-node@10.9.1)\n\ndevDependencies:\n  '@nestjs/cli':\n    specifier: ^10.0.0\n    version: 10.0.0\n  '@nestjs/schematics':\n    specifier: ^10.0.0\n    version: 10.0.0(chokidar@3.5.3)(typescript@5.1.3)\n  '@nestjs/testing':\n    specifier: ^10.0.0\n    version: 10.0.0(@nestjs/common@10.2.9)(@nestjs/core@10.2.9)(@nestjs/platform-express@10.0.0)\n  '@types/express':\n    specifier: ^4.17.17\n    version: 4.17.17\n  '@types/jest':\n    specifier: ^29.5.2\n    version: 29.5.2\n  '@types/node':\n    specifier: ^20.3.1\n    version: 20.3.1\n  '@types/supertest':\n    specifier: ^2.0.12\n    version: 2.0.12\n  '@typescript-eslint/eslint-plugin':\n    s"
+   }
+  ],
+  "notes": [
+   "代码（已8期）/代码（已8期）/10-2/test/jest-e2e.json",
+   "代码（已8期）/代码（已8期）/10-2/tsconfig.build.json",
+   "代码（已8期）/代码（已8期）/10-2/tsconfig.json"
+  ]
+ },
+ "transcript_path": "D:/ai/video2text/output/小滴课堂低代码大课\\audio\\02.第二期【6.1-10.8】\\10-2.TypeORM 框架-轻松掌握链接 Mysql 数据库配置【网盘分享wpfx.org.cn】 .md",
+ "out_path": "D:/ai/video2text/output/小滴课堂低代码大课\\blog\\02.第二期【6.1-10.8】\\10-2.TypeORM 框架-轻松掌握链接 Mysql 数据库配置【网盘分享wpfx.org.cn】 .md"
+}

@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build & Test (offline mock profile, no API key needed)
+        run: mvn -B verify
+      - name: Package
+        run: mvn -B -DskipTests package
+      - name: Build Docker image
+        if: github.event_name == 'push'
+        run: docker build -t 981-demo:${GITHUB_SHA::7} .

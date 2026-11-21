@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: stock-risk-bot
+  profiles:
+    # 默认离线 mock：不联网、不填 Key 即可跑通主流程，用于演示与测试
+    active: ${SPRING_PROFILES_ACTIVE:default}
+  ai:
+    openai:
+      api-key: ${SPRING_AI_OPENAI_API_KEY:dummy}
+      base-url: ${SPRING_AI_OPENAI_BASE_URL:https://api.openai.com/v1}
+      chat:
+        options:
+          model: ${SPRING_AI_OPENAI_CHAT_MODEL:gpt-4o}
+          temperature: 0.2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+risk:
+  quote:
+    # 真实行情端点；留空则仅用 mock 源（env 驱动，严禁硬编码）
+    api-url: ${RISK_QUOTE_API_URL:}
+    # 超时配置外置（env 驱动）：网关挂起不能拖死扫描线程
+    connect-timeout-ms: ${RISK_QUOTE_CONNECT_TIMEOUT_MS:3000}
+    read-timeout-ms: ${RISK_QUOTE_READ_TIMEOUT_MS:5000}
+    retry:
+      # 行情网关重试：指数退避（首次 500ms，逐次 ×2）+ 最多 3 次
+      max-attempts: ${RISK_QUOTE_RETRY_MAX_ATTEMPTS:3}
+      wait-ms: ${RISK_QUOTE_RETRY_WAIT_MS:500}
+  llm:
+    # 问答链路的 token 成本上限（进程内累计）：超限后 /api/risk/query 返回降级文案
+    max-token-budget: ${RISK_LLM_MAX_TOKEN_BUDGET:200000}
+    retry:
+      # LLM 通道重试：指数退避（首次 500ms，逐次 ×2）+ 最多 3 次
+      max-attempts: ${RISK_LLM_RETRY_MAX_ATTEMPTS:3}
+      wait-ms: ${RISK_LLM_RETRY_WAIT_MS:500}
+  rules:
+    price-change-threshold: 5.0   # 涨跌幅异动阈值(%)，被 PriceVolatilityRule 读取
+    volume-spike-ratio: 2.0       # 成交量相对基准倍数，被 VolumeSpikeRule 读取
+    volume-spike-base: 8000000    # 成交量基准量，被 VolumeSpikeRule 读取（生产改滚动均值）
+    # 注：当前仅实现 Price / Volume 两条规则，未实现波动率规则，故无 volatility-threshold 配置
+  scan:
+    enabled: true
+    fixed-delay-ms: 30000         # 每 30s 扫描一次（演示用，生产按需调整）
+
+logging:
+  pattern:
+    # 把 traceId/spanId 注入每条日志：一次请求的全链路日志可用 traceId 串起来
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+

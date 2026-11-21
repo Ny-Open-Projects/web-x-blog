@@ -1,0 +1,102 @@
+# 页面和数据联调—注册模块开发
+
+> **导语**：注册页和登录页长得几乎一模一样，但把两页放在一起看，最容易看清「同一套请求封装如何被复用」。本文讲注册模块如何复用 Form、如何借助 ahooks 的 `useRequest` 拿到 `loading` 与 `run`、如何只改接口路径就接通后端，最后走一遍完整的注册联调验证。
+
+## 前置知识
+
+建议先读《页面和数据联调—登录模块开发》，登录模块里已经把 `Form` 校验、`makeRequest` 二次封装、`axios` 拦截器与 token 缓存全部搭好了。另需了解 ahooks 的 `useRequest` 基本用法，以及 React Router 的路由跳转。
+
+## 正文
+
+### 结构复用：只改文本与跳转路径
+
+注册页的 HTML 结构与登录页完全一致，差异只有两处：按钮里的文本由「登录」改成「注册」，以及跳转路径由注册页改回登录页。样式、表单项、`Label`、`name`、`rules` 校验规则都可以直接沿用。
+
+因此注册模块真正要写的，是表单提交后触发的那段请求逻辑，而不是页面骨架。
+
+### useRequest：run、loading 与回调参数
+
+`Form` 的 `onFinish` 绑定的是 `useRequest` 提供的 `run` 方法。`run` 触发时会执行我们传入的回调函数，把表单值交给注册接口：
+
+```ts
+const { run, loading } = useRequest(register, {
+  manual: true,
+  onSuccess(data) {
+    localStorage.setItem('token', data);
+    message.success('注册成功');
+    navigate('/courseManagement');
+  },
+});
+```
+
+这里有几个点值得说清：
+
+- `manual: true` 表示不自动执行，等 `run()` 被表单提交调用才发请求。
+- 请求较慢时 `loading` 会变为 `true`，页面可以直接拿它渲染「加载中」样式，不用自己维护一个 `useState`。这正是用 ahooks `useRequest` 而不是裸写 axios 的好处。
+- 回调拿到的 `data` 里是 `username` 与 `password`，由 `Form` 自动填充；注册成功后 `onSuccess` 被触发，写入 token 并跳到课程管理页。
+
+ahooks 里 `useRequest` 的参数顺序容易看迷糊，建议对照官网的 API 说明读一遍，比死记格式靠谱。
+
+### 接口层：只改路径与名称
+
+注册接口与登录接口几乎相同，只是路径和函数名不同：
+
+```ts
+export function register(data: RegisterParams) {
+  return makeRequest<string>({
+    url: '/user/register',
+    method: 'post',
+    data,
+  });
+}
+```
+
+底层 `makeRequest`、`axios.create` 的基础路径、请求拦截器注入 token、响应拦截器统一提示，全都是通用的，一行都不用改。这也是登录模块里坚持做二次封装的价值：新增一个接口只是加一个函数。
+
+本阶段依赖版本由 `代码（已8期）/代码（已8期）/10-2/pnpm-lock.yaml` 锁定，NestJS 10 相关条目如下：
+
+```yaml
+lockfileVersion: '6.0'
+
+dependencies:
+  '@nestjs/common':
+    specifier: ^10.0.0
+    version: 10.2.9(reflect-metadata@0.1.13)(rxjs@7.8.1)
+  '@nestjs/core':
+    specifier: ^10.0.0
+    version: 10.2.9
+  '@nestjs/typeorm':
+    specifier: ^10.0.1
+    version: 10.0.1
+  mysql2:
+    specifier: ^3.6.3
+    version: 3.6.3
+  typeorm:
+    specifier: ^0.3.17
+    version: 0.3.17(mysql2@3.6.3)(ts-node@10.9.1)
+```
+
+### 联调验证
+
+访问 `/register` 之前，务必先清掉浏览器里残留的 token：只要检测到已登录，路由就会把用户重定向到首页，根本进不去注册页。
+
+清理后测试：
+
+1. 打开注册页，填入用户名与密码（例如 `3333` / `4444`）；
+2. 点击注册，页面弹出「注册成功」提示；
+3. 自动跳转到有权限的课程管理页；
+4. 打开 DevTools 的 Application → Local Storage，能看到写入的 token（加密后保存）。
+
+四步都通过，就说明前端请求 → 后端注册接口 → 写库 → 返回 token → 前端缓存与跳转这条链路已经打通。
+
+## 小结
+
+- 注册页复用登录页的表单结构，只改按钮文本与跳转路径。
+- `useRequest` 用 `manual: true` + `run` 手动触发，`loading` 可直接用于加载态。
+- `onSuccess` 里统一完成写 token、提示、跳转，逻辑集中好维护。
+- 接口层只改 `url` 与函数名，二次封装的 `makeRequest` 与两个拦截器完全复用。
+- 联调前先清 token，否则会被登录态重定向挡在注册页之外。
+
+## 下一步
+
+登录、注册两条链路打通后，就该让 token 真正发挥作用。建议接着看《页面和数据联调—课程获取和删除模块开发》，练习带权限的课程接口联调；再建议接着看《页面和数据联调—课程创建和编辑模块开发》，把表单与列表的完整增删改补完。

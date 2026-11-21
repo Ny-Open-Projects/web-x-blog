@@ -1,0 +1,63 @@
+{
+ "generated_at": "2026-11-05 22:55:44",
+ "course_root": "D:\\ai\\video2text\\output\\小滴课堂低代码大课\\audio",
+ "material_root": "X:\\小滴课堂-解压",
+ "articles": 229,
+ "material_files_total": 17146,
+ "material_files_linked": 17146,
+ "material_files_unlinked": 0,
+ "coverage_pct": 100.0,
+ "by_category_total": {
+  "doc": 299,
+  "code": 13724,
+  "data": 1323,
+  "binary": 528,
+  "image": 1102,
+  "archive": 164,
+  "font": 4,
+  "slide": 2
+ },
+ "by_category_size_mb": {
+  "doc": 35.6,
+  "code": 72.3,
+  "data": 30.5,
+  "binary": 296.4,
+  "image": 255.8,
+  "archive": 803.2,
+  "font": 0.3,
+  "slide": 0.1
+ },
+ "by_category_linked": {
+  "code": 13724,
+  "data": 1323,
+  "image": 1102,
+  "binary": 528,
+  "doc": 299,
+  "archive": 164,
+  "font": 4,
+  "slide": 2
+ },
+ "anchor_stats": {
+  "art": 229,
+  "pre_chapter": 40,
+  "code_feature": 7,
+  "toolkit": 41,
+  "lesson_no": 115,
+  "orphan_code": 1
+ },
+ "episodes": 190,
+ "chapters": 31,
+ "code_dirs": 116,
+ "articles_with_code_dir": 115,
+ "articles_with_episode": 189,
+ "articles_with_images": 160,
+ "unlinked_by_source": {},
+ "unlinked_by_category": {},
+ "unlinked_sample": [],
+ "excluded_dirs": {
+  "dist": 205,
+  ".git": 100,
+  "node_modules": 9,
+  ".next": 31
+ }
+}

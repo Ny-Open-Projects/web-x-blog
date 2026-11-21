@@ -1,0 +1,7 @@
+packages:
+  - "packages/*"
+
+# pnpm v10+: 允许这些依赖执行安装脚本(esbuild 需要下载平台二进制)
+allowBuilds:
+  '@nestjs/core': true
+  esbuild: true

@@ -1,0 +1,22 @@
+# prod profile：接真实模型（OpenAI 兼容端点 / 通义 / 本地 vLLM 均可，走 OPENAI_API_KEY 与 base-url）
+transfer:
+  offline: false
+  llm:
+    base-url: ${TRANSFER_LLM_BASE_URL:}
+    model: ${TRANSFER_LLM_MODEL:}
+    api-key: ${OPENAI_API_KEY:}
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: ${TRANSFER_DB_URL:jdbc:h2:mem:transfer}
+    username: ${TRANSFER_DB_USER:sa}
+    password: ${TRANSFER_DB_PASSWORD:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus

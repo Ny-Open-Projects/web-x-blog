@@ -1,0 +1,50 @@
+{
+  "missing_in_graph": [
+    {"name": "Vue Router（嵌套路由/路由守卫/权限验证）", "evidence": "第5章/5-12~5-15；第17章/5-6~5-7", "action": "补卡+补边"},
+    {"name": "Vuex（module/action/mutations 测试）", "evidence": "第5章/5-16~5-20；第6章/6-2；第16章/4-3；第17章/2-3", "action": "补卡+补边"},
+    {"name": "Vite（创建项目、Vue CLI 对比）", "evidence": "第4章/4-17；第5章/5-4", "action": "补卡+补边"},
+    {"name": "Webpack 深入（手写 loader/plugin、bundle-analyzer、分包、路由懒加载、chainWebpack）", "evidence": "第19章/3-2~3-5、4-2~4-9", "action": "补卡+补边"},
+    {"name": "Rollup 与组件库打包（ESM/UMD、Vue/TS 插件、npm link、Snowpack）", "evidence": "第9章/9-4~9-17", "action": "补卡+补边"},
+    {"name": "前端工程化规范（ESLint/Prettier/Git Flow/项目结构）", "evidence": "第4章/4-19~4-20；第5章/5-5~5-9", "action": "补卡+补边"},
+    {"name": "TDD 与 Jest mock 体系（timers/第三方模块/全局组件）", "evidence": "第7章/7-3~7-20；第8章/8-5、8-10、8-13、8-19", "action": "细分C_test"},
+    {"name": "Web 性能优化（Nginx、HTTP 缓存、gzip/Brotli、HTTP2、keep-alive）", "evidence": "第19章/5-2~5-9", "action": "补卡+补边（ch19 真实主题）"},
+    {"name": "多环境与环境变量（mode/.env）", "evidence": "第14章/14-10；第19章/2-1~2-5；第20章/20-23", "action": "补卡"},
+    {"name": "Node 进程模型（Cluster、Egg 多进程、压测）", "evidence": "第14章/14-3~14-6", "action": "补卡+补边"},
+    {"name": "Docker 细分（Dockerfile、docker-compose、镜像优化、MongoDB 权限、YAML）", "evidence": "第14章/14-17~14-29", "action": "细分C_docker"},
+    {"name": "GitHub Actions 细分（Secrets、ACR、自动部署+回滚、release-it）", "evidence": "第14章/14-30~14-40", "action": "细分C_cicd"},
+    {"name": "云服务器运维（SSH key 免密、Linux 装机）", "evidence": "第14章/14-7~14-9", "action": "补卡"},
+    {"name": "流与图片处理（Sharp、Stream/pipeline、busboy/egg-multipart 源码）", "evidence": "第13章/13-4~13-16", "action": "补卡+补边"},
+    {"name": "CropperJS 图片裁剪", "evidence": "第15章/2-2~2-6", "action": "补卡"},
+    {"name": "B 端工具库（html2canvas 及原理手写、qrcode、Clipboard.js、FileSaver.js 源码解析）", "evidence": "第18章/2-3~2-7、4-2、5-1~5-4、7-1~7-4", "action": "补卡+补边"},
+    {"name": "组合式函数复用（usePublishWork/useLoadMore/useClickOutside/InlineEdit/actionWrapper）", "evidence": "第15章/3-4~3-5、4-1~4-5；第17章/4-5；第18章/3-3、6-2~6-6", "action": "补卡"},
+    {"name": "Mock 联调（JSON Server + JWT mock）", "evidence": "第17章/3-1~3-4", "action": "补卡+补边"},
+    {"name": "表单验证（egg-validate、错误码规范化、AForm/useForm 源码解析）", "evidence": "第12章/12-5~12-6；第17章/4-1、4-6~4-7", "action": "补卡"},
+    {"name": "Session 体系细节（Cookie、egg-session 外部存储、koa-session 源码、bcrypt、mongoose-sequence）", "evidence": "第12章/12-8~12-17", "action": "细分C_auth"},
+    {"name": "MongoDB 进阶（索引、聚合 $lookup、设计原则、egg-mongoose 源码、egg 插件抽象）", "evidence": "第11章/11-12~11-17、11-23~11-24", "action": "细分C_mongo"},
+    {"name": "Nuxt3 细分（渲染模式、Nitro server/中间件/存储层、nuxt-mongoose、SEO）", "evidence": "第20章/20-3、20-17~20-27", "action": "细分C_nuxt"},
+    {"name": "Nuxt 生态（Zod、VeeValidate、NuxtUI、Tailwind CSS）", "evidence": "第21章/21-1~21-9、21-16", "action": "补卡"},
+    {"name": "管理系统部署（Nuxt 构建、部署脚本、PM2、Bun）", "evidence": "第22章/22-13~22-17", "action": "补卡+补边"},
+    {"name": "业务闭环概念（作品发布/展示渠道/H5 渲染链路/自动保存）", "evidence": "第13章/13-28~13-29；第17章/6-4~6-7；第18章/3-1~3-2", "action": "补业务概念卡"}
+  ],
+  "ghost_nodes": [
+    {"node": "C_vue2 (Vue 2)", "reason": "全素材仅 2 处对比提及（第1章/1-1 L229；第8章/8-15 L11），ch04/ch05 的 covers 边无教学内容支撑", "action": "删边或降级为对比提及"},
+    {"edge": "ch18 -> C_nuxt (covers)", "reason": "第18章 30 篇 grep 'nuxt' = 0 命中，Nuxt 从第 20 章开始", "action": "删边"},
+    {"edge": "ch19 -> C_cicd (covers)", "reason": "第19章 grep 'github actions' = 0 命中", "action": "删边"},
+    {"edge": "ch19 -> C_docker (covers)", "reason": "仅 第19章/5-1 部署的概念 L41/L45 一处顺带回顾 Docker Compose", "action": "删边或降级"}
+  ],
+  "missing_edges": [
+    {"edge": "C_ssr -> mod_opsflow-server", "reason": "H5 SSR 渲染产物由 server 生成并上传 OSS（第13章/13-23~13-27）；现 C_ssr->mod_opsflow-web 不准确"},
+    {"edge": "mod_opsflow-admin -> C_upload / C_oss", "reason": "admin 有上传组件并上传阿里云（第22章/22-4~22-7）"},
+    {"edge": "mod_opsflow-admin -> mod_opsflow-server (depends_on)", "reason": "admin 调用同一套后端接口（第20~21章注册/登录/表格）"},
+    {"edge": "mod_opsflow-admin -> 部署节点", "reason": "admin 用 PM2/Bun 部署而非 Docker（第22章/22-13~22-16），部署方式应与 web 区分"},
+    {"edge": "ch05 -> VueRouter/Vuex/Vite 概念", "reason": "补概念卡后需加 covers 边"},
+    {"edge": "ch14 -> C_auth (弱)", "reason": "第14章/14-21~14-22 MongoDB 权限验证，可加弱边或忽略"}
+  ],
+  "meta": {
+    "scanned_root": "work/source/24.真实高质量低代码商业项目-前端后端运维管理系统/",
+    "chapters": 22,
+    "md_files": 547,
+    "graph": "/Volumes/SAMSUNG/ai-done/24.真实高质量低代码商业项目-前端后端运维管理系统/graph/knowledge_graph.json",
+    "note": "7 个代码模块节点实测存在于 课程源码+电子书/解压后/，非幽灵；INDEX.md 口径 512 篇与本树 547 篇差异（第7章 Done/ 副本不在本树）已记录"
+  }
+}

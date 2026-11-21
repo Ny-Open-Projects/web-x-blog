@@ -1,0 +1,17 @@
+# 最小沙箱运行镜像：Debian 底包 + Node 运行时
+# 构建上下文：/tmp/lcbase（node.tar.gz）
+# 用途：低代码平台 script.eval 的容器级硬隔离执行环境
+FROM redis:7
+
+COPY node.tar.gz /tmp/node.tar.gz
+
+RUN set -eux; \
+    tar -xzf /tmp/node.tar.gz --strip-components=1 -C /usr/local; \
+    rm -f /tmp/node.tar.gz; \
+    node -v; \
+    # 精简：去掉文档与包索引，减小镜像体积
+    rm -rf /usr/share/doc /usr/share/man /var/lib/apt/lists/* /usr/share/locale
+
+# 重置继承自 redis 基础镜像的入口/命令
+ENTRYPOINT []
+CMD ["node"]

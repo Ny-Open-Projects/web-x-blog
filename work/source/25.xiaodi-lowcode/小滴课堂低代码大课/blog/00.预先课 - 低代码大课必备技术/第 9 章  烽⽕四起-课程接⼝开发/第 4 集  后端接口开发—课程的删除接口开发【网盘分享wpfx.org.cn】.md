@@ -1,0 +1,79 @@
+# 后端接口开发：课程的删除接口开发
+
+> **导语**：删除接口看起来最"简单"，却最见工程功底。本文以课程模块收尾的一集为例，讲清如何用 @Delete 声明删除接口、用 DTO 校验前端传来的课程 ID、以及为什么"删除"实际是一次把 del 从 0 改成 1 的软删除更新。读完你能独立写出一个带鉴权、带参数校验、可被前端安全调用的删除接口。
+
+## 前置知识
+
+建议先读《后端接口开发—课程的修改接口开发》，熟悉 course.controller.ts 与 service 层的既有写法；再补《Nest的管道验证DTO》，理解 DTO 如何配合管道拦截非法参数。若对 del 字段的来历陌生，可回看《项目需求分析—接口和数据库数据结构分析》。
+
+## 正文
+
+### 删除接口的组成
+
+这一集的目标是补上课程增删改查的最后一块。整体链路和前面几个接口一致：控制器里新增一个 delete 方法，用 @Delete() 装饰器声明为 DELETE 请求，通过 DeleteCourseDto 校验并接收前端传来的课程 ID，再把 DTO 交给服务层；服务层根据 ID 定位记录并执行"删除"。
+
+关键点在于：这里的删除并不是从数据库物理抹掉一行，而是把该记录的 del 字段更新为 1——与需求分析阶段定下的软删除约定完全对应。前端查询列表时只返回 del = 0 的记录，于是记录"消失"了，数据却仍留在库里，可追溯、可恢复。
+
+### 控制器与 DTO
+
+在 course.controller.ts 里复制一份既有方法，把类装饰器改成 @Delete，方法名与 DTO 同步改为删除语义。删除接口和修改、创建接口一样，需要在请求头携带 Authorization 对应的 token，走统一的鉴权逻辑。
+
+```ts
+@Delete()
+async deleteCourse(@Body() dto: DeleteCourseDto) {
+  return this.courseService.delete(dto);
+}
+```
+
+DTO 负责守住入参这一关：
+
+```ts
+export class DeleteCourseDto {
+  @IsNumber()
+  id: number;
+}
+```
+
+（写法对应视频演示的 @Delete + DeleteCourseDto 结构；配套后端工程位于 `代码（已8期）/代码（已8期）/9-2/lowcode/packages/server/`。）
+
+服务层拿到 id 后调用的是 update 而非 remove，把目标行的 del 由 0 置为 1，这样一次"删除"就完成了。
+
+### 用 Apifox 验证：正常删除与参数校验
+
+调试 DELETE 请求同样离不开接口工具。在 Apifox 里新建一个 DELETE 方法的接口，Body 传 `id: 1`（Number 类型，表示要删除第一条课程），Headers 增加 Authorization 并填入 token，保存后点击发送。
+
+发送前先看数据库：第一条课程的 del 默认是 0。请求成功后刷新表，del 变成 1，删除生效。
+
+紧接着演示了 DTO 的价值：把 Body 里的 id 从数字 1 改成字符串 "1"，再次发送同样会被校验拦下。类型不符的入参根本到不了服务层，这正是"管道 + DTO"在接口边界上替我们挡住的第一类错误。
+
+### 把代码纳入版本管理
+
+功能验证通过后，讲师把这一集的改动合并到本地仓库；有远程仓库的同学再 push 上去。逐个接口小步提交、每集可回溯，是这类连载项目保持代码整洁的实用习惯。
+
+### 配套工程
+
+本篇所在的工程是 pnpm workspace 多包仓库，根目录脚本用 `pnpm --filter` 驱动各子包，服务端以 start:dev 热更新、start:prod 运行产物：
+
+```json
+{
+  "scripts": {
+    "run:server": "pnpm --filter server run start:dev",
+    "build:server": "pnpm --filter server run build",
+    "start:server": "pnpm --filter server run start:prod"
+  }
+}
+```
+
+该片段来自 `代码（已8期）/代码（已8期）/9-2/lowcode/package.json`；控制器与服务层代码在 `packages/server/` 下（同目录的 `nest-cli.json`、`tsconfig.json` 等配置见配套资料）。启动热更新后保存即生效，正是上面反复"保存—刷新数据库"能快速验证的前提。
+
+## 小结
+
+- 删除接口 = @Delete 装饰器 + DeleteCourseDto 校验 + 服务层按 ID 处理，结构与其他课程接口一致。
+- 这里的"删除"是软删除：update del 由 0 → 1，不物理删行，数据仍留在库中。
+- 接口需携带 Authorization token，与需要鉴权的其他接口保持统一。
+- Apifox 中 Body 传 `id: 1`、Headers 带 token，发送后数据库 del 变 1；把 id 改成字符串会被 DTO 拦截。
+- 验证通过后把改动合并到本地仓库，保持每集可回溯。
+
+## 下一步
+
+至此课程接口的增、查、改、删四个接口全部打通，本章内容告一段落，接下来进入前后端联调。建议接着看《页面和数据联调—课程获取和删除模块开发》，把查询与删除接口接到真实页面上；再跟进《页面和数据联调—课程创建和编辑模块开发》，补齐另外两个接口的页面交互。若想巩固参数校验，可回看《Nest的管道验证DTO》。
