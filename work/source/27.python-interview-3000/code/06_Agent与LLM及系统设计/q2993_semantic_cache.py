@@ -1,0 +1,114 @@
+"""Q2993 语义缓存的 TTL 与失效:相似命中+时间过期+文档级失效。
+
+语义缓存不是精确匹配:用假嵌入加余弦阈值判断「问法不同但意思相同」,
+命中即省一次调用。两个失效维度必须都做:时间维度 TTL 到期即失效
+(答案可能过时);内容维度当底层文档更新时,凡引用过该文档的缓存
+条目要能按血缘批量清除,否则用户会读到旧政策的缓存答案。
+"""
+
+import hashlib
+import math
+
+DIM = 32
+
+
+def _tokens(text):
+    """中文友好分词:去空白后取二元组。"""
+    compact = "".join(text.split())
+    if len(compact) < 2:
+        return [compact] if compact else []
+    return [compact[i:i + 2] for i in range(len(compact) - 1)]
+
+
+def embed(text):
+    vec = [0.0] * DIM
+    for token in _tokens(text):
+        h = int(hashlib.md5(token.encode("utf-8")).hexdigest(), 16)
+        vec[h % DIM] += 1.0
+    norm = math.sqrt(sum(v * v for v in vec)) or 1.0
+    return [v / norm for v in vec]
+
+
+def cosine(a, b):
+    return sum(x * y for x, y in zip(a, b))
+
+
+class SemanticCache:
+    def __init__(self, threshold=0.85, ttl=60.0, clock=lambda: 0.0):
+        self.threshold = threshold
+        self.ttl = ttl
+        self.clock = clock
+        self.entries = []          # {q, vec, answer, refs, created}
+        self.stats = {"hit": 0, "miss": 0, "expired": 0,
+                      "invalidated": 0}
+
+    def put(self, question, answer, refs=()):
+        self.entries.append({"q": question, "vec": embed(question),
+                             "answer": answer, "refs": set(refs),
+                             "created": self.clock()})
+
+    def _expired(self, entry, now):
+        return now - entry["created"] > self.ttl
+
+    def get(self, question):
+        now = self.clock()
+        qv = embed(question)
+        best, best_score = None, -1.0
+        for e in list(self.entries):
+            if self._expired(e, now):       # 惰性清理:路过即清
+                self.entries.remove(e)
+                self.stats["expired"] += 1
+                continue
+            score = cosine(qv, e["vec"])
+            if score > best_score:
+                best, best_score = e, score
+        if best is None or best_score < self.threshold:
+            self.stats["miss"] += 1
+            return None
+        self.stats["hit"] += 1
+        return {"answer": best["answer"], "score": round(best_score, 4)}
+
+    def invalidate_doc(self, doc_id):
+        """文档更新:清除所有引用过它的缓存条目(血缘失效)。"""
+        before = len(self.entries)
+        self.entries = [e for e in self.entries if doc_id not in e["refs"]]
+        self.stats["invalidated"] += before - len(self.entries)
+
+
+def main():
+    now = [1000.0]
+    cache = SemanticCache(threshold=0.85, ttl=60.0, clock=lambda: now[0])
+
+    cache.put("退款政策是什么", "签收后 7 天内可无理由退款。",
+              refs=("policy",))
+    cache.put("发货要多久", "下单后 48 小时内发货。", refs=("shipping",))
+
+    # 完全一致:命中
+    hit = cache.get("退款政策是什么")
+    assert hit and hit["score"] == 1.0, hit
+    # 换种问法:尾部带语气词,二元组重叠度仍过阈值
+    hit2 = cache.get("退款政策是什么 呢")
+    assert hit2 and hit2["answer"].startswith("签收后"), hit2
+    # 无关问题:未命中
+    assert cache.get("发票怎么开") is None
+    assert cache.stats["miss"] == 1 and cache.stats["hit"] == 2
+
+    # TTL:时钟前移,过期条目在读取时被顺手清掉
+    now[0] = 1100.0
+    assert cache.get("退款政策是什么") is None
+    assert cache.stats["expired"] == 2, cache.stats
+    assert not cache.entries
+
+    # 血缘失效:shipping 文档更新,引用它的缓存立刻清空
+    cache.put("发货要多久", "下单后 24 小时内发货。", refs=("shipping",))
+    assert cache.get("发货要多久") is not None
+    cache.invalidate_doc("shipping")
+    assert cache.get("发货要多久") is None
+    assert cache.stats["invalidated"] == 1
+    assert not cache.entries
+    print("命中:", hit["answer"], "| 相似问法分数:", hit2["score"])
+    print("统计:", cache.stats)
+
+
+if __name__ == "__main__":
+    main()

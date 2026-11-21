@@ -1,0 +1,91 @@
+"""ETL 完整最小实现: 抽取 -> 转换 -> 加载 -> 对账, 每步留指标, 对账不过则阻断"""
+import hashlib
+import json
+
+# ---- 源数据: 模拟业务库导出的原始订单 (含重复、脏金额、大小写混乱) ----
+RAW_ORDERS = [
+    {"oid": "A001", "user": "  u1 ", "amount": "199.00", "status": "PAID", "ts": "2026-03-01 10:00:00"},
+    {"oid": "A002", "user": "u2", "amount": "58.5", "status": "paid", "ts": "2026-03-01 11:00:00"},
+    {"oid": "A003", "user": "u1", "amount": "0", "status": "REFUNDED", "ts": "2026-03-01 12:00:00"},
+    {"oid": "A003", "user": "u1", "amount": "0", "status": "REFUNDED", "ts": "2026-03-01 12:00:00"},
+    {"oid": "A004", "user": "u3", "amount": "N/A", "status": "PAID", "ts": "2026-03-01 13:00:00"},
+    {"oid": "A005", "user": "u2", "amount": "120", "status": "PAID", "ts": "2026-03-02 09:30:00"},
+]
+
+
+def extract(rows):
+    """抽取层: 隔离拷贝, 不改源数据; 记录抽取行数"""
+    return [dict(r) for r in rows]
+
+
+def transform(rows):
+    """转换层: 去重 -> 类型修正 -> 规范化 -> 派生字段, 返回干净数据与丢弃台账"""
+    out, dropped, seen = [], [], set()
+    for r in rows:
+        oid = r["oid"].strip()
+        if oid in seen:
+            dropped.append({"oid": oid, "reason": "duplicate"})
+            continue
+        seen.add(oid)
+        try:
+            amount = round(float(r["amount"]), 2)
+        except (TypeError, ValueError):
+            dropped.append({"oid": oid, "reason": "bad_amount", "raw": r["amount"]})
+            continue
+        out.append({
+            "order_id": oid,
+            "user_id": r["user"].strip(),
+            "amount": amount,
+            "is_paid": r["status"].strip().upper() == "PAID",
+            "dt": r["ts"][:10],
+        })
+    return out, dropped
+
+
+def load(rows, target):
+    """加载层: 按 dt 分区写入目标表, 返回各分区行数"""
+    for r in rows:
+        target.setdefault(r["dt"], []).append(r)
+    return {dt: len(v) for dt, v in sorted(target.items())}
+
+
+def fingerprint(row):
+    """行指纹: 排序键序列化后取 md5, 用于对账"""
+    payload = json.dumps(row, sort_keys=True, ensure_ascii=False)
+    return hashlib.md5(payload.encode("utf-8")).hexdigest()
+
+
+def reconcile(extracted, transformed, loaded, dropped):
+    """对账层: 三条守恒式 + 加载内容与转换输出逐一比对"""
+    checks = []
+    n_src, n_t, n_drop = len(extracted), len(transformed), len(dropped)
+    checks.append(("行数守恒 源=目标+丢弃", n_src == n_t + n_drop,
+                   "%d == %d + %d" % (n_src, n_t, n_drop)))
+    sum_t = round(sum(r["amount"] for r in transformed), 2)
+    sum_l = round(sum(r["amount"] for rows in loaded.values() for r in rows), 2)
+    checks.append(("金额合计 转换=加载", sum_t == sum_l, "%.2f == %.2f" % (sum_t, sum_l)))
+    tgt_fp = sorted(fingerprint(r) for rows in loaded.values() for r in rows)
+    src_fp = sorted(fingerprint(r) for r in transformed)
+    checks.append(("行级指纹 转换=加载", tgt_fp == src_fp,
+                   "%d 行逐一比对" % len(tgt_fp)))
+    paid = sum(1 for r in transformed if r["is_paid"])
+    checks.append(("口径检查 已支付笔数一致", sum(1 for rows in loaded.values() for r in rows if r["is_paid"]) == paid,
+                   "%d 笔" % paid))
+    return {"checks": checks, "verdict": "PASS" if all(ok for _, ok, _ in checks) else "FAIL"}
+
+
+if __name__ == "__main__":
+    extracted = extract(RAW_ORDERS)
+    transformed, dropped = transform(extracted)
+    target = {}
+    partitions = load(transformed, target)
+    rep = reconcile(extracted, transformed, target, dropped)
+
+    print("抽取: %d 行" % len(extracted))
+    print("转换: 出 %d 行, 丢弃 %d 条 -> %s" % (len(transformed), len(dropped),
+                                               json.dumps(dropped, ensure_ascii=False)))
+    print("加载: 分区行数 %s" % json.dumps(partitions, ensure_ascii=False))
+    for name, ok, detail in rep["checks"]:
+        print("对账[%s] %s: %s" % ("PASS" if ok else "FAIL", name, detail))
+    print("最终判定:", rep["verdict"], "->", "放行下游" if rep["verdict"] == "PASS" else "阻断并告警")
+    print("要点: 每层留指标, 对账用 行数+合计+指纹 三重守恒, FAIL 时宁可阻断也不让坏数据进仓库")

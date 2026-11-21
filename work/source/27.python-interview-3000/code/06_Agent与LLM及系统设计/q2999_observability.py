@@ -1,0 +1,123 @@
+"""Q2999 可观测三支柱的最小实现:结构化日志+指标+分布式追踪。
+
+三支柱不是三套系统,而是同一事件的三种投影:一次请求有唯一
+trace_id,追踪把它拆成带父子关系的 span,指标按 span 的结果累计
+计数与耗时直方图,日志行携带 trace_id 便于三者互查。做到「用
+trace_id 串起一次请求的所有证据」,可观测性就及格了。
+"""
+
+import json
+import math
+
+
+class Metrics:
+    def __init__(self):
+        self.counters = {}
+        self.hist = {}               # name -> list of values
+
+    def incr(self, name, by=1, tags=""):
+        key = name + "|" + tags
+        self.counters[key] = self.counters.get(key, 0) + by
+
+    def observe(self, name, value):
+        self.hist.setdefault(name, []).append(value)
+
+    def latency_ms(self, name):
+        """最简分位数:p50/p99 用近似桶。"""
+        vals = sorted(self.hist.get(name, []))
+        if not vals:
+            return {}
+        def q(p):
+            idx = min(int(math.ceil(p * len(vals))) - 1, len(vals) - 1)
+            return vals[max(idx, 0)]
+        return {"p50": q(0.5), "p99": q(0.99), "count": len(vals)}
+
+
+class Logger:
+    def __init__(self):
+        self.lines = []
+
+    def log(self, level, event, trace_id="", **fields):
+        rec = {"level": level, "event": event, "trace_id": trace_id}
+        rec.update(fields)
+        self.lines.append(json.dumps(rec, ensure_ascii=False, sort_keys=True))
+
+
+class Tracer:
+    def __init__(self, clock, metrics, logger):
+        self.clock = clock
+        self.metrics = metrics
+        self.logger = logger
+        self.spans = {}
+        self._seq = 0
+
+    def start(self, trace_id, name, parent=None):
+        self._seq += 1
+        span_id = "sp_%d" % self._seq      # 全局唯一 span id
+        self.spans[span_id] = {"trace_id": trace_id, "name": name,
+                               "parent": parent, "start": self.clock(),
+                               "status": "active"}
+        return span_id
+
+    def end(self, span_id, status="ok"):
+        span = self.spans[span_id]
+        dur = round(self.clock() - span["start"], 4)
+        span["status"] = status
+        span["dur"] = dur
+        self.metrics.incr("llm_request", tags=span["name"] + ":" + status)
+        self.metrics.observe(span["name"] + "_ms", dur * 1000)
+        self.logger.log("info" if status == "ok" else "error",
+                        "span_end", trace_id=span["trace_id"],
+                        span=span["name"], dur_ms=dur, status=status)
+        return dur
+
+    def children(self, trace_id, parent_id):
+        return [sid for sid, s in self.spans.items()
+                if s["trace_id"] == trace_id and s["parent"] == parent_id]
+
+
+def main():
+    metrics, logger = Metrics(), Logger()
+    t = [0.0]
+    tracer = Tracer(clock=lambda: t[0], metrics=metrics, logger=logger)
+
+    # 一次成功请求:root span + 两个子 span
+    root = tracer.start("tr_1", "gateway")
+    t[0] = 0.02
+    c1 = tracer.start("tr_1", "llm_call", parent=root)
+    t[0] = 0.25
+    tracer.end(c1, "ok")
+    t[0] = 0.27
+    c2 = tracer.start("tr_1", "tool_call", parent=root)
+    t[0] = 0.30
+    tracer.end(c2, "ok")
+    t[0] = 0.31
+    tracer.end(root, "ok")
+    spans = tracer.children("tr_1", root)
+    assert len(spans) == 2 and \
+        {tracer.spans[s]["name"] for s in spans} == {"llm_call", "tool_call"}
+    assert all(tracer.spans[s]["parent"] == root for s in spans)
+
+    # 一次失败请求:错误 span 计入指标与错误日志
+    root2 = tracer.start("tr_2", "gateway")
+    c3 = tracer.start("tr_2", "llm_call", parent=root2)
+    t[0] = 0.40
+    tracer.end(c3, "error")
+    tracer.end(root2, "ok")
+    assert metrics.counters["llm_request|llm_call:error"] == 1
+    assert metrics.counters["llm_request|llm_call:ok"] == 1
+    lat = metrics.latency_ms("llm_call_ms")
+    assert lat["count"] == 2 and lat["p99"] >= lat["p50"], lat
+
+    # 三支柱互查:日志行携带 trace_id,可与 span 对上
+    tr1_logs = [l for l in logger.lines if '"trace_id": "tr_1"' in l]
+    assert len(tr1_logs) == 3, len(tr1_logs)
+    err_logs = [l for l in logger.lines if '"status": "error"' in l]
+    assert len(err_logs) == 1 and '"trace_id": "tr_2"' in err_logs[0]
+    print("成功请求 span 数:", 1 + len(spans))
+    print("llm_call 延迟:", lat)
+    print("错误日志:", err_logs[0])
+
+
+if __name__ == "__main__":
+    main()

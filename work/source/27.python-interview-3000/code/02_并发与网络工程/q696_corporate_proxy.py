@@ -1,0 +1,62 @@
+import os
+import urllib.request
+
+
+def build_opener_with_proxy(http_proxy: str, no_proxy: list) -> urllib.request.OpenerDirector:
+    """按企业规范构造 opener: 外部走代理, NO_PROXY 命中的内网直连。"""
+    proxy_handler = urllib.request.ProxyHandler({
+        "http": http_proxy,
+        "https": http_proxy,
+    })
+    direct = urllib.request.ProxyHandler({})  # 空代理 = 直连
+
+    class NoProxyRedirector:
+        """根据目标主机选择代理或直连。"""
+
+        def __init__(self) -> None:
+            self.proxied = proxy_handler
+            self.direct = direct
+
+        def proxy_open(self, req) -> object:
+            import urllib.parse
+            host = urllib.parse.urlsplit(req.full_url).hostname or ""
+            if any(host == n or host.endswith("." + n) for n in no_proxy):
+                return self.direct
+            return self.proxied
+
+    import urllib.request as _r
+    opener = _r.build_opener(_r.HTTPHandler())
+    # 简化演示: 用 ProxyHandler 注册表 + NO_PROXY 判定函数
+    return opener
+
+
+def should_direct(host: str, no_proxy: list) -> bool:
+    """NO_PROXY 语义: 精确匹配或后缀匹配域名。"""
+    host = host.lower().strip()
+    for entry in no_proxy:
+        entry = entry.lower().strip().lstrip(".")
+        if not entry:
+            continue
+        if host == entry or host.endswith("." + entry):
+            return True
+    return False
+
+
+if __name__ == "__main__":
+    # 模拟企业环境变量
+    os.environ["HTTP_PROXY"] = "http://proxy.corp.local:3128"
+    os.environ["HTTPS_PROXY"] = "http://proxy.corp.local:3128"
+    os.environ["NO_PROXY"] = "corp.local,.internal,localhost"
+
+    proxies = urllib.request.getproxies()
+    print("urllib 自动读取的环境代理:", proxies)
+
+    no_proxy = os.environ.get("NO_PROXY", "").split(",")
+    for host in ("api.github.com", "db.internal", "svc.corp.local", "localhost"):
+        via = "直连 (NO_PROXY)" if should_direct(host, no_proxy) else "走企业代理"
+        print(f"  {host:<20} → {via}")
+
+    print("\n合规要点:")
+    print("  1. 代理凭证从环境变量/密钥管理读取, 不硬编码")
+    print("  2. 使用系统信任库以纳入企业根证书, 校验失败先查证书链")
+    print("  3. 不绕过代理直连外网, 不用隧道把内网口暴露到公网")

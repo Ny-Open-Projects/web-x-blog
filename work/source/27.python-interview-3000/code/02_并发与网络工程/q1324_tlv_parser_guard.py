@@ -1,0 +1,64 @@
+KNOWN = {0x01: "NAME", 0x02: "VALUE"}
+MAX_TLV_LEN = 128
+
+
+class TLVError(ValueError):
+    pass
+
+
+class TLVParser:
+    def __init__(self) -> None:
+        self._buf = bytearray()
+
+    def feed(self, data: bytes) -> list:
+        self._buf.extend(data)
+        out = []
+        while True:
+            if len(self._buf) < 3:        # type 1B + len 2B
+                break
+            t = self._buf[0]
+            ln = int.from_bytes(self._buf[1:3], "big")
+            if ln > MAX_TLV_LEN:          # 防护二: 红线越界, 直接断
+                raise TLVError(f"类型 {t} 声明长度 {ln} 超过红线 {MAX_TLV_LEN}")
+            if len(self._buf) < 3 + ln:   # 防护二: 未到齐, 继续等
+                break
+            value = bytes(self._buf[3:3 + ln])
+            del self._buf[:3 + ln]        # 防护三: 每轮必消费, 零长度也会推进
+            out.append((t, KNOWN.get(t, "SKIP_UNKNOWN"), value))
+        return out
+
+
+def make_tlv(t: int, value: bytes) -> bytes:
+    return bytes([t]) + len(value).to_bytes(2, "big") + value
+
+
+def main() -> None:
+    p = TLVParser()
+    stream = (make_tlv(0x01, b"alice")
+              + make_tlv(0x7F, b"new-version-field")   # 未来才认识的类型
+              + make_tlv(0x02, b"payload"))
+    got = []
+    got.extend(p.feed(stream[:5]))          # 不规则切片喂入
+    got.extend(p.feed(stream[5:17]))
+    got.extend(p.feed(stream[17:]))
+    print("解析结果:", got)
+    assert got[0][1] == "NAME" and got[1][1] == "SKIP_UNKNOWN" and got[2][1] == "VALUE"
+    print("前向兼容: 未知类型 0x7F 被整块跳过, 已知字段不受影响")
+
+    # 截断流: 半个 TLV 挂起等待, 不报错
+    p2 = TLVParser()
+    assert p2.feed(make_tlv(0x01, b"ab")[:4]) == []
+    print("截断流: 字节数不足时安静等待, 不误报")
+
+    # 越界长度: 红线直接断连
+    p3 = TLVParser()
+    evil = bytes([0x01]) + (0xFFFF).to_bytes(2, "big")
+    try:
+        p3.feed(evil)
+        print("越界长度漏过!")
+    except TLVError as exc:
+        print(f"越界长度被拒: {exc}")
+
+
+if __name__ == "__main__":
+    main()

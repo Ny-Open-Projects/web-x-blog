@@ -1,0 +1,72 @@
+"""分片上传的合并: 清单校验 有序拼接与整体哈希(纯标准库)。"""
+import hashlib
+import os
+import tempfile
+
+
+def merge_chunks(session, out_dir):
+    """session: total 分片数, digest 期望整体哈希, chunks: {序号: (数据, 分片哈希)}。"""
+    idxs = sorted(session["chunks"])
+    if idxs != list(range(session["total"])):
+        missing = sorted(set(range(session["total"])) - set(idxs))
+        return None, "缺分片: {}".format(missing)
+    digest = hashlib.sha256()
+    out_path = os.path.join(out_dir, "merged.bin")
+    with open(out_path, "wb") as out:
+        for idx in idxs:
+            data, declared = session["chunks"][idx]
+            if hashlib.sha256(data).hexdigest() != declared:
+                os.unlink(out_path)
+                return None, "分片 {} 哈希不符, 合并已回滚".format(idx)
+            digest.update(data)
+            out.write(data)
+    if digest.hexdigest() != session["digest"]:
+        os.unlink(out_path)
+        return None, "整体哈希不符, 合并已回滚"
+    return out_path, "合并完成, 整体哈希一致"
+
+
+def build_session(corrupt=None, drop=None):
+    """构造 3 分片演示会话: 确定性数据加可选的损坏与缺失。"""
+    chunks, whole = {}, b""
+    for idx in range(3):
+        data = (b"chunk-%d-" % idx) * 16          # 128 字节确定性分片
+        whole += data
+        if corrupt == idx:
+            data = data[:-1] + bytes([data[-1] ^ 0xFF])   # 翻转最后一字节
+        chunks[idx] = (data, hashlib.sha256(
+            (b"chunk-%d-" % idx) * 16).hexdigest())
+    if drop is not None:
+        chunks.pop(drop)
+    return {"total": 3, "digest": hashlib.sha256(whole).hexdigest(), "chunks": chunks}
+
+
+tmpdir = tempfile.mkdtemp()
+
+# 场景一: 三片齐全且哈希一致
+path, msg = merge_chunks(build_session(), tmpdir)
+print("齐全会话   -> {} {}".format(os.path.basename(path) if path else None, msg))
+assert path and os.path.exists(path)
+with open(path, "rb") as fh:
+    assert len(fh.read()) == 3 * 128
+os.unlink(path)
+
+# 场景二: 缺 1 号分片
+path, msg = merge_chunks(build_session(drop=1), tmpdir)
+print("缺 1 号片  -> {} {}".format(path, msg))
+assert path is None and "缺分片" in msg
+
+# 场景三: 2 号分片被篡改, 单片校验失败且产物被回滚
+path, msg = merge_chunks(build_session(corrupt=2), tmpdir)
+print("2 号片损坏 -> {} {}".format(path, msg))
+assert path is None and "2" in msg and "回滚" in msg
+
+# 场景四: 整体哈希不符, 合并后仍要回滚
+bad = build_session()
+wrong = dict(bad)
+wrong["digest"] = "0" * 64
+path, msg = merge_chunks(wrong, tmpdir)
+print("整体哈希错 -> {} {}".format(path, msg))
+assert path is None and "整体" in msg
+print("要点: 合并前查清单完整性, 合并中验单片哈希, 合并后验整体哈希, "
+      "任何一步失败都删除半成品, 客户端只拿确定的结果")

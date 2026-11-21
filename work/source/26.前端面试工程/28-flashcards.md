@@ -1,0 +1,1020 @@
+# 前端面试 Top 300 高频速记卡
+
+> 从 27 个专题题库（5000+ 题）中精选 300 张最高频考卡，覆盖事件循环、闭包、原型、Promise 手写、虚拟列表、防抖节流、缓存、跨域、Token 刷新、React/Vue 原理、webpack/vite 原理、性能指标、盒模型、BFC、HTTPS、分包等公认必考点。
+>
+> **用法（考前 7 天冲刺）**：每天过 45 张（约 6-7 章），只看问题回忆答案，卡壳再回原题库细读；第 7 天把全部 300 张快速扫一遍收尾。每张卡末尾的回链编号（如 JS-081）可在对应题库文件中 grep 定位原题。
+
+```mermaid
+graph TD
+    ROOT[Top 300 速记卡] --> A[JS 25张]
+    ROOT --> B[CSS 12张]
+    ROOT --> C[TS 17张]
+    ROOT --> D[WEB 17张]
+    ROOT --> E[V3 21张]
+    ROOT --> F[R19 21张]
+    ROOT --> G[FRP 17张]
+    ROOT --> H[ALG 12张]
+    ROOT --> I[HW 8张]
+    ROOT --> J[SCN 13张]
+    ROOT --> K[ENG 13张]
+    ROOT --> L[PER 13张]
+    ROOT --> M[BAS 17张]
+    ROOT --> N[BLD 13张]
+    ROOT --> O[MP 8张]
+    ROOT --> P[NODE 13张]
+    ROOT --> Q[DP 8张]
+    ROOT --> R[VIZ 4张]
+    ROOT --> S[AV 4张]
+    ROOT --> T[XP 4张]
+    ROOT --> U[AGT 8张]
+    ROOT --> V[OPS 4张]
+    ROOT --> W[SOFT 8张]
+    ROOT --> X[H5 8张]
+    ROOT --> Y[ARC 4张]
+    ROOT --> Z[OPT 8张]
+```
+
+## 目录
+
+- 第一章 JavaScript 基础与异步（001-025，JS）
+- 第二章 CSS（026-037，CSS）
+- 第三章 TypeScript（038-054，TS）
+- 第四章 网络与浏览器（055-071，WEB）
+- 第五章 Vue3（072-092，V3）
+- 第六章 React 19（093-113，R19）
+- 第七章 框架原理（114-130，FRP）
+- 第八章 算法（131-142，ALG）
+- 第九章 手写题（143-150，HW）
+- 第十章 场景题（151-163，SCN）
+- 第十一章 工程化（164-176，ENG）
+- 第十二章 性能与安全（177-189，PER）
+- 第十三章 基础速记（190-206，BAS）
+- 第十四章 构建工具（207-219，BLD）
+- 第十五章 小程序（220-227，MP）
+- 第十六章 Node 与 BFF（228-240，NODE）
+- 第十七章 设计模式（241-248，DP）
+- 第十八章 可视化（249-252，VIZ）
+- 第十九章 音视频（253-256，AV）
+- 第二十章 跨端（257-260，XP）
+- 第二十一章 AI 与 Agent（261-268，AGT）
+- 第二十二章 运维与发布（269-272，OPS）
+- 第二十三章 软技能（273-280，SOFT）
+- 第二十四章 HTML5（281-288，H5）
+- 第二十五章 架构（289-292，ARC）
+- 第二十六章 性能优化进阶（293-300，OPT）
+
+## 第一章 JavaScript 基础与异步（001-025）
+
+### 001：JavaScript 有哪些数据类型？typeof 有什么坑？
+**答**：7 种基本类型 number/string/boolean/undefined/null/symbol/bigint 加引用类型 object；`typeof null` 返回 "object" 是历史遗留 bug；typeof 能区分 function，但数组和普通对象都返回 "object"。（回链 JS-001）
+
+### 002：var、let、const 的区别？什么是暂时性死区？
+**答**：var 函数作用域会提升并初始化为 undefined 且可重复声明；let/const 块级作用域，声明前访问抛 ReferenceError 即暂时性死区；const 不可重新赋值但对象内容可改，for 循环中 let 每轮新建绑定（这是循环闭包拿到正确 i 的原因）。（回链 JS-011）
+
+### 003：什么是闭包？原理是什么？
+**答**：内部函数引用外部变量，且外部函数返回后变量依然存活；函数创建时保存对外层词法环境的引用，只要函数可达环境就不被回收；是模块模式、函数工厂、高阶函数的基础，每次外部调用产生独立的环境实例。（回链 JS-013）
+
+### 004：this 的绑定规则与优先级？
+**答**：new 绑定 > 显式（call/apply/bind）> 隐式（obj.fn()）> 默认（window/严格 undefined）；箭头函数没有自身 this，定义时捕获外层；隐式丢失最常见——方法赋给变量或作为回调传入后变回默认绑定。（回链 JS-019）
+
+### 005：什么是原型和原型链？
+**答**：函数有 prototype、对象有内部属性 [[Prototype]]；属性查找沿 [[Prototype]] 一路向上直到 null 这条链就是原型链；自身属性遮蔽原型同名属性，工程代码用 Object.create 而非废弃的 __proto__。（回链 JS-026）
+
+### 006：有哪些继承方式？最优方案是什么？
+**答**：原型链继承引用属性被共享、借用构造函数方法不复用、组合继承调两次父构造；最优是寄生组合式继承——子原型 = Object.create(Parent.prototype) 配合 Parent.call(this)，class extends 本质与它相同。（回链 JS-028）
+
+### 007：Promise.all、allSettled、race、any 的区别？
+**答**：all 全部成功才成功、任一失败立即失败；allSettled 等全部落定返回 status 数组适合容错聚合；race 取第一个落定者适合超时控制；any 取第一个成功者，全部失败才抛 AggregateError。（回链 JS-037）
+
+### 008：浏览器的事件循环机制是怎样的？
+**答**：每轮循环：执行完调用栈 → 清空全部微任务 → 渲染检查（rAF、样式布局、绘制）→ 取一个宏任务执行；微任务如 Promise.then/MutationObserver，宏任务如 setTimeout/UI 事件/script 整体代码。（回链 JS-043）
+
+### 009：宏任务与微任务分别有哪些？为什么要区分？
+**答**：微任务含 Promise 回调、queueMicrotask、MutationObserver，每轮同批清空；宏任务含 setTimeout、I/O、UI 事件，每轮只取一个；区分的目的是保证"当前逻辑结束后、渲染前"完成状态同步，避免 UI 中间态闪烁。（回链 JS-044）
+
+### 010：0.1 + 0.2 为什么不等于 0.3？
+**答**：IEEE 754 双精度下 0.1 和 0.2 都是无限循环二进制的近似值，相加产生误差；安全整数上限是 2^53-1；展示用 toFixed，金额计算整数化（分）或用 decimal 库，超大整数用 BigInt。（回链 JS-055）
+
+### 011：CommonJS 与 ESM 的核心区别？
+**答**：CJS 运行时同步 require、输出值的拷贝；ESM 编译期静态分析、输出只读引用（live binding）；CJS 顶层 this 是 exports、ESM 是 undefined；ESM 的静态结构是 tree-shaking 可行的前提。（回链 JS-065）
+
+### 012：如何手写防抖 debounce？
+**答**：每次触发都重置定时器，停止触发 delay 毫秒后才真正执行；进阶点有 leading 立即执行与 cancel 取消清理；典型场景是搜索联想、resize 重算布局。（回链 JS-069）
+
+### 013：如何手写节流 throttle？
+**答**：一段时间内只执行一次，时间戳版首沿触发、定时器版尾沿触发，完整版首次立即 + 停止后补一次；典型场景 scroll 监听、按钮防连点；与防抖的区别口诀——防抖"等停止"、节流"控频率"。（回链 JS-070）
+
+### 014：V8 的垃圾回收机制是怎样的？
+**答**：分代回收——新生代用 Scavenge 复制算法（From/To 半区），两轮存活后晋升老生代；老生代用三色标记的增量标记 + 标记整理消除碎片；引用计数是 IE 旧方案，循环引用泄漏是它被弃用的根源。（回链 JS-073）
+
+### 015：常见内存泄漏场景有哪些？如何排查？
+**答**：高频场景是未清理的定时器/监听、闭包持有大对象、detached DOM、全局变量与无限增长缓存；排查用 Memory 面板三快照对比、Performance Monitor 看 JS heap 曲线；治理是组件卸载成对清理、缓存用 WeakMap 或 LRU 限容。（回链 JS-074）
+
+### 016：如何手写 LRU 缓存？
+**答**：Map 版利用插入序：get 时 delete 再 set 移到末尾，满时删 keys().next().value，全部 O(1)，生产首选；双链表版语义直白（头最新尾最旧）但代码量大，面试常要求手写以考察哨兵节点与指针操作。（回链 JS-086）
+
+### 017：如何实现 async 并发限制器（p-limit）？
+**答**：核心状态是活跃数 activeCount、等待队列与并发上限；未达上限立即执行否则入队；任务无论成败结算时 activeCount-- 并放行队首，返回值就是任务本身的 Promise，可直接进 Promise.all。（回链 JS-090）
+
+### 018：如何用 AbortController 取消 fetch？
+**答**：signal 传给 fetch，abort() 后请求立即中断并抛 AbortError；最常见用法是超时取消，abort 可携带原因；多个请求共享同一 signal 实现级联取消；用 e.name === 'AbortError' 区分业务错误。（回链 JS-091）
+
+### 019：前端全局错误捕获的完整方案？
+**答**：window error 捕获 JS 运行时错误与资源错误（资源错误不冒泡，需捕获阶段监听且 e.target !== window）；unhandledrejection 捕获 Promise 拒绝；上报用 sendBeacon 或图片打点防上报死循环；跨域脚本需 crossorigin + CORS 才能拿到真实堆栈。（回链 JS-121）
+
+### 020：手写 Promise 完整版的核心要点？
+**答**：三状态单向流转且只可变更一次；pending 期间回调入队，settle 后用 queueMicrotask 异步派发；then 返回新 Promise——返回值成为新值、抛错转为 reject；缺省 onRejected 时 reason 原样透传直到被 catch 接住。（回链 JS-147）
+
+### 021：事件流三阶段与 stopPropagation 的深解？
+**答**：捕获（window 到 target）→ 目标阶段（按注册顺序）→ 冒泡（target 到 window）；stopPropagation 阻断继续传播但同层后注册的监听仍执行；stopImmediatePropagation 连同层后续监听一起拦掉；捕获适合全局埋点、冒泡适合事件委托。（回链 JS-160）
+
+### 022：手写 fetch 封装完整版？
+**答**：超时用 AbortController + setTimeout 且与外部 signal 桥接合并；重试只针对网络错误与 5xx，配指数退避；拦截器请求侧注入 token、响应侧统一剥壳与错误归一；TimeoutError 要与用户取消区分开。（回链 JS-166）
+
+### 023：内存泄漏全场景清单与系统性排查？
+**答**：本质是不再需要的对象仍被 GC Root 可达引用持有；五大场景——setInterval 忘清、监听未移除、闭包持大对象、缓存无限增长、detached DOM；三快照对比后看 Retainers 链定位持有者；原则是"谁注册谁注销"、WeakMap/LRU 限容。（回链 JS-178）
+
+### 024：如何设计一个前端请求库？
+**答**：拦截器管道——请求侧注入 token、响应侧统一错误解包与 401 处理；重试限幂等方法上的网络错误与 5xx，加指数退避；取消统一走 AbortSignal 级联；GET 缓存按 method+url+params 生成 key，命中返回同一 Promise 天然防击穿。（回链 JS-184）
+
+### 025：权限系统前端核心（按钮/路由/接口三层）如何落地？
+**答**：路由级用 meta + 全局守卫 + 动态注册，按钮级用权限码指令，接口级由拦截器处理 401/403；登录后拉取权限码集合存响应式单例，三层共用同一数据源；前端权限只是体验优化，服务端校验才是安全底线。（回链 JS-193）
+
+## 第二章 CSS（026-037）
+
+### 026：标准盒模型和 IE 盒模型的区别？
+**答**：content-box 的 width 只含内容，总宽 = width + padding + border；border-box 的 width 已含 padding 与 border，内容区被压缩；工程全局 border-box，布局计算更直观。（回链 CSS-001）
+
+### 027：什么是 BFC？触发条件有哪些？
+**答**：BFC 是独立渲染区域，内部布局不影响外部；触发方式首选 display:flow-root（无副作用），另有 float、absolute/fixed、inline-block/flex/grid、overflow 非 visible；三大特性：隔离 margin 合并、包含浮动、不与浮动元素重叠。（回链 CSS-009）
+
+### 028：sticky 的生效条件？哪些场景失效？
+**答**：必须显式设置 top/bottom/left/right 至少一个阈值；在最近滚动祖先内吸附，且不能超出父容器边界；祖先 overflow 非 visible 会改变滚动容器，是 sticky 失效的最常见原因。（回链 CSS-015）
+
+### 029：flex:1、flex:auto、flex:none 的区别？
+**答**：flex:1 = 1 1 0% 忽略内容严格等分；flex:auto = 1 1 auto 先按内容分配再瓜分剩余；flex:none = 0 0 auto 固定尺寸不伸不缩；"等分"用 flex:1，"自适应内容但分剩余"用 auto。（回链 CSS-024）
+
+### 030：未知宽高元素如何一行代码水平垂直居中？
+**答**：grid + place-items:center 是最短写法；flex 版用 justify-content + align-items 双 center；absolute 版配 translate(-50%,-50%) 或 inset:0 + margin:auto；面试至少给三种并说明是否脱离文档流。（回链 CSS-035）
+
+### 031：rem 适配方案如何实现？
+**答**：核心是按屏宽动态设置 html 的 font-size；JS 方案 clientWidth / 设计稿宽 × 基准值；postcss-pxtorem 在构建期把 px 自动换算成 rem；纯 CSS 可用 calc(100vw / 7.5) 让 750 稿下 1rem=100px。（回链 CSS-038）
+
+### 032：移动端 1px 边框问题的成因与解决方案？
+**答**：成因是 CSS 的 1px 逻辑像素在 dpr=2/3 屏幕渲染为 2/3 物理像素，视觉偏粗；推荐伪元素绘制 200% 尺寸再 scale(0.5) 缩回；0.5px 边框需降级检测；viewport 整体缩放方案复杂已少用。（回链 CSS-040）
+
+### 033：为什么动画推荐用 transform 和 opacity？
+**答**：top/left/margin 改变布局，每帧触发 Layout + Paint 代价高；transform/opacity 在合成阶段由 GPU 处理，通常跳过布局与绘制；合成动画还能在合成器线程运行，主线程卡顿时依然流畅；位移一律用 translate。（回链 CSS-049）
+
+### 034：重排与重绘的关系？如何减少？
+**答**：流水线 JS→Style→Layout→Paint→Composite，重排必然引发重绘、反之不然；循环里交替读写 offsetTop 与 style 会强制同步布局（layout thrashing）；批量修改用 DocumentFragment、读写分离，动画与滚动走 transform + rAF。（回链 CSS-051）
+
+### 035：选择器优先级如何计算？
+**答**：四元组内联 > ID > 类/伪类/属性 > 元素/伪元素，高位胜出；!important 覆盖正常级联，都带 important 时再比优先级与源码顺序；:is() 取参数中最高优先级、:where() 恒为 0；工程规范禁用 !important。（回链 CSS-053）
+
+### 036：三栏布局（左右固定中间自适应）有哪几种实现？
+**答**：flex 的 flex:1 一行解决，首选；grid 用 grid-template-columns 声明式最强；float 兼容老浏览器、absolute 脱离文档流需自理高度、table-cell 仅维护遗留代码；选型 flex/grid 优先。（回链 CSS-131）
+
+### 037：100vh 在移动端有什么问题？dvh/svh/lvh 怎么选？
+**答**：iOS 的 100vh 按地址栏收起后的最大视口计算，地址栏展开时底部被裁；svh 是最小视口适合首屏 hero，lvh 是最大视口适合背景，dvh 实时变化最精确但会抖动；兼容写法先写 100vh 再用新单位覆盖。（回链 CSS-175）
+
+## 第三章 TypeScript（038-054）
+
+### 038：unknown 与 any 的区别？unknown 如何安全使用？
+**答**：unknown 同样能接收任何值，但使用前必须先收窄或断言，不能直接访问属性或调用；适合不可信数据的入口——JSON.parse 结果、第三方回调参数、catch 的 error；typeof/instanceof/in/自定义守卫对 unknown 全部适用。（回链 TS-010）
+
+### 039：never 类型的含义与典型用途？
+**答**：never 是底层类型，表示"不可能有值"——抛错与死循环函数的返回值；可以赋给任何类型但任何类型都不能赋给它；核心用途是穷尽性检查：联合类型收窄到 default 分支后剩余为 never，漏处理分支时赋值给 never 会编译报错。（回链 TS-011）
+
+### 040：interface 和 type 的区别？如何选择？
+**答**：interface 只描述对象/函数形状、支持声明合并；type 能表达联合、元组、映射、条件类型，重名直接报错；扩展方式 interface 用 extends、type 用交叉 &（交叉冲突属性变 never 不报错）；官方建议能用 interface 描述对象就用 interface。（回链 TS-014）
+
+### 041：什么是 const 断言 as const？
+**答**：把字面量整体变成最深层的只读结构——所有属性加 readonly、可变值收窄为字面量类型、数组变只读元组；常用于替代 enum 定义常量与配置表；只能用在字面量上，不能用在普通变量表达式。（回链 TS-019）
+
+### 042：TypeScript 有哪些类型收窄手段？
+**答**：typeof 收窄原始类型、instanceof 收窄类实例、in 收窄属性存在性；真值判断、相等判断（配合字面量类型）、includes 也有效；收窄只在当前控制流分支内有效，不改变原声明类型。（回链 TS-022）
+
+### 043：什么是可辨识联合？优势是什么？
+**答**：多个类型共享一个字面量"标签"属性（kind/type/tag）组合成联合；比较标签即可精准收窄，比 in/typeof 更直观可靠；状态建模、Redux 式 action、AST 节点天然适合；配合穷尽检查在编译期保证所有状态被处理。（回链 TS-027）
+
+### 044：泛型函数是什么？类型参数如何推断？
+**答**：泛型用类型参数 <T> 把类型"参数化"，同一份逻辑适配多种类型且保持精确；调用时按实参自动推断，也可显式指定；返回值类型随入参联动，这是 any 做不到的。（回链 TS-030）
+
+### 045：如何手写 Partial、Required、Readonly？
+**答**：三者都是同态映射类型，遍历 keyof T 修改修饰符；Partial 用 ? 变可选、Required 用 -? 去可选、Readonly 加 readonly 前缀；修饰符加减语法为 +?/-? 与 +readonly/-readonly。（回链 TS-035）
+
+### 046：如何手写 Pick、Omit、Record？
+**答**：Pick 以 K extends keyof T 约束后按 K 重新映射；Omit 是两步思路——先用 Exclude 从 keyof T 剔除 K 再 Pick；Record 用 keyof any（string|number|symbol）生成键集合到 V 的映射。（回链 TS-036）
+
+### 047：如何用 infer 手写 ReturnType、Parameters、InstanceType？
+**答**：infer 在 extends 条件类型中"占位"推断函数签名的某一部分；ReturnType 用 `T extends (...args:any)=>infer R ? R : never`；Parameters 推断参数元组、InstanceType 推断构造函数实例类型，模式相同。（回链 TS-038）
+
+### 048：什么是分布式条件类型？
+**答**：extends 左边是裸类型参数且传入联合类型时，会对每个成员分别求值再合并；这是 Exclude/Extract 能按成员过滤的根本原因；用元组包裹 `[T] extends [U]` 可阻止分发做整体判断。（回链 TS-045）
+
+### 049：enum 与 const enum 的区别与坑？
+**答**：普通 enum 编译生成真实的双向映射对象，有运行时代价，数字枚举反向映射会污染 key 空间；const enum 编译时内联无运行时对象，但 isolatedModules 下限制多；社区推荐 as const 对象 + keyof typeof 替代。（回链 TS-057）
+
+### 050：什么是协变与逆变？TS 函数参数是逆变吗？
+**答**：协变方向与包装一致（Dog[] 可赋给 Animal[]），TS 的对象、数组都是协变；函数参数在 strictFunctionTypes 下是逆变；方法简写语法保持双变兼容旧代码，属性箭头函数形式才严格逆变。（回链 TS-058）
+
+### 051：如何用 Zod 让 schema 与类型单一来源？
+**答**：手写 interface + 手写校验是双份维护易漂移；只写一份 Zod schema，用 z.infer 反推编译期类型，schema 是唯一事实来源；parse 运行时校验失败抛字段级错误；valibot/ajv+JSON Schema 同理。（回链 TS-120）
+
+### 052：strict 全家桶包含哪些？如何落地？
+**答**：strict 总开关含 strictNullChecks、noImplicitAny、strictFunctionTypes、strictPropertyInitialization、useUnknownInCatchVariables 等；辅助开关 noImplicitReturns、noUnusedLocals 等；存量仓库 tsc --noEmit 摸底、按目录豁免渐进收紧、CI 设为门禁。（回链 TS-125）
+
+### 053：provide/inject 如何用 InjectionKey 类型安全？
+**答**：key 用 InjectionKey<T> 类型的 Symbol——provide 端值被约束为 T，inject 端返回 T | undefined；带默认值时自动去掉 undefined，杜绝 as 断言导致 key 与类型脱节；key 独立文件导出即"注入契约"。（回链 TS-136）
+
+### 054：localStorage 如何做类型安全封装？
+**答**：存储条目带版本号 { v, data }，读取时版本匹配走校验、不匹配走迁移函数；validate 是运行时防线（localStorage 天然不可信）；泛型 T 由调用方声明，get/set 全链路同类型。（回链 TS-174）
+
+## 第四章 网络与浏览器（055-071）
+
+### 055：HTTP/2 多路复用怎么工作？解决了什么？
+**答**：报文拆成二进制帧，一条 TCP 连接交错传输多个 Stream，按 Stream ID 重组；解决 HTTP/1.1 应用层队头阻塞，并发不再受 6 连接限制；但 TCP 丢包仍阻塞所有流——TCP 层队头阻塞由 HTTP/3 解决。（回链 WEB-005）
+
+### 056：HTTP/3（QUIC）相比 HTTP/2 的改进？
+**答**：传输层从 TCP 换成 UDP 上的 QUIC，可靠性、流控、拥塞控制进用户态，握手集成 TLS 1.3；独立的流级流控彻底解决 TCP 队头阻塞；Connection ID 实现连接迁移（WiFi 切 4G 不重握手）；前端代码无感知。（回链 WEB-008）
+
+### 057：GET 和 POST 的区别？什么是幂等性？
+**答**：GET 安全幂等、参数在 URL 可缓存收藏；POST 非幂等、参数在 Body 默认不缓存；"GET 长度限制"是浏览器与服务器的实现限制而非协议限制；幂等性决定重试策略——POST 重试必须带幂等键。（回链 WEB-010）
+
+### 058：描述一次完整的 TLS 1.2 握手。
+**答**：ClientHello（版本/套件/随机数）→ ServerHello + 证书；客户端验证证书链后用公钥加密预主密钥发给服务器；双方用两个随机数 + 预主密钥算出会话密钥；互发 Finished 验证后开始加密通信；TLS 1.3 压缩到 1-RTT 并废弃 RSA 密钥交换。（回链 WEB-012）
+
+### 059：301、302、307、308 有什么区别？
+**答**：301 永久/302 临时，浏览器可能把 POST 改写成 GET（历史兼容行为）；307/308 不允许改方法（临时/永久）；接口迁移用 308/307 保住 POST 语义、旧 URL 下线用 301；301 转移 SEO 权重，302/307 不转移。（回链 WEB-017）
+
+### 060：强缓存是什么？Cache-Control 常用指令？
+**答**：强缓存浏览器本地直接用缓存不发请求（from disk/memory cache），Cache-Control 优先级高于 Expires；max-age 相对秒数、no-cache 跳过强缓存但仍可协商、no-store 彻底不缓存；private/public 控制代理与 CDN 可否缓存；HTML 常配 max-age=0, must-revalidate。（回链 WEB-022）
+
+### 061：协商缓存 ETag 和 Last-Modified 的原理与优先级？
+**答**：服务端下发 ETag（资源指纹）与 Last-Modified（修改时间），浏览器回带 If-None-Match / If-Modified-Since；两者都有时 ETag 优先级更高；Last-Modified 秒级精度且分布式 mtime 不一致会误判，ETag 内容寻址更准但有计算成本。（回链 WEB-023）
+
+### 062：工程上如何设计一套可靠的缓存策略？
+**答**：入口 HTML 用 no-cache 每次协商，保证发布即新版本；带 contenthash 的 JS/CSS/图片用 max-age=31536000, immutable；接口数据视业务用 no-store 或短缓存 + stale-while-revalidate；CDN 层与浏览器层配置必须一致。（回链 WEB-025）
+
+### 063：SameSite 有哪几个值？如何影响 CSRF 防御？
+**答**：Strict 完全禁止跨站携带但从外站链接进来丢登录态；Lax 允许顶级导航 GET 携带，是现代浏览器默认值；None 必须配合 Secure 用于跨站场景；CSRF 本质是借浏览器自动携带的 Cookie，Lax 已挡住绝大多数，再配 CSRF Token 与 Origin 校验双保险。（回链 WEB-030）
+
+### 064：什么是同源策略？限制什么、不限制什么？
+**答**：协议 + 域名 + 端口完全一致才是同源；限制跨源 XHR/fetch 响应读取、DOM 访问、Cookie/Storage 读取；不限制 img/script/link/video 等标签加载、表单提交；服务器之间的请求没有同源策略。（回链 WEB-034）
+
+### 065：CORS 简单请求和预检请求怎么区分？
+**答**：简单请求限 GET/HEAD/POST，且 Content-Type 为 text/plain、multipart/form-data、x-www-form-urlencoded 之一，不带自定义头；其余触发 OPTIONS 预检（application/json、Authorization 都会触发）；预检由浏览器自动完成，Access-Control-Max-Age 可缓存预检结果。（回链 WEB-035）
+
+### 066：从输入 URL 到页面渲染经历哪些阶段？
+**答**：网络阶段 DNS → TCP 握手 → TLS → 发送请求接收响应；渲染阶段解析 HTML 建 DOM、解析 CSS 建 CSSOM 合成渲染树；Layout 算几何、Paint 填像素、Composite GPU 合成上屏；JS 默认阻塞 DOM 解析、CSS 阻塞渲染，defer/async 改变脚本执行时机。（回链 WEB-048）
+
+### 067：CSS 和 JS 如何阻塞渲染？defer 与 async 怎么选？
+**答**：CSS 阻塞渲染但不阻塞 DOM 解析，还阻塞其后 JS 执行；默认 script 下载执行都阻塞；async 下载不阻塞、下载完立即执行、顺序不保证适合独立脚本（埋点）；defer 下载不阻塞、DOM 解析完按序执行，适合依赖 DOM 与顺序的业务脚本。（回链 WEB-051）
+
+### 068：首屏性能优化有哪些系统性手段？
+**答**：网络层 HTTP/2/3、CDN、preconnect/preload、压缩、WebP/AVIF；渲染层关键 CSS 内联、JS defer/async、首屏外懒加载、骨架屏；资源层路由级代码分割、Tree Shaking、按需引入；指标驱动——以 LCP/INP/CLS 为目标用 Lighthouse 与 RUM 持续回归。（回链 WEB-052）
+
+### 069：JWT 应该存哪里？Access + Refresh 双 Token 怎么落地？
+**答**：存 localStorage 任何 XSS 都能偷走，存 HttpOnly Cookie 需配 CSRF 防护；Access 短期（约 15 分钟）随请求走，Refresh 长期只用于换新且只发鉴权接口；401 后并发请求合并成一次 refresh，成功后重放排队请求；Refresh 要做轮换并保留服务端吊销能力。（回链 WEB-145）
+
+### 070：XSS 三种类型长什么样？分别怎么修？
+**答**：存储型恶意脚本入库危害最大、反射型藏 URL 参数靠诱导、DOM 型纯前端写 innerHTML/eval 等危险 sink；修复原则——默认用 textContent 等安全 API，富文本过 DOMPurify 白名单消毒，CSP 兜底；别用 v-html / dangerouslySetInnerHTML 插未消毒数据。（回链 WEB-151）
+
+### 071：跨域方案怎么选？
+**答**：能改服务端用 CORS（正统方案）；不能改则同域部署或网关代理；纯浏览器间用 postMessage（必须校验 origin）；开发环境 devServer proxy、生产 nginx 反代，两套逻辑同构；JSONP 已淘汰不再建议。（回链 WEB-195）
+
+## 第五章 Vue3（072-092）
+
+### 072：Vue3 相比 Vue2 有哪些核心变化？
+**答**：响应式从 Object.defineProperty 换成 Proxy，支持新增/删除属性、数组索引与 length；新增组合式 API，逻辑复用从 mixin 转向 composable；编译期优化（静态提升、patchFlag、block tree）+ 支持 Fragment 多根节点；全面 TS，新增 Teleport/Suspense/KeepAlive，移除 filter 与 $on。（回链 V3-001）
+
+### 073：Proxy 相比 Object.defineProperty 有哪些优势？
+**答**：defineProperty 只能劫持初始化时已存在的属性，新增/删除要 $set，数组索引与 length 拦截不到需重写 7 个方法；Proxy 代理整个对象，13 种拦截器，还能代理 Map/Set，嵌套对象可惰性代理提升初始化性能；局限是无法 polyfill 到 IE11。（回链 V3-002）
+
+### 074：描述 Vue3 的 track 与 trigger 机制。
+**答**：依赖收集单位是 effect（渲染函数、computed、watch 回调都是 effect）；track 发生在 get 拦截，把 activeEffect 记入 targetMap → depsMap → deps 三层结构；trigger 发生在 set 拦截，按 target + key 找到 effect 集合交给调度器执行。（回链 V3-003）
+
+### 075：ref 为什么需要 .value？与 reactive 的本质区别？
+**答**：Proxy 只能代理对象无法代理基本类型，所以 ref 把值包装成 RefImpl 对象，通过 class 的 value getter/setter 实现 track/trigger——这就是必须 .value 的原因；对象类型的 ref 内部会调 reactive 做深层转换；模板中 ref 自动解包。（回链 V3-006）
+
+### 076：Vue3 的异步批量更新（调度器）如何工作？
+**答**：trigger 不直接重渲染，而是把渲染 effect 放进 queueJob 队列；队列用 Set 去重，同一 tick 多次修改只入队一次；通过 Promise.then 在微任务中统一 flush——改 100 次数据只更新 1 次 DOM。（回链 V3-007）
+
+### 077：computed 的缓存机制是什么？
+**答**：依赖不变时返回缓存值不重复计算 getter；内部用 dirty 标记——依赖变更只把 dirty 置 true 并通知订阅它的 effect，真正读取时才重算；computed 本身也是 effect，惰性求值 + 缓存使它天然适合派生状态。（回链 V3-015）
+
+### 078：watchEffect 和 watch 的区别？
+**答**：watch 懒执行、显式声明数据源、回调拿到新旧值；watchEffect 立即执行、自动收集依赖、没有新旧值；两者都返回 stop 函数且组件卸载自动停止；副作用清理用 onCleanup 回调（常用于取消上一次请求）。（回链 V3-019）
+
+### 079：组合式 API 解决了 mixin 的哪些问题？
+**答**：mixin 属性来源不明、命名冲突静默覆盖、与组件隐式耦合（互相不知道依赖什么）；composable 显式 import、显式传参、显式返回，天然支持 TS 类型推导。（回链 V3-021）
+
+### 080：Pinia 为什么取代了 Vuex？
+**答**：去掉 mutation，action 中直接修改状态，模板代码减半；store 之间直接互相引用，模块天然扁平化不需要 modules 嵌套；完整 TS 推断无需手写 Payload 类型；Vue2/3 均可用、SSR 支持好，是官方推荐。（回链 V3-031）
+
+### 081：key 的作用？为什么不能用 index 当 key？
+**答**：key 是 vnode 的身份标识，diff 时判断"是否同一节点"从而复用 DOM 并移动而非重建；无 key 走就地复用状态可能错位；index 当 key 在头部插入后所有 key 变化且内容平移，带内部状态的组件（输入框）会错乱；用稳定唯一的业务 id。（回链 V3-042）
+
+### 082：Vue3 快速 diff 分为哪几步？
+**答**：先预处理相同前缀与后缀缩小乱序区间；旧节点遍历完则批量挂载、新节点遍历完则批量卸载；乱序区间建 key→index 映射记录 source；对 source 求最长递增子序列，LIS 内节点不动、其余倒序 move，DOM 移动次数最少。（回链 V3-043）
+
+### 083：patchFlag 和静态提升如何加速更新？
+**答**：静态提升把纯静态 vnode 提到 render 函数外只创建一次，diff 直接跳过；patchFlag 给动态节点打标（文本/class/props 等），diff 只比对标记部分；block tree 把动态节点收集进扁平数组，更新不再递归整棵树；这是编译时优化路线。（回链 V3-044）
+
+### 084：Pinia 的 storeToRefs 解决什么问题？
+**答**：直接解构 store 会丢失响应式（state 变普通值，action 不受影响）；storeToRefs 只把 state 和 getters 转成 ref，action 保持原样可直接解构；内部基于 toRefs 并跳过函数属性；忘记用它是最常见的响应式丢失事故。（回链 V3-054）
+
+### 085：完整描述一次导航中守卫的执行顺序。
+**答**：全局 beforeEach → 路由独享 beforeEnter → 组件内 beforeRouteEnter → 全局 beforeResolve → 确认导航 → 全局 afterEach → DOM 更新 → beforeRouteEnter 的 next 回调；Router4 可不写 next（return false 取消、return 路由对象重定向）；afterEach 能拿到 failure 用于埋点。（回链 V3-058）
+
+### 086：长列表渲染有哪些优化手段？
+**答**：虚拟滚动只渲染可视区条目（vue-virtual-scroller 等）；大数据用 shallowRef/shallowReactive 避免深层代理，只读展示用 v-once/v-memo；分页懒加载减少单次渲染量，KeepAlive 缓存列表页；非紧急更新放 requestIdleCallback。（回链 V3-064）
+
+### 087：Vue SSR 的原理与优缺点？
+**答**：服务端用 renderToString 把组件渲染成 HTML 直接返回，首屏无需等 JS；客户端 createSSRApp 挂载时 hydration 激活已有 DOM 只补挂事件与状态；优点首屏快、SEO 友好，代价是服务器压力与开发约束；window/document 必须放 onMounted 或客户端分支。（回链 V3-065）
+
+### 088：如何完整实现动态路由与权限菜单？
+**答**：守卫发现 token 存在但路由未注册 → 请求菜单 → 组件名经 import.meta.glob 映射成懒加载组件 → addRoute 逐条挂载 → 最后注册 404 兜底 → replace 重进；404 必须最后注册否则拦截一切未匹配路径；模块级标记防止重复注册。（回链 V3-092）
+
+### 089：Vue3.4 的 defineModel 怎么用？
+**答**：一个宏替代三件套——声明 modelValue prop、注册 update:modelValue emit、返回可读写 ref；组件内直接 keyword.value = x 自动同步父组件；支持多个 v-model、必填校验、默认值与修饰符；是受控/非受控双模式组件的官方化简。（回链 V3-131）
+
+### 090：手写简化版 Vue3 reactivity 核心？
+**答**：三件套 targetMap + track（get 时收集 activeEffect）+ trigger（set 时重跑）；effect 执行前后置与清空 activeEffect，重跑前 cleanup 删除旧依赖解决分支切换；trigger 跳过自身防死循环；扩展口诀——嵌套用栈、computed 加脏标记、scheduler 换回调即 watch。（回链 V3-136）
+
+### 091：手写 nextTick（微任务批处理）？
+**答**：更新异步批处理——job 进 Set 队列去重，Promise.then 注册一次 flush，同一轮改 N 次只渲染 1 次；nextTick 返回 flush 完成后的 Promise，回调执行时 DOM 已更新；flush 期间新入队的 job 属于下一轮；按组件 uid 排序保证父先子后。（回链 V3-141）
+
+### 092：中后台管理系统前端架构怎么设计？
+**答**：权限四层——动态 addRoute → 菜单过滤 → v-perm 按钮权限码 → 接口兜底；Layout 容器（侧边栏+顶栏+router-view）与业务页面彻底分离；表格体系 ProTable 封装 + useTableQuery 状态机；表单 schema 化让 80% 的 CRUD 配置生成；动态路由 + keep-alive 白名单 + 微前端预留。（回链 V3-182）
+
+## 第六章 React 19（093-113）
+
+### 093：JSX 的本质是什么？和 ReactElement 什么关系？
+**答**：JSX 是语法糖，编译后产出描述 UI 的普通 JS 对象（ReactElement）；现代编译产物调用 jsx-runtime 的 jsx 函数而非旧 createElement；Element 只是"描述"，真正 DOM 创建发生在渲染器 commit 阶段。（回链 R19-011）
+
+### 094：useState 的函数式更新为什么必须掌握？
+**答**：setState 传函数时以"当前最新值"为参数，天然规避批处理导致的陈旧值；同一事件连续三次 setCount(count + 1) 只加 1，函数式更新才正确；必须是纯函数，StrictMode 下会调用两次帮助暴露副作用。（回链 R19-016）
+
+### 095：useEffect 依赖数组语义？如何处理请求竞态？
+**答**：依赖数组声明 effect 依赖哪些响应式值，变化时先执行上次清理再重跑；空数组挂载后跑一次、不写则每次渲染后跑；竞态处理用 AbortController 取消旧请求，或用 ignore 标志位丢弃过期结果。（回链 R19-018）
+
+### 096：StrictMode 为什么让 effect 执行两次？
+**答**：开发环境故意 mount → unmount → remount 一次，模拟快速切换场景；目的是提前暴露没有正确清理的副作用（忘取消订阅、忘清定时器）；只发生在开发模式；幂等 + 完整清理的 effect 表现不变，这正是 React 要验证的。（回链 R19-020）
+
+### 097：useLayoutEffect 与 useEffect 的区别？
+**答**：useEffect 绘制之后异步执行不阻塞渲染；useLayoutEffect 在 DOM 变更后、绘制前同步执行，适合测量 DOM 并立即修改布局，避免"先画错再修正"的闪烁；代价是阻塞绘制，滥用拖慢首屏；SSR 下会告警。（回链 R19-026）
+
+### 098：为什么列表要用稳定唯一的 key？
+**答**：key 是 Fiber 节点同级间的身份标识，Diff 靠它匹配决定复用还是重建；index 当 key 在头部插入/删除时后面全部错位复用，典型 bug 是输入框内容串行、组件状态"搬家"；用数据自带稳定 id，纯静态展示列表才可用 index。（回链 R19-035）
+
+### 099：React Diff 算法的三条策略？
+**答**：不同类型元素产生不同的树，类型不同直接卸载重建；同层比较，跨层级移动视为删除加重建；同层同类型子节点靠 key 标识身份，匹配则复用 Fiber 只更新变化 props；三条假设把复杂度从 O(n^3) 降到 O(n)。（回链 R19-036）
+
+### 100：Fiber 架构的双缓存与可中断渲染？
+**答**：Fiber 树以链表组织支持暂停后从任意节点恢复；双缓存——current 树对应当前屏幕，workInProgress 树在内存构建完一次性替换；render 阶段可中断可丢弃必须无副作用，commit 阶段同步不可中断；createRoot 是启用并发的前提。（回链 R19-038）
+
+### 101：Suspense 的工作原理？
+**答**：子组件数据未就绪时 throw 一个 Promise，React 捕获后展示最近的 Suspense fallback；Promise resolve 后重试渲染并替换 fallback；数据源可在组件树外提前创建实现"请求先于渲染"；多个边界分段加载、各自展示骨架屏。（回链 R19-040）
+
+### 102：错误边界 ErrorBoundary 怎么实现？
+**答**：实现 getDerivedStateFromError 或 componentDidCatch 的 class 组件（目前仍需 class）；前者渲染降级 UI，后者拿 error 与 componentStack 适合上报；捕获的是子树渲染期与生命周期错误，包在路由/区块级兜底；事件与异步错误捕不到需另行处理。（回链 R19-042）
+
+### 103：虚拟列表的原理？核心参数怎么算？
+**答**：只渲染可视区条目，滚动时计算起始索引与可见条数，其余用撑高容器占位；startIndex = floor(scrollTop / itemHeight)，可见条数 = ceil(viewportHeight / itemHeight) 再加缓冲；用 transform 或 paddingTop 把窗口平移到位；不定高需缓存位置估算修正。（回链 R19-049）
+
+### 104：React Compiler 是什么？取代 useMemo 吗？
+**答**：编译期自动分析组件与 Hook，插入等价的缓存逻辑，理想情况不再手写 useMemo/useCallback/memo；基于静态分析，无法证明安全的代码会放弃优化不做错误缓存；定位是"让默认渲染足够快"，与手动优化不冲突。（回链 R19-051）
+
+### 105：CSR、SSR、SSG、ISR 的区别与选择？
+**答**：CSR 浏览器渲染，首屏慢 SEO 弱但交互后体验好；SSR 每请求服务端渲染，首屏快但服务器成本高；SSG 构建时生成静态 HTML，CDN 分发最快适合内容不常变；ISR 是 SSG 的增量更新（revalidate），兼顾新鲜度与速度。（回链 R19-053）
+
+### 106：Context 性能差在哪？怎么优化？
+**答**：value 一变所有消费组件整体重渲染，且 value 常是 render 时新建的对象；优化一拆分 Context 高低频分离；优化二 value 用 useMemo 稳定，dispatch 等稳定引用单独放一个 Context；优化三 use-context-selector 让组件只订阅选中的切片。（回链 R19-080）
+
+### 107：手写简化版 useState 说明 hooks 链原理？
+**答**：hook 按调用顺序挂在 fiber 的 hooks 链表上，渲染时 cursor 归零靠顺序对位——这就是 Hooks 不能写在 if 里的根源；setState 不直接改值而是把 action 入队，下次渲染消费队列、函数式更新累积；state 是渲染快照，事件回调读到的是本次闭包旧值；多次 setState 批处理一轮只重渲染一次。（回链 R19-131）
+
+### 108：useTransition 的完整场景有哪些？
+**答**：心法是把高优先级反馈（输入、tab 高亮）与低优先级渲染（重列表）拆开，后者包进 startTransition；tab 切换立即高亮、慢面板用 isPending 显示骨架；搜索输入即时回显、结果列表用 transition 后的值渲染；isPending 必须用于 UI 反馈。（回链 R19-138）
+
+### 109：前端请求层架构怎么设计？
+**答**：分层 http（裸请求+拦截器）→ api（领域化函数）→ hooks（缓存状态由 TanStack Query 接管），组件永远不直接 fetch；拦截器只做横切关注点——注入 token/traceId、错误码翻译、401 刷新重放；取消三处都接——路由切换、搜索防抖、组件卸载；错误统一 code/message/data 形状。（回链 R19-144）
+
+### 110：完整权限系统三层如何打通？
+**答**：路由层守卫 + 动态路由表决定"能否进页面"，按钮层 usePermission 条件渲染，接口层前端拦 401/403、服务端真正鉴权；登录后拉 permissions 集合存 store，三层读同一份；路由表按 code 过滤生成，菜单即路由表投影；无权限体验分层——403 页/隐藏置灰/拦截上报。（回链 R19-153）
+
+### 111：手写 zustand mini？
+**答**：内核极简——模块级 store 保存 state，setState 浅合并后通知订阅者；React 接入用 useSyncExternalStore，selector 切片 + useRef 缓存上次结果做浅比较，切片没变就不重渲染；这就是"精确订阅"的本质，50 行内可完整实现。（回链 R19-158）
+
+### 112：useSyncExternalStore 接入 external store 的注意事项？
+**答**：签名 (subscribe, getSnapshot, getServerSnapshot?)，是 React 18 为非 React 状态源提供的官方桥；getSnapshot 必须缓存稳定（内容不变返回同一引用否则无限循环）；subscribe 返回取消函数，数据变化后先更新 store 再通知；getServerSnapshot 供 SSR 防 hydration mismatch，且天然处理 tearing。（回链 R19-159）
+
+### 113：手写 Redux 核心？
+**答**：createStore 闭包保存 currentState + listeners，dispatch 先跑 reducer 再通知；applyMiddleware 本质是 dispatch 的装饰——注入 {getState, dispatch} 链式包装出增强版 dispatch；中间件约定 store => next => action；要点是 reducer 纯函数、通知在 reducer 之后、compose 从右向左组合。（回链 R19-160）
+
+## 第七章 框架原理（114-130）
+
+### 114：用 Proxy 手写简化版 Vue3 响应式？
+**答**：三件套——effect 注册副作用、track 在读属性时收集当前 effect、trigger 在写属性时重新执行收集到的 effect；数据结构 targetMap: WeakMap<target, Map<key, Set<effect>>>；reactive 用 Proxy 拦截 get/set，get 里调 track、set 里调 trigger；源码再叠加嵌套 effect 栈与 cleanup。（回链 FRP-001）
+
+### 115：Vue3 依赖收集的三层 WeakMap 结构？为什么用 WeakMap？
+**答**：WeakMap<target, Map<属性key, Set<effect>>> 分别按对象、属性、去重 effect 组织；WeakMap 的 key 是弱引用，对象无引用后整个依赖表随之被 GC，无需手动清理——这是决定性原因；第二层用 Map 因 key 可能是 Symbol；effect 重跑前 cleanup 解决分支切换的遗留依赖。（回链 FRP-002）
+
+### 116：computed 的懒计算与脏标记如何实现？
+**答**：两段式——依赖变化时只把 _dirty 置 true 并通知订阅 computed 的 effect，getter 本身不执行（懒计算）；真正读取 value 时若 _dirty 为 true 才执行 getter 重算并缓存；computed 既是上游的订阅者又是下游的依赖，形成依赖链。（回链 FRP-005）
+
+### 117：Vue 的异步批量更新与 nextTick 原理？
+**答**：同轮多次修改组件只更新一次——trigger 把更新 job 放进去重队列（Set）；队列通过 Promise.then 微任务批量 flush，按组件 id 排序父先子后；nextTick 的回调排在 flush 之后执行，所以此时 DOM 已更新——这就是"改完立刻读 DOM 是旧值"的原因。（回链 FRP-009）
+
+### 118：什么是虚拟 DOM？h 函数返回什么？
+**答**：用 JS 对象描述 DOM 树 {type, props, children, key}，更新 = 新旧 vnode 对比后最小化操作真实 DOM；h 只是 vnode 工厂，负责规范化参数不触碰真实 DOM；价值是声明式 UI、跨平台、可 diff；代价是多一层对象创建与 diff 开销。（回链 FRP-010）
+
+### 119：diff 子节点时双端比较与 LIS 各起什么作用？
+**答**：Vue2 双端比较用头尾四指针四步匹配，高效处理列表反转/前插；Vue3 先 patch 同前后缀，再对乱序区间建 key→index 映射求最长递增子序列——LIS 内节点不动，只移动其余节点，移动次数最少；React 单向遍历 + key Map，不做 LIS。（回链 FRP-012）
+
+### 120：Fiber 架构是什么？为什么用链表？
+**答**：React 15 递归更新整棵树不可中断；Fiber 节点用 child/sibling/return 三指针链表化，遍历用循环 + 指针回退，随时暂停保存现场；节点还带 alternate（双缓冲）、lanes（优先级）、flags、stateNode；本质是把递归改造成"可暂停的迭代"。（回链 FRP-023）
+
+### 121：组件里多次调用 useState，React 如何区分？
+**答**：fiber.memoizedState 指向单向 Hook 链表，mount 时按调用顺序建节点，update 时按同序读取——第 3 次调用的 useState 永远读第 3 个节点；update 对象先进该 hook 的 queue 再依次计算；靠调用顺序与链表位置对齐，不靠参数和名字。（回链 FRP-028）
+
+### 122：为什么 Hooks 不能写在条件语句或循环里？
+**答**：Hook 的身份完全由链表位置决定，React 只认"第 N 次调用"；条件分支少调一个 hook 后续全部错位，数据串乱甚至崩溃；开发环境报 "Rendered fewer hooks than expected"；正确做法是把条件移进 hook 内部或拆组件。（回链 FRP-029）
+
+### 123：React 18 自动批处理原理？setState 为什么"异步"？
+**答**：setState 只把 update 排进队列并调度一次 render，真正更新在微任务/调度器回调批量执行——"异步"的体感来源；批处理把同轮多次 setState 合并为一次 render 只取最终值；React 17 只在合成事件内批处理，18 起 ensureRootIsScheduled 全场景覆盖；flushSync 可强制同步。（回链 FRP-030）
+
+### 124：React 合成事件与事件委托原理？
+**答**：React 在根容器上委托监听，利用冒泡统一进入分发器；分发器沿 Fiber 的 return 链向上收集捕获与冒泡两条路径的回调，按序执行模拟完整事件流；回调拿到的是 SyntheticEvent 合成对象，抹平浏览器差异，e.nativeEvent 取原生对象；收益是减少监听器数量并接入批处理调度。（回链 FRP-037）
+
+### 125：从 setState 到界面更新的完整链路？
+**答**：update 入 hook 队列并 scheduleUpdateOnFiber → lane 并入 pendingLanes、按最高优先级选调度器 → render 阶段 beginWork 计算 state、产出 workInProgress 树（可中断）→ commit 阶段 mutation 应用 DOM、layout 跑 useLayoutEffect、paint 后 passive 跑 useEffect；口诀：排队 update → 调度 lane → 可中断 render → 同步 commit。（回链 FRP-039）
+
+### 126：Vue 与 React 响应式驱动更新的本质差异？
+**答**：Vue 是 push 模型——Proxy 拦截数据变化时精确知道谁在用，只把相关组件入队，粒度是组件；React 是 pull 模型——setState 只表达"可能变了"，默认向下整树重算，靠 memo/useMemo 手动拦截；React 选 pull 是为了 Concurrent 可中断重算，Vue3 靠响应式天然知道最小更新范围，是设计取舍非优劣。（回链 FRP-046）
+
+### 127：SSR 的 hydration 原理？为什么水合不匹配？
+**答**：SSR 输出的 HTML 已含完整 DOM，客户端 hydration 不重建而是"认领"——复刻组件树与现有 DOM 对齐，只补挂事件与状态；mismatch 源于两端渲染结果不一致（Date.now/random/typeof window 分支）；React 18 会在首个差异处丢弃服务端 DOM 改为客户端重渲，代价大；随机值放 useEffect、时间统一服务端传入。（回链 FRP-049）
+
+### 128：Hooks 链表与 fiber.memoizedState 的关系？
+**答**：fiber 的 memoizedState 指向 Hook 链表头，节点结构 {memoizedState, queue, next}；渲染时 workInProgressHook 指针按调用顺序逐个取/建节点；顺序错乱会让第 N 次 Hook 对上第 M 个节点，eslint 的 rules-of-hooks 就是静态检查调用顺序；多次 setState 是同一 hook 节点上的 queue，与"多个 Hook 各一条链"是两个维度。（回链 FRP-079）
+
+### 129：Scheduler 为什么用 MessageChannel 实现时间切片？
+**答**：调度器需要宏任务级让出——微任务会在当前帧绘制前一口气跑完无法切片；setTimeout 嵌套 5 层后最小间隔被钳到 4ms 且后台 tab 大幅节流；MessageChannel 的 postMessage 无最小延迟，是主线程上"尽快的宏任务"；workLoop 里 shouldYield 检查约 5ms 帧预算，超了就保存断点让出主线程。（回链 FRP-148）
+
+### 130：TanStack Query 的核心原理？
+**答**：内核是 QueryCache: Map<queryHash, Query>，queryKey 相同即同一个 Query；去重——同 key 观察者共享同一个 promise，并发调用只发一次请求；观察者引用计数驱动 GC，归零后启动 gcTime（默认 5 分钟）超时删除；staleTime 决定新鲜期，过期则先返回旧数据再后台刷新（SWR 语义）。（回链 FRP-161）
+
+## 第八章 算法（131-142）
+
+### 131：扁平数组如何 O(n) 转树？
+**答**：第一遍循环按 id 建 Map（节点带 children 数组）；第二遍按 pid 挂到父节点 children，找不到父节点的作为根；避免递归查找父节点的 O(n²)；时间空间均 O(n)。（回链 ALG-021）
+
+### 132：用 Map 实现 LRU 缓存？
+**答**：Map 迭代顺序即插入顺序，可模拟双向链表；get/put 时先 delete 再 set 把 key 挪到最新位置；超容量时 keys().next().value 拿最旧 key 删除；get/put 均 O(1)。（回链 ALG-048）
+
+### 133：手写并发限制器 p-limit 的核心逻辑？
+**答**：计数器 active + 等待队列：调用返回 Promise 入队；next() 在 active < 限额时出队执行；任务 finally 里 active-- 并继续调度下一个；完成时机用 then(resolve, reject) 透传原 Promise 结果。（回链 ALG-054）
+
+### 134：如何实现指数退避重试？
+**答**：循环 + 捕获异常，成功即返回；失败且还有额度就等待 base × factor^attempt 后重试；指数退避（Exponential Backoff）+ 随机抖动（jitter）是标准实践，避免大量客户端同时重试打爆服务端。（回链 ALG-055）
+
+### 135：如何用滑动窗口求无重复字符的最长子串？
+**答**：右指针扩张，遇重复字符时左指针收缩直到窗口内无重复（Set 记录窗口字符），每步更新最大长度；右指针最多 n 步、左指针最多 n 步整体线性，优于暴力 O(n²)。（回链 ALG-058）
+
+### 136：虚拟列表不定高时为什么必须二分查找定位？
+**答**：滚动事件每帧触发，O(n) 遍历在几万条数据下会掉帧；前缀和数组 offsets 单调递增是标准二分场景；找"第一个累计偏移 >= scrollTop 的下标"，O(log n)，10 万条约 17 次比较。（回链 ALG-066）
+
+### 137：手写快排？它为什么不稳定？
+**答**：三路分区把数组切成 <pivot、==pivot、>pivot 三段递归排两侧；不稳定是因为分区交换会打乱相等元素的原相对顺序；平均 O(n log n)、最坏 O(n²)（随机 pivot 规避），空间 O(log n) 递归栈。（回链 ALG-070）
+
+### 138：Vue3 diff 为什么要用 LIS？手写 O(n log n) 版本？
+**答**：LIS 找出"下标递增即不用动"的最长节点集，其余节点才需要真实 DOM 移动，移动次数最少；getSequence 用贪心 + 二分维护最小尾部，p 数组记录前驱用于回溯出真正子序列；值为 0 表示新增节点要跳过。（回链 ALG-078）
+
+### 139：如何用拓扑排序检测循环依赖？
+**答**：统计每个节点入度，入度为 0 的进队列；依次出队并把邻居入度减 1，减到 0 就入队；最终出队数 < 节点数说明有环；微前端加载、npm 依赖树、任务编排都靠它，O(V + E)。（回链 ALG-087）
+
+### 140：手写深拷贝（循环引用 + 特殊类型）？
+**答**：三步走——原始值与 null 直接返回；Date/RegExp/Map/Set 各分支处理且成员递归克隆；普通对象用 WeakMap 在递归之前记录"原对象 → 克隆对象"，再次遇到即循环引用直接返回克隆占位；Reflect.ownKeys 可带出 Symbol 键。（回链 ALG-096）
+
+### 141：大文件上传全链路（分片/重试/秒传/续传）？
+**答**：file.slice 切固定分片 → 抽样 hash（首中尾各 2MB + 文件大小）算 SHA-256 问服务端秒传 → verify 拿已传分片列表实现断点续传 → 并发池上传、单片失败重新入队 → 全部完成通知合并；核心是"队列 + 并发计数 + 补位调度"。（回链 ALG-100）
+
+### 142：如何高效取 TopK？
+**答**：维护大小为 K 的小顶堆，遍历数据比堆顶大就替换并下沉，否则跳过；堆内始终是当前最大的 K 个，时间 O(n log k)、空间 O(k)，K=10 时几乎线性；取"最差的前 K"用大顶堆对称处理。（回链 ALG-153）
+
+## 第九章 手写题（143-150）
+
+### 143：手写 Promise 核心（then 链）的评分点？
+**答**：状态只能从 pending 单向流转且不可逆；then 必须返回新 Promise 才能链式，回调用 queueMicrotask 异步执行；pending 时回调入队列、resolve 后统一触发；返回 thenable 要等待落定；抛异常转 reject；缺省回调时值穿透。（回链 HW-001）
+
+### 144：手写 Promise.all 的评分点？
+**答**：返回新 Promise，结果数组按下标写入、与传入顺序一致（不是完成顺序）；全部成功才 resolve，任一 reject 立即整体失败（fail-fast）；非 Promise 值用 Promise.resolve 包装；用计数器判断完成而非 results.length；空数组直接 resolve([])。（回链 HW-002）
+
+### 145：手写防抖（含 immediate/cancel）的评分点？
+**答**：闭包保存 timer，每次先 clearTimeout 再重设；immediate 模式首次立即执行、静默期内全部丢弃、静默期后恢复；cancel 要同时清 timer 并置空变量（否则 immediate 判断错乱）；返回普通函数用 fn.apply 透传 this 与参数。（回链 HW-014）
+
+### 146：手写节流的评分点？
+**答**：两种经典实现——时间戳版（首次立即、末次不执行）+ 定时器版（末次必执行、首次延迟），合并版是满分答案；闭包记录上次执行时间 prev，wait - (now - prev) 是剩余冷却；切到时间戳触发时要清掉挂着的 timer 防重复执行。（回链 HW-015）
+
+### 147：手写深拷贝的评分点？
+**答**：基础类型直接返回；Date/RegExp 走专属构造；循环引用用 WeakMap 缓存已拷贝对象（弱引用不阻止 GC 是高频追问）；Map/Set 按各自 API 拷贝内部键值；保留原型 Object.create(Object.getPrototypeOf)；遍历用 Reflect.ownKeys 含 Symbol key。（回链 HW-016）
+
+### 148：手写 LRU 缓存的评分点？
+**答**：get 和 put 都要 O(1) 是判题核心；Map 版利用插入序，命中先 delete 再 set 移到末尾、满时删 keys().next().value；双链表版用 head/tail 哨兵，命中摘下挂尾部、淘汰删 head.next；get 不存在返回 -1，先说清约定。（回链 HW-021）
+
+### 149：手写虚拟列表（定高）的评分点？
+**答**：三个核心量——start = floor(scrollTop / itemHeight)、可见数 = ceil(clientHeight / itemHeight) 加上下 buffer、offset = start × itemHeight 用 transform/padding 顶回位置；外层撑出总高度形成真实滚动条；不定高需缓存测量高度 + 二分定位；数据千级以上才值得用。（回链 HW-037）
+
+### 150：手写 React useState 的评分点？
+**答**：hooks 状态存模块级数组，按调用顺序用递增 index 对位——"Hooks 不能写在 if/循环里"的原因必讲；setState 支持函数式更新 setCount(c => c + 1)；setState 触发重渲染，渲染开始时 index 重置 0；每次渲染有独立 state 快照；初始化只在第一次。（回链 HW-040）
+
+## 第十章 场景题（151-163）
+
+### 151：线上页面突然大面积白屏如何排查？
+**答**：先止血再查因——全量白屏优先回滚上一版本，确认影响范围（全量还是部分用户、哪个版本入口）；排查链路：JS 资源加载失败（CDN/路径/缓存）→ JS 运行时报错（监控 + sourcemap）→ 接口异常 → DOM 存在但不可见；预防是接入白屏检测，onload 后检查根节点内容量。（回链 SCN-001）
+
+### 152：首屏加载超过 5 秒，给出完整优化方案？
+**答**：先量化再动手——Lighthouse 与 Performance 跑出 LCP/FCP/TTFB，Network 瀑布找最大瓶颈；网络层 CDN、HTTP/2、Gzip/Brotli、接口合并预请求；体积层路由懒加载、按需引入、图片压缩 webp、剔除无用依赖；渲染层关键 CSS 内联、骨架屏、SSR，静态资源 hash 强缓存一年。（回链 SCN-003）
+
+### 153：搜索框连续输入请求乱序，旧结果覆盖新结果怎么办？
+**答**：根因是竞态——先发的请求后返回覆盖新结果，核心手段是"请求取消 + 忽略过期响应"；用 AbortController 取消上一次未完成请求，输入侧配 300ms 防抖；服务端不支持取消也没关系，abort 后 fetch 直接 reject，忽略 AbortError 即可。（回链 SCN-008）
+
+### 154：大文件分片上传与断点续传怎么实现？
+**答**：file.slice 按 5MB 切片，串行或小并发上传；上传前调 verify 接口拿服务端已有分片索引，跳过即续传；全部分片传完调 merge，服务端按序合并并校验 hash；页面刷新后再进来凭文件 hash 走同一套 verify 恢复进度。（回链 SCN-012）
+
+### 155：accessToken 过期如何做到无感刷新？
+**答**：双 Token——access 短期随业务请求携带，refresh 长期仅用于换新；拦截器捕获 401 用 refresh 换新后重放原请求，refresh 也失效才踢回登录页；并发 401 只触发一次刷新——复用同一个"刷新中"Promise，完成后统一带新 Token 重放。（回链 SCN-018）
+
+### 156：1 万条数据渲染表格卡死，虚拟列表如何落地？
+**答**：只渲染可视区 + 上下缓冲共几十条，占位元素撑出真实滚动高度，内层 transform 把切片顶回原位置；固定行高 startIndex = scrollTop / rowHeight 即可；不定高用"预估高度渲染 + 实测后回写高度缓存"修正，vue-virtual-scroller、react-window 同思路。（回链 SCN-023）
+
+### 157：微前端多个子应用样式互相污染怎么隔离？
+**答**：构建期给子应用样式加命名空间前缀，成本低但防不住全局标签选择器与 reset；运行期 strictStyleIsolation 用 Shadow DOM 彻底隔离，代价是弹窗挂 body 丢样式，可改 experimentalStyleIsolation 或把弹窗挂载点移到子应用容器内；规约兜底禁止全局 * 选择器与 reset。（回链 SCN-043）
+
+### 158：新版本先放 5% 用户验证，灰度发布如何落地？
+**答**：流量层灰度（推荐）——nginx 按 Cookie/header/UID 尾号分流到不同版本目录，同一用户固定命中同一版本避免 hash 混用；前端层灰度——入口请求配置接口拿 featureFlags，按开关走新旧逻辑，支持运行时调整与一键回滚；对比错误率、白屏率、转化率，达标后 5% → 20% → 100% 放量。（回链 SCN-046）
+
+### 159：从零搭建前端监控怎么做？
+**答**：错误采集三类——window error（注意捕获阶段与 target 判断）、unhandledrejection、接口失败，配 sourcemap 还原堆栈；性能采集用 PerformanceObserver 读 web-vitals 与资源耗时，行为埋点记录最后 N 步操作、报错时附带现场；上报策略 sendBeacon + 批量合并 + 采样，避免监控拖垮页面。（回链 SCN-049）
+
+### 160：发布后老用户 ChunkLoadError 如何根治？
+**答**：根因是 HTML 与 hash 资源不同步——旧 HTML 引用的 chunk 被新发布删除；发布端必须"不覆盖式发布"，保留最近 N 个版本的静态资源；运行时兜底——全局捕获 ChunkLoadError 自动刷新一次（计数防死循环）；主动升级——轮询 version.json，用户切走标签页时静默 reload。（回链 SCN-057）
+
+### 161：多接口依赖（B 依赖 A、D 依赖 B 和 C）如何编排？
+**答**：先画依赖 DAG，用 Promise 表达并行与依赖关系，坚决杜绝全串行 await——A、C 并行发出，B 等 A，D 等 B 和 C；失败策略分层：关键接口失败整体报错，次要接口失败降级默认值不阻塞页面；整体加超时兜底防单个慢接口拖死整页。（回链 SCN-085）
+
+### 162：大促下单如何用前端配合后端防超卖？
+**答**：超卖根因在后端扣减，前端职责是"减少无效请求 + 保证只发一次"——按钮状态机（idle/submitting/polling）防连击与重复提交；提交前库存预检拦截必然失败的请求；排队削峰场景返回"受理中"，前端轮询最终结果；所有分支解锁按钮并给明确文案。（回链 SCN-126）
+
+### 163：秒杀倒计时如何与服务端一致且开抢不抖动？
+**答**：时钟基准必须服务端——进页面请求时间接口算 offset = serverTime - Date.now()，本地 serverNow = Date.now() + offset 并用 rAF 周期重校准；秒级渲染只更新文本节点，数字用 tabular-nums 防宽度跳变；开抢瞬间提前停大动画，点击加 200-500ms 随机抖动错峰；以服务端开抢标识为准做二次确认。（回链 SCN-129）
+
+## 第十一章 工程化（164-176）
+
+### 164：npm、yarn、pnpm 的核心区别？
+**答**：npm 早期嵌套 node_modules 造成依赖地狱，npm3/yarn 扁平化但带来幽灵依赖；yarn1 的贡献是 lockfile 与并行安装；pnpm 用全局内容寻址 store + 硬链接、符号链接组织 node_modules，磁盘省速度快；pnpm 默认严格隔离，从根源解决幽灵依赖。（回链 ENG-001）
+
+### 165：lockfile 的作用？CI 中怎么装依赖？
+**答**：lockfile 锁定依赖树精确版本与完整性 hash，保证任何机器装出相同结果；必须提交到仓库；CI 用严格模式——npm ci / pnpm install --frozen-lockfile / yarn --immutable；与 package.json 不一致直接报错，防版本漂移。（回链 ENG-003）
+
+### 166：Vite 开发模式为什么快？
+**答**：dev 完全不打包——利用浏览器原生 ESM，请求哪个模块就按需编译哪个；源码由 esbuild 转译远超 Babel，依赖启动时预构建进缓存；HMR 精确到模块级而非按 entry 重算模块图；冷启动工作量与首屏模块数成正比，与全项目体积无关。（回链 ENG-009）
+
+### 167：loader 和 plugin 的区别？
+**答**：loader 是文件转换器——输入源码输出 JS 模块，链式执行从右到左；plugin 基于 tapable 钩子介入编译器全生命周期，打包优化、资源注入、生成文件都能做；loader 解决"webpack 不认识这个文件"，plugin 解决"流程中做额外的事"。（回链 ENG-016）
+
+### 168：webpack HMR 的原理？
+**答**：文件变化 → watch 重新编译，生成新 hash 与更新模块（manifest + chunk）；dev server 通过 WebSocket 推 hash，浏览器比对后按需拉取更新模块；module.hot.accept 声明热替换边界并执行回调，状态可保留；找不到边界或替换失败回退整页刷新。（回链 ENG-021）
+
+### 169：Babel 编译流程分哪三步？
+**答**：parse——源码字符串解析成 AST（@babel/parser）；transform——遍历 AST，visitor 在节点上增删改，是插件工作的阶段；generate——把修改后的 AST 反序列化回代码并生成 sourcemap。（回链 ENG-025）
+
+### 170：Tree-shaking 的原理？sideEffects 有什么用？
+**答**：基于 ESM 静态结构标记未被使用的 export，压缩阶段删除死代码；CJS 的动态 require 无法摇掉；sideEffects: false 告知打包器所有文件无副作用，未引用模块可整体删除；CSS、polyfill 等副作用文件必须显式列入数组否则误删出 bug。（回链 ENG-028）
+
+### 171：source map 的原理与生产配置？
+**答**：source map 是"编译产物位置 → 源码位置"的映射文件，基于 VLQ 编码的 mappings 字段；dev 追求速度用 eval-cheap-module-source-map 折中；生产生成 hidden-source-map，只上传 .map 到监控平台不发布到 CDN；公网暴露完整 map 等于源码开源。（回链 ENG-030）
+
+### 172：Git Flow 与 Trunk-based 怎么选？
+**答**：Git Flow 双长期分支 + feature/release/hotfix，发布节奏重，适合版本化交付；Trunk-based 所有人高频小步合入 main + 短生命周期分支 + 功能开关，适合持续部署；现代前端团队多用 Trunk-based + PR review + CI 卡点；分支存活时间越短，集成风险越小。（回链 ENG-035）
+
+### 173：revert 和 reset 的区别？线上分支用哪个？
+**答**：revert 生成"反向提交"撤销指定提交，历史完整保留、安全可推送，公共分支必用；reset 移动分支指针——soft 保留到暂存区、mixed 到工作区、hard 彻底丢弃；已 push 的提交用 reset 强推会破坏协作属高危；本地未推送整理用 reset，线上回滚用 revert。（回链 ENG-038）
+
+### 174：微前端是什么？主流方案怎么对比？
+**答**：把多个独立开发、独立部署的前端应用聚合成一个产品，解决巨石应用与多团队协作；qiankun 基于 single-spa，HTML entry + 沙箱生态成熟；micro-app 用 WebComponent 接入成本低；Module Federation 构建层模块共享，适合共享依赖与按需加载；选型看技术栈差异、隔离要求、上线方式。（回链 ENG-047）
+
+### 175：Nginx 托管 SPA 的标准配置？
+**答**：try_files $uri $uri/ /index.html 是灵魂——路径找不到文件回退 index.html 交给前端路由，刷新不 404；缓存分层——contenthash 资源 immutable 长缓存、index.html 必须 no-cache；gzip/brotli 压缩文本，已压缩类型跳过；开 sendfile、tcp_nopush 提升吞吐。（回链 ENG-055）
+
+### 176：前端错误监控要捕获哪几类错误？
+**答**：三类错误源——JS 运行错误（window error，捕获阶段可拿资源加载错误）、Promise 未处理拒绝（unhandledrejection）、接口失败；上报用 navigator.sendBeacon，页面卸载也能可靠发出；上报内容含类型、message、stack、版本信息，配 sourcemap 还原；生产建议直接接 Sentry 类平台，注意采样率与去重。（回链 ENG-057）
+
+## 第十二章 性能与安全（177-189）
+
+### 177：Core Web Vitals 三大指标与阈值？
+**答**：LCP 衡量加载性能，良好 <2.5s；INP 衡量交互响应性，良好 <200ms，2024 年 3 月起正式取代 FID；CLS 衡量视觉稳定性，良好 <0.1；实践直接用 Google 官方 web-vitals 库采集。（回链 PER-001）
+
+### 178：什么是 LCP？如何优化？
+**答**：视口内最大图片或文本块完成渲染的时间点，候选元素会随渲染更新、取最后一次；优化——LCP 图片用 preload + fetchpriority="high"，不要给它加懒加载，服务端 TTFB 要快，避免首屏字体阻塞；观测注意 buffered: true 否则漏采。（回链 PER-002）
+
+### 179：INP 和 FID 有什么区别？
+**答**：FID 只统计第一次交互的输入延迟（点击到事件处理开始），不覆盖后续交互、不含处理与渲染耗时；INP 统计全生命周期所有交互的完整延迟（输入延迟 + 处理时长 + 下一帧绘制延迟），取接近最差的第 98 百分位；更能代表真实体验，直接驱动优化长任务。（回链 PER-003）
+
+### 180：CLS 如何计算？如何避免布局偏移？
+**答**：单次偏移分数 = 影响面积比例 × 距离比例，CLS 是所有非用户输入偏移的累加；用户输入后 500ms 内的偏移（hadRecentInput）不计入；常见诱因——图片视频不设宽高、动态横幅、字体闪替、广告位未占位；修复是写死宽高或 aspect-ratio、预留广告位、font-display: swap 配尺寸接近的 fallback。（回链 PER-004）
+
+### 181：如何用 IntersectionObserver 实现图片懒加载？
+**答**：真实地址放 data-src，进入视口前一段距离再换到 src；IO 异步观察交叉状态，比 scroll + getBoundingClientRect 性能好不阻塞主线程；rootMargin 提前量约 200px；加载一次后 unobserve；原生 loading="lazy" 也应了解。（回链 PER-013）
+
+### 182：什么是长任务？如何观测和优化？
+**答**：主线程被连续占用超过 50ms 的任务，期间无法响应交互，是 INP 劣化的直接原因；用 PerformanceObserver 的 longtask 类型观测，attribution 给出归因容器；优化——大计算移 Web Worker，用 setTimeout/scheduler.postTask/rIC 切片，避免一次性同步处理大数据。（回链 PER-017）
+
+### 183：虚拟列表的原理与核心实现？
+**答**：只渲染视口内可见条目（外加缓冲），占位容器撑完整滚动高度，滚动时只换内容；三要素——总高度占位、可视区起止下标（scrollTop / itemHeight 推算）、偏移补偿；定高直接算，不定高缓存实测高度做位置索引；工程优先 vue-virtual-scroller、react-window、@tanstack/virtual。（回链 PER-019）
+
+### 184：重排与重绘？如何减少强制同步布局？
+**答**：重排几何变化代价大、重绘仅视觉变化代价小，transform/opacity 只走合成层两者都不触发；强制同步布局是写操作后立刻读 offsetWidth/getBoundingClientRect，循环内即布局抖动；优化读写分离——先批量读完再批量写，DOM 碎片用 DocumentFragment 离线构建；频繁动画元素提合成层但不滥用。（回链 PER-022）
+
+### 185：前端常见内存泄漏场景？
+**答**：被遗忘的定时器——setInterval 回调持有闭包数据，组件销毁后仍在跑；意外的全局变量——忘写 let/const 挂到 window；失效的事件监听未在销毁时移除；无界缓存——Map/Object 只增不减，应改 WeakMap 或加淘汰策略。（回链 PER-031）
+
+### 186：为什么埋点上报首选 sendBeacon？
+**答**：浏览器保证页面卸载后仍能可靠发出，不阻塞 unload，适合"离开页面"必丢场景；fetch/XHR 在卸载时会被取消，标准降级是 fetch 加 keepalive: true；体用 Blob 指定 application/json，注意队列约 64KB 限制要分片；更老的兜底是 Image GET 打点。（回链 PER-036）
+
+### 187：XSS 的防御手段？富文本场景怎么处理？
+**答**：纯文本用 HTML 实体转义或框架默认转义（JSX/插值）；富文本必须渲染 HTML 时用 DOMPurify 白名单过滤后再插入，绝不自己写黑名单正则；纵深防御配合 CSP、HttpOnly、输入侧校验；误区——v-html / dangerouslySetInnerHTML 直接渲染接口数据等于放弃框架保护。（回链 PER-041）
+
+### 188：CSRF 的原理与防御？
+**答**：原理是浏览器自动携带 cookie，攻击者诱导已登录用户在恶意页面发起跨站请求；CSRF Token——登录后下发随机 token，写请求必须携带，攻击者站点拿不到；SameSite=Lax/Strict 让跨站请求不携带 cookie，成本最低的防御；辅助校验 Origin/Referer、GET 只读不写、高危操作二次验证。（回链 PER-043）
+
+### 189：npm 投毒的典型手法与组合防御？
+**答**：手法——抢注弃用包名（typosquatting）、向热门包发带后门的新版本、postinstall 脚本安装时执行恶意代码；防御——lockfile 锁精确版本与 integrity、CI 用 npm ci、--ignore-scripts 禁安装期脚本、overrides 钉住风险传递依赖；流程——新依赖过评审、audit + Socket 扫描进 CI、lockfile 变更重点审；最小依赖原则。（回链 PER-079）
+
+## 第十三章 基础速记（190-206）
+
+### 190：CSS 引入方式？link 和 @import 的区别？
+**答**：三种——外链 link、内联 style、行内属性；link 是 HTML 标签并行下载，可被 JS 动态增删实现主题切换；@import 是 CSS 语法，必须等当前 CSS 下载解析完才串行发请求，可能引起 FOUC，工程一律用 link。（回链 BAS-011）
+
+### 191：JS 七种基本类型？typeof 的陷阱？
+**答**：string、number、bigint、boolean、undefined、symbol、null，其余都是 object；陷阱一 typeof null === 'object' 历史 bug；陷阱二 typeof 函数返回 'function'；typeof 区分不了数组，要用 Array.isArray 或 Object.prototype.toString.call。（回链 BAS-019）
+
+### 192：typeof 和 instanceof 的区别？
+**答**：typeof 返回类型字符串，适合原始类型与函数，写法简单但不精确；instanceof 检查构造函数的 prototype 是否在对象原型链上，只能用于对象/函数，跨 iframe 失效；终极精确方案是 Object.prototype.toString.call(x)。（回链 BAS-020）
+
+### 193：map、filter、reduce 的区别？
+**答**：map 一一映射返回等长新数组；filter 条件筛选返回子集；reduce 把数组归约为任意值（数字、对象、数组）；三者都不修改原数组，map/filter 可用 reduce 实现；常见错误是 map 里忘写 return 得到一堆 undefined。（回链 BAS-027）
+
+### 194：事件冒泡和捕获是怎么回事？
+**答**：完整事件流三阶段——捕获（window 往下到目标）、目标阶段、冒泡（目标往上到 window）；addEventListener 第三参 true 表示捕获阶段触发，默认 false 冒泡；stopPropagation 阻止继续传播，preventDefault 只取消默认行为不影响传播。（回链 BAS-033）
+
+### 195：setTimeout 和 setInterval 的注意点？
+**答**：定时器不精确——delay 只是"最早执行时间"，主线程被占用会顺延；嵌套超过 5 层后最小间隔被强制 4ms；setInterval 回调执行超过间隔会堆积执行，推荐链式 setTimeout 替代；组件卸载必须 clear，否则泄漏并访问已销毁组件。（回链 BAS-041）
+
+### 196：offsetWidth / clientWidth / scrollWidth 的区别？
+**答**：offsetWidth = content + padding + border（不含 margin）；clientWidth = content + padding 再减滚动条宽度；scrollWidth 是溢出内容撑开的实际总宽，是"能滚多远"的依据；scrollHeight > clientHeight 判断出现纵向滚动。（回链 BAS-095）
+
+### 197：preventDefault、stopPropagation、stopImmediatePropagation 的区别？
+**答**：preventDefault 阻止浏览器默认行为（提交、跳转），不影响事件传播；stopPropagation 阻止继续传播，但同元素上其他监听器仍执行；stopImmediatePropagation 传播停止且同元素上排在后面的监听器也不再执行。（回链 BAS-101）
+
+### 198：什么情况触发 OPTIONS 预检请求？
+**答**：非简单请求先发 OPTIONS 探路——方法为 PUT/DELETE/PATCH 等，或 Content-Type 非三种简单值，或携带自定义头（X-Token、Authorization）；简单请求 = GET/HEAD/POST + 三种表单 Content-Type + 无自定义头；服务端对 OPTIONS 返回 2xx 并带 Allow 头，Access-Control-Max-Age 可缓存预检结果。（回链 BAS-105）
+
+### 199：JSONP 为什么只支持 GET？
+**答**：本质是用 script src 绕过同源策略，而 script 标签只能发起 GET 请求；服务端把数据包进回调返回 callback({...})，浏览器当 JS 执行拿到数据；现代方案是 CORS，JSONP 只在维护老系统时出现，回调名可注入存在 XSS 风险。（回链 BAS-124）
+
+### 200：暂时性死区（TDZ）是什么？
+**答**：let/const 变量从块级作用域开始到声明语句执行完之间是死区，访问抛 ReferenceError 而不是 undefined；对死区变量做 typeof 也报错（与未声明变量返回 undefined 不同）；本质是"先声明后访问"的强约束替代 var 的静默提升。（回链 BAS-127）
+
+### 201：宏任务微任务基础输出题怎么推？
+**答**：同步代码最先执行完；同步栈清空后立即清空微任务队列；然后才取一个宏任务执行；口诀——同步 → 微任务清空 → 一个宏任务 → 再清微任务，循环往复。（回链 BAS-141）
+
+### 202：async 函数的返回值是怎么被包装的？
+**答**：return 的值一律被 Promise.resolve 包装；返回另一个 promise 时跟随它的最终状态；throw 等价于返回 rejected promise，错误变成 Promise 拒绝而非同步异常；所以 async fn() 的结果永远可以安全 .then/.catch。（回链 BAS-144）
+
+### 203：事件循环和渲染的顺序？rAF 排在哪？
+**答**：一帧内顺序——清空同步代码与微任务 → 执行 rAF 回调 → 样式计算、布局、绘制 → 空闲后才取下一个宏任务；rAF 在绘制前执行，拿到的 DOM 状态就是本帧要画的；微任务在每次宏任务结束后、渲染前清空——这也是强制同步布局的成因。（回链 BAS-150）
+
+### 204：防抖和节流一句话区分？
+**答**：防抖是"停手后才执行，一直动手就一直等"；节流是"固定频率放行，期间再急也只执行一次"；防抖场景——搜索联想、表单校验、resize 重算；节流场景——滚动加载、鼠标跟随、按钮防连点。（回链 BAS-196）
+
+### 205：重绘和重排一句话区分？
+**答**：重排（reflow）是几何变了要重新算布局，重绘（repaint）只是外观变了重新画；重排必然引发重绘反之不然，重排代价远大于重绘；连续"改样式 → 读几何属性"会强制同步布局；优化——批量读写分离、优先 transform/opacity。（回链 BAS-197）
+
+### 206：cookie、localStorage、sessionStorage 一句话辨析？
+**答**：cookie 约 4KB、每个 HTTP 请求自动携带、可设过期与 HttpOnly，适合服务端会话凭证；localStorage 5-10MB 持久化、同源所有标签页共享、不随请求发送，适合主题偏好等本地数据；sessionStorage 标签页级会话、关标签即清，适合一次性表单草稿。（回链 BAS-198）
+
+## 第十四章 构建工具（207-219）
+
+### 207：webpack 构建流程全阶段？
+**答**：初始化——读配置建 Compiler；编译阶段——run → new Compilation → make 触发 addEntry，从 entry 递归 buildModule（loader 转换 → AST → 收集依赖成模块图）；封装阶段——seal 优化、分 chunk、生成 assets；产出阶段——emit 写入 output.path（最后修改产物的机会）→ done。（回链 BLD-002）
+
+### 208：Module、Chunk、Bundle 三者的关系？
+**答**：Module 是编译基本单位，经依赖关系组成模块图；Chunk 是打包中间产物，由模块按 entry、splitChunks、动态 import 规则组装；Bundle 是最终输出文件，一个 chunk 可对应多个 asset（js + css）；async chunk 不会阻塞首屏。（回链 BLD-003）
+
+### 209：tree-shaking 为什么必须基于 ESM？
+**答**：ESM 的 import/export 是编译期语法，AST 阶段就能建立"导出绑定 → 使用处"的静态关系；CJS 的 require 是运行时函数调用无法静态穷举；usedExports 标记未使用导出，terser 压缩时删死代码；副作用代码需 sideEffects 标记配合，export default 整对象导出会让分析失效。（回链 BLD-025）
+
+### 210：splitChunks 核心参数精讲？
+**答**：chunks 决定参与分割的类型（默认 async，'all' 才能抽 initial 与 async 共用模块）；minSize/minChunks 防止"为抽而抽"；cacheGroups 按 test/priority/name 分组，priority 决定模块归属；maxAsyncRequests/maxInitialRequests 是并行请求上限，HTTP2 可适当调大。（回链 BLD-032）
+
+### 211：runtimeChunk 是什么？为什么是持久缓存关键？
+**答**：runtime 是模块加载与 chunk 调度代码（__webpack_require__ 等），默认内联在 entry 里，其中记录 chunk id → 文件名映射，业务变化会连带 entry hash 失效；单独抽出后业务改动不再触碰 runtime 与 vendor，大部分缓存命中；一般配 deterministic module ids 使用。（回链 BLD-033）
+
+### 212：HMR 的完整流程？
+**答**：文件变化 → watcher 重编译，内存 fs 更新 → 服务端 WebSocket 推送新 hash → 客户端请求 manifest（.hot-update.json）与 update（.hot-update.js）→ runtime 执行 module.hot.accept 注册的回调替换模块；替换失败回退整页刷新；hash 的作用是匹配版本避免串版本。（回链 BLD-039）
+
+### 213：webpack5 持久缓存的原理与失效策略？
+**答**：首次构建把模块编译结果 + 依赖快照序列化到 node_modules/.cache/webpack；下次构建对比时间戳/内容哈希，未变模块直接反序列化复用；buildDependencies 里的配置、loader、插件版本变化会整体失效（把 config、lockfile 加入）；CI 里把缓存目录作为 restore key 是最有效的提速手段。（回链 BLD-047）
+
+### 214：hash、chunkhash、contenthash 的区别？
+**答**：hash 整个构建一个，任何文件变全变；chunkhash 按 chunk 计算，但 chunk 依赖变化也会变；contenthash 按文件内容本身计算，css 与 js 解耦——js 改动不影响抽出的 css 文件名，是长效缓存的正确姿势；配合 moduleIds: 'deterministic' 防 id 扰动。（回链 BLD-054）
+
+### 215：Module Federation 的核心概念？
+**答**：host 是消费方，声明 remotes 与 shared；remote 是提供方，声明 exposes（模块级暴露）与 filename（容器入口）；shared 声明共同依赖运行时协商版本；运行时本质是把模块图拆到多个可独立部署的容器，浏览器端动态连接（remoteEntry.js + 动态加载）。（回链 BLD-061）
+
+### 216：Vite 为什么快？
+**答**：dev 不打包——请求到哪个模块才 transform 哪个，启动时间与模块总数解耦；原生 ESM 复用浏览器 import 图，懒加载天然分摊请求；esbuild 预构建把 node_modules 依赖打成单个 ESM（Go 并行快 10-100 倍），同时合并请求防瀑布；预构建结果缓存 node_modules/.vite 二次启动瞬时。（回链 BLD-073）
+
+### 217：Vite HMR 的原理？与 webpack 消息模型差异？
+**答**：文件变化 → 沿 import 链向上找最近的"接受更新边界"（import.meta.hot.accept 的模块），只失效该边界以下模块；WebSocket 推 updates 消息，客户端按 timestamp 给模块 URL 加 ?t= 破缓存；CSS 直接由 css-update 换样式不走 JS 模块链，比 webpack 快；full-reload 消息触发整页刷新。（回链 BLD-080）
+
+### 218：esbuild 为什么快？
+**答**：Go 编译型语言 + 真多核并行（每文件一个 goroutine）；从零实现的编译器不做 AST 对象，用连续内存一次遍历完成解析、绑定、转换，缓存友好；对比 JS 工具链（babel/terser/webpack）串行执行多遍 AST；三大 API——transform/build/serve；生态插件弱，常嵌入 Vite、tsup 做重活。（回链 BLD-081）
+
+### 219：sourcemap 修饰符含义与生产选择？
+**答**：eval 模块包 eval 执行最快但映射粗、不生成 .map；cheap 只映射到行；module 映射到原始源码（没有它调试到的是 babel 产物）；nosources 只有映射无源码省体积；dev 用 eval-cheap-module-source-map，生产用 hidden-source-map 生成但不上传 CDN，map 上传监控平台。（回链 BLD-091）
+
+## 第十五章 小程序（220-227）
+
+### 220：小程序为什么采用双线程架构？
+**答**：渲染层（多个 WebView）与逻辑层（单个 JsCore/V8）分离，native 层中转通信；安全管控——逻辑层无法操作 DOM/BOM，页面内容由 WXML 编译结果驱动，可静态审查防钓鱼；性能——JS 执行与渲染互不阻塞；跨端一致——两层分别抹平 WebView 与 JsCore 差异。（回链 MP-001）
+
+### 221：setData 的通信机制？
+**答**：逻辑层 setData → 数据序列化 → native 层转发 → 渲染层反序列化，与 WXML 编译的虚拟树 diff 后应用到 DOM；一次至少经历两次跨线程通信 + 两次序列化，数据量与调用频率直接决定耗时；渲染层到逻辑层的事件方向相反同样经 native 中转；优化方向——少调、小数据、路径更新。（回链 MP-002）
+
+### 222：setData 性能优化的完整手段？
+**答**：降频率——高频事件节流，同 tick 多次 setData 用 wx.nextTick 合并；降数据量——只传变化字段用路径更新（'list[2].status'），不参与渲染的数据放 this 而非 data；避坑——不向后台页面 setData、不传长列表全量与大 JSON；用 Audits/Performance 面板验证调用次数与耗时。（回链 MP-016）
+
+### 223：原生组件同层渲染的原理？
+**答**：原生组件（video/map/camera 等）由 native 直接渲染，不属于 WebView DOM，层级恒在最上无法覆盖；同层渲染让原生组件进 WebView 同一合成层——iOS 挂到 WKChildScrollView，Android 由内核与 native 协作，支持 z-index、transform、被遮挡；未完全同层的仍需 cover-view 兜底；真机验证能否覆盖与裁剪。（回链 MP-038）
+
+### 224：小程序登录鉴权的完整流程？
+**答**：wx.login 拿临时凭证 code（5 分钟有效、一次性）→ 传给自家后端；后端携 appid + secret + code 调 code2Session 换 openid/unionid/session_key；后端自签自定义登录态返回，前端 storage 保存、请求放 header；session_key 是解密密钥绝不能下发前端；token 过期用 wx.checkSession 判断静默重登。（回链 MP-045）
+
+### 225：小程序支付的完整流程？
+**答**：前端创建订单 → 后端调统一下单 API（openid、金额、notify_url）拿 prepay_id → 后端二次签名返回 → 前端 wx.requestPayment 拉收银台 → 微信异步回调 notify_url，后端验签 + 幂等更新订单 → 前端轮询/通知展示结果；核心原则——前端 success 不代表支付成功，一切以后端回调与查单为准，金额计算必须在服务端。（回链 MP-048）
+
+### 226：小程序长列表性能方案？
+**答**：官方 recycle-view 组件（回收复用 + 固定/可估高度）接入成本低；自研虚拟列表——只渲染可视区 ± buffer 切片，占位撑滚动，scrollTop 映射 startIndex，不定高需缓存实测高度；配合分页加载、图片懒加载、局部路径更新，避免整列表 setData。（回链 MP-060）
+
+### 227：小程序启动性能专项怎么做？
+**答**：冷启动链路 = 拉代码包 → 注入环境 → 执行 app.js → 首页渲染，对应优化四件事——包小、并发、预取、缓存；包体主包 <1.5M，lazyCodeLoading: requiredComponents，分包 + preloadRule；首屏预取利用渲染前空窗发请求，storage 缓存上次响应做 SWR；用 wx.getPerformance 的 evaluateScript/firstRender 看 P90 趋势。（回链 MP-129）
+
+## 第十六章 Node 与 BFF（228-240）
+
+### 228：Node 事件循环的六个阶段？与浏览器差异？
+**答**：timers → pending callbacks → idle/prepare → poll → check（setImmediate）→ close callbacks；每阶段是 FIFO 队列，阶段间切换先清微任务（nextTick 优先级最高）；浏览器没有多阶段模型；在 I/O 回调中 setImmediate 总是先于 setTimeout 执行。（回链 NODE-001）
+
+### 229：process.nextTick 与 Promise 的优先级？
+**答**：nextTick 有独立队列，优先级高于 Promise 微任务——每个宏任务后先清 nextTick 队列再清 Promise 队列；nextTick 回调中再产 nextTick 有饿死 I/O 的风险；setImmediate 属于 check 阶段宏任务，晚于所有微任务。（回链 NODE-002）
+
+### 230：Libuv 线程池是怎么回事？哪些 API 走线程池？
+**答**：主线程单线程跑 JS，libuv 默认 4 线程池（UV_THREADPOOL_SIZE 可调最大 1024）；走线程池——fs 全部文件 I/O、dns.lookup（非 resolve）、部分 crypto（pbkdf2/scrypt/randomBytes）、zlib；网络 I/O 走 epoll 不占线程池；密码哈希与压缩高并发会占满线程池拖慢所有调用。（回链 NODE-003）
+
+### 231：Stream 有哪四种类型？
+**答**：Readable（fs.createReadStream、http.IncomingMessage，有 flowing/paused 两模式）；Writable（fs.createWriteStream、ServerResponse）；Duplex 读写独立（net.Socket、WebSocket）；Transform 是 Duplex 特例写进转换后可读（zlib.createGzip、crypto）；核心收益——恒定内存处理任意大数据。（回链 NODE-009）
+
+### 232：什么是背压？pipe、pipeline、compose 区别？
+**答**：背压是写端消费不及生产速度时 write() 返回 false，缓冲超 highWaterMark 数据积压；pipe 自动背压但不转发错误、不销毁流，生产禁用；pipeline 自动背压 + 任一流错误销毁整链 + Promise 化，推荐；stream.compose 是链式封装，支持 signal 中断。（回链 NODE-010）
+
+### 233：Express 中间件模型与 Koa 的本质区别？
+**答**：Express 是线性模型 (req, res, next)，不调 next 且不结束响应则请求悬挂，中间件直接操作同一 res、执行完不会"回来"；Koa 用 await next() 形成洋葱模型，后半个洋葱圈在响应前执行；Express 4 异步路由的 Promise reject 不会被捕获，必须 try/catch 或 next(err)。（回链 NODE-022）
+
+### 234：手写 Koa 的 compose（洋葱模型核心）？
+**答**：把中间件组成递归调用链——dispatch(0) 执行第 0 个，其内 await next() 即 dispatch(1)，最后一层执行完逐层回溯，前半段在请求前、后半段在响应前；硬性校验——中间件必须是函数、必须顺序数组、next 不能被多次调用；兜底一个 noop 保证最内层不报错。（回链 NODE-023）
+
+### 235：JWT 如何实现刷新与黑名单？
+**答**：双 token——access 短命 15min + refresh 长命 7d，refresh 存 Redis 可作废可检测重放；黑名单——把已登出 access 的 jti 写 Redis，TTL = 该 token 剩余寿命，校验时多查一次（可本地缓存降压力）；refresh 一次性轮换，旧 refresh 被再次使用视为被盗，作废整个 token family。（回链 NODE-035）
+
+### 236：缓存穿透、击穿、雪崩的对策？
+**答**：穿透（查不存在的 key）——空值缓存短 TTL、布隆过滤器前置、参数校验；击穿（热点 key 过期瞬间）——互斥回源分布式锁、singleflight 合并同 key 请求、逻辑过期后台刷新；雪崩（大量 key 同时过期）——TTL 加随机抖动、多级缓存、Redis 高可用、熔断降级兜底。（回链 NODE-042）
+
+### 237：BFF 是什么？解决什么问题？
+**答**：面向特定前端的服务器中间层——Web/APP/小程序各有一套"懂这个端"的服务端；解决的问题——多端适配（不同端要不同字段）、聚合裁剪（一次聚合减少串行往返）、协议转换（gRPC/RPC 转 HTTP/JSON）、防腐层（下游变更前端零感知）；代价是多一层部署与延迟；Node 是 BFF 事实标准。（回链 NODE-046）
+
+### 238：如何实现优雅退出？
+**答**：收到 SIGTERM → 停止接受新连接（server.close()）与摘除 LB 流量 → 等存量请求处理完（设强制超时）→ 关闭资源（DB 池、Redis）→ process.exit(0)；K8s 在 grace period 后 SIGKILL，处理必须在时限内完成；keep-alive 空闲连接要主动 destroy 否则 close 一直等；只 exit 不排空会大量 502。（回链 NODE-060）
+
+### 239：限流四种算法对比？
+**答**：固定窗口 INCR+EXPIRE 最简，但窗口边界有 2 倍突刺；滑动窗口用 ZSET 记时间戳，精确无突刺但内存与请求量成正比；漏桶恒定速率漏水强行整流，适合保护脆弱下游；令牌桶恒速补币允许积攒突发，网关首选；全部用 Redis + Lua 保证"读-判-写"原子。（回链 NODE-132）
+
+### 240：缓存一致性怎么保？延迟双删？
+**答**：主流 Cache-Aside——写时先更新 DB 再删缓存（不是更新缓存，防并发写覆盖旧值）；双删原因——并发下读请求可能在 DB 更新前读旧值、更新后把旧值回填缓存，脏数据活到 TTL，第二次延迟删除专清这种回填；延迟量约主从同步 + 一次读耗时，用延迟队列实现；终极方案 Canal 订阅 binlog 异步删缓存；任何方案都要 TTL 兜底。（回链 NODE-145）
+
+## 第十七章 设计模式（241-248）
+
+### 241：为什么说 HOC 就是装饰器模式？
+**答**：装饰器不改变原组件接口、透明叠加职责，HOC 接收组件返回新组件且 props 协议兼容，正是装饰器语义；通过"包一层"扩展避免继承强耦合，可 compose 叠加多个；React.memo、connect、withRouter 都是应用；注意必须透传 props 否则"吞 props"。（回链 DP-028）
+
+### 242：适配器、装饰器、代理三者如何辨析？
+**答**：共同点是都"包一层"；意图不同——适配器改变接口（为兼容）、装饰器保持接口叠加职责（为增强）、代理保持接口控制访问（为管控时机/权限/成本）；判断法先问"接口形状变了吗"；改名调用是适配器、HOC 加埋点是装饰器、懒加载图与 Vue3 reactive 是代理。（回链 DP-034）
+
+### 243：享元模式如何支撑虚拟列表？
+**答**：10 万条列表每条一个 DOM 必崩，虚拟列表只渲染约 20 条，滚动时复用这批节点更新内容；享元思想——DOM 节点是共享的内部资源（少量），列表项数据是外部状态（每次传入），对象少状态外置；同源应用——Canvas 弹幕、粒子系统、key 复用。（回链 DP-038）
+
+### 244：观察者模式和发布订阅模式的本质区别？
+**答**：观察者——目标（Subject）直接维护观察者列表并通知，双方知道彼此，耦合"松但存在"；发布订阅——多了一个事件中心（Broker），发布者与订阅者互不相识，解耦更彻底；判别法看有无中间调度者；Vue 的 dep→watcher 是观察者，EventEmitter/mitt/DOM 自定义事件是发布订阅。（回链 DP-043）
+
+### 245：策略模式如何设计表单校验？
+**答**：策略定义一族可互换算法，调用方运行时选择——把"用哪个算法"和"算法怎么实现"分离；校验器只负责"取规则、执行、汇总错误"，required/手机号/强度都是策略；三件套——规则字典、校验上下文、规则组合；收益是新增规则零侵入（OCP）、可单测、可被 schema 配置化复用。（回链 DP-051）
+
+### 246：Koa 中间件为什么是职责链（洋葱模型）？
+**答**：职责链是多个处理者串成链，请求沿链传递，每个节点处理后决定是否交给下一个；compose 把 [fn1, fn2, fn3] 合成嵌套 Promise——进入 fn1→fn2→fn3，返回 fn3→fn2→fn1；与 Express 的区别是支持 await next() 之后的"回程逻辑"（计时、响应后埋点）；手写核心是递归 + Promise。（回链 DP-062）
+
+### 247：虚拟 DOM 是哪些模式的组合？
+**答**：工厂——h/createElement 产出统一 VNode；代理——数据层 reactive/setState 拦截变化驱动重新渲染；策略——diff 按"同类型/不同类型/列表"分派，列表 key + LIS 是核心策略；备忘录/享元——patchFlag 与 blockTree 记录动态节点跳过静态内容。（回链 DP-091）
+
+### 248：webpack/tapable 插件系统是什么模式组合？
+**答**：tapable 的各类 Hook 是发布订阅的工程化——tap 注册、call/promise 触发；webpack 编译流程是一条模板方法骨架，每个阶段暴露钩子，插件通过 hooks.xxx.tap 在固定切面注入逻辑；同一钩子多插件按注册顺序串行，带职责链色彩；Compiler/Compilation 是中介者中心对象。（回链 DP-096）
+
+## 第十八章 可视化（249-252）
+
+### 249：ECharts 整体架构？ZRender 扮演什么角色？
+**答**：自上而下四层——option 声明层 → 内部模型层（把 option 解析成坐标系、series、组件模型并做 diff）→ ZRender 渲染引擎 → Canvas/SVG 绘制；ZRender 是绘图抽象层，含 Storage（场景图形树）、Painter（可插拔后端）、Handler（命中检测与事件）、Animation；性能问题要定位是模型层算得慢还是 Painter 画得慢。（回链 VIZ-030）
+
+### 250：D3 的 data join 思想？
+**答**：声明式地把数据集与 DOM 选择集对齐，按 key 函数匹配分成三部分——已有节点 update、多出来的数据 enter、多出来的节点 exit；selection.join 一次写全三个分支且各挂过渡动画；key 函数是精髓——默认按索引对齐会错位，按业务 id 才能增量复用与平滑移动；这正是 VDOM diff 的同源思想。（回链 VIZ-038）
+
+### 251：大屏适配方案如何选型？
+**答**：等比 scale——设计稿 1920×1080 整体 transform: scale 居中，还原 100% 但文字放大发虚、事件坐标要换算；rem/vw——文字始终清晰但所有尺寸要换算，宽高比不一致时变形；响应式 flex/grid 适合不固定分辨率的后台；混合方案最常见——外层 scale + 关键文字 rem 二次修正。（回链 VIZ-060）
+
+### 252：从 option 到像素，ECharts 渲染流程？
+**答**：setOption → parseOption 归一化配置合并默认项 → Model 层创建坐标系 → 数据进 DataStore 做 stack/filter 与视觉映射（颜色、symbol 由 visual encoder 生成）→ View 层生成 ZRender 图元 → zrender 分层、脏矩形、动画插值与增量刷新 → Canvas/SVG 出像素；理解链路才能解释 lazyUpdate 为何快。（回链 VIZ-119）
+
+## 第十九章 音视频（253-256）
+
+### 253：封装格式和编码格式的区别？
+**答**：编码格式（codec）是压缩算法——H264/H265/VP8/VP9/AV1；封装格式（container）是"盒子"，定义轨道、时间戳、索引的组织——MP4/WebM/MKV/FLV/TS；一个封装可装多种编码——MP4 常装 H264/H265/AV1+AAC/Opus，WebM 只装 VP8/VP9/AV1+Vorbis/Opus；兼容结论——H264+AAC 覆盖最广，WebRTC 默认 VP8/H264+Opus。（回链 AV-003）
+
+### 254：MSE 的原理？
+**答**：MSE 允许 JS 向 video 喂媒体数据——MediaSource 挂到 video.src（URL.createObjectURL），内部多个 SourceBuffer 每轨一个；JS 只负责取数据 + appendBuffer，demux/decode 由浏览器完成，所以输入必须是浏览器支持的封装（fMP4/WebM）；标准流程——createObjectURL → addSourceBuffer → fetch 分片 → appendBuffer → updateend 续传 → endOfStream；坑——updating 时 append 抛错、时间戳乱序 decode error、要 removeBuffer 防内存膨胀。（回链 AV-012）
+
+### 255：HLS 协议全解？延迟由什么构成？
+**答**：把流切成小分片（TS 或 fMP4），m3u8 索引文件描述顺序，客户端循环拉取；关键标签——EXTINF（分片时长）、EXT-X-MEDIA-SEQUENCE（滑动窗口首序号）、EXT-X-ENDLIST（点播结束）；直播循环——拉 playlist → 下载新分片 → sleep 约 分片时长 → 再拉 playlist；延迟 ≈ 分片时长 × 缓冲分片数 + playlist 刷新周期 + CDN 缓存，4s 分片约 12-20s。（回链 AV-016）
+
+### 256：ICE/STUN/TURN 分别解决什么问题？
+**答**：ICE 是框架——收集所有候选地址并两两配对做连通性检查；STUN 帮 NAT 内主机发现公网映射地址；TURN 在打洞失败时中继转发；对称型 NAT 大概率要 TURN（约 10-20% 连接走中继）；流程——收集候选 → 信令交换 → STUN 连通性检查 → 选最优路径；TURN 有带宽成本，要加限时凭证防盗用。（回链 AV-027）
+
+## 第二十章 跨端（257-260）
+
+### 257：主流跨端方案全景对比？
+**答**：WebView 混合（Cordova/Hybrid）——UI 全 H5 + 桥接 API，成本低动态化强，受内核与桥接开销制约；原生渲染（RN）——JS 写业务映射原生控件，体验接近原生但受桥与平台差异影响；自绘引擎（Flutter）——Skia 直绘像素三端一致，但包大、动态化受限；编译时方案（Taro/uni-app）——一套 DSL 编译到多端，覆盖面广但受目标端能力上限约束。（回链 XP-001）
+
+### 258：RN 从 Bridge 到新架构如何演进？
+**答**：旧 Bridge 异步批量消息、JSON 序列化、无法同步调用，是性能天花板；JSI 用 C++ 层替代，JS 直接持有原生对象引用（HostObject），支持同步调用与任意 JS 引擎；新架构三件套——TurboModules（按需加载原生模块）+ Fabric（C++ ShadowTree 同步可中断渲染）+ Codegen（编译期生成胶水）；Hermes 字节码免编译启动快，与 JSI 深度绑定。（回链 XP-007）
+
+### 259：如何设计一个完整的 JSBridge？
+**答**：协议要素——唯一 requestId 关联调用与回调、方法命名空间、版本号，回调经 window.__bridge_cb_<id> 派发用完即焚；传输——iOS 用 WKScriptMessageHandler + evaluateJavaScript，Android 用 addJavascriptInterface 或 prompt 拦截；必备机制——超时清理回调表防泄漏、取消、序列化大小限制、原生统一回主线程；安全——域名白名单、参数校验、高危 API 二次确认。（回链 XP-028）
+
+### 260：Electron 的进程模型？
+**答**：主进程（Node 环境）管理生命周期、窗口、原生 API，全局唯一；渲染进程每个 BrowserWindow 一个独立 Chromium 进程，默认无 Node 能力（安全考虑）；Utility Process 是 Node 子进程，跑重活（LSP、文件索引、ffmpeg）不污染主进程；GPU/网络服务是 Chromium 基础设施进程。（回链 XP-033）
+
+## 第二十一章 AI 与 Agent（261-268）
+
+### 261：SSE 流式输出如何解析？打字机效果怎么落地？
+**答**：请求带 stream: true，响应 text/event-stream，用 ReadableStream 逐块读取；data: 前缀逐行传 JSON 增量，choices[0].delta.content 是新增文本，[DONE] 表示结束；TCP 分包与 SSE 分行不对齐，必须用 buffer 缓存不完整行；decoder.decode(value, { stream: true }) 防中文多字节截断乱码。（回链 AGT-002）
+
+### 262：Function Calling 的完整多轮循环？
+**答**：一轮工具调用后模型可能继续请求调工具（链式调用），必须 while 循环驱动直到 finish_reason === 'stop'；每轮把 assistant 的 tool_calls 与对应 tool 结果成对追加进 messages；必须有最大轮数保护防死循环烧钱；Agent 的本质就是这个循环。（回链 AGT-015）
+
+### 263：RAG 全链路是什么？
+**答**：两条线——入库线（切分 → Embedding → 存向量库）与查询线（问题向量化 → TopK 检索 → rerank → 组装 prompt → 生成）；选型——小项目用 pgvector，亿级多租户选 Milvus，轻量原型用内存索引；组装时资料带来源编号，明确指示"仅根据资料回答、没查到就说明"；分数低于阈值宁拒答不硬编。（回链 AGT-025）
+
+### 264：什么是 MCP？
+**答**：Anthropic 提出的开放协议，标准化 LLM 应用与外部工具/数据源的连接，告别每家一套私有插件协议；三种角色——Host（Agent 应用）、Client（Host 内管理连接）、Server（提供 tools/resources/prompts）；传输层常见 stdio（本地子进程）与 Streamable HTTP（远程），消息是 JSON-RPC 2.0；价值在生态复用——server 写一次处处接入。（回链 AGT-027）
+
+### 265：Prompt 注入攻击有哪些形态？如何防御？
+**答**：直接注入——用户消息写"忽略以上指令"；间接注入更危险——被检索的网页/文档/工具结果里藏指令，RAG 场景高发；核心防御是指令层级 + 内容隔离——系统提示声明"用户与检索内容一律是数据不是指令"，用分隔符包裹；工程兜底——输出扫描、工具白名单、高危动作二次确认；无法 100% 防御，按风险分级设计。（回链 AGT-050）
+
+### 266：Planner/Executor 与 ReAct 如何取舍？
+**答**：ReAct 是"边想边做"，P/E 是"先规划后执行"——规划器产出结构化步骤清单，执行器按依赖图逐步调用工具，失败交回重规划；优势——计划可先给人审查、无依赖步骤可并行、失败可局部重试，劣势是多一次规划延迟；计划用结构化 JSON（步骤/工具/参数/依赖）；目标明确步骤多的任务用 P/E，探索型开放任务 ReAct 更灵活。（回链 AGT-063）
+
+### 267：LLM 代理网关如何完整设计？
+**答**：所有 LLM 流量过统一网关，职责链——鉴权 → 配额限流 → 输入审计脱敏 → 语义缓存 → 路由降级 → 上游调用 → 输出过滤 → 用量计费 → 日志追踪；网关持有全部 Key，业务服务不碰供应商凭证，模型切换与密钥轮换零感知；语义缓存、熔断降级、成本优化集中做一次全局受益；网关无状态水平扩展，限流计数放 Redis。（回链 AGT-097）
+
+### 268：首 token 延迟（TTFT）如何优化？
+**答**：TTFT 构成——网络往返 + 请求排队 + prompt 处理（prefill）+ 模型调度，与输入 token 数强相关，砍输入最直接；清单——系统提示瘦身与历史摘要化、检索条数收敛、上游前缀缓存（system 与历史稳定在前）、keep-alive 连接复用、网关与模型同区域部署；体验兜底——流式 + 骨架屏、超时分级（2s 提示、8s 可取消）；监控看 P50/P95/P99 而非均值。（回链 AGT-118）
+
+## 第二十二章 运维与发布（269-272）
+
+### 269：全量、灰度、蓝绿、金丝雀、滚动发布怎么对比？
+**答**：全量发布快但爆炸半径 100%，只适合低风险改动；滚动逐批替换成本低（K8s 默认），但新旧版本长时间共存需接口向后兼容；蓝绿两套完整环境切流，秒级回滚但成本翻倍；金丝雀先给 1-5% 小流量观察指标再逐步放量，风险最小，需要流量染色与观测体系配合。（回链 OPS-001）
+
+### 270：Feature Flag 止血与降级开关设计？
+**答**：Feature Flag 是不改代码、不发版本就能关闭功能的运行时开关，把 30 分钟回滚变成 30 秒止血；读取要有本地缓存兜底（配置中心挂了用最后一份已知配置），默认值偏保守；粒度到功能级，高风险发布在 MR 里声明涉及哪些开关并写预案；开关是技术债，定期清理长期为 true 的死开关。（回链 OPS-013）
+
+### 271：为什么 index.html 一定不能被 CDN 缓存？
+**答**：index.html 是"版本清单"，它引用哪些 hash chunk 决定用户看到的功能；被缓存则新版本发布后用户拿旧 html，请求的旧 chunk 可能已清理，直接白屏/404；配置——CDN 跟随源站 no-cache 或对 html 路径设不缓存，Nginx 也显式 no-cache；验证用 curl -I 看 X-Cache 与 Cache-Control 实际值。（回链 OPS-020）
+
+### 272：sourcemap 生产策略为什么 hidden 最合适？
+**答**：三个选择——normal（map 随产物公开）、hidden（生成 map 但不写 sourceMappingURL 注释）、不生成（无法还原）；hidden 是生产标准——构建产出 .map 上传监控平台，浏览器与 CDN 拿不到，兼顾可还原与安全；配套动作是构建后立刻上传再从发布产物剔除；map 生成拖慢构建，CI 按需开关。（回链 OPS-077）
+
+## 第二十三章 软技能（273-280）
+
+### 273：项目描述如何用 STAR 改写？
+**答**：简历项目描述是"压缩版 STAR"——Situation 与 Task 各半句，Action 一句，Result 必须量化收尾；90% 的烂描述烂在只有 Action 没有 Result；改写步骤——先补背景（为什么做）→ 再补结果（数据/对比）→ 最后压缩动作描述。（回链 SOFT-002）
+
+### 274："这个项目最大的挑战是什么"怎么答？
+**答**：考的是定义问题的能力与解决问题的完整度，不是比惨——挑战要"难在技术或约束"，不能难在"沟通不畅"；结构——挑战是什么 → 为什么难（约束与矛盾）→ 尝试过什么、失败在哪 → 最终方案 → 结果 → 沉淀；"失败尝试"是加分项，说明你是排除法找到的解。（回链 SOFT-013）
+
+### 275：遇到压力面试怎么办？
+**答**：先识别——连环否定、打断、故意唱反调多是压力测试，考察情绪稳定性；第一招澄清——把攻击性问题拉回事实（"您是指性能问题还是落地可行性？"），问题一具体压力减半；第二招暂停——允许自己停 3-5 秒思考，比慌乱作答专业得多。（回链 SOFT-023）
+
+### 276：八股题的分层答法？
+**答**：拉开差距的不是背功是层次；标准四层——定义（是什么）→ 原理（怎么实现）→ 场景（什么时候用）→ 权衡（代价与替代方案）；节奏——定义一句话、原理两三句、场景一句、权衡主动说，控制在 60-90 秒，给面试官留追问口。（回链 SOFT-028）
+
+### 277：完全不会的题怎么答才不减分？
+**答**：直接说"不知道"诚实但不加分，瞎编是最大减分项；标准三步——诚实承认 → 从已知推理 → 迁移相似知识，展示思考过程比答案本身值钱；示范——"不会 X，但它解决 Y 问题，Y 我熟悉 Z 方案，所以 X 大概率……"。（回链 SOFT-029）
+
+### 278：手写防抖节流的标准答题流程？
+**答**：流程——先辨析概念差异 → 确认需求场景 → 手写实现 → 补进阶点 → 自测；辨析一句话——防抖"停止触发 n 毫秒后才执行"（最后一次说了算），节流"n 毫秒内最多执行一次"（第一次说了算）；先写基础版拿稳分，再主动补立即执行、取消、返回值等进阶点。（回链 SOFT-040）
+
+### 279：被问期望薪资，三种策略怎么选？
+**答**：精确报价（有对标筹码时）、区间报价（常规稳妥）、反问回抛（信息不足时）；精确报价的前提是手里有对标 offer 或明确知道市场价，报具体数字显笃定且锚定效应强；区间报价技巧——区间下限 = 心理底线，说"18-22"时真实目标是 20 而非 18。（回链 SOFT-050）
+
+### 280："你的三年/五年规划"标准答法？
+**答**：真实考点是你的人生规划与岗位是否兼容，答案要指向"在贵司这个岗位深耕"；安全结构——一年扎住（上手业务成为可靠执行者）→ 两三年建立专长（某领域主力）→ 三五年放大价值（带人或主导架构）；规划要绑定具体技术方向，泛泛的"成为更优秀的工程师"是零分。（回链 SOFT-061）
+
+## 第二十四章 HTML5（281-288）
+
+### 281：meta viewport 每个字段的含义？
+**答**：移动浏览器默认把页面渲染在约 980px 虚拟视口再缩小导致字小，viewport meta 用来接管；width=device-width 视口等于设备 CSS 像素宽度，initial-scale=1 初始缩放；禁缩放（user-scalable=no）对无障碍不友好且 iOS 10 起被忽略，不建议；viewport-fit=cover 配合刘海安全区使用。（回链 H5-004）
+
+### 282：大文件分片上传与断点续传？
+**答**：file.slice 切片 → 逐片受限并发上传 → 服务端按 hash 合并，文件整体 hash 作唯一标识；断点续传——上传前问服务端"这个 hash 已有哪些分片"，跳过已传、失败只重传该片；并发 3-6 片配进度回调，完成后调 merge；hash 计算慢用 Web Worker 或抽样 hash（首尾 + 中间采样）权衡。（回链 H5-033）
+
+### 283：图片懒加载怎么做？原生与 IO 的差别？
+**答**：原生 loading="lazy" 零 JS，浏览器自行判断接近视口才加载并留预载距离；IntersectionObserver 手动换 src，控制力强可加渐显动画与自定义 rootMargin；不支持原生时降级 IO 方案；图片必须写 width/height 或 aspect-ratio 防 CLS；首屏图不要懒加载（反而慢 LCP）。（回链 H5-044）
+
+### 284：video 的 playsinline 为什么关键？
+**答**：iOS Safari 不加 playsinline，视频播放会全屏接管整个界面，退出要点"完成"；加了才能在页面内嵌位置播放，是 H5 视频流正常工作的前提；iOS 10 前需要私有属性 webkit-playsinline，现在标准属性全覆盖；组合 playsinline + muted + autoplay 才能静默自动播放，三者缺一大概率被拦截。（回链 H5-065）
+
+### 285：Canvas 的 save/restore 状态栈怎么用？
+**答**：save 把样式/变换矩阵/裁剪区/阴影等压栈，restore 弹栈恢复，LIFO 必须严格配对；不成对的后果——变换跨帧累积（图形越转越歪）、clip 裁剪区越缩越小、样式泄漏到后续绘制；原则是进入绘制分支先 save、离开前必 restore（try/finally 思维）；restore 只恢复状态不恢复像素，清像素用 clearRect。（回链 H5-127）
+
+### 286：FLIP 动画技术是什么？
+**答**：FLIP = First（变更前记录位置）→ Last（执行 DOM 变更后取新位置）→ Invert（用 transform 反向平移缩放使元素"看起来没动"）→ Play（下一帧移除反向 transform 触发过渡）；解决 DOM 重排后位置突变、而 transition 只对属性变化生效的问题；用 element.animate 实现更干净；只动 transform/opacity 保证合成器执行。（回链 H5-148）
+
+### 287：visualViewport 如何解决软键盘遮挡？
+**答**：window.visualViewport 暴露可见视口的 offsetTop/height/scale 与 resize/scroll 事件，键盘弹出时可见视口变小；键盘高度近似 = innerHeight - vv.height，把输入区用 transform 平移到可见视口底部；iOS 键盘不改变 layout viewport，fixed 元素会被遮——与安卓最大差异；防御——vv.scale > 1 时跳过防误判、事件防抖，兜底 scrollIntoView({block:'center'})。（回链 H5-155）
+
+### 288：Modal 的焦点陷阱怎么实现？
+**答**：打开时记住 document.activeElement，焦点移入 modal；关闭后归还给触发元素——焦点不归还是最高频无障碍缺陷；Tab 循环——keydown 捕获 Tab，收集容器内可聚焦元素，正向到尾跳头、反向到头跳尾；给背景元素设 inert（整树不可聚焦），原生 dialog.showModal 自带陷阱 + Esc，优先用；配套 role="dialog" aria-modal="true"。（回链 H5-174）
+
+## 第二十五章 架构（289-292）
+
+### 289：存量系统渐进演进还是推倒重来？绞杀者模式怎么落地？
+**答**：默认选渐进式——重写风险集中在"业务逻辑的暗知识"，老系统越久隐性规则越多；推倒重来只在技术栈无法满足硬性指标、维护成本超重写成本、业务窗口允许 3-6 个月并行时成立；绞杀者模式——新系统按路由/页面逐步接管流量，网关层分流，老页面只减不增，最后下线。（回链 ARC-006）
+
+### 290：feature 目录 vs 类型目录如何选择？
+**答**：类型目录（components/hooks/services 按技术分层）适合小项目——直观上手快，但一个需求要跳 4 个目录，功能归属逐渐失控；feature 目录（按业务内聚）适合中大型——删功能 = 删目录、边界清晰，需要纪律防止跨 feature 乱引；演进路径——MVP 用类型目录，出现 3+ 并行团队后按域逐步迁移到 feature。（回链 ARC-016）
+
+### 291：qiankun 的工作原理？
+**答**：JS 沙箱——Proxy 沙箱代理 window 读写进各自 fakeWindow，老浏览器降级 SnapshotSandbox（激活时拍快照、卸载时恢复）；样式隔离——experimentalStyleIsolation 改写选择器加作用域，strictStyleIsolation 用 Shadow DOM（彻底但弹窗挂 body 会失效）；生命周期按 bootstrap → mount → unmount 驱动，unmount 时恢复被劫持的全局副作用。（回链 ARC-040）
+
+### 292：前端状态如何分类？各放哪里？
+**答**：四分类——服务端状态（缓存的远端数据）、客户端全局状态（跨页面共享）、URL 状态（可分享可刷新）、本地 UI 状态（组件内部）；架构核心思想是先"分流"再"选库"；大量全局状态库的滥用源于把服务端状态塞进了 Redux；每新增一个状态先问归属，再定存储位置与生命周期。（回链 ARC-051）
+
+## 第二十六章 性能优化进阶（293-300）
+
+### 293：Service Worker 缓存策略如何选择？
+**答**：cache-first 先查缓存命中直接返回（连网不发）——最快但可能过期，适合带 hash 的静态资源；network-first 先发网络请求成功则更新缓存，失败回落缓存——最新鲜但弱网慢，适合 HTML 与 API 数据；stale-while-revalidate 立即回缓存 + 后台更新，两者折中适合"次新"内容。（回链 OPT-029）
+
+### 294：虚拟列表进阶（动态高度、缓冲区）？
+**答**：比定高多三件事——高度缓存 + 前缀和定位 + 渲染后修正；流程——先按预估高度算起始 index → 渲染后测量真实高度写缓存 → 用前缀和重算偏移，滚动中逐步把预估值替换为真实值；缓冲区上下各多渲染约半屏防快速滚动白屏，再配合 rAF 节流 scroll。（回链 OPT-033）
+
+### 295：强制同步布局（Layout Thrashing）如何定位与修复？
+**答**：交替"写布局属性 → 读布局属性"会让浏览器每读一次被迫重排，一帧内 N 次重排即 Thrashing；Performance 面板特征——一帧里密集的紫色 Recalculate Style 与黄色 Layout 交替，调用栈指向读布局代码；修复（FastDom 模式）——读和写分成两个队列，同帧先集中读完所有值再集中写所有变更，永远不交错。（回链 OPT-065）
+
+### 296：为什么大数组要用 shallowRef？
+**答**：ref([]) 默认深层响应式——每个元素、每个嵌套字段都被 Proxy 包装，10 万条数据光是初始化代理就多花几百 ms，后续读取还要走拦截；shallowRef 只代理引用本身，整体替换数组才触发更新，内部字段保持原生零开销；配合 triggerRef 在原地修改后手动通知，markRaw 标记个别对象永不代理。（回链 OPT-089）
+
+### 297：Core Web Vitals 从全红到全绿的路线？
+**答**：排序原则——先测量后优化、按"对总分拖累 × 修复成本"排优先级、每步只动一个变量并验证 RUM；六阶段——基线体检（CrUX+RUM+Lab 三源对齐）→ LCP 治理 → CLS 治理（通常最容易全绿）→ INP 治理（长任务切片、第三方瘦身，最难）→ 回归卡口 → 持续运营；验收统一用 CrUX/RUM 的 P75 达标。（回链 OPT-119）
+
+### 298：首屏慢如何做关键链路拆解？
+**答**：链路 = 重定向 → DNS/TCP/TLS → 请求发出 → TTFB → HTML 下载 → 资源发现下载 → 解析执行 → FCP，用 PerformanceNavigationTiming 把每段耗时精确拆出；归因口诀——TTFB 占比高打后端/CDN、资源加载慢打阻塞资源、load 后仍白屏打 JS 执行；逐段算占比画瀑布，先打占比最大的一段，避免经验主义优化。（回链 OPT-121）
+
+### 299：INP 不达标如何做三段归因？
+**答**：Event Timing API 的 interactionId 把一次交互拆成 inputDelay（事件排队）、processing（回调执行）、presentationDelay（渲染提交）三段；inputDelay 高 → 主线程被长任务占住，治理长任务；processing 高 → 回调本身慢，拆分瘦身事件处理；presentationDelay 高 → 大范围重排重绘，减少 DOM 变更范围；上报带交互目标按 P75 聚合直接定位瓶颈。（回链 OPT-129）
+
+### 300：polyfill 体积膨胀如何治理？
+**答**：全量 core-js + regenerator 可占 90-120KB，其中 80% 是老浏览器才需要的；治理三板斧——browserslist 精确声明目标（如 chrome >= 87）、useBuiltIns: 'usage' 只注入缺失的 polyfill、优先原生特性检测；双产物方案——构建 module/nomodule 两份 bundle，现代浏览器只吃无 polyfill 版本，可省 30-50% JS 体积。（回链 OPT-145）
+
+---
+
+> 全部 300 张卡到此结束。配套文件：`28-flashcards-anki.csv`（Anki 可导入）。回链编号可在对应题库文件中 grep 定位原题与完整代码。

@@ -1,0 +1,69 @@
+"""异步看门狗: 任务心跳监测与卡死处置。
+
+长任务"活着但卡死"是 asyncio 最危险的故障: 不抛异常、不完成、占着连接。
+模式: 被监测任务周期性 beat() 更新心跳时间戳; 看门狗协程定期巡逻,
+超过 stall_limit 没心跳的任务直接 cancel——用取消把它从卡死中拽出来。
+"""
+import asyncio
+
+
+class Watchdog:
+    def __init__(self, stall_limit=0.25):
+        self.beats = {}
+        self.stall_limit = stall_limit
+        self.killed = []
+
+    def beat(self, name):
+        self.beats[name] = asyncio.get_running_loop().time()
+
+    async def patrol(self, tasks):
+        loop = asyncio.get_running_loop()
+        while any(not t.done() for t in tasks.values()):
+            await asyncio.sleep(0.05)
+            now = loop.time()
+            for name, t in tasks.items():
+                if t.done():
+                    continue
+                if now - self.beats.get(name, 0.0) > self.stall_limit:
+                    self.killed.append(name)
+                    t.cancel()               # 用取消把卡死任务拽出来
+
+
+async def healthy(wd, name, rounds):
+    for _ in range(rounds):
+        await asyncio.sleep(0.04)
+        wd.beat(name)                        # 每 40ms 跳一次心跳
+    return name + "-done"
+
+
+async def staller(wd, name):
+    wd.beat(name)
+    await asyncio.sleep(1.0)                 # 卡死: 之后再也不跳心跳
+    return name + "-done"
+
+
+async def main():
+    wd = Watchdog(stall_limit=0.25)
+    tasks = {
+        "healthy-1": asyncio.create_task(healthy(wd, "healthy-1", 6)),
+        "healthy-2": asyncio.create_task(healthy(wd, "healthy-2", 8)),
+        "staller": asyncio.create_task(staller(wd, "staller")),
+    }
+    patrol = asyncio.create_task(wd.patrol(tasks))
+    results = await asyncio.gather(*tasks.values(), return_exceptions=True)
+    try:
+        await patrol
+    except asyncio.CancelledError:
+        pass
+
+    print("看门狗踢掉的卡死任务:", wd.killed)
+    print("healthy-1 结果:", results[0])
+    print("staller 已取消:", tasks["staller"].cancelled())
+    assert results[0] == "healthy-1-done", "健康任务不应被误伤"
+    assert tasks["staller"].cancelled(), "卡死任务应被看门狗取消"
+    assert wd.killed == ["staller"], "只踢卡死的, 不踢健康的"
+    print("结论: 心跳是活性的唯一证据; 看门狗的处置手段就是 cancel")
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

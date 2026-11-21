@@ -1,0 +1,69 @@
+"""精确前缀缓存:规范化序列化做 key,版本化 TTL,统计命中率。"""
+import hashlib, json, time
+
+
+class PrefixCache:
+    def __init__(self, ttl=600, max_entries=1000):
+        self.store, self.ttl = {}, ttl
+        self.hits = self.misses = 0
+        self.max_entries = max_entries
+
+    @staticmethod
+    def norm(messages):
+        """规范化:角色统一小写、内容去首尾空白,保证前缀稳定性。"""
+        return json.dumps([[m["role"].lower(), m["content"].strip()] for m in messages],
+                          ensure_ascii=False, sort_keys=True)
+
+    def key(self, model_version, messages):
+        h = hashlib.sha256()
+        h.update(model_version.encode())
+        h.update(self.norm(messages).encode())
+        return h.hexdigest()
+
+    def get(self, key):
+        item = self.store.get(key)
+        if item and time.time() - item["t"] < self.ttl:
+            self.hits += 1
+            return item["answer"]
+        self.misses += 1
+        return None
+
+    def put(self, key, answer):
+        if len(self.store) >= self.max_entries:
+            oldest = min(self.store, key=lambda k: self.store[k]["t"])
+            del self.store[oldest]                 # 淘汰最旧
+        self.store[key] = {"answer": answer, "t": time.time()}
+
+
+class Client:
+    def __init__(self, cache, model_version="v1"):
+        self.cache, self.mv = cache, model_version
+
+    def chat(self, system, user_msg, llm):
+        prefix = [{"role": "system", "content": system}, {"role": "user", "content": user_msg}]
+        k = self.cache.key(self.mv, prefix)
+        hit = self.cache.get(k)
+        if hit:
+            return hit, True
+        answer, _ = llm(prefix)
+        self.cache.put(k, answer)
+        return answer, False
+
+
+if __name__ == "__main__":
+    cache = PrefixCache()
+    client = Client(cache)
+
+    def llm(messages):
+        return "回答:" + messages[-1]["content"], 0.01
+
+    a1, h1 = client.chat("你是订单客服,规则固定", "查订单 A1", llm)
+    a2, h2 = client.chat("你是订单客服,规则固定", "查订单 A1", llm)
+    print(f"第一次命中={h1} 第二次命中={h2}")
+    assert not h1 and h2
+    # 动态信息混入 system 会破坏命中
+    client.chat(f"你是客服,当前时间 {time.time()}", "查订单 A2", llm)
+    client.chat(f"你是客服,当前时间 {time.time()}", "查订单 A2", llm)
+    c = client.cache
+    print(f"命中率 {c.hits}/{c.hits + c.misses} —— 动态 system 请求未命中,符合预期")
+    assert c.misses >= 3

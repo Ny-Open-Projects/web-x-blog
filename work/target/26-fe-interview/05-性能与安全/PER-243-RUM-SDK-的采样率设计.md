@@ -1,0 +1,34 @@
+---
+title: [PER-243] RUM SDK 全量上报还是抽样？采样率怎么定才不破坏分位数？
+date: 2026-11-19
+categories: [性能与安全]
+tags: [前端面试, 面试题, 09]
+type: 面试题
+---
+
+## PER-243：RUM SDK 全量上报还是抽样？采样率怎么定才不破坏分位数？
+
+**答**：
+- 抽样的坑：性能分布是长尾的，简单随机抽样在低流量下容易把尾部样本（最慢的 1%）抽没，p98/p75 直接失真。分位数越靠尾部，所需样本量越大——p75 稳定约需数千样本，p98 要数十倍于它。
+- 推荐方案：① 按页面分层采样——核心页面全量、长尾页面 10~20%；② 慢样本补偿——采样命中但判定为慢（超阈值）的样本强制上报，保尾部；③ 会话级一致——同一会话内所有指标同采或同不采，避免拼出不存在的"混合会话"。
+- 采样率怎么定：先按服务端承受量倒推（QPS 预算），再验证——把当前数据随机降采样 50%/10%，对比 p75/p98 波动，波动 < 5% 即可降采样。
+- 埋点自指：SDK 本身也要轻（脚本体积、上报用 sendBeacon 批量、上报失败静默），别让监控 SDK 成为性能问题。
+
+```javascript
+// 分层采样 + 慢样本补偿
+function shouldSample({ pageWeight, metrics, rate }) {
+  // 慢样本强制保留：任一指标越过"差"阈值
+  const slow = metrics.lcp > 4000 || metrics.inp > 500 || metrics.cls > 0.25;
+  if (slow) return true;                       // 保尾部，分位数不失真
+  const r = mulberry32(hash(sessionId));       // 会话级确定性采样
+  return r() < (pageWeight === 'core' ? 1 : rate);   // 核心页全量，长尾页降采样
+}
+function mulberry32(seed) {                    // 确定性 PRNG：同会话同结果
+  return function () {
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+```

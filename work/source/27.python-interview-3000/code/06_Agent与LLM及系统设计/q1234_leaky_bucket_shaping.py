@@ -1,0 +1,46 @@
+"""漏桶整形:计算每条消息的应发时刻,突发输入被平滑为恒定速率输出。"""
+
+
+class LeakyShaper:
+    def __init__(self, rate_per_sec, burst_capacity):
+        self.rate, self.capacity = rate_per_sec, burst_capacity
+        self.queue, self.schedule = [], []
+        self.next_emit = None
+
+    def submit(self, items, now):
+        """突发到达:入桶(有界),为每条计算应发时刻。"""
+        admitted = 0
+        for it in items:
+            if len(self.queue) >= self.capacity:
+                break
+            self.queue.append(it)
+            admitted += 1
+        if self.next_emit is None and self.queue:
+            self.next_emit = now
+        t = self.next_emit
+        while self.queue and t is not None:
+            self.schedule.append((round(t, 3), self.queue.pop(0)))
+            self.next_emit = t = t + 1.0 / self.rate
+        return admitted
+
+    def due(self, now):
+        return [it for ts, it in self.schedule if ts <= now]
+
+
+if __name__ == "__main__":
+    shaper = LeakyShaper(rate_per_sec=50, burst_capacity=20)
+    admitted = shaper.submit([f"m{i}" for i in range(1000)], now=0.0)   # 突发 1000
+    print(f"突发 1000 条,桶容量 20,只收 {admitted} 条,其余拒绝/等待重试")
+    assert admitted == 20
+
+    first = shaper.schedule[:3]
+    last = shaper.schedule[-1]
+    print("前 3 条应发时刻:", first)
+    print("最后一条应发时刻:", last)
+    gaps = [round(shaper.schedule[i + 1][0] - shaper.schedule[i][0], 4)
+            for i in range(min(5, len(shaper.schedule) - 1))]
+    assert all(abs(g - 0.02) < 1e-6 for g in gaps), f"输出间隔必须恒定 1/50s, 实际 {gaps}"
+    print(f"输出被平滑为 50/s,间隔恒定 {gaps[0]}s;瞬时峰值被完全削平")
+    early = shaper.due(0.01)
+    assert len(early) == 1, "t=0.01 只应发出第 1 条"
+    print("速率承诺可被下游稳定消化")

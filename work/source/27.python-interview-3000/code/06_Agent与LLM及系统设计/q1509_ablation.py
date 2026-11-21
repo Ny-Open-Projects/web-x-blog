@@ -1,0 +1,97 @@
+"""检索消融实验框架:逐组件开关组合跑评估,按贡献度排序,找出真正有效的组件。"""
+import hashlib
+import math
+
+
+def embed(text, dim=16):
+    vec = [0.0] * dim
+    padded = " " + text + " "
+    for i in range(len(padded) - 2):
+        h = int(hashlib.md5(padded[i:i + 3].encode()).hexdigest(), 16)
+        vec[h % dim] += 1.0
+    n = math.sqrt(sum(v * v for v in vec)) or 1.0
+    return [v / n for v in vec]
+
+
+def cosine(a, b):
+    return sum(x * y for x, y in zip(a, b))
+
+
+class Pipeline:
+    """可开关的检索管线:bm25 近似词面分 + 向量分 + rerank 加权。"""
+
+    def __init__(self, docs, use_vector=True, use_rerank=False, rerank_weight=0.5):
+        self.docs = docs
+        self.use_vector, self.use_rerank, self.rw = use_vector, use_rerank, rerank_weight
+
+    def _lexical(self, query, text):
+        q = set(query)
+        t = set(text)
+        return len(q & t) / max(1, len(q))
+
+    def search(self, query, k=2):
+        qv = embed(query)
+        scored = {}
+        for did, text in self.docs.items():
+            s = self._lexical(query, text)
+            if self.use_vector:
+                s = 0.5 * s + 0.5 * cosine(qv, embed(text))
+            scored[did] = s
+        ranked = sorted(scored.items(), key=lambda t: -t[1])
+        if self.use_rerank:
+            def rr(did):
+                return 0.7 * scored[did] + 0.3 * self._lexical(query, self.docs[did][:6])
+            ranked = sorted(ranked, key=lambda t: -rr(t[0]))
+        return [did for did, _ in ranked[:k]]
+
+
+class Ablation:
+    """消融器:枚举开关组合,跑同一评估集,输出每个组件的净贡献。"""
+
+    def __init__(self, docs, golden):
+        self.docs = docs
+        self.golden = golden               # [(query, {relevant})]
+
+    def score(self, use_vector, use_rerank, k=2):
+        p = Pipeline(self.docs, use_vector=use_vector, use_rerank=use_rerank)
+        hit = sum(any(g in p.search(q, k) for g in rel) for q, rel in self.golden)
+        return hit / len(self.golden)
+
+    def run(self):
+        base = self.score(True, False)
+        configs = {
+            "baseline_vec": self.score(True, False),
+            "no_vector": self.score(False, False),
+            "vec_rerank": self.score(True, True),
+            "rerank_only": self.score(False, True),
+        }
+        contributions = {
+            "vector": round(configs["baseline_vec"] - configs["no_vector"], 2),
+            "rerank_on_vec": round(configs["vec_rerank"] - configs["baseline_vec"], 2),
+            "rerank_alone": round(configs["rerank_only"] - 0.0, 2),
+        }
+        ranking = sorted(contributions.items(), key=lambda kv: -kv[1])
+        return {"configs": configs, "contributions": contributions, "ranking": ranking}
+
+
+if __name__ == "__main__":
+    docs = {"d1": "退款流程 订单页申请 48小时到账",
+            "d2": "会员积分 消费一元一分",
+            "d3": "发票申请 个人中心 电子发票",
+            "d4": "物流 快递单号 订单详情"}
+    golden = [("退款到账时间", {"d1"}), ("开发票流程", {"d3"}),
+              ("积分怎么算", {"d2"}), ("查快递单号", {"d4"})]
+
+    ab = Ablation(docs, golden)
+    r = ab.run()
+    assert r["configs"]["baseline_vec"] >= r["configs"]["no_vector"], "向量通道应不劣于纯词面"
+    assert r["configs"]["baseline_vec"] == 1.0
+    assert "vector" in r["contributions"] and "rerank_on_vec" in r["contributions"]
+    assert r["ranking"][0][1] >= r["ranking"][-1][1], "贡献度降序"
+
+    p_off = Pipeline(docs, use_vector=False)
+    assert p_off.search("退款到账时间")[0] == "d1"
+    p_on = Pipeline(docs, use_vector=True, use_rerank=True)
+    assert p_on.search("退款到账时间")[0] == "d1"
+    print("消融框架通过:baseline hit@2 =", r["configs"]["baseline_vec"],
+          "贡献度排序:", r["ranking"])

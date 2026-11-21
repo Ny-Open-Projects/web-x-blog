@@ -1,0 +1,153 @@
+---
+title: [Q1865] SO_LINGER 三配置对照实测:排空、阻塞排空与 RST
+date: 2026-11-17
+categories: [Python并发与网络]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q1865 · SO_LINGER 三配置对照实测:排空、阻塞排空与 RST
+
+> 难度:★★★★ | 标签:SO_LINGER, TCP, 关闭语义
+
+**问**:close 一个还有数据的 TCP 连接,数据一定送达吗?SO_LINGER 的三种配置分别是什么行为?
+
+**答**:不一定,行为由 SO_LINGER 决定:默认(l_onoff=0)异步走四次挥手,未发数据继续送达,对端读到 EOF;on 且超时大于零,close 阻塞尝试排空发送缓冲,排空或超时后仍以 FIN 收尾;on 且超时为零,close 立即发 RST,未发未读数据全部丢弃。
+
+- 实验三个场景各连一次回环回声服务:默认 close 发 200KB 服务端完整收到后读到 EOF;
+
+- linger on+0 发 200KB,服务端最终收到 ConnectionResetError——即使数据全到了,后续 recv 仍以重置收尾,业务语义是 '这条连接死了' 而不是 '说完了';
+
+- linger on+1 发 100B,close 阻塞排空后正常 FIN,数据完整;
+
+- getsockopt 读回配置验证写入了,macOS 上结构体是两个 int 打包。
+
+工程含义:要体面下线用默认或 on+N;要主动制造 RST 快速释放(如踢掉异常连接)用 on+0,但要接受对端把 '死亡' 误判为 '崩溃' 的语义。
+
+```python
+# file: code/02_并发与网络工程/q1865_so_linger_matrix.py
+# -*- coding: utf-8 -*-
+"""SO_LINGER 三配置对照实测: 默认排空 / on+N 阻塞排空 / on+0 发 RST。
+
+- 默认(l_onoff=0): close 异步走四次挥手, 未发数据继续送达, 对端读到 EOF;
+- on 且超时大于 0: close 阻塞尝试排空发送缓冲, 超时或排空后仍以 FIN 收尾;
+- on 且超时为 0: close 立即发 RST, 未发未读数据全部丢弃, 对端收到连接重置。
+"""
+import socket
+import struct
+import threading
+import time
+
+TOTAL = 200_000
+results = []
+lock = threading.Lock()
+
+
+def wait_port(port, timeout=3.0):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        try:
+            with socket.create_connection(("127.0.0.1", port), timeout=0.2):
+                return
+        except OSError:
+            time.sleep(0.05)
+    raise RuntimeError("端口未就绪")
+
+
+def serve_conn(conn):
+    conn.settimeout(3.0)
+    first = conn.recv(65536)
+    if not first:
+        conn.close()
+        return                          # 端口探针连接, 不计入实验记录
+    total = len(first)
+    err = None
+    try:
+        while True:
+            data = conn.recv(65536)
+            if not data:
+                break
+            total += len(data)
+    except OSError as e:
+        err = repr(e)
+    with lock:
+        results.append((total, err))
+    conn.close()
+
+
+def start_server():
+    srv = socket.socket()
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 0))
+    srv.listen(5)
+    stop = threading.Event()
+
+    def loop():
+        srv.settimeout(0.2)
+        while not stop.is_set():
+            try:
+                conn, _ = srv.accept()
+            except socket.timeout:
+                continue
+            threading.Thread(target=serve_conn, args=(conn,), daemon=True).start()
+
+    threading.Thread(target=loop, daemon=True).start()
+    port = srv.getsockname()[1]
+    wait_port(port)
+    return srv, stop, port
+
+
+def scenario(name, linger, payload):
+    srv, stop, port = start_server()
+    before = len(results)
+    c = socket.socket()
+    c.connect(("127.0.0.1", port))
+    if linger is not None:
+        c.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER,
+                     struct.pack("ii", *linger))
+        onoff, secs = struct.unpack(
+            "ii", c.getsockopt(socket.SOL_SOCKET, socket.SO_LINGER, 8))
+        print("%s: SO_LINGER 读回 onoff=%d secs=%d" % (name, onoff, secs))
+    else:
+        print("%s: SO_LINGER 读回默认 onoff=0" % name)
+    try:
+        c.sendall(b"x" * payload)
+    except OSError as e:
+        print("  发送端报错:", repr(e))
+    c.close()
+    deadline = time.monotonic() + 2.0
+    while time.monotonic() < deadline and len(results) <= before:
+        time.sleep(0.02)
+    stop.set()
+    srv.close()
+    total, err = results[before]
+    print("  服务端读到 %d 字节, 错误=%s" % (total, err))
+    return total, err
+
+
+def main():
+    print("场景一 默认 close 发 200KB:")
+    total1, err1 = scenario("默认 close", None, TOTAL)
+    assert total1 == TOTAL and err1 is None, "默认 close 数据必须完整送达且以 EOF 收尾"
+
+    print("场景二 linger on 0 秒 发 200KB:")
+    total2, err2 = scenario("linger on 0", (1, 0), TOTAL)
+    assert err2 is not None and "ConnectionReset" in err2, \
+        "on+0 必须发 RST, 服务端以连接重置收尾"
+    print("  (RST 后服务端可能只收到部分数据: %d/%d)" % (total2, TOTAL))
+
+    print("场景三 linger on 1 秒 发 100B:")
+    total3, err3 = scenario("linger on 1", (1, 1), 100)
+    assert total3 == 100 and err3 is None, "on+1 阻塞排空后仍走 FIN, 数据完整"
+
+    print("结论: 三种配置三种告别, RST 会丢数据, 排空才体面")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+**追问**:1) linger on+N 超时后数据去哪了?——发送缓冲里未发出的数据被丢弃,连接以 RST 收尾;所以 N 要按发送缓冲排空时间估算,给小了等于变相丢数据。2) linger on+N 的 N 怎么估算?——N ≈ 发送缓冲数据量/出口带宽:200KB@100Mbps≈16ms,给 1s 是冗余;N 太小等于变相丢数据(超时后 RST 丢缓冲);「linger 配置+发送量+带宽」三者的账要一起算——与 Q659/Q660 的缓冲账同源。3) RST 收尾的业务语义怎么处理?——对端收到 ConnectionResetError:未读数据丢弃+连接死亡;客户端要区分「数据到了但连接被重置」(可能已处理)与「数据没到」(可重试,幂等兜底 Q706);服务端设计「必须回执」的协议时,close 时机要在最后一条数据被 ACK 之后再决定。4) 生产陷阱?——linger on+0 用于正常关闭(数据丢失+对端报错,见 Q1871);「close 就万事大吉」没确认发送缓冲已排空;服务端残留未读数据时 close(RST,Q1608 同源);把 linger 当「保证送达」的手段(它只决定 close 的行为,不保证数据送达)。
+
+
+---

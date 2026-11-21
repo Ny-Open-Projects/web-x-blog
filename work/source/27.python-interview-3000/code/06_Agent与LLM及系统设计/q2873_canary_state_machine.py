@@ -1,0 +1,71 @@
+"""Q2873 灰度回滚的状态机:放量 暂停 回滚与冻结的守卫迁移。
+
+灰度发布的状态迁移必须收进状态机:canary 促升 partial 要看错误率
+守卫,rollback 落到 frozen 是终态,冻结后只能靠新版本重开。状态机
+挡住的不是笔误,是「错误率 8% 还在放量」这种值班时刻的致命手滑。
+"""
+
+ALLOWED = {
+    ("draft", "start_canary"): ("canary", None),
+    ("canary", "promote"): ("partial", lambda r: r.err_rate < 0.01),
+    ("canary", "rollback"): ("frozen", None),
+    ("partial", "promote"): ("full", lambda r: r.err_rate < 0.005),
+    ("partial", "rollback"): ("frozen", None),
+    ("full", "rollback"): ("frozen", None),
+}
+
+
+class InvalidTransition(Exception):
+    pass
+
+
+class Release:
+    def __init__(self, version, err_rate=0.0):
+        self.version = version
+        self.state = "draft"
+        self.err_rate = err_rate
+        self.history = ["draft"]
+
+    def fire(self, action):
+        key = (self.state, action)
+        if key not in ALLOWED:
+            raise InvalidTransition(
+                "非法迁移:" + self.state + " --" + action + "-->")
+        target, guard = ALLOWED[key]
+        if guard is not None and not guard(self):
+            raise InvalidTransition(
+                "守卫未通过:" + self.state + " --" + action
+                + "-->: err_rate=" + str(self.err_rate))
+        self.state = target
+        self.history.append(target)
+
+
+def main():
+    rel = Release("v2026.44", err_rate=0.004)
+    rel.fire("start_canary")
+    rel.fire("promote")            # 0.4% < 1%,可促升
+    assert rel.state == "partial", rel.state
+    rel.err_rate = 0.008
+    err = ""
+    try:
+        rel.fire("promote")        # 0.8% > 0.5%,守卫拦下
+    except InvalidTransition as exc:
+        err = str(exc)
+    assert "守卫未通过" in err, err
+    assert rel.state == "partial"  # 拦下后原状态不动
+    rel.fire("rollback")
+    assert rel.state == "frozen"
+    # frozen 是终态:继续放量必须新版本重开
+    try:
+        rel.fire("promote")
+        raise AssertionError("应当拒绝")
+    except InvalidTransition as exc:
+        err2 = str(exc)
+    assert "非法迁移" in err2, err2
+    print("迁移轨迹:", rel.history)
+    print("守卫拦截:", err)
+    print("终态拒绝:", err2)
+
+
+if __name__ == "__main__":
+    main()

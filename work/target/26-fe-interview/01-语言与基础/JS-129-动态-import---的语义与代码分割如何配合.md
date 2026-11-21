@@ -1,0 +1,49 @@
+---
+title: [JS-129] 动态 import() 的语义与代码分割如何配合？
+date: 2026-11-17
+categories: [JavaScript]
+tags: [前端面试, 面试题, 04]
+type: 面试题
+---
+
+## JS-129：动态 import() 的语义与代码分割如何配合？
+
+**答**：
+- `import()` 返回 Promise（模块命名空间对象），可在任意位置调用：条件、循环、事件回调。
+- 打包器以 import() 的目标为切分点生成独立 chunk，实现按需加载与路由级分割。
+- 与静态 import 的区别：静态 import 在模块求值前完成加载且不可取消；import() 是运行时决策。
+- 弱网下 chunk 加载会失败，要做重试兜底；配合 prefetch/preload 提示可优化体验。
+
+```javascript
+// 1. 事件触发按需加载
+button.addEventListener('click', async () => {
+  const { default: Chart } = await import('./chart.js'); // 点击才拉取
+  new Chart(el);
+});
+
+// 2. 路由级代码分割
+const routes = {
+  '/home':  () => import('./pages/home.js'),
+  '/admin': () => import('./pages/admin.js'), // 权限页独立分包
+};
+
+// 3. 失败重试：弱网 chunk 加载失败是线上常见问题
+async function loadPage(name, retries = 2) {
+  try {
+    return await routes[name]();
+  } catch (e) {
+    if (retries > 0) return loadPage(name, retries - 1);
+    throw new Error(`页面资源加载失败: ${name}`);
+  }
+}
+
+// 4. 与预加载提示配合（不执行，只提前下载）
+// <link rel="modulepreload" href="/chunks/admin.js">
+// webpack: import(/* webpackPrefetch: true */ './next-page.js')
+
+// 5. 模块命名空间对象的形态
+import('./math.js').then((mod) => {
+  console.log(Object.keys(mod));   // 所有具名导出 + default
+  console.log(mod.default);
+});
+```

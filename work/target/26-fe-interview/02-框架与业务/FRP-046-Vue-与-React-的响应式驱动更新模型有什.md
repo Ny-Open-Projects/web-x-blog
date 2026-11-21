@@ -1,0 +1,42 @@
+---
+title: [FRP-046] Vue 与 React 的响应式驱动更新模型有什么本质差异？
+date: 2026-11-17
+categories: [框架原理]
+tags: [前端面试, 面试题, 13]
+type: 面试题
+---
+
+## FRP-046：Vue 与 React 的响应式驱动更新模型有什么本质差异？
+
+**答**：
+- Vue 是 **push 模型**：数据变化（Proxy 拦截）时框架**主动知道**"谁在用这份数据"，精确把相关组件的更新 job 入队，更新粒度是组件。
+- React 是 **pull 模型**：setState 只表达"这里可能变了"，框架不知道谁依赖它，默认从该 fiber **向下整树重算**，靠 memo/useMemo/shouldComponentUpdate 手动拦截。
+- 带来的差异：Vue 改 state 后依赖它的 computed/watch 自动精确更新；React 必须重跑函数组件（所以 React 的 render 必须是纯函数、可重复执行）。
+- React 选择 pull 是为了 Concurrent（可中断重算，最新状态总是对的）；Vue3 的响应式精确性使其天然知道"最小更新范围"，两者是设计取舍而非优劣。
+
+```javascript
+// 一一对应：同一需求的两种驱动模型
+// —— Vue push 模型：框架知道依赖关系，只更新用到的组件 ——
+// Child.vue
+// <template>{{ props.count }}</template>
+// 父组件改 user.name（未被 Child 使用）时，Child 的 render effect 不会被触发
+
+// React pull 模型：父组件 setState 后默认整棵子树重跑
+import { memo } from 'react';
+
+function Parent() {
+  const [user, setUser] = useState({ name: 'a', count: 0 });
+  // setName 触发 Parent 重跑 -> 默认 Child 也重跑（即使它只用 name 不用 count）
+  return <Child name={user.name} />;
+}
+
+// 需要手动声明依赖边界：
+const Child = memo(({ name }) => {
+  console.log('child render'); // memo + 引用稳定时才被跳过
+  return <span>{name}</span>;
+});
+
+// Vue3 等价物：依赖收集天然完成"自动 memo"
+// const count = computed(() => state.count); // 只在 state.count 变时重算
+// 总结：Vue 依赖关系显式记录在案（track），React 靠开发者用 memo 系列补充声明
+```

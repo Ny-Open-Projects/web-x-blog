@@ -1,0 +1,114 @@
+"""失败分类与归档:瞬时错误退避重排队,永久错误进死信档案等人工,政策错误直接终止。"""
+from collections import deque
+
+
+def classify(exc):
+    """三类错误:transient 可重试 / permanent 数据性失败 / policy 违规必须终止。"""
+    msg = str(exc).lower()
+    if "timeout" in msg or "rate" in msg or "503" in msg:
+        return "transient"
+    if "not_found" in msg or "invalid" in msg or "404" in msg:
+        return "permanent"
+    return "policy"
+
+
+class TriageQueue:
+    """处置队列:transient 按退避重排队并计次数;permanent 入死信;policy 直接终止任务。"""
+
+    MAX_RETRY = 3
+
+    def __init__(self):
+        self.ready = deque()               # 立即可跑
+        self.waiting = []                  # (due_round, run)
+        self.dead_letter = []
+        self.terminated = []
+        self.round = 0
+
+    def submit(self, run_id, payload):
+        self.ready.append({"run_id": run_id, "payload": payload, "attempts": 0})
+
+    def drain_one(self, executor):
+        """执行一个任务:按错误分类走不同通道。executor 抛错即失败。"""
+        if not self.ready:
+            return None
+        run = self.ready.popleft()
+        run["attempts"] += 1
+        try:
+            result = executor(run["payload"])
+            return {"run_id": run["run_id"], "ok": True, "result": result}
+        except Exception as exc:
+            kind = classify(exc)
+            if kind == "transient" and run["attempts"] < self.MAX_RETRY:
+                self.waiting.append((self.round + 2 ** run["attempts"], run))   # 指数退避
+                return {"run_id": run["run_id"], "ok": False, "requeued": True,
+                        "backoff": 2 ** run["attempts"], "kind": kind}
+            if kind == "transient":
+                self.dead_letter.append((run, str(exc), "retry_exhausted"))
+                return {"run_id": run["run_id"], "ok": False, "dead": True, "kind": kind}
+            if kind == "permanent":
+                self.dead_letter.append((run, str(exc), "permanent_error"))
+                return {"run_id": run["run_id"], "ok": False, "dead": True, "kind": kind}
+            self.terminated.append((run, str(exc)))
+            return {"run_id": run["run_id"], "ok": False, "terminated": True, "kind": kind}
+
+    def advance(self):
+        """推进一轮:到期的 waiting 任务回到 ready。"""
+        self.round += 1
+        still = []
+        for due, run in self.waiting:
+            if due <= self.round:
+                self.ready.append(run)
+            else:
+                still.append((due, run))     # 保持 元组 形状 否则下轮解包失败
+        self.waiting = still
+
+
+if __name__ == "__main__":
+    q = TriageQueue()
+    q.submit("r1", {"op": "search"})
+    q.submit("r2", {"op": "read"})
+    q.submit("r3", {"op": "delete"})
+    q.submit("r4", {"op": "write"})
+
+    def exec1(p):
+        if p["op"] == "read":
+            raise RuntimeError("upstream timeout 503")
+        if p["op"] == "delete":
+            raise ValueError("invalid target 404")
+        return {"done": p["op"]}
+
+    outcomes = [q.drain_one(exec1) for _ in range(4)]
+    assert outcomes[0]["ok"] is True
+    assert outcomes[1]["requeued"] is True and outcomes[1]["backoff"] == 2, "瞬时错误退避重排队"
+    assert outcomes[2]["dead"] is True and outcomes[2]["kind"] == "permanent"
+    assert outcomes[3]["ok"] is True
+
+    def flaky(p):
+        if p["op"] == "search" and flaky.n < 2:
+            flaky.n += 1
+            raise RuntimeError("upstream timeout 503")
+        return "ok:" + p["op"]
+    flaky.n = 0
+
+    q2 = TriageQueue()
+    q2.submit("job", {"op": "search"})
+    h1 = q2.drain_one(flaky)
+    assert h1["requeued"] and h1["backoff"] == 2
+    q2.advance()
+    assert not q2.ready, "退避 2 轮未到期不应回到 ready"
+    q2.advance()
+    assert q2.ready, "第 2 轮到期回 ready"
+    h2 = q2.drain_one(flaky)
+    for _ in range(6):                         # 第二次退避是 2 的 2 次方 等到到期
+        q2.advance()
+        if q2.ready:
+            break
+    h3 = q2.drain_one(flaky)
+    assert h3["ok"] is True and h3["result"] == "ok:search", "第三次成功 瞬时错误自愈"
+
+    q3 = TriageQueue()
+    q3.submit("bad", {"op": "x"})
+    r = q3.drain_one(lambda p: (_ for _ in ()).throw(ValueError("invalid input 404")))
+    assert r["dead"] is True and r["kind"] == "permanent"
+    assert len(q3.dead_letter) == 1 and q3.dead_letter[0][2] == "permanent_error"
+    print("失败分类通过:瞬时退避自愈 永久入死信 政策类直接终止")
