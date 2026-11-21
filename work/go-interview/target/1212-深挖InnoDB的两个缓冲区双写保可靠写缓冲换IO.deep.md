@@ -63,7 +63,7 @@ innodb_change_buffer_max_size = 25       # 占 buffer pool 比例，上限 50
 
 **关键数字（P7 硬证据）**：16KB / 4KB、2MB 双写区（每次 1MB）、redo block 512 字节、change buffer 默认 25%（上限 50%）。
 
-> 边界：buffer pool 与 AHI 见 1300；redo/undo 见 1209；本卡只讲 doublewrite 与 change buffer 两个缓冲区。
+> 边界：buffer pool 与 AHI 见 125；redo/undo 见 1207；本卡只讲 doublewrite 与 change buffer 两个缓冲区。
 
 ## ⚠️ 原文纠错
 1. 事实核校：双写先持久化副本再做原地更新、崩溃时用副本恢复、脏页落盘随机 IO 而双写顺序 IO、写缓冲针对写多读少场景、非唯一索引页不立即加载而只记录修改、读取时合并进缓冲池——均与 InnoDB 实现一致 `[经验]`。

@@ -36,7 +36,7 @@
 
 ## 关键代码
 ```go
-package main
+// 片段：defer recover 与 defercancel 示范（无 main，讲解用）
 
 import (
 	"context"

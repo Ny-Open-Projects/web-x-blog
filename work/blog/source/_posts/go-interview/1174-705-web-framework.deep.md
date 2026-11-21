@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "705-web-framework.deep"
+title: "705 Web 框架选型三维拆解深挖"
 date: 2026-10-10 09:07:02
 categories: [Go面试题集]
 tags: [Go面试题集]

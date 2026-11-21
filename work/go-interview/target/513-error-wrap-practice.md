@@ -36,7 +36,7 @@
 ## 关键代码
 
 ```go
-package main
+// 片段：错误包装实战（load/cache 等外部辅助见工程）
 
 import (
 	"errors"

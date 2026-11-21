@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "1912-counter-architecture.deep"
+title: "1912 海量计数器架构演进深挖"
 date: 2026-10-10 09:23:39
 categories: [Go面试题集]
 tags: [Go面试题集]

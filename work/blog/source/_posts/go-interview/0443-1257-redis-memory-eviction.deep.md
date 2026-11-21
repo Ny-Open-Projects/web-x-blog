@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "1257-redis-memory-eviction.deep"
+title: "1257 Redis 内存满处理链路深挖"
 date: 2026-10-10 12:51:51
 categories: [Go面试题集]
 tags: [Go面试题集]

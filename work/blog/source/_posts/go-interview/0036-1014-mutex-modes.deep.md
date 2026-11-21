@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "1014-mutex-modes.deep"
+title: "1014 Mutex 正常与饥饿模式行为深挖"
 date: 2026-10-10 08:17:54
 categories: [Go面试题集]
 tags: [Go面试题集]

@@ -21,9 +21,10 @@
 
 ## 数据现状
 
-- `work/source/`：622 个文件 / 5 个科目（4.es-go、6.k8s2-KCNA、7.k8s3-top、8.k8s4-cka、9.k8s5-prod）
-- `work/target/`：空 → 尚未产出
-- `work/blog/`：空
+- **编号事实源 = `work/COURSES.md`**（1–25 连续编号，新增课程先查它）
+- `work/source/`：20 素材目录 + 24/25 号新入库课（25.xiaodi-lowcode 2026-11-17 入库，1253 文件）
+- `work/target/`：20+ 目录；`25-lowcode` 含 229 篇 posts + 35 卡 + scan1~scan10 十轮扫描报告
+- `work/blog/`：`_posts` 20 目录；25 号 229 篇 + 35 卡已进站（hexo 构建通过），courses/index.md 20 门 / 3555 篇
 
 ## 复用清单（别重造）
 
@@ -1953,3 +1954,4 @@
 - 回填 58 张主卡头部（标题/关键词取自正文，分类/难度/题型/频率按主题判定）；1501 难度 L2→L3 对齐同名 .deep.md（规则12 深挖门槛）。
 - 复跑门禁 1394/1394 PASS 0 error；本地 commit（ahead 244，未 push）。
 - 夜班无人值守三件套（NIGHT-SHIFT.md + watchdog + 自动化 344365e2）因队列已空，自动化列表已空、watchdog 已退出——course11 目标达成。
+- [课程11 · Desktop原始工作区吸收完毕](GO-INTERVIEW-DESKTOP-ABSORBED.md) — ~/Desktop/go-interview 三遍扫描确认后已删除；缺口 9 卡已补（2001-2005/1854/1855/821/822），815 存疑已解，读物格式能力存于 _pipeline/gen-*.py

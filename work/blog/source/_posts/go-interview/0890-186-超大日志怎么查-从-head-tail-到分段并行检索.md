@@ -65,12 +65,17 @@ import (
 )
 
 func main() {
+	if len(os.Args) < 3 {
+		fmt.Println("用法：go run . <日志文件路径> <检索正则>")
+		return
+	}
 	path, pattern := os.Args[1], os.Args[2]
 	re := regexp.MustCompile(pattern)
 
 	f, err := os.Open(path)
 	if err != nil {
-		panic(err)
+		fmt.Println("跳过演示：需要日志文件 fixture：", err)
+		return
 	}
 	defer f.Close() // 必须关闭，否则文件句柄泄漏
 

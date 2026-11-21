@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "1228-index-row-format.deep"
+title: "1228 索引长度限制与行格式体系深挖"
 date: 2026-10-10 08:32:04
 categories: [Go面试题集]
 tags: [Go面试题集]

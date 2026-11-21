@@ -1,3 +1,5 @@
+# 1207 binlog 写路径刷盘与组提交深挖
+
 ## 思路与架构
 binlog 刷盘命题分三层：写路径（事务→binlog cache→文件）、持久化策略（sync_binlog 决定何时 fsync）、与 redo 的协同（两阶段提交+组提交）。核心矛盾是「持久性 vs 写入吞吐」。
 

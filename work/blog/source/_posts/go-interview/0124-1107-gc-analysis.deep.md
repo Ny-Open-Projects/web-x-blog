@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "1107-gc-analysis.deep"
+title: "1107 GC 三层分析模型深挖（gctrace/memstats/pprof）"
 date: 2026-10-10 09:07:02
 categories: [Go面试题集]
 tags: [Go面试题集]

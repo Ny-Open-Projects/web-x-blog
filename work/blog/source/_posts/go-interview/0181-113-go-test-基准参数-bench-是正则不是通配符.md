@@ -50,7 +50,6 @@ tags: [Go面试题集]
 // go test -bench=. -benchtime=2s        每个跑 2 秒
 // go test -bench=. -benchmem            附带 B/op 与 allocs/op
 // go test -bench=. -cpu=2,4,8           在 2/4/8 个逻辑 CPU 下各跑一遍
-package main
 ```
 
 ## 总结与追问预判

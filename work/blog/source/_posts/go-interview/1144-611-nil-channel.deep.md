@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "611-nil-channel.deep"
+title: "611 nil channel 收发关闭语义深挖"
 date: 2026-10-10 09:07:53
 categories: [Go面试题集]
 tags: [Go面试题集]

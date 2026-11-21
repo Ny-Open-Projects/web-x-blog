@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "201-go-selection.deep"
+title: "201 Go 技术选型权衡深挖"
 date: 2026-10-10 09:23:39
 categories: [Go面试题集]
 tags: [Go面试题集]

@@ -48,7 +48,7 @@
 
 ## 关键代码
 ```go
-package main
+// 片段：预分配与 strings.Join 基准（无 main，讲解用）
 
 import (
 	"strings"

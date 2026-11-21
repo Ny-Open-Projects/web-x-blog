@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "514-object-equality.deep"
+title: "514 == 与 DeepEqual 分工深挖"
 date: 2026-10-10 09:02:18
 categories: [Go面试题集]
 tags: [Go面试题集]

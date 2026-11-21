@@ -1,3 +1,5 @@
+# 506 map key 可比较性约束深挖
+
 ## 思路与架构
 「float/切片能否作 map key」的本质是 **map key 的可比较性约束（comparable）** 在三类场景下的落地：编译期硬拒（slice/map/func）、语法合法但语义诡异（float/NaN、指针）。它把「类型可比较清单」（`509-comparable-types.md`）迁移到了 map 这一具体数据结构的实战约束。
 

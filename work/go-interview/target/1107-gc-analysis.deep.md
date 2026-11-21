@@ -1,3 +1,5 @@
+# 1107 GC 三层分析模型深挖（gctrace/memstats/pprof）
+
 ## 思路与架构
 ```text
 分析 Go GC 的三层模型：

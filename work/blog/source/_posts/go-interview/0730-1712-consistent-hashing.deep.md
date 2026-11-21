@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "1712-consistent-hashing.deep"
+title: "1712 一致性哈希三层架构深挖"
 date: 2026-10-10 09:09:51
 categories: [Go面试题集]
 tags: [Go面试题集]

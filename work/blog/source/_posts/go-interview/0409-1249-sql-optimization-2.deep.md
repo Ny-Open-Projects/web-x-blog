@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "1249-sql-optimization-2.deep"
+title: "1249 SQL 优化分层体系三例深挖"
 date: 2026-10-10 08:40:51
 categories: [Go面试题集]
 tags: [Go面试题集]

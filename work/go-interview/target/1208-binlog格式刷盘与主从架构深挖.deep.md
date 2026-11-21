@@ -43,4 +43,4 @@ MIXED(MBR)     默认 STATEMENT，无法精确复制时自动转 ROW   ← 面�
   半同步 ACK = 已"写入 relay log" 而非 "已执行完"
 ```
 
-> 边界：redo/undo 与两阶段提交见 1209；事务隔离与 MVCC 见 1230/1231；本卡只讲 binlog 格式、刷盘、主从复制。
+> 边界：redo/undo 与两阶段提交见 1207；事务隔离与 MVCC 见 1230/1231；本卡只讲 binlog 格式、刷盘、主从复制。

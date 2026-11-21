@@ -5,7 +5,7 @@
 > 原文锚点：第 29~35 段、第 86~89 段「RC 每语句生成、RR 启动时生成一次、事务真正启动的两种方式」
 
 ## 一句话总述
-读已提交（RC）与可重复读（RR）都靠一致性视图 ReadView 实现，**唯一区别是生成时机**：RC 在事务内**每条语句执行前**都重新生成一个 ReadView，故同一事务两次读可能不一致；RR 只在**事务启动时**生成一次并全程复用，故事务期间读到的数据恒为启动时刻的快照。
+读已提交（RC）与可重复读（RR）都靠一致性视图 ReadView 实现，**唯一区别是生成时机**：RC 在事务内**每次快照读（一致性读）前**都重新生成一个 ReadView，故同一事务两次读可能不一致；RR 只在**事务内第一次快照读时**生成一次并全程复用（`START TRANSACTION WITH CONSISTENT SNAPSHOT` 则在启动时立即生成），故事务期间读到的数据恒为第一次快照读时刻的快照。
 
 ## 面试官视角
 「RC 与 RR 的实现差异」是必考题，答案就是 ReadView 生成时机。高分还要补：**BEGIN/START TRANSACTION 并不立即启动事务**，要等到第一条操作 InnoDB 表的语句才真正启动；想立即启动需用 `START TRANSACTION WITH CONSISTENT SNAPSHOT`。
@@ -15,7 +15,7 @@
 
 1. **共同点**：两者都通过 ReadView（一致性视图）判断版本可见性，视图记录「当前所有活跃事务 ID 列表」。
 2. **RC 时机**：事务中**每个 SQL 语句执行前**都重新生成一个 ReadView → 期间别的事务提交修改后，本事务再读会看到新数据（不可重复读）。
-3. **RR 时机**：仅在**事务启动时**生成一个 ReadView，整个事务期间复用 → 事务内读到的一直是启动时刻的快照（可重复读）。
+3. **RR 时机**：仅在**事务内第一次快照读（一致性读）**时生成一个 ReadView，整个事务期间复用 → 事务内读到的一直是第一次快照读时刻的快照（可重复读）。注意 `BEGIN` 与第一条非读语句（如 UPDATE，走当前读）都**不**建立视图；`WITH CONSISTENT SNAPSHOT` 是唯一在启动时立即建立的例外。
 4. **启动事务的真正时机**：`BEGIN`/`START TRANSACTION` 本身**不启动事务**，要等第一条操作 InnoDB 表的语句；`START TRANSACTION WITH CONSISTENT SNAPSHOT` 才立即启动。
 
 ## 追问链
@@ -31,7 +31,7 @@
 | 隔离级别 | ReadView 生成 |
 |----------|---------------|
 | RC | 每语句前重新生成 |
-| RR | 事务启动时生成一次 |
+| RR | 事务内第一次快照读时生成一次（WITH CONSISTENT SNAPSHOT 例外） |
 
 ## 关键代码
 ```sql
@@ -39,7 +39,7 @@ START TRANSACTION WITH CONSISTENT SNAPSHOT;  -- 立即启动事务并建 ReadVie
 ```
 
 ## 总结与追问预判
-核心：**RC 每语句新建 ReadView、RR 仅启动时建一次；BEGIN 不立即启动事务**。追问常接「可见性怎么判」（见 1231）。
+核心：**RC 每次快照读新建 ReadView、RR 仅第一次快照读时建一次；BEGIN 与当前读语句都不建立视图**。追问常接「可见性怎么判」（见 1231）。
 
 ## ⚠️ 原文纠错
 1. 事实核校： [经验] RC/RR 均靠 ReadView、生成时机差异（每语句 vs 启动一次）、BEGIN 不立即启动事务需首条 InnoDB 语句、WITH CONSISTENT SNAPSHOT 立即启动——均正确，本卡为准。

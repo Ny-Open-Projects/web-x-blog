@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "1020-concurrency-pitfalls-2.deep"
+title: "1020 并发编程误区（二）三类嗅觉陷阱深挖"
 date: 2026-10-10 08:21:23
 categories: [Go面试题集]
 tags: [Go面试题集]

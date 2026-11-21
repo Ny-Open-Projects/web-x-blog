@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "502-composite-literal.deep"
+title: "502 组合字面量分层体系深挖"
 date: 2026-10-10 09:02:18
 categories: [Go面试题集]
 tags: [Go面试题集]

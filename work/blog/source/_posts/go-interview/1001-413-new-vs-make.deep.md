@@ -1,6 +1,6 @@
 ---
 disableNunjucks: true
-title: "413-new-vs-make.deep"
+title: "413 new 与 make 五维区别深挖"
 date: 2026-10-10 09:23:39
 categories: [Go面试题集]
 tags: [Go面试题集]

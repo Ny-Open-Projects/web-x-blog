@@ -42,8 +42,7 @@ tags: [Go面试题集]
 ## 关键代码
 
 ```go
-package main
-
+// 片段：零拷贝 API 示范（import 声明见上）
 import (
 	"reflect"
 	"unsafe"
