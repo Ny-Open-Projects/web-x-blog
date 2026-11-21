@@ -140,7 +140,10 @@ def main() -> int:
     for d in sorted(src.iterdir()):
         if not d.is_dir() or d.name.lower() == "code" or d.name.startswith("."):
             continue
-        txts = sorted(d.rglob("*.txt"), key=lambda p: sort_key(lesson_code(p.stem)))
+        txts = sorted(
+            (p for p in d.rglob("*") if p.is_file() and p.suffix in (".txt", ".md")),
+            key=lambda p: sort_key(lesson_code(p.stem)),
+        )
         if not txts:
             continue
         chapters.append({"name": d.name, "count": len(txts)})

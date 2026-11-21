@@ -20,6 +20,13 @@ ROOT = Path(__file__).resolve().parents[2]
 TARGET = ROOT / "work" / "target"
 POSTS = ROOT / "work" / "blog" / "source" / "_posts"
 
+# 课程标识 -> 发布区实际使用的中文顶级分类。
+# 未登记的课程保持原行为（直接用 course 标识），不影响既有 3282 篇。
+# 依据：发布区前 300 篇抽样 0 篇含英文课程标识，全部为中文分类。
+COURSE_LABELS = {
+    "data-analysis": "人人都能学会数据分析",
+}
+
 TITLE_RE = re.compile(r'^title:\s*(.*)$', re.M)
 
 
@@ -117,8 +124,9 @@ def inject_course(text, course):
     fm = text[4:end]
     body = text[end + 4:]
     cats = parse_categories(fm)
-    if course not in cats:
-        cats = [course] + cats
+    label = COURSE_LABELS.get(course, course)
+    if label not in cats:
+        cats = [label] + cats
     new_line = "categories: [" + ", ".join(cats) + "]"
     lines = fm.split("\n")
     out, i, replaced = [], 0, False

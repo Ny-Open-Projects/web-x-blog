@@ -30,3 +30,10 @@ ai/backups/
 
 # 课程验证代码生成的图片产物
 work/quant-site/content/data/*.png
+
+# 三门 Agent 课程的 Java demo 工程：构建产物与可执行 jar 不入库（mvn package 可重建）
+work/blog/courses/*/[0-9]*-demo/target/
+
+# TS 增量缓存与运行时日志（transient，不入库）
+*.tsbuildinfo
+work/go-interview/_logs/

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量化课程 · 网锋量化 QuantSite</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<nav class="nav"><div class="wrap nav-inner">
+  <div class="brand"><span class="logo">锋</span>网锋量化 <span style="color:var(--faint);font-weight:600;font-size:13px">QuantSite</span></div>
+  <div class="nav-links">
+    <a href="index.html">数据看板</a>
+    <a href="course.html" class="active">量化课程</a>
+    <a href="#" onclick="return soon()">模拟盘</a>
+    <a href="#" onclick="return soon()">社区</a>
+  </div>
+  <span class="badge-sim">内容制作中</span>
+</div></nav>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>数字货币 Python 量化投资实战</h1>
+    <p>从量化概念、Python/Pandas 基础，到交易所接口、择时 / 选币 / 套利策略与自动交易 —— 一门可跑通闭环的量化实战课。</p>
+  </section>
+
+  <div class="sim-banner">📚 课程内容由转写稿经「源稿 → 图文卡片」管线制作中，章节课时结构如下；每课时将配图文讲解 + 可运行代码 + 知识图谱。</div>
+
+  <section class="section">
+    <div class="section-title"><span class="bar"></span>课程大纲<span class="sub">11 章 · 58 课时</span></div>
+    <div id="chapters"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><span class="bar"></span>学习路径建议</div>
+    <div class="card" style="line-height:1.9;color:var(--muted)">
+      ① <b style="color:var(--text)">入门</b>：第1章 量化投资介绍 + 第2章 比特币介绍，建立概念与标的认识；<br>
+      ② <b style="color:var(--text)">打基础</b>：第3章 Python 基础 + 第4/5章 Pandas，掌握数据处理；<br>
+      ③ <b style="color:var(--text)">连真实</b>：第6章 交易所接口，把数据跑通；<br>
+      ④ <b style="color:var(--text)">上策略</b>：第7章 择时 / 第9章 选币 / 第10章 套利，配合看板实操；<br>
+      ⑤ <b style="color:var(--text)">成闭环</b>：第8章 自动交易，接入模拟盘验证（不接真实资金）。
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <b>说明：</b>本课程为量化方法教学内容，配套看板为模拟数据演示；<b>不构成投资建议</b>，数字货币与量化交易风险极高，历史/模拟业绩不代表未来收益。
+</div></footer>
+
+<script>
+function soon(){ alert("该模块在后续阶段上线。"); return false; }
+const CHAPTERS = [
+  {n:"01", t:"量化投资介绍", c:6, tag:"入门"},
+  {n:"02", t:"比特币介绍", c:5, tag:"入门"},
+  {n:"03", t:"Python 基础", c:10, tag:"打基础"},
+  {n:"04", t:"Pandas 入门操作", c:6, tag:"打基础"},
+  {n:"05", t:"Pandas 高阶操作", c:4, tag:"打基础"},
+  {n:"06", t:"交易所接口", c:6, tag:"连真实"},
+  {n:"07", t:"择时策略", c:5, tag:"上策略"},
+  {n:"08", t:"自动交易", c:5, tag:"成闭环"},
+  {n:"09", t:"选币策略", c:1, tag:"上策略"},
+  {n:"10", t:"套利策略", c:6, tag:"上策略"},
+  {n:"番外", t:"番外课程（环境 / 调试 / 工具）", c:4, tag:"辅助"}
+];
+document.getElementById("chapters").innerHTML = CHAPTERS.map(ch=>`
+  <details class="chapter" ${ch.n==="01"?"open":""}>
+    <summary><span class="n">${ch.n}</span>${ch.t}<span class="cnt">${ch.c} 课时 · ${ch.tag}</span></summary>
+    <div class="lessons">
+      ${Array.from({length:ch.c},(_,i)=>`<div class="lesson"><span class="lt">${String(i+1).padStart(2,"0")}</span><span>课时内容制作中（转写稿 → 图文卡片）</span><span class="st">待制作</span></div>`).join("")}
+    </div>
+  </details>`).join("");
+</script>
+</body>
+</html>

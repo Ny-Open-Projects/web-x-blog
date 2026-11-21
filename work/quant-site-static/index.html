@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据看板 · 网锋量化 QuantSite</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<nav class="nav"><div class="wrap nav-inner">
+  <div class="brand"><span class="logo">锋</span>网锋量化 <span style="color:var(--faint);font-weight:600;font-size:13px">QuantSite</span></div>
+  <div class="nav-links">
+    <a href="index.html" class="active">数据看板</a>
+    <a href="course.html">量化课程</a>
+    <a href="#" onclick="return soon()">模拟盘</a>
+    <a href="#" onclick="return soon()">社区</a>
+  </div>
+  <span class="badge-sim">模拟数据</span>
+</div></nav>
+
+<main class="wrap">
+  <div class="sim-banner">⚠️ 当前为 <b>模拟数据演示</b>（Phase 0 打样），非实时行情；所有分析与操作仅为方法演示，不构成投资建议。</div>
+
+  <section class="hero">
+    <h1>量化决策看板</h1>
+    <p>短线择时 · 多时间维度 · 可解释信号 ｜ 数据更新：<span id="updated">—</span></p>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><span class="bar"></span>今日大盘环境<span class="sub">大盘多空评级作为个股决策前置过滤</span></div>
+    <div class="index-grid" id="indexGrid"></div>
+    <div class="mkt-rating" id="mktRating"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><span class="bar"></span>标的组合全览<span class="sub">自选 ETF / 个股</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>标的</th><th>最新价</th><th>涨跌幅</th><th>量比</th><th>换手率</th><th>午后</th><th>短线方向</th><th>操作</th></tr></thead>
+      <tbody id="overviewTable"></tbody>
+    </table></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><span class="bar"></span>逐一深度分析<span class="sub">每标的：今日数据 / 午后 / 多周期趋势 / 支撑压力 / 情景概率 / 条件式操作</span></div>
+    <div class="stock-grid" id="stockGrid"></div>
+  </section>
+
+  <section class="section">
+    <div class="section-title"><span class="bar"></span>组合操作指引</div>
+    <div class="card"><div class="action" id="comboAction" style="border-left-color:var(--accent2)"></div></div>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <b>数据来源与时效：</b>本页数据为 <b>模拟数据</b>（Phase 0 打样，更新于 <span id="foot-updated">—</span>），非实时行情；接入实盘后将标注真实数据源（JQData / Tushare / akshare）与更新时间。<br>
+  <b>合规披露：</b>本看板为量化方法学习与演示工具，<b>不构成任何投资建议</b>；量化交易有风险，历史与模拟业绩不代表未来收益；本站不代客理财、不自动下单。投资决策请独立判断并自行承担风险。
+</div></footer>
+
+<script src="assets/app.js"></script>
+<script>
+  function soon(){ alert("该模块在后续阶段上线（当前 Phase 0 打样）。"); return false; }
+  document.addEventListener("DOMContentLoaded",()=>{ const u=document.getElementById("updated"); if(u) document.getElementById("foot-updated").textContent=u.textContent; });
+</script>
+</body>
+</html>
