@@ -1,0 +1,102 @@
+---
+title: "[Q5251] __slots__ 与 property 共存：类属性、同名冲突与缓存位设计"
+date: 2026-11-24
+categories: [Python语言核心]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5251 · __slots__ 与 property 共存：类属性、同名冲突与缓存位设计
+
+难度：P6 ｜ 标签：__slots__、property、描述符、类属性、惰性缓存、dataclass slots、继承链、类创建期校验
+
+**问**：`__slots__` 类里能不能定义 property——两者不是都会往类上挂属性吗？把 slot 名和 property 名写成同一个会发生什么（报错在什么时机、什么类型）？给"属性值惰性计算后缓存"的场景怎么设计（property + 缓存位）？`dataclass(slots=True)` 会把类重建一遍，手写的 @property 会不会丢？继承链里父类 property 访问子类新增的 slot 成员有什么约束？
+
+**答**：
+结论：**property 与 `__slots__` 天然共存，因为它们挂在不同的层面**——`__slots__` 定义的是"实例允许的数据成员名"（实际是挂在类上的 slot descriptor），而 property 是**类属性级别的非数据描述符**，根本不进实例的存储布局，所以"省内存的类 + 计算属性"是标准组合，`hasattr(v, '__dict__')` 依然为 False。真正的冲突只有一种：**slot 名与 property 名同名**——类体执行时 property 赋值已经占了类命名空间的名字，`__slots__` 再声明同名成员会在**类创建期**（不是实例化时）直接抛 `ValueError: 'xxx' in __slots__ conflicts with class variable`，这是 CPython 类型系统在 type 创建时的早期校验，fail-fast 程度很高所以不会埋运行时雷。工程上最常见的正确用法是**惰性缓存位模式**：`__slots__` 里放一个 `_cached` 私有成员（初始 None），property 首次访问时算出结果写进缓存位，后续访问 O(1)——注意缓存位与计算源必须用**不同名字**（`total` 与 `_total`），同名的冲突规则（第 2 点）决定了你不能用同一个名字既当 slot 又当 property。`dataclass(slots=True)`（3.10+）的实现是**根据原类重新创建一个新类**（拷贝类属性、处理描述符），手写在类体上的 @property 会被完整保留，slots 布局同时生效；但要注意它重建类的副作用——`functools.cached_property` 这类依赖实例 `__dict__` 的描述符在 slots 类上会失效（没地方缓存），以及重建后 `__module__`/qualname 等元信息与原类的细微差异。继承链的规则：**子类 `__slots__` 不得重复父类已声明的成员**（重复会静默产生第二个同 slot descriptor，浪费且易错），父类 property 可以正常访问子类新增的 slot 成员（属性查找沿 MRO，slot descriptor 语义一致）。
+
+取舍：a) 缓存位的失效问题：property 缓存进 slot 后，**底层源数据变了缓存不会自动失效**——要么源数据设计为初始化后不可变（dataclass frozen），要么提供显式 `invalidate()`；`functools.cached_property` 有内置失效语义但依赖 `__dict__`，slots 类用不了（这是 slots 与 property 组合的真正痛点）；b) memory profile：property 本身零实例开销（类级），加缓存位的成本是一个 slot（8 字节级）——"计算昂贵 + 反复访问"才值得缓存，轻量计算（`norm` 这种）直接算反而更省；c) dataclass(slots=True) 与 cached_property 组合的正确写法：缓存位自己管理（本卡的 `_total` 模式），或放弃 slots；d) 测试视角：slots 类的 property 冲突在**模块导入期**就炸（类创建），CI 即可拦截，不需要运行时用例。
+
+实战：事故形态是"团队给百万元素场景加 slots 省内存，顺手把 property 名和 slot 名写成同名（都想叫 `full_name`），模块 import 时全员 ValueError——比静默行为好，但排查花了一小时才发现是 slots 冲突文案里的 'conflicts with class variable'；另一处是 cached_property 挂在 slots 类上直接 AttributeError，因为实例没有 `__dict__`"。修复为：slot 名与 property 名强制不同前缀约定（`_` 开头做缓存位）、slots 类禁用 cached_property 改手写缓存位、类创建期冲突靠 import 期测试兜住。下面实测共存、冲突时机、缓存位与 dataclass 组合。
+
+```python
+# __slots__ 与 property/描述符共存: 合法与冲突的精确边界
+import dataclasses
+
+print("[1] slots 类定义 property: 合法 (property 是类属性, 不占 slot)")
+class Vec:
+    __slots__ = ("x", "y")
+    def __init__(self, x, y) -> None:
+        self.x, self.y = x, y
+    @property
+    def norm(self) -> float:
+        return (self.x ** 2 + self.y ** 2) ** 0.5
+
+v = Vec(3, 4)
+print("    v.norm =", v.norm, "| 无 __dict__:", not hasattr(v, "__dict__"))
+
+print("[2] slot 名与 property 同名: 类创建期直接 ValueError")
+try:
+    class Bad:
+        __slots__ = ("temp",)
+        @property
+        def temp(self):
+            return 1
+except ValueError as e:
+    print("    ValueError:", e)
+
+print("[3] property 惰性缓存: slot 存缓存位, 首算后复用")
+class Report:
+    __slots__ = ("rows", "_total")
+    def __init__(self, rows) -> None:
+        self.rows = rows
+        self._total = None
+    @property
+    def total(self):
+        if self._total is None:            # 首次计算写入 slot 缓存位
+            self._total = sum(self.rows)
+        return self._total
+
+r = Report(range(1000))
+print("    首算 total =", r.total, "| 二次命中缓存:", r._total is not None)
+
+print("[4] dataclass(slots=True) 与 @property 组合: 重建类不丢 property")
+@dataclasses.dataclass(slots=True)
+class Item:
+    price: int
+    qty: int
+    @property
+    def amount(self) -> int:
+        return self.price * self.qty
+
+it = Item(2, 3)
+print("    amount =", it.amount, "| slots 生效:", not hasattr(it, "__dict__"))
+
+print("[5] 继承链: 父类 property 读子类新增 slot 成员")
+class Base:
+    __slots__ = ("name",)
+    @property
+    def upper(self) -> str:
+        return self.name.upper()
+
+class Child(Base):
+    __slots__ = ("extra",)                 # 子类 slots 不得重复父类成员
+
+c = Child()
+c.name = "abc"
+print("    c.upper =", c.upper)
+print("[rule ] property 是类属性可与 slots 共存; 同名冲突在类创建期 ValueError; 缓存位用独立 _ 前缀 slot")
+```
+
+**追问一**：为什么 slot 与 property 同名是 ValueError 而不是静默覆盖？类创建期还校验哪些 slots 冲突？—— 类体执行完成后，`type` 的创建流程（`type.__new__`）会先收集类命名空间里所有可覆盖的类属性，再逐个创建 `__slots__` 对应的 slot descriptor；如果命名空间里已存在**同名且不可覆盖**的条目（property、staticmethod、普通函数等），创建同名 slot descriptor 会互相矛盾，CPython 选择在这里抛 ValueError——"in __slots__ conflicts with class variable"。这一时机校验的价值：错误在最早期暴露（import 期），不会等到第一个实例化才炸。类创建期相关的其他 slots 校验：①子类与父类 slots **重复声明**不报错（这是历史行为，CPython 允许但产生两个独立 slot descriptor，浪费存储且赋值只写其中一个——静默坑，靠 code review 与 `__slots__` 的 lint 约定兜）；②slots 与 `__dict__` 冲突：显式同时声明 `__slots__` 与 `__dict__` 类变量会覆盖 slots 语义（少见）；③多继承两个父类都有 slots 且有非空 layout 时报"multiple bases have instance lay-out conflict"——布局冲突在类创建期炸。面试口径：知道"同名冲突是 ValueError、发生在类创建期"是 P6；能解释 CPython 在 type 创建时做 slot descriptor 装配的顺序与多继承布局冲突是 P7。
+
+**追问二**：`functools.cached_property` 为什么在 slots 类上失效？它的缓存机制与手写缓存位的工程取舍是什么？—— cached_property 的实现是一个非数据描述符：首次访问时计算结果**写入 `obj.__dict__[attr_name]`**（写入实例 `__dict__` 后，后续属性查找命中 dict 直接返回，不再走描述符协议——非数据描述符让位于实例 dict）。slots 类的实例**没有 `__dict__`**（这正是 slots 省内存的机制），所以 cached_property 首次写入时 AttributeError。工程取舍：①**手写缓存位**（本卡 `_total` 模式）：显式 slot `_cached`，property 内判断 None——可控、可失效、无魔法，但要为每个缓存属性写样板；②**放弃 slots**：缓存属性多、失效语义复杂时，`__dict__` 的灵活性比省的内存值钱（slots 的收益集中在百万级对象场景）；③**折中方案**：少量热点属性手写缓存位 + 其余轻计算直接算。失效纪律：缓存位失效要么"源不可变"（frozen dataclass），要么显式 invalidate 方法——**静默脏缓存**是 property 缓存的事故大头（源数据 update 后读到旧值），code review 要检查"property 缓存位的失效路径是否与源数据的所有写入路径配对"。
+
+## 背诵要点
+- property 是类级非数据描述符，不占实例布局，与 __slots__ 天然共存；slot 名与 property 同名在**类创建期**抛 `ValueError: conflicts with class variable`（import 期 fail-fast）。
+- 惰性缓存位模式：slot 放 `_cached`（与 property 名不同），首算写入；slots 类没有 __dict__，cached_property 直接失效——手写缓存位替代。
+- dataclass(slots=True) 重建类保留手写 @property；子类 slots 不得重复父类成员（静默产生双 descriptor）；缓存位必须与源数据写入路径配对失效。
+
+## 复盘追问
+- 为什么 slot 与 property 同名不报静默覆盖而是 ValueError？错误为什么在 import 期？（type 创建流程先看类命名空间再装配 slot descriptor，同名不可覆盖条目直接冲突；类创建发生在模块导入期）
+- slots 类要加可失效缓存怎么办？（手写缓存位 slot + 显式 invalidate，或放弃 slots；cached_property 依赖 __dict__ 不可用）

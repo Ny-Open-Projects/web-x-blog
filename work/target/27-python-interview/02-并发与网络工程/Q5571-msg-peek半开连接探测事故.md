@@ -39,7 +39,7 @@ sel.register(conn, selectors.EVENT_READ)
 def probe(sock, idle_timeout=0.3):
     if sel.select(idle_timeout):
         try:
-            data = sock.recv(1, socket.MSG_PEEK | socket.DONTWAIT)
+            data = sock.recv(1, socket.MSG_PEEK | getattr(socket, "MSG_DONTWAIT", 0))
             if data == b"":
                 return "eof"            # 对端正常关闭
             return "alive-with-data"

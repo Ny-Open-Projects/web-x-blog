@@ -19,43 +19,52 @@ type: 面试题
 import asyncio, time, sys
 
 async def main():
-    # 1) 真实 socket 对 + 慢消费者(读端故意不读), 观察写缓冲堆积与 drain 背压
-    import socket as _s
-    a, b = _s.socketpair()
-    reader, writer = await asyncio.open_connection(sock=b)     # 写端 writer
-    r, _ = await asyncio.open_connection(sock=a)               # 读端故意不读
+    # 服务端 = 慢读者: 消费速率可控(flow 事件), 用于制造确定性的积压/恢复
+    flow = asyncio.Event(); flow.set()           # True=允许消费
+    async def handler(reader, writer):
+        await asyncio.sleep(0.1)                 # 前 0.1s 完全不读 -> 客户端积压
+        while True:
+            await flow.wait()
+            data = await reader.read(1024)       # 1KB/10ms 的慢速消费
+            if not data: return
+            await asyncio.sleep(0.01)
 
-    writer.transport.set_write_buffer_limits(high=4096, low=1024)
-    print("水位线:", writer.transport.get_write_buffer_limits())
+    srv = await asyncio.start_server(handler, "127.0.0.1", 0)
+    r, w = await asyncio.open_connection(*srv.sockets[0].getsockname()[:2])
+    import socket as _s
+    w.transport.get_extra_info("socket").setsockopt(_s.SOL_SOCKET, _s.SO_SNDBUF, 8192)
+    w.transport.set_write_buffer_limits(high=4096, low=1024)
+    print("水位线:", w.transport.get_write_buffer_limits())
 
     chunk = b"x" * 1024
     # 2) 不 drain 狂写: write 永不阻塞, 缓冲无限堆积(事故形态)
     for _ in range(50):
-        writer.write(chunk)
-    print("50 次 write 后积压字节:", writer.transport.get_write_buffer_size())
+        w.write(chunk)
+    print("50 次 write 后积压字节:", w.transport.get_write_buffer_size())
 
-    # 3) 正确形态: 批量 write + await drain, 背压传导
+    # 3) 正确形态: 批量 write + await drain, 背压随慢读者传导
     async def paced_writer(n, batch=4):
         for _ in range(0, n, batch):
             for _ in range(batch):
-                writer.write(chunk)
-            await writer.drain()          # 缓冲>high 时在此挂起
+                w.write(chunk)
+            await w.drain()                      # 缓冲>high 时在此挂起
     t0 = time.perf_counter()
     await paced_writer(8)
-    print("paced 写 8 块 + drain 完成耗时: %.3fs" % (time.perf_counter() - t0))
+    print("paced 写 8 块 + drain 完成: %.3fs (受慢读者速率约束)" % (time.perf_counter() - t0))
 
-    # 4) drain 加超时: 慢连接识别与降级
-    for _ in range(100):                   # 制造大积压
-        writer.write(chunk)
+    # 4) drain 加超时: 慢连接识别与降级(停掉消费 -> 积压不被吸收)
+    flow.clear()
+    for _ in range(100):
+        w.write(chunk)
     try:
-        await asyncio.wait_for(writer.drain(), timeout=0.2)
+        await asyncio.wait_for(w.drain(), timeout=0.2)
+        print("drain 未超时(内核缓冲吸收了积压, 现实中要结合 get_write_buffer_size 判断)")
     except asyncio.TimeoutError:
-        print("drain 超时 -> 判定慢连接, 应断开降级(积压:", writer.transport.get_write_buffer_size(), "B)")
-
-    writer.close()
-    try: await writer.wait_closed()
-    except Exception: pass
-    r.feed_eof()
+        print("drain 超时 -> 判定慢连接, abort 断开降级(积压:", w.transport.get_write_buffer_size(), "B)")
+    w.transport.abort()                          # 关慢连接用 abort: 立即丢缓冲
+    flow.set()                                   # 放行 handler 读到 EOF
+    srv.close()
+    await asyncio.sleep(0.1)                     # 残余 handler 由 asyncio.run 收尾取消
 
 asyncio.run(main())
 print("容量公式: 进程写缓冲总量 = Σ 各连接 get_write_buffer_size(), P99 告警 + 慢连接踢出")

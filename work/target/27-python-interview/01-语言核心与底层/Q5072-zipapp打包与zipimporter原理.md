@@ -24,7 +24,7 @@ pkg = os.path.join(d, "mypkg")
 os.makedirs(pkg)
 with open(os.path.join(pkg, "__init__.py"), "w") as f:
     f.write("VALUE = 42\n")
-with open(os.path.join(pkg, "__main__.py"), "w") as f:
+with open(os.path.join(d, "__main__.py"), "w") as f:   # 顶层入口: zipapp 直接采用
     f.write("import mypkg, sys; print('hello from pyz', mypkg.VALUE)\n")
 
 # 2) 先 compileall 保证包内是 .pyc(zipimport 走 pyc 免编译)
@@ -32,8 +32,7 @@ subprocess.run([sys.executable, "-m", "compileall", "-q", pkg], check=True)
 
 # 3) zipapp 打包并执行
 pyz = os.path.join(d, "tool.pyz")
-subprocess.run([sys.executable, "-m", "zipapp", d, "-o", pyz, "-m", "mypkg.__main__:main"]
-               if False else [sys.executable, "-m", "zipapp", d, "-o", pyz], check=True)
+subprocess.run([sys.executable, "-m", "zipapp", d, "-o", pyz], check=True)
 r = subprocess.run([sys.executable, pyz], capture_output=True, text=True)
 print("pyz 运行输出:", r.stdout.strip() or r.stderr.strip())
 

@@ -57,14 +57,14 @@ async def worker():
         if not row: return
         id_, payload, tries = row
         try:
-            raise RuntimeError("模拟首试失败" if tries == 0 else None) if tries == 0 else None
+            if tries == 0:
+                raise RuntimeError("模拟首试失败")
+            db.execute("UPDATE outbox SET status='done' WHERE id=?", (id_,))
+            print(f"outbox 任务 {id_} 成功: {payload}")
         except RuntimeError as e:
             db.execute("UPDATE outbox SET tries=tries+1, status=? WHERE id=?",
                        ("failed" if tries >= 1 else "pending", id_))
             print(f"outbox 任务 {id_} 失败重试(tries={tries+1}): {e}")
-        else:
-            db.execute("UPDATE outbox SET status='done' WHERE id=?", (id_,))
-            print(f"outbox 任务 {id_} 成功: {payload}")
         await asyncio.sleep(0)
 
 asyncio.run(worker())

@@ -32,9 +32,9 @@ inc, rd = outer()
 print("读写共享同一 cell:", inc() == 1 and inc() == 2 and rd() == 2)
 print("inner.__closure__:", inc.__closure__, "| cell 内容:", inc.__closure__[0].cell_contents)
 
-# 1) 字节码: STORE_DEREF/LOAD_DEREF vs LOAD_FAST
-print("== outer 中对 n 的字节码 ==")
-dis.dis(outer.__code__.co_consts[1], depth=0)   # 只看 nonlocal 函数的 deref 指令
+# 1) 字节码: STORE_DEREF/LOAD_DEREF(nonlocal 写) 与 LOAD_DEREF(闭包读)
+print("== inner 的字节码(含 nonlocal 写) ==")
+dis.dis(inc, depth=0)
 
 # 2) 写不加 nonlocal -> 名字被归为本地 -> UnboundLocalError
 def broken():

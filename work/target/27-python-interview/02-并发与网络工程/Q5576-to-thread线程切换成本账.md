@@ -61,9 +61,15 @@ async def main():
         s = 0
         for i in range(n): s += i
         return s
+    t1 = time.perf_counter()
+    await asyncio.to_thread(pure_py, 2_000_000)          # 单任务基线
+    t_single = time.perf_counter() - t1
     t0 = time.perf_counter()
-    await asyncio.gather(asyncio.to_thread(pure_py, 2_000_000), pure_py(2_000_000))
-    print("GIL 下 两份纯 Python 计算 gather 总耗时: %.0fms (≈串行, 无并行收益)" % ((time.perf_counter()-t0)*1000))
+    await asyncio.gather(asyncio.to_thread(pure_py, 2_000_000),
+                         asyncio.to_thread(pure_py, 2_000_000))
+    t_pair = time.perf_counter() - t0
+    print("GIL 下两个纯 Python 任务并发 %.0fms ≈ 单任务 %.0fms 的 %.1f 倍(无并行收益, 仅 GIL 轮转)"
+          % (t_pair*1000, t_single*1000, t_pair/t_single))
 
 asyncio.run(main())
 print("结论: 释放 GIL 的 C 库 -> 线程池有意义; 纯 Python 重逻辑 -> 进程池; 轻任务 -> 尽量消灭 to_thread")

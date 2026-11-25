@@ -1,0 +1,119 @@
+---
+title: "[Q7793] 长期记忆的写入冲突与版本化：覆盖、合并、失效三种策略"
+date: 2026-11-25
+categories: [PythonAgent与LLM]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q7793 · 长期记忆的写入冲突与版本化：覆盖、合并、失效三种策略
+
+难度：P7 ｜ 标签：Agent、长期记忆、版本化、冲突解决、supersedes、tombstone、乱序写入
+
+基线：库知识库外知识卡，代码用标准库模拟——用带时间戳的版本链与 tombstone 复现三种写入策略，不调用外部 API。
+
+**问**：Agent 的长期记忆里，用户先说"我住在上海"，两天后说"我搬到北京了"。抽取器把两条都写成 `city`，按"后写入覆盖"落库，结果某次重放旧会话，上海又被写回去，用户画像在两个城市之间反复横跳。长期记忆的写入该用覆盖、合并还是失效？并发/乱序写入怎么判断谁是最新？删除一条记忆时，是物理删掉还是留标记？
+
+**答**：
+
+- **结论**：长期记忆不是 KV 存储，而是**带时间维度的版本链**。三种策略各有适用面：① **覆盖（overwrite）**：只保留最新值，适合"强单值、低审计要求"的属性（当前城市、当前套餐），但必须按**事件时间**而非到达时间裁决，否则重放/延迟写入会把旧值盖回来；② **合并（merge）**：字段级合并，适合一条记忆包含多个独立字段（"偏好：语言=中文、时区=UTC+8"），冲突只发生在同一字段，不同字段互不覆盖；③ **失效（invalidate）**：不物理删除，追加一条 `valid_until`/tombstone，查询按时间点返回"当时有效"的值，适合需要审计、回溯、纠错的场景。判断"谁最新"不能只看 `updated_at`（那是写入时间，受乱序影响），要用 `event_time`（用户说这句话的时间）+ 单调版本号（`supersedes` 指针）双保险。
+- **取舍**：覆盖省空间、查询简单，但丢失历史，出错无法回溯；版本链可审计、可时间旅行，但存储随更新增长，需要 compaction（保留最近 N 版 + 关键转折点）。合并最灵活，但要有**字段级 schema**，否则"合并"退化成"整条替换"。删除策略同理：物理删除满足"被遗忘权"，但会破坏审计与幂等重放；tombstone 保留历史，但要在检索时过滤掉，且要考虑"删除后又被旧数据写回"的复活问题（用删除标记的版本号做闸门）。
+- **实战**：一次记忆污染事故：用户改地址后，旧的会话重放把旧地址写回，因为写入用了"到达时间 + 覆盖"。修复为三步：① 每条事实带 `event_time` 与 `supersedes`（指向被替代的版本）；② 写入时若 `event_time` 早于当前版本，直接拒绝（迟到写不覆盖）；③ 同一字段在短窗口内出现不同值、来源置信度接近时，不自动裁决，进"待确认"队列让用户确认。删除改成 tombstone + `deleted_at`，检索默认过滤，审计接口可查。
+
+下面用版本链复现乱序覆盖、字段级合并与 tombstone 的时间旅行。
+
+```python
+# 长期记忆: 覆盖 vs 版本链 vs tombstone
+from dataclasses import dataclass
+
+@dataclass
+class Version:
+    value: str
+    event_time: int
+    source: str
+    supersedes: int = -1          # 指向被替代版本的下标
+
+class Memory:
+    def __init__(self):
+        self.chains = {}          # (entity, attr) -> [Version]
+
+    def write(self, entity, attr, value, event_time, source="user", mode="versioned"):
+        key = (entity, attr)
+        chain = self.chains.setdefault(key, [])
+        if mode == "overwrite":                 # 按到达顺序覆盖
+            chain.append(Version(value, event_time, source))
+            self.chains[key] = [chain[-1]]
+            return "overwritten"
+        if mode == "versioned":                 # 迟到写不覆盖
+            if chain and event_time < chain[-1].event_time:
+                return "rejected_stale"
+            idx = len(chain)
+            chain.append(Version(value, event_time, source, supersedes=idx - 1))
+            return "appended"
+
+    def read(self, entity, attr, as_of=None):
+        chain = self.chains.get((entity, attr), [])
+        visible = [v for v in chain if v.event_time <= (as_of if as_of is not None else 10**9)]
+        return visible[-1].value if visible else None
+
+    def invalidate(self, entity, attr, event_time):
+        ch = self.chains.setdefault((entity, attr), [])
+        ch.append(Version(None, event_time, "user", supersedes=len(ch) - 1))
+
+
+# 场景: t=10 写上海, t=9 的北京延迟到达(重放)
+ov = Memory()
+ov.write("u1", "city", "上海", 10, mode="overwrite")
+ov.write("u1", "city", "北京", 9, mode="overwrite")   # 旧事件后到
+print(f"[1] 覆盖(按到达): city={ov.read('u1', 'city')!r}")
+assert ov.read("u1", "city") == "北京"        # 旧值把新值盖了
+
+vm = Memory()
+vm.write("u1", "city", "上海", 10)
+r = vm.write("u1", "city", "北京", 9)
+print(f"[2] 版本链: 写入结果={r}, city={vm.read('u1', 'city')!r}, 历史={len(vm.chains[('u1','city')])}")
+assert r == "rejected_stale" and vm.read("u1", "city") == "上海"
+vm.write("u1", "city", "北京", 12)            # 真正的新事件
+print(f"    新事件 t=12: city={vm.read('u1','city')!r}, t=11 时={vm.read('u1','city', as_of=11)!r}")
+assert vm.read("u1", "city") == "北京" and vm.read("u1", "city", as_of=11) == "上海"
+print("    → 实测 版本链按 event_time 裁决, 支持 as-of 回溯; 覆盖只看到达顺序必错")
+
+# 字段级合并: 语言与时区互不覆盖
+mem = Memory()
+mem.write("u1", "lang", "中文", 10); mem.write("u1", "tz", "UTC+8", 10)
+print(f"[3] 合并: lang={mem.read('u1','lang')!r}, tz={mem.read('u1','tz')!r}")
+assert mem.read("u1", "lang") == "中文" and mem.read("u1", "tz") == "UTC+8"
+
+mem.invalidate("u1", "tz", 15)   # tombstone: 保留历史, 查询按时间点返回
+print(f"[4] 失效后: t=16 -> {mem.read('u1','tz', as_of=16)!r}, "
+      f"t=12 -> {mem.read('u1','tz', as_of=12)!r}")
+assert mem.read("u1", "tz", as_of=16) is None and mem.read("u1", "tz", as_of=12) == "UTC+8"
+# 冲突检测: 同字段、短窗口、不同值、来源置信度接近 -> 不自动裁决
+def conflict(chain, window=5):
+    for a, b in zip(chain, chain[1:]):
+        if (a.value and b.value and a.value != b.value
+                and abs(b.event_time - a.event_time) <= window):
+            return True
+    return False
+c = Memory()
+c.write("u1", "city", "上海", 100)
+c.write("u1", "city", "北京", 102)
+print(f"[5] 100s 内两个不同值: 冲突={conflict(c.chains[('u1','city')])}")
+assert conflict(c.chains[("u1", "city")])
+print("    → 实测 冲突应进确认队列, 而不是靠来源/时间戳静默裁决")
+```
+
+**追问一**：`supersedes` 指针和"取时间戳最大的版本"有什么区别？—— 时间戳最大只解决"单字段顺序"，解决不了**分支与回滚**：两个并发写入可能都在"当前版本"之后，谁也没 supersede 谁；用户说"刚才说错了，还是原来的"时，时间戳更大但值要回到旧版本，单纯 max 时间戳会把它当成新值（其实也对），但无法表达"撤销"的语义。`supersedes` 是显式的版本图：每条新版本声明"我替代哪一条"，可以形成链、也可以分叉（需要冲突解决）；回滚就是新增一条指向旧值的版本，历史不被篡改。工程上两者都要：时间戳用于排序与迟到判断，`supersedes` 用于表达因果与撤销。
+
+**追问二**：tombstone 会不会被旧数据"复活"？—— 会，如果写入路径只看"有没有值"而不看"删除发生在什么时候"。典型场景：用户删除手机号（tombstone at t=20），一个 t=15 的旧会话被重放，抽取器又写入手机号；若写入只校验 `event_time` 是否比当前版本新，t=15 < 20 会被拒绝——所以**删除也必须进入版本链并带 event_time**，而不是在另一个表里打标记。另一个漏洞是检索侧：向量索引可能还留着旧记忆的 embedding，删除后要同步删除/过滤，否则会出现"库里删了、检索还能召回"的鬼影（Q7720 的软删除召回缺口）。
+
+## 背诵要点
+
+- 长期记忆是版本链，不是 KV 覆盖；用 `event_time` 裁决新旧、`supersedes` 表达因果，迟到写（event_time 更早）必须拒绝。
+- 三策略：覆盖（强单值、省空间）、合并（字段级、多来源）、失效（tombstone、可回溯）；删除也要进版本链，否则会被旧数据复活。
+- 同字段短窗口内的不同值属于冲突，应进确认队列；静默按时间/来源裁决会把错误固化。
+
+## 复盘追问
+
+- 用户改地址后旧地址又回来了，你怎么定位是"覆盖策略"还是"重放"？（看写入时间的来源：若按到达时间排序，重放必然覆盖；检查是否有 event_time 与 supersedes）
+- 删除记忆为什么不能只删主表行？（向量索引/缓存/下游副本仍有残留，检索会召回"已删除"内容；删除要传播到所有索引并带版本号）

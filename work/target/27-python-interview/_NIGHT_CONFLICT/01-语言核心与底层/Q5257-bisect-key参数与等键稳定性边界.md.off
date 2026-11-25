@@ -1,0 +1,94 @@
+---
+title: "[Q5257] bisect 的 key= 参数：按属性二分、调用次数与等键插入的稳定性边界"
+date: 2026-11-25
+categories: [Python语言核心]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5257 · bisect 的 key= 参数：按属性二分、调用次数与等键插入的稳定性边界
+
+难度：P6 ｜ 标签：bisect、key 参数、3.10、有序表、insort、稳定性、装饰排序
+
+**问**：维护一个按时间戳排序的连接池列表，3.9 时代码要先 `[(obj.ts, obj) for obj in items]` 再二分，每插入一次就重建一张 tuple 表；3.10 之后看到 `bisect(..., key=...)` 就想直接替换。`key` 是什么时候被调用的、调几次？`insort` 遇到相同 key 时插在前面还是后面、能保证稳定吗？为什么把 `key` 写成位置参数会直接 TypeError？
+
+**答**：
+
+- **结论**：3.10 给 `bisect_left/right`、`insort_left/right` 加了**仅关键字**的 `key=`：二分时对"被访问到的元素"调用 `key(elem)` 取比较值，所以比较次数是 O(log n)，key 调用次数也是 O(log n) 量级，而不是像"装饰-排序-去装饰"那样先 O(n) 建表。`insort` 的实现是"先算待插入元素的 key，再二分找位置，最后 `list.insert`"——注意待插入元素的 `key(x)` 在 3.12 上会被调用**两次**（insort 自己一次，内部 bisect 又一次），所以 key 必须是纯函数，带副作用/计数/IO 的 key 会得到意外结果。等键插入的位置由函数名决定：`insort_right` 插在所有相等元素**之后**，`insort_left` 插在**之前**；反复用 `insort_right` 能保持"同 key 元素按插入顺序排列"的稳定效果，`insort_left` 则是后插入的排在前面（逆序）。`key` 是 keyword-only：第二个位置参数是 `lo`，把函数传进去会被当成下标，报 `TypeError: 'function' object cannot be interpreted as an integer`。
+
+- **取舍**：a) 用 `key=` 替代装饰表：省掉每次 O(n) 的 tuple 构建和一次全量复制，内存峰值从 2n 降到 n；代价是每次比较都要调一次 Python 函数（attrgetter 是 C 实现，比 lambda 快），n 很大时"预计算 key 数组"仍然可能更快；b) 稳定性：`insort_right` 是"稳定插入"的默认选择；如果业务要求"新元素优先"（如最新事件排前面），才用 `insort_left`，并且要意识到等键元素的相对顺序被反转；c) 降序表：`bisect` 只认升序，降序要么存负 key（`key=lambda r: -r.ts`），要么维护一个反向比较的包装类，不要试图传 `reverse=True`（没有这个参数）；d) 元素可变时不要用 key= 做"就地更新"：bisect 不会重新排序，改了属性后表就不再有序，必须删除+重插。
+
+- **实战**：事故形态是""连接池按 `last_used` 排序，回收线程用 `insort_left` 插入等时间戳的连接，结果同一毫秒内建立的连接被逆序排列，LRU 淘汰总是先踢掉最新的那条，缓存命中率掉了一半。根因是把 `insort_left` 当成"插到前面更快"，忽略了等键顺序。修复：统一 `insort_right` 保持插入顺序；key 用 `operator.attrgetter("last_used")` 而不是带日志的 lambda（那个 lambda 每次比较都写一条 debug 日志，二分 20 次就是 20 条）；给"表始终有序"加一条开发期断言，批量插入后抽查相邻元素。
+
+```python
+# bisect key=: O(log n) 次 key 调用, insort 的等键位置与 keyword-only 约束
+import bisect
+from operator import attrgetter
+
+class Conn:
+    def __init__(self, ts, name):
+        self.ts = ts
+        self.name = name
+    def __repr__(self):
+        return f"{self.name}@{self.ts}"
+
+rows = [Conn(i, chr(97 + i)) for i in range(8)]     # a@0 ... h@7
+
+calls = []
+def key(c):
+    calls.append(c.ts)
+    return c.ts
+
+pos = bisect.bisect_left(rows, 4, key=key)
+print("→ 8 个元素二分到位置", pos, ", key 调用", len(calls), "次:", calls)
+assert pos == 4
+assert len(calls) <= 4                    # O(log n), 不是 O(n)
+
+calls.clear()
+bisect.insort_right(rows, Conn(4, "NEW"), key=key)
+print("→ insort_right 后:", [c.name for c in rows])
+assert [c.name for c in rows] == ["a", "b", "c", "d", "e", "NEW", "f", "g", "h"]
+print("→ insort 的 key 调用序列:", calls)
+assert calls.count(4) >= 2                # 待插入元素的 key 至少算两次, 必须纯函数
+
+# 等键: right 插在后面(稳定), left 插在前面(逆序)
+a = Conn(5, "first")
+b = Conn(5, "second")
+lst = [Conn(1, "head"), Conn(5, "old")]
+bisect.insort_right(lst, a, key=attrgetter("ts"))
+bisect.insort_right(lst, b, key=attrgetter("ts"))
+assert [c.name for c in lst] == ["head", "old", "first", "second"]
+
+lst2 = [Conn(1, "head"), Conn(5, "old")]
+bisect.insort_left(lst2, a, key=attrgetter("ts"))
+bisect.insort_left(lst2, b, key=attrgetter("ts"))
+print("→ insort_left 的等键顺序:", [c.name for c in lst2])
+assert [c.name for c in lst2] == ["head", "second", "first", "old"]
+
+# key 是 keyword-only: 位置传函数会被当成 lo
+try:
+    bisect.bisect_left(rows, 4, key)
+except TypeError as e:
+    print("→ key 位置传参:", e)
+
+# 旧写法: 先物化 key 数组, 再对数组二分, 多一次 O(n) 复制
+ts_list = [c.ts for c in rows]
+p = bisect.bisect_left(ts_list, 4)
+print("→ 物化 key 数组的二分位置:", p, "| key= 的位置:", pos)
+assert p == pos == 4
+```
+
+**追问一**：`bisect` 的 key 调用次数为什么不是"每个元素一次"？这对 key 函数提出了什么要求？—— 二分只访问 O(log n) 个中点（8 个元素 3 次、1024 个 10 次），每次比较要拿中点元素的 key，所以 key 调用次数与比较次数同阶；`insort` 还要额外算一次待插入元素的 key（3.12 实测是两次）。要求：①**纯函数**——不能有副作用、不能依赖调用次数，否则日志/计数器会翻倍，甚至因为两次调用返回不同值（比如 key 里取 `time.time()`）导致二分路径不自洽；②**稳定**——同一个元素多次调用必须返回相等的值，否则 bisect 的前提"表按 key 有序"被破坏；③**便宜**——attrgetter/operator.itemgetter 是 C 实现，比 Python lambda 快一个量级，热路径优先用它们；需要复杂计算时先在插入时把 key 存到元素字段里（物化），不要每次比较都重算。
+
+**追问二**：为什么 `bisect` 不提供 `reverse=True`？降序表怎么做才不踩坑？—— 二分的核心不变量是"`a[lo:hi]` 按比较器升序"，加入 reverse 会让 `lo/hi` 的收缩方向、`insort_left/right` 的语义、以及"相等元素插哪边"三处同时反转，API 会变得难以推理，所以标准库选择不做。降序的三种做法：①**负 key**：数值型时间戳/分数用 `key=lambda x: -x.ts`，最直观，但只适用于可取负的类型；②**包装类**：自定义 `__lt__` 反向比较，侵入元素类型；③**维护升序 + 反向索引**：读的时候 `reversed()`，写的时候按升序插，语义最稳。坑在于混用：表按降序排、却用升序 key 二分，`bisect` 不会报错，只会返回一个错误位置，插入后表悄悄失去有序性——所以生产代码应在批量写后断言 `all(key(a[i]) <= key(a[i+1]))`。
+
+## 背诵要点
+
+- 3.10 的 `key=` 是 keyword-only：`bisect_left(a, x, lo=0, hi=len, *, key=None)`；位置传函数会被当 lo，报 TypeError。
+- key 调用 O(log n) 次（insort 对待插入元素会算两次），必须纯、稳定、便宜；热路径用 attrgetter/itemgetter。
+- `insort_right` 等键插在后（稳定），`insort_left` 插在前（逆序）；bisect 只支持升序，降序用负 key 或包装类并断言有序性。
+
+## 复盘追问
+
+- 为什么带日志的 key 函数会让 bisect 变慢很多？（每次比较都调用、insort 还算两次；日志 IO 被放大到 O(log n) 次每条插入）
+- 3.9 的"装饰-二分-去装饰"和 3.10 的 key= 各适合什么场景？（一次性批量构建适合装饰表；频繁单条插入用 key= 省 O(n) 复制）

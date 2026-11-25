@@ -1,0 +1,88 @@
+---
+title: "[Q6253] 多租户运行时隔离键：cache key、队列分区、日志与 DB 的租户维度贯穿"
+date: 2026-11-24
+categories: [PythonWeb后端]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q6253 · 多租户运行时隔离键：cache key、队列分区、日志与 DB 的租户维度贯穿
+
+难度：P7 ｜ 标签：多租户、隔离键、cache key、跨租户污染、队列分区、结构化日志、row 级隔离、RLS、纵深防御
+
+**问**：架构层的"多租户隔离三种模式"（Q6014）选完之后，**运行时**的隔离键怎么贯穿每一层——cache key 的租户维度缺了会出什么事故、读缓存时为什么还要二次校验租户？异步任务/消息的租户怎么传递（消息体自带 vs 进程级全局）、按租户分区的保序与噪声隔离怎么兼得？日志/指标里租户字段怎么设计（拼字符串 vs 结构化字段）？DB 层 row 级 tenant_id 列的强制谓词怎么落地（ORM 注入 + 查询审查 + RLS 兜底）？
+
+**答**：
+结论：隔离模式（独立库/独立 schema/共享表）是**存储层决策**，而事故发生在**运行时每一层的键设计**——租户维度必须在"缓存、队列、日志、DB"四个运行时面全部贯穿，任何一层缺位就是跨租户泄漏的通道。四个层面的键纪律：①**cache key**——规范 `t:{tenant}:{kind}:{ident}`（租户永远第一段，单一组装函数生成、禁止手拼字符串）：缺租户维度的键（`user_profile:u1001`）在两个租户恰好都有 id=u1001 时直接**跨租户污染**（A 租户读到 B 租户的资料缓存）——生成侧强制之外，**消费侧还要校验**（反序列化时比对缓存键的租户段与当前上下文租户，不一致抛异常）——纵深防御：即使有代码路径手拼了错键（bug 或注入），消费校验兜住（本卡实测 PermissionError 拦截跨租户读取）；②**队列/任务**——消息体**自带 tenant_id 字段**（不依赖 worker 的进程级全局——异步执行时上下文早就没了，消息是唯一可靠的租户载体），分区路由按 `hash(tenant_id) % partitions`：同租户进同分区（**保序**：租户内操作有序），不同租户散到不同分区（**噪声隔离**：大租户的导出任务不拖慢小租户）；worker 消费时从消息体恢复租户上下文（再走 cache/DB 的键纪律）；③**日志/指标**——租户是**结构化字段**（JSON 的 `{"tenant": "acme", ...}`）不是拼在消息字符串里——按租户过滤/聚合/计费（Q6251 的配额计量也吃这个字段）、单租户排障不翻全量日志；日志里的租户值来自可信来源（网关注入的上下文，Q6252 头治理的产出），不是客户端可伪造的头；④**DB**——共享表模式下每张业务表带 `tenant_id` 列且进**复合索引**（`(tenant_id, id)`——查询永远先按租户切），ORM 层强制注入谓词（基类 query 自动 `filter(tenant_id == ctx.tenant)`，裸查询在 code review 里是红线），**审查兜底**：慢查询日志里抓"无租户谓词的全表扫描"告警 + 数据库行级安全策略（PostgreSQL RLS）做最后防线（应用层 bug 漏了谓词时 DB 层拒绝）。
+
+取舍：a) 键格式与迁移：加租户前缀后旧键全部失效——灰期"双读"（先读新键、miss 后读旧键回填新键）或直接清缓存（视缓存重要性），迁移脚本按租户分批；b) 一致性 vs 性能：读侧二次校验的代价（多一次 parse/比对）在热路径上可测——优化是"校验放进反序列化层统一做"（不散在业务代码）；c) 分区数与倾斜：超大租户（数据量是别人的百倍）按 tenant hash 分区会倾斜——热点租户单独分区或按"租户+业务键"二级 hash，但破坏"同租户保序"，要按业务语义选；d) RLS 的适用面：RLS（DB 层强制租户谓词）是强防线但带来连接管理复杂度（SET app.tenant_id 会话变量 + 连接池污染，Q5551 的线程本地残留同构问题）——共享表 + ORM 注入为主、RLS 为兜底的分层更务实；e) 租户上下文的传播：HTTP → task/线程池的租户传播用 contextvars（Q387）或显式传参，禁止线程池里依赖全局变量（Q5551 的残留污染）。
+
+实战：事故形态是"报表服务缓存键没带租户（`daily_summary:2026-11-24`），两个租户同一天的数据互相覆盖——客户 A 看到客户 B 的经营数据，数据泄漏事故；另一个是导出任务队列消费时 worker 用'最后一次处理的租户'的全局变量生成文件，错租户的导出发给了另一个客户"。修复为：缓存键规范（t 前缀 + 组装函数 + 消费校验）、消息体强制 tenant_id 字段 + worker 启动校验、历史缓存清空迁移、审计脚本扫"无租户维度的键"（`keys daily_summary:*` 类模式告警）。下面实测键规范、消费校验与队列路由语义。
+
+```python
+# 多租户运行时隔离键: cache key / 队列分区 / 日志 / DB 的租户维度贯穿
+import json
+
+def cache_key(tenant_id: str, kind: str, ident: str) -> str:
+    """规范: t:{tenant}:{kind}:{ident} -- 租户永远是第一段"""
+    return f"t:{tenant_id}:{kind}:{ident}"
+
+def parse_cache_key(key: str) -> dict:
+    parts = key.split(":")
+    return {"tenant": parts[1], "kind": parts[2], "ident": ":".join(parts[3:])}
+
+print("[1] cache key 的租户维度: 缺租户 = 跨租户污染事故")
+k1 = cache_key("acme", "user_profile", "u1001")
+k2 = cache_key("other", "user_profile", "u1001")
+print("    同一业务 id 不同租户:", k1, "|", k2, "(键不同, 天然隔离)")
+try:
+    parse_cache_key("user_profile:u1001")     # 缺租户前缀的历史键
+except IndexError:
+    print("    缺租户的键解析失败 -> 历史数据要显式迁移")
+
+print("[2] 反序列化侧的租户校验: 读缓存也要验租户 (纵深防御)")
+def cache_get(key: str, tenant_id: str, blob: str | None) -> dict | None:
+    if blob is None:
+        return None
+    data = json.loads(blob)
+    if parse_cache_key(key)["tenant"] != tenant_id:
+        raise PermissionError(f"cache key 租户不匹配: {key} vs {tenant_id}")
+    return data
+
+blob = json.dumps({"name": "alice"})
+print("    正常读取:", cache_get(k1, "acme", blob))
+try:
+    cache_get(k1, "other", blob)
+except PermissionError as e:
+    print("    跨租户读取被拦:", e)
+
+print("[3] 队列与任务: 消息体自带租户 + 分区按租户路由")
+task_msg = {"tenant_id": "acme", "task": "export", "payload": {"rows": 5000}}
+print("    消息体字段:", task_msg, "(worker 从消息体取租户, 不依赖进程级全局)")
+print("    分区路由: hash(tenant_id) % partitions -> 同租户串行(保序) 不同租户并行(隔离噪声)")
+
+print("[4] 日志与指标: 租户字段结构化, 不是拼在字符串里")
+log_line = json.dumps({"ts": "2026-11-24", "tenant": "acme", "path": "/v1/users", "latency_ms": 42})
+print("    结构化日志:", log_line, "(按 tenant 过滤/聚合/计费, 单租户排障不翻全量)")
+
+print("[5] DB 层: row 级 tenant_id 列 + 查询强制带租户谓词")
+print("    每张业务表带 tenant_id 列并进复合索引 (tenant_id, id)")
+print("    ORM 层强制注入: session.query(User).filter(User.tenant_id == ctx.tenant) 不允许裸查询")
+print("    防线: 查询审查 (无租户谓词的查询告警) + 数据库行级策略 (RLS) 兜底")
+
+print("[6] 三层防线总结: 生成时强制 (key 组装函数) + 消费时校验 (反序列化租户比对) + 审计兜底 (日志/审查)")
+print("[rule ] 租户键 = t:{tenant}:{kind}:{ident} 第一段强制; 消费侧再校验租户; 消息体自带租户; 结构化日志字段化; DB 复合索引+强制谓词")
+```
+
+**追问一**：租户上下文在"HTTP 请求 → 异步任务 → 线程池子任务"的传播链怎么设计？全局变量方案为什么必然出事？—— 传播链设计：①**HTTP 入口**——网关鉴权后确定租户（从 token/头解析，Q6252 的可信头），注入 contextvars（`ContextVar("tenant_id")`）——异步协程的 context 是创建时快照继承（Q387/Q5751），子任务自动携带；②**异步任务边界**——任务消息**序列化时显式写入 tenant_id 字段**（contextvars 不跨进程/不跨消息队列），消费端从消息体恢复 contextvars 再执行——这是"消息体自带租户"的必要性：contextvars 只在进程内有效，跨进程的租户载体只有消息体；③**线程池子任务**——`run_in_executor` 的 contextvars 传播要看 Python 版本（3.8+ executor 提交时会拷贝当前 context，但线程复用后的残留是另一问题，Q5551 的 threading.local 残留）——**显式传参是最稳的**（tenant_id 作为任务函数参数），contextvars 作为辅助。全局变量方案必死的原因：线程/协程复用让"全局的当前租户"指向上一个任务（残留污染），并发下两个请求互相覆盖——租户是**每请求状态**，载体必须是请求作用域（contextvars/参数/消息体），不能是进程作用域。审计形态：code review 红线"业务代码不得读全局租户变量"+ 运行时断言（租户为空的上下文直接拒绝服务）。
+
+**追问二**：RLS（行级安全）与 ORM 注入谓词的分工怎么设计？"共享表"模式的索引与性能代价怎么控制？—— 分工：**ORM 注入是主防线**（查询自动带租户谓词，性能可控、错误信息友好），**RLS 是兜底防线**（DB 层按会话变量强制过滤，应用层 bug 漏谓词时数据仍隔离）。RLS 的落地：每张表建 policy `USING (tenant_id = current_setting('app.tenant_id')::text)`，连接归还池前 RESET——连接池与 RLS 的交互是复杂点：池化连接的会话变量残留（上一个请求的租户）会让下一个请求读到错租户（Q5551 同构）——必须"借出连接时 SET、归还时 RESET"配对（框架层封装）。性能代价控制：①**复合索引**——所有业务查询带 tenant_id 谓词，索引 `(tenant_id, ...)` 让谓词走索引前缀（不额外增加成本）；②**数据倾斜**——大租户的行数占比高时统计信息失真（planner 误判），按租户分区表（partition by tenant 或 hash）可物理隔离（超大租户独立分区）；③**跨租户运维查询**（平台方的全局统计）在 RLS 下要用特权角色绕过 policy——特权路径要审计。工程结论：租户数 < 千、无强合规要求时 ORM 注入 + 审查够用；合规要求（数据隔离审计）或租户互相不可见是硬需求时上 RLS——RLS 的复杂度（连接管理、迁移、运维）只在"兜底价值超过管理成本"时值得。
+
+## 背诵要点
+- 运行时四层贯穿：cache key `t:{tenant}:{kind}:{ident}`（组装函数单点 + 消费侧校验租户段，纵深防御）、消息体自带 tenant_id（contextvars 不跨进程）、结构化日志 tenant 字段、DB 复合索引 `(tenant_id, id)` + ORM 强制谓词。
+- 全局变量存租户必出事故（线程/协程复用的残留污染）；租户是每请求状态——HTTP 用 contextvars、跨进程用消息体、线程池显式传参。
+- 分区按 tenant hash：同租户保序、不同租户噪声隔离；热点租户倾斜要单独分区（破坏保序按业务选）；RLS 是兜底防线，连接池借出 SET/归还 RESET 必须配对。
+
+## 复盘追问
+- "报表缓存被两个租户互相覆盖"的事故链与三层修复？（键缺租户维度 + 同业务 id 撞车；生成侧规范键 + 消费侧校验 + 审计扫无租户键）
+- 导出任务发给错租户的根因、异步链路的租户传播怎么设计？（worker 依赖全局变量残留；消息体显式 tenant_id 字段 + 消费端恢复上下文，跨进程唯一可靠载体是消息体）

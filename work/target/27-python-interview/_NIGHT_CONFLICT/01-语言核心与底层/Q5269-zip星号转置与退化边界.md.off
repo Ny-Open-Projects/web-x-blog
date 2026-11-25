@@ -1,0 +1,86 @@
+---
+title: "[Q5269] zip(*) 转置与退化边界：空矩阵、单行矩阵与解包副作用"
+date: 2026-11-25
+categories: [Python语言核心]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5269 · zip(*) 转置与退化边界：空矩阵、单行矩阵与解包副作用
+
+难度：P6 ｜ 标签：zip、矩阵转置、解包、星号收集、列分组、strict、退化输入
+
+**问**：`zip(*matrix)` 转置为什么能用？`zip(*[])` 与 `zip(*[[1,2]])` 分别返回什么？为什么"聚合行成列"用 zip(*) 而"列聚合回行"不用？带 side effect 的行生成器做 `zip(*rows)` 时会被消费几次？与 strict=True 配合能守住什么契约？
+
+**答**：
+
+- **结论**：`zip(*matrix)` 的机制是：星号把行的列表**展开成独立位置参数**（`zip(row0, row1, ...)`），zip 按最短行停止配对——第 i 次产出 `(row0[i], row1[i], ...)`，恰好是**第 i 列**，这就是转置。三个退化边界必须背下来：①`zip(*[])` 即 `zip()`——空参数的 zip 是**空迭代器**，`list(zip(*[])) == []`，对空矩阵"静默返回空"是安全的，但下游若假设"转置至少有一列"就会踩空；②`zip(*[[1, 2, 3]])` 即 `zip([1,2,3])`——单参数 zip 把每个元素包成**单元素元组** `[(1,), (2,), (3,)]`，单行矩阵转置得到的是"多列、每列单元素"——语义正确但要留意下游解包 `for col, in ...`；③zip 产出的行是**元组**：`zip(*)` 转置的结果是列元组的迭代器，需要 list 就物化。副作用问题：`zip(*gen_rows)` 展开时**先物化整个生成器**（星号收集参数就是 `[*gen]`），生成器被消费一次但全部行先驻内存——它不是流式转置，百万行矩阵的 `zip(*rows)` 是 O(n) 行内存的。
+
+- **取舍**：a) 行→列（按列聚合、转置）：zip(*) 一行流，前提是**行已全部在内存**；b) 列→行（把若干列打包回行）：`zip(col_a, col_b, col_c)` 同样是配对语义，但列是独立序列时它才是流式的；c) 大矩阵/流式行转置：zip(*) 不适用（要物化所有行），要么接受物化，要么改用"预分配目标矩阵 + 下标赋值"（转置后形状已知时 O(1) 额外内存），或逐列 `list(itertools.islice(...))` 处理；d) 等长契约：行不齐时 zip(*) **静默按最短截断**——列尾数据悄悄丢失，3.10+ 的 `zip(*matrix, strict=True)` 把不齐变成 ValueError，等长语义的转置必须开 strict。
+
+- **实战**：事故形态是"报表引擎把 CSV 行流转置成列聚合：`for col in zip(*rows)`，某次上游产出 0 行，转置返回空迭代，下游 `columns[0]` 抛 IndexError 而不是优雅处理'无数据'；另一次两行长度不一致（个别行少一列），zip 静默截断，报表右下角一小块数据悄悄缺失，对账很久才发现"。修复：①空矩阵显式分支（`if not rows: return EMPTY_REPORT`）；②行等长断言：`assert len(set(map(len, rows))) == 1` 或 `zip(*rows, strict=True)`；③流式场景放弃 zip(*)，改逐列 islice 或物化前校验。下面实测转置、三类退化与 strict 契约。
+
+```python
+from itertools import zip_longest
+
+print("[1] 转置机制: 星号展开行 -> zip 按位置配对成列")
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+cols = list(zip(*matrix))
+print("    转置:", cols)
+assert cols == [(1, 4, 7), (2, 5, 8), (3, 6, 9)]
+# 两次转置还原 (列是元组, 还原时再物化为 list)
+assert [list(r) for r in zip(*cols)] == matrix
+
+print("[2] 三类退化输入")
+assert list(zip(*[])) == []                    # 空矩阵: zip() 空 -> 空迭代器
+single = list(zip(*[[1, 2, 3]]))               # 单行: 每元素包成单元素元组
+print(f"    单行转置: {single}")
+assert single == [(1,), (2,), (3,)]
+assert list(zip(*[[], []])) == []              # 全空行: 配对零次 -> 空
+try:
+    next(zip(*[[], [1]]))                      # 最短行 0 -> 空
+    raise AssertionError("不应有元素")
+except StopIteration:
+    print("    行长不齐时按最短行静默截断")
+
+print("[3] strict=True: 3.10+ 把'静默截断'变成显式 ValueError")
+try:
+    list(zip(*[[1, 2], [1, 2, 3]], strict=True))
+    raise AssertionError("应当 ValueError")
+except ValueError as e:
+    print("    行不齐:", e)
+
+print("[4] zip(*gen) 先物化全部行: 生成器副作用一次全跑")
+produced = []
+def gen_rows():
+    for i in range(3):
+        produced.append(f"r{i}")
+        yield [i, i, i]
+list(zip(*gen_rows()))
+print(f"    展开参数时行生成器全部消费: {produced}")
+assert produced == ["r0", "r1", "r2"]          # 不是流式, 是先物化
+
+print("[5] 列聚合与补齐: zip_longest 处理'以长为准'")
+names = ["alice", "bob"]
+scores = [90, 85, 70]                          # 多一条脏数据
+pairs = list(zip_longest(names, scores, fillvalue="-"))
+print("    以长为准补齐:", pairs)
+assert pairs == [("alice", 90), ("bob", 85), ("-", 70)]
+assert list(zip(names, scores)) == [("alice", 90), ("bob", 85)]   # zip 以短为准
+print("[rule ] zip(*)=行展开成参数按位配列; 空矩阵/单行/不齐行是三退化; 等长转置必开 strict")
+```
+
+**追问一**：为什么"流式行转置"是反模式？内存正确的列聚合怎么做？—— 流式转置的本质矛盾：列 i 的完整值要等"所有行的第 i 个元素"到齐——对行流来说第 i 列的最后元素在第 N 行，意味着必须缓冲全部行或全部列值，"流式"只是假象。内存正确的两种形态：①**逐列缓冲**：维护 n 个列缓冲，行流逐行 append 到各列（`cols[j].append(row[j])`），内存 O(总单元格)——与 zip(*) 相同，但没有星号展开的中间参数列表；②**单列流式**：一次只处理一列，用 `itertools.islice(row_gen, col_index, col_index + 1)` 逐行切不行（islice 每行新建生成器浪费），正确做法是 `next(itertools.islice(row, idx, None))` 对每行取第 idx 个值聚合——每行只留一个值。真正要"列式存储"就别用 Python 循环：numpy 的 `arr.T` 视图零复制，或 sqlite/pandas 的列式读写。结论：小矩阵 zip(*) 最省事；大矩阵要么列缓冲赋值要么交给 numpy。
+
+**追问二**：`zip(*matrix, strict=True)` 的参数顺序为什么合法？星号收集与关键字参数的相互作用是什么？—— `f(*matrix, strict=True)` 展开后等价 `f(row0, row1, ..., strict=True)`：星号收集项占据位置参数段，`strict` 作为关键字参数跟在后面——**调用语法允许"星号展开之后接关键字"**（本卡 [3] 就在用），拦截的是"星号展开之后接**位置**参数"（`f(*a, b)` 语法错误，位置参数不能跟在 *args 后）。深一层：`zip(*matrix, strict=True)` 里展开的行个数不受限，这要求调用者知道 zip 的签名是 `zip(*iterables, strict=False)`（3.10 起 strict 是 keyword-only 的官方参数，3.9 没有此参数——传了直接 TypeError，所以低版本兼容要 `try/except TypeError` 降级或版本断言）。工程纪律：等长转置代码必须显式 strict 并在 CI 用一个不等长样本锁行为——静默截断的 bug 恰恰只在"偶尔不齐"的数据上出现，等长单测抓不住。
+
+## 背诵要点
+
+- `zip(*matrix)`：星号把行展开为位置参数，zip 按位配对产出列元组；两次转置可还原原矩阵。
+- 三退化：`zip(*[])` → 空迭代器；单行 → 每元素 `(x,)` 单元组；行不齐 → 静默按最短截断，等长语义必须 `zip(*m, strict=True)`（3.10+）。
+- `zip(*gen_rows)` 展开参数时先物化全部行（非流式）；大矩阵转置用列缓冲下标赋值或 numpy `arr.T` 视图。
+
+## 复盘追问
+
+- 为什么说 zip(*) 不是流式转置？（星号展开参数即 [*gen] 物化全部行；列的完整值依赖全部行到齐，流式是假象）
+- 上游产出 0 行或行长不齐时 zip(*) 的行为与防御？（空矩阵返回空迭代器要显式分支；不齐静默截断要用 strict=True 或等长断言把契约显式化）

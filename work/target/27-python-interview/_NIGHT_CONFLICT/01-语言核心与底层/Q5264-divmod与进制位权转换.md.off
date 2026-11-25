@@ -1,0 +1,97 @@
+---
+title: "[Q5264] divmod 与进制位权：商余同取与进制转换的实现细节"
+date: 2026-11-25
+categories: [Python语言核心]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5264 · divmod 与进制位权：商余同取与进制转换的实现细节
+
+难度：P6 ｜ 标签：divmod、进制转换、位权、base36、负数取模、时间换算、int(str, base)
+
+**问**：divmod 一次返回商和余，比分开算 `//` 和 `%` 好在哪？为什么进制转换的"除基取余"必须从**低位到高位**产生数字？负数做 divmod 时商余是什么方向（floor 语义）？怎么用标准库把 int 编码成 base36/62 短链 ID、再解码回来？
+
+**答**：
+
+- **结论**：`divmod(a, b)` 返回 `(a // b, a % b)`，一次完成两个运算且**保证商与余自洽**（`a == b*q + r` 且 `0 <= r < abs(b)`）——分开写两次除法在 b 为 0 时报两个不同位置的错误、在浮点数上还可能因两次舍入不自洽；divmod 单指令对（CPython 里一次调用返回 tuple）也是时间/进制换算的标准工具。进制转换的核心规律：**对基取余得到的永远是最低位**——`n % base` 是个位，`n // base` 去掉个位；所以"除基取余"产生数字的顺序天然是低位在前，构造字符串时要**反转**或**前插**。Python 的 `%` 对负数是 floor 语义：`-7 % 3 == 2`（余数非负、商向下取整），这保证除基取余算法对负数输入也能产出非负位数字——先把符号摘出来再转绝对值即可。内置 `int(s, base)` 支持任意 2-36 进制解码（借字符表 0-9a-z），但**编码**没有内置，base36/62 编码要自己写位权循环。
+
+- **取舍**：a) `divmod` vs 分开算：整数场景两者等价且 divmod 更自洽；浮点场景 `math.fmod`（C 语义）与 `%`（floor 语义）结果不同，money/时间场景用 divmod(int) 更安全；b) 除基取余用"前插字符串"还是"append 后反转"：前插 `digits = ch + digits` 是 O(k²)（字符串不可变，每次拷贝），append 后 `"".join(reversed(digits))` 是 O(k)——k 大（base2 长二进制）时差距明显；c) `int(s, 36)` vs 自己写解码：标准库更快且校验字符集，但**不区分大小写会静默混淆**（`int("Z", 36) == int("z", 36)`），短链 ID 这种"大小写敏感、62 进制"场景必须自建字符表且编码解码共用同一份表常量，防两处硬编码漂移；d) 大数转进制别用除基循环硬算百万位二进制——`bin()`/`format(n, 'b')` 走 C 层快速路径，自写循环只在"非标准字符表"（base58/62）时才有必要。
+
+- **实战**：事故形态是"短链服务用 base62 编码 ID，编码函数里字符表从 '0'..'9''A'..'Z''a'..'z' 拼，解码函数手滑写成 '0'..'9''a'..'z''A'..'Z'——大小写段顺序不同导致 `a`（编码表里 36+26=62-10? 无）与解码表里不同位权映射错位，部分短链解析到别人的文章 ID"，这类 bug 编码解码各自单测都对（各自自洽），只有 round-trip 测试能抓住。修复：①字符表定义为模块级常量 `ALPHABET`，编码解码共用；②CI 加 property 测试：随机 int 全程 `decode(encode(n)) == n`；③负数/0 显式约定（0 编码为表首字符、负数禁止或前缀符号位）。下面实测 divmod 自洽、除基取余方向与 base62 往返。
+
+```python
+ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+BASE = len(ALPHABET)          # 62
+
+def encode(n: int) -> str:
+    """整数 -> base62, 短链 ID 的标准写法: 低位在前产生, 最后反转"""
+    if n == 0:
+        return ALPHABET[0]
+    digits = []
+    while n:
+        n, r = divmod(n, BASE)      # r 永远是"当前最低位"
+        digits.append(ALPHABET[r])
+    return "".join(reversed(digits))     # append+reverse: O(k), 别用前插
+
+def decode(s: str) -> int:
+    """base62 -> 整数, 位权累加: 高位先到, 每步乘基再加新位"""
+    n = 0
+    for ch in s:
+        n = n * BASE + ALPHABET.index(ch)
+    return n
+
+print("[1] divmod: 商余同取且自洽")
+q, r = divmod(233, 62)
+print(f"    divmod(233, 62) = ({q}, {r})  -> 62*{q}+{r} = {BASE * q + r}")
+assert 62 * q + r == 233
+assert 0 <= r < BASE
+h, m = divmod(3750, 60)
+print(f"    3750 秒 = {h} 分 {m} 秒")
+assert h == 62 and m == 30
+
+print("[2] 除基取余: 每次余数都是最低位, 产生顺序=低位在前")
+n = 233
+produced = []
+while n:
+    n, r = divmod(n, 10)
+    produced.append(r)
+print(f"    产生的数字流: {produced} (233 的个位先出)")
+assert produced == [3, 3, 2]
+assert "".join(map(str, reversed(produced))) == "233"
+
+print("[3] floor 语义: 负数余数非负, 商向负无穷取整")
+print(f"    divmod(-7, 3) = {divmod(-7, 3)}")
+assert divmod(-7, 3) == (-3, 2)          # 不是 (-2, -1)!
+assert divmod(7, -3) == (-3, -2)         # 除数负 -> 余数也非正
+print("    -7 % 3 =", -7 % 3, "(Python 的 % 是 floor 语义, 余数跟除数同号)")
+
+print("[4] base62 往返: encode/decode 必须共用同一字符表")
+for probe in (0, 1, 61, 62, 3844, 999999999):
+    assert decode(encode(probe)) == probe, probe
+big = 123_456_789_012_345
+assert decode(encode(big)) == big
+print("    123456789012345 ->", encode(big), "-> round-trip OK")
+
+print("[5] 标准库 int(s, base) 只管解码(2-36), 且大小写不敏感")
+assert int("zz", 36) == 35 * 36 + 35 == 1295
+assert int("Z", 36) == int("z", 36)      # 大小写混淆点, base62 场景不能用它
+assert format(1295, "x") == hex(1295)[2:]
+print("    int('zz', 36) =", int("zz", 36), "| 自写表才是 62 进制的唯一正解")
+print("[rule ] divmod 商余自洽; 除基取余低位先出须反转; base62 编解码共用表常量+往返测试")
+```
+
+**追问一**：为什么 CPython 的 `//` 与 `%` 对负数选 floor 语义而不是 C 的截断语义？这对工程有什么影响？—— 设计动机：floor 语义下余数与除数同号、且 `(a // b) * b + a % b == a` 恒成立的同时**余数落进 `[0, b)`（b>0 时）**，这让"模 N 分桶/环形缓冲/取位数字"天然正确——`(-1) % 7 == 6` 表示"-1 号桶 = 第 6 号桶"，环形结构不需要 `((a % b) + b) % b` 双重修正；C 的截断语义余数符号跟被试者走，`-1 % 7 == -1` 会把负数桶号漏出数组。影响：跨语言移植时（C/Go/JS 的 % 是截断语义）取模结果不同，Python 服务算出的分片号要在文档里写明 floor 语义；金额场景通常先保证操作数非负，从根上绕开语义差。另外 `divmod` 在 b 为负时余数也非正（与除数同号），要"永远非负余数"就先归一化除数符号。
+
+**追问二**：base64/base58/base62/base36 各自解决什么问题？短链 ID 为什么不用 base64？—— base36（0-9a-z）大小写不敏感，适合"用户手抄、电话口述"的场景；base64 是**传输编码**不是数字编码（面向字节、含 +/=、padding，值大小写敏感且带符号歧义），用于 URL 路径会与 `/` `+` 冲突（有 urlsafe 变体但语义仍是字节块）；base58 去掉易混字符（0/O/l/I）与 +/-，面向"人工誊抄钱包地址"；base62 是纯数字编码（无 padding、严格递增保序、可做范围分片），且**保序**——数值大则字符串字典序大（等长前缀下），这让数据库主键排序与短链词典序一致。选型口诀：字节转文本用 base64 家族，整数转短文本用 base36/62，人工誊抄加 base58 的字符集约束。
+
+## 背诵要点
+
+- `divmod(a, b)` 一次返回自洽的 `(q, r)`，恒有 `a == b*q + r`；Python `%` 是 floor 语义：余数与除数同号、b>0 时余数非负（`-7 % 3 == 2`）。
+- 除基取余每次产出的都是最低位 → 产生顺序低位在前，字符串要 `"".join(reversed(digits))`（append+反转 O(k)，前插 O(k²)）。
+- `int(s, base)` 仅解码 2-36 且大小写不敏感；base62/58 编码自建字符表，编解码共用表常量 + 随机往返测试兜底。
+
+## 复盘追问
+
+- 除基取余为什么天然低位先出？（`n % base` 摘的是当前最低位，`n // base` 去掉它；下一次的"最低位"是次低位，循环即为低位→高位）
+- 短链编码解码各自单测通过却全错，怎么防？（表常量单一来源 + round-trip property 测试：随机 n 断言 decode(encode(n))==n）

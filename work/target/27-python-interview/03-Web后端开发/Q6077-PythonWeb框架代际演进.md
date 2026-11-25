@@ -60,7 +60,10 @@ try:
     from pydantic import BaseModel
     class Query(BaseModel):
         page: int = 1                             # schema-first: 类型即契约+文档
-    print("schema-first:", Query(page="3x"))      # 直接 ValidationError, 自动 OpenAPI
+    try:
+        Query(page="3x")
+    except Exception as e:
+        print("schema-first 拦截非法输入:", type(e).__name__, "| 契约即文档(自动 OpenAPI)")
 except ImportError:
     print("pydantic 未安装: 需要 pip install 'pydantic>=2' (基线 Pydantic v2)")
 

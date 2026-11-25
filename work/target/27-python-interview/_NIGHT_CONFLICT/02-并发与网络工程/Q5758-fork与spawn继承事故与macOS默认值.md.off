@@ -1,0 +1,88 @@
+---
+title: "[Q5758] fork 与 spawn 的继承事故：锁、连接、fd 与 macOS 的 spawn 默认值"
+date: 2026-11-25
+categories: [Python并发网络]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5758 · fork 与 spawn 的继承事故：锁、连接、fd 与 macOS 的 spawn 默认值
+
+难度：P7 ｜ 标签：multiprocessing、fork、spawn、forkserver、锁继承、fd 继承、COW、__main__ 重导入
+
+**问**：一个 Linux 上跑得好好的多进程服务迁到 macOS 后，子进程一启动就报"target 不可 pickle"；另一个服务在 fork 模式下偶发子进程卡死，栈显示它在等一把永远没人释放的锁。fork 和 spawn 到底继承了哪些东西？为什么"多线程进程里 fork"是禁忌？macOS 的默认启动方式是什么、从 Linux 迁过来要注意什么？
+
+**答**：
+
+- **结论**：`fork` 复制当前进程的**整个地址空间**（COW）和**文件描述符表**，子进程从 `fork()` 返回点继续执行，**不重新 import 模块、不重新执行 `__main__`**；它继承的不只是数据，还有**锁的状态、连接对象、以及"其他线程已经消失"这个事实**。`spawn` 启动一个全新的解释器，重新 import 主模块、用 pickle 把 target/args 传过去，子进程只拿到显式传递的对象，不继承父进程的锁、连接、大部分 fd；代价是启动慢（几十到几百毫秒）且 target/args 必须可 pickle。`forkserver` 是先起一个干净的 server 进程，之后每个子进程从 server fork，避免重复 import，但同样不继承应用状态。macOS 自 3.8 起默认就是 `spawn`（`mp.get_start_method()` 可验证），所以"Linux 上 fork 能跑、macOS 上报 pickle 错"不是 3.12 的新问题，而是平台默认值差异。
+
+- **取舍**：a) fork 快、能共享预热内存（COW），适合"单线程、无共享连接、fork 后立刻 exec 或做纯计算"的场景；b) spawn 安全、隔离好，适合"父进程有多线程/连接池/锁"的服务，代价是启动开销与"必须能 pickle"；c) forkserver 是折中：Linux 上大进程池常用，启动比 spawn 快，但仍要求 target 可 pickle；d) **不要在 fork 子进程里复用父进程的连接**（数据库/Redis/HTTP 长连接）：TCP 连接是四元组 + 内核状态，两个进程同时读写会导致协议错乱、响应串包；正确做法是 fork 后重建连接，或让子进程自己连；e) fd 继承与 start method 是两件事：`os.set_inheritable(fd, True)` 的 fd 会跨 exec 传递，multiprocessing 默认会关掉非必要的 fd，但自己 `open` 的日志文件仍可能被继承。
+
+- **实战**：事故形态是"fork 模式下子进程偶发卡死"——父进程有一个后台线程持有 `logging` 的锁，主线程此时 `fork()`，子进程只保留调用 fork 的线程，那把锁在子进程里永远是"已锁定、持有者不存在"，子进程第一次写日志就死等。修复：改用 spawn/forkserver，或在 fork 前确保没有线程持锁（不现实），或注册 `os.register_at_fork` 在子进程里重置锁（只适用于自己可控的锁）。第二个事故是"迁移到 macOS 后进程池起不来"：target 是闭包/lambda、args 里有 `threading.Lock`，spawn 需要 pickle，直接 `TypeError: cannot pickle '_thread.lock' object`；修复是把 target 提到模块顶层、参数改成可 pickle 的数据，锁改为在子进程内部创建。
+
+```python
+# spawn: 子进程重新 import 主模块, 不继承父进程状态; 锁不可 pickle
+import multiprocessing as mp
+import os
+import sys
+import threading
+
+STATE = ["initial"]
+
+def child(queue):
+    STATE.append("child")
+    queue.put((os.getpid(), __name__, list(STATE), os.getppid()))
+
+def child_with_lock(lock):
+    return "unreachable"
+
+if __name__ == "__main__":
+    print("→ 本机默认启动方式:", mp.get_start_method(), "| 可选:", mp.get_all_start_methods())
+    if sys.platform == "darwin":
+        assert mp.get_start_method() == "spawn"      # macOS 自 3.8 起
+
+    STATE.append("parent")                            # 父进程的修改
+    ctx = mp.get_context("spawn")
+    queue = ctx.Queue()
+    proc = ctx.Process(target=child, args=(queue,))
+    proc.start()
+    pid, modname, state, ppid = queue.get(timeout=30)
+    proc.join(30)
+
+    print("→ 子进程 pid/module/state:", pid, modname, state)
+    assert pid != os.getpid()                         # 新进程
+    assert modname == "__mp_main__"                   # 主模块被重新 import
+    assert state == ["initial", "child"]              # 父进程的 "parent" 没有被继承
+    assert ppid == os.getpid()
+    assert proc.exitcode == 0
+
+    # spawn 下 target/args 必须可 pickle: threading.Lock 直接失败
+    err = ""
+    try:
+        bad = ctx.Process(target=child_with_lock, args=(threading.Lock(),))
+        bad.start()
+        bad.join(5)
+    except (TypeError, AttributeError) as e:
+        err = str(e)
+        print("→ 传 threading.Lock 给 spawn:", e)
+    assert "pickle" in err.lower()
+
+    # 对比: 模块级 STATE 在子进程里是全新对象, 不是父进程那份
+    assert STATE == ["initial", "parent"]             # 父进程自己没被子进程影响
+    print("→ 父进程 STATE 保持不变:", STATE)
+```
+
+**追问一**：fork 之后子进程里的锁为什么可能永远解不开？`os.register_at_fork` 能救吗？—— 锁的实现通常是"一个原子变量 + 等待队列"，fork 复制的是**某一瞬间的内存**：如果 fork 时另一个线程正持有锁（`locked=1`），子进程里这个标志还是 1，但持有它的线程在子进程里**不存在**（fork 只复制调用线程），于是任何 `acquire` 都会永远等下去；条件变量、信号量、`logging` 的内部锁、`malloc` 的 arena 锁都可能中招。`os.register_at_fork(after_in_child=...)` 可以在子进程里重新初始化**你自己实现/包装**的锁，但标准库内部的锁（logging、importlib、随机数）无法安全重置，所以"fork + 多线程"没有通用解；正解是 spawn/forkserver，或者 fork 后只做 `exec`。
+
+**追问二**：spawn 下父进程打开的 fd 会传给子进程吗？为什么"子进程写日志把文件写坏"仍然会发生？—— 默认情况下 Python 3.4+ 的 fd 是 non-inheritable（PEP 446），`spawn` 启动的新解释器不会继承大多数 fd；但有两类例外：①显式 `os.set_inheritable(fd, True)` 或 `pass_fds` 传递的 fd；②**文件描述符的偏移量是内核对象的一部分**——即使子进程通过继承/传递拿到了同一个 fd，两个进程共享同一个 file offset，交替写会互相覆盖（日志交错、半行）。如果子进程重新 `open` 同一个文件，则是两个独立 offset，追加模式（`O_APPEND`）下内核保证单次 write 原子，但多行日志仍可能交错。结论：跨进程写同一文件要么走 `logging.handlers.QueueHandler` 集中到父进程，要么每进程独立文件，不要共享 fd。
+
+## 背诵要点
+
+- fork 复制地址空间/fd/锁状态，不重新 import；子进程只保留调用线程，其他线程持有的锁永远不解 → 死锁。
+- spawn 起全新解释器，重新 import `__main__`、pickle target/args，不继承锁与连接；target 必须模块级可 pickle，`threading.Lock` 直接失败。
+- macOS 自 3.8 默认 spawn；fork 子进程不要复用父进程的 DB/Redis/TCP 连接，fd 可继承但 file offset 共享，日志要集中或分文件。
+
+## 复盘追问
+
+- 为什么"Linux 能跑、macOS 报 cannot pickle"？（macOS 默认 spawn，需要 pickle target/args；Linux 默认 fork 直接复制内存，不需要）
+- fork 出的子进程为什么可能卡在 logging 上？（fork 时另一线程持有 logging 锁，子进程里持有者不存在，锁永远不释放）

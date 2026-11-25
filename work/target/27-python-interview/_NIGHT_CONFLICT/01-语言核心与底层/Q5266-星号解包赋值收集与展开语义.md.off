@@ -1,0 +1,103 @@
+---
+title: "[Q5266] 星号解包赋值 a, *b, c：收集侧与展开侧的求值语义"
+date: 2026-11-25
+categories: [Python语言核心]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5266 · 星号解包赋值 a, *b, c：收集侧与展开侧的求值语义
+
+难度：P6 ｜ 标签：解包、星号表达式、扩展可迭代、列表收集、错误数量、multiple assignment、函数签名
+
+**问**：赋值左侧的 `a, *b, c = ...` 与函数调用右侧的 `f(*args)` 里星号是同一个东西吗？`*b` 收集的一定是列表吗，能不能用 `*b,` 解包进元组？一个可迭代对象被左侧解包两次会发生什么（错误数与部分赋值）？右侧解包 `[*a, *b]` 与 `a + b` 的取舍？
+
+**答**：
+
+- **结论**：两个星号是**同一语法家族的两个方向**：赋值左侧（收集方向）——`a, *b, c = seq` 先对右侧整体做"解包赋值"，星号项收集"多余"的元素为**列表**（总是 list，不管右侧是什么类型；恰好够分时 `*b` 收到 `[]`）；函数调用/字面量（展开方向）——`f(*args)` 把可迭代对象摊开成独立参数，`[*a, *b]` 把多个可迭代拼接。左侧解包在 3.x 由单条 `UNPACK_EX` 指令完成：**先把右侧完整解包进值栈、再逐个赋值**——因此元素不足抛 ValueError 时**所有目标一律保持原值**（不存在部分赋值）；真正的陷阱是右侧迭代器已被推进/耗尽，以及"失败后代码继续使用旧值"的半旧状态。补充事实：`*b, = [1, 2]`（尾逗号）是把单元素收集进列表的惯用法；`a, *b, c` 里 b 可以同时吃首尾之间的一切；解包不支持"两个星号"（`a, *b, *c = ...` 语法错误）。
+
+- **取舍**：a) 收集方向适合"头/中/尾三段式"（命令行首参、表头、表尾），比切片三连 `s[0], s[1:-1], s[-1]` 快且不依赖 len——但可读性见仁见智，团队要有约定；b) 展开方向 `[*a, *b]` vs `a + b`：前者接受任意可迭代（生成器、dict 键），后者要求两侧都是同类型序列且产生新对象——合并生成器用 `[*gen1, *gen2]`（物化）或 `itertools.chain`（惰性）按内存需求选；c) 函数签名端 `def f(*args, **kwargs)` 与 `def f(a, *rest, key=None)`：后者的"星号后只能关键字传参"（keyword-only）是 API 设计利器，星号收集项与 keyword-only 是同一语法的两面；d) 不可迭代右侧直接解包会 TypeError，但**字符串也是可迭代**——`a, b = "py"` 得到 `'p','y'`，`a, b = "python"` 直接 ValueError，函数参数里把"用户传来的 str"当"列表的列表"解包是常见翻车点，边界处先做类型白名单。
+
+- **实战**：事故形态是"配置解析里 `host, *ports, tls = spec.split(':')`，spec 格式升级成 `host:`（空 ports 段）后 `ports` 收到 `[]`，下游 `ports[0]` 抛 IndexError；另一个分支里 `a, *b = wrong_shape` 因元素不足抛 ValueError——异常处理器捕获后让函数走默认配置继续跑，但**右侧生成器已被耗尽**，重试分支拿到的 `a, *b` 是空流的产物（空列表），配置静默变成全默认，日志里出现'解析成功但值不对'的假象"。修复：①解包前先校验形状（`parts = spec.split(':'); if len(parts) < 2: raise`），把"错误数"从 ValueError 变成带上下文的业务异常；②解包失败后禁止"降级继续"——目标全部保持旧值，必须显式走失败路径；③CI 对 `*` 解包的行加 lint：解包目标的形状断言（assertRaises + 形状白名单）。下面实测收集语义、错误数与部分赋值。
+
+```python
+print("[1] 收集方向: 星号项永远收集为 list, 恰好够分时收空")
+a, *b, c = [1, 2, 3, 4, 5]
+print(f"    a={a}, b={b}, c={c}")
+assert a == 1 and c == 5
+assert isinstance(b, list) and b == [2, 3, 4]
+head, *tail = [1]                      # 一个元素: head=1, tail=[]
+assert head == 1 and tail == []
+x, *rest = "abc"
+print(f"    字符串也能解包: x={x!r}, rest={rest}")
+assert x == "a" and rest == ["b", "c"]
+first, *mid, last = "XY"               # 至少要 2 个元素: mid 可为空, first/last 各占 1 个
+assert first == "X" and last == "Y" and mid == []
+try:
+    first2, *mid2, last2 = "X"         # 只有 1 个元素: 首尾槽不够分
+except ValueError as e:
+    print("    首尾槽至少要 2 个元素:", e)
+
+print("[2] 展开方向: 函数调用与字面量拼接")
+def add(a, b, c):
+    return a + b + c
+nums = [1, 2, 3]
+assert add(*nums) == 6                 # 展开: 列表 -> 三参数
+gen = (i * 10 for i in range(3))
+merged = [*nums, *gen]                 # 展开进字面量: 任意可迭代
+print("    [*nums, *gen] =", merged)
+assert merged == [1, 2, 3, 0, 10, 20]
+assert {*"abc", *"cba"} == {"a", "b", "c"}      # 集合展开自动去重
+
+print("[3] 错误数: 元素不足抛 ValueError, 目标全部不赋值, 但右侧迭代器已被耗尽")
+sink = {}
+try:
+    sink["a"], *sink["b"], sink["c"] = [1]      # 首尾槽至少各 1 个, [1,2] 恰好够分不报错
+except ValueError as e:
+    print("    元素不足:", e, "| 失败后 sink =", sink)
+assert sink == {}                               # UNPACK_EX 先整体解包后赋值: 不存在部分赋值
+it = iter([1])
+got = {}
+try:
+    got["a"], *got["b"], got["c"] = it
+except ValueError as e:
+    print("    迭代器同样失败, 且已被推进:", "剩余 =", list(it))
+assert got == {} and list(it) == []             # 真实风险: 迭代器被耗尽, 目标保持旧值
+
+print("[4] 星号后 keyword-only: 同一语法的签名面")
+def endpoint(path, *middlewares, timeout=1.0, retries=0):
+    return path, middlewares, timeout, retries
+p, mws, t, r = endpoint("/x", "log", "auth", retries=3)
+assert p == "/x" and mws == ("log", "auth") and t == 1.0 and r == 3
+try:
+    exec("endpoint('/x', timeout=0.5, 'log')")     # 语法期即拦截: 位置参数在关键字后
+except SyntaxError as e:
+    print("    语法期即拦截:", type(e).__name__)
+
+print("[5] 收集方向的边界: 不支持双星号; 尾逗号单元素收集")
+try:
+    exec("a, *b, *c = [1, 2, 3]")
+except SyntaxError as e:
+    print("    两个星号项:", type(e).__name__)
+solo, = [42]              # 单目标解包: solo=42
+assert solo == 42
+collected, = ([42],)      # 星号版: collected=[42]
+*flat, = [42]
+assert flat == [42]
+print("[rule ] 左侧星号=收集为list(先收集后停, 失败已部分赋值); 右侧星号=展开; 星号后=keyword-only")
+```
+
+**追问一**：`a, *b, c = iterator` 对"只能消费一次的生成器"做什么？为什么失败时"目标未赋值但迭代器已被耗尽"？—— 赋值语句对右侧先调 `iter()`，`UNPACK_EX` 一次完成解包：头部槽逐个取值，星号槽**持续取值直到"剩下的数量 == 尾部槽数"**（对无 `__len__` 的迭代器，CPython 维护一个栈缓冲收进列表，再从尾部弹出尾部槽），全部解包成功后才执行 STORE——所以**失败时目标全部未赋值，但迭代器已经被推进到耗尽**；`a, *b, c = gen` 对有限生成器是消费完；对无限生成器（如 `itertools.count()`）会**吃满内存直到 OOM**，因为没有"剩余数量==尾槽数"的终点。评审红线：①星号解包无限/超长流的右侧必须先 islice 截断；②解包失败后迭代器已不可复用，"解包失败重试"必须重建右侧可迭代；③不要依赖"失败时目标保持旧值"做回滚——那是隐式行为，显式失败路径才可审计。
+
+**追问二**：`def f(*args)` 与 `def f(a, *rest, key=None)` 在 API 演进上怎么组合使用？为什么要警惕 `**kwargs` 吞掉拼写错误的参数名？—— 演进套路：v1 是 `def f(a, b)`；要加可选参数时别改成 `def f(a, b, c=None)`（调用方位置传参 `f(1, 2, 3)` 会把 c 当位置参数，未来再调序就破坏兼容），而是 `def f(a, b, *, c=None)` 把新参数钉成 keyword-only——调用方必须写 `c=3`，未来参数重排序零破坏。`*args`/`**kwargs` 的转发（`def wrapper(*args, **kwargs): return f(*args, **kwargs)`）是装饰器标配，但 `**kwargs` 的代价是**拼错的参数名静默进入 kwargs**：调用 `f(timeou=1)` 不报错，直到函数体里 KeyError 或被吞。治理：对外 API 的成熟段全部 keyword-only + 类型注解 + IDE 补全；纯转发层用 `functools.wraps` 保持签名元数据（inspect.signature 可还原），并对 kwargs 里"函数签名不认识的键"在 debug 模式下告警。
+
+## 背诵要点
+
+- 赋值左侧 `*b` 收集为 list（恰好够分收空 `[]`）；右侧 `*x` 展开任意可迭代；元素不足抛 ValueError 时**目标全部保持原值**，但右侧迭代器已被耗尽。
+- `def f(a, *rest, key=None)` 星号后是 keyword-only——API 加可选参数钉成 keyword-only 防位置兼容破坏。
+- `a, *b, c = gen` 会消费生成器"到需要为止"，右侧是无限流会 OOM；解包失败的迭代器已部分推进不可重试。
+
+## 复盘追问
+
+- 为什么解包失败后"配置静默变默认值"？（UNPACK_EX 失败时目标保持旧值、迭代器已被耗尽；异常处理器若降级继续，旧值+空流产物就是半旧状态——失败必须走显式失败路径）
+- 为什么加可选参数用 def f(a, b, *, c=None) 而不是 f(a, b, c=None)？（keyword-only 钉死传参方式，防止调用方位置传参造成未来重排序的兼容破坏）

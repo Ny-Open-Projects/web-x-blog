@@ -37,9 +37,9 @@ async def main():
     # 1) readline 聚合读取: 无换行符的超限数据 -> LimitOverrunError 防线生效
     r, w = await asyncio.open_connection("127.0.0.1", port, limit=8192)
     try:
-        await r.readuntil(b"\n")     # 对端发的是无分隔符大块
-    except asyncio.IncompleteReadError:
-        print("readuntil 未到分隔符(对端未发) -> IncompleteReadError")
+        await asyncio.wait_for(r.readuntil(b"\n"), timeout=1)  # 对端不发数据
+    except asyncio.TimeoutError:
+        print("服务端未响应(两端互等的死锁形态, 实际需读侧超时兜底)")
     except Exception as e:
         print("聚合读超限防线:", type(e).__name__)
     w.close(); await w.wait_closed()

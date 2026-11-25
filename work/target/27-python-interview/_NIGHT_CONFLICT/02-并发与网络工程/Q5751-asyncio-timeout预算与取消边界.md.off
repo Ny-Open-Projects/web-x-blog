@@ -1,0 +1,102 @@
+---
+title: "[Q5751] asyncio.timeout 的预算与取消边界：内层吞掉取消，外层超时为什么失效"
+date: 2026-11-25
+categories: [Python并发网络]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5751 · asyncio.timeout 的预算与取消边界：内层吞掉取消，外层超时为什么失效
+
+难度：P7 ｜ 标签：asyncio.timeout、timeout_at、deadline、CancelledError、uncancel、取消传播、超时预算
+
+**问**：一个 RPC 处理函数外层套了 `asyncio.timeout(3)`，内部每个下游调用又各自套 `asyncio.timeout(1)`。压测时发现偶发"请求跑了 5 秒才返回，而且返回的是成功响应"；另一次把内层的 `except Exception` 改成 `except BaseException` 兜底后，外层超时彻底不生效了。`asyncio.timeout` 到期时到底抛什么、在哪个边界转换？内层捕获 `CancelledError` 为什么会破坏外层预算？嵌套时 deadline 应该怎么算？
+
+**答**：
+
+- **结论**：`asyncio.timeout(d)` 是一个异步上下文管理器：进入时向事件循环注册一个 `call_at(deadline, ...)` 的回调，到期时对**当前 Task** 调用 `cancel()`；退出时若"到期状态"成立，`__aexit__` 会把这次取消"认领"（`uncancel()`）并抛出 `TimeoutError`。关键在 `__aexit__` 的判断：只有 `state == EXPIRING` **且**传播上来的异常是 `CancelledError`，才会转成 `TimeoutError`。如果块内的代码把 `CancelledError` 吞掉并正常返回，`__aexit__` 看到的是"无异常"，于是既不 `uncancel` 也不抛错，块继续往下执行——外层以为"时间到了"，内层却当成"成功"，这就是"超时后仍返回成功"的事故根因。嵌套时的正确做法是**预算传递**：子步骤的 deadline 取 `min(外层deadline, now + 子预算)`，用 `timeout_at(绝对时间)` 而不是相对 `timeout`，这样每层看到的都是同一个单调时钟上的绝对时刻，不会因为层层 reset 把总预算放大。
+
+- **取舍**：a) 相对 `timeout` 适合"单个操作最多等多久"，绝对 `timeout_at` 适合"整条链路共享一个 deadline"；网关/入口算一次 deadline 往下传，比每层各写一个数字更可控；b) 捕获 `CancelledError` 必须"要么处理完立刻 re-raise，要么用 `uncancel()` 明确认领"——吞掉不抛是破坏取消协议的根源；清理逻辑用 `try/finally`，不要在 `except CancelledError` 里做长耗时操作；c) 内层超时应该转换成业务错误（如 `UpstreamTimeout`）再往外抛，避免和外层 `TimeoutError` 混淆；但转换后外层仍要能感知"预算已耗尽"，否则会继续重试；d) 不要用 `wait_for` 包 `timeout`：两层都会 cancel 同一个 Task，`uncancel` 计数容易对不上，3.11+ 统一用 `timeout`/`timeout_at`。
+
+- **实战**：事故形态是"下游超时被兜底吞掉，外层预算形同虚设"——内层 `except BaseException: return fallback` 把 `CancelledError` 一起吃了，外层 `timeout(3)` 到期时取消被吞，函数继续跑完并返回 200，客户端看到的是"3 秒超时配置下 5 秒成功"。修复：①内层只捕获 `Exception`，`CancelledError` 直接放行；②确实需要兜底时用 `except asyncio.CancelledError: raise` 显式重抛；③所有下游调用改成 `timeout_at(min(deadline, now+per_call))`，并在入口记录 deadline 余量；④加一条压测断言"响应时间 P99 ≤ 外层 timeout + 100ms"。
+
+```python
+# asyncio.timeout: 预算传递、边界转换, 以及内层吞取消导致外层失效
+import asyncio
+
+async def downstream(deadline):
+    async with asyncio.timeout_at(deadline) as t:
+        await asyncio.sleep(1)
+    return t
+
+async def main():
+    loop = asyncio.get_running_loop()
+    t0 = loop.time()
+    outer_deadline = t0 + 0.25
+
+    # 正确: 子步骤预算不超过外层 deadline
+    async with asyncio.timeout_at(outer_deadline) as outer:
+        inner_deadline = min(outer_deadline, loop.time() + 0.05)
+        try:
+            await downstream(inner_deadline)
+        except TimeoutError:
+            print("→ 内层先到期, 外层 expired =", outer.expired())
+            assert outer.expired() is False
+            await asyncio.sleep(0.05)          # 外层预算还有剩余, 可以继续
+    print("→ 总耗时:", round(loop.time() - t0, 2), "秒, 外层 expired =", outer.expired())
+    assert outer.expired() is False
+    assert loop.time() - t0 < 0.25
+
+    # 外层到期: TimeoutError 在外层边界转换
+    try:
+        async with asyncio.timeout(0.05) as t:
+            await asyncio.sleep(1)
+    except TimeoutError:
+        print("→ 外层到期, expired =", t.expired())
+        assert t.expired() is True
+
+    # 事故: 内层吞掉 CancelledError, 外层超时不再抛错
+    async def swallow_cancel():
+        try:
+            await asyncio.sleep(1)
+        except asyncio.CancelledError:
+            return "swallowed"                 # 取消被吃掉, 块"正常"返回
+
+    async with asyncio.timeout(0.05) as broken:
+        got = await swallow_cancel()
+        print("→ 吞掉取消后块继续执行, 返回值:", got, "| expired =", broken.expired())
+    assert got == "swallowed"
+    assert broken.expired() is True             # 到期了, 但没有 TimeoutError
+
+    # 正确姿势: 捕获后立刻重抛
+    async def reraise():
+        try:
+            await asyncio.sleep(1)
+        except asyncio.CancelledError:
+            print("→ 清理后重抛取消")
+            raise
+    fired = False
+    try:
+        async with asyncio.timeout(0.05):
+            await reraise()
+    except TimeoutError:
+        fired = True
+    assert fired
+
+asyncio.run(main())
+```
+
+**追问一**：为什么 `timeout` 到期不直接抛 `TimeoutError`，而是先 `cancel()` 再在边界转换？—— 因为协程不能从"外部"直接注入异常：取消是 asyncio 唯一的跨任务中断机制，它把 `CancelledError` 抛在 Task 当前 `await` 点，让 `finally`/`__aexit__` 有机会做清理。`timeout` 自己也是一个上下文管理器，它在 `__aexit__` 里判断"这次 CancelledError 是不是我造成的"（靠 `state == EXPIRING` 和 `uncancel()` 的计数），是才转换成 `TimeoutError`；不是（比如外层取消、用户主动 cancel）就原样放行。这个设计保证了"取消"和"超时"在底层是同一条路径，代价是**任何吞掉 CancelledError 的代码都会破坏上层对超时的判断**——内层 `except BaseException` 是典型反模式。
+
+**追问二**：嵌套 `timeout` 时，如果内层和外层同时到期，谁会赢？`uncancel` 计数怎么保证不串？—— 同一时刻到期时，两个 `call_at` 回调都会对同一个 Task 调 `cancel()`，Task 的 `_num_cancels_requested` 变成 2，但只抛一次 `CancelledError`。最内层的 `__aexit__` 先看到 `EXPIRING`，调用 `uncancel()` 把计数减 1、抛 `TimeoutError`；如果这个 `TimeoutError` 没被内层捕获，它会继续冒泡到外层，外层看到的是 `TimeoutError` 而不是 `CancelledError`，所以外层**不会**再转换成自己的 `TimeoutError`（它的 `exc_type` 不是 CancelledError），最终调用方拿到的是内层的超时错误——归因于"最先到期的那个边界"。要区分归属，不要靠异常类型，靠每层自己的 `expired()` 或自定义异常；`uncancel` 的返回值（剩余取消请求数）可以用来判断"是否还有外层取消未处理"。
+
+## 背诵要点
+
+- `asyncio.timeout` 到期 → `task.cancel()`；只有 `state == EXPIRING` 且传播上来的异常是 `CancelledError` 时，`__aexit__` 才 `uncancel()` 并抛 `TimeoutError`。
+- 内层吞掉 `CancelledError` 会让外层 `__aexit__` 看到"无异常"，超时不抛错、块继续执行——兜底只能 `except Exception`，取消必须重抛。
+- 嵌套用 `timeout_at(min(外层deadline, now+子预算))` 传绝对 deadline；同时到期由最内层边界转换，归因靠各层 `expired()` 而非异常类型。
+
+## 复盘追问
+
+- 为什么内层 `except BaseException: return fallback` 会让外层超时"失效"？（CancelledError 被吞，外层 __aexit__ 的 exc_type 不是 CancelledError，不转换也不抛错）
+- 多层超时如何避免"每层 reset 把总预算放大"？（入口算一次绝对 deadline，逐层 timeout_at(min(deadline, now+per_call))）

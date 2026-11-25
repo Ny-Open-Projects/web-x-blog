@@ -56,10 +56,11 @@ async def main():
 
 asyncio.run(main())
 
-# 4) 源码级佐证: set_result -> schedule_callbacks -> call_soon
-import asyncio.base_events, inspect, asyncio.futures
-src = inspect.getsource(asyncio.futures.Future._schedule_callbacks)
-print("源码佐证: 回调经 _call_soon 投递 =", "_call_soon" in src)
+# 4) 源码级佐证: 纯 Python 版 futures.py 中 set_result -> _schedule_callbacks -> _call_soon
+import inspect, asyncio.futures
+src_text = open(inspect.getsourcefile(asyncio.futures), encoding="utf-8").read()
+print("源码佐证: _schedule_callbacks 存在 =", "_schedule_callbacks" in src_text,
+      "| 回调经 _call_soon 投递 =", "_call_soon" in src_text)
 print("python:", sys.version.split()[0])
 ```
 

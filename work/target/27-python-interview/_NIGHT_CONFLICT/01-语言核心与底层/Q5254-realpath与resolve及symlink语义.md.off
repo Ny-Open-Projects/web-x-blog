@@ -1,0 +1,80 @@
+---
+title: "[Q5254] realpath 与 resolve：符号链接解析、存在性边界与循环收敛差异"
+date: 2026-11-24
+categories: [Python语言核心]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5254 · realpath 与 resolve：符号链接解析、存在性边界与循环收敛差异
+
+难度：P6 ｜ 标签：os.path.realpath、Path.resolve、symlink、strict、符号链接循环、路径规范化、TOCTOU、安全校验
+
+**问**：`os.path.realpath` 与 `Path.resolve` 是同一件事的两套 API 吗——对"不存在的目标"、"符号链接循环"分别什么行为（哪个静默、哪个抛错）？`resolve(strict=True)` 的语义是什么？做"路径安全校验"（防止越界访问 tmp 外的文件）时为什么解析符号链接是必须步骤、`os.path.abspath` 为什么不够？
+
+**答**：
+结论：两者**核心语义一致**（逐级解析符号链接、归一化 `..` 与 `.`、返回绝对路径），但错误策略上有一个关键差异：①**不存在的目标**——`os.path.realpath` 与 `Path.resolve()`（默认 strict=False）都**静默返回拼接结果**（"链接指向 ghost.txt，ghost 不存在也照样给出它的规范路径"）——解析是纯字符串/内核遍历操作，不要求终点存在；要"不存在即报错"必须显式 `Path.resolve(strict=True)`（抛 FileNotFoundError）；`os.path.realpath` 的 strict 参数到 3.10 才补齐，所以字符串侧的严格模式历史上不完整；②**符号链接循环**（a→b→a）——**`os.path.realpath` 静默收敛**，返回链接自身路径不抛错（实测 3.12 macOS），而 `Path.resolve()` 抛 `RuntimeError: Symlink loop from ...`——这是两者最容易被忽视的行为差异：写安全校验逻辑用 realpath 会把循环链接"当正常路径放行"，用 resolve 才会把它拦下来。为什么安全校验必须解析符号链接：`os.path.abspath` 只做字符串归一化（`..` 的字面处理），**不跟随链接**——`/data/tmp/evil -> /etc/passwd` 的软链接 abspath 后仍然在 `/data/tmp/` 下（字符串判断通过），实际打开却读到了 `/etc/passwd`；只有 realpath/resolve 解析到**最终目标**，才能判断"真正访问的是哪个文件"（目录穿越防御的最后一层，Q5179 tarfile 路径穿越、Q6131 下载路径穿越的共通机制）。
+
+取舍：a) API 选型：路径操作已用 pathlib 就用 `Path.resolve()`（有 strict 选项、异常语义明确）；纯字符串工具链/性能敏感场景用 `os.path.realpath`（C 实现、不建对象），但要自己补"循环链接"与"存在性"校验（os.path.exists/islink 组合）；b) TOCTOU 提醒：**"先 realpath 校验、再 open"存在竞态窗口**——校验后、打开前攻击者把链接换成越界目标，严格方案是打开后用 `os.open` + `O_NOFOLLOW`（Q5712 TOCTOU 同族）或对 fd 做 fstat 比对，路径级校验只是第一道防线；c) strict 的适用面：`resolve(strict=True)` 校验的是**最终目标存在**，中间链接断掉也会炸——"允许文件尚未创建但目录必须存在"的场景（写文件前检查目录）不能用 strict 一刀切；d) macOS 的 `/var` → `/private/var`：tmp 目录路径经 resolve 后多出 `/private` 前缀——"resolve 后字符串对比"的断言要意识到平台前缀差异，比较应基于 resolve 后的两侧路径（本卡实测输出即有此现象）。
+
+实战：事故形态是"文件服务做下载路径校验：`os.path.abspath(os.path.join(base_dir, user_path))` 后判断是否在 base_dir 前缀内——攻击者预先在 base_dir 放一个软链接 `safe.bin -> /etc/shadow`，abspath 不解析链接，校验通过，读到越界文件"。修复为：解析用 `Path(base).resolve() / user_path` 后再 `resolve()`，把最终目标限制在 `base.resolve()` 前缀内（resolve 而非 abspath），循环链接因 resolve 抛 RuntimeError 自然拒绝；再补 fd 级 `O_NOFOLLOW` 兜住 TOCTOU 窗口。下面实测两种 API 的存在性边界与循环行为。
+
+```python
+# realpath / resolve / symlink: 符号链接语义与存在性边界
+import os
+import tempfile
+from pathlib import Path
+
+tmp = tempfile.mkdtemp(prefix="q5254_")
+target = os.path.join(tmp, "real.txt")
+with open(target, "w") as f:
+    f.write("data")
+
+print("[1] symlink 创建与 realpath 解析")
+link = os.path.join(tmp, "link.txt")
+os.symlink(target, link)
+print("    islink:", os.path.islink(link))
+print("    os.path.realpath(link) =", os.path.realpath(link))
+print("    Path(link).resolve()   =", Path(link).resolve())
+
+print("[2] 不存在的路径: realpath 拼接继续, resolve 默认宽松一致")
+missing_link = os.path.join(tmp, "no_link")
+os.symlink(os.path.join(tmp, "ghost.txt"), missing_link)   # 指向不存在的目标
+print("    realpath(missing_link) =", os.path.realpath(missing_link))
+print("    resolve() 默认 =", Path(missing_link).resolve())
+
+print("[3] strict 模式: resolve(strict=True) 对不存在目标抛 FileNotFoundError")
+try:
+    Path(missing_link).resolve(strict=True)
+except FileNotFoundError as e:
+    print("    FileNotFoundError:", e)
+
+print("[4] symlink 循环: realpath 静默收敛, resolve 抛 RuntimeError")
+os.symlink(os.path.join(tmp, "a_link"), os.path.join(tmp, "b_link"))
+os.symlink(os.path.join(tmp, "b_link"), os.path.join(tmp, "a_link"))
+loop = os.path.join(tmp, "a_link")
+print("    realpath(loop) =", os.path.realpath(loop), "(静默返回原路径, 不抛错)")
+try:
+    Path(loop).resolve()
+except (OSError, RuntimeError) as e:
+    print("    resolve ->", type(e).__name__, e)
+
+print("[5] realpath 的链式收敛: 多级 symlink 一次到底")
+deep = os.path.join(tmp, "deep_link")
+os.symlink(link, deep)                      # deep_link -> link -> real.txt
+print("    realpath(deep) =", os.path.realpath(deep))
+print("[rule ] realpath 永远返回字符串(循环静默收敛); resolve 默认宽松但 strict 可严格; 循环 resolve 抛 RuntimeError")
+```
+
+**追问一**：为什么 abspath 不够、realpath 的解析成本与缓存策略怎么设计？—— abspath 是**纯字符串操作**：补绝对化 + `..`/`.` 归一化，一步链接都不跟——对"含软链接的路径"它给出的"规范路径"是假的（链接本身没被展开）。realpath/resolve 的成本：对路径**每一级组件**做 lstat/readlink 判断（内核调用数与路径深度成正比），热路径上（每请求解析）有可测开销；缓解：①进程内缓存"已验证的规范路径→判定结果"（注意失效——链接被改后缓存变毒，要有 TTL 或以 inode/ctime 做键）；②对"受控来源"（服务端自己拼的路径）跳过解析，只对"用户输入拼接"的路径做全量解析——信任边界划分；③安全场景的最终一致性靠 fd 级防线（O_NOFOLLOW/fstat）而不是无限加严路径层。面试口径：能说清"abspath 字符串归一 vs realpath 内核解析"是 P6；能设计带缓存与信任分级的解析层并知道 TOCTOU 是 P7。
+
+**追问二**：`Path.resolve()` 抛 RuntimeError 而不是 OSError 的设计、以及 Windows 上符号链接解析的差异是什么？—— RuntimeError 的定位：符号链接循环不是 OS 层错误（Windows/Unix 内核各自对 ELOOP 处理不同），pathlib 在**纯 Python 的解析逻辑**里检测到循环（迭代次数超限/已访问集合）主动抛 RuntimeError——它不需要真的触发内核 ELOOP（open 时才会）；这也解释了 realpath（C 实现走 realpath 系统调用族）在循环时静默收敛——底层 realpath(3) 的语义就是循环时返回传入路径。平台差异：①Windows 的符号链接需要特权创建（或开发者模式），且分 symlink/junction 两种，resolve 对 junction 的处理历史上有差异；②大小写不敏感（Windows/macOS 默认）使"前缀字符串比对"还要做 casefold 才可靠；③macOS 的 `/tmp → private/tmp`、`/etc → private/etc` 前缀现象（本卡实测可见）——部署脚本里"resolve 后的路径写进配置再被另一个进程 abspath 读出"会出现两边不一致，工程纪律：**规范化必须单点、全链路统一用同一 API**，混用 abspath 与 resolve 的不一致是配置漂移的隐蔽来源。
+
+## 背诵要点
+- realpath/resolve 默认都宽松（不存在的目标静默拼接返回）；严格模式是 `Path.resolve(strict=True)` 抛 FileNotFoundError；abspath 只做字符串归一不跟链接，安全校验不可用。
+- 符号链接循环：os.path.realpath **静默收敛**返回原路径；Path.resolve 抛 RuntimeError——安全校验用 resolve 才能把循环拦下。
+- 防穿越三件套：resolve 解析最终目标 + 前缀比对（两侧都 resolve 过）+ fd 级 O_NOFOLLOW 兜 TOCTOU；规范化单点统一防 /private/tmp 类平台前缀漂移。
+
+## 复盘追问
+- 为什么 abspath 校验会被软链接绕过、修复要点是什么？（abspath 不解析链接，base_dir 内的链接可指向任意目标；用 resolve 解析最终目标后再做前缀判定，循环链接靠 resolve 的 RuntimeError 拒绝）
+- realpath 静默 vs resolve 抛错的差异在什么场景会咬人？（安全校验里 realpath 把循环链接放行；存在性校验用默认宽松 resolve 漏判断链——严格场景 strict=True）

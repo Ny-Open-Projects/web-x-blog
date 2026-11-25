@@ -1,0 +1,103 @@
+---
+title: "[Q5259] __deepcopy__ 钩子：自定义深拷贝协议、memo 占位与递归安全"
+date: 2026-11-24
+categories: [Python语言核心]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5259 · __deepcopy__ 钩子：自定义深拷贝协议、memo 占位与递归安全
+
+难度：P6 ｜ 标签：copy.deepcopy、__deepcopy__、memo、递归引用、共享子树、拷贝协议、__reduce__、循环引用
+
+**问**：`copy.deepcopy` 的 memo 参数是什么机制——它为什么能同时解决"递归对象无限拷贝"与"共享子树保真"两个问题？自定义 `__deepcopy__(self, memo)` 的正确三步是什么（漏掉哪一步会 RecursionError）？`__deepcopy__` 与 `__reduce_ex__` 的优先级关系？什么时候值得自定义拷贝协议而不是用默认实现？
+
+**答**：
+结论：deepcopy 的 memo 是一个 **`{id(对象): 副本}` 字典**，一次 deepcopy 调用全程共享——它同时承担两个职责：①**递归安全**——拷贝树的过程中每遇到一个新对象就"先占位后填充"，若子结构指回祖先（自引用），递归进入祖先时 `id` 已在 memo 中，直接返回已有副本，不会无限展开；②**共享保真**——同一对象被多处引用时只拷贝一份（`x.y is x.z` 的 identity 关系在副本里还原，Q5077 的 memo 成本账、Q5250 的 pickle memo 同机制不同协议）。自定义 `__deepcopy__` 的**正确三步**：①入口先查 `if id(self) in memo: return memo[id(self)]`（防外层重复拷贝）；②构造副本后**立即** `memo[id(self)] = new`（在填充子结构之前！这是递归安全的根——子结构指回 self 时能命中占位）；③再逐字段 `copy.deepcopy(子结构, memo)` 填充。**漏掉第②步（或先填子结构后注册）在自引用对象上必 RecursionError**：每层都新建副本、memo 里永远查不到入口，递归炸栈。优先级关系：copy 模块的协议查找顺序是 `__deepcopy__` → `__reduce_ex__`/`__reduce__` → 默认递归——**类上只要定义了 `__deepcopy__` 就完全接管**（不再走 reduce 路径），这意味着自定义钩子是"全有或全无"的契约：接管后所有字段的拷贝策略都由你负责（漏拷字段=副本缺数据），没有"只定制某个字段"的中间态（那是 deepcopy 后修补或 `memo` 预注入的场景）。值得自定义的时机：默认 deepcopy 对**不可拷贝资源**（连接、锁、文件句柄）无能为力或拷出危险副本、对象含**外部注册表副作用**（拷贝要重新登记）、或**性能敏感**（默认实现的通用递归开销大，专用实现可按已知结构直拷）。
+
+取舍：a) 默认实现覆盖面：纯数据类（dict/list/自定义对象）默认 deepcopy 就对，先试默认再考虑钩子——自定义是"接锅"协议，接管后默认的所有保证（共享保真、类型还原）都要自己复刻；b) memo 预注入技巧：不想写完整钩子但想"让某个成员在拷贝时被替换"（如连接对象换成新连接），可以**提前把替换物塞进 memo**（`memo[id(conn)] = new_conn`），默认实现递归到 conn 时直接用替换物——比写全量钩子轻得多；c) 与浅拷贝的关系：`copy.copy` 不走 `__deepcopy__`（它找 `__copy__`），两个钩子独立定义，只写 deepcopy 不影响浅拷贝行为——但这造成"copy 与 deepcopy 语义不一致"的可能，写钩子时两条协议的语义要一起过一遍；d) 不可拷贝资源的正确表达：与其在钩子里硬拷锁/连接，不如把它们从 deepcopy 语义里排除（副本持有新资源或直接不持有），并在文档写明副本的语义（"副本不共享连接"）。
+
+实战：事故形态是"自研 AST 节点类为省拷贝时间写了 `__deepcopy__` 只拷贝了核心字段（跳过了 parent 回指），某个 PR 给节点加了 `source_span` 字段后副本上 AttributeError——自定义钩子绕过了默认实现的字段遍历，新增字段没同步进钩子，静默缺数据；另一次是钩子里先 deepcopy 子节点再注册 memo，优化重构把两个树节点互相引用后 RecursionError"。修复为：钩子实现统一走"查 memo→构造空壳→注册→填充"模板 + 类测试锁死"副本字段完整性"（遍历 `__slots__`/`__dict__` 键比对）+ 可拷贝字段清单纳入 code review。下面实测默认实现的递归/共享能力、错误钩子的爆栈与正确三步。
+
+```python
+# __deepcopy__ 钩子与 memo: 自定义深拷贝协议的正确姿势
+import copy
+
+class Node:
+    def __init__(self, name, child=None) -> None:
+        self.name = name
+        self.child = child
+    def __repr__(self) -> str:
+        return f"Node({self.name!r})"
+
+print("[1] 默认 deepcopy: 递归拷贝整棵树, memo 保证共享还原")
+c = Node("root", Node("leaf"))
+d1 = copy.deepcopy(c)
+print("    拷贝后子节点独立:", d1.child is not c.child, "| 名字:", d1.child.name)
+
+print("[2] 递归对象: 默认实现靠 memo 防止无限递归")
+loop = Node("a")
+loop.child = loop
+back = copy.deepcopy(loop)
+print("    拷贝后仍自指:", back.child is back, "(memo[id] 复用同一副本)")
+
+print("[3] 错误的自定义 __deepcopy__: 不查 memo -> 递归爆栈")
+class BadNode(Node):
+    def __deepcopy__(self, memo):
+        return BadNode(self.name, copy.deepcopy(self.child, memo))  # 忘记先注册自己
+bad = BadNode("a")
+bad.child = bad
+try:
+    copy.deepcopy(bad)
+except RecursionError:
+    print("    RecursionError: 每层都新建 BadNode, memo 里查不到入口")
+
+print("[4] 正确的自定义 __deepcopy__: 先占位 memo 再填充, 递归引用命中占位")
+class GoodNode(Node):
+    def __deepcopy__(self, memo):
+        if id(self) in memo:               # 递归引用: 返回已有副本
+            return memo[id(self)]
+        new = GoodNode(self.name)          # 1. 先构造空壳
+        memo[id(self)] = new               # 2. 立即注册占位 (递归安全的根)
+        if self.child is not None:         # 3. 再填充子结构
+            new.child = copy.deepcopy(self.child, memo)
+        return new
+
+good = GoodNode("a")
+good.child = good
+gback = copy.deepcopy(good)
+print("    拷贝后仍自指:", gback.child is gback, "| name:", gback.name)
+
+print("[5] 共享子树保真: memo 让两处引用同一子树只拷贝一份")
+shared = Node("shared")
+holder = GoodNode("h1")
+holder.child = shared
+holder2 = GoodNode("h2")
+holder2.child = shared
+pair = copy.deepcopy([holder, holder2])
+print("    两宿主的子节点同一份:", pair[0].child is pair[1].child)
+
+print("[6] __deepcopy__ 优先于 __reduce_ex__: 存在即接管协议")
+class Picky(Node):
+    def __reduce__(self):
+        raise AssertionError("__reduce__ 不该被调到")
+    def __deepcopy__(self, memo):
+        return Picky(self.name)
+
+p = copy.deepcopy(Picky("ok"))
+print("    走 __deepcopy__:", p.name)
+print("[rule ] 自定义 __deepcopy__ 三步: 查 memo / 构造后立即注册占位 / 再填子结构; 漏注册必爆栈")
+```
+
+**追问一**：memo 预注入与完整 `__deepcopy__` 钩子怎么选？"拷贝时替换连接对象"这类需求两个方案各怎么落地？—— memo 预注入：调用侧提前构造 `memo = {id(old_conn): new_conn}`，`copy.deepcopy(obj, memo)` 递归遇到 old_conn 时返回 new_conn——**不动类定义**、按调用点定制，适合"同一类对象在不同场景拷贝策略不同"（测试环境换 mock 连接、生产换新连接池借的连接）；局限：调用方必须知道对象图里的敏感成员（封装泄漏），且注入点分散。完整钩子：类内固化策略（所有 deepcopy 调用一致），适合"该类天生不可安全默认拷贝"（连接类、句柄类、含全局注册的对象）；代价是接管全部字段遍历职责（新增字段要同步）。选型：**策略与类绑定用钩子，策略与调用场景绑定用预注入**；两者都满足不了（策略随运行时状态变）说明拷贝语义本身设计有问题，应重构为显式的 `clone()` 方法——deepcopy 的隐式协议承载不了"策略随状态变"。工程形态：资源类（连接/锁）在 `__init__` 文档标注"不可 deepcopy"，提供 `clone()`/工厂重建语义，并考虑在 `__deepcopy__` 里直接 raise（fail-fast 优于拷出危险副本）。
+
+**追问二**：deepcopy 的 memo 与 pickle 的 memo 机制怎么对比？为什么两套协议都要"id→副本"映射但实现不同？—— 共同的本质：**对象图遍历都要处理"图"而非"树"**——共享与递归是对象图的常态（引用语义），"id→副本"映射是把图拷贝转为树拷贝的唯一手段（每对象只实例化一次，引用关系用副本间的引用还原）。差异在协议层：①**memo 生命周期**——deepcopy 的 memo 是单次调用作用域（调用结束即弃），pickle 的 memo 是**单次 dumps 流**作用域且最终编码进产物（pickle 流里的 GET/PUT 引用指令还原共享关系，跨进程重建后保真）；②**协议主动权**——deepcopy 的 memo 对自定义 `__deepcopy__` 是**约定参数**（不传/不用也能跑，但丢共享语义），pickle 的 memo 是**协议内建**（自定义 `__reduce__` 返回的对象仍被 memo 管理）；③**失败形态**——deepcopy 漏 memo 递归爆栈（本卡 [3]），pickle 漏共享还原则产物膨胀（同一对象序列化两份，反序列化后 identity 断裂，语义 bug 非崩溃）；④**不可拷贝内容**——deepcopy 遇不可拷贝对象抛错或递归失败，pickle 遇不可 pickle 对象 PicklingError（且 unpickle 是任意代码执行面 Q428）。选型口径：进程内"结构快照/回滚"用 deepcopy（保留 Python 类型与 identity），跨进程持久化用 pickle（协议化引用还原）——两者的 memo 都是"保真"的基石，弄丢共享语义的 bug 都属于"结构对了、identity 错了"的静默类。
+
+## 背诵要点
+- memo 是 `{id: 副本}` 字典，一次 deepcopy 全程共享：递归安全（自引用命中占位）+ 共享保真（多处引用拷一份）双重职责。
+- 自定义 `__deepcopy__` 三步：查 memo → 构造后**立即注册占位** → 再填子结构；先填子结构后注册在自引用上必 RecursionError。
+- 协议优先级：`__deepcopy__` 存在即完全接管（reduce 不再走）；`__copy__` 与之独立；策略与类绑定用钩子、与场景绑定用 memo 预注入、随状态变则重构为显式 clone()。
+
+## 复盘追问
+- 自定义 __deepcopy__ 漏掉哪一步会爆栈、为什么？（构造副本后没有先写 memo[id(self)] 就递归拷子结构，自引用每层新建副本永远查不到入口，RecursionError）
+- "拷贝时替换连接对象"怎么落地、什么时候该放弃 deepcopy 写 clone()？（memo 预注入不动类定义、按调用点定制；策略随运行时状态变化时隐式协议承载不了，重构为显式 clone）

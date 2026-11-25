@@ -1,0 +1,109 @@
+---
+title: "[Q7794] prompt 前缀缓存命中率工程：什么改动会击穿 KV 缓存"
+date: 2026-11-25
+categories: [PythonAgent与LLM]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q7794 · prompt 前缀缓存命中率工程：什么改动会击穿 KV 缓存
+
+难度：P7 ｜ 标签：Agent、prompt cache、KV cache、前缀稳定性、成本、命中率
+
+基线：库知识库外知识卡，代码用标准库模拟——用 token 级最长公共前缀与计价模型算命中率，不调用外部 API。
+
+**问**：接入 prompt caching 后，账单只降了 8%，文档说"重复前缀可省 90% 输入成本"。排查发现命中率只有 12%。代码看起来每次都是同一套 system prompt + 工具定义，为什么会不命中？把"当前时间"从 system 挪到 user 末尾，命中率立刻到 80%——差别在哪？哪些看似无害的改动会击穿缓存？
+
+**答**：
+
+- **结论**：前缀缓存（KV cache / prompt cache）只认**从第一个 token 开始、逐 token 完全一致**的前缀；一旦某个位置不同，**该位置之后全部失效**，不是"部分命中"。所以命中率的本质是**最长公共前缀长度 / 总长度**。击穿缓存的常见改动，按"位置越靠前、伤害越大"排序：① system prompt 里拼当前时间/用户 ID/请求 ID/随机问候；② 工具定义的**顺序**、JSON 的 **key 顺序**、缩进与空白变化（序列化不稳定）；③ few-shot 示例随机采样或按请求变化；④ 多租户场景把租户名/权限拼在前面；⑤ 检索结果放在 system 之前（应该放最后）。反过来，**在末尾追加**用户问题、检索块、时间戳，不会影响前面已缓存的前缀。
+- **取舍**：命中率不是唯一目标，要同时看**缓存前缀长度、TTL、隔离粒度**。缓存按前缀块存储，前缀越长、复用越频繁越划算；但跨用户共享缓存有**数据泄漏**风险（缓存的是 KV，可能被侧信道/日志带出），多租户通常要按租户隔离 cache key——隔离会降低命中率，是安全成本。另一个取舍是"动态内容前置"带来的可读性/调试便利 vs 命中率：把工具定义、静态 few-shot 放前面，动态内容一律后置，是低成本高收益的纪律。
+- **实战**：某 Agent 每次请求在 system 开头拼 `Current time: {now}`，命中率 12%。把时间移到 user 消息末尾后命中率 80%，输入成本降 62%；进一步发现工具定义用 `json.dumps` 默认不排序 key，不同进程序列化顺序不同，又击穿了一部分——改成 `sort_keys=True` 并固定工具顺序后稳定在 88%。最后的边际收益来自"把检索块从 system 挪到 user 末尾"，因为它每次不同，放在前面等于每次全量失效。
+
+下面用 token 级 LCP 量化五种改动对命中率的影响。
+
+```python
+# prompt 前缀缓存: 最长公共前缀决定命中, 末尾追加不影响
+BASE = [
+    ("system", "You are a helpful assistant. Current date 2026-11-25. Be concise."),
+    ("tools", '{"name":"search","params":{"q":"str"}} {"name":"calc","params":{"expr":"str"}}'),
+    ("fewshot", "Q: 2+2? A: 4. Q: 3+3? A: 6."),
+    ("history", "user: hi assistant: hello"),
+    ("user", "今天天气如何"),
+]
+
+
+def flat(segments):
+    return " ".join(text for _, text in segments).split()
+
+
+def hit_tokens(a, b):
+    ta, tb = flat(a), flat(b)
+    n = 0
+    for x, y in zip(ta, tb):
+        if x != y:
+            break
+        n += 1
+    return n, len(ta)
+
+
+VARIANTS = {
+    "时间变化(在 system)": [(k, v.replace("2026-11-25", "2026-11-26")) for k, v in BASE],
+    "工具顺序互换": [BASE[0], ("tools", '{"name":"calc"} {"name":"search"}'),
+                     BASE[2], BASE[3], BASE[4]],
+    "工具 JSON 空白变化": [BASE[0], ("tools", BASE[1][1].replace(",", ", ")),
+                          BASE[2], BASE[3], BASE[4]],
+    "末尾追加一轮": BASE + [("user2", "那明天呢")],
+    "动态内容前置": [("user", "今天天气如何")] + BASE[:-1],
+}
+
+base_len = len(flat(BASE))
+print(f"[1] 基线 prompt {base_len} tokens")
+for name, segs in VARIANTS.items():
+    hit, total = hit_tokens(BASE, segs)
+    print(f"    {name:>14}: 命中 {hit:>2}/{base_len} = {hit / base_len:.0%}")
+    if name == "末尾追加一轮":
+        assert hit == base_len, "末尾追加不影响前缀"
+    if name == "时间变化(在 system)":
+        assert hit / base_len < 0.35, "前部动态内容只保住 system 开头很小一段"
+    if name == "动态内容前置":
+        assert hit <= 2, "把动态内容放最前面等于放弃缓存"
+
+# 成本账: 输入 $3/M, 缓存读 $0.3/M, 每次 10k 输入 tokens
+IN_LEN = 10_000
+PRICE, CACHED = 3.0, 0.3
+for rate in (0.0, 0.12, 0.8, 0.88):
+    cost = IN_LEN * ((1 - rate) * PRICE + rate * CACHED) / 1e6
+    print(f"[2] 命中率 {rate:.0%}: 单次输入成本 ${cost:.5f}, "
+          f"相对无缓存省 {rate * (1 - CACHED / PRICE):.0%}")
+assert 0.88 * (1 - CACHED / PRICE) > 0.75
+print("    → 实测 命中率 88% 时省 79% 输入成本; 12% 只省 11%, 与'降 8%'一致")
+
+# 稳定化: 排序 key + 固定工具顺序 + 动态内容后置
+STABLE = [
+    ("system", "You are a helpful assistant. Be concise."),
+    ("tools", '{"name":"calc","params":{"expr":"str"}} {"name":"search","params":{"q":"str"}}'),
+    ("fewshot", "Q: 2+2? A: 4."),
+    ("history", "user: hi assistant: hello"),
+    ("user", "今天天气如何 | current time 2026-11-25"),
+]
+hit, _ = hit_tokens(STABLE, STABLE[:4] + [("user", "今天天气如何 | current time 2026-11-26")])
+print(f"[3] 稳定前缀 + 动态尾部: 命中 {hit}/{len(flat(STABLE))} = {hit / len(flat(STABLE)):.0%}")
+assert hit / len(flat(STABLE)) > 0.8
+print("    → 实测 前缀稳定性是可以设计的: 静态段在前且序列化确定, 动态段一律后置")
+```
+
+**追问一**：为什么只是改了一个空格，命中率也会归零？—— 缓存按 token 序列匹配，空格会影响分词：`{"a":1}` 与 `{"a": 1}` 可能产生不同的 token 序列（尤其在 BPE 里标点与空白的合并规则不同），从差异位置开始后面全不匹配。更隐蔽的是 **JSON key 顺序**：Python 3.7+ 的 dict 保序，但不同服务/不同版本的工具注册表可能产生不同顺序，`json.dumps` 不排序就会让同一份 schema 序列化成不同字节。工程纪律是：工具定义用 `json.dumps(..., sort_keys=True, separators=(",", ":"))` 生成，注册顺序固定，模板渲染不要引入随机空白。
+
+**追问二**：多租户共享前缀缓存，命中率更高，为什么很多团队还是选择隔离？—— 因为缓存的是**模型对前缀的内部表示**，虽然不直接返回原文，但通过计时侧信道、日志、调试接口可能推断出其他租户的内容；合规上"不同租户的数据不共享存储"通常是硬要求。隔离粒度可以是"每租户一个 cache namespace"，代价是冷启动多、命中率下降；折中是"公共 system/工具定义共享（不含租户数据）+ 租户相关内容放后面"，既保住大部分命中，又不跨租户泄漏业务数据。判断标准是前缀里有没有**租户私有信息**，有就必须隔离。
+
+## 背诵要点
+
+- 前缀缓存只认从第一个 token 起的完全一致前缀，差异点之后全部失效；命中率 = 最长公共前缀 / 总长度。
+- 击穿因素按位置排序：system 里的时间/ID、工具顺序与 JSON key 顺序、随机 few-shot、租户信息前置；末尾追加不影响。
+- 设计纪律：静态段在前且序列化确定（`sort_keys=True`、固定顺序、无随机空白），动态段（时间、检索块、用户输入）一律后置；私有数据按租户隔离。
+
+## 复盘追问
+
+- 同一套 system prompt 命中率却只有 12%，你先查什么？（打印实际请求的前 N 个 token 做 diff：时间戳、工具顺序、空白、租户前缀）
+- 为什么"把检索结果放 system 里"会显著降低命中率？（检索结果每次不同且位置靠前，等于每次请求的前缀从那里开始就变了）

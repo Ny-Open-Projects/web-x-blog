@@ -1,0 +1,103 @@
+---
+title: "[Q7796] 两个 judge 打分差了 40 分：双 judge 分歧仲裁与分歧率的信号价值"
+date: 2026-11-25
+categories: [PythonAgent与LLM]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q7796 · 两个 judge 打分差了 40 分：双 judge 分歧仲裁与分歧率的信号价值
+
+难度：P7 ｜ 标签：LLM-as-judge、双judge、分歧仲裁、一致率、异构judge、仲裁回流、标注规范
+
+基线：Python 3.12；模拟双 judge 独立判分与分歧升级链（一致直采 / 分歧送强模型仲裁 / 极端分歧送人工），量化一致率、仲裁成本与分歧样本的价值，全标准库实跑。
+
+**问**：评测把单 judge 换成双 judge 提高可信度，结果发现两 judge 对同一批答案的打分方差很大：有的差 5 分（可接受），有的差 40 分（一个 60 一个 95），极端案例还出现方向相反（一个说好一个说差）。双 judge 的分歧该怎么定义和分级？仲裁链怎么设计才不把成本烧爆？分歧样本本身有什么价值？
+
+**答**：
+
+- **结论**：分歧的分级要按**判定后果**分，不按分差绝对值分：① **量化分差**（同向、差值小）——对"分数均值型"指标影响小，取均值或去极值均值即可，不升级；② **档位翻转**（分数跨过及格线/门槛线）——直接改变"通过率"这类决策指标，必须升级；③ **方向对立**（一个 pass 一个 fail，或理由互相矛盾）——说明至少一个 judge 的理解是错的，或题目本身歧义，是最高优先级的信号。仲裁链按分歧等级分流：一致 → 直采；量化分差 → 均值采纳（可选抽检）；档位翻转 → 强模型仲裁（第三次判定，少数服从多数）；方向对立 → 强模型仲裁 + 挂人工队列，且该用例标记"疑似歧义题"。**分歧率本身是信号**：健康评测集的双 judge 一致率应在 85~95%；一致率骤降通常意味着三类问题——judge 提示歧义（规则写糊了）、评测集混入边界题（好题但难判）、或某个 judge 侧变更（模型版本/参数漂移）。分歧不是要消灭的噪声，是定位评测系统缺陷的传感器。
+- **取舍**：① **成本账**：双 judge 本身是 2x 判定成本，仲裁再加第三判——预算内要控的是"仲裁占比"：分歧集中在少数题簇（某类题两 judge 永远吵）时，修题/修 rubric 比每次都仲裁便宜；用仲裁占比做阈值（如 >15% 触发 rubric 修订），而不是无限堆 judge；② **judge 同源问题**：两个 judge 若是同一家模型不同参数，会犯同型错误（都偏好长答案），一致率高是**共谋**不是可靠——双 judge 要异构（不同模型家族），宁可接受略低一致率换独立性；③ **仲裁结果的权威性**：强模型仲裁也非金标准，仲裁结果必须带"仲裁级"标记入库（直采/仲裁/人工），人工样本才是 rubric 校准的真金样本（Q7779 LLM-as-judge 校准与人工标注一致性的落地材料）；④ **分歧样本的复用**：分歧题是天然的高价值标注素材——它暴露了 rubric 的模糊地带，仲裁结果回流后（题干澄清、rubric 细化、评分锚点示例补充）能让下一轮一致率上升，形成"分歧 → 修订 → 一致率提升"的收敛循环。
+- **实战**：① 一致率分簇监控：总一致率之外，按用例类别/难度分簇看——总一致率 90% 但"内容安全类"只有 60%，比平均数更能定位 rubric 缺陷；② 仲裁队列的时效分层：档位翻转影响发布决策（阻塞回归门禁 Q1164），仲裁要小时级；方向对立疑似歧义题不阻塞发布（先剔除出本轮统计、标记待修），避免一条歧义题卡住整个评测跑批；③ 仲裁提示词独立版本管理：仲裁 judge 的提示与双 judge 不同（要给足上下文、说明双方打分与理由），单独快照与回归；④ 分歧仪表盘三指标：一致率（分簇）、仲裁占比（成本健康度）、人工升级率（rubric 成熟度），三者趋势与评测集修订记录对齐复盘。
+
+```python
+"""Q7796 双 judge 分歧仲裁: 分级定义 + 升级链 + 一致率信号。"""
+import statistics
+
+
+def classify_diff(s1: float, s2: float, gate: float = 80.0, big: float = 20.0) -> str:
+    """分歧分级: 量化分差(小) / 档位翻转(跨门槛) / 方向对立(同向性与大差)."""
+    diff = abs(s1 - s2)
+    same_side = (s1 >= gate) == (s2 >= gate)
+    if not same_side and diff > 5:
+        return "flip" if diff <= 40 else "oppose"      # 跨门槛 vs 方向对立(大差+反向)
+    if diff > big:
+        return "oppose" if not same_side else "gap"
+    return "minor"
+
+
+def arbitrate(s1: float, s2: float, level: str, strong_judge: float) -> tuple[float, str]:
+    """升级链: minor->均值; flip->强模型仲裁多数决; oppose->仲裁+挂人工."""
+    if level == "minor":
+        return (s1 + s2) / 2, "mean"
+    if level == "flip":
+        votes = [s1, s2, strong_judge]
+        near = min(votes, key=lambda v: abs(v - statistics.median(votes)))
+        return near, "arbitrated"
+    return strong_judge, "arbitrated+human"
+
+
+def run_batch(cases: list[dict], gate: float = 80.0) -> dict:
+    """跑批: 每题双 judge 判分 -> 分级 -> 仲裁; 汇总一致率/仲裁占比."""
+    stats = {"agree": 0, "arb": 0, "human": 0, "scores": [], "disagree_clusters": []}
+    for c in cases:
+        s1, s2 = c["j1"], c["j2"]
+        level = classify_diff(s1, s2, gate)
+        if level == "minor" and abs(s1 - s2) <= 5:
+            stats["agree"] += 1
+            stats["scores"].append((s1 + s2) / 2)
+        else:
+            stats["arb"] += 1
+            score, how = arbitrate(s1, s2, level, c["strong"])
+            stats["scores"].append(score)
+            if "human" in how:
+                stats["human"] += 1
+                stats["disagree_clusters"].append(c["cluster"])
+    n = len(cases)
+    return {**stats, "agree_rate": stats["agree"] / n, "arb_rate": stats["arb"] / n}
+
+
+if __name__ == "__main__":
+    cases = [   # (j1, j2, strong, cluster): 大部分一致, 少数分歧
+        {"j1": 88, "j2": 90, "strong": 89, "cluster": "qa"},
+        {"j1": 75, "j2": 72, "strong": 74, "cluster": "qa"},
+        {"j1": 92, "j2": 91, "strong": 92, "cluster": "sum"},
+        {"j1": 60, "j2": 95, "strong": 62, "cluster": "safety"},    # 档位翻转
+        {"j1": 55, "j2": 96, "strong": 58, "cluster": "safety"},    # 方向对立
+        {"j1": 81, "j2": 83, "strong": 82, "cluster": "qa"},
+        {"j1": 70, "j2": 95, "strong": 72, "cluster": "safety"},    # 档位翻转
+        {"j1": 85, "j2": 86, "strong": 85, "cluster": "sum"},
+        {"j1": 66, "j2": 68, "strong": 67, "cluster": "sum"},
+        {"j1": 78, "j2": 76, "strong": 77, "cluster": "qa"},
+    ]
+    r = run_batch(cases)
+    print(f"一致率 {r['agree_rate']:.0%} | 仲裁占比 {r['arb_rate']:.0%} | "
+          f"人工升级 {r['human']} 题")
+    print(f"人工升级题簇: {sorted(set(r['disagree_clusters']))}  <- safety 类 rubric 歧义")
+    print(f"分类演练: 88/90={classify_diff(88, 90)}, 60/95={classify_diff(60, 95)}, "
+          f"55/96={classify_diff(55, 96)}")
+    ok = (r["agree_rate"] == 0.7 and r["human"] == 1
+          and classify_diff(60, 95) == "flip" and classify_diff(55, 96) == "oppose"
+          and sorted(set(r["disagree_clusters"])) == ["safety"])
+    print(f"校验: 分级正确 + 仲裁链生效 + 分歧簇定位到 safety -> {'通过' if ok else '异常'}")
+    print("结论：分歧按后果分级(分差/翻档/对立), 仲裁链=均值->强模型多数决->人工;")
+    print("      分歧率是传感器: 分簇一致率定位 rubric 歧义, 仲裁占比守成本")
+```
+
+**追问一**：两个 judge 一致但都错（同源共谋偏差）怎么发现和防范？异构 judge 的"异构"要做到什么程度？
+
+→ 解析：共谋偏差的发现与防范：① **发现靠金标样本**——维护一小批"人工确标的锚点用例"（各档位分数、易错点明确），双 judge 每轮跑批时锚点必跑：锚点上的分数偏移（都偏高/都偏低/都偏好某种风格）就是共谋的直接证据，锚点判分曲线要独立于业务分数曲线监控；② **发现靠结构特征审计**——共谋偏差有可识别的模式：分数与答案长度正相关（都偏好长答案）、与格式规整度正相关、对同一错误类型集体失明（都看不出引用编造）；对已判分数做"分数 vs 结构特征"的相关性审计，异常相关即偏差指纹；③ **防范靠异构设计**——"异构"要异在三处：模型家族不同（不同预训练与对齐谱系，犯同型错误的概率才真正低）、提示模板独立（同一 rubric 的两种表述，避免提示层面的共同盲区）、参数独立（温度等采样配置各自合理）；更进一步可以做"双向盲评"（互相不知道对方存在与分数），防锚定；④ **接受的残余风险**——异构只降低不消除共谋：某些偏差是任务结构性的（LLM 天然偏好流畅文本），双异构 judge 也会同犯，这类偏差最终只能靠人工锚点与结构审计兜住，且 rubric 里要显式写"不因流畅/长度加分"这类反偏差规则（Q7779 校准闭环的输入）。总原则：**一致率高从来不是可靠性的充分证据——独立性与锚点校准才是；一致性指标必须与"对金标锚点的正确率"一起看，只看一致率的评测系统会把共谋当稳定。**
+
+**追问二**：仲裁结果回流后，怎么把它变成 rubric 的修订而不只是"该题的修正"？修订会不会反过来扰动历史分数的可比性？
+
+→ 解析：回流与可比性是评测集治理的成熟度标志：① **从单题修正到规则修订**——仲裁样本入库时做"归因三问"：这题为什么吵（题干歧义/边界状态/评分维度缺失/权重争议）？同类题会不会也吵（按簇扫描，凡同簇题目逐一过 rubric 对应条款）？修订是改题还是改 rubric（优先改 rubric——改题只修一个点，改 rubric 修一类）？修订产物是 rubric 的 diff（哪条评分条款细化、新增什么锚点示例）而不是只改题库；② **锚点示例的杠杆**——rubric 修订最有力的形式是"评分锚点"：把分歧题的两个答案连同仲裁理由做成 rubric 里的对照示例（90 分长这样、60 分长这样），judge 对锚点的跟随远强于抽象条款描述，一致率提升立竿见影；③ **历史分数可比性**——rubric 是判定器版本，修订即判定器变更：历史分数与新分数不再同基线，处理方式与 golden-file 审更同族（Q7277）：版本号绑定 rubric 版本，跨版本分数不直接对比；关键趋势指标（发布门禁）在 rubric 修订时做"双跑对照"（新旧 rubric 各跑一轮关键集，差值出报告）后切换；④ **修订频率的纪律**——rubric 修订按批次走（攒够一批分歧样本统一修，附仲裁证据），不逐题热改：逐题热改会让 rubric 版本碎片化、历史分数断代密集，可比性成本失控；批次修订 + 版本号 + 双跑对照，把"判定器演进"变成可审计的流水。总原则：**仲裁的价值不在修正一道题，而在暴露 rubric 的系统性模糊；回流要落到 rubric 版本上，可比性要靠版本纪律守住——否则修一次 rubric，历史趋势断一次代。**

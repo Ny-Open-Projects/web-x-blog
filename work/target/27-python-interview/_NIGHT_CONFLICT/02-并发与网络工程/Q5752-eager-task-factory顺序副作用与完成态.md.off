@@ -1,0 +1,107 @@
+---
+title: "[Q5752] eager_task_factory：create_task 同步起跑后的顺序副作用与完成态"
+date: 2026-11-25
+categories: [Python并发网络]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5752 · eager_task_factory：create_task 同步起跑后的顺序副作用与完成态
+
+难度：P7 ｜ 标签：asyncio、eager_task_factory、3.12、任务启动、执行顺序、Task 完成态、延迟优化
+
+**问**：为了把"大量微小 RPC 子调用"的尾延迟降下来，团队在服务启动时装了 3.12 的 `loop.set_task_factory(asyncio.eager_task_factory)`。上线后出现两类怪事：①父协程在 `create_task` 之后才设置的上下文（`state["token"] = ...`）子任务读不到，偶尔读到旧值；②`create_task` 返回的 Task 有时已经是 `done()`，异常在 `await` 之前就存进了 Task，错误上报的时间和调用栈都对不上。eager 启动到底改变了什么？它适合什么、不适合什么？
+
+**答**：
+
+- **结论**：默认 Task 的 `__init__` 只把协程包起来，第一次 `__step` 由事件循环在**下一个调度点**执行；`eager_task_factory` 换成一个在 `Task.__init__` 里就同步 `coro.send(None)` 的 Task：`create_task` 调用期间，子协程会一直跑到**第一个真正挂起**（`await` 一个未完成的 Future）或直接返回为止。于是执行顺序从"父继续 → 子起步"变成"子先跑一段 → 父继续"，父协程在 create 之后做的初始化对子任务不可见。如果子协程没有挂起点（纯计算/立即返回），Task 在 `create_task` 返回时就已经 `done()`，结果或异常已经存在 Task 里，回调（`add_done_callback`）会在下一次循环迭代被调度，而不是"等 await 才发生"。收益是省掉一次事件循环往返，微任务多时尾延迟明显下降；代价是**顺序语义变了**，任何依赖"create_task 之后父协程先执行"的代码都会翻转。
+
+- **取舍**：a) 适合"子任务与父任务无共享可变状态、且创建后马上 await"的场景（`gather` 一批 RPC、并行查多个缓存）；b) 不适合"先 create 再补上下文"的写法：要么把参数在 create 前准备好，要么用 `asyncio.create_task(coro, context=ctx)` 显式传 context；c) 不要在 eager 的创建路径里做阻塞 IO/CPU 重活：它现在跑在**调用者**的栈上，父协程会被同步卡住，"并发"退化成串行；d) 异常语义：eager 只影响"何时执行"，不影响"异常何时抛出"——异常仍存在 Task 里，`await` 时才抛；但"未 await 就 GC"的 "Task exception was never retrieved" 会更早出现，错误监控的时序要接受。
+
+- **实战**：事故形态是"灰度开启 eager 后，鉴权中间件偶发 401"——中间件在 `create_task(handle(req))` 之后才把用户信息写进 `contextvar`/`request.state`，默认调度下子任务总在父协程让出后才跑，所以能读到；eager 下子任务先跑，读到空值。修复：把上下文准备移到 create 之前，或显式 `context=copy_context()`；同时对"创建后立即 await"的批量调用保留 eager，对"fire-and-forget + 共享状态"的后台任务恢复默认工厂。第二个坑是延迟指标"看起来没降"：eager 只省了启动的一次 loop 往返，如果子任务本身要等网络，收益被 IO 淹没，别把它当银弹。
+
+```python
+# eager_task_factory: 同步起跑、顺序翻转、已完成 Task 与异常存放
+import asyncio
+
+log = []
+
+async def child(tag):
+    log.append(("start", tag))
+    await asyncio.sleep(0)
+    log.append(("end", tag))
+
+async def instant():
+    return 42
+
+async def boom():
+    raise ValueError("boom")
+
+async def main():
+    loop = asyncio.get_running_loop()
+
+    # 默认工厂: 父协程先继续, 子任务在下一个调度点才起步
+    t0 = loop.create_task(child("default"))
+    log.append(("parent", "after-create"))
+    print("→ 默认工厂的前两步:", log)
+    assert log[0] == ("parent", "after-create")
+    await t0
+    log.clear()
+
+    # eager 工厂: 创建时同步跑到第一个挂起点
+    loop.set_task_factory(asyncio.eager_task_factory)
+    t1 = loop.create_task(child("eager"))
+    log.append(("parent", "after-create"))
+    print("→ eager 工厂的前两步:", log)
+    assert log[0] == ("start", "eager")
+    assert ("end", "eager") not in log          # 卡在 sleep(0) 的挂起点
+    assert not t1.done()
+    await t1
+    assert ("end", "eager") in log
+    log.clear()
+
+    # 没有挂起点的协程: create_task 返回时已经完成
+    t2 = loop.create_task(instant())
+    print("→ 立即返回的 Task: done =", t2.done(), "result =", t2.result())
+    assert t2.done() and t2.result() == 42
+
+    # 异常也是"提前执行、延迟抛出": create_task 不抛, await 才抛
+    t3 = loop.create_task(boom())
+    assert t3.done()
+    try:
+        await t3
+    except ValueError as e:
+        print("→ 异常在 await 时才抛出:", e)
+    else:
+        raise AssertionError("应该抛 ValueError")
+
+    # 顺序副作用: 父协程 create 之后才写的状态, 子任务读不到
+    state = {}
+    async def read_state():
+        return state.get("token")
+    t4 = loop.create_task(read_state())
+    state["token"] = "secret"
+    print("→ 子任务读到的 token:", await t4)
+    assert await t4 is None                     # eager 已经跑完, 读到空
+
+    loop.set_task_factory(None)                 # 恢复默认, 避免影响后续
+    t5 = loop.create_task(read_state())
+    assert await t5 == "secret"                 # 默认调度下父先写, 子后读
+
+asyncio.run(main())
+```
+
+**追问一**：eager 启动省掉的"一次事件循环往返"到底值多少？为什么对微小任务收益大、对网络调用几乎无感？—— 默认 `create_task` 后，Task 要等 loop 处理完当前回调、进入下一轮 `_run_once`，才被 `call_soon` 调度执行；这中间至少一次队列插入 + 一次 loop 迭代（微秒级）。对"纯内存、几十微秒完成"的任务，这一次往返占比很高，批量 1000 个就能省几毫秒；对"要等 5ms 网络"的任务，省掉的几微秒可以忽略。所以 eager 的正确用法是"短任务 + 高频 + 无共享状态"，而不是"所有任务都开"。另一个隐性收益是减少 loop 上的待调度队列长度，降低尾部的调度抖动。
+
+**追问二**：eager Task 与 `gather`/`TaskGroup` 一起用时，顺序和异常聚合会变吗？—— 会变但不变坏：`gather` 仍然是"先创建所有子任务，再等它们"，eager 只是让每个子任务在创建时就推进到第一个挂起点，所以"所有子任务都起步"这件事发生得更早；如果某个子任务在第一个挂起点之前就抛异常，`gather` 仍然在 `await` 时看到它（异常存在 Task 里），不会在 `create_task` 处炸。`TaskGroup` 的取消语义也不变：它监听的是子任务完成/异常事件，eager 只是让事件更早到达。真正需要小心的是"子任务在 eager 阶段就修改了共享状态"——`gather` 的调用方通常假设"创建阶段无副作用"，这个假设在 eager 下不成立。
+
+## 背诵要点
+
+- `eager_task_factory` 让 Task 在 `create_task` 内同步跑到第一个挂起点；无挂起的协程返回时已 `done()`，结果/异常已在 Task 里。
+- 顺序从"父先继续"变成"子先跑一段"，父协程 create 之后写的共享状态/context 子任务可能读不到；参数要在 create 前备好。
+- 收益是一次 loop 往返，适合短小高频任务；阻塞逻辑、fire-and-forget + 共享状态、依赖创建顺序的代码不要开。
+
+## 复盘追问
+
+- 为什么默认工厂下子任务总在父协程让出后才执行，eager 下却可能先跑完？（默认首次 __step 由 loop 调度；eager 在 Task.__init__ 里同步 send）
+- eager 下如何保证子任务看到父协程刚设置的值？（create 前设置，或显式传 context；不要依赖"创建后父协程先执行"）

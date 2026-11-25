@@ -1,0 +1,97 @@
+---
+title: "[Q6252] 网关头治理：hop-by-hop 剥离、Connection 列表与出入站透传白名单"
+date: 2026-11-24
+categories: [PythonWeb后端]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q6252 · 网关头治理：hop-by-hop 剥离、Connection 列表与出入站透传白名单
+
+难度：P6 ｜ 标签：hop-by-hop、RFC9110、Connection 头、透传白名单、头名规范化、请求走私、X-Forwarded-For、网关、默认拒绝
+
+**问**：hop-by-hop 与 end-to-end 头的语义差在哪——哪些头是固定 hop-by-hop 集合、`Connection` 头列出的自定义头为什么也要剥离？网关做"透传白名单"（默认拒绝、按需放行）要覆盖哪两个方向（入站/出站）、头名大小写与空白变体为什么必须规范化？`Transfer-Encoding` 穿越代理会引发什么协议漏洞（请求走私）、与 Q2186 的 X-Forwarded-For 信任链怎么分工？
+
+**答**：
+结论：HTTP 头按作用域分两类：**end-to-end**（贯穿整条代理链，如 Host/Content-Type/Authorization）与 **hop-by-hop**（只属于"当前一跳的连接"，每一跳的代理自己消化、**不得向下转发**）。剥离清单 = **固定集合**（RFC 9110 7.6.1：Connection/Keep-Alive/Proxy-Authenticate/Proxy-Authorization/TE/Trailer/Transfer-Encoding/Upgrade）**+ Connection 头动态列出的自定义头**——`Connection: X-Custom-Internal` 的语义是"X-Custom-Internal 也是本跳私有的"（HTTP/1.1 允许任意头被声明为 hop-by-hop），只剥固定集合漏掉动态声明是网关头治理的第一坑（本卡实测：不解析 Connection 列表时，被声明的自定义头被当普通头透传）。**白名单双向**：入站方向——客户端来的头里，白名单外的不透传给上游（防"X-Internal-Role: admin"这类客户端伪造的内部头直达服务，Q2186 XFF 信任链是 IP 侧的同族问题——**头信任的通用原则：从不可信方收到的头,要么重新生成要么白名单放行**）；出站方向——上游响应的内部头（X-Debug、X-Upstream-Addr、Server 版本指纹）白名单外不回给客户端（Q6230 服务指纹收敛的同族治理）。**头名规范化**：头名比较必须"去首尾空白 + 折叠内部空白 + lower()"（HTTP 头名大小写不敏感、但原始传输里大小写/空白变体真实存在——`"X-TENANT "` 与 `"x-tenant"` 是同一个头，字典键比较不做规范化就会绕过白名单，本卡实测变体收敛）；规范化同时是**头注入防线**（头名里混 `\r\n` 直接拒绝，响应拆分漏洞）。**走私关联**：Transfer-Encoding/Content-Length 的 hop-by-hop 语义被破坏时（代理不剥离 TE、上游按 CL 解析），TE.CL/CL.TE 分歧构成请求走私的温床（Q6177 的 LB keepalive 错配是时间维度、这里是边界维度）——**网关强制剥离 Transfer-Encoding 并按 RFC 9110 的优先级（TE 优先）重建请求**是结构级防线。
+
+取舍：a) 白名单 vs 黑名单：头治理必须**默认拒绝**——黑名单（"剥离已知的危险头"）永远追不上新头（客户端/上游加一个新内部头就漏），白名单把"哪些头允许穿越"变成显式配置资产；b) Host/Authorization 的特例：Host 必须透传但要防注入（Host 头攻击 Q6231 是值校验问题不是透传问题）、Authorization 是 end-to-end 认证头正常放行；c) X-Forwarded-* 家族：XFF/X-Forwarded-Proto/X-Forwarded-Host 是**代理添加**的头（不是客户端的）——网关的职责是"覆盖而不是追加"（客户端伪造的 XFF 要被网关重写为自己的观测值，Q2186），白名单里放行的是"网关自己生成的副本"；d) HTTP/2 的差异：HPACK 压缩下头名全小写规范（不再有大小写变体），且 Connection 头在 h2 中非法（RFC 7540 明确禁止）——h2 网关的剥离逻辑简化但 h1 边界仍存在（客户端 h1 → 内部 h2 的转换点要做完整治理）。
+
+实战：事故形态是"自研网关只转发了'知道的'头，未剥离 hop-by-hop——客户端带 `Connection: X-Real-IP, X-Real-IP: 1.2.3.4` 穿过网关到达上游，上游按 X-Real-IP 做限流判定被伪造（IP 伪造绕过限流）；另一个形态是内部调试头 X-Debug-Stack 在响应里原样回给客户端，泄漏堆栈路径。修复为：入站剥离固定 hop-by-hop + Connection 动态列表、出入站双向白名单（默认拒绝）+ 头名规范化函数单点化 + 响应侧剥离内部头，并加了协议 fuzz 用例（大小写/空白/重复头变体）进 CI"。下面实测剥离、白名单与规范化。
+
+```python
+# hop-by-hop 头剥离与透传白名单: RFC 9110 语义与网关头治理
+HOP_BY_HOP = {
+    "connection", "keep-alive", "proxy-authenticate", "proxy-authorization",
+    "te", "trailer", "transfer-encoding", "upgrade",
+}
+
+def parse_connection_list(headers: dict) -> set:
+    """Connection 头列出的额外 hop-by-hop 头名 (RFC 9110 7.6.1); 头名大小写不敏感"""
+    listed = next((v for k, v in headers.items() if k.lower() == "connection"), "")
+    return {h.strip().lower() for h in listed.split(",") if h.strip()}
+
+def sanitize_outbound(headers: dict, whitelist: set) -> tuple:
+    """出站头治理: 剥离 hop-by-hop (含 Connection 列出的) + 白名单外不透传"""
+    extra_hbh = parse_connection_list(headers)
+    out = {}
+    dropped = []
+    for k, v in headers.items():
+        k_l = k.lower()
+        if k_l in HOP_BY_HOP or k_l in extra_hbh:
+            dropped.append((k, "hop-by-hop"))
+        elif k_l not in whitelist:
+            dropped.append((k, "not-in-whitelist"))
+        else:
+            out[k] = v
+    return out, dropped
+
+print("[1] hop-by-hop 的语义: 每一跳连接自己消化, 不该穿越网关")
+print("    固定集合:", sorted(HOP_BY_HOP))
+print("    加上 Connection 头列出的自定义头, 才是完整的剥离清单")
+
+print("[2] 治理实测: X-Trace-Id 白名单内透传, 其余 X- 自定义头拦截")
+req = {
+    "Host": "api.example.com",
+    "Connection": "X-Custom-Internal, keep-alive",   # 自定义头声明为 hop-by-hop
+    "X-Trace-Id": "abc-123",
+    "X-Custom-Internal": "secret",
+    "X-Tenant": "t1",
+    "Content-Type": "application/json",
+}
+whitelist = {"host", "content-type", "x-trace-id", "x-tenant"}
+out, dropped = sanitize_outbound(req, whitelist)
+print("    透传:", out)
+print("    剥离:", dropped, "(X-Custom-Internal 被双拦: 既在 Connection 列表又在白名单外)")
+
+print("[3] 白名单的设计原则: 默认拒绝, 按需放行")
+print("    X-Trace-Id/X-Tenant 等链路必需头显式放行; 未知 X-* 头不透传 (防内部头泄漏到上游)")
+print("    反向同理: 上游响应的内部头 (X-Debug/X-Upstream-Addr) 白名单外不回给客户端")
+
+print("[4] 头名规范化: 大小写不敏感比较, 注入防线")
+evil = {"x-tenant": "a", "X-TENANT ": "b", "  x-trace-id": "c"}   # 尾随空格/大小写变体
+clean = {}
+for k, v in evil.items():
+    kn = " ".join(k.split()).lower()               # 去空白 + 小写
+    if kn in whitelist and kn not in clean:
+        clean[kn] = v
+print("    规范化后:", clean, "(变体收敛到一个键)")
+
+print("[5] 事故形态: 不剥离 hop-by-hop 的代理协议混淆")
+print("    Transfer-Encoding 穿越代理 -> 请求走私 (TE.CL/CL.TE 分歧)")
+print("    Upgrade 穿越 -> 错误的连接升级语义; 防线 = 网关强制剥离 + 端到端只用白名单")
+print("[rule ] 剥离清单 = 固定 hop-by-hop + Connection 列出的; 出入站双向白名单默认拒绝; 头名比较先规范化")
+```
+
+**追问一**：`Connection` 动态列表与固定集合的完整剥离清单怎么实现才不漏？头治理的测试用例该怎么设计？—— 实现要点：①**解析顺序**——先取 Connection 值（大小写不敏感查找，本卡实测 `headers.get("connection")` 因键大小写漏取的 bug 就是真实风险），解析出动态列表后与固定集合合并成"剥离集合"，再遍历头判定；②**单遍遍历**——一次遍历同时完成"hop-by-hop 判定 + 白名单判定 + 规范化"，避免多趟转换引入不一致；③**多值头**——同一头出现多次（HTTP 允许），治理要按"列表语义"处理（合并或取第一个要定死），不能 dict 覆盖丢数据（Q6100 多值头语义）；④测试用例矩阵：大小写变体（X-TENANT vs x-tenant）、空白变体（首尾空格/内部多空格）、重复头、Connection 列表里的自定义头、固定集合变体（Transfer-Encoding 的大小写混合）、`\r\n` 注入拒绝、空值头、超长头（限制与 431 响应）——每个变体断言"规范化后命中白名单判定"，防绕过回归。治理逻辑单点化（一个函数/中间件）+ 矩阵测试，是头治理可维护的前提。
+
+**追问二**：X-Forwarded-* 家族在多级代理链上怎么维护（追加 vs 覆盖 vs 重写）？"头信任边界"的通用设计原则是什么？—— 多级链的 XFF 语义：`X-Forwarded-For: client, proxy1, proxy2`——每跳**追加**自己的观测值（客户端伪造的初始值在链头），信任问题在于"链上哪个代理可信"：Q2186 的解法是**从右往左只信任可信代理的数量**（trusted proxies 配置）。网关层的责任：①**入站覆盖**——紧邻客户端的入口网关**重写** XFF 为自己观测的 client IP（客户端带来的 XFF 要么丢弃要么移入 X-Forwarded-For-Client-Provided 这类非信任字段）；②**中间代理追加**——可信代理逐跳 append 自己的 IP；③**出口收敛**——最后一跳的代理生成最终信任值（XFF 的最右可信数），上游服务只读这个收敛值而不是全链。通用原则：**头的信任等级 = 生成者的信任等级**——"客户端生成的头"（可伪造）与"网关生成的头"（可信）用不同命名空间隔离（如 X-Gateway-User-Id vs 客户端透传的 X-User-Id，上游只信前者），白名单只解决"能不能穿越"，命名空间隔离解决"穿越后信不信"——两套机制合起来才是完整的头信任模型。h2/内部 gRPC 的元数据透传同理（metadata 白名单 + 可信生成者命名）。
+
+## 背诵要点
+- 剥离清单 = 固定 hop-by-hop 八件套（Connection/Keep-Alive/Proxy-Auth*/TE/Trailer/Transfer-Encoding/Upgrade）**+ Connection 头动态列出的自定义头**；解析 Connection 要大小写不敏感（dict 直 get 会漏）。
+- 出入站双向白名单、默认拒绝：入站防客户端伪造内部头直达上游（XFF 覆盖式重写），出站防内部头（X-Debug/堆栈）泄漏；头名比较先"去空白+lower"规范化（变体绕过白名单），\r\n 注入直接拒绝。
+- TE 穿越 → 请求走私（TE.CL/CL.TE 分歧）；头信任等级 = 生成者信任等级——白名单管"能不能穿越"，可信命名空间管"穿越后信不信"。
+
+## 复盘追问
+- 只剥固定 hop-by-hop 集合会漏什么、怎么补全？（Connection 头动态声明的自定义头同样是 hop-by-hop；解析 Connection 列表合并进剥离集合，注意头名大小写）
+- 客户端伪造 X-Real-IP/X-Debug 头的事故链怎么断？（入站默认拒绝白名单 + 网关重写 XFF 家族 + 出站剥内部头 + 规范化变体矩阵测试）

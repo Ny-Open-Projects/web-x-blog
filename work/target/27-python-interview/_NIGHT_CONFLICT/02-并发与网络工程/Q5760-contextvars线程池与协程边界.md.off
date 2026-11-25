@@ -1,0 +1,120 @@
+---
+title: "[Q5760] contextvars 在线程池与协程边界：谁复制上下文、谁在泄漏"
+date: 2026-11-25
+categories: [Python并发网络]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5760 · contextvars 在线程池与协程边界：谁复制上下文、谁在泄漏
+
+难度：P7 ｜ 标签：contextvars、ContextVar、copy_context、to_thread、run_in_executor、threading.local、上下文传播、泄漏
+
+**问**：一个混合模型服务：协程里用 `contextvars` 存 tenant/trace id，遇到阻塞库就 `loop.run_in_executor` 丢进线程池，偶尔也用 `asyncio.to_thread`。上线后出现两类问题：①线程池里的代码读到的 tenant 是 `None`，把数据写错了库；②某些请求的 trace id 串到了下一个请求，日志里出现"请求 A 的事务里打印了请求 B 的 id"。`contextvars` 到底在哪些边界复制、哪些边界共享？`run_in_executor` 和 `to_thread` 为什么行为不同？怎么在混合模型里不泄漏？
+
+**答**：
+
+- **结论**：`ContextVar` 的值存在 `Context` 对象里，**不是存在线程里**。`asyncio.Task` 创建时会 `copy_context()` 得到一份快照，之后子任务对变量的 `set` 只改自己的副本，父任务看不到；`asyncio.to_thread(fn)` 会先复制当前上下文，再在 worker 线程里 `ctx.run(fn)`，所以线程里能看到调用时的值；而 `loop.run_in_executor(ex, fn)` **不复制上下文**，worker 线程执行的是它自己那份（通常是空的/default）——这就是"线程里 tenant 为 None"的原因。泄漏来自另一面：线程池的线程会被复用，worker 线程的 `Context` 在任务结束后**不会自动清空**，如果 `fn` 里 `set` 了变量且没有 `reset`，下一个提交到同一线程的任务会读到上一个任务的值；协程侧同理，`set` 之后不 `reset(token)`，同一 Task 后续逻辑（包括它创建的后台任务）都会继承脏值。
+
+- **取舍**：a) 需要"线程里看到协程上下文"时用 `to_thread`（自动复制），或者显式 `ctx = copy_context(); loop.run_in_executor(ex, ctx.run, fn, *args)`；b) 不要把一个 `Context` 对象并发交给多个线程 `ctx.run`：`Context` 不可重入，第二个会抛 `RuntimeError: cannot enter context ... already entered`，每个任务要各自 `copy_context()`；c) 线程池里改了上下文变量，要么在 `finally` 里 `reset(token)`，要么让每个任务用独立的 `copy_context()`，不要依赖"线程结束会清理"；d) `threading.local` 只适合"纯线程、无线程池复用、无协程"的场景；一旦有协程或线程池，它的生命周期与请求不匹配，应该换 `contextvars`；e) 请求级中间件用 `token = var.set(...)`，在 `finally` 里 `var.reset(token)`，这是唯一可靠的"请求结束即恢复"。
+
+- **实战**：事故形态是"多租户写错库"——协程里设置了 `tenant=A`，`run_in_executor` 调同步 ORM，worker 线程的 `Context` 里没有 tenant，ORM 拿到 `None` 后落到默认库；更隐蔽的是下一次请求复用了同一线程，读到了上一个请求残留的 tenant，把 B 的数据写进 A。修复：①所有跨线程调用统一走 `to_thread` 或显式 `ctx.run`；②在 worker 入口加断言"tenant 必须非空"，缺失直接失败而不是落到默认值；③线程池任务包一层 `token = var.set(value); try: ... finally: var.reset(token)`；④日志里同时打 `threading.get_ident()` 和 trace id，串号时能立刻定位是线程复用还是上下文没传。
+
+```python
+# contextvars: Task 复制、to_thread 复制、run_in_executor 不复制、线程复用泄漏
+import asyncio
+import contextvars
+import threading
+from concurrent.futures import ThreadPoolExecutor
+
+req = contextvars.ContextVar("req", default="<none>")
+local = threading.local()
+
+def sync_read():
+    return req.get()
+
+def sync_set(tag):
+    req.set("leaked-" + tag)
+    return req.get()
+
+def local_set(tag):
+    local.who = tag
+    return local.who
+
+def local_read():
+    return getattr(local, "who", "<unset>")
+
+async def main():
+    loop = asyncio.get_running_loop()
+    req.set("A")
+    # 1) Task 复制上下文: 子任务看得到父值, 写不回父
+    async def child():
+        seen = req.get()
+        req.set("child")
+        return seen
+    t = asyncio.create_task(child())
+    print("→ 子任务看到:", await t, "| 父任务仍是:", req.get())
+    assert await t == "A"
+    assert req.get() == "A"
+    # 2) to_thread 复制上下文
+    print("→ to_thread 读到:", await asyncio.to_thread(sync_read))
+    assert await asyncio.to_thread(sync_read) == "A"
+    # 3) run_in_executor 不复制: 读到的是线程自己的 default
+    with ThreadPoolExecutor(1, thread_name_prefix="worker") as ex:
+        print("→ run_in_executor 读到:", await loop.run_in_executor(ex, sync_read))
+        assert await loop.run_in_executor(ex, sync_read) == "<none>"
+        # 4) 线程复用导致泄漏: worker 里 set 之后不 reset
+        await loop.run_in_executor(ex, sync_set, "x")
+        leaked = await loop.run_in_executor(ex, sync_read)
+        print("→ 同一线程的下一个任务读到:", leaked)
+        assert leaked == "leaked-x"
+    # 5) threading.local 同样跨任务残留
+    with ThreadPoolExecutor(1) as ex:
+        await loop.run_in_executor(ex, local_set, "A")
+        print("→ threading.local 残留:", await loop.run_in_executor(ex, local_read))
+        assert await loop.run_in_executor(ex, local_read) == "A"
+    # 6) 显式传播: 每个任务各自 copy_context, ctx.run 带参数
+    ctx = contextvars.copy_context()
+    with ThreadPoolExecutor(1) as ex:
+        got = await loop.run_in_executor(ex, ctx.run, sync_read)
+        print("→ 显式 ctx.run 读到:", got)
+        assert got == "A"
+    # 7) 同一个 Context 不能并发进入
+    shared = contextvars.copy_context()
+    barrier = threading.Barrier(2)
+    def hold():
+        barrier.wait(1.0)
+        return req.get()
+    with ThreadPoolExecutor(2) as ex:
+        results = await asyncio.gather(
+            loop.run_in_executor(ex, shared.run, hold),
+            loop.run_in_executor(ex, shared.run, hold),
+            return_exceptions=True,
+        )
+    errors = [r for r in results if isinstance(r, RuntimeError) and "already entered" in str(r)]
+    print("→ 共享 Context 并发进入:", errors[0] if errors else "未触发")
+    assert errors
+
+    # 8) reset(token) 才是请求级恢复的正解
+    token = req.set("B"); assert req.get() == "B"
+    req.reset(token)
+    print("→ reset(token) 后恢复为:", req.get())
+    assert req.get() == "A"
+
+asyncio.run(main())
+```
+
+**追问一**：为什么 `Context` 不允许并发进入？`copy_context()` 复制的成本有多大？—— `Context` 是一个"栈式映射"，`ctx.run(fn)` 会把当前上下文切到它、执行、再切回；如果两个线程同时进入同一个 Context，变量写入会互相踩，且退出顺序无法保证恢复正确，所以实现用 `entered` 标志直接拒绝（快速失败优于静默错乱）。`copy_context()` 是浅拷贝：只复制"变量到值的映射"（Hamt 持久化结构，写时复制），不复制值本身，成本与上下文里的变量数量相关（通常几十到几百纳秒），所以"每个任务复制一份"是可接受的；但不要在高频循环里反复 `copy_context()`，也不要复制一个塞了几千个变量的巨型上下文。
+
+**追问二**：ASGI 服务里每个请求一个 Task，为什么还会出现"上下文串号"？—— 正常路径下，服务器为每个请求 `create_task`，Task 复制当时的上下文，请求之间天然隔离；串号通常来自三个地方：①**后台任务**：`asyncio.create_task` 在请求处理中途创建，它复制的是"当时"的上下文，如果之后请求又 `set` 了新值，后台任务看不到（不是串号，但会读到旧值）；②**线程池复用**：`run_in_executor` 不复制上下文且线程不清理，前一个请求在 worker 里 set 的值被下一个请求读到（本卡的核心）；③**手动复用 Context**：为了省复制而缓存一个 `Context` 反复 `run`，并发时直接报错，串行时则把上一个请求的值带进来。排查手段：在请求入口和 worker 入口各打一条"trace_id + context 快照"，对比就能看出是哪一层没传/没清。
+
+## 背诵要点
+
+- Task 创建时 `copy_context()` 快照，子任务写不回父；`to_thread` 复制上下文，`run_in_executor` 不复制（worker 读 default）。
+- 线程池线程会被复用，worker 里 `set` 不 `reset` 会泄漏给下一个任务；`threading.local` 同样残留，且与协程模型不匹配。
+- 显式传播用 `ctx = copy_context(); run_in_executor(ex, ctx.run, fn, *args)`，每个任务独立 copy；同一 Context 不能并发 `run`（already entered）。
+
+## 复盘追问
+
+- 为什么协程里 set 的 tenant，`run_in_executor` 里读到 None？（run_in_executor 不做 copy_context，worker 执行的是线程自己的上下文）
+- 请求 A 的 trace id 出现在请求 B 的日志里，有哪几种可能？（线程池上下文残留、缓存/复用 Context、后台任务继承了旧快照；逐层打快照定位）

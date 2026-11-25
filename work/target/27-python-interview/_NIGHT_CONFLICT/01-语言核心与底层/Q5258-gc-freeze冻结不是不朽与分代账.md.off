@@ -1,0 +1,80 @@
+---
+title: "[Q5258] gc.freeze() 的边界：冻结不等于不朽、get_objects 归零与 COW 收益的来源"
+date: 2026-11-25
+categories: [Python语言核心]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5258 · gc.freeze() 的边界：冻结不等于不朽、get_objects 归零与 COW 收益的来源
+
+难度：P7 ｜ 标签：gc.freeze、永久代、分代回收、COW、fork、get_objects、内存监控
+
+**问**：一个 pre-fork 服务在 fork 前 `gc.freeze()` 冻结了预热好的对象图，预期"所有 worker 共享只读页、RSS 不涨"，结果①内存监控大盘在 freeze 后显示"Python 对象数归零"，告警全灭；②某个大缓存对象在 `del` 之后确实被释放了，说明 freeze 并没有把它变成不朽；③RSS 还是涨了。`gc.freeze()` 到底把对象放到了哪里？它保证什么、不保证什么？为什么 `gc.get_objects()` 看不到它们？
+
+**答**：
+
+- **结论**：`gc.freeze()` 把当前所有被 GC 跟踪的对象从三个分代链表**移到永久代（permanent generation）**，并把这些对象从分代计数里扣除（`gc.get_count()` 归零、`gc.get_freeze_count()` 返回被冻结的数量）。永久代的对象**不参与任何循环 GC 扫描**：分代回收不会遍历它们、不会因它们触发阈值、不会在它们之间找循环引用。但它**不是 immortal**：引用计数照常工作，最后一个强引用消失时对象立刻释放（`weakref` 会变 None），只是"循环垃圾"再也收不到了——如果冻结的对象图里有环，那些环会泄漏到进程结束。`gc.get_objects()` 遍历的是三个分代链表，永久代不在其中，所以 freeze 之后它返回接近 0 个对象（只剩 freeze 之后新分配的），监控脚本如果用它算"存活对象数"会以为内存清零。`gc.unfreeze()` 把永久代整体移回最老的一代，恢复可回收性。
+
+- **取舍**：a) freeze 的收益在 fork 场景：子进程继承父进程的页，GC 扫描会读写对象的 header（`gc_refs`、tracing 位），把共享页弄脏触发 COW 复制；冻结后这些对象不再被扫描，省掉的是"GC 触碰"，不是"应用代码触碰"——应用逻辑仍然会改引用计数，那部分 COW 省不掉，所以 RSS 不会完全不涨；b) 代价是"循环垃圾永久泄漏"：预热阶段产生的环（异常 traceback、闭包、注册表）会被钉死，freeze 前应先 `gc.collect()` 清一轮，并确认对象图里没有大环；c) 时机：在"预热完成、fork 之前"冻结最划算；fork 之后在子进程里 freeze 只影响该子进程，且此时页已经被写过，COW 收益大打折扣；d) 不要用 freeze 做"内存优化"：它不释放内存、不压缩堆，只改变 GC 的扫描范围，常驻服务里 freeze 反而让后续产生的循环垃圾无法回收。
+  判断是否该 freeze 的方法很直接：如果进程不做 fork、也不追求 fork 后的共享页，freeze 几乎没有收益，只有"环泄漏"的风险。
+
+- **实战**：事故形态是"pre-fork + freeze 后，对象数监控归零，SRE 以为 worker 崩了而触发批量重启"。根因是监控用 `len(gc.get_objects())` 作为存活对象指标，而 freeze 把永久代从遍历范围里摘掉了。修复：监控改用 `gc.get_count()` + `gc.get_freeze_count()` + `tracemalloc` 的组合指标，并在 freeze 时打一条"frozen=N"的启动日志；另一个坑是"freeze 之后 RSS 仍涨"——团队以为 freeze 没生效，实际是应用在 fork 后不断创建请求对象，这些新对象不在永久代，照常分配、照常触发 GC；freeze 只保护"冻结那一刻的旧图"。最终规范：fork 前 `gc.collect(); gc.freeze()`，子进程启动后记录 `freeze_count`，并在退出时 `gc.unfreeze()`（便于 fork 出的孙进程/热重载复用同一解释器状态）。
+  验证 freeze 是否真的生效，不要看 RSS，要看 `gc.get_freeze_count()` 是否等于预热对象的数量级，以及 `gc.get_count()` 是否归零。
+
+```python
+# gc.freeze: 永久代、get_objects 可见性、引用计数仍然生效
+import gc
+import weakref
+
+class Node:
+    pass
+
+keep = [Node() for _ in range(5000)]
+gc.collect()
+base = len(gc.get_objects())
+print("→ freeze 前可见对象:", base, "| 冻结计数:", gc.get_freeze_count())
+assert base > 5000
+
+gc.freeze()
+frozen = gc.get_freeze_count()
+visible = len(gc.get_objects())
+print("→ freeze 后: freeze_count =", frozen, "| get_objects =", visible, "| get_count =", gc.get_count())
+assert frozen >= 5000
+assert visible < 50                     # 永久代不在分代链表里, 几乎看不到
+assert keep[0] not in gc.get_objects()  # 冻结对象对 get_objects 不可见
+
+# freeze 不是 immortal: 引用计数归零照样释放
+ref = weakref.ref(keep[0])
+del keep[0]
+print("→ 删除最后一个强引用后 weakref 是否为 None:", ref() is None)
+assert ref() is None
+
+# freeze 之后新分配的对象仍然被正常跟踪与回收
+fresh = Node()
+assert gc.is_tracked(fresh)
+fresh_ref = weakref.ref(fresh)
+del fresh
+assert fresh_ref() is None
+
+# unfreeze 把永久代移回最老一代, 对象重新可见
+gc.unfreeze()
+print("→ unfreeze 后: freeze_count =", gc.get_freeze_count(), "| get_objects =", len(gc.get_objects()))
+assert gc.get_freeze_count() == 0
+assert len(gc.get_objects()) > 1000
+```
+
+**追问一**：freeze 到底省了哪些 COW 写？为什么 RSS 还会涨？—— 循环 GC 的标记阶段会在每个被跟踪对象的 header 上读写 `gc_refs`（先复制引用计数、再减引用、再恢复），这些写落在对象所在页上，子进程一写就触发 COW 复制；freeze 把这些对象移出扫描范围，GC 不再碰它们的 header，父进程预热出的页就能在多个 worker 间保持共享。但省不掉的写有两类：①**引用计数**——应用代码每次 `Py_INCREF/DECREF`（哪怕只是把对象放进 list、传参、出作用域）都会改 header 的 `ob_refcnt`，这是 COW 的主要来源，freeze 管不了；②**新分配**——fork 之后创建的请求对象、缓存条目、日志字符串全在私有页上，RSS 必然涨。所以 freeze 的收益上限是"GC 扫描那部分写"，通常是个位数到十几个百分点的 RSS 降幅，不是"零 COW"。
+
+**追问二**：冻结的对象图里有循环引用会怎样？为什么必须在 freeze 前 `gc.collect()`？—— 循环垃圾的判定依赖 GC 从根出发做可达性分析；对象进了永久代后不再被扫描，即使整个环已经不可达，也不会被识别和回收——它们会一直占着内存到进程退出。预热阶段最容易产生环：异常 traceback 持有帧、帧持有局部变量、类注册表互相引用、`functools.lru_cache` 的闭包。正确顺序是"预热 → `gc.collect()` 清掉预热期产生的环 → 再 `gc.freeze()`"；如果先 freeze 再 collect，那些环已经被钉死，collect 也救不回来。另一个细节：`gc.freeze()` 是进程级的，fork 出的子进程继承冻结状态；子进程里 `unfreeze()` 只影响自己，不会改变父进程或其他 worker。
+
+## 背诵要点
+
+- `gc.freeze()` 把当前被跟踪对象移入永久代：GC 不再扫描、`get_count()` 归零、`get_freeze_count()` 记录数量；`gc.get_objects()` 看不到永久代。
+- freeze 不是 immortal：引用计数照常释放对象，但永久代里的**循环垃圾**永久泄漏；freeze 前必须 `gc.collect()` 清环。
+- COW 收益只来自"GC 不再写对象 header"，引用计数写与新分配仍在，RSS 不会零增长；fork 前 freeze 最划算，`unfreeze()` 可恢复。
+
+## 复盘追问
+
+- 为什么 freeze 后监控大盘显示对象数为 0？（`gc.get_objects()` 只遍历三个分代，永久代不在其中；监控要加 `get_freeze_count()`）
+- freeze 能替代"减少内存占用"的优化吗？（不能：它不释放/不压缩，只停止 GC 扫描；还会让环泄漏，收益仅限 fork 的 COW）

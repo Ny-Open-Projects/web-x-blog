@@ -1,0 +1,79 @@
+---
+title: "[Q5757] asyncio.add_signal_handler：信号回调的执行语义、协程投递与 Unix 边界"
+date: 2026-11-24
+categories: [Python并发网络]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5757 · asyncio.add_signal_handler：信号回调的执行语义、协程投递与 Unix 边界
+
+难度：P6 ｜ 标签：asyncio、add_signal_handler、signal、SIGUSR1、SIGTERM、Unix、Windows、信号回调、优雅关闭、create_task
+
+**问**：`loop.add_signal_handler(sig, callback)` 与 `signal.signal(sig, handler)` 差在哪——回调在什么线程、什么上下文里执行（能不能直接传协程）？为什么"信号处理函数里做复杂逻辑"在 asyncio 世界是反模式、协程怎么从信号回调里启动？Windows 为什么不支持（Q5521）、优雅关闭的标准接法（SIGTERM → 停收新请求 → 排空）在这套 API 下怎么落？
+
+**答**：
+结论：两套 API 的本质差异是**回调的执行上下文**：`signal.signal` 注册的 handler 由**内核在信号到达时打断主线程执行**（异步中断语义，任何时刻插进来，Q5680 的信号路由问题域），handler 里只能做"设置标志位"级别的最小动作（复杂逻辑在 Python 字节码层面随时可能被下一个信号打断，重入不安全）；`asyncio.add_signal_handler` 是**事件循环封装的信号源**——循环内部用自管道（self-pipe）把信号转为 fd 可读事件，信号到达后回调被**当作普通回调在事件循环内调度执行**（不打断任何代码，与 timer/callback 同队列），于是回调里可以安全地操作 loop 状态（create_task、call_soon、改共享数据无锁竞争——单线程循环语义保证）。三个关键语义：①**回调是普通函数不是协程**——直接传 async 函数只会返回 coroutine 对象被忽略（还能收到 "coroutine was never awaited" 警告），协程要用 `loop.create_task(sig_worker())` 从同步回调里投递；②**Unix only**——Windows 的 selector 子系统不支持把信号当 fd 事件，`add_signal_handler` 抛 `NotImplementedError`（Q5521 的跨平台差异清单第一项），跨平台代码用 `signal.signal` 设标志 + 循环内轮询的降级路径；③**remove 恢复默认**——`remove_signal_handler(sig)` 返回是否原先是自己注册的，恢复后信号退回默认行为（SIG_DFL 或先前 signal.signal 设置的 handler）。优雅关闭的标准接法（Q2905/Q602 的落地形态）：`add_signal_handler(SIGTERM, initiate_shutdown)` → 回调里 create_task(shutdown_coro)（停收新连接 → 排空在途请求 → 取消后台任务 → 关资源）——信号只是"扳机"，真正的关闭流程是协程（可 await、可超时、可捕获 CancelledError 收尾）。
+
+取舍：a) 为什么循环要封装信号：signal.signal 的中断语义与 asyncio 的协作式调度冲突——handler 在 await 中途打断协程代码、操作了半成品的循环状态，竞态不可推理；自管道方案把"异步中断"转为"循环内排队"，代价是信号处理延迟一个循环迭代（微秒级，可接受）；b) 信号集合的占用：add_signal_handler 会**接管该信号的默认行为**——注册 SIGINT 后 KeyboardInterrupt 不再抛出（Ctrl+C 被回调吃掉），要"两次 Ctrl+C 强杀"的运维习惯就丢了——生产惯例：SIGINT 注册时保留快速逃生（回调里第二次触发调 os._exit）；c) 信号密度与丢失：同一信号极短间隔多次到达可能合并（自管道写字节合并语义），信号处理要幂等（收到一次 SIGTERM 与三次效果一致）；d) 子线程注册的坑：add_signal_handler 必须在**事件循环所在主线程**调用（signal 模块本身也只在主线程有效，Q5680），测试里在子线程跑 loop 时注册会报 ValueError。
+
+实战：事故形态是"服务在 signal.signal(SIGTERM, handler) 的 handler 里直接调 `loop.run_until_complete(shutdown())`——handler 打断了正在运行的循环，run_until_complete 嵌套触发 RuntimeError；有时 handler 里改了共享 dict 造成偶发数据竞态。修复为 add_signal_handler + create_task 投递关闭协程，关闭流程拿到完整的事件循环语义（超时控制、排空、异常处理），且 Windows 开发机上走降级分支（标志位 + sleep 轮询）"。runbook 增补：验证关闭流程必须在**真实 SIGTERM**（docker stop / k8s rollout）下演练，mock 信号回调与真实信号的自管道路径不完全等价。下面实测注册、自发信号、协程投递与 remove。
+
+```python
+# asyncio.add_signal_handler: 执行语义与 Unix 边界
+import asyncio
+import signal
+
+received = []
+
+def on_sigusr1() -> None:
+    # 运行在事件循环内的普通回调: 不能 await, 不能阻塞
+    received.append("SIGUSR1-callback")
+    try:
+        asyncio.get_running_loop()
+        received.append("in-loop: True")
+    except RuntimeError:
+        received.append("in-loop: False")
+
+async def main() -> None:
+    loop = asyncio.get_running_loop()
+    print("[1] 注册: add_signal_handler 用普通回调 (不是协程)")
+    loop.add_signal_handler(signal.SIGUSR1, on_sigusr1)
+
+    print("[2] 自发信号: 回调在事件循环内执行")
+    import os
+    os.kill(os.getpid(), signal.SIGUSR1)
+    await asyncio.sleep(0.1)                 # 信号回调由循环调度
+    print("    received =", received)
+
+    print("[3] 协程不能直接当 handler: 包一层同步入口 + create_task")
+    async def sig_worker() -> None:
+        await asyncio.sleep(0.01)
+        received.append("worker-done")
+    def on_sigusr2() -> None:
+        loop.create_task(sig_worker())       # 同步回调里投递协程
+    loop.add_signal_handler(signal.SIGUSR2, on_sigusr2)
+    os.kill(os.getpid(), signal.SIGUSR2)
+    await asyncio.sleep(0.1)
+    print("    received =", received)
+
+    print("[4] remove_signal_handler: 退回默认行为 (或 SIG_DFL)")
+    ok = loop.remove_signal_handler(signal.SIGUSR1)
+    print("    removed SIGUSR1:", ok)
+
+asyncio.run(main())
+print("[rule ] add_signal_handler=Unix only; 回调是普通函数在循环内执行; 协程经 create_task 投递; 用完 remove")
+```
+
+**追问一**：为什么信号在 asyncio 里必须走"自管道"转事件？signal.signal 的中断语义与协作式调度冲突的具体形态是什么？—— 冲突形态：`signal.signal` 的 handler 由内核在**任意字节码边界**插入执行（C 层信号中断 → Python 检查 pending signal → 在下一条字节码前跑 handler），而 asyncio 循环的任何时刻都可能在操作内部数据结构（就绪队列、定时器堆、socket 状态机）——handler 里碰这些结构就是无锁竞态（主线程"同时"在两段代码里）。自管道方案：循环启动时创建 `os.pipe()`，信号 handler 只做一件事——**往管道写一个字节**（这在信号上下文里是 async-signal-safe 的最小动作），管道另一端注册进 selector——信号到达 → 管道可读 → 循环的常规 select 迭代里取出事件 → 调用用户回调。本质是把"内核异步中断"降维成"fd 就绪事件"，回调进入协作式调度的正常队列（不打断任何代码、与任务共享单线程语义）。信号的合并：管道写多个字节，循环一次读空——三次 SIGUSR1 可能只触发两次回调（或一次），信号处理的幂等纪律由此而来（统计类信号别依赖精确次数）。这个设计也解释了"为什么回调在循环内"：它就是循环的一个普通 IO 事件回调。
+
+**追问二**：优雅关闭里"SIGTERM 关闭协程"与"TaskGroup/在途任务取消"怎么串——信号触发后到进程退出的完整时序与超时兜底？—— 完整时序：①信号到达 → 关闭协程被 create_task 启动；②**停收**——listener 关闭/健康检查摘流（k8s 先摘 endpoint 再 SIGTERM，preStop 窗口配合）；③**排空**——等待在途请求完成（带总超时，如 30s，Q602 的分层），用 `asyncio.gather(*inflight, return_exceptions=True)` 或 TaskGroup 收敛；④**取消后台**——gather 后 `for t in all_tasks(): t.cancel()` + 等待 CancelledError 传播（cleanup 幂等，Q5516/Q5662 的取消风暴治理）；⑤**资源关闭**——连接池/文件句柄/日志 flush；⑥**退出**——协程正常 return 后 main 退出，进程以 0 退出。超时兜底：③的排空超时与④的取消等待都要有**硬截止**（`asyncio.wait_for` 或 `asyncio.timeout`）——排空卡住不能让 SIGTERM 后的进程永远不死（k8s terminationGracePeriodSeconds 到点 SIGKILL，来不及 flush 的数据全丢——grace period 要大于关闭流程的硬截止）。易错点：信号回调里直接 cancel 所有任务会跳过"先排空再取消"的顺序（在途请求被误杀）；关闭协程与主任务的耦合（main 在 gather 所有 worker 时被 cancel）要保证 CancelledError 从上到下传播一致。验证形态：CI 里向子进程发 SIGTERM 断言退出码与日志时序（停收→排空→取消→退出），docker/k8s 环境再验一轮真信号。
+
+## 背诵要点
+- signal.signal = 内核中断主线程（只做设标志级动作）；add_signal_handler = 自管道转 fd 事件，回调是**循环内的普通回调**（可安全 create_task/操作共享状态）。
+- 回调必须是普通函数，协程经 `loop.create_task()` 投递；注册会接管默认行为（SIGINT 的 KeyboardInterrupt 消失）；信号合并 → 处理要幂等；Unix only，Windows NotImplementedError。
+- 优雅关闭时序：信号 → 停收 → 排空（带超时）→ 取消后台 → 关资源 → 退出；grace period 要大于关闭硬截止，真 SIGTERM 演练才算数。
+
+## 复盘追问
+- 为什么 handler 里不能写复杂逻辑、自管道怎么解决？（内核任意字节码边界打断 → 操作循环内部结构是无锁竞态；自管道把信号降维成 fd 就绪事件，回调进协作式队列）
+- SIGTERM 后到进程退出有哪几步、每步的超时怎么配？（停收/排空/取消/关资源/退出，排空与取消各带硬截止；k8s grace period > 硬截止，防 SIGKILL 丢 flush）

@@ -1,0 +1,96 @@
+---
+title: "[Q5756] 应用层心跳与 TCP keepalive：半开连接探测与判死窗口设计"
+date: 2026-11-24
+categories: [Python并发网络]
+tags: [Python面试, 面试题, 27]
+type: 面试题
+---
+
+### Q5756 · 应用层心跳与 TCP keepalive：半开连接探测与判死窗口设计
+
+难度：P6 ｜ 标签：心跳、keepalive、半开连接、判死窗口、SO_KEEPALIVE、TCP_KEEPALIVE、missed 计数、抖动容忍、假活
+
+**问**：为什么"TCP 连接建立"不等于"对端应用还活着"——半开连接（一端崩溃另一端不知道）怎么形成？TCP keepalive 与应用层心跳各证明什么（"内核到内核通" vs "应用栈活着"）、粒度与默认参数差多少？应用层心跳的判死窗口怎么设计（为什么不能"超一个间隔就判死"、missed 计数怎么容忍抖动）？判死之后的动作链（主动断开/重连退避）怎么写？
+
+**答**：
+结论：TCP 是**虚拟连接**——对端崩溃且内核已死时，本端只要不发数据，TCP 层永远安静（FIN 不来、RST 不来），这条"半开连接"会一直挂在连接表里占资源；对端应用死了但内核活着（进程被 OOM 杀）时，本端发数据会收到 RST（内核回的），**进程死了与主机死了的探测成本不同**——主机断电/网络分区场景只有心跳能兜。两个探测层各证明一件事：**TCP keepalive**（`SO_KEEPALIVE=1` + 平台参数 `TCP_KEEPALIVE/TCP_KEEPINTVL/TCP_KEEPCNT`，macOS/Linux 常量不同要 getattr 安全取）证明"**内核到内核的路径通**"——但它发的是空探针，**对端应用卡死（事件循环阻塞、死锁）照样回 ACK**（内核代答），这是"假活"——keepalive 探不出应用层僵死；默认参数极粗（Linux 2h 间隔起步，Q5746 的 TCP_USER_TIMEOUT 是写方向的另一兜底）。**应用层心跳**（协议里带 ping/pong 帧，WebSocket 的 ping/pong、gRPC keepalive、MQTT PINGREQ）证明"**应用栈活着**"——pong 必须由应用代码生成，事件循环卡死/线程死锁时 pong 停，假活被戳破；代价是协议实现与应用层复杂度。**判死窗口设计**：不能"超过一个间隔没 pong 就判死"（网络抖动一次就误杀），正确模型是 **missed 计数**——每过 interval 无 pong 则 missed+1，**收到 pong 清零**（容忍偶发抖动），连续 `dead_after` 个周期无 pong 才判死——总判死窗口 ≈ dead_after × interval（本卡实测：interval=1s、dead_after=3，3.1s 判死；漏 1 个周期补上时只 missed=1 不误杀）。**判死后的动作链**：立即主动 close（不等 TCP 层超时——死链不主动关就堆 CLOSE_WAIT/半开，Q5724）→ 指数退避重连（防止对端恢复时的重连风暴，Q5603）→ 重连成功后重建会话状态（订阅、鉴权）。
+
+取舍：a) 参数与 SLA 的换算：判死窗口 = dead_after × interval 是**检测延迟**下限——窗口越小误杀越多（抖动容忍度低），越大死链挂得越久（故障检测时间变长）；经验比例 dead_after=3~5，interval 按"链路 RTT 的 10 倍左右"设（跨机房 50ms RTT 取 1s）；b) 单向 vs 双向心跳：客户端 ping 服务端 pong 是单向（省一半流量），但只证明"客户端视角服务端活"——服务端对客户端的活性靠"读超时"（多久没收到任何数据就断，数据本身也是活性证据）；双向心跳在两端都是"被动方需要检测主动方"时才用；c) 心跳与数据的互斥：任何业务数据到达也应视为活性证据（重置 missed）——"只有 pong 算活"会在繁忙连接上误判（数据狂奔但 pong 被限流丢弃的场景罕见但要定义清楚）；d) keepalive 的补充角色：不与应用层心跳互斥——keepalive 兜"TCP 层黑洞"（NAT 表项过期、中间设备静默丢弃），应用心跳兜"应用假活"，长连接两个都开，粒度不同互补。
+
+实战：事故形态是"自研推送网关的客户端半开堆积：用户杀 App（TCP 无 FIN），服务端连接表里这些连接'健康'，推送写进去全进发送缓冲——直到缓冲满水位告警才发现 30% 连接是死的；keepalive 默认 2h 根本来不及。修复为：应用层 ping/pong（interval=30s、dead_after=3，90s 判死）+ keepalive 参数调短兜底层 + 判死即 close 并在 metrics 上分'心跳判死/写失败判死'两个口径，半开占比从 30% 降到 <1%"。下面实测心跳状态机的抖动容忍与判死推演。
+
+```python
+# 应用层心跳 vs TCP keepalive: 状态机模拟与超时窗口设计
+import time
+
+class HeartbeatMonitor:
+    """应用层心跳: 超时窗口 = N * 间隔, 连续失败才断言死链 (时钟可注入以便模拟)"""
+    def __init__(self, interval: float, dead_after: int, now: float | None = None) -> None:
+        self.interval = interval
+        self.dead_after = dead_after          # 连续 miss 次数阈值
+        self.last_pong = now if now is not None else time.monotonic()
+        self.missed = 0
+        self.alive = True
+
+    def on_pong(self, now: float | None = None) -> None:
+        self.last_pong = now if now is not None else time.monotonic()
+        self.missed = 0                       # 收到 pong 清零 (抖动容忍)
+
+    def tick(self, now: float) -> str:        # now: 模拟时钟 (本卡用注入值演示)
+        if not self.alive:
+            return "already-dead"
+        while now - self.last_pong > (self.missed + 1) * self.interval:
+            self.missed += 1
+            if self.missed >= self.dead_after:
+                self.alive = False
+                return f"DEAD (连续 {self.missed} 个周期无 pong)"
+        return (f"ok (missed={self.missed}/{self.dead_after}, "
+                f"距上次 pong {now - self.last_pong:.2f}s)")
+
+print("[1] 心跳参数设计: 间隔与死亡窗口")
+print("    interval=1s, dead_after=3 -> 判死窗口 ~3s (不是 1s 就判死)")
+
+print("[2] 正常心跳: 每周期 pong 到达, missed 恒 0")
+m = HeartbeatMonitor(interval=1.0, dead_after=3, now=0.0)
+for t in (0.5, 1.2, 2.1, 3.0):
+    m.on_pong(now=t)
+    print(f"    t={t}: {m.tick(t)}")
+
+print("[3] 抖动: 漏 1 个周期但第 2 个补上 -> 只 missed=1, 不误杀")
+m2 = HeartbeatMonitor(interval=1.0, dead_after=3, now=0.0)
+m2.on_pong(now=0.0)                           # t=0 有 pong
+print("    t=1.4 (漏1):", m2.tick(1.4))
+m2.on_pong(now=1.9)                           # t=1.9 补上
+print("    t=1.9 补回:", m2.tick(1.9))
+
+print("[4] 断链: 连续 3 个周期无 pong -> 判死")
+m3 = HeartbeatMonitor(interval=1.0, dead_after=3, now=0.0)
+m3.on_pong(now=0.0)                           # t=0 有 pong
+for t in (1.1, 2.1, 3.1, 4.2):
+    r = m3.tick(t)
+    print(f"    t={t}: {r}")
+    if "DEAD" in r or "already" in r:
+        break
+
+print("[5] TCP keepalive 与应用层心跳的分工")
+print("    TCP keepalive: 内核层, 默认 2h 才探测, 间隔/次数可调但粒度粗, 只证明'内核到内核通'")
+print("    应用层心跳: 证明'应用栈活着' (事件循环没卡/业务线程没死/代理转发正常)")
+print("    半开连接: 一端崩溃, 另一端不知道 -> TCP keepalive 或应用层心跳二选一必须有一个")
+
+print("[6] 判死后的动作: 主动断开 + 重连, 不等 TCP 层超时")
+print("    死链不主动关 -> CLOSE_WAIT/半开堆积; 判死即 close + 指数退避重连")
+print("[rule ] 判死窗口 = dead_after*interval (抖动容忍); 收到 pong 清零; keepalive 证明内核通, 心跳证明应用活")
+```
+
+**追问一**：keepalive 的三个内核参数（间隔/单次间隔/次数）在 Linux 与 macOS 上怎么设、为什么"内核代答"让 keepalive 探不出应用假活？—— 参数：Linux 是 `TCP_KEEPIDLE`（空闲多久开始探测）/`TCP_KEEPINTVL`（每次探测间隔）/`TCP_KEEPCNT`（失败几次断）；macOS 没有 KEEPIDLE，对应 `TCP_KEEPALIVE`（空闲起点），INTVL/CNT 同名常量值不同——**跨平台设置用 getattr(socket, "TCP_KEEPALIVE", None) 探测再设**，缺了就跳过并记日志（本卡不实设参数，避免平台差异炸测试）。"内核代答"机制：keepalive 探针是**纯 TCP 层 ACK**，不需要唤醒应用进程——接收端内核直接回 ACK，哪怕用户态事件循环已经卡死（GIL 长持锁、死循环、GC 停顿），keepalive 全部成功——所以 keepalive 只能证明"内核协议栈活着"，**应用假活必须应用层心跳**（pong 由应用生成，卡死即停）。部署口径：keepalive 参数调短（如 60s/10s/3，90s 级检测）兜网络黑洞，应用心跳（30s×3）兜应用假活，两层独立配置互为冗余。
+
+**追问二**：心跳判死后的重连退避怎么防"风暴"？会话状态重建（订阅/鉴权）与"旧连接残留"怎么处理？—— 重连退避：①**指数退避 + 抖动**——1s、2s、4s…上限封顶（如 60s），加随机抖动（±20%）打散对端恢复瞬间的同步重连（重连风暴 Q5603 的容量账：万级客户端同时重连，服务端 Task 创建速率与 accept 队列都会过载）；②**上限与熔断**——连续 N 次失败后退避封顶并进入"半开探测"（每分钟试一次），避免无限重试打爆；③**批量错峰**——批量重连（服务重启后全体客户端重连）用客户端侧随机延迟（0~30s 散射）主动错峰。会话重建：重连后**必须重建**订阅列表/鉴权令牌（连接级状态全部失效）——用"重连后同步快照"模式：先鉴权、再拉当前订阅全集（而不是增量补），幂等可重入；旧连接残留的清理：服务端对新连接带同一 client_id 的旧连接做**踢旧**（关闭旧连接，Q6005 会话粘性的互斥语义），防"僵尸连接继续收推送"的双消费。闭环指标：重连原因分布（心跳判死/写失败/网络错误）、重连成功率、旧连接踢出数——三个数一起看才能区分"网络抖动"与"服务端重启"。
+
+## 背诵要点
+- 半开连接：对端崩溃无 FIN/RST，本端不发数据 TCP 层永远安静；进程死（内核回 RST）与主机死（无响应）探测成本不同。
+- TCP keepalive 证明"内核到内核通"（探针内核代答，探不出应用假活；Linux 默认 2h）+ 参数 KEEPALIVE/INTVL/CNT 跨平台 getattr；应用层心跳证明"应用栈活着"（pong 由应用生成，卡死即停）。
+- 判死窗口 = dead_after × interval（3~5 倍），missed 计数 + pong 清零容忍抖动；判死即 close（防 CLOSE_WAIT 堆积）+ 指数退避抖动重连 + 会话快照重建 + 踢旧防双消费。
+
+## 复盘追问
+- 为什么 keepalive 探不出"事件循环卡死"的对端？（keepalive 探针是纯 TCP ACK，内核代答不唤醒应用——应用假活只有应用层心跳能戳破）
+- 心跳判死窗口为什么不能等于一个 interval、参数怎么按 SLA 定？（单周期判死一次抖动就误杀；dead_after=3~5、interval≈RTT×10，窗口=检测延迟下限与误杀率的换算）

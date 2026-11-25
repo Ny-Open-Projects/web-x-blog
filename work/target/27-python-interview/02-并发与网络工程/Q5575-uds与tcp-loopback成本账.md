@@ -21,7 +21,10 @@ import socket, time, os, threading, sys
 N, MSG = 5000, b"m" * 64
 def serve(s, mode):                       # echo 服务
     while True:
-        c, _ = s.accept()
+        try:
+            c, _ = s.accept()
+        except OSError:
+            return                         # 主线程 close 后退出
         try:
             while True:
                 d = c.recv(4096)
@@ -33,22 +36,27 @@ def serve(s, mode):                       # echo 服务
             c.close()
 
 def bench(addr, family, tag):
+    path = "/tmp/q5575.sock" if family == socket.AF_UNIX else None
+    addr = path if path else addr
     s = socket.socket(family); s.bind(addr); s.listen(8)
     threading.Thread(target=serve, args=(s, tag), daemon=True).start()
     time.sleep(0.05)
-    c = socket.socket(family); c.connect(addr)
-    c.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1) if family == socket.AF_INET else None
+    c = socket.socket(family)
+    c.connect(s.getsockname() if family == socket.AF_INET else addr)
+    if family == socket.AF_INET:
+        c.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     t0 = time.perf_counter()
     for _ in range(N):
         c.sendall(MSG); assert c.recv(4096) == MSG
     dt = time.perf_counter() - t0
     c.close(); s.close()
-    try: os.unlink(addr) if family == socket.AF_UNIX else None
-    except OSError: pass
+    if path:
+        try: os.unlink(path)
+        except OSError: pass
     print(f"{tag}: {N} 次 64B ping-pong = {dt*1000:.0f}ms ({dt/N*1e6:.1f}us/次)")
 
 # 1) 同机小消息对比(macOS/Linux 都可跑, 绝对值看平台)
-bench(("/tmp/q5575.sock", ), socket.AF_UNIX, "UDS ")
+bench(None, socket.AF_UNIX, "UDS ")
 bench(("127.0.0.1", 0), socket.AF_INET, "TCP ")
 
 # 2) SO_PEERCRED 是 Linux 专属; mac 上演示不存在
@@ -58,11 +66,11 @@ print("SO_PEERCRED(Linux 对端 pid/uid 校验):", hasattr(socket, "SO_PEERCRED"
 p = "/tmp/q5575_left.sock"
 open(p, "w").close()
 try:
-    s = socket.socket(socket.AF_UNIX); s.bind((p,))
+    s = socket.socket(socket.AF_UNIX); s.bind(p)
 except OSError as e:
     print("残留 socket 文件导致 bind 失败:", e)
     os.unlink(p)
-    s.bind((p,)); print("unlink 后 bind 成功"); s.close(); os.unlink(p)
+    s.bind(p); print("unlink 后 bind 成功"); s.close(); os.unlink(p)
 
 print("python:", sys.version.split()[0])
 ```
