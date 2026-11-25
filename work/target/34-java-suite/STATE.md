@@ -7,7 +7,8 @@
 - M1 257 篇 ✅ / M2 12 篇 ✅ / M3 1629 篇 ✅ / M4 214 单元重写 ✅（QC 214/214 PASS）
 - `_posts/java-suite` 2112 篇 + images 188 + demos 8；hexo 全量 14302 files 通过
 - 导航页（courses/index.md + 根 index.md）34 号卡已补；COURSES.md 34 号行 + 计数基线 + 变更记录已登
-- 保活 cron automation-e817b99e 使命完成，可停
+- git: commit 1ac2faf5（含全站风格审计修复）已在远端；2026-11-21 二次 push a028994d 连带课程24/11收尾提交上远端——**任务 done**
+- 保活 cron automation-e817b99e 使命完成（已删）
 
 ## 过程要点（复盘索引）
 - 归档两坑：rsync 目标已存在会嵌套、先 chmod 只读会挡后续 mkdir → 脚本 v2 先拷后锁
