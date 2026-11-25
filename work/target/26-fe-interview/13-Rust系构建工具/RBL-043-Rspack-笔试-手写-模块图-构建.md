@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-043：笔试：手写模块图构建（含动态 import 与循环依赖标记）
-**题目**：实现 buildModuleGraph(entry)：1) 识别静态 import/export from 与动态 import() 两类依赖；2) 动态 import 的依赖标记为 async（不进入同步可达集）；3) 检测循环依赖并用 DFS 染色（白/灰/黑）标记回边；4) 输出 { modules: [{id, path, deps}], cycles }；5) 文件不存在时抛出带路径的错误。
+**答**：实现 buildModuleGraph(entry)：1) 识别静态 import/export from 与动态 import() 两类依赖；2) 动态 import 的依赖标记为 async（不进入同步可达集）；3) 检测循环依赖并用 DFS 染色（白/灰/黑）标记回边；4) 输出 { modules: [{id, path, deps}], cycles }；5) 文件不存在时抛出带路径的错误。
 
 ```javascript
 const fs = require('fs'), path = require('path');

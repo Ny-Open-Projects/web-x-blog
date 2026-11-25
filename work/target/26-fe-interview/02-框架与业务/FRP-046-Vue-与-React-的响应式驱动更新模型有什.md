@@ -40,3 +40,9 @@ const Child = memo(({ name }) => {
 // const count = computed(() => state.count); // 只在 state.count 变时重算
 // 总结：Vue 依赖关系显式记录在案（track），React 靠开发者用 memo 系列补充声明
 ```
+
+**追问**：
+
+1. React 为什么做不到 Vue 那样的精确更新？→ 没有运行期的依赖收集，函数组件每次执行都会重建整棵 vnode，只能在重算之后用 bailout（props/state 全等）把子树跳过，省的是 patch 而不是 render。
+2. React 的 bailout 在什么情况下会整体失效？→ 父组件 render 时新建了对象/函数 props、children 写成内联 JSX、或 context value 变化，浅比较失败会穿透 `memo`，这时候整棵子树照样重算。
+3. Vue 的 push 模型有没有变慢的场景？→ 一次交互触发上千个 effect 时，调度队列的排序与逐个 patch 是分散开销，不像 React 那样可以按优先级整体延后，所以 Vue 侧更依赖虚拟列表和控制更新规模。

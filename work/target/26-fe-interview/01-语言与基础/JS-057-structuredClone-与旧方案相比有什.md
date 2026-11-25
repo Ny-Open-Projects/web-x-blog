@@ -40,4 +40,10 @@ const bc = structuredClone(new Box());
 console.log(bc instanceof Box); // false
 ```
 
-## 八、Map/Set/WeakMap 与 Proxy/Reflect
+## 追问（补充）
+
+**追问**：
+
+1. 拷贝 ArrayBuffer 是共享内存还是复制？ → 默认是复制；用 `{ transfer: [buf] }` 则转移所有权，源端的 buffer 立刻变成 detached、byteLength 归零。
+2. 为什么类实例克隆后 `instanceof` 为 false？ → 算法只搬运可结构化克隆的数据，不复制原型链，结果的原型是 Object.prototype，方法全部丢失。
+3. 项目不支持 structuredClone 又需要 Date/循环引用，怎么降级？ → 用 `MessageChannel` 的 postMessage 做同构克隆，或手写带类型分支和 WeakMap 去重的深拷贝。

@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-191：笔试：手写 PR 构建报告生成器（聚合多 job 结果为一条评论）
 
-**题目**：写 pr-report.mjs：1) 输入多 job 结果数组（{job, status, durationSec, cacheHit, failedFiles?, sizeDelta?}）；2) 生成 markdown：状态总览表（图标 ✅/❌/⏭️）、总墙钟时间、缓存命中情况、产物体积变化、失败文件清单（可折叠 `<details>`）；3) 幂等：同一 PR 重复运行应更新而非追加（输出 signature 供查找已有评论）；4) 顶部摘要行：全绿或"3 个 job 失败"一句话；5) 数据缺失的 job 显示 skipped。
+**答**：写 pr-report.mjs：1) 输入多 job 结果数组（{job, status, durationSec, cacheHit, failedFiles?, sizeDelta?}）；2) 生成 markdown：状态总览表（图标 ✅/❌/⏭️）、总墙钟时间、缓存命中情况、产物体积变化、失败文件清单（可折叠 `<details>`）；3) 幂等：同一 PR 重复运行应更新而非追加（输出 signature 供查找已有评论）；4) 顶部摘要行：全绿或"3 个 job 失败"一句话；5) 数据缺失的 job 显示 skipped。
 
 ```javascript
 // pr-report.mjs

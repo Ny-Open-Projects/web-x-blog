@@ -14,6 +14,7 @@ type: 笔试题
 - 评分点：状态机（代码块开关）；仅行首判定。
 
 ```javascript
+const FENCE = '\u0060'.repeat(3);   // 三反引号围栏（码点构造，避免源码内出现字面围栏）
 const MD_RULES = [
   { re: /^###\s/, type: 'h3' }, { re: /^##\s/, type: 'h2' },
   { re: /^#\s/, type: 'h1' },
@@ -21,7 +22,7 @@ const MD_RULES = [
   { re: /^>\s/, type: 'quote' },
 ];
 function mdAutoFormat(block, key, codeState) {
-  if (key === 'Enter' && /^```\s*$/.test(block.text))
+  if (key === 'Enter' && new RegExp('^' + FENCE + '\\s*$').test(block.text))
     return { action: codeState.open ? 'close-code' : 'open-code', consume: true };
   if (key !== ' ') return null;
   for (const r of MD_RULES) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-128：笔试：手写多任务并行 runner（子进程 + 失败聚合）
-**题目**：写 run-tasks.ts：1) 并行执行给定命令列表（bun spawn 子进程）；2) 实时透传各任务输出（带任务名前缀）；3) 任一失败不立即退出，等全部结束后统一报告失败清单并 exit 1；4) 支持 maxConcurrency 限流；5) 总耗时输出。
+**答**：写 run-tasks.ts：1) 并行执行给定命令列表（bun spawn 子进程）；2) 实时透传各任务输出（带任务名前缀）；3) 任一失败不立即退出，等全部结束后统一报告失败清单并 exit 1；4) 支持 maxConcurrency 限流；5) 总耗时输出。
 
 ```typescript
 // run-tasks.ts —— bun run-tasks.ts "build:a" "build:b" "test"

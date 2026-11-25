@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-429：手写 CDN 预热器
-**需求**：实现 `createCdnWarmer(manifest, { concurrency })`：1) 目的：发布后预热边缘节点（避免首用户回源慢）——并发拉取全部产物；2) 关键路径优先：entry html 与首屏 chunk 先预热（优先级队列）；3) 预热验证：HEAD 请求确认可达 + 内容长度与 manifest 一致（防上传截断）；4) 失败重试与最终报告 { warmed, failed }；5) 区域并发控制（每 region 限速防打爆）；6) 跳过已是热点的（HEAD 命中且 ETag 匹配）。
+**答**：实现 `createCdnWarmer(manifest, { concurrency })`：1) 目的：发布后预热边缘节点（避免首用户回源慢）——并发拉取全部产物；2) 关键路径优先：entry html 与首屏 chunk 先预热（优先级队列）；3) 预热验证：HEAD 请求确认可达 + 内容长度与 manifest 一致（防上传截断）；4) 失败重试与最终报告 { warmed, failed }；5) 区域并发控制（每 region 限速防打爆）；6) 跳过已是热点的（HEAD 命中且 ETag 匹配）。
 
 ```javascript
 export async function createCdnWarmer(manifest, { baseUrl, concurrency = 8, regionLimit = 4 } = {}) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-233：手写：useTemplateRef 的实现原理（按名寻址的模板引用桥）
-**需求**：实现 `useTemplateRef(name)`：返回一个 ref；要求实例维护 `templateRefs` 注册表，`ref="name"` 挂载/卸载时自动写入/清空注册表与对应 ref，同名多次出现时收集为数组，useTemplateRef 返回的 ref 与注册表双向一致。
+**答**：实现 `useTemplateRef(name)`：返回一个 ref；要求实例维护 `templateRefs` 注册表，`ref="name"` 挂载/卸载时自动写入/清空注册表与对应 ref，同名多次出现时收集为数组，useTemplateRef 返回的 ref 与注册表双向一致。
 **评分点**：
 - 注册表与实例生命周期绑定（组件卸载清理）
 - 数组语义正确（v-for 场景）

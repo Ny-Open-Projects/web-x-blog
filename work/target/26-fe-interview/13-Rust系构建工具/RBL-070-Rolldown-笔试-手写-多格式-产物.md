@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-070：笔试：手写库打包产物 exports 映射生成器
-**题目**：给定 dist 目录文件清单与 package.json，生成合法的 exports 字段：1) 对 src 下每个 .ts 入口（index.ts、utils/format.ts）生成对应的 "." "./utils/format" 条目；2) 每条目含 import（.mjs）、require（.cjs）、types（.d.ts）三种条件；3) 条件顺序 types 在前（TS moduleResolution 惯例）；4) 无对应产物时跳过并警告；5) 写回 package.json 保持其他字段不变。
+**答**：给定 dist 目录文件清单与 package.json，生成合法的 exports 字段：1) 对 src 下每个 .ts 入口（index.ts、utils/format.ts）生成对应的 "." "./utils/format" 条目；2) 每条目含 import（.mjs）、require（.cjs）、types（.d.ts）三种条件；3) 条件顺序 types 在前（TS moduleResolution 惯例）；4) 无对应产物时跳过并警告；5) 写回 package.json 保持其他字段不变。
 
 ```javascript
 const fs = require('fs'), path = require('path');

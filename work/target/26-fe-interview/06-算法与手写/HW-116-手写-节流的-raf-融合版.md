@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-116：手写 rAF 融合节流——scroll/pointermove 事件每帧最多一次 + 帧内多次事件合并参数
 **答**：高频事件（scroll/pointermove）的最优节流不是定时器而是 rAF：每帧最多执行一次，且帧内多次触发**合并参数**（如取最后的 scroll 位置 + 标记方向变化），回调拿到的是"这一帧的净状态"。
 
 ```javascript

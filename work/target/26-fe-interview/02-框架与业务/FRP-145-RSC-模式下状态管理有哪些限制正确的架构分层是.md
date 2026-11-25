@@ -53,3 +53,11 @@ async function addToCart(id, qty) {
 }
 // 心智模型：服务端是"唯一的真相源"，客户端 state 只是 island 内的临时 UI 状态
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 客户端组件能 import 服务端组件来用吗？ → 不能直接 import 使用，但服务端可以把服务端组件作为 children/插槽 prop 传进客户端组件；这是跨边界组合的唯一合法通道，也是"客户端外壳包服务端内容"的标准写法。
+2. Server Action 和普通 REST 接口的本质差别在哪？ → 它不是新协议，而是编译成 POST 请求加内联 action id，框架负责序列化参数、校验 Origin（防 CSRF）并在完成后 revalidate 缓存；省掉了手写路由与手动失效。
+3. 如果一个页面所有组件都要交互，RSC 还有意义吗？ → 意义退化为传统 SSR 加 CSR。RSC 的收益全在"把取数与静态渲染留在服务端"：减少 client bundle、把请求瀑布收敛到服务端、避免敏感数据下发。

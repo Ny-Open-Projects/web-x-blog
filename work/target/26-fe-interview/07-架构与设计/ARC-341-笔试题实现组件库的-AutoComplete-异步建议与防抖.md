@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-341：笔试题：实现组件库的 AutoComplete 异步建议与防抖？
-**题目**：实现 AutoComplete：1) 输入防抖 300ms 后请求建议；2) 竞态处理（慢请求不覆盖新结果，AbortController）；3) 空值不发请求并清空建议；4) 键盘选择（上下+回车）；5) loading 态展示。
+**答**：实现 AutoComplete：1) 输入防抖 300ms 后请求建议；2) 竞态处理（慢请求不覆盖新结果，AbortController）；3) 空值不发请求并清空建议；4) 键盘选择（上下+回车）；5) loading 态展示。
 **评分点**：
 - 防抖实现正确（定时器清理）。
 - 竞态：每个请求带 AbortController，新请求 abort 旧请求；或用请求序号过滤过期响应。

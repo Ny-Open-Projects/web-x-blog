@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-487：手写状态层 SLO 计算器
-**需求**：实现 `createSloTracker({ target })`：1) `recordGood()/recordBad()`：滑动窗口事件流（保留最近 28 天按分钟桶压缩：每桶 good/total 计数）；2) `compliance()`：good/total 比率与 target 比较；3) `errorBudget()`：剩余错误预算 =（1-target）× total - bad，可透支为负；4) `burnRate(windowMin)`：近期错误预算消耗速率 vs 理想速率（快烧告警依据：>14x 快烧）；5) `report()` 输出 compliance/budget/burnRate 与建议动作（快烧→冻结发布）。
+**答**：实现 `createSloTracker({ target })`：1) `recordGood()/recordBad()`：滑动窗口事件流（保留最近 28 天按分钟桶压缩：每桶 good/total 计数）；2) `compliance()`：good/total 比率与 target 比较；3) `errorBudget()`：剩余错误预算 =（1-target）× total - bad，可透支为负；4) `burnRate(windowMin)`：近期错误预算消耗速率 vs 理想速率（快烧告警依据：>14x 快烧）；5) `report()` 输出 compliance/budget/burnRate 与建议动作（快烧→冻结发布）。
 
 ```javascript
 export function createSloTracker({ target = 0.999, windowMin = 28 * 24 * 60 } = {}) {

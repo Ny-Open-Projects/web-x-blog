@@ -31,3 +31,9 @@ performance.mark('sdk-init-start');
 init(); performance.mark('sdk-init-end');
 performance.measure('sdk-init', 'sdk-init-start', 'sdk-init-end');
 ```
+
+**追问**：
+
+1. `sendBeacon` 失败静默丢弃，那关键错误也丢怎么办？ → 错误类走单独通道并允许 localStorage 暂存、下次启动重试，性能类才允许丢，否则线上首错永远丢在卸页那一刻。
+2. 每 5s flush 一次，页面关闭时最后一批怎么保证发出？ → 监听 `visibilitychange` 与 `pagehide` 立即 flush，beacon 在卸载期仍可靠；不要用 unload 里同步 XHR 兜底，那会拖慢关闭。
+3. 「SDK 自身 CPU < 1%」怎么测才不是自说自话？ → 固定基准页跑 before/after 的长任务与 INP 对比，SDK 自报耗时只能证明它自己那几行，证明不了对页面的真实影响。

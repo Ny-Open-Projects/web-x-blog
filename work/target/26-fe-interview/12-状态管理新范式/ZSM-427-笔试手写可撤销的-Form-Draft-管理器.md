@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-427：手写可撤销的表单草稿管理器
-**需求**：实现 `createDraftManager(formId)`：1) `set(field, value)` 更新草稿（内存），debounce 1s 持久化到 storage；2) 撤销栈：按字段分组（同字段 800ms 内合并为一步）；3) `undo()` 撤销上一步（跨字段），`reset()` 清空草稿与历史；4) `restore()` 启动时从 storage 恢复（损坏/版本不符丢弃）；5) `submit()` 成功后清草稿与历史；6) undo 边界返回 changed 标志。
+**答**：实现 `createDraftManager(formId)`：1) `set(field, value)` 更新草稿（内存），debounce 1s 持久化到 storage；2) 撤销栈：按字段分组（同字段 800ms 内合并为一步）；3) `undo()` 撤销上一步（跨字段），`reset()` 清空草稿与历史；4) `restore()` 启动时从 storage 恢复（损坏/版本不符丢弃）；5) `submit()` 成功后清草稿与历史；6) undo 边界返回 changed 标志。
 
 ```javascript
 export function createDraftManager(formId, storage) {

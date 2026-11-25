@@ -51,3 +51,9 @@ const vm = new ViewModel(model, [['name', nameInput]]);
 vm.set('name', 'Jerry');
 console.log(nameLabel.textContent); // Jerry —— 数据变了视图自动更新
 ```
+
+**追问**：
+
+1. 组件化、微前端时代 MVC 还有意义吗，现代框架算哪一类？ → 算 MVVM 的变体：响应式代理替代手动同步、虚拟 DOM 承担视图更新；分层职责没变，只是数据绑定吃掉了 Controller 的一部分。
+2. 双向绑定在复杂表单里出了名难调试，你怎么看？ → 复杂状态改单向数据流加受控组件，双向绑定只留给叶子表单控件，避免一个值被多处写入还找不到源头。
+3. 让你评价"React 到底算 MVC 的 V 还是 MVVM"，怎么答？ → React 只提供视图层与状态原语，Controller 与 ViewModel 由业务代码承担，hooks 相当于把 VM 逻辑函数化，不必硬套字母。

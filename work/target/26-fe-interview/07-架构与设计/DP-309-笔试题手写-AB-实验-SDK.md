@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-309：笔试题：手写 AB 实验 SDK（曝光/快照/锁定）？
-**题目**：实现 Experiments SDK：1) get(name) 返回分组（首次判定并触发曝光事件 assignment）；2) 会话锁定（同一会话同分组，sessionStorage）；3) 埋点自动附加分桶快照；4) 跨实验互斥（同层互斥）。
+**答**：实现 Experiments SDK：1) get(name) 返回分组（首次判定并触发曝光事件 assignment）；2) 会话锁定（同一会话同分组，sessionStorage）；3) 埋点自动附加分桶快照；4) 跨实验互斥（同层互斥）。
 **评分点**：
 - 分桶 hash 正确 + 层 salt 正交。
 - 曝光事件直发不进批量队列（ARC-283）。

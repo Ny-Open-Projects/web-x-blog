@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-187：笔试：手写一个简化版 useOptimistic
-**题目**：实现 `useOptimistic(state, reducer)` 的核心机制（不必精确复刻 React 内部实现，语义对即可）：① 返回 `[optimisticState, addOptimistic]`；② `addOptimistic(action)` 立即把 reducer 应用到当前值上，UI 即时更新；③ 外部真实 state 变化（过渡结束）时自动回落到真实值并丢弃未确认的乐观值；④ 与 `startTransition`/`useTransition` 的 isPending 联动：过渡未结束时保持乐观态。
+**答**：实现 `useOptimistic(state, reducer)` 的核心机制（不必精确复刻 React 内部实现，语义对即可）：① 返回 `[optimisticState, addOptimistic]`；② `addOptimistic(action)` 立即把 reducer 应用到当前值上，UI 即时更新；③ 外部真实 state 变化（过渡结束）时自动回落到真实值并丢弃未确认的乐观值；④ 与 `startTransition`/`useTransition` 的 isPending 联动：过渡未结束时保持乐观态。
 
 ```tsx
 import { useState, useTransition, useRef } from 'react';

@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-149：手写多时区时间显示——Intl.DateTimeFormat timeZone 复用与相对时间降级链
 **答**：IM/跨境协作的多时区显示：① Intl.DateTimeFormat 实例按 locale+timeZone 缓存（HW-125 同款纪律）；② 相对时间（3 分钟前）用 Intl.RelativeTimeFormat 分档；③ 降级链：同日→时刻、同年→月日、跨年→完整日期（本地化格式自动正确）。
 
 ```javascript

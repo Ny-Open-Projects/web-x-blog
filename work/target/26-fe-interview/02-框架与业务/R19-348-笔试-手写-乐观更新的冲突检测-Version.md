@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-348：笔试：手写带版本冲突检测的乐观编辑
-**题**：编辑文档标题：乐观显示新标题；action 携带 baseVersion；服务端发现 version 不一致返回 CONFLICT + 服务端最新值；前端弹「覆盖 or 查看最新」选择。
+**答**：编辑文档标题：乐观显示新标题；action 携带 baseVersion；服务端发现 version 不一致返回 CONFLICT + 服务端最新值；前端弹「覆盖 or 查看最新」选择。
 
 ```javascript
 function TitleEditor({ doc }) {
@@ -45,6 +45,3 @@ function TitleEditor({ doc }) {
 - CONFLICT 分支：回滚乐观 + 展示双值让用户决策。
 - 覆盖路径重新发起 action（带上新 version 由服务端返回）。
 - 说明乐观锁 vs 最后写入胜出的取舍。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-e60852d4-eec8-44ee-9961-6548b9e3c3fa-cwd'; fi
-exit "$__zcode_status"

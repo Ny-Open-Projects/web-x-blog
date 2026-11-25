@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-140：笔试：手写一个 shouldRevalidate 决策引擎
-**题目**：RRv7 的 `shouldRevalidate` 决定 mutation 后 loader 是否重跑。实现通用决策器 `decideRevalidate(ctx)`：① 默认 true（action 后全重跑）；② 提交的 intent 在 loader 声明的 `skipIntents` 里 → false；③ 导航到同 URL 且 formData 为空（无效导航）→ false；④ action 返回错误（actionResult 有 error）→ false（数据没变不必刷）；⑤ 强制刷新参数 `forceRevalidate` 出现 → 无条件 true。
+**答**：RRv7 的 `shouldRevalidate` 决定 mutation 后 loader 是否重跑。实现通用决策器 `decideRevalidate(ctx)`：① 默认 true（action 后全重跑）；② 提交的 intent 在 loader 声明的 `skipIntents` 里 → false；③ 导航到同 URL 且 formData 为空（无效导航）→ false；④ action 返回错误（actionResult 有 error）→ false（数据没变不必刷）；⑤ 强制刷新参数 `forceRevalidate` 出现 → 无条件 true。
 
 ```ts
 type Ctx = {

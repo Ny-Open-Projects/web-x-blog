@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-137：手写大 JSON 流式解析——Worker 内分块解析 + 进度上报 + 结构回调（不全量驻内存）
 **答**：50MB JSON 用 JSON.parse 一次解析 = 主线程卡 2~5s + 双倍内存峰值。Worker 内流式方案：按字节块读取（File.slice / fetch reader）→ 增量解析顶层元素（JSON Lines 最简单；标准 JSON 用括号深度扫描切顶层元素）→ 每解析出一个元素回调主线程（进度 + 数据），不全量驻内存。
 
 ```javascript

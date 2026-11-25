@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-459：手写 Abort 传播器
-**需求**：实现 `createAbortScope(parent?)`：1) `scope.run(fn)`：fn 收到 scope 的 signal；2) 父 scope abort 时所有子 scope 级联 abort（监听父 signal）；3) `scope.onAbort(fn)` 注册清理回调（abort 时逆序执行，LIFO）；4) `dispose()`：abort + 清空回调 + 从父级解绑（防泄漏）；5) abort 后 run 直接 reject（AbortError）不再执行 fn；6) signal.reason 传播（子 scope 的 abort 原因继承父级）。
+**答**：实现 `createAbortScope(parent?)`：1) `scope.run(fn)`：fn 收到 scope 的 signal；2) 父 scope abort 时所有子 scope 级联 abort（监听父 signal）；3) `scope.onAbort(fn)` 注册清理回调（abort 时逆序执行，LIFO）；4) `dispose()`：abort + 清空回调 + 从父级解绑（防泄漏）；5) abort 后 run 直接 reject（AbortError）不再执行 fn；6) signal.reason 传播（子 scope 的 abort 原因继承父级）。
 
 ```javascript
 export class AbortScope {

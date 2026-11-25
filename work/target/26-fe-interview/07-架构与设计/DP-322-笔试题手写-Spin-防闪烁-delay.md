@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-322：笔试题：手写 Spin 防闪烁（delay + 全局嵌套计数）？
-**题目**：实现 Spin：1) delay 300ms 防闪烁（请求快完成不闪 loading）；2) delay 内完成则完全不显示；3) 全局 Spin 嵌套计数（N 个并发请求共享一个全屏 loading）；4) 组件卸载清理。
+**答**：实现 Spin：1) delay 300ms 防闪烁（请求快完成不闪 loading）；2) delay 内完成则完全不显示；3) 全局 Spin 嵌套计数（N 个并发请求共享一个全屏 loading）；4) 组件卸载清理。
 **评分点**：
 - 延迟显示逻辑正确（setTimeout + cleanup）。
 - 计数归零才隐藏。

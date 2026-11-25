@@ -25,3 +25,9 @@ bus.onmessage = ({ data }) => {
   if (data.type === 'refresh') rotateToken(data.token);        // 跟进续期
 };
 ```
+
+**追问**：
+
+1. BroadcastChannel 在旧浏览器或隐私模式不可用，同 Tab 的 storage 事件又不触发，怎么兜底？ → 特性检测后降级为定时轮询 storage 版本号，并在页面可见性变化时主动校验一次登录态。
+2. 三个 Tab 同时收到 401，怎么保证只刷新一次？ → 用 Web Locks 或基于 storage 的 leader 选举，只有一个 Tab 拿锁去刷新，其余 Tab 等广播结果再决定重放请求。
+3. HttpOnly Cookie 方案下，用户怎么知道自己在别的设备被踢下线了？ → 靠接口返回的特定错误码加上会话事件的长连接或轮询，收到即清本地态、跳登录并带 returnUrl。

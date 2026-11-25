@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-149：笔试：手写一个带失效的 Query 缓存层（TanStack Query 核心简化）
-**题目**：实现 `QueryClient` 的核心：① `fetchQuery(key, fn, { staleTime })`：缓存命中且未过期直接返回；② 过期（stale）后重新执行 fn，期间并发调用**共享同一 pending**（不重复请求）；③ `invalidateQuery(prefix)`：按 key 前缀失效（下次 fetch 强制重跑）；④ 同 key 不同参数序列化判等；⑤ staleTime=0 表示总是 stale。
+**答**：实现 `QueryClient` 的核心：① `fetchQuery(key, fn, { staleTime })`：缓存命中且未过期直接返回；② 过期（stale）后重新执行 fn，期间并发调用**共享同一 pending**（不重复请求）；③ `invalidateQuery(prefix)`：按 key 前缀失效（下次 fetch 强制重跑）；④ 同 key 不同参数序列化判等；⑤ staleTime=0 表示总是 stale。
 
 ```ts
 type QueryKey = readonly unknown[];

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-432：手写撤销操作的服务端协调
-**需求**：实现 `createServerBackedUndo(api)`：1) `apply(patch)`：本地应用 + 服务端提交，服务端返回 opId 与版本；2) `undo()`：取最后 op 生成逆 patch，本地应用 + 服务端提交 `api.undo(opId, baseVersion)`；3) 撤销与在途 apply 竞态：apply 未确认前 undo 排队等待（串行化）；4) 服务端拒绝撤销（该 op 已被他人依赖）→ 本地回滚撤销并提示；5) 全程幂等（opId 复用）。
+**答**：实现 `createServerBackedUndo(api)`：1) `apply(patch)`：本地应用 + 服务端提交，服务端返回 opId 与版本；2) `undo()`：取最后 op 生成逆 patch，本地应用 + 服务端提交 `api.undo(opId, baseVersion)`；3) 撤销与在途 apply 竞态：apply 未确认前 undo 排队等待（串行化）；4) 服务端拒绝撤销（该 op 已被他人依赖）→ 本地回滚撤销并提示；5) 全程幂等（opId 复用）。
 
 ```javascript
 export function createServerBackedUndo(api, store) {

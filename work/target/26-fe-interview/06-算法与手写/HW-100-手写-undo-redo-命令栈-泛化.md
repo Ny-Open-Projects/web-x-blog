@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-100：手写可泛化的 undo/redo 命令栈——命令对象接口、合并连续操作、容量上限
 **答**：命令模式 undo/redo：每个操作封装 {execute, undo}；连续同类操作（如连续打字）合并为一个命令（coalesce 窗口内）；栈容量上限丢最旧；redo 指针语义（新命令入栈清空 redo 分支）。与 ALG-199（画板场景）的差异是通用接口化。
 
 ```javascript

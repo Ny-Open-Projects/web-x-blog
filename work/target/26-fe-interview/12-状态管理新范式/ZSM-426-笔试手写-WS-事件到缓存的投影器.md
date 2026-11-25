@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-426：手写 WS 事件到缓存的投影器
-**需求**：实现 `createProjector(queryClient)`：1) `register(domain, handlers)`：为业务域注册投影规则（created/updated/deleted 事件 → 缓存操作）；2) `handle(event)`：按 event.domain 路由，幂等（event.id 去重，已处理跳过）；3) created/updated → setQueryData upsert 到列表缓存（含排序字段重排）；4) deleted → 列表缓存移除 + 详情缓存移除；5) 未注册域的事件计入 unknown 计数不处理；6) 处理失败不炸订阅循环（隔离 try-catch）。
+**答**：实现 `createProjector(queryClient)`：1) `register(domain, handlers)`：为业务域注册投影规则（created/updated/deleted 事件 → 缓存操作）；2) `handle(event)`：按 event.domain 路由，幂等（event.id 去重，已处理跳过）；3) created/updated → setQueryData upsert 到列表缓存（含排序字段重排）；4) deleted → 列表缓存移除 + 详情缓存移除；5) 未注册域的事件计入 unknown 计数不处理；6) 处理失败不炸订阅循环（隔离 try-catch）。
 
 ```javascript
 export function createProjector(qc) {

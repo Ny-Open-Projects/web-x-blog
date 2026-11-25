@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-435：笔试：从 schema 生成 mock 响应的最小实现。
-**题目**：schema `{field: type}`（type 支持 string/number/boolean/array:string）。实现 `mockFromSchema(schema, opts)`：按类型生成确定性假值（string→`mock-{field}`、number→1、array→[值,值]），可选按示例值优先。
+**答**：schema `{field: type}`（type 支持 string/number/boolean/array:string）。实现 `mockFromSchema(schema, opts)`：按类型生成确定性假值（string→`mock-{field}`、number→1、array→[值,值]），可选按示例值优先。
 
 ```javascript
 function mockValue(field, type, example) {

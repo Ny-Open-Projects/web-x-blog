@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-130：笔试：手写一个 RRv7 风格的路由匹配器（含动态段与嵌套）
-**题目**：实现 `matchRoutes(routes, pathname)`：① 扁平 routes 定义（含 `path` 与 `children`）；② 支持动态段 `:id`、可选段 `?`、通配 `*`；③ 返回匹配链（从根到叶的 branch，含每层 params）；④ 嵌套路径父子拼接（children 的相对路径）；⑤ index route（`index: true`）只在父路径精确匹配时命中。
+**答**：实现 `matchRoutes(routes, pathname)`：① 扁平 routes 定义（含 `path` 与 `children`）；② 支持动态段 `:id`、可选段 `?`、通配 `*`；③ 返回匹配链（从根到叶的 branch，含每层 params）；④ 嵌套路径父子拼接（children 的相对路径）；⑤ index route（`index: true`）只在父路径精确匹配时命中。
 
 ```ts
 type RouteDef = {

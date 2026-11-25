@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-463：ISR fallback 三态状态机
-**需求**：实现 `createIsrFallback({ mode })`，mode ∈ 'blocking' | 'true' | 'false'：1) 未缓存路径首次请求：blocking → 同步渲染返回 200（首访慢但可直接 SEO）；'true' → 立即返回占位 + 触发后台生成；'false' → 直接 404（预生成清单外的路径不存在）；2) 生成完成后写缓存，'true' 的后续访问走缓存；3) 同一路径生成中再有请求：blocking 排队等待同一 promise（单飞），'true' 继续返回占位不排队；4) 生成失败保留旧值，无旧值时 blocking 返 500、'true' 继续占位。
+**答**：实现 `createIsrFallback({ mode })`，mode ∈ 'blocking' | 'true' | 'false'：1) 未缓存路径首次请求：blocking → 同步渲染返回 200（首访慢但可直接 SEO）；'true' → 立即返回占位 + 触发后台生成；'false' → 直接 404（预生成清单外的路径不存在）；2) 生成完成后写缓存，'true' 的后续访问走缓存；3) 同一路径生成中再有请求：blocking 排队等待同一 promise（单飞），'true' 继续返回占位不排队；4) 生成失败保留旧值，无旧值时 blocking 返 500、'true' 继续占位。
 
 ```javascript
 export function createIsrFallback({ mode, render }) {

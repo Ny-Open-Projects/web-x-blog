@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-063：笔试：手写一个简化版 Hydration 校验器
-**题目**：实现 `hydrateCheck(serverHTML, rootEl)`，模拟水合一致性校验：① 按 DOM 节点顺序比较服务端 HTML 字符串解析结果与客户端实际 DOM 的标签名；② 发现第一个不一致时返回 `{ ok: false, path, expected, actual }`；③ 全一致返回 `{ ok: true }`。
+**答**：实现 `hydrateCheck(serverHTML, rootEl)`，模拟水合一致性校验：① 按 DOM 节点顺序比较服务端 HTML 字符串解析结果与客户端实际 DOM 的标签名；② 发现第一个不一致时返回 `{ ok: false, path, expected, actual }`；③ 全一致返回 `{ ok: true }`。
 
 ```ts
 type Mismatch = { ok: false; path: string; expected: string; actual: string } | { ok: true };

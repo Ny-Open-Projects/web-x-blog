@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-047：笔试：手写增量构建的模块缓存失效器（脏标记扩散）
-**题目**：给定模块图 { id, deps, parents }，实现 invalidate(changedId)：1) 把变更模块标记 dirty；2) 沿 parents 反向传播 dirty（依赖它的模块都要重编）；3) 遇到已 dirty 的模块剪枝（避免指数扩散）；4) 返回本次需要重编的模块 id 列表；5) 支持 contenthash 相同则剪枝（同内容变更可优化传播）。
+**答**：给定模块图 { id, deps, parents }，实现 invalidate(changedId)：1) 把变更模块标记 dirty；2) 沿 parents 反向传播 dirty（依赖它的模块都要重编）；3) 遇到已 dirty 的模块剪枝（避免指数扩散）；4) 返回本次需要重编的模块 id 列表；5) 支持 contenthash 相同则剪枝（同内容变更可优化传播）。
 
 ```javascript
 class InvalidationTracker {

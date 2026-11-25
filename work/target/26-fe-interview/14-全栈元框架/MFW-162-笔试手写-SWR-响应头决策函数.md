@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-162：笔试：手写一个 SWR 响应头决策函数
-**题目**：实现 `swrHeaders(input)`：① 输入含内容类型、敏感度、TTL 偏好；② 输出合规 Cache-Control：敏感内容一律 `private, no-store`；公开内容 `public, s-maxage=N, stale-while-revalidate=M`，且 M ≥ 2N；③ 请求带 `Authorization` 头时降级为 private 缓存（浏览器可用、CDN 不共享）；④ TTL=0 时输出 `no-cache`（可缓存但需校验）而非 no-store；⑤ 产出同时含 `Age`/`X-SWR-Source` 观测头（缓存命中来源）。
+**答**：实现 `swrHeaders(input)`：① 输入含内容类型、敏感度、TTL 偏好；② 输出合规 Cache-Control：敏感内容一律 `private, no-store`；公开内容 `public, s-maxage=N, stale-while-revalidate=M`，且 M ≥ 2N；③ 请求带 `Authorization` 头时降级为 private 缓存（浏览器可用、CDN 不共享）；④ TTL=0 时输出 `no-cache`（可缓存但需校验）而非 no-store；⑤ 产出同时含 `Age`/`X-SWR-Source` 观测头（缓存命中来源）。
 
 ```ts
 type Input = {

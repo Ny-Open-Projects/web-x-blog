@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-471：手写构建平台 SLO 计算器
-**需求**：实现 `createSlo({ targets })`：1) 多 SLO 并行追踪：构建成功率/缓存命中率/P95 时长——各自独立滑窗；2) 分母规则：成功率排除用户代码错误（用户错误是正常信号）——分母分类是 SLO 设计核心；3) 错误预算：每 SLO 独立预算，burn rate 分级（>14x 冻结合流）；4) 按维度切片：按分支（main 与 feature SLO 分开）/按团队（谁在消耗预算）；5) report() 输出各 SLO 达成/预算余量/烧速率/建议动作。
+**答**：实现 `createSlo({ targets })`：1) 多 SLO 并行追踪：构建成功率/缓存命中率/P95 时长——各自独立滑窗；2) 分母规则：成功率排除用户代码错误（用户错误是正常信号）——分母分类是 SLO 设计核心；3) 错误预算：每 SLO 独立预算，burn rate 分级（>14x 冻结合流）；4) 按维度切片：按分支（main 与 feature SLO 分开）/按团队（谁在消耗预算）；5) report() 输出各 SLO 达成/预算余量/烧速率/建议动作。
 
 ```javascript
 export function createSlo({ targets }) {

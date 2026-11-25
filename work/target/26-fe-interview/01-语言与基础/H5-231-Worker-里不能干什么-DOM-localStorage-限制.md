@@ -25,3 +25,9 @@ self.addEventListener('message', async ({ data }) => {
 });
 console.log(navigator.hardwareConcurrency);   // ✅ 决定 Worker 池大小
 ```
+
+**追问**：
+
+1. Worker 里能直接用 IndexedDB 吗，还是必须让主线程代劳？ → 能直接用，IndexedDB 本身就是异步 API 且 worker 可用；注意主线程与 worker 共享同一个库，版本升级要统一处理 `onupgradeneeded`。
+2. 为什么规范偏偏不给 Worker 暴露 localStorage？ → 它是同步 API，会阻塞线程并与主线程共享同一份存储，容易引入竞态；替代方案是 IndexedDB，或把值 postMessage 给主线程读写。
+3. SharedWorker 和 ServiceWorker 的限制一样吗？ → 都无 DOM；ServiceWorker 更严，没有 window、同步 XHR 不可用，且会被随时终止，不能把状态放内存，必须持久化。

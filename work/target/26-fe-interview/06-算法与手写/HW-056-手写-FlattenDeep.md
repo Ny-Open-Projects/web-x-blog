@@ -29,7 +29,7 @@ function flattenDeepPro(arr) {
       // 倒序压栈，保证 pop 出来的顺序与原数组一致
       for (let i = next.length - 1; i >= 0; i--) stack.push(next[i]);
     } else {
-      result.push(next);        // 稀疏空位在解构时已变 undefined，行为与 flat 对齐
+      result.push(next);        // 注意：spread 已把空位变成 undefined，与 flat 不一致（flat 剔除空位）
     }
   }
   return result;
@@ -53,3 +53,18 @@ function flattenDeepIndex(arr) {
 ```
 
 ---
+
+## 补充：评分点与变体
+
+**评分点**：
+
+- 迭代版用显式栈时 pop 得到的是反序，必须压栈时逆序 push 或改成索引指针正向遍历，否则结果顺序整体颠倒
+- 展开判据只用 `Array.isArray`，不展开 arguments 与类数组是合理取舍，但要主动说明这条边界
+- 稀疏数组与 undefined 要明确策略：`flat` 会**剔除**空位（`[1,,3].flat()` → `[1,3]`）、`map` 保留空位但不调用回调、`[...arr]` 把空位变成 undefined，三者行为都不同，混用会埋坑
+- 复杂度 O(n)（n 为叶子总数，每元素进出栈常数次），递归版深度受调用栈限制约一万层
+
+**变体与延伸**：
+
+1. 十万层嵌套如何不爆栈 → 迭代加显式栈，JS 没有尾调用优化，只能靠迭代而非递归改写
+2. 要同时展开类数组 → 用 Array.from 归一化，或把判据放宽到带 length 的对象并处理字符串误判
+3. 要求不改原数组 → 新建结果数组，元素仍是引用（浅拷贝），嵌套其中的对象不会被复制

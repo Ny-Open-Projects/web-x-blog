@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-305：笔试题：手写性能预算 CI 检查器？
-**题目**：实现 budgetCheck(buildStats, budget)：1) 体积预算逐 chunk 对比（gzip 后）；2) 预算继承（page 继承 base 预算，可覆盖）；3) 冻结期规则（date 在冻结窗口 → 超预算即 fail，平时 warn）；4) 输出报告结构（violations 列表）。
+**答**：实现 budgetCheck(buildStats, budget)：1) 体积预算逐 chunk 对比（gzip 后）；2) 预算继承（page 继承 base 预算，可覆盖）；3) 冻结期规则（date 在冻结窗口 → 超预算即 fail，平时 warn）；4) 输出报告结构（violations 列表）。
 **评分点**：
 - 预算合并（继承+覆盖）正确。
 - 级别判定正确（冻结期 error / 平时 warn）。

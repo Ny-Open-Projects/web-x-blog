@@ -43,3 +43,9 @@ export function inc() { count += 1; }
 // inc();
 // console.log(count);  // 1 —— ESM 是活引用；CJS 下拿到的永远是快照 0
 ```
+
+**追问**：
+
+1. ESM 的 live binding 遇到循环依赖会怎样？ → 可能先拿到尚未初始化的绑定，访问时抛 ReferenceError（TDZ）；要用函数延迟访问，避免在模块顶层立即求值。
+2. 为什么 ESM 能做 tree-shaking 而 CJS 不行？ → ESM 的导入导出是静态结构，编译期即可确定；CJS 的 require 是运行时表达式，打包器无法静态判断用了哪些导出。
+3. 打包器怎么把 CJS 交给浏览器运行？ → 用 interop 包装：把 module.exports 映射为 default 导出，并打上 `__esModule` 标记，供运行时区分。

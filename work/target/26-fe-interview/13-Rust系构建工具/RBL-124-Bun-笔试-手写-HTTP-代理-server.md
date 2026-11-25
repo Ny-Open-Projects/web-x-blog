@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-124：笔试：手写 Bun 版开发代理 server（转发 + 跨域头）
-**题目**：用 Bun.serve 实现 dev proxy：1) /api/* 请求转发到 http://localhost:8080（保留方法/头/体）；2) 响应注入 CORS 头；3) 非 /api 路径返回静态文件（dist 目录）；4) 上游失败返回 502 且带错误信息；5) 支持 rewrite 规则（/api/user → /users）。
+**答**：用 Bun.serve 实现 dev proxy：1) /api/* 请求转发到 http://localhost:8080（保留方法/头/体）；2) 响应注入 CORS 头；3) 非 /api 路径返回静态文件（dist 目录）；4) 上游失败返回 502 且带错误信息；5) 支持 rewrite 规则（/api/user → /users）。
 
 ```typescript
 const UPSTREAM = 'http://localhost:8080';

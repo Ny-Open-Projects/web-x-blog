@@ -53,3 +53,11 @@ flowchart LR
     A --> H[服务端渲染 server-renderer nuxt]
     A --> I[调试 vue-devtools]
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. Vue 的流式 SSR 支持 React 那种乱序补丁吗？ → 不完全。Vue 按 Suspense 边界顺序输出，先发 fallback，边界就绪后再补送对应片段与替换脚本；不支持任意乱序拼接，边界划分因此要按"慢数据在后"的顺序设计。
+2. 流式输出时组件里的 onMounted 会执行吗？ → 不会。服务端不跑 onMounted，只在客户端 hydrate 后才触发；服务端准备数据要用 setup 里的 await 或 onServerPrefetch，否则首屏拿到的是空数据。
+3. 用 hydrateOnInteraction 懒水合，用户点击前的事件会丢吗？ → 实现上会先在容器上做事件代理拦截，触发水合后再派发，所以正常不丢；但水合失败或组件抛错时这次交互会静默丢失，需要补一个兜底提示。

@@ -41,4 +41,10 @@ async function profile(canvas) {
 // WebGPU 生态（Three.js WebGPURenderer 等）在成熟中，新项目可评估
 ```
 
-## 二十五、表单与输入工程
+## 追问（补充）
+
+**追问**：
+
+1. 什么情况下 Canvas 2D 反而比 WebGL 快？ → 元素少、以文本和矢量为主、频繁 `getImageData` 读回像素，或设备 GPU 弱/被驱动黑名单时；WebGL 的上下文创建和纹理上传开销反而更大。
+2. 分层 canvas（2D 底 + WebGL 叠）要注意什么？ → 两层宽高必须按同一 devicePixelRatio 设置，靠 DOM 顺序决定合成层级；WebGL 层要开 alpha 并用透明清屏，否则会把底层盖住。
+3. 怎么确认瓶颈在绘制而不是 GC？ → Rendering 面板看栅格化/合成耗时是否占满帧；Memory 面板若出现周期性锯齿说明是 GC，此时应先减少对象分配而不是换图形栈。

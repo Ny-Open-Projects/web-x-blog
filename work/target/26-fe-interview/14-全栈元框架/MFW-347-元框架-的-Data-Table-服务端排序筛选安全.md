@@ -6,7 +6,7 @@ tags: [前端面试, 笔试题, MFW]
 type: 笔试题
 ---
 
-## MFW→347：排序筛选安全
+## MFW-347：排序筛选安全
 
 **答**:
 - 攻击面一：orderBy 直拼（`?sort=price;DROP` 或 private 字段排序探测——salary desc 按响应差异推断数据）——白名单映射（sortKey→列枚举表，未知 key 400）

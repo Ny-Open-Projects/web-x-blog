@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-284：笔试：手写授权封装
-**题**：实现 ensureAuth(scope, { degradate })：getSetting 已授权直接过；未请求过调 wx.authorize；已拒绝则弹「去设置」引导 wx.openSetting，仍拒绝执行 degradate 降级回调；返回 Promise<boolean>；记录拒绝状态防重复打扰。
+**答**：实现 ensureAuth(scope, { degradate })：getSetting 已授权直接过；未请求过调 wx.authorize；已拒绝则弹「去设置」引导 wx.openSetting，仍拒绝执行 degradate 降级回调；返回 Promise<boolean>；记录拒绝状态防重复打扰。
 
 ```javascript
 async function ensureAuth(scope, { degradate } = {}) {
@@ -39,6 +39,3 @@ async function ensureAuth(scope, { degradate } = {}) {
 - 拒绝后走 openSetting 而非重复 authorize（原生框不再弹）。
 - degradate 降级回调与布尔返回双出口。
 - 首次拒绝的「场景延迟触发」理念（说出即可）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-c398f6e5-5c53-44e5-94ee-6f85d455162b-cwd'; fi
-exit "$__zcode_status"

@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-112：手写安全 JSON 序列化——循环引用、BigInt、undefined、Date 自定义替换器
 **答**：JSON.stringify 四大坑：循环引用抛错、BigInt 抛 TypeError、undefined/函数/符号键静默丢失、Date 变 ISO 字符串但 Map/Set 直接变 {}。安全序列化 = 自写替换器 + WeakSet 循环检测 + 类型转换协议。
 
 ```javascript

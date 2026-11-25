@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-185：笔试：手写 CI 日志解析器（阶段耗时统计 + 错误上下文提取）
 
-**题目**：写 parse-log.mjs：1) 输入 CI 原始日志（行数组，形如 `[11:02:11] START build` / `[11:02:35] END build ok` / 堆栈错误行）；2) 解析每个阶段的耗时（START/END 配对，输出秒）；3) 提取错误：匹配 `Error:`、`ERROR in`、`FAILED` 开头行，带其后 5 行上下文，同源错误去重（按 message hash）；4) 输出结构化 {stages, errors}；5) 未配对 START（阶段中断）标记为 aborted 并用日志总时长封顶。
+**答**：写 parse-log.mjs：1) 输入 CI 原始日志（行数组，形如 `[11:02:11] START build` / `[11:02:35] END build ok` / 堆栈错误行）；2) 解析每个阶段的耗时（START/END 配对，输出秒）；3) 提取错误：匹配 `Error:`、`ERROR in`、`FAILED` 开头行，带其后 5 行上下文，同源错误去重（按 message hash）；4) 输出结构化 {stages, errors}；5) 未配对 START（阶段中断）标记为 aborted 并用日志总时长封顶。
 
 ```javascript
 // parse-log.mjs

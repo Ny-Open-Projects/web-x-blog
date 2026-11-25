@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-186：笔试：手写幂等 Server Action（requestId 去重 + 过期清理）
-**题目**：实现一个幂等包装器 `withIdempotency(action)`：① 客户端每次提交生成唯一 requestId，服务端按 requestId 去重——同键并发请求只执行一次，其余等待并返回相同结果；② 执行中的请求要互斥（防止并发双写）；③ 结果缓存 5 分钟后过期（过期键可重新执行）；④ 请求失败（throw）不缓存结果，允许重试；⑤ 提供测试用例说明并发双击只产生一次写入。
+**答**：实现一个幂等包装器 `withIdempotency(action)`：① 客户端每次提交生成唯一 requestId，服务端按 requestId 去重——同键并发请求只执行一次，其余等待并返回相同结果；② 执行中的请求要互斥（防止并发双写）；③ 结果缓存 5 分钟后过期（过期键可重新执行）；④ 请求失败（throw）不缓存结果，允许重试；⑤ 提供测试用例说明并发双击只产生一次写入。
 
 ```ts
 type Pending = { promise: Promise<unknown> };

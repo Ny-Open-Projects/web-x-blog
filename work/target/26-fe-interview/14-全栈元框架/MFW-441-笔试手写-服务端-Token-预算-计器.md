@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-441：服务端成本预算计
-**需求**：实现 `createSpendMeter(route, { dbMs: 200, calls: 8 } = {})`：1) 包装数据函数：每次 DB 查询/出站调用记账（耗时/次数/目标域——ALS 请求级账本）；2) 预算执行：超 dbMs → 后续查询改走缓存只读副本或拒绝（Error BUDGET——防单请求拖垮集群——与 392 限幅互补：租户级+请求级两维）；3) 账单随响应头/日志出口（x-cost-db-ms, x-cost-calls——可观测可分摊 MFW-461 数据源）；4) 违规路由榜单（P95 超预算 top10——优化队列自动生成）。
+**答**：实现 `createSpendMeter(route, { dbMs: 200, calls: 8 } = {})`：1) 包装数据函数：每次 DB 查询/出站调用记账（耗时/次数/目标域——ALS 请求级账本）；2) 预算执行：超 dbMs → 后续查询改走缓存只读副本或拒绝（Error BUDGET——防单请求拖垮集群——与 392 限幅互补：租户级+请求级两维）；3) 账单随响应头/日志出口（x-cost-db-ms, x-cost-calls——可观测可分摊 MFW-461 数据源）；4) 违规路由榜单（P95 超预算 top10——优化队列自动生成）。
 
 ```javascript
 export function withMeter(budget, fn) {

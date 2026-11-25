@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-074：笔试：手写简化 Tree Shaking（导出标记 + 未引用剔除）
-**题目**：给定模块 { id, exports: ['a','b'], imports: [{ from: 1, names: ['a'] }] }，实现 treeShake(modules)：1) 从入口模块的具名导入反向传播"被使用导出"标记；2) 未被标记的导出从模块的导出清单剔除；3) 一个模块所有导出都未被引用且声明无副作用时整模块剔除；4) sideEffects: false 语义支持（未导入即剔除）；5) re-export 链（A re-export B 的 a）正确传播。
+**答**：给定模块 { id, exports: ['a','b'], imports: [{ from: 1, names: ['a'] }] }，实现 treeShake(modules)：1) 从入口模块的具名导入反向传播"被使用导出"标记；2) 未被标记的导出从模块的导出清单剔除；3) 一个模块所有导出都未被引用且声明无副作用时整模块剔除；4) sideEffects: false 语义支持（未导入即剔除）；5) re-export 链（A re-export B 的 a）正确传播。
 
 ```javascript
 function treeShake(modules) { // modules: [{id, imports:[{from,names}], exports:[...], sideEffectsFree}]

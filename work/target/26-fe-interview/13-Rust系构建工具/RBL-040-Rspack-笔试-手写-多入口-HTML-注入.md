@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-040：笔试：手写简化版 HTML 注入插件（多入口 script 注入）
-**题目**：实现 HtmlMiniPlugin：1) 读取模板 HTML（含 </body>）；2) emit 阶段把所有入口 chunk 的 js 以 <script defer src> 注入 </body> 前、css 以 <link rel=stylesheet> 注入 </head> 前；3) 支持 options.template 与 options.publicPath；4) 输出 index.html 为新 asset；5) 已存在的同名 asset 要替换。
+**答**：实现 HtmlMiniPlugin：1) 读取模板 HTML（含 </body>）；2) emit 阶段把所有入口 chunk 的 js 以 <script defer src> 注入 </body> 前、css 以 <link rel=stylesheet> 注入 </head> 前；3) 支持 options.template 与 options.publicPath；4) 输出 index.html 为新 asset；5) 已存在的同名 asset 要替换。
 
 ```javascript
 class HtmlMiniPlugin {

@@ -40,3 +40,9 @@ beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));   // 未声明�
 afterEach(() => { server.resetHandlers(); vi.useRealTimers(); });
 afterAll(() => server.close());
 ```
+
+**追问**：
+
+1. msw 的 handler 与真实接口漂移了怎么发现，onUnhandledRequest 够用吗？ → 不够，它只抓没人处理的请求、抓不到结构错；要用 OpenAPI 生成 handler，或让 mock 响应过一遍契约校验，校验失败即判契约破坏。
+2. 增量覆盖率在 rebase、大重构、纯移动文件时会误判，diff 怎么算？ → 以 merge-base 对比目标分支，按行内容而非路径匹配被移动的文件，只对新增或修改的行要求覆盖，纯 rename 不计入增量。
+3. v8 和 istanbul 两种 provider 差别在哪，TS 项目选哪个？ → v8 快、统计实际执行，但经 sourcemap 后行号与分支精度不如 istanbul；TS 且编译转换多的项目倾向 istanbul，要能定位到源码行就必须把 sourcemap 校正开起来。

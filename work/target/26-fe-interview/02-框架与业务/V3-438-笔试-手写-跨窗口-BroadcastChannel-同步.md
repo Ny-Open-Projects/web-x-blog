@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-438：笔试：手写跨窗口状态同步（BroadcastChannel + 兜底 storage 事件）
-**题**：实现 `useCrossTabSync(store)`：BroadcastChannel 广播 store 变更（带来源 tabId，忽略自己发的消息）；不支持 BroadcastChannel 时用 storage 事件兜底；消息带版本号防乱序；卸载关闭 channel。
+**答**：实现 `useCrossTabSync(store)`：BroadcastChannel 广播 store 变更（带来源 tabId，忽略自己发的消息）；不支持 BroadcastChannel 时用 storage 事件兜底；消息带版本号防乱序；卸载关闭 channel。
 
 ```javascript
 export function useCrossTabSync(store) {
@@ -48,6 +48,3 @@ export function useCrossTabSync(store) {
 - 版本号防乱序。
 - BroadcastChannel 降级 storage 方案。
 - 卸载 close 防泄漏。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-884c2465-f88d-4920-b668-9c616efdc5bb-cwd'; fi
-exit "$__zcode_status"

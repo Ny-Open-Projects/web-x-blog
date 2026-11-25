@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-439：SSE 复用网关
-**需求**：实现 `createSseHub(upstreamFactory)`：1) 服务端：同用户多频道（order/chat/presence）合一条 SSE（浏览器 6 连接限制——多 Tab 场景必爆）；协议 `event: <domain>\ndata: {...}\n\n`；2) 订阅生命周期与页面绑定（Last-Event-ID 重连补发窗口内事件——不丢不重：序号 per-domain）；3) 背压：慢消费者（socket 缓冲超 1MB）→ 该连接降级模式（只推 P0 域+提示刷新——不做无限缓冲）；4) 鉴权随订阅（每 domain 授权检查——复用连接提权防护：新 domain 订阅要重新 can()）；5) 心跳 15s（代理超时防断）+ 平滑重连指数退避。
+**答**：实现 `createSseHub(upstreamFactory)`：1) 服务端：同用户多频道（order/chat/presence）合一条 SSE（浏览器 6 连接限制——多 Tab 场景必爆）；协议 `event: <domain>\ndata: {...}\n\n`；2) 订阅生命周期与页面绑定（Last-Event-ID 重连补发窗口内事件——不丢不重：序号 per-domain）；3) 背压：慢消费者（socket 缓冲超 1MB）→ 该连接降级模式（只推 P0 域+提示刷新——不做无限缓冲）；4) 鉴权随订阅（每 domain 授权检查——复用连接提权防护：新 domain 订阅要重新 can()）；5) 心跳 15s（代理超时防断）+ 平滑重连指数退避。
 
 ```javascript
 export function sseHandler(user, streams) {

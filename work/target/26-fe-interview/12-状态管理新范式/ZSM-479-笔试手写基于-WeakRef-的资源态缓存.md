@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-479：手写基于 WeakRef 的资源态缓存
-**需求**：实现 `createWeakCache(loader)`：1) `get(key)`：命中（WeakRef 存活）直接返回；未命中/已被 GC 调 loader 重建；2) `cleanup()`：遍历清除 deref() === undefined 的条目（GC 后墓碑清理）；3) 定期 cleanup（interval 可配）+ stop 清理；4) 大资源（图片位图/WebGL 纹理）场景说明为什么 WeakRef 合适（GC 压力由引擎管理，不用手动 LRU）；5) `size()` 返回存活条目数（清理后统计）。
+**答**：实现 `createWeakCache(loader)`：1) `get(key)`：命中（WeakRef 存活）直接返回；未命中/已被 GC 调 loader 重建；2) `cleanup()`：遍历清除 deref() === undefined 的条目（GC 后墓碑清理）；3) 定期 cleanup（interval 可配）+ stop 清理；4) 大资源（图片位图/WebGL 纹理）场景说明为什么 WeakRef 合适（GC 压力由引擎管理，不用手动 LRU）；5) `size()` 返回存活条目数（清理后统计）。
 
 ```javascript
 export function createWeakCache(loader, { cleanupIntervalMs = 60_000 } = {}) {

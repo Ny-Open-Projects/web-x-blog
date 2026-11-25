@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-168：手写 SPA 路由切换指标——navigationId 变化检测 + 软导航 LCP 近似 + 路由级看板数据
 **答**：SPA 软导航指标（PER-253 工程化）：路由起点（pushState 包装）→ 软导航 LCP 近似（MutationObserver + 双 rAF 稳定判定，PER-136 模式）→ 路由级 INP 近似（切换后首次交互延迟）→ 按路由聚合上报（看板按 route 分组）。
 
 ```javascript

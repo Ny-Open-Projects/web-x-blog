@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-454：手写 PR 构建报告评论生成器
-**需求**：实现 `generatePrComment(results)`：1) results：`{ build: { ok, timeMs }, sizeDiff: { summary, md }, tests: { pass, fail, skipped }, checklist: { md } }`；2) 单一评论聚合（不刷屏：bot 只维护一条 sticky 评论——每次更新替换）；3) 分区折叠（<details> 折叠次要信息——CI 噪音治理）；4) 状态徽章（✅/⚠️/❌ 顶部摘要行——reviewer 3 秒判断）；5) 超长截断（评论 > 64KB 平台限制——截断提示 + artifact 链接）；6) 指纹防覆盖：评论带构建 sha 标识（并发构建更新不互踩）。
+**答**：实现 `generatePrComment(results)`：1) results：`{ build: { ok, timeMs }, sizeDiff: { summary, md }, tests: { pass, fail, skipped }, checklist: { md } }`；2) 单一评论聚合（不刷屏：bot 只维护一条 sticky 评论——每次更新替换）；3) 分区折叠（<details> 折叠次要信息——CI 噪音治理）；4) 状态徽章（✅/⚠️/❌ 顶部摘要行——reviewer 3 秒判断）；5) 超长截断（评论 > 64KB 平台限制——截断提示 + artifact 链接）；6) 指纹防覆盖：评论带构建 sha 标识（并发构建更新不互踩）。
 
 ```javascript
 const STATUS = { ok: '✅', warn: '⚠️', fail: '❌' }

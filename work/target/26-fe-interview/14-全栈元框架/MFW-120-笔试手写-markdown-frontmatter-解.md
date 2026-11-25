@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-120：笔试：手写一个 markdown frontmatter 解析器（含校验）
-**题目**：内容站构建期要解析 markdown 文件的 frontmatter。实现 `parseFrontmatter(source, schema)`：① 解析文件头 `---` 包裹的 YAML 简化子集（key: value、数组 `- item`、嵌套一层）；② 用 schema（形如 zod 的 `{ validate(v) }` 对象）校验；③ 校验失败抛出带字段名的错误；④ 无 frontmatter 或格式错时给出明确错误；⑤ 返回 `{ data, content }`。
+**答**：内容站构建期要解析 markdown 文件的 frontmatter。实现 `parseFrontmatter(source, schema)`：① 解析文件头 `---` 包裹的 YAML 简化子集（key: value、数组 `- item`、嵌套一层）；② 用 schema（形如 zod 的 `{ validate(v) }` 对象）校验；③ 校验失败抛出带字段名的错误；④ 无 frontmatter 或格式错时给出明确错误；⑤ 返回 `{ data, content }`。
 
 ```ts
 type Schema = { validate: (v: Record<string, unknown>) => { ok: true } | { ok: false; errors: string[] } };

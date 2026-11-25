@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-434：手写 SSR 安全的 Store 注入
-**需求**：实现每请求隔离的 store 工厂 `createSSRStoreBridge()`：1) 服务端：`createReqStore()` 每请求新建 store（禁止模块级单例）；2) `extract(store)` 序列化为内嵌脚本（XSS 安全：`</script` 转义）；3) 客户端：`hydrateFromScript()` 解析注入数据初始化 store，校验 schema 版本；4) 解析失败/版本不符回退默认态并上报；5) 校验「注入不含函数字段」（深度扫描拒绝）；6) 提供 `assertNoSharedStore(fn)` 测试助手（检测模块级单例）。
+**答**：实现每请求隔离的 store 工厂 `createSSRStoreBridge()`：1) 服务端：`createReqStore()` 每请求新建 store（禁止模块级单例）；2) `extract(store)` 序列化为内嵌脚本（XSS 安全：`</script` 转义）；3) 客户端：`hydrateFromScript()` 解析注入数据初始化 store，校验 schema 版本；4) 解析失败/版本不符回退默认态并上报；5) 校验「注入不含函数字段」（深度扫描拒绝）；6) 提供 `assertNoSharedStore(fn)` 测试助手（检测模块级单例）。
 
 ```javascript
 export function createSSRStoreBridge(defaultState, schemaVersion) {

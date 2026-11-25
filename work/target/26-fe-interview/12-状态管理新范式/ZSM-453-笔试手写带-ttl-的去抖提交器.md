@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-453：手写去抖提交器
-**需求**：实现 `createDebouncedCommit(fn, opts)`：1) `call(args)`：窗口 800ms 内多次调用只提交最后一次（trailing）；2) 首次调用立即提交（leading），窗口重置；3) pending 期间 `cancel()`：丢弃未提交的 trailing 调用（返回 false），已提交的不受影响；4) `flush()` 立即提交 pending；5) 返回的 Promise 在真正提交时 resolve（未提交被 cancel 的 reject 'cancelled'）；6) maxWait 上限：持续调用最迟 maxWait 强制提交（防饿死）。
+**答**：实现 `createDebouncedCommit(fn, opts)`：1) `call(args)`：窗口 800ms 内多次调用只提交最后一次（trailing）；2) 首次调用立即提交（leading），窗口重置；3) pending 期间 `cancel()`：丢弃未提交的 trailing 调用（返回 false），已提交的不受影响；4) `flush()` 立即提交 pending；5) 返回的 Promise 在真正提交时 resolve（未提交被 cancel 的 reject 'cancelled'）；6) maxWait 上限：持续调用最迟 maxWait 强制提交（防饿死）。
 
 ```javascript
 export function createDebouncedCommit(fn, { wait = 800, maxWait = 5000 } = {}) {

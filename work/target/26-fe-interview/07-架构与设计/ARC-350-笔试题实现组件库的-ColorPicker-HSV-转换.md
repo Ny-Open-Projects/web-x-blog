@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-350：笔试题：实现组件库的 ColorPicker HSV 转换？
-**题目**：实现 ColorPicker 的核心颜色引擎：1) HSV ↔ Hex/RGB 互转（函数正确性）；2) 面板选色：点击/拖动映射到 s/v（0~1）；3) hue 条映射 0~360；4) 输出格式切换（hex/rgb/hsl 任一）。
+**答**：实现 ColorPicker 的核心颜色引擎：1) HSV ↔ Hex/RGB 互转（函数正确性）；2) 面板选色：点击/拖动映射到 s/v（0~1）；3) hue 条映射 0~360；4) 输出格式切换（hex/rgb/hsl 任一）。
 **评分点**：
 - 转换公式正确（重点 HSV→RGB 分段计算）。
 - 拖动映射正确（clientX/width clamp 到 0~1，s=右为满、v=上为满）。

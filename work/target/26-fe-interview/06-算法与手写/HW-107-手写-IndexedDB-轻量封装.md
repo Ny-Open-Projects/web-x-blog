@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-107：手写 IndexedDB 轻量封装——Promise 化 CRUD、索引查询、游标分页与升级迁移
 **答**：IDB 原生 API 回调地狱且事务易错，封装四要点：① 打开/升级（onupgradeneeded 建库建索引，版本迁移按版本号 switch）；② Promise 化事务（事务 complete 才 resolve，错误 reject 并带事务回滚语义）；③ 游标分页（cursor + limit，keyset 分页优于 offset）；④ 泛型 get/put/delete/query(byIndex)。
 
 ```javascript

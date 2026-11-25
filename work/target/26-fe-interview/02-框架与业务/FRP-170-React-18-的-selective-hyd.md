@@ -17,7 +17,7 @@ type: 面试题
 
 ```javascript
 // 简化实现，帮助理解 selective hydration 的事件重放
-const capturedEvents = [];   // 暂存队列
+let capturedEvents = [];        // 暂存队列（重放时会 filter 重新赋值）
 
 // 1. root 上提前挂委托（hydrate 之前！）
 function listenToAllSupportedEvents(rootEl) {
@@ -60,3 +60,11 @@ function isDiscrete(type) {
 // t3 评论区 hydrate 完成
 // t4 重放点击 -> 点赞生效 —— 用户视角"点了就有效"，延迟被框架吸收
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 重放的事件会不会被处理两次？ → 不会。未水合时原生监听器只负责识别 fiber 未水合并入队，不做分发；重放走的是合成事件分发链，原生这一层不会再触发业务逻辑。
+2. 重放时 target DOM 已经被 `$RC` 换掉了，怎么定位？ → 队列里记的是 fiber 与所属 Suspense 边界，不是裸 DOM 引用；重放时按 fiber 重新取实例。若该块因 mismatch 走了 client render，这批事件会被丢弃而不是重放到错误节点上。
+3. React 19 在事件重放上有调整吗？ → 有收敛。19 把未水合区域整体当作可升级的 Suspense 边界调度，并把表单相关的重放补齐（提交类事件在水合后能补发一次），同时改进了 hydrate 优先级与 lane 的映射。

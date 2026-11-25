@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-474：prefetch 预算 LRU 窗口管理器
-**需求**：实现 `createPrefetchBudget({ bytes, entries })`：1) `request(href, size)`：按 RSC payload 估算字节数准入；超总预算时按 LRU 驱逐最久未"访问"（request 或 hover 触碰即刷新）的条目；2) 同 href 重复请求直接命中（命中即刷新 LRU 位）；3) 条目数上限 entries 同样生效，双约束先触发者生效；4) `stats()` 返回 { used, entries, evicted: n }——低端机（navigator.deviceMemory 低）可调小预算（构造参数体现）。
+**答**：实现 `createPrefetchBudget({ bytes, entries })`：1) `request(href, size)`：按 RSC payload 估算字节数准入；超总预算时按 LRU 驱逐最久未"访问"（request 或 hover 触碰即刷新）的条目；2) 同 href 重复请求直接命中（命中即刷新 LRU 位）；3) 条目数上限 entries 同样生效，双约束先触发者生效；4) `stats()` 返回 { used, entries, evicted: n }——低端机（navigator.deviceMemory 低）可调小预算（构造参数体现）。
 
 ```javascript
 export function createPrefetchBudget({ bytes = 2_000_000, entries = 50 } = {}) {

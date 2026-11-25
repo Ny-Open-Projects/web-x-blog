@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-436：手写构建产物树去重器
-**需求**：实现 `dedupeAssets(files)`：1) files：Map<path, content>；2) 相同内容（hash 相同）的多个路径 → 保留一个实体文件，其余替换为引用（或 symlink/软链接声明）；3) 引用语义选择：硬链接（同文件系统）vs 单实体+manifest 映射（跨域 CDN 用 URL 映射）；4) 节省体积统计（deduped bytes）；5) 引用安全：实体文件删除时引用文件不能悬空（保留策略：hash 索引文件生命周期 = 最长引用者）；6) 输出 { entities, references, savedBytes }。
+**答**：实现 `dedupeAssets(files)`：1) files：Map<path, content>；2) 相同内容（hash 相同）的多个路径 → 保留一个实体文件，其余替换为引用（或 symlink/软链接声明）；3) 引用语义选择：硬链接（同文件系统）vs 单实体+manifest 映射（跨域 CDN 用 URL 映射）；4) 节省体积统计（deduped bytes）；5) 引用安全：实体文件删除时引用文件不能悬空（保留策略：hash 索引文件生命周期 = 最长引用者）；6) 输出 { entities, references, savedBytes }。
 
 ```javascript
 import crypto from 'node:crypto'

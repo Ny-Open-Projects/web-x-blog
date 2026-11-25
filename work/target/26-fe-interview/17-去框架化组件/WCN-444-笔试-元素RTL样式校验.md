@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-444：笔试：实现元素样式的 RTL 校验器（物理方向属性扫描）。
-**题目**：扫描 CSS：left/right/top/bottom 物理属性（非 inset-logical）→ 违规；transform translateX 无 dir 分支 → 警告；输出建议（margin-inline-start 等）。
+**答**：扫描 CSS：left/right/top/bottom 物理属性（非 inset-logical）→ 违规；transform translateX 无 dir 分支 → 警告；输出建议（margin-inline-start 等）。
 
 ```javascript
 const RTL_RULES = [

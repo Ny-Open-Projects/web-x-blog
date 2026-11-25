@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-460：generateStaticParams 组合爆炸裁剪器
-**需求**：实现 `pruneStaticParams(segments, { max = 10000 })`：1) segments = [{ name, values: [] }]（如 [{ name:'category', values:[...] }, { name:'slug', values:[...] }]）；2) 笛卡尔积展开预览总路径数，超 `max` 时按段优先级裁剪：从最后一段起截断到 `max / 前面已展开数` 个（高频前缀优先静态化，长尾走 fallback）；3) 返回 { combos: [[...]], truncated: true, dropped: n }；4) 空段（values 空）视为动态段，不参与展开。
+**答**：实现 `pruneStaticParams(segments, { max = 10000 })`：1) segments = [{ name, values: [] }]（如 [{ name:'category', values:[...] }, { name:'slug', values:[...] }]）；2) 笛卡尔积展开预览总路径数，超 `max` 时按段优先级裁剪：从最后一段起截断到 `max / 前面已展开数` 个（高频前缀优先静态化，长尾走 fallback）；3) 返回 { combos: [[...]], truncated: true, dropped: n }；4) 空段（values 空）视为动态段，不参与展开。
 
 ```javascript
 export function pruneStaticParams(segments, { max = 10000 } = {}) {

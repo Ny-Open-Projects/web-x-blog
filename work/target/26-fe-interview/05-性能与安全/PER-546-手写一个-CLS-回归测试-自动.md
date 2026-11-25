@@ -44,3 +44,18 @@ async function clsRegression(url) {
 }
 clsRegression('https://example.com/list').then(console.log);
 ```
+
+## 补充：评分点与变体
+
+**评分点**：
+
+- 覆盖关键交互（列表加载、弹层、图片位），逐场景独立断言。
+- 监听 layout-shift 并排除 hadRecentInput 造成的偏移。
+- 断言阈值之外，输出偏移元素归因。
+- 占位尺寸缺失时能定位到具体节点。
+
+**变体与延伸**：
+
+1. 为什么要排除 hadRecentInput？ → 用户主动交互引发的偏移不计入 CLS，不排除会大量误报。
+2. 图片位怎么防抖？ → 预设 aspect-ratio 或宽高，避免加载完成后撑开布局。
+3. 字体导致的偏移怎么测？ → 断言 font-display 与回退字体度量，观察切换瞬间的 shift 条目。

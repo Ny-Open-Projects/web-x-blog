@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-110：笔试：手写一个 SSG 预渲染检查器（adapter-static 前置校验）
-**题目**：用 adapter-static 时全站必须可预渲染。实现 `checkPrerenderable(routes)`：① 路由标记了 `prerender = false` 或依赖请求级数据（cookies/headers/fetch 外部 API 无 fallback）→ 报错并列出原因；② 动态路由 `:id` 没有提供 entries 列表 → 报错；③ 检查通过的返回可渲染 URL 清单。
+**答**：用 adapter-static 时全站必须可预渲染。实现 `checkPrerenderable(routes)`：① 路由标记了 `prerender = false` 或依赖请求级数据（cookies/headers/fetch 外部 API 无 fallback）→ 报错并列出原因；② 动态路由 `:id` 没有提供 entries 列表 → 报错；③ 检查通过的返回可渲染 URL 清单。
 
 ```ts
 type Route = {

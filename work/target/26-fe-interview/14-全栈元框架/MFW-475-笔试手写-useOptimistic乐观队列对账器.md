@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-475：useOptimistic 乐观队列对账器
-**需求**：实现 `OptimisticLedger`：1) `optimistic(item)` 立即入视图，带临时 id 与 `pending: true`；2) `confirm(tempId, real)` 服务端真值到达：替换临时项并保持位置（不重排——位置抖动是差评来源）；3) `reject(tempId)` 失败移除并触发 `onError`；4) 服务端全量刷新到达时 `reconcile(serverList)`：以服务端为准，删掉不在其中的本地乐观项（孤儿清理），顺序完全采用服务端序。
+**答**：实现 `OptimisticLedger`：1) `optimistic(item)` 立即入视图，带临时 id 与 `pending: true`；2) `confirm(tempId, real)` 服务端真值到达：替换临时项并保持位置（不重排——位置抖动是差评来源）；3) `reject(tempId)` 失败移除并触发 `onError`；4) 服务端全量刷新到达时 `reconcile(serverList)`：以服务端为准，删掉不在其中的本地乐观项（孤儿清理），顺序完全采用服务端序。
 
 ```javascript
 export class OptimisticLedger {

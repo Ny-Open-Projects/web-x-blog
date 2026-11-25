@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-479：SSE 推送与 RSC 增量刷新协调器
-**需求**：实现 `createRefreshHub()`：1) `subscribe(routeId, res)`：SSE 订阅，同一客户端同 routeId 去重（重复订阅只留一份）；2) `broadcast(routeId, { tag, version })`：写 `event: refresh` 帧，带节流：同 routeId 1s 内多次 broadcast 合并成一次（高频写场景保护客户端）；3) `onClientEvent` 收到客户端 ack 后才计投递完成，3s 无 ack 判死连接并清理（半开连接清理）；4) `count(routeId)` 查看活跃订阅数（服务端决定是否降级为轮询）。
+**答**：实现 `createRefreshHub()`：1) `subscribe(routeId, res)`：SSE 订阅，同一客户端同 routeId 去重（重复订阅只留一份）；2) `broadcast(routeId, { tag, version })`：写 `event: refresh` 帧，带节流：同 routeId 1s 内多次 broadcast 合并成一次（高频写场景保护客户端）；3) `onClientEvent` 收到客户端 ack 后才计投递完成，3s 无 ack 判死连接并清理（半开连接清理）；4) `count(routeId)` 查看活跃订阅数（服务端决定是否降级为轮询）。
 
 ```javascript
 export function createRefreshHub() {

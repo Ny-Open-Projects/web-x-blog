@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-097：笔试：手写模块请求聚合器（N 个请求合并为 chunk）
-**题目**：实现 chunkAggregator(compile)：1) 浏览器批量请求模块列表（如 import 分析后的依赖数组）；2) 将已在编译队列中的请求合并为一个 chunk 产物（一次编译调用，产物含所有模块）；3) 5ms 内到达的请求合并（微批处理窗口）；4) 重复模块去重；5) 返回 { chunkName, modules } 给每个请求方同一份结果。
+**答**：实现 chunkAggregator(compile)：1) 浏览器批量请求模块列表（如 import 分析后的依赖数组）；2) 将已在编译队列中的请求合并为一个 chunk 产物（一次编译调用，产物含所有模块）；3) 5ms 内到达的请求合并（微批处理窗口）；4) 重复模块去重；5) 返回 { chunkName, modules } 给每个请求方同一份结果。
 
 ```javascript
 function createChunkAggregator(compile) {

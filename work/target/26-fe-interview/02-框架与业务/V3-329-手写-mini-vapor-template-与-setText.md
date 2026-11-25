@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-329：手写：用 template + setText 实现一个 mini Vapor 组件
-**题**：不使用虚拟 DOM，实现 `template(html)` 克隆静态模板、`setText(el, getter)` 绑定动态文本；用它们实现一个计数器组件 setup，要求点击按钮更新计数显示。含边界：多次挂载互不影响。
+**答**：不使用虚拟 DOM，实现 `template(html)` 克隆静态模板、`setText(el, getter)` 绑定动态文本；用它们实现一个计数器组件 setup，要求点击按钮更新计数显示。含边界：多次挂载互不影响。
 
 ```javascript
 function template(html) {

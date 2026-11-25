@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-187：笔试：手写 pnpm-workspace 依赖图解析器
 
-**题目**：写 workspace-graph.mjs：1) 读 pnpm-workspace.yaml 的 packages glob（如 ['apps/*', 'packages/*']）与各包 package.json；2) 构建内部依赖图：deps/devDeps/peerDeps 里名字匹配 workspace 内包的算内部依赖，其他为外部；3) 检测循环依赖并输出环路径；4) 提供 dependents(name)：谁（含传递）依赖该包；5) 输出：节点数、边数、无上游的根包列表（可独立发版的候选）。
+**答**：写 workspace-graph.mjs：1) 读 pnpm-workspace.yaml 的 packages glob（如 ['apps/*', 'packages/*']）与各包 package.json；2) 构建内部依赖图：deps/devDeps/peerDeps 里名字匹配 workspace 内包的算内部依赖，其他为外部；3) 检测循环依赖并输出环路径；4) 提供 dependents(name)：谁（含传递）依赖该包；5) 输出：节点数、边数、无上游的根包列表（可独立发版的候选）。
 
 ```javascript
 // workspace-graph.mjs

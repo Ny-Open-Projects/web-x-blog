@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-056：手写 Jotai 的 selectAtom（切片 + 缓存比较）
 
-**题目要求**：
+**答**：
 - 实现 `selectAtom(atom, selector, equalityFn = Object.is)`：返回一个只读派生 atom。
 - 关键行为：源 atom 变化时执行 selector，结果与上次相等（equalityFn）就**保持旧引用**，订阅者不重渲染。
 - selector 对同一输入应只跑一次并缓存。

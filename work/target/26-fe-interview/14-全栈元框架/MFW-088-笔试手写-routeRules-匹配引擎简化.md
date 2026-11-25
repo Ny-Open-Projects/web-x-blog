@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-088：笔试：手写一个简化版 routeRules 匹配引擎
-**题目**：Nuxt 的 routeRules 支持精确路径与通配符（`/products/**`、`/docs/*`）。实现 `matchRules(rules, path)`：① 返回**所有**命中的规则按声明顺序；② `**` 匹配多级路径，`*` 只匹配单段；③ 精确匹配优先级最高；④ 支持后续规则覆盖前面规则的键（合并视图）。
+**答**：Nuxt 的 routeRules 支持精确路径与通配符（`/products/**`、`/docs/*`）。实现 `matchRules(rules, path)`：① 返回**所有**命中的规则按声明顺序；② `**` 匹配多级路径，`*` 只匹配单段；③ 精确匹配优先级最高；④ 支持后续规则覆盖前面规则的键（合并视图）。
 
 ```ts
 type Rule = { swr?: number; ssr?: boolean; headers?: Record<string, string> };

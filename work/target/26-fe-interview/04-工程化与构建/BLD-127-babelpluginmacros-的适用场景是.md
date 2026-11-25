@@ -41,3 +41,11 @@ module.exports = createMacro(versionMacro);
 // const banner = `app@${BUILD_VERSION}`;   → 产物： var banner = "app@2.7.1";（零运行时）
 // 对比 DefinePlugin：define 替换"标识符"，macro 可以带参数、有作用域、能报编译错误
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 什么时候选 macro 而不是普通插件？ → 能力要跨项目复用、又不想让每个项目改 .babelrc 时，靠 import 触发更省心，也更容易跟着包一起发版。
+2. 两者本质区别？ → 插件全局生效且对顺序敏感，macro 只作用于显式 import 它的文件，作用域更小、副作用更可控。
+3. macro 的限制？ → 仍跑在 babel 单文件上下文，不能做跨文件分析；TypeScript 类型要额外声明，且文件必须经过 babel 处理才生效，esbuild 直通时会被直接跳过。

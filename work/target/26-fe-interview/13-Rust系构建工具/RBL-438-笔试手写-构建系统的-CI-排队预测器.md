@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-438：手写 CI 排队时间预测器
-**需求**：实现 `predictQueueTime({ queueDepth, runningJobs, avgDuration, runnerCount })`：1) 模型：排队时间 ≈（queueDepth 中能并行启动的部分 + 正在跑任务的剩余时间期望）× 任务时长 / 可用 runner；2) 输出期望值与 P90（历史排队时长分布分位叠加）；3) 用途：提交前提示「预计等待 X 分钟」（开发者可错峰）与「是否值得优化排队」（排队占比高 → 扩容优先）；4) 历史数据采样：按 hour-of-day 分桶（早高峰与深夜排队差异大——统一平均会失真）；5) 预测校准：预测 vs 实际偏差跟踪（漂移告警）。
+**答**：实现 `predictQueueTime({ queueDepth, runningJobs, avgDuration, runnerCount })`：1) 模型：排队时间 ≈（queueDepth 中能并行启动的部分 + 正在跑任务的剩余时间期望）× 任务时长 / 可用 runner；2) 输出期望值与 P90（历史排队时长分布分位叠加）；3) 用途：提交前提示「预计等待 X 分钟」（开发者可错峰）与「是否值得优化排队」（排队占比高 → 扩容优先）；4) 历史数据采样：按 hour-of-day 分桶（早高峰与深夜排队差异大——统一平均会失真）；5) 预测校准：预测 vs 实际偏差跟踪（漂移告警）。
 
 ```javascript
 export function createQueuePredictor(history) {

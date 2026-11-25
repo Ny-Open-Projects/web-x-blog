@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-423：手写构建配置校验器
-**需求**：实现 `createConfigValidator(schema)`：1) schema 声明式：`{ field: { type: 'string'|'number'|'bool'|'enum'|'object'|'array', required, values, children } }`；2) validate(config)：逐字段校验 → 错误列表 { path, code: 'unknown'|'type'|'required'|'value', message }；3) unknown 字段给 did-you-mean（编辑距离最近字段建议）；4) 嵌套递归校验（children）；5) 输出人类可读报告（路径精确 + 修复示例）；6) strict 模式（unknown 报错）与 loose（警告）。
+**答**：实现 `createConfigValidator(schema)`：1) schema 声明式：`{ field: { type: 'string'|'number'|'bool'|'enum'|'object'|'array', required, values, children } }`；2) validate(config)：逐字段校验 → 错误列表 { path, code: 'unknown'|'type'|'required'|'value', message }；3) unknown 字段给 did-you-mean（编辑距离最近字段建议）；4) 嵌套递归校验（children）；5) 输出人类可读报告（路径精确 + 修复示例）；6) strict 模式（unknown 报错）与 loose（警告）。
 
 ```javascript
 function editDistance(a, b) {

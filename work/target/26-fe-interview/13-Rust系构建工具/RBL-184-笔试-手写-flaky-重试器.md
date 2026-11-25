@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-184：笔试：手写 flaky 检测重试器（失败重试与 flaky 标记）
 
-**题目**：写 retry-flaky.mjs：1) 输入测试命令执行器（返回 {file, ok}）与文件列表；2) 首轮全量跑，失败的文件进入重试池；3) 重试至多 2 次：仍失败 → 真 failed；重试后通过 → 标记 flaky 并计入报告；4) 输出报告：failed/flaky/passed 文件清单；5) flaky 文件写入 .flaky-report.json（跨次构建累计，次数 ≥ 3 自动升级为 CI 失败，防 flaky 被永远容忍）。
+**答**：写 retry-flaky.mjs：1) 输入测试命令执行器（返回 {file, ok}）与文件列表；2) 首轮全量跑，失败的文件进入重试池；3) 重试至多 2 次：仍失败 → 真 failed；重试后通过 → 标记 flaky 并计入报告；4) 输出报告：failed/flaky/passed 文件清单；5) flaky 文件写入 .flaky-report.json（跨次构建累计，次数 ≥ 3 自动升级为 CI 失败，防 flaky 被永远容忍）。
 
 ```javascript
 // retry-flaky.mjs

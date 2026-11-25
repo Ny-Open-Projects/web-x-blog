@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-405：笔试：实现 deep-signal（深层对象代理，属性级订阅）。
-**题目**：`deepSignal(obj)` 返回 Proxy：任意嵌套属性读取自动建子信号节点（懒建），写入只触发该属性订阅者。删除/新增属性也响应。
+**答**：`deepSignal(obj)` 返回 Proxy：任意嵌套属性读取自动建子信号节点（懒建），写入只触发该属性订阅者。删除/新增属性也响应。
 
 ```javascript
 function deepSignal(obj, path = '') {

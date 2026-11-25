@@ -27,3 +27,9 @@ if (res) {
 // 服务端配合：response headers 加
 // Server-Timing: db;dur=120, app;dur=45, total;dur=165
 ```
+
+**追问**：
+
+1. 服务端没配 `Server-Timing` 时，前端还能拆网络与服务端吗？ → 只能靠 `responseStart - requestStart` 粗估：用同域名静态资源的 RTT 当网络基线做差值，剩余才算服务端，弱网下基线本身不可靠要标注置信度。
+2. `serverTiming` 里 db 加 app 可能小于总耗时，差额是什么？ → 是排队、网关转发、序列化等未埋点段；若 db+app 远小于总耗时，说明埋点漏了环节，先补埋点再谈归因。
+3. `network` 大且 server 小就一定是 CDN 问题吗？ → 还要排除 DNS、TLS 握手与弱网重传，看 `domainLookupEnd`、`connectEnd`、`responseStart` 分段，只有纯等待段大才是回源问题。

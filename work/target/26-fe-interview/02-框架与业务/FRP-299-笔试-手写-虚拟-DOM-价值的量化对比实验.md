@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## FRP-299：笔试：手写 VDOM 价值量化实验
-**题**：设计实验量化「VDOM 的代价与价值」：场景 1000 行列表改 1 行。A 方案：直接 innerHTML 全量重建；B 方案：手写 VDOM + diff（只 patch 变化行）；C 方案：细粒度 signal 单点更新。输出三者耗时与 DOM 节点变更数（MutationObserver 计数）。
+**答**：设计实验量化「VDOM 的代价与价值」：场景 1000 行列表改 1 行。A 方案：直接 innerHTML 全量重建；B 方案：手写 VDOM + diff（只 patch 变化行）；C 方案：细粒度 signal 单点更新。输出三者耗时与 DOM 节点变更数（MutationObserver 计数）。
 
 ```javascript
 function countMutations(container, fn) {
@@ -32,6 +32,3 @@ async function experiment(container, rows) {
 - 三方案代表「无优化/VDOM/细粒度」三档。
 - 预期结论：A 最快但 DOM 变更最贵；B 一次脚本开销换 DOM 最小化；C 两项都最小。
 - 能说出 VDOM 的价值 = 「用脚本换 DOM」，瓶颈转移而非消除。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-b4eb27a5-c24b-45b3-be81-fdae24d0867b-cwd'; fi
-exit "$__zcode_status"

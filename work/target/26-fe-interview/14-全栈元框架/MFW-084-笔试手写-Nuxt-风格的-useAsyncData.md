@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-084：笔试：手写一个简化版 useAsyncData
-**题目**：实现 `useAsyncData(key, fn, options)` 的核心能力：① SSR 阶段执行 fn 并把结果存入 payload；② 客户端复水时按 key 命中则不重复请求；③ 同 key 并发调用去重（共享 pending）；④ 返回 `{ data, error, status, refresh }`；⑤ 支持 `lazy: true`（不阻塞首屏）。
+**答**：实现 `useAsyncData(key, fn, options)` 的核心能力：① SSR 阶段执行 fn 并把结果存入 payload；② 客户端复水时按 key 命中则不重复请求；③ 同 key 并发调用去重（共享 pending）；④ 返回 `{ data, error, status, refresh }`；⑤ 支持 `lazy: true`（不阻塞首屏）。
 
 ```ts
 import { ref, computed } from 'vue';

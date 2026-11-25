@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-045：笔试：手写 tapable 风格的 SyncHook 与 AsyncSeriesHook
-**题目**：实现两个钩子类：1) SyncHook：tap 注册、call 同步串行调用；2) AsyncSeriesHook：tap/tapAsync/tapPromise 注册，promise() 串行执行异步回调（前一个完成才执行下一个）；3) 支持拦截子串不匹配的参数透传；4) call 传参给每个回调；5) tapAsync 回调以 (err) => 结尾，err 非 null 时中断后续。
+**答**：实现两个钩子类：1) SyncHook：tap 注册、call 同步串行调用；2) AsyncSeriesHook：tap/tapAsync/tapPromise 注册，promise() 串行执行异步回调（前一个完成才执行下一个）；3) 支持拦截子串不匹配的参数透传；4) call 传参给每个回调；5) tapAsync 回调以 (err) => 结尾，err 非 null 时中断后续。
 
 ```javascript
 class SyncHook {

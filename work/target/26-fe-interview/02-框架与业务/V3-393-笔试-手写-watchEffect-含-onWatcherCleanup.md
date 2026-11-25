@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-393：笔试：手写 watchEffect（依赖收集 + onWatcherCleanup）
-**题**：实现 `watchEffect(fn)`：自动收集 fn 内用到的响应式数据；依赖变化时先执行上轮注册的 cleanup 再重跑；组件卸载（手动 stop）时也执行 cleanup；重复触发需去重调度（一次微任务）。
+**答**：实现 `watchEffect(fn)`：自动收集 fn 内用到的响应式数据；依赖变化时先执行上轮注册的 cleanup 再重跑；组件卸载（手动 stop）时也执行 cleanup；重复触发需去重调度（一次微任务）。
 
 ```javascript
 let activeEffect = null
@@ -42,6 +42,3 @@ function watchEffect(fn) {
 - cleanup 在重跑前与 stop 时都执行。
 - 微任务调度去重（scheduled 标记）。
 - activeEffect 保存/恢复（嵌套安全）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-38a7be3c-bc26-49d1-803f-90bf7789a764-cwd'; fi
-exit "$__zcode_status"

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-404：SWR 头决策器
-**需求**：实现 `cacheHeaders(routeProfile)`：1) 输入画像 { kind: 'static'|'isr'|'private-dyn'|'api', ttl, tags[], personalized }；2) 输出正确头组合：static→immutable,1y；isr→s-maxage+stale-while-revalidate+Surrogate-Key（tags 空格join）；personalized→private,no-cache（禁共享缓存——不串用户）；api→按 method（GET 带 tag，其余 no-store）；3) 冲突校验：personalized=true 且出现 s-maxage → throw（策略自相矛盾 fail 在配置期）；4) 稳定排序输出（diff 可读）。
+**答**：实现 `cacheHeaders(routeProfile)`：1) 输入画像 { kind: 'static'|'isr'|'private-dyn'|'api', ttl, tags[], personalized }；2) 输出正确头组合：static→immutable,1y；isr→s-maxage+stale-while-revalidate+Surrogate-Key（tags 空格join）；personalized→private,no-cache（禁共享缓存——不串用户）；api→按 method（GET 带 tag，其余 no-store）；3) 冲突校验：personalized=true 且出现 s-maxage → throw（策略自相矛盾 fail 在配置期）；4) 稳定排序输出（diff 可读）。
 
 ```javascript
 CL removed

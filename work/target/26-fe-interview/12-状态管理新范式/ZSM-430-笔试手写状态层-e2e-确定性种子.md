@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-430：手写确定性状态种子
-**需求**：实现 `seedStore(store, spec)`：1) spec 声明式：`{ items: { count: 30, template: {...}, ids: 'seq' } }`；2) id 确定性：`seq` 模式生成 `id_0001..`（可复现）；3) 随机字段用可种子化 PRNG（mulberry32，seed 相同输出相同）；4) 时间字段基于固定基准时间 + 偏移（不依赖 Date.now）；5) 深度合并 template（数组字段按 count 展开）；6) 返回注入后的 store（链式）。
+**答**：实现 `seedStore(store, spec)`：1) spec 声明式：`{ items: { count: 30, template: {...}, ids: 'seq' } }`；2) id 确定性：`seq` 模式生成 `id_0001..`（可复现）；3) 随机字段用可种子化 PRNG（mulberry32，seed 相同输出相同）；4) 时间字段基于固定基准时间 + 偏移（不依赖 Date.now）；5) 深度合并 template（数组字段按 count 展开）；6) 返回注入后的 store（链式）。
 
 ```javascript
 function mulberry32(seed) {

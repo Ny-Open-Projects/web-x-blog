@@ -39,3 +39,9 @@ module.exports = {
   },
 };
 ```
+
+**追问**：
+
+1. `include` 写相对路径为什么规则静默失效？→ loader 的 `test`/`include` 用绝对路径匹配，相对字符串永远不命中，规则不报错但不生效，表现是"配置写了却还在报语法错"。
+2. monorepo 里内部包不参与编译会怎样？→ `node_modules` 默认被排除，包内导出的是 TS/JSX 源码时直接报语法错误；要用 `require.resolve` 拿到真实路径加入 `include`。
+3. `oneOf` 里规则顺序有什么讲究？→ 只取第一条命中的规则，`module.css` 必须排在通用 css 规则之前，否则被兜底规则吃掉，CSS Modules 静默失效。

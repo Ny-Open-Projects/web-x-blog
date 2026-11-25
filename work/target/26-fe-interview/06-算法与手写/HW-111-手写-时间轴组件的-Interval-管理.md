@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-111：手写多定时器管理器——命名定时器、统一暂停/恢复（visibilitychange）与泄漏防护
 **答**：轮询/时间轴/动画常需多个定时器，散落管理易泄漏。管理器：按 key 注册（重复注册自动替换旧实例）；页面 hidden 统一暂停、visible 恢复（移动端省电）；destroy 全量清理；执行回调 try-catch 防一个回调炸掉整个循环。
 
 ```javascript

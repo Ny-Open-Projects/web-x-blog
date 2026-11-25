@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-312：笔试题：手写 Table 合计行与列冻结计算？
-**题目**：实现 Table 冻结列布局计算：1) freeze: 'left'|'right' 列偏移计算（含 sticky offset 累加）；2) 合计行聚合（sum/avg/custom，跳过非数值）；3) 列宽总和与滚动宽度；4) 冻结列阴影条件（存在横向溢出时）。
+**答**：实现 Table 冻结列布局计算：1) freeze: 'left'|'right' 列偏移计算（含 sticky offset 累加）；2) 合计行聚合（sum/avg/custom，跳过非数值）；3) 列宽总和与滚动宽度；4) 冻结列阴影条件（存在横向溢出时）。
 **评分点**：
 - sticky 偏移累加正确（冻结列 offset = 前序冻结列宽和）。
 - 聚合器策略接口（sum/avg/custom）。

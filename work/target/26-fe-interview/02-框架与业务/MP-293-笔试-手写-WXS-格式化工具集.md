@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-293：笔试：手写 WXS 工具集
-**题**：编写 fmt.wxs：formatRelativeTime(ts, now)（1 分钟内「刚刚」、1h 内「N 分钟前」、24h 内「N 小时前」、7 天内「N 天前」、更久 MM-DD）；formatMoney(fen)（分转元，保留两位）；getStatusText(code)（枚举映射）。注意 WXS 是 ES5 子集（无模板字符串/箭头函数）。
+**答**：编写 fmt.wxs：formatRelativeTime(ts, now)（1 分钟内「刚刚」、1h 内「N 分钟前」、24h 内「N 小时前」、7 天内「N 天前」、更久 MM-DD）；formatMoney(fen)（分转元，保留两位）；getStatusText(code)（枚举映射）。注意 WXS 是 ES5 子集（无模板字符串/箭头函数）。
 
 ```javascript
 // fmt.wxs
@@ -35,6 +35,3 @@ module.exports = { formatRelativeTime: formatRelativeTime, formatMoney: formatMo
 - getDate 是 WXS 内建（不是 new Date）——高频考点。
 - 分转元整数运算避免浮点误差。
 - module.exports 导出、WXML 中 <wxs module="fmt"> 用法说明。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-43d10973-ee48-4d7a-acd2-392128e7b510-cwd'; fi
-exit "$__zcode_status"

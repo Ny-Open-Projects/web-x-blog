@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-291：笔试题：手写依赖注入（IoC 容器 + 单例作用域）？
-**题目**：实现 IoC 容器：1) register(name, factory, { deps, singleton })；2) resolve 递归注入依赖；3) singleton 单例缓存 vs transient 每次新建；4) 循环依赖报错。
+**答**：实现 IoC 容器：1) register(name, factory, { deps, singleton })；2) resolve 递归注入依赖；3) singleton 单例缓存 vs transient 每次新建；4) 循环依赖报错。
 **评分点**：
 - 递归 resolve 正确（依赖闭包求值）。
 - 单例缓存键正确（容器级，非全局）。

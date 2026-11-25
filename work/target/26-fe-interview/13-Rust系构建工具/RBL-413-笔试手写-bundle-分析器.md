@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-413：手写 bundle 分析器
-**需求**：实现 `analyzeBundle(modules)`：1) modules：`[{ id, name(如 node_modules/lodash/clone.js), size, chunks: ['main'] }]`；2) 输出按「包→目录→文件」聚合的体积树（node_modules/lodash 总量、子路径占比）；3) 重复包检测：同包多版本（从 name 解析版本）→ 告警与浪费体积；4) 重复内容检测：不同模块 hash 相同（重复打包）→ 合并建议；5) gzip 估算输入可选（真实 gzip 更准）；6) 输出 top N 占比列表。
+**答**：实现 `analyzeBundle(modules)`：1) modules：`[{ id, name(如 node_modules/lodash/clone.js), size, chunks: ['main'] }]`；2) 输出按「包→目录→文件」聚合的体积树（node_modules/lodash 总量、子路径占比）；3) 重复包检测：同包多版本（从 name 解析版本）→ 告警与浪费体积；4) 重复内容检测：不同模块 hash 相同（重复打包）→ 合并建议；5) gzip 估算输入可选（真实 gzip 更准）；6) 输出 top N 占比列表。
 
 ```javascript
 import crypto from 'node:crypto'

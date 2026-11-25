@@ -35,3 +35,11 @@ module.exports = {
 //              动态值： <h1 style={{ '--title-size': size + 'px' }} class="Title__t1z9k">
 // 对比 styled-components：产物含 runtime + 逐帧 injectStyle 调用；linaria 产物 = 纯 CSS
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. zero-runtime 真的零运行时吗？ → 编译期把样式抽成静态 CSS 与类名，运行时只剩拼接 class 字符串；props 派生的动态样式只能降级成内联样式或 CSS 变量，能力上有取舍。
+2. extract 失败的常见原因？ → 样式写在动态模板字符串里、跨文件变量无法静态求值、条件分支里的样式对象，都会被判定为不可抽取而回落到运行时注入。
+3. 怎么验证抽取正确？ → SSR 输出的 class 与产物 CSS 做一一比对，再叠加视觉回归和首屏 CSS 体积前后对比，确认没有漏样式或重复注入。

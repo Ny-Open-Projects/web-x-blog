@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-346：笔试题：实现组件库的 Watermark 防篡改水印？
-**题目**：实现 Watermark 组件：1) Canvas 生成平铺水印背景（rotate/opacity/font）；2) MutationObserver 防篡改（删节点/改样式自动恢复）；3) 组件卸载清理 observer；4) 高清屏（devicePixelRatio）模糊问题处理。
+**答**：实现 Watermark 组件：1) Canvas 生成平铺水印背景（rotate/opacity/font）；2) MutationObserver 防篡改（删节点/改样式自动恢复）；3) 组件卸载清理 observer；4) 高清屏（devicePixelRatio）模糊问题处理。
 **评分点**：
 - Canvas 尺寸乘 dpr 并 ctx.scale，文字清晰。
 - Observer 观察 attr/childList/subtree 三类变更，检测到被移除/修改即重绘。

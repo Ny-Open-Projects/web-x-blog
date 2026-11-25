@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-308：手写简版 computed（运行时依赖收集）
-**需求**：实现响应式系统 `signal(value)` 与 `computed(fn)`：1) `signal()` 返回读写器，写时通知；2) `computed` 首次读取时通过运行时依赖收集记录用到的 signal/computed；3) 任一依赖变化将 computed 标脏，下次读取时惰性重算；4) 依赖未变（值 Object.is 相同）不重算不传播；5) 不支持异步与循环（循环抛错）。
+**答**：实现响应式系统 `signal(value)` 与 `computed(fn)`：1) `signal()` 返回读写器，写时通知；2) `computed` 首次读取时通过运行时依赖收集记录用到的 signal/computed；3) 任一依赖变化将 computed 标脏，下次读取时惰性重算；4) 依赖未变（值 Object.is 相同）不重算不传播；5) 不支持异步与循环（循环抛错）。
 
 ```javascript
 let currentDeps = null

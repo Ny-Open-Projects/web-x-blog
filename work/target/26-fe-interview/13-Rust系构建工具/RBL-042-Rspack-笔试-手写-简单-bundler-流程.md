@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-042：笔试：手写一个简化 bundler（Rspack 核心流程思想版）
-**题目**：用 Node 实现 bundler 核心：1) 从 entry 出发解析 import 语句构建模块图；2) 每个模块编译成「id + 源码」并按依赖拓扑排序；3) 生成单个自执行 bundle，运行时 require 实现 ESM→内部模块映射；4) 循环依赖不崩溃（缓存已执行模块）；5) 说明 Rspack 在哪些环节把这套流程并行化。
+**答**：用 Node 实现 bundler 核心：1) 从 entry 出发解析 import 语句构建模块图；2) 每个模块编译成「id + 源码」并按依赖拓扑排序；3) 生成单个自执行 bundle，运行时 require 实现 ESM→内部模块映射；4) 循环依赖不崩溃（缓存已执行模块）；5) 说明 Rspack 在哪些环节把这套流程并行化。
 
 ```javascript
 const fs = require('fs'), path = require('path');
@@ -60,3 +60,11 @@ module.exports = { bundle };
 - 依赖表依赖 id 间接层（deps 数组下标→require(x)）。
 - 生成 IIFE + 运行时注入（bundle 产物结构正确）。
 - 能答出 Rspack 对应环节的并行化：parse 与 transform 并行、模块图构建后 chunk 生成算法化。
+
+## 变体与延伸（补充）
+
+**变体与延伸**：
+
+1. 循环依赖在运行时为什么可能拿到 undefined？ → A 执行中 require B，B 又 require A 时命中的是 cache 里 A 的**半成品 exports**；解法是导出用 getter 延迟取值，或在模块末尾统一赋值。
+2. 你这版能做 tree-shaking 吗？ → 不能。运行时 require 版本没有静态导出信息，要改成语义分析阶段收集 import/export、标记副作用，再做作用域提升与未引用导出剔除。
+3. 增量构建该缓存什么？ → 模块级缓存键 = 文件内容哈希 + 依赖导出哈希 + loader 配置；任一变化沿依赖图向上游传播失效，只按文件 mtime 判断会漏掉依赖变更。

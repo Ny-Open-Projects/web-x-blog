@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-322：笔试题：实现组件库的 Portal 与弹层定位？
-**题目**：实现 `Popover` 组件：1) 内容通过 Portal 渲染到 body；2) 根据触发元素自动定位（bottom 首选，空间不足自动翻转 top）；3) 点击外部关闭；4) Esc 关闭并归还焦点。
+**答**：实现 `Popover` 组件：1) 内容通过 Portal 渲染到 body；2) 根据触发元素自动定位（bottom 首选，空间不足自动翻转 top）；3) 点击外部关闭；4) Esc 关闭并归还焦点。
 **评分点**：
 - Portal 正确创建/复用容器节点（不要每次渲染新建 div）。
 - 定位计算正确（getBoundingClientRect + 翻转逻辑 + 边界 8px 预留）。
@@ -49,3 +49,11 @@ function Popover({ trigger, children }) {
   </>);
 }
 ```
+
+## 变体与延伸（补充）
+
+**变体与延伸**：
+
+1. 弹层在滚动容器内位置漂移怎么办？ → `position: fixed` 直接用 `getBoundingClientRect()` 的视口坐标，不叠 `scrollY`；同时监听 `scroll`（capture）与 `ResizeObserver` 重算，容器滚动也能跟住。
+2. 多个弹层嵌套时点外部怎么不误关？ → `pointerdown` 里用 `composedPath()` 判断是否落在任一弹层容器内；嵌套时只关栈顶那一层，不要一次性全关。
+3. 无障碍还差哪几项？ → `aria-expanded`/`aria-controls` 关联触发器、`role="dialog"` + `aria-modal`、Tab 焦点陷阱、关闭后焦点归还触发元素，以及打开时给背景加 `inert`。

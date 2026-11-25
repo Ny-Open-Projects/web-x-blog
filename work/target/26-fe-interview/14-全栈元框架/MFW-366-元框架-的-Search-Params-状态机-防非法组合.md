@@ -6,7 +6,7 @@ tags: [前端面试, 笔试题, MFW]
 type: 笔试题
 ---
 
-## MFW→366：searchParams 状态机
+## MFW-366：searchParams 状态机
 
 **答**:
 - 问题：URL 可任意构造（RBL-358 信任边界）——组合非法（tab=chart&export=csv&deep=500 互相矛盾）直接进查询 = DoS 与语义混乱

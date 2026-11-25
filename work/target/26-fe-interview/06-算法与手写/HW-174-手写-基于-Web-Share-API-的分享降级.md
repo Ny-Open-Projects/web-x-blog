@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-174：手写 Web Share 分享——canShare 能力检测与多级降级（系统分享→复制链接→手动提示）
 **答**：分享能力三级降级：navigator.share（系统原生分享面板，移动端体验最佳）→ navigator.clipboard.writeText 复制（桌面常用）→ 手动选择文案提示（最老环境）。canShare 先探测（带文件的分享移动端支持差异大）。
 
 ```javascript

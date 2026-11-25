@@ -42,3 +42,11 @@ await once(button, 'click');
 - 重复 resolve 的状态锁定语义（天然由 Promise 保证，需说明）
 - 事件桥接用法展示价值
 - ES2024 已内置，生产先特性检测（polyfill 只兜底老环境）
+
+## 变体与延伸（补充）
+
+**变体与延伸**：
+
+1. 有了 Promise 构造函数为什么还需要 withResolvers？ → 构造函数把 resolve/reject 困在 executor 内，要在外部作用域触发就得先把它们存出来，withResolvers 正是把 deferred 模式标准化。
+2. 重复调用 resolve 为什么不会抛错？ → Promise 规范规定状态落定后后续 resolve/reject 被静默忽略，这由内置语义保证，polyfill 不需要也不应该额外报错。
+3. 为什么用 `new this(...)` 而不是 `new Promise(...)`？ → 让子类调用 `Sub.withResolvers()` 时得到子类实例，保持原型链与 instanceof 正确，硬编码 Promise 会破坏继承。

@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-100：手写简化版 dehydrate/hydrate（缓存序列化与新鲜度恢复）
 
-**题目要求**：
+**答**：
 - dehydrate：把缓存 Map 序列化为 `{ entries: [{ key, data, ts }] }`，只序列化可 JSON 化的 data。
 - hydrate：把 entries 灌回缓存；恢复时保留原 ts（新鲜度随时间迁移），不覆盖客户端已有**更新**的数据（客户端 ts 更新则跳过）。
 - 说明 staleTime 在两端如何统一生效。

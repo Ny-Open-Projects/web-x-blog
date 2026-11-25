@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-183：手写音频上下文懒初始化——AudioContext 用户手势解锁 + 挂起恢复状态机 + 提示音队列
 **答**：浏览器音频限制的完整处理：AudioContext 必须在用户手势后才能 resumed——懒初始化（首次手势时创建/resume）+ 状态机（suspended→resumed）+ 提示音队列（手势前积累的提示音在手势解锁后按序播放）+ 自动挂起恢复（系统打断（来电）后 interrupted 状态处理 iOS）。
 
 ```javascript

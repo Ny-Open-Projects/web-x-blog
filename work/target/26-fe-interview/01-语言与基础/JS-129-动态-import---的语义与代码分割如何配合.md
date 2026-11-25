@@ -47,3 +47,9 @@ import('./math.js').then((mod) => {
   console.log(mod.default);
 });
 ```
+
+**追问**：
+
+1. 同一个模块 `import()` 两次，会发两次请求吗？ → 不会，模块只求值一次，第二次拿到同一个命名空间对象；但求值结果（含失败）会被模块映射缓存。
+2. 为什么「失败重试 import」经常无效？ → 浏览器把失败的 fetch 也记进模块映射，同一 URL 再 import 仍直接 reject；重试必须换 URL（加版本或时间戳参数）才能重新请求。
+3. 路由分包后再做 prefetch，会不会把弱网用户流量打爆？ → 会；prefetch 应在空闲且网络良好时触发，用 `requestIdleCallback` 加 `connection.effectiveType` 判断，弱网直接跳过。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-075：笔试：手写 CJS require 静态提取器（含动态 require 报告）
-**题目**：实现 extractRequires(code, id)：1) 提取所有 require('literal') 的静态依赖；2) require(variable) / require(template) 判定为动态依赖，收集并输出警告（带文件与行号）；3) 返回 { statics, dynamics }；4) 跳过注释与字符串字面量中的伪 require（简化：行级检测以 `//` 开头的行）；5) 行号计算正确。
+**答**：实现 extractRequires(code, id)：1) 提取所有 require('literal') 的静态依赖；2) require(variable) / require(template) 判定为动态依赖，收集并输出警告（带文件与行号）；3) 返回 { statics, dynamics }；4) 跳过注释与字符串字面量中的伪 require（简化：行级检测以 `//` 开头的行）；5) 行号计算正确。
 
 ```javascript
 function extractRequires(code, id) {

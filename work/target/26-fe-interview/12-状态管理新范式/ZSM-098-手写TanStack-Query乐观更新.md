@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-098：手写带快照回滚的乐观更新工具（useOptimisticUpdate）
 
-**题目要求**：
+**答**：
 - 实现 `useOptimisticUpdate({ key, apply, request })`：调用 `run(payload)` 时 ① 取消在途（简化为忽略）② 快照当前缓存 ③ apply 写入乐观值 ④ 执行 request，成功后 invalidate（标记重取），失败回滚快照。
 - 回滚后必须通知订阅者重渲染。
 

@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-167：手写表单快照对比——structuredClone 快照 + 增量 diff + dirty 字段列表驱动提交
 **答**：提交优化（只提交变更字段）：进入编辑时 structuredClone 快照 → 提交时浅 diff（顶层字段比对，嵌套字段走 JSON 比较）→ 产出 dirty 列表 → 请求只带变更字段（带宽省 + 冲突检测粒度细——乐观锁按字段版本）。
 
 ```javascript

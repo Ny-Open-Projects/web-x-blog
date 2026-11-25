@@ -34,3 +34,9 @@ const BigList = memo(({ keyword }) => {
   return filterRows(keyword).map(renderRow);
 });
 ```
+
+**追问**：
+
+1. `useDeferredValue` 延后一帧，但昂贵渲染本身要 200ms 还是卡怎么办？ → 优先级只保证输入不被阻塞，工作量得靠虚拟化、分页或 Worker 砍掉；deferred 不会让重计算变快，只会让它晚一点发生。
+2. transition 包了 setState，但列表 key 不稳定导致整表重挂载，还有用吗？ → 没用，key 不稳会整表重建、transition 白做，先修 key 与 memo 边界再谈优先级。
+3. `isStale ? 0.6 : 1` 做过渡态，频繁切换会不会闪？ → 加最小过渡时长或用 CSS transition 平滑，否则每个按键都在 0.6 与 1 之间跳，观感比卡顿更差。

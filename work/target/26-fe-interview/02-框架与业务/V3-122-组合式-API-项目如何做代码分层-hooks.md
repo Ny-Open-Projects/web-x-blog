@@ -41,3 +41,9 @@ export function useOrderList() {
 //
 // 边界口诀：services 管 IO，hooks 编排流程与生命周期，stores 管跨组件共享
 ```
+
+**追问**：
+
+1. 两个 composable 互相调用会不会形成循环依赖？→ 会，尤其在彼此 import 对方时；解法是依赖注入：把 service 或 store 当参数传进去，不 import 对方，或者把共用逻辑再下沉一层。
+2. store 里能不能写 computed 和异步 action？→ computed 可以，只做派生且不发请求；异步 action 保留但内部只调 service，裸 fetch 和组装查询参数必须留在 service，否则 store 变成第二个组件。
+3. 怎么防止 composable 变成"万能层"？→ 划三条线：出现业务规则或格式化就下沉纯函数 utils，出现 IO 就回 services，composable 只留组合、生命周期与 loading/error 编排。

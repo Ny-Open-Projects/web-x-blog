@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-406：笔试：实现一个模块依赖注入容器（测试/生产双绑定）。
-**题目**：`createContainer({ overrides })`：注册服务工厂，`get(name)` 返回实例；overrides 里的名字直接用测试替身；循环依赖检测报错。
+**答**：`createContainer({ overrides })`：注册服务工厂，`get(name)` 返回实例；overrides 里的名字直接用测试替身；循环依赖检测报错。
 
 ```javascript
 export function createContainer(defs = {}, overrides = {}) {

@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-189：手写路由数据预取——hover/触摸触发 prefetch + 去重 + TTL 缓存与命中率上报
 **答**：路由数据预取的完整工程化：触发（hover 100ms 阈值防误滑 + touchstart 触摸设备）→ 去重（在途 Map 共享 Promise）→ TTL 缓存（预取数据 30s 有效，过期即弃）→ 命中率上报（X-Prefetch 标记，PER-391）→ 弱网/saveData 禁用。
 
 ```javascript

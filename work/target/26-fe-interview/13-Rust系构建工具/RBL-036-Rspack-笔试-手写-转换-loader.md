@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-036：笔试：手写一个 Rspack 风格的 markdown 转 JS loader
-**题目**：实现一个 loader（webpack/Rspack 兼容写法），把 .md 文件转换为 JS 模块。要求：1) 支持异步 loader 写法（用 this.async）；2) 把 markdown 中图片路径改写为 options.base 前缀；3) 输出 `export default html` 形式；4) options.base 为空时跳过改写；5) 出错时通过回调让构建失败。
+**答**：实现一个 loader（webpack/Rspack 兼容写法），把 .md 文件转换为 JS 模块。要求：1) 支持异步 loader 写法（用 this.async）；2) 把 markdown 中图片路径改写为 options.base 前缀；3) 输出 `export default html` 形式；4) options.base 为空时跳过改写；5) 出错时通过回调让构建失败。
 
 ```javascript
 const { marked } = require('marked');

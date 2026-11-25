@@ -47,3 +47,11 @@ function reconcileKeyedChildren(oldChildren, newChildren, container) {
 // 新：[{key:0,D},{key:1,A},{key:2,B},{key:3,C}]
 // key=0 上 A 被当 D 复用 —— A 的 input 值显示给了 D，全部串位
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 同层内调整顺序时，React 会重建 DOM 吗？ → 不会。key 匹配上就复用 fiber，只打 placement 标记，commit 阶段用 insertBefore 把已有节点搬到新位置，DOM 节点与组件 state 都保留。
+2. 为什么 key 只要求"同层级唯一"，不需要全局唯一？ → 因为 existingChildren 这个 Map 只在当前父节点的 children 范围内建立，跨父节点的 key 根本不参与同一次比较；但同一列表里重复 key 会导致 Map 覆盖，复用直接错乱。
+3. 列表重排后输入框失焦、动画跳一下，根因是什么？ → 错位复用让 React 对已聚焦元素执行 insertBefore，元素从文档里摘下再插入会丢焦点，同时触发 CSS 过渡重算；换稳定业务 id 就能同时消掉这两个现象。

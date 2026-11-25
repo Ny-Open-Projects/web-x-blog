@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-411：手写 WASM 插件的 JS 侧加载器
-**需求**：实现 `loadWasmPlugin(wasmPath, allowedCaps)`：1) 实例化 wasm 模块（imports 注入宿主能力：白名单 fs.read/env.get——未声明能力调用即抛错）；2) 按插件导出的 hooks 列表生成 JS 插件对象（transform 等方法桥接到 wasm 导出）；3) 数据传递：code 写入 wasm 线性内存（exports.alloc + memory.write）→ 调用 hook → 读回结果（ptr+len）；4) 超时保护（同步 wasm 调用无法 abort——用 hook 级时间统计告警）；5) capabilities 元数据导出（插件声明的能力清单供审计）。
+**答**：实现 `loadWasmPlugin(wasmPath, allowedCaps)`：1) 实例化 wasm 模块（imports 注入宿主能力：白名单 fs.read/env.get——未声明能力调用即抛错）；2) 按插件导出的 hooks 列表生成 JS 插件对象（transform 等方法桥接到 wasm 导出）；3) 数据传递：code 写入 wasm 线性内存（exports.alloc + memory.write）→ 调用 hook → 读回结果（ptr+len）；4) 超时保护（同步 wasm 调用无法 abort——用 hook 级时间统计告警）；5) capabilities 元数据导出（插件声明的能力清单供审计）。
 
 ```javascript
 import fs from 'node:fs'

@@ -10,7 +10,7 @@ type: 面试题
 
 **答**：
 - 公共链路：bundler（webpack/vite）监听文件变化 → 重新编译该模块 → 通过 ws 通知浏览器 → runtime 执行模块更新回调（`module.hot.accept` / `import.meta.hot.accept`）→ **框架的 HMR 运行时**决定"只是重渲染"还是"整页刷新"。
-- **react-refresh**：编译器给每个组件函数注入 `registerSignature(type, getKey)`；runtime 在模块更新时比较新旧组件的**签名**（自定义 Hook 列表 + 源码结构 hash）——签名不变 → `setType` 原地替换组件函数引用，fiber 复用、**state 保留**；签名变了（Hook 数量/顺序变了）→ 强制 remount 该组件子树（state 必然丢，否则 Hooks 链表对不上）。
+- **react-refresh**：编译器给每个组件函数注入 `$RefreshReg$(type, id)`（注册组件）与 `$RefreshSig$()`（生成签名函数，运行时经 `setSignature(fn, sig)` 登记）；runtime 在模块更新时比较新旧组件的**签名**（自定义 Hook 列表 + 源码结构 hash）——签名不变 → `setType` 原地替换组件函数引用，fiber 复用、**state 保留**；签名变了（Hook 数量/顺序变了）→ 强制 remount 该组件子树（state 必然丢，否则 Hooks 链表对不上）。
 - **Vue HMR**：SFC 编译产物带 `__hmrId`；运行时把组件实例注册到 `instancesMap`，文件更新时走 `rerender`（只重跑 render，setup 不重跑，state 保留）或 `reload`（重新执行 setup，当 script 部分变化时）。
 - 边界本质相同：**变更是否影响"组件形状"**——纯 render/模板改 → 热替换渲染层；setup/逻辑结构改 → 重执行初始化；模块级副作用/store 定义改 → 往上传直到整页 reload。
 
@@ -55,3 +55,11 @@ function vueHmr(instance, newRender, scriptChanged) {
 }
 function useStateLike(v) { return v; }
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 为什么只改了一个自定义 Hook，调用它的组件也会被 remount？ → 签名里包含被调用 Hook 的序列与结构，Hook 自身签名变化会沿调用链向上冒泡，所有调用它的组件签名一并失效，只能 remount 以保证 Hooks 链表对得上。
+2. 签名一致、state 保留的情况下，useEffect 会不会重跑？ → 不会。组件函数引用被原地替换，fiber 与 memoizedState 全部保留，依赖未变的 effect 不重跑、也不触发 cleanup；只有组件被 remount 才会重新执行。
+3. 什么写法会让 Fast Refresh 退化成整页 reload，Vue 侧对应哪一类？ → 导出非组件（如模块级常量、store 实例、工具函数）或组件用匿名箭头高阶包裹导致签名丢失，react-refresh 只能往上传；Vue 侧对应改了 `<script>` 里的模块级副作用，走 reload 而非 rerender。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-426：手写构建流水线 DAG 校验器
-**需求**：实现 `validatePipeline(stages)`：1) stages：`{ id, needs: string[], outputs: string[], inputs: string[] }`；2) 检查：环（needs 成环拒绝）、缺失引用（needs/inputs 引用不存在的 stage/产物）、产物唯一性（同一产物两个 stage 产出——冲突）、输入就绪（inputs 必须来自 needs 的 outputs——隐式依赖检测）；3) 返回 { ok, errors: [{code, detail}] }；4) 输出拓扑序（合法时给出执行顺序建议）；5) 错误码风格（DAG_CYCLE/DAG_MISSING/DAG_CONFLICT/DAG_IMPLICIT）。
+**答**：实现 `validatePipeline(stages)`：1) stages：`{ id, needs: string[], outputs: string[], inputs: string[] }`；2) 检查：环（needs 成环拒绝）、缺失引用（needs/inputs 引用不存在的 stage/产物）、产物唯一性（同一产物两个 stage 产出——冲突）、输入就绪（inputs 必须来自 needs 的 outputs——隐式依赖检测）；3) 返回 { ok, errors: [{code, detail}] }；4) 输出拓扑序（合法时给出执行顺序建议）；5) 错误码风格（DAG_CYCLE/DAG_MISSING/DAG_CONFLICT/DAG_IMPLICIT）。
 
 ```javascript
 export function validatePipeline(stages) {

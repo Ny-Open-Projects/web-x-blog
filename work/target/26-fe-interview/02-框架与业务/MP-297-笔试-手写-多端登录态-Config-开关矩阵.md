@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-297：笔试：手写远程 Config 开关矩阵
-**题**：实现 ConfigManager：init() 启动拉取远程配置（带本地缓存兜底——网络失败用上次配置）；get(key, defaultValue)；支持灰度分组（config 按 userBucket 返回不同值）；配置版本号 diff（相同版本不写 storage）；暴露订阅（key 变化通知）。
+**答**：实现 ConfigManager：init() 启动拉取远程配置（带本地缓存兜底——网络失败用上次配置）；get(key, defaultValue)；支持灰度分组（config 按 userBucket 返回不同值）；配置版本号 diff（相同版本不写 storage）；暴露订阅（key 变化通知）。
 
 ```javascript
 class ConfigManager {
@@ -42,6 +42,3 @@ class ConfigManager {
 - 版本 diff 减少 storage 写。
 - 灰度 bucket 分组。
 - watch 订阅让开关变化驱动 UI（热更新降级的前提）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-735dfdc4-6180-4141-920c-5470e58e19e9-cwd'; fi
-exit "$__zcode_status"

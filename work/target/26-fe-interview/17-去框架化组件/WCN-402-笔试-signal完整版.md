@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-402：笔试：手写带双向订阅注册的 signal/computed/effect（依赖图完整版）。
-**题目**：在 401 基础上补全：signal.subs 注册订阅者；computed 作为「既是依赖又是订阅者」的双向节点；写信号 → 标脏直接订阅者 → 传播到间接 effect；批处理去重。
+**答**：在 401 基础上补全：signal.subs 注册订阅者；computed 作为「既是依赖又是订阅者」的双向节点；写信号 → 标脏直接订阅者 → 传播到间接 effect；批处理去重。
 
 ```javascript
 const stack = [];

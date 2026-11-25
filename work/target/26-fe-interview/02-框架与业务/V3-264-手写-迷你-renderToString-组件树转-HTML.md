@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-264：手写：迷你 renderToString（组件树 → HTML 字符串）
-**需求**：实现 `renderToString(vnode)`：支持元素节点（attrs 序列化含 class/style/布尔属性）、文本、子组件（setup 函数返回渲染函数）、数组 children、props 内函数属性忽略、事件忽略；HTML 转义文本节点；支持 Fragment 输出为子元素序列。
+**答**：实现 `renderToString(vnode)`：支持元素节点（attrs 序列化含 class/style/布尔属性）、文本、子组件（setup 函数返回渲染函数）、数组 children、props 内函数属性忽略、事件忽略；HTML 转义文本节点；支持 Fragment 输出为子元素序列。
 **评分点**：
 - attrs 序列化：布尔 true 属性只写名、null/undefined 跳过、函数跳过
 - 文本与属性值的 HTML 转义（& < > "）

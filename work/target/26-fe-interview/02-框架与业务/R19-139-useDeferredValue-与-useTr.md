@@ -64,3 +64,11 @@ export function SearchWithTransition({ items }) {
 // 选型口诀：触发点在手 -> useTransition；触发点在父级/受控库 -> useDeferredValue
 // 封装通用列表时推荐 A：调用方无需理解 transition 也能获得性能收益
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. useDeferredValue 的第二个参数 initialValue 解决什么问题？ → React 19 新增。首帧直接用它而不是"先真值后降级"，避免初始就渲染一万行重活；可传一个轻量占位渲染，让第一次 paint 直接轻装上阵。
+2. 为什么说有不可中断的同步工作时两者都会失效？ → 可中断只作用于 render 阶段。如果重活落在 useLayoutEffect 或同步的第三方绘制里，会占住主线程，旧 UI 无法保持响应，降级也就没有意义。
+3. 它和 debounce 的本质区别是什么？ → debounce 按时间窗口丢弃事件、延迟固定；deferred 按渲染优先级让新值尽快追上，输入即刻上屏、重活可被打断，没有固定延迟，但慢设备上结果仍可能落后于输入。

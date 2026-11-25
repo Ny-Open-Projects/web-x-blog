@@ -32,3 +32,9 @@ app.options('/data', (req, res) => {
   }).sendStatus(204);
 });
 ```
+
+**追问**：
+
+1. 为什么 OPTIONS 预检请求不带 cookie 和自定义头？ → 规范如此，预检只用于探测服务端能力；所以鉴权中间件若拦截所有请求，必须先放行 OPTIONS 再鉴权。
+2. `Access-Control-Max-Age` 设得很大有什么副作用？ → 缓存期内改了允许的方法或头不会生效，前端会一直按旧策略发请求；Chrome 上限 2 小时，要权衡。
+3. 为什么带 `Authorization` 头一定触发预检？ → 它不在 CORS 安全头白名单里（只有 Accept、Accept-Language、Content-Language 和受限的 Content-Type），任何非白名单头都触发预检。

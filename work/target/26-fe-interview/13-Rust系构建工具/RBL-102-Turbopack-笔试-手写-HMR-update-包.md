@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-102：笔试：手写 HMR update 包生成器（增量产物 + accept 链）
-**题目**：实现 buildUpdate(changedModules, graph)：1) 找出每个变更模块沿依赖引用链向上传播的所有受影响模块；2) 判断根（无人引用的受影响模块）作为 update 入口；3) 生成 update 包：{ changed, affected, entry, hot }——hot 为 true 仅当根模块声明了 accept（源码含 module.hot.accept 或 import.meta.hot.accept）；4) 无 accept 的根 → hot: false（提示整页刷新）；5) 循环依赖不造成死循环。
+**答**：实现 buildUpdate(changedModules, graph)：1) 找出每个变更模块沿依赖引用链向上传播的所有受影响模块；2) 判断根（无人引用的受影响模块）作为 update 入口；3) 生成 update 包：{ changed, affected, entry, hot }——hot 为 true 仅当根模块声明了 accept（源码含 module.hot.accept 或 import.meta.hot.accept）；4) 无 accept 的根 → hot: false（提示整页刷新）；5) 循环依赖不造成死循环。
 
 ```javascript
 function buildUpdate(changedModules, graph) { // graph: Map<mod, {importers:Set, accepts:boolean}>

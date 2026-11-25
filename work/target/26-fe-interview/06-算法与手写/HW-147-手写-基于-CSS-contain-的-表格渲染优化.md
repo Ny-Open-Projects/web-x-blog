@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-147：手写大表格渲染优化——contain/rga 固定布局 + 分块挂载 + 行高契约防抖动
 **答**：1000 行表格渲染卡顿三层优化：① table-layout: fixed + contain: strict（行子树样式/布局影响范围锁定，PER-345）；② 分块挂载（rAF 每帧 50 行，帧预算控制 PER-241）；③ 行高契约（CSS 固定行高，内容溢出 ellipsis——单元格内容不定高，杜绝逐行 layout 连锁）。
 
 ```javascript

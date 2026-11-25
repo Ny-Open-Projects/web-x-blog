@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-199：笔试：手写 `use(Promise)` 的简化版（挂起与缓存）
-**题目**：React 的 `use(promise)` 在渲染期间读取 Promise：pending 时抛出 promise 让 Suspense 接管，resolve 后返回值，reject 时抛给 ErrorBoundary。实现简化版：① 同一个 promise 组件重渲染时不重复订阅（结果缓存挂在 promise 上）；② pending 抛出原 promise（Suspense 靠引用稳定去重，不能每次抛新 promise）；③ resolve 后返回 value；④ reject 后抛出错误（只抛一次，后续重渲染抛同样的错误）；⑤ 不允许在 try/catch 里捕获挂起信号（调用方误用时给出可读报错）。
+**答**：React 的 `use(promise)` 在渲染期间读取 Promise：pending 时抛出 promise 让 Suspense 接管，resolve 后返回值，reject 时抛给 ErrorBoundary。实现简化版：① 同一个 promise 组件重渲染时不重复订阅（结果缓存挂在 promise 上）；② pending 抛出原 promise（Suspense 靠引用稳定去重，不能每次抛新 promise）；③ resolve 后返回 value；④ reject 后抛出错误（只抛一次，后续重渲染抛同样的错误）；⑤ 不允许在 try/catch 里捕获挂起信号（调用方误用时给出可读报错）。
 
 ```tsx
 type Status = 'pending' | 'ok' | 'err';

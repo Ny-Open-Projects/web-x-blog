@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-196：手写基于配额的存储降级决策——estimate 百分比驱动缓存预算（三级策略 PER-323 工程化）
 **答**：PER-323 存储分级的自动化落地：estimate() → 用量/配额比 + persisted 状态 → 输出缓存预算档位（persistent/generous/conservative/minimal）→ 缓存层按档位取预算（预算 = 档位配置 × 配额比例）；档位变化时缓存层平滑收缩（LRU 淘汰到新预算）。
 
 ```javascript

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-138：笔试：手写路由守卫（loader 重定向 + 权限矩阵）
-**题目**：实现可复用的守卫工具 `requireUser(options)` 与 `requireRole(roles)`，供 RRv7 loader 使用：① 未登录 redirect 到 /login 并带 returnTo；② 已登录但角色不符抛 403 Response；③ 支持从 session/Authorization 双来源解析；④ returnTo 有开放重定向防护（只允许站内相对路径）；⑤ 提供 loader 装饰器 `withGuard(loader, guard)` 组合。
+**答**：实现可复用的守卫工具 `requireUser(options)` 与 `requireRole(roles)`，供 RRv7 loader 使用：① 未登录 redirect 到 /login 并带 returnTo；② 已登录但角色不符抛 403 Response；③ 支持从 session/Authorization 双来源解析；④ returnTo 有开放重定向防护（只允许站内相对路径）；⑤ 提供 loader 装饰器 `withGuard(loader, guard)` 组合。
 
 ```ts
 import { redirect } from 'react-router';

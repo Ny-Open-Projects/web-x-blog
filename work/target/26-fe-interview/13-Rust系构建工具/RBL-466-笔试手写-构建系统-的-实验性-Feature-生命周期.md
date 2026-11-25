@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-466：手写实验性 Feature 生命周期管理
-**需求**：实现 `createFeatureLifecycle(registry)`：1) 注册：`register({ name, stage: 'experimental', owner, eolDate, docs })`——experimental 必须有 owner 与 EOL（无主人不进主干）；2) 阶段流转：experimental → stable（需采纳数据：使用者 ≥3 团队）→ deprecated（映射替代 + 期限）→ removed；3) 流转校验：跳阶段拒绝（experimental 不能直接 removed——要 deprecated 通知期）；4) 定期审计：experimental 超过 eolDate 未流转 → 告警（孤儿实验清理）；5) 输出生命周期看板（各阶段数量与即将 EOL 清单）。
+**答**：实现 `createFeatureLifecycle(registry)`：1) 注册：`register({ name, stage: 'experimental', owner, eolDate, docs })`——experimental 必须有 owner 与 EOL（无主人不进主干）；2) 阶段流转：experimental → stable（需采纳数据：使用者 ≥3 团队）→ deprecated（映射替代 + 期限）→ removed；3) 流转校验：跳阶段拒绝（experimental 不能直接 removed——要 deprecated 通知期）；4) 定期审计：experimental 超过 eolDate 未流转 → 告警（孤儿实验清理）；5) 输出生命周期看板（各阶段数量与即将 EOL 清单）。
 
 ```javascript
 const FLOW = { experimental: ['stable', 'deprecated'], stable: ['deprecated'], deprecated: ['removed'] }

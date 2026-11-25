@@ -51,3 +51,11 @@ sequenceDiagram
   Cmt->>View: 同步提交 DOM 更新
   View->>View: 绘制完成后异步执行 useEffect
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 为什么跨层级移动会被当成删除加重建？ → diff 只在同一父节点的 children 范围内比较，没有跨层搜索机制（那会退化到 O(n³) 级别）；从 A 容器挪到 B 容器，在算法看来是两次互不相关的操作。
+2. key 相同但组件类型不同，会复用吗？ → 不会。复用条件是 key 与 type 同时相等，类型变了就卸载旧的、按新类型创建，state 全部丢失，这就是三元里切换两个组件会重置状态的原因。
+3. 三条策略只覆盖 render 阶段，commit 还要做什么？ → diff 产出 placement/update/deletion 标记，commit 分 beforeMutation、mutation（真正改 DOM）、layout 三段执行，layout 之后才异步跑 passive effect。

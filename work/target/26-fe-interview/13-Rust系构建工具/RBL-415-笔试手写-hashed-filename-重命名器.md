@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-415：手写 hashed filename 重命名器
-**需求**：实现 `hashRename(files, { pattern })`：1) files：`Map<path, content>`；2) 重命名：`main.js → main.a1b2c3d4.js`（内容 sha256 前 8 位，替换扩展名前插入）；3) 引用重写：JS/CSS/HTML 内对旧路径的引用替换为新路径（字符串精确匹配 + 相对路径解析归一）；4) 两轮收敛：重命名后产物引用链二次校验（所有引用指向存在的文件）；5) 返回 { renamed: Map<old, new>, files: 新 Map, brokenRefs: [] }。
+**答**：实现 `hashRename(files, { pattern })`：1) files：`Map<path, content>`；2) 重命名：`main.js → main.a1b2c3d4.js`（内容 sha256 前 8 位，替换扩展名前插入）；3) 引用重写：JS/CSS/HTML 内对旧路径的引用替换为新路径（字符串精确匹配 + 相对路径解析归一）；4) 两轮收敛：重命名后产物引用链二次校验（所有引用指向存在的文件）；5) 返回 { renamed: Map<old, new>, files: 新 Map, brokenRefs: [] }。
 
 ```javascript
 import crypto from 'node:crypto'

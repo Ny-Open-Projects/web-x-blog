@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-035：笔试：手写 ErrorBoundary 组件（含 reset 重试与 fallback 函数式）
-**题目**：不用 error.js，手写一个通用 React ErrorBoundary（class 组件）：捕获子树渲染错误，支持 `fallbackRender({error, reset})`、`onError` 上报回调、`reset()` 重试。要求：fallback 自身抛错不能死循环；reset 改变 retryKey 强制重挂载子树；事件回调错误不在捕获范围（说明即可）。
+**答**：不用 error.js，手写一个通用 React ErrorBoundary（class 组件）：捕获子树渲染错误，支持 `fallbackRender({error, reset})`、`onError` 上报回调、`reset()` 重试。要求：fallback 自身抛错不能死循环；reset 改变 retryKey 强制重挂载子树；事件回调错误不在捕获范围（说明即可）。
 
 ```jsx
 import { Component } from 'react';

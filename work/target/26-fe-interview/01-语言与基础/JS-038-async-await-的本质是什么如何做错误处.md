@@ -35,3 +35,9 @@ async function loadFast() {
   return { user, cfg };
 }
 ```
+
+**追问**：
+
+1. `loadFast` 里 `Promise.all` 有一个 reject，另一个请求会被取消吗？ → 不会，另一个继续跑，只是结果被丢弃；要真取消必须挂同一个 AbortController，或用 allSettled 收全后再判断。
+2. await 之后的代码抛错且没 try/catch，错误去哪了？ → 变成该 async 函数返回 Promise 的 rejection；调用方不 await 或不 catch，就会触发 unhandledrejection。
+3. 既然 async 不阻塞主线程，为什么还会卡页面？ → 它只让出当前函数，后续是微任务；若微任务持续排队清不空，渲染同样被饿死。

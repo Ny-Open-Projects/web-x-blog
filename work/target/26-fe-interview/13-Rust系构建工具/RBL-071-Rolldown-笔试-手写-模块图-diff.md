@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-071：笔试：手写两次构建的模块归属 diff 工具（chunk 迁移检测）
-**题目**：实现 diffChunkMembers(before, after)：输入两次构建的 chunk 信息数组 [{ chunkName, modules: ['src/a.ts', ...] }]，输出：1) 新增/删除的 chunk；2) 模块从 chunk X 迁移到 chunk Y 的清单；3) 同名 chunk 成员一致时输出 stable；4) 迁移会影响缓存命中，输出受影响入口的警告；5) 支持 --json 输出。
+**答**：实现 diffChunkMembers(before, after)：输入两次构建的 chunk 信息数组 [{ chunkName, modules: ['src/a.ts', ...] }]，输出：1) 新增/删除的 chunk；2) 模块从 chunk X 迁移到 chunk Y 的清单；3) 同名 chunk 成员一致时输出 stable；4) 迁移会影响缓存命中，输出受影响入口的警告；5) 支持 --json 输出。
 
 ```javascript
 function diffChunkMembers(before, after) {

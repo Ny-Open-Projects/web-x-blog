@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-466：Middleware matcher 简化引擎
-**需求**：实现 `matchMiddleware(pathname, matcher)`：1) matcher = { rules: ['/dashboard/:path*', '/about', '/blog/(?<year>\\d+)'] }，支持三种语法：字面量、`:param` 与 `:param*` 通配、正则；2) 返回 { matched, params }，`:path*` 捕获余下所有段为字符串；3) 排除规则 `!` 前缀优先于包含（`/dashboard/:path*` 但 `!/dashboard/admin`）；4) 尾斜杠归一化（`/about/` 命中 `/about`）——middleware 每请求都跑，引擎必须零依赖且 O(规则数)。
+**答**：实现 `matchMiddleware(pathname, matcher)`：1) matcher = { rules: ['/dashboard/:path*', '/about', '/blog/(?<year>\\d+)'] }，支持三种语法：字面量、`:param` 与 `:param*` 通配、正则；2) 返回 { matched, params }，`:path*` 捕获余下所有段为字符串；3) 排除规则 `!` 前缀优先于包含（`/dashboard/:path*` 但 `!/dashboard/admin`）；4) 尾斜杠归一化（`/about/` 命中 `/about`）——middleware 每请求都跑，引擎必须零依赖且 O(规则数)。
 
 ```javascript
 export function matchMiddleware(pathname, { rules = [] } = {}) {

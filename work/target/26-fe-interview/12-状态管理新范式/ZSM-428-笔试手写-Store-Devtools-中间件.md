@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-428：手写 Store Devtools 中间件
-**需求**：实现 `withDevtools(storeCreator)`：1) 包装 storeCreator：每次 setState 记录 `{ action, prev, next, ts }` 到时间线（上限 200 条）；2) devtools API：`jump(index)` 跳到第 n 条状态（整体替换 store state）；3) `pause()/resume()`：暂停时 state 变更仍生效但不再记录；4) `exportLog()` 导出时间线（脱敏钩子 sanitize 可选）；5) 时间线满 FIFO 淘汰；6) jump 后继续 set 的行为：时间线分叉——truncate 到当前点再追加。
+**答**：实现 `withDevtools(storeCreator)`：1) 包装 storeCreator：每次 setState 记录 `{ action, prev, next, ts }` 到时间线（上限 200 条）；2) devtools API：`jump(index)` 跳到第 n 条状态（整体替换 store state）；3) `pause()/resume()`：暂停时 state 变更仍生效但不再记录；4) `exportLog()` 导出时间线（脱敏钩子 sanitize 可选）；5) 时间线满 FIFO 淘汰；6) jump 后继续 set 的行为：时间线分叉——truncate 到当前点再追加。
 
 ```javascript
 export function withDevtools(storeCreator, { limit = 200, sanitize } = {}) {

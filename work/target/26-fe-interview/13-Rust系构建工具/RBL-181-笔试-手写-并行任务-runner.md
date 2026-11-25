@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-181：笔试：手写并行任务 runner（并发限流 + fail-fast + 超时 kill）
 
-**题目**：写 task-runner.mjs：1) 输入命令数组（如 ['pnpm --filter a build', ...]）与并发度 N；2) 用 child_process.spawn 并发执行，同时最多 N 个；3) fail-fast：任一命令非零退出，不再派发新任务，等待在跑任务结束（或 --hard 立即 kill 全部）；4) 每任务支持超时（默认 5min）超时 kill 并计为失败；5) 输出每个任务耗时与状态汇总，退出码 = 失败数 >0 ? 1 : 0。
+**答**：写 task-runner.mjs：1) 输入命令数组（如 ['pnpm --filter a build', ...]）与并发度 N；2) 用 child_process.spawn 并发执行，同时最多 N 个；3) fail-fast：任一命令非零退出，不再派发新任务，等待在跑任务结束（或 --hard 立即 kill 全部）；4) 每任务支持超时（默认 5min）超时 kill 并计为失败；5) 输出每个任务耗时与状态汇总，退出码 = 失败数 >0 ? 1 : 0。
 
 ```javascript
 // task-runner.mjs

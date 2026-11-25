@@ -53,3 +53,11 @@ function EditorByKey({ draftId }) {
 ```
 
 ## 二十四、状态库与数据流原理对比
+
+## 追问（补充）
+
+**追问**：
+
+1. key 变化时旧子树的 effect 清理和新子树的 effect 谁先执行？ → 同一个 commit 内先对旧树全部执行 cleanup（子先父后），再 mount 新树、按顺序跑 effect；因为都在 commit 内完成，用户看不到中间帧，这也是它优于手动 reset 的关键。
+2. 什么情况下不该用 key 重置？ → 子树很大且需要保留 DOM、滚动位置、焦点时不该用，因为 key 重置等于全量重建 DOM、重跑所有 effect；这种场景应用 ref 暴露的 reset 方法只清数据。
+3. 同一位置 key 相同但组件类型变了，state 会保留吗？ → 不会。复用条件是 key 相同**且** type 相同，type 不同一律 unmount 再 mount，这就是条件渲染里三元切换两个组件会丢 state 的源码原因。

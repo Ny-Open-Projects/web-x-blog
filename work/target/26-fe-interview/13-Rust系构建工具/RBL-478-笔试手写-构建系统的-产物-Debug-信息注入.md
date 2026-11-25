@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-478：手写产物 debug 信息注入
-**需求**：实现 `injectDebugInfo(bundle, meta)`：1) 注入运行时可读的构建指纹（版本/sha/构建时间戳/工具版本/envHash）——线上排查「用户跑的哪个版本」；2) 注入方式：全局对象（window.__BUILD__）+ 版本端点（/version.json 静态生成）；3) 稳定性权衡：时间戳破坏缓存 → 分离策略（产物不含时间戳，版本信息独立文件——hash 稳定与可追溯兼得）；4) sourcemap 关联：注入 bundleVersion 与 map 版本配对（监控符号化匹配）；5) 隐私边界：不注入机器名/用户路径。
+**答**：实现 `injectDebugInfo(bundle, meta)`：1) 注入运行时可读的构建指纹（版本/sha/构建时间戳/工具版本/envHash）——线上排查「用户跑的哪个版本」；2) 注入方式：全局对象（window.__BUILD__）+ 版本端点（/version.json 静态生成）；3) 稳定性权衡：时间戳破坏缓存 → 分离策略（产物不含时间戳，版本信息独立文件——hash 稳定与可追溯兼得）；4) sourcemap 关联：注入 bundleVersion 与 map 版本配对（监控符号化匹配）；5) 隐私边界：不注入机器名/用户路径。
 
 ```javascript
 export function injectDebugInfo(bundle, meta) {

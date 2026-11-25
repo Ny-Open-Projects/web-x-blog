@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-408：手写 atomFamily（参数化 atom + LRU 清理）
-**需求**：实现 `createAtomFamily(factory, { max = 100 })`：1) `get(param)` 返回该参数的 atom 实例（同参数复用）；2) LRU 淘汰：超过 max 时清除最久未访问的 atom（连同其状态）；3) `remove(param)` 主动清除；4) 访问（get）刷新 LRU 顺序；5) 正在被订阅的 atom 不淘汰（有活引用保护）。
+**答**：实现 `createAtomFamily(factory, { max = 100 })`：1) `get(param)` 返回该参数的 atom 实例（同参数复用）；2) LRU 淘汰：超过 max 时清除最久未访问的 atom（连同其状态）；3) `remove(param)` 主动清除；4) 访问（get）刷新 LRU 顺序；5) 正在被订阅的 atom 不淘汰（有活引用保护）。
 
 ```javascript
 export function createAtomFamily(factory, { max = 100 } = {}) {

@@ -54,3 +54,9 @@ function Demo() {
   );
 }
 ```
+
+**追问**：
+
+1. 为什么不能在 render 期间读写 ref 来"传值"？→ render 可能被丢弃或重复执行（StrictMode 会双调），写 ref 属于副作用，而且本次读到的还是上一次渲染留下的值；读写都放到事件或 effect 里。
+2. `useRef` 和 `useMemo` 存实例有什么区别？→ `useMemo` 只是缓存提示，内存压力下 React 可以丢弃重算；`useRef` 保证同一对象存活到卸载，存定时器 ID、图表实例、WebSocket 必须用它。
+3. 既想改 ref 又想更新视图怎么办？→ 别给 ref 加订阅，那不叫 ref 了；用 `useCallback` 包一层 setState 触发器，或者直接换成 useState / useSyncExternalStore。

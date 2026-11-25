@@ -58,3 +58,11 @@ function childSetup(props) {
   return () => props.count.value + 1; // 正确（模板中 {{ count }} 会自动解包）
 }
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. Vue 3.5 的 props 解构响应式和这里的解包规则冲突吗？ → 不冲突，但是两件事。3.5 起 `const { count } = defineProps()` 由编译器转成按属性访问以保持响应，这属于编译期转换；一旦你把它存进数组或 Map，仍然拿到原始值或 ref 本身，运行时的解包规则不变。
+2. 为什么给 reactive 里已有的 ref 属性赋普通值，不会替换整个 ref？ → set trap 判断旧值是 ref 而新值不是 ref，就写 `old.value = nv`，保持同一个 ref 实例，所以外部持有该 ref 的人也能看到更新；只有赋一个新 ref 才会整体替换这个属性。
+3. shallowReactive / shallowRef 嵌套时解包还生效吗？ → 不生效。shallowReactive 只代理第一层，嵌套对象不做深层代理，里面的 ref 既不追踪也不解包；shallowRef 的 .value 指向的对象整块不代理，用它是为了省掉深层开销。

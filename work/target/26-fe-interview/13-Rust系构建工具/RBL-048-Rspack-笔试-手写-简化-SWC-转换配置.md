@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-048：笔试：手写简化 AST 转换器（识别 import 并重写目标语法）
-**题目**：实现 transform(code, options)：1) 把 `import x from 'y'` 转换为 CommonJS `const x = require('y')`（默认导出）；2) 处理命名导入 `import { a, b as c } from 'y'`；3) options.dropConsole 为真时删除 console.* 语句；4) 保留代码其余部分不变；5) 说明为什么生产级实现必须走 AST 而不是正则。
+**答**：实现 transform(code, options)：1) 把 `import x from 'y'` 转换为 CommonJS `const x = require('y')`（默认导出）；2) 处理命名导入 `import { a, b as c } from 'y'`；3) options.dropConsole 为真时删除 console.* 语句；4) 保留代码其余部分不变；5) 说明为什么生产级实现必须走 AST 而不是正则。
 
 ```javascript
 function transform(code, { dropConsole = false } = {}) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-339：笔试题：手写 WeakRef 缓存（自动回收）？
-**题目**：实现 WeakCache：1) 大对象缓存（WeakRef 持有，GC 可回收）；2) get 时 ref.deref() 判活；3) FinalizationRegistry 清理键记录；4) 与普通 Map 缓存的适用边界。
+**答**：实现 WeakCache：1) 大对象缓存（WeakRef 持有，GC 可回收）；2) get 时 ref.deref() 判活；3) FinalizationRegistry 清理键记录；4) 与普通 Map 缓存的适用边界。
 **评分点**：
 - deref 判活与重建策略。
 - Registry 回调清理键表。

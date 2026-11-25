@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-443：手写迁移函数静态安全校验
-**需求**：实现 `validateMigrateFn(fnSource)`：对用户写的 persist migrate 函数做静态检查（基于正则的简化 lint）：1) 禁止 `Date.now`/`Math.random`（迁移必须确定性）；2) 禁止访问 `localStorage`/`document`/`window`（纯函数）；3) 禁止 `fetch`/`XMLHttpRequest`（无网络）；4) 禁止 `while(true)` 与无终止条件的递归自调用（防死循环）；5) 返回 `{ ok, violations: [{rule, line}] }`；6) 违规即拒绝注册该 migrate（fail-fast）。
+**答**：实现 `validateMigrateFn(fnSource)`：对用户写的 persist migrate 函数做静态检查（基于正则的简化 lint）：1) 禁止 `Date.now`/`Math.random`（迁移必须确定性）；2) 禁止访问 `localStorage`/`document`/`window`（纯函数）；3) 禁止 `fetch`/`XMLHttpRequest`（无网络）；4) 禁止 `while(true)` 与无终止条件的递归自调用（防死循环）；5) 返回 `{ ok, violations: [{rule, line}] }`；6) 违规即拒绝注册该 migrate（fail-fast）。
 
 ```javascript
 const RULES = [

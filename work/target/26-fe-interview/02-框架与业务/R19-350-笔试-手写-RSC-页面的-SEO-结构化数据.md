@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-350：笔试：手写商品页的 SEO 元信息与 JSON-LD
-**题**：在服务端组件中：生成 title/description/canonical/OG；商品数据生成 Product JSON-LD（含价格/库存/评分）；同一数据源复用避免重复请求（cache()）；未找到商品调 notFound()。
+**答**：在服务端组件中：生成 title/description/canonical/OG；商品数据生成 Product JSON-LD（含价格/库存/评分）；同一数据源复用避免重复请求（cache()）；未找到商品调 notFound()。
 
 ```javascript
 import { cache } from 'react'
@@ -47,6 +47,3 @@ export default async function GoodsPage({ params }) {
 - notFound() 的 SEO 语义（404 状态码）。
 - JSON-LD 与页面内容一致性（价格/库存同步）。
 - availability 状态映射、无评分时省略字段。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-72337c00-ba03-4376-a06e-d78f17640e7d-cwd'; fi
-exit "$__zcode_status"

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-045：笔试：手写路由预取调度器（IO 预算 + 去重 + 失效）
-**题目**：实现 `createPrefetcher(fetchPayload)`：`observe(url)` 将视口内链接入队；并发上限 N（IO 预算），超出的排队；`hover(url)` 把该 url 提到队首；同 url 去重（已完成或进行中不重复请求）；`invalidate(url)` 清除缓存允许重新预取；页面隐藏（visibilitychange）暂停调度。
+**答**：实现 `createPrefetcher(fetchPayload)`：`observe(url)` 将视口内链接入队；并发上限 N（IO 预算），超出的排队；`hover(url)` 把该 url 提到队首；同 url 去重（已完成或进行中不重复请求）；`invalidate(url)` 清除缓存允许重新预取；页面隐藏（visibilitychange）暂停调度。
 
 ```javascript
 function createPrefetcher(fetchPayload, { concurrency = 4, ttl = 60_000 } = {}) {

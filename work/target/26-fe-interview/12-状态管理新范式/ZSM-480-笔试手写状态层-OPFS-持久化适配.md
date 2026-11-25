@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-480：手写状态层 OPFS 持久化适配
-**需求**：实现 OPFS（Origin Private File System）存储适配器 `createOPFSStorage(dir)`：1) 符合 persist 的 storage 接口：getItem/setItem/removeItem（异步）；2) 每个状态一个文件（`/state/${key}.json`），原子写：写临时文件 → rename（OPFS move 原子性）；3) 读取容错：文件不存在返回 null、JSON 损坏删除重读 null；4) 大状态（>5MB）自动分片存储（`key.part0/part1`，读取时拼接）；5) 能力检测：OPFS 不可用回退 IndexedDB/null（调用方降级）。
+**答**：实现 OPFS（Origin Private File System）存储适配器 `createOPFSStorage(dir)`：1) 符合 persist 的 storage 接口：getItem/setItem/removeItem（异步）；2) 每个状态一个文件（`/state/${key}.json`），原子写：写临时文件 → rename（OPFS move 原子性）；3) 读取容错：文件不存在返回 null、JSON 损坏删除重读 null；4) 大状态（>5MB）自动分片存储（`key.part0/part1`，读取时拼接）；5) 能力检测：OPFS 不可用回退 IndexedDB/null（调用方降级）。
 
 ```javascript
 export async function createOPFSStorage() {

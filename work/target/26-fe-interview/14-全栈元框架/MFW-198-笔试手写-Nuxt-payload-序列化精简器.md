@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-198：笔试：手写 payload 序列化精简器（函数剔除 + 引用去重）
-**题目**：实现 `preparePayload(obj)`，把服务端状态清洗成可安全注入 HTML 的 payload：① 递归剔除函数、DOM 节点、Symbol 键（不可序列化内容）；② 循环引用不炸（记录已见对象，第二次出现用引用占位符 `$ref`）；③ 数组/对象深拷贝但保持结构；④ Date/Map/Set 转 JSON 安全结构（ISO 字符串 / 数组），标注类型以便客户端还原；⑤ 体积统计：输出清洗前后的 JSON 大小对比。
+**答**：实现 `preparePayload(obj)`，把服务端状态清洗成可安全注入 HTML 的 payload：① 递归剔除函数、DOM 节点、Symbol 键（不可序列化内容）；② 循环引用不炸（记录已见对象，第二次出现用引用占位符 `$ref`）；③ 数组/对象深拷贝但保持结构；④ Date/Map/Set 转 JSON 安全结构（ISO 字符串 / 数组），标注类型以便客户端还原；⑤ 体积统计：输出清洗前后的 JSON 大小对比。
 
 ```ts
 type Cleaned = unknown;

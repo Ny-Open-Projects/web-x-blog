@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-424：实验头选择器
-**需求**：实现 `expEdgeEdgeMiddleware(exps, { cookieMs = 30d } = {})`：1) 首访未分桶：Set-Cookie 固化 uid+各实验变体（sticky 后续稳定）+ 请求头 x-exp-* 注入下传 RSC；2) 响应缓存正确性：RSC 页依赖变体 → 自动追加 `Vary: x-exp-cart`（漏 Vary = A 桶用户拿到 B 桶缓存页——MFW-374 事故的运行时防线）；3) 比例只扩不缩校验（配置热载时 newRatio < old → reject 保留旧值——不踢老用户）；4) 实验暂停 → 头仍下发 control 值（缓存键稳定——不留孤儿桶）。
+**答**：实现 `expEdgeEdgeMiddleware(exps, { cookieMs = 30d } = {})`：1) 首访未分桶：Set-Cookie 固化 uid+各实验变体（sticky 后续稳定）+ 请求头 x-exp-* 注入下传 RSC；2) 响应缓存正确性：RSC 页依赖变体 → 自动追加 `Vary: x-exp-cart`（漏 Vary = A 桶用户拿到 B 桶缓存页——MFW-374 事故的运行时防线）；3) 比例只扩不缩校验（配置热载时 newRatio < old → reject 保留旧值——不踢老用户）；4) 实验暂停 → 头仍下发 control 值（缓存键稳定——不留孤儿桶）。
 
 ```javascript
 export function expMid (ex, {, { salt = 's1' } = {}) {

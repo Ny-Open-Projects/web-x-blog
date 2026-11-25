@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-320：笔试题：手写 i18n 热切换 Provider？
-**题目**：实现 React I18nProvider：1) Context + useSyncExternalStore 驱动语言切换；2) 切换语言预加载新语言包完成才切换（防闪烁）；3) t(key) 响应式；4) 切换后持久化 + URL 同步。
+**答**：实现 React I18nProvider：1) Context + useSyncExternalStore 驱动语言切换；2) 切换语言预加载新语言包完成才切换（防闪烁）；3) t(key) 响应式；4) 切换后持久化 + URL 同步。
 **评分点**：
 - store 模式正确（version 计数 + subscribe）。
 - 预加载后原子切换（loading 期间保持旧语言）。

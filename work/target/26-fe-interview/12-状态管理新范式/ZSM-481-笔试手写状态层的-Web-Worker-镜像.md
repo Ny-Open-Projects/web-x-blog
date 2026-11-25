@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-481：手写状态层 Web Worker 镜像
-**需求**：实现主线程↔Worker 的状态镜像：1) `mirrorToWorker(worker, getState)`：主线程每次 setState 后把状态（或增量 patch）postMessage 给 Worker；2) Worker 侧 `serveWorker(reduce)`：接收 patch 应用到镜像 state，支持 `query` 请求（Worker 内计算重结果回传）；3) 请求协议：`{ id, type: 'patch'|'query', payload }`，响应带同 id；4) 主线程 `queryInWorker(fn, args)`：Promise 化，超时 5s；5) Worker 状态不能有 DOM 依赖（传输前校验可序列化）。
+**答**：实现主线程↔Worker 的状态镜像：1) `mirrorToWorker(worker, getState)`：主线程每次 setState 后把状态（或增量 patch）postMessage 给 Worker；2) Worker 侧 `serveWorker(reduce)`：接收 patch 应用到镜像 state，支持 `query` 请求（Worker 内计算重结果回传）；3) 请求协议：`{ id, type: 'patch'|'query', payload }`，响应带同 id；4) 主线程 `queryInWorker(fn, args)`：Promise 化，超时 5s；5) Worker 状态不能有 DOM 依赖（传输前校验可序列化）。
 
 ```javascript
 // 主线程侧

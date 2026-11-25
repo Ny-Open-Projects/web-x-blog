@@ -34,3 +34,14 @@ export default defineConfig({
   },
 });
 ```
+
+**边界与易错**：
+
+1. `manualChunks` 函数返回 `undefined` 不报错：模块静默退回默认分包，vendor 根本没拆出来，要核对产物而不是相信配置。
+2. 跨 chunk 循环依赖：Rollup 会告警并把模块拉回同一 chunk，原本拆开的长缓存收益直接消失。
+
+**追问**：
+
+1. vendor 拆太细为什么更慢？→ 请求数上升，共享模块被复制进多个 chunk 重复下载，单 chunk 命中率也不一定更高。
+2. `manualChunks` 和 `splitVendorChunkPlugin` 怎么选？→ 后者自动拆 node_modules 省事但粗，前者可控但要维护映射。
+3. 怎么确认分包生效？→ 看 dist 与 chunk 报告，确认业务 chunk 里没有 react 源码。

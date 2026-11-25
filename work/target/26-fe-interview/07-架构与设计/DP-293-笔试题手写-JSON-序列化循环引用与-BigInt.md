@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-293：笔试题：手写 JSON 序列化（循环引用/BigInt/函数）？
-**题目**：实现 jsonStringify(value)：1) 基本类型/数组/对象；2) 循环引用输出 "[Circular]" 不死循环；3) BigInt 抛错或转字符串（可配置）；4) 函数/undefined 语义与原生一致（对象内跳过、数组内变 null）；5) 转义控制字符。
+**答**：实现 jsonStringify(value)：1) 基本类型/数组/对象；2) 循环引用输出 "[Circular]" 不死循环；3) BigInt 抛错或转字符串（可配置）；4) 函数/undefined 语义与原生一致（对象内跳过、数组内变 null）；5) 转义控制字符。
 **评分点**：
 - 递归栈 path 用 Set 检测循环（当前祖先链，不是已访问全量）。
 - undefined/函数在对象 vs 数组中的不同语义正确。

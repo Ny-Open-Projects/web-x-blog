@@ -47,3 +47,11 @@ async function streamNdjson(url, onRow) {
 }
 // streamNdjson('/api/huge-list?format=ndjson', (row) => appendVirtualRow(row));
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 分片会不会更慢？ → 总解析时间略增，但把长任务切成 50ms 以内的小段，交互不被阻塞，感知收益通常大于吞吐损失。
+2. Worker 解析完怎么回传？ → 用 Transferable 转移 ArrayBuffer 而不是结构化克隆，避免主线程再拷贝一份大对象。
+3. 流式解析适合什么数据？ → 超大数组或 NDJSON，边读边处理，内存峰值与总数据量解耦，但需要自己维护解析状态机，错误恢复也更麻烦，需要额外的校验与重试分支。

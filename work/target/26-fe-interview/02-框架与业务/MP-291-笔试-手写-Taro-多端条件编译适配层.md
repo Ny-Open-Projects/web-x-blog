@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-291：笔试：手写多端适配层
-**题**：实现 platform.ts 适配层：统一 storage/request/share 三组 API——内部按 process.env.TARO_ENV 分支（weapp/h5/rn），对外零平台差异签名；TS 类型按环境收窄；禁止业务层直接调 wx.*（ESLint 约束）。
+**答**：实现 platform.ts 适配层：统一 storage/request/share 三组 API——内部按 process.env.TARO_ENV 分支（weapp/h5/rn），对外零平台差异签名；TS 类型按环境收窄；禁止业务层直接调 wx.*（ESLint 约束）。
 
 ```javascript
 // adapter/storage.ts
@@ -39,6 +39,3 @@ export async function share(title, path) {
 - weapp getStorageSync 空串语义处理。
 - H5 降级方案（分享→复制链接）。
 - ESLint no-restricted-globals 禁 wx 的治理手段。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-82eb1ea4-fb39-470d-840b-a6098e45ea86-cwd'; fi
-exit "$__zcode_status"

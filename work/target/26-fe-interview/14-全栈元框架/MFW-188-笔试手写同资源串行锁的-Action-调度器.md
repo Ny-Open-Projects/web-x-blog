@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-188：笔试：手写同资源串行锁的 Server Action 调度器
-**题目**：多个用户请求可能同时写同一资源（如同一购物车、同一库存）。实现 `withResourceLock(resourceId, fn)`：① 同一 resourceId 的操作严格串行（前一个完成才开始下一个）；② 不同 resourceId 并行；③ 等待队列有上限（同键排队最多 5 个，超限直接抛 `BusyError`）；④ 持锁超时（10s）自动释放防死锁，被超时中断的请求抛错但锁不泄漏。
+**答**：多个用户请求可能同时写同一资源（如同一购物车、同一库存）。实现 `withResourceLock(resourceId, fn)`：① 同一 resourceId 的操作严格串行（前一个完成才开始下一个）；② 不同 resourceId 并行；③ 等待队列有上限（同键排队最多 5 个，超限直接抛 `BusyError`）；④ 持锁超时（10s）自动释放防死锁，被超时中断的请求抛错但锁不泄漏。
 
 ```ts
 type Queue = { chain: Promise<unknown>; length: number };

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-453：手写构建错误 AI 修复建议器
-**需求**：实现 `createFixSuggester({ llm, registry })`：1) 流程：错误 → 结构化上下文（错误码+代码帧+相关配置）→ prompt 组装 → LLM → 建议结构化解析（{ explain, patch, confidence }）；2) prompt 注入注册表知识（错误码文档/历史修复案例 top3——RAG 式检索）；3) 建议可验证：patch 附带验证命令（如重新构建该模块）——AI 建议必须可验证；4) 人工确认门（不自动 apply——建议式）；5) 反馈闭环：用户采纳/拒绝记录 → 优化检索库；6) 降级：LLM 不可用 → 注册表静态建议兜底。
+**答**：实现 `createFixSuggester({ llm, registry })`：1) 流程：错误 → 结构化上下文（错误码+代码帧+相关配置）→ prompt 组装 → LLM → 建议结构化解析（{ explain, patch, confidence }）；2) prompt 注入注册表知识（错误码文档/历史修复案例 top3——RAG 式检索）；3) 建议可验证：patch 附带验证命令（如重新构建该模块）——AI 建议必须可验证；4) 人工确认门（不自动 apply——建议式）；5) 反馈闭环：用户采纳/拒绝记录 → 优化检索库；6) 降级：LLM 不可用 → 注册表静态建议兜底。
 
 ```javascript
 export function createFixSuggester({ llm, registry, history }) {

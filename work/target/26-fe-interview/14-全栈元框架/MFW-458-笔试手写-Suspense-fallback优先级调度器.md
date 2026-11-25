@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-458：Suspense 边界优先级调度器
-**需求**：实现 `createSuspenseScheduler()`：1) `schedule(boundary)`，boundary = { id, priority(1 最高), estMs }；2) 并发渲染配额 `concurrency`（默认 3），同优先级按 estMs 短任务优先（SJF，先给用户可感知内容）；3) 任务完成/超时（estMs 超 5s 直接 reject 不占坑）释放配额并自动补位；4) 返回 `snapshot()` 查看运行/排队分布——用于流式 SSR 决定先 flush 哪个洞。
+**答**：实现 `createSuspenseScheduler()`：1) `schedule(boundary)`，boundary = { id, priority(1 最高), estMs }；2) 并发渲染配额 `concurrency`（默认 3），同优先级按 estMs 短任务优先（SJF，先给用户可感知内容）；3) 任务完成/超时（estMs 超 5s 直接 reject 不占坑）释放配额并自动补位；4) 返回 `snapshot()` 查看运行/排队分布——用于流式 SSR 决定先 flush 哪个洞。
 
 ```javascript
 export function createSuspenseScheduler({ concurrency = 3 } = {}) {

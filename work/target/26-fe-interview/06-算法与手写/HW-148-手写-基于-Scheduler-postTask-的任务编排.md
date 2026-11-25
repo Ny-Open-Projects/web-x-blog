@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-148：手写 postTask 任务编排——依赖链按优先级调度、取消传播与超时兜底
 **答**：任务编排器：任务声明（fn/priority/dependsOn/signal）→ 依赖拓扑（ALG-226 分层）→ 每层用 scheduler.postTask 按优先级调度（user-blocking 先于 background）→ 取消传播（依赖被取消，下游级联取消）→ 整体超时兜底。
 
 ```javascript

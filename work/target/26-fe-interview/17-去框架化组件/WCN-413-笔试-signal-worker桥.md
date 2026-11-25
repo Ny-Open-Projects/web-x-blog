@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-413：笔试：实现主线程代理信号与 Worker 权威图的桥接。
-**题目**：Worker 内持权威信号图；主线程 `proxySignal(id)`：读走本地缓存，写 postMessage；Worker 变更广播回来更新缓存（且不再回写，防回环）。
+**答**：Worker 内持权威信号图；主线程 `proxySignal(id)`：读走本地缓存，写 postMessage；Worker 变更广播回来更新缓存（且不再回写，防回环）。
 
 ```javascript
 // main.js

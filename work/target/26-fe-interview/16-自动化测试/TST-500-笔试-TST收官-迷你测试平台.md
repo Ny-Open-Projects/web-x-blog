@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-500：笔试：整合题——实现一个迷你测试平台核心（排队/执行/报告/门禁）。
-**题目**：整合：RunQueue（优先级）+ Executor（分片并行 mock）+ Reporter（聚合去重）+ Gate（分级判定）。接口 `submit(suite, ref, priority)` → 返回 runId；`run(runId)` 异步执行并产出报告；`gate(runId)` 判定。写出骨架与关键方法。
+**答**：整合：RunQueue（优先级）+ Executor（分片并行 mock）+ Reporter（聚合去重）+ Gate（分级判定）。接口 `submit(suite, ref, priority)` → 返回 runId；`run(runId)` 异步执行并产出报告；`gate(runId)` 判定。写出骨架与关键方法。
 
 ```javascript
 class MiniPlatform {

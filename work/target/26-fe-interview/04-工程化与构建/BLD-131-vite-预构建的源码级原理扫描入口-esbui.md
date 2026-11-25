@@ -39,3 +39,11 @@ async function optimizeDeps(config, server) {
 }
 // 常用命令：vite optimize / vite --force 强制重建
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 预构建缓存什么时候会失效？ → 锁文件内容变化、`optimizeDeps` 的 include/exclude 或 esbuild 版本变化、cacheDir 被清空；另外 `file:` 链接的 monorepo 包默认跳过预构建但会纳入监听，改它不会命中缓存。
+2. dev 启动后才被引用的新依赖会怎样？ → 触发运行时二次预构建并整页 reload，用 `optimizeDeps.include` 预声明可以避免开发中途刷新，但声明多了会拖慢冷启动。
+3. 生产构建为什么不用这套产物？ → rollup 负责完整 tree-shaking、压缩与 chunk 拆分，预构建只为 dev 提速并把 CJS 归一化成 ESM，两者产物不可混用。

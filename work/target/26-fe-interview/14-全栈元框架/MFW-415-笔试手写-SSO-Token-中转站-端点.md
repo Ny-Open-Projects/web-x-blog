@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-415：SSO 中转站
-**需求**：实现 IdP 侧 `createCodeBroker(authn, { ttl = 10_000 } = {})`：1) `POST /issue`（已登录中心域）→ { code, redirectTo}（code=随机 128bit，存 { uid, target, exp, used:false }，目标域必须在白名单）；2) `POST /exchange { code, clientSecret }`（目标域后端调用）→ 校验（存在/未过期/未用/secret 匹配/域匹配）→ 返回 { userId, sessionSeed }→标记 used（单次）；3) 重放检测：used 命中 → 安全告警（可能是窃取重放——不只拒绝）；4) 全端点限流（code 猜测面防护——128bit 熵 + 速率双保险）。
+**答**：实现 IdP 侧 `createCodeBroker(authn, { ttl = 10_000 } = {})`：1) `POST /issue`（已登录中心域）→ { code, redirectTo}（code=随机 128bit，存 { uid, target, exp, used:false }，目标域必须在白名单）；2) `POST /exchange { code, clientSecret }`（目标域后端调用）→ 校验（存在/未过期/未用/secret 匹配/域匹配）→ 返回 { userId, sessionSeed }→标记 used（单次）；3) 重放检测：used 命中 → 安全告警（可能是窃取重放——不只拒绝）；4) 全端点限流（code 猜测面防护——128bit 熵 + 速率双保险）。
 
 ```javascript
 export function codeBroker(authn, { keys, allow = ['shop.app.com', 'pay.app.com'] } = {}) {

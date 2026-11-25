@@ -40,3 +40,9 @@ function consumeFirstScreen(route, params) {
   return fetch(route.api).then(r => r.json());                  // 失配兜底
 }
 ```
+
+**追问**：
+
+1. `normKey` 用 `String(params[k])`，`1` 和 `'1'` 会归一，但 `undefined` 和缺字段呢？ → 要显式剔除 undefined 再排序拼接，否则两端 key 不一致直接全 miss。
+2. 预取成功但数据超过 30s，为什么不用？ → 首屏展示旧价或旧库存有资损风险，宁可回源，时效阈值按业务敏感度定。
+3. 命中率 85% 目标，deeplink 参数后到导致 miss 怎么优化？ → 容器等参数就绪再预取，或对常见参数组合做预取池，而不是先取后改 key。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-444：手写构建期 JSON 瘦身插件
-**需求**：实现 `slimJson(content, { fields, sortKeys, dedupe })`：1) 只保留白名单字段（fields 路径支持 a.b.c 与数组通配 a.*.id）；2) 重复值引用：重复字符串/对象入字典（去重后 JSON 体积下降）；3) key 排序（提高压缩率——同 key 邻近压缩字典命中率高）；4) 数值精度裁剪（价格 123.45000 → 123.45）；5) 体积对比输出（before/after/gzip）；6) 校验：瘦身后 JSON 可解析且白名单字段值不变（正确性快检）。
+**答**：实现 `slimJson(content, { fields, sortKeys, dedupe })`：1) 只保留白名单字段（fields 路径支持 a.b.c 与数组通配 a.*.id）；2) 重复值引用：重复字符串/对象入字典（去重后 JSON 体积下降）；3) key 排序（提高压缩率——同 key 邻近压缩字典命中率高）；4) 数值精度裁剪（价格 123.45000 → 123.45）；5) 体积对比输出（before/after/gzip）；6) 校验：瘦身后 JSON 可解析且白名单字段值不变（正确性快检）。
 
 ```javascript
 export function slimJson(content, { fields, sortKeys = true } = {}) {

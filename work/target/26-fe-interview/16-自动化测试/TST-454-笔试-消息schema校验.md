@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-454：笔试：事件消息的 schema registry 校验（版本兼容）。
-**题目**：registry `{'order.paid': {v1: schema, v2: schema}}`。实现 `validateMessage(topic, body)`：取 body.schemaVersion 对应 schema 校验；无版本默认最新；版本不存在报错并列出可用版本。
+**答**：registry `{'order.paid': {v1: schema, v2: schema}}`。实现 `validateMessage(topic, body)`：取 body.schemaVersion 对应 schema 校验；无版本默认最新；版本不存在报错并列出可用版本。
 
 ```javascript
 function validateMessage(registry, topic, body, ajv) {

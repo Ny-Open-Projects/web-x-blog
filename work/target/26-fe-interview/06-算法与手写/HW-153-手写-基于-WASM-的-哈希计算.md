@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-153：手写 WASM 哈希计算封装——Worker 内 WASM SHA-256、分块喂入与主线程进度
 **答**：大文件 hash（HW-140 秒传依赖）：WebCrypto 的 digest 需要全量输入（大文件内存峰值高）；WASM 增量哈希（分块 update/final）在 Worker 内流式计算——内存峰值 = 块大小，且可配合文件 slice 逐块读取，进度实时上报。
 
 ```javascript

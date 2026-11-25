@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-152：笔试：手写语法降级缺口检测（target vs 源码语法）
 
-**题目**：写 check-syntax-gap.mjs：1) 输入目标 target（es2015/es2018/es2020）与源文件列表；2) 对每个文件用 parser 检测是否使用了"高于 target 才有的语法"：es2020 独有（?? 空值合并、?. 可选链）、es2022（class fields、顶层 await、#private）；3) 输出报告 {file: [features]}，标注"构建器需降级"或"target 已覆盖无需处理"；4) 检测基于 token/AST 节点类型映射表实现；5) 顶层 await 检测只看模块顶层（函数内 await 不算）。
+**答**：写 check-syntax-gap.mjs：1) 输入目标 target（es2015/es2018/es2020）与源文件列表；2) 对每个文件用 parser 检测是否使用了"高于 target 才有的语法"：es2020 独有（?? 空值合并、?. 可选链）、es2022（class fields、顶层 await、#private）；3) 输出报告 {file: [features]}，标注"构建器需降级"或"target 已覆盖无需处理"；4) 检测基于 token/AST 节点类型映射表实现；5) 顶层 await 检测只看模块顶层（函数内 await 不算）。
 
 ```javascript
 // check-syntax-gap.mjs

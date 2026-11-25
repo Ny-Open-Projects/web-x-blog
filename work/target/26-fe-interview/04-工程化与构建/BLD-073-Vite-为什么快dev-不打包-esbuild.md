@@ -36,3 +36,9 @@ export default defineConfig({
 // vite：浏览器请求 index.html -> 沿 import 逐个请求 /src/main.js /src/App.vue /node_modules/.vite/deps/react.js
 //       每个文件只有单文件 transform 开销 -> 快启动 慢请求（海量小请求由 HTTP2 缓解）
 ```
+
+**追问**：
+
+1. 依赖预构建什么时候要手动 `--force` 重跑？→ 新增依赖、lockfile 变化、`optimizeDeps` 配置改动后缓存 key 失配时；动态拼接的 import（`import('./views/' + name)`) 扫描不到，必须写进 `include`。
+2. dev 已经够快了，为什么生产还要打包？→ 生产要 tree-shaking、压缩、chunk 拆分为长缓存、以及语法降级，原生 ESM 在窄带与多模块场景下会产生海量请求。
+3. 海量小请求在 dev 环境怎么缓解？→ 预构建把依赖合并成一个文件、HTTP/2 多路复用、源码请求走 `304`/强缓存并只用 `?t=` 破变更文件；深层目录宜用扁平化 alias 减少解析链。

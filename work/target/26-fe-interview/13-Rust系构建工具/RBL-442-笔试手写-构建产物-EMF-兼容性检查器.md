@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-442：手写产物导出兼容性检查器
-**需求**：实现 `checkExports(pkgJson, distFiles)`：1) 校验 exports 条件完整性：types 顺序在最前（TS 双读）、import/require 指向文件存在；2) 每个导出路径存在性（exports 里声明的文件 dist 里必须有）；3) 反向：dist 里存在但 exports 未声明的文件（意外产物）列出；4) main/module/exports 一致性（老工具链回退路径也指向有效文件）；5) 双包陷阱检测：import 与 require 指向同一文件（同文件双语义——双实例风险）；6) 输出 { ok, errors, warnings }。
+**答**：实现 `checkExports(pkgJson, distFiles)`：1) 校验 exports 条件完整性：types 顺序在最前（TS 双读）、import/require 指向文件存在；2) 每个导出路径存在性（exports 里声明的文件 dist 里必须有）；3) 反向：dist 里存在但 exports 未声明的文件（意外产物）列出；4) main/module/exports 一致性（老工具链回退路径也指向有效文件）；5) 双包陷阱检测：import 与 require 指向同一文件（同文件双语义——双实例风险）；6) 输出 { ok, errors, warnings }。
 
 ```javascript
 function resolveExportPath(root, sub) {

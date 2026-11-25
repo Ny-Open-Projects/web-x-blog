@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-406：手写 useSyncExternalStore + shallow selector Hook
-**需求**：实现 `useShallowStore(store, selector)`：1) 基于 useSyncExternalStore 订阅外部 store；2) getSnapshot 返回 selector(state)——必须引用稳定（用缓存的上次结果，浅相等时不产生新引用）；3) shallow 比较：一层 key 逐个 Object.is；4) 订阅清理正确（useSyncExternalStore 自管）；5) selector 返回原始值时直接比较。
+**答**：实现 `useShallowStore(store, selector)`：1) 基于 useSyncExternalStore 订阅外部 store；2) getSnapshot 返回 selector(state)——必须引用稳定（用缓存的上次结果，浅相等时不产生新引用）；3) shallow 比较：一层 key 逐个 Object.is；4) 订阅清理正确（useSyncExternalStore 自管）；5) selector 返回原始值时直接比较。
 
 ```javascript
 import { useSyncExternalStore, useRef } from 'react'

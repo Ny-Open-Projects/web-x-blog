@@ -9,7 +9,7 @@ type: 面试题
 ## PER-583：监控 SDK 的初始化时序问题：脚本异步加载时首屏指标为什么会漏？怎么保证不漏采？
 
 **答**：
-- 漏采机制：监控 SDK 若 `async` 晚于首屏渲染执行，`buffered: true` 虽能补回 paint/LCP 历史 entry，但**布局偏移序列、错误堆栈、慢交互细节**没有浏览器缓冲，错过了就永久丢失。
+- 漏采机制：监控 SDK 若 `async` 晚于首屏渲染执行，`buffered: true` 虽能补回 paint/LCP/布局偏移的历史 entry，但**错误堆栈、慢交互细节**没有浏览器缓冲，错过了就永久丢失。
 - 不漏采三板斧：SDK 内联到 `<head>` 最先执行（同步）；`buffered: true` 全指标补采；错误监听在 SDK 加载前用极简预埋钩子"（window.onerror 收集到数组，SDK 到位后回放给正式采集器）。
 - 采集时机与指标口径的关系：LCP 要在 visibility hidden 时 finalize，CLS 要剔除输入后的偏移——时序错了指标值本身就不对，不只是漏不漏的问题。
 - 追问钩子：为什么不用 `document.currentScript` 判断加载时机？——module/defer 场景下 currentScript 为 null，要靠 script 标记属性显式声明模式。

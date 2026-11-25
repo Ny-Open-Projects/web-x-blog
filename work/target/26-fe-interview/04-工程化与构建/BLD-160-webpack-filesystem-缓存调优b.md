@@ -45,3 +45,11 @@ module.exports = (env, argv) => {
   };
 };
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. `buildDependencies` 的作用？ → 声明构建工具自身的依赖（webpack 配置、loader），它们变化时整个缓存失效；漏配会出现改了配置却不生效的假命中。
+2. snapshot 该怎么调？ → 默认按 mtime，CI 上文件时间不可靠时改成 hash 或 timestamp 加 hash，代价是每次构建多算一遍哈希。
+3. 缓存不命中的常见原因？ → 配置里塞了函数或随机值、绝对路径进了 key、环境变量没纳入 version、node_modules 变动没写进 buildDependencies，这四类占大多数，排查时按此顺序逐项排除。

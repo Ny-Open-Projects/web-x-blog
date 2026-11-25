@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-157：手写滚动入场动画——IO 触发 + 单次触发与重复触发模式 + reduced-motion 尊重
 **答**：滚动入场动画（fade-in-up）的正确形态：IO 触发（不是 scroll 监听，PER-402 两端一致零主线程）；两种模式（once：进入即播并 unobserve；repeat：离开重置可再播）；CSS transition 执行（合成器路径）；prefers-reduced-motion 直接展示（PER-489）。
 
 ```javascript

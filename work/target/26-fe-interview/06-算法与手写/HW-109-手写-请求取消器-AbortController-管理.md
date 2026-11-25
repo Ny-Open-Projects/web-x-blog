@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-109：手写请求取消管理器——按 key 取消在途请求、页面卸载全量取消、复用 signal
 **答**：fetch 一旦发出无法"暂停"，取消靠 AbortController。管理器：按业务 key（如 'search'）注册 controller，同 key 新请求自动取消旧请求（竞态治理）；AbortSignal.any 组合多个信号（页面卸载 + 业务取消都触发）；卸载前全量取消防止僵尸请求。
 
 ```javascript

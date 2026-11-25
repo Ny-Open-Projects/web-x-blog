@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-296：笔试：手写 Scene 参数解析器
-**题**：onLoad 收到 options：scene（二维码 getQuery 解码后的字符串）、query 参数、path。实现 parseEntry(options)：统一输出 { source: 'qr'|'share'|'search'|'direct', params }；scene 支持 a=1&b=2 与 JSON 两种格式；未知来源兜底；参数白名单过滤。
+**答**：onLoad 收到 options：scene（二维码 getQuery 解码后的字符串）、query 参数、path。实现 parseEntry(options)：统一输出 { source: 'qr'|'share'|'search'|'direct', params }；scene 支持 a=1&b=2 与 JSON 两种格式；未知来源兜底；参数白名单过滤。
 
 ```javascript
 function parseEntry(options = {}) {
@@ -39,6 +39,3 @@ function parseEntry(options = {}) {
 - 来源判定优先级清晰。
 - 白名单过滤（防参数注入）。
 - 直接打开/分享/二维码三来源全覆盖。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-0182258a-26e6-4c17-9a46-c418a7678326-cwd'; fi
-exit "$__zcode_status"

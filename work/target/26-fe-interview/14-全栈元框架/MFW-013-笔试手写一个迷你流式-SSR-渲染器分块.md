@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-013：笔试：手写迷你流式 SSR 渲染器（分块输出 + 占位替换）
-**题目**：实现 `streamRender(node, res)`：组件树中「异步组件」（返回 Promise 的函数组件）渲染时先输出 `<!--slot:N-->` 占位注释 + fallback HTML，继续渲染其余树；Promise resolve 后输出一段 `<script>` 把占位处替换为真实 HTML。边界：异常组件替换为错误占位；全部完成后输出结束标记。
+**答**：实现 `streamRender(node, res)`：组件树中「异步组件」（返回 Promise 的函数组件）渲染时先输出 `<!--slot:N-->` 占位注释 + fallback HTML，继续渲染其余树；Promise resolve 后输出一段 `<script>` 把占位处替换为真实 HTML。边界：异常组件替换为错误占位；全部完成后输出结束标记。
 
 ```javascript
 const { randomUUID } = require('crypto');

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-271：笔试：手写 setData 包装器（高频更新合并）
-**题**：实现 `createSafeSetData(page)`：返回 safeSetData(data)；16ms 窗口内多次调用合并（深合并对象）；超 256KB 拆分批次发送；组件销毁后不再发送；暴露 flush 立即发送。
+**答**：实现 `createSafeSetData(page)`：返回 safeSetData(data)；16ms 窗口内多次调用合并（深合并对象）；超 256KB 拆分批次发送；组件销毁后不再发送；暴露 flush 立即发送。
 
 ```javascript
 function createSafeSetData(page) {
@@ -43,6 +43,3 @@ function createSafeSetData(page) {
 - 超限拆批（按顶层 key）。
 - destroy 防泄漏（页面卸载后仍 setData 是崩溃源）。
 - flush 满足「需要立即渲染」的场景。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-82655713-9d37-485b-a015-ee8146bf95ab-cwd'; fi
-exit "$__zcode_status"

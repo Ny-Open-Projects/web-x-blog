@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-494：RSC 段错误重试退避器
-**需求**：实现 `retryWithBackoff(fn, { tries = 3, base = 200, signal })`：1) 指数退避重试：base × 2^i + 抖动（±20%——同时重试的请求会同步风暴，抖动打散）；2) 错误分类：网络类/5xx 可重试，4xx（除 429）不重试直接抛（重试不可恢复错误是浪费）；3) 429/503 尊重 Retry-After 头（有的话按头等，没有按退避）；4) signal 取消贯穿：每轮 await 前检查 aborted，取消立即抛（流式渲染取消传播，重试不能违反）。
+**答**：实现 `retryWithBackoff(fn, { tries = 3, base = 200, signal })`：1) 指数退避重试：base × 2^i + 抖动（±20%——同时重试的请求会同步风暴，抖动打散）；2) 错误分类：网络类/5xx 可重试，4xx（除 429）不重试直接抛（重试不可恢复错误是浪费）；3) 429/503 尊重 Retry-After 头（有的话按头等，没有按退避）；4) signal 取消贯穿：每轮 await 前检查 aborted，取消立即抛（流式渲染取消传播，重试不能违反）。
 
 ```javascript
 const RETRYABLE = /ECONNRESET|ETIMEDOUT|fetch failed/

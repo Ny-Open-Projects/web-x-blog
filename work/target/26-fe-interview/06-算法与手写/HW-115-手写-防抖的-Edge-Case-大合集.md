@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-115：手写防抖的边界大全：leading/trailing/cancel/flush/最大等待与异步防抖
 **答**：在 HW-014 基础上补全工程级防抖的六个能力：leading 首次立即执行、trailing 结束后执行、cancel 取消、flush 立即结算、maxWait 最长等待（防长时间连续触发饿死）、异步函数版（等待 promise 完成才允许下一次）。
 
 ```javascript

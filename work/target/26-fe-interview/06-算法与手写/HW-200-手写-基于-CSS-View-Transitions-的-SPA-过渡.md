@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-200：手写 SPA 路由 View Transition——旧页快照/新页渲染/命名元素跨页插值
 **答**：SPA 路由过渡：navigate 后 startViewTransition 内完成路由渲染（旧页快照 → 新页渲染 → 交叉淡入）；命名元素（商品图从列表到详情的位置插值——view-transition-name 相同的元素跨页自动动画）；数据加载与过渡协调（数据就绪才 startViewTransition，防快照期空白）。
 
 ```javascript

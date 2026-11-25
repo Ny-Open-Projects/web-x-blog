@@ -34,3 +34,9 @@ module.exports = {
   },
 };
 ```
+
+**追问**：
+
+1. Rspack 对 webpack 的兼容到什么程度？→ 配置项和主流 loader 基本兼容，但部分 plugin 钩子与内部 API 未实现，深度定制的插件需要改写或换成 Rust 侧实现。
+2. 迁移第一步该做什么？→ 先保证产物可比：跑一遍构建 diff 与体积对比，再逐条替换不兼容的 loader/plugin，并保留 webpack 分支作为回退。
+3. Rust 插件和 JS 插件性能差多少？→ JS 插件仍在 Node 侧执行，跨语言调用有序列化开销，热点逻辑（自定义 loader 里的正则/AST 处理）会成为新瓶颈。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-404：手写构建产物 manifest 生成器
-**需求**：实现 `generateManifest(assets, meta)`：1) assets：文件树（path→content）；2) 生成 `{ version, files: { path: { hash, size } }, entry, envHash }`；3) hash 用内容 sha256（basename 前 8 位作为文件名后缀的重命名映射：old→hashed）；4) entry 为入口 html 引用替换（html 里的产物路径替换为 hashed 路径）；5) envHash 来自 meta.env 清单（参与指纹）；6) 递归目录遍历支持。
+**答**：实现 `generateManifest(assets, meta)`：1) assets：文件树（path→content）；2) 生成 `{ version, files: { path: { hash, size } }, entry, envHash }`；3) hash 用内容 sha256（basename 前 8 位作为文件名后缀的重命名映射：old→hashed）；4) entry 为入口 html 引用替换（html 里的产物路径替换为 hashed 路径）；5) envHash 来自 meta.env 清单（参与指纹）；6) 递归目录遍历支持。
 
 ```javascript
 import crypto from 'node:crypto'

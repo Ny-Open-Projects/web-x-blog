@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-443：手写构建期 dead code 探测器
-**需求**：实现 `findDeadModules(graph, entry)`：1) graph（RBL-416）；2) 可达性分析：从入口沿 import 边遍历——不可达模块即 dead 候选；3) 动态引用豁免：被动态 import（含字符串模板构造路径目录）引用的模块保守保留（标记 dynamic-ref 不删）；4) re-export 穿透：仅被 barrel re-export 且 barrel 未被使用的模块仍是 dead（barrel 本身可达不算豁免）；5) 输出 dead 列表（含体积——删除收益量化）与置信度（static-analysis vs needs-review）。
+**答**：实现 `findDeadModules(graph, entry)`：1) graph（RBL-416）；2) 可达性分析：从入口沿 import 边遍历——不可达模块即 dead 候选；3) 动态引用豁免：被动态 import（含字符串模板构造路径目录）引用的模块保守保留（标记 dynamic-ref 不删）；4) re-export 穿透：仅被 barrel re-export 且 barrel 未被使用的模块仍是 dead（barrel 本身可达不算豁免）；5) 输出 dead 列表（含体积——删除收益量化）与置信度（static-analysis vs needs-review）。
 
 ```javascript
 export function findDeadModules(graph, entry) {

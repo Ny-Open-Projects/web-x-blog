@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-342：笔试题：实现组件库的 Collapse 手风琴与高度动画？
-**题目**：实现 Collapse：1) 手风琴模式（accordion：同时只展开一个）；2) 展开收起高度动画（内容高度未知，不写死 max-height）；3) 动画结束才真正卸载内容（或保留 DOM 用 grid 动画）；4) 受控 activeKeys。
+**答**：实现 Collapse：1) 手风琴模式（accordion：同时只展开一个）；2) 展开收起高度动画（内容高度未知，不写死 max-height）；3) 动画结束才真正卸载内容（或保留 DOM 用 grid 动画）；4) 受控 activeKeys。
 **评分点**：
 - 高度动画不写死 max-height（scrollHeight 测量或 grid-template-rows 1fr 技巧）。
 - 动画状态机正确（opening/open/closing/closed），transitionend 清理。

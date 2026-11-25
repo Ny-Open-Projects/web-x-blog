@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-476：笔试：整合题——迷你元素平台核心（注册/版本/token/审计）。
-**题目**：整合：defineOnce（版本协商）+ token 注入（主题类切换）+ registry（版本盘点）+ audit（泄漏/裸值）。接口 `platform.register(tag, Impl, version)`、`platform.theme('dark')`、`platform.audit()`。
+**答**：整合：defineOnce（版本协商）+ token 注入（主题类切换）+ registry（版本盘点）+ audit（泄漏/裸值）。接口 `platform.register(tag, Impl, version)`、`platform.theme('dark')`、`platform.audit()`。
 
 ```javascript
 const platform = {

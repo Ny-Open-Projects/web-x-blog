@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-129：笔试：手写 .env 多环境加载器（优先级 + 注入 Define）
-**题目**：写 loadEnv(mode)：1) 依次加载 .env、.env.local、.env.{mode}、.env.{mode}.local（后者优先级高）；2) 解析 KEY=VALUE（支持引号包裹与注释行）；3) process.env 已存在的键不被覆盖（系统环境优先）；4) 返回仅"前端可见"前缀（如 PUBLIC_）的键值对；5) 输出 DefinePlugin 风格的映射。
+**答**：写 loadEnv(mode)：1) 依次加载 .env、.env.local、.env.{mode}、.env.{mode}.local（后者优先级高）；2) 解析 KEY=VALUE（支持引号包裹与注释行）；3) process.env 已存在的键不被覆盖（系统环境优先）；4) 返回仅"前端可见"前缀（如 PUBLIC_）的键值对；5) 输出 DefinePlugin 风格的映射。
 
 ```typescript
 // load-env.ts

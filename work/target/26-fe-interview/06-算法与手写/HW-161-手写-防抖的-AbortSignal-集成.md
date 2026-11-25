@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-161：手写带 AbortSignal 的防抖——debounce 返回的 Promise 可取消，组件卸载联动
 **答**：现代防抖形态：debounce(fn, wait, {signal}) 返回 Promise，signal.abort() 取消待执行（Promise reject AbortError）；signal 由组件卸载/请求管理器传入（PER-109 联动）——防抖定时器与外部取消信号统一。
 
 ```javascript

@@ -43,4 +43,10 @@ module.exports = {
 // CI 中执行：npx size-limit && npx @lhci/cli autorun，任一超标即 fail
 ```
 
-## 九、测量与分析体系
+## 追问（补充）
+
+**追问**：
+
+1. Lighthouse CI 在 CI 机器上跑，机器性能差异会不会让断言随机红？ → 用固定规格 runner 或多次取中位数并放宽阈值，别拿开发机数据当基线。
+2. `size-limit` 卡 gzip 体积，但某次正常需求确实超了怎么走？ → 走预算变更评审（谁批、为什么），禁止直接改 limit 数字了事。
+3. Lab 达标但 RUM 仍差，说明什么？ → Lab 环境不代表真实机型网络，要用 RUM 分机型切片找差距，而不是继续压 Lab 分数。

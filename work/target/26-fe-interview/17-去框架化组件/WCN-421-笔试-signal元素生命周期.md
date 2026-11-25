@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-421：笔试：元素内信号 effect 的生命周期绑定（自动随元素销毁）。
-**题目**：`bindEffect(el, fn)`：effect 创建时关联元素；元素 disconnectedCallback 自动 dispose 全部绑定 effect。实现注册表（WeakRef 元素 → effect 集合）。
+**答**：`bindEffect(el, fn)`：effect 创建时关联元素；元素 disconnectedCallback 自动 dispose 全部绑定 effect。实现注册表（WeakRef 元素 → effect 集合）。
 
 ```javascript
 const reg = new WeakMap();

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-126：笔试：手写 TS 构建辅助脚本（批量资源重命名 + manifest）
-**题目**：用 Bun 写 rename-assets.ts：1) 扫描 dist/img 下所有 png/jpg；2) 计算内容 hash 前 8 位并重命名 name.<hash>.ext；3) 生成 manifest.json（原名→新名映射）；4) 幂等：已带 hash 的文件跳过；5) 空目录/无匹配文件时正常结束不报错。
+**答**：用 Bun 写 rename-assets.ts：1) 扫描 dist/img 下所有 png/jpg；2) 计算内容 hash 前 8 位并重命名 name.<hash>.ext；3) 生成 manifest.json（原名→新名映射）；4) 幂等：已带 hash 的文件跳过；5) 空目录/无匹配文件时正常结束不报错。
 
 ```typescript
 // rename-assets.ts —— bun rename-assets.ts

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-325：笔试题：实现组件库错误边界与降级 UI？
-**题目**：实现 `ErrorBoundary`：1) 捕获渲染错误展示降级 UI；2) 支持自定义 fallback（函数式，接收错误与重置回调）；3) resetKeys 变化时自动重置子树；4) 错误上报钩子；5) 不捕获事件处理与异步错误（说明原因）。
+**答**：实现 `ErrorBoundary`：1) 捕获渲染错误展示降级 UI；2) 支持自定义 fallback（函数式，接收错误与重置回调）；3) resetKeys 变化时自动重置子树；4) 错误上报钩子；5) 不捕获事件处理与异步错误（说明原因）。
 **评分点**：
 - 生命周期方法使用正确（getDerivedStateFromError 设置降级态、componentDidCatch 上报）。
 - resetKeys 比较逻辑正确（浅比较，变化即重置）。
@@ -39,3 +39,11 @@ class ErrorBoundary extends React.Component<EBProps, { error: Error | null }> {
 }
 // 5) 局限：onClick 内 throw / promise reject 不经过 React 渲染管线 → 用 window.onerror/unhandledrejection 全局兜底
 ```
+
+## 变体与延伸（补充）
+
+**变体与延伸**：
+
+1. 降级 UI 自己也抛错怎么办？→ 外层再包一层兜底边界，最终 fallback 用纯静态文案加刷新按钮，且只依赖零业务逻辑的原生渲染。
+2. 函数组件为主的项目怎么落地？→ 把 class 边界收敛到路由或模块级一层，业务组件不重复挂，或直接用成熟封装库，避免每个页面各写一份导致上报口径不一。
+3. 这个边界怎么测？→ 渲染必抛错的子组件，断言 fallback 出现、onError 只调一次、resetKeys 变化后子树恢复，并覆盖 reset 回调后能重新渲染正常内容。

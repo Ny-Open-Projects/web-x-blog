@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-422：笔试：手写 Pinia 持久化插件（白名单 + 防抖 + 版本迁移）
-**题**：实现 Pinia 插件：仅持久化 store.$id 在白名单中的 store；按 store 配置的 paths 白名单挑字段存储（防大对象/敏感字段）；写入防抖 300ms；存储带版本号，版本不匹配丢弃旧数据。
+**答**：实现 Pinia 插件：仅持久化 store.$id 在白名单中的 store；按 store 配置的 paths 白名单挑字段存储（防大对象/敏感字段）；写入防抖 300ms；存储带版本号，版本不匹配丢弃旧数据。
 
 ```javascript
 const debounceMap = new Map()
@@ -45,6 +45,3 @@ function pick(obj, paths) {
 - 防抖写入 + detached 订阅。
 - 版本号不匹配丢弃（schema 变更安全）。
 - 恢复用 $patch 而非整体替换（保留未持久化字段默认值）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-1b24dc37-88d7-4f9e-827b-5f3c11f2fde6-cwd'; fi
-exit "$__zcode_status"

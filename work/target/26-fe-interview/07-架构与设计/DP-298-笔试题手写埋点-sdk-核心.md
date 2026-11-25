@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-298：笔试题：手写埋点 SDK 核心（批量/采样/页面离开兜底）？
-**题目**：实现 Tracker：1) track(event, props) 入队；2) 批量上报（50 条或 5s）；3) 采样率配置（track 按比例丢弃，pv 全量）；4) visibilitychange/pagehide 时 sendBeacon 兜底不丢数据；5) 失败重试进本地缓存。
+**答**：实现 Tracker：1) track(event, props) 入队；2) 批量上报（50 条或 5s）；3) 采样率配置（track 按比例丢弃，pv 全量）；4) visibilitychange/pagehide 时 sendBeacon 兜底不丢数据；5) 失败重试进本地缓存。
 **评分点**：
 - 批量触发条件正确（任一满足）。
 - 采样决策点在入队前（省内存），pv 豁免。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-348：笔试题：实现组件库的 Anchor 锚点滚动联动高亮？
-**题目**：实现 Anchor 目录组件：1) 滚动监听高亮当前区块（取"最后一个 top ≤ 阈值"的锚点）；2) scroll 监听 rAF 节流 + Passive；3) 点击平滑滚动（考虑 sticky header 偏移 offsetTop 配置）；4) 目标元素动态增删时重新收集锚点。
+**答**：实现 Anchor 目录组件：1) 滚动监听高亮当前区块（取"最后一个 top ≤ 阈值"的锚点）；2) scroll 监听 rAF 节流 + Passive；3) 点击平滑滚动（考虑 sticky header 偏移 offsetTop 配置）；4) 目标元素动态增删时重新收集锚点。
 **评分点**：
 - 高亮算法正确（当前激活 = 最后一个满足 getBoundingClientRect().top - offset ≤ 0 的锚点）。
 - rAF 节流 + passive 监听，性能意识。

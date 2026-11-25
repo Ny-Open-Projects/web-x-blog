@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-046：笔试：手写 loader 链调度器（倒序执行 + pitch 正序 + 拦截）
-**题目**：实现 runLoaders(loaders, source)：1) 先正序执行 pitch，任一 pitch 返回非 undefined 值则进入「回跳」：跳过其后的 loader 常规阶段与剩余 pitch，从该 loader 前一个 loader 的常规阶段倒序执行；2) 无拦截时倒序执行常规阶段（最后一个 loader 先处理）；3) 每个 loader 以 (source, remaining) 调用；4) 返回最终转换结果与实际执行的 loader 名单；5) 画出两次执行顺序图。
+**答**：实现 runLoaders(loaders, source)：1) 先正序执行 pitch，任一 pitch 返回非 undefined 值则进入「回跳」：跳过其后的 loader 常规阶段与剩余 pitch，从该 loader 前一个 loader 的常规阶段倒序执行；2) 无拦截时倒序执行常规阶段（最后一个 loader 先处理）；3) 每个 loader 以 (source, remaining) 调用；4) 返回最终转换结果与实际执行的 loader 名单；5) 画出两次执行顺序图。
 
 ```javascript
 function runLoaders(loaders, source) {

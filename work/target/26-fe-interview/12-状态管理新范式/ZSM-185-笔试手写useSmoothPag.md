@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-185：手写 useSmoothPagination（keepPreviousData 语义的分页 Hook）
-**需求**：实现 `useSmoothPagination({ fetcher, page, pageSize })`：1) page 变化发起请求；2) 新页数据到达前 data 保留上一页内容（isStale 标记）；3) 响应竞态守卫：只有最新 page 的响应被采纳；4) 首次加载 isLoading；5) 返回 { data, isLoading, isStale, refetch }。核心考点：引用保留 + AbortController + effect 清理顺序。
+**答**：实现 `useSmoothPagination({ fetcher, page, pageSize })`：1) page 变化发起请求；2) 新页数据到达前 data 保留上一页内容（isStale 标记）；3) 响应竞态守卫：只有最新 page 的响应被采纳；4) 首次加载 isLoading；5) 返回 { data, isLoading, isStale, refetch }。核心考点：引用保留 + AbortController + effect 清理顺序。
 
 ```javascript
 export function useSmoothPagination({ fetcher, page, pageSize }) {

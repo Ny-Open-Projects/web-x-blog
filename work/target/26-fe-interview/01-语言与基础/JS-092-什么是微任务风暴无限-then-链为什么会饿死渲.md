@@ -36,5 +36,11 @@ async function processInChunks(list, handler, size = 1000) {
     await new Promise((r) => setTimeout(r, 0));
   }
 }
-processInChunks(Array(1e6).keys(), (i) => { /* 重计算 */ }, 10000);
+processInChunks([...Array(1e6).keys()], (i) => { /* 重计算 */ }, 10000);
 ```
+
+**追问**：
+
+1. 为什么 `setTimeout(0)` 能让出主线程，而 `await Promise.resolve()` 不能让出？ → 前者排入宏任务队列，必须等微任务队列彻底清空后才轮到它，中间浏览器才有机会渲染和派发输入事件。
+2. 在 `requestAnimationFrame` 回调里无限排微任务会怎样？ → 同样会卡死：rAF 回调属于同一帧的任务，其内部微任务队列不清空就不会结束该回调，下一帧永远不来；每帧只跑一轮才能保证出帧。
+3. 线上页面已冻结、连控制台都点不动，怎么确认是微任务风暴而不是死循环？ → Performance 面板看单帧内全是 Function Call 且没有 Rendering/Paint；CPU profile 里 `Promise.then` 微任务占比极高、堆栈是自我续接的 then，就能锁定。

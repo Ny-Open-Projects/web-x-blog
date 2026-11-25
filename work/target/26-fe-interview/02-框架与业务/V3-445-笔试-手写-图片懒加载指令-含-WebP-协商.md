@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-445：笔试：手写图片懒加载指令（IntersectionObserver + WebP 协商 + 失败占位）
-**题**：实现 v-lazy 指令：data-src 延迟加载；进入视口（rootMargin 200px 预取）时替换 src；优先请求 .webp（canvas 检测支持）；加载失败显示占位图并允许重试；卸载/元素移除时断开 observer。
+**答**：实现 v-lazy 指令：data-src 延迟加载；进入视口（rootMargin 200px 预取）时替换 src；优先请求 .webp（canvas 检测支持）；加载失败显示占位图并允许重试；卸载/元素移除时断开 observer。
 
 ```javascript
 let webpSupport = null
@@ -45,6 +45,3 @@ export const vLazy = {
 - WebP 能力检测缓存（只测一次）。
 - 失败占位 + 重试上限（防死循环）。
 - 指令生命周期配对 unobserve。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-8f07b0e3-fd10-4bfa-b6db-67db1f8980df-cwd'; fi
-exit "$__zcode_status"

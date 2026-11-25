@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-414：笔试：实现信号图的内存审计工具。
-**题目**：注册表记录全部 effect（创建栈/宿主/disposed）。`audit()` 返回：存活但无宿主的 effect（泄漏嫌疑）清单与依赖图规模。
+**答**：注册表记录全部 effect（创建栈/宿主/disposed）。`audit()` 返回：存活但无宿主的 effect（泄漏嫌疑）清单与依赖图规模。
 
 ```javascript
 const registry = new Set();

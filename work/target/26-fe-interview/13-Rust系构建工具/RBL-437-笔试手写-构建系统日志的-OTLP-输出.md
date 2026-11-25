@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-437：手写构建日志 OTLP 输出适配
-**需求**：实现 `createOtlpLogger({ endpoint })`：1) 构建事件 → OTel 语义约定（logs/spans）：build = trace（span 层级：build→phase→task），日志事件带 traceId 关联；2) span 结构：name/startTime/endTime/attributes（task 名/缓存命中）；3) 批量导出（OTLP/JSON over HTTP，batch 50 或 5s flush）；4) 降级：endpoint 不可达时本地写文件（可后补上传）；5) `child(span)` 嵌套层级与 RBL-405 profiler 数据格式兼容转换。
+**答**：实现 `createOtlpLogger({ endpoint })`：1) 构建事件 → OTel 语义约定（logs/spans）：build = trace（span 层级：build→phase→task），日志事件带 traceId 关联；2) span 结构：name/startTime/endTime/attributes（task 名/缓存命中）；3) 批量导出（OTLP/JSON over HTTP，batch 50 或 5s flush）；4) 降级：endpoint 不可达时本地写文件（可后补上传）；5) `child(span)` 嵌套层级与 RBL-405 profiler 数据格式兼容转换。
 
 ```javascript
 import fs from 'node:fs'

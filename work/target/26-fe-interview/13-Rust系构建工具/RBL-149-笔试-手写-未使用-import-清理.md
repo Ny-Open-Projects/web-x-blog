@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-149：笔试：手写未使用 import 清理器（AST 收集 + 重写）
 
-**题目**：写 remove-unused-imports.ts：1) 解析源码收集所有 import 声明的导入标识符；2) 扫描 AST 其余部分统计标识符实际使用（含 JSX 中使用的组件）；3) 删除整个未使用的 import 语句；部分使用的 ImportSpecifier 只保留用到的子句；4) 使用位置偏移列表从后往前做文本重写（避免位移）；5) 输出清理后代码与删除清单。
+**答**：写 remove-unused-imports.ts：1) 解析源码收集所有 import 声明的导入标识符；2) 扫描 AST 其余部分统计标识符实际使用（含 JSX 中使用的组件）；3) 删除整个未使用的 import 语句；部分使用的 ImportSpecifier 只保留用到的子句；4) 使用位置偏移列表从后往前做文本重写（避免位移）；5) 输出清理后代码与删除清单。
 
 ```typescript
 // remove-unused-imports.ts

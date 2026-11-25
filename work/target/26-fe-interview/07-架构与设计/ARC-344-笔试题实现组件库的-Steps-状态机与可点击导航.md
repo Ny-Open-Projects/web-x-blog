@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-344：笔试题：实现组件库的 Steps 状态机与可点击导航？
-**题目**：实现 Steps：1) 状态推导（done/current/wait 按 currentIndex 计算）；2) 可点击导航（点击已完成步骤回跳，点击未到步骤禁止——除非 allowClickAll）；3) 垂直/水平布局与连接线；4) 错误步骤状态（current 显示 error 图标）。
+**答**：实现 Steps：1) 状态推导（done/current/wait 按 currentIndex 计算）；2) 可点击导航（点击已完成步骤回跳，点击未到步骤禁止——除非 allowClickAll）；3) 垂直/水平布局与连接线；4) 错误步骤状态（current 显示 error 图标）。
 **评分点**：
 - 状态推导纯函数正确（i < cur → done，= cur → current，> cur → wait）。
 - 点击权限逻辑正确（只允许回跳已完成的）。

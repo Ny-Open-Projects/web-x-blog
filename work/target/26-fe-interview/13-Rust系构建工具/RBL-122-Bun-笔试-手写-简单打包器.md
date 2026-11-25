@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-122：笔试：手写 bun 风格的一键打包脚本（含产物体积报告）
-**题目**：用 Bun API 写 build.ts：1) 调 Bun.build 打包 src/index.ts 到 dist；2) 输出每个产物的体积与 gzip 估算（用 Bun.file 读产物 + 压缩 API）；3) sourcemap 外部产出；4) 失败时收集日志并 exit 1；5) 总耗时输出。
+**答**：用 Bun API 写 build.ts：1) 调 Bun.build 打包 src/index.ts 到 dist；2) 输出每个产物的体积与 gzip 估算（用 Bun.file 读产物 + 压缩 API）；3) sourcemap 外部产出；4) 失败时收集日志并 exit 1；5) 总耗时输出。
 
 ```typescript
 // build.ts —— bun build.ts 直接运行（TS 免编译）

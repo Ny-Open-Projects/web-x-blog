@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-477：手写状态机 guard 与延迟事件
-**需求**：实现增强版 FSM：1) 转移可带 guard：`(ctx) => boolean`，guard 不过则事件被拒绝（状态不变，返回 rejected）；2) 延迟事件：`after: ms` 定义的自动转移（进入状态后计时，离开状态取消计时）；3) 多个事件匹配同一状态时按定义顺序取第一个 guard 通过的；4) 延迟事件与显式事件竞态：显式事件先到则延迟计时取消；5) `send(event)` 返回 { changed, from, to, rejectedBy? }；6) 进入/离开钩子（onEnter/onExit）。
+**答**：实现增强版 FSM：1) 转移可带 guard：`(ctx) => boolean`，guard 不过则事件被拒绝（状态不变，返回 rejected）；2) 延迟事件：`after: ms` 定义的自动转移（进入状态后计时，离开状态取消计时）；3) 多个事件匹配同一状态时按定义顺序取第一个 guard 通过的；4) 延迟事件与显式事件竞态：显式事件先到则延迟计时取消；5) `send(event)` 返回 { changed, from, to, rejectedBy? }；6) 进入/离开钩子（onEnter/onExit）。
 
 ```javascript
 export function createMachine({ initial, states, context = {} }) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-076：笔试：手写 preserveModules 产物路径映射器
-**题目**：实现 mapPreserveModules(entries, rootDir)：1) 每个源文件对应一个产物文件（保留目录结构）；2) 路径基于 rootDir 相对化（src/components/Button.tsx → dist/components/Button.js）；3) rootDir 之外的文件（如 node_modules 被保留时）提升到 dist 的 _external/ 前缀避免路径逃逸；4) index 文件对应目录名产物（src/index.ts → dist/index.js）；5) 输出 Map<源路径, 产物路径>。
+**答**：实现 mapPreserveModules(entries, rootDir)：1) 每个源文件对应一个产物文件（保留目录结构）；2) 路径基于 rootDir 相对化（src/components/Button.tsx → dist/components/Button.js）；3) rootDir 之外的文件（如 node_modules 被保留时）提升到 dist 的 _external/ 前缀避免路径逃逸；4) index 文件对应目录名产物（src/index.ts → dist/index.js）；5) 输出 Map<源路径, 产物路径>。
 
 ```javascript
 const path = require('path');

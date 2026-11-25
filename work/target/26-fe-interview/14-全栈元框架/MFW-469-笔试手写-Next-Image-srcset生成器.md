@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-469：Next Image srcset 生成器
-**需求**：实现 `buildSrcset(src, { width, sizes, deviceSizes, imageSizes, quality })`：1) 按 sizes 描述符（如 `(max-width: 640px) 100vw, 50vw`）结合 deviceSizes [640,750,828,...,3840] 计算每档需要的实际像素宽；2) 只保留 ≤ 原图 width 的档位（放大无意义白耗流量），去重排序；3) 输出 `url Widthw` 逗号串，URL 参数含 w 与 q（Next 图像优化器格式 `/api/image?url=..&w=..&q=..`）；4) quality 超 [0,100] 抛错（防误配）。
+**答**：实现 `buildSrcset(src, { width, sizes, deviceSizes, imageSizes, quality })`：1) 按 sizes 描述符（如 `(max-width: 640px) 100vw, 50vw`）结合 deviceSizes [640,750,828,...,3840] 计算每档需要的实际像素宽；2) 只保留 ≤ 原图 width 的档位（放大无意义白耗流量），去重排序；3) 输出 `url Widthw` 逗号串，URL 参数含 w 与 q（Next 图像优化器格式 `/api/image?url=..&w=..&q=..`）；4) quality 超 [0,100] 抛错（防误配）。
 
 ```javascript
 export function buildSrcset(src, { width, sizes, deviceSizes, imageSizes = [], quality = 75 }) {

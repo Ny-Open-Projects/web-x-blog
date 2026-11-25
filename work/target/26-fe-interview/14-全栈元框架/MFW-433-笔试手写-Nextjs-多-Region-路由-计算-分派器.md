@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-433：Region 分派
-**需求**：实现 `regionDispatch(req, { topology, { dataHomes: { orders: 'us-east', users: 'eu' } } })`：1) 判定函数：路由的数据归属（蓝图 deps 表→主 region）vs 用户接入点（geo header）→ 计算 region = argmin(数据RTT + 用户延迟)（读写分离：读可副本就近，写必主）；2) 输出 { computeRegion, dataMode: 'local'|'remote', proxyTo? }——边缘函数按此转发或本地执行；3) 缓存 key 含 computeRegion（同路由不同区渲染产物不互串——时区/合规差异）；4) 故障转移：主 region 不可用→读降级副本+写排队（MFW-496 语义复用）；5) 度量：跨区调用占比（应 <15%——架构漂移信号）。
+**答**：实现 `regionDispatch(req, { topology, { dataHomes: { orders: 'us-east', users: 'eu' } } })`：1) 判定函数：路由的数据归属（蓝图 deps 表→主 region）vs 用户接入点（geo header）→ 计算 region = argmin(数据RTT + 用户延迟)（读写分离：读可副本就近，写必主）；2) 输出 { computeRegion, dataMode: 'local'|'remote', proxyTo? }——边缘函数按此转发或本地执行；3) 缓存 key 含 computeRegion（同路由不同区渲染产物不互串——时区/合规差异）；4) 故障转移：主 region 不可用→读降级副本+写排队（MFW-496 语义复用）；5) 度量：跨区调用占比（应 <15%——架构漂移信号）。
 
 ```javascript
 export function dispatch(req, { blue, health }) {

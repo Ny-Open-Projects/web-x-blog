@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-441：笔试：手写带取消与超时的 Promise 包装器
-**题**：实现 `cancellable(promiseFactory)`：返回 `{ promise, cancel }`；cancel 后 promise 永远 pending（对调用方等效取消，且不触发 unhandledrejection）；可选 timeout：超时以 TimeoutError reject；cancel 后不再 reject。
+**答**：实现 `cancellable(promiseFactory)`：返回 `{ promise, cancel }`；cancel 后 promise 永远 pending（对调用方等效取消，且不触发 unhandledrejection）；可选 timeout：超时以 TimeoutError reject；cancel 后不再 reject。
 
 ```javascript
 function cancellable(factory, { timeout } = {}) {
@@ -36,6 +36,3 @@ function cancellable(factory, { timeout } = {}) {
 - timeout reject 错误类型明确。
 - clearTimeout 防泄漏。
 - 结果写入前检查 cancelled。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-f129ad98-65e4-437d-aab9-07a2718a868d-cwd'; fi
-exit "$__zcode_status"

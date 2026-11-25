@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-477：笔试：实现元素测试 kit（fixture/事件断言/属性等待）。
-**题目**：`createFixture(tag, props)`：创建并挂载元素（props 设置 property），返回 `{el, cleanup}`；`waitForProp(el, name, match)` 轮询 property（超时失败）；`oneEvent(el, name)` Promise 化事件断言。
+**答**：`createFixture(tag, props)`：创建并挂载元素（props 设置 property），返回 `{el, cleanup}`；`waitForProp(el, name, match)` 轮询 property（超时失败）；`oneEvent(el, name)` Promise 化事件断言。
 
 ```javascript
 async function createFixture(tag, props = {}) {

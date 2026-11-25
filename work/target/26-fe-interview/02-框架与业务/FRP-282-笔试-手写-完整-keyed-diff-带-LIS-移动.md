@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## FRP-282：笔试：手写完整 keyed diff
-**题**：实现 `diffChildren(oldChildren, newChildren, container)`：old/new 是 `{ key, text }` 数组（DOM 为文本节点模拟）；要求：key 匹配复用 DOM 节点；移动次数最少（LIS）；新增/删除正确；返回操作统计 { moves, adds, removes }。
+**答**：实现 `diffChildren(oldChildren, newChildren, container)`：old/new 是 `{ key, text }` 数组（DOM 为文本节点模拟）；要求：key 匹配复用 DOM 节点；移动次数最少（LIS）；新增/删除正确；返回操作统计 { moves, adds, removes }。
 
 ```javascript
 function diffChildren(oldC, newC, container) {
@@ -40,6 +40,3 @@ function diffChildren(oldC, newC, container) {
 - LIS 求出「无需移动」集合（核心）。
 - insertBefore 的 anchor 用新顺序后继（锚点正确性）。
 - 统计返回便于测试断言。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-b80b52ff-da77-41c6-a04a-9c3d802b32d9-cwd'; fi
-exit "$__zcode_status"

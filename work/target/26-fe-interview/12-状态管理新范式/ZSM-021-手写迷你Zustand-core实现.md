@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-021：手写一个迷你 Zustand（create + useStore 核心）
 
-**题目要求**：
+**答**：
 - 实现 `create(initFn)`：内部维护 state、订阅集合，返回 hook；initFn 接收 `(set, get)`。
 - set 支持 `部分对象浅合并` 和 `函数入参` 两种形式；组件卸载自动取消订阅。
 - 保证并发渲染安全（使用 useSyncExternalStore）；重复渲染不因引用新对象而无限循环。
@@ -57,3 +57,11 @@ export function create(initFn) {
 - subscribe 返回取消函数，避免内存泄漏。
 - 引用相等短路（next === state 直接 return），防止死循环。
 - getState 闭包读取最新 state，异步回调中正确。
+
+## 变体与延伸（补充）
+
+**变体与延伸**：
+
+1. selector 每次返回新对象，`useSyncExternalStore` 会死循环吗 → 会，getSnapshot 返回新引用被判定为变化；解法是只取原始值或套用 useShallow。
+2. 想在 `setState` 之后同步拿到新 state（不等订阅回调）怎么办 → 先算 `next` 再赋值，`getState()` 立即返回新值，同一 tick 内读到的都是新的。
+3. 多个 store 需要互相读写怎么办 → 不要在 initFn 里直接调另一个 store 的 set，改在 action 中显式调用或用订阅桥接，避免循环触发。

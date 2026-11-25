@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-246：手写：迷你 Suspense（异步依赖计数 + fallback 切换 + 超时）
-**需求**：实现 `createSuspense(childrenPromise, { fallback, timeout })`：收集子树异步依赖 promise；全部 resolve 前渲染 fallback；超过 timeout 未完成时提示降级（标记 timedOut）；任一 reject 时回调 onError 且支持通过返回的 retry() 重新进入 pending。不要求 vnode diff，可用字符串渲染函数模拟。
+**答**：实现 `createSuspense(childrenPromise, { fallback, timeout })`：收集子树异步依赖 promise；全部 resolve 前渲染 fallback；超过 timeout 未完成时提示降级（标记 timedOut）；任一 reject 时回调 onError 且支持通过返回的 retry() 重新进入 pending。不要求 vnode diff，可用字符串渲染函数模拟。
 **评分点**：
 - pending 计数归零判定（Promise.allSettled 思路 + reject 短路）
 - timeout 与完成竞态处理（完成后清除定时器）

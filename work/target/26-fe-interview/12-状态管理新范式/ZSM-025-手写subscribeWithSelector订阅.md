@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-025：手写 subscribeWithSelector 中间件（selector 级订阅）
 
-**题目要求**：
+**答**：
 - 实现 `subscribeWithSelector(config)`：增强 `api.subscribe`，支持 `subscribe(selector, listener, opts)`。
 - 每次 store 变化执行 selector，与上次结果比较（Object.is），变化才调用 listener，回调入参 `(selected, prevSelected, state, prevState)`。
 - 返回取消订阅函数；`fireImmediately: true` 时订阅后立刻触发一次。

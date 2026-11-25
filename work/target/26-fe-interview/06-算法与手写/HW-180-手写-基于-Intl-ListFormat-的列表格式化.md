@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-180：手写列表本地化格式化——Intl.ListFormat（and/or 单元）与超长列表折叠（A, B 及其他 12 项）
 **答**：列表展示本地化（"A、B 和 C" vs "A, B, and C"）：Intl.ListFormat（conjunction/disjunction）自动处理连接词与顿号；超长列表折叠（显示前 3 + "及其他 N 项"，N 的文案本地化）；单元素/空列表边界。
 
 ```javascript

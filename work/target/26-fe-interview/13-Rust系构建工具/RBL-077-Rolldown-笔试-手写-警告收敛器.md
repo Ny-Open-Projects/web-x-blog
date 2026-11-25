@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-077：笔试：手写构建警告收敛器（去重 + 分级 + 白名单）
-**题目**：实现 WarningSink：1) 收集 { code, message, file } 警告；2) 同 code+file 去重计数；3) 白名单（如 CIRCULAR_DEPENDENCY）降级为 silent；4) 阈值规则：同 code 超过 N 条升级为 error；5) flush 输出按 code 分组汇总，返回是否有 error。
+**答**：实现 WarningSink：1) 收集 { code, message, file } 警告；2) 同 code+file 去重计数；3) 白名单（如 CIRCULAR_DEPENDENCY）降级为 silent；4) 阈值规则：同 code 超过 N 条升级为 error；5) flush 输出按 code 分组汇总，返回是否有 error。
 
 ```javascript
 class WarningSink {

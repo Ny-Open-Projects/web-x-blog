@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-050：笔试：手写并行模块转换池（模拟 Rspack Rayon 调度）
-**题目**：实现 transformAll(files, worker, concurrency)：1) concurrency 个并发槽位并行执行 worker(file)；2) 任一失败要整体 reject 且已完成的任务不浪费；3) 保持输出顺序与输入顺序一致（并行但结果有序）；4) 支持 concurrency 动态取消（借 AbortSignal）；5) 统计吞吐（tasks/s）。
+**答**：实现 transformAll(files, worker, concurrency)：1) concurrency 个并发槽位并行执行 worker(file)；2) 任一失败要整体 reject 且已完成的任务不浪费；3) 保持输出顺序与输入顺序一致（并行但结果有序）；4) 支持 concurrency 动态取消（借 AbortSignal）；5) 统计吞吐（tasks/s）。
 
 ```javascript
 async function transformAll(files, worker, concurrency = 4, signal = new AbortSignal()) {

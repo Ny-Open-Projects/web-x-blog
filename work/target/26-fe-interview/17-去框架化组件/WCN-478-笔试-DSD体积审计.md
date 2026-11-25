@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-478：笔试：实现 DSD 输出的体积审计（模板占比）。
-**题目**：输入整页 HTML：统计 DSD 模板字节数占总量比；> 40% 告警并列出占比最高的元素 tag（优化目标）。
+**答**：输入整页 HTML：统计 DSD 模板字节数占总量比；> 40% 告警并列出占比最高的元素 tag（优化目标）。
 
 ```javascript
 function dsdBudget(html, { threshold = 0.4 } = {}) {

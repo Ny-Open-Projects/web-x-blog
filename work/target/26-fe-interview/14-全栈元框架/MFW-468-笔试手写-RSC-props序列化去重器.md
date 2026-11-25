@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-468：RSC props 序列化去重器
-**需求**：实现 `serializeWithDedup(value)`：1) 同一对象引用在树中出现多次时只序列化一次，第二次起输出 `$ref:id`（Flight 的引用传递语义——大列表页体积减半）；2) 循环引用不爆栈：用 WeakMap 记录访问中节点，再遇到输出 `$ref:循环`；3) 字符串值若本身以 `$` 开头需转义为 `$` + 前缀（Flight 保留前缀语义）；4) 输出 JSON 可逆：提供 `deserialize` 还原共享引用（同一 id 还原后仍为同一对象引用）。
+**答**：实现 `serializeWithDedup(value)`：1) 同一对象引用在树中出现多次时只序列化一次，第二次起输出 `$ref:id`（Flight 的引用传递语义——大列表页体积减半）；2) 循环引用不爆栈：用 WeakMap 记录访问中节点，再遇到输出 `$ref:循环`；3) 字符串值若本身以 `$` 开头需转义为 `$` + 前缀（Flight 保留前缀语义）；4) 输出 JSON 可逆：提供 `deserialize` 还原共享引用（同一 id 还原后仍为同一对象引用）。
 
 ```javascript
 export function serializeWithDedup(value) {

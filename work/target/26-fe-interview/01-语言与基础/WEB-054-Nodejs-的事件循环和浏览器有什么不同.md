@@ -33,3 +33,9 @@ fs.readFile(__filename, () => {
   // 稳定输出 immediate -> timeout
 });
 ```
+
+**追问**：
+
+1. `process.nextTick` 里递归调用 nextTick 会怎样？ → 会饿死事件循环：每个阶段切换前都要清空 nextTick 队列，递归不停就永远进不到 timers 和 I/O，定时器全部延迟。
+2. Node 里 `setTimeout(fn, 0)` 真的是 0 毫秒吗？ → 不是，最小被钳到 1ms；和 setImmediate 在主模块中的先后依赖进程启动耗时，所以在 I/O 回调外不能假定顺序。
+3. 浏览器有没有 setImmediate？ → 标准里没有（只有旧 IE 有），常用 `MessageChannel` 模拟「最快宏任务」，或把逻辑放到 rAF 之后执行。

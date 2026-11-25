@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-467：手写构建文档自动维护器
-**需求**：实现 `syncBuildDocs(config, docs)`：1) 单一事实源：从 config schema 自动生成「构建配置文档」章节（字段/默认值/说明）——手写文档必然漂移；2) 变更检测：config 变更 → 文档 diff → 提示需要更新（PR 门禁：改配置必改文档或声明不适用）；3) 章节 protect：人工写的章节（架构决策/最佳实践）不会被自动生成覆盖（区域标记 <!-- auto -->）；4) 示例同步：配置示例从 schema 生成合法示例（不会出现过期字段）；5) 输出：更新后的文档 + diff 摘要。
+**答**：实现 `syncBuildDocs(config, docs)`：1) 单一事实源：从 config schema 自动生成「构建配置文档」章节（字段/默认值/说明）——手写文档必然漂移；2) 变更检测：config 变更 → 文档 diff → 提示需要更新（PR 门禁：改配置必改文档或声明不适用）；3) 章节 protect：人工写的章节（架构决策/最佳实践）不会被自动生成覆盖（区域标记 <!-- auto -->）；4) 示例同步：配置示例从 schema 生成合法示例（不会出现过期字段）；5) 输出：更新后的文档 + diff 摘要。
 
 ```javascript
 export function syncBuildDocs(schema, currentDocs) {

@@ -6,8 +6,8 @@ tags: [前端面试, 笔试题, MFW]
 type: 笔试题
 ---
 
-## MFW→MFW-443：双运行时 fetch
-**需求**：实现 `unifiedFetch(spec)`：1) 运行时探测（Edge: 无 process/有 caches.default；Node: process.versions.node）——同一调用两端行为正确；2) 能力阶梯：Edge 用 Cache API + HTTP 驱动 DB；Node 用 LRU+连接池——上层同一签名；3) 差异抹平点：超时（Edge AbortSignal 支持/Node 用 timeout 参数——pg query_timeout）、重试（统一策略层与运行时无关）；4) 禁区守卫：Node 专有依赖在 Edge target 构建期报错（依赖审计 MFW-229 前移到 import 图）；5) 快照测试：两端各跑同断言集（行为一致性门禁——双端漂移早发现）。
+## MFW-443：双运行时 fetch
+**答**：实现 `unifiedFetch(spec)`：1) 运行时探测（Edge: 无 process/有 caches.default；Node: process.versions.node）——同一调用两端行为正确；2) 能力阶梯：Edge 用 Cache API + HTTP 驱动 DB；Node 用 LRU+连接池——上层同一签名；3) 差异抹平点：超时（Edge AbortSignal 支持/Node 用 timeout 参数——pg query_timeout）、重试（统一策略层与运行时无关）；4) 禁区守卫：Node 专有依赖在 Edge target 构建期报错（依赖审计 MFW-229 前移到 import 图）；5) 快照测试：两端各跑同断言集（行为一致性门禁——双端漂移早发现）。
 
 ```javascript
 const IS_EDGE = typeof process === 'undefined' || !process.versions?.node

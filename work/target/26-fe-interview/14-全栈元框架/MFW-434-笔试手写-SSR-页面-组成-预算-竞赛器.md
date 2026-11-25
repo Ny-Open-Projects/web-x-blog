@@ -6,8 +6,8 @@ tags: [前端面试, 笔试题, MFW]
 type: 笔试题
 ---
 
-## MFM→MFW-434：预算竞赛
-**需求**：实现 `raceSegments(specs, { pageMs = 800 } = {})`（MFW-326/382 合一执行器）：1) 段声明 {name, fn, tier: 'core'|'boost'|'fill', ownMs}；2) 全局页预算分配：core 保底（pageMs×0.6 按数均分），boost 竞速剩余（先到先得——量入为出），fill 只用 idle（全部完成后仍剩预算才跑）；3) 每段结果三态 { data | fallback, usedMs, aborted }；4) 总钟到 → 未完成 boost/fill 全弃（页面准时出货——部分数据好于迟到整页）；5) 决策可解释输出（哪个段被谁挤掉——预算链审计）。
+## MFW-434：MFM→434：预算竞赛
+**答**：实现 `raceSegments(specs, { pageMs = 800 } = {})`（MFW-326/382 合一执行器）：1) 段声明 {name, fn, tier: 'core'|'boost'|'fill', ownMs}；2) 全局页预算分配：core 保底（pageMs×0.6 按数均分），boost 竞速剩余（先到先得——量入为出），fill 只用 idle（全部完成后仍剩预算才跑）；3) 每段结果三态 { data | fallback, usedMs, aborted }；4) 总钟到 → 未完成 boost/fill 全弃（页面准时出货——部分数据好于迟到整页）；5) 决策可解释输出（哪个段被谁挤掉——预算链审计）。
 
 ```javascript
 export async function raceSpecs(specs, { pageMs = 800 } = {}) {

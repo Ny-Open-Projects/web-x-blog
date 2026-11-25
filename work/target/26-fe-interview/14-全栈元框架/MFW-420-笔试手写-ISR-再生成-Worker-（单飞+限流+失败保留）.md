@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-420：ISR Worker
-**需求**：实现 `createRegenWorker(store, render, { concurrency = 3 } = {})`：1) 队列消费：失效事件（tag/key）→ 去重合并 → 并发 ≤3 再生成；2) 单飞跨请求（同 key 在途共享——后续失效登记 dirty 不重复排队，完成后检查 dirty 决定是否再排一轮——不丢最末变更）；3) 失败保留旧页（渲染异常→不上架新产物——旧版继续服务+告警计数）；4) 写入原子（临时 key+rename——RBL-344）；5) 观测 { queueLen, inFlight, failStreak }（连续失败 ≥3 熔断该域——防坏数据源打爆循环）。
+**答**：实现 `createRegenWorker(store, render, { concurrency = 3 } = {})`：1) 队列消费：失效事件（tag/key）→ 去重合并 → 并发 ≤3 再生成；2) 单飞跨请求（同 key 在途共享——后续失效登记 dirty 不重复排队，完成后检查 dirty 决定是否再排一轮——不丢最末变更）；3) 失败保留旧页（渲染异常→不上架新产物——旧版继续服务+告警计数）；4) 写入原子（临时 key+rename——RBL-344）；5) 观测 { queueLen, inFlight, failStreak }（连续失败 ≥3 熔断该域——防坏数据源打爆循环）。
 
 ```javascript
 export function createRegenWorker({ store, renderOne, { conc = 3, failCap = 3 } = {}) {

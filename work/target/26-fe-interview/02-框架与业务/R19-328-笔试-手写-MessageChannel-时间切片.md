@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-328：笔试：手写 MessageChannel 时间切片执行器
-**题**：实现 `timeSlice(tasks, deadline = 5)`：任务数组逐个执行，累计超过 deadline 停止，用 MessageChannel 宏任务续跑剩余，全部完成调用 onDone；支持 cancel。
+**答**：实现 `timeSlice(tasks, deadline = 5)`：任务数组逐个执行，累计超过 deadline 停止，用 MessageChannel 宏任务续跑剩余，全部完成调用 onDone；支持 cancel。
 
 ```javascript
 function timeSlice(tasks, { deadline = 5, onDone, onTick } = {}) {
@@ -32,6 +32,3 @@ function timeSlice(tasks, { deadline = 5, onDone, onTick } = {}) {
 - deadline 判断在 while 条件内（先执行再判断，避免死循环）。
 - cancel 关闭端口防泄漏。
 - 能对比 rAF/setTimeout/微任务三种让出方式差异。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-cb22169e-442b-4969-a9f5-46644cb63fe0-cwd'; fi
-exit "$__zcode_status"

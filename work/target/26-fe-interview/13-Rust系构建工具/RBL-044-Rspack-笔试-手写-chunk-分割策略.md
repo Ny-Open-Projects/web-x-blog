@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-044：笔试：手写简化 splitChunks 策略（公共依赖提取）
-**题目**：给定模块图 { entry: 'a', deps: Set<string>[] }（多个入口），实现 split(entries, { minChunks, minSize })：1) 统计每个模块被多少入口同步可达；2) 被 ≥ minChunks 个入口共享且合并体积 ≥ minSize 的模块抽成 chunk 'shared'；3) 其余模块归属各自入口 chunk；4) 动态 import 的模块不参与公共抽取（独立 async chunk）；5) 返回 chunk 划分映射。
+**答**：给定模块图 { entry: 'a', deps: Set<string>[] }（多个入口），实现 split(entries, { minChunks, minSize })：1) 统计每个模块被多少入口同步可达；2) 被 ≥ minChunks 个入口共享且合并体积 ≥ minSize 的模块抽成 chunk 'shared'；3) 其余模块归属各自入口 chunk；4) 动态 import 的模块不参与公共抽取（独立 async chunk）；5) 返回 chunk 划分映射。
 
 ```javascript
 function reachableSync(entry, deps, asyncDeps) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-091：笔试：手写 Vue SSR 的脱水复水模块（含 XSS 防护）
-**题目**：实现 `serialize(state)` 与 `rehydrate(windowVar)`：① 状态安全地嵌入 HTML（防 `</script>` 闭合逃逸与 `<!--` 注入）；② 客户端解析后还原为对象；③ 支持 Date/undefined 等非纯 JSON 类型；④ 解析失败返回空对象不崩溃。
+**答**：实现 `serialize(state)` 与 `rehydrate(windowVar)`：① 状态安全地嵌入 HTML（防 `</script>` 闭合逃逸与 `<!--` 注入）；② 客户端解析后还原为对象；③ 支持 Date/undefined 等非纯 JSON 类型；④ 解析失败返回空对象不崩溃。
 
 ```ts
 // serialize.ts —— 服务端：状态 -> 安全脚本字符串

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-426：笔试：手写 WebSocket 心跳重连与消息去重（Vue composable）
-**题**：实现 `useWs(url)`：自动心跳（30s ping，超时未收到 pong 判定断开重连）；指数退避重连（上限 30s）；消息按 msgId 去重（服务端重发场景）；组件卸载时真正关闭并停心跳。
+**答**：实现 `useWs(url)`：自动心跳（30s ping，超时未收到 pong 判定断开重连）；指数退避重连（上限 30s）；消息按 msgId 去重（服务端重发场景）；组件卸载时真正关闭并停心跳。
 
 ```javascript
 function useWs(url) {
@@ -47,6 +47,3 @@ function useWs(url) {
 - 指数退避 + 上限，onopen 重置计数。
 - msgId 去重（Set）。
 - 组件卸载 close 且不再重连（closed 标志，高频扣分点）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-59418848-1e15-4c05-ab4a-c2871fb7f1e3-cwd'; fi
-exit "$__zcode_status"

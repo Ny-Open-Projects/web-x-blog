@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-190：笔试：手写 fetch 缓存包装器（`next: { revalidate, tags }` 语义）
-**题目**：模拟 Next.js Data Cache 的核心行为，实现 `cachedFetch(url, { revalidate, tags })`：① 默认缓存命中直接返回缓存值；② `revalidate` 秒后过期（后台 stale-while-revalidate：先返回旧值，同时刷新）；③ `revalidateTag(tag)` 使带该 tag 的所有条目立即失效（下次读取重新拉取，不做 SWR）；④ 同一 url 并发首取只发一次网络请求；⑤ no-store 语义（`revalidate: 0`）完全绕过缓存。
+**答**：模拟 Next.js Data Cache 的核心行为，实现 `cachedFetch(url, { revalidate, tags })`：① 默认缓存命中直接返回缓存值；② `revalidate` 秒后过期（后台 stale-while-revalidate：先返回旧值，同时刷新）；③ `revalidateTag(tag)` 使带该 tag 的所有条目立即失效（下次读取重新拉取，不做 SWR）；④ 同一 url 并发首取只发一次网络请求；⑤ no-store 语义（`revalidate: 0`）完全绕过缓存。
 
 ```ts
 type Entry = { value: Response; fetchedAt: number; tags: string[] };

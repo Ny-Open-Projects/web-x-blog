@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-146：笔试：手写多进程并行转换器（swc transform worker 池）
 
-**题目**：写 transpile-all.mjs：1) 递归收集 src 下所有 .ts/.tsx 文件；2) 用 worker_threads 起 min(CPU核数-1, 8) 个 worker 并行调用 @swc/core 转换（target es2020，automatic runtime）；3) 结果写到 .out/ 目录同名 .js；4) 任一文件转换失败不影响其他文件，最后汇总成功/失败数并以失败数非 0 退出码 1 退出；5) 主线程不转文件，只做调度。
+**答**：写 transpile-all.mjs：1) 递归收集 src 下所有 .ts/.tsx 文件；2) 用 worker_threads 起 min(CPU核数-1, 8) 个 worker 并行调用 @swc/core 转换（target es2020，automatic runtime）；3) 结果写到 .out/ 目录同名 .js；4) 任一文件转换失败不影响其他文件，最后汇总成功/失败数并以失败数非 0 退出码 1 退出；5) 主线程不转文件，只做调度。
 
 ```javascript
 // transpile-all.mjs

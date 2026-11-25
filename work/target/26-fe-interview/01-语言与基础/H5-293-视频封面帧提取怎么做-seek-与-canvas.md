@@ -28,3 +28,9 @@ async function grabFrame(videoUrl, t = 0.5) {
   return c.toDataURL('image/jpeg', 0.8);
 }
 ```
+
+**追问**：
+
+1. 为什么抽帧前必须等 `loadedmetadata`，并且视频要 `muted`？ → 元数据没到时时长和视频尺寸都未知，设置 `currentTime` 会被忽略；移动端自动播放策略要求静音，否则 video 不会真正解码。
+2. 视频跨域但服务端没配 CORS，`drawImage` 之后会怎样？ → canvas 被标记为污染，随后 `toDataURL`/`getImageData` 直接抛 SecurityError；只能让服务端返回 `Access-Control-Allow-Origin`，或改为服务端 ffmpeg 抽帧。
+3. 明明 seek 到 0.5s，画出来却是附近关键帧的画面，怎么解决？ → 浏览器 seek 精度受关键帧限制；应改等到 `requestVideoFrameCallback` 回调拿到实际呈现帧再绘制，或把抽帧点对齐到 GOP 关键帧时间。

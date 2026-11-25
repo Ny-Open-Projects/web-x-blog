@@ -5,7 +5,7 @@ categories: [性能与安全]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-204：手写布局抖动运行时检测——MutationObserver 标记写 + 布局读取 API patch 检测交错
 **答**：PER-404 运行时检测的完整实现：MutationObserver 检测 style/class 写（标记本帧"有写"）→ patch 布局读取 API（offsetWidth 系/getBoundingClientRect/getComputedStyle）——帧内有写又读 = 抖动嫌疑（输出调用栈）→ rAF 每帧重置。
 
 ```javascript

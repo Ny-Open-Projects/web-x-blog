@@ -15,7 +15,7 @@ type: 面试题
 - 实务影响：`shallowRef` 与普通 ref 的性能差距在 3.5 明显缩小，深层数据也可放心用 reactive，只有超大集合才需要 shallow 策略。
 ```javascript
 function ref(value) {
-  const dep = null // 惰性创建
+  let dep = null // 惰性创建
   return {
     get value() {
       const d = dep ??= new Dep()
@@ -25,7 +25,7 @@ function ref(value) {
     set value(nv) {
       if (Object.is(nv, value)) return
       value = nv
-      dep?.version = ++globalVersion  // 只打版本
+      if (dep) dep.version = ++globalVersion  // 只打版本，不收集
       notify(dep)
     }
   }

@@ -26,3 +26,9 @@ sso.on('logout', () => clearLocalAndRedirect());   // 单点登出广播
 //   token 存内存 + sessionStorage（不进 URL）。
 // 降级：authCenter down → 宽限期用缓存 token（≤30min）。
 ```
+
+**追问**：
+
+1. iframe 静默续期在第三方 cookie 被禁的浏览器里失效怎么办？ → 降级为刷新 token 或顶层跳转续期，不能假设 iframe 一定带得上 cookie。
+2. 认证中心挂了走「缓存 token 宽限 30 分钟」，这 30 分钟的安全边界怎么定？ → 只放宽读与低敏接口，写操作和资金类仍要求重新认证。
+3. 单点登出广播，某个子系统没收到怎么办？ → 子系统每次路由切换校验本地会话有效性，广播是加速手段而非唯一保障。

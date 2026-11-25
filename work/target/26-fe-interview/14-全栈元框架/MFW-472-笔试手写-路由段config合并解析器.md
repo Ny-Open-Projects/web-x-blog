@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-472：路由段 config 合并解析器
-**需求**：实现 `resolveSegmentConfig(segments)`：1) segments 为嵌套路径各层的 `export const` 集：{ dynamic: 'force-static'|'force-dynamic'|'auto', revalidate, runtime, fetchCache }；2) 继承规则：子段未设置继承父段；`force-dynamic` 不可被子孙翻回 static（向下锁定）；`revalidate` 取祖先链最小值（最保守）；3) 冲突检测：父 force-static 而子段出现 `cookies()/headers()` 动态 API 调用标记 `usesDynamic: true` → 整链升级为 dynamic 并出 warning；4) 输出最终 { dynamic, revalidate, runtime, warnings }。
+**答**：实现 `resolveSegmentConfig(segments)`：1) segments 为嵌套路径各层的 `export const` 集：{ dynamic: 'force-static'|'force-dynamic'|'auto', revalidate, runtime, fetchCache }；2) 继承规则：子段未设置继承父段；`force-dynamic` 不可被子孙翻回 static（向下锁定）；`revalidate` 取祖先链最小值（最保守）；3) 冲突检测：父 force-static 而子段出现 `cookies()/headers()` 动态 API 调用标记 `usesDynamic: true` → 整链升级为 dynamic 并出 warning；4) 输出最终 { dynamic, revalidate, runtime, warnings }。
 
 ```javascript
 export function resolveSegmentConfig(segments) {

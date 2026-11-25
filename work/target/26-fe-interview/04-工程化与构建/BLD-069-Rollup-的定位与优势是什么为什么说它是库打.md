@@ -40,3 +40,9 @@ export default {
 // "exports": { ".": { "import": "./dist/index.mjs", "require": "./dist/index.cjs" } },
 // "peerDependencies": { "react": ">=17" }
 ```
+
+**追问**：
+
+1. 为什么 React 必须写进 `external`？→ 打进来会导致应用里存在两份 React，hooks 立刻报 "Invalid hook call"；同时要在 `peerDependencies` 里声明版本范围，交给使用方安装。
+2. Rollup 的 tree-shaking 什么时候会失效？→ 模块有顶层副作用（立即执行的调用、装饰器、CJS 动态 require）或 package.json 没标 `sideEffects: false`，需要 `/*#__PURE__*/` 显式标注。
+3. 同时产出 ESM 和 CJS 时 `exports` 怎么写？→ 用条件导出分别指向 `import`/`require`，并单独给 `types`；要注意 dual package hazard——同一包被两条路径加载会出现两份实例和两份单例状态。

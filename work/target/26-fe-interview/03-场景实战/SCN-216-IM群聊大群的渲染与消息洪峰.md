@@ -38,3 +38,9 @@ class MessageRenderer {
 }
 // @我检测：batch.filter(isMentionMe) → 置顶提示条。
 ```
+
+**追问**：
+
+1. 洪峰折叠成「有 132 条新消息」后，用户点开要不要一次全渲染？ → 仍需分批 append 并保持虚拟列表，一次插 132 条会制造一次长任务。
+2. 虚拟列表动态测高在消息插入时会不会抖动？ → 新消息 append 到尾部不改历史项高度，向上翻页才需补偿 scrollTop，否则视口会跳。
+3. `memoItem` 只比对内容，撤回与已读态变化怎么触发更新？ → memo 要包含 status、recalled 等版本字段，或把 message.version 纳入比较。

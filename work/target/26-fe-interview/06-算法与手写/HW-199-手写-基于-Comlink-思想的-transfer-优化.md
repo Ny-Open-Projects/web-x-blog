@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-199：手写带 transfer 的 RPC——Comlink 风格封装 + 大 buffer 自动 transfer + 参数校验
 **答**：HW-289 RPC 的 transfer 增强：调用参数中 ArrayBuffer 自动识别进 transfer 列表（零拷贝）；返回值同理（worker 端标记 transfer）；参数校验（函数/DOM 不可传——clone 会抛错，提前报错提示）；调用池复用 worker（HW-270 回压）。
 
 ```javascript

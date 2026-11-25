@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-417：最小客户端路由器
-**需求**：实现 `createRouter(routes)`（~60 行）：1) History API 导航（push/replace + popstate 监听——含 bfcache pageshow 重连语义）；2) 路径匹配（:param 提取 + 通配 *）；3) 守卫链（async 串行，redirect 深度 ≤3 防环——MFW-455 复刻）；4) 异步组件加载（懒 import + 加载态与竞态守卫——新导航使旧 load 失效 version 号）；5) 滚动语义（push 回顶 / pop 保持——history.scrollRestoration 手动接管）；6) base 防抖（同 path 重复 push 忽略）。
+**答**：实现 `createRouter(routes)`（~60 行）：1) History API 导航（push/replace + popstate 监听——含 bfcache pageshow 重连语义）；2) 路径匹配（:param 提取 + 通配 *）；3) 守卫链（async 串行，redirect 深度 ≤3 防环——MFW-455 复刻）；4) 异步组件加载（懒 import + 加载态与竞态守卫——新导航使旧 load 失效 version 号）；5) 滚动语义（push 回顶 / pop 保持——history.scrollRestoration 手动接管）；6) base 防抖（同 path 重复 push 忽略）。
 
 ```javascript
 export function createRouter(routes, { guards = [] } = {}) {

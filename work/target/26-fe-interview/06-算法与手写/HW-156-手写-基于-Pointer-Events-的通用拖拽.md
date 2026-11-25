@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-156：手写 Pointer Events 通用拖拽——统一鼠标触摸、点按阈值区分点击/拖拽、touch-action 协调
 **答**：通用拖拽三层决策：① Pointer Events 统一鼠标/触摸/笔（setPointerCapture 持续跟踪）；② 点按阈值（move < 5px 判定为点击，> 阈值才进入拖拽——防止触摸设备上"想点击却拖走"）；③ touch-action: none 声明（告诉浏览器该区域手势归应用管，防拖拽时页面滚动打架）。
 
 ```javascript

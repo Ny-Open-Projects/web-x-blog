@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-496：边缘缓存 Vary 头规范器
-**需求**：实现 `canonicalVary(headers, { allow })`：1) 收集响应所有 Vary 值（可能多行多值），拆分/去重/排序成规范形式（CDN 对 Vary 的匹配是字符串敏感的——`Vary: A, B` 与两行分别 A、B 语义相同但要规范化避免重复缓存条目）；2) 白名单过滤：不在 allow（如 ['Accept-Encoding','X-Experiment']）中的 vary 维度剔除并告警（Cookie 在 Vary 里等于放弃缓存——必须显式决策）；3) `*` 值直接判 no-cache（Vary: * 等于不可缓存）；4) 输出 { vary, removed, warnings }。
+**答**：实现 `canonicalVary(headers, { allow })`：1) 收集响应所有 Vary 值（可能多行多值），拆分/去重/排序成规范形式（CDN 对 Vary 的匹配是字符串敏感的——`Vary: A, B` 与两行分别 A、B 语义相同但要规范化避免重复缓存条目）；2) 白名单过滤：不在 allow（如 ['Accept-Encoding','X-Experiment']）中的 vary 维度剔除并告警（Cookie 在 Vary 里等于放弃缓存——必须显式决策）；3) `*` 值直接判 no-cache（Vary: * 等于不可缓存）；4) 输出 { vary, removed, warnings }。
 
 ```javascript
 export function canonicalVary(headers, { allow = ['Accept-Encoding', 'X-Experiment'] } = {}) {

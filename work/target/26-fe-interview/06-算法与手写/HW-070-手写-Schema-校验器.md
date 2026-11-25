@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-070：手写迷你 JSON Schema 校验器——type/required/enum/min/max/pattern 递归嵌套
 **答**：递归校验器：validate(value, schema, path) 返回错误数组（带路径 `a.b[0].c`）。对象 schema 递归每个属性，数组 schema 校验 items，类型字符串与数组（多类型）都支持。
 
 ```javascript

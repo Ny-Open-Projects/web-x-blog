@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-418：手写增量 watch 编译器
-**需求**：实现 `createWatcher(graph, { compileModule, onChange })`：1) 初始全量编译（缓存每模块编译产物与输入 hash）；2) watch 文件变更事件：变更模块重编译；3) 脏传播：沿反向依赖边把「引用变更模块」的模块也重编译（引用内容变化）；4) 产物级聚合：受影响 chunk 重渲染，未影响 chunk 跳过（输出 rebuild 列表）；5) 批处理：100ms 窗口内多事件合并一次重编译；6) 内容相等短路：重编译产物与缓存相同 → 不传播（hash 短路）。
+**答**：实现 `createWatcher(graph, { compileModule, onChange })`：1) 初始全量编译（缓存每模块编译产物与输入 hash）；2) watch 文件变更事件：变更模块重编译；3) 脏传播：沿反向依赖边把「引用变更模块」的模块也重编译（引用内容变化）；4) 产物级聚合：受影响 chunk 重渲染，未影响 chunk 跳过（输出 rebuild 列表）；5) 批处理：100ms 窗口内多事件合并一次重编译；6) 内容相等短路：重编译产物与缓存相同 → 不传播（hash 短路）。
 
 ```javascript
 export function createWatcher(graph, { compileModule, windowMs = 100 } = {}) {

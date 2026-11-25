@@ -6,8 +6,8 @@ tags: [前端面试, 笔试题, MFW]
 type: 笔试题
 ---
 
-## MFW→MFW-413：分桶器
-**需求**：实现 `createExperimenter(registry, salt)`：1) hash(uid, exp, salt) → 0..9999 分桶（sticky——同 uid 恒同变体，含比例扩大不迁移——RBL-491 协议）；2) 分层实验正交（exp 名进 hash 域——两实验独立不相关）；3) ratio 变更只扩不缩（缩容会踢老用户——拒绝并提示走新实验）；4) 内建 SRM 自检（每小时实际计数 vs 配置卡方——p<0.001 告警：分流实现坏先于结论发现）；5) expose(handled) 只输出句柄。
+## MFW-413：分桶器
+**答**：实现 `createExperimenter(registry, salt)`：1) hash(uid, exp, salt) → 0..9999 分桶（sticky——同 uid 恒同变体，含比例扩大不迁移——RBL-491 协议）；2) 分层实验正交（exp 名进 hash 域——两实验独立不相关）；3) ratio 变更只扩不缩（缩容会踢老用户——拒绝并提示走新实验）；4) 内建 SRM 自检（每小时实际计数 vs 配置卡方——p<0.001 告警：分流实现坏先于结论发现）；5) expose(handled) 只输出句柄。
 
 ```javascript
 export function createExp(reg, salt) {

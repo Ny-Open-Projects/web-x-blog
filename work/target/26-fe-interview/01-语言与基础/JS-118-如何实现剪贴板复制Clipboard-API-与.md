@@ -51,3 +51,9 @@ async function pasteFromClipboard() {
   }
 }
 ```
+
+**追问**：
+
+1. HTTP 页面下 `navigator.clipboard` 一定不可用吗？ → 是，非安全上下文里它是 undefined（localhost 除外），只能直接走 execCommand 分支，所以判断要同时看 `window.isSecureContext`。
+2. `execCommand('copy')` 返回 true 就一定写进剪贴板了吗？ → 不一定，它只表示命令被接受；部分浏览器和输入法会静默失败，仍要让用户确认或提供手动复制入口。
+3. 复制多行文本或超长文本有什么坑？ → iOS 会折叠连续空白和换行，必须用 textarea 的 value 赋值而非 innerHTML；超长内容还要考虑主线程阻塞，必要时分片或提示。

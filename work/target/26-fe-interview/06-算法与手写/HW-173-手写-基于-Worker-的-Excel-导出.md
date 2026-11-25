@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-173：手写大数据量 Excel 导出——Worker 内分块生成 CSV/流式下载 + 内存峰值控制与进度
 **答**：10 万行导出：主线程一次 JSON.stringify + Blob 会卡死且内存翻倍。Worker 内流式生成 CSV（分块读取数据 + 行级序列化）→ 用 WritableStream/分片 Blob 拼接下载，内存峰值 = 块大小；进度实时上报；CSV 注入防护（公式注入：= 开头的值加前缀转义）。
 
 ```javascript

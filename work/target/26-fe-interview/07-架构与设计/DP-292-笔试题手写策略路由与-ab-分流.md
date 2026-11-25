@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-292：笔试题：手写策略路由与 AB 分流？
-**题目**：实现分流器：1) `assign(userId, layer, experiments)` 返回该用户在各实验的分组（control/treat）；2) 分桶确定性（同用户同结果）；3) 层间正交（不同层独立分配）；4) 白名单强制分组；5) SRM 校验函数（观测比例 vs 配置比例，p 值近似）。
+**答**：实现分流器：1) `assign(userId, layer, experiments)` 返回该用户在各实验的分组（control/treat）；2) 分桶确定性（同用户同结果）；3) 层间正交（不同层独立分配）；4) 白名单强制分组；5) SRM 校验函数（观测比例 vs 配置比例，p 值近似）。
 **评分点**：
 - hash 分桶确定性（稳定字符串 hash + salt）。
 - 层 salt 隔离（layer 进 hash 输入）。

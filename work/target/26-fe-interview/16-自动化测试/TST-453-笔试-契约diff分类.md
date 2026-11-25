@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-453：笔试：OpenAPI 新旧版本的 breaking diff 分类器。
-**题目**：契约 `[{path, method, responses: {status: schema}}]` 与 body 必填字段集。分类：删接口/删必填响应状态/新增必填请求字段/删响应字段 = breaking；新增可选字段/新增响应字段 = compatible。输出分类清单。
+**答**：契约 `[{path, method, responses: {status: schema}}]` 与 body 必填字段集。分类：删接口/删必填响应状态/新增必填请求字段/删响应字段 = breaking；新增可选字段/新增响应字段 = compatible。输出分类清单。
 
 ```javascript
 function contractDiff(oldC, nextC) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-402：手写任务图拓扑调度器
-**需求**：实现 `createScheduler(tasks)`：1) tasks：`{ id, deps: string[], run: async () => void, weight? }`；2) 调度：并发执行（concurrency 上限），依赖满足即启动；3) 优先级：同批可选任务按关键路径（含自身及其下游最长耗时估计）降序启动——关键路径先跑减少总时长；4) 失败策略：任务失败后其下游任务跳过（标记 skipped），其他分支继续；5) 返回汇总 { done, failed, skipped, durations }。
+**答**：实现 `createScheduler(tasks)`：1) tasks：`{ id, deps: string[], run: async () => void, weight? }`；2) 调度：并发执行（concurrency 上限），依赖满足即启动；3) 优先级：同批可选任务按关键路径（含自身及其下游最长耗时估计）降序启动——关键路径先跑减少总时长；4) 失败策略：任务失败后其下游任务跳过（标记 skipped），其他分支继续；5) 返回汇总 { done, failed, skipped, durations }。
 
 ```javascript
 export function createScheduler(tasks, { concurrency = 4 } = {}) {

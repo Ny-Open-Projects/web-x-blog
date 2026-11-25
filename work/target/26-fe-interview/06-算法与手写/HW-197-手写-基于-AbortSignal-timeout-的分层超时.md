@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-197：手写分层超时——AbortSignal.timeout/connect 超时/总预算三层（连接快超时+响应慢超时）
 **答**：fetch 无原生连接超时，分层实现：① AbortSignal.timeout(ms)（响应总超时）；② 连接超时模拟（fetch 后短窗内未到 response headers 即 abort——用 fetch 的 read 第一块判断；简化版用双 timer：connectTimeout 先到则 abort）；③ 多请求总预算（PER-328）。AbortSignal.any 组合信号（业务取消 + 超时）。
 
 ```javascript

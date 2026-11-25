@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-125：笔试：手写覆盖率门禁脚本（bun test 覆盖率 + 阈值判定）
-**题目**：写 coverage-gate.ts：1) 运行 bun test --coverage 拿覆盖率数据；2) 对 lines/functions/branches 三个维度设阈值（如 80/70/60）；3) 低于阈值 exit 1 并输出未达标项；4) 支持增量目录白名单（只统计 src/ 下）；5) 输出汇总表。
+**答**：写 coverage-gate.ts：1) 运行 bun test --coverage 拿覆盖率数据；2) 对 lines/functions/branches 三个维度设阈值（如 80/70/60）；3) 低于阈值 exit 1 并输出未达标项；4) 支持增量目录白名单（只统计 src/ 下）；5) 输出汇总表。
 
 ```typescript
 // coverage-gate.ts

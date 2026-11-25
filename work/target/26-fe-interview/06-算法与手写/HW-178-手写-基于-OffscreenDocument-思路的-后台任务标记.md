@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-178：手写后台任务标记——页面离开前的任务续跑声明（sendBeacon + Background Sync 分级）
 **答**：用户离开时"任务还能不能跑完"的分级：① 同步快任务（<1s）——页面 hidden 前直接跑完（visibilitychange 内同步逻辑）；② 短任务（<10s）——sendBeacon/fetch keepalive 移交给浏览器排队续传（PER-252）；③ 长任务（>10s）——Background Sync（SW sync 事件，浏览器保证有网时唤醒，页面可关闭，PER-330）；④ 不可续任务——明确提示用户（"离开将中断导出"确认框）。
 
 ```javascript

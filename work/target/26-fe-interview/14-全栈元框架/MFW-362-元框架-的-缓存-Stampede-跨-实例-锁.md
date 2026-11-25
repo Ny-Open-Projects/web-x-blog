@@ -1,5 +1,7 @@
 ---
 title: [MFW-362] 跨实例缓存重建锁（fencing token 版）
+
+## MFW-362：跨实例缓存重建锁（fencing token 版）
 date: 2026-11-20
 categories: [全栈元框架]
 tags: [前端面试, 笔试题, MFW]

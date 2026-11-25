@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-465：流式 HTML 占位替换器（loading.js 语义）
-**需求**：实现 `createStreamInjector()`：1) 首屏先 flush 含占位注释 `<!--slot:ID-->` 的 HTML 壳；2) 后台分段完成后调用 `inject(id, html)`，生成 `<template data-slot>` + 替换脚本：`<script>$RL(id,html)</script>` 形式推入写出队列（真实框架用隐藏 div + innerHTML 换入）；3) `writeTo(stream)` 保证顺序：壳未 flush 完先排队；4) 注入脚本必须转义 `</script`（防提前闭合注入 XSS——流式注入头号安全问题）。
+**答**：实现 `createStreamInjector()`：1) 首屏先 flush 含占位注释 `<!--slot:ID-->` 的 HTML 壳；2) 后台分段完成后调用 `inject(id, html)`，生成 `<template data-slot>` + 替换脚本：`<script>$RL(id,html)</script>` 形式推入写出队列（真实框架用隐藏 div + innerHTML 换入）；3) `writeTo(stream)` 保证顺序：壳未 flush 完先排队；4) 注入脚本必须转义 `</script`（防提前闭合注入 XSS——流式注入头号安全问题）。
 
 ```javascript
 const esc = s => s.replace(/<\/script/gi, '<\\/script') // 关键转义

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-325：笔试：手写支持重试的 Suspense 容器
-**题**：实现 `MySuspense` 类组件：捕获子树 throw 的 promise（getDerivedStateFromError 无法区分——用 componentDidCatch 判断是否 promise）；pending 时渲染 fallback；promise resolve 后重渲染子树；rejected 渲染 error UI 并提供 retry（重挂载子组件，key 自增）。
+**答**：实现 `MySuspense` 类组件：捕获子树 throw 的 promise（getDerivedStateFromError 无法区分——用 componentDidCatch 判断是否 promise）；pending 时渲染 fallback；promise resolve 后重渲染子树；rejected 渲染 error UI 并提供 retry（重挂载子组件，key 自增）。
 
 ```javascript
 class MySuspense extends React.Component {
@@ -37,6 +37,3 @@ class MySuspense extends React.Component {
 - resolve 后重渲染（真实 React 在调度器层做，此处简化）。
 - retry 用 key 自增强制子树重建。
 - 说明真实 Suspense 在 render 阶段（非错误通道）捕获，性能远优于 componentDidCatch 模拟。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-2e71b4d6-d634-4d6c-a073-fb5ff050fe15-cwd'; fi
-exit "$__zcode_status"

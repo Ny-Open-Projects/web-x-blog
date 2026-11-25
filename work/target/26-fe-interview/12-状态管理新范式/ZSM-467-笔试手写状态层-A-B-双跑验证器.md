@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-467：手写状态层 A/B 双跑验证器
-**需求**：实现 `createShadowRunner(oldImpl, newImpl)`：1) `exec(input)`：主路径返回 oldImpl 结果（用户无感），影子异步跑 newImpl；2) 影子结果与主结果对比（viewFn 视图级），不一致记录 { input, old, new }（采样 10% 上报）；3) 影子异常吞掉不影响主路径（隔离）；4) `verdict()` 返回 { total, match, matchRate }；5) 超时影子（3s）计为 mismatch（防止假阳性通过）；6) matchRate 连续达标（>=99.9% 且 total>=1000）触发 canPromote()。
+**答**：实现 `createShadowRunner(oldImpl, newImpl)`：1) `exec(input)`：主路径返回 oldImpl 结果（用户无感），影子异步跑 newImpl；2) 影子结果与主结果对比（viewFn 视图级），不一致记录 { input, old, new }（采样 10% 上报）；3) 影子异常吞掉不影响主路径（隔离）；4) `verdict()` 返回 { total, match, matchRate }；5) 超时影子（3s）计为 mismatch（防止假阳性通过）；6) matchRate 连续达标（>=99.9% 且 total>=1000）触发 canPromote()。
 
 ```javascript
 export function createShadowRunner(oldImpl, newImpl, viewFn, { sampleRate = 0.1 } = {}) {

@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-155：手写字段级 AsyncValidator——并行校验聚合、依赖注入与错误消息本地化
 **答**：异步校验聚合器：多字段并行校验（唯一性/风控/黑名单），Promise.allSettled 聚合（单个失败不影响其他错误收集）；错误消息本地化（校验器返回消息 key，渲染层按 locale 翻译——校验与展示解耦）；依赖注入（校验器接收 service 实例，测试时注入 mock）。
 
 ```javascript

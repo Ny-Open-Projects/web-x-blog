@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-419：笔试：信号系统的性能计数器（写放大检测）。
-**题目**：dev 模式统计：每信号写次数/每 computed 重算次数/每 effect 执行次数。`report()` 输出写放大比（effect 执行总数 / 写总数）。
+**答**：dev 模式统计：每信号写次数/每 computed 重算次数/每 effect 执行次数。`report()` 输出写放大比（effect 执行总数 / 写总数）。
 
 ```javascript
 const stats = { writes: 0, effectRuns: 0, computedRuns: 0, perNode: new Map() };

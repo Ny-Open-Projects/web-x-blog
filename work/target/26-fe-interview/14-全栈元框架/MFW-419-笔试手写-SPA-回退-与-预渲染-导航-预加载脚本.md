@@ -6,8 +6,8 @@ tags: [前端面试, 笔试题, MFW]
 type: 笔试题
 ---
 
-## MFW→419：预加载调度
-**需求**：实现 `createLinkPrefetcher({Budget = 4} = {})`：1) 意图分层：hover(200ms 防抖)/touchstart/viewport(IntersectionObserver) 三触发器；2) 全局并发预算（同时 ≤4 在途预取——优先级队列：viewport > hover；新意图抢占最低优先者 abort）；3) 预取内容协商（Accept: text/html——仅当服务端该路由可缓存才存——响应头 no-store 直接弃）；4) 命中率统计上报（预取数/导航命中数——低于 20% 自动收紧触发器等级）；5) 单飞（同 URL 在途共享 Promise）。
+## MFW-419：预加载调度
+**答**：实现 `createLinkPrefetcher({Budget = 4} = {})`：1) 意图分层：hover(200ms 防抖)/touchstart/viewport(IntersectionObserver) 三触发器；2) 全局并发预算（同时 ≤4 在途预取——优先级队列：viewport > hover；新意图抢占最低优先者 abort）；3) 预取内容协商（Accept: text/html——仅当服务端该路由可缓存才存——响应头 no-store 直接弃）；4) 命中率统计上报（预取数/导航命中数——低于 20% 自动收紧触发器等级）；5) 单飞（同 URL 在途共享 Promise）。
 
 ```javascript
 export function attachPreloader(router, { budget = 4, report }) {

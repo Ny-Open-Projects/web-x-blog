@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## FRP-285：笔试：手写 diff 最少移动断言工具
-**题**：实现 `assertMinimalMoves(before, after, actualMoves)`：计算理论最少移动次数（LIS 长度判定）并断言 actualMoves 不超过它；同时校验 before/after 的 DOM 顺序语义（保留项相对顺序可乱、复用集合一致）。
+**答**：实现 `assertMinimalMoves(before, after, actualMoves)`：计算理论最少移动次数（LIS 长度判定）并断言 actualMoves 不超过它；同时校验 before/after 的 DOM 顺序语义（保留项相对顺序可乱、复用集合一致）。
 
 ```javascript
 function minimalMoves(before, after) {
@@ -35,6 +35,3 @@ function assertMinimalMoves(before, after, actualMoves) {
 - 复用集合一致性校验（防 diff 静默丢节点）。
 - 排序比较避免误报。
 - 能用于 property-based 随机用例生成。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-933311cf-6d01-4fe0-bb53-fb2896f422e3-cwd'; fi
-exit "$__zcode_status"

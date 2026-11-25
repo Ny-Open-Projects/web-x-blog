@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-125：手写多币种格式化——Intl.NumberFormat 复用、大额缩写与币种符号位置本地化
 **答**：金额本地化三坑：每次 new Intl.NumberFormat 昂贵（必须模块级缓存）；币种符号位置随 locale（$1,234 vs 1.234 US$）；大额缩写（¥1.2万 vs $1.2M）规则不同。封装一个复用缓存 + 缩写策略的格式化器。
 
 ```javascript

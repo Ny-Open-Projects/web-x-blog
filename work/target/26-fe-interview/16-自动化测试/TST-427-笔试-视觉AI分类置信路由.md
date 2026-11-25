@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-427：笔试：AI 视觉分类结果按置信度路由（自动判/人工审）。
-**题目**：分类结果 `[{category, confidence}]`。规则：confidence ≥ 0.8 自动生效；0.5-0.8 → 人工快审队列；< 0.5 → 视为噪声（仅记录）。输出三队列与人工队列优先级（按 1-置信度 排序）。
+**答**：分类结果 `[{category, confidence}]`。规则：confidence ≥ 0.8 自动生效；0.5-0.8 → 人工快审队列；< 0.5 → 视为噪声（仅记录）。输出三队列与人工队列优先级（按 1-置信度 排序）。
 
 ```javascript
 function routeClassification(results) {

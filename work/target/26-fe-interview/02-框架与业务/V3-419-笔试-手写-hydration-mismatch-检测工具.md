@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-419：笔试：手写 hydration mismatch 检测工具
-**题**：实现 `diffHtml(serverHtml, clientTree)`：服务端产出 HTML 字符串与客户端水合后的 DOM 树比较，返回首个不匹配的路径（如 `div#app > ul > li[2]`）与两边内容摘要；要求按标签名逐层比较，文本节点归一化空白。
+**答**：实现 `diffHtml(serverHtml, clientTree)`：服务端产出 HTML 字符串与客户端水合后的 DOM 树比较，返回首个不匹配的路径（如 `div#app > ul > li[2]`）与两边内容摘要；要求按标签名逐层比较，文本节点归一化空白。
 
 ```javascript
 function normalizeText(s) { return s.replace(/\s+/g, ' ').trim() }
@@ -40,6 +40,3 @@ function diffHtml(serverHtml, clientEl) {
 - 文本归一化避免空白噪音误报。
 - 两侧节点数不对称的分支处理（extra/missing）。
 - 摘要截断（避免日志爆炸）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-77b0d251-5ff8-47f1-80bb-ebb7b81a511a-cwd'; fi
-exit "$__zcode_status"

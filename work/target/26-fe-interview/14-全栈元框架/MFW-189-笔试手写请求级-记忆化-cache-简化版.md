@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-189：笔试：手写请求级记忆化（React cache() 简化版）
-**题目**：实现 `memoizePerRequest(fn)`：① 同一请求内按参数缓存结果，同参调用只执行一次（含并发：第一个 promise 被共享）；② 不同请求之间互不可见（不会把 A 用户的取数给 B）；③ 缓存上限（单请求最多 100 个键，防异常爆炸）；④ 用 AsyncLocalStorage 或等价机制实现请求隔离；⑤ 错误结果也按请求缓存吗？说明并实现你的选择。
+**答**：实现 `memoizePerRequest(fn)`：① 同一请求内按参数缓存结果，同参调用只执行一次（含并发：第一个 promise 被共享）；② 不同请求之间互不可见（不会把 A 用户的取数给 B）；③ 缓存上限（单请求最多 100 个键，防异常爆炸）；④ 用 AsyncLocalStorage 或等价机制实现请求隔离；⑤ 错误结果也按请求缓存吗？说明并实现你的选择。
 
 ```ts
 import { AsyncLocalStorage } from 'node:async_hooks';

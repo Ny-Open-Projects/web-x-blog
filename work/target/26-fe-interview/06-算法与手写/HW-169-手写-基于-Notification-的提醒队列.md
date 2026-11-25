@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-169：手写通知提醒队列——Notification 权限状态机、页面可见性分流（前台 toast/后台推送）与去重
 **答**：提醒分流：页面可见 → 应用内 toast（不打扰）；页面隐藏 → 系统通知（Notification，需权限状态机：default 引导授权/denied 静默跳过/granted 发送）；去重（同 key 提醒 5 分钟内只发一次）；SW 场景用 showNotification（页面关闭也能送达）。
 
 ```javascript

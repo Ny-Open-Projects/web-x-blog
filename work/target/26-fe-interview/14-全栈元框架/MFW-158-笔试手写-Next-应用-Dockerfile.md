@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-158：笔试：手写 Next.js 应用的生产 Dockerfile（多阶段 + 优雅退出）
-**题目**：为 Next.js（App Router + standalone 输出）写生产 Dockerfile：① 多阶段构建，镜像最小化；② 非 root 用户运行；③ 只监听 3000；④ 处理 SIGTERM 优雅退出（停止接新请求后排空）；⑤ 健康检查内置（HEALTHCHECK 或注释说明 K8s 探针）。
+**答**：为 Next.js（App Router + standalone 输出）写生产 Dockerfile：① 多阶段构建，镜像最小化；② 非 root 用户运行；③ 只监听 3000；④ 处理 SIGTERM 优雅退出（停止接新请求后排空）；⑤ 健康检查内置（HEALTHCHECK 或注释说明 K8s 探针）。
 
 ```dockerfile
 # syntax=docker/dockerfile:1

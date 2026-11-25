@@ -47,3 +47,11 @@ list.addEventListener('mouseout', (e) => {
   if (item && !item.contains(e.relatedTarget)) item.classList.remove('hover');
 });
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. focus 与 focusin 的触发顺序和冒泡性差别？ → focus 先触发但不冒泡，focusin 随后触发且冒泡；要委托用 focusin，要最早拦截用捕获阶段的 focus。
+2. scroll 为什么无法委托到 document？ → scroll 事件只在滚动元素自身触发、不冒泡，监听 document 收不到子容器滚动，只能监听容器本身或用 IntersectionObserver 替代。
+3. mouseover 委托不判 relatedTarget 会怎样？ → 指针在子元素之间移动也会重复触发 over/out，导致 hover 态闪烁、进出计数虚高，必须用 `contains(e.relatedTarget)` 过滤。

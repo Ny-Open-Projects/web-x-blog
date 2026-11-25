@@ -44,3 +44,9 @@ if (import.meta.hot) {
 // <- { type: 'css-update', path: '/src/style.css', timestamp: 1710001 }
 // <- { type: 'full-reload', path: '/index.html' }  （无法热替换时）
 ```
+
+**追问**：
+
+1. 改了文件为什么变成整页刷新？→ 沿 import 链向上找不到声明了 `accept` 的边界，只能 `full-reload`；React 项目要靠 Fast Refresh 插件在组件模块上注入 accept。
+2. HMR 更新成功但组件状态丢了，为什么？→ 模块被整体替换而非原地更新，或者组件签名变了（hook 数量/顺序变化），Fast Refresh 会放弃保留 state 直接重挂。
+3. Vite 与 webpack 的消息模型差在哪？→ webpack 只推 hash，客户端还要再请求 `hot-update.json` 拿变更清单；Vite 直接推 `path + timestamp` 精确到单模块，少一次往返。

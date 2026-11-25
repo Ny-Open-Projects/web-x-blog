@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-453：笔试：实现条件块的编译产物（anchor 注释节点 + 条件切换）。
-**题目**：输入 `{cond, then: node, else: node}`。产物：anchor 占位（注释节点），effect 切换：真渲染 then 假渲染 else（重建/复用按简化选择，说明取舍）。
+**答**：输入 `{cond, then: node, else: node}`。产物：anchor 占位（注释节点），effect 切换：真渲染 then 假渲染 else（重建/复用按简化选择，说明取舍）。
 
 ```javascript
 function compileIf({ cond, then, otherwise }) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-478：SSR 页面 Cache-Control 组合推导器
-**需求**：实现 `deriveCacheControl(page)`：1) page = { render: 'static'|'isr'|'dynamic', revalidate, personal, cookies, auth }；2) 推导规则：static → `public, max-age=31536000, immutable`；isr → `public, s-maxage=X, stale-while-revalidate=Y`（Y = min(revalidate, 60)）；dynamic → 有 cookie/auth/personal 任一 → `private, no-store`；否则 `public, s-maxage=60, must-revalidate`；3) 冲突裁决：dynamic 但带 personal 必须同时加 `Vary: Cookie`（或干脆 no-store，二选一给理由）；4) 输出 { header, vary, reason }（每条决策带理由——缓存头评审要用）。
+**答**：实现 `deriveCacheControl(page)`：1) page = { render: 'static'|'isr'|'dynamic', revalidate, personal, cookies, auth }；2) 推导规则：static → `public, max-age=31536000, immutable`；isr → `public, s-maxage=X, stale-while-revalidate=Y`（Y = min(revalidate, 60)）；dynamic → 有 cookie/auth/personal 任一 → `private, no-store`；否则 `public, s-maxage=60, must-revalidate`；3) 冲突裁决：dynamic 但带 personal 必须同时加 `Vary: Cookie`（或干脆 no-store，二选一给理由）；4) 输出 { header, vary, reason }（每条决策带理由——缓存头评审要用）。
 
 ```javascript
 export function deriveCacheControl(page) {

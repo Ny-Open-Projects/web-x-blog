@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-151：笔试：手写压缩一致性校验工具（minify 前后行为等价抽查）
 
-**题目**：写 verify-minify.mjs：1) 输入原始 chunk 与压缩后 chunk 两个文件路径；2) 用 @swc/core 分别 parse 两份代码得到导出符号集与字符串字面量集；3) 校验：压缩后导出名集合 ⊆ 原导出名集合（mangle 允许局部重命名但 export 名应保留）、字符串字面量集合一致（防止压缩吞掉关键串）；4) 体积对比输出 gzip 前后压缩率；5) 任一校验失败 exit 1 并打印首个差异。
+**答**：写 verify-minify.mjs：1) 输入原始 chunk 与压缩后 chunk 两个文件路径；2) 用 @swc/core 分别 parse 两份代码得到导出符号集与字符串字面量集；3) 校验：压缩后导出名集合 ⊆ 原导出名集合（mangle 允许局部重命名但 export 名应保留）、字符串字面量集合一致（防止压缩吞掉关键串）；4) 体积对比输出 gzip 前后压缩率；5) 任一校验失败 exit 1 并打印首个差异。
 
 ```javascript
 // verify-minify.mjs

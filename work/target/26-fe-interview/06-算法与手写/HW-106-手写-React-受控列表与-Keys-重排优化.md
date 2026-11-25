@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-106：手写带拖拽排序的受控列表——key 稳定性、受控数据流与拖拽落点计算
 **答**：拖拽排序三要点：① **key 必须稳定且唯一**（用数据 id，绝不用 index——index 在重排后会让 React 复用错误节点的输入状态）；② 受控数据流——拖拽只更新源数组顺序（splice + 不可变更新 HW-099），DOM 顺序交给 React；③ 落点计算——用 dragover 的 clientY 对半比较目标项中线，决定 before/after。
 
 ```jsx

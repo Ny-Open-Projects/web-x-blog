@@ -11,7 +11,7 @@ type: 面试题
 **答**：
 - React Compiler（原 React Forget）在**构建期**分析组件/hook 的数据流，自动插入等价于 useMemo/useCallback/自动依赖的缓存代码——开发者不再手写 memo。
 - 核心是**依赖追踪的编译期化**：编译器把组件转成 SSA 形式，计算每个值依赖哪些输入（props/state/外部读取），把"依赖不变则复用"表达为编译产物。
-- 产物形态：JSX 嵌入 `_c(dependencies, () => jsx(...))` 帮助函数——运行时做 `Object.is` 依赖比对，全等则返回缓存的元素树。
+- 产物形态：组件开头 `const $ = _c(n)` 取缓存槽数组（`_c` 即 `useMemoCache`），随后对每个值内联 `if ($[0] !== dep) { …; $[1] = value }` 做 `Object.is` 比对，全等则复用槽里的元素树。
 - 边界：编译器**只对符合 React 规则的代码**生效——可变全局、按调用顺序变化的逻辑会被跳过（保守策略，不改变语义只跳过优化）；ESLint 插件负责提前暴露违规。
 
 ```javascript
@@ -55,7 +55,7 @@ function TodoList(t32) {
 // —— _c/useMemoCache 的运行时 ——
 function useMemoCache(size) {
   const fiber = currentFiber;
-  const slot = fiber.memoizedState ??= { cache: new Array(size).empty };
+  const slot = fiber.memoizedState ??= { cache: new Array(size) };
   return slot.cache;   // 缓存挂在 fiber 上：组件卸载即释放，与 hooks 同生命周期
 }
 
@@ -68,3 +68,11 @@ function useMemoCache(size) {
 ```
 
 ## 二十七、手写进阶综合
+
+## 追问（补充）
+
+**追问**：
+
+1. 编译产物把缓存挂在 fiber 上，会不会随卸载泄漏？ → 不会。useMemoCache 的槽位存在 memoizedState 里，随组件卸载一起回收；但要留意缓存的是 JSX 元素树，闭包里捕获的大对象会跟着活到该槽位失效为止。
+2. 有了 Compiler 还需要 React.memo 吗？ → 需要。Compiler 优化的是组件内部的计算与 JSX 复用，父组件重渲时子组件是否跳过仍取决于 props 浅比较，这层 memo 语义它不替代，两者互补。
+3. 哪些代码会被编译器直接跳过？ → 违反 Hooks 规则、渲染期读写可变全局、用 ref 当前值参与渲染计算、依赖调用顺序的副作用，都会被保守跳过（不缓存但语义不变）；靠 eslint-plugin-react-hooks 的 compiler 规则提前暴露。

@@ -45,3 +45,11 @@ async function wtStreamingPlayer(url, videoRenderer) {
   });
 }
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. datagram 超过 1200B 会怎样，分片怎么定 → 超限直接抛错或丢弃，所以应用层要按 MTU 自己切帧（视频按 NAL 单元切并带序号），关键帧走可靠流、P 帧走 datagram，丢帧由解码器容忍。
+2. 连接断了播放器怎么无感恢复 → 监听 closed 与 draining，用 0-RTT 重连并带上次流序号续传，重连期间保持最后一帧不黑屏。
+3. Safari 不支持时降级路径怎么设计 → 能力探测后按 WebTransport、WebSocket 加 WebCodecs、HTTP-FLV 的顺序一次性选定并锁死，运行中不因单次失败来回切协议，首帧时间反而更差。

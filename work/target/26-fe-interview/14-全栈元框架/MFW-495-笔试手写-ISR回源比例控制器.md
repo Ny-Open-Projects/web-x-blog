@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-495：ISR 回源比例（dogpile）控制器
-**需求**：实现 `OriginGuard({ maxPerMin = 60 })`：1) 缓存过期瞬间大量并发回源（dogpile）要限流：`admit(key)` 按每分钟配额放行真实回源，超出的返回 `stale`（允许继续用旧值并延时重试——SWR 兜底）；2) 每 key 单飞已在上一层做，这里防的是"多 key 同时过期"的总量风暴（如整点批量过期）；3) 配额按令牌桶：容量 = maxPerMin，每秒匀速回填；4) 拒绝时带 `retryAfter` 建议（错峰到桶回填时刻）。
+**答**：实现 `OriginGuard({ maxPerMin = 60 })`：1) 缓存过期瞬间大量并发回源（dogpile）要限流：`admit(key)` 按每分钟配额放行真实回源，超出的返回 `stale`（允许继续用旧值并延时重试——SWR 兜底）；2) 每 key 单飞已在上一层做，这里防的是"多 key 同时过期"的总量风暴（如整点批量过期）；3) 配额按令牌桶：容量 = maxPerMin，每秒匀速回填；4) 拒绝时带 `retryAfter` 建议（错峰到桶回填时刻）。
 
 ```javascript
 export class OriginGuard {

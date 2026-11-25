@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-198：手写上报通道验证——sendBeacon 返回值/keepalive 限制/64KB 排队检查与降级测试器
 **答**：上报通道的自我验证器（SDK 自监控，PER-246）：sendBeacon 返回 false（64KB 排队满）→ 记录降级事件；fetch keepalive 超 64KB 抛错 → 捕获记录；定期健康探针（小 beacon 到探针端点，服务端回 204 验证链路通）——通道故障时 SDK 降频（防止无效重试堆积）。
 
 ```javascript

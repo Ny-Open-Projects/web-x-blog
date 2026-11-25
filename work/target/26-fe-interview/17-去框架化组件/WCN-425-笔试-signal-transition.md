@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-425：笔试：实现 transition 双缓冲（低优先级更新不闪烁）。
-**题目**：`startTransition(fn)`：fn 内信号写入进「pending 层」；读取时 transition 进行中返回旧值；transition 结束合并进主层一次 flush。
+**答**：`startTransition(fn)`：fn 内信号写入进「pending 层」；读取时 transition 进行中返回旧值；transition 结束合并进主层一次 flush。
 
 ```javascript
 let transacting = false; const pendingLayer = new Map();

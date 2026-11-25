@@ -37,3 +37,9 @@ async function refreshToken() {
   return res.json();
 }
 ```
+
+**追问**：
+
+1. 刷新接口本身返回 401，拦截器会怎样？ → 会再次进入 401 分支，形成无限递归刷新；必须把 refresh 请求排除在拦截器之外，或加 `_retry` 标记只重放一次。
+2. 并发 401 时 `refreshing` 变量会有竞争吗？ → JS 单线程下赋值本身安全，但 `finally` 里置 null 的时机很关键：若在等待者恢复前清空，后续 401 会再发起一次刷新。
+3. Refresh Token 轮换后，旧 token 被人重放怎么发现？ → 服务端记录 token 家族，已使用过的 refresh 再次出现即判定盗用，吊销整条链并强制重新登录。

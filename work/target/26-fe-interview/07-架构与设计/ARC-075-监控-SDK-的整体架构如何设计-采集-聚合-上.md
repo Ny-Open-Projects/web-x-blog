@@ -39,8 +39,14 @@ class Monitor {
   flush = () => {
     const batch = this.buffer.splice(0);
     const body = JSON.stringify(batch);
-    navigator.sendBeacon?.(this.ctx.config.dsn, body)               // 页面卸载也不丢
-      ?? fetch(this.ctx.config.dsn, { method: 'POST', body, keepalive: true });
+    if (!navigator.sendBeacon?.(this.ctx.config.dsn, body))          // sendBeacon 失败返回 false，需显式回退
+      fetch(this.ctx.config.dsn, { method: 'POST', body, keepalive: true });   // 页面卸载也不丢
   };
 }
 ```
+
+**追问**：
+
+1. sendBeacon 有 64KB 上限且不能自定义 header，批量超了怎么办？ → 按体积切批并压缩，超限降级 fetch 加 keepalive，仍失败就落本地缓存下次补发，不能静默丢弃。
+2. SDK 自己抛错把宿主搞白屏，怎么保证永不伤害宿主？ → 所有入口包 try/catch，全局 error 监听里先判断是否来自 SDK 栈并直接忽略，初始化异步执行，避免在宿主主流程里同步跑逻辑。
+3. 采样率 10% 时错误总数怎么还原，低频的严重错误会不会被采没？ → 错误类事件全量不采样，性能类按采样上报 sampleRate 供后端加权还原，致命等级单独走全量通道。

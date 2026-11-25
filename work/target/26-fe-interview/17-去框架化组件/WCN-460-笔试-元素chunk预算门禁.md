@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-460：笔试：实现元素 chunk 的体积预算门禁（构建产物检查）。
-**题目**：输入 `[{file, gzip}]` 与预算表。门禁：超预算列出；共享 chunk（被 > 3 元素引用）单独预算。输出 `{violations, total}` 与构建退出码。
+**答**：输入 `[{file, gzip}]` 与预算表。门禁：超预算列出；共享 chunk（被 > 3 元素引用）单独预算。输出 `{violations, total}` 与构建退出码。
 
 ```javascript
 function chunkGate(arts, budgets, { exempt = [] } = {}) {

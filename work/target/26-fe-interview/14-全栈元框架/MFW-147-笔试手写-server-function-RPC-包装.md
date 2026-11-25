@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-147：笔试：手写一个 server function RPC 包装器
-**题目**：实现 `createServerFn(options)` 简化版：① 返回可调用函数，客户端调用时 POST 到 `/api/_rpc/{fnId}`；② 服务端根据 fnId 从注册表找到 handler 执行，入参先过 validator；③ 结果统一 `{ data }` 或 `{ error: { message, code } }` 结构；④ 仅服务端函数（isServer）直接本地调用不走网络；⑤ 未注册的 fnId 返回 404 结构化错误。
+**答**：实现 `createServerFn(options)` 简化版：① 返回可调用函数，客户端调用时 POST 到 `/api/_rpc/{fnId}`；② 服务端根据 fnId 从注册表找到 handler 执行，入参先过 validator；③ 结果统一 `{ data }` 或 `{ error: { message, code } }` 结构；④ 仅服务端函数（isServer）直接本地调用不走网络；⑤ 未注册的 fnId 返回 404 结构化错误。
 
 ```ts
 // shared/rpc.ts —— 客户端与服务端共用

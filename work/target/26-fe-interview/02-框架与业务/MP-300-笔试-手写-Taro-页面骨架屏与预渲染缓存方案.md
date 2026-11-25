@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-300：笔试：手写启动优化组合方案
-**题**：落地「首页启动优化」：① app.json 开启 initialRenderingCache；② 页面首屏骨架（静态结构在缓存中呈现）+ 数据并行拉取；③ 关键分包 preloadRule；④ 按需注入 lazyCodeLoading；⑤ 优化效果验证方案（指标与对照）。写出关键配置与页面结构。
+**答**：落地「首页启动优化」：① app.json 开启 initialRenderingCache；② 页面首屏骨架（静态结构在缓存中呈现）+ 数据并行拉取；③ 关键分包 preloadRule；④ 按需注入 lazyCodeLoading；⑤ 优化效果验证方案（指标与对照）。写出关键配置与页面结构。
 
 ```json
 // app.json
@@ -42,6 +42,3 @@ Page({
 - 一次性 setData 替换（减少消息次数）。
 - 验证方案包含灰度对照与指标定义。
 - 能说出 initialRenderingCache 的失效边界（结构变更）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-af6a2a43-f809-4433-bbee-fe40d01b5b97-cwd'; fi
-exit "$__zcode_status"

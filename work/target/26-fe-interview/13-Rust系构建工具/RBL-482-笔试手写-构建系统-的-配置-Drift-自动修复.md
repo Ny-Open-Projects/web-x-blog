@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-482：手写配置 drift 自动修复
-**需求**：实现 `autoFixDrift(repos, baseline)`：1) 检测各仓配置与 baseline 的 drift（字段级 diff）；2) 自动修复分类：safe（版本号对齐——codemod 直接改）/needs-review（语义差异——生成 PR 人工审）/cannot-fix（结构性差异——报告）；3) 修复 PR 生成：带 diff 预览与验证状态；4) 修复幂等：重复执行不产生新变更（修复后与 baseline 一致）；5) 报告 { fixed, needsReview, cannotFix }，修复率追踪。
+**答**：实现 `autoFixDrift(repos, baseline)`：1) 检测各仓配置与 baseline 的 drift（字段级 diff）；2) 自动修复分类：safe（版本号对齐——codemod 直接改）/needs-review（语义差异——生成 PR 人工审）/cannot-fix（结构性差异——报告）；3) 修复 PR 生成：带 diff 预览与验证状态；4) 修复幂等：重复执行不产生新变更（修复后与 baseline 一致）；5) 报告 { fixed, needsReview, cannotFix }，修复率追踪。
 
 ```javascript
 export function autoFixDrift(repos, baseline, codemod) {

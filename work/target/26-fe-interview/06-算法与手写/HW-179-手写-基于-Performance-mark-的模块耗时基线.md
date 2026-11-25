@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-179：手写模块耗时基线——mark/measure 包装 + 启动分阶段水位 + 版本对比基线固化
 **答**：启动分阶段耗时基线：按里程碑打 mark（HTML 解析完/核心 bundle 执行完/首屏组件挂载/交互就绪）→ measure 出各段时长 → 与固化基线（budgets.json 式）对比，CI 中回归即拦。包装器保证 mark 幂等（重复调用不重复计）与异常安全。
 
 ```javascript

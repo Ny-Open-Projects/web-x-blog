@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-196：笔试：手写构建环境变量校验器（fail fast，别跑 20 分钟才报缺变量）
 
-**题目**：写 env-guard.mjs：1) 输入声明文件 env.schema.json：必填/可选变量、类型（string/int/url/bool）、默认值、正则约束；2) 校验 process.env：必填缺失 → 报错列出全部缺失项（一次报全，不是逐个失败）；类型不符/正则不过 → 报错；可选缺省 → 注入默认值；3) 支持 scope：prod-only 变量仅在 NODE_ENV=production 时必填；4) 校验通过后输出 sanitized 摘要（值脱敏：PASSWORD/KEY/TOKEN 只显示 ***）；5) 失败 exit 1 且在构建开始前运行（CI 第一步）。
+**答**：写 env-guard.mjs：1) 输入声明文件 env.schema.json：必填/可选变量、类型（string/int/url/bool）、默认值、正则约束；2) 校验 process.env：必填缺失 → 报错列出全部缺失项（一次报全，不是逐个失败）；类型不符/正则不过 → 报错；可选缺省 → 注入默认值；3) 支持 scope：prod-only 变量仅在 NODE_ENV=production 时必填；4) 校验通过后输出 sanitized 摘要（值脱敏：PASSWORD/KEY/TOKEN 只显示 ***）；5) 失败 exit 1 且在构建开始前运行（CI 第一步）。
 
 ```javascript
 // env-guard.mjs

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-482：手写状态层 SW 缓存同步
-**需求**：实现主页面与 Service Worker 的状态缓存同步：1) 页面 `pushToSW(key, data)`：把关键状态写入 SW 持有的 Cache（离线可用）；2) SW 侧监听 message 写 Cache API；3) 页面冷启动 `pullFromSW(key)`：SW 缓存优先于网络（离线优先读路径）；4) 版本戳：每次写入带 `{ v, data }`，读取时版本较旧的数据标记 stale；5) 双通道：BroadcastChannel 兜底 SW 不可用时直接 localStorage。
+**答**：实现主页面与 Service Worker 的状态缓存同步：1) 页面 `pushToSW(key, data)`：把关键状态写入 SW 持有的 Cache（离线可用）；2) SW 侧监听 message 写 Cache API；3) 页面冷启动 `pullFromSW(key)`：SW 缓存优先于网络（离线优先读路径）；4) 版本戳：每次写入带 `{ v, data }`，读取时版本较旧的数据标记 stale；5) 双通道：BroadcastChannel 兜底 SW 不可用时直接 localStorage。
 
 ```javascript
 // 页面侧

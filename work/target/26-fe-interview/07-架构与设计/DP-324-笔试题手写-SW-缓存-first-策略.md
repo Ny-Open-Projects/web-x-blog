@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-324：笔试题：手写 SW 缓存策略（cache-first + swr）？
-**题目**：在 Service Worker 实现路由级策略：1) 静态资源 cache-first；2) HTML stale-while-revalidate；3) API network-first；4) 缓存版本化与 activate 清理旧缓存。
+**答**：在 Service Worker 实现路由级策略：1) 静态资源 cache-first；2) HTML stale-while-revalidate；3) API network-first；4) 缓存版本化与 activate 清理旧缓存。
 **评分点**：
 - 策略实现正确（三种响应来源）。
 - swr 不阻塞当前响应（缓存立即返回+后台刷新）。

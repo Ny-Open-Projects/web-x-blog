@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-176：手写动态主题引擎——CSS 变量三主题 + 跟随系统 + 无闪切（data-theme 预注入）
 **答**：主题切换零重排：CSS 变量定义三套主题（:root[data-theme=dark] 覆盖变量值），切换只改 data-theme 属性（样式重绘不重匹配，PER-403）；跟随系统（prefers-color-scheme change 监听，用户显式选择优先）；无闪切（HTML 内联脚本首字节注入 data-theme，防"白闪"FOUC）。
 
 ```html

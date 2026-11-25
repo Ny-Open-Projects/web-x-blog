@@ -26,3 +26,14 @@ export default function Index() {
   )
 }
 ```
+
+**边界与易错**：
+
+1. 误以为 Taro 3 直接调原生 `setData`：中间隔着 taro-runtime 的假 DOM 与 diff，`setData` 只发差量路径。
+2. 页面显示/隐藏要用 `useDidShow`，组件挂载才用 `useEffect`；放错位置会导致重复请求。
+
+**追问**：
+
+1. 运行时方案的瓶颈在哪？→ 假 DOM diff 加 setData 序列化与跨线程通信，层级越深路径越长，优化点是减少节点数与合并 setData。
+2. 编译时方案为什么被放弃？→ 只能覆盖静态 JSX 子集，动态逻辑要写条件编译，React 的完整能力用不上。
+3. 与原生小程序混用注意什么？→ 跳转正常，但共享状态、请求拦截、事件总线都不自动生效。

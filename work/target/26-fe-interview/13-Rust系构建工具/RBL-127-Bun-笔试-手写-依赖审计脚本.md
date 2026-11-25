@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-127：笔试：手写依赖审计脚本（幽灵依赖检测）
-**题目**：写 audit-deps.ts：1) 扫描 src 下所有 import 语句提取裸导入包名；2) 读取 package.json 的 dependencies + devDependencies 声明集合；3) 报告「代码用了但未声明」的幽灵依赖；4) 报告「声明了但未使用」的死依赖；5) scope 包归并正确（@scope/name 取两段）。
+**答**：写 audit-deps.ts：1) 扫描 src 下所有 import 语句提取裸导入包名；2) 读取 package.json 的 dependencies + devDependencies 声明集合；3) 报告「代码用了但未声明」的幽灵依赖；4) 报告「声明了但未使用」的死依赖；5) scope 包归并正确（@scope/name 取两段）。
 
 ```typescript
 // audit-deps.ts

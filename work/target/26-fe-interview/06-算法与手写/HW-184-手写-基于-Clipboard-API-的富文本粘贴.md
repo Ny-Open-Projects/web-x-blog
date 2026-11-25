@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-184：手写富文本粘贴净化——ClipboardData 解析 text/html + DOMPurify 白名单净化 + 图片拦截确认
 **答**：粘贴安全管线：paste 事件拦截 → 优先 text/html（保格式）→ DOMPurify 白名单净化（PER-202 Trusted Types 配合）→ 粘贴图片（clipboardData.files）弹确认（外部图片可能巨大/隐私）→ 纯文本兜底。
 
 ```javascript

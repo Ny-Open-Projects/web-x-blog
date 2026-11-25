@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-437：手写状态层 Feature Flag 门控
-**需求**：实现 `createFlagGate(defaults)`：1) `get(key)` 读 flag（未加载时返回 default 保守值）；2) `load(remoteFlags)`：异步加载后热生效；但「状态相关 flag」要求快照一致性——`snapshot()` 冻结当前 flag 集，组件用快照渲染（同一渲染批次内 flag 不漂移）；3) `useFlag(key)` 在渲染中读快照；4) flag 变更默认「下次刷新生效」开关（strict 模式：状态 flag 变更直接抛错阻止热切）；5) `onChange(key, fn)` 订阅变更（非 strict flag 才支持热切）。
+**答**：实现 `createFlagGate(defaults)`：1) `get(key)` 读 flag（未加载时返回 default 保守值）；2) `load(remoteFlags)`：异步加载后热生效；但「状态相关 flag」要求快照一致性——`snapshot()` 冻结当前 flag 集，组件用快照渲染（同一渲染批次内 flag 不漂移）；3) `useFlag(key)` 在渲染中读快照；4) flag 变更默认「下次刷新生效」开关（strict 模式：状态 flag 变更直接抛错阻止热切）；5) `onChange(key, fn)` 订阅变更（非 strict flag 才支持热切）。
 
 ```javascript
 export function createFlagGate(defaults = {}, { strictKeys = [] } = {}) {

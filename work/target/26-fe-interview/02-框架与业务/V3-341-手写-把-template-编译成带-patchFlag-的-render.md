@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-341：手写：把简单模板编译成带 patchFlag 的 render 函数
-**题**：实现 `compileSimple(template)`，输入形如 `<div><span>{{msg}}</span><p class="a">static</p></div>`，输出等价的 render 函数字符串：静态节点生成常量、动态文本节点标 patchFlag=TEXT。要求：静态节点提升、动态节点保留表达式占位。
+**答**：实现 `compileSimple(template)`，输入形如 `<div><span>{{msg}}</span><p class="a">static</p></div>`，输出等价的 render 函数字符串：静态节点生成常量、动态文本节点标 patchFlag=TEXT。要求：静态节点提升、动态节点保留表达式占位。
 
 ```javascript
 function compileSimple(tpl) {
@@ -36,6 +36,3 @@ function compileSimple(tpl) {
 - 能区分静态/动态节点并给动态文本标 patchFlag=1（TEXT）。
 - 静态节点提升为模块级常量。
 - 用正则或简易解析提取插值表达式（DOMParser/正则均可），不需完整 AST 但结构不能硬编码死。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-aa513259-2959-498b-b5e5-881f417bdf3b-cwd'; fi
-exit "$__zcode_status"

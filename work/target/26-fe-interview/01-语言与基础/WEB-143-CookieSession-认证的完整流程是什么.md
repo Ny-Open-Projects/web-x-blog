@@ -32,3 +32,9 @@ app.get('/me', (req, res) => {
   res.json({ userId: req.session.userId });
 });
 ```
+
+**追问**：
+
+1. 粘性会话和 Redis 集中存储怎么选？ → 实例少、可接受扩容抖动用粘性；要弹性扩缩、支持即时踢人和多端一致，必须用 Redis 集中存储。
+2. Session 的滑动续期怎么做才不放大写压力？ → 每次请求不必都回写，只在剩余有效期低于阈值（如 50%）时重置 maxAge 并更新 Redis TTL。
+3. 有 `SameSite=Lax` 的 Session cookie 还存在 CSRF 风险吗？ → 存在，顶层 GET 导航仍会带上 cookie；只要 GET 接口有副作用就能被利用，敏感操作要 POST 加 CSRF token。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-194：笔试：手写 ETag / 304 协商缓存中间件
-**题目**：为 SSR 应用实现 ETag 协商缓存中间件：① 渲染完成后计算响应体 ETag（内容 hash，弱 ETag `W/` 可选）；② 比对请求头 `If-None-Match`，命中则返回 304（无 body），跳过后续渲染发送；③ 支持 `*` 通配与多值匹配（逗号分隔列表）；④ 动态内容（登录态页面）不启用 ETag——按配置开关；⑤ 304 响应仍要带上 `Cache-Control`/`Vary` 头（304 不等于无缓存语义）。
+**答**：为 SSR 应用实现 ETag 协商缓存中间件：① 渲染完成后计算响应体 ETag（内容 hash，弱 ETag `W/` 可选）；② 比对请求头 `If-None-Match`，命中则返回 304（无 body），跳过后续渲染发送；③ 支持 `*` 通配与多值匹配（逗号分隔列表）；④ 动态内容（登录态页面）不启用 ETag——按配置开关；⑤ 304 响应仍要带上 `Cache-Control`/`Vary` 头（304 不等于无缓存语义）。
 
 ```ts
 import { createHash } from 'node:crypto';

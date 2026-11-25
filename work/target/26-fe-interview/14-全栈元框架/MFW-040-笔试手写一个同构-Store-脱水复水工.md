@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-040：笔试：手写同构 Store 的脱水复水工具（createIsomorphicStore）
-**题目**：实现 `createIsomorphicStore(name, reducer)`：服务端每次调用 `dehydrate()` 把状态序列化为可嵌 HTML 的 JSON（防 XSS 转义 `<`）；客户端首次挂载从 `window.__STORE__` 复水（严格模式与重复复水防御），之后走普通内存 store。要求支持 Date 复原、循环引用检测报错。
+**答**：实现 `createIsomorphicStore(name, reducer)`：服务端每次调用 `dehydrate()` 把状态序列化为可嵌 HTML 的 JSON（防 XSS 转义 `<`）；客户端首次挂载从 `window.__STORE__` 复水（严格模式与重复复水防御），之后走普通内存 store。要求支持 Date 复原、循环引用检测报错。
 
 ```javascript
 function createIsomorphicStore(name, reducer) {

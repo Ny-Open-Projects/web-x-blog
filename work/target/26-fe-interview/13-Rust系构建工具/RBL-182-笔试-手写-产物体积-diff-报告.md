@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-182：笔试：手写产物体积 diff 报告（PR 评论用）
 
-**题目**：写 size-diff.mjs：1) 输入基线与当前的产物目录（各含 manifest.json：文件→gzip 字节数）；2) 生成 markdown 报告表格：新增/删除/变化三类，变化列含绝对差与百分比，超阈值（默认 gzip +10KB 或 +5%）标 ⚠️；3) 汇总总 gzip 体积变化；4) 输出可直接贴进 PR 评论的 markdown；5) 文件名带 hash 的（app.abc123.js）要先归一化名字再对比。
+**答**：写 size-diff.mjs：1) 输入基线与当前的产物目录（各含 manifest.json：文件→gzip 字节数）；2) 生成 markdown 报告表格：新增/删除/变化三类，变化列含绝对差与百分比，超阈值（默认 gzip +10KB 或 +5%）标 ⚠️；3) 汇总总 gzip 体积变化；4) 输出可直接贴进 PR 评论的 markdown；5) 文件名带 hash 的（app.abc123.js）要先归一化名字再对比。
 
 ```javascript
 // size-diff.mjs

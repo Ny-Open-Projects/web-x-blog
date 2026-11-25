@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-100：笔试：手写一个 SvelteKit 登录（form action + session cookie）
-**题目**：实现 `/login` 页面的登录链路：① `+page.server.js` 的 login action 校验账密；② 成功后发 httpOnly session cookie 并 redirect 到原页；③ 失败 fail 返回错误信息；④ `hooks.server.js` 里解析 cookie 注入 `locals.user`；⑤ 登录页未登录可访问、其他页未登录跳登录。
+**答**：实现 `/login` 页面的登录链路：① `+page.server.js` 的 login action 校验账密；② 成功后发 httpOnly session cookie 并 redirect 到原页；③ 失败 fail 返回错误信息；④ `hooks.server.js` 里解析 cookie 注入 `locals.user`；⑤ 登录页未登录可访问、其他页未登录跳登录。
 
 ```js
 // src/routes/login/+page.server.js

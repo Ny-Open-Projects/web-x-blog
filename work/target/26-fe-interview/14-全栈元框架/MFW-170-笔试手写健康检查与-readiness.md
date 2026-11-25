@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-170：笔试：手写健康检查端点（liveness 与 readiness 分离）
-**题目**：为 SSR 应用实现两个端点：① `/api/health`（liveness）：进程活着即 200，不检查依赖；② `/api/ready`（readiness）：检查 DB/缓存下游连通，任一不可用返回 503；③ readiness 检查带独立超时（不能被慢 DB 拖死探针）；④ 响应带各依赖耗时明细；⑤ 进程优雅关闭期间 readiness 返回 503（先行摘流）。
+**答**：为 SSR 应用实现两个端点：① `/api/health`（liveness）：进程活着即 200，不检查依赖；② `/api/ready`（readiness）：检查 DB/缓存下游连通，任一不可用返回 503；③ readiness 检查带独立超时（不能被慢 DB 拖死探针）；④ 响应带各依赖耗时明细；⑤ 进程优雅关闭期间 readiness 返回 503（先行摘流）。
 
 ```ts
 import { pool } from '../lib/db';

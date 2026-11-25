@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-023：手写 Zustand 持久化中间件（persist + partialize + 版本迁移）
 
-**题目要求**：
+**答**：
 - 实现中间件 `persist(config, { name, partialize, version, migrate })`，包装 creator：创建时从 localStorage 读回并合并（migrate 兼容旧版本），每次 set 后把 partialize 结果写入。
 - JSON 解析失败、版本不匹配需兜底（migrate 或丢弃）。
 - 不把函数字段写进 storage。

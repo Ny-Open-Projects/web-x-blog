@@ -53,3 +53,11 @@ function messagesOf(chatId) {
 }
 console.log(await messagesOf(1));
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. Cookie 每次请求都携带，怎么避免拖慢首屏？ → 静态资源放独立 CDN 域名不带 Cookie，主域 Cookie 用 Path 与 SameSite 收窄范围，控制体积在 4KB 内。
+2. localStorage 是同步 API，大量写入有什么代价？ → 阻塞主线程，序列化大对象会掉帧甚至卡死，大容量结构化数据应换 IndexedDB 的异步事务。
+3. sessionStorage 在刷新与新建标签时的表现？ → 刷新保留，同源新标签默认不共享，`window.open` 或复制标签页会复制一份副本，容易误以为「跨标签共享」。

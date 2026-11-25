@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-424：笔试：手写 v-memo 效果的自定义指令（依赖变化才更新）
-**题**：实现指令 `v-freeze="[dep1, dep2]"`：值未变化时阻止元素内容更新（利用自定义指令在组件更新阶段做对比），变化时更新并记录新快照；快照比较用浅比较数组序列化；卸载时清理。
+**答**：实现指令 `v-freeze="[dep1, dep2]"`：值未变化时阻止元素内容更新（利用自定义指令在组件更新阶段做对比），变化时更新并记录新快照；快照比较用浅比较数组序列化；卸载时清理。
 
 ```javascript
 export const vFreeze = {
@@ -36,6 +36,3 @@ export const vFreeze = {
 - 能说清指令版与编译期 v-memo 的本质区别（编译期直接跳 patch，无 DOM 替换成本）。
 - mounted/updated 生命周期配对。
 - 能指出 JSON.stringify 比较的局限（大对象开销）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-ff15686e-55dd-460d-af67-5eb13c3990a5-cwd'; fi
-exit "$__zcode_status"

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-410：手写产物 diff 报告生成器
-**需求**：实现 `diffManifests(prev, next)`：1) 按 hash 对比文件：新增/删除/修改（hash 变）/不变；2) 修改文件输出体积变化（绝对+百分比）；3) 按「源文件归因」：利用 renames 与 chunk 映射把变化归到 chunk 与来源包（可选深度）；4) 输出结构化 + markdown 双格式（markdown 用于 PR 评论）；5) 排序：按体积变化绝对值降序（最影响看板的排前）；6) 汇总统计 { added, removed, changed, unchanged, sizeDelta }。
+**答**：实现 `diffManifests(prev, next)`：1) 按 hash 对比文件：新增/删除/修改（hash 变）/不变；2) 修改文件输出体积变化（绝对+百分比）；3) 按「源文件归因」：利用 renames 与 chunk 映射把变化归到 chunk 与来源包（可选深度）；4) 输出结构化 + markdown 双格式（markdown 用于 PR 评论）；5) 排序：按体积变化绝对值降序（最影响看板的排前）；6) 汇总统计 { added, removed, changed, unchanged, sizeDelta }。
 
 ```javascript
 export function diffManifests(prev, next) {

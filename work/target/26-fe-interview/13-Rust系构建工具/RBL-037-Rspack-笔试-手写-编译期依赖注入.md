@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-037：笔试：手写 DefinePlugin 简化版（编译期常量注入）
-**题目**：实现一个 Rspack plugin，在 emit 前对所有 JS 产物做常量替换：1) 输入 { '__BUILD_TIME__': Date, '__APP_NAME__': String } 形式的映射；2) 字符串常量在产物中以字面量替换；3) 只处理 .js 文件；4) 构建启动时打印将注入的常量清单；5) 说明真实 DefinePlugin 应在模块层而非产物层替换的原因。
+**答**：实现一个 Rspack plugin，在 emit 前对所有 JS 产物做常量替换：1) 输入 { '__BUILD_TIME__': Date, '__APP_NAME__': String } 形式的映射；2) 字符串常量在产物中以字面量替换；3) 只处理 .js 文件；4) 构建启动时打印将注入的常量清单；5) 说明真实 DefinePlugin 应在模块层而非产物层替换的原因。
 
 ```javascript
 class MiniDefinePlugin {

@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-085：手写 Promise 顺序执行器——串行链 + 失败中断/跳过策略 + 进度回调
 **答**：串行执行 N 个异步任务，支持三种失败策略：`fail-fast`（中止返回已完成结果）、`skip`（跳过继续）、`collect`（全部执行返回 errors 数组）。进度回调 onProgress(done, total)。与 HW-028（纯串行）的差异在于策略与进度。
 
 ```javascript

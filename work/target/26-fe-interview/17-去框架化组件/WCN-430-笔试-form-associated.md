@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-430：笔试：实现 formAssociated 表单控件（值/校验/FormData 集成）。
-**题目**：`DsRating extends HTMLElement, formAssociated`：内部 input[type=range] 同步 value；setFormValue 上报；ValidityState 转发（required 语义）；重置响应。
+**答**：`DsRating extends HTMLElement, formAssociated`：内部 input[type=range] 同步 value；setFormValue 上报；ValidityState 转发（required 语义）；重置响应。
 
 ```javascript
 class DsRating extends HTMLElement {

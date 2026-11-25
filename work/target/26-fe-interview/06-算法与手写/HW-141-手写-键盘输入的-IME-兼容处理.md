@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-141：手写输入法（IME）兼容的搜索输入——compositionstart/end 期间不触发搜索与计数
 **答**：中文输入法（IME）在 composition 期间（拼音串）会触发 input 事件——防抖搜索会在"拼音没确认"时发起错误请求。正确处理：compositionstart 置 composing=true（期间忽略 input），compositionend 时立即触发一次搜索（用户确认拼音的瞬间响应）。
 
 ```javascript

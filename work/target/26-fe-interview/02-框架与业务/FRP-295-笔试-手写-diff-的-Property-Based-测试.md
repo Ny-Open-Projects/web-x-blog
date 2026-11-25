@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## FRP-295：笔试：手写 diff 的 property-based 测试
-**题**：实现 `randomCase(seed, n)`：生成随机「旧列表/新列表」对（key 池有限、含增删乱序），对每对运行待测 diff，断言：1) 最终顺序等于新列表；2) 保留节点 DOM 引用不变（复用）；3) moves ≤ minimalMoves 理论值。跑 500 组。
+**答**：实现 `randomCase(seed, n)`：生成随机「旧列表/新列表」对（key 池有限、含增删乱序），对每对运行待测 diff，断言：1) 最终顺序等于新列表；2) 保留节点 DOM 引用不变（复用）；3) moves ≤ minimalMoves 理论值。跑 500 组。
 
 ```javascript
 function mulberry32(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296 } }
@@ -37,6 +37,3 @@ function propertyTest(diffFn, rounds = 500) {
 - 三条性质断言（顺序/复用/上限）覆盖 diff 语义。
 - 有限 key 池逼迫复用与冲突场景。
 - 能说明 property-based 与手写用例的互补（覆盖想象不到的组合）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-0061ac70-4ec6-4073-83e5-26b05b5ae6bb-cwd'; fi
-exit "$__zcode_status"

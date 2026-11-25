@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-498：Next 版本升级 codemod 计划器
-**需求**：实现 `planUpgrade(routes, breaking)`：1) routes = [{ path, features: ['async-params','next/head','getServerSideProps'] }]，breaking = { 'async-params': { fix: 'codemod', effort: 1 }, 'next/head': { fix: 'rewrite', effort: 3 }, 'getServerSideProps': { fix: 'rewrite', effort: 8 } }；2) 输出迁移批次：按 effort 升序分批，每批总量 ≤ 13 点（一批一个 PR，控制 review 与回滚粒度）；3) 依赖排序：`getServerSideProps` 改写批次排在 `async-params` 之后（API 形态先统一再迁移）；4) 输出 [{ batch: n, paths: [...], totalEffort }] 并标注阻塞项（无法 codemod 的功能进度可见）。
+**答**：实现 `planUpgrade(routes, breaking)`：1) routes = [{ path, features: ['async-params','next/head','getServerSideProps'] }]，breaking = { 'async-params': { fix: 'codemod', effort: 1 }, 'next/head': { fix: 'rewrite', effort: 3 }, 'getServerSideProps': { fix: 'rewrite', effort: 8 } }；2) 输出迁移批次：按 effort 升序分批，每批总量 ≤ 13 点（一批一个 PR，控制 review 与回滚粒度）；3) 依赖排序：`getServerSideProps` 改写批次排在 `async-params` 之后（API 形态先统一再迁移）；4) 输出 [{ batch: n, paths: [...], totalEffort }] 并标注阻塞项（无法 codemod 的功能进度可见）。
 
 ```javascript
 export function planUpgrade(routes, breaking) {

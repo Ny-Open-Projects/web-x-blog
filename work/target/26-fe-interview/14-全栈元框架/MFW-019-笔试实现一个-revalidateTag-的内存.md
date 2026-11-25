@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-019：笔试：实现内存版 tag 失效缓存（get/set/revalidateTag）
-**题目**：实现 `createTagCache()`：`get(key, fn, tags)` 读缓存（命中返回值，未命中执行 fn 并按 tags 记录）；`revalidateTag(tag)` 使所有含该 tag 的条目立即失效（下一次 get 重算）；`revalidateTag` 后**正在进行的 get 不得回写旧值**。要求 O(1) 失效，支持时间过期兜底。
+**答**：实现 `createTagCache()`：`get(key, fn, tags)` 读缓存（命中返回值，未命中执行 fn 并按 tags 记录）；`revalidateTag(tag)` 使所有含该 tag 的条目立即失效（下一次 get 重算）；`revalidateTag` 后**正在进行的 get 不得回写旧值**。要求 O(1) 失效，支持时间过期兜底。
 
 ```javascript
 function createTagCache({ defaultTTL = 60_000 } = {}) {

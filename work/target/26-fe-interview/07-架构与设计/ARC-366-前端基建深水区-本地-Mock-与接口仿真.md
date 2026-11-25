@@ -27,3 +27,9 @@ const worker = setupWorker(
 );
 worker.start({ onUnhandledRequest: 'warn' });
 ```
+
+**追问**：
+
+1. schema 生成的 mock 测试全过、真实数据是 null 或极值就崩，怎么防？ → mock 要按 schema 的 nullable 与边界生成最坏样本集，而不是只跑 faker 的正常数据；关键接口准备异常样本库。
+2. MSW 靠 Service Worker 拦截，SSR 或首屏请求拦不到怎么处理？ → SW 只能拦浏览器发起的请求，SSR 侧要用 msw/node 的 server 或把 fetch 注入成可替换层，两端共用同一套 handler。
+3. mock 和真实接口长期两套数据各走各的，怎么治？ → 契约测试卡在 CI 上游，联调环境定期用真实返回对照 schema，mock 只当契约的可执行副本，不允许成为独立事实源。

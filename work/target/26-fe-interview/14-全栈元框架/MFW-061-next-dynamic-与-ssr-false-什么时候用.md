@@ -37,3 +37,9 @@ export default function Dashboard() {
   );
 }
 ```
+
+**追问**：
+
+1. `ssr: false` 的组件为什么在 App Router 里必须 `'use client'`？→ 「跳过 SSR」本身是客户端渲染决策，Server Component 在服务端已经执行完，没有这个开关。
+2. 拆包后首屏 CLS 怎么控？→ loading 占位给固定宽高而不是 min-height，骨架尺寸与真实组件一致，否则加载完必然跳动。
+3. 什么时候该用 RSC 而不是 dynamic？→ 组件只是取数加展示、不依赖浏览器 API 时用 RSC，整块 JS 都不下发，比 dynamic 更省。

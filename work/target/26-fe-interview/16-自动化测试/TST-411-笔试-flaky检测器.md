@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-411：笔试：实现 flaky 用例检测（N 次重跑统计）。
-**题目**：输入每用例 N 次运行结果。flaky = 通过率在 (0,1) 开区间（既不全过也不全挂）。输出 flaky 清单与通过率；连续失败（全挂）标记 broken 区分。
+**答**：输入每用例 N 次运行结果。flaky = 通过率在 (0,1) 开区间（既不全过也不全挂）。输出 flaky 清单与通过率；连续失败（全挂）标记 broken 区分。
 
 ```javascript
 function detectFlaky(runs) {

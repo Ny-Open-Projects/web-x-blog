@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-334：笔试：手写 Server Action 的重试封装
-**题**：实现 `retryAction(action, args, { retries = 2, backoff = 500 })`：网络错误（fetch failed / 5xx）重试带指数退避；业务错误（返回 ok:false）不重试；每次重试用新 requestId（幂等键固定为首次生成的，保证服务端去重）；最终失败抛出。
+**答**：实现 `retryAction(action, args, { retries = 2, backoff = 500 })`：网络错误（fetch failed / 5xx）重试带指数退避；业务错误（返回 ok:false）不重试；每次重试用新 requestId（幂等键固定为首次生成的，保证服务端去重）；最终失败抛出。
 
 ```javascript
 async function retryAction(action, args, { retries = 2, backoff = 500 } = {}) {
@@ -31,6 +31,3 @@ async function retryAction(action, args, { retries = 2, backoff = 500 } = {}) {
 - 业务错误与网络错误的分类（前者不重试）。
 - 指数退避。
 - 最终抛出而非吞错。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-c8c65a28-f0ac-4171-878c-21fb480fb68e-cwd'; fi
-exit "$__zcode_status"

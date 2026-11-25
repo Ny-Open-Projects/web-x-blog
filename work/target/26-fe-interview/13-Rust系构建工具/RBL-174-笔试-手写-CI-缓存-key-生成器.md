@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-174：笔试：手写 CI 缓存 key 生成器（lockfile + 源码 + 配置）
 
-**题目**：写 cache-key.mjs：1) 输入工作目录与配置（排除 glob、环境变量白名单）；2) 生成缓存 key：`{prefix}-{os}-{lockhash}-{srchash}-{version}`；3) lockhash = 所有 lock 文件内容 hash；srchash = 排除后源码文件的"相对路径+内容"排序 hash；4) 环境变量按白名单键名排序后加入 hash；5) 提供 --print-diff 模式：对比两个目录的 key 并输出首个造成差异的文件路径。
+**答**：写 cache-key.mjs：1) 输入工作目录与配置（排除 glob、环境变量白名单）；2) 生成缓存 key：`{prefix}-{os}-{lockhash}-{srchash}-{version}`；3) lockhash = 所有 lock 文件内容 hash；srchash = 排除后源码文件的"相对路径+内容"排序 hash；4) 环境变量按白名单键名排序后加入 hash；5) 提供 --print-diff 模式：对比两个目录的 key 并输出首个造成差异的文件路径。
 
 ```javascript
 // cache-key.mjs

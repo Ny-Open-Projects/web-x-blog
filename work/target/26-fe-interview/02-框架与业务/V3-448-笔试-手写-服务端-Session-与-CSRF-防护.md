@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-448：笔试：手写 CSRF 防护中间件（双提交 Cookie + SameSite）
-**题**：实现 CSRF 中间件：登录时下发 csrf token（cookie 可读版 + session 存储版）；写操作（POST/PUT/DELETE）校验请求头 X-CSRF-Token 与 session 中的一致；GET 与开放接口跳过；失败 403。
+**答**：实现 CSRF 中间件：登录时下发 csrf token（cookie 可读版 + session 存储版）；写操作（POST/PUT/DELETE）校验请求头 X-CSRF-Token 与 session 中的一致；GET 与开放接口跳过；失败 403。
 
 ```javascript
 export default defineEventHandler(async (event) => {
@@ -36,6 +36,3 @@ export default defineEventHandler(async (event) => {
 - 安全方法跳过、开放接口白名单。
 - SameSite=Lax 与 CSRF 双防线关系。
 - 403 语义正确。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-eccfef0e-c4e2-454d-8f8d-33bfe7d939d3-cwd'; fi
-exit "$__zcode_status"

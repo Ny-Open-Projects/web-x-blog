@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-410：双维限流器
-**需求**：实现 `createBiLayerLimiter({ ip: {cap:120,win:60_000}, user: {cap:30,win:60_000} } )`（Edge 内存版，KV 版接口同构）：1) 固定窗口计数即可（Edge 生命周期短——精确令牌桶成本不值）；2) 判定顺序：IP 桶先（匿名可拦）→ 登录后用户桶（更细）；3) 响应带 X-RateLimit-Remaining/Reset（客户端礼貌退避）；4) 内部拨测白名单（独立命名空间不计费）；5) 周期清理（窗口滚动删除死键——Map 不无限涨）。
+**答**：实现 `createBiLayerLimiter({ ip: {cap:120,win:60_000}, user: {cap:30,win:60_000} } )`（Edge 内存版，KV 版接口同构）：1) 固定窗口计数即可（Edge 生命周期短——精确令牌桶成本不值）；2) 判定顺序：IP 桶先（匿名可拦）→ 登录后用户桶（更细）；3) 响应带 X-RateLimit-Remaining/Reset（客户端礼貌退避）；4) 内部拨测白名单（独立命名空间不计费）；5) 周期清理（窗口滚动删除死键——Map 不无限涨）。
 
 ```javascript
 export function createBiLimit(limitss) {

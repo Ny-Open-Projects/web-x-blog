@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-327：笔试题：实现组件库 ConfigProvider 上下文穿透？
-**题目**：实现嵌套可合并的 `ConfigProvider`：1) 子 Provider 继承父配置并局部覆盖；2) 支持配置读取 hook（含默认值）；3) Portal 渲染的内容也能拿到配置（Portal 不脱离 React 树，但要求说明 createPortal 上下文特性）；4) 性能：配置变化只重渲染消费组件。
+**答**：实现嵌套可合并的 `ConfigProvider`：1) 子 Provider 继承父配置并局部覆盖；2) 支持配置读取 hook（含默认值）；3) Portal 渲染的内容也能拿到配置（Portal 不脱离 React 树，但要求说明 createPortal 上下文特性）；4) 性能：配置变化只重渲染消费组件。
 **评分点**：
 - 合并逻辑正确（读父 context 再覆盖本次传入字段）。
 - useConfig 默认值兜底正确。

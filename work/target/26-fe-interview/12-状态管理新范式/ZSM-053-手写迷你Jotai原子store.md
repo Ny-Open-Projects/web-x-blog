@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-053：手写一个迷你 Jotai（atom + useAtom + 简单派生）
 
-**题目要求**：
+**答**：
 - 实现 `atom(init)`：初始值或 read 函数（`get => value`）。
 - 实现 `useAtomValue(atom)`：读取并订阅，派生 atom 依赖变化时重算。
 - 实现 `useSetAtom(atom)`：写基础 atom（传值或函数）；写派生 atom 需实现写函数 `atom(read, write)` 的 write 分支。

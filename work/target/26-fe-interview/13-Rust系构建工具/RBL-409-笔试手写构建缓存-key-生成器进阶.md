@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-409：手写构建缓存 key 生成器
-**需求**：实现 `cacheKey(task, inputs)`：1) inputs：`{ files: Map<path, contentHash>, env: {}, config: object, toolVersion, depOutputs: Map<pkg, hash> }`；2) key = sha(稳定序列化所有输入)——对象键排序、数组保序、Map 键排序；3) 分层 key：`{ tier1: toolVersion, tier2: config+env, tier3: files+depOutputs }`——分层支持「工具不变仅文件变」的快速失效定位；4) 相同输入必同 key（跨机器）；5) `explain(keyA, keyB)` 找出两 key 首个不同的层级（缓存 miss 归因）。
+**答**：实现 `cacheKey(task, inputs)`：1) inputs：`{ files: Map<path, contentHash>, env: {}, config: object, toolVersion, depOutputs: Map<pkg, hash> }`；2) key = sha(稳定序列化所有输入)——对象键排序、数组保序、Map 键排序；3) 分层 key：`{ tier1: toolVersion, tier2: config+env, tier3: files+depOutputs }`——分层支持「工具不变仅文件变」的快速失效定位；4) 相同输入必同 key（跨机器）；5) `explain(keyA, keyB)` 找出两 key 首个不同的层级（缓存 miss 归因）。
 
 ```javascript
 import crypto from 'node:crypto'

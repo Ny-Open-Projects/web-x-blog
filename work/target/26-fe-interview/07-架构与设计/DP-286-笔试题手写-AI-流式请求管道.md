@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-286：笔试题：手写 AI 流式请求管道（SSE 解析+背压）？
-**题目**：实现 `streamChat(prompt, { onToken, onDone, onError })`：1) fetch + ReadableStream 读取 SSE（data: 前缀解析）；2) 分块边界处理（chunk 可能截断事件）；3) onToken 防抖批量回调（每 16ms 合并）；4) abort 支持。
+**答**：实现 `streamChat(prompt, { onToken, onDone, onError })`：1) fetch + ReadableStream 读取 SSE（data: 前缀解析）；2) 分块边界处理（chunk 可能截断事件）；3) onToken 防抖批量回调（每 16ms 合并）；4) abort 支持。
 **评分点**：
 - SSE 缓冲解析正确（跨 chunk 事件拼接 buffer，\n\n 切事件）。
 - [DONE] 终止处理与 reader.cancel。

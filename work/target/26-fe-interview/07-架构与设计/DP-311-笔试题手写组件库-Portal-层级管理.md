@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-311：笔试题：手写组件库 Portal 层级管理？
-**题目**：实现 PopupManager：1) 全局 z-index 递增分配（push/pop 回收）；2) 嵌套弹层层级正确（子弹层始终高于父）；3) ESC 关闭最顶层；4) 容器复用（同一 portal root）。
+**答**：实现 PopupManager：1) 全局 z-index 递增分配（push/pop 回收）；2) 嵌套弹层层级正确（子弹层始终高于父）；3) ESC 关闭最顶层；4) 容器复用（同一 portal root）。
 **评分点**：
 - 栈式分配正确（push 得到 max+1，pop 归还）。
 - 回收后复用编号（避免 z-index 无限膨胀）。

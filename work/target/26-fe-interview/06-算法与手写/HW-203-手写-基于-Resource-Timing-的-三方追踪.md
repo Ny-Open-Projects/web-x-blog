@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-203：手写三方资源追踪——按域归类三方资源（体积/阻塞/发现延迟），输出三方审计报表
 **答**：三方资源审计自动化：Resource Timing 全量 → 按域归类（self/first-party 域集合之外）→ 每域聚合（体积/请求数/总时长/render-blocking 判定）→ 三方排行报表（PER-316 审计的自动化数据源）。
 
 ```javascript

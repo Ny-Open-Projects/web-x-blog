@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-470：边缘 KV 会话滑动过期续期器
-**需求**：实现 `createEdgeSession(kv)`：1) `get(sid)`：KV 读 `{ userId, exp }`，过期删除返回 null；未过期且剩余寿命 < 1/2 时异步 `refresh`（滑动续期写回 exp = now + ttl，不阻塞本次请求——边缘写延迟高）；2) 同 sid 并发 refresh 去重（本实例内单飞；跨实例靠 KV 最后写胜出即可，不需要分布式锁——容忍双写幂等）；3) `destroy(sid)` 立即失效（登出）：删除 + 负缓存 60s（防已删会话被旧副本复活——KV 最终一致）；4) 全程不阻塞主流程超过 5ms（get 必须 await 一次读完成）。
+**答**：实现 `createEdgeSession(kv)`：1) `get(sid)`：KV 读 `{ userId, exp }`，过期删除返回 null；未过期且剩余寿命 < 1/2 时异步 `refresh`（滑动续期写回 exp = now + ttl，不阻塞本次请求——边缘写延迟高）；2) 同 sid 并发 refresh 去重（本实例内单飞；跨实例靠 KV 最后写胜出即可，不需要分布式锁——容忍双写幂等）；3) `destroy(sid)` 立即失效（登出）：删除 + 负缓存 60s（防已删会话被旧副本复活——KV 最终一致）；4) 全程不阻塞主流程超过 5ms（get 必须 await 一次读完成）。
 
 ```javascript
 export function createEdgeSession(kv, { ttl = 3600_000 } = {}) {

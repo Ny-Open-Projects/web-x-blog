@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-394：笔试：手写 useDebounceFn composable（含组件卸载自动清理）
-**题**：实现 `useDebounceFn(fn, wait)`：返回防抖函数；支持 cancel/flush 方法；组件卸载时自动 cancel（不漏触发）；onScopeDispose 实现自动清理。
+**答**：实现 `useDebounceFn(fn, wait)`：返回防抖函数；支持 cancel/flush 方法；组件卸载时自动 cancel（不漏触发）；onScopeDispose 实现自动清理。
 
 ```javascript
 import { onScopeDispose, getCurrentScope } from 'vue'
@@ -29,6 +29,3 @@ function useDebounceFn(fn, wait = 300) {
 - 用 onScopeDispose + getCurrentScope 做卸载清理，且在非组件上下文调用不报错。
 - flush 触发 pending 调用。
 - 说明卸载后触发 debounced 不会再执行（timer 被清但新调用仍会建 timer——能答出这个边界加分）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-60f5f368-d21a-445b-8d5c-de89934c5fe8-cwd'; fi
-exit "$__zcode_status"

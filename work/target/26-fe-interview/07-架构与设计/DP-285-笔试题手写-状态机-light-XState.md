@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-285：笔试题：手写状态机（light-XState）？
-**题目**：实现 createMachine + interpret：1) 配置式状态图（states/on/guard/actions）；2) send 触发转移，非法事件保持原态；3) guard 条件转移；4) 订阅状态变化（subscribe）。
+**答**：实现 createMachine + interpret：1) 配置式状态图（states/on/guard/actions）；2) send 触发转移，非法事件保持原态；3) guard 条件转移；4) 订阅状态变化（subscribe）。
 **评分点**：
 - 转移查找正确（当前态的 on 表 + guard 求值）。
 - 非法事件不转移（显式忽略并记录）。

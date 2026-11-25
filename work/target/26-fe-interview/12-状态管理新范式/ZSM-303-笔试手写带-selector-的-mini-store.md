@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-303：手写带 selector 订阅的 mini store
-**需求**：实现 `createStore(init)`：1) `getState()`/`setState(patch)`（函数或对象，浅合并）；2) `subscribe(selector, listener, equalityFn?)`——仅当 selector 结果变化（默认 Object.is）时通知；3) 返回退订函数；4) 整树 setState 也必须先浅合并再比较；5) 提供与 useSyncExternalStore 对接的 getSnapshot 稳定性保证（未变更时返回同一引用）。
+**答**：实现 `createStore(init)`：1) `getState()`/`setState(patch)`（函数或对象，浅合并）；2) `subscribe(selector, listener, equalityFn?)`——仅当 selector 结果变化（默认 Object.is）时通知；3) 返回退订函数；4) 整树 setState 也必须先浅合并再比较；5) 提供与 useSyncExternalStore 对接的 getSnapshot 稳定性保证（未变更时返回同一引用）。
 
 ```javascript
 export function createStore(init) {

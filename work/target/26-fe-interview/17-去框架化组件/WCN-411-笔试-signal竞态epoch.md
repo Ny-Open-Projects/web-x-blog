@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-411：笔试：实现异步派生的竞态防护（epoch 校验）。
-**题目**：computed.async(fn)：fn 返回 promise；订阅者拿到「最新一次请求的结果」；旧请求返回被丢弃。实现状态机（loading/data/error）。
+**答**：computed.async(fn)：fn 返回 promise；订阅者拿到「最新一次请求的结果」；旧请求返回被丢弃。实现状态机（loading/data/error）。
 
 ```javascript
 function asyncComputed(fn) {

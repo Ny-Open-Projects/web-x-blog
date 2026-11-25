@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-323：笔试题：手写 AutoComplete（防抖+竞态+键盘）？
-**题目**：实现 AutoComplete：1) 输入 300ms 防抖后请求；2) 新请求 abort 旧请求；3) 键盘上下选择 + Enter 提交；4) 空输入清空建议。
+**答**：实现 AutoComplete：1) 输入 300ms 防抖后请求；2) 新请求 abort 旧请求；3) 键盘上下选择 + Enter 提交；4) 空输入清空建议。
 **评分点**：
 - AbortController 竞态处理正确。
 - 防抖清理（timer ref）。

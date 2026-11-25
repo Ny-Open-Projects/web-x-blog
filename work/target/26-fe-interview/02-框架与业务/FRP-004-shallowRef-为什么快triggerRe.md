@@ -46,3 +46,9 @@ list.value[0].done = true;   // 不会触发！内部属性改动不可见
 triggerRef(list);            // 手动派发，打印 done? true
 list.value = [{ id: 1, done: false }]; // 整体替换，触发更新
 ```
+
+**追问**：
+
+1. `shallowRef` 包一个大对象，改外层属性为什么也不触发？→ 它只代理 `.value` 这一个访问点，对象内部任何层级都不在依赖收集范围，改属性必须手动 `triggerRef` 或整体换引用。
+2. 调了 `triggerRef` 视图还是没更新，通常是什么原因？→ 组件在 render 期间没读过这个 ref（只在事件里读），依赖没被 track，派发再多次也没有订阅者；另一个原因是同 tick 内被批处理合并，要 `await nextTick()` 后再看。
+3. `shallowRef` 和 `markRaw` 存第三方实例有什么区别？→ `markRaw` 是让对象彻底不被代理、且不可逆，`shallowRef` 仍然参与依赖收集、整体替换时能触发更新，存 ECharts 实例并需要换图时应选后者。

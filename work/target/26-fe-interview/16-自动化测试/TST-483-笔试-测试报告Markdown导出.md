@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-483：笔试：测试结果导出为可读 Markdown 周报。
-**题目**：输入本周多次运行统计 `[{date, total, failed, flaky}]`。输出：趋势表、环比变化（失败数）、flaky 榜 top3、一句话结论（失败率上升/下降/平稳，±20% 阈值）。
+**答**：输入本周多次运行统计 `[{date, total, failed, flaky}]`。输出：趋势表、环比变化（失败数）、flaky 榜 top3、一句话结论（失败率上升/下降/平稳，±20% 阈值）。
 
 ```javascript
 function weeklyReport(runs, flakyByTest) {

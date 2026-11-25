@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-408：手写构建配置 merge 策略
-**需求**：实现 `mergeConfig(base, override)`：1) 普通对象深合并；2) 数组策略可配：concat（拼接）/replace（覆盖）/mergeById（按 name/id 去重合并——插件数组合并）；3) 函数值：override 函数接收 base 结果执行（链式定制）；4) 特殊键规则（plugins/rules 用 mergeById，output 用 replace）；5) 循环引用安全；6) 不可变（不修改两个输入）。
+**答**：实现 `mergeConfig(base, override)`：1) 普通对象深合并；2) 数组策略可配：concat（拼接）/replace（覆盖）/mergeById（按 name/id 去重合并——插件数组合并）；3) 函数值：override 函数接收 base 结果执行（链式定制）；4) 特殊键规则（plugins/rules 用 mergeById，output 用 replace）；5) 循环引用安全；6) 不可变（不修改两个输入）。
 
 ```javascript
 const ARRAY_STRATEGY = { plugins: 'mergeById', module: { rules: 'mergeById' }, output: 'replace' }

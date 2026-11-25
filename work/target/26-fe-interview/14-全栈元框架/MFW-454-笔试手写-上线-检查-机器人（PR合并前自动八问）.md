@@ -6,8 +6,8 @@ tags: [前端面试, 笔试题, MFW]
 type: 笔试题
 ---
 
-## MFM→MFW-454：上线八问机器人
-**需求**：实现 `preMergeBot(prDiff, answers)`——合并前自动回答八问（数据来自管线而非口述）：①影响路由（蓝图闭包）②缓存策略变化（fetch 选项 diff）③新外部依赖（审计卡）④回滚方案（双版本指针在？）⑤性能预算（快照 vs 表）⑥安全头/CSP 违规 ⑦实验键入矩阵否 ⑧数据出口新字段（payload 审计）——每问附证据链（命令+输出摘要），无数据=「未知」标红（不允许口 say yes）。
+## MFW-454：MFM→454：上线八问机器人
+**答**：实现 `preMergeBot(prDiff, answers)`——合并前自动回答八问（数据来自管线而非口述）：①影响路由（蓝图闭包）②缓存策略变化（fetch 选项 diff）③新外部依赖（审计卡）④回滚方案（双版本指针在？）⑤性能预算（快照 vs 表）⑥安全头/CSP 违规 ⑦实验键入矩阵否 ⑧数据出口新字段（payload 审计）——每问附证据链（命令+输出摘要），无数据=「未知」标红（不允许口 say yes）。
 
 ```javascript
 export async function eightQuestions (pr) {

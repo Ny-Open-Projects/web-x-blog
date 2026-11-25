@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-133：手写 idleThrottle——低优先级事件（resize/observers）空闲时才处理，积压合并到一次
 **答**：resize/媒体查询/observer 回调这类"不必即时"的事件：不防抖（用户可能等很久）也不节流（浪费帧），而是 idle 节流——触发时记"脏"标记，空闲时处理一次，处理时读最新状态（自然合并积压）。
 
 ```javascript

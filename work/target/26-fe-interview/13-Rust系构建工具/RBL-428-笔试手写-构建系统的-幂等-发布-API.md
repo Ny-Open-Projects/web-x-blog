@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-428：手写幂等发布 API
-**需求**：实现 `createReleaseApi(store)`：1) `release({ idempotencyKey, manifest, target })`：同 key 重放返回首次结果（不重复发布）；2) 状态机：pending→uploading→verifying→done/failed（状态可查询）；3) 断点续传：uploading 中断后同 key 重入从断点继续（已上传文件跳过——按 hash 对比）；4) 原子切换：verifying 通过后一次性切入口（切失败回滚指针）；5) 并发同 key：共享同一发布（不并发两次）；6) `status(key)` 查询。
+**答**：实现 `createReleaseApi(store)`：1) `release({ idempotencyKey, manifest, target })`：同 key 重放返回首次结果（不重复发布）；2) 状态机：pending→uploading→verifying→done/failed（状态可查询）；3) 断点续传：uploading 中断后同 key 重入从断点继续（已上传文件跳过——按 hash 对比）；4) 原子切换：verifying 通过后一次性切入口（切失败回滚指针）；5) 并发同 key：共享同一发布（不并发两次）；6) `status(key)` 查询。
 
 ```javascript
 export function createReleaseApi(store, cdn) {

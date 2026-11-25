@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-481：笔试：实现元素 API 迁移的 codemod（属性重命名/事件改名）。
-**题目**：输入源码与映射 `[{from, to, kind: 'prop'|'event'|'tag'}]`。正则替换：prop（`.from` → `.to`，注意边界）、event（字符串字面量）、tag（标签名）。输出替换计数与歧义清单（多候选匹配）。
+**答**：输入源码与映射 `[{from, to, kind: 'prop'|'event'|'tag'}]`。正则替换：prop（`.from` → `.to`，注意边界）、event（字符串字面量）、tag（标签名）。输出替换计数与歧义清单（多候选匹配）。
 
 ```javascript
 function codemod(src, mappings) {

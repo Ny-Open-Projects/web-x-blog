@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-458：手写构建趋势看板聚合
-**需求**：实现 `aggregateTrends(builds)`：1) builds：构建事件流 [{ at, durationMs, cacheHit, branch, task }]；2) 聚合维度：日/周粒度（P50/P95 时长、命中率、构建次数）、按分支过滤（main vs feature 分开看——流量差异大）；3) 环比计算（本周 vs 上周——趋势方向）；4) 异常周标记（P95 环比涨超 20% 高亮）；5) 输出 { daily: [], weekly: [], regressions: [] }；6) 数据稀疏处理（某日无构建 → null 断点而非 0——图表语义正确）。
+**答**：实现 `aggregateTrends(builds)`：1) builds：构建事件流 [{ at, durationMs, cacheHit, branch, task }]；2) 聚合维度：日/周粒度（P50/P95 时长、命中率、构建次数）、按分支过滤（main vs feature 分开看——流量差异大）；3) 环比计算（本周 vs 上周——趋势方向）；4) 异常周标记（P95 环比涨超 20% 高亮）；5) 输出 { daily: [], weekly: [], regressions: [] }；6) 数据稀疏处理（某日无构建 → null 断点而非 0——图表语义正确）。
 
 ```javascript
 function pctile(sorted, p) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-424：手写 gzip/brotli 体积估算与校准
-**需求**：实现 `createSizeEstimator()`：1) `real(content)`：真实 gzip(level 6) 与 brotli(q5) 压缩（node zlib）；2) `estimate(content)`：无压缩库场景的启发式估算（按字符分布：重复度高的 JSON/文本压缩率好——基于 token 频率熵的近似）；3) `calibrate(samples)`：用真实压缩结果校准估算系数（估算/真实比率回归）；4) `compare(a, b)`：两产物压缩后 diff（体积门禁用真实值）；5) 预算口径：预算以真实 gzip 为准，估算仅用于「写代码时快速心算」。
+**答**：实现 `createSizeEstimator()`：1) `real(content)`：真实 gzip(level 6) 与 brotli(q5) 压缩（node zlib）；2) `estimate(content)`：无压缩库场景的启发式估算（按字符分布：重复度高的 JSON/文本压缩率好——基于 token 频率熵的近似）；3) `calibrate(samples)`：用真实压缩结果校准估算系数（估算/真实比率回归）；4) `compare(a, b)`：两产物压缩后 diff（体积门禁用真实值）；5) 预算口径：预算以真实 gzip 为准，估算仅用于「写代码时快速心算」。
 
 ```javascript
 import zlib from 'node:zlib'

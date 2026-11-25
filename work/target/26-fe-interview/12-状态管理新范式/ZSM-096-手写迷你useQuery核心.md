@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-096：手写迷你 useQuery 核心（缓存 + stale + 去重 + 重试）
 
-**题目要求**：
+**答**：
 - 实现 `useQuery({ key, fn, staleTime = 0, retry = 1 })`：按 key 缓存；挂载时若缓存 stale 则请求；同 key 并发请求去重（共享同一个 Promise）；失败按 retry 次数重试。
 - 返回 `{ data, isLoading, error, refetch }`；组件卸载不影响缓存。
 - 支持 refetch 手动刷新；key 变化自动重取。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-427：矩阵裁剪器
-**需求**：实现 `pruneExperimentMatrix(fullMatrix, liveRoutes)`（MFW-450 扩展路由维度）：1) 全组合 = 实验变体 × 环境，但「变体未被任何活路由消费」→ 整支裁剪（死实验不产产物）；2) 路由消费图：route → flags[](从蓝图 MFW-363 取)——倒排：flag → routes[]；3) 产物合并优化：裁剪后若某 flag 只剩单值 → 降维（DefinePlugin 常量折叠进基础构建——少一次全量）；4) 输出 { builds: [...], eliminated: [{ reason } ], dimsRemoved: [flags] }。
+**答**：实现 `pruneExperimentMatrix(fullMatrix, liveRoutes)`（MFW-450 扩展路由维度）：1) 全组合 = 实验变体 × 环境，但「变体未被任何活路由消费」→ 整支裁剪（死实验不产产物）；2) 路由消费图：route → flags[](从蓝图 MFW-363 取)——倒排：flag → routes[]；3) 产物合并优化：裁剪后若某 flag 只剩单值 → 降维（DefinePlugin 常量折叠进基础构建——少一次全量）；4) 输出 { builds: [...], eliminated: [{ reason } ], dimsRemoved: [flags] }。
 
 ```javascript
 export function pr ueMatrix/combo = (matrix, blue) {

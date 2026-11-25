@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-215：手写：用双向链表实现 mini 响应式依赖收集（track/trigger/unlink）
-**需求**：实现 `reactive`（Proxy）+ `effect`，依赖用 3.5 式双向链表（Dep.subs 链 + Effect.deps 链互指），要求支持：重复 track 去重、重跑前精准 unlink 失效依赖、触发时只调度存活订阅者。不要求版本计数。
+**答**：实现 `reactive`（Proxy）+ `effect`，依赖用 3.5 式双向链表（Dep.subs 链 + Effect.deps 链互指），要求支持：重复 track 去重、重跑前精准 unlink 失效依赖、触发时只调度存活订阅者。不要求版本计数。
 **评分点**：
 - Dep 与 Effect 双链互指结构是否正确（prev/next 双向）
 - unlink 是否 O(1)（不能遍历 Set）

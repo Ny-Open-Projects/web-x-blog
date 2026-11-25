@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-097：手写 QueryClient 的 invalidateQueries（前缀匹配失效 + 活跃重取）
 
-**题目要求**：
+**答**：
 - 在 ZSM-096 基础上实现 `qc.invalidateQueries({ queryKey })`：把所有「以 queryKey 为前缀」的缓存标记 stale，并对当前有订阅者的 key 立即重取（调用其最近一次使用的 fn）。
 - 要求 key 匹配是结构化前缀：`['goods']` 匹配 `['goods', 'detail', 1]`，不匹配 `['goodsx']`。
 

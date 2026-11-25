@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-407：边界渗漏检测
-**需求**：实现 `detectLeak(files)`：1) files：`{ path, isClient, imports: string[], exports: string[] }[]`；2) 规则一：无 'use client' 模块从 client 模块 import（RSC 引 client 内部 = 服务端执行客户端代码——序列化断裂）；3) 规则二：client 模块从 server-only 包 import（DB 驱动进浏览器包）；4) 规则三：client→client 传函数 props 的模块对（跨客户端边界不可序列化——父 RSC 传 fn 是合法，client 父传 client 子 fn 也断裂）；5) 输出违规对与建议（边界组件下移/类型改 DTO）。
+**答**：实现 `detectLeak(files)`：1) files：`{ path, isClient, imports: string[], exports: string[] }[]`；2) 规则一：无 'use client' 模块从 client 模块 import（RSC 引 client 内部 = 服务端执行客户端代码——序列化断裂）；3) 规则二：client 模块从 server-only 包 import（DB 驱动进浏览器包）；4) 规则三：client→client 传函数 props 的模块对（跨客户端边界不可序列化——父 RSC 传 fn 是合法，client 父传 client 子 fn 也断裂）；5) 输出违规对与建议（边界组件下移/类型改 DTO）。
 
 ```javascript
 export function detectLeak(files) {

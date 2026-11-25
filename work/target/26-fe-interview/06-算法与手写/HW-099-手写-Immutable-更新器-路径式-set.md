@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-099：手写路径式不可变更新——setIn/getIn/updateIn，共享未变更引用（结构共享）
 **答**：Redux 式不可变更新的核心是**结构共享**：只沿路径克隆，路径外的兄弟节点保持原引用（React.memo/shouldComponentUpdate 依赖引用相等才有效）。实现递归：浅拷贝当前层，只替换目标键的克隆结果。
 
 ```javascript

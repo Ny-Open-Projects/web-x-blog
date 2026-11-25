@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-409：deadline 守护器
-**需求**：实现 `withRenderDeadline(renderFn, { totalMs = 3000, perDeps = {} })`：1) 总钟 + 每依赖子钟（AbortSignal.any 组合——MFW-361）；2) 超时段不炸整页——返回该段 fallback 数据并标记 degraded（页面完整、指标可信）；3) 剩余预算继承：子段超时消耗计入总钟（后续段预算 = total - elapsed）；4) 全部超时 → 快速失败（整页 504 + traceId——用户等 3s 得到错误好过 10s 白屏）；5) 观测每段 { ms, degraded }。
+**答**：实现 `withRenderDeadline(renderFn, { totalMs = 3000, perDeps = {} })`：1) 总钟 + 每依赖子钟（AbortSignal.any 组合——MFW-361）；2) 超时段不炸整页——返回该段 fallback 数据并标记 degraded（页面完整、指标可信）；3) 剩余预算继承：子段超时消耗计入总钟（后续段预算 = total - elapsed）；4) 全部超时 → 快速失败（整页 504 + traceId——用户等 3s 得到错误好过 10s 白屏）；5) 观测每段 { ms, degraded }。
 
 ```javascript
 export async function withDeadline(segments, { totalMs = 3000 } = {}) {

@@ -34,3 +34,11 @@ function SuggestBox() {
   return <List items={lw.data}/>
 }
 ```
+
+## 边界与易错（补充）
+
+**边界与易错**：
+
+- abortable 只中止 fetch 本身，已经进入的 `then` 链不会自动停。后处理里要自己判 `signal.aborted`，否则旧响应仍会写进 store。
+- `loadable(atom)` 不要写在组件体内，每次渲染都会包出一个新 atom，缓存直接失效；要提到模块作用域或 `useMemo` 里。
+- 三态渲染容易漏掉第四态「有旧数据但正在刷新」。直接闪骨架比保留旧数据体验更差，搜索联想场景应该保留上一批结果并加 loading 指示。

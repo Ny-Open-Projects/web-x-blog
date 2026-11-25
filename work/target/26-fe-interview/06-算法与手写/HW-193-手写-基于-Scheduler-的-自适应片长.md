@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-193：手写自适应切片调度器——按设备性能动态调整片长（快机 30ms/慢机 15ms）与实时校准
 **答**：切片片长按设备自适应：基线（navigator.hardwareConcurrency + deviceMemory 初值）+ 实时校准（观察 yield 后到下次任务开始的间隙——间隙小 = 设备忙 = 缩短片长）。快机大切片（调度开销占比低），慢机小切片（保交互）。
 
 ```javascript

@@ -6,7 +6,7 @@ tags: [前端面试, 笔试题, RBL]
 type: 笔试题
 ---
 
-## MFW→345：Sunset 执行器
+## MFW-345：Sunset 执行器
 
 **答**:
 - 生命周期自动化：deprecated 声明（{ route, sunsetAt, successor }) → 运行时三动作（响应自动附 Sunset 头+替代 Link / 按 caller 白名单延迟个人为期限 / 到期切 410+文档跳转）——人只做决策，执行器做纪律

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-041：笔试：手写构建耗时分段统计插件（多阶段打点）
-**题目**：实现 StageTimingPlugin：1) 分别统计 resolve 前后（thisCompilation→make）、make→finishModules、emit 前后、总时长四段；2) watch 模式每次 rebuild 重新统计；3) 输出 JSON 到 stdout；4) 使用 performance.now 保证精度；5) done 钩子里输出并区分单次构建/重建标签。
+**答**：实现 StageTimingPlugin：1) 分别统计 resolve 前后（thisCompilation→make）、make→finishModules、emit 前后、总时长四段；2) watch 模式每次 rebuild 重新统计；3) 输出 JSON 到 stdout；4) 使用 performance.now 保证精度；5) done 钩子里输出并区分单次构建/重建标签。
 
 ```javascript
 class StageTimingPlugin {

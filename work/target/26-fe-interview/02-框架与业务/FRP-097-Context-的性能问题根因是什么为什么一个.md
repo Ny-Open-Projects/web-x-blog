@@ -54,3 +54,11 @@ const NameCtx = createContext('a'), ThemeCtx = createContext('light');
 Provider(NameCtx, 'b', () => renderComponent('UserBadge', UserBadge)); // 只有 NameCtx 消费者重渲染
 // 对比 Zustand：useStore(s => s.name) 中 theme 变化时 selector 快照不变 -> 直接跳过
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. React 19 的 `<Ctx value={...}>` 省掉 Provider，性能上有没有改善？ → 没有。传播仍是引用比对后让全部消费者重渲，19 只是语法糖（省一层 Provider 组件），粒度问题一模一样，仍需拆分或换订阅方案。
+2. 用 useMemo 包了 value，消费者就一定不重渲了吗？ → 不一定。dep 里只要有每次渲染新建的对象或内联函数，引用照样变；而且 value 稳定只保证"内容不变时不通知"，一旦真变了仍是全量消费者重渲。
+3. 想做到字段级精确更新，除了拆 Context 还有什么原理层方案？ → 把 store 实例本身放进 Context（引用恒定），组件用 `useSyncExternalStore` 加 selector 订阅；这样 Context 只承担"取 store"，重渲由 selector 快照比较决定，等价于 Zustand 的订阅模型。

@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-175：手写 URL 深层解析——相对路径解析、searchParams 数组语义、锚点与路由冲突处理
 **答**：URL 工具封装：相对路径 → 绝对（URL 构造器 base 参数，代替手写拼接）；searchParams 的数组语义规范化（getAll vs 逗号——与 HW-152 的编码对称）；hash 与 history 路由冲突（hash 含路由时禁止业务使用锚点）；中文编码一致性（encodeURI vs encodeURIComponent 边界——整 URL 用 encodeURI、参数值用 encodeURIComponent）。
 
 ```javascript

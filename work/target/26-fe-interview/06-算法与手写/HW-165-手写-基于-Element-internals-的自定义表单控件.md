@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-165：手写 ElementInternals 自定义表单控件——WC 参与 form 校验（formAssociated + setValidity）
 **答**：自定义表单控件（WC）原生参与 form：static formAssociated = true + attachInternals——setValidity({valid: false}, '消息', anchor) 让控件接进原生校验体系（form.reportValidity/`:invalid` 伪类/checkValidity 全部生效），form.reset 与 FormData 收集自动工作。
 
 ```javascript

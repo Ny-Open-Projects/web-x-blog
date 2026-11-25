@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-408：笔试：实现 effect 的 onCleanup（重跑前清理）。
-**题目**：effect(fn) 内可调用 onCleanup(cb)：下次重跑前执行 cb；effect dispose 时也执行。
+**答**：effect(fn) 内可调用 onCleanup(cb)：下次重跑前执行 cb；effect dispose 时也执行。
 
 ```javascript
 let currentEffect = null;

@@ -62,3 +62,11 @@ class Demo extends Component {
   render() { return <button onClick={this.handleClick}>click</button>; }
 }
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. React 19 的 onCaughtError / onUncaughtError 和 boundary 是什么关系？ → 正交关系。root 选项里的三个回调只负责统一上报，fallback 仍由 boundary 渲染；19 的好处是不必再在每个 boundary 的 componentDidCatch 里重复接监控。
+2. Suspense 抛的 promise 会被 error boundary 接住吗？ → 不会。Suspense 认的是 thenable，不走错误通道；只有真正 throw 的 Error 才进 boundary。异步取数失败要先把 promise reject 转成在 render 期 throw，才能被兜住。
+3. boundary 里做了 reset 为什么还显示错误页？ → 因为 getDerivedStateFromError 已把 error 写进 state，reset 必须显式把 error 置回 null；而且旧子树 fiber 仍是坏的，通常还要把重试计数当 key 重建子树才彻底恢复，只清 state 会停在半坏的树上。

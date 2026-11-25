@@ -46,3 +46,11 @@ function RootLayout() {
 // }
 // 客户端 hydrate(qc, dehydratedState) -> useQuery 直接命中缓存不发请求
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. TanStack Start 没有 RSC，首屏 JS 体积怎么控 → 按路由做代码分割，大依赖用动态 import 下沉到交互点，`ssr:false` 只留给纯客户端页，靠 bundle 分析守预算。
+2. loader 在服务端直调 server function，鉴权放哪一层 → 放在 server function 内部（middleware/context），不能只靠路由守卫，因为 server function 可被直接请求。
+3. 客户端导航时 loader 会不会重跑、缓存怎么算 → 默认会重跑，除非命中 `staleTime`；路由级 `staleTime`/`gcTime` 控制缓存，Query 的 dehydratedState 只管首屏。

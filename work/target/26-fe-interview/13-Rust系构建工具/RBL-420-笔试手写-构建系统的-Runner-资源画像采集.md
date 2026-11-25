@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-420：手写 Runner 资源画像采集
-**需求**：实现 `profileProcess(child)`：1) 采集子进程 CPU/内存：定时采样（pidstat 不可用时 /proc 读取——Linux）或 process.report（Node 子进程内嵌上报）；2) 峰值内存/CPU/时长记录；3) 资源画像输出：{ peakRssMB, cpuPercent, durationMs, samples }；4) 采样频率自适应（短任务 500ms、长任务 2s）；5) 跨平台降级：非 Linux 用 Node 内建 process.memoryUsage（子进程内上报 IPC）；6) 画像用于调度决策（内存预算 × 并发度）。
+**答**：实现 `profileProcess(child)`：1) 采集子进程 CPU/内存：定时采样（pidstat 不可用时 /proc 读取——Linux）或 process.report（Node 子进程内嵌上报）；2) 峰值内存/CPU/时长记录；3) 资源画像输出：{ peakRssMB, cpuPercent, durationMs, samples }；4) 采样频率自适应（短任务 500ms、长任务 2s）；5) 跨平台降级：非 Linux 用 Node 内建 process.memoryUsage（子进程内上报 IPC）；6) 画像用于调度决策（内存预算 × 并发度）。
 
 ```javascript
 import fs from 'node:fs'

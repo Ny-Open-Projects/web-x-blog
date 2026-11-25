@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-030：笔试：手写 i18n 语言协商 Middleware（含 cookie 优先级与回退）
-**题目**：支持 locales `['zh','en','ja']`，默认 `zh`。规则：用户已访问过则尊重 `NEXT_LOCALE` cookie；否则按 Accept-Language 协商；都不命中用默认。URL 无语言前缀时 307 重定向到 `/{locale}{path}`（保留 query）；`/_next`、静态资源与 API 不处理。
+**答**：支持 locales `['zh','en','ja']`，默认 `zh`。规则：用户已访问过则尊重 `NEXT_LOCALE` cookie；否则按 Accept-Language 协商；都不命中用默认。URL 无语言前缀时 307 重定向到 `/{locale}{path}`（保留 query）；`/_next`、静态资源与 API 不处理。
 
 ```typescript
 import { NextResponse } from 'next/server';

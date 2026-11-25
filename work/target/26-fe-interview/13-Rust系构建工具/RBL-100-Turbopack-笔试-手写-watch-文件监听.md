@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-100：笔试：手写文件监听器（防抖 + glob 过滤 + 变更分类）
-**题目**：实现 watchFiles(paths, cb)：1) 对目录树递归建立 mtime 快照；2) 轮询对比发现 added/changed/removed 三类变更；3) 支持 ignore glob（如 node_modules/**）；4) 变更事件防抖 100ms 批量回调（参数为 [{type, file}]）；5) 停止监听 stop()。
+**答**：实现 watchFiles(paths, cb)：1) 对目录树递归建立 mtime 快照；2) 轮询对比发现 added/changed/removed 三类变更；3) 支持 ignore glob（如 node_modules/**）；4) 变更事件防抖 100ms 批量回调（参数为 [{type, file}]）；5) 停止监听 stop()。
 
 ```javascript
 const fs = require('fs'), path = require('path');

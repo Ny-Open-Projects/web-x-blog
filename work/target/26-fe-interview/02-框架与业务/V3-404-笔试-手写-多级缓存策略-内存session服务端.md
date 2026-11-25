@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-404：笔试：手写接口数据的多级缓存（内存 → sessionStorage → 网络）
-**题**：实现 `cachedFetch(url, { ttl = 60_000 })`：L1 内存 Map（带 TTL）、L2 sessionStorage（TTL + 时间戳）、L3 网络；命中低层要回填上层；同一 URL 并发请求去重。
+**答**：实现 `cachedFetch(url, { ttl = 60_000 })`：L1 内存 Map（带 TTL）、L2 sessionStorage（TTL + 时间戳）、L3 网络；命中低层要回填上层；同一 URL 并发请求去重。
 
 ```javascript
 const mem = new Map()
@@ -42,6 +42,3 @@ function invalidate(url) {
 - inflight 去重（finally 清理）。
 - sessionStorage 超配额 try/catch。
 - 提供 invalidate 主动失效入口。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-67ad85b7-58da-4b09-9947-9e972c1fd04d-cwd'; fi
-exit "$__zcode_status"

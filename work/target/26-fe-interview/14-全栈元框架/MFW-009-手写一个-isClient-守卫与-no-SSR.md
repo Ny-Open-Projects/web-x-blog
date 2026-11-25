@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-009：笔试：手写 useIsClient 守卫与 NoSSR 包装组件
-**题目**：不使用 next/dynamic，手写两个工具：`useIsClient()`（服务端渲染恒为 false，客户端 hydrate 后变 true，且不会造成 hydration mismatch 闪烁错误）和 `<NoSSR fallback>`（服务端与首帧渲染 fallback，挂载后渲染 children）。要求处理 StrictMode 双调用、SSR/CSR 输出一致性、卸载后状态清理。
+**答**：不使用 next/dynamic，手写两个工具：`useIsClient()`（服务端渲染恒为 false，客户端 hydrate 后变 true，且不会造成 hydration mismatch 闪烁错误）和 `<NoSSR fallback>`（服务端与首帧渲染 fallback，挂载后渲染 children）。要求处理 StrictMode 双调用、SSR/CSR 输出一致性、卸载后状态清理。
 
 ```jsx
 'use client';

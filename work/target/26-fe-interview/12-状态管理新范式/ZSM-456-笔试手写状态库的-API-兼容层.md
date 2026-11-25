@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-456：手写状态库 API 兼容层
-**需求**：实现 `withCompat(store, legacyMap)`：1) legacyMap 声明旧 API → 新实现映射：`{ addItem: { to: (store, ...args) => {...}, deprecatedIn: 'v2' } }`；2) 调用旧 API：转译执行 + 首次调用打 deprecation 警告（每调用点只警告一次，带堆栈定位）；3) `usage()` 返回旧 API 调用统计（迁移验收数据：哪个旧 API 还在被用）；4) `removeIn` 到期的旧 API 直接抛错（带迁移指引文案）；5) 新 API 直通不包装。
+**答**：实现 `withCompat(store, legacyMap)`：1) legacyMap 声明旧 API → 新实现映射：`{ addItem: { to: (store, ...args) => {...}, deprecatedIn: 'v2' } }`；2) 调用旧 API：转译执行 + 首次调用打 deprecation 警告（每调用点只警告一次，带堆栈定位）；3) `usage()` 返回旧 API 调用统计（迁移验收数据：哪个旧 API 还在被用）；4) `removeIn` 到期的旧 API 直接抛错（带迁移指引文案）；5) 新 API 直通不包装。
 
 ```javascript
 export function withCompat(store, legacyMap, { removeIn } = {}) {

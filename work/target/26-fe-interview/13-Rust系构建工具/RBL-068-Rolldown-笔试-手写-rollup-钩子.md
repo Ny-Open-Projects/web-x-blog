@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-068：笔试：手写一个 Rollup/Rolldown 风格的虚拟模块插件
-**题目**：实现 virtualModulePlugin({ name, content })：1) resolveId 返回带 \0 前缀的虚拟 id（约定虚拟模块以 \0 开头避免被其他插件处理）；2) load 命中该 id 返回内容；3) 支持函数式 content（入参 env）；4) 其他模块 import 该虚拟模块时正确解析；5) 解释 \0 前缀的作用。
+**答**：实现 virtualModulePlugin({ name, content })：1) resolveId 返回带 \0 前缀的虚拟 id（约定虚拟模块以 \0 开头避免被其他插件处理）；2) load 命中该 id 返回内容；3) 支持函数式 content（入参 env）；4) 其他模块 import 该虚拟模块时正确解析；5) 解释 \0 前缀的作用。
 
 ```javascript
 function virtualModulePlugin({ name, content }) {

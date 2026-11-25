@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-147：笔试：手写 browserslist → .swcrc 配置生成器
 
-**题目**：写 gen-swcrc.js：1) 输入 browserslist 字符串（如 "Chrome >= 80, Safari >= 13, node >= 16"）；2) 解析出各浏览器最低版本，映射为 SWC 的 `jsc.target`（规则：支持 es2022 语法的最低版本全满足→es2022；否则逐级降档 es2020/es2018/es2015）；3) 输出完整 .swcrc JSON（含 parser/typescript、module es6、env.mode=usage）；4) 无法识别的 query 打 warning 且忽略；5) 纯函数 + CLI 双入口。
+**答**：写 gen-swcrc.js：1) 输入 browserslist 字符串（如 "Chrome >= 80, Safari >= 13, node >= 16"）；2) 解析出各浏览器最低版本，映射为 SWC 的 `jsc.target`（规则：支持 es2022 语法的最低版本全满足→es2022；否则逐级降档 es2020/es2018/es2015）；3) 输出完整 .swcrc JSON（含 parser/typescript、module es6、env.mode=usage）；4) 无法识别的 query 打 warning 且忽略；5) 纯函数 + CLI 双入口。
 
 ```javascript
 // gen-swcrc.js

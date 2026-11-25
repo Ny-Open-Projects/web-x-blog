@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-454：笔试：实现 keyed 列表的运行时 diff（增删/移动最小化）。
-**题目**：输入旧 keys 数组与新 keys 数组：输出操作序列（remove/insert/move，按 key）；DOM 节点 Map 复用；移动 = insertBefore 到正确位置。
+**答**：输入旧 keys 数组与新 keys 数组：输出操作序列（remove/insert/move，按 key）；DOM 节点 Map 复用；移动 = insertBefore 到正确位置。
 
 ```javascript
 function keyedDiff(oldKeys, newKeys) {

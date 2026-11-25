@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-055：手写 useHydrateAtoms（SSR 初始值注入，只生效一次）
 
-**题目要求**：
+**答**：
 - 实现 `useHydrateAtoms(entries, store?)`：传入 `[[atom, value]]` 数组，在组件首次渲染时把初值写入 store。
 - 语义：**只在挂载时生效一次**，后续父组件重渲染传新值不覆盖（这是与 setState 的关键区别）。
 - 必须在渲染期同步写入（不能 setTimeout），保证 SSR/CSR 首帧一致。

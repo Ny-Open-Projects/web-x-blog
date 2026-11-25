@@ -21,13 +21,18 @@ function reportError(err, extra = {}) {
     message: err.message,
     stack: err.stack,
     release: __APP_VERSION__,       // 构建注入
-    lineno: err.lineno, colno: err.colno,
     ...extra,
   }));
 }
 window.addEventListener('error', (e) => {
   if (e.target && e.target.src) return reportError(new Error(`资源加载失败:${e.target.src}`));
-  reportError(e.error || e, { type: 'runtime' });
+  reportError(e.error || e, { type: 'runtime', lineno: e.lineno, colno: e.colno, file: e.filename });
 }, true);
 window.addEventListener('unhandledrejection', (e) => reportError(e.reason, { type: 'promise' }));
 ```
+
+**追问**：
+
+1. 为什么上报用 `sendBeacon` 而不是 fetch？ → 页面卸载时 fetch 会被中断，sendBeacon 由浏览器排队发送且不阻塞卸载；但它有体积上限（约 64KB），大 payload 得分片或走正常请求。
+2. SourceMap 上传到监控平台，怎么防止源码泄露？ → 只传私有制品库并做访问控制，绝不部署到 CDN；构建用 hidden-source-map，确认上传成功后可删除本地 map。
+3. 资源加载失败没有堆栈和行列号，靠什么定位？ → 只能靠资源 URL、页面路由、面包屑和发布版本号；可给 script 绑 onerror 上报 chunk 名，再用构建清单反查源码模块。

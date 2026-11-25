@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-463：手写依赖图 diff
-**需求**：实现 `diffGraphs(prev, next)`：1) 节点 diff：新增/移除模块；2) 边 diff：新增/删除依赖边（import 变化的精确归因）；3) 变更影响传播：新增边影响「共享 chunk 划分」的预测（模块进入新 chunk 的风险提示）；4) 输出 { nodes: {added, removed}, edges: {added, removed}, riskNotes }；5) 归因到 commit（结合 git diff——哪个 commit 引入的边）；6) 大图性能（增量 diff：只对比受变更模块的子图——全图 diff 在 10k 模块上不可行）。
+**答**：实现 `diffGraphs(prev, next)`：1) 节点 diff：新增/移除模块；2) 边 diff：新增/删除依赖边（import 变化的精确归因）；3) 变更影响传播：新增边影响「共享 chunk 划分」的预测（模块进入新 chunk 的风险提示）；4) 输出 { nodes: {added, removed}, edges: {added, removed}, riskNotes }；5) 归因到 commit（结合 git diff——哪个 commit 引入的边）；6) 大图性能（增量 diff：只对比受变更模块的子图——全图 diff 在 10k 模块上不可行）。
 
 ```javascript
 export function diffGraphs(prev, next, gitBlame) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-433：手写状态层 OT 简版（文本 op 变换）
-**需求**：实现文本 OT 三件套：1) `apply(doc, op)`：op 为 `{type:'ins', pos, str}` 或 `{type:'del', pos, len}`；2) `transform(op, against)`：计算 op 在 against 已应用后的新坐标（并行 op 变换，两边同源）；3) `sync(localOps, remoteOps, doc)`：本地 op 队列与远端 op 集合收敛——远端 op 先 apply，本地 op 逐个 transform 后 apply；4) pos 越界钳制；5) 变换后 op 语义不变（插入内容保留）。
+**答**：实现文本 OT 三件套：1) `apply(doc, op)`：op 为 `{type:'ins', pos, str}` 或 `{type:'del', pos, len}`；2) `transform(op, against)`：计算 op 在 against 已应用后的新坐标（并行 op 变换，两边同源）；3) `sync(localOps, remoteOps, doc)`：本地 op 队列与远端 op 集合收敛——远端 op 先 apply，本地 op 逐个 transform 后 apply；4) pos 越界钳制；5) 变换后 op 语义不变（插入内容保留）。
 
 ```javascript
 export function apply(doc, op) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-105：笔试：手写懒评估值对象（Lazy Vc 模拟）
-**题目**：实现 lazy(factory)：1) 返回 { get } ——首次 get 才执行 factory，之后返回缓存值；2) 支持链式 map(fn)：延迟到 get 时才逐级求值（中间不产生中间值对象）；3) 多处引用同一 lazy 实例只算一次（单飞：并发 get 合并）；4) 失效 invalidate() 后重新惰性求值；5) 统计 evaluations 次数验证惰性。
+**答**：实现 lazy(factory)：1) 返回 { get } ——首次 get 才执行 factory，之后返回缓存值；2) 支持链式 map(fn)：延迟到 get 时才逐级求值（中间不产生中间值对象）；3) 多处引用同一 lazy 实例只算一次（单飞：并发 get 合并）；4) 失效 invalidate() 后重新惰性求值；5) 统计 evaluations 次数验证惰性。
 
 ```javascript
 function lazy(factory) {

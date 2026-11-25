@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-078：笔试：手写 dev/prod 产物一致性校验器（模块集合比对）
-**题目**：实现 checkParity(devStats, prodStats)：1) 比较两次构建的模块集合（path 集合差集）；2) dev 有 prod 无 → 报「dev-only 依赖」（prod 会被摇掉）；3) prod 有 dev 无 → 报「prod-only 依赖」（条件加载，dev 不感知，可能带隐藏副作用）；4) 输出差异清单与影响面；5) 只对业务模块（src/ 下）报差异，node_modules 忽略。
+**答**：实现 checkParity(devStats, prodStats)：1) 比较两次构建的模块集合（path 集合差集）；2) dev 有 prod 无 → 报「dev-only 依赖」（prod 会被摇掉）；3) prod 有 dev 无 → 报「prod-only 依赖」（条件加载，dev 不感知，可能带隐藏副作用）；4) 输出差异清单与影响面；5) 只对业务模块（src/ 下）报差异，node_modules 忽略。
 
 ```javascript
 function checkParity(devStats, prodStats, { sourcePattern = /^src\// } = {}) {

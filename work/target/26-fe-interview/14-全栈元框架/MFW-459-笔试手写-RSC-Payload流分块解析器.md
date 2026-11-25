@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-459：RSC Payload 流分块解析器（复水侧）
-**需求**：实现 `createFlightParser()`：1) 输入为 TextDecoderStream 逐 chunk 喂 `push(text)`，RSC 流按行分隔：行格式 `ID:["..."]`（新模块/数据行）或续行（不带 ID 前缀，拼到上一行）；2) `push` 返回本轮新增的完整记录 [{ id, body }]，不完整行留在缓冲；3) `flush()` 校验缓冲清空，否则抛 `TruncatedFlightError`（流被截断——网络中断常见）；4) 供客户端 Router Cache 增量合并。
+**答**：实现 `createFlightParser()`：1) 输入为 TextDecoderStream 逐 chunk 喂 `push(text)`，RSC 流按行分隔：行格式 `ID:["..."]`（新模块/数据行）或续行（不带 ID 前缀，拼到上一行）；2) `push` 返回本轮新增的完整记录 [{ id, body }]，不完整行留在缓冲；3) `flush()` 校验缓冲清空，否则抛 `TruncatedFlightError`（流被截断——网络中断常见）；4) 供客户端 Router Cache 增量合并。
 
 ```javascript
 export function createFlightParser(onRecord) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-420：笔试：手写 defineModel 完整版（默认值 + 修饰符 + 校验 emit）
-**题**：实现 `useModelEnhanced(props, emit, key, opts)`：opts 含 default、validate(value)（非法值不 emit 且返回 false）、modifiers（number/trim/lazy 不处理 lazy，因 lazy 是事件层）；未绑定时读写本地副本（本地态），绑定后写走 emit。
+**答**：实现 `useModelEnhanced(props, emit, key, opts)`：opts 含 default、validate(value)（非法值不 emit 且返回 false）、modifiers（number/trim/lazy 不处理 lazy，因 lazy 是事件层）；未绑定时读写本地副本（本地态），绑定后写走 emit。
 
 ```javascript
 function useModelEnhanced(props, emit, key = 'modelValue', opts = {}) {
@@ -41,6 +41,3 @@ function useModelEnhanced(props, emit, key = 'modelValue', opts = {}) {
 - validate 不通过直接拦截（不 emit 也不写本地）。
 - 修饰符 transform 支持 trim/number。
 - 同值短路。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-a161f6e5-9fc3-45c0-8354-8389b03b676a-cwd'; fi
-exit "$__zcode_status"

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-309：手写微前端 postMessage RPC 封装（超时 + 校验）
-**需求**：实现 `createRpc(targetWindow, targetOrigin)`：1) `call(method, payload)` 返回 Promise，带 10s 超时；2) 消息协议 `{ __rpc: true, id, method, payload }` 与响应 `{ __rpc: true, id, result, error }`；3) 校验来源 origin 与消息标记，非法消息忽略；4) 支持对端注册 handler（`on(method, fn)`）自动回包；5) 多个并发调用按 id 正确配对。
+**答**：实现 `createRpc(targetWindow, targetOrigin)`：1) `call(method, payload)` 返回 Promise，带 10s 超时；2) 消息协议 `{ __rpc: true, id, method, payload }` 与响应 `{ __rpc: true, id, result, error }`；3) 校验来源 origin 与消息标记，非法消息忽略；4) 支持对端注册 handler（`on(method, fn)`）自动回包；5) 多个并发调用按 id 正确配对。
 
 ```javascript
 export function createRpc(targetWindow, targetOrigin) {

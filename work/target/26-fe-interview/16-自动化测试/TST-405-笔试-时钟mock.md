@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-405：笔试：实现可控时钟（冻结/推进/定时器虚拟化）。
-**题目**：`installClock(t0)`：Date.now 固定为 t0；`advance(ms)` 推进时钟并触发到期的 setTimeout；`uninstall` 还原。
+**答**：`installClock(t0)`：Date.now 固定为 t0；`advance(ms)` 推进时钟并触发到期的 setTimeout；`uninstall` 还原。
 
 ```javascript
 export function installClock(t0) {

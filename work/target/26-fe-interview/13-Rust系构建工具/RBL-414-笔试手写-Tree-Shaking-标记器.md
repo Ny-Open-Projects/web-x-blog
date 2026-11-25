@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-414：手写 Tree-Shaking 标记器
-**需求**：实现 `markUsedExports(entryExports, modules)`：1) modules：`{ id, exports: string[], imports: [{ from, names: string[] }], sideEffects: boolean }[]`；2) 从入口被引用的导出出发，沿 import 链标记「使用的导出」（跨模块传播）；3) sideEffects: true 的模块整体保留（所有导出标记 used）；4) 输出每个模块的 usedExports 与 unusedExports（shaking 候选）；5) 循环引用安全（标记过程不死循环）；6) re-export 链（barrel）穿透（a re-export b 的 x）。
+**答**：实现 `markUsedExports(entryExports, modules)`：1) modules：`{ id, exports: string[], imports: [{ from, names: string[] }], sideEffects: boolean }[]`；2) 从入口被引用的导出出发，沿 import 链标记「使用的导出」（跨模块传播）；3) sideEffects: true 的模块整体保留（所有导出标记 used）；4) 输出每个模块的 usedExports 与 unusedExports（shaking 候选）；5) 循环引用安全（标记过程不死循环）；6) re-export 链（barrel）穿透（a re-export b 的 x）。
 
 ```javascript
 export function markUsedExports(entryRefs, modules) {

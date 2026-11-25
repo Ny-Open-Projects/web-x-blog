@@ -57,3 +57,11 @@ async function drawTexture(canvas, imgSrc) {
 - 非 2 的幂尺寸必须 LINEAR 过滤 + CLAMP_TO_EDGE（WebGL1）
 - uv 由顶点坐标推导 `(p+1)/2`，省一个 uv attribute
 - TRIANGLE_STRIP 四顶点画矩形（比 TRIANGLES 六顶点省）
+
+## 变体与延伸（补充）
+
+**变体与延伸**：
+
+1. 换成 WebGL2 要改什么？ → `texture2D`/`gl_FragColor` 改为 `texture()` 与 `out` 变量声明；NPOT 限制消失，但 CLAMP_TO_EDGE 仍建议保留，避免边缘采样越界。
+2. 一次画多张纹理怎么做？ → 每张图绑定到不同纹理单元：`gl.activeTexture(gl.TEXTURE0 + i)` 后 `uniform1i(sampler, i)`，片元着色器里按 uv 分段采样或混合。
+3. 4K 大图首帧卡顿怎么解？ → 用 `createImageBitmap` 在 Worker 里解码，主线程只做 `texImage2D` 上传；同时生成 mipmap，否则缩小显示时会出现严重摩尔纹。

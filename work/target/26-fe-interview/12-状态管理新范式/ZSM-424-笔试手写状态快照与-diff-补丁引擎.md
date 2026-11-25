@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-424：手写状态快照与 diff 补丁引擎
-**需求**：实现快照/补丁引擎：1) `snapshot(state)` 生成不可变快照（structuredClone）；2) `diff(a, b)` 生成 patch 数组：`{op:'set'|'del', path, value?}`，path 为 `a.b.0.c` 形式（数组下标）；3) `apply(state, patches)` 按序应用生成新状态（不可变更新：只复制变更路径节点）；4) `invert(patches, before)` 生成逆补丁（撤销用）；5) 引用相等的子树跳过（性能）。
+**答**：实现快照/补丁引擎：1) `snapshot(state)` 生成不可变快照（structuredClone）；2) `diff(a, b)` 生成 patch 数组：`{op:'set'|'del', path, value?}`，path 为 `a.b.0.c` 形式（数组下标）；3) `apply(state, patches)` 按序应用生成新状态（不可变更新：只复制变更路径节点）；4) `invert(patches, before)` 生成逆补丁（撤销用）；5) 引用相等的子树跳过（性能）。
 
 ```javascript
 export function diff(a, b, path = '', out = []) {

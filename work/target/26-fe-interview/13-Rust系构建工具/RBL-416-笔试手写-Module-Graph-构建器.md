@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-416：手写 Module Graph 构建器
-**需求**：实现 `buildGraph(entries, { readFile, resolve })`：1) 从入口递归：readFile → 提取 import（静态字符串）→ resolve → 递归子模块；2) 图节点 { id, content, imports: string[] }，去重（同模块单实例）；3) 循环引用：标记 cycle 但不无限递归（访问中集合）；4) 动态 import（变量参数）标记 dynamic-unresolved（保守策略：视为无法静态分析）；5) 缺失模块：报错带完整解析链（从哪个文件引用的）；6) 输出 { modules: Map, entry: id, cycles: [][] }。
+**答**：实现 `buildGraph(entries, { readFile, resolve })`：1) 从入口递归：readFile → 提取 import（静态字符串）→ resolve → 递归子模块；2) 图节点 { id, content, imports: string[] }，去重（同模块单实例）；3) 循环引用：标记 cycle 但不无限递归（访问中集合）；4) 动态 import（变量参数）标记 dynamic-unresolved（保守策略：视为无法静态分析）；5) 缺失模块：报错带完整解析链（从哪个文件引用的）；6) 输出 { modules: Map, entry: id, cycles: [][] }。
 
 ```javascript
 export function buildGraph(entries, { readFile, resolve, extractImports }) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-191：笔试：手写 on-demand revalidate 端点（secret 校验 + tag/path 分派）
-**题目**：实现一个 `/api/revalidate` 端点（Route Handler）供 CMS webhook 调用：① 必须带 `?secret=`，与 `process.env.REVALIDATE_SECRET` 比较（用恒时比较防时序攻击）；② 按 body 分派：`{ type: 'tag', tag }` 走 revalidateTag，`{ type: 'path', path }` 走 revalidatePath；③ path 必须是站内路径（防「cache 欺骗」：外部输入不能清除任意路径）；④ 支持 tag 批量（数组）；⑤ 记录审计日志（谁在何时失效了什么）；⑥ webhook 重试会重复调用——端点必须幂等安全。
+**答**：实现一个 `/api/revalidate` 端点（Route Handler）供 CMS webhook 调用：① 必须带 `?secret=`，与 `process.env.REVALIDATE_SECRET` 比较（用恒时比较防时序攻击）；② 按 body 分派：`{ type: 'tag', tag }` 走 revalidateTag，`{ type: 'path', path }` 走 revalidatePath；③ path 必须是站内路径（防「cache 欺骗」：外部输入不能清除任意路径）；④ 支持 tag 批量（数组）；⑤ 记录审计日志（谁在何时失效了什么）；⑥ webhook 重试会重复调用——端点必须幂等安全。
 
 ```ts
 import { revalidatePath, revalidateTag } from 'next/cache';

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-412：笔试：实现 keyed 列表信号结构（顺序 + 内容分离）。
-**题目**：`keyedList(initial)` 返回 `{keys: signal, item(id): signal, push, remove, update}`：内容更新只触发对应 item 订阅；顺序变更触发 keys 订阅。
+**答**：`keyedList(initial)` 返回 `{keys: signal, item(id): signal, push, remove, update}`：内容更新只触发对应 item 订阅；顺序变更触发 keys 订阅。
 
 ```javascript
 function keyedList(initial) {

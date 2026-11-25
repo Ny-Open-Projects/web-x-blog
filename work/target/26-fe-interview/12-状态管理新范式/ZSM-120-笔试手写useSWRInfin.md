@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-120：手写 useSWRInfinite 核心（分页游标缓存 + 终止判断 + 加载更多）
-**需求**：实现 `useSWRInfinite(getKey, fetcher)`。getKey(index, previousPageData) 返回页 key 或 null（终止）；`data` 为页数组二维结构；`setSize(n)` 触发加载到第 n 页；`size` 当前页数；每页独立缓存，重复 setSize 不重复请求。边界：previousPageData 为 null（无上游）时 index 0；getKey 返回 null 的页不存在。
+**答**：实现 `useSWRInfinite(getKey, fetcher)`。getKey(index, previousPageData) 返回页 key 或 null（终止）；`data` 为页数组二维结构；`setSize(n)` 触发加载到第 n 页；`size` 当前页数；每页独立缓存，重复 setSize 不重复请求。边界：previousPageData 为 null（无上游）时 index 0；getKey 返回 null 的页不存在。
 
 ```javascript
 export function useSWRInfinite(getKey, fetcher) {

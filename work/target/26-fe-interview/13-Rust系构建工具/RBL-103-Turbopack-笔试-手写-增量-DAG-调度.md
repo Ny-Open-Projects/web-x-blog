@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-103：笔试：手写增量 DAG 调度器（拓扑重算 + 并发执行）
-**题目**：实现 createScheduler(tasks, deps)：1) tasks 为 Map<name, async fn>，deps 为依赖边（先跑依赖）；2) schedule(changed)：重算 changed 及其所有下游，未受影响任务跳过；3) 并发执行：无依赖关系的任务同时跑（Promise.all 分层）；4) 同一轮内任务去重；5) 失败任务阻断其下游（下游标记 skipped）。
+**答**：实现 createScheduler(tasks, deps)：1) tasks 为 Map<name, async fn>，deps 为依赖边（先跑依赖）；2) schedule(changed)：重算 changed 及其所有下游，未受影响任务跳过；3) 并发执行：无依赖关系的任务同时跑（Promise.all 分层）；4) 同一轮内任务去重；5) 失败任务阻断其下游（下游标记 skipped）。
 
 ```javascript
 function createScheduler(tasks, deps) {

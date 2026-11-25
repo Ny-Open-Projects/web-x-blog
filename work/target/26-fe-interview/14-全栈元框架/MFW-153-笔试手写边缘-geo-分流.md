@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-153：笔试：手写一个边缘 geo 分流中间件
-**题目**：在边缘（类 Cloudflare Workers/Next Middleware 环境）实现 geo 分流：① 按请求头 `x-vercel-ip-country`/`cf-ipcountry` 识别国家；② 中国大陆访问 `/products/**` 时 302 到 `cn.example.com` 同路径；③ 其余地区注入 `x-served-region` 头继续；④ 支持强制测试参数 `?geo=US` 覆盖（仅调试模式）；⑤ 分流决策要可缓存（避免每请求计算）。
+**答**：在边缘（类 Cloudflare Workers/Next Middleware 环境）实现 geo 分流：① 按请求头 `x-vercel-ip-country`/`cf-ipcountry` 识别国家；② 中国大陆访问 `/products/**` 时 302 到 `cn.example.com` 同路径；③ 其余地区注入 `x-served-region` 头继续；④ 支持强制测试参数 `?geo=US` 覆盖（仅调试模式）；⑤ 分流决策要可缓存（避免每请求计算）。
 
 ```ts
 type GeoEnv = { DEBUG: boolean };

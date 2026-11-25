@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-429：手写路由级预取器（意图分层 + 去重 + 取消）
-**需求**：实现 `createPrefetcher(queryClient, optionsFn)`：1) `hover(id)`：hover 意图 → 预取（500ms 防抖，鼠标快速扫过不触发）；2) `viewport(id)`：进入视口意图 → 立即预取（低优先级标记）；3) `confirm(id)`：实际导航 → 等待预取完成（复用同一 Promise，不重复请求）；4) 同 id 并发预取去重（共享 inflight）；5) hover 后 3s 未 confirm 自动 abort（释放资源）；6) 预取失败静默。
+**答**：实现 `createPrefetcher(queryClient, optionsFn)`：1) `hover(id)`：hover 意图 → 预取（500ms 防抖，鼠标快速扫过不触发）；2) `viewport(id)`：进入视口意图 → 立即预取（低优先级标记）；3) `confirm(id)`：实际导航 → 等待预取完成（复用同一 Promise，不重复请求）；4) 同 id 并发预取去重（共享 inflight）；5) hover 后 3s 未 confirm 自动 abort（释放资源）；6) 预取失败静默。
 
 ```javascript
 export function createPrefetcher(queryClient, optionsFn) {

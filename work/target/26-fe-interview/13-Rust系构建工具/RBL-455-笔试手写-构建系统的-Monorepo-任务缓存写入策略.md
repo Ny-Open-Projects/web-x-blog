@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-455：手写任务缓存写入策略
-**需求**：实现 `decideCacheWrite(task, result)`：1) 判定要素：任务类型（build 可缓存 / test 条件可缓存 / lint 可缓存）、结果稳定性（test 通过但历史 flaky 率高 → 不写缓存）、确定输出（outputs 与声明一致）；2) 缓存等级：global（共享）/ team / local——按任务类型与分支决定；3) flaky 保护：近 7 天重试率 > 5% 的 test 任务结果禁入共享缓存（只写 local）；4) 大小预算：单条目 > 100MB 不入远程（传输成本 > 收益）；5) 输出 { write: boolean, tier, reason }（决策可解释）。
+**答**：实现 `decideCacheWrite(task, result)`：1) 判定要素：任务类型（build 可缓存 / test 条件可缓存 / lint 可缓存）、结果稳定性（test 通过但历史 flaky 率高 → 不写缓存）、确定输出（outputs 与声明一致）；2) 缓存等级：global（共享）/ team / local——按任务类型与分支决定；3) flaky 保护：近 7 天重试率 > 5% 的 test 任务结果禁入共享缓存（只写 local）；4) 大小预算：单条目 > 100MB 不入远程（传输成本 > 收益）；5) 输出 { write: boolean, tier, reason }（决策可解释）。
 
 ```javascript
 export function decideCacheWrite(task, result, context) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-459：手写 Runbook 自动生成器
-**需求**：实现 `generateRunbook(incidentHistory, checks)`：1) 从事故历史提取高频故障模式（错误签名聚类 top5 → 每类生成 Runbook 草稿：症状/诊断命令/处置）；2) 诊断命令自动生成（错误类型对应的 check 脚本调用——checks 注册表）；3) 处置步骤从「历史成功处置」提取（同签名事故的处置动作统计——多数派步骤）；4) 人工审校标记（自动生成内容必须人工确认后生效——置信度分级）；5) 输出 markdown（Runbook 条目）+ 未覆盖故障模式清单（Runbook 空白区提示）。
+**答**：实现 `generateRunbook(incidentHistory, checks)`：1) 从事故历史提取高频故障模式（错误签名聚类 top5 → 每类生成 Runbook 草稿：症状/诊断命令/处置）；2) 诊断命令自动生成（错误类型对应的 check 脚本调用——checks 注册表）；3) 处置步骤从「历史成功处置」提取（同签名事故的处置动作统计——多数派步骤）；4) 人工审校标记（自动生成内容必须人工确认后生效——置信度分级）；5) 输出 markdown（Runbook 条目）+ 未覆盖故障模式清单（Runbook 空白区提示）。
 
 ```javascript
 function signature(err) { return `${err.code ?? 'unknown'}#${err.message.slice(0, 50)}` }

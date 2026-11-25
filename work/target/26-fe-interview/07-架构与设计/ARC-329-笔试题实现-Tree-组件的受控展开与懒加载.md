@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-329：笔试题：实现 Tree 组件的受控展开与懒加载？
-**题目**：实现 Tree 组件核心：1) 受控 expandedKeys + 非受控 defaultExpandedKeys 双模式；2) 节点懒加载（无 children 且 hasChildren → 展开时触发 loadData）；3) 加载态与失败重试；4) 选中受控（selectedKeys 单选）。
+**答**：实现 Tree 组件核心：1) 受控 expandedKeys + 非受控 defaultExpandedKeys 双模式；2) 节点懒加载（无 children 且 hasChildren → 展开时触发 loadData）；3) 加载态与失败重试；4) 选中受控（selectedKeys 单选）。
 **评分点**：
 - 受控/非受控双模式合并逻辑正确（expanded 集合运算）。
 - 懒加载触发时机正确（首次展开才触发，缓存不重复请求），loading 态渲染。

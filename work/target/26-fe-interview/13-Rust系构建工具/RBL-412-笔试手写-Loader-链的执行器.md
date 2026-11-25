@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-412：手写 Loader 链执行器
-**需求**：实现 `runLoaderChain(loaders, { resource, code, map })`：1) loaders 按倒序执行（webpack 语义：数组末尾先执行）；2) 每个 loader 签名 `loader(code, map, meta)` 返回 code/map；3) sourcemap 链：loader 返回新 map 时与上游 map 级联（remap），未返回时保持上游 map；4) pitch 阶段支持（loader.pitch 先于正文，pitch 返回值短路后续 loader 与源文件读取）；5) meta 透传；6) 异常传播带 loader 名称。
+**答**：实现 `runLoaderChain(loaders, { resource, code, map })`：1) loaders 按倒序执行（webpack 语义：数组末尾先执行）；2) 每个 loader 签名 `loader(code, map, meta)` 返回 code/map；3) sourcemap 链：loader 返回新 map 时与上游 map 级联（remap），未返回时保持上游 map；4) pitch 阶段支持（loader.pitch 先于正文，pitch 返回值短路后续 loader 与源文件读取）；5) meta 透传；6) 异常传播带 loader 名称。
 
 ```javascript
 import SourceMap from 'source-map'   // 简化：假设 remap 工具可用

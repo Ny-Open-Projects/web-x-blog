@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-416：最小 SSR 服务器
-**需求**：实现 `createMiniServer({ routes, render, assetDir, timeoutMs = 3000 } )`：1) 协商顺序（RBL-497/246）：hash 静态文件 → 退役/健康端点 → SSR 路由匹配 → SPA 回退 404 页；2) SSR 用 renderToPipeableStream 流式（Shell 先写 header——TTFB 前置）+ 整体 deadline（超时切精简错误流——已发头部不能换状态码，输出内联错误卡）；3) 水合数据注入（window.__PRESET__ 转义 `</script`——XSS）；4) 静态文件 immutable+1y / 页面 no-store（路径族分派表）；5) 优雅停机（SIGTERM 摘流排水——MFW-285）。
+**答**：实现 `createMiniServer({ routes, render, assetDir, timeoutMs = 3000 } )`：1) 协商顺序（RBL-497/246）：hash 静态文件 → 退役/健康端点 → SSR 路由匹配 → SPA 回退 404 页；2) SSR 用 renderToPipeableStream 流式（Shell 先写 header——TTFB 前置）+ 整体 deadline（超时切精简错误流——已发头部不能换状态码，输出内联错误卡）；3) 水合数据注入（window.__PRESET__ 转义 `</script`——XSS）；4) 静态文件 immutable+1y / 页面 no-store（路径族分派表）；5) 优雅停机（SIGTERM 摘流排水——MFW-285）。
 
 ```javascript
 import { renderToPipeableStream } from 'react-dom/server'

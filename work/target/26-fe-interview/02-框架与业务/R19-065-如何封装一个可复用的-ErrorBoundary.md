@@ -52,3 +52,9 @@ export class ErrorBoundary extends Component {
 //   <OrderList userId={userId} />
 // </ErrorBoundary>
 ```
+
+**追问**：
+
+1. `resetKeys` 用浅比较有什么坑？→ 父级每次 render 都新建数组，`some` 逐项比较看起来没问题，但如果 key 本身是对象就会永远判定"变化"，一有更新就 reset；应传稳定引用。
+2. 多个边界嵌套时错误落到哪一层？→ 最近的祖先边界先接住；如果它渲染 fallback 时又抛错，会继续向上冒泡，形成级联降级，所以 fallback 本身要足够简单。
+3. 边界能捕获兄弟组件的错误吗？→ 不能，只兜自己的子树；要兜住并列的两个兄弟，必须把边界提到它们的共同父级。

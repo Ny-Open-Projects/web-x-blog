@@ -5,8 +5,8 @@ categories: [场景算法]
 tags: [前端面试, 笔试题, 15]
 type: 笔试题
 ---
-
-**场景**：慢脚本排行（PER-213 LoAF 聚合）的通用化：事件流（{group, cost}）单遍产出每 group 的 Top-K 与总量——分组 Map + 桶内小顶堆（ALG-211 多维化）。
+## ALG-323：流式 TopN 聚合：按维度聚合的 Top-K 排行（分组桶 + 桶内堆，单遍流式）？
+**答**：慢脚本排行（PER-213 LoAF 聚合）的通用化：事件流（{group, cost}）单遍产出每 group 的 Top-K 与总量——分组 Map + 桶内小顶堆（ALG-211 多维化）。
 
 **思路**：Map<group, { total, heap }>；事件到达：组 total += cost、堆维护 Top-K；溢出控制：组数上限（LRU 淘汰冷组）。
 

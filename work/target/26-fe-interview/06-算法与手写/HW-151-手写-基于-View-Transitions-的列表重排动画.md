@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-151：手写 View Transitions API 列表重排——startViewTransition + view-transition-name 绑定实现元素移动动画
 **答**：列表拖拽重排的平滑动画（元素从旧位置滑到新位置）：View Transitions API——DOM 更新前调用 document.startViewTransition，给每个元素唯一 view-transition-name，浏览器自动插值旧位置→新位置（transform 动画合成器执行）。降级：不支持时直接更新（功能不受损）。
 
 ```javascript

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-329：笔试：手写迷你 useDeferredValue
-**题**：实现 `useMyDeferredValue(value)` 返回 `[deferred, isStale]`：value 变化时输入即时可用（返回原 value 由调用方决定哪部分用 deferred）；deferred 延迟一帧跟随 value；追赶期间 isStale=true。
+**答**：实现 `useMyDeferredValue(value)` 返回 `[deferred, isStale]`：value 变化时输入即时可用（返回原 value 由调用方决定哪部分用 deferred）；deferred 延迟一帧跟随 value；追赶期间 isStale=true。
 
 ```javascript
 function useMyDeferredValue(value) {
@@ -33,6 +33,3 @@ function useMyDeferredValue(value) {
 - 一帧延迟近似 transition 语义（真实 React 用 lane 调度，渲染可中断）。
 - effect 清理 cancel。
 - deferred === value 时不追加调度（幂等）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-0b90d706-a065-4079-9c5f-efa3a8ab8e1b-cwd'; fi
-exit "$__zcode_status"

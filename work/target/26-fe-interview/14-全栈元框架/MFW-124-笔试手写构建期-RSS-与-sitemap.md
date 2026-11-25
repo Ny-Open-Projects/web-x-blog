@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-124：笔试：手写构建期 RSS 与 sitemap 生成器
-**题目**：内容站构建时要产出 `rss.xml` 与 `sitemap.xml`。实现两个函数：① `rss(posts, site)` 输出合规 RSS 2.0（channel 元信息 + item 的 title/link/pubDate/description，日期 RFC 822 格式，XML 转义）；② `sitemap(urls, site)` 输出 sitemap 0.9 格式（含 lastmod，URL 转义）；③ 都要处理特殊字符防 XML 注入。
+**答**：内容站构建时要产出 `rss.xml` 与 `sitemap.xml`。实现两个函数：① `rss(posts, site)` 输出合规 RSS 2.0（channel 元信息 + item 的 title/link/pubDate/description，日期 RFC 822 格式，XML 转义）；② `sitemap(urls, site)` 输出 sitemap 0.9 格式（含 lastmod，URL 转义）；③ 都要处理特殊字符防 XML 注入。
 
 ```ts
 type Post = { title: string; slug: string; pubDate: Date; description?: string };

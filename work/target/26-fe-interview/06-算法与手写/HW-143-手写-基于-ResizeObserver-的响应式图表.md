@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-143：手写容器响应式图表——ResizeObserver 防抖重绘、初始尺寸与 DPR 适配
 **答**：图表跟随容器（不是窗口）尺寸：ResizeObserver 观察容器（比 window resize 精确——侧栏折叠也触发）；重绘防抖（rAF 合帧 + 高频 resize 合并）；canvas 按 devicePixelRatio 缩放（否则高清屏模糊）；首次回调即初始尺寸（RO 触发时机）。
 
 ```javascript

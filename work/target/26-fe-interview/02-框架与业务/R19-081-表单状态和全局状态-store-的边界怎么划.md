@@ -42,3 +42,9 @@ function ProfileForm({ user }) {
 }
 // 反例：把每个 keystroke 都同步进 Zustand → 全局订阅者疯狂重渲染
 ```
+
+**追问**：
+
+1. 表单草稿需要跨路由保留（比如分步表单）怎么办？→ 提到模块级 store 但单独开 draft 命名空间，并在离开流程时清理；或者用 sessionStorage 持久化，不要混进业务实体 store，否则别处会读到未提交的半成品。
+2. 受控表单每个 keyStroke 都 setState，性能真的有问题吗？→ React 会批处理，主要成本是本组件重渲一遍；真正出问题的是大表单（几百个字段）用一个大 state 对象，应改 `useReducer` 或非受控 + ref，缩小渲染范围。
+3. 提交成功后 draft 和 store 不一致怎么收敛？→ 以提交接口返回值为准重置 draft，或提交后重新拉取详情；走乐观更新时要保留回滚快照，失败时把 draft 恢复成提交前的值。

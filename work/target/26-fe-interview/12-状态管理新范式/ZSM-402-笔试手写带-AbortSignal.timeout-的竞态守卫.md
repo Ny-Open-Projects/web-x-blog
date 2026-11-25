@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-402：手写竞态守卫（只接受最新请求结果）
-**需求**：实现 `useLatest(queryFn, deps)` 语义的纯函数版 `createLatestRunner()`：1) `run(key, asyncFn)` 发起执行；2) 同 key 新 run 立即使旧 run「过期」——旧结果 resolve 后被丢弃且旧请求被 abort（asyncFn 收到 signal）；3) `get(key)` 返回最新完成结果或 undefined；4) 过期请求的 reject（abort）不抛给调用方；5) 支持 `cancelAll()`。
+**答**：实现 `useLatest(queryFn, deps)` 语义的纯函数版 `createLatestRunner()`：1) `run(key, asyncFn)` 发起执行；2) 同 key 新 run 立即使旧 run「过期」——旧结果 resolve 后被丢弃且旧请求被 abort（asyncFn 收到 signal）；3) `get(key)` 返回最新完成结果或 undefined；4) 过期请求的 reject（abort）不抛给调用方；5) 支持 `cancelAll()`。
 
 ```javascript
 export function createLatestRunner() {

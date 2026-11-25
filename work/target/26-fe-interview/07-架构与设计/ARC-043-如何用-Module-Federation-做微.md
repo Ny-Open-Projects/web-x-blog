@@ -31,3 +31,9 @@ module.exports = {
 // 主应用：const OrderList = React.lazy(() => import('appTrade/OrderList'));
 // 注意：MF 没有沙箱，shared singleton 的版本协商失败会直接运行时报错
 ```
+
+**追问**：
+
+1. shared 里 react 版本协商失败，运行时报什么、怎么兜底？ → 会报 shared module 不可用或版本不符，需在 shared 填真实 requiredVersion、宿主启动时校验并打印冲突模块，兜底是让远端自带副本、放弃 singleton。
+2. 没有沙箱，两个子应用同时改 window 和全局样式怎么治理？ → 全局变量约定命名空间并禁止裸写 window，样式用前缀或 Shadow DOM 局部隔离，构建期加 lint 规则扫 window 赋值，跨应用通信只走显式事件总线。
+3. remoteEntry 挂了、子应用又发了新版，主应用怎么感知？ → 入口地址带版本或 hash 防 CDN 缓存旧入口，加载失败由 error boundary 兜住并重试，新版按远端地址灰度切换，别指望远端自己覆盖。

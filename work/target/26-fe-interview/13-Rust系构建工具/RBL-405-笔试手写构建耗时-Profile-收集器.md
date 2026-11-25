@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-405：手写构建耗时 Profile 收集器
-**需求**：实现 `createProfiler()`：1) `span(name)` 返回 end()——记录嵌套 span（父子关系由调用栈推断）；2) `mark(event)` 时间点标记；3) 输出 chrome tracing 格式（{ name, cat, ts, dur, ph: 'X' }）与汇总表（各 span 自身耗时/含子耗时）；4) 异步 span 支持（end 可在 promise 后调用）；5) 输出按开始时间排序；6) 嵌套聚合正确（父 span 含子 span 时间）。
+**答**：实现 `createProfiler()`：1) `span(name)` 返回 end()——记录嵌套 span（父子关系由调用栈推断）；2) `mark(event)` 时间点标记；3) 输出 chrome tracing 格式（{ name, cat, ts, dur, ph: 'X' }）与汇总表（各 span 自身耗时/含子耗时）；4) 异步 span 支持（end 可在 promise 后调用）；5) 输出按开始时间排序；6) 嵌套聚合正确（父 span 含子 span 时间）。
 
 ```javascript
 export function createProfiler() {

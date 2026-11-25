@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-069：笔试：手写 chunk 依赖闭合检测器（环检测 + 闭合修复）
-**题目**：给定 chunk 划分 { chunkId: moduleIds[] } 与模块依赖图，实现 checkClosure：1) 找出跨 chunk 的模块依赖边；2) 判断 chunk 级是否有循环（chunk A→B→A）；3) 有环时输出「需要合并的 chunk 对」；4) 合并后重新校验直到无环；5) 返回最终 chunk 划分。
+**答**：给定 chunk 划分 { chunkId: moduleIds[] } 与模块依赖图，实现 checkClosure：1) 找出跨 chunk 的模块依赖边；2) 判断 chunk 级是否有循环（chunk A→B→A）；3) 有环时输出「需要合并的 chunk 对」；4) 合并后重新校验直到无环；5) 返回最终 chunk 划分。
 
 ```javascript
 function checkClosure(chunkOf, deps) { // chunkOf: Map<modId, chunkId>

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-289：笔试题：手写 AOP 切面库（before/after/around）？
-**题目**：实现 aspect 库：1) `before(obj, method, hook)`（hook 返回 false 阻断原方法）；2) `after`（拿到返回值可改写）；3) `around`（完全接管，可调用 target 转发）；4) 支持异步方法；5) 移除切面（返回 unweave）。
+**答**：实现 aspect 库：1) `before(obj, method, hook)`（hook 返回 false 阻断原方法）；2) `after`（拿到返回值可改写）；3) `around`（完全接管，可调用 target 转发）；4) 支持异步方法；5) 移除切面（返回 unweave）。
 **评分点**：
 - 三类切面语义正确（before 短路/after 改写/around 转发）。
 - 异步兼容（await 原方法与 hook）。

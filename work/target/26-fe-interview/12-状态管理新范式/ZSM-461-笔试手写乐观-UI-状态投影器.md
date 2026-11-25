@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-461：手写乐观 UI 状态投影器
-**需求**：实现 `createProjection(store)`：1) `apply(item, optimisticPatch)`：返回投影句柄——store 中该条目立即生效并带 `_opt: true` 标记；2) `handle.confirm(serverItem)`：以服务端值覆盖并清除标记；3) `handle.rollback()`：恢复投影前快照；4) `handle.expire(ms)`：超时未确认自动回滚并触发 onExpire 回调（可重试提示）；5) 同一条目多次 apply：新投影覆盖旧投影（旧句柄失效）；6) `isOptimistic(id)` 查询。
+**答**：实现 `createProjection(store)`：1) `apply(item, optimisticPatch)`：返回投影句柄——store 中该条目立即生效并带 `_opt: true` 标记；2) `handle.confirm(serverItem)`：以服务端值覆盖并清除标记；3) `handle.rollback()`：恢复投影前快照；4) `handle.expire(ms)`：超时未确认自动回滚并触发 onExpire 回调（可重试提示）；5) 同一条目多次 apply：新投影覆盖旧投影（旧句柄失效）；6) `isOptimistic(id)` 查询。
 
 ```javascript
 export function createProjection(store) {

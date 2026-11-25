@@ -45,3 +45,11 @@ export interface Storage {
 //   export const storage: Storage = { get: k => Promise.resolve(localStorage.getItem(k)), ... }
 // 边界 lint：shared 内出现 "react-native"/"react-dom" import 直接 CI 报错
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. shared 里误 import 了 react-native，怎么在构建前就拦住 → ESLint no-restricted-imports 按目录禁用端框架依赖，再加 CI 对 shared 分别用 web 与 native 两套 tsconfig 跑 tsc --noEmit，类型不通过就阻断合并。
+2. 双端发布节奏不同，shared 改动把旧版 App 打崩怎么办 → shared 只做向后兼容的增量变更，破坏性改动发新包新大版本，App 侧锁 semver 范围而不是跟随最新。
+3. monorepo 里会不会出现两份 shared 实例 → 用 workspace 协议加 fixed 版本模式统一版本号，禁止业务包各自声明不同版本，构建时校验产物里只存在一个副本，否则双实例会让单例状态各自独立。

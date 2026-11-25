@@ -62,3 +62,11 @@ async function screenshot(el) {
 // dom-to-image：SVG foreignObject + 序列化 —— 更快但字体/跨域坑多
 // 服务端 Puppeteer screenshot：保真度上限的选择（有服务端预算时优先）
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 为什么先把 DOM 克隆进同尺寸 iframe 再遍历？ → 隔离宿主页面的脚本与继承样式，避免伪元素、全局 CSS 污染 `getComputedStyle` 的测量结果，也方便固定视口宽度。
+2. 跨域图片为什么会渲染空白，useCORS 做了什么？ → 未带 CORS 头的图片会污染 canvas 使 toDataURL 抛安全错误；useCORS 让图片带凭据请求，服务端需配合返回 Access-Control-Allow-Origin。
+3. 文本为什么必须按行 fillText 而不是整段填 innerText？ → Canvas 没有自动换行，必须按字体度量自己断行、对齐基线，否则换行位置与浏览器不一致，还原度立刻崩。

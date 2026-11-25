@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-162：手写字体加载状态机——FontFaceSet loadingdone/loadingerror 事件驱动的多字体降级
 **答**：多字体（标题体/正文体/等宽体）独立降级：document.fonts 事件驱动（loadingdone/loadingerror）——字体失败逐个降级（标题体失败用次选/系统字体），页面级 loading class 的解除按"关键字体集"判定（部分字体失败不阻塞关键路径渲染）。
 
 ```javascript

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-080：笔试：手写构建报告生成器（体积榜 + 依赖贡献）
-**题目**：实现 buildReport(stats)：输入 { chunks: [{ name, size, modules: [{ path, size, owner }] }] }，输出：1) chunk 体积降序榜（前 5，含 gzip 估算 gzip≈0.3*size）；2) 按 owner（node_modules 包名）聚合的依赖贡献榜；3) 单模块超过 100KB 的告警清单；4) 重复模块检测（同 path 出现于多 chunk）；5) 输出 markdown 报表字符串。
+**答**：实现 buildReport(stats)：输入 { chunks: [{ name, size, modules: [{ path, size, owner }] }] }，输出：1) chunk 体积降序榜（前 5，含 gzip 估算 gzip≈0.3*size）；2) 按 owner（node_modules 包名）聚合的依赖贡献榜；3) 单模块超过 100KB 的告警清单；4) 重复模块检测（同 path 出现于多 chunk）；5) 输出 markdown 报表字符串。
 
 ```javascript
 const kb = (n) => (n / 1024).toFixed(1);

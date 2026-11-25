@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-005：笔试：手写一个极简 RSC 运行时（序列化组件树为 Payload 并渲染）
-**题目**：实现 `renderRSC(element, slots)`：服务端把组件树「求值」成 JSON Payload——Server Component 递归展开为普通节点，Client Component 记为 `{ type: 'client', id, props }` 引用；再实现客户端侧 `hydrateRSC(payload, registry)`：根据 registry 里注册的客户端模块重建可渲染树。要求：支持嵌套、props 校验（函数不允许下发）、children 引用。
+**答**：实现 `renderRSC(element, slots)`：服务端把组件树「求值」成 JSON Payload——Server Component 递归展开为普通节点，Client Component 记为 `{ type: 'client', id, props }` 引用；再实现客户端侧 `hydrateRSC(payload, registry)`：根据 registry 里注册的客户端模块重建可渲染树。要求：支持嵌套、props 校验（函数不允许下发）、children 引用。
 
 ```javascript
 // ===== 服务端：把组件树求值为 RSC Payload =====

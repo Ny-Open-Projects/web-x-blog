@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-433：笔试：实现元素的水合恢复（采用 DSD + 状态 + 不重建 DOM）。
-**题目**：connectedCallback：① shadowRoot 已存在（DSD）则跳过模板注入 ② 读 data-state 恢复信号 ③ 只绑事件不重渲染。开发模式校验：恢复值与 DOM 文本一致。
+**答**：connectedCallback：① shadowRoot 已存在（DSD）则跳过模板注入 ② 读 data-state 恢复信号 ③ 只绑事件不重渲染。开发模式校验：恢复值与 DOM 文本一致。
 
 ```javascript
 connectedCallback() {

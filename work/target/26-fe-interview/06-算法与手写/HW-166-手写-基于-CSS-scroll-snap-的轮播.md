@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-166：手写 CSS scroll-snap 轮播——零 JS 滚动吸附 + IO 同步指示器 + 程序滚动兜底
 **答**：轮播的零 JS 方案：scroll-snap-type 负责吸附（浏览器原生惯性+吸附），JS 只做两件事——IO 同步指示器（当前页高亮）与前后按钮的 scrollTo（scrollIntoView 平滑）；不支持 snap 的老浏览器降级为普通横向滚动（功能可用）。
 
 ```html

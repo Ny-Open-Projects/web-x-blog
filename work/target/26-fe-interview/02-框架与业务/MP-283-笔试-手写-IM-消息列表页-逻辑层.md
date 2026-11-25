@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-283：笔试：手写 IM 消息列表页核心
-**题**：实现：消息分页加载（向上翻历史，scroll-into-view 保持位置）；WebSocket 消息按 msgId 去重插入；未读数管理（在底部时自动已读）；发送消息乐观展示（sending 态 + 失败重试）。
+**答**：实现：消息分页加载（向上翻历史，scroll-into-view 保持位置）；WebSocket 消息按 msgId 去重插入；未读数管理（在底部时自动已读）；发送消息乐观展示（sending 态 + 失败重试）。
 
 ```javascript
 Page({
@@ -53,6 +53,3 @@ Page({
 - 历史加载位置保持（scroll-into-view 锚点）。
 - 乐观发送 + sending/failed 状态 + 路径级 setData。
 - 未读管理（底部自动已读）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-059f966f-381c-41be-bc2e-e3d6dd5705d2-cwd'; fi
-exit "$__zcode_status"

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-456：手写构建配置加密注入
-**需求**：实现 `createSecretInjector(kms)`：1) 构建期注入 secret 的安全通道：不进产物（运行时从 KMS/配置服务拉取）——构建只注入「密文的加载地址」；2) 如必须构建期注入（SSR server bundle）：加密进产物 + 运行时用部署侧密钥解密（信封加密）；3) 注入审计：哪个 secret 注入到哪个产物（审计清单）；4) 轮换支持：secret 版本号注入（运行时校验版本）；5) 防泄露扫描：注入后产物扫描确认无明文 secret（构建门禁）。
+**答**：实现 `createSecretInjector(kms)`：1) 构建期注入 secret 的安全通道：不进产物（运行时从 KMS/配置服务拉取）——构建只注入「密文的加载地址」；2) 如必须构建期注入（SSR server bundle）：加密进产物 + 运行时用部署侧密钥解密（信封加密）；3) 注入审计：哪个 secret 注入到哪个产物（审计清单）；4) 轮换支持：secret 版本号注入（运行时校验版本）；5) 防泄露扫描：注入后产物扫描确认无明文 secret（构建门禁）。
 
 ```javascript
 import crypto from 'node:crypto'

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-465：笔试：实现 token 消费审计（未使用 token / 裸值残留）。
-**题目**：输入 token 定义与全仓组件样式。输出：零消费 token 清单（候选删除）、裸值残留（组件内硬编码但存在近似 token）。
+**答**：输入 token 定义与全仓组件样式。输出：零消费 token 清单（候选删除）、裸值残留（组件内硬编码但存在近似 token）。
 
 ```javascript
 function tokenAudit(tokens, styles) {

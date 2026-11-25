@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-074：手写有限状态机（FSM）——声明式转移表、非法转移报错、进入/离开钩子
 **答**：FSM 三要素：states、transitions（{from: {event: to}}）、当前态。要点：非法 event 在当前态下要么报错要么忽略（可配置）；entry/exit 钩子在转移时按序触发（exit 旧 → transition → entry 新）；支持带 payload 的事件与转移条件（guard）。
 
 ```javascript

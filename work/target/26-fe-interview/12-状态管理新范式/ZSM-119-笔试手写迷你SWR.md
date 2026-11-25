@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-119：手写迷你 SWR 核心（缓存 + 去重 + stale-while-revalidate + mutate）
-**需求**：实现 `useSWR(key, fetcher, options)`，要求：1) 缓存命中先返回旧数据（stale）；2) dedupingInterval 内同 key 请求合并；3) `mutate(key, data?)` 支持写缓存/失效重取/函数式更新；4) key 变化时返回对应缓存。边界：key 为 null 不请求；fetcher 抛错不影响已有缓存；多组件订阅同 key 同步更新。用 React 实现核心逻辑即可。
+**答**：实现 `useSWR(key, fetcher, options)`，要求：1) 缓存命中先返回旧数据（stale）；2) dedupingInterval 内同 key 请求合并；3) `mutate(key, data?)` 支持写缓存/失效重取/函数式更新；4) key 变化时返回对应缓存。边界：key 为 null 不请求；fetcher 抛错不影响已有缓存；多组件订阅同 key 同步更新。用 React 实现核心逻辑即可。
 
 ```javascript
 const cache = new Map()      // key -> data

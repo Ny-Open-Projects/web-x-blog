@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-188：手写批量图片水印——Worker 内 OffscreenCanvas 平铺水印 + 内存回收 + 批量进度
 **答**：批量加水印（相册导出）：Worker + OffscreenCanvas（主线程零卡顿）——drawImage 原图 → 平铺绘制水印（pattern 平铺或坐标循环）→ convertToBlob 回传；ImageBitmap transfer 零拷贝 + close() 回收；批量回压（并发 2）与进度。
 
 ```javascript

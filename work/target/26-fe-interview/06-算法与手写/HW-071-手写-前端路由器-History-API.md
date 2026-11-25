@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-071：手写前端路由器（History API 版）——push/replace、popstate、路由参数与守卫
 **答**：路由器五件套：注册表（path→handler，支持 :param）、push/replace（history.pushState + 手动触发 handler）、popstate（前进后退自动匹配）、参数解析（正则 :param）、前置守卫链（可取消导航）。注意 pushState 不触发 popstate，必须手动调用匹配逻辑。
 
 ```javascript

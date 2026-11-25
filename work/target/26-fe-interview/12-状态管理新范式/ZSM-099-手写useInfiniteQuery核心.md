@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-099：手写迷你 useInfiniteQuery（pages 累积 + 游标推进）
 
-**题目要求**：
+**答**：
 - 实现 `useInfiniteQuery({ key, fn, initialPageParam, getNextPageParam })`。
 - data 结构 `{ pages: [], pageParams: [] }`；fetchNextPage 用上一页响应的 getNextPageParam 结果作为下一页 pageParam；返回 undefined 停止。
 - 缓存按 key；hasNextPage、isFetchingNextPage 状态正确。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-410：手写 queryKey 规范化器（稳定序列化 + 命中率）
-**需求**：实现 `canonicalKey(parts)`：1) 输入数组各元素规范化：对象 key 排序后序列化、Date→ISO、undefined 跳过、数组保序；2) 输出稳定字符串（同语义输入必同输出）；3) `registerKey(key)` 登记 + `stats()` 返回 { unique, total, hitRate }（total 含重复登记，hitRate=1-unique/total）；4) 相同 key 重复登记计为命中（缓存复用信号）；5) 循环引用抛错。
+**答**：实现 `canonicalKey(parts)`：1) 输入数组各元素规范化：对象 key 排序后序列化、Date→ISO、undefined 跳过、数组保序；2) 输出稳定字符串（同语义输入必同输出）；3) `registerKey(key)` 登记 + `stats()` 返回 { unique, total, hitRate }（total 含重复登记，hitRate=1-unique/total）；4) 相同 key 重复登记计为命中（缓存复用信号）；5) 循环引用抛错。
 
 ```javascript
 export function canonicalKey(parts) {

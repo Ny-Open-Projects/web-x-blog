@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-121：实现 SWR 的离线写队列（断网暂存 mutation，联网后重放）
-**需求**：实现 `queueMutation(task)` 与自动重放：1) 网络正常直接执行 task（一个返回 Promise 的函数）；2) 断网时把 task 存入 localStorage 队列；3) 监听 online 事件按序重放，成功一条删一条；4) 某条连续失败 3 次则跳过该条继续后续；5) 提供清空接口。边界：页面刷新后队列仍在；重放时保持提交顺序。
+**答**：实现 `queueMutation(task)` 与自动重放：1) 网络正常直接执行 task（一个返回 Promise 的函数）；2) 断网时把 task 存入 localStorage 队列；3) 监听 online 事件按序重放，成功一条删一条；4) 某条连续失败 3 次则跳过该条继续后续；5) 提供清空接口。边界：页面刷新后队列仍在；重放时保持提交顺序。
 
 ```javascript
 const KEY = 'offline-mutation-queue'

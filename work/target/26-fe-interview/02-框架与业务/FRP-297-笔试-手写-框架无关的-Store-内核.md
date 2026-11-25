@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## FRP-297：笔试：手写框架无关 Store 内核
-**题**：实现 createStore：`get()`/`set(patch)`/`subscribe(fn)`；set 用不可变合并；提供 `useStore(selector)`（React：useSyncExternalStore）与 Vue 版（customRef/computed）两个适配层，核心零框架依赖。
+**答**：实现 createStore：`get()`/`set(patch)`/`subscribe(fn)`；set 用不可变合并；提供 `useStore(selector)`（React：useSyncExternalStore）与 Vue 版（customRef/computed）两个适配层，核心零框架依赖。
 
 ```javascript
 // core（零依赖）
@@ -46,6 +46,3 @@ function useStoreVue(store, selector) {
 - React 用 useSyncExternalStore（并发安全）。
 - Vue 用 customRef/computed 桥接。
 - selector 级订阅（防全 store 变更触发渲染）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-3cea5ab1-71f5-4609-8efa-91bdfa2197a0-cwd'; fi
-exit "$__zcode_status"

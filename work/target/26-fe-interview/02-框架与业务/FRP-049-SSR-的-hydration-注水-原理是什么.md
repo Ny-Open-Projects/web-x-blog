@@ -51,3 +51,11 @@ function hydrate(vnode, domElement) {
 //   return <span>{new Date().toLocaleTimeString()}</span>; // 错误示范
 // }
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 出现 mismatch 时 React 18 是整页重渲还是只重渲出错的那个组件？ → 在第一个不一致的节点上把整棵 root 的服务端 DOM 丢弃、从 root 重新 client render，不是局部修补，所以代价按整页算；React 19 改为尽量保留可复用节点并打印带 diff 的错误信息，方便定位到具体元素。
+2. 为什么 hydration 期间写 useLayoutEffect 会报警告，而 useEffect 不会？ → 水合时 DOM 已存在，React 不走 layout 插入流程，无法保证 layoutEffect 在浏览器绘制前成对执行；18 直接告警，19 允许它在 hydrate 完成后补跑但仍建议用 useEffect。
+3. 线上已上线又没法改代码，怎么定位是哪棵子树造成的 mismatch？ → 先用 `suppressHydrationWarning` 逐层收窄范围，再对 Date.now、Math.random、`typeof window` 分支三类来源做二分；也可以把可疑子树改成 `dynamic(..., {ssr:false})` 先止损，再回头修根因。

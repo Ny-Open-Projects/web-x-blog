@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-327：笔试题：手写 Web Vitals 上报（LCP/INP/CLS）？
-**题目**：实现 vitals 上报：1) LCP（PerformanceObserver largest-contentful-paint，页面隐藏时上报最终值）；2) INP（event entries 取最差交互延迟）；3) CLS 累计布局偏移（exclude 首帧）；4) 统一 beacon 上报。
+**答**：实现 vitals 上报：1) LCP（PerformanceObserver largest-contentful-paint，页面隐藏时上报最终值）；2) INP（event entries 取最差交互延迟）；3) CLS 累计布局偏移（exclude 首帧）；4) 统一 beacon 上报。
 **评分点**：
 - LCP observer buffered: true 补早事件。
 - 最终 LCP 取最后一次（隐藏时定值）。

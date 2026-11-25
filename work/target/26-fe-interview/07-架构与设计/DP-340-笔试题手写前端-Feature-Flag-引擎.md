@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-340：笔试题：手写 Feature Flag 引擎（规则求值）？
-**题目**：实现 FlagEngine：1) flag 定义（default + rules 数组：条件+值）；2) 规则按序求值，首个匹配生效（条件：用户属性/percentage）；3) 依赖 flag（flag 引用其他 flag 结果）；4) 循环依赖检测。
+**答**：实现 FlagEngine：1) flag 定义（default + rules 数组：条件+值）；2) 规则按序求值，首个匹配生效（条件：用户属性/percentage）；3) 依赖 flag（flag 引用其他 flag 结果）；4) 循环依赖检测。
 **评分点**：
 - 规则求值顺序正确（短路首个匹配）。
 - percentage 用稳定 hash 分桶（不随机）。

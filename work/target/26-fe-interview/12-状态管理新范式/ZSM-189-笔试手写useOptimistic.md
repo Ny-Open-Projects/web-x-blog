@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-189：手写 useOptimisticList（列表乐观增删 + 服务端对账去重）
-**需求**：实现 `useOptimisticList(serverItems, { idKey = 'id' })`：1) serverItems 变化时与本地乐观条目合并对账——乐观条目被服务端确认（id 命中）后替换为服务端版本，未命中的（被他人删除的）移除；2) `add(item)` 乐观追加（临时 id = tmp_ 前缀），提交成功后带临时 id 去对账；3) `remove(id)` 乐观移除，失败恢复；4) 返回 { items, add, remove }。核心考点：临时 id 与服务端 id 的映射对账、合并顺序稳定（乐观条目保持用户操作位置）。
+**答**：实现 `useOptimisticList(serverItems, { idKey = 'id' })`：1) serverItems 变化时与本地乐观条目合并对账——乐观条目被服务端确认（id 命中）后替换为服务端版本，未命中的（被他人删除的）移除；2) `add(item)` 乐观追加（临时 id = tmp_ 前缀），提交成功后带临时 id 去对账；3) `remove(id)` 乐观移除，失败恢复；4) 返回 { items, add, remove }。核心考点：临时 id 与服务端 id 的映射对账、合并顺序稳定（乐观条目保持用户操作位置）。
 
 ```javascript
 export function useOptimisticList(serverItems = [], { idKey = 'id' } = {}) {

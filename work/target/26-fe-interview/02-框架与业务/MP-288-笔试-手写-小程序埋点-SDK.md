@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-288：笔试：手写小程序埋点 SDK
-**题**：实现 track.js：track(event, props)（批量：10 条或 5s flush）；自动 PV：重写 Page/Component 构造器，onShow 上报 PV 带 route 与来源（referrer）；页面隐藏/小程序切后台 flush；失败重试队列（最多 3 次）。
+**答**：实现 track.js：track(event, props)（批量：10 条或 5s flush）；自动 PV：重写 Page/Component 构造器，onShow 上报 PV 带 route 与来源（referrer）；页面隐藏/小程序切后台 flush；失败重试队列（最多 3 次）。
 
 ```javascript
 const buffer = []
@@ -45,6 +45,3 @@ wx.onAppHide?.(flush) // 切后台兜底（生命周期内 sendBeacon 不可用�
 - 批量双阈值 + hide flush。
 - 重试上限。
 - 小程序无 sendBeacon——切后台时机的兜底思路（说出局限加分）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-cc7bbb62-104c-46fb-89f6-5e5154e67c9b-cwd'; fi
-exit "$__zcode_status"

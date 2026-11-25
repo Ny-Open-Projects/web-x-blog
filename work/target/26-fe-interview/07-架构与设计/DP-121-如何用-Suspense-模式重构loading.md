@@ -10,7 +10,7 @@ type: 面试题
 **答**：
 - Suspense 模式的核心：组件直接"读"同步形态的数据，未就绪就 throw 一个 thenable，由最近的 Suspense 边界兜住显示 fallback——组件里不再出现 `if (loading)`。
 - 落地手法：资源创建函数返回 `{ read() }`，内部缓存 Promise 结果（命中即同步返回），等效虚拟代理 + 备忘录（DP-032）。
-- React 18 的 use() / 框架级 suspense 数据源已内置该机制；自实现用于理解原理与旧版本兼容。
+- React 19 的 use() / 框架级 suspense 数据源已内置该机制；自实现用于理解原理与旧版本兼容。
 
 ```jsx
 // 资源模式：把 Promise 包装成可"同步读"的资源（代理 + 缓存）
@@ -48,3 +48,9 @@ export default function Page() {
   );
 }
 ```
+
+**追问**：
+
+1. read 抛 Promise 之后 React 怎么知道要重渲染，同一 resource 被两个组件读会怎样？ → 边界捕获 thenable 后在该 Promise resolve 时重试渲染；同一 resource 共享缓存只发一次请求，但 read 期间缓存被清空会让并发渲染读到不同值，造成撕裂。
+2. 局部刷新会整块闪回 fallback，怎么只变暗不闪？ → 用 transition 的 isPending 或 useDeferredValue 保留旧内容，只有首次加载才进 fallback，避免在 transition 之外切 key。
+3. React 19 的 use() 出来了还要自己写 createResource 吗，缓存 key 怎么设计？ → use() 直接吃 Promise，但每次渲染新建 Promise 会无限挂起，必须配合 cache 或数据层按 key 去重，key 要含请求参数与失效版本。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-414：手写 store 订阅扇出监控（定位渲染风暴）
-**需求**：实现 `instrumentStore(store)`：1) 包装 subscribe 统计每个 listener 的「通知次数」；2) 包装 setState 记录单次通知扇出（listener 数）与相邻两次 setState 的最小间隔；3) 同一事件循环 tick 内 setState 超过 10 次判定「疑似循环」打告警（带最后一次写入来源 stack）；4) `report()` 返回 top5 高频 listener（含注册位置）与扇出分布；5) 提供 `reset()`。
+**答**：实现 `instrumentStore(store)`：1) 包装 subscribe 统计每个 listener 的「通知次数」；2) 包装 setState 记录单次通知扇出（listener 数）与相邻两次 setState 的最小间隔；3) 同一事件循环 tick 内 setState 超过 10 次判定「疑似循环」打告警（带最后一次写入来源 stack）；4) `report()` 返回 top5 高频 listener（含注册位置）与扇出分布；5) 提供 `reset()`。
 
 ```javascript
 export function instrumentStore(store) {

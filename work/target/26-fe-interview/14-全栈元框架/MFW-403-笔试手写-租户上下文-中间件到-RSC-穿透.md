@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-403：租户上下文穿透
-**需求**：实现 `tenantChain()`：1) middleware 解析 Host→tenantId，写入请求头 `x-tenant`（内部签名防伪造——HMAC(key, tenantId+ts)）；2) RSC/Action 侧 `getTenant()`：验签读头（伪造/过期→reject）；3) 缓存 key 工厂强制含租户（tk(tag, id) = `t:${tenant}:${tag}`——漏租户编译期不可能）；4) provide 测试助手（绕过 HTTP 直接注入上下文——单测友好）。
+**答**：实现 `tenantChain()`：1) middleware 解析 Host→tenantId，写入请求头 `x-tenant`（内部签名防伪造——HMAC(key, tenantId+ts)）；2) RSC/Action 侧 `getTenant()`：验签读头（伪造/过期→reject）；3) 缓存 key 工厂强制含租户（tk(tag, id) = `t:${tenant}:${tag}`——漏租户编译期不可能）；4) provide 测试助手（绕过 HTTP 直接注入上下文——单测友好）。
 
 ```javascript
 import { headers } from 'next/headers'

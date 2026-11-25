@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-026：手写 Zustand 中间件组合器 compose 并保证顺序正确
 
-**题目要求**：
+**答**：
 - 实现 `compose(...mws)` 返回高阶 creator：`create(compose(logger, persist)(baseConfig))` 等价于嵌套调用 `logger(persist(baseConfig))`。
 - 保证**最左中间件最外层**（先拿到最终 set，最后执行包装）。
 - 附带实现 `apply(mws)` 语义清晰版：从内到外依次包裹。

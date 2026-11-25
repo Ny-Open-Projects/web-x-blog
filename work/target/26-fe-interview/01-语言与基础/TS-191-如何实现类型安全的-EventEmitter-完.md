@@ -55,3 +55,9 @@ bus.emit("login", "u1");
 // bus.emit("login", 1);     // 报错：payload 不是 string
 // bus.on("nope", () => {}); // 报错：事件不存在
 ```
+
+**追问**：
+
+1. `emit` 遍历 Set 时，监听器里调用 off 移除自己，会影响本次遍历吗？ → 会，Set 的 forEach 是活迭代器，删除尚未访问的元素会被跳过，新增元素甚至可能被本轮执行；应先 `[...set]` 快照再遍历。
+2. `once` 注册后调用 `off(event, 原fn)` 能注销掉吗？ → 不能，Set 里存的是 wrap，引用不同删不掉，监听器会残留；需要保存 wrap 到 fn 的映射，或让 once 返回自己的退订函数。
+3. 某个监听器抛异常，后面的监听器还会执行吗？ → 不会，forEach 里 throw 会直接跳出并冒泡给 emit 调用方；要按需 try/catch 逐个隔离，并用 AggregateError 汇总上报。

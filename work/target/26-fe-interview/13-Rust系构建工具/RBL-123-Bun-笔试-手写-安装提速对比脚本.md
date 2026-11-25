@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-123：笔试：手写包管理器性能对比脚本（npm vs bun install）
-**题目**：写 bench-install.sh/ts：1) 在隔离目录分别执行 npm install 与 bun install（同一 package.json）；2) 各跑 3 次取 P50；3) 冷/热缓存两模式（热缓存复用全局缓存）；4) 输出对比表；5) 保证公平：每次安装前清空 node_modules、固定 registry。
+**答**：写 bench-install.sh/ts：1) 在隔离目录分别执行 npm install 与 bun install（同一 package.json）；2) 各跑 3 次取 P50；3) 冷/热缓存两模式（热缓存复用全局缓存）；4) 输出对比表；5) 保证公平：每次安装前清空 node_modules、固定 registry。
 
 ```typescript
 // bench-install.ts —— bun bench-install.ts

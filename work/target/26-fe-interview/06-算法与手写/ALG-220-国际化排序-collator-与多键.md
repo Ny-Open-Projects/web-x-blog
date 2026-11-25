@@ -5,8 +5,8 @@ categories: [场景算法]
 tags: [前端面试, 笔试题, 15]
 type: 笔试题
 ---
-
-**场景**：通讯录要按中文拼音排序（'张三' 在 '李四' 前后取决于拼音），混合英文/数字按区域规则。`localeCompare` 每次调用慢（内部构造 collator），用 `Intl.Collator` 实例复用，性能差 10 倍以上。
+## ALG-220：国际化列表排序：中文按拼音、多语言混合按区域排序（Intl.Collator，O(n log n)）
+**答**：通讯录要按中文拼音排序（'张三' 在 '李四' 前后取决于拼音），混合英文/数字按区域规则。`localeCompare` 每次调用慢（内部构造 collator），用 `Intl.Collator` 实例复用，性能差 10 倍以上。
 
 **思路**：`new Intl.Collator('zh', { sensitivity: 'base', numeric: true })` 复用比较器；多键排序（先姓氏后名字）用比较器链；稳定排序与 null 容错。
 

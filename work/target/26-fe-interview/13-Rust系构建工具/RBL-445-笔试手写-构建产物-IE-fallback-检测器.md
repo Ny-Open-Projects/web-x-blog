@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-445：手写产物语法兼容性检测器
-**需求**：实现 `checkSyntaxCompat(code, targets)`：1) targets：browserslist 目标（简化为特性集合：es2015/es2017/es2020）；2) 检测产物是否含超纲语法（简化：正则特征——可选链 ?.、??、class fields、top-level await）；3) 每个特征标注其 ES 版本与目标支持状态；4) 转译缺失告警（产物含超纲语法 = 转译配置没覆盖目标）；5) 输出 { ok, found: [{ feature, es, supportedByTargets }] }；6) 与 browserslist 一致性：目标声明与产物实际语法的交叉验证。
+**答**：实现 `checkSyntaxCompat(code, targets)`：1) targets：browserslist 目标（简化为特性集合：es2015/es2017/es2020）；2) 检测产物是否含超纲语法（简化：正则特征——可选链 ?.、??、class fields、top-level await）；3) 每个特征标注其 ES 版本与目标支持状态；4) 转译缺失告警（产物含超纲语法 = 转译配置没覆盖目标）；5) 输出 { ok, found: [{ feature, es, supportedByTargets }] }；6) 与 browserslist 一致性：目标声明与产物实际语法的交叉验证。
 
 ```javascript
 const FEATURES = [

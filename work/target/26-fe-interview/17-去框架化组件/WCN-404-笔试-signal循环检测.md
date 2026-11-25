@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-404：笔试：给 signal 系统加循环检测。
-**题目**：检测两类环：① 依赖环（computed A 依赖 B，B 依赖 A）② effect 自写环（effect 写自己读的信号导致无限重跑，> 100 次判循环）。输出环路径。
+**答**：检测两类环：① 依赖环（computed A 依赖 B，B 依赖 A）② effect 自写环（effect 写自己读的信号导致无限重跑，> 100 次判循环）。输出环路径。
 
 ```javascript
 function checkCycle(node, path = []) {

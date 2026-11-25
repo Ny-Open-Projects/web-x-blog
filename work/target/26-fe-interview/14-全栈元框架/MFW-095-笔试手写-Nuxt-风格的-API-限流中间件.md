@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-095：笔试：手写一个 Nitro API 限流中间件（令牌桶 + 分用户）
-**题目**：为 `server/api/**` 实现限流中间件：① 按 API key（header `x-api-key`）区分用户，每用户独立配额（如 100 次/分钟）；② 用令牌桶算法平滑限流（允许短时突发）；③ 超限返回 429 且带 `Retry-After`；④ 多实例部署时能指出内存实现的局限与 Redis 方案的改造点。
+**答**：为 `server/api/**` 实现限流中间件：① 按 API key（header `x-api-key`）区分用户，每用户独立配额（如 100 次/分钟）；② 用令牌桶算法平滑限流（允许短时突发）；③ 超限返回 429 且带 `Retry-After`；④ 多实例部署时能指出内存实现的局限与 Redis 方案的改造点。
 
 ```ts
 // server/middleware/rate-limit.ts

@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-027：手写 Zustand 多 store 实例工厂（按业务 id 创建独立 store）
 
-**题目要求**：
+**答**：
 - 场景：IM 页面每个会话一个独立 store（未读数、消息列表）。实现 `createSessionStore(sessionId)`，重复创建返回同一实例（缓存复用）。
 - 提供 `destroySessionStore(sessionId)`：清缓存、断开订阅，防内存泄漏。
 - 保证并发调用幂等。

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-446：手写 Registry 镜像切换器
-**需求**：实现 `createRegistryFailover(registries)`：1) registries：`[{ name, url, priority }]`；2) 健康探测：定期 ping（/-/ping 端点）→ 不可用标记降级；3) install 时按优先级选 registry：主不可用切镜像；4) 切换事件记录（哪个包在哪个 registry 拿的——溯源）；5) 回主恢复：主恢复后逐步回切（避免全量回切风暴——按比例）；6) 一致性提示：镜像与主可能不同步（新包在镜像缺失）→ 主可用时优先主。
+**答**：实现 `createRegistryFailover(registries)`：1) registries：`[{ name, url, priority }]`；2) 健康探测：定期 ping（/-/ping 端点）→ 不可用标记降级；3) install 时按优先级选 registry：主不可用切镜像；4) 切换事件记录（哪个包在哪个 registry 拿的——溯源）；5) 回主恢复：主恢复后逐步回切（避免全量回切风暴——按比例）；6) 一致性提示：镜像与主可能不同步（新包在镜像缺失）→ 主可用时优先主。
 
 ```javascript
 export function createRegistryFailover(registries) {

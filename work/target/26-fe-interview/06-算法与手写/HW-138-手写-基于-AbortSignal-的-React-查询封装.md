@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-138：手写 useQuery 最小实现——缓存、竞态、重试、失效重取与卸载中止（React Query 核心）
 **答**：React Query 核心语义的最小复刻：① 缓存（Map key→{data, ts}）+ staleTime；② 竞态（AbortController + seq）；③ 失效重取（invalidate 触发订阅者刷新）；④ 重试退避；⑤ 卸载中止；⑥ loading/error/stale 状态机。
 
 ```javascript

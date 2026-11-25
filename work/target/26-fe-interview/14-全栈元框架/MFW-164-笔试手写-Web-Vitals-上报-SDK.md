@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-164：笔试：手写一个 Web Vitals 上报 SDK
-**题目**：实现 `initVitals(options)`：① 用 PerformanceObserver 监听 LCP（`largest-contentful-paint`）；② LCP 取最后一次有效条目（页面停止变化前的最大值）；③ 页面隐藏（visibilitychange → hidden）时上报最终值；④ 上报用 sendBeacon，失败降级 fetch keepalive；⑤ 采样率控制与去重（同一 metric 只上报一次）。
+**答**：实现 `initVitals(options)`：① 用 PerformanceObserver 监听 LCP（`largest-contentful-paint`）；② LCP 取最后一次有效条目（页面停止变化前的最大值）；③ 页面隐藏（visibilitychange → hidden）时上报最终值；④ 上报用 sendBeacon，失败降级 fetch keepalive；⑤ 采样率控制与去重（同一 metric 只上报一次）。
 
 ```ts
 type VitalsOpts = { endpoint: string; sampleRate?: number; route?: string };

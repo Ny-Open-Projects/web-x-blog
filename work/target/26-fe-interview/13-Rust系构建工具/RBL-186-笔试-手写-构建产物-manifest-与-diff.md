@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-186：笔试：手写构建产物 manifest 生成器（含缓存复用完整性校验）
 
-**题目**：写 gen-manifest.mjs：1) 扫描 dist 目录（递归）；2) 生成 manifest：每个文件记录 {path, size, gzipSize, hash(sha256 前 16)}，含 HTML 内引用的资源关联（script/link 标签解析）；3) 输出 manifest.json 按 path 排序；4) 提供 verify(manifest, dist)：校验 manifest 与实际目录一致（无缺文件、hash 对上），缓存恢复场景用（防"缓存命中但产物目录不完整"）；5) HTML 引用缺失资源（引用了不存在的 chunk）要报错。
+**答**：写 gen-manifest.mjs：1) 扫描 dist 目录（递归）；2) 生成 manifest：每个文件记录 {path, size, gzipSize, hash(sha256 前 16)}，含 HTML 内引用的资源关联（script/link 标签解析）；3) 输出 manifest.json 按 path 排序；4) 提供 verify(manifest, dist)：校验 manifest 与实际目录一致（无缺文件、hash 对上），缓存恢复场景用（防"缓存命中但产物目录不完整"）；5) HTML 引用缺失资源（引用了不存在的 chunk）要报错。
 
 ```javascript
 // gen-manifest.mjs

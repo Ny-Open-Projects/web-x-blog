@@ -27,3 +27,9 @@ function intercept(requestUrl) {
   return local ? { body: local, mime: guessMime(path) } : null; // 读不到也回退网络
 }
 ```
+
+**追问**：
+
+1. 拦截返回的 HTML 里相对路径资源，还能命中映射表吗？ → 取决于 base URL；若 HTML 以 `file://` 返回，相对路径会变成本地文件路径而绕过拦截，需用虚拟域名（如 `https://app.local/`）作基址。
+2. 拦截响应漏了哪个头会导致白屏？ → 最常见是 `Content-Type` 和 `Content-Encoding`：JS 被当 text/plain 拒绝执行，gzip 内容未声明编码会乱码，MIME 必须与线上完全一致。
+3. 版本切换时用户正停留在旧页面，会出什么问题？ → 映射表一换，旧页面再请求旧 hash 资源会 404；必须保留旧版本目录一个周期，只让新导航用新表，或提示用户刷新。

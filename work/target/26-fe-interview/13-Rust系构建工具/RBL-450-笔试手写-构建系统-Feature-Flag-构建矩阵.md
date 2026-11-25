@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-450：手写 Feature Flag 构建矩阵
-**需求**：实现 `expandBuildMatrix(flags, configs)`：1) flags：`{ f1: [true, false], f2: ['a', 'b'] }`；2) 笛卡尔积展开：所有组合 × 所有环境配置 → 构建矩阵（但禁止全展开——组合爆炸）；3) 约束过滤：`{ requires: { f2: ['a'] } }`——f1=true 需要 f2=a（非法组合剔除）；4) 命名规则：产物目录按 flag 组合命名（f1t-f2a）；5) 去重优化：相同 DefinePlugin 组合的产物只构建一次（结果复用）；6) 输出矩阵（含每个组合的 envHash 与产物复用关系）。
+**答**：实现 `expandBuildMatrix(flags, configs)`：1) flags：`{ f1: [true, false], f2: ['a', 'b'] }`；2) 笛卡尔积展开：所有组合 × 所有环境配置 → 构建矩阵（但禁止全展开——组合爆炸）；3) 约束过滤：`{ requires: { f2: ['a'] } }`——f1=true 需要 f2=a（非法组合剔除）；4) 命名规则：产物目录按 flag 组合命名（f1t-f2a）；5) 去重优化：相同 DefinePlugin 组合的产物只构建一次（结果复用）；6) 输出矩阵（含每个组合的 envHash 与产物复用关系）。
 
 ```javascript
 export function expandBuildMatrix(flags, configs, { constraints = {} } = {}) {

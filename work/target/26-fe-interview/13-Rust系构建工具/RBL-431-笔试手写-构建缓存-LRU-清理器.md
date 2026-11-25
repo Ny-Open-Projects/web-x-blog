@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-431：手写构建缓存 LRU 清理器
-**需求**：实现 `evictCache(entries, { maxSize })`：1) entries：`[{ key, size, lastUsed, pinned }]`（pinned=关键任务缓存不可清）；2) 超过 maxSize 时按 lastUsed 升序（LRU）逐个删除，直到达标；3) pinned 条目跳过；全部 pinned 且仍超限 → 返回 { overLimit: true }（明确不可达而非静默）；4) 删除批次输出（可审计：删了哪些）；5) 保护策略：单次最多删 50%（防止一次清光导致雪崩全量重算）；6) 并发访问安全说明（清理与写入并发时的窗口语义）。
+**答**：实现 `evictCache(entries, { maxSize })`：1) entries：`[{ key, size, lastUsed, pinned }]`（pinned=关键任务缓存不可清）；2) 超过 maxSize 时按 lastUsed 升序（LRU）逐个删除，直到达标；3) pinned 条目跳过；全部 pinned 且仍超限 → 返回 { overLimit: true }（明确不可达而非静默）；4) 删除批次输出（可审计：删了哪些）；5) 保护策略：单次最多删 50%（防止一次清光导致雪崩全量重算）；6) 并发访问安全说明（清理与写入并发时的窗口语义）。
 
 ```javascript
 export function evictCache(entries, { maxSize, maxRatio = 0.5 } = {}) {

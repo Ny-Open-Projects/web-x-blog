@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-301：笔试题：手写低代码 DSL→Vue 出码器？
-**题目**：实现 `generate(dsl) → vue SFC 字符串`：1) 组件树递归生成 template（缩进）；2) props 中表达式 `{{expr}}` 转为 :prop 绑定；3) 事件 onClick 字符串表达式转 @click 方法引用；4) 生成 script setup（数据源/方法声明）。
+**答**：实现 `generate(dsl) → vue SFC 字符串`：1) 组件树递归生成 template（缩进）；2) props 中表达式 `{{expr}}` 转为 :prop 绑定；3) 事件 onClick 字符串表达式转 @click 方法引用；4) 生成 script setup（数据源/方法声明）。
 **评分点**：
 - 递归生成正确（children 嵌套 + 缩进）。
 - 表达式 vs 字面量区分正确（type: 'expression' → :bind）。

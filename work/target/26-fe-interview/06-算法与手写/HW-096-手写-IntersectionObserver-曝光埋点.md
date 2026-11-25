@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-096：手写曝光埋点（IntersectionObserver）——批量上报、去重、50% 阈值与离开即算
 **答**：曝光定义：元素 50% 可见且持续（或进入即算，按业务）。实现：单例 IO 观察所有埋点元素，进入时记录时间戳与首次可见，离开/页面隐藏时结算曝光时长，批量上报 + 已曝光去重。用 Map 存待结算项，visibilitychange 时 flush。
 
 ```javascript

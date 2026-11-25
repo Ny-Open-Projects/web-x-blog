@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-462：手写构建工具 AB 双跑验证
-**需求**：实现 `createShadowBuild(oldTool, newTool)`：1) PR 构建双跑：主路径用旧工具（用户无感），影子跑新工具；2) 产物对比：功能等价性（smoke 断言）+ 产物 diff 摘要（chunk 结构/体积）；3) 影子超时（3x 主路径时长）计为不兼容（防假通过）；4) 结果聚合：连续 N 个 PR 全通过 → canPromote（迁移决策依据）；5) 失败归因：diff 的第一个差异点定位（哪个 chunk/模块）。
+**答**：实现 `createShadowBuild(oldTool, newTool)`：1) PR 构建双跑：主路径用旧工具（用户无感），影子跑新工具；2) 产物对比：功能等价性（smoke 断言）+ 产物 diff 摘要（chunk 结构/体积）；3) 影子超时（3x 主路径时长）计为不兼容（防假通过）；4) 结果聚合：连续 N 个 PR 全通过 → canPromote（迁移决策依据）；5) 失败归因：diff 的第一个差异点定位（哪个 chunk/模块）。
 
 ```javascript
 export function createShadowBuild(oldTool, newTool, { shadowTimeoutFactor = 3, promoteN = 20 } = {}) {

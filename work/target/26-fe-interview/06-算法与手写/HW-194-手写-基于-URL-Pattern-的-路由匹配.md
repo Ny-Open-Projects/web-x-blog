@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-194：手写 URLPattern 路由匹配——内置 pattern 匹配（groups 提取）与降级正则
 **答**：URLPattern API（Chrome 95+）替代手写正则路由（HW-071 的现代版）：`new URLPattern({ pathname: '/goods/:id' })` → exec 返回 groups.id；支持通配 `:id?`/`:path+`；降级到正则版（同语义）。
 
 ```javascript

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## FRP-291：笔试：手写迷你 Vapor createFor
-**题**：实现 `createFor(container, renderItem, getKey, source)`：source 为响应式数组（watch 驱动）；key→block 映射复用 DOM；新增 renderItem、删除移除并调用 cleanup；顺序变化按新序 insertBefore；无 diff 算法但保证正确与最少重排。
+**答**：实现 `createFor(container, renderItem, getKey, source)`：source 为响应式数组（watch 驱动）；key→block 映射复用 DOM；新增 renderItem、删除移除并调用 cleanup；顺序变化按新序 insertBefore；无 diff 算法但保证正确与最少重排。
 
 ```javascript
 function createFor(container, renderItem, getKey, source) {
@@ -44,6 +44,3 @@ function createFor(container, renderItem, getKey, source) {
 - 项级 cleanups（Vapor 块作用域语义）。
 - 删除时先清理再移除。
 - 能指出「全量 append 重排」可优化为 LIS/标记位重排（说出即可）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-3fc17b4c-20de-4a01-9250-05192eb8a843-cwd'; fi
-exit "$__zcode_status"

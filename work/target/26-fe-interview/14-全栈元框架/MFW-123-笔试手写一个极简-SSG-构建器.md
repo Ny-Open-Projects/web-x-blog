@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-123：笔试：手写一个极简 SSG 构建器（路由 + 渲染 + 输出）
-**题目**：实现 `build(config)`：① 遍历静态路由与带 `getStaticPaths` 的动态路由；② 用模板函数渲染 HTML；③ 输出到 dist 目录（含 index.html 与嵌套目录）；④ 渲染失败收集错误最后统一报告，失败的页面不产文件；⑤ 并发渲染（Promise pool，限制 8）。
+**答**：实现 `build(config)`：① 遍历静态路由与带 `getStaticPaths` 的动态路由；② 用模板函数渲染 HTML；③ 输出到 dist 目录（含 index.html 与嵌套目录）；④ 渲染失败收集错误最后统一报告，失败的页面不产文件；⑤ 并发渲染（Promise pool，限制 8）。
 
 ```ts
 import { mkdir, writeFile } from 'fs/promises';

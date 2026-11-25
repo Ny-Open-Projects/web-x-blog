@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-408：Action 装饰器
-**需求**：实现 `guardedAction({ capacity, windowMs, need, prepare, execute, onDenied })`：1) 顺序铁律：鉴权 → 限流 → schema → 业务（鉴权最先——匿名流量不耗限流预算）；2) 限流失败 429 带 Retry-After（MFW-294 协议）；3) schema fail 返回字段级 errors（MFW-339 协议）；4) 业务抛 AppError(kind) 透传给客户端 error 协议；5) 全程 try/finally 释放资源；6) 拒绝与成功都打点（维度：step）。
+**答**：实现 `guardedAction({ capacity, windowMs, need, prepare, execute, onDenied })`：1) 顺序铁律：鉴权 → 限流 → schema → 业务（鉴权最先——匿名流量不耗限流预算）；2) 限流失败 429 带 Retry-After（MFW-294 协议）；3) schema fail 返回字段级 errors（MFW-339 协议）；4) 业务抛 AppError(kind) 透传给客户端 error 协议；5) 全程 try/finally 释放资源；6) 拒绝与成功都打点（维度：step）。
 
 ```javascript
 export function guardedAction({ spec, opts = {}) {

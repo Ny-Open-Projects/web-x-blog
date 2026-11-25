@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-425：树规模限制器
-**需求**：实现 `guardRscTree(render, { maxDepth = 40, maxNodes = 5000, onBreach })`：1) 渲染期计数（React Fiber 不可直查——用 Babel 插件期静态上報 + 运行时 createElement wrap 双保险：运行时 wrap 计数实际节点、静态分析报潜在深链）；2) 超限行为分级：dev 抛错（定位组件链）/prod 降级（该子树替换为「内容过大」占位——页面不死）；3) 递归组件防炸（如无限嵌套评论树——depth 计数天然覆盖）；4) 输出违例 { route, depth, nodes, path }。
+**答**：实现 `guardRscTree(render, { maxDepth = 40, maxNodes = 5000, onBreach })`：1) 渲染期计数（React Fiber 不可直查——用 Babel 插件期静态上報 + 运行时 createElement wrap 双保险：运行时 wrap 计数实际节点、静态分析报潜在深链）；2) 超限行为分级：dev 抛错（定位组件链）/prod 降级（该子树替换为「内容过大」占位——页面不死）；3) 递归组件防炸（如无限嵌套评论树——depth 计数天然覆盖）；4) 输出违例 { route, depth, nodes, path }。
 
 ```javascript
 let budget = null

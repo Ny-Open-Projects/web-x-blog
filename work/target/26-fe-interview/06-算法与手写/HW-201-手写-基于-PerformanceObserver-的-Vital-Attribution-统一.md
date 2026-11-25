@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-201：手写 Vital 归因统一采集器——四指标归因字段（element/invoke/phase）映射到统一 schema
 **答**：四指标归因统一：LCP（element/url + 四段）、INP（target/三段 + LoAF invoker）、CLS（sources 矩形）、TTFB（导航分段）——映射到统一 schema {metric, value, attribution:{cause, suspect, phase}}，看板一套查询查所有归因。
 
 ```javascript

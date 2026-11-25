@@ -39,12 +39,26 @@ async function lcpAttribution(url) {
     ? ['LCP 是图片：建议 preload + AVIF + 合适尺寸']
     : ['LCP 是文本：字体 swap + 关键 CSS 内联'];
   return {
-    element: `${r.tag}#${r.id || ''} size=${Math.round(r.size / 1024)}KB`,
+    element: `${r.tag}#${r.id || ''} area=${Math.round(r.size)}px²`,  // size 是像素面积, 非文件字节
     lcpMs: Math.round(r.startTime),
     ttfbMs: Math.round(r.ttfb),
     loadPhaseMs: Math.round(r.startTime - r.ttfb),       // 含加载+渲染两段
-    advice: r.loadPhaseMs > 1500 ? adv : ['当前 LCP 达标'],
+    advice: (r.startTime - r.ttfb) > 1500 ? adv : ['当前 LCP 达标'],
   };
 }
 lcpAttribution('https://example.com').then(console.log);
 ```
+
+## 补充：评分点与变体
+
+**评分点**：
+
+- 能通过 PerformanceObserver 加 buffered 拿到 LCP 元素，输出 tag、id 与尺寸。
+- 耗时分解到 TTFB、资源加载、渲染三段，而不是只报总时长。
+- 建议按元素类型分流：图片走 preload 与格式优化，文本走字体与关键 CSS。
+- 有超时兜底与浏览器关闭，避免脚本挂死。
+
+**变体与延伸**：
+
+1. 为什么要用 buffered？ → 脚本注入晚于 LCP 发生时仍能拿到历史条目，不加就永远采不到。
+2. 无头浏览器跑出的 LCP 能代表真实用户吗？ → 不能，只作回归门禁，真实判断看 RUM 分位与设备分布。

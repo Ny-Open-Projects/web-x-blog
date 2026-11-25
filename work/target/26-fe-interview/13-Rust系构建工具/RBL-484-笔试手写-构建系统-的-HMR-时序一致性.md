@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-484：手写 HMR 时序一致性守卫
-**需求**：实现 `createHmrSequencer(ws)`：1) 问题：多次编辑产生多个 HMR update——客户端应用顺序必须与服务端生成顺序一致（乱序 = 状态不一致）；2) 序号协议：update 带 seq，客户端按 seq 严格递增应用（gap 检测——丢包则请求全量刷新）；3) 快速编辑合并：同一文件的连续编辑合并为一次 update（防抖 + 末值）；4) stale update 丢弃：客户端正在应用 update N 时收到 N+1——排队不丢弃（每个 update 都有效）；5) 断线重连：seq 恢复协议（重连后请求当前版本快照）。
+**答**：实现 `createHmrSequencer(ws)`：1) 问题：多次编辑产生多个 HMR update——客户端应用顺序必须与服务端生成顺序一致（乱序 = 状态不一致）；2) 序号协议：update 带 seq，客户端按 seq 严格递增应用（gap 检测——丢包则请求全量刷新）；3) 快速编辑合并：同一文件的连续编辑合并为一次 update（防抖 + 末值）；4) stale update 丢弃：客户端正在应用 update N 时收到 N+1——排队不丢弃（每个 update 都有效）；5) 断线重连：seq 恢复协议（重连后请求当前版本快照）。
 
 ```javascript
 export function createHmrSequencer() {

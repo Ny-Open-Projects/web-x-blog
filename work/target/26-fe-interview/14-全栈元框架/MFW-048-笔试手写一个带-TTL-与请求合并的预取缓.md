@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-048：笔试：手写带 TTL 与请求合并的客户端预取缓存
-**题目**：实现 `createPrefetchCache()`：`prefetch(key, fn)` 立即发起（in-flight 合并）；`read(key)` 返回值或 Promise——TTL 内返回缓存值；过期且有缓存值则返回旧值并后台刷新（SWR）；无缓存则等待 fn。`clear(prefix)` 按前缀批量失效；页面卸载自动清空（提供 dispose）。
+**答**：实现 `createPrefetchCache()`：`prefetch(key, fn)` 立即发起（in-flight 合并）；`read(key)` 返回值或 Promise——TTL 内返回缓存值；过期且有缓存值则返回旧值并后台刷新（SWR）；无缓存则等待 fn。`clear(prefix)` 按前缀批量失效；页面卸载自动清空（提供 dispose）。
 
 ```javascript
 function createPrefetchCache({ ttl = 30_000 } = {}) {

@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-150：笔试：手写自定义 lint 规则（模型层禁止裸调 fetch）
 
-**题目**：写规则 no-fetch-in-service：1) 遍历源码 AST；2) 当文件路径含 `services/` 且出现裸 `fetch(url)` 调用（非经过封装的 http.get/post）时报错；3) 错误信息带行号（由 span 换算）；4) 支持豁免：调用点前一行有 `// oxlint-disable-next-line no-fetch-in-service` 注释则跳过；5) 输出诊断数组 [{file, line, message}]，可对接任意 lint 引擎（思路等价 oxlint/ESLint 的 visitor 规则）。
+**答**：写规则 no-fetch-in-service：1) 遍历源码 AST；2) 当文件路径含 `services/` 且出现裸 `fetch(url)` 调用（非经过封装的 http.get/post）时报错；3) 错误信息带行号（由 span 换算）；4) 支持豁免：调用点前一行有 `// oxlint-disable-next-line no-fetch-in-service` 注释则跳过；5) 输出诊断数组 [{file, line, message}]，可对接任意 lint 引擎（思路等价 oxlint/ESLint 的 visitor 规则）。
 
 ```typescript
 // rules/no-fetch-in-service.ts

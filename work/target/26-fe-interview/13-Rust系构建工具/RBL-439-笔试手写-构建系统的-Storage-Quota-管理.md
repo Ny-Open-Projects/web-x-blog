@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-439：手写构建存储配额管理
-**需求**：实现 `createQuotaManager(root, { limitBytes })`：1) `usage()`：目录树大小统计（du 语义——递归 stat 聚合，缓存目录大小）；2) 写入前配额检查：预计写入超限 → 触发 LRU 清理（RBL-431）后再检查；仍超 → 拒绝写入（返回 quota 错误，调用方降级不缓存）；3) 软硬限：软限 80% 告警 + 预清理、硬限 100% 拒绝；4) 按域配额（各任务缓存独立配额防单任务吃光）；5) `report()` { usage, limit, perDomain, topConsumers }。
+**答**：实现 `createQuotaManager(root, { limitBytes })`：1) `usage()`：目录树大小统计（du 语义——递归 stat 聚合，缓存目录大小）；2) 写入前配额检查：预计写入超限 → 触发 LRU 清理（RBL-431）后再检查；仍超 → 拒绝写入（返回 quota 错误，调用方降级不缓存）；3) 软硬限：软限 80% 告警 + 预清理、硬限 100% 拒绝；4) 按域配额（各任务缓存独立配额防单任务吃光）；5) `report()` { usage, limit, perDomain, topConsumers }。
 
 ```javascript
 import fs from 'node:fs'

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-430：手写发布前 Checklist 执行器
-**需求**：实现 `runChecklist(items, { manifest, ci })`：1) items：`[{ name, run: async (ctx) => { ok, detail }, blocking, timeoutMs }]`；2) 并行执行 + 各自超时（超时=失败防挂死）；3) blocking 分级：blocking 失败 → 拒绝发布；非 blocking 失败 → 警告收集；4) 白名单豁免：`{ check, issue, until }`——过期豁免无效；5) 结果持久化（发布记录关联 checklist 结果——审计链）；6) 输出人类报告（PASS/FAIL/WARN 表格）。
+**答**：实现 `runChecklist(items, { manifest, ci })`：1) items：`[{ name, run: async (ctx) => { ok, detail }, blocking, timeoutMs }]`；2) 并行执行 + 各自超时（超时=失败防挂死）；3) blocking 分级：blocking 失败 → 拒绝发布；非 blocking 失败 → 警告收集；4) 白名单豁免：`{ check, issue, until }`——过期豁免无效；5) 结果持久化（发布记录关联 checklist 结果——审计链）；6) 输出人类报告（PASS/FAIL/WARN 表格）。
 
 ```javascript
 async function withTimeout(promise, ms, name) {

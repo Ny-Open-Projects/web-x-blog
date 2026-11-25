@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-192：笔试：手写 TanStack Query 风格的脱水复水桥
-**题目**：实现最小化的 Query 缓存脱水复水：① 服务端 `dehydrate(cache)` 把缓存项序列化为可嵌入 HTML 的 JSON（key 序列化、状态收敛为 `{ data, dataUpdatedAt }`）；② `serialize` 产出防 XSS 的 script 标签内容（转义 `</script`）；③ 客户端 `hydrate(cache, payload)` 把条目写回缓存，且**只写客户端没有的/更新的**（客户端已 invalidated 的条目不覆盖）；④ 进行中的 promise 不能序列化（跳过并标记）。
+**答**：实现最小化的 Query 缓存脱水复水：① 服务端 `dehydrate(cache)` 把缓存项序列化为可嵌入 HTML 的 JSON（key 序列化、状态收敛为 `{ data, dataUpdatedAt }`）；② `serialize` 产出防 XSS 的 script 标签内容（转义 `</script`）；③ 客户端 `hydrate(cache, payload)` 把条目写回缓存，且**只写客户端没有的/更新的**（客户端已 invalidated 的条目不覆盖）；④ 进行中的 promise 不能序列化（跳过并标记）。
 
 ```ts
 type Entry = { data: unknown; dataUpdatedAt: number; invalidated?: boolean };

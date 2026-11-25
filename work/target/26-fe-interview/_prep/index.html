@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大厂前端面试备战系统</title>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#ffffff; --ink:#1a1d24; --sub:#5b6472;
+  --line:#e3e6ec; --brand:#3b5bdb; --brand-soft:#edf1ff;
+  --warn:#c2410c; --ok:#0f766e; --gold:#b45309;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.65; padding:40px 20px 80px;
+}
+.wrap{max-width:1080px;margin:0 auto}
+header{text-align:center;margin-bottom:44px}
+h1{font-size:32px;letter-spacing:-.5px;margin-bottom:10px}
+.sub{color:var(--sub);font-size:15px}
+.stats{display:flex;justify-content:center;gap:14px;margin-top:26px;flex-wrap:wrap}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 26px;min-width:124px}
+.stat b{display:block;font-size:24px;color:var(--brand);font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--sub)}
+h2{font-size:19px;margin:46px 0 18px;padding-left:12px;border-left:4px solid var(--brand)}
+.lead{color:var(--sub);font-size:14px;margin-bottom:16px}
+.layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.layer{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;position:relative;transition:.18s}
+.layer:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,41,59,.08)}
+.layer .tag{position:absolute;top:14px;right:16px;font-size:11px;color:var(--brand);background:var(--brand-soft);padding:3px 9px;border-radius:20px}
+.layer h3{font-size:15px;margin-bottom:8px}
+.layer p{font-size:13px;color:var(--sub)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.dir{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.18s}
+.dir:hover{box-shadow:0 8px 24px rgba(30,41,59,.08)}
+.dir summary{padding:16px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:12px}
+.dir summary::-webkit-details-marker{display:none}
+.dir summary::after{content:"▾";margin-left:auto;color:var(--sub);font-size:12px;transition:.2s}
+.dir[open] summary::after{transform:rotate(180deg)}
+.dir .name{font-weight:600;font-size:14.5px}
+.dir .badge{margin-left:auto;font-size:11.5px;color:var(--sub);background:#f1f3f7;border-radius:20px;padding:3px 10px;font-variant-numeric:tabular-nums}
+.dir .body{padding:0 18px 18px;font-size:13px;color:#333}
+.dir .body .row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+.pill{font-size:11.5px;padding:2px 9px;border-radius:20px;background:var(--brand-soft);color:var(--brand)}
+.pill.warn{background:#fff4ed;color:var(--warn)}
+.dir ul{margin:8px 0 0 18px;color:var(--sub)}
+.dir li{margin-bottom:4px}
+.dir a{display:inline-block;margin-top:10px;font-size:13px;color:var(--brand);text-decoration:none;border-bottom:1px dashed var(--brand)}
+.week{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px;display:flex;gap:16px;align-items:flex-start}
+.week .n{flex:0 0 52px;height:52px;border-radius:12px;background:var(--brand-soft);color:var(--brand);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.week h4{font-size:14.5px;margin-bottom:4px}
+.week p{font-size:13px;color:var(--sub)}
+.cta{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.cta a{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;text-decoration:none;color:inherit;transition:.18s}
+.cta a:hover{border-color:var(--brand);box-shadow:0 8px 24px rgba(59,91,219,.12)}
+.cta b{display:block;font-size:15px;margin-bottom:6px;color:var(--brand)}
+.cta span{font-size:13px;color:var(--sub)}
+.note{margin-top:14px;background:#fffbf0;border:1px solid #f5e2b8;border-radius:12px;padding:16px 18px;font-size:13.5px;color:#7c5a12}
+footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:56px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>大厂前端面试备战系统</h1>
+    <p class="sub">10,000 题精编 · 三个专项层（经典算法 / 场景算法 / 前端手写）· 17 个方向 · 四层漏斗 · 8 周路径</p>
+    <div class="stats">
+      <div class="stat"><b>10,000</b><span>精编题库</span></div>
+      <div class="stat"><b>430</b><span>经典算法</span></div>
+      <div class="stat"><b>550</b><span>场景算法</span></div>
+      <div class="stat"><b>410</b><span>前端手写</span></div>
+    </div>
+  </header>
+
+  <h2>四层漏斗：按时间取用</h2>
+  <p class="lead">不要试图刷完一万题。从下往上按需取用，时间越少越往上层走。</p>
+  <div class="layers">
+    <div class="layer"><span class="tag">入口</span><h3>L1 考点地图</h3><p>17 方向考察权重、必会/高频/加分三档清单。第一天先看全局。</p></div>
+    <div class="layer"><span class="tag">排期</span><h3>L2 学习路径</h3><p>8 周计划、每日 3 小时节奏、每周自测标准与压缩方案。</p></div>
+    <div class="layer"><span class="tag">冲刺</span><h3>L3 核心 500</h3><p>按大厂权重筛出的高价值题，面试 338 + 笔试 162。</p></div>
+    <div class="layer"><span class="tag">押题</span><h3>L3+ 精讲 100</h3><p>30 秒口述版 + 三层追问链 + 采分点 + 易错点。</p></div>
+    <div class="layer"><span class="tag">字典</span><h3>L4 全库索引</h3><p>17 个方向分册，10,000 题可点跳原卡，用于查漏补缺。</p></div>
+  </div>
+
+  <h2>17 个方向 · 点开看考点</h2>
+  <p class="lead">括号内为该方向题库题量。🔥 标记的是性价比最高、最该优先攻的方向。</p>
+  <div class="grid">
+    <details class="dir" open>
+      <summary><span class="name">01 语言与基础 🔥</span><span class="badge">956 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">一面主战场</span><span class="pill">占比 25%</span></div>
+      <ul><li>闭包/原型链/this/事件循环/Promise</li><li>深浅拷贝、防抖节流、ESM</li><li>HTTP 缓存、HTTP/1.1→3、TCP、跨域</li><li>渲染流程、重排重绘、BFC、flex</li></ul>
+      <a href="06-完整题库索引/01-语言与基础.md">查看 956 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">02 框架与业务 🔥</span><span class="badge">770 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">一~二面核心</span><span class="pill">占比 20%</span></div>
+      <ul><li>Hooks 原理与闭包陷阱、useEffect 时机</li><li>Fiber 架构、diff 与 key</li><li>Vue 响应式、nextTick、编译优化</li><li>SSR 与水合、组件通信</li></ul>
+      <a href="06-完整题库索引/02-框架与业务.md">查看 770 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">06 算法与手写 🔥</span><span class="badge">960 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">一面白板</span><span class="pill">占比 20%</span></div>
+      <ul><li>防抖节流/深拷贝/Promise/EventEmitter/LRU</li><li>链表、二叉树、双指针、滑动窗口</li><li>排序、二分、DFS/BFS</li><li>DP：爬楼梯、最长子序列、背包</li></ul>
+      <a href="06-完整题库索引/06-算法与手写.md">查看 960 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">05 性能与安全 🔥</span><span class="badge">661 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">二面必问</span><span class="pill">占比 15%</span></div>
+      <ul><li>LCP/INP/CLS 与优化手段</li><li>首屏优化清单、虚拟列表</li><li>XSS/CSRF/CSP、同源策略</li><li>监控体系与性能归因</li></ul>
+      <a href="06-完整题库索引/05-性能与安全.md">查看 661 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">03 场景实战</span><span class="badge">554 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">二~三面</span><span class="pill">占比 15%</span></div>
+      <ul><li>表单引擎、长列表、权限路由</li><li>大促秒杀、支付对账、IM、直播</li><li>导入导出、上传</li></ul>
+      <a href="06-完整题库索引/03-场景实战.md">查看 554 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">07 架构与设计</span><span class="badge">582 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">三面</span><span class="pill">占比 8%</span></div>
+      <ul><li>组件库设计、微前端方案对比</li><li>状态管理选型、设计模式落地</li><li>架构演进、灰度回滚、监控体系</li></ul>
+      <a href="06-完整题库索引/07-架构与设计.md">查看 582 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">04 工程化与构建</span><span class="badge">397 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">二面</span><span class="pill">占比 6%</span></div>
+      <ul><li>webpack 流程、loader/plugin</li><li>Vite 为什么快、tree-shaking 条件</li><li>代码分割、sourcemap、monorepo</li></ul>
+      <a href="06-完整题库索引/04-工程化与构建.md">查看 397 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">11 软技能与求职 🔥</span><span class="badge">434 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">三面 + HR</span><span class="pill">占比 10%</span></div>
+      <ul><li>90 秒自我介绍、STAR 项目叙述</li><li>离职原因、职业规划、薪资谈判</li><li>冲突/失败/影响力行为面</li></ul>
+      <a href="06-完整题库索引/11-软技能与求职.md">查看 434 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">08 服务端与全栈</span><span class="badge">495 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">加分项</span><span class="pill">占比 5%</span></div>
+      <ul><li>Node 事件循环、BFF 容错</li><li>幂等、限流、Redis、分布式锁</li><li>SSR、消息队列、灰度</li></ul>
+      <a href="06-完整题库索引/08-服务端与全栈.md">查看 495 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">12 状态管理新范式</span><span class="badge">545 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">框架深水</span><span class="pill">占比 3%</span></div>
+      <ul><li>Zustand/Jotai/Valtio 选型</li><li>TanStack Query 缓存模型</li><li>XState、原子化、多标签同步</li></ul>
+      <a href="06-完整题库索引/12-状态管理新范式.md">查看 545 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">10 AI 与 Agent</span><span class="badge">602 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">新兴加分</span><span class="pill">占比 3%</span></div>
+      <ul><li>流式渲染、中断重试</li><li>Function Calling、RAG 展示</li><li>上下文管理、多模型路由</li></ul>
+      <a href="06-完整题库索引/10-AI与Agent.md">查看 602 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">09 垂直方向</span><span class="badge">609 题</span></summary>
+      <div class="body"><div class="row"><span class="pill warn">按岗位取舍</span></div>
+      <ul><li>可视化、音视频、跨端、低代码</li><li>非目标方向可直接跳过</li></ul>
+      <a href="06-完整题库索引/09-垂直方向.md">查看 609 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">14 全栈元框架</span><span class="badge">483 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">前沿加分</span></div>
+      <ul><li>RSC、Server Actions</li><li>Next App Router、ISR/PPR</li><li>流式渲染与水合</li></ul>
+      <a href="06-完整题库索引/14-全栈元框架.md">查看 483 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">16 自动化测试</span><span class="badge">485 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">质量工程</span></div>
+      <ul><li>单测设计、测试金字塔、Mock</li><li>E2E、契约测试、flaky 治理</li></ul>
+      <a href="06-完整题库索引/16-自动化测试.md">查看 485 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">15 AI 结对开发工程化</span><span class="badge">487 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">新兴加分</span></div>
+      <ul><li>AI 生成代码验证、上下文管理</li><li>AI 代码审查、团队规范</li></ul>
+      <a href="06-完整题库索引/15-AI结对开发工程化.md">查看 487 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">13 Rust 系构建工具</span><span class="badge">501 题</span></summary>
+      <div class="body"><div class="row"><span class="pill warn">工程深水</span></div>
+      <ul><li>SWC/OXC 为什么快、Rspack</li><li>NAPI 边界、插件生态</li></ul>
+      <a href="06-完整题库索引/13-Rust系构建工具.md">查看 501 题 →</a></div>
+    </details>
+    <details class="dir">
+      <summary><span class="name">17 去框架化组件</span><span class="badge">479 题</span></summary>
+      <div class="body"><div class="row"><span class="pill">技术视野</span></div>
+      <ul><li>Signals 模型、细粒度更新</li><li>Web Components、islands</li><li>设计系统 token</li></ul>
+      <a href="06-完整题库索引/17-去框架化组件.md">查看 479 题 →</a></div>
+    </details>
+  </div>
+
+  <h2>算法专项 · 430 道经典题</h2>
+  <p class="lead">大厂笔试的真实形态是 LeetCode 风格，不是场景包装题。这块单独拎出来，按 22 个题型组织，每题带题干、暴力→最优思路、可运行代码、复杂度、易错点、变体追问。</p>
+  <div class="cta" style="margin-bottom:16px">
+    <a href="09-算法冲刺手册.md"><b>09 算法冲刺手册 · 先读这个</b><span>题型识别决策树 ｜ 数据规模反推算法 ｜ 20 个核心模板 ｜ 30 天刷题计划 ｜ 考场五步法</span></a>
+    <a href="../18-经典算法题库/_INDEX.md"><b>18 经典算法题库 · 全部 22 型</b><span>C-001 ~ C-430，按题型分文件，可点跳；含优先级标注与常见误区</span></a>
+  </div>
+  <p class="lead" style="margin-top:22px">下面这 <strong>8 个题型覆盖大厂前端笔试 80% 的考点</strong>，共 160 题，时间紧就先攻这些：</p>
+  <div class="cta">
+    <a href="../18-经典算法题库/01-数组与矩阵.md"><b>01 数组与矩阵 · 20 题</b><span>两数/三数之和、区间合并、螺旋矩阵、原地修改、前缀和、接雨水</span></a>
+    <a href="../18-经典算法题库/03-双指针与滑动窗口.md"><b>03 双指针与滑窗 · 20 题</b><span>有序双指针、最小覆盖子串、无重复最长、滑窗最大值、原地删除</span></a>
+    <a href="../18-经典算法题库/05-链表.md"><b>05 链表 · 20 题</b><span>反转、K 个一组、环检测、复制随机指针、排序链表、哑结点技巧</span></a>
+    <a href="../18-经典算法题库/08-二叉树遍历与构造.md"><b>08 二叉树遍历 · 20 题</b><span>前中后序递归+迭代、层序、前序中序构造、Morris 遍历</span></a>
+    <a href="../18-经典算法题库/09-二叉树属性与路径.md"><b>09 二叉树路径 · 20 题</b><span>直径、最大路径和、路径总和 III、LCA、打家劫舍 III（树形 DP）</span></a>
+    <a href="../18-经典算法题库/11-回溯与DFS.md"><b>11 回溯与 DFS · 20 题</b><span>全排列、子集、组合去重、N 皇后、数独、单词搜索、剪枝</span></a>
+    <a href="../18-经典算法题库/15-动态规划-线性与序列.md"><b>15 DP 线性与序列 · 20 题</b><span>爬楼梯、打家劫舍、LIS 贪心+二分、编辑距离、股票四状态</span></a>
+    <a href="../18-经典算法题库/16-动态规划-背包与区间.md"><b>16 DP 背包与区间 · 20 题</b><span>01/完全/多重背包、零钱兑换、最大正方形、戳气球、区间 DP</span></a>
+  </div>
+  <div class="note" style="margin-top:16px"><strong>算法这块最容易走的三条弯路：</strong>① 只刷 Easy——区分度全在 Medium；② 看题解就算做完——判断标准是关掉答案限时 20 分钟一次写对；③ 忽略 ACM 模式——阿里/腾讯笔试算法对但输入解析错就是 0 分，<a href="../18-经典算法题库/22-ACM模式与大厂笔试实操.md" style="color:inherit">C-416~430 那 15 篇</a>要单独练。</div>
+
+  <h2>场景算法专题 · 550 题重组为 10 型</h2>
+  <p class="lead">经典算法练的是「手法」，场景题练的是「选型」——只给你一句业务描述，你要自己定数据结构和复杂度上限。这块把原题库 550 道场景题按「业务场景 → 算法映射」重组，每型含映射表、场景范式、6 道精讲。</p>
+  <div class="cta" style="margin-bottom:14px">
+    <a href="10-场景算法冲刺手册.md"><b>10 场景算法冲刺手册</b><span>50 条映射总表 ｜ 五步答题法 ｜ 10 个场景范式 ｜ 五个最容易犯的错 ｜ 20 天计划</span></a>
+    <a href="../19-场景算法专题/_INDEX.md"><b>19 场景算法专题 · 全部 10 型</b><span>精讲 60 题 + 3 套模拟卷（电商大促 / 后台管理 / IM 协同）</span></a>
+  </div>
+  <div class="cta">
+    <a href="../19-场景算法专题/01-列表表格与文本处理.md"><b>01 列表表格与文本 · 6 讲</b><span>去重、分组、多字段排序、稳定分区、格式化、模板插值</span></a>
+    <a href="../19-场景算法专题/02-树形数据与级联.md"><b>02 树形数据与级联 · 6 讲</b><span>扁平↔嵌套、路径回填、级联剪枝、LCA、权限树半选</span></a>
+    <a href="../19-场景算法专题/03-链表栈队列与哈希.md"><b>03 链表栈队列哈希 · 6 讲</b><span>双栈队列、单调栈、LRU/LFU、快慢指针、环形缓冲</span></a>
+    <a href="../19-场景算法专题/07-缓存去重与异步调度.md"><b>07 缓存去重与调度 · 6 讲</b><span>布隆、游标分页、退避重试、请求去重、竞态、三种限流</span></a>
+    <a href="../19-场景算法专题/05-动态规划与贪心.md"><b>05 DP 与贪心 · 6 讲</b><span>凑单背包、LIS 与 diff、编辑距离、区间调度、反悔贪心</span></a>
+    <a href="../19-场景算法专题/11-场景算法模拟卷.md"><b>模拟卷 · 3 套</b><span>限时 90 分钟，含评分口径与「卡在哪一步」复盘表</span></a>
+    <a href="../19-场景算法专题/12-原卡全量索引.md"><b>550 张原卡全量索引</b><span>精讲 60 题之外的 490 题，按「归属专题」一列即可捞出打卡</span></a>
+  </div>
+
+  <h2>手写题专题 · 410 题重组为 10 型</h2>
+  <p class="lead">前端面试投入产出比最高的一块。按 L1 必会 / L2 进阶 / L3 深水三层组织，每题除了实现，还列出<b>必须覆盖的边界</b>和<b>追问链</b>——面试官看的正是这两样。</p>
+  <div class="cta" style="margin-bottom:14px">
+    <a href="11-手写题冲刺手册.md"><b>11 手写题冲刺手册</b><span>L1 20 题必会清单 ｜ 四步答题法 ｜ 12 个万能模板 ｜ 10 个高频追问标准答法</span></a>
+    <a href="../20-手写题专题/_INDEX.md"><b>20 手写题专题 · 全部 10 型</b><span>精讲 60 题 + 3 套模拟卷（基础必会 / 工程实战 / 原理与设计）</span></a>
+  </div>
+  <div class="cta">
+    <a href="../20-手写题专题/01-异步与Promise体系.md"><b>01 异步与 Promise · 6 讲</b><span>Promise 核心与五个静态方法、并发控制、重试退避、可取消</span></a>
+    <a href="../20-手写题专题/02-函数工具与this绑定.md"><b>02 函数工具与 this · 6 讲</b><span>call/apply/bind、new、instanceof、防抖、节流、柯里化</span></a>
+    <a href="../20-手写题专题/03-对象数组与数据结构.md"><b>03 对象数组结构 · 6 讲</b><span>深拷贝、深比较、扁平化、去重、结构共享、防环遍历</span></a>
+    <a href="../20-手写题专题/05-框架原理手写.md"><b>05 框架原理 · 6 讲</b><span>Vue reactive、v-model、useState/useEffect、diff、useQuery</span></a>
+    <a href="../20-手写题专题/07-请求调度与限流.md"><b>07 请求调度限流 · 6 讲</b><span>p-limit、退避重试、令牌桶/漏桶/滑窗、去重合并、竞态防护</span></a>
+    <a href="../20-手写题专题/11-手写模拟卷.md"><b>模拟卷 · 3 套</b><span>45 分钟白板，含自评表——「主动报边界」是区分度最高的一栏</span></a>
+    <a href="../20-手写题专题/12-原卡全量索引.md"><b>410 张原卡全量索引</b><span>精讲 60 题之外的 350 题，按「归属专题」一列即可捞出打卡</span></a>
+  </div>
+  <div class="note" style="margin-top:16px"><strong>三块的关系：</strong>经典算法（18）练<b>手法</b>——模板怎么写得又对又快；场景算法（19）练<b>选型</b>——什么需求用什么结构；手写题（20）练<b>落地</b>——白板上 10 分钟写出能跑的代码。三块都要，但不能同时开始：先 18 建手法，再 19 练判断，最后 20 磨手感。</div>
+
+  <h2>8 周节奏</h2>
+  <p class="lead">每天 3 小时：早 0.5h 口述复习 · 白天 2h 主题学习 · 晚 0.5h 手写。</p>
+  <div class="week"><div class="n">W1</div><div><h4>JS 核心 + 手写入门</h4><p>闭包/原型/this/事件循环/Promise；手写防抖、深拷贝、EventEmitter</p></div></div>
+  <div class="week"><div class="n">W2</div><div><h4>浏览器 + 网络 + CSS</h4><p>URL 到渲染、HTTP 缓存与版本演进；手写 Promise.all</p></div></div>
+  <div class="week"><div class="n">W3</div><div><h4>框架原理（选一个深挖）</h4><p>Fiber/diff/Hooks 或 Vue 响应式与编译；两框架对比</p></div></div>
+  <div class="week"><div class="n">W4</div><div><h4>工程化 + 状态管理</h4><p>构建全流程、tree-shaking、TanStack Query 缓存模型</p></div></div>
+  <div class="week"><div class="n">W5</div><div><h4>性能 + 安全</h4><p>3 个实战优化案例带数据；XSS/CSRF/CSP 防御链</p></div></div>
+  <div class="week"><div class="n">W6</div><div><h4>算法 + 手写综合</h4><p>20 道高频手写 15 分钟内跑通；算法讲复杂度与优化</p></div></div>
+  <div class="week"><div class="n">W7</div><div><h4>场景 + 架构 + 项目复盘</h4><p>20 分钟项目叙述定稿；设计一个中台/微前端方案</p></div></div>
+  <div class="week"><div class="n">W8</div><div><h4>模拟面 + 查漏 + 软技能</h4><p>3 次全真模拟；90 秒自我介绍；反问清单</p></div></div>
+
+  <h2>直接进入</h2>
+  <div class="cta">
+    <a href="00-总纲.md"><b>00 总纲</b><span>这套东西怎么用、三种人三种打法</span></a>
+    <a href="01-大厂考点地图.md"><b>01 考点地图</b><span>17 方向三档清单与投入分配</span></a>
+    <a href="02-学习路径与节奏.md"><b>02 学习路径</b><span>8 周计划与压缩方案</span></a>
+    <a href="03-答题框架与表达.md"><b>03 答题框架</b><span>八股三层法、手写四步、场景五步</span></a>
+    <a href="04-核心500题.md"><b>04 核心 500 题</b><span>面试 338 + 笔试 162 冲刺清单</span></a>
+    <a href="05-精讲100题.md"><b>05 精讲 100 题</b><span>30 秒版 + 追问链 + 采分点</span></a>
+    <a href="07-项目复盘模板.md"><b>07 项目复盘</b><span>把项目讲成二面加分项</span></a>
+    <a href="08-面试前自检.md"><b>08 上场自检</b><span>T-24h 清单与临场原则</span></a>
+    <a href="09-算法冲刺手册.md"><b>09 算法冲刺手册</b><span>识别决策树 + 20 模板 + 30 天计划</span></a>
+    <a href="12-题库质量分级与去重报告.md"><b>12 质量审计</b><span>A/B/C 分级 · 核心 500 已全部达 A（500/0/0）· 语义重复 0.07%</span></a>
+    <a href="13-答案正确性核查报告.md"><b>13 正确性核查</b><span>571 卡逐张精读 · 111 处事实/语法错误已修 · 72 条存疑清单</span></a>
+  </div>
+
+  <h2>方向专题（2026-11-25 独立成库）</h2>
+  <div class="grid">
+    <a href="../21-数字孪生专题/_INDEX.md"><b>21 数字孪生专题</b><span>140 卡 · 孪生大屏场景 + 3D/WebGPU + 地图 GIS + 图表大屏</span></a>
+    <a href="../22-Agent前端专题/_INDEX.md"><b>22 Agent 前端专题</b><span>1,089 卡 · LLM 调用/流式 UI/RAG/工具调用/AI 结对（精选 18 核心卡）</span></a>
+    <a href="../23-NodeJS专题/_INDEX.md"><b>23 NodeJS 专题</b><span>495 卡 · 事件循环/Stream/限流幂等/MQ/运维（精选 28 核心卡）</span></a>
+    <a href="../../25-lowcode/posts/00.预先课%20-%20低代码大课必备技术"><b>25 低代码大课</b><span>229 篇全栈实战 · NestJS + React 低代码平台（独立目录）</span></a>
+  </div>
+
+  <div class="note"><strong>一条最重要的提醒：</strong>一万道题是字典，不是考卷；430 道算法题是弹药，也不是考卷。决定你能不能进大厂的，是那个能讲 20 分钟的项目、能扛三层追问的基础、15 分钟能跑通的手写。题库只负责让你不缺素材。</div>
+
+  <footer>大厂前端面试备战系统 · 精编题库 10,000 题 + 经典算法 430 题 · 生成于 2026-11-24</footer>
+</div>
+</body>
+</html>

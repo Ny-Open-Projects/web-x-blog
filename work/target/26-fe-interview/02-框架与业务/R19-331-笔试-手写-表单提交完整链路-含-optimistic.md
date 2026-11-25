@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-331：笔试：手写「评论提交」完整链路
-**题**：实现 CommentForm：客户端校验（非空/长度 ≤500）不通过不发请求；乐观插入评论（status: sending）；提交失败回滚并保留输入；成功替换为服务端数据；提交中禁用按钮。
+**答**：实现 CommentForm：客户端校验（非空/长度 ≤500）不通过不发请求；乐观插入评论（status: sending）；提交失败回滚并保留输入；成功替换为服务端数据；提交中禁用按钮。
 
 ```javascript
 function CommentForm({ postId, comments, addCommentAction }) {
@@ -48,6 +48,3 @@ function CommentForm({ postId, comments, addCommentAction }) {
 - 乐观插入 + sending 标记；失败回滚自动 + 输入恢复（手动 setText）。
 - pending 禁用按钮防重复。
 - addOptimistic 在 transition 内调用。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-6dd9dab0-96da-4d48-9652-01037b5b111b-cwd'; fi
-exit "$__zcode_status"

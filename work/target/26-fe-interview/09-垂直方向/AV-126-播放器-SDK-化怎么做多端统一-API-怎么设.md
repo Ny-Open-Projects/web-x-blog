@@ -37,3 +37,11 @@ export function createPlayer(platform: string, el: unknown, cfg: SdkConfig): Uni
 ```
 
 ## 十五、性能与 QoE 深化（AV-127 ~ AV-132）
+
+## 追问（补充）
+
+**追问**：
+
+1. 统一状态机里 stalled 与 loading 的边界怎么定，定错会怎样 → 播放中连续 3s 无 progress 才算 stalled，切源和 seek 属于 loading；混用会让卡顿率指标虚高甚至翻倍。
+2. 各端错误码语义不一致，监控怎么横向对比 → SDK 内做错误码归一表（网络、解码、鉴权、资源四类），原始码放 detail 字段保留排障信息，指标层只认归一码。
+3. SDK 升级后老业务插件不兼容怎么办 → 插件与 core 之间只依赖稳定事件协议并做版本协商，core 大版本升级提供兼容 shim 撑一个版本周期再删。

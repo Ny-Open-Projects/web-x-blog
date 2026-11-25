@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-436：笔试：实现元素 shadow 样式的「裸值」静态校验器。
-**题目**：输入元素 CSS 文本：颜色（#hex/rgb）、间距（px 除 0）、字体（除 var）出现即违规；var(--ds-*) 合法。输出违规行与建议 token。
+**答**：输入元素 CSS 文本：颜色（#hex/rgb）、间距（px 除 0）、字体（除 var）出现即违规；var(--ds-*) 合法。输出违规行与建议 token。
 
 ```javascript
 const RULES = [

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-407：手写 sourcemap 校验器
-**需求**：实现 `validateSourceMap(code, map)`：1) 校验 version=3、sources/sourcesContent 数量一致、mappings 可解析（VLQ 段结构合法）；2) 抽样验证：随机取 mappings 中的映射点 → 映射回源码行列 → 验证 sourcesContent 对应行存在；3) 校验 sources 相对路径可解析（与 sourceRoot 组合）；4) 返回 { ok, errors, sampled }（sampled 为实际抽样数）；5) 映射点解析实现 VLQ base64 解码（至少支持单段）。
+**答**：实现 `validateSourceMap(code, map)`：1) 校验 version=3、sources/sourcesContent 数量一致、mappings 可解析（VLQ 段结构合法）；2) 抽样验证：随机取 mappings 中的映射点 → 映射回源码行列 → 验证 sourcesContent 对应行存在；3) 校验 sources 相对路径可解析（与 sourceRoot 组合）；4) 返回 { ok, errors, sampled }（sampled 为实际抽样数）；5) 映射点解析实现 VLQ base64 解码（至少支持单段）。
 
 ```javascript
 const B64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'

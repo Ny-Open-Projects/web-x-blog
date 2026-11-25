@@ -46,3 +46,9 @@ const prefStore = new TypedStore<{ theme: "dark" | "light" }>(
   (old) => ({ theme: (old as { dark?: boolean }).dark ? "dark" : "light" }), // v1.dark → v2.theme
 );
 ```
+
+**追问**：
+
+1. 存储被外部写坏、`JSON.parse` 抛错会怎样？ → get 直接抛出导致整页崩溃；必须 try/catch，解析失败时返回 null 并清掉这个坏键。
+2. 迁移函数抛错或返回不合法的数据怎么办？ → 应回退到默认值、删除旧键并上报，否则每次读取都会在同一处抛错，形成死循环。
+3. localStorage 写满抛 `QuotaExceededError` 怎么处理？ → set 必须 try/catch，触发缓存淘汰或提示用户清理，不能假设写入一定成功。

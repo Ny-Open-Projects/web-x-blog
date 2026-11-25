@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-135：笔试：手写 RRv7 风格的 action + useFetcher 购物车操作
-**题目**：实现购物车页：① action 支持 add/remove/update-quantity 三种 intent；② 服务端校验数量与库存；③ 每行删除用 useFetcher（不触发页面导航）；④ 修改数量乐观更新；⑤ action 后 loader 数据自动刷新。
+**答**：实现购物车页：① action 支持 add/remove/update-quantity 三种 intent；② 服务端校验数量与库存；③ 每行删除用 useFetcher（不触发页面导航）；④ 修改数量乐观更新；⑤ action 后 loader 数据自动刷新。
 
 ```tsx
 // app/routes/cart.tsx

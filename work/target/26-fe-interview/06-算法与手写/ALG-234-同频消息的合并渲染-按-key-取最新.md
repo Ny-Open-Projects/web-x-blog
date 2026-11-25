@@ -5,8 +5,8 @@ categories: [场景算法]
 tags: [前端面试, 笔试题, 15]
 type: 笔试题
 ---
-
-**场景**：行情 WS 每秒 200 条 tick，同标的多次更新——逐条渲染 200 次 = INP 爆炸。合帧：一帧内的 tick 按 symbol 收敛为最新一条，每帧渲染一次。
+## ALG-234：行情列表：一帧内 200 条 tick 按 key 取最新渲染（Map 合帧聚合）
+**答**：行情 WS 每秒 200 条 tick，同标的多次更新——逐条渲染 200 次 = INP 爆炸。合帧：一帧内的 tick 按 symbol 收敛为最新一条，每帧渲染一次。
 
 **思路**：tick 入 Map（symbol → 最新 tick），rAF flush 一次渲染 Map 值；变价颜色动画用 CSS transition（合成器）避免逐条 class 切换卡顿。
 

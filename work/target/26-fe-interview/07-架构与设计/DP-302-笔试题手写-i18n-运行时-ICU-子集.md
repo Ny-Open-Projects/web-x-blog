@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-302：笔试题：手写 i18n 运行时（ICU 子集+回退链）？
-**题目**：实现 I18n 类：1) 懒加载语言包（动态 import）；2) t(key, params) 插值 {name}；3) 复数 t(key, {n}) 按 Intl.PluralRules 选 one/other；4) 回退链 zh-CN→zh→en；5) 缺 key 上报并返回 key。
+**答**：实现 I18n 类：1) 懒加载语言包（动态 import）；2) t(key, params) 插值 {name}；3) 复数 t(key, {n}) 按 Intl.PluralRules 选 one/other；4) 回退链 zh-CN→zh→en；5) 缺 key 上报并返回 key。
 **评分点**：
 - 懒加载并行去重（同一语言同时多次调用只 import 一次）。
 - 回退链构建正确（去重、顺序）。

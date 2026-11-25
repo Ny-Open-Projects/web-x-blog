@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-401：笔试题：手写轻量 IoC 容器
-**题目**：实现 Container：1) register(name, factory) 注册工厂函数；2) resolve(name) 支持依赖注入（factory 参数声明依赖名）；3) 默认单例缓存；4) 循环依赖检测报错。
+**答**：实现 Container：1) register(name, factory) 注册工厂函数；2) resolve(name) 支持依赖注入（factory 参数声明依赖名）；3) 默认单例缓存；4) 循环依赖检测报错。
 **评分点**：
 - 依赖解析用参数名（或显式 deps）递归 resolve。
 - 单例缓存正确（首次 resolve 后复用实例）。

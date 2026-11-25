@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-423：蓝图对账
-**需求**：实现 `reconcile(buildBlueprint, registry)`: 1) 三表互查：①失效注册表（写操作→tag 集）覆盖蓝图全部 tagPattern？未覆盖 = 改了数据没人失效；②预算表（route→p95Ms）缺新路由条目 → warn+默认档；③权限矩阵：蓝图 authz 点 ∈ 已声明权限码表（拼错权限码=永远 deny 的暗坑）；2) 输出 { missingInvalidation[], unbudgeted[], unknownAuthz[] }；3) CI 语义：unknownAuthz=fail（安全），其余 warn（债务可见）+ 豁免通道（MFW-464 issue+until）。
+**答**：实现 `reconcile(buildBlueprint, registry)`: 1) 三表互查：①失效注册表（写操作→tag 集）覆盖蓝图全部 tagPattern？未覆盖 = 改了数据没人失效；②预算表（route→p95Ms）缺新路由条目 → warn+默认档；③权限矩阵：蓝图 authz 点 ∈ 已声明权限码表（拼错权限码=永远 deny 的暗坑）；2) 输出 { missingInvalidation[], unbudgeted[], unknownAuthz[] }；3) CI 语义：unknownAuthz=fail（安全），其余 warn（债务可见）+ 豁免通道（MFW-464 issue+until）。
 
 ```javascript
 export function reconcile(b /*蓝图*/, reg /*{invalidations, budgets, authzCodes}*/, { strictAuthz = true } = {}) {

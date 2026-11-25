@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-488：边缘 AB 实验权重再平衡器
-**需求**：实现 `rebalance(experiment, observed)`：1) experiment = { buckets: [{ name, weight }] }，observed = { bucket: samples }；2) 线上样本比与配置权重比偏差 > 5%（SRM，样本比例失配）时报警并输出修正建议权重（使期望流量与实际对齐）；3) sticky 不变：修正只影响新进入用户，已分桶用户 uid → bucket 映射不动（hash 分桶输出保持）；4) 权重和必须归一到 100，某个 bucket 权重到 0 表示停止进人（自然出清）。
+**答**：实现 `rebalance(experiment, observed)`：1) experiment = { buckets: [{ name, weight }] }，observed = { bucket: samples }；2) 线上样本比与配置权重比偏差 > 5%（SRM，样本比例失配）时报警并输出修正建议权重（使期望流量与实际对齐）；3) sticky 不变：修正只影响新进入用户，已分桶用户 uid → bucket 映射不动（hash 分桶输出保持）；4) 权重和必须归一到 100，某个 bucket 权重到 0 表示停止进人（自然出清）。
 
 ```javascript
 export function rebalance(experiment, observed, { srmTol = 0.05 } = {}) {

@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-191：手写 offline-first 数据层——本地优先读写 + 服务端同步队列 + 冲突版本向量
 **答**：offline-first 数据层（本地优先架构）：读写都走本地 IDB（离线可用零延迟），写操作进同步队列（带版本号），恢复后与服务端对账（last-write-win 或版本向量检测冲突）。三层：Store（IDB 封装 HW-107）、Queue（outbox）、Sync（重放 + 冲突处理）。
 
 ```javascript

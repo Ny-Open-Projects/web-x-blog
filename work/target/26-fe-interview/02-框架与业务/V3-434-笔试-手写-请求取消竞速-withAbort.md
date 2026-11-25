@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-434：笔试：手写 AbortController 请求取消（组件卸载 + 覆盖旧请求）
-**题**：实现 `useFetchAbort(loaderFn)`：run() 每次调用前 abort 上一请求（切换参数场景）；组件卸载时 abort 进行中请求；返回 { data, run, cancel }；abort 触发的错误（AbortError）不进 error 状态。
+**答**：实现 `useFetchAbort(loaderFn)`：run() 每次调用前 abort 上一请求（切换参数场景）；组件卸载时 abort 进行中请求；返回 { data, run, cancel }；abort 触发的错误（AbortError）不进 error 状态。
 
 ```javascript
 function useFetchAbort(loaderFn) {
@@ -37,6 +37,3 @@ function useFetchAbort(loaderFn) {
 - AbortError 识别与忽略（不污染 error）。
 - 卸载 abort。
 - 错误只由最新请求写入（cur === controller 判断）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-5e1c2417-95a1-4af6-a6ee-719a7b075114-cwd'; fi
-exit "$__zcode_status"

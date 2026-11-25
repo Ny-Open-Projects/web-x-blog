@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-299：笔试题：手写 Koa Lite（洋葱模型+错误处理）？
-**题目**：实现 mini Koa：1) app.use 注册中间件；2) 洋葱执行（compose）；3) ctx = { req, res, body, status }；4) 未捕获错误进 app.onerror（默认 500）；5) listen 启动 HTTP server。
+**答**：实现 mini Koa：1) app.use 注册中间件；2) 洋葱执行（compose）；3) ctx = { req, res, body, status }；4) 未捕获错误进 app.onerror（默认 500）；5) listen 启动 HTTP server。
 **评分点**：
 - compose 正确（防多次 next）。
 - body 写入时机（中间件跑完后统一 end）。

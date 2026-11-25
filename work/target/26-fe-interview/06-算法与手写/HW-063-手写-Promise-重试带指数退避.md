@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-063：手写指数退避重试（retry）——支持退避系数、抖动与条件重试
 **答**：在 HW-008 基础上加工程化参数：退避 `delay * factor^i`、随机抖动（防惊群）、`shouldRetry(err)` 条件重试（429/5xx 重试，4xx 不重试）、totalTimeout 总兜底。递归 or 循环皆可，循环更清晰。
 
 ```javascript
@@ -34,11 +34,18 @@ function retry(task, {
   })();
 }
 
-// 用法：429 与 5xx 可重试，其余不重试
-retry((attempt) => fetch('/api/goods').then((r) => {
-  if (!r.ok) throw Object.assign(new Error(String(r.status)), { retryable: r.status === 429 || r.status >= 500 });
-  return r.json();
-}), { retries: 3, delay: 300 });
+// 用法：429 与 5xx 可重试，其余不重试（浏览器场景）
+// retry((attempt) => fetch('/api/goods').then((r) => {
+//   if (!r.ok) throw Object.assign(new Error(String(r.status)), { retryable: r.status === 429 || r.status >= 500 });
+//   return r.json();
+// }), { retries: 3, delay: 300 });
+
+// 可运行演示：模拟前两次 503（可重试）、第三次成功
+let calls = 0;
+retry(async () => {
+  if (++calls < 3) throw Object.assign(new Error('503'), { retryable: true });
+  return `ok after ${calls} tries`;
+}, { retries: 3, delay: 10 }).then(console.log);  // ok after 3 tries
 ```
 
 **评分点**：

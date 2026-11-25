@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-185：手写跨列表拖拽——dataTransfer 传 id + 拖入高亮判定 + 跨列表 splice 移动（含空列表落点）
 **答**：任务看板跨列拖拽：dataTransfer.setData 传任务 id（跨列表数据载体）；dragover 的 dropEffect 与高亮判定（列表容器 dragover 必须 preventDefault 才允许 drop）；空列表的落点（容器级 drop 处理——无子元素可命中）；跨列表移动 = 源列 splice 移除 + 目标列 splice 插入（不可变更新 HW-099）。
 
 ```javascript

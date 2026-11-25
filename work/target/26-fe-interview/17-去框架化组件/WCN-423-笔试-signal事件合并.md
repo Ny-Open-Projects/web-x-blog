@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-423：笔试：高频事件（input）写入信号的「帧合并」优化。
-**题目**：`frameSet(sig, v)`：同一帧内多次写合并（rAF 前 Last-Wins），帧边界统一 set。与直接 set 的对比（写次数统计）。
+**答**：`frameSet(sig, v)`：同一帧内多次写合并（rAF 前 Last-Wins），帧边界统一 set。与直接 set 的对比（写次数统计）。
 
 ```javascript
 let pending = new Map(), rafId = null;

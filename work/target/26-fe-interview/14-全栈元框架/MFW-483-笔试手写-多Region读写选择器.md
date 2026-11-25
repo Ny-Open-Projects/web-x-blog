@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-483：多 Region 写主读从选择器
-**需求**：实现 `pickDb(req, { primary, replicas, lag })`：1) 写操作（POST/PUT/DELETE/Action）一律走 primary（无论其距离）；2) 读走最近副本，但页面有"读己之写"需求（header 带 `x-after-write: <ts>`）且副本滞后 > ts 时强制回落 primary；3) 副本健康不佳（lag 超阈值 5s）摘除；4) 全副本摘除时回落 primary 并打标 `degraded`（读压力转移比拒绝服务好）。
+**答**：实现 `pickDb(req, { primary, replicas, lag })`：1) 写操作（POST/PUT/DELETE/Action）一律走 primary（无论其距离）；2) 读走最近副本，但页面有"读己之写"需求（header 带 `x-after-write: <ts>`）且副本滞后 > ts 时强制回落 primary；3) 副本健康不佳（lag 超阈值 5s）摘除；4) 全副本摘除时回落 primary 并打标 `degraded`（读压力转移比拒绝服务好）。
 
 ```javascript
 const LAG_LIMIT = 5000

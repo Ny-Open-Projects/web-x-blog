@@ -49,3 +49,11 @@ await esbuild.build({
 // 限制小结：改不了 AST、没有 per-module render 钩子（rollup transform 的替代即 onLoad）；
 // go 二进制并发处理，速度是 babel 的 10-100x，生态换性能就是这个交易。
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 为什么 esbuild 没提供 AST 插件？ → 它是 Go 侧多线程编译管线，插件只能在 onResolve/onLoad 里按文本和字节介入，没有节点级钩子；需要改语法树就串 babel 或 swc 做后处理。
+2. onResolve 与 onLoad 的匹配顺序？ → 注册时可用 filter 与 namespace 限定，onResolve 按插件注册顺序尝试，第一个返回结果即终止；onLoad 按 resolve 结果的 namespace 加 path 匹配。
+3. 插件能力的边界在哪？ → 能改解析路径、提供虚拟模块、转译内容；不能做依赖图完成后的跨模块分析，也没有 webpack 那套 emit 与 afterEmit 生命周期。

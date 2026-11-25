@@ -45,3 +45,11 @@ const vnode3 = h(MyComponent, { title: 'hi' });
 console.log(vnode1.shapeFlag); // 1 | 8 = 9：元素 + 文本子节点
 console.log(vnode2.shapeFlag); // 1 | 16 = 17：元素 + 数组子节点
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. shapeFlag 为什么用位运算而不是普通枚举字段？ → 把节点类型与 children 类型压进一个整数，patch 时用位与直接判断分支，比多次 typeof / Array.isArray 便宜，也让编译器能把判断内联成常量。
+2. 组件 vnode 的 el 和 subTree 是什么关系？ → 组件 vnode 自身不产 DOM，它的 el 指向子树根元素；subTree 是组件 render 返回的 vnode，patch 过程中靠 el 与 subTree.el 双向对齐，卸载时也从 el 向上找容器。
+3. 手写 h 时 children 同时传字符串和数组会怎样？ → 归一化是按"字符串 / 数组 / 对象"三选一分支走的，混传会落到对象分支被当成 slots；React 侧混传直接报错，这是两边归一化策略的差异，写库时必须显式判断。

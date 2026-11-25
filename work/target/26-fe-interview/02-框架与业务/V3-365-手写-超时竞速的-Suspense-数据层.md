@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-365：手写：带超时竞速与兜底的 Suspense 数据层
-**题**：实现 `loadResource(loader, { timeout = 3000, fallback = null })`：loader 超时改用 fallback 数据（不 reject），失败也回退 fallback 并上报错误；多次调用同 key 需去重（进行中的 promise 复用）。
+**答**：实现 `loadResource(loader, { timeout = 3000, fallback = null })`：loader 超时改用 fallback 数据（不 reject），失败也回退 fallback 并上报错误；多次调用同 key 需去重（进行中的 promise 复用）。
 
 ```javascript
 const inflight = new Map()

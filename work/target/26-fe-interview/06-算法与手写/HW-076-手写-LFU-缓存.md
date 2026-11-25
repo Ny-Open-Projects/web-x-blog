@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-076：手写 LFU 缓存——访问次数淘汰 + 同频次内 LRU（O(1) 两级结构）
 **答**：LFU 难点在 O(1)：需要两级结构——`freqMap: freq -> 双向链表（该频次的键，链头最旧）`，外加 `key -> {value, freq, node}` 索引。get/set 都把 key 从 freq 链挪到 freq+1 链头（链尾最旧先淘汰）；容量满时从最小频次链的尾端淘汰；最低频次指针随淘汰上移、随新增复位为 1。
 
 ```javascript

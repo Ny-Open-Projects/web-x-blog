@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-477：loading.js 嵌套优先级解析器
-**需求**：实现 `pickLoadingFallback(route, segments)`：1) segments 为路径各层是否定义 loading.js：['app', 'app/blog', 'app/blog/[slug]']；2) 导航到 route 时选**最浅**的已定义 loading 边界显示（父级 loading 包裹整个子树——嵌套流式语义）；3) 若 route 自身层有 loading 则精确显示自身（就近优先）；4) 返回 { slot, depth }；无任何 loading 时返回 null（整页等待）——并给出该情况下建议（在中间层补 loading）。
+**答**：实现 `pickLoadingFallback(route, segments)`：1) segments 为路径各层是否定义 loading.js：['app', 'app/blog', 'app/blog/[slug]']；2) 导航到 route 时选**最浅**的已定义 loading 边界显示（父级 loading 包裹整个子树——嵌套流式语义）；3) 若 route 自身层有 loading 则精确显示自身（就近优先）；4) 返回 { slot, depth }；无任何 loading 时返回 null（整页等待）——并给出该情况下建议（在中间层补 loading）。
 
 ```javascript
 export function pickLoadingFallback(route, segments) {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-299：笔试：手写错误监控 SDK
-**题**：实现 monitor.init(app)：捕获 App.onError / onUnhandledRejection / wx.onMemoryWarning；错误去重指纹（消息前 100 字符，10 分钟窗口）；自动附带上下文（route/页面栈深度/系统信息/内存水位）；关键流程 try-catch 包装 helper；上报失败本地暂存重试。
+**答**：实现 monitor.init(app)：捕获 App.onError / onUnhandledRejection / wx.onMemoryWarning；错误去重指纹（消息前 100 字符，10 分钟窗口）；自动附带上下文（route/页面栈深度/系统信息/内存水位）；关键流程 try-catch 包装 helper；上报失败本地暂存重试。
 
 ```javascript
 const monitor = {
@@ -47,6 +47,3 @@ function tryGuard(name, fn) {
 - 指纹去重 + 时间窗口。
 - 上下文丰富（路由/栈深/内存）。
 - 上报失败暂存重试；tryGuard 不吞错（report 后 rethrow）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-bc7067f4-66f8-473c-b13e-04746ce79aa3-cwd'; fi
-exit "$__zcode_status"

@@ -5,8 +5,8 @@ categories: [场景算法]
 tags: [前端面试, 笔试题, 15]
 type: 笔试题
 ---
-
-**场景**：筛选面板显示价格区间："¥100 - ¥200"（中文）vs "$100 - $200"（英文）vs "100~200 元"——Intl 支持 range format（Intl.NumberFormat.formatRange），不同 locale 的连接符/符号位置自动正确。
+## ALG-252：价格区间与数字范围的本地化格式化：Intl.NumberFormat 的 RangeFormat 与自定义区间？
+**答**：筛选面板显示价格区间："¥100 - ¥200"（中文）vs "$100 - $200"（英文）vs "100~200 元"——Intl 支持 range format（Intl.NumberFormat.formatRange），不同 locale 的连接符/符号位置自动正确。
 
 **思路**：formatRange（同币种区间）；步长对齐（区间端点按档位取整：99.9 → 100）；开放区间（200 以上 → ¥200 起/¥200+）。
 

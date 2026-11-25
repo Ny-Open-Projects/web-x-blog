@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-413：手写通用脱水/复水桥（带版本与截断）
-**需求**：实现 `dehydrate(obj)` 与 `rehydrate(str)`：1) dehydrate 输出 JSON 字符串，附带 `__v` 版本与 `__ts` 时间戳；2) 值内 Date→`{__t:'date',v:ISO}`、Map→`{__t:'map',v:[[k,v]]}`、Set→`{__t:'set',v:[...]}`；3) 循环引用抛错；4) 单条体积超 maxBytes 抛错（防止 HTML 膨胀）；5) rehydrate 还原上述类型并校验版本——版本不符返回 null（调用方走默认值）。
+**答**：实现 `dehydrate(obj)` 与 `rehydrate(str)`：1) dehydrate 输出 JSON 字符串，附带 `__v` 版本与 `__ts` 时间戳；2) 值内 Date→`{__t:'date',v:ISO}`、Map→`{__t:'map',v:[[k,v]]}`、Set→`{__t:'set',v:[...]}`；3) 循环引用抛错；4) 单条体积超 maxBytes 抛错（防止 HTML 膨胀）；5) rehydrate 还原上述类型并校验版本——版本不符返回 null（调用方走默认值）。
 
 ```javascript
 const VERSION = 2

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-406：笔试：手写 keep-alive 核心（LRU 缓存 + include/exclude）
-**题**：用 Map 实现组件实例 LRU 缓存：`keepAliveCache(max)` 提供 get(key, factory) 与 prune；命中时移到「最新」；超容量淘汰最旧（先销毁实例再删）；支持 include 列表过滤。
+**答**：用 Map 实现组件实例 LRU 缓存：`keepAliveCache(max)` 提供 get(key, factory) 与 prune；命中时移到「最新」；超容量淘汰最旧（先销毁实例再删）；支持 include 列表过滤。
 
 ```javascript
 function keepAliveCache(max = 10) {
@@ -43,6 +43,3 @@ function keepAliveCache(max = 10) {
 - 淘汰时先 unmount 再删除（防副作用/内存泄漏）。
 - prune 用 while 处理 max 突降场景。
 - include 过滤可在 get 前判断（说出即可）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-91b2be68-60a6-4e0f-b4b3-28d1c443efd7-cwd'; fi
-exit "$__zcode_status"

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-122：手写 SWR 乐观更新 Hook（useOptimisticMutation：快照 + 回滚 + 对账）
-**需求**：实现 `useOptimisticMutation(key, mutationFn)`，返回 `trigger(variables)`：1) 立即用 updater(cur, variables) 更新缓存；2) 快照旧值；3) mutationFn 失败回滚快照并抛错；4) 成功后用服务端返回值覆盖；5) 同一 key 并发两次 trigger 时不互相覆盖（队列化）。边界：updater 抛错不发起请求；组件卸载后不再写缓存。
+**答**：实现 `useOptimisticMutation(key, mutationFn)`，返回 `trigger(variables)`：1) 立即用 updater(cur, variables) 更新缓存；2) 快照旧值；3) mutationFn 失败回滚快照并抛错；4) 成功后用服务端返回值覆盖；5) 同一 key 并发两次 trigger 时不互相覆盖（队列化）。边界：updater 抛错不发起请求；组件卸载后不再写缓存。
 
 ```javascript
 import { useRef, useEffect } from 'react'

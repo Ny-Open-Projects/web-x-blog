@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## WCN-407：笔试：实现 signal 的 equals 自定义比较选项。
-**题目**：`signal(v, {equals})`：写时用 equals(new, old) 判定是否传播；默认严格相等（NaN 处理：Object.is）。
+**答**：`signal(v, {equals})`：写时用 equals(new, old) 判定是否传播；默认严格相等（NaN 处理：Object.is）。
 
 ```javascript
 const defaultEq = Object.is;

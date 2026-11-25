@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-499：迷你 Next——静态/ISR/流式组合渲染器（收官大题）
-**需求**：实现 `createMiniNext({ routes, render, ttl })`：1) routes = { '/about': 'static', '/feed': 'stream', '/p/:id': 'isr' }；2) 请求分派：static 直接读预渲染产物（构建期注入）；isr 走缓存 + 过期单飞再生成（旧值先行）；stream 用分块渲染：先写壳，各段 promise 完成按序写出（乱序到达也要按段序输出）；3) 统一错误路径：渲染异常返回降级页 + x-render-error 头；4) 中间件层：每请求 `x-mnw-*` 头注入 trace，全部渲染模式走同一入口（组合而非分裂——元框架本质）。
+**答**：实现 `createMiniNext({ routes, render, ttl })`：1) routes = { '/about': 'static', '/feed': 'stream', '/p/:id': 'isr' }；2) 请求分派：static 直接读预渲染产物（构建期注入）；isr 走缓存 + 过期单飞再生成（旧值先行）；stream 用分块渲染：先写壳，各段 promise 完成按序写出（乱序到达也要按段序输出）；3) 统一错误路径：渲染异常返回降级页 + x-render-error 头；4) 中间件层：每请求 `x-mnw-*` 头注入 trace，全部渲染模式走同一入口（组合而非分裂——元框架本质）。
 
 ```javascript
 export function createMiniNext({ routes, render, ttl = 30_000 }) {

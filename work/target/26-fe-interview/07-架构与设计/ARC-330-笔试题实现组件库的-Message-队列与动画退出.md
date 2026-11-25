@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-330：笔试题：实现组件库的 Message 队列与动画退出？
-**题目**：实现 `message.success(text)` 全局提示：1) 命令式 API + React 集成（无 Provider 也可用）；2) 自动关闭（3s）+ hover 暂停；3) 退出动画播放完才移除 DOM（leaving 状态）；4) 同屏上限（超限移除最旧的）。
+**答**：实现 `message.success(text)` 全局提示：1) 命令式 API + React 集成（无 Provider 也可用）；2) 自动关闭（3s）+ hover 暂停；3) 退出动画播放完才移除 DOM（leaving 状态）；4) 同屏上限（超限移除最旧的）。
 **评分点**：
 - 命令式调用与 React 渲染桥接正确（单例容器挂载 + 事件/store 驱动）。
 - 定时器与 hover 暂停正确（mouseleave 重置计时）。

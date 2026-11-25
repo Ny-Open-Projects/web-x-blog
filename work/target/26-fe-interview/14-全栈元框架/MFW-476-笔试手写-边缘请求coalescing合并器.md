@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-476：边缘请求 coalescing 合并器
-**需求**：实现 `coalesce(key, fetcher, { windowMs = 10 })`：1) 10ms 窗口内同 key 的并发调用合并为一次真实 fetch（热门商品页数百并发同 key 是常态）；2) 首个调用立刻发车（不等待窗口攒满——首响优先），窗口内的后来者直接搭车；3) 失败传播：fetch reject 时所有搭车者一起 reject（同 key 同命运）；4) 跨 isolate 不保证（说明注释）——需要全局去重用共享缓存（如 Data Cache），本函数只做请求级合并。
+**答**：实现 `coalesce(key, fetcher, { windowMs = 10 })`：1) 10ms 窗口内同 key 的并发调用合并为一次真实 fetch（热门商品页数百并发同 key 是常态）；2) 首个调用立刻发车（不等待窗口攒满——首响优先），窗口内的后来者直接搭车；3) 失败传播：fetch reject 时所有搭车者一起 reject（同 key 同命运）；4) 跨 isolate 不保证（说明注释）——需要全局去重用共享缓存（如 Data Cache），本函数只做请求级合并。
 
 ```javascript
 const inflight = new Map() // key -> Promise（请求级，isolate 生命周期）

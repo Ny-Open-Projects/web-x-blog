@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-104：笔试：手写任务缓存 LRU 驱逐器（容量 + 冷任务驱逐）
-**题目**：实现 TaskCache(maxEntries)：1) get/set 基本语义，set 超容量时驱逐最久未使用；2) 记录命中统计（hits/misses/evictions）；3) pinned 集合：被下游依赖的任务不驱逐（依赖完整性）；4) 驱逐时若任务是 pinned 则跳过找下一个；5) get 命中要更新"最近使用"位置。
+**答**：实现 TaskCache(maxEntries)：1) get/set 基本语义，set 超容量时驱逐最久未使用；2) 记录命中统计（hits/misses/evictions）；3) pinned 集合：被下游依赖的任务不驱逐（依赖完整性）；4) 驱逐时若任务是 pinned 则跳过找下一个；5) get 命中要更新"最近使用"位置。
 
 ```javascript
 class TaskCache {

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-439：手写 Server Action 幂等客户端封装
-**需求**：实现 `createActionClient(action)`：1) `call(args)`：参数稳定序列化后去重——同参数在途调用共享同一 Promise；2) 成功结果短缓存（10s 内同参数直接返回缓存）；3) 自动附加幂等键 `__opId`（同参数重试复用同一 opId——服务端去重依赖它）；4) 失败重试同 opId 最多 1 次；5) 超时（30s）后进入「待确认」态：返回 pending 标记而非错误（结果可能已生效）；6) `confirmPending(opId)` 轮询确认接口收尾。
+**答**：实现 `createActionClient(action)`：1) `call(args)`：参数稳定序列化后去重——同参数在途调用共享同一 Promise；2) 成功结果短缓存（10s 内同参数直接返回缓存）；3) 自动附加幂等键 `__opId`（同参数重试复用同一 opId——服务端去重依赖它）；4) 失败重试同 opId 最多 1 次；5) 超时（30s）后进入「待确认」态：返回 pending 标记而非错误（结果可能已生效）；6) `confirmPending(opId)` 轮询确认接口收尾。
 
 ```javascript
 export function createActionClient(action, { cacheMs = 10_000, timeoutMs = 30_000 } = {}) {

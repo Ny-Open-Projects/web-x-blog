@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MP-272：笔试：手写小程序虚拟列表核心
-**题**：实现页面逻辑：定高行高 ROW_H=80；scroll-view onScroll 计算可视窗口（含上下各 5 条缓冲），setData 只更新 visible 数据与 padding（上下占位高度）；滚动节流（rAF 语义用 16ms）；支持 scrollToIndex。
+**答**：实现页面逻辑：定高行高 ROW_H=80；scroll-view onScroll 计算可视窗口（含上下各 5 条缓冲），setData 只更新 visible 数据与 padding（上下占位高度）；滚动节流（rAF 语义用 16ms）；支持 scrollToIndex。
 
 ```javascript
 const ROW_H = 80
@@ -38,6 +38,3 @@ Page({
 - 上下占位 padding 撑住滚动高度（核心技巧）。
 - 滚动节流 + 卸载清理。
 - 说明不定高版本需实测行高校正（说出思路即可）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-45125328-054c-42df-b9f7-d745a3782d49-cwd'; fi
-exit "$__zcode_status"

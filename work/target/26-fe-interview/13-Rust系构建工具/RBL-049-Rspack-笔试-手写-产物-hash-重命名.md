@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-049：笔试：手写产物重命名与 HTML 引用同步器（contenthash）
-**题目**：实现 applyContentHash(files)：1) 对每个 .js/.css 计算内容 sha256 前 8 位；2) 把 `app.js` 重命名为 `app.<hash>.js`；3) HTML 内引用（script src / link href）同步替换为新文件名；4) css 内 url() 引用的图片也参与重命名与替换；5) 循环引用（css 引 js 无此场景，但 html↔manifest）要保证替换只发生一轮不重复。
+**答**：实现 applyContentHash(files)：1) 对每个 .js/.css 计算内容 sha256 前 8 位；2) 把 `app.js` 重命名为 `app.<hash>.js`；3) HTML 内引用（script src / link href）同步替换为新文件名；4) css 内 url() 引用的图片也参与重命名与替换；5) 循环引用（css 引 js 无此场景，但 html↔manifest）要保证替换只发生一轮不重复。
 
 ```javascript
 const crypto = require('crypto');

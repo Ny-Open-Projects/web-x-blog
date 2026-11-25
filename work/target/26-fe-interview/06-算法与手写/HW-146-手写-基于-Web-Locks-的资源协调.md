@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-146：手写 Web Locks 资源协调——跨标签页互斥任务（清理/同步/选主）与锁泄漏防护
 **答**：跨标签页互斥（只有一页做清理/同步）：navigator.locks.request({ifAvailable}) 非阻塞抢锁（抢不到立即返回 false——多数场景"跳过"比"排队"正确）；持锁心跳（长任务中锁持有者崩溃，浏览器自动释放——但任务要幂等可重入）；steal 模式（forceRelease 语义用 steal: true 抢死锁）。
 
 ```javascript

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-492：请求级 Promise 缓存（React cache() 语义）
-**需求**：实现 `createRequestCache()`：1) `wrap(fn)` 返回包装函数：同一请求上下文内同参数调用只执行一次（React cache() 的核心：Request Memoization 的用户级版本）；2) 缓存键 = fn.id + 稳定化参数（深序列化排序）；3) 缓存的是 **promise 本身**（调用方各自 await 同一 promise——不必等首次完成才能命中）；4) 请求结束 `clear()`（AsyncLocalStorage 挂钩演示：每个请求一个独立 store，不跨请求泄漏）。
+**答**：实现 `createRequestCache()`：1) `wrap(fn)` 返回包装函数：同一请求上下文内同参数调用只执行一次（React cache() 的核心：Request Memoization 的用户级版本）；2) 缓存键 = fn.id + 稳定化参数（深序列化排序）；3) 缓存的是 **promise 本身**（调用方各自 await 同一 promise——不必等首次完成才能命中）；4) 请求结束 `clear()`（AsyncLocalStorage 挂钩演示：每个请求一个独立 store，不跨请求泄漏）。
 
 ```javascript
 import { AsyncLocalStorage } from 'node:async_hooks'

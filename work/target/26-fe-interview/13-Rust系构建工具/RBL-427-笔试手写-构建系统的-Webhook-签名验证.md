@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-427：手写 Webhook 签名验证
-**需求**：实现 `verifyWebhook(req, secret)`：1) 签名头：`X-Signature: t=<ts>,v1=<hmac>`——HMAC-SHA256(secret, `${ts}.${rawBody}`)；2) 防重放：ts 与当前差超 5 分钟拒绝；3) 时序安全比较（constant-time，防计时攻击）；4) 原始 body 校验（JSON 解析前先验签——解析后重签不等价）；5) 密钥轮换：支持多有效密钥（按 kid 头选择——旧密钥宽限期）；6) 返回 { ok, reason? }。
+**答**：实现 `verifyWebhook(req, secret)`：1) 签名头：`X-Signature: t=<ts>,v1=<hmac>`——HMAC-SHA256(secret, `${ts}.${rawBody}`)；2) 防重放：ts 与当前差超 5 分钟拒绝；3) 时序安全比较（constant-time，防计时攻击）；4) 原始 body 校验（JSON 解析前先验签——解析后重签不等价）；5) 密钥轮换：支持多有效密钥（按 kid 头选择——旧密钥宽限期）；6) 返回 { ok, reason? }。
 
 ```javascript
 import crypto from 'node:crypto'

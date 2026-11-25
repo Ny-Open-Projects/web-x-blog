@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-295：笔试题：手写图片懒加载与 WebP 降级链？
-**题目**：实现 LazyImage 组件逻辑：1) IntersectionObserver 进入视口加载（rootMargin 预加载）；2) src 协商：优先 .webp，浏览器不支持回退 .jpg（特性检测）；3) 加载失败重试 1 次后显示占位；4) 卸载取消 observer。
+**答**：实现 LazyImage 组件逻辑：1) IntersectionObserver 进入视口加载（rootMargin 预加载）；2) src 协商：优先 .webp，浏览器不支持回退 .jpg（特性检测）；3) 加载失败重试 1 次后显示占位；4) 卸载取消 observer。
 **评分点**：
 - IO 配置正确（rootMargin 200px + threshold 0）。
 - WebP 特性检测用 canvas.toDataURL('image/webp') 或 picture/source 方案。

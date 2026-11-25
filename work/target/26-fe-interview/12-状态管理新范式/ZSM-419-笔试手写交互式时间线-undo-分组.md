@@ -2,12 +2,12 @@
 title: [ZSM-419] 笔试：手写按操作语义分组的撤销栈（拖拽/输入/删除各成组）
 date: 2026-11-20
 categories: [状态管理新范式]
-tags: [前端面试, 面试题, ZSM]
+tags: [前端面试, 笔试题, ZSM]
 type: 笔试题
 ---
 
 ## ZSM-419：手写按操作语义分组的撤销栈
-**需求**：实现 `createGroupedHistory()`：1) `begin(kind)` 开始一个操作组（如 'drag'/'input'/'delete'），组内 push 合并为一步；2) `push(patch)` 记入当前组；3) `end()` 结束组（未 end 的组自动在 begin 新组或 undo 时隐式结束）；4) `undo()/redo()` 按组粒度恢复（组内多次 patch 一次撤销）；5) 组记录 patch 列表，undo 时逆序应用逆 patch；6) 支持「原子组」（组内失败整体丢弃）。
+**答**：实现 `createGroupedHistory()`：1) `begin(kind)` 开始一个操作组（如 'drag'/'input'/'delete'），组内 push 合并为一步；2) `push(patch)` 记入当前组；3) `end()` 结束组（未 end 的组自动在 begin 新组或 undo 时隐式结束）；4) `undo()/redo()` 按组粒度恢复（组内多次 patch 一次撤销）；5) 组记录 patch 列表，undo 时逆序应用逆 patch；6) 支持「原子组」（组内失败整体丢弃）。
 
 ```javascript
 export function createGroupedHistory() {

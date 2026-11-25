@@ -44,3 +44,11 @@ module.exports = {
   },
 };
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 同一 rule 里 loader 为什么倒序执行？ → 正常阶段从右到左、从下到上，pitch 阶段正序，所以 babel-loader 要写在数组最右边，source map 才能沿着 loader 链正确传递。
+2. 为什么要开 `cacheDirectory`？ → babel 每次全量重跑很贵，缓存按文件内容与 babel 配置哈希落到 node_modules/.cache，只有源文件或配置变了才失效。
+3. babel 和 webpack 各管什么？ → babel 只做单文件语法转换与 polyfill 注入，模块解析、依赖图构建和 chunk 拆分归 webpack，两者职责不要混，混用会导致重复转译。

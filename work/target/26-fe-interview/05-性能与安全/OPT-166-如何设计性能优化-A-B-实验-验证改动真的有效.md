@@ -45,3 +45,11 @@ const group = assignGroup(user.id);
 reportPerf({ metric: 'LCP', value: lcp, group, exp: 'lcp-image-opt' });
 // 收尾：bootstrapP75Diff(treatmentLCPs, controlLCPs) → { p75_diff: -420, ci95: [-510, -330], significant: true }
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 为什么不能只看均值？ → 性能分布长尾，应看 P75/P95 与达标率，均值会被少数极值带偏，掩盖多数人的真实体验。
+2. 怎么保证可信？ → 按用户维度随机分流、样本量足够、控制版本与机型差异，看置信区间是否重叠。
+3. 常见陷阱？ → 实验期叠加发版或节假日流量、缓存预热不均、分流不独立导致串味，这三点最容易让结论失真，实验前要把这些变量固定住。

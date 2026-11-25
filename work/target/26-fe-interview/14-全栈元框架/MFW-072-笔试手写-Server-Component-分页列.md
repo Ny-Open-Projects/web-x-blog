@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-072：笔试：手写一个 RSC 分页列表页（游标分页 + searchParams）
-**题目**：实现商品列表页 `/products?cursor=xxx&q=手机`：① 游标分页（不用 offset，防深分页性能塌陷）；② 关键词过滤走索引；③ 下一页用 Link 带 query，服务端渲染拿数据；④ 空态与非法 cursor 要兜底。
+**答**：实现商品列表页 `/products?cursor=xxx&q=手机`：① 游标分页（不用 offset，防深分页性能塌陷）；② 关键词过滤走索引；③ 下一页用 Link 带 query，服务端渲染拿数据；④ 空态与非法 cursor 要兜底。
 
 ```tsx
 // app/products/page.tsx

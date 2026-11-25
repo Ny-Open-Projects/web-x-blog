@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-190：手写 FLIP 动画通用实现——测量旧位→更新 DOM→反向变换→过渡归位（列表重排零依赖方案）
 **答**：FLIP（First-Last-Invert-Play）通用实现——View Transitions 不支持时的零依赖方案：First 记录元素旧位置（getBoundingClientRect）→ Last 更新 DOM → Invert 计算 delta 反向 transform → Play 用 WAAPI 过渡到恒等（合成器路径）。
 
 ```javascript

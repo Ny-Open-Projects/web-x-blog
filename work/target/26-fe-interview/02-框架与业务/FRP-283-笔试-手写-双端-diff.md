@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## FRP-283：笔试：手写双端 diff
-**题**：实现 `twoWayDiff(oldChildren, newChildren)`：返回 { unmount: [], mount: [], moves: [{ el, anchor: 'before'|'after', ref }] }；四指针（头头/尾尾/旧头新尾/旧尾新头）匹配 + key Map 兜底；用最小用例验证反转场景零移动。
+**答**：实现 `twoWayDiff(oldChildren, newChildren)`：返回 { unmount: [], mount: [], moves: [{ el, anchor: 'before'|'after', ref }] }；四指针（头头/尾尾/旧头新尾/旧尾新头）匹配 + key Map 兜底；用最小用例验证反转场景零移动。
 
 ```javascript
 function twoWayDiff(oldC, newC) {
@@ -35,6 +35,3 @@ function twoWayDiff(oldC, newC) {
 - 中间乱序 Map 兜底。
 - 未匹配新节点 mount、未匹配旧节点 unmount。
 - 反转场景零移动断言。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-fbba9bd1-05ae-4024-8195-0a5cd017a07e-cwd'; fi
-exit "$__zcode_status"

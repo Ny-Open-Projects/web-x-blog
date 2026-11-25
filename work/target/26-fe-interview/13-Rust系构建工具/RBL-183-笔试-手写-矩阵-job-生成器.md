@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-183：笔试：手写 CI 矩阵 job 生成器（按测试目录动态生成 matrix）
 
-**题目**：写 gen-matrix.mjs：1) 输入包列表与每包测试文件数；2) 决策每个包是否独立成 job（测试文件 > 100 独立 + 内部再分片）、小包合并进 combined job（合并后总数 ≤ 200）；3) 生成 GitHub Actions matrix JSON：{ include: [{package, shard, shards}] }；4) 输出命令模板供各 job 使用：vitest run --shard=i/n --filter=包名；5) 环境变量 MAX_JOBS 限制总 job 数（超限时合并最小包）。
+**答**：写 gen-matrix.mjs：1) 输入包列表与每包测试文件数；2) 决策每个包是否独立成 job（测试文件 > 100 独立 + 内部再分片）、小包合并进 combined job（合并后总数 ≤ 200）；3) 生成 GitHub Actions matrix JSON：{ include: [{package, shard, shards}] }；4) 输出命令模板供各 job 使用：vitest run --shard=i/n --filter=包名；5) 环境变量 MAX_JOBS 限制总 job 数（超限时合并最小包）。
 
 ```javascript
 // gen-matrix.mjs

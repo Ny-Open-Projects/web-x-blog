@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## TST-472：笔试：视觉 diff 后自动生成「修复建议」（基于差异区域特征）。
-**题目**：diff 结果 `{regions: [{x, y, w, h, kind: 'shift'|'color'|'missing'}]}`。规则：shift → 建议查布局/间距 token；color → 查主题 token 映射；missing → 查条件渲染/加载失败。输出建议清单（按区域面积降序）。
+**答**：diff 结果 `{regions: [{x, y, w, h, kind: 'shift'|'color'|'missing'}]}`。规则：shift → 建议查布局/间距 token；color → 查主题 token 映射；missing → 查条件渲染/加载失败。输出建议清单（按区域面积降序）。
 
 ```javascript
 const SUGGEST = {

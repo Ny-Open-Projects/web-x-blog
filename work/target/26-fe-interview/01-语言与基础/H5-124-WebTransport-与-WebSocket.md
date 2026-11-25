@@ -50,3 +50,11 @@ function wsFallback() {
   return ws;
 }
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. QUIC 的 datagram 为什么能绕开 TCP 队头阻塞？ → QUIC 在用户态按 stream 独立做序号与重传，一个包丢失只影响所属 stream，datagram 干脆不重传、到达即用。
+2. 企业网络封 UDP 时降级链路怎么设计？ → 给 `transport.ready` 加超时探测，超时或 `closed` 触发即回退 WebSocket，并把失败阶段埋点区分是握手失败还是中途断开。
+3. HTTP/3 的 0-RTT 恢复有什么安全代价？ → 0-RTT 数据可被重放，只应承载幂等请求，刷新 token 这类敏感写操作必须等 1-RTT 握手完成后再发。

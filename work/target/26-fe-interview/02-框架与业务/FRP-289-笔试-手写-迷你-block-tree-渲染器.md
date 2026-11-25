@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## FRP-289：笔试：手写迷你 block tree 渲染器
-**题**：实现 `renderBlock(buildFn)`：buildFn 内调 `trackDynamic(vnode)` 收集动态节点到 block；返回 { mount, update }——update 时只遍历收集到的动态 vnode 做 patch（不遍历静态树）；嵌套 block（v-if 边界）各自独立。
+**答**：实现 `renderBlock(buildFn)`：buildFn 内调 `trackDynamic(vnode)` 收集动态节点到 block；返回 { mount, update }——update 时只遍历收集到的动态 vnode 做 patch（不遍历静态树）；嵌套 block（v-if 边界）各自独立。
 
 ```javascript
 let currentBlock = null
@@ -37,6 +37,3 @@ function trackDynamic(vnode) {
 - update 只遍历 dynamics（跳过静态）。
 - 嵌套 block 用栈式 currentBlock 恢复。
 - 结构变化时整块重建的语义说明。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-1fccddd2-a1a6-43c5-9dad-0767cc29e3fc-cwd'; fi
-exit "$__zcode_status"

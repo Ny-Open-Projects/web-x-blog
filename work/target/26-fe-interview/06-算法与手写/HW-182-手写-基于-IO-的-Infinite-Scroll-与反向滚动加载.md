@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-182：手写双向无限滚动——底部触发加载下一页 + 顶部反向加载历史（滚动锚定防跳动）
 **答**：聊天记录/邮件类双向滚动：底部 IO 触发 nextPage（追加）；顶部哨兵触发 prevPage（prepend）——prepend 后滚动位置补偿（保持视觉位置：加载前记录 scrollHeight，插入后 scrollTop += delta，PER-397 滚动锚定的手动版）。竞态防护（快速滚动双触发合并）与到底提示。
 
 ```javascript

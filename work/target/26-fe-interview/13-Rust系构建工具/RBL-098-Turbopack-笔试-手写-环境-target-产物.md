@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-098：笔试：手写多 target 编译分流器（client/server/edge）
-**题目**：实现 multiTargetCompile(code, target)：1) client：保留 console、注入 hydration 辅助；2) server：剥离所有 DOM 访问行（window/document 开头的语句）、保留 console；3) edge：剥离 DOM 且剥离 console（无调试）；4) 'use client' 文件在 server target 下输出为引用占位（export default '__CLIENT_REF__'）；5) 返回 { code, target, clientRef } 结构。
+**答**：实现 multiTargetCompile(code, target)：1) client：保留 console、注入 hydration 辅助；2) server：剥离所有 DOM 访问行（window/document 开头的语句）、保留 console；3) edge：剥离 DOM 且剥离 console（无调试）；4) 'use client' 文件在 server target 下输出为引用占位（export default '__CLIENT_REF__'）；5) 返回 { code, target, clientRef } 结构。
 
 ```javascript
 function multiTargetCompile(code, target) {

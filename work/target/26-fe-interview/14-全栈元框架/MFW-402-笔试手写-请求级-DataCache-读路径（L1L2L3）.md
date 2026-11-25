@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-402：三级读路径
-**需求**：实现 `createDomainReader({ mem, ttlMs = 30_000 })`：1) L1 请求内 Map（AsyncLocalStorage store——同请求同 key 单飞）；2) L2 进程内 LRU（跨请求，TTL 内复用；容量 500）；3) L3 fetcher；4) 读到 L2/L3 回填上层；5) negCache：L3 null/错误 30s（穿透防护——RBL-426 同款）；6) invalidate(domain) 清 L2 对应前缀+L1 全清。
+**答**：实现 `createDomainReader({ mem, ttlMs = 30_000 })`：1) L1 请求内 Map（AsyncLocalStorage store——同请求同 key 单飞）；2) L2 进程内 LRU（跨请求，TTL 内复用；容量 500）；3) L3 fetcher；4) 读到 L2/L3 回填上层；5) negCache：L3 null/错误 30s（穿透防护——RBL-426 同款）；6) invalidate(domain) 清 L2 对应前缀+L1 全清。
 
 ```javascript
 import { AsyncLocalStorage } from 'node:async_local_storage'

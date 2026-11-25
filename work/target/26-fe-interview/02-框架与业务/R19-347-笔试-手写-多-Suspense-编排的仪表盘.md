@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-347：笔试：手写仪表盘的多 Suspense 编排
-**题**：仪表盘数据：核心指标（必须快，阻塞渲染）、图表（独立边界）、消息流（独立边界可失败）。实现 Dashboard 布局：核心数据 RSC 直接 await；图表/消息流各自 Suspense + ErrorBoundary；消息流失败显示重试按钮不影响其他区域。
+**答**：仪表盘数据：核心指标（必须快，阻塞渲染）、图表（独立边界）、消息流（独立边界可失败）。实现 Dashboard 布局：核心数据 RSC 直接 await；图表/消息流各自 Suspense + ErrorBoundary；消息流失败显示重试按钮不影响其他区域。
 
 ```javascript
 // Dashboard.server.js
@@ -35,6 +35,3 @@ export default async function Dashboard() {
 - 图表/消息流独立边界（互不阻塞）。
 - ErrorBoundary 与 Suspense 成对出现（等待 + 失败两个态）。
 - 重试入口在错误 fallback 内。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-84f61b59-34ef-4a3e-8650-9584c2ed9e23-cwd'; fi
-exit "$__zcode_status"

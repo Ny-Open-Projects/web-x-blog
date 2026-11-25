@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## R19-338：笔试：手写迷你 Flight 流解析器
-**题**：Flight 流格式：每行一个 JSON 块 `id:json`，块内引用写作 `"$@1"`（指向 id 1）。实现 `parseFlight(stream)`：逐行解析到对象池；引用用 Proxy/getter 延迟解析；返回根对象。要求：先到先渲染（解析完一行立即可用）。
+**答**：Flight 流格式：每行一个 JSON 块 `id:json`，块内引用写作 `"$@1"`（指向 id 1）。实现 `parseFlight(stream)`：逐行解析到对象池；引用用 Proxy/getter 延迟解析；返回根对象。要求：先到先渲染（解析完一行立即可用）。
 
 ```javascript
 function parseFlight(lines) {
@@ -40,6 +40,3 @@ function parseFlight(lines) {
 - 引用标记 `$@id` 解析到对象池。
 - 未到达引用的处理（至少说出延迟 getter 思路）。
 - 根块约定（id 0）。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-4fd2db4c-de0e-4f69-a437-7494116e11f2-cwd'; fi
-exit "$__zcode_status"

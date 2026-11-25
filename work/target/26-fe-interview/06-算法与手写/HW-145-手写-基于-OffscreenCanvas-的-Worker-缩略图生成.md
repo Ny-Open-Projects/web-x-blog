@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-145：手写 Worker 缩略图生成——OffscreenCanvas 解码缩放 + 回压队列 + 主线程占位
 **答**：批量图片缩略图（上传列表/相册）：解码+缩放挪 Worker（OffscreenCanvas，PER-290），主线程只挂占位与替换结果；回压队列（HW-270 模式）防 50 张图同时解码打爆 Worker 内存；失败降级（原图直出）。
 
 ```javascript

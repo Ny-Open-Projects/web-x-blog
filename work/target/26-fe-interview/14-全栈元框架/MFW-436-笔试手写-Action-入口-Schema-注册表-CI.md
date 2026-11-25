@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-436：Schema 注册表 CI
-**需求**：实现 `buildActionRegistry(actionFiles)` + `assertServerSafety(registry)`：1) 提取全部 'use server' 导出函数的 { name, hasValidator: bool, authzCall: bool, writeCalls: string[] }（正则近似——生产用 AST）；2) 三断言：无 validator 的写 Action = fail（不可信输入直达 DB）；有写无鉴权检查 = fail（MFW-227 红线）；GET 语义 Action（method:'GET'）含写 = fail；3) 输出机器可读注册表 JSON（客户端类型生成/安全审计双消费）；4) 豁免单列（只读查询 Action 免鉴权？不行——读也要登录态——豁免仅限 healthcheck 类）。
+**答**：实现 `buildActionRegistry(actionFiles)` + `assertServerSafety(registry)`：1) 提取全部 'use server' 导出函数的 { name, hasValidator: bool, authzCall: bool, writeCalls: string[] }（正则近似——生产用 AST）；2) 三断言：无 validator 的写 Action = fail（不可信输入直达 DB）；有写无鉴权检查 = fail（MFW-227 红线）；GET 语义 Action（method:'GET'）含写 = fail；3) 输出机器可读注册表 JSON（客户端类型生成/安全审计双消费）；4) 豁免单列（只读查询 Action 免鉴权？不行——读也要登录态——豁免仅限 healthcheck 类）。
 
 ```javascript
 export function auditServerFns(files) {

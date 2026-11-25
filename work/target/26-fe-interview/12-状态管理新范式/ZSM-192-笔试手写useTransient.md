@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-192：手写 useTransient（rAF 节流的瞬态更新 Hook：高频事件绕过 React 逐帧渲染）
-**需求**：实现 `useTransient(onFrame)`：1) 高频事件（pointermove/scroll）回调里只写 ref，不触发渲染；2) rAF 循环里每帧调用一次 onFrame(latest)，可命令式操作 DOM；3) 提供可选的 `commit()`：把最新值 setState 一次，结束高频阶段后「落地」进 React 世界；4) 组件卸载停止 rAF；5) 返回 { ref, commit }。用指针拖拽场景给出完整用法。
+**答**：实现 `useTransient(onFrame)`：1) 高频事件（pointermove/scroll）回调里只写 ref，不触发渲染；2) rAF 循环里每帧调用一次 onFrame(latest)，可命令式操作 DOM；3) 提供可选的 `commit()`：把最新值 setState 一次，结束高频阶段后「落地」进 React 世界；4) 组件卸载停止 rAF；5) 返回 { ref, commit }。用指针拖拽场景给出完整用法。
 
 ```javascript
 export function useTransient(onFrame) {

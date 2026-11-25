@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-194：笔试：手写 artifact 轮转清理（按分支保留 N 份 + 磁盘水位）
 
-**题目**：写 artifact-gc.mjs：1) 输入 artifact 元数据数组（{name, branch, size, createdAt}）与存储目录；2) 保留策略：每个 branch 保留最近 N 份（默认 5）、最近 7 天内的全部保留（ irrespective 分支数）；3) 另有磁盘水位线：删除后总占用仍超水位（默认 20GB）则继续按"最旧优先"全局删除并告警；4) 输出删除清单与删除后总大小；5) 删除前二次校验（文件存在才删），缺失的记为 stale 同步清理元数据。
+**答**：写 artifact-gc.mjs：1) 输入 artifact 元数据数组（{name, branch, size, createdAt}）与存储目录；2) 保留策略：每个 branch 保留最近 N 份（默认 5）、最近 7 天内的全部保留（ irrespective 分支数）；3) 另有磁盘水位线：删除后总占用仍超水位（默认 20GB）则继续按"最旧优先"全局删除并告警；4) 输出删除清单与删除后总大小；5) 删除前二次校验（文件存在才删），缺失的记为 stale 同步清理元数据。
 
 ```javascript
 // artifact-gc.mjs

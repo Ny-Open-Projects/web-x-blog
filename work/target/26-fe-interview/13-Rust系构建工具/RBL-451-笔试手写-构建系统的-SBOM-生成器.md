@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-451：手写 SBOM 生成器
-**需求**：实现 `generateSBOM(lockfile, pkgJson)`：1) 从 lockfile 解析依赖树（含传递依赖）——去重（同包单条目）；2) 输出 CycloneDX 简化格式：`{ components: [{ name, version, purl, licenses?, scope }] }`——scope 区分 direct/transitive；3) purl 标准格式（pkg:npm/name@version）；4) 与产物关联：bundle 里实际打包的依赖标记（stats 联动——SBOM 标「in-bundle」）；5) 差异对比：两次 SBOM diff（新引入/移除/升级——CVE 响应时定位受影响产物）。
+**答**：实现 `generateSBOM(lockfile, pkgJson)`：1) 从 lockfile 解析依赖树（含传递依赖）——去重（同包单条目）；2) 输出 CycloneDX 简化格式：`{ components: [{ name, version, purl, licenses?, scope }] }`——scope 区分 direct/transitive；3) purl 标准格式（pkg:npm/name@version）；4) 与产物关联：bundle 里实际打包的依赖标记（stats 联动——SBOM 标「in-bundle」）；5) 差异对比：两次 SBOM diff（新引入/移除/升级——CVE 响应时定位受影响产物）。
 
 ```javascript
 export function generateSBOM(lockfile, pkgJson, bundleStats) {

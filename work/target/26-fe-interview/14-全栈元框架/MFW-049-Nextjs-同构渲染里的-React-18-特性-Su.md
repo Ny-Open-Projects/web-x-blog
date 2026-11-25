@@ -42,3 +42,11 @@ function ProductSearch({ initial }) {
   );
 }
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. `useTransition` 里调 `router.push` 真能中断吗 → 能打断的是渲染阶段的重渲染，网络请求本身不中断；transition 只是把这次导航标记为可中断更新，旧页面继续可交互。
+2. 流式 SSR 里某个 Suspense 边界抛错，整页会挂吗 → 不会，错误被最近的 error boundary 捕获，只替换该边界内容，外层 shell 与已下发部分保留。
+3. `useSyncExternalStore` 在 SSR 下为什么必须提供 `getServerSnapshot` → 服务端没有订阅，React 需要一份稳定快照生成首屏 HTML，缺了会直接报错或造成水合不一致。

@@ -5,7 +5,7 @@ categories: [性能与安全]
 tags: [前端面试, 面试题, 09]
 type: 面试题
 ---
-
+## HW-172：手写第三方 Cookie 降级——Storage Access API 请求访问 + 分区存储语义说明与功能降级链
 **答**：三方 Cookie 退场（PER-196）下的嵌入场景降级：iframe 内需要用户身份（客服插件识别用户）→ Storage Access API（document.requestStorageAccess——用户手势内请求，浏览器弹授权）→ 拒绝/不支持则功能降级（匿名客服会话 + 提示登录）。
 
 ```javascript

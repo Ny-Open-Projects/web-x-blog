@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-199：笔试：手写 mini-CI runner（YAML 声明 → 调度执行 → 缓存 → 报告）
 
-**题目**：综合题。写 mini-ci.mjs：输入 pipeline 描述对象（无需解析 yaml）：{ tasks: [{name, cmd, deps, cache: {inputs, outputs}}], concurrency }；要求：1) 按依赖图调度（可并行处并行，RBL-178 的波次/池）；2) 每个带 cache 的任务先查缓存（输入指纹 hash，RBL-176），命中跳过执行恢复产物；3) 失败任务重试 1 次后仍失败则跳过其下游任务（下游标记 skipped）；4) 生成 markdown 报告（状态/耗时/缓存命中，RBL-191 风格）；5) 全程状态可断点续跑（RBL-197）。
+**答**：综合题。写 mini-ci.mjs：输入 pipeline 描述对象（无需解析 yaml）：{ tasks: [{name, cmd, deps, cache: {inputs, outputs}}], concurrency }；要求：1) 按依赖图调度（可并行处并行，RBL-178 的波次/池）；2) 每个带 cache 的任务先查缓存（输入指纹 hash，RBL-176），命中跳过执行恢复产物；3) 失败任务重试 1 次后仍失败则跳过其下游任务（下游标记 skipped）；4) 生成 markdown 报告（状态/耗时/缓存命中，RBL-191 风格）；5) 全程状态可断点续跑（RBL-197）。
 
 ```javascript
 // mini-ci.mjs —— 组合前三题的能力成最小可用 runner

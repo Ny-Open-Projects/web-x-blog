@@ -28,3 +28,15 @@ async function getEngine() {
 }
 // 调用：批量传整帧数据，而非逐像素跨界调用
 ```
+
+**边界与易错**：
+
+- 性能敏感不等于该上 WASM：DOM 密集、IO 密集、调用次数多而单次计算小的场景，引入后反而更慢，先 profile 再决策。
+- 线性内存不会自动回收：Rust/C++ 侧要显式释放，JS 拿到的 TypedArray 只是视图，模块 grow 内存后旧视图会 detached，继续用直接抛错。
+- instantiateStreaming 依赖正确的 application/wasm MIME，CDN 没配好会静默退回慢路径，必须显式捕获并走降级分支。
+
+**追问**：
+
+1. WASM 和 Worker 怎么组合，主线程还要不要参与数据搬运？ → 实例化与计算全放 Worker，主线程只做 transferable 的 ArrayBuffer 转移，避免结构化克隆把大数组再拷一遍。
+2. 你说体积压到 1MB 内，那要不要预加载？ → 首屏用不到就别预加载，进入相关路由时再 preload，配合长缓存与内容 hash，首屏关键路径不为它让位。
+3. 升级了 .wasm 但用户页面还引着旧版本怎么办？ → 文件名带内容 hash 且由 JS 统一拼路径，加载失败或校验不过就走 JS 降级实现，不让白屏。

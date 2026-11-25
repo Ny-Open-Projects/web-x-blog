@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ARC-334：笔试题：实现组件库的 Dropdown 键盘导航？
-**题目**：实现 Dropdown 菜单键盘交互：1) Enter/ArrowDown 打开；2) 打开后 ArrowUp/Down 在项间移动（跳过 disabled 项，循环）；3) Enter 激活当前项；4) Esc 关闭归还焦点到触发器；5) Home/End 跳首尾。
+**答**：实现 Dropdown 菜单键盘交互：1) Enter/ArrowDown 打开；2) 打开后 ArrowUp/Down 在项间移动（跳过 disabled 项，循环）；3) Enter 激活当前项；4) Esc 关闭归还焦点到触发器；5) Home/End 跳首尾。
 **评分点**：
 - roving tabindex 模式正确（当前项 tabIndex=0 其余 -1），而不是管理 DOM focus 数组。
 - disabled 项跳过逻辑正确（防死循环：全部 disabled 时不动）。

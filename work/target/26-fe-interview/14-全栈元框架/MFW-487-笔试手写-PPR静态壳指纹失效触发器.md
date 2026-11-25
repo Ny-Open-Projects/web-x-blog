@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-487：PPR 静态壳指纹与失效触发器
-**需求**：实现 `ShellRegistry`：1) `publish(route, shellHtml, { deps })`：发布壳并计算指纹 = hash(html)；同路由重复 publish 指纹不变则跳过（幂等构建）；2) `invalidateByDep(dep)`：deps 含该 dep 的路由壳失效——但只失效壳的"静态部分描述"，洞数据独立缓存；3) 失效立即生效（下次请求重建壳），提供 `rebuildQueue` 保证重建串行（防重建风暴）；4) `status(route)` 返回 { fingerprint, publishedAt, valid }——可观测壳生命周期。
+**答**：实现 `ShellRegistry`：1) `publish(route, shellHtml, { deps })`：发布壳并计算指纹 = hash(html)；同路由重复 publish 指纹不变则跳过（幂等构建）；2) `invalidateByDep(dep)`：deps 含该 dep 的路由壳失效——但只失效壳的"静态部分描述"，洞数据独立缓存；3) 失效立即生效（下次请求重建壳），提供 `rebuildQueue` 保证重建串行（防重建风暴）；4) `status(route)` 返回 { fingerprint, publishedAt, valid }——可观测壳生命周期。
 
 ```javascript
 import { createHash } from 'node:crypto'

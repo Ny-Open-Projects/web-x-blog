@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-336：笔试题：手写表单 Schema 渲染器？
-**题目**：实现 SchemaForm：1) schema 字段 → 组件映射（text/number/select/date）；2) 联动（visibleWhen）；3) 校验错误展示；4) 提交前全量校验。
+**答**：实现 SchemaForm：1) schema 字段 → 组件映射（text/number/select/date）；2) 联动（visibleWhen）；3) 校验错误展示；4) 提交前全量校验。
 **评分点**：
 - 组件映射注册表（可扩展）。
 - 联动求值只算受影响字段。

@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-148：笔试：手写 import 依赖扫描器（基于 parser 的 AST 统计）
 
-**题目**：写 scan-deps.mjs：1) 输入一个文件，解析 AST（可用 oxc-parser 或任意 parser）；2) 统计四类依赖：静态 import、动态 import()、require() 调用、export ... from；3) 区分外部包（非相对路径，取 bare specifier 的包名，支持 @scope/name）与内部文件；4) 输出 { external: [...], internal: [...], dynamic: [...], reexport: [...] }，各自去重排序；5) parse 失败输出 errors 并继续（返回空结构 + 错误信息）。
+**答**：写 scan-deps.mjs：1) 输入一个文件，解析 AST（可用 oxc-parser 或任意 parser）；2) 统计四类依赖：静态 import、动态 import()、require() 调用、export ... from；3) 区分外部包（非相对路径，取 bare specifier 的包名，支持 @scope/name）与内部文件；4) 输出 { external: [...], internal: [...], dynamic: [...], reexport: [...] }，各自去重排序；5) parse 失败输出 errors 并继续（返回空结构 + 错误信息）。
 
 ```javascript
 // scan-deps.mjs

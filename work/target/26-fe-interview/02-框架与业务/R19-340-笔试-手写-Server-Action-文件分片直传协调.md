@@ -7,7 +7,7 @@ type: 面试题
 ---
 
 ## R19-340：笔试：手写大文件上传（预签名直传 + Action 协调）
-**题**：实现：action `initUpload` 返回 uploadId 与各分片预签名 URL；客户端并发 3 路直传对象存储（绕过服务端带宽）；全部完成调 `completeUpload` 校验分片并入库；断点续传靠 initUpload 返回已传分片。
+**答**：实现：action `initUpload` 返回 uploadId 与各分片预签名 URL；客户端并发 3 路直传对象存储（绕过服务端带宽）；全部完成调 `completeUpload` 校验分片并入库；断点续传靠 initUpload 返回已传分片。
 
 ```javascript
 'use server'
@@ -40,6 +40,3 @@ export async function completeUpload(uploadId, checksum) {
 - 断点续传（已传分片索引）。
 - completeUpload 校验分片数量 + 校验和 + 权限（userId 属主校验）。
 - action 只管协调，不收文件本体。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-d2740a26-6696-4f07-89a9-8fa44bfa1004-cwd'; fi
-exit "$__zcode_status"

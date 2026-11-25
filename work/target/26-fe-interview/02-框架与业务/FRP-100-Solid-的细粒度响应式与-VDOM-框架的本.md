@@ -50,3 +50,11 @@ const { el, setCount } = CompiledComponent();
 setCount(1);
 console.log(el.querySelector('p').textContent); // 1：只动了 p 的文本，h1 完全未参与
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. Solid 里为什么不能解构 props？ → props 是带 getter 的代理，解构会在初始化时把值取出来一次，之后的更新再也追不到；正确写法是 `props.x` 或在 createMemo / effect 内部访问。
+2. 组件只执行一次，生命周期与清理怎么工作？ → onMount、createEffect 都注册到 owner 树上，销毁时由 owner 统一执行 cleanup；没有重渲染，也就不存在"每次渲染都重新注册"的经典问题。
+3. Solid 的水合和 React 的水合差别在哪？ → Solid 不重跑组件函数，而是复用服务端 DOM、重新绑定信号订阅，成本与交互点数量相关；React 必须重放整棵组件树的计算，mismatch 时还要整页回退。

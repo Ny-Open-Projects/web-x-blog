@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-105：笔试：手写 SvelteKit 的 handle hook 完成请求级鉴权与审计
-**题目**：实现 `hooks.server.js`：① 解析 Bearer token（API 请求）与 session cookie（页面请求）两种身份源，统一注入 `locals.user`；② `/admin/**` 仅 admin 角色可过，否则 403；③ API 未鉴权返回 401 JSON；④ 记录审计日志（path、userId、耗时）；⑤ 全链路异常返回 500 且不泄漏内部信息。
+**答**：实现 `hooks.server.js`：① 解析 Bearer token（API 请求）与 session cookie（页面请求）两种身份源，统一注入 `locals.user`；② `/admin/**` 仅 admin 角色可过，否则 403；③ API 未鉴权返回 401 JSON；④ 记录审计日志（path、userId、耗时）；⑤ 全链路异常返回 500 且不泄漏内部信息。
 
 ```ts
 // src/hooks.server.ts

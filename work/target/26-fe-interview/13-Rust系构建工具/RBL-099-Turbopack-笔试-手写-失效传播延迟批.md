@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-099：笔试：手写失效传播节流器（高频变更合并重算）
-**题目**：实现 DebouncedRevalidator(recompute)：1) invalidate(ids) 标记失效集合；2) 50ms 窗口内的高频 invalidate 合并成一次 recompute（参数为合并后的 id 集合）；3) recompute 进行中到达的新失效：标记为 pending，当前完成后立即再跑一轮（不丢失效）；4) 支持并发去重（同一时刻最多一个 recompute）；5) 返回统计 { runs, dropped }。
+**答**：实现 DebouncedRevalidator(recompute)：1) invalidate(ids) 标记失效集合；2) 50ms 窗口内的高频 invalidate 合并成一次 recompute（参数为合并后的 id 集合）；3) recompute 进行中到达的新失效：标记为 pending，当前完成后立即再跑一轮（不丢失效）；4) 支持并发去重（同一时刻最多一个 recompute）；5) 返回统计 { runs, dropped }。
 
 ```javascript
 function createRevalidator(recompute) {

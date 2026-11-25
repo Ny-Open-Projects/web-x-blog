@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-072：笔试：手写简易 ESM bundler（export 语句解析 + live binding）
-**题目**：在 RBL-042 基础上实现 ESM 语义：1) 解析 named export（export const/function/{}）与 default export；2) 产物用 getter 形式导出实现 live binding（`__esModule` + Object.defineProperty）；3) import 的具名成员通过访问器取值（保证循环依赖时读到最新值）；4) re-export 透传（export * from）；5) 说明为什么不能简单用值拷贝。
+**答**：在 RBL-042 基础上实现 ESM 语义：1) 解析 named export（export const/function/{}）与 default export；2) 产物用 getter 形式导出实现 live binding（`__esModule` + Object.defineProperty）；3) import 的具名成员通过访问器取值（保证循环依赖时读到最新值）；4) re-export 透传（export * from）；5) 说明为什么不能简单用值拷贝。
 
 ```javascript
 function parseExports(code) {

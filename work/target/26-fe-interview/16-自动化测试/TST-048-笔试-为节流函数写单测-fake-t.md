@@ -50,3 +50,11 @@ describe('throttle', () => {
 - fake timers 推进用 199/200 这类精确边界而不是 sleep。
 - 断言「最后收到的参数」验证合并逻辑而不是只数次数。
 - afterEach 恢复真实 timers。
+
+## 变体与延伸（补充）
+
+**变体与延伸**：
+
+1. 实现里用 `Date.now()`，fake timers 能控住吗 → 能，`vi.useFakeTimers()` 默认连 `Date` 一起 mock，但必须靠 `advanceTimersByTime` 推进时钟，否则时间不走。
+2. 怎么精确测「窗口内被丢弃、窗口后首调立即执行」 → 用 199 / 200 / 201 三档推进，断言 200 处恰好触发一次、201 处新窗口首调同步执行。
+3. 实现里有 `cancel()`，测试要注意什么 → 取消后继续推进时钟不应再触发，且 `cancel` 要重置内部 `lastTime`，否则下一次调用会被误判在窗口内而丢弃。

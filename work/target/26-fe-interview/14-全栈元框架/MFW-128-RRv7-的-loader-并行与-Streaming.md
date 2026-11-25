@@ -39,3 +39,9 @@ export default function Product() {
   );
 }
 ```
+
+**追问**：
+
+1. 嵌套路由里某个 loader 抛错，其他并行 loader 会怎样？→ 整条路由进 ErrorBoundary，其他结果被丢弃；要高可用就把易错数据降级成 defer 的 promise。
+2. defer 的 promise 在 hydrate 前 reject 会怎样？→ 必须由 `<Await errorElement>` 接住，否则冒泡到路由级 ErrorBoundary 把整页干掉。
+3. 流式返回后 `useLoaderData` 里拿到的到底是什么？→ 拿到的是 promise 本身，同步字段可直读，消费 promise 必须走 `<Await>` 或 `use()`。

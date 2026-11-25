@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 面试题, 09]
 type: 笔试题
 ---
-
+## HW-171：手写 Navigation API 路由——navigate 事件拦截、canIntercept 域限制与拦截回滚
 **答**：Navigation API（Chrome 102+）替代手写 history 劫持：navigate 事件可拦截（intercept 处理 SPA 渲染）与 preventDefault 取消（未保存表单守卫）；canIntercept 限制拦截域；navigation.transitionWhile/intercept 的回滚（handler 抛错自动回滚到旧页面——比 pushState 手动回滚可靠）。
 
 ```javascript

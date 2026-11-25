@@ -47,3 +47,11 @@ export default defineConfig({
 ```
 
 ## 十五章 Rollup 深入与库构建（BLD-141 ~ BLD-148）
+
+## 追问（补充）
+
+**追问**：
+
+1. 双实例 Vue 怎么判定？ → 报错提示多实例或 provide/inject 失效，用 `--debug` 看 resolve 结果，或打印两处 import.meta.url 比对实际路径，常见于软链包与重复安装。
+2. 预构建循环依赖报错怎么处理？ → 把环上的包显式加进 `optimizeDeps.include` 让它们一起预构建，或 exclude 交给浏览器原生 ESM 处理，不要两种策略混着来。
+3. 外部化失效怎么排查？ → 检查 `build.rollupOptions.external` 与 `ssr.noExternal` 的优先级，SSR 场景还要看依赖是否被判定为 ESM-only 而绕过了 external，表现为依赖被打进产物。

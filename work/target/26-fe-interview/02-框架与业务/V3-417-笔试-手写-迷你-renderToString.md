@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-417：笔试：手写迷你 renderToString（组件树 → HTML）
-**题**：实现 `renderToString(node)`：node 为 `{ tag, props, children }`（children 可含文本/子节点/异步函数）；props 转属性（class 数组拼接、style 对象转串、布尔 true 输出属性名、false/null 省略）；children 为 Promise 时等待后渲染（简单流式不支持，要求全量等待）；HTML 转义文本内容。
+**答**：实现 `renderToString(node)`：node 为 `{ tag, props, children }`（children 可含文本/子节点/异步函数）；props 转属性（class 数组拼接、style 对象转串、布尔 true 输出属性名、false/null 省略）；children 为 Promise 时等待后渲染（简单流式不支持，要求全量等待）；HTML 转义文本内容。
 
 ```javascript
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
@@ -35,6 +35,3 @@ async function renderToString(node) {
 - class/style 特殊处理。
 - 文本转义防 XSS（核心安全点）。
 - 异步子节点 Promise.all 并行等待。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-44e5b057-024f-424c-9c93-7da9366ceea1-cwd'; fi
-exit "$__zcode_status"

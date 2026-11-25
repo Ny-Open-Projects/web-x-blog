@@ -8,7 +8,7 @@ type: 笔试题
 
 ## RBL-188：笔试：手写 lockfile 变更检测（哪些包的依赖变了）
 
-**题目**：写 lock-diff.mjs：1) 输入新旧两份 pnpm-lock.yaml（解析为对象即可，不必真解析 yaml）；2) 对比 importers（各 workspace 包的依赖声明段）找出依赖变更的包（新增/删除/版本变化）；3) 对比 packages/snapshots 段找新增与移除的依赖版本条目；4) 输出：{ changedImporters, addedPkgs, removedPkgs }；5) changedImporters 为空但 packages 有变（如共享依赖升级）时输出标记 `shared-only: true` 提示"全仓可能需要重装"。
+**答**：写 lock-diff.mjs：1) 输入新旧两份 pnpm-lock.yaml（解析为对象即可，不必真解析 yaml）；2) 对比 importers（各 workspace 包的依赖声明段）找出依赖变更的包（新增/删除/版本变化）；3) 对比 packages/snapshots 段找新增与移除的依赖版本条目；4) 输出：{ changedImporters, addedPkgs, removedPkgs }；5) changedImporters 为空但 packages 有变（如共享依赖升级）时输出标记 `shared-only: true` 提示"全仓可能需要重装"。
 
 ```javascript
 // lock-diff.mjs

@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-146：笔试：手写一个类型安全的 searchParams 解析器
-**题目**：实现 `parseSearch(search, schema)`：① schema 描述字段类型（string/number/enum/boolean）与默认值；② URLSearchParams → 类型化对象，缺失用默认值；③ 非法值（如 page=abc、sort=x）按策略处理：带默认值用默认值并收集警告，无默认值抛错；④ 重复参数取最后一个；⑤ 输出与 TS 类型一致（返回类型由泛型推导）。
+**答**：实现 `parseSearch(search, schema)`：① schema 描述字段类型（string/number/enum/boolean）与默认值；② URLSearchParams → 类型化对象，缺失用默认值；③ 非法值（如 page=abc、sort=x）按策略处理：带默认值用默认值并收集警告，无默认值抛错；④ 重复参数取最后一个；⑤ 输出与 TS 类型一致（返回类型由泛型推导）。
 
 ```ts
 type FieldType =

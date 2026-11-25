@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-421：分步草稿 API
-**需求**：实现 `draftEndpoints(db, crypto, { ttlDays = 7, schemas } )`：1) POST /drafts → { id: 不透明随机串, stepUrls }（创建即归属）；2) PATCH /drafts/:id/step/:n → 归属校验（uid 不匹配 → 404 非 403——存在性不泄露）+ 步数据加密存储（AES-GCM per-draft key）+ schema 版本记录；3) GET 恢复 → 版本比对：相等直返/旧版走 migrate 链/新版（回滚发版）提示重填；4) 提交 → 全量聚合校验（步级通过≠整体合法：跨步依赖如 A 步国家=B 步税号格式）→ fieldErrors 带步号定位；5) GC（updatedAt > 7d 删除——含密钥销毁）。
+**答**：实现 `draftEndpoints(db, crypto, { ttlDays = 7, schemas } )`：1) POST /drafts → { id: 不透明随机串, stepUrls }（创建即归属）；2) PATCH /drafts/:id/step/:n → 归属校验（uid 不匹配 → 404 非 403——存在性不泄露）+ 步数据加密存储（AES-GCM per-draft key）+ schema 版本记录；3) GET 恢复 → 版本比对：相等直返/旧版走 migrate 链/新版（回滚发版）提示重填；4) 提交 → 全量聚合校验（步级通过≠整体合法：跨步依赖如 A 步国家=B 步税号格式）→ fieldErrors 带步号定位；5) GC（updatedAt > 7d 删除——含密钥销毁）。
 
 ```javascript
 export function draftApi(db, { keyring } = {}) {

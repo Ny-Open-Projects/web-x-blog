@@ -39,3 +39,11 @@ gate.resolve();        // 一声令下全部放行
 - 能说出两个以上真实用途（回调转 Promise、门闩/信号、任务协调）。
 - 知道 ES2024 原生 withResolvers 并给出 polyfill 写法。
 - 多次 resolve 只第一次生效的语义理解。
+
+## 变体与延伸（补充）
+
+**变体与延伸**：
+
+1. resolve 之后再调 reject 会怎样 → 状态已 settled，后续调用一律静默忽略且不抛错，这正是「只第一次生效」的语义，重复调用也不改变已定状态
+2. 如何避免 Promise 永不结算造成泄漏 → 用 Promise.race 加超时兜底，或在 finally 里清理挂起的 waiter，否则等待方永久占住闭包引用，超时后要主动 reject 释放
+3. 与直接 new Promise 的实质差别 → 解构出 resolve/reject 后可传出作用域，调用方不必交出整个 executor，回调转 Promise 与任务协调共用一套 API，这是它存在的实际价值

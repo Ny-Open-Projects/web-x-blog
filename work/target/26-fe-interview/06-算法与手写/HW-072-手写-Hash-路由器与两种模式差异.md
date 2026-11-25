@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-072：手写 Hash 路由器，并说明 hash 与 history 模式的本质差异与选型
 **答**：hash 路由锚在 `location.hash`（# 后部分）：变化天然触发 `hashchange`，无需服务器配置、刷新不 404；history 模式路径真实但需要服务端 fallback。hash 的代价：URL 带 #、SEO 弱、锚点功能被占用。实现要点：解析 hash、normalize 无 hash 时的默认路由、pushState 兼容（hashchange 双通道防重复解析）。
 
 ```javascript

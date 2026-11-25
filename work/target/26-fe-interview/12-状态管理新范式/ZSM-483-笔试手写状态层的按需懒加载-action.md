@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## ZSM-483：手写状态层按需懒加载 action
-**需求**：实现 `lazyActions(store, loaders)`：1) loaders：`{ exportExcel: () => import('./excelAction') }`——大动作代码分包；2) 调用 `store.exportExcel(...)`：动态 import → 拿到真实 action → 执行；3) 并发调用去重：同 action 在途 import 共享同一 Promise；4) 加载中再次调用排队等待后执行（语义：每次调用都执行，共享 import 不共享执行）；5) 加载失败：抛错并允许下次重试（失败不缓存）；6) TS 类型：懒加载 action 签名与同步一致（声明式映射）。
+**答**：实现 `lazyActions(store, loaders)`：1) loaders：`{ exportExcel: () => import('./excelAction') }`——大动作代码分包；2) 调用 `store.exportExcel(...)`：动态 import → 拿到真实 action → 执行；3) 并发调用去重：同 action 在途 import 共享同一 Promise；4) 加载中再次调用排队等待后执行（语义：每次调用都执行，共享 import 不共享执行）；5) 加载失败：抛错并允许下次重试（失败不缓存）；6) TS 类型：懒加载 action 签名与同步一致（声明式映射）。
 
 ```javascript
 export function lazyActions(store, loaders) {

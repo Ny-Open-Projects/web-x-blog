@@ -34,4 +34,10 @@ const safe = (s) => s.replace(/[&<>"']/g, (c) =>
 document.querySelector('#nick').textContent = userNick; // textContent 永不产生 HTML
 ```
 
-## 十八、安全机制
+## 追问（补充）
+
+**追问**：
+
+1. 凭证放进 HttpOnly cookie 后前端拿不到 token，请求怎么带？ → 靠浏览器自动携带，fetch 加 `credentials:'include'`，服务端按 Cookie 校验会话，不需要前端拼 Authorization 头。
+2. 已有项目把 token 存在 localStorage，迁到 HttpOnly 的最小改动路径？ → 登录成功后由服务端 `Set-Cookie` 下发 session，前端删掉写入逻辑、全局请求改 `credentials:'include'`，同时补 CSRF token 与 SameSite。
+3. `SameSite=Lax` 是不是就能替代 CSRF token？ → 不能，Lax 只拦跨站的非顶层请求，顶层 GET 导航仍会带 cookie，且老浏览器不识别；仍需双提交 token 或校验 Origin/Referer。

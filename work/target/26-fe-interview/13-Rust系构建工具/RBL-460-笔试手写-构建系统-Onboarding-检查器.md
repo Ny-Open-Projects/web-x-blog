@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-460：手写新成员 Onboarding 检查器
-**需求**：实现 `createOnboardingChecker(env)`：1) 检查新成员本地环境就绪度：Node 版本匹配 / pnpm 安装 / .env 就绪（有默认值可跑）/ 依赖安装完整 / 首次构建通过；2) 输出分步指引（每项失败给出精确修复命令——不是文档链接而是可复制命令）；3) 时间预估（首次构建预热时间告知——预期管理）；4) 一键修复尝试（safe 项自动修复：如 pnpm install；危险项仅提示）；5) 结果持久化（onboarding 进度跟踪——卡在哪一步可见，驱动文档改进）。
+**答**：实现 `createOnboardingChecker(env)`：1) 检查新成员本地环境就绪度：Node 版本匹配 / pnpm 安装 / .env 就绪（有默认值可跑）/ 依赖安装完整 / 首次构建通过；2) 输出分步指引（每项失败给出精确修复命令——不是文档链接而是可复制命令）；3) 时间预估（首次构建预热时间告知——预期管理）；4) 一键修复尝试（safe 项自动修复：如 pnpm install；危险项仅提示）；5) 结果持久化（onboarding 进度跟踪——卡在哪一步可见，驱动文档改进）。
 
 ```javascript
 import { execSync } from 'node:child_process'

@@ -5,8 +5,8 @@ categories: [场景算法]
 tags: [前端面试, 笔试题, 15]
 type: 笔试题
 ---
-
-**场景**：评论区：用户常看前几页（跳页体验好，offset 分页），数据可能新增导致 offset 漂移重/漏；深层翻页（第 50 页+）offset 性能差（数据库 skip 大）。混合策略：浅层 offset + 深层 cursor（keyset）。
+## ALG-230：评论区分页：前 3 页用 offset（可跳页）、深层用 cursor（稳定不重）的混合分页策略？
+**答**：评论区：用户常看前几页（跳页体验好，offset 分页），数据可能新增导致 offset 漂移重/漏；深层翻页（第 50 页+）offset 性能差（数据库 skip 大）。混合策略：浅层 offset + 深层 cursor（keyset）。
 
 **思路**：浅层（page ≤ 3）`LIMIT n OFFSET m`；越过阈值切 cursor（以当页最后一条的 id/ts 为游标 `WHERE ts < cursor ORDER BY ts DESC LIMIT n`）；切点把 cursor 传给前端继续。
 

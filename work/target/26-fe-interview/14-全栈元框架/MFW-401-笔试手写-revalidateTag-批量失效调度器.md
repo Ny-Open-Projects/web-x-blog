@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-401：批量失效调度器
-**需求**：CMS 全量更新触发数千 `revalidateTag`——直接调用会打爆再生成队列。实现 `createInvalidationPump(native, { batchMs = 100, throughput = 20 } = {})`：1) 同窗口 tag 去重合并；2) 按优先级出队（首页/详情 > 长尾列表——priority(fn) 注册时声明）；3) 限速放行（每 windowMs 最多 throughput 个，其余滚入下轮）；4) flush() 同步清空（pagehide/停机兜底）；5) 观测 { queued, dropped, rounds }。
+**答**：CMS 全量更新触发数千 `revalidateTag`——直接调用会打爆再生成队列。实现 `createInvalidationPump(native, { batchMs = 100, throughput = 20 } = {})`：1) 同窗口 tag 去重合并；2) 按优先级出队（首页/详情 > 长尾列表——priority(fn) 注册时声明）；3) 限速放行（每 windowMs 最多 throughput 个，其余滚入下轮）；4) flush() 同步清空（pagehide/停机兜底）；5) 观测 { queued, dropped, rounds }。
 
 ```javascript
 export function createInvalidationPipeline(n, { batchMs = 100, throughput = 20 } = {}) {

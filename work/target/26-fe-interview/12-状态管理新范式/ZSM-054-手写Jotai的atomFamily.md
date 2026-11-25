@@ -8,7 +8,7 @@ type: 笔试题
 
 ## ZSM-054：手写 Jotai 的 atomFamily（带缓存与 TTL 清理）
 
-**题目要求**：
+**答**：
 - 实现 `atomFamily(param => atom(...))`：同参数返回同一 atom（缓存复用），不同参数各自独立。
 - 支持 `family.remove(param)` 释放实例，防长列表累积内存。
 - 进阶：给缓存加 TTL（如 5 分钟未访问自动清理），避免手动 remove 遗漏。

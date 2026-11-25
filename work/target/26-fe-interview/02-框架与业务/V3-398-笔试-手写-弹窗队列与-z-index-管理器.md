@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-398：笔试：手写弹窗队列与 z-index 管理器
-**题**：实现全局弹窗管理器：`open(options)` 返回 Promise（resolve 用户点击结果）；维护栈保证后开的弹窗 z-index 更高；同一 key 的弹窗去重（已存在则返回现有 promise）；关闭时自动出栈并恢复底层弹窗可交互。
+**答**：实现全局弹窗管理器：`open(options)` 返回 Promise（resolve 用户点击结果）；维护栈保证后开的弹窗 z-index 更高；同一 key 的弹窗去重（已存在则返回现有 promise）；关闭时自动出栈并恢复底层弹窗可交互。
 
 ```javascript
 const stack = []
@@ -38,6 +38,3 @@ function closeTop(result) { stack.at(-1)?.close(result) }
 - 栈结构 + 递增 zIndex（或栈顶动态计算）。
 - key 去重返回同一 promise。
 - 关闭时 resolve 结果并出栈，不泄漏。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-28c596e9-fd96-482c-8c9c-f9c7884725a9-cwd'; fi
-exit "$__zcode_status"

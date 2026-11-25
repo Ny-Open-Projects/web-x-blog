@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-109：笔试：手写 SvelteKit 风格的 load 依赖追踪导航器
-**题目**：实现简化版 SvelteKit 导航数据层：① 每个路由的 load 声明自己读取了 `url` 还是 `params`（用显式 deps 数组模拟）；② 导航时只重跑「URL 或 params 变化且 load 声明了对应依赖」的 load；③ 结果缓存在内存，未重跑的 load 直接复用；④ 支持手动 invalidateAll。
+**答**：实现简化版 SvelteKit 导航数据层：① 每个路由的 load 声明自己读取了 `url` 还是 `params`（用显式 deps 数组模拟）；② 导航时只重跑「URL 或 params 变化且 load 声明了对应依赖」的 load；③ 结果缓存在内存，未重跑的 load 直接复用；④ 支持手动 invalidateAll。
 
 ```ts
 type LoadCtx = { url: URL; params: Record<string, string> };

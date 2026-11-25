@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-074：笔试：手写一个并发受限的取数任务池（Promise Pool）
-**题目**：SSR 页面要并发拉 100 个推荐接口，直接 Promise.all 会打爆下游。实现 `promisePool(tasks, limit)`：① 任意时刻最多 limit 个任务在跑；② 全部完成后按原顺序返回结果数组；③ 单个任务失败不影响其他任务（结果对应位置为 rejected 原因）；④ 全部失败时整体尽快返回。
+**答**：SSR 页面要并发拉 100 个推荐接口，直接 Promise.all 会打爆下游。实现 `promisePool(tasks, limit)`：① 任意时刻最多 limit 个任务在跑；② 全部完成后按原顺序返回结果数组；③ 单个任务失败不影响其他任务（结果对应位置为 rejected 原因）；④ 全部失败时整体尽快返回。
 
 ```ts
 type Settled<T> = { status: 'fulfilled'; value: T } | { status: 'rejected'; reason: unknown };

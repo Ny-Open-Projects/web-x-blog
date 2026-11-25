@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## V3-395：笔试：手写 useRequest composable（竞态 + 重试 + 卸载取消）
-**题**：实现 `useRequest(loader, { watch, retry = 2 })` 返回 `{ data, error, loading, run }`：watch 源变化自动重发；快速连发时只保留最后一次结果（竞态防护）；失败重试带退避；组件卸载后 resolve 不再写 data。
+**答**：实现 `useRequest(loader, { watch, retry = 2 })` 返回 `{ data, error, loading, run }`：watch 源变化自动重发；快速连发时只保留最后一次结果（竞态防护）；失败重试带退避；组件卸载后 resolve 不再写 data。
 
 ```javascript
 function useRequest(loader, { watch: src, retry = 2 } = {}) {
@@ -38,6 +38,3 @@ function useRequest(loader, { watch: src, retry = 2 } = {}) {
 - 卸载后不写入（getCurrentScope().active 判断）。
 - 指数退避重试与最终失败落 error。
 - loading 的最终状态由最后一次请求决定。
-__zcode_status=$?
-if [ "$__zcode_status" -eq 0 ]; then pwd -P > '/var/folders/0s/4tf1lwpd7817z10jldln1r4c0000h8/T/zcode-e113c188-7404-4992-ba49-86f54c09998c-cwd'; fi
-exit "$__zcode_status"

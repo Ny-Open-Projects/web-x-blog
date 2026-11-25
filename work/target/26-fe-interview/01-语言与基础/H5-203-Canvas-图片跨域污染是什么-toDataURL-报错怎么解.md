@@ -28,3 +28,15 @@ img.onload = () => {
   }
 };
 ```
+
+**边界与易错**：
+
+- `img.crossOrigin` 必须在给 `src` 赋值之前设置，赋值之后再设不会补发 CORS 请求，图片已按普通请求进缓存，画上去照样污染。
+- 服务端只回 `Access-Control-Allow-Origin` 却没回 `Vary: Origin`，CDN 可能把无 CORS 头的响应缓存后发给带 crossOrigin 的请求，需要加 cache-busting 参数重取。
+- 换成 `toBlob` 并不能绕过污染，因为污染判定发生在 `drawImage` 那一刻，导出方法只是把错误暴露出来。
+
+**追问**：
+
+1. `crossOrigin='anonymous'` 和 `'use-credentials'` 有什么区别？ → 前者不带 cookie，服务端可用 `*`；后者带凭证，响应必须是具体源且带 `Access-Control-Allow-Credentials: true`。
+2. 之前没设 crossOrigin 加载过同一张图，现在补设还有救吗？ → 已经画进 canvas 的像素无法解污染，必须新建 Image 按正确顺序加载，并用新 URL 或参数破掉旧缓存。
+3. 只有 Safari 报错、Chrome 正常，可能是什么原因？ → Safari 对 SVG 和缓存复用更严格，或某个 CDN 边缘节点漏配 CORS，要按 UA 分别抓响应头对比。

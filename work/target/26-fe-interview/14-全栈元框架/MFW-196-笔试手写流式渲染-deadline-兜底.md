@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-196：笔试：手写流式渲染 deadline 兜底（超时切静态壳）
-**题目**：流式 SSR 中，慢依赖（如推荐服务 8s）会拖死首屏。实现带 deadline 的分段流式：① 整页设 deadline（如 4s），超时后仍未完成的段**放弃数据渲染，改输出静态兜底内容**（如默认推荐位/骨架），绝不无限等待；② 已完成的段照常输出（先到的先 flush）；③ 每段支持单独超时（段级 > 整页级）；④ 兜底内容要标注（`data-degraded`），前端与监控能识别降级；⑤ 取消：用户断连（request abort）时停止所有待渲染任务。
+**答**：流式 SSR 中，慢依赖（如推荐服务 8s）会拖死首屏。实现带 deadline 的分段流式：① 整页设 deadline（如 4s），超时后仍未完成的段**放弃数据渲染，改输出静态兜底内容**（如默认推荐位/骨架），绝不无限等待；② 已完成的段照常输出（先到的先 flush）；③ 每段支持单独超时（段级 > 整页级）；④ 兜底内容要标注（`data-degraded`），前端与监控能识别降级；⑤ 取消：用户断连（request abort）时停止所有待渲染任务。
 
 ```ts
 type Segment = { name: string; render: () => Promise<string>; fallback: string; timeout: number };

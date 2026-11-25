@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-485：手写产物 treemap 渲染数据
-**需求**：实现 `buildTreemap(modules)`：1) 输入模块列表（路径/体积）；2) 层级树：按路径段聚合（node_modules/lodash → 节点）；3) squarified treemap 布局算法（面积 ∝ 体积，宽高比优化——简化版 slice-and-dice 也接受但标注）；4) 输出可直接渲染的矩形列表 { x, y, w, h, name, size, depth }；5) 交互数据：点击节点下钻（子矩形查询）；6) 大数据优化：深度限制（>5 层聚合为 other——渲染性能）。
+**答**：实现 `buildTreemap(modules)`：1) 输入模块列表（路径/体积）；2) 层级树：按路径段聚合（node_modules/lodash → 节点）；3) squarified treemap 布局算法（面积 ∝ 体积，宽高比优化——简化版 slice-and-dice 也接受但标注）；4) 输出可直接渲染的矩形列表 { x, y, w, h, name, size, depth }；5) 交互数据：点击节点下钻（子矩形查询）；6) 大数据优化：深度限制（>5 层聚合为 other——渲染性能）。
 
 ```javascript
 export function buildTreemap(modules, { width = 800, height = 600, maxDepth = 5 } = {}) {

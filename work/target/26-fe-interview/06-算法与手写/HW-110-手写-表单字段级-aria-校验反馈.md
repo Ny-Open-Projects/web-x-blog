@@ -5,7 +5,7 @@ categories: [手写代码]
 tags: [前端面试, 笔试题, 24]
 type: 笔试题
 ---
-
+## HW-110：手写无障碍表单校验反馈——aria-invalid、aria-describedby 与错误播报
 **答**：表单校验的无障碍三件套：① `aria-invalid="true"` 标记错误字段；② `aria-describedby` 指向错误消息元素（读屏软件读到字段描述+错误）；③ 错误消息用 `role="alert"`（或 aria-live="polite"）让读屏主动播报；④ focus 管理——提交失败聚焦第一个错误字段。
 
 ```javascript

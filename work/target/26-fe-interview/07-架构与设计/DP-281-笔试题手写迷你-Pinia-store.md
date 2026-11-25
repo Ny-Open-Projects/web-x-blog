@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-281：笔试题：手写迷你 Pinia（工厂+观察者+持久化）？
-**题目**：实现 `defineStore(id, setup)` 与 `useStore()`：1) 同 id 单例；2) state 变更通知订阅者；3) $patch 批量合并；4) 订阅函数支持立即回放当前 state；5) 持久化插件（$subscribe 时写 localStorage）。
+**答**：实现 `defineStore(id, setup)` 与 `useStore()`：1) 同 id 单例；2) state 变更通知订阅者；3) $patch 批量合并；4) 订阅函数支持立即回放当前 state；5) 持久化插件（$subscribe 时写 localStorage）。
 **评分点**：
 - 单例容器正确（Map + inject/全局兜底）。
 - 观察者通知在批量合并后只触发一次（$patch 合一）。

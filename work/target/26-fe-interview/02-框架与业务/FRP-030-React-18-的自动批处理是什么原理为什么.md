@@ -54,3 +54,11 @@ function flushWork() {
 // flushSync(() => setCount(10));
 // console.log(ref.current.textContent); // 立即是 10
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 在事件里用 flushSync 有什么代价？ → 会强制同步 render 加 commit，打断批处理，可能引起多次 layout 与掉帧；在 render 期间调用还会告警。只在必须立刻读 DOM 测量（如弹层定位）时局部使用。
+2. 为什么 setTimeout 里 React 17 渲染两次、18 只渲染一次？ → 17 的 isBatchingUpdates 只在自己的事件系统与生命周期里置位，宏任务里脱离上下文后每次 setState 各自 flush；18 改成微任务调度加 lane 合并，任何来源的更新进同一队列。
+3. 同一事件里 setState 后立刻读 state 还是旧值，怎么拿最新？ → 用函数式更新串联（`setCount(c => c + 1)`），或把读取放到 effect / layoutEffect；不要指望同步读取，setState 是排队调度而非赋值。

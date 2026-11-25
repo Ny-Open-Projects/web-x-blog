@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-457：RSC 树 diff 增量重渲染决策器
-**需求**：实现 `planRerender(prevTree, nextTree)`：1) 树节点 { id, type: 'server'|'client', props, children }；2) diff 后输出需重新在服务端执行的 server 段集合：client 节点 props 变了只重发 props，不重跑其 server 子树；server 节点 props 变了（或 key 变）连同整段 server 子树标 `rerun`；3) key 相同的 server 叶子 props 深相等 → 标 `skip`（缓存命中语义）；4) 输出 [{ id, action: 'rerun'|'reprop'|'skip' }]，顺序保持先序。
+**答**：实现 `planRerender(prevTree, nextTree)`：1) 树节点 { id, type: 'server'|'client', props, children }；2) diff 后输出需重新在服务端执行的 server 段集合：client 节点 props 变了只重发 props，不重跑其 server 子树；server 节点 props 变了（或 key 变）连同整段 server 子树标 `rerun`；3) key 相同的 server 叶子 props 深相等 → 标 `skip`（缓存命中语义）；4) 输出 [{ id, action: 'rerun'|'reprop'|'skip' }]，顺序保持先序。
 
 ```javascript
 function same(a, b) { return JSON.stringify(a ?? null) === JSON.stringify(b ?? null) }

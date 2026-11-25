@@ -54,3 +54,11 @@ function commitRoot() {
 //    若某个中间状态曾把 'abc' 写回 DOM -> revert 成 'abcd'
 // 用户视角：无论并发多忙，输入框永远显示自己刚打的内容，永不回跳
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 把 onChange 里的 setQuery 也放进 startTransition 会怎样？ → 输入更新被降为过渡优先级，不再 sync 上屏，受控值会滞后于按键，体感就是"打字卡顿"。正确做法是只把派生列表的更新放进 transition，输入本身保持 sync lane。
+2. React 19 里 revert 的实现有变化吗？ → 有调整。19 在 commit 前发现 DOM value 与最新 state 不一致时直接安排一次同步重渲来对齐，精简了 18 里那套 restore 队列的部分分支，但"输入永不回跳"的结论不变。
+3. 非受控输入有回跳问题吗？ → 没有。非受控时 DOM 是唯一真相源，React 不往 value 里写值，也就不存在把旧 state 写回去的可能；代价是无法在渲染期格式化或拦截输入。

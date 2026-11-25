@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## DP-282：笔试题：手写 EventBus（once/通配/命名空间解绑）？
-**题目**：实现 EventBus：1) on/off/emit/once；2) 通配符 `*` 监听所有事件（收到 {event, payload}）；3) offNamespace('cart') 批量解绑前缀事件；4) emit 时 handler 抛错不阻断其他 handler。
+**答**：实现 EventBus：1) on/off/emit/once；2) 通配符 `*` 监听所有事件（收到 {event, payload}）；3) offNamespace('cart') 批量解绑前缀事件；4) emit 时 handler 抛错不阻断其他 handler。
 **评分点**：
 - once 自解绑在 emit 遍历前快照（防遍历中修改集合）。
 - 通配事件签名正确。

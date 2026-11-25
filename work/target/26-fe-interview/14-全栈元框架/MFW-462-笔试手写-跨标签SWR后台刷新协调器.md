@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-462：跨标签 SWR 后台刷新协调器
-**需求**：基于 BroadcastChannel 实现跨标签页单飞刷新：1) `swr(key, fetcher, { ttl })`：本地缓存新鲜直接返回；过期则先回旧值（stale），并选举一个标签发请求——`tryLock(key)` 用 channel 抢锁（id 小者胜，模拟确定性选举）；2) 中标标签 fetch 后 `broadcast({ key, data, version })`，所有标签写回缓存；3) 抢锁 300ms 未定则自己上（选举失败的兜底，防 channel 丢消息集体等死）；4) 同 key 请求进行中直接复用 in-flight promise（本标签单飞）。
+**答**：基于 BroadcastChannel 实现跨标签页单飞刷新：1) `swr(key, fetcher, { ttl })`：本地缓存新鲜直接返回；过期则先回旧值（stale），并选举一个标签发请求——`tryLock(key)` 用 channel 抢锁（id 小者胜，模拟确定性选举）；2) 中标标签 fetch 后 `broadcast({ key, data, version })`，所有标签写回缓存；3) 抢锁 300ms 未定则自己上（选举失败的兜底，防 channel 丢消息集体等死）；4) 同 key 请求进行中直接复用 in-flight promise（本标签单飞）。
 
 ```javascript
 const ch = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('swr') : null

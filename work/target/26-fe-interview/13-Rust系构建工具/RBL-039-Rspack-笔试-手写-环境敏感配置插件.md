@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-039：笔试：手写「环境探测插件」——构建期校验必填环境变量
-**题目**：实现 EnvCheckPlugin：1) 构造时传入必填变量名数组与对应正则校验；2) compiler 钩子里在构建开始前校验 process.env；3) 缺失或格式不符时让构建失败并给出可读错误（指明变量名与期望格式）；4) 通过后注入 DefinePlugin 同款常量（避免两处配置）；5) 提供 strict 选项：非 strict 时只 warning 不失败。
+**答**：实现 EnvCheckPlugin：1) 构造时传入必填变量名数组与对应正则校验；2) compiler 钩子里在构建开始前校验 process.env；3) 缺失或格式不符时让构建失败并给出可读错误（指明变量名与期望格式）；4) 通过后注入 DefinePlugin 同款常量（避免两处配置）；5) 提供 strict 选项：非 strict 时只 warning 不失败。
 
 ```javascript
 const rspack = require('@rspack/core');

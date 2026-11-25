@@ -53,3 +53,11 @@ function areHookInputsEqual(nextDeps, prevDeps) {
 // const [data] = useMemo(() => fetchOnce(), []); // 错误！React 可能重复调用
 // const [data] = useEffect(() => { fetchOnce(); }, []);         // 正确：副作用
 ```
+
+## 追问（补充）
+
+**追问**：
+
+1. 不传依赖数组和传空数组，语义差在哪？ → 不传 deps 每次 render 都重算，等于没缓存；传 `[]` 才永远复用首次结果，但那时值已和后续 props 脱钩，闭包里读到的是首帧的快照，容易埋陈旧值。
+2. 为什么 Concurrent 下 useMemo 的缓存可能被丢弃？ → 可中断渲染会把 workInProgress 的 hook 链表整段丢掉重来，挂在上面的 memoizedState 随之作废；所以工厂函数必须纯，不能在里面发请求或改外部变量。
+3. 用了 useCallback 加 memo，子组件为什么还会重渲？ → deps 里含每次新建的对象或数组，引用照样变；另外给子组件传了内联 JSX 的 children，浅比较必然失败，需要把 children 稳定化或改传渲染函数。

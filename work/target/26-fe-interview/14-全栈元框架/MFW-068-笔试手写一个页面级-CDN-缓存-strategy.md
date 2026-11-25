@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-068：笔试：手写一个页面级 CDN 缓存策略决策函数
-**题目**：实现 `cacheHeaders(page)`，按页面类型返回 Cache-Control 头。规则：① 静态指纹资源 `public, max-age=31536000, immutable`；② 公开 SSR 页 `public, s-maxage=60, stale-while-revalidate=300`；③ 登录后页面 `private, no-store`；④ 含敏感查询参数的 URL 一律不缓存；⑤ API JSON 响应按传入 ttl 缓存但必须带 `Vary: Accept-Encoding`。
+**答**：实现 `cacheHeaders(page)`，按页面类型返回 Cache-Control 头。规则：① 静态指纹资源 `public, max-age=31536000, immutable`；② 公开 SSR 页 `public, s-maxage=60, stale-while-revalidate=300`；③ 登录后页面 `private, no-store`；④ 含敏感查询参数的 URL 一律不缓存；⑤ API JSON 响应按传入 ttl 缓存但必须带 `Vary: Accept-Encoding`。
 
 ```ts
 type PageType = 'static' | 'ssr-public' | 'authed' | 'api';

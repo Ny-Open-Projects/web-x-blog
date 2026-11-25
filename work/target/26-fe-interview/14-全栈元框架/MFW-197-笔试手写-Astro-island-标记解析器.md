@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-197：笔试：手写 Astro island 标记解析器
-**题目**：Astro 渲染后 HTML 里的 island 形如 `<astro-island uid="z1Ab" component-url="/Counter.js" component-export="default" renderer-url="/client.js" props='{"count":3}' client="visible" ssr="...">...</astro-island>`。实现解析器 `parseIslands(html)`：① 提取页面所有 island 的元信息（uid、组件、client 指令、props）；② props 是 JSON 属性，注意单引号包裹与嵌套引号（不能粗暴 split）；③ 统计报告：按 client 指令分类数量、预计需要下载的 JS 模块去重集合；④ 处理嵌套 island（内层不算独立触发点，只统计外层）；⑤ 非法 island（缺 component-url）收集进 errors 而不是抛异常中断。
+**答**：Astro 渲染后 HTML 里的 island 形如 `<astro-island uid="z1Ab" component-url="/Counter.js" component-export="default" renderer-url="/client.js" props='{"count":3}' client="visible" ssr="...">...</astro-island>`。实现解析器 `parseIslands(html)`：① 提取页面所有 island 的元信息（uid、组件、client 指令、props）；② props 是 JSON 属性，注意单引号包裹与嵌套引号（不能粗暴 split）；③ 统计报告：按 client 指令分类数量、预计需要下载的 JS 模块去重集合；④ 处理嵌套 island（内层不算独立触发点，只统计外层）；⑤ 非法 island（缺 component-url）收集进 errors 而不是抛异常中断。
 
 ```ts
 const ATTRS = /<astro-island\b([^>]*)>/g;

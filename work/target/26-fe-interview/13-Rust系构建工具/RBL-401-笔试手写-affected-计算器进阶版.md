@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## RBL-401：手写 affected 计算器
-**需求**：实现 `computeAffected(changedFiles, graph, globalDeps)`：1) graph：`{ pkg, deps: string[], files: string[] }[]`（包依赖图+文件归属）；2) 变更文件 → 所属包 → 沿「被依赖方向」闭包展开（依赖该包的包都受影响）；3) globalDeps 命中（如 tsconfig.base.json）→ 全部包受影响；4) 返回受影响包集合（确定性排序）；5) 循环依赖检测（图中环则抛错——affected 依赖无环图）。
+**答**：实现 `computeAffected(changedFiles, graph, globalDeps)`：1) graph：`{ pkg, deps: string[], files: string[] }[]`（包依赖图+文件归属）；2) 变更文件 → 所属包 → 沿「被依赖方向」闭包展开（依赖该包的包都受影响）；3) globalDeps 命中（如 tsconfig.base.json）→ 全部包受影响；4) 返回受影响包集合（确定性排序）；5) 循环依赖检测（图中环则抛错——affected 依赖无环图）。
 
 ```javascript
 function computeAffected(changedFiles, graph, globalDeps) {

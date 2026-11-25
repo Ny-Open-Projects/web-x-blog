@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-119：笔试：手写一个 Islands 按需水合调度器
-**题目**：Astro 输出的静态 HTML 里，每个岛有占位标记。实现调度器 `mountIslands()`：① 扫描 `[data-island]` 元素；② 按 `data-hydrate` 值调度：`load` 立即、`idle` 空闲后、`visible` 进入视口、`media` 匹配媒体查询；③ 水合 = 动态 import 该岛的模块并调用其 render；④ 同一岛只水合一次。
+**答**：Astro 输出的静态 HTML 里，每个岛有占位标记。实现调度器 `mountIslands()`：① 扫描 `[data-island]` 元素；② 按 `data-hydrate` 值调度：`load` 立即、`idle` 空闲后、`visible` 进入视口、`media` 匹配媒体查询；③ 水合 = 动态 import 该岛的模块并调用其 render；④ 同一岛只水合一次。
 
 ```ts
 interface IslandHost {

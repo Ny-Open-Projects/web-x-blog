@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-022：笔试：手写支持 stale-while-revalidate 语义的缓存层
-**题目**：实现 `createSWRCache()`：`get(key, fn, { maxAge, swr })`——maxAge 内直接回新鲜值；超过 maxAge 但在 swr 窗口内，**立即返回旧值并后台异步重取**；超过 swr 则同步等待重取。要求同一 key 并发请求只触发一次重取（请求合并），失败不影响返回旧值。
+**答**：实现 `createSWRCache()`：`get(key, fn, { maxAge, swr })`——maxAge 内直接回新鲜值；超过 maxAge 但在 swr 窗口内，**立即返回旧值并后台异步重取**；超过 swr 则同步等待重取。要求同一 key 并发请求只触发一次重取（请求合并），失败不影响返回旧值。
 
 ```javascript
 function createSWRCache() {

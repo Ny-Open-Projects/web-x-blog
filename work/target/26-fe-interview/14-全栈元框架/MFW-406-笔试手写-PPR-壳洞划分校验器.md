@@ -7,7 +7,7 @@ type: 笔试题
 ---
 
 ## MFW-406：壳洞校验器
-**需求**：实现 `validatePprSplit(pageAst)`（输入：构建器给出的段清单 `[{ id, usesRequestFx: bool, sizeEst, aboveFold} ]`）：1) 壳内禁止请求级 API——任一非 Suspense 段 usesRequestFx=true → 整页退化 SSR（报错并指认段）；2) 洞预算：aboveFold 动态段 ≤2（首屏等待面收敛）；3) 骨架尺寸声明齐全（每个洞有 fallback 尺寸≈内容——CLS 防护）；4) 输出 { ok, degradedTo?: 'ssr', violations: [{code, seg}] }，错误码：SHELL_LEAK / TOO_MANY_ABOVE_FOLD / NO_FALLBACK_SIZE。
+**答**：实现 `validatePprSplit(pageAst)`（输入：构建器给出的段清单 `[{ id, usesRequestFx: bool, sizeEst, aboveFold} ]`）：1) 壳内禁止请求级 API——任一非 Suspense 段 usesRequestFx=true → 整页退化 SSR（报错并指认段）；2) 洞预算：aboveFold 动态段 ≤2（首屏等待面收敛）；3) 骨架尺寸声明齐全（每个洞有 fallback 尺寸≈内容——CLS 防护）；4) 输出 { ok, degradedTo?: 'ssr', violations: [{code, seg}] }，错误码：SHELL_LEAK / TOO_MANY_ABOVE_FOLD / NO_FALLBACK_SIZE。
 
 ```javascript
 // segments: [{ id, inShell, inSusp, readsRequest, aboveFold, fallbackBytes? }]
